@@ -45,15 +45,10 @@ gconftest_SOURCES = \
 gconftest_LDFLAGS = \
 	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS) $(SDP_LIBS)
 
-EXTRA_DIST = \
+GOB_DIST = \
 	spinner.gob chooser.gob controller.gob
 
 BUILT_SOURCES = \
-	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
-	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
-	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h
-
-CLEANFILES =  \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
 	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
 	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h
@@ -65,9 +60,12 @@ gnomebt-%.c gnomebt-%.h gnomebt-%-private.h: %.gob
 	@GOB2@ $<
 
 # Python bindings
-CLEANFILES += btctl-py.c
-EXTRA_DIST += btctl.defs btctl.override
-                                                                                
+PYTHON_CLEANFILES += btctl-py.c
+PYTHON_DIST += btctl.defs btctl.override
+           
+EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
+CLEANFILES = $(CLEANFILES) $(PYTHON_CLEANFILES)
+
 if HAVE_PYTHON
 regenerate-defs: gnomebt-controller.h
 	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
