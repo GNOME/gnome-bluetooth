@@ -109,10 +109,10 @@ controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la
 controller_la_LDFLAGS = $(GNOME_BLUETOOTH_PYTHON_LIBS) \
 			$(GNOME_BLUETOOTH_LIBS) \
-			-module
+			-module -avoid-version
 
 chooser_la_SOURCES = gnomebt-chooser-py.c gnomebt-chooser-pymodule.c
 chooser_la_LIBADD =  libgnomebt.la
 chooser_la_LDFLAGS = 	$(GNOME_BLUETOOTH_PYTHON_LIBS) \
 			$(GNOME_BLUETOOTH_LIBS) \
-			-module
+			-module -avoid-version

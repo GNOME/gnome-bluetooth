@@ -110,7 +110,7 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
         /* we create an explanatory message from explanation, with
            the '%s' exchanged for the device name */
 
-        dname = gnomebt_controller_get_device_name (self->btmanager, bdaddr);
+        dname = gnomebt_controller_get_device_preferred_name (self->btmanager, bdaddr);
 
         exp = g_strdup_printf (explanation ? explanation :
                 _("<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</span>\n\nAn external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."), 

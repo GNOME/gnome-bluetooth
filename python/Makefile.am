@@ -21,7 +21,7 @@ iconlist_la_SOURCES = iconlist.c \
 					  gtkobject-support.c \
 					  pyegg-private.h
 
-iconlist_la_LDFLAGS = -module
+iconlist_la_LDFLAGS = -module -avoid-version
 
 iconlist_la_LIBADD = \
 	$(GNOME_BLUETOOTH_PYTHON_LIBS) \

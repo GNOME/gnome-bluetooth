@@ -143,6 +143,16 @@ complete_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
 }
 
 static void
+connect_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
+{
+	g_message ("Incoming connection from %s", bdaddr);
+	/* Connection from a stranger: time to ask their name */
+
+	btctl_controller_request_name (BTCTL_CONTROLLER (app->btctl),
+			bdaddr);
+}
+
+static void
 error_callback (BtctlObex *bo, gchar * bdaddr, guint reason, MyApp *app)
 {
 	/* g_message ("Error %d from %s",reason,  bdaddr); */
@@ -333,6 +343,8 @@ main (int argc, char *argv[])
 				G_CALLBACK(complete_callback), (gpointer) app);
 	g_signal_connect (G_OBJECT(app->obex), "error",
 				G_CALLBACK(error_callback), (gpointer) app);
+	g_signal_connect (G_OBJECT(app->obex), "connect",
+				G_CALLBACK(connect_callback), (gpointer) app);
 
 	app->tray_icon = egg_tray_icon_new (_("Bluetooth File Server"));
 	app->btctl = gnomebt_controller_new ();
