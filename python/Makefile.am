@@ -11,10 +11,10 @@ CTAGS_ARGS = $(python_DATA)
 
 noinst_PYTHON = testiconlist.py
 
-AM_CFLAGS = \
+INCLUDES = \
 	-I$(GNOME_BLUETOOTH_PYTHON_CFLAGS) \
 	$(PYTHON_INCLUDES) \
-	-I ../libegg/libegg/iconlist
+	-I$(top_srcdir)/libegg/libegg/iconlist
 
 iconlist_la_SOURCES = iconlist.c \
 					  iconlistmodule.c \
@@ -28,14 +28,15 @@ iconlist_la_LIBADD = \
 	../libegg/libegg/iconlist/libeggiconlist.la
 
 EXTRA_DIST = iconlist.defs iconlist.override \
-			 gnome-bluetooth-manager.desktop.in
+			 gnome-bluetooth-manager.desktop.in \
+			 $(python_DATA) gnome-bluetooth-manager
 
-iconlist.c: iconlist.defs iconlist.override            
+iconlist.c: iconlist.defs iconlist.override
 	pygtk-codegen-2.0 --prefix iconlist \
 		--register $(DEFSDIR)/gdk-types.defs \
 		--register $(DEFSDIR)/gtk-types.defs \
-		--override iconlist.override \
-		iconlist.defs > $@
+		--override $(srcdir)iconlist.override \
+		$(srcdir)/iconlist.defs > $@
 
 defs.py: Makefile
 	echo "version = '$(PACKAGE_VERSION)'" >defs.py
@@ -47,4 +48,4 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 install-exec-hook:
-	$(INSTALL_SCRIPT) gnome-bluetooth-manager $(bindir)/gnome-bluetooth-manager
+	$(INSTALL_SCRIPT) $(srcdir)/gnome-bluetooth-manager $(bindir)/gnome-bluetooth-manager

@@ -6,7 +6,8 @@ AM_CPPFLAGS = \
 	$(GNOME_BLUETOOTH_CFLAGS) \
 	$(BLUETOOTH_CFLAGS) \
 	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
-	$(GNOME_BLUETOOTH_PYTHON_CFLAGS)  $(PYTHON_INCLUDES)
+	$(GNOME_BLUETOOTH_PYTHON_CFLAGS)  $(PYTHON_INCLUDES) \
+	-I$(srcdir) -I../src
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
 	gnomebt-chooser-test gnomebt-permissiondialog-test
@@ -15,8 +16,13 @@ lib_LTLIBRARIES = libgnomebt.la
 py_LTLIBRARIES = controller.la chooser.la
 
 libgnomebt_la_SOURCES = \
-	gnomebt-spinner.c gnomebt-icons.c gnomebt-icons.h \
-	gnomebt-chooser.c gnomebt-controller.c gnomebt-permissiondialog.c
+	gnomebt-controller.c gnomebt-controller.h \
+	gnomebt-permissiondialog.c gnomebt-permissiondialog.h \
+	gnomebt-spinner.c gnomebt-spinner.h \
+	gnomebt-chooser.c gnomebt-chooser.h \
+	gnomebt-icons.c gnomebt-icons.h
+
+gnomebt-chooser.lo: gnomebt-controller.h gnomebt-spinner.h
 
 libgnomebt_la_LDFLAGS = \
 	-version-info 0:0:0
@@ -65,7 +71,9 @@ gnomebt-%.c gnomebt-%.h gnomebt-%-private.h: %.gob
 
 # Python bindings
 PYTHON_CLEANFILES = btctl-py.c
-PYTHON_DIST = btctl.defs btctl.override
+PYTHON_DIST = \
+	gnomebt-controller.defs gnomebt-controller.override \
+	gnomebt-chooser.defs gnomebt-chooser.override
 
 EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
 CLEANFILES = $(PYTHON_CLEANFILES)
@@ -81,15 +89,15 @@ gnomebt-chooser.defs: gnomebt-chooser.h
 gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 	pygtk-codegen-2.0 --prefix controller \
 		--register $(DEFSDIR)/gtk-types.defs \
-		--override gnomebt-controller.override \
-		gnomebt-controller.defs > $@
+		--override $(srcdir)/gnomebt-controller.override \
+		$(srcdir)/gnomebt-controller.defs > $@
 
-gnomebt-chooser-py.c: gnomebt-chooser.defs gnomebt-controller.defs gnomebt-chooser.override
+gnomebt-chooser-py.c: gnomebt-chooser.defs gnomebt-controller.defs gnomebt-chooser.override gnomebt-spinner.h gnomebt-controller.h
 	pygtk-codegen-2.0 --prefix chooser \
 		--register $(DEFSDIR)/gtk-types.defs \
-		--register gnomebt-controller.defs \
-		--override gnomebt-chooser.override \
-		gnomebt-chooser.defs > $@
+		--register $(srcdir)/gnomebt-controller.defs \
+		--override $(srcdir)/gnomebt-chooser.override \
+		$(srcdir)/gnomebt-chooser.defs > $@
 
 pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt/
 

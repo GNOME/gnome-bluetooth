@@ -23,7 +23,8 @@ gnome_obex_send_LDFLAGS = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ \
 	../src/libgnomebt.la
 
 INCLUDES = @GNOME_BLUETOOTH_CFLAGS@ @BLUETOOTH_CFLAGS@ \
-	-I ../libegg/libegg/tray -I ../src \
+	-I$(top_srcdir)/libegg/libegg/tray -I../src \
+	-I$(top_srcdir)/src \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\""
 
