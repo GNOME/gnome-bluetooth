@@ -4,7 +4,6 @@ requires 2.0.0
 %{
 #include <gconf/gconf-client.h>
 #include "gnomebt-permissiondialog.h"
-
 %}
 
 %h{
@@ -13,13 +12,25 @@ requires 2.0.0
 #include <gtk/gtk.h>
 #include <gnome.h>
 #include "gnomebt-controller.h"
+#include "gnomebt-icons.h"
+%}
+
+%{
+static void remember_cb (GtkToggleButton *button, gpointer user_data);
 %}
 
 class Gnomebt:PermissionDialog from Gtk:Dialog {
     private GtkWidget *okbutton;
     private GtkWidget *cancelbutton;
+    private GtkWidget *label;
     private GtkWidget *rememberbutton;
-    private gint response = 0;
+
+    private GdkPixbuf *icon = { gnomebt_icon (); }
+        destroywith gdk_pixbuf_unref;
+
+    private gboolean remember = FALSE;
+
+    private gulong remember_cb;
 
     public GnomebtController *btmanager;
 
@@ -31,6 +42,37 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
     initialise_gui (self, const gchar *bdaddr, const gchar *title,
         const gchar *explanation)
 	{
+        gchar *exp;
+        GtkWidget *hbox,*vbox,*img;
+
+        /* border & spacing */
+        gtk_box_set_spacing (GTK_BOX (GTK_DIALOG(self)->vbox), 12);
+        gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
+        gtk_dialog_set_has_separator (GTK_DIALOG (self), FALSE);
+
+        gtk_container_set_border_width (GTK_CONTAINER (self), 6);
+
+
+        hbox = GTK_WIDGET (gtk_hbox_new (FALSE, 12));
+        gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+
+        gtk_container_add (GTK_CONTAINER(GTK_DIALOG(self)->vbox), 
+            hbox);
+
+        vbox = GTK_WIDGET (gtk_vbox_new (FALSE, 12));
+
+        /* image */
+        img = GTK_WIDGET (gtk_image_new_from_pixbuf (self->_priv->icon));
+
+        gtk_window_set_icon (GTK_WINDOW (self), self->_priv->icon);
+        gtk_misc_set_alignment (GTK_MISC (img), 0.0, 0.0);
+
+        /* fill up hbox */
+        gtk_container_add (GTK_CONTAINER(hbox), img);
+        gtk_container_add (GTK_CONTAINER(hbox), vbox);
+
+        /* make widgets */
+
         self->_priv->okbutton = GTK_WIDGET (gtk_dialog_add_button (
             GTK_DIALOG(self), GTK_STOCK_OK, GTK_RESPONSE_OK));
 
@@ -47,11 +89,33 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
         gtk_window_set_position (GTK_WINDOW(self),
             GTK_WIN_POS_MOUSE);
 
-        /* border & spacing */
+        /* we create an explanatory message from explanation, with
+           the '%s' exchanged for the device name */
 
-        gtk_box_set_spacing (
-            GTK_BOX (GTK_DIALOG(self)->vbox),
-            6);
+        exp = g_strdup_printf (explanation ? explanation :
+                _("<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</span>\n\nAn external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."), 
+            gnomebt_controller_get_device_name (self->btmanager, bdaddr));
+
+
+        self->_priv->label = GTK_WIDGET (gtk_label_new (NULL));
+
+        gtk_label_set_markup (GTK_LABEL (self->_priv->label), exp);
+        gtk_label_set_selectable (GTK_LABEL (self->_priv->label), TRUE);
+        gtk_label_set_line_wrap (GTK_LABEL (self->_priv->label), TRUE);
+        gtk_misc_set_alignment (GTK_MISC (self->_priv->label), 0.0, 0.0);
+
+        gtk_container_add (GTK_CONTAINER (vbox), self->_priv->label);
+
+        g_free (exp);
+
+        /* remember this button */
+
+        self->_priv->rememberbutton = GTK_WIDGET (
+            gtk_check_button_new_with_mnemonic (
+                _("_Remember this decision in future")));
+
+        gtk_container_add (GTK_CONTAINER (vbox),
+            self->_priv->rememberbutton);
 
         gtk_widget_show_all (GTK_WIDGET(self));
 	}
@@ -65,9 +129,26 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
         dlg->btmanager = ctl;
         gnomebt_permissiondialog_initialise_gui (dlg, bdaddr,
             title, explanation);
-
+        g_signal_connect (
+            GTK_OBJECT (dlg->_priv->rememberbutton),
+            "toggled", G_CALLBACK (remember_cb), (gpointer) dlg);
         return dlg;
+    }
+
+    public
+    gboolean
+    remember (self)
+    {
+        return self->_priv->remember;
     }
 
 }
 
+%{
+static void
+remember_cb (GtkToggleButton *button, gpointer user_data)
+{
+    GnomebtPermissionDialog *dlg = GNOMEBT_PERMISSIONDIALOG (user_data);
+    dlg->_priv->remember = gtk_toggle_button_get_active (button);
+}
+%}
