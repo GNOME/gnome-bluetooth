@@ -23,12 +23,12 @@ dnl Check for the "check" unit test framework
 dnl AC_CHECK_LIB(check,suite_create)
 
 dnl Gettext stuff.
-GETTEXT_PACKAGE="gnome-bluetooth"
+GETTEXT_PACKAGE=gnome-bluetooth
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"gnome-bluetooth", [Manage Bluetooth devices from the GNOME desktop.])
 
 dnl Add the languages which your application supports here.
-ALL_LINGUAS="cs en_CA en_GB de es hu ja nb nl no pt pt_BR sq sv"
+ALL_LINGUAS="cs en_CA en_GB de es fr hu ja nb nl no pt pt_BR sq sv"
 AM_GLIB_GNU_GETTEXT
 
 AC_SUBST(DLOPEN)
