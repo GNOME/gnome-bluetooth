@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: gnome-bluetooth
+Description: libraries for controlling Bluetooth from GNOME
+Version: @VERSION@
+Requires: glib-2.0 gobject-2.0 libbtctl
+Libs: -L${libdir} -lgnomebt
+Cflags: -I${includedir}/gnome-bluetooth

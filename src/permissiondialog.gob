@@ -79,10 +79,11 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
 
         vbox = GTK_WIDGET (gtk_vbox_new (FALSE, 12));
 
-        /* image */
-        img = GTK_WIDGET (gtk_image_new_from_pixbuf (self->_priv->icon));
-
         gtk_window_set_icon (GTK_WINDOW (self), self->_priv->icon);
+
+        /* image */
+        img = GTK_WIDGET (gtk_image_new_from_stock (GTK_STOCK_DIALOG_QUESTION, 
+                GTK_ICON_SIZE_DIALOG));
         gtk_misc_set_alignment (GTK_MISC (img), 0.0, 0.0);
 
         /* fill up hbox */
@@ -99,7 +100,7 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
 
 
         gtk_dialog_set_default_response (GTK_DIALOG(self),
-            GTK_RESPONSE_CANCEL);
+            GTK_RESPONSE_OK);
 
         gtk_window_set_title (GTK_WINDOW(self),
             title ? title : _("Connection Request"));

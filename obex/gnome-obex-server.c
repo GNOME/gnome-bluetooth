@@ -263,7 +263,7 @@ about_activated(GtkMenuItem *item, gpointer data)
 	pixbuf = gnomebt_icon();
 
 	about = (gpointer)gnome_about_new(_("Bluetooth File Sharing"), VERSION,
-							"Copyright \xc2\xa9 2003 Edd Dumbill",
+							"Copyright \xc2\xa9 2003-4 Edd Dumbill",
 							_("Receive files from Bluetooth devices"),
 							(const char **)authors,
 							(const char **)documenters,

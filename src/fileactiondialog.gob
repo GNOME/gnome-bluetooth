@@ -106,9 +106,6 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
 		gtk_container_add (GTK_CONTAINER(hbox), vbox);
 
 		/* make widgets */
-		self->_priv->deletebutton = GTK_WIDGET (gtk_dialog_add_button (
-            GTK_DIALOG(self), GTK_STOCK_DELETE, GNOMEBT_FILEACTION_DELETE));
-
         /* only add open button if there's something to open */
         if (self->_priv->app) {
             /* g_message ("will run %s", self->_priv->app->command); */
@@ -117,13 +114,16 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
             gnome_vfs_mime_application_free (self->_priv->app);
         }
 
+		self->_priv->deletebutton = GTK_WIDGET (gtk_dialog_add_button (
+            GTK_DIALOG(self), GTK_STOCK_DELETE, GNOMEBT_FILEACTION_DELETE));
+
 		self->_priv->savebutton = GTK_WIDGET (gtk_dialog_add_button (
 			GTK_DIALOG(self), GTK_STOCK_SAVE, GNOMEBT_FILEACTION_SAVE));
 
 		gtk_dialog_set_default_response (GTK_DIALOG(self),
 			GNOMEBT_FILEACTION_SAVE);
 
-		gtk_window_set_title (GTK_WINDOW(self), _("Bluetooth transfer received"));
+		gtk_window_set_title (GTK_WINDOW(self), _("Bluetooth Transfer Received"));
 
 		gtk_window_set_position (GTK_WINDOW(self),
 			GTK_WIN_POS_MOUSE);
