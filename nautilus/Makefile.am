@@ -16,7 +16,7 @@ libgnome_bluetooth_component_la_SOURCES =			\
 	gnome-bluetooth-component.h				\
 	libmain.c
 
-libgnome_bluetooth_component_la_LIBADD = $(FR_LIBS)
+libgnome_bluetooth_component_la_LIBADD = $(GNOME_BLUETOOTH_LIBS)
 libgnome_bluetooth_component_la_LDFLAGS = -module -avoid-version
 
 server_in_files = GNOME_Bluetooth_Component.server.in.in

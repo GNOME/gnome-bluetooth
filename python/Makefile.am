@@ -15,15 +15,16 @@ python_PYTHON = __init__.py manager.py defs.py
 
 noinst_PYTHON = testiconlist.py
 
+CFLAGS = \
+	-I$(GNOME_BLUETOOTH_PYTHON_CFLAGS) \
+	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/ \
+	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION) \
+	-I ../libegg/libegg/iconlist
+
 iconlist_la_SOURCES = iconlist.c \
 					  iconlistmodule.c \
 					  gtkobject-support.c \
 					  pyegg-private.h
-
-iconlist_la_CFLAGS = \
-	-g $(GNOME_BLUETOOTH_PYTHON_CFLAGS) \
-	-I $(PYTHON_PREFIX)/include/python$(PYTHON_VERSION) \
-	-I ../libegg/libegg/iconlist
 
 iconlist_la_LDFLAGS = -module
 

@@ -1,3 +1,22 @@
+2003-09-26  Bastien Nocera  <hadess@hadess.net>
+
+	* autogen.sh:
+	* configure.in:
+	* nautilus/Makefile.am:
+	* python.m4:
+	* python/Makefile.am:
+	* src/Makefile.am:
+	* src/gconftest.c: (add_device_callback), (device_name_callback),
+	(add_device_service_callback), (main):
+	* src/manager-impl.c: (add_device_callback),
+	(device_name_callback), (add_device_service_callback),
+	(btmanager_impl_discover_devices), (btmanager_impl_init),
+	(btmanager_impl_connect_rfcomm_port),
+	(btmanager_impl_get_rfcomm_port),
+	(btmanager_impl_channels_for_service):
+	* src/manager.h: fix building with older autotools, fix for updated
+	version of libbtctl with BtctlController
+
 2003-09-19  Edd Dumbill <edd@usefulinc.com>
 
     * nautilus/: add Nautilus context menu component. Initial functionality

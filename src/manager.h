@@ -22,7 +22,7 @@ G_BEGIN_DECLS
 typedef struct {
   BonoboObject parent;
   GConfClient  *client;
-  Btctl        *bc;
+  BtctlController        *bc;
 } BTManager;
 
 typedef struct {

@@ -23,7 +23,7 @@ dnl Check for the "check" unit test framework
 dnl AC_CHECK_LIB(check,suite_create)
 
 dnl Gettext stuff.
-GETTEXT_PACKAGE=gnome-bluetooth
+GETTEXT_PACKAGE="gnome-bluetooth"
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"gnome-bluetooth", [Manage Bluetooth devices from the GNOME desktop.])
 
@@ -51,6 +51,8 @@ BLUEZ_PATH_SDP([], AC_MSG_ERROR([libsdp is required to build this software - par
 AC_SUBST(GNOME_BLUETOOTH_CFLAGS)
 AC_SUBST(GNOME_BLUETOOTH_LIBS)
 AC_SUBST(GLIB_GENMARSHAL)
+AC_SUBST(GNOME_BLUETOOTH_PYTHON_CFLAGS)
+AC_SUBST(GNOME_BLUETOOTH_PYTHON_LIBS)
 
 GNOME_BLUETOOTH_DATA_DIR="$datadir/gnome-bluetooth"
 AC_SUBST(GNOME_BLUETOOTH_DATA_DIR)

@@ -39,7 +39,7 @@ device_list_compare_gconf(gconstpointer gconfname,
 }
 
 static void
-add_device_callback(Btctl *bc,
+add_device_callback(BtctlController *bc,
 					gchar*    name, guint clsid,
 					gpointer data)
 {
@@ -98,7 +98,7 @@ add_device_callback(Btctl *bc,
 }
 
 static void
-device_name_callback(Btctl *bc, gchar *device, gchar *name, gpointer data)
+device_name_callback(BtctlController *bc, gchar *device, gchar *name, gpointer data)
 {
   GError *err=NULL;
   GConfClient *client=GCONF_CLIENT(BTMANAGER(data)->client);
@@ -114,7 +114,7 @@ device_name_callback(Btctl *bc, gchar *device, gchar *name, gpointer data)
 }
 
 static void
-add_device_service_callback(Btctl *bc,
+add_device_service_callback(BtctlController *bc,
 							gchar *addr, gchar *name,
 							guint clsid, guint port,
 							gpointer data)
@@ -210,7 +210,7 @@ btmanager_impl_remove_all_devices(BTManager *mgr)
 void
 btmanager_impl_discover_devices(BTManager *mgr)
 {
-  btctl_discover_devices(mgr->bc);
+  btctl_controller_discover_devices(mgr->bc);
 }
 
 BTDeviceDesc *
@@ -322,10 +322,10 @@ btmanager_impl_for_each_known_device_filtered(BTManager *mgr,
 void
 btmanager_impl_init(BTManager *mgr)
 {
-  Btctl *bc;
+  BtctlController *bc;
   mgr->client=gconf_client_get_default();
 
-  bc=BTCTL(btctl_new());
+  bc=btctl_controller_new();
 
   g_signal_connect (G_OBJECT(bc), "add_device",
 					G_CALLBACK(add_device_callback),
@@ -343,13 +343,13 @@ btmanager_impl_init(BTManager *mgr)
 gint
 btmanager_impl_connect_rfcomm_port(BTManager *mgr, gchar* bdaddr, guint chan)
 {
-  return btctl_establish_rfcomm_connection(mgr->bc, bdaddr, chan);
+  return btctl_controller_establish_rfcomm_connection(mgr->bc, bdaddr, chan);
 }
 
 gint
 btmanager_impl_get_rfcomm_port(BTManager *mgr, gchar* bdaddr, guint chan)
 {
-  return btctl_get_established_rfcomm_connection(mgr->bc, bdaddr, chan);
+  return btctl_controller_get_established_rfcomm_connection(mgr->bc, bdaddr, chan);
 }
 void
 btmanager_impl_shutdown(BTManager *mgr)
@@ -374,7 +374,7 @@ btmanager_impl_channels_for_service(BTManager *mgr, const gchar *bdaddr, guint s
    * itself.
    */
   gconf_client_set_list(client, key, GCONF_VALUE_INT, NULL, &err);
-  btctl_scan_for_service(mgr->bc, bdaddr, svcid);
+  btctl_controller_scan_for_service(mgr->bc, bdaddr, svcid);
 
   /* g_message("Getting list for key %s", key); */
   list=gconf_client_get_list(client, key, GCONF_VALUE_INT, &err);

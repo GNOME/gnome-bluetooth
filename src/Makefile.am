@@ -50,7 +50,7 @@ gnome_bluetooth_control_SOURCES = \
 	main.c manager.c manager.h manager-impl.c
 
 gnome_bluetooth_control_LDADD = \
-	libBtctl.a $(BTCTL_LIBS) \
+	libBtctl.a \
 	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS) $(SDP_LIBS)
 
 BTCTL_CORBA_GENERATED = \

@@ -30,7 +30,7 @@ device_list_compare_gconf(gconstpointer gconfname,
 }
 
 static void 
-add_device_callback(Btctl *bc,
+add_device_callback(BtctlController *bc,
 					gchar*    name, guint clsid,
 					gpointer data) 
 {
@@ -69,7 +69,7 @@ add_device_callback(Btctl *bc,
 }
 
 static void 
-device_name_callback(Btctl *bc,
+device_name_callback(BtctlController *bc,
 					 gchar*   device,
 					 gchar*   name,
 					 gpointer data) 
@@ -88,7 +88,7 @@ device_name_callback(Btctl *bc,
 }
 
 static void 
-add_device_service_callback(Btctl *bc,
+add_device_service_callback(BtctlController *bc,
 							gchar *addr, gchar *name, 
 							guint clsid, guint port, 
 							gpointer data)
@@ -180,7 +180,7 @@ main (int argc, char **argv)
 {
   GConfClient *client;
   GError *err;
-  Btctl *bc;
+  BtctlController *bc;
 
   g_type_init();
 
@@ -193,7 +193,7 @@ main (int argc, char **argv)
 
   remove_all_devices(client);
 
-  bc=BTCTL(btctl_new());
+  bc=btctl_controller_new();
 
   g_signal_connect (G_OBJECT(bc), "add_device",
 					G_CALLBACK(add_device_callback),
@@ -204,7 +204,7 @@ main (int argc, char **argv)
   g_signal_connect (G_OBJECT(bc), "add_device_service",
 					G_CALLBACK(add_device_service_callback),
 					(gpointer)client);
-  btctl_discover_devices(bc);
+  btctl_controller_discover_devices(bc);
   g_object_unref(bc);
 
   g_object_unref(client);
