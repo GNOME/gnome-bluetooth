@@ -1,0 +1,25 @@
+
+requires 2.0.0
+
+%{
+#include <gconf/gconf-client.h>
+#include "gnomebt-chooser.h"
+%}
+
+%h{
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gtk/gtkdialog.h>
+
+%}
+
+class Gnomebt:Chooser from Gtk:Dialog {
+  init(self)
+	{
+	}
+
+  public GnomebtChooser *
+	new (void)
+  {
+	return GNOMEBT_CHOOSER(GET_NEW);
+  }
+}

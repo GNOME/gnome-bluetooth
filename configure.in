@@ -41,7 +41,7 @@ GOB2_HOOK(2.0.0,[],[AC_MSG_ERROR([Cannot find GOB-2, install from http://www.5z.
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
-PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 libbonobo-2.0 bonobo-activation-2.0 gconf-2.0 libbtctl >= 0.3.2)
+PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 libbonobo-2.0 bonobo-activation-2.0 gconf-2.0 libbtctl >= 0.4)
 PKG_CHECK_MODULES(GNOME_BLUETOOTH_PYTHON, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 libbonobo-2.0 bonobo-activation-2.0 gconf-2.0 pygtk-2.0)
 
 BLUEZ_PATH_BLUETOOTH([], AC_MSG_ERROR([libbluetooth is required to build this software - part of bluez-libs]))

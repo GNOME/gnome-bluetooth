@@ -23,7 +23,8 @@ noinst_LIBRARIES = libBtctl.a
 noinst_LTLIBRARIES = libgnomebt.la
 
 libgnomebt_la_SOURCES = \
-	gnomebt-spinner.c gnomebt-icons.c gnomebt-icons.h
+	gnomebt-spinner.c gnomebt-icons.c gnomebt-icons.h \
+	gnomebt-chooser.c
 
 libgnomebt_la_LDFLAGS = \
 	-version-info 0:0:0
@@ -74,7 +75,7 @@ server_in_files = GNOME_Bluetooth_Manager.server.in
 server_DATA     = $(server_in_files:.server.in=.server)
 
 EXTRA_DIST = $(idl_DATA) GNOME_Bluetooth_Manager.server.in.in \
-	spinner.gob
+	spinner.gob chooser.gob
 
 
 @INTLTOOL_SERVER_RULE@
@@ -85,11 +86,13 @@ $(server_in_files): $(server_in_files:.server.in=.server.in.in)
 
 BUILT_SOURCES = $(BTCTL_CORBA_GENERATED) \
 	GNOME_Bluetooth_Manager.server.in GNOME_Bluetooth_Manager.server \
-	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h
+	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
+	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h
 
 CLEANFILES = $(BTCTL_CORBA_GENERATED) \
 	GNOME_Bluetooth_Manager.server.in GNOME_Bluetooth_Manager.server \
-	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h
+	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
+	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
