@@ -50,6 +50,13 @@ enum MajorDeviceClass {
     GNOMEBT_MAJOR_IMAGING
 };
 
+/* ASK is first, it is the default */
+enum ConnectPermissions {
+    GNOMEBT_PERM_ASK = 0,
+    GNOMEBT_PERM_NEVER,
+    GNOMEBT_PERM_ALWAYS
+};
+
 GType   gnomebt_service_desc_get_type   (void);
 GType   gnomebt_device_desc_get_type    (void);
 
@@ -112,6 +119,42 @@ class Gnomebt:Controller from Btctl:Controller {
         g_free (key);
         if (err)
             g_clear_error (&err);
+    }
+
+    public
+    void
+    set_device_permission (self, const gchar *bdaddr, gint flag)
+    {
+        GError *err = NULL;
+        gchar *key;
+
+        g_return_if_fail (flag == GNOMEBT_PERM_NEVER ||
+            flag == GNOMEBT_PERM_ASK ||
+            flag == GNOMEBT_PERM_ALWAYS);
+
+        key = g_strdup_printf (GP"/device/%s/permission", bdaddr);
+        gconf_client_set_int (self->_priv->client, key, flag, &err);
+        g_free (key);
+        if (err)
+            g_clear_error (&err);
+    }
+    
+    public
+    gint
+    get_device_permission (self, const gchar *bdaddr) 
+    {
+        GError *err = NULL;
+        gchar *key;
+        gint retval;
+
+        key = g_strdup_printf (GP"/device/%s/permission", bdaddr);
+        retval = gconf_client_get_int (self->_priv->client, key, &err);
+        g_free (key);
+        if (err) {
+            g_clear_error (&err);
+            retval = GNOMEBT_PERM_ASK;
+        }
+        return retval;
     }
 
     public

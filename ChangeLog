@@ -1,3 +1,11 @@
+2003-11-17  Edd Dumbill <edd@usefulinc.com>
+
+	* src/controller.gob: add get/set_device_permission method to store
+    user prefs for remote device connections
+	* src/gnomebt-controller-test.c: add test for perms
+	* python/manager.py: get rid of u prefix from about dialog strings:
+    source file is utf-8 native anyway, so we don't want to double-convert
+
 2003-11-12  Bastien Nocera  <hadess@hadess.net>
 
 	* python/manager.py: add an icon for the window

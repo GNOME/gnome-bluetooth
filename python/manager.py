@@ -227,8 +227,8 @@ class BTManager (object):
         gnome.ui.About (
                 __appname__,
                 __version__,
-                _(u"Copyright \xc2\xa9 Edd Dumbill 2003"),
-                _(u"Manage remote bluetooth devices."),
+                _("Copyright \xc2\xa9 Edd Dumbill 2003"),
+                _("Manage remote bluetooth devices."),
                 [ "Edd Dumbill <edd@usefulinc.com>" ],
                 [],
                 "",

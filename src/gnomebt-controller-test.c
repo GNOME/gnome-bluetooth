@@ -99,6 +99,16 @@ int main(int argc, char **argv)
     printf("Preferred name for " TBDADDR " is %s\n",
             gnomebt_controller_get_device_preferred_name(bc, TBDADDR));
 
+    printf("Permission for " TBDADDR " is %d\n", 
+            gnomebt_controller_get_device_permission(bc, TBDADDR));
+    printf("Setting permission to %d\n", GNOMEBT_PERM_ASK);
+    gnomebt_controller_set_device_permission(bc, TBDADDR, GNOMEBT_PERM_ASK);
+    printf("Permission for " TBDADDR " is %d\n", 
+            gnomebt_controller_get_device_permission(bc, TBDADDR));
+    printf("Setting permission to %d\n", GNOMEBT_PERM_ALWAYS);
+    gnomebt_controller_set_device_permission(bc, TBDADDR, GNOMEBT_PERM_ALWAYS);
+    printf("Setting permission to invalid value %d\n", 34);
+    gnomebt_controller_set_device_permission(bc, TBDADDR, 34);
 
     printf("Looking to see what channel OPUSH is on " TBDADDR "\n");
 
