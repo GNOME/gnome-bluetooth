@@ -1,8 +1,7 @@
 /*
- *  GSource source for asynchronous HCI operations
+ *  GSource source for OBEX
  *
- *  Copyright (C) 2993  Edd Dumbill <edd@usefulinc.com>
- *  Copyright (C) 2003  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2004  Edd Dumbill <edd@usefulinc.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -164,8 +163,6 @@ gnomebt_obexserver_source_prepare (GSource *source, gint *timeout)
 {
     return FALSE;
 }
-
-/* warning: this function uses internals from openobex */
 
 static void
 get_peer_bdaddr (GnomebtObexserverSource *s, bdaddr_t *addr)

@@ -54,6 +54,7 @@ if test "x$HAVE_PYTHON" = "xyes"; then
     AC_SUBST(DEFSDIR)
     AC_SUBST(GNOME_BLUETOOTH_PY_LIBS)
     AC_SUBST(GNOME_BLUETOOTH_PY_CFLAGS)
+    AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 else
     AC_MSG_RESULT(no)
 fi

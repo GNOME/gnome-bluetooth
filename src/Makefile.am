@@ -8,7 +8,7 @@ AM_CPPFLAGS = \
 	$(SDP_CFLAGS) \
 	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
 	$(GNOME_BLUETOOTH_PY_CFLAGS) \
-	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/
+	$(PYTHON_INCLUDES)
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
 				gnomebt-chooser-test gnomebt-permissiondialog-test

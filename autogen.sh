@@ -6,7 +6,7 @@ test -z "$srcdir" && srcdir=.
 
 PKG_NAME="Gnome Bluetooth Controller"
 
-(cd $srcdir && cat python.m4 bluez-sdp.m4 bluez-libs.m4 >acinclude.m4)
+(cd $srcdir && cat python.m4 python-headers.m4 bluez-sdp.m4 bluez-libs.m4 >acinclude.m4)
 
 (test -f $srcdir/configure.in) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
