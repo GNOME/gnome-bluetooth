@@ -1,0 +1,35 @@
+<gconfschemafile>
+    <schemalist>
+
+        <schema>
+            <key>/schemas/apps/gnome-obex-server/savedir</key>
+            <applyto>/apps/gnome-obex-server/savedir</applyto>
+            <owner>gnome-obex-server</owner>
+            <type>string</type>
+            <default></default>
+            <locale name="C">
+                <short>Directory to save received files</short>
+                <long>Incoming files are saved automatically into
+                this directory.  If display-notification is set
+                then the user gets chance to open or delete them.
+                </long>
+            </locale>
+        </schema>
+
+        <schema>
+            <key>/schemas/apps/gnome-obex-server/receive_notification</key>
+            <applyto>/apps/gnome-obex-server/receive_notification</applyto>
+            <owner>gnome-obex-server</owner>
+            <type>bool</type>
+            <default>true</default>
+            <locale name="C">
+                <short>Display dialog when file received</short>
+                <long>Received files are automatically saved. If this
+                option is set, then the user is prompted with a dialog
+                which allows them to view or delete the received
+                file.</long>
+            </locale>
+        </schema>
+    
+    </schemalist>
+</gconfschemafile>

@@ -32,7 +32,7 @@ requires 2.0.0
 #include <libgnomevfs/gnome-vfs-utils.h>
 #include <gnome.h>
 
-#define GNOMEBT_FILEACTION_SAVE 0x01
+#define GNOMEBT_FILEACTION_CLOSE 0x01
 #define GNOMEBT_FILEACTION_OPEN 0x02
 #define GNOMEBT_FILEACTION_DELETE 0x03
 %}
@@ -122,10 +122,10 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
             GTK_DIALOG(self), GTK_STOCK_DELETE, GNOMEBT_FILEACTION_DELETE));
 
 		self->_priv->savebutton = GTK_WIDGET (gtk_dialog_add_button (
-			GTK_DIALOG(self), GTK_STOCK_SAVE, GNOMEBT_FILEACTION_SAVE));
+			GTK_DIALOG(self), GTK_STOCK_CLOSE, GNOMEBT_FILEACTION_CLOSE));
 
 		gtk_dialog_set_default_response (GTK_DIALOG(self),
-			GNOMEBT_FILEACTION_SAVE);
+			GNOMEBT_FILEACTION_CLOSE);
 
 		gtk_window_set_title (GTK_WINDOW(self), _("Bluetooth Transfer Received"));
 

@@ -28,8 +28,8 @@ int main(int argc, char **argv)
 			case GNOMEBT_FILEACTION_DELETE:
 				g_message ("user said delete");
 				break;
-			case GNOMEBT_FILEACTION_SAVE:
-				g_message ("user said save");
+			case GNOMEBT_FILEACTION_CLOSE:
+				g_message ("user said do nothing");
 				break;
 			case GNOMEBT_FILEACTION_OPEN:
 				g_message ("user said open");

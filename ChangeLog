@@ -1,7 +1,22 @@
+2005-01-15  Edd Dumbill <edd@usefulinc.com>
+
+	* obex/gnome-obex-server.c: patch from Tuomas Salo.  Use new
+	timestamp parameter on OBEX PUT to preserve timestamp.
+	Add get_display_notifications() to look for the gconf key
+	/apps/gnome-obex-server/receive_notification, controlling whether
+	dialog is shown when files received.
+	Move /system/bluetooth/obex-savedir to
+	/apps/gnome-obex-server/savedir.
+	* data/Makefile.am, data/gnome-obex-server.schemas.in: create schemas
+	for gconf keys.
+	* src/fileaction.gob: replace 'Save' button with 'Close'
+	* configure.in: require libbtctl 0.5.0 or better
+
 2005-01-07  Edd Dumbill  <edd@usefulinc.com>
 
 	* obex/gnome-obex-server.c: Change translator_credits to
 	translator-credits.  Regenerate pot file.
+	* po/*.po: update all po files for translator-credits.
 
 2004-11-06 Amanpreet Singh Alam<aalam@redhat.com>
 

@@ -28,6 +28,9 @@
 #include <stdarg.h>
 #include <fcntl.h>
 
+#include <sys/types.h>
+#include <utime.h>
+
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -65,6 +68,7 @@ typedef struct _appinfo {
 static gboolean allowed_to_put (MyApp *app, const gchar *bdaddr);
 static gboolean tray_destroy_cb (GtkObject *obj, MyApp *app);
 static const gchar * get_save_dir ();
+static int get_display_notifications ();
 
 static MyApp *app;
 static gint spincount = 0;
@@ -108,13 +112,27 @@ get_save_dir ()
 
 	if (client) {
 		dir = gconf_client_get_string (client,
-				"/system/bluetooth/obex-savedir", NULL);
+				"/apps/gnome-obex-server/savedir", NULL);
 		g_object_unref (client);
 	}
-	if (dir == NULL) {
-		dir = g_get_home_dir();
+	if (dir == NULL || strlen (dir) == 0) {
+		dir = g_get_home_dir ();
 	}
 	return dir;
+}
+
+static gboolean
+get_display_notifications ()
+{
+	gboolean yesno = TRUE;
+	GConfClient *client = gconf_client_get_default();
+
+	if (client) {
+		yesno = gconf_client_get_bool (client,
+				  "/apps/gnome-obex-server/receive_notification", NULL);
+		g_object_unref (client);
+	}
+	return yesno;
 }
 
 /*
@@ -202,10 +220,11 @@ file_action_response (GtkDialog *dialog, gint arg, gpointer user_data)
 
 static void
 put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
-		gpointer body, guint len, MyApp *app)
+		gpointer body, guint len, guint timestamp, MyApp *app)
 {
 	int fd;
 	gchar *targetname = NULL;
+	struct utimbuf utim;
 	GnomebtFileActionDialog *dlg;
 
 	if (! app->decision) {
@@ -223,14 +242,26 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 	if (fd >= 0) {
 		write (fd, body, len);
 		close (fd);
+		
+		if(timestamp) {
+			utim.actime = utim.modtime = (time_t) timestamp;
+			utime(targetname, &utim);
+		}
+		
 		btctl_obex_set_response (bo, TRUE);
-		dlg = gnomebt_fileactiondialog_new (
-				gnomebt_controller_get_device_preferred_name (app->btctl, bdaddr),
-				targetname );
-		g_signal_connect (G_OBJECT (dlg), "response",
-				G_CALLBACK (file_action_response), dlg);
-		g_signal_connect_swapped (G_OBJECT (dlg),
-				"response", G_CALLBACK (gtk_widget_destroy), dlg);
+
+		/* if notify, then display this dialog */
+
+		if (get_display_notifications ()) {
+			dlg = gnomebt_fileactiondialog_new (
+					gnomebt_controller_get_device_preferred_name 
+						(app->btctl, bdaddr),
+					targetname);
+			g_signal_connect (G_OBJECT (dlg), "response",
+					G_CALLBACK (file_action_response), dlg);
+			g_signal_connect_swapped (G_OBJECT (dlg),
+					"response", G_CALLBACK (gtk_widget_destroy), dlg);
+		}
 	} else {
 		g_warning ("Couldn't save file.");
 		btctl_obex_set_response (bo, FALSE);
