@@ -11,8 +11,7 @@ noinst_PYTHON = testiconlist.py
 
 AM_CFLAGS = \
 	-I$(GNOME_BLUETOOTH_PYTHON_CFLAGS) \
-	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/ \
-	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION) \
+	$(PYTHON_INCLUDES) \
 	-I ../libegg/libegg/iconlist
 
 iconlist_la_SOURCES = iconlist.c \

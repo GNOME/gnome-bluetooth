@@ -69,9 +69,9 @@ gnomebt-%.c gnomebt-%.h gnomebt-%-private.h: %.gob
 # Python bindings
 PYTHON_CLEANFILES = btctl-py.c
 PYTHON_DIST = btctl.defs btctl.override
-           
+
 EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
-CLEANFILES = $(CLEANFILES) $(PYTHON_CLEANFILES)
+CLEANFILES = $(PYTHON_CLEANFILES)
 
 if HAVE_PYTHON
 regenerate-defs: gnomebt-controller.h
@@ -82,7 +82,7 @@ gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 		--register $(DEFSDIR)/gtk-types.defs \
 		--override gnomebt-controller.override \
 		gnomebt-controller.defs > $@
-                                                                                
+
 pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt/
 controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la

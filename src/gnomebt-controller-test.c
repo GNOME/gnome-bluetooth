@@ -78,11 +78,14 @@ int main(int argc, char **argv)
                 G_CALLBACK(add_device_service_callback),
                 NULL);
 
+    printf("Removing entry 00:40:8C:5E:5D:A4\n");
+
+    gnomebt_controller_remove_device (bc, "00:40:8C:5E:5D:A4");
+
 	btctl_controller_list_rfcomm_connections(BTCTL_CONTROLLER(bc));
 
 	printf("Connection to " TBDADDR " %d\n", 
 		   btctl_controller_get_established_rfcomm_connection(BTCTL_CONTROLLER(bc), TBDADDR, 0));
-
     printf("Doing synchronous discovery\n");
     gnomebt_controller_discover_devices(bc);
 

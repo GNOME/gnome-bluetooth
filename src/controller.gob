@@ -72,6 +72,8 @@ void gnomebt_device_desc_unref (GnomebtDeviceDesc *desc);
 void gnomebt_channel_list_free (GSList *list);
 void gnomebt_service_list_free (GSList *list);
 void gnomebt_device_desc_list_free (GSList *list);
+void gnomebt_string_list_free (GSList *list);
+void gnomebt_entry_list_free (GSList *list);
 gchar *gnomebt_device_desc_get_name (GnomebtDeviceDesc *desc);
 gchar *gnomebt_device_desc_get_bdaddr (GnomebtDeviceDesc *desc);
 guint gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc);
@@ -250,6 +252,8 @@ class Gnomebt:Controller from Btctl:Controller {
             }
         }
 
+        gnomebt_entry_list_free (entries);
+
         return result;
     }
 
@@ -273,14 +277,17 @@ class Gnomebt:Controller from Btctl:Controller {
 
         /* TODO: find some way of caching this in case the SDP
            discovery fails */
+
         gconf_client_set_list (client, key, GCONF_VALUE_INT, NULL, &err);
         btctl_controller_scan_for_service (BTCTL_CONTROLLER(self),
             bdaddr, svcid);
 
-        list=gconf_client_get_list(client, key, GCONF_VALUE_INT, &err);
+        list = gconf_client_get_list(client, key, GCONF_VALUE_INT, &err);
         g_free(key);
+
         return list;
     }
+
     public
     void
     remove_device (self, const gchar *name)
@@ -291,30 +298,30 @@ class Gnomebt:Controller from Btctl:Controller {
         GSList *victim,*each;
         gchar *key;
 
-        /* TODO: figure out if there are memory leaks here */
-
-        list=gconf_client_get_list(client, GP"/device/devices",
+        list = gconf_client_get_list(client, GP"/device/devices",
                          GCONF_VALUE_STRING, &err);
 
-        victim=g_slist_find_custom(list, name,
+        victim = g_slist_find_custom(list, name,
                          gnomebt_controller_device_list_compare_gconf);
         if (victim) {
-            list=g_slist_delete_link(list, victim);
-            gconf_client_set_list(client, GP"/device/devices",
+
+            g_free (victim->data);
+            list = g_slist_delete_link (list, victim);
+
+            gconf_client_set_list (client, GP"/device/devices",
                       GCONF_VALUE_STRING, list, &err);
 
-            // now to remove everything in the device's dir
-            key=g_strdup_printf(GP"/device/%s", name);
-            list=gconf_client_all_entries(client, key, &err);
-            each=list;
-            while(each) {
-                GConfEntry *entry=(GConfEntry*)each->data;
-                gconf_client_unset(client, gconf_entry_get_key(entry), &err);
-                gconf_entry_free(entry);
-                each=g_slist_next(each);
-            }
-            if (list)
-                g_slist_free(list);
+            /* now to remove everything in the device's dir */
+
+            key = g_strdup_printf(GP"/device/%s", name);
+            gconf_client_recursive_unset (client, key, 
+                GCONF_UNSET_INCLUDING_SCHEMA_NAMES, &err);
+
+            g_free (key);
+        }
+
+        if (list) {
+            gnomebt_string_list_free (list);
         }
     }
 
@@ -331,7 +338,8 @@ class Gnomebt:Controller from Btctl:Controller {
         for (item=list; item != NULL; item=g_slist_next(item)) {
             gnomebt_controller_remove_device(self, (gchar*)item->data);
         }
-        g_slist_free(list);
+
+        gnomebt_string_list_free(list);
     }
 
     public
@@ -352,7 +360,7 @@ class Gnomebt:Controller from Btctl:Controller {
             }
         }
 
-        g_slist_free(list);        
+        gnomebt_string_list_free(list);
     }
 
     public
@@ -379,6 +387,9 @@ class Gnomebt:Controller from Btctl:Controller {
                     gnomebt_controller_get_device_class (self, bdaddr);
             }
         }
+
+        gnomebt_string_list_free (list);
+
         return ret;
     }
 
@@ -428,8 +439,10 @@ class Gnomebt:Controller from Btctl:Controller {
     {
         GSList *chanlist, *item;
         gint num=-1;
+
         chanlist = gnomebt_controller_channels_for_service (self,
             bdaddr, service);
+
         for (item=chanlist; item != NULL && num < 0; item=g_slist_next(item)) {
             num = gnomebt_controller_get_rfcomm_port(self, bdaddr,
                 (guint)item->data);
@@ -553,13 +566,19 @@ class Gnomebt:Controller from Btctl:Controller {
         list=gconf_client_get_list(client, GP"/device/devices", 
             GCONF_VALUE_STRING, &err);
 
-        if (!list || !g_slist_find_custom(list, name,
+        if (!list || !g_slist_find_custom (list, name,
             gnomebt_controller_device_list_compare_gconf))    {
-            list=g_slist_append(list, name);
+            
+            list=g_slist_append(list, g_strdup(name));
             gconf_client_set_list(client, GP"/device/devices",
                 GCONF_VALUE_STRING, list, &err);
+
             if (err)
-                gnomebt_controller_dump_err(err);
+                gnomebt_controller_dump_err (err);
+
+            if (list) {
+                gnomebt_string_list_free (list);
+            }
         } else {
             g_message("Already know about %s, preparing for rediscovery", name);
 
@@ -569,12 +588,12 @@ class Gnomebt:Controller from Btctl:Controller {
              * is added.
              */
             if (list)
-                g_slist_free(list);
+                gnomebt_string_list_free (list);
 
             key=g_strdup_printf(GP"/device/%s", name);
             list=gconf_client_all_entries(client, key, &err);
             each=list;
-            while(each) {
+            while (each) {
                 const gchar *delkey;
                 GConfEntry *entry=(GConfEntry*)each->data;
                 delkey=gconf_entry_get_key(entry);
@@ -585,12 +604,12 @@ class Gnomebt:Controller from Btctl:Controller {
                 each=g_slist_next(each);
             }
 
+            if (list) 
+                g_slist_free(list);
+
             g_free(key);
         }
 
-        if (list) {
-            g_slist_free(list);
-        }
     }
 
     private
@@ -749,6 +768,9 @@ gnomebt_service_list_free (GSList *list)
 {
     GSList *item;
 
+    if (list == NULL)
+        return;
+
     for (item=list; item!=NULL; item=g_slist_next(item))
         gnomebt_service_desc_unref ((GnomebtServiceDesc *)item->data);
     g_slist_free(item);
@@ -758,8 +780,42 @@ void
 gnomebt_device_desc_list_free (GSList *list)
 {
     GSList *item;
+
+    if (list == NULL)
+        return;
+
     for (item = list; item != NULL; item = g_slist_next (item))
         gnomebt_device_desc_unref ((GnomebtDeviceDesc*) item->data);
+    g_slist_free (list);
+}
+
+void
+gnomebt_string_list_free (GSList *list)
+{
+    GSList *item;
+
+    if (list == NULL)
+        return;
+
+    for (item = list; item != NULL; item = g_slist_next (item)) {
+        g_free ((gchar *) item->data);
+        item->data = NULL;
+    }
+    g_slist_free (list);
+}
+
+void
+gnomebt_entry_list_free (GSList *list)
+{
+    GSList *item;
+
+    if (list == NULL)
+        return;
+
+    for (item = list; item != NULL; item = g_slist_next (item)) {
+        gconf_entry_free ((GConfEntry *) item->data);
+        item->data = NULL;
+    }
     g_slist_free (list);
 }
 

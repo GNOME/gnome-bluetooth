@@ -6,6 +6,7 @@ import os
 import os.path
 
 import pygtk
+pygtk.require("2.0")
 import gtk
 import gtk.glade
 
@@ -109,7 +110,7 @@ class BTManager (object):
         menuitem = gtk.MenuItem (_("_Edit"))
         menubar.add (menuitem)
         menu = BTMenu ()
-        menu.add (gtk.ImageMenuItem (gtk.STOCK_DELETE))
+        menu.add (gtk.ImageMenuItem (gtk.STOCK_DELETE), self.on_delete)
         menu.add (gtk.SeparatorMenuItem ())
         menu.add (gtk.ImageMenuItem (gtk.STOCK_PROPERTIES))
         menuitem.set_submenu (menu)
@@ -163,7 +164,7 @@ class BTManager (object):
             ic = iconlist.IconListItem (
                     gtk.gdk.pixbuf_new_from_file (
                         self.icon_name (d['deviceclass'])),
-                        prefname)
+                        prefname or "Unnamed")
             ic.set_data (d['bdaddr'])
             self.iconlist.append_item (ic)
 
@@ -218,21 +219,33 @@ class BTManager (object):
             self.statusbar.push (_("Error during scan."))
             self.statusbar.set_progress_percentage (0.0)
             self.scanitem.set_sensitive (gtk.TRUE)
+        else:
+            print "Unhandled status %d" % status
 
     def on_scan (self, widget, data = None):
         self.scanitem.set_sensitive (gtk.FALSE)
         self.btctl.discover_async ()
 
+    def on_delete (self, widget, data = None):
+        item = self.iconlist.get_selected()[0]
+        if item is None: return
+        id = item.get_data()
+        self.btctl.remove_device (id)
+        # Assume it worked
+        self.iconlist.remove_item (item)
+    
     def on_about (self, widget, data = None):
-        gnome.ui.About (
-                __appname__,
-                __version__,
-                _("Copyright \xc2\xa9 Edd Dumbill 2003"),
-                _("Manage remote bluetooth devices."),
-                [ "Edd Dumbill <edd@usefulinc.com>" ],
-                [],
-                "",
-                self.logo).show ()
+        dialog = gnome.ui.About (
+            __appname__,
+            __version__,
+            _("Copyright \xc2\xa9 Edd Dumbill 2003"),
+            _("Manage remote bluetooth devices."),
+            [ "Edd Dumbill <edd@usefulinc.com>" ],
+            [],
+            "",
+            self.logo)
+        dialog.set_transient_for (self.window)
+        dialog.show ()
 
     def image_file (self, fname):
         for d in [os.path.join (__datadir__, "pixmaps"), "../pixmaps"]:
