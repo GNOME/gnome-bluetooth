@@ -60,6 +60,7 @@ class Gnomebt:Spinner from Gtk:EventBox {
 
 	   gtk_container_add(GTK_CONTAINER(self),
 						 GTK_WIDGET(self->_priv->image));
+       g_object_ref (G_OBJECT (self->_priv->image));
 
 	   for (i=0; i<SPIN_LAST; i++) {
 		 gchar *fname;

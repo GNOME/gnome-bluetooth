@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = po src obex python libegg nautilus
+SUBDIRS = po libegg src obex python nautilus
 
 EXTRA_DIST = \
 	autogen.sh \

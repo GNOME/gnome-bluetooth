@@ -43,23 +43,10 @@ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
 PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 libbtctl >= 0.4)
 PKG_CHECK_MODULES(GNOME_BLUETOOTH_PYTHON, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 pygtk-2.0)
+AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
-PKG_CHECK_MODULES(GNOME_BLUETOOTH_PY, pygtk-2.0, HAVE_PYTHON=yes, HAVE_PYTHON=no)
-AC_MSG_CHECKING(for python support)
-if test "x$HAVE_PYTHON" = "xyes"; then
-    AM_PATH_PYTHON(2.2)
-    AC_MSG_RESULT(yes)
-    DEFSDIR=`pkg-config --variable=defsdir pygtk-2.0`
-    PKG_CHECK_MODULES(GNOME_BLUETOOTH_PY, gobject-2.0 glib-2.0 pygtk-2.0)
-    AC_SUBST(DEFSDIR)
-    AC_SUBST(GNOME_BLUETOOTH_PY_LIBS)
-    AC_SUBST(GNOME_BLUETOOTH_PY_CFLAGS)
-    AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
-else
-    AC_MSG_RESULT(no)
-fi
-AM_CONDITIONAL(HAVE_PYTHON, [test $HAVE_PYTHON = yes])
-
+DEFSDIR=`pkg-config --variable=defsdir pygtk-2.0`
+AC_SUBST(DEFSDIR)
 
 BLUEZ_PATH_BLUETOOTH([], AC_MSG_ERROR([libbluetooth is required to build this software - part of bluez-libs]))
 
@@ -84,9 +71,6 @@ PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.0.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-
 AC_SUBST(GOBEX_LIBS)
 AC_SUBST(GOBEX_CFLAGS)
 AM_PATH_OPENOBEX(1.0.0)
-
-dnl python stuff
-AM_PATH_PYTHON(2.2)
 
 dnl ==========================================================================
 dnl Turn on the additional warnings last, so -Werror doesn't affect other tests.

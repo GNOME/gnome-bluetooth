@@ -6,18 +6,13 @@ AM_CPPFLAGS = \
 	$(GNOME_BLUETOOTH_CFLAGS) \
 	$(BLUETOOTH_CFLAGS) \
 	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
-	$(GNOME_BLUETOOTH_PY_CFLAGS) \
-	$(PYTHON_INCLUDES)
+	$(GNOME_BLUETOOTH_PYTHON_CFLAGS)  $(PYTHON_INCLUDES)
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
 	gnomebt-chooser-test gnomebt-permissiondialog-test
 
 lib_LTLIBRARIES = libgnomebt.la
-if HAVE_PYTHON
 py_LTLIBRARIES = controller.la chooser.la
-else
-py_LTLIBRARIES =
-endif
 
 libgnomebt_la_SOURCES = \
 	gnomebt-spinner.c gnomebt-icons.c gnomebt-icons.h \
@@ -75,7 +70,6 @@ PYTHON_DIST = btctl.defs btctl.override
 EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
 CLEANFILES = $(PYTHON_CLEANFILES)
 
-if HAVE_PYTHON
 regenerate-defs: gnomebt-controller.defs gnomebt-chooser.defs
 
 gnomebt-controller.defs: gnomebt-controller.h
@@ -101,15 +95,12 @@ pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt/
 
 controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la
-controller_la_LDFLAGS = $(GNOME_BLUETOOTH_PY_LIBS) \
+controller_la_LDFLAGS = $(GNOME_BLUETOOTH_PYTHON_LIBS) \
 			$(GNOME_BLUETOOTH_LIBS) \
 			-module
 
 chooser_la_SOURCES = gnomebt-chooser-py.c gnomebt-chooser-pymodule.c
 chooser_la_LIBADD =  libgnomebt.la
-chooser_la_LDFLAGS = 	$(GNOME_BLUETOOTH_PY_LIBS) \
+chooser_la_LDFLAGS = 	$(GNOME_BLUETOOTH_PYTHON_LIBS) \
 			$(GNOME_BLUETOOTH_LIBS) \
 			-module
-
-endif
-

@@ -2,13 +2,6 @@
 #  $Id$
 #
 
-#noinst_LIBRARIES = libmisc.a
-
-#libmisc_a_SOURCES = \
-#	obex_io.c obex_io.h \
-#	obex_put_common.c obex_put_common.h \
-#	util.c util.h
-
 bin_PROGRAMS = gnome-obex-send gnome-obex-server
 
 noinst_PROGRAMS =

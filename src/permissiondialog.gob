@@ -40,9 +40,10 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
 
     private void
     initialise_gui (self, const gchar *bdaddr, const gchar *title,
-        const gchar *explanation)
+        const gchar *explanation, const gchar *alwaystext)
 	{
         gchar *exp;
+        gchar *dname;
         GtkWidget *hbox,*vbox,*img;
 
         /* border & spacing */
@@ -92,10 +93,14 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
         /* we create an explanatory message from explanation, with
            the '%s' exchanged for the device name */
 
+        dname = gnomebt_controller_get_device_name (self->btmanager, bdaddr);
+
         exp = g_strdup_printf (explanation ? explanation :
                 _("<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</span>\n\nAn external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."), 
-            gnomebt_controller_get_device_name (self->btmanager, bdaddr));
+            (dname != NULL ? dname : bdaddr));
 
+        if (dname)
+            g_free (dname);
 
         self->_priv->label = GTK_WIDGET (gtk_label_new (NULL));
 
@@ -111,8 +116,8 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
         /* remember this button */
 
         self->_priv->rememberbutton = GTK_WIDGET (
-            gtk_check_button_new_with_mnemonic (
-                _("_Remember this decision in future")));
+            gtk_check_button_new_with_mnemonic (alwaystext ? alwaystext : 
+                _("_Always allow this device to connect.")));
 
         gtk_container_add (GTK_CONTAINER (vbox),
             self->_priv->rememberbutton);
@@ -123,12 +128,13 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
     public
     GnomebtPermissionDialog *
     new (GnomebtController *ctl, const gchar *bdaddr,
-        const gchar *title, const gchar *explanation)
+        const gchar *title, const gchar *explanation,
+        const gchar *alwaystext)
     {
         GnomebtPermissionDialog *dlg = GNOMEBT_PERMISSIONDIALOG(GET_NEW);
         dlg->btmanager = ctl;
         gnomebt_permissiondialog_initialise_gui (dlg, bdaddr,
-            title, explanation);
+            title, explanation, alwaystext);
         g_signal_connect (
             GTK_OBJECT (dlg->_priv->rememberbutton),
             "toggled", G_CALLBACK (remember_cb), (gpointer) dlg);

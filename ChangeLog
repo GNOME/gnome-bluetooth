@@ -1,3 +1,7 @@
+2004-06-04  Edd Dumbill <edd@usefulinc.com>
+
+	* Build fixes.  Compile cleanly with -Werror.
+
 2004-06-03  Edd Dumbill <edd@usefulinc.com>
 
 	* obex/gnome-obex-send.c: new OBEX sending program using improved
@@ -7,6 +11,11 @@
 	* libegg/: freshen from GNOME CVS.  Remove fileselector, menu,
 	and toolbar directories as we don't use these.
 	* configure.in: remove SDP check.
+	* src/gnome-obex-server.c: new server implementation.
+	* src/spinner.gob: ref created image.
+	* src/: remove unneeded files: servonly.c obex_test_server.h
+	obex_test_server.c obex_test.h obex_test_client.h obexsdp.h
+	obexsdp.c obex_put_common.h obex_put_common.c obex_io.h obex_io.c
 
 2004-02-01  Edd Dumbill <edd@usefulinc.com>
 

@@ -295,7 +295,7 @@ class Gnomebt:Controller from Btctl:Controller {
         GConfClient *client = self->_priv->client;
         GError *err=NULL;
         GSList *list=NULL;
-        GSList *victim,*each;
+        GSList *victim;
         gchar *key;
 
         list = gconf_client_get_list(client, GP"/device/devices",

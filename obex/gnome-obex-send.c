@@ -99,8 +99,6 @@ report_error (const gchar *msg) {
 static void
 cancel_clicked (GtkWidget *button, gpointer userdata)
 {
-	MyApp *app = (MyApp *) userdata;
-
 	gtk_main_quit ();
 }
 
@@ -190,7 +188,6 @@ static void
 mainloop (MyApp *app)
 {
 	GtkWidget *dialog, *label, *button;
-	const gchar *fname = NULL;
 
 	g_signal_connect (G_OBJECT (app->obex), "progress",
 		G_CALLBACK (progress_callback), (gpointer) app);
@@ -222,7 +219,6 @@ mainloop (MyApp *app)
 int
 main (int argc, char *argv[])
 {
-	gchar *dest = NULL;
 	GValue context_as_value = { 0 };
 	const gchar *fname = NULL;
 	uint8_t channel;
