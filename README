@@ -7,12 +7,12 @@ project.
 
 The software is in its early stages right now.
 
-This package contains a Bonobo server to control Bluetooth devices,
-and a simple GUI to explore which devices are available
-(gnome-bluetooth-admin).  An OBEX server is available,
+This package contains a controller class, GnomebtController, to control
+Bluetooth devices, and a simple GUI to explore which devices are
+available (gnome-bluetooth-manager).  An OBEX server is available,
 gnome-obex-server.  This will receive files sent via Bluetooth to your
 PC, and save them in your home directory.  The program gnome-obex-send
-enables you to send files.  It is used by the Nautilus component -- 
+enables you to send files.  It is used by the Nautilus component --
 select the files you want to send and choose "Send via Bluetooth..."
 from the context menu.
 
@@ -29,6 +29,7 @@ You need:
 
 * These GNOME 2 packages:
   	gobject-2.0 libgnomeui-2.0 >= 1.110.0 libbonobo-2.0
-	bonobo-activation-2.0 gconf-2.0 gob2
+	bonobo-activation-2.0 gconf-2.0 gob2 pygtk-2.2 python2.2/2.3
 
- -- Edd Dumbill <edd@usefulinc.com>, Sat Jun  7 17:08:07 BST 2003
+ -- Edd Dumbill <edd@usefulinc.com>
+    Thu Oct 30 19:12:10 GMT 2003
