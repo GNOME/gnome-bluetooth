@@ -9,25 +9,21 @@
 #	obex_put_common.c obex_put_common.h \
 #	util.c util.h
 
-bin_PROGRAMS = gnome-obex-send 
-#gnome-obex-server
+bin_PROGRAMS = gnome-obex-send gnome-obex-server
 
 noinst_PROGRAMS =
 
-#gnome_obex_server_SOURCES = \
-#	servonly.c obex_test.h \
-#	obex_test_client.c obex_test_client.h \
-#	obex_test_server.c obex_test_server.h \
-#	obexsdp.c obexsdp.h
+gnome_obex_server_SOURCES = \
+	gnome-obex-server.c util.c util.h
 
 gnome_obex_send_SOURCES = \
 	chooser.c chooser.h \
 	gnome-obex-send.c
 
-#gnome_obex_server_LDADD = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ \
-#	$(GNOME_BLUETOOTH_LIBS) \
-#	libmisc.a ../libegg/libegg/tray/libeggtray.la \
-#	../src/libgnomebt.la
+gnome_obex_server_LDADD = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ \
+	$(GNOME_BLUETOOTH_LIBS) \
+	../libegg/libegg/tray/libeggtray.la \
+	../src/libgnomebt.la
 
 gnome_obex_send_LDFLAGS = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ \
 	$(GNOME_BLUETOOTH_LIBS) \

@@ -30,6 +30,7 @@ typedef struct _appinfo {
 	BtctlObexClient	*obex;
 	GnomeProgram	*prog;
 	gchar	*data;
+	gchar	*error;
 } MyApp;
 
 #define GLADE_FILE DATA_DIR "/gnome-obex-send.glade"
@@ -87,7 +88,7 @@ static void
 report_error (const gchar *msg) {
 	GtkWidget *dialog;
 
-	dialog=gnome_error_dialog (msg);
+	dialog = gnome_error_dialog (msg);
 	gtk_signal_connect_object (GTK_OBJECT (dialog),
 			"close", GTK_SIGNAL_FUNC (gtk_main_quit),
 			(gpointer) dialog);
@@ -100,14 +101,12 @@ cancel_clicked (GtkWidget *button, gpointer userdata)
 {
 	MyApp *app = (MyApp *) userdata;
 
-	g_message("User hit cancel");
 	gtk_main_quit ();
 }
 
 static void
 progress_callback (BtctlObexClient *bo, gchar * bdaddr, gpointer data) 
 {
-	g_message ("Progress from %s", bdaddr);
 	update_gui ((MyApp *)data);
 }
 
@@ -116,7 +115,6 @@ complete_callback (BtctlObexClient *bo, gchar * bdaddr, gpointer data)
 {
 	MyApp *app = (MyApp *)data;
 
-	g_message ("Operation complete from %s", bdaddr);
 	if (app->data) {
 		g_free (app->data);
 		app->data = NULL;
@@ -131,7 +129,7 @@ send_one (MyApp *app)
 	const gchar *fname;
 	gchar *bname;
 	gsize len;
-	GError *err;
+	GError *err = NULL;
 	GtkWidget *label;
 
 	if ((fname = poptGetArg (app->context))) {
@@ -139,7 +137,6 @@ send_one (MyApp *app)
 		app->data = NULL;
 		if (g_file_get_contents (fname, &(app->data), &len, &err)) {
 			bname = g_path_get_basename (fname);
-			g_message ("Sending %s", fname);
 			label = glade_xml_get_widget (app->xml, "filename_label");
 			gtk_label_set_text (GTK_LABEL (label), bname);
 			btctl_obex_client_push_data (app->obex,
@@ -147,7 +144,7 @@ send_one (MyApp *app)
 			/* TODO: check error return here from command submit */
 			g_free (bname);
 		} else {
-			g_warning ("Unable to read %s", fname);
+			app->error = g_strdup_printf (_("Unable to read file '%s'."), fname);
 			/* TODO: implement error handling */
 			g_error_free (err);
 			/* error, so we quit */
@@ -165,8 +162,6 @@ static void
 connected_callback (BtctlObexClient *bo, gchar * bdaddr, gpointer data) 
 {
 	/* OBEX connect has succeeded, so start sending */
-	g_message ("Connected OK to %s", bdaddr);
-
 	g_idle_add ((GSourceFunc) send_one, data);
 }
 
@@ -174,17 +169,18 @@ static void
 error_callback (BtctlObexClient *bo, gchar * bdaddr, guint reason,
 		gpointer data)
 {
-	g_message ("Error %d from %s",reason,  bdaddr);
+	MyApp *app = (MyApp *) data;
+
 	switch (reason) {
 		case BTCTL_OBEX_ERR_LINK:
-			g_message ("Link error");
-			break;
 		case BTCTL_OBEX_ERR_PARSE:
-			g_message ("Malformed incoming data");
+			app->error = g_strdup (_("An error occurred while sending data."));
 			break;
 		case BTCTL_OBEX_ERR_ABORT:
-			g_message ("Peer aborted transfer");
+			app->error = g_strdup (_("The remote device canceled the transfer."));
 			break;
+		default:
+			app->error = g_strdup (_("An unknown error occurred."));
 	}
 	/* Error condition, so quit. */
 	gtk_main_quit ();
@@ -294,7 +290,7 @@ main (int argc, char *argv[])
 		if (btctl_obex_client_is_initialised (app->obex)) {
 			mainloop (app);
 		} else {
-			report_error (_("Unable to create connection to remote device."));
+			report_error (_("Unable to connect to remote device."));
 			ret = 1;
 		}
 		g_object_unref (app->obex);
@@ -302,6 +298,11 @@ main (int argc, char *argv[])
 
 	if (app->data)
 		g_free (app->data);
+
+	if (app->error) {
+		report_error (app->error);
+		g_free (app->error);
+	}
 
 	g_free (app);
 	return ret;
