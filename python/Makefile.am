@@ -1,5 +1,5 @@
 
-pythondir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gtk-2.0/gnomebt
+pythondir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt
 pkgpythondir = $(pythondir)
 libdir = $(pkgpythondir)
 

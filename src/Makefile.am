@@ -78,7 +78,7 @@ gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 		--override gnomebt-controller.override \
 		gnomebt-controller.defs > $@
                                                                                 
-pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gtk-2.0/gnomebt
+pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt/
 controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la
 endif
