@@ -4,7 +4,7 @@ SUBDIRS = po libegg src obex python nautilus
 
 EXTRA_DIST = \
 	intltool-extract.in intltool-merge.in intltool-update.in \
-	COPYING COPYING.gnomebt
+	COPYING COPYING.gnomebt TODO
 
 install-data-local:
 	@$(NORMAL_INSTALL)
