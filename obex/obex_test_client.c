@@ -31,6 +31,15 @@
 #include <string.h>
 #include <fcntl.h>
 #include <libgen.h>
+
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <netinet/in.h>
+
+#include <bluetooth/bluetooth.h>
+#include <bluetooth/rfcomm.h>
+
 #include <openobex/obex.h>
 
 

@@ -27,6 +27,8 @@
  */
 
 #include <stdio.h>
+#include "gnomebt-permissiondialog.h"
+
 #include <openobex/obex.h>
 
 #include <stdlib.h>
@@ -37,8 +39,6 @@
 #include "obex_test.h"
 #include "obex_test_server.h"
 
-#define TRUE  1
-#define FALSE 0
 
 void put_server(obex_t *handle, obex_object_t *object);
 void connect_server(obex_t *handle, obex_object_t *object);
@@ -100,7 +100,11 @@ connect_server(obex_t *handle, obex_object_t *object)
 
 	const uint8_t *who = NULL;
 	int who_len = 0;
-	printf(/* __FUNCTION */ "()\n");
+
+    struct context *gt;
+    gt = OBEX_GetUserData(handle);
+    
+	printf("Connect to server\n");
 
 	while(OBEX_ObjectGetNextHeader(handle, object, &hi, &hv, &hlen))	{
 		if(hi == OBEX_HDR_WHO)	{
@@ -108,7 +112,7 @@ connect_server(obex_t *handle, obex_object_t *object)
 			who_len = hlen;
 		}
 		else	{
-			printf(/* __FUNCTION */ "() Skipped header %02x\n", hi);
+			printf("Skipped header %02x\n", hi);
 		}
 	}
 	if (who_len == 6)	{
@@ -116,23 +120,27 @@ connect_server(obex_t *handle, obex_object_t *object)
 			printf("Weeeha. I'm talking to the coolest OS ever!\n");
 		}
 	}
-	OBEX_ObjectSetRsp(object, OBEX_RSP_SUCCESS, OBEX_RSP_SUCCESS);
+
+    OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
 }
 
 void
 server_request(obex_t *handle, obex_object_t *object, int event, int cmd)
 {
+	struct context *gt;
+	gt = OBEX_GetUserData(handle);
+
 	switch(cmd)	{
 	case OBEX_CMD_CONNECT:
 		connect_server(handle, object);
 		break;
 	case OBEX_CMD_DISCONNECT:
-		printf("We got a disconnect-request\n");
+		printf("We got a disconnect request\n");
 		OBEX_ObjectSetRsp(object, OBEX_RSP_SUCCESS, OBEX_RSP_SUCCESS);
 		break;
 	case OBEX_CMD_PUT:
-		OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
-		put_server(handle, object);
+        OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
+        put_server(handle, object);
 		break;
 	case OBEX_CMD_SETPATH:
 		printf("Got a SETPATH request\n");

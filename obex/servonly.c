@@ -17,39 +17,26 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <netinet/in.h>
-
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
 
 #include <openobex/obex.h>
+
+#include <glib.h>
+#include <gtk/gtk.h>
+#include <gconf/gconf-client.h>
+#include <gconf/gconf-value.h>
+#include <gnome.h>
 
 #include "obex_test.h"
 #include "obex_test_client.h"
 #include "obex_test_server.h"
 
 #include "obexsdp.h"
-
-#include <glib.h>
-#include <gtk/gtk.h>
-#include <gconf/gconf-client.h>
-#include <gconf/gconf-value.h>
-
-#include <gnome.h>
 #include "eggtrayicon.h"
-
-#include "gnomebt-spinner.h"
-#include "gnomebt-icons.h"
 
 #define IR_SERVICE "OBEX"
 #define BT_CHANNEL 4
-
-typedef struct _appinfo {
-  GnomebtSpinner *spin;
-  struct context *gt;
-  obex_t *handle;
-  GtkMenu *menu;
-  GtkTooltips *tooltip;
-} MyApp;
 
 void obex_event(obex_t *handle, obex_object_t *object,
 				int mode, int event, int obex_cmd, int obex_rsp);
@@ -62,6 +49,26 @@ void my_server_do(void);
 
 static MyApp *app;
 
+static gboolean allowed_to_put (gpointer data, gchar *bdaddr);
+ 
+static gboolean
+allowed_to_put (gpointer data, gchar *bdaddr)
+{
+    struct context *ctxt = (struct context *)data;
+    MyApp *app = (MyApp *)ctxt->app;
+    GnomebtPermissionDialog *dlg;
+    gboolean result;
+  
+    g_message ("in allowed_to_put");
+  
+    dlg = gnomebt_permissiondialog_new (app->btctl,
+            bdaddr, "File transfer requested",
+            "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n\nThe remote device is attempting to send you a file via Bluetooth.");
+    result = gtk_dialog_run (GTK_DIALOG (dlg));
+    gtk_widget_destroy (GTK_WIDGET (dlg));
+    return (result == GTK_RESPONSE_OK);
+}
+
 //
 // Called by the obex-layer when some event occurs.
 //
@@ -69,6 +76,9 @@ void
 obex_event(obex_t *handle, obex_object_t *object,
 		   int mode, int event, int obex_cmd, int obex_rsp)
 {
+    struct context *gt;
+	gt = OBEX_GetUserData(handle);
+
 	switch (event)	{
 	case OBEX_EV_PROGRESS:
 		gnomebt_spinner_spin(app->spin);
@@ -78,6 +88,9 @@ obex_event(obex_t *handle, obex_object_t *object,
 		printf("Request aborted!\n");
 		break;
 
+	case OBEX_EV_LINKERR:
+	  OBEX_TransportDisconnect(handle);
+	  g_message("Link error.");
 	case OBEX_EV_REQDONE:
 	  if(mode == OBEX_CLIENT) {
 		client_done(handle, object, obex_cmd, obex_rsp);
@@ -87,23 +100,40 @@ obex_event(obex_t *handle, obex_object_t *object,
 	  break;
 
 	case OBEX_EV_REQHINT:
-	  /* Accept any command. Not really good, but
-		 this is a test-program :)
-		 TODO: Fix this */
-		OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
+        switch (obex_cmd) {
+            case OBEX_CMD_PUT:
+                if (allowed_to_put ((gpointer) gt, "00:00:00:00:00:00")) {
+                    OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE,
+                            OBEX_RSP_SUCCESS);
+                } else {
+                    g_message ("ReqHint: Denying PUT on user request");
+                    OBEX_ObjectSetRsp(object, OBEX_RSP_FORBIDDEN,
+                        OBEX_RSP_FORBIDDEN);
+                }
+                break;
+            case OBEX_CMD_CONNECT:
+            case OBEX_CMD_DISCONNECT:
+                OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
+                break;
+            case OBEX_CMD_GET:
+            case OBEX_CMD_SETPATH:
+            default:
+                OBEX_ObjectSetRsp(object, OBEX_RSP_NOT_IMPLEMENTED,
+                        OBEX_RSP_NOT_IMPLEMENTED);
+                g_message ("ReqHint: denying command %02x", obex_cmd);
+                break;
+        }
 		break;
 
 	case OBEX_EV_REQ:
 		server_request(handle, object, event, obex_cmd);
 		break;
 
-	case OBEX_EV_LINKERR:
-	  OBEX_TransportDisconnect(handle);
-	  app->gt->serverdone = TRUE;
+	/*case OBEX_EV_LINKERR:
+	  OBEX_TransportDisconnect(handle); 
 	  printf("Link broken!\n");
-	  /* TODO: figure out how to recover
-		 from this situation. */
-	  break;
+	  app->gt->serverdone = TRUE;
+	  break;*/
 
 	case OBEX_EV_STREAMEMPTY:
 		fillstream(handle, object);
@@ -114,45 +144,6 @@ obex_event(obex_t *handle, obex_object_t *object,
 		break;
 	}
 }
-
-/*
- * Function get_peer_addr (name, peer)
- */
-int
-get_peer_addr(char *name, struct sockaddr_in *peer)
-{
-	struct hostent *host;
-	u_long inaddr;
-
-	/* Is the address in dotted decimal? */
-	if ((inaddr = inet_addr(name)) != INADDR_NONE) {
-		memcpy((char *) &peer->sin_addr, (char *) &inaddr,
-		      sizeof(inaddr));
-	}
-	else {
-		if ((host = gethostbyname(name)) == NULL) {
-			printf("Bad host name: ");
-			exit(-1);
-		}
-		memcpy((char *) &peer->sin_addr, host->h_addr,
-				host->h_length);
-	}
-	return 0;
-}
-
-//
-//
-//
-int
-inet_connect(obex_t *handle)
-{
-	struct sockaddr_in peer;
-
-	get_peer_addr("localhost", &peer);
-	return OBEX_TransportConnect(handle, (struct sockaddr *) &peer,
-				  sizeof(struct sockaddr_in));
-}
-
 
 void
 my_server_do(void)
@@ -176,6 +167,7 @@ my_init(gpointer data)
   } else {
 	gnomebt_spinner_reset(app->spin);
 	g_timeout_add(100, obex_poll, NULL);
+    g_message("Polling for requests");
   }
 
   return 0;
@@ -341,7 +333,8 @@ main (int argc, char *argv[])
 
   tray_icon = egg_tray_icon_new (_("Bluetooth File Sharing"));
   spin = gnomebt_spinner_new();
-  app->spin=spin;
+  app->spin = spin;
+  app->btctl = gnomebt_controller_new ();
 
   app->tooltip = gtk_tooltips_new();
   gtk_tooltips_set_tip (app->tooltip,
@@ -389,7 +382,10 @@ main (int argc, char *argv[])
   gtk_container_add (GTK_CONTAINER (tray_icon), GTK_WIDGET(spin));
   gtk_widget_show_all (GTK_WIDGET (tray_icon));
 
-  main2(NULL);
+  main2 (NULL);
+
+  g_object_unref (app->spin);
+  g_object_unref (app->btctl);
 
   g_free(app);
 

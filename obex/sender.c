@@ -44,14 +44,6 @@
 
 #define GLADE_FILE DATA_DIR "/gnome-obex-send.glade"
 
-typedef struct _appinfo {
-  struct context *gt;
-  obex_t *handle;
-  GladeXML *xml;
-  poptContext context;
-} MyApp;
-
-
 uint8_t get_obex_channel(char *bdaddr);
 void obex_event(obex_t *handle, obex_object_t *object, int mode,
 				int event, int obex_cmd, int obex_rsp);

@@ -2,7 +2,6 @@
 #define OBEX_TEST_CLIENT_H
 
 #include "obex_test.h"
-
 void client_done(obex_t *handle, obex_object_t *object, int obex_cmd, int obex_rsp);
 
 void connect_client(obex_t *handle);

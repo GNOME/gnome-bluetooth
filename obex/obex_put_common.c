@@ -31,13 +31,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <bluetooth/bluetooth.h>
+
 #include <openobex/obex.h>
+#include "obex_test.h"
 #include "obex_put_common.h"
 #include "obex_io.h"
-#include "obex_test.h"
-
-#define TRUE  1
-#define FALSE 0
 
 extern obex_t *handle;
 extern volatile int finished;
@@ -117,19 +116,25 @@ void put_done(obex_object_t *object)
  */
 void server_request(obex_object_t *object, int event, int cmd)
 {
+    struct context *gt;
+    gt = OBEX_GetUserData(handle);
+
 	switch(cmd)	{
 	case OBEX_CMD_SETPATH:
 		printf("Received SETPATH command\n");
 		OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
 		break;
 	case OBEX_CMD_PUT:
+		printf("Received PUT command\n");
 		OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
 		put_done(object);
 		break;
 	case OBEX_CMD_CONNECT:
+		printf("Received CONNECT command\n");
 		OBEX_ObjectSetRsp(object, OBEX_RSP_SUCCESS, OBEX_RSP_SUCCESS);
 		break;
 	case OBEX_CMD_DISCONNECT:
+		printf("Received DISCONNECT command\n");
 		OBEX_ObjectSetRsp(object, OBEX_RSP_SUCCESS, OBEX_RSP_SUCCESS);
 		break;
 	default:
@@ -174,6 +179,9 @@ void client_done(obex_object_t *object, int obex_cmd, int obex_rsp)
  */
 void obex_event(obex_t *handle, obex_object_t *object, int mode, int event, int obex_cmd, int obex_rsp)
 {
+	struct context *gt;
+	gt = OBEX_GetUserData(handle);
+
 	switch (event)	{
 	case OBEX_EV_PROGRESS:
 		printf(".");
@@ -190,6 +198,7 @@ void obex_event(obex_t *handle, obex_object_t *object, int mode, int event, int 
 		/* Comes BEFORE the lib parses anything. */
 		switch(obex_cmd) {
 		case OBEX_CMD_PUT:
+            break;
 		case OBEX_CMD_CONNECT:
 		case OBEX_CMD_DISCONNECT:
 			OBEX_ObjectSetRsp(object, OBEX_RSP_CONTINUE, OBEX_RSP_SUCCESS);
