@@ -6,7 +6,7 @@ AM_CPPFLAGS = \
 	$(GNOME_BLUETOOTH_CFLAGS) \
 	$(BLUETOOTH_CFLAGS) \
 	$(SDP_CFLAGS) \
-    -DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
+	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
 	$(GNOME_BLUETOOTH_PY_CFLAGS) \
 	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/
 
@@ -71,7 +71,7 @@ EXTRA_DIST += btctl.defs btctl.override
 if HAVE_PYTHON
 regenerate-defs: gnomebt-controller.h
 	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
-                                                                                
+
 gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 	pygtk-codegen-2.0 --prefix controller \
 		--register $(DEFSDIR)/gtk-types.defs \
@@ -81,8 +81,8 @@ gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gtk-2.0/gnomebt
 controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la
+endif
 controller_la_LDFLAGS = $(GNOME_BLUETOOTH_PY_LIBS) \
 						$(GNOME_BLUETOOTH_LIBS) \
 						-module
-endif
 
