@@ -2,25 +2,27 @@
 
 	* Merged patch from Ross Burton:
 
-      * python/Makefile.am: Use PYTHON_INCLUDES instead of the broken
-      PYTHON_PREFIX/blaa, as PYTHON_PREFIX is where python is currently
-      installed for me.
+	- python/Makefile.am: Use PYTHON_INCLUDES instead of the broken
+	PYTHON_PREFIX/blaa, as PYTHON_PREFIX is where python is currently
+	installed for me.
 
-      * src/controller.gob: Fiddle with delete_device. This works for me but
-      the directory is not removed correctly.  I must examine the gconf code
-      as I'm still having issues with it when I scan.
+	- src/controller.gob: Fiddle with delete_device. This works for me but
+	the directory is not removed correctly.  I must examine the gconf code
+	as I'm still having issues with it when I scan.
 
-      * src/Makefile.am: Remove useless whitespace (my emacs shows it in
-      purple) and fix CLEAN_FILES.
-    
-      * python/manager.py: Require pygtk 2.0, implement Delete, handle unnamed
-      devices (happened to me a few days ago) and add my calling card, a call
-      to gtk_window_set_transient_for().
+	- src/Makefile.am: Remove useless whitespace (my emacs shows it in
+	purple) and fix CLEAN_FILES.
+
+	- python/manager.py: Require pygtk 2.0, implement Delete, handle
+	unnamed devices (happened to me a few days ago) and add my calling
+	card, a call to gtk_window_set_transient_for().
 
 	* src/controller.gob: remember to free various lists returned from
 	gconf_client calls.
 
 	* src/gnomebt-controller-test.c: add silly test for delete_device.
+
+	* obex/: move obex-server-source away from here: to libbtctl
 
 2004-01-02  Edd Dumbill <edd@usefulinc.com>
 

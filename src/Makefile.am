@@ -11,7 +11,7 @@ AM_CPPFLAGS = \
 	$(PYTHON_INCLUDES)
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
-				gnomebt-chooser-test gnomebt-permissiondialog-test
+	gnomebt-chooser-test gnomebt-permissiondialog-test
 
 lib_LTLIBRARIES = libgnomebt.la
 if HAVE_PYTHON
@@ -53,6 +53,8 @@ gconftest_LDFLAGS = \
 
 GOB_DIST = \
 	spinner.gob chooser.gob controller.gob permissiondialog.gob
+
+CTAGS_ARGS = --line-directives=yes --langmap=c++:.gob $(GOB_DIST)
 
 BUILT_SOURCES = \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \

@@ -7,6 +7,8 @@ python_LTLIBRARIES = iconlist.la
 
 python_DATA = __init__.py manager.py hig_alert.py defs.py
 
+CTAGS_ARGS = $(python_DATA)
+
 noinst_PYTHON = testiconlist.py
 
 AM_CFLAGS = \
