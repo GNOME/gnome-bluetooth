@@ -82,6 +82,22 @@
   )
 )
 
+(define-function gnomebt_string_list_free
+  (c-name "gnomebt_string_list_free")
+  (return-type "none")
+  (parameters
+    '("GSList*" "list")
+  )
+)
+
+(define-function gnomebt_entry_list_free
+  (c-name "gnomebt_entry_list_free")
+  (return-type "none")
+  (parameters
+    '("GSList*" "list")
+  )
+)
+
 (define-method get_name
   (of-object "GnomebtDeviceDesc")
   (c-name "gnomebt_device_desc_get_name")
@@ -127,6 +143,25 @@
   (parameters
     '("const-gchar*" "bdaddr")
     '("const-gchar*" "name")
+  )
+)
+
+(define-method set_device_permission
+  (of-object "GnomebtController")
+  (c-name "gnomebt_controller_set_device_permission")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "bdaddr")
+    '("gint" "flag")
+  )
+)
+
+(define-method get_device_permission
+  (of-object "GnomebtController")
+  (c-name "gnomebt_controller_get_device_permission")
+  (return-type "gint")
+  (parameters
+    '("const-gchar*" "bdaddr")
   )
 )
 

@@ -15,7 +15,7 @@ noinst_PROGRAMS=gconftest gnomebt-controller-test \
 
 lib_LTLIBRARIES = libgnomebt.la
 if HAVE_PYTHON
-py_LTLIBRARIES = controller.la
+py_LTLIBRARIES = controller.la chooser.la
 else
 py_LTLIBRARIES =
 endif
@@ -54,7 +54,8 @@ gconftest_LDFLAGS = \
 GOB_DIST = \
 	spinner.gob chooser.gob controller.gob permissiondialog.gob
 
-CTAGS_ARGS = --line-directives=yes --langmap=c++:.gob $(GOB_DIST)
+CTAGS_ARGS = --langmap=c++:.gob \
+	$(GOB_DIST)
 
 BUILT_SOURCES = \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
@@ -76,8 +77,13 @@ EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
 CLEANFILES = $(PYTHON_CLEANFILES)
 
 if HAVE_PYTHON
-regenerate-defs: gnomebt-controller.h
+regenerate-defs: gnomebt-controller.defs gnomebt-chooser.defs
+
+gnomebt-controller.defs: gnomebt-controller.h
 	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
+
+gnomebt-chooser.defs: gnomebt-chooser.h
+	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-chooser.h > gnomebt-chooser.defs
 
 gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 	pygtk-codegen-2.0 --prefix controller \
@@ -85,11 +91,26 @@ gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 		--override gnomebt-controller.override \
 		gnomebt-controller.defs > $@
 
+gnomebt-chooser-py.c: gnomebt-chooser.defs gnomebt-controller.defs gnomebt-chooser.override
+	pygtk-codegen-2.0 --prefix chooser \
+		--register $(DEFSDIR)/gtk-types.defs \
+		--register gnomebt-controller.defs \
+		--override gnomebt-chooser.override \
+		gnomebt-chooser.defs > $@
+
 pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt/
+
 controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la
-endif
 controller_la_LDFLAGS = $(GNOME_BLUETOOTH_PY_LIBS) \
-						$(GNOME_BLUETOOTH_LIBS) \
-						-module
+			$(GNOME_BLUETOOTH_LIBS) \
+			-module
+
+chooser_la_SOURCES = gnomebt-chooser-py.c gnomebt-chooser-pymodule.c
+chooser_la_LIBADD =  libgnomebt.la
+chooser_la_LDFLAGS = 	$(GNOME_BLUETOOTH_PY_LIBS) \
+			$(GNOME_BLUETOOTH_LIBS) \
+			-module
+
+endif
 

@@ -1,0 +1,47 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object Chooser
+  (in-module "Gnomebt")
+  (parent "GtkDialog")
+  (c-name "GnomebtChooser")
+  (gtype-id "GNOMEBT_TYPE_CHOOSER")
+)
+
+;; Enumerations and flags ...
+
+
+;; From gnomebt-chooser.h
+
+(define-function gnomebt_chooser_get_type
+  (c-name "gnomebt_chooser_get_type")
+  (return-type "GType")
+)
+
+(define-function gnomebt_chooser_new
+  (c-name "gnomebt_chooser_new")
+  (is-constructor-of "GnomebtChooser")
+  (return-type "GnomebtChooser*")
+  (parameters
+    '("GnomebtController*" "ctl")
+  )
+)
+
+(define-method get_response
+  (of-object "GnomebtChooser")
+  (c-name "gnomebt_chooser_get_response")
+  (return-type "gint")
+)
+
+(define-method get_bdaddr
+  (of-object "GnomebtChooser")
+  (c-name "gnomebt_chooser_get_bdaddr")
+  (return-type "gchar*")
+)
+
+(define-method start_scan
+  (of-object "GnomebtChooser")
+  (c-name "gnomebt_chooser_start_scan")
+  (return-type "none")
+)
+
+

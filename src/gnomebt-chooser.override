@@ -1,0 +1,20 @@
+%%
+headers
+#include <Python.h>
+#include "pygobject.h"
+#include "gnomebt-controller.h"
+#include "gnomebt-chooser.h"
+
+void chooser_register_classes(PyObject *d);
+#define PyGnomebtController_Type PyBtctlController_Type
+
+%%
+modulename chooser
+%%
+import gobject.GObject as PyGObject_Type
+import gtk.Dialog as PyGtkDialog_Type
+import btctl.Controller as PyBtctlController_Type
+%%
+ignore-glob
+  *_get_type
+%%
