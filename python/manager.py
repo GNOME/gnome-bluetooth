@@ -57,6 +57,9 @@ class BTManager (object):
     def __init__ (self):
         self.btctl = controller.Controller()
         self.setup_gui ()
+        self.btctl.connect ("device_name", self.on_device_name)
+        self.btctl.connect ("status_change", self.on_status_change)
+        self.btctl.connect ("add_device", self.on_add_device)
         self.read_devices ()
 
     def setup_gui (self):
@@ -89,6 +92,8 @@ class BTManager (object):
         menu.add (gtk.SeparatorMenuItem ())
         menu.add (gtk.ImageMenuItem (gtk.STOCK_QUIT), self.destroy)
 
+        self.scanitem = scanitem
+
         menuitem.set_submenu (menu)
 
         menuitem = gtk.MenuItem (_("_Edit"))
@@ -105,7 +110,7 @@ class BTManager (object):
         menu.add (gtk.ImageMenuItem ('gnome-stock-about'), self.on_about)
         menuitem.set_submenu (menu)
         
-        self.statusbar = gnome.ui.AppBar (gtk.FALSE, gtk.TRUE, 
+        self.statusbar = gnome.ui.AppBar (gtk.TRUE, gtk.TRUE, 
                 gnome.ui.PREFERENCES_NEVER)
         self.window.set_statusbar (self.statusbar)
         self.window.set_menus (menubar)
@@ -150,10 +155,6 @@ class BTManager (object):
                         d['name'])
             ic.set_data (d['bdaddr'])
             self.iconlist.append_item (ic)
-        if len (devs) > 0:
-            self.statusbar.set_status (_("Found %d devices.") % len (devs))
-        else:
-            self.statusbar.set_status (_("No devices found."))
 
     def delete_event (self, widget, event, data = None):
         return gtk.FALSE
@@ -172,20 +173,49 @@ class BTManager (object):
         if cls > 6:
             cls = 0
         return self.image_file (icon_names[cls])
-    
-    def on_scan (self, widget, data = None):
-        self.statusbar.push (_("Scanning for devices."))
-        self.btctl.discover_devices ()
+
+    def on_add_device (self, controller, name, data = None):
+        self.items_found = self.items_found + 1
         self.statusbar.pop ()
-        self.iconlist.clear ()
-        self.read_devices ()
+        self.statusbar.push (_("Found device %s.") % (name))
+    
+    def on_device_name (self, controller, device, name, data = None):
+        self.names_found = self.names_found + 1
+        self.statusbar.pop ()
+        self.statusbar.push (_("Device %s is called '%s'.") % (device, name))
+        self.statusbar.set_progress_percentage (0.50 + float (self.names_found) / float (self.items_found) * 0.50)
+
+    def on_status_change (self, controller, status, data = None):
+        self.statusbar.pop ()
+        if status == 2:
+            self.statusbar.push (_("Scanning for devices..."))
+            self.statusbar.set_progress_percentage (0.05)
+        elif status == 3:
+            self.statusbar.push (_("Retrieving device names..."))
+            self.statusbar.set_progress_percentage (0.50)
+            self.names_found = 0
+        elif status == 4:
+            self.statusbar.push (_("Scan complete."))
+            self.scanitem.set_sensitive (gtk.TRUE)
+            self.statusbar.set_progress_percentage (0.0)
+            self.iconlist.clear ()
+            self.read_devices ()
+        elif status == 1:
+            self.statusbar.push (_("Error during scan."))
+            self.statusbar.set_progress_percentage (0.0)
+            self.scanitem.set_sensitive (gtk.TRUE)
+
+    def on_scan (self, widget, data = None):
+        self.items_found = 0
+        self.scanitem.set_sensitive (gtk.FALSE)
+        self.btctl.discover_async ()
 
     def on_about (self, widget, data = None):
         gnome.ui.About (
                 __appname__,
                 __version__,
                 _(u"Copyright © Edd Dumbill 2003"),
-                _(u"Administer local bluetooth devices."),
+                _(u"Manage remote bluetooth devices."),
                 [ "Edd Dumbill <edd@usefulinc.com>" ],
                 [],
                 "",

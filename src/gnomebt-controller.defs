@@ -58,6 +58,30 @@
   (return-type "none")
 )
 
+(define-function gnomebt_channel_list_free
+  (c-name "gnomebt_channel_list_free")
+  (return-type "none")
+  (parameters
+    '("GSList*" "list")
+  )
+)
+
+(define-function gnomebt_service_list_free
+  (c-name "gnomebt_service_list_free")
+  (return-type "none")
+  (parameters
+    '("GSList*" "list")
+  )
+)
+
+(define-function gnomebt_device_desc_list_free
+  (c-name "gnomebt_device_desc_list_free")
+  (return-type "none")
+  (parameters
+    '("GSList*" "list")
+  )
+)
+
 (define-method get_name
   (of-object "GnomebtDeviceDesc")
   (c-name "gnomebt_device_desc_get_name")
@@ -114,15 +138,6 @@
   )
 )
 
-(define-method free_service_list
-  (of-object "GnomebtController")
-  (c-name "gnomebt_controller_free_service_list")
-  (return-type "none")
-  (parameters
-    '("GSList*" "list")
-  )
-)
-
 (define-method channels_for_service
   (of-object "GnomebtController")
   (c-name "gnomebt_controller_channels_for_service")
@@ -130,15 +145,6 @@
   (parameters
     '("const-gchar*" "bdaddr")
     '("guint" "svcid")
-  )
-)
-
-(define-method free_channel_list
-  (of-object "GnomebtController")
-  (c-name "gnomebt_controller_free_channel_list")
-  (return-type "none")
-  (parameters
-    '("GSList*" "list")
   )
 )
 
@@ -175,24 +181,6 @@
   (return-type "GnomebtDeviceDesc*")
   (parameters
     '("const-gchar*" "bdaddr")
-  )
-)
-
-(define-method free_device_desc
-  (of-object "GnomebtController")
-  (c-name "gnomebt_controller_free_device_desc")
-  (return-type "none")
-  (parameters
-    '("GnomebtDeviceDesc*" "dd")
-  )
-)
-
-(define-method free_device_desc_list
-  (of-object "GnomebtController")
-  (c-name "gnomebt_controller_free_device_desc_list")
-  (return-type "none")
-  (parameters
-    '("GSList*" "list")
   )
 )
 
