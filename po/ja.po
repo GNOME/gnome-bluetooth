@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-12 14:28+0900\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-09-12 14:26+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -173,47 +173,43 @@ msgstr "GNOME Bluetooth コンポーネント"
 msgid "Send via Bluetooth..."
 msgstr "Bluetooth を介して送信..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "送信側デバイスの Bluetooth アドレス"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "ファイル '%s' を読み込めません。"
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "データを送信する際にエラーが発生しました。"
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "リモート・デバイスが転送をキャンセルしました。"
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "不明なエラーが発生しました。"
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "接続中..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Glade ファイルが見つかりません (gnome-bluetooth のインストールを確認して下さ"
 "い)。"
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "リモート・デバイスはオブジェクト受信をサポートしていません。"
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "プログラムを初期化できません。"
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "リモート・デバイスへ接続できません。"
 
@@ -239,8 +235,10 @@ msgstr ""
 msgid "Always accept files from this device."
 msgstr "常にこのデバイスからのファイルを受け入れます。"
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
 msgstr ""
 "相花 毅 <aihana@gnome.gr.jp>\n"
 "日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
@@ -255,20 +253,20 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth ファイル共有"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Bluetooth デバイスからファイルの受信"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Bluetooth ファイル・サーバ"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Bluetooth ファイル転送の準備"
 
@@ -360,11 +358,11 @@ msgstr "Bluetooth デバイスの選択"
 msgid "Device"
 msgstr "デバイス"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth 転送を受信しました"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
@@ -373,7 +371,7 @@ msgstr ""
 "<span weight='bold' size='larger'>'%s' からファイルを受信しました。どうします"
 "か？</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -423,3 +421,6 @@ msgstr "Bluetooth ファイル転送"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "送信先デバイスの選択"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "送信側デバイスの Bluetooth アドレス"

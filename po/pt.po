@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-08 02:13+0100\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-08-08 02:20+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -173,51 +173,43 @@ msgstr "Componente GNOME Bluetooth"
 msgid "Send via Bluetooth..."
 msgstr "Enviar através de Bluetooth..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "Endereço Bluetooth do dispositivo de destino"
-
-#: obex/gnome-obex-send.c:61
-msgid "BDADDR"
-msgstr "BDADDR"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Incapaz de ler o ficheiro '%s'."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "Ocorreu um erro ao enviar os dados."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "O dispositivo remoto cancelou a transferência."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "Ocorreu um erro desconhecido."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "A Ligar..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
-"Incapaz de encontrar o ficheiro de interface de utilizador, verifique a "
-"sua instalação do gnome-bluetooth."
+"Incapaz de encontrar o ficheiro de interface de utilizador, verifique a sua "
+"instalação do gnome-bluetooth."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "Dispositivo remoto não suporta a recepção de objectos."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "Incapaz de inicializar a aplicação."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Incapaz de se ligar ao dispositivo remoto."
 
@@ -242,26 +234,36 @@ msgstr ""
 msgid "Always accept files from this device."
 msgstr "Aceitar sempre ficheiros deste dispositivo."
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
 msgstr "Duarte Loreto <happyguy_pt@hotmail.com>"
 
 #. When try icon is destroyed, recreate it.  This happens
 #. when the notification area is removed.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#. *
+#. * TODO:
+#. *
+#. * ensure it only gets invoked once
+#. * display sensible error dialogs
+#. * think about fancy received-file actions
+#. *	 - should we send vcards to evo, etc?
+#.
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Partilha de Ficheiros Bluetooth"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Receber ficheiros de dispositivos Bluetooth"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Servidor de Ficheiros Bluetooth"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Preparado para transferências de ficheiros Bluetooth"
 
@@ -269,20 +271,6 @@ msgstr "Preparado para transferências de ficheiros Bluetooth"
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Receber ficheiros enviados por dispositivos Bluetooth"
 
-#. handy to keep around in case you need to verify
-#. * the above
-#. void testnewname()
-#. {
-#. printf("%s\n", newname("My File"));
-#. printf("%s\n", newname("My File ()"));
-#. printf("%s\n", newname("My File )1("));
-#. printf("%s\n", newname("My File (2)"));
-#. printf("%s\n", newname("My File (1) (2)"));
-#. printf("%s\n", newname("My File.(3)"));
-#. printf("%s\n", newname("My File (Second try)"));
-#. printf("%s\n", newname("fred.pdf"));
-#. }
-#. *
 #: python/gnome-bluetooth-manager.desktop.in.h:1
 msgid "Bluetooth Manager"
 msgstr "Gestor Bluetooth"
@@ -291,41 +279,6 @@ msgstr "Gestor Bluetooth"
 msgid "Display Bluetooth devices and their properties"
 msgstr "Apresentar dispositivos Bluetooth e suas propriedades"
 
-#. gnome-bluetooth-manager
-#. (C) 2003-4 Edd Dumbill <edd@usefulinc.com>
-#.
-#. This program is free software; you can redistribute it and/or modify
-#. it under the terms of the GNU General Public License as published by
-#. the Free Software Foundation; either version 2 of the License, or
-#. (at your option) any later version.
-#.
-#. This program is distributed in the hope that it will be useful,
-#. but WITHOUT ANY WARRANTY; without even the implied warranty of
-#. MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#. GNU General Public License for more details.
-#.
-#. You should have received a copy of the GNU General Public License
-#. along with this program; if not, write to the Free Software
-#. Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#. !/usr/bin/env python
-#. -*- coding: utf-8 -*-
-#.
-#. gnome-bluetooth-manager
-#. (C) 2003-4 Edd Dumbill <edd@usefulinc.com>
-#.
-#. This program is free software; you can redistribute it and/or modify
-#. it under the terms of the GNU General Public License as published by
-#. the Free Software Foundation; either version 2 of the License, or
-#. (at your option) any later version.
-#.
-#. This program is distributed in the hope that it will be useful,
-#. but WITHOUT ANY WARRANTY; without even the implied warranty of
-#. MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#. GNU General Public License for more details.
-#.
-#. You should have received a copy of the GNU General Public License
-#. along with this program; if not, write to the Free Software
-#. Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #: python/manager.py:54
 msgid "Bluetooth Device Manager"
 msgstr "Gestor de Dispositivos Bluetooth"
@@ -388,7 +341,6 @@ msgstr "Análise terminada."
 msgid "Error during scan."
 msgstr "Erro durante a análise."
 
-#. Assume it worked
 #: python/manager.py:259
 msgid "Copyright Â© Edd Dumbill 2003"
 msgstr "Copyright © Edd Dumbill 2003"
@@ -405,11 +357,11 @@ msgstr "Seleccione o dispositivo Bluetooth"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Recebida Transferência Bluetooth"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
@@ -418,7 +370,7 @@ msgstr ""
 "<span weight='bold' size='larger'>Ficheiro recebido de '%s'. O que deseja "
 "fazer?</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -442,8 +394,8 @@ msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
 msgstr ""
-"<span weight='bold' size='larger'>Permitir que o dispositivo Bluetooth '%s'"
-"se ligue?</span>\n"
+"<span weight='bold' size='larger'>Permitir que o dispositivo Bluetooth '%"
+"s'se ligue?</span>\n"
 "\n"
 "Um dispositivo externo está a tentar ligar-se ao seu computador através de "
 "Bluetooth. Tem de decidir se deseja aceitar esta ligação."
@@ -468,3 +420,9 @@ msgstr "Transferências de ficheiro Bluetooth"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "Seleccione o dispositivo de destino"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "Endereço Bluetooth do dispositivo de destino"
+
+#~ msgid "BDADDR"
+#~ msgstr "BDADDR"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-24 22:02+0200\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-09-24 21:47+0200\n"
 "Last-Translator: Raphaël Tournoy <lexpas@free.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -176,47 +176,43 @@ msgstr "Composant GNOME Bluetooth"
 msgid "Send via Bluetooth..."
 msgstr "Envoyer par Bluetooth..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "Adresse Bluetooth du périphérique de destination"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Impossible de lire le fichier « %s »."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "Une erreur est survenue pendant l'envoi des données."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "Le périphérique distant a annulé le transfert."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "Une erreur inconnue est survenue."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "Connexion en cours..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Impossible de trouver le fichier d'interface utilisateur, vérifier "
 "l'installation de gnome-bluetooth."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "Le périphérique distant ne gère pas la réception d'objets."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "Le programme ne peut pas être initialisé."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Impossible de se connecter au périphérique distant."
 
@@ -242,12 +238,13 @@ msgstr ""
 msgid "Always accept files from this device."
 msgstr "Toujours accepter les fichiers provenant de ce périphérique."
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
 msgstr ""
 "Raphaël Tournoy <lexpas@free.fr>\n"
 "Christophe Merlet (RedFox) <redfox@redfoxcenter.org>"
-
 
 #. When try icon is destroyed, recreate it.  This happens
 #. when the notification area is removed.
@@ -259,20 +256,20 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Partage de fichier Bluetooth"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Reçoit des fichiers de périphériques Bluetooth"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Serveur de fichier Bluetooth"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Prêt pour les transferts de fichiers Bluetooth"
 
@@ -366,11 +363,11 @@ msgstr "Sélectionner le périphérique Bluetooth"
 msgid "Device"
 msgstr "Périphérique"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Transfert Bluetooth reçu"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
@@ -379,7 +376,7 @@ msgstr ""
 "<span weight='bold' size='larger'>Fichier reçu de « %s ». Que souhaitez-vous "
 "faire ?</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -429,3 +426,6 @@ msgstr "Transfert de fichier Bluetooth"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "Choisir le périphérique de destination"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "Adresse Bluetooth du périphérique de destination"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-12 16:47-0400\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-08-12 14:47-0300\n"
 "Last-Translator: Raphael Higino <raphaelh@uai.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -173,47 +173,43 @@ msgstr "Componente Bluetooth do GNOME"
 msgid "Send via Bluetooth..."
 msgstr "Enviar via Bluetooth..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "Endereço Bluetooth do dispositivo de destino"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Impossível ler o arquivo '%s'."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "Ocorreu um erro ao enviar os dados."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "O dispositivo remoto cancelou a transferência."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "Ocorreu um erro desconhecido."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Não é possível encontrar o arquivo da interface de usuário. Verifique sua "
 "instalação do gnome-bluetooth."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "O dispositivo remoto não suporta recebimento de objetos."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "Não é possível iniciar o programa."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Impossível conectar com o dispositivo remoto."
 
@@ -238,8 +234,10 @@ msgstr ""
 msgid "Always accept files from this device."
 msgstr "Sempre aceitar arquivos desse dispositivo."
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
 msgstr "Raphael Higino <raphaelh@uai.com.br>"
 
 #. When try icon is destroyed, recreate it.  This happens
@@ -252,20 +250,20 @@ msgstr "Raphael Higino <raphaelh@uai.com.br>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Compartilhamento de Arquivos via Bluetooth"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Receber arquivos de dispositivos Bluetooth"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Servidor de Arquivos Bluetooth"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Pronto para transferências de arquivos via Bluetooth"
 
@@ -359,11 +357,11 @@ msgstr "Escolha o dispositivo Bluetooth"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Transferência via Bluetooth recebida"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
@@ -372,7 +370,7 @@ msgstr ""
 "<span weight='bold' size='larger'>Arquivo recebido de '%s'. O que você "
 "gostaria de fazer?</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -422,6 +420,9 @@ msgstr "Transferência de arquivos via Bluetooth"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "Escolha o dispositivo de destino"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "Endereço Bluetooth do dispositivo de destino"
 
 #~ msgid "BDADDR"
 #~ msgstr "BDADDR"

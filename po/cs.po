@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-08 19:36+0200\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-08-08 23:34+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -174,45 +174,43 @@ msgstr "Komponenta GNOME Bluetooth"
 msgid "Send via Bluetooth..."
 msgstr "Odeslat přes Bluetooth..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "Adresa Bluetooth cílového zařízení"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Nemohu číst soubor '%s'."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "Při odesílání dat došlo k chybě."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "Vzdálené zařízení zrušilo přenos."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "Došlo k neznámé chybě."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "Připojuji se..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "Nemohu najít soubor uživatelského rozhraní, zkontrolujte vaši instalaci gnome-bluetooth."
+msgstr ""
+"Nemohu najít soubor uživatelského rozhraní, zkontrolujte vaši instalaci "
+"gnome-bluetooth."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "Vzdálené zařízení nepodporuje příjem objektů."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "Nemohu inicializovat program."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Nemohu se připojit ke vzdálenému zařízení."
 
@@ -230,14 +228,17 @@ msgid ""
 msgstr ""
 "<span weight='bold' size='larger'>Přijmout soubor od '%s'?</span>\n"
 "\n"
-"Vzdálené zařízení se pokouší vám odeslat soubor přes Bluetooth. Chcete připojení povolit?"
+"Vzdálené zařízení se pokouší vám odeslat soubor přes Bluetooth. Chcete "
+"připojení povolit?"
 
 #: obex/gnome-obex-server.c:88
 msgid "Always accept files from this device."
 msgstr "Vždy přijímat soubory z tohoto zařízení"
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
 #. When try icon is destroyed, recreate it.  This happens
@@ -250,20 +251,20 @@ msgstr "Miloslav Trmač <mitr@volny.cz>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Sdílení souborů přes Bluetooth"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Přijímat soubory od zařízení Bluetooth"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Server souborů přes Bluetooth"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Připraven pro přenosy souborů přes Bluetooth"
 
@@ -291,7 +292,9 @@ msgstr "Nemohu v systému najít zařízení Bluetooth"
 msgid ""
 "Please make sure that your bluetooth adapter is correctly plugged in your "
 "machine."
-msgstr "Zkontrolujte prosím, jestli je váš adaptér pro bluetooth správně připojen k počítači."
+msgstr ""
+"Zkontrolujte prosím, jestli je váš adaptér pro bluetooth správně připojen k "
+"počítači."
 
 #: python/manager.py:97
 msgid "Bluetooth devices"
@@ -356,18 +359,20 @@ msgstr "Zvolte zařízení Bluetooth"
 msgid "Device"
 msgstr "Zařízení"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Přijat přenos Bluetooth"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
 "like to do?</span>"
-msgstr "<span weight='bold' size='larger'>Přijat soubor od '%s'. Co chcete udělat?</span>"
+msgstr ""
+"<span weight='bold' size='larger'>Přijat soubor od '%s'. Co chcete udělat?</"
+"span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -391,9 +396,11 @@ msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
 msgstr ""
-"<span weight='bold' size='larger'>Povolit zařízení Bluetooth '%s' připojit se?</span>\n"
+"<span weight='bold' size='larger'>Povolit zařízení Bluetooth '%s' připojit "
+"se?</span>\n"
 "\n"
-"Externí zařízení se pokouší připojit k vašemu počítači přes Bluetooh. Musíte se rozhodnout, jestli chcete připojení přijmout."
+"Externí zařízení se pokouší připojit k vašemu počítači přes Bluetooh. Musíte "
+"se rozhodnout, jestli chcete připojení přijmout."
 
 #: src/permissiondialog.gob:138
 msgid "_Always allow this device to connect."
@@ -415,3 +422,6 @@ msgstr "Přenos souborů přes Bluetooth"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "Zvolte cílové zařízení"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "Adresa Bluetooth cílového zařízení"

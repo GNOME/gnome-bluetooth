@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-11 11:37+0200\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-08-11 19:29+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -173,47 +173,43 @@ msgstr "GNOME Bluetooth összetevő"
 msgid "Send via Bluetooth..."
 msgstr "Küldés Bluetooth-on keresztül..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "A céleszközök Bluetooth-címe"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "A(z) '%s' fájl nem olvasható."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "Hiba lépett fel az adatok küldése közben."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "A távoli eszköz megszakította az átvitelt."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "Ismeretlen hiba lépett fel."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "Kapcsolódás..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Nem található felhasználói felület-fájl, ellenőrizze a gnome-bluetooth "
 "telepítését."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "A távoli eszköz nem támogatja objektumok fogadását."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "A program nem inicializálható."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Nem lehet kapcsolódni távoli eszközhöz."
 
@@ -238,8 +234,10 @@ msgstr ""
 msgid "Always accept files from this device."
 msgstr "Mindig fogadja el a fájlokat ettől az eszköztől."
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
 
 #. When try icon is destroyed, recreate it.  This happens
@@ -252,20 +250,20 @@ msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth fájlmegosztás"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Fájlok fogadása Bluetooth eszközöktől"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Bluetooth fájlkiszolgáló"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Bluetooth fájlátvitelre kész"
 
@@ -359,11 +357,11 @@ msgstr "Válasszon Bluetooth eszközt"
 msgid "Device"
 msgstr "Eszköz"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth átvitel érkezett"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
@@ -372,7 +370,7 @@ msgstr ""
 "<span weight='bold' size='larger'>Fájl érkezett ettől: '%s'. Mit szeretne "
 "tenni?</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -422,3 +420,6 @@ msgstr "Bluetooth fájlátvitel"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "Válassza ki a céleszközt"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "A céleszközök Bluetooth-címe"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-05 23:44+0100\n"
+"POT-Creation-Date: 2005-01-07 12:31+0000\n"
 "PO-Revision-Date: 2004-10-05 23:45+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English <en@li.org>\n"
@@ -174,44 +174,42 @@ msgstr "GNOME Bluetooth component"
 msgid "Send via Bluetooth..."
 msgstr "Send via Bluetooth..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "Bluetooth address of destination device"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Unable to read file '%s'."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "An error occurred while sending data."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "The remote device cancelled the transfer."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "An unknown error occurred."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "Connecting..."
 
-#: obex/gnome-obex-send.c:274
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "Can't find user interface file, check your gnome-bluetooth installation."
+#: obex/gnome-obex-send.c:276
+msgid ""
+"Can't find user interface file, check your gnome-bluetooth installation."
+msgstr ""
+"Can't find user interface file, check your gnome-bluetooth installation."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "Remote device doesn't support receiving objects."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "Can't initialise program."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Unable to connect to remote device."
 
@@ -224,39 +222,48 @@ msgstr "Incoming Bluetooth Transfer"
 msgid ""
 "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
 "\n"
-"The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
+"The remote device is attempting to send you a file via Bluetooth. Do you "
+"wish to allow the connection?"
 msgstr ""
 "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
 "\n"
-"The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
+"The remote device is attempting to send you a file via Bluetooth. Do you "
+"wish to allow the connection?"
 
 #: obex/gnome-obex-server.c:88
 msgid "Always accept files from this device."
 msgstr "Always accept files from this device."
 
-#: obex/gnome-obex-server.c:255
-msgid "translator_credits"
-msgstr "translator_credits"
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:257
+msgid "translator-credits"
+msgstr "translator-credits"
 
 #. When try icon is destroyed, recreate it.  This happens
+#. when the notification area is removed.
 #. *
+#. * TODO:
+#. *
+#. * ensure it only gets invoked once
 #. * display sensible error dialogs
+#. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
-#: obex/gnome-obex-server.c:265
-#: obex/gnome-obex-server.c:317
+#.
+#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth File Sharing"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:269
 msgid "Receive files from Bluetooth devices"
 msgstr "Receive files from Bluetooth devices"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:376
 msgid "Bluetooth File Server"
 msgstr "Bluetooth File Server"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:414
 msgid "Ready for Bluetooth file transfers"
 msgstr "Ready for Bluetooth file transfers"
 
@@ -281,8 +288,12 @@ msgid "Could not find Bluetooth devices on the system"
 msgstr "Could not find Bluetooth devices on the system"
 
 #: python/manager.py:86
-msgid "Please make sure that your bluetooth adapter is correctly plugged in your machine."
-msgstr "Please make sure that your Bluetooth adapter is correctly plugged into your machine."
+msgid ""
+"Please make sure that your bluetooth adapter is correctly plugged in your "
+"machine."
+msgstr ""
+"Please make sure that your Bluetooth adapter is correctly plugged into your "
+"machine."
 
 #: python/manager.py:97
 msgid "Bluetooth devices"
@@ -346,16 +357,20 @@ msgstr "Choose Bluetooth device"
 msgid "Device"
 msgstr "Device"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth Transfer Received"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
-msgid "<span weight='bold' size='larger'>File received from '%s'. What would you like to do?</span>"
-msgstr "<span weight='bold' size='larger'>File received from '%s'. What would you like to do?</span>"
+msgid ""
+"<span weight='bold' size='larger'>File received from '%s'. What would you "
+"like to do?</span>"
+msgstr ""
+"<span weight='bold' size='larger'>File received from '%s'. What would you "
+"like to do?</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -373,27 +388,32 @@ msgstr "Connection Request"
 #: src/permissiondialog.gob:117
 #, c-format
 msgid ""
-"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</span>\n"
+"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</"
+"span>\n"
 "\n"
-"An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
+"An external device is attempting to connect to your computer via Bluetooth. "
+"You must decide if you want to accept the connection."
 msgstr ""
-"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</span>\n"
+"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</"
+"span>\n"
 "\n"
-"An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
+"An external device is attempting to connect to your computer via Bluetooth. "
+"You must decide if you want to accept the connection."
 
 #: src/permissiondialog.gob:138
 msgid "_Always allow this device to connect."
 msgstr "_Always allow this device to connect."
 
-#: ui/gnome-obex-send.glade.h:1
-#: ui/obex-send-strings.c:8
+#: ui/gnome-obex-send.glade.h:1 ui/obex-send-strings.c:8
 msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Sending file</span>"
 
+#.
 #. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
-#: ui/gnome-obex-send.glade.h:2
-#: ui/obex-send-strings.c:7
+#.
+#: ui/gnome-obex-send.glade.h:2 ui/obex-send-strings.c:7
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth file transfer"
 
@@ -401,3 +421,5 @@ msgstr "Bluetooth file transfer"
 msgid "Choose destination device"
 msgstr "Choose destination device"
 
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "Bluetooth address of destination device"
