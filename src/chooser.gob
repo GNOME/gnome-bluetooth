@@ -4,22 +4,218 @@ requires 2.0.0
 %{
 #include <gconf/gconf-client.h>
 #include "gnomebt-chooser.h"
+
+enum 
+{
+    DEV_NAME_COLUMN,
+	DEV_NUM_COLUMN,
+    DEV_NUM_COLUMNS
+};
+
+static void treeview_cb (GtkTreeSelection *sel, gpointer data);
+static void response_cb (GtkDialog *d, gint arg, gpointer userdata);
 %}
 
 %h{
+#include <glib.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gtk/gtkdialog.h>
-
+#include <gtk/gtk.h>
+#include <gnome.h>
+#include "gnomebt-controller.h"
 %}
 
 class Gnomebt:Chooser from Gtk:Dialog {
-  init(self)
+    private GtkListStore *devstore = { 
+        gtk_list_store_new (DEV_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_UINT); }
+        destroywith g_object_unref;
+
+    private GSList *list = { NULL; }
+        destroy { if (VAR) gnomebt_device_desc_list_free (VAR); };
+
+    private gint cur_device = -1;
+    private GtkWidget *okbutton;
+    private gint response = 0;
+    private GtkWidget *devtreeview;
+    public GnomebtController *btmanager;
+
+    init (self)
 	{
+        GtkWidget *sw;
+        GtkTreeSelection *select;
+
+        /* initialise ui */   
+
+        self->_priv->okbutton = GTK_WIDGET (gtk_dialog_add_button (
+            GTK_DIALOG(self), GTK_STOCK_OK, GTK_RESPONSE_OK));
+        gtk_widget_set_sensitive (self->_priv->okbutton, FALSE);
+
+        gtk_dialog_add_buttons (GTK_DIALOG(self),
+            GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+            NULL);
+
+        gtk_dialog_set_default_response (GTK_DIALOG(self),
+            GTK_RESPONSE_CANCEL);
+
+        gtk_window_set_title (GTK_WINDOW(self),
+            _("Choose Bluetooth device"));
+
+        gtk_window_set_position (GTK_WINDOW(self),
+            GTK_WIN_POS_MOUSE);
+
+        /* response callback */
+        g_signal_connect (GTK_OBJECT (self), "response", 
+             G_CALLBACK (response_cb), (gpointer) self);
+        /* dialog box is destroyed on response 
+        g_signal_connect_swapped (GTK_OBJECT (self), 
+             "response", G_CALLBACK (gtk_widget_destroy), GTK_OBJECT (self));
+        */
+
+        /* make the scrolled window */
+
+        sw = GTK_WIDGET (gtk_scrolled_window_new (NULL, NULL));
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(sw),
+            GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW(sw),
+            GTK_SHADOW_IN);
+        
+        /* make the treeview */
+
+        self->_priv->devtreeview = gtk_tree_view_new ();
+        gtk_tree_view_set_model (GTK_TREE_VIEW(self->_priv->devtreeview),
+            gtk_tree_model_sort_new_with_model (
+                GTK_TREE_MODEL (self->_priv->devstore)));
+        select = gtk_tree_view_get_selection (
+            GTK_TREE_VIEW (self->_priv->devtreeview));
+        gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
+        gtk_tree_view_set_headers_visible (
+            GTK_TREE_VIEW (self->_priv->devtreeview), FALSE);
+
+        /* set selection callback */
+
+        g_signal_connect(G_OBJECT(select), "changed",
+			G_CALLBACK(treeview_cb), (gpointer)self);
+
+        /* add renderer to tree */
+        gnomebt_chooser_add_text_renderer (self, DEV_NAME_COLUMN,
+            _("Device"));
+
+        /* add the treeview and show all widgets */
+
+        gtk_container_add (GTK_CONTAINER(sw), self->_priv->devtreeview);
+        gtk_container_add (GTK_CONTAINER(GTK_DIALOG(self)->vbox), sw);
+        gtk_widget_show_all (GTK_WIDGET(self));
 	}
 
-  public GnomebtChooser *
-	new (void)
-  {
-	return GNOMEBT_CHOOSER(GET_NEW);
-  }
+    public
+    GnomebtChooser *
+    new (GnomebtController *ctl)
+    {
+        GnomebtChooser *chooser = GNOMEBT_CHOOSER(GET_NEW);
+        chooser->btmanager = ctl;
+        /* fill up with data */
+        gnomebt_chooser_populate_device_list (chooser);
+        return chooser;
+    }
+
+    public
+    gint
+    get_response (self)
+    {
+        return self->_priv->response;
+    }
+
+    public
+    gchar *
+    get_bdaddr (self)
+    {
+        if (self->_priv->cur_device >= 0) {
+            GnomebtDeviceDesc *dd=(GnomebtDeviceDesc*)
+                g_slist_nth(self->_priv->list, self->_priv->cur_device)->data;
+            return g_strdup (dd->bdaddr);
+        } else {
+            return NULL;
+        }
+    }
+
+    private
+    void
+    add_text_renderer (self, int colno, gchar *label)
+    {
+        GtkCellRenderer *renderer;
+        GtkTreeViewColumn *column;
+        GtkTreeView *tv = GTK_TREE_VIEW (self->_priv->devtreeview);
+
+        renderer = gtk_cell_renderer_text_new ();
+        column = gtk_tree_view_column_new_with_attributes (
+            label, renderer, "text", colno, NULL);
+        gtk_tree_view_append_column (tv, column);
+    }
+
+    private
+    void
+    populate_device_list (self)
+    {
+        guint i=0;
+        GtkTreeIter iter;
+        GSList *item;
+
+        if (self->_priv->list)
+            gnomebt_device_desc_list_free (self->_priv->list);
+        self->_priv->list = gnomebt_controller_known_devices (
+            self->btmanager);
+
+        gtk_list_store_clear (self->_priv->devstore);
+        for (item=self->_priv->list, i=0; item!=NULL;
+            item=g_slist_next(item), i++) {
+            GnomebtDeviceDesc *dd=(GnomebtDeviceDesc*)item->data;
+            gtk_list_store_append(self->_priv->devstore, &iter);
+            gtk_list_store_set(self->_priv->devstore, &iter,
+				DEV_NAME_COLUMN, dd->name,
+				DEV_NUM_COLUMN, i,
+				-1);
+        }
+        gtk_tree_sortable_set_sort_column_id (
+            GTK_TREE_SORTABLE(self->_priv->devstore),
+            DEV_NAME_COLUMN, GTK_SORT_ASCENDING);
+    }
 }
+
+%{
+static void
+treeview_cb (GtkTreeSelection *sel, gpointer data)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	GnomebtChooser *chooser=(GnomebtChooser *)data;
+
+	if (gtk_tree_selection_get_selected(sel, &model, &iter)) {
+		guint i;
+		gtk_tree_model_get(model, &iter,
+			DEV_NUM_COLUMN, &i,
+			-1);
+        
+        chooser->_priv->cur_device = i;
+        if (i >= 0) {
+            GtkWidget *button = chooser->_priv->okbutton;
+            gtk_widget_set_sensitive (button, TRUE);
+        }
+	}
+}
+
+static void
+response_cb (GtkDialog *d, gint arg, gpointer userdata)
+{
+    GnomebtChooser *m = (GnomebtChooser *)userdata;
+    switch (arg) {
+        case GTK_RESPONSE_CANCEL:
+        case GTK_RESPONSE_OK:
+        case GTK_RESPONSE_DELETE_EVENT:
+            m->_priv->response = arg;
+            gtk_widget_hide (GTK_WIDGET (m));
+            break;
+        case GTK_RESPONSE_HELP:
+            /* TODO -- do help*/
+            break;
+    }
+}
+%}

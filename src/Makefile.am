@@ -10,7 +10,8 @@ AM_CPPFLAGS = \
 	$(GNOME_BLUETOOTH_PY_CFLAGS) \
 	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/
 
-noinst_PROGRAMS=gconftest gnomebt-controller-test
+noinst_PROGRAMS=gconftest gnomebt-controller-test \
+				gnomebt-chooser-test
 
 lib_LTLIBRARIES = libgnomebt.la
 if HAVE_PYTHON
@@ -25,6 +26,12 @@ libgnomebt_la_SOURCES = \
 
 libgnomebt_la_LDFLAGS = \
 	-version-info 0:0:0
+
+gnomebt_chooser_test_SOURCES = \
+	gnomebt-chooser-test.c
+
+gnomebt_chooser_test_LDADD = \
+	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
 
 gnomebt_controller_test_SOURCES = \
 	gnomebt-controller-test.c

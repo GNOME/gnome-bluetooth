@@ -16,6 +16,11 @@
     * configure.in, Makefile.am: stop compilation of orbit/ subdir
     * python/manager.py: remove Bonobo use, use new gnomebt.controller module
     * README, HACKING, NEWS: freshen up to reflect removal of Bonobo component
+    * src/manager.c, src/manager.h, src/manager-impl.c,
+    src/GNOME_Bluetooth_Manager.idl, src/GNOME_Bluetooth_Manager.server.in.in,
+    src/main.c: remove Bonobo component source.
+    * src/chooser.gob: implement device chooser dialog
+    * obex/chooser.c: remove old chooser implementation, use new dialog
 
 2003-09-27  Bastien Nocera  <hadess@hadess.net>
 
