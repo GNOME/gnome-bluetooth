@@ -31,12 +31,12 @@ fill_icon_list (EggIconList *icon_list)
   EggIconListItem *item = NULL;
   int i, j;
   
-  pixbuf = gdk_pixbuf_new_from_file ("gnome-calendar.png", NULL);
+  pixbuf = gdk_pixbuf_new_from_file ("gnome-textfile.png", NULL);
   
   timer = g_timer_new ();
 
   i = 0;
-  while (i < 10)
+  while (i < 1000)
     {
       char *str;
 
@@ -94,7 +94,7 @@ selection_changed (EggIconList *icon_list)
 static void
 item_added (EggIconList *icon_list, EggIconListItem *item)
 {
-  g_print ("Item added: %s\n", egg_icon_list_item_get_label (item));
+/*  g_print ("Item added: %s\n", egg_icon_list_item_get_label (item));*/
 }
 
 
