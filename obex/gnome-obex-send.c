@@ -58,7 +58,7 @@ static gchar *bdaddrstr = NULL;
 
 static const struct poptOption options[] = {
 	{"dest", 'd', POPT_ARG_STRING, &bdaddrstr,
-	 0, N_("Bluetooth address of destination device"), N_("BDADDR")},
+	 0, _("Bluetooth address of destination device"), "BDADDR"},
 	{NULL, '\0', 0, NULL, 0}
 };
 
