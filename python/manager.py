@@ -14,7 +14,8 @@ import gnome.ui
 
 import locale, gettext
 
-from gnomebt import iconlist, controller
+from gnomebt import iconlist, controller, hig_alert
+
 try:
     from gnomebt import defs
     __version__ = defs.version
@@ -26,7 +27,6 @@ except:
 
 APP='gnome-bluetooth'
 DIR='../po'
-locale.setlocale (locale.LC_ALL, '')
 gettext.bindtextdomain (APP, DIR)
 gettext.textdomain (APP)
 gettext.install (APP, DIR, unicode = 1)
@@ -62,6 +62,11 @@ class BTManager (object):
         self.btctl.connect ("device_name", self.on_device_name)
         self.btctl.connect ("status_change", self.on_status_change)
         self.btctl.connect ("add_device", self.on_add_device)
+
+	if self.btctl.is_initialised() == gtk.FALSE:
+	    hig_alert.reportError (_("Could not find Bluetooth devices on the system"), _("Please make sure that your bluetooth adapter is correctly plugged in your machine."))
+            sys.exit (1)
+
         self.read_devices ()
 
     def setup_gui (self):
@@ -216,7 +221,7 @@ class BTManager (object):
         gnome.ui.About (
                 __appname__,
                 __version__,
-                _(u"Copyright © Edd Dumbill 2003"),
+                _(u"Copyright \xc2\xa9 Edd Dumbill 2003"),
                 _(u"Manage remote bluetooth devices."),
                 [ "Edd Dumbill <edd@usefulinc.com>" ],
                 [],
