@@ -1,7 +1,23 @@
-Release 0.5.0
-=============
+gnome-bluetooth 0.5.0
+=====================
 
- * WARNING: Radical changes!
+ * gnome-obex-send and gnome-obex-server are now based on the new
+   OBEX code in libbtctl.  This should lead to an increase in reliability.
+   gnome-obex-server now lets you decide whether a device is allowed to
+   connect or not.  The download directory can be configured from the
+   gconf key /apps/gnome-bluetooth/obex-savedir.
+
+ * gnome-bluetooth-admin has been retired in favour of a new program
+   called gnome-bluetooth-manager.  This is implemented in Python, but
+   is only at an early stage right now.
+
+ * gnome-vfs support has been removed.  Use gnome-bluetooth-manager to
+   view all the devices.
+
+ * OBEX sending support is now available on the Nautilus context menus
+   for files.
+
+ * Radical changes in underlying code!
 
    The Bonobo component has been completely removed, in favour of a
    normal GObject, GnomebtController, to be found in libgnomebt.  This
@@ -14,11 +30,14 @@ Release 0.5.0
    Porting your code to this new object should make your programs smaller
    and more reliable.
 
--- Edd Dumbill 2003/
+ * New widgets include GnomebtChooser, GnomebtPermissionDialog, 
+   GnomebtSpinner.
+
+-- Edd Dumbill 2004-06-04
 
 
-Release 0.4.1
-=============
+gnome-bluetooth 0.4.1
+=====================
 
 * Added gnome-obex-send program, which sends files via OBEX push to a
   destination server.
@@ -26,5 +45,5 @@ Release 0.4.1
 * Added gnome-vfs module, go to bluetooth:/// in nautilus to see which
   remote devices have been discovered.
 
--- Edd Dumbill 2003/06/07
+-- Edd Dumbill 2003-06-07
 

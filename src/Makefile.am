@@ -22,6 +22,10 @@ libgnomebt_la_SOURCES = \
 	gnomebt-chooser.c gnomebt-chooser.h \
 	gnomebt-icons.c gnomebt-icons.h
 
+pkginclude_HEADERS = \
+	gnomebt-icons.h gnomebt-chooser.h gnomebt-spinner.h \
+	gnomebt-controller.h gnomebt-permissiondialog.h
+
 gnomebt-chooser.lo: gnomebt-controller.h gnomebt-spinner.h
 
 libgnomebt_la_LDFLAGS = \

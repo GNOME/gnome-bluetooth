@@ -1,11 +1,13 @@
 GNOME Bluetooth Subsystem
 =========================
 
-The GNOME Bluetooth Subsystem is being developed as a prototype by Edd
-Dumbill, with the intention of being submitted to the GNOME desktop
-project.
+Maintained by Edd Dumbill <edd@usefulinc.com>
 
-The software is in its early stages right now.
+The GNOME Bluetooth Subsystem is being developed with the ultimate
+intention of being submitted to the GNOME desktop project.
+
+The software is in its early stages right now.  See the NEWS file for
+the latest changes in this release.
 
 This package contains a controller class, GnomebtController, to control
 Bluetooth devices, and a simple GUI to explore which devices are
@@ -16,13 +18,29 @@ enables you to send files.  It is used by the Nautilus component --
 select the files you want to send and choose "Send via Bluetooth..."
 from the context menu.
 
+There is a mailing list discussing this software at 
+http://lists.usefulinc.com/mailman/listinfo/gnome-bluetooth
+
+The tools in obex/ and python/ are licensed under the GNU General
+Public License, Version 2.   See the file COPYING, which accompanies
+this distribution, and the section "License for gnome-bluetooth
+applications" below.
+
+The libgnomebt library in src/ is licensed under the GNU Lesser General
+Public License.  See the file COPYING.gnomebt, which accompanies this
+distribution, and the section "License for libgnomebt" belows.
+
+
 Building
---------
+========
 
 You need:
 
-* Bluetooth libs, utils and sdp installed installed (bluez.sf.net)
-  bluez-sdp *must* be version 1.0 or better
+* Bluetooth libs, utils installed installed (bluez.sf.net)
+  Version 2.7 or better recommended.
+
+* libbtctl 0.4, available from http://usefulinc.com/software/gnome-bluetooth,
+  or GNOME CVS.
 
 * Bluetooth kernel modules installed (either kernel 2.4.22 or get patches
   from bluez.sf.net).
@@ -31,5 +49,45 @@ You need:
   	gobject-2.0 libgnomeui-2.0 >= 1.110.0 libbonobo-2.0
 	bonobo-activation-2.0 gconf-2.0 gob2 pygtk-2.2 python2.2/2.3
 
- -- Edd Dumbill <edd@usefulinc.com>
-    Thu Oct 30 19:12:10 GMT 2003
+
+License for libgnomebt
+======================
+
+    libgnomebt -- GNOME Bluetooth libraries
+    Copyright (C) 2003-2004 Edd Dumbill
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+
+
+License for gnome-bluetooth applications
+========================================
+
+    gnome-bluetooth obex and administration tools
+    Copyright (C) 2003-2004 Edd Dumbill
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
