@@ -24,14 +24,14 @@ gnome_obex_send_SOURCES = \
 	obexsdp.c obexsdp.h chooser.c chooser.h
 
 gnome_obex_server_LDADD = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ @GOBEX_LIBS@ \
-	@SDP_LIBS@ \
+	@SDP_LIBS@ $(GNOME_BLUETOOTH_LIBS) \
 	libmisc.a ../libegg/libegg/tray/libeggtray.la \
 	../src/libgnomebt.la
 
 gnome_obex_send_LDFLAGS = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ @GOBEX_LIBS@ \
 	@SDP_LIBS@ $(GNOME_BLUETOOTH_LIBS) \
 	libmisc.a ../libegg/libegg/tray/libeggtray.la \
-	../src/libgnomebt.la ../src/libBtctl.a
+	../src/libgnomebt.la
 
 INCLUDES = @OPENOBEX_CFLAGS@ @BLUETOOTH_CFLAGS@ @GOBEX_CFLAGS@ \
 	@SDP_CFLAGS@ \

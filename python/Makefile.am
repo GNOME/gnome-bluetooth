@@ -1,15 +1,9 @@
 
-PYDEFS = `pkg-config --variable=defsdir pygtk-2.0`
-
-# sigh, some hackery around what automake normally provides is
-# necessary, in order to install into a subdir of site-packages
-# sorry to anyone this offends :-)
-
-pythondir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt
+pythondir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gtk-2.0/gnomebt
 pkgpythondir = $(pythondir)
 libdir = $(pkgpythondir)
 
-lib_LTLIBRARIES = iconlist.la
+python_LTLIBRARIES = iconlist.la
 
 python_DATA = __init__.py manager.py defs.py
 
@@ -37,8 +31,8 @@ EXTRA_DIST = iconlist.defs iconlist.override \
 
 iconlist.c: iconlist.defs iconlist.override            
 	pygtk-codegen-2.0 --prefix iconlist \
-		--register $(PYDEFS)/gdk-types.defs \
-		--register $(PYDEFS)/gtk-types.defs \
+		--register $(DEFSDIR)/gdk-types.defs \
+		--register $(DEFSDIR)/gtk-types.defs \
 		--override iconlist.override \
 		iconlist.defs > $@
 

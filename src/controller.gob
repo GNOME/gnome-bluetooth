@@ -1,0 +1,680 @@
+requires 2.0.0
+
+%at{
+/* gnomebt-controller: GNOME bluetooth system operation
+ *
+ * Copyright (c) 2003 Edd Dumbill <edd@usefulinc.com>
+ */
+%}
+
+%privateheader{
+#include <gconf/gconf-client.h>
+#include <gconf/gconf-value.h>
+%}
+
+%{
+#include <bluetooth/sdp.h>
+#define GP "/system/bluetooth"
+%}
+
+%h{
+#include <stdlib.h>
+#include <string.h>
+#include <libbtctl/btctl.h>
+
+typedef struct _GnomebtServiceDesc {
+    guint   id;
+    GSList  *channels;
+    int ref_count;
+} GnomebtServiceDesc;
+
+typedef struct _GnomebtDeviceDesc {
+    gchar   *name;
+    gchar   *bdaddr;
+    guint   deviceclass;
+    int ref_count;
+} GnomebtDeviceDesc;
+
+typedef void (*GnomebtDeviceCallback)(GObject *m, gchar *bdaddr, gpointer data);
+typedef int (*GnomebtDeviceFilter)(GObject *m, gchar *bdaddr, gpointer data);
+
+#define GNOMEBT_IS_MAJOR_CLASS(t, cls) (((t>>8)&0x1f)==cls)
+
+enum MajorDeviceClass {
+    GNOMEBT_MAJOR_MISC = 0,
+    GNOMEBT_MAJOR_COMPUTER,
+    GNOMEBT_MAJOR_PHONE,
+    GNOMEBT_MAJOR_LAN,
+    GNOMEBT_MAJOR_AUDIOVIDEO,
+    GNOMEBT_MAJOR_PERIPHERAL,
+    GNOMEBT_MAJOR_IMAGING
+};
+
+GType   gnomebt_service_desc_get_type   (void);
+GType   gnomebt_device_desc_get_type    (void);
+
+#define GNOMEBT_TYPE_SERVICE_DESC   (gnomebt_service_desc_get_type ())
+#define GNOMEBT_TYPE_DEVICE_DESC    (gnomebt_device_desc_get_type ())
+
+GnomebtServiceDesc *gnomebt_service_desc_new (void);
+GnomebtDeviceDesc *gnomebt_device_desc_new (void);
+void gnomebt_service_desc_ref (GnomebtServiceDesc *desc);
+void gnomebt_service_desc_unref (GnomebtServiceDesc *desc);
+void gnomebt_device_desc_ref (GnomebtDeviceDesc *desc);
+void gnomebt_device_desc_unref (GnomebtDeviceDesc *desc);
+gchar *gnomebt_device_desc_get_name (GnomebtDeviceDesc *desc);
+gchar *gnomebt_device_desc_get_bdaddr (GnomebtDeviceDesc *desc);
+guint gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc);
+%}
+
+class Gnomebt:Controller from Btctl:Controller {
+
+    private GConfClient *client = { gconf_client_get_default() }
+        unrefwith g_object_unref;
+
+    public
+    void
+    discover_devices (self)
+    {
+        btctl_controller_discover_devices (BTCTL_CONTROLLER(self));
+    }
+
+    public
+    gchar *
+    get_device_name (self, const gchar *bdaddr)
+    {
+        GError *err = NULL;
+        gchar *name;
+        gchar *key = g_strdup_printf (GP"/device/%s/name", bdaddr);
+
+        name = gconf_client_get_string (self->_priv->client, key, &err);
+        g_free (key);
+        if (err) {
+            g_clear_error (&err);
+            return NULL;
+        } else {
+            name=g_strdup (name);
+        }
+        return name;
+    }
+
+    public
+    guint
+    get_device_class (self, const gchar *bdaddr)
+    {
+        GError *err=NULL;
+        guint dclass;
+        gchar *key=g_strdup_printf(GP"/device/%s/class", bdaddr);
+
+        dclass = (guint) gconf_client_get_int (self->_priv->client, key, &err);
+        g_free (key);
+        if (err) {
+            g_clear_error(&err);
+            return 0;
+        }
+        return dclass;
+    }
+
+    public
+    GSList *
+    services_for_device (self, const gchar *bdaddr)
+    {
+        GConfClient *client = self->_priv->client;
+        GSList *result=NULL;
+        GConfEntry *entry;
+        GSList *item,*entries;
+        GError *err=NULL;
+        guint svcno, keyoffset;
+        GnomebtServiceDesc *desc=NULL;
+
+        gchar *key=g_strdup_printf(GP"/device/%s", bdaddr);
+
+        keyoffset=strlen(key)+1;
+        entries=gconf_client_all_entries(client, key, &err);
+        g_free(key);
+
+        for(item=entries; item!=NULL; item=g_slist_next(item)) {
+            entry=(GConfEntry *)item->data;
+            key=(gchar*)gconf_entry_get_key(entry);
+            if (g_ascii_strncasecmp("svc", &key[keyoffset], 3)==0) {
+                svcno=(guint)strtol(&key[keyoffset+3], NULL, 16);
+                desc=gnomebt_service_desc_new();
+                desc->id=svcno;
+                desc->channels=gconf_client_get_list (client, key,
+                    GCONF_VALUE_INT, &err);
+                result=g_slist_append(result, (gpointer)desc);
+            }
+        }
+
+        return result;
+    }
+
+    public
+    void
+    service_list_free (self, GSList *list)
+    {
+        GSList *item;
+        GnomebtServiceDesc *desc;
+
+        for (item=list; item!=NULL; item=g_slist_next(item)) {
+            desc=(GnomebtServiceDesc *)item->data;
+            if (desc) {
+                g_slist_free(desc->channels);
+            }
+            g_free(desc);
+        }
+        g_slist_free(item);
+    }
+
+    public
+    GSList *
+    channels_for_service (self, const gchar *bdaddr, guint svcid)
+    {
+        GConfClient *client = self->_priv->client;
+        GSList *list;
+        GError *err=NULL;
+        gchar *key=g_strdup_printf(GP"/device/%s/svc%x",
+                                 bdaddr, svcid);
+
+        /* first, we clear the existing list and ask the device
+         * itself. this is because some devices just don't keep
+         * the same channels for the service over time, e.g. the
+         * Sony Ericsson P800.
+         */
+
+        /* TODO: find some way of caching this in case the SDP
+           discovery fails */
+        gconf_client_set_list (client, key, GCONF_VALUE_INT, NULL, &err);
+        btctl_controller_scan_for_service (BTCTL_CONTROLLER(self),
+            bdaddr, svcid);
+
+        list=gconf_client_get_list(client, key, GCONF_VALUE_INT, &err);
+        g_free(key);
+        return list;
+    }
+
+    public
+    void
+    channel_list_free (self, GSList *list)
+    {
+        g_slist_free (list);
+    }
+
+    public
+    void
+    remove_device (self, const gchar *name)
+    {
+        GConfClient *client = self->_priv->client;
+        GError *err=NULL;
+        GSList *list=NULL;
+        GSList *victim,*each;
+        gchar *key;
+
+        /* TODO: figure out if there are memory leaks here */
+
+        list=gconf_client_get_list(client, GP"/device/devices",
+                         GCONF_VALUE_STRING, &err);
+
+        victim=g_slist_find_custom(list, name,
+                         gnomebt_controller_device_list_compare_gconf);
+        if (victim) {
+            list=g_slist_delete_link(list, victim);
+            gconf_client_set_list(client, GP"/device/devices",
+                      GCONF_VALUE_STRING, list, &err);
+
+            // now to remove everything in the device's dir
+            key=g_strdup_printf(GP"/device/%s", name);
+            list=gconf_client_all_entries(client, key, &err);
+            each=list;
+            while(each) {
+                GConfEntry *entry=(GConfEntry*)each->data;
+                gconf_client_unset(client, gconf_entry_get_key(entry), &err);
+                gconf_entry_free(entry);
+                each=g_slist_next(each);
+            }
+            if (list)
+                g_slist_free(list);
+        }
+    }
+
+    public
+    void
+    remove_all_devices (self)
+    {
+        GConfClient *client = self->_priv->client;
+        GError *err=NULL;
+        GSList *item,*list=NULL;
+
+        list=gconf_client_get_list(client, GP"/device/devices",
+            GCONF_VALUE_STRING, &err);
+        for (item=list; item != NULL; item=g_slist_next(item)) {
+            gnomebt_controller_remove_device(self, (gchar*)item->data);
+        }
+        g_slist_free(list);
+    }
+
+    public
+    void
+    for_each_known_device_filtered (self, GnomebtDeviceCallback cb,
+        GnomebtDeviceFilter filt, gpointer data, gpointer filterdata)
+    {
+        GError *err = NULL;
+        GConfClient *client = self->_priv->client;
+        GSList *item,*list=NULL;
+
+        list=gconf_client_get_list(client, GP"/device/devices",
+            GCONF_VALUE_STRING, &err);
+
+        for(item=list; item!=NULL; item=g_slist_next(item)) {
+            if (!filt || ((*filt)(G_OBJECT(self), (gchar*)item->data, filterdata))) {
+                  (*cb)(G_OBJECT(self), (gchar*)item->data, data);
+            }
+        }
+
+        g_slist_free(list);        
+    }
+
+    public
+    GnomebtDeviceDesc *
+    get_device_desc (self, const gchar *bdaddr (check null))
+    {
+        GConfClient *client = self->_priv->client;
+        GError *err = NULL;
+        GSList *victim, *list = NULL;
+        GnomebtDeviceDesc *ret = NULL;
+
+        list=gconf_client_get_list(client, GP"/device/devices",
+                     GCONF_VALUE_STRING, &err);
+
+        victim=g_slist_find_custom(list, bdaddr,
+                     gnomebt_controller_device_list_compare_gconf);
+
+        if (victim) {
+            ret = gnomebt_device_desc_new();
+            if (ret) {
+                ret->bdaddr = g_strdup(bdaddr);
+                ret->name = gnomebt_controller_get_device_name (self, bdaddr);
+                ret->deviceclass = 
+                    gnomebt_controller_get_device_class (self, bdaddr);
+            }
+        }
+        return ret;
+    }
+
+    public
+    void
+    device_desc_free (self, GnomebtDeviceDesc *dd (check null))
+    {
+        if (dd->name) g_free (dd->name);
+        if (dd->bdaddr) g_free (dd->bdaddr);
+        g_free (dd);
+    }
+
+    public
+    void
+    device_desc_list_free (self, GSList *list)
+    {
+        GSList *item;
+        for (item = list; item != NULL; item = g_slist_next (item))
+        {
+            gnomebt_controller_device_desc_free (self,
+                (GnomebtDeviceDesc*) item->data);
+        }
+    }
+
+    public
+    void
+    for_each_known_device (self, GnomebtDeviceCallback cb (check null), 
+        gpointer data)
+    {
+        gnomebt_controller_for_each_known_device_filtered (self,
+            cb, NULL, data, NULL);
+    }
+
+    public
+    GSList *
+    known_devices (self)
+    {
+        GSList *list = NULL;
+        gnomebt_controller_for_each_known_device (self,
+            gnomebt_controller_known_devices_cb, (gpointer)&list);
+        return list; 
+    }
+
+    public
+    GSList *
+    known_devices_of_class (self, const guint clsid)
+    {
+        GSList *list = NULL;
+        gnomebt_controller_for_each_known_device_filtered (self,
+            gnomebt_controller_known_devices_cb,
+            gnomebt_controller_filter_by_class, (gpointer)&list, 
+            (gpointer)&clsid);
+        return list;
+    }
+
+    public
+    gint
+    get_rfcomm_port (self, const gchar *bdaddr, guint channel)
+    {
+        return btctl_controller_get_established_rfcomm_connection (
+            BTCTL_CONTROLLER(self), bdaddr, channel);
+    }
+
+    public
+    guint
+    get_rfcomm_port_by_service (self, const gchar *bdaddr, guint service)
+    {
+        GSList *chanlist, *item;
+        gint num=-1;
+        chanlist = gnomebt_controller_channels_for_service (self,
+            bdaddr, service);
+        for (item=chanlist; item != NULL && num < 0; item=g_slist_next(item)) {
+            num = gnomebt_controller_get_rfcomm_port(self, bdaddr,
+                (guint)item->data);
+        }
+        g_slist_free(chanlist);
+        return num;
+    }
+
+
+    public
+    gint
+    connect_rfcomm_port (self, const gchar *bdaddr (check null),
+        guint channel) 
+    {
+        return btctl_controller_establish_rfcomm_connection (
+            BTCTL_CONTROLLER(self), bdaddr, channel);
+    }
+
+    public
+    gint
+    connect_rfcomm_port_by_service (self, const gchar *bdaddr (check null),
+        guint service)
+    {
+        GSList *chanlist, *item;
+        gint num=-1;
+        chanlist = gnomebt_controller_channels_for_service (self,
+            bdaddr, service);
+        for (item=chanlist; item != NULL && num < 0; item=g_slist_next(item)) {
+            num = gnomebt_controller_get_rfcomm_port (self, bdaddr,
+                (guint)item->data);
+            if (num < 0) {
+                num=gnomebt_controller_connect_rfcomm_port (self,
+                    bdaddr, (guint)item->data );
+                 g_message("rfcomm attempting to connect %s chan %d, got %d",
+                    bdaddr, (guint)item->data,num);
+            }
+        }
+        g_slist_free(chanlist);
+        return num;
+    }
+
+    /* new and constructor methods */
+
+    public
+    GnomebtController *
+    new (void)
+    {
+        return GNOMEBT_CONTROLLER(GET_NEW);
+    }
+
+    init (self)
+    {
+        g_signal_connect (G_OBJECT(self), "add_device",
+            G_CALLBACK(gnomebt_controller_add_device_callback),
+            (gpointer)self);
+        g_signal_connect (G_OBJECT(self), "device_name",
+            G_CALLBACK(gnomebt_controller_device_name_callback),
+            (gpointer)self);
+        g_signal_connect (G_OBJECT(self), "add_device_service",
+            G_CALLBACK(gnomebt_controller_add_device_service_callback),
+            (gpointer)self);       
+    }
+
+    /* private utility methods */
+
+    private
+    void
+    known_devices_cb (GObject *controller, gchar *bdaddr, gpointer data)
+    {
+        GnomebtController *btctl = GNOMEBT_CONTROLLER(controller);
+        GSList **list = (GSList **)data;
+        GnomebtDeviceDesc *dd = NULL;
+
+        dd = gnomebt_controller_get_device_desc (btctl, bdaddr);
+        *list = g_slist_append (*list, (gpointer) dd);
+    }
+
+    private
+    int
+    filter_by_class (GObject *controller, gchar *bdaddr, gpointer data)
+    {
+        GnomebtController *btctl = GNOMEBT_CONTROLLER(controller);
+        guint *clsptr = data;
+        guint dclass = gnomebt_controller_get_device_class (btctl, bdaddr);
+        int ret;
+        ret= GNOMEBT_IS_MAJOR_CLASS (dclass, *clsptr);
+        return ret;
+    }
+
+    private
+    gint
+    device_list_compare_gconf (gconstpointer gconfname, gconstpointer namestr)
+    {
+        gchar *a,*b;
+        b=(gchar*)namestr;
+        a=(gchar*)gconfname;
+
+        return g_strcasecmp(a,b);
+    }
+
+    private
+    void
+    dump_err (GError *gerr)
+    {
+        g_error("%d %d %s\n", gerr->domain, gerr->code, gerr->message);
+    }
+
+    private
+    void
+    add_device_callback (BtctlController *bc,
+        gchar *name, guint clsid, gpointer data)
+    {
+        GError *err=NULL;
+        GConfClient *client = GCONF_CLIENT (GNOMEBT_CONTROLLER(data)->_priv->client);
+        GSList *each, *list=NULL;
+        gchar *key=g_strdup_printf(GP"/device/%s/class", name);
+
+        gconf_client_set_int(client, key, clsid, &err);
+        g_free(key);
+
+        list=gconf_client_get_list(client, GP"/device/devices", 
+            GCONF_VALUE_STRING, &err);
+
+        if (!list || !g_slist_find_custom(list, name,
+            gnomebt_controller_device_list_compare_gconf))    {
+            list=g_slist_append(list, name);
+            gconf_client_set_list(client, GP"/device/devices",
+                GCONF_VALUE_STRING, list, &err);
+            if (err)
+                gnomebt_controller_dump_err(err);
+        } else {
+            g_message("Already know about %s, preparing for rediscovery", name);
+
+            /**
+             * Some devices may change the channels services are offered
+             * on. We should therefore purge service descriptions when a device
+             * is added.
+             */
+            if (list)
+                g_slist_free(list);
+
+            key=g_strdup_printf(GP"/device/%s", name);
+            list=gconf_client_all_entries(client, key, &err);
+            each=list;
+            while(each) {
+                const gchar *delkey;
+                GConfEntry *entry=(GConfEntry*)each->data;
+                delkey=gconf_entry_get_key(entry);
+                if (g_strstr_len(delkey, strlen(delkey), "svc")) {
+                    gconf_client_unset(client, delkey, &err);
+                }
+                gconf_entry_free(entry);
+                each=g_slist_next(each);
+            }
+
+            g_free(key);
+        }
+
+        if (list) {
+            g_slist_free(list);
+        }
+    }
+
+    private
+    void
+    device_name_callback (BtctlController *bc, gchar *device, gchar *name,
+        gpointer data)
+    {
+        GError *err=NULL;
+        GConfClient *client=GCONF_CLIENT(GNOMEBT_CONTROLLER(data)->_priv->client);
+        gchar *key=g_strdup_printf(GP"/device/%s/name", device);
+
+        gconf_client_set_string(client, key, name, &err);
+        if (err)
+            gnomebt_controller_dump_err(err);
+        g_free(key);
+    }
+
+    private
+    void
+    add_device_service_callback (BtctlController *nc, gchar *addr, gchar *name,
+        guint clsid, guint port, gpointer data)
+    {
+        GError *err=NULL;
+        GConfClient *client=GCONF_CLIENT(GNOMEBT_CONTROLLER(data)->_priv->client);
+        gchar *key=g_strdup_printf(GP"/device/%s/svc%x", addr, clsid);
+        if (port) {
+            GSList *list;
+            /* TODO: Implement GError handling here */
+            list=gconf_client_get_list(client, key, GCONF_VALUE_INT, &err);
+            if (!g_slist_find(list, GINT_TO_POINTER(port))) {
+                list=g_slist_append(list, GINT_TO_POINTER(port));
+                gconf_client_set_list(client, key, GCONF_VALUE_INT, list, &err);
+            }
+            if (list)
+                g_slist_free(list);
+        }
+        g_message("device %s (%s) port %d\n", addr, name, port);
+
+        g_free(key);
+    }
+}
+
+%{
+
+GType
+gnomebt_service_desc_get_type (void)
+{
+    static GType boxed_type = 0;
+    if (!boxed_type)
+        boxed_type = g_boxed_type_register_static ("GnomebtServiceDesc",
+            (GBoxedCopyFunc) gnomebt_service_desc_ref,
+            (GBoxedFreeFunc) gnomebt_service_desc_unref);
+ 
+    return boxed_type;
+}
+
+GnomebtServiceDesc *
+gnomebt_service_desc_new ()
+{
+    GnomebtServiceDesc *desc;
+
+    desc = g_new0 (GnomebtServiceDesc, 1);
+    desc->ref_count = 1;
+    return desc;
+}
+
+void
+gnomebt_service_desc_ref (GnomebtServiceDesc *desc)
+{
+    g_return_if_fail (desc != NULL);
+    desc->ref_count += 1;
+}
+
+void
+gnomebt_service_desc_unref (GnomebtServiceDesc *desc)
+{
+    g_return_if_fail (desc != NULL);
+
+    desc->ref_count -= 1;
+    if (desc->ref_count == 0)
+    {
+        g_slist_free (desc->channels);
+        g_free (desc);
+    }
+}
+
+GnomebtDeviceDesc *
+gnomebt_device_desc_new ()
+{
+    GnomebtDeviceDesc *desc;
+
+    desc = g_new0 (GnomebtDeviceDesc, 1);
+    desc->ref_count = 1;
+    return desc;
+}
+
+GType
+gnomebt_device_desc_get_type (void)
+{
+    static GType boxed_type = 0;
+    if (!boxed_type)
+        boxed_type = g_boxed_type_register_static ("GnomebtDeviceDesc",
+            (GBoxedCopyFunc) gnomebt_device_desc_ref,
+            (GBoxedFreeFunc) gnomebt_device_desc_unref);
+ 
+    return boxed_type;
+}
+
+void
+gnomebt_device_desc_unref (GnomebtDeviceDesc *desc)
+{
+    g_return_if_fail (desc != NULL);
+
+    desc->ref_count -= 1;
+    if (desc->ref_count == 0)
+    {
+        if (desc->name) g_free (desc->name);
+        if (desc->bdaddr) g_free (desc->bdaddr);
+        g_free (desc);
+    }
+}
+
+void
+gnomebt_device_desc_ref (GnomebtDeviceDesc *desc)
+{
+    g_return_if_fail (desc != NULL);
+    desc->ref_count += 1;
+}
+
+gchar *
+gnomebt_device_desc_get_name (GnomebtDeviceDesc *desc)
+{
+    return desc->name;
+}
+
+gchar *
+gnomebt_device_desc_get_bdaddr (GnomebtDeviceDesc *desc)
+{
+    return desc->bdaddr;
+}
+
+guint
+gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc)
+{
+    return desc->deviceclass;
+}
+
+%}

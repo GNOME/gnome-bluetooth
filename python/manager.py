@@ -5,11 +5,6 @@ import sys
 import os
 import os.path
 
-import bonobo
-import bonobo.ui
-import Bonobo
-import ORBit
-
 import pygtk
 import gtk
 import gtk.glade
@@ -19,7 +14,7 @@ import gnome.ui
 
 import locale, gettext
 
-from gnomebt import iconlist
+from gnomebt import iconlist, controller
 try:
     from gnomebt import defs
     __version__ = defs.version
@@ -28,8 +23,6 @@ except:
     __version__ = "0.0"
     __datadir__ = ".."
 
-ORBit.load_typelib ('GNOME_Bluetooth_Manager')
-import GNOME.Bluetooth
 
 APP='gnome-bluetooth'
 DIR='../po'
@@ -38,7 +31,6 @@ gettext.bindtextdomain (APP, DIR)
 gettext.textdomain (APP)
 gettext.install (APP, DIR, unicode = 1)
 
-bonobo.activate ()
 
 __appname__ = _("Bluetooth Device Manager")
 
@@ -46,13 +38,13 @@ __appname__ = _("Bluetooth Device Manager")
 gladefile = "../ui/gnome-bluetooth-manager/gnome-bluetooth-manager.glade"
 
 icon_names = {
-  GNOME.Bluetooth.MAJOR_MISC: "btdevice-misc.png",
-  GNOME.Bluetooth.MAJOR_COMPUTER: "btdevice-computer.png",
-  GNOME.Bluetooth.MAJOR_PHONE: "btdevice-phone.png",
-  GNOME.Bluetooth.MAJOR_LAN: "btdevice-lan.png",
-  GNOME.Bluetooth.MAJOR_AUDIOVIDEO: "btdevice-audiovideo.png",
-  GNOME.Bluetooth.MAJOR_PERIPHERAL: "btdevice-peripheral.png",
-  GNOME.Bluetooth.MAJOR_IMAGING: "btdevice-imaging.png"
+  0: "btdevice-misc.png",
+  1: "btdevice-computer.png",
+  2: "btdevice-phone.png",
+  3: "btdevice-lan.png",
+  4: "btdevice-audiovideo.png",
+  5: "btdevice-peripheral.png",
+  6: "btdevice-imaging.png"
 }
 
 class BTMenu (gtk.Menu):
@@ -63,8 +55,7 @@ class BTMenu (gtk.Menu):
 
 class BTManager (object):
     def __init__ (self):
-        self.btctl = bonobo.get_object ('OAFIID:GNOME_Bluetooth_Manager',
-                'GNOME/Bluetooth/Manager')
+        self.btctl = controller.Controller()
         self.setup_gui ()
         self.read_devices ()
 
@@ -151,13 +142,13 @@ class BTManager (object):
         print "Drag data",widget, dc, x, y, selection_data, info, t, data
 
     def read_devices (self):
-        devs = self.btctl.knownDevices ()
+        devs = self.btctl.known_devices ()
         for d in devs:
             ic = iconlist.IconListItem (
                     gtk.gdk.pixbuf_new_from_file (
-                        self.icon_name (d.deviceclass)),
-                        d.name)
-            ic.set_data (d.bdaddr)
+                        self.icon_name (d['deviceclass'])),
+                        d['name'])
+            ic.set_data (d['bdaddr'])
             self.iconlist.append_item (ic)
         if len (devs) > 0:
             self.statusbar.set_status (_("Found %d devices.") % len (devs))
@@ -178,13 +169,13 @@ class BTManager (object):
 
     def icon_name (self, deviceclass = 0):
         cls = (deviceclass >> 8) & 0x1f
-        if cls > GNOME.Bluetooth.MAJOR_IMAGING:
-            cls = GNOME_Bluetooth_MAJOR_MISC
+        if cls > 6:
+            cls = 0
         return self.image_file (icon_names[cls])
     
     def on_scan (self, widget, data = None):
         self.statusbar.push (_("Scanning for devices."))
-        self.btctl.discoverDevices ()
+        self.btctl.discover_devices ()
         self.statusbar.pop ()
         self.iconlist.clear ()
         self.read_devices ()

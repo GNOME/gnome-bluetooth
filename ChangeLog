@@ -1,3 +1,21 @@
+2003-10-30  Edd Dumbill <edd@usefulinc.com>
+
+    * src/controller.gob, src/Makefile.am: port Bonobo object functionality
+    into a straight GObject, GnomebtController.
+    * src/gnomebt-controller-test.c: test program to exercise the
+    features of GnomebtController.
+    * obex/sender.c, obex/chooser.c, obex/Makefile.am: remove dependency
+    on the Bonobo component.
+    * gnome-vfs/README: note that stuff in this directory is obsolete
+    * src/btadmin.{c,h}: removed these files, they're for an obsolete tool
+    * src/manager-client.c: remove obsolete test program for Bonobo object
+    * configure.in, src/Makefile.am: definitions for Python gnomebt module
+    * src/gnomebt-controller.{override,defs},
+    src/gnome-bt-controller-pymodule.c: Python wrapper for gnomebt
+    * python/Makefile.am: small tidyups
+    * configure.in, Makefile.am: stop compilation of orbit/ subdir
+    * python/manager.py: remove Bonobo use, use new gnomebt.controller module
+
 2003-09-27  Bastien Nocera  <hadess@hadess.net>
 
 	* autogen.sh: fix generation of libegg/configure on a clean checkout

@@ -12,23 +12,20 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-#include <libbonobo.h>
-#include "GNOME_Bluetooth_Manager.h"
-
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include <gnome.h>
 
+#include "gnomebt-controller.h"
 #include "chooser.h"
 
 #define GLADE_FILE DATA_DIR "/gnome-obex-send.glade"
 
 
 typedef struct _BTChooser {
-    GNOME_Bluetooth_Manager btmanager;
-    CORBA_Environment ev;
-    GNOME_Bluetooth_DeviceList *list;
+    GnomebtController *btmanager;
+    GSList *list;
     GtkListStore *devstore;
     GtkTreeView *devtreeview;
     gint cur_device;
@@ -46,18 +43,21 @@ enum
 static void
 populate_device_list(BTChooser *app)
 {
-	guint i;
+	guint i=0;
 	GtkTreeIter iter;
+    GSList *item;
 
-	GNOME_Bluetooth_Manager_knownDevices(app->btmanager,
-			&(app->list), &(app->ev));
+    if (app->list)
+        gnomebt_controller_device_desc_list_free (app->btmanager, app->list);
+    app->list = gnomebt_controller_known_devices (app->btmanager);
 
 	gtk_list_store_clear(app->devstore);
 
-	for(i=0; i<app->list->_length; i++) {
+    for(item=app->list, i=0; item!=NULL; item=g_slist_next(item), i++) {
+        GnomebtDeviceDesc *dd=(GnomebtDeviceDesc*)item->data;
 		gtk_list_store_append(app->devstore, &iter);
 		gtk_list_store_set(app->devstore, &iter,
-				DEV_NAME_COLUMN, app->list->_buffer[i].name,
+				DEV_NAME_COLUMN, dd->name,
 				DEV_NUM_COLUMN, i,
 				-1);
 	}
@@ -153,16 +153,8 @@ choose_bdaddr ()
     app = g_new0 (BTChooser, 1);
 
     app->xml = xml;
-    app->btmanager=bonobo_get_object("OAFIID:GNOME_Bluetooth_Manager",
-					  "GNOME/Bluetooth/Manager", NULL);
+    app->btmanager=gnomebt_controller_new();
 
-    if (app->btmanager==CORBA_OBJECT_NIL) {
-        g_warning("Couldn't get instance of BT Manager");
-        bonobo_debug_shutdown();
-        return NULL;
-    }
-    
-    CORBA_exception_init(&(app->ev));
     app->list = NULL;
     app->cur_device = -1;
     app->devstore=gtk_list_store_new(DEV_NUM_COLUMNS, G_TYPE_STRING,
@@ -195,13 +187,14 @@ choose_bdaddr ()
 
     if (app->response == GTK_RESPONSE_OK && 
             app->cur_device >= 0) {
-        ret = g_strdup (app->list->_buffer[app->cur_device].bdaddr);
+        GnomebtDeviceDesc *dd=(GnomebtDeviceDesc*)
+            g_slist_nth(app->list, app->cur_device)->data;
+        ret = g_strdup (dd->bdaddr);
     }
 
-    CORBA_free(app->list);
-    CORBA_exception_free(&(app->ev));
-    bonobo_object_release_unref(app->btmanager, NULL);
-    bonobo_debug_shutdown();
+    if (app->list)
+        gnomebt_controller_device_desc_list_free(app->btmanager, app->list);
+    g_object_unref(app->btmanager);
     g_object_unref(G_OBJECT(app->devstore));
  
     g_free (app);

@@ -13,9 +13,6 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-#include <libbonobo.h>
-#include "GNOME_Bluetooth_Manager.h"
-
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -23,6 +20,7 @@
 
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
+#include <bluetooth/sdp.h>
 
 #include <openobex/obex.h>
 
@@ -38,6 +36,8 @@
 #include "obex_test_server.h"
 
 #include "chooser.h"
+
+#include "gnomebt-controller.h"
 
 #define ERR_ERROR 1
 #define ERR_TIMEOUT 2
@@ -112,48 +112,26 @@ obex_event(obex_t *handle, obex_object_t *object,
 uint8_t
 get_obex_channel(char *bdaddr)
 {
-  GNOME_Bluetooth_Manager btmanager;
-  CORBA_Environment ev;
-  GNOME_Bluetooth_ChannelList *list;
-  int ret=0;
+    GnomebtController *btmanager;
+    GSList *list, *item;
+    uint8_t ret=0;
 
-  bonobo_activate();
+    btmanager = gnomebt_controller_new ();
+  
+    if (!btmanager) {
+        g_warning("gnomebt_controller_new() failed");
+        return -1;
+    }
 
-  btmanager=bonobo_get_object("OAFIID:GNOME_Bluetooth_Manager",
-								"GNOME/Bluetooth/Manager", NULL);
+    list = gnomebt_controller_channels_for_service ( btmanager,
+            (const gchar *)bdaddr,
+            OBEX_OBJPUSH_SVCLASS_ID);
 
-  if (btmanager==CORBA_OBJECT_NIL) {
-    g_warning("Couldn't get instance of BT Manager");
-    bonobo_debug_shutdown();
-	return -1;
-  }
-
-  CORBA_exception_init (&ev);
-  list=NULL;
-
-  GNOME_Bluetooth_Manager_channelsForService
-	(btmanager,
-	 &list,
-	 (const CORBA_char*)bdaddr,
-	 GNOME_Bluetooth_OBEX_OBJPUSH_SVCLASS_ID,
-	 &ev);
-
-  if (BONOBO_EX(&ev)) {
-    char *err=bonobo_exception_get_text (&ev);
-    g_warning (_("An exception occured '%s'"), err);
-    g_free (err);
-    CORBA_exception_free (&ev);
-  } else {
-	guint j;
-
-	for(j=0; j<list->_length; j++) {
-	  ret=list->_buffer[j];
-	}
-	CORBA_free(list);
-  }
-  bonobo_object_release_unref (btmanager, NULL);
-  bonobo_debug_shutdown ();
-  return ret;
+    for (item=list; item != NULL; item = g_slist_next(item)) {
+        ret = (uint8_t)((guint) item->data);
+    }
+    
+    return ret;
 }
 
 static gchar *bdaddrstr=NULL;
@@ -394,11 +372,6 @@ main (int argc, char *argv[])
 						   g_value_init (&context_as_value, G_TYPE_POINTER));
 
 	app->context = g_value_get_pointer (&context_as_value);
-
-	if (!bonobo_init(&argc, argv)) {
-	  g_warning("Couldn't initialize bonobo");
-	  return 1;
-	}
 
 	/* find GLADE ui
 	  TODO use the nifty gnome file find functions */

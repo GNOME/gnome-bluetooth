@@ -6,40 +6,31 @@ AM_CPPFLAGS = \
 	$(GNOME_BLUETOOTH_CFLAGS) \
 	$(BLUETOOTH_CFLAGS) \
 	$(SDP_CFLAGS) \
-    -DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\""
+    -DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
+	$(GNOME_BLUETOOTH_PY_CFLAGS) \
+	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/
 
-noinst_PROGRAMS=manager-testclient gconftest
+noinst_PROGRAMS=gconftest gnomebt-controller-test
 
-bin_PROGRAMS = \
-	gnome-bluetooth-admin
-
-libexec_PROGRAMS = \
-	gnome-bluetooth-control
-
-## lib_LTLIBRARIES = libgnomebt.la
-
-noinst_LIBRARIES = libBtctl.a 
-
-noinst_LTLIBRARIES = libgnomebt.la
+lib_LTLIBRARIES = libgnomebt.la
+if HAVE_PYTHON
+py_LTLIBRARIES = controller.la
+else
+py_LTLIBRARIES =
+endif
 
 libgnomebt_la_SOURCES = \
 	gnomebt-spinner.c gnomebt-icons.c gnomebt-icons.h \
-	gnomebt-chooser.c
+	gnomebt-chooser.c gnomebt-controller.c
 
 libgnomebt_la_LDFLAGS = \
 	-version-info 0:0:0
 
-gnome_bluetooth_admin_SOURCES = \
-	btadmin.c btadmin.h
+gnomebt_controller_test_SOURCES = \
+	gnomebt-controller-test.c
 
-gnome_bluetooth_admin_LDADD = \
-	$(GNOME_BLUETOOTH_LIBS) libBtctl.a
-
-manager_testclient_SOURCES = \
-	manager-client.c
-
-manager_testclient_LDADD = \
-	$(GNOME_BLUETOOTH_LIBS) libBtctl.a
+gnomebt_controller_test_LDADD = \
+	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
 
 gconftest_SOURCES = \
 	gconftest.c
@@ -47,55 +38,44 @@ gconftest_SOURCES = \
 gconftest_LDFLAGS = \
 	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS) $(SDP_LIBS)
 
-gnome_bluetooth_control_SOURCES = \
-	main.c manager.c manager.h manager-impl.c
+EXTRA_DIST = \
+	spinner.gob chooser.gob controller.gob
 
-gnome_bluetooth_control_LDADD = \
-	libBtctl.a \
-	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS) $(SDP_LIBS)
-
-BTCTL_CORBA_GENERATED = \
-	GNOME_Bluetooth_Manager-common.c \
-	GNOME_Bluetooth_Manager-skels.c  \
-	GNOME_Bluetooth_Manager-stubs.c  \
-	GNOME_Bluetooth_Manager.h
-
-libBtctl_a_SOURCES = $(BTCTL_CORBA_GENERATED)
-
-$(BTCTL_CORBA_GENERATED): GNOME_Bluetooth_Manager.idl
-	$(ORBIT_IDL) -I`$(PKG_CONFIG) --variable=idldir libbonobo-2.0` \
-		-I`$(PKG_CONFIG) --variable=idldir bonobo-activation-2.0` \
-		$(srcdir)/GNOME_Bluetooth_Manager.idl
-
-idldir = $(datadir)/idl
-idl_DATA = GNOME_Bluetooth_Manager.idl
-
-serverdir       = $(libdir)/bonobo/servers
-server_in_files = GNOME_Bluetooth_Manager.server.in
-server_DATA     = $(server_in_files:.server.in=.server)
-
-EXTRA_DIST = $(idl_DATA) GNOME_Bluetooth_Manager.server.in.in \
-	spinner.gob chooser.gob
-
-
-@INTLTOOL_SERVER_RULE@
-
-$(server_in_files): $(server_in_files:.server.in=.server.in.in)
-	sed -e "s|\@LIBEXEC\@|$(libexecdir)|" $< > $@
-
-
-BUILT_SOURCES = $(BTCTL_CORBA_GENERATED) \
-	GNOME_Bluetooth_Manager.server.in GNOME_Bluetooth_Manager.server \
+BUILT_SOURCES = \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
-	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h
+	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
+	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h
 
-CLEANFILES = $(BTCTL_CORBA_GENERATED) \
-	GNOME_Bluetooth_Manager.server.in GNOME_Bluetooth_Manager.server \
+CLEANFILES =  \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
-	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h
+	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
+	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
 
 gnomebt-%.c gnomebt-%.h gnomebt-%-private.h: %.gob
 	@GOB2@ $<
+
+# Python bindings
+CLEANFILES += btctl-py.c
+EXTRA_DIST += btctl.defs btctl.override
+                                                                                
+if HAVE_PYTHON
+regenerate-defs: gnomebt-controller.h
+	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
+                                                                                
+gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
+	pygtk-codegen-2.0 --prefix controller \
+		--register $(DEFSDIR)/gtk-types.defs \
+		--override gnomebt-controller.override \
+		gnomebt-controller.defs > $@
+                                                                                
+pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gtk-2.0/gnomebt
+controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
+controller_la_LIBADD =  libgnomebt.la
+controller_la_LDFLAGS = $(GNOME_BLUETOOTH_PY_LIBS) \
+						$(GNOME_BLUETOOTH_LIBS) \
+						-module
+endif
+
