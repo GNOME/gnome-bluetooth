@@ -11,7 +11,7 @@ libdir = $(pkgpythondir)
 
 lib_LTLIBRARIES = iconlist.la
 
-python_PYTHON = __init__.py manager.py defs.py
+python_DATA = __init__.py manager.py defs.py
 
 noinst_PYTHON = testiconlist.py
 
