@@ -190,7 +190,9 @@ class BTManager (object):
         self.names_found = self.names_found + 1
         self.statusbar.pop ()
         self.statusbar.push (_("Device %s is called '%s'.") % (device, name))
-        self.statusbar.set_progress_percentage (0.50 + float (self.names_found) / float (self.items_found) * 0.50)
+        if self.items_found > 0:
+            self.statusbar.set_progress_percentage (0.50 +
+                    float (self.names_found) / float (self.items_found) * 0.50)
 
     def on_status_change (self, controller, status, data = None):
         self.statusbar.pop ()

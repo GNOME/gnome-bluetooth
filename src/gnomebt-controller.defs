@@ -120,6 +120,43 @@
   )
 )
 
+(define-method set_device_alias
+  (of-object "GnomebtController")
+  (c-name "gnomebt_controller_set_device_alias")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "bdaddr")
+    '("const-gchar*" "name")
+  )
+)
+
+(define-method remove_device_alias
+  (of-object "GnomebtController")
+  (c-name "gnomebt_controller_remove_device_alias")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "bdaddr")
+  )
+)
+
+(define-method get_device_alias
+  (of-object "GnomebtController")
+  (c-name "gnomebt_controller_get_device_alias")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "bdaddr")
+  )
+)
+
+(define-method get_device_preferred_name
+  (of-object "GnomebtController")
+  (c-name "gnomebt_controller_get_device_preferred_name")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "bdaddr")
+  )
+)
+
 (define-method get_device_class
   (of-object "GnomebtController")
   (c-name "gnomebt_controller_get_device_class")

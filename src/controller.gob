@@ -102,6 +102,64 @@ class Gnomebt:Controller from Btctl:Controller {
     }
 
     public
+    void
+    set_device_alias (self, const gchar *bdaddr, const gchar *name)
+    {
+        GError *err = NULL;
+        gchar *key=g_strdup_printf(GP"/device/%s/alias", bdaddr);
+
+        gconf_client_set_string(self->_priv->client, key, name, &err);
+        g_free (key);
+        if (err)
+            g_clear_error (&err);
+    }
+
+    public
+    void
+    remove_device_alias (self, const gchar *bdaddr)
+    {
+        GError *err = NULL;
+        gchar *key=g_strdup_printf(GP"/device/%s/alias", bdaddr);
+
+        gconf_client_unset(self->_priv->client, key, &err);
+        g_free (key);
+        if (err)
+            g_clear_error (&err);
+    }
+
+    public
+    gchar *
+    get_device_alias (self, const gchar *bdaddr)
+    {
+        GError *err = NULL;
+        gchar *name;
+        gchar *key = g_strdup_printf (GP"/device/%s/alias", bdaddr);
+
+        name = gconf_client_get_string (self->_priv->client, key, &err);
+        g_free (key);
+        if (err) {
+            g_clear_error (&err);
+            return NULL;
+        } else {
+            name=g_strdup (name);
+        }
+        return name;
+    }
+
+    public
+    gchar *
+    get_device_preferred_name (self, const gchar *bdaddr)
+    {
+        gchar *name;
+
+        name = gnomebt_controller_get_device_alias (self, bdaddr);
+        if (name == NULL) {
+            name = gnomebt_controller_get_device_name (self, bdaddr);
+        }
+        return name;
+    }
+
+    public
     guint
     get_device_class (self, const gchar *bdaddr)
     {

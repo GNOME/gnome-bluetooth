@@ -86,6 +86,20 @@ int main(int argc, char **argv)
     printf("Doing synchronous discovery\n");
     gnomebt_controller_discover_devices(bc);
 
+    printf("Preferred name for " TBDADDR " is %s\n",
+            gnomebt_controller_get_device_preferred_name(bc, TBDADDR));
+    printf("Setting alias for " TBDADDR " to 'testalias'\n");
+    gnomebt_controller_set_device_alias(bc, TBDADDR, "testalias");
+    printf("Alias for " TBDADDR " is %s\n",
+            gnomebt_controller_get_device_alias(bc, TBDADDR));
+    printf("Preferred name for " TBDADDR " is %s\n",
+            gnomebt_controller_get_device_preferred_name(bc, TBDADDR));
+    printf("Removing alias\n");
+    gnomebt_controller_remove_device_alias(bc, TBDADDR);
+    printf("Preferred name for " TBDADDR " is %s\n",
+            gnomebt_controller_get_device_preferred_name(bc, TBDADDR));
+
+
     printf("Looking to see what channel OPUSH is on " TBDADDR "\n");
 
     btctl_controller_scan_for_service(BTCTL_CONTROLLER(bc), TBDADDR, 0x1105);
