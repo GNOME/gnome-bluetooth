@@ -19,5 +19,7 @@ which gnome-autogen.sh || {
     exit 1
 }
 
+(cd libegg && USE_GNOME2_MACROS=1 . gnome-autogen.sh)
+
 USE_GNOME2_MACROS=1 . gnome-autogen.sh
 
