@@ -156,10 +156,11 @@ class BTManager (object):
     def read_devices (self):
         devs = self.btctl.known_devices ()
         for d in devs:
+            prefname = self.btctl.get_device_preferred_name(d['bdaddr'])
             ic = iconlist.IconListItem (
                     gtk.gdk.pixbuf_new_from_file (
                         self.icon_name (d['deviceclass'])),
-                        d['name'])
+                        prefname)
             ic.set_data (d['bdaddr'])
             self.iconlist.append_item (ic)
 
