@@ -5,7 +5,6 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_BLUETOOTH_CFLAGS) \
 	$(BLUETOOTH_CFLAGS) \
-	$(SDP_CFLAGS) \
 	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
 	$(GNOME_BLUETOOTH_PY_CFLAGS) \
 	$(PYTHON_INCLUDES)
@@ -49,7 +48,7 @@ gconftest_SOURCES = \
 	gconftest.c
 
 gconftest_LDFLAGS = \
-	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS) $(SDP_LIBS)
+	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS)
 
 GOB_DIST = \
 	spinner.gob chooser.gob controller.gob permissiondialog.gob

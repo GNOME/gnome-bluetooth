@@ -1,3 +1,13 @@
+2004-06-03  Edd Dumbill <edd@usefulinc.com>
+
+	* obex/gnome-obex-send.c: new OBEX sending program using improved
+	libbtctl functions.
+	* obex/sender.c, obex/obex_test_client.c: retire old sender.
+	* obex/chooser.c: consume outstanding Gtk events after dialog close.
+	* libegg/: freshen from GNOME CVS.  Remove fileselector, menu,
+	and toolbar directories as we don't use these.
+	* configure.in: remove SDP check.
+
 2004-02-01  Edd Dumbill <edd@usefulinc.com>
 
 	* src/gnomebt-chooser-pymodule.c, src/gnomebt-chooser.defs,

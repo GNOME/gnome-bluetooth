@@ -63,8 +63,6 @@ AM_CONDITIONAL(HAVE_PYTHON, [test $HAVE_PYTHON = yes])
 
 BLUEZ_PATH_BLUETOOTH([], AC_MSG_ERROR([libbluetooth is required to build this software - part of bluez-libs]))
 
-BLUEZ_PATH_SDP([], AC_MSG_ERROR([libsdp is required to build this software - part of bluez-sdp]))
-
 AC_SUBST(GNOME_BLUETOOTH_CFLAGS)
 AC_SUBST(GNOME_BLUETOOTH_LIBS)
 AC_SUBST(GLIB_GENMARSHAL)
