@@ -1,0 +1,34 @@
+GNOME Bluetooth Subsystem
+=========================
+
+The GNOME Bluetooth Subsystem is being developed as a prototype by Edd
+Dumbill, with the intention of being submitted to the GNOME desktop
+project.
+
+The software is in its early stages right now.
+
+This package contains a Bonobo server to control Bluetooth devices,
+and a simple GUI to explore which devices are available
+(gnome-bluetooth-admin).  An OBEX server is available,
+gnome-obex-server.  This will receive files sent via Bluetooth to your
+PC, and save them in your home directory.  The program gnome-obex-send
+enables you to send files.  It is used by the Nautilus component -- 
+select the files you want to send and choose "Send via Bluetooth..."
+from the context menu.
+
+Building
+--------
+
+You need:
+
+* Bluetooth libs, utils and sdp installed installed (bluez.sf.net)
+  bluez-sdp *must* be version 1.0 or better
+
+* Bluetooth kernel modules installed (either kernel 2.4.22 or get patches
+  from bluez.sf.net).
+
+* These GNOME 2 packages:
+  	gobject-2.0 libgnomeui-2.0 >= 1.110.0 libbonobo-2.0
+	bonobo-activation-2.0 gconf-2.0 gob2
+
+ -- Edd Dumbill <edd@usefulinc.com>, Sat Jun  7 17:08:07 BST 2003

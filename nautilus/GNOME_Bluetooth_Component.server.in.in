@@ -1,0 +1,28 @@
+<oaf_info>
+
+<oaf_server iid="OAFIID:GNOME_Bluetooth_Component_Send"
+	type="shlib" location="@BONOBODIR@/libgnome-bluetooth-component.so">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+		<item value="IDL:Bonobo/Listener:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" _value="GNOME Bluetooth Component send operations"/>
+	<oaf_attribute name="description" type="string" _value="GNOME Bluetooth component"/>
+        <oaf_attribute name="bonobo:supported_uri_schemes" type="stringv">
+                <item value="file"/>
+        </oaf_attribute>
+	<oaf_attribute name="bonobo:supported_mime_types" type="stringv">
+		<item value="application/*"/>
+		<item value="text/*"/>
+		<item value="audio/*"/>
+		<item value="image/*"/>
+		<item value="model/*"/>
+		<item value="message/*"/>
+		<item value="video/*"/>
+	</oaf_attribute>
+	<oaf_attribute name="nautilus:context_menu_handler" type="boolean" value="true"/>
+	<oaf_attribute name="nautilus:can_handle_multiple_files" type="boolean" value="true"/>
+	<oaf_attribute name="nautilusverb:BTOBEXSend" type="string" _value="Send via Bluetooth..."/>
+</oaf_server>
+
+</oaf_info>

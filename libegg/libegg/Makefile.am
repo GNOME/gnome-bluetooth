@@ -1,0 +1,12 @@
+
+SUBDIRS = util tray iconlist
+
+INCLUDES = \
+  $(EGG_CFLAGS)  \
+  -DEGG_COMPILATION  \
+  -DGTK_DISABLE_DEPRECATED \
+  -DGDK_DISABLE_DEPRECATED \
+  -DG_DISABLE_DEPRECATED
+
+##noinst_LTLIBRARIES = libegg.la
+

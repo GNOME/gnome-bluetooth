@@ -1,0 +1,85 @@
+
+#include <Bonobo.idl>
+
+module GNOME {
+  module Bluetooth {
+	typedef long ServiceID;
+	typedef long Channel;
+	typedef sequence<Channel> ChannelList;
+
+	struct Device {
+	  string name;
+	  string bdaddr;
+	  long   deviceclass;
+	};
+	typedef sequence<Device> DeviceList;
+
+	struct Service {
+	  ServiceID		service;
+	  ChannelList	channels;
+	};
+	typedef sequence<Service> ServiceList;
+
+	exception UnknownDevice {
+	  string bdaddr;
+	};
+
+	enum MajorDeviceClass {
+	  MAJOR_MISC,
+	  MAJOR_COMPUTER,
+	  MAJOR_PHONE,
+	  MAJOR_LAN,
+	  MAJOR_AUDIOVIDEO,
+	  MAJOR_PERIPHERAL,
+	  MAJOR_IMAGING
+	};
+
+	const ServiceID SDP_SERVER_SVCLASS_ID = 0x1000;
+	const ServiceID BROWSE_GRP_DESC_SVCLASS_ID = 0x1001;
+	const ServiceID PUBLIC_BROWSE_GROUP = 0x1002;
+	const ServiceID SERIAL_PORT_SVCLASS_ID = 0x1101;
+	const ServiceID LAN_ACCESS_SVCLASS_ID = 0x1102;
+	const ServiceID DIALUP_NET_SVCLASS_ID = 0x1103;
+	const ServiceID IRMC_SYNC_SVCLASS_ID = 0x1104;
+	const ServiceID OBEX_OBJPUSH_SVCLASS_ID = 0x1105;
+	const ServiceID OBEX_FILETRANS_SVCLASS_ID = 0x1106;
+	const ServiceID IRMC_SYNC_CMD_SVCLASS_ID = 0x1107;
+	const ServiceID HEADSET_SVCLASS_ID = 0x1108;
+	const ServiceID CORDLESS_TELEPHONY_SVCLASS_ID = 0x1109;
+	const ServiceID INTERCOM_SVCLASS_ID = 0x1110;
+	const ServiceID FAX_SVCLASS_ID = 0x1111;
+	const ServiceID HEADSET_AGW_SVCLASS_ID = 0x1112;
+	const ServiceID PANU_SVCLASS_ID = 0x1115;
+	const ServiceID NAP_SVCLASS_ID = 0x1116;
+	const ServiceID GN_SVCLASS_ID = 0x1117;
+	const ServiceID HID_SVCLASS_ID = 0x1124;
+	const ServiceID CIP_SVCLASS_ID = 0x1128;
+	const ServiceID PNP_INFO_SVCLASS_ID = 0x1200;
+	const ServiceID GENERIC_NETWORKING_SVCLASS_ID = 0x1201;
+	const ServiceID GENERIC_FILETRANS_SVCLASS_ID = 0x1202;
+	const ServiceID GENERIC_AUDIO_SVCLASS_ID = 0x1203;
+	const ServiceID GENERIC_TELEPHONY_SVCLASS_ID = 0x1204;
+
+	interface Manager : Bonobo::Unknown {
+	  void knownDevices (out DeviceList list);
+	  void knownDevicesOfClass (out DeviceList list, in MajorDeviceClass clsid);
+	  void removeAllDevices ();
+	  void removeDevice(in string bdaddr);
+
+	  long getRFCOMMPort(in string bdaddr, in long channel);
+	  long connectRFCOMMPort(in string bdaddr, in long channel);
+
+	  long getRFCOMMPortByService(in string bdaddr, in ServiceID service);
+	  long connectRFCOMMPortByService(in string bdaddr, in ServiceID service);
+
+	  void servicesForDevice(out ServiceList list, in string bdaddr);
+	  void channelsForService(out ChannelList list, 
+							  in string bdaddr, in ServiceID service);
+	  void discoverDevices ();
+
+	  void getDeviceInfo (out Device dev, in string bdaddr)
+		raises(UnknownDevice);
+	};
+
+  };
+};

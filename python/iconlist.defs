@@ -1,0 +1,316 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object IconList
+  (in-module "Egg")
+  (parent "GtkContainer")
+  (c-name "EggIconList")
+  (gtype-id "EGG_TYPE_ICON_LIST")
+)
+
+(define-boxed IconListItem
+    (in-module "Egg")
+    (c-name "EggIconListItem")
+    (gtype-id "EGG_TYPE_ICON_LIST_ITEM")
+)
+
+;; Enumerations and flags ...
+
+
+;; From eggiconlist.h
+
+(define-function egg_icon_list_get_type
+  (c-name "egg_icon_list_get_type")
+  (return-type "GType")
+)
+
+(define-function egg_icon_list_item_get_type
+  (c-name "egg_icon_list_item_get_type")
+  (return-type "GType")
+)
+
+(define-function egg_icon_list_new
+  (c-name "egg_icon_list_new")
+  (is-constructor-of "EggIconList")
+  (return-type "GtkWidget*")
+)
+
+(define-function egg_icon_list_item_new
+  (c-name "egg_icon_list_item_new")
+  (is-constructor-of "EggIconListItem")
+  (return-type "EggIconListItem*")
+  (parameters
+    '("GdkPixbuf*" "icon")
+    '("const-gchar*" "label")
+  )
+)
+
+(define-method ref
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_ref")
+  (return-type "none")
+)
+
+(define-method unref
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_unref")
+  (return-type "none")
+)
+
+(define-method set_data
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_set_data")
+  (return-type "none")
+  (parameters
+    '("gpointer" "data")
+  )
+)
+
+(define-method set_data_full
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_set_data_full")
+  (return-type "none")
+  (parameters
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_notify")
+  )
+)
+
+(define-method get_data
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_get_data")
+  (return-type "gpointer")
+)
+
+(define-method set_label
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_set_label")
+  (return-type "none")
+  (parameters
+    '("const-char*" "label")
+  )
+)
+
+(define-method get_label
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_get_label")
+  (return-type "const-gchar*")
+)
+
+(define-method set_icon
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_set_icon")
+  (return-type "none")
+  (parameters
+    '("GdkPixbuf*" "icon")
+  )
+)
+
+(define-method get_icon
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_get_icon")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method append_item
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_append_item")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method prepend_item
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_prepend_item")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method insert_item_before
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_insert_item_before")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "sibling")
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method insert_item_after
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_insert_item_after")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "sibling")
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method remove_item
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_remove_item")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method clear
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_clear")
+  (return-type "none")
+)
+
+(define-method get_item_at_pos
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_item_at_pos")
+  (return-type "EggIconListItem*")
+  (parameters
+    '("gint" "x")
+    '("gint" "y")
+  )
+)
+
+(define-method get_item_count
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_item_count")
+  (return-type "gint")
+)
+
+(define-method foreach
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_foreach")
+  (return-type "none")
+  (parameters
+    '("EggIconListForeachFunc" "func")
+    '("gpointer" "data")
+  )
+)
+
+(define-method get_selected
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_selected")
+  (return-type "GList*")
+)
+
+(define-method selected_foreach
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_selected_foreach")
+  (return-type "none")
+  (parameters
+    '("EggIconListForeachFunc" "func")
+    '("gpointer" "data")
+  )
+)
+
+(define-method set_selection_mode
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_set_selection_mode")
+  (return-type "none")
+  (parameters
+    '("GtkSelectionMode" "mode")
+  )
+)
+
+(define-method get_selection_mode
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_selection_mode")
+  (return-type "GtkSelectionMode")
+)
+
+(define-method select_item
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_select_item")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method unselect_item
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_unselect_item")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method is_selected
+  (of-object "EggIconListItem")
+  (c-name "egg_icon_list_item_is_selected")
+  (return-type "gboolean")
+)
+
+(define-method select_all
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_select_all")
+  (return-type "none")
+)
+
+(define-method unselect_all
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_unselect_all")
+  (return-type "none")
+)
+
+(define-method set_sorted
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_set_sorted")
+  (return-type "none")
+  (parameters
+    '("gboolean" "sorted")
+  )
+)
+
+(define-method get_sorted
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_sorted")
+  (return-type "gboolean")
+)
+
+(define-method set_sort_func
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_set_sort_func")
+  (return-type "none")
+  (parameters
+    '("EggIconListItemCompareFunc" "func")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_notify")
+  )
+)
+
+(define-method set_sort_order
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_set_sort_order")
+  (return-type "none")
+  (parameters
+    '("GtkSortType" "order")
+  )
+)
+
+(define-method get_sort_order
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_sort_order")
+  (return-type "GtkSortType")
+)
+
+(define-method item_activated
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_item_activated")
+  (return-type "none")
+  (parameters
+    '("EggIconListItem*" "item")
+  )
+)
+
+(define-method get_items
+  (of-object "EggIconList")
+  (c-name "egg_icon_list_get_items")
+  (return-type "GList*")
+)
+
+

@@ -1,0 +1,22 @@
+
+gnome-vfs module
+
+I've had all sorts of ups and downs about how this should work. For
+the moment, here's what happens: The module fakes .desktop entries for
+each device it knows about, which are application links to an admin
+tool.  Any files dropped onto the icons are sent to the admin tool as
+arguments, and so an OBEX push is attempted.
+
+In an ideal world I'd like much richer behaviour, but this is the best
+I can manage within the constraints of what nautilus provides.
+
+(I did do some experiments with the devices done as as link type
+.desktop files, but I couldn't get the application semantics working
+to my satisfaction.)
+
+If you have a better suggestion (and even better, code), please let me
+know.
+
+-- Edd Dumbill <edd@usefulinc.com>
+
+

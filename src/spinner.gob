@@ -1,0 +1,90 @@
+
+requires 2.0.0
+
+%{
+#include <gconf/gconf-client.h>
+#include "gnomebt-spinner.h"
+%}
+
+%h{
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gtk/gtkeventbox.h>
+#include <gtk/gtkimage.h>
+#define SPIN_LAST 6
+#define DEFAULT_FRAME 2
+
+#define GTK_TYPE_EVENTBOX GTK_TYPE_EVENT_BOX
+
+%}
+
+class Gnomebt:Spinner from Gtk:EventBox {
+  private GtkImage *image={GTK_IMAGE(gtk_image_new())}
+	destroy {
+	  g_object_unref(VAR);
+	};
+
+  private GdkPixbuf *spinner_images[SPIN_LAST]
+	destroy {
+	int i;
+	for (i=0; i<SPIN_LAST; i++)
+	  if (spinner_images[i])
+		g_object_unref(spinner_images[i]);
+  };
+
+  private int spinner_size = 16;
+  private int frame = 0;
+
+  private void
+	update_image(self)
+	{
+	  gtk_image_set_from_pixbuf(GTK_IMAGE(self->_priv->image),
+								self->_priv->spinner_images[self->_priv->frame]);
+	}
+
+  public void
+	spin(self) {
+	self->_priv->frame = (self->_priv->frame+1) % SPIN_LAST;
+	gnomebt_spinner_update_image(self);
+  }
+
+  public void
+	reset(self) {
+	self->_priv->frame = DEFAULT_FRAME;
+	gnomebt_spinner_update_image(self);
+  }
+
+  init(self)
+	{
+	   int i=0;
+	   GError *error=NULL;
+
+	   gtk_container_add(GTK_CONTAINER(self),
+						 GTK_WIDGET(self->_priv->image));
+
+	   for (i=0; i<SPIN_LAST; i++) {
+		 gchar *fname;
+		 GdkPixbuf *temp;
+		 fname=g_strdup_printf(DATA_DIR"/pixmaps/frame%d.png", i+1);
+
+		 temp=gdk_pixbuf_new_from_file(fname, &error);
+		 self->_priv->spinner_images[i] =
+		   gdk_pixbuf_scale_simple(temp, self->_priv->spinner_size,
+								   self->_priv->spinner_size,
+								   GDK_INTERP_HYPER);
+		 g_object_unref(temp);
+		 g_free(fname);
+	   }
+	   gnomebt_spinner_update_image(self);
+	}
+
+  public GnomebtSpinner *
+	new (void)
+  {
+	return GNOMEBT_SPINNER(GET_NEW);
+  }
+}
+
+// TODO make this derive from an icon object
+// add methods:
+//   reset
+//   spin

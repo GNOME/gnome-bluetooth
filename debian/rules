@@ -1,0 +1,545 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+# Colin's Build System
+# Copyright © 2002 Colin Walters <walters@debian.org>
+# $Id$
+
+####################################
+# DO NOT MODIFY THIS FILE DIRECTLY #
+####################################
+
+### Introduction to Colin's Build System #############################
+# This file is shared between all the packages which use Colin's Build
+# System.  The idea is that this file contains sane defaults, and
+# stuff specific to a package should go into the debian/rocks Makefile
+# fragment.  There generic hooks where you can override and add
+# functionality for a specific package.
+
+# The big motivating factor for CBS was originally that more and more
+# programs today are created using GNU configure scripts and GNU
+# automake, and as such they are all very similar to configure and
+# build.  CBS takes advantage of this by doing stuff like looking for
+# an executable file named "configure"; if it exists, CBS tries
+# treating it like a GNU configure script, and passes it sane
+# arguments (like --prefix=/usr).  This will work for like 90% of the
+# cases out there (including at least all my packages).  But if it
+# doesn't work, no problem; you can customize or just completely
+# override it the debian/rocks file.  For example, suppose that you
+# need to pass "--enable-foo" to the configure script.  In that case,
+# all you need to do is create a file named debian/rocks, which
+# contains:
+
+# DEB_CONFIGURE_EXTRA_FLAGS := --enable-foo
+
+# And that's it!  Everything else happens automagically.  However,
+# suppose that your "configure" script isn't made by autoconf, and
+# instead expects the user to interactively configure the program
+# (e.g. Perl).  In that case, you can just override the
+# "deb-common-configure" rule, by putting something like the following
+# in your debian/rocks:
+
+# deb-common-configure:
+#	./configure --blah --blargh < debian/answers
+
+# All of the rules which are overridable are listed below, up to the
+# line "-include debian/rocks".  There are also a large group of
+# variables you may customize to affect a default rule, instead of of
+# just overriding the rule completely.
+
+# CBS also helps you keep up-to-date with the latest policy; when
+# there is a new DEB_BUILD_OPTIONS entry, or they change semantics (as
+# in the latest "debug" => "noopt" change), you shouldn't have to
+# change anything in your packages (besides rebuilding them with the
+# latest CBS version); CBS will just handle it.
+
+### CBS and Debhelper ################################################
+# Colin's Build System currently relies heavily on debhelper version
+# 4, so you must have a Build-Depends: debhelper (>= 4.0.0).
+
+### Single vs. Multi Binary packages #################################
+# If you have a single binary package, CBS tries to use the upstream
+# Makefile to install everything into debian/packagename, so it will
+# all appear in the binary package.  To remove files, move them
+# around, just override the deb-binary-hook-<packagename> target in
+# the debian/rocks file, like:
+
+# deb-binary-hook-mypackage:
+#	mv debian/mypackage/usr/sbin/myprogram debian/mypackage/usr/bin/myprogram
+#	rm debian/mypackage/usr/share/doc/mypackage/INSTALL
+
+# If you have a multi-binary package, CBS (by default) uses the
+# upstream Makefile to install everything in debian/tmp.  After this,
+# the recommended method is to use dh_install to copy these files into
+# the appropriate package.  To do this, just create
+# "packagename.install" files; see the dh_install man page.
+
+### Common Problems ##################################################
+
+# Are you having problems with your package not building with the
+# default deb-common-build rule?  This could be because of CFLAGS
+# issues.  If it doesn't work, then your upstream's build system is
+# broken.  You should be able to set CFLAGS to contain the
+# optimization and debugging settings you want, and this shouldn't
+# frob any -I or other internal arguments the upstream build system
+# needs.  One way to fix this is to have upstream fix their Makefile
+# to do something like:
+
+# # This is the default set of optimization and debugging flags, which
+# # can be overridden with a CFLAGS passed to the make invocation.
+# CFLAGS = -g -O2
+# # Now add specific stuff we need.
+# override CFLAGS += -I. -I.. -ffrob-stuff
+
+# On a related note, if you want to have a nice, easy-to-maintain,
+# working build system, try to convince your upstream to switch to
+# automake, autoconf, and libtool.
+
+### The latest version of CBS ########################################
+# The canonical source for Colin's Build System is:
+# http://cvs.verbum.org/debian/rules
+
+# Note that you can easily update your current version by running:
+# debian/rules update
+
+# Are you keeping your Debian packages in CVS?  In that case, it would
+# probably be a good idea to disable keyword expansion for this file,
+# so debian/rules update won't get confused.  Run:
+# cvs admin -ko debian/rules
+
+### Hooks which are overridable ######################################
+
+## This target is called before almost anything else; in particular,
+## it is called even before patches are applied.  This is a good place
+## to do stuff like generate a debian/control from debian/control.xml,
+## etc.
+deb-pre-build:
+	 # Nothing to do by default.
+
+## This target is called after patches are applied, but before
+## configure scripts or anything else are run.  This is a good place
+## to do wacky stuff like:
+## 'find . -name 'Makefile.in' -exec touch {} \;'.
+deb-post-patches:
+	 # Nothing to do by default.
+
+## This target is called after patches are applied (i.e. after
+## deb-post-patches).  It is, as its name implies, a good place to run
+## GNU configure scripts or the like.
+deb-common-configure:
+	if [ -x ./configure ]; then $(DEB_CONFIGURE_INVOKE) --prefix=$(DEB_CONFIGURE_PREFIX) --mandir=$(DEB_CONFIGURE_MANDIR) --infodir=$(DEB_CONFIGURE_INFODIR) --sysconfdir=$(DEB_CONFIGURE_SYSCONFDIR) --localstatedir=$(DEB_CONFIGURE_LOCALSTATEDIR) --libexecdir=$(DEB_CONFIGURE_LIBEXECDIR) --disable-maintainer-mode $(DEB_CONFIGURE_EXTRA_FLAGS) $(DEB_USER_CONFIGURE_FLAGS); fi
+
+## This target is for configuring a specific package.  It is called
+## once for each package.
+deb-configure-%:
+	 # Nothing to do by default.
+
+## This is an "extra" rule, where you may prefix arbitrary commands to
+## the general build, but not override the default.  It is called
+## before deb-common-build.
+deb-extra-pre-common-build::
+	 # Nothing to do by default.
+
+## This target is called after common configuration (but not
+## necessarily after package-specific configuration).  Generally, this
+## is a good place to invoke make and the like.  Note that if you do
+## package-specific configuration, you should likely override this
+## rule to do nothing, and then do package-specific building in
+## deb-build-<package>.
+deb-common-build:
+	if [ -f Makefile ]; then \
+	  $(DEB_MAKE_ENVVARS) $(MAKE) CFLAGS="$(CFLAGS)" CXXFLAGS="$(CXXFLAGS)" $(DEB_BUILD_MAKE_TARGET); \
+	fi
+
+## This is an "extra" rule, where you may add arbitrary commands to
+## the general build, but not override the default.  It is called
+## after deb-common-build.
+deb-extra-common-build:: deb-common-build
+	 # Nothing to do by default.
+
+## This target is called once for each package, after package-specific
+## configuration; it is for doing any building to a specific package.
+deb-build-%:
+	 # Nothing to do by default.
+
+## This is an "extra" rule, where you may add arbitrary commands to
+## the package-specific build, but not override the default.  It is
+## called after deb-build-<package>.
+deb-extra-build-%: deb-build-%
+	 # Nothing to do by default.
+
+## This target is called after pre-build, and before any configuration
+## takes place.  It is designed to automatically update
+## config.{sub,guess} files which are used by packages which use GNU
+## autoconf.  You should not generally need to override this target.
+## You may need to set DEB_AC_AUX_DIR if upstream used the autoconf
+## macro AC_CONFIG_AUX_DIR.
+deb-autotools-setup:
+	if [ -r /usr/share/misc/config.sub ]; then \
+	   if [ -r $(DEB_AC_AUX_DIR)/config.sub -a ! -f $(DEB_AC_AUX_DIR)/config.sub.orig-cbs ]; then \
+	       mv $(DEB_AC_AUX_DIR)/config.sub $(DEB_AC_AUX_DIR)/config.sub.orig-cbs; \
+	       cp -f /usr/share/misc/config.sub $(DEB_AC_AUX_DIR)/config.sub; \
+	   fi; \
+	fi
+	if [ -r /usr/share/misc/config.guess ]; then \
+	   if [ -r $(DEB_AC_AUX_DIR)/config.guess -a ! -f $(DEB_AC_AUX_DIR)/config.guess.orig-cbs ]; then \
+	       mv $(DEB_AC_AUX_DIR)/config.guess $(DEB_AC_AUX_DIR)/config.guess.orig-cbs; \
+	       cp -f /usr/share/misc/config.guess $(DEB_AC_AUX_DIR)/config.guess; \
+	   fi; \
+	fi
+
+## This target is called during the clean process; it is designed to
+## undo the effects of deb-autotools-setup, so that you won't get
+## spurious bits in your Debian diff.  You should not generally need
+## to override this target.
+deb-autotools-clean:
+	if [ -r $(DEB_AC_AUX_DIR)/config.sub.orig-cbs ]; then \
+	  mv $(DEB_AC_AUX_DIR)/config.sub.orig-cbs $(DEB_AC_AUX_DIR)/config.sub; \
+	fi
+	if [ -r $(DEB_AC_AUX_DIR)/config.guess.orig-cbs ]; then \
+	  mv $(DEB_AC_AUX_DIR)/config.guess.orig-cbs $(DEB_AC_AUX_DIR)/config.guess; \
+	fi
+
+## This target is called during the cleaning process.
+deb-clean:
+	if [ -f Makefile ]; then $(MAKE) distclean || $(MAKE) clean || true; fi
+	if test -f config.log; then \
+	  if grep -i -q 'generated by GNU Autoconf' config.log || grep -i -q 'to aid debugging if configure ' config.log; then \
+	    rm -f config.log; \
+	  fi; \
+	fi
+	if test -f config.status && grep -i -q 'Generated.*by configure.' config.status; then rm -f config.status; fi
+	if test -f config.cache && grep -i -q 'shell.*script.*caches.*results.*configure' config.cache; then rm -f config.cache; fi
+
+## This is an "extra" rule, where you may add arbitrary commands to
+## the cleaning process, but not override the default.
+deb-extra-clean:: deb-clean
+	 # Nothing to do by default.
+
+## This target is called after the common installation step.  It
+## should install your package into its destination, e.g. debian/tmp
+## (for single-binary packages, into debian/<packagename>).
+deb-common-install:
+	if [ -f Makefile ]; then \
+	  if grep -q DESTDIR Makefile || grep -q -i 'generated.*by.*automake' Makefile; then \
+	    $(DEB_MAKE_ENVVARS) $(MAKE) install DESTDIR=$(DEB_DESTDIR); \
+	  else \
+	    echo "This Makefile doesn't appear to support DESTDIR; you must override $@ in debian/rocks"; \
+	    exit 1; \
+	  fi; \
+	else \
+	  echo "No default install action, you must override $@ in debian/rocks"; \
+	  exit 1; \
+	fi
+
+## This is an "extra" rule, where you may add arbitrary commands to
+## the common installation process, but not override the default.
+deb-extra-common-install:: deb-common-install
+	 # Nothing to do by default.
+
+## This target is called once for each package, after that package's
+## specific build step.
+deb-install-%:
+	 # Nothing to do by default.
+
+## This is an "extra" rule, where you may add arbitrary commands to
+## the installation process for a specific package, but not override
+## the default.
+deb-extra-install-%: deb-install-%
+	 # Nothing to do by default.
+
+## This is a sort of "catchall" rule to do post-installation cleanup.
+## It is called by deb-binary-<packagename> after everything should be
+## installed in debian/tmp or debian/<packagename>.  This is a good
+## place to do things like move binaries from debian/tmp/usr/bin to
+## debian/tmp/usr/sbin, convert HTML documentation into plain text,
+## etc.
+deb-binary-hook-%:
+	 # Nothing to do by default.
+
+## This rule is called after the installation for a package.  It does
+## all the work of installing things like changelogs, README.Debian
+## files, etc., and also actually builds the .deb files.  It relies
+## heavily on Debhelper, so please see the docs for those commands to
+## understand how it works and to customize things more.  You may
+## override this target if you have special needs, but it is not
+## recommended.  It is better instead to use one of the provided
+## hooks, or add a hook where necessary and send in a patch for CBS.
+deb-binary-%: 
+	dh_installdocs $(DEB_ALL_DOCS) $(DEB_INSTALL_DOCS_$(DEB_CURPACKAGE)) -p$(DEB_CURPACKAGE)
+	dh_installexamples $(DEB_INSTALL_EXAMPLES_$(DEB_CURPACKAGE)) -p$(DEB_CURPACKAGE)
+	dh_installman $(DEB_INSTALL_MANPAGES_$(DEB_CURPACKAGE)) -p$(DEB_CURPACKAGE)
+	dh_installinfo $(DEB_INSTALL_INFO_$(DEB_CURPACKAGE)) -p$(DEB_CURPACKAGE)
+	dh_installmenu -p$(DEB_CURPACKAGE)
+	dh_installcron -p$(DEB_CURPACKAGE)
+	dh_installdebconf -p$(DEB_CURPACKAGE)
+	dh_installpam -p$(DEB_CURPACKAGE)
+	dh_installchangelogs -p$(DEB_CURPACKAGE)
+	dh_install -p$(DEB_CURPACKAGE)
+	$(internal_invoke) deb-binary-hook-$(DEB_CURPACKAGE)
+	$(internal_invoke) deb-strip-$(DEB_CURPACKAGE)
+	dh_link -p$(DEB_CURPACKAGE)
+	dh_compress -p$(DEB_CURPACKAGE) $(foreach entry,$(DEB_COMPRESS_EXCLUDE),$(patsubst %,-X %,$(entry))) \
+	 $(foreach entry,$(DEB_COMPRESS_EXCLUDE_$(DEB_CURPACKAGE)),$(patsubst %,-X %,$(entry)))
+	dh_fixperms -p$(DEB_CURPACKAGE) $(foreach entry,$(DEB_FIXPERMS_EXCLUDE),$(patsubst %,-X %,$(entry))) \
+	 $(foreach entry,$(DEB_FIXPERMS_EXCLUDE_$(DEB_CURPACKAGE)),$(patsubst %,-X %,$(entry)))
+	$(internal_invoke) deb-makeshlibs-$(DEB_CURPACKAGE)
+	$(internal_invoke) deb-post-fixperms-binary-$(DEB_CURPACKAGE)
+	dh_installdeb -p$(DEB_CURPACKAGE)
+	$(internal_invoke) deb-shlibdeps-$(DEB_CURPACKAGE)
+	dh_gencontrol -p$(DEB_CURPACKAGE)
+	dh_md5sums -p$(DEB_CURPACKAGE)
+	dh_builddeb -p$(DEB_CURPACKAGE)
+
+## This rule is called by the default deb-binary-<package>
+## implementation, after all package data has been installed, and
+## after the deb-binary-hook-<packagename> has been called.  As its
+## name implies, it is where you should strip binaries.
+deb-strip-%:
+	dh_strip -p$(DEB_CURPACKAGE)
+
+## This rule is called by the default deb-binary-<package>
+## implementation, *after* permissions have been sanitized.  This is
+## an excellent place to make binaries setuid where necessary, for
+## example.
+deb-post-fixperms-binary-%:
+	 # Nothing to do by default.
+
+## This rule is called by the default deb-binary-<package>
+## implementation, right before the final Debian package building
+## process.  This is where you should generate a "shlibs" file for
+## your package, if necessary.
+deb-makeshlibs-%:
+	dh_makeshlibs -p$(DEB_CURPACKAGE)
+
+## This rule is called by the default deb-binary-<package>
+## implementation, during the final Debian package building
+## process.  This is where you should determine 
+deb-shlibdeps-%:
+	dh_shlibdeps -p$(DEB_CURPACKAGE) $(if $(DEB_SHLIBDEPS_LIBRARY_$(DEB_CURPACKAGE)),-L $(DEB_SHLIBDEPS_LIBRARY_$(DEB_CURPACKAGE))) $(if $(DEB_SHLIBDEPS_INCLUDE_$(DEB_CURPACKAGE))$(DEB_SHLIBDEPS_INCLUDE),-l $(DEB_SHLIBDEPS_INCLUDE_$(DEB_CURPACKAGE)):$(DEB_SHLIBDEPS_INCLUDE))
+
+-include debian/rocks
+
+### Overridable variables #######################################
+
+# Some common variables; usually you shouldn't have to set these.
+DEB_ARCH_PACKAGES ?= $(shell dh_listpackages -a 2>/dev/null || true)
+DEB_INDEP_PACKAGES ?= $(shell dh_listpackages -i 2>/dev/null || true)
+DEB_ALL_PACKAGES ?= $(DEB_ARCH_PACKAGES) $(DEB_INDEP_PACKAGES)
+DEB_SOURCE_PACKAGE ?= $(strip $(shell egrep '^Source: ' debian/control | cut -f 2 -d ':'))
+
+export DH_COMPAT=4
+
+DEB_VERSION ?= $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+
+DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+
+DEB_C_DEFAULT_OPT ?= -O2
+DEB_CXX_DEFAULT_OPT ?= $(DEB_C_DEFAULT_OPT)
+CFLAGS ?= -Wall -g
+CXXFLAGS ?= -Wall -g
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+	CXXFLAGS += -O0
+else
+	CFLAGS += $(DEB_C_DEFAULT_OPT)
+	CXXFLAGS += $(DEB_CXX_DEFAULT_OPT)
+endif
+
+DEB_PATCHDIRS ?= debian/patches
+DEB_PATCHES ?= $(foreach dir,$(DEB_PATCHDIRS),$(shell echo $(wildcard $(dir)/*.patch) $(wildcard $(dir)/*.diff)))
+
+DEB_CONFIGURE_INVOKE ?= ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE)
+DEB_CONFIGURE_PREFIX ?=/usr
+DEB_CONFIGURE_MANDIR ?="\$${prefix}/share/man"
+DEB_CONFIGURE_INFODIR ?="\$${prefix}/share/info"
+DEB_CONFIGURE_SYSCONFDIR ?=/etc
+DEB_CONFIGURE_LOCALSTATEDIR ?=/var
+DEB_CONFIGURE_LIBEXECDIR ?="\$${prefix}/lib/$(DEB_SOURCE_PACKAGE)"
+DEB_CONFIGURE_EXTRA_FLAGS ?=
+DEB_MAKE_ENVVARS ?= 
+DEB_BUILD_MAKE_TARGET ?= 
+DEB_DIRS ?=
+DEB_CLEAN ?=
+DEB_CLEAN_EXCLUDE ?=
+DEB_ALL_DOCS ?=
+DEB_KEEP_CHANGELOG_NAME ?=
+DEB_ALL_CHANGELOG ?= $(if $(DEB_ISNATIVE),,$(shell if test -r ChangeLog; then echo ChangeLog; fi))
+DEB_FIXPERMS_EXCLUDE ?=
+DEB_COMPRESS_EXCLUDE ?=
+# This variable should be a colon-separated list of paths
+DEB_SHLIBDEPS_INCLUDE ?=
+DEB_EXAMPLES ?=
+DEB_CHANGELOGS ?=
+DEB_AC_AUX_DIR ?=.
+
+DEB_PHONY_RULES ?=
+
+ifeq ($(strip $(shell echo $(DEB_ALL_PACKAGES) | wc -w)),1)
+	DEB_DESTDIR ?= `pwd`/debian/$(strip $(DEB_ALL_PACKAGES))
+else
+	DEB_DESTDIR ?= `pwd`/debian/tmp
+endif
+
+### Other variables ##################################################
+
+DEB_ISNATIVE := $(shell dpkg-parsechangelog | egrep '^Version:' | perl -ne 'print if not /^Version:\s*.*-/;')
+
+### Internal implementation ##########################################
+update:
+	@if [ -f debian/rules ]; then \
+	  curversion=`head debian/rules | perl -lne 'if (/Id: rules,v (.*?) /) { print $$1; }'`; \
+	  echo "Installed version: " $$curversion; \
+	  rm -rf debian/cbs-update ; mkdir -p debian/cbs-update && cd debian/cbs-update; \
+	  echo -n "Downloading latest version from :pserver:anoncvs@cvs.verbum.org:/cvs..."; \
+	  cvs -Q -d :pserver:anoncvs@cvs.verbum.org:/cvs co debian/rules; \
+	  echo "done."; \
+	  newversion=`head debian/rules | perl -lne 'if (/Id: rules,v (.*?) /) { print $$1; }'`; \
+	  if [ "$$newversion" != "$$curversion" ]; then \
+	    echo "Retrieving log for revisions $$curversion to $$newversion..."; \
+	    cvs -q -d :pserver:anoncvs@cvs.verbum.org:/cvs log "-r$$curversion:$$newversion" debian/rules; \
+	  else \
+	    echo "No changes."; \
+	  fi; \
+	  mv debian/rules .. ; cd .. ; rm -rf cbs-update ; chmod a+x rules; \
+	else \
+	  echo "Couldn't find debian/rules; you must execute this target as debian/rules update"; \
+	fi
+
+internal_invoke := debian/rules "DEB_ARCH_PACKAGES=$(DEB_ARCH_PACKAGES)" "DEB_INDEP_PACKAGES=$(DEB_INDEP_PACKAGES)" "DEB_ALL_PACKAGES=$(DEB_ALL_PACKAGES)" "DEB_VERSION=$(DEB_VERSION)" "DEB_HOST_GNU_TYPE=$(DEB_HOST_GNU_TYPE)" "DEB_BUILD_GNU_TYPE=$(DEB_BUILD_GNU_TYPE)" "DEB_DESTDIR=$(DEB_DESTDIR)" "DEB_PATCHES=$(DEB_PATCHES)"
+
+pre-build: debian/stamp-pre-build
+debian/stamp-pre-build:
+	$(internal_invoke) deb-pre-build
+	touch $@
+
+# The patch subsystem
+apply-patches: pre-build debian/stamp-patched
+debian/stamp-patched: $(DEB_PATCHES)
+debian/stamp-patched reverse-patches:
+	@echo "patches: $(DEB_PATCHES)"
+	@set -e ; for patch in $(DEB_PATCHES); do \
+	  level=$(head $$patch | egrep '^#DPATCHLEVEL=' | cut -f 2 -d '='); \
+	  reverse=""; \
+	  if [ "$@" = "reverse-patches" ]; then reverse="-R"; fi; \
+	  success=""; \
+	  if [ -z "$$level" ]; then \
+	    echo -n "Trying "; if test -n "$$reverse"; then echo -n "reversed "; fi; echo -n "patch $$patch at level "; \
+	    for level in 0 1 2; do \
+	      if test -z "$$success"; then \
+	        echo -n "$$level..."; \
+	        if cat $$patch | patch $$reverse --dry-run -p$$level 1>$$patch.level-$$level.log 2>&1; then \
+	          if cat $$patch | patch $$reverse --no-backup-if-mismatch -V never -p$$level 1>$$patch.level-$$level.log 2>&1; then \
+	            success=yes; \
+	            touch debian/stamp-patch-$$(basename $$patch); \
+	            echo "success."; \
+                  fi; \
+	        fi; \
+	      fi; \
+            done; \
+	    if test -z "$$success"; then \
+	      if test -z "$$reverse"; then \
+	        echo "failure."; \
+	        exit 1; \
+	       else \
+	         echo "failure (ignored)."; \
+               fi \
+	    fi; \
+	  else \
+	    echo -n "Trying patch $$patch at level $$level..."; \
+	    if cat $$patch | patch $$reverse --no-backup-if-mismatch -V never -p$$level 1>$$patch.log 2>&1; then \
+              touch debian/stamp-patch-$$(basename $$patch); \
+	      echo "success."; \
+	    else \
+	      echo "failure:"; \
+	      cat $$patch.log; \
+	      if test -z "$$reverse"; then exit 1; fi; \
+            fi; \
+	  fi; \
+	done
+	if [ "$@" = "debian/stamp-patched" ]; then touch debian/stamp-patched; fi
+
+post-patches: debian/stamp-post-patches
+debian/stamp-post-patches: apply-patches
+	$(internal_invoke) deb-post-patches
+	touch $@
+
+# The general targets
+common-configure: post-patches debian/stamp-common-configure
+debian/stamp-common-configure:
+	dh_testdir
+	$(internal_invoke) deb-autotools-setup
+	$(internal_invoke) deb-common-configure
+	touch $@
+$(patsubst %,configure-%,$(DEB_ALL_PACKAGES)) : configure-% : common-configure debian/stamp-configure-%
+$(patsubst %,debian/stamp-configure-%,$(DEB_ALL_PACKAGES)) : debian/stamp-configure-%: debian/stamp-patched
+	dh_testdir
+	$(internal_invoke) deb-configure-package-$(patsubst debian/stamp-configure-%,%,$@) DEB_CURPACKAGE=$(patsubst debian/stamp-configure-%,%,$@)
+	touch $@
+
+# Required Debian target
+build: build-arch build-indep
+
+common-build: debian/stamp-common-build
+debian/stamp-common-build: $(patsubst %,configure-%,$(DEB_ALL_PACKAGES))
+	dh_testdir
+	$(internal_invoke) deb-extra-pre-common-build
+	$(internal_invoke) deb-extra-common-build
+	touch $@
+$(patsubst %,build-%,$(DEB_ALL_PACKAGES)) :: build-% : debian/stamp-build-%
+$(patsubst %,debian/stamp-build-%,$(DEB_ALL_PACKAGES)) : debian/stamp-build-% : common-build configure-%
+	dh_testdir
+	$(internal_invoke) deb-extra-build-$(patsubst debian/stamp-build-%,%,$@) DEB_CURPACKAGE=$(patsubst debian/stamp-build-%,%,$@)
+	touch $@
+
+build-arch: $(patsubst %,build-%,$(DEB_ARCH_PACKAGES))
+build-indep: $(patsubst %,build-%,$(DEB_INDEP_PACKAGES))
+
+# Required Debian target
+clean: clean-dh-tests reverse-patches clean-impl
+clean-dh-tests:
+	dh_testdir
+	dh_testroot
+clean-impl:
+	$(internal_invoke) deb-autotools-clean
+	$(internal_invoke) deb-extra-clean
+	for dir in $(DEB_PATCHDIRS); do rm -f $$dir/*.log; done
+	rm -f debian/stamp-*
+	dh_clean $(DEB_CLEAN) $(foreach entry,$(DEB_CLEAN_EXCLUDE),$(patsubst %,-X %,$(entry))) 
+
+common-install: debian/stamp-common-install
+debian/stamp-common-install: $(patsubst %,build-%,$(DEB_ALL_PACKAGES))
+	dh_testdir
+	dh_clean -k
+	dh_installdirs -A $(DEB_DIRS)
+	$(internal_invoke) deb-extra-common-install DEB_CURPACKAGE=
+	touch $@
+install-arch: $(patsubst %,install-%,$(DEB_ARCH_PACKAGES))
+install-indep: $(patsubst %,install-%,$(DEB_INDEP_PACKAGES))
+$(patsubst %,install-%,$(DEB_ALL_PACKAGES)) :: install-% : common-install build-%
+	dh_testdir
+	dh_testroot
+	$(internal_invoke) deb-extra-install-$(patsubst install-%,%,$@) DEB_CURPACKAGE=$(patsubst install-%,%,$@)
+
+common-binary: debian/stamp-common-binary
+debian/stamp-common-binary: $(patsubst %,install-%,$(DEB_ALL_PACKAGES)) common-install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs $(if $(DEB_KEEP_CHANGELOG_NAME),-k) $(DEB_ALL_CHANGELOG)
+	touch $@
+
+# Required Debian targets
+binary-indep: common-binary $(patsubst %,binary-%,$(DEB_INDEP_PACKAGES))
+binary-arch: common-binary $(patsubst %,binary-%,$(DEB_ARCH_PACKAGES))
+
+binary-% :: common-binary install-% 
+	dh_testdir
+	dh_testroot
+	$(internal_invoke) deb-binary-$(patsubst binary-%,%,$@) DEB_CURPACKAGE=$(patsubst binary-%,%,$@)
+
+# Required Debian target
+binary: binary-indep binary-arch
+
+.PHONY: pre-build apply-patches reverse-patches post-patches common-configure build common-build build-% build-arch build-indep clean clean-dh-tests clean-impl common-install install-arch install-indep install-% common-binary binary-% binary-indep binary-arch binary deb-common-configure deb-common-build deb-clean deb-common-install deb-strip deb-makeshlibs $(DEB_PHONY_RULES)

@@ -1,0 +1,62 @@
+ The guidelines for this library are:
+ 
+   - All features are intended to end up in a stable platform library
+     when they're ready.
+
+   - All features must be "sponsored" by the maintainer of the
+     platform library the feature is targetting. Features 
+     without sponsors do not go in.
+
+   - In sponsoring a feature, maintainers are saying that think a
+     feature along these lines makes sense in their platform library,
+     and that the initial implementation looks at least approximately
+     like what they want.
+
+   - As soon as a feature has been shipped in stable form in a
+     platform library, it comes out of libegg.
+
+   - If a maintainer decides that a feature doesn't make sense after
+     all, or that a radically different approach is required, they can
+     "unsponsor" the feature and the feature will be removed from 
+     libegg.
+
+   - All patches must be approved by the sponsor of the feature being
+     patched, though the sponsor maintainer may choose to delegate
+     patch review duties. (To the person implementing the feature, for
+     example.)
+
+   - Maintainers will probably do a final review/revision of features
+     before movinng them from prototype library to platform library.
+
+   - Features can only have dependencies that are shared by the target
+     platform library. For example you can't use libgnome to implement
+     a feature targetted for GLib. (You can however depend on another
+     GLib-targetted libegg feature, of course.)
+ 
+   - Features are in the "egg" namespace not in the platform library
+     namespace, and are renamed when they're moved.
+
+   - The API/ABI of libegg can change at any time, though it's
+     courteous to coordinate with app developers, cruft should not be
+     left in the prototype library for compatibility reasons.
+
+   - The purpose of this library is to test feature APIs and
+     implementations, so the library is expected to be a
+     work-in-progress, but bug reports and suggestions are extremely
+     welcome.
+
+   - Discussion of features should happen on the mailing list for the
+     target platform library, but may also be cc'd to
+     gnome-libs-devel@gnome.org. Coordination of libegg itself happens
+     on gnome-libs-devel@gnome.org.
+
+   - libegg will always depend on the latest stable branches of the
+     platform libraries, not on the development branches.
+
+As a special exception to the rule that all features are destined for
+a real lib, a hackaround for the lack of a feature that is destined
+for a real lib is also allowed. So for example, you could put
+EelEllipsizingLabel in here until GTK has label ellipsizing, ASSUMING
+that you've verified with the GTK maintainers that GTK will have label
+ellipsizing, and ASSUMING that the workaround goes away when the real
+feature has gone in.

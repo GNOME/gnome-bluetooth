@@ -1,0 +1,111 @@
+
+API/requirements sketch
+
+* discover local devices: optionally reporting discovery events
+
+* report all discovered devices
+
+* report discovered devices matching requirement X
+
+* add/remove rfcomm connection to device D on port P
+
+* watch for appearance/disappearance of a device
+
+Details
+
+for reporting, use an EventSource
+
+see the source of gnome-media/cddb-slave2
+
+the server object can be initialised multiple times while one
+bluetooth-control process runs: so the bluetooth device must 
+either allocated statically and locked, or allocated dynamically and 
+locked on method calls.
+
+
+SPARE IDL
+---------
+
+for use when the time arises
+
+	enum ComputerMinorDeviceClass {
+	  COMPUTER_UNCATEGORIZED,
+	  COMPUTER_DESKTOP,
+	  COMPUTER_SERVER,
+	  COMPUTER_LAPTOP,
+	  COMPUTER_HANDHELD,
+	  COMPUTER_PALM,
+	  COMPUTER_WEARABLE
+	};
+
+	enum PhoneMinorDeviceClass {
+	  PHONE_UNCATEGORIZED,
+	  PHONE_CELLULAR,
+	  PHONE_CORDLESS,
+	  PHONE_SMARTPHONE,
+	  PHONE_WIRED,
+	  PHONE_ISDN,
+	  PHONE_SIM_CARD_READER
+	};
+
+	enum LANMinorDeviceClass {
+	  LAN_FULL,
+	  LAN_1_TO_17,
+	  LAN_17_TO_33,
+	  LAN_33_TO_50,
+	  LAN_50_TO_67,
+	  LAN_67_TO_83,
+	  LAN_83_TO_99,
+	  LAN_UNAVAILABLE
+	};
+
+	enum AudioVideoMinorDeviceClass {
+	  AV_UNCATEGORIZED,
+	  AV_HEADSET,
+	  AV_HANDSFREE,
+	  AV_RESERVED1,
+	  AV_MICROPHONE,
+	  AV_LOUDSPEAKER,
+	  AV_HEADPHONES,
+	  AV_PORTABLE_AUDIO,
+	  AV_CARAUDIO,
+	  AV_SET_TOP_BOX,
+	  AV_HIFI_AUDIO,
+	  AV_VCR,
+	  AV_VIDEO_CAMERA,
+	  AV_CAMCORDER,
+	  AV_MONITOR,
+	  AV_DISPLAY_AND_SPEAKER,
+	  AV_VIDEO_CONFERENCING,
+	  AV_RESERVED2,
+	  AV_GAMING
+	};
+
+	enum PeripheralMinorDeviceClass {
+	  PERIPHERAL_UNCATEGORIZED,
+	  PERIPHERAL_JOYSTICK,
+	  PERIPHERAL_GAMEPAD,
+	  PERIPHERAL_REMOTE_CONTROL,
+	  PERIPERHAL_SENSING_DEVICE,
+	  PERIPHERAL_DIGITIZER_TABLET
+	};
+
+	enum ProfileID {
+	  SERIAL_PORT,
+	  LAN_ACCESS,
+	  DIALUP_NET,
+	  IRMC_SYNC,
+	  OBEX_OBJPUSH,
+	  OBEX_FILETRANS,
+	  IRMC_SYNC_CMD,
+	  HEADSET,
+	  CORDLESS_TELEPHONY,
+	  INTERCOM,
+	  FAX,
+	  HEADSET_AGW,
+	  PANU,
+	  NAP,
+	  GN,
+	  HID,
+	  CIP
+	};

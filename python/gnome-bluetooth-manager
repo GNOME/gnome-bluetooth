@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+try:
+    from gnomebt import manager
+except:
+    import manager
+manager.BTManager().main()

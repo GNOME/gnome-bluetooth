@@ -1,0 +1,95 @@
+2003-09-19  Edd Dumbill <edd@usefulinc.com>
+
+    * nautilus/: add Nautilus context menu component. Initial functionality
+    calls gnome-obex-send with selected files.
+    * obex/chooser.{c,h}: create device chooser to be called if --dest is
+    not specified
+    * obex/sender.c: call chooser when no --dest
+    * ui/gnome-obex-send.glade: add device chooser dialog to glade description
+
+2003-09-18  Edd Dumbill  <edd@usefulinc.com>
+
+    * configure.in: require libbtctl 0.3.2 or better, for the
+    btctl_scan_for_service() method. 
+
+    * src/manager-impl.c: always re-probe a device when asked for a
+    channel corresponding to a service.  This fixes stupid devices like the
+    P800 which move around which channels they host services on.
+
+2003-06-07  Edd Dumbill  <edd@usefulinc.com>
+
+    * obex/sender.c: finished preliminary GUI for
+    gnome-obex-send. Still much to do in figuring out how to
+    gracefully cancel an operation.  Likewise, the server side needs
+    to be able to recover gracefully from crashes.
+
+2003-06-03  Edd Dumbill  <edd@usefulinc.com>
+
+    * gnome-vfs/bluetooth-method.c: changed linked app to be the
+    gnome-obex-send program
+
+    * obex/obex_test_client.c (my_push_client): add copy of
+    push_client routine that takes the filename as a parameter rather
+    than from stdin.
+
+    * obex/sender.c: main file for gnome-obex-send, a client program
+    to send files via OBEX PUSH
+
+    * src/manager-impl.c (add_device_callback): purge service
+    descriptions on re-encountering a device, as some devices change
+    which channels their services are offered on
+
+2003-04-27  Edd Dumbill  <edd@usefulinc.com>
+
+    * Make gnome-vfs module display icons depending on the class of
+    device.
+
+2003-04-26  Edd Dumbill  <edd@usefulinc.com>
+
+    * Added a gnome-vfs module, which talks to the bonobo component
+    and presents a view of the known bluetooth devices to Nautilus.
+
+2003-04-24  Edd Dumbill  <edd@usefulinc.com>
+
+    * Release 0.4.
+
+    * src/gnomebt-icons.c: add some handy icon routines to libgnomebt
+    to dole out icons to those who ask
+
+    * obex/servonly.c: register with SDP. Add "Quit" menu item.
+    Initialise GNOME properly.
+
+    * obex/obexsdp.c, obex/obexsdp.h: added SDP registration for the
+    OBEX server
+
+2003-04-05  Edd Dumbill  <edd@usefulinc.com>
+
+    * Added libgnomebt, which will store useful reusable routines for
+    GNOME applications running bluetooth -- UI components, for instance.
+
+    * Added bare bones OBEX server implementation.
+
+2003-02-22  Edd Dumbill  <edd@usefulinc.com>
+
+    * Release 0.3.
+    * Reorganized source distribution so libbtctl is self
+    contained. This is because some users want only this component
+    without the Bonobo stuff.  Libbtcl will now follow a separate
+    development path.
+
+2003-02-07  Edd Dumbill  <edd@usefulinc.com>
+
+    * Release 0.2.
+    * Fully implemented servicesForDevice.
+    * Updated to BlueZ SDP 1.0 API.
+
+2002-12-13  Edd Dumbill  <edd@usefulinc.com>
+
+    * Created user interface: gnome-bluetooth-admin tool comprising
+      src/btadmin.c, src/btadmin.h, ui/btdeview.glade
+    * Added CORBA method for finding all the services a device supports:
+      servicesForDevice(out ServiceList list, in string bdaddr)
+
+2002-11-11  Edd Dumbill  <edd@usefulinc.com>
+
+    * Initial public release.

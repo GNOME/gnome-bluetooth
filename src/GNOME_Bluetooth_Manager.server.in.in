@@ -1,0 +1,26 @@
+<oaf_info>
+
+<oaf_server iid="OAFIID:GNOME_Bluetooth_Manager_Factory"
+	    type="exe"
+	    location="@LIBEXEC@/gnome-bluetooth-control">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:GNOME/ObjectFactory:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" _value="Bluetooth Manager Factory"/>
+	<oaf_attribute name="description" type="string" _value="Bluetooth Manager Factory"/>
+
+</oaf_server>
+
+<oaf_server iid="OAFIID:GNOME_Bluetooth_Manager"
+	    type="factory" 
+	    location="OAFIID:GNOME_Bluetooth_Manager_Factory">
+
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:GNOME/Bluetooth/Manager:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" _value="Bluetooth Manager"/>
+	<oaf_attribute name="description" type="string" _value="Control Bluetooth devices"/>
+
+</oaf_server>
+
+</oaf_info>
