@@ -98,7 +98,7 @@ int main(int argc, char **argv)
             printf ("      Channel: %d\n", (guint) chans->data);
         }
     }
-    gnomebt_controller_service_list_free (bc, services);
+    gnomebt_service_list_free (services);
 
     chans = gnomebt_controller_channels_for_service (bc, TBDADDR, 0x1101);
     printf ("Channels for Service ID: %x\n", 0x1101);
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
         printf ("Name %s Address %s Class %x\n",
                 dd->name, dd->bdaddr, dd->deviceclass);
     }
-    gnomebt_controller_device_desc_list_free (bc, devices);
+    gnomebt_device_desc_list_free (devices);
 
     printf ("Known devices that are phones:\n");
     for (devices = gnomebt_controller_known_devices_of_class (bc, GNOMEBT_MAJOR_PHONE ); devices != NULL; devices = g_slist_next (devices)) {
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
         printf ("Name %s Address %s Class %x\n",
                 dd->name, dd->bdaddr, dd->deviceclass);
     }
-    gnomebt_controller_device_desc_list_free (bc, devices);
+    gnomebt_device_desc_list_free (devices);
 
     printf ("Testing RFCOMM\n");
     

@@ -48,7 +48,7 @@ populate_device_list(BTChooser *app)
     GSList *item;
 
     if (app->list)
-        gnomebt_controller_device_desc_list_free (app->btmanager, app->list);
+        gnomebt_device_desc_list_free (app->list);
     app->list = gnomebt_controller_known_devices (app->btmanager);
 
 	gtk_list_store_clear(app->devstore);
@@ -193,7 +193,7 @@ choose_bdaddr ()
     }
 
     if (app->list)
-        gnomebt_controller_device_desc_list_free(app->btmanager, app->list);
+        gnomebt_device_desc_list_free (app->list);
     g_object_unref(app->btmanager);
     g_object_unref(G_OBJECT(app->devstore));
  

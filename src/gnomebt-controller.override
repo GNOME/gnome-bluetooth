@@ -35,8 +35,7 @@ _wrap_gnomebt_controller_known_devices (PyGObject *self)
                 "name", dd->name, "bdaddr", dd->bdaddr,
                 "deviceclass", dd->deviceclass));
     }
-    gnomebt_controller_device_desc_list_free (
-        GNOMEBT_CONTROLLER (self->obj), dlist);
+    gnomebt_device_desc_list_free (dlist);
     return ret;
 }
 %%
@@ -65,8 +64,7 @@ _wrap_gnomebt_controller_known_devices_of_class (PyGObject *self, PyObject *args
                 "name", dd->name, "bdaddr", dd->bdaddr,
                 "deviceclass", dd->deviceclass));
     }
-    gnomebt_controller_device_desc_list_free (
-        GNOMEBT_CONTROLLER (self->obj), dlist);
+    gnomebt_device_desc_list_free (dlist);
     return ret;
 }
 %%
@@ -97,8 +95,7 @@ _wrap_gnomebt_controller_services_for_device (PyGObject *self, PyObject *args)
         PyDict_SetItem(ret, Py_BuildValue("i", desc->id), chanlist);
     }
 
-    gnomebt_controller_service_list_free (GNOMEBT_CONTROLLER (self->obj), 
-        slist);
+    gnomebt_service_list_free (slist);
     return ret;
 }
 %%

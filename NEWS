@@ -1,3 +1,21 @@
+Release 0.5.0
+=============
+
+ * WARNING: Radical changes!
+
+   The Bonobo component has been completely removed, in favour of a
+   normal GObject, GnomebtController, to be found in libgnomebt.  This
+   embodies all of the functionality from the Bonobo object, but without
+   getting CORBA/Bonobo involved.  It ships with Python bindings, too.
+
+   To find out how to use it, check out gnomebt-controller-test.c in src/
+   for C, and the applications in the python/ directory for Python.
+
+   Porting your code to this new object should make your programs smaller
+   and more reliable.
+
+-- Edd Dumbill 2003/
+
 
 Release 0.4.1
 =============

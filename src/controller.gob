@@ -62,6 +62,9 @@ void gnomebt_service_desc_ref (GnomebtServiceDesc *desc);
 void gnomebt_service_desc_unref (GnomebtServiceDesc *desc);
 void gnomebt_device_desc_ref (GnomebtDeviceDesc *desc);
 void gnomebt_device_desc_unref (GnomebtDeviceDesc *desc);
+void gnomebt_channel_list_free (GSList *list);
+void gnomebt_service_list_free (GSList *list);
+void gnomebt_device_desc_list_free (GSList *list);
 gchar *gnomebt_device_desc_get_name (GnomebtDeviceDesc *desc);
 gchar *gnomebt_device_desc_get_bdaddr (GnomebtDeviceDesc *desc);
 guint gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc);
@@ -149,22 +152,7 @@ class Gnomebt:Controller from Btctl:Controller {
         return result;
     }
 
-    public
-    void
-    service_list_free (self, GSList *list)
-    {
-        GSList *item;
-        GnomebtServiceDesc *desc;
 
-        for (item=list; item!=NULL; item=g_slist_next(item)) {
-            desc=(GnomebtServiceDesc *)item->data;
-            if (desc) {
-                g_slist_free(desc->channels);
-            }
-            g_free(desc);
-        }
-        g_slist_free(item);
-    }
 
     public
     GSList *
@@ -192,14 +180,6 @@ class Gnomebt:Controller from Btctl:Controller {
         g_free(key);
         return list;
     }
-
-    public
-    void
-    channel_list_free (self, GSList *list)
-    {
-        g_slist_free (list);
-    }
-
     public
     void
     remove_device (self, const gchar *name)
@@ -301,26 +281,6 @@ class Gnomebt:Controller from Btctl:Controller {
         return ret;
     }
 
-    public
-    void
-    device_desc_free (self, GnomebtDeviceDesc *dd (check null))
-    {
-        if (dd->name) g_free (dd->name);
-        if (dd->bdaddr) g_free (dd->bdaddr);
-        g_free (dd);
-    }
-
-    public
-    void
-    device_desc_list_free (self, GSList *list)
-    {
-        GSList *item;
-        for (item = list; item != NULL; item = g_slist_next (item))
-        {
-            gnomebt_controller_device_desc_free (self,
-                (GnomebtDeviceDesc*) item->data);
-        }
-    }
 
     public
     void
@@ -675,6 +635,31 @@ guint
 gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc)
 {
     return desc->deviceclass;
+}
+
+void
+gnomebt_channel_list_free (GSList *list)
+{
+    g_slist_free (list);
+}
+
+void
+gnomebt_service_list_free (GSList *list)
+{
+    GSList *item;
+
+    for (item=list; item!=NULL; item=g_slist_next(item))
+        gnomebt_service_desc_unref ((GnomebtServiceDesc *)item->data);
+    g_slist_free(item);
+}
+
+void
+gnomebt_device_desc_list_free (GSList *list)
+{
+    GSList *item;
+    for (item = list; item != NULL; item = g_slist_next (item))
+        gnomebt_device_desc_unref ((GnomebtDeviceDesc*) item->data);
+    g_slist_free (list);
 }
 
 %}
