@@ -57,6 +57,8 @@ class BTManager (object):
     def __init__ (self):
         self.btctl = controller.Controller()
         self.setup_gui ()
+        self.items_found = 0
+        self.names_found = 0
         self.btctl.connect ("device_name", self.on_device_name)
         self.btctl.connect ("status_change", self.on_status_change)
         self.btctl.connect ("add_device", self.on_add_device)
@@ -189,6 +191,7 @@ class BTManager (object):
         self.statusbar.pop ()
         if status == 2:
             self.statusbar.push (_("Scanning for devices..."))
+            self.items_found = 0
             self.statusbar.set_progress_percentage (0.05)
         elif status == 3:
             self.statusbar.push (_("Retrieving device names..."))
@@ -206,7 +209,6 @@ class BTManager (object):
             self.scanitem.set_sensitive (gtk.TRUE)
 
     def on_scan (self, widget, data = None):
-        self.items_found = 0
         self.scanitem.set_sensitive (gtk.FALSE)
         self.btctl.discover_async ()
 
