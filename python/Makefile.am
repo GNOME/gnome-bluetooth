@@ -9,7 +9,7 @@ python_DATA = __init__.py manager.py hig_alert.py defs.py
 
 noinst_PYTHON = testiconlist.py
 
-CFLAGS = \
+AM_CFLAGS = \
 	-I$(GNOME_BLUETOOTH_PYTHON_CFLAGS) \
 	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/ \
 	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION) \

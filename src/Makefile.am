@@ -67,8 +67,8 @@ gnomebt-%.c gnomebt-%.h gnomebt-%-private.h: %.gob
 	@GOB2@ $<
 
 # Python bindings
-PYTHON_CLEANFILES += btctl-py.c
-PYTHON_DIST += btctl.defs btctl.override
+PYTHON_CLEANFILES = btctl-py.c
+PYTHON_DIST = btctl.defs btctl.override
            
 EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
 CLEANFILES = $(CLEANFILES) $(PYTHON_CLEANFILES)
