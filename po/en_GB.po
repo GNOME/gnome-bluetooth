@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-04 17:36+0100\n"
+"POT-Creation-Date: 2004-06-06 21:45+0100\n"
 "PO-Revision-Date: 2003-11-18 11:49+0000\n"
 "Last-Translator: Edd Dumbill <edd@usefulinc.com>\n"
 "Language-Team: English <en@li.org>\n"
@@ -34,18 +34,18 @@ msgstr "<span weight=\"bold\" size=\"larger\">Sending file</span>"
 msgid "Choose destination device"
 msgstr "Choose destination device"
 
-#: chooser.gob:91
+#: chooser.gob:109
 msgid "Choose Bluetooth device"
 msgstr "Choose Bluetooth device"
 
-#: chooser.gob:133
+#: chooser.gob:151
 msgid "Device"
 msgstr "Device"
 
 #. When try icon is destroyed, recreate it.  This happens
 #. when the notification area is removed.
-#: obex/gnome-obex-server.desktop.in.h:1 obex/gnome-obex-server.c:217
-#: obex/gnome-obex-server.c:269
+#: obex/gnome-obex-server.desktop.in.h:1 obex/gnome-obex-server.c:230
+#: obex/gnome-obex-server.c:282
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth File Sharing"
 
@@ -53,61 +53,61 @@ msgstr "Bluetooth File Sharing"
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Receive files sent by Bluetooth devices"
 
-#: obex/gnome-obex-send.c:46
+#: obex/gnome-obex-send.c:61
 msgid "Bluetooth address of destination device"
 msgstr "Bluetooth address of destination device"
 
-#: obex/gnome-obex-send.c:46
+#: obex/gnome-obex-send.c:61
 msgid "BDADDR"
 msgstr "BDADDR"
 
-#: obex/gnome-obex-send.c:145
+#: obex/gnome-obex-send.c:160
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr ""
 
-#: obex/gnome-obex-send.c:175
+#: obex/gnome-obex-send.c:190
 #, fuzzy
 msgid "An error occurred while sending data."
 msgstr "An error occurred while sending data. Check the receiving device."
 
-#: obex/gnome-obex-send.c:178
+#: obex/gnome-obex-send.c:193
 msgid "The remote device canceled the transfer."
 msgstr ""
 
-#: obex/gnome-obex-send.c:181
+#: obex/gnome-obex-send.c:196
 msgid "An unknown error occurred."
 msgstr ""
 
-#: obex/gnome-obex-send.c:212
+#: obex/gnome-obex-send.c:227
 msgid "Connecting..."
 msgstr ""
 
-#: obex/gnome-obex-send.c:259
+#: obex/gnome-obex-send.c:274
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:289
 #, fuzzy
 msgid "Remote device doesn't support receiving objects."
 msgstr ""
 "The device you are trying to send to doesn't support receiving objects."
 
-#: obex/gnome-obex-send.c:283
+#: obex/gnome-obex-send.c:298
 msgid "Can't initialize program."
 msgstr ""
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:304
 msgid "Unable to connect to remote device."
 msgstr ""
 
-#: obex/gnome-obex-server.c:72
+#: obex/gnome-obex-server.c:85
 msgid "File transfer requested"
 msgstr ""
 
-#: obex/gnome-obex-server.c:73
+#: obex/gnome-obex-server.c:86
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
@@ -116,25 +116,25 @@ msgid ""
 "wish to allow the connection?"
 msgstr ""
 
-#: obex/gnome-obex-server.c:74
+#: obex/gnome-obex-server.c:87
 #, fuzzy
 msgid "Always accept files from this device."
 msgstr "Receive files from Bluetooth devices"
 
-#: obex/gnome-obex-server.c:207
+#: obex/gnome-obex-server.c:220
 msgid "translator_credits"
 msgstr "translator_credits"
 
-#: obex/gnome-obex-server.c:219
+#: obex/gnome-obex-server.c:232
 msgid "Receive files from Bluetooth devices"
 msgstr "Receive files from Bluetooth devices"
 
-#: obex/gnome-obex-server.c:324
+#: obex/gnome-obex-server.c:337
 #, fuzzy
 msgid "Bluetooth File Server"
 msgstr "Bluetooth File Sharing"
 
-#: obex/gnome-obex-server.c:362
+#: obex/gnome-obex-server.c:375
 msgid "Ready for Bluetooth file transfers"
 msgstr "Ready for Bluetooth file transfers"
 
@@ -160,15 +160,15 @@ msgstr "Bluetooth Manager"
 msgid "Display Bluetooth devices and their properties"
 msgstr "Display Bluetooth devices and their properties"
 
-#: python/manager.py:36
+#: python/manager.py:54
 msgid "Bluetooth Device Manager"
 msgstr "Bluetooth Device Manager"
 
-#: python/manager.py:68
+#: python/manager.py:86
 msgid "Could not find Bluetooth devices on the system"
 msgstr "Could not find Bluetooth devices on the system"
 
-#: python/manager.py:68
+#: python/manager.py:86
 msgid ""
 "Please make sure that your bluetooth adapter is correctly plugged in your "
 "machine."
@@ -176,57 +176,57 @@ msgstr ""
 "Please make sure that your Bluetooth adapter is correctly plugged into your "
 "machine."
 
-#: python/manager.py:79
+#: python/manager.py:97
 msgid "Bluetooth devices"
 msgstr "Bluetooth devices"
 
-#: python/manager.py:94
+#: python/manager.py:112
 msgid "_Devices"
 msgstr "_Devices"
 
-#: python/manager.py:98
+#: python/manager.py:116
 msgid "_Scan"
 msgstr "_Scan"
 
-#: python/manager.py:110
+#: python/manager.py:128
 msgid "_Edit"
 msgstr "_Edit"
 
-#: python/manager.py:118
+#: python/manager.py:136
 msgid "_Help"
 msgstr "_Help"
 
-#: python/manager.py:192
+#: python/manager.py:210
 #, python-format
 msgid "Found device %s."
 msgstr "Found device %s."
 
-#: python/manager.py:197
+#: python/manager.py:215
 #, python-format
 msgid "Device %s is called '%s'."
 msgstr "Device %s is called '%s'."
 
-#: python/manager.py:205
+#: python/manager.py:223
 msgid "Scanning for devices..."
 msgstr "Scanning for devices..."
 
-#: python/manager.py:209
+#: python/manager.py:227
 msgid "Retrieving device names..."
 msgstr "Retrieving device names..."
 
-#: python/manager.py:213
+#: python/manager.py:231
 msgid "Scan complete."
 msgstr "Scan complete."
 
-#: python/manager.py:219
+#: python/manager.py:237
 msgid "Error during scan."
 msgstr "Error during scan."
 
-#: python/manager.py:241
+#: python/manager.py:259
 msgid "Copyright Â© Edd Dumbill 2003"
 msgstr "Copyright © Edd Dumbill 2003"
 
-#: python/manager.py:242
+#: python/manager.py:260
 msgid "Manage remote bluetooth devices."
 msgstr "Manage remote Bluetooth devices."
 

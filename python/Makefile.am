@@ -35,7 +35,7 @@ iconlist.c: iconlist.defs iconlist.override
 	pygtk-codegen-2.0 --prefix iconlist \
 		--register $(DEFSDIR)/gdk-types.defs \
 		--register $(DEFSDIR)/gtk-types.defs \
-		--override $(srcdir)iconlist.override \
+		--override $(srcdir)/iconlist.override \
 		$(srcdir)/iconlist.defs > $@
 
 defs.py: Makefile
@@ -48,4 +48,4 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 install-exec-hook:
-	$(INSTALL_SCRIPT) $(srcdir)/gnome-bluetooth-manager $(bindir)/gnome-bluetooth-manager
+	$(INSTALL_SCRIPT) $(srcdir)/gnome-bluetooth-manager $(DESTDIR)$(bindir)/gnome-bluetooth-manager

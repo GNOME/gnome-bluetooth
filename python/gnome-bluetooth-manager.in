@@ -1,0 +1,4 @@
+#!/bin/sh
+PYTHONPATH=@prefix@/lib/python@PYTHON_VERSION@/site-packages:$PYTHONPATH
+export PYTHONPATH
+exec @PYTHON@ @prefix@/lib/python@PYTHON_VERSION@/site-packages/gnomebt/manager.py
