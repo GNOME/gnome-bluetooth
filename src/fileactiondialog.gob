@@ -51,13 +51,16 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
     private const gchar *fname;
 
     private GdkPixbuf *icon = { gnomebt_icon (); }
-        destroywith gdk_pixbuf_unref;
+        destroywith g_object_unref;
 
     private GdkPixbuf *mimeicon = { NULL; }
-        destroywith gdk_pixbuf_unref;
+        destroywith g_object_unref;
 
 	private GnomeVFSFileInfo *vfsinf = { NULL; }
-        destroywith gnome_vfs_file_info_unref;
+        destroy {
+		 gnome_vfs_file_info_unref (vfsinf);
+		 vfsinf = NULL;
+	};
 
     private gchar *uri = { NULL; }
         destroywith g_free;

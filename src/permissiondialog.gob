@@ -43,7 +43,7 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
     private GtkWidget *rememberbutton;
 
     private GdkPixbuf *icon = { gnomebt_icon (); }
-        destroywith gdk_pixbuf_unref;
+        destroywith g_object_unref;
 
     private gboolean remember = FALSE;
 
