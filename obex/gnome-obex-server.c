@@ -252,7 +252,9 @@ about_activated(GtkMenuItem *item, gpointer data)
 	GdkPixbuf *pixbuf = NULL;
 	const gchar *authors[] = { "Edd Dumbill <edd@usefulinc.com>", NULL };
 	const gchar *documenters[] = { NULL };
-	const gchar *translator_credits = _("translator_credits");
+	/* add your name and email address in here if you've translated
+	   this program */
+	const gchar *translator_credits = _("translator-credits");
 
 	if (about != NULL) {
 	gdk_window_raise (GTK_WIDGET(about)->window);
@@ -268,7 +270,7 @@ about_activated(GtkMenuItem *item, gpointer data)
 							(const char **)authors,
 							(const char **)documenters,
 							strcmp (translator_credits,
-									"translator_credits") != 0 ?
+									"translator-credits") != 0 ?
 							translator_credits : NULL,
 							pixbuf);
 

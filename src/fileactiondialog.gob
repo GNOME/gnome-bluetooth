@@ -117,6 +117,7 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
             gnome_vfs_mime_application_free (self->_priv->app);
         }
 
+/* FIXME: make this DISCARD, not DELETE */
 		self->_priv->deletebutton = GTK_WIDGET (gtk_dialog_add_button (
             GTK_DIALOG(self), GTK_STOCK_DELETE, GNOMEBT_FILEACTION_DELETE));
 
