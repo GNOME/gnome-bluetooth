@@ -1,3 +1,12 @@
+2004-01-02  Edd Dumbill <edd@usefulinc.com>
+
+	* obex/obex-server-source.c, obex/obex-server-source.h,
+	obex/obex-server-source-private.h, obex/obex-server-source-test.c:
+    start of a GSource for OBEX control.  Starting with a server,
+    this may be able to cope with both server and client uses cases
+    in the future.  The source should be used by a nice GObject that
+    will create signals on OBEX events.
+
 2003-12-27  Edd Dumbill <edd@usefulinc.com>
 
 	* obex/: integrate permission dialog, play around trying to get the

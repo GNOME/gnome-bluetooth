@@ -11,6 +11,16 @@ libmisc_a_SOURCES = \
 
 bin_PROGRAMS = gnome-obex-server gnome-obex-send
 
+noinst_PROGRAMS = gnome-obex-source-test
+
+gnome_obex_source_test_SOURCES = \
+	obex-server-source.c obex-server-source-test.c \
+	obex-server-source.h
+
+gnome_obex_source_test_LDADD = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ @GOBEX_LIBS@ \
+	@SDP_LIBS@ $(GNOME_BLUETOOTH_LIBS) \
+	../src/libgnomebt.la
+
 gnome_obex_server_SOURCES = \
 	servonly.c obex_test.h \
 	obex_test_client.c obex_test_client.h \
