@@ -1,21 +1,47 @@
 # German translation of gnome-bluetooth.
-# Copyright (C) 2004 THE gnome-bluetooth'S COPYRIGHT HOLDER
+# Copyright (C) 2005 Edd Dumbill <edd@usefulinc.com>
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Hendrik Brandt <heb@gnome-de.org>, 2004.
-# , fuzzy
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth HEAD\n"
+"Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-07 12:31+0000\n"
-"PO-Revision-Date: 2004-12-10 14:43+0100\n"
-"Last-Translator: Hendrik Brandt <heb@gnome-de.org>\n"
+"POT-Creation-Date: 2005-01-16 23:00+0100\n"
+"PO-Revision-Date: 2005-01-16 22:59+0100\n"
+"Last-Translator: Frank Arnold <frank@scirocco-5v-turbo.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: data/gnome-obex-server.schemas.in.h:1
+msgid "Directory to save received files"
+msgstr "Ordner zum Speichern der empfangenen Dateien"
+
+#: data/gnome-obex-server.schemas.in.h:2
+msgid "Display dialog when file received"
+msgstr "Nach Dateiempfang Dialog anzeigen"
+
+#: data/gnome-obex-server.schemas.in.h:3
+msgid ""
+"Incoming files are saved automatically into this directory. If display-"
+"notification is set then the user gets chance to open or delete them."
+msgstr ""
+"Eingehende Dateien werden automatisch in diesem Ordner gespeichert. Falls "
+"»receive_notification« gesetzt ist, bekommt der Benutzer die Möglichkeit, "
+"diese Dateien zu öffnen oder zu löschen."
+
+#: data/gnome-obex-server.schemas.in.h:4
+msgid ""
+"Received files are automatically saved. If this option is set, then the user "
+"is prompted with a dialog which allows them to view or delete the received "
+"file."
+msgstr ""
+"Empfangene Dateien werden automatisch gespeichert. Wenn diese Option gesetzt "
+"ist, wird dem Benutzer ein Dialog angezeigt, der ihm das Anschauen bzw. das "
+"Löschen der empfangenen Datei ermöglicht."
 
 #: libegg/libegg/iconlist/eggiconlist.c:313
 msgid "Selection mode"
@@ -216,11 +242,11 @@ msgstr "Programm konnte nicht initialisiert werden."
 msgid "Unable to connect to remote device."
 msgstr "Mit der Gegenstelle konnte nicht verbunden werden."
 
-#: obex/gnome-obex-server.c:86
+#: obex/gnome-obex-server.c:90
 msgid "Incoming Bluetooth Transfer"
 msgstr "Einkommende Bluetooth-Übertragung"
 
-#: obex/gnome-obex-server.c:87
+#: obex/gnome-obex-server.c:91
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
@@ -234,13 +260,13 @@ msgstr ""
 "Die Gegenstelle versucht Ihnen per Bluetooth eine Datei zu senden.Möchten "
 "Sie diese Verbindung zulassen?"
 
-#: obex/gnome-obex-server.c:88
+#: obex/gnome-obex-server.c:92
 msgid "Always accept files from this device."
 msgstr "Dateien von diesem Gerät immer akzeptieren."
 
 #. add your name and email address in here if you've translated
 #. this program
-#: obex/gnome-obex-server.c:257
+#: obex/gnome-obex-server.c:288
 msgid "translator-credits"
 msgstr "Hendrik Brandt <eru@gmx.li>"
 
@@ -254,20 +280,20 @@ msgstr "Hendrik Brandt <eru@gmx.li>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:267 obex/gnome-obex-server.c:319
+#: obex/gnome-obex-server.c:298 obex/gnome-obex-server.c:350
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth-Dateiverteilung"
 
-#: obex/gnome-obex-server.c:269
+#: obex/gnome-obex-server.c:300
 msgid "Receive files from Bluetooth devices"
 msgstr "Dateien von einem Bluetooth-Gerät empfangen"
 
-#: obex/gnome-obex-server.c:376
+#: obex/gnome-obex-server.c:407
 msgid "Bluetooth File Server"
 msgstr "Bluetooth-Datei-Server"
 
-#: obex/gnome-obex-server.c:414
+#: obex/gnome-obex-server.c:445
 msgid "Ready for Bluetooth file transfers"
 msgstr "Bereit für Bluetooth-Dateiübertragungen"
 
