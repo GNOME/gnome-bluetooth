@@ -2,9 +2,11 @@ import gtk
 
 from gettext import gettext as _
 
-def reportError(primaryText, secondaryText):
+def reportError(parentWindow, primaryText, secondaryText):
     alert = HIGAlert(primaryText, secondaryText,
                      buttons = (gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
+    if parentWindow != None:
+        alert.set_transient_for (parentWindow)
     alert.run()
     alert.hide()
 

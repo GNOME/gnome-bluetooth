@@ -64,7 +64,7 @@ class BTManager (object):
         self.btctl.connect ("add_device", self.on_add_device)
 
 	if self.btctl.is_initialised() == gtk.FALSE:
-	    hig_alert.reportError (_("Could not find Bluetooth devices on the system"), _("Please make sure that your bluetooth adapter is correctly plugged in your machine."))
+	    hig_alert.reportError (self.window, _("Could not find Bluetooth devices on the system"), _("Please make sure that your bluetooth adapter is correctly plugged in your machine."))
             sys.exit (1)
 
         self.read_devices ()
