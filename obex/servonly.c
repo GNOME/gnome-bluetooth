@@ -31,6 +31,9 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <gconf/gconf-client.h>
+#include <gconf/gconf-value.h>
+
 #include <gnome.h>
 #include "eggtrayicon.h"
 
@@ -192,6 +195,23 @@ obex_poll(gpointer data)
   return 1; // call us again next idle
 }
 
+static char *
+get_save_dir ()
+{
+    char *dir = NULL;
+    GConfClient *client = gconf_client_get_default();
+
+    if (client) {
+        dir = gconf_client_get_string (client,
+                "/system/bluetooth/obex-savedir", NULL);
+        g_object_unref (client);
+    }
+    if (dir == NULL) {
+        dir = (char *) g_get_home_dir();
+    }
+    return dir;
+}
+
 gboolean
 main2 (gpointer data)
 {
@@ -203,7 +223,7 @@ main2 (gpointer data)
   app->gt=&global_context;
   app->gt->serverdone=FALSE;
   app->gt->app=(void*)app;
-  app->gt->save_dir=(const char*)g_get_home_dir();
+  app->gt->save_dir = get_save_dir();
 
   if(! (app->handle = OBEX_Init(OBEX_TRANS_BLUETOOTH, obex_event, 0)))      {
 	perror("OBEX_Init failed");

@@ -58,17 +58,16 @@ put_server(obex_t *handle, obex_object_t *object)
 	struct context *gt;
 	gt = OBEX_GetUserData(handle);
 
-	printf(/* __FUNCTION */ "()\n");
 
 	while(OBEX_ObjectGetNextHeader(handle, object, &hi, &hv, &hlen))	{
 		switch(hi)	{
 		case OBEX_HDR_BODY:
-			printf(/* __FUNCTION */ "() Found body\n");
+			printf("Found body\n");
 			body = hv.bs;
 			body_len = hlen;
 			break;
 		case OBEX_HDR_NAME:
-			printf(/* __FUNCTION */ "() Found name\n");
+			printf("Found name\n");
 			if( (namebuf = malloc(hlen / 2)))	{
 				OBEX_UnicodeToChar(namebuf, hv.bs, hlen);
 				name = namebuf;
@@ -76,7 +75,7 @@ put_server(obex_t *handle, obex_object_t *object)
 			break;
 
 		default:
-			printf(/* __FUNCTION */ "() Skipped header %02x\n", hi);
+			printf("Skipped header %02x\n", hi);
 		}
 	}
 	if(!body)	{
@@ -141,7 +140,7 @@ server_request(obex_t *handle, obex_object_t *object, int event, int cmd)
 		break;
 	case OBEX_CMD_GET:
 	default:
-		printf(/* __FUNCTION */ "() Denied %02x request\n", cmd);
+		printf("Denied %02x request\n", cmd);
 		OBEX_ObjectSetRsp(object, OBEX_RSP_NOT_IMPLEMENTED, OBEX_RSP_NOT_IMPLEMENTED);
 		break;
 	}
@@ -164,7 +163,7 @@ server_done(obex_t *handle, obex_object_t *object, int obex_cmd, int obex_rsp)
 		break;
 
 	default:
-		printf(/* __FUNCTION */ "() Command (%02x) has now finished\n", 
+		printf("Command (%02x) has now finished\n", 
 			   obex_cmd);
 		break;
 	}
