@@ -80,6 +80,9 @@ class BTManager (object):
         self.window.set_default_size (400, 200)
         self.window.connect ("delete_event", self.delete_event)
         self.window.connect ("destroy", self.destroy)
+	window_icon_name = self.image_file ("blueradio-48.png")
+	window_icon = gtk.gdk.pixbuf_new_from_file (window_icon_name)
+	self.window.set_icon (window_icon)
 
         vbox = gtk.VBox ()
 
