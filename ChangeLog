@@ -6,6 +6,11 @@
 	* src/gnome-obex-server.c: send name request on device connect.
 	* src/permissiondialog.gob: display preferred name for device,
 	not just the name.
+	* src/fileaction.gob: new dialog for displaying received files
+	to the user and asking what to do next.
+	* src/fileactiontest.c: test program for fileaction dialog.
+	* src/gnome-obex-server.c: call fileaction dialog when file
+	received: should user open, save or delete?
 
 2004-06-10  Edd Dumbill <edd@usefulinc.com>
 

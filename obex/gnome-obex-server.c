@@ -49,6 +49,7 @@
 #include "gnomebt-controller.h"
 #include "gnomebt-spinner.h"
 #include "gnomebt-permissiondialog.h"
+#include "gnomebt-fileactiondialog.h"
 #include "util.h"
 
 typedef struct _appinfo {
@@ -184,11 +185,28 @@ request_put_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
 }
 
 static void
+file_action_response (GtkDialog *dialog, gint arg, gpointer user_data)
+{
+	switch (arg) {
+		case GNOMEBT_FILEACTION_OPEN:
+			gnomebt_fileactiondialog_open (GNOMEBT_FILEACTIONDIALOG (dialog));
+			break;
+		case GNOMEBT_FILEACTION_DELETE:
+			gnomebt_fileactiondialog_delete (GNOMEBT_FILEACTIONDIALOG (dialog));
+			break;
+		default:
+			/* will be SAVE, so we do nothing */
+			break;
+	}
+}
+
+static void
 put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 		gpointer body, guint len, MyApp *app)
 {
 	int fd;
 	gchar *targetname = NULL;
+	GnomebtFileActionDialog *dlg;
 
 	if (! app->decision) {
 		btctl_obex_set_response (bo, FALSE);
@@ -202,15 +220,22 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 			get_save_dir ());
 	g_message ("Saving to '%s'", targetname);
 	fd = open (targetname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-	g_free (targetname);
 	if (fd >= 0) {
 		write (fd, body, len);
 		close (fd);
 		btctl_obex_set_response (bo, TRUE);
+		dlg = gnomebt_fileactiondialog_new (
+				gnomebt_controller_get_device_preferred_name (app->btctl, bdaddr),
+				targetname );
+		g_signal_connect (G_OBJECT (dlg), "response",
+				G_CALLBACK (file_action_response), dlg);
+		g_signal_connect_swapped (G_OBJECT (dlg),
+				"response", G_CALLBACK (gtk_widget_destroy), dlg);
 	} else {
 		g_warning ("Couldn't save file.");
 		btctl_obex_set_response (bo, FALSE);
 	}
+	g_free (targetname);
 }
 
 static gboolean

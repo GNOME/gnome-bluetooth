@@ -10,7 +10,8 @@ AM_CPPFLAGS = \
 	-I$(srcdir) -I../src
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
-	gnomebt-chooser-test gnomebt-permissiondialog-test
+	gnomebt-chooser-test gnomebt-permissiondialog-test \
+	gnomebt-fileactiondialog-test
 
 lib_LTLIBRARIES = libgnomebt.la
 py_LTLIBRARIES = controller.la chooser.la
@@ -20,11 +21,13 @@ libgnomebt_la_SOURCES = \
 	gnomebt-permissiondialog.c gnomebt-permissiondialog.h \
 	gnomebt-spinner.c gnomebt-spinner.h \
 	gnomebt-chooser.c gnomebt-chooser.h \
-	gnomebt-icons.c gnomebt-icons.h
+	gnomebt-icons.c gnomebt-icons.h \
+	gnomebt-fileactiondialog.c gnomebt-fileactiondialog.h
 
 pkginclude_HEADERS = \
 	gnomebt-icons.h gnomebt-chooser.h gnomebt-spinner.h \
-	gnomebt-controller.h gnomebt-permissiondialog.h
+	gnomebt-controller.h gnomebt-permissiondialog.h \
+	gnomebt-fileactiondialog.h
 
 gnomebt-chooser.lo: gnomebt-controller.h gnomebt-spinner.h
 
@@ -43,6 +46,12 @@ gnomebt_controller_test_SOURCES = \
 gnomebt_controller_test_LDADD = \
 	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
 
+gnomebt_fileactiondialog_test_SOURCES = \
+	gnomebt-fileactiondialog-test.c
+
+gnomebt_fileactiondialog_test_LDADD = \
+	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
+
 gnomebt_permissiondialog_test_SOURCES = \
 	gnomebt-permissiondialog-test.c
 
@@ -56,7 +65,8 @@ gconftest_LDFLAGS = \
 	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS)
 
 GOB_DIST = \
-	spinner.gob chooser.gob controller.gob permissiondialog.gob
+	spinner.gob chooser.gob controller.gob permissiondialog.gob \
+	fileactiondialog.gob
 
 CTAGS_ARGS = --langmap=c++:.gob \
 	$(GOB_DIST)
@@ -65,7 +75,8 @@ BUILT_SOURCES = \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
 	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
 	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h \
-	gnomebt-permissiondialog.c gnomebt-permissiondialog.h gnomebt-permissiondialog-private.h
+	gnomebt-permissiondialog.c gnomebt-permissiondialog.h gnomebt-permissiondialog-private.h \
+	gnomebt-fileactiondialog.c gnomebt-fileactiondialog.h gnomebt-fileactiondialog-private.h
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
