@@ -21,6 +21,12 @@
     src/main.c: remove Bonobo component source.
     * src/chooser.gob: implement device chooser dialog
     * obex/chooser.c: remove old chooser implementation, use new dialog
+    * ui/gnome-obex-send.glade: remove chooser dialog
+    * src/controller.gob: add threaded discovery
+    * src/chooser.gob: implement, but leave commented out, usage of 
+    threaded discovery while dialog is shown. To make this usable we need
+    to find a way of coping with the fact that inquiries are uncancellable
+    and can take up to 10 seconds.
 
 2003-09-27  Bastien Nocera  <hadess@hadess.net>
 

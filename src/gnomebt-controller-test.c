@@ -18,6 +18,11 @@ static void status_callback(GnomebtController *bc,
         gpointer data) {
 
     printf("got status %d\n", field);
+    if (field == BTCTL_STATUS_COMPLETE || 
+            field == BTCTL_STATUS_ERROR) {
+        int *complete = (int*)data;
+        *complete = 1;
+    }
 }
 
 static void add_device_callback(GnomebtController *bc,
@@ -52,6 +57,8 @@ int main(int argc, char **argv)
     int num;
     gchar *devname;
     FILE *f;
+    int complete = 0;
+    int ticks;
 
     g_type_init();
 
@@ -63,7 +70,7 @@ int main(int argc, char **argv)
      */
     
     g_signal_connect (G_OBJECT(bc), "status_change",
-                G_CALLBACK(status_callback), NULL);
+                G_CALLBACK(status_callback), &complete);
     g_signal_connect (G_OBJECT(bc), "add_device",
                 G_CALLBACK(add_device_callback), NULL);
     g_signal_connect (G_OBJECT(bc), "device_name",
@@ -77,7 +84,21 @@ int main(int argc, char **argv)
 	printf("Connection to " TBDADDR " %d\n", 
 		   btctl_controller_get_established_rfcomm_connection(BTCTL_CONTROLLER(bc), TBDADDR, 0));
 
-    btctl_controller_discover_devices(BTCTL_CONTROLLER(bc));
+    printf("Doing asynchronous discovery\n");
+    
+    gnomebt_controller_discover_devices_threaded(bc);
+    ticks = 4;
+    while (!complete) {
+        printf("%d before cancellation\n", ticks);
+        sleep (1);
+        ticks--;
+        if (ticks == 0) {
+            btctl_controller_cancel_discovery (BTCTL_CONTROLLER(bc));
+        }
+    }
+
+    printf("Doing synchronous discovery\n");
+    gnomebt_controller_discover_devices(bc);
 
     printf("Looking to see what channel OPUSH is on " TBDADDR "\n");
 

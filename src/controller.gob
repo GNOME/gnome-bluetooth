@@ -72,6 +72,17 @@ guint gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc);
 
 class Gnomebt:Controller from Btctl:Controller {
 
+    /* the thread var must come first, so that it is the first
+       thing to be shut down on disposal */
+    private GThread *thread = NULL
+        unref {
+            if (VAR) {
+                btctl_controller_cancel_discovery (
+                    BTCTL_CONTROLLER(obj_self));
+                g_thread_join (VAR);
+            };
+        };
+
     private GConfClient *client = { gconf_client_get_default() }
         unrefwith g_object_unref;
 
@@ -79,7 +90,30 @@ class Gnomebt:Controller from Btctl:Controller {
     void
     discover_devices (self)
     {
+        if (!self->_priv->thread) {
+            btctl_controller_discover_devices (BTCTL_CONTROLLER(self));
+        }
+    }
+
+    private
+    gpointer
+    discover_devices_threadfunc (gpointer data)
+    {
+        GnomebtController *self = GNOMEBT_CONTROLLER(data);
         btctl_controller_discover_devices (BTCTL_CONTROLLER(self));
+        self->_priv->thread = NULL;
+        return NULL;
+    }
+
+    public
+    void
+    discover_devices_threaded (self)
+    {
+        if (!self->_priv->thread) {
+            self->_priv->thread = g_thread_create (
+                gnomebt_controller_discover_devices_threadfunc, (gpointer) self,
+                TRUE, NULL);
+        }
     }
 
     public

@@ -14,6 +14,8 @@ enum
 
 static void treeview_cb (GtkTreeSelection *sel, gpointer data);
 static void response_cb (GtkDialog *d, gint arg, gpointer userdata);
+static void device_found_cb (GnomebtController *bc, gchar* device,
+    gchar* name, gpointer data);
 %}
 
 %h{
@@ -36,6 +38,15 @@ class Gnomebt:Chooser from Gtk:Dialog {
     private GtkWidget *okbutton;
     private gint response = 0;
     private GtkWidget *devtreeview;
+    private gulong discovery_cb = 0 
+        destroy {
+            if (discovery_cb) {
+                GnomebtChooser *self= GNOMEBT_CHOOSER (obj_self);
+                g_signal_handler_disconnect (
+                    (gpointer)(self->btmanager),
+                    discovery_cb);
+            }
+        };
     public GnomebtController *btmanager;
 
     init (self)
@@ -65,10 +76,15 @@ class Gnomebt:Chooser from Gtk:Dialog {
         /* response callback */
         g_signal_connect (GTK_OBJECT (self), "response", 
              G_CALLBACK (response_cb), (gpointer) self);
-        /* dialog box is destroyed on response 
-        g_signal_connect_swapped (GTK_OBJECT (self), 
-             "response", G_CALLBACK (gtk_widget_destroy), GTK_OBJECT (self));
-        */
+
+        /* border & spacing */
+        gtk_container_set_border_width (
+            GTK_CONTAINER (GTK_DIALOG(self)->vbox),
+            3);
+
+        gtk_box_set_spacing (
+            GTK_BOX (GTK_DIALOG(self)->vbox),
+            3);
 
         /* make the scrolled window */
 
@@ -114,6 +130,12 @@ class Gnomebt:Chooser from Gtk:Dialog {
         chooser->btmanager = ctl;
         /* fill up with data */
         gnomebt_chooser_populate_device_list (chooser);
+
+        chooser->_priv->discovery_cb = g_signal_connect_after (
+            G_OBJECT(ctl), "device_name",
+            G_CALLBACK(device_found_cb), (gpointer)chooser);
+
+        /* gnomebt_controller_discover_devices_threaded (ctl); */
         return chooser;
     }
 
@@ -217,5 +239,15 @@ response_cb (GtkDialog *d, gint arg, gpointer userdata)
             /* TODO -- do help*/
             break;
     }
+}
+
+static void
+device_found_cb (GnomebtController *bc, gchar* device, gchar* name,
+        gpointer data)
+{
+    GnomebtChooser *chooser = (GnomebtChooser *)data;
+    gdk_threads_enter();
+    gnomebt_chooser_populate_device_list (chooser);
+    gdk_threads_leave();
 }
 %}
