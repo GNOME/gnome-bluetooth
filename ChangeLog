@@ -1,3 +1,8 @@
+2003-11-01  Edd Dumbill <edd@usefulinc.com>
+
+	* src/controller.gob: ripped out the threads stuff
+	* src/chooser.gob: changed discovery to use the btctl async method
+
 2003-10-31  Bastien Nocera  <hadess@hadess.net>
 
 	* configure.in:
@@ -5,38 +10,38 @@
 
 2003-10-31  Edd Dumbill <edd@usefulinc.com>
 
-    * src/chooser.gob: started implementing a "Refresh" button to rescan for
-    devices.  Currently running into weird threading issues.  Ugh.
+	* src/chooser.gob: started implementing a "Refresh" button to rescan for
+	devices.  Currently running into weird threading issues.  Ugh.
 
 2003-10-30  Edd Dumbill <edd@usefulinc.com>
 
-    * src/controller.gob, src/Makefile.am: port Bonobo object functionality
-    into a straight GObject, GnomebtController.
-    * src/gnomebt-controller-test.c: test program to exercise the
-    features of GnomebtController.
-    * obex/sender.c, obex/chooser.c, obex/Makefile.am: remove dependency
-    on the Bonobo component.
-    * gnome-vfs/README: note that stuff in this directory is obsolete
-    * src/btadmin.{c,h}: removed these files, they're for an obsolete tool
-    * src/manager-client.c: remove obsolete test program for Bonobo object
-    * configure.in, src/Makefile.am: definitions for Python gnomebt module
-    * src/gnomebt-controller.{override,defs},
-    src/gnome-bt-controller-pymodule.c: Python wrapper for gnomebt
-    * python/Makefile.am: small tidyups
-    * configure.in, Makefile.am: stop compilation of orbit/ subdir
-    * python/manager.py: remove Bonobo use, use new gnomebt.controller module
-    * README, HACKING, NEWS: freshen up to reflect removal of Bonobo component
-    * src/manager.c, src/manager.h, src/manager-impl.c,
-    src/GNOME_Bluetooth_Manager.idl, src/GNOME_Bluetooth_Manager.server.in.in,
-    src/main.c: remove Bonobo component source.
-    * src/chooser.gob: implement device chooser dialog
-    * obex/chooser.c: remove old chooser implementation, use new dialog
-    * ui/gnome-obex-send.glade: remove chooser dialog
-    * src/controller.gob: add threaded discovery
-    * src/chooser.gob: implement, but leave commented out, usage of 
-    threaded discovery while dialog is shown. To make this usable we need
-    to find a way of coping with the fact that inquiries are uncancellable
-    and can take up to 10 seconds.
+	* src/controller.gob, src/Makefile.am: port Bonobo object functionality
+	into a straight GObject, GnomebtController.
+	* src/gnomebt-controller-test.c: test program to exercise the
+	features of GnomebtController.
+	* obex/sender.c, obex/chooser.c, obex/Makefile.am: remove dependency
+	on the Bonobo component.
+	* gnome-vfs/README: note that stuff in this directory is obsolete
+	* src/btadmin.{c,h}: removed these files, they're for an obsolete tool
+	* src/manager-client.c: remove obsolete test program for Bonobo object
+	* configure.in, src/Makefile.am: definitions for Python gnomebt module
+	* src/gnomebt-controller.{override,defs},
+	src/gnome-bt-controller-pymodule.c: Python wrapper for gnomebt
+	* python/Makefile.am: small tidyups
+	* configure.in, Makefile.am: stop compilation of orbit/ subdir
+	* python/manager.py: remove Bonobo use, use new gnomebt.controller module
+	* README, HACKING, NEWS: freshen up to reflect removal of Bonobo component
+	* src/manager.c, src/manager.h, src/manager-impl.c,
+	src/GNOME_Bluetooth_Manager.idl, src/GNOME_Bluetooth_Manager.server.in.in,
+	src/main.c: remove Bonobo component source.
+	* src/chooser.gob: implement device chooser dialog
+	* obex/chooser.c: remove old chooser implementation, use new dialog
+	* ui/gnome-obex-send.glade: remove chooser dialog
+	* src/controller.gob: add threaded discovery
+	* src/chooser.gob: implement, but leave commented out, usage of 
+	threaded discovery while dialog is shown. To make this usable we need
+	to find a way of coping with the fact that inquiries are uncancellable
+	and can take up to 10 seconds.
 
 2003-09-27  Bastien Nocera  <hadess@hadess.net>
 
@@ -44,8 +49,8 @@
 
 2003-09-26  Edd Dumbill <edd@usefulinc.com>
 
-    * configure.in: require libbtctl 0.4 or better
-    * src/chooser.gob: start work on a device-chooser widget
+	* configure.in: require libbtctl 0.4 or better
+	* src/chooser.gob: start work on a device-chooser widget
 
 2003-09-26  Bastien Nocera  <hadess@hadess.net>
 
@@ -82,96 +87,96 @@
 
 2003-09-19  Edd Dumbill <edd@usefulinc.com>
 
-    * nautilus/: add Nautilus context menu component. Initial functionality
-    calls gnome-obex-send with selected files.
-    * obex/chooser.{c,h}: create device chooser to be called if --dest is
-    not specified
-    * obex/sender.c: call chooser when no --dest
-    * ui/gnome-obex-send.glade: add device chooser dialog to glade description
+	* nautilus/: add Nautilus context menu component. Initial functionality
+	calls gnome-obex-send with selected files.
+	* obex/chooser.{c,h}: create device chooser to be called if --dest is
+	not specified
+	* obex/sender.c: call chooser when no --dest
+	* ui/gnome-obex-send.glade: add device chooser dialog to glade description
 
 2003-09-18  Edd Dumbill  <edd@usefulinc.com>
 
-    * configure.in: require libbtctl 0.3.2 or better, for the
-    btctl_scan_for_service() method. 
+	* configure.in: require libbtctl 0.3.2 or better, for the
+	btctl_scan_for_service() method. 
 
-    * src/manager-impl.c: always re-probe a device when asked for a
-    channel corresponding to a service.  This fixes stupid devices like the
-    P800 which move around which channels they host services on.
+	* src/manager-impl.c: always re-probe a device when asked for a
+	channel corresponding to a service.  This fixes stupid devices like the
+	P800 which move around which channels they host services on.
 
 2003-06-07  Edd Dumbill  <edd@usefulinc.com>
 
-    * obex/sender.c: finished preliminary GUI for
-    gnome-obex-send. Still much to do in figuring out how to
-    gracefully cancel an operation.  Likewise, the server side needs
-    to be able to recover gracefully from crashes.
+	* obex/sender.c: finished preliminary GUI for
+	gnome-obex-send. Still much to do in figuring out how to
+	gracefully cancel an operation.  Likewise, the server side needs
+	to be able to recover gracefully from crashes.
 
 2003-06-03  Edd Dumbill  <edd@usefulinc.com>
 
-    * gnome-vfs/bluetooth-method.c: changed linked app to be the
-    gnome-obex-send program
+	* gnome-vfs/bluetooth-method.c: changed linked app to be the
+	gnome-obex-send program
 
-    * obex/obex_test_client.c (my_push_client): add copy of
-    push_client routine that takes the filename as a parameter rather
-    than from stdin.
+	* obex/obex_test_client.c (my_push_client): add copy of
+	push_client routine that takes the filename as a parameter rather
+	than from stdin.
 
-    * obex/sender.c: main file for gnome-obex-send, a client program
-    to send files via OBEX PUSH
+	* obex/sender.c: main file for gnome-obex-send, a client program
+	to send files via OBEX PUSH
 
-    * src/manager-impl.c (add_device_callback): purge service
-    descriptions on re-encountering a device, as some devices change
-    which channels their services are offered on
+	* src/manager-impl.c (add_device_callback): purge service
+	descriptions on re-encountering a device, as some devices change
+	which channels their services are offered on
 
 2003-04-27  Edd Dumbill  <edd@usefulinc.com>
 
-    * Make gnome-vfs module display icons depending on the class of
-    device.
+	* Make gnome-vfs module display icons depending on the class of
+	device.
 
 2003-04-26  Edd Dumbill  <edd@usefulinc.com>
 
-    * Added a gnome-vfs module, which talks to the bonobo component
-    and presents a view of the known bluetooth devices to Nautilus.
+	* Added a gnome-vfs module, which talks to the bonobo component
+	and presents a view of the known bluetooth devices to Nautilus.
 
 2003-04-24  Edd Dumbill  <edd@usefulinc.com>
 
-    * Release 0.4.
+	* Release 0.4.
 
-    * src/gnomebt-icons.c: add some handy icon routines to libgnomebt
-    to dole out icons to those who ask
+	* src/gnomebt-icons.c: add some handy icon routines to libgnomebt
+	to dole out icons to those who ask
 
-    * obex/servonly.c: register with SDP. Add "Quit" menu item.
-    Initialise GNOME properly.
+	* obex/servonly.c: register with SDP. Add "Quit" menu item.
+	Initialise GNOME properly.
 
-    * obex/obexsdp.c, obex/obexsdp.h: added SDP registration for the
-    OBEX server
+	* obex/obexsdp.c, obex/obexsdp.h: added SDP registration for the
+	OBEX server
 
 2003-04-05  Edd Dumbill  <edd@usefulinc.com>
 
-    * Added libgnomebt, which will store useful reusable routines for
-    GNOME applications running bluetooth -- UI components, for instance.
+	* Added libgnomebt, which will store useful reusable routines for
+	GNOME applications running bluetooth -- UI components, for instance.
 
-    * Added bare bones OBEX server implementation.
+	* Added bare bones OBEX server implementation.
 
 2003-02-22  Edd Dumbill  <edd@usefulinc.com>
 
-    * Release 0.3.
-    * Reorganized source distribution so libbtctl is self
-    contained. This is because some users want only this component
-    without the Bonobo stuff.  Libbtcl will now follow a separate
-    development path.
+	* Release 0.3.
+	* Reorganized source distribution so libbtctl is self
+	contained. This is because some users want only this component
+	without the Bonobo stuff.  Libbtcl will now follow a separate
+	development path.
 
 2003-02-07  Edd Dumbill  <edd@usefulinc.com>
 
-    * Release 0.2.
-    * Fully implemented servicesForDevice.
-    * Updated to BlueZ SDP 1.0 API.
+	* Release 0.2.
+	* Fully implemented servicesForDevice.
+	* Updated to BlueZ SDP 1.0 API.
 
 2002-12-13  Edd Dumbill  <edd@usefulinc.com>
 
-    * Created user interface: gnome-bluetooth-admin tool comprising
-      src/btadmin.c, src/btadmin.h, ui/btdeview.glade
-    * Added CORBA method for finding all the services a device supports:
-      servicesForDevice(out ServiceList list, in string bdaddr)
+	* Created user interface: gnome-bluetooth-admin tool comprising
+	  src/btadmin.c, src/btadmin.h, ui/btdeview.glade
+	* Added CORBA method for finding all the services a device supports:
+	  servicesForDevice(out ServiceList list, in string bdaddr)
 
 2002-11-11  Edd Dumbill  <edd@usefulinc.com>
 
-    * Initial public release.
+	* Initial public release.

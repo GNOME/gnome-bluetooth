@@ -58,7 +58,6 @@ int main(int argc, char **argv)
     gchar *devname;
     FILE *f;
     int complete = 0;
-    int ticks;
 
     g_type_init();
 
@@ -83,19 +82,6 @@ int main(int argc, char **argv)
 
 	printf("Connection to " TBDADDR " %d\n", 
 		   btctl_controller_get_established_rfcomm_connection(BTCTL_CONTROLLER(bc), TBDADDR, 0));
-
-    printf("Doing asynchronous discovery\n");
-    
-    gnomebt_controller_discover_devices_threaded(bc);
-    ticks = 4;
-    while (!complete) {
-        printf("%d before cancellation\n", ticks);
-        sleep (1);
-        ticks--;
-        if (ticks == 0) {
-            btctl_controller_cancel_discovery (BTCTL_CONTROLLER(bc));
-        }
-    }
 
     printf("Doing synchronous discovery\n");
     gnomebt_controller_discover_devices(bc);

@@ -44,7 +44,6 @@ class Gnomebt:Chooser from Gtk:Dialog {
     private GtkWidget *scanbutton;
     private gint response = 0;
     private GtkWidget *devtreeview;
-    private GtkWidget *progressbar;
     private GnomebtSpinner *spin;
     private guint timeout_stop = 0;
     private gulong discovery_cb = 0 
@@ -133,28 +132,12 @@ class Gnomebt:Chooser from Gtk:Dialog {
         gnomebt_chooser_add_text_renderer (self, DEV_NAME_COLUMN,
             _("Device"));
 
-        self->_priv->progressbar = gtk_progress_bar_new ();
-        gnomebt_chooser_reset_progress_bar (self);
-
         /* add the treeview and show all widgets */
 
         gtk_container_add (GTK_CONTAINER(sw), self->_priv->devtreeview);
         gtk_container_add (GTK_CONTAINER(GTK_DIALOG(self)->vbox), sw);
-        gtk_container_add (GTK_CONTAINER(GTK_DIALOG(self)->vbox), 
-            self->_priv->progressbar);
         gtk_widget_show_all (GTK_WIDGET(self));
 	}
-
-    private
-    void
-    reset_progress_bar (self)
-    {
-        gtk_progress_bar_set_fraction (
-            GTK_PROGRESS_BAR (self->_priv->progressbar), 0.0);
-        gtk_progress_bar_set_text (
-            GTK_PROGRESS_BAR (self->_priv->progressbar),
-            _("Click Refresh to find new devices"));
-    }
 
     public
     GnomebtChooser *
@@ -201,9 +184,8 @@ class Gnomebt:Chooser from Gtk:Dialog {
     start_scan (self)
     {
         /* commence an async scan */
-        gtk_widget_set_sensitive (GTK_WIDGET(self), FALSE);
-        /* g_timeout_add (300, (GSourceFunc)timeout_cb, (gpointer)self); */
-        gnomebt_controller_discover_devices_threaded (self->btmanager);
+        gtk_widget_set_sensitive (GTK_WIDGET(self->_priv->scanbutton), FALSE);
+        btctl_controller_discover_async (BTCTL_CONTROLLER(self->btmanager));
     }
 
     private
@@ -298,50 +280,31 @@ device_found_cb (GnomebtController *bc, gchar* device, gchar* name,
         gpointer data)
 {
     GnomebtChooser *chooser = (GnomebtChooser *)data;
-    gdk_threads_enter();
+    g_message ("device %s %s found", device, name);
     gnomebt_chooser_populate_device_list (chooser);
-    gdk_threads_leave();
 }
 
 static void
 status_cb (GnomebtController *bc, gint field, gpointer data) {
-    GnomebtChooser *choose = GNOMEBT_CHOOSER (data);
-    g_message("got status %d\n", field);
-    gdk_threads_enter();
+    GnomebtChooser *chooser = GNOMEBT_CHOOSER (data);
     switch (field) {
         case BTCTL_STATUS_SCANNING:
-            gtk_progress_bar_set_text (GTK_PROGRESS_BAR(choose->_priv->progressbar), _("Scanning for devices"));
+            /* g_message("scanning started"); */
             break;
         case BTCTL_STATUS_GETTING_NAMES:
-            gtk_progress_bar_set_text (GTK_PROGRESS_BAR(choose->_priv->progressbar), _("Retrieving device names"));
-            gtk_progress_bar_set_fraction (
-                GTK_PROGRESS_BAR (choose->_priv->progressbar), 0.4);
+            /* g_message("getting names"); */
             break;
         case BTCTL_STATUS_GETTING_SERVICES:
-            gtk_progress_bar_set_text (GTK_PROGRESS_BAR(choose->_priv->progressbar), _("Finding supported services"));
-            gtk_progress_bar_set_fraction (
-                GTK_PROGRESS_BAR (choose->_priv->progressbar), 0.7);
             break;
         case BTCTL_STATUS_COMPLETE:
         case BTCTL_STATUS_ERROR:
-            gnomebt_chooser_populate_device_list (choose);
-            gnomebt_chooser_reset_progress_bar (choose);
-            choose->_priv->timeout_stop = 1;
-            gtk_widget_set_sensitive (GTK_WIDGET(choose), TRUE);
+            gtk_widget_set_sensitive (GTK_WIDGET(chooser->_priv->scanbutton),
+                TRUE);
+            /* g_message("scanning complete"); */
             break;
         default:
             break;
     }
-    gdk_threads_leave();
 }
-/*
-static gboolean
-timeout_cb (gpointer data)
-{
-    GnomebtChooser *chooser = GNOMEBT_CHOOSER(data);
-    if (chooser->_priv->timeout_stop == 1) 
-        return FALSE;
-    return TRUE;
-}
-*/
+
 %}
