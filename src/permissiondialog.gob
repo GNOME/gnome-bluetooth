@@ -1,0 +1,73 @@
+
+requires 2.0.0
+
+%{
+#include <gconf/gconf-client.h>
+#include "gnomebt-permissiondialog.h"
+
+%}
+
+%h{
+#include <glib.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gtk/gtk.h>
+#include <gnome.h>
+#include "gnomebt-controller.h"
+%}
+
+class Gnomebt:PermissionDialog from Gtk:Dialog {
+    private GtkWidget *okbutton;
+    private GtkWidget *cancelbutton;
+    private GtkWidget *rememberbutton;
+    private gint response = 0;
+
+    public GnomebtController *btmanager;
+
+    init (self)
+    {
+    }
+
+    private void
+    initialise_gui (self, const gchar *bdaddr, const gchar *title,
+        const gchar *explanation)
+	{
+        self->_priv->okbutton = GTK_WIDGET (gtk_dialog_add_button (
+            GTK_DIALOG(self), GTK_STOCK_OK, GTK_RESPONSE_OK));
+
+        gtk_dialog_add_buttons (GTK_DIALOG(self),
+            GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+            NULL);
+
+        gtk_dialog_set_default_response (GTK_DIALOG(self),
+            GTK_RESPONSE_CANCEL);
+
+        gtk_window_set_title (GTK_WINDOW(self),
+            title ? title : _("Connection request"));
+
+        gtk_window_set_position (GTK_WINDOW(self),
+            GTK_WIN_POS_MOUSE);
+
+        /* border & spacing */
+
+        gtk_box_set_spacing (
+            GTK_BOX (GTK_DIALOG(self)->vbox),
+            6);
+
+        gtk_widget_show_all (GTK_WIDGET(self));
+	}
+
+    public
+    GnomebtPermissionDialog *
+    new (GnomebtController *ctl, const gchar *bdaddr,
+        const gchar *title, const gchar *explanation)
+    {
+        GnomebtPermissionDialog *dlg = GNOMEBT_PERMISSIONDIALOG(GET_NEW);
+        dlg->btmanager = ctl;
+        gnomebt_permissiondialog_initialise_gui (dlg, bdaddr,
+            title, explanation);
+
+        return dlg;
+    }
+
+}
+

@@ -11,7 +11,7 @@ AM_CPPFLAGS = \
 	-I$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)/
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
-				gnomebt-chooser-test
+				gnomebt-chooser-test gnomebt-permissiondialog-test
 
 lib_LTLIBRARIES = libgnomebt.la
 if HAVE_PYTHON
@@ -22,7 +22,7 @@ endif
 
 libgnomebt_la_SOURCES = \
 	gnomebt-spinner.c gnomebt-icons.c gnomebt-icons.h \
-	gnomebt-chooser.c gnomebt-controller.c
+	gnomebt-chooser.c gnomebt-controller.c gnomebt-permissiondialog.c
 
 libgnomebt_la_LDFLAGS = \
 	-version-info 0:0:0
@@ -39,6 +39,12 @@ gnomebt_controller_test_SOURCES = \
 gnomebt_controller_test_LDADD = \
 	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
 
+gnomebt_permissiondialog_test_SOURCES = \
+	gnomebt-permissiondialog-test.c
+
+gnomebt_permissiondialog_test_LDADD = \
+	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
+
 gconftest_SOURCES = \
 	gconftest.c
 
@@ -46,12 +52,13 @@ gconftest_LDFLAGS = \
 	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS) $(SDP_LIBS)
 
 GOB_DIST = \
-	spinner.gob chooser.gob controller.gob
+	spinner.gob chooser.gob controller.gob permissiondialog.gob
 
 BUILT_SOURCES = \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
 	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
-	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h
+	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h \
+	gnomebt-permissiondialog.c gnomebt-permissiondialog.h gnomebt-permissiondialog-private.h
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
