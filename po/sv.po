@@ -1,6 +1,6 @@
 # Swedish messages for gnome-bluetooth.
-# Copyright (C) 2004 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2004.
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2004, 2005.
 #
 # $Id$
 #
@@ -8,13 +8,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-14 11:48+0200\n"
-"PO-Revision-Date: 2004-08-14 11:46+0200\n"
+"POT-Creation-Date: 2005-04-30 23:56+0200\n"
+"PO-Revision-Date: 2005-04-30 23:56+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: data/gnome-obex-server.schemas.in.h:1
+msgid "Directory to save received files"
+msgstr "Katalog för att spara mottagna filer"
+
+#: data/gnome-obex-server.schemas.in.h:2
+msgid "Display dialog when file received"
+msgstr "Visa dialogfönster då en fil mottags"
+
+#: data/gnome-obex-server.schemas.in.h:3
+msgid ""
+"Incoming files are saved automatically into this directory. If display-"
+"notification is set then the user gets chance to open or delete them."
+msgstr ""
+"Inkommande filer sparas automatiskt i denna katalog. Om displaynotifiering "
+"är aktiverat får användaren en möjlighet att öppna eller ta bort dem."
+
+#: data/gnome-obex-server.schemas.in.h:4
+msgid ""
+"Received files are automatically saved. If this option is set, then the user "
+"is prompted with a dialog which allows them to view or delete the received "
+"file."
+msgstr ""
+"Mottagna filer sparas automatiskt. Om detta alternativ är aktiverat kommer "
+"användaren att få ett dialogfönster som låter dem visa eller ta bort den "
+"mottagna filen."
 
 #: libegg/libegg/iconlist/eggiconlist.c:313
 msgid "Selection mode"
@@ -125,9 +151,8 @@ msgid "Stock ID for a stock image to display"
 msgstr ""
 
 #: libegg/libegg/tray/eggstatusicon.c:178
-#, fuzzy
 msgid "Animation"
-msgstr "Bekräftelse"
+msgstr "Animering"
 
 #: libegg/libegg/tray/eggstatusicon.c:179
 msgid "GdkPixbufAnimation to display"
@@ -146,14 +171,12 @@ msgid "Size"
 msgstr "Storlek"
 
 #: libegg/libegg/tray/eggstatusicon.c:196
-#, fuzzy
 msgid "The size of the icon"
-msgstr "Programmets version"
+msgstr "Storleken på ikonen"
 
 #: libegg/libegg/tray/eggstatusicon.c:205
-#, fuzzy
 msgid "Blinking"
-msgstr "Blanding"
+msgstr "Blinkande"
 
 #: libegg/libegg/tray/eggstatusicon.c:206
 msgid "Whether or not the status icon is blinking"
@@ -161,9 +184,8 @@ msgstr ""
 
 #: libegg/libegg/tray/eggtrayicon.c:118
 #: libegg/libegg/tray/eggtraymanager.c:145
-#, fuzzy
 msgid "Orientation"
-msgstr "Förälderplats:"
+msgstr "Orientering"
 
 #: libegg/libegg/tray/eggtrayicon.c:119
 #: libegg/libegg/tray/eggtraymanager.c:146
@@ -183,55 +205,51 @@ msgstr "GNOME Bluetooth-komponent"
 msgid "Send via Bluetooth..."
 msgstr "Skicka via Bluetooth..."
 
-#: obex/gnome-obex-send.c:61
-msgid "Bluetooth address of destination device"
-msgstr "Målenhetens Bluetooth-adress"
-
-#: obex/gnome-obex-send.c:160
+#: obex/gnome-obex-send.c:162
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Kan inte läsa filen \"%s\"."
 
-#: obex/gnome-obex-send.c:190
+#: obex/gnome-obex-send.c:192
 msgid "An error occurred while sending data."
 msgstr "Ett fel inträffade vid skickande av data."
 
-#: obex/gnome-obex-send.c:193
+#: obex/gnome-obex-send.c:195
 msgid "The remote device canceled the transfer."
 msgstr "Fjärrenheten avbröt överföringen."
 
-#: obex/gnome-obex-send.c:196
+#: obex/gnome-obex-send.c:198
 msgid "An unknown error occurred."
 msgstr "Ett oväntat fel inträffade."
 
-#: obex/gnome-obex-send.c:227
+#: obex/gnome-obex-send.c:229
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: obex/gnome-obex-send.c:274
+#: obex/gnome-obex-send.c:276
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Kan inte hitta användargränssnittsfil. Kontrollera din installation av gnome-"
 "bluetooth."
 
-#: obex/gnome-obex-send.c:289
+#: obex/gnome-obex-send.c:291
 msgid "Remote device doesn't support receiving objects."
 msgstr "Fjärrenheten stöder inte mottagande objekt."
 
-#: obex/gnome-obex-send.c:298
+#: obex/gnome-obex-send.c:300
 msgid "Can't initialize program."
 msgstr "Kan inte initiera program."
 
-#: obex/gnome-obex-send.c:304
+#: obex/gnome-obex-send.c:306
 msgid "Unable to connect to remote device."
 msgstr "Kan inte ansluta till fjärrenheten."
 
-#: obex/gnome-obex-server.c:86
+#: obex/gnome-obex-server.c:90
 msgid "Incoming Bluetooth Transfer"
 msgstr "Inkommande Bluetooth-överföring"
 
-#: obex/gnome-obex-server.c:87
+#: obex/gnome-obex-server.c:91
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
@@ -244,11 +262,13 @@ msgstr ""
 "Fjärrenheten försöker att skicka en fil till dig via Bluetooth. Vill du "
 "tillåta anslutningen?"
 
-#: obex/gnome-obex-server.c:88
+#: obex/gnome-obex-server.c:92
 msgid "Always accept files from this device."
 msgstr "Acceptera alltid filer från denna enhet."
 
-#: obex/gnome-obex-server.c:255
+#. add your name and email address in here if you've translated
+#. this program
+#: obex/gnome-obex-server.c:288
 msgid "translator-credits"
 msgstr ""
 "Christian Rose\n"
@@ -264,20 +284,20 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: obex/gnome-obex-server.c:265 obex/gnome-obex-server.c:317
+#: obex/gnome-obex-server.c:298 obex/gnome-obex-server.c:350
 #: obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth-fildelning"
 
-#: obex/gnome-obex-server.c:267
+#: obex/gnome-obex-server.c:300
 msgid "Receive files from Bluetooth devices"
 msgstr "Mottag filer från Bluetooth-enheter"
 
-#: obex/gnome-obex-server.c:374
+#: obex/gnome-obex-server.c:407
 msgid "Bluetooth File Server"
 msgstr "Bluetooth-filserver"
 
-#: obex/gnome-obex-server.c:412
+#: obex/gnome-obex-server.c:445
 msgid "Ready for Bluetooth file transfers"
 msgstr "Redo för Bluetooth-filöverföringar"
 
@@ -370,11 +390,11 @@ msgstr "Välj Bluetooth-enhet"
 msgid "Device"
 msgstr "Enhet"
 
-#: src/fileactiondialog.gob:129
+#: src/fileactiondialog.gob:130
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth-överföring mottagen"
 
-#: src/fileactiondialog.gob:136
+#: src/fileactiondialog.gob:137
 #, c-format
 msgid ""
 "<span weight='bold' size='larger'>File received from '%s'. What would you "
@@ -383,7 +403,7 @@ msgstr ""
 "<span weight='bold' size='larger'>Fil mottagen från \"%s\". Vad vill du göra?"
 "</span>"
 
-#: src/fileactiondialog.gob:164
+#: src/fileactiondialog.gob:165
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -433,6 +453,9 @@ msgstr "Bluetooth-filöverföring"
 #: ui/obex-send-strings.c:9
 msgid "Choose destination device"
 msgstr "Välj målenhet"
+
+#~ msgid "Bluetooth address of destination device"
+#~ msgstr "Målenhetens Bluetooth-adress"
 
 #~ msgid "Accept a file from '%s'?"
 #~ msgstr "Acceptera en fil från \"%s\"?"
