@@ -761,24 +761,28 @@ gnomebt_device_desc_ref (GnomebtDeviceDesc *desc)
 gchar *
 gnomebt_device_desc_get_name (GnomebtDeviceDesc *desc)
 {
+    g_return_if_fail (desc != NULL);
     return desc->name;
 }
 
 gchar *
 gnomebt_device_desc_get_bdaddr (GnomebtDeviceDesc *desc)
 {
+    g_return_if_fail (desc != NULL);
     return desc->bdaddr;
 }
 
 guint
 gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc)
 {
+    g_return_if_fail (desc != NULL);
     return desc->deviceclass;
 }
 
 void
 gnomebt_channel_list_free (GSList *list)
 {
+    g_return_if_fail (list != NULL);
     g_slist_free (list);
 }
 
