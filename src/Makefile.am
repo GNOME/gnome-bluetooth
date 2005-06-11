@@ -11,7 +11,7 @@ AM_CPPFLAGS = \
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
 	gnomebt-chooser-test gnomebt-permissiondialog-test \
-	gnomebt-fileactiondialog-test
+	gnomebt-fileactiondialog-test spinner-test
 
 lib_LTLIBRARIES = libgnomebt.la
 py_LTLIBRARIES = controller.la chooser.la
@@ -56,6 +56,12 @@ gnomebt_permissiondialog_test_SOURCES = \
 	gnomebt-permissiondialog-test.c
 
 gnomebt_permissiondialog_test_LDADD = \
+	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
+
+spinner_test_SOURCES = \
+	spinner-test.c
+
+spinner_test_LDADD = \
 	$(GNOME_BLUETOOTH_LIBS) libgnomebt.la
 
 gconftest_SOURCES = \

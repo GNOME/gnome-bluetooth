@@ -13,25 +13,6 @@
 
 #define TBDADDR "00:80:37:2A:B6:BC"
 
-static void status_callback(GnomebtController *bc,
-        gint    field,
-        gpointer data) {
-
-    printf("got status %d\n", field);
-    if (field == BTCTL_STATUS_COMPLETE || 
-            field == BTCTL_STATUS_ERROR) {
-        int *complete = (int*)data;
-        *complete = 1;
-    }
-}
-
-static void add_device_callback(GnomebtController *bc,
-        gchar*    name,
-        gpointer data) {
-
-    printf("got device %s\n", name);
-}
-
 static void device_name_callback(GnomebtController *bc,
         gchar*   device,
         gchar*   name,
@@ -39,16 +20,6 @@ static void device_name_callback(GnomebtController *bc,
 
     printf("device %s is called %s\n", device, name);
 }
-
-static void add_device_service_callback(GnomebtController *bc,
-                            gchar *addr, gchar *name, 
-                            guint clsid, guint channel,
-										gpointer data)
-{
-    printf("device %s (%s) has service %d channel %d\n",
-                addr, name, clsid, channel);
-}
-
 
 int main(int argc, char **argv)
 {
@@ -68,15 +39,8 @@ int main(int argc, char **argv)
      * which update the gconf registry with cached information
      */
     
-    g_signal_connect (G_OBJECT(bc), "status_change",
-                G_CALLBACK(status_callback), &complete);
-    g_signal_connect (G_OBJECT(bc), "add_device",
-                G_CALLBACK(add_device_callback), NULL);
     g_signal_connect (G_OBJECT(bc), "device_name",
                 G_CALLBACK(device_name_callback), NULL);
-    g_signal_connect (G_OBJECT(bc), "add_device_service",
-                G_CALLBACK(add_device_service_callback),
-                NULL);
 
     printf("Removing entry 00:40:8C:5E:5D:A4\n");
 
