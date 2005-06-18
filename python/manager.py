@@ -83,7 +83,7 @@ class BTManager (object):
         self.btctl.connect ("add_device", self.on_add_device)
 
 	if self.btctl.is_initialised() == gtk.FALSE:
-	    hig_alert.reportError (self.window, _("Could not find Bluetooth devices on the system"), _("Please make sure that your bluetooth adapter is correctly plugged in your machine."))
+	    hig_alert.reportError (self.window, _("Could not find Bluetooth devices on the system"), _("Please make sure that your Bluetooth adapter is correctly plugged in your machine."))
             sys.exit (1)
 
         self.read_devices ()
@@ -257,7 +257,7 @@ class BTManager (object):
             __appname__,
             __version__,
             _("Copyright \xc2\xa9 Edd Dumbill 2003"),
-            _("Manage remote bluetooth devices."),
+            _("Manage remote Bluetooth devices."),
             [ "Edd Dumbill <edd@usefulinc.com>" ],
             [],
             "",
