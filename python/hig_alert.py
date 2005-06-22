@@ -32,8 +32,8 @@ class HIGAlert(gtk.Dialog):
         gtk.Dialog.__init__(self, primaryText, parent, flags, buttons)
 
         self.set_border_width(6)
-        self.set_has_separator(gtk.FALSE)
-        self.set_resizable(gtk.FALSE)
+        self.set_has_separator(False)
+        self.set_resizable(False)
 
         self.vbox.set_spacing(12)
 
@@ -45,24 +45,24 @@ class HIGAlert(gtk.Dialog):
         image.set_from_stock(gtk.STOCK_DIALOG_ERROR, gtk.ICON_SIZE_DIALOG)
         alignment = gtk.Alignment(yalign=0.0)
         alignment.add(image)
-        hbox.pack_start(alignment, expand=gtk.FALSE)
+        hbox.pack_start(alignment, expand=False)
 
         
         vbox = gtk.VBox()
 
         primaryLabel = gtk.Label("")
-        primaryLabel.set_use_markup(gtk.TRUE)
+        primaryLabel.set_use_markup(True)
         primaryLabel.set_markup('<span weight="bold" size="larger">%s</span>\n' % (primaryText))
-        primaryLabel.set_line_wrap(gtk.TRUE)
+        primaryLabel.set_line_wrap(True)
         primaryLabel.set_alignment(0.0, 0.0)
-        primaryLabel.set_selectable(gtk.TRUE)
+        primaryLabel.set_selectable(True)
         
         secondaryLabel = gtk.Label("")
-        secondaryLabel.set_use_markup(gtk.TRUE)
+        secondaryLabel.set_use_markup(True)
         secondaryLabel.set_markup(secondaryText)
-        secondaryLabel.set_line_wrap(gtk.TRUE)
+        secondaryLabel.set_line_wrap(True)
         secondaryLabel.set_alignment(0.0, 0.0)
-        secondaryLabel.set_selectable(gtk.TRUE)
+        secondaryLabel.set_selectable(True)
         
         vbox.pack_start(primaryLabel)
         vbox.pack_end(secondaryLabel)

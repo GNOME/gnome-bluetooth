@@ -24,7 +24,7 @@ class HelloWorld:
         self.iconlist.set_sort_func (
                 lambda a, b, iconlist, userdata = None:
                     cmp (a.get_data(), b.get_data()))
-        self.iconlist.set_sorted (gtk.TRUE)
+        self.iconlist.set_sorted (True)
         
         self.scrolly = gtk.ScrolledWindow ()
         self.window.add (self.scrolly)
@@ -41,7 +41,7 @@ class HelloWorld:
             self.iconlist.append_item (ic)
 
     def delete_event (self, widget, event, data = None):
-        return gtk.FALSE
+        return False
 
     def destroy (self, widget, data = None):
         gtk.main_quit ()

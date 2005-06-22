@@ -82,7 +82,7 @@ class BTManager (object):
         self.btctl.connect ("status_change", self.on_status_change)
         self.btctl.connect ("add_device", self.on_add_device)
 
-	if self.btctl.is_initialised() == gtk.FALSE:
+	if not self.btctl.is_initialised():
 	    hig_alert.reportError (self.window, _("Could not find Bluetooth devices on the system"), _("Please make sure that your Bluetooth adapter is correctly plugged in your machine."))
             sys.exit (1)
 
@@ -139,7 +139,7 @@ class BTManager (object):
         menu.add (gtk.ImageMenuItem ('gnome-stock-about'), self.on_about)
         menuitem.set_submenu (menu)
         
-        self.statusbar = gnome.ui.AppBar (gtk.TRUE, gtk.TRUE, 
+        self.statusbar = gnome.ui.AppBar (True, True, 
                 gnome.ui.PREFERENCES_NEVER)
         self.window.set_statusbar (self.statusbar)
         self.window.set_menus (menubar)
@@ -151,7 +151,7 @@ class BTManager (object):
         self.iconlist.set_sort_func (
                 lambda a, b, iconlist, userdata = None:
                     cmp (a.get_data(), b.get_data()))
-        self.iconlist.set_sorted (gtk.TRUE)
+        self.iconlist.set_sorted (True)
 
         self.iconlist.drag_dest_set (gtk.DEST_DEFAULT_ALL, 
                 [("text/uri-list", 0, 0)],
@@ -160,7 +160,7 @@ class BTManager (object):
         
         self.scrolly = gtk.ScrolledWindow ()
         self.scrolly.set_shadow_type (gtk.SHADOW_IN)
-        vbox.pack_end (self.scrolly, expand = gtk.TRUE)
+        vbox.pack_end (self.scrolly, expand = True)
         self.scrolly.set_policy (gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.scrolly.add (self.iconlist)
 
@@ -187,7 +187,7 @@ class BTManager (object):
             self.iconlist.append_item (ic)
 
     def delete_event (self, widget, event, data = None):
-        return gtk.FALSE
+        return False
 
     def destroy (self, widget, data = None):
         gtk.main_quit ()
@@ -229,19 +229,19 @@ class BTManager (object):
             self.names_found = 0
         elif status == 4:
             self.statusbar.push (_("Scan complete."))
-            self.scanitem.set_sensitive (gtk.TRUE)
+            self.scanitem.set_sensitive (True)
             self.statusbar.set_progress_percentage (0.0)
             self.iconlist.clear ()
             self.read_devices ()
         elif status == 1:
             self.statusbar.push (_("Error during scan."))
             self.statusbar.set_progress_percentage (0.0)
-            self.scanitem.set_sensitive (gtk.TRUE)
+            self.scanitem.set_sensitive (True)
         else:
             print "Unhandled status %d" % status
 
     def on_scan (self, widget, data = None):
-        self.scanitem.set_sensitive (gtk.FALSE)
+        self.scanitem.set_sensitive (False)
         self.btctl.discover_async ()
 
     def on_delete (self, widget, data = None):
