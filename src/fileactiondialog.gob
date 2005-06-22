@@ -72,7 +72,7 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
 	private void
 	initialise_gui (self, const gchar *dname)
 	{
-		gchar *exp, *sizetext;
+		gchar *exp, *sizetext, *msg;
 		GtkWidget *hbox,*vbox,*img;
         GtkWidget *iconbox, *iconimg;
         GtkWidget *detailslabel;
@@ -132,9 +132,10 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
 		gtk_window_set_position (GTK_WINDOW(self),
 			GTK_WIN_POS_MOUSE);
 
-        /* FIXME: dname needs escaping */
-		exp = g_strdup_printf (
-				_("<span weight='bold' size='larger'>File received from '%s'. What would you like to do?</span>"), dname);
+		/* FIXME: dname needs escaping */
+		msg = g_strdup_printf (_("File received from '%s'. What would you like to do?"), dname);
+		exp = g_strdup_printf ("<span weight='bold' size='larger'>%s</span>", msg);
+		g_free (msg);
 
 		self->_priv->label = GTK_WIDGET (gtk_label_new (NULL));
 
