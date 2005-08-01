@@ -36,7 +36,7 @@ requires 2.0.0
 static void remember_cb (GtkToggleButton *button, gpointer user_data);
 %}
 
-class Gnomebt:PermissionDialog from Gtk:Dialog {
+class Gnomebt:PermissionDialog from Gtk:Message:Dialog {
     private GtkWidget *okbutton;
     private GtkWidget *cancelbutton;
     private GtkWidget *label;
@@ -59,35 +59,28 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
     initialise_gui (self, const gchar *bdaddr, const gchar *title,
         const gchar *explanation, const gchar *alwaystext)
 	{
+	gchar *title_markup, *title_device;
         gchar *exp;
         gchar *dname;
         GtkWidget *hbox,*vbox,*img;
+	GValue value = { 0, };
 
         /* border & spacing */
-        gtk_box_set_spacing (GTK_BOX (GTK_DIALOG(self)->vbox), 12);
-        gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
-        gtk_dialog_set_has_separator (GTK_DIALOG (self), FALSE);
-
-        gtk_container_set_border_width (GTK_CONTAINER (self), 6);
-
-
         hbox = GTK_WIDGET (gtk_hbox_new (FALSE, 12));
         gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
 
-        gtk_container_add (GTK_CONTAINER(GTK_DIALOG(self)->vbox), 
-            hbox);
+        gtk_container_add (GTK_CONTAINER(GTK_DIALOG(self)->vbox), hbox);
 
         vbox = GTK_WIDGET (gtk_vbox_new (FALSE, 12));
 
         gtk_window_set_icon (GTK_WINDOW (self), self->_priv->icon);
 
         /* image */
-        img = GTK_WIDGET (gtk_image_new_from_stock (GTK_STOCK_DIALOG_QUESTION, 
-                GTK_ICON_SIZE_DIALOG));
-        gtk_misc_set_alignment (GTK_MISC (img), 0.0, 0.0);
+	g_value_init (&value, GTK_TYPE_INT);
+	g_value_set_int (&value, GTK_MESSAGE_QUESTION);
+	g_object_set_property (G_OBJECT (self), "message-type", &value);
 
         /* fill up hbox */
-        gtk_container_add (GTK_CONTAINER(hbox), img);
         gtk_container_add (GTK_CONTAINER(hbox), vbox);
 
         /* make widgets */
@@ -98,38 +91,36 @@ class Gnomebt:PermissionDialog from Gtk:Dialog {
         self->_priv->okbutton = GTK_WIDGET (gtk_dialog_add_button (
             GTK_DIALOG(self), GTK_STOCK_OK, GTK_RESPONSE_OK));
 
-
         gtk_dialog_set_default_response (GTK_DIALOG(self),
             GTK_RESPONSE_OK);
 
-        gtk_window_set_title (GTK_WINDOW(self),
-            title ? title : _("Connection Request"));
+        gtk_window_set_title (GTK_WINDOW(self),"");
 
         gtk_window_set_position (GTK_WINDOW(self),
             GTK_WIN_POS_MOUSE);
 
-        /* we create an explanatory message from explanation, with
-           the '%s' exchanged for the device name */
-
         dname = gnomebt_controller_get_device_preferred_name (self->btmanager, bdaddr);
 
-        exp = g_strdup_printf (explanation ? explanation :
-                _("<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</span>\n\nAn external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."), 
-            (dname != NULL ? dname : bdaddr));
+        if (!title) {
+            title_device = g_strdup_printf
+	        (_("Allow Bluetooth device '%s' to connect?"),
+                (dname != NULL ? dname : bdaddr));
+	} else{
+	    title_device = g_strdup_printf
+	        (title, (dname != NULL ? dname : bdaddr));
+	}
 
-        if (dname)
-            g_free (dname);
+	title_markup = g_strdup_printf ("<span weight='bold' size='larger'>%s</span>", title_device);
+	g_free (title_device);
+	g_free (dname);
 
-        self->_priv->label = GTK_WIDGET (gtk_label_new (NULL));
+        gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (self), title_markup);
+	g_free (title_markup);
 
-        gtk_label_set_markup (GTK_LABEL (self->_priv->label), exp);
-        gtk_label_set_selectable (GTK_LABEL (self->_priv->label), TRUE);
-        gtk_label_set_line_wrap (GTK_LABEL (self->_priv->label), TRUE);
-        gtk_misc_set_alignment (GTK_MISC (self->_priv->label), 0.0, 0.0);
-
-        gtk_container_add (GTK_CONTAINER (vbox), self->_priv->label);
-
-        g_free (exp);
+        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (self),
+	    "%s", explanation ? explanation :
+	    _("An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."));
+        g_free (title_markup);
 
         /* remember this button */
 

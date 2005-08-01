@@ -87,8 +87,8 @@ allowed_to_put (MyApp *app, const gchar *bdaddr)
 		return FALSE;
 
 	dlg = gnomebt_permissiondialog_new (app->btctl,
-			bdaddr, _("Incoming Bluetooth Transfer"),
-			_("<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n\nThe remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"),
+			bdaddr, _("Accept a file from '%s'?"),
+			_("The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"),
 			_("Always accept files from this device."));
 	result = gtk_dialog_run (GTK_DIALOG (dlg));
 

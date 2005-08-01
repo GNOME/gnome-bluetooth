@@ -12,9 +12,9 @@ int main(int argc, char **argv)
     gtk_init (&argc, &argv);
     btctl = gnomebt_controller_new ();
     dlg = gnomebt_permissiondialog_new (btctl, 
-            "00:80:37:2A:B6:BC", "File transfer requested",
-            "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n\nThe remote device is attempting to send you a file via Bluetooth.",
-			"Always accept files from this device.");
+            "00:80:37:2A:B6:BC", "Accept a file from '%s'?",
+            "The remote device is attempting to send you a file via Bluetooth.",
+	    "Always accept files from this device.");
     result = gtk_dialog_run (GTK_DIALOG (dlg));
     switch (result) {
         case GTK_RESPONSE_OK:
