@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-05 11:35+0000\n"
-"PO-Revision-Date: 2005-07-05 22:09+0200\n"
+"POT-Creation-Date: 2005-08-05 03:40+0000\n"
+"PO-Revision-Date: 2005-08-05 12:18+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -230,21 +230,15 @@ msgid "Unable to connect to remote device."
 msgstr "Nemohu se připojit ke vzdálenému zařízení."
 
 #: ../obex/gnome-obex-server.c:90
-msgid "Incoming Bluetooth Transfer"
-msgstr "Příchozí přenos Bluetooth"
+#, c-format
+msgid "Accept a file from '%s'?"
+msgstr "Přijmout soubor od '%s'?"
 
 #: ../obex/gnome-obex-server.c:91
-#, c-format
 msgid ""
-"<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
-"\n"
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
-msgstr ""
-"<span weight='bold' size='larger'>Přijmout soubor od '%s'?</span>\n"
-"\n"
-"Vzdálené zařízení se pokouší vám odeslat soubor přes Bluetooth. Chcete "
-"připojení povolit?"
+msgstr "Vzdálené zařízení se pokouší vám odeslat soubor přes Bluetooth. Chcete připojení povolit?"
 
 #: ../obex/gnome-obex-server.c:92
 msgid "Always accept files from this device."
@@ -307,7 +301,9 @@ msgstr "Nemohu v systému najít zařízení Bluetooth"
 msgid ""
 "Please make sure that your Bluetooth adapter is correctly plugged in your "
 "machine."
-msgstr "Zkontrolujte prosím, jestli je váš adaptér pro Bluetooth správně připojen k počítači."
+msgstr ""
+"Zkontrolujte prosím, jestli je váš adaptér pro Bluetooth správně připojen k "
+"počítači."
 
 #: ../python/manager.py:97
 msgid "Bluetooth devices"
@@ -394,25 +390,17 @@ msgstr ""
 "<span weight='bold'>Velikost:</span> %s"
 
 #: ../src/permissiondialog.gob:106
-msgid "Connection Request"
-msgstr "Požadavek na připojení"
-
-#: ../src/permissiondialog.gob:117
 #, c-format
+msgid "Allow Bluetooth device '%s' to connect?"
+msgstr "Povolit zařízení Bluetooth '%s' připojit se?"
+
+#: ../src/permissiondialog.gob:122
 msgid ""
-"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</"
-"span>\n"
-"\n"
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
-msgstr ""
-"<span weight='bold' size='larger'>Povolit zařízení Bluetooth '%s' připojit "
-"se?</span>\n"
-"\n"
-"Externí zařízení se pokouší připojit k vašemu počítači přes Bluetooh. Musíte "
-"se rozhodnout, jestli chcete připojení přijmout."
+msgstr "Externí zařízení se pokouší připojit k vašemu počítači přes Bluetooh. Musíte se rozhodnout, jestli chcete připojení přijmout."
 
-#: ../src/permissiondialog.gob:138
+#: ../src/permissiondialog.gob:129
 msgid "_Always allow this device to connect."
 msgstr "_Vždy tomuto zařízení povoilt připojení."
 
@@ -423,6 +411,12 @@ msgstr "<span weight=\"bold\" size=\"larger\">Odesílám soubor</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Přenos souborů přes Bluetooth"
+
+#~ msgid "Incoming Bluetooth Transfer"
+#~ msgstr "Příchozí přenos Bluetooth"
+
+#~ msgid "Connection Request"
+#~ msgstr "Požadavek na připojení"
 
 #~ msgid "GNOME Bluetooth Component send operations"
 #~ msgstr "Operace odeílání komponenty GNOME Bluetooth"
