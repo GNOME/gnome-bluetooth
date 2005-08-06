@@ -49,6 +49,8 @@ AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 DEFSDIR=`pkg-config --variable=defsdir pygtk-2.0`
 AC_SUBST(DEFSDIR)
+CODEGENDIR=`pkg-config --variable codegendir pygtk-2.0`
+AC_SUBST(CODEGENDIR)
 
 BLUEZ_PATH_BLUETOOTH([], AC_MSG_ERROR([libbluetooth is required to build this software - part of bluez-libs]))
 

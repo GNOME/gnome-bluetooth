@@ -102,10 +102,10 @@ CLEANFILES = $(PYTHON_CLEANFILES)
 regenerate-defs: gnomebt-controller.defs gnomebt-chooser.defs
 
 gnomebt-controller.defs: gnomebt-controller.h
-	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
+	python $(CODEGENDIR)/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
 
 gnomebt-chooser.defs: gnomebt-chooser.h
-	python /usr/share/pygtk/2.0/codegen/h2def.py -v gnomebt-chooser.h > gnomebt-chooser.defs
+	python $(CODEGENDIR)/h2def.py -v gnomebt-chooser.h > gnomebt-chooser.defs
 
 gnomebt-controller-py.c: gnomebt-controller.defs gnomebt-controller.override
 	pygtk-codegen-2.0 --prefix controller \
