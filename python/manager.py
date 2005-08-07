@@ -139,8 +139,7 @@ class BTManager (object):
         menu.add (gtk.ImageMenuItem ('gnome-stock-about'), self.on_about)
         menuitem.set_submenu (menu)
         
-        self.statusbar = gnome.ui.AppBar (True, True, 
-                gnome.ui.PREFERENCES_NEVER)
+        self.statusbar = gnome.ui.AppBar (True, True)
         self.window.set_statusbar (self.statusbar)
         self.window.set_menus (menubar)
         menubar.show_all ()
