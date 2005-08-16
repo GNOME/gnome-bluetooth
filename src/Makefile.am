@@ -99,8 +99,6 @@ PYTHON_DIST = \
 EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
 CLEANFILES = $(PYTHON_CLEANFILES)
 
-regenerate-defs: gnomebt-controller.defs gnomebt-chooser.defs
-
 gnomebt-controller.defs: gnomebt-controller.h
 	python $(CODEGENDIR)/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs
 
