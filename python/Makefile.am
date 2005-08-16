@@ -30,6 +30,7 @@ iconlist_la_LIBADD = \
 EXTRA_DIST = iconlist.defs iconlist.override \
 			 gnome-bluetooth-manager.desktop.in \
 			 $(python_DATA) gnome-bluetooth-manager
+			 $(noinst_PYTHON)
 
 iconlist.c: iconlist.defs iconlist.override
 	pygtk-codegen-2.0 --prefix iconlist \
