@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-23 11:35+0000\n"
-"PO-Revision-Date: 2005-06-24 12:24+0200\n"
+"POT-Creation-Date: 2005-08-16 11:36+0000\n"
+"PO-Revision-Date: 2005-08-16 16:43+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: ../data/gnome-obex-server.schemas.in.h:1
@@ -230,19 +230,15 @@ msgid "Unable to connect to remote device."
 msgstr "Nem lehet kapcsolódni távoli eszközhöz."
 
 #: ../obex/gnome-obex-server.c:90
-msgid "Incoming Bluetooth Transfer"
-msgstr "Bejövő Bluetooth átvitel"
+#, c-format
+msgid "Accept a file from '%s'?"
+msgstr "Elfogadja a fájlt a következőtől: \"%s\"?"
 
 #: ../obex/gnome-obex-server.c:91
-#, c-format
 msgid ""
-"<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
-"\n"
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
 msgstr ""
-"<span weight='bold' size='larger'>Elfogadja a fájlt ettől: \"%s\"</span>\n"
-"\n"
 "A távoli eszköz Bluetooth-on keresztül próbál Önnek küldeni egy fájlt. "
 "Engedélyezni kívánja a kapcsolatot?"
 
@@ -331,37 +327,37 @@ msgstr "S_zerkesztés"
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../python/manager.py:210
+#: ../python/manager.py:209
 #, python-format
 msgid "Found device %s."
 msgstr "%s eszközt érzékeltem."
 
-#: ../python/manager.py:215
+#: ../python/manager.py:214
 #, python-format
 msgid "Device %s is called '%s'."
 msgstr "%s eszköz neve: \"%s\"."
 
-#: ../python/manager.py:223
+#: ../python/manager.py:222
 msgid "Scanning for devices..."
 msgstr "Eszközök keresése..."
 
-#: ../python/manager.py:227
+#: ../python/manager.py:226
 msgid "Retrieving device names..."
 msgstr "Eszköznevek letöltése..."
 
-#: ../python/manager.py:231
+#: ../python/manager.py:230
 msgid "Scan complete."
 msgstr "Keresés befejezve."
 
-#: ../python/manager.py:237
+#: ../python/manager.py:236
 msgid "Error during scan."
 msgstr "Hiba a keresés közben."
 
-#: ../python/manager.py:259
+#: ../python/manager.py:258
 msgid "Copyright Â© Edd Dumbill 2003"
 msgstr "Copyright © Edd Dumbill 2003"
 
-#: ../python/manager.py:260
+#: ../python/manager.py:259
 msgid "Manage remote Bluetooth devices."
 msgstr "Távoli Bluetooth eszközök kezelése."
 
@@ -395,25 +391,19 @@ msgstr ""
 "<span weight='bold'>Méret:</span> %s"
 
 #: ../src/permissiondialog.gob:106
-msgid "Connection Request"
-msgstr "Kapcsolatkérés"
-
-#: ../src/permissiondialog.gob:117
 #, c-format
+msgid "Allow Bluetooth device '%s' to connect?"
+msgstr "Engedélyezi \"%s\" Bluetooth eszköz kapcsolódását?"
+
+#: ../src/permissiondialog.gob:122
 msgid ""
-"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</"
-"span>\n"
-"\n"
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
 msgstr ""
-"<span weight='bold' size='larger'>Engedélyezi \"%s\" Bluetooth eszköz "
-"kapcsolódását?</span>\n"
-"\n"
 "Egy külső eszköz Bluetooth-on keresztül próbál kapcsolódni az Ön "
 "számítógépéhez. El kell döntenie, elfogadja-e a kapcsolatot."
 
-#: ../src/permissiondialog.gob:138
+#: ../src/permissiondialog.gob:129
 msgid "_Always allow this device to connect."
 msgstr "_Mindig engedélyezem ezen eszköz kapcsolódását."
 
