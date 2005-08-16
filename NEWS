@@ -2,7 +2,22 @@ gnome-bluetooth 0.6.0
 =====================
 
  * gnome-obex-server: Now preserves timestamps of reserved files (Tumoas
-   Salo). 
+   Salo).
+
+ * Save received files to the path specified in the
+   /apps/gnome-obex-server/savedir GConf key
+
+ * Remove the nautilus extension, sending files over Bluetooth devices is
+   now handled though nautilus-sendto (Bastien Nocera)
+
+ * Make gnome-bluetooth-manager run with newer PyGTK (Olav Vitters,
+   Harald Hoyer)
+
+ * Make dialogues comply better with the HIG (Bastien Nocera)
+
+ * Add a test program for the spinner widget (Bastien Nocera)
+
+ * Build fixes (Bastien Nocera)
 
  * Updated translations:
 	cs: Miloslav Trmac 

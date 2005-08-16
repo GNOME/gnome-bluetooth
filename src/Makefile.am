@@ -32,7 +32,7 @@ pkginclude_HEADERS = \
 gnomebt-chooser.lo: gnomebt-controller.h gnomebt-spinner.h
 
 libgnomebt_la_LDFLAGS = \
-	-version-info 0:0:0
+	-version-info $(GNOMEBT_LT_VERSION)
 
 gnomebt_chooser_test_SOURCES = \
 	gnomebt-chooser-test.c
