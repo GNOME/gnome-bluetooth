@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME Bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 03:34+0000\n"
-"PO-Revision-Date: 2005-06-20 01:22+0200\n"
+"POT-Creation-Date: 2005-08-16 11:36+0000\n"
+"PO-Revision-Date: 2005-08-16 21:20+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -231,19 +231,15 @@ msgid "Unable to connect to remote device."
 msgstr "Niet in staat te verbinden met apparaat op afstand."
 
 #: ../obex/gnome-obex-server.c:90
-msgid "Incoming Bluetooth Transfer"
-msgstr "Binnenkomende Bluetooth-overdracht"
+#, c-format
+msgid "Accept a file from '%s'?"
+msgstr "Een bestand van '%s' accepteren?"
 
 #: ../obex/gnome-obex-server.c:91
-#, c-format
 msgid ""
-"<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
-"\n"
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
 msgstr ""
-"<span weight='bold' size='larger'>Bestand van '%s' accepteren?</span>\n"
-"\n"
 "Het apparaat op afstand probeert u bestand te sturen via Bluetooth. Wenst u "
 "de verbinding toe te staan?"
 
@@ -309,8 +305,8 @@ msgid ""
 "Please make sure that your Bluetooth adapter is correctly plugged in your "
 "machine."
 msgstr ""
-"Zorg alstublieft dat uw Bluetooth-adapter correct op uw computer "
-"aangesloten is."
+"Zorg alstublieft dat uw Bluetooth-adapter correct op uw computer aangesloten "
+"is."
 
 #: ../python/manager.py:97
 msgid "Bluetooth devices"
@@ -332,37 +328,37 @@ msgstr "Be_werken"
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../python/manager.py:210
+#: ../python/manager.py:209
 #, python-format
 msgid "Found device %s."
 msgstr "Apparaat %s gevonden."
 
-#: ../python/manager.py:215
+#: ../python/manager.py:214
 #, python-format
 msgid "Device %s is called '%s'."
 msgstr "Apparaat %s heet '%s'."
 
-#: ../python/manager.py:223
+#: ../python/manager.py:222
 msgid "Scanning for devices..."
 msgstr "Bezig met apparaten scannen..."
 
-#: ../python/manager.py:227
+#: ../python/manager.py:226
 msgid "Retrieving device names..."
 msgstr "Ophalen van apparaatnamen..."
 
-#: ../python/manager.py:231
+#: ../python/manager.py:230
 msgid "Scan complete."
 msgstr "Scan afgerond."
 
-#: ../python/manager.py:237
+#: ../python/manager.py:236
 msgid "Error during scan."
 msgstr "Er is een fout opgetreden tijds het scannen."
 
-#: ../python/manager.py:259
+#: ../python/manager.py:258
 msgid "Copyright Â© Edd Dumbill 2003"
 msgstr "Copyright © Edd Dumbill 2003"
 
-#: ../python/manager.py:260
+#: ../python/manager.py:259
 msgid "Manage remote Bluetooth devices."
 msgstr "Bluetooth-apparaten op afstand beheren."
 
@@ -378,16 +374,13 @@ msgstr "Apparaat"
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth-overdracht ontvangen"
 
-#: ../src/fileactiondialog.gob:137
+#. FIXME: dname needs escaping
+#: ../src/fileactiondialog.gob:136
 #, c-format
-msgid ""
-"<span weight='bold' size='larger'>File received from '%s'. What would you "
-"like to do?</span>"
-msgstr ""
-"<span weight='bold' size='larger'>Bestand van '%s' ontvangen. Wat wilt u "
-"doen?</span>"
+msgid "File received from '%s'. What would you like to do?"
+msgstr "Bestand van '%s' ontvangen. Wat wilt u doen?"
 
-#: ../src/fileactiondialog.gob:165
+#: ../src/fileactiondialog.gob:166
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -399,25 +392,19 @@ msgstr ""
 "<span weight='bold'>Grootte:</span> %s"
 
 #: ../src/permissiondialog.gob:106
-msgid "Connection Request"
-msgstr "Verbindingsaanvraag"
-
-#: ../src/permissiondialog.gob:117
 #, c-format
+msgid "Allow Bluetooth device '%s' to connect?"
+msgstr "Bluetooth-apparaat '%s' toestaan te verbinden?"
+
+#: ../src/permissiondialog.gob:122
 msgid ""
-"<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?</"
-"span>\n"
-"\n"
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
 msgstr ""
-"<span weight='bold' size='larger'>Bluetooth apparaat '%s' toestaan te "
-"verbinden?</span>\n"
-"\n"
 "Een extern apparaat tracht met uw computer te verbinden via Bluetooth. U "
 "dient te beslissen of u de verbinding wenst te accepteren."
 
-#: ../src/permissiondialog.gob:138
+#: ../src/permissiondialog.gob:129
 msgid "_Always allow this device to connect."
 msgstr "Bestanden van _dit apparaat altijd accepteren."
 
@@ -428,6 +415,12 @@ msgstr "<span weight=\"bold\" size=\"larger\">Bestand aan het versturen</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth bestandsoverdracht"
+
+#~ msgid "Incoming Bluetooth Transfer"
+#~ msgstr "Binnenkomende Bluetooth-overdracht"
+
+#~ msgid "Connection Request"
+#~ msgstr "Verbindingsaanvraag"
 
 #~ msgid "GNOME Bluetooth Component send operations"
 #~ msgstr "GNOME Bluetooth-component verzendoperaties"
