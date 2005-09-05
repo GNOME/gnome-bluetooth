@@ -1,3 +1,9 @@
+2005-09-05  Bastien Nocera  <hadess@hadess.net>
+
+	* src/controller.gob: fix 2 memory leaks, gconf_client_get_string
+	already returns a newly-allocated string
+	* src/permissiondialog.gob: fix a double-free
+
 2005-08-24  Pawan Chitrakar  <pchitrakar@gmail.com>
 
 	* configure.in: Added ne in ALL_LINGUAS

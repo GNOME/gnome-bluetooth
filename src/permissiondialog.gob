@@ -120,7 +120,6 @@ class Gnomebt:PermissionDialog from Gtk:Message:Dialog {
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (self),
 	    "%s", explanation ? explanation :
 	    _("An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."));
-        g_free (title_markup);
 
         /* remember this button */
 

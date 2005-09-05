@@ -123,8 +123,6 @@ class Gnomebt:Controller from Btctl:Controller {
         if (err) {
             g_clear_error (&err);
             return NULL;
-        } else {
-            name=g_strdup (name);
         }
         return name;
     }
@@ -204,8 +202,6 @@ class Gnomebt:Controller from Btctl:Controller {
         if (err) {
             g_clear_error (&err);
             return NULL;
-        } else {
-            name=g_strdup (name);
         }
         return name;
     }
