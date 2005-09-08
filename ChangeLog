@@ -1,3 +1,13 @@
+2005-09-09  Bastien Nocera  <hadess@hadess.net>
+
+	* autogen.sh: required automake 1.8
+	* configure.in: dist as .tar.bz2 and checking the NEWS file before
+	make dist
+	* src/fileactiondialog.gob: don't use uri after it was freed, make
+	sure that a URI was created before using it
+	* src/gnomebt-fileactiondialog-test.c: (main): check that the
+	files exist before running the tests
+
 2005-09-05  Bastien Nocera  <hadess@hadess.net>
 
 	* src/controller.gob: fix 2 memory leaks, gconf_client_get_string

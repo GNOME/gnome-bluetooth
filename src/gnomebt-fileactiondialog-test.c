@@ -6,7 +6,7 @@
 static const gchar *fnames[] = {
 	"/tmp/picture.jpg",
 	"/etc/motd",
-	"/vmlinuz",
+	"/tmp/vmlinuz",
 	"/tmp/README",
 	NULL
 };
@@ -16,9 +16,23 @@ int main(int argc, char **argv)
 	GnomebtFileActionDialog *dlg;
 	gint result;
 	gint i = 0;
+	gboolean bad = FALSE;
 	
 	gtk_init (&argc, &argv);
 
+	while (fnames[i]) {
+		if (g_file_test (fnames[i], G_FILE_TEST_EXISTS) == FALSE) {
+			g_warning ("%s doesn't exist", fnames[i]);
+			bad = TRUE;
+		}
+		i++;
+	}
+	if (bad != FALSE) {
+		g_warning ("Please fix the errors above before continuing");
+		return 1;
+	}
+
+	i = 0;
 	while (fnames [i]) {
 	
 		dlg = gnomebt_fileactiondialog_new (

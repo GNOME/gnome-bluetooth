@@ -200,7 +200,8 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
             gnome_vfs_init ();
 
         uri = (gchar *) gnome_vfs_get_uri_from_local_path ((const char *)fname);
-
+	if (uri == NULL)
+	    return NULL;
 
         inf = gnome_vfs_file_info_new ();
         res = gnome_vfs_get_file_info (uri, inf,
@@ -223,9 +224,9 @@ class Gnomebt:FileActionDialog from Gtk:Dialog {
             gnomebt_fileactiondialog_initialise_gui (dlg, devname);
         } else {
             g_free (inf);
+	    g_warning ("gnome_vfs_get_file_info returned error %d for uri %s", res, uri);
             g_free (uri);
-            g_warning ("gnome_vfs_get_file_info returned error %d for uri %s", res, uri);
-        }
+                    }
         return dlg;
 	}
 
