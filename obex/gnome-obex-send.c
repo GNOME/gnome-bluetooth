@@ -101,6 +101,14 @@ update_gui (MyApp *app)
 	gtk_progress_bar_set_fraction( GTK_PROGRESS_BAR (bar), frac);
 }
 
+static gboolean
+is_palm_device (const char *bdaddr)
+{
+	return (g_str_has_prefix (bdaddr, "00:04:6B")
+			|| g_str_has_prefix (bdaddr, "00:07:E0")
+			|| g_str_has_prefix (bdaddr, "00:0E:20"));
+}
+
 static void
 report_error (const gchar *msg) {
 	GtkWidget *dialog;
@@ -288,7 +296,11 @@ main (int argc, char *argv[])
 	channel = get_obex_channel (bdaddrstr);
 
 	if (channel < 1) {
-		report_error (_("Remote device doesn't support receiving objects."));
+		if (is_palm_device (bdaddrstr)) {
+			report_error (_("Make sure \"Beam receive\" is enabled in the Power preferences, and Bluetooth is enabled."));
+		} else {
+			report_error (_("Remote device doesn't support receiving objects."));
+		}
 		g_free (app);
 		return 1;
 	}
