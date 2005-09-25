@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-05 03:40+0000\n"
-"PO-Revision-Date: 2005-08-05 12:18+0200\n"
+"POT-Creation-Date: 2005-09-25 18:54+0200\n"
+"PO-Revision-Date: 2005-09-25 22:37+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -189,43 +189,49 @@ msgstr "Orientace"
 msgid "The orientation of the tray."
 msgstr "Orientace oznamovací oblasti."
 
-#: ../obex/gnome-obex-send.c:162
+#: ../obex/gnome-obex-send.c:170
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Nemohu číst soubor '%s'."
 
-#: ../obex/gnome-obex-send.c:192
+#: ../obex/gnome-obex-send.c:200
 msgid "An error occurred while sending data."
 msgstr "Při odesílání dat došlo k chybě."
 
-#: ../obex/gnome-obex-send.c:195
+#: ../obex/gnome-obex-send.c:203
 msgid "The remote device canceled the transfer."
 msgstr "Vzdálené zařízení zrušilo přenos."
 
-#: ../obex/gnome-obex-send.c:198
+#: ../obex/gnome-obex-send.c:206
 msgid "An unknown error occurred."
 msgstr "Došlo k neznámé chybě."
 
-#: ../obex/gnome-obex-send.c:229
+#: ../obex/gnome-obex-send.c:237
 msgid "Connecting..."
 msgstr "Připojuji se..."
 
-#: ../obex/gnome-obex-send.c:276
+#: ../obex/gnome-obex-send.c:284
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Nemohu najít soubor uživatelského rozhraní, zkontrolujte vaši instalaci "
 "gnome-bluetooth."
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:300
+msgid ""
+"Make sure \"Beam receive\" is enabled in the Power preferences, and "
+"Bluetooth is enabled."
+msgstr "Přesvědčte se, že \"Příjem paprsku\" je povolen v Nastavení napájení a že je povolen Bluetooth."
+
+#: ../obex/gnome-obex-send.c:302
 msgid "Remote device doesn't support receiving objects."
 msgstr "Vzdálené zařízení nepodporuje příjem objektů."
 
-#: ../obex/gnome-obex-send.c:300
+#: ../obex/gnome-obex-send.c:312
 msgid "Can't initialize program."
 msgstr "Nemohu inicializovat program."
 
-#: ../obex/gnome-obex-send.c:306
+#: ../obex/gnome-obex-send.c:318
 msgid "Unable to connect to remote device."
 msgstr "Nemohu se připojit ke vzdálenému zařízení."
 
@@ -238,7 +244,9 @@ msgstr "Přijmout soubor od '%s'?"
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
-msgstr "Vzdálené zařízení se pokouší vám odeslat soubor přes Bluetooth. Chcete připojení povolit?"
+msgstr ""
+"Vzdálené zařízení se pokouší vám odeslat soubor přes Bluetooth. Chcete "
+"připojení povolit?"
 
 #: ../obex/gnome-obex-server.c:92
 msgid "Always accept files from this device."
@@ -325,38 +333,38 @@ msgstr "_Upravit"
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../python/manager.py:210
+#: ../python/manager.py:209
 #, python-format
 msgid "Found device %s."
 msgstr "Nalezeno zařízení %s."
 
-#: ../python/manager.py:215
+#: ../python/manager.py:214
 #, python-format
 msgid "Device %s is called '%s'."
 msgstr "Zařízení %s se jmenuje '%s'."
 
-#: ../python/manager.py:223
+#: ../python/manager.py:222
 msgid "Scanning for devices..."
 msgstr "Hledám zařízení..."
 
-#: ../python/manager.py:227
+#: ../python/manager.py:226
 msgid "Retrieving device names..."
 msgstr "Získávám jména zařízení..."
 
-#: ../python/manager.py:231
+#: ../python/manager.py:230
 msgid "Scan complete."
 msgstr "Hledání dokončeno."
 
-#: ../python/manager.py:237
+#: ../python/manager.py:236
 msgid "Error during scan."
 msgstr "Chyba při hledání."
 
 # What's this?
-#: ../python/manager.py:259
+#: ../python/manager.py:258
 msgid "Copyright Â© Edd Dumbill 2003"
 msgstr "Copyright © Edd Dumbill 2003"
 
-#: ../python/manager.py:260
+#: ../python/manager.py:259
 msgid "Manage remote Bluetooth devices."
 msgstr "Spravovat vzdálená zařízení bluetooth."
 
@@ -398,9 +406,11 @@ msgstr "Povolit zařízení Bluetooth '%s' připojit se?"
 msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
-msgstr "Externí zařízení se pokouší připojit k vašemu počítači přes Bluetooh. Musíte se rozhodnout, jestli chcete připojení přijmout."
+msgstr ""
+"Externí zařízení se pokouší připojit k vašemu počítači přes Bluetooh. Musíte "
+"se rozhodnout, jestli chcete připojení přijmout."
 
-#: ../src/permissiondialog.gob:129
+#: ../src/permissiondialog.gob:128
 msgid "_Always allow this device to connect."
 msgstr "_Vždy tomuto zařízení povoilt připojení."
 
