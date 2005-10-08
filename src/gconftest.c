@@ -193,7 +193,7 @@ main (int argc, char **argv)
 
   remove_all_devices(client);
 
-  bc=btctl_controller_new();
+  bc=btctl_controller_new(NULL);
 
   g_signal_connect (G_OBJECT(bc), "add_device",
 					G_CALLBACK(add_device_callback),

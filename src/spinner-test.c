@@ -16,7 +16,7 @@ on_start_clicked (GtkButton *button, GnomebtSpinner *spinner)
 	if (id != -1)
 		return;
 
-	id = g_timeout_add (500, spin_me, spinner);
+	id = g_timeout_add (500, (GSourceFunc) spin_me, spinner);
 }
 
 static void
@@ -32,7 +32,8 @@ on_stop_clicked (GtkButton *button, GnomebtSpinner *spinner)
 
 int main (int argc, char **argv)
 {
-	GtkWidget *window, *box, *start, *stop, *spinner;
+	GtkWidget *window, *box, *start, *stop;
+	GnomebtSpinner *spinner;
 	gtk_init (&argc, &argv);
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -46,13 +47,13 @@ int main (int argc, char **argv)
 			FALSE, FALSE, 4);
 	gtk_box_pack_end (GTK_BOX (box), stop,
 			FALSE, FALSE, 4);
-	gtk_box_pack_end (GTK_BOX (box), spinner,
+	gtk_box_pack_end (GTK_BOX (box), GTK_WIDGET (spinner),
 			FALSE, FALSE, 4);
 
 	g_signal_connect (G_OBJECT (start), "clicked",
-			on_start_clicked, spinner);
+			G_CALLBACK (on_start_clicked), spinner);
 	g_signal_connect (G_OBJECT (stop), "clicked",
-			on_stop_clicked, spinner);
+			G_CALLBACK (on_stop_clicked), spinner);
 
 	gtk_widget_show_all (window);
 	gtk_main ();
