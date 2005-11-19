@@ -6,7 +6,7 @@
 dnl BLUEZ_PATH_BLUETOOTH([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
 dnl Test for libbluetooth, and define BLUETOOTH_CFLAGS and BLUETOOTH_LIBS
 dnl
-AC_DEFUN(BLUEZ_PATH_BLUETOOTH,
+AC_DEFUN([BLUEZ_PATH_BLUETOOTH],
 [dnl 
 dnl Get the cflags and libraries
 dnl

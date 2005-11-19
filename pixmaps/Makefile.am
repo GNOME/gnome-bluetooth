@@ -1,7 +1,6 @@
 
 pixmapsdir = $(datadir)/$(PACKAGE)/pixmaps
 pixmaps_DATA =				\
-		blueradio-48.png	\
 		blueradio.png		\
 		blueradio.svg		\
 		btdevice-audiovideo.png	\
@@ -18,4 +17,7 @@ pixmaps_DATA =				\
 		frame5.png		\
 		frame6.png
 
-EXTRA_DIST = $(pixmaps_DATA) blueradio.xcf
+icondir = $(datadir)/pixmaps
+icon_DATA = blueradio-48.png
+
+EXTRA_DIST = $(pixmaps_DATA) $(icon_DATA) blueradio.xcf

@@ -80,7 +80,9 @@ else:
   dnl general consensus is that you shouldn't need this ability.
 
   AC_SUBST(PYTHON_PREFIX)
-  PYTHON_PREFIX='${prefix}'
+  changequote(<<, >>)dnl
+  PYTHON_PREFIX=`$PYTHON -c "import sys; print sys.prefix"`
+  changequote([, ])dnl
 
   AC_SUBST(PYTHON_EXEC_PREFIX)
   PYTHON_EXEC_PREFIX='${exec_prefix}'
@@ -103,7 +105,7 @@ else:
   dnl then the old $(pythondir) was pretty useless.
 
   AC_SUBST(pythondir)
-  pythondir=$PYTHON_PREFIX"/lib/python"$PYTHON_VERSION/site-packages
+  pythondir=$PYTHON_PREFIX${libdir##$prefix}"/python"$PYTHON_VERSION"/site-packages"
 
   dnl pkgpythondir -- $PACKAGE directory under pythondir.  Was
   dnl   PYTHON_SITE_PACKAGE in previous betas, but this naming is

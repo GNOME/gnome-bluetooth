@@ -5,7 +5,7 @@ dnl it from Owen Taylor and Manish Singh
 
 dnl BLUEZ_PATH_SDP([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
 dnl
-AC_DEFUN(BLUEZ_PATH_SDP,
+AC_DEFUN([BLUEZ_PATH_SDP],
 [dnl 
 dnl Get the cflags and libraries
 dnl
