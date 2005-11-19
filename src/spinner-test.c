@@ -7,6 +7,7 @@ guint id = -1;
 static gboolean spin_me (GnomebtSpinner *spinner)
 {
 	gnomebt_spinner_spin (spinner);
+	return TRUE;
 }
 
 static void
@@ -57,5 +58,7 @@ int main (int argc, char **argv)
 
 	gtk_widget_show_all (window);
 	gtk_main ();
+
+	return 0;
 }
 
