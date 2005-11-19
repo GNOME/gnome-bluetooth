@@ -757,21 +757,21 @@ gnomebt_device_desc_ref (GnomebtDeviceDesc *desc)
 gchar *
 gnomebt_device_desc_get_name (GnomebtDeviceDesc *desc)
 {
-    g_return_if_fail (desc != NULL);
+    g_return_val_if_fail (desc != NULL, NULL);
     return desc->name;
 }
 
 gchar *
 gnomebt_device_desc_get_bdaddr (GnomebtDeviceDesc *desc)
 {
-    g_return_if_fail (desc != NULL);
+    g_return_val_if_fail (desc != NULL, NULL);
     return desc->bdaddr;
 }
 
 guint
 gnomebt_device_desc_get_deviceclass (GnomebtDeviceDesc *desc)
 {
-    g_return_if_fail (desc != NULL);
+    g_return_val_if_fail (desc != NULL, 0);
     return desc->deviceclass;
 }
 
