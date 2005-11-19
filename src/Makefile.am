@@ -118,7 +118,7 @@ gnomebt-chooser-py.c: gnomebt-chooser.defs gnomebt-controller.defs gnomebt-choos
 		--override $(srcdir)/gnomebt-chooser.override \
 		$(srcdir)/gnomebt-chooser.defs > $@
 
-pydir = $(PYTHON_PREFIX)/lib/python$(PYTHON_VERSION)/site-packages/gnomebt/
+pydir = @pythondir@/gnomebt/
 
 controller_la_SOURCES = gnomebt-controller-py.c gnomebt-controller-pymodule.c
 controller_la_LIBADD =  libgnomebt.la
