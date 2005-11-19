@@ -90,7 +90,7 @@ _wrap_gnomebt_controller_services_for_device (PyGObject *self, PyObject *args)
         PyObject *chanlist = PyList_New (num_s);
         for (chans=desc->channels, j=0; chans; chans=g_slist_next(chans), ++j) {
             PyList_SET_ITEM(chanlist, j,
-                Py_BuildValue("i", (guint)chans->data));
+                Py_BuildValue("i", GPOINTER_TO_UINT(chans->data)));
         }
         PyDict_SetItem(ret, Py_BuildValue("i", desc->id), chanlist);
     }
@@ -122,7 +122,7 @@ _wrap_gnomebt_controller_channels_for_service (PyGObject *self, PyObject *args,
     ret = PyList_New (len);
     for (l = slist, i = 0; l; l = g_slist_next (l), ++i) {
         PyList_SET_ITEM(ret, i,
-            Py_BuildValue("i", (guint)l->data));
+            Py_BuildValue("i", GPOINTER_TO_UINT(l->data)));
     }
     g_slist_free(slist);
     return ret;

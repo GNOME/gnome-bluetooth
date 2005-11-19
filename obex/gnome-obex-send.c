@@ -83,7 +83,7 @@ get_obex_channel (const gchar *bdaddr)
 			OBEX_OBJPUSH_SVCLASS_ID);
 
 	for (item=list; item != NULL; item = g_slist_next(item)) {
-		ret = (uint8_t)((guint) item->data);
+		ret = GPOINTER_TO_UINT(item->data);
 	}
 
 	g_object_unref (btmanager);

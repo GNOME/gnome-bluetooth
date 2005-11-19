@@ -460,7 +460,7 @@ class Gnomebt:Controller from Btctl:Controller {
 
         for (item=chanlist; item != NULL && num < 0; item=g_slist_next(item)) {
             num = gnomebt_controller_get_rfcomm_port(self, bdaddr,
-                (guint)item->data);
+                GPOINTER_TO_UINT(item->data));
         }
         g_slist_free(chanlist);
         return num;
@@ -487,12 +487,12 @@ class Gnomebt:Controller from Btctl:Controller {
             bdaddr, service);
         for (item=chanlist; item != NULL && num < 0; item=g_slist_next(item)) {
             num = gnomebt_controller_get_rfcomm_port (self, bdaddr,
-                (guint)item->data);
+                GPOINTER_TO_UINT(item->data));
             if (num < 0) {
                 num=gnomebt_controller_connect_rfcomm_port (self,
-                    bdaddr, (guint)item->data );
+                    bdaddr, GPOINTER_TO_UINT(item->data) );
                  g_message("rfcomm attempting to connect %s chan %d, got %d",
-                    bdaddr, (guint)item->data,num);
+                    bdaddr, GPOINTER_TO_UINT(item->data),num);
             }
         }
         g_slist_free(chanlist);

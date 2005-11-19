@@ -93,7 +93,7 @@ int main(int argc, char **argv)
         GnomebtServiceDesc *desc = (GnomebtServiceDesc *)item->data;
         printf ("   Service ID: %x\n", desc->id);
         for (chans=desc->channels; chans!=NULL; chans = g_slist_next (chans)) {
-            printf ("      Channel: %d\n", (guint) chans->data);
+            printf ("      Channel: %d\n", GPOINTER_TO_UINT(chans->data));
         }
     }
     gnomebt_service_list_free (services);
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     chans = gnomebt_controller_channels_for_service (bc, TBDADDR, 0x1101);
     printf ("Channels for Service ID: %x\n", 0x1101);
     for ( ; chans!=NULL; chans = g_slist_next (chans)) {
-        printf ("  Channel: %d\n", (guint) chans->data);
+        printf ("  Channel: %d\n", GPOINTER_TO_UINT(chans->data));
     }
 
     printf ("Known devices:\n");
