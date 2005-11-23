@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-02 22:25+0900\n"
-"PO-Revision-Date: 2005-09-02 22:18+0900\n"
+"POT-Creation-Date: 2005-11-23 20:15+0900\n"
+"PO-Revision-Date: 2005-11-23 20:14+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -187,43 +187,51 @@ msgstr "向き"
 msgid "The orientation of the tray."
 msgstr "トレイの向きです"
 
-#: ../obex/gnome-obex-send.c:162
+#: ../obex/gnome-obex-send.c:171
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "ファイル '%s' を読み込めません。"
 
-#: ../obex/gnome-obex-send.c:192
+#: ../obex/gnome-obex-send.c:201
 msgid "An error occurred while sending data."
 msgstr "データを送信する際にエラーが発生しました。"
 
-#: ../obex/gnome-obex-send.c:195
+#: ../obex/gnome-obex-send.c:204
 msgid "The remote device canceled the transfer."
 msgstr "リモート・デバイスが転送をキャンセルしました。"
 
-#: ../obex/gnome-obex-send.c:198
+#: ../obex/gnome-obex-send.c:207
 msgid "An unknown error occurred."
 msgstr "不明なエラーが発生しました。"
 
-#: ../obex/gnome-obex-send.c:229
+#: ../obex/gnome-obex-send.c:238
 msgid "Connecting..."
 msgstr "接続中..."
 
-#: ../obex/gnome-obex-send.c:276
+#: ../obex/gnome-obex-send.c:291
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Glade ファイルが見つかりません (gnome-bluetooth のインストールを確認して下さ"
 "い)。"
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:307
+msgid ""
+"Make sure \"Beam receive\" is enabled in the Power preferences, and "
+"Bluetooth is enabled."
+msgstr ""
+"電源設定で \"Beam receive\" が有効でかつ Bluetooth が利用可能になっているか確"
+"認して下さい。"
+
+#: ../obex/gnome-obex-send.c:309
 msgid "Remote device doesn't support receiving objects."
 msgstr "リモート・デバイスはオブジェクト受信をサポートしていません。"
 
-#: ../obex/gnome-obex-send.c:300
+#: ../obex/gnome-obex-send.c:319
 msgid "Can't initialize program."
 msgstr "プログラムを初期化できません。"
 
-#: ../obex/gnome-obex-send.c:306
+#: ../obex/gnome-obex-send.c:325
 msgid "Unable to connect to remote device."
 msgstr "リモート・デバイスへ接続できません。"
 
@@ -367,17 +375,17 @@ msgstr "Bluetooth デバイスの選択"
 msgid "Device"
 msgstr "デバイス"
 
-#: ../src/fileactiondialog.gob:130
+#: ../src/fileactiondialog.gob:132
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth 転送を受信しました"
 
 #. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:136
+#: ../src/fileactiondialog.gob:138
 #, c-format
 msgid "File received from '%s'. What would you like to do?"
 msgstr "'%s' からファイルを受信しました。どのように処理しますか？"
 
-#: ../src/fileactiondialog.gob:166
+#: ../src/fileactiondialog.gob:168
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -401,7 +409,7 @@ msgstr ""
 "外部デバイスが Bluetooth を介して、お使いのシステムへ接続しようとしています。"
 "その接続を許可するかどうかを判断して下さい。"
 
-#: ../src/permissiondialog.gob:129
+#: ../src/permissiondialog.gob:128
 msgid "_Always allow this device to connect."
 msgstr "常にこのデバイスへの接続を許可する(_A)"
 
