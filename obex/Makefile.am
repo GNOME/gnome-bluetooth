@@ -26,7 +26,8 @@ INCLUDES = @GNOME_BLUETOOTH_CFLAGS@ @BLUETOOTH_CFLAGS@ \
 	-I$(top_srcdir)/libegg/libegg/tray -I../src \
 	-I$(top_srcdir)/src \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\""
+	-DDATA_DIR="\"$(GNOME_BLUETOOTH_DATA_DIR)\"" \
+	-DICON_DIR="\"$(datadir)/pixmaps\""
 
 EXTRA_DIST = gnome-obex-server.desktop.in
 

@@ -49,6 +49,7 @@ typedef struct _appinfo {
 } MyApp;
 
 #define GLADE_FILE DATA_DIR "/gnome-obex-send.glade"
+#define ICON_FILE ICON_DIR "/blueradio-48.png"
 
 static void mainloop (MyApp *app);
 static uint8_t get_obex_channel (const gchar *bdaddr);
@@ -275,6 +276,12 @@ main (int argc, char *argv[])
 		fname=GLADE_FILE;
 	} else if (g_file_exists("../ui/gnome-obex-send.glade")) {
 		fname="../ui/gnome-obex-send.glade";
+	}
+
+	if (g_file_exists(ICON_FILE)) {
+		gtk_window_set_default_icon_from_file (ICON_FILE, NULL);
+	} else if (g_file_exists("../pixmaps/blueradio-48.png")) {
+		gtk_window_set_default_icon_from_file ("../pixmaps/blueradio-48.png", NULL);
 	}
 
 	if (fname) {
