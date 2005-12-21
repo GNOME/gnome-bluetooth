@@ -52,10 +52,11 @@ AM_GCONF_SOURCE_2
 GOB2_HOOK(2.0.0,[],[AC_MSG_ERROR([Cannot find GOB-2, install from http://www.5z.com/jirka/gob.html])])
 
 BTCTL_REQUIRED=0.6.0
+GCONF_REQUIRED=2.3.3
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
-PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 libbtctl >= $BTCTL_REQUIRED)
+PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 libbtctl >= $BTCTL_REQUIRED gconf-2.0 >= $GCONF_REQUIRED)
 PKG_CHECK_MODULES(GNOME_BLUETOOTH_PYTHON, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 pygtk-2.0 libbtctl >= $BTCTL_REQUIRED)
 AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
