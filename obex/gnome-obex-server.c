@@ -220,7 +220,7 @@ file_action_response (GtkDialog *dialog, gint arg, gpointer user_data)
 
 static void
 put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
-		gpointer body, guint len, guint timestamp, MyApp *app)
+		BtctlObexData *data, guint timestamp, MyApp *app)
 {
 	int fd;
 	gchar *targetname = NULL;
@@ -233,14 +233,14 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 	}
 
 	g_message ("File arrived from %s", bdaddr);
-	g_message ("Filename '%s' Length %d", fname, len);
+	g_message ("Filename '%s' Length %d", fname, data->body_len);
 
 	targetname = get_safe_unique_filename (fname,
 			get_save_dir ());
 	g_message ("Saving to '%s'", targetname);
 	fd = open (targetname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 	if (fd >= 0) {
-		write (fd, body, len);
+		write (fd, data->body, data->body_len);
 		close (fd);
 		
 		if(timestamp) {
