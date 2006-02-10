@@ -265,7 +265,7 @@ class BTManager (object):
         dialog.show ()
 
     def image_file (self, fname):
-        for d in [os.path.join (__datadir__, "pixmaps"), "../pixmaps"]:
+        for d in [os.path.join (__datadir__, "pixmaps"), os.path.join (__datadir__, "../pixmaps"), "../pixmaps"]:
             if os.path.isfile (os.path.join (d, fname)):
                 return os.path.join (d, fname)
         return None
