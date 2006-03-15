@@ -84,7 +84,7 @@ AC_SUBST(VFSMOD_CFLAGS)
 AC_SUBST(VFSMOD_LIBS)
 
 dnl stuff for obex
-PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.4.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-2.0 libglade-2.0 libgnome-2.0 >= 2.0.0 gnome-vfs-module-2.0)
+PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.6.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-2.0 libglade-2.0 libgnome-2.0 >= 2.0.0 gnome-vfs-module-2.0)
 AC_SUBST(GOBEX_LIBS)
 AC_SUBST(GOBEX_CFLAGS)
 AM_PATH_OPENOBEX(1.0.0)
