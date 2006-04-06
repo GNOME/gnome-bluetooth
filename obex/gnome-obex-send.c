@@ -157,9 +157,18 @@ send_one (MyApp *app)
 	GtkWidget *label;
 
 	if ((fname = poptGetArg (app->context))) {
+		char *path;
 		/* there's a file to send */
 		app->data = NULL;
-		if (g_file_get_contents (fname, &(app->data), &len, &err)) {
+		if (g_str_has_prefix (fname, "file://")) {
+			path = g_filename_from_uri (fname, NULL, NULL);
+		} else {
+			path = g_strdup (fname);
+		}
+		if (path == NULL)
+			return FALSE;
+
+		if (g_file_get_contents (path, &(app->data), &len, &err)) {
 			bname = g_path_get_basename (fname);
 			label = glade_xml_get_widget (app->xml, "filename_label");
 			gtk_label_set_text (GTK_LABEL (label), bname);
@@ -174,6 +183,7 @@ send_one (MyApp *app)
 			/* error, so we quit */
 			gtk_main_quit ();
 		}
+		g_free (path);
 	} else {
 		/* nothing left to send, time to quit */
 		gtk_main_quit ();
