@@ -67,7 +67,6 @@ typedef struct _appinfo {
 
 static gboolean allowed_to_put (MyApp *app, const gchar *bdaddr);
 static gboolean tray_destroy_cb (GtkObject *obj, MyApp *app);
-static const gchar * get_save_dir ();
 static int get_display_notifications ();
 
 static MyApp *app;
@@ -104,25 +103,57 @@ allowed_to_put (MyApp *app, const gchar *bdaddr)
 	return (result == GTK_RESPONSE_OK);
 }
 
-static const gchar *
-get_save_dir ()
+static char *
+get_save_dir (void)
 {
-	const gchar *dir = NULL;
+	char *dir = NULL;
 	GConfClient *client = gconf_client_get_default();
 
 	if (client) {
 		dir = gconf_client_get_string (client,
 				"/apps/gnome-obex-server/savedir", NULL);
 		g_object_unref (client);
+
+		/* Starts with ~/ ? */
+		if (dir != NULL && dir[0] == '~' && dir[1] == '/') {
+			dir = g_build_filename (g_get_home_dir (),
+					dir + 2, NULL);
+		}
 	}
-	if (dir == NULL || strlen (dir) == 0) {
-		dir = g_get_home_dir ();
+
+	/* Try ~/Desktop/Downloads */
+	if (dir == NULL || strlen (dir) == 0 || g_file_test (dir, G_FILE_TEST_IS_DIR) == FALSE) {
+		const char *translated_folder;
+		char *converted;
+
+		g_free (dir);
+		/* The name of the default downloads folder,
+		 * Needs to be the same as Epiphany's */
+		translated_folder = _("Downloads");
+
+		converted = g_filename_from_utf8 (translated_folder, -1, NULL,
+				NULL, NULL);
+		dir = g_build_filename (g_get_home_dir (), "Desktop",
+				converted, NULL);
+		g_free (converted);
+	}
+
+	/* Try ~/Desktop */
+	if (g_file_test (dir, G_FILE_TEST_IS_DIR) == FALSE) {
+		g_free (dir);
+		dir = g_build_filename (g_get_home_dir (), "Desktop", NULL);
+	}
+
+	/* Try ~/ */
+	if (g_file_test (dir, G_FILE_TEST_IS_DIR) == FALSE) {
+		g_free (dir);
+		dir = g_strdup (g_get_home_dir ());
 	}
 	return dir;
 }
 
 static gboolean
-get_display_notifications ()
+get_display_notifications (void)
 {
 	gboolean yesno = TRUE;
 	GConfClient *client = gconf_client_get_default();
@@ -134,14 +165,6 @@ get_display_notifications ()
 	}
 	return yesno;
 }
-
-/*
-static gboolean
-prefs_activated(GtkMenuItem *item, gpointer data)
-{
-	return TRUE;
-}
-*/
 
 static void
 progress_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
@@ -223,7 +246,7 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 		BtctlObexData *data, guint timestamp, MyApp *app)
 {
 	int fd;
-	gchar *targetname = NULL;
+	char *targetname = NULL, *dir;
 	struct utimbuf utim;
 	GnomebtFileActionDialog *dlg;
 
@@ -235,8 +258,10 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 	g_message ("File arrived from %s", bdaddr);
 	g_message ("Filename '%s' Length %d", fname, data->body_len);
 
-	targetname = get_safe_unique_filename (fname,
-			get_save_dir ());
+	dir = get_save_dir ();
+	targetname = get_safe_unique_filename (fname, dir);
+	g_free (dir);
+
 	g_message ("Saving to '%s'", targetname);
 	fd = open (targetname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 	if (fd >= 0) {

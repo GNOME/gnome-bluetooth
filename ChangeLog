@@ -1,3 +1,10 @@
+2006-04-17  Bastien Nocera  <hadess@hadess.net>
+
+	* obex/gnome-obex-server.c: (get_save_dir),
+	(get_display_notifications), (put_callback): save to
+	~/Desktop/Downloads by default, then fallback to ~/Desktop and ~/
+	(Closes: #317229), fixes a memory leak for each received file
+
 2006-04-06  Bastien Nocera  <hadess@hadess.net>
 
 	* obex/gnome-obex-send.c: (send_one): allow passing URIs as well
