@@ -31,9 +31,6 @@ AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
 
-dnl Check for the "check" unit test framework
-dnl AC_CHECK_LIB(check,suite_create)
-
 dnl Gettext stuff.
 GETTEXT_PACKAGE=gnome-bluetooth
 AC_SUBST(GETTEXT_PACKAGE)
@@ -42,9 +39,6 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"gnome-bluetooth", [Manage Bluetooth devices 
 dnl Add the languages which your application supports here.
 ALL_LINGUAS="be bg cs da de en_CA en_GB es fi fr gl hu it ja mk nb ne nl pa pt pt_BR ru rw sq sv uk vi zh_CN zh_HK zh_TW"
 AM_GLIB_GNU_GETTEXT
-
-AC_SUBST(DLOPEN)
-AC_SUBST(DLPREOPEN)
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
 AM_GCONF_SOURCE_2
@@ -65,8 +59,6 @@ AC_SUBST(DEFSDIR)
 CODEGENDIR=`pkg-config --variable codegendir pygtk-2.0`
 AC_SUBST(CODEGENDIR)
 
-BLUEZ_PATH_BLUETOOTH([], AC_MSG_ERROR([libbluetooth is required to build this software - part of bluez-libs]))
-
 AC_SUBST(GNOME_BLUETOOTH_CFLAGS)
 AC_SUBST(GNOME_BLUETOOTH_LIBS)
 AC_SUBST(GLIB_GENMARSHAL)
@@ -76,18 +68,10 @@ AC_SUBST(GNOME_BLUETOOTH_PYTHON_LIBS)
 GNOME_BLUETOOTH_DATA_DIR="$datadir/gnome-bluetooth"
 AC_SUBST(GNOME_BLUETOOTH_DATA_DIR)
 
-GNOME_VFS_REQUIRED=2.1.3.1
-
-dnl stuff for gnome-vfs module
-PKG_CHECK_MODULES(VFSMOD, gnome-vfs-2.0 >= $GNOME_VFS_REQUIRED gnome-vfs-module-2.0 >= $GNOME_VFS_REQUIRED)
-AC_SUBST(VFSMOD_CFLAGS)
-AC_SUBST(VFSMOD_LIBS)
-
 dnl stuff for obex
 PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.6.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-2.0 libglade-2.0 libgnome-2.0 >= 2.0.0 gnome-vfs-module-2.0)
 AC_SUBST(GOBEX_LIBS)
 AC_SUBST(GOBEX_CFLAGS)
-AM_PATH_OPENOBEX(1.0.0)
 
 dnl ==========================================================================
 dnl Turn on the additional warnings last, so -Werror doesn't affect other tests.

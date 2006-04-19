@@ -13,16 +13,16 @@ gnome_obex_send_SOURCES = \
 	chooser.c chooser.h \
 	gnome-obex-send.c
 
-gnome_obex_server_LDADD = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ \
+gnome_obex_server_LDADD = \
 	$(GNOME_BLUETOOTH_LIBS) \
 	../libegg/libegg/tray/libeggtray.la \
 	../src/libgnomebt.la
 
-gnome_obex_send_LDFLAGS = @OPENOBEX_LIBS@ @BLUETOOTH_LIBS@ \
+gnome_obex_send_LDFLAGS = \
 	$(GNOME_BLUETOOTH_LIBS) \
 	../src/libgnomebt.la
 
-INCLUDES = @GNOME_BLUETOOTH_CFLAGS@ @BLUETOOTH_CFLAGS@ \
+INCLUDES = $(GNOME_BLUETOOTH_CFLAGS) \
 	-I$(top_srcdir)/libegg/libegg/tray -I../src \
 	-I$(top_srcdir)/src \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \

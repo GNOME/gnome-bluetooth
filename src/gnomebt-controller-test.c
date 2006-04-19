@@ -7,11 +7,10 @@
 
 #include "gnomebt-controller.h"
 
-#include <bluetooth/sdp.h>
-
 /* change this to a device you know works */
 
 #define TBDADDR "00:80:37:2A:B6:BC"
+#define DIALUP_NET_SVCLASS_ID           0x1103
 
 static void device_name_callback(GnomebtController *bc,
         gchar*   device,
