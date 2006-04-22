@@ -1,23 +1,21 @@
 # translation of gl.po to Galego
-# translation of gnome-bluetooth.HEAD.po to Galego
-# translation of gnome-bluetooth.HEAD.po to Galician
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Ignacio Casal Quinteiro <adorador_del_heavy@hotmail.com>, 2004.
-# Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005.
 #
+# Ignacio Casal Quinteiro <adorador_del_heavy@hotmail.com>, 2004.
+# Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 17:29+0100\n"
-"PO-Revision-Date: 2005-12-04 17:32+0100\n"
+"POT-Creation-Date: 2006-04-22 12:05+0200\n"
+"PO-Revision-Date: 2006-04-22 12:06+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
-"Language-Team: Galego\n"
+"Language-Team: Galego <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: ../data/gnome-obex-server.schemas.in.h:1
 msgid "Directory to save received files"
@@ -191,57 +189,59 @@ msgstr "Orientación"
 msgid "The orientation of the tray."
 msgstr "A orientación da bandexa."
 
-#: ../obex/gnome-obex-send.c:171
+#: ../obex/gnome-obex-send.c:180
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Imposible ler o ficheiro '%s'."
 
-#: ../obex/gnome-obex-send.c:201
+#: ../obex/gnome-obex-send.c:211
 msgid "An error occurred while sending data."
 msgstr "Ocorreu un erro mentras se enviaban os datos."
 
-#: ../obex/gnome-obex-send.c:204
+#: ../obex/gnome-obex-send.c:214
 msgid "The remote device canceled the transfer."
 msgstr "O dispositivo remoto cancelou a transferencia."
 
-#: ../obex/gnome-obex-send.c:207
+#: ../obex/gnome-obex-send.c:217
 msgid "An unknown error occurred."
 msgstr "Ocorreu un erro descoñecido."
 
-#: ../obex/gnome-obex-send.c:238
+#: ../obex/gnome-obex-send.c:248
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:301
 msgid "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Non se pode atopar o ficheiro de interface de usuario, verifique a súa "
 "instalación de gnome-bluetooth."
 
-#: ../obex/gnome-obex-send.c:307
+#: ../obex/gnome-obex-send.c:317
 msgid ""
 "Make sure \"Beam receive\" is enabled in the Power preferences, and "
 "Bluetooth is enabled."
-msgstr "Asegúrese de que a \"Recepción de raios\" está activada nas preferencias de Enerxía, e Bluetooth está activado."
+msgstr ""
+"Asegúrese de que a \"Recepción de raios\" está activada nas preferencias de "
+"Enerxía, e Bluetooth está activado."
 
-#: ../obex/gnome-obex-send.c:309
+#: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
 msgstr "O dispositivo remoto non soporta a recepción de obxetos."
 
-#: ../obex/gnome-obex-send.c:319
+#: ../obex/gnome-obex-send.c:329
 msgid "Can't initialize program."
 msgstr "Non se pode iniciar o programa."
 
-#: ../obex/gnome-obex-send.c:325
+#: ../obex/gnome-obex-send.c:335
 msgid "Unable to connect to remote device."
 msgstr "Imposible conectar co dispositivo remoto."
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:89
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Aceptar un ficheiro desde '%s'?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:90
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -249,13 +249,19 @@ msgstr ""
 "O dispositivo remoto está intentando enviarlle un ficheiro por Bluetooth. "
 "Desexa permitir a conexión?"
 
-#: ../obex/gnome-obex-server.c:92
+#: ../obex/gnome-obex-server.c:91
 msgid "Always accept files from this device."
 msgstr "Aceptar sempre os ficheiros dese dispositivo."
 
+#. The name of the default downloads folder,
+#. * Needs to be the same as Epiphany's
+#: ../obex/gnome-obex-server.c:132
+msgid "Downloads"
+msgstr "Descargas"
+
 #. add your name and email address in here if you've translated
 #. this program
-#: ../obex/gnome-obex-server.c:288
+#: ../obex/gnome-obex-server.c:313
 msgid "translator-credits"
 msgstr ""
 "Ignacio Casal Quinteiro <nacho.resa@gmail.com> \n"
@@ -271,20 +277,20 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:298 ../obex/gnome-obex-server.c:350
+#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
 #: ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Compartir ficheiros por Bluetooth"
 
-#: ../obex/gnome-obex-server.c:300
+#: ../obex/gnome-obex-server.c:325
 msgid "Receive files from Bluetooth devices"
 msgstr "Recibir ficheiros desde dispositivos Bluetooth"
 
-#: ../obex/gnome-obex-server.c:407
+#: ../obex/gnome-obex-server.c:432
 msgid "Bluetooth File Server"
 msgstr "Servidor de ficheiros Bluetooth"
 
-#: ../obex/gnome-obex-server.c:445
+#: ../obex/gnome-obex-server.c:470
 msgid "Ready for Bluetooth file transfers"
 msgstr "Preparado para transferencias de ficheiros Bluetooth"
 
