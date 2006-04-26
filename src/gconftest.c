@@ -204,7 +204,7 @@ main (int argc, char **argv)
   g_signal_connect (G_OBJECT(bc), "add_device_service",
 					G_CALLBACK(add_device_service_callback),
 					(gpointer)client);
-  btctl_controller_discover_devices(bc);
+  btctl_controller_discover_devices(bc, NULL);
   g_object_unref(bc);
 
   g_object_unref(client);

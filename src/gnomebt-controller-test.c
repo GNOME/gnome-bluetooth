@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 
     printf("Looking to see what channel OPUSH is on " TBDADDR "\n");
 
-    btctl_controller_scan_for_service(BTCTL_CONTROLLER(bc), TBDADDR, 0x1105);
+    btctl_controller_scan_for_service(BTCTL_CONTROLLER(bc), TBDADDR, 0x1105, NULL);
 
     printf("Examining " TBDADDR ", name %s class %x\n",
             gnomebt_controller_get_device_name(bc, TBDADDR),

@@ -106,7 +106,7 @@ class Gnomebt:Controller from Btctl:Controller {
     void
     discover_devices (self)
     {
-        btctl_controller_discover_devices (BTCTL_CONTROLLER(self));
+        btctl_controller_discover_devices (BTCTL_CONTROLLER(self), NULL);
     }
 
     public
@@ -294,7 +294,7 @@ class Gnomebt:Controller from Btctl:Controller {
 
         gconf_client_set_list (client, key, GCONF_VALUE_INT, NULL, &err);
         btctl_controller_scan_for_service (BTCTL_CONTROLLER(self),
-            bdaddr, svcid);
+            bdaddr, svcid, NULL);
 
         list = gconf_client_get_list(client, key, GCONF_VALUE_INT, &err);
         g_free(key);
