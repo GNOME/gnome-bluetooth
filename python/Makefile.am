@@ -1,7 +1,7 @@
 
-pythondir = @pythondir@/gnomebt
-pkgpythondir = $(pythondir)
 libdir = $(pkgpythondir)
+
+bin_PROGRAMS = gnome-bluetooth-manager
 
 python_LTLIBRARIES = iconlist.la
 
@@ -29,7 +29,7 @@ iconlist_la_LIBADD = \
 
 EXTRA_DIST = iconlist.defs iconlist.override \
 			 gnome-bluetooth-manager.desktop.in \
-			 $(python_DATA) gnome-bluetooth-manager
+			 $(python_DATA) $(script_in_files)
 			 $(noinst_PYTHON)
 
 iconlist.c: iconlist.defs iconlist.override
@@ -42,6 +42,10 @@ iconlist.c: iconlist.defs iconlist.override
 defs.py: Makefile
 	echo "version = '$(PACKAGE_VERSION)'" >defs.py
 	echo "datadir = '$(pkgdatadir)'" >>defs.py
+
+script_in_files = gnome-bluetooth-manager.in
+gnome-bluetooth-manager: $(script_in_files)
+	cat $(srcdir)/gnome-bluetooth-manager.in | sed 's,\@pythondir\@,$(pythondir),' | sed 's,\@PYTHON\@,$(PYTHON),' > $@
 
 desktop_in_files = gnome-bluetooth-manager.desktop.in
 desktopdir = $(datadir)/applications
