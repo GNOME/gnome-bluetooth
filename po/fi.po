@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 21:25+0200\n"
-"PO-Revision-Date: 2006-01-07 22:32+0200\n"
+"POT-Creation-Date: 2006-07-02 23:09+0300\n"
+"PO-Revision-Date: 2006-07-02 23:09+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,9 +29,9 @@ msgid ""
 "Incoming files are saved automatically into this directory. If display-"
 "notification is set then the user gets chance to open or delete them."
 msgstr ""
-"Vastaanotetut tiedostot tallennetaan automaattisesti tähän kansioon. "
-"Jos huomautus vastaanotosta on asetettu, voi käyttäjä heti näyttää tai "
-"poistaa vastaanotetut tiedostot."
+"Vastaanotetut tiedostot tallennetaan automaattisesti tähän kansioon. Jos "
+"huomautus vastaanotosta on asetettu, voi käyttäjä heti näyttää tai poistaa "
+"vastaanotetut tiedostot."
 
 #: ../data/gnome-obex-server.schemas.in.h:4
 msgid ""
@@ -189,60 +189,59 @@ msgstr "Suunta"
 msgid "The orientation of the tray."
 msgstr "Ilmoitusalueen suunta"
 
-#: ../obex/gnome-obex-send.c:171
+#: ../obex/gnome-obex-send.c:180
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Tiedostoa \"%s\" ei voi lukea."
 
-#: ../obex/gnome-obex-send.c:201
+#: ../obex/gnome-obex-send.c:211
 msgid "An error occurred while sending data."
 msgstr "Tapahtui virhe lähetettäessä."
 
-#: ../obex/gnome-obex-send.c:204
+#: ../obex/gnome-obex-send.c:214
 msgid "The remote device canceled the transfer."
 msgstr "Bluetooth-laite keskeytti siirron."
 
-#: ../obex/gnome-obex-send.c:207
+#: ../obex/gnome-obex-send.c:217
 msgid "An unknown error occurred."
 msgstr "Tapahtui tuntematon virhe."
 
-#: ../obex/gnome-obex-send.c:238
+#: ../obex/gnome-obex-send.c:248
 msgid "Connecting..."
 msgstr "Yhdistetään..."
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:301
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
-"Käyttöliittymätiedostoa ei löydy, tarkista gnome-bluetoothin "
-"asennuksesi."
+"Käyttöliittymätiedostoa ei löydy, tarkista gnome-bluetoothin asennuksesi."
 
-#: ../obex/gnome-obex-send.c:307
+#: ../obex/gnome-obex-send.c:317
 msgid ""
 "Make sure \"Beam receive\" is enabled in the Power preferences, and "
 "Bluetooth is enabled."
 msgstr ""
-"Tarkista että \"Signaalin vastaanotto\" on käytössä virta-asetuksissa "
-"ja että Bluetooth on käytössä."
+"Tarkista että \"Signaalin vastaanotto\" on käytössä virta-asetuksissa ja "
+"että Bluetooth on käytössä."
 
-#: ../obex/gnome-obex-send.c:309
+#: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
 msgstr "Bluetooth-laite ei tue kohteiden vastaanottoa."
 
-#: ../obex/gnome-obex-send.c:319
+#: ../obex/gnome-obex-send.c:329
 msgid "Can't initialize program."
 msgstr "Ohjelmaa ei voi alustaa."
 
-#: ../obex/gnome-obex-send.c:325
+#: ../obex/gnome-obex-send.c:335
 msgid "Unable to connect to remote device."
 msgstr "Bluetooth-laitteeseen ei saada yhteyttä."
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:89
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Hyväksy tiedosto lähettäjältä \"%s\"?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:90
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -250,16 +249,22 @@ msgstr ""
 "Bluetooth-laite yrittää lähettää tiedostoa Bluetoothilla. Haluatko sallia "
 "tämän yhteyden?"
 
-#: ../obex/gnome-obex-server.c:92
+#: ../obex/gnome-obex-server.c:91
 msgid "Always accept files from this device."
 msgstr "Salli aina yhteydet tältä laitteelta."
 
+#. The name of the default downloads folder,
+#. * Needs to be the same as Epiphany's
+#: ../obex/gnome-obex-server.c:132
+msgid "Downloads"
+msgstr "Noudot"
+
 #. add your name and email address in here if you've translated
 #. this program
-#: ../obex/gnome-obex-server.c:288
+#: ../obex/gnome-obex-server.c:313
 msgid "translator-credits"
 msgstr ""
-"Ilkka Tuohela, 2005\n"
+"Ilkka Tuohela, 2005-2006\n"
 "\n"
 "http://www.gnome.fi/"
 
@@ -273,20 +278,20 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:298 ../obex/gnome-obex-server.c:350
+#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
 #: ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetoothin tiedostojenjako"
 
-#: ../obex/gnome-obex-server.c:300
+#: ../obex/gnome-obex-server.c:325
 msgid "Receive files from Bluetooth devices"
 msgstr "Vastaanota tiedostoja bluetooth-laitteilta"
 
-#: ../obex/gnome-obex-server.c:407
+#: ../obex/gnome-obex-server.c:432
 msgid "Bluetooth File Server"
 msgstr "Bluetooth-tiedostopalvelin"
 
-#: ../obex/gnome-obex-server.c:445
+#: ../obex/gnome-obex-server.c:470
 msgid "Ready for Bluetooth file transfers"
 msgstr "Valmis Bluetooth-tiedostonsiirtoon"
 
@@ -314,8 +319,7 @@ msgstr "Tietokoneesta ei löytynyt bluetooth-laitteita"
 msgid ""
 "Please make sure that your Bluetooth adapter is correctly plugged in your "
 "machine."
-msgstr ""
-"Varmista että Bluetooth-sovittimesi on oikein kytketty tietokoneeseen."
+msgstr "Varmista että Bluetooth-sovittimesi on oikein kytketty tietokoneeseen."
 
 #: ../python/manager.py:97
 msgid "Bluetooth devices"
@@ -424,5 +428,3 @@ msgstr "<span weight=\"bold\" size=\"larger\">Lähetetään tiedostoa</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth-tiedostonsiirto"
-
-
