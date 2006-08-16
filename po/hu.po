@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-16 11:36+0000\n"
+"POT-Creation-Date: 2006-08-15 03:47+0200\n"
 "PO-Revision-Date: 2005-08-16 16:43+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.1\n"
-"Plural-Forms:  nplurals=1; plural=0;\n"
+"Plural-Forms:   nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gnome-obex-server.schemas.in.h:1
 msgid "Directory to save received files"
@@ -190,51 +190,58 @@ msgstr "Elhelyezkedés"
 msgid "The orientation of the tray."
 msgstr "A tálca elhelyezkedése."
 
-#: ../obex/gnome-obex-send.c:162
+#: ../obex/gnome-obex-send.c:180
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "A(z) \"%s\" fájl nem olvasható."
 
-#: ../obex/gnome-obex-send.c:192
+#: ../obex/gnome-obex-send.c:211
 msgid "An error occurred while sending data."
 msgstr "Hiba lépett fel az adatok küldése közben."
 
-#: ../obex/gnome-obex-send.c:195
+#: ../obex/gnome-obex-send.c:214
 msgid "The remote device canceled the transfer."
 msgstr "A távoli eszköz megszakította az átvitelt."
 
-#: ../obex/gnome-obex-send.c:198
+#: ../obex/gnome-obex-send.c:217
 msgid "An unknown error occurred."
 msgstr "Ismeretlen hiba lépett fel."
 
-#: ../obex/gnome-obex-send.c:229
+#: ../obex/gnome-obex-send.c:248
 msgid "Connecting..."
 msgstr "Kapcsolódás..."
 
-#: ../obex/gnome-obex-send.c:276
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
+#: ../obex/gnome-obex-send.c:301
+msgid ""
+"Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Nem található felhasználói felület-fájl, ellenőrizze a gnome-bluetooth "
 "telepítését."
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:317
+msgid ""
+"Make sure \"Beam receive\" is enabled in the Power preferences, and "
+"Bluetooth is enabled."
+msgstr ""
+
+#: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
 msgstr "A távoli eszköz nem támogatja objektumok fogadását."
 
-#: ../obex/gnome-obex-send.c:300
+#: ../obex/gnome-obex-send.c:329
 msgid "Can't initialize program."
 msgstr "A program nem inicializálható."
 
-#: ../obex/gnome-obex-send.c:306
+#: ../obex/gnome-obex-send.c:335
 msgid "Unable to connect to remote device."
 msgstr "Nem lehet kapcsolódni távoli eszközhöz."
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:89
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Elfogadja a fájlt a következőtől: \"%s\"?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:90
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -242,13 +249,19 @@ msgstr ""
 "A távoli eszköz Bluetooth-on keresztül próbál Önnek küldeni egy fájlt. "
 "Engedélyezni kívánja a kapcsolatot?"
 
-#: ../obex/gnome-obex-server.c:92
+#: ../obex/gnome-obex-server.c:91
 msgid "Always accept files from this device."
 msgstr "Mindig fogadja el a fájlokat ettől az eszköztől."
 
+#. The name of the default downloads folder,
+#. * Needs to be the same as Epiphany's
+#: ../obex/gnome-obex-server.c:132
+msgid "Downloads"
+msgstr ""
+
 #. add your name and email address in here if you've translated
 #. this program
-#: ../obex/gnome-obex-server.c:288
+#: ../obex/gnome-obex-server.c:313
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
 
@@ -262,20 +275,20 @@ msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:298 ../obex/gnome-obex-server.c:350
+#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
 #: ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth fájlmegosztás"
 
-#: ../obex/gnome-obex-server.c:300
+#: ../obex/gnome-obex-server.c:325
 msgid "Receive files from Bluetooth devices"
 msgstr "Fájlok fogadása Bluetooth eszközöktől"
 
-#: ../obex/gnome-obex-server.c:407
+#: ../obex/gnome-obex-server.c:432
 msgid "Bluetooth File Server"
 msgstr "Bluetooth fájlkiszolgáló"
 
-#: ../obex/gnome-obex-server.c:445
+#: ../obex/gnome-obex-server.c:470
 msgid "Ready for Bluetooth file transfers"
 msgstr "Bluetooth fájlátvitelre kész"
 
@@ -369,17 +382,17 @@ msgstr "Válasszon Bluetooth eszközt"
 msgid "Device"
 msgstr "Eszköz"
 
-#: ../src/fileactiondialog.gob:130
+#: ../src/fileactiondialog.gob:132
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth átvitel érkezett"
 
 #. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:136
+#: ../src/fileactiondialog.gob:138
 #, c-format
 msgid "File received from '%s'. What would you like to do?"
 msgstr "Fájl érkezett ettől: \"%s\". Mit szeretne tenni?"
 
-#: ../src/fileactiondialog.gob:166
+#: ../src/fileactiondialog.gob:168
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -403,7 +416,7 @@ msgstr ""
 "Egy külső eszköz Bluetooth-on keresztül próbál kapcsolódni az Ön "
 "számítógépéhez. El kell döntenie, elfogadja-e a kapcsolatot."
 
-#: ../src/permissiondialog.gob:129
+#: ../src/permissiondialog.gob:128
 msgid "_Always allow this device to connect."
 msgstr "_Mindig engedélyezem ezen eszköz kapcsolódását."
 
@@ -414,4 +427,3 @@ msgstr "<span weight=\"bold\" size=\"larger\">Fájl küldése</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth fájlátvitel"
-
