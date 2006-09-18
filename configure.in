@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.52)
 
-AC_INIT(gnome-bluetooth, 0.7.0)
+AC_INIT(gnome-bluetooth, 0.8.0)
 AC_CONFIG_SRCDIR(src/controller.gob)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -45,7 +45,7 @@ AM_GCONF_SOURCE_2
 
 GOB2_HOOK(2.0.0,[],[AC_MSG_ERROR([Cannot find GOB-2, install from http://www.5z.com/jirka/gob.html])])
 
-BTCTL_REQUIRED=0.6.0
+BTCTL_REQUIRED=0.8.0
 GCONF_REQUIRED=2.3.3
 
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
@@ -126,6 +126,5 @@ pixmaps/Makefile
 src/Makefile
 po/Makefile.in
 obex/Makefile
-python/Makefile
 ])
 

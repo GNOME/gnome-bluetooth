@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = po libegg src obex python data ui pixmaps
+SUBDIRS = po libegg src obex data ui pixmaps
 
 EXTRA_DIST = \
 	intltool-extract.in intltool-merge.in intltool-update.in \
