@@ -1,14 +1,14 @@
 # gnome-bluetooth ja.po.
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2004-2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the 'gnome-bluetooth' package.
-# Takeshi AIHANA <aihana@gnome.gr.jp>, 2004, 2005.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2004-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-23 20:15+0900\n"
-"PO-Revision-Date: 2005-11-23 20:14+0900\n"
+"POT-Creation-Date: 2006-09-24 18:16+0900\n"
+"PO-Revision-Date: 2006-09-24 18:10+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -187,35 +187,35 @@ msgstr "向き"
 msgid "The orientation of the tray."
 msgstr "トレイの向きです"
 
-#: ../obex/gnome-obex-send.c:171
+#: ../obex/gnome-obex-send.c:180
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "ファイル '%s' を読み込めません。"
 
-#: ../obex/gnome-obex-send.c:201
+#: ../obex/gnome-obex-send.c:211
 msgid "An error occurred while sending data."
 msgstr "データを送信する際にエラーが発生しました。"
 
-#: ../obex/gnome-obex-send.c:204
+#: ../obex/gnome-obex-send.c:214
 msgid "The remote device canceled the transfer."
 msgstr "リモート・デバイスが転送をキャンセルしました。"
 
-#: ../obex/gnome-obex-send.c:207
+#: ../obex/gnome-obex-send.c:217
 msgid "An unknown error occurred."
 msgstr "不明なエラーが発生しました。"
 
-#: ../obex/gnome-obex-send.c:238
+#: ../obex/gnome-obex-send.c:248
 msgid "Connecting..."
 msgstr "接続中..."
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:301
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Glade ファイルが見つかりません (gnome-bluetooth のインストールを確認して下さ"
 "い)。"
 
-#: ../obex/gnome-obex-send.c:307
+#: ../obex/gnome-obex-send.c:317
 msgid ""
 "Make sure \"Beam receive\" is enabled in the Power preferences, and "
 "Bluetooth is enabled."
@@ -223,24 +223,24 @@ msgstr ""
 "電源設定で \"Beam receive\" が有効でかつ Bluetooth が利用可能になっているか確"
 "認して下さい。"
 
-#: ../obex/gnome-obex-send.c:309
+#: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
 msgstr "リモート・デバイスはオブジェクト受信をサポートしていません。"
 
-#: ../obex/gnome-obex-send.c:319
+#: ../obex/gnome-obex-send.c:329
 msgid "Can't initialize program."
 msgstr "プログラムを初期化できません。"
 
-#: ../obex/gnome-obex-send.c:325
+#: ../obex/gnome-obex-send.c:335
 msgid "Unable to connect to remote device."
 msgstr "リモート・デバイスへ接続できません。"
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:89
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "'%s' からのファイルを受信しますか？"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:90
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -248,17 +248,23 @@ msgstr ""
 "リモート・デバイスが Bluetooth を介してファイルを送信してきました。接続を許可"
 "してもよろしいですか？"
 
-#: ../obex/gnome-obex-server.c:92
+#: ../obex/gnome-obex-server.c:91
 msgid "Always accept files from this device."
 msgstr "常にこのデバイスからのファイルを受け入れます。"
 
+#. The name of the default downloads folder,
+#. * Needs to be the same as Epiphany's
+#: ../obex/gnome-obex-server.c:132
+msgid "Downloads"
+msgstr "ダウンロード"
+
 #. add your name and email address in here if you've translated
 #. this program
-#: ../obex/gnome-obex-server.c:288
+#: ../obex/gnome-obex-server.c:313
 msgid "translator-credits"
 msgstr ""
-"相花 毅 <aihana@gnome.gr.jp>\n"
-"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
+"相花 毅 <takeshi.aihana@gmail.com>\n"
+"日本GNOMEユーザー会 http://www.gnome.gr.jp"
 
 #. When try icon is destroyed, recreate it.  This happens
 #. when the notification area is removed.
@@ -270,102 +276,26 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:298 ../obex/gnome-obex-server.c:350
+#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
 #: ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth ファイル共有"
 
-#: ../obex/gnome-obex-server.c:300
+#: ../obex/gnome-obex-server.c:325
 msgid "Receive files from Bluetooth devices"
 msgstr "Bluetooth デバイスからファイルの受信"
 
-#: ../obex/gnome-obex-server.c:407
+#: ../obex/gnome-obex-server.c:432
 msgid "Bluetooth File Server"
 msgstr "Bluetooth ファイル・サーバ"
 
-#: ../obex/gnome-obex-server.c:445
+#: ../obex/gnome-obex-server.c:470
 msgid "Ready for Bluetooth file transfers"
 msgstr "Bluetooth ファイル転送の準備"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Bluetooth デバイスが送信したファイルを受信します"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth マネージャ"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Bluetooth デバイスとそのプロパティを表示します"
-
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Bluetooth デバイス・マネージャ"
-
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "お使いのシステムで Bluetooth デバイスを見つけることができませんでした"
-
-#: ../python/manager.py:86
-msgid ""
-"Please make sure that your Bluetooth adapter is correctly plugged in your "
-"machine."
-msgstr "Bluetooth アダプタが正しく接続されているか確認して下さい。"
-
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Bluetooth デバイス"
-
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "デバイス(_D)"
-
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "スキャン(_S)"
-
-#: ../python/manager.py:128
-msgid "_Edit"
-msgstr "編集(_E)"
-
-#: ../python/manager.py:136
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "デバイス %s が見つかりました"
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "デバイス %s の名前は '%s' です"
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "デバイスを捜しています..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "デバイス名を取得しています..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "スキャンが完了しました"
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "スキャン中にエラーが発生しました"
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Copyright © Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "リモートの Bluetooth デバイスを管理します。"
 
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
@@ -396,12 +326,12 @@ msgstr ""
 "<span weight='bold'>種類:</span> %s\n"
 "<span weight='bold'>サイズ:</span> %s"
 
-#: ../src/permissiondialog.gob:106
+#: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
 msgstr "Bluetooth デバイス '%s' への接続を許可しますか？"
 
-#: ../src/permissiondialog.gob:122
+#: ../src/permissiondialog.gob:121
 msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
@@ -409,7 +339,7 @@ msgstr ""
 "外部デバイスが Bluetooth を介して、お使いのシステムへ接続しようとしています。"
 "その接続を許可するかどうかを判断して下さい。"
 
-#: ../src/permissiondialog.gob:128
+#: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "常にこのデバイスへの接続を許可する(_A)"
 
