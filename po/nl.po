@@ -1,16 +1,17 @@
-# translation of GNOME Bluetooth.
-# Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Dutch translation of GNOME Bluetooth.
+#
+# This file is distributed under the same license as the gnome-bluetooth package.
+#
 # Reinout van Schouwen <reinout@cs.vu.nl>, 2004, 2005.
-# 
+# Wouter Bolsterlee <uws+gnome@xs4all.nl>, 2006.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME Bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-16 11:36+0000\n"
-"PO-Revision-Date: 2005-08-16 21:20+0200\n"
-"Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
+"POT-Creation-Date: 2006-09-29 12:47+0200\n"
+"PO-Revision-Date: 2006-09-29 12:48+0200 \n"
+"Last-Translator: Wouter Bolsterlee <uws+gnome@xs4all.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -190,52 +191,60 @@ msgstr "Oriëntatie"
 msgid "The orientation of the tray."
 msgstr "De oriëntatie van het vak."
 
-#: ../obex/gnome-obex-send.c:162
+#: ../obex/gnome-obex-send.c:180
 #, c-format
 msgid "Unable to read file '%s'."
 msgstr "Niet in staat bestand '%s' te lezen."
 
-#: ../obex/gnome-obex-send.c:192
+#: ../obex/gnome-obex-send.c:211
 msgid "An error occurred while sending data."
 msgstr "Er is een fout opgetreden bij het verzenden van gegevens."
 
-#: ../obex/gnome-obex-send.c:195
+#: ../obex/gnome-obex-send.c:214
 msgid "The remote device canceled the transfer."
 msgstr "Het apparaat op afstand annuleerde de overdracht."
 
-#: ../obex/gnome-obex-send.c:198
+#: ../obex/gnome-obex-send.c:217
 msgid "An unknown error occurred."
 msgstr "Een onbekende fout is opgetreden."
 
-#: ../obex/gnome-obex-send.c:229
+#: ../obex/gnome-obex-send.c:248
 msgid "Connecting..."
 msgstr "Verbinden..."
 
-#: ../obex/gnome-obex-send.c:276
+#: ../obex/gnome-obex-send.c:301
 msgid ""
 "Can't find user interface file, check your gnome-bluetooth installation."
 msgstr ""
 "Kan gebruikersinterface-bestand niet vinden, controleer uw gnome-bluetooth "
 "installatie."
 
-#: ../obex/gnome-obex-send.c:291
+#: ../obex/gnome-obex-send.c:317
+msgid ""
+"Make sure \"Beam receive\" is enabled in the Power preferences, and "
+"Bluetooth is enabled."
+msgstr ""
+"Controleer of ‘straalontvangst’ is ingeschakeld in de energievoorkeuren en "
+"dat Bluetooth ingeschakeld is."
+
+#: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
 msgstr "Apparaat op afstand is niet in staat objecten te ontvangen."
 
-#: ../obex/gnome-obex-send.c:300
+#: ../obex/gnome-obex-send.c:329
 msgid "Can't initialize program."
 msgstr "Kan programma niet initialiseren."
 
-#: ../obex/gnome-obex-send.c:306
+#: ../obex/gnome-obex-send.c:335
 msgid "Unable to connect to remote device."
 msgstr "Niet in staat te verbinden met apparaat op afstand."
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:89
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Een bestand van '%s' accepteren?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:90
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -243,15 +252,25 @@ msgstr ""
 "Het apparaat op afstand probeert u bestand te sturen via Bluetooth. Wenst u "
 "de verbinding toe te staan?"
 
-#: ../obex/gnome-obex-server.c:92
+#: ../obex/gnome-obex-server.c:91
 msgid "Always accept files from this device."
 msgstr "Bestanden van dit apparaat altijd accepteren."
 
+#. The name of the default downloads folder,
+#. * Needs to be the same as Epiphany's
+#: ../obex/gnome-obex-server.c:132
+msgid "Downloads"
+msgstr "Downloads"
+
 #. add your name and email address in here if you've translated
 #. this program
-#: ../obex/gnome-obex-server.c:288
+#: ../obex/gnome-obex-server.c:313
 msgid "translator-credits"
-msgstr "Reinout van Schouwen <reinout@cs.vu.nl>"
+msgstr ""
+"Wouter Bolsterlee\n"
+"Reinout van Schouwen\n"
+"\n"
+"Kijk voor meer informatie op http://nl.gnome.org/"
 
 #. When try icon is destroyed, recreate it.  This happens
 #. when the notification area is removed.
@@ -263,104 +282,26 @@ msgstr "Reinout van Schouwen <reinout@cs.vu.nl>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:298 ../obex/gnome-obex-server.c:350
+#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
 #: ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bestanden delen met Bluetooth"
 
-#: ../obex/gnome-obex-server.c:300
+#: ../obex/gnome-obex-server.c:325
 msgid "Receive files from Bluetooth devices"
 msgstr "Bestanden ontvangen van Bluetooth-apparaten"
 
-#: ../obex/gnome-obex-server.c:407
+#: ../obex/gnome-obex-server.c:432
 msgid "Bluetooth File Server"
 msgstr "Bluetooth bestandsserver"
 
-#: ../obex/gnome-obex-server.c:445
+#: ../obex/gnome-obex-server.c:470
 msgid "Ready for Bluetooth file transfers"
 msgstr "Klaar voor Bluetooth bestandsoverdrachten"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Bestanden ontvangen verstuurd door Bluetooth-apparaten"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth-beheer"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Bluetooth-apparaten en hun eigenschappen weergeven"
-
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Bluetooth apparaatbeheer"
-
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "Kan geen Bluetooth-apparaten vinden op het systeem"
-
-#: ../python/manager.py:86
-msgid ""
-"Please make sure that your Bluetooth adapter is correctly plugged in your "
-"machine."
-msgstr ""
-"Zorg alstublieft dat uw Bluetooth-adapter correct op uw computer aangesloten "
-"is."
-
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Bluetooth-apparaten"
-
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "_Apparaten"
-
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "_Scannen"
-
-#: ../python/manager.py:128
-msgid "_Edit"
-msgstr "Be_werken"
-
-#: ../python/manager.py:136
-msgid "_Help"
-msgstr "_Hulp"
-
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "Apparaat %s gevonden."
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "Apparaat %s heet '%s'."
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "Bezig met apparaten scannen..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "Ophalen van apparaatnamen..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "Scan afgerond."
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "Er is een fout opgetreden tijds het scannen."
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Copyright © Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "Bluetooth-apparaten op afstand beheren."
 
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
@@ -370,17 +311,17 @@ msgstr "Kies Bluetooth-apparaat"
 msgid "Device"
 msgstr "Apparaat"
 
-#: ../src/fileactiondialog.gob:130
+#: ../src/fileactiondialog.gob:132
 msgid "Bluetooth Transfer Received"
 msgstr "Bluetooth-overdracht ontvangen"
 
 #. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:136
+#: ../src/fileactiondialog.gob:138
 #, c-format
 msgid "File received from '%s'. What would you like to do?"
 msgstr "Bestand van '%s' ontvangen. Wat wilt u doen?"
 
-#: ../src/fileactiondialog.gob:166
+#: ../src/fileactiondialog.gob:168
 #, c-format
 msgid ""
 "<span weight='bold'>Name:</span> %s\n"
@@ -391,12 +332,12 @@ msgstr ""
 "<span weight='bold'>Type:</span> %s\n"
 "<span weight='bold'>Grootte:</span> %s"
 
-#: ../src/permissiondialog.gob:106
+#: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
 msgstr "Bluetooth-apparaat '%s' toestaan te verbinden?"
 
-#: ../src/permissiondialog.gob:122
+#: ../src/permissiondialog.gob:121
 msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
@@ -404,7 +345,7 @@ msgstr ""
 "Een extern apparaat tracht met uw computer te verbinden via Bluetooth. U "
 "dient te beslissen of u de verbinding wenst te accepteren."
 
-#: ../src/permissiondialog.gob:129
+#: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "Bestanden van _dit apparaat altijd accepteren."
 
@@ -415,6 +356,64 @@ msgstr "<span weight=\"bold\" size=\"larger\">Bestand aan het versturen</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth bestandsoverdracht"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Bluetooth-beheer"
+
+#~ msgid "Display Bluetooth devices and their properties"
+#~ msgstr "Bluetooth-apparaten en hun eigenschappen weergeven"
+
+#~ msgid "Bluetooth Device Manager"
+#~ msgstr "Bluetooth apparaatbeheer"
+
+#~ msgid "Could not find Bluetooth devices on the system"
+#~ msgstr "Kan geen Bluetooth-apparaten vinden op het systeem"
+
+#~ msgid ""
+#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
+#~ "machine."
+#~ msgstr ""
+#~ "Zorg alstublieft dat uw Bluetooth-adapter correct op uw computer "
+#~ "aangesloten is."
+
+#~ msgid "Bluetooth devices"
+#~ msgstr "Bluetooth-apparaten"
+
+#~ msgid "_Devices"
+#~ msgstr "_Apparaten"
+
+#~ msgid "_Scan"
+#~ msgstr "_Scannen"
+
+#~ msgid "_Edit"
+#~ msgstr "Be_werken"
+
+#~ msgid "_Help"
+#~ msgstr "_Hulp"
+
+#~ msgid "Found device %s."
+#~ msgstr "Apparaat %s gevonden."
+
+#~ msgid "Device %s is called '%s'."
+#~ msgstr "Apparaat %s heet '%s'."
+
+#~ msgid "Scanning for devices..."
+#~ msgstr "Bezig met apparaten scannen..."
+
+#~ msgid "Retrieving device names..."
+#~ msgstr "Ophalen van apparaatnamen..."
+
+#~ msgid "Scan complete."
+#~ msgstr "Scan afgerond."
+
+#~ msgid "Error during scan."
+#~ msgstr "Er is een fout opgetreden tijds het scannen."
+
+#~ msgid "Copyright Â© Edd Dumbill 2003"
+#~ msgstr "Copyright © Edd Dumbill 2003"
+
+#~ msgid "Manage remote Bluetooth devices."
+#~ msgstr "Bluetooth-apparaten op afstand beheren."
 
 #~ msgid "Incoming Bluetooth Transfer"
 #~ msgstr "Binnenkomende Bluetooth-overdracht"
