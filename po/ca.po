@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-30 12:11+0200\n"
-"PO-Revision-Date: 2006-04-30 12:34+0200\n"
+"POT-Creation-Date: 2006-11-26 18:58+0100\n"
+"PO-Revision-Date: 2006-11-26 19:02+0100\n"
 "Last-Translator: Josep Puigdemont Casamajó <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -124,9 +124,10 @@ msgstr "Opacitat de la caixa de selecció"
 msgid "Opacity of the selection box"
 msgstr "Opacitat de la caixa de selecció"
 
+# FIXME
 #: ../libegg/libegg/tray/eggstatusicon.c:154
 msgid "Pixbuf"
-msgstr ""
+msgstr "Pixbuf"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:155
 msgid "A GdkPixbuf to display"
@@ -142,11 +143,11 @@ msgstr "Nom del fitxer a carregar i mostrar"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:170
 msgid "Stock ID"
-msgstr ""
+msgstr "ID d'estoc"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:171
 msgid "Stock ID for a stock image to display"
-msgstr ""
+msgstr "ID d'estoc per a la imatge d'estoc a mostrar"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:178
 msgid "Animation"
@@ -162,7 +163,7 @@ msgstr "Tipus d'imatge"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:187
 msgid "The representation being used for image data"
-msgstr ""
+msgstr "La representació emprada per les dades de la imatge"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:195
 msgid "Size"
@@ -223,6 +224,8 @@ msgid ""
 "Make sure \"Beam receive\" is enabled in the Power preferences, and "
 "Bluetooth is enabled."
 msgstr ""
+"Assegureu-vos que s'hagi habilitat «beam receive» (la recepció) a les "
+"preferències d'energia, i també s'hagi habilitat el Bluetooth."
 
 #: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
@@ -296,84 +299,6 @@ msgstr "A punt per a transferències de fitxers amb Bluetooth"
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Rep fitxers enviats per dispositius Bluetooth"
 
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Gestor Bluetooth"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Mostra els dispositius Bluetooth i les seves propietats"
-
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Gestor de dispositius Bluetooth"
-
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "No s'ha pogut trobar cap dispositiu Bluetooth al sistema"
-
-#: ../python/manager.py:86
-msgid ""
-"Please make sure that your Bluetooth adapter is correctly plugged in your "
-"machine."
-msgstr ""
-"Assegureu-vos que el vostre adaptador Bluetooth està correctament connectat "
-"a l'ordinador."
-
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Dispositius Bluetooth"
-
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "_Dispositius"
-
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "E_scaneja"
-
-#: ../python/manager.py:128
-msgid "_Edit"
-msgstr "_Edita"
-
-#: ../python/manager.py:136
-msgid "_Help"
-msgstr "A_juda"
-
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "S'ha trobat el dispositiu %s."
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "El dispositiu %s s'anomena «%s»."
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "S'estan cercant dispositius..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "S'estan recuperant els noms dels dispositius..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "S'ha completat l'escaneig."
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "S'ha produït un error en escanejar."
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Copyright © Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "Gestiona dispositius Bluetooth remots."
-
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
 msgstr "Seleccioneu el dispositiu Bluetooth"
@@ -403,12 +328,12 @@ msgstr ""
 "<span weight='bold'>Tipus:</span> %s\n"
 "<span weight='bold'>Mida:</span> %s"
 
-#: ../src/permissiondialog.gob:106
+#: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
 msgstr "Voleu permetre que el dispositiu Bluetooth «%s» es connecti?"
 
-#: ../src/permissiondialog.gob:122
+#: ../src/permissiondialog.gob:121
 msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
@@ -416,7 +341,7 @@ msgstr ""
 "Hi ha un dispositiu extern que intenta connectar-se al vostre ordinador "
 "mitjançant Bluetooth. Heu de decidir si voleu acceptar la connexió."
 
-#: ../src/permissiondialog.gob:128
+#: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "_Sempre permet que aquest dispositiu es connecti."
 
@@ -427,3 +352,61 @@ msgstr "<span weight=\"bold\" size=\"larger\">S'està enviant el fitxer</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Transferència de fitxers amb Bluetooth"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Gestor Bluetooth"
+
+#~ msgid "Display Bluetooth devices and their properties"
+#~ msgstr "Mostra els dispositius Bluetooth i les seves propietats"
+
+#~ msgid "Bluetooth Device Manager"
+#~ msgstr "Gestor de dispositius Bluetooth"
+
+#~ msgid "Could not find Bluetooth devices on the system"
+#~ msgstr "No s'ha pogut trobar cap dispositiu Bluetooth al sistema"
+
+#~ msgid ""
+#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
+#~ "machine."
+#~ msgstr ""
+#~ "Assegureu-vos que el vostre adaptador Bluetooth està correctament "
+#~ "connectat a l'ordinador."
+
+#~ msgid "Bluetooth devices"
+#~ msgstr "Dispositius Bluetooth"
+
+#~ msgid "_Devices"
+#~ msgstr "_Dispositius"
+
+#~ msgid "_Scan"
+#~ msgstr "E_scaneja"
+
+#~ msgid "_Edit"
+#~ msgstr "_Edita"
+
+#~ msgid "_Help"
+#~ msgstr "A_juda"
+
+#~ msgid "Found device %s."
+#~ msgstr "S'ha trobat el dispositiu %s."
+
+#~ msgid "Device %s is called '%s'."
+#~ msgstr "El dispositiu %s s'anomena «%s»."
+
+#~ msgid "Scanning for devices..."
+#~ msgstr "S'estan cercant dispositius..."
+
+#~ msgid "Retrieving device names..."
+#~ msgstr "S'estan recuperant els noms dels dispositius..."
+
+#~ msgid "Scan complete."
+#~ msgstr "S'ha completat l'escaneig."
+
+#~ msgid "Error during scan."
+#~ msgstr "S'ha produït un error en escanejar."
+
+#~ msgid "Copyright Â© Edd Dumbill 2003"
+#~ msgstr "Copyright © Edd Dumbill 2003"
+
+#~ msgid "Manage remote Bluetooth devices."
+#~ msgstr "Gestiona dispositius Bluetooth remots."
