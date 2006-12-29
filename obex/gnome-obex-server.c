@@ -1,7 +1,9 @@
 /*
  * gnome-obex-server
  * Copyright (c) 2003-4 Edd Dumbill <edd@usefulinc.com>.
- *
+ * Copyright (C) 2006 Arjan Timmerman
+ * Copyright (C) 2006 Christian Persch
+ *	
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -41,6 +43,7 @@
 #include <openobex/obex.h>
 
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <gconf/gconf-value.h>
@@ -48,29 +51,109 @@
 
 #include <btobex.h>
 
-#include "eggtrayicon.h"
 #include "gnomebt-controller.h"
-#include "gnomebt-spinner.h"
 #include "gnomebt-permissiondialog.h"
 #include "gnomebt-fileactiondialog.h"
 #include "util.h"
 
+#define N_FRAMES	6
+#define REST_FRAME	4
+
 typedef struct _appinfo {
 	GnomebtController	*btctl;
 	BtctlObex		*obex;
-	GnomebtSpinner	*spin;
-	GtkTooltips		*tooltip;
-	EggTrayIcon	*tray_icon;
-	GtkMenu	*menu;
-	gboolean 	decision;
+	GtkStatusIcon		*status_icon;
+	GdkPixbuf               *frames[N_FRAMES];
+	gint                     frame;
+	guint                    spincount;
+	gint			 status_icon_size;
+	GtkMenu			*menu;
+	gboolean 		 decision;
 } MyApp;
 
 static gboolean allowed_to_put (MyApp *app, const gchar *bdaddr);
-static gboolean tray_destroy_cb (GtkObject *obj, MyApp *app);
 static int get_display_notifications ();
 
 static MyApp *app;
-static gint spincount = 0;
+
+/* FIXME: we should install icon animations in theme (like ephy-spinner icons) */
+
+static void
+load_icons (MyApp *app)
+{
+	guint i;
+
+	for (i = 0; i < N_FRAMES; ++i) {
+		char *filename;
+		GError *error = NULL;
+
+		filename = g_strdup_printf (ICON_DIR G_DIR_SEPARATOR_S "frame%d.png", i + 1);
+		app->frames[i] = gdk_pixbuf_new_from_file_at_size (filename,
+								   app->status_icon_size,
+								   app->status_icon_size,
+								   &error);
+		if (error != NULL) {
+			g_warning ("Failed to load frame %d: %s\n", i + 1, error->message);
+			g_error_free (error);
+		}
+		g_free (filename);
+	}
+}
+
+static void
+unload_icons (MyApp *app)
+{
+	guint i;
+
+	for (i = 0; i < N_FRAMES; ++i) {
+		if (app->frames[i]) {
+			g_object_unref (app->frames[i]);
+			app->frames[i] = NULL;
+		}
+	}
+}
+
+static gboolean
+status_icon_size_changed (GtkStatusIcon *status_icon,
+			  gint size,
+			  MyApp *app)
+{
+	if (app->status_icon_size == size)
+		return TRUE;
+
+	/* FIXME remove this once gtk bug #340107 is fixed */
+	if (size == 200)
+		return TRUE;
+
+	unload_icons (app);
+
+	app->status_icon_size = size;
+	load_icons (app);
+
+	gtk_status_icon_set_from_pixbuf (app->status_icon,
+					 app->frames[app->frame]);
+
+	return TRUE;
+}
+
+static void
+step_animation (MyApp *app)
+{
+	app->frame++;
+	if (app->frame >= N_FRAMES)
+		app->frame = 0;
+
+	gtk_status_icon_set_from_pixbuf (app->status_icon,
+					 app->frames[app->frame]);
+}
+
+static void
+stop_animation (MyApp *app)
+{
+	app->frame = REST_FRAME;
+	gtk_status_icon_set_from_pixbuf (app->status_icon,
+					 app->frames[app->frame]);
+}
 
 static gboolean
 allowed_to_put (MyApp *app, const gchar *bdaddr)
@@ -169,19 +252,20 @@ get_display_notifications (void)
 static void
 progress_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
 {
-	/* g_message ("Progress from %s", bdaddr); */
-	spincount++;
-	if (spincount > 3) {
-		gnomebt_spinner_spin (app->spin);
-		spincount = 0;
+	//g_message ("Progress from %s", bdaddr);
+	app->spincount++;
+	if (app->spincount > 3) {
+		step_animation (app);
+		app->spincount = 0;
 	}
 }
 
 static void
 complete_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
 {
-	/* g_message ("Operation complete from %s", bdaddr); */
-	gnomebt_spinner_reset (app->spin);
+	//g_message ("Operation complete from %s", bdaddr);
+
+	stop_animation (app);
 }
 
 static void
@@ -209,7 +293,8 @@ error_callback (BtctlObex *bo, gchar * bdaddr, guint reason, MyApp *app)
 			g_message ("Client aborted transfer");
 			break;
 	}
-	gnomebt_spinner_reset (app->spin);
+
+	stop_animation (app);
 }
 
 static void
@@ -217,6 +302,8 @@ request_put_callback (BtctlObex *bo, gchar * bdaddr, MyApp *app)
 {
 
 	g_message ("Device %s is about to send an object.", bdaddr);
+	gtk_status_icon_set_tooltip (app->status_icon,
+				     _("Incoming Bluetooth file transfer"));
 	/* Here we'd decide whether or not to accept a PUT
 	 * from this device.  For testing purposes, we will.
 	 */
@@ -257,6 +344,8 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 
 	g_message ("File arrived from %s", bdaddr);
 	g_message ("Filename '%s' Length %d", fname, data->body_len);
+	gtk_status_icon_set_tooltip (app->status_icon,
+				     _("Ready for Bluetooth file transfers"));
 
 	dir = get_save_dir ();
 	targetname = get_safe_unique_filename (fname, dir);
@@ -304,91 +393,44 @@ quit_activated (GtkMenuItem *item, gpointer data)
 static gboolean
 about_activated(GtkMenuItem *item, gpointer data)
 {
-	static gpointer about = NULL;
-	GdkPixbuf *pixbuf = NULL;
 	const gchar *authors[] = { "Edd Dumbill <edd@usefulinc.com>", NULL };
 	const gchar *documenters[] = { NULL };
-	/* add your name and email address in here if you've translated
-	   this program */
-	const gchar *translator_credits = _("translator-credits");
-
-	if (about != NULL) {
-	gdk_window_raise (GTK_WIDGET(about)->window);
-	gdk_window_show (GTK_WIDGET(about)->window);
-	return TRUE;
-	}
+	GdkPixbuf *pixbuf = NULL;
 
 	pixbuf = gnomebt_icon();
 
-	about = (gpointer)gnome_about_new(_("Bluetooth File Sharing"), VERSION,
-							"Copyright \xc2\xa9 2003-4 Edd Dumbill",
-							_("Receive files from Bluetooth devices"),
-							(const char **)authors,
-							(const char **)documenters,
-							strcmp (translator_credits,
-									"translator-credits") != 0 ?
-							translator_credits : NULL,
-							pixbuf);
+	gtk_show_about_dialog (NULL,
+				"name", _("Bluetooth File Sharing"),
+				"version", VERSION,
+				"copyright", "Copyright \xc2\xa9 2003-4 Edd Dumbill",
+				"comments", _("Receive files from Bluetooth devices"),
+				"authors", authors,
+				"documenters", documenters,
+				/* add your name and email address in here if you've translated
+				 * this program
+				 */
+				"translator-credits", _("translator-credits"),
+				"logo", pixbuf,
+				/* FIXME: website? */
+				NULL);
 
 	if (pixbuf != NULL)
-	gdk_pixbuf_unref (pixbuf);
-
-	g_signal_connect (G_OBJECT (about), "destroy",
-					G_CALLBACK (gtk_widget_destroyed), &about);
-
-	g_object_add_weak_pointer (G_OBJECT (about), &about);
-
-	gtk_widget_show(GTK_WIDGET(about));
+		gdk_pixbuf_unref (pixbuf);
 
 	return TRUE;
 }
 
 static gboolean
-tray_icon_press (GtkWidget *widget, GdkEventButton *event, MyApp *app)
+status_icon_press (GtkStatusIcon *status_icon,
+		   guint button,
+                   guint32 activate_time,
+		   MyApp *app)
 {
-	if (event->button == 3)
-	{
-		gtk_menu_popup (GTK_MENU (app->menu), NULL, NULL, NULL,
-						NULL, event->button, event->time);
-		return TRUE;
-	}
-	return FALSE;
-}
-
-static gboolean
-tray_icon_release (GtkWidget *widget, GdkEventButton *event, MyApp *app)
-{
-	if (event->button == 3) {
-		gtk_menu_popdown (GTK_MENU (app->menu));
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-static gboolean
-tray_destroy_cb (GtkObject *obj, MyApp *app)
-{
-	/* When try icon is destroyed, recreate it.  This happens
-	   when the notification area is removed. */
-
-	app->tray_icon = egg_tray_icon_new (_("Bluetooth File Sharing"));
-	app->spin = gnomebt_spinner_new ();
-	gnomebt_spinner_reset (app->spin);
-
-	g_signal_connect (G_OBJECT (app->tray_icon), "destroy",
-		G_CALLBACK (tray_destroy_cb), (gpointer) app);
-
-	g_signal_connect (GTK_OBJECT (app->spin), "button_press_event",
-		G_CALLBACK (tray_icon_press), (gpointer) app);
-
-	g_signal_connect (GTK_OBJECT (app->spin), "button_release_event",
-		G_CALLBACK (tray_icon_release), (gpointer) app);
-
-	gtk_container_add (GTK_CONTAINER (app->tray_icon),
-			GTK_WIDGET (app->spin));
-
-	gtk_widget_show_all (GTK_WIDGET (app->tray_icon));
+	gtk_menu_popup (GTK_MENU (app->menu), NULL, NULL,
+			gtk_status_icon_position_menu, status_icon,
+			button, activate_time);
+	if (button == 0)
+		gtk_menu_shell_select_first (GTK_MENU_SHELL (app->menu), FALSE);
 
 	return TRUE;
 }
@@ -396,18 +438,28 @@ tray_destroy_cb (GtkObject *obj, MyApp *app)
 int
 main (int argc, char *argv[])
 {
+	GnomeProgram *program;
 	GtkWidget *item;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	gnome_program_init ("gnome-obex-server", VERSION,
-						LIBGNOMEUI_MODULE,
-						argc, argv,
-						NULL);
+	program = gnome_program_init ("gnome-obex-server", VERSION,
+				      LIBGNOMEUI_MODULE,
+				      argc, argv,
+				      GNOME_PARAM_APP_DATADIR, DATA_DIR,
+				      NULL);
 
 	app=g_new0 (MyApp, 1);
+
+	app->status_icon = gtk_status_icon_new ();
+	app->frame = REST_FRAME;
+
+	g_signal_connect (app->status_icon, "size-changed",
+			  G_CALLBACK (status_icon_size_changed), app);
+	g_signal_connect (app->status_icon, "popup-menu",
+			  G_CALLBACK (status_icon_press), app);
 
 	app->obex = btctl_obex_new ();
 
@@ -428,11 +480,10 @@ main (int argc, char *argv[])
 				G_CALLBACK(error_callback), (gpointer) app);
 	g_signal_connect (G_OBJECT(app->obex), "connect",
 				G_CALLBACK(connect_callback), (gpointer) app);
+	
 
-	app->tray_icon = egg_tray_icon_new (_("Bluetooth File Server"));
+
 	app->btctl = gnomebt_controller_new ();
-
-	app->tooltip = gtk_tooltips_new();
 
 	app->menu = GTK_MENU (gtk_menu_new());
 
@@ -463,22 +514,19 @@ main (int argc, char *argv[])
 	gtk_widget_show (item);
 	gtk_menu_shell_append (GTK_MENU_SHELL(app->menu), item);
 
-	tray_destroy_cb (NULL, app);
-
-	gtk_tooltips_set_tip (app->tooltip,
-						GTK_WIDGET (app->spin),
-						_("Ready for Bluetooth file transfers"),
-						NULL);
-
+	gtk_status_icon_set_tooltip (app->status_icon,
+				     _("Ready for Bluetooth file transfers"));
+	gtk_status_icon_set_visible (app->status_icon, TRUE);
+		
 	gtk_main ();
 
-	/* NB: tray icon not tidied here. to do it properly,
-	 * detach its destroy handler, then destroy it.  that
-	 * will destroy its contained spin widget too. */
+	unload_icons (app);
+	g_object_unref (app->status_icon);
 	g_object_unref (app->btctl);
 	g_object_unref (app->obex);
-
 	g_free (app);
+
+	g_object_unref (program);
 
 	return 0;
 }

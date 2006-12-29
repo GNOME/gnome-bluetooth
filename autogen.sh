@@ -19,7 +19,5 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-(cd libegg && REQUIRED_AUTOMAKE_VERSION=1.8 USE_GNOME2_MACROS=1 . gnome-autogen.sh)
-
 REQUIRED_AUTOMAKE_VERSION=1.8 USE_GNOME2_MACROS=1 . gnome-autogen.sh
 

@@ -15,7 +15,7 @@ GNOMEBT_LT_VERSION=0:1:0
 AC_SUBST(GNOMEBT_LT_VERSION)
 
 AM_MAINTAINER_MODE
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip check-news])
 
@@ -45,7 +45,8 @@ GOB2_HOOK(2.0.0,[],[AC_MSG_ERROR([Cannot find GOB-2, install from http://www.5z.
 BTCTL_REQUIRED=0.8.0
 GCONF_REQUIRED=2.3.3
 
-AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+PKG_PROG_PKG_CONFIG
+
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
 PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 libbtctl >= $BTCTL_REQUIRED gconf-2.0 >= $GCONF_REQUIRED)
 PKG_CHECK_MODULES(GNOME_BLUETOOTH_PYTHON, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 pygtk-2.0 libbtctl >= $BTCTL_REQUIRED)
@@ -62,11 +63,8 @@ AC_SUBST(GLIB_GENMARSHAL)
 AC_SUBST(GNOME_BLUETOOTH_PYTHON_CFLAGS)
 AC_SUBST(GNOME_BLUETOOTH_PYTHON_LIBS)
 
-GNOME_BLUETOOTH_DATA_DIR="$datadir/gnome-bluetooth"
-AC_SUBST(GNOME_BLUETOOTH_DATA_DIR)
-
 dnl stuff for obex
-PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.6.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-2.0 libglade-2.0 libgnome-2.0 >= 2.0.0 gnome-vfs-module-2.0)
+PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.10.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-2.0 libglade-2.0 libgnome-2.0 >= 2.0.0 gnome-vfs-module-2.0)
 AC_SUBST(GOBEX_LIBS)
 AC_SUBST(GOBEX_CFLAGS)
 
@@ -111,8 +109,6 @@ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
 else
     AC_MSG_RESULT(no)
 fi
-
-AC_CONFIG_SUBDIRS(libegg)
 
 AC_CONFIG_FILES([
 Makefile
