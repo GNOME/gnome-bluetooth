@@ -1,16 +1,16 @@
 # Swedish messages for gnome-bluetooth.
 # Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2004, 2005.
 # Daniel Nylander <po@danielnylander.se>, 2006.
+# Christian Rose <menthos@menthos.com>, 2004, 2005.
 #
-# $Id$
+# $Id: sv.po,v 1.4 2006/05/11 17:43:03 dnylande Exp $
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-11 19:21+0200\n"
-"PO-Revision-Date: 2006-05-11 19:41+0100\n"
+"POT-Creation-Date: 2007-01-11 00:36+0100\n"
+"PO-Revision-Date: 2007-01-11 00:22+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -26,12 +26,22 @@ msgid "Display dialog when file received"
 msgstr "Visa dialogfönster då en fil tas emot"
 
 #: ../data/gnome-obex-server.schemas.in.h:3
-msgid "Incoming files are saved automatically into this directory. If display-notification is set then the user gets chance to open or delete them."
-msgstr "Inkommande filer sparas automatiskt i denna katalog. Om displaynotifiering är aktiverat får användaren en möjlighet att öppna eller ta bort dem."
+msgid ""
+"Incoming files are saved automatically into this directory. If display-"
+"notification is set then the user gets chance to open or delete them."
+msgstr ""
+"Inkommande filer sparas automatiskt i denna katalog. Om displaynotifiering "
+"är aktiverat får användaren en möjlighet att öppna eller ta bort dem."
 
 #: ../data/gnome-obex-server.schemas.in.h:4
-msgid "Received files are automatically saved. If this option is set, then the user is prompted with a dialog which allows them to view or delete the received file."
-msgstr "Mottagna filer sparas automatiskt. Om detta alternativ är aktiverat kommer användaren att få ett dialogfönster som låter dem visa eller ta bort den mottagna filen."
+msgid ""
+"Received files are automatically saved. If this option is set, then the user "
+"is prompted with a dialog which allows them to view or delete the received "
+"file."
+msgstr ""
+"Mottagna filer sparas automatiskt. Om detta alternativ är aktiverat kommer "
+"användaren att få ett dialogfönster som låter dem visa eller ta bort den "
+"mottagna filen."
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:313
 msgid "Selection mode"
@@ -201,12 +211,19 @@ msgid "Connecting..."
 msgstr "Ansluter..."
 
 #: ../obex/gnome-obex-send.c:301
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "Kan inte hitta användargränssnittsfil. Kontrollera din installation av gnome-bluetooth."
+msgid ""
+"Can't find user interface file, check your gnome-bluetooth installation."
+msgstr ""
+"Kan inte hitta användargränssnittsfil. Kontrollera din installation av gnome-"
+"bluetooth."
 
 #: ../obex/gnome-obex-send.c:317
-msgid "Make sure \"Beam receive\" is enabled in the Power preferences, and Bluetooth is enabled."
-msgstr "Se till att \"Beam receive\" är aktiverad i ströminställningarna, och att Bluetooth är akiverat."
+msgid ""
+"Make sure \"Beam receive\" is enabled in the Power preferences, and "
+"Bluetooth is enabled."
+msgstr ""
+"Se till att \"Beam receive\" är aktiverad i ströminställningarna, och att "
+"blåtand är aktiverat."
 
 #: ../obex/gnome-obex-send.c:319
 msgid "Remote device doesn't support receiving objects."
@@ -220,35 +237,37 @@ msgstr "Kan inte initiera program."
 msgid "Unable to connect to remote device."
 msgstr "Kan inte ansluta till fjärrenheten."
 
-#: ../obex/gnome-obex-server.c:89
+#: ../obex/gnome-obex-server.c:172
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Acceptera en fil från \"%s\"?"
 
-#: ../obex/gnome-obex-server.c:90
-msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
-msgstr "Fjärrenheten försöker att skicka en fil till dig via Bluetooth. Vill du tillåta anslutningen?"
+#: ../obex/gnome-obex-server.c:173
+msgid ""
+"The remote device is attempting to send you a file via Bluetooth. Do you "
+"wish to allow the connection?"
+msgstr ""
+"Fjärrenheten försöker att skicka en fil till dig via blåtand. Vill du "
+"tillåta anslutningen?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:174
 msgid "Always accept files from this device."
 msgstr "Acceptera alltid filer från denna enhet."
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:132
+#: ../obex/gnome-obex-server.c:215
 msgid "Downloads"
 msgstr "Hämtningar"
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:313
-msgid "translator-credits"
-msgstr ""
-"Christian Rose\n"
-"Skicka synpunkter på översättningen till sv@li.org"
+#: ../obex/gnome-obex-server.c:306
+msgid "Incoming Bluetooth file transfer"
+msgstr "Inkommande filöverföring öve blåtand"
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
+#: ../obex/gnome-obex-server.c:348 ../obex/gnome-obex-server.c:518
+msgid "Ready for Bluetooth file transfers"
+msgstr "Redo för filöverföringar över blåtand"
+
 #. *
 #. * TODO:
 #. *
@@ -257,105 +276,33 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:323
-#: ../obex/gnome-obex-server.c:375
-#: ../obex/gnome-obex-server.desktop.in.h:1
+#: ../obex/gnome-obex-server.c:403 ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
-msgstr "Bluetooth-fildelning"
+msgstr "Fildelning över blåtand"
 
-#: ../obex/gnome-obex-server.c:325
+#: ../obex/gnome-obex-server.c:406
 msgid "Receive files from Bluetooth devices"
-msgstr "Mottag filer från Bluetooth-enheter"
+msgstr "Mottag filer från blåtandsenheter"
 
-#: ../obex/gnome-obex-server.c:432
-msgid "Bluetooth File Server"
-msgstr "Bluetooth-filserver"
-
-#: ../obex/gnome-obex-server.c:470
-msgid "Ready for Bluetooth file transfers"
-msgstr "Redo för Bluetooth-filöverföringar"
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:412
+msgid "translator-credits"
+msgstr ""
+"Daniel Nylander\n"
+"Christian Rose\n"
+"\n"
+"Skicka synpunkter på översättningen till\n"
+"tp-sv@listor.tp-sv.se"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
-msgstr "Mottag filer som skickas av Bluetooth-enheter"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth-hanterare"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Visa Bluetooth-enheter och deras egenskaper"
-
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Bluetooth-enhetshanterare"
-
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "Kunde inte hitta Bluetooth-enheter på systemet"
-
-#: ../python/manager.py:86
-msgid "Please make sure that your Bluetooth adapter is correctly plugged in your machine."
-msgstr "Försäkra dig om att din Bluetooth-adapter är korrekt ansluten till din dator."
-
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Bluetooth-enheter"
-
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "_Enheter"
-
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "_Genomsök"
-
-#: ../python/manager.py:128
-msgid "_Edit"
-msgstr "_Redigera"
-
-#: ../python/manager.py:136
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "Hittade enheten %s."
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "Enheten %s kallas \"%s\"."
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "Letar efter enheter..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "Hämtar namn på enheter..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "Genomsökning klar."
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "Fel vid genomsökning."
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Copyright Â© Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "Hantera Bluetooth-fjärrenheter."
+msgstr "Ta emot filer som skickas av blåtandsenheter"
 
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
-msgstr "Välj Bluetooth-enhet"
+msgstr "Välj blåtandsenhet"
 
 #: ../src/chooser.gob:151
 msgid "Device"
@@ -363,7 +310,7 @@ msgstr "Enhet"
 
 #: ../src/fileactiondialog.gob:132
 msgid "Bluetooth Transfer Received"
-msgstr "Bluetooth-överföring mottagen"
+msgstr "Blåtandsöverföring mottagen"
 
 #. FIXME: dname needs escaping
 #: ../src/fileactiondialog.gob:138
@@ -382,16 +329,20 @@ msgstr ""
 "<span weight='bold'>Typ:</span> %s\n"
 "<span weight='bold'>Storlek:</span> %s"
 
-#: ../src/permissiondialog.gob:106
+#: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Tillåt Bluetooth-enheten \"%s\" att ansluta?"
+msgstr "Tillåt blåtandsenheten \"%s\" att ansluta?"
 
-#: ../src/permissiondialog.gob:122
-msgid "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
-msgstr "En extern enhet försöker att ansluta till din dator via Bluetooth. Du måste välja om du vill acceptera anslutningen."
+#: ../src/permissiondialog.gob:121
+msgid ""
+"An external device is attempting to connect to your computer via Bluetooth. "
+"You must decide if you want to accept the connection."
+msgstr ""
+"En extern enhet försöker att ansluta till din dator via blåtand. Du måste "
+"välja om du vill acceptera anslutningen."
 
-#: ../src/permissiondialog.gob:128
+#: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "_Tillåt alltid denna enhet att ansluta."
 
@@ -401,16 +352,78 @@ msgstr "<span weight=\"bold\" size=\"larger\">Skickar fil</span>"
 
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
-msgstr "Bluetooth-filöverföring"
+msgstr "Filöverföring över blåtand"
+
+#~ msgid "Bluetooth File Server"
+#~ msgstr "Bluetooth-filserver"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Bluetooth-hanterare"
+
+#~ msgid "Display Bluetooth devices and their properties"
+#~ msgstr "Visa Bluetooth-enheter och deras egenskaper"
+
+#~ msgid "Bluetooth Device Manager"
+#~ msgstr "Bluetooth-enhetshanterare"
+
+#~ msgid "Could not find Bluetooth devices on the system"
+#~ msgstr "Kunde inte hitta Bluetooth-enheter på systemet"
+
+#~ msgid ""
+#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
+#~ "machine."
+#~ msgstr ""
+#~ "Försäkra dig om att din Bluetooth-adapter är korrekt ansluten till din "
+#~ "dator."
+
+#~ msgid "Bluetooth devices"
+#~ msgstr "Bluetooth-enheter"
+
+#~ msgid "_Devices"
+#~ msgstr "_Enheter"
+
+#~ msgid "_Scan"
+#~ msgstr "_Genomsök"
+
+#~ msgid "_Edit"
+#~ msgstr "_Redigera"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjälp"
+
+#~ msgid "Found device %s."
+#~ msgstr "Hittade enheten %s."
+
+#~ msgid "Device %s is called '%s'."
+#~ msgstr "Enheten %s kallas \"%s\"."
+
+#~ msgid "Scanning for devices..."
+#~ msgstr "Letar efter enheter..."
+
+#~ msgid "Retrieving device names..."
+#~ msgstr "Hämtar namn på enheter..."
+
+#~ msgid "Scan complete."
+#~ msgstr "Genomsökning klar."
+
+#~ msgid "Error during scan."
+#~ msgstr "Fel vid genomsökning."
+
+#~ msgid "Copyright Â© Edd Dumbill 2003"
+#~ msgstr "Copyright Â© Edd Dumbill 2003"
+
+#~ msgid "Manage remote Bluetooth devices."
+#~ msgstr "Hantera Bluetooth-fjärrenheter."
 
 #~ msgid "GNOME Bluetooth Component send operations"
 #~ msgstr "Skickandeoperationer för GNOME Bluetooth-komponent"
+
 #~ msgid "GNOME Bluetooth component"
 #~ msgstr "GNOME Bluetooth-komponent"
+
 #~ msgid "Send via Bluetooth..."
 #~ msgstr "Skicka via Bluetooth..."
-#~ msgid "Incoming Bluetooth Transfer"
-#~ msgstr "Inkommande Bluetooth-överföring"
+
 #~ msgid ""
 #~ "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
 #~ "\n"
@@ -421,22 +434,27 @@ msgstr "Bluetooth-filöverföring"
 #~ "\n"
 #~ "Fjärrenheten försöker att skicka en fil till dig via Bluetooth. Vill du "
 #~ "tillåta anslutningen?"
+
 #~ msgid ""
 #~ "Please make sure that your bluetooth adapter is correctly plugged in your "
 #~ "machine."
 #~ msgstr ""
 #~ "Försäkra dig om att din Bluetooth-adapter är korrekt ansluten till din "
 #~ "dator."
+
 #~ msgid "Manage remote bluetooth devices."
 #~ msgstr "Hantera Bluetooth-fjärrenheter."
+
 #~ msgid ""
 #~ "<span weight='bold' size='larger'>File received from '%s'. What would you "
 #~ "like to do?</span>"
 #~ msgstr ""
 #~ "<span weight='bold' size='larger'>Fil mottagen från \"%s\". Vad vill du "
 #~ "göra?</span>"
+
 #~ msgid "Connection Request"
 #~ msgstr "Anslutningsbegäran"
+
 #~ msgid ""
 #~ "<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?"
 #~ "</span>\n"
@@ -449,32 +467,45 @@ msgstr "Bluetooth-filöverföring"
 #~ "\n"
 #~ "En extern enhet försöker att ansluta till din dator via Bluetooth. Du "
 #~ "måste välja om du vill acceptera anslutningen."
+
 #~ msgid "Choose destination device"
 #~ msgstr "Välj målenhet"
+
 #~ msgid "Bluetooth address of destination device"
 #~ msgstr "Målenhetens Bluetooth-adress"
+
 #~ msgid "File Sharing"
 #~ msgstr "Fildelning"
+
 #~ msgid "Devices"
 #~ msgstr "Enheter"
+
 #~ msgid "Copyright © Edd Dumbill 2003"
 #~ msgstr "Copyright © Edd Dumbill 2003"
+
 #~ msgid "Copyright Â© Edd Dumbill 2004"
 #~ msgstr "Copyright Â© Edd Dumbill 2004"
+
 #~ msgid "Copyright © Edd Dumbill 2004"
 #~ msgstr "Copyright © Edd Dumbill 2004"
+
 #~ msgid "Copyright Â© Edd Dumbill 2003, 2004"
 #~ msgstr "Copyright Â© Edd Dumbill 2003, 2004"
+
 #~ msgid "Copyright © Edd Dumbill 2003, 2004"
 #~ msgstr "Copyright © Edd Dumbill 2003, 2004"
+
 #~ msgid "Choose device"
 #~ msgstr "Välj enhet"
+
 #~ msgid "Name:"
 #~ msgstr "Namn:"
+
 #~ msgid "Type:"
 #~ msgstr "Typ:"
+
 #~ msgid "Size:"
 #~ msgstr "Storlek:"
+
 #~ msgid "Sending file"
 #~ msgstr "Skickar fil"
-
