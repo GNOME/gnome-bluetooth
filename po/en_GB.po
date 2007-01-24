@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-12 22:31+0100\n"
-"PO-Revision-Date: 2006-09-12 22:31-0000\n"
+"POT-Creation-Date: 2007-01-24 06:57+0000\n"
+"PO-Revision-Date: 2007-01-24 06:57-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -219,33 +219,34 @@ msgstr "Can't initialise program."
 msgid "Unable to connect to remote device."
 msgstr "Unable to connect to remote device."
 
-#: ../obex/gnome-obex-server.c:89
+#: ../obex/gnome-obex-server.c:172
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Accept a file from '%s'?"
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:173
 msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
 msgstr "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:174
 msgid "Always accept files from this device."
 msgstr "Always accept files from this device."
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:132
+#: ../obex/gnome-obex-server.c:215
 msgid "Downloads"
 msgstr "Downloads"
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:313
-msgid "translator-credits"
-msgstr "translator-credits"
+#: ../obex/gnome-obex-server.c:306
+msgid "Incoming Bluetooth file transfer"
+msgstr "Incoming Bluetooth file transfer"
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
+#: ../obex/gnome-obex-server.c:348
+#: ../obex/gnome-obex-server.c:518
+msgid "Ready for Bluetooth file transfers"
+msgstr "Ready for Bluetooth file transfers"
+
 #. *
 #. * TODO:
 #. *
@@ -254,101 +255,25 @@ msgstr "translator-credits"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:323
-#: ../obex/gnome-obex-server.c:375
+#: ../obex/gnome-obex-server.c:403
 #: ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth File Sharing"
 
-#: ../obex/gnome-obex-server.c:325
+#: ../obex/gnome-obex-server.c:406
 msgid "Receive files from Bluetooth devices"
 msgstr "Receive files from Bluetooth devices"
 
-#: ../obex/gnome-obex-server.c:432
-msgid "Bluetooth File Server"
-msgstr "Bluetooth File Server"
-
-#: ../obex/gnome-obex-server.c:470
-msgid "Ready for Bluetooth file transfers"
-msgstr "Ready for Bluetooth file transfers"
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:412
+msgid "translator-credits"
+msgstr "translator-credits"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Receive files sent by Bluetooth devices"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth Manager"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Display Bluetooth devices and their properties"
-
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Bluetooth Device Manager"
-
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "Could not find Bluetooth devices on the system"
-
-#: ../python/manager.py:86
-msgid "Please make sure that your Bluetooth adapter is correctly plugged in your machine."
-msgstr "Please make sure that your Bluetooth adapter is correctly plugged in your machine."
-
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Bluetooth devices"
-
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "_Devices"
-
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "_Scan"
-
-#: ../python/manager.py:128
-msgid "_Edit"
-msgstr "_Edit"
-
-#: ../python/manager.py:136
-msgid "_Help"
-msgstr "_Help"
-
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "Found device %s."
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "Device %s is called '%s'."
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "Scanning for devices..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "Retrieving device names..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "Scan complete."
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "Error during scan."
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Copyright © Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "Manage remote Bluetooth devices."
 
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
@@ -379,16 +304,16 @@ msgstr ""
 "<span weight='bold'>Type:</span> %s\n"
 "<span weight='bold'>Size:</span> %s"
 
-#: ../src/permissiondialog.gob:106
+#: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
 msgstr "Allow Bluetooth device '%s' to connect?"
 
-#: ../src/permissiondialog.gob:122
+#: ../src/permissiondialog.gob:121
 msgid "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
 msgstr "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
 
-#: ../src/permissiondialog.gob:128
+#: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "_Always allow this device to connect."
 
@@ -400,14 +325,54 @@ msgstr "<span weight=\"bold\" size=\"larger\">Sending file</span>"
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth file transfer"
 
+#~ msgid "Bluetooth File Server"
+#~ msgstr "Bluetooth File Server"
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Bluetooth Manager"
+#~ msgid "Display Bluetooth devices and their properties"
+#~ msgstr "Display Bluetooth devices and their properties"
+#~ msgid "Bluetooth Device Manager"
+#~ msgstr "Bluetooth Device Manager"
+#~ msgid "Could not find Bluetooth devices on the system"
+#~ msgstr "Could not find Bluetooth devices on the system"
+#~ msgid ""
+#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
+#~ "machine."
+#~ msgstr ""
+#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
+#~ "machine."
+#~ msgid "Bluetooth devices"
+#~ msgstr "Bluetooth devices"
+#~ msgid "_Devices"
+#~ msgstr "_Devices"
+#~ msgid "_Scan"
+#~ msgstr "_Scan"
+#~ msgid "_Edit"
+#~ msgstr "_Edit"
+#~ msgid "_Help"
+#~ msgstr "_Help"
+#~ msgid "Found device %s."
+#~ msgstr "Found device %s."
+#~ msgid "Device %s is called '%s'."
+#~ msgstr "Device %s is called '%s'."
+#~ msgid "Scanning for devices..."
+#~ msgstr "Scanning for devices..."
+#~ msgid "Retrieving device names..."
+#~ msgstr "Retrieving device names..."
+#~ msgid "Scan complete."
+#~ msgstr "Scan complete."
+#~ msgid "Error during scan."
+#~ msgstr "Error during scan."
+#~ msgid "Copyright Â© Edd Dumbill 2003"
+#~ msgstr "Copyright © Edd Dumbill 2003"
+#~ msgid "Manage remote Bluetooth devices."
+#~ msgstr "Manage remote Bluetooth devices."
 #~ msgid "GNOME Bluetooth Component send operations"
 #~ msgstr "GNOME Bluetooth Component send operations"
 #~ msgid "GNOME Bluetooth component"
 #~ msgstr "GNOME Bluetooth component"
 #~ msgid "Send via Bluetooth..."
 #~ msgstr "Send via Bluetooth..."
-#~ msgid "Incoming Bluetooth Transfer"
-#~ msgstr "Incoming Bluetooth Transfer"
 #~ msgid "Connection Request"
 #~ msgstr "Connection Request"
 #~ msgid "Choose destination device"
