@@ -1,16 +1,16 @@
 # Catalan translations for gnome-bluetooth package
 # Traduccions al català del paquet «gnome-bluetooth».
-# Copyright © 2006 The Free Software Foundation, Inc.
+# Copyright © 2006, 2007 The Free Software Foundation, Inc.
 # This file is distributed under the same license as the
 #   gnome-bluetooth package.
-# Josep Puigdemont <josep.puigdemont@gmail.com>, 2006.
+# Josep Puigdemont <josep.puigdemont@gmail.com>, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-26 18:58+0100\n"
-"PO-Revision-Date: 2006-11-26 19:02+0100\n"
+"POT-Creation-Date: 2007-01-26 00:41+0100\n"
+"PO-Revision-Date: 2007-01-26 00:42+0100\n"
 "Last-Translator: Josep Puigdemont Casamajó <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -239,12 +239,12 @@ msgstr "No es pot inicialitzar el programa."
 msgid "Unable to connect to remote device."
 msgstr "No s'ha pogut connectar al dispositiu remot."
 
-#: ../obex/gnome-obex-server.c:89
+#: ../obex/gnome-obex-server.c:172
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Voleu acceptar un fitxer de «%s»?"
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:173
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -252,24 +252,24 @@ msgstr ""
 "El dispositiu remot intenta enviar-vos un fitxer a través de Bluetooth. "
 "Voleu permetre la connexió?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:174
 msgid "Always accept files from this device."
 msgstr "Sempre accepta fitxers d'aquest dispositiu."
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:132
+#: ../obex/gnome-obex-server.c:215
 msgid "Downloads"
 msgstr "Baixades"
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:313
-msgid "translator-credits"
-msgstr "Josep Puigdemont Casamajó <josep.puigdemont@gmail.com>"
+#: ../obex/gnome-obex-server.c:306
+msgid "Incoming Bluetooth file transfer"
+msgstr "Transferència de fitxers amb Bluetooth entrant"
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
+#: ../obex/gnome-obex-server.c:348 ../obex/gnome-obex-server.c:518
+msgid "Ready for Bluetooth file transfers"
+msgstr "A punt per a transferències de fitxers amb Bluetooth"
+
 #. *
 #. * TODO:
 #. *
@@ -278,22 +278,20 @@ msgstr "Josep Puigdemont Casamajó <josep.puigdemont@gmail.com>"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
-#: ../obex/gnome-obex-server.desktop.in.h:1
+#: ../obex/gnome-obex-server.c:403 ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Compartició de fitxers amb Bluetooth"
 
-#: ../obex/gnome-obex-server.c:325
+#: ../obex/gnome-obex-server.c:406
 msgid "Receive files from Bluetooth devices"
 msgstr "Recepció de fitxers de dispositius Bluetooth"
 
-#: ../obex/gnome-obex-server.c:432
-msgid "Bluetooth File Server"
-msgstr "Servidor de fitxers Bluetooth"
-
-#: ../obex/gnome-obex-server.c:470
-msgid "Ready for Bluetooth file transfers"
-msgstr "A punt per a transferències de fitxers amb Bluetooth"
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:412
+msgid "translator-credits"
+msgstr "Josep Puigdemont Casamajó <josep.puigdemont@gmail.com>"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
@@ -352,6 +350,9 @@ msgstr "<span weight=\"bold\" size=\"larger\">S'està enviant el fitxer</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Transferència de fitxers amb Bluetooth"
+
+#~ msgid "Bluetooth File Server"
+#~ msgstr "Servidor de fitxers Bluetooth"
 
 #~ msgid "Bluetooth Manager"
 #~ msgstr "Gestor Bluetooth"
