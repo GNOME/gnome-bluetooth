@@ -1,16 +1,17 @@
 # Danish translation of gnome-bluetooth.
-# Copyright (C) 2005, 06
+# Copyright (C) 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Lasse Bang Mikkelsen <lbm@fatalerror.dk>, 2005, 06.
+# Peter Bach <bach.peter@gmail.com>, 2007
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-11 18:32+0200\n"
-"PO-Revision-Date: 2006-10-11 18:32+0200\n"
-"Last-Translator: Lasse Bang Mikkelsen <lbm@fatalerror.dk>\n"
-"Language-Team: Danish <dansk@klid.dk>\n"
+"POT-Creation-Date: 2007-02-04 13:49+0100\n"
+"PO-Revision-Date: 2007-02-02 21:44+0200\n"
+"Last-Translator: Peter Bach <bach.peter@gmail.com>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,18 +19,18 @@ msgstr ""
 
 #: ../data/gnome-obex-server.schemas.in.h:1
 msgid "Directory to save received files"
-msgstr "Katalog til modtagne filer"
+msgstr "Mappe til modtagne filer"
 
 #: ../data/gnome-obex-server.schemas.in.h:2
 msgid "Display dialog when file received"
-msgstr "Vis vindue når fil modtages"
+msgstr "Vis vindue når fil er modtaget"
 
 #: ../data/gnome-obex-server.schemas.in.h:3
 msgid ""
 "Incoming files are saved automatically into this directory. If display-"
 "notification is set then the user gets chance to open or delete them."
 msgstr ""
-"Indkomne filer gemmes automatisk til dette katalog. Hvis påmindelse er slået "
+"Indkomne filer gemmes automatisk til denne mappe. Hvis påmindelse er slået "
 "til, vil brugeren få mulighed for at åbne eller slette dem."
 
 #: ../data/gnome-obex-server.schemas.in.h:4
@@ -38,7 +39,7 @@ msgid ""
 "is prompted with a dialog which allows them to view or delete the received "
 "file."
 msgstr ""
-"Modtagne filer gemmes automatisk. Hvis dette tilvalg er slået til, vil "
+"Modtagne filer gemmes automatisk. Hvis denne valgmulighed er slået til, vil "
 "brugeren få mulighed for at vise eller slette den modtagne fil."
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:313
@@ -234,12 +235,12 @@ msgstr "Kan ikke initialisere program."
 msgid "Unable to connect to remote device."
 msgstr "Kan ikke tilslutte til fjernenhed."
 
-#: ../obex/gnome-obex-server.c:89
+#: ../obex/gnome-obex-server.c:172
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Acceptér fil fra \"%s\"?"
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:173
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -247,28 +248,24 @@ msgstr ""
 "Fjernenheden forsøger at sende en fil til dig via Bluetooth. Ønsker du at "
 "tillade forbindelsen?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:174
 msgid "Always accept files from this device."
 msgstr "Acceptér altid filer fra denne enhed."
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:132
+#: ../obex/gnome-obex-server.c:215
 msgid "Downloads"
 msgstr "Overførsler"
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:313
-msgid "translator-credits"
-msgstr ""
-"Lasse Bang Mikkelsen\n"
-"\n"
-"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
-"Mere info: http://www.dansk-gruppen.dk"
+#: ../obex/gnome-obex-server.c:306
+msgid "Incoming Bluetooth file transfer"
+msgstr "Bluetooth filoverførsel"
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
+#: ../obex/gnome-obex-server.c:348 ../obex/gnome-obex-server.c:518
+msgid "Ready for Bluetooth file transfers"
+msgstr "Klar til Bluetooth filoverførsler"
+
 #. *
 #. * TODO:
 #. *
@@ -277,22 +274,25 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
-#: ../obex/gnome-obex-server.desktop.in.h:1
+#: ../obex/gnome-obex-server.c:403 ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Bluetooth fildeling"
 
-#: ../obex/gnome-obex-server.c:325
+#: ../obex/gnome-obex-server.c:406
 msgid "Receive files from Bluetooth devices"
 msgstr "Modtag filer fra Bluetooth-enheder"
 
-#: ../obex/gnome-obex-server.c:432
-msgid "Bluetooth File Server"
-msgstr "Bluetooth filserver"
-
-#: ../obex/gnome-obex-server.c:470
-msgid "Ready for Bluetooth file transfers"
-msgstr "Klar til Bluetooth filoverførsler"
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:412
+msgid "translator-credits"
+msgstr ""
+"Lasse Bang Mikkelsen\n"
+"Peter Bach\n"
+"\n"
+"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Mere info: http://www.dansk-gruppen.dk"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
@@ -314,7 +314,7 @@ msgstr "Bluetooth-overførsel modtaget"
 #: ../src/fileactiondialog.gob:138
 #, c-format
 msgid "File received from '%s'. What would you like to do?"
-msgstr "Fil modtaget fra \"%s\". Hvad vil du foretage dig?"
+msgstr "Fil modtaget fra \"%s\". Hvad vil du gøre med den?"
 
 #: ../src/fileactiondialog.gob:168
 #, c-format
@@ -351,3 +351,6 @@ msgstr "<span weight=\"bold\" size=\"larger\">Sender fil</span>"
 #: ../ui/gnome-obex-send.glade.h:2
 msgid "Bluetooth file transfer"
 msgstr "Bluetooth filoverførsel"
+
+#~ msgid "Bluetooth File Server"
+#~ msgstr "Bluetooth filserver"
