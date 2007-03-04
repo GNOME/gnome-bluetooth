@@ -1,18 +1,18 @@
 # French translation of gnome-bluetooth.
-# Copyright (C) 2004-2006 Free Software Foundation, Inc.
+# Copyright (C) 2004-2007 Free Software Foundation, Inc.
 # This file is under the same licence as the gnome-bluetooth package.
 #
 # Raphaël Tournoy <lexpas@free.fr>, 2004.
-# Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2004-2006.
-# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006.
+# Christophe Merlet <redfox@redfoxcenter.org>, 2004-2006.
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-26 14:35+0200\n"
-"PO-Revision-Date: 2006-08-26 14:35+0200\n"
-"Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
+"POT-Creation-Date: 2007-03-04 04:36+0100\n"
+"PO-Revision-Date: 2007-02-10 12:24+0100\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -240,12 +240,12 @@ msgstr "Le programme ne peut pas être initialisé."
 msgid "Unable to connect to remote device."
 msgstr "Impossible de se connecter au périphérique distant."
 
-#: ../obex/gnome-obex-server.c:89
+#: ../obex/gnome-obex-server.c:172
 #, c-format
 msgid "Accept a file from '%s'?"
 msgstr "Accepter un fichier de « %s » ?"
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:173
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
@@ -253,27 +253,24 @@ msgstr ""
 "Le périphérique distant essaie de vous envoyer un fichier par Bluetooth. "
 "Souhaitez-vous autoriser la connexion ?"
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:174
 msgid "Always accept files from this device."
 msgstr "Toujours accepter les fichiers provenant de ce périphérique."
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:132
+#: ../obex/gnome-obex-server.c:215
 msgid "Downloads"
 msgstr "Téléchargements"
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:313
-msgid "translator-credits"
-msgstr ""
-"Raphaël Tournoy <lexpas@free.fr>\n"
-"Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
-"Jonathan Ernst <jonathan@ernstfamily.ch>"
+#: ../obex/gnome-obex-server.c:306
+msgid "Incoming Bluetooth file transfer"
+msgstr "Transfert de fichiers Bluetooth entrant"
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
+#: ../obex/gnome-obex-server.c:348 ../obex/gnome-obex-server.c:518
+msgid "Ready for Bluetooth file transfers"
+msgstr "Prêt pour les transferts de fichiers Bluetooth"
+
 #. *
 #. * TODO:
 #. *
@@ -282,104 +279,27 @@ msgstr ""
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:323 ../obex/gnome-obex-server.c:375
-#: ../obex/gnome-obex-server.desktop.in.h:1
+#: ../obex/gnome-obex-server.c:403 ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "Partage de fichiers Bluetooth"
 
-#: ../obex/gnome-obex-server.c:325
+#: ../obex/gnome-obex-server.c:406
 msgid "Receive files from Bluetooth devices"
 msgstr "Reçoit des fichiers de périphériques Bluetooth"
 
-#: ../obex/gnome-obex-server.c:432
-msgid "Bluetooth File Server"
-msgstr "Serveur de fichiers Bluetooth"
-
-#: ../obex/gnome-obex-server.c:470
-msgid "Ready for Bluetooth file transfers"
-msgstr "Prêt pour les transferts de fichiers Bluetooth"
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:412
+msgid "translator-credits"
+msgstr ""
+"Raphaël Tournoy <lexpas@free.fr>\n"
+"Christophe Merlet <redfox@redfoxcenter.org>\n"
+"Jonathan Ernst <jonathan@ernstfamily.ch>"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
 msgstr "Reçoit des fichiers de périphériques Bluetooth"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Gestionnaire Bluetooth"
-
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Affiche les périphériques Bluetooth et leur propriétés"
-
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Gestionnaire de périphériques Bluetooth"
-
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "Aucun périphérique Bluetooth n'a pu être trouvé sur votre système"
-
-#: ../python/manager.py:86
-msgid ""
-"Please make sure that your Bluetooth adapter is correctly plugged in your "
-"machine."
-msgstr ""
-"Vérifiez que votre adaptateur Bluetooth est correctement branché à votre "
-"machine."
-
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Périphériques Bluetooth"
-
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "_Périphériques"
-
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "_Rechercher"
-
-#: ../python/manager.py:128
-msgid "_Edit"
-msgstr "É_dition"
-
-#: ../python/manager.py:136
-msgid "_Help"
-msgstr "_Aide"
-
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "Périphérique %s trouvé."
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "Le périphérique %s est appelé « %s »."
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "Recherche de périphériques..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "Récupération des noms de périphériques..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "Recherche terminée."
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "Erreur pendant la recherche."
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Copyright © Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "Gérer les périphériques Bluetooth distants."
 
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
@@ -410,12 +330,12 @@ msgstr ""
 "<span weight='bold'>Type :</span> %s\n"
 "<span weight='bold'>Taille :</span> %s"
 
-#: ../src/permissiondialog.gob:106
+#: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
 msgstr "Autoriser le périphérique Bluetooth « %s » à se connecter ?"
 
-#: ../src/permissiondialog.gob:122
+#: ../src/permissiondialog.gob:121
 msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
@@ -423,7 +343,7 @@ msgstr ""
 "Un périphérique externe tente de se connecter à votre ordinateur par "
 "Bluetooth. Vous devez décider si vous voulez accepter cette connexion."
 
-#: ../src/permissiondialog.gob:128
+#: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "Toujours _autoriser ce périphérique à se connecter."
 
