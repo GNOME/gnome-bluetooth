@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Project\n"
+"Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-17 21:14+0000\n"
-"PO-Revision-Date: 2006-11-18 00:38+0100\n"
+"POT-Creation-Date: 2007-02-22 19:02+0000\n"
+"PO-Revision-Date: 2007-04-14 18:38+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: ../data/gnome-obex-server.schemas.in.h:1
 #, fuzzy
 msgid "Directory to save received files"
-msgstr "الدليل الذي منه تحمل ملفات القواميس."
+msgstr "غير قادر على الحفظ للدليل &quot;{0}&quot;."
 
 #: ../data/gnome-obex-server.schemas.in.h:2
 msgid "Display dialog when file received"
@@ -47,12 +47,12 @@ msgstr "نمط الانتقاء"
 #: ../libegg/libegg/iconlist/eggiconlist.c:322
 #, fuzzy
 msgid "Sorted"
-msgstr "غير مرتّبة"
+msgstr "مصنّف"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:323
 #, fuzzy
 msgid "Icon list is sorted"
-msgstr "المفتاح '%s' ليس قائمة.\n"
+msgstr "{0} موجود في القائمة مسبقاً"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:329
 #, fuzzy
@@ -71,12 +71,12 @@ msgstr "الحشو الأعلى"
 #: ../libegg/libegg/iconlist/eggiconlist.c:345
 #, fuzzy
 msgid "Number of pixels between icons"
-msgstr "عدد بكسلات الإزاحة"
+msgstr "عدد البكسلات بين صفوف أيقونات"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:352
 #, fuzzy
 msgid "Top margin"
-msgstr "<b>الحاشية اليمنى</b>"
+msgstr "الهامش الأعلى [%s]"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:353
 #, fuzzy
@@ -86,7 +86,7 @@ msgstr "عدد البكسلات في الهامش الأيسر"
 #: ../libegg/libegg/iconlist/eggiconlist.c:360
 #, fuzzy
 msgid "Bottom margin"
-msgstr "<b>الحاشية اليمنى</b>"
+msgstr "الهامش السفلي [%s]"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:361
 #, fuzzy
@@ -116,22 +116,22 @@ msgstr "عدد البكسلات في الهامش الأيمن"
 #: ../libegg/libegg/iconlist/eggiconlist.c:386
 #, fuzzy
 msgid "Selection Box Color"
-msgstr "اختيار لون المنتقى"
+msgstr "لون علبة الإختيار"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:387
 #, fuzzy
 msgid "Color of the selection box"
-msgstr "اختيار لون المنتقى"
+msgstr "لون صندوق الإختيار"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:393
 #, fuzzy
 msgid "Selection Box Alpha"
-msgstr "عنوان صندوق مربع حوار الانتقاء"
+msgstr "ألفا علبة الإختيار"
 
 #: ../libegg/libegg/iconlist/eggiconlist.c:394
 #, fuzzy
 msgid "Opacity of the selection box"
-msgstr "عنوان صندوق مربع حوار الانتقاء"
+msgstr "شفافية علبة الإختيار"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:154
 #, fuzzy
@@ -176,7 +176,7 @@ msgstr "GdkPixbufAnimation لعرضها"
 #: ../libegg/libegg/tray/eggstatusicon.c:186
 #, fuzzy
 msgid "Image type"
-msgstr "نوع الصورة:"
+msgstr "نوع الصورة"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:187
 #, fuzzy
@@ -196,11 +196,12 @@ msgstr "حجم الأيقونة"
 #: ../libegg/libegg/tray/eggstatusicon.c:205
 #, fuzzy
 msgid "Blinking"
-msgstr "نص ومّاض"
+msgstr "ومّاض"
 
 #: ../libegg/libegg/tray/eggstatusicon.c:206
+#, fuzzy
 msgid "Whether or not the status icon is blinking"
-msgstr ""
+msgstr "فيما إذا كانت أيقونة الحالة وامضة"
 
 #: ../libegg/libegg/tray/eggtrayicon.c:118
 #: ../libegg/libegg/tray/eggtraymanager.c:145
@@ -212,12 +213,12 @@ msgstr "الإتّجاه"
 #: ../libegg/libegg/tray/eggtraymanager.c:146
 #, fuzzy
 msgid "The orientation of the tray."
-msgstr "إتجاه الطبق."
+msgstr "إتجاه اللوحة."
 
 #: ../obex/gnome-obex-send.c:180
 #, fuzzy, c-format
 msgid "Unable to read file '%s'."
-msgstr "فشل في قراءة الملف '%s': %s"
+msgstr "غير قادر على قراءة ملف الترخيص."
 
 #: ../obex/gnome-obex-send.c:211
 #, fuzzy
@@ -260,35 +261,36 @@ msgstr "لا يمكن تشغيل الأعمال."
 msgid "Unable to connect to remote device."
 msgstr "لا يمكن الإتصال بالخادم عن بعد"
 
-#: ../obex/gnome-obex-server.c:89
+#: ../obex/gnome-obex-server.c:172
 #, fuzzy, c-format
 msgid "Accept a file from '%s'?"
-msgstr "الملف النواة من البرنامج"
+msgstr "استيراد من ملفّ"
 
-#: ../obex/gnome-obex-server.c:90
+#: ../obex/gnome-obex-server.c:173
 msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
 msgstr ""
 
-#: ../obex/gnome-obex-server.c:91
+#: ../obex/gnome-obex-server.c:174
 msgid "Always accept files from this device."
 msgstr ""
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:132
+#: ../obex/gnome-obex-server.c:215
 #, fuzzy
 msgid "Downloads"
 msgstr "التنزيلات"
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:313
+#: ../obex/gnome-obex-server.c:306
 #, fuzzy
-msgid "translator-credits"
-msgstr "Yousef Raffah يوسف رفه (yousef@raffah.com)"
+msgid "Incoming Bluetooth file transfer"
+msgstr "برنامج نقل ملفّات مُتطوّر."
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
+#: ../obex/gnome-obex-server.c:348
+#: ../obex/gnome-obex-server.c:518
+msgid "Ready for Bluetooth file transfers"
+msgstr ""
+
 #. *
 #. * TODO:
 #. *
@@ -297,25 +299,26 @@ msgstr "Yousef Raffah يوسف رفه (yousef@raffah.com)"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:323
-#: ../obex/gnome-obex-server.c:375
+#: ../obex/gnome-obex-server.c:403
 #: ../obex/gnome-obex-server.desktop.in.h:1
 #, fuzzy
 msgid "Bluetooth File Sharing"
 msgstr "خدمة مشاركة الملفات"
 
-#: ../obex/gnome-obex-server.c:325
+#: ../obex/gnome-obex-server.c:406
 msgid "Receive files from Bluetooth devices"
 msgstr ""
 
-#: ../obex/gnome-obex-server.c:432
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:412
 #, fuzzy
-msgid "Bluetooth File Server"
-msgstr "مسح نادل STUN"
-
-#: ../obex/gnome-obex-server.c:470
-msgid "Ready for Bluetooth file transfers"
+msgid "translator-credits"
 msgstr ""
+"فريق عربآيز للترجمة http://www.arabeyes.org :\n"
+"جهاد عفيفي\t<djihed@gmail.com>\n"
+"يوسف رفه\t<yousef@raffah.com>"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
@@ -324,7 +327,7 @@ msgstr ""
 #: ../src/chooser.gob:109
 #, fuzzy
 msgid "Choose Bluetooth device"
-msgstr "رجاءً اختر جهاز خرج الصّوت:"
+msgstr "إدارة أجهزة البلوتوث"
 
 #: ../src/chooser.gob:151
 #, fuzzy
@@ -366,10 +369,14 @@ msgstr ""
 #: ../ui/gnome-obex-send.glade.h:1
 #, fuzzy
 msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">تسجيلات متعددة موجودة</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">كلمة السر مطلوبة</span>"
 
 #: ../ui/gnome-obex-send.glade.h:2
 #, fuzzy
 msgid "Bluetooth file transfer"
-msgstr "حوّل المكالمة الحالية"
+msgstr "نقل الملفّات (FTP)"
+
+#, fuzzy
+#~ msgid "Bluetooth File Server"
+#~ msgstr "مسح نادل STUN"
 
