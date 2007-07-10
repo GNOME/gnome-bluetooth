@@ -1,5 +1,11 @@
 2007-07-10  Bastien Nocera  <hadess@hadess.net>
 
+	* obex/gnome-obex-send.c: (disconnected_callback), (send_one),
+	(mainloop): Patch from Allen Hubbe <allenbh@gmail.com> to send
+	a disconnect when we're finished sending a file (Closes: #452970)
+
+2007-07-10  Bastien Nocera  <hadess@hadess.net>
+
 	* configure.in: Patch from Andreas Hanke <andreas.hanke@gmx-topmail.de>
 	to avoid checking for libraries we don't use (Closes: #409813)
 

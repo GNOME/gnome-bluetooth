@@ -147,6 +147,19 @@ complete_callback (BtctlObexClient *bo, gchar * bdaddr, gpointer data)
 	g_idle_add ((GSourceFunc) send_one, data);
 }
 
+static void
+disconnected_callback (BtctlObexClient *bo, gchar * bdaddr, gpointer data)
+{
+	MyApp *app = (MyApp *)data;
+
+	if (app->data) {
+		g_free (app->data);
+		app->data = NULL;
+	}
+
+	gtk_main_quit();
+}
+
 static gboolean
 send_one (MyApp *app)
 {
@@ -185,8 +198,8 @@ send_one (MyApp *app)
 		}
 		g_free (path);
 	} else {
-		/* nothing left to send, time to quit */
-		gtk_main_quit ();
+		/* nothing left to send, time to disconnect */
+		btctl_obex_client_disconnect (app->obex);
 	}
 	
 	return FALSE;
@@ -231,6 +244,8 @@ mainloop (MyApp *app)
 		G_CALLBACK (complete_callback), (gpointer) app);
 	g_signal_connect (G_OBJECT (app->obex), "connected",
 		G_CALLBACK (connected_callback), (gpointer) app);
+	g_signal_connect (G_OBJECT (app->obex), "disconnected",
+		G_CALLBACK (disconnected_callback), (gpointer) app);
 	g_signal_connect (G_OBJECT (app->obex), "error",
 		G_CALLBACK (error_callback), (gpointer) app);
 
