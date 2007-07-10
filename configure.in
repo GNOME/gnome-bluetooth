@@ -63,11 +63,6 @@ AC_SUBST(GLIB_GENMARSHAL)
 AC_SUBST(GNOME_BLUETOOTH_PYTHON_CFLAGS)
 AC_SUBST(GNOME_BLUETOOTH_PYTHON_LIBS)
 
-dnl stuff for obex
-PKG_CHECK_MODULES(GOBEX, gtk+-2.0 >= 2.10.0 gnome-vfs-2.0 librsvg-2.0 libgnomeui-2.0 libglade-2.0 libgnome-2.0 >= 2.0.0 gnome-vfs-module-2.0)
-AC_SUBST(GOBEX_LIBS)
-AC_SUBST(GOBEX_CFLAGS)
-
 dnl ==========================================================================
 dnl Turn on the additional warnings last, so -Werror doesn't affect other tests.
 AC_ARG_ENABLE(compile-warnings,
