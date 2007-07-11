@@ -27,20 +27,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdarg.h>
-#include <fcntl.h>
 
 #include <sys/types.h>
 #include <utime.h>
-
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <bluetooth/bluetooth.h>
-#include <bluetooth/rfcomm.h>
-
-#include <openobex/obex.h>
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -332,7 +321,7 @@ static void
 put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 		BtctlObexData *data, guint timestamp, MyApp *app)
 {
-	int fd;
+	GError *error = NULL;
 	char *targetname = NULL, *dir;
 	struct utimbuf utim;
 	GnomebtFileActionDialog *dlg;
@@ -352,11 +341,7 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 	g_free (dir);
 
 	g_message ("Saving to '%s'", targetname);
-	fd = open (targetname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-	if (fd >= 0) {
-		write (fd, data->body, data->body_len);
-		close (fd);
-		
+	if (g_file_set_contents (targetname, data->body, data->body_len, &error) == FALSE) {
 		if(timestamp) {
 			utim.actime = utim.modtime = (time_t) timestamp;
 			utime(targetname, &utim);
@@ -377,7 +362,8 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 					"response", G_CALLBACK (gtk_widget_destroy), dlg);
 		}
 	} else {
-		g_warning ("Couldn't save file.");
+		g_warning ("Couldn't save file: %s", error->message);
+		g_error_free (error);
 		btctl_obex_set_response (bo, FALSE);
 	}
 	g_free (targetname);

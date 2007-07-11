@@ -1,3 +1,12 @@
+2007-07-11  Bastien Nocera  <hadess@hadess.net>
+
+	* configure.in: Up the version, for our testing, require a newer GTK+
+	for the tray icon
+	* gnome-bluetooth.pc.in: require libgnomeui-2.0, it's really needed
+	* obex/gnome-obex-server.c: (put_callback): use g_file_set_contents()
+	instead of our crappy function, remove a whole load of unneeded included
+	headers
+
 2007-07-10  Bastien Nocera  <hadess@hadess.net>
 
 	* obex/gnome-obex-send.c: (disconnected_callback), (send_one),
