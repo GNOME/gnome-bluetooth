@@ -341,7 +341,7 @@ put_callback (BtctlObex *bo, gchar * bdaddr, gchar *fname,
 	g_free (dir);
 
 	g_message ("Saving to '%s'", targetname);
-	if (g_file_set_contents (targetname, data->body, data->body_len, &error) == FALSE) {
+	if (g_file_set_contents (targetname, data->body, data->body_len, &error) != FALSE) {
 		if(timestamp) {
 			utim.actime = utim.modtime = (time_t) timestamp;
 			utime(targetname, &utim);
