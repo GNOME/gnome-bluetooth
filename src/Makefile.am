@@ -98,7 +98,12 @@ PYTHON_DIST = \
 	gnomebt-chooser.defs gnomebt-chooser.override
 
 EXTRA_DIST = $(GOB_DIST) $(PYTHON_DIST)
-CLEANFILES = $(PYTHON_CLEANFILES)
+CLEANFILES = $(PYTHON_CLEANFILES) *.defs *-py.c						\
+	     gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h		\
+	     gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h	\
+	     gnomebt-fileactiondialog.c gnomebt-fileactiondialog.h gnomebt-fileactiondialog-private.h	\
+	     gnomebt-permissiondialog.c gnomebt-permissiondialog.h gnomebt-permissiondialog-private.h	\
+	     gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h
 
 gnomebt-controller.defs: gnomebt-controller.h
 	python $(CODEGENDIR)/h2def.py -v gnomebt-controller.h > gnomebt-controller.defs

@@ -3,6 +3,19 @@
 	* obex/gnome-obex-server.c: (put_callback): Don't crash when receiving
 	a file, thanks to Raphaël for triggering the stupid reversed condition
 
+============ Version 0.9.0
+
+2007-07-12  Bastien Nocera  <hadess@hadess.net>
+
+	* NEWS: upd
+	* configure.in: 0.9.0
+
+	* Makefile.am:
+	* obex/Makefile.am:
+	* src/Makefile.am: Fix make distcheck
+
+	* libegg/*: Remove rest of libegg
+
 2007-07-11  Bastien Nocera  <hadess@hadess.net>
 
 	* configure.in: Up the version, for our testing, require a newer GTK+

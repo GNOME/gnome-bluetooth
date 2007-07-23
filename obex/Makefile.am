@@ -1,5 +1,5 @@
 #
-#  $Id$
+#  $Id: Makefile.am,v 1.11 2006/12/29 21:30:42 hadess Exp $
 #
 
 bin_PROGRAMS = gnome-obex-send gnome-obex-server
@@ -34,3 +34,5 @@ desktop_in_files = gnome-obex-server.desktop.in
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
+
+CLEANFILES = $(desktop_DATA)
