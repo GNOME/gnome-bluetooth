@@ -1,3 +1,11 @@
+2007-12-17  Bastien Nocera  <hadess@hadess.net>
+
+	* obex/gnome-obex-send.c: (send_one): Patch from Baptiste
+	Mille-Mathias <bmm80@free.fr> to use the unescaped filename
+	when pushing files to other devices, so as to avoid filenames
+	like foo%20bar.jpg showing up on the remote device
+	(Closes: #423649)
+
 2007-08-31  Bastien Nocera  <hadess@hadess.net>
 
 	* MAINTAINERS: upd

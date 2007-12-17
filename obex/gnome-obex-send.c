@@ -164,10 +164,8 @@ static gboolean
 send_one (MyApp *app)
 {
 	const gchar *fname;
-	gchar *bname;
 	gsize len;
 	GError *err = NULL;
-	GtkWidget *label;
 
 	if ((fname = poptGetArg (app->context))) {
 		char *path;
@@ -182,7 +180,18 @@ send_one (MyApp *app)
 			return FALSE;
 
 		if (g_file_get_contents (path, &(app->data), &len, &err)) {
-			bname = g_path_get_basename (fname);
+			char *bname;
+			GtkWidget *label;
+
+			if (g_str_has_prefix (fname, "file://") != FALSE) {
+				char *unescaped_bname;
+				unescaped_bname = g_filename_from_uri (fname, NULL, NULL);
+				bname = g_path_get_basename (unescaped_bname);
+				g_free (unescaped_bname);
+			} else {
+				bname = g_path_get_basename (fname);
+			}
+
 			label = glade_xml_get_widget (app->xml, "filename_label");
 			gtk_label_set_text (GTK_LABEL (label), bname);
 			btctl_obex_client_push_data (app->obex,
