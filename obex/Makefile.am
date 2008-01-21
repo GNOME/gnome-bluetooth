@@ -2,22 +2,14 @@
 #  $Id: Makefile.am,v 1.11 2006/12/29 21:30:42 hadess Exp $
 #
 
-bin_PROGRAMS = gnome-obex-send gnome-obex-server
+bin_PROGRAMS = gnome-obex-server
 
 noinst_PROGRAMS =
 
 gnome_obex_server_SOURCES = \
 	gnome-obex-server.c util.c util.h
 
-gnome_obex_send_SOURCES = \
-	chooser.c chooser.h \
-	gnome-obex-send.c
-
 gnome_obex_server_LDADD = \
-	$(GNOME_BLUETOOTH_LIBS) \
-	../src/libgnomebt.la
-
-gnome_obex_send_LDFLAGS = \
 	$(GNOME_BLUETOOTH_LIBS) \
 	../src/libgnomebt.la
 
