@@ -1,0 +1,150 @@
+# translation of gnome-bluetooth.po to Basque
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-bluetooth\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-03-11 16:44+0100\n"
+"PO-Revision-Date: 2008-03-11 16:58+0100\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
+"Language-Team: Basque <itzulpena@euskalgnu.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+
+#: ../data/gnome-obex-server.schemas.in.h:1
+msgid "Directory to save received files"
+msgstr "Direktorioa jasotako fitxategiak gordetzeko"
+
+#: ../data/gnome-obex-server.schemas.in.h:2
+msgid "Display dialog when file received"
+msgstr "Bistaratu elkarrizketa-koadroa fitxategia jasotzean"
+
+#: ../data/gnome-obex-server.schemas.in.h:3
+msgid ""
+"Incoming files are saved automatically into this directory. If display-"
+"notification is set then the user gets chance to open or delete them."
+msgstr ""
+"Sarrerako fitxategiak direktorio honetan gordetzen dira automatikoki. "
+"'display-notification' (bistaratu jakinarazpena) ezartzen bada, erabiltzaileak "
+"aukera izango du hauek irekitzeko edo ezabatzeko."
+
+#: ../data/gnome-obex-server.schemas.in.h:4
+msgid ""
+"Received files are automatically saved. If this option is set, then the user "
+"is prompted with a dialog which allows them to view or delete the received "
+"file."
+msgstr ""
+"Jasotako fitxategiak automatikoki gordeko dira. Aukera hau ezartzen bada, "
+"elkarrizketa-koadro batean erabiltzaileari galdetuko zaio jasotako fitxategiak "
+"ikustea edo ezabatzea nahi dituen."
+
+#: ../obex/gnome-obex-server.c:161
+#, c-format
+msgid "Accept a file from '%s'?"
+msgstr "Onartu '%s'(r)en fitxategia?"
+
+#: ../obex/gnome-obex-server.c:162
+msgid ""
+"The remote device is attempting to send you a file via Bluetooth. Do you "
+"wish to allow the connection?"
+msgstr ""
+"Urruneko gailua zuri fitxategi bat Bluetooth bidez bidaltzen saiatzen ari da. "
+"Nahi duzu konexioa onartzea?"
+
+#: ../obex/gnome-obex-server.c:163
+msgid "Always accept files from this device."
+msgstr "Onartu beti gailu honetako fitxategiak"
+
+#. The name of the default downloads folder,
+#. * Needs to be the same as Epiphany's
+#: ../obex/gnome-obex-server.c:204
+msgid "Downloads"
+msgstr "Deskargak"
+
+#: ../obex/gnome-obex-server.c:295
+msgid "Incoming Bluetooth file transfer"
+msgstr "Sarrerako Bluetooth fitxategi-transferentzia"
+
+#: ../obex/gnome-obex-server.c:337 ../obex/gnome-obex-server.c:504
+msgid "Ready for Bluetooth file transfers"
+msgstr "Prest Bluetooth fitxategi-transferentzietarako"
+
+#. *
+#. * TODO:
+#. *
+#. * ensure it only gets invoked once
+#. * display sensible error dialogs
+#. * think about fancy received-file actions
+#. *	 - should we send vcards to evo, etc?
+#.
+#: ../obex/gnome-obex-server.c:389 ../obex/gnome-obex-server.desktop.in.h:1
+msgid "Bluetooth File Sharing"
+msgstr "Bluetooth bidez fitxategiak partekatzea"
+
+#: ../obex/gnome-obex-server.c:392
+msgid "Receive files from Bluetooth devices"
+msgstr "Jaso fitxategiak Bluetooth gailuetatik"
+
+#. add your name and email address in here if you've translated
+#. * this program
+#.
+#: ../obex/gnome-obex-server.c:398
+msgid "translator-credits"
+msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
+
+#: ../obex/gnome-obex-server.desktop.in.h:2
+msgid "Receive files sent by Bluetooth devices"
+msgstr "Jaso Bluetooth gailuek bidalitako fitxategiak"
+
+#: ../src/chooser.gob:109
+msgid "Choose Bluetooth device"
+msgstr "Aukeratu Bluetooth gailua"
+
+#: ../src/chooser.gob:151
+msgid "Device"
+msgstr "Gailua"
+
+#: ../src/fileactiondialog.gob:132
+msgid "Bluetooth Transfer Received"
+msgstr "Bluetooth-transferentzia jaso da"
+
+#. FIXME: dname needs escaping
+#: ../src/fileactiondialog.gob:138
+#, c-format
+msgid "File received from '%s'. What would you like to do?"
+msgstr "Fitxategia jaso da '%s'(e)ndik. Zer egitea nahi duzu?"
+
+#: ../src/fileactiondialog.gob:168
+#, c-format
+msgid ""
+"<span weight='bold'>Name:</span> %s\n"
+"<span weight='bold'>Type:</span> %s\n"
+"<span weight='bold'>Size:</span> %s"
+msgstr ""
+"<span weight='bold'>Izena:</span> %s\n"
+"<span weight='bold'>Mota:</span> %s\n"
+"<span weight='bold'>Tamaina:</span> %s"
+
+#: ../src/permissiondialog.gob:105
+#, c-format
+msgid "Allow Bluetooth device '%s' to connect?"
+msgstr "Baimendu '%s' Bluetooth gailuari konektatzea?"
+
+#: ../src/permissiondialog.gob:121
+msgid ""
+"An external device is attempting to connect to your computer via Bluetooth. "
+"You must decide if you want to accept the connection."
+msgstr ""
+"Kanpoko gailu bat ordenagailura Bluetooth bidez konektatzen saiatzen ari da. "
+"Erabaki egin behar duzu konexioa onartzea nahi duzun edo ez."
+
+#: ../src/permissiondialog.gob:127
+msgid "_Always allow this device to connect."
+msgstr "_Baimendu beti gailu hau konektatzea"
+
