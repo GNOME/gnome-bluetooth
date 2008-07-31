@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arabic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-26 18:29+0000\n"
+"POT-Creation-Date: 2008-07-31 11:07+0100\n"
 "PO-Revision-Date: 2007-12-26 18:48+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabeyes <doc@arabeyes.org>\n"
@@ -24,53 +24,21 @@ msgid "Display dialog when file received"
 msgstr "اعرض حوارا عند استقبال ملف"
 
 #: ../data/gnome-obex-server.schemas.in.h:3
-msgid "Incoming files are saved automatically into this directory. If display-notification is set then the user gets chance to open or delete them."
-msgstr "تحفظ الملفات المستقبَلة آليا في هذا الدليل. إذا كانت display-notification محددة فإن المستخدم له فرصة لحذف أو عرض الملف."
+msgid ""
+"Incoming files are saved automatically into this directory. If display-"
+"notification is set then the user gets chance to open or delete them."
+msgstr ""
+"تحفظ الملفات المستقبَلة آليا في هذا الدليل. إذا كانت display-notification "
+"محددة فإن المستخدم له فرصة لحذف أو عرض الملف."
 
 #: ../data/gnome-obex-server.schemas.in.h:4
-msgid "Received files are automatically saved. If this option is set, then the user is prompted with a dialog which allows them to view or delete the received file."
-msgstr "تحفظ الملفات المستقبَلة آليا. إذا كان هذا الخيار مفعلا، فإنه يتم إخطار المستخدم بحوار يسمح له بعرض أو حذف الملف."
-
-#: ../obex/gnome-obex-send.c:202
-#, c-format
-msgid "Unable to read file '%s'."
-msgstr "غير قادر على قراءة الملف '%s'."
-
-#: ../obex/gnome-obex-send.c:233
-msgid "An error occurred while sending data."
-msgstr "حدث خطأ عند ارسال البيانات."
-
-#: ../obex/gnome-obex-send.c:236
-msgid "The remote device canceled the transfer."
-msgstr "تم إلغاء العملية من طرف الجهاز الآخر."
-
-#: ../obex/gnome-obex-send.c:239
-msgid "An unknown error occurred."
-msgstr "حدث خطأ مجهول."
-
-#: ../obex/gnome-obex-send.c:272
-msgid "Connecting..."
-msgstr "اتصال ...."
-
-#: ../obex/gnome-obex-send.c:325
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "لا يمكن إيجاد ملف الواجهة، الرجاء التأكد من تثبيت جنوم بلوتوث."
-
-#: ../obex/gnome-obex-send.c:341
-msgid "Make sure \"Beam receive\" is enabled in the Power preferences, and Bluetooth is enabled."
-msgstr "تأكد من أن \"Beam receive\" مفعلة في تفضيلات الطاقة، و أن بلوتوث مفعل."
-
-#: ../obex/gnome-obex-send.c:343
-msgid "Remote device doesn't support receiving objects."
-msgstr "الجهاز الآخر لا يحتمل تلقي أجسام."
-
-#: ../obex/gnome-obex-send.c:353
-msgid "Can't initialize program."
-msgstr "لا يمكن يدأ البرنامج."
-
-#: ../obex/gnome-obex-send.c:359
-msgid "Unable to connect to remote device."
-msgstr "لا يمكن الإتصال بالجهاز الآخر"
+msgid ""
+"Received files are automatically saved. If this option is set, then the user "
+"is prompted with a dialog which allows them to view or delete the received "
+"file."
+msgstr ""
+"تحفظ الملفات المستقبَلة آليا. إذا كان هذا الخيار مفعلا، فإنه يتم إخطار "
+"المستخدم بحوار يسمح له بعرض أو حذف الملف."
 
 #: ../obex/gnome-obex-server.c:161
 #, c-format
@@ -78,7 +46,9 @@ msgid "Accept a file from '%s'?"
 msgstr "اقبل ملفا من '%s'؟"
 
 #: ../obex/gnome-obex-server.c:162
-msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
+msgid ""
+"The remote device is attempting to send you a file via Bluetooth. Do you "
+"wish to allow the connection?"
 msgstr "يحاول الجهاز الآخر ارسال ملف عبر بلوتوث. هل تريد السماح بالإتصال."
 
 #: ../obex/gnome-obex-server.c:163
@@ -95,8 +65,7 @@ msgstr "التنزيلات"
 msgid "Incoming Bluetooth file transfer"
 msgstr "نقل ملف بلوتوث داخل"
 
-#: ../obex/gnome-obex-server.c:337
-#: ../obex/gnome-obex-server.c:504
+#: ../obex/gnome-obex-server.c:337 ../obex/gnome-obex-server.c:504
 msgid "Ready for Bluetooth file transfers"
 msgstr "مستعدّ لعمليات نقل بلوتوث"
 
@@ -108,8 +77,7 @@ msgstr "مستعدّ لعمليات نقل بلوتوث"
 #. * think about fancy received-file actions
 #. *	 - should we send vcards to evo, etc?
 #.
-#: ../obex/gnome-obex-server.c:389
-#: ../obex/gnome-obex-server.desktop.in.h:1
+#: ../obex/gnome-obex-server.c:389 ../obex/gnome-obex-server.desktop.in.h:1
 msgid "Bluetooth File Sharing"
 msgstr "مشاركة ملفات بلوتوث"
 
@@ -163,23 +131,60 @@ msgid "Allow Bluetooth device '%s' to connect?"
 msgstr "اسمح بجهاز بلوتوث '%s' بالإتصال؟"
 
 #: ../src/permissiondialog.gob:121
-msgid "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
-msgstr "يحاول جهاز خارجي الإتصال بحاسوبك عبر بلوتوث. يجب أن تقرر ان كنت تريد قبول الإتصال."
+msgid ""
+"An external device is attempting to connect to your computer via Bluetooth. "
+"You must decide if you want to accept the connection."
+msgstr ""
+"يحاول جهاز خارجي الإتصال بحاسوبك عبر بلوتوث. يجب أن تقرر ان كنت تريد قبول "
+"الإتصال."
 
 #: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
 msgstr "_دائماً اسمح لهذا الجهاز بالإتصال"
 
-#: ../ui/gnome-obex-send.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">يجري إرسال الملف</span>"
+#~ msgid "Unable to read file '%s'."
+#~ msgstr "غير قادر على قراءة الملف '%s'."
 
-#: ../ui/gnome-obex-send.glade.h:2
-msgid "Bluetooth file transfer"
-msgstr "نقل ملفّ عبر بلوتوث "
+#~ msgid "An error occurred while sending data."
+#~ msgstr "حدث خطأ عند ارسال البيانات."
+
+#~ msgid "The remote device canceled the transfer."
+#~ msgstr "تم إلغاء العملية من طرف الجهاز الآخر."
+
+#~ msgid "An unknown error occurred."
+#~ msgstr "حدث خطأ مجهول."
+
+#~ msgid "Connecting..."
+#~ msgstr "اتصال ...."
+
+#~ msgid ""
+#~ "Can't find user interface file, check your gnome-bluetooth installation."
+#~ msgstr "لا يمكن إيجاد ملف الواجهة، الرجاء التأكد من تثبيت جنوم بلوتوث."
+
+#~ msgid ""
+#~ "Make sure \"Beam receive\" is enabled in the Power preferences, and "
+#~ "Bluetooth is enabled."
+#~ msgstr ""
+#~ "تأكد من أن \"Beam receive\" مفعلة في تفضيلات الطاقة، و أن بلوتوث مفعل."
+
+#~ msgid "Remote device doesn't support receiving objects."
+#~ msgstr "الجهاز الآخر لا يحتمل تلقي أجسام."
+
+#~ msgid "Can't initialize program."
+#~ msgstr "لا يمكن يدأ البرنامج."
+
+#~ msgid "Unable to connect to remote device."
+#~ msgstr "لا يمكن الإتصال بالجهاز الآخر"
+
+#~ msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">يجري إرسال الملف</span>"
+
+#~ msgid "Bluetooth file transfer"
+#~ msgstr "نقل ملفّ عبر بلوتوث "
 
 #~ msgid "Selection mode"
 #~ msgstr "نمط الانتقاء"
+
 #~ msgid "The selection mode"
 #~ msgstr "نمط الانتقاء"
 
@@ -190,6 +195,7 @@ msgstr "نقل ملفّ عبر بلوتوث "
 #, fuzzy
 #~ msgid "Icon list is sorted"
 #~ msgstr "حجم الأيقونات محدّد"
+
 #~ msgid "Sort order"
 #~ msgstr "ترتيب الفرز"
 
@@ -220,58 +226,75 @@ msgstr "نقل ملفّ عبر بلوتوث "
 #, fuzzy
 #~ msgid "Number of pixels in bottom margin"
 #~ msgstr "عدد البكسلات في الهامش الأيسر"
+
 #~ msgid "Left margin"
 #~ msgstr "الهامش ا?يسر"
 
 #, fuzzy
 #~ msgid "Number of pixels in left margin"
 #~ msgstr "عدد البكسلات في الهامش الأيسر"
+
 #~ msgid "Right margin"
 #~ msgstr "الهامش ا?يمن"
 
 #, fuzzy
 #~ msgid "Number of pixels in right margin"
 #~ msgstr "عدد البكسلات في الهامش الأيمن"
+
 #~ msgid "Selection Box Color"
 #~ msgstr "لون علبة الإختيار"
+
 #~ msgid "Color of the selection box"
 #~ msgstr "لون صندوق الإختيار"
+
 #~ msgid "Selection Box Alpha"
 #~ msgstr "ألفا علبة الإختيار"
+
 #~ msgid "Opacity of the selection box"
 #~ msgstr "شفافية علبة الإختيار"
+
 #~ msgid "Pixbuf"
 #~ msgstr "بكسبف"
+
 #~ msgid "A GdkPixbuf to display"
 #~ msgstr "GdkPixbuf لعرضه"
 
 #, fuzzy
 #~ msgid "Filename"
 #~ msgstr "اسم الملف:"
+
 #~ msgid "Filename to load and display"
 #~ msgstr "اسم الملف للتحميل و العرض"
 
 #, fuzzy
 #~ msgid "Stock ID"
 #~ msgstr "هوية المخزون"
+
 #~ msgid "Stock ID for a stock image to display"
 #~ msgstr "هوية المخزون لصورة مخزون للعرض"
+
 #~ msgid "Animation"
 #~ msgstr "رسوم متحركة"
+
 #~ msgid "GdkPixbufAnimation to display"
 #~ msgstr "GdkPixbufAnimation لعرضها"
+
 #~ msgid "Image type"
 #~ msgstr "نوع الصورة"
+
 #~ msgid "The representation being used for image data"
 #~ msgstr "التقديم المستعمل لبيانات الرسوم"
 
 #, fuzzy
 #~ msgid "Size"
 #~ msgstr "الحجم:"
+
 #~ msgid "The size of the icon"
 #~ msgstr "حجم الأيقونة"
+
 #~ msgid "Blinking"
 #~ msgstr "ومّاض"
+
 #~ msgid "Whether or not the status icon is blinking"
 #~ msgstr "فيما إذا كانت أيقونة الحالة وامضة"
 
@@ -282,4 +305,3 @@ msgstr "نقل ملفّ عبر بلوتوث "
 #, fuzzy
 #~ msgid "The orientation of the tray."
 #~ msgstr "إتجاه الطبق."
-
