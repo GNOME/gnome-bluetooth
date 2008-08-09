@@ -1,23 +1,27 @@
+# translation of gnome-bluetooth.HEAD.po to Arabic
+# Automatically generated, 2007.
+# Djihed Afifi <djihed@gmail.com>, 2007.
+# Khaled Hosny <khaledhosny@eglug.org>, 2008.
 # Arabic translations for THIS package.
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as THIS package.
-# Automatically generated, 2007.
-# Djihed Afifi <djihed@gmail.com>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: Arabic\n"
+"Project-Id-Version: gnome-bluetooth.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-31 11:07+0100\n"
-"PO-Revision-Date: 2007-12-26 18:48+0100\n"
-"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
-"Language-Team: Arabeyes <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2008-08-09 11:46+0300\n"
+"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: ../data/gnome-obex-server.schemas.in.h:1
 msgid "Directory to save received files"
-msgstr "دليل لحفظ الملفات المُستقبَلة"
+msgstr "دليل حفظ الملفات المُستقبَلة"
 
 #: ../data/gnome-obex-server.schemas.in.h:2
 msgid "Display dialog when file received"
@@ -28,7 +32,7 @@ msgid ""
 "Incoming files are saved automatically into this directory. If display-"
 "notification is set then the user gets chance to open or delete them."
 msgstr ""
-"تحفظ الملفات المستقبَلة آليا في هذا الدليل. إذا كانت display-notification "
+"تحفظ الملفات المستقبَلة في هذا الدليل تلقائيا. إذا كانت display-notification "
 "محددة فإن المستخدم له فرصة لحذف أو عرض الملف."
 
 #: ../data/gnome-obex-server.schemas.in.h:4
@@ -37,23 +41,23 @@ msgid ""
 "is prompted with a dialog which allows them to view or delete the received "
 "file."
 msgstr ""
-"تحفظ الملفات المستقبَلة آليا. إذا كان هذا الخيار مفعلا، فإنه يتم إخطار "
+"تحفظ الملفات المستقبَلة تلقائيا. إذا كان هذا الخيار مفعلا، فإنه يتم إخطار "
 "المستخدم بحوار يسمح له بعرض أو حذف الملف."
 
 #: ../obex/gnome-obex-server.c:161
 #, c-format
 msgid "Accept a file from '%s'?"
-msgstr "اقبل ملفا من '%s'؟"
+msgstr "أأقبل ملفا من '%s'؟"
 
 #: ../obex/gnome-obex-server.c:162
 msgid ""
 "The remote device is attempting to send you a file via Bluetooth. Do you "
 "wish to allow the connection?"
-msgstr "يحاول الجهاز الآخر ارسال ملف عبر بلوتوث. هل تريد السماح بالإتصال."
+msgstr "يحاول جهاز بعيد إرسال ملف عبر بلوتوث. هل تريد السماح بالاتصال؟"
 
 #: ../obex/gnome-obex-server.c:163
 msgid "Always accept files from this device."
-msgstr "دائماً اقبل الملفات من هذا الجهاز"
+msgstr "اقبل الملفات من هذا الجهاز دائمًا"
 
 #. The name of the default downloads folder,
 #. * Needs to be the same as Epiphany's
@@ -63,7 +67,7 @@ msgstr "التنزيلات"
 
 #: ../obex/gnome-obex-server.c:295
 msgid "Incoming Bluetooth file transfer"
-msgstr "نقل ملف بلوتوث داخل"
+msgstr "نقل ملفات بلوتوث الواردة"
 
 #: ../obex/gnome-obex-server.c:337 ../obex/gnome-obex-server.c:504
 msgid "Ready for Bluetooth file transfers"
@@ -90,7 +94,10 @@ msgstr "استقبل الملفات من أجهزة بلوتوث"
 #.
 #: ../obex/gnome-obex-server.c:398
 msgid "translator-credits"
-msgstr "جهاد عفيفي djihed@gmail.com"
+msgstr ""
+"فريق عربايز للترجمة http://www.arabeyes.org:\n"
+"جهاد عفيفي\t<djihed@gmail.com>\n"
+"خالد حسني\t<khaledhosny@eglug.org>"
 
 #: ../obex/gnome-obex-server.desktop.in.h:2
 msgid "Receive files sent by Bluetooth devices"
@@ -98,7 +105,7 @@ msgstr "استقبل الملفات المرسلة من أجهزة بلوتوث"
 
 #: ../src/chooser.gob:109
 msgid "Choose Bluetooth device"
-msgstr "انتق جهاز بلوتوث"
+msgstr "اختر جهاز بلوتوث"
 
 #: ../src/chooser.gob:151
 msgid "Device"
@@ -121,187 +128,24 @@ msgid ""
 "<span weight='bold'>Type:</span> %s\n"
 "<span weight='bold'>Size:</span> %s"
 msgstr ""
-"<span weight='bold'>الإسم:</span> %s\n"
+"<span weight='bold'>الاسم:</span> %s\n"
 "<span weight='bold'>النوع:</span> %s\n"
 "<span weight='bold'>الحجم:</span> %s"
 
 #: ../src/permissiondialog.gob:105
 #, c-format
 msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "اسمح بجهاز بلوتوث '%s' بالإتصال؟"
+msgstr "أأسمح لجهاز بلوتوث '%s' بالاتصال؟"
 
 #: ../src/permissiondialog.gob:121
 msgid ""
 "An external device is attempting to connect to your computer via Bluetooth. "
 "You must decide if you want to accept the connection."
 msgstr ""
-"يحاول جهاز خارجي الإتصال بحاسوبك عبر بلوتوث. يجب أن تقرر ان كنت تريد قبول "
-"الإتصال."
+"يحاول جهاز خارجي الاتصال بحاسوبك عبر بلوتوث. يجب أن تقرر إن كنت تريد قبول "
+"الاتصال."
 
 #: ../src/permissiondialog.gob:127
 msgid "_Always allow this device to connect."
-msgstr "_دائماً اسمح لهذا الجهاز بالإتصال"
+msgstr "اسمح لهذا الجهاز بالاتصال _دائمًا."
 
-#~ msgid "Unable to read file '%s'."
-#~ msgstr "غير قادر على قراءة الملف '%s'."
-
-#~ msgid "An error occurred while sending data."
-#~ msgstr "حدث خطأ عند ارسال البيانات."
-
-#~ msgid "The remote device canceled the transfer."
-#~ msgstr "تم إلغاء العملية من طرف الجهاز الآخر."
-
-#~ msgid "An unknown error occurred."
-#~ msgstr "حدث خطأ مجهول."
-
-#~ msgid "Connecting..."
-#~ msgstr "اتصال ...."
-
-#~ msgid ""
-#~ "Can't find user interface file, check your gnome-bluetooth installation."
-#~ msgstr "لا يمكن إيجاد ملف الواجهة، الرجاء التأكد من تثبيت جنوم بلوتوث."
-
-#~ msgid ""
-#~ "Make sure \"Beam receive\" is enabled in the Power preferences, and "
-#~ "Bluetooth is enabled."
-#~ msgstr ""
-#~ "تأكد من أن \"Beam receive\" مفعلة في تفضيلات الطاقة، و أن بلوتوث مفعل."
-
-#~ msgid "Remote device doesn't support receiving objects."
-#~ msgstr "الجهاز الآخر لا يحتمل تلقي أجسام."
-
-#~ msgid "Can't initialize program."
-#~ msgstr "لا يمكن يدأ البرنامج."
-
-#~ msgid "Unable to connect to remote device."
-#~ msgstr "لا يمكن الإتصال بالجهاز الآخر"
-
-#~ msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-#~ msgstr "<span weight=\"bold\" size=\"larger\">يجري إرسال الملف</span>"
-
-#~ msgid "Bluetooth file transfer"
-#~ msgstr "نقل ملفّ عبر بلوتوث "
-
-#~ msgid "Selection mode"
-#~ msgstr "نمط الانتقاء"
-
-#~ msgid "The selection mode"
-#~ msgstr "نمط الانتقاء"
-
-#, fuzzy
-#~ msgid "Sorted"
-#~ msgstr "المرتّب"
-
-#, fuzzy
-#~ msgid "Icon list is sorted"
-#~ msgstr "حجم الأيقونات محدّد"
-
-#~ msgid "Sort order"
-#~ msgstr "ترتيب الفرز"
-
-#, fuzzy
-#~ msgid "Sort direction the icon list should use"
-#~ msgstr "اتجاه الفرز الذي يتوجب على مؤشر الفرز أن يشير إليه"
-
-#, fuzzy
-#~ msgid "Icon padding"
-#~ msgstr "تَبَاعُد الأيقونة"
-
-#, fuzzy
-#~ msgid "Number of pixels between icons"
-#~ msgstr "عدد البكسلات بين أعمدة أيقونات"
-
-#, fuzzy
-#~ msgid "Top margin"
-#~ msgstr "الهامش ا?يسر"
-
-#, fuzzy
-#~ msgid "Number of pixels in top margin"
-#~ msgstr "عدد البكسلات في الهامش الأيسر"
-
-#, fuzzy
-#~ msgid "Bottom margin"
-#~ msgstr "الحشو الأسفل"
-
-#, fuzzy
-#~ msgid "Number of pixels in bottom margin"
-#~ msgstr "عدد البكسلات في الهامش الأيسر"
-
-#~ msgid "Left margin"
-#~ msgstr "الهامش ا?يسر"
-
-#, fuzzy
-#~ msgid "Number of pixels in left margin"
-#~ msgstr "عدد البكسلات في الهامش الأيسر"
-
-#~ msgid "Right margin"
-#~ msgstr "الهامش ا?يمن"
-
-#, fuzzy
-#~ msgid "Number of pixels in right margin"
-#~ msgstr "عدد البكسلات في الهامش الأيمن"
-
-#~ msgid "Selection Box Color"
-#~ msgstr "لون علبة الإختيار"
-
-#~ msgid "Color of the selection box"
-#~ msgstr "لون صندوق الإختيار"
-
-#~ msgid "Selection Box Alpha"
-#~ msgstr "ألفا علبة الإختيار"
-
-#~ msgid "Opacity of the selection box"
-#~ msgstr "شفافية علبة الإختيار"
-
-#~ msgid "Pixbuf"
-#~ msgstr "بكسبف"
-
-#~ msgid "A GdkPixbuf to display"
-#~ msgstr "GdkPixbuf لعرضه"
-
-#, fuzzy
-#~ msgid "Filename"
-#~ msgstr "اسم الملف:"
-
-#~ msgid "Filename to load and display"
-#~ msgstr "اسم الملف للتحميل و العرض"
-
-#, fuzzy
-#~ msgid "Stock ID"
-#~ msgstr "هوية المخزون"
-
-#~ msgid "Stock ID for a stock image to display"
-#~ msgstr "هوية المخزون لصورة مخزون للعرض"
-
-#~ msgid "Animation"
-#~ msgstr "رسوم متحركة"
-
-#~ msgid "GdkPixbufAnimation to display"
-#~ msgstr "GdkPixbufAnimation لعرضها"
-
-#~ msgid "Image type"
-#~ msgstr "نوع الصورة"
-
-#~ msgid "The representation being used for image data"
-#~ msgstr "التقديم المستعمل لبيانات الرسوم"
-
-#, fuzzy
-#~ msgid "Size"
-#~ msgstr "الحجم:"
-
-#~ msgid "The size of the icon"
-#~ msgstr "حجم الأيقونة"
-
-#~ msgid "Blinking"
-#~ msgstr "ومّاض"
-
-#~ msgid "Whether or not the status icon is blinking"
-#~ msgstr "فيما إذا كانت أيقونة الحالة وامضة"
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "الإتجاه:"
-
-#, fuzzy
-#~ msgid "The orientation of the tray."
-#~ msgstr "إتجاه الطبق."
