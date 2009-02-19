@@ -10,24 +10,19 @@ AM_CPPFLAGS = \
 	-I$(srcdir) -I../src
 
 noinst_PROGRAMS=gconftest gnomebt-controller-test \
-	gnomebt-chooser-test gnomebt-permissiondialog-test \
-	gnomebt-fileactiondialog-test spinner-test
+	gnomebt-chooser-test spinner-test
 
 lib_LTLIBRARIES = libgnomebt.la
 py_LTLIBRARIES = controller.la chooser.la
 
 libgnomebt_la_SOURCES = \
 	gnomebt-controller.c gnomebt-controller.h \
-	gnomebt-permissiondialog.c gnomebt-permissiondialog.h \
 	gnomebt-spinner.c gnomebt-spinner.h \
-	gnomebt-chooser.c gnomebt-chooser.h \
-	gnomebt-icons.c gnomebt-icons.h \
-	gnomebt-fileactiondialog.c gnomebt-fileactiondialog.h
+	gnomebt-chooser.c gnomebt-chooser.h
 
 pkginclude_HEADERS = \
-	gnomebt-icons.h gnomebt-chooser.h gnomebt-spinner.h \
-	gnomebt-controller.h gnomebt-permissiondialog.h \
-	gnomebt-fileactiondialog.h
+	gnomebt-chooser.h gnomebt-spinner.h \
+	gnomebt-controller.h
 
 gnomebt-chooser.lo: gnomebt-controller.h gnomebt-spinner.h
 
@@ -47,18 +42,6 @@ gnomebt_controller_test_SOURCES = \
 gnomebt_controller_test_LDADD = \
 	libgnomebt.la $(GNOME_BLUETOOTH_LIBS)
 
-gnomebt_fileactiondialog_test_SOURCES = \
-	gnomebt-fileactiondialog-test.c
-
-gnomebt_fileactiondialog_test_LDADD = \
-	libgnomebt.la $(GNOME_BLUETOOTH_LIBS)
-
-gnomebt_permissiondialog_test_SOURCES = \
-	gnomebt-permissiondialog-test.c
-
-gnomebt_permissiondialog_test_LDADD = \
-	libgnomebt.la $(GNOME_BLUETOOTH_LIBS)
-
 spinner_test_SOURCES = \
 	spinner-test.c
 
@@ -72,8 +55,7 @@ gconftest_LDADD = \
 	$(GNOME_BLUETOOTH_LIBS) $(BLUETOOTH_LIBS)
 
 GOB_DIST = \
-	spinner.gob chooser.gob controller.gob permissiondialog.gob \
-	fileactiondialog.gob
+	spinner.gob chooser.gob controller.gob
 
 CTAGS_ARGS = --langmap=c++:.gob \
 	$(GOB_DIST)
@@ -81,9 +63,7 @@ CTAGS_ARGS = --langmap=c++:.gob \
 BUILT_SOURCES = \
 	gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h \
 	gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h \
-	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h \
-	gnomebt-permissiondialog.c gnomebt-permissiondialog.h gnomebt-permissiondialog-private.h \
-	gnomebt-fileactiondialog.c gnomebt-fileactiondialog.h gnomebt-fileactiondialog-private.h
+	gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
@@ -102,7 +82,6 @@ CLEANFILES = $(PYTHON_CLEANFILES) *.defs *-py.c						\
 	     gnomebt-chooser.c gnomebt-chooser.h gnomebt-chooser-private.h		\
 	     gnomebt-controller.c gnomebt-controller.h gnomebt-controller-private.h	\
 	     gnomebt-fileactiondialog.c gnomebt-fileactiondialog.h gnomebt-fileactiondialog-private.h	\
-	     gnomebt-permissiondialog.c gnomebt-permissiondialog.h gnomebt-permissiondialog-private.h	\
 	     gnomebt-spinner.c gnomebt-spinner.h gnomebt-spinner-private.h
 
 gnomebt-controller.defs: gnomebt-controller.h

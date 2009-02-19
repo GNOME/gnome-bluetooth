@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = po src obex data pixmaps
+SUBDIRS = po src pixmaps
 
 EXTRA_DIST = \
 	intltool-extract.in intltool-merge.in intltool-update.in \
