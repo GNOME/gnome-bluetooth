@@ -216,6 +216,11 @@ static gboolean focus_callback(GtkWidget *editable,
 static void update_buttons(struct adapter_data *adapter, gboolean bonded,
 					gboolean trusted, gboolean connected)
 {
+	if (trusted) {
+		gtk_button_set_label(GTK_BUTTON(adapter->button_trusted), _("Distrust"));
+	} else {
+		gtk_button_set_label(GTK_BUTTON(adapter->button_trusted), _("Trust"));
+	}
 	gtk_widget_set_sensitive(adapter->button_delete, bonded);
 	gtk_widget_set_sensitive(adapter->button_disconnect, connected);
 }
@@ -666,7 +671,7 @@ static void create_adapter(struct adapter_data *adapter)
 
 	adapter->button_disconnect = button;
 
-	button = gtk_button_new_with_label(_("Add to Trusted"));
+	button = gtk_button_new_with_label(_("Trust"));
 	image = gtk_image_new_from_stock(GTK_STOCK_ABOUT,
 						GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image(GTK_BUTTON(button), image);
