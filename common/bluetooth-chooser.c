@@ -31,7 +31,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "bluetooth-client.h"
-#include "bluetooth-device-selection.h"
+#include "bluetooth-chooser.h"
 
 enum {
 	SELECTED_DEVICE_CHANGED,
@@ -40,12 +40,12 @@ enum {
 
 static int selection_table_signals[LAST_SIGNAL] = { 0 };
 
-#define BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
-										 BLUETOOTH_TYPE_DEVICE_SELECTION, BluetoothDeviceSelectionPrivate))
+#define BLUETOOTH_CHOOSER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
+										 BLUETOOTH_TYPE_CHOOSER, BluetoothChooserPrivate))
 
-typedef struct _BluetoothDeviceSelectionPrivate BluetoothDeviceSelectionPrivate;
+typedef struct _BluetoothChooserPrivate BluetoothChooserPrivate;
 
-struct _BluetoothDeviceSelectionPrivate {
+struct _BluetoothChooserPrivate {
 	BluetoothClient *client;
 	GtkTreeSelection *selection;
 	GtkTreeModel *model, *filter, *adapter_model;
@@ -71,7 +71,7 @@ struct _BluetoothDeviceSelectionPrivate {
 	guint show_device_category : 1;
 };
 
-G_DEFINE_TYPE(BluetoothDeviceSelection, bluetooth_device_selection, GTK_TYPE_VBOX)
+G_DEFINE_TYPE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_VBOX)
 
 static const char *
 bluetooth_device_category_to_string (int type)
@@ -127,18 +127,18 @@ type_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 }
 
 void
-bluetooth_device_selection_start_discovery (BluetoothDeviceSelection *self)
+bluetooth_chooser_start_discovery (BluetoothChooser *self)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
 	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
 	bluetooth_client_start_discovery (priv->client);
 }
 
 gchar *
-bluetooth_device_selection_get_selected_device (BluetoothDeviceSelection *self)
+bluetooth_chooser_get_selected_device (BluetoothChooser *self)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 	GtkTreeIter iter;
 	gchar *address;
 	gboolean selected;
@@ -152,9 +152,9 @@ bluetooth_device_selection_get_selected_device (BluetoothDeviceSelection *self)
 }
 
 gchar *
-bluetooth_device_selection_get_selected_device_name (BluetoothDeviceSelection *self)
+bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 	GtkTreeIter iter;
 	gchar *name;
 	gboolean selected;
@@ -170,19 +170,19 @@ bluetooth_device_selection_get_selected_device_name (BluetoothDeviceSelection *s
 static void
 search_button_clicked (GtkButton *button, gpointer user_data)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(user_data);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER(user_data);
 
-	bluetooth_device_selection_start_discovery (self);
+	bluetooth_chooser_start_discovery (self);
 }
 
 static void
 select_browse_device_callback (GtkTreeSelection *selection, gpointer user_data)
 {
-	BluetoothDeviceSelection *self = user_data;
+	BluetoothChooser *self = user_data;
 	gchar *address;
 
 	g_object_notify (G_OBJECT(self), "device-selected");
-	address = bluetooth_device_selection_get_selected_device (self);
+	address = bluetooth_chooser_get_selected_device (self);
 	g_signal_emit (G_OBJECT (self),
 		       selection_table_signals[SELECTED_DEVICE_CHANGED],
 		       0, address);
@@ -190,7 +190,7 @@ select_browse_device_callback (GtkTreeSelection *selection, gpointer user_data)
 }
 
 static gboolean
-filter_type_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelectionPrivate *priv)
+filter_type_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothChooserPrivate *priv)
 {
 	int type;
 
@@ -202,7 +202,7 @@ filter_type_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelecti
 }
 
 static gboolean
-filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelectionPrivate *priv)
+filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothChooserPrivate *priv)
 {
 	gboolean bonded, trusted;
 
@@ -229,8 +229,8 @@ filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSel
 static gboolean
 filter_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
 	return filter_type_func (model, iter, priv) && filter_category_func (model, iter, priv);
 }
@@ -238,8 +238,8 @@ filter_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 static void
 filter_type_changed_cb (GtkComboBox *widget, gpointer data)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
 	priv->device_type_filter = 1 << gtk_combo_box_get_active (GTK_COMBO_BOX(priv->device_type));
 	if (priv->filter)
@@ -249,8 +249,8 @@ filter_type_changed_cb (GtkComboBox *widget, gpointer data)
 static void
 filter_category_changed_cb (GtkComboBox *widget, gpointer data)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
 	priv->device_category_filter = gtk_combo_box_get_active (GTK_COMBO_BOX(priv->device_category));
 	if (priv->filter)
@@ -264,8 +264,8 @@ model_row_changed (GtkTreeModel *model,
 		   GtkTreeIter  *iter,
 		   gpointer      data)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 	gboolean discovering, is_default;
 
 	char *foo;
@@ -289,8 +289,8 @@ static void default_adapter_changed (GObject    *gobject,
 				     GParamSpec *arg1,
 				     gpointer    data)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 	char *adapter;
 
 	g_object_get (gobject, "default-adapter", &adapter, NULL);
@@ -322,9 +322,9 @@ static void default_adapter_changed (GObject    *gobject,
 }
 
 static GtkWidget *
-create_treeview (BluetoothDeviceSelection *self)
+create_treeview (BluetoothChooser *self)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 	GtkWidget *scrolled, *tree;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -405,9 +405,9 @@ create_treeview (BluetoothDeviceSelection *self)
 }
 
 static void
-bluetooth_device_selection_init(BluetoothDeviceSelection *self)
+bluetooth_chooser_init(BluetoothChooser *self)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 	char *str;
 	int i;
 
@@ -575,9 +575,9 @@ bluetooth_device_selection_init(BluetoothDeviceSelection *self)
 }
 
 static void
-bluetooth_device_selection_finalize (GObject *object)
+bluetooth_chooser_finalize (GObject *object)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	if (priv->client) {
 		g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
@@ -596,7 +596,7 @@ bluetooth_device_selection_finalize (GObject *object)
 		priv->model = NULL;
 	}
 
-	G_OBJECT_CLASS(bluetooth_device_selection_parent_class)->finalize(object);
+	G_OBJECT_CLASS(bluetooth_chooser_parent_class)->finalize(object);
 }
 
 enum {
@@ -613,10 +613,10 @@ enum {
 };
 
 static void
-bluetooth_device_selection_set_property (GObject *object, guint prop_id,
+bluetooth_chooser_set_property (GObject *object, guint prop_id,
 					 const GValue *value, GParamSpec *pspec)
 {
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	switch (prop_id) {
 	case PROP_TITLE:
@@ -673,18 +673,18 @@ bluetooth_device_selection_set_property (GObject *object, guint prop_id,
 }
 
 static void
-bluetooth_device_selection_get_property (GObject *object, guint prop_id,
+bluetooth_chooser_get_property (GObject *object, guint prop_id,
 					 GValue *value, GParamSpec *pspec)
 {
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(object);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER(object);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	switch (prop_id) {
 	case PROP_DEVICE_SELECTED:
-		g_value_take_string (value, bluetooth_device_selection_get_selected_device (self));
+		g_value_take_string (value, bluetooth_chooser_get_selected_device (self));
 		break;
 	case PROP_DEVICE_SELECTED_NAME:
-		g_value_take_string (value, bluetooth_device_selection_get_selected_device_name (self));
+		g_value_take_string (value, bluetooth_chooser_get_selected_device_name (self));
 		break;
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
@@ -711,20 +711,20 @@ bluetooth_device_selection_get_property (GObject *object, guint prop_id,
 }
 
 static void
-bluetooth_device_selection_class_init (BluetoothDeviceSelectionClass *klass)
+bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 {
-	g_type_class_add_private(klass, sizeof(BluetoothDeviceSelectionPrivate));
+	g_type_class_add_private(klass, sizeof(BluetoothChooserPrivate));
 
-	G_OBJECT_CLASS(klass)->finalize = bluetooth_device_selection_finalize;
+	G_OBJECT_CLASS(klass)->finalize = bluetooth_chooser_finalize;
 
-	G_OBJECT_CLASS(klass)->set_property = bluetooth_device_selection_set_property;
-	G_OBJECT_CLASS(klass)->get_property = bluetooth_device_selection_get_property;
+	G_OBJECT_CLASS(klass)->set_property = bluetooth_chooser_set_property;
+	G_OBJECT_CLASS(klass)->get_property = bluetooth_chooser_get_property;
 
 	selection_table_signals[SELECTED_DEVICE_CHANGED] =
 		g_signal_new ("selected-device-changed",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (BluetoothDeviceSelectionClass, selected_device_changed),
+			      G_STRUCT_OFFSET (BluetoothChooserClass, selected_device_changed),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__STRING,
 			      G_TYPE_NONE, 1, G_TYPE_STRING);
@@ -759,9 +759,9 @@ bluetooth_device_selection_class_init (BluetoothDeviceSelectionClass *klass)
 }
 
 GtkWidget *
-bluetooth_device_selection_new (const gchar *title)
+bluetooth_chooser_new (const gchar *title)
 {
-	return g_object_new(BLUETOOTH_TYPE_DEVICE_SELECTION,
+	return g_object_new(BLUETOOTH_TYPE_CHOOSER,
 			    "title", title,
 			    NULL);
 }

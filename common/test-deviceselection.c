@@ -28,7 +28,7 @@
 
 #include <gtk/gtk.h>
 
-#include "bluetooth-device-selection.h"
+#include "bluetooth-chooser.h"
 #include "bluetooth-client.h"
 
 static void device_selected_cb(GObject *object,
@@ -49,7 +49,7 @@ static void device_category_filter_selected_cb(GObject *object,
 	g_message ("Property \"device-category-filter\" changed");
 }
 
-static void select_device_changed(BluetoothDeviceSelection *sel,
+static void select_device_changed(BluetoothChooser *sel,
 				  gchar *address, gpointer user_data)
 {
 	GtkDialog *dialog = user_data;
@@ -84,7 +84,7 @@ create_phone_dialogue (void)
 
 	dialog = create_dialogue ("Browse Devices");
 
-	selector = bluetooth_device_selection_new("Select device to use");
+	selector = bluetooth_chooser_new("Select device to use");
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
@@ -103,7 +103,7 @@ create_wizard_dialogue (void)
 
 	dialog = create_dialogue ("Add a Device");
 
-	selector = bluetooth_device_selection_new("Select new device to setup");
+	selector = bluetooth_chooser_new("Select new device to setup");
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
@@ -149,7 +149,7 @@ int main(int argc, char **argv)
 	g_signal_connect(selector, "notify::device-category-filter",
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
-	bluetooth_device_selection_start_discovery (BLUETOOTH_DEVICE_SELECTION (selector));
+	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 	gtk_widget_show(dialog);
 
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
