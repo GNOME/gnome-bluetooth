@@ -843,6 +843,9 @@ static void bluetooth_client_finalize(GObject *client)
 
 	g_object_unref(priv->store);
 
+	g_free (priv->default_adapter);
+	priv->default_adapter = NULL;
+
 	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize(client);
 }
 
