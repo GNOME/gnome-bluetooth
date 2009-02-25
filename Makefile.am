@@ -1,7 +1,7 @@
 
 SUBDIRS = po icons common applet properties wizard sendto browse
 
-EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in
+EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update
