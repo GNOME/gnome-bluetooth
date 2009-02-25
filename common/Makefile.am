@@ -7,17 +7,22 @@ libcommon_la_SOURCES = helper.h helper.c \
 		bluetooth-client.h bluetooth-client.c \
 		bluetooth-agent.h bluetooth-agent.c \
 		obex-agent.h obex-agent.c \
-		helper.c helper.h
+		helper.c helper.h \
+		bluetooth-enums.h
 libcommon_la_LIBADD = $(LIBGNOMEBT_LIBS)
 
 libgnome_bluetooth_1_0_la_SOURCES =			\
+	bluetooth-enums.h				\
 	bluetooth-client.h bluetooth-client.c		\
 	marshal.h marshal.c				\
 	bluetooth-device-selection.c bluetooth-device-selection.h
 libgnome_bluetooth_1_0_la_LIBADD = $(LIBGNOMEBT_LIBS)
 
 gnomebluetoothdir = $(pkgincludedir)
-gnomebluetooth_HEADERS = bluetooth-device-selection.c bluetooth-device-selection.h
+gnomebluetooth_HEADERS =				\
+	bluetooth-device-selection.c			\
+	bluetooth-device-selection.h			\
+	bluetooth-enums.h
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 

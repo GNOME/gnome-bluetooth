@@ -26,6 +26,7 @@
 #define __BLUETOOTH_DEVICE_SELECTION_H
 
 #include <gtk/gtkvbox.h>
+#include <bluetooth-enums.h>
 
 G_BEGIN_DECLS
 
@@ -40,13 +41,6 @@ G_BEGIN_DECLS
 						BLUETOOTH_TYPE_DEVICE_SELECTION))
 #define BLUETOOTH_GET_DEVICE_SELECTION_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
 				BLUETOOTH_TYPE_DEVICE_SELECTION, BluetoothDeviceSelectionClass))
-
-enum {
-	BLUETOOTH_CATEGORY_ALL,
-	BLUETOOTH_CATEGORY_PAIRED,
-	BLUETOOTH_CATEGORY_TRUSTED,
-	BLUETOOTH_CATEGORY_NUM_CATEGORIES
-};
 
 typedef struct _BluetoothDeviceSelection BluetoothDeviceSelection;
 typedef struct _BluetoothDeviceSelectionClass BluetoothDeviceSelectionClass;
