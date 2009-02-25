@@ -52,17 +52,20 @@ struct _BluetoothChooser {
 struct _BluetoothChooserClass {
 	GtkVBoxClass parent_class;
 
-	void (*selected_device_changed) (BluetoothChooser *sel, gchar *device);
+	void (*selected_device_changed) (BluetoothChooser *self, gchar *device);
 };
 
 GType bluetooth_chooser_get_type (void);
 
 GtkWidget *bluetooth_chooser_new (const gchar *title);
 
-gchar *bluetooth_chooser_get_selected_device (BluetoothChooser *sel);
-gchar *bluetooth_chooser_get_selected_device_name (BluetoothChooser *self);
+void bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title);
 
-void bluetooth_chooser_start_discovery (BluetoothChooser *sel);
+gchar *bluetooth_chooser_get_selected_device (BluetoothChooser *self);
+gchar *bluetooth_chooser_get_selected_device_name (BluetoothChooser *self);
+gchar * bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self);
+
+void bluetooth_chooser_start_discovery (BluetoothChooser *self);
 
 G_END_DECLS
 

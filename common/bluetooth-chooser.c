@@ -131,40 +131,59 @@ bluetooth_chooser_start_discovery (BluetoothChooser *self)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
+	g_return_if_fail (priv->show_search);
+
 	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
 	bluetooth_client_start_discovery (priv->client);
+}
+
+static char *
+bluetooth_chooser_get_selected_device_data (BluetoothChooser *self, guint column)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	gchar *str;
+	gboolean selected;
+
+	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
+	if (selected == FALSE)
+		return NULL;
+
+	gtk_tree_model_get (priv->filter, &iter, column, &str, -1);
+	return str;
 }
 
 gchar *
 bluetooth_chooser_get_selected_device (BluetoothChooser *self)
 {
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	GtkTreeIter iter;
-	gchar *address;
-	gboolean selected;
-
-	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
-	if (selected == FALSE)
-		return NULL;
-
-	gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_ADDRESS, &address, -1);
-	return address;
+	return bluetooth_chooser_get_selected_device_data (self, BLUETOOTH_COLUMN_ADDRESS);
 }
 
 gchar *
 bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
 {
+	return bluetooth_chooser_get_selected_device_data (self, BLUETOOTH_COLUMN_NAME);
+}
+
+gchar *
+bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
+{
+	return bluetooth_chooser_get_selected_device_data (self, BLUETOOTH_COLUMN_ICON);
+}
+
+void
+bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
+{
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	GtkTreeIter iter;
-	gchar *name;
-	gboolean selected;
+	char *str;
 
-	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
-	if (selected == FALSE)
-		return NULL;
-
-	gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_NAME, &name, -1);
-	return name;
+	if (title == NULL) {
+		str = g_strdup_printf ("<b>%s</b>", _("Recognized Bluetooth Devices"));
+	} else {
+		str = g_strdup_printf ("<b>%s</b>", title);
+	}
+	gtk_label_set_markup (GTK_LABEL(priv->label), str);
+	g_free (str);
 }
 
 static void
@@ -432,9 +451,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_box_pack_start (GTK_BOX (self), vbox, TRUE, TRUE, 0);
 
 	/* The top level label */
-	str = g_strdup_printf ("<b>%s</b>", _("Recognized Bluetooth Devices"));
-	priv->label = gtk_label_new (str);
-	g_free (str);
+	priv->label = gtk_label_new ("");
 	gtk_widget_show (priv->label);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->label, FALSE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (priv->label), TRUE);
@@ -603,6 +620,7 @@ enum {
 	PROP_0,
 	PROP_TITLE,
 	PROP_DEVICE_SELECTED,
+	PROP_DEVICE_SELECTED_ICON,
 	PROP_DEVICE_SELECTED_NAME,
 	PROP_SHOW_PAIRING,
 	PROP_SHOW_SEARCH,
@@ -620,16 +638,7 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 
 	switch (prop_id) {
 	case PROP_TITLE:
-		{
-			char *str;
-
-			if (!g_value_get_string(value))
-				break;
-
-			str = g_strdup_printf ("<b>%s</b>", g_value_get_string(value));
-			gtk_label_set_markup (GTK_LABEL(priv->label), str);
-			g_free (str);
-		}
+		bluetooth_chooser_set_title (BLUETOOTH_CHOOSER (object), g_value_get_string (value));
 		break;
 	case PROP_SHOW_PAIRING:
 		priv->show_paired = g_value_get_boolean (value);
@@ -686,6 +695,9 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 	case PROP_DEVICE_SELECTED_NAME:
 		g_value_take_string (value, bluetooth_chooser_get_selected_device_name (self));
 		break;
+	case PROP_DEVICE_SELECTED_ICON:
+		g_value_take_string (value, bluetooth_chooser_get_selected_device_icon (self));
+		break;
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
 		break;
@@ -734,6 +746,9 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 									  NULL, NULL, NULL, G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
+										    NULL, NULL, NULL, G_PARAM_READABLE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SELECTED_ICON, g_param_spec_string ("device-selected-icon",
 										    NULL, NULL, NULL, G_PARAM_READABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED_NAME, g_param_spec_string ("device-selected-name",
