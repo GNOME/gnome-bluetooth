@@ -33,6 +33,7 @@
 
 #include <bluetooth-instance.h>
 #include <bluetooth-client.h>
+#include <bluetooth-chooser.h>
 
 #include "notify.h"
 #include "agent.h"
@@ -135,12 +136,65 @@ static void settings_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
+static void
+select_device_changed(BluetoothChooser *sel,
+		      char *address,
+		      gpointer user_data)
+{
+	GtkDialog *dialog = user_data;
+
+	gtk_dialog_set_response_sensitive(dialog,
+				GTK_RESPONSE_ACCEPT, address != NULL);
+}
+
 static void browse_callback(GObject *widget, gpointer user_data)
 {
-	const char *command = "bluetooth-browse";
+	GtkWidget *dialog, *selector;
+	char *bdaddr, *cmd;
+	int response_id;
 
-	if (!g_spawn_command_line_async(command, NULL))
-		g_printerr("Couldn't execute command: %s\n", command);
+	dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
+					     GTK_DIALOG_NO_SEPARATOR,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+					     GTK_STOCK_CONNECT, GTK_RESPONSE_ACCEPT, NULL);
+	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
+					  GTK_RESPONSE_ACCEPT, FALSE);
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
+
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+
+	selector = bluetooth_chooser_new(_("Select device to browse"));
+	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
+	gtk_widget_show(selector);
+	g_object_set(selector,
+		     "show-search", TRUE,
+		     "show-device-category", TRUE,
+		     "show-device-type", TRUE,
+		     NULL);
+	g_signal_connect(selector, "selected-device-changed",
+			 G_CALLBACK(select_device_changed), dialog);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
+
+	bdaddr = NULL;
+	response_id = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (response_id == GTK_RESPONSE_ACCEPT)
+		g_object_get (G_OBJECT (selector), "device-selected", &bdaddr, NULL);
+
+	gtk_widget_destroy (dialog);
+
+	if (response_id != GTK_RESPONSE_ACCEPT)
+		return;
+
+	cmd = g_strdup_printf("%s --no-default-window \"obex://[%s]\"",
+			      "nautilus", bdaddr);
+	g_free (bdaddr);
+
+	if (!g_spawn_command_line_async(cmd, NULL))
+		g_printerr("Couldn't execute command: %s\n", cmd);
+
+	g_free (cmd);
 }
 
 static void sendto_callback(GObject *widget, gpointer user_data)

@@ -23,5 +23,3 @@
 
 GtkWidget *create_tree(GtkTreeModel *model, gboolean icons);
 
-gchar *show_browse_dialog(void);
-gchar **show_select_dialog(void);

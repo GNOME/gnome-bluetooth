@@ -1,5 +1,5 @@
 
-SUBDIRS = po icons common applet properties wizard sendto browse
+SUBDIRS = po icons common applet properties wizard sendto
 
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27
 

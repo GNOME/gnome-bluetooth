@@ -36,8 +36,7 @@
 #include <dbus/dbus-glib-lowlevel.h>
 
 #include <obex-agent.h>
-
-#include "helper.h"
+#include <bluetooth-chooser.h>
 #include "marshal.h"
 
 #define AGENT_PATH "/org/bluez/agent/sendto"
@@ -671,6 +670,94 @@ static void name_owner_changed(DBusGProxy *proxy, const char *name,
 {
 	if (g_str_equal(name, "org.openobex") == TRUE && *new == '\0')
 		gtk_main_quit();
+}
+
+static void
+select_device_changed(BluetoothChooser *sel,
+		      char *address,
+		      gpointer user_data)
+{
+	GtkDialog *dialog = user_data;
+
+	gtk_dialog_set_response_sensitive(dialog,
+				GTK_RESPONSE_ACCEPT, address != NULL);
+}
+
+static char *
+show_browse_dialog (void)
+{
+	GtkWidget *dialog, *selector, *button, *image;
+	char *bdaddr;
+	int response_id;
+
+	dialog = gtk_dialog_new_with_buttons(_("Select Device to Send To"), NULL,
+					     GTK_DIALOG_NO_SEPARATOR,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+					     NULL);
+	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Send _To"), GTK_RESPONSE_ACCEPT);
+	image = gtk_image_new_from_icon_name ("document-send", GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (button), image);
+	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
+					  GTK_RESPONSE_ACCEPT, FALSE);
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
+
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+
+	selector = bluetooth_chooser_new("Select device to send files to");
+	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
+	gtk_widget_show(selector);
+	g_object_set(selector,
+		     "show-search", TRUE,
+		     "show-device-category", TRUE,
+		     "show-device-type", TRUE,
+		     NULL);
+	g_signal_connect(selector, "selected-device-changed",
+			 G_CALLBACK(select_device_changed), dialog);
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
+
+	bdaddr = NULL;
+	response_id = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (response_id == GTK_RESPONSE_ACCEPT)
+		g_object_get (G_OBJECT (selector), "device-selected", &bdaddr, NULL);
+
+	gtk_widget_destroy (dialog);
+
+	return bdaddr;
+}
+
+static char **
+show_select_dialog(void)
+{
+	GtkWidget *dialog;
+	gchar **files = NULL;
+
+	dialog = gtk_file_chooser_dialog_new(_("Choose files to send"), NULL,
+				GTK_FILE_CHOOSER_ACTION_OPEN,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+
+	gtk_file_chooser_set_select_multiple(GTK_FILE_CHOOSER(dialog), TRUE);
+
+	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
+		GSList *list, *filenames;
+		int i;
+
+		filenames = gtk_file_chooser_get_filenames(GTK_FILE_CHOOSER(dialog));
+
+		files = g_new(gchar *, g_slist_length(filenames) + 1);
+
+		for (list = filenames, i = 0; list; list = list->next, i++)
+			files[i] = list->data;
+		files[i] = NULL;
+
+		g_slist_free(filenames);
+	}
+
+	gtk_widget_destroy(dialog);
+
+	return files;
 }
 
 static GOptionEntry options[] = {
