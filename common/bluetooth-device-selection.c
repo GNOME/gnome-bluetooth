@@ -308,7 +308,9 @@ static void default_adapter_changed (GObject    *gobject,
 	if (adapter == NULL)
 		return;
 
-	priv->model = bluetooth_client_get_device_filter_model (priv->client, NULL, NULL, NULL, NULL);
+	g_free (adapter);
+
+	priv->model = bluetooth_client_get_device_model (priv->client, NULL);
 	if (priv->model) {
 		priv->filter = gtk_tree_model_filter_new (priv->model, NULL);
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
@@ -579,6 +581,7 @@ bluetooth_device_selection_finalize (GObject *object)
 
 	if (priv->client) {
 		g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
+		priv->default_adapter_changed_id = 0;
 
 		bluetooth_client_stop_discovery (priv->client);
 		g_object_unref (priv->client);
