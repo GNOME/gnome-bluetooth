@@ -100,74 +100,6 @@ int_log2(int v)
 }
 
 static void
-name_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
-	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
-{
-	gchar *address;
-	gchar *name;
-
-	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_ADDRESS, &address,
-			    BLUETOOTH_COLUMN_NAME, &name, -1);
-
-	/* If we don't have a name, replace the name with the
-	 * Bluetooth address, with the ":" replaced by "-" */
-	if (name == NULL) {
-		name = g_strdup (address);
-		g_strdelimit (name, ":", '-');
-	}
-
-	g_object_set (cell, "text", name ? name : address, NULL);
-
-	g_free (name);
-	g_free (address);
-}
-
-static void
-type_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
-	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
-{
-	guint type;
-
-	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_TYPE, &type, -1);
-
-	switch (type) {
-	case BLUETOOTH_TYPE_PHONE:
-		g_object_set (cell, "icon-name", "stock_cell-phone", NULL);
-		break;
-	case BLUETOOTH_TYPE_MODEM:
-		g_object_set (cell, "icon-name", "modem", NULL);
-		break;
-	case BLUETOOTH_TYPE_COMPUTER:
-		g_object_set (cell, "icon-name", "computer", NULL);
-		break;
-	case BLUETOOTH_TYPE_NETWORK:
-		g_object_set (cell, "icon-name", "network-wireless", NULL);
-		break;
-	case BLUETOOTH_TYPE_HEADSET:
-		g_object_set (cell, "icon-name", "stock_headphones", NULL);
-		break;
-	case BLUETOOTH_TYPE_HEADPHONE:
-		g_object_set (cell, "icon-name", "stock_headphones", NULL);
-		break;
-	case BLUETOOTH_TYPE_KEYBOARD:
-		g_object_set (cell, "icon-name", "input-keyboard", NULL);
-		break;
-	case BLUETOOTH_TYPE_MOUSE:
-		g_object_set (cell, "icon-name", "input-mouse", NULL);
-		break;
-	case BLUETOOTH_TYPE_CAMERA:
-		g_object_set (cell, "icon-name", "camera-photo", NULL);
-		break;
-	case BLUETOOTH_TYPE_PRINTER:
-		g_object_set (cell, "icon-name", "printer", NULL);
-		break;
-	default:
-		g_object_set (cell, "icon-name", "bluetooth", NULL);
-		break;
-	}
-}
-
-static void
 bonded_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
@@ -421,16 +353,14 @@ create_treeview (BluetoothDeviceSelection *self)
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_set_spacing (column, 4);
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-
-	gtk_tree_view_column_set_cell_data_func (column, renderer,
-						 type_to_icon, NULL, NULL);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "icon-name", BLUETOOTH_COLUMN_ICON, NULL);
 
 	/* The device name */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
-
-	gtk_tree_view_column_set_cell_data_func (column, renderer,
-						 name_to_text, NULL, NULL);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "text", BLUETOOTH_COLUMN_ALIAS, NULL);
 
 	/* The bonded icon */
 	priv->bonded_cell = gtk_cell_renderer_pixbuf_new ();
