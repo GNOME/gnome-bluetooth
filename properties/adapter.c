@@ -34,6 +34,7 @@
 #include <bluetooth-client.h>
 #include <helper.h>
 
+#include "adapter.h"
 #include "general.h"
 
 static BluetoothClient *client;

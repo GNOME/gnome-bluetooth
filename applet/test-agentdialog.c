@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 		g_printerr("Connecting to system bus failed: %s\n",
 							error->message);
 		g_error_free(error);
-		gtk_exit(1);
+		return 1;
 	}
 
 	statusicon = init_notification();

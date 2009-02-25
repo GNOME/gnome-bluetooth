@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 		} else
 			g_printerr("An unknown error occurred\n");
 
-		gtk_exit(1);
+		return 1;
 	}
 
 	gtk_window_set_default_icon_name("bluetooth");
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	if (option_device == NULL) {
 		option_device = show_browse_dialog();
 		if (option_device == NULL)
-			gtk_exit(1);
+			return 1;
 	}
 
 	command = g_strdup_printf("%s --no-default-window \"obex://[%s]\"",

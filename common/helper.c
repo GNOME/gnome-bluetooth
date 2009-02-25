@@ -29,6 +29,7 @@
 #include <gtk/gtk.h>
 
 #include <bluetooth-client.h>
+#include "helper.h"
 
 static void connected_to_icon(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			GtkTreeModel *model, GtkTreeIter *iter, gpointer data)

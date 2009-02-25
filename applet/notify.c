@@ -29,6 +29,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libnotify/notify.h>
+#include "notify.h"
 
 static GtkStatusIcon *statusicon = NULL;
 static NotifyNotification *notify = NULL;

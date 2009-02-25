@@ -166,7 +166,7 @@ static void create_window(void)
 					_("Sending files via Bluetooth"));
 	gtk_label_set_markup(GTK_LABEL(label), text);
 	g_free(text);
-	gtk_box_pack_start_defaults(GTK_BOX(vbox), label);
+	gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
 
 	table = gtk_table_new(2, 2, FALSE);
 	gtk_table_set_col_spacings(GTK_TABLE(table), 4);
@@ -208,7 +208,7 @@ static void create_window(void)
 							PANGO_ELLIPSIZE_END);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
 							_("Connecting..."));
-	gtk_box_pack_start_defaults(GTK_BOX(vbox), progress);
+	gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
 
 	label_status = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label_status), 0, 0.5);
@@ -703,7 +703,7 @@ int main(int argc, char *argv[])
 		} else
 			g_printerr("An unknown error occurred\n");
 
-		gtk_exit(1);
+		return 1;
 	}
 
 	gtk_window_set_default_icon_name("bluetooth");
@@ -711,14 +711,14 @@ int main(int argc, char *argv[])
 	if (option_files == NULL) {
 		option_files = show_select_dialog();
 		if (option_files == NULL)
-			gtk_exit(1);
+			return 1;
 	}
 
 	if (option_device == NULL) {
 		option_device = show_browse_dialog();
 		if (option_device == NULL) {
 			g_strfreev(option_files);
-			gtk_exit(1);
+			return 1;
 		}
 	}
 
@@ -756,7 +756,7 @@ int main(int argc, char *argv[])
 		} else
 			g_print("An unknown error occured\n");
 
-		gtk_exit(1);
+		return 1;
 	}
 
 	dbus_g_object_register_marshaller(marshal_VOID__STRING_STRING,

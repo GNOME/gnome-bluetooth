@@ -624,7 +624,8 @@ static void create_search(GtkWidget *assistant)
 
 	hbox_custom = gtk_hbox_new(FALSE, 6);
 	radio_custom = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("Custom PIN code:"));
-	entry_custom = gtk_entry_new_with_max_length(4);
+	entry_custom = gtk_entry_new();
+	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), 4);
 	gtk_entry_set_width_chars(GTK_ENTRY(entry_custom), 4);
         g_signal_connect (entry_custom, "key-press-event",
 			  G_CALLBACK (entry_custom_event), NULL);
@@ -745,12 +746,12 @@ int main(int argc, char *argv[])
 		} else
 			g_print("An unknown error occurred\n");
 
-		gtk_exit(1);
+		return 1;
 	}
 
 	instance = bluetooth_instance_new("wizard");
 	if (instance == NULL)
-		gtk_exit(0);
+		return 0;
 
 	gtk_window_set_default_icon_name("bluetooth");
 

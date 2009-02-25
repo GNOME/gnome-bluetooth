@@ -368,12 +368,12 @@ int main(int argc, char *argv[])
 		} else
 			g_print("An unknown error occurred\n");
 
-		gtk_exit(1);
+		return 1;
 	}
 
 	instance = bluetooth_instance_new("applet");
 	if (instance == NULL)
-		gtk_exit(0);
+		return 0;
 
 	g_set_application_name(_("Bluetooth Applet"));
 
