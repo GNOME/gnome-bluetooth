@@ -475,7 +475,41 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 	if (get_iter_from_proxy(priv->store, &iter, adapter) == FALSE)
 		return;
 
-	if (g_str_equal(property, "Name") == TRUE) {
+	if (g_str_equal (property, "Powered") == TRUE) {
+		GHashTable *hash;
+		const gchar *address, *name;
+		gboolean discovering;
+		GPtrArray *array;
+
+		/* Need to update those properties! */
+		adapter_get_properties(adapter, &hash, NULL);
+		if (hash != NULL) {
+			value = g_hash_table_lookup(hash, "Address");
+			address = value ? g_value_get_string(value) : NULL;
+
+			value = g_hash_table_lookup(hash, "Name");
+			name = value ? g_value_get_string(value) : NULL;
+
+			value = g_hash_table_lookup(hash, "Discovering");
+			discovering = value ? g_value_get_boolean(value) : FALSE;
+
+			gtk_tree_store_set(priv->store, &iter,
+					   BLUETOOTH_COLUMN_ADDRESS, address,
+					   BLUETOOTH_COLUMN_NAME, name,
+					   BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+
+			adapter_list_devices(adapter, &array, NULL);
+			if (array != NULL) {
+				int i;
+
+				for (i = 0; i < array->len; i++) {
+					gchar *path = g_ptr_array_index(array, i);
+					device_created(adapter, path, client);
+					g_free(path);
+				}
+			}
+		}
+	} else if (g_str_equal(property, "Name") == TRUE) {
 		const gchar *name = g_value_get_string(value);
 
 		gtk_tree_store_set(priv->store, &iter,
