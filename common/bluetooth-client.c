@@ -786,7 +786,7 @@ GtkTreeModel *bluetooth_client_get_model(BluetoothClient *client)
 
 GtkTreeModel *bluetooth_client_get_filter_model(BluetoothClient *client,
 				GtkTreeModelFilterVisibleFunc func,
-				gpointer data, GtkDestroyNotify destroy)
+				gpointer data, GDestroyNotify destroy)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeModel *model;
@@ -879,7 +879,7 @@ GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client,
 
 GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
 		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
-				gpointer data, GtkDestroyNotify destroy)
+				gpointer data, GDestroyNotify destroy)
 {
 	GtkTreeModel *model;
 
