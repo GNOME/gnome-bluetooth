@@ -449,6 +449,7 @@ static void create_type(GtkWidget *assistant)
 	gtk_widget_set_sensitive(GTK_WIDGET(button), FALSE);
 	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
+	/* translators: a hands-free headset, usually only one ear is covered */
 	button = gtk_radio_button_new_with_label(group, _("Headset"));
 	group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(button));
 	gtk_widget_set_sensitive(GTK_WIDGET(button), FALSE);

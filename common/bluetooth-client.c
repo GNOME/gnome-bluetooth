@@ -95,6 +95,7 @@ const gchar *bluetooth_type_to_string(guint type)
 	case BLUETOOTH_TYPE_NETWORK:
 		return N_("Network");
 	case BLUETOOTH_TYPE_HEADSET:
+		/* translators: a hands-free headset, usually only one ear is covered */
 		return N_("Headset");
 	case BLUETOOTH_TYPE_HEADPHONE:
 		return N_("Headphone");
