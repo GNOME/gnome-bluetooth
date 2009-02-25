@@ -6,12 +6,9 @@ AM_CONFIG_HEADER(config.h)
 
 AM_MAINTAINER_MODE
 
-AC_INIT_BLUEZ
-
 AC_LANG_C
 
 AC_PROG_CC
-AC_PROG_CC_PIE
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
@@ -25,6 +22,8 @@ IT_PROG_INTLTOOL([0.35.0])
 
 AC_PATH_PROG(GCONFTOOL, [gconftool-2])
 AM_GCONF_SOURCE_2
+
+AC_DEFINE_UNQUOTED(LOCALEDIR, "${prefix}/share/locale", [Directory for the localization files])
 
 AC_ARG_ENABLE(desktop-update, AC_HELP_STRING([--disable-desktop-update],
 					[Disable desktop database update]))
@@ -88,9 +87,13 @@ dnl PKG_CHECK_MODULES(OPENOBEX, libopenobex-glib >= 1.4, dummy=yes, dummy=no)
 dnl AC_SUBST(OPENOBEX_CFLAGS)
 dnl AC_SUBST(OPENOBEX_LIBS)
 
-AC_ARG_BLUEZ
-
-AC_OUTPUT(Makefile icons/Makefile common/Makefile
-			applet/Makefile properties/Makefile wizard/Makefile
-			sendto/Makefile browse/Makefile analyzer/Makefile
-			explorer/Makefile proximity/Makefile po/Makefile.in)
+AC_OUTPUT(Makefile
+	  icons/Makefile
+	  common/Makefile
+	  applet/Makefile
+	  properties/Makefile
+	  wizard/Makefile
+	  sendto/Makefile
+	  browse/Makefile
+	  po/Makefile.in
+)
