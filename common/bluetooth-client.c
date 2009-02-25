@@ -117,6 +117,35 @@ const gchar *bluetooth_type_to_string(guint type)
 	}
 }
 
+gboolean
+bluetooth_verify_address (const char *bdaddr)
+{
+	gboolean retval = TRUE;
+	char **elems;
+
+	g_return_val_if_fail (bdaddr != NULL, FALSE);
+
+	if (strlen (bdaddr) != 17)
+		return FALSE;
+
+	elems = g_strsplit (bdaddr, ":", -1);
+	if (elems == NULL)
+		return FALSE;
+	if (g_strv_length (elems) != 6) {
+		g_strfreev (elems);
+		return FALSE;
+	}
+	for (i = 0; i < 6; i++) {
+		if (g_ascii_isxdigit (elems[i][0]) == FALSE || g_ascii_isxdigit (elems[i][1]) == FALSE) {
+			retval = FALSE;
+			break;
+		}
+	}
+
+	g_strfreev (elems);
+	return retval;
+}
+
 static guint class_to_type(guint32 class)
 {
 	switch ((class & 0x1f00) >> 8) {
