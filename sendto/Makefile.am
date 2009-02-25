@@ -6,7 +6,7 @@ bluetooth_sendto_SOURCES = main.c
 bluetooth_sendto_LDADD = $(top_builddir)/common/libcommon.a \
 					@GTK_LIBS@ @GIO_LIBS@ @DBUS_LIBS@
 
-AM_CFLAGS = @DBUS_CFLAGS@ @GIO_CFLAGS@ @GTK_CFLAGS@
+AM_CFLAGS = @DBUS_CFLAGS@ @GIO_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 INCLUDES = -I$(top_srcdir)/common -I$(top_builddir)/common
 

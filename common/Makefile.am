@@ -7,7 +7,7 @@ libcommon_a_SOURCES = helper.h helper.c \
 		bluetooth-agent.h bluetooth-agent.c \
 		obex-agent.h obex-agent.c
 
-AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@
+AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-instance-glue.h \

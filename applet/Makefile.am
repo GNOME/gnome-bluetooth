@@ -13,7 +13,7 @@ test_agentdialog_SOURCES = test-agentdialog.c notify.h notify.c
 test_agentdialog_LDADD = $(top_builddir)/common/libcommon.a \
 				@NOTIFY_LIBS@ @GTK_LIBS@ @DBUS_LIBS@
 
-AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ @GCONF_CFLAGS@ @NOTIFY_CFLAGS@
+AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ @GCONF_CFLAGS@ @NOTIFY_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 INCLUDES = -I$(top_srcdir)/common
 

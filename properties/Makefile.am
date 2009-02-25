@@ -7,7 +7,7 @@ bluetooth_properties_SOURCES = main.c general.h general.c \
 bluetooth_properties_LDADD = $(top_builddir)/common/libcommon.a \
 				@GCONF_LIBS@ @GTK_LIBS@ @HAL_LIBS@ @DBUS_LIBS@
 
-AM_CFLAGS = @DBUS_CFLAGS@ @HAL_CFLAGS@ @GTK_CFLAGS@ @GCONF_CFLAGS@
+AM_CFLAGS = @DBUS_CFLAGS@ @HAL_CFLAGS@ @GTK_CFLAGS@ @GCONF_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 INCLUDES = -I$(top_srcdir)/common
 
