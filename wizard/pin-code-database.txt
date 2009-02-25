@@ -1,0 +1,24 @@
+# This is a PIN code database for use in the Bluetooth wizard.
+#
+# The syntax is a simple tab-separated file with 4 fields:
+# type	bdaddr_prefix	device_name	device_pin
+# 
+# Lines starting with # (such as this one) and empty lines are ignored
+# Recognised types are:
+# any, mouse, keyboard, headset, headphones
+# 
+# The bdaddr_prefix and device_name fields can be left empty
+
+# Apple Wireless and Mighty Mouse
+mouse	00:0A:95:		0000
+mouse	00:14:51:		0000
+
+# GPS devices
+any	00:0D:B5:	TomTom Wireless GPS MkII	0000
+any	00:0D:B5:	GPS-GW-005	0000
+
+######## Generic type ########
+
+# Headphones and headsets
+headphone			0000
+headset			0000

@@ -37,6 +37,7 @@
 #include "helper.h"
 
 #define AGENT_PATH "/org/bluez/agent/wizard"
+#define PIN_CODE_DB "pin-code-database.txt"
 
 static BluetoothClient *client;
 static BluetoothAgent *agent;
@@ -56,32 +57,100 @@ static GtkWidget *label_passkey = NULL;
 
 static GtkTreeSelection *search_selection = NULL;
 
+#define TYPE_IS(x, r) {				\
+	if (g_str_equal(type, x)) return r;	\
+}
+
+static guint string_to_type(const char *type)
+{
+	TYPE_IS ("any", BLUETOOTH_TYPE_ANY);
+	TYPE_IS ("mouse", BLUETOOTH_TYPE_MOUSE);
+	TYPE_IS ("keyboard", BLUETOOTH_TYPE_KEYBOARD);
+	TYPE_IS ("headset", BLUETOOTH_TYPE_HEADSET);
+	TYPE_IS ("headphone", BLUETOOTH_TYPE_HEADPHONE);
+
+	g_warning ("unhandled type '%s'", type);
+	return BLUETOOTH_TYPE_ANY;
+}
+
+static char *set_pincode_for_device(guint type, const char *address, const char *name)
+{
+	char *contents, **lines;
+	char *ret_pin = NULL;
+	guint i;
+
+	/* Load the PIN database and split it in lines */
+	if (!g_file_get_contents(PIN_CODE_DB, &contents, NULL, NULL)) {
+		char *filename;
+
+		filename = g_build_filename(PKGDATADIR, PIN_CODE_DB, NULL);
+		if (!g_file_get_contents(filename, &contents, NULL, NULL)) {
+			g_warning("Could not load "PIN_CODE_DB);
+			g_free (filename);
+			return NULL;
+		}
+		g_free (filename);
+	}
+
+	lines = g_strsplit(contents, "\n", -1);
+	g_free (contents);
+	if (lines == NULL) {
+		g_warning("Could not parse "PIN_CODE_DB);
+		return NULL;
+	}
+
+	/* And now process each line */
+	for (i = 0; lines[i] != NULL; i++) {
+		char **items;
+		guint ltype;
+		const char *laddress, *lname, *lpin;
+
+		/* Ignore comments and empty lines */
+		if (lines[i][0] == '#' || lines[i][0] == '\0')
+			continue;
+
+		items = g_strsplit(lines[i], "\t", 4);
+		ltype = string_to_type(items[0]);
+
+		if (ltype != BLUETOOTH_TYPE_ANY && ltype != type) {
+			g_strfreev (items);
+			continue;
+		}
+		laddress = items[1];
+		lname = items[2];
+		lpin = items[3];
+
+		/* If we have an address, does the OUI prefix match? */
+		if (strlen(laddress) > 0 && g_str_has_prefix(address, laddress) == FALSE) {
+			g_strfreev (items);
+			continue;
+		}
+
+		/* If we have a name, does it match? */
+		if (strlen(lname) > 0 && g_str_equal(name, lname) == FALSE) {
+			g_strfreev (items);
+			continue;
+		}
+
+		/* Everything matches, we have a pincode */
+		ret_pin = g_strdup(lpin);
+		g_strfreev(items);
+		break;
+	}
+
+	g_strfreev(lines);
+	return ret_pin;
+}
+
 static gboolean pincode_callback(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
-	const char *pincode = target_pincode;
+	char *pincode;
 	gchar *text;
 
-	/* Apple Wireless and Mighty Mouse */
-	if (target_type == BLUETOOTH_TYPE_MOUSE && 
-				(g_str_has_prefix(target_address,
-							"00:0A:95:") == TRUE ||
-				g_str_has_prefix(target_address,
-							"00:14:51:") == TRUE))
-		pincode = "0000";
-
-	/* Most headsets are using 0000 as pincode */
-	if (target_type == BLUETOOTH_TYPE_HEADSET ||
-				target_type == BLUETOOTH_TYPE_HEADPHONE)
-		pincode = "0000";
-
-	/* Most GPS devices are using 0000 as pincode */
-	if (g_str_has_prefix(target_address, "00:0D:B5") == TRUE &&
-				(g_str_equal(target_name,
-					"TomTom Wireless GPS MkII") == TRUE ||
-				g_str_equal(target_name,
-						"GPS-GW-005") == TRUE))
-		pincode = "0000";
+	pincode = set_pincode_for_device(target_type, target_address, target_name);
+	if (pincode == NULL)
+		pincode = g_strdup(target_pincode);
 
 	text = g_strdup_printf(_("Please enter the following PIN code: %s"),
 								pincode);
@@ -89,6 +158,7 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 	g_free(text);
 
 	dbus_g_method_return(context, pincode);
+	g_free(pincode);
 
 	return TRUE;
 }
