@@ -15,7 +15,8 @@ libgnome_bluetooth_la_SOURCES =				\
 	bluetooth-enums.h				\
 	bluetooth-client.h bluetooth-client.c		\
 	marshal.h marshal.c				\
-	bluetooth-chooser.c bluetooth-chooser.h
+	bluetooth-chooser.c bluetooth-chooser.h		\
+	bluetooth-chooser-button.c bluetooth-chooser-button.h
 
 libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS)
 
@@ -29,8 +30,8 @@ libgnome_bluetooth_la_LDFLAGS =				\
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS =				\
-	bluetooth-chooser.c				\
 	bluetooth-chooser.h				\
+	bluetooth-chooser-button.h			\
 	bluetooth-enums.h
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
