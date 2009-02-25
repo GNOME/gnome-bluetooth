@@ -92,6 +92,8 @@ const gchar *bluetooth_type_to_string(guint type)
 		return N_("Headset");
 	case BLUETOOTH_TYPE_HEADPHONE:
 		return N_("Headphone");
+	case BLUETOOTH_TYPE_OTHER_AUDIO:
+		return N_("Audio device");
 	case BLUETOOTH_TYPE_KEYBOARD:
 		return N_("Keyboard");
 	case BLUETOOTH_TYPE_MOUSE:
@@ -134,6 +136,8 @@ static guint class_to_type(guint32 class)
 			return BLUETOOTH_TYPE_HEADSET;
 		case 0x06:
 			return BLUETOOTH_TYPE_HEADPHONE;
+		default:
+			return BLUETOOTH_TYPE_OTHER_AUDIO;
 		}
 		break;
 	case 0x05:
