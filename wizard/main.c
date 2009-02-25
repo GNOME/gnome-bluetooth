@@ -69,6 +69,7 @@ static guint string_to_type(const char *type)
 	TYPE_IS ("headset", BLUETOOTH_TYPE_HEADSET);
 	TYPE_IS ("headphone", BLUETOOTH_TYPE_HEADPHONE);
 	TYPE_IS ("audio", BLUETOOTH_TYPE_OTHER_AUDIO);
+	TYPE_IS ("printer", BLUETOOTH_TYPE_PRINTER);
 
 	g_warning ("unhandled type '%s'", type);
 	return BLUETOOTH_TYPE_ANY;
