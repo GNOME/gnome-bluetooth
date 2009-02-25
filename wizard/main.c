@@ -691,7 +691,7 @@ static void create_summary(GtkWidget *assistant)
 
 	vbox = create_vbox(assistant, GTK_ASSISTANT_PAGE_SUMMARY,
 				_("Summary"),
-				_("Succesfully configured new device"));
+				_("Successfully configured new device"));
 
 	page_summary = vbox;
 }
