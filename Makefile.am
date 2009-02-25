@@ -14,6 +14,9 @@ MAINTAINERCLEANFILES = Makefile.in \
 	intltool-extract.in intltool-update.in intltool-merge.in \
 	gnome-bluetooth-1.0.pc
 
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gnome-bluetooth-1.0.pc
+
 install-data-hook:
 if ICON_UPDATE
 	$(UPDATE_ICON_CACHE) -f -t $(DESTDIR)$(datadir)/icons/hicolor

@@ -1,0 +1,9 @@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: gnome-bluetooth-1.0
+Description: Widgets for Bluetooth device selection
+Version: @VERSION@
+Requires: gtk+-2.0
+Libs: -L${libdir} -lgnome-bluetooth-1.0
+Cflags: -I${includedir}/gnome-bluetooth
