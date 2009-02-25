@@ -475,9 +475,15 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 					BLUETOOTH_COLUMN_NAME, name, -1);
 	} else if (g_str_equal(property, "Discovering") == TRUE) {
 		gboolean discovering = g_value_get_boolean(value);
+		GtkTreePath *path;
 
 		gtk_tree_store_set(priv->store, &iter,
 				BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+
+		/* Tell the world */
+		path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+		gtk_tree_model_row_changed (GTK_TREE_MODEL (priv->store), path, &iter);
+		gtk_tree_path_free (path);
 	}
 }
 

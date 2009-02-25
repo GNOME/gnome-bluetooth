@@ -48,11 +48,9 @@ typedef struct _BluetoothDeviceSelectionPrivate BluetoothDeviceSelectionPrivate;
 struct _BluetoothDeviceSelectionPrivate {
 	BluetoothClient *client;
 	GtkTreeSelection *selection;
-	GtkTreeModel *model, *filter;
+	GtkTreeModel *model, *filter, *adapter_model;
 	GtkWidget *label;
 
-	gulong discov_started_id;
-	gulong discov_completed_id;
 	gulong default_adapter_changed_id;
 
 	/* Widgets/UI bits that can be shown or hidden */
@@ -246,26 +244,6 @@ search_button_clicked (GtkButton *button, gpointer user_data)
 }
 
 static void
-discovery_started (BluetoothClient *client, const char *adapter_path, gboolean is_default, gpointer user_data)
-{
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(user_data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
-
-	if (is_default)
-		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
-}
-
-static void
-discovery_completed (BluetoothClient *client, const char *adapter_path, gboolean is_default, gpointer user_data)
-{
-	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(user_data);
-	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
-
-	if (is_default)
-		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
-}
-
-static void
 select_browse_device_callback (GtkTreeSelection *selection, gpointer user_data)
 {
 	BluetoothDeviceSelection *self = user_data;
@@ -346,6 +324,33 @@ filter_category_changed_cb (GtkComboBox *widget, gpointer data)
 	if (priv->filter)
 		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
 	g_object_notify (G_OBJECT(self), "device-category-filter");
+}
+
+static void
+model_row_changed (GtkTreeModel *model,
+		   GtkTreePath  *path,
+		   GtkTreeIter  *iter,
+		   gpointer      data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	gboolean discovering, is_default;
+
+	char *foo;
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_NAME, &foo, -1);
+
+	/* Not an adapter changing? */
+	if (gtk_tree_path_get_depth (path) != 1)
+		return;
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
+			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
+			    -1);
+	if (is_default == FALSE)
+		return;
+	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), !discovering);
 }
 
 static void default_adapter_changed (GObject    *gobject,
@@ -450,7 +455,7 @@ create_treeview (BluetoothDeviceSelection *self)
 			  G_CALLBACK(select_browse_device_callback), self);
 
 	/* Set the model, and filter */
-	priv->model = bluetooth_client_get_device_filter_model (priv->client, NULL, NULL, NULL, NULL);
+	priv->model = bluetooth_client_get_device_model (priv->client, NULL);
 	if (priv->model) {
 		priv->filter = gtk_tree_model_filter_new (priv->model, NULL);
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
@@ -485,11 +490,6 @@ bluetooth_device_selection_init(BluetoothDeviceSelection *self)
 	priv->show_search = FALSE;
 
 	priv->client = bluetooth_client_new ();
-
-	priv->discov_started_id = g_signal_connect (G_OBJECT(priv->client),
-			"discovery-started", G_CALLBACK(discovery_started), self);
-	priv->discov_completed_id = g_signal_connect (G_OBJECT(priv->client),
-			"discovery-completed", G_CALLBACK(discovery_completed), self);
 
 	/* Setup the widget itself */
 	gtk_box_set_spacing (GTK_BOX(self), 18);
@@ -527,15 +527,21 @@ bluetooth_device_selection_init(BluetoothDeviceSelection *self)
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 1);
 
+	/* Setup the adapter disco mode callback for the search button */
+	priv->adapter_model = bluetooth_client_get_adapter_model (priv->client);
+	g_signal_connect (priv->adapter_model, "row-changed",
+			  G_CALLBACK (model_row_changed), self);
+
 	/* The search button */
 	priv->search_button = gtk_button_new_with_mnemonic (_("S_earch"));
 	gtk_widget_set_no_show_all (priv->search_button, TRUE);
 	gtk_box_pack_end (GTK_BOX (hbox), priv->search_button, FALSE, TRUE, 0);
 	g_signal_connect (G_OBJECT(priv->search_button), "clicked",
 			  G_CALLBACK(search_button_clicked), self);
-	gtk_widget_set_tooltip_text (priv->search_button, _("Rescan Bluetooth devices"));
+	gtk_widget_set_tooltip_text (priv->search_button, _("Search for Bluetooth devices"));
 	if (priv->show_search)
 		gtk_widget_show (priv->search_button);
+	//FIXME check whether the default adapter is discovering right now
 
 	/* The treeview */
 	scrolled_window = create_treeview (self);
@@ -641,11 +647,23 @@ bluetooth_device_selection_finalize (GObject *object)
 {
 	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
 
-	g_signal_handler_disconnect (G_OBJECT(priv->client), priv->discov_started_id);
-	g_signal_handler_disconnect (G_OBJECT(priv->client), priv->discov_completed_id);
-	g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
+	if (priv->client) {
+		g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
 
-	bluetooth_client_stop_discovery (priv->client);
+		bluetooth_client_stop_discovery (priv->client);
+		g_object_unref (priv->client);
+		priv->client = NULL;
+	}
+	if (priv->adapter_model) {
+		g_object_unref (priv->adapter_model);
+		priv->adapter_model = NULL;
+	}
+	if (priv->model != NULL) {
+		g_object_unref (priv->model);
+		priv->model = NULL;
+	}
+
+	G_OBJECT_CLASS(bluetooth_device_selection_parent_class)->finalize(object);
 }
 
 enum {
