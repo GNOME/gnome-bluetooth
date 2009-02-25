@@ -437,6 +437,7 @@ static void create_adapter(struct adapter_data *adapter)
 
 	GtkWidget *mainbox;
 	GtkWidget *vbox;
+	GtkWidget *table;
 	GtkWidget *label;
 	GtkWidget *image;
 	GtkWidget *button;
@@ -602,18 +603,20 @@ static void create_adapter(struct adapter_data *adapter)
 	g_signal_connect(G_OBJECT(entry), "focus-out-event",
 					G_CALLBACK(focus_callback), adapter);
 
-	vbox = gtk_vbox_new(FALSE, 6);
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
+	table = gtk_table_new(2, 2, FALSE);
+	gtk_box_pack_start(GTK_BOX(mainbox), table, TRUE, TRUE, 0);
 
 	label = create_label(_("Known devices"));
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_table_attach(GTK_TABLE(table), label, 0, 2, 0, 1,
+			 GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 6);
 
 	scrolled = gtk_scrolled_window_new(NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled),
 				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolled),
 							GTK_SHADOW_OUT);
-	gtk_container_add(GTK_CONTAINER(vbox), scrolled);
+	gtk_table_attach(GTK_TABLE(table), scrolled, 0, 1, 1, 2,
+			 GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 6, 6);
 
 	model = bluetooth_client_get_device_filter_model(client,
 				adapter->proxy, device_filter, NULL, NULL);
@@ -632,12 +635,13 @@ static void create_adapter(struct adapter_data *adapter)
 
 	gtk_container_add(GTK_CONTAINER(scrolled), tree);
 
-	buttonbox = gtk_hbutton_box_new();
+	buttonbox = gtk_vbutton_box_new();
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox),
 						GTK_BUTTONBOX_START);
 	gtk_box_set_spacing(GTK_BOX(buttonbox), 6);
 	gtk_box_set_homogeneous(GTK_BOX(buttonbox), FALSE);
-	gtk_box_pack_start(GTK_BOX(vbox), buttonbox, FALSE, FALSE, 0);
+	gtk_table_attach(GTK_TABLE(table), buttonbox, 1, 2, 1, 2,
+			 GTK_FILL, GTK_FILL, 6, 6);
 
 	button = gtk_button_new_with_label(_("Setup new device..."));
 	image = gtk_image_new_from_stock(GTK_STOCK_ADD,
