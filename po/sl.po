@@ -1,331 +1,688 @@
-# Slovenian translation of gnome-bluetooth.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-bluetooth package.
-#
-# Matej Urbančič <matej.urban@gmail.com>, 2006, 2007.
+# Slovenian translation for bluez-gnome
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the bluez-gnome package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-18 03:35+0100\n"
-"PO-Revision-Date: 2007-01-11 14:26+0100\n"
-"Last-Translator: Matej Urbančič <matej.urban@gmail.com>\n"
-"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Project-Id-Version: bluez-gnome\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-09-29 14:31+0200\n"
+"PO-Revision-Date: 2008-09-17 08:14+0000\n"
+"Last-Translator: Štefan Baebler <Unknown>\n"
+"Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
-"X-Poedit-Language: Slovenian\n"
-"X-Poedit-Country: SLOVENIA\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
-#: ../data/gnome-obex-server.schemas.in.h:1
-msgid "Directory to save received files"
-msgstr "Mapa za shranjevanje sprejetih datotek"
+#: ../common/bluetooth-client.c:82
+msgid "All types"
+msgstr "Vse vrste"
 
-#: ../data/gnome-obex-server.schemas.in.h:2
-msgid "Display dialog when file received"
-msgstr "Prikaz okna ob prejetju datoteke."
+#: ../common/bluetooth-client.c:84
+msgid "Phone"
+msgstr "Telefon"
 
-#: ../data/gnome-obex-server.schemas.in.h:3
-msgid "Incoming files are saved automatically into this directory. If display-notification is set then the user gets chance to open or delete them."
-msgstr "Prihajajoče datoteke so samodejno shranjene v to mapo. Če je določeno tudi zaslonsko obveščanje, lahko uporabnik odpira in briše vnose."
+#: ../common/bluetooth-client.c:86
+msgid "Modem"
+msgstr "Modem"
 
-#: ../data/gnome-obex-server.schemas.in.h:4
-msgid "Received files are automatically saved. If this option is set, then the user is prompted with a dialog which allows them to view or delete the received file."
-msgstr "Sprejete datoteke so samodejno shranjene. V primeru, da je možnost izbrana, uporabnika opozori opozorilno okno, ki omogoča pregled in brisanje prejetih datotek."
+#: ../common/bluetooth-client.c:88
+msgid "Computer"
+msgstr "Računalnik"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:313
-msgid "Selection mode"
-msgstr "Način izbire"
+#: ../common/bluetooth-client.c:90
+msgid "Network"
+msgstr "Omrežje"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:314
-msgid "The selection mode"
-msgstr "Način izbire"
+#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+msgid "Headset"
+msgstr "Slušalka"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:322
-msgid "Sorted"
-msgstr "Urejeno"
+#: ../common/bluetooth-client.c:94
+msgid "Headphone"
+msgstr ""
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:323
-msgid "Icon list is sorted"
-msgstr "Lista ikon je urejena"
+#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+msgid "Keyboard"
+msgstr "Tipkovnica"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:329
-msgid "Sort order"
-msgstr "Red razvrstitve"
+#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+msgid "Mouse"
+msgstr "Miška"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:330
-msgid "Sort direction the icon list should use"
-msgstr "Vrstni red razvrščanja v listi ikon."
+#: ../common/bluetooth-client.c:100
+msgid "Camera"
+msgstr "Fotoaparat"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:344
-msgid "Icon padding"
-msgstr "Podlaganje ikon"
+#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+msgid "Printer"
+msgstr "Tiskalnik"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:345
-msgid "Number of pixels between icons"
-msgstr "Število točk med ikonami."
+#: ../common/bluetooth-client.c:104
+msgid "Joypad"
+msgstr "Igralni plošček"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:352
-msgid "Top margin"
-msgstr "Zgornji rob"
+#: ../common/bluetooth-client.c:106
+msgid "Tablet"
+msgstr "Tablica"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:353
-msgid "Number of pixels in top margin"
-msgstr "Število točk zgornjega robu."
+#: ../common/bluetooth-client.c:108
+msgid "Unknown"
+msgstr "Neznano"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:360
-msgid "Bottom margin"
-msgstr "Spodnji rob"
+#: ../common/helper.c:162
+msgid "Select Device"
+msgstr "Izberite napravo"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:361
-msgid "Number of pixels in bottom margin"
-msgstr "Število točk spodnjega robu."
+#: ../common/helper.c:222
+msgid "Choose files to send"
+msgstr "Izberite datoteke, ki jih želite poslati"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:369
-msgid "Left margin"
-msgstr "Levi rob"
+#: ../applet/main.c:123
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Upravitelj naprav Bluetooth za namizje GNOME"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:370
-msgid "Number of pixels in left margin"
-msgstr "Število pikslov levega robu"
+#: ../applet/main.c:126 ../analyzer/dialog.c:128
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  cupacup https://launchpad.net/~janez-troha\n"
+"  Štefan Baebler https://launchpad.net/~stefanba"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:377
-msgid "Right margin"
-msgstr "Desni rob"
+#: ../applet/main.c:177 ../applet/main.c:232
+msgid "Setup new device..."
+msgstr ""
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:378
-msgid "Number of pixels in right margin"
-msgstr "Število pikslov desnega robu"
+#: ../applet/main.c:242
+msgid "Send files to device..."
+msgstr ""
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:386
-msgid "Selection Box Color"
-msgstr "Barva izbornega okna."
+#: ../applet/main.c:250
+msgid "Browse files on device..."
+msgstr ""
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:387
-msgid "Color of the selection box"
-msgstr "Barva izbornega okna."
+#: ../applet/main.c:373
+msgid "Bluetooth Applet"
+msgstr ""
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:393
-msgid "Selection Box Alpha"
-msgstr "Alfa izbornega okna"
+#: ../applet/agent.c:258
+msgid "Authentication request"
+msgstr "Zahtevek za overovitev"
 
-#: ../libegg/libegg/iconlist/eggiconlist.c:394
-msgid "Opacity of the selection box"
-msgstr "Motnost izbornega okna."
+#: ../applet/agent.c:286 ../applet/agent.c:395
+msgid "Pairing request for device:"
+msgstr "Zahteva po uparitvi z napravo:"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:154
-msgid "Pixbuf"
-msgstr "Pixbuf"
+#: ../applet/agent.c:303
+msgid "Enter passkey for authentication:"
+msgstr "Vnesite geslo za uparitev:"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:155
-msgid "A GdkPixbuf to display"
-msgstr "GdkPixbuf, ki naj se prikaže"
+#: ../applet/agent.c:327
+msgid "Show input"
+msgstr "Prikaži vnos"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:162
-msgid "Filename"
-msgstr "Ime datoteke"
+#: ../applet/agent.c:369
+msgid "Confirmation request"
+msgstr "Zahteva za potrditev"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:163
-msgid "Filename to load and display"
-msgstr "Ime datoteke, ki naj se naloži in prikaže"
+#: ../applet/agent.c:412
+msgid "Confirm value for authentication:"
+msgstr "Potrdite vrednost za overovitev:"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:170
-msgid "Stock ID"
-msgstr "Osnovni ID"
+#: ../applet/agent.c:456
+msgid "Authorization request"
+msgstr "Zahteva za overovitev"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:171
-msgid "Stock ID for a stock image to display"
-msgstr "Osnovni ID slike, ki naj se prikaže"
+#: ../applet/agent.c:482
+msgid "Authorization request for device:"
+msgstr "Zahteva za overovitev naprave:"
 
-#: ../libegg/libegg/tray/eggstatusicon.c:178
-msgid "Animation"
-msgstr "Animacija"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:179
-msgid "GdkPixbufAnimation to display"
-msgstr "GdkPixbufAnimation, ki naj se prikaže"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:186
-msgid "Image type"
-msgstr "Vrsta slike"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:187
-msgid "The representation being used for image data"
-msgstr "Način prezentacije, ki se uporablja za slikovne podatke"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:195
-msgid "Size"
-msgstr "Velikost"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:196
-msgid "The size of the icon"
-msgstr "Velikost Ikone"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:205
-msgid "Blinking"
-msgstr "Utripanje"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:206
-msgid "Whether or not the status icon is blinking"
-msgstr "Ali naj ikona stanja utripa med delovanjem ali ne."
-
-#: ../libegg/libegg/tray/eggtrayicon.c:118
-#: ../libegg/libegg/tray/eggtraymanager.c:145
-msgid "Orientation"
-msgstr "Usmeritev"
-
-#: ../libegg/libegg/tray/eggtrayicon.c:119
-#: ../libegg/libegg/tray/eggtraymanager.c:146
-msgid "The orientation of the tray."
-msgstr "Usmerjenost pladnja."
-
-#: ../obex/gnome-obex-send.c:180
+#: ../applet/agent.c:503
 #, c-format
-msgid "Unable to read file '%s'."
-msgstr "Ni mogoče prebrati datoteke '%s'."
+msgid "Grant access to %s?"
+msgstr "Dovoli dostop %s?"
 
-#: ../obex/gnome-obex-send.c:211
-msgid "An error occurred while sending data."
-msgstr "Prišlo je do napake med pošiljanjem podatkov."
+#: ../applet/agent.c:512
+msgid "Always grant access"
+msgstr "Vselej dovoli dostop"
 
-#: ../obex/gnome-obex-send.c:214
-msgid "The remote device canceled the transfer."
-msgstr "Oddaljena naprava je prekinila prenos."
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#, c-format
+msgid "Pairing request for %s"
+msgstr ""
 
-#: ../obex/gnome-obex-send.c:217
-msgid "An unknown error occurred."
-msgstr "Prišlo je do neznane napake."
+#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
+#: ../applet/agent.c:736 ../applet/agent.c:781
+msgid "Bluetooth device"
+msgstr "Naprava Bluetooth"
 
-#: ../obex/gnome-obex-send.c:248
+#: ../applet/agent.c:591
+msgid "Enter PIN code"
+msgstr ""
+
+#: ../applet/agent.c:638 ../applet/agent.c:688
+msgid "Enter passkey"
+msgstr "Vnesite geslo"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:732
+#, c-format
+msgid "Confirmation request for %s"
+msgstr ""
+
+#: ../applet/agent.c:737
+msgid "Confirm passkey"
+msgstr ""
+
+#: ../applet/agent.c:777
+#, c-format
+msgid "Authorization request for %s"
+msgstr "Zahteva za overovitev %s"
+
+#: ../applet/agent.c:782
+msgid "Check authorization"
+msgstr "Preveri overovitev"
+
+#: ../applet/bluetooth-applet.desktop.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Upravljalnik Bluetooth"
+
+#: ../applet/bluetooth-applet.desktop.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr ""
+
+#: ../properties/main.c:63
+msgid "Bluetooth Preferences"
+msgstr "Nastavitve Bluetooth"
+
+#: ../properties/main.c:94
+msgid "General"
+msgstr "Splošno"
+
+#: ../properties/main.c:131
+msgid "Bluetooth Properties"
+msgstr ""
+
+#: ../properties/general.c:172
+msgid "File transfer"
+msgstr "Prenos datotek"
+
+#: ../properties/general.c:176
+msgid "Receive files from remote devices"
+msgstr "Sprejmi datoteke z drugih naprav"
+
+#: ../properties/general.c:184
+msgid "Share files from public folder"
+msgstr "Deli datoteke iz javnih map"
+
+#: ../properties/general.c:195
+msgid "Notification area"
+msgstr ""
+
+#: ../properties/general.c:199
+msgid "Never display icon"
+msgstr "Nikoli ne prikaži ikone"
+
+#: ../properties/general.c:206
+msgid "Only display when adapter present"
+msgstr "Prikaži le, ko je naprava prisotna"
+
+#: ../properties/general.c:213
+msgid "Always display icon"
+msgstr "Vselej prikaži ikono"
+
+#: ../properties/adapter.c:99
+msgid "Adapter"
+msgstr "Vmesnik"
+
+#: ../properties/adapter.c:174
+msgid "always"
+msgstr ""
+
+#: ../properties/adapter.c:176
+msgid "hidden"
+msgstr ""
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "%'g minute"
+msgid_plural "%'g minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../properties/adapter.c:477
+msgid "Visibility setting"
+msgstr ""
+
+#: ../properties/adapter.c:490
+msgid "Hidden"
+msgstr ""
+
+#: ../properties/adapter.c:502
+msgid "Always visible"
+msgstr ""
+
+#: ../properties/adapter.c:514
+msgid "Temporary visible"
+msgstr ""
+
+#: ../properties/adapter.c:566
+msgid "Friendly name"
+msgstr ""
+
+#: ../properties/adapter.c:587
+msgid "Known devices"
+msgstr ""
+
+#: ../properties/dialog.c:41
+msgid "Remove from list of known devices?"
+msgstr ""
+
+#: ../properties/dialog.c:42
+msgid ""
+"If you delete the device, you have to set it up again before next use."
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Nastavitve za Bluetooth"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid ""
+"Display options for the notification icon. Valid options are \"never\", "
+"\"present\" and \"always\"."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "If Bluetooth file sharing is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:3
+msgid "If receiving of remote files via Bluetooth is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:4
+msgid ""
+"If the service for receiving remote files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:5
+msgid "If the service for sharing files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:6
+msgid "When to show the notification icon"
+msgstr "Kdaj naj se prikaže ikona z obvestili"
+
+#: ../wizard/main.c:75
+#, c-format
+msgid "Please enter the following PIN code: %s"
+msgstr ""
+
+#: ../wizard/main.c:94
+#, c-format
+msgid "Please enter the following passkey: %s%s"
+msgstr ""
+
+#: ../wizard/main.c:115
+#, c-format
+msgid "Pairing with %s canceled"
+msgstr ""
+
+#: ../wizard/main.c:118
+#, c-format
+msgid "Pairing with %s finished"
+msgstr ""
+
+#: ../wizard/main.c:145
+#, c-format
+msgid "Successfully paired with %s"
+msgstr ""
+
+#: ../wizard/main.c:159
+#, c-format
+msgid "Pairing with %s failed"
+msgstr ""
+
+#: ../wizard/main.c:193
+#, c-format
+msgid "Connecting to %s now ..."
+msgstr ""
+
+#: ../wizard/main.c:264
+msgid "Introduction"
+msgstr ""
+
+#: ../wizard/main.c:265
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr ""
+
+#: ../wizard/main.c:268
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer.\n"
+"\n"
+msgstr ""
+
+#: ../wizard/main.c:303
+msgid "Device type"
+msgstr ""
+
+#: ../wizard/main.c:304
+msgid "Select the type of device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:316
+msgid "Mobile phone"
+msgstr ""
+
+#: ../wizard/main.c:331
+msgid "Any device"
+msgstr ""
+
+#: ../wizard/main.c:392
+msgid "Device search"
+msgstr ""
+
+#: ../wizard/main.c:393
+msgid "Select the device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:428
+msgid "Device setup"
+msgstr ""
+
+#: ../wizard/main.c:429
+msgid "Setting up new device"
+msgstr ""
+
+#: ../wizard/main.c:451
+msgid "Summary"
+msgstr ""
+
+#: ../wizard/main.c:452
+msgid "Succesfully configured new device"
+msgstr ""
+
+#: ../wizard/main.c:462
+msgid "Bluetooth Device Wizard"
+msgstr ""
+
+#: ../sendto/main.c:93
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:98 ../sendto/main.c:111
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:109
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:119
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:145
+msgid "File Transfer"
+msgstr "Prenos datotek"
+
+#: ../sendto/main.c:162
+msgid "Sending files via Bluetooth"
+msgstr "Pošiljanje datotek prek Bluetooth-a"
+
+#: ../sendto/main.c:174
+msgid "From:"
+msgstr "Od:"
+
+#: ../sendto/main.c:190
+msgid "To:"
+msgstr "Za:"
+
+#: ../sendto/main.c:206
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
-#: ../obex/gnome-obex-send.c:301
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "Ni mogoče določiti datoteke z uporabniškim vmesnikom. Preverite gnome-bluetooth namestitev."
-
-#: ../obex/gnome-obex-send.c:317
-msgid "Make sure \"Beam receive\" is enabled in the Power preferences, and Bluetooth is enabled."
-msgstr "Prepričajte se, da je \"Sprejemanje žarka\" omogočeno med naprednimi nastavitvami in da je omogočena Bluetooth naprava."
-
-#: ../obex/gnome-obex-send.c:319
-msgid "Remote device doesn't support receiving objects."
-msgstr "Oddaljena naprava ne podpira sprejemanja predmetov."
-
-#: ../obex/gnome-obex-send.c:329
-msgid "Can't initialize program."
-msgstr "Ni mogoče zagnati programa."
-
-#: ../obex/gnome-obex-send.c:335
-msgid "Unable to connect to remote device."
-msgstr "Ni mogoča povezava z oddaljeno napravo."
-
-#: ../obex/gnome-obex-server.c:172
+#: ../sendto/main.c:254
 #, c-format
-msgid "Accept a file from '%s'?"
-msgstr "Sprejmem datoteke preko '%s'?"
+msgid "Sending %s"
+msgstr "Pošiljanje %s"
 
-#: ../obex/gnome-obex-server.c:173
-msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
-msgstr "Oddaljena naprava skuša poslati datoteko preko Bluetooth. Ali se želite povezati s to napravo?"
-
-#: ../obex/gnome-obex-server.c:174
-msgid "Always accept files from this device."
-msgstr "Vedno sprejmi datoteke s te naprave."
-
-#. The name of the default downloads folder,
-#. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:215
-msgid "Downloads"
-msgstr "Prenosi"
-
-#: ../obex/gnome-obex-server.c:306
-msgid "Incoming Bluetooth file transfer"
-msgstr "Bluetooth prenos datotek"
-
-#: ../obex/gnome-obex-server.c:348
-#: ../obex/gnome-obex-server.c:518
-msgid "Ready for Bluetooth file transfers"
-msgstr "Pripravljen na Bluetooth prenos datotek"
-
-#. *
-#. * TODO:
-#. *
-#. * ensure it only gets invoked once
-#. * display sensible error dialogs
-#. * think about fancy received-file actions
-#. *	 - should we send vcards to evo, etc?
-#.
-#: ../obex/gnome-obex-server.c:403
-#: ../obex/gnome-obex-server.desktop.in.h:1
-msgid "Bluetooth File Sharing"
-msgstr "Bluetooth skupne datoteke"
-
-#: ../obex/gnome-obex-server.c:406
-msgid "Receive files from Bluetooth devices"
-msgstr "Sprejemanje datotek preko Bluetooth naprave"
-
-#. add your name and email address in here if you've translated
-#. * this program
-#.
-#: ../obex/gnome-obex-server.c:412
-msgid "translator-credits"
-msgstr "Matej Urbančič <matej.urban@gmail.com>"
-
-#: ../obex/gnome-obex-server.desktop.in.h:2
-msgid "Receive files sent by Bluetooth devices"
-msgstr "Sprejemanje datotek poslanih preko Bluetooth naprav"
-
-#: ../src/chooser.gob:109
-msgid "Choose Bluetooth device"
-msgstr "Izbor Bluetooth naprave"
-
-#: ../src/chooser.gob:151
-msgid "Device"
-msgstr "Naprava"
-
-#: ../src/fileactiondialog.gob:132
-msgid "Bluetooth Transfer Received"
-msgstr "Sprejeti Bluetooth prenos"
-
-#. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:138
+#: ../sendto/main.c:261 ../sendto/main.c:326
 #, c-format
-msgid "File received from '%s'. What would you like to do?"
-msgstr "Datoteka sprejeta preko '%s'. Kaj želite storiti?"
+msgid "Sending file %d of %d"
+msgstr "Pošiljanje %d od %d datotek"
 
-#: ../src/fileactiondialog.gob:168
+#: ../sendto/main.c:322
 #, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:324
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:373
+msgid "An unknown error occured"
+msgstr "Prišlo je do neznane napake"
+
+#: ../sendto/main.c:383
 msgid ""
-"<span weight='bold'>Name:</span> %s\n"
-"<span weight='bold'>Type:</span> %s\n"
-"<span weight='bold'>Size:</span> %s"
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
 msgstr ""
-"<span weight='bold'>Ime:</span> %s\n"
-"<span weight='bold'>Tip:</span> %s\n"
-"<span weight='bold'>Velikost:</span> %s"
 
-#: ../src/permissiondialog.gob:105
-#, c-format
-msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Naj dovolim Bluetooth napravi '%s' povezavo?"
+#: ../sendto/main.c:554 ../browse/main.c:38
+msgid "Remote device to use"
+msgstr ""
 
-#: ../src/permissiondialog.gob:121
-msgid "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
-msgstr "Zunanja naprava se skuša povezati z vašim računalnikom. Ali se želite povezati s to napravo?"
+#: ../analyzer/main.c:166
+msgid "Saving of protocol trace failed"
+msgstr ""
 
-#: ../src/permissiondialog.gob:127
-msgid "_Always allow this device to connect."
-msgstr "_Vedno dovoli tej napravi, da se poveže."
+#: ../analyzer/main.c:313
+msgid "Loading Trace"
+msgstr ""
 
-#: ../ui/gnome-obex-send.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Pošiljanje datoteke</span>"
+#: ../analyzer/main.c:317
+msgid "Live Import"
+msgstr ""
 
-#: ../ui/gnome-obex-send.glade.h:2
-msgid "Bluetooth file transfer"
-msgstr "Bluetooth prenos datotek"
+#: ../analyzer/main.c:321
+msgid "Protocol Trace"
+msgstr ""
 
+#: ../analyzer/main.c:326
+msgid "Unsaved"
+msgstr "Neshranjen"
+
+#: ../analyzer/main.c:609
+msgid "Can't live import from"
+msgstr ""
+
+#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
+msgid "Bluetooth Analyzer"
+msgstr ""
+
+#: ../analyzer/main.c:856
+msgid "_File"
+msgstr "_Datoteka"
+
+#: ../analyzer/main.c:886
+msgid "Open _Recent"
+msgstr "Odpri _nedavno"
+
+#: ../analyzer/main.c:933
+msgid "_Edit"
+msgstr "_Uredi"
+
+#: ../analyzer/main.c:942
+msgid "_View"
+msgstr "_Pogled"
+
+#: ../analyzer/main.c:947
+msgid "_Full Screen"
+msgstr "Če_z cel zaslon"
+
+#: ../analyzer/main.c:954
+msgid "_Tools"
+msgstr "_Orodja"
+
+#: ../analyzer/main.c:959
+msgid "_Debug Packet List"
+msgstr ""
+
+#: ../analyzer/main.c:968
+msgid "_Help"
+msgstr "_Pomoč"
+
+#: ../analyzer/dialog.c:110
+msgid "Bluetooth protocol analyzer"
+msgstr ""
+
+#: ../analyzer/dialog.c:140
+msgid "All Files"
+msgstr "Vse datoteke"
+
+#: ../analyzer/dialog.c:145
+msgid "Supported Files"
+msgstr "Podprte datoteke"
+
+#: ../analyzer/dialog.c:154
+msgid "Frontline BTSnoop Files"
+msgstr ""
+
+#: ../analyzer/dialog.c:160
+msgid "Apple Packet Logger Files"
+msgstr ""
+
+#: ../analyzer/dialog.c:175
+msgid "By Extension"
+msgstr "Po končnici"
+
+#: ../analyzer/dialog.c:180
+msgid "Frontline BTSnoop Format"
+msgstr ""
+
+#: ../analyzer/dialog.c:185
+msgid "Apple Packet Logger Format"
+msgstr ""
+
+#: ../analyzer/dialog.c:249
+msgid "Select File _Type"
+msgstr "Izberite _vrsto datoteke"
+
+#: ../analyzer/dialog.c:292
+msgid "File Type"
+msgstr "Vrsta datoteke"
+
+#: ../analyzer/dialog.c:297
+msgid "Extensions"
+msgstr "Končnice"
+
+#: ../analyzer/dialog.c:331
+msgid "Save File"
+msgstr "Shrani datoteko"
+
+#: ../analyzer/dialog.c:373
+msgid "Open File"
+msgstr "Odpri datoteko"
+
+#: ../analyzer/dialog.c:455
+msgid "Local connection"
+msgstr "Krajevna povezava"
+
+#: ../analyzer/dialog.c:463
+msgid "Remote connection"
+msgstr "Oddaljena povezava"
+
+#: ../analyzer/dialog.c:497
+msgid "Open Import"
+msgstr ""
+
+#: ../analyzer/dialog.c:537
+msgid "Save the protocol trace before closing?"
+msgstr ""
+
+#: ../analyzer/dialog.c:538
+msgid "If you don't save, all information will be permanently lost."
+msgstr ""
+
+#: ../analyzer/dialog.c:546
+msgid "Close _without Saving"
+msgstr "Zapri _brez shranjevanja"
+
+#: ../analyzer/dialog.c:576
+msgid "There is"
+msgstr ""
+
+#: ../analyzer/dialog.c:576
+msgid "There are"
+msgstr ""
+
+#: ../analyzer/dialog.c:577
+msgid "unsaved protocol trace."
+msgstr ""
+
+#: ../analyzer/dialog.c:578
+msgid "unsaved protocol traces."
+msgstr ""
+
+#: ../analyzer/dialog.c:579
+msgid "If you quit now, all information will be lost."
+msgstr ""
+
+#: ../analyzer/dialog.c:589
+msgid "_Discard Changes"
+msgstr "_Zavrzi spremembe"
+
+#: ../analyzer/tracer.c:250
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../analyzer/tracer.c:258
+msgid "Packet"
+msgstr "Paket"
+
+#: ../analyzer/tracer.c:267
+msgid "Timestamp"
+msgstr ""
+
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
+msgid "Analyze Bluetooth traces"
+msgstr ""
+
+#: ../analyzer/bluetooth-manager.xml.in.h:1
+msgid "Apple Packet Logger File"
+msgstr ""
+
+#: ../analyzer/bluetooth-manager.xml.in.h:2
+msgid "Frontline BTSnoop File"
+msgstr ""

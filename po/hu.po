@@ -1,203 +1,936 @@
-# Hungarian translation of gnome-bluetooth.
-# Copyright (C) 2004, 2007 Free Software Foundation, Inc.
-# This file is distributed under the same license as the gnome-bluetooth package.
+# Hungarian translation for bluez-gnome
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the bluez-gnome package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 #
-# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth.HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-13 03:15+0100\n"
-"PO-Revision-Date: 2007-11-01 11:39+0100\n"
+"Project-Id-Version: bluez-gnome\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-09-29 14:31+0200\n"
+"PO-Revision-Date: 2008-02-24 14:54+0000\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
-#: ../data/gnome-obex-server.schemas.in.h:1
-msgid "Directory to save received files"
-msgstr "A fogadott fájlok mentése ezen könyvtárba"
+#~ msgid "Device"
+#~ msgstr "Eszköz:"
 
-#: ../data/gnome-obex-server.schemas.in.h:2
-msgid "Display dialog when file received"
-msgstr "Párbeszédablak megjelenítése fájl fogadásakor"
-
-#: ../data/gnome-obex-server.schemas.in.h:3
-msgid ""
-"Incoming files are saved automatically into this directory. If display-"
-"notification is set then the user gets chance to open or delete them."
-msgstr ""
-"Az érkező fájlok automatikusan ebbe a könyvtárba kerülnek. Ha a display-"
-"notification be van állítva, a felhasználó lehetőséget kap a megnyitásukra "
-"vagy törlésükre."
-
-#: ../data/gnome-obex-server.schemas.in.h:4
-msgid ""
-"Received files are automatically saved. If this option is set, then the user "
-"is prompted with a dialog which allows them to view or delete the received "
-"file."
-msgstr ""
-"Az érkező fájlok automatikusan mentésre kerülnek. Ha ez a lehetőség be van "
-"állítva, a felhasználó lehetőséget kap egy párbeszédablakban az érkezett "
-"fájl megtekintésére vagy törlésére."
-
-#: ../obex/gnome-obex-send.c:193
 #, c-format
-msgid "Unable to read file '%s'."
-msgstr "A(z) \"%s\" fájl nem olvasható."
+#~ msgid "Created bonding with %s"
+#~ msgstr "Összekötve a(z) %s eszközzel"
 
-#: ../obex/gnome-obex-send.c:224
-msgid "An error occurred while sending data."
-msgstr "Hiba lépett fel az adatok küldése közben."
-
-#: ../obex/gnome-obex-send.c:227
-msgid "The remote device canceled the transfer."
-msgstr "A távoli eszköz megszakította az átvitelt."
-
-#: ../obex/gnome-obex-send.c:230
-msgid "An unknown error occurred."
-msgstr "Ismeretlen hiba lépett fel."
-
-#: ../obex/gnome-obex-send.c:263
-msgid "Connecting..."
-msgstr "Kapcsolódás..."
-
-#: ../obex/gnome-obex-send.c:316
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr ""
-"Nem található felhasználói felület-fájl, ellenőrizze a gnome-bluetooth "
-"telepítését."
-
-#: ../obex/gnome-obex-send.c:332
-msgid ""
-"Make sure \"Beam receive\" is enabled in the Power preferences, and "
-"Bluetooth is enabled."
-msgstr "Győződjön meg róla, hogy a sugár vétel (\"Beam receive\") be van kapcsolva az energiagazdálkodási beállításoknál és a Bluetooth engedélyezve van."
-
-#: ../obex/gnome-obex-send.c:334
-msgid "Remote device doesn't support receiving objects."
-msgstr "A távoli eszköz nem támogatja objektumok fogadását."
-
-#: ../obex/gnome-obex-send.c:344
-msgid "Can't initialize program."
-msgstr "A program nem inicializálható."
-
-#: ../obex/gnome-obex-send.c:350
-msgid "Unable to connect to remote device."
-msgstr "Nem lehet kapcsolódni távoli eszközhöz."
-
-#: ../obex/gnome-obex-server.c:161
 #, c-format
-msgid "Accept a file from '%s'?"
-msgstr "Elfogadja a fájlt a következőtől: \"%s\"?"
+#~ msgid "Removed bonding with %s"
+#~ msgstr "Az összeköttetés megszüntetve a(z) %s eszközzel."
 
-#: ../obex/gnome-obex-server.c:162
-msgid ""
-"The remote device is attempting to send you a file via Bluetooth. Do you "
-"wish to allow the connection?"
+#~ msgid "Device has been switched off"
+#~ msgstr "Az eszköz kikapcsolva"
+
+#~ msgid "Device has been made non-discoverable"
+#~ msgstr "Az eszköz nem felderíthető állapotba került"
+
+#~ msgid "Device has been made connectable"
+#~ msgstr "Az eszköz kapcsolatra kész"
+
+#~ msgid "Device has been made discoverable"
+#~ msgstr "Az eszköz felderíthető állapotba került"
+
+#~ msgid "Device has been made limited discoverable"
+#~ msgstr "Az eszköz korlátozottan felderíthető állapotba került"
+
+#~ msgid "Device has been switched into pairing mode"
+#~ msgstr "Az eszköz párosítási módba kapcsolva"
+
+#, c-format
+#~ msgid "Couldn't execute command: %s\n"
+#~ msgstr "A parancs végrehajtása meghiúsult: %s\n"
+
+#~ msgid "Browse Devices"
+#~ msgstr "Eszközök tallózása"
+
+#~ msgid "Select device to browse"
+#~ msgstr "Válassza ki a tallózni kívánt eszközt"
+
+#~ msgid "Send File..."
+#~ msgstr "Fájl küldése..."
+
+#~ msgid "Browse Device..."
+#~ msgstr "Eszköz tallózása..."
+
+#~ msgid "Setup New Device"
+#~ msgstr "Új eszköz beállítása"
+
+#, c-format
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Párosítási kérelem a következőhöz: \"%s\""
+
+#~ msgid "Services"
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "Authorization requests"
+#~ msgstr "Felhatalmazási kérelmek"
+
+#~ msgid "Automatically authorize incoming requests"
+#~ msgstr "A beérkező kérelmek automatikus jóváhagyása"
+
+#~ msgid "Hardware database"
+#~ msgstr "Hardveradatbázis"
+
+#~ msgid "Select class of device automatically"
+#~ msgstr "Eszközosztály automatikus kiválasztása"
+
+#~ msgid "Available services"
+#~ msgstr "Elérhető szolgáltatások"
+
+#~ msgid "never"
+#~ msgstr "soha"
+
+#~ msgid "1 minute"
+#~ msgstr "1 perc"
+
+#, c-format
+#~ msgid "%g minutes"
+#~ msgstr "%g perc"
+
+#~ msgid "Set _Trusted"
+#~ msgstr "Meg_bízom ebben"
+
+#~ msgid "Remove _Trust"
+#~ msgstr "_Bizalom megvonása"
+
+#~ msgid "Mode of operation"
+#~ msgstr "Művelet módja"
+
+#~ msgid "Other devices can connect"
+#~ msgstr "Más eszközök kapcsolódhatnak"
+
+#~ msgid "Visible and connectable for other devices"
+#~ msgstr "Más eszközök láthatják és kapcsolódhatnak"
+
+#~ msgid "Limited discoverable and connectable"
+#~ msgstr "Korlátozottan felderíthető és csatlakoztatható"
+
+#~ msgid "Make adapter invisible after:"
+#~ msgstr "Az adapter legyen láthatatlan ennyi idő után:"
+
+#~ msgid "Adapter name"
+#~ msgstr "Illesztőnév"
+
+#~ msgid "Class of device"
+#~ msgstr "Eszközosztály"
+
+#~ msgid "Unspecified"
+#~ msgstr "Nincs megadva"
+
+#~ msgid "Desktop workstation"
+#~ msgstr "Asztali munkaállomás"
+
+#~ msgid "Laptop computer"
+#~ msgstr "Noteszgép"
+
+#~ msgid "Bonded devices"
+#~ msgstr "Párosított eszközök"
+
+#~ msgid "If HAL should be used for automatic preferences settings"
+#~ msgstr "A HAL használata az automatikus beállításokhoz"
+
+#~ msgid ""
+#~ "If HAL should be used to automatically adjust settings like class of device "
+#~ "etc."
+#~ msgstr ""
+#~ "A HAL használandó-e a beállítások, például az eszközosztály, stb. "
+#~ "automatikus testreszabáshoz."
+
+#~ msgid "If authorization requests should be automatically granted"
+#~ msgstr "Engedélyezési kérelmek automatikus megadása"
+
+#~ msgid ""
+#~ "If authorization requests should be granted all the time without asking the "
+#~ "user for confirmation."
+#~ msgstr ""
+#~ "Engedélyezési kérelmek automatikus megadása mindig, felhasználói jóváhagyás "
+#~ "nélkül."
+
+#~ msgid ""
+#~ "Switched device into\n"
+#~ "%s mode"
+#~ msgstr ""
+#~ "Az eszköz átállítva\n"
+#~ "%s módba"
+
+#~ msgid "Connecting to system bus failed: %s\n"
+#~ msgstr "A csatlakozás meghiúsult a rendszerbuszhoz: %s\n"
+
+#~ msgid "<b>Notification area</b>"
+#~ msgstr "<b>Értesítési terület</b>"
+
+#~ msgid "Bluetooth preferences"
+#~ msgstr "Bluetooth beállítások"
+
+#~ msgid "<b>Mode of operation</b>"
+#~ msgstr "<b>Működési mód</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>Adapter name</b>"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Adapternév</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>Class of device</b>"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Eszközosztály</b>"
+
+#~ msgid "Sort by RSSI"
+#~ msgstr "Rendezés RSSI szerint"
+
+#~ msgid "Icon view"
+#~ msgstr "Ikonnézet"
+
+#~ msgid "Periodic discovery"
+#~ msgstr "Rendszeres felderítés"
+
+#~ msgid "Stop discovery"
+#~ msgstr "Felderítés leállítása"
+
+#~ msgid ""
+#~ "The device wizard will walk you through the process of configuring Bluetooth "
+#~ "enabled devices for use with this computer."
+#~ msgstr ""
+#~ "Az eszközvarázsló végigvezeti a Bluetooth-képes eszközök a számítógéppel "
+#~ "történő használatra beállításának folyamatán."
+
+#~ msgid ""
+#~ "\n"
+#~ "Enter passkey for authentication:"
+#~ msgstr ""
+#~ "\n"
+#~ "Adja meg a jelszót a hitelesítéshez:"
+
+#~ msgid ""
+#~ "\n"
+#~ "Confirm value for authentication:"
+#~ msgstr ""
+#~ "\n"
+#~ "Erősítse meg az értéket a hitelesítéshez:"
+
+#~ msgid ""
+#~ "Pairing request for %s\n"
+#~ "\n"
+#~ "Click to open passkey entry dialog"
+#~ msgstr ""
+#~ "Párosítási kérés a következőhöz: %s\n"
+#~ "\n"
+#~ "A jelszóbeviteli párbeszédablak megjelenítéséhez kattintson ide"
+
+#~ msgid ""
+#~ "Pairing request for %s\n"
+#~ "\n"
+#~ "Click to open confirmation dialog"
+#~ msgstr ""
+#~ "Párosítási kérés a következőhöz: %s\n"
+#~ "\n"
+#~ "A megerősítési ablak megnyitásához kattintson"
+
+#~ msgid "Search for devices"
+#~ msgstr "Eszközök keresése"
+
+#~ msgid "Select file to send"
+#~ msgstr "Válassza ki a küldendő fájlt"
+
+#~ msgid "Select type of device you wanna setup"
+#~ msgstr "Válassza ki a beállítandó eszköz típusát"
+
+#~ msgid "Select device you wanna setup"
+#~ msgstr "Válassza ki a beállítandó eszközt"
+
+#~ msgid "Bluetooth device wizard"
+#~ msgstr "Bluetooth-eszköz varázsló"
+
+#~ msgid "Search"
+#~ msgstr "Keresés"
+
+#: ../common/bluetooth-client.c:82
+msgid "All types"
 msgstr ""
-"A távoli eszköz Bluetooth-on keresztül próbál Önnek küldeni egy fájlt. "
-"Engedélyezni kívánja a kapcsolatot?"
 
-#: ../obex/gnome-obex-server.c:163
-msgid "Always accept files from this device."
-msgstr "Mindig fogadja el a fájlokat ettől az eszköztől."
+#: ../common/bluetooth-client.c:84
+msgid "Phone"
+msgstr ""
 
-#. The name of the default downloads folder,
-#. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:204
-msgid "Downloads"
-msgstr "Letöltések"
+#: ../common/bluetooth-client.c:86
+msgid "Modem"
+msgstr ""
 
-#: ../obex/gnome-obex-server.c:295
-msgid "Incoming Bluetooth file transfer"
-msgstr "Bejövő Bluetooth fájlátvitel"
+#: ../common/bluetooth-client.c:88
+msgid "Computer"
+msgstr ""
 
-#: ../obex/gnome-obex-server.c:337 ../obex/gnome-obex-server.c:504
-msgid "Ready for Bluetooth file transfers"
-msgstr "Bluetooth fájlátvitelre kész"
+#: ../common/bluetooth-client.c:90
+msgid "Network"
+msgstr ""
 
-#. *
-#. * TODO:
-#. *
-#. * ensure it only gets invoked once
-#. * display sensible error dialogs
-#. * think about fancy received-file actions
-#. *	 - should we send vcards to evo, etc?
-#.
-#: ../obex/gnome-obex-server.c:389 ../obex/gnome-obex-server.desktop.in.h:1
-msgid "Bluetooth File Sharing"
-msgstr "Bluetooth fájlmegosztás"
+#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+msgid "Headset"
+msgstr "Fejhallgató"
 
-#: ../obex/gnome-obex-server.c:392
-msgid "Receive files from Bluetooth devices"
-msgstr "Fájlok fogadása Bluetooth eszközöktől"
+#: ../common/bluetooth-client.c:94
+msgid "Headphone"
+msgstr ""
 
-#. add your name and email address in here if you've translated
-#. * this program
-#.
-#: ../obex/gnome-obex-server.c:398
+#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+msgid "Keyboard"
+msgstr "Billentyűzet"
+
+#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+msgid "Mouse"
+msgstr "Egér"
+
+#: ../common/bluetooth-client.c:100
+msgid "Camera"
+msgstr ""
+
+#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+msgid "Printer"
+msgstr "Nyomtató"
+
+#: ../common/bluetooth-client.c:104
+msgid "Joypad"
+msgstr ""
+
+#: ../common/bluetooth-client.c:106
+msgid "Tablet"
+msgstr ""
+
+#: ../common/bluetooth-client.c:108
+msgid "Unknown"
+msgstr ""
+
+#: ../common/helper.c:162
+msgid "Select Device"
+msgstr ""
+
+#: ../common/helper.c:222
+msgid "Choose files to send"
+msgstr ""
+
+#: ../applet/main.c:123
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Bluetooth-kezelő a GNOME asztalhoz"
+
+#: ../applet/main.c:126 ../analyzer/dialog.c:128
 msgid "translator-credits"
-msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
-
-#: ../obex/gnome-obex-server.desktop.in.h:2
-msgid "Receive files sent by Bluetooth devices"
-msgstr "Bluetooth eszközök által küldött fájlok fogadása"
-
-#: ../src/chooser.gob:109
-msgid "Choose Bluetooth device"
-msgstr "Válasszon Bluetooth eszközt"
-
-#: ../src/chooser.gob:151
-msgid "Device"
-msgstr "Eszköz"
-
-#: ../src/fileactiondialog.gob:132
-msgid "Bluetooth Transfer Received"
-msgstr "Bluetooth átvitel érkezett"
-
-#. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:138
-#, c-format
-msgid "File received from '%s'. What would you like to do?"
-msgstr "Fájl érkezett ettől: \"%s\". Mit szeretne tenni?"
-
-#: ../src/fileactiondialog.gob:168
-#, c-format
-msgid ""
-"<span weight='bold'>Name:</span> %s\n"
-"<span weight='bold'>Type:</span> %s\n"
-"<span weight='bold'>Size:</span> %s"
 msgstr ""
-"<span weight='bold'>Név:</span> %s\n"
-"<span weight='bold'>Típus:</span> %s\n"
-"<span weight='bold'>Méret:</span> %s"
+"Launchpad Contributions:\n"
+"  Gabor Kelemen https://launchpad.net/~kelemeng\n"
+"  Istvan Szekeres https://launchpad.net/~szekeres\n"
+"  Áron Sisak https://launchpad.net/~asisak\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Gabor Kelemen https://launchpad.net/~kelemeng\n"
+"  Kőrösi Krisztián https://launchpad.net/~koeroesi86\n"
+"  Pittmann Tamás https://launchpad.net/~zaivaldi"
 
-#: ../src/permissiondialog.gob:105
-#, c-format
-msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Engedélyezi \"%s\" Bluetooth eszköz kapcsolódását?"
-
-#: ../src/permissiondialog.gob:121
-msgid ""
-"An external device is attempting to connect to your computer via Bluetooth. "
-"You must decide if you want to accept the connection."
+#: ../applet/main.c:177 ../applet/main.c:232
+msgid "Setup new device..."
 msgstr ""
-"Egy külső eszköz Bluetooth-on keresztül próbál kapcsolódni az Ön "
-"számítógépéhez. El kell döntenie, elfogadja-e a kapcsolatot."
 
-#: ../src/permissiondialog.gob:127
-msgid "_Always allow this device to connect."
-msgstr "_Mindig engedélyezem ezen eszköz kapcsolódását."
+#: ../applet/main.c:242
+msgid "Send files to device..."
+msgstr ""
 
-#: ../ui/gnome-obex-send.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Fájl küldése</span>"
+#: ../applet/main.c:250
+msgid "Browse files on device..."
+msgstr ""
 
-#: ../ui/gnome-obex-send.glade.h:2
-msgid "Bluetooth file transfer"
-msgstr "Bluetooth fájlátvitel"
+#: ../applet/main.c:373
+msgid "Bluetooth Applet"
+msgstr "Bluetooth kisalkalmazás"
 
+#: ../applet/agent.c:258
+msgid "Authentication request"
+msgstr "Hitelesítési kérés"
+
+#: ../applet/agent.c:286 ../applet/agent.c:395
+msgid "Pairing request for device:"
+msgstr "Eszközpárosítási kérés az eszközhöz:"
+
+#: ../applet/agent.c:303
+msgid "Enter passkey for authentication:"
+msgstr "Írja be a felhatalmazásra használt jelszót:"
+
+#: ../applet/agent.c:327
+msgid "Show input"
+msgstr "Bemenet mutatása"
+
+#: ../applet/agent.c:369
+msgid "Confirmation request"
+msgstr "Megerősítési kérés"
+
+#: ../applet/agent.c:412
+msgid "Confirm value for authentication:"
+msgstr "Erősítse meg a felhatalmazásra használt értéket:"
+
+#: ../applet/agent.c:456
+msgid "Authorization request"
+msgstr "Felhatalmazási kérés"
+
+#: ../applet/agent.c:482
+msgid "Authorization request for device:"
+msgstr "Felhatalmazási kérés a következő eszközre:"
+
+#: ../applet/agent.c:503
+#, c-format
+msgid "Grant access to %s?"
+msgstr "Ad hozzáférést a(z) %s eszközhöz?"
+
+#: ../applet/agent.c:512
+msgid "Always grant access"
+msgstr "Mindig adok hozzáférést"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#, c-format
+msgid "Pairing request for %s"
+msgstr ""
+
+#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
+#: ../applet/agent.c:736 ../applet/agent.c:781
+msgid "Bluetooth device"
+msgstr "Bluetooth eszköz"
+
+#: ../applet/agent.c:591
+msgid "Enter PIN code"
+msgstr ""
+
+#: ../applet/agent.c:638 ../applet/agent.c:688
+msgid "Enter passkey"
+msgstr ""
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:732
+#, c-format
+msgid "Confirmation request for %s"
+msgstr ""
+
+#: ../applet/agent.c:737
+msgid "Confirm passkey"
+msgstr ""
+
+#: ../applet/agent.c:777
+#, c-format
+msgid "Authorization request for %s"
+msgstr "Felhatalmazási kérés a következő eszközre: %s"
+
+#: ../applet/agent.c:782
+msgid "Check authorization"
+msgstr ""
+
+#: ../applet/bluetooth-applet.desktop.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Bluetooth-kezelő"
+
+#: ../applet/bluetooth-applet.desktop.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Bluetooth-kezelő kisalkalmazás"
+
+#: ../properties/main.c:63
+msgid "Bluetooth Preferences"
+msgstr "Bluetooth beállításai"
+
+#: ../properties/main.c:94
+msgid "General"
+msgstr "Általános"
+
+#: ../properties/main.c:131
+msgid "Bluetooth Properties"
+msgstr ""
+
+#: ../properties/general.c:172
+msgid "File transfer"
+msgstr ""
+
+#: ../properties/general.c:176
+msgid "Receive files from remote devices"
+msgstr ""
+
+#: ../properties/general.c:184
+msgid "Share files from public folder"
+msgstr ""
+
+#: ../properties/general.c:195
+msgid "Notification area"
+msgstr "Értesítési terület"
+
+#: ../properties/general.c:199
+msgid "Never display icon"
+msgstr "Soha ne jelenjen meg az ikon"
+
+#: ../properties/general.c:206
+msgid "Only display when adapter present"
+msgstr "Csak adapter jelenlétében jelenjen meg"
+
+#: ../properties/general.c:213
+msgid "Always display icon"
+msgstr "Az ikon mindig jelenjen meg"
+
+#: ../properties/adapter.c:99
+msgid "Adapter"
+msgstr "Adapter"
+
+#: ../properties/adapter.c:174
+msgid "always"
+msgstr ""
+
+#: ../properties/adapter.c:176
+msgid "hidden"
+msgstr ""
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "%'g minute"
+msgid_plural "%'g minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../properties/adapter.c:477
+msgid "Visibility setting"
+msgstr ""
+
+#: ../properties/adapter.c:490
+msgid "Hidden"
+msgstr ""
+
+#: ../properties/adapter.c:502
+msgid "Always visible"
+msgstr ""
+
+#: ../properties/adapter.c:514
+msgid "Temporary visible"
+msgstr ""
+
+#: ../properties/adapter.c:566
+msgid "Friendly name"
+msgstr ""
+
+#: ../properties/adapter.c:587
+msgid "Known devices"
+msgstr ""
+
+#: ../properties/dialog.c:41
+msgid "Remove from list of known devices?"
+msgstr ""
+
+#: ../properties/dialog.c:42
+msgid ""
+"If you delete the device, you have to set it up again before next use."
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:1
+msgid "Bluetooth"
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "A Bluetooth beállítások módosítása"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid ""
+"Display options for the notification icon. Valid options are \"never\", "
+"\"present\" and \"always\"."
+msgstr ""
+"Az értesítési ikon megjelenítésének beállítása. A lehetséges értékek: "
+"\"never\" (soha), \"present\" (jelenleg) és \"always\" (mindig)."
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "If Bluetooth file sharing is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:3
+msgid "If receiving of remote files via Bluetooth is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:4
+msgid ""
+"If the service for receiving remote files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:5
+msgid "If the service for sharing files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:6
+msgid "When to show the notification icon"
+msgstr "Mikor jelenjen meg az értesítési ikon"
+
+#: ../wizard/main.c:75
+#, c-format
+msgid "Please enter the following PIN code: %s"
+msgstr ""
+
+#: ../wizard/main.c:94
+#, c-format
+msgid "Please enter the following passkey: %s%s"
+msgstr ""
+
+#: ../wizard/main.c:115
+#, c-format
+msgid "Pairing with %s canceled"
+msgstr ""
+
+#: ../wizard/main.c:118
+#, c-format
+msgid "Pairing with %s finished"
+msgstr ""
+
+#: ../wizard/main.c:145
+#, c-format
+msgid "Successfully paired with %s"
+msgstr ""
+
+#: ../wizard/main.c:159
+#, c-format
+msgid "Pairing with %s failed"
+msgstr ""
+
+#: ../wizard/main.c:193
+#, c-format
+msgid "Connecting to %s now ..."
+msgstr ""
+
+#: ../wizard/main.c:264
+msgid "Introduction"
+msgstr "Bevezető"
+
+#: ../wizard/main.c:265
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr "Üdvözli a Bluetooth eszköz beállítása varázsló"
+
+#: ../wizard/main.c:268
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer.\n"
+"\n"
+msgstr ""
+
+#: ../wizard/main.c:303
+msgid "Device type"
+msgstr "Eszköz típusa"
+
+#: ../wizard/main.c:304
+msgid "Select the type of device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:316
+msgid "Mobile phone"
+msgstr "Mobiltelefon"
+
+#: ../wizard/main.c:331
+msgid "Any device"
+msgstr "Bármilyen eszköz"
+
+#: ../wizard/main.c:392
+msgid "Device search"
+msgstr "Eszközkeresés"
+
+#: ../wizard/main.c:393
+msgid "Select the device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:428
+msgid "Device setup"
+msgstr ""
+
+#: ../wizard/main.c:429
+msgid "Setting up new device"
+msgstr ""
+
+#: ../wizard/main.c:451
+msgid "Summary"
+msgstr "Összegzés"
+
+#: ../wizard/main.c:452
+msgid "Succesfully configured new device"
+msgstr "Az új eszköz sikeresen beállítva"
+
+#: ../wizard/main.c:462
+msgid "Bluetooth Device Wizard"
+msgstr ""
+
+#: ../sendto/main.c:93
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:98 ../sendto/main.c:111
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:109
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:119
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:145
+msgid "File Transfer"
+msgstr ""
+
+#: ../sendto/main.c:162
+msgid "Sending files via Bluetooth"
+msgstr ""
+
+#: ../sendto/main.c:174
+msgid "From:"
+msgstr ""
+
+#: ../sendto/main.c:190
+msgid "To:"
+msgstr ""
+
+#: ../sendto/main.c:206
+msgid "Connecting..."
+msgstr ""
+
+#: ../sendto/main.c:254
+#, c-format
+msgid "Sending %s"
+msgstr ""
+
+#: ../sendto/main.c:261 ../sendto/main.c:326
+#, c-format
+msgid "Sending file %d of %d"
+msgstr ""
+
+#: ../sendto/main.c:322
+#, c-format
+msgid "%d KB/s"
+msgstr ""
+
+#: ../sendto/main.c:324
+#, c-format
+msgid "%d B/s"
+msgstr ""
+
+#: ../sendto/main.c:373
+msgid "An unknown error occured"
+msgstr ""
+
+#: ../sendto/main.c:383
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+
+#: ../sendto/main.c:554 ../browse/main.c:38
+msgid "Remote device to use"
+msgstr ""
+
+#: ../analyzer/main.c:166
+msgid "Saving of protocol trace failed"
+msgstr "A protokollnyom mentése meghiúsult"
+
+#: ../analyzer/main.c:313
+msgid "Loading Trace"
+msgstr "Nyom betöltése"
+
+#: ../analyzer/main.c:317
+msgid "Live Import"
+msgstr "Élő importálás"
+
+#: ../analyzer/main.c:321
+msgid "Protocol Trace"
+msgstr "Protokollnyom"
+
+#: ../analyzer/main.c:326
+msgid "Unsaved"
+msgstr "Mentetlen"
+
+#: ../analyzer/main.c:609
+msgid "Can't live import from"
+msgstr "Nem lehet importálni az eszközről:"
+
+#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
+msgid "Bluetooth Analyzer"
+msgstr "Bluetooth elemző"
+
+#: ../analyzer/main.c:856
+msgid "_File"
+msgstr "_Fájl"
+
+#: ../analyzer/main.c:886
+msgid "Open _Recent"
+msgstr "Leg_utóbbi megnyitása"
+
+#: ../analyzer/main.c:933
+msgid "_Edit"
+msgstr "S_zerkesztés"
+
+#: ../analyzer/main.c:942
+msgid "_View"
+msgstr "_Nézet"
+
+#: ../analyzer/main.c:947
+msgid "_Full Screen"
+msgstr "_Teljes képernyő"
+
+#: ../analyzer/main.c:954
+msgid "_Tools"
+msgstr ""
+
+#: ../analyzer/main.c:959
+msgid "_Debug Packet List"
+msgstr ""
+
+#: ../analyzer/main.c:968
+msgid "_Help"
+msgstr "_Súgó"
+
+#: ../analyzer/dialog.c:110
+msgid "Bluetooth protocol analyzer"
+msgstr "Bluetooth protokollelemző"
+
+#: ../analyzer/dialog.c:140
+msgid "All Files"
+msgstr "Minden fájl"
+
+#: ../analyzer/dialog.c:145
+msgid "Supported Files"
+msgstr "Támogatott fájlok"
+
+#: ../analyzer/dialog.c:154
+msgid "Frontline BTSnoop Files"
+msgstr "Frontline BTSnoop fájlok"
+
+#: ../analyzer/dialog.c:160
+msgid "Apple Packet Logger Files"
+msgstr "Apple Packet Logger fájlok"
+
+#: ../analyzer/dialog.c:175
+msgid "By Extension"
+msgstr "Kiterjesztés szerint"
+
+#: ../analyzer/dialog.c:180
+msgid "Frontline BTSnoop Format"
+msgstr "Frontline BTSnoop formátum"
+
+#: ../analyzer/dialog.c:185
+msgid "Apple Packet Logger Format"
+msgstr "Apple Packet Logger formátum"
+
+#: ../analyzer/dialog.c:249
+msgid "Select File _Type"
+msgstr "Válasszon fájl_típust"
+
+#: ../analyzer/dialog.c:292
+msgid "File Type"
+msgstr "Fájltípus"
+
+#: ../analyzer/dialog.c:297
+msgid "Extensions"
+msgstr "Bővítmények"
+
+#: ../analyzer/dialog.c:331
+msgid "Save File"
+msgstr "Mentés"
+
+#: ../analyzer/dialog.c:373
+msgid "Open File"
+msgstr "Megnyitás"
+
+#: ../analyzer/dialog.c:455
+msgid "Local connection"
+msgstr "Helyi kapcsolat"
+
+#: ../analyzer/dialog.c:463
+msgid "Remote connection"
+msgstr "Távoli kapcsolat"
+
+#: ../analyzer/dialog.c:497
+msgid "Open Import"
+msgstr "Importálás megnyitása"
+
+#: ../analyzer/dialog.c:537
+msgid "Save the protocol trace before closing?"
+msgstr "Menti a protkollnyomot a bezárás előtt?"
+
+#: ../analyzer/dialog.c:538
+msgid "If you don't save, all information will be permanently lost."
+msgstr "Mentés nélkül minden információ végérvényesen elvész."
+
+#: ../analyzer/dialog.c:546
+msgid "Close _without Saving"
+msgstr "Bezárás mentés _nélkül"
+
+#: ../analyzer/dialog.c:576
+msgid "There is"
+msgstr "Van még"
+
+#: ../analyzer/dialog.c:576
+msgid "There are"
+msgstr "Van még"
+
+#: ../analyzer/dialog.c:577
+msgid "unsaved protocol trace."
+msgstr "mentetlen protokollnyom."
+
+#: ../analyzer/dialog.c:578
+msgid "unsaved protocol traces."
+msgstr "mentetlen protokollnyom."
+
+#: ../analyzer/dialog.c:579
+msgid "If you quit now, all information will be lost."
+msgstr "Ha kilép, minden információ elvész."
+
+#: ../analyzer/dialog.c:589
+msgid "_Discard Changes"
+msgstr "Módosítások _eldobása"
+
+#: ../analyzer/tracer.c:250
+msgid "Type"
+msgstr "Típus"
+
+#: ../analyzer/tracer.c:258
+msgid "Packet"
+msgstr "Csomag"
+
+#: ../analyzer/tracer.c:267
+msgid "Timestamp"
+msgstr "Időpecsét"
+
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
+msgid "Analyze Bluetooth traces"
+msgstr ""
+
+#: ../analyzer/bluetooth-manager.xml.in.h:1
+msgid "Apple Packet Logger File"
+msgstr "Apple Packet Logger fájl"
+
+#: ../analyzer/bluetooth-manager.xml.in.h:2
+msgid "Frontline BTSnoop File"
+msgstr "Frontline BTSnoop fájl"

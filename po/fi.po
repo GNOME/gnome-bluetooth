@@ -1,193 +1,984 @@
-# Finnish messages for gnome-bluetooth
-# Copyright (C) 2005 Ilkka Tuohela 
-# This file is distributed under the same license as the gnome-bluetooth package.
-# Ilkka Tuohela <hile@iki.fi>, 2005-2006.
+# Finnish translation for bluez-gnome
+# Copyright (c) 2007 Timo Jyrinki
+# This file is distributed under the same license as the bluez-gnome package.
+# Timo Jyrinki <timo.jyrinki@iki.fi>, 2007.
+# Note: Gnome Finnish translation team is at http://gnome.fi/
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth\n"
+"Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-12 13:38+0300\n"
-"PO-Revision-Date: 2008-10-12 13:38+0300\n"
+"POT-Creation-Date: 2008-09-29 14:31+0200\n"
+"PO-Revision-Date: 2008-02-24 14:54+0000\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
-#: ../data/gnome-obex-server.schemas.in.h:1
-msgid "Directory to save received files"
-msgstr "Kansio, johon vastaanotetut tiedostot tallennetaan"
+#~ msgid "All categories"
+#~ msgstr "Kaikki luokat"
 
-#: ../data/gnome-obex-server.schemas.in.h:2
-msgid "Display dialog when file received"
-msgstr "Näytä valintaikkuna, kun tiedosto vastaanotetaan"
+#~ msgid "Bonded"
+#~ msgstr "Liitetty"
 
-#: ../data/gnome-obex-server.schemas.in.h:3
-msgid ""
-"Incoming files are saved automatically into this directory. If display-"
-"notification is set then the user gets chance to open or delete them."
-msgstr ""
-"Vastaanotetut tiedostot tallennetaan automaattisesti tähän kansioon. Jos "
-"huomautus vastaanotosta on asetettu, voi käyttäjä heti näyttää tai poistaa "
-"vastaanotetut tiedostot."
+#~ msgid "Trusted"
+#~ msgstr "Luotettu"
 
-#: ../data/gnome-obex-server.schemas.in.h:4
-msgid ""
-"Received files are automatically saved. If this option is set, then the user "
-"is prompted with a dialog which allows them to view or delete the received "
-"file."
-msgstr ""
-"Vastaanotetut tiedostot tallennetaan automaattisesti. Jos tämä asetus on "
-"valittu, näytetään käyttäjälle valintaikkuna, josta voi näyttää tai poistaa "
-"vastaanotetun tiedoston."
+#~ msgid "Device"
+#~ msgstr "Laite"
 
-#: ../obex/gnome-obex-server.c:161
+#~ msgid "Device _category:"
+#~ msgstr "Laite_luokka:"
+
+#~ msgid "Device _type:"
+#~ msgstr "Laite_tyyppi:"
+
 #, c-format
-msgid "Accept a file from '%s'?"
-msgstr "Hyväksy tiedosto lähettäjältä \"%s\"?"
+#~ msgid "Created bonding with %s"
+#~ msgstr "Luotiin liitos kohteen %s kanssa."
 
-#: ../obex/gnome-obex-server.c:162
-msgid ""
-"The remote device is attempting to send you a file via Bluetooth. Do you "
-"wish to allow the connection?"
+#, c-format
+#~ msgid "Removed bonding with %s"
+#~ msgstr "Poistettiin kohteen %s kanssa ollut liitos"
+
+#~ msgid "Device has been switched off"
+#~ msgstr "Laite on kytketty pois päältä"
+
+#~ msgid "Device has been made non-discoverable"
+#~ msgstr "Laite ei ole nyt löydettävissä"
+
+#~ msgid "Device has been made connectable"
+#~ msgstr "Laite vastaanottaa nyt yhteyksiä"
+
+#~ msgid "Device has been made discoverable"
+#~ msgstr "Laite on nyt löydettävissä"
+
+#~ msgid "Device has been made limited discoverable"
+#~ msgstr "Laite on nyt rajoitetusti löydettävissä"
+
+#~ msgid "Device has been switched into pairing mode"
+#~ msgstr "Laite on nyt kytketty paritustilaan"
+
+#, c-format
+#~ msgid "Couldn't execute command: %s\n"
+#~ msgstr "Komentoa ei voitu suorittaa: %s\n"
+
+#~ msgid "Browse Devices"
+#~ msgstr "Selaa laitteita"
+
+#~ msgid "Select device to browse"
+#~ msgstr "Valitse laite jota haluat selata"
+
+#~ msgid "Send File..."
+#~ msgstr "Lähetä tiedosto..."
+
+#~ msgid "Browse Device..."
+#~ msgstr "Selaa laitetta..."
+
+#~ msgid "Setup New Device"
+#~ msgstr "Aseta uusi laite"
+
+#, c-format
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Parituspyyntö laitteelta \"%s\""
+
+#~ msgid "Confirm pairing"
+#~ msgstr "Vahvista paritus"
+
+#~ msgid "Services"
+#~ msgstr "Palvelut"
+
+#~ msgid "Authorization requests"
+#~ msgstr "Todennuspyynnöt"
+
+#~ msgid "Automatically authorize incoming requests"
+#~ msgstr "Salli tulevat yhteyspyynnöt automaattisesti"
+
+#~ msgid "Hardware database"
+#~ msgstr "Laitetietokanta"
+
+#~ msgid "Select class of device automatically"
+#~ msgstr "Valitse laiteluokka automaattisesti"
+
+#~ msgid "Available services"
+#~ msgstr "Saatavilla olevat palvelut"
+
+#~ msgid "never"
+#~ msgstr "ei koskaan"
+
+#~ msgid "1 minute"
+#~ msgstr "1 minuutti"
+
+#, c-format
+#~ msgid "%g minutes"
+#~ msgstr "%g minuuttia"
+
+#~ msgid "Set _Trusted"
+#~ msgstr "Aseta _luotetuksi"
+
+#~ msgid "Remove _Trust"
+#~ msgstr "Aseta ei-_luotetuksi"
+
+#~ msgid "Mode of operation"
+#~ msgstr "Toimintatila"
+
+#~ msgid "Other devices can connect"
+#~ msgstr "Muut laitteet voivat yhdistää"
+
+#~ msgid "Visible and connectable for other devices"
+#~ msgstr "Näkyvissä, ja muut laitteet voivat yhdistää"
+
+#~ msgid "Limited discoverable and connectable"
+#~ msgstr "Rajoitetusti löydettävissä ja yhdistettävissä"
+
+#~ msgid "Make adapter invisible after:"
+#~ msgstr "Tee sovittimesta näkymätön tietyn ajan jälkeen:"
+
+#~ msgid "Adapter name"
+#~ msgstr "Sovittimen nimi"
+
+#~ msgid "Class of device"
+#~ msgstr "Laiteluokka"
+
+#~ msgid "Unspecified"
+#~ msgstr "Määrittelemätön"
+
+#~ msgid "Desktop workstation"
+#~ msgstr "Työasema"
+
+#~ msgid "Laptop computer"
+#~ msgstr "Kannettava tietokone"
+
+#~ msgid "Bonded devices"
+#~ msgstr "Liitetyt laitteet"
+
+#~ msgid "Remove from list of bonded devices?"
+#~ msgstr "Poista liitettyjen laitteiden luettelosta?"
+
+#~ msgid ""
+#~ "If you delete the bonding, you have to re-pair the device before next use."
+#~ msgstr ""
+#~ "Jos liitos poistetaan, laite tulee parittaa uudelleen ennen seuraavaa "
+#~ "käyttöä."
+
+#~ msgid "Remove device entry from service?"
+#~ msgstr "Poista laite palvelusta?"
+
+#~ msgid ""
+#~ "If you delete the device entry, you can't use it with this service anymore."
+#~ msgstr ""
+#~ "Jos laite poistetaan, sitä ei voi enää käyttää tämän palvelun kanssa."
+
+#~ msgid "Connecting to device"
+#~ msgstr "Yhdistetään laitteeseen"
+
+#~ msgid "Select device"
+#~ msgstr "Valitse laite"
+
+#~ msgid "Show all devices"
+#~ msgstr "Näytä kaikki laitteet"
+
+#~ msgid "Create Device"
+#~ msgstr "Luo laite"
+
+#~ msgid "Audio devices"
+#~ msgstr "Äänilaitteet"
+
+#~ msgid "connected"
+#~ msgstr "yhdistetty"
+
+#~ msgid "Input devices"
+#~ msgstr "Syöttölaitteet"
+
+#~ msgid "_Disconnect"
+#~ msgstr "_Katkaise"
+
+#~ msgid "Network devices"
+#~ msgstr "Verkkolaitteet"
+
+#~ msgid "If HAL should be used for automatic preferences settings"
+#~ msgstr "Käytetäänkö HALia automaattisten asetusten hakuun"
+
+#~ msgid ""
+#~ "If HAL should be used to automatically adjust settings like class of device "
+#~ "etc."
+#~ msgstr ""
+#~ "Käytetäänkö HALia laiteluokka- ynnä muiden asetusten automaatiseen "
+#~ "tekemiseen."
+
+#~ msgid "If authorization requests should be automatically granted"
+#~ msgstr "Hyväksytäänkö valtuutuspyynnöt automaattisesti"
+
+#~ msgid ""
+#~ "If authorization requests should be granted all the time without asking the "
+#~ "user for confirmation."
+#~ msgstr ""
+#~ "Hyväksytäänkö valtuutuspyynnöt kaiken aikaa kysymättä käyttäjältä "
+#~ "varmistusta."
+
+#~ msgid "Select File"
+#~ msgstr "Valitse tiedosto"
+
+#~ msgid "Click to open passkey entry dialog"
+#~ msgstr "Napsauta avataksesi salasanan syöttöikkunan"
+
+#~ msgid "Click to open confirmation dialog"
+#~ msgstr "Napsauta avataksesi varmistusikkunan"
+
+#~ msgid "Pairing with new device"
+#~ msgstr "Paritetaan uudeen laitteen kanssa"
+
+#~ msgid "Can't open file"
+#~ msgstr "Tiedostoa ei voi avata"
+
+#~ msgid ""
+#~ "Switched device into\n"
+#~ "%s mode"
+#~ msgstr ""
+#~ "Muutettiin laitteen\n"
+#~ "tilaksi %s"
+
+#~ msgid "Connecting to system bus failed: %s\n"
+#~ msgstr "Laiteväylään yhdistäminen epäonnistui: %s\n"
+
+#~ msgid "<b>Notification area</b>"
+#~ msgstr "<b>Ilmoitusalue</b>"
+
+#~ msgid "Bluetooth preferences"
+#~ msgstr "Bluetooth-asetukset"
+
+#~ msgid "<b>Mode of operation</b>"
+#~ msgstr "<b>Toimintatila</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>Adapter name</b>"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Sovittimen nimi</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>Class of device</b>"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Laiteluokka</b>"
+
+#~ msgid "Sort by RSSI"
+#~ msgstr "Lajittele RSSI-arvon (signaalin voimakkuus) mukaan"
+
+#~ msgid "Icon view"
+#~ msgstr "Kuvakenäkymä"
+
+#~ msgid "Periodic discovery"
+#~ msgstr "Etsi laitteita väliajoin"
+
+#~ msgid "Stop discovery"
+#~ msgstr "Pysätä etsintä"
+
+#~ msgid "Service properties"
+#~ msgstr "Palvelun ominaisuudet"
+
+#~ msgid "Service path"
+#~ msgstr "Palvelun polku"
+
+#~ msgid ""
+#~ "\n"
+#~ "Description"
+#~ msgstr ""
+#~ "\n"
+#~ "Kuvaus"
+
+#~ msgid "Search for devices"
+#~ msgstr "Etsi laitteita"
+
+#~ msgid "Search"
+#~ msgstr "Etsi"
+
+#~ msgid "Click to open authorization dialog"
+#~ msgstr "Napsauta avataksesi valtuutusikkunan"
+
+#~ msgid "Device pairing"
+#~ msgstr "Laiteparitus"
+
+#: ../common/bluetooth-client.c:82
+msgid "All types"
+msgstr "Kaikki tyypit"
+
+#: ../common/bluetooth-client.c:84
+msgid "Phone"
+msgstr "Puhelin"
+
+#: ../common/bluetooth-client.c:86
+msgid "Modem"
+msgstr "Modeemi"
+
+#: ../common/bluetooth-client.c:88
+msgid "Computer"
+msgstr "Tietokone"
+
+#: ../common/bluetooth-client.c:90
+msgid "Network"
+msgstr "Verkko"
+
+#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+msgid "Headset"
+msgstr "Kuulokkeet"
+
+#: ../common/bluetooth-client.c:94
+msgid "Headphone"
 msgstr ""
-"Bluetooth-laite yrittää lähettää tiedostoa bluetoothilla. Haluatko sallia "
-"tämän yhteyden?"
 
-#: ../obex/gnome-obex-server.c:163
-msgid "Always accept files from this device."
-msgstr "Salli aina yhteydet tältä laitteelta."
+#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+msgid "Keyboard"
+msgstr "Näppäimistö"
 
-#. The name of the default downloads folder,
-#. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:204
-msgid "Downloads"
-msgstr "Noudot"
+#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+msgid "Mouse"
+msgstr "Hiiri"
 
-#: ../obex/gnome-obex-server.c:295
-msgid "Incoming Bluetooth file transfer"
-msgstr "Saapuva bluetooth-tiedostonsiirto"
+#: ../common/bluetooth-client.c:100
+msgid "Camera"
+msgstr "Kamera"
 
-#: ../obex/gnome-obex-server.c:337 ../obex/gnome-obex-server.c:504
-msgid "Ready for Bluetooth file transfers"
-msgstr "Valmis bluetooth-tiedostonsiirtoon"
+#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+msgid "Printer"
+msgstr "Tulostin"
 
-#. *
-#. * TODO:
-#. *
-#. * ensure it only gets invoked once
-#. * display sensible error dialogs
-#. * think about fancy received-file actions
-#. *	 - should we send vcards to evo, etc?
-#.
-#: ../obex/gnome-obex-server.c:389 ../obex/gnome-obex-server.desktop.in.h:1
-msgid "Bluetooth File Sharing"
-msgstr "Bluetooth-tiedostojako"
+#: ../common/bluetooth-client.c:104
+msgid "Joypad"
+msgstr ""
 
-#: ../obex/gnome-obex-server.c:392
-msgid "Receive files from Bluetooth devices"
-msgstr "Vastaanota tiedostoja bluetooth-laitteilta"
+#: ../common/bluetooth-client.c:106
+msgid "Tablet"
+msgstr ""
 
-#. add your name and email address in here if you've translated
-#. * this program
-#.
-#: ../obex/gnome-obex-server.c:398
+#: ../common/bluetooth-client.c:108
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: ../common/helper.c:162
+msgid "Select Device"
+msgstr ""
+
+#: ../common/helper.c:222
+msgid "Choose files to send"
+msgstr ""
+
+#: ../applet/main.c:123
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Bluetooth-yhteyksien hallinta Gnome-työpöydälle"
+
+#: ../applet/main.c:126 ../analyzer/dialog.c:128
 msgid "translator-credits"
 msgstr ""
-"Ilkka Tuohela, 2005-2007\n"
+"Timo Jyrinki <timo.jyrinki@iki.fi>, 2007\n"
 "\n"
-"http://www.gnome.fi/"
+"Launchpad Contributions:\n"
+"  Mika Hynnä https://launchpad.net/~ighea\n"
+"  Timo Jyrinki https://launchpad.net/~timo-jyrinki\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Timo Jyrinki https://launchpad.net/~timo-jyrinki"
 
-#: ../obex/gnome-obex-server.desktop.in.h:2
-msgid "Receive files sent by Bluetooth devices"
-msgstr "Vastaanota bluetooth-laitteiden lähettämiä tiedostoja"
-
-#: ../src/chooser.gob:109
-msgid "Choose Bluetooth device"
-msgstr "Valitse bluetooth-laite"
-
-#: ../src/chooser.gob:151
-msgid "Device"
-msgstr "Laite"
-
-#: ../src/fileactiondialog.gob:132
-msgid "Bluetooth Transfer Received"
-msgstr "Bluetooth-siirto vastaanotettu"
-
-#. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:138
-#, c-format
-msgid "File received from '%s'. What would you like to do?"
-msgstr "Vastaanotettiin tiedosto lähettäjältä \"%s\". Mitä haluat tehdä?"
-
-#: ../src/fileactiondialog.gob:168
-#, c-format
-msgid ""
-"<span weight='bold'>Name:</span> %s\n"
-"<span weight='bold'>Type:</span> %s\n"
-"<span weight='bold'>Size:</span> %s"
+#: ../applet/main.c:177 ../applet/main.c:232
+msgid "Setup new device..."
 msgstr ""
-"<span weight='bold'>Nimi:</span> %s\n"
-"<span weight='bold'>Tyyppi:</span> %s\n"
-"<span weight='bold'>Koko:</span> %s"
 
-#: ../src/permissiondialog.gob:105
-#, c-format
-msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Salli bluetooth-laitteen \"%s\" ottaa yhteyttä?"
-
-#: ../src/permissiondialog.gob:121
-msgid ""
-"An external device is attempting to connect to your computer via Bluetooth. "
-"You must decide if you want to accept the connection."
+#: ../applet/main.c:242
+msgid "Send files to device..."
 msgstr ""
-"Bluetooth-verkon laite yrittää ottaa yhteyttä tietokoneeseen Bluetoothilla. "
-"Sinun täytyy päättää haluatko hyväksyä yhteyden."
 
-#: ../src/permissiondialog.gob:127
-msgid "_Always allow this device to connect."
-msgstr "S_alli aina tämän laitteen ottaa yhteyttä."
+#: ../applet/main.c:250
+msgid "Browse files on device..."
+msgstr ""
 
-#~ msgid "Unable to read file '%s'."
-#~ msgstr "Tiedostoa \"%s\" ei voi lukea."
+#: ../applet/main.c:373
+msgid "Bluetooth Applet"
+msgstr "Bluetooth-sovelma"
 
-#~ msgid "An error occurred while sending data."
-#~ msgstr "Tapahtui virhe lähetettäessä."
+#: ../applet/agent.c:258
+msgid "Authentication request"
+msgstr "Todennuspyyntö"
 
-#~ msgid "The remote device canceled the transfer."
-#~ msgstr "Bluetooth-laite keskeytti siirron."
+#: ../applet/agent.c:286 ../applet/agent.c:395
+msgid "Pairing request for device:"
+msgstr "Parituspyyntö laitteelle:"
 
-#~ msgid "An unknown error occurred."
-#~ msgstr "Tapahtui tuntematon virhe."
+#: ../applet/agent.c:303
+msgid "Enter passkey for authentication:"
+msgstr "Anna salasana todennusta varten:"
 
-#~ msgid "Connecting..."
-#~ msgstr "Yhdistetään..."
+#: ../applet/agent.c:327
+msgid "Show input"
+msgstr "Näytä salasana"
 
-#~ msgid ""
-#~ "Can't find user interface file, check your gnome-bluetooth installation."
-#~ msgstr ""
-#~ "Käyttöliittymätiedostoa ei löydy, tarkista gnome-bluetoothin asennuksesi."
+#: ../applet/agent.c:369
+msgid "Confirmation request"
+msgstr "Varmistuspyyntö"
 
-#~ msgid ""
-#~ "Make sure \"Beam receive\" is enabled in the Power preferences, and "
-#~ "Bluetooth is enabled."
-#~ msgstr ""
-#~ "Tarkista että \"Signaalin vastaanotto\" on käytössä virta-asetuksissa ja "
-#~ "että bluetooth on käytössä."
+#: ../applet/agent.c:412
+msgid "Confirm value for authentication:"
+msgstr "Varmista arvo todennusta varten:"
 
-#~ msgid "Remote device doesn't support receiving objects."
-#~ msgstr "Bluetooth-laite ei tue kohteiden vastaanottoa."
+#: ../applet/agent.c:456
+msgid "Authorization request"
+msgstr "Valtuutuspyyntö"
 
-#~ msgid "Can't initialize program."
-#~ msgstr "Ohjelmaa ei voi alustaa."
+#: ../applet/agent.c:482
+msgid "Authorization request for device:"
+msgstr "Valtuutuspyyntö laitteelle:"
 
-#~ msgid "Unable to connect to remote device."
-#~ msgstr "Bluetooth-laitteeseen ei saada yhteyttä."
+#: ../applet/agent.c:503
+#, c-format
+msgid "Grant access to %s?"
+msgstr "Myönnä pääsy laitteelle %s?"
 
-#~ msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-#~ msgstr "<span weight=\"bold\" size=\"larger\">Lähetetään tiedostoa</span>"
+#: ../applet/agent.c:512
+msgid "Always grant access"
+msgstr "Myönnä pääsy aina"
 
-#~ msgid "Bluetooth file transfer"
-#~ msgstr "Bluetooth-tiedostonsiirto"
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#, c-format
+msgid "Pairing request for %s"
+msgstr ""
+
+#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
+#: ../applet/agent.c:736 ../applet/agent.c:781
+msgid "Bluetooth device"
+msgstr "Bluetooth-laite"
+
+#: ../applet/agent.c:591
+msgid "Enter PIN code"
+msgstr ""
+
+#: ../applet/agent.c:638 ../applet/agent.c:688
+msgid "Enter passkey"
+msgstr "Anna tunnusluku"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:732
+#, c-format
+msgid "Confirmation request for %s"
+msgstr ""
+
+#: ../applet/agent.c:737
+msgid "Confirm passkey"
+msgstr ""
+
+#: ../applet/agent.c:777
+#, c-format
+msgid "Authorization request for %s"
+msgstr "Valtuutuspyyntö laitteelta %s"
+
+#: ../applet/agent.c:782
+msgid "Check authorization"
+msgstr "Tarkista valtuutus"
+
+#: ../applet/bluetooth-applet.desktop.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Bluetooth-hallinta"
+
+#: ../applet/bluetooth-applet.desktop.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Bluetooth-hallintasovelma"
+
+#: ../properties/main.c:63
+msgid "Bluetooth Preferences"
+msgstr "Bluetooth-asetukset"
+
+#: ../properties/main.c:94
+msgid "General"
+msgstr "Yleiset"
+
+#: ../properties/main.c:131
+msgid "Bluetooth Properties"
+msgstr ""
+
+#: ../properties/general.c:172
+msgid "File transfer"
+msgstr ""
+
+#: ../properties/general.c:176
+msgid "Receive files from remote devices"
+msgstr ""
+
+#: ../properties/general.c:184
+msgid "Share files from public folder"
+msgstr ""
+
+#: ../properties/general.c:195
+msgid "Notification area"
+msgstr "Ilmoitusalue"
+
+#: ../properties/general.c:199
+msgid "Never display icon"
+msgstr "Älä koskaan näytä kuvaketta"
+
+#: ../properties/general.c:206
+msgid "Only display when adapter present"
+msgstr "Näytä kuvake vain kun sovitin on käytössä"
+
+#: ../properties/general.c:213
+msgid "Always display icon"
+msgstr "Näytä kuvake aina"
+
+#: ../properties/adapter.c:99
+msgid "Adapter"
+msgstr "Sovitin"
+
+#: ../properties/adapter.c:174
+msgid "always"
+msgstr ""
+
+#: ../properties/adapter.c:176
+msgid "hidden"
+msgstr ""
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "%'g minute"
+msgid_plural "%'g minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../properties/adapter.c:477
+msgid "Visibility setting"
+msgstr ""
+
+#: ../properties/adapter.c:490
+msgid "Hidden"
+msgstr ""
+
+#: ../properties/adapter.c:502
+msgid "Always visible"
+msgstr ""
+
+#: ../properties/adapter.c:514
+msgid "Temporary visible"
+msgstr ""
+
+#: ../properties/adapter.c:566
+msgid "Friendly name"
+msgstr ""
+
+#: ../properties/adapter.c:587
+msgid "Known devices"
+msgstr ""
+
+#: ../properties/dialog.c:41
+msgid "Remove from list of known devices?"
+msgstr ""
+
+#: ../properties/dialog.c:42
+msgid ""
+"If you delete the device, you have to set it up again before next use."
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Muuta Bluetooth-asetuksia"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid ""
+"Display options for the notification icon. Valid options are \"never\", "
+"\"present\" and \"always\"."
+msgstr ""
+"Ilmoituskuvakkeen näyttämisen valinnat. Hyväksyttyjä arvoja ovat \"never\", "
+"\"present\" ja \"always\"."
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "If Bluetooth file sharing is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:3
+msgid "If receiving of remote files via Bluetooth is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:4
+msgid ""
+"If the service for receiving remote files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:5
+msgid "If the service for sharing files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:6
+msgid "When to show the notification icon"
+msgstr "Milloin ilmoituskuvake näytetään"
+
+#: ../wizard/main.c:75
+#, c-format
+msgid "Please enter the following PIN code: %s"
+msgstr ""
+
+#: ../wizard/main.c:94
+#, c-format
+msgid "Please enter the following passkey: %s%s"
+msgstr ""
+
+#: ../wizard/main.c:115
+#, c-format
+msgid "Pairing with %s canceled"
+msgstr ""
+
+#: ../wizard/main.c:118
+#, c-format
+msgid "Pairing with %s finished"
+msgstr ""
+
+#: ../wizard/main.c:145
+#, c-format
+msgid "Successfully paired with %s"
+msgstr ""
+
+#: ../wizard/main.c:159
+#, c-format
+msgid "Pairing with %s failed"
+msgstr ""
+
+#: ../wizard/main.c:193
+#, c-format
+msgid "Connecting to %s now ..."
+msgstr ""
+
+#: ../wizard/main.c:264
+msgid "Introduction"
+msgstr "Johdanto"
+
+#: ../wizard/main.c:265
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr "Tervetuloa Bluetooth-laitteen ohjattuun asetusten tekoon"
+
+#: ../wizard/main.c:268
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer.\n"
+"\n"
+msgstr ""
+"Tällä ohjatulla toiminnolla Bluetooth-laitteet voidaan määrittää tämän "
+"tietokoneen kanssa käytettäviksi.\n"
+"\n"
+
+#: ../wizard/main.c:303
+msgid "Device type"
+msgstr "Laitetyyppi"
+
+#: ../wizard/main.c:304
+msgid "Select the type of device you want to setup"
+msgstr "Valitse laitetyyppi jonka haluat määrittää"
+
+#: ../wizard/main.c:316
+msgid "Mobile phone"
+msgstr "Matkapuhelin"
+
+#: ../wizard/main.c:331
+msgid "Any device"
+msgstr "Mikä tahansa laite"
+
+#: ../wizard/main.c:392
+msgid "Device search"
+msgstr "Laitteiden haku"
+
+#: ../wizard/main.c:393
+msgid "Select the device you want to setup"
+msgstr "Valitse laite jonka haluat määrittää"
+
+#: ../wizard/main.c:428
+msgid "Device setup"
+msgstr ""
+
+#: ../wizard/main.c:429
+msgid "Setting up new device"
+msgstr ""
+
+#: ../wizard/main.c:451
+msgid "Summary"
+msgstr "Yhteenveto"
+
+#: ../wizard/main.c:452
+msgid "Succesfully configured new device"
+msgstr "Uuden laitteen asetus onnistui"
+
+#: ../wizard/main.c:462
+msgid "Bluetooth Device Wizard"
+msgstr "Bluetooth-laitteiden ohjattu määritys"
+
+#: ../sendto/main.c:93
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:98 ../sendto/main.c:111
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:109
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:119
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:145
+msgid "File Transfer"
+msgstr ""
+
+#: ../sendto/main.c:162
+msgid "Sending files via Bluetooth"
+msgstr ""
+
+#: ../sendto/main.c:174
+msgid "From:"
+msgstr ""
+
+#: ../sendto/main.c:190
+msgid "To:"
+msgstr ""
+
+#: ../sendto/main.c:206
+msgid "Connecting..."
+msgstr ""
+
+#: ../sendto/main.c:254
+#, c-format
+msgid "Sending %s"
+msgstr ""
+
+#: ../sendto/main.c:261 ../sendto/main.c:326
+#, c-format
+msgid "Sending file %d of %d"
+msgstr ""
+
+#: ../sendto/main.c:322
+#, c-format
+msgid "%d KB/s"
+msgstr ""
+
+#: ../sendto/main.c:324
+#, c-format
+msgid "%d B/s"
+msgstr ""
+
+#: ../sendto/main.c:373
+msgid "An unknown error occured"
+msgstr ""
+
+#: ../sendto/main.c:383
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+
+#: ../sendto/main.c:554 ../browse/main.c:38
+msgid "Remote device to use"
+msgstr ""
+
+#: ../analyzer/main.c:166
+msgid "Saving of protocol trace failed"
+msgstr "Yhteyskäytäntöjäljitystietojen tallennus epäonnistui"
+
+#: ../analyzer/main.c:313
+msgid "Loading Trace"
+msgstr "Ladataan jäljitystietoja"
+
+#: ../analyzer/main.c:317
+msgid "Live Import"
+msgstr "Reaaliaikainen tuonti"
+
+#: ../analyzer/main.c:321
+msgid "Protocol Trace"
+msgstr "Yhteyskäytäntöjäljitys"
+
+#: ../analyzer/main.c:326
+msgid "Unsaved"
+msgstr "Tallentamaton"
+
+#: ../analyzer/main.c:609
+msgid "Can't live import from"
+msgstr "Ei voida tuoda reaaliakaisesti kohteesta"
+
+#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
+msgid "Bluetooth Analyzer"
+msgstr "Bluetooth-analysoija"
+
+#: ../analyzer/main.c:856
+msgid "_File"
+msgstr "_Tiedosto"
+
+#: ../analyzer/main.c:886
+msgid "Open _Recent"
+msgstr "Avaa _viimeisin"
+
+#: ../analyzer/main.c:933
+msgid "_Edit"
+msgstr "_Muokkaa"
+
+#: ../analyzer/main.c:942
+msgid "_View"
+msgstr "_Näytä"
+
+#: ../analyzer/main.c:947
+msgid "_Full Screen"
+msgstr "_Kokoruutu"
+
+#: ../analyzer/main.c:954
+msgid "_Tools"
+msgstr "_Työkalut"
+
+#: ../analyzer/main.c:959
+msgid "_Debug Packet List"
+msgstr "_Virheenjäljitys pakettiluettelolla"
+
+#: ../analyzer/main.c:968
+msgid "_Help"
+msgstr "O_hje"
+
+#: ../analyzer/dialog.c:110
+msgid "Bluetooth protocol analyzer"
+msgstr "Bluetooth-yhteyskäytäntöanalysoija"
+
+#: ../analyzer/dialog.c:140
+msgid "All Files"
+msgstr "Kaikki tiedostot"
+
+#: ../analyzer/dialog.c:145
+msgid "Supported Files"
+msgstr "Tuetut tiedostot"
+
+#: ../analyzer/dialog.c:154
+msgid "Frontline BTSnoop Files"
+msgstr "Frontline BTSnoop -tiedostot"
+
+#: ../analyzer/dialog.c:160
+msgid "Apple Packet Logger Files"
+msgstr "Apple Packet Logger -tiedostot"
+
+#: ../analyzer/dialog.c:175
+msgid "By Extension"
+msgstr "Tiedostopäätteen mukaan"
+
+#: ../analyzer/dialog.c:180
+msgid "Frontline BTSnoop Format"
+msgstr "Frontline BTSnoop -muoto"
+
+#: ../analyzer/dialog.c:185
+msgid "Apple Packet Logger Format"
+msgstr "Apple Packet Logger -muoto"
+
+#: ../analyzer/dialog.c:249
+msgid "Select File _Type"
+msgstr "Valitse tiedosto_tyyppi"
+
+#: ../analyzer/dialog.c:292
+msgid "File Type"
+msgstr "Tiedostotyyppi"
+
+#: ../analyzer/dialog.c:297
+msgid "Extensions"
+msgstr "Tiedostopäätteet"
+
+#: ../analyzer/dialog.c:331
+msgid "Save File"
+msgstr "Tallenna tiedosto"
+
+#: ../analyzer/dialog.c:373
+msgid "Open File"
+msgstr "Avaa tiedosto"
+
+#: ../analyzer/dialog.c:455
+msgid "Local connection"
+msgstr "Paikallinen yhteys"
+
+#: ../analyzer/dialog.c:463
+msgid "Remote connection"
+msgstr "Etäyhteys"
+
+#: ../analyzer/dialog.c:497
+msgid "Open Import"
+msgstr "Avaa tuonti"
+
+#: ../analyzer/dialog.c:537
+msgid "Save the protocol trace before closing?"
+msgstr "Tallenna yhteyskäytäntöjäljitystiedot ennen sulkemista?"
+
+#: ../analyzer/dialog.c:538
+msgid "If you don't save, all information will be permanently lost."
+msgstr "Jos et tallenna, kaikki tiedot menetetään pysyvästi."
+
+#: ../analyzer/dialog.c:546
+msgid "Close _without Saving"
+msgstr "Sulje _tallentamatta"
+
+#: ../analyzer/dialog.c:576
+msgid "There is"
+msgstr "Löytyi"
+
+#: ../analyzer/dialog.c:576
+msgid "There are"
+msgstr "Löytyi"
+
+#: ../analyzer/dialog.c:577
+msgid "unsaved protocol trace."
+msgstr "tallentamaton yhteyskäytäntöjäljitystietue"
+
+#: ../analyzer/dialog.c:578
+msgid "unsaved protocol traces."
+msgstr "tallentamatonta yhteyskäytäntöjäljitystietuetta"
+
+#: ../analyzer/dialog.c:579
+msgid "If you quit now, all information will be lost."
+msgstr "Jos poistut nyt, kaikki tiedot menetetään"
+
+#: ../analyzer/dialog.c:589
+msgid "_Discard Changes"
+msgstr "_Hylkää muutokset"
+
+#: ../analyzer/tracer.c:250
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../analyzer/tracer.c:258
+msgid "Packet"
+msgstr "Paketti"
+
+#: ../analyzer/tracer.c:267
+msgid "Timestamp"
+msgstr "Aikaleima"
+
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
+msgid "Analyze Bluetooth traces"
+msgstr "Bluetooth-jälkien analysointi"
+
+#: ../analyzer/bluetooth-manager.xml.in.h:1
+msgid "Apple Packet Logger File"
+msgstr "Apple Packet Logger -tiedosto"
+
+#: ../analyzer/bluetooth-manager.xml.in.h:2
+msgid "Frontline BTSnoop File"
+msgstr "Frontline BTSnoop -tiedosto"

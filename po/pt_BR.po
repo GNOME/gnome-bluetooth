@@ -1,373 +1,946 @@
-# Brazilian Portuguese translation of gnome-bluetooth.HEAD
-# Copyright (C) 2004-2007 Free Software Foundation, Inc.
-# This file is distributed under the same license as the gnome-bluetooth package.
-# Raphael Higino <phhigino@gmail.com>, 2004-2005.
-# Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>, 2006-2007.
+# Brazilian Portuguese translation for bluez-gnome
+# Copyright (c) 2007 Luiz Augusto von Dentz
+# This file is distributed under the same license as the bluez-gnome package.
+# Luiz Augusto von Dentz <luiz.dentz@indt.org.br>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth\n"
+"Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-02 02:13+0000\n"
-"PO-Revision-Date: 2007-01-14 19:14-0300\n"
-"Last-Translator: Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
+"POT-Creation-Date: 2008-09-29 14:31+0200\n"
+"PO-Revision-Date: 2008-02-24 14:55+0000\n"
+"Last-Translator: Marcel Holtmann <marcel@holtmann.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
-#: ../data/gnome-obex-server.schemas.in.h:1
-msgid "Directory to save received files"
-msgstr "Diretório onde salvar arquivos recebidos"
+#~ msgid "Device"
+#~ msgstr "Dispositivo"
 
-#: ../data/gnome-obex-server.schemas.in.h:2
-msgid "Display dialog when file received"
-msgstr "Exibir notificação quando receber arquivo"
-
-#: ../data/gnome-obex-server.schemas.in.h:3
-msgid "Incoming files are saved automatically into this directory. If display-notification is set then the user gets chance to open or delete them."
-msgstr "Arquivos recebidos são salvados automaticamente neste diretório. Se \"Exibir notificação\" for especificado, o usuário tem a possibilidade de abri-los ou apagá-los."
-
-#: ../data/gnome-obex-server.schemas.in.h:4
-msgid "Received files are automatically saved. If this option is set, then the user is prompted with a dialog which allows them to view or delete the received file."
-msgstr "Arquivos recebidos são salvados automaticamente. Se essa opção for especificada, o usuário será notificado com uma janela de diálogo que lhe permite visualizar ou apagar o arquivo recebido."
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:313
-msgid "Selection mode"
-msgstr "Modo de seleção"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:314
-msgid "The selection mode"
-msgstr "O modo de seleção"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:322
-msgid "Sorted"
-msgstr "Ordenada"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:323
-msgid "Icon list is sorted"
-msgstr "A lista de ícones está ordenada"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:329
-msgid "Sort order"
-msgstr "Ordem"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:330
-msgid "Sort direction the icon list should use"
-msgstr "O modo de ordenação que a lista de ícones deve usar"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:344
-msgid "Icon padding"
-msgstr "Espaço entre ícones"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:345
-msgid "Number of pixels between icons"
-msgstr "Número de pixels entre os ícones"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:352
-msgid "Top margin"
-msgstr "Margem superior"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:353
-msgid "Number of pixels in top margin"
-msgstr "Número de pixels na margem superior"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:360
-msgid "Bottom margin"
-msgstr "Margem inferior"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:361
-msgid "Number of pixels in bottom margin"
-msgstr "Número de pixels na margem inferior"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:369
-msgid "Left margin"
-msgstr "Margem esquerda"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:370
-msgid "Number of pixels in left margin"
-msgstr "Número de pixels na margem esquerda"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:377
-msgid "Right margin"
-msgstr "Margem direita"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:378
-msgid "Number of pixels in right margin"
-msgstr "Número de pixels na margem direita"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:386
-msgid "Selection Box Color"
-msgstr "Cor da Caixa de Seleção"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:387
-msgid "Color of the selection box"
-msgstr "Cor da caixa de seleção"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:393
-msgid "Selection Box Alpha"
-msgstr "Alfa da Caixa de Seleção"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:394
-msgid "Opacity of the selection box"
-msgstr "Opacidade da caixa de seleção"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:154
-msgid "Pixbuf"
-msgstr "Pixbuf"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:155
-msgid "A GdkPixbuf to display"
-msgstr "Um GdkPixbuf para exibir"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:162
-msgid "Filename"
-msgstr "Nome do arquivo"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:163
-msgid "Filename to load and display"
-msgstr "Nome do arquivo para carregar e exibir"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:170
-msgid "Stock ID"
-msgstr "ID de predefinição"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:171
-msgid "Stock ID for a stock image to display"
-msgstr "A ID de uma imagem predefinida a ser exibida"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:178
-msgid "Animation"
-msgstr "Animação"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:179
-msgid "GdkPixbufAnimation to display"
-msgstr "GdkPixbufAnimation para exibir"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:186
-msgid "Image type"
-msgstr "Tipo de imagem"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:187
-msgid "The representation being used for image data"
-msgstr "A representação sendo usada para os dados da imagem"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:195
-msgid "Size"
-msgstr "Tamanho"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:196
-msgid "The size of the icon"
-msgstr "O tamanho do ícone"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:205
-msgid "Blinking"
-msgstr "Piscar"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:206
-msgid "Whether or not the status icon is blinking"
-msgstr "Se o ícone de status deve piscar ou não"
-
-#: ../libegg/libegg/tray/eggtrayicon.c:118
-#: ../libegg/libegg/tray/eggtraymanager.c:145
-msgid "Orientation"
-msgstr "Orientação"
-
-#: ../libegg/libegg/tray/eggtrayicon.c:119
-#: ../libegg/libegg/tray/eggtraymanager.c:146
-msgid "The orientation of the tray."
-msgstr "A orientação da bandeja."
-
-#: ../obex/gnome-obex-send.c:180
 #, c-format
-msgid "Unable to read file '%s'."
-msgstr "Não foi possível ler o arquivo '%s'."
+#~ msgid "Created bonding with %s"
+#~ msgstr "Relacionamento com %s criado"
 
-#: ../obex/gnome-obex-send.c:211
-msgid "An error occurred while sending data."
-msgstr "Ocorreu um erro ao enviar os dados."
-
-#: ../obex/gnome-obex-send.c:214
-msgid "The remote device canceled the transfer."
-msgstr "O dispositivo remoto cancelou a transferência."
-
-#: ../obex/gnome-obex-send.c:217
-msgid "An unknown error occurred."
-msgstr "Ocorreu um erro desconhecido."
-
-#: ../obex/gnome-obex-send.c:248
-msgid "Connecting..."
-msgstr "Conectando..."
-
-#: ../obex/gnome-obex-send.c:301
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "Não é possível encontrar o arquivo da interface de usuário. Verifique sua instalação do gnome-bluetooth."
-
-#: ../obex/gnome-obex-send.c:317
-msgid "Make sure \"Beam receive\" is enabled in the Power preferences, and Bluetooth is enabled."
-msgstr "Certifique-se de que \"Recepção transf.\" esteja habilitado em preferências de Energia, e que o Bluetooth esteja habilitado."
-
-#: ../obex/gnome-obex-send.c:319
-msgid "Remote device doesn't support receiving objects."
-msgstr "O dispositivo remoto não suporta recebimento de objetos."
-
-#: ../obex/gnome-obex-send.c:329
-msgid "Can't initialize program."
-msgstr "Não é possível iniciar o programa."
-
-#: ../obex/gnome-obex-send.c:335
-msgid "Unable to connect to remote device."
-msgstr "Não foi possível conectar-se a dispositivo remoto."
-
-#: ../obex/gnome-obex-server.c:172
 #, c-format
-msgid "Accept a file from '%s'?"
-msgstr "Aceitar um arquivo de '%s'?"
+#~ msgid "Removed bonding with %s"
+#~ msgstr "Relacionamento com %s removido"
 
-#: ../obex/gnome-obex-server.c:173
-msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
-msgstr "O dispositivo remoto está tentando enviar um arquivo via Bluetooth. Você deseja permitir a conexão?"
+#~ msgid "Device has been switched off"
+#~ msgstr "Dispositivo desativado"
 
-#: ../obex/gnome-obex-server.c:174
-msgid "Always accept files from this device."
-msgstr "Sempre aceitar arquivos desse dispositivo."
+#~ msgid "Device has been made non-discoverable"
+#~ msgstr "O dispositivo foi ocultado"
 
-#. The name of the default downloads folder,
-#. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:215
-msgid "Downloads"
-msgstr "Downloads"
+#~ msgid "Device has been made connectable"
+#~ msgstr "Dispositivo invisível"
 
-#: ../obex/gnome-obex-server.c:306
-msgid "Incoming Bluetooth file transfer"
-msgstr "Recebendo arquivos via Bluetooth"
+#~ msgid "Device has been made discoverable"
+#~ msgstr "Dispositivo visível"
 
-#: ../obex/gnome-obex-server.c:348
-#: ../obex/gnome-obex-server.c:518
-msgid "Ready for Bluetooth file transfers"
-msgstr "Pronto para transferências de arquivos via Bluetooth"
+#~ msgid "Device has been made limited discoverable"
+#~ msgstr "O dispositivo foi parcialmente ocultado"
 
-#. *
-#. * TODO:
-#. *
-#. * ensure it only gets invoked once
-#. * display sensible error dialogs
-#. * think about fancy received-file actions
-#. *	 - should we send vcards to evo, etc?
-#.
-#: ../obex/gnome-obex-server.c:403
-#: ../obex/gnome-obex-server.desktop.in.h:1
-msgid "Bluetooth File Sharing"
-msgstr "Compartilhamento de Arquivos via Bluetooth"
+#~ msgid "Device has been switched into pairing mode"
+#~ msgstr "O dispositivo está em modo de emparelhamento"
 
-#: ../obex/gnome-obex-server.c:406
-msgid "Receive files from Bluetooth devices"
-msgstr "Receber arquivos de dispositivos Bluetooth"
+#, c-format
+#~ msgid "Couldn't execute command: %s\n"
+#~ msgstr "Comando não pode ser executado: %s\n"
 
-#. add your name and email address in here if you've translated
-#. * this program
-#.
-#: ../obex/gnome-obex-server.c:412
+#~ msgid "Browse Devices"
+#~ msgstr "Explorar Dispositivos"
+
+#~ msgid "Select device to browse"
+#~ msgstr "Escolher dispositivo para explorar"
+
+#~ msgid "Send File..."
+#~ msgstr "Enviar Arquivo..."
+
+#~ msgid "Browse Device..."
+#~ msgstr "Explorar Dispositivo..."
+
+#~ msgid "Setup New Device"
+#~ msgstr "Configurar Novo Dispositivo"
+
+#, c-format
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Pedido de emparelhamento para '%s'"
+
+#~ msgid "Services"
+#~ msgstr "Serviços"
+
+#~ msgid "Authorization requests"
+#~ msgstr "Pedido de autorização"
+
+#~ msgid "Automatically authorize incoming requests"
+#~ msgstr "Autorização automatica"
+
+#~ msgid "Hardware database"
+#~ msgstr "Banco de dados de hardware"
+
+#~ msgid "Select class of device automatically"
+#~ msgstr "Seleção automatica de classe de dispositivo"
+
+#~ msgid "Available services"
+#~ msgstr "Serviços disponiveis"
+
+#~ msgid "never"
+#~ msgstr "nunca"
+
+#~ msgid "1 minute"
+#~ msgstr "1 minuto"
+
+#, c-format
+#~ msgid "%g minutes"
+#~ msgstr "%g minutos"
+
+#~ msgid "Set _Trusted"
+#~ msgstr "Definir _Confiança"
+
+#~ msgid "Remove _Trust"
+#~ msgstr "Remover _Confiança"
+
+#~ msgid "Mode of operation"
+#~ msgstr "Modo de operação"
+
+#~ msgid "Other devices can connect"
+#~ msgstr "Invisível para outros dispositivos"
+
+#~ msgid "Visible and connectable for other devices"
+#~ msgstr "Visível para outros dispositivos"
+
+#~ msgid "Limited discoverable and connectable"
+#~ msgstr "Visibilidade e conectividade limitadas"
+
+#~ msgid "Make adapter invisible after:"
+#~ msgstr "Adaptador invisível após:"
+
+#~ msgid "Adapter name"
+#~ msgstr "Nome do adaptador"
+
+#~ msgid "Class of device"
+#~ msgstr "Classe do dispositivo"
+
+#~ msgid "Unspecified"
+#~ msgstr "Não especificado"
+
+#~ msgid "Desktop workstation"
+#~ msgstr "Estação de trabalho"
+
+#~ msgid "Laptop computer"
+#~ msgstr "Laptop"
+
+#~ msgid "Bonded devices"
+#~ msgstr "Dispositivos coligados"
+
+#~ msgid "If HAL should be used for automatic preferences settings"
+#~ msgstr "Se HAL deve ser usado para configuração automática de preferências"
+
+#~ msgid ""
+#~ "If HAL should be used to automatically adjust settings like class of device "
+#~ "etc."
+#~ msgstr ""
+#~ "Se HAL deve ser usado para ajustar automaticamente configurações como classe "
+#~ "do dispositivo etc."
+
+#~ msgid "If authorization requests should be automatically granted"
+#~ msgstr "Se pedidos de autorização devem ser aprovados automaticamente"
+
+#~ msgid ""
+#~ "If authorization requests should be granted all the time without asking the "
+#~ "user for confirmation."
+#~ msgstr ""
+#~ "Se os pedidos de autorização devem ser sempre aprovados, sem confirmação do "
+#~ "usuário."
+
+#~ msgid "Connecting to system bus failed: %s\n"
+#~ msgstr "Conexão com o system bus falhou: %s\n"
+
+#~ msgid "<b>Notification area</b>"
+#~ msgstr "<b>Área de notificação</b>"
+
+#~ msgid "Bluetooth preferences"
+#~ msgstr "Preferências Bluetooth"
+
+#~ msgid "Service properties"
+#~ msgstr "Propriedades de serviço"
+
+#~ msgid "Service path"
+#~ msgstr "Caminho do serviço"
+
+#~ msgid ""
+#~ "\n"
+#~ "Description"
+#~ msgstr ""
+#~ "\n"
+#~ "Descrição"
+
+#~ msgid ""
+#~ "\n"
+#~ "Enter passkey for authentication:"
+#~ msgstr ""
+#~ "\n"
+#~ "Entre com a senha para autenticação:"
+
+#~ msgid ""
+#~ "\n"
+#~ "Confirm value for authentication:"
+#~ msgstr ""
+#~ "\n"
+#~ "Confirmar valor de autenticação:"
+
+#~ msgid ""
+#~ "Pairing request for %s\n"
+#~ "\n"
+#~ "Click to open passkey entry dialog"
+#~ msgstr ""
+#~ "Pareamento com %s\n"
+#~ "\n"
+#~ "Clique para abrir o dialogo de entrada de chave"
+
+#~ msgid ""
+#~ "Pairing request for %s\n"
+#~ "\n"
+#~ "Click to open confirmation dialog"
+#~ msgstr ""
+#~ "Pedido para pareamento %s\n"
+#~ "\n"
+#~ "Clique para abrir o dialogo de confirmação"
+
+#~ msgid "Search"
+#~ msgstr "Pesquisar"
+
+#~ msgid "Grant access to"
+#~ msgstr "Acesso permitido a"
+
+#~ msgid ""
+#~ "Authorization request for %s\n"
+#~ "\n"
+#~ "Click to open authorization dialog"
+#~ msgstr ""
+#~ "Pedido de autorização %s\n"
+#~ "\n"
+#~ "Clique para abrir o dialogo de autorização"
+
+#~ msgid ""
+#~ "\n"
+#~ "Hardware database"
+#~ msgstr ""
+#~ "\n"
+#~ "Bando de dados de Hardware"
+
+#~ msgid ""
+#~ "\n"
+#~ "Notification area"
+#~ msgstr ""
+#~ "\n"
+#~ "Area de notificação"
+
+#~ msgid "Devices"
+#~ msgstr "Dispositivos"
+
+#~ msgid "Trusted devices"
+#~ msgstr "Dispositivos autorizados"
+
+#~ msgid ""
+#~ "\n"
+#~ "Adapter name"
+#~ msgstr ""
+#~ "\n"
+#~ "Nome do adaptador"
+
+#~ msgid ""
+#~ "\n"
+#~ "Class of device"
+#~ msgstr ""
+#~ "\n"
+#~ "Classe do dispositivo"
+
+#: ../common/bluetooth-client.c:82
+msgid "All types"
+msgstr ""
+
+#: ../common/bluetooth-client.c:84
+msgid "Phone"
+msgstr ""
+
+#: ../common/bluetooth-client.c:86
+msgid "Modem"
+msgstr ""
+
+#: ../common/bluetooth-client.c:88
+msgid "Computer"
+msgstr ""
+
+#: ../common/bluetooth-client.c:90
+msgid "Network"
+msgstr ""
+
+#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+msgid "Headset"
+msgstr "Fone de ouvido com microfone"
+
+#: ../common/bluetooth-client.c:94
+msgid "Headphone"
+msgstr ""
+
+#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+msgid "Mouse"
+msgstr "Mouse"
+
+#: ../common/bluetooth-client.c:100
+msgid "Camera"
+msgstr ""
+
+#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+msgid "Printer"
+msgstr "Impressora"
+
+#: ../common/bluetooth-client.c:104
+msgid "Joypad"
+msgstr ""
+
+#: ../common/bluetooth-client.c:106
+msgid "Tablet"
+msgstr ""
+
+#: ../common/bluetooth-client.c:108
+msgid "Unknown"
+msgstr ""
+
+#: ../common/helper.c:162
+msgid "Select Device"
+msgstr ""
+
+#: ../common/helper.c:222
+msgid "Choose files to send"
+msgstr ""
+
+#: ../applet/main.c:123
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Gerenciador Bluetooth para o GNOME desktop"
+
+#: ../applet/main.c:126 ../analyzer/dialog.c:128
 msgid "translator-credits"
 msgstr ""
-"Raphael Higino <phhigino@gmail.com>\n"
-"Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>"
+"Launchpad Contributions:\n"
+"  Andre Noel https://launchpad.net/~andrenoel\n"
+"  André Gondim https://launchpad.net/~andregondim\n"
+"  Carlos Eduardo Livino https://launchpad.net/~c.livino\n"
+"  Fábio Nogueira https://launchpad.net/~deb-user-ba\n"
+"  Luiz Augusto von Dentz https://launchpad.net/~luiz-dentz\n"
+"  Wanderson Santiago dos Reis https://launchpad.net/~wasare\n"
+"  marco.olimpio https://launchpad.net/~marco-olimpio\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Alexandre Sapata Carbonell https://launchpad.net/~alexandre-sapata-"
+"carbonell\n"
+"  Luiz Augusto von Dentz https://launchpad.net/~luiz-dentz\n"
+"  Marcel Holtmann https://launchpad.net/~holtmann\n"
+"  Rafael Porto Rodrigues https://launchpad.net/~rafporto\n"
+"  Samir Koosah https://launchpad.net/~binlade\n"
+"  rafaelpagliuca https://launchpad.net/~rafaelpagliuca"
 
-#: ../obex/gnome-obex-server.desktop.in.h:2
-msgid "Receive files sent by Bluetooth devices"
-msgstr "Receba arquivos enviados por dispositivos Bluetooth"
-
-#: ../src/chooser.gob:109
-msgid "Choose Bluetooth device"
-msgstr "Escolha o dispositivo Bluetooth"
-
-#: ../src/chooser.gob:151
-msgid "Device"
-msgstr "Dispositivo"
-
-#: ../src/fileactiondialog.gob:132
-msgid "Bluetooth Transfer Received"
-msgstr "Transferência via Bluetooth Recebida"
-
-#. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:138
-#, c-format
-msgid "File received from '%s'. What would you like to do?"
-msgstr "Arquivo recebido de '%s'. O que você gostaria de fazer?"
-
-#: ../src/fileactiondialog.gob:168
-#, c-format
-msgid ""
-"<span weight='bold'>Name:</span> %s\n"
-"<span weight='bold'>Type:</span> %s\n"
-"<span weight='bold'>Size:</span> %s"
+#: ../applet/main.c:177 ../applet/main.c:232
+msgid "Setup new device..."
 msgstr ""
-"<span weight='bold'>Nome:</span> %s\n"
-"<span weight='bold'>Tipo:</span> %s\n"
-"<span weight='bold'>Tamanho:</span> %s"
 
-#: ../src/permissiondialog.gob:105
+#: ../applet/main.c:242
+msgid "Send files to device..."
+msgstr ""
+
+#: ../applet/main.c:250
+msgid "Browse files on device..."
+msgstr ""
+
+#: ../applet/main.c:373
+msgid "Bluetooth Applet"
+msgstr "Applet Bluetooth"
+
+#: ../applet/agent.c:258
+msgid "Authentication request"
+msgstr "Requisição de autenticação"
+
+#: ../applet/agent.c:286 ../applet/agent.c:395
+msgid "Pairing request for device:"
+msgstr "Requisição de emparelhamento para dispositivo:"
+
+#: ../applet/agent.c:303
+msgid "Enter passkey for authentication:"
+msgstr "Digite a senha para autenticação:"
+
+#: ../applet/agent.c:327
+msgid "Show input"
+msgstr "Exibir entrada"
+
+#: ../applet/agent.c:369
+msgid "Confirmation request"
+msgstr "Requesição de confirmação"
+
+#: ../applet/agent.c:412
+msgid "Confirm value for authentication:"
+msgstr "Confirme o valor para autenticação:"
+
+#: ../applet/agent.c:456
+msgid "Authorization request"
+msgstr "Pedido de autenticação"
+
+#: ../applet/agent.c:482
+msgid "Authorization request for device:"
+msgstr "Pedido de autorização para o dispositivo:"
+
+#: ../applet/agent.c:503
 #, c-format
-msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Permitir que o dispositivo Bluetooth '%s' se conecte?"
+msgid "Grant access to %s?"
+msgstr "Conceder acesso a %s?"
 
-#: ../src/permissiondialog.gob:121
-msgid "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
-msgstr "Um dispositivo externo está tentando conectar-se ao computador via Bluetooth. Você deve decidir se deseja aceitar a conexão."
+#: ../applet/agent.c:512
+msgid "Always grant access"
+msgstr "Sempre conceder acesso"
 
-#: ../src/permissiondialog.gob:127
-msgid "_Always allow this device to connect."
-msgstr "_Sempre permitir que esse dispositivo conecte."
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#, c-format
+msgid "Pairing request for %s"
+msgstr ""
 
-#: ../ui/gnome-obex-send.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Enviando arquivo</span>"
+#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
+#: ../applet/agent.c:736 ../applet/agent.c:781
+msgid "Bluetooth device"
+msgstr "Dispositivo bluetooth"
 
-#: ../ui/gnome-obex-send.glade.h:2
-msgid "Bluetooth file transfer"
-msgstr "Transferência de arquivos via Bluetooth"
+#: ../applet/agent.c:591
+msgid "Enter PIN code"
+msgstr ""
 
-#~ msgid "Bluetooth File Server"
-#~ msgstr "Servidor de Arquivos Bluetooth"
-#~ msgid "Bluetooth Manager"
-#~ msgstr "Gerenciador Bluetooth"
-#~ msgid "Display Bluetooth devices and their properties"
-#~ msgstr "Exibir dispositivos Bluetooth e suas propriedades"
-#~ msgid "Bluetooth Device Manager"
-#~ msgstr "Gerenciador de Dispositivos Bluetooth"
-#~ msgid "Could not find Bluetooth devices on the system"
-#~ msgstr "Não foi possível encontrar dispositivos Bluetooth no sistema"
-#~ msgid ""
-#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
-#~ "machine."
-#~ msgstr ""
-#~ "Por favor, certifique-se de que seu adaptador bluetooth esteja "
-#~ "corretamente conectado na sua máquina."
-#~ msgid "Bluetooth devices"
-#~ msgstr "Dispositivos Bluetooth"
-#~ msgid "_Devices"
-#~ msgstr "_Dispositivos"
-#~ msgid "_Scan"
-#~ msgstr "_Procurar"
-#~ msgid "_Edit"
-#~ msgstr "_Editar"
-#~ msgid "_Help"
-#~ msgstr "Aj_uda"
-#~ msgid "Found device %s."
-#~ msgstr "Encontrado o dispositivo %s."
-#~ msgid "Device %s is called '%s'."
-#~ msgstr "O dispositivo %s é chamado de '%s'."
-#~ msgid "Scanning for devices..."
-#~ msgstr "Procurando por dispositivos..."
-#~ msgid "Retrieving device names..."
-#~ msgstr "Obtendo os nomes dos dispositivos..."
-#~ msgid "Scan complete."
-#~ msgstr "Busca completa."
-#~ msgid "Error during scan."
-#~ msgstr "Erro durante a busca."
-#~ msgid "Copyright Â© Edd Dumbill 2003"
-#~ msgstr "Copyright © Edd Dumbill 2003"
-#~ msgid "Manage remote Bluetooth devices."
-#~ msgstr "Gerenciar dispositivos bluetooth remotos."
+#: ../applet/agent.c:638 ../applet/agent.c:688
+msgid "Enter passkey"
+msgstr ""
 
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:732
+#, c-format
+msgid "Confirmation request for %s"
+msgstr ""
+
+#: ../applet/agent.c:737
+msgid "Confirm passkey"
+msgstr ""
+
+#: ../applet/agent.c:777
+#, c-format
+msgid "Authorization request for %s"
+msgstr "Pedido de autorização para %s"
+
+#: ../applet/agent.c:782
+msgid "Check authorization"
+msgstr ""
+
+#: ../applet/bluetooth-applet.desktop.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Gerenciador Bluetooth"
+
+#: ../applet/bluetooth-applet.desktop.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Applet Gerenciador Bluetooth"
+
+#: ../properties/main.c:63
+msgid "Bluetooth Preferences"
+msgstr "Preferências Bluetooth"
+
+#: ../properties/main.c:94
+msgid "General"
+msgstr "Geral"
+
+#: ../properties/main.c:131
+msgid "Bluetooth Properties"
+msgstr ""
+
+#: ../properties/general.c:172
+msgid "File transfer"
+msgstr ""
+
+#: ../properties/general.c:176
+msgid "Receive files from remote devices"
+msgstr ""
+
+#: ../properties/general.c:184
+msgid "Share files from public folder"
+msgstr ""
+
+#: ../properties/general.c:195
+msgid "Notification area"
+msgstr "Área de notificação"
+
+#: ../properties/general.c:199
+msgid "Never display icon"
+msgstr "Não mostre o icone"
+
+#: ../properties/general.c:206
+msgid "Only display when adapter present"
+msgstr "Mostre o icone somente quando algum adaptador esteja presente"
+
+#: ../properties/general.c:213
+msgid "Always display icon"
+msgstr "Sempre mostre o icone"
+
+#: ../properties/adapter.c:99
+msgid "Adapter"
+msgstr "Adaptador"
+
+#: ../properties/adapter.c:174
+msgid "always"
+msgstr ""
+
+#: ../properties/adapter.c:176
+msgid "hidden"
+msgstr ""
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "%'g minute"
+msgid_plural "%'g minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../properties/adapter.c:477
+msgid "Visibility setting"
+msgstr ""
+
+#: ../properties/adapter.c:490
+msgid "Hidden"
+msgstr ""
+
+#: ../properties/adapter.c:502
+msgid "Always visible"
+msgstr ""
+
+#: ../properties/adapter.c:514
+msgid "Temporary visible"
+msgstr ""
+
+#: ../properties/adapter.c:566
+msgid "Friendly name"
+msgstr ""
+
+#: ../properties/adapter.c:587
+msgid "Known devices"
+msgstr ""
+
+#: ../properties/dialog.c:41
+msgid "Remove from list of known devices?"
+msgstr ""
+
+#: ../properties/dialog.c:42
+msgid ""
+"If you delete the device, you have to set it up again before next use."
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:1
+msgid "Bluetooth"
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Configurar Bluetooth"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid ""
+"Display options for the notification icon. Valid options are \"never\", "
+"\"present\" and \"always\"."
+msgstr ""
+"Exibir opções para o ícone de notificação. As opções válidas são \"nunca\", "
+"\"presente\" e \"sempre\"."
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "If Bluetooth file sharing is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:3
+msgid "If receiving of remote files via Bluetooth is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:4
+msgid ""
+"If the service for receiving remote files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:5
+msgid "If the service for sharing files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:6
+msgid "When to show the notification icon"
+msgstr "Quando exibir ícone de notificação"
+
+#: ../wizard/main.c:75
+#, c-format
+msgid "Please enter the following PIN code: %s"
+msgstr ""
+
+#: ../wizard/main.c:94
+#, c-format
+msgid "Please enter the following passkey: %s%s"
+msgstr ""
+
+#: ../wizard/main.c:115
+#, c-format
+msgid "Pairing with %s canceled"
+msgstr ""
+
+#: ../wizard/main.c:118
+#, c-format
+msgid "Pairing with %s finished"
+msgstr ""
+
+#: ../wizard/main.c:145
+#, c-format
+msgid "Successfully paired with %s"
+msgstr ""
+
+#: ../wizard/main.c:159
+#, c-format
+msgid "Pairing with %s failed"
+msgstr ""
+
+#: ../wizard/main.c:193
+#, c-format
+msgid "Connecting to %s now ..."
+msgstr ""
+
+#: ../wizard/main.c:264
+msgid "Introduction"
+msgstr "Introdução"
+
+#: ../wizard/main.c:265
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr ""
+
+#: ../wizard/main.c:268
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer.\n"
+"\n"
+msgstr ""
+
+#: ../wizard/main.c:303
+msgid "Device type"
+msgstr ""
+
+#: ../wizard/main.c:304
+msgid "Select the type of device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:316
+msgid "Mobile phone"
+msgstr "Telefone Celular"
+
+#: ../wizard/main.c:331
+msgid "Any device"
+msgstr "Qualquer dispositivo"
+
+#: ../wizard/main.c:392
+msgid "Device search"
+msgstr ""
+
+#: ../wizard/main.c:393
+msgid "Select the device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:428
+msgid "Device setup"
+msgstr ""
+
+#: ../wizard/main.c:429
+msgid "Setting up new device"
+msgstr ""
+
+#: ../wizard/main.c:451
+msgid "Summary"
+msgstr "Sumário"
+
+#: ../wizard/main.c:452
+msgid "Succesfully configured new device"
+msgstr ""
+
+#: ../wizard/main.c:462
+msgid "Bluetooth Device Wizard"
+msgstr ""
+
+#: ../sendto/main.c:93
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:98 ../sendto/main.c:111
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:109
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:119
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:145
+msgid "File Transfer"
+msgstr ""
+
+#: ../sendto/main.c:162
+msgid "Sending files via Bluetooth"
+msgstr ""
+
+#: ../sendto/main.c:174
+msgid "From:"
+msgstr ""
+
+#: ../sendto/main.c:190
+msgid "To:"
+msgstr ""
+
+#: ../sendto/main.c:206
+msgid "Connecting..."
+msgstr ""
+
+#: ../sendto/main.c:254
+#, c-format
+msgid "Sending %s"
+msgstr ""
+
+#: ../sendto/main.c:261 ../sendto/main.c:326
+#, c-format
+msgid "Sending file %d of %d"
+msgstr ""
+
+#: ../sendto/main.c:322
+#, c-format
+msgid "%d KB/s"
+msgstr ""
+
+#: ../sendto/main.c:324
+#, c-format
+msgid "%d B/s"
+msgstr ""
+
+#: ../sendto/main.c:373
+msgid "An unknown error occured"
+msgstr ""
+
+#: ../sendto/main.c:383
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+
+#: ../sendto/main.c:554 ../browse/main.c:38
+msgid "Remote device to use"
+msgstr ""
+
+#: ../analyzer/main.c:166
+msgid "Saving of protocol trace failed"
+msgstr "Falha na gravação de rastreamento de protocolo"
+
+#: ../analyzer/main.c:313
+msgid "Loading Trace"
+msgstr "Carregando Rastreamento"
+
+#: ../analyzer/main.c:317
+msgid "Live Import"
+msgstr "Importação Imediata"
+
+#: ../analyzer/main.c:321
+msgid "Protocol Trace"
+msgstr "Rastreamento de Protocolo"
+
+#: ../analyzer/main.c:326
+msgid "Unsaved"
+msgstr "Não salvo"
+
+#: ../analyzer/main.c:609
+msgid "Can't live import from"
+msgstr "Não foi possível fazer importação imediata de"
+
+#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
+msgid "Bluetooth Analyzer"
+msgstr "Analisador Bluetooth"
+
+#: ../analyzer/main.c:856
+msgid "_File"
+msgstr "_Arquivo"
+
+#: ../analyzer/main.c:886
+msgid "Open _Recent"
+msgstr "Abrir_Recente"
+
+#: ../analyzer/main.c:933
+msgid "_Edit"
+msgstr "_Editar"
+
+#: ../analyzer/main.c:942
+msgid "_View"
+msgstr "_Visualização"
+
+#: ../analyzer/main.c:947
+msgid "_Full Screen"
+msgstr "_Tela cheia"
+
+#: ../analyzer/main.c:954
+msgid "_Tools"
+msgstr ""
+
+#: ../analyzer/main.c:959
+msgid "_Debug Packet List"
+msgstr ""
+
+#: ../analyzer/main.c:968
+msgid "_Help"
+msgstr "Aj_uda"
+
+#: ../analyzer/dialog.c:110
+msgid "Bluetooth protocol analyzer"
+msgstr "Analizador de protocolo Bluetooth"
+
+#: ../analyzer/dialog.c:140
+msgid "All Files"
+msgstr "Todos Arquivos"
+
+#: ../analyzer/dialog.c:145
+msgid "Supported Files"
+msgstr "Arquivos Suportados"
+
+#: ../analyzer/dialog.c:154
+msgid "Frontline BTSnoop Files"
+msgstr "Arquivos Frontline BTSnoop"
+
+#: ../analyzer/dialog.c:160
+msgid "Apple Packet Logger Files"
+msgstr "Arquivos Apple Packet Logger"
+
+#: ../analyzer/dialog.c:175
+msgid "By Extension"
+msgstr "Por Extensão"
+
+#: ../analyzer/dialog.c:180
+msgid "Frontline BTSnoop Format"
+msgstr "Formato Frontline BTSnoop"
+
+#: ../analyzer/dialog.c:185
+msgid "Apple Packet Logger Format"
+msgstr "Formato Apple Packet Logger"
+
+#: ../analyzer/dialog.c:249
+msgid "Select File _Type"
+msgstr "Selecionar Tipo de _Arquivo"
+
+#: ../analyzer/dialog.c:292
+msgid "File Type"
+msgstr "Tipo de Arquivo"
+
+#: ../analyzer/dialog.c:297
+msgid "Extensions"
+msgstr "Extensões"
+
+#: ../analyzer/dialog.c:331
+msgid "Save File"
+msgstr "Salvar Arquivo"
+
+#: ../analyzer/dialog.c:373
+msgid "Open File"
+msgstr "Abrir Arquivo"
+
+#: ../analyzer/dialog.c:455
+msgid "Local connection"
+msgstr "Conexão local"
+
+#: ../analyzer/dialog.c:463
+msgid "Remote connection"
+msgstr "Conexão remota"
+
+#: ../analyzer/dialog.c:497
+msgid "Open Import"
+msgstr "Abrir Importar"
+
+#: ../analyzer/dialog.c:537
+msgid "Save the protocol trace before closing?"
+msgstr "Salvar o rastreamento de protocolo antes de sair?"
+
+#: ../analyzer/dialog.c:538
+msgid "If you don't save, all information will be permanently lost."
+msgstr ""
+"Se não forem gravadas, todas as informações serão perdidas definitivamente."
+
+#: ../analyzer/dialog.c:546
+msgid "Close _without Saving"
+msgstr "Fechar _sem Salvar"
+
+#: ../analyzer/dialog.c:576
+msgid "There is"
+msgstr "Há"
+
+#: ../analyzer/dialog.c:576
+msgid "There are"
+msgstr "Há"
+
+#: ../analyzer/dialog.c:577
+msgid "unsaved protocol trace."
+msgstr "rastreamento de protocolo não salvo."
+
+#: ../analyzer/dialog.c:578
+msgid "unsaved protocol traces."
+msgstr "rastreamentos de protocolo não salvos."
+
+#: ../analyzer/dialog.c:579
+msgid "If you quit now, all information will be lost."
+msgstr "Se sair agora, todas as informações serão perdidas."
+
+#: ../analyzer/dialog.c:589
+msgid "_Discard Changes"
+msgstr "_Descartar Alterações"
+
+#: ../analyzer/tracer.c:250
+msgid "Type"
+msgstr "Tipo"
+
+#: ../analyzer/tracer.c:258
+msgid "Packet"
+msgstr "Pacote"
+
+#: ../analyzer/tracer.c:267
+msgid "Timestamp"
+msgstr "Registro de hora"
+
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
+msgid "Analyze Bluetooth traces"
+msgstr ""
+
+#: ../analyzer/bluetooth-manager.xml.in.h:1
+msgid "Apple Packet Logger File"
+msgstr "Arquivo Apple Packet Logger"
+
+#: ../analyzer/bluetooth-manager.xml.in.h:2
+msgid "Frontline BTSnoop File"
+msgstr "Arquivo Frontline BTSnoop"

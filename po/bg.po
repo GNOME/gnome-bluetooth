@@ -1,423 +1,819 @@
-# Bulgarian translation of gnome-bluetooth.
-# Copyright (C) 2005 THE gnome-bluetooth'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-bluetooth package.
-# Rostislav "zbrox" Raykov <zbrox@i-space.org>, 2005.
-# 
-# 
+# Bulgarian translation for bluez-gnome
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the bluez-gnome package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-03 16:15+0300\n"
-"PO-Revision-Date: 2005-10-03 16:15+0300\n"
-"Last-Translator: Rostislav \"zbrox\" Raykov <zbrox@i-space.org>\n"
-"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
+"Project-Id-Version: bluez-gnome\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-09-29 14:31+0200\n"
+"PO-Revision-Date: 2008-02-24 14:54+0000\n"
+"Last-Translator: Launchpad Translations Administrators "
+"<rosetta@launchpad.net>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
-#: ../data/gnome-obex-server.schemas.in.h:1
-msgid "Directory to save received files"
-msgstr "Папка, в която да се запазят получените файлове"
+#~ msgid "Device"
+#~ msgstr "Устройство"
 
-#: ../data/gnome-obex-server.schemas.in.h:2
-msgid "Display dialog when file received"
-msgstr "Показване на прозорец при получен файл"
-
-#: ../data/gnome-obex-server.schemas.in.h:3
-msgid ""
-"Incoming files are saved automatically into this directory. If display-"
-"notification is set then the user gets chance to open or delete them."
-msgstr ""
-"Пристигащите файлове се запазват автоматично в тази папка. Ако е включено "
-"съобщаването за пристигащи файлове, потребителя може да ги отвори или изтрие."
-
-#: ../data/gnome-obex-server.schemas.in.h:4
-msgid ""
-"Received files are automatically saved. If this option is set, then the user "
-"is prompted with a dialog which allows them to view or delete the received "
-"file."
-msgstr ""
-"Получените файлове се запазват автоматично. Ако тази опция е включена, на "
-"потребителя е показван прозорец, който позволява файловете да се прегледат "
-"или изтрият."
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:313
-msgid "Selection mode"
-msgstr "Режим на избор"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:314
-msgid "The selection mode"
-msgstr "Режим на избор"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:322
-msgid "Sorted"
-msgstr "Сортирани"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:323
-msgid "Icon list is sorted"
-msgstr "Списъка с икони е сортиран"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:329
-msgid "Sort order"
-msgstr "Ред на сортиране"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:330
-msgid "Sort direction the icon list should use"
-msgstr "Посока на сортиране, която да използва списъка с икони"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:344
-msgid "Icon padding"
-msgstr "Отстояние между иконите"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:345
-msgid "Number of pixels between icons"
-msgstr "Брой пиксели между иконите"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:352
-msgid "Top margin"
-msgstr "Горна граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:353
-msgid "Number of pixels in top margin"
-msgstr "Брой пиксели в горната граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:360
-msgid "Bottom margin"
-msgstr "Долна граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:361
-msgid "Number of pixels in bottom margin"
-msgstr "Брой пиксели в долната граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:369
-msgid "Left margin"
-msgstr "Лява граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:370
-msgid "Number of pixels in left margin"
-msgstr "Брой пиксели в лявата граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:377
-msgid "Right margin"
-msgstr "Дясна граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:378
-msgid "Number of pixels in right margin"
-msgstr "Брой пиксели в дясната граница"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:386
-msgid "Selection Box Color"
-msgstr "Цвят на изборната кутийка"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:387
-msgid "Color of the selection box"
-msgstr "Цвят на изборната кутийка"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:393
-msgid "Selection Box Alpha"
-msgstr "Кутия за избор Алфа"
-
-#: ../libegg/libegg/iconlist/eggiconlist.c:394
-msgid "Opacity of the selection box"
-msgstr "Прозрачност на изборната кутийка"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:154
-msgid "Pixbuf"
-msgstr "Буфер за пиксели"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:155
-msgid "A GdkPixbuf to display"
-msgstr "GdkPixbuf, който да се покаже"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:162
-msgid "Filename"
-msgstr "Име на файл"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:163
-msgid "Filename to load and display"
-msgstr "Име на файл, който да се зареди и покаже"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:170
-msgid "Stock ID"
-msgstr "Идентификатор на стандартна икона"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:171
-msgid "Stock ID for a stock image to display"
-msgstr "Идентификатор на стандартна икона за стандартно изображение"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:178
-msgid "Animation"
-msgstr "Анимация"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:179
-msgid "GdkPixbufAnimation to display"
-msgstr "GdkPixbufAnimation който да се показва"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:186
-msgid "Image type"
-msgstr "Вид изображение"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:187
-msgid "The representation being used for image data"
-msgstr "Репрезентацията, която ще се използва за данните за изображения"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:195
-msgid "Size"
-msgstr "Размер"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:196
-msgid "The size of the icon"
-msgstr "Размера на иконата"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:205
-msgid "Blinking"
-msgstr "Мигащо"
-
-#: ../libegg/libegg/tray/eggstatusicon.c:206
-msgid "Whether or not the status icon is blinking"
-msgstr "Дали мига или не статус иконата"
-
-#: ../libegg/libegg/tray/eggtrayicon.c:118
-#: ../libegg/libegg/tray/eggtraymanager.c:145
-msgid "Orientation"
-msgstr "Ориентация"
-
-#: ../libegg/libegg/tray/eggtrayicon.c:119
-#: ../libegg/libegg/tray/eggtraymanager.c:146
-msgid "The orientation of the tray."
-msgstr "Ориентацията на тавата."
-
-#: ../obex/gnome-obex-send.c:170
 #, c-format
-msgid "Unable to read file '%s'."
-msgstr "Не може да се прочете файла \"%s\"."
+#~ msgid "Created bonding with %s"
+#~ msgstr "Осъществено свързване с %s"
 
-#: ../obex/gnome-obex-send.c:200
-msgid "An error occurred while sending data."
-msgstr "Грешка при преноса на данни"
-
-#: ../obex/gnome-obex-send.c:203
-msgid "The remote device canceled the transfer."
-msgstr "Отдалеченото устройство отказа трансфера."
-
-#: ../obex/gnome-obex-send.c:206
-msgid "An unknown error occurred."
-msgstr "Непозната грешка"
-
-#: ../obex/gnome-obex-send.c:237
-msgid "Connecting..."
-msgstr "Свързване..."
-
-#: ../obex/gnome-obex-send.c:284
-msgid ""
-"Can't find user interface file, check your gnome-bluetooth installation."
-msgstr ""
-"Не може да се намери файла с потребителския интерфейс, проверете "
-"инсталацията на gnome-bluetooth."
-
-#: ../obex/gnome-obex-send.c:300
-msgid ""
-"Make sure \"Beam receive\" is enabled in the Power preferences, and "
-"Bluetooth is enabled."
-msgstr ""
-"Проверете дали в настройките за енергоспестяване е разрешено приемането на "
-"Bluetooth, както и дали Bluetooth въобще е включен."
-
-#: ../obex/gnome-obex-send.c:302
-msgid "Remote device doesn't support receiving objects."
-msgstr "Отдалеченото устройство не поддържа приемане на обекти."
-
-#: ../obex/gnome-obex-send.c:312
-msgid "Can't initialize program."
-msgstr "Не може да се стартира програмата."
-
-#: ../obex/gnome-obex-send.c:318
-msgid "Unable to connect to remote device."
-msgstr "Не може да се установи връзка с отдалеченото устройство."
-
-#: ../obex/gnome-obex-server.c:90
 #, c-format
-msgid "Accept a file from '%s'?"
-msgstr "Приемане на файл от \"%s\"?"
+#~ msgid "Removed bonding with %s"
+#~ msgstr "Премахнато е свързването с %s"
 
-#: ../obex/gnome-obex-server.c:91
-msgid ""
-"The remote device is attempting to send you a file via Bluetooth. Do you "
-"wish to allow the connection?"
+#~ msgid "Device has been switched off"
+#~ msgstr "Устройството е вече изключено"
+
+#~ msgid "Device has been made non-discoverable"
+#~ msgstr "Устройството е вече скрито за намиране"
+
+#~ msgid "Device has been made connectable"
+#~ msgstr "Устройството вече позволява свързване"
+
+#~ msgid "Device has been made discoverable"
+#~ msgstr "Устройството е вече достъпно за намиране"
+
+#~ msgid "Device has been made limited discoverable"
+#~ msgstr "Устройството е вече с ограничена откриваемост"
+
+#~ msgid "Device has been switched into pairing mode"
+#~ msgstr "Устройството е вече в режим на обмяна на ключове"
+
+#, c-format
+#~ msgid "Couldn't execute command: %s\n"
+#~ msgstr "Не може да се изпълни команда: %s\n"
+
+#~ msgid "Browse Devices"
+#~ msgstr "Преглед на устройства"
+
+#~ msgid "Select device to browse"
+#~ msgstr "Избиране на устройство за преглеждане"
+
+#~ msgid "Send File..."
+#~ msgstr "Изпращане на файл..."
+
+#~ msgid "Browse Device..."
+#~ msgstr "Преглеждане на устройство..."
+
+#~ msgid "Setup New Device"
+#~ msgstr "Настройване на ново устройство"
+
+#, c-format
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Запитване за свързване с '%s'"
+
+#~ msgid "Services"
+#~ msgstr "Услуги"
+
+#~ msgid "Authorization requests"
+#~ msgstr "Запитване за оторизация"
+
+#~ msgid "Automatically authorize incoming requests"
+#~ msgstr "Автоматично оторизиране на входящи запитвания"
+
+#~ msgid "Hardware database"
+#~ msgstr "База данни за хардуер"
+
+#~ msgid "Select class of device automatically"
+#~ msgstr "Избиране класа на устройството автоматично"
+
+#~ msgid "Available services"
+#~ msgstr "Налични услуги"
+
+#~ msgid "never"
+#~ msgstr "никога"
+
+#~ msgid "1 minute"
+#~ msgstr "1 минута"
+
+#, c-format
+#~ msgid "%g minutes"
+#~ msgstr "%g минути"
+
+#~ msgid "Set _Trusted"
+#~ msgstr "_Доверен"
+
+#~ msgid "Remove _Trust"
+#~ msgstr "_Недоверен"
+
+#~ msgid "Mode of operation"
+#~ msgstr "Режим на действие"
+
+#~ msgid "Other devices can connect"
+#~ msgstr "Други устройства могат да се свързват"
+
+#~ msgid "Visible and connectable for other devices"
+#~ msgstr "Видим и свързваем с други устройства"
+
+#~ msgid "Limited discoverable and connectable"
+#~ msgstr "Ограничени откриваемост и позволяване за свързване"
+
+#~ msgid "Make adapter invisible after:"
+#~ msgstr "Адаптера да става невидим след:"
+
+#~ msgid "Adapter name"
+#~ msgstr "Име на адаптер"
+
+#~ msgid "Class of device"
+#~ msgstr "Вид устройство"
+
+#~ msgid "Unspecified"
+#~ msgstr "Неопределен"
+
+#~ msgid "Desktop workstation"
+#~ msgstr "Настолна работна станция"
+
+#~ msgid "Laptop computer"
+#~ msgstr "Преносим компютър"
+
+#~ msgid "Bonded devices"
+#~ msgstr "Свързани усройства"
+
+#~ msgid "Search"
+#~ msgstr "Търсене"
+
+#: ../common/bluetooth-client.c:82
+msgid "All types"
 msgstr ""
-"Отдалеченото устройство се опитва да ви прати файл по Bluetooth. Желаете ли "
-"да приемете връзката?"
 
-#: ../obex/gnome-obex-server.c:92
-msgid "Always accept files from this device."
-msgstr "Винаги да се приемат файлове от това устройство."
+#: ../common/bluetooth-client.c:84
+msgid "Phone"
+msgstr ""
 
-#. add your name and email address in here if you've translated
-#. this program
-#: ../obex/gnome-obex-server.c:288
+#: ../common/bluetooth-client.c:86
+msgid "Modem"
+msgstr ""
+
+#: ../common/bluetooth-client.c:88
+msgid "Computer"
+msgstr ""
+
+#: ../common/bluetooth-client.c:90
+msgid "Network"
+msgstr ""
+
+#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+msgid "Headset"
+msgstr "Слушалки"
+
+#: ../common/bluetooth-client.c:94
+msgid "Headphone"
+msgstr ""
+
+#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+msgid "Mouse"
+msgstr "Мишка"
+
+#: ../common/bluetooth-client.c:100
+msgid "Camera"
+msgstr ""
+
+#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+msgid "Printer"
+msgstr "Принтер"
+
+#: ../common/bluetooth-client.c:104
+msgid "Joypad"
+msgstr ""
+
+#: ../common/bluetooth-client.c:106
+msgid "Tablet"
+msgstr ""
+
+#: ../common/bluetooth-client.c:108
+msgid "Unknown"
+msgstr ""
+
+#: ../common/helper.c:162
+msgid "Select Device"
+msgstr ""
+
+#: ../common/helper.c:222
+msgid "Choose files to send"
+msgstr ""
+
+#: ../applet/main.c:123
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Управление на Bluetooth поддръжката в работната среда GNOME"
+
+#: ../applet/main.c:126 ../analyzer/dialog.c:128
 msgid "translator-credits"
-msgstr "Ростислав \"zbrox\" Райков <zbrox@i-space.org>"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Georgi Arabadjiev https://launchpad.net/~devismaster\n"
+"  Launchpad Translations Administrators https://launchpad.net/~rosetta-"
+"admins\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Emil Pavlov https://launchpad.net/~emil-p-pavlov\n"
+"  Launchpad Translations Administrators https://launchpad.net/~rosetta-"
+"admins\n"
+"  Marcel Holtmann https://launchpad.net/~holtmann"
 
-#. When try icon is destroyed, recreate it.  This happens
-#. when the notification area is removed.
-#. *
-#. * TODO:
-#. *
-#. * ensure it only gets invoked once
-#. * display sensible error dialogs
-#. * think about fancy received-file actions
-#. *	 - should we send vcards to evo, etc?
-#.
-#: ../obex/gnome-obex-server.c:298 ../obex/gnome-obex-server.c:350
-#: ../obex/gnome-obex-server.desktop.in.h:1
-msgid "Bluetooth File Sharing"
-msgstr "Споделяне на файлове по Bluetooth"
+#: ../applet/main.c:177 ../applet/main.c:232
+msgid "Setup new device..."
+msgstr ""
 
-#: ../obex/gnome-obex-server.c:300
-msgid "Receive files from Bluetooth devices"
-msgstr "Получаване на файлове от Bluetooth устройства"
+#: ../applet/main.c:242
+msgid "Send files to device..."
+msgstr ""
 
-#: ../obex/gnome-obex-server.c:407
-msgid "Bluetooth File Server"
-msgstr "Bluetooth файлов сървър"
+#: ../applet/main.c:250
+msgid "Browse files on device..."
+msgstr ""
 
-#: ../obex/gnome-obex-server.c:445
-msgid "Ready for Bluetooth file transfers"
-msgstr "Готов за Bluetooth файлови трансфери"
+#: ../applet/main.c:373
+msgid "Bluetooth Applet"
+msgstr "Аплет \"Bluetooth\""
 
-#: ../obex/gnome-obex-server.desktop.in.h:2
-msgid "Receive files sent by Bluetooth devices"
-msgstr "Получаване на файлове изпратени от blueetooth устройства"
+#: ../applet/agent.c:258
+msgid "Authentication request"
+msgstr "Изискване за идентификация"
 
-#: ../python/gnome-bluetooth-manager.desktop.in.h:1
+#: ../applet/agent.c:286 ../applet/agent.c:395
+msgid "Pairing request for device:"
+msgstr "Изискване за свързване за устройство:"
+
+#: ../applet/agent.c:303
+msgid "Enter passkey for authentication:"
+msgstr "Въведете парола за идентификация"
+
+#: ../applet/agent.c:327
+msgid "Show input"
+msgstr "Показване на входящи данни"
+
+#: ../applet/agent.c:369
+msgid "Confirmation request"
+msgstr "Изискване за подтвърждение"
+
+#: ../applet/agent.c:412
+msgid "Confirm value for authentication:"
+msgstr "Потвърждаване на стойноста за автентикация:"
+
+#: ../applet/agent.c:456
+msgid "Authorization request"
+msgstr "Изискване на оторизация"
+
+#: ../applet/agent.c:482
+msgid "Authorization request for device:"
+msgstr "Изискване на оторизация за устройство:"
+
+#: ../applet/agent.c:503
+#, c-format
+msgid "Grant access to %s?"
+msgstr "Осигуряване на достъп на %s?"
+
+#: ../applet/agent.c:512
+msgid "Always grant access"
+msgstr "Осигуряване на достъп винаги"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#, c-format
+msgid "Pairing request for %s"
+msgstr ""
+
+#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
+#: ../applet/agent.c:736 ../applet/agent.c:781
+msgid "Bluetooth device"
+msgstr "Bluetooth устройство"
+
+#: ../applet/agent.c:591
+msgid "Enter PIN code"
+msgstr ""
+
+#: ../applet/agent.c:638 ../applet/agent.c:688
+msgid "Enter passkey"
+msgstr ""
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:732
+#, c-format
+msgid "Confirmation request for %s"
+msgstr ""
+
+#: ../applet/agent.c:737
+msgid "Confirm passkey"
+msgstr ""
+
+#: ../applet/agent.c:777
+#, c-format
+msgid "Authorization request for %s"
+msgstr "Запитване за оторизация на %s"
+
+#: ../applet/agent.c:782
+msgid "Check authorization"
+msgstr ""
+
+#: ../applet/bluetooth-applet.desktop.in.h:1
 msgid "Bluetooth Manager"
 msgstr "Bluetooth управление"
 
-#: ../python/gnome-bluetooth-manager.desktop.in.h:2
-msgid "Display Bluetooth devices and their properties"
-msgstr "Показване на Bluetooth устройства и техните възможности"
+#: ../applet/bluetooth-applet.desktop.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Аплет за управление на Bluetooth устройства"
 
-#: ../python/manager.py:54
-msgid "Bluetooth Device Manager"
-msgstr "Управление на bluetooth устройства"
+#: ../properties/main.c:63
+msgid "Bluetooth Preferences"
+msgstr "Настройки на Bluetooth"
 
-#: ../python/manager.py:86
-msgid "Could not find Bluetooth devices on the system"
-msgstr "Не могат да се открият Bluetooth устройства"
+#: ../properties/main.c:94
+msgid "General"
+msgstr "Главен"
 
-#: ../python/manager.py:86
-msgid ""
-"Please make sure that your Bluetooth adapter is correctly plugged in your "
-"machine."
+#: ../properties/main.c:131
+msgid "Bluetooth Properties"
 msgstr ""
-"Уверете се, че вашият Bluetooth адаптер е правилно включен в компютъра Ви."
 
-#: ../python/manager.py:97
-msgid "Bluetooth devices"
-msgstr "Bluetooth устройства"
+#: ../properties/general.c:172
+msgid "File transfer"
+msgstr ""
 
-#: ../python/manager.py:112
-msgid "_Devices"
-msgstr "Устройства"
+#: ../properties/general.c:176
+msgid "Receive files from remote devices"
+msgstr ""
 
-#: ../python/manager.py:116
-msgid "_Scan"
-msgstr "Сканиране"
+#: ../properties/general.c:184
+msgid "Share files from public folder"
+msgstr ""
 
-#: ../python/manager.py:128
+#: ../properties/general.c:195
+msgid "Notification area"
+msgstr "Плот за известяване"
+
+#: ../properties/general.c:199
+msgid "Never display icon"
+msgstr "Никога да не се показва иконата"
+
+#: ../properties/general.c:206
+msgid "Only display when adapter present"
+msgstr "Показване само, ако има наличен адаптор"
+
+#: ../properties/general.c:213
+msgid "Always display icon"
+msgstr "Винаги да се показва иконата"
+
+#: ../properties/adapter.c:99
+msgid "Adapter"
+msgstr "Адаптер"
+
+#: ../properties/adapter.c:174
+msgid "always"
+msgstr ""
+
+#: ../properties/adapter.c:176
+msgid "hidden"
+msgstr ""
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "%'g minute"
+msgid_plural "%'g minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../properties/adapter.c:477
+msgid "Visibility setting"
+msgstr ""
+
+#: ../properties/adapter.c:490
+msgid "Hidden"
+msgstr ""
+
+#: ../properties/adapter.c:502
+msgid "Always visible"
+msgstr ""
+
+#: ../properties/adapter.c:514
+msgid "Temporary visible"
+msgstr ""
+
+#: ../properties/adapter.c:566
+msgid "Friendly name"
+msgstr ""
+
+#: ../properties/adapter.c:587
+msgid "Known devices"
+msgstr ""
+
+#: ../properties/dialog.c:41
+msgid "Remove from list of known devices?"
+msgstr ""
+
+#: ../properties/dialog.c:42
+msgid ""
+"If you delete the device, you have to set it up again before next use."
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:1
+msgid "Bluetooth"
+msgstr ""
+
+#: ../properties/bluetooth-properties.desktop.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Настройване на Bluetooth"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid ""
+"Display options for the notification icon. Valid options are \"never\", "
+"\"present\" and \"always\"."
+msgstr ""
+"Показване на опциите за известяващата икона. Валидни опции са \"never\", "
+"\"present\" и \"always\""
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "If Bluetooth file sharing is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:3
+msgid "If receiving of remote files via Bluetooth is enabled"
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:4
+msgid ""
+"If the service for receiving remote files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:5
+msgid "If the service for sharing files via Bluetooth is enabled or not."
+msgstr ""
+
+#: ../properties/bluetooth-manager.schemas.in.h:6
+msgid "When to show the notification icon"
+msgstr "Кога да се показва известяващата икона"
+
+#: ../wizard/main.c:75
+#, c-format
+msgid "Please enter the following PIN code: %s"
+msgstr ""
+
+#: ../wizard/main.c:94
+#, c-format
+msgid "Please enter the following passkey: %s%s"
+msgstr ""
+
+#: ../wizard/main.c:115
+#, c-format
+msgid "Pairing with %s canceled"
+msgstr ""
+
+#: ../wizard/main.c:118
+#, c-format
+msgid "Pairing with %s finished"
+msgstr ""
+
+#: ../wizard/main.c:145
+#, c-format
+msgid "Successfully paired with %s"
+msgstr ""
+
+#: ../wizard/main.c:159
+#, c-format
+msgid "Pairing with %s failed"
+msgstr ""
+
+#: ../wizard/main.c:193
+#, c-format
+msgid "Connecting to %s now ..."
+msgstr ""
+
+#: ../wizard/main.c:264
+msgid "Introduction"
+msgstr ""
+
+#: ../wizard/main.c:265
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr ""
+
+#: ../wizard/main.c:268
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer.\n"
+"\n"
+msgstr ""
+
+#: ../wizard/main.c:303
+msgid "Device type"
+msgstr ""
+
+#: ../wizard/main.c:304
+msgid "Select the type of device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:316
+msgid "Mobile phone"
+msgstr ""
+
+#: ../wizard/main.c:331
+msgid "Any device"
+msgstr ""
+
+#: ../wizard/main.c:392
+msgid "Device search"
+msgstr ""
+
+#: ../wizard/main.c:393
+msgid "Select the device you want to setup"
+msgstr ""
+
+#: ../wizard/main.c:428
+msgid "Device setup"
+msgstr ""
+
+#: ../wizard/main.c:429
+msgid "Setting up new device"
+msgstr ""
+
+#: ../wizard/main.c:451
+msgid "Summary"
+msgstr ""
+
+#: ../wizard/main.c:452
+msgid "Succesfully configured new device"
+msgstr ""
+
+#: ../wizard/main.c:462
+msgid "Bluetooth Device Wizard"
+msgstr ""
+
+#: ../sendto/main.c:93
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:98 ../sendto/main.c:111
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:109
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:119
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../sendto/main.c:145
+msgid "File Transfer"
+msgstr ""
+
+#: ../sendto/main.c:162
+msgid "Sending files via Bluetooth"
+msgstr ""
+
+#: ../sendto/main.c:174
+msgid "From:"
+msgstr ""
+
+#: ../sendto/main.c:190
+msgid "To:"
+msgstr ""
+
+#: ../sendto/main.c:206
+msgid "Connecting..."
+msgstr ""
+
+#: ../sendto/main.c:254
+#, c-format
+msgid "Sending %s"
+msgstr ""
+
+#: ../sendto/main.c:261 ../sendto/main.c:326
+#, c-format
+msgid "Sending file %d of %d"
+msgstr ""
+
+#: ../sendto/main.c:322
+#, c-format
+msgid "%d KB/s"
+msgstr ""
+
+#: ../sendto/main.c:324
+#, c-format
+msgid "%d B/s"
+msgstr ""
+
+#: ../sendto/main.c:373
+msgid "An unknown error occured"
+msgstr ""
+
+#: ../sendto/main.c:383
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+
+#: ../sendto/main.c:554 ../browse/main.c:38
+msgid "Remote device to use"
+msgstr ""
+
+#: ../analyzer/main.c:166
+msgid "Saving of protocol trace failed"
+msgstr ""
+
+#: ../analyzer/main.c:313
+msgid "Loading Trace"
+msgstr ""
+
+#: ../analyzer/main.c:317
+msgid "Live Import"
+msgstr ""
+
+#: ../analyzer/main.c:321
+msgid "Protocol Trace"
+msgstr ""
+
+#: ../analyzer/main.c:326
+msgid "Unsaved"
+msgstr "Несъхранен"
+
+#: ../analyzer/main.c:609
+msgid "Can't live import from"
+msgstr ""
+
+#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
+msgid "Bluetooth Analyzer"
+msgstr ""
+
+#: ../analyzer/main.c:856
+msgid "_File"
+msgstr "_Файл"
+
+#: ../analyzer/main.c:886
+msgid "Open _Recent"
+msgstr ""
+
+#: ../analyzer/main.c:933
 msgid "_Edit"
-msgstr "Редакция"
+msgstr "_Редактиране"
 
-#: ../python/manager.py:136
+#: ../analyzer/main.c:942
+msgid "_View"
+msgstr "_Изглед"
+
+#: ../analyzer/main.c:947
+msgid "_Full Screen"
+msgstr "_Цял екран"
+
+#: ../analyzer/main.c:954
+msgid "_Tools"
+msgstr ""
+
+#: ../analyzer/main.c:959
+msgid "_Debug Packet List"
+msgstr ""
+
+#: ../analyzer/main.c:968
 msgid "_Help"
-msgstr "Помощ"
+msgstr "_Помощ"
 
-#: ../python/manager.py:209
-#, python-format
-msgid "Found device %s."
-msgstr "Открито е устройството %s."
-
-#: ../python/manager.py:214
-#, python-format
-msgid "Device %s is called '%s'."
-msgstr "Устройството %s се нарича \"%s\"."
-
-#: ../python/manager.py:222
-msgid "Scanning for devices..."
-msgstr "Сканиране за устройства..."
-
-#: ../python/manager.py:226
-msgid "Retrieving device names..."
-msgstr "Взимане на имената на устройствата..."
-
-#: ../python/manager.py:230
-msgid "Scan complete."
-msgstr "Сканирането завършено"
-
-#: ../python/manager.py:236
-msgid "Error during scan."
-msgstr "Грешка при сканирането."
-
-#: ../python/manager.py:258
-msgid "Copyright Â© Edd Dumbill 2003"
-msgstr "Всички права запазени Â© Edd Dumbill 2003"
-
-#: ../python/manager.py:259
-msgid "Manage remote Bluetooth devices."
-msgstr "Управление на отдалечени Bluetooth устройства."
-
-#: ../src/chooser.gob:109
-msgid "Choose Bluetooth device"
-msgstr "Избор на Bluetooth устройство"
-
-#: ../src/chooser.gob:151
-msgid "Device"
-msgstr "Устройство"
-
-#: ../src/fileactiondialog.gob:130
-msgid "Bluetooth Transfer Received"
-msgstr "Bluetooth трансфер получен"
-
-#. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:136
-#, c-format
-msgid "File received from '%s'. What would you like to do?"
-msgstr "Получен е файл от \"%s\". Какво желаете да направите?"
-
-#: ../src/fileactiondialog.gob:166
-#, c-format
-msgid ""
-"<span weight='bold'>Name:</span> %s\n"
-"<span weight='bold'>Type:</span> %s\n"
-"<span weight='bold'>Size:</span> %s"
+#: ../analyzer/dialog.c:110
+msgid "Bluetooth protocol analyzer"
 msgstr ""
-"<span weight='bold'>Име:</span> %s\n"
-"<span weight='bold'>Вид:</span> %s\n"
-"<span weight='bold'>Размер:</span> %s"
 
-#: ../src/permissiondialog.gob:106
-#, c-format
-msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Позволяване на връзка на Bluetooth устройството \"%s\"?"
+#: ../analyzer/dialog.c:140
+msgid "All Files"
+msgstr "Всички файлове"
 
-#: ../src/permissiondialog.gob:122
-msgid ""
-"An external device is attempting to connect to your computer via Bluetooth. "
-"You must decide if you want to accept the connection."
+#: ../analyzer/dialog.c:145
+msgid "Supported Files"
+msgstr "Поддържани файлове"
+
+#: ../analyzer/dialog.c:154
+msgid "Frontline BTSnoop Files"
 msgstr ""
-"Външно устройство се опитва да се свърже с компютъра Ви по Bluetooth. Трябва "
-"да решите дали да приеме връзката."
 
-#: ../src/permissiondialog.gob:128
-msgid "_Always allow this device to connect."
-msgstr "Позволяване на връзка на това устройство"
+#: ../analyzer/dialog.c:160
+msgid "Apple Packet Logger Files"
+msgstr ""
 
-#: ../ui/gnome-obex-send.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Изпращане на файл</span>"
+#: ../analyzer/dialog.c:175
+msgid "By Extension"
+msgstr "По разширение"
 
-#: ../ui/gnome-obex-send.glade.h:2
-msgid "Bluetooth file transfer"
-msgstr "Пренос на файлове с Bluetooth"
+#: ../analyzer/dialog.c:180
+msgid "Frontline BTSnoop Format"
+msgstr ""
+
+#: ../analyzer/dialog.c:185
+msgid "Apple Packet Logger Format"
+msgstr ""
+
+#: ../analyzer/dialog.c:249
+msgid "Select File _Type"
+msgstr ""
+
+#: ../analyzer/dialog.c:292
+msgid "File Type"
+msgstr "Вид файл"
+
+#: ../analyzer/dialog.c:297
+msgid "Extensions"
+msgstr "Приставки"
+
+#: ../analyzer/dialog.c:331
+msgid "Save File"
+msgstr "Запис на файл"
+
+#: ../analyzer/dialog.c:373
+msgid "Open File"
+msgstr "Отваряне на файл"
+
+#: ../analyzer/dialog.c:455
+msgid "Local connection"
+msgstr "Локална връзка"
+
+#: ../analyzer/dialog.c:463
+msgid "Remote connection"
+msgstr "Отдалечена връзка"
+
+#: ../analyzer/dialog.c:497
+msgid "Open Import"
+msgstr ""
+
+#: ../analyzer/dialog.c:537
+msgid "Save the protocol trace before closing?"
+msgstr ""
+
+#: ../analyzer/dialog.c:538
+msgid "If you don't save, all information will be permanently lost."
+msgstr "Ако не запишете, цялата информация ще бъде загубена."
+
+#: ../analyzer/dialog.c:546
+msgid "Close _without Saving"
+msgstr "Затваряне _без запазване"
+
+#: ../analyzer/dialog.c:576
+msgid "There is"
+msgstr ""
+
+#: ../analyzer/dialog.c:576
+msgid "There are"
+msgstr ""
+
+#: ../analyzer/dialog.c:577
+msgid "unsaved protocol trace."
+msgstr ""
+
+#: ../analyzer/dialog.c:578
+msgid "unsaved protocol traces."
+msgstr ""
+
+#: ../analyzer/dialog.c:579
+msgid "If you quit now, all information will be lost."
+msgstr "Ако излезете сега, цялата информация ще бъде загубена."
+
+#: ../analyzer/dialog.c:589
+msgid "_Discard Changes"
+msgstr "_Отказване от промените"
+
+#: ../analyzer/tracer.c:250
+msgid "Type"
+msgstr "Вид"
+
+#: ../analyzer/tracer.c:258
+msgid "Packet"
+msgstr "Пакет"
+
+#: ../analyzer/tracer.c:267
+msgid "Timestamp"
+msgstr ""
+
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
+msgid "Analyze Bluetooth traces"
+msgstr ""
+
+#: ../analyzer/bluetooth-manager.xml.in.h:1
+msgid "Apple Packet Logger File"
+msgstr ""
+
+#: ../analyzer/bluetooth-manager.xml.in.h:2
+msgid "Frontline BTSnoop File"
+msgstr ""

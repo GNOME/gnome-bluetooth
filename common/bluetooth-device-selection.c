@@ -1,0 +1,816 @@
+/*
+ *
+ *  BlueZ - Bluetooth protocol stack for Linux
+ *
+ *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2006-2007  Bastien Nocera <hadess@hadess.net>
+ *
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <gtk/gtk.h>
+
+#include <glib/gi18n-lib.h>
+
+#include "client.h"
+
+#include "bluetooth-device-selection.h"
+
+enum {
+	SELECTED_DEVICE_CHANGED,
+	LAST_SIGNAL
+};
+
+static int selection_table_signals[LAST_SIGNAL] = { 0 };
+
+#define BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
+										 BLUETOOTH_TYPE_DEVICE_SELECTION, BluetoothDeviceSelectionPrivate))
+
+typedef struct _BluetoothDeviceSelectionPrivate BluetoothDeviceSelectionPrivate;
+
+struct _BluetoothDeviceSelectionPrivate {
+	BluetoothClient *client;
+	GtkTreeSelection *selection;
+	GtkTreeModel *model, *filter;
+	GtkWidget *label;
+
+	gulong discov_started_id;
+	gulong discov_completed_id;
+	gulong default_adapter_changed_id;
+
+	/* Widgets/UI bits that can be shown or hidden */
+	GtkCellRenderer *bonded_cell;
+	GtkWidget *treeview;
+	GtkWidget *search_button;
+	GtkWidget *device_type_label, *device_type;
+	GtkWidget *device_category_label, *device_category;
+	GtkWidget *filters_vbox;
+
+	/* Current filter */
+	int device_type_filter;
+	int device_category_filter;
+
+	guint show_bonded : 1;
+	guint show_search : 1;
+	guint show_device_type : 1;
+	guint show_device_category : 1;
+};
+
+G_DEFINE_TYPE(BluetoothDeviceSelection, bluetooth_device_selection, GTK_TYPE_VBOX)
+
+static const char *
+bluetooth_device_category_to_string (int type)
+{
+	switch (type) {
+	case BLUETOOTH_CATEGORY_ALL:
+		return N_("All categories");
+	case BLUETOOTH_CATEGORY_BONDED:
+		return N_("Bonded");
+	case BLUETOOTH_CATEGORY_TRUSTED:
+		return N_("Trusted");
+	default:
+		return N_("Unknown");
+	}
+}
+
+static int
+int_log2(int v)
+{
+	int rv = 0;
+	while (v >>= 1)
+		rv++;
+	return rv;
+}
+
+static void
+name_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	gchar *address;
+	gchar *name;
+
+	gtk_tree_model_get (model, iter, COLUMN_ADDRESS, &address,
+			    COLUMN_NAME, &name, -1);
+
+	/* If we don't have a name, replace the name with the
+	 * Bluetooth address, with the ":" replaced by "-" */
+	if (name == NULL) {
+		name = g_strdup (address);
+		g_strdelimit (name, ":", '-');
+	}
+
+	g_object_set (cell, "text", name ? name : address, NULL);
+
+	g_free (name);
+	g_free (address);
+}
+
+static void
+type_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	guint type;
+
+	gtk_tree_model_get (model, iter, COLUMN_TYPE, &type, -1);
+
+	switch (type) {
+	case BLUETOOTH_TYPE_PHONE:
+		g_object_set (cell, "icon-name", "stock_cell-phone", NULL);
+		break;
+	case BLUETOOTH_TYPE_MODEM:
+		g_object_set (cell, "icon-name", "modem", NULL);
+		break;
+	case BLUETOOTH_TYPE_COMPUTER:
+		g_object_set (cell, "icon-name", "computer", NULL);
+		break;
+	case BLUETOOTH_TYPE_NETWORK:
+		g_object_set (cell, "icon-name", "network-wireless", NULL);
+		break;
+	case BLUETOOTH_TYPE_HEADSET:
+		g_object_set (cell, "icon-name", "stock_headphones", NULL);
+		break;
+	case BLUETOOTH_TYPE_HEADPHONE:
+		g_object_set (cell, "icon-name", "stock_headphones", NULL);
+		break;
+	case BLUETOOTH_TYPE_KEYBOARD:
+		g_object_set (cell, "icon-name", "input-keyboard", NULL);
+		break;
+	case BLUETOOTH_TYPE_MOUSE:
+		g_object_set (cell, "icon-name", "input-mouse", NULL);
+		break;
+	case BLUETOOTH_TYPE_CAMERA:
+		g_object_set (cell, "icon-name", "camera-photo", NULL);
+		break;
+	case BLUETOOTH_TYPE_PRINTER:
+		g_object_set (cell, "icon-name", "printer", NULL);
+		break;
+	default:
+		g_object_set (cell, "icon-name", "bluetooth", NULL);
+		break;
+	}
+}
+
+static void
+bonded_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	gboolean bonded;
+
+	gtk_tree_model_get (model, iter, COLUMN_BONDED, &bonded, -1);
+
+	if (bonded == FALSE)
+		g_object_set (cell, "stock-id", NULL, NULL);
+	else
+		g_object_set (cell, "stock-id", GTK_STOCK_DIALOG_AUTHENTICATION, NULL);
+}
+
+static void
+type_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	guint type;
+
+	gtk_tree_model_get (model, iter, COLUMN_TYPE, &type, -1);
+	if (type == 0)
+		g_object_set (cell, "text", _("Unknown"), NULL);
+	else
+		g_object_set (cell, "text", bluetooth_type_to_string (type), NULL);
+}
+
+void
+bluetooth_device_selection_start_discovery (BluetoothDeviceSelection *self)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+
+	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
+	bluetooth_client_discover_devices (priv->client, NULL);
+}
+
+gchar *
+bluetooth_device_selection_get_selected_device (BluetoothDeviceSelection *self)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	gchar *address;
+	gboolean selected;
+
+	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
+	if (selected == FALSE)
+		return NULL;
+
+	gtk_tree_model_get (priv->filter, &iter, COLUMN_ADDRESS, &address, -1);
+	return address;
+}
+
+gchar *
+bluetooth_device_selection_get_selected_device_name (BluetoothDeviceSelection *self)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	gchar *name;
+	gboolean selected;
+
+	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
+	if (selected == FALSE)
+		return NULL;
+
+	gtk_tree_model_get (priv->filter, &iter, COLUMN_NAME, &name, -1);
+	return name;
+}
+
+static void
+search_button_clicked (GtkButton *button, gpointer user_data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(user_data);
+
+	bluetooth_device_selection_start_discovery (self);
+}
+
+static void
+discovery_started (BluetoothClient *client, const char *adapter_path, gboolean is_default, gpointer user_data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(user_data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+
+	if (is_default)
+		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
+}
+
+static void
+discovery_completed (BluetoothClient *client, const char *adapter_path, gboolean is_default, gpointer user_data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(user_data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+
+	if (is_default)
+		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
+}
+
+static void
+select_browse_device_callback (GtkTreeSelection *selection, gpointer user_data)
+{
+	BluetoothDeviceSelection *self = user_data;
+	gchar *address;
+
+	g_object_notify (G_OBJECT(self), "device-selected");
+	address = bluetooth_device_selection_get_selected_device (self);
+	g_signal_emit (G_OBJECT (self),
+		       selection_table_signals[SELECTED_DEVICE_CHANGED],
+		       0, address);
+	g_free (address);
+}
+
+static gboolean
+filter_type_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelectionPrivate *priv)
+{
+	int type;
+
+	if (priv->device_type_filter == BLUETOOTH_TYPE_ANY)
+		return TRUE;
+
+	gtk_tree_model_get (model, iter, COLUMN_TYPE, &type, -1);
+	return (type & priv->device_type_filter);
+}
+
+static gboolean
+filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelectionPrivate *priv)
+{
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_ALL)
+		return TRUE;
+
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_BONDED) {
+		gboolean bonded;
+
+		gtk_tree_model_get (model, iter, COLUMN_BONDED, &bonded, -1);
+		return bonded;
+	}
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_TRUSTED) {
+		gboolean trusted;
+
+		gtk_tree_model_get (model, iter, COLUMN_TRUSTED, &trusted, -1);
+		return trusted;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+filter_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+
+	return filter_type_func (model, iter, priv) && filter_category_func (model, iter, priv);
+}
+
+static void
+filter_type_changed_cb (GtkComboBox *widget, gpointer data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+
+	priv->device_type_filter = 1 << gtk_combo_box_get_active (GTK_COMBO_BOX(priv->device_type));
+	if (priv->filter)
+		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
+	g_object_notify (G_OBJECT(self), "device-type-filter");
+}
+static void
+filter_category_changed_cb (GtkComboBox *widget, gpointer data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+
+	priv->device_category_filter = gtk_combo_box_get_active (GTK_COMBO_BOX(priv->device_category));
+	if (priv->filter)
+		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
+	g_object_notify (G_OBJECT(self), "device-category-filter");
+}
+
+static void default_adapter_changed (GObject    *gobject,
+				     GParamSpec *arg1,
+				     gpointer    data)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION (data);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	char *adapter;
+
+	g_object_get (gobject, "default-adapter", &adapter, NULL);
+
+	if (adapter == NULL) {
+		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), FALSE);
+		gtk_tree_view_set_model (GTK_TREE_VIEW(priv->treeview), NULL);
+	}
+
+	if (priv->model) {
+		g_object_unref (priv->model);
+		priv->model = NULL;
+	}
+
+	if (adapter == NULL)
+		return;
+
+	priv->model = bluetooth_client_get_model_with_filter (priv->client, NULL, NULL, NULL);
+	if (priv->model) {
+		priv->filter = gtk_tree_model_filter_new (priv->model, NULL);
+		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
+							filter_func, self, NULL);
+		gtk_tree_view_set_model (GTK_TREE_VIEW(priv->treeview), priv->filter);
+		g_object_unref (priv->filter);
+		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
+	}
+}
+
+static GtkWidget *
+create_treeview (BluetoothDeviceSelection *self)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	GtkWidget *scrolled, *tree;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+
+	/* Create the scrolled window */
+	scrolled = gtk_scrolled_window_new (NULL, NULL);
+
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(scrolled),
+					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW(scrolled),
+					     GTK_SHADOW_OUT);
+
+	/* Create the tree view */
+	tree = gtk_tree_view_new ();
+
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW(tree), TRUE);
+
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(tree), TRUE);
+
+	g_object_set (tree, "show-expanders", FALSE, NULL);
+
+	column = gtk_tree_view_column_new ();
+
+	gtk_tree_view_column_set_title (column, _("Device"));
+
+	/* The type icon */
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_set_spacing (column, 4);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+
+	gtk_tree_view_column_set_cell_data_func (column, renderer,
+						 type_to_icon, NULL, NULL);
+
+	/* The device name */
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+
+	gtk_tree_view_column_set_cell_data_func (column, renderer,
+						 name_to_text, NULL, NULL);
+
+	/* The bonded icon */
+	priv->bonded_cell = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_end (column, priv->bonded_cell, FALSE);
+
+	gtk_tree_view_column_set_cell_data_func (column, priv->bonded_cell,
+						 bonded_to_icon, NULL, NULL);
+
+	gtk_tree_view_append_column (GTK_TREE_VIEW(tree), column);
+
+	gtk_tree_view_column_set_min_width (GTK_TREE_VIEW_COLUMN(column), 280);
+
+	gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW(tree), -1,
+						    _("Type"), gtk_cell_renderer_text_new(),
+						    type_to_text, NULL, NULL);
+
+	priv->selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(tree));
+
+	gtk_tree_selection_set_mode (priv->selection, GTK_SELECTION_SINGLE);
+
+	g_signal_connect (G_OBJECT(priv->selection), "changed",
+			  G_CALLBACK(select_browse_device_callback), self);
+
+	/* Set the model, and filter */
+	priv->model = bluetooth_client_get_model_with_filter (priv->client, NULL, NULL, NULL);
+	if (priv->model) {
+		priv->filter = gtk_tree_model_filter_new (priv->model, NULL);
+		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
+							filter_func, self, NULL);
+		gtk_tree_view_set_model (GTK_TREE_VIEW(tree), priv->filter);
+		g_object_unref (priv->filter);
+	} else {
+		gtk_widget_set_sensitive (GTK_WIDGET (tree), FALSE);
+	}
+
+	gtk_container_add (GTK_CONTAINER(scrolled), tree);
+	priv->treeview = tree;
+
+	return scrolled;
+}
+
+static void
+bluetooth_device_selection_init(BluetoothDeviceSelection *self)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(self);
+	GtkTooltips *tooltips;
+	char *str;
+	int i;
+
+	GtkWidget *vbox;
+	GtkWidget *label;
+	GtkWidget *alignment;
+	GtkWidget *hbox;
+	GtkWidget *scrolled_window;
+	GtkWidget *table;
+
+	priv->show_bonded = FALSE;
+	priv->show_search = FALSE;
+
+	priv->client = bluetooth_client_new ();
+
+	priv->discov_started_id = g_signal_connect (G_OBJECT(priv->client),
+			"discovery-started", G_CALLBACK(discovery_started), self);
+	priv->discov_completed_id = g_signal_connect (G_OBJECT(priv->client),
+			"discovery-completed", G_CALLBACK(discovery_completed), self);
+
+	tooltips = gtk_tooltips_new ();
+
+	/* Setup the widget itself */
+	gtk_box_set_spacing (GTK_BOX(self), 18);
+	gtk_container_set_border_width (GTK_CONTAINER(self), 0);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (vbox);
+	gtk_box_pack_start (GTK_BOX (self), vbox, TRUE, TRUE, 0);
+
+	/* The top level label */
+	str = g_strdup_printf ("<b>%s</b>", _("Recognized Bluetooth Devices"));
+	priv->label = gtk_label_new (str);
+	g_free (str);
+	gtk_widget_show (priv->label);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->label, FALSE, TRUE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (priv->label), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (priv->label), 0, 0.5);
+
+	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
+	gtk_widget_show (alignment);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+
+	/* The treeview label */
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_widget_show (vbox);
+	gtk_container_add (GTK_CONTAINER (alignment), vbox);
+
+	hbox = gtk_hbox_new (FALSE, 24);
+	gtk_widget_show (hbox);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
+
+	label = gtk_label_new_with_mnemonic (_("_Select a device from the following list:"));
+	gtk_widget_show (label);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 1);
+
+	/* The search button */
+	priv->search_button = gtk_button_new_with_mnemonic (_("S_earch"));
+	gtk_widget_set_no_show_all (priv->search_button, TRUE);
+	gtk_box_pack_end (GTK_BOX (hbox), priv->search_button, FALSE, TRUE, 0);
+	g_signal_connect (G_OBJECT(priv->search_button), "clicked",
+			  G_CALLBACK(search_button_clicked), self);
+	gtk_tooltips_set_tip (tooltips, priv->search_button, _("Rescan Bluetooth devices"), NULL);
+	if (priv->show_search)
+		gtk_widget_show (priv->search_button);
+
+	/* The treeview */
+	scrolled_window = create_treeview (self);
+	gtk_widget_show_all (scrolled_window);
+	gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
+
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_widget_show (vbox);
+	gtk_box_pack_start (GTK_BOX (self), vbox, FALSE, TRUE, 0);
+	priv->filters_vbox = vbox;
+
+	/* The filters */
+	str = g_strdup_printf ("<b>%s</b>", _("Show Only Bluetooth Devices With..."));
+	label = gtk_label_new (str);
+	g_free (str);
+	gtk_widget_show (label);
+	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
+	gtk_widget_show (alignment);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+
+	table = gtk_table_new (2, 2, FALSE);
+	gtk_widget_show (table);
+	gtk_container_add (GTK_CONTAINER (alignment), table);
+	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
+	gtk_table_set_col_spacings (GTK_TABLE (table), 12);
+
+	/* The device category filter */
+	label = gtk_label_new_with_mnemonic (_("Device _category:"));
+	gtk_widget_set_no_show_all (label, TRUE);
+	gtk_widget_show (label);
+	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 1, 2,
+			  (GtkAttachOptions) (GTK_FILL),
+			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	priv->device_category_label = label;
+
+	priv->device_category = gtk_combo_box_new_text ();
+	gtk_widget_set_no_show_all (priv->device_category, TRUE);
+	gtk_widget_show (priv->device_category);
+	gtk_table_attach (GTK_TABLE (table), priv->device_category, 1, 2, 1, 2,
+			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_tooltips_set_tip (tooltips, priv->device_category, _("Select the device category to filter above list"), NULL);
+	for (i = 0; i < BLUETOOTH_CATEGORY_NUM_CATEGORIES; i++) {
+		gtk_combo_box_append_text (GTK_COMBO_BOX(priv->device_category),
+					   _(bluetooth_device_category_to_string (i)));
+	}
+	g_signal_connect (G_OBJECT (priv->device_category), "changed",
+			  G_CALLBACK(filter_category_changed_cb), self);
+	gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_category), priv->device_category_filter);
+	if (priv->show_device_category) {
+		gtk_widget_show (priv->device_category_label);
+		gtk_widget_show (priv->device_category);
+	}
+
+	/* The device type filter */
+	label = gtk_label_new_with_mnemonic (_("Device _type:"));
+	gtk_widget_set_no_show_all (label, TRUE);
+	gtk_widget_show (label);
+	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1,
+			  (GtkAttachOptions) (GTK_FILL),
+			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	priv->device_type_label = label;
+
+	priv->device_type = gtk_combo_box_new_text ();
+	gtk_widget_set_no_show_all (priv->device_type, TRUE);
+	gtk_widget_show (priv->device_type);
+	gtk_table_attach (GTK_TABLE (table), priv->device_type, 1, 2, 0, 1,
+			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_tooltips_set_tip (tooltips, priv->device_type, _("Select the device type to filter above list"), NULL);
+	/* The types match the types used in client.h */
+	for (i = 0; i < BLUETOOTH_TYPE_NUM_TYPES; i++) {
+		gtk_combo_box_append_text (GTK_COMBO_BOX(priv->device_type),
+					   _(bluetooth_type_to_string (1 << i)));
+	}
+	g_signal_connect (G_OBJECT (priv->device_type), "changed",
+			  G_CALLBACK(filter_type_changed_cb), self);
+	gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_type), int_log2(priv->device_type_filter));
+	if (priv->show_device_type) {
+		gtk_widget_show (priv->device_type_label);
+		gtk_widget_show (priv->device_type);
+	}
+
+	/* if filters are not visible hide the vbox */
+	if (!priv->show_device_type && !priv->show_device_category)
+		gtk_widget_hide (priv->filters_vbox);
+
+	priv->default_adapter_changed_id = g_signal_connect (priv->client, "notify::default-adapter",
+							     G_CALLBACK (default_adapter_changed), self);
+}
+
+static void
+bluetooth_device_selection_finalize (GObject *object)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
+
+	g_signal_handler_disconnect (G_OBJECT(priv->client), priv->discov_started_id);
+	g_signal_handler_disconnect (G_OBJECT(priv->client), priv->discov_completed_id);
+	g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
+
+	bluetooth_client_cancel_discovery (priv->client, NULL);
+}
+
+enum {
+	PROP_0,
+	PROP_TITLE,
+	PROP_DEVICE_SELECTED,
+	PROP_DEVICE_SELECTED_NAME,
+	PROP_SHOW_BONDING,
+	PROP_SHOW_SEARCH,
+	PROP_SHOW_DEVICE_TYPE,
+	PROP_SHOW_DEVICE_CATEGORY,
+	PROP_DEVICE_TYPE_FILTER,
+	PROP_DEVICE_CATEGORY_FILTER
+};
+
+static void
+bluetooth_device_selection_set_property (GObject *object, guint prop_id,
+					 const GValue *value, GParamSpec *pspec)
+{
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
+
+	switch (prop_id) {
+	case PROP_TITLE:
+		{
+			char *str;
+
+			if (!g_value_get_string(value))
+				break;
+
+			str = g_strdup_printf ("<b>%s</b>", g_value_get_string(value));
+			gtk_label_set_markup (GTK_LABEL(priv->label), str);
+			g_free (str);
+		}
+		break;
+	case PROP_SHOW_BONDING:
+		priv->show_bonded = g_value_get_boolean (value);
+		if (priv->bonded_cell != NULL)
+			g_object_set (G_OBJECT (priv->bonded_cell), "visible", priv->show_bonded, NULL);
+		break;
+	case PROP_SHOW_SEARCH:
+		priv->show_search = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (priv->search_button), "visible", priv->show_search, NULL);
+		break;
+	case PROP_SHOW_DEVICE_TYPE:
+		priv->show_device_type = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (priv->device_type_label), "visible", priv->show_device_type, NULL);
+		g_object_set (G_OBJECT (priv->device_type), "visible", priv->show_device_type, NULL);
+		if (priv->show_device_type || priv->show_device_category)
+			g_object_set (G_OBJECT (priv->filters_vbox), "visible", TRUE, NULL);
+		else
+			g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
+		break;
+	case PROP_SHOW_DEVICE_CATEGORY:
+		priv->show_device_category = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (priv->device_category_label), "visible", priv->show_device_category, NULL);
+		g_object_set (G_OBJECT (priv->device_category), "visible", priv->show_device_category, NULL);
+		if (priv->show_device_type || priv->show_device_category)
+			g_object_set (G_OBJECT (priv->filters_vbox), "visible", TRUE, NULL);
+		else
+			g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
+		break;
+	case PROP_DEVICE_TYPE_FILTER:
+		priv->device_type_filter = g_value_get_int (value);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_type), int_log2(priv->device_type_filter));
+		break;
+	case PROP_DEVICE_CATEGORY_FILTER:
+		priv->device_category_filter = g_value_get_int (value);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_category), priv->device_category_filter);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+bluetooth_device_selection_get_property (GObject *object, guint prop_id,
+					 GValue *value, GParamSpec *pspec)
+{
+	BluetoothDeviceSelection *self = BLUETOOTH_DEVICE_SELECTION(object);
+	BluetoothDeviceSelectionPrivate *priv = BLUETOOTH_DEVICE_SELECTION_GET_PRIVATE(object);
+
+	switch (prop_id) {
+	case PROP_DEVICE_SELECTED:
+		g_value_take_string (value, bluetooth_device_selection_get_selected_device (self));
+		break;
+	case PROP_DEVICE_SELECTED_NAME:
+		g_value_take_string (value, bluetooth_device_selection_get_selected_device_name (self));
+		break;
+	case PROP_SHOW_BONDING:
+		g_value_set_boolean (value, priv->show_bonded);
+		break;
+	case PROP_SHOW_SEARCH:
+		g_value_set_boolean (value, priv->show_search);
+		break;
+	case PROP_SHOW_DEVICE_TYPE:
+		g_value_set_boolean (value, priv->show_device_type);
+		break;
+	case PROP_SHOW_DEVICE_CATEGORY:
+		g_value_set_boolean (value, priv->show_device_category);
+		break;
+	case PROP_DEVICE_TYPE_FILTER:
+		g_value_set_int (value, priv->device_type_filter);
+		break;
+	case PROP_DEVICE_CATEGORY_FILTER:
+		g_value_set_int (value, priv->device_category_filter);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+bluetooth_device_selection_class_init (BluetoothDeviceSelectionClass *klass)
+{
+	g_type_class_add_private(klass, sizeof(BluetoothDeviceSelectionPrivate));
+
+	G_OBJECT_CLASS(klass)->finalize = bluetooth_device_selection_finalize;
+
+	G_OBJECT_CLASS(klass)->set_property = bluetooth_device_selection_set_property;
+	G_OBJECT_CLASS(klass)->get_property = bluetooth_device_selection_get_property;
+
+	selection_table_signals[SELECTED_DEVICE_CHANGED] =
+		g_signal_new ("selected-device-changed",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BluetoothDeviceSelectionClass, selected_device_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__STRING,
+			      G_TYPE_NONE, 1, G_TYPE_STRING);
+
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_TITLE, g_param_spec_string ("title",
+									  NULL, NULL, NULL, G_PARAM_WRITABLE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
+										    NULL, NULL, NULL, G_PARAM_READABLE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SELECTED_NAME, g_param_spec_string ("device-selected-name",
+										    NULL, NULL, NULL, G_PARAM_READABLE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_BONDING, g_param_spec_boolean ("show-bonding",
+										  NULL, NULL, FALSE, G_PARAM_READWRITE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_SEARCH, g_param_spec_boolean ("show-search",
+										 NULL, NULL, FALSE, G_PARAM_READWRITE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_DEVICE_TYPE, g_param_spec_boolean ("show-device-type",
+										      NULL, NULL, TRUE, G_PARAM_READWRITE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_DEVICE_CATEGORY, g_param_spec_boolean ("show-device-category",
+											  NULL, NULL, TRUE, G_PARAM_READWRITE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_TYPE_FILTER, g_param_spec_int ("device-type-filter", NULL, NULL,
+										    1, 1 << (BLUETOOTH_TYPE_NUM_TYPES - 1), 1, G_PARAM_READWRITE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_CATEGORY_FILTER, g_param_spec_int ("device-category-filter", NULL, NULL,
+					 						0, BLUETOOTH_CATEGORY_NUM_CATEGORIES, 0, G_PARAM_READWRITE));
+}
+
+GtkWidget *
+bluetooth_device_selection_new (const gchar *title)
+{
+	return g_object_new(BLUETOOTH_TYPE_DEVICE_SELECTION,
+			    "title", title,
+			    NULL);
+}
+

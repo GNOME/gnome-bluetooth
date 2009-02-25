@@ -1,374 +1,1007 @@
-# Swedish messages for gnome-bluetooth.
-# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
-# Daniel Nylander <po@danielnylander.se>, 2006.
-# Christian Rose <menthos@menthos.com>, 2004, 2005.
-#
-# $Id: sv.po,v 1.4 2006/05/11 17:43:03 dnylande Exp $
+# Swedish translation for bluez-gnome
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the bluez-gnome package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-19 09:45+0200\n"
-"PO-Revision-Date: 2007-08-19 09:47+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
-"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"Project-Id-Version: bluez-gnome\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-09-29 14:31+0200\n"
+"PO-Revision-Date: 2008-10-02 12:37+0000\n"
+"Last-Translator: Daniel Nylander <yeager@ubuntu.com>\n"
+"Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
-#: ../data/gnome-obex-server.schemas.in.h:1
-msgid "Directory to save received files"
-msgstr "Katalog för att spara mottagna filer"
+#~ msgid "All categories"
+#~ msgstr "Alla kategorier"
 
-#: ../data/gnome-obex-server.schemas.in.h:2
-msgid "Display dialog when file received"
-msgstr "Visa dialogfönster då en fil tas emot"
+#~ msgid "Bonded"
+#~ msgstr "Ihopparad"
 
-#: ../data/gnome-obex-server.schemas.in.h:3
-msgid "Incoming files are saved automatically into this directory. If display-notification is set then the user gets chance to open or delete them."
-msgstr "Inkommande filer sparas automatiskt i denna katalog. Om displaynotifiering är aktiverat får användaren en möjlighet att öppna eller ta bort dem."
+#~ msgid "Trusted"
+#~ msgstr "Pålitlig"
 
-#: ../data/gnome-obex-server.schemas.in.h:4
-msgid "Received files are automatically saved. If this option is set, then the user is prompted with a dialog which allows them to view or delete the received file."
-msgstr "Mottagna filer sparas automatiskt. Om detta alternativ är aktiverat kommer användaren att få ett dialogfönster som låter dem visa eller ta bort den mottagna filen."
+#~ msgid "Device"
+#~ msgstr "Enhet"
 
-#: ../obex/gnome-obex-send.c:193
+#~ msgid "Device _category:"
+#~ msgstr "Enhets_kategori:"
+
+#~ msgid "Device _type:"
+#~ msgstr "Enhets_typ:"
+
 #, c-format
-msgid "Unable to read file '%s'."
-msgstr "Kan inte läsa filen \"%s\"."
+#~ msgid "Created bonding with %s"
+#~ msgstr "Skapar relation med %s"
 
-#: ../obex/gnome-obex-send.c:224
-msgid "An error occurred while sending data."
-msgstr "Ett fel inträffade vid skickande av data."
+#, c-format
+#~ msgid "Removed bonding with %s"
+#~ msgstr "Tog bort relation med %s"
 
-#: ../obex/gnome-obex-send.c:227
-msgid "The remote device canceled the transfer."
-msgstr "Fjärrenheten avbröt överföringen."
+#~ msgid "Device has been switched off"
+#~ msgstr "Enheten är nu avstängd"
 
-#: ../obex/gnome-obex-send.c:230
-msgid "An unknown error occurred."
-msgstr "Ett oväntat fel inträffade."
+#~ msgid "Device has been made non-discoverable"
+#~ msgstr "Enheten är nu inte upptäckningsbar"
 
-#: ../obex/gnome-obex-send.c:263
+#~ msgid "Device has been made connectable"
+#~ msgstr "Enheten är nu anslutningsbar"
+
+#~ msgid "Device has been made discoverable"
+#~ msgstr "Enheten är nu upptäckningsbar"
+
+#~ msgid "Device has been made limited discoverable"
+#~ msgstr "Enheten är nu begränsat upptäckningsbar"
+
+#~ msgid "Device has been switched into pairing mode"
+#~ msgstr "Enheten har nu växlats till ihopparningsläge"
+
+#, c-format
+#~ msgid "Couldn't execute command: %s\n"
+#~ msgstr "Kunde inte köra kommando: %s\n"
+
+#~ msgid "Browse Devices"
+#~ msgstr "Bläddra enheter"
+
+#~ msgid "Select device to browse"
+#~ msgstr "Välj enhet att bläddra"
+
+#~ msgid "Send File..."
+#~ msgstr "Skicka fil..."
+
+#~ msgid "Browse Device..."
+#~ msgstr "Bläddra enhet..."
+
+#~ msgid "Setup New Device"
+#~ msgstr "Konfigurera ny enhet"
+
+#, c-format
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Ihopparningsbegäran för \"%s\""
+
+#~ msgid "Confirm pairing"
+#~ msgstr "Bekräfta ihopparning"
+
+#~ msgid "Services"
+#~ msgstr "Tjänster"
+
+#~ msgid "Authorization requests"
+#~ msgstr "Auktorisationsbegäran"
+
+#~ msgid "Automatically authorize incoming requests"
+#~ msgstr "Auktorisera automatiskt inkommande begäran"
+
+#~ msgid "Hardware database"
+#~ msgstr "Hårdvarudatabas"
+
+#~ msgid "Select class of device automatically"
+#~ msgstr "Välj automatiskt enhetsklass"
+
+#~ msgid "Available services"
+#~ msgstr "Tillgängliga tjänster"
+
+#~ msgid "never"
+#~ msgstr "aldrig"
+
+#~ msgid "1 minute"
+#~ msgstr "1 minut"
+
+#, c-format
+#~ msgid "%g minutes"
+#~ msgstr "%g minuter"
+
+#~ msgid "Set _Trusted"
+#~ msgstr "Ställ in som _pålitlig"
+
+#~ msgid "Remove _Trust"
+#~ msgstr "Ta bort som _pålitlig"
+
+#~ msgid "Mode of operation"
+#~ msgstr "Funktionsläge"
+
+#~ msgid "Other devices can connect"
+#~ msgstr "Andra enheter kan ansluta"
+
+#~ msgid "Visible and connectable for other devices"
+#~ msgstr "Synlig och anslutningsbar för andra enheter"
+
+#~ msgid "Limited discoverable and connectable"
+#~ msgstr "Begränsad upptäckningsbar och anslutningsbar"
+
+#~ msgid "Make adapter invisible after:"
+#~ msgstr "Gör adaptern osynlig efter:"
+
+#~ msgid "Adapter name"
+#~ msgstr "Adapternamn"
+
+#~ msgid "Class of device"
+#~ msgstr "Enhetsklass"
+
+#~ msgid "Unspecified"
+#~ msgstr "Inte angiven"
+
+#~ msgid "Desktop workstation"
+#~ msgstr "Skrivbordsdator"
+
+#~ msgid "Laptop computer"
+#~ msgstr "Bärbar dator"
+
+#~ msgid "Bonded devices"
+#~ msgstr "Ihopparade enheter"
+
+#~ msgid "Remove from list of bonded devices?"
+#~ msgstr "Ta bort från listan över ihopparade enheter?"
+
+#~ msgid ""
+#~ "If you delete the bonding, you have to re-pair the device before next use."
+#~ msgstr ""
+#~ "Om du tar bort ihopparningen så måste du para ihop enheterna igen innan "
+#~ "användning."
+
+#~ msgid "Remove device entry from service?"
+#~ msgstr "Ta bort enhetspost från tjänsten?"
+
+#~ msgid ""
+#~ "If you delete the device entry, you can't use it with this service anymore."
+#~ msgstr ""
+#~ "Om du tar bort enhetsposten så kan du inte längre använda den med denna "
+#~ "tjänst."
+
+#~ msgid "Connecting to device"
+#~ msgstr "Ansluter till enhet"
+
+#~ msgid "Select device"
+#~ msgstr "Välj enhet"
+
+#~ msgid "Show all devices"
+#~ msgstr "Visa alla enheter"
+
+#~ msgid "Create Device"
+#~ msgstr "Skapa enhet"
+
+#~ msgid "Audio devices"
+#~ msgstr "Ljudenheter"
+
+#~ msgid "connected"
+#~ msgstr "ansluten"
+
+#~ msgid "Input devices"
+#~ msgstr "Inmatningsenheter"
+
+#~ msgid "_Disconnect"
+#~ msgstr "_Koppla från"
+
+#~ msgid "Network devices"
+#~ msgstr "Nätverksenheter"
+
+#~ msgid "If HAL should be used for automatic preferences settings"
+#~ msgstr "Om HAL ska användas för automatiska inställningar"
+
+#~ msgid ""
+#~ "If HAL should be used to automatically adjust settings like class of device "
+#~ "etc."
+#~ msgstr ""
+#~ "Om HAL ska användas för att automatiskt justera inställningar såsom "
+#~ "enhetsklass etc."
+
+#~ msgid "If authorization requests should be automatically granted"
+#~ msgstr "Om auktoriseringsbegäran ska tillåtas automatiskt"
+
+#~ msgid ""
+#~ "If authorization requests should be granted all the time without asking the "
+#~ "user for confirmation."
+#~ msgstr ""
+#~ "Om auktoriseringsbegäran ska tillåtas hela tiden utan att fråga användaren "
+#~ "om att bekräfta."
+
+#~ msgid ""
+#~ "Switched device into\n"
+#~ "%s mode"
+#~ msgstr ""
+#~ "Växlade enhet till\n"
+#~ "läget %s"
+
+#~ msgid "Connecting to system bus failed: %s\n"
+#~ msgstr "Anslutning till systembussen misslyckades: %s\n"
+
+#~ msgid "<b>Notification area</b>"
+#~ msgstr "<b>Notifieringsyta</b>"
+
+#~ msgid "Bluetooth preferences"
+#~ msgstr "Inställningar för blåtand"
+
+#~ msgid "<b>Mode of operation</b>"
+#~ msgstr "<b>Operationsläge</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>Adapter name</b>"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Adapterns namn</b>"
+
+#~ msgid ""
+#~ "\n"
+#~ "<b>Class of device</b>"
+#~ msgstr ""
+#~ "\n"
+#~ "<b>Enhetsklass</b>"
+
+#~ msgid "Sort by RSSI"
+#~ msgstr "Sortera efter RSSI"
+
+#~ msgid "Icon view"
+#~ msgstr "Ikonvy"
+
+#~ msgid "Periodic discovery"
+#~ msgstr "Periodisk identifiering"
+
+#~ msgid "Stop discovery"
+#~ msgstr "Stoppa identifiering"
+
+#~ msgid ""
+#~ "The device wizard will walk you through the process of configuring Bluetooth "
+#~ "enabled devices for use with this computer."
+#~ msgstr ""
+#~ "Enhetsguiden kommer att ta dig genom konfigurationsprocessen för "
+#~ "blåtandsenheter för användning med den här datorn."
+
+#~ msgid ""
+#~ "\n"
+#~ "Enter passkey for authentication:"
+#~ msgstr ""
+#~ "\n"
+#~ "Ange lösennyckel för autentisering:"
+
+#~ msgid ""
+#~ "\n"
+#~ "Confirm value for authentication:"
+#~ msgstr ""
+#~ "\n"
+#~ "Bekräfta värde för autentisering:"
+
+#~ msgid ""
+#~ "Pairing request for %s\n"
+#~ "\n"
+#~ "Click to open passkey entry dialog"
+#~ msgstr ""
+#~ "Ihopparningsbegäran för %s\n"
+#~ "\n"
+#~ "Klicka för att öppna inmatningsfält för lösennyckel"
+
+#~ msgid ""
+#~ "Pairing request for %s\n"
+#~ "\n"
+#~ "Click to open confirmation dialog"
+#~ msgstr ""
+#~ "Ihopparningsbegäran för %s\n"
+#~ "\n"
+#~ "Klicka för att öppna bekräftelsedialogen"
+
+#~ msgid "Search for devices"
+#~ msgstr "Sök efter enheter"
+
+#~ msgid "Select file to send"
+#~ msgstr "Välj fil att skicka"
+
+#~ msgid "Select type of device you wanna setup"
+#~ msgstr "Välj enhetstyp att konfigurera"
+
+#~ msgid "Select device you wanna setup"
+#~ msgstr "Välj enhet att konfigurera"
+
+#~ msgid "Bluetooth device wizard"
+#~ msgstr "Enhetsguide för blåtand"
+
+#~ msgid "Search"
+#~ msgstr "Sök"
+
+#: ../common/bluetooth-client.c:82
+msgid "All types"
+msgstr "Alla typer"
+
+#: ../common/bluetooth-client.c:84
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../common/bluetooth-client.c:86
+msgid "Modem"
+msgstr "Modem"
+
+#: ../common/bluetooth-client.c:88
+msgid "Computer"
+msgstr "Dator"
+
+#: ../common/bluetooth-client.c:90
+msgid "Network"
+msgstr "Nätverk"
+
+#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+msgid "Headset"
+msgstr "Headset"
+
+#: ../common/bluetooth-client.c:94
+msgid "Headphone"
+msgstr "Hörlurar"
+
+#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+msgid "Keyboard"
+msgstr "Tangentbord"
+
+#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+msgid "Mouse"
+msgstr "Mus"
+
+#: ../common/bluetooth-client.c:100
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+msgid "Printer"
+msgstr "Skrivare"
+
+#: ../common/bluetooth-client.c:104
+msgid "Joypad"
+msgstr "Styrspak"
+
+#: ../common/bluetooth-client.c:106
+msgid "Tablet"
+msgstr "Ritbord"
+
+#: ../common/bluetooth-client.c:108
+msgid "Unknown"
+msgstr "Okänd"
+
+#: ../common/helper.c:162
+msgid "Select Device"
+msgstr "Välj enhet"
+
+#: ../common/helper.c:222
+msgid "Choose files to send"
+msgstr "Välj filer att skicka"
+
+#: ../applet/main.c:123
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "En blåtandshanterare för GNOME-skrivbordet"
+
+#: ../applet/main.c:126 ../analyzer/dialog.c:128
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Daniel Nylander https://launchpad.net/~yeager\n"
+"  Micke Karlsson https://launchpad.net/~mickek\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Daniel Nylander https://launchpad.net/~yeager\n"
+"  Per Osbeck https://launchpad.net/~perosb"
+
+#: ../applet/main.c:177 ../applet/main.c:232
+msgid "Setup new device..."
+msgstr "Konfigurera ny enhet..."
+
+#: ../applet/main.c:242
+msgid "Send files to device..."
+msgstr "Skicka filer till enhet..."
+
+#: ../applet/main.c:250
+msgid "Browse files on device..."
+msgstr "Bläddra i filer på enhet..."
+
+#: ../applet/main.c:373
+msgid "Bluetooth Applet"
+msgstr "Panelprogram för Bluetooth"
+
+#: ../applet/agent.c:258
+msgid "Authentication request"
+msgstr "Begäran om autentisering"
+
+#: ../applet/agent.c:286 ../applet/agent.c:395
+msgid "Pairing request for device:"
+msgstr "Ihopparningsbegäran för enhet:"
+
+#: ../applet/agent.c:303
+msgid "Enter passkey for authentication:"
+msgstr "Ange lösennyckel för autentisering:"
+
+#: ../applet/agent.c:327
+msgid "Show input"
+msgstr "Visa inmatning"
+
+#: ../applet/agent.c:369
+msgid "Confirmation request"
+msgstr "Begäran om bekräftelse"
+
+#: ../applet/agent.c:412
+msgid "Confirm value for authentication:"
+msgstr "Bekräfta värde för autentisering:"
+
+#: ../applet/agent.c:456
+msgid "Authorization request"
+msgstr "Begäran om auktorisering"
+
+#: ../applet/agent.c:482
+msgid "Authorization request for device:"
+msgstr "Begäran om auktorisering för enhet:"
+
+#: ../applet/agent.c:503
+#, c-format
+msgid "Grant access to %s?"
+msgstr "Tillåt åtkomst till %s?"
+
+#: ../applet/agent.c:512
+msgid "Always grant access"
+msgstr "Tillåt alltid åtkomst"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#, c-format
+msgid "Pairing request for %s"
+msgstr "Ihopparningsbegäran för %s"
+
+#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
+#: ../applet/agent.c:736 ../applet/agent.c:781
+msgid "Bluetooth device"
+msgstr "Blåtandsenhet"
+
+#: ../applet/agent.c:591
+msgid "Enter PIN code"
+msgstr "Ange PIN-kod"
+
+#: ../applet/agent.c:638 ../applet/agent.c:688
+msgid "Enter passkey"
+msgstr "Ange lösennyckel"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:732
+#, c-format
+msgid "Confirmation request for %s"
+msgstr "Begäran om bekräftelse för %s"
+
+#: ../applet/agent.c:737
+msgid "Confirm passkey"
+msgstr "Bekräfta lösennyckel"
+
+#: ../applet/agent.c:777
+#, c-format
+msgid "Authorization request for %s"
+msgstr "Auktoriseringsbegäran för %s"
+
+#: ../applet/agent.c:782
+msgid "Check authorization"
+msgstr "Kontrollera auktorisation"
+
+#: ../applet/bluetooth-applet.desktop.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Blåtandshanterare"
+
+#: ../applet/bluetooth-applet.desktop.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Panelprogram för blåtandshantering"
+
+#: ../properties/main.c:63
+msgid "Bluetooth Preferences"
+msgstr "Inställningar för Bluetooth"
+
+#: ../properties/main.c:94
+msgid "General"
+msgstr "Allmänt"
+
+#: ../properties/main.c:131
+msgid "Bluetooth Properties"
+msgstr "Egenskaper för Bluetooth"
+
+#: ../properties/general.c:172
+msgid "File transfer"
+msgstr "Filöverföring"
+
+#: ../properties/general.c:176
+msgid "Receive files from remote devices"
+msgstr "Ta emot filer från fjärrenheter"
+
+#: ../properties/general.c:184
+msgid "Share files from public folder"
+msgstr "Dela ut filer från publik mapp"
+
+#: ../properties/general.c:195
+msgid "Notification area"
+msgstr "Notifieringsyta"
+
+#: ../properties/general.c:199
+msgid "Never display icon"
+msgstr "Visa aldrig ikonen"
+
+#: ../properties/general.c:206
+msgid "Only display when adapter present"
+msgstr "Visa endast när adaptern är ansluten"
+
+#: ../properties/general.c:213
+msgid "Always display icon"
+msgstr "Visa alltid ikonen"
+
+#: ../properties/adapter.c:99
+msgid "Adapter"
+msgstr "Adapter"
+
+#: ../properties/adapter.c:174
+msgid "always"
+msgstr "alltid"
+
+#: ../properties/adapter.c:176
+msgid "hidden"
+msgstr "dold"
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "%'g minute"
+msgid_plural "%'g minutes"
+msgstr[0] "%'g minut"
+msgstr[1] "%'g minuter"
+
+#: ../properties/adapter.c:477
+msgid "Visibility setting"
+msgstr "Synlighetsinställning"
+
+#: ../properties/adapter.c:490
+msgid "Hidden"
+msgstr "Dold"
+
+#: ../properties/adapter.c:502
+msgid "Always visible"
+msgstr "Alltid synlig"
+
+#: ../properties/adapter.c:514
+msgid "Temporary visible"
+msgstr "Temporärt synlig"
+
+#: ../properties/adapter.c:566
+msgid "Friendly name"
+msgstr "Kortnamn"
+
+#: ../properties/adapter.c:587
+msgid "Known devices"
+msgstr "Kända enheter"
+
+#: ../properties/dialog.c:41
+msgid "Remove from list of known devices?"
+msgstr "Ta bort från listan över kända enheter?"
+
+#: ../properties/dialog.c:42
+msgid ""
+"If you delete the device, you have to set it up again before next use."
+msgstr ""
+"Om du tar bort enheten så behöver du konfigurera den än en gång om du "
+"behöver den igen."
+
+#: ../properties/bluetooth-properties.desktop.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Konfigurera blåtandsinställningar"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid ""
+"Display options for the notification icon. Valid options are \"never\", "
+"\"present\" and \"always\"."
+msgstr ""
+"Visningsalternativ för notifieringsikonen. Giltiga alternativ är \"never\", "
+"\"present\" och \"always\"."
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "If Bluetooth file sharing is enabled"
+msgstr "Om fildelning via Bluetooth är aktiverat"
+
+#: ../properties/bluetooth-manager.schemas.in.h:3
+msgid "If receiving of remote files via Bluetooth is enabled"
+msgstr "Om mottagning av fjärrfiler via Bluetooth är aktiverat"
+
+#: ../properties/bluetooth-manager.schemas.in.h:4
+msgid ""
+"If the service for receiving remote files via Bluetooth is enabled or not."
+msgstr ""
+"Om tjänsten för mottagning av fjärrfiler via Bluetooth är aktiverad eller "
+"inte."
+
+#: ../properties/bluetooth-manager.schemas.in.h:5
+msgid "If the service for sharing files via Bluetooth is enabled or not."
+msgstr ""
+"Om tjänsten för delning av filer via Bluetooth är aktiverad eller inte."
+
+#: ../properties/bluetooth-manager.schemas.in.h:6
+msgid "When to show the notification icon"
+msgstr "När notifieringsikonen ska visas"
+
+#: ../wizard/main.c:75
+#, c-format
+msgid "Please enter the following PIN code: %s"
+msgstr "Ange följande PIN-kod: %s"
+
+#: ../wizard/main.c:94
+#, c-format
+msgid "Please enter the following passkey: %s%s"
+msgstr "Ange följande lösennyckel: %s%s"
+
+#: ../wizard/main.c:115
+#, c-format
+msgid "Pairing with %s canceled"
+msgstr "Ihopparning med %s avbröts"
+
+#: ../wizard/main.c:118
+#, c-format
+msgid "Pairing with %s finished"
+msgstr "Ihopparning med %s är färdig"
+
+#: ../wizard/main.c:145
+#, c-format
+msgid "Successfully paired with %s"
+msgstr "Ihopparning med %s lyckades"
+
+#: ../wizard/main.c:159
+#, c-format
+msgid "Pairing with %s failed"
+msgstr "Ihopparning med %s misslyckades"
+
+#: ../wizard/main.c:193
+#, c-format
+msgid "Connecting to %s now ..."
+msgstr "Ansluter till %s nu ..."
+
+#: ../wizard/main.c:264
+msgid "Introduction"
+msgstr "Introduktion"
+
+#: ../wizard/main.c:265
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr "Välkommen till konfigurationsguiden för blåtandsenheter"
+
+#: ../wizard/main.c:268
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer.\n"
+"\n"
+msgstr ""
+"Enhetsguiden kommer att hjälpa dig genom processen att konfigurera "
+"blåtandsenheter för användning med denna dator.\n"
+"\n"
+
+#: ../wizard/main.c:303
+msgid "Device type"
+msgstr "Enhetstyp"
+
+#: ../wizard/main.c:304
+msgid "Select the type of device you want to setup"
+msgstr "Välj den enhetstyp som du vill konfigurera"
+
+#: ../wizard/main.c:316
+msgid "Mobile phone"
+msgstr "Mobiltelefon"
+
+#: ../wizard/main.c:331
+msgid "Any device"
+msgstr "Alla enheter"
+
+#: ../wizard/main.c:392
+msgid "Device search"
+msgstr "Enhetssökning"
+
+#: ../wizard/main.c:393
+msgid "Select the device you want to setup"
+msgstr "Välj enheten som du vill konfigurera"
+
+#: ../wizard/main.c:428
+msgid "Device setup"
+msgstr "Enhetskonfiguration"
+
+#: ../wizard/main.c:429
+msgid "Setting up new device"
+msgstr "Konfigurera ny enhet"
+
+#: ../wizard/main.c:451
+msgid "Summary"
+msgstr "Sammandrag"
+
+#: ../wizard/main.c:452
+msgid "Succesfully configured new device"
+msgstr "Konfiguration av ny enhet lyckades"
+
+#: ../wizard/main.c:462
+msgid "Bluetooth Device Wizard"
+msgstr "Guide för blåtandsenhet"
+
+#: ../sendto/main.c:93
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d sekund"
+msgstr[1] "%'d sekunder"
+
+#: ../sendto/main.c:98 ../sendto/main.c:111
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minut"
+msgstr[1] "%'d minuter"
+
+#: ../sendto/main.c:109
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d timme"
+msgstr[1] "%'d timmar"
+
+#: ../sendto/main.c:119
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "ungefär %'d timme"
+msgstr[1] "ungefär %'d timmar"
+
+#: ../sendto/main.c:145
+msgid "File Transfer"
+msgstr "Filöverföring"
+
+#: ../sendto/main.c:162
+msgid "Sending files via Bluetooth"
+msgstr "Skickar filer via Bluetooth"
+
+#: ../sendto/main.c:174
+msgid "From:"
+msgstr "Från:"
+
+#: ../sendto/main.c:190
+msgid "To:"
+msgstr "Till:"
+
+#: ../sendto/main.c:206
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: ../obex/gnome-obex-send.c:316
-msgid "Can't find user interface file, check your gnome-bluetooth installation."
-msgstr "Kan inte hitta användargränssnittsfil. Kontrollera din installation av gnome-bluetooth."
-
-#: ../obex/gnome-obex-send.c:332
-msgid "Make sure \"Beam receive\" is enabled in the Power preferences, and Bluetooth is enabled."
-msgstr "Se till att \"Beam receive\" är aktiverad i ströminställningarna och att Bluetooth är aktiverat."
-
-#: ../obex/gnome-obex-send.c:334
-msgid "Remote device doesn't support receiving objects."
-msgstr "Fjärrenheten stöder inte mottagande objekt."
-
-#: ../obex/gnome-obex-send.c:344
-msgid "Can't initialize program."
-msgstr "Kan inte initiera program."
-
-#: ../obex/gnome-obex-send.c:350
-msgid "Unable to connect to remote device."
-msgstr "Kan inte ansluta till fjärrenheten."
-
-#: ../obex/gnome-obex-server.c:161
+#: ../sendto/main.c:254
 #, c-format
-msgid "Accept a file from '%s'?"
-msgstr "Acceptera en fil från \"%s\"?"
+msgid "Sending %s"
+msgstr "Skickar %s"
 
-#: ../obex/gnome-obex-server.c:162
-msgid "The remote device is attempting to send you a file via Bluetooth. Do you wish to allow the connection?"
-msgstr "Fjärrenheten försöker att skicka en fil till dig via Bluetooth. Vill du tillåta anslutningen?"
-
-#: ../obex/gnome-obex-server.c:163
-msgid "Always accept files from this device."
-msgstr "Acceptera alltid filer från denna enhet."
-
-#. The name of the default downloads folder,
-#. * Needs to be the same as Epiphany's
-#: ../obex/gnome-obex-server.c:204
-msgid "Downloads"
-msgstr "Hämtningar"
-
-#: ../obex/gnome-obex-server.c:295
-msgid "Incoming Bluetooth file transfer"
-msgstr "Inkommande filöverföring via Bluetooth"
-
-#: ../obex/gnome-obex-server.c:337
-#: ../obex/gnome-obex-server.c:504
-msgid "Ready for Bluetooth file transfers"
-msgstr "Redo för filöverföringar via Bluetooth"
-
-#. *
-#. * TODO:
-#. *
-#. * ensure it only gets invoked once
-#. * display sensible error dialogs
-#. * think about fancy received-file actions
-#. *	 - should we send vcards to evo, etc?
-#.
-#: ../obex/gnome-obex-server.c:389
-#: ../obex/gnome-obex-server.desktop.in.h:1
-msgid "Bluetooth File Sharing"
-msgstr "Fildelning via Bluetooth"
-
-#: ../obex/gnome-obex-server.c:392
-msgid "Receive files from Bluetooth devices"
-msgstr "Mottag filer från blåtandsenheter"
-
-#. add your name and email address in here if you've translated
-#. * this program
-#.
-#: ../obex/gnome-obex-server.c:398
-msgid "translator-credits"
-msgstr ""
-"Daniel Nylander\n"
-"Christian Rose\n"
-"\n"
-"Skicka synpunkter på översättningen till\n"
-"tp-sv@listor.tp-sv.se"
-
-#: ../obex/gnome-obex-server.desktop.in.h:2
-msgid "Receive files sent by Bluetooth devices"
-msgstr "Ta emot filer som skickas av blåtandsenheter"
-
-#: ../src/chooser.gob:109
-msgid "Choose Bluetooth device"
-msgstr "Välj blåtandsenhet"
-
-#: ../src/chooser.gob:151
-msgid "Device"
-msgstr "Enhet"
-
-#: ../src/fileactiondialog.gob:132
-msgid "Bluetooth Transfer Received"
-msgstr "Blåtandsöverföring mottagen"
-
-#. FIXME: dname needs escaping
-#: ../src/fileactiondialog.gob:138
+#: ../sendto/main.c:261 ../sendto/main.c:326
 #, c-format
-msgid "File received from '%s'. What would you like to do?"
-msgstr "Fil mottagen från \"%s\". Vad vill du göra?"
+msgid "Sending file %d of %d"
+msgstr "Skickar fil %d av %d"
 
-#: ../src/fileactiondialog.gob:168
+#: ../sendto/main.c:322
 #, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:324
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:373
+msgid "An unknown error occured"
+msgstr "Ett okänt fel inträffade"
+
+#: ../sendto/main.c:383
 msgid ""
-"<span weight='bold'>Name:</span> %s\n"
-"<span weight='bold'>Type:</span> %s\n"
-"<span weight='bold'>Size:</span> %s"
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
 msgstr ""
-"<span weight='bold'>Namn:</span> %s\n"
-"<span weight='bold'>Typ:</span> %s\n"
-"<span weight='bold'>Storlek:</span> %s"
+"Försäkra dig om att enheten är påslagen samt att den accepterar "
+"blåtandsanslutningar"
 
-#: ../src/permissiondialog.gob:105
-#, c-format
-msgid "Allow Bluetooth device '%s' to connect?"
-msgstr "Tillåt blåtandsenheten \"%s\" att ansluta?"
+#: ../sendto/main.c:554 ../browse/main.c:38
+msgid "Remote device to use"
+msgstr "Fjärrenhet att använda"
 
-#: ../src/permissiondialog.gob:121
-msgid "An external device is attempting to connect to your computer via Bluetooth. You must decide if you want to accept the connection."
-msgstr "En extern enhet försöker att ansluta till din dator via Bluetooth. Du måste välja om du vill acceptera anslutningen."
+#: ../analyzer/main.c:166
+msgid "Saving of protocol trace failed"
+msgstr "Sparning av protokollspårning misslyckades"
 
-#: ../src/permissiondialog.gob:127
-msgid "_Always allow this device to connect."
-msgstr "_Tillåt alltid denna enhet att ansluta."
+#: ../analyzer/main.c:313
+msgid "Loading Trace"
+msgstr "Läser in spårningsfil"
 
-#: ../ui/gnome-obex-send.glade.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Sending file</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Skickar fil</span>"
+#: ../analyzer/main.c:317
+msgid "Live Import"
+msgstr "Direktimport"
 
-#: ../ui/gnome-obex-send.glade.h:2
-msgid "Bluetooth file transfer"
-msgstr "Filöverföring via Bluetooth"
+#: ../analyzer/main.c:321
+msgid "Protocol Trace"
+msgstr "Protokollspårning"
 
-#~ msgid "Selection mode"
-#~ msgstr "Markeringsläge"
-#~ msgid "The selection mode"
-#~ msgstr "Markeringsläget"
-#~ msgid "Sorted"
-#~ msgstr "Sorterad"
-#~ msgid "Icon list is sorted"
-#~ msgstr "Ikonlistan är sorterad"
-#~ msgid "Sort order"
-#~ msgstr "Sorteringsordning"
-#~ msgid "Sort direction the icon list should use"
-#~ msgstr "Sorteringsriktningen som ikonlistan ska använda"
-#~ msgid "Icon padding"
-#~ msgstr "Ikonmellanrum"
-#~ msgid "Number of pixels between icons"
-#~ msgstr "Antalet bildpunkter mellan ikoner"
-#~ msgid "Top margin"
-#~ msgstr "Överkantsmarginal"
-#~ msgid "Number of pixels in top margin"
-#~ msgstr "Antal bildpunkter i överkantsmarginalen"
-#~ msgid "Bottom margin"
-#~ msgstr "Underkantsmarginal"
-#~ msgid "Number of pixels in bottom margin"
-#~ msgstr "Antal bildpunkter i underkantsmarginalen"
-#~ msgid "Left margin"
-#~ msgstr "Vänstermarginal"
-#~ msgid "Number of pixels in left margin"
-#~ msgstr "Antal bildpunkter i vänstermarginalen"
-#~ msgid "Right margin"
-#~ msgstr "Högermarginal"
-#~ msgid "Number of pixels in right margin"
-#~ msgstr "Antal bildpunkter i högermarginalen"
-#~ msgid "Selection Box Color"
-#~ msgstr "Färg på markeringsruta"
-#~ msgid "Color of the selection box"
-#~ msgstr "Färg på markeringsrutan"
-#~ msgid "Selection Box Alpha"
-#~ msgstr "Alfavärde för markeringsrutan"
-#~ msgid "Opacity of the selection box"
-#~ msgstr "Opacitet för markeringsrutan"
-#~ msgid "Pixbuf"
-#~ msgstr "Pixbuf"
-#~ msgid "A GdkPixbuf to display"
-#~ msgstr "En GdkPixbuf att visa"
-#~ msgid "Filename"
-#~ msgstr "Filnamn"
-#~ msgid "Filename to load and display"
-#~ msgstr "Filnamn att läsa in och visa"
-#~ msgid "Stock ID"
-#~ msgstr "Standardid"
-#~ msgid "Stock ID for a stock image to display"
-#~ msgstr "Standard-id för en standardbild att visa"
-#~ msgid "Animation"
-#~ msgstr "Animering"
-#~ msgid "GdkPixbufAnimation to display"
-#~ msgstr "GdkPixbufAnimation att visa"
-#~ msgid "Image type"
-#~ msgstr "Bildtyp"
-#~ msgid "The representation being used for image data"
-#~ msgstr "Representationen som används för bilddata"
-#~ msgid "Size"
-#~ msgstr "Storlek"
-#~ msgid "The size of the icon"
-#~ msgstr "Storleken på ikonen"
-#~ msgid "Blinking"
-#~ msgstr "Blinkande"
-#~ msgid "Whether or not the status icon is blinking"
-#~ msgstr "Huruvida statusikonen blinkar eller inte"
-#~ msgid "Orientation"
-#~ msgstr "Orientering"
-#~ msgid "The orientation of the tray."
-#~ msgstr "Lådans orientering."
-#~ msgid "Bluetooth File Server"
-#~ msgstr "Bluetooth-filserver"
-#~ msgid "Bluetooth Manager"
-#~ msgstr "Bluetooth-hanterare"
-#~ msgid "Display Bluetooth devices and their properties"
-#~ msgstr "Visa Bluetooth-enheter och deras egenskaper"
-#~ msgid "Bluetooth Device Manager"
-#~ msgstr "Bluetooth-enhetshanterare"
-#~ msgid "Could not find Bluetooth devices on the system"
-#~ msgstr "Kunde inte hitta Bluetooth-enheter på systemet"
-#~ msgid ""
-#~ "Please make sure that your Bluetooth adapter is correctly plugged in your "
-#~ "machine."
-#~ msgstr ""
-#~ "Försäkra dig om att din Bluetooth-adapter är korrekt ansluten till din "
-#~ "dator."
-#~ msgid "Bluetooth devices"
-#~ msgstr "Bluetooth-enheter"
-#~ msgid "_Devices"
-#~ msgstr "_Enheter"
-#~ msgid "_Scan"
-#~ msgstr "_Genomsök"
-#~ msgid "_Edit"
-#~ msgstr "_Redigera"
-#~ msgid "_Help"
-#~ msgstr "_Hjälp"
-#~ msgid "Found device %s."
-#~ msgstr "Hittade enheten %s."
-#~ msgid "Device %s is called '%s'."
-#~ msgstr "Enheten %s kallas \"%s\"."
-#~ msgid "Scanning for devices..."
-#~ msgstr "Letar efter enheter..."
-#~ msgid "Retrieving device names..."
-#~ msgstr "Hämtar namn på enheter..."
-#~ msgid "Scan complete."
-#~ msgstr "Genomsökning klar."
-#~ msgid "Error during scan."
-#~ msgstr "Fel vid genomsökning."
-#~ msgid "Copyright Â© Edd Dumbill 2003"
-#~ msgstr "Copyright Â© Edd Dumbill 2003"
-#~ msgid "Manage remote Bluetooth devices."
-#~ msgstr "Hantera Bluetooth-fjärrenheter."
-#~ msgid "GNOME Bluetooth Component send operations"
-#~ msgstr "Skickandeoperationer för GNOME Bluetooth-komponent"
-#~ msgid "GNOME Bluetooth component"
-#~ msgstr "GNOME Bluetooth-komponent"
-#~ msgid "Send via Bluetooth..."
-#~ msgstr "Skicka via Bluetooth..."
-#~ msgid ""
-#~ "<span weight='bold' size='larger'>Accept a file from '%s'?</span>\n"
-#~ "\n"
-#~ "The remote device is attempting to send you a file via Bluetooth. Do you "
-#~ "wish to allow the connection?"
-#~ msgstr ""
-#~ "<span weight='bold' size='larger'>Acceptera en fil från \"%s\"?</span>\n"
-#~ "\n"
-#~ "Fjärrenheten försöker att skicka en fil till dig via Bluetooth. Vill du "
-#~ "tillåta anslutningen?"
-#~ msgid ""
-#~ "Please make sure that your bluetooth adapter is correctly plugged in your "
-#~ "machine."
-#~ msgstr ""
-#~ "Försäkra dig om att din Bluetooth-adapter är korrekt ansluten till din "
-#~ "dator."
-#~ msgid "Manage remote bluetooth devices."
-#~ msgstr "Hantera Bluetooth-fjärrenheter."
-#~ msgid ""
-#~ "<span weight='bold' size='larger'>File received from '%s'. What would you "
-#~ "like to do?</span>"
-#~ msgstr ""
-#~ "<span weight='bold' size='larger'>Fil mottagen från \"%s\". Vad vill du "
-#~ "göra?</span>"
-#~ msgid "Connection Request"
-#~ msgstr "Anslutningsbegäran"
-#~ msgid ""
-#~ "<span weight='bold' size='larger'>Allow Bluetooth device '%s' to connect?"
-#~ "</span>\n"
-#~ "\n"
-#~ "An external device is attempting to connect to your computer via "
-#~ "Bluetooth. You must decide if you want to accept the connection."
-#~ msgstr ""
-#~ "<span weight='bold' size='larger'>Tillåt Bluetooth-enheten \"%s\" att "
-#~ "ansluta?</span>\n"
-#~ "\n"
-#~ "En extern enhet försöker att ansluta till din dator via Bluetooth. Du "
-#~ "måste välja om du vill acceptera anslutningen."
-#~ msgid "Choose destination device"
-#~ msgstr "Välj målenhet"
-#~ msgid "Bluetooth address of destination device"
-#~ msgstr "Målenhetens Bluetooth-adress"
-#~ msgid "File Sharing"
-#~ msgstr "Fildelning"
-#~ msgid "Devices"
-#~ msgstr "Enheter"
-#~ msgid "Copyright © Edd Dumbill 2003"
-#~ msgstr "Copyright © Edd Dumbill 2003"
-#~ msgid "Copyright Â© Edd Dumbill 2004"
-#~ msgstr "Copyright Â© Edd Dumbill 2004"
-#~ msgid "Copyright © Edd Dumbill 2004"
-#~ msgstr "Copyright © Edd Dumbill 2004"
-#~ msgid "Copyright Â© Edd Dumbill 2003, 2004"
-#~ msgstr "Copyright Â© Edd Dumbill 2003, 2004"
-#~ msgid "Copyright © Edd Dumbill 2003, 2004"
-#~ msgstr "Copyright © Edd Dumbill 2003, 2004"
-#~ msgid "Choose device"
-#~ msgstr "Välj enhet"
-#~ msgid "Name:"
-#~ msgstr "Namn:"
-#~ msgid "Type:"
-#~ msgstr "Typ:"
-#~ msgid "Size:"
-#~ msgstr "Storlek:"
-#~ msgid "Sending file"
-#~ msgstr "Skickar fil"
+#: ../analyzer/main.c:326
+msgid "Unsaved"
+msgstr "Osparad"
 
+#: ../analyzer/main.c:609
+msgid "Can't live import from"
+msgstr "Kan inte direktimportera från"
+
+#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
+msgid "Bluetooth Analyzer"
+msgstr "Blåtandsanalysator"
+
+#: ../analyzer/main.c:856
+msgid "_File"
+msgstr "_Arkiv"
+
+#: ../analyzer/main.c:886
+msgid "Open _Recent"
+msgstr "Öppna _senaste"
+
+#: ../analyzer/main.c:933
+msgid "_Edit"
+msgstr "R_edigera"
+
+#: ../analyzer/main.c:942
+msgid "_View"
+msgstr "_Visa"
+
+#: ../analyzer/main.c:947
+msgid "_Full Screen"
+msgstr "_Helskärm"
+
+#: ../analyzer/main.c:954
+msgid "_Tools"
+msgstr "Ver_ktyg"
+
+#: ../analyzer/main.c:959
+msgid "_Debug Packet List"
+msgstr "_Felsök paketlista"
+
+#: ../analyzer/main.c:968
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../analyzer/dialog.c:110
+msgid "Bluetooth protocol analyzer"
+msgstr "Protokollanalysator för Bluetooth"
+
+#: ../analyzer/dialog.c:140
+msgid "All Files"
+msgstr "Alla filer"
+
+#: ../analyzer/dialog.c:145
+msgid "Supported Files"
+msgstr "Filer som stöds"
+
+#: ../analyzer/dialog.c:154
+msgid "Frontline BTSnoop Files"
+msgstr "Frontline BTSnoop-filer"
+
+#: ../analyzer/dialog.c:160
+msgid "Apple Packet Logger Files"
+msgstr "Apple Packet Logger-filer"
+
+#: ../analyzer/dialog.c:175
+msgid "By Extension"
+msgstr "Efter filändelse"
+
+#: ../analyzer/dialog.c:180
+msgid "Frontline BTSnoop Format"
+msgstr "Frontline BTSnoop-format"
+
+#: ../analyzer/dialog.c:185
+msgid "Apple Packet Logger Format"
+msgstr "Apple Packet Logger-format"
+
+#: ../analyzer/dialog.c:249
+msgid "Select File _Type"
+msgstr "Välj fil_typ"
+
+#: ../analyzer/dialog.c:292
+msgid "File Type"
+msgstr "Filtyp"
+
+#: ../analyzer/dialog.c:297
+msgid "Extensions"
+msgstr "Filändelser"
+
+#: ../analyzer/dialog.c:331
+msgid "Save File"
+msgstr "Spara fil"
+
+#: ../analyzer/dialog.c:373
+msgid "Open File"
+msgstr "Öppna fil"
+
+#: ../analyzer/dialog.c:455
+msgid "Local connection"
+msgstr "Lokal anslutning"
+
+#: ../analyzer/dialog.c:463
+msgid "Remote connection"
+msgstr "Fjärranslutning"
+
+#: ../analyzer/dialog.c:497
+msgid "Open Import"
+msgstr "Öppna import"
+
+#: ../analyzer/dialog.c:537
+msgid "Save the protocol trace before closing?"
+msgstr "Spara protokollspårning innan stängning?"
+
+#: ../analyzer/dialog.c:538
+msgid "If you don't save, all information will be permanently lost."
+msgstr "Om du inte sparar kommer all information att gå förlorad."
+
+#: ../analyzer/dialog.c:546
+msgid "Close _without Saving"
+msgstr "Stäng _utan att spara"
+
+#: ../analyzer/dialog.c:576
+msgid "There is"
+msgstr "Det finns"
+
+#: ../analyzer/dialog.c:576
+msgid "There are"
+msgstr "Det finns"
+
+#: ../analyzer/dialog.c:577
+msgid "unsaved protocol trace."
+msgstr "osparad protokollspårning."
+
+#: ../analyzer/dialog.c:578
+msgid "unsaved protocol traces."
+msgstr "osparade protokollspårningar."
+
+#: ../analyzer/dialog.c:579
+msgid "If you quit now, all information will be lost."
+msgstr "Om du avslutar nu kommer all information att gå förlorad."
+
+#: ../analyzer/dialog.c:589
+msgid "_Discard Changes"
+msgstr "_Förkasta ändringar"
+
+#: ../analyzer/tracer.c:250
+msgid "Type"
+msgstr "Typ"
+
+#: ../analyzer/tracer.c:258
+msgid "Packet"
+msgstr "Paket"
+
+#: ../analyzer/tracer.c:267
+msgid "Timestamp"
+msgstr "Tidsstämpel"
+
+#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
+msgid "Analyze Bluetooth traces"
+msgstr "Analysera blåtandsdata"
+
+#: ../analyzer/bluetooth-manager.xml.in.h:1
+msgid "Apple Packet Logger File"
+msgstr "Apple Packet Logger-fil"
+
+#: ../analyzer/bluetooth-manager.xml.in.h:2
+msgid "Frontline BTSnoop File"
+msgstr "Frontline BTSnoop-fil"

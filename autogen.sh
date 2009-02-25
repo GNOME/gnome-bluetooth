@@ -4,11 +4,9 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="Gnome Bluetooth Controller"
+PKG_NAME="Gnome Bluetooth"
 
-(cd $srcdir && cat python-headers.m4 gob2.m4 >acinclude.m4)
-
-(test -f $srcdir/configure.in) || {
+(test -f $srcdir/configure.ac) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level directory"
     exit 1

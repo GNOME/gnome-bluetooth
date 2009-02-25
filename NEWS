@@ -1,169 +1,198 @@
-gnome-bluetooth 0.12.0
-======================
+ver 1.8:
+	Add additional support for using obex-client.
+	Make mice and keyboards automatically trusted.
+		
+ver 1.7:
+	Add support for HAL enabled kill switches.
 
- * Remove gnome-obex-server, as it's replaced by gnome-user-share
+ver 1.6:
+	Add new visibility settings.
+	Add device setup button to properties application.
+	Add activation menu with option to setup devices.
+	Use the Icon property for device type icons.
+	Use the Alias property for device names.
 
-gnome-bluetooth 0.11.0
-======================
+ver 1.5:
+	Use GIO to normalize pathnames.
+	Fix getting name of remote devices.
+	Write "time left" in human readable terms.
 
- * Remove gnome-obex-send as it's replaced by bluez-gnome's bluetooth-sendto
+ver 1.4:
+	Use longer D-Bus timeout for device creation.
+	Add Simple Pairing support to the wizard.
+	Add bluetooth-browse application.
+	Stop discovery when closing browse dialog.
+	Connect keyboards and mice after setup.
+	Introduce headphone device type.
 
-gnome-bluetooth 0.10.0
-======================
+ver 1.3:
+	Fix pincode handling for headsets and mice.
+	Fix complete status when going back to search page.
+	Use StartDiscovery and StopDiscovery method calls.
+	Sort search lists by RSSI value.
 
- * Unescape URIs when uploading files, so we don't end up with
- escaping in filenames (eg. file%20with%20space instead of "file with space")
+ver 1.2:
+	Add support for numeric passkey requests.
+	Add support for confirmation requests.
+	Remove --singleton from desktop files.
 
-gnome-bluetooth 0.9.1
-=====================
+ver 1.1:
+	Fix device status display in selection lists.
+	Enable bluetooth-sendto application.
+	Enable bluetooth-wizard application.
 
- * Fix a typo that meant the obex server was crashing when receiving
- a file
+ver 1.0:
+	Make use of the BlueZ 4.x D-Bus API.
 
-gnome-bluetooth 0.9.0
-=====================
+ver 0.28:
+	Import translations from Ubuntu Rosetta.
+	Add selected device name property.
+	Hide filters box when not needed.
 
- * Send a disconnect when we finish sending a file, fixes reception
- of files on some devices
+ver 0.27:
+	Import translations from Ubuntu Rosetta.
+	Improve the handling of error messages.
+	Make the display of service names translatable.
+	Remove status column for services.
+	Disable the passkey confirmation part.
+	Enable PIE by default if supported.
+	Don't optimize when debug is enabled.
 
- * Use new GTK+ features for the tray icon
+ver 0.26:
+	Import translations from Ubuntu Rosetta
+	Update user interface of sendto application.
+	Move analyzer application to the system category.
 
- * Build fixes
+ver 0.25:
+	Remove signal handlers when no longer needed.
+	Show OBEX errors and close server on failure.
 
-gnome-bluetooth 0.8.0
-=====================
+ver 0.24:
+	Update various translations.
+	Add Frisian translation.
+	Add tablets and joypads/joysticks device types.
+	Fix setting filter properties in the device selection widget.
+	Fix missing assignment of filter labels.
+	Show all the possibly known devices.
 
- * Fix icons not showing up properly
+ver 0.23:
+	Include more translations from Ubuntu Rosetta.
 
- * Allow passing URIs as well as local filenames to gnome-obex-send
+ver 0.22:
+	Update for obex-data-server version 0.3 API.
 
- * Save to ~/Desktop/Downloads by default, then fallback to ~/Desktop and ~/,
-   as Epiphany does, or to the user specified directory
+ver 0.21:
+	Update Polish translation.
+	Allow translation of the sendto application.
+	Fix annotation for missing translatable strings.
+	Fix translation issue for desktop files.
 
- * Remove direct openobex and bluez-devel dependencies, as well as gnome-vfs
+ver 0.20:
+	Disable signals when finalizing the object.
+	Make about dialog a single instance.
 
-gnome-bluetooth 0.7.0
-=====================
+ver 0.19:
+	Add new Tango friendly Bluetooth icon.
+	Add support for file receiving.
+	Add support for file sharing.
+	Don't show class of device selector when HAL is used.
+	Enable the clickable links and call applications.
+	Make search button and discovery work again.
+	Fix detection of database update tools.
 
- * Fix a bad crasher that was plaguing 0.6.0 users
+ver 0.18:
+	Update Japanese translation.
+	Separate status icon, notification and agent handling.
 
- * Have the menu icons magically appear again
+ver 0.17:
+	Update Polish translation.
+	Handle uint64 file size variables.
+	Use object path for session path type.
+	Use well known name to autostart the OBEX service.
 
- * Fix some memory leaks
+ver 0.16:
+	Update Polish translation.
+	Add Japanese translation.
+	Add more supported HAL classes.
+	Add support for handling default adapter changes.
+	Make device selection widget look better.
+	Make notification library a requirement.
+	Enable sendto application.
 
- * Better message when an error occurs sending a file to a Palm
+ver 0.15:
+	Use buttons in notification popups.
+	Use CreateSecureDevice for input device setup.
+	Add remove button for network connections.
+	Enable connect/disconnect button for network devices.
+	Enable singleton support.
+	Update device selection widget.
+	Make tooltips HIG compliant.
 
- * Fix build warnings
+ver 0.14:
+	Add support for Bluetooth mime types.
+	Add support for service specific actions.
+	Ask user to confirm when deleting a bonding.
 
- * Fix Python detection for bi-arch systems
+ver 0.13:
+	Include translations from Ubuntu Rosetta.
 
- * Update for libbtctl 0.6.0
+ver 0.12:
+	Add support for disconnecting devices.
+	Add support for changing the trust status.
+	Add trust checkbox to authorization dialog.
 
-gnome-bluetooth 0.6.0
-=====================
+ver 0.11:
+	Add support for BTSnoop files with baseband data.
+	Add support for showing list of bonded devices.
+	Split properties code into multiple files.
 
- * gnome-obex-server: Now preserves timestamps of reserved files (Tumoas
-   Salo).
+ver 0.10:
+	Add Bluetooth protocol analyzer application.
+	Add Bluetooth device selection widget.
+	Add browse device menu entry.
+	Remove GTK compat code for status icon.
 
- * Save received files to the path specified in the
-   /apps/gnome-obex-server/savedir GConf key
+ver 0.9:
+	Simplify the GConf callbacks.
+	Make some strings more translator friendly.
+	Don't translate command-line warnings.
+	Rename Brazilian translation file.
+	Update Polish translation.
+	Add Romanian translation.
 
- * Remove the nautilus extension, sending files over Bluetooth devices is
-   now handled though nautilus-sendto (Bastien Nocera)
+ver 0.8:
+	Add support for limited discovery mode.
 
- * Make gnome-bluetooth-manager run with newer PyGTK (Olav Vitters,
-   Harald Hoyer)
+ver 0.7:
+	Fix handling of multiple adapters.
+	Use HAL for initial class of device setup.
+	Add basic support for authorization agent.
+	Add missing manual pages.
+	Add GConf schema support.
+	Add translatable desktop and schema files.
+	Add Finish translation.
+	Add Brazilian translation.
+	Add Polish translation.
+	Add Hungarian translation.
 
- * Make dialogues comply better with the HIG (Bastien Nocera)
+ver 0.6:
+	Fix policy for showing status icon.
+	Add support for confirmation callback.
+	Add application for Bluetooth settings.
 
- * Add a test program for the spinner widget (Bastien Nocera)
+ver 0.5:
+	Add support for periodic discovery.
 
- * Build fixes (Bastien Nocera)
+ver 0.4:
+	Fix handling of daemon restarts.
+	Always show the status icon.
 
- * Updated translations:
-	cs: Miloslav Trmac 
-	de: Hendrik Brandt 
-	en_CA: Adam Weinberger 
-	en_GB: David Lodge 
-	es: Francisco Javier F. Serrador 
-	fr: Raphaël Tournoy 
-	hu: Gabor Kelemen 
-	ja: Takeshi AIHANA 
-	nb: Kjartan Maraas 
-	nl: Reinout van Schouwen 
-	no: Kjartan Maraas 
-	pa: Amanpreet Singh Alam 
-	pt_BR: Raphael Higino 
-	pt: Duarte Loreto 
-	ru: Leonid Kanter 
-	sq: Laurent Dhima 
-	sv: Christian Rose 
-	uk: Maxim Dziumanenko 
-	zh_CN: Funda Wang 
+ver 0.3:
+	Add notification support.
+	Add about dialog.
 
-gnome-bluetooth 0.5.1
-=====================
+ver 0.2:
+	Add status icon support.
 
- * gnome-obex-server: Ask user what to do with received files, displaying
-   nice little box with file details.  Also displays proper name of a
-   connecting device.
-
- * libgnomebt: Now includes pkg-config file so libgnomebt can be used by other
-   packages.
-
-gnome-bluetooth 0.5.0
-=====================
-
-This release provides similar functionality to the 0.4 release, but
-with many internal rewrites and cleanups.  New features will come in
-the next release, so don't worry!  I'm aware that HIG love is needed
-in many places, but as the dialog requirements aren't stable yet, too
-much refinement is premature.
-
- * gnome-obex-send and gnome-obex-server are now based on the new
-   OBEX code in libbtctl.  This should lead to an increase in reliability.
-   gnome-obex-server now lets you decide whether a device is allowed to
-   connect or not.  The download directory can be configured from the
-   gconf key /apps/gnome-bluetooth/obex-savedir.
-
- * gnome-bluetooth-admin has been retired in favour of a new program
-   called gnome-bluetooth-manager.  This is implemented in Python, but
-   is only at an early stage right now.
-
- * gnome-vfs support has been removed.  Use gnome-bluetooth-manager to
-   view all the devices.
-
- * OBEX sending support is now available on the Nautilus context menus
-   for files.
-
- * Radical changes in underlying code!
-
-   The Bonobo component has been completely removed, in favour of a
-   normal GObject, GnomebtController, to be found in libgnomebt.  This
-   embodies all of the functionality from the Bonobo object, but without
-   getting CORBA/Bonobo involved.  It ships with Python bindings, too.
-
-   To find out how to use it, check out gnomebt-controller-test.c in src/
-   for C, and the applications in the python/ directory for Python.
-
-   Porting your code to this new object should make your programs smaller
-   and more reliable.
-
- * New widgets include GnomebtChooser, GnomebtPermissionDialog, 
-   GnomebtSpinner.
-
--- Edd Dumbill,  Thu Jun 10 15:26:09 BST 2004
-
-
-
-gnome-bluetooth 0.4.1
-=====================
-
-* Added gnome-obex-send program, which sends files via OBEX push to a
-  destination server.
-
-* Added gnome-vfs module, go to bluetooth:/// in nautilus to see which
-  remote devices have been discovered.
-
--- Edd Dumbill 2003-06-07
-
+ver 0.1:
+	Initial public release.
