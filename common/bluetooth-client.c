@@ -122,6 +122,7 @@ bluetooth_verify_address (const char *bdaddr)
 {
 	gboolean retval = TRUE;
 	char **elems;
+	guint i;
 
 	g_return_val_if_fail (bdaddr != NULL, FALSE);
 
