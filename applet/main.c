@@ -77,7 +77,9 @@ static void open_uri(GtkWindow *parent, const char *uri)
 						cmdline, &error) == FALSE) {
 		dialog = gtk_message_dialog_new(parent,
 			GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_CLOSE, error->message);
+					GTK_BUTTONS_CLOSE, NULL);
+		gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(dialog),
+			error->message);
 		gtk_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(dialog);
 		g_error_free(error);

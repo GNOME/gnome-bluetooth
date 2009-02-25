@@ -292,7 +292,8 @@ static gboolean show_confirm_dialog(void)
 				_("If you delete the device, you have to "
 					"set it up again before next use."));
 	dialog = gtk_message_dialog_new_with_markup(NULL, GTK_DIALOG_MODAL,
-				GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, text);
+				GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, NULL);
+	gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(dialog), text);
 	g_free(text);
 
 	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_CANCEL,
