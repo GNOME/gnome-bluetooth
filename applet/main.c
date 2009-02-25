@@ -105,8 +105,8 @@ static void about_email_hook(GtkAboutDialog *dialog,
 static void about_callback(GtkWidget *item, gpointer user_data)
 {
 	const gchar *authors[] = {
-		"Marcel Holtmann <marcel@holtmann.org>",
 		"Bastien Nocera <hadess@hadess.net>",
+		"Marcel Holtmann <marcel@holtmann.org>",
 		NULL
 	};
 	const gchar *artists[] = {
@@ -118,13 +118,13 @@ static void about_callback(GtkWidget *item, gpointer user_data)
 	gtk_about_dialog_set_email_hook(about_email_hook, NULL, NULL);
 
 	gtk_show_about_dialog(NULL, "version", VERSION,
-		"copyright", "Copyright \xc2\xa9 2005-2008 Marcel Holtmann",
+		"copyright", "Copyright \xc2\xa9 2005-2008 Marcel Holtmann, 2006-2009 Bastien Nocera",
 		"comments", _("A Bluetooth manager for the GNOME desktop"),
 		"authors", authors,
 		"artists", artists,
 		"translator-credits", _("translator-credits"),
-		"website", "http://www.bluez.org/",
-		"website-label", "www.bluez.org",
+		"website", "http://live.gnome.org/GnomeBluetooth",
+		"website-label", _("GNOME Bluetooth home page"),
 		"logo-icon-name", "bluetooth", NULL);
 }
 
