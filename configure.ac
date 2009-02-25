@@ -82,10 +82,6 @@ PKG_CHECK_MODULES(SENDTO,
 		  gtk+-2.0
 		  gio-2.0)
 
-dnl Requires for the browse dialogue
-PKG_CHECK_MODULES(BROWSE,
-		  gtk+-2.0)
-
 dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
@@ -116,7 +112,6 @@ AC_OUTPUT(Makefile
 	  properties/Makefile
 	  wizard/Makefile
 	  sendto/Makefile
-	  browse/Makefile
 	  po/Makefile.in
 )
 
