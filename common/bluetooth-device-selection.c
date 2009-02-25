@@ -82,9 +82,11 @@ bluetooth_device_category_to_string (int type)
 	case BLUETOOTH_CATEGORY_ALL:
 		return N_("All categories");
 	case BLUETOOTH_CATEGORY_PAIRED:
-		return N_("Bonded");
+		return N_("Paired");
 	case BLUETOOTH_CATEGORY_TRUSTED:
 		return N_("Trusted");
+	case BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED:
+		return N_("Not paired or trusted");
 	default:
 		return N_("Unknown");
 	}
@@ -292,21 +294,24 @@ filter_type_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelecti
 static gboolean
 filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothDeviceSelectionPrivate *priv)
 {
+	gboolean bonded, trusted;
+
 	if (priv->device_category_filter == BLUETOOTH_CATEGORY_ALL)
 		return TRUE;
 
-	if (priv->device_category_filter == BLUETOOTH_CATEGORY_PAIRED) {
-		gboolean bonded;
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_PAIRED, &bonded,
+			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
+			    -1);
 
-		gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &bonded, -1);
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_PAIRED)
 		return bonded;
-	}
-	if (priv->device_category_filter == BLUETOOTH_CATEGORY_TRUSTED) {
-		gboolean trusted;
-
-		gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_TRUSTED)
 		return trusted;
-	}
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED)
+		return (!bonded && !trusted);
+
+	g_assert_not_reached ();
 
 	return FALSE;
 }
