@@ -246,15 +246,8 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 
 	update_buttons(adapter, paired, trusted, connected);
 
-	if (selected == TRUE) {
-		gtk_widget_show(adapter->button_disconnect);
-		gtk_widget_show(adapter->button_trusted);
-		gtk_widget_show(adapter->button_delete);
-	} else {
-		gtk_widget_hide(adapter->button_disconnect);
-		gtk_widget_hide(adapter->button_trusted);
-		gtk_widget_hide(adapter->button_delete);
-	}
+	gtk_widget_set_sensitive(adapter->button_trusted, selected);
+	gtk_widget_set_sensitive(adapter->button_delete, selected);
 }
 
 static void row_callback(GtkTreeModel *model, GtkTreePath  *path,
@@ -646,61 +639,51 @@ static void create_adapter(struct adapter_data *adapter)
 	gtk_box_set_homogeneous(GTK_BOX(buttonbox), FALSE);
 	gtk_box_pack_start(GTK_BOX(vbox), buttonbox, FALSE, FALSE, 0);
 
-	button = gtk_button_new();
+	button = gtk_button_new_with_label(_("Setup new device..."));
 	image = gtk_image_new_from_stock(GTK_STOCK_ADD,
 						GTK_ICON_SIZE_BUTTON);
-	gtk_container_add(GTK_CONTAINER(button), image);
-	gtk_container_set_border_width(GTK_CONTAINER(button), 0);
+	gtk_button_set_image(GTK_BUTTON(button), image);
 	gtk_box_pack_start(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
 
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(wizard_callback), adapter);
 
-	button = gtk_button_new();
-	gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
+	button = gtk_button_new_with_label(_("Disconnect"));
 	image = gtk_image_new_from_stock(GTK_STOCK_DISCONNECT,
 						GTK_ICON_SIZE_BUTTON);
-	gtk_container_add(GTK_CONTAINER(button), image);
-	gtk_container_set_border_width(GTK_CONTAINER(button), 0);
-	gtk_widget_set_no_show_all(button, TRUE);
-	gtk_widget_show(image);
+	gtk_button_set_image(GTK_BUTTON(button), image);
 	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 								button, TRUE);
+	gtk_widget_set_sensitive(button, FALSE);
 
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(disconnect_callback), adapter);
 
 	adapter->button_disconnect = button;
 
-	button = gtk_button_new();
-	gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
+	button = gtk_button_new_with_label(_("Add to Trusted"));
 	image = gtk_image_new_from_stock(GTK_STOCK_ABOUT,
 						GTK_ICON_SIZE_BUTTON);
-	gtk_container_add(GTK_CONTAINER(button), image);
-	gtk_container_set_border_width(GTK_CONTAINER(button), 0);
-	gtk_widget_set_no_show_all(button, TRUE);
-	gtk_widget_show(image);
+	gtk_button_set_image(GTK_BUTTON(button), image);
 	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 								button, TRUE);
+	gtk_widget_set_sensitive(button, FALSE);
 
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(trusted_callback), adapter);
 
 	adapter->button_trusted = button;
 
-	button = gtk_button_new();
-	gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
+	button = gtk_button_new_with_label(_("Delete"));
 	image = gtk_image_new_from_stock(GTK_STOCK_DELETE,
 						GTK_ICON_SIZE_BUTTON);
-	gtk_container_add(GTK_CONTAINER(button), image);
-	gtk_container_set_border_width(GTK_CONTAINER(button), 0);
-	gtk_widget_set_no_show_all(button, TRUE);
-	gtk_widget_show(image);
+	gtk_button_set_image(GTK_BUTTON(button), image);
 	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 								button, TRUE);
+	gtk_widget_set_sensitive(button, FALSE);
 
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(delete_callback), adapter);
