@@ -8,14 +8,18 @@ libcommon_la_SOURCES = helper.h helper.c \
 		bluetooth-agent.h bluetooth-agent.c \
 		obex-agent.h obex-agent.c \
 		helper.c helper.h
+libcommon_la_LIBADD = $(LIBGNOMEBT_LIBS)
 
 libgnome_bluetooth_1_0_la_SOURCES =			\
 	bluetooth-client.h bluetooth-client.c		\
 	marshal.h marshal.c				\
 	bluetooth-device-selection.c bluetooth-device-selection.h
-libgnome_bluetooth_1_0_la_LIBADD = $(GTK_LIBS) $(DBUS_LIBS)
+libgnome_bluetooth_1_0_la_LIBADD = $(LIBGNOMEBT_LIBS)
 
-AM_CFLAGS = -I$(srcdir) @DBUS_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+gnomebluetoothdir = $(pkgincludedir)
+gnomebluetooth_HEADERS = bluetooth-device-selection.c bluetooth-device-selection.h
+
+AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-instance-glue.h \
@@ -47,7 +51,7 @@ marshal.h: marshal.list
 	$(GLIB_GENMARSHAL) --prefix=marshal $< --header > $@
 
 marshal.c: marshal.list
-	$(GLIB_GENMARSHAL) --prefix=marshal $< --body > $@
+	$(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
 
 bluetooth-instance-glue.h: bluetooth-instance.xml
 	$(DBUS_BINDING_TOOL) --prefix=bluetooth_instance --mode=glib-server --output=$@ $<

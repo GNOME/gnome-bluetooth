@@ -3,10 +3,9 @@ bin_PROGRAMS = bluetooth-browse
 
 bluetooth_browse_SOURCES = main.c
 
-bluetooth_browse_LDADD = $(top_builddir)/common/libcommon.la \
-						@GTK_LIBS@ @DBUS_LIBS@
+bluetooth_browse_LDADD = $(top_builddir)/common/libcommon.la $(BROWSE_LIBS)
 
-AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+AM_CFLAGS = $(BROWSE_CFLAGS) $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 INCLUDES = -I$(top_srcdir)/common
 

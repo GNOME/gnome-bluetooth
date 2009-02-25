@@ -3,10 +3,9 @@ bin_PROGRAMS = bluetooth-wizard
 
 bluetooth_wizard_SOURCES = main.c
 
-bluetooth_wizard_LDADD = $(top_builddir)/common/libcommon.la \
-						@GTK_LIBS@ @DBUS_LIBS@
+bluetooth_wizard_LDADD = $(top_builddir)/common/libcommon.la $(WIZARD_LIBS)
 
-AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
+AM_CFLAGS = $(WIZARD_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
 pin_DATA = pin-code-database.txt
 pindir = $(pkgdatadir)

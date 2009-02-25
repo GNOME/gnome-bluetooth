@@ -58,42 +58,49 @@ if (test "$enable_icon_update" != no); then
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
-PKG_CHECK_MODULES(DBUS, dbus-glib-1 >= 0.73, dummy=yes,
-				AC_MSG_ERROR(dbus-glib >= 0.73 is required))
-AC_SUBST(DBUS_CFLAGS)
-AC_SUBST(DBUS_LIBS)
+DBUS_GLIB_REQUIRED=0.73
+HAL_REQUIRED=0.5.8
+NOTIFY_REQUIRED=0.4.3
+
+dnl Requires for the properties window
+PKG_CHECK_MODULES(PROPS,
+		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  hal >= $HAL_REQUIRED
+		  gconf-2.0
+		  gtk+-2.0)
+
+dnl Requires for the applet
+PKG_CHECK_MODULES(APPLET,
+		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gconf-2.0
+		  gtk+-2.0
+		  libnotify >= $NOTIFY_REQUIRED)
+
+dnl Requires for the sendto app
+PKG_CHECK_MODULES(SENDTO,
+		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gtk+-2.0
+		  gio-2.0)
+
+dnl Requires for the browse dialogue
+PKG_CHECK_MODULES(BROWSE,
+		  gtk+-2.0)
+
+dnl Requires for the wizard dialogue
+PKG_CHECK_MODULES(WIZARD,
+		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gtk+-2.0)
+
+dnl Requires for the libraries
+PKG_CHECK_MODULES(LIBGNOMEBT,
+		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gtk+-2.0)
 
 DBUS_BINDING_TOOL="dbus-binding-tool"
 AC_SUBST(DBUS_BINDING_TOOL)
 
-PKG_CHECK_MODULES(HAL, hal >= 0.5.8, [
-		AC_DEFINE(HAVE_HAL, 1, [Define to 1 if you have HAL support.])
-], dummy=no)
-AC_SUBST(HAL_CFLAGS)
-AC_SUBST(HAL_LIBS)
-
-PKG_CHECK_MODULES(GIO, gio-2.0 >= 2.16, dummy=yes,
-				AC_MSG_ERROR(gio >= 2.16 is required))
-AC_SUBST(GIO_CFLAGS)
-AC_SUBST(GIO_LIBS)
-
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.10, dummy=yes,
-				AC_MSG_ERROR(gtk+ >= 2.10 is required))
-AC_SUBST(GTK_CFLAGS)
-AC_SUBST(GTK_LIBS)
-
 GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
 AC_SUBST(GLIB_GENMARSHAL)
-
-PKG_CHECK_MODULES(GCONF, gconf-2.0 >= 2.16, dummy=yes,
-				AC_MSG_ERROR(gconf >= 2.16 is required))
-AC_SUBST(GCONF_CFLAGS)
-AC_SUBST(GCONF_LIBS)
-
-PKG_CHECK_MODULES(NOTIFY, libnotify >= 0.4.3, dummy=yes,
-				AC_MSG_ERROR(libnotify is required))
-AC_SUBST(NOTIFY_CFLAGS)
-AC_SUBST(NOTIFY_LIBS)
 
 GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
