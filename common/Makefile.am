@@ -1,6 +1,6 @@
 
 noinst_LTLIBRARIES = libcommon.la
-lib_LTLIBRARIES = libgnome-bluetooth-1.0.la
+lib_LTLIBRARIES = libgnome-bluetooth.la
 
 libcommon_la_SOURCES = helper.h helper.c \
 		bluetooth-instance.h bluetooth-instance.c \
@@ -11,12 +11,19 @@ libcommon_la_SOURCES = helper.h helper.c \
 		bluetooth-enums.h
 libcommon_la_LIBADD = $(LIBGNOMEBT_LIBS)
 
-libgnome_bluetooth_1_0_la_SOURCES =			\
+libgnome_bluetooth_la_SOURCES =				\
 	bluetooth-enums.h				\
 	bluetooth-client.h bluetooth-client.c		\
 	marshal.h marshal.c				\
 	bluetooth-device-selection.c bluetooth-device-selection.h
-libgnome_bluetooth_1_0_la_LIBADD = $(LIBGNOMEBT_LIBS)
+
+libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS)
+
+libgnome_bluetooth_la_LDFLAGS =				\
+	-version-info $(GNOMEBT_LT_VERSION)		\
+	-export-symbols $(srcdir)/gnome-bluetooth.symbols\
+	-no-undefined					\
+	$(AM_LDFLAGS)
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS =				\
@@ -42,7 +49,7 @@ test_client_LDADD = libcommon.la $(GTK_LIBS) $(DBUS_LIBS)
 
 test_agent_LDADD = libcommon.la $(DBUS_LIBS)
 
-test_deviceselection_LDADD = libgnome-bluetooth-1.0.la
+test_deviceselection_LDADD = libgnome-bluetooth.la
 
 EXTRA_DIST = marshal.list \
 		bluetooth-instance.xml \
