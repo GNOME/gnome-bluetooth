@@ -4,13 +4,25 @@ AC_INIT()
 AM_INIT_AUTOMAKE(gnome-bluetooth, 2.27.0)
 AM_CONFIG_HEADER(config.h)
 
+# Before making a release, the GNOMEBT_LT_VERSION string should be modified.
+# The string is of the form C:R:A.
+# - If interfaces have been changed or added, but binary compatibility has
+#   been preserved, change to C+1:0:A+1
+# - If binary compatibility has been broken (eg removed or changed interfaces)
+#   change to C+1:0:0
+# - If the interface is the same as the previous version, change to C:R+1:A
+GNOMEBT_LT_VERSION=2:0:0
+AC_SUBST(GNOMEBT_LT_VERSION)
+
 AM_MAINTAINER_MODE
 
 AC_LANG_C
-
 AC_PROG_CC
 AC_PROG_INSTALL
-AC_PROG_RANLIB
+
+dnl Initialize libtool
+AM_DISABLE_STATIC
+AM_PROG_LIBTOOL
 
 GETTEXT_PACKAGE=gnome-bluetooth
 AC_SUBST(GETTEXT_PACKAGE)
@@ -90,6 +102,7 @@ GNOME_CXX_WARNINGS
 GNOME_MAINTAINER_MODE_DEFINES
 
 AC_OUTPUT(Makefile
+	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
 	  common/Makefile
 	  applet/Makefile
@@ -99,3 +112,4 @@ AC_OUTPUT(Makefile
 	  browse/Makefile
 	  po/Makefile.in
 )
+

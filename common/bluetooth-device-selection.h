@@ -43,7 +43,7 @@ G_BEGIN_DECLS
 
 enum {
 	BLUETOOTH_CATEGORY_ALL,
-	BLUETOOTH_CATEGORY_BONDED,
+	BLUETOOTH_CATEGORY_PAIRED,
 	BLUETOOTH_CATEGORY_TRUSTED,
 	BLUETOOTH_CATEGORY_NUM_CATEGORIES
 };
@@ -64,7 +64,10 @@ struct _BluetoothDeviceSelectionClass {
 GType bluetooth_device_selection_get_type (void);
 
 GtkWidget *bluetooth_device_selection_new (const gchar *title);
+
 gchar *bluetooth_device_selection_get_selected_device (BluetoothDeviceSelection *sel);
+gchar *bluetooth_device_selection_get_selected_device_name (BluetoothDeviceSelection *self);
+
 void bluetooth_device_selection_start_discovery (BluetoothDeviceSelection *sel);
 
 G_END_DECLS

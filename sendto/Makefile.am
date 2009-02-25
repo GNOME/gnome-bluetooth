@@ -3,7 +3,7 @@ bin_PROGRAMS = bluetooth-sendto
 
 bluetooth_sendto_SOURCES = main.c
 
-bluetooth_sendto_LDADD = $(top_builddir)/common/libcommon.a \
+bluetooth_sendto_LDADD = $(top_builddir)/common/libcommon.la \
 					@GTK_LIBS@ @GIO_LIBS@ @DBUS_LIBS@
 
 AM_CFLAGS = @DBUS_CFLAGS@ @GIO_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)

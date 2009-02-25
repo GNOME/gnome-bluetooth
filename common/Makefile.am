@@ -1,13 +1,21 @@
 
-noinst_LIBRARIES = libcommon.a
+noinst_LTLIBRARIES = libcommon.la
+lib_LTLIBRARIES = libgnome-bluetooth-1.0.la
 
-libcommon_a_SOURCES = helper.h helper.c \
+libcommon_la_SOURCES = helper.h helper.c \
 		bluetooth-instance.h bluetooth-instance.c \
 		bluetooth-client.h bluetooth-client.c \
 		bluetooth-agent.h bluetooth-agent.c \
-		obex-agent.h obex-agent.c
+		obex-agent.h obex-agent.c \
+		helper.c helper.h
 
-AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+libgnome_bluetooth_1_0_la_SOURCES =			\
+	bluetooth-client.h bluetooth-client.c		\
+	marshal.h marshal.c				\
+	bluetooth-device-selection.c bluetooth-device-selection.h
+libgnome_bluetooth_1_0_la_LIBADD = $(GTK_LIBS) $(DBUS_LIBS)
+
+AM_CFLAGS = -I$(srcdir) @DBUS_CFLAGS@ @GTK_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-instance-glue.h \
@@ -15,15 +23,17 @@ BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-agent-glue.h \
 		obex-agent-glue.h
 
-nodist_libcommon_a_SOURCES = $(BUILT_SOURCES)
+nodist_libcommon_la_SOURCES = $(BUILT_SOURCES)
 
 CLEANFILES = $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent
+noinst_PROGRAMS = test-client test-agent test-deviceselection
 
-test_client_LDADD = libcommon.a @GTK_LIBS@ @DBUS_LIBS@
+test_client_LDADD = libcommon.la $(GTK_LIBS) $(DBUS_LIBS)
 
-test_agent_LDADD = libcommon.a @DBUS_LIBS@
+test_agent_LDADD = libcommon.la $(DBUS_LIBS)
+
+test_deviceselection_LDADD = libgnome-bluetooth-1.0.la
 
 EXTRA_DIST = marshal.list \
 		bluetooth-instance.xml \

@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 
 #include "bluetooth-device-selection.h"
-#include "client.h"
+#include "bluetooth-client.h"
 
 static void device_selected_cb(GObject *object,
 			       GParamSpec *spec, gpointer user_data)

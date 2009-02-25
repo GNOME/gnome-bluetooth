@@ -8,7 +8,9 @@ aclocal.m4
 config.h
 config.h.in
 config.log
+config.guess
 config.status
+config.sub
 configure
 depcomp
 install-sh
@@ -18,6 +20,8 @@ intltool-merge
 intltool-merge.in
 intltool-update
 intltool-update.in
+ltmain.sh
+libtool
 missing
 mkinstalldirs
 stamp-h1
@@ -31,6 +35,7 @@ po/.intltool-merge-cache
 
 common/test-client
 common/test-agent
+common/test-deviceselection
 applet/bluetooth-applet
 applet/test-agentdialog
 properties/bluetooth-properties
@@ -45,4 +50,6 @@ marshal.c
 *~
 *.rej
 *.orig
+*.lo
+*.la
 bluetooth-manager.xml

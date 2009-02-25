@@ -3,14 +3,14 @@ bin_PROGRAMS = bluetooth-applet
 
 bluetooth_applet_SOURCES = main.c notify.h notify.c agent.h agent.c
 
-bluetooth_applet_LDADD = $(top_builddir)/common/libcommon.a \
+bluetooth_applet_LDADD = $(top_builddir)/common/libcommon.la \
 			@NOTIFY_LIBS@ @GCONF_LIBS@ @GTK_LIBS@ @DBUS_LIBS@
 
 noinst_PROGRAMS = test-agentdialog
 
 test_agentdialog_SOURCES = test-agentdialog.c notify.h notify.c
 
-test_agentdialog_LDADD = $(top_builddir)/common/libcommon.a \
+test_agentdialog_LDADD = $(top_builddir)/common/libcommon.la \
 				@NOTIFY_LIBS@ @GTK_LIBS@ @DBUS_LIBS@
 
 AM_CFLAGS = @DBUS_CFLAGS@ @GTK_CFLAGS@ @GCONF_CFLAGS@ @NOTIFY_CFLAGS@ $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
