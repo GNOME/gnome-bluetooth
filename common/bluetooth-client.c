@@ -71,6 +71,12 @@ struct _BluetoothClientPrivate {
 	DBusGProxy *dbus;
 	DBusGProxy *manager;
 	GtkTreeStore *store;
+	char *default_adapter;
+};
+
+enum {
+	PROP_0,
+	PROP_DEFAULT_ADAPTER,
 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
@@ -606,6 +612,13 @@ static void adapter_removed(DBusGProxy *manager,
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
 									&iter);
 	}
+
+	/* No adapters left in the tree? */
+	if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL(priv->store), NULL) == 0) {
+		g_free(priv->default_adapter);
+		priv->default_adapter = NULL;
+		g_object_notify (G_OBJECT (client), "default-adapter");
+	}
 }
 
 static void default_adapter_changed(DBusGProxy *manager,
@@ -641,6 +654,11 @@ static void default_adapter_changed(DBusGProxy *manager,
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
 									&iter);
 	}
+
+	/* Record the new default adapter */
+	g_free(priv->default_adapter);
+	priv->default_adapter = g_strdup(path);
+	g_object_notify (G_OBJECT (client), "default-adapter");
 }
 
 static void name_owner_changed(DBusGProxy *dbus, const char *name,
@@ -722,6 +740,24 @@ static void bluetooth_client_init(BluetoothClient *client)
 	}
 }
 
+static void
+bluetooth_client_get_property (GObject        *object,
+			       guint           property_id,
+			       GValue         *value,
+			       GParamSpec     *pspec)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(object);
+
+	switch (property_id) {
+	case PROP_DEFAULT_ADAPTER:
+		g_value_set_string (value, priv->default_adapter);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
+}
+
 static void bluetooth_client_finalize(GObject *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
@@ -755,6 +791,12 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	g_type_class_add_private(klass, sizeof(BluetoothClientPrivate));
 
 	object_class->finalize = bluetooth_client_finalize;
+	object_class->get_property = bluetooth_client_get_property;
+
+
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER,
+					 g_param_spec_string ("default-adapter", NULL, NULL,
+							      NULL, G_PARAM_READABLE));
 
 	dbus_g_object_register_marshaller(marshal_VOID__STRING_BOXED,
 						G_TYPE_NONE, G_TYPE_STRING,
