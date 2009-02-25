@@ -58,14 +58,12 @@ static void select_device_changed(BluetoothDeviceSelection *sel,
 				GTK_RESPONSE_ACCEPT, address != NULL);
 }
 
-int main(int argc, char **argv)
+static GtkWidget *
+create_dialogue (const char *title)
 {
-	GtkWidget *dialog, *selector;
-	int response;
+	GtkWidget *dialog;
 
-	gtk_init(&argc, &argv);
-
-	dialog = gtk_dialog_new_with_buttons("Browse Devices", NULL,
+	dialog = gtk_dialog_new_with_buttons(title, NULL,
 				GTK_DIALOG_NO_SEPARATOR,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 				GTK_STOCK_CONNECT, GTK_RESPONSE_ACCEPT, NULL);
@@ -76,13 +74,72 @@ int main(int argc, char **argv)
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
 
-	selector = bluetooth_device_selection_new("Select a Device to Setup");
+	return dialog;
+}
+
+static GtkWidget *
+create_phone_dialogue (void)
+{
+	GtkWidget *dialog, *selector;
+
+	dialog = create_dialogue ("Browse Devices");
+
+	selector = bluetooth_device_selection_new("Select device to use");
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
 		     "show-search", TRUE,
 		     "device-type-filter", BLUETOOTH_TYPE_PHONE,
 		     NULL);
+	g_object_set_data (G_OBJECT (dialog), "selector", selector);
+
+	return dialog;
+}
+
+static GtkWidget *
+create_wizard_dialogue (void)
+{
+	GtkWidget *dialog, *selector;
+
+	dialog = create_dialogue ("Add a Device");
+
+	selector = bluetooth_device_selection_new("Select new device to setup");
+	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
+	gtk_widget_show(selector);
+	g_object_set(selector,
+		     "show-search", TRUE,
+		     "show-device-category", FALSE,
+		     "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
+		     NULL);
+	g_object_set_data (G_OBJECT (dialog), "selector", selector);
+
+	return dialog;
+}
+
+
+int main(int argc, char **argv)
+{
+	GtkWidget *dialog, *selector;
+	const char *selection;
+	int response;
+
+	gtk_init(&argc, &argv);
+	if (argc < 2)
+		selection = "wizard";
+	else
+		selection = argv[1];
+
+	if (g_str_equal (selection, "phone")) {
+		dialog = create_phone_dialogue ();
+	} else if (g_str_equal (selection, "wizard")) {
+		dialog = create_wizard_dialogue ();
+	} else {
+		g_warning ("Unknown dialogue type, try either \"phone\" or \"wizard\"");
+		return 1;
+	}
+
+	selector = g_object_get_data (G_OBJECT (dialog), "selector");
+
 	g_signal_connect(selector, "selected-device-changed",
 			 G_CALLBACK(select_device_changed), dialog);
 	g_signal_connect(selector, "notify::device-selected",
@@ -92,6 +149,7 @@ int main(int argc, char **argv)
 	g_signal_connect(selector, "notify::device-category-filter",
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+	bluetooth_device_selection_start_discovery (BLUETOOTH_DEVICE_SELECTION (selector));
 	gtk_widget_show(dialog);
 
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
