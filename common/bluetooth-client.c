@@ -396,6 +396,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 
 			goto done;
 		}
+		g_free (value);
 
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store), &iter);
 	}
