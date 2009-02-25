@@ -97,8 +97,8 @@ const gchar *bluetooth_type_to_string(guint type)
 	case BLUETOOTH_TYPE_HEADSET:
 		/* translators: a hands-free headset, a combination of a single speaker with a microphone */
 		return N_("Headset");
-	case BLUETOOTH_TYPE_HEADPHONE:
-		return N_("Headphone");
+	case BLUETOOTH_TYPE_HEADPHONES:
+		return N_("Headphones");
 	case BLUETOOTH_TYPE_OTHER_AUDIO:
 		return N_("Audio device");
 	case BLUETOOTH_TYPE_KEYBOARD:
@@ -172,7 +172,7 @@ static guint class_to_type(guint32 class)
 		case 0x02:
 			return BLUETOOTH_TYPE_HEADSET;
 		case 0x06:
-			return BLUETOOTH_TYPE_HEADPHONE;
+			return BLUETOOTH_TYPE_HEADPHONES;
 		default:
 			return BLUETOOTH_TYPE_OTHER_AUDIO;
 		}

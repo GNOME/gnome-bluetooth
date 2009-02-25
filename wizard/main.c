@@ -73,7 +73,7 @@ static guint string_to_type(const char *type)
 	TYPE_IS ("mouse", BLUETOOTH_TYPE_MOUSE);
 	TYPE_IS ("keyboard", BLUETOOTH_TYPE_KEYBOARD);
 	TYPE_IS ("headset", BLUETOOTH_TYPE_HEADSET);
-	TYPE_IS ("headphone", BLUETOOTH_TYPE_HEADPHONE);
+	TYPE_IS ("headphones", BLUETOOTH_TYPE_HEADPHONES);
 	TYPE_IS ("audio", BLUETOOTH_TYPE_OTHER_AUDIO);
 	TYPE_IS ("printer", BLUETOOTH_TYPE_PRINTER);
 	TYPE_IS ("network", BLUETOOTH_TYPE_NETWORK);
