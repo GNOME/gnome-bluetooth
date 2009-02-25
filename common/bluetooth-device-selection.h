@@ -25,7 +25,7 @@
 #ifndef __BLUETOOTH_DEVICE_SELECTION_H
 #define __BLUETOOTH_DEVICE_SELECTION_H
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 #include <bluetooth-enums.h>
 
 G_BEGIN_DECLS
