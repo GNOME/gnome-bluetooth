@@ -27,6 +27,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 
 #include <dbus/dbus-glib.h>
 
@@ -48,6 +49,11 @@ static gchar *target_pincode = NULL;
 static guint target_type = BLUETOOTH_TYPE_ANY;
 static gboolean target_ssp = FALSE;
 
+/* NULL means automatic, anything else is a pincode specified by the user */
+static const gchar *user_pincode = NULL;
+static const gchar *last_fixed_pincode = "0000";
+
+static GtkWidget *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_setup = NULL;
 static GtkWidget *page_summary = NULL;
@@ -151,9 +157,13 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 	char *pincode;
 	gchar *text;
 
-	pincode = set_pincode_for_device(target_type, target_address, target_name);
-	if (pincode == NULL)
-		pincode = g_strdup(target_pincode);
+	if (user_pincode != NULL && strlen(user_pincode) == 4) {
+		pincode = g_strdup (user_pincode);
+	} else {
+		pincode = set_pincode_for_device(target_type, target_address, target_name);
+		if (pincode == NULL)
+			pincode = g_strdup(target_pincode);
+	}
 
 	text = g_strdup_printf(_("Please enter the following PIN code: %s"),
 								pincode);
@@ -451,9 +461,21 @@ static void create_type(GtkWidget *assistant)
 }
 #endif
 
+static void set_page_search_complete(void)
+{
+	int selected;
+	gboolean complete;
+
+	selected = gtk_tree_selection_count_selected_rows (search_selection);
+	complete = (selected != 0 &&
+			(user_pincode == NULL || strlen(user_pincode) == 4));
+
+	gtk_assistant_set_page_complete(GTK_ASSISTANT (window_assistant),
+					page_search, complete);
+}
+
 static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 {
-	GtkAssistant *assistant = user_data;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gboolean selected;
@@ -470,7 +492,7 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 			selected = FALSE;
 	}
 
-	gtk_assistant_set_page_complete(assistant, page_search, selected);
+	set_page_search_complete();
 }
 
 static gboolean device_filter(GtkTreeModel *model,
@@ -483,6 +505,54 @@ static gboolean device_filter(GtkTreeModel *model,
 	return (paired == TRUE) ? FALSE : TRUE;
 }
 
+static gboolean entry_custom_event(GtkWidget *entry,
+					GdkEventKey *event, GtkWidget *box)
+{
+	if (event->length == 0)
+		return FALSE;
+
+	if ((event->keyval >= GDK_0 && event->keyval <= GDK_9) ||
+	    (event->keyval >= GDK_KP_0 && event->keyval <= GDK_KP_9))
+		return FALSE;
+
+	return TRUE;
+}
+
+static void entry_custom_changed(GtkWidget *entry, gpointer user_data)
+{
+	user_pincode = gtk_entry_get_text(GTK_ENTRY(entry));
+	set_page_search_complete();
+}
+
+static void toggle_set_sensitive(GtkWidget *button, GtkWidget *widget)
+{
+	gboolean active;
+
+	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
+	gtk_widget_set_sensitive(widget, active);
+}
+
+static void set_user_pincode(GtkWidget *button, const gchar *pincode)
+{
+	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
+		return;
+
+	if (pincode == NULL && user_pincode != NULL)
+		last_fixed_pincode = user_pincode;
+
+	user_pincode = pincode;
+	set_page_search_complete();
+}
+
+static void set_from_last_fixed_pincode(GtkWidget *button, gpointer user_data)
+{
+	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
+		return;
+
+	user_pincode = last_fixed_pincode;
+	set_page_search_complete();
+}
+
 static void create_search(GtkWidget *assistant)
 {
 	GtkWidget *vbox;
@@ -491,6 +561,16 @@ static void create_search(GtkWidget *assistant)
 	GtkTreeModel *model;
 	GtkTreeModel *sorted;
 	GtkTreeSelection *selection;
+	GtkWidget *radio_auto;
+	GtkWidget *radio_fixed;
+	GtkWidget *align_fixed;
+	GtkWidget *vbox_fixed;
+	GtkWidget *radio_0000;
+	GtkWidget *radio_1111;
+	GtkWidget *radio_1234;
+	GtkWidget *hbox_custom;
+	GtkWidget *radio_custom;
+	GtkWidget *entry_custom;
 
 	vbox = create_vbox(assistant, GTK_ASSISTANT_PAGE_CONTENT,
 				_("Device search"),
@@ -519,6 +599,62 @@ static void create_search(GtkWidget *assistant)
 	search_selection = selection;
 
 	gtk_container_add(GTK_CONTAINER(scrolled), tree);
+
+	radio_auto = gtk_radio_button_new_with_mnemonic(NULL,
+					_("_Automatic PIN code selection"));
+	gtk_container_add(GTK_CONTAINER(vbox), radio_auto);
+
+	radio_fixed = gtk_radio_button_new_with_mnemonic_from_widget(GTK_RADIO_BUTTON(radio_auto), _("Use _fixed PIN code:"));
+	gtk_container_add(GTK_CONTAINER(vbox), radio_fixed);
+
+	align_fixed = gtk_alignment_new(0, 0, 1, 1);
+	gtk_alignment_set_padding(GTK_ALIGNMENT(align_fixed), 0, 0, 24, 0);
+	gtk_container_add(GTK_CONTAINER(vbox), align_fixed);
+	vbox_fixed = gtk_vbox_new(FALSE, 0);
+	gtk_container_add(GTK_CONTAINER(align_fixed), vbox_fixed);
+
+	radio_0000 = gtk_radio_button_new_with_label(NULL, _("'0000' (most headsets, mice and GPS devices)"));
+	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_0000);
+
+	radio_1111 = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("'1111'"));
+	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_1111);
+
+	radio_1234 = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("'1234'"));
+	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_1234);
+
+	hbox_custom = gtk_hbox_new(FALSE, 6);
+	radio_custom = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("Custom PIN code:"));
+	entry_custom = gtk_entry_new_with_max_length(4);
+	gtk_entry_set_width_chars(GTK_ENTRY(entry_custom), 4);
+        g_signal_connect (entry_custom, "key-press-event",
+			  G_CALLBACK (entry_custom_event), NULL);
+        g_signal_connect (entry_custom, "changed",
+			  G_CALLBACK (entry_custom_changed), NULL);
+	gtk_box_pack_start(GTK_BOX(hbox_custom), radio_custom,
+			FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox_custom), entry_custom,
+			FALSE, FALSE, 0);
+	gtk_container_add(GTK_CONTAINER(vbox_fixed), hbox_custom);
+
+	toggle_set_sensitive(radio_fixed, vbox_fixed);
+	g_signal_connect(radio_fixed, "toggled",
+			G_CALLBACK(toggle_set_sensitive), vbox_fixed);
+	toggle_set_sensitive(radio_custom, entry_custom);
+	g_signal_connect(radio_custom, "toggled",
+			G_CALLBACK(toggle_set_sensitive), entry_custom);
+
+	g_signal_connect(radio_auto, "toggled",
+			G_CALLBACK(set_user_pincode), NULL);
+	g_signal_connect(radio_fixed, "toggled",
+			G_CALLBACK(set_from_last_fixed_pincode), NULL);
+	g_signal_connect(radio_0000, "toggled",
+			G_CALLBACK(set_user_pincode), "0000");
+	g_signal_connect(radio_1111, "toggled",
+			G_CALLBACK(set_user_pincode), "1111");
+	g_signal_connect(radio_1234, "toggled",
+			G_CALLBACK(set_user_pincode), "1234");
+        g_signal_connect_swapped (radio_custom, "toggled",
+			  G_CALLBACK (entry_custom_changed), entry_custom);
 
 	page_search = vbox;
 }
@@ -631,6 +767,7 @@ int main(int argc, char *argv[])
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
 	window = create_wizard();
+	window_assistant = window;
 
 	bluetooth_instance_set_window(instance, GTK_WINDOW(window));
 
