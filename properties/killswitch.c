@@ -31,14 +31,11 @@
 
 #include <dbus/dbus-glib-lowlevel.h>
 
-#ifdef HAVE_HAL
 #include <hal/libhal.h>
-#endif
 
 #include "general.h"
 #include "killswitch.h"
 
-#ifdef HAVE_HAL
 static LibHalContext *halctx = NULL;
 
 static void setpower_reply(DBusPendingCall *call, void *user_data)
@@ -186,9 +183,6 @@ static gboolean detect_killswitch(GtkWidget *vbox)
 
 	return result;
 }
-#else
-#define detect_killswitch(widget) FALSE
-#endif
 
 GtkWidget *create_killswitch(void)
 {
@@ -213,7 +207,6 @@ void setup_killswitch(void)
 	if (connection == NULL)
 		return;
 
-#ifdef HAVE_HAL
 	halctx = libhal_ctx_new();
 	if (halctx == NULL)
 		return;
@@ -230,18 +223,15 @@ void setup_killswitch(void)
 		halctx = NULL;
 		return;
 	}
-#endif
 }
 
 void cleanup_killswitch(void)
 {
-#ifdef HAVE_HAL
 	if (halctx != NULL) {
 		libhal_ctx_shutdown(halctx, NULL);
 		libhal_ctx_free(halctx);
 		halctx = NULL;
 	}
-#endif
 
 	if (connection != NULL)
 		dbus_connection_unref(connection);
