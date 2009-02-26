@@ -504,11 +504,6 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (hbox);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 
-	label = gtk_label_new_with_mnemonic (_("_Select a device from the following list:"));
-	gtk_widget_show (label);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 1);
-
 	/* Setup the adapter disco mode callback for the search button */
 	priv->adapter_model = bluetooth_client_get_adapter_model (priv->client);
 	g_signal_connect (priv->adapter_model, "row-changed",
