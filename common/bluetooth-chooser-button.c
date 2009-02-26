@@ -300,6 +300,17 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 
 	button_class->clicked = bluetooth_chooser_button_clicked;
 
+	/**
+	 * BluetoothChooserButton:chooser-created:
+	 *
+	 * @bluetoothchooserbutton: a #BluetoothChooserButton widget
+	 * @arg1: a #BluetoothChooser widget
+	 *
+	 * The signal is sent when a popup dialogue is created for the user to select
+	 * a device. This signal allows you to change the configuration and filtering
+	 * of the tree from its defaults.
+	 *
+	 **/
 	signals[CHOOSER_CREATED] =
 		g_signal_new ("chooser-created",
 			      G_TYPE_FROM_CLASS (klass),
@@ -309,9 +320,21 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE, 1, G_TYPE_OBJECT);
 
+	/**
+	 * BluetoothChooserButton:device:
+	 *
+	 * The Bluetooth address of the selected device or %NULL
+	 **/
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_string ("device", "Device", "The Bluetooth address of the selected device.",
 							      NULL, G_PARAM_READWRITE));
+	/**
+	 * BluetoothChooserButton:is-available:
+	 *
+	 * %TRUE if there is a powered Bluetooth adapter available.
+	 *
+	 * See also: bluetooth_chooser_button_available()
+	 **/
 	g_object_class_install_property (object_class, PROP_IS_AVAILABLE,
 					 g_param_spec_boolean ("is-available", "Bluetooth is available", "Whether Bluetooth is available.",
 							       TRUE, G_PARAM_READABLE));
@@ -338,6 +361,11 @@ bluetooth_chooser_button_init (BluetoothChooserButton *button)
 	set_btdevname (button, NULL, NULL, NULL);
 }
 
+/**
+ * bluetooth_chooser_button_new:
+ *
+ * Return value: a #BluetoothChooserButton
+ **/
 GtkWidget *
 bluetooth_chooser_button_new (void)
 {
@@ -346,6 +374,12 @@ bluetooth_chooser_button_new (void)
 			     NULL);
 }
 
+/**
+ * bluetooth_chooser_button_available:
+ * @button: a #BluetoothChooserButton
+ *
+ * Return value: %TRUE if there is a powered Bluetooth adapter available, and the button should be sensitive.
+ **/
 gboolean
 bluetooth_chooser_button_available (BluetoothChooserButton *button)
 {
