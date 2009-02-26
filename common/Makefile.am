@@ -3,7 +3,6 @@ noinst_LTLIBRARIES = libcommon.la
 lib_LTLIBRARIES = libgnome-bluetooth.la
 
 libcommon_la_SOURCES = helper.h helper.c \
-		bluetooth-instance.h bluetooth-instance.c \
 		bluetooth-client.h bluetooth-client.c \
 		bluetooth-agent.h bluetooth-agent.c \
 		obex-agent.h obex-agent.c \
@@ -37,7 +36,6 @@ gnomebluetooth_HEADERS =				\
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 BUILT_SOURCES = marshal.h marshal.c \
-		bluetooth-instance-glue.h \
 		bluetooth-client-glue.h \
 		bluetooth-agent-glue.h \
 		obex-agent-glue.h
@@ -55,7 +53,6 @@ test_agent_LDADD = libcommon.la $(DBUS_LIBS)
 test_deviceselection_LDADD = libgnome-bluetooth.la
 
 EXTRA_DIST = marshal.list \
-		bluetooth-instance.xml \
 		bluetooth-client.xml \
 		bluetooth-agent.xml \
 		obex-agent.xml
@@ -67,9 +64,6 @@ marshal.h: marshal.list
 
 marshal.c: marshal.list
 	$(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
-
-bluetooth-instance-glue.h: bluetooth-instance.xml
-	$(DBUS_BINDING_TOOL) --prefix=bluetooth_instance --mode=glib-server --output=$@ $<
 
 bluetooth-client-glue.h: bluetooth-client.xml
 	$(DBUS_BINDING_TOOL) --prefix=bluetooth_client --mode=glib-client --output=$@ $<

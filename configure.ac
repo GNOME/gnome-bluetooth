@@ -70,14 +70,16 @@ PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  hal >= $HAL_REQUIRED
 		  gconf-2.0
-		  gtk+-2.0)
+		  gtk+-2.0
+		  unique-1.0)
 
 dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gconf-2.0
 		  gtk+-2.0
-		  libnotify >= $NOTIFY_REQUIRED)
+		  libnotify >= $NOTIFY_REQUIRED
+		  unique-1.0)
 
 dnl Requires for the sendto app
 PKG_CHECK_MODULES(SENDTO,
@@ -88,7 +90,8 @@ PKG_CHECK_MODULES(SENDTO,
 dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  gtk+-2.0)
+		  gtk+-2.0
+		  unique-1.0)
 
 dnl Requires for the libraries
 PKG_CHECK_MODULES(LIBGNOMEBT,

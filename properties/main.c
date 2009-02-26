@@ -28,8 +28,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-
-#include <bluetooth-instance.h>
+#include <unique/uniqueapp.h>
 
 #include "general.h"
 #include "adapter.h"
@@ -100,13 +99,25 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	return window;
 }
 
+static UniqueResponse
+message_received_cb (UniqueApp         *app,
+                     int                command,
+                     UniqueMessageData *message_data,
+                     guint              time_,
+                     gpointer           user_data)
+{
+        gtk_window_present (GTK_WINDOW (user_data));
+
+        return UNIQUE_RESPONSE_OK;
+}
+
 static GOptionEntry options[] = {
 	{ NULL },
 };
 
 int main(int argc, char *argv[])
 {
-	BluetoothInstance *instance;
+	UniqueApp *app;
 	GtkWidget *window;
 	GtkWidget *notebook;
 	GError *error = NULL;
@@ -126,9 +137,11 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	instance = bluetooth_instance_new("properties");
-	if (instance == NULL)
+	app = unique_app_new ("org.gnome.Bluetooth.properties", NULL);
+	if (unique_app_is_running (app)) {
+		unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
 		return 0;
+	}
 
 	g_set_application_name(_("Bluetooth Properties"));
 
@@ -142,7 +155,8 @@ int main(int argc, char *argv[])
 
 	window = create_window(notebook);
 
-	bluetooth_instance_set_window(instance, GTK_WINDOW(window));
+	g_signal_connect (app, "message-received",
+			  G_CALLBACK (message_received_cb), window);
 
 	gtk_main();
 
@@ -150,7 +164,7 @@ int main(int argc, char *argv[])
 
 	cleanup_general();
 
-	g_object_unref(instance);
+	g_object_unref(app);
 
 	return 0;
 }

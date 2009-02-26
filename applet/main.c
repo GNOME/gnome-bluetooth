@@ -30,8 +30,8 @@
 #include <gtk/gtk.h>
 
 #include <gconf/gconf-client.h>
+#include <unique/uniqueapp.h>
 
-#include <bluetooth-instance.h>
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
 
@@ -407,7 +407,7 @@ static GOptionEntry options[] = {
 
 int main(int argc, char *argv[])
 {
-	BluetoothInstance *instance;
+	UniqueApp *app;
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
 	GError *error = NULL;
@@ -428,9 +428,11 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	instance = bluetooth_instance_new("applet");
-	if (instance == NULL)
+	app = unique_app_new ("org.gnome.Bluetooth.applet", NULL);
+	if (unique_app_is_running (app)) {
+		g_warning ("Applet is already running, exiting");
 		return 0;
+	}
 
 	g_set_application_name(_("Bluetooth Applet"));
 
@@ -498,7 +500,7 @@ int main(int argc, char *argv[])
 
 	g_object_unref(client);
 
-	g_object_unref(instance);
+	g_object_unref (app);
 
 	return 0;
 }
