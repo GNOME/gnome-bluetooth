@@ -221,21 +221,12 @@ static void wizard_callback(GObject *widget, gpointer user_data)
 static void activate_callback(GObject *widget, gpointer user_data)
 {
 	guint32 activate_time = gtk_get_current_event_time();
-	GtkWidget *menu;
-	GtkWidget *item;
+	GtkWidget *menu = user_data;
 
 	if (query_blinking() == TRUE) {
 		show_agents();
 		return;
 	}
-
-	menu = gtk_menu_new();
-
-	item = gtk_menu_item_new_with_label(_("Setup new device..."));
-	g_signal_connect(item, "activate",
-				G_CALLBACK(wizard_callback), NULL);
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			gtk_status_icon_position_menu,
@@ -476,11 +467,9 @@ int main(int argc, char *argv[])
 
 	update_icon_visibility();
 
-	g_signal_connect(statusicon, "activate",
-				G_CALLBACK(activate_callback), NULL);
-
 	menu = create_popupmenu();
-
+	g_signal_connect(statusicon, "activate",
+				G_CALLBACK(activate_callback), menu);
 	g_signal_connect(statusicon, "popup-menu",
 				G_CALLBACK(popup_callback), menu);
 
