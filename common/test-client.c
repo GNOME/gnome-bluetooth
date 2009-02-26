@@ -186,6 +186,10 @@ static void create_window(void)
 					"Discovering", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_DISCOVERING, NULL);
 
+	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
+					"Powered", gtk_cell_renderer_text_new(),
+					"text", BLUETOOTH_COLUMN_POWERED, NULL);
+
 	model = bluetooth_client_get_model(client);
 	sorted = gtk_tree_model_sort_new_with_model(model);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(sorted),

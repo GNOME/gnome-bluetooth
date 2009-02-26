@@ -500,6 +500,7 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 	BluetoothClient *client = BLUETOOTH_CLIENT(user_data);
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
+	gboolean notify = FALSE;
 
 	DBG("client %p property %s", client, property);
 
@@ -509,7 +510,7 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 	if (g_str_equal (property, "Powered") == TRUE) {
 		GHashTable *hash;
 		const gchar *address, *name;
-		gboolean discovering;
+		gboolean discovering, powered;
 		GPtrArray *array;
 
 		/* Need to update those properties! */
@@ -524,10 +525,16 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 			value = g_hash_table_lookup(hash, "Discovering");
 			discovering = value ? g_value_get_boolean(value) : FALSE;
 
+			value = g_hash_table_lookup(hash, "Powered");
+			powered = value ? g_value_get_boolean(value) : FALSE;
+
 			gtk_tree_store_set(priv->store, &iter,
 					   BLUETOOTH_COLUMN_ADDRESS, address,
 					   BLUETOOTH_COLUMN_NAME, name,
-					   BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+					   BLUETOOTH_COLUMN_DISCOVERING, discovering,
+					   BLUETOOTH_COLUMN_POWERED, powered,
+					   -1);
+			notify = TRUE;
 
 			adapter_list_devices(adapter, &array, NULL);
 			if (array != NULL) {
@@ -547,10 +554,14 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 					BLUETOOTH_COLUMN_NAME, name, -1);
 	} else if (g_str_equal(property, "Discovering") == TRUE) {
 		gboolean discovering = g_value_get_boolean(value);
-		GtkTreePath *path;
 
 		gtk_tree_store_set(priv->store, &iter,
 				BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+		notify = TRUE;
+	}
+
+	if (notify != FALSE) {
+		GtkTreePath *path;
 
 		/* Tell the world */
 		path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
@@ -570,7 +581,7 @@ static void adapter_added(DBusGProxy *manager,
 	GHashTable *hash = NULL;
 	GValue *value;
 	const gchar *address, *name;
-	gboolean discovering;
+	gboolean discovering, powered;
 
 	DBG("client %p path %s", client, path);
 
@@ -587,17 +598,23 @@ static void adapter_added(DBusGProxy *manager,
 
 		value = g_hash_table_lookup(hash, "Discovering");
 		discovering = value ? g_value_get_boolean(value) : FALSE;
+
+		value = g_hash_table_lookup(hash, "Powered");
+		powered = value ? g_value_get_boolean(value) : FALSE;
 	} else {
 		address = NULL;
 		name = NULL;
 		discovering = FALSE;
+		powered = FALSE;
 	}
 
 	gtk_tree_store_insert_with_values(priv->store, &iter, NULL, -1,
-				BLUETOOTH_COLUMN_PROXY, adapter,
-				BLUETOOTH_COLUMN_ADDRESS, address,
-				BLUETOOTH_COLUMN_NAME, name,
-				BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+					  BLUETOOTH_COLUMN_PROXY, adapter,
+					  BLUETOOTH_COLUMN_ADDRESS, address,
+					  BLUETOOTH_COLUMN_NAME, name,
+					  BLUETOOTH_COLUMN_DISCOVERING, discovering,
+					  BLUETOOTH_COLUMN_POWERED, powered,
+					  -1);
 
 	dbus_g_proxy_add_signal(adapter, "PropertyChanged",
 				G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
@@ -756,10 +773,10 @@ static void bluetooth_client_init(BluetoothClient *client)
 	DBG("client %p", client);
 
 	priv->store = gtk_tree_store_new(_BLUETOOTH_NUM_COLUMNS, G_TYPE_OBJECT,
-			G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-			G_TYPE_UINT, G_TYPE_STRING, G_TYPE_INT,
-			G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-					G_TYPE_BOOLEAN, G_TYPE_BOOLEAN);
+					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
+					 G_TYPE_UINT, G_TYPE_STRING, G_TYPE_INT,
+					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
+					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN);
 
 	priv->dbus = dbus_g_proxy_new_for_name(connection, DBUS_SERVICE_DBUS,
 				DBUS_PATH_DBUS, DBUS_INTERFACE_DBUS);
