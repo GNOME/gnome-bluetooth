@@ -318,11 +318,7 @@ model_row_changed (GtkTreeModel *model,
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	gboolean discovering, is_default;
-
-	char *foo;
-	gtk_tree_model_get (model, iter,
-			    BLUETOOTH_COLUMN_NAME, &foo, -1);
+	gboolean discovering, is_default, powered;
 
 	/* Not an adapter changing? */
 	if (gtk_tree_path_get_depth (path) != 1)
@@ -331,10 +327,13 @@ model_row_changed (GtkTreeModel *model,
 	gtk_tree_model_get (model, iter,
 			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
 			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
+			    BLUETOOTH_COLUMN_POWERED, &powered,
 			    -1);
+
 	if (is_default == FALSE)
 		return;
-	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), !discovering);
+	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), !discovering && powered);
+	gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), powered);
 }
 
 static void default_adapter_changed (GObject    *gobject,
@@ -349,6 +348,7 @@ static void default_adapter_changed (GObject    *gobject,
 
 	if (adapter == NULL) {
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
 		gtk_tree_view_set_model (GTK_TREE_VIEW(priv->treeview), NULL);
 	}
 
@@ -370,6 +370,7 @@ static void default_adapter_changed (GObject    *gobject,
 		gtk_tree_view_set_model (GTK_TREE_VIEW(priv->treeview), priv->filter);
 		g_object_unref (priv->filter);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
 	}
 }
 
