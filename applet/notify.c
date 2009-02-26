@@ -93,12 +93,9 @@ GtkStatusIcon *init_notification(void)
 {
 	notify_init("bluetooth-manager");
 
-	statusicon = gtk_status_icon_new();
-	g_object_unref(statusicon);
-
 	statusicon = gtk_status_icon_new_from_icon_name("bluetooth");
 
-	//gtk_status_icon_set_tooltip(statusicon, _("Bluetooth Manager"));
+	gtk_status_icon_set_tooltip_markup(statusicon, _("Bluetooth Manager"));
 
 	return statusicon;
 }
