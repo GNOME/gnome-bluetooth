@@ -35,6 +35,9 @@ IT_PROG_INTLTOOL([0.35.0])
 AC_PATH_PROG(GCONFTOOL, [gconftool-2])
 AM_GCONF_SOURCE_2
 
+dnl gtk-doc checks
+GTK_DOC_CHECK(1.9)
+
 AC_DEFINE_UNQUOTED(LOCALEDIR, "${prefix}/share/locale", [Directory for the localization files])
 
 AC_ARG_ENABLE(desktop-update, AC_HELP_STRING([--disable-desktop-update],
@@ -112,6 +115,9 @@ AC_OUTPUT(Makefile
 	  properties/Makefile
 	  wizard/Makefile
 	  sendto/Makefile
+	  docs/Makefile
+	  docs/reference/Makefile
+	  docs/reference/libgnome-bluetooth/Makefile
 	  po/Makefile.in
 )
 
