@@ -225,8 +225,6 @@ default_adapter_changed (GObject *object, GParamSpec *pspec, gpointer data)
 	button->is_available = (adapter != NULL);
 	g_free (adapter);
 
-	gtk_widget_set_sensitive (GTK_WIDGET (button), button->is_available);
-
 	if (button->is_available != FALSE)
 		set_btdevname (button, button->bdaddr, NULL, NULL);
 
