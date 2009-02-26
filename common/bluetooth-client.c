@@ -205,7 +205,7 @@ static guint class_to_type(guint32 class)
 		break;
 	}
 
-	return BLUETOOTH_TYPE_ANY;
+	return 0;
 }
 
 typedef gboolean (*IterSearchFunc) (GtkTreeStore *store,
