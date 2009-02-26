@@ -125,6 +125,7 @@ create_wizard_dialogue (void)
 	gtk_widget_show(selector);
 	g_object_set(selector,
 		     "show-search", TRUE,
+		     "show-device-type", TRUE,
 		     "show-device-category", FALSE,
 		     "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
 		     NULL);
