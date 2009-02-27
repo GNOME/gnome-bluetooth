@@ -242,6 +242,30 @@ bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
 }
 
 static void
+device_model_row_changed (GtkTreeModel *model,
+			   GtkTreePath  *path,
+			   GtkTreeIter  *iter,
+			   gpointer      data)
+{
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	char *name;
+
+	/* Not the selection changing? */
+	if (gtk_tree_selection_path_is_selected (priv->selection, path) == FALSE)
+		return;
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_NAME, &name,
+			    -1);
+	/* Maybe it's the name that changed */
+	if (name != NULL)
+		g_object_notify (G_OBJECT (self), "device-selected-name");
+
+	g_free (name);
+}
+
+static void
 search_button_clicked (GtkButton *button, gpointer user_data)
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER(user_data);
@@ -393,6 +417,9 @@ static void default_adapter_changed (GObject    *gobject,
 		g_object_unref (priv->filter);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
+
+		g_signal_connect (priv->adapter_model, "row-changed",
+				  G_CALLBACK (device_model_row_changed), self);
 	}
 }
 
@@ -469,6 +496,9 @@ create_treeview (BluetoothChooser *self)
 							filter_func, self, NULL);
 		gtk_tree_view_set_model (GTK_TREE_VIEW(tree), priv->filter);
 		g_object_unref (priv->filter);
+
+		g_signal_connect (priv->adapter_model, "row-changed",
+				  G_CALLBACK (device_model_row_changed), self);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (tree), FALSE);
 	}
