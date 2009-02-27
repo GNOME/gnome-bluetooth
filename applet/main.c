@@ -40,6 +40,7 @@
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
+
 static gboolean adapter_present = FALSE;
 
 enum {
@@ -312,26 +313,6 @@ static GtkWidget *create_popupmenu(void)
 	return menu;
 }
 
-static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
-					GtkTreeIter *iter, gpointer user_data)
-{
-	adapter_present = TRUE;
-
-	if (icon_policy != ICON_POLICY_NEVER)
-		show_icon();
-}
-
-static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
-							gpointer user_data)
-{
-	if (gtk_tree_model_iter_n_children(model, NULL) < 1) {
-		adapter_present = FALSE;
-
-		if (icon_policy != ICON_POLICY_ALWAYS)
-			hide_icon();
-	}
-}
-
 static void update_icon_visibility()
 {
 	if (icon_policy == ICON_POLICY_NEVER)
@@ -343,6 +324,22 @@ static void update_icon_visibility()
 			show_icon();
 		else
 			hide_icon();
+	}
+}
+
+static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
+					GtkTreeIter *iter, gpointer user_data)
+{
+	adapter_present = TRUE;
+	update_icon_visibility ();
+}
+
+static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
+							gpointer user_data)
+{
+	if (gtk_tree_model_iter_n_children(model, NULL) < 1) {
+		adapter_present = FALSE;
+		update_icon_visibility ();
 	}
 }
 
