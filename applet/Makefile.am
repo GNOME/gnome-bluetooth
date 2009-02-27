@@ -19,6 +19,7 @@ man_MANS = bluetooth-applet.1
 
 autostartdir = $(sysconfdir)/xdg/autostart
 
+autostart_in_in_files = bluetooth-applet.desktop.in.in
 autostart_in_files = bluetooth-applet.desktop.in
 
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
@@ -27,6 +28,6 @@ autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(autostart_DATA)
 
-EXTRA_DIST = $(man_MANS) $(autostart_in_files)
+EXTRA_DIST = $(man_MANS) $(autostart_in_in_files)
 
 MAINTAINERCLEANFILES = Makefile.in

@@ -14,6 +14,7 @@ man_MANS = bluetooth-properties.1
 
 desktopdir = $(datadir)/applications
 
+desktop_in_in_files = bluetooth-properties.desktop.in.in
 desktop_in_files = bluetooth-properties.desktop.in
 
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
@@ -30,7 +31,7 @@ schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
 CLEANFILES = $(desktop_DATA) $(schema_DATA)
 
-EXTRA_DIST = $(man_MANS) $(desktop_in_files) $(schema_in_files)
+EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) $(schema_in_files)
 
 MAINTAINERCLEANFILES = Makefile.in
 

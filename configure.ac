@@ -115,7 +115,9 @@ AC_OUTPUT(Makefile
 	  icons/Makefile
 	  common/Makefile
 	  applet/Makefile
+	  applet/bluetooth-applet.desktop.in
 	  properties/Makefile
+	  properties/bluetooth-properties.desktop.in
 	  wizard/Makefile
 	  sendto/Makefile
 	  docs/Makefile
