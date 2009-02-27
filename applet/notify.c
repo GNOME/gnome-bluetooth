@@ -32,6 +32,7 @@
 #include "notify.h"
 
 static GtkStatusIcon *statusicon = NULL;
+static char *icon_name = NULL;
 static NotifyNotification *notify = NULL;
 
 static void notify_action(NotifyNotification *notify,
@@ -54,7 +55,7 @@ void show_notification(const gchar *summary, const gchar *message,
 		notify_notification_close(notify, NULL);
 	}
 
-	notify = notify_notification_new(summary, message, "bluetooth", NULL);
+	notify = notify_notification_new(summary, message, icon_name, NULL);
 
 	notify_notification_set_timeout(notify, timeout);
 
@@ -93,7 +94,7 @@ GtkStatusIcon *init_notification(void)
 {
 	notify_init("bluetooth-manager");
 
-	statusicon = gtk_status_icon_new_from_icon_name("bluetooth");
+	statusicon = gtk_status_icon_new_from_icon_name(icon_name);
 
 #if GTK_CHECK_VERSION(2,15,0)
 	gtk_status_icon_set_tooltip_markup(statusicon, _("Bluetooth Manager"));
@@ -108,17 +109,34 @@ void cleanup_notification(void)
 
 	g_object_unref(statusicon);
 
+	g_free (icon_name);
+	icon_name = NULL;
+
 	notify_uninit();
 }
 
 void show_icon(void)
 {
-	gtk_status_icon_set_visible(statusicon, TRUE);
+	if (statusicon != NULL)
+		gtk_status_icon_set_visible(statusicon, TRUE);
 }
 
 void hide_icon(void)
 {
-	gtk_status_icon_set_visible(statusicon, FALSE);
+	if (statusicon != NULL)
+		gtk_status_icon_set_visible(statusicon, FALSE);
+}
+
+void set_icon(gboolean enabled)
+{
+	const char *name = (enabled ? "bluetooth" : "bluetooth-disabled");
+
+	if (statusicon == NULL) {
+		g_free (icon_name);
+		icon_name = g_strdup (name);
+	} else {
+		gtk_status_icon_set_from_icon_name (statusicon, name);
+	}
 }
 
 void enable_blinking(void)

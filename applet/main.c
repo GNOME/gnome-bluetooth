@@ -40,8 +40,8 @@
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
-
-static gboolean adapter_present = FALSE;
+static guint num_adapters_present = 0;
+static guint num_adapters_powered = 0;
 
 enum {
 	ICON_POLICY_NEVER,
@@ -247,14 +247,17 @@ static void popup_callback(GObject *widget, guint button,
 				guint activate_time, gpointer user_data)
 {
 	GtkWidget *menu = user_data;
+	gboolean enabled;
+
+	enabled = (num_adapters_present - num_adapters_powered) >= 0;
 
 	gtk_widget_set_sensitive(menuitem_sendto,
 				program_available("obex-data-server") &&
-						adapter_present == TRUE);
+						enabled);
 
 	gtk_widget_set_sensitive(menuitem_browse,
 					program_available("nautilus") &&
-						adapter_present == TRUE);
+						enabled);
 
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			gtk_status_icon_position_menu,
@@ -320,27 +323,56 @@ static void update_icon_visibility()
 	else if (icon_policy == ICON_POLICY_ALWAYS)
 		show_icon();
 	else if (icon_policy == ICON_POLICY_PRESENT) {
-		if (adapter_present == TRUE)
+		if (num_adapters_powered == 0)
+			set_icon (FALSE);
+		else
+			set_icon (TRUE);
+		if (num_adapters_present > 0)
 			show_icon();
 		else
 			hide_icon();
 	}
 }
 
-static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
-					GtkTreeIter *iter, gpointer user_data)
+static void adapter_changed (GtkTreeModel *model,
+			     GtkTreePath  *path,
+			     GtkTreeIter  *_iter,
+			     gpointer      data)
 {
-	adapter_present = TRUE;
+	GtkTreeIter iter;
+	gboolean powered, cont;
+
+	num_adapters_present = num_adapters_powered = 0;
+
+	cont = gtk_tree_model_get_iter_first (model, &iter);
+	while (cont) {
+		num_adapters_present++;
+
+		gtk_tree_model_get (model, &iter,
+				    BLUETOOTH_COLUMN_POWERED, &powered,
+				    -1);
+		if (powered)
+			num_adapters_powered++;
+
+		cont = gtk_tree_model_iter_next (model, &iter);
+	}
+
 	update_icon_visibility ();
 }
 
-static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
-							gpointer user_data)
+static void adapter_added(GtkTreeModel *model,
+			  GtkTreePath *path,
+			  GtkTreeIter *iter,
+			  gpointer user_data)
 {
-	if (gtk_tree_model_iter_n_children(model, NULL) < 1) {
-		adapter_present = FALSE;
-		update_icon_visibility ();
-	}
+	adapter_changed (model, NULL, NULL, NULL);
+}
+
+static void adapter_removed(GtkTreeModel *model,
+			    GtkTreePath *path,
+			    gpointer user_data)
+{
+	adapter_changed (model, NULL, NULL, NULL);
 }
 
 static GConfEnumStringPair icon_policy_enum_map [] = {
@@ -415,13 +447,13 @@ int main(int argc, char *argv[])
 	adapter_model = bluetooth_client_get_adapter_model(client);
 
 	g_signal_connect(G_OBJECT(adapter_model), "row-inserted",
-					G_CALLBACK(adapter_added), NULL);
-
+			 G_CALLBACK(adapter_added), NULL);
 	g_signal_connect(G_OBJECT(adapter_model), "row-deleted",
-					G_CALLBACK(adapter_removed), NULL);
-
-	if (gtk_tree_model_iter_n_children(adapter_model, NULL) > 0)
-		adapter_present = TRUE;
+			 G_CALLBACK(adapter_removed), NULL);
+	g_signal_connect (G_OBJECT (adapter_model), "row-changed",
+			  G_CALLBACK (adapter_changed), NULL);
+	/* Set the default */
+	adapter_changed (adapter_model, NULL, NULL, NULL);
 
 	gconf = gconf_client_get_default();
 

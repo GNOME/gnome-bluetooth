@@ -31,6 +31,7 @@ void close_notification(void);
 
 void show_icon(void);
 void hide_icon(void);
+void set_icon(gboolean enabled);
 
 void enable_blinking(void);
 void disable_blinking(void);
