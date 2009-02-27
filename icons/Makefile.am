@@ -37,3 +37,14 @@ uninstall-local:
 		FILE=`echo $$i | cut -d_ -f4`; \
 		rm -f $(DESTDIR)$(datadir)/icons/$$THEME/$$SIZE/$$CONTEXT/$$FILE; \
 	done
+
+install-data-hook:
+if ICON_UPDATE
+	$(UPDATE_ICON_CACHE) -f -t $(DESTDIR)$(datadir)/icons/hicolor
+endif
+
+uninstall-hook:
+if ICON_UPDATE
+	$(UPDATE_ICON_CACHE) $(DESTDIR)$(datadir)/icons/hicolor
+endif
+

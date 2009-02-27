@@ -19,9 +19,6 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-bluetooth-1.0.pc
 
 install-data-hook:
-if ICON_UPDATE
-	$(UPDATE_ICON_CACHE) -f -t $(DESTDIR)$(datadir)/icons/hicolor
-endif
 if MIME_UPDATE
 	$(UPDATE_MIME_DATABASE) $(DESTDIR)$(datadir)/mime
 endif
@@ -30,9 +27,6 @@ if DESKTOP_UPDATE
 endif
 
 uninstall-hook:
-if ICON_UPDATE
-	$(UPDATE_ICON_CACHE) $(DESTDIR)$(datadir)/icons/hicolor
-endif
 if MIME_UPDATE
 	$(UPDATE_MIME_DATABASE) $(DESTDIR)$(datadir)/mime
 endif
