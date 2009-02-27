@@ -200,6 +200,28 @@ bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
 }
 
 /**
+ * bluetooth_chooser_get_selected_device_type:
+ * @self: a #BluetoothChooser widget
+ *
+ * Return value: the type of the device selected, or '0' if unknown
+ */
+guint
+bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	guint type;
+	gboolean selected;
+
+	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
+	if (selected == FALSE)
+		return 0;
+
+	gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_TYPE, &type, -1);
+	return type;
+}
+
+/**
  * bluetooth_chooser_set_title:
  * @self: a BluetoothChooser widget
  * @title: the widget header title
@@ -311,10 +333,10 @@ filter_category_changed_cb (GtkComboBox *widget, gpointer data)
 }
 
 static void
-model_row_changed (GtkTreeModel *model,
-		   GtkTreePath  *path,
-		   GtkTreeIter  *iter,
-		   gpointer      data)
+adapter_model_row_changed (GtkTreeModel *model,
+			   GtkTreePath  *path,
+			   GtkTreeIter  *iter,
+			   gpointer      data)
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
@@ -508,7 +530,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	/* Setup the adapter disco mode callback for the search button */
 	priv->adapter_model = bluetooth_client_get_adapter_model (priv->client);
 	g_signal_connect (priv->adapter_model, "row-changed",
-			  G_CALLBACK (model_row_changed), self);
+			  G_CALLBACK (adapter_model_row_changed), self);
 
 	/* The search button */
 	priv->search_button = gtk_button_new_with_mnemonic (_("S_earch"));
@@ -651,6 +673,7 @@ enum {
 	PROP_DEVICE_SELECTED,
 	PROP_DEVICE_SELECTED_ICON,
 	PROP_DEVICE_SELECTED_NAME,
+	PROP_DEVICE_SELECTED_TYPE,
 	PROP_SHOW_PAIRING,
 	PROP_SHOW_SEARCH,
 	PROP_SHOW_DEVICE_TYPE,
@@ -726,6 +749,9 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		break;
 	case PROP_DEVICE_SELECTED_ICON:
 		g_value_take_string (value, bluetooth_chooser_get_selected_device_icon (self));
+		break;
+	case PROP_DEVICE_SELECTED_TYPE:
+		g_value_set_uint (value, bluetooth_chooser_get_selected_device_type (self));
 		break;
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
@@ -811,6 +837,14 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED_NAME, g_param_spec_string ("device-selected-name",
 										    NULL, NULL, NULL, G_PARAM_READABLE));
+	/**
+	 * BluetoothChooser:device-selected-type:
+	 *
+	 * the currently selected device's type, or 0
+	 **/
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SELECTED_TYPE, g_param_spec_uint ("device-selected-type", NULL, NULL,
+										       1, 1 << (_BLUETOOTH_TYPE_NUM_TYPES - 1), 1, G_PARAM_READABLE));
 	/**
 	 * BluetoothChooser:show-pairing:
 	 *
