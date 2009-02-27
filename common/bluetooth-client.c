@@ -72,11 +72,13 @@ struct _BluetoothClientPrivate {
 	DBusGProxy *manager;
 	GtkTreeStore *store;
 	char *default_adapter;
+	gboolean default_adapter_powered;
 };
 
 enum {
 	PROP_0,
 	PROP_DEFAULT_ADAPTER,
+	PROP_DEFAULT_ADAPTER_POWERED,
 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
@@ -516,6 +518,8 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 		/* Need to update those properties! */
 		adapter_get_properties(adapter, &hash, NULL);
 		if (hash != NULL) {
+			gboolean is_default;
+
 			value = g_hash_table_lookup(hash, "Address");
 			address = value ? g_value_get_string(value) : NULL;
 
@@ -535,6 +539,15 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 					   BLUETOOTH_COLUMN_POWERED, powered,
 					   -1);
 			notify = TRUE;
+
+			/* Update the power setting */
+			gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
+					   BLUETOOTH_COLUMN_DEFAULT, &is_default,
+					   -1);
+			if (is_default) {
+				priv->default_adapter_powered = powered;
+				g_object_notify (G_OBJECT (client), "default-adapter-powered");
+			}
 
 			adapter_list_devices(adapter, &array, NULL);
 			if (array != NULL) {
@@ -720,16 +733,20 @@ static void default_adapter_changed(DBusGProxy *manager,
 	while (cont == TRUE) {
 		DBusGProxy *adapter;
 		const char *adapter_path;
-		gboolean found;
+		gboolean found, powered;
 
 		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-					BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+				   BLUETOOTH_COLUMN_PROXY, &adapter,
+				   BLUETOOTH_COLUMN_POWERED, &powered, -1);
 
 		adapter_path = dbus_g_proxy_get_path(adapter);
 
 		found = g_str_equal(path, adapter_path);
 
 		g_object_unref(adapter);
+
+		if (found != FALSE)
+			priv->default_adapter_powered = powered;
 
 		gtk_tree_store_set(priv->store, &iter,
 					BLUETOOTH_COLUMN_DEFAULT, found, -1);
@@ -742,6 +759,7 @@ static void default_adapter_changed(DBusGProxy *manager,
 	g_free(priv->default_adapter);
 	priv->default_adapter = g_strdup(path);
 	g_object_notify (G_OBJECT (client), "default-adapter");
+	g_object_notify (G_OBJECT (client), "default-adapter-powered");
 }
 
 static void name_owner_changed(DBusGProxy *dbus, const char *name,
@@ -835,6 +853,9 @@ bluetooth_client_get_property (GObject        *object,
 	case PROP_DEFAULT_ADAPTER:
 		g_value_set_string (value, priv->default_adapter);
 		break;
+	case PROP_DEFAULT_ADAPTER_POWERED:
+		g_value_set_boolean (value, priv->default_adapter_powered);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
@@ -883,6 +904,9 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER,
 					 g_param_spec_string ("default-adapter", NULL, NULL,
 							      NULL, G_PARAM_READABLE));
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_POWERED,
+					 g_param_spec_boolean ("default-adapter-powered", NULL, NULL,
+					 		       FALSE, G_PARAM_READABLE));
 
 	dbus_g_object_register_marshaller(marshal_VOID__STRING_BOXED,
 						G_TYPE_NONE, G_TYPE_STRING,
