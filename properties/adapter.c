@@ -98,6 +98,8 @@ static void powered_changed_cb(GtkWidget *button, gpointer user_data)
 	GValue powered = { 0 };
 
 	adapter->powered = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+	/* Cheat and update the visibility straight away */
+	update_visibility (adapter);
 
 	g_value_init(&powered, G_TYPE_BOOLEAN);
 	g_value_set_boolean(&powered, adapter->powered);
@@ -108,8 +110,6 @@ static void powered_changed_cb(GtkWidget *button, gpointer user_data)
 					G_TYPE_INVALID, G_TYPE_INVALID);
 
 	g_value_unset(&powered);
-
-	update_visibility (adapter);
 }
 
 static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
