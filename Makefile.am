@@ -19,17 +19,11 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-bluetooth-1.0.pc
 
 install-data-hook:
-if MIME_UPDATE
-	$(UPDATE_MIME_DATABASE) $(DESTDIR)$(datadir)/mime
-endif
 if DESKTOP_UPDATE
 	$(UPDATE_DESKTOP_DATABASE) $(DESTDIR)$(datadir)/applications
 endif
 
 uninstall-hook:
-if MIME_UPDATE
-	$(UPDATE_MIME_DATABASE) $(DESTDIR)$(datadir)/mime
-endif
 if DESKTOP_UPDATE
 	$(UPDATE_DESKTOP_DATABASE) $(DESTDIR)$(datadir)/applications
 endif

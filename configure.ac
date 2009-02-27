@@ -47,13 +47,6 @@ if (test "$enable_desktop_update" != no); then
 fi
 AM_CONDITIONAL([DESKTOP_UPDATE], [test -n "$UPDATE_DESKTOP_DATABASE"])
 
-AC_ARG_ENABLE(mime-update, AC_HELP_STRING([--disable-mime-update],
-					[Disable mime database update]))
-if (test "$enable_mime_update" != no); then
-	AC_PATH_PROG(UPDATE_MIME_DATABASE, [update-mime-database])
-fi
-AM_CONDITIONAL([MIME_UPDATE], [test -n "$UPDATE_MIME_DATABASE"])
-
 AC_ARG_ENABLE(icon-update, AC_HELP_STRING([--disable-icon-update],
 					[Disable icon cache update]))
 if (test "$enable_icon_update" != no); then
