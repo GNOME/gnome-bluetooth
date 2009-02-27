@@ -52,10 +52,6 @@ static int icon_policy = ICON_POLICY_PRESENT;
 
 #define PREF_DIR		"/apps/bluetooth-manager"
 #define PREF_ICON_POLICY	PREF_DIR "/icon_policy"
-#if 0
-#define PREF_RECEIVE_ENABLED	PREF_DIR "/receive_enabled"
-#define PREF_SHARING_ENABLED	PREF_DIR "/sharing_enabled"
-#endif
 
 static GConfClient* gconf;
 
@@ -378,18 +374,6 @@ static void gconf_callback(GConfClient *client, guint cnxn_id,
 		update_icon_visibility();
 		return;
 	}
-
-#if 0
-	if (g_str_equal(entry->key, PREF_RECEIVE_ENABLED) == TRUE) {
-		set_receive_enabled(gconf_value_get_bool(value));
-		return;
-	}
-
-	if (g_str_equal(entry->key, PREF_SHARING_ENABLED) == TRUE) {
-		set_sharing_enabled(gconf_value_get_bool(value));
-		return;
-	}
-#endif
 }
 
 static GOptionEntry options[] = {
@@ -449,14 +433,6 @@ int main(int argc, char *argv[])
 		gconf_string_to_enum(icon_policy_enum_map, str, &icon_policy);
 		g_free(str);
 	}
-
-#if 0
-	set_receive_enabled(gconf_client_get_bool(gconf,
-						PREF_RECEIVE_ENABLED, NULL));
-
-	set_sharing_enabled(gconf_client_get_bool(gconf,
-						PREF_SHARING_ENABLED, NULL));
-#endif
 
 	gconf_client_add_dir(gconf, PREF_DIR, GCONF_CLIENT_PRELOAD_NONE, NULL);
 
