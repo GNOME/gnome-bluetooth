@@ -32,10 +32,34 @@
 #include "bluetooth-chooser-button.h"
 #include "bluetooth-client.h"
 
+static void select_device_changed(BluetoothChooser *sel,
+				  gchar *address, gpointer user_data)
+{
+	GtkDialog *dialog = user_data;
+	char *name;
+
+	g_object_get (G_OBJECT (sel), "device-selected-name", &name, NULL);
+	gtk_dialog_set_response_sensitive(dialog,
+				GTK_RESPONSE_ACCEPT, (address != NULL && name != NULL));
+	g_free (name);
+}
+
 static void device_selected_cb(GObject *object,
 			       GParamSpec *spec, gpointer user_data)
 {
 	g_message ("Property \"device-selected\" changed");
+}
+
+static void device_selected_name_cb(GObject *object,
+			       GParamSpec *spec, gpointer user_data)
+{
+	char *address;
+
+	g_message ("Property \"device-selected-name\" changed");
+
+	g_object_get (G_OBJECT (object), "device-selected", &address, NULL);
+	select_device_changed (BLUETOOTH_CHOOSER (object), address, user_data);
+	g_free (address);
 }
 
 static void device_type_filter_selected_cb(GObject *object,
@@ -48,15 +72,6 @@ static void device_category_filter_selected_cb(GObject *object,
 				GParamSpec *spec, gpointer user_data)
 {
 	g_message ("Property \"device-category-filter\" changed");
-}
-
-static void select_device_changed(BluetoothChooser *sel,
-				  gchar *address, gpointer user_data)
-{
-	GtkDialog *dialog = user_data;
-
-	gtk_dialog_set_response_sensitive(dialog,
-				GTK_RESPONSE_ACCEPT, address != NULL);
 }
 
 /* Phone chooser */
@@ -149,6 +164,8 @@ create_wizard_dialogue (void)
 			 G_CALLBACK(select_device_changed), dialog);
 	g_signal_connect(selector, "notify::device-selected",
 			 G_CALLBACK(device_selected_cb), dialog);
+	g_signal_connect(selector, "notify::device-selected-name",
+			 G_CALLBACK(device_selected_name_cb), dialog);
 	g_signal_connect(selector, "notify::device-type-filter",
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",
