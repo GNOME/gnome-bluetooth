@@ -95,7 +95,9 @@ GtkStatusIcon *init_notification(void)
 
 	statusicon = gtk_status_icon_new_from_icon_name("bluetooth");
 
+#if GTK_CHECK_VERSION(2,15,0)
 	gtk_status_icon_set_tooltip_markup(statusicon, _("Bluetooth Manager"));
+#endif
 
 	return statusicon;
 }
