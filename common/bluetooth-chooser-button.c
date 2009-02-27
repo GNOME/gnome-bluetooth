@@ -38,7 +38,8 @@ struct _BluetoothChooserButton {
 	GtkWidget         *dialog;
 	GtkWidget         *chooser;
 	char              *bdaddr;
-	gboolean           is_available;
+	guint              is_available : 1;
+	guint              has_selection : 1;
 };
 
 enum {
@@ -142,11 +143,13 @@ set_btdevname (BluetoothChooserButton *button, const char *bdaddr, const char *n
 	g_free (found_icon);
 }
 
-static void select_device_changed(BluetoothChooser *self, gchar *address, gpointer user_data)
+static void select_device_changed(BluetoothChooser *self, gchar *address, gpointer data)
 {
-	GtkDialog *dialog = user_data;
+	BluetoothChooserButton *button = BLUETOOTH_CHOOSER_BUTTON (data);
 
-	gtk_dialog_set_response_sensitive(dialog, GTK_RESPONSE_ACCEPT, address != NULL);
+	button->has_selection = (address != NULL);
+	gtk_dialog_set_response_sensitive(GTK_DIALOG (button->dialog), GTK_RESPONSE_ACCEPT,
+					  button->has_selection && button->is_available);
 }
 
 static void
@@ -204,7 +207,7 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 	/* Create the button->chooser */
 	button->chooser = bluetooth_chooser_new (NULL);
 	g_signal_connect(button->chooser, "selected-device-changed",
-			 G_CALLBACK(select_device_changed), button->dialog);
+			 G_CALLBACK(select_device_changed), button);
 	g_signal_emit (G_OBJECT (button),
 		       signals[CHOOSER_CREATED],
 		       0, button->chooser);
@@ -220,13 +223,24 @@ default_adapter_changed (GObject *object, GParamSpec *pspec, gpointer data)
 {
 	BluetoothChooserButton *button = BLUETOOTH_CHOOSER_BUTTON (data);
 	char *adapter;
+	gboolean powered;
 
-	g_object_get (G_OBJECT (button->client), "default-adapter", &adapter, NULL);
-	button->is_available = (adapter != NULL);
+	g_object_get (G_OBJECT (button->client),
+		      "default-adapter", &adapter,
+		      "default-adapter-powered", &powered,
+		      NULL);
+	if (adapter != NULL)
+		button->is_available = powered;
+	else
+		button->is_available = FALSE;
+
+	if (adapter != NULL)
+		set_btdevname (button, button->bdaddr, NULL, NULL);
 	g_free (adapter);
 
-	if (button->is_available != FALSE)
-		set_btdevname (button, button->bdaddr, NULL, NULL);
+	if (button->dialog != NULL)
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (button->dialog), GTK_RESPONSE_ACCEPT,
+						   button->has_selection && button->is_available);
 
 	g_object_notify (G_OBJECT (button), "is-available");
 }
@@ -278,6 +292,9 @@ bluetooth_chooser_button_get_property (GObject *object, guint property_id, GValu
 	switch (property_id) {
 	case PROP_DEVICE:
 		g_value_set_string (value, button->bdaddr);
+		break;
+	case PROP_IS_AVAILABLE:
+		g_value_set_boolean (value, button->is_available);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -351,6 +368,8 @@ bluetooth_chooser_button_init (BluetoothChooserButton *button)
 
 	button->client = bluetooth_client_new ();
 	g_signal_connect (G_OBJECT (button->client), "notify::default-adapter",
+			  G_CALLBACK (default_adapter_changed), button);
+	g_signal_connect (G_OBJECT (button->client), "notify::default-adapter-powered",
 			  G_CALLBACK (default_adapter_changed), button);
 
 	/* And set the default value already */
