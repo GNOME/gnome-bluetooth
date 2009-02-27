@@ -53,8 +53,7 @@ static guint target_type = BLUETOOTH_TYPE_ANY;
 static gboolean target_ssp = FALSE;
 
 /* NULL means automatic, anything else is a pincode specified by the user */
-static const gchar *user_pincode = NULL;
-static const gchar *last_fixed_pincode = "0000";
+static gchar *user_pincode = NULL;
 
 static GtkWidget *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
@@ -168,8 +167,7 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 			pincode = g_strdup(target_pincode);
 	}
 
-	text = g_strdup_printf(_("Please enter the following PIN code: %s"),
-								pincode);
+	text = g_strdup_printf(_("Please enter the following passkey: %s"), pincode);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), text);
 	g_free(text);
 
@@ -188,8 +186,7 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 	code = g_strdup_printf("%d", passkey);
 	done = g_strnfill(entered, '*');
 
-	text = g_strdup_printf(_("Please enter the following passkey: %s%s"),
-							done, code + entered);
+	text = g_strdup_printf(_("Please enter the following passkey: %s%s"), done, code + entered);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), text);
 	g_free(text);
 
@@ -446,10 +443,12 @@ static gboolean entry_custom_event(GtkWidget *entry,
 	return TRUE;
 }
 
-static void entry_custom_changed(GtkWidget *entry, gpointer user_data)
+static void entry_custom_changed(GtkWidget *entry, GtkWidget *dialog)
 {
-	user_pincode = gtk_entry_get_text(GTK_ENTRY(entry));
-//	set_page_search_complete();
+	user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+					   GTK_RESPONSE_ACCEPT,
+					   gtk_entry_get_text_length (GTK_ENTRY (entry)) >= 1);
 }
 
 static void toggle_set_sensitive(GtkWidget *button, GtkWidget *widget)
@@ -460,25 +459,45 @@ static void toggle_set_sensitive(GtkWidget *button, GtkWidget *widget)
 	gtk_widget_set_sensitive(widget, active);
 }
 
-static void set_user_pincode(GtkWidget *button, const gchar *pincode)
+static void set_user_pincode(GtkWidget *button, GtkWidget *dialog)
 {
-	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
-		return;
+	GSList *list, *l;
 
-	if (pincode == NULL && user_pincode != NULL)
-		last_fixed_pincode = user_pincode;
+	list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (button));
+	for (l = list; l ; l = l->next) {
+		GtkEntry *entry;
+		GtkWidget *radio;
+		const char *pin;
 
-	user_pincode = pincode;
-//	set_page_search_complete();
-}
+		if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
+			continue;
 
-static void set_from_last_fixed_pincode(GtkWidget *button, gpointer user_data)
-{
-	if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
-		return;
+		/* Is it radio_fixed that changed? */
+		radio = g_object_get_data (G_OBJECT (button), "button");
+		if (radio != NULL) {
+			set_user_pincode (radio, NULL);
+			return;
+		}
 
-	user_pincode = last_fixed_pincode;
-//	set_page_search_complete(); //FIXME what?
+		pin = g_object_get_data (G_OBJECT (button), "pin");
+		entry = g_object_get_data (G_OBJECT (button), "entry");
+
+		if (entry != NULL) {
+			g_free (user_pincode);
+			user_pincode = g_strdup (gtk_entry_get_text(entry));
+			gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+							   GTK_RESPONSE_ACCEPT,
+							   gtk_entry_get_text_length (entry) >= 1);
+		} else if (pin != NULL) {
+			g_free (user_pincode);
+			if (*pin == '\0')
+				user_pincode = NULL;
+			else
+				user_pincode = g_strdup (pin);
+		}
+
+		break;
+	}
 }
 
 static void device_selected_name_cb (GObject *object,
@@ -504,26 +523,34 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	GtkWidget *radio_fixed;
 	GtkWidget *align_fixed;
 	GtkWidget *vbox_fixed;
+	GtkWidget *radio;
 	GtkWidget *radio_0000;
 	GtkWidget *radio_1111;
 	GtkWidget *radio_1234;
 	GtkWidget *hbox_custom;
 	GtkWidget *radio_custom;
 	GtkWidget *entry_custom;
+	char *oldpin;
+
+	oldpin = g_strdup (user_pincode);
+	g_free (user_pincode);
+	user_pincode = NULL;
 
 	dialog = gtk_dialog_new_with_buttons (_("Passkey options"),
 					      GTK_WINDOW (data),
 					      GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
+					      GTK_STOCK_CANCEL,
+					      GTK_RESPONSE_REJECT,
 					      GTK_STOCK_CLOSE,
 					      GTK_RESPONSE_ACCEPT,
 					      NULL);
 	vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 
 	radio_auto = gtk_radio_button_new_with_mnemonic(NULL,
-					_("_Automatic PIN code selection"));
+					_("_Automatic passkey selection"));
 	gtk_container_add(GTK_CONTAINER(vbox), radio_auto);
 
-	radio_fixed = gtk_radio_button_new_with_mnemonic_from_widget(GTK_RADIO_BUTTON(radio_auto), _("Use _fixed PIN code:"));
+	radio_fixed = gtk_radio_button_new_with_mnemonic_from_widget(GTK_RADIO_BUTTON(radio_auto), _("Use _fixed passkey:"));
 	gtk_container_add(GTK_CONTAINER(vbox), radio_fixed);
 
 	align_fixed = gtk_alignment_new(0, 0, 1, 1);
@@ -542,14 +569,14 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_1234);
 
 	hbox_custom = gtk_hbox_new(FALSE, 6);
-	radio_custom = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("Custom PIN code:"));
+	radio_custom = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("Custom passkey code:"));
 	entry_custom = gtk_entry_new();
-	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), 4);
-	gtk_entry_set_width_chars(GTK_ENTRY(entry_custom), 4);
-        g_signal_connect (entry_custom, "key-press-event",
+	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), 20);
+	gtk_entry_set_width_chars(GTK_ENTRY(entry_custom), 20);
+	g_signal_connect (entry_custom, "key-press-event",
 			  G_CALLBACK (entry_custom_event), NULL);
-        g_signal_connect (entry_custom, "changed",
-			  G_CALLBACK (entry_custom_changed), NULL);
+	g_signal_connect (entry_custom, "changed",
+			  G_CALLBACK (entry_custom_changed), dialog);
 	gtk_box_pack_start(GTK_BOX(hbox_custom), radio_custom,
 			FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox_custom), entry_custom,
@@ -563,21 +590,52 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	g_signal_connect(radio_custom, "toggled",
 			G_CALLBACK(toggle_set_sensitive), entry_custom);
 
+	/* When reopening, try to guess where the pincode was set */
+	radio = NULL;
+	if (oldpin == NULL)
+		radio = radio_auto;
+	else if (g_str_equal (oldpin, "0000"))
+		radio = radio_0000;
+	else if (g_str_equal (oldpin, "1111"))
+		radio = radio_1111;
+	else if (g_str_equal (oldpin, "1234"))
+		radio = radio_1234;
+	else
+		radio = radio_custom;
+
+	if (radio != radio_auto)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_fixed), TRUE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+	if (radio == radio_custom)
+		gtk_entry_set_text (GTK_ENTRY (entry_custom), oldpin);
+
+	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
+	g_object_set_data (G_OBJECT (radio_fixed), "button", radio_0000);
+	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
+	g_object_set_data (G_OBJECT (radio_1111), "pin", "1111");
+	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
+	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
+
 	g_signal_connect(radio_auto, "toggled",
-			G_CALLBACK(set_user_pincode), NULL);
+			 G_CALLBACK(set_user_pincode), dialog);
 	g_signal_connect(radio_fixed, "toggled",
-			G_CALLBACK(set_from_last_fixed_pincode), NULL);
+			 G_CALLBACK(set_user_pincode), dialog);
 	g_signal_connect(radio_0000, "toggled",
-			G_CALLBACK(set_user_pincode), "0000");
+			 G_CALLBACK(set_user_pincode), dialog);
 	g_signal_connect(radio_1111, "toggled",
-			G_CALLBACK(set_user_pincode), "1111");
+			 G_CALLBACK(set_user_pincode), dialog);
 	g_signal_connect(radio_1234, "toggled",
-			G_CALLBACK(set_user_pincode), "1234");
-        g_signal_connect_swapped (radio_custom, "toggled",
-			  G_CALLBACK (entry_custom_changed), entry_custom);
+			 G_CALLBACK(set_user_pincode), dialog);
+	g_signal_connect(radio_custom, "toggled",
+			 G_CALLBACK(set_user_pincode), dialog);
 
 	gtk_widget_show_all (vbox);
-	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_ACCEPT)
+		user_pincode = oldpin;
+	else
+		g_free (oldpin);
+
 	gtk_widget_destroy (dialog);
 }
 
