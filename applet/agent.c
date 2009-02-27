@@ -588,7 +588,7 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 	g_free(name);
 
 	show_notification(_("Bluetooth device"),
-					line, _("Enter PIN code"), 0,
+					line, _("Enter passkey"), 0,
 					G_CALLBACK(notification_closed));
 
 	g_free(line);
