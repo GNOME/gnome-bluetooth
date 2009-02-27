@@ -74,6 +74,18 @@ chooser_created (BluetoothChooserButton *button, BluetoothChooser *chooser, gpoi
 		     NULL);
 }
 
+static void
+is_available_changed (GObject    *gobject,
+		      GParamSpec *pspec,
+		      gpointer    user_data)
+{
+	gboolean is_available;
+
+	g_object_get (gobject, "is-available", &is_available, NULL);
+	g_message ("button is available: %d", is_available);
+	gtk_widget_set_sensitive (GTK_WIDGET (gobject), is_available);
+}
+
 static GtkWidget *
 create_phone_dialogue (const char *bdaddr)
 {
@@ -87,6 +99,9 @@ create_phone_dialogue (const char *bdaddr)
 		g_object_set (G_OBJECT (button), "device", bdaddr, NULL);
 	g_signal_connect (G_OBJECT (button), "chooser-created",
 			  G_CALLBACK (chooser_created), NULL);
+	g_signal_connect (G_OBJECT (button), "notify::is-available",
+			  G_CALLBACK (is_available_changed), NULL);
+	is_available_changed (G_OBJECT (button), NULL, NULL);
 	gtk_widget_show (button);
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), button);
 
