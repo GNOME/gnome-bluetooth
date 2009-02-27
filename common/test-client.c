@@ -213,11 +213,40 @@ static void create_window(void)
 	gtk_widget_show_all(window);
 }
 
+static void
+default_adapter_changed (GObject    *gobject,
+			 GParamSpec *pspec,
+			 gpointer    user_data)
+{
+	char *adapter;
+
+	g_object_get (G_OBJECT (gobject), "default-adapter", &adapter, NULL);
+	g_message ("Default adapter changed: %s", adapter ? adapter : "(none)");
+}
+
+static void
+default_adapter_powered_changed (GObject    *gobject,
+				 GParamSpec *pspec,
+				 gpointer    user_data)
+{
+	gboolean powered;
+
+	g_object_get (G_OBJECT (gobject), "default-adapter-powered", &powered, NULL);
+	g_message ("Default adapter is %s", powered ? "powered" : "switched off");
+}
+
 int main(int argc, char *argv[])
 {
 	gtk_init(&argc, &argv);
 
 	client = bluetooth_client_new();
+	g_signal_connect (G_OBJECT (client), "notify::default-adapter",
+			  G_CALLBACK (default_adapter_changed), NULL);
+	g_signal_connect (G_OBJECT (client), "notify::default-adapter-powered",
+			  G_CALLBACK (default_adapter_powered_changed), NULL);
+
+	default_adapter_changed (G_OBJECT (client), NULL, NULL);
+	default_adapter_powered_changed (G_OBJECT (client), NULL, NULL);
 
 	create_window();
 
