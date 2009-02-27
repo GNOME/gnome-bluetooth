@@ -44,50 +44,30 @@ struct adapter_data {
 	DBusGProxy *proxy;
 	GtkWidget *notebook;
 	GtkWidget *child;
-	GtkWidget *button_dummy;
-	GtkWidget *button_hidden;
-	GtkWidget *button_always;
-	GtkWidget *button_timeout;
-	GtkWidget *timeout_scale;
+	GtkWidget *button_discoverable;
 	GtkWidget *entry;
 	GtkWidget *button_delete;
 	GtkWidget *button_trusted;
 	GtkWidget *button_disconnect;
 	GtkTreeSelection *selection;
 	GtkTreeRowReference *reference;
-	guint signal_hidden;
-	guint signal_always;
-	guint signal_timeout;
-	guint signal_scale;
+	guint signal_discoverable;
 	gboolean powered;
 	gboolean discoverable;
 	guint timeout_value;
-	guint timeout_remain;
 	int name_changed;
 };
 
 static void block_signals(struct adapter_data *adapter)
 {
-	g_signal_handler_block(adapter->button_hidden,
-						adapter->signal_hidden);
-	g_signal_handler_block(adapter->button_always,
-						adapter->signal_always);
-	g_signal_handler_block(adapter->button_timeout,
-						adapter->signal_timeout);
-	g_signal_handler_block(adapter->timeout_scale,
-						adapter->signal_scale);
+	g_signal_handler_block(adapter->button_discoverable,
+						adapter->signal_discoverable);
 }
 
 static void unblock_signals(struct adapter_data *adapter)
 {
-	g_signal_handler_unblock(adapter->button_hidden,
-						adapter->signal_hidden);
-	g_signal_handler_unblock(adapter->button_always,
-						adapter->signal_always);
-	g_signal_handler_unblock(adapter->button_timeout,
-						adapter->signal_timeout);
-	g_signal_handler_unblock(adapter->timeout_scale,
-						adapter->signal_scale);
+	g_signal_handler_unblock(adapter->button_discoverable,
+						adapter->signal_discoverable);
 }
 
 static void update_tab_label(GtkNotebook *notebook,
@@ -96,7 +76,7 @@ static void update_tab_label(GtkNotebook *notebook,
 	GtkWidget *label;
 
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(notebook), child,
-				name && name[0] != '\0' ? name : _("Adapter"));
+				name && name[0] != '\0' ? name : _("Unnamed Adapter"));
 
 	label = gtk_notebook_get_tab_label(GTK_NOTEBOOK(notebook), child);
 	gtk_label_set_max_width_chars(GTK_LABEL(label), 20);
@@ -109,26 +89,12 @@ static void mode_callback(GtkWidget *button, gpointer user_data)
 	GValue discoverable = { 0 };
 	GValue timeout = { 0 };
 
-	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)) == FALSE)
-		return;
-
 	g_value_init(&discoverable, G_TYPE_BOOLEAN);
 	g_value_init(&timeout, G_TYPE_UINT);
 
-	if (button == adapter->button_hidden) {
-		g_value_set_boolean(&discoverable, FALSE);
-		g_value_set_uint(&timeout, 0);
-	} else if (button == adapter->button_always) {
-		g_value_set_boolean(&discoverable, TRUE);
-		g_value_set_uint(&timeout, 0);
-	} else if (button == adapter->button_timeout) {
-		g_value_set_boolean(&discoverable, TRUE);
-		if (adapter->timeout_value > 0)
-			g_value_set_uint(&timeout, adapter->timeout_value);
-		else
-			g_value_set_uint(&timeout, 3 * 60);
-	} else
-		return;
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (button), FALSE);
+	g_value_set_boolean(&discoverable, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
+	g_value_set_uint(&timeout, 0);
 
 	dbus_g_proxy_call(adapter->proxy, "SetProperty", NULL,
 					G_TYPE_STRING, "Discoverable",
@@ -142,42 +108,6 @@ static void mode_callback(GtkWidget *button, gpointer user_data)
 
 	g_value_unset(&discoverable);
 	g_value_unset(&timeout);
-}
-
-static void scale_callback(GtkWidget *scale, gpointer user_data)
-{
-	struct adapter_data *adapter = user_data;
-	GValue timeout = { 0 };
-	gdouble value;
-
-	value = gtk_range_get_value(GTK_RANGE(scale));
-	adapter->timeout_value = value * 60;
-
-	g_value_init(&timeout, G_TYPE_UINT);
-	g_value_set_uint(&timeout, adapter->timeout_value);
-
-	dbus_g_proxy_call(adapter->proxy, "SetProperty", NULL,
-					G_TYPE_STRING, "DiscoverableTimeout",
-					G_TYPE_VALUE, &timeout,
-					G_TYPE_INVALID, G_TYPE_INVALID);
-
-	g_value_unset(&timeout);
-}
-
-static gchar *format_callback(GtkWidget *scale,
-				gdouble value, gpointer user_data)
-{
-	struct adapter_data *adapter = user_data;
-
-	if (value == 0) {
-		if (adapter->discoverable == TRUE)
-			return g_strdup(_("always"));
-		else
-			return g_strdup(_("hidden"));
-	}
-
-	return g_strdup_printf(ngettext("%'g minute",
-					"%'g minutes", value), value);
 }
 
 static void name_callback(GtkWidget *editable, gpointer user_data)
@@ -412,28 +342,6 @@ static gboolean device_filter(GtkTreeModel *model,
 	return active;
 }
 
-static gboolean counter_callback(gpointer user_data)
-{
-	struct adapter_data *adapter = user_data;
-	gdouble value;
-
-	if (adapter->timeout_remain == 0)
-		return FALSE;
-
-	else if (adapter->timeout_remain < 60)
-		value = 1;
-	else if (adapter->timeout_remain > 60 * 30)
-		value = 30;
-	else
-		value = adapter->timeout_remain / 60;
-
-	adapter->timeout_remain--;
-
-	gtk_range_set_fill_level(GTK_RANGE(adapter->timeout_scale), value);
-
-	return TRUE;
-}
-
 static void create_adapter(struct adapter_data *adapter)
 {
 	GHashTable *hash = NULL;
@@ -448,15 +356,12 @@ static void create_adapter(struct adapter_data *adapter)
 	GtkWidget *label;
 	GtkWidget *image;
 	GtkWidget *button;
-	GtkWidget *scale;
 	GtkWidget *entry;
 	GtkWidget *buttonbox;
 	GtkWidget *scrolled;
 	GtkWidget *tree;
 	GtkTreeModel *model;
 	GtkTreeSelection *selection;
-	GSList *group = NULL;
-	gdouble scale_value;
 
 	dbus_g_proxy_call(adapter->proxy, "GetProperties", NULL, G_TYPE_INVALID,
 				dbus_g_type_get_map("GHashTable",
@@ -503,91 +408,23 @@ static void create_adapter(struct adapter_data *adapter)
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
 
-	label = create_label(_("Visibility setting"));
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-
-	button = gtk_radio_button_new_with_label(group, NULL);
-	group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(button));
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-
-	gtk_widget_set_no_show_all(button, TRUE);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button), TRUE);
-
-	adapter->button_dummy = button;
-
-	button = gtk_radio_button_new_with_label(group,
-					_("Hidden"));
-	group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(button));
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-
-	if (powered == TRUE && discoverable == FALSE)
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button), TRUE);
-
-	adapter->button_hidden = button;
-	adapter->signal_hidden = g_signal_connect(G_OBJECT(button), "toggled",
-					G_CALLBACK(mode_callback), adapter);
-
-	button = gtk_radio_button_new_with_label(group,
-					_("Always visible"));
-	group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(button));
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-
-	if (discoverable == TRUE && timeout == 0)
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button), TRUE);
-
-	adapter->button_always = button;
-	adapter->signal_always = g_signal_connect(G_OBJECT(button), "toggled",
-					G_CALLBACK(mode_callback), adapter);
-
-	button = gtk_radio_button_new_with_label(group,
-					_("Temporary visible"));
-	group = gtk_radio_button_get_group(GTK_RADIO_BUTTON(button));
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-
-	if (discoverable == TRUE && timeout > 0)
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button), TRUE);
-
-	adapter->button_timeout = button;
-	adapter->signal_timeout = g_signal_connect(G_OBJECT(button), "toggled",
-					G_CALLBACK(mode_callback), adapter);
-
-	scale = gtk_hscale_new_with_range(0, 30, 1);
-	gtk_scale_set_digits(GTK_SCALE(scale), 0);
-	gtk_scale_set_value_pos(GTK_SCALE(scale), GTK_POS_BOTTOM);
-	gtk_range_set_restrict_to_fill_level(GTK_RANGE(scale), FALSE);
-	gtk_range_set_show_fill_level(GTK_RANGE(scale), TRUE);
-
-	if (discoverable == TRUE) {
-		if (timeout == 0)
-			scale_value = 0;
-		else if (timeout < 60)
-			scale_value = 1;
-		else if (timeout > 60 * 30)
-			scale_value = 30;
-		else
-			scale_value = timeout / 60;
-	} else
-		scale_value = 0.0;
-
-	gtk_range_set_value(GTK_RANGE(scale), scale_value);
-	gtk_range_set_fill_level(GTK_RANGE(scale), scale_value);
-	gtk_range_set_update_policy(GTK_RANGE(scale), GTK_UPDATE_DISCONTINUOUS);
-	gtk_box_pack_start(GTK_BOX(vbox), scale, FALSE, FALSE, 0);
-
-	if (discoverable == TRUE && timeout > 0) {
-		adapter->timeout_remain = timeout;
-		g_timeout_add_seconds(1, counter_callback, adapter);
+	button = gtk_check_button_new_with_mnemonic (_("_Discoverable"));
+	/* FIXME, the whole page should be off */
+	gtk_widget_set_sensitive (button, powered);
+	if (discoverable != FALSE && timeout == 0)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+	else if (discoverable == FALSE)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), FALSE);
+	else {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (button), TRUE);
 	}
 
-	adapter->timeout_scale = scale;
-	adapter->signal_scale = g_signal_connect(G_OBJECT(scale), "value-changed",
-					G_CALLBACK(scale_callback), adapter);
+	adapter->button_discoverable = button;
+	adapter->signal_discoverable = g_signal_connect(G_OBJECT(button), "toggled",
+							G_CALLBACK(mode_callback), adapter);
 
-	g_signal_connect(G_OBJECT(scale), "format-value",
-					G_CALLBACK(format_callback), adapter);
-
-	if (discoverable == FALSE || timeout == 0)
-		gtk_widget_set_sensitive(GTK_WIDGET(scale), FALSE);
+	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
@@ -708,54 +545,23 @@ static void create_adapter(struct adapter_data *adapter)
 
 static void update_visibility(struct adapter_data *adapter)
 {
-	GtkWidget *scale = adapter->timeout_scale;
-	GtkWidget *button;
-	gboolean sensitive;
-	gdouble value;
-
-	if (adapter->discoverable == TRUE) {
-		if (adapter->timeout_value == 0)
-			value = 0;
-		else if (adapter->timeout_value < 60)
-			value = 1;
-		else if (adapter->timeout_value > 60 * 30)
-			value = 30;
-		else
-			value = adapter->timeout_value / 60;
-
-		if (adapter->timeout_value > 0) {
-			button = adapter->button_timeout;
-			sensitive = TRUE;
-		} else {
-			button = adapter->button_always;
-			sensitive = FALSE;
-		}
-
-		if (adapter->timeout_remain == 0)
-			g_timeout_add_seconds(1, counter_callback, adapter);
-
-		adapter->timeout_remain = adapter->timeout_value;
-	} else {
-		value = 0.0;
-
-		if (adapter->powered == FALSE)
-			button = adapter->button_dummy;
-		else
-			button = adapter->button_hidden;
-
-		sensitive = FALSE;
-		adapter->timeout_remain = 0;
-	}
-
+	gboolean inconsistent, enabled;
 	block_signals(adapter);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button), TRUE);
-	gtk_range_set_value(GTK_RANGE(scale), value);
-	gtk_range_set_fill_level(GTK_RANGE(scale), value);
-	if (sensitive == FALSE) {
-		gtk_scale_set_draw_value(GTK_SCALE(scale), FALSE);
-		gtk_scale_set_draw_value(GTK_SCALE(scale), TRUE);
+
+	/* FIXME, the whole page should be off */
+	gtk_widget_set_sensitive (adapter->button_discoverable, adapter->powered);
+	if (adapter->discoverable != FALSE && adapter->timeout_value == 0) {
+		inconsistent = FALSE;
+		enabled = TRUE;
+	} else if (adapter->discoverable == FALSE) {
+		inconsistent = enabled = FALSE;
+	} else {
+		inconsistent = enabled = TRUE;
 	}
-	gtk_widget_set_sensitive(GTK_WIDGET(scale), sensitive);
+
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (adapter->button_discoverable), inconsistent);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (adapter->button_discoverable), enabled);
+
 	unblock_signals(adapter);
 }
 
@@ -794,11 +600,6 @@ static void property_changed(DBusGProxy *proxy, const char *property,
 		guint timeout = g_value_get_uint(value);
 
 		adapter->timeout_value = timeout;
-
-		if (adapter->timeout_remain == 0)
-			g_timeout_add_seconds(1, counter_callback, adapter);
-
-		adapter->timeout_remain = timeout;
 
 		update_visibility(adapter);
 	}
