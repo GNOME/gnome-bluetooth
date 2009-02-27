@@ -63,7 +63,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), _("Bluetooth Preferences"));
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-	gtk_window_set_default_size(GTK_WINDOW(window), 420, 420);
+	gtk_window_set_default_size(GTK_WINDOW(window), 550, 420);
 	g_signal_connect(G_OBJECT(window), "delete-event",
 					G_CALLBACK(delete_callback), NULL);
 
