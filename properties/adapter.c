@@ -45,6 +45,8 @@ struct adapter_data {
 	GtkWidget *notebook;
 	GtkWidget *child;
 	GtkWidget *button_discoverable;
+	GtkWidget *button_powered;
+	GtkWidget *name_vbox, *devices_table;
 	GtkWidget *entry;
 	GtkWidget *button_delete;
 	GtkWidget *button_trusted;
@@ -52,22 +54,29 @@ struct adapter_data {
 	GtkTreeSelection *selection;
 	GtkTreeRowReference *reference;
 	guint signal_discoverable;
+	guint signal_powered;
 	gboolean powered;
 	gboolean discoverable;
 	guint timeout_value;
 	int name_changed;
 };
 
+static void update_visibility(struct adapter_data *adapter);
+
 static void block_signals(struct adapter_data *adapter)
 {
 	g_signal_handler_block(adapter->button_discoverable,
 						adapter->signal_discoverable);
+	g_signal_handler_block(adapter->button_powered,
+						adapter->signal_powered);
 }
 
 static void unblock_signals(struct adapter_data *adapter)
 {
 	g_signal_handler_unblock(adapter->button_discoverable,
 						adapter->signal_discoverable);
+	g_signal_handler_unblock(adapter->button_powered,
+						adapter->signal_powered);
 }
 
 static void update_tab_label(GtkNotebook *notebook,
@@ -83,7 +92,27 @@ static void update_tab_label(GtkNotebook *notebook,
 	gtk_label_set_ellipsize(GTK_LABEL(label), PANGO_ELLIPSIZE_END);
 }
 
-static void mode_callback(GtkWidget *button, gpointer user_data)
+static void powered_changed_cb(GtkWidget *button, gpointer user_data)
+{
+	struct adapter_data *adapter = user_data;
+	GValue powered = { 0 };
+
+	adapter->powered = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+
+	g_value_init(&powered, G_TYPE_BOOLEAN);
+	g_value_set_boolean(&powered, adapter->powered);
+
+	dbus_g_proxy_call(adapter->proxy, "SetProperty", NULL,
+					G_TYPE_STRING, "Powered",
+					G_TYPE_VALUE, &powered,
+					G_TYPE_INVALID, G_TYPE_INVALID);
+
+	g_value_unset(&powered);
+
+	update_visibility (adapter);
+}
+
+static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
 {
 	struct adapter_data *adapter = user_data;
 	GValue discoverable = { 0 };
@@ -408,9 +437,19 @@ static void create_adapter(struct adapter_data *adapter)
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
 
+	/* The powered checkbox */
+	button = gtk_check_button_new_with_mnemonic (_("_Powered"));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), powered);
+
+	adapter->button_powered = button;
+	adapter->signal_powered = g_signal_connect(G_OBJECT(button), "toggled",
+						   G_CALLBACK(powered_changed_cb), adapter);
+	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
+
+	/* The discoverable checkbox */
 	button = gtk_check_button_new_with_mnemonic (_("_Discoverable"));
-	/* FIXME, the whole page should be off */
-	gtk_widget_set_sensitive (button, powered);
+	if (powered == FALSE)
+		discoverable = FALSE;
 	if (discoverable != FALSE && timeout == 0)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 	else if (discoverable == FALSE)
@@ -419,13 +458,15 @@ static void create_adapter(struct adapter_data *adapter)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (button), TRUE);
 	}
+	gtk_widget_set_sensitive (button, adapter->powered);
 
 	adapter->button_discoverable = button;
 	adapter->signal_discoverable = g_signal_connect(G_OBJECT(button), "toggled",
-							G_CALLBACK(mode_callback), adapter);
+							G_CALLBACK(discoverable_changed_cb), adapter);
 
 	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
+	/* The friendly name */
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
 
@@ -441,12 +482,16 @@ static void create_adapter(struct adapter_data *adapter)
 		gtk_entry_set_text(GTK_ENTRY(entry), name);
 
 	adapter->entry = entry;
+	adapter->name_vbox = vbox;
 
 	g_signal_connect(G_OBJECT(entry), "changed",
 					G_CALLBACK(name_callback), adapter);
 	g_signal_connect(G_OBJECT(entry), "focus-out-event",
 					G_CALLBACK(focus_callback), adapter);
 
+	gtk_widget_set_sensitive (adapter->name_vbox, adapter->powered);
+
+	/* The known devices */
 	table = gtk_table_new(2, 2, FALSE);
 	gtk_box_pack_start(GTK_BOX(mainbox), table, TRUE, TRUE, 0);
 
@@ -476,6 +521,7 @@ static void create_adapter(struct adapter_data *adapter)
 				G_CALLBACK(select_callback), adapter);
 
 	adapter->selection = selection;
+	adapter->devices_table = table;
 
 	gtk_container_add(GTK_CONTAINER(scrolled), tree);
 
@@ -538,6 +584,8 @@ static void create_adapter(struct adapter_data *adapter)
 
 	adapter->button_delete = button;
 
+	gtk_widget_set_sensitive (adapter->devices_table, adapter->powered);
+
 	g_object_set_data(G_OBJECT(mainbox), "adapter", adapter);
 
 	gtk_widget_show_all(mainbox);
@@ -548,8 +596,11 @@ static void update_visibility(struct adapter_data *adapter)
 	gboolean inconsistent, enabled;
 	block_signals(adapter);
 
-	/* FIXME, the whole page should be off */
+	/* Switch off a few widgets */
 	gtk_widget_set_sensitive (adapter->button_discoverable, adapter->powered);
+	gtk_widget_set_sensitive (adapter->devices_table, adapter->powered);
+	gtk_widget_set_sensitive (adapter->name_vbox, adapter->powered);
+
 	if (adapter->discoverable != FALSE && adapter->timeout_value == 0) {
 		inconsistent = FALSE;
 		enabled = TRUE;
@@ -561,6 +612,7 @@ static void update_visibility(struct adapter_data *adapter)
 
 	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (adapter->button_discoverable), inconsistent);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (adapter->button_discoverable), enabled);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (adapter->button_powered), adapter->powered);
 
 	unblock_signals(adapter);
 }
