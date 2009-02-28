@@ -543,8 +543,7 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	GtkWidget *entry_custom;
 	char *oldpin;
 
-	oldpin = g_strdup (user_pincode);
-	g_free (user_pincode);
+	oldpin = user_pincode;
 	user_pincode = NULL;
 
 	dialog = gtk_dialog_new_with_buttons (_("Passkey options"),
@@ -642,10 +641,12 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 
 	gtk_widget_show_all (vbox);
 
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_ACCEPT)
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_ACCEPT) {
+		g_free (user_pincode);
 		user_pincode = oldpin;
-	else
+	} else {
 		g_free (oldpin);
+	}
 
 	gtk_widget_destroy (dialog);
 }
