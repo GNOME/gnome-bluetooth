@@ -59,46 +59,41 @@ static GConfClient* gconf;
 static GtkWidget *menuitem_sendto = NULL;
 static GtkWidget *menuitem_browse = NULL;
 
-static void open_uri(GtkWindow *parent, const char *uri)
+static void about_url_hook (GtkAboutDialog *about,
+			    const gchar *link,
+			    gpointer data)
 {
-	GtkWidget *dialog;
-	GdkScreen *screen;
 	GError *error = NULL;
-	gchar *cmdline;
 
-	screen = gtk_window_get_screen(parent);
-
-	cmdline = g_strconcat("xdg-open ", uri, NULL);
-
-	if (gdk_spawn_command_line_on_screen(screen,
-						cmdline, &error) == FALSE) {
-		dialog = gtk_message_dialog_new(parent,
-			GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
-					GTK_BUTTONS_CLOSE, NULL);
-		gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(dialog),
-			error->message);
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);
-		g_error_free(error);
+	if (!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (about)),
+			   link,
+			   gtk_get_current_event_time (),
+			   &error))
+	{
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (GTK_WINDOW (about),
+						GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
+						GTK_BUTTONS_CLOSE, NULL);
+		gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG(dialog),
+					      error->message);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		g_error_free (error);
 	}
-
-	g_free(cmdline);
 }
 
-static void about_url_hook(GtkAboutDialog *dialog,
-					const gchar *url, gpointer data)
+static void about_email_hook(GtkAboutDialog *about,
+			     const char *email_address,
+			     gpointer data)
 {
-	open_uri(GTK_WINDOW(dialog), url);
-}
+	char *escaped, *uri;
 
-static void about_email_hook(GtkAboutDialog *dialog,
-					const gchar *email, gpointer data)
-{
-	gchar *uri;
+	escaped = g_uri_escape_string (email_address, NULL, FALSE);
+	uri = g_strdup_printf ("mailto:%s", escaped);
+	g_free (escaped);
 
-	uri = g_strconcat("mailto:", email, NULL);
-	open_uri(GTK_WINDOW(dialog), uri);
-	g_free(uri);
+	about_url_hook (about, uri, data);
+	g_free (uri);
 }
 
 static void about_callback(GtkWidget *item, gpointer user_data)
