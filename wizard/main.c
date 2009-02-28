@@ -62,6 +62,7 @@ static GtkWidget *page_summary = NULL;
 
 static GtkWidget *label_setup = NULL;
 static GtkWidget *label_passkey = NULL;
+static GtkWidget *label_passkey_help = NULL;
 
 static BluetoothChooser *selector = NULL;
 
@@ -153,11 +154,20 @@ static char *set_pincode_for_device(guint type, const char *address, const char 
 	return ret_pin;
 }
 
+static void
+set_large_label (GtkLabel *label, const char *text)
+{
+	char *str;
+
+	str = g_strdup_printf("<span font=\"50\" color=\"black\" bgcolor=\"white\">  %s  </span>", text);
+	gtk_label_set_markup(GTK_LABEL(label_passkey), str);
+	g_free(str);
+}
+
 static gboolean pincode_callback(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	char *pincode;
-	gchar *text;
 
 	if (user_pincode != NULL && strlen(user_pincode) == 4) {
 		pincode = g_strdup (user_pincode);
@@ -167,9 +177,8 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 			pincode = g_strdup(target_pincode);
 	}
 
-	text = g_strdup_printf(_("Please enter the following passkey: %s"), pincode);
-	gtk_label_set_markup(GTK_LABEL(label_passkey), text);
-	g_free(text);
+	gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
+	set_large_label (GTK_LABEL (label_passkey), pincode);
 
 	dbus_g_method_return(context, pincode);
 	g_free(pincode);
@@ -197,8 +206,9 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 		done = g_strdup ("");
 	}
 
-	text = g_strdup_printf(_("Please enter the following passkey: %s%s"), done, code + entered);
-	gtk_label_set_markup(GTK_LABEL(label_passkey), text);
+	gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
+	text = g_strdup_printf("%s%s", done, code + entered);
+	set_large_label (GTK_LABEL (label_passkey), text);
 	g_free(text);
 
 	g_free(done);
@@ -227,6 +237,7 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 
 	g_free(text);
 
+	gtk_label_set_markup(GTK_LABEL(label_passkey_help), NULL);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), NULL);
 
 	dbus_g_method_return(context);
@@ -262,11 +273,13 @@ static void create_callback(const char *path, gpointer user_data)
 		}
 
 		complete = TRUE;
-	} else
+	} else {
 		text = g_strdup_printf(_("Pairing with %s failed"),
 								target_name);
+	}
 
 	gtk_label_set_markup(GTK_LABEL(label_setup), text);
+	gtk_label_set_markup(GTK_LABEL(label_passkey_help), NULL);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), NULL);
 
 	g_free(text);
@@ -703,6 +716,11 @@ static void create_setup(GtkWidget *assistant)
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
+	label_passkey_help = label;
+
+	label = gtk_label_new(NULL);
+	gtk_misc_set_alignment(GTK_MISC(label), 0.5, 0.5);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
 	label_passkey = label;
 
 	page_setup = vbox;
@@ -793,7 +811,7 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-	target_pincode = g_strdup_printf("%d", g_random_int_range(1000, 9999));
+	target_pincode = g_strdup_printf("%d", g_random_int_range(100000, 999999));
 
 	client = bluetooth_client_new();
 
