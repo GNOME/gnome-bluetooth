@@ -181,7 +181,6 @@ static void update_buttons(struct adapter_data *adapter, gboolean bonded,
 	} else {
 		gtk_button_set_label(GTK_BUTTON(adapter->button_trusted), _("Trust"));
 	}
-	gtk_widget_set_sensitive(adapter->button_delete, bonded);
 	gtk_widget_set_sensitive(adapter->button_disconnect, connected);
 }
 
@@ -230,6 +229,8 @@ static void row_callback(GtkTreeModel *model, GtkTreePath  *path,
 					BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
 
 	update_buttons(adapter, bonded, trusted, connected);
+
+	gtk_widget_set_sensitive(adapter->button_delete, TRUE);
 }
 
 static void wizard_callback(GtkWidget *button, gpointer user_data)
