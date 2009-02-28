@@ -78,6 +78,7 @@ static GType agent_error_get_type(void)
 
 static GList *input_list = NULL;
 
+typedef struct input_data input_data;
 struct input_data {
 	char *path;
 	char *uuid;
@@ -91,13 +92,13 @@ struct input_data {
 
 static gint input_compare(gconstpointer a, gconstpointer b)
 {
-	struct input_data *a_data = (struct input_data *) a;
-	struct input_data *b_data = (struct input_data *) b;
+	input_data *a_data = (input_data *) a;
+	input_data *b_data = (input_data *) b;
 
 	return g_ascii_strcasecmp(a_data->path, b_data->path);
 }
 
-static void input_free(struct input_data *input)
+static void input_free(input_data *input)
 {
 	gtk_widget_destroy(input->dialog);
 
@@ -117,7 +118,7 @@ static void input_free(struct input_data *input)
 static void passkey_callback(GtkWidget *dialog,
 				gint response, gpointer user_data)
 {
-	struct input_data *input = user_data;
+	input_data *input = user_data;
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		const char *text;
@@ -141,7 +142,7 @@ static void passkey_callback(GtkWidget *dialog,
 static void confirm_callback(GtkWidget *dialog,
 				gint response, gpointer user_data)
 {
-	struct input_data *input = user_data;
+	input_data *input = user_data;
 
 	if (response != GTK_RESPONSE_YES) {
 		GError *error;
@@ -154,7 +155,7 @@ static void confirm_callback(GtkWidget *dialog,
 	input_free(input);
 }
 
-static void set_trusted(struct input_data *input)
+static void set_trusted(input_data *input)
 {
 	GValue value = { 0 };
 	gboolean active;
@@ -179,7 +180,7 @@ static void set_trusted(struct input_data *input)
 static void auth_callback(GtkWidget *dialog,
 				gint response, gpointer user_data)
 {
-	struct input_data *input = user_data;
+	input_data *input = user_data;
 
 	if (response == GTK_RESPONSE_YES) {
 		set_trusted(input);
@@ -197,7 +198,7 @@ static void auth_callback(GtkWidget *dialog,
 static void insert_callback(GtkEditable *editable, const gchar *text,
 			gint length, gint *position, gpointer user_data)
 {
-	struct input_data *input = user_data;
+	input_data *input = user_data;
 	gint i;
 
 	if (input->numeric == FALSE)
@@ -213,7 +214,7 @@ static void insert_callback(GtkEditable *editable, const gchar *text,
 
 static void changed_callback(GtkWidget *editable, gpointer user_data)
 {
-	struct input_data *input = user_data;
+	input_data *input = user_data;
 	const gchar *text;
 
 	text = gtk_entry_get_text(GTK_ENTRY(input->entry));
@@ -223,7 +224,7 @@ static void changed_callback(GtkWidget *editable, gpointer user_data)
 
 static void toggled_callback(GtkWidget *button, gpointer user_data)
 {
-	struct input_data *input = user_data;
+	input_data *input = user_data;
 	gboolean mode;
 
 	mode = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
@@ -242,10 +243,10 @@ static void passkey_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	GtkWidget *entry;
 	GtkWidget *table;
 	GtkWidget *vbox;
-	struct input_data *input;
+	input_data *input;
 	gchar *markup;
 
-	input = g_try_malloc0(sizeof(*input));
+	input = g_new0(input_data, 1);
 	if (!input)
 		return;
 
@@ -355,9 +356,9 @@ static void confirm_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	GtkWidget *table;
 	GtkWidget *vbox;
 	gchar *markup;
-	struct input_data *input;
+	input_data *input;
 
-	input = g_try_malloc0(sizeof(*input));
+	input = g_new0(input_data, 1);
 	if (!input)
 		return;
 
@@ -441,9 +442,9 @@ static void auth_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	GtkWidget *table;
 	GtkWidget *vbox;
 	gchar *markup, *text;
-	struct input_data *input;
+	input_data *input;
 
-	input = g_try_malloc0(sizeof(*input));
+	input = g_new0(input_data, 1);
 	if (!input)
 		return;
 
@@ -523,7 +524,7 @@ static void auth_dialog(DBusGProxy *adapter, DBusGProxy *device,
 
 static void show_dialog(gpointer data, gpointer user_data)
 {
-	struct input_data *input = data;
+	input_data *input = data;
 
 	gtk_widget_show_all(input->dialog);
 
@@ -793,9 +794,9 @@ static gboolean cancel_request(DBusGMethodInvocation *context,
 	DBusGProxy *adapter = user_data;
 	GList *list;
 	GError *result;
-	struct input_data *input;
+	input_data *input;
 
-	input = g_try_malloc0(sizeof(*input));
+	input = g_new0(input_data, 1);
 	if (!input)
 		return FALSE;
 

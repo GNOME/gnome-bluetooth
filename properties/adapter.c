@@ -40,6 +40,7 @@
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
 
+typedef struct adapter_data adapter_data;
 struct adapter_data {
 	DBusGProxy *proxy;
 	GtkWidget *notebook;
@@ -61,9 +62,9 @@ struct adapter_data {
 	int name_changed;
 };
 
-static void update_visibility(struct adapter_data *adapter);
+static void update_visibility(adapter_data *adapter);
 
-static void block_signals(struct adapter_data *adapter)
+static void block_signals(adapter_data *adapter)
 {
 	g_signal_handler_block(adapter->button_discoverable,
 						adapter->signal_discoverable);
@@ -71,7 +72,7 @@ static void block_signals(struct adapter_data *adapter)
 						adapter->signal_powered);
 }
 
-static void unblock_signals(struct adapter_data *adapter)
+static void unblock_signals(adapter_data *adapter)
 {
 	g_signal_handler_unblock(adapter->button_discoverable,
 						adapter->signal_discoverable);
@@ -94,7 +95,7 @@ static void update_tab_label(GtkNotebook *notebook,
 
 static void powered_changed_cb(GtkWidget *button, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	GValue powered = { 0 };
 
 	adapter->powered = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
@@ -114,7 +115,7 @@ static void powered_changed_cb(GtkWidget *button, gpointer user_data)
 
 static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	GValue discoverable = { 0 };
 	GValue timeout = { 0 };
 
@@ -141,7 +142,7 @@ static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
 
 static void name_callback(GtkWidget *editable, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 
 	adapter->name_changed = 1;
 }
@@ -149,7 +150,7 @@ static void name_callback(GtkWidget *editable, gpointer user_data)
 static gboolean focus_callback(GtkWidget *editable,
 				GdkEventFocus *event, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	GValue value = { 0 };
 	const gchar *text;
 
@@ -173,7 +174,7 @@ static gboolean focus_callback(GtkWidget *editable,
 	return FALSE;
 }
 
-static void update_buttons(struct adapter_data *adapter, gboolean bonded,
+static void update_buttons(adapter_data *adapter, gboolean bonded,
 					gboolean trusted, gboolean connected)
 {
 	if (trusted) {
@@ -186,7 +187,7 @@ static void update_buttons(struct adapter_data *adapter, gboolean bonded,
 
 static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	DBusGProxy *proxy;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -217,7 +218,7 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 static void row_callback(GtkTreeModel *model, GtkTreePath  *path,
 					GtkTreeIter *iter, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	gboolean bonded = FALSE, trusted = FALSE, connected = FALSE;
 
 	if (gtk_tree_selection_iter_is_selected(adapter->selection,
@@ -273,7 +274,7 @@ static gboolean show_confirm_dialog(void)
 
 static void delete_callback(GtkWidget *button, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	DBusGProxy *device;
@@ -301,7 +302,7 @@ static void delete_callback(GtkWidget *button, gpointer user_data)
 
 static void trusted_callback(GtkWidget *button, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	GValue value = { 0 };
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -333,7 +334,7 @@ static void trusted_callback(GtkWidget *button, gpointer user_data)
 
 static void disconnect_callback(GtkWidget *button, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	DBusGProxy *device;
@@ -372,7 +373,7 @@ static gboolean device_filter(GtkTreeModel *model,
 	return active;
 }
 
-static void create_adapter(struct adapter_data *adapter)
+static void create_adapter(adapter_data *adapter)
 {
 	GHashTable *hash = NULL;
 	GValue *value;
@@ -592,7 +593,7 @@ static void create_adapter(struct adapter_data *adapter)
 	gtk_widget_show_all(mainbox);
 }
 
-static void update_visibility(struct adapter_data *adapter)
+static void update_visibility(adapter_data *adapter)
 {
 	gboolean inconsistent, enabled;
 	block_signals(adapter);
@@ -621,7 +622,7 @@ static void update_visibility(struct adapter_data *adapter)
 static void property_changed(DBusGProxy *proxy, const char *property,
 					GValue *value, gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 
 	if (g_str_equal(property, "Name") == TRUE) {
 		const gchar *name = g_value_get_string(value);
@@ -658,15 +659,13 @@ static void property_changed(DBusGProxy *proxy, const char *property,
 	}
 }
 
-static struct adapter_data *adapter_alloc(GtkTreeModel *model,
+static adapter_data *adapter_alloc(GtkTreeModel *model,
 		GtkTreePath *path, GtkTreeIter *iter, gpointer user_data)
 {
 	DBusGProxy *proxy;
-	struct adapter_data *adapter;
+	adapter_data *adapter;
 
-	adapter = g_try_malloc0(sizeof(*adapter));
-	if (adapter == NULL)
-		return NULL;
+	adapter = g_new0(adapter_data, 1);
 
 	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PROXY, &proxy, -1);
 
@@ -685,7 +684,7 @@ static struct adapter_data *adapter_alloc(GtkTreeModel *model,
 
 static gboolean adapter_create(gpointer user_data)
 {
-	struct adapter_data *adapter = user_data;
+	adapter_data *adapter = user_data;
 
 	dbus_g_proxy_connect_signal(adapter->proxy, "PropertyChanged",
 				G_CALLBACK(property_changed), adapter, NULL);
@@ -698,7 +697,7 @@ static gboolean adapter_create(gpointer user_data)
 static gboolean adapter_insert(GtkTreeModel *model, GtkTreePath *path,
 					GtkTreeIter *iter, gpointer user_data)
 {
-	struct adapter_data *adapter;
+	adapter_data *adapter;
 
 	adapter = adapter_alloc(model, path, iter, user_data);
 	if (adapter == NULL)
@@ -712,7 +711,7 @@ static gboolean adapter_insert(GtkTreeModel *model, GtkTreePath *path,
 static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
 					GtkTreeIter *iter, gpointer user_data)
 {
-	struct adapter_data *adapter;
+	adapter_data *adapter;
 
 	adapter = adapter_alloc(model, path, iter, user_data);
 	if (adapter == NULL)
@@ -729,7 +728,7 @@ static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
 
 	for (i = 0; i < count; i++) {
 		GtkWidget *widget;
-		struct adapter_data *adapter;
+		adapter_data *adapter;
 
 		widget = gtk_notebook_get_nth_page(notebook, i);
 		if (widget == NULL)
