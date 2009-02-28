@@ -53,6 +53,7 @@ static void setpower_reply(DBusPendingCall *call, void *user_data)
 	}
 
 	dbus_message_unref(reply);
+	dbus_pending_call_unref (call);
 
 	gtk_widget_set_sensitive(button, TRUE);
 }
@@ -121,20 +122,22 @@ static gboolean add_killswitch(GtkWidget *vbox, const char *udi)
 	DBusPendingCall *call;
 	DBusMessage *message;
 	GtkWidget *button;
-	const char *type, *name;
+	char *type, *name;
 
 	type = libhal_device_get_property_string(halctx, udi,
 						"killswitch.type", NULL);
-	if (type == NULL || g_str_equal(type, "bluetooth") == FALSE)
+	if (type == NULL || g_str_equal(type, "bluetooth") == FALSE) {
+		g_free (type);
 		return FALSE;
+	}
+	g_free (type);
 
 	name = libhal_device_get_property_string(halctx, udi,
 							"info.product", NULL);
-	if (name == NULL)
-		name = "Bluetooth Switch";
 
-	button = gtk_check_button_new_with_label(name);
-	g_object_set_data(G_OBJECT(button), "UDI", g_strdup(udi));
+	button = gtk_check_button_new_with_label(name ? name : _("Bluetooth Switch"));
+	g_free (name);
+	g_object_set_data_full(G_OBJECT(button), "UDI", g_strdup(udi), (GDestroyNotify) g_free);
 	gtk_widget_set_sensitive(button, FALSE);
 	gtk_box_pack_end(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(button), "toggled",
