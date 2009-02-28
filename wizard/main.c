@@ -178,13 +178,24 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 }
 
 static gboolean display_callback(DBusGMethodInvocation *context,
-				DBusGProxy *device, guint passkey,
-					guint entered, gpointer user_data)
+				 DBusGProxy *device, guint passkey,
+				 guint entered, gpointer user_data)
 {
 	gchar *text, *done, *code;
 
 	code = g_strdup_printf("%d", passkey);
-	done = g_strnfill(entered, '*');
+
+	if (entered > 0) {
+		GtkEntry *entry;
+		gunichar invisible;
+
+		entry = GTK_ENTRY (gtk_entry_new ());
+		invisible = gtk_entry_get_invisible_char (entry);
+		done = g_strnfill(entered, invisible);
+		g_object_unref (entry);
+	} else {
+		done = g_strdup ("");
+	}
 
 	text = g_strdup_printf(_("Please enter the following passkey: %s%s"), done, code + entered);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), text);
