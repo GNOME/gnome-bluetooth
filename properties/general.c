@@ -33,7 +33,6 @@
 
 #include <bluetooth-client.h>
 
-#include "killswitch.h"
 #include "general.h"
 
 typedef enum {
@@ -46,10 +45,6 @@ static int icon_policy = ICON_POLICY_PRESENT;
 
 #define PREF_DIR		"/apps/bluetooth-manager"
 #define PREF_ICON_POLICY	PREF_DIR "/icon_policy"
-#if 0
-#define PREF_RECEIVE_ENABLED	PREF_DIR "/receive_enabled"
-#define PREF_SHARING_ENABLED	PREF_DIR "/sharing_enabled"
-#endif
 
 static GConfEnumStringPair icon_policy_enum_map [] = {
 	{ ICON_POLICY_NEVER,	"never"		},
@@ -60,10 +55,6 @@ static GConfEnumStringPair icon_policy_enum_map [] = {
 
 static GConfClient* gconf;
 
-#if 0
-static GtkWidget *button_receive;
-static GtkWidget *button_sharing;
-#endif
 static GtkWidget *button_never;
 static GtkWidget *button_always;
 static GtkWidget *button_present;
@@ -113,26 +104,6 @@ static void policy_callback(GtkWidget *button, gpointer user_data)
 		update_icon_policy(button);
 }
 
-#if 0
-static void receive_callback(GtkWidget *button, gpointer user_data)
-{
-	gboolean value;
-
-	value = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
-
-	gconf_client_set_bool(gconf, PREF_RECEIVE_ENABLED, value, NULL);
-}
-
-static void sharing_callback(GtkWidget *button, gpointer user_data)
-{
-	gboolean value;
-
-	value = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
-
-	gconf_client_set_bool(gconf, PREF_SHARING_ENABLED, value, NULL);
-}
-#endif
-
 GtkWidget *create_label(const gchar *str)
 {
 	GtkWidget *label;
@@ -155,36 +126,9 @@ GtkWidget *create_general(void)
 	GtkWidget *vbox;
 	GtkWidget *label;
 	GSList *group = NULL;
-#if 0
-	gboolean value;
-#endif
 
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
-
-#if 0
-	vbox = gtk_vbox_new(FALSE, 6);
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
-
-	label = create_label(_("File transfer"));
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-
-	button_receive = gtk_check_button_new_with_label(
-				_("Receive files from remote devices"));
-	value = gconf_client_get_bool(gconf, PREF_RECEIVE_ENABLED, NULL);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_receive), value);
-	gtk_box_pack_start(GTK_BOX(vbox), button_receive, FALSE, FALSE, 0);
-	g_signal_connect(G_OBJECT(button_receive), "toggled",
-					G_CALLBACK(receive_callback), NULL);
-
-	button_sharing = gtk_check_button_new_with_label(
-				_("Share files from public folder"));
-	value = gconf_client_get_bool(gconf, PREF_SHARING_ENABLED, NULL);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_sharing), value);
-	gtk_box_pack_start(GTK_BOX(vbox), button_sharing, FALSE, FALSE, 0);
-	g_signal_connect(G_OBJECT(button_sharing), "toggled",
-					G_CALLBACK(sharing_callback), NULL);
-#endif
 
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
@@ -215,9 +159,6 @@ GtkWidget *create_general(void)
 
 	update_icon_policy(NULL);
 
-	vbox = create_killswitch();
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
-
 	return mainbox;
 }
 
@@ -240,24 +181,6 @@ static void gconf_callback(GConfClient *client, guint cnxn_id,
 
 		update_icon_policy(NULL);
 	}
-
-#if 0
-	if (g_str_equal(entry->key, PREF_RECEIVE_ENABLED) == TRUE) {
-		if (!button_receive)
-			return;
-
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_receive),
-						gconf_value_get_bool(value));
-	}
-
-	if (g_str_equal(entry->key, PREF_SHARING_ENABLED) == TRUE) {
-		if (!button_sharing)
-			return;
-
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(button_sharing),
-						gconf_value_get_bool(value));
-	}
-#endif
 }
 
 void setup_general(void)
@@ -276,13 +199,9 @@ void setup_general(void)
 
 	gconf_client_notify_add(gconf, PREF_DIR,
 					gconf_callback, NULL, NULL, NULL);
-
-	setup_killswitch();
 }
 
 void cleanup_general(void)
 {
-	cleanup_killswitch();
-
 	g_object_unref(gconf);
 }
