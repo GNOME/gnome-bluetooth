@@ -31,6 +31,10 @@ endif
 # Build ChangeLog from GIT or SVN history
 # (SVN r304 was the first ChangeLog-less checkin).
 # Only build this when in a git or svn checkout.
+#
+SVN_ROOT=svn+ssh://svn.gnome.org/svn/
+SVN_MODULE=gnome-bluetooth
+SVN_BRANCH=trunk
 
 ChangeLog:
 	@if test -f $(top_srcdir)/.git/HEAD; then \

@@ -1,8 +1,17 @@
-AC_PREREQ(2.50)
-AC_INIT()
+AC_PREREQ(2.52)
 
-AM_INIT_AUTOMAKE(gnome-bluetooth, 2.27.0)
-AM_CONFIG_HEADER(config.h)
+m4_define(gnomebt_version_major, 2)
+m4_define(gnomebt_version_minor, 27)
+m4_define(gnomebt_version_micro, 0)
+
+AC_INIT([gnome-bluetooth],
+        [gnomebt_version_major.gnomebt_version_minor.gnomebt_version_micro],
+        [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth])
+
+AC_CONFIG_SRCDIR([applet/main.c])
+AC_CONFIG_HEADERS([config.h])
+
+AM_INIT_AUTOMAKE([1.9 dist-bzip2 no-dist-gzip check-news])
 
 # Before making a release, the GNOMEBT_LT_VERSION string should be modified.
 # The string is of the form C:R:A.
