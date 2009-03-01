@@ -36,9 +36,11 @@
 
 #include "adapter.h"
 #include "general.h"
+#include "killswitch.h"
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
+static GtkWidget *killswitch_page;
 
 typedef struct adapter_data adapter_data;
 struct adapter_data {
@@ -754,6 +756,36 @@ static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
 	}
 }
 
+static void
+button_clicked_cb (GtkButton *button, gpointer user_data)
+{
+	BluetoothKillswitch *killswitch = user_data;
+
+	g_message ("button_clicked_cb");
+
+	bluetooth_killswitch_set_state (killswitch, KILLSWITCH_STATE_NOT_KILLED);
+}
+
+static GtkWidget *
+create_killswitch_page (void)
+{
+	GtkWidget *button;
+	BluetoothKillswitch *killswitch;
+
+	killswitch = bluetooth_killswitch_new ();
+	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE) {
+		/* No killswitches */
+		g_object_unref (killswitch);
+		return NULL;
+	}
+
+	button = gtk_button_new_with_label ("Turn Bluetooth on");
+	g_signal_connect (G_OBJECT (button), "clicked",
+			  G_CALLBACK (button_clicked_cb), killswitch);
+
+	return button;
+}
+
 void setup_adapter(GtkNotebook *notebook)
 {
 	client = bluetooth_client_new();
@@ -767,6 +799,14 @@ void setup_adapter(GtkNotebook *notebook)
 					G_CALLBACK(adapter_removed), notebook);
 
 	gtk_tree_model_foreach(adapter_model, adapter_insert, notebook);
+
+	killswitch_page = create_killswitch_page ();
+	if (killswitch_page && gtk_tree_model_iter_n_children (adapter_model, NULL) == 0) {
+		GtkWidget *label;
+
+		label = gtk_label_new (_("Bluetooth Status"));
+		gtk_notebook_prepend_page(notebook, killswitch_page, label);
+	}
 }
 
 void cleanup_adapter(void)
@@ -774,4 +814,20 @@ void cleanup_adapter(void)
 	g_object_unref(adapter_model);
 
 	g_object_unref(client);
+
+	if (killswitch_page) {
+		GtkWidget *notebook = gtk_widget_get_parent (killswitch_page);
+		guint i;
+
+		for (i = 0; i < gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook)); i++) {
+			GtkWidget *widget;
+			
+			widget = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i);
+			if (widget == killswitch_page) {
+				gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), i);
+				gtk_widget_destroy (killswitch_page);
+			}
+		}
+	}
 }
+
