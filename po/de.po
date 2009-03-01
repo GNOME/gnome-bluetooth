@@ -1,16 +1,16 @@
 # German translation for bluez-gnome
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# Mario Blättermann <mariobl@gnome.org>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-09-29 14:31+0200\n"
-"PO-Revision-Date: 2008-03-01 23:13+0000\n"
-"Last-Translator: funkyferdy <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-01 11:03+0100\n"
+"PO-Revision-Date: 2009-03-01 11:31+0100\n"
+"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,75 +18,138 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../common/bluetooth-client.c:82
+#: ../common/bluetooth-client.c:90
 msgid "All types"
 msgstr "Alle Typen"
 
-#: ../common/bluetooth-client.c:84
+#: ../common/bluetooth-client.c:92
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../common/bluetooth-client.c:86
+#: ../common/bluetooth-client.c:94
 msgid "Modem"
 msgstr "Modem"
 
-#: ../common/bluetooth-client.c:88
+#: ../common/bluetooth-client.c:96
 msgid "Computer"
-msgstr ""
+msgstr "Rechner"
 
-#: ../common/bluetooth-client.c:90
+#: ../common/bluetooth-client.c:98
 msgid "Network"
 msgstr "Netzwerk"
 
-#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../common/bluetooth-client.c:101
 msgid "Headset"
-msgstr "Kopfhöhrer"
+msgstr "Hör-Sprechgarnitur"
 
-#: ../common/bluetooth-client.c:94
-msgid "Headphone"
-msgstr ""
+#: ../common/bluetooth-client.c:103
+msgid "Headphones"
+msgstr "Kopfhörer"
 
-#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+#: ../common/bluetooth-client.c:105
+msgid "Audio device"
+msgstr "Audio-Geräte"
+
+#: ../common/bluetooth-client.c:107
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+#: ../common/bluetooth-client.c:109
 msgid "Mouse"
 msgstr "Maus"
 
-#: ../common/bluetooth-client.c:100
+#: ../common/bluetooth-client.c:111
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+#: ../common/bluetooth-client.c:113
 msgid "Printer"
 msgstr "Drucker"
 
-#: ../common/bluetooth-client.c:104
+#: ../common/bluetooth-client.c:115
 msgid "Joypad"
-msgstr ""
+msgstr "Joypad"
 
-#: ../common/bluetooth-client.c:106
+#: ../common/bluetooth-client.c:117
 msgid "Tablet"
-msgstr ""
+msgstr "Tablet"
 
-#: ../common/bluetooth-client.c:108
+#: ../common/bluetooth-client.c:119 ../common/bluetooth-chooser.c:89
+#: ../common/bluetooth-chooser.c:124
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../common/helper.c:162
-msgid "Select Device"
-msgstr "Gerät auswählen"
+#: ../common/bluetooth-chooser-button.c:65
+#: ../common/bluetooth-chooser-button.c:361
+msgid "Click to select device..."
+msgstr "Klicken, um Dienst auszuwählen …"
 
-#: ../common/helper.c:222
-msgid "Choose files to send"
-msgstr ""
+#: ../common/bluetooth-chooser.c:81
+msgid "All categories"
+msgstr "Alle Typen"
 
-#: ../applet/main.c:123
+#: ../common/bluetooth-chooser.c:83
+msgid "Paired"
+msgstr "Verbunden"
+
+#: ../common/bluetooth-chooser.c:85
+msgid "Trusted"
+msgstr "Vertrauenswürdig verbunden"
+
+#: ../common/bluetooth-chooser.c:87
+msgid "Not paired or trusted"
+msgstr "Nicht verbunden oder vertrauenswürdig verbunden"
+
+#: ../common/bluetooth-chooser.c:236
+msgid "Recognized Bluetooth Devices"
+msgstr "Erkannte Bluetooth-Geräte"
+
+#: ../common/bluetooth-chooser.c:454
+msgid "Device"
+msgstr "Gerät "
+
+#: ../common/bluetooth-chooser.c:481
+msgid "Type"
+msgstr "Typ"
+
+#. The search button
+#: ../common/bluetooth-chooser.c:566
+msgid "S_earch"
+msgstr "S_uchen"
+
+#: ../common/bluetooth-chooser.c:571
+msgid "Search for Bluetooth devices"
+msgstr "Bluetooth-Geräte suchen"
+
+#. The filters
+#: ../common/bluetooth-chooser.c:589
+msgid "Show Only Bluetooth Devices With..."
+msgstr "Nur Bluetooth-Geräte anzeigen mit …"
+
+#. The device category filter
+#: ../common/bluetooth-chooser.c:609
+msgid "Device _category:"
+msgstr "Geräte_kategorie:"
+
+#: ../common/bluetooth-chooser.c:624
+msgid "Select the device category to filter above list"
+msgstr "Wählen Sie die zu filternde Gerätekategorie in der oberen Liste aus "
+
+#. The device type filter
+#: ../common/bluetooth-chooser.c:638
+msgid "Device _type:"
+msgstr "Geräte_typ:"
+
+#: ../common/bluetooth-chooser.c:653
+msgid "Select the device type to filter above list"
+msgstr "Wählen Sie den zu filternden Gerätetyp in der oberen Liste aus "
+
+#: ../applet/main.c:116
 msgid "A Bluetooth manager for the GNOME desktop"
 msgstr "Ein Bluetooth-Manager für die GNOME Desktopumgebung"
 
-#: ../applet/main.c:126 ../analyzer/dialog.c:128
+#: ../applet/main.c:119
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -96,210 +159,212 @@ msgstr ""
 "  Stefan Horning https://launchpad.net/~stefan-horning\n"
 "  Thomas Trummer https://launchpad.net/~th-trummer\n"
 "  Vinzenz Vietzke https://launchpad.net/~v1nz\n"
-"  funkyferdy https://launchpad.net/~funkyferdy"
+"  funkyferdy https://launchpad.net/~funkyferdy\n"
+"\n"
+"Mario Blättermann <mariobl@gnome.org>"
 
-#: ../applet/main.c:177 ../applet/main.c:232
+#: ../applet/main.c:121
+msgid "GNOME Bluetooth home page"
+msgstr "GNOME Bluetooth-Webseite"
+
+#: ../applet/main.c:150
+msgid "Select Device to Browse"
+msgstr "Gerät zum Durchsuchen auswählen"
+
+#: ../applet/main.c:154
+msgid "_Browse"
+msgstr "_Durchsuchen"
+
+#: ../applet/main.c:164
+msgid "Select device to browse"
+msgstr "Gerät zum Durchsuchen auswählen"
+
+#: ../applet/main.c:275 ../properties/adapter.c:540
 msgid "Setup new device..."
-msgstr ""
+msgstr "Neues Gerät  konfigurieren …"
 
-#: ../applet/main.c:242
+#: ../applet/main.c:285
 msgid "Send files to device..."
-msgstr ""
+msgstr "Dateien an Gerät senden …"
 
-#: ../applet/main.c:250
+#: ../applet/main.c:293
 msgid "Browse files on device..."
-msgstr ""
+msgstr "Dateien auf Gerät durchsuchen …"
 
-#: ../applet/main.c:373
+#: ../applet/main.c:436
 msgid "Bluetooth Applet"
-msgstr "Bluetooth-Anwendung"
+msgstr "Bluetooth-Applet"
 
-#: ../applet/agent.c:258
+#: ../applet/notify.c:100 ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Bluetooth-Verwaltung"
+
+#: ../applet/agent.c:259
 msgid "Authentication request"
-msgstr "Authentifizierungsanfrage"
+msgstr "Legitimierungsanfrage"
 
-#: ../applet/agent.c:286 ../applet/agent.c:395
+#: ../applet/agent.c:287 ../applet/agent.c:396
 msgid "Pairing request for device:"
-msgstr ""
+msgstr "Verbindungsanfrage für Gerät:"
 
-#: ../applet/agent.c:303
+#: ../applet/agent.c:304
 msgid "Enter passkey for authentication:"
-msgstr "Geben Sie zur Authentifizierung Ihren Passkey ein:"
+msgstr "Geben Sie zur Legitimierung Ihren Schlüssel ein:"
 
-#: ../applet/agent.c:327
+#: ../applet/agent.c:328
 msgid "Show input"
 msgstr "Eingabe anzeigen"
 
-#: ../applet/agent.c:369
+#: ../applet/agent.c:370
 msgid "Confirmation request"
 msgstr "Bestätigungsanfrage"
 
-#: ../applet/agent.c:412
+#: ../applet/agent.c:413
 msgid "Confirm value for authentication:"
-msgstr "Bestätigen Sie zur Authentifizierung den Wert:"
+msgstr "Bestätigen Sie zur Legitimierung den Wert:"
 
-#: ../applet/agent.c:456
+#: ../applet/agent.c:457
 msgid "Authorization request"
-msgstr "Authentifizierungsanfrage"
+msgstr "Legitimierungsanfrage"
 
-#: ../applet/agent.c:482
+#: ../applet/agent.c:483
 msgid "Authorization request for device:"
-msgstr "Autorisierungsanfrage für Gerät:"
+msgstr "Legitimierungsanfrage für Gerät:"
 
-#: ../applet/agent.c:503
+#: ../applet/agent.c:504
 #, c-format
 msgid "Grant access to %s?"
 msgstr "Zugriff auf %s erlauben?"
 
-#: ../applet/agent.c:512
+#: ../applet/agent.c:513
 msgid "Always grant access"
 msgstr "Zugriff immer erlauben"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
+#: ../applet/agent.c:587 ../applet/agent.c:634 ../applet/agent.c:684
 #, c-format
 msgid "Pairing request for %s"
-msgstr ""
+msgstr "Verbindungsanfrage für %s"
 
-#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
-#: ../applet/agent.c:736 ../applet/agent.c:781
+#: ../applet/agent.c:591 ../applet/agent.c:638 ../applet/agent.c:688
+#: ../applet/agent.c:737 ../applet/agent.c:782
 msgid "Bluetooth device"
 msgstr "Bluetooth-Gerät"
 
-#: ../applet/agent.c:591
-msgid "Enter PIN code"
-msgstr ""
-
-#: ../applet/agent.c:638 ../applet/agent.c:688
+#: ../applet/agent.c:592 ../applet/agent.c:639 ../applet/agent.c:689
 msgid "Enter passkey"
-msgstr "Geben sie ihren Passkey ein"
+msgstr "Geben Sie Ihren Schlüssel ein"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:732
+#: ../applet/agent.c:733
 #, c-format
 msgid "Confirmation request for %s"
-msgstr ""
+msgstr "Bestätigungsanfrage für %s"
 
-#: ../applet/agent.c:737
+#: ../applet/agent.c:738
 msgid "Confirm passkey"
-msgstr ""
+msgstr "Schlüssel bestätigen:"
 
-#: ../applet/agent.c:777
+#: ../applet/agent.c:778
 #, c-format
 msgid "Authorization request for %s"
 msgstr "Autorisierungsanfrage für %s"
 
-#: ../applet/agent.c:782
+#: ../applet/agent.c:783
 msgid "Check authorization"
-msgstr "Verifizieren sie die Authorisierung"
+msgstr "Legitimierung prüfen"
 
-#: ../applet/bluetooth-applet.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth-Verwaltung"
-
-#: ../applet/bluetooth-applet.desktop.in.h:2
+#: ../applet/bluetooth-applet.desktop.in.in.h:2
 msgid "Bluetooth Manager applet"
-msgstr ""
+msgstr "Bluetooth-Verwaltungs-Applet"
 
-#: ../properties/main.c:63
+#: ../properties/main.c:64
 msgid "Bluetooth Preferences"
-msgstr "Bluetooth Einstellungen"
+msgstr "Bluetooth-Einstellungen"
 
-#: ../properties/main.c:94
+#: ../properties/main.c:95
 msgid "General"
 msgstr "Allgemein"
 
-#: ../properties/main.c:131
+#: ../properties/main.c:146
 msgid "Bluetooth Properties"
-msgstr ""
+msgstr "Bluetooth-Eigenschaften"
 
-#: ../properties/general.c:172
-msgid "File transfer"
-msgstr "Dateiübertragung"
-
-#: ../properties/general.c:176
-msgid "Receive files from remote devices"
-msgstr ""
-
-#: ../properties/general.c:184
-msgid "Share files from public folder"
-msgstr "Öffentliches Verzeichnis freigeben"
-
-#: ../properties/general.c:195
+#: ../properties/general.c:136
 msgid "Notification area"
-msgstr ""
+msgstr "Benachrichtigungsfeld"
 
-#: ../properties/general.c:199
+#: ../properties/general.c:140
 msgid "Never display icon"
-msgstr "Icon niemals anzeigen"
+msgstr "Symbol niemals anzeigen"
 
-#: ../properties/general.c:206
+#: ../properties/general.c:147
 msgid "Only display when adapter present"
 msgstr "Nur zeigen, wenn ein Adapter vorhanden ist"
 
-#: ../properties/general.c:213
+#: ../properties/general.c:154
 msgid "Always display icon"
-msgstr "Icon immer anzeigen"
+msgstr "Symbol immer anzeigen"
 
-#: ../properties/adapter.c:99
-msgid "Adapter"
-msgstr "Adapter"
+#: ../properties/adapter.c:91
+msgid "Unnamed Adapter"
+msgstr "Unbenannter Adapter"
 
-#: ../properties/adapter.c:174
-msgid "always"
+#: ../properties/adapter.c:183
+msgid "Distrust"
+msgstr "Nicht vertrauen"
+
+#: ../properties/adapter.c:185 ../properties/adapter.c:563
+msgid "Trust"
+msgstr "Vertrauen"
+
+#: ../properties/adapter.c:254
+msgid "Remove from list of known devices?"
+msgstr "Aus der Liste der bekannten Geräte entfernen?"
+
+#: ../properties/adapter.c:255
+msgid "If you delete the device, you have to set it up again before next use."
 msgstr ""
+"Falls Sie das Gerät entfernen, müssen Sie es vor der nächsten Benutzung "
+"erneut konfigurieren."
 
-#: ../properties/adapter.c:176
-msgid "hidden"
-msgstr ""
+#. The powered checkbox
+#: ../properties/adapter.c:445
+msgid "_Powered"
+msgstr "_Eingeschaltet"
 
-#: ../properties/adapter.c:179
-#, c-format
-msgid "%'g minute"
-msgid_plural "%'g minutes"
-msgstr[0] ""
-msgstr[1] ""
+#. The discoverable checkbox
+#: ../properties/adapter.c:454
+msgid "_Discoverable"
+msgstr "_Nicht sichtbar"
 
 #: ../properties/adapter.c:477
-msgid "Visibility setting"
-msgstr ""
-
-#: ../properties/adapter.c:490
-msgid "Hidden"
-msgstr ""
+msgid "Friendly name"
+msgstr "Benutzerdefinierter Name"
 
 #: ../properties/adapter.c:502
-msgid "Always visible"
-msgstr ""
-
-#: ../properties/adapter.c:514
-msgid "Temporary visible"
-msgstr ""
-
-#: ../properties/adapter.c:566
-msgid "Friendly name"
-msgstr ""
-
-#: ../properties/adapter.c:587
 msgid "Known devices"
-msgstr ""
+msgstr "Bekannte Geräte"
 
-#: ../properties/dialog.c:41
-msgid "Remove from list of known devices?"
-msgstr ""
+#: ../properties/adapter.c:549
+msgid "Disconnect"
+msgstr "Verbindung trennen"
 
-#: ../properties/dialog.c:42
-msgid ""
-"If you delete the device, you have to set it up again before next use."
-msgstr ""
+#: ../properties/adapter.c:577
+msgid "Delete"
+msgstr "Entfernen"
 
-#: ../properties/bluetooth-properties.desktop.in.h:1
+#: ../properties/adapter.c:807
+msgid "Bluetooth Status"
+msgstr "Bluetooth-Status"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:1
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../properties/bluetooth-properties.desktop.in.h:2
+#: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "Bluetooth-Einstellungen bearbeiten"
 
@@ -308,387 +373,223 @@ msgid ""
 "Display options for the notification icon. Valid options are \"never\", "
 "\"present\" and \"always\"."
 msgstr ""
-"Anzeigeoptionen für das Statusicon. Mögliche Werte sind: »never«, »present« "
-"und »always«."
+"Anzeigeoptionen für das Benachrichtigungssymbol. Mögliche Werte sind: »never«, "
+"»present« und »always«."
 
 #: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "If Bluetooth file sharing is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:3
-msgid "If receiving of remote files via Bluetooth is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:4
-msgid ""
-"If the service for receiving remote files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:5
-msgid "If the service for sharing files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:6
 msgid "When to show the notification icon"
 msgstr "Legt fest, wann das Benachrichtigungssymbol angezeigt werden soll"
 
-#: ../wizard/main.c:75
-#, c-format
-msgid "Please enter the following PIN code: %s"
-msgstr ""
+#: ../wizard/main.c:180 ../wizard/main.c:209
+msgid "Please enter the following passkey:"
+msgstr "Bitte geben Sie den folgenden Schlüssel ein:"
 
-#: ../wizard/main.c:94
-#, c-format
-msgid "Please enter the following passkey: %s%s"
-msgstr ""
-
-#: ../wizard/main.c:115
+#: ../wizard/main.c:230
 #, c-format
 msgid "Pairing with %s canceled"
-msgstr ""
+msgstr "Verbindung mit %s abgebrochen"
 
-#: ../wizard/main.c:118
+#: ../wizard/main.c:233
 #, c-format
 msgid "Pairing with %s finished"
-msgstr ""
+msgstr "Verbindung mit %s abgeschlossen"
 
-#: ../wizard/main.c:145
+#: ../wizard/main.c:261
 #, c-format
 msgid "Successfully paired with %s"
-msgstr ""
+msgstr "Erfolgreich verbunden mit %s"
 
-#: ../wizard/main.c:159
+#: ../wizard/main.c:277
 #, c-format
 msgid "Pairing with %s failed"
-msgstr ""
+msgstr "Verbindung mit %s gescheitert"
 
-#: ../wizard/main.c:193
+#: ../wizard/main.c:329
 #, c-format
 msgid "Connecting to %s now ..."
-msgstr ""
+msgstr "Verbindung zu %s wird jetzt hergestellt …"
 
-#: ../wizard/main.c:264
+#: ../wizard/main.c:403
 msgid "Introduction"
-msgstr ""
+msgstr "Einführung"
 
-#: ../wizard/main.c:265
+#: ../wizard/main.c:404
 msgid "Welcome to the Bluetooth device setup wizard"
-msgstr ""
+msgstr "Willkommen zum Bluetooth-Geräteassistenten"
 
-#: ../wizard/main.c:268
+#: ../wizard/main.c:407
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer.\n"
 "\n"
 msgstr ""
+"Der Bluetooth-Geräteassistent wird Sie durch den Vorgang der Konfiguration "
+"von Bluetooth-Geräten zur Benutzung mit diesem Rechner führen.\n"
+"\n"
 
-#: ../wizard/main.c:303
-msgid "Device type"
-msgstr ""
+#: ../wizard/main.c:562
+msgid "Passkey options"
+msgstr "Schlüsseloptionen"
 
-#: ../wizard/main.c:304
-msgid "Select the type of device you want to setup"
-msgstr ""
+#: ../wizard/main.c:573
+msgid "_Automatic passkey selection"
+msgstr "_Automatische Schlüsselauswahl"
 
-#: ../wizard/main.c:316
-msgid "Mobile phone"
-msgstr ""
+#: ../wizard/main.c:576
+msgid "Use _fixed passkey:"
+msgstr "_Festen Schlüssel verwenden:"
 
-#: ../wizard/main.c:331
-msgid "Any device"
-msgstr ""
+#: ../wizard/main.c:585
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (die meisten Kopfhörer, Mäuse und GPS-Geräte)"
 
-#: ../wizard/main.c:392
+#: ../wizard/main.c:588
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/main.c:591
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/main.c:595
+msgid "Custom passkey code:"
+msgstr "Benutzerdefinierter Schlüsselcode:"
+
+#: ../wizard/main.c:672
 msgid "Device search"
-msgstr ""
+msgstr "Suche nach Geräten"
 
-#: ../wizard/main.c:393
+#. The selector
+#: ../wizard/main.c:675
 msgid "Select the device you want to setup"
-msgstr ""
+msgstr "Gerät zur Konfiguration auswählen"
 
-#: ../wizard/main.c:428
+#: ../wizard/main.c:692
+msgid "Passkey _options..."
+msgstr "Schlüssel_optionen …"
+
+#: ../wizard/main.c:706
 msgid "Device setup"
-msgstr ""
+msgstr "Gerätekonfiguration"
 
-#: ../wizard/main.c:429
+#: ../wizard/main.c:707
 msgid "Setting up new device"
-msgstr ""
+msgstr "Neues Gerät wird konfiguriert"
 
-#: ../wizard/main.c:451
+#: ../wizard/main.c:734
 msgid "Summary"
-msgstr ""
+msgstr "Zusammenfassung"
 
-#: ../wizard/main.c:452
-msgid "Succesfully configured new device"
-msgstr ""
+#: ../wizard/main.c:735
+msgid "Successfully configured new device"
+msgstr "Das neue Gerät wurde erfolgreich konfiguriert"
 
-#: ../wizard/main.c:462
+#: ../wizard/main.c:745
 msgid "Bluetooth Device Wizard"
-msgstr ""
+msgstr "Bluetooth-Geräteassistent"
 
-#: ../sendto/main.c:93
+#: ../sendto/main.c:96
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%'d Sekunde"
+msgstr[1] "%'d Sekunden"
 
-#: ../sendto/main.c:98 ../sendto/main.c:111
+#: ../sendto/main.c:101 ../sendto/main.c:114
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%'d Minute"
+msgstr[1] "%'d Minuten"
 
-#: ../sendto/main.c:109
+#: ../sendto/main.c:112
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%'d Stunde"
+msgstr[1] "%'d Stunden"
 
-#: ../sendto/main.c:119
+#: ../sendto/main.c:122
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ungefähr %'d Stunde"
+msgstr[1] "ungefähr %'d Stunden"
 
-#: ../sendto/main.c:145
+#: ../sendto/main.c:148
 msgid "File Transfer"
-msgstr ""
+msgstr "Dateiübertragung"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:165
 msgid "Sending files via Bluetooth"
-msgstr ""
+msgstr "Dateien über Bluetooth versenden"
 
-#: ../sendto/main.c:174
+#: ../sendto/main.c:177
 msgid "From:"
 msgstr "Von:"
 
-#: ../sendto/main.c:190
+#: ../sendto/main.c:193
 msgid "To:"
-msgstr ""
+msgstr "An:"
 
-#: ../sendto/main.c:206
+#: ../sendto/main.c:209
 msgid "Connecting..."
-msgstr "Verbinde ..."
+msgstr "Verbindung wird hergestellt ..."
 
-#: ../sendto/main.c:254
+#: ../sendto/main.c:257 ../sendto/main.c:580
 #, c-format
 msgid "Sending %s"
-msgstr ""
+msgstr "%s wird gesendet"
 
-#: ../sendto/main.c:261 ../sendto/main.c:326
+#: ../sendto/main.c:264 ../sendto/main.c:329 ../sendto/main.c:587
 #, c-format
 msgid "Sending file %d of %d"
-msgstr ""
+msgstr "Datei %d wird an %d gesendet"
 
-#: ../sendto/main.c:322
+#: ../sendto/main.c:325
 #, c-format
 msgid "%d KB/s"
-msgstr ""
+msgstr "%d kB/s"
 
-#: ../sendto/main.c:324
+#: ../sendto/main.c:327
 #, c-format
 msgid "%d B/s"
-msgstr ""
+msgstr "%d B/s"
 
-#: ../sendto/main.c:373
+#: ../sendto/main.c:359
+msgid "Error Occurred"
+msgstr "Es ist ein Fehler aufgetreten"
+
+#: ../sendto/main.c:386
 msgid "An unknown error occured"
-msgstr ""
+msgstr "Ein unbekannter Fehler ist aufgetreten"
 
-#: ../sendto/main.c:383
+#: ../sendto/main.c:396
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
 msgstr ""
+"Stellen Sie sicher, dass das entfernte Gerät eingeschaltet ist und Bluetooth-"
+"Verbindungen akzeptiert"
 
-#: ../sendto/main.c:554 ../browse/main.c:38
+#: ../sendto/main.c:693
+msgid "Select Device to Send To"
+msgstr "Gerät als Empfänger auswählen"
+
+#: ../sendto/main.c:697
+msgid "Send _To"
+msgstr "Senden _an"
+
+#: ../sendto/main.c:736
+msgid "Choose files to send"
+msgstr "Dateien zum Senden auswählen"
+
+#: ../sendto/main.c:765
 msgid "Remote device to use"
-msgstr ""
+msgstr "Zu verwendendes entferntes Gerät"
 
-#: ../analyzer/main.c:166
-msgid "Saving of protocol trace failed"
-msgstr ""
+#~ msgid "File transfer"
+#~ msgstr "Dateiübertragung"
 
-#: ../analyzer/main.c:313
-msgid "Loading Trace"
-msgstr ""
-
-#: ../analyzer/main.c:317
-msgid "Live Import"
-msgstr ""
-
-#: ../analyzer/main.c:321
-msgid "Protocol Trace"
-msgstr ""
-
-#: ../analyzer/main.c:326
-msgid "Unsaved"
-msgstr ""
-
-#: ../analyzer/main.c:609
-msgid "Can't live import from"
-msgstr ""
-
-#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
-msgid "Bluetooth Analyzer"
-msgstr ""
-
-#: ../analyzer/main.c:856
-msgid "_File"
-msgstr ""
-
-#: ../analyzer/main.c:886
-msgid "Open _Recent"
-msgstr ""
-
-#: ../analyzer/main.c:933
-msgid "_Edit"
-msgstr ""
-
-#: ../analyzer/main.c:942
-msgid "_View"
-msgstr ""
-
-#: ../analyzer/main.c:947
-msgid "_Full Screen"
-msgstr ""
-
-#: ../analyzer/main.c:954
-msgid "_Tools"
-msgstr ""
-
-#: ../analyzer/main.c:959
-msgid "_Debug Packet List"
-msgstr ""
-
-#: ../analyzer/main.c:968
-msgid "_Help"
-msgstr ""
-
-#: ../analyzer/dialog.c:110
-msgid "Bluetooth protocol analyzer"
-msgstr ""
-
-#: ../analyzer/dialog.c:140
-msgid "All Files"
-msgstr ""
-
-#: ../analyzer/dialog.c:145
-msgid "Supported Files"
-msgstr ""
-
-#: ../analyzer/dialog.c:154
-msgid "Frontline BTSnoop Files"
-msgstr ""
-
-#: ../analyzer/dialog.c:160
-msgid "Apple Packet Logger Files"
-msgstr ""
-
-#: ../analyzer/dialog.c:175
-msgid "By Extension"
-msgstr ""
-
-#: ../analyzer/dialog.c:180
-msgid "Frontline BTSnoop Format"
-msgstr ""
-
-#: ../analyzer/dialog.c:185
-msgid "Apple Packet Logger Format"
-msgstr ""
-
-#: ../analyzer/dialog.c:249
-msgid "Select File _Type"
-msgstr ""
-
-#: ../analyzer/dialog.c:292
-msgid "File Type"
-msgstr ""
-
-#: ../analyzer/dialog.c:297
-msgid "Extensions"
-msgstr ""
-
-#: ../analyzer/dialog.c:331
-msgid "Save File"
-msgstr ""
-
-#: ../analyzer/dialog.c:373
-msgid "Open File"
-msgstr ""
-
-#: ../analyzer/dialog.c:455
-msgid "Local connection"
-msgstr ""
-
-#: ../analyzer/dialog.c:463
-msgid "Remote connection"
-msgstr ""
-
-#: ../analyzer/dialog.c:497
-msgid "Open Import"
-msgstr ""
-
-#: ../analyzer/dialog.c:537
-msgid "Save the protocol trace before closing?"
-msgstr ""
-
-#: ../analyzer/dialog.c:538
-msgid "If you don't save, all information will be permanently lost."
-msgstr ""
-
-#: ../analyzer/dialog.c:546
-msgid "Close _without Saving"
-msgstr ""
-
-#: ../analyzer/dialog.c:576
-msgid "There is"
-msgstr ""
-
-#: ../analyzer/dialog.c:576
-msgid "There are"
-msgstr ""
-
-#: ../analyzer/dialog.c:577
-msgid "unsaved protocol trace."
-msgstr ""
-
-#: ../analyzer/dialog.c:578
-msgid "unsaved protocol traces."
-msgstr ""
-
-#: ../analyzer/dialog.c:579
-msgid "If you quit now, all information will be lost."
-msgstr ""
-
-#: ../analyzer/dialog.c:589
-msgid "_Discard Changes"
-msgstr ""
-
-#: ../analyzer/tracer.c:250
-msgid "Type"
-msgstr "Typ"
-
-#: ../analyzer/tracer.c:258
-msgid "Packet"
-msgstr ""
-
-#: ../analyzer/tracer.c:267
-msgid "Timestamp"
-msgstr ""
-
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
-msgid "Analyze Bluetooth traces"
-msgstr ""
-
-#: ../analyzer/bluetooth-manager.xml.in.h:1
-msgid "Apple Packet Logger File"
-msgstr ""
-
-#: ../analyzer/bluetooth-manager.xml.in.h:2
-msgid "Frontline BTSnoop File"
-msgstr ""
+#~ msgid "Share files from public folder"
+#~ msgstr "Öffentliches Verzeichnis freigeben"
