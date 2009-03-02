@@ -49,9 +49,8 @@ static GtkWidget *label_status;
 static GtkWidget *progress;
 
 static gchar *option_device = NULL;
+static gchar *option_device_name = NULL;
 static gchar **option_files = NULL;
-
-static gchar *device_name = NULL;
 
 static guint64 current_size = 0;
 static guint64 total_size = 0;
@@ -199,7 +198,7 @@ static void create_window(void)
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label), PANGO_ELLIPSIZE_END);
-	gtk_label_set_text(GTK_LABEL(label), device_name);
+	gtk_label_set_text(GTK_LABEL(label), option_device_name);
 	gtk_table_attach_defaults(GTK_TABLE(table), label, 1, 2, 1, 2);
 
 	progress = gtk_progress_bar_new();
@@ -766,6 +765,8 @@ show_select_dialog(void)
 static GOptionEntry options[] = {
 	{ "device", 0, 0, G_OPTION_ARG_STRING, &option_device,
 				N_("Remote device to use"), "ADDRESS" },
+	{ "name", 0, 0, G_OPTION_ARG_STRING, &option_device_name,
+				N_("Remove device's name"), NULL },
 	{ "dest", 0, G_OPTION_FLAG_HIDDEN,
 			G_OPTION_ARG_STRING, &option_device, NULL, NULL },
 	{ G_OPTION_REMAINING, 0, 0,
@@ -798,6 +799,14 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
+	/* A device name, but no device? */
+	if (option_device == NULL && option_device_name != NULL) {
+		if (option_files != NULL)
+			g_strfreev(option_files);
+		g_free (option_device_name);
+		return 1;
+	}
+
 	if (option_files == NULL) {
 		option_files = show_select_dialog();
 		if (option_files == NULL)
@@ -805,7 +814,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (option_device == NULL) {
-		option_device = show_browse_dialog(&device_name);
+		option_device = show_browse_dialog(&option_device_name);
 		if (option_device == NULL) {
 			g_strfreev(option_files);
 			return 1;
@@ -860,10 +869,10 @@ int main(int argc, char *argv[])
 	dbus_g_object_register_marshaller(marshal_VOID__UINT64,
 				G_TYPE_NONE, G_TYPE_UINT64, G_TYPE_INVALID);
 
-	if (device_name == NULL)
-		device_name = get_device_name(option_device);
-	if (device_name == NULL)
-		device_name = g_strdup(option_device);
+	if (option_device_name == NULL)
+		option_device_name = get_device_name(option_device);
+	if (option_device_name == NULL)
+		option_device_name = g_strdup(option_device);
 
 	create_window();
 
@@ -923,10 +932,9 @@ int main(int argc, char *argv[])
 
 	dbus_g_connection_unref(conn);
 
-	g_free(device_name);
-
 	g_strfreev(option_files);
 	g_free(option_device);
+	g_free(option_device_name);
 
 	return 0;
 }
