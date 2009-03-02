@@ -684,7 +684,7 @@ select_device_changed(BluetoothChooser *sel,
 }
 
 static char *
-show_browse_dialog (void)
+show_browse_dialog (char **device_name)
 {
 	GtkWidget *dialog, *selector, *button, *image;
 	char *bdaddr;
@@ -720,7 +720,10 @@ show_browse_dialog (void)
 	bdaddr = NULL;
 	response_id = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (response_id == GTK_RESPONSE_ACCEPT)
-		g_object_get (G_OBJECT (selector), "device-selected", &bdaddr, NULL);
+		g_object_get (G_OBJECT (selector),
+			      "device-selected", &bdaddr,
+			      "device-selected-name", device_name,
+			      NULL);
 
 	gtk_widget_destroy (dialog);
 
@@ -802,7 +805,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (option_device == NULL) {
-		option_device = show_browse_dialog();
+		option_device = show_browse_dialog(&device_name);
 		if (option_device == NULL) {
 			g_strfreev(option_files);
 			return 1;
@@ -857,7 +860,8 @@ int main(int argc, char *argv[])
 	dbus_g_object_register_marshaller(marshal_VOID__UINT64,
 				G_TYPE_NONE, G_TYPE_UINT64, G_TYPE_INVALID);
 
-	device_name = get_device_name(option_device);
+	if (device_name == NULL)
+		device_name = get_device_name(option_device);
 	if (device_name == NULL)
 		device_name = g_strdup(option_device);
 
