@@ -143,8 +143,8 @@ bluetooth_chooser_start_discovery (BluetoothChooser *self)
 
 	g_return_if_fail (priv->show_search);
 
-	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
-	bluetooth_client_start_discovery (priv->client);
+	if (bluetooth_client_start_discovery (priv->client) != FALSE)
+		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
 }
 
 static char *
@@ -501,6 +501,7 @@ create_treeview (BluetoothChooser *self)
 				  G_CALLBACK (device_model_row_changed), self);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (tree), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (priv->search_button), FALSE);
 	}
 
 	gtk_container_add (GTK_CONTAINER(scrolled), tree);
