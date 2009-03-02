@@ -143,6 +143,29 @@ create_dialogue (const char *title)
 	return dialog;
 }
 
+static void
+response_cb (GtkDialog *dialog, gint response_id, BluetoothChooser *selector)
+{
+	if (response_id == GTK_RESPONSE_ACCEPT) {
+		char *address, *name, *icon;
+		guint type;
+
+		g_object_get (G_OBJECT (selector),
+			      "device-selected", &address,
+			      "device-selected-name", &name,
+			      "device-selected-icon", &icon,
+			      "device-selected-type", &type,
+			      NULL);
+		g_message("Selected device is: %s (address: %s, icon: %s, type: %s)",
+			  name, address, icon, bluetooth_type_to_string (type));
+		g_free(address);
+		g_free (name);
+		g_free (icon);
+	} else {
+		g_message ("No selected device");
+	}
+}
+
 static GtkWidget *
 create_wizard_dialogue (void)
 {
@@ -172,6 +195,9 @@ create_wizard_dialogue (void)
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
+
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (response_cb), selector);
 
 	return dialog;
 }
@@ -204,15 +230,6 @@ int main(int argc, char **argv)
 
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
 
-#if 0
-	if (response == GTK_RESPONSE_ACCEPT) {
-		char *address;
-
-		g_object_get(selector, "device-selected", &address, NULL);
-		g_message("Selected device is: %s", address);
-		g_free(address);
-	}
-#endif
 	gtk_widget_destroy(dialog);
 
 	return 0;
