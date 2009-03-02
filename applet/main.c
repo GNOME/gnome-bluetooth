@@ -56,6 +56,7 @@ static int icon_policy = ICON_POLICY_PRESENT;
 
 static GConfClient* gconf;
 
+static GtkWidget *menuitem_setup = NULL;
 static GtkWidget *menuitem_sendto = NULL;
 static GtkWidget *menuitem_browse = NULL;
 
@@ -210,21 +211,6 @@ static void wizard_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
-static void activate_callback(GObject *widget, gpointer user_data)
-{
-	guint32 activate_time = gtk_get_current_event_time();
-	GtkWidget *menu = user_data;
-
-	if (query_blinking() == TRUE) {
-		show_agents();
-		return;
-	}
-
-	gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
-			gtk_status_icon_position_menu,
-			GTK_STATUS_ICON(widget), 1, activate_time);
-}
-
 static gboolean program_available(const char *program)
 {
 	gchar *path;
@@ -244,7 +230,10 @@ static void popup_callback(GObject *widget, guint button,
 	GtkWidget *menu = user_data;
 	gboolean enabled;
 
-	enabled = (num_adapters_present - num_adapters_powered) >= 0;
+	if (num_adapters_present == 0)
+		enabled = FALSE;
+	else
+		enabled = (num_adapters_present - num_adapters_powered) >= 0;
 
 	gtk_widget_set_sensitive(menuitem_sendto,
 				program_available("obex-data-server") &&
@@ -254,9 +243,23 @@ static void popup_callback(GObject *widget, guint button,
 					program_available("nautilus") &&
 						enabled);
 
+	gtk_widget_set_sensitive(menuitem_setup, enabled);
+
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			gtk_status_icon_position_menu,
 			GTK_STATUS_ICON(widget), button, activate_time);
+}
+
+static void activate_callback(GObject *widget, gpointer user_data)
+{
+	guint32 activate_time = gtk_get_current_event_time();
+
+	if (query_blinking() == TRUE) {
+		show_agents();
+		return;
+	}
+
+	popup_callback(widget, 0, activate_time, user_data);
 }
 
 static GtkWidget *create_popupmenu(void)
@@ -280,6 +283,7 @@ static GtkWidget *create_popupmenu(void)
 				G_CALLBACK(wizard_callback), NULL);
 	gtk_widget_show(item);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+	menuitem_setup = item;
 
 	item = gtk_separator_menu_item_new();
 	gtk_widget_show(item);
