@@ -263,10 +263,13 @@ static GtkWidget *create_popupmenu(void)
 {
 	GtkWidget *menu;
 	GtkWidget *item;
+	GtkWidget *image;
 
 	menu = gtk_menu_new();
 
-	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
+	image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+	item = gtk_image_menu_item_new_with_label(_("Preferences..."));
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 	g_signal_connect(item, "activate",
 				G_CALLBACK(settings_callback), NULL);
 	gtk_widget_show(item);
