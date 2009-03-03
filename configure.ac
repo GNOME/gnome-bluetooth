@@ -70,7 +70,6 @@ NOTIFY_REQUIRED=0.4.3
 dnl Requires for the properties window
 PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  hal >= $HAL_REQUIRED
 		  gconf-2.0
 		  gtk+-2.0
 		  unique-1.0)
@@ -95,10 +94,16 @@ PKG_CHECK_MODULES(WIZARD,
 		  gtk+-2.0
 		  unique-1.0)
 
-dnl Requires for the libraries
+dnl Requires for the public library
 PKG_CHECK_MODULES(LIBGNOMEBT,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gtk+-2.0)
+
+dnl Requires for the private library
+PKG_CHECK_MODULES(COMMON,
+		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gtk+-2.0
+		  hal >= $HAL_REQUIRED)
 
 DBUS_BINDING_TOOL="dbus-binding-tool"
 AC_SUBST(DBUS_BINDING_TOOL)

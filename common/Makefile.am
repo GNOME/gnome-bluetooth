@@ -9,7 +9,8 @@ libcommon_la_SOURCES = helper.h helper.c \
 		obex-agent.h obex-agent.c \
 		helper.c helper.h \
 		bluetooth-enums.h
-libcommon_la_LIBADD = $(LIBGNOMEBT_LIBS)
+libcommon_la_LIBADD = $(COMMON_LIBS)
+libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 
 libgnome_bluetooth_la_SOURCES =				\
 	bluetooth-enums.h				\
@@ -34,7 +35,7 @@ gnomebluetooth_HEADERS =				\
 	bluetooth-chooser-button.h			\
 	bluetooth-enums.h
 
-AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-client-glue.h \
