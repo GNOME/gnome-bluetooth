@@ -31,6 +31,13 @@
 
 #include "bluetooth-killswitch.h"
 
+enum {
+	STATE_CHANGED,
+	LAST_SIGNAL
+};
+
+static int signals[LAST_SIGNAL] = { 0 };
+
 #define BLUETOOTH_KILLSWITCH_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 				BLUETOOTH_TYPE_KILLSWITCH, BluetoothKillswitchPrivate))
 
@@ -38,7 +45,7 @@ typedef struct _BluetoothIndKillswitch BluetoothIndKillswitch;
 struct _BluetoothIndKillswitch {
 	char *udi;
 	DBusPendingCall *call;
-	gboolean killed;
+	gboolean killed; //FIXME Change this to be a KillswitchState
 };
 
 typedef struct _BluetoothKillswitchPrivate BluetoothKillswitchPrivate;
@@ -60,12 +67,15 @@ setpower_reply (DBusPendingCall *call, void *user_data)
 	gint32 power;
 	GList *l;
 
+	priv->num_remaining_answers--;
+
 	reply = dbus_pending_call_steal_reply(call);
 
 	if (dbus_message_get_args(reply, NULL, DBUS_TYPE_INT32, &power,
 				  DBUS_TYPE_INVALID) == FALSE) {
 		dbus_message_unref(reply);
-		return;
+		//FIXME ind->killed is wrong in that case
+		goto done;
 	}
 
 	/* Look for the killswitch */
@@ -73,14 +83,18 @@ setpower_reply (DBusPendingCall *call, void *user_data)
 		BluetoothIndKillswitch *ind = l->data;
 		if (call != ind->call)
 			continue;
-		ind->killed = (power > 0);
 		ind->call = NULL;
-		priv->num_remaining_answers--;
 		break;
 	}
 
 	dbus_message_unref(reply);
 	dbus_pending_call_unref (call);
+
+done:
+	if (priv->num_remaining_answers == 0)
+		g_signal_emit (G_OBJECT (killswitch),
+			       signals[STATE_CHANGED],
+			       0, bluetooth_killswitch_get_state (killswitch));
 }
 
 static void
@@ -92,12 +106,15 @@ getpower_reply (DBusPendingCall *call, void *user_data)
 	GList *l;
 	gint32 power;
 
+	priv->num_remaining_answers--;
+
 	reply = dbus_pending_call_steal_reply (call);
 
 	if (dbus_message_get_args(reply, NULL, DBUS_TYPE_INT32, &power,
 				  DBUS_TYPE_INVALID) == FALSE) {
 		dbus_message_unref(reply);
-		return;
+		//FIXME might be, might not, ind->killed is wrong
+		goto done;
 	}
 
 	/* Look for the killswitch */
@@ -105,16 +122,19 @@ getpower_reply (DBusPendingCall *call, void *user_data)
 		BluetoothIndKillswitch *ind = l->data;
 		if (call != ind->call)
 			continue;
-		ind->killed = (power > 0);
+		ind->killed = (power == 0);
 		ind->call = NULL;
-		priv->num_remaining_answers--;
 		break;
 	}
 
 	dbus_message_unref(reply);
 	dbus_pending_call_unref (call);
 
-	//g_object_notify (G_OBJECT (killswitch), "killed");
+done:
+	if (priv->num_remaining_answers == 0)
+		g_signal_emit (G_OBJECT (killswitch),
+			       signals[STATE_CHANGED],
+			       0, bluetooth_killswitch_get_state (killswitch));
 }
 
 void
@@ -199,6 +219,7 @@ bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState
 		}
 
 		ind->call = call;
+		ind->killed = !value;
 		priv->num_remaining_answers++;
 
 		dbus_pending_call_set_notify(call, setpower_reply, killswitch, NULL);
@@ -376,6 +397,16 @@ bluetooth_killswitch_class_init(BluetoothKillswitchClass *klass)
 
 	g_type_class_add_private(klass, sizeof(BluetoothKillswitchPrivate));
 	object_class->finalize = bluetooth_killswitch_finalize;
+
+	signals[STATE_CHANGED] =
+		g_signal_new ("state-changed",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BluetoothKillswitchClass, state_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__INT,
+			      G_TYPE_NONE, 1, G_TYPE_INT);
+
 }
 
 BluetoothKillswitch *

@@ -57,6 +57,8 @@ struct _BluetoothKillswitch {
 
 struct _BluetoothKillswitchClass {
 	GObjectClass parent_class;
+
+	void (*state_changed) (BluetoothKillswitch *killswitch, KillswitchState state);
 };
 
 GType bluetooth_killswitch_get_type(void);
