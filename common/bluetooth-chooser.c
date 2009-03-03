@@ -69,6 +69,7 @@ struct _BluetoothChooserPrivate {
 	guint show_search : 1;
 	guint show_device_type : 1;
 	guint show_device_category : 1;
+	guint disco_rq : 1;
 };
 
 G_DEFINE_TYPE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_VBOX)
@@ -145,6 +146,8 @@ bluetooth_chooser_start_discovery (BluetoothChooser *self)
 
 	if (bluetooth_client_start_discovery (priv->client) != FALSE)
 		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
+	else
+		priv->disco_rq = TRUE;
 }
 
 static char *
@@ -417,6 +420,13 @@ static void default_adapter_changed (GObject    *gobject,
 		g_object_unref (priv->filter);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
+
+		/* Start a disovery if it was requested before we
+		 * had an adapter available */
+		if (priv->disco_rq != FALSE) {
+			bluetooth_chooser_start_discovery (self);
+			priv->disco_rq = FALSE;
+		}
 
 		g_signal_connect (priv->adapter_model, "row-changed",
 				  G_CALLBACK (device_model_row_changed), self);
