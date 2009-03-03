@@ -63,69 +63,6 @@ static GtkWidget *menuitem_setup = NULL;
 static GtkWidget *menuitem_sendto = NULL;
 static GtkWidget *menuitem_browse = NULL;
 
-static void about_url_hook (GtkAboutDialog *about,
-			    const gchar *link,
-			    gpointer data)
-{
-	GError *error = NULL;
-
-	if (!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (about)),
-			   link,
-			   gtk_get_current_event_time (),
-			   &error))
-	{
-		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new (GTK_WINDOW (about),
-						GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_CLOSE, NULL);
-		gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG(dialog),
-					      error->message);
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-		g_error_free (error);
-	}
-}
-
-static void about_email_hook(GtkAboutDialog *about,
-			     const char *email_address,
-			     gpointer data)
-{
-	char *escaped, *uri;
-
-	escaped = g_uri_escape_string (email_address, NULL, FALSE);
-	uri = g_strdup_printf ("mailto:%s", escaped);
-	g_free (escaped);
-
-	about_url_hook (about, uri, data);
-	g_free (uri);
-}
-
-static void about_callback(GtkWidget *item, gpointer user_data)
-{
-	const gchar *authors[] = {
-		"Bastien Nocera <hadess@hadess.net>",
-		"Marcel Holtmann <marcel@holtmann.org>",
-		NULL
-	};
-	const gchar *artists[] = {
-		"Andreas Nilsson <nisses.mail@home.se>",
-		NULL,
-	};
-
-	gtk_about_dialog_set_url_hook(about_url_hook, NULL, NULL);
-	gtk_about_dialog_set_email_hook(about_email_hook, NULL, NULL);
-
-	gtk_show_about_dialog(NULL, "version", VERSION,
-		"copyright", "Copyright \xc2\xa9 2005-2008 Marcel Holtmann, 2006-2009 Bastien Nocera",
-		"comments", _("A Bluetooth manager for the GNOME desktop"),
-		"authors", authors,
-		"artists", artists,
-		"translator-credits", _("translator-credits"),
-		"website", "http://live.gnome.org/GnomeBluetooth",
-		"website-label", _("GNOME Bluetooth home page"),
-		"logo-icon-name", "bluetooth", NULL);
-}
-
 static void settings_callback(GObject *widget, gpointer user_data)
 {
 	const char *command = "bluetooth-properties";
@@ -363,16 +300,6 @@ static GtkWidget *create_popupmenu(void)
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
 	menuitem_browse = item;
-
-	item = gtk_separator_menu_item_new();
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
-	g_signal_connect(item, "activate",
-				G_CALLBACK(about_callback), NULL);
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
 	return menu;
 }
