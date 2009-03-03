@@ -26,10 +26,7 @@
 #include <config.h>
 #endif
 
-#include <glib/gi18n.h>
-
 #include <dbus/dbus-glib-lowlevel.h>
-
 #include <hal/libhal.h>
 
 #include "killswitch.h"
@@ -91,8 +88,6 @@ getpower_reply (DBusPendingCall *call, void *user_data)
 	/* Look for the killswitch */
 	for (l = priv->killswitches; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
-		g_message ("comparing %p", call);
-		g_message ("with %p", ind->call);
 		if (call != ind->call)
 			continue;
 		ind->killed = (power > 0);
@@ -110,6 +105,8 @@ bluetooth_killswitch_update_state (BluetoothKillswitch *killswitch)
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 	GList *l;
+
+	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
 
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
@@ -146,6 +143,7 @@ bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState
 	gboolean value;
 	GList *l;
 
+	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
 	g_return_if_fail (state == KILLSWITCH_STATE_KILLED || state == KILLSWITCH_STATE_NOT_KILLED);
 
 	value = (state == KILLSWITCH_STATE_NOT_KILLED);
@@ -173,7 +171,6 @@ bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState
 		}
 
 		ind->call = call;
-		g_message ("set state, call %p", call);
 
 		dbus_pending_call_set_notify(call, setpower_reply, killswitch, NULL);
 
@@ -187,6 +184,8 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 	int state = KILLSWITCH_STATE_UNKNOWN;
 	GList *l;
+
+	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), KILLSWITCH_STATE_UNKNOWN);
 
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
@@ -214,6 +213,8 @@ gboolean
 bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch)
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+
+	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), FALSE);
 
 	return (priv->killswitches != NULL);
 }
@@ -254,8 +255,6 @@ add_killswitch (BluetoothKillswitch *killswitch, const char *udi)
 	ind->udi = g_strdup (udi);
 	ind->call = call;
 	priv->killswitches = g_list_append (priv->killswitches, ind);
-
-	g_message ("add killswitch %p", call);
 
 	dbus_pending_call_set_notify (call, getpower_reply, killswitch, NULL);
 
@@ -308,6 +307,12 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 }
 
 static void
+free_ind_killswitch (BluetoothIndKillswitch *ind)
+{
+	g_free (ind->udi);
+}
+
+static void
 bluetooth_killswitch_finalize (GObject *object)
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (object);
@@ -323,8 +328,9 @@ bluetooth_killswitch_finalize (GObject *object)
 		priv->connection = NULL;
 	}
 
-	//FIXME
-	//kill everything in killswitches
+	g_list_foreach (priv->killswitches, (GFunc) free_ind_killswitch, NULL);
+	g_list_free (priv->killswitches);
+	priv->killswitches = NULL;
 
 	G_OBJECT_CLASS(bluetooth_killswitch_parent_class)->finalize(object);
 }
