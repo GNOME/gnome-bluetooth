@@ -34,6 +34,7 @@
 
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
+#include <bluetooth-killswitch.h>
 
 #include "notify.h"
 #include "agent.h"
@@ -55,6 +56,7 @@ static int icon_policy = ICON_POLICY_PRESENT;
 #define PREF_ICON_POLICY	PREF_DIR "/icon_policy"
 
 static GConfClient* gconf;
+static BluetoothKillswitch *killswitch = NULL;
 
 static GtkWidget *menuitem_setup = NULL;
 static GtkWidget *menuitem_sendto = NULL;
@@ -320,16 +322,17 @@ static GtkWidget *create_popupmenu(void)
 
 static void update_icon_visibility()
 {
+	if (num_adapters_powered == 0)
+		set_icon (FALSE);
+	else
+		set_icon (TRUE);
+
 	if (icon_policy == ICON_POLICY_NEVER)
 		hide_icon();
 	else if (icon_policy == ICON_POLICY_ALWAYS)
 		show_icon();
 	else if (icon_policy == ICON_POLICY_PRESENT) {
-		if (num_adapters_powered == 0)
-			set_icon (FALSE);
-		else
-			set_icon (TRUE);
-		if (num_adapters_present > 0)
+		if (num_adapters_present > 0 || killswitch != NULL)
 			show_icon();
 		else
 			hide_icon();
@@ -443,6 +446,12 @@ int main(int argc, char *argv[])
 	g_set_application_name(_("Bluetooth Applet"));
 
 	gtk_window_set_default_icon_name("bluetooth");
+
+	killswitch = bluetooth_killswitch_new ();
+	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE) {
+		g_object_unref (killswitch);
+		killswitch = NULL;
+	}
 
 	client = bluetooth_client_new();
 
