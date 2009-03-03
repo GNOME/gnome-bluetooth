@@ -62,6 +62,8 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
+static DBusGProxy *session_proxy = NULL;
+
 static gchar *filename_to_path(const gchar *filename)
 {
 	GFile *file;
@@ -354,10 +356,30 @@ static void error_occurred(DBusGProxy *proxy, const gchar *name,
 {
 	gchar *text;
 
+	g_return_if_fail (proxy == session_proxy);
+
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
 						_("Error Occurred"));
 
 	text = g_strdup_printf("<span foreground=\"red\">%s</span>", message);
+	gtk_label_set_markup(GTK_LABEL(label_status), text);
+	g_free(text);
+
+	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
+						GTK_RESPONSE_CLOSE, TRUE);
+}
+
+static void session_connect_error (DBusGProxy *proxy, const char *error_name,
+				   const char *error_message, gpointer user_data)
+{
+	gchar *text;
+
+	g_return_if_fail (proxy != session_proxy);
+
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
+						_("Error Occurred"));
+
+	text = g_strdup_printf("<span foreground=\"red\">%s</span>", error_message);
 	gtk_label_set_markup(GTK_LABEL(label_status), text);
 	g_free(text);
 
@@ -371,7 +393,7 @@ static void session_connected(DBusGProxy *proxy, gpointer user_data)
 
 	first_update = get_system_time();
 
-	send_file(proxy);
+	send_file(session_proxy);
 }
 
 #define OPENOBEX_CONNECTION_FAILED "org.openobex.Error.ConnectionAttemptFailed"
@@ -424,44 +446,41 @@ static void create_notify(DBusGProxy *proxy,
 		return;
 	}
 
-	proxy = dbus_g_proxy_new_for_name(conn, "org.openobex",
+	session_proxy = dbus_g_proxy_new_for_name(conn, "org.openobex",
 						path, "org.openobex.Session");
 
-	dbus_g_proxy_add_signal(proxy, "Connected", G_TYPE_INVALID);
+	dbus_g_proxy_add_signal(session_proxy, "Connected", G_TYPE_INVALID);
 
-	dbus_g_proxy_connect_signal(proxy, "Connected",
+	dbus_g_proxy_connect_signal(session_proxy, "Connected",
 				G_CALLBACK(session_connected), NULL, NULL);
 
-	dbus_g_proxy_add_signal(proxy, "ErrorOccurred",
+	dbus_g_proxy_add_signal(session_proxy, "ErrorOccurred",
 				G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID);
 
-	dbus_g_proxy_connect_signal(proxy, "ErrorOccurred",
+	dbus_g_proxy_connect_signal(session_proxy, "ErrorOccurred",
 				G_CALLBACK(error_occurred), NULL, NULL);
 
-	dbus_g_proxy_add_signal(proxy, "Cancelled", G_TYPE_INVALID);
+	dbus_g_proxy_add_signal(session_proxy, "Cancelled", G_TYPE_INVALID);
 
-	dbus_g_proxy_connect_signal(proxy, "Cancelled",
+	dbus_g_proxy_connect_signal(session_proxy, "Cancelled",
 				G_CALLBACK(transfer_cancelled), NULL, NULL);
 
-	dbus_g_proxy_add_signal(proxy, "TransferStarted", G_TYPE_STRING,
+	dbus_g_proxy_add_signal(session_proxy, "TransferStarted", G_TYPE_STRING,
 				G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_INVALID);
 
-	dbus_g_proxy_connect_signal(proxy, "TransferStarted",
+	dbus_g_proxy_connect_signal(session_proxy, "TransferStarted",
 				G_CALLBACK(transfer_started), NULL, NULL);
 
-	dbus_g_proxy_add_signal(proxy, "TransferProgress",
+	dbus_g_proxy_add_signal(session_proxy, "TransferProgress",
 						G_TYPE_UINT64, G_TYPE_INVALID);
 
-	dbus_g_proxy_connect_signal(proxy, "TransferProgress",
+	dbus_g_proxy_connect_signal(session_proxy, "TransferProgress",
 				G_CALLBACK(transfer_progress), NULL, NULL);
 
-	dbus_g_proxy_add_signal(proxy, "TransferCompleted", G_TYPE_INVALID);
+	dbus_g_proxy_add_signal(session_proxy, "TransferCompleted", G_TYPE_INVALID);
 
-	dbus_g_proxy_connect_signal(proxy, "TransferCompleted",
+	dbus_g_proxy_connect_signal(session_proxy, "TransferCompleted",
 				G_CALLBACK(transfer_completed), NULL, NULL);
-
-	dbus_g_proxy_call(proxy, "Connect", NULL, G_TYPE_INVALID,
-							G_TYPE_INVALID);
 }
 
 static gchar *get_name(DBusGProxy *device)
@@ -869,6 +888,13 @@ int main(int argc, char *argv[])
 	dbus_g_object_register_marshaller(marshal_VOID__UINT64,
 				G_TYPE_NONE, G_TYPE_UINT64, G_TYPE_INVALID);
 
+	dbus_g_object_register_marshaller(marshal_VOID__STRING_STRING_STRING,
+					  G_TYPE_NONE,
+					  DBUS_TYPE_G_OBJECT_PATH,
+					  G_TYPE_STRING,
+					  G_TYPE_STRING,
+					  G_TYPE_INVALID);
+
 	if (option_device_name == NULL)
 		option_device_name = get_device_name(option_device);
 	if (option_device_name == NULL)
@@ -889,6 +915,17 @@ int main(int argc, char *argv[])
 
 		dbus_g_proxy_connect_signal(proxy, "NameOwnerChanged",
 				G_CALLBACK(name_owner_changed), NULL, NULL);
+
+		dbus_g_proxy_add_signal(proxy, "SessionConnected", DBUS_TYPE_G_OBJECT_PATH, G_TYPE_INVALID);
+
+		dbus_g_proxy_connect_signal(proxy, "SessionConnected",
+					    G_CALLBACK(session_connected), NULL, NULL);
+
+		dbus_g_proxy_add_signal(proxy, "SessionConnectError",
+					DBUS_TYPE_G_OBJECT_PATH, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID);
+
+		dbus_g_proxy_connect_signal(proxy, "SessionConnectError",
+					    G_CALLBACK(session_connect_error), NULL, NULL);
 
 		dbus_g_proxy_begin_call(proxy, "CreateBluetoothSession",
 					create_notify, NULL, NULL,
