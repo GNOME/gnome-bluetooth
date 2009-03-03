@@ -719,7 +719,10 @@ static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
 	if (adapter == NULL)
 		return;
 
-	g_timeout_add(250, adapter_create, adapter);
+	/* XXX This is needed so that we can run dbus_g_proxy_add_signal()
+	 * for "PropertyChanged" on the adapter, remove when we have some
+	 * decent D-Bus bindings */
+	g_idle_add(adapter_create, adapter);
 }
 
 static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
