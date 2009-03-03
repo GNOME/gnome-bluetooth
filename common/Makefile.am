@@ -5,6 +5,7 @@ lib_LTLIBRARIES = libgnome-bluetooth.la
 libcommon_la_SOURCES = helper.h helper.c \
 		bluetooth-client.h bluetooth-client.c \
 		bluetooth-agent.h bluetooth-agent.c \
+		bluetooth-killswitch.h bluetooth-killswitch.c \
 		obex-agent.h obex-agent.c \
 		helper.c helper.h \
 		bluetooth-enums.h

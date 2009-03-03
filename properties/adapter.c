@@ -36,7 +36,7 @@
 
 #include "adapter.h"
 #include "general.h"
-#include "killswitch.h"
+#include "bluetooth-killswitch.h"
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;

@@ -29,7 +29,7 @@
 #include <dbus/dbus-glib-lowlevel.h>
 #include <hal/libhal.h>
 
-#include "killswitch.h"
+#include "bluetooth-killswitch.h"
 
 #define BLUETOOTH_KILLSWITCH_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 				BLUETOOTH_TYPE_KILLSWITCH, BluetoothKillswitchPrivate))
