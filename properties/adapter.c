@@ -796,8 +796,6 @@ static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
 static void
 button_clicked_cb (GtkButton *button, gpointer user_data)
 {
-	g_message ("button_clicked_cb");
-
 	gtk_widget_set_sensitive (GTK_WIDGET (user_data), FALSE);
 	bluetooth_killswitch_set_state (killswitch, KILLSWITCH_STATE_NOT_KILLED);
 }
