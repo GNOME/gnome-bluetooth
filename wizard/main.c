@@ -57,6 +57,7 @@ static gchar *user_pincode = NULL;
 
 static GtkWidget *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
+static GtkWidget *passkey_button = NULL;
 static GtkWidget *page_setup = NULL;
 static GtkWidget *page_summary = NULL;
 
@@ -301,10 +302,16 @@ static void prepare_callback(GtkWidget *assistant,
 	const char *path = AGENT_PATH;
 
 	if (page == page_search) {
+		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), passkey_button);
 		complete = set_page_search_complete ();
 		bluetooth_client_start_discovery(client);
-	} else
+	} else {
+		if (gtk_widget_get_parent (passkey_button) != NULL) {
+			g_object_ref (passkey_button);
+			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), passkey_button);
+		}
 		bluetooth_client_stop_discovery(client);
+	}
 
 	if (page == page_setup) {
 		gchar *text, *markup, *address, *name;
@@ -689,12 +696,14 @@ static void create_search(GtkWidget *assistant)
 
 	gtk_container_add(GTK_CONTAINER(vbox), GTK_WIDGET (selector));
 
+	page_search = vbox;
+
 	button = gtk_button_new_with_mnemonic (_("Passkey _options..."));
-	gtk_box_pack_end (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	g_signal_connect (G_OBJECT (button), "clicked",
 			  G_CALLBACK (passkey_option_button_clicked), assistant);
+	gtk_widget_show (button);
 
-	page_search = vbox;
+	passkey_button = button;
 }
 
 static void create_setup(GtkWidget *assistant)
