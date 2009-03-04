@@ -5,11 +5,11 @@ icons = hicolor_apps_16x16_bluetooth.png \
 	hicolor_apps_32x32_bluetooth.png \
 	hicolor_apps_48x48_bluetooth.png \
 	hicolor_apps_scalable_bluetooth.svg \
-	hicolor_apps_16x16_bluetooth-disabled.png \
-	hicolor_apps_22x22_bluetooth-disabled.png \
-	hicolor_apps_24x24_bluetooth-disabled.png \
-	hicolor_apps_32x32_bluetooth-disabled.png \
-	hicolor_apps_48x48_bluetooth-disabled.png
+	hicolor_status_16x16_bluetooth-disabled.png \
+	hicolor_status_22x22_bluetooth-disabled.png \
+	hicolor_status_24x24_bluetooth-disabled.png \
+	hicolor_status_32x32_bluetooth-disabled.png \
+	hicolor_status_48x48_bluetooth-disabled.png
 
 noinst_DATA = hicolor_apps_16x16_bluetooth.svg \
 		hicolor_apps_22x22_bluetooth.svg \
