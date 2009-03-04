@@ -2,7 +2,7 @@ AC_PREREQ(2.52)
 
 m4_define(gnomebt_version_major, 2)
 m4_define(gnomebt_version_minor, 27)
-m4_define(gnomebt_version_micro, 0)
+m4_define(gnomebt_version_micro, 1)
 
 AC_INIT([gnome-bluetooth],
         [gnomebt_version_major.gnomebt_version_minor.gnomebt_version_micro],
@@ -33,7 +33,7 @@ dnl Initialize libtool
 AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
 
-GETTEXT_PACKAGE=gnome-bluetooth
+GETTEXT_PACKAGE=gnome-bluetooth2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 					[The name of the gettext domain])
