@@ -369,12 +369,13 @@ static void error_occurred(DBusGProxy *proxy, const gchar *name,
 						GTK_RESPONSE_CLOSE, TRUE);
 }
 
-static void session_connect_error (DBusGProxy *proxy, const char *error_name,
+static void session_connect_error (DBusGProxy *proxy, DBusGProxy *session_obj, const char *error_name,
 				   const char *error_message, gpointer user_data)
 {
 	gchar *text;
 
-	g_return_if_fail (proxy != session_proxy);
+	if (session_obj != session_proxy)
+		return;
 
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
 						_("Error Occurred"));
@@ -387,8 +388,11 @@ static void session_connect_error (DBusGProxy *proxy, const char *error_name,
 						GTK_RESPONSE_CLOSE, TRUE);
 }
 
-static void session_connected(DBusGProxy *proxy, gpointer user_data)
+static void session_connected(DBusGProxy *proxy, DBusGProxy *session_obj, gpointer user_data)
 {
+	if (session_obj != session_proxy)
+		return;
+
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), NULL);
 
 	first_update = get_system_time();
@@ -448,11 +452,6 @@ static void create_notify(DBusGProxy *proxy,
 
 	session_proxy = dbus_g_proxy_new_for_name(conn, "org.openobex",
 						path, "org.openobex.Session");
-
-	dbus_g_proxy_add_signal(session_proxy, "Connected", G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal(session_proxy, "Connected",
-				G_CALLBACK(session_connected), NULL, NULL);
 
 	dbus_g_proxy_add_signal(session_proxy, "ErrorOccurred",
 				G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID);
