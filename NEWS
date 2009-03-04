@@ -1,3 +1,29 @@
+ver 2.27.0:
+	UI changes:
+	- Move the device related buttons in the properties,
+	and add labels for them
+	- Fix the properties not fitting on netbook screens
+	- Revive the chooser widget, and add a chooser button,
+	exported through a library
+	- Add killswitch functionality to the applet, and show
+	the applet as disabled when the killswitch is on, or
+	the adapter is disabled
+	- Make the discoverable preference easier
+	- Use the GTK+ invisible char not '*' in the wizard for Simple
+	Pairing
+	- Better display of passkey in the wizard
+	Functional changes:
+	- Add PIN quirks database for a number of devices for wizard
+	- Allow users to select another passkey for devices in wizard
+	- Wait for the device name to be available before setting up
+	a device
+	Build fixes:
+	- Remove use of deprecated functions
+	- Loads of memory leak fixes
+	- Show the Bluetooth preferences in XFCE, and launch
+	the applet there as well
+	- Update sendto for latest obex-data-server API
+
 ver 1.8:
 	Add additional support for using obex-client.
 	Make mice and keyboards automatically trusted.
