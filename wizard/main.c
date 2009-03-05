@@ -289,8 +289,11 @@ static void create_callback(const char *path, gpointer user_data)
 	if (path != NULL) {
 		gint page;
 
-		text = g_strdup_printf(_("Successfully paired with %s"),
-								target_name);
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Successfully paired with 'Sony Bluetooth Headset'
+		 */
+		text = g_strdup_printf(_("Successfully paired with '%s'"), target_name);
 
 		page = gtk_assistant_get_current_page(assistant);
 		if (page > 0)
@@ -305,8 +308,11 @@ static void create_callback(const char *path, gpointer user_data)
 
 		complete = TRUE;
 	} else {
-		text = g_strdup_printf(_("Pairing with %s failed"),
-								target_name);
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Pairing with 'Sony Bluetooth Headset' failed
+		 */
+		text = g_strdup_printf(_("Pairing with '%s' failed"), target_name);
 	}
 
 	gtk_label_set_markup(GTK_LABEL(label_setup), text);
@@ -345,7 +351,7 @@ static void prepare_callback(GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
-		gchar *text, *markup, *address, *name;
+		gchar *text, *address, *name;
 		guint type;
 
 		/* Get the info about the device now,
@@ -364,14 +370,14 @@ static void prepare_callback(GtkWidget *assistant,
 
 		target_type = type;
 
-		text = g_strdup_printf(_("Connecting to %s now ..."),
-								target_name);
-		markup = g_strdup_printf("%s\n\n", text);
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Connecting to 'Sony Bluetooth Headset' now...
+		 */
+		text = g_strdup_printf(_("Connecting to '%s' now..."), target_name);
+		gtk_label_set_markup(GTK_LABEL(label_setup), text);
+
 		g_free(text);
-
-		gtk_label_set_markup(GTK_LABEL(label_setup), markup);
-
-		g_free(markup);
 
 		complete = FALSE;
 
