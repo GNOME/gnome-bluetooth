@@ -369,12 +369,12 @@ static void error_occurred(DBusGProxy *proxy, const gchar *name,
 						GTK_RESPONSE_CLOSE, TRUE);
 }
 
-static void session_connect_error (DBusGProxy *proxy, DBusGProxy *session_obj, const char *error_name,
+static void session_connect_error (DBusGProxy *proxy, const char *session_obj, const char *error_name,
 				   const char *error_message, gpointer user_data)
 {
 	gchar *text;
 
-	if (session_obj != session_proxy)
+	if (strcmp (session_obj, dbus_g_proxy_get_path (session_proxy)) != 0)
 		return;
 
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
@@ -388,9 +388,9 @@ static void session_connect_error (DBusGProxy *proxy, DBusGProxy *session_obj, c
 						GTK_RESPONSE_CLOSE, TRUE);
 }
 
-static void session_connected(DBusGProxy *proxy, DBusGProxy *session_obj, gpointer user_data)
+static void session_connected(DBusGProxy *proxy, const char *session_obj, gpointer user_data)
 {
-	if (session_obj != session_proxy)
+	if (strcmp (session_obj, dbus_g_proxy_get_path (session_proxy)) != 0)
 		return;
 
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), NULL);
