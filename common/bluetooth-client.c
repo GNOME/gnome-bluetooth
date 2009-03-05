@@ -1234,8 +1234,8 @@ static void connect_input_callback(DBusGProxy *proxy,
 	g_object_unref(proxy);
 }
 
-gboolean bluetooth_client_connect_input(BluetoothClient *client,
-				const char *device,
+static gboolean bluetooth_client_connect_service(BluetoothClient *client,
+				const char *device, const char *iface_name,
 				BluetoothClientConnectFunc func, gpointer data)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
@@ -1246,7 +1246,7 @@ gboolean bluetooth_client_connect_input(BluetoothClient *client,
 	DBG("client %p", client);
 
 	proxy = dbus_g_proxy_new_from_proxy(priv->manager,
-						BLUEZ_INPUT_INTERFACE, device);
+						iface_name, device);
 	if (proxy == NULL)
 		return FALSE;
 
@@ -1265,3 +1265,13 @@ gboolean bluetooth_client_connect_input(BluetoothClient *client,
 
 	return TRUE;
 }
+
+gboolean bluetooth_client_connect_input(BluetoothClient *client,
+				const char *device,
+				BluetoothClientConnectFunc func, gpointer data)
+{
+	return bluetooth_client_connect_service(client, device,
+						BLUEZ_INPUT_INTERFACE,
+						func, data);
+}
+
