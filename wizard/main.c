@@ -54,6 +54,8 @@ static gboolean target_ssp = FALSE;
 
 /* NULL means automatic, anything else is a pincode specified by the user */
 static gchar *user_pincode = NULL;
+/* If TRUE, then we won't display the PIN code to the user when pairing */
+static gboolean automatic_pincode = FALSE;
 
 static GtkWidget *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
@@ -170,16 +172,32 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 {
 	char *pincode;
 
-	if (user_pincode != NULL && strlen(user_pincode) == 4) {
+	if (user_pincode != NULL && *user_pincode != '\0') {
 		pincode = g_strdup (user_pincode);
 	} else {
 		pincode = set_pincode_for_device(target_type, target_address, target_name);
 		if (pincode == NULL)
 			pincode = g_strdup(target_pincode);
+		else
+			automatic_pincode = TRUE;
 	}
 
-	gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
-	set_large_label (GTK_LABEL (label_passkey), pincode);
+	if (automatic_pincode == FALSE) {
+		gtk_widget_show (label_passkey_help);
+		gtk_widget_show (label_passkey);
+
+		gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
+		set_large_label (GTK_LABEL (label_passkey), pincode);
+	} else {
+		gtk_widget_show (label_passkey_help);
+		gtk_widget_hide (label_passkey);
+
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Please wait whilst 'Sony Bluetooth Headset' is being paired
+		 */
+		gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please wait whilst '%s' is being paired"));
+	}
 
 	dbus_g_method_return(context, pincode);
 	g_free(pincode);
@@ -207,6 +225,8 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 		done = g_strdup ("");
 	}
 
+	gtk_widget_show (label_passkey_help);
+
 	gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
 	text = g_strdup_printf("%s%s", done, code + entered);
 	set_large_label (GTK_LABEL (label_passkey), text);
@@ -227,16 +247,26 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 {
 	gchar *text;
 
-	if (target_ssp == FALSE)
-		text = g_strdup_printf(_("Pairing with %s canceled"),
-								target_name);
-	else
-		text = g_strdup_printf(_("Pairing with %s finished"),
-								target_name);
+	if (target_ssp == FALSE) {
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Pairing with 'Sony Bluetooth Headset' cancelled
+		 */
+		text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
+	} else {
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Pairing with 'Sony Bluetooth Headset' finished
+		 */
+		text = g_strdup_printf(_("Pairing with '%s' finished"), target_name);
+	}
 
 	gtk_label_set_markup(GTK_LABEL(label_setup), text);
 
 	g_free(text);
+
+	gtk_widget_hide (label_passkey);
+	gtk_widget_hide (label_passkey_help);
 
 	gtk_label_set_markup(GTK_LABEL(label_passkey_help), NULL);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), NULL);
@@ -280,8 +310,9 @@ static void create_callback(const char *path, gpointer user_data)
 	}
 
 	gtk_label_set_markup(GTK_LABEL(label_setup), text);
-	gtk_label_set_markup(GTK_LABEL(label_passkey_help), NULL);
-	gtk_label_set_markup(GTK_LABEL(label_passkey), NULL);
+
+	gtk_widget_hide (label_passkey_help);
+	gtk_widget_hide (label_passkey);
 
 	g_free(text);
 
