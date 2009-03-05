@@ -8,13 +8,15 @@
 # any, mouse, keyboard, headset, headphones
 # 
 # The bdaddr_prefix and device_name fields can be left empty
-
-# Apple Wireless and Mighty Mouse
-mouse	00:0A:95:		0000
-mouse	00:14:51:		0000
+#
+# If device_pin is NULL, then the device won't be paired, but
+# it will be setup, and set as trusted
 
 # TomTom Go remote
 keyboard	00:13:6C:	TomTom Remote	0000
+# Sony PlayStation 3 Remote Control
+any	00:19:C1:	BD Remote Control	NULL
+any	00:1E:3D:	BD Remote Control	NULL
 
 # GPS devices
 any	00:0D:B5:	TomTom Wireless GPS MkII	0000
@@ -71,3 +73,7 @@ printer			0000
 headphones			0000
 headset			0000
 audio			0000
+
+# Mice don't need pincodes
+mouse			NULL
+

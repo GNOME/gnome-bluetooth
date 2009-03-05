@@ -88,7 +88,7 @@ static guint string_to_type(const char *type)
 	return BLUETOOTH_TYPE_ANY;
 }
 
-static char *set_pincode_for_device(guint type, const char *address, const char *name)
+static char *get_pincode_for_device(guint type, const char *address, const char *name)
 {
 	char *contents, **lines;
 	char *ret_pin = NULL;
@@ -175,7 +175,7 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 	if (user_pincode != NULL && *user_pincode != '\0') {
 		pincode = g_strdup (user_pincode);
 	} else {
-		pincode = set_pincode_for_device(target_type, target_address, target_name);
+		pincode = get_pincode_for_device(target_type, target_address, target_name);
 		if (pincode == NULL)
 			pincode = g_strdup(target_pincode);
 		else
@@ -351,7 +351,7 @@ static void prepare_callback(GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
-		gchar *text, *address, *name;
+		gchar *text, *address, *name, *pincode;
 		guint type;
 
 		/* Get the info about the device now,
@@ -383,16 +383,12 @@ static void prepare_callback(GtkWidget *assistant,
 
 		g_object_ref(agent);
 
-		if (target_type == BLUETOOTH_TYPE_MOUSE)
+		/* Do we pair, or don't we? */
+		pincode = get_pincode_for_device (target_type, target_address, target_name);
+		g_message ("pincode for %s is %s", target_name, pincode);
+		if (pincode != NULL && g_str_equal (pincode, "NULL"))
 			path = NULL;
-
-		/* Sony PlayStation 3 Remote Control */
-		if (g_str_equal(target_name, "BD Remote Control") == TRUE &&
-					(g_str_has_prefix(target_address,
-							"00:19:C1:") == TRUE ||
-					g_str_has_prefix(target_address,
-							"00:1E:3D:") == TRUE))
-			path = NULL;
+		g_free (pincode);
 
 		bluetooth_client_create_device(client, target_address,
 					path, create_callback, assistant);
