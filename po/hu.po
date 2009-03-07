@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2009-03-02 16:12+0000\n"
-"PO-Revision-Date: 2009-03-03 15:32+0100\n"
+"POT-Creation-Date: 2009-03-05 16:41+0000\n"
+"PO-Revision-Date: 2009-03-07 16:42+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,6 @@ msgid "Headphones"
 msgstr "Fülhallgató"
 
 #: ../common/bluetooth-client.c:105
-#| msgid "Any device"
 msgid "Audio device"
 msgstr "Hangeszköz"
 
@@ -77,8 +76,8 @@ msgstr "Játékvezérlő"
 msgid "Tablet"
 msgstr "Tábla"
 
-#: ../common/bluetooth-client.c:119 ../common/bluetooth-chooser.c:89
-#: ../common/bluetooth-chooser.c:124
+#: ../common/bluetooth-client.c:119 ../common/bluetooth-chooser.c:90
+#: ../common/bluetooth-chooser.c:125
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -87,111 +86,103 @@ msgstr "Ismeretlen"
 msgid "Click to select device..."
 msgstr "Kattintson az eszközválasztáshoz…"
 
-#: ../common/bluetooth-chooser.c:81
-#| msgid "All Files"
+#: ../common/bluetooth-chooser.c:82
 msgid "All categories"
 msgstr "Minden kategória"
 
-#: ../common/bluetooth-chooser.c:83
+#: ../common/bluetooth-chooser.c:84
 msgid "Paired"
 msgstr "Párosított"
 
-#: ../common/bluetooth-chooser.c:85
-#| msgid "Set _Trusted"
+#: ../common/bluetooth-chooser.c:86
 msgid "Trusted"
 msgstr "Megbízható"
 
-#: ../common/bluetooth-chooser.c:87
+#: ../common/bluetooth-chooser.c:88
 msgid "Not paired or trusted"
 msgstr "Nem párosított vagy megbízható"
 
-#: ../common/bluetooth-chooser.c:236
-#| msgid "Bluetooth device"
+#: ../common/bluetooth-chooser.c:239
 msgid "Recognized Bluetooth Devices"
 msgstr "Felismert Bluetooth eszközök"
 
-#: ../common/bluetooth-chooser.c:454
+#: ../common/bluetooth-chooser.c:464
 msgid "Device"
 msgstr "Eszköz"
 
-#: ../common/bluetooth-chooser.c:481
+#: ../common/bluetooth-chooser.c:491
 msgid "Type"
 msgstr "Típus"
 
 #. The search button
-#: ../common/bluetooth-chooser.c:567
-#| msgid "Search"
+#: ../common/bluetooth-chooser.c:577
 msgid "S_earch"
 msgstr "K_eresés"
 
-#: ../common/bluetooth-chooser.c:572
-#| msgid "Search for devices"
+#: ../common/bluetooth-chooser.c:582
 msgid "Search for Bluetooth devices"
 msgstr "Bluetooth eszközök keresése"
 
 #. The filters
-#: ../common/bluetooth-chooser.c:590
+#: ../common/bluetooth-chooser.c:600
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Csak az ilyen Bluetooth eszközök megjelenítése…"
 
 #. The device category filter
-#: ../common/bluetooth-chooser.c:610
-#| msgid "Device type"
+#: ../common/bluetooth-chooser.c:620
 msgid "Device _category:"
 msgstr "Eszköz_kategória:"
 
-#: ../common/bluetooth-chooser.c:625
+#: ../common/bluetooth-chooser.c:635
 msgid "Select the device category to filter above list"
 msgstr "Válassza ki az eszközkategóriát a fenti lista szűréséhez"
 
 #. The device type filter
-#: ../common/bluetooth-chooser.c:639
-#| msgid "Device type"
+#: ../common/bluetooth-chooser.c:649
 msgid "Device _type:"
 msgstr "Eszköz_típus:"
 
-#: ../common/bluetooth-chooser.c:654
-#| msgid "Select device to browse"
+#: ../common/bluetooth-chooser.c:664
 msgid "Select the device type to filter above list"
 msgstr "Válassza ki az eszköztípust a fenti lista szűréséhez"
 
-#: ../applet/main.c:116
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Bluetooth-kezelő a GNOME asztali környezethez"
-
-#: ../applet/main.c:119
-msgid "translator-credits"
-msgstr ""
-"Kelemen Gábor https://launchpad.net/~kelemeng\n"
-"Kőrösi Krisztián https://launchpad.net/~koeroesi86\n"
-"Sisak Áron https://launchpad.net/~asisak\n"
-"Szekeres István https://launchpad.net/~szekeres\n"
-"Pittmann Tamás https://launchpad.net/~zaivaldi"
-
-#: ../applet/main.c:121
-#| msgid "Bluetooth Manager"
-msgid "GNOME Bluetooth home page"
-msgstr "A GNOME Bluetooth honlapja"
-
-#: ../applet/main.c:150
-#| msgid "Select device to browse"
+#: ../applet/main.c:91
 msgid "Select Device to Browse"
 msgstr "Válassza ki a tallózni kívánt eszközt"
 
-#: ../applet/main.c:154
+#: ../applet/main.c:95
 msgid "_Browse"
 msgstr "_Tallózás"
 
-#: ../applet/main.c:164
+#: ../applet/main.c:105
 msgid "Select device to browse"
 msgstr "Válassza ki a tallózni kívánt eszközt"
 
-#: ../applet/main.c:271
-#| msgid "Bluetooth Preferences"
+#: ../applet/main.c:225
+#| msgid "Bluetooth Status"
+msgid "Bluetooth Status Unknown"
+msgstr "Bluetooth állapota ismeretlen"
+
+#: ../applet/main.c:227
+#| msgid "Bluetooth"
+msgid "Turn On Bluetooth"
+msgstr "Bluetooth bekapcsolása"
+
+#: ../applet/main.c:230
+#| msgid "Bluetooth"
+msgid "Turn Off Bluetooth"
+msgstr "Bluetooth kikapcsolása"
+
+#: ../applet/main.c:256
+#| msgid "Bluetooth Status"
+msgid "Checking Bluetooth status"
+msgstr "Bluetooth állapotának ellenőrzése"
+
+#: ../applet/main.c:270
 msgid "Preferences..."
 msgstr "Beállítások…"
 
-#: ../applet/main.c:278 ../properties/adapter.c:540
+#: ../applet/main.c:277 ../properties/adapter.c:545
 msgid "Setup new device..."
 msgstr "Új eszköz beállítása…"
 
@@ -203,7 +194,7 @@ msgstr "Fájlok küldése az eszközre…"
 msgid "Browse files on device..."
 msgstr "Fájlok tallózása az eszközön…"
 
-#: ../applet/main.c:439
+#: ../applet/main.c:430
 msgid "Bluetooth Applet"
 msgstr "Bluetooth kisalkalmazás"
 
@@ -292,15 +283,32 @@ msgstr "Felhatalmazás ellenőrzése"
 msgid "Bluetooth Manager applet"
 msgstr "Bluetooth-kezelő kisalkalmazás"
 
-#: ../properties/main.c:64
+#: ../properties/main.c:109
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Bluetooth-kezelő a GNOME asztali környezethez"
+
+#: ../properties/main.c:112
+msgid "translator-credits"
+msgstr ""
+"Kelemen Gábor https://launchpad.net/~kelemeng\n"
+"Kőrösi Krisztián https://launchpad.net/~koeroesi86\n"
+"Sisak Áron https://launchpad.net/~asisak\n"
+"Szekeres István https://launchpad.net/~szekeres\n"
+"Pittmann Tamás https://launchpad.net/~zaivaldi"
+
+#: ../properties/main.c:114
+msgid "GNOME Bluetooth home page"
+msgstr "A GNOME Bluetooth honlapja"
+
+#: ../properties/main.c:127
 msgid "Bluetooth Preferences"
 msgstr "Bluetooth beállításai"
 
-#: ../properties/main.c:95
+#: ../properties/main.c:164
 msgid "General"
 msgstr "Általános"
 
-#: ../properties/main.c:146
+#: ../properties/main.c:215
 msgid "Bluetooth Properties"
 msgstr "Bluetooth tulajdonságai"
 
@@ -320,59 +328,62 @@ msgstr "Csak adapter jelenlétében jelenjen meg"
 msgid "Always display icon"
 msgstr "Az ikon mindig jelenjen meg"
 
-#: ../properties/adapter.c:91
-#| msgid "Adapter"
+#: ../properties/adapter.c:96
 msgid "Unnamed Adapter"
 msgstr "Névtelen adapter"
 
-#: ../properties/adapter.c:183
+#: ../properties/adapter.c:188
 msgid "Distrust"
 msgstr "Nem megbízható"
 
-#: ../properties/adapter.c:185 ../properties/adapter.c:563
+#: ../properties/adapter.c:190 ../properties/adapter.c:568
 msgid "Trust"
 msgstr "Megbízható"
 
-#: ../properties/adapter.c:254
+#: ../properties/adapter.c:259
 msgid "Remove from list of known devices?"
 msgstr "Eltávolítja az ismert eszközök listájából?"
 
-#: ../properties/adapter.c:255
+#: ../properties/adapter.c:260
 msgid "If you delete the device, you have to set it up again before next use."
 msgstr ""
 "Ha töröl egy eszközt, újra be kell majd állítania a következő használat "
 "előtt."
 
 #. The powered checkbox
-#: ../properties/adapter.c:445
+#: ../properties/adapter.c:450
 msgid "_Powered"
 msgstr "Be_kapcsolva"
 
 #. The discoverable checkbox
-#: ../properties/adapter.c:454
+#: ../properties/adapter.c:459
 msgid "_Discoverable"
 msgstr "_Feltérképezhető"
 
-#: ../properties/adapter.c:477
+#: ../properties/adapter.c:482
 msgid "Friendly name"
 msgstr "Barátságos név"
 
-#: ../properties/adapter.c:502
+#: ../properties/adapter.c:507
 msgid "Known devices"
 msgstr "Ismert eszközök"
 
-#: ../properties/adapter.c:549
+#: ../properties/adapter.c:554
 msgid "Disconnect"
 msgstr "Bontás"
 
-#: ../properties/adapter.c:577
+#: ../properties/adapter.c:582
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../properties/adapter.c:807
-#| msgid "Bluetooth Applet"
+#: ../properties/adapter.c:682
 msgid "Bluetooth Status"
 msgstr "Bluetooth állapota"
+
+#: ../properties/adapter.c:824
+#| msgid "Bluetooth device"
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth letiltva"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
 msgid "Bluetooth"
@@ -386,50 +397,86 @@ msgstr "A Bluetooth beállítások módosítása"
 msgid ""
 "Display options for the notification icon. Valid options are \"never\", "
 "\"present\" and \"always\"."
-msgstr "Az értesítési ikon megjelenítésének beállítása. A lehetséges értékek: „never” (soha), „present” (jelenleg) és „always” (mindig)."
+msgstr ""
+"Az értesítési ikon megjelenítésének beállítása. A lehetséges értékek: "
+"„never” (soha), „present” (jelenleg) és „always” (mindig)."
 
 #: ../properties/bluetooth-manager.schemas.in.h:2
 msgid "When to show the notification icon"
 msgstr "Mikor jelenjen meg az értesítési ikon"
 
-#: ../wizard/main.c:180 ../wizard/main.c:209
+#: ../wizard/main.c:189 ../wizard/main.c:230
 msgid "Please enter the following passkey:"
 msgstr "Adja meg a következő jelszót:"
 
-#: ../wizard/main.c:230
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
+#.
+#: ../wizard/main.c:199
 #, c-format
-msgid "Pairing with %s canceled"
-msgstr "A(z) %s eszközzel való párosítás megszakadt"
+msgid "Please wait whilst '%s' is being paired"
+msgstr "Várjon „%s” párosítására"
 
-#: ../wizard/main.c:233
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:255
 #, c-format
-msgid "Pairing with %s finished"
-msgstr "A(z) %s eszközzel való párosítás befejeződött"
+#| msgid "Pairing with %s canceled"
+msgid "Pairing with '%s' cancelled"
+msgstr "A(z) „%s” eszközzel való párosítás megszakítva"
 
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' finished
+#.
 #: ../wizard/main.c:261
 #, c-format
-msgid "Successfully paired with %s"
-msgstr "Sikeresen párosítva a(z) %s eszközzel"
+#| msgid "Pairing with %s finished"
+msgid "Pairing with '%s' finished"
+msgstr "A(z) „%s” eszközzel való párosítás befejeződött"
 
-#: ../wizard/main.c:277
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Successfully paired with 'Sony Bluetooth Headset'
+#.
+#: ../wizard/main.c:296
 #, c-format
-msgid "Pairing with %s failed"
-msgstr "A párosítás a(z) %s eszközzel meghiúsult"
+#| msgid "Successfully paired with %s"
+msgid "Successfully paired with '%s'"
+msgstr "Sikeresen párosítva a(z) „%s” eszközzel"
 
-#: ../wizard/main.c:329
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' failed
+#.
+#: ../wizard/main.c:315
 #, c-format
-msgid "Connecting to %s now ..."
-msgstr "Csatlakozás a(z) %s eszközhöz…"
+#| msgid "Pairing with %s failed"
+msgid "Pairing with '%s' failed"
+msgstr "A párosítás a(z) „%s” eszközzel meghiúsult"
 
-#: ../wizard/main.c:403
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Connecting to 'Sony Bluetooth Headset' now...
+#.
+#: ../wizard/main.c:377
+#, c-format
+#| msgid "Connecting to %s now ..."
+msgid "Connecting to '%s' now..."
+msgstr "Csatlakozás a(z) „%s” eszközhöz…"
+
+#: ../wizard/main.c:447
 msgid "Introduction"
 msgstr "Bevezető"
 
-#: ../wizard/main.c:404
+#: ../wizard/main.c:448
 msgid "Welcome to the Bluetooth device setup wizard"
 msgstr "Üdvözli a Bluetooth eszköz beállítása varázsló"
 
-#: ../wizard/main.c:407
+#: ../wizard/main.c:451
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer.\n"
@@ -439,145 +486,144 @@ msgstr ""
 "kapcsolásának folyamatán.\n"
 "\n"
 
-#: ../wizard/main.c:562
+#: ../wizard/main.c:606
 msgid "Passkey options"
 msgstr "Jelszóbeállítások"
 
-#: ../wizard/main.c:573
+#: ../wizard/main.c:617
 msgid "_Automatic passkey selection"
 msgstr "_Automatikus jelszóválasztás"
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:620
 msgid "Use _fixed passkey:"
 msgstr "_Rögzített jelszó használata:"
 
-#: ../wizard/main.c:585
+#: ../wizard/main.c:629
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "„0000” (a legtöbb fejhallgató, egér és GPS eszköz)"
 
-#: ../wizard/main.c:588
+#: ../wizard/main.c:632
 msgid "'1111'"
 msgstr "„1111”"
 
-#: ../wizard/main.c:591
+#: ../wizard/main.c:635
 msgid "'1234'"
 msgstr "„1234”"
 
-#: ../wizard/main.c:595
+#: ../wizard/main.c:639
 msgid "Custom passkey code:"
 msgstr "Egyéni jelszókód:"
 
-#: ../wizard/main.c:672
+#: ../wizard/main.c:716
 msgid "Device search"
 msgstr "Eszközkeresés"
 
 #. The selector
-#: ../wizard/main.c:675
+#: ../wizard/main.c:719
 msgid "Select the device you want to setup"
 msgstr "Válassza ki a beállítani kívánt eszközt"
 
-#: ../wizard/main.c:692
+#: ../wizard/main.c:738
 msgid "Passkey _options..."
 msgstr "Jels_zóbeállítások…"
 
-#: ../wizard/main.c:706
+#: ../wizard/main.c:752
 msgid "Device setup"
 msgstr "Eszköz beállítása"
 
-#: ../wizard/main.c:707
+#: ../wizard/main.c:753
 msgid "Setting up new device"
 msgstr "Új eszköz beállítása"
 
-#: ../wizard/main.c:734
+#: ../wizard/main.c:780
 msgid "Summary"
 msgstr "Összegzés"
 
-#: ../wizard/main.c:735
-#| msgid "Succesfully configured new device"
+#: ../wizard/main.c:781
 msgid "Successfully configured new device"
 msgstr "Az új eszköz sikeresen beállítva"
 
-#: ../wizard/main.c:745
+#: ../wizard/main.c:791
 msgid "Bluetooth Device Wizard"
 msgstr "Bluetooth eszközvarázsló"
 
-#: ../sendto/main.c:95
+#: ../sendto/main.c:97
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d másodperc"
 msgstr[1] "%'d másodperc"
 
-#: ../sendto/main.c:100 ../sendto/main.c:113
+#: ../sendto/main.c:102 ../sendto/main.c:115
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d perc"
 msgstr[1] "%'d perc"
 
-#: ../sendto/main.c:111
+#: ../sendto/main.c:113
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d óra"
 msgstr[1] "%'d óra"
 
-#: ../sendto/main.c:121
+#: ../sendto/main.c:123
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "megközelítőleg %'d óra"
 msgstr[1] "megközelítőleg %'d óra"
 
-#: ../sendto/main.c:147
+#: ../sendto/main.c:149
 msgid "File Transfer"
 msgstr "Fájlátvitel"
 
-#: ../sendto/main.c:164
+#: ../sendto/main.c:166
 msgid "Sending files via Bluetooth"
 msgstr "Fájlok küldése Bluetooth-on"
 
-#: ../sendto/main.c:176
+#: ../sendto/main.c:178
 msgid "From:"
 msgstr "Feladó:"
 
-#: ../sendto/main.c:192
+#: ../sendto/main.c:194
 msgid "To:"
 msgstr "Címzett:"
 
-#: ../sendto/main.c:208
+#: ../sendto/main.c:210
 msgid "Connecting..."
 msgstr "Kapcsolódás…"
 
-#: ../sendto/main.c:256 ../sendto/main.c:579
+#: ../sendto/main.c:258 ../sendto/main.c:597
 #, c-format
 msgid "Sending %s"
 msgstr "%s küldése"
 
-#: ../sendto/main.c:263 ../sendto/main.c:328 ../sendto/main.c:586
+#: ../sendto/main.c:265 ../sendto/main.c:330 ../sendto/main.c:604
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%d. fájl küldése, összesen %d"
 
-#: ../sendto/main.c:324
+#: ../sendto/main.c:326
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:326
+#: ../sendto/main.c:328
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:358
+#: ../sendto/main.c:362 ../sendto/main.c:381
 msgid "Error Occurred"
 msgstr "Hiba történt"
 
-#: ../sendto/main.c:385
+#: ../sendto/main.c:411
 msgid "An unknown error occured"
 msgstr "Ismeretlen hiba történt"
 
-#: ../sendto/main.c:395
+#: ../sendto/main.c:421
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -585,24 +631,23 @@ msgstr ""
 "Ellenőrizze, hogy a távoli eszköz be van-e kapcsolva, illetve fogadja-e a "
 "Bluetooth kapcsolatokat"
 
-#: ../sendto/main.c:692
-#| msgid "Select file to send"
+#: ../sendto/main.c:710
 msgid "Select Device to Send To"
 msgstr "Válassza ki a küldendő fájlt"
 
-#: ../sendto/main.c:696
+#: ../sendto/main.c:714
 msgid "Send _To"
 msgstr "_Küldés…"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Choose files to send"
 msgstr "Válassza ki a küldeni kívánt fájlokat"
 
-#: ../sendto/main.c:767
+#: ../sendto/main.c:785
 msgid "Remote device to use"
 msgstr "Használandó távoli eszköz"
 
-#: ../sendto/main.c:769
+#: ../sendto/main.c:787
 msgid "Remove device's name"
 msgstr "Távoli eszköz neve"
 
