@@ -63,6 +63,7 @@ if (test "$enable_icon_update" != no); then
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
+GTK_REQUIRED=2.15.0
 DBUS_GLIB_REQUIRED=0.73
 HAL_REQUIRED=0.5.8
 NOTIFY_REQUIRED=0.4.3
@@ -78,7 +79,7 @@ dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gconf-2.0
-		  gtk+-2.0
+		  gtk+-2.0 >= $GTK_REQUIRED
 		  libnotify >= $NOTIFY_REQUIRED
 		  unique-1.0)
 
