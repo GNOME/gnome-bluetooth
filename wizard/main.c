@@ -59,7 +59,6 @@ static gboolean automatic_pincode = FALSE;
 
 static GtkWidget *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
-static GtkWidget *passkey_button = NULL;
 static GtkWidget *page_setup = NULL;
 static GtkWidget *page_summary = NULL;
 
@@ -339,14 +338,9 @@ static void prepare_callback(GtkWidget *assistant,
 	const char *path = AGENT_PATH;
 
 	if (page == page_search) {
-		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), passkey_button);
 		complete = set_page_search_complete ();
 		bluetooth_client_start_discovery(client);
 	} else {
-		if (gtk_widget_get_parent (passkey_button) != NULL) {
-			g_object_ref (passkey_button);
-			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), passkey_button);
-		}
 		bluetooth_client_stop_discovery(client);
 	}
 
@@ -385,7 +379,6 @@ static void prepare_callback(GtkWidget *assistant,
 
 		/* Do we pair, or don't we? */
 		pincode = get_pincode_for_device (target_type, target_address, target_name);
-		g_message ("pincode for %s is %s", target_name, pincode);
 		if (pincode != NULL && g_str_equal (pincode, "NULL"))
 			path = NULL;
 		g_free (pincode);
@@ -736,7 +729,8 @@ static void create_search(GtkWidget *assistant)
 			  G_CALLBACK (passkey_option_button_clicked), assistant);
 	gtk_widget_show (button);
 
-	passkey_button = button;
+	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET (button),
+			    FALSE, FALSE, 6);
 }
 
 static void create_setup(GtkWidget *assistant)
