@@ -575,71 +575,40 @@ static void
 passkey_option_button_clicked (GtkButton *button, gpointer data)
 {
 	GtkWidget *dialog;
-	GtkWidget *vbox;
+	GtkBuilder *xml;
 	GtkWidget *radio_auto;
-	GtkWidget *radio_fixed;
-	GtkWidget *align_fixed;
-	GtkWidget *vbox_fixed;
-	GtkWidget *radio;
 	GtkWidget *radio_0000;
 	GtkWidget *radio_1111;
 	GtkWidget *radio_1234;
-	GtkWidget *hbox_custom;
 	GtkWidget *radio_custom;
 	GtkWidget *entry_custom;
+	GtkWidget *radio;
 	char *oldpin;
+
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "passkey-options.ui", NULL) == 0) {
+		if (gtk_builder_add_from_file (xml, PKGDATADIR "/" "passkey-options.ui", NULL) == 0) {
+			g_warning ("Could not load passkey-options.ui, broken installation");
+			return;
+		}
+	}
 
 	oldpin = user_pincode;
 	user_pincode = NULL;
 
-	dialog = gtk_dialog_new_with_buttons (_("Passkey Options"),
-					      GTK_WINDOW (data),
-					      GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
-					      GTK_STOCK_CLOSE,
-					      GTK_RESPONSE_ACCEPT,
-					      NULL);
-	vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	dialog = GTK_WIDGET (gtk_builder_get_object (xml, "dialog"));
+	radio_auto = GTK_WIDGET (gtk_builder_get_object (xml, "radio_auto"));
+	radio_0000 = GTK_WIDGET (gtk_builder_get_object (xml, "radio_0000"));
+	radio_1111 = GTK_WIDGET (gtk_builder_get_object (xml, "radio_1111"));
+	radio_1234 = GTK_WIDGET (gtk_builder_get_object (xml, "radio_1234"));
+	radio_custom = GTK_WIDGET (gtk_builder_get_object (xml, "radio_custom"));
+	entry_custom = GTK_WIDGET (gtk_builder_get_object (xml, "entry_custom"));
 
-	radio_auto = gtk_radio_button_new_with_mnemonic(NULL,
-					_("_Automatic passkey selection"));
-	gtk_container_add(GTK_CONTAINER(vbox), radio_auto);
-
-	radio_fixed = gtk_radio_button_new_with_mnemonic_from_widget(GTK_RADIO_BUTTON(radio_auto), _("Use _fixed passkey:"));
-	gtk_container_add(GTK_CONTAINER(vbox), radio_fixed);
-
-	align_fixed = gtk_alignment_new(0, 0, 1, 1);
-	gtk_alignment_set_padding(GTK_ALIGNMENT(align_fixed), 0, 0, 24, 0);
-	gtk_container_add(GTK_CONTAINER(vbox), align_fixed);
-	vbox_fixed = gtk_vbox_new(FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(align_fixed), vbox_fixed);
-
-	radio_0000 = gtk_radio_button_new_with_label(NULL, _("'0000' (most headsets, mice and GPS devices)"));
-	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_0000);
-
-	radio_1111 = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("'1111'"));
-	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_1111);
-
-	radio_1234 = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("'1234'"));
-	gtk_container_add(GTK_CONTAINER(vbox_fixed), radio_1234);
-
-	hbox_custom = gtk_hbox_new(FALSE, 6);
-	radio_custom = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(radio_0000), _("Custom passkey code:"));
-	entry_custom = gtk_entry_new();
-	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), 20);
-	gtk_entry_set_width_chars(GTK_ENTRY(entry_custom), 20);
 	g_signal_connect (entry_custom, "key-press-event",
 			  G_CALLBACK (entry_custom_event), NULL);
 	g_signal_connect (entry_custom, "changed",
 			  G_CALLBACK (entry_custom_changed), dialog);
-	gtk_box_pack_start(GTK_BOX(hbox_custom), radio_custom,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox_custom), entry_custom,
-			FALSE, FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(vbox_fixed), hbox_custom);
 
-	toggle_set_sensitive(radio_fixed, vbox_fixed);
-	g_signal_connect(radio_fixed, "toggled",
-			G_CALLBACK(toggle_set_sensitive), vbox_fixed);
 	toggle_set_sensitive(radio_custom, entry_custom);
 	g_signal_connect(radio_custom, "toggled",
 			G_CALLBACK(toggle_set_sensitive), entry_custom);
@@ -657,8 +626,6 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	else
 		radio = radio_custom;
 
-	if (radio != radio_auto)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_fixed), TRUE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
 	if (radio == radio_custom)
 		gtk_entry_set_text (GTK_ENTRY (entry_custom), oldpin);
@@ -666,15 +633,12 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	g_free (oldpin);
 
 	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
-	g_object_set_data (G_OBJECT (radio_fixed), "button", radio_0000);
 	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
 	g_object_set_data (G_OBJECT (radio_1111), "pin", "1111");
 	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
 	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
 
 	g_signal_connect(radio_auto, "toggled",
-			 G_CALLBACK(set_user_pincode), dialog);
-	g_signal_connect(radio_fixed, "toggled",
 			 G_CALLBACK(set_user_pincode), dialog);
 	g_signal_connect(radio_0000, "toggled",
 			 G_CALLBACK(set_user_pincode), dialog);
@@ -689,7 +653,6 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 			  G_CALLBACK (gtk_widget_destroy), NULL);
 
 	gtk_widget_show_all (dialog);
-
 }
 
 static void create_search(GtkWidget *assistant)

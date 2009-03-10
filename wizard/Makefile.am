@@ -10,6 +10,9 @@ AM_CFLAGS = $(WIZARD_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="
 pin_DATA = pin-code-database.txt
 pindir = $(pkgdatadir)
 
+ui_DATA = passkey-options.ui
+uidir = $(pkgdatadir)
+
 INCLUDES = -I$(top_srcdir)/common
 
 man_MANS = bluetooth-wizard.1
