@@ -592,11 +592,9 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	oldpin = user_pincode;
 	user_pincode = NULL;
 
-	dialog = gtk_dialog_new_with_buttons (_("Passkey options"),
+	dialog = gtk_dialog_new_with_buttons (_("Passkey Options"),
 					      GTK_WINDOW (data),
 					      GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
-					      GTK_STOCK_CANCEL,
-					      GTK_RESPONSE_REJECT,
 					      GTK_STOCK_CLOSE,
 					      GTK_RESPONSE_ACCEPT,
 					      NULL);
