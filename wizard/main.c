@@ -663,6 +663,8 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	if (radio == radio_custom)
 		gtk_entry_set_text (GTK_ENTRY (entry_custom), oldpin);
 
+	g_free (oldpin);
+
 	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
 	g_object_set_data (G_OBJECT (radio_fixed), "button", radio_0000);
 	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
@@ -683,16 +685,11 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	g_signal_connect(radio_custom, "toggled",
 			 G_CALLBACK(set_user_pincode), dialog);
 
-	gtk_widget_show_all (vbox);
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (gtk_widget_destroy), NULL);
 
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) != GTK_RESPONSE_ACCEPT) {
-		g_free (user_pincode);
-		user_pincode = oldpin;
-	} else {
-		g_free (oldpin);
-	}
+	gtk_widget_show_all (dialog);
 
-	gtk_widget_destroy (dialog);
 }
 
 static void create_search(GtkWidget *assistant)
