@@ -731,7 +731,7 @@ static void create_search(GtkWidget *assistant)
 
 	page_search = vbox;
 
-	button = gtk_button_new_with_mnemonic (_("Passkey _options..."));
+	button = gtk_button_new_with_mnemonic (_("Passkey _Options..."));
 	g_signal_connect (G_OBJECT (button), "clicked",
 			  G_CALLBACK (passkey_option_button_clicked), assistant);
 	gtk_widget_show (button);
