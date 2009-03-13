@@ -243,15 +243,17 @@ void
 bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	char *str;
 
 	if (title == NULL) {
-		str = g_strdup_printf ("<b>%s</b>", _("Recognized Bluetooth Devices"));
+		gtk_widget_hide (priv->label);
 	} else {
+		char *str;
+
 		str = g_strdup_printf ("<b>%s</b>", title);
+		gtk_label_set_markup (GTK_LABEL(priv->label), str);
+		g_free (str);
+		gtk_widget_show (priv->label);
 	}
-	gtk_label_set_markup (GTK_LABEL(priv->label), str);
-	g_free (str);
 }
 
 static void
@@ -580,6 +582,8 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (alignment);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+
+	gtk_widget_hide (priv->label);
 
 	/* The treeview label */
 	vbox = gtk_vbox_new (FALSE, 6);
