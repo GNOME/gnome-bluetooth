@@ -217,7 +217,6 @@ create_props_dialogue (void)
 		     "show-device-type", FALSE,
 		     "show-device-category", FALSE,
 		     "show-pairing", TRUE,
-		     "show-trusted", TRUE,
 		     "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
 		     NULL);
 
