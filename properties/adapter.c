@@ -55,7 +55,6 @@ struct adapter_data {
 	GtkWidget *name_vbox, *devices_table;
 	GtkWidget *entry;
 	GtkWidget *button_delete;
-	GtkWidget *button_trusted;
 	GtkWidget *button_disconnect;
 	GtkTreeSelection *selection;
 	GtkTreeRowReference *reference;
@@ -181,14 +180,8 @@ static gboolean focus_callback(GtkWidget *editable,
 	return FALSE;
 }
 
-static void update_buttons(adapter_data *adapter, gboolean bonded,
-					gboolean trusted, gboolean connected)
+static void update_buttons(adapter_data *adapter, gboolean bonded, gboolean connected)
 {
-	if (trusted) {
-		gtk_button_set_label(GTK_BUTTON(adapter->button_trusted), _("Distrust"));
-	} else {
-		gtk_button_set_label(GTK_BUTTON(adapter->button_trusted), _("Trust"));
-	}
 	gtk_widget_set_sensitive(adapter->button_disconnect, connected);
 }
 
@@ -199,7 +192,7 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gboolean selected;
-	gboolean paired = FALSE, trusted = FALSE, connected = FALSE;
+	gboolean paired = FALSE, connected = FALSE;
 
 	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
 
@@ -207,7 +200,6 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 		gtk_tree_model_get(model, &iter,
 				BLUETOOTH_COLUMN_PROXY, &proxy,
 				BLUETOOTH_COLUMN_PAIRED, &paired,
-				BLUETOOTH_COLUMN_TRUSTED, &trusted,
 				BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
 
 		if (proxy != NULL) {
@@ -216,9 +208,8 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 		}
 	}
 
-	update_buttons(adapter, paired, trusted, connected);
+	update_buttons(adapter, paired, connected);
 
-	gtk_widget_set_sensitive(adapter->button_trusted, selected);
 	gtk_widget_set_sensitive(adapter->button_delete, selected);
 }
 
@@ -226,17 +217,16 @@ static void row_callback(GtkTreeModel *model, GtkTreePath  *path,
 					GtkTreeIter *iter, gpointer user_data)
 {
 	adapter_data *adapter = user_data;
-	gboolean bonded = FALSE, trusted = FALSE, connected = FALSE;
+	gboolean bonded = FALSE, connected = FALSE;
 
 	if (gtk_tree_selection_iter_is_selected(adapter->selection,
 							iter) == FALSE)
 		return;
 
 	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PAIRED, &bonded,
-					BLUETOOTH_COLUMN_TRUSTED, &trusted,
 					BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
 
-	update_buttons(adapter, bonded, trusted, connected);
+	update_buttons(adapter, bonded, connected);
 
 	gtk_widget_set_sensitive(adapter->button_delete, TRUE);
 }
@@ -303,38 +293,6 @@ static void delete_callback(GtkWidget *button, gpointer user_data)
 					DBUS_TYPE_G_OBJECT_PATH, path,
 					G_TYPE_INVALID, G_TYPE_INVALID);
 	}
-
-	g_object_unref(device);
-}
-
-static void trusted_callback(GtkWidget *button, gpointer user_data)
-{
-	adapter_data *adapter = user_data;
-	GValue value = { 0 };
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	DBusGProxy *device;
-	gboolean trusted = FALSE;
-
-	if (gtk_tree_selection_get_selected(adapter->selection,
-						&model, &iter) == FALSE)
-		return;
-
-	gtk_tree_model_get(model, &iter, BLUETOOTH_COLUMN_PROXY, &device,
-					BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
-
-	if (device == NULL)
-		return;
-
-	g_value_init(&value, G_TYPE_BOOLEAN);
-
-	g_value_set_boolean(&value, !trusted);
-
-	dbus_g_proxy_call(device, "SetProperty", NULL,
-			G_TYPE_STRING, "Trusted",
-			G_TYPE_VALUE, &value, G_TYPE_INVALID, G_TYPE_INVALID);
-
-	g_value_unset(&value);
 
 	g_object_unref(device);
 }
@@ -564,20 +522,6 @@ static void create_adapter(adapter_data *adapter)
 				G_CALLBACK(disconnect_callback), adapter);
 
 	adapter->button_disconnect = button;
-
-	button = gtk_button_new_with_label(_("Trust"));
-	image = gtk_image_new_from_stock(GTK_STOCK_ABOUT,
-						GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image(GTK_BUTTON(button), image);
-	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
-	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
-								button, TRUE);
-	gtk_widget_set_sensitive(button, FALSE);
-
-	g_signal_connect(G_OBJECT(button), "clicked",
-				G_CALLBACK(trusted_callback), adapter);
-
-	adapter->button_trusted = button;
 
 	button = gtk_button_new_with_label(_("Delete"));
 	image = gtk_image_new_from_stock(GTK_STOCK_DELETE,
