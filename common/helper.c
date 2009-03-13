@@ -44,19 +44,6 @@ static void connected_to_icon(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	g_object_set(cell, "visible", connected, NULL);
 }
 
-static void trusted_to_icon(GtkTreeViewColumn *column, GtkCellRenderer *cell,
-			GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
-{
-	gboolean trusted;
-
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
-
-	if (trusted == TRUE)
-		g_object_set(cell, "icon-name", GTK_STOCK_ABOUT, NULL);
-
-	g_object_set(cell, "visible", trusted, NULL);
-}
-
 static void paired_to_icon(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
@@ -105,10 +92,6 @@ GtkWidget *create_tree(GtkTreeModel *model, gboolean icons)
 	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
 				"Connected", gtk_cell_renderer_pixbuf_new(),
 					connected_to_icon, NULL, NULL);
-
-	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
-				"Trusted", gtk_cell_renderer_pixbuf_new(),
-					trusted_to_icon, NULL, NULL);
 
 	column = gtk_tree_view_column_new();
 	gtk_tree_view_column_set_visible(column, FALSE);
