@@ -55,6 +55,7 @@ struct _BluetoothChooserPrivate {
 
 	/* Widgets/UI bits that can be shown or hidden */
 	GtkCellRenderer *bonded_cell;
+	GtkCellRenderer *trusted_cell;
 	GtkWidget *treeview;
 	GtkWidget *search_button;
 	GtkWidget *device_type_label, *device_type;
@@ -66,6 +67,7 @@ struct _BluetoothChooserPrivate {
 	int device_category_filter;
 
 	guint show_paired : 1;
+	guint show_trusted : 1;
 	guint show_search : 1;
 	guint show_device_type : 1;
 	guint show_device_category : 1;
@@ -86,6 +88,8 @@ bluetooth_device_category_to_string (int type)
 		return N_("Trusted");
 	case BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED:
 		return N_("Not paired or trusted");
+	case BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED:
+		return N_("Paired or trusted");
 	default:
 		return N_("Unknown");
 	}
@@ -108,10 +112,18 @@ bonded_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &bonded, -1);
 
-	if (bonded == FALSE)
-		g_object_set (cell, "stock-id", NULL, NULL);
-	else
-		g_object_set (cell, "stock-id", GTK_STOCK_DIALOG_AUTHENTICATION, NULL);
+	g_object_set (cell, "stock-id", bonded ? GTK_STOCK_DIALOG_AUTHENTICATION : NULL, NULL);
+}
+
+static void
+trusted_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	gboolean trusted;
+
+	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
+
+	g_object_set (cell, "stock-id", trusted ? GTK_STOCK_ABOUT : NULL, NULL);
 }
 
 static void
@@ -121,10 +133,8 @@ type_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	guint type;
 
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_TYPE, &type, -1);
-	if (type == 0)
-		g_object_set (cell, "text", _("Unknown"), NULL);
-	else
-		g_object_set (cell, "text", bluetooth_type_to_string (type), NULL);
+
+	g_object_set (cell, "text", (type == 0) ? _("Unknown") : bluetooth_type_to_string (type), NULL);
 }
 
 /**
@@ -321,6 +331,8 @@ filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothChooserPr
 		return trusted;
 	if (priv->device_category_filter == BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED)
 		return (!bonded && !trusted);
+	if (priv->device_category_filter == BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED)
+		return (bonded || trusted);
 
 	g_assert_not_reached ();
 
@@ -482,6 +494,15 @@ create_treeview (BluetoothChooser *self)
 
 	gtk_tree_view_column_set_cell_data_func (column, priv->bonded_cell,
 						 bonded_to_icon, NULL, NULL);
+	g_object_set (G_OBJECT (priv->bonded_cell), "visible", priv->show_paired, NULL);
+
+	/* The trusted icon */
+	priv->trusted_cell = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_end (column, priv->trusted_cell, FALSE);
+
+	gtk_tree_view_column_set_cell_data_func (column, priv->trusted_cell,
+						 trusted_to_icon, NULL, NULL);
+	g_object_set (G_OBJECT (priv->trusted_cell), "visible", priv->show_trusted, NULL);
 
 	gtk_tree_view_append_column (GTK_TREE_VIEW(tree), column);
 
@@ -535,6 +556,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	GtkWidget *table;
 
 	priv->show_paired = FALSE;
+	priv->show_trusted = FALSE;
 	priv->show_search = FALSE;
 
 	priv->client = bluetooth_client_new ();
@@ -716,6 +738,7 @@ enum {
 	PROP_DEVICE_SELECTED_NAME,
 	PROP_DEVICE_SELECTED_TYPE,
 	PROP_SHOW_PAIRING,
+	PROP_SHOW_TRUSTED,
 	PROP_SHOW_SEARCH,
 	PROP_SHOW_DEVICE_TYPE,
 	PROP_SHOW_DEVICE_CATEGORY,
@@ -737,6 +760,11 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		priv->show_paired = g_value_get_boolean (value);
 		if (priv->bonded_cell != NULL)
 			g_object_set (G_OBJECT (priv->bonded_cell), "visible", priv->show_paired, NULL);
+		break;
+	case PROP_SHOW_TRUSTED:
+		priv->show_trusted = g_value_get_boolean (value);
+		if (priv->trusted_cell)
+			g_object_set (G_OBJECT (priv->trusted_cell), "visible", priv->show_trusted, NULL);
 		break;
 	case PROP_SHOW_SEARCH:
 		priv->show_search = g_value_get_boolean (value);
@@ -796,6 +824,9 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		break;
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
+		break;
+	case PROP_SHOW_TRUSTED:
+		g_value_set_boolean (value, priv->show_trusted);
 		break;
 	case PROP_SHOW_SEARCH:
 		g_value_set_boolean (value, priv->show_search);
@@ -893,6 +924,14 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	 **/
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_PAIRING, g_param_spec_boolean ("show-pairing",
+										  NULL, NULL, FALSE, G_PARAM_READWRITE));
+	/**
+	 * BluetoothChooser:show-trusted:
+	 *
+	 * Whether to show the trusted column in the tree.
+	 **/
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_TRUSTED, g_param_spec_boolean ("show-trusted",
 										  NULL, NULL, FALSE, G_PARAM_READWRITE));
 	/**
 	 * BluetoothChooser:show-search:
