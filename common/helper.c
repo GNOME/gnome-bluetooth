@@ -66,7 +66,7 @@ static void paired_to_icon(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 
 	if (paired == TRUE)
 		g_object_set(cell, "icon-name",
-				GTK_STOCK_DIALOG_AUTHENTICATION, NULL);
+				"bluetooth-paired", NULL);
 
 	g_object_set(cell, "visible", paired, NULL);
 }

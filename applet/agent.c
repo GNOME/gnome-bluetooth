@@ -277,7 +277,7 @@ static void passkey_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	gtk_table_set_col_spacings(GTK_TABLE(table), 20);
 	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
-	image = gtk_image_new_from_icon_name(GTK_STOCK_DIALOG_AUTHENTICATION,
+	image = gtk_image_new_from_icon_name("bluetooth-paired",
 							GTK_ICON_SIZE_DIALOG);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.0, 0.0);
 	gtk_table_attach(GTK_TABLE(table), image, 0, 1, 0, 5,
@@ -386,7 +386,7 @@ static void confirm_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
 
-	image = gtk_image_new_from_icon_name(GTK_STOCK_DIALOG_AUTHENTICATION,
+	image = gtk_image_new_from_icon_name("bluetooth-paired",
 							GTK_ICON_SIZE_DIALOG);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.0, 0.0);
 	gtk_table_attach(GTK_TABLE(table), image, 0, 1, 0, 5,
@@ -473,7 +473,7 @@ static void auth_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
 
-	image = gtk_image_new_from_icon_name(GTK_STOCK_DIALOG_AUTHENTICATION,
+	image = gtk_image_new_from_icon_name("bluetooth-paired",
 							GTK_ICON_SIZE_DIALOG);
 	gtk_misc_set_alignment(GTK_MISC(image), 0.0, 0.0);
 	gtk_table_attach(GTK_TABLE(table), image, 0, 1, 0, 5,
