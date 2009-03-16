@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-08 00:15+0100\n"
-"PO-Revision-Date: 2009-03-08 00:18+0100\n"
+"POT-Creation-Date: 2009-03-17 00:16+0100\n"
+"PO-Revision-Date: 2009-03-17 00:22+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -75,8 +75,8 @@ msgstr "Joypad"
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../common/bluetooth-client.c:119 ../common/bluetooth-chooser.c:90
-#: ../common/bluetooth-chooser.c:125
+#: ../common/bluetooth-client.c:119 ../common/bluetooth-chooser.c:92
+#: ../common/bluetooth-chooser.c:124
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -101,47 +101,47 @@ msgstr "Vertrauenswürdig verbunden"
 msgid "Not paired or trusted"
 msgstr "Nicht verbunden oder vertrauenswürdig verbunden"
 
-#: ../common/bluetooth-chooser.c:239
-msgid "Recognized Bluetooth Devices"
-msgstr "Erkannte Bluetooth-Geräte"
+#: ../common/bluetooth-chooser.c:90
+msgid "Paired or trusted"
+msgstr "Verbunden oder vertrauenswürdig verbunden"
 
-#: ../common/bluetooth-chooser.c:464
+#: ../common/bluetooth-chooser.c:465
 msgid "Device"
 msgstr "Gerät "
 
-#: ../common/bluetooth-chooser.c:491
+#: ../common/bluetooth-chooser.c:493
 msgid "Type"
 msgstr "Typ"
 
 #. The search button
-#: ../common/bluetooth-chooser.c:577
+#: ../common/bluetooth-chooser.c:581
 msgid "S_earch"
 msgstr "S_uchen"
 
-#: ../common/bluetooth-chooser.c:582
+#: ../common/bluetooth-chooser.c:586
 msgid "Search for Bluetooth devices"
 msgstr "Bluetooth-Geräte suchen"
 
 #. The filters
-#: ../common/bluetooth-chooser.c:600
+#: ../common/bluetooth-chooser.c:604
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Nur Bluetooth-Geräte anzeigen mit …"
 
 #. The device category filter
-#: ../common/bluetooth-chooser.c:620
+#: ../common/bluetooth-chooser.c:624
 msgid "Device _category:"
 msgstr "Geräte_kategorie:"
 
-#: ../common/bluetooth-chooser.c:635
+#: ../common/bluetooth-chooser.c:639
 msgid "Select the device category to filter above list"
 msgstr "Wählen Sie die zu filternde Gerätekategorie in der oberen Liste aus "
 
 #. The device type filter
-#: ../common/bluetooth-chooser.c:649
+#: ../common/bluetooth-chooser.c:653
 msgid "Device _type:"
 msgstr "Geräte_typ:"
 
-#: ../common/bluetooth-chooser.c:664
+#: ../common/bluetooth-chooser.c:668
 msgid "Select the device type to filter above list"
 msgstr "Wählen Sie den zu filternden Gerätetyp in der oberen Liste aus "
 
@@ -177,7 +177,7 @@ msgstr "Bluetooth-Status überprüfen"
 msgid "Preferences..."
 msgstr "Einstellungen …"
 
-#: ../applet/main.c:277 ../properties/adapter.c:545
+#: ../applet/main.c:277 ../properties/adapter.c:503
 msgid "Setup new device..."
 msgstr "Neues Gerät  konfigurieren …"
 
@@ -193,7 +193,7 @@ msgstr "Dateien auf Gerät durchsuchen …"
 msgid "Bluetooth Applet"
 msgstr "Bluetooth-Applet"
 
-#: ../applet/notify.c:100 ../applet/bluetooth-applet.desktop.in.in.h:1
+#: ../applet/notify.c:99 ../applet/bluetooth-applet.desktop.in.in.h:1
 msgid "Bluetooth Manager"
 msgstr "Bluetooth-Verwaltung"
 
@@ -328,59 +328,51 @@ msgstr "Nur zeigen, wenn ein Adapter vorhanden ist"
 msgid "Always display icon"
 msgstr "Symbol immer anzeigen"
 
-#: ../properties/adapter.c:96
+#: ../properties/adapter.c:95
 msgid "Unnamed Adapter"
 msgstr "Unbenannter Adapter"
 
-#: ../properties/adapter.c:188
-msgid "Distrust"
-msgstr "Nicht vertrauen"
-
-#: ../properties/adapter.c:190 ../properties/adapter.c:568
-msgid "Trust"
-msgstr "Vertrauen"
-
-#: ../properties/adapter.c:259
+#: ../properties/adapter.c:249
 msgid "Remove from list of known devices?"
 msgstr "Aus der Liste der bekannten Geräte entfernen?"
 
-#: ../properties/adapter.c:260
+#: ../properties/adapter.c:250
 msgid "If you delete the device, you have to set it up again before next use."
 msgstr ""
 "Falls Sie das Gerät entfernen, müssen Sie es vor der nächsten Benutzung "
 "erneut konfigurieren."
 
 #. The powered checkbox
-#: ../properties/adapter.c:450
+#: ../properties/adapter.c:408
 msgid "_Powered"
 msgstr "_Eingeschaltet"
 
 #. The discoverable checkbox
-#: ../properties/adapter.c:459
+#: ../properties/adapter.c:417
 msgid "_Discoverable"
 msgstr "_Nicht sichtbar"
 
-#: ../properties/adapter.c:482
+#: ../properties/adapter.c:440
 msgid "Friendly name"
 msgstr "Benutzerdefinierter Name"
 
-#: ../properties/adapter.c:507
+#: ../properties/adapter.c:465
 msgid "Known devices"
 msgstr "Bekannte Geräte"
 
-#: ../properties/adapter.c:554
+#: ../properties/adapter.c:512
 msgid "Disconnect"
 msgstr "Verbindung trennen"
 
-#: ../properties/adapter.c:582
+#: ../properties/adapter.c:526
 msgid "Delete"
 msgstr "Entfernen"
 
-#: ../properties/adapter.c:682
+#: ../properties/adapter.c:626
 msgid "Bluetooth Status"
 msgstr "Bluetooth-Status"
 
-#: ../properties/adapter.c:824
+#: ../properties/adapter.c:768
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth ist deaktiviert"
 
@@ -397,14 +389,14 @@ msgid ""
 "Display options for the notification icon. Valid options are \"never\", "
 "\"present\" and \"always\"."
 msgstr ""
-"Anzeigeoptionen für das Benachrichtigungssymbol. Mögliche Werte sind: »never«, "
-"»present« und »always«."
+"Anzeigeoptionen für das Benachrichtigungssymbol. Mögliche Werte sind: "
+"»never«, »present« und »always«."
 
 #: ../properties/bluetooth-manager.schemas.in.h:2
 msgid "When to show the notification icon"
 msgstr "Legt fest, wann das Benachrichtigungssymbol angezeigt werden soll"
 
-#: ../wizard/main.c:189 ../wizard/main.c:230
+#: ../wizard/main.c:188 ../wizard/main.c:229
 msgid "Please enter the following passkey:"
 msgstr "Bitte geben Sie den folgenden Schlüssel ein:"
 
@@ -412,7 +404,7 @@ msgstr "Bitte geben Sie den folgenden Schlüssel ein:"
 #. * The '%s' is the device name, for example:
 #. * Please wait whilst 'Sony Bluetooth Headset' is being paired
 #.
-#: ../wizard/main.c:199
+#: ../wizard/main.c:198
 #, c-format
 msgid "Please wait whilst '%s' is being paired"
 msgstr "Bitte warten Sie, während die Verbindung zu »%s« hergestellt wird"
@@ -421,7 +413,7 @@ msgstr "Bitte warten Sie, während die Verbindung zu »%s« hergestellt wird"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:255
+#: ../wizard/main.c:254
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Verbindung mit »%s« wurde abgebrochen"
@@ -430,7 +422,7 @@ msgstr "Verbindung mit »%s« wurde abgebrochen"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' finished
 #.
-#: ../wizard/main.c:261
+#: ../wizard/main.c:260
 #, c-format
 msgid "Pairing with '%s' finished"
 msgstr "Verbindung mit »%s« ist abgeschlossen"
@@ -439,7 +431,7 @@ msgstr "Verbindung mit »%s« ist abgeschlossen"
 #. * The '%s' is the device name, for example:
 #. * Successfully paired with 'Sony Bluetooth Headset'
 #.
-#: ../wizard/main.c:296
+#: ../wizard/main.c:295
 #, c-format
 msgid "Successfully paired with '%s'"
 msgstr "Erfolgreich verbunden mit »%s«"
@@ -448,7 +440,7 @@ msgstr "Erfolgreich verbunden mit »%s«"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:315
+#: ../wizard/main.c:314
 #, c-format
 msgid "Pairing with '%s' failed"
 msgstr "Verbindung mit »%s« ist gescheitert"
@@ -457,20 +449,20 @@ msgstr "Verbindung mit »%s« ist gescheitert"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:377
+#: ../wizard/main.c:371
 #, c-format
 msgid "Connecting to '%s' now..."
 msgstr "Verbindung zu »%s« wird jetzt hergestellt …"
 
-#: ../wizard/main.c:443
+#: ../wizard/main.c:436
 msgid "Introduction"
 msgstr "Einführung"
 
-#: ../wizard/main.c:444
+#: ../wizard/main.c:437
 msgid "Welcome to the Bluetooth device setup wizard"
 msgstr "Willkommen zum Bluetooth-Geräteassistenten"
 
-#: ../wizard/main.c:447
+#: ../wizard/main.c:440
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer.\n"
@@ -480,64 +472,36 @@ msgstr ""
 "von Bluetooth-Geräten zur Benutzung mit diesem Rechner führen.\n"
 "\n"
 
-#: ../wizard/main.c:602
-msgid "Passkey options"
-msgstr "Schlüsseloptionen"
-
-#: ../wizard/main.c:613
-msgid "_Automatic passkey selection"
-msgstr "_Automatische Schlüsselauswahl"
-
-#: ../wizard/main.c:616
-msgid "Use _fixed passkey:"
-msgstr "_Festen Schlüssel verwenden:"
-
-#: ../wizard/main.c:625
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (die meisten Kopfhörer, Mäuse und GPS-Geräte)"
-
-#: ../wizard/main.c:628
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/main.c:631
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/main.c:635
-msgid "Custom passkey code:"
-msgstr "Benutzerdefinierter Schlüsselcode:"
-
-#: ../wizard/main.c:712
+#: ../wizard/main.c:663
 msgid "Device search"
 msgstr "Suche nach Geräten"
 
 #. The selector
-#: ../wizard/main.c:715
+#: ../wizard/main.c:666
 msgid "Select the device you want to setup"
 msgstr "Gerät zur Konfiguration auswählen"
 
-#: ../wizard/main.c:734
-msgid "Passkey _options..."
+#: ../wizard/main.c:685
+msgid "Passkey _Options..."
 msgstr "Schlüssel_optionen …"
 
-#: ../wizard/main.c:748
+#: ../wizard/main.c:700
 msgid "Device setup"
 msgstr "Gerätekonfiguration"
 
-#: ../wizard/main.c:749
+#: ../wizard/main.c:701
 msgid "Setting up new device"
 msgstr "Neues Gerät wird konfiguriert"
 
-#: ../wizard/main.c:776
+#: ../wizard/main.c:728
 msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: ../wizard/main.c:777
+#: ../wizard/main.c:729
 msgid "Successfully configured new device"
 msgstr "Das neue Gerät wurde erfolgreich konfiguriert"
 
-#: ../wizard/main.c:787
+#: ../wizard/main.c:739
 msgid "Bluetooth Device Wizard"
 msgstr "Bluetooth-Geräteassistent"
 
@@ -644,6 +608,36 @@ msgstr "Zu verwendendes entferntes Gerät"
 #: ../sendto/main.c:787
 msgid "Remove device's name"
 msgstr "Gerätename entfernen"
+
+#~ msgid "Recognized Bluetooth Devices"
+#~ msgstr "Erkannte Bluetooth-Geräte"
+
+#~ msgid "Distrust"
+#~ msgstr "Nicht vertrauen"
+
+#~ msgid "Trust"
+#~ msgstr "Vertrauen"
+
+#~ msgid "Passkey options"
+#~ msgstr "Schlüsseloptionen"
+
+#~ msgid "_Automatic passkey selection"
+#~ msgstr "_Automatische Schlüsselauswahl"
+
+#~ msgid "Use _fixed passkey:"
+#~ msgstr "_Festen Schlüssel verwenden:"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "'0000' (die meisten Kopfhörer, Mäuse und GPS-Geräte)"
+
+#~ msgid "'1111'"
+#~ msgstr "'1111'"
+
+#~ msgid "'1234'"
+#~ msgstr "'1234'"
+
+#~ msgid "Custom passkey code:"
+#~ msgstr "Benutzerdefinierter Schlüsselcode:"
 
 #~ msgid "File transfer"
 #~ msgstr "Dateiübertragung"
