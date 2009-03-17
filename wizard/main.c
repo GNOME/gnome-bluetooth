@@ -188,6 +188,8 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 		gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
 		set_large_label (GTK_LABEL (label_passkey), pincode);
 	} else {
+		char *text;
+
 		gtk_widget_show (label_passkey_help);
 		gtk_widget_hide (label_passkey);
 
@@ -195,7 +197,9 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 		 * The '%s' is the device name, for example:
 		 * Please wait whilst 'Sony Bluetooth Headset' is being paired
 		 */
-		gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please wait whilst '%s' is being paired"));
+		text = g_strdup_printf(_("Please wait whilst '%s' is being paired"), target_name);
+		gtk_label_set_markup(GTK_LABEL(label_passkey_help), text);
+		g_free(text);
 	}
 
 	dbus_g_method_return(context, pincode);
