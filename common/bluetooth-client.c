@@ -302,8 +302,39 @@ static gboolean get_iter_from_path(GtkTreeStore *store,
 	return iter_search(store, iter, NULL, compare_path, (gpointer) path);
 }
 
+static void
+device_services_changed (DBusGProxy *iface, const char *property,
+			 GValue *value, gpointer user_data)
+{
+	BluetoothClient *client = user_data;
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GtkTreeIter iter;
+	GtkTreePath *tree_path;
+	GHashTable *table;
+	const char *path;
+
+	if (g_str_equal (property, "Connected") == FALSE)
+		return;
+
+	path = dbus_g_proxy_get_path (iface);
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
+		return;
+
+	gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
+			   BLUETOOTH_COLUMN_SERVICES, &table,
+			   -1);
+
+	g_hash_table_insert (table,
+			     (gpointer) dbus_g_proxy_get_interface (iface),
+			     GINT_TO_POINTER (g_value_get_boolean(value)));
+
+	tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+	gtk_tree_model_row_changed (GTK_TREE_MODEL (priv->store), tree_path, &iter);
+	gtk_tree_path_free (tree_path);
+}
+
 static GHashTable *
-device_list_nodes (DBusGProxy *device, BluetoothClientPrivate *priv)
+device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect_signal)
 {
 	GHashTable *table;
 	guint i;
@@ -332,7 +363,12 @@ device_list_nodes (DBusGProxy *device, BluetoothClientPrivate *priv)
 					     connectable_interfaces[i],
 					     GINT_TO_POINTER (is_connected));
 
-			//FIXME connect to the changed properties for that iface?
+			if (connect_signal != FALSE) {
+				dbus_g_proxy_add_signal(iface, "PropertyChanged",
+							G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
+				dbus_g_proxy_connect_signal(iface, "PropertyChanged",
+							    G_CALLBACK(device_services_changed), client, NULL);
+			}
 		}
 	}
 
@@ -472,7 +508,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 					-1);
 
 			if (device != NULL) {
-				services = device_list_nodes (device, priv);
+				services = device_list_nodes (device, client, FALSE);
 
 				gtk_tree_store_set(priv->store, &iter,
 					BLUETOOTH_COLUMN_PROXY, device,
@@ -490,7 +526,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store), &iter);
 	}
 
-	services = device_list_nodes (device, priv);
+	services = device_list_nodes (device, client, TRUE);
 
 	gtk_tree_store_insert_with_values(priv->store, &iter, parent, -1,
 				BLUETOOTH_COLUMN_PROXY, device,
