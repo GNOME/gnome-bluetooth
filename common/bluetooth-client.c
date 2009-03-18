@@ -59,13 +59,13 @@
 #define BLUEZ_DEVICE_INTERFACE	"org.bluez.Device"
 
 static char * connectable_interfaces[] = {
-	"org.bluez.Input",
 	"org.bluez.Headset",
-	"org.bluez.AudioSink"
+	"org.bluez.AudioSink",
+	"org.bluez.Input"
 };
 
 /* Keep in sync with above */
-#define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[0])
+#define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[2])
 
 static DBusGConnection *connection = NULL;
 static BluetoothClient *bluetooth_client = NULL;
@@ -347,6 +347,12 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 	for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
 		DBusGProxy *iface;
 		GHashTable *props;
+
+		/* Don't add the input interface for devices that already have
+		 * audio stuff */
+		if (g_str_equal (connectable_interfaces[i], BLUEZ_INPUT_INTERFACE)
+		    && g_hash_table_size (table) > 0)
+			continue;
 
 		iface = dbus_g_proxy_new_from_proxy (device, connectable_interfaces[i],
 						     NULL);
