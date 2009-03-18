@@ -57,7 +57,15 @@
 #define BLUEZ_MANAGER_INTERFACE	"org.bluez.Manager"
 #define BLUEZ_ADAPTER_INTERFACE	"org.bluez.Adapter"
 #define BLUEZ_DEVICE_INTERFACE	"org.bluez.Device"
-#define BLUEZ_INPUT_INTERFACE	"org.bluez.Input"
+
+static char * connectable_interfaces[] = {
+	"org.bluez.Input",
+	"org.bluez.Headset",
+	"org.bluez.AudioSink"
+};
+
+/* Keep in sync with above */
+#define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[0])
 
 static DBusGConnection *connection = NULL;
 static BluetoothClient *bluetooth_client = NULL;
@@ -294,6 +302,48 @@ static gboolean get_iter_from_path(GtkTreeStore *store,
 	return iter_search(store, iter, NULL, compare_path, (gpointer) path);
 }
 
+static GHashTable *
+device_list_nodes (DBusGProxy *device, BluetoothClientPrivate *priv)
+{
+	GHashTable *table;
+	guint i;
+
+	if (device == NULL)
+		return NULL;
+
+	table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
+
+	for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
+		DBusGProxy *iface;
+		GHashTable *props;
+
+		iface = dbus_g_proxy_new_from_proxy (device, connectable_interfaces[i],
+						     NULL);
+		if (dbus_g_proxy_call (iface, "GetProperties", NULL,
+				       G_TYPE_INVALID, dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &props,
+				       G_TYPE_INVALID) != FALSE) {
+			GValue *value;
+			gboolean is_connected;
+
+			value = g_hash_table_lookup(props, "Connected");
+			is_connected = value ? g_value_get_boolean(value) : FALSE;
+
+			g_hash_table_insert (table,
+					     connectable_interfaces[i],
+					     GINT_TO_POINTER (is_connected));
+
+			//FIXME connect to the changed properties for that iface?
+		}
+	}
+
+	if (g_hash_table_size (table) == 0) {
+		g_hash_table_destroy (table);
+		return NULL;
+	}
+
+	return table;
+}
+
 static void device_changed(DBusGProxy *device, const char *property,
 					GValue *value, gpointer user_data)
 {
@@ -347,6 +397,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 	DBusGProxy *device;
 	GValue *value;
 	const gchar *address, *alias, *name, *icon;
+	GHashTable *services;
 	gboolean paired, trusted, connected;
 	guint type;
 	gint rssi;
@@ -417,14 +468,19 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 					BLUETOOTH_COLUMN_NAME, name,
 					BLUETOOTH_COLUMN_TYPE, type,
 					BLUETOOTH_COLUMN_ICON, icon,
-					BLUETOOTH_COLUMN_RSSI, rssi, -1);
+					BLUETOOTH_COLUMN_RSSI, rssi,
+					-1);
 
 			if (device != NULL) {
+				services = device_list_nodes (device, priv);
+
 				gtk_tree_store_set(priv->store, &iter,
 					BLUETOOTH_COLUMN_PROXY, device,
 					BLUETOOTH_COLUMN_CONNECTED, connected,
 					BLUETOOTH_COLUMN_TRUSTED, trusted,
-					BLUETOOTH_COLUMN_PAIRED, paired, -1);
+					BLUETOOTH_COLUMN_PAIRED, paired,
+					BLUETOOTH_COLUMN_SERVICES, services,
+					-1);
 			}
 
 			goto done;
@@ -433,6 +489,8 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store), &iter);
 	}
+
+	services = device_list_nodes (device, priv);
 
 	gtk_tree_store_insert_with_values(priv->store, &iter, parent, -1,
 				BLUETOOTH_COLUMN_PROXY, device,
@@ -444,7 +502,9 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 				BLUETOOTH_COLUMN_RSSI, rssi,
 				BLUETOOTH_COLUMN_PAIRED, paired,
 				BLUETOOTH_COLUMN_TRUSTED, trusted,
-				BLUETOOTH_COLUMN_CONNECTED, connected, -1);
+				BLUETOOTH_COLUMN_CONNECTED, connected,
+				BLUETOOTH_COLUMN_SERVICES, services,
+				-1);
 
 done:
 	if (device != NULL) {
@@ -452,7 +512,6 @@ done:
 				G_TYPE_STRING, G_TYPE_VALUE, G_TYPE_INVALID);
 		dbus_g_proxy_connect_signal(device, "PropertyChanged",
 				G_CALLBACK(device_changed), client, NULL);
-
 		g_object_unref(device);
 	}
 }
@@ -794,7 +853,8 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
 					 G_TYPE_UINT, G_TYPE_STRING, G_TYPE_INT,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN);
+					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
+					 G_TYPE_HASH_TABLE);
 
 	priv->dbus = dbus_g_proxy_new_for_name(connection, DBUS_SERVICE_DBUS,
 				DBUS_PATH_DBUS, DBUS_INTERFACE_DBUS);

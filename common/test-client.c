@@ -96,6 +96,31 @@ static void type_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	g_object_set(cell, "text", bluetooth_type_to_string(type), NULL);
 }
 
+static void
+services_foreach (const char *service, gpointer _value, GString *str)
+{
+	gboolean value = GPOINTER_TO_INT (_value);
+	g_string_append_printf (str, "%s (%s) ", service, value ? "connected" : "not connected");
+}
+
+static void services_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
+		GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
+{
+	GString *str;
+	GHashTable *services;
+
+	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_SERVICES, &services, -1);
+	if (services == NULL) {
+		g_object_set(cell, "text", NULL, NULL);
+		return;
+	}
+
+	str = g_string_new (NULL);
+	g_hash_table_foreach (services, (GHFunc) services_foreach, str);
+	g_object_set(cell, "text", str->str, NULL);
+	g_string_free (str, TRUE);
+}
+
 static void create_window(void)
 {
 	GtkWidget *window;
@@ -190,6 +215,10 @@ static void create_window(void)
 					"Powered", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_POWERED, NULL);
 
+	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
+					"Services", gtk_cell_renderer_text_new(),
+						services_to_text, NULL, NULL);
+
 	model = bluetooth_client_get_model(client);
 	sorted = gtk_tree_model_sort_new_with_model(model);
 	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(sorted),
@@ -222,6 +251,7 @@ default_adapter_changed (GObject    *gobject,
 
 	g_object_get (G_OBJECT (gobject), "default-adapter", &adapter, NULL);
 	g_message ("Default adapter changed: %s", adapter ? adapter : "(none)");
+	g_free (adapter);
 }
 
 static void
