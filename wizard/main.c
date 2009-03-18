@@ -302,9 +302,10 @@ static void create_callback(const char *path, gpointer user_data)
 		if (page > 0)
 			gtk_assistant_set_current_page(assistant, page + 1);
 
+		bluetooth_client_set_trusted(client, path, TRUE);
+
 		if (target_type == BLUETOOTH_TYPE_KEYBOARD ||
 					target_type == BLUETOOTH_TYPE_MOUSE) {
-			bluetooth_client_set_trusted(client, path, TRUE);
 			bluetooth_client_connect_input(client, path,
 						connect_callback, assistant);
 		}
