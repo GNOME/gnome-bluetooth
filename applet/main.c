@@ -40,7 +40,7 @@
 #include "agent.h"
 
 static BluetoothClient *client;
-static GtkTreeModel *adapter_model;
+static GtkTreeModel *devices_model;
 static guint num_adapters_present = 0;
 static guint num_adapters_powered = 0;
 
@@ -59,6 +59,8 @@ static GConfClient* gconf;
 static BluetoothKillswitch *killswitch = NULL;
 
 static GtkBuilder *xml = NULL;
+static GtkActionGroup *devices_action_group = NULL;
+static guint devices_ui_id = 0;
 
 void settings_callback(GObject *widget, gpointer user_data);
 void browse_callback(GObject *widget, gpointer user_data);
@@ -245,6 +247,8 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 
 static GtkWidget *create_popupmenu(void)
 {
+	GObject *object;
+
 	xml = gtk_builder_new ();
 	if (gtk_builder_add_from_file (xml, "popup-menu.ui", NULL) == 0)
 		gtk_builder_add_from_file (xml, PKGDATADIR "popup-menu.ui", NULL);
@@ -255,6 +259,9 @@ static GtkWidget *create_popupmenu(void)
 		object = gtk_builder_get_object (xml, "killswitch-label");
 		gtk_action_set_visible (GTK_ACTION (object), TRUE);
 	}
+
+	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
+	devices_ui_id = gtk_ui_manager_new_merge_id (GTK_UI_MANAGER (object));
 
 	return GTK_WIDGET (gtk_builder_get_object (xml, "bluetooth-applet-popup"));
 }
@@ -305,46 +312,156 @@ update_icon_visibility (void)
 	}
 }
 
-static void adapter_changed (GtkTreeModel *model,
+static void
+remove_action_item (GtkAction *action, gpointer data)
+{
+	gtk_action_group_remove_action (devices_action_group, action);
+}
+
+static void
+update_device_list (GtkTreeIter *parent)
+{
+	GObject *object;
+	GtkTreeIter iter;
+	gboolean cont;
+	guint num_devices;
+	GList *actions;
+
+	num_devices = 0;
+
+	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
+
+	if (devices_action_group == NULL) {
+		devices_action_group = gtk_action_group_new ("devices-action-group");
+		gtk_ui_manager_insert_action_group (GTK_UI_MANAGER (object),
+						    devices_action_group, -1); 
+	}
+
+	if (parent == NULL) {
+		/* No default adapter? Remove everything */
+		actions = gtk_action_group_list_actions (devices_action_group);
+		g_list_foreach (actions, (GFunc) remove_action_item, NULL);
+		g_list_free (actions);
+		gtk_ui_manager_remove_ui (GTK_UI_MANAGER (object), devices_ui_id);
+		goto done;
+	}
+
+	/* Get a list of actions, and remove the one with a
+	 * device in the list */
+	actions = gtk_action_group_list_actions (devices_action_group);
+
+	cont = gtk_tree_model_iter_children (devices_model, &iter, parent);
+	while (cont) {
+		GHashTable *table;
+		const char *name, *address;
+		gboolean connected;
+		GtkAction *action;
+
+		action = NULL;
+
+		gtk_tree_model_get (devices_model, &iter,
+				    BLUETOOTH_COLUMN_ADDRESS, &address,
+				    BLUETOOTH_COLUMN_SERVICES, &table,
+				    BLUETOOTH_COLUMN_ALIAS, &name,
+				    BLUETOOTH_COLUMN_CONNECTED, &connected,
+				    -1);
+
+		if (address != NULL) {
+			action = gtk_action_group_get_action (devices_action_group, address);
+			if (action)
+				actions = g_list_remove (actions, action);
+		}
+
+		if (table != NULL && address != NULL) {
+			char *label;
+
+			/* FIXME we should have a bold label here instead
+			 * try with gtk_ui_manager_get_widget() */
+			if (connected != FALSE)
+				label = g_strdup_printf (_("%s (Connected)"), name);
+			else
+				label = g_strdup_printf (_("%s (Disconnected)"), name);
+
+			if (action == NULL) {
+				action = gtk_action_new (address, label, NULL, NULL);
+
+				gtk_action_group_add_action (devices_action_group, action);
+				g_object_unref (action);
+				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), devices_ui_id,
+						       "/bluetooth-applet-popup/devices-placeholder", address, address,
+						       GTK_UI_MANAGER_MENUITEM, FALSE);
+			} else {
+				gtk_action_set_label (action, label);
+			}
+			g_free (label);
+
+			num_devices++;
+		}
+
+		cont = gtk_tree_model_iter_next (devices_model, &iter);
+	}
+
+	/* Remove the left-over devices */
+	g_list_foreach (actions, (GFunc) remove_action_item, NULL);
+	g_list_free (actions);
+
+done:
+	gtk_ui_manager_ensure_update (GTK_UI_MANAGER (object));
+
+	object = gtk_builder_get_object (xml, "devices-label");
+	gtk_action_set_visible (GTK_ACTION (object), num_devices > 0);
+}
+
+static void device_changed (GtkTreeModel *model,
 			     GtkTreePath  *path,
 			     GtkTreeIter  *_iter,
 			     gpointer      data)
 {
-	GtkTreeIter iter;
+	GtkTreeIter iter, *default_iter;
 	gboolean powered, cont;
 
+	default_iter = NULL;
 	num_adapters_present = num_adapters_powered = 0;
 
 	cont = gtk_tree_model_get_iter_first (model, &iter);
 	while (cont) {
+		gboolean is_default;
+
 		num_adapters_present++;
 
 		gtk_tree_model_get (model, &iter,
+				    BLUETOOTH_COLUMN_DEFAULT, &is_default,
 				    BLUETOOTH_COLUMN_POWERED, &powered,
 				    -1);
 		if (powered)
 			num_adapters_powered++;
+		if (is_default && powered)
+			default_iter = gtk_tree_iter_copy (&iter);
 
 		cont = gtk_tree_model_iter_next (model, &iter);
 	}
 
 	update_icon_visibility ();
 	update_menu_items ();
+	update_device_list (default_iter);
+
+	if (default_iter != NULL)
+		gtk_tree_iter_free (default_iter);
 }
 
-static void adapter_added(GtkTreeModel *model,
+static void device_added(GtkTreeModel *model,
 			  GtkTreePath *path,
 			  GtkTreeIter *iter,
 			  gpointer user_data)
 {
-	adapter_changed (model, NULL, NULL, NULL);
+	device_changed (model, path, iter, user_data);
 }
 
-static void adapter_removed(GtkTreeModel *model,
+static void device_removed(GtkTreeModel *model,
 			    GtkTreePath *path,
 			    gpointer user_data)
 {
-	adapter_changed (model, NULL, NULL, NULL);
+	device_changed (model, path, NULL, user_data);
 }
 
 static GConfEnumStringPair icon_policy_enum_map [] = {
@@ -427,16 +544,16 @@ int main(int argc, char *argv[])
 
 	client = bluetooth_client_new();
 
-	adapter_model = bluetooth_client_get_adapter_model(client);
+	devices_model = bluetooth_client_get_model(client);
 
-	g_signal_connect(G_OBJECT(adapter_model), "row-inserted",
-			 G_CALLBACK(adapter_added), NULL);
-	g_signal_connect(G_OBJECT(adapter_model), "row-deleted",
-			 G_CALLBACK(adapter_removed), NULL);
-	g_signal_connect (G_OBJECT (adapter_model), "row-changed",
-			  G_CALLBACK (adapter_changed), NULL);
+	g_signal_connect(G_OBJECT(devices_model), "row-inserted",
+			 G_CALLBACK(device_added), NULL);
+	g_signal_connect(G_OBJECT(devices_model), "row-deleted",
+			 G_CALLBACK(device_removed), NULL);
+	g_signal_connect (G_OBJECT (devices_model), "row-changed",
+			  G_CALLBACK (device_changed), NULL);
 	/* Set the default */
-	adapter_changed (adapter_model, NULL, NULL, NULL);
+	device_changed (devices_model, NULL, NULL, NULL);
 
 	gconf = gconf_client_get_default();
 
@@ -472,7 +589,7 @@ int main(int argc, char *argv[])
 
 	cleanup_notification();
 
-	g_object_unref(adapter_model);
+	g_object_unref(devices_model);
 
 	g_object_unref(client);
 
