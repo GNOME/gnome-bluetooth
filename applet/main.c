@@ -58,12 +58,15 @@ static int icon_policy = ICON_POLICY_PRESENT;
 static GConfClient* gconf;
 static BluetoothKillswitch *killswitch = NULL;
 
-static GtkWidget *menuitem_status = NULL;
-static GtkWidget *menuitem_setup = NULL;
-static GtkWidget *menuitem_sendto = NULL;
-static GtkWidget *menuitem_browse = NULL;
+static GtkBuilder *xml = NULL;
 
-static void settings_callback(GObject *widget, gpointer user_data)
+void settings_callback(GObject *widget, gpointer user_data);
+void browse_callback(GObject *widget, gpointer user_data);
+void bluetooth_status_callback (GObject *widget, gpointer user_data);
+void wizard_callback(GObject *widget, gpointer user_data);
+void sendto_callback(GObject *widget, gpointer user_data);
+
+void settings_callback(GObject *widget, gpointer user_data)
 {
 	const char *command = "bluetooth-properties";
 
@@ -82,7 +85,7 @@ select_device_changed(BluetoothChooser *sel,
 				GTK_RESPONSE_ACCEPT, address != NULL);
 }
 
-static void browse_callback(GObject *widget, gpointer user_data)
+void browse_callback(GObject *widget, gpointer user_data)
 {
 	GtkWidget *dialog, *selector, *button, *image;
 	char *bdaddr, *cmd;
@@ -135,7 +138,7 @@ static void browse_callback(GObject *widget, gpointer user_data)
 	g_free (cmd);
 }
 
-static void sendto_callback(GObject *widget, gpointer user_data)
+void sendto_callback(GObject *widget, gpointer user_data)
 {
 	const char *command = "bluetooth-sendto";
 
@@ -143,7 +146,7 @@ static void sendto_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
-static void wizard_callback(GObject *widget, gpointer user_data)
+void wizard_callback(GObject *widget, gpointer user_data)
 {
 	const char *command = "bluetooth-wizard";
 
@@ -151,15 +154,17 @@ static void wizard_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
-static void bluetooth_status_callback (GObject *widget, gpointer user_data)
+void bluetooth_status_callback (GObject *widget, gpointer user_data)
 {
+	GObject *object;
 	gboolean active;
 
-	active = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menuitem_status), "active"));
+	object = gtk_builder_get_object (xml, "killswitch-label");
+	active = GPOINTER_TO_INT (g_object_get_data (object, "bt-active"));
 	active = !active;
 	bluetooth_killswitch_set_state (killswitch,
 					active ? KILLSWITCH_STATE_NOT_KILLED : KILLSWITCH_STATE_KILLED);
-	g_object_set_data (G_OBJECT (menuitem_status), "active", GINT_TO_POINTER (active));
+	g_object_set_data (object, "bt-active", GINT_TO_POINTER (active));
 }
 
 static gboolean program_available(const char *program)
@@ -179,22 +184,6 @@ static void popup_callback(GObject *widget, guint button,
 				guint activate_time, gpointer user_data)
 {
 	GtkWidget *menu = user_data;
-	gboolean enabled;
-
-	if (num_adapters_present == 0)
-		enabled = FALSE;
-	else
-		enabled = (num_adapters_present - num_adapters_powered) >= 0;
-
-	gtk_widget_set_sensitive(menuitem_sendto,
-				program_available("obex-data-server") &&
-						enabled);
-
-	gtk_widget_set_sensitive(menuitem_browse,
-					program_available("nautilus") &&
-						enabled);
-
-	gtk_widget_set_sensitive(menuitem_setup, enabled);
 
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL,
 			gtk_status_icon_position_menu,
@@ -216,95 +205,88 @@ static void activate_callback(GObject *widget, gpointer user_data)
 static void
 killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state)
 {
+	GObject *object;
 	gboolean sensitive = TRUE;
 	gboolean bstate = FALSE;
-	const char *label;
+	const char *label, *status_label;
 
 	if (state == KILLSWITCH_STATE_UNKNOWN || state == KILLSWITCH_STATE_MIXED) {
 		sensitive = FALSE;
-		label = N_("Bluetooth Status Unknown");
+		label = NULL;
+		status_label = N_("Bluetooth: Unknown");
 	} else if (state == KILLSWITCH_STATE_KILLED) {
 		label = N_("Turn On Bluetooth");
+		status_label = N_("Bluetooth: Off");
 		bstate = FALSE;
 	} else if (state == KILLSWITCH_STATE_NOT_KILLED) {
 		label = N_("Turn Off Bluetooth");
+		status_label = N_("Bluetooth: On");
 		bstate = TRUE;
 	} else {
 		g_assert_not_reached ();
 	}
 
-	gtk_widget_set_sensitive (menuitem_status, sensitive);
-	g_signal_handlers_block_by_func (G_OBJECT (menuitem_status),
-					 G_CALLBACK (bluetooth_status_callback),
-					 NULL);
-	gtk_menu_item_set_label (GTK_MENU_ITEM (menuitem_status), _(label));
-	g_object_set_data (G_OBJECT (menuitem_status), "active", GINT_TO_POINTER (bstate));
-	g_signal_handlers_unblock_by_func (G_OBJECT (menuitem_status),
-					   G_CALLBACK (bluetooth_status_callback),
-					   NULL);
+	object = gtk_builder_get_object (xml, "killswitch");
+	gtk_action_set_visible (GTK_ACTION (object), sensitive);
+	gtk_action_set_label (GTK_ACTION (object), _(status_label));
+
+	if (sensitive != FALSE) {
+		object = gtk_builder_get_object (xml, "killswitch-label");
+		g_signal_handlers_block_by_func (object,
+						 G_CALLBACK (bluetooth_status_callback),
+						 NULL);
+		gtk_action_set_label (GTK_ACTION (object), _(label));
+		g_object_set_data (object, "bt-active", GINT_TO_POINTER (bstate));
+		g_signal_handlers_unblock_by_func (object,
+						   G_CALLBACK (bluetooth_status_callback),
+						   NULL);
+	}
 }
 
 static GtkWidget *create_popupmenu(void)
 {
-	GtkWidget *menu;
-	GtkWidget *item;
-	GtkWidget *image;
-
-	menu = gtk_menu_new();
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "popup-menu.ui", NULL) == 0)
+		gtk_builder_add_from_file (xml, PKGDATADIR "popup-menu.ui", NULL);
 
 	if (killswitch != NULL) {
-		item = gtk_menu_item_new_with_mnemonic (_("Checking Bluetooth status"));
-		gtk_widget_set_sensitive (item, FALSE);
-		g_signal_connect(item, "activate",
-				 G_CALLBACK (bluetooth_status_callback), NULL);
-		gtk_widget_show(item);
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-		menuitem_status = item;
+		GObject *object;
 
-		item = gtk_separator_menu_item_new();
-		gtk_widget_show(item);
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+		object = gtk_builder_get_object (xml, "killswitch-label");
+		gtk_action_set_visible (GTK_ACTION (object), TRUE);
 	}
 
-	image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
-	item = gtk_image_menu_item_new_with_label(_("Preferences..."));
-	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-	g_signal_connect(item, "activate",
-				G_CALLBACK(settings_callback), NULL);
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-	item = gtk_menu_item_new_with_label(_("Setup new device..."));
-	g_signal_connect(item, "activate",
-				G_CALLBACK(wizard_callback), NULL);
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-	menuitem_setup = item;
-
-	item = gtk_separator_menu_item_new();
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-	item = gtk_image_menu_item_new_with_label(_("Send files to device..."));
-	g_signal_connect(item, "activate",
-				G_CALLBACK(sendto_callback), NULL);
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-	menuitem_sendto = item;
-
-	item = gtk_image_menu_item_new_with_label(_("Browse files on device..."));
-	g_signal_connect(item, "activate",
-				G_CALLBACK(browse_callback), NULL);
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-	menuitem_browse = item;
-
-	return menu;
+	return GTK_WIDGET (gtk_builder_get_object (xml, "bluetooth-applet-popup"));
 }
 
-static void update_icon_visibility()
+static void
+update_menu_items (void)
+{
+	gboolean enabled;
+	GObject *object;
+
+	if (num_adapters_present == 0)
+		enabled = FALSE;
+	else
+		enabled = (num_adapters_present - num_adapters_powered) >= 0;
+
+
+	object = gtk_builder_get_object (xml, "send-file");
+	gtk_action_set_sensitive (GTK_ACTION (object),
+				  enabled &&
+				  (program_available ("obex-data-server")
+				   || program_available ("obexd")));
+
+	object = gtk_builder_get_object (xml, "browse-device");
+	gtk_action_set_sensitive (GTK_ACTION (object),
+				  enabled && program_available ("nautilus"));
+
+	object = gtk_builder_get_object (xml, "setup-new");
+	gtk_action_set_sensitive (GTK_ACTION (object), enabled);
+}
+
+static void
+update_icon_visibility (void)
 {
 	if (num_adapters_powered == 0)
 		set_icon (FALSE);
@@ -347,6 +329,7 @@ static void adapter_changed (GtkTreeModel *model,
 	}
 
 	update_icon_visibility ();
+	update_menu_items ();
 }
 
 static void adapter_added(GtkTreeModel *model,
@@ -431,6 +414,8 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
+	menu = create_popupmenu();
+
 	killswitch = bluetooth_killswitch_new ();
 	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE) {
 		g_object_unref (killswitch);
@@ -470,7 +455,6 @@ int main(int argc, char *argv[])
 
 	update_icon_visibility();
 
-	menu = create_popupmenu();
 	g_signal_connect(statusicon, "activate",
 				G_CALLBACK(activate_callback), menu);
 	g_signal_connect(statusicon, "popup-menu",

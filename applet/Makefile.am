@@ -11,11 +11,14 @@ test_agentdialog_SOURCES = test-agentdialog.c notify.h notify.c
 
 test_agentdialog_LDADD = $(top_builddir)/common/libcommon.la $(APPLET_LIBS)
 
-AM_CFLAGS = $(APPLET_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+AM_CFLAGS = $(APPLET_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
 INCLUDES = -I$(top_srcdir)/common
 
 man_MANS = bluetooth-applet.1
+
+ui_DATA = popup-menu.ui
+uidir = $(pkgdatadir)
 
 autostartdir = $(sysconfdir)/xdg/autostart
 
@@ -28,6 +31,6 @@ autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(autostart_DATA)
 
-EXTRA_DIST = $(man_MANS) $(autostart_in_in_files)
+EXTRA_DIST = $(man_MANS) $(autostart_in_in_files) $(ui_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
