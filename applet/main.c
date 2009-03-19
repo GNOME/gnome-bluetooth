@@ -62,11 +62,14 @@ static GtkBuilder *xml = NULL;
 static GtkActionGroup *devices_action_group = NULL;
 static guint devices_ui_id = 0;
 
+/* Signal callbacks */
 void settings_callback(GObject *widget, gpointer user_data);
 void browse_callback(GObject *widget, gpointer user_data);
 void bluetooth_status_callback (GObject *widget, gpointer user_data);
 void wizard_callback(GObject *widget, gpointer user_data);
 void sendto_callback(GObject *widget, gpointer user_data);
+
+static void action_set_bold (GtkUIManager *manager, GtkAction *action, const char *path);
 
 void settings_callback(GObject *widget, gpointer user_data)
 {
@@ -262,6 +265,9 @@ static GtkWidget *create_popupmenu(void)
 
 	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
 	devices_ui_id = gtk_ui_manager_new_merge_id (GTK_UI_MANAGER (object));
+	action_set_bold (GTK_UI_MANAGER (object),
+			 GTK_ACTION (gtk_builder_get_object (xml, "devices-label")),
+			 "/bluetooth-applet-popup/devices-label");
 
 	return GTK_WIDGET (gtk_builder_get_object (xml, "bluetooth-applet-popup"));
 }
@@ -325,16 +331,22 @@ on_connect_activate (GtkAction *action, gpointer data)
 }
 
 static void
-action_set_markup (GtkUIManager *manager, const char *name, const char *str)
+action_set_bold (GtkUIManager *manager, GtkAction *action, const char *path)
 {
 	GtkWidget *widget;
-	char *path;
+	char *str;
+	const char *label;
 
-	path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", name);
+	/* That sucks, but otherwise the widget might not exist */
+	gtk_ui_manager_ensure_update (manager);
+
 	widget = gtk_ui_manager_get_widget (manager, path);
-	g_free (path);
 	g_assert (widget);
+
+	label = gtk_action_get_label (action);
+	str = g_strdup_printf ("<b>%s</b>", label);
 	gtk_label_set_markup (GTK_LABEL (GTK_BIN (widget)->child), str);
+	g_free (str);
 }
 
 static void
@@ -401,15 +413,8 @@ update_device_list (GtkTreeIter *parent)
 		}
 
 		if (table != NULL && address != NULL && proxy != NULL) {
-			char *label;
-
-			if (connected != FALSE)
-				label = g_strdup_printf ("<b>%s</b>", name);
-			else
-				label = g_strdup_printf ("%s", name);
-
 			if (action == NULL) {
-				action = gtk_action_new (address, label, NULL, NULL);
+				action = gtk_action_new (address, name, NULL, NULL);
 
 				gtk_action_group_add_action (devices_action_group, action);
 				g_object_unref (action);
@@ -419,7 +424,7 @@ update_device_list (GtkTreeIter *parent)
 				g_signal_connect (G_OBJECT (action), "activate",
 						  G_CALLBACK (on_connect_activate), NULL);
 			} else {
-				gtk_action_set_label (action, label);
+				gtk_action_set_label (action, name);
 			}
 			g_object_set_data_full (G_OBJECT (action),
 						"connected", GINT_TO_POINTER (connected), NULL);
@@ -427,8 +432,13 @@ update_device_list (GtkTreeIter *parent)
 						"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
 
 			/* And now for the trick of the day */
-			action_set_markup (GTK_UI_MANAGER (object), address, label);
-			g_free (label);
+			if (connected != FALSE) {
+				char *path;
+
+				path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+				action_set_bold (GTK_UI_MANAGER (object), action, path);
+				g_free (path);
+			}
 
 			num_devices++;
 		}
