@@ -313,6 +313,18 @@ update_icon_visibility (void)
 }
 
 static void
+on_connect_activate (GtkAction *action, gpointer data)
+{
+	gboolean connected;
+	const char *path;
+
+	connected = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "connected"));
+	path = g_object_get_data (G_OBJECT (action), "device-path");
+
+	g_message ("we should %s %s", connected ? "disconnect" : "connect", path);
+}
+
+static void
 action_set_markup (GtkUIManager *manager, const char *name, const char *str)
 {
 	GtkWidget *widget;
@@ -329,6 +341,7 @@ static void
 remove_action_item (GtkAction *action, gpointer data)
 {
 	gtk_action_group_remove_action (devices_action_group, action);
+	g_object_unref (action); //FIXME ?
 }
 
 static void
@@ -359,13 +372,14 @@ update_device_list (GtkTreeIter *parent)
 		goto done;
 	}
 
-	/* Get a list of actions, and remove the one with a
+	/* Get a list of actions, and remove the ones with a
 	 * device in the list */
 	actions = gtk_action_group_list_actions (devices_action_group);
 
 	cont = gtk_tree_model_iter_children (devices_model, &iter, parent);
 	while (cont) {
 		GHashTable *table;
+		DBusGProxy *proxy;
 		const char *name, *address;
 		gboolean connected;
 		GtkAction *action;
@@ -373,6 +387,7 @@ update_device_list (GtkTreeIter *parent)
 		action = NULL;
 
 		gtk_tree_model_get (devices_model, &iter,
+				    BLUETOOTH_COLUMN_PROXY, &proxy,
 				    BLUETOOTH_COLUMN_ADDRESS, &address,
 				    BLUETOOTH_COLUMN_SERVICES, &table,
 				    BLUETOOTH_COLUMN_ALIAS, &name,
@@ -385,7 +400,7 @@ update_device_list (GtkTreeIter *parent)
 				actions = g_list_remove (actions, action);
 		}
 
-		if (table != NULL && address != NULL) {
+		if (table != NULL && address != NULL && proxy != NULL) {
 			char *label;
 
 			if (connected != FALSE)
@@ -401,15 +416,24 @@ update_device_list (GtkTreeIter *parent)
 				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), devices_ui_id,
 						       "/bluetooth-applet-popup/devices-placeholder", address, address,
 						       GTK_UI_MANAGER_MENUITEM, FALSE);
+				g_signal_connect (G_OBJECT (action), "activate",
+						  G_CALLBACK (on_connect_activate), NULL);
 			} else {
 				gtk_action_set_label (action, label);
 			}
+			g_object_set_data_full (G_OBJECT (action),
+						"connected", GINT_TO_POINTER (connected), NULL);
+			g_object_set_data_full (G_OBJECT (action),
+						"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
+
 			/* And now for the trick of the day */
 			action_set_markup (GTK_UI_MANAGER (object), address, label);
 			g_free (label);
 
 			num_devices++;
 		}
+		if (proxy != NULL)
+			g_object_unref (proxy);
 
 		cont = gtk_tree_model_iter_next (devices_model, &iter);
 	}
