@@ -66,8 +66,8 @@ static char * connectable_interfaces[] = {
 
 /* Keep in sync with above */
 #define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[2])
-#define BLUEZ_INPUT_HEADSET (connectable_interfaces[1])
-#define BLUEZ_INPUT_AUDIOSINK (connectable_interfaces[0])
+#define BLUEZ_HEADSET_INTERFACE (connectable_interfaces[1])
+#define BLUEZ_AUDIOSINK_INTERFACE (connectable_interfaces[0])
 
 static DBusGConnection *connection = NULL;
 static BluetoothClient *bluetooth_client = NULL;
@@ -1319,7 +1319,7 @@ gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 typedef struct {
 	BluetoothClientConnectFunc func;
 	gpointer data;
-	gboolean did_audiosink;
+	gboolean did_headset;
 } ConnectData;
 
 static void connect_input_callback(DBusGProxy *proxy,
@@ -1344,14 +1344,13 @@ static void connect_audio_callback(DBusGProxy *proxy,
 {
 	ConnectData *conndata = user_data;
 	GError *error = NULL;
-	gboolean got_error;
 
-	got_error = dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
+	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
 
 	if (error != NULL)
 		g_error_free(error);
 
-	if (conndata->did_audiosink || got_error == FALSE) {
+	if (conndata->did_headset) {
 		if (conndata->func)
 			conndata->func(conndata->data);
 
@@ -1364,10 +1363,10 @@ static void connect_audio_callback(DBusGProxy *proxy,
 		new_conndata = g_new0 (ConnectData, 1);
 		new_conndata->func = conndata->func;
 		new_conndata->data = conndata->data;
-		new_conndata->did_audiosink = TRUE;
+		new_conndata->did_headset = TRUE;
 
 		new_proxy = dbus_g_proxy_new_from_proxy(proxy,
-						    BLUEZ_INPUT_HEADSET, NULL);
+						    BLUEZ_AUDIOSINK_INTERFACE, NULL);
 		g_object_unref (proxy);
 		call = dbus_g_proxy_begin_call(new_proxy, "Connect",
 					       connect_audio_callback, new_conndata, g_free,
@@ -1418,7 +1417,7 @@ gboolean bluetooth_client_connect_audio(BluetoothClient *client,
 				BluetoothClientConnectFunc func, gpointer data)
 {
 	return bluetooth_client_connect_service(client, device,
-						BLUEZ_INPUT_AUDIOSINK,
+						BLUEZ_HEADSET_INTERFACE,
 						func, data);
 }
 
