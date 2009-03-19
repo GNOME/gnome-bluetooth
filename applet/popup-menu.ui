@@ -8,14 +8,14 @@
 			<object class="GtkActionGroup" id="killswitch-action-group">
 				<child>
 					<object class="GtkAction" id="killswitch-label">
-						<property name="label" translatable="yes">Checking Bluetooth status</property>
+						<property name="label" translatable="yes">Bluetooth: Checking</property>
 						<property name="sensitive">false</property>
 						<property name="visible">false</property>
 					</object>
 				</child>
 				<child>
 					<object class="GtkAction" id="killswitch">
-						<property name="label" translatable="yes">Turn _Off Bluetooth</property>
+						<property name="label" translatable="no">Turn Off Bluetooth</property>
 						<property name="visible">false</property>
 						<signal name="activate" handler="bluetooth_status_callback"/>
 					</object>
