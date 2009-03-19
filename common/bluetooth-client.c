@@ -1344,26 +1344,33 @@ static void connect_audio_callback(DBusGProxy *proxy,
 {
 	ConnectData *conndata = user_data;
 	GError *error = NULL;
+	gboolean got_error;
 
-	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
+	got_error = dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
 
 	if (error != NULL)
 		g_error_free(error);
 
-	if (conndata->did_audiosink) {
+	if (conndata->did_audiosink || got_error == FALSE) {
 		if (conndata->func)
 			conndata->func(conndata->data);
 
 		g_object_unref(proxy);
 	} else {
 		DBusGProxy *new_proxy;
+		ConnectData *new_conndata;
 
-		conndata->did_audiosink = TRUE;
+		/* the conndata will be freed when we return */
+		new_conndata = g_new0 (ConnectData, 1);
+		new_conndata->func = conndata->func;
+		new_conndata->data = conndata->data;
+		new_conndata->did_audiosink = TRUE;
+
 		new_proxy = dbus_g_proxy_new_from_proxy(proxy,
 						    BLUEZ_INPUT_HEADSET, NULL);
 		g_object_unref (proxy);
 		call = dbus_g_proxy_begin_call(new_proxy, "Connect",
-					       connect_audio_callback, conndata, g_free,
+					       connect_audio_callback, new_conndata, g_free,
 					       G_TYPE_INVALID);
 	}
 }
