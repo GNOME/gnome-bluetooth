@@ -281,6 +281,10 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 
 static void connect_callback(gpointer user_data)
 {
+	GtkAssistant *assistant = user_data;
+
+	gtk_widget_hide (label_passkey_help);
+	gtk_assistant_set_page_complete(assistant, page_setup, TRUE);
 }
 
 static void create_callback(const char *path, gpointer user_data)
@@ -313,9 +317,14 @@ static void create_callback(const char *path, gpointer user_data)
 					target_type == BLUETOOTH_TYPE_OTHER_AUDIO) {
 			bluetooth_client_connect_audio(client, path,
 						connect_callback, assistant);
+		} else {
+			complete = TRUE;
 		}
-
-		complete = TRUE;
+		if (complete == FALSE) {
+			gtk_label_set_text (GTK_LABEL (label_passkey_help),
+					    _("Please wait while setting up the device..."));
+			gtk_widget_show (label_passkey_help);
+		}
 	} else {
 		/* translators:
 		 * The '%s' is the device name, for example:
