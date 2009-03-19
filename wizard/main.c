@@ -308,6 +308,11 @@ static void create_callback(const char *path, gpointer user_data)
 					target_type == BLUETOOTH_TYPE_MOUSE) {
 			bluetooth_client_connect_input(client, path,
 						connect_callback, assistant);
+		} else if (target_type == BLUETOOTH_TYPE_HEADSET ||
+					target_type == BLUETOOTH_TYPE_HEADPHONES ||
+					target_type == BLUETOOTH_TYPE_OTHER_AUDIO) {
+			bluetooth_client_connect_audio(client, path,
+						connect_callback, assistant);
 		}
 
 		complete = TRUE;
