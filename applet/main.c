@@ -313,6 +313,19 @@ update_icon_visibility (void)
 }
 
 static void
+action_set_markup (GtkUIManager *manager, const char *name, const char *str)
+{
+	GtkWidget *widget;
+	char *path;
+
+	path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", name);
+	widget = gtk_ui_manager_get_widget (manager, path);
+	g_free (path);
+	g_assert (widget);
+	gtk_label_set_markup (GTK_LABEL (GTK_BIN (widget)->child), str);
+}
+
+static void
 remove_action_item (GtkAction *action, gpointer data)
 {
 	gtk_action_group_remove_action (devices_action_group, action);
@@ -375,12 +388,10 @@ update_device_list (GtkTreeIter *parent)
 		if (table != NULL && address != NULL) {
 			char *label;
 
-			/* FIXME we should have a bold label here instead
-			 * try with gtk_ui_manager_get_widget() */
 			if (connected != FALSE)
-				label = g_strdup_printf (_("%s (Connected)"), name);
+				label = g_strdup_printf ("<b>%s</b>", name);
 			else
-				label = g_strdup_printf (_("%s (Disconnected)"), name);
+				label = g_strdup_printf ("%s", name);
 
 			if (action == NULL) {
 				action = gtk_action_new (address, label, NULL, NULL);
@@ -393,6 +404,8 @@ update_device_list (GtkTreeIter *parent)
 			} else {
 				gtk_action_set_label (action, label);
 			}
+			/* And now for the trick of the day */
+			action_set_markup (GTK_UI_MANAGER (object), address, label);
 			g_free (label);
 
 			num_devices++;
