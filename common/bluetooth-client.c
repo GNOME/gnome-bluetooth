@@ -66,6 +66,8 @@ static char * connectable_interfaces[] = {
 
 /* Keep in sync with above */
 #define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[2])
+#define BLUEZ_INPUT_HEADSET (connectable_interfaces[1])
+#define BLUEZ_INPUT_AUDIOSINK (connectable_interfaces[0])
 
 static DBusGConnection *connection = NULL;
 static BluetoothClient *bluetooth_client = NULL;
@@ -1317,6 +1319,7 @@ gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 typedef struct {
 	BluetoothClientConnectFunc func;
 	gpointer data;
+	gboolean did_audiosink;
 } ConnectData;
 
 static void connect_input_callback(DBusGProxy *proxy,
@@ -1336,11 +1339,41 @@ static void connect_input_callback(DBusGProxy *proxy,
 	g_object_unref(proxy);
 }
 
+static void connect_audio_callback(DBusGProxy *proxy,
+				   DBusGProxyCall *call, void *user_data)
+{
+	ConnectData *conndata = user_data;
+	GError *error = NULL;
+
+	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
+
+	if (error != NULL)
+		g_error_free(error);
+
+	if (conndata->did_audiosink) {
+		if (conndata->func)
+			conndata->func(conndata->data);
+
+		g_object_unref(proxy);
+	} else {
+		DBusGProxy *new_proxy;
+
+		conndata->did_audiosink = TRUE;
+		new_proxy = dbus_g_proxy_new_from_proxy(proxy,
+						    BLUEZ_INPUT_HEADSET, NULL);
+		g_object_unref (proxy);
+		call = dbus_g_proxy_begin_call(new_proxy, "Connect",
+					       connect_audio_callback, conndata, g_free,
+					       G_TYPE_INVALID);
+	}
+}
+
 static gboolean bluetooth_client_connect_service(BluetoothClient *client,
 				const char *device, const char *iface_name,
 				BluetoothClientConnectFunc func, gpointer data)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	DBusGProxyCallNotify notify_func;
 	ConnectData *conndata;
 	DBusGProxy *proxy;
 	DBusGProxyCall *call;
@@ -1361,11 +1394,25 @@ static gboolean bluetooth_client_connect_service(BluetoothClient *client,
 	conndata->func = func;
 	conndata->data = data;
 
+	if (g_str_equal (iface_name, BLUEZ_INPUT_INTERFACE))
+		notify_func = connect_input_callback;
+	else
+		notify_func = connect_audio_callback;
+
 	call = dbus_g_proxy_begin_call(proxy, "Connect",
-				connect_input_callback, conndata, g_free,
-							G_TYPE_INVALID);
+				       notify_func, conndata, g_free,
+				       G_TYPE_INVALID);
 
 	return TRUE;
+}
+
+gboolean bluetooth_client_connect_audio(BluetoothClient *client,
+				const char *device,
+				BluetoothClientConnectFunc func, gpointer data)
+{
+	return bluetooth_client_connect_service(client, device,
+						BLUEZ_INPUT_AUDIOSINK,
+						func, data);
 }
 
 gboolean bluetooth_client_connect_input(BluetoothClient *client,

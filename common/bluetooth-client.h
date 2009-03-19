@@ -105,7 +105,10 @@ typedef void (*BluetoothClientConnectFunc) (gpointer data);
 
 gboolean bluetooth_client_connect_input(BluetoothClient *client,
 				const char *device,
-				BluetoothClientConnectFunc, gpointer data);
+				BluetoothClientConnectFunc func, gpointer data);
+gboolean bluetooth_client_connect_audio(BluetoothClient *client,
+				const char *device,
+				BluetoothClientConnectFunc func, gpointer data);
 
 const gchar *bluetooth_type_to_string(guint type);
 gboolean bluetooth_verify_address (const char *bdaddr);
