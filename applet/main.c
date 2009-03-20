@@ -253,7 +253,7 @@ static GtkWidget *create_popupmenu(void)
 
 	xml = gtk_builder_new ();
 	if (gtk_builder_add_from_file (xml, "popup-menu.ui", NULL) == 0)
-		gtk_builder_add_from_file (xml, PKGDATADIR "popup-menu.ui", NULL);
+		gtk_builder_add_from_file (xml, PKGDATADIR "/popup-menu.ui", NULL);
 
 	if (killswitch != NULL) {
 		GObject *object;
