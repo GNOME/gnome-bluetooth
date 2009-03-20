@@ -231,21 +231,20 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 		g_assert_not_reached ();
 	}
 
-	object = gtk_builder_get_object (xml, "killswitch");
-	gtk_action_set_visible (GTK_ACTION (object), sensitive);
+	object = gtk_builder_get_object (xml, "killswitch-label");
 	gtk_action_set_label (GTK_ACTION (object), _(status_label));
 
+	object = gtk_builder_get_object (xml, "killswitch");
+	gtk_action_set_visible (GTK_ACTION (object), sensitive);
+	gtk_action_set_label (GTK_ACTION (object), _(label));
+
 	if (sensitive != FALSE) {
-		object = gtk_builder_get_object (xml, "killswitch-label");
-		g_signal_handlers_block_by_func (object,
-						 G_CALLBACK (bluetooth_status_callback),
-						 NULL);
 		gtk_action_set_label (GTK_ACTION (object), _(label));
 		g_object_set_data (object, "bt-active", GINT_TO_POINTER (bstate));
-		g_signal_handlers_unblock_by_func (object,
-						   G_CALLBACK (bluetooth_status_callback),
-						   NULL);
 	}
+
+	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
+	gtk_ui_manager_ensure_update (GTK_UI_MANAGER (object));
 }
 
 static GtkWidget *create_popupmenu(void)
@@ -578,8 +577,6 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-	menu = create_popupmenu();
-
 	killswitch = bluetooth_killswitch_new ();
 	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE) {
 		g_object_unref (killswitch);
@@ -588,6 +585,8 @@ int main(int argc, char *argv[])
 		g_signal_connect (G_OBJECT (killswitch), "state-changed",
 				  G_CALLBACK (killswitch_state_changed), NULL);
 	}
+
+	menu = create_popupmenu();
 
 	client = bluetooth_client_new();
 
