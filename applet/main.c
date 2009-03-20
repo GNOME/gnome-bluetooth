@@ -354,7 +354,6 @@ static void
 remove_action_item (GtkAction *action, gpointer data)
 {
 	gtk_action_group_remove_action (devices_action_group, action);
-	g_object_unref (action); //FIXME ?
 }
 
 static void
