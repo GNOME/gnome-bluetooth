@@ -826,6 +826,11 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 static void
 bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 {
+	/* Use to calculate the maximum value for the 
+	 * device-type-filter value */
+	guint i;
+	int max_filter_val;
+
 	g_type_class_add_private(klass, sizeof(BluetoothChooserPrivate));
 
 	G_OBJECT_CLASS(klass)->finalize = bluetooth_chooser_finalize;
@@ -929,9 +934,11 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	 *
 	 * FIXME
 	 **/
+	for (i = 0, max_filter_val = 0 ; i < _BLUETOOTH_TYPE_NUM_TYPES; i++)
+		max_filter_val += 1 << i;
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_TYPE_FILTER, g_param_spec_int ("device-type-filter", NULL, NULL,
-										    1, 1 << (_BLUETOOTH_TYPE_NUM_TYPES - 1), 1, G_PARAM_READWRITE));
+										    1, max_filter_val, 1, G_PARAM_READWRITE));
 	/**
 	 * BluetoothChooser:device-category-filter:
 	 *
