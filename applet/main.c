@@ -164,7 +164,7 @@ void bluetooth_status_callback (GObject *widget, gpointer user_data)
 	GObject *object;
 	gboolean active;
 
-	object = gtk_builder_get_object (xml, "killswitch-label");
+	object = gtk_builder_get_object (xml, "killswitch");
 	active = GPOINTER_TO_INT (g_object_get_data (object, "bt-active"));
 	active = !active;
 	bluetooth_killswitch_set_state (killswitch,
