@@ -79,6 +79,7 @@ dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gconf-2.0
+		  gmodule-export-2.0
 		  gtk+-2.0 >= $GTK_REQUIRED
 		  libnotify >= $NOTIFY_REQUIRED
 		  unique-1.0)
