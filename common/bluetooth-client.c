@@ -1447,3 +1447,60 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 	return TRUE;
 }
 
+static void disconnect_callback(DBusGProxy *proxy,
+				DBusGProxyCall *call,
+				void *user_data)
+{
+	ConnectData *conndata = user_data;
+	GError *error = NULL;
+
+	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
+
+	if (error != NULL)
+		g_error_free(error);
+
+	if (conndata->func)
+		conndata->func(conndata->data);
+
+	g_object_unref(proxy);
+}
+
+gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
+					      const char *device,
+					      BluetoothClientConnectFunc func,
+					      gpointer data)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	ConnectData *conndata;
+	DBusGProxy *proxy;
+	DBusGProxyCall *call;
+	GHashTable *table;
+	GtkTreeIter iter;
+
+	DBG("client %p", client);
+
+	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
+		return FALSE;
+
+	gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
+			   BLUETOOTH_COLUMN_PROXY, &proxy,
+			   BLUETOOTH_COLUMN_SERVICES, &table,
+			   -1);
+	if (table == NULL || proxy == NULL) {
+		if (proxy != NULL)
+			g_object_unref (proxy);
+		return FALSE;
+	}
+
+	conndata = g_new0 (ConnectData, 1);
+
+	conndata->func = func;
+	conndata->data = data;
+
+	call = dbus_g_proxy_begin_call(proxy, "Disconnect",
+				       disconnect_callback, conndata, g_free,
+				       G_TYPE_INVALID);
+
+	return TRUE;
+}
+

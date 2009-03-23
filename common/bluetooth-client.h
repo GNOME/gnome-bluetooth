@@ -107,6 +107,10 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 					  const char *device,
 					  BluetoothClientConnectFunc func,
 					  gpointer data);
+gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
+					      const char *device,
+					      BluetoothClientConnectFunc func,
+					      gpointer data);
 
 const gchar *bluetooth_type_to_string(guint type);
 gboolean bluetooth_verify_address (const char *bdaddr);
