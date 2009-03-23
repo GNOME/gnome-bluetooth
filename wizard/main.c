@@ -308,22 +308,12 @@ static void create_callback(const char *path, gpointer user_data)
 
 		bluetooth_client_set_trusted(client, path, TRUE);
 
-		if (target_type == BLUETOOTH_TYPE_KEYBOARD ||
-					target_type == BLUETOOTH_TYPE_MOUSE) {
-			bluetooth_client_connect_input(client, path,
-						connect_callback, assistant);
-		} else if (target_type == BLUETOOTH_TYPE_HEADSET ||
-					target_type == BLUETOOTH_TYPE_HEADPHONES ||
-					target_type == BLUETOOTH_TYPE_OTHER_AUDIO) {
-			bluetooth_client_connect_audio(client, path,
-						connect_callback, assistant);
-		} else {
-			complete = TRUE;
-		}
-		if (complete == FALSE) {
+		if (bluetooth_client_connect_service(client, path, connect_callback, assistant) != FALSE) {
 			gtk_label_set_text (GTK_LABEL (label_passkey_help),
 					    _("Please wait while setting up the device..."));
 			gtk_widget_show (label_passkey_help);
+		} else {
+			complete = TRUE;
 		}
 	} else {
 		/* translators:
