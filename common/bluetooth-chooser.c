@@ -467,6 +467,8 @@ static void default_adapter_changed (GObject    *gobject,
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
 							filter_func, self, NULL);
 		gtk_tree_view_set_model (GTK_TREE_VIEW(priv->treeview), priv->filter);
+		g_signal_connect (priv->filter, "row-changed",
+				  G_CALLBACK (device_model_row_changed), self);
 		g_object_unref (priv->filter);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
@@ -477,9 +479,6 @@ static void default_adapter_changed (GObject    *gobject,
 			bluetooth_chooser_start_discovery (self);
 			priv->disco_rq = FALSE;
 		}
-
-		g_signal_connect (priv->adapter_model, "row-changed",
-				  G_CALLBACK (device_model_row_changed), self);
 	}
 }
 
@@ -556,10 +555,9 @@ create_treeview (BluetoothChooser *self)
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
 							filter_func, self, NULL);
 		gtk_tree_view_set_model (GTK_TREE_VIEW(tree), priv->filter);
-		g_object_unref (priv->filter);
-
-		g_signal_connect (priv->adapter_model, "row-changed",
+		g_signal_connect (priv->filter, "row-changed",
 				  G_CALLBACK (device_model_row_changed), self);
+		g_object_unref (priv->filter);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (tree), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->search_button), FALSE);
