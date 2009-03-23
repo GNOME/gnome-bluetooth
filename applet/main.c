@@ -328,7 +328,10 @@ on_connect_activate (GtkAction *action, gpointer data)
 	connected = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "connected"));
 	path = g_object_get_data (G_OBJECT (action), "device-path");
 
-	g_message ("we should %s %s", connected ? "disconnect" : "connect", path);
+	if (connected == FALSE)
+		bluetooth_client_connect_service (client, path, NULL, NULL);
+	else
+		bluetooth_client_disconnect_service (client, path, NULL, NULL);
 }
 
 static void
