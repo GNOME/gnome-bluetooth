@@ -430,6 +430,12 @@ static void device_changed(DBusGProxy *device, const char *property,
 
 		gtk_tree_store_set(priv->store, &iter,
 				BLUETOOTH_COLUMN_CONNECTED, connected, -1);
+	} else if (g_str_equal (property, "UUIDs") == TRUE) {
+		GHashTable *services;
+
+		services = device_list_nodes (device, client, TRUE);
+		gtk_tree_store_set(priv->store, &iter,
+				   BLUETOOTH_COLUMN_SERVICES, services, -1);
 	}
 }
 
