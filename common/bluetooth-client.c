@@ -1380,59 +1380,70 @@ static void connect_audio_callback(DBusGProxy *proxy,
 	}
 }
 
-static gboolean bluetooth_client_connect_service(BluetoothClient *client,
-				const char *device, const char *iface_name,
-				BluetoothClientConnectFunc func, gpointer data)
+gboolean bluetooth_client_connect_service(BluetoothClient *client,
+					  const char *device,
+					  BluetoothClientConnectFunc func,
+					  gpointer data)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	DBusGProxyCallNotify notify_func;
 	ConnectData *conndata;
 	DBusGProxy *proxy;
 	DBusGProxyCall *call;
+	GHashTable *table;
+	GtkTreeIter iter;
+	const char *iface_name;
 
 	DBG("client %p", client);
 
-	proxy = dbus_g_proxy_new_from_proxy(priv->manager,
-						iface_name, device);
-	if (proxy == NULL)
+	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
 		return FALSE;
 
-	conndata = g_try_new0(ConnectData, 1);
-	if (conndata == NULL) {
-		g_object_unref(proxy);
+	gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
+			   BLUETOOTH_COLUMN_SERVICES, &table,
+			   -1);
+	if (table == NULL)
+		return FALSE;
+
+	conndata = g_new0 (ConnectData, 1);
+
+	if (g_hash_table_lookup_extended (table, BLUEZ_INPUT_INTERFACE, NULL, NULL) != FALSE) {
+		notify_func = connect_input_callback;
+		iface_name = BLUEZ_INPUT_INTERFACE;
+	} else if (g_hash_table_lookup_extended (table, BLUEZ_HEADSET_INTERFACE, NULL, NULL) != FALSE &&
+		   g_hash_table_lookup_extended (table, BLUEZ_AUDIOSINK_INTERFACE, NULL, NULL) != FALSE) {
+		notify_func = connect_audio_callback;
+		iface_name = BLUEZ_HEADSET_INTERFACE;
+	} else if (g_hash_table_lookup_extended (table, BLUEZ_HEADSET_INTERFACE, NULL, NULL) != FALSE) {
+		notify_func = connect_audio_callback;
+		iface_name = BLUEZ_HEADSET_INTERFACE;
+		/* Don't go and connect to the audiosink, there's none */
+		conndata->did_headset = TRUE;
+	} else if (g_hash_table_lookup_extended (table, BLUEZ_AUDIOSINK_INTERFACE, NULL, NULL) != FALSE) {
+		notify_func = connect_audio_callback;
+		iface_name = BLUEZ_AUDIOSINK_INTERFACE;
+		/* Don't try to connect to audiosink again */
+		conndata->did_headset = TRUE;
+	} else {
+		g_printerr("No supported services on the '%s' device\n", device);
+		g_free (conndata);
+		return FALSE;
+	}
+
+	proxy = dbus_g_proxy_new_from_proxy(priv->manager,
+						iface_name, device);
+	if (proxy == NULL) {
+		g_free (conndata);
 		return FALSE;
 	}
 
 	conndata->func = func;
 	conndata->data = data;
 
-	if (g_str_equal (iface_name, BLUEZ_INPUT_INTERFACE))
-		notify_func = connect_input_callback;
-	else
-		notify_func = connect_audio_callback;
-
 	call = dbus_g_proxy_begin_call(proxy, "Connect",
 				       notify_func, conndata, g_free,
 				       G_TYPE_INVALID);
 
 	return TRUE;
-}
-
-gboolean bluetooth_client_connect_audio(BluetoothClient *client,
-				const char *device,
-				BluetoothClientConnectFunc func, gpointer data)
-{
-	return bluetooth_client_connect_service(client, device,
-						BLUEZ_HEADSET_INTERFACE,
-						func, data);
-}
-
-gboolean bluetooth_client_connect_input(BluetoothClient *client,
-				const char *device,
-				BluetoothClientConnectFunc func, gpointer data)
-{
-	return bluetooth_client_connect_service(client, device,
-						BLUEZ_INPUT_INTERFACE,
-						func, data);
 }
 
