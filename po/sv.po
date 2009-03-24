@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-19 23:14+0100\n"
-"PO-Revision-Date: 2009-03-19 23:16+0100\n"
+"POT-Creation-Date: 2009-03-24 10:43+0100\n"
+"PO-Revision-Date: 2009-03-24 10:44+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -74,8 +74,8 @@ msgid "Tablet"
 msgstr "Ritbord"
 
 #: ../common/bluetooth-client.c:129
-#: ../common/bluetooth-chooser.c:92
-#: ../common/bluetooth-chooser.c:124
+#: ../common/bluetooth-chooser.c:99
+#: ../common/bluetooth-chooser.c:122
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -84,65 +84,73 @@ msgstr "Okänd"
 msgid "Click to select device..."
 msgstr "Klicka för att välja enhet..."
 
-#: ../common/bluetooth-chooser.c:82
+#: ../common/bluetooth-chooser.c:89
 msgid "All categories"
 msgstr "Alla kategorier"
 
-#: ../common/bluetooth-chooser.c:84
+#: ../common/bluetooth-chooser.c:91
 msgid "Paired"
 msgstr "Ihopparad"
 
-#: ../common/bluetooth-chooser.c:86
+#: ../common/bluetooth-chooser.c:93
 msgid "Trusted"
 msgstr "Pålitlig"
 
-#: ../common/bluetooth-chooser.c:88
+#: ../common/bluetooth-chooser.c:95
 msgid "Not paired or trusted"
 msgstr "Inte ihopparad eller pålitlig"
 
-#: ../common/bluetooth-chooser.c:90
+#: ../common/bluetooth-chooser.c:97
 msgid "Paired or trusted"
 msgstr "Ihopparad eller pålitlig"
 
-#: ../common/bluetooth-chooser.c:465
+#: ../common/bluetooth-chooser.c:513
 msgid "Device"
 msgstr "Enhet"
 
-#: ../common/bluetooth-chooser.c:493
+#: ../common/bluetooth-chooser.c:541
 msgid "Type"
 msgstr "Typ"
 
 #. The search button
-#: ../common/bluetooth-chooser.c:581
+#: ../common/bluetooth-chooser.c:629
 msgid "S_earch"
 msgstr "S_ök"
 
-#: ../common/bluetooth-chooser.c:586
+#: ../common/bluetooth-chooser.c:634
 msgid "Search for Bluetooth devices"
 msgstr "Sök efter blåtandsenheter"
 
 #. The filters
-#: ../common/bluetooth-chooser.c:604
+#: ../common/bluetooth-chooser.c:652
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Visa endast blåtandsenheter med..."
 
 #. The device category filter
-#: ../common/bluetooth-chooser.c:624
+#: ../common/bluetooth-chooser.c:672
 msgid "Device _category:"
 msgstr "Enhets_kategori:"
 
-#: ../common/bluetooth-chooser.c:639
+#: ../common/bluetooth-chooser.c:687
 msgid "Select the device category to filter above list"
 msgstr "Välj enhetskategori för att filtrera ovanstående lista"
 
 #. The device type filter
-#: ../common/bluetooth-chooser.c:653
+#: ../common/bluetooth-chooser.c:701
 msgid "Device _type:"
 msgstr "Enhets_typ:"
 
-#: ../common/bluetooth-chooser.c:668
+#: ../common/bluetooth-chooser.c:722
 msgid "Select the device type to filter above list"
 msgstr "Välj enhetstyp för att filtrera ovanstående lista"
+
+#: ../common/bluetooth-chooser.c:728
+msgid "Input devices (mice, keyboards, ...)"
+msgstr "Inmatningsenheter (möss, tangentbord, ...)"
+
+#: ../common/bluetooth-chooser.c:732
+msgid "Headphones, headsets and other audio devices"
+msgstr "Hörlurar, headsets och andra ljudenheter"
 
 #: ../applet/main.c:99
 msgid "Select Device to Browse"
@@ -176,7 +184,7 @@ msgstr "Inaktivera Bluetooth"
 msgid "Bluetooth: On"
 msgstr "Bluetooth: På"
 
-#: ../applet/main.c:577
+#: ../applet/main.c:580
 msgid "Bluetooth Applet"
 msgstr "Panelprogram för Bluetooth"
 
@@ -425,7 +433,7 @@ msgstr "Ihopparning med \"%s\" är färdig"
 msgid "Successfully paired with '%s'"
 msgstr "Ihopparning med \"%s\" lyckades"
 
-#: ../wizard/main.c:325
+#: ../wizard/main.c:313
 msgid "Please wait while setting up the device..."
 msgstr "Vänta under tiden enheten konfigureras..."
 
@@ -433,7 +441,7 @@ msgstr "Vänta under tiden enheten konfigureras..."
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:333
+#: ../wizard/main.c:323
 #, c-format
 msgid "Pairing with '%s' failed"
 msgstr "Ihopparning med \"%s\" misslyckades"
@@ -442,20 +450,20 @@ msgstr "Ihopparning med \"%s\" misslyckades"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:390
+#: ../wizard/main.c:380
 #, c-format
 msgid "Connecting to '%s' now..."
 msgstr "Ansluter nu till \"%s\" ..."
 
-#: ../wizard/main.c:455
+#: ../wizard/main.c:445
 msgid "Introduction"
 msgstr "Introduktion"
 
-#: ../wizard/main.c:456
+#: ../wizard/main.c:446
 msgid "Welcome to the Bluetooth device setup wizard"
 msgstr "Välkommen till konfigurationsguiden för blåtandsenheter"
 
-#: ../wizard/main.c:459
+#: ../wizard/main.c:449
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth enabled devices for use with this computer.\n"
 "\n"
@@ -463,36 +471,36 @@ msgstr ""
 "Enhetsguiden kommer att hjälpa dig genom processen att konfigurera blåtandsenheter för användning med denna dator.\n"
 "\n"
 
-#: ../wizard/main.c:682
+#: ../wizard/main.c:672
 msgid "Device search"
 msgstr "Enhetssökning"
 
 #. The selector
-#: ../wizard/main.c:685
+#: ../wizard/main.c:675
 msgid "Select the device you want to setup"
 msgstr "Välj enheten som du vill konfigurera"
 
-#: ../wizard/main.c:704
+#: ../wizard/main.c:694
 msgid "Passkey _Options..."
 msgstr "Alternativ för lösennyc_kel..."
 
-#: ../wizard/main.c:719
+#: ../wizard/main.c:709
 msgid "Device setup"
 msgstr "Enhetskonfiguration"
 
-#: ../wizard/main.c:720
+#: ../wizard/main.c:710
 msgid "Setting up new device"
 msgstr "Konfigurera ny enhet"
 
-#: ../wizard/main.c:747
+#: ../wizard/main.c:737
 msgid "Summary"
 msgstr "Sammandrag"
 
-#: ../wizard/main.c:748
+#: ../wizard/main.c:738
 msgid "Successfully configured new device"
 msgstr "Konfiguration av ny enhet lyckades"
 
-#: ../wizard/main.c:758
+#: ../wizard/main.c:748
 msgid "Bluetooth Device Wizard"
 msgstr "Guide för blåtandsenhet"
 
