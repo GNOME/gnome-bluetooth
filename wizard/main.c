@@ -36,8 +36,6 @@
 #include <bluetooth-chooser.h>
 #include <bluetooth-agent.h>
 
-#include "helper.h"
-
 #define AGENT_PATH "/org/bluez/agent/wizard"
 #define PIN_CODE_DB "pin-code-database.txt"
 

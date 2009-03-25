@@ -2,12 +2,11 @@
 noinst_LTLIBRARIES = libcommon.la
 lib_LTLIBRARIES = libgnome-bluetooth.la
 
-libcommon_la_SOURCES = helper.h helper.c \
+libcommon_la_SOURCES = \
 		bluetooth-client.h bluetooth-client.c \
 		bluetooth-agent.h bluetooth-agent.c \
 		bluetooth-killswitch.h bluetooth-killswitch.c \
 		obex-agent.h obex-agent.c \
-		helper.c helper.h \
 		bluetooth-enums.h
 libcommon_la_LIBADD = $(COMMON_LIBS)
 libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
