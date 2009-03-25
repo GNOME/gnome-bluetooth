@@ -642,7 +642,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 
 	/* The top level label */
 	priv->label = gtk_label_new ("");
-	gtk_widget_show (priv->label);
+	gtk_widget_set_no_show_all (priv->label, TRUE);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->label, FALSE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (priv->label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (priv->label), 0, 0.5);
@@ -935,6 +935,9 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 	}
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
+		break;
+	case PROP_SHOW_CONNECTED:
+		g_value_set_boolean (value, priv->show_connected);
 		break;
 	case PROP_SHOW_SEARCH:
 		g_value_set_boolean (value, priv->show_search);
