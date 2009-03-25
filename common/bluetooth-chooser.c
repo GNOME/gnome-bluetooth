@@ -690,6 +690,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (self), vbox, FALSE, TRUE, 0);
 	priv->filters_vbox = vbox;
+	gtk_widget_set_no_show_all (priv->filters_vbox, TRUE);
 
 	/* The filters */
 	str = g_strdup_printf ("<b>%s</b>", _("Show Only Bluetooth Devices With..."));
@@ -921,7 +922,7 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		g_value_set_uint (value, bluetooth_chooser_get_selected_device_type (self));
 		break;
 	case PROP_DEVICE_SELECTED_IS_CONNECTED:
-		g_value_set_uint (value, bluetooth_chooser_get_selected_device_is_connected (self));
+		g_value_set_boolean (value, bluetooth_chooser_get_selected_device_is_connected (self));
 		break;
 	case PROP_DEVICE_SELECTED_PROXY: {
 		GtkTreeIter iter;
