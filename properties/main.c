@@ -118,7 +118,7 @@ static void about_callback(GtkWidget *item, GtkWindow *parent)
 static GtkWidget *create_window(GtkWidget *notebook)
 {
 	GtkWidget *window;
-	GtkWidget *widget;
+/*	GtkWidget *widget; */
 	GtkWidget *vbox;
 	GtkWidget *buttonbox;
 	GtkWidget *button;
@@ -130,7 +130,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	g_signal_connect(G_OBJECT(window), "delete-event",
 					G_CALLBACK(delete_callback), NULL);
 
-	vbox = gtk_vbox_new(FALSE, 12);
+	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 12);
 	gtk_container_add(GTK_CONTAINER(window), vbox);
 
@@ -158,11 +158,12 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 #endif
 
+#if 0
 	widget = create_general();
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), widget, NULL);
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(notebook),
 						widget, _("General"));
-
+#endif
 	gtk_widget_show_all(window);
 
 	return window;
@@ -216,9 +217,11 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-	setup_general();
+/*	setup_general(); */
 
 	notebook = gtk_notebook_new();
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 
 	setup_adapter(GTK_NOTEBOOK(notebook));
 
@@ -231,7 +234,7 @@ int main(int argc, char *argv[])
 
 	cleanup_adapter();
 
-	cleanup_general();
+/*	cleanup_general(); */
 
 	g_object_unref(app);
 

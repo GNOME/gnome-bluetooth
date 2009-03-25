@@ -40,10 +40,10 @@
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
+static BluetoothKillswitch *killswitch;
 
-static GtkWidget *killswitch_page;
-static BluetoothKillswitch *killswitch = NULL;
-static gboolean has_killswitch_page = FALSE;
+#define KILLSWITCH_PAGE_NUM(n) (gtk_notebook_get_n_pages (n) - 2)
+#define NO_ADAPTERS_PAGE_NUM(n) (-1)
 
 typedef struct adapter_data adapter_data;
 struct adapter_data {
@@ -62,13 +62,12 @@ struct adapter_data {
 	guint signal_powered;
 	gboolean powered;
 	gboolean discoverable;
+	gboolean is_default;
 	guint timeout_value;
 	int name_changed;
-	gboolean bring_forward;
 };
 
 static void update_visibility(adapter_data *adapter);
-static GtkWidget * create_killswitch_page (void);
 
 static void block_signals(adapter_data *adapter)
 {
@@ -84,19 +83,6 @@ static void unblock_signals(adapter_data *adapter)
 						adapter->signal_discoverable);
 	g_signal_handler_unblock(adapter->button_powered,
 						adapter->signal_powered);
-}
-
-static void update_tab_label(GtkNotebook *notebook,
-					GtkWidget *child, const char *name)
-{
-	GtkWidget *label;
-
-	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(notebook), child,
-				name && name[0] != '\0' ? name : _("Unnamed Adapter"));
-
-	label = gtk_notebook_get_tab_label(GTK_NOTEBOOK(notebook), child);
-	gtk_label_set_max_width_chars(GTK_LABEL(label), 20);
-	gtk_label_set_ellipsize(GTK_LABEL(label), PANGO_ELLIPSIZE_END);
 }
 
 static void powered_changed_cb(GtkWidget *button, gpointer user_data)
@@ -392,12 +378,11 @@ static void create_adapter(adapter_data *adapter)
 	adapter->discoverable = discoverable;
 	adapter->timeout_value = timeout;
 
-	mainbox = gtk_vbox_new(FALSE, 18);
+	mainbox = gtk_vbox_new(FALSE, 6);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
 
 	page_num = gtk_notebook_prepend_page(GTK_NOTEBOOK(adapter->notebook),
 							mainbox, NULL);
-	update_tab_label(GTK_NOTEBOOK(adapter->notebook), mainbox, name);
 
 	adapter->child = mainbox;
 
@@ -411,7 +396,8 @@ static void create_adapter(adapter_data *adapter)
 	adapter->button_powered = button;
 	adapter->signal_powered = g_signal_connect(G_OBJECT(button), "toggled",
 						   G_CALLBACK(powered_changed_cb), adapter);
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
+	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE)
+		gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
 	/* The discoverable checkbox */
 	button = gtk_check_button_new_with_mnemonic (_("_Discoverable"));
@@ -543,10 +529,8 @@ static void create_adapter(adapter_data *adapter)
 
 	gtk_widget_show_all(mainbox);
 
-	if (adapter->bring_forward != FALSE) {
+	if (adapter->is_default != FALSE)
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (adapter->notebook), page_num);
-		adapter->bring_forward = FALSE;
-	}
 }
 
 static void update_visibility(adapter_data *adapter)
@@ -580,17 +564,7 @@ static void property_changed(DBusGProxy *proxy, const char *property,
 {
 	adapter_data *adapter = user_data;
 
-	if (g_str_equal(property, "Name") == TRUE) {
-		const gchar *name = g_value_get_string(value);
-
-		update_tab_label(GTK_NOTEBOOK(adapter->notebook),
-							adapter->child, name);
-
-		gtk_entry_set_text(GTK_ENTRY(adapter->entry),
-							name ? name : "");
-
-		adapter->name_changed = 0;
-	} else if (g_str_equal(property, "Powered") == TRUE) {
+	if (g_str_equal(property, "Powered") == TRUE) {
 		gboolean powered = g_value_get_boolean(value);
 
 		adapter->powered = powered;
@@ -615,29 +589,19 @@ static void property_changed(DBusGProxy *proxy, const char *property,
 	}
 }
 
-static void
-add_killswitch (GtkNotebook *notebook)
-{
-	if (killswitch_page == NULL)
-		killswitch_page = create_killswitch_page ();
-	if (killswitch_page && gtk_tree_model_iter_n_children (adapter_model, NULL) == 0) {
-		GtkWidget *label;
-
-		label = gtk_label_new (_("Bluetooth Status"));
-		gtk_notebook_prepend_page(notebook, killswitch_page, label);
-		has_killswitch_page = TRUE;
-	}
-}
-
 static adapter_data *adapter_alloc(GtkTreeModel *model,
 		GtkTreePath *path, GtkTreeIter *iter, gpointer user_data)
 {
 	DBusGProxy *proxy;
 	adapter_data *adapter;
+	gboolean is_default;
 
 	adapter = g_new0(adapter_data, 1);
 
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PROXY, &proxy, -1);
+	gtk_tree_model_get(model, iter,
+			   BLUETOOTH_COLUMN_PROXY, &proxy,
+			   BLUETOOTH_COLUMN_DEFAULT, &is_default,
+			   -1);
 
 	if (proxy == NULL) {
 		g_free(adapter);
@@ -648,6 +612,7 @@ static adapter_data *adapter_alloc(GtkTreeModel *model,
 
 	adapter->reference = gtk_tree_row_reference_new(model, path);
 	adapter->proxy = proxy;
+	adapter->is_default = is_default;
 
 	return adapter;
 }
@@ -682,19 +647,10 @@ static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
 					GtkTreeIter *iter, gpointer user_data)
 {
 	adapter_data *adapter;
-	int num;
 
 	adapter = adapter_alloc(model, path, iter, user_data);
 	if (adapter == NULL)
 		return;
-
-	num = gtk_notebook_page_num (GTK_NOTEBOOK (user_data), killswitch_page);
-	if (num != -1) {
-		gtk_notebook_remove_page (GTK_NOTEBOOK (user_data), num);
-		adapter->bring_forward = TRUE;
-		has_killswitch_page = FALSE;
-		killswitch_page = NULL;
-	}
 
 	/* XXX This is needed so that we can run dbus_g_proxy_add_signal()
 	 * for "PropertyChanged" on the adapter, remove when we have some
@@ -727,7 +683,17 @@ static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
 		adapter->reference = NULL;
 
 		gtk_notebook_remove_page(notebook, i);
-		add_killswitch (notebook);
+		if (gtk_tree_model_iter_n_children (model, NULL) == 0) {
+			if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
+				gtk_notebook_set_current_page (notebook,
+							       KILLSWITCH_PAGE_NUM(notebook));
+			} else {
+				gtk_notebook_set_current_page (notebook,
+							       NO_ADAPTERS_PAGE_NUM(notebook));
+			}
+		}
+		/* When the default adapter changes, the adapter_changed signal will
+		 * take care of setting the right page */
 
 		g_signal_handlers_disconnect_by_func(adapter->proxy,
 						property_changed, adapter);
@@ -738,26 +704,69 @@ static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
 }
 
 static void
+adapter_changed (GtkTreeModel *model,
+		 GtkTreePath  *path,
+		 GtkTreeIter  *iter,
+		 GtkNotebook  *notebook)
+{
+	DBusGProxy *proxy;
+	int i, count;
+	gboolean is_default, powered;
+	char *name;
+
+	count = gtk_notebook_get_n_pages(notebook);
+
+	gtk_tree_model_get(model, iter,
+			   BLUETOOTH_COLUMN_PROXY, &proxy,
+			   BLUETOOTH_COLUMN_DEFAULT, &is_default,
+			   BLUETOOTH_COLUMN_POWERED, &powered,
+			   BLUETOOTH_COLUMN_NAME, &name,
+			   -1);
+
+	if (proxy == NULL)
+		return;
+
+	for (i = 0; i < count; i++) {
+		GtkWidget *widget;
+		adapter_data *adapter;
+
+		widget = gtk_notebook_get_nth_page(notebook, i);
+		if (widget == NULL)
+			continue;
+
+		adapter = g_object_get_data(G_OBJECT(widget), "adapter");
+		if (adapter == NULL)
+			continue;
+
+		if (proxy == adapter->proxy) {
+			if (is_default != FALSE && powered != FALSE)
+				gtk_notebook_set_current_page (notebook, i);
+			/* We usually get an adapter_added before the device
+			 * is powered, so we set the name here instead */
+			if (name)
+				gtk_entry_set_text(GTK_ENTRY(adapter->entry), name);
+			break;
+		}
+	}
+
+	g_object_unref (proxy);
+	g_free (name);
+}
+
+static void
 button_clicked_cb (GtkButton *button, gpointer user_data)
 {
 	gtk_widget_set_sensitive (GTK_WIDGET (user_data), FALSE);
 	bluetooth_killswitch_set_state (killswitch, KILLSWITCH_STATE_NOT_KILLED);
 }
 
-static GtkWidget *
-create_killswitch_page (void)
+static void
+create_killswitch_page (GtkNotebook *notebook)
 {
 	GtkWidget *mainbox;
 	GtkWidget *vbox;
 	GtkWidget *label;
 	GtkWidget *button;
-
-	killswitch = bluetooth_killswitch_new ();
-	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE) {
-		/* No killswitches */
-		g_object_unref (killswitch);
-		return NULL;
-	}
 
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
@@ -773,24 +782,48 @@ create_killswitch_page (void)
 			  G_CALLBACK (button_clicked_cb), button);
 	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
-	return mainbox;
+	gtk_notebook_append_page(notebook, mainbox, NULL);
 }
 
+static void
+create_no_adapter_page (GtkNotebook *notebook)
+{
+	GtkWidget *mainbox;
+	GtkWidget *vbox;
+	GtkWidget *label;
+
+	mainbox = gtk_vbox_new(FALSE, 24);
+	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
+
+	vbox = gtk_vbox_new(FALSE, 6);
+	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
+
+	label = create_label(_("No Bluetooth adapters present"));
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+
+	//FIXME add a label saying we should insert a device
+	gtk_notebook_append_page(notebook, mainbox, NULL);
+}
 void setup_adapter(GtkNotebook *notebook)
 {
+	killswitch = bluetooth_killswitch_new ();
+
+	/* Create our static pages first */
+	create_killswitch_page (notebook);
+	create_no_adapter_page (notebook);
+
 	client = bluetooth_client_new();
 
 	adapter_model = bluetooth_client_get_adapter_model(client);
 
 	g_signal_connect_after(G_OBJECT(adapter_model), "row-inserted",
 					G_CALLBACK(adapter_added), notebook);
-
 	g_signal_connect_after(G_OBJECT(adapter_model), "row-deleted",
 					G_CALLBACK(adapter_removed), notebook);
+	g_signal_connect_after (G_OBJECT(adapter_model), "row-changed",
+				G_CALLBACK (adapter_changed), notebook);
 
 	gtk_tree_model_foreach(adapter_model, adapter_insert, notebook);
-
-	add_killswitch (notebook);
 }
 
 void cleanup_adapter(void)
@@ -799,8 +832,6 @@ void cleanup_adapter(void)
 
 	g_object_unref(client);
 
-	if (has_killswitch_page == FALSE && killswitch_page != NULL)
-		gtk_widget_destroy (killswitch_page);
-	killswitch_page = NULL;
+	g_object_unref (killswitch);
 }
 
