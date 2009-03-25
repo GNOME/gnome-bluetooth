@@ -275,6 +275,7 @@ static void create_adapter(adapter_data *adapter)
 
 	GtkWidget *mainbox;
 	GtkWidget *vbox;
+	GtkWidget *alignment;
 	GtkWidget *table;
 	GtkWidget *label;
 	GtkWidget *image;
@@ -363,10 +364,15 @@ static void create_adapter(adapter_data *adapter)
 	label = create_label(_("Friendly name"));
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 
+	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
+	gtk_widget_show (alignment);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+
 	entry = gtk_entry_new();
 	gtk_entry_set_max_length(GTK_ENTRY(entry), 248);
 	gtk_widget_set_size_request(entry, 240, -1);
-	gtk_box_pack_start(GTK_BOX(vbox), entry, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (alignment), entry);
 
 	if (name != NULL)
 		gtk_entry_set_text(GTK_ENTRY(entry), name);
