@@ -652,8 +652,6 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
 	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
 
-	gtk_widget_hide (priv->label);
-
 	/* The treeview label */
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox);
