@@ -55,6 +55,7 @@ struct _BluetoothChooserPrivate {
 
 	/* Widgets/UI bits that can be shown or hidden */
 	GtkCellRenderer *bonded_cell;
+	GtkCellRenderer *connected_cell;
 	GtkWidget *treeview;
 	GtkWidget *search_button;
 	GtkWidget *device_type_label, *device_type;
@@ -67,6 +68,7 @@ struct _BluetoothChooserPrivate {
 	int device_category_filter;
 
 	guint show_paired : 1;
+	guint show_connected : 1;
 	guint show_search : 1;
 	guint show_device_type : 1;
 	guint show_device_category : 1;
@@ -109,6 +111,17 @@ bonded_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &bonded, -1);
 
 	g_object_set (cell, "icon-name", bonded ? "bluetooth-paired" : NULL, NULL);
+}
+
+static void
+connected_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	gboolean connected;
+
+	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
+
+	g_object_set (cell, "icon-name", connected ? GTK_STOCK_CONNECT : NULL, NULL);
 }
 
 static void
@@ -220,6 +233,27 @@ bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
 }
 
 /**
+ * bluetooth_chooser_get_selected_device_is_connected:
+ * @self: a #BluetoothChooser widget
+ *
+ * Return value: whether the selected device is conncted to this computer, will be %FALSE if no devices are selected
+ */
+gboolean
+bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	gboolean selected, connected;
+
+	selected = gtk_tree_selection_get_selected (priv->selection, NULL, &iter);
+	if (selected == FALSE)
+		return 0;
+
+	gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
+	return connected;
+}
+
+/**
  * bluetooth_chooser_set_title:
  * @self: a BluetoothChooser widget
  * @title: the widget header title
@@ -261,6 +295,7 @@ device_model_row_changed (GtkTreeModel *model,
 	/* Maybe it's the name that changed */
 	if (name != NULL)
 		g_object_notify (G_OBJECT (self), "device-selected-name");
+	g_object_notify (G_OBJECT (self), "device-selected-is-connected");
 
 	g_free (name);
 }
@@ -524,6 +559,14 @@ create_treeview (BluetoothChooser *self)
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes (column, renderer,
 					     "text", BLUETOOTH_COLUMN_ALIAS, NULL);
+
+	/* The connected icon */
+	priv->connected_cell = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start (column, priv->connected_cell, FALSE);
+
+	gtk_tree_view_column_set_cell_data_func (column, priv->connected_cell,
+						 connected_to_icon, NULL, NULL);
+	g_object_set (G_OBJECT (priv->connected_cell), "visible", priv->show_connected, NULL);
 
 	/* The bonded icon */
 	priv->bonded_cell = gtk_cell_renderer_pixbuf_new ();
@@ -790,8 +833,10 @@ enum {
 	PROP_DEVICE_SELECTED_ICON,
 	PROP_DEVICE_SELECTED_NAME,
 	PROP_DEVICE_SELECTED_TYPE,
+	PROP_DEVICE_SELECTED_IS_CONNECTED,
+	PROP_DEVICE_SELECTED_PROXY,
 	PROP_SHOW_PAIRING,
-	PROP_SHOW_TRUSTED,
+	PROP_SHOW_CONNECTED,
 	PROP_SHOW_SEARCH,
 	PROP_SHOW_DEVICE_TYPE,
 	PROP_SHOW_DEVICE_CATEGORY,
@@ -813,6 +858,11 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		priv->show_paired = g_value_get_boolean (value);
 		if (priv->bonded_cell != NULL)
 			g_object_set (G_OBJECT (priv->bonded_cell), "visible", priv->show_paired, NULL);
+		break;
+	case PROP_SHOW_CONNECTED:
+		priv->show_connected = g_value_get_boolean (value);
+		if (priv->connected_cell != NULL)
+			g_object_set (G_OBJECT (priv->connected_cell), "visible", priv->show_connected, NULL);
 		break;
 	case PROP_SHOW_SEARCH:
 		priv->show_search = g_value_get_boolean (value);
@@ -870,6 +920,18 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 	case PROP_DEVICE_SELECTED_TYPE:
 		g_value_set_uint (value, bluetooth_chooser_get_selected_device_type (self));
 		break;
+	case PROP_DEVICE_SELECTED_IS_CONNECTED:
+		g_value_set_uint (value, bluetooth_chooser_get_selected_device_is_connected (self));
+		break;
+	case PROP_DEVICE_SELECTED_PROXY: {
+		GtkTreeIter iter;
+		GObject *proxy = NULL;
+
+		if (gtk_tree_selection_get_selected (priv->selection, NULL, &iter) != FALSE)
+			gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_PROXY, &proxy);
+		g_value_take_object (value, proxy);
+		break;
+	}
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
 		break;
@@ -968,6 +1030,18 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 					 PROP_DEVICE_SELECTED_TYPE, g_param_spec_uint ("device-selected-type", NULL, NULL,
 										       1, 1 << (_BLUETOOTH_TYPE_NUM_TYPES - 1), 1, G_PARAM_READABLE));
 	/**
+	 * BluetoothChooser:device-selected-is-connected:
+	 *
+	 * whether the selected device is conncted to this computer, will be %FALSE if no devices are selected
+	 **/
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SELECTED_IS_CONNECTED, g_param_spec_boolean ("device-selected-is-connected", NULL, NULL,
+												  FALSE, G_PARAM_READABLE));
+	/* Left blank intentionally */
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SELECTED_PROXY, g_param_spec_object ("device-selected-proxy", NULL, NULL,
+												  G_TYPE_OBJECT, G_PARAM_READABLE));
+	/**
 	 * BluetoothChooser:show-pairing:
 	 *
 	 * Whether to show the pairing column in the tree.
@@ -975,6 +1049,14 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_PAIRING, g_param_spec_boolean ("show-pairing",
 										  NULL, NULL, FALSE, G_PARAM_READWRITE));
+	/**
+	 * BluetoothChooser:show-connected:
+	 *
+	 * Whether to show the connected column in the tree.
+	 **/
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_CONNECTED, g_param_spec_boolean ("show-connected",
+										    NULL, NULL, FALSE, G_PARAM_READWRITE));
 	/**
 	 * BluetoothChooser:show-search:
 	 *
