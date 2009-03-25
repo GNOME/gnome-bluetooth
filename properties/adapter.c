@@ -32,11 +32,11 @@
 #include <dbus/dbus-glib.h>
 
 #include <bluetooth-client.h>
-#include <helper.h>
+#include <bluetooth-killswitch.h>
+#include <bluetooth-chooser.h>
 
 #include "adapter.h"
 #include "general.h"
-#include "bluetooth-killswitch.h"
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
@@ -56,7 +56,7 @@ struct adapter_data {
 	GtkWidget *entry;
 	GtkWidget *button_delete;
 	GtkWidget *button_disconnect;
-	GtkTreeSelection *selection;
+	GtkWidget *chooser;
 	GtkTreeRowReference *reference;
 	guint signal_discoverable;
 	guint signal_powered;
@@ -166,55 +166,25 @@ static gboolean focus_callback(GtkWidget *editable,
 	return FALSE;
 }
 
-static void update_buttons(adapter_data *adapter, gboolean bonded, gboolean connected)
+static void update_buttons(adapter_data *adapter, gboolean selected, gboolean connected)
 {
+	gtk_widget_set_sensitive(adapter->button_delete, selected);
 	gtk_widget_set_sensitive(adapter->button_disconnect, connected);
 }
 
-static void select_callback(GtkTreeSelection *selection, gpointer user_data)
+static void
+device_selected_cb(GObject *object,
+		   GParamSpec *spec,
+		   adapter_data *adapter)
 {
-	adapter_data *adapter = user_data;
-	DBusGProxy *proxy;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	gboolean selected;
-	gboolean paired = FALSE, connected = FALSE;
+	char *address;
+	gboolean connected;
 
-	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
-
-	if (selected == TRUE) {
-		gtk_tree_model_get(model, &iter,
-				BLUETOOTH_COLUMN_PROXY, &proxy,
-				BLUETOOTH_COLUMN_PAIRED, &paired,
-				BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
-
-		if (proxy != NULL) {
-			paired = TRUE;
-			g_object_unref(proxy);
-		}
-	}
-
-	update_buttons(adapter, paired, connected);
-
-	gtk_widget_set_sensitive(adapter->button_delete, selected);
-}
-
-static void row_callback(GtkTreeModel *model, GtkTreePath  *path,
-					GtkTreeIter *iter, gpointer user_data)
-{
-	adapter_data *adapter = user_data;
-	gboolean bonded = FALSE, connected = FALSE;
-
-	if (gtk_tree_selection_iter_is_selected(adapter->selection,
-							iter) == FALSE)
-		return;
-
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PAIRED, &bonded,
-					BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
-
-	update_buttons(adapter, bonded, connected);
-
-	gtk_widget_set_sensitive(adapter->button_delete, TRUE);
+	g_object_get (G_OBJECT (adapter->chooser),
+		      "device-selected", &address,
+		      "device-selected-is-connected", &connected,
+		      NULL);
+	update_buttons(adapter, (address != NULL), connected);
 }
 
 static void wizard_callback(GtkWidget *button, gpointer user_data)
@@ -258,16 +228,10 @@ static gboolean show_confirm_dialog(void)
 static void delete_callback(GtkWidget *button, gpointer user_data)
 {
 	adapter_data *adapter = user_data;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 	DBusGProxy *device;
 	const char *path;
 
-	if (gtk_tree_selection_get_selected(adapter->selection,
-						&model, &iter) == FALSE)
-		return;
-
-	gtk_tree_model_get(model, &iter, BLUETOOTH_COLUMN_PROXY, &device, -1);
+	g_object_get (G_OBJECT (adapter->chooser), "device-selected-proxy", &device, NULL);
 
 	if (device == NULL)
 		return;
@@ -286,15 +250,9 @@ static void delete_callback(GtkWidget *button, gpointer user_data)
 static void disconnect_callback(GtkWidget *button, gpointer user_data)
 {
 	adapter_data *adapter = user_data;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
 	DBusGProxy *device;
 
-	if (gtk_tree_selection_get_selected(adapter->selection,
-						&model, &iter) == FALSE)
-		return;
-
-	gtk_tree_model_get(model, &iter, BLUETOOTH_COLUMN_PROXY, &device, -1);
+	g_object_get (G_OBJECT (adapter->chooser), "device-selected-proxy", &device, NULL);
 
 	if (device == NULL)
 		return;
@@ -305,23 +263,6 @@ static void disconnect_callback(GtkWidget *button, gpointer user_data)
 	g_object_unref(device);
 
 	gtk_widget_set_sensitive(button, FALSE);
-}
-
-static gboolean device_filter(GtkTreeModel *model,
-					GtkTreeIter *iter, gpointer user_data)
-{
-	DBusGProxy *proxy;
-	gboolean active;
-
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PROXY, &proxy,
-					BLUETOOTH_COLUMN_PAIRED, &active, -1);
-
-	if (proxy != NULL) {
-		active = TRUE;
-		g_object_unref(proxy);
-	}
-
-	return active;
 }
 
 static void create_adapter(adapter_data *adapter)
@@ -340,10 +281,6 @@ static void create_adapter(adapter_data *adapter)
 	GtkWidget *button;
 	GtkWidget *entry;
 	GtkWidget *buttonbox;
-	GtkWidget *scrolled;
-	GtkWidget *tree;
-	GtkTreeModel *model;
-	GtkTreeSelection *selection;
 	int page_num;
 
 	dbus_g_proxy_call(adapter->proxy, "GetProperties", NULL, G_TYPE_INVALID,
@@ -452,31 +389,27 @@ static void create_adapter(adapter_data *adapter)
 	gtk_table_attach(GTK_TABLE(table), label, 0, 2, 0, 1,
 			 GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 6);
 
-	scrolled = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled),
-				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolled),
-							GTK_SHADOW_OUT);
-	gtk_table_attach(GTK_TABLE(table), scrolled, 0, 1, 1, 2,
-			 GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 6, 6);
+	/* Note that this will only ever show the devices on the default
+	 * adapter, this is on purpose */
+	adapter->chooser = bluetooth_chooser_new (NULL);
+	g_object_set (adapter->chooser,
+		      "show-search", FALSE,
+		      "show-device-type", FALSE,
+		      "show-device-category", FALSE,
+		      "show-pairing", TRUE,
+		      "show-connected", TRUE,
+		      "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
+		      NULL);
 
-	model = bluetooth_client_get_device_filter_model(client,
-				adapter->proxy, device_filter, NULL, NULL);
-	g_signal_connect(G_OBJECT(model), "row-changed",
-				G_CALLBACK(row_callback), adapter);
-	tree = create_tree(model, FALSE);
-	g_object_unref(model);
+	g_signal_connect (adapter->chooser, "notify::device-selected",
+			  G_CALLBACK(device_selected_cb), adapter);
+	g_signal_connect (adapter->chooser, "notify::device-selected-is-connected",
+			  G_CALLBACK(device_selected_cb), adapter);
 
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree));
-	gtk_tree_selection_set_mode(selection, GTK_SELECTION_SINGLE);
+	gtk_table_attach(GTK_TABLE(table), adapter->chooser, 0, 1, 1, 2,
+			 GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
 
-	g_signal_connect(G_OBJECT(selection), "changed",
-				G_CALLBACK(select_callback), adapter);
-
-	adapter->selection = selection;
 	adapter->devices_table = table;
-
-	gtk_container_add(GTK_CONTAINER(scrolled), tree);
 
 	buttonbox = gtk_vbutton_box_new();
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox),

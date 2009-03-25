@@ -3,7 +3,7 @@ bin_PROGRAMS = bluetooth-properties
 
 bluetooth_properties_SOURCES = main.c general.h general.c adapter.h adapter.c
 
-bluetooth_properties_LDADD = $(top_builddir)/common/libcommon.la $(PROPS_LIBS)
+bluetooth_properties_LDADD = $(top_builddir)/common/libgnome-bluetooth.la $(top_builddir)/common/libcommon.la $(PROPS_LIBS)
 
 AM_CFLAGS = $(PROPS_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
