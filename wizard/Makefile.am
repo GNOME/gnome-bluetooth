@@ -1,7 +1,7 @@
 
 bin_PROGRAMS = bluetooth-wizard
 
-bluetooth_wizard_SOURCES = main.c
+bluetooth_wizard_SOURCES = main.c pin.c pin.h
 
 bluetooth_wizard_LDADD = $(top_builddir)/common/libgnome-bluetooth.la $(top_builddir)/common/libcommon.la $(WIZARD_LIBS)
 
