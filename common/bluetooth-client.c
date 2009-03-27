@@ -1325,7 +1325,10 @@ gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 typedef struct {
 	BluetoothClientConnectFunc func;
 	gpointer data;
+	/* used for connect */
 	gboolean did_headset;
+	/* used for disconnect */
+	GList *services;
 } ConnectData;
 
 static void connect_input_callback(DBusGProxy *proxy,
@@ -1389,7 +1392,6 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 	DBusGProxyCallNotify notify_func;
 	ConnectData *conndata;
 	DBusGProxy *proxy;
-	DBusGProxyCall *call;
 	GHashTable *table;
 	GtkTreeIter iter;
 	const char *iface_name;
@@ -1440,9 +1442,11 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 	conndata->func = func;
 	conndata->data = data;
 
-	call = dbus_g_proxy_begin_call(proxy, "Connect",
-				       notify_func, conndata, g_free,
-				       G_TYPE_INVALID);
+	dbus_g_proxy_begin_call(proxy, "Connect",
+				notify_func, conndata, g_free,
+				G_TYPE_INVALID);
+
+	g_object_unref (proxy);
 
 	return TRUE;
 }
@@ -1452,17 +1456,64 @@ static void disconnect_callback(DBusGProxy *proxy,
 				void *user_data)
 {
 	ConnectData *conndata = user_data;
-	GError *error = NULL;
 
-	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
+	dbus_g_proxy_end_call(proxy, call, NULL, G_TYPE_INVALID);
 
-	if (error != NULL)
-		g_error_free(error);
+	if (conndata->services != NULL) {
+		DBusGProxy *service;
+
+		service = dbus_g_proxy_new_from_proxy (proxy,
+						       conndata->services->data, NULL);
+
+		conndata->services = g_list_remove (conndata->services, conndata->services->data);
+
+		dbus_g_proxy_begin_call(service, "Disconnect",
+					disconnect_callback, conndata, NULL,
+					G_TYPE_INVALID);
+
+		g_object_unref (proxy);
+
+		return;
+	}
 
 	if (conndata->func)
 		conndata->func(conndata->data);
 
 	g_object_unref(proxy);
+}
+
+static int
+service_to_index (const char *service)
+{
+	guint i;
+
+	g_return_val_if_fail (service != NULL, -1);
+
+	for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
+		if (g_str_equal (connectable_interfaces[i], service) != FALSE)
+			return i;
+	}
+
+	g_assert_not_reached ();
+
+	return -1;
+}
+
+static int
+rev_sort_services (const char *servicea, const char *serviceb)
+{
+	int a, b;
+
+	g_message ("comparing %s and %s", servicea, serviceb);
+
+	a = service_to_index (servicea);
+	b = service_to_index (serviceb);
+
+	if (a < b)
+		return 1;
+	if (a > b)
+		return -1;
+	return 0;
 }
 
 gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
@@ -1486,20 +1537,33 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 			   BLUETOOTH_COLUMN_PROXY, &proxy,
 			   BLUETOOTH_COLUMN_SERVICES, &table,
 			   -1);
-	if (table == NULL || proxy == NULL) {
-		if (proxy != NULL)
-			g_object_unref (proxy);
+	if (proxy == NULL)
 		return FALSE;
-	}
 
 	conndata = g_new0 (ConnectData, 1);
 
 	conndata->func = func;
 	conndata->data = data;
 
-	call = dbus_g_proxy_begin_call(proxy, "Disconnect",
-				       disconnect_callback, conndata, g_free,
-				       G_TYPE_INVALID);
+	if (table == NULL) {
+		call = dbus_g_proxy_begin_call(proxy, "Disconnect",
+					       disconnect_callback, conndata, NULL,
+					       G_TYPE_INVALID);
+	} else {
+		DBusGProxy *service;
+
+		conndata->services = g_hash_table_get_keys (table);
+		conndata->services = g_list_sort (conndata->services, (GCompareFunc) rev_sort_services);
+
+		service = dbus_g_proxy_new_from_proxy (priv->manager,
+						       conndata->services->data, device);
+
+		conndata->services = g_list_remove (conndata->services, conndata->services->data);
+
+		dbus_g_proxy_begin_call(service, "Disconnect",
+					disconnect_callback, conndata, NULL,
+					G_TYPE_INVALID);
+	}
 
 	return TRUE;
 }
