@@ -26,8 +26,9 @@
 #endif
 
 #include <glib.h>
-
 #include <bluetooth-enums.h>
+
+#include "pin.h"
 
 #define PIN_CODE_DB "pin-code-database.xml"
 
