@@ -927,7 +927,7 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		GObject *proxy = NULL;
 
 		if (gtk_tree_selection_get_selected (priv->selection, NULL, &iter) != FALSE)
-			gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_PROXY, &proxy);
+			gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_PROXY, &proxy, -1);
 		g_value_take_object (value, proxy);
 		break;
 	}
