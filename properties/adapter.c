@@ -265,6 +265,20 @@ static void disconnect_callback(GtkWidget *button, gpointer user_data)
 	gtk_widget_set_sensitive(button, FALSE);
 }
 
+static void
+set_current_page (GtkNotebook *notebook)
+{
+	if (gtk_tree_model_iter_n_children (adapter_model, NULL) == 0) {
+		if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
+			gtk_notebook_set_current_page (notebook,
+						       KILLSWITCH_PAGE_NUM(notebook));
+		} else {
+			gtk_notebook_set_current_page (notebook,
+						       NO_ADAPTERS_PAGE_NUM(notebook));
+		}
+	}
+}
+
 static void create_adapter(adapter_data *adapter)
 {
 	GHashTable *hash = NULL;
@@ -622,15 +636,7 @@ static void adapter_removed(GtkTreeModel *model, GtkTreePath *path,
 		adapter->reference = NULL;
 
 		gtk_notebook_remove_page(notebook, i);
-		if (gtk_tree_model_iter_n_children (model, NULL) == 0) {
-			if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
-				gtk_notebook_set_current_page (notebook,
-							       KILLSWITCH_PAGE_NUM(notebook));
-			} else {
-				gtk_notebook_set_current_page (notebook,
-							       NO_ADAPTERS_PAGE_NUM(notebook));
-			}
-		}
+		set_current_page (notebook);
 		/* When the default adapter changes, the adapter_changed signal will
 		 * take care of setting the right page */
 
@@ -721,6 +727,8 @@ create_killswitch_page (GtkNotebook *notebook)
 			  G_CALLBACK (button_clicked_cb), button);
 	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
+	gtk_widget_show_all (mainbox);
+
 	gtk_notebook_append_page(notebook, mainbox, NULL);
 }
 
@@ -739,6 +747,8 @@ create_no_adapter_page (GtkNotebook *notebook)
 
 	label = create_label(_("No Bluetooth adapters present"));
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+
+	gtk_widget_show_all (mainbox);
 
 	//FIXME add a label saying we should insert a device
 	gtk_notebook_append_page(notebook, mainbox, NULL);
@@ -763,6 +773,8 @@ void setup_adapter(GtkNotebook *notebook)
 				G_CALLBACK (adapter_changed), notebook);
 
 	gtk_tree_model_foreach(adapter_model, adapter_insert, notebook);
+
+	set_current_page (notebook);
 }
 
 void cleanup_adapter(void)
