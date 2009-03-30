@@ -60,7 +60,6 @@ static BluetoothKillswitch *killswitch = NULL;
 
 static GtkBuilder *xml = NULL;
 static GtkActionGroup *devices_action_group = NULL;
-static guint devices_ui_id = 0;
 
 /* Signal callbacks */
 void settings_callback(GObject *widget, gpointer user_data);
@@ -265,7 +264,10 @@ static GtkWidget *create_popupmenu(void)
 	}
 
 	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
-	devices_ui_id = gtk_ui_manager_new_merge_id (GTK_UI_MANAGER (object));
+	devices_action_group = gtk_action_group_new ("devices-action-group");
+	gtk_ui_manager_insert_action_group (GTK_UI_MANAGER (object),
+					    devices_action_group, -1);
+
 	action_set_bold (GTK_UI_MANAGER (object),
 			 GTK_ACTION (gtk_builder_get_object (xml, "devices-label")),
 			 "/bluetooth-applet-popup/devices-label");
@@ -354,8 +356,12 @@ action_set_bold (GtkUIManager *manager, GtkAction *action, const char *path)
 }
 
 static void
-remove_action_item (GtkAction *action, gpointer data)
+remove_action_item (GtkAction *action, GtkUIManager *manager)
 {
+	guint menu_merge_id;
+
+	menu_merge_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (action), "merge-id"));
+	gtk_ui_manager_remove_ui (GTK_UI_MANAGER (manager), menu_merge_id);
 	gtk_action_group_remove_action (devices_action_group, action);
 }
 
@@ -372,18 +378,11 @@ update_device_list (GtkTreeIter *parent)
 
 	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
 
-	if (devices_action_group == NULL) {
-		devices_action_group = gtk_action_group_new ("devices-action-group");
-		gtk_ui_manager_insert_action_group (GTK_UI_MANAGER (object),
-						    devices_action_group, -1); 
-	}
-
 	if (parent == NULL) {
 		/* No default adapter? Remove everything */
 		actions = gtk_action_group_list_actions (devices_action_group);
-		g_list_foreach (actions, (GFunc) remove_action_item, NULL);
+		g_list_foreach (actions, (GFunc) remove_action_item, object);
 		g_list_free (actions);
-		gtk_ui_manager_remove_ui (GTK_UI_MANAGER (object), devices_ui_id);
 		goto done;
 	}
 
@@ -417,13 +416,17 @@ update_device_list (GtkTreeIter *parent)
 
 		if (table != NULL && address != NULL && proxy != NULL) {
 			if (action == NULL) {
+				guint menu_merge_id;
 				action = gtk_action_new (address, name, NULL, NULL);
 
 				gtk_action_group_add_action (devices_action_group, action);
 				g_object_unref (action);
-				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), devices_ui_id,
+				menu_merge_id = gtk_ui_manager_new_merge_id (GTK_UI_MANAGER (object));
+				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
 						       "/bluetooth-applet-popup/devices-placeholder", address, address,
 						       GTK_UI_MANAGER_MENUITEM, FALSE);
+				g_object_set_data_full (G_OBJECT (action),
+							"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
 				g_signal_connect (G_OBJECT (action), "activate",
 						  G_CALLBACK (on_connect_activate), NULL);
 			} else {
@@ -452,7 +455,7 @@ update_device_list (GtkTreeIter *parent)
 	}
 
 	/* Remove the left-over devices */
-	g_list_foreach (actions, (GFunc) remove_action_item, NULL);
+	g_list_foreach (actions, (GFunc) remove_action_item, object);
 	g_list_free (actions);
 
 done:
