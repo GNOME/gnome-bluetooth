@@ -7,7 +7,7 @@ bluetooth_wizard_LDADD = $(top_builddir)/common/libgnome-bluetooth.la $(top_buil
 
 AM_CFLAGS = $(WIZARD_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
-pin_DATA = pin-code-database.txt pin-code-database.xml
+pin_DATA = pin-code-database.xml
 pindir = $(pkgdatadir)
 
 ui_DATA = passkey-options.ui
