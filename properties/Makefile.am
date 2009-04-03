@@ -20,7 +20,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
 
-ui_DATA = properties-no-adapter.ui
+ui_DATA = properties-no-adapter.ui properties-adapter-off.ui
 uidir = $(pkgdatadir)
 
 schemadir = $(GCONF_SCHEMA_FILE_DIR)

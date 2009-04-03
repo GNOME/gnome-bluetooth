@@ -713,19 +713,23 @@ create_killswitch_page (GtkNotebook *notebook)
 	GtkWidget *label;
 	GtkWidget *button;
 
+	GtkBuilder *xml;
+
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "properties-adapter-off.ui", NULL) > 0)
+		gtk_builder_add_from_file (xml, PKGDATADIR "properties-adapter-off.ui", NULL);
+	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
+
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
 
-	vbox = gtk_vbox_new(FALSE, 6);
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
-
 	label = create_label(_("Bluetooth is disabled"));
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(mainbox), label, FALSE, FALSE, 0);
 
-	button = gtk_button_new_with_label ("Turn Bluetooth on");
-	g_signal_connect (G_OBJECT (button), "clicked",
+	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
+
+	g_signal_connect (gtk_builder_get_object (xml, "button1"), "clicked",
 			  G_CALLBACK (button_clicked_cb), button);
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 
 	gtk_widget_show_all (mainbox);
 
