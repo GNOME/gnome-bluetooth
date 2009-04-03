@@ -503,15 +503,9 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 		value = g_hash_table_lookup(hash, "Connected");
 		connected = value ? g_value_get_boolean(value) : FALSE;
 	} else {
-		address = NULL;
-		alias = NULL;
-		name = NULL;
-		type = BLUETOOTH_TYPE_ANY;
-		icon = NULL;
-		rssi = 0;
-		paired = FALSE;
-		trusted = FALSE;
-		connected = FALSE;
+		if (device)
+			g_object_unref (device);
+		return;
 	}
 
 	cont = gtk_tree_model_iter_children(GTK_TREE_MODEL(priv->store),
