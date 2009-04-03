@@ -267,7 +267,13 @@ default_adapter_powered_changed (GObject    *gobject,
 
 int main(int argc, char *argv[])
 {
+	GLogLevelFlags fatal_mask;
+
 	gtk_init(&argc, &argv);
+
+	fatal_mask = g_log_set_always_fatal (G_LOG_FATAL_MASK);
+	fatal_mask |= G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL;
+	g_log_set_always_fatal (fatal_mask);
 
 	client = bluetooth_client_new();
 	g_signal_connect (G_OBJECT (client), "notify::default-adapter",
