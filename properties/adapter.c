@@ -738,21 +738,26 @@ create_no_adapter_page (GtkNotebook *notebook)
 	GtkWidget *mainbox;
 	GtkWidget *vbox;
 	GtkWidget *label;
+	GtkBuilder *xml;
+
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "properties-no-adapter.ui", NULL) > 0)
+		gtk_builder_add_from_file (xml, PKGDATADIR "properties-no-adapter.ui", NULL);
+	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
 
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
 
-	vbox = gtk_vbox_new(FALSE, 6);
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
-
 	label = create_label(_("No Bluetooth adapters present"));
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(mainbox), label, FALSE, FALSE, 0);
+
+	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
 
 	gtk_widget_show_all (mainbox);
 
-	//FIXME add a label saying we should insert a device
 	gtk_notebook_append_page(notebook, mainbox, NULL);
 }
+
 void setup_adapter(GtkNotebook *notebook)
 {
 	killswitch = bluetooth_killswitch_new ();

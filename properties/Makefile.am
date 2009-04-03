@@ -5,7 +5,7 @@ bluetooth_properties_SOURCES = main.c general.h general.c adapter.h adapter.c
 
 bluetooth_properties_LDADD = $(top_builddir)/common/libgnome-bluetooth.la $(top_builddir)/common/libcommon.la $(PROPS_LIBS)
 
-AM_CFLAGS = $(PROPS_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+AM_CFLAGS = $(PROPS_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
 INCLUDES = -I$(top_srcdir)/common
 
@@ -19,6 +19,9 @@ desktop_in_files = bluetooth-properties.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
+
+ui_DATA = properties-no-adapter.ui
+uidir = $(pkgdatadir)
 
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
 
