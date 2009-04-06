@@ -23,6 +23,4 @@
  */
 
 GtkWidget *create_label(const gchar *str);
-GtkWidget *create_general(void);
-void setup_general(void);
-void cleanup_general(void);
+

@@ -1,7 +1,7 @@
 
 bin_PROGRAMS = bluetooth-properties
 
-bluetooth_properties_SOURCES = main.c general.h general.c adapter.h adapter.c
+bluetooth_properties_SOURCES = main.c general.h general.c adapter.h adapter.c gconf-bridge.c gconf-bridge.h
 
 bluetooth_properties_LDADD = $(top_builddir)/common/libgnome-bluetooth.la $(top_builddir)/common/libcommon.la $(PROPS_LIBS)
 

@@ -43,17 +43,10 @@ static BluetoothClient *client;
 static GtkTreeModel *devices_model;
 static guint num_adapters_present = 0;
 static guint num_adapters_powered = 0;
-
-enum {
-	ICON_POLICY_NEVER,
-	ICON_POLICY_ALWAYS,
-	ICON_POLICY_PRESENT,
-};
-
-static int icon_policy = ICON_POLICY_PRESENT;
+static gboolean show_icon_pref = TRUE;
 
 #define PREF_DIR		"/apps/bluetooth-manager"
-#define PREF_ICON_POLICY	PREF_DIR "/icon_policy"
+#define PREF_SHOW_ICON		PREF_DIR "/icon_policy"
 
 static GConfClient* gconf;
 static BluetoothKillswitch *killswitch = NULL;
@@ -309,16 +302,13 @@ update_icon_visibility (void)
 	else
 		set_icon (TRUE);
 
-	if (icon_policy == ICON_POLICY_NEVER)
-		hide_icon();
-	else if (icon_policy == ICON_POLICY_ALWAYS)
-		show_icon();
-	else if (icon_policy == ICON_POLICY_PRESENT) {
-		if (num_adapters_present > 0 || killswitch != NULL)
-			show_icon();
-		else
-			hide_icon();
+	if (show_icon_pref != FALSE) {
+		if (num_adapters_present > 0 || killswitch != NULL) {
+			show_icon ();
+			return;
+		}
 	}
+	hide_icon ();
 }
 
 static void
@@ -517,13 +507,6 @@ static void device_removed(GtkTreeModel *model,
 	device_changed (model, path, NULL, user_data);
 }
 
-static GConfEnumStringPair icon_policy_enum_map [] = {
-	{ ICON_POLICY_NEVER,	"never"		},
-	{ ICON_POLICY_ALWAYS,	"always"	},
-	{ ICON_POLICY_PRESENT,	"present"	},
-	{ ICON_POLICY_PRESENT,	NULL		},
-};
-
 static void gconf_callback(GConfClient *client, guint cnxn_id,
 					GConfEntry *entry, gpointer user_data)
 {
@@ -533,15 +516,8 @@ static void gconf_callback(GConfClient *client, guint cnxn_id,
 	if (value == NULL)
 		return;
 
-	if (g_str_equal(entry->key, PREF_ICON_POLICY) == TRUE) {
-		const char *str;
-
-		str = gconf_value_get_string(value);
-		if (!str)
-			return;
-
-		gconf_string_to_enum(icon_policy_enum_map, str, &icon_policy);
-
+	if (g_str_equal(entry->key, PREF_SHOW_ICON) == TRUE) {
+		show_icon_pref = gconf_value_get_bool(value);
 		update_icon_visibility();
 		return;
 	}
@@ -557,7 +533,6 @@ int main(int argc, char *argv[])
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
 	GError *error = NULL;
-	char *str;
 
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
@@ -610,11 +585,7 @@ int main(int argc, char *argv[])
 
 	gconf = gconf_client_get_default();
 
-	str = gconf_client_get_string(gconf, PREF_ICON_POLICY, NULL);
-	if (str) {
-		gconf_string_to_enum(icon_policy_enum_map, str, &icon_policy);
-		g_free(str);
-	}
+	show_icon_pref = gconf_client_get_bool(gconf, PREF_SHOW_ICON, NULL);
 
 	gconf_client_add_dir(gconf, PREF_DIR, GCONF_CLIENT_PRELOAD_NONE, NULL);
 

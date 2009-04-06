@@ -2,14 +2,14 @@
   <schemalist>
 
     <schema>
-      <key>/schemas/apps/bluetooth-manager/icon_policy</key>
-      <applyto>/apps/bluetooth-manager/icon_policy</applyto>
+      <key>/schemas/apps/bluetooth-manager/show_icon</key>
+      <applyto>/apps/bluetooth-manager/show_icon</applyto>
       <owner>bluetooth-manager</owner>
-      <type>string</type>
-      <default>present</default>
+      <type>boolean</type>
+      <default>true</default>
       <locale name="C">
-        <short>When to show the notification icon</short>
-        <long>Display options for the notification icon. Valid options are "never", "present" and "always".</long>
+        <short>Whether to show the notification icon</short>
+        <long>Whether to show the notification icon.</long>
       </locale>
     </schema>
 

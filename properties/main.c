@@ -30,8 +30,12 @@
 #include <gtk/gtk.h>
 #include <unique/uniqueapp.h>
 
+#include "gconf-bridge.h"
 #include "general.h"
 #include "adapter.h"
+
+#define PREF_DIR		"/apps/bluetooth-manager"
+#define PREF_SHOW_ICON		PREF_DIR "/show_icon"
 
 static gboolean delete_callback(GtkWidget *window, GdkEvent *event,
 							gpointer user_data)
@@ -118,10 +122,10 @@ static void about_callback(GtkWidget *item, GtkWindow *parent)
 static GtkWidget *create_window(GtkWidget *notebook)
 {
 	GtkWidget *window;
-/*	GtkWidget *widget; */
 	GtkWidget *vbox;
 	GtkWidget *buttonbox;
 	GtkWidget *button;
+	GConfBridge *bridge;
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), _("Bluetooth Preferences"));
@@ -135,6 +139,12 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_container_add(GTK_CONTAINER(window), vbox);
 
 	gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
+
+	button = gtk_check_button_new_with_mnemonic (_("_Show Bluetooth icon"));
+	bridge = gconf_bridge_get ();
+	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
+	gconf_bridge_bind_property_full (bridge, PREF_SHOW_ICON, G_OBJECT (button),
+					 "active", FALSE);
 
 	buttonbox = gtk_hbutton_box_new();
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox), GTK_BUTTONBOX_END);
@@ -158,12 +168,6 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 #endif
 
-#if 0
-	widget = create_general();
-	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), widget, NULL);
-	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(notebook),
-						widget, _("General"));
-#endif
 	gtk_widget_show_all(window);
 
 	return window;
