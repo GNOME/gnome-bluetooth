@@ -51,7 +51,6 @@ struct adapter_data {
 	GtkWidget *notebook;
 	GtkWidget *child;
 	GtkWidget *button_discoverable;
-	GtkWidget *button_powered;
 	GtkWidget *name_vbox, *devices_table;
 	GtkWidget *entry;
 	GtkWidget *button_delete;
@@ -59,7 +58,6 @@ struct adapter_data {
 	GtkWidget *chooser;
 	GtkTreeRowReference *reference;
 	guint signal_discoverable;
-	guint signal_powered;
 	gboolean powered;
 	gboolean discoverable;
 	gboolean is_default;
@@ -73,36 +71,12 @@ static void block_signals(adapter_data *adapter)
 {
 	g_signal_handler_block(adapter->button_discoverable,
 						adapter->signal_discoverable);
-	g_signal_handler_block(adapter->button_powered,
-						adapter->signal_powered);
 }
 
 static void unblock_signals(adapter_data *adapter)
 {
 	g_signal_handler_unblock(adapter->button_discoverable,
 						adapter->signal_discoverable);
-	g_signal_handler_unblock(adapter->button_powered,
-						adapter->signal_powered);
-}
-
-static void powered_changed_cb(GtkWidget *button, gpointer user_data)
-{
-	adapter_data *adapter = user_data;
-	GValue powered = { 0 };
-
-	adapter->powered = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	/* Cheat and update the visibility straight away */
-	update_visibility (adapter);
-
-	g_value_init(&powered, G_TYPE_BOOLEAN);
-	g_value_set_boolean(&powered, adapter->powered);
-
-	dbus_g_proxy_call(adapter->proxy, "SetProperty", NULL,
-					G_TYPE_STRING, "Powered",
-					G_TYPE_VALUE, &powered,
-					G_TYPE_INVALID, G_TYPE_INVALID);
-
-	g_value_unset(&powered);
 }
 
 static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
@@ -341,16 +315,6 @@ static void create_adapter(adapter_data *adapter)
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, TRUE, 0);
 
-	/* The powered checkbox */
-	button = gtk_check_button_new_with_mnemonic (_("_Powered"));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), powered);
-
-	adapter->button_powered = button;
-	adapter->signal_powered = g_signal_connect(G_OBJECT(button), "toggled",
-						   G_CALLBACK(powered_changed_cb), adapter);
-	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE)
-		gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-
 	/* The discoverable checkbox */
 	button = gtk_check_button_new_with_mnemonic (_("_Discoverable"));
 	if (powered == FALSE)
@@ -507,7 +471,6 @@ static void update_visibility(adapter_data *adapter)
 
 	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (adapter->button_discoverable), inconsistent);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (adapter->button_discoverable), enabled);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (adapter->button_powered), adapter->powered);
 
 	unblock_signals(adapter);
 }
@@ -728,7 +691,8 @@ create_killswitch_page (GtkNotebook *notebook)
 
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
 
-	g_signal_connect (gtk_builder_get_object (xml, "button1"), "clicked",
+	button = GTK_WIDGET (gtk_builder_get_object (xml, "button1"));
+	g_signal_connect (button, "clicked",
 			  G_CALLBACK (button_clicked_cb), button);
 
 	gtk_widget_show_all (mainbox);
