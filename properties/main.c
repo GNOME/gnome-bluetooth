@@ -221,11 +221,8 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-/*	setup_general(); */
-
 	notebook = gtk_notebook_new();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 
 	setup_adapter(GTK_NOTEBOOK(notebook));
 
@@ -237,8 +234,6 @@ int main(int argc, char *argv[])
 	gtk_main();
 
 	cleanup_adapter();
-
-/*	cleanup_general(); */
 
 	g_object_unref(app);
 
