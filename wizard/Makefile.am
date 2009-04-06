@@ -10,7 +10,7 @@ AM_CFLAGS = $(WIZARD_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="
 pin_DATA = pin-code-database.xml
 pindir = $(pkgdatadir)
 
-ui_DATA = passkey-options.ui
+ui_DATA = wizard.ui
 uidir = $(pkgdatadir)
 
 INCLUDES = -I$(top_srcdir)/common

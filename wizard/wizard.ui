@@ -1,8 +1,177 @@
 <?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.14"/>
-  <!-- interface-naming-policy project-wide -->
-  <object class="GtkDialog" id="dialog">
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkAssistant" id="assistant">
+    <property name="title" translatable="yes">Bluetooth Device Wizard</property>
+    <property name="window_position">center</property>
+    <property name="default_width">440</property>
+    <property name="default_height">440</property>
+    <signal name="prepare" handler="prepare_callback"/>
+    <signal name="cancel" handler="close_callback"/>
+    <signal name="close" handler="close_callback"/>
+    <child>
+      <object class="GtkVBox" id="page_intro">
+        <property name="visible">True</property>
+        <property name="border_width">24</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">&lt;b&gt;Welcome to the Bluetooth device setup wizard&lt;/b&gt;
+</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label2">
+            <property name="width_request">380</property>
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">The device wizard will walk you through the process of configuring Bluetooth enabled devices for use with this computer.
+
+</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">intro</property>
+        <property name="title">Introduction</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkVBox" id="page_search">
+        <property name="visible">True</property>
+        <property name="border_width">24</property>
+        <property name="spacing">6</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkButton" id="passkey_option_button">
+            <property name="label" translatable="yes">Passkey _options...</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_underline">True</property>
+            <signal name="clicked" handler="passkey_option_button_clicked"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title">Device search</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkVBox" id="page_setup">
+        <property name="visible">True</property>
+        <property name="border_width">24</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkLabel" id="label3">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">&lt;b&gt;Setting up new device&lt;/b&gt;
+</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_setup">
+            <property name="width_request">380</property>
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label">label_setup</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_passkey_help">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label">label_passkey_help</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_passkey">
+            <property name="label">label_passkey</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title">Device setup</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkVBox" id="page_summary">
+        <property name="visible">True</property>
+        <property name="border_width">24</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkLabel" id="label4">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">&lt;b&gt;Successfully configured new device&lt;/b&gt;
+</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">summary</property>
+        <property name="title">Summary</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkDialog" id="passkey_dialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Passkey Options</property>
     <property name="destroy_with_parent">True</property>
@@ -162,7 +331,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button1</action-widget>
+      <action-widget response="-3">button1</action-widget>
     </action-widgets>
   </object>
+
 </interface>

@@ -67,6 +67,14 @@ static GtkWidget *label_passkey_help = NULL;
 
 static BluetoothChooser *selector = NULL;
 
+static GtkWidget *passkey_dialog = NULL;
+static GtkWidget *radio_auto = NULL;
+static GtkWidget *radio_0000 = NULL;
+static GtkWidget *radio_1111 = NULL;
+static GtkWidget *radio_1234 = NULL;
+static GtkWidget *radio_custom = NULL;
+static GtkWidget *entry_custom = NULL;
+
 static void
 set_large_label (GtkLabel *label, const char *text)
 {
@@ -252,7 +260,7 @@ static void close_callback(GtkWidget *assistant, gpointer data)
 }
 
 static void prepare_callback(GtkWidget *assistant,
-					GtkWidget *page, gpointer data)
+                             GtkWidget *page, gpointer data)
 {
 	gboolean complete = TRUE;
 	const char *path = AGENT_PATH;
@@ -311,79 +319,6 @@ static void prepare_callback(GtkWidget *assistant,
 							page, complete);
 }
 
-static GtkWidget *create_vbox(GtkWidget *assistant, GtkAssistantPageType type,
-				const gchar *title, const gchar *section)
-{
-	GtkWidget *vbox;
-	GtkWidget *label;
-	GdkPixbuf *pixbuf;
-	gchar *str;
-
-	vbox = gtk_vbox_new(FALSE, 6);
-
-	gtk_container_set_border_width(GTK_CONTAINER(vbox), 24);
-	gtk_assistant_append_page(GTK_ASSISTANT(assistant), vbox);
-	gtk_assistant_set_page_type(GTK_ASSISTANT(assistant), vbox, type);
-	gtk_assistant_set_page_title(GTK_ASSISTANT(assistant), vbox, title);
-
-	pixbuf = gtk_icon_theme_load_icon(gtk_icon_theme_get_default(),
-						"bluetooth", 32, 0, NULL);
-	gtk_assistant_set_page_header_image(GTK_ASSISTANT(assistant),
-								vbox, pixbuf);
-	g_object_unref(pixbuf);
-
-	if (section) {
-		label = gtk_label_new(NULL);
-		str = g_strdup_printf("<b>%s</b>\n", section);
-		gtk_label_set_markup(GTK_LABEL(label), str);
-		g_free(str);
-		gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
-		gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-	}
-
-	return vbox;
-}
-
-static void create_intro(GtkWidget *assistant)
-{
-	GtkWidget *vbox;
-	GtkWidget *label;
-	GtkWidget *combo;
-	GtkTreeModel *model;
-	GtkCellRenderer *renderer;
-
-	vbox = create_vbox(assistant, GTK_ASSISTANT_PAGE_INTRO,
-			_("Introduction"),
-			_("Welcome to the Bluetooth device setup wizard"));
-
-	label = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label), _("The device wizard will "
-				"walk you through the process of configuring "
-				"Bluetooth enabled devices for use with this "
-				"computer.\n\n"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
-	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
-	gtk_widget_set_size_request(GTK_WIDGET(label), 380, -1);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
-
-	combo = gtk_combo_box_new();
-
-	model = bluetooth_client_get_adapter_model(client);
-	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), model);
-	g_object_unref(model);
-
-	gtk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
-	gtk_cell_layout_clear(GTK_CELL_LAYOUT(combo));
-
-	renderer = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), renderer, TRUE);
-	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), renderer,
-					"text", BLUETOOTH_COLUMN_NAME, NULL);
-
-	if (gtk_tree_model_iter_n_children(model, NULL) > 1)
-		gtk_box_pack_start(GTK_BOX(vbox), combo, FALSE, FALSE, 0);
-}
-
 static gboolean
 set_page_search_complete (void)
 {
@@ -407,8 +342,7 @@ set_page_search_complete (void)
 	return complete;
 }
 
-static gboolean entry_custom_event(GtkWidget *entry,
-					GdkEventKey *event, GtkWidget *box)
+static gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event)
 {
 	if (event->length == 0)
 		return FALSE;
@@ -420,10 +354,10 @@ static gboolean entry_custom_event(GtkWidget *entry,
 	return TRUE;
 }
 
-static void entry_custom_changed(GtkWidget *entry, GtkWidget *dialog)
+static void entry_custom_changed(GtkWidget *entry)
 {
 	user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
-	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
 					   GTK_RESPONSE_ACCEPT,
 					   gtk_entry_get_text_length (GTK_ENTRY (entry)) >= 1);
 }
@@ -434,9 +368,13 @@ static void toggle_set_sensitive(GtkWidget *button, GtkWidget *widget)
 
 	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
 	gtk_widget_set_sensitive(widget, active);
+	/* When selecting another PIN, make sure the "Close" button is sensitive */
+	if (!active)
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
+						   GTK_RESPONSE_ACCEPT, TRUE);
 }
 
-static void set_user_pincode(GtkWidget *button, GtkWidget *dialog)
+static void set_user_pincode(GtkWidget *button)
 {
 	GSList *list, *l;
 
@@ -452,7 +390,7 @@ static void set_user_pincode(GtkWidget *button, GtkWidget *dialog)
 		/* Is it radio_fixed that changed? */
 		radio = g_object_get_data (G_OBJECT (button), "button");
 		if (radio != NULL) {
-			set_user_pincode (radio, NULL);
+			set_user_pincode (radio);
 			return;
 		}
 
@@ -462,7 +400,7 @@ static void set_user_pincode(GtkWidget *button, GtkWidget *dialog)
 		if (entry != NULL) {
 			g_free (user_pincode);
 			user_pincode = g_strdup (gtk_entry_get_text(entry));
-			gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+			gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
 							   GTK_RESPONSE_ACCEPT,
 							   gtk_entry_get_text_length (entry) >= 1);
 		} else if (pin != NULL) {
@@ -494,47 +432,15 @@ static void select_device_changed(BluetoothChooser *selector,
 static void
 passkey_option_button_clicked (GtkButton *button, gpointer data)
 {
-	GtkWidget *dialog;
-	GtkBuilder *xml;
-	GtkWidget *radio_auto;
-	GtkWidget *radio_0000;
-	GtkWidget *radio_1111;
-	GtkWidget *radio_1234;
-	GtkWidget *radio_custom;
-	GtkWidget *entry_custom;
 	GtkWidget *radio;
 	char *oldpin;
-
-	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "passkey-options.ui", NULL) == 0) {
-		if (gtk_builder_add_from_file (xml, PKGDATADIR "/" "passkey-options.ui", NULL) == 0) {
-			g_warning ("Could not load passkey-options.ui, broken installation");
-			return;
-		}
-	}
 
 	oldpin = user_pincode;
 	user_pincode = NULL;
 
-	dialog = GTK_WIDGET (gtk_builder_get_object (xml, "dialog"));
-	radio_auto = GTK_WIDGET (gtk_builder_get_object (xml, "radio_auto"));
-	radio_0000 = GTK_WIDGET (gtk_builder_get_object (xml, "radio_0000"));
-	radio_1111 = GTK_WIDGET (gtk_builder_get_object (xml, "radio_1111"));
-	radio_1234 = GTK_WIDGET (gtk_builder_get_object (xml, "radio_1234"));
-	radio_custom = GTK_WIDGET (gtk_builder_get_object (xml, "radio_custom"));
-	entry_custom = GTK_WIDGET (gtk_builder_get_object (xml, "entry_custom"));
-
-	g_signal_connect (entry_custom, "key-press-event",
-			  G_CALLBACK (entry_custom_event), NULL);
-	g_signal_connect (entry_custom, "changed",
-			  G_CALLBACK (entry_custom_changed), dialog);
-
-	toggle_set_sensitive(radio_custom, entry_custom);
-	g_signal_connect(radio_custom, "toggled",
-			G_CALLBACK(toggle_set_sensitive), entry_custom);
+	gtk_window_present(GTK_WINDOW(passkey_dialog));
 
 	/* When reopening, try to guess where the pincode was set */
-	radio = NULL;
 	if (oldpin == NULL)
 		radio = radio_auto;
 	else if (g_str_equal (oldpin, "0000"))
@@ -550,37 +456,58 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	if (radio == radio_custom)
 		gtk_entry_set_text (GTK_ENTRY (entry_custom), oldpin);
 
-	g_free (oldpin);
+	if (gtk_dialog_run (GTK_DIALOG (passkey_dialog)) != GTK_RESPONSE_ACCEPT) {
+		g_free (user_pincode);
+		user_pincode = oldpin;
+	} else {
+		g_free (oldpin);
+	}
 
-	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
-	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
-	g_object_set_data (G_OBJECT (radio_1111), "pin", "1111");
-	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
-	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
-
-	g_signal_connect(radio_auto, "toggled",
-			 G_CALLBACK(set_user_pincode), dialog);
-	g_signal_connect(radio_0000, "toggled",
-			 G_CALLBACK(set_user_pincode), dialog);
-	g_signal_connect(radio_1111, "toggled",
-			 G_CALLBACK(set_user_pincode), dialog);
-	g_signal_connect(radio_1234, "toggled",
-			 G_CALLBACK(set_user_pincode), dialog);
-	g_signal_connect(radio_custom, "toggled",
-			 G_CALLBACK(set_user_pincode), dialog);
-
-	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (gtk_widget_destroy), NULL);
-
-	gtk_widget_show_all (dialog);
+	gtk_widget_hide(passkey_dialog);
 }
 
-static void create_search(GtkWidget *assistant)
+static GtkWidget *create_wizard(void)
 {
-	GtkWidget *vbox;
-	GtkWidget *button;
+	GtkAssistant *assistant;
+	GtkBuilder *builder;
+	GError *err = NULL;
+	GtkWidget *combo, *page_intro;
+	GtkTreeModel *model;
+	GtkCellRenderer *renderer;
+	GdkPixbuf *pixbuf;
 
-	vbox = create_vbox(assistant, GTK_ASSISTANT_PAGE_CONTENT, _("Device search"), NULL);
+	builder = gtk_builder_new ();
+	if (gtk_builder_add_from_file (builder, "wizard.ui", NULL) == 0) {
+		if (gtk_builder_add_from_file (builder, PKGDATADIR "/wizard.ui", &err) == 0) {
+			g_warning ("Could not load UI from %s: %s", PKGDATADIR "/wizard.ui", err->message);
+			g_error_free(err);
+			return NULL;
+		}
+	}
+
+	assistant = GTK_ASSISTANT(gtk_builder_get_object(builder, "assistant"));
+
+	/* Intro page */
+	combo = gtk_combo_box_new();
+
+	model = bluetooth_client_get_adapter_model(client);
+	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), model);
+	g_object_unref(model);
+
+	gtk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
+	gtk_cell_layout_clear(GTK_CELL_LAYOUT(combo));
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), renderer,
+					"text", BLUETOOTH_COLUMN_NAME, NULL);
+
+	page_intro = GTK_WIDGET(gtk_builder_get_object(builder, "page_intro"));
+	if (gtk_tree_model_iter_n_children(model, NULL) > 1)
+		gtk_box_pack_start(GTK_BOX(page_intro), combo, FALSE, FALSE, 0);
+
+	/* Search page */
+	page_search = GTK_WIDGET(gtk_builder_get_object(builder, "page_search"));
 
 	/* The selector */
 	selector = BLUETOOTH_CHOOSER (bluetooth_chooser_new(_("Select the device you want to setup")));
@@ -598,73 +525,64 @@ static void create_search(GtkWidget *assistant)
 	g_signal_connect(selector, "notify::device-selected-name",
 			 G_CALLBACK(device_selected_name_cb), assistant);
 
-	gtk_container_add(GTK_CONTAINER(vbox), GTK_WIDGET (selector));
+	gtk_container_add(GTK_CONTAINER(page_search), GTK_WIDGET (selector));
 
-	page_search = vbox;
+	/* Setup page */
+	page_setup = GTK_WIDGET(gtk_builder_get_object(builder, "page_setup"));
+	label_setup = GTK_WIDGET(gtk_builder_get_object(builder, "label_setup"));
+	label_passkey_help = GTK_WIDGET(gtk_builder_get_object(builder, "label_passkey_help"));
+	label_passkey = GTK_WIDGET(gtk_builder_get_object(builder, "label_passkey"));
 
-	button = gtk_button_new_with_mnemonic (_("Passkey _Options..."));
-	g_signal_connect (G_OBJECT (button), "clicked",
-			  G_CALLBACK (passkey_option_button_clicked), assistant);
-	gtk_widget_show (button);
+	/* Summary page */
+	page_summary = GTK_WIDGET(gtk_builder_get_object(builder, "page_summary"));
 
-	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET (button),
-			    FALSE, FALSE, 6);
-}
+	/* Set page icons (named icons not supported by Glade) */
+	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+					   "bluetooth", 32, 0, NULL);
+	gtk_assistant_set_page_header_image (assistant, page_intro, pixbuf);
+	gtk_assistant_set_page_header_image (assistant, page_search, pixbuf);
+	gtk_assistant_set_page_header_image (assistant, page_setup, pixbuf);
+	gtk_assistant_set_page_header_image (assistant, page_summary, pixbuf);
+	g_object_unref (pixbuf);
 
-static void create_setup(GtkWidget *assistant)
-{
-	GtkWidget *vbox;
-	GtkWidget *label;
+	/* Passkey dialog */
+	passkey_dialog = GTK_WIDGET(gtk_builder_get_object(builder, "passkey_dialog"));
+	radio_auto = GTK_WIDGET(gtk_builder_get_object(builder, "radio_auto"));
+	radio_0000 = GTK_WIDGET(gtk_builder_get_object(builder, "radio_0000"));
+	radio_1111 = GTK_WIDGET(gtk_builder_get_object(builder, "radio_1111"));
+	radio_1234 = GTK_WIDGET(gtk_builder_get_object(builder, "radio_1234"));
+	radio_custom = GTK_WIDGET(gtk_builder_get_object(builder, "radio_custom"));
+	entry_custom = GTK_WIDGET(gtk_builder_get_object(builder, "entry_custom"));
 
-	vbox = create_vbox(assistant, GTK_ASSISTANT_PAGE_CONTENT,
-				_("Device setup"),
-				_("Setting up new device"));
+	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
+	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
+	g_object_set_data (G_OBJECT (radio_1111), "pin", "1111");
+	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
+	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
 
-	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
-	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
-	gtk_widget_set_size_request(GTK_WIDGET(label), 380, -1);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
-	label_setup = label;
+	g_signal_connect(radio_auto, "toggled",
+			 G_CALLBACK(set_user_pincode), NULL);
+	g_signal_connect(radio_0000, "toggled",
+			 G_CALLBACK(set_user_pincode), NULL);
+	g_signal_connect(radio_1111, "toggled",
+			 G_CALLBACK(set_user_pincode), NULL);
+	g_signal_connect(radio_1234, "toggled",
+			 G_CALLBACK(set_user_pincode), NULL);
+	g_signal_connect(radio_custom, "toggled",
+			 G_CALLBACK(set_user_pincode), NULL);
 
-	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
-	label_passkey_help = label;
+	g_signal_connect (entry_custom, "key-press-event",
+			  G_CALLBACK (entry_custom_event), NULL);
+	g_signal_connect (entry_custom, "changed",
+			  G_CALLBACK (entry_custom_changed), NULL);
+	g_signal_connect(radio_custom, "toggled",
+			G_CALLBACK(toggle_set_sensitive), entry_custom);
 
-	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 0.5, 0.5);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 0);
-	label_passkey = label;
-
-	page_setup = vbox;
-}
-
-static void create_summary(GtkWidget *assistant)
-{
-	GtkWidget *vbox;
-
-	vbox = create_vbox(assistant, GTK_ASSISTANT_PAGE_SUMMARY,
-				_("Summary"),
-				_("Successfully configured new device"));
-
-	page_summary = vbox;
-}
-
-static GtkWidget *create_wizard(void)
-{
-	GtkWidget *assistant;
-
-	assistant = gtk_assistant_new();
-	gtk_window_set_title(GTK_WINDOW(assistant), _("Bluetooth Device Wizard"));
-	gtk_window_set_position(GTK_WINDOW(assistant), GTK_WIN_POS_CENTER);
-	gtk_window_set_default_size(GTK_WINDOW(assistant), 440, 440);
-
-	create_intro(assistant);
-	//create_type(assistant);
-	create_search(assistant);
-	create_setup(assistant);
-	create_summary(assistant);
+	/* Connect signals.  Autoconnect could be used if the build process
+         * was changed.  Set the GtkBuilder documentation for details.
+         * Check all signals are in the .ui files before removing manual
+         * connections. */
+	/*gtk_builder_connect_signals(builder, NULL);*/
 
 	g_signal_connect(G_OBJECT(assistant), "close",
 					G_CALLBACK(close_callback), NULL);
@@ -672,12 +590,14 @@ static GtkWidget *create_wizard(void)
 					G_CALLBACK(close_callback), NULL);
 	g_signal_connect(G_OBJECT(assistant), "prepare",
 					G_CALLBACK(prepare_callback), NULL);
+	g_signal_connect (gtk_builder_get_object(builder, "passkey_option_button"), "clicked",
+			  G_CALLBACK (passkey_option_button_clicked), assistant);
 
-	gtk_widget_show_all(assistant);
+	gtk_widget_show_all(GTK_WIDGET(assistant));
 
 	gtk_assistant_update_buttons_state(GTK_ASSISTANT(assistant));
 
-	return assistant;
+	return GTK_WIDGET(assistant);
 }
 
 static UniqueResponse
@@ -738,6 +658,8 @@ int main(int argc, char *argv[])
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
 	window = create_wizard();
+	if (window == NULL)
+		return 1;
 	window_assistant = window;
 
 	g_signal_connect (app, "message-received",
@@ -753,3 +675,4 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
