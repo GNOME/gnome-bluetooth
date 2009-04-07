@@ -627,6 +627,8 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	GtkWidget *table;
 	GtkCellRenderer *renderer;
 
+	gtk_widget_push_composite_child ();
+
 	priv->show_paired = FALSE;
 	priv->show_search = FALSE;
 
@@ -798,6 +800,8 @@ bluetooth_chooser_init(BluetoothChooser *self)
 
 	priv->default_adapter_changed_id = g_signal_connect (priv->client, "notify::default-adapter",
 							     G_CALLBACK (default_adapter_changed), self);
+
+	gtk_widget_pop_composite_child ();
 }
 
 static void
