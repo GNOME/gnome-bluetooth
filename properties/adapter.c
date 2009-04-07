@@ -679,7 +679,7 @@ create_killswitch_page (GtkNotebook *notebook)
 	GtkBuilder *xml;
 
 	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "properties-adapter-off.ui", NULL) > 0)
+	if (gtk_builder_add_from_file (xml, "properties-adapter-off.ui", NULL) == 0)
 		gtk_builder_add_from_file (xml, PKGDATADIR "properties-adapter-off.ui", NULL);
 	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
 
@@ -709,7 +709,7 @@ create_no_adapter_page (GtkNotebook *notebook)
 	GtkBuilder *xml;
 
 	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "properties-no-adapter.ui", NULL) > 0)
+	if (gtk_builder_add_from_file (xml, "properties-no-adapter.ui", NULL) == 0)
 		gtk_builder_add_from_file (xml, PKGDATADIR "properties-no-adapter.ui", NULL);
 	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
 
