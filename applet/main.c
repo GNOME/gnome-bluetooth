@@ -46,7 +46,7 @@ static guint num_adapters_powered = 0;
 static gboolean show_icon_pref = TRUE;
 
 #define PREF_DIR		"/apps/bluetooth-manager"
-#define PREF_SHOW_ICON		PREF_DIR "/icon_policy"
+#define PREF_SHOW_ICON		PREF_DIR "/show_icon"
 
 static GConfClient* gconf;
 static BluetoothKillswitch *killswitch = NULL;
