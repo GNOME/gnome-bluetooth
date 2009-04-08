@@ -198,7 +198,7 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static void connect_callback(gpointer user_data)
+static void connect_callback(gboolean connected, gpointer user_data)
 {
 	GtkAssistant *assistant = user_data;
 
