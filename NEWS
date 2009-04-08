@@ -1,3 +1,41 @@
+ver 2.27.2:
+General:
+	- Use our own "paired" icon, to avoid confusion in some themes
+	- Remove "Trust" from the UI, it's an implementation detail
+	- Group input and audio device-types under the same heading
+	in the chooser
+
+Applet:
+	- Use new "disabled" icons
+	- Add a status label for the killswitch menu item
+	- Add the ability to connect/disconnect from devices
+	directly from the applet's menu
+
+Properties:
+	- Only show the default adapter, and simplify the UI
+	- Show a way to turn off the killswitch when there's
+	no Bluetooth adapters in the machine
+
+Wizard:
+	- Don't show "Enter passkey" when we know the passkey
+	of the device already
+	- Remove special-casing of mice, and PS3 BD remote from
+	the code and into the database
+	- Move passkey options button back into the content area,
+	from the action area
+	- Simplify passkey options dialogue
+	- Connect to input and audio devices when setup finishes
+	- Mark all the newly paired devices as trusted
+	- Fix the wizard not allowing to get past the search page
+	when the device selected didn't have a name at first
+	- Port quirks database to XML
+	- Add quirk for the Bluemax Bluetooth GPS Receiver GPS-009
+	- Add quirk for the Nintendo Wiimote
+	- Add quirk for iBT-GPS, and another GPS
+
+Sendto:
+	- Fix obex-data-server support
+
 ver 2.27.1:
 	- Fix the translations clashing with the old gnome-bluetooth
 
