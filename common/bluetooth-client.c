@@ -1333,6 +1333,7 @@ typedef struct {
 	gpointer data;
 	/* used for disconnect */
 	GList *services;
+	gboolean disconnected;
 } ConnectData;
 
 static void connect_callback(DBusGProxy *proxy,
@@ -1340,14 +1341,16 @@ static void connect_callback(DBusGProxy *proxy,
 {
 	ConnectData *conndata = user_data;
 	GError *error = NULL;
+	gboolean connected = FALSE;
 
-	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
+	if (dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID) != FALSE)
+		connected = TRUE;
 
 	if (error != NULL)
 		g_error_free(error);
 
 	if (conndata->func)
-		conndata->func(conndata->data);
+		conndata->func(connected, conndata->data);
 
 	g_object_unref(proxy);
 }
@@ -1417,7 +1420,8 @@ static void disconnect_callback(DBusGProxy *proxy,
 {
 	ConnectData *conndata = user_data;
 
-	dbus_g_proxy_end_call(proxy, call, NULL, G_TYPE_INVALID);
+	if (dbus_g_proxy_end_call(proxy, call, NULL, G_TYPE_INVALID) != FALSE)
+		conndata->disconnected = TRUE;
 
 	if (conndata->services != NULL) {
 		DBusGProxy *service;
@@ -1437,9 +1441,10 @@ static void disconnect_callback(DBusGProxy *proxy,
 	}
 
 	if (conndata->func)
-		conndata->func(conndata->data);
+		conndata->func(!conndata->disconnected, conndata->data);
 
 	g_object_unref(proxy);
+	g_free (conndata);
 }
 
 static int
