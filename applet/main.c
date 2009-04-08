@@ -48,6 +48,13 @@ static gboolean show_icon_pref = TRUE;
 #define PREF_DIR		"/apps/bluetooth-manager"
 #define PREF_SHOW_ICON		PREF_DIR "/show_icon"
 
+enum {
+	CONNECTED,
+	DISCONNECTED,
+	CONNECTING,
+	DISCONNECTING
+};
+
 static GConfClient* gconf;
 static BluetoothKillswitch *killswitch = NULL;
 
@@ -312,18 +319,97 @@ update_icon_visibility (void)
 }
 
 static void
+set_device_status_label (const char *address, int connected)
+{
+	char *action_name, *action_path;
+	GtkAction *status;
+	GObject *object;
+	const char *label;
+
+	g_return_if_fail (address != NULL);
+
+	switch (connected) {
+	case DISCONNECTING:
+		label = N_("Disconnecting...");
+		break;
+	case CONNECTING:
+		label = N_("Connecting...");
+		break;
+	case CONNECTED:
+		label = N_("Connected");
+		break;
+	case DISCONNECTED:
+		label = N_("Disconnected");
+		break;
+	default:
+		g_assert_not_reached ();
+	}
+
+	action_name = g_strdup_printf ("%s-status", address);
+	status = gtk_action_group_get_action (devices_action_group, action_name);
+	g_free (action_name);
+
+	g_assert (status != NULL);
+	gtk_action_set_label (status, _(label));
+
+	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
+	action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
+				       address, address);
+	action_set_bold (GTK_UI_MANAGER (object), status, action_path);
+	g_free (action_path);
+}
+
+static void
+connection_action_callback (GtkAction *action)
+{
+	const char *address;
+	int connected;
+
+	/* Revert to the previous state and wait for the
+	 * BluetoothClient to catch up */
+	connected = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "connected"));
+	if (connected == DISCONNECTING)
+		connected = CONNECTED;
+	else if (connected == CONNECTING)
+		connected = DISCONNECTED;
+	else
+		return;
+
+	g_object_set_data_full (G_OBJECT (action),
+				"connected", GINT_TO_POINTER (connected), NULL);
+	address = g_object_get_data (G_OBJECT (action), "address");
+	set_device_status_label (address, connected);
+}
+
+static void
 on_connect_activate (GtkAction *action, gpointer data)
 {
-	gboolean connected;
+	int connected;
 	const char *path;
+	const char *address;
 
 	connected = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "connected"));
+	/* Don't try connecting if something is already in progress */
+	if (connected == CONNECTING || connected == DISCONNECTING)
+		return;
+
 	path = g_object_get_data (G_OBJECT (action), "device-path");
 
-	if (connected == FALSE)
-		bluetooth_client_connect_service (client, path, NULL, NULL);
-	else
-		bluetooth_client_disconnect_service (client, path, NULL, NULL);
+	if (connected == DISCONNECTED) {
+		if (bluetooth_client_connect_service (client, path, (BluetoothClientConnectFunc) connection_action_callback, action) != FALSE)
+			connected = DISCONNECTING;
+	} else if (connected == CONNECTED) {
+		if (bluetooth_client_disconnect_service (client, path, (BluetoothClientConnectFunc) connection_action_callback, action) != FALSE)
+			connected = CONNECTING;
+	} else {
+		g_assert_not_reached ();
+	}
+
+	g_object_set_data_full (G_OBJECT (action),
+				"connected", GINT_TO_POINTER (connected), NULL);
+
+	address = g_object_get_data (G_OBJECT (action), "address");
+	set_device_status_label (address, connected);
 }
 
 static void
@@ -362,7 +448,7 @@ update_device_list (GtkTreeIter *parent)
 	GtkTreeIter iter;
 	gboolean cont;
 	guint num_devices;
-	GList *actions;
+	GList *actions, *l;
 
 	num_devices = 0;
 
@@ -376,17 +462,22 @@ update_device_list (GtkTreeIter *parent)
 		goto done;
 	}
 
-	/* Get a list of actions, and remove the ones with a
-	 * device in the list */
+	/* Get a list of actions, and we'll remove the ones with a
+	 * device in the list. We remove the submenu items first */
 	actions = gtk_action_group_list_actions (devices_action_group);
+	for (l = actions; l != NULL; l = l->next) {
+		if (bluetooth_verify_address (gtk_action_get_name (l->data)) == FALSE)
+			l->data = NULL;
+	}
+	actions = g_list_remove_all (actions, NULL);
 
 	cont = gtk_tree_model_iter_children (devices_model, &iter, parent);
 	while (cont) {
 		GHashTable *table;
 		DBusGProxy *proxy;
 		const char *name, *address;
-		gboolean connected;
-		GtkAction *action;
+		gboolean is_connected;
+		GtkAction *action, *status, *oper;
 
 		action = NULL;
 
@@ -395,18 +486,32 @@ update_device_list (GtkTreeIter *parent)
 				    BLUETOOTH_COLUMN_ADDRESS, &address,
 				    BLUETOOTH_COLUMN_SERVICES, &table,
 				    BLUETOOTH_COLUMN_ALIAS, &name,
-				    BLUETOOTH_COLUMN_CONNECTED, &connected,
+				    BLUETOOTH_COLUMN_CONNECTED, &is_connected,
 				    -1);
 
 		if (address != NULL) {
 			action = gtk_action_group_get_action (devices_action_group, address);
-			if (action)
+			if (action) {
+				char *action_name;
+
 				actions = g_list_remove (actions, action);
+
+				action_name = g_strdup_printf ("%s-status", address);
+				status = gtk_action_group_get_action (devices_action_group, action_name);
+				g_free (action_name);
+
+				action_name = g_strdup_printf ("%s-action", address);
+				oper = gtk_action_group_get_action (devices_action_group, action_name);
+				g_free (action_name);
+			}
 		}
 
 		if (table != NULL && address != NULL && proxy != NULL) {
 			if (action == NULL) {
 				guint menu_merge_id;
+				char *action_name, *action_path;
+
+				/* The menu item with descendants */
 				action = gtk_action_new (address, name, NULL, NULL);
 
 				gtk_action_group_add_action (devices_action_group, action);
@@ -414,21 +519,66 @@ update_device_list (GtkTreeIter *parent)
 				menu_merge_id = gtk_ui_manager_new_merge_id (GTK_UI_MANAGER (object));
 				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
 						       "/bluetooth-applet-popup/devices-placeholder", address, address,
-						       GTK_UI_MANAGER_MENUITEM, FALSE);
+						       GTK_UI_MANAGER_MENU, FALSE);
 				g_object_set_data_full (G_OBJECT (action),
 							"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
-				g_signal_connect (G_OBJECT (action), "activate",
+
+				/* The status menu item */
+				action_name = g_strdup_printf ("%s-status", address);
+				status = gtk_action_new (action_name,
+							 is_connected ? _("Connected") : _("Disconnected"), NULL, NULL);
+				gtk_action_set_sensitive (status, FALSE);
+
+				gtk_action_group_add_action (devices_action_group, status);
+				g_object_unref (status);
+
+				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
+						       action_path, action_name, action_name,
+						       GTK_UI_MANAGER_MENUITEM, FALSE);
+				g_free (action_path);
+
+				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s",
+							       address, action_name);
+				action_set_bold (GTK_UI_MANAGER (object), status, action_path);
+				g_free (action_path);
+
+				g_free (action_name);
+
+				/* The connect button */
+				action_name = g_strdup_printf ("%s-action", address);
+				oper = gtk_action_new (action_name,
+						       is_connected ? _("Disconnect") : _("Connect"), NULL, NULL);
+
+				gtk_action_group_add_action (devices_action_group, oper);
+				g_object_unref (oper);
+
+				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
+						       action_path, action_name, action_name,
+						       GTK_UI_MANAGER_MENUITEM, FALSE);
+				g_free (action_path);
+
+				g_free (action_name);
+
+				g_signal_connect (G_OBJECT (oper), "activate",
 						  G_CALLBACK (on_connect_activate), NULL);
 			} else {
+				g_assert (oper != NULL);
+				g_assert (status != NULL);
 				gtk_action_set_label (action, name);
+				set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
+				gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
 			}
-			g_object_set_data_full (G_OBJECT (action),
-						"connected", GINT_TO_POINTER (connected), NULL);
-			g_object_set_data_full (G_OBJECT (action),
+			g_object_set_data_full (G_OBJECT (oper),
+						"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
+			g_object_set_data_full (G_OBJECT (oper),
+						"address", g_strdup (address), g_free);
+			g_object_set_data_full (G_OBJECT (oper),
 						"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
 
 			/* And now for the trick of the day */
-			if (connected != FALSE) {
+			if (is_connected != FALSE) {
 				char *path;
 
 				path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
