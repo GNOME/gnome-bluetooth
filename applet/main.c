@@ -441,6 +441,21 @@ remove_action_item (GtkAction *action, GtkUIManager *manager)
 	gtk_action_group_remove_action (devices_action_group, action);
 }
 
+static char *
+escape_label_for_action (const char *alias)
+{
+	char **tokens, *name;
+
+	if (strchr (alias, '_') == NULL)
+		return g_strdup (alias);
+
+	tokens = g_strsplit (alias, "_", -1);
+	name = g_strjoinv ("__", tokens);
+	g_strfreev (tokens);
+
+	return name;
+}
+
 static void
 update_device_list (GtkTreeIter *parent)
 {
@@ -475,7 +490,7 @@ update_device_list (GtkTreeIter *parent)
 	while (cont) {
 		GHashTable *table;
 		DBusGProxy *proxy;
-		const char *name, *address;
+		const char *alias, *address;
 		gboolean is_connected;
 		GtkAction *action, *status, *oper;
 
@@ -485,7 +500,7 @@ update_device_list (GtkTreeIter *parent)
 				    BLUETOOTH_COLUMN_PROXY, &proxy,
 				    BLUETOOTH_COLUMN_ADDRESS, &address,
 				    BLUETOOTH_COLUMN_SERVICES, &table,
-				    BLUETOOTH_COLUMN_ALIAS, &name,
+				    BLUETOOTH_COLUMN_ALIAS, &alias,
 				    BLUETOOTH_COLUMN_CONNECTED, &is_connected,
 				    -1);
 
@@ -506,7 +521,11 @@ update_device_list (GtkTreeIter *parent)
 			}
 		}
 
-		if (table != NULL && address != NULL && proxy != NULL) {
+		if (table != NULL && address != NULL && proxy != NULL && alias != NULL) {
+			char *name;
+
+			name = escape_label_for_action (alias);
+
 			if (action == NULL) {
 				guint menu_merge_id;
 				char *action_name, *action_path;
@@ -570,6 +589,8 @@ update_device_list (GtkTreeIter *parent)
 				set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
 				gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
 			}
+			g_free (name);
+
 			g_object_set_data_full (G_OBJECT (oper),
 						"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
 			g_object_set_data_full (G_OBJECT (oper),
