@@ -22,6 +22,6 @@ all: check
 		xmllint --noout --valid $(srcdir)/pin-code-database.xml ;	\
 	fi
 
-EXTRA_DIST = $(man_MANS) $(pin_DATA)
+EXTRA_DIST = $(man_MANS) $(pin_DATA) $(ui_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
