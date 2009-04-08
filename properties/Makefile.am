@@ -33,7 +33,7 @@ schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
 CLEANFILES = $(desktop_DATA) $(schema_DATA)
 
-EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) $(schema_in_files)
+EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) $(schema_in_files) $(ui_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
 
