@@ -75,6 +75,17 @@ static GtkWidget *radio_1234 = NULL;
 static GtkWidget *radio_custom = NULL;
 static GtkWidget *entry_custom = NULL;
 
+/* Signals */
+void close_callback(GtkWidget *assistant, gpointer data);
+void prepare_callback(GtkWidget *assistant, GtkWidget *page, gpointer data);
+void select_device_changed(BluetoothChooser *selector, gchar *address, gpointer user_data);
+void device_selected_name_cb (GObject *object, GParamSpec *spec, gpointer user_data);
+gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event);
+void set_user_pincode(GtkWidget *button);
+void toggle_set_sensitive(GtkWidget *button, gpointer data);
+void passkey_option_button_clicked (GtkButton *button, gpointer data);
+void entry_custom_changed(GtkWidget *entry);
+
 static void
 set_large_label (GtkLabel *label, const char *text)
 {
@@ -252,15 +263,16 @@ static void create_callback(const char *path, gpointer user_data)
 	gtk_assistant_set_page_complete(assistant, page_setup, complete);
 }
 
-static void close_callback(GtkWidget *assistant, gpointer data)
+void close_callback(GtkWidget *assistant, gpointer data)
 {
 	gtk_widget_destroy(assistant);
 
 	gtk_main_quit();
 }
 
-static void prepare_callback(GtkWidget *assistant,
-                             GtkWidget *page, gpointer data)
+void prepare_callback(GtkWidget *assistant,
+		      GtkWidget *page,
+		      gpointer data)
 {
 	gboolean complete = TRUE;
 	const char *path = AGENT_PATH;
@@ -342,7 +354,8 @@ set_page_search_complete (void)
 	return complete;
 }
 
-static gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event)
+gboolean
+entry_custom_event(GtkWidget *entry, GdkEventKey *event)
 {
 	if (event->length == 0)
 		return FALSE;
@@ -354,7 +367,8 @@ static gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event)
 	return TRUE;
 }
 
-static void entry_custom_changed(GtkWidget *entry)
+void
+entry_custom_changed(GtkWidget *entry)
 {
 	user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
@@ -362,7 +376,8 @@ static void entry_custom_changed(GtkWidget *entry)
 					   gtk_entry_get_text_length (GTK_ENTRY (entry)) >= 1);
 }
 
-static void toggle_set_sensitive(GtkWidget *button, gpointer data)
+void
+toggle_set_sensitive(GtkWidget *button, gpointer data)
 {
 	gboolean active;
 
@@ -374,7 +389,8 @@ static void toggle_set_sensitive(GtkWidget *button, gpointer data)
 						   GTK_RESPONSE_ACCEPT, TRUE);
 }
 
-static void set_user_pincode(GtkWidget *button)
+void
+set_user_pincode(GtkWidget *button)
 {
 	GSList *list, *l;
 
@@ -415,21 +431,21 @@ static void set_user_pincode(GtkWidget *button)
 	}
 }
 
-static void device_selected_name_cb (GObject *object,
-				     GParamSpec *spec,
-				     gpointer user_data)
+void device_selected_name_cb (GObject *object,
+			      GParamSpec *spec,
+			      gpointer user_data)
 {
 	set_page_search_complete ();
 }
 
-static void select_device_changed(BluetoothChooser *selector,
-				  gchar *address,
-				  gpointer user_data)
+void select_device_changed(BluetoothChooser *selector,
+			   gchar *address,
+			   gpointer user_data)
 {
 	set_page_search_complete ();
 }
 
-static void
+void
 passkey_option_button_clicked (GtkButton *button, gpointer data)
 {
 	GtkWidget *radio;
@@ -517,11 +533,6 @@ static GtkWidget *create_wizard(void)
 		      "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
 		      NULL);
 
-	g_signal_connect(selector, "selected-device-changed",
-			 G_CALLBACK(select_device_changed), NULL);
-	g_signal_connect(selector, "notify::device-selected-name",
-			 G_CALLBACK(device_selected_name_cb), NULL);
-
 	/* Setup page */
 	page_setup = GTK_WIDGET(gtk_builder_get_object(builder, "page_setup"));
 	label_setup = GTK_WIDGET(gtk_builder_get_object(builder, "label_setup"));
@@ -555,38 +566,7 @@ static GtkWidget *create_wizard(void)
 	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
 	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
 
-	g_signal_connect(radio_auto, "toggled",
-			 G_CALLBACK(set_user_pincode), NULL);
-	g_signal_connect(radio_0000, "toggled",
-			 G_CALLBACK(set_user_pincode), NULL);
-	g_signal_connect(radio_1111, "toggled",
-			 G_CALLBACK(set_user_pincode), NULL);
-	g_signal_connect(radio_1234, "toggled",
-			 G_CALLBACK(set_user_pincode), NULL);
-	g_signal_connect(radio_custom, "toggled",
-			 G_CALLBACK(set_user_pincode), NULL);
-
-	g_signal_connect (entry_custom, "key-press-event",
-			  G_CALLBACK (entry_custom_event), NULL);
-	g_signal_connect (entry_custom, "changed",
-			  G_CALLBACK (entry_custom_changed), NULL);
-	g_signal_connect (radio_custom, "toggled",
-			  G_CALLBACK(toggle_set_sensitive), NULL);
-
-	/* Connect signals.  Autoconnect could be used if the build process
-         * was changed.  Set the GtkBuilder documentation for details.
-         * Check all signals are in the .ui files before removing manual
-         * connections. */
-	/*gtk_builder_connect_signals(builder, NULL);*/
-
-	g_signal_connect(G_OBJECT(assistant), "close",
-					G_CALLBACK(close_callback), NULL);
-	g_signal_connect(G_OBJECT(assistant), "cancel",
-					G_CALLBACK(close_callback), NULL);
-	g_signal_connect(G_OBJECT(assistant), "prepare",
-					G_CALLBACK(prepare_callback), NULL);
-	g_signal_connect (gtk_builder_get_object(builder, "passkey_option_button"), "clicked",
-			  G_CALLBACK (passkey_option_button_clicked), NULL);
+	gtk_builder_connect_signals(builder, NULL);
 
 	gtk_widget_show (GTK_WIDGET(assistant));
 

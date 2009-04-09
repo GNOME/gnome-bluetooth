@@ -94,6 +94,7 @@ PKG_CHECK_MODULES(SENDTO,
 dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gmodule-export-2.0
 		  gtk+-2.0
 		  unique-1.0)
 

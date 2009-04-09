@@ -61,6 +61,8 @@
             <property name="show-device-type">True</property>
             <property name="show-device-category">False</property>
             <property name="visible">True</property>
+            <signal name="selected-device-changed" handler="select_device_changed"/>
+            <signal name="notify::device-selected-name" handler="device_selected_name_cb"/>
           </object>
           <packing>
             <property name="position">0</property>
@@ -201,6 +203,7 @@
                 <property name="use_underline">True</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="set_user_pincode"/>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -226,6 +229,7 @@
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">radio_auto</property>
+                <signal name="toggled" handler="set_user_pincode"/>
               </object>
               <packing>
                 <property name="position">2</property>
@@ -240,6 +244,7 @@
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">radio_auto</property>
+                <signal name="toggled" handler="set_user_pincode"/>
               </object>
               <packing>
                 <property name="position">3</property>
@@ -254,6 +259,7 @@
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">radio_auto</property>
+                <signal name="toggled" handler="set_user_pincode"/>
               </object>
               <packing>
                 <property name="position">4</property>
@@ -272,6 +278,8 @@
                     <property name="active">True</property>
                     <property name="draw_indicator">True</property>
                     <property name="group">radio_auto</property>
+                    <signal name="toggled" handler="set_user_pincode"/>
+                    <signal name="toggled" handler="toggle_set_sensitive"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -284,8 +292,9 @@
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="max_length">20</property>
-                    <property name="invisible_char">&#x25CF;</property>
                     <property name="width_chars">20</property>
+                    <signal name="key-press-event" handler="entry_custom_event"/>
+                    <signal name="changed" handler="entry_custom_changed"/>
                   </object>
                   <packing>
                     <property name="position">1</property>
