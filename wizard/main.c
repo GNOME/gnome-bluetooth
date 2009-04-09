@@ -512,22 +512,15 @@ static GtkWidget *create_wizard(void)
 	page_search = GTK_WIDGET(gtk_builder_get_object(builder, "page_search"));
 
 	/* The selector */
-	selector = BLUETOOTH_CHOOSER (bluetooth_chooser_new(_("Select the device you want to setup")));
-	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
-	gtk_widget_show(GTK_WIDGET (selector));
-	g_object_set(selector,
-		     "show-search", TRUE,
-		     "show-device-type", TRUE,
-		     "show-device-category", FALSE,
-		     "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
-		     NULL);
+	selector = BLUETOOTH_CHOOSER (gtk_builder_get_object (builder, "selector"));
+	g_object_set (selector,
+		      "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
+		      NULL);
 
 	g_signal_connect(selector, "selected-device-changed",
 			 G_CALLBACK(select_device_changed), NULL);
 	g_signal_connect(selector, "notify::device-selected-name",
 			 G_CALLBACK(device_selected_name_cb), NULL);
-
-	gtk_container_add(GTK_CONTAINER(page_search), GTK_WIDGET (selector));
 
 	/* Setup page */
 	page_setup = GTK_WIDGET(gtk_builder_get_object(builder, "page_setup"));
