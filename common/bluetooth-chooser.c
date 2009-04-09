@@ -135,6 +135,32 @@ type_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	g_object_set (cell, "text", (type == 0) ? _("Unknown") : bluetooth_type_to_string (type), NULL);
 }
 
+static void
+alias_to_label (GtkTreeViewColumn *column, GtkCellRenderer *cell,
+		GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	const char *alias;
+	char *label, *escaped;
+	gboolean connected;
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_ALIAS, &alias,
+			    BLUETOOTH_COLUMN_CONNECTED, &connected,
+			    -1);
+
+	if (connected == FALSE) {
+		g_object_set (cell, "text", alias, NULL);
+		return;
+	}
+
+	escaped = g_markup_escape_text (alias, -1);
+	label = g_strdup_printf ("<b>%s</b>", escaped);
+	g_free (escaped);
+
+	g_object_set (cell, "markup", label, NULL);
+	g_free (label);
+}
+
 /**
  * bluetooth_chooser_start_discovery:
  * @self: a #BluetoothChooser widget
@@ -557,8 +583,8 @@ create_treeview (BluetoothChooser *self)
 	/* The device name */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
-	gtk_tree_view_column_set_attributes (column, renderer,
-					     "text", BLUETOOTH_COLUMN_ALIAS, NULL);
+	gtk_tree_view_column_set_cell_data_func (column, renderer,
+						 alias_to_label, NULL, NULL);
 
 	/* The connected icon */
 	priv->connected_cell = gtk_cell_renderer_pixbuf_new ();
