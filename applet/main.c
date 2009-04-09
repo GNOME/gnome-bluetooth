@@ -703,6 +703,7 @@ int main(int argc, char *argv[])
 	UniqueApp *app;
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
+	GConfValue *value;
 	GError *error = NULL;
 
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
@@ -756,7 +757,13 @@ int main(int argc, char *argv[])
 
 	gconf = gconf_client_get_default();
 
-	show_icon_pref = gconf_client_get_bool(gconf, PREF_SHOW_ICON, NULL);
+	value = gconf_client_get (gconf, PREF_SHOW_ICON, NULL);
+	if (value == NULL) {
+		show_icon_pref = TRUE;
+	} else {
+		show_icon_pref = gconf_value_get_bool (value);
+		gconf_value_free (value);
+	}
 
 	gconf_client_add_dir(gconf, PREF_DIR, GCONF_CLIENT_PRELOAD_NONE, NULL);
 
