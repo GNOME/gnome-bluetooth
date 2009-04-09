@@ -438,7 +438,9 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	oldpin = user_pincode;
 	user_pincode = NULL;
 
-	gtk_window_present(GTK_WINDOW(passkey_dialog));
+	gtk_window_set_transient_for (GTK_WINDOW (passkey_dialog),
+				      GTK_WINDOW (window_assistant));
+	gtk_window_present (GTK_WINDOW (passkey_dialog));
 
 	/* When reopening, try to guess where the pincode was set */
 	if (oldpin == NULL)
@@ -593,7 +595,7 @@ static GtkWidget *create_wizard(void)
 	g_signal_connect (gtk_builder_get_object(builder, "passkey_option_button"), "clicked",
 			  G_CALLBACK (passkey_option_button_clicked), assistant);
 
-	gtk_widget_show_all(GTK_WIDGET(assistant));
+	gtk_widget_show (GTK_WIDGET(assistant));
 
 	gtk_assistant_update_buttons_state(GTK_ASSISTANT(assistant));
 
