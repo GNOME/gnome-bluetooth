@@ -58,6 +58,12 @@
 #define BLUEZ_ADAPTER_INTERFACE	"org.bluez.Adapter"
 #define BLUEZ_DEVICE_INTERFACE	"org.bluez.Device"
 
+static char * detectable_interfaces[] = {
+	"org.bluez.Headset",
+	"org.bluez.AudioSink",
+	"org.bluez.Input"
+};
+
 static char * connectable_interfaces[] = {
 	"org.bluez.Audio",
 	"org.bluez.Input"
@@ -66,6 +72,8 @@ static char * connectable_interfaces[] = {
 /* Keep in sync with above */
 #define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[1])
 #define BLUEZ_AUDIO_INTERFACE (connectable_interfaces[0])
+#define BLUEZ_HEADSET_INTERFACE (detectable_interfaces[0])
+#define BLUEZ_AUDIOSINK_INTERFACE (detectable_interfaces[1])
 
 static DBusGConnection *connection = NULL;
 static BluetoothClient *bluetooth_client = NULL;
@@ -350,18 +358,28 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 
 	table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
 
-	for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
+	for (i = 0; i < G_N_ELEMENTS (detectable_interfaces); i++) {
 		DBusGProxy *iface;
 		GHashTable *props;
+		const char *iface_name;
 
 		/* Don't add the input interface for devices that already have
 		 * audio stuff */
-		if (g_str_equal (connectable_interfaces[i], BLUEZ_INPUT_INTERFACE)
+		if (g_str_equal (detectable_interfaces[i], BLUEZ_INPUT_INTERFACE)
 		    && g_hash_table_size (table) > 0)
 			continue;
+		/* Add org.bluez.Audio if the device supports headset or audiosink */
+		if (g_str_equal (detectable_interfaces[i], BLUEZ_HEADSET_INTERFACE) ||
+		    g_str_equal (detectable_interfaces[i], BLUEZ_AUDIOSINK_INTERFACE))
+		    	iface_name = BLUEZ_AUDIO_INTERFACE;
+		else
+			iface_name = detectable_interfaces[i];
 
-		iface = dbus_g_proxy_new_from_proxy (device, connectable_interfaces[i],
-						     NULL);
+		/* And skip interface if it's already in the hash table */
+		if (g_hash_table_lookup (table, iface_name) != NULL)
+			continue;
+
+		iface = dbus_g_proxy_new_from_proxy (device, iface_name, NULL);
 		if (dbus_g_proxy_call (iface, "GetProperties", NULL,
 				       G_TYPE_INVALID, dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &props,
 				       G_TYPE_INVALID) != FALSE) {
@@ -380,9 +398,7 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 				is_connected = (g_strcmp0(str, "connected") == 0);
 			}
 
-			g_hash_table_insert (table,
-					     connectable_interfaces[i],
-					     GINT_TO_POINTER (is_connected));
+			g_hash_table_insert (table, (gpointer) iface_name, GINT_TO_POINTER (is_connected));
 
 			if (connect_signal != FALSE) {
 				dbus_g_proxy_add_signal(iface, "PropertyChanged",
