@@ -362,12 +362,12 @@ static void entry_custom_changed(GtkWidget *entry)
 					   gtk_entry_get_text_length (GTK_ENTRY (entry)) >= 1);
 }
 
-static void toggle_set_sensitive(GtkWidget *button, GtkWidget *widget)
+static void toggle_set_sensitive(GtkWidget *button, gpointer data)
 {
 	gboolean active;
 
 	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
-	gtk_widget_set_sensitive(widget, active);
+	gtk_widget_set_sensitive(entry_custom, active);
 	/* When selecting another PIN, make sure the "Close" button is sensitive */
 	if (!active)
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
@@ -523,9 +523,9 @@ static GtkWidget *create_wizard(void)
 		     NULL);
 
 	g_signal_connect(selector, "selected-device-changed",
-			 G_CALLBACK(select_device_changed), assistant);
+			 G_CALLBACK(select_device_changed), NULL);
 	g_signal_connect(selector, "notify::device-selected-name",
-			 G_CALLBACK(device_selected_name_cb), assistant);
+			 G_CALLBACK(device_selected_name_cb), NULL);
 
 	gtk_container_add(GTK_CONTAINER(page_search), GTK_WIDGET (selector));
 
@@ -577,8 +577,8 @@ static GtkWidget *create_wizard(void)
 			  G_CALLBACK (entry_custom_event), NULL);
 	g_signal_connect (entry_custom, "changed",
 			  G_CALLBACK (entry_custom_changed), NULL);
-	g_signal_connect(radio_custom, "toggled",
-			G_CALLBACK(toggle_set_sensitive), entry_custom);
+	g_signal_connect (radio_custom, "toggled",
+			  G_CALLBACK(toggle_set_sensitive), NULL);
 
 	/* Connect signals.  Autoconnect could be used if the build process
          * was changed.  Set the GtkBuilder documentation for details.
@@ -593,7 +593,7 @@ static GtkWidget *create_wizard(void)
 	g_signal_connect(G_OBJECT(assistant), "prepare",
 					G_CALLBACK(prepare_callback), NULL);
 	g_signal_connect (gtk_builder_get_object(builder, "passkey_option_button"), "clicked",
-			  G_CALLBACK (passkey_option_button_clicked), assistant);
+			  G_CALLBACK (passkey_option_button_clicked), NULL);
 
 	gtk_widget_show (GTK_WIDGET(assistant));
 
