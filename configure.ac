@@ -121,6 +121,8 @@ GNOME_COMPILE_WARNINGS([maximum])
 GNOME_CXX_WARNINGS
 GNOME_MAINTAINER_MODE_DEFINES
 
+GNOME_DOC_INIT
+
 AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
@@ -135,5 +137,6 @@ AC_OUTPUT(Makefile
 	  docs/reference/Makefile
 	  docs/reference/libgnome-bluetooth/Makefile
 	  po/Makefile.in
+	  help/Makefile
 )
 

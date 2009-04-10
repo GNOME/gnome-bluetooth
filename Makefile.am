@@ -1,13 +1,13 @@
 
-SUBDIRS = icons common applet properties wizard sendto docs po
+SUBDIRS = icons common applet properties wizard sendto docs po help
 
-EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make
+EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make gnome-doc-utils.make
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update \
-	--enable-gtk-doc
+	--enable-gtk-doc --disable-scrollkeeper
 
-DISTCLEANFILES = intltool-extract intltool-update intltool-merge
+DISTCLEANFILES = intltool-extract intltool-update intltool-merge gnome-doc-utils.make
 
 MAINTAINERCLEANFILES = Makefile.in \
 	aclocal.m4 configure config.h.in config.sub config.guess \
