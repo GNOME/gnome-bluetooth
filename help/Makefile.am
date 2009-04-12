@@ -9,4 +9,4 @@ DOC_FIGURES = \
 	figures/bluetooth-properties.png	\
 	figures/bluetooth-wizard.png
 	
-DOC_LINGUAS = 
+DOC_LINGUAS = de
