@@ -490,7 +490,7 @@ update_device_list (GtkTreeIter *parent)
 	while (cont) {
 		GHashTable *table;
 		DBusGProxy *proxy;
-		const char *alias, *address;
+		char *alias, *address;
 		gboolean is_connected;
 		GtkAction *action, *status, *oper;
 
@@ -612,6 +612,8 @@ update_device_list (GtkTreeIter *parent)
 		if (proxy != NULL)
 			g_object_unref (proxy);
 
+		g_free (alias);
+		g_free (address);
 		cont = gtk_tree_model_iter_next (devices_model, &iter);
 	}
 

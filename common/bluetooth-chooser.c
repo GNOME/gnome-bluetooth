@@ -139,8 +139,7 @@ static void
 alias_to_label (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
-	const char *alias;
-	char *label, *escaped;
+	char *alias, *escaped, *label;
 	gboolean connected;
 
 	gtk_tree_model_get (model, iter,
@@ -150,15 +149,15 @@ alias_to_label (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 
 	if (connected == FALSE) {
 		g_object_set (cell, "text", alias, NULL);
-		return;
+	} else {
+		escaped = g_markup_escape_text (alias, -1);
+		label = g_strdup_printf ("<b>%s</b>", escaped);
+		g_free (escaped);
+
+		g_object_set (cell, "markup", label, NULL);
+		g_free (label);
 	}
-
-	escaped = g_markup_escape_text (alias, -1);
-	label = g_strdup_printf ("<b>%s</b>", escaped);
-	g_free (escaped);
-
-	g_object_set (cell, "markup", label, NULL);
-	g_free (label);
+	g_free (alias);
 }
 
 /**
