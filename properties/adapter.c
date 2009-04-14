@@ -679,8 +679,13 @@ create_killswitch_page (GtkNotebook *notebook)
 	GtkBuilder *xml;
 
 	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "properties-adapter-off.ui", NULL) == 0)
-		gtk_builder_add_from_file (xml, PKGDATADIR "properties-adapter-off.ui", NULL);
+	if (gtk_builder_add_from_file (xml, "properties-adapter-off.ui", NULL) == 0) {
+		if (gtk_builder_add_from_file (xml, PKGDATADIR "/properties-adapter-off.ui", NULL) == 0) {
+			g_warning ("Failed to load properties-adapter-off.ui");
+			return;
+		}
+	}
+
 	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
 
 	mainbox = gtk_vbox_new(FALSE, 24);
@@ -709,8 +714,12 @@ create_no_adapter_page (GtkNotebook *notebook)
 	GtkBuilder *xml;
 
 	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "properties-no-adapter.ui", NULL) == 0)
-		gtk_builder_add_from_file (xml, PKGDATADIR "properties-no-adapter.ui", NULL);
+	if (gtk_builder_add_from_file (xml, "properties-no-adapter.ui", NULL) == 0) {
+		if (gtk_builder_add_from_file (xml, PKGDATADIR "/properties-no-adapter.ui", NULL) == 0) {
+			g_warning ("Failed to load properties-no-adapter.ui");
+			return;
+		}
+	}
 	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
 
 	mainbox = gtk_vbox_new(FALSE, 24);
