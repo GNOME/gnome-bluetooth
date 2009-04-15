@@ -91,7 +91,7 @@ set_large_label (GtkLabel *label, const char *text)
 {
 	char *str;
 
-	str = g_strdup_printf("<span font=\"50\" color=\"black\" bgcolor=\"white\">  %s  </span>", text);
+	str = g_strdup_printf("<span font_desc=\"50\" color=\"black\" bgcolor=\"white\">  %s  </span>", text);
 	gtk_label_set_markup(GTK_LABEL(label_passkey), str);
 	g_free(str);
 }
