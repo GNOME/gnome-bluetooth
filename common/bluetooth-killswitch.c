@@ -63,10 +63,10 @@ power_to_state (int power)
 {
 	switch (power) {
 	case 1: /* RFKILL_STATE_UNBLOCKED */
-		return KILLSWITCH_STATE_NOT_KILLED;
+		return KILLSWITCH_STATE_UNBLOCKED;
 	case 0: /* RFKILL_STATE_SOFT_BLOCKED */
 	case 2: /* RFKILL_STATE_HARD_BLOCKED */
-		return KILLSWITCH_STATE_KILLED;
+		return KILLSWITCH_STATE_SOFT_BLOCKED;
 	default:
 		g_warning ("Unknown power state %d, please file a bug at "PACKAGE_BUGREPORT, power);
 		return KILLSWITCH_STATE_UNKNOWN;
@@ -202,14 +202,14 @@ bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState
 	GList *l;
 
 	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
-	g_return_if_fail (state == KILLSWITCH_STATE_KILLED || state == KILLSWITCH_STATE_NOT_KILLED);
+	g_return_if_fail (state == KILLSWITCH_STATE_SOFT_BLOCKED || state == KILLSWITCH_STATE_UNBLOCKED);
 
 	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 
 	if (priv->num_remaining_answers > 0)
 		return;
 
-	value = (state == KILLSWITCH_STATE_NOT_KILLED);
+	value = (state == KILLSWITCH_STATE_UNBLOCKED);
 
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
@@ -259,15 +259,15 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
 
-		if (ind->state == KILLSWITCH_STATE_KILLED) {
+		if (ind->state == KILLSWITCH_STATE_SOFT_BLOCKED) {
 			if (state == KILLSWITCH_STATE_UNKNOWN)
-				state = KILLSWITCH_STATE_KILLED;
-			if (state != KILLSWITCH_STATE_KILLED)
+				state = KILLSWITCH_STATE_SOFT_BLOCKED;
+			if (state != KILLSWITCH_STATE_SOFT_BLOCKED)
 				state = KILLSWITCH_STATE_MIXED;
 		} else {
 			if (state == KILLSWITCH_STATE_UNKNOWN)
-				state = KILLSWITCH_STATE_NOT_KILLED;
-			if (state != KILLSWITCH_STATE_NOT_KILLED)
+				state = KILLSWITCH_STATE_UNBLOCKED;
+			if (state != KILLSWITCH_STATE_UNBLOCKED)
 				state = KILLSWITCH_STATE_MIXED;
 		}
 	}

@@ -665,7 +665,7 @@ static void
 button_clicked_cb (GtkButton *button, gpointer user_data)
 {
 	gtk_widget_set_sensitive (GTK_WIDGET (user_data), FALSE);
-	bluetooth_killswitch_set_state (killswitch, KILLSWITCH_STATE_NOT_KILLED);
+	bluetooth_killswitch_set_state (killswitch, KILLSWITCH_STATE_UNBLOCKED);
 }
 
 static void

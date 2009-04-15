@@ -167,7 +167,7 @@ void bluetooth_status_callback (GObject *widget, gpointer user_data)
 	active = GPOINTER_TO_INT (g_object_get_data (object, "bt-active"));
 	active = !active;
 	bluetooth_killswitch_set_state (killswitch,
-					active ? KILLSWITCH_STATE_NOT_KILLED : KILLSWITCH_STATE_KILLED);
+					active ? KILLSWITCH_STATE_UNBLOCKED : KILLSWITCH_STATE_SOFT_BLOCKED);
 	g_object_set_data (object, "bt-active", GINT_TO_POINTER (active));
 }
 
@@ -218,11 +218,11 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 		sensitive = FALSE;
 		label = NULL;
 		status_label = N_("Bluetooth: Unknown");
-	} else if (state == KILLSWITCH_STATE_KILLED) {
+	} else if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
 		label = N_("Turn On Bluetooth");
 		status_label = N_("Bluetooth: Off");
 		bstate = FALSE;
-	} else if (state == KILLSWITCH_STATE_NOT_KILLED) {
+	} else if (state == KILLSWITCH_STATE_UNBLOCKED) {
 		label = N_("Turn Off Bluetooth");
 		status_label = N_("Bluetooth: On");
 		bstate = TRUE;
