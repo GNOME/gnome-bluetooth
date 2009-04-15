@@ -668,6 +668,22 @@ button_clicked_cb (GtkButton *button, gpointer user_data)
 	bluetooth_killswitch_set_state (killswitch, KILLSWITCH_STATE_UNBLOCKED);
 }
 
+static gboolean
+set_sensitive_now (gpointer user_data)
+{
+	gtk_widget_set_sensitive (GTK_WIDGET (user_data), TRUE);
+	return FALSE;
+}
+
+static void
+killswitch_state_changed (BluetoothKillswitch *killswitch,
+			  KillswitchState state,
+			  gpointer user_data)
+{
+	if (state != KILLSWITCH_STATE_UNBLOCKED)
+		g_timeout_add_seconds (3, set_sensitive_now, user_data);
+}
+
 static void
 create_killswitch_page (GtkNotebook *notebook)
 {
@@ -699,6 +715,8 @@ create_killswitch_page (GtkNotebook *notebook)
 	button = GTK_WIDGET (gtk_builder_get_object (xml, "button1"));
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (button_clicked_cb), button);
+	g_signal_connect (killswitch, "state-changed",
+			  G_CALLBACK (killswitch_state_changed), button);
 
 	gtk_widget_show_all (mainbox);
 
