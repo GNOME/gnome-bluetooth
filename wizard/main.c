@@ -549,7 +549,8 @@ static GtkWidget *create_wizard(void)
 	gtk_assistant_set_page_header_image (assistant, page_search, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_setup, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_summary, pixbuf);
-	g_object_unref (pixbuf);
+	if (pixbuf != NULL)
+		g_object_unref (pixbuf);
 
 	/* Passkey dialog */
 	passkey_dialog = GTK_WIDGET(gtk_builder_get_object(builder, "passkey_dialog"));
