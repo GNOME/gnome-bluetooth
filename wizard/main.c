@@ -55,6 +55,7 @@ static gboolean target_ssp = FALSE;
 static gchar *user_pincode = NULL;
 /* If TRUE, then we won't display the PIN code to the user when pairing */
 static gboolean automatic_pincode = FALSE;
+static char *pincode = NULL;
 
 static GtkWidget *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
@@ -99,41 +100,7 @@ set_large_label (GtkLabel *label, const char *text)
 static gboolean pincode_callback(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
-	char *pincode;
-
-	if (user_pincode != NULL && *user_pincode != '\0') {
-		pincode = g_strdup (user_pincode);
-	} else {
-		pincode = get_pincode_for_device(target_type, target_address, target_name);
-		if (pincode == NULL)
-			pincode = g_strdup(target_pincode);
-		else
-			automatic_pincode = TRUE;
-	}
-
-	if (automatic_pincode == FALSE) {
-		gtk_widget_show (label_passkey_help);
-		gtk_widget_show (label_passkey);
-
-		gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
-		set_large_label (GTK_LABEL (label_passkey), pincode);
-	} else {
-		char *text;
-
-		gtk_widget_show (label_passkey_help);
-		gtk_widget_hide (label_passkey);
-
-		/* translators:
-		 * The '%s' is the device name, for example:
-		 * Please wait whilst 'Sony Bluetooth Headset' is being paired
-		 */
-		text = g_strdup_printf(_("Please wait whilst '%s' is being paired"), target_name);
-		gtk_label_set_markup(GTK_LABEL(label_passkey_help), text);
-		g_free(text);
-	}
-
 	dbus_g_method_return(context, pincode);
-	g_free(pincode);
 
 	return TRUE;
 }
@@ -285,7 +252,7 @@ void prepare_callback(GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
-		gchar *text, *address, *name, *pincode;
+		gchar *text, *address, *name, *pin_ret;
 		guint type;
 
 		/* Get the info about the device now,
@@ -318,13 +285,49 @@ void prepare_callback(GtkWidget *assistant,
 		g_object_ref(agent);
 
 		/* Do we pair, or don't we? */
-		pincode = get_pincode_for_device (target_type, target_address, target_name);
-		if (pincode != NULL && g_str_equal (pincode, "NULL"))
+		pin_ret = get_pincode_for_device (target_type, target_address, target_name);
+		if (pin_ret != NULL && g_str_equal (pin_ret, "NULL"))
 			path = NULL;
-		g_free (pincode);
+		g_free (pin_ret);
 
 		bluetooth_client_create_device(client, target_address,
 					path, create_callback, assistant);
+	}
+
+	if (page == page_setup) {
+		g_free (pincode);
+		pincode = NULL;
+
+		if (user_pincode != NULL && *user_pincode != '\0') {
+			pincode = g_strdup (user_pincode);
+		} else {
+			pincode = get_pincode_for_device(target_type, target_address, target_name);
+			if (pincode == NULL)
+				pincode = g_strdup(target_pincode);
+			else
+				automatic_pincode = TRUE;
+		}
+
+		if (automatic_pincode == FALSE) {
+			gtk_widget_show (label_passkey_help);
+			gtk_widget_show (label_passkey);
+
+			gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
+			set_large_label (GTK_LABEL (label_passkey), target_pincode);
+		} else {
+			char *text;
+
+			gtk_widget_show (label_passkey_help);
+			gtk_widget_hide (label_passkey);
+
+			/* translators:
+			 * The '%s' is the device name, for example:
+			 * Please wait whilst 'Sony Bluetooth Headset' is being paired
+			 */
+			text = g_strdup_printf(_("Please wait whilst '%s' is being paired"), target_name);
+			gtk_label_set_markup(GTK_LABEL(label_passkey_help), text);
+			g_free(text);
+		}
 	}
 
 	gtk_assistant_set_page_complete(GTK_ASSISTANT(assistant),
