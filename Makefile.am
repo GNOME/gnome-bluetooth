@@ -28,21 +28,10 @@ if DESKTOP_UPDATE
 	$(UPDATE_DESKTOP_DATABASE) $(DESTDIR)$(datadir)/applications
 endif
 
-# Build ChangeLog from GIT or SVN history
-# (SVN r304 was the first ChangeLog-less checkin).
-# Only build this when in a git or svn checkout.
-#
-SVN_ROOT=svn+ssh://svn.gnome.org/svn/
-SVN_MODULE=gnome-bluetooth
-SVN_BRANCH=trunk
-
+# Build ChangeLog from GIT history
 ChangeLog:
 	@if test -f $(top_srcdir)/.git/HEAD; then \
 		git log --stat > $@; \
-	elif test -f $(top_srcdir)/.svn/entries; then \
-		svn log -v --xml -r HEAD:304 $(SVN_ROOT)/$(SVN_MODULE)/$(SVN_BRANCH) | \
-			xsltproc --stringparam strip-prefix "$(SVN_MODULE)/$(SVN_BRANCH)" \
-				 --stringparam include-rev "yes" $(top_srcdir)/svn2cl.xsl - > $@; \
 	fi
 
 dist: ChangeLog
