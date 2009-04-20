@@ -31,7 +31,7 @@ endif
 # Build ChangeLog from GIT history
 ChangeLog:
 	@if test -f $(top_srcdir)/.git/HEAD; then \
-		git log --stat > $@; \
+		git log --stat --after="Fri Feb 20 00:08:02 2009" > $@; \
 	fi
 
 dist: ChangeLog
