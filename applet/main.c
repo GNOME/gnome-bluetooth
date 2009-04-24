@@ -501,7 +501,6 @@ update_device_list (GtkTreeIter *parent)
 				    BLUETOOTH_COLUMN_ADDRESS, &address,
 				    BLUETOOTH_COLUMN_SERVICES, &table,
 				    BLUETOOTH_COLUMN_ALIAS, &alias,
-				    BLUETOOTH_COLUMN_CONNECTED, &is_connected,
 				    -1);
 
 		if (address != NULL) {
@@ -518,6 +517,21 @@ update_device_list (GtkTreeIter *parent)
 				action_name = g_strdup_printf ("%s-action", address);
 				oper = gtk_action_group_get_action (devices_action_group, action_name);
 				g_free (action_name);
+			}
+		}
+
+		/* If one service is connected, then we're connected */
+		is_connected = FALSE;
+		if (table != NULL) {
+			GList *list, *l;
+
+			list = g_hash_table_get_values (table);
+			for (l = list; l != NULL; l = l->next) {
+				gboolean val = GPOINTER_TO_INT (l->data);
+				if (val != FALSE) {
+					is_connected = TRUE;
+					break;
+				}
 			}
 		}
 
