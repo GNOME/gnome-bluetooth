@@ -39,6 +39,7 @@
 #include "notify.h"
 #include "agent.h"
 
+static gboolean option_debug = FALSE;
 static BluetoothClient *client;
 static GtkTreeModel *devices_model;
 static guint num_adapters_present = 0;
@@ -63,12 +64,18 @@ static GtkActionGroup *devices_action_group = NULL;
 
 /* Signal callbacks */
 void settings_callback(GObject *widget, gpointer user_data);
+void quit_callback(GObject *widget, gpointer user_data);
 void browse_callback(GObject *widget, gpointer user_data);
 void bluetooth_status_callback (GObject *widget, gpointer user_data);
 void wizard_callback(GObject *widget, gpointer user_data);
 void sendto_callback(GObject *widget, gpointer user_data);
 
 static void action_set_bold (GtkUIManager *manager, GtkAction *action, const char *path);
+
+void quit_callback(GObject *widget, gpointer user_data)
+{
+	gtk_main_quit ();
+}
 
 void settings_callback(GObject *widget, gpointer user_data)
 {
@@ -260,6 +267,12 @@ static GtkWidget *create_popupmenu(void)
 		GObject *object;
 
 		object = gtk_builder_get_object (xml, "killswitch-label");
+		gtk_action_set_visible (GTK_ACTION (object), TRUE);
+	}
+	if (option_debug != FALSE) {
+		GObject *object;
+
+		object = gtk_builder_get_object (xml, "quit");
 		gtk_action_set_visible (GTK_ACTION (object), TRUE);
 	}
 
@@ -711,6 +724,7 @@ static void gconf_callback(GConfClient *client, guint cnxn_id,
 }
 
 static GOptionEntry options[] = {
+	{ "debug", 'd', 0, G_OPTION_ARG_NONE, &option_debug, N_("Debug"), NULL },
 	{ NULL },
 };
 
@@ -720,27 +734,35 @@ int main(int argc, char *argv[])
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
 	GConfValue *value;
+	GOptionContext *context;
 	GError *error = NULL;
 
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 	textdomain(GETTEXT_PACKAGE);
 
-	if (gtk_init_with_args(&argc, &argv, NULL,
-				options, GETTEXT_PACKAGE, &error) == FALSE) {
-		if (error) {
-			g_print("%s\n", error->message);
-			g_error_free(error);
-		} else
-			g_print("An unknown error occurred\n");
+	g_type_init ();
 
+	/* Parse command-line options */
+	context = g_option_context_new (N_("- Bluetooth applet"));
+	g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
+	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+	g_option_context_add_group (context, gtk_get_option_group (TRUE));
+	if (g_option_context_parse (context, &argc, &argv, &error) == FALSE) {
+		g_print (_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+			 error->message, argv[0]);
+		g_error_free (error);
 		return 1;
 	}
 
-	app = unique_app_new ("org.gnome.Bluetooth.applet", NULL);
-	if (unique_app_is_running (app)) {
-		g_warning ("Applet is already running, exiting");
-		return 0;
+	if (option_debug == FALSE) {
+		app = unique_app_new ("org.gnome.Bluetooth.applet", NULL);
+		if (unique_app_is_running (app)) {
+			g_warning ("Applet is already running, exiting");
+			return 0;
+		}
+	} else {
+		app = NULL;
 	}
 
 	g_set_application_name(_("Bluetooth Applet"));
@@ -811,7 +833,8 @@ int main(int argc, char *argv[])
 
 	g_object_unref(client);
 
-	g_object_unref (app);
+	if (app != NULL)
+		g_object_unref (app);
 
 	return 0;
 }
