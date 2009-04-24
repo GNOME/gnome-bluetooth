@@ -417,6 +417,35 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 	return table;
 }
 
+static char **
+device_list_uuids (GValue *value)
+{
+	GPtrArray *ret;
+	char **uuids;
+	guint i;
+
+	if (value == NULL)
+		return NULL;
+
+	uuids = g_value_get_boxed (value);
+	if (uuids == NULL)
+		return NULL;
+
+	ret = g_ptr_array_new ();
+
+	for (i = 0; uuids[i] != NULL; i++) {
+		char *uuid;
+
+		//FIXME convert to bluetooth short names
+		uuid = g_strdup (uuids[i]);
+		g_ptr_array_add (ret, uuid);
+	}
+
+	g_ptr_array_add (ret, NULL);
+
+	return (char **) g_ptr_array_free (ret, FALSE);
+}
+
 static void device_changed(DBusGProxy *device, const char *property,
 					GValue *value, gpointer user_data)
 {
@@ -461,10 +490,14 @@ static void device_changed(DBusGProxy *device, const char *property,
 				BLUETOOTH_COLUMN_CONNECTED, connected, -1);
 	} else if (g_str_equal (property, "UUIDs") == TRUE) {
 		GHashTable *services;
+		char **uuids;
 
 		services = device_list_nodes (device, client, TRUE);
+		uuids = device_list_uuids (value);
 		gtk_tree_store_set(priv->store, &iter,
-				   BLUETOOTH_COLUMN_SERVICES, services, -1);
+				   BLUETOOTH_COLUMN_SERVICES, services,
+				   BLUETOOTH_COLUMN_UUIDS, uuids, -1);
+		g_strfreev (uuids);
 	}
 }
 
@@ -476,6 +509,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 	DBusGProxy *device;
 	GValue *value;
 	const gchar *address, *alias, *name, *icon;
+	char **uuids;
 	GHashTable *services;
 	gboolean paired, trusted, connected;
 	guint type;
@@ -519,6 +553,9 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 
 		value = g_hash_table_lookup(hash, "Connected");
 		connected = value ? g_value_get_boolean(value) : FALSE;
+
+		value = g_hash_table_lookup(hash, "UUIDs");
+		uuids = device_list_uuids (value);
 	} else {
 		if (device)
 			g_object_unref (device);
@@ -542,6 +579,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 					BLUETOOTH_COLUMN_TYPE, type,
 					BLUETOOTH_COLUMN_ICON, icon,
 					BLUETOOTH_COLUMN_RSSI, rssi,
+					BLUETOOTH_COLUMN_UUIDS, uuids,
 					-1);
 
 			if (device != NULL) {
@@ -577,6 +615,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 				BLUETOOTH_COLUMN_TRUSTED, trusted,
 				BLUETOOTH_COLUMN_CONNECTED, connected,
 				BLUETOOTH_COLUMN_SERVICES, services,
+				BLUETOOTH_COLUMN_UUIDS, uuids,
 				-1);
 
 done:
@@ -587,6 +626,7 @@ done:
 				G_CALLBACK(device_changed), client, NULL);
 		g_object_unref(device);
 	}
+	g_strfreev (uuids);
 }
 
 static void device_found(DBusGProxy *adapter, const char *address,
@@ -927,7 +967,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_UINT, G_TYPE_STRING, G_TYPE_INT,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-					 G_TYPE_HASH_TABLE);
+					 G_TYPE_HASH_TABLE, G_TYPE_STRV);
 
 	priv->dbus = dbus_g_proxy_new_for_name(connection, DBUS_SERVICE_DBUS,
 				DBUS_PATH_DBUS, DBUS_INTERFACE_DBUS);
