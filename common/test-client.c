@@ -132,7 +132,7 @@ static void uuids_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		str = NULL;
 	else
 		str = g_strjoinv (", ", uuids);
-	g_free (uuids);
+	g_strfreev (uuids);
 
 	g_object_set(cell, "text", str, NULL);
 	g_free (str);
