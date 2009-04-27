@@ -681,58 +681,7 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 	if (get_iter_from_proxy(priv->store, &iter, adapter) == FALSE)
 		return;
 
-	if (g_str_equal (property, "Powered") == TRUE) {
-		GHashTable *hash;
-		const gchar *address, *name;
-		gboolean discovering, powered;
-		GPtrArray *array;
-
-		/* Need to update those properties! */
-		adapter_get_properties(adapter, &hash, NULL);
-		if (hash != NULL) {
-			gboolean is_default;
-
-			value = g_hash_table_lookup(hash, "Address");
-			address = value ? g_value_get_string(value) : NULL;
-
-			value = g_hash_table_lookup(hash, "Name");
-			name = value ? g_value_get_string(value) : NULL;
-
-			value = g_hash_table_lookup(hash, "Discovering");
-			discovering = value ? g_value_get_boolean(value) : FALSE;
-
-			value = g_hash_table_lookup(hash, "Powered");
-			powered = value ? g_value_get_boolean(value) : FALSE;
-
-			gtk_tree_store_set(priv->store, &iter,
-					   BLUETOOTH_COLUMN_ADDRESS, address,
-					   BLUETOOTH_COLUMN_NAME, name,
-					   BLUETOOTH_COLUMN_DISCOVERING, discovering,
-					   BLUETOOTH_COLUMN_POWERED, powered,
-					   -1);
-			notify = TRUE;
-
-			/* Update the power setting */
-			gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
-					   BLUETOOTH_COLUMN_DEFAULT, &is_default,
-					   -1);
-			if (is_default) {
-				priv->default_adapter_powered = powered;
-				g_object_notify (G_OBJECT (client), "default-adapter-powered");
-			}
-
-			adapter_list_devices(adapter, &array, NULL);
-			if (array != NULL) {
-				int i;
-
-				for (i = 0; i < array->len; i++) {
-					gchar *path = g_ptr_array_index(array, i);
-					device_created(adapter, path, client);
-					g_free(path);
-				}
-			}
-		}
-	} else if (g_str_equal(property, "Name") == TRUE) {
+	if (g_str_equal(property, "Name") == TRUE) {
 		const gchar *name = g_value_get_string(value);
 
 		gtk_tree_store_set(priv->store, &iter,
@@ -762,7 +711,7 @@ static void adapter_added(DBusGProxy *manager,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 	DBusGProxy *adapter;
-	GPtrArray *array = NULL;
+	GPtrArray *devices;
 	GHashTable *hash = NULL;
 	GValue *value;
 	const gchar *address, *name;
@@ -786,11 +735,15 @@ static void adapter_added(DBusGProxy *manager,
 
 		value = g_hash_table_lookup(hash, "Powered");
 		powered = value ? g_value_get_boolean(value) : FALSE;
+
+		value = g_hash_table_lookup(hash, "Devices");
+		devices = value ? g_value_get_boxed (value) : NULL;
 	} else {
 		address = NULL;
 		name = NULL;
 		discovering = FALSE;
 		powered = FALSE;
+		devices = NULL;
 	}
 
 	gtk_tree_store_insert_with_values(priv->store, &iter, NULL, -1,
@@ -821,12 +774,11 @@ static void adapter_added(DBusGProxy *manager,
 	dbus_g_proxy_connect_signal(adapter, "DeviceFound",
 				G_CALLBACK(device_found), client, NULL);
 
-	adapter_list_devices(adapter, &array, NULL);
-	if (array != NULL) {
+	if (devices != NULL) {
 		int i;
 
-		for (i = 0; i < array->len; i++) {
-			gchar *path = g_ptr_array_index(array, i);
+		for (i = 0; i < devices->len; i++) {
+			gchar *path = g_ptr_array_index(devices, i);
 			device_created(adapter, path, client);
 			g_free(path);
 		}
