@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-20 17:42+0200\n"
-"PO-Revision-Date: 2009-04-20 17:43+0100\n"
+"POT-Creation-Date: 2009-04-28 09:04+0200\n"
+"PO-Revision-Date: 2009-04-28 09:05+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -152,70 +152,88 @@ msgstr "Inmatningsenheter (möss, tangentbord, ...)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hörlurar, headsets och andra ljudenheter"
 
-#: ../applet/main.c:98
+#: ../applet/main.c:105
 msgid "Select Device to Browse"
 msgstr "Välj enhet att bläddra"
 
-#: ../applet/main.c:102
+#: ../applet/main.c:109
 msgid "_Browse"
 msgstr "_Bläddra"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:119
 msgid "Select device to browse"
 msgstr "Välj enhet att bläddra"
 
-#: ../applet/main.c:220
+#: ../applet/main.c:227
 msgid "Bluetooth: Unknown"
 msgstr "Bluetooth: Okänd"
 
-#: ../applet/main.c:222
+#: ../applet/main.c:229
 #: ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Aktivera Bluetooth"
 
-#: ../applet/main.c:223
+#: ../applet/main.c:230
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Av"
 
-#: ../applet/main.c:226
+#: ../applet/main.c:233
 msgid "Turn Off Bluetooth"
 msgstr "Inaktivera Bluetooth"
 
-#: ../applet/main.c:227
+#: ../applet/main.c:234
 msgid "Bluetooth: On"
 msgstr "Bluetooth: På"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:346
 msgid "Disconnecting..."
 msgstr "Kopplar från..."
 
-#: ../applet/main.c:336
+#: ../applet/main.c:349
 #: ../sendto/main.c:210
 msgid "Connecting..."
 msgstr "Ansluter..."
 
-#: ../applet/main.c:339
-#: ../applet/main.c:548
+#: ../applet/main.c:352
+#: ../applet/main.c:575
 msgid "Connected"
 msgstr "Ansluten"
 
-#: ../applet/main.c:342
-#: ../applet/main.c:548
+#: ../applet/main.c:355
+#: ../applet/main.c:575
 msgid "Disconnected"
 msgstr "Frånkopplad"
 
-#: ../applet/main.c:570
-#: ../applet/main.c:590
+#: ../applet/main.c:597
+#: ../applet/main.c:617
 #: ../properties/adapter.c:415
 msgid "Disconnect"
 msgstr "Koppla från"
 
-#: ../applet/main.c:570
-#: ../applet/main.c:590
+#: ../applet/main.c:597
+#: ../applet/main.c:617
 msgid "Connect"
 msgstr "Anslut"
 
-#: ../applet/main.c:732
+#: ../applet/main.c:727
+msgid "Debug"
+msgstr "Felsök"
+
+#. Parse command-line options
+#: ../applet/main.c:747
+msgid "- Bluetooth applet"
+msgstr "- Panelprogram för Bluetooth"
+
+#: ../applet/main.c:752
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Kör \"%s --help\" för att se en komplett lista över tillgängliga kommandoradsflaggor.\n"
+
+#: ../applet/main.c:768
 msgid "Bluetooth Applet"
 msgstr "Panelprogram för Bluetooth"
 
@@ -330,10 +348,14 @@ msgid "Preferences..."
 msgstr "Inställningar..."
 
 #: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "Avsluta"
+
+#: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
 msgstr "Skicka filer till enhet..."
 
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:7
 #: ../properties/adapter.c:406
 msgid "Setup new device..."
 msgstr "Konfigurera ny enhet..."
