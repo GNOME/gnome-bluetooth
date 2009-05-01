@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-04-17 12:42+0000\n"
-"PO-Revision-Date: 2009-04-19 14:07+0200\n"
+"POT-Creation-Date: 2009-04-24 19:58+0000\n"
+"PO-Revision-Date: 2009-05-01 21:35+0200\n"
 "Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -155,63 +155,83 @@ msgstr "Dispositivos de entrada (ratones, teclados, ...)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Auriculares, auriculares con micrófono y otros dispositivos de sonido"
 
-#: ../applet/main.c:98
+#: ../applet/main.c:105
 msgid "Select Device to Browse"
 msgstr "Seleccionar el dispositivo que examinar"
 
-#: ../applet/main.c:102
+#: ../applet/main.c:109
 msgid "_Browse"
 msgstr "_Examinar"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:119
 msgid "Select device to browse"
 msgstr "Seleccionar el dispositivo para examinar"
 
-#: ../applet/main.c:220
+#: ../applet/main.c:227
 msgid "Bluetooth: Unknown"
 msgstr "Bluetooth: Desconocido"
 
-#: ../applet/main.c:222 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:229 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Encender Bluetooth"
 
-#: ../applet/main.c:223
+#: ../applet/main.c:230
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Apagado"
 
-#: ../applet/main.c:226
+#: ../applet/main.c:233
 msgid "Turn Off Bluetooth"
 msgstr "Apagar Bluetooth"
 
-#: ../applet/main.c:227
+#: ../applet/main.c:234
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Encendido"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:346
 msgid "Disconnecting..."
 msgstr "Desconectando…"
 
-#: ../applet/main.c:336 ../sendto/main.c:210
+#: ../applet/main.c:349 ../sendto/main.c:210
 msgid "Connecting..."
 msgstr "Conectando…"
 
-#: ../applet/main.c:339 ../applet/main.c:548
+#: ../applet/main.c:352 ../applet/main.c:575
 msgid "Connected"
 msgstr "Conectado"
 
-#: ../applet/main.c:342 ../applet/main.c:548
+#: ../applet/main.c:355 ../applet/main.c:575
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../applet/main.c:570 ../applet/main.c:590 ../properties/adapter.c:415
+#: ../applet/main.c:597 ../applet/main.c:617 ../properties/adapter.c:415
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: ../applet/main.c:570 ../applet/main.c:590
+#: ../applet/main.c:597 ../applet/main.c:617
 msgid "Connect"
 msgstr "Conectar"
 
-#: ../applet/main.c:732
+#: ../applet/main.c:727
+msgid "Debug"
+msgstr "Depurar"
+
+#. Parse command-line options
+#: ../applet/main.c:747
+#| msgid "Bluetooth Applet"
+msgid "- Bluetooth applet"
+msgstr "- Miniaplicación para Bluetooth"
+
+#: ../applet/main.c:752
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Ejecute «%s --help» para ver una lista completa de todas las opciones "
+"disponibles de la línea de comandos.\n"
+
+#: ../applet/main.c:768
 msgid "Bluetooth Applet"
 msgstr "Miniaplicación para Bluetooth"
 
@@ -317,10 +337,14 @@ msgid "Preferences..."
 msgstr "Preferencias..."
 
 #: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "Salir"
+
+#: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
 msgstr "Enviar archivos al dispositivo..."
 
-#: ../applet/popup-menu.ui.h:6 ../properties/adapter.c:406
+#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:406
 msgid "Setup new device..."
 msgstr "Configurar un dispositivo nuevo..."
 
@@ -444,24 +468,15 @@ msgstr "Error de GConf:  %s"
 msgid "All further errors shown only on terminal."
 msgstr "En adelante todos los errores sólo se mostrarán en el terminal."
 
-#: ../wizard/main.c:118 ../wizard/main.c:163
+#: ../wizard/main.c:130 ../wizard/main.c:315
 msgid "Please enter the following passkey:"
 msgstr "Introduzca la siguiente contraseña:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
-#.
-#: ../wizard/main.c:130
-#, c-format
-msgid "Please wait whilst '%s' is being paired"
-msgstr "Espere mientras «%s» se empareja"
-
-#. translators:
-#. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:188
+#: ../wizard/main.c:155
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Emparejamiento con «%s» cancelado"
@@ -470,7 +485,7 @@ msgstr "Emparejamiento con «%s» cancelado"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' finished
 #.
-#: ../wizard/main.c:194
+#: ../wizard/main.c:161
 #, c-format
 msgid "Pairing with '%s' finished"
 msgstr "Finalizó el emparejamiento con «%s»"
@@ -479,12 +494,12 @@ msgstr "Finalizó el emparejamiento con «%s»"
 #. * The '%s' is the device name, for example:
 #. * Successfully paired with 'Sony Bluetooth Headset'
 #.
-#: ../wizard/main.c:233
+#: ../wizard/main.c:200
 #, c-format
 msgid "Successfully paired with '%s'"
 msgstr "Emparejado con «%s» correctamente"
 
-#: ../wizard/main.c:243
+#: ../wizard/main.c:210
 msgid "Please wait while setting up the device..."
 msgstr "Espere mientras se configura el dispositivo..."
 
@@ -492,7 +507,7 @@ msgstr "Espere mientras se configura el dispositivo..."
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:253
+#: ../wizard/main.c:220
 #, c-format
 msgid "Pairing with '%s' failed"
 msgstr "Falló el emparejamiento con «%s»"
@@ -501,10 +516,19 @@ msgstr "Falló el emparejamiento con «%s»"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:311
+#: ../wizard/main.c:278
 #, c-format
 msgid "Connecting to '%s' now..."
 msgstr "Conectando con «%s» ahora..."
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
+#.
+#: ../wizard/main.c:327
+#, c-format
+msgid "Please wait whilst '%s' is being paired"
+msgstr "Espere mientras «%s» se empareja"
 
 #: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -523,17 +547,14 @@ msgid "<b>Fixed Passkey</b>"
 msgstr "<b>Contraseña fija</b>"
 
 #: ../wizard/wizard.ui.h:5
-#| msgid "<b>Setting up new device</b>\n"
 msgid "<b>Setting up new device</b>"
 msgstr "<b>Configurando el dispositivo nuevo</b>"
 
 #: ../wizard/wizard.ui.h:6
-#| msgid "<b>Successfully configured new device</b>\n"
 msgid "<b>Successfully configured new device</b>"
 msgstr "<b>Se configuró correctamente el nuevo dispositivo</b>"
 
 #: ../wizard/wizard.ui.h:7
-#| msgid "<b>Welcome to the Bluetooth device setup wizard</b>\n"
 msgid "<b>Welcome to the Bluetooth device setup wizard</b>"
 msgstr ""
 "<b>Bienvenido al asistente de configuración de dispositivos Bluetooth</b>"
@@ -559,10 +580,6 @@ msgid "Select the device you want to setup"
 msgstr "Seleccione el dispositivo que quiere configurar"
 
 #: ../wizard/wizard.ui.h:13
-#| msgid ""
-#| "The device wizard will walk you through the process of configuring "
-#| "Bluetooth enabled devices for use with this computer.\n"
-#| "\n"
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer."
