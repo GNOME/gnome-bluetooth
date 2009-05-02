@@ -81,7 +81,7 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 			if (type != BLUETOOTH_TYPE_ANY && type != pdata->type)
 				return;
 		} else if (g_str_equal (*attr_names, "oui")) {
-			if (g_str_has_prefix (*attr_values, pdata->address) == FALSE)
+			if (g_str_has_prefix (pdata->address, *attr_values) == FALSE)
 				return;
 		} else if (g_str_equal (*attr_names, "name")) {
 			if (g_str_equal (*attr_values, pdata->name) == FALSE)
