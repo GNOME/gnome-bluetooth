@@ -417,6 +417,25 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 	return table;
 }
 
+/* Short names from Table 2 at:
+ * https://www.bluetooth.org/Technical/AssignedNumbers/service_discovery.htm */
+static const char *
+uuid16_to_string (guint64 uuid16)
+{
+	switch (uuid16) {
+	case 0x1103:
+		return "DialupNetworking";
+	case 0x1105:
+		return "OBEXObjectPush";
+	case 0x1106:
+		return "OBEXFileTransfer";
+	case 0x110B:
+		return "AudioSink";
+	default:
+		return NULL;
+	}
+}
+
 static char **
 device_list_uuids (GValue *value)
 {
@@ -434,11 +453,26 @@ device_list_uuids (GValue *value)
 	ret = g_ptr_array_new ();
 
 	for (i = 0; uuids[i] != NULL; i++) {
-		char *uuid;
+		char **parts;
+		guint uuid16;
+		const char *uuid;
 
-		//FIXME convert to bluetooth short names
-		uuid = g_strdup (uuids[i]);
-		g_ptr_array_add (ret, uuid);
+		parts = g_strsplit (uuids[i], "-", -1);
+		if (parts == NULL || parts[0] == NULL) {
+			g_strfreev (parts);
+			continue;
+		}
+
+		uuid16 = g_ascii_strtoull (parts[0], NULL, 16);
+		g_strfreev (parts);
+		if (uuid16 == 0)
+			continue;
+
+		uuid = uuid16_to_string (uuid16);
+		if (uuid == NULL)
+			continue;
+		g_ptr_array_add (ret, g_strdup (uuid));
+
 	}
 
 	g_ptr_array_add (ret, NULL);
