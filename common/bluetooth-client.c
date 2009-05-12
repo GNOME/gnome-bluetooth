@@ -431,6 +431,10 @@ uuid16_to_string (guint64 uuid16)
 		return "OBEXFileTransfer";
 	case 0x110B:
 		return "AudioSink";
+	case 0x1115:
+		return "PANU";
+	case 0x1116:
+		return "NAP";
 	default:
 		return NULL;
 	}
