@@ -119,6 +119,8 @@ static void services_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	g_hash_table_foreach (services, (GHFunc) services_foreach, str);
 	g_object_set(cell, "text", str->str, NULL);
 	g_string_free (str, TRUE);
+
+	g_hash_table_unref (services);
 }
 
 static void uuids_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,

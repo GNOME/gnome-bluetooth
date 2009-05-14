@@ -535,6 +535,8 @@ static void device_changed(DBusGProxy *device, const char *property,
 		gtk_tree_store_set(priv->store, &iter,
 				   BLUETOOTH_COLUMN_SERVICES, services,
 				   BLUETOOTH_COLUMN_UUIDS, uuids, -1);
+		if (services != NULL)
+			g_hash_table_unref (services);
 		g_strfreev (uuids);
 	}
 }
@@ -554,6 +556,8 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 	gint rssi;
 	GtkTreeIter iter;
 	gboolean cont;
+
+	services = NULL;
 
 	if (hash == NULL) {
 		device = dbus_g_proxy_new_from_proxy(adapter,
@@ -665,6 +669,8 @@ done:
 		g_object_unref(device);
 	}
 	g_strfreev (uuids);
+	if (services)
+		g_hash_table_unref (services);
 }
 
 static void device_found(DBusGProxy *adapter, const char *address,
@@ -1458,6 +1464,7 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 			break;
 		}
 	}
+	g_hash_table_unref (table);
 
 	if (iface_name == NULL) {
 		g_printerr("No supported services on the '%s' device\n", device);
@@ -1571,8 +1578,11 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 			   BLUETOOTH_COLUMN_PROXY, &proxy,
 			   BLUETOOTH_COLUMN_SERVICES, &table,
 			   -1);
-	if (proxy == NULL)
+	if (proxy == NULL) {
+		if (table != NULL)
+			g_hash_table_unref (table);
 		return FALSE;
+	}
 
 	conndata = g_new0 (ConnectData, 1);
 
@@ -1587,6 +1597,7 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 		DBusGProxy *service;
 
 		conndata->services = g_hash_table_get_keys (table);
+		g_hash_table_unref (table);
 		conndata->services = g_list_sort (conndata->services, (GCompareFunc) rev_sort_services);
 
 		service = dbus_g_proxy_new_from_proxy (priv->manager,
