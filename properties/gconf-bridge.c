@@ -1215,16 +1215,13 @@ error_handler (GConfClient *client,
         g_warning ("GConf error:\n  %s", error->message);
 
         if (!shown_dialog) {
-                char *message;
                 GtkWidget *dlg;
 
-                message = g_strdup_printf (_("GConf error: %s"),
-                                           error->message);
                 dlg = gtk_message_dialog_new (NULL, 0,
                                               GTK_MESSAGE_ERROR,
                                               GTK_BUTTONS_OK,
-                                              message);
-                g_free (message);
+                                              _("GConf error: %s"),
+                                              error->message);
 
                 gtk_message_dialog_format_secondary_text
                         (GTK_MESSAGE_DIALOG (dlg),
