@@ -784,7 +784,7 @@ static GOptionEntry options[] = {
 	{ "device", 0, 0, G_OPTION_ARG_STRING, &option_device,
 				N_("Remote device to use"), "ADDRESS" },
 	{ "name", 0, 0, G_OPTION_ARG_STRING, &option_device_name,
-				N_("Remove device's name"), NULL },
+				N_("Remote device's name"), NULL },
 	{ "dest", 0, G_OPTION_FLAG_HIDDEN,
 			G_OPTION_ARG_STRING, &option_device, NULL, NULL },
 	{ G_OPTION_REMAINING, 0, 0,
