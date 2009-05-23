@@ -27,6 +27,10 @@
   connected to and marked as trusted. This is for devices such as mice
   and joypads where there is no encryption
 
+  If a device can use a random PIN but is limited in the number of digits that
+  can be entered, then set the "pin" attribute should be set to "max:X" where X
+  is the maximum number of digits, for example max:4 for 4 digits.
+
   [1]: So specific devices should be at the top, and generic ones at the bottom,
   so settings for specific devices are overridden as expected.
 -->
@@ -130,6 +134,9 @@
 
 	<!-- http://bugzilla.gnome.org/show_bug.cgi?id=561325 -->
 	<device type="network" oui="00:06:66:" name="OBDPros scantool" pin="1234"/>
+
+	<!-- http://bugzilla.gnome.org/show_bug.cgi?id=583651 -->
+	<device type="audio" oui="00:1A:80:" name="CMT-DH5BT" pin="max:4"/>
 
 <!-- Generic types -->
 

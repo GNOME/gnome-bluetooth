@@ -25,12 +25,15 @@
 #include <config.h>
 #endif
 
+#include <stdlib.h>
+#include <string.h>
 #include <glib.h>
 #include <bluetooth-enums.h>
 
 #include "pin.h"
 
 #define PIN_CODE_DB "pin-code-database.xml"
+#define MAX_DIGITS_PIN_PREFIX "max:"
 
 #define TYPE_IS(x, r) {				\
 	if (g_str_equal(type, x)) return r;	\
@@ -53,6 +56,7 @@ static guint string_to_type(const char *type)
 
 typedef struct {
 	char *ret_pin;
+	guint max_digits;
 	guint type;
 	const char *address;
 	const char *name;
@@ -68,7 +72,7 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 {
 	PinParseData *pdata = (PinParseData *) data;
 
-	if (pdata->ret_pin != NULL)
+	if (pdata->ret_pin != NULL || pdata->max_digits != 0)
 		return;
 	if (g_str_equal (element_name, "device") == FALSE)
 		return;
@@ -87,7 +91,12 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 			if (g_str_equal (*attr_values, pdata->name) == FALSE)
 				return;
 		} else if (g_str_equal (*attr_names, "pin")) {
-			pdata->ret_pin = g_strdup (*attr_values);
+			if (g_str_has_prefix (MAX_DIGITS_PIN_PREFIX, *attr_values) != FALSE) {
+				pdata->max_digits = strtoul (*attr_values + strlen (MAX_DIGITS_PIN_PREFIX), NULL, 0);
+				g_assert (pdata->max_digits > 0 && pdata->max_digits < PIN_NUM_DIGITS);
+			} else {
+				pdata->ret_pin = g_strdup (*attr_values);
+			}
 			return;
 		}
 
@@ -97,7 +106,7 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 }
 
 char *
-get_pincode_for_device (guint type, const char *address, const char *name)
+get_pincode_for_device (guint type, const char *address, const char *name, guint *max_digits)
 {
 	GMarkupParseContext *ctx;
 	GMarkupParser parser = { pin_db_parse_start_tag, NULL, NULL, NULL, NULL };
@@ -120,6 +129,7 @@ get_pincode_for_device (guint type, const char *address, const char *name)
 	}
 
 	data.ret_pin = NULL;
+	data.max_digits = 0;
 	data.type = type;
 	data.address = address;
 	data.name = name;
@@ -133,6 +143,9 @@ get_pincode_for_device (guint type, const char *address, const char *name)
 
 	g_markup_parse_context_free (ctx);
 	g_free (buf);
+
+	if (max_digits != NULL)
+		*max_digits = data.max_digits;
 
 	return data.ret_pin;
 }

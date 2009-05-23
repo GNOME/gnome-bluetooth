@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <math.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -285,7 +286,7 @@ void prepare_callback(GtkWidget *assistant,
 		g_object_ref(agent);
 
 		/* Do we pair, or don't we? */
-		pin_ret = get_pincode_for_device (target_type, target_address, target_name);
+		pin_ret = get_pincode_for_device (target_type, target_address, target_name, NULL);
 		if (pin_ret != NULL && g_str_equal (pin_ret, "NULL"))
 			path = NULL;
 		g_free (pin_ret);
@@ -301,11 +302,19 @@ void prepare_callback(GtkWidget *assistant,
 		if (user_pincode != NULL && *user_pincode != '\0') {
 			pincode = g_strdup (user_pincode);
 		} else {
-			pincode = get_pincode_for_device(target_type, target_address, target_name);
-			if (pincode == NULL)
-				pincode = g_strdup(target_pincode);
-			else
+			guint max_digits;
+
+			pincode = get_pincode_for_device(target_type, target_address, target_name, &max_digits);
+			if (pincode == NULL) {
+				/* Truncate the default pincode if the device doesn't like long
+				 * PIN codes */
+				if (max_digits != PIN_NUM_DIGITS && max_digits > 0)
+					pincode = g_strndup(target_pincode, max_digits);
+				else
+					pincode = g_strdup(target_pincode);
+			} else {
 				automatic_pincode = TRUE;
+			}
 		}
 
 		if (automatic_pincode == FALSE) {
@@ -624,7 +633,8 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-	target_pincode = g_strdup_printf("%d", g_random_int_range(100000, 999999));
+	target_pincode = g_strdup_printf("%d", g_random_int_range(pow (10, PIN_NUM_DIGITS - 1),
+								  pow (10, PIN_NUM_DIGITS) - 1));
 
 	client = bluetooth_client_new();
 
