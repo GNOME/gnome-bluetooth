@@ -322,7 +322,7 @@ void prepare_callback(GtkWidget *assistant,
 			gtk_widget_show (label_passkey);
 
 			gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
-			set_large_label (GTK_LABEL (label_passkey), target_pincode);
+			set_large_label (GTK_LABEL (label_passkey), pincode);
 		} else {
 			char *text;
 
