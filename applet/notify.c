@@ -33,6 +33,7 @@
 
 static GtkStatusIcon *statusicon = NULL;
 static char *icon_name = NULL;
+static char *tooltip = NULL;
 static NotifyNotification *notify = NULL;
 
 static void notify_action(NotifyNotification *notify,
@@ -95,8 +96,7 @@ GtkStatusIcon *init_notification(void)
 	notify_init("bluetooth-manager");
 
 	statusicon = gtk_status_icon_new_from_icon_name(icon_name);
-
-	gtk_status_icon_set_tooltip_markup(statusicon, _("Bluetooth Manager"));
+	gtk_status_icon_set_tooltip_markup(statusicon, tooltip);
 
 	return statusicon;
 }
@@ -109,6 +109,8 @@ void cleanup_notification(void)
 
 	g_free (icon_name);
 	icon_name = NULL;
+	g_free (tooltip);
+	tooltip = NULL;
 
 	notify_uninit();
 }
@@ -128,12 +130,15 @@ void hide_icon(void)
 void set_icon(gboolean enabled)
 {
 	const char *name = (enabled ? "bluetooth" : "bluetooth-disabled");
+	const char *_tooltip = enabled ? _("Bluetooth: Enabled") : _("Bluetooth: Disabled");
 
 	if (statusicon == NULL) {
 		g_free (icon_name);
 		icon_name = g_strdup (name);
+		tooltip = g_strdup (_tooltip);
 	} else {
 		gtk_status_icon_set_from_icon_name (statusicon, name);
+		gtk_status_icon_set_tooltip_markup(statusicon, _tooltip);
 	}
 }
 
