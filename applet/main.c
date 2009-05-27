@@ -503,6 +503,10 @@ add_menu_item (const char *address,
 	GtkAction *action;
 	char *action_path, *action_name;
 
+	g_return_val_if_fail (address != NULL, NULL);
+	g_return_val_if_fail (suffix != NULL, NULL);
+	g_return_val_if_fail (label != NULL, NULL);
+
 	action_name = g_strdup_printf ("%s-%s", address, suffix);
 	action = gtk_action_new (action_name, label, NULL, NULL);
 
@@ -529,7 +533,7 @@ add_menu_item (const char *address,
 static void
 update_device_list (GtkTreeIter *parent)
 {
-	GObject *object;
+	GtkUIManager *uimanager;
 	GtkTreeIter iter;
 	gboolean cont;
 	guint num_devices;
@@ -537,12 +541,12 @@ update_device_list (GtkTreeIter *parent)
 
 	num_devices = 0;
 
-	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
+	uimanager = GTK_UI_MANAGER (gtk_builder_get_object (xml, "bluetooth-applet-ui-manager"));
 
 	if (parent == NULL) {
 		/* No default adapter? Remove everything */
 		actions = gtk_action_group_list_actions (devices_action_group);
-		g_list_foreach (actions, (GFunc) remove_action_item, object);
+		g_list_foreach (actions, (GFunc) remove_action_item, uimanager);
 		g_list_free (actions);
 		goto done;
 	}
@@ -620,8 +624,8 @@ update_device_list (GtkTreeIter *parent)
 
 				gtk_action_group_add_action (devices_action_group, action);
 				g_object_unref (action);
-				menu_merge_id = gtk_ui_manager_new_merge_id (GTK_UI_MANAGER (object));
-				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
+				menu_merge_id = gtk_ui_manager_new_merge_id (uimanager);
+				gtk_ui_manager_add_ui (uimanager, menu_merge_id,
 						       "/bluetooth-applet-popup/devices-placeholder", address, address,
 						       GTK_UI_MANAGER_MENU, FALSE);
 				g_object_set_data_full (G_OBJECT (action),
@@ -637,14 +641,14 @@ update_device_list (GtkTreeIter *parent)
 				g_object_unref (status);
 
 				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
-				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
+				gtk_ui_manager_add_ui (uimanager, menu_merge_id,
 						       action_path, action_name, action_name,
 						       GTK_UI_MANAGER_MENUITEM, FALSE);
 				g_free (action_path);
 
 				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s",
 							       address, action_name);
-				action_set_bold (GTK_UI_MANAGER (object), status, action_path);
+				action_set_bold (uimanager, status, action_path);
 				g_free (action_path);
 
 				g_free (action_name);
@@ -658,7 +662,7 @@ update_device_list (GtkTreeIter *parent)
 				g_object_unref (oper);
 
 				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
-				gtk_ui_manager_add_ui (GTK_UI_MANAGER (object), menu_merge_id,
+				gtk_ui_manager_add_ui (uimanager, menu_merge_id,
 						       action_path, action_name, action_name,
 						       GTK_UI_MANAGER_MENUITEM, FALSE);
 				g_free (action_path);
@@ -673,7 +677,7 @@ update_device_list (GtkTreeIter *parent)
 					add_menu_item (address,
 						       "sendto",
 						       _("Send files..."),
-						       GTK_UI_MANAGER (object),
+						       uimanager,
 						       menu_merge_id,
 						       G_CALLBACK (sendto_callback));
 				}
@@ -681,7 +685,7 @@ update_device_list (GtkTreeIter *parent)
 					add_menu_item (address,
 						       "browse",
 						       _("Browse files..."),
-						       GTK_UI_MANAGER (object),
+						       uimanager,
 						       menu_merge_id,
 						       G_CALLBACK (browse_callback));
 				}
@@ -706,7 +710,7 @@ update_device_list (GtkTreeIter *parent)
 				char *path;
 
 				path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
-				action_set_bold (GTK_UI_MANAGER (object), action, path);
+				action_set_bold (uimanager, action, path);
 				g_free (path);
 			}
 
@@ -724,14 +728,14 @@ update_device_list (GtkTreeIter *parent)
 	}
 
 	/* Remove the left-over devices */
-	g_list_foreach (actions, (GFunc) remove_action_item, object);
+	g_list_foreach (actions, (GFunc) remove_action_item, uimanager);
 	g_list_free (actions);
 
 done:
-	gtk_ui_manager_ensure_update (GTK_UI_MANAGER (object));
+	gtk_ui_manager_ensure_update (uimanager);
 
-	object = gtk_builder_get_object (xml, "devices-label");
-	gtk_action_set_visible (GTK_ACTION (object), num_devices > 0);
+	gtk_action_set_visible (GTK_ACTION (gtk_builder_get_object (xml, "devices-label")),
+				num_devices > 0);
 }
 
 static void device_changed (GtkTreeModel *model,
