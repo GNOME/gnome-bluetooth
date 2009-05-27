@@ -617,7 +617,7 @@ update_device_list (GtkTreeIter *parent)
 
 			if (action == NULL) {
 				guint menu_merge_id;
-				char *action_name, *action_path;
+				char *action_path;
 
 				/* The menu item with descendants */
 				action = gtk_action_new (address, name, NULL, NULL);
@@ -632,45 +632,26 @@ update_device_list (GtkTreeIter *parent)
 							"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
 
 				/* The status menu item */
-				action_name = g_strdup_printf ("%s-status", address);
-				status = gtk_action_new (action_name,
-							 is_connected ? _("Connected") : _("Disconnected"), NULL, NULL);
+				status = add_menu_item (address,
+							"status",
+							is_connected ? _("Connected") : _("Disconnected"),
+							uimanager,
+							menu_merge_id,
+							NULL);
 				gtk_action_set_sensitive (status, FALSE);
 
-				gtk_action_group_add_action (devices_action_group, status);
-				g_object_unref (status);
-
-				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
-				gtk_ui_manager_add_ui (uimanager, menu_merge_id,
-						       action_path, action_name, action_name,
-						       GTK_UI_MANAGER_MENUITEM, FALSE);
-				g_free (action_path);
-
-				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s",
-							       address, action_name);
+				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
+							       address, address);
 				action_set_bold (uimanager, status, action_path);
 				g_free (action_path);
 
-				g_free (action_name);
-
 				/* The connect button */
-				action_name = g_strdup_printf ("%s-action", address);
-				oper = gtk_action_new (action_name,
-						       is_connected ? _("Disconnect") : _("Connect"), NULL, NULL);
-
-				gtk_action_group_add_action (devices_action_group, oper);
-				g_object_unref (oper);
-
-				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
-				gtk_ui_manager_add_ui (uimanager, menu_merge_id,
-						       action_path, action_name, action_name,
-						       GTK_UI_MANAGER_MENUITEM, FALSE);
-				g_free (action_path);
-
-				g_free (action_name);
-
-				g_signal_connect (G_OBJECT (oper), "activate",
-						  G_CALLBACK (on_connect_activate), NULL);
+				oper = add_menu_item (address,
+						      "action",
+						      is_connected ? _("Disconnect") : _("Connect"),
+						      uimanager,
+						      menu_merge_id,
+						      G_CALLBACK (on_connect_activate));
 
 				/* The Send to... button */
 				if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
