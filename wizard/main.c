@@ -354,7 +354,11 @@ set_page_search_complete (void)
 		      "device-selected-name", &name,
 		      NULL);
 
-	if (address != NULL && name != NULL)
+	if (address == NULL)
+		complete = FALSE;
+	else if (name == NULL)
+		complete = (user_pincode != NULL && strlen(user_pincode) >= 4);
+	else
 		complete = (user_pincode == NULL || strlen(user_pincode) >= 4);
 
 	g_free (address);
