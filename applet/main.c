@@ -98,50 +98,54 @@ select_device_changed(BluetoothChooser *sel,
 
 void browse_callback(GObject *widget, gpointer user_data)
 {
-	GtkWidget *dialog, *selector, *button, *image;
-	char *bdaddr, *cmd;
-	int response_id;
+	char *address, *cmd;
 
-	dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
-					     GTK_DIALOG_NO_SEPARATOR,
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
-					     NULL);
-	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);
-	image = gtk_image_new_from_icon_name (GTK_STOCK_CONNECT, GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (button), image);
-	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-					  GTK_RESPONSE_ACCEPT, FALSE);
-	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
+	address = g_strdup (g_object_get_data (widget, "address"));
+	if (address == NULL) {
+		GtkWidget *dialog, *selector, *button, *image;
+		int response_id;
 
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+		dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
+						     GTK_DIALOG_NO_SEPARATOR,
+						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+						     NULL);
+		button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);
+		image = gtk_image_new_from_icon_name (GTK_STOCK_CONNECT, GTK_ICON_SIZE_BUTTON);
+		gtk_button_set_image (GTK_BUTTON (button), image);
+		gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
+						  GTK_RESPONSE_ACCEPT, FALSE);
+		gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
 
-	selector = bluetooth_chooser_new(_("Select device to browse"));
-	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
-	gtk_widget_show(selector);
-	g_object_set(selector,
-		     "show-search", TRUE,
-		     "show-device-category", TRUE,
-		     "show-device-type", TRUE,
-		     NULL);
-	g_signal_connect(selector, "selected-device-changed",
-			 G_CALLBACK(select_device_changed), dialog);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
-	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
+		gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+		gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
 
-	bdaddr = NULL;
-	response_id = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response_id == GTK_RESPONSE_ACCEPT)
-		g_object_get (G_OBJECT (selector), "device-selected", &bdaddr, NULL);
+		selector = bluetooth_chooser_new(_("Select device to browse"));
+		gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
+		gtk_widget_show(selector);
+		g_object_set(selector,
+			     "show-search", TRUE,
+			     "show-device-category", TRUE,
+			     "show-device-type", TRUE,
+			     NULL);
+		g_signal_connect(selector, "selected-device-changed",
+				 G_CALLBACK(select_device_changed), dialog);
+		gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+		bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
-	gtk_widget_destroy (dialog);
+		address = NULL;
+		response_id = gtk_dialog_run (GTK_DIALOG (dialog));
+		if (response_id == GTK_RESPONSE_ACCEPT)
+			g_object_get (G_OBJECT (selector), "device-selected", &address, NULL);
 
-	if (response_id != GTK_RESPONSE_ACCEPT)
-		return;
+		gtk_widget_destroy (dialog);
+
+		if (response_id != GTK_RESPONSE_ACCEPT)
+			return;
+	}
 
 	cmd = g_strdup_printf("%s --no-default-window \"obex://[%s]\"",
-			      "nautilus", bdaddr);
-	g_free (bdaddr);
+			      "nautilus", address);
+	g_free (address);
 
 	if (!g_spawn_command_line_async(cmd, NULL))
 		g_printerr("Couldn't execute command: %s\n", cmd);
@@ -151,10 +155,17 @@ void browse_callback(GObject *widget, gpointer user_data)
 
 void sendto_callback(GObject *widget, gpointer user_data)
 {
-	const char *command = "bluetooth-sendto";
+	char *cmd;
+	const char *address;
 
-	if (!g_spawn_command_line_async(command, NULL))
-		g_printerr("Couldn't execute command: %s\n", command);
+	address = g_object_get_data (widget, "address");
+
+	cmd = g_strdup_printf("%s --device=\"%s\"", "bluetooth-sendto", address);
+
+	if (!g_spawn_command_line_async(cmd, NULL))
+		g_printerr("Couldn't execute command: %s\n", cmd);
+
+	g_free (cmd);
 }
 
 void wizard_callback(GObject *widget, gpointer user_data)
@@ -469,6 +480,52 @@ escape_label_for_action (const char *alias)
 	return name;
 }
 
+static gboolean
+device_has_uuid (const char **uuids, const char *uuid)
+{
+	guint i;
+
+	for (i = 0; uuids[i] != NULL; i++) {
+		if (g_str_equal (uuid, uuids[i]) != FALSE)
+			return TRUE;
+	}
+	return FALSE;
+}
+
+static GtkAction *
+add_menu_item (const char *address,
+	       const char *suffix,
+	       const char *label,
+	       GtkUIManager *uimanager,
+	       guint merge_id,
+	       GCallback callback)
+{
+	GtkAction *action;
+	char *action_path, *action_name;
+
+	action_name = g_strdup_printf ("%s-%s", address, suffix);
+	action = gtk_action_new (action_name, label, NULL, NULL);
+
+	gtk_action_group_add_action (devices_action_group, action);
+	g_object_unref (action);
+
+	action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+	gtk_ui_manager_add_ui (uimanager, merge_id,
+			       action_path, action_name, action_name,
+			       GTK_UI_MANAGER_MENUITEM, FALSE);
+	g_free (action_path);
+
+	g_free (action_name);
+
+	if (callback != NULL)
+		g_signal_connect (G_OBJECT (action), "activate", callback, NULL);
+
+	g_object_set_data_full (G_OBJECT (action),
+				"address", g_strdup (address), g_free);
+
+	return action;
+}
+
 static void
 update_device_list (GtkTreeIter *parent)
 {
@@ -503,7 +560,7 @@ update_device_list (GtkTreeIter *parent)
 	while (cont) {
 		GHashTable *table;
 		DBusGProxy *proxy;
-		char *alias, *address;
+		char *alias, *address, **uuids;
 		gboolean is_connected;
 		GtkAction *action, *status, *oper;
 
@@ -514,6 +571,7 @@ update_device_list (GtkTreeIter *parent)
 				    BLUETOOTH_COLUMN_ADDRESS, &address,
 				    BLUETOOTH_COLUMN_SERVICES, &table,
 				    BLUETOOTH_COLUMN_ALIAS, &alias,
+				    BLUETOOTH_COLUMN_UUIDS, &uuids,
 				    -1);
 
 		if (address != NULL) {
@@ -609,6 +667,24 @@ update_device_list (GtkTreeIter *parent)
 
 				g_signal_connect (G_OBJECT (oper), "activate",
 						  G_CALLBACK (on_connect_activate), NULL);
+
+				/* The Send to... button */
+				if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
+					add_menu_item (address,
+						       "sendto",
+						       _("Send files..."),
+						       GTK_UI_MANAGER (object),
+						       menu_merge_id,
+						       G_CALLBACK (sendto_callback));
+				}
+				if (device_has_uuid ((const char **) uuids, "OBEXFileTransfer") != FALSE) {
+					add_menu_item (address,
+						       "browse",
+						       _("Browse files..."),
+						       GTK_UI_MANAGER (object),
+						       menu_merge_id,
+						       G_CALLBACK (browse_callback));
+				}
 			} else {
 				g_assert (oper != NULL);
 				g_assert (status != NULL);
@@ -641,6 +717,7 @@ update_device_list (GtkTreeIter *parent)
 
 		if (table != NULL)
 			g_hash_table_unref (table);
+		g_strfreev (uuids);
 		g_free (alias);
 		g_free (address);
 		cont = gtk_tree_model_iter_next (devices_model, &iter);
