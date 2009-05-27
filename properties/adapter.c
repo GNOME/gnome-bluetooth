@@ -257,6 +257,7 @@ static void create_adapter(adapter_data *adapter)
 {
 	GHashTable *hash = NULL;
 	GValue *value;
+	DBusGProxy *default_proxy;
 	const gchar *address, *name;
 	gboolean powered, discoverable;
 	guint timeout;
@@ -303,6 +304,13 @@ static void create_adapter(adapter_data *adapter)
 	adapter->powered = powered;
 	adapter->discoverable = discoverable;
 	adapter->timeout_value = timeout;
+
+	default_proxy = bluetooth_client_get_default_adapter (client);
+	if (default_proxy != NULL) {
+		adapter->is_default = g_str_equal (dbus_g_proxy_get_path (default_proxy),
+						   dbus_g_proxy_get_path (adapter->proxy));
+		g_object_unref (default_proxy);
+	}
 
 	mainbox = gtk_vbox_new(FALSE, 6);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
@@ -510,25 +518,18 @@ static adapter_data *adapter_alloc(GtkTreeModel *model,
 {
 	DBusGProxy *proxy;
 	adapter_data *adapter;
-	gboolean is_default;
-
-	adapter = g_new0(adapter_data, 1);
 
 	gtk_tree_model_get(model, iter,
 			   BLUETOOTH_COLUMN_PROXY, &proxy,
-			   BLUETOOTH_COLUMN_DEFAULT, &is_default,
 			   -1);
 
-	if (proxy == NULL) {
-		g_free(adapter);
+	if (proxy == NULL)
 		return NULL;
-	}
 
+	adapter = g_new0(adapter_data, 1);
 	adapter->notebook = user_data;
-
 	adapter->reference = gtk_tree_row_reference_new(model, path);
 	adapter->proxy = proxy;
-	adapter->is_default = is_default;
 
 	return adapter;
 }
@@ -631,9 +632,6 @@ adapter_changed (GtkTreeModel *model,
 			   BLUETOOTH_COLUMN_NAME, &name,
 			   -1);
 
-	if (proxy == NULL)
-		return;
-
 	for (i = 0; i < count; i++) {
 		GtkWidget *widget;
 		adapter_data *adapter;
@@ -646,14 +644,18 @@ adapter_changed (GtkTreeModel *model,
 		if (adapter == NULL)
 			continue;
 
-		if (proxy == adapter->proxy) {
+		adapter->is_default = is_default;
+
+		if (proxy == NULL || adapter->proxy == NULL)
+			continue;
+
+		if (g_str_equal (dbus_g_proxy_get_path (proxy), dbus_g_proxy_get_path (adapter->proxy)) != FALSE) {
 			if (is_default != FALSE && powered != FALSE)
 				gtk_notebook_set_current_page (notebook, i);
 			/* We usually get an adapter_added before the device
 			 * is powered, so we set the name here instead */
 			if (name)
 				gtk_entry_set_text(GTK_ENTRY(adapter->entry), name);
-			break;
 		}
 	}
 
