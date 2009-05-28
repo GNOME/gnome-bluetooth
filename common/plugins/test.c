@@ -25,19 +25,32 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n-lib.h>
+
 #include <gtk/gtk.h>
 #include <bluetooth-plugin.h>
 
 static gboolean
 has_config_widget (const char *bdaddr, const char **uuids)
 {
+	guint i;
+
+	if (uuids == NULL)
+		return FALSE;
+	for (i = 0; uuids[i] != NULL; i++) {
+		if (g_str_equal (uuids[i], "PANU"))
+			return TRUE;
+	}
 	return FALSE;
 }
 
 static GtkWidget *
 get_config_widgets (const char *bdaddr, const char **uuids)
 {
-	return NULL;
+	/* translators:
+	 * This is in a test plugin, please make sure you add the "(test)" part,
+	 * or leave untranslated */
+	return gtk_check_button_new_with_label (_("Access the Internet using your mobile phone (test)"));
 }
 
 static GbtPluginInfo plugin_info = {
