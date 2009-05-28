@@ -476,7 +476,10 @@ device_list_uuids (GValue *value)
 		if (uuid == NULL)
 			continue;
 		g_ptr_array_add (ret, g_strdup (uuid));
-
+	}
+	if (ret->len == 0) {
+		g_ptr_array_free (ret, TRUE);
+		return NULL;
 	}
 
 	g_ptr_array_add (ret, NULL);
