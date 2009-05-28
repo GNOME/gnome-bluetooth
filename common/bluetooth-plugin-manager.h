@@ -29,6 +29,9 @@ G_BEGIN_DECLS
 gboolean bluetooth_plugin_manager_init (void);
 void bluetooth_plugin_manager_cleanup (void);
 
+GList *bluetooth_plugin_manager_get_widgets (const char *bdaddr,
+					     const char **uuids);
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_PLUGIN_MANAGER_H */

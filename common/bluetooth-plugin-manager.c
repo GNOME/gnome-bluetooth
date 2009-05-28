@@ -40,6 +40,7 @@ bluetooth_plugin_dir_process (const char *plugindir)
 	const char *item;
 	GbtPlugin *p = NULL;
 	GError *err = NULL;
+	gboolean (*gbt_init_plugin)(GbtPlugin *p);
 
 	dir = g_dir_open (plugindir, 0, &err);
 
@@ -61,6 +62,14 @@ bluetooth_plugin_dir_process (const char *plugindir)
 					continue;
 				}
 				g_free (module_path);
+
+				if (!g_module_symbol (p->module, "gbt_init_plugin", (gpointer *) &gbt_init_plugin)) {
+					g_warning ("error: %s", g_module_error ());
+					g_module_close (p->module);
+					continue;
+				}
+
+				gbt_init_plugin (p);
 
 				plugin_list = g_list_append (plugin_list, p); 
 			}
@@ -96,5 +105,22 @@ bluetooth_plugin_manager_cleanup (void)
 	}
 	g_list_free (plugin_list);
 	plugin_list = NULL;
+}
+
+GList *
+bluetooth_plugin_manager_get_widgets (const char *bdaddr,
+				      const char **uuids)
+{
+	GList *ret = NULL;
+	GList *l;
+
+	for (l = plugin_list; l != NULL; l = l->next) {
+		GbtPlugin *p = l->data;
+
+		if (p->info->has_config_widget (bdaddr, uuids))
+			ret = g_list_prepend (ret, p->info->get_config_widgets (bdaddr, uuids));
+	}
+
+	return ret;
 }
 
