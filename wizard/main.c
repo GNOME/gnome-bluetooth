@@ -36,6 +36,7 @@
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
 #include <bluetooth-agent.h>
+#include <bluetooth-plugin-manager.h>
 
 #include "pin.h"
 
@@ -66,6 +67,8 @@ static GtkWidget *page_summary = NULL;
 static GtkWidget *label_setup = NULL;
 static GtkWidget *label_passkey = NULL;
 static GtkWidget *label_passkey_help = NULL;
+static GtkWidget *extra_config_label = NULL;
+static GtkWidget *extra_config_help_label = NULL;
 
 static BluetoothChooser *selector = NULL;
 
@@ -253,7 +256,7 @@ void prepare_callback(GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
-		gchar *text, *address, *name, *pin_ret;
+		char *text, *address, *name, *pin_ret;
 		BluetoothType type;
 
 		/* Get the info about the device now,
@@ -297,6 +300,12 @@ void prepare_callback(GtkWidget *assistant,
 		g_free (pincode);
 		pincode = NULL;
 
+		/* Set the filter on the selector, so we can use it to get more
+		 * info later, in page_summary */
+		g_object_set (selector,
+			      "device-category-filter", BLUETOOTH_CATEGORY_ALL,
+			      NULL);
+
 		if (user_pincode != NULL && *user_pincode != '\0') {
 			pincode = g_strdup (user_pincode);
 		} else {
@@ -334,6 +343,38 @@ void prepare_callback(GtkWidget *assistant,
 			text = g_strdup_printf(_("Please wait whilst '%s' is being paired"), target_name);
 			gtk_label_set_markup(GTK_LABEL(label_passkey_help), text);
 			g_free(text);
+		}
+	}
+
+	if (page == page_summary) {
+		GList *widgets = NULL;
+		GValue value = { 0, };
+		char **uuids;
+
+		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
+		g_value_unset (&value);
+
+		if (bluetooth_chooser_get_selected_device_info (selector, "uuids", &value) != FALSE) {
+			uuids = g_value_get_boxed (&value);
+			widgets = bluetooth_plugin_manager_get_widgets (target_address,
+									(const char **) uuids);
+			g_value_unset (&value);
+		}
+		if (widgets != NULL) {
+			GList *l;
+
+			gtk_widget_show (extra_config_label);
+			gtk_widget_show (extra_config_help_label);
+			for (l = widgets; l != NULL; l = l->next) {
+				GtkWidget *widget = l->data;
+				gtk_box_pack_start (GTK_BOX (page_summary),
+						    widget,
+						    FALSE,
+						    TRUE,
+						    6);
+				gtk_widget_show (widget);
+			}
+			g_list_free (widgets);
 		}
 	}
 
@@ -553,6 +594,8 @@ static GtkWidget *create_wizard(void)
 
 	/* Summary page */
 	page_summary = GTK_WIDGET(gtk_builder_get_object(builder, "page_summary"));
+	extra_config_label = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_label"));
+	extra_config_help_label = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_help_label"));
 
 	/* Set page icons (named icons not supported by Glade) */
 	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
@@ -646,6 +689,8 @@ int main(int argc, char *argv[])
 
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
+	bluetooth_plugin_manager_init ();
+
 	window = create_wizard();
 	if (window == NULL)
 		return 1;
@@ -655,6 +700,8 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (message_received_cb), window);
 
 	gtk_main();
+
+	bluetooth_plugin_manager_cleanup ();
 
 	g_object_unref(agent);
 
