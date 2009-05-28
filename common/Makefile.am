@@ -25,10 +25,8 @@ libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS)
 libgnome_bluetooth_la_LDFLAGS =				\
 	-version-info $(GNOMEBT_LT_VERSION)		\
 	-no-undefined					\
-	$(AM_LDFLAGS)
-
-# FIXME
-#	-export-symbols $(srcdir)/gnome-bluetooth.symbols
+	$(AM_LDFLAGS)					\
+	-export-symbols $(srcdir)/gnome-bluetooth.symbols
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS =				\
