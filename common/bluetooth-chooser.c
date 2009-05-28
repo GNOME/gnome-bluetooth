@@ -1063,7 +1063,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	/**
 	 * BluetoothChooser:device-selected-is-connected:
 	 *
-	 * whether the selected device is conncted to this computer, will be %FALSE if no devices are selected
+	 * whether the selected device is connected to this computer, will be %FALSE if no devices are selected
 	 **/
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED_IS_CONNECTED, g_param_spec_boolean ("device-selected-is-connected", NULL, NULL,
