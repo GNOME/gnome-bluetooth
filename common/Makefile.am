@@ -1,12 +1,15 @@
+SUBDIRS = plugins
 
 noinst_LTLIBRARIES = libcommon.la
 lib_LTLIBRARIES = libgnome-bluetooth.la
 
-libcommon_la_SOURCES = \
-		bluetooth-client.h bluetooth-client.c \
-		bluetooth-agent.h bluetooth-agent.c \
-		bluetooth-killswitch.h bluetooth-killswitch.c \
-		obex-agent.h obex-agent.c \
+libcommon_la_SOURCES =						\
+		bluetooth-client.h bluetooth-client.c		\
+		bluetooth-agent.h bluetooth-agent.c		\
+		bluetooth-killswitch.h bluetooth-killswitch.c	\
+		obex-agent.h obex-agent.c			\
+		bluetooth-plugin-manager.c			\
+		bluetooth-plugin-manager.h			\
 		bluetooth-enums.h
 libcommon_la_LIBADD = $(COMMON_LIBS)
 libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
@@ -32,9 +35,10 @@ gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS =				\
 	bluetooth-chooser.h				\
 	bluetooth-chooser-button.h			\
-	bluetooth-enums.h
+	bluetooth-enums.h				\
+	bluetooth-plugin.h
 
-AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
+AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-client-glue.h \

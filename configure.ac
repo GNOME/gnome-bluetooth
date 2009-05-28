@@ -106,8 +106,13 @@ PKG_CHECK_MODULES(LIBGNOMEBT,
 dnl Requires for the private library
 PKG_CHECK_MODULES(COMMON,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+		  gmodule-2.0
 		  gtk+-2.0
 		  hal >= $HAL_REQUIRED)
+
+dnl Requires for the plugins
+PKG_CHECK_MODULES(PLUGINS,
+		  gtk+-2.0)
 
 DBUS_BINDING_TOOL="dbus-binding-tool"
 AC_SUBST(DBUS_BINDING_TOOL)
@@ -127,6 +132,7 @@ AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
 	  common/Makefile
+	  common/plugins/Makefile
 	  applet/Makefile
 	  applet/bluetooth-applet.desktop.in
 	  properties/Makefile
