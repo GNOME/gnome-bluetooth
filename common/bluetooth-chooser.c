@@ -32,6 +32,7 @@
 
 #include "bluetooth-client.h"
 #include "bluetooth-chooser.h"
+#include "gnome-bluetooth-enum-types.h"
 
 enum {
 	SELECTED_DEVICE_CHANGED,
@@ -276,6 +277,36 @@ bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
 
 	gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
 	return connected;
+}
+
+gboolean
+bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
+					    const char *info,
+					    GValue *value)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	GEnumClass *eclass;
+	GEnumValue *ev;
+	GtkTreeIter iter;
+
+	g_return_val_if_fail (info != NULL, FALSE);
+
+	if (gtk_tree_selection_get_selected (priv->selection, NULL, &iter) == FALSE)
+		return FALSE;
+
+	eclass = g_type_class_ref (BLUETOOTH_TYPE_COLUMN);
+	ev = g_enum_get_value_by_nick (eclass, info);
+	if (ev == NULL) {
+		g_warning ("Unknown info '%s'", info);
+		g_type_class_unref (eclass);
+		return FALSE;
+	}
+
+	gtk_tree_model_get_value (priv->filter, &iter, ev->value, value);
+
+	g_type_class_unref (eclass);
+
+	return TRUE;
 }
 
 /**
