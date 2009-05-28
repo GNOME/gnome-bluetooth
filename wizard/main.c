@@ -254,15 +254,13 @@ void prepare_callback(GtkWidget *assistant,
 
 	if (page == page_setup) {
 		gchar *text, *address, *name, *pin_ret;
-		guint type;
+		BluetoothType type;
 
 		/* Get the info about the device now,
 		 * we can't get here without a valid selection */
-		g_object_get (G_OBJECT (selector),
-			      "device-selected", &address,
-			      "device-selected-name", &name,
-			      "device-selected-type", &type,
-			      NULL);
+		address = bluetooth_chooser_get_selected_device (selector);
+		name = bluetooth_chooser_get_selected_device_name (selector);
+		type = bluetooth_chooser_get_selected_device_type (selector);
 
 		g_free(target_address);
 		target_address = address;
@@ -349,10 +347,8 @@ set_page_search_complete (void)
 	char *name, *address;
 	gboolean complete = FALSE;
 
-	g_object_get (G_OBJECT (selector),
-		      "device-selected", &address,
-		      "device-selected-name", &name,
-		      NULL);
+	address = bluetooth_chooser_get_selected_device (selector);
+	name = bluetooth_chooser_get_selected_device_name (selector);
 
 	if (address == NULL)
 		complete = FALSE;

@@ -242,7 +242,7 @@ bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
  *
  * Return value: the type of the device selected, or '0' if unknown
  */
-guint
+BluetoothType
 bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
@@ -279,9 +279,17 @@ bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
 	return connected;
 }
 
+/**
+ * bluetooth_chooser_get_selected_device_info:
+ * @self: A #BluetoothChooser widget.
+ * @field: The identifier for the field to get data for.
+ * @value: An empty #GValue to set.
+ *
+ * Return value: %TRUE if the @value has been set.
+ */
 gboolean
 bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
-					    const char *info,
+					    const char *field,
 					    GValue *value)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
@@ -289,15 +297,15 @@ bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 	GEnumValue *ev;
 	GtkTreeIter iter;
 
-	g_return_val_if_fail (info != NULL, FALSE);
+	g_return_val_if_fail (field != NULL, FALSE);
 
 	if (gtk_tree_selection_get_selected (priv->selection, NULL, &iter) == FALSE)
 		return FALSE;
 
 	eclass = g_type_class_ref (BLUETOOTH_TYPE_COLUMN);
-	ev = g_enum_get_value_by_nick (eclass, info);
+	ev = g_enum_get_value_by_nick (eclass, field);
 	if (ev == NULL) {
-		g_warning ("Unknown info '%s'", info);
+		g_warning ("Unknown field '%s'", field);
 		g_type_class_unref (eclass);
 		return FALSE;
 	}
@@ -349,9 +357,7 @@ device_model_row_changed (GtkTreeModel *model,
 			    BLUETOOTH_COLUMN_NAME, &name,
 			    -1);
 	/* Maybe it's the name that changed */
-	if (name != NULL)
-		g_object_notify (G_OBJECT (self), "device-selected-name");
-	g_object_notify (G_OBJECT (self), "device-selected-is-connected");
+	g_object_notify (G_OBJECT (self), "device-selected");
 
 	g_free (name);
 }
@@ -889,11 +895,6 @@ enum {
 	PROP_0,
 	PROP_TITLE,
 	PROP_DEVICE_SELECTED,
-	PROP_DEVICE_SELECTED_ICON,
-	PROP_DEVICE_SELECTED_NAME,
-	PROP_DEVICE_SELECTED_TYPE,
-	PROP_DEVICE_SELECTED_IS_CONNECTED,
-	PROP_DEVICE_SELECTED_PROXY,
 	PROP_SHOW_PAIRING,
 	PROP_SHOW_CONNECTED,
 	PROP_SHOW_SEARCH,
@@ -970,27 +971,6 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 	case PROP_DEVICE_SELECTED:
 		g_value_take_string (value, bluetooth_chooser_get_selected_device (self));
 		break;
-	case PROP_DEVICE_SELECTED_NAME:
-		g_value_take_string (value, bluetooth_chooser_get_selected_device_name (self));
-		break;
-	case PROP_DEVICE_SELECTED_ICON:
-		g_value_take_string (value, bluetooth_chooser_get_selected_device_icon (self));
-		break;
-	case PROP_DEVICE_SELECTED_TYPE:
-		g_value_set_uint (value, bluetooth_chooser_get_selected_device_type (self));
-		break;
-	case PROP_DEVICE_SELECTED_IS_CONNECTED:
-		g_value_set_boolean (value, bluetooth_chooser_get_selected_device_is_connected (self));
-		break;
-	case PROP_DEVICE_SELECTED_PROXY: {
-		GtkTreeIter iter;
-		GObject *proxy = NULL;
-
-		if (gtk_tree_selection_get_selected (priv->selection, NULL, &iter) != FALSE)
-			gtk_tree_model_get (priv->filter, &iter, BLUETOOTH_COLUMN_PROXY, &proxy, -1);
-		g_value_take_object (value, proxy);
-		break;
-	}
 	case PROP_SHOW_PAIRING:
 		g_value_set_boolean (value, priv->show_paired);
 		break;
@@ -1067,42 +1047,6 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
 										    NULL, NULL, NULL, G_PARAM_READABLE));
-	/**
-	 * BluetoothChooser:device-selected-icon:
-	 *
-	 * the icon name to use to represent the currently selected device, or %NULL
-	 **/
-	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_SELECTED_ICON, g_param_spec_string ("device-selected-icon",
-										    NULL, NULL, NULL, G_PARAM_READABLE));
-	/**
-	 * BluetoothChooser:device-selected-name:
-	 *
-	 * the name for the currently selected device
-	 **/
-	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_SELECTED_NAME, g_param_spec_string ("device-selected-name",
-										    NULL, NULL, NULL, G_PARAM_READABLE));
-	/**
-	 * BluetoothChooser:device-selected-type:
-	 *
-	 * the currently selected device's type, or 0
-	 **/
-	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_SELECTED_TYPE, g_param_spec_uint ("device-selected-type", NULL, NULL,
-										       1, 1 << (_BLUETOOTH_TYPE_NUM_TYPES - 1), 1, G_PARAM_READABLE));
-	/**
-	 * BluetoothChooser:device-selected-is-connected:
-	 *
-	 * whether the selected device is connected to this computer, will be %FALSE if no devices are selected
-	 **/
-	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_SELECTED_IS_CONNECTED, g_param_spec_boolean ("device-selected-is-connected", NULL, NULL,
-												  FALSE, G_PARAM_READABLE));
-	/* Left blank intentionally */
-	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_SELECTED_PROXY, g_param_spec_object ("device-selected-proxy", NULL, NULL,
-												  G_TYPE_OBJECT, G_PARAM_READABLE));
 	/**
 	 * BluetoothChooser:show-pairing:
 	 *

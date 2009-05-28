@@ -154,10 +154,8 @@ device_selected_cb(GObject *object,
 	char *address;
 	gboolean connected;
 
-	g_object_get (G_OBJECT (adapter->chooser),
-		      "device-selected", &address,
-		      "device-selected-is-connected", &connected,
-		      NULL);
+	address = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (adapter->chooser));
+	connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (adapter->chooser));
 	update_buttons(adapter, (address != NULL), connected);
 }
 
@@ -202,10 +200,16 @@ static gboolean show_confirm_dialog(void)
 static void delete_callback(GtkWidget *button, gpointer user_data)
 {
 	adapter_data *adapter = user_data;
+	GValue value = { 0, };
 	DBusGProxy *device;
 	const char *path;
 
-	g_object_get (G_OBJECT (adapter->chooser), "device-selected-proxy", &device, NULL);
+	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (adapter->chooser),
+							"proxy", &value) == FALSE) {
+		return;
+	}
+	device = g_value_dup_object (&value);
+	g_value_unset (&value);
 
 	if (device == NULL)
 		return;
@@ -224,9 +228,15 @@ static void delete_callback(GtkWidget *button, gpointer user_data)
 static void disconnect_callback(GtkWidget *button, gpointer user_data)
 {
 	adapter_data *adapter = user_data;
+	GValue value = { 0, };
 	DBusGProxy *device;
 
-	g_object_get (G_OBJECT (adapter->chooser), "device-selected-proxy", &device, NULL);
+	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (adapter->chooser),
+							"proxy", &value) == FALSE) {
+		return;
+	}
+	device = g_value_dup_object (&value);
+	g_value_unset (&value);
 
 	if (device == NULL)
 		return;
@@ -394,8 +404,6 @@ static void create_adapter(adapter_data *adapter)
 		      NULL);
 
 	g_signal_connect (adapter->chooser, "notify::device-selected",
-			  G_CALLBACK(device_selected_cb), adapter);
-	g_signal_connect (adapter->chooser, "notify::device-selected-is-connected",
 			  G_CALLBACK(device_selected_cb), adapter);
 
 	gtk_table_attach(GTK_TABLE(table), adapter->chooser, 0, 1, 1, 2,

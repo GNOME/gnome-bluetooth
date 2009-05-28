@@ -159,11 +159,10 @@ dialog_response_cb (GtkDialog *dialog, int response_id, gpointer data)
 	char *bdaddr, *icon, *name;
 
 	if (response_id == GTK_RESPONSE_ACCEPT) {
-		g_object_get(button->chooser,
-			     "device-selected", &bdaddr,
-			     "device-selected-name", &name,
-			     "device-selected-icon", &icon,
-			     NULL);
+		BluetoothChooser *chooser = BLUETOOTH_CHOOSER (button->chooser);
+		bdaddr = bluetooth_chooser_get_selected_device (chooser);
+		name = bluetooth_chooser_get_selected_device_name (chooser);
+		icon = bluetooth_chooser_get_selected_device_icon (chooser);
 	}
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));

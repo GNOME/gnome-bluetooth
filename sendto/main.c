@@ -736,11 +736,10 @@ show_browse_dialog (char **device_name)
 
 	bdaddr = NULL;
 	response_id = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response_id == GTK_RESPONSE_ACCEPT)
-		g_object_get (G_OBJECT (selector),
-			      "device-selected", &bdaddr,
-			      "device-selected-name", device_name,
-			      NULL);
+	if (response_id == GTK_RESPONSE_ACCEPT) {
+		bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (selector));
+		*device_name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (selector));
+	}
 
 	gtk_widget_destroy (dialog);
 

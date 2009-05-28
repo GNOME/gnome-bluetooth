@@ -70,7 +70,7 @@ static void select_device_changed(BluetoothChooser *sel,
 	GtkDialog *dialog = user_data;
 	char *name;
 
-	g_object_get (G_OBJECT (sel), "device-selected-name", &name, NULL);
+	name = bluetooth_chooser_get_selected_device_name (sel);
 	gtk_dialog_set_response_sensitive(dialog,
 				GTK_RESPONSE_ACCEPT, (address != NULL && name != NULL));
 	g_free (name);
@@ -81,18 +81,6 @@ static void device_selected_cb(GObject *object,
 {
 	g_message ("Property \"device-selected\" changed");
 	dump_selected_device(BLUETOOTH_CHOOSER (object));
-}
-
-static void device_selected_name_cb(GObject *object,
-			       GParamSpec *spec, gpointer user_data)
-{
-	char *address;
-
-	g_message ("Property \"device-selected-name\" changed");
-
-	g_object_get (G_OBJECT (object), "device-selected", &address, NULL);
-	select_device_changed (BLUETOOTH_CHOOSER (object), address, user_data);
-	g_free (address);
 }
 
 static void device_type_filter_selected_cb(GObject *object,
@@ -183,12 +171,10 @@ response_cb (GtkDialog *dialog, gint response_id, BluetoothChooser *selector)
 		char *address, *name, *icon;
 		guint type;
 
-		g_object_get (G_OBJECT (selector),
-			      "device-selected", &address,
-			      "device-selected-name", &name,
-			      "device-selected-icon", &icon,
-			      "device-selected-type", &type,
-			      NULL);
+		address = bluetooth_chooser_get_selected_device (selector);
+		name = bluetooth_chooser_get_selected_device_name (selector);
+		icon = bluetooth_chooser_get_selected_device_icon (selector);
+		type = bluetooth_chooser_get_selected_device_type (selector);
 		g_message("Selected device is: %s (address: %s, icon: %s, type: %s)",
 			  name, address, icon, bluetooth_type_to_string (type));
 		g_free(address);
@@ -220,8 +206,6 @@ create_wizard_dialogue (void)
 			 G_CALLBACK(select_device_changed), dialog);
 	g_signal_connect(selector, "notify::device-selected",
 			 G_CALLBACK(device_selected_cb), dialog);
-	g_signal_connect(selector, "notify::device-selected-name",
-			 G_CALLBACK(device_selected_name_cb), dialog);
 	g_signal_connect(selector, "notify::device-type-filter",
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",
@@ -258,8 +242,6 @@ create_props_dialogue (void)
 			 G_CALLBACK(select_device_changed), dialog);
 	g_signal_connect(selector, "notify::device-selected",
 			 G_CALLBACK(device_selected_cb), dialog);
-	g_signal_connect(selector, "notify::device-selected-name",
-			 G_CALLBACK(device_selected_name_cb), dialog);
 	g_signal_connect(selector, "notify::device-type-filter",
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",

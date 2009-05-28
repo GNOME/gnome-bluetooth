@@ -67,7 +67,7 @@ gboolean bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 						     GValue *value);
 gchar *bluetooth_chooser_get_selected_device_name (BluetoothChooser *self);
 gchar * bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self);
-guint bluetooth_chooser_get_selected_device_type (BluetoothChooser *self);
+BluetoothType bluetooth_chooser_get_selected_device_type (BluetoothChooser *self);
 gboolean bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self);
 
 void bluetooth_chooser_start_discovery (BluetoothChooser *self);
