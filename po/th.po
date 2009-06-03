@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-05-20 17:37+0000\n"
-"PO-Revision-Date: 2009-06-03 15:39+0700\n"
+"POT-Creation-Date: 2009-06-03 08:45+0000\n"
+"PO-Revision-Date: 2009-06-03 19:16+0700\n"
 "Last-Translator: Akom C. <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -74,150 +74,165 @@ msgstr "จอยแพ็ด"
 msgid "Tablet"
 msgstr "แท็บเล็ต"
 
-#: ../common/bluetooth-client.c:135 ../common/bluetooth-chooser.c:101
-#: ../common/bluetooth-chooser.c:135
+#: ../common/bluetooth-client.c:135 ../common/bluetooth-chooser.c:102
+#: ../common/bluetooth-chooser.c:136
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
 #: ../common/bluetooth-chooser-button.c:65
-#: ../common/bluetooth-chooser-button.c:361
+#: ../common/bluetooth-chooser-button.c:360
 msgid "Click to select device..."
 msgstr "คลิกเพื่อเลือกอุปกรณ์..."
 
-#: ../common/bluetooth-chooser.c:91
+#: ../common/bluetooth-chooser.c:92
 msgid "All categories"
 msgstr "ทุกประเภท"
 
-#: ../common/bluetooth-chooser.c:93
+#: ../common/bluetooth-chooser.c:94
 msgid "Paired"
 msgstr "จับคู่แล้ว"
 
-#: ../common/bluetooth-chooser.c:95
+#: ../common/bluetooth-chooser.c:96
 msgid "Trusted"
 msgstr "เชื่อถือ"
 
-#: ../common/bluetooth-chooser.c:97
+#: ../common/bluetooth-chooser.c:98
 msgid "Not paired or trusted"
 msgstr "ยังไม่จับคู่หรือไม่เชื่อถือ"
 
-#: ../common/bluetooth-chooser.c:99
+#: ../common/bluetooth-chooser.c:100
 msgid "Paired or trusted"
 msgstr "จับคู่แล้วหรือเชื่อถือ"
 
-#: ../common/bluetooth-chooser.c:573
+#: ../common/bluetooth-chooser.c:610
 msgid "Device"
 msgstr "อุปกรณ์"
 
-#: ../common/bluetooth-chooser.c:609
+#: ../common/bluetooth-chooser.c:646
 msgid "Type"
 msgstr "ชนิด"
 
 #. The search button
-#: ../common/bluetooth-chooser.c:697
+#: ../common/bluetooth-chooser.c:734
 msgid "S_earch"
 msgstr "_ค้นหา"
 
-#: ../common/bluetooth-chooser.c:702
+#: ../common/bluetooth-chooser.c:739
 msgid "Search for Bluetooth devices"
 msgstr "ค้นหาอุปกรณ์บลูทูท"
 
 #. The filters
-#: ../common/bluetooth-chooser.c:721
+#: ../common/bluetooth-chooser.c:758
 msgid "Show Only Bluetooth Devices With..."
 msgstr "แสดงเฉพาะอุปกรณ์บลูทูทที่มี..."
 
 #. The device category filter
-#: ../common/bluetooth-chooser.c:741
+#: ../common/bluetooth-chooser.c:778
 msgid "Device _category:"
 msgstr "_ประเภทอุปกรณ์:"
 
-#: ../common/bluetooth-chooser.c:756
+#: ../common/bluetooth-chooser.c:793
 msgid "Select the device category to filter above list"
 msgstr "เลือกประเภทอุปกรณ์เพื่อกรองรายการข้างบน"
 
 #. The device type filter
-#: ../common/bluetooth-chooser.c:770
+#: ../common/bluetooth-chooser.c:807
 msgid "Device _type:"
 msgstr "_ชนิดอุปกรณ์:"
 
-#: ../common/bluetooth-chooser.c:791
+#: ../common/bluetooth-chooser.c:828
 msgid "Select the device type to filter above list"
 msgstr "เลือกชนิดอุปกรณ์เพื่อกรองรายการข้างบน"
 
-#: ../common/bluetooth-chooser.c:797
+#: ../common/bluetooth-chooser.c:834
 msgid "Input devices (mice, keyboards, ...)"
 msgstr "อุปกรณ์อินพุต (เมาส์ แป้นพิมพ์...)"
 
-#: ../common/bluetooth-chooser.c:801
+#: ../common/bluetooth-chooser.c:838
 msgid "Headphones, headsets and other audio devices"
 msgstr "หูฟัง ชุดหูฟัง และอุปกรณ์เสียงอื่น"
 
-#: ../applet/main.c:105
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../common/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "เข้าถึงอินเทอร์เน็ตโดยใช้โทรศัพท์มือถือของคุณ (ทดสอบ)"
+
+#: ../applet/main.c:108
 msgid "Select Device to Browse"
 msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
 
-#: ../applet/main.c:109
+#: ../applet/main.c:112
 msgid "_Browse"
 msgstr "เ_รียกดู"
 
-#: ../applet/main.c:119
+#: ../applet/main.c:122
 msgid "Select device to browse"
 msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
 
-#: ../applet/main.c:227
+#: ../applet/main.c:238
 msgid "Bluetooth: Unknown"
 msgstr "บลูทูท: ไม่ทราบ"
 
-#: ../applet/main.c:229 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:240 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "เปิดบลูทูท"
 
-#: ../applet/main.c:230
+#: ../applet/main.c:241
 msgid "Bluetooth: Off"
 msgstr "บลูทูท: ปิด"
 
-#: ../applet/main.c:233
+#: ../applet/main.c:244
 msgid "Turn Off Bluetooth"
 msgstr "ปิดบลูทูท"
 
-#: ../applet/main.c:234
+#: ../applet/main.c:245
 msgid "Bluetooth: On"
 msgstr "บลูทูท: เปิด"
 
-#: ../applet/main.c:346
+#: ../applet/main.c:357
 msgid "Disconnecting..."
 msgstr "กำลังตัดการเชื่อมต่อ..."
 
-#: ../applet/main.c:349 ../sendto/main.c:210
+#: ../applet/main.c:360 ../sendto/main.c:210
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
-#: ../applet/main.c:352 ../applet/main.c:575
+#: ../applet/main.c:363 ../applet/main.c:637
 msgid "Connected"
 msgstr "เชื่อมต่ออยู่"
 
-#: ../applet/main.c:355 ../applet/main.c:575
+#: ../applet/main.c:366 ../applet/main.c:637
 msgid "Disconnected"
 msgstr "ไม่ได้เชื่อมต่อ"
 
-#: ../applet/main.c:597 ../applet/main.c:617 ../properties/adapter.c:415
+#: ../applet/main.c:651 ../applet/main.c:678 ../properties/adapter.c:431
 msgid "Disconnect"
 msgstr "ตัดการเชื่อมต่อ"
 
-#: ../applet/main.c:597 ../applet/main.c:617
+#: ../applet/main.c:651 ../applet/main.c:678
 msgid "Connect"
 msgstr "เชื่อมต่อ"
 
-#: ../applet/main.c:729
+#: ../applet/main.c:660
+msgid "Send files..."
+msgstr "ส่งแฟ้ม..."
+
+#: ../applet/main.c:668
+msgid "Browse files..."
+msgstr "เรียกดูแฟ้ม..."
+
+#: ../applet/main.c:791
 msgid "Debug"
 msgstr "ดีบั๊ก"
 
 #. Parse command-line options
-#: ../applet/main.c:749
+#: ../applet/main.c:811
 msgid "- Bluetooth applet"
 msgstr "- แอพเพล็ตบลูทูท"
 
-#: ../applet/main.c:754
+#: ../applet/main.c:816
 #, c-format
 msgid ""
 "%s\n"
@@ -226,13 +241,17 @@ msgstr ""
 "%s\n"
 "เรียก '%s --help' เพื่อดูตัวเลือกบรรทัดคำสั่งทั้งหมดที่ใช้ได้\n"
 
-#: ../applet/main.c:770
+#: ../applet/main.c:832
 msgid "Bluetooth Applet"
 msgstr "แอพเพล็ตบลูทูท"
 
-#: ../applet/notify.c:99 ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "เครื่องมือจัดการบลูทูท"
+#: ../applet/notify.c:133
+msgid "Bluetooth: Enabled"
+msgstr "บลูทูท: เปิดใช้งาน"
+
+#: ../applet/notify.c:133
+msgid "Bluetooth: Disabled"
+msgstr "บลูทูท: ปิดใช้"
 
 #: ../applet/agent.c:259
 msgid "Authentication request"
@@ -311,6 +330,10 @@ msgstr "การขอการยืนยันตัวบุคคลสำ
 msgid "Check authorization"
 msgstr "ตรวจสอบการยืนยันตัวบุคคล"
 
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "เครื่องมือจัดการบลูทูท"
+
 #: ../applet/bluetooth-applet.desktop.in.in.h:2
 msgid "Bluetooth Manager applet"
 msgstr "แอพเพล็ตจัดการบลูทูท"
@@ -339,7 +362,7 @@ msgstr "ออก"
 msgid "Send files to device..."
 msgstr "ส่งแฟ้มไปยังอุปกรณ์..."
 
-#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:406
+#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:422
 msgid "Setup new device..."
 msgstr "ตั้งค่าอุปกรณ์ใหม่..."
 
@@ -367,36 +390,36 @@ msgstr "แ_สดงไอคอนบลูทูท"
 msgid "Bluetooth Properties"
 msgstr "คุณสมบัติบลูทูท"
 
-#: ../properties/adapter.c:179
+#: ../properties/adapter.c:177
 msgid "Remove from list of known devices?"
 msgstr "ลบออกจากรายชื่ออุปกรณ์ที่ทราบหรือไม่?"
 
-#: ../properties/adapter.c:180
+#: ../properties/adapter.c:178
 msgid "If you delete the device, you have to set it up again before next use."
 msgstr "ถ้าคุณลบอุปกรณ์นี้ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งก่อนใช้ครั้งต่อไป"
 
 #. The discoverable checkbox
-#: ../properties/adapter.c:319
+#: ../properties/adapter.c:337
 msgid "_Discoverable"
 msgstr "เ_ปิดให้ค้นหาได้"
 
-#: ../properties/adapter.c:342
+#: ../properties/adapter.c:360
 msgid "Friendly name"
 msgstr "ชื่อที่เข้าใจง่าย"
 
-#: ../properties/adapter.c:372
+#: ../properties/adapter.c:390
 msgid "Known devices"
 msgstr "อุปกรณ์ที่ทราบ"
 
-#: ../properties/adapter.c:429
+#: ../properties/adapter.c:445
 msgid "Delete"
 msgstr "ลบ"
 
-#: ../properties/adapter.c:710
+#: ../properties/adapter.c:720
 msgid "Bluetooth is disabled"
 msgstr "บลูทูทถูกปิดใช้งาน"
 
-#: ../properties/adapter.c:746
+#: ../properties/adapter.c:756
 msgid "No Bluetooth adapters present"
 msgstr "ไม่มีอะแดปเตอร์บลูทูท"
 
@@ -420,16 +443,16 @@ msgstr "จะแสดงไอคอนแจ้งเหตุหรือไ
 msgid "Whether to show the notification icon."
 msgstr "จะแสดงไอคอนแจ้งเหตุหรือไม่"
 
-#: ../properties/gconf-bridge.c:1221
+#: ../properties/gconf-bridge.c:1223
 #, c-format
 msgid "GConf error: %s"
 msgstr "ข้อผิดพลาดของ GConf: %s"
 
-#: ../properties/gconf-bridge.c:1231
+#: ../properties/gconf-bridge.c:1228
 msgid "All further errors shown only on terminal."
 msgstr "ข้อผิดพลาดที่เหลือทั้งหมดแสดงไว้ในเทอร์มินัลเท่านั้น"
 
-#: ../wizard/main.c:130 ../wizard/main.c:315
+#: ../wizard/main.c:134 ../wizard/main.c:331
 msgid "Please enter the following passkey:"
 msgstr "กรุณาป้อนกุญแจรหัสผ่านต่อไปนี้:"
 
@@ -437,7 +460,7 @@ msgstr "กรุณาป้อนกุญแจรหัสผ่านต่
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:155
+#: ../wizard/main.c:159
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
@@ -446,7 +469,7 @@ msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' finished
 #.
-#: ../wizard/main.c:161
+#: ../wizard/main.c:165
 #, c-format
 msgid "Pairing with '%s' finished"
 msgstr "การจับคู่กับ '%s' เสร็จสิ้นแล้ว"
@@ -455,12 +478,12 @@ msgstr "การจับคู่กับ '%s' เสร็จสิ้นแ
 #. * The '%s' is the device name, for example:
 #. * Successfully paired with 'Sony Bluetooth Headset'
 #.
-#: ../wizard/main.c:200
+#: ../wizard/main.c:204
 #, c-format
 msgid "Successfully paired with '%s'"
 msgstr "จับคู่กับ '%s' สำเร็จแล้ว"
 
-#: ../wizard/main.c:210
+#: ../wizard/main.c:214
 msgid "Please wait while setting up the device..."
 msgstr "กรุณารอสักครู่ขณะตั้งค่าอุปกรณ์ ..."
 
@@ -468,7 +491,7 @@ msgstr "กรุณารอสักครู่ขณะตั้งค่า
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:220
+#: ../wizard/main.c:224
 #, c-format
 msgid "Pairing with '%s' failed"
 msgstr "จับคู่กับ '%s' ไม่สำเร็จ"
@@ -477,7 +500,7 @@ msgstr "จับคู่กับ '%s' ไม่สำเร็จ"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:278
+#: ../wizard/main.c:280
 #, c-format
 msgid "Connecting to '%s' now..."
 msgstr "กำลังเชื่อมต่อไปยัง '%s' ในขณะนี้..."
@@ -486,7 +509,7 @@ msgstr "กำลังเชื่อมต่อไปยัง '%s' ในข
 #. * The '%s' is the device name, for example:
 #. * Please wait whilst 'Sony Bluetooth Headset' is being paired
 #.
-#: ../wizard/main.c:327
+#: ../wizard/main.c:343
 #, c-format
 msgid "Please wait whilst '%s' is being paired"
 msgstr "กรุณารอขณะจับคู่กับ '%s'"
@@ -504,16 +527,16 @@ msgid "'1234'"
 msgstr "'1234'"
 
 #: ../wizard/wizard.ui.h:4
+msgid "<b>Additional setup</b>"
+msgstr "<b>ตั้งค่าเพิ่มเติม</b>"
+
+#: ../wizard/wizard.ui.h:5
 msgid "<b>Fixed Passkey</b>"
 msgstr "<b>กุญแจรหัสผ่านแบบตายตัว</b>"
 
-#: ../wizard/wizard.ui.h:5
+#: ../wizard/wizard.ui.h:6
 msgid "<b>Setting up new device</b>"
 msgstr "<b>กำลังตั้งค่าอุปกรณ์ใหม่</b>"
-
-#: ../wizard/wizard.ui.h:6
-msgid "<b>Successfully configured new device</b>"
-msgstr "<b>ตั้งค่าอุปกรณ์ใหม่สำเร็จ</b>"
 
 #: ../wizard/wizard.ui.h:7
 msgid "<b>Welcome to the Bluetooth device setup wizard</b>"
@@ -536,10 +559,27 @@ msgid "Passkey _options..."
 msgstr "_ตัวเลือกของกุญแจรหัสผ่าน..."
 
 #: ../wizard/wizard.ui.h:12
+msgid "Select the additional services you want to use with your device: "
+msgstr "เลือกบริการเสริมที่คุณต้องการใช้กับอุปกรณ์ของคุณ:"
+
+#: ../wizard/wizard.ui.h:13
 msgid "Select the device you want to setup"
 msgstr "เลือกอุปกรณ์ที่คุณต้องการตั้งค่า"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:14
+msgid "Successfully configured new device"
+msgstr "ตั้งค่าอุปกรณ์ใหม่สำเร็จแล้ว"
+
+#: ../wizard/wizard.ui.h:15
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#xAB;"
+"discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the "
+"device's manual if in doubt."
+msgstr ""
+"อุปกรณ์จะต้องอยู่ภายใน 10 เมตรจากเครื่องคอมพิวเตอร์ของคุณ และ &#xAB;เปิดให้ค้นหาได้&#xBB; "
+"(บางครั้งเรียกว่า &#xAB;มองเห็นได้&#xBB;) กรุณาตรวจสอบกับคู่มืออุปกรณ์หากมีข้อสงสัย"
+
+#: ../wizard/wizard.ui.h:16
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer."
@@ -547,11 +587,11 @@ msgstr ""
 "เครื่องมือช่วยตั้งค่าอุปกรณ์ จะพาคุณผ่านกระบวนการตั้งค่าอุปกรณ์ที่รองรับบลูทูท "
 "เพื่อใช้กับคอมพิวเตอร์เครื่องนี้"
 
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:17
 msgid "_Automatic passkey selection"
 msgstr "เลือกกุญแจรหัสผ่านโดย_อัตโนมัติ"
 
-#: ../wizard/wizard.ui.h:15
+#: ../wizard/wizard.ui.h:18
 msgid "gtk-close"
 msgstr "gtk-close"
 
@@ -637,14 +677,14 @@ msgstr "เลือกอุปกรณ์ที่จะรับการส
 msgid "Send _To"
 msgstr "ส่งไ_ปยัง"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:755
 msgid "Choose files to send"
 msgstr "เลือกแฟ้มที่จะส่ง"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:784
 msgid "Remote device to use"
 msgstr "อุปกรณ์อีกฝ่ายที่จะใช้"
 
-#: ../sendto/main.c:787
-msgid "Remove device's name"
+#: ../sendto/main.c:786
+msgid "Remote device's name"
 msgstr "ชื่อของอุปกรณ์อีกฝ่าย"
