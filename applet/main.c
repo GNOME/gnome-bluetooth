@@ -485,6 +485,9 @@ device_has_uuid (const char **uuids, const char *uuid)
 {
 	guint i;
 
+	if (uuids == NULL)
+		return FALSE;
+
 	for (i = 0; uuids[i] != NULL; i++) {
 		if (g_str_equal (uuid, uuids[i]) != FALSE)
 			return TRUE;
