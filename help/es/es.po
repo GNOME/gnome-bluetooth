@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-help.master\n"
-"POT-Creation-Date: 2009-05-20 17:37+0000\n"
-"PO-Revision-Date: 2009-05-23 20:18+0200\n"
+"POT-Creation-Date: 2009-05-23 18:20+0000\n"
+"PO-Revision-Date: 2009-06-04 07:20+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -195,6 +195,10 @@ msgid ""
 "the <ulink url=\"ghelp:user-guide?feedback-bugs\" type=\"help\">GNOME "
 "Feedback Page </ulink> ."
 msgstr ""
+"Para informar de un fallo, o hacer alguna sugerencia concerniente a la "
+"aplicación <application>gnome-bluetooth</application> o este manual, siga "
+"las indicaciones en la <ulink url=\"ghelp:user-guide?feedback-bugs\" type="
+"\"help\">Página de comentarios de GNOME</ulink>."
 
 #: C/gnome-bluetooth.xml:137(para)
 msgid ""
@@ -278,6 +282,12 @@ msgid ""
 "guimenu><guimenu>Terminal</guimenu></menuchoice> and type <command>bluetooth-"
 "applet</command>."
 msgstr ""
+"La miniaplicación <application>gnome-bluetooth</application> se inicia "
+"automáticamente cuando inicia su sesión, y puede encontrar su icono en el "
+"área de notificación. Para lanzar manualmente la miniaplicación, abra el "
+"menú <menuchoice><guimenu>Aplicaciones</guimenu><guimenu>Accesorios</"
+"guimenu><guimenu>Terminal</guimenu></menuchoice> y escriba "
+"<command>bluetooth-applet</command>."
 
 #: C/gnome-bluetooth.xml:203(para)
 msgid ""
@@ -286,6 +296,10 @@ msgid ""
 "guimenu><guimenu>Session</guimenu></menuchoice> and disable "
 "<guilabel>Bluetooth Manager</guilabel>."
 msgstr ""
+"Para evitar que se lance la miniaplicación en su escritorio, abra el menú "
+"<menuchoice><guimenu>Sistema</guimenu><guimenu>Preferencias</"
+"guimenu><guimenu>Aplicaciones al inicio</guimenu></menuchoice> y desactive "
+"<guilabel>Administrador de Bluetooth</guilabel>."
 
 #: C/gnome-bluetooth.xml:212(title)
 msgid "Turning off your Bluetooth adapter"
@@ -299,12 +313,19 @@ msgid ""
 "the autonomy, this is a good idea to disable your Bluetooth device when you "
 "don't use it."
 msgstr ""
+"Desactivar su adaptador de Bluetooth detendrá cualquier comunicación actual "
+"y futura desde y hacia su dispositivo Bluetooth. Desactivar su dispositivo "
+"Bluetooth le permite ahorrar batería de su portátil, y así aumentar la "
+"autonomía, es buena idea desactivar el dispositivo Bluetooth cuando no lo "
+"usa."
 
 #: C/gnome-bluetooth.xml:218(para)
 msgid ""
 "Click on the icon of the applet, and choose <menuchoice><guimenu>Turn Off "
 "Bluetooth</guimenu></menuchoice>, the notification icon will become grey."
 msgstr ""
+"Pulse en el icono de la miniaplicación y elija <menuchoice><guimenu>Apagar "
+"Bluetooth</guimenu></menuchoice>, el icono de notificación se vuelve gris."
 
 #: C/gnome-bluetooth.xml:225(title)
 msgid "Sending files to Bluetooth device"
@@ -316,6 +337,9 @@ msgid ""
 "pick up the file to send and you'll have to select the device to send the "
 "file to."
 msgstr ""
+"Elija este menú para enviar un archivo a un dispositivo; aparecerá un gestor "
+"de archivos para seleccionar el archivo que enviar y tendrá que seleccionar "
+"el dispositivo al que enviar el archivo."
 
 #: C/gnome-bluetooth.xml:233(title)
 msgid "Browsing Bluetooth device"
@@ -326,6 +350,8 @@ msgid ""
 "Choose this menu to browse the device filesystem directly in your file "
 "manager."
 msgstr ""
+"Elija este menú para examinar directamente el sistema de archivos del "
+"dispositivo con su gestor de archivos."
 
 #: C/gnome-bluetooth.xml:238(title)
 msgid "Last used devices"
@@ -342,6 +368,8 @@ msgid ""
 "To connect to the device, click on its name, which will become bolded to "
 "inform you're connect to it."
 msgstr ""
+"Para conectarse con el dispositivo, pulse sobre su nombre, que aparecerá en "
+"negrita para informarle que está conectado a él."
 
 #: C/gnome-bluetooth.xml:244(title)
 msgid "Adding a new device"
@@ -354,12 +382,19 @@ msgid ""
 "guimenu>. An graphical assistant will help you in the process of setting up "
 "your device."
 msgstr ""
+"Para añadir un dispositivo nuevo (que consiste en emparejar su adaptador con "
+"su dispositivo), pulse en el icono de la miniaplicación y elija "
+"<guimenu>Configurar dispositivo nuevo...</guimenu>. Un asistente gráfico le "
+"ayudará en el proceso de configurar su dispositivo."
 
 #: C/gnome-bluetooth.xml:253(para)
 msgid ""
 "Don't forget to set your remote device in discoverable mode before starting "
 "the process, else the wizard won't be able to find it."
 msgstr ""
+"No se olvide de configurar su dispositivo remoto para que pueda ser "
+"descubierto antes de iniciar el proceso, de lo contrario el asistente no "
+"podrá encontrarlo."
 
 #: C/gnome-bluetooth.xml:259(para)
 msgid ""
@@ -367,16 +402,22 @@ msgid ""
 "You can filter out the list of devices by choosing the type of devices "
 "you're looking for."
 msgstr ""
+"El asistente presenta los dispositivos que ha encontrado alrededor que se "
+"pueden descubrir. Puede filtrar la lista de dispositivos eligiendo el tipo "
+"de dispositivos que está buscando."
 
 #: C/gnome-bluetooth.xml:265(title)
 msgid "Device search in wizard"
-msgstr ""
+msgstr "Búsqueda de dispositivos en el asistente"
 
 #: C/gnome-bluetooth.xml:275(para)
 msgid ""
 "If your device has a harcoded passkey, choose <guibutton>Passkey Options...</"
 "guibutton>, in the new dialog, choose the passkey to use."
 msgstr ""
+"Si su dispositivo tiene una contraseña grabada, elija <guibutton>Opciones de "
+"la contraseña...</guibutton>, elija la contraseña que usar en el nuevo "
+"diálogo."
 
 #: C/gnome-bluetooth.xml:279(para)
 msgid ""
@@ -385,6 +426,11 @@ msgid ""
 "else you'll be presented a passkey to enter in your device, type it on your "
 "device, once done the devices and your adapter will be paired."
 msgstr ""
+"Elija <guibutton>Adelante</guibutton> para el paso de emparejamiento; si "
+"definió una contraseña fija en el paso anterior, el emparejamiento será "
+"automático, en caso contrario se le pedirá que introduzca una contraseña en "
+"su dispositivo, escríbala, una vez hecho esto los dispositivos estarán "
+"emparejados."
 
 #: C/gnome-bluetooth.xml:287(title) C/gnome-bluetooth.xml:303(title)
 msgid "Preferences"
@@ -396,12 +442,17 @@ msgid ""
 "<menuchoice><guilabel>Preferences</guilabel></menuchoice>, the preferences "
 "dialog will appear."
 msgstr ""
+"Pulse en el icono de la miniaplicación y elija "
+"<menuchoice><guilabel>Preferencias</guilabel></menuchoice>, aparecerá el "
+"diálogo de preferencias."
 
 #: C/gnome-bluetooth.xml:296(para)
 msgid ""
 "For more information about preferences, see section <xref linkend=\"gnome-"
 "bluetooth-preferences\"/>"
 msgstr ""
+"Para obtener más información acerca de las preferencias consulte la sección "
+"<xref linkend=\"gnome-bluetooth-preferences\"/>."
 
 #: C/gnome-bluetooth.xml:304(para)
 msgid ""
@@ -409,6 +460,9 @@ msgid ""
 "to manage your various Bluetooth devices or change properties of your "
 "Bluetooth adapter(s)."
 msgstr ""
+"El diálogo de preferencias de <application>gnome-bluetooth</application> le "
+"permite gestionar varios dispositivos Bluetooth o cambiar las propiedades de "
+"sus adaptadores de Bluetooth."
 
 #: C/gnome-bluetooth.xml:310(title)
 msgid "Preferences dialog"
@@ -416,13 +470,16 @@ msgstr "Diálogo de preferencias"
 
 #: C/gnome-bluetooth.xml:321(title)
 msgid "Discoverable"
-msgstr ""
+msgstr "Descubrible"
 
 #: C/gnome-bluetooth.xml:323(para)
 msgid ""
 "When your adapter is set to <guilabel>Discoverable</guilabel> any Bluetooth "
 "device around will be able to see it, and therefore will able to ask pairing."
 msgstr ""
+"Cuando su adaptador está ajustado a <guilabel>Descubrible</guilabel> "
+"cualquier dispositivo Bluetooth en los alrededores podrá verlo, y por lo "
+"tanto pedir emparejamiento."
 
 #: C/gnome-bluetooth.xml:328(para)
 msgid ""
@@ -430,6 +487,9 @@ msgid ""
 "adapter undiscoverable to other devices is a good thing to do to limit the "
 "possibility of cracking."
 msgstr ""
+"Bluetooth, al igual que otros tipos de red implica riesgos de seguridad, por "
+"ello configurar su adaptador para que no pueda ser descubierto por otros "
+"dispositivos es bueno para limitar la posibilidad de una brecha de seguridad."
 
 #: C/gnome-bluetooth.xml:333(para)
 msgid ""
@@ -437,12 +497,17 @@ msgid ""
 "with another device, once it is done, you can untick <guilabel>Discoverable</"
 "guilabel>."
 msgstr ""
+"Esto sólo es útil para ajustar su dispositivo para que pueda ser descubierto "
+"si planea emparejarlo con otro dispositivo, una vez que lo haya hecho puede "
+"deseleccionar <guilabel>Descubrible</guilabel>."
 
 #: C/gnome-bluetooth.xml:338(para)
 msgid ""
 "When your device is undiscoverable, communication with already paired "
 "Bluetooth devices is possible."
 msgstr ""
+"Cuando su dispositivo no se puede descubrir, la comunicación con los "
+"dispositivos Bluetooth emparejados aún es posible."
 
 #: C/gnome-bluetooth.xml:345(title)
 msgid "Adapter friendly name"
@@ -453,6 +518,8 @@ msgid ""
 "The friendly name is an alias for the address used to identified each "
 "Bluetooth device much easier to remind."
 msgstr ""
+"El nombre amistoso es un alias para la dirección usada para identificar cada "
+"dispositivo Bluetooth, mucho más fácil de recordar."
 
 #: C/gnome-bluetooth.xml:350(para)
 msgid ""
@@ -461,6 +528,10 @@ msgid ""
 "the text entry and set the name you want. the change will be immediatly "
 "effective."
 msgstr ""
+"De forma predeterminada el nombre amistoso es <envar>HOSTNAME</envar>-0 "
+"(donde <envar>HOSTNAME</envar> es el nombre de su equipo), para cambiarlo "
+"edite la entrada de texto y establezca el nombre que quiere, el cambio será "
+"efectivo inmediatamente."
 
 #: C/gnome-bluetooth.xml:358(title)
 msgid "Known Devices"
@@ -471,10 +542,12 @@ msgid ""
 "Setup new device, as described in <xref linkend=\"gnome-bluetooth-applet-"
 "setup\"/>"
 msgstr ""
+"Configure el nuevo dispositivo tal y como se describe en <xref linkend="
+"\"gnome-bluetooth-applet-setup\"/>."
 
 #: C/gnome-bluetooth.xml:369(para)
 msgid "Connect / Disconnect to a device."
-msgstr ""
+msgstr "Conectarse y desconectarse de un dispositivo."
 
 #: C/gnome-bluetooth.xml:374(para)
 msgid ""
@@ -482,6 +555,9 @@ msgid ""
 "device, and no communication will be allowed. You need to pair them together "
 "again if you want transfer files for instance."
 msgstr ""
+"Borrado de dispositivos. El borrado elimina el emparejamiento entre el "
+"adaptador y el dispositivo, no permitiendo ninguna comunicación. Necesitará "
+"emparejarlos de nuevo si quiere transferir archivos."
 
 #: C/gnome-bluetooth.xml:359(para)
 msgid ""
@@ -489,6 +565,9 @@ msgid ""
 "and let you manage them, like deleting them, connect to them or adding new "
 "one. <placeholder-1/>"
 msgstr ""
+"<guilabel>Dispositivos conocidos</guilabel> lista los dispositivos Bluetooth "
+"que ha emparejado y le permite gestionarlos, como borrarlos, conectarse con "
+"ellos o añadir uno nuevo. <placeholder-1/>"
 
 #: C/gnome-bluetooth.xml:386(title)
 msgid "Frequently Asked Questions"
@@ -499,6 +578,8 @@ msgid ""
 "I don't see how to receive files over Bluetooth on my computer in "
 "<application>gnome-bluetooth</application>, am I blind?"
 msgstr ""
+"No veo cómo recibir archivos a través de Bluetooth en mi equipo usando "
+"<application>gnome-bluetooth</application>, ¿estoy ciego?"
 
 #: C/gnome-bluetooth.xml:393(para)
 msgid ""
@@ -506,6 +587,10 @@ msgid ""
 "application>, but in <application>gnome-user-share</application>, so you "
 "have to install this application to be able to received files over Bluetooth."
 msgstr ""
+"La recepción de archivos no está implementada en <application>gnome-"
+"bluetooth</application> sino en <application>gnome-user-share</application> "
+"(Compartición de archivos personales), de tal forma que tiene que instalar "
+"esta aplicación para poder recibir archivos a través de Bluetooth."
 
 #: C/gnome-bluetooth.xml:401(para)
 msgid ""
