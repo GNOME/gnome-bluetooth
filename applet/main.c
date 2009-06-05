@@ -459,9 +459,21 @@ static void
 remove_action_item (GtkAction *action, GtkUIManager *manager)
 {
 	guint menu_merge_id;
+	GList *actions, *l;
 
 	menu_merge_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (action), "merge-id"));
 	gtk_ui_manager_remove_ui (GTK_UI_MANAGER (manager), menu_merge_id);
+	actions = gtk_action_group_list_actions (devices_action_group);
+	for (l = actions; l != NULL; l = l->next) {
+		GtkAction *a = l->data;
+		/* Don't remove the top-level action straight away */
+		if (g_str_equal (gtk_action_get_name (a), gtk_action_get_name (action)) != FALSE)
+			continue;
+		/* But remove all the sub-actions for it */
+		if (g_str_has_prefix (gtk_action_get_name (a), gtk_action_get_name (action)) != FALSE)
+			gtk_action_group_remove_action (devices_action_group, a);
+	}
+	g_list_free (actions);
 	gtk_action_group_remove_action (devices_action_group, action);
 }
 
