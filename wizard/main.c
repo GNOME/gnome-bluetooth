@@ -84,7 +84,6 @@ static GtkWidget *entry_custom = NULL;
 void close_callback(GtkWidget *assistant, gpointer data);
 void prepare_callback(GtkWidget *assistant, GtkWidget *page, gpointer data);
 void select_device_changed(BluetoothChooser *selector, gchar *address, gpointer user_data);
-void device_selected_name_cb (GObject *object, GParamSpec *spec, gpointer user_data);
 gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event);
 void set_user_pincode(GtkWidget *button);
 void toggle_set_sensitive(GtkWidget *button, gpointer data);
@@ -482,13 +481,6 @@ set_user_pincode(GtkWidget *button)
 
 		break;
 	}
-}
-
-void device_selected_name_cb (GObject *object,
-			      GParamSpec *spec,
-			      gpointer user_data)
-{
-	set_page_search_complete ();
 }
 
 void select_device_changed(BluetoothChooser *selector,
