@@ -579,11 +579,9 @@ update_device_list (GtkTreeIter *parent)
 	while (cont) {
 		GHashTable *table;
 		DBusGProxy *proxy;
-		char *alias, *address, **uuids;
+		char *alias, *address, **uuids, *name;
 		gboolean is_connected;
 		GtkAction *action, *status, *oper;
-
-		action = NULL;
 
 		gtk_tree_model_get (devices_model, &iter,
 				    BLUETOOTH_COLUMN_PROXY, &proxy,
@@ -593,21 +591,32 @@ update_device_list (GtkTreeIter *parent)
 				    BLUETOOTH_COLUMN_UUIDS, &uuids,
 				    -1);
 
-		if (address != NULL) {
-			action = gtk_action_group_get_action (devices_action_group, address);
-			if (action) {
-				char *action_name;
+		if (table == NULL || address == NULL || proxy == NULL || alias == NULL) {
+			if (proxy != NULL)
+				g_object_unref (proxy);
 
-				actions = g_list_remove (actions, action);
+			if (table != NULL)
+				g_hash_table_unref (table);
+			g_strfreev (uuids);
+			g_free (alias);
+			g_free (address);
+			cont = gtk_tree_model_iter_next (devices_model, &iter);
+			continue;
+		}
 
-				action_name = g_strdup_printf ("%s-status", address);
-				status = gtk_action_group_get_action (devices_action_group, action_name);
-				g_free (action_name);
+		action = gtk_action_group_get_action (devices_action_group, address);
+		if (action) {
+			char *action_name;
 
-				action_name = g_strdup_printf ("%s-action", address);
-				oper = gtk_action_group_get_action (devices_action_group, action_name);
-				g_free (action_name);
-			}
+			actions = g_list_remove (actions, action);
+
+			action_name = g_strdup_printf ("%s-status", address);
+			status = gtk_action_group_get_action (devices_action_group, action_name);
+			g_free (action_name);
+
+			action_name = g_strdup_printf ("%s-action", address);
+			oper = gtk_action_group_get_action (devices_action_group, action_name);
+			g_free (action_name);
 		}
 
 		/* If one service is connected, then we're connected */
@@ -623,95 +632,91 @@ update_device_list (GtkTreeIter *parent)
 					break;
 				}
 			}
+			g_list_free (list);
 		}
 
-		if (table != NULL && address != NULL && proxy != NULL && alias != NULL) {
-			char *name;
+		name = escape_label_for_action (alias);
 
-			name = escape_label_for_action (alias);
+		if (action == NULL) {
+			guint menu_merge_id;
+			char *action_path;
 
-			if (action == NULL) {
-				guint menu_merge_id;
-				char *action_path;
+			/* The menu item with descendants */
+			action = gtk_action_new (address, name, NULL, NULL);
 
-				/* The menu item with descendants */
-				action = gtk_action_new (address, name, NULL, NULL);
+			gtk_action_group_add_action (devices_action_group, action);
+			g_object_unref (action);
+			menu_merge_id = gtk_ui_manager_new_merge_id (uimanager);
+			gtk_ui_manager_add_ui (uimanager, menu_merge_id,
+					       "/bluetooth-applet-popup/devices-placeholder", address, address,
+					       GTK_UI_MANAGER_MENU, FALSE);
+			g_object_set_data_full (G_OBJECT (action),
+						"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
 
-				gtk_action_group_add_action (devices_action_group, action);
-				g_object_unref (action);
-				menu_merge_id = gtk_ui_manager_new_merge_id (uimanager);
-				gtk_ui_manager_add_ui (uimanager, menu_merge_id,
-						       "/bluetooth-applet-popup/devices-placeholder", address, address,
-						       GTK_UI_MANAGER_MENU, FALSE);
-				g_object_set_data_full (G_OBJECT (action),
-							"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
+			/* The status menu item */
+			status = add_menu_item (address,
+						"status",
+						is_connected ? _("Connected") : _("Disconnected"),
+						uimanager,
+						menu_merge_id,
+						NULL);
+			gtk_action_set_sensitive (status, FALSE);
 
-				/* The status menu item */
-				status = add_menu_item (address,
-							"status",
-							is_connected ? _("Connected") : _("Disconnected"),
-							uimanager,
-							menu_merge_id,
-							NULL);
-				gtk_action_set_sensitive (status, FALSE);
+			action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
+						       address, address);
+			action_set_bold (uimanager, status, action_path);
+			g_free (action_path);
 
-				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
-							       address, address);
-				action_set_bold (uimanager, status, action_path);
-				g_free (action_path);
+			/* The connect button */
+			oper = add_menu_item (address,
+					      "action",
+					      is_connected ? _("Disconnect") : _("Connect"),
+					      uimanager,
+					      menu_merge_id,
+					      G_CALLBACK (on_connect_activate));
 
-				/* The connect button */
-				oper = add_menu_item (address,
-						      "action",
-						      is_connected ? _("Disconnect") : _("Connect"),
-						      uimanager,
-						      menu_merge_id,
-						      G_CALLBACK (on_connect_activate));
-
-				/* The Send to... button */
-				if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
-					add_menu_item (address,
-						       "sendto",
-						       _("Send files..."),
-						       uimanager,
-						       menu_merge_id,
-						       G_CALLBACK (sendto_callback));
-				}
-				if (device_has_uuid ((const char **) uuids, "OBEXFileTransfer") != FALSE) {
-					add_menu_item (address,
-						       "browse",
-						       _("Browse files..."),
-						       uimanager,
-						       menu_merge_id,
-						       G_CALLBACK (browse_callback));
-				}
-			} else {
-				g_assert (oper != NULL);
-				g_assert (status != NULL);
-				gtk_action_set_label (action, name);
-				set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
-				gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
+			/* The Send to... button */
+			if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
+				add_menu_item (address,
+					       "sendto",
+					       _("Send files..."),
+					       uimanager,
+					       menu_merge_id,
+					       G_CALLBACK (sendto_callback));
 			}
-			g_free (name);
-
-			g_object_set_data_full (G_OBJECT (oper),
-						"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
-			g_object_set_data_full (G_OBJECT (oper),
-						"address", g_strdup (address), g_free);
-			g_object_set_data_full (G_OBJECT (oper),
-						"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
-
-			/* And now for the trick of the day */
-			if (is_connected != FALSE) {
-				char *path;
-
-				path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
-				action_set_bold (uimanager, action, path);
-				g_free (path);
+			if (device_has_uuid ((const char **) uuids, "OBEXFileTransfer") != FALSE) {
+				add_menu_item (address,
+					       "browse",
+					       _("Browse files..."),
+					       uimanager,
+					       menu_merge_id,
+					       G_CALLBACK (browse_callback));
 			}
-
-			num_devices++;
+		} else {
+			g_assert (oper != NULL);
+			g_assert (status != NULL);
+			gtk_action_set_label (action, name);
+			set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
+			gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
 		}
+		g_free (name);
+
+		g_object_set_data_full (G_OBJECT (oper),
+					"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
+		g_object_set_data_full (G_OBJECT (oper),
+					"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
+
+		/* And now for the trick of the day */
+		if (is_connected != FALSE) {
+			char *path;
+
+			path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+			action_set_bold (uimanager, action, path);
+			g_free (path);
+		}
+
+		num_devices++;
+
 		if (proxy != NULL)
 			g_object_unref (proxy);
 
