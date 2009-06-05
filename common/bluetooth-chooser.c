@@ -347,19 +347,18 @@ device_model_row_changed (GtkTreeModel *model,
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	char *name;
+	char *address;
 
 	/* Not the selection changing? */
 	if (gtk_tree_selection_path_is_selected (priv->selection, path) == FALSE)
 		return;
 
-	gtk_tree_model_get (model, iter,
-			    BLUETOOTH_COLUMN_NAME, &name,
-			    -1);
-	/* Maybe it's the name that changed */
 	g_object_notify (G_OBJECT (self), "device-selected");
-
-	g_free (name);
+	address = bluetooth_chooser_get_selected_device (self);
+	g_signal_emit (G_OBJECT (self),
+		       selection_table_signals[SELECTED_DEVICE_CHANGED],
+		       0, address);
+	g_free (address);
 }
 
 static void
