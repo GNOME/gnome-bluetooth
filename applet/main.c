@@ -580,6 +580,27 @@ add_menu_item (const char *address,
 }
 
 static void
+add_separator_item (const char *address,
+		    const char *suffix,
+		    GtkUIManager *uimanager,
+		    guint merge_id)
+{
+	char *action_path, *action_name;
+
+	g_return_if_fail (address != NULL);
+	g_return_if_fail (suffix != NULL);
+
+	action_name = g_strdup_printf ("%s-%s", address, suffix);
+	action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+
+	gtk_ui_manager_add_ui (uimanager, merge_id,
+			       action_path, action_name, NULL,
+			       GTK_UI_MANAGER_SEPARATOR, FALSE);
+	g_free (action_path);
+	g_free (action_name);
+}
+
+static void
 update_device_list (GtkTreeIter *parent)
 {
 	GtkUIManager *uimanager;
@@ -716,6 +737,8 @@ update_device_list (GtkTreeIter *parent)
 						      G_CALLBACK (on_connect_activate));
 			}
 
+			add_separator_item (address, "connect-sep", uimanager, menu_merge_id);
+
 			/* The Send to... button */
 			if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
 				add_menu_item (address,
@@ -733,6 +756,9 @@ update_device_list (GtkTreeIter *parent)
 					       menu_merge_id,
 					       G_CALLBACK (browse_callback));
 			}
+
+			add_separator_item (address, "files-sep", uimanager, menu_merge_id);
+
 			if (type == BLUETOOTH_TYPE_KEYBOARD && program_available (KEYBOARD_PREFS)) {
 				add_menu_item (address,
 					       "keyboard",
