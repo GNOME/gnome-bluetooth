@@ -379,7 +379,7 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 		if (g_hash_table_lookup (table, iface_name) != NULL)
 			continue;
 
-		iface = dbus_g_proxy_new_from_proxy (device, iface_name, NULL);
+		iface = dbus_g_proxy_new_from_proxy (device, detectable_interfaces[i], NULL);
 		if (dbus_g_proxy_call (iface, "GetProperties", NULL,
 				       G_TYPE_INVALID, dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &props,
 				       G_TYPE_INVALID) != FALSE) {
