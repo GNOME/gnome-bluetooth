@@ -507,6 +507,18 @@ device_has_uuid (const char **uuids, const char *uuid)
 	return FALSE;
 }
 
+static gboolean
+device_has_submenu (const char **uuids, GHashTable *services)
+{
+	if (services != NULL)
+		return TRUE;
+	if (device_has_uuid (uuids, "OBEXObjectPush") != FALSE)
+		return TRUE;
+	if (device_has_uuid (uuids, "OBEXFileTransfer") != FALSE)
+		return TRUE;
+	return FALSE;
+}
+
 static GtkAction *
 add_menu_item (const char *address,
 	       const char *suffix,
@@ -577,7 +589,7 @@ update_device_list (GtkTreeIter *parent)
 
 	cont = gtk_tree_model_iter_children (devices_model, &iter, parent);
 	while (cont) {
-		GHashTable *table;
+		GHashTable *services;
 		DBusGProxy *proxy;
 		char *alias, *address, **uuids, *name;
 		gboolean is_connected;
@@ -586,17 +598,18 @@ update_device_list (GtkTreeIter *parent)
 		gtk_tree_model_get (devices_model, &iter,
 				    BLUETOOTH_COLUMN_PROXY, &proxy,
 				    BLUETOOTH_COLUMN_ADDRESS, &address,
-				    BLUETOOTH_COLUMN_SERVICES, &table,
+				    BLUETOOTH_COLUMN_SERVICES, &services,
 				    BLUETOOTH_COLUMN_ALIAS, &alias,
 				    BLUETOOTH_COLUMN_UUIDS, &uuids,
 				    -1);
 
-		if (table == NULL || address == NULL || proxy == NULL || alias == NULL) {
+		if (device_has_submenu ((const char **) uuids, services) == FALSE ||
+		    address == NULL || proxy == NULL || alias == NULL) {
 			if (proxy != NULL)
 				g_object_unref (proxy);
 
-			if (table != NULL)
-				g_hash_table_unref (table);
+			if (services != NULL)
+				g_hash_table_unref (services);
 			g_strfreev (uuids);
 			g_free (alias);
 			g_free (address);
@@ -605,6 +618,8 @@ update_device_list (GtkTreeIter *parent)
 		}
 
 		action = gtk_action_group_get_action (devices_action_group, address);
+		oper = NULL;
+		status = NULL;
 		if (action) {
 			char *action_name;
 
@@ -621,10 +636,10 @@ update_device_list (GtkTreeIter *parent)
 
 		/* If one service is connected, then we're connected */
 		is_connected = FALSE;
-		if (table != NULL) {
+		if (services != NULL) {
 			GList *list, *l;
 
-			list = g_hash_table_get_values (table);
+			list = g_hash_table_get_values (services);
 			for (l = list; l != NULL; l = l->next) {
 				gboolean val = GPOINTER_TO_INT (l->data);
 				if (val != FALSE) {
@@ -653,27 +668,29 @@ update_device_list (GtkTreeIter *parent)
 			g_object_set_data_full (G_OBJECT (action),
 						"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
 
-			/* The status menu item */
-			status = add_menu_item (address,
-						"status",
-						is_connected ? _("Connected") : _("Disconnected"),
-						uimanager,
-						menu_merge_id,
-						NULL);
-			gtk_action_set_sensitive (status, FALSE);
+			if (services != NULL) {
+				/* The status menu item */
+				status = add_menu_item (address,
+							"status",
+							is_connected ? _("Connected") : _("Disconnected"),
+							uimanager,
+							menu_merge_id,
+							NULL);
+				gtk_action_set_sensitive (status, FALSE);
 
-			action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
-						       address, address);
-			action_set_bold (uimanager, status, action_path);
-			g_free (action_path);
+				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
+							       address, address);
+				action_set_bold (uimanager, status, action_path);
+				g_free (action_path);
 
-			/* The connect button */
-			oper = add_menu_item (address,
-					      "action",
-					      is_connected ? _("Disconnect") : _("Connect"),
-					      uimanager,
-					      menu_merge_id,
-					      G_CALLBACK (on_connect_activate));
+				/* The connect button */
+				oper = add_menu_item (address,
+						      "action",
+						      is_connected ? _("Disconnect") : _("Connect"),
+						      uimanager,
+						      menu_merge_id,
+						      G_CALLBACK (on_connect_activate));
+			}
 
 			/* The Send to... button */
 			if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
@@ -693,18 +710,20 @@ update_device_list (GtkTreeIter *parent)
 					       G_CALLBACK (browse_callback));
 			}
 		} else {
-			g_assert (oper != NULL);
-			g_assert (status != NULL);
 			gtk_action_set_label (action, name);
-			set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
-			gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
+			if (status != NULL)
+				set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
+			if (oper != NULL)
+				gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
 		}
 		g_free (name);
 
-		g_object_set_data_full (G_OBJECT (oper),
-					"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
-		g_object_set_data_full (G_OBJECT (oper),
-					"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
+		if (oper != NULL) {
+			g_object_set_data_full (G_OBJECT (oper),
+						"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
+			g_object_set_data_full (G_OBJECT (oper),
+						"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
+		}
 
 		/* And now for the trick of the day */
 		if (is_connected != FALSE) {
@@ -720,8 +739,8 @@ update_device_list (GtkTreeIter *parent)
 		if (proxy != NULL)
 			g_object_unref (proxy);
 
-		if (table != NULL)
-			g_hash_table_unref (table);
+		if (services != NULL)
+			g_hash_table_unref (services);
 		g_strfreev (uuids);
 		g_free (alias);
 		g_free (address);
