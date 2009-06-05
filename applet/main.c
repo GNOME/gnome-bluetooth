@@ -49,6 +49,9 @@ static gboolean show_icon_pref = TRUE;
 #define PREF_DIR		"/apps/bluetooth-manager"
 #define PREF_SHOW_ICON		PREF_DIR "/show_icon"
 
+#define KEYBOARD_PREFS		"gnome-keyboard-properties"
+#define MOUSE_PREFS		"gnome-mouse-properties"
+
 enum {
 	CONNECTED,
 	DISCONNECTED,
@@ -166,6 +169,22 @@ void sendto_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", cmd);
 
 	g_free (cmd);
+}
+
+static void keyboard_callback(GObject *widget, gpointer user_data)
+{
+	const char *command = KEYBOARD_PREFS;
+
+	if (!g_spawn_command_line_async(command, NULL))
+		g_printerr("Couldn't execute command: %s\n", command);
+}
+
+static void mouse_callback(GObject *widget, gpointer user_data)
+{
+	const char *command = MOUSE_PREFS;
+
+	if (!g_spawn_command_line_async(command, NULL))
+		g_printerr("Couldn't execute command: %s\n", command);
 }
 
 void wizard_callback(GObject *widget, gpointer user_data)
@@ -508,7 +527,7 @@ device_has_uuid (const char **uuids, const char *uuid)
 }
 
 static gboolean
-device_has_submenu (const char **uuids, GHashTable *services)
+device_has_submenu (const char **uuids, GHashTable *services, BluetoothType type)
 {
 	if (services != NULL)
 		return TRUE;
@@ -516,6 +535,9 @@ device_has_submenu (const char **uuids, GHashTable *services)
 		return TRUE;
 	if (device_has_uuid (uuids, "OBEXFileTransfer") != FALSE)
 		return TRUE;
+	if (type == BLUETOOTH_TYPE_KEYBOARD ||
+	    type == BLUETOOTH_TYPE_MOUSE)
+	    	return TRUE;
 	return FALSE;
 }
 
@@ -593,6 +615,7 @@ update_device_list (GtkTreeIter *parent)
 		DBusGProxy *proxy;
 		char *alias, *address, **uuids, *name;
 		gboolean is_connected;
+		BluetoothType type;
 		GtkAction *action, *status, *oper;
 
 		gtk_tree_model_get (devices_model, &iter,
@@ -601,9 +624,10 @@ update_device_list (GtkTreeIter *parent)
 				    BLUETOOTH_COLUMN_SERVICES, &services,
 				    BLUETOOTH_COLUMN_ALIAS, &alias,
 				    BLUETOOTH_COLUMN_UUIDS, &uuids,
+				    BLUETOOTH_COLUMN_TYPE, &type,
 				    -1);
 
-		if (device_has_submenu ((const char **) uuids, services) == FALSE ||
+		if (device_has_submenu ((const char **) uuids, services, type) == FALSE ||
 		    address == NULL || proxy == NULL || alias == NULL) {
 			if (proxy != NULL)
 				g_object_unref (proxy);
@@ -708,6 +732,22 @@ update_device_list (GtkTreeIter *parent)
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (browse_callback));
+			}
+			if (type == BLUETOOTH_TYPE_KEYBOARD && program_available (KEYBOARD_PREFS)) {
+				add_menu_item (address,
+					       "keyboard",
+					       _("Open Keyboard Preferences..."),
+					       uimanager,
+					       menu_merge_id,
+					       G_CALLBACK (keyboard_callback));
+			}
+			if (type == BLUETOOTH_TYPE_MOUSE && program_available (MOUSE_PREFS)) {
+				add_menu_item (address,
+					       "mouse",
+					       _("Open Mouse Preferences..."),
+					       uimanager,
+					       menu_merge_id,
+					       G_CALLBACK (mouse_callback));
 			}
 		} else {
 			gtk_action_set_label (action, name);
