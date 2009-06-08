@@ -103,9 +103,21 @@ set_large_label (GtkLabel *label, const char *text)
 static gboolean pincode_callback(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
+	g_message ("got pincode callback");
 	dbus_g_method_return(context, pincode);
 
 	return TRUE;
+}
+
+static gboolean confirm_callback(DBusGMethodInvocation *context,
+				 DBusGProxy *device,
+				 guint passkey,
+				 gpointer user_data)
+{
+	g_message ("got confirm callback");
+	g_message ("FIXME");
+
+	return FALSE;
 }
 
 static gboolean display_callback(DBusGMethodInvocation *context,
@@ -113,6 +125,8 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 				 guint entered, gpointer user_data)
 {
 	gchar *text, *done, *code;
+
+	g_message ("got display callback");
 
 	code = g_strdup_printf("%d", passkey);
 
@@ -150,6 +164,8 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 {
 	gchar *text;
 
+	g_message ("got cancel_callback");
+
 	if (target_ssp == FALSE) {
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -183,6 +199,8 @@ static void connect_callback(gpointer user_data)
 {
 	GtkAssistant *assistant = user_data;
 
+	g_message ("got connect_callback");
+
 	gtk_widget_hide (label_passkey_help);
 	gtk_assistant_set_page_complete(assistant, page_setup, TRUE);
 }
@@ -192,6 +210,8 @@ static void create_callback(const char *path, gpointer user_data)
 	GtkAssistant *assistant = user_data;
 	gboolean complete = FALSE;
 	gchar *text;
+
+	g_message ("got create_callback");
 
 	if (path != NULL) {
 		gint page;
@@ -255,7 +275,9 @@ void prepare_callback(GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
+		GValue value = { 0, };
 		char *text, *address, *name, *pin_ret;
+		gboolean legacypairing;
 		BluetoothType type;
 
 		/* Get the info about the device now,
@@ -263,6 +285,10 @@ void prepare_callback(GtkWidget *assistant,
 		address = bluetooth_chooser_get_selected_device (selector);
 		name = bluetooth_chooser_get_selected_device_name (selector);
 		type = bluetooth_chooser_get_selected_device_type (selector);
+		if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE)
+			legacypairing = g_value_get_boolean (&value);
+		else
+			legacypairing = TRUE;
 
 		g_free(target_address);
 		target_address = address;
@@ -271,6 +297,7 @@ void prepare_callback(GtkWidget *assistant,
 		target_name = name;
 
 		target_type = type;
+		target_ssp = !legacypairing;
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -318,12 +345,12 @@ void prepare_callback(GtkWidget *assistant,
 					pincode = g_strndup(target_pincode, max_digits);
 				else
 					pincode = g_strdup(target_pincode);
-			} else {
+			} else if (target_ssp == FALSE) {
 				automatic_pincode = TRUE;
 			}
 		}
 
-		if (automatic_pincode == FALSE) {
+		if (automatic_pincode == FALSE && target_ssp == FALSE) {
 			gtk_widget_show (label_passkey_help);
 			gtk_widget_show (label_passkey);
 
@@ -678,6 +705,7 @@ int main(int argc, char *argv[])
 	bluetooth_agent_set_pincode_func(agent, pincode_callback, NULL);
 	bluetooth_agent_set_display_func(agent, display_callback, NULL);
 	bluetooth_agent_set_cancel_func(agent, cancel_callback, NULL);
+	bluetooth_agent_set_confirm_func(agent, confirm_callback, NULL);
 
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
