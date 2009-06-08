@@ -224,6 +224,7 @@ static void create_window(void)
 static void finish_sending(DBusGProxy *proxy)
 {
 	gtk_label_set_markup(GTK_LABEL(label_status), NULL);
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
 	dbus_g_proxy_call(proxy, "Disconnect", NULL, G_TYPE_INVALID,
 							G_TYPE_INVALID);
@@ -299,7 +300,10 @@ static void transfer_progress(DBusGProxy *proxy,
 	gchar *time, *rate, *file, *text;
 
 	current_sent = total_sent + bytes;
-	fraction = (gdouble) current_sent / (gdouble) total_size;
+	if (total_size == 0)
+		fraction = 0.0;
+	else
+		fraction = (gdouble) current_sent / (gdouble) total_size;
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), fraction);
 
 	current_time = get_system_time();
@@ -628,6 +632,8 @@ static gboolean complete_callback(DBusGMethodInvocation *context,
 	total_sent += current_size;
 
 	file_index++;
+
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
 	dbus_g_method_return(context);
 
