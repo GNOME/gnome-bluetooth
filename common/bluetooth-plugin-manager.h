@@ -31,6 +31,7 @@ void bluetooth_plugin_manager_cleanup (void);
 
 GList *bluetooth_plugin_manager_get_widgets (const char *bdaddr,
 					     const char **uuids);
+void bluetooth_plugin_manager_device_deleted (const char *bdaddr);
 
 G_END_DECLS
 

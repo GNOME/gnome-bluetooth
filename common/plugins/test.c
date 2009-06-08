@@ -53,10 +53,17 @@ get_config_widgets (const char *bdaddr, const char **uuids)
 	return gtk_check_button_new_with_label (_("Access the Internet using your mobile phone (test)"));
 }
 
+static void
+device_removed (const char *bdaddr)
+{
+	g_message ("Device '%s' got removed");
+}
+
 static GbtPluginInfo plugin_info = {
 	"test-plugin",
 	has_config_widget,
-	get_config_widgets
+	get_config_widgets,
+	device_removed
 };
 
 GBT_INIT_PLUGIN(plugin_info)

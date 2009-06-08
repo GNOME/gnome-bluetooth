@@ -12,6 +12,7 @@ struct _GbtPluginInfo
 	const char *id;
 	gboolean (* has_config_widget) (const char *bdaddr, const char **uuids);
 	GtkWidget * (* get_config_widgets) (const char *bdaddr, const char **uuids);
+	void (* device_removed) (const char *bdaddr);
 };
 
 struct _GbtPlugin

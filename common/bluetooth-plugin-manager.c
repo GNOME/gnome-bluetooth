@@ -124,3 +124,16 @@ bluetooth_plugin_manager_get_widgets (const char *bdaddr,
 	return ret;
 }
 
+void
+bluetooth_plugin_manager_device_deleted (const char *bdaddr)
+{
+	GList *l;
+
+	for (l = plugin_list; l != NULL; l = l->next) {
+		GbtPlugin *p = l->data;
+
+		if (p->info->device_removed != NULL)
+			p->info->device_removed (bdaddr);
+	}
+}
+
