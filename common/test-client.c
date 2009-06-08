@@ -227,6 +227,10 @@ static void create_window(void)
 					"text", BLUETOOTH_COLUMN_CONNECTED, NULL);
 
 	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
+					"Legacy Pairing", gtk_cell_renderer_text_new(),
+					"text", BLUETOOTH_COLUMN_LEGACYPAIRING, NULL);
+
+	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
 					"Discovering", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_DISCOVERING, NULL);
 

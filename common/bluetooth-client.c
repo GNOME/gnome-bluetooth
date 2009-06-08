@@ -554,7 +554,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 	const gchar *address, *alias, *name, *icon;
 	char **uuids;
 	GHashTable *services;
-	gboolean paired, trusted, connected;
+	gboolean paired, trusted, connected, legacypairing;
 	guint type;
 	gint rssi;
 	GtkTreeIter iter;
@@ -601,6 +601,9 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 
 		value = g_hash_table_lookup(hash, "UUIDs");
 		uuids = device_list_uuids (value);
+
+		value = g_hash_table_lookup(hash, "LegacyPairing");
+		legacypairing = value ? g_value_get_boolean(value) : TRUE;
 	} else {
 		if (device)
 			g_object_unref (device);
@@ -625,6 +628,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 					BLUETOOTH_COLUMN_ICON, icon,
 					BLUETOOTH_COLUMN_RSSI, rssi,
 					BLUETOOTH_COLUMN_UUIDS, uuids,
+					BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 					-1);
 
 			if (device != NULL) {
@@ -661,6 +665,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 				BLUETOOTH_COLUMN_CONNECTED, connected,
 				BLUETOOTH_COLUMN_SERVICES, services,
 				BLUETOOTH_COLUMN_UUIDS, uuids,
+				BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 				-1);
 
 done:
@@ -966,7 +971,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_UINT, G_TYPE_STRING, G_TYPE_INT,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-					 G_TYPE_HASH_TABLE, G_TYPE_STRV);
+					 G_TYPE_BOOLEAN, G_TYPE_HASH_TABLE, G_TYPE_STRV);
 
 	priv->dbus = dbus_g_proxy_new_for_name(connection, DBUS_SERVICE_DBUS,
 				DBUS_PATH_DBUS, DBUS_INTERFACE_DBUS);
