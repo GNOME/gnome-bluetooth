@@ -44,7 +44,9 @@
 static DBusGConnection *conn = NULL;
 
 static GtkWidget *dialog;
+static GtkWidget *button;
 static GtkWidget *label_from;
+static GtkWidget *image_status;
 static GtkWidget *label_status;
 static GtkWidget *progress;
 
@@ -141,14 +143,15 @@ static gboolean is_palm_device(const gchar *bdaddr)
 
 static void create_window(void)
 {
-	GtkWidget *vbox;
+	GtkWidget *vbox, *hbox;
 	GtkWidget *table;
 	GtkWidget *label;
 	gchar *text;
 
 	dialog = gtk_dialog_new_with_buttons(_("File Transfer"), NULL,
 				GTK_DIALOG_NO_SEPARATOR,
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+				NULL);
+	button = gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 	gtk_window_set_type_hint(GTK_WINDOW(dialog),
 						GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
@@ -210,10 +213,18 @@ static void create_window(void)
 							_("Connecting..."));
 	gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
 
+	hbox = gtk_hbox_new (FALSE, 4);
+
+	image_status = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_MENU);
+	gtk_widget_set_no_show_all (image_status, TRUE);
+	gtk_box_pack_start(GTK_BOX (hbox), image_status, FALSE, FALSE, 4);
+
 	label_status = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label_status), 0, 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label_status), PANGO_ELLIPSIZE_END);
-	gtk_box_pack_start(GTK_BOX(vbox), label_status, TRUE, TRUE, 2);
+	gtk_box_pack_start(GTK_BOX (hbox), label_status, TRUE, TRUE, 4);
+
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 2);
 
 	g_signal_connect(G_OBJECT(dialog), "response",
 				G_CALLBACK(response_callback), NULL);
@@ -358,38 +369,28 @@ static void transfer_cancelled(DBusGProxy *proxy, gpointer user_data)
 static void error_occurred(DBusGProxy *proxy, const gchar *name,
 				const gchar *message, gpointer user_data)
 {
-	gchar *text;
-
 	g_return_if_fail (proxy == session_proxy);
 
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
-						_("Error Occurred"));
+	gtk_label_set_markup(GTK_LABEL(label_status), message);
 
-	text = g_strdup_printf("<span foreground=\"red\">%s</span>", message);
-	gtk_label_set_markup(GTK_LABEL(label_status), text);
-	g_free(text);
-
+	gtk_widget_show (image_status);
+	gtk_button_set_label (GTK_BUTTON (button), GTK_STOCK_CLOSE);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						GTK_RESPONSE_CLOSE, TRUE);
+						GTK_RESPONSE_CANCEL, TRUE);
 }
 
 static void session_connect_error (DBusGProxy *proxy, const char *session_obj, const char *error_name,
 				   const char *error_message, gpointer user_data)
 {
-	gchar *text;
-
 	if (strcmp (session_obj, dbus_g_proxy_get_path (session_proxy)) != 0)
 		return;
 
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
-						_("Error Occurred"));
+	gtk_label_set_markup(GTK_LABEL(label_status), error_message);
 
-	text = g_strdup_printf("<span foreground=\"red\">%s</span>", error_message);
-	gtk_label_set_markup(GTK_LABEL(label_status), text);
-	g_free(text);
-
+	gtk_widget_show (image_status);
+	gtk_button_set_label (GTK_BUTTON (button), GTK_STOCK_CLOSE);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						GTK_RESPONSE_CLOSE, TRUE);
+						GTK_RESPONSE_CANCEL, TRUE);
 }
 
 static void session_connected(DBusGProxy *proxy, const char *session_obj, gpointer user_data)
@@ -661,19 +662,16 @@ static void send_notify(DBusGProxy *proxy,
 
 	if (dbus_g_proxy_end_call(proxy, call, &error,
 						G_TYPE_INVALID) == FALSE) {
-		gchar *text, *message;
+		char *message;
 
 		message = get_error_message(error);
+		gtk_widget_show (image_status);
+		gtk_label_set_markup(GTK_LABEL(label_status), message);
+		g_free (message);
 
-		text = g_strdup_printf("<span foreground=\"red\">%s</span>",
-								message);
-		gtk_label_set_markup(GTK_LABEL(label_status), text);
-		g_free(text);
-
-		g_free(message);
-
+		gtk_button_set_label (GTK_BUTTON (button), GTK_STOCK_CLOSE);
 		gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						GTK_RESPONSE_CLOSE, TRUE);
+						GTK_RESPONSE_CANCEL, TRUE);
 		return;
 	}
 
@@ -709,7 +707,7 @@ select_device_changed(BluetoothChooser *sel,
 static char *
 show_browse_dialog (char **device_name)
 {
-	GtkWidget *dialog, *selector, *button, *image;
+	GtkWidget *dialog, *selector, *send_button, *image;
 	char *bdaddr;
 	int response_id;
 
@@ -717,9 +715,9 @@ show_browse_dialog (char **device_name)
 					     GTK_DIALOG_NO_SEPARATOR,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 					     NULL);
-	button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Send _To"), GTK_RESPONSE_ACCEPT);
+	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Send _To"), GTK_RESPONSE_ACCEPT);
 	image = gtk_image_new_from_icon_name ("document-send", GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image (GTK_BUTTON (button), image);
+	gtk_button_set_image (GTK_BUTTON (send_button), image);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 					  GTK_RESPONSE_ACCEPT, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
