@@ -25,6 +25,7 @@
 GtkStatusIcon *init_notification(void);
 void cleanup_notification(void);
 
+gboolean notification_supports_actions(void);
 void show_notification(const gchar *summary, const gchar *message,
 			const gchar *action, gint timeout, GCallback handler);
 void close_notification(void);

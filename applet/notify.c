@@ -41,6 +41,21 @@ static void notify_action(NotifyNotification *notify,
 {
 }
 
+gboolean notification_supports_actions (void)
+{
+	gboolean supports_actions = FALSE;
+	GList *caps = NULL;
+
+	caps = notify_get_server_caps ();
+	if (g_list_find_custom(caps, "actions", (GCompareFunc)g_strcmp0) != NULL)
+		supports_actions = TRUE;
+
+	g_list_foreach(caps, (GFunc)g_free, NULL);
+	g_list_free (caps);
+
+	return supports_actions;
+}
+
 void show_notification(const gchar *summary, const gchar *message,
 			const gchar *action, gint timeout, GCallback handler)
 {

@@ -259,7 +259,10 @@ static void passkey_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	gtk_window_set_title(GTK_WINDOW(dialog), _("Authentication request"));
 	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-	gtk_window_set_keep_above(GTK_WINDOW(dialog), TRUE);
+	if (notification_supports_actions () != FALSE)
+		gtk_window_set_keep_above(GTK_WINDOW(dialog), TRUE);
+	else
+		gtk_window_set_focus_on_map(GTK_WINDOW(dialog), FALSE);
 	gtk_window_set_urgency_hint(GTK_WINDOW(dialog), TRUE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog), FALSE);
 	input->dialog = dialog;
@@ -531,11 +534,16 @@ static void show_dialog(gpointer data, gpointer user_data)
 	gtk_window_present(GTK_WINDOW(input->dialog));
 }
 
-static void notification_closed(GObject *object, gpointer user_data)
+static void present_notification_dialogs (void)
 {
 	g_list_foreach(input_list, show_dialog, NULL);
 
 	disable_blinking();
+}
+
+static void notification_closed(GObject *object, gpointer user_data)
+{
+	present_notification_dialogs ();
 }
 
 #ifndef DBUS_TYPE_G_DICTIONARY
@@ -588,9 +596,12 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 
 	g_free(name);
 
-	show_notification(_("Bluetooth device"),
-					line, _("Enter passkey"), 0,
-					G_CALLBACK(notification_closed));
+	if (notification_supports_actions () != FALSE)
+		show_notification(_("Bluetooth device"),
+				    line, _("Enter passkey"), 0,
+				    G_CALLBACK(notification_closed));
+	else
+		present_notification_dialogs ();
 
 	g_free(line);
 
@@ -635,9 +646,12 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 
 	g_free(name);
 
-	show_notification(_("Bluetooth device"),
-					line, _("Enter passkey"), 0,
-					G_CALLBACK(notification_closed));
+	if (notification_supports_actions () != FALSE)
+		show_notification(_("Bluetooth device"),
+				    line, _("Enter passkey"), 0,
+				    G_CALLBACK(notification_closed));
+	else
+		present_notification_dialogs ();
 
 	g_free(line);
 
@@ -685,9 +699,12 @@ static gboolean display_request(DBusGMethodInvocation *context,
 
 	g_free(name);
 
-	show_notification(_("Bluetooth device"),
-					line, _("Enter passkey"), 0,
-					G_CALLBACK(notification_closed));
+	if (notification_supports_actions () != FALSE)
+		show_notification(_("Bluetooth device"),
+				    line, _("Enter passkey"), 0,
+				    G_CALLBACK(notification_closed));
+	else
+		present_notification_dialogs ();
 
 	g_free(line);
 
@@ -734,9 +751,12 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 
 	g_free(name);
 
-	show_notification(_("Bluetooth device"),
-					line, _("Confirm passkey"), 0,
-					G_CALLBACK(notification_closed));
+	if (notification_supports_actions () != FALSE)
+		show_notification(_("Bluetooth device"),
+				    line, _("Confirm passkey"), 0,
+				    G_CALLBACK(notification_closed));
+	else
+		present_notification_dialogs ();
 
 	g_free(line);
 
@@ -779,9 +799,12 @@ static gboolean authorize_request(DBusGMethodInvocation *context,
 
 	g_free(name);
 
-	show_notification(_("Bluetooth device"),
-					line, _("Check authorization"), 0,
-					G_CALLBACK(notification_closed));
+	if (notification_supports_actions () != FALSE)
+		show_notification(_("Bluetooth device"),
+				    line, _("Check authorization"), 0,
+				    G_CALLBACK(notification_closed));
+	else
+		present_notification_dialogs ();
 
 	g_free(line);
 
