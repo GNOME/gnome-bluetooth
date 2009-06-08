@@ -3,11 +3,11 @@ bin_PROGRAMS = bluetooth-properties
 
 bluetooth_properties_SOURCES = main.c general.h general.c adapter.h adapter.c gconf-bridge.c gconf-bridge.h
 
-bluetooth_properties_LDADD = $(top_builddir)/common/libgnome-bluetooth.la $(top_builddir)/common/libcommon.la $(PROPS_LIBS)
+bluetooth_properties_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la $(PROPS_LIBS)
 
 AM_CFLAGS = $(PROPS_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
-INCLUDES = -I$(top_srcdir)/common
+INCLUDES = -I$(top_srcdir)/lib
 
 man_MANS = bluetooth-properties.1
 

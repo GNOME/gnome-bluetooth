@@ -4,7 +4,7 @@ INCLUDES =                                      \
         -DDATADIR=\"$(datadir)\"                \
         -DICONDIR=\"$(icondir)\"                \
 	-DLOCALEDIR="\"$(datadir)/locale\""	\
-        -I$(top_srcdir)/common			\
+        -I$(top_srcdir)/lib			\
         -I$(top_builddir)			\
 	$(PLUGINS_CFLAGS)			\
 	$(WARN_CFLAGS)

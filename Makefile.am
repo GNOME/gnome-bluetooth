@@ -1,5 +1,5 @@
 
-SUBDIRS = icons common applet properties wizard sendto docs po help
+SUBDIRS = icons lib applet properties wizard sendto docs po help
 
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make gnome-doc-utils.make
 

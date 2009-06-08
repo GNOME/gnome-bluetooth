@@ -131,8 +131,8 @@ GNOME_DOC_INIT
 AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
-	  common/Makefile
-	  common/plugins/Makefile
+	  lib/Makefile
+	  lib/plugins/Makefile
 	  applet/Makefile
 	  applet/bluetooth-applet.desktop.in
 	  properties/Makefile
