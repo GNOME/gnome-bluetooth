@@ -94,7 +94,7 @@ DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client);
 gboolean bluetooth_client_start_discovery(BluetoothClient *client);
 gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
 
-typedef void (*BluetoothClientCreateDeviceFunc) (const char *path, gpointer data);
+typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client, const char *path, gpointer data);
 
 gboolean bluetooth_client_create_device(BluetoothClient *client,
 			const char *address, const char *agent,
@@ -103,7 +103,7 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
 
-typedef void (*BluetoothClientConnectFunc) (gpointer data);
+typedef void (*BluetoothClientConnectFunc) (BluetoothClient *client, gpointer data);
 
 gboolean bluetooth_client_connect_service(BluetoothClient *client,
 					  const char *device,

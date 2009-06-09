@@ -1335,7 +1335,7 @@ static void create_device_callback(DBusGProxy *proxy,
 	}
 
 	if (devdata->func)
-		devdata->func(path, devdata->data);
+		devdata->func(bluetooth_client, path, devdata->data);
 
 	g_object_unref(proxy);
 }
@@ -1431,7 +1431,7 @@ static void connect_callback(DBusGProxy *proxy,
 		g_error_free(error);
 
 	if (conndata->func)
-		conndata->func(conndata->data);
+		conndata->func(bluetooth_client, conndata->data);
 
 	g_object_unref(proxy);
 }
@@ -1525,7 +1525,7 @@ static void disconnect_callback(DBusGProxy *proxy,
 	}
 
 	if (conndata->func)
-		conndata->func(conndata->data);
+		conndata->func(bluetooth_client, conndata->data);
 
 	g_object_unref(proxy);
 	g_free (conndata);

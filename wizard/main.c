@@ -195,7 +195,7 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static void connect_callback(gpointer user_data)
+static void connect_callback(BluetoothClient *_client, gpointer user_data)
 {
 	GtkAssistant *assistant = user_data;
 
@@ -205,7 +205,7 @@ static void connect_callback(gpointer user_data)
 	gtk_assistant_set_page_complete(assistant, page_setup, TRUE);
 }
 
-static void create_callback(const char *path, gpointer user_data)
+static void create_callback(BluetoothClient *_client, const char *path, gpointer user_data)
 {
 	GtkAssistant *assistant = user_data;
 	gboolean complete = FALSE;
