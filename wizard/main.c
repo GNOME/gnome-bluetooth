@@ -41,6 +41,9 @@
 #include "pin.h"
 
 #define AGENT_PATH "/org/bluez/agent/wizard"
+/* We'll try to connect to the device repeatedly for that
+ * amount of time before we bail out */
+#define CONNECT_TIMEOUT 3.0
 
 static gboolean set_page_search_complete(void);
 
@@ -195,14 +198,31 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static void connect_callback(BluetoothClient *_client, gpointer user_data)
-{
-	GtkAssistant *assistant = user_data;
+typedef struct {
+	char *path;
+	GTimer *timer;
+} ConnectData;
 
-	g_message ("got connect_callback");
+static void connect_callback(BluetoothClient *_client,
+			     gboolean success,
+			     gpointer user_data)
+{
+	ConnectData *data = (ConnectData *) user_data;
+
+	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
+		if (bluetooth_client_connect_service(client, data->path, connect_callback, data) != FALSE)
+			return;
+	}
+
+	if (success == FALSE)
+		g_warning ("Failed to connect to device %s, please file a bug", data->path);
+
+	g_timer_destroy (data->timer);
+	g_free (data->path);
+	g_free (data);
 
 	gtk_widget_hide (label_passkey_help);
-	gtk_assistant_set_page_complete(assistant, page_setup, TRUE);
+	gtk_assistant_set_page_complete(GTK_ASSISTANT (window_assistant), page_setup, TRUE);
 }
 
 static void create_callback(BluetoothClient *_client, const char *path, gpointer user_data)
@@ -215,6 +235,7 @@ static void create_callback(BluetoothClient *_client, const char *path, gpointer
 
 	if (path != NULL) {
 		gint page;
+		ConnectData *data;
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -228,11 +249,19 @@ static void create_callback(BluetoothClient *_client, const char *path, gpointer
 
 		bluetooth_client_set_trusted(client, path, TRUE);
 
-		if (bluetooth_client_connect_service(client, path, connect_callback, assistant) != FALSE) {
+		data = g_new0 (ConnectData, 1);
+		data->path = g_strdup (path);
+		data->timer = g_timer_new ();
+
+		if (bluetooth_client_connect_service(client, path, connect_callback, data) != FALSE) {
 			gtk_label_set_text (GTK_LABEL (label_passkey_help),
 					    _("Please wait while setting up the device..."));
 			gtk_widget_show (label_passkey_help);
 		} else {
+			g_timer_destroy (data->timer);
+			g_free (data->path);
+			g_free (data);
+
 			complete = TRUE;
 		}
 	} else {
