@@ -64,8 +64,6 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
-static DBusGProxy *session_proxy = NULL;
-
 static gchar *filename_to_path(const gchar *filename)
 {
 	GFile *file;
@@ -232,179 +230,6 @@ static void create_window(void)
 	gtk_widget_show_all(dialog);
 }
 
-static void finish_sending(DBusGProxy *proxy)
-{
-	gtk_label_set_markup(GTK_LABEL(label_status), NULL);
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
-
-	dbus_g_proxy_call(proxy, "Disconnect", NULL, G_TYPE_INVALID,
-							G_TYPE_INVALID);
-
-	gtk_widget_destroy(dialog);
-
-	gtk_main_quit();
-}
-
-static void send_file(DBusGProxy *proxy)
-{
-	gchar *filename = option_files[file_index];
-	GError *error = NULL;
-	gchar *basename, *text, *markup;
-
-	if (file_index > file_count - 1) {
-		finish_sending(proxy);
-		return;
-	}
-
-	if (filename[0] == '\0') {
-		file_index++;
-		send_file(proxy);
-		return;
-	}
-
-	text = g_path_get_dirname(filename);
-	gtk_label_set_markup(GTK_LABEL(label_from), text);
-	g_free(text);
-
-	basename = g_path_get_basename(filename);
-	text = g_strdup_printf(_("Sending %s"), basename);
-	g_free(basename);
-	markup = g_markup_printf_escaped("<i>%s</i>", text);
-	gtk_label_set_markup(GTK_LABEL(label_status), markup);
-	g_free(markup);
-	g_free(text);
-
-	text = g_strdup_printf(_("Sending file %d of %d"),
-						file_index + 1, file_count);
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), text);
-	g_free(text);
-
-	dbus_g_proxy_call(proxy, "SendFile", &error,
-				G_TYPE_STRING, filename, G_TYPE_INVALID,
-							G_TYPE_INVALID);
-
-	if (error != NULL) {
-		g_printerr("Sending of file %s failed: %s\n", filename,
-							error->message);
-		g_error_free(error);
-		gtk_main_quit();
-	}
-}
-
-static void transfer_started(DBusGProxy *proxy, gchar *a, gchar *b,
-					guint64 size, gpointer user_data)
-{
-	current_size = size;
-
-	last_update = get_system_time();
-}
-
-static void transfer_progress(DBusGProxy *proxy,
-					guint64 bytes, gpointer user_data)
-{
-	gint64 current_time;
-	gint elapsed_time;
-	gint remaining_time;
-	gint transfer_rate;
-	guint64 current_sent;
-	gdouble fraction;
-	gchar *time, *rate, *file, *text;
-
-	current_sent = total_sent + bytes;
-	if (total_size == 0)
-		fraction = 0.0;
-	else
-		fraction = (gdouble) current_sent / (gdouble) total_size;
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), fraction);
-
-	current_time = get_system_time();
-	elapsed_time = (current_time - first_update) / 1000000;
-
-	if (current_time < last_update + 1000000)
-		return;
-
-	last_update = current_time;
-
-	if (elapsed_time == 0)
-		return;
-
-	transfer_rate = current_sent / elapsed_time;
-
-	if (transfer_rate == 0)
-		return;
-
-	remaining_time = (total_size - current_sent) / transfer_rate;
-
-	time = format_time(remaining_time);
-
-	if (transfer_rate >= 3000)
-		rate = g_strdup_printf(_("%d KB/s"), transfer_rate / 1000);
-	else
-		rate = g_strdup_printf(_("%d B/s"), transfer_rate);
-
-	file = g_strdup_printf(_("Sending file %d of %d"),
-						file_index + 1, file_count);
-	text = g_strdup_printf("%s (%s, %s)", file, rate, time);
-	g_free(file);
-	g_free(rate);
-	g_free(time);
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), text);
-	g_free(text);
-}
-
-static void transfer_completed(DBusGProxy *proxy, gpointer user_data)
-{
-	total_sent += current_size;
-
-	file_index++;
-
-	send_file(proxy);
-}
-
-static void transfer_cancelled(DBusGProxy *proxy, gpointer user_data)
-{
-	transfer_completed(proxy, user_data);
-}
-
-static void error_occurred(DBusGProxy *proxy, const gchar *name,
-				const gchar *message, gpointer user_data)
-{
-	g_return_if_fail (proxy == session_proxy);
-
-	gtk_label_set_markup(GTK_LABEL(label_status), message);
-
-	gtk_widget_show (image_status);
-	gtk_button_set_label (GTK_BUTTON (button), GTK_STOCK_CLOSE);
-	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						GTK_RESPONSE_CANCEL, TRUE);
-}
-
-static void session_connect_error (DBusGProxy *proxy, const char *session_obj, const char *error_name,
-				   const char *error_message, gpointer user_data)
-{
-	if (strcmp (session_obj, dbus_g_proxy_get_path (session_proxy)) != 0)
-		return;
-
-	gtk_label_set_markup(GTK_LABEL(label_status), error_message);
-
-	gtk_widget_show (image_status);
-	gtk_button_set_label (GTK_BUTTON (button), GTK_STOCK_CLOSE);
-	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						GTK_RESPONSE_CANCEL, TRUE);
-}
-
-static void session_connected(DBusGProxy *proxy, const char *session_obj, gpointer user_data)
-{
-	if (strcmp (session_obj, dbus_g_proxy_get_path (session_proxy)) != 0)
-		return;
-
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), NULL);
-
-	first_update = get_system_time();
-
-	send_file(session_proxy);
-}
-
 #define OPENOBEX_CONNECTION_FAILED "org.openobex.Error.ConnectionAttemptFailed"
 
 static gchar *get_error_message(GError *error)
@@ -435,56 +260,6 @@ done:
 	g_error_free(error);
 
 	return message;
-}
-
-static void create_notify(DBusGProxy *proxy,
-				DBusGProxyCall *call, void *user_data)
-{
-	GError *error = NULL;
-	const gchar *path = NULL;
-
-	if (dbus_g_proxy_end_call(proxy, call, &error,
-					DBUS_TYPE_G_OBJECT_PATH, &path,
-						G_TYPE_INVALID) == FALSE) {
-		gchar *message;
-
-		message = get_error_message(error);
-		error_occurred(proxy, NULL, message, NULL);
-		g_free(message);
-
-		return;
-	}
-
-	session_proxy = dbus_g_proxy_new_for_name(conn, "org.openobex",
-						path, "org.openobex.Session");
-
-	dbus_g_proxy_add_signal(session_proxy, "ErrorOccurred",
-				G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal(session_proxy, "ErrorOccurred",
-				G_CALLBACK(error_occurred), NULL, NULL);
-
-	dbus_g_proxy_add_signal(session_proxy, "Cancelled", G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal(session_proxy, "Cancelled",
-				G_CALLBACK(transfer_cancelled), NULL, NULL);
-
-	dbus_g_proxy_add_signal(session_proxy, "TransferStarted", G_TYPE_STRING,
-				G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal(session_proxy, "TransferStarted",
-				G_CALLBACK(transfer_started), NULL, NULL);
-
-	dbus_g_proxy_add_signal(session_proxy, "TransferProgress",
-						G_TYPE_UINT64, G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal(session_proxy, "TransferProgress",
-				G_CALLBACK(transfer_progress), NULL, NULL);
-
-	dbus_g_proxy_add_signal(session_proxy, "TransferCompleted", G_TYPE_INVALID);
-
-	dbus_g_proxy_connect_signal(session_proxy, "TransferCompleted",
-				G_CALLBACK(transfer_completed), NULL, NULL);
 }
 
 static gchar *get_name(DBusGProxy *device)
@@ -620,8 +395,56 @@ static gboolean progress_callback(DBusGMethodInvocation *context,
 				DBusGProxy *transfer, guint64 transferred,
 							gpointer user_data)
 {
-	transfer_progress(NULL, transferred, NULL);
+	gint64 current_time;
+	gint elapsed_time;
+	gint remaining_time;
+	gint transfer_rate;
+	guint64 current_sent;
+	gdouble fraction;
+	gchar *time, *rate, *file, *text;
 
+	current_sent = total_sent + transferred;
+	if (total_size == 0)
+		fraction = 0.0;
+	else
+		fraction = (gdouble) current_sent / (gdouble) total_size;
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), fraction);
+
+	current_time = get_system_time();
+	elapsed_time = (current_time - first_update) / 1000000;
+
+	if (current_time < last_update + 1000000)
+		goto done;
+
+	last_update = current_time;
+
+	if (elapsed_time == 0)
+		goto done;
+
+	transfer_rate = current_sent / elapsed_time;
+
+	if (transfer_rate == 0)
+		goto done;
+
+	remaining_time = (total_size - current_sent) / transfer_rate;
+
+	time = format_time(remaining_time);
+
+	if (transfer_rate >= 3000)
+		rate = g_strdup_printf(_("%d KB/s"), transfer_rate / 1000);
+	else
+		rate = g_strdup_printf(_("%d B/s"), transfer_rate);
+
+	file = g_strdup_printf(_("Sending file %d of %d"),
+						file_index + 1, file_count);
+	text = g_strdup_printf("%s (%s, %s)", file, rate, time);
+	g_free(file);
+	g_free(rate);
+	g_free(time);
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), text);
+	g_free(text);
+
+done:
 	dbus_g_method_return(context);
 
 	return TRUE;
@@ -684,13 +507,6 @@ static void value_free(GValue *value)
 {
 	g_value_unset(value);
 	g_free(value);
-}
-
-static void name_owner_changed(DBusGProxy *proxy, const char *name,
-			const char *prev, const char *new, gpointer user_data)
-{
-	if (g_str_equal(name, "org.openobex") == TRUE && *new == '\0')
-		gtk_main_quit();
 }
 
 static void
@@ -798,6 +614,9 @@ static GOptionEntry options[] = {
 int main(int argc, char *argv[])
 {
 	DBusGProxy *proxy;
+	GHashTable *hash = NULL;
+	GValue *value;
+	ObexAgent *agent;
 	GError *error = NULL;
 	int i;
 
@@ -904,66 +723,32 @@ int main(int argc, char *argv[])
 
 	create_window();
 
-	proxy = dbus_g_proxy_new_for_name_owner(conn, "org.openobex.client",
-					"/", "org.openobex.Client", NULL);
+	proxy = dbus_g_proxy_new_for_name(conn, "org.openobex.client",
+					"/", "org.openobex.Client");
 
-	if (proxy == NULL) {
-		proxy = dbus_g_proxy_new_for_name(conn, "org.openobex",
-				"/org/openobex", "org.openobex.Manager");
+	agent = obex_agent_new();
 
-		dbus_g_proxy_add_signal(proxy, "NameOwnerChanged",
-					G_TYPE_STRING, G_TYPE_STRING,
-					G_TYPE_STRING, G_TYPE_INVALID);
+	obex_agent_set_release_func(agent, release_callback, NULL);
+	obex_agent_set_request_func(agent, request_callback, NULL);
+	obex_agent_set_progress_func(agent, progress_callback, NULL);
+	obex_agent_set_complete_func(agent, complete_callback, NULL);
 
-		dbus_g_proxy_connect_signal(proxy, "NameOwnerChanged",
-				G_CALLBACK(name_owner_changed), NULL, NULL);
+	obex_agent_setup(agent, AGENT_PATH);
 
-		dbus_g_proxy_add_signal(proxy, "SessionConnected", DBUS_TYPE_G_OBJECT_PATH, G_TYPE_INVALID);
+	hash = g_hash_table_new_full(g_str_hash, g_str_equal,
+				     g_free, (GDestroyNotify) value_free);
 
-		dbus_g_proxy_connect_signal(proxy, "SessionConnected",
-					    G_CALLBACK(session_connected), NULL, NULL);
+	value = g_new0(GValue, 1);
+	g_value_init(value, G_TYPE_STRING);
+	g_value_set_string(value, option_device);
+	g_hash_table_insert(hash, g_strdup("Destination"), value);
 
-		dbus_g_proxy_add_signal(proxy, "SessionConnectError",
-					DBUS_TYPE_G_OBJECT_PATH, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID);
-
-		dbus_g_proxy_connect_signal(proxy, "SessionConnectError",
-					    G_CALLBACK(session_connect_error), NULL, NULL);
-
-		dbus_g_proxy_begin_call(proxy, "CreateBluetoothSession",
-					create_notify, NULL, NULL,
-					G_TYPE_STRING, option_device,
-					G_TYPE_STRING, "00:00:00:00:00:00",
-					G_TYPE_STRING, "opp", G_TYPE_INVALID);
-	} else {
-		GHashTable *hash = NULL;
-		GValue *value;
-		ObexAgent *agent;
-
-		agent = obex_agent_new();
-
-		obex_agent_set_release_func(agent, release_callback, NULL);
-		obex_agent_set_request_func(agent, request_callback, NULL);
-		obex_agent_set_progress_func(agent, progress_callback, NULL);
-		obex_agent_set_complete_func(agent, complete_callback, NULL);
-
-		obex_agent_setup(agent, AGENT_PATH);
-
-		hash = g_hash_table_new_full(g_str_hash, g_str_equal,
-					g_free, (GDestroyNotify) value_free);
-
-		value = g_new0(GValue, 1);
-		g_value_init(value, G_TYPE_STRING);
-		g_value_set_string(value, option_device);
-		g_hash_table_insert(hash, g_strdup("Destination"), value);
-
-		dbus_g_proxy_begin_call(proxy, "SendFiles",
+	dbus_g_proxy_begin_call(proxy, "SendFiles",
 				send_notify, NULL, NULL,
-				dbus_g_type_get_map("GHashTable",
-					G_TYPE_STRING, G_TYPE_VALUE), hash,
+				dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), hash,
 				G_TYPE_STRV, option_files,
 				DBUS_TYPE_G_OBJECT_PATH, AGENT_PATH,
-							G_TYPE_INVALID);
-	}
+				G_TYPE_INVALID);
 
 	gtk_main();
 
