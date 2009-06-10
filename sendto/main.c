@@ -36,6 +36,7 @@
 #include <dbus/dbus-glib-lowlevel.h>
 
 #include <obex-agent.h>
+#include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
 #include "marshal.h"
 
@@ -262,87 +263,43 @@ done:
 	return message;
 }
 
-static gchar *get_name(DBusGProxy *device)
-{
-	GHashTable *hash;
-
-	if (dbus_g_proxy_call(device, "GetProperties", NULL,
-			G_TYPE_INVALID, dbus_g_type_get_map("GHashTable",
-						G_TYPE_STRING, G_TYPE_VALUE),
-					&hash, G_TYPE_INVALID) != FALSE) {
-		GValue *value;
-		gchar *name;
-
-		value = g_hash_table_lookup(hash, "Name");
-		name = value ? g_value_dup_string(value) : NULL;
-		g_hash_table_destroy(hash);
-
-		return name;
-	}
-
-	return NULL;
-}
-
 static gchar *get_device_name(const gchar *address)
 {
-	DBusGConnection *connection;
-	DBusGProxy *manager;
-	GPtrArray *adapters;
-	gchar *name;
-	guint i;
+	BluetoothClient *client;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean cont;
+	char *found_name;
 
-	name = NULL;
-
-	connection = dbus_g_bus_get(DBUS_BUS_SYSTEM, NULL);
-	if (connection == NULL)
-		return name;
-
-	manager = dbus_g_proxy_new_for_name(connection, "org.bluez",
-						"/", "org.bluez.Manager");
-	if (manager == NULL) {
-		dbus_g_connection_unref(connection);
-		return name;
+	found_name = NULL;
+	client = bluetooth_client_new ();
+	model = bluetooth_client_get_model (client);
+	if (model == NULL) {
+		g_object_unref (client);
+		return NULL;
 	}
 
-	if (dbus_g_proxy_call(manager, "ListAdapters", NULL,
-			G_TYPE_INVALID, dbus_g_type_get_collection("GPtrArray",
-						DBUS_TYPE_G_OBJECT_PATH),
-					&adapters, G_TYPE_INVALID) == FALSE) {
-		g_object_unref(manager);
-		dbus_g_connection_unref(connection);
-		return name;
-	}
+	cont = gtk_tree_model_get_iter_first(model, &iter);
+	while (cont != FALSE) {
+		char *bdaddr, *name;
 
-	for (i = 0; i < adapters->len && name == NULL; i++) {
-		DBusGProxy *adapter;
-		char *device_path;
-
-		adapter = dbus_g_proxy_new_for_name(connection, "org.bluez",
-						g_ptr_array_index(adapters, i),
-							"org.bluez.Adapter");
-
-		if (dbus_g_proxy_call(adapter, "FindDevice", NULL,
-					G_TYPE_STRING, address, G_TYPE_INVALID,
-					DBUS_TYPE_G_OBJECT_PATH, &device_path,
-						G_TYPE_INVALID) == TRUE) {
-			DBusGProxy *device;
-			device = dbus_g_proxy_new_for_name(connection,
-						"org.bluez", device_path,
-							"org.bluez.Device");
-			name = get_name(device);
-			g_object_unref(device);
+		gtk_tree_model_get(model, &iter,
+				   BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
+				   BLUETOOTH_COLUMN_ALIAS, &name,
+				   -1);
+		if (g_strcmp0 (bdaddr, address) == 0) {
+			g_free (bdaddr);
+			found_name = name;
 			break;
 		}
 
-		g_object_unref(adapter);
+		cont = gtk_tree_model_iter_next(model, &iter);
 	}
 
-	g_ptr_array_free(adapters, TRUE);
-	g_object_unref(manager);
+	g_object_unref (model);
+	g_object_unref (client);
 
-	dbus_g_connection_unref(connection);
-
-	return name;
+	return found_name;
 }
 
 static void get_properties_callback (DBusGProxy *proxy,
