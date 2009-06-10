@@ -1,3 +1,47 @@
+ver 2.27.6:
+Applet:
+	- Use a better tooltip for the applet
+	- Add "Send File" and "Browse files" menu item for devices
+	  that support it
+	- Add menu items to call the preferences for mice and keyboards
+	- Fix assertions when removing a device, and pairing it again
+	  without the applet being restarted
+	- Don't show "Connect" for devices without input or audio capabilities
+	- Support notification-daemon without any support for actions, as
+	  used in Ubuntu
+	- Pass the device name to bluetooth-sendto
+
+Preferences:
+	- Fix the adapter page not showing up when restarting bluetoothd
+	- Add --dump debug option, to dump a list of all known devices
+	  and their properties
+
+Send-to:
+	- Fix warning when sending an empty file
+	- Remove use of red labels on errors
+	- Remove obex-data-server support, and require obexd
+	- Try harder to get a device name
+
+Wizard:
+	- Fix handling for devices that use random passkeys, but
+	  can't handle 6 digits (such as Sony CMT-DH5BT)
+	- Add support for Simple Pairing for devices without a display
+	- Try harder to connect to devices after pairing them, fixes
+	  the Microsoft Wireless Notebook Presenter Mouse 8000 not
+	  working straight after pairing
+	- Allow skipping name resolution when we would be using
+	  a fixed passkey
+	- Don't allow stepping back in the middle of pairing
+	- Add more instructions on the front page
+
+Library:
+	- Allow getting arbitrary data from the backend for
+	  BluetoothChooser users
+	- Only export the supported symbols in the library
+	- Add plugin support, so third-party applications can
+	  be setup, for a particular device, from the preferences
+	  or the wizard
+
 ver 2.27.5:
 	- Fix some killswitch related bugs
 	- Work with older versions of Pango
