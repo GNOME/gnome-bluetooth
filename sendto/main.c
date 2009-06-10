@@ -292,6 +292,8 @@ static gchar *get_device_name(const gchar *address)
 			found_name = name;
 			break;
 		}
+		g_free (bdaddr);
+		g_free (name);
 
 		cont = gtk_tree_model_iter_next(model, &iter);
 	}
