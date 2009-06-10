@@ -158,17 +158,40 @@ void browse_callback(GObject *widget, gpointer user_data)
 
 void sendto_callback(GObject *widget, gpointer user_data)
 {
-	char *cmd;
-	const char *address;
+	GPtrArray *a;
+	GError *err = NULL;
+	guint i;
+	const char *address, *alias;
 
 	address = g_object_get_data (widget, "address");
+	alias = g_object_get_data (widget, "alias");
 
-	cmd = g_strdup_printf("%s --device=\"%s\"", "bluetooth-sendto", address);
+	a = g_ptr_array_new ();
+	g_ptr_array_add (a, "bluetooth-sendto");
+	if (address != NULL) {
+		char *s;
 
-	if (!g_spawn_command_line_async(cmd, NULL))
-		g_printerr("Couldn't execute command: %s\n", cmd);
+		s = g_strdup_printf ("--device=\"%s\"", address);
+		g_ptr_array_add (a, s);
+	}
+	if (address != NULL && alias != NULL) {
+		char *s;
 
-	g_free (cmd);
+		s = g_strdup_printf ("--name=\"%s\"", alias);
+		g_ptr_array_add (a, s);
+	}
+	g_ptr_array_add (a, NULL);
+
+	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
+			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
+		g_printerr("Couldn't execute command: %s\n", err->message);
+		g_error_free (err);
+	}
+
+	for (i = 1; a->pdata[i] != NULL; i++)
+		g_free (a->pdata[i]);
+
+	g_ptr_array_free (a, TRUE);
 }
 
 static void keyboard_callback(GObject *widget, gpointer user_data)
@@ -750,6 +773,8 @@ update_device_list (GtkTreeIter *parent)
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (sendto_callback));
+				g_object_set_data_full (G_OBJECT (action),
+							"alias", g_strdup (alias), g_free);
 			}
 			if (device_has_uuid ((const char **) uuids, "OBEXFileTransfer") != FALSE) {
 				add_menu_item (address,
