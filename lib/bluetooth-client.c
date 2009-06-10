@@ -438,6 +438,12 @@ uuid16_to_string (guint uuid16)
 		return "PANU";
 	case 0x1116:
 		return "NAP";
+	case 0x1124:
+		return "HumanInterfaceDeviceService";
+	case 0x1000: /* ServiceDiscoveryServerServiceClassID */
+	case 0x1200: /* PnPInformation */
+		/* Those are ignored */
+		return NULL;
 	default:
 		g_debug ("Unhandled UUID 0x%X", uuid16);
 		return NULL;
