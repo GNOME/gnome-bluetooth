@@ -103,7 +103,9 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
 
-typedef void (*BluetoothClientConnectFunc) (BluetoothClient *client, gpointer data);
+typedef void (*BluetoothClientConnectFunc) (BluetoothClient *client,
+					    gboolean success,
+					    gpointer data);
 
 gboolean bluetooth_client_connect_service(BluetoothClient *client,
 					  const char *device,

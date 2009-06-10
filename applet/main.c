@@ -403,8 +403,11 @@ set_device_status_label (const char *address, int connected)
 }
 
 static void
-connection_action_callback (GtkAction *action)
+connection_action_callback (BluetoothClient *_client,
+			    gboolean success,
+			    gpointer user_data)
 {
+	GtkAction *action = (GtkAction *) user_data;
 	const char *address;
 	int connected;
 
@@ -439,10 +442,10 @@ on_connect_activate (GtkAction *action, gpointer data)
 	path = g_object_get_data (G_OBJECT (action), "device-path");
 
 	if (connected == DISCONNECTED) {
-		if (bluetooth_client_connect_service (client, path, (BluetoothClientConnectFunc) connection_action_callback, action) != FALSE)
+		if (bluetooth_client_connect_service (client, path, connection_action_callback, action) != FALSE)
 			connected = DISCONNECTING;
 	} else if (connected == CONNECTED) {
-		if (bluetooth_client_disconnect_service (client, path, (BluetoothClientConnectFunc) connection_action_callback, action) != FALSE)
+		if (bluetooth_client_disconnect_service (client, path, connection_action_callback, action) != FALSE)
 			connected = CONNECTING;
 	} else {
 		g_assert_not_reached ();

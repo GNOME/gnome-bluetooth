@@ -1435,14 +1435,17 @@ static void connect_callback(DBusGProxy *proxy,
 {
 	ConnectData *conndata = user_data;
 	GError *error = NULL;
+	gboolean retval = TRUE;
 
 	dbus_g_proxy_end_call(proxy, call, &error, G_TYPE_INVALID);
 
-	if (error != NULL)
+	if (error != NULL) {
+		retval = FALSE;
 		g_error_free(error);
+	}
 
 	if (conndata->func)
-		conndata->func(bluetooth_client, conndata->data);
+		conndata->func(bluetooth_client, retval, conndata->data);
 
 	g_object_unref(proxy);
 }
@@ -1534,7 +1537,7 @@ static void disconnect_callback(DBusGProxy *proxy,
 	}
 
 	if (conndata->func)
-		conndata->func(bluetooth_client, conndata->data);
+		conndata->func(bluetooth_client, TRUE, conndata->data);
 
 	g_object_unref(proxy);
 	g_free (conndata);
