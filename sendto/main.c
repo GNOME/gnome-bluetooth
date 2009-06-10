@@ -345,18 +345,18 @@ static gchar *get_device_name(const gchar *address)
 	return name;
 }
 
-static gboolean request_callback(DBusGMethodInvocation *context,
-				DBusGProxy *transfer, gpointer user_data)
+static void get_properties_callback (DBusGProxy *proxy,
+				     DBusGProxyCall *call,
+				     void *user_data)
 {
+	GError *error = NULL;
 	gchar *filename = option_files[file_index];
 	gchar *basename, *text, *markup;
 	GHashTable *hash;
 
-	if (dbus_g_proxy_call(transfer,
-				"GetProperties", NULL, G_TYPE_INVALID,
-				dbus_g_type_get_map("GHashTable",
-						G_TYPE_STRING, G_TYPE_VALUE),
-					&hash, G_TYPE_INVALID) == TRUE) {
+	if (dbus_g_proxy_end_call (proxy, call, &error,
+				   dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &hash,
+				   G_TYPE_INVALID) != FALSE) {
 		GValue *value;
 
 		value = g_hash_table_lookup(hash, "Size");
@@ -385,6 +385,14 @@ static gboolean request_callback(DBusGMethodInvocation *context,
 						file_index + 1, file_count);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), text);
 	g_free(text);
+}
+
+static gboolean request_callback(DBusGMethodInvocation *context,
+				DBusGProxy *transfer, gpointer user_data)
+{
+	dbus_g_proxy_begin_call(transfer, "GetProperties",
+				get_properties_callback, NULL, NULL,
+				G_TYPE_INVALID);
 
 	dbus_g_method_return(context, "");
 
