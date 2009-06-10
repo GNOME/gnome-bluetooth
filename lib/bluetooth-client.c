@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <string.h>
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
@@ -156,7 +157,9 @@ bluetooth_verify_address (const char *bdaddr)
 		return FALSE;
 	}
 	for (i = 0; i < 6; i++) {
-		if (g_ascii_isxdigit (elems[i][0]) == FALSE || g_ascii_isxdigit (elems[i][1]) == FALSE) {
+		if (strlen (elems[i]) != 2 ||
+		    g_ascii_isxdigit (elems[i][0]) == FALSE ||
+		    g_ascii_isxdigit (elems[i][1]) == FALSE) {
 			retval = FALSE;
 			break;
 		}
