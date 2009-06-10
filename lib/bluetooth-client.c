@@ -264,31 +264,6 @@ static gboolean iter_search(GtkTreeStore *store,
 	return found;
 }
 
-static gboolean compare_proxy(GtkTreeStore *store,
-					GtkTreeIter *iter, gpointer user_data)
-{
-	DBusGProxy *proxy = user_data;
-	DBusGProxy *object;
-	gboolean found = FALSE;
-
-	gtk_tree_model_get(GTK_TREE_MODEL(store), iter,
-					BLUETOOTH_COLUMN_PROXY, &object, -1);
-
-	if (object != NULL) {
-		found = g_str_equal(dbus_g_proxy_get_path(proxy),
-						dbus_g_proxy_get_path(object));
-		g_object_unref(object);
-	}
-
-	return found;
-}
-
-static gboolean get_iter_from_proxy(GtkTreeStore *store,
-					GtkTreeIter *iter, DBusGProxy *proxy)
-{
-	return iter_search(store, iter, NULL, compare_proxy, proxy);
-}
-
 static gboolean compare_path(GtkTreeStore *store,
 					GtkTreeIter *iter, gpointer user_data)
 {
@@ -309,9 +284,18 @@ static gboolean compare_path(GtkTreeStore *store,
 
 static gboolean
 get_iter_from_path (GtkTreeStore *store,
-		    GtkTreeIter *iter, const char *path)
+		    GtkTreeIter *iter,
+		    const char *path)
 {
 	return iter_search(store, iter, NULL, compare_path, (gpointer) path);
+}
+
+static gboolean
+get_iter_from_proxy(GtkTreeStore *store,
+		    GtkTreeIter *iter,
+		    DBusGProxy *proxy)
+{
+	return iter_search(store, iter, NULL, compare_path, dbus_g_proxy_get_path (proxy));
 }
 
 static void
