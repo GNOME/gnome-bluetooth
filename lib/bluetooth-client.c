@@ -1494,8 +1494,6 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 				connect_callback, conndata, g_free,
 				G_TYPE_INVALID);
 
-	g_object_unref (proxy);
-
 	return TRUE;
 }
 
