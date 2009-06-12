@@ -117,8 +117,25 @@ static gboolean confirm_callback(DBusGMethodInvocation *context,
 				 guint passkey,
 				 gpointer user_data)
 {
-	g_message ("got confirm callback");
-	g_message ("FIXME");
+	char *str, *label;
+
+	target_ssp = TRUE;
+
+	gtk_widget_show (label_passkey_help);
+	label = g_strdup_printf (_("Please confirm that the passkey displayed on '%s' matches this one"),
+				 target_name);
+	gtk_label_set_markup(GTK_LABEL(label_passkey_help), label);
+	g_free (label);
+
+	gtk_widget_show (label_passkey);
+	str = g_strdup_printf ("%d", passkey);
+	set_large_label (GTK_LABEL (label_passkey), str);
+	g_free (str);
+
+	//FIXME show the buttons,
+	//and call
+	//dbus_g_method_return(context, ""); if match
+	//dbus_g_method_return(context, error); if not (see applet)
 
 	return FALSE;
 }
@@ -128,6 +145,8 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 				 guint entered, gpointer user_data)
 {
 	gchar *text, *done, *code;
+
+	target_ssp = TRUE;
 
 	g_message ("got display callback");
 
@@ -154,8 +173,6 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 
 	g_free(done);
 	g_free(code);
-
-	target_ssp = TRUE;
 
 	dbus_g_method_return(context);
 
