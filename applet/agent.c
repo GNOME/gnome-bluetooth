@@ -592,7 +592,7 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
-	line = g_strdup_printf(_("Pairing request for %s"), name);
+	line = g_strdup_printf(_("Pairing request for '%s'"), name);
 
 	g_free(name);
 
@@ -642,7 +642,7 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
-	line = g_strdup_printf(_("Pairing request for %s"), name);
+	line = g_strdup_printf(_("Pairing request for '%s'"), name);
 
 	g_free(name);
 
@@ -695,7 +695,7 @@ static gboolean display_request(DBusGMethodInvocation *context,
 
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
-	line = g_strdup_printf(_("Pairing request for %s"), name);
+	line = g_strdup_printf(_("Pairing request for '%s'"), name);
 
 	g_free(name);
 
@@ -747,13 +747,13 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
-	line = g_strdup_printf(_("Confirmation request for %s"), name);
+	line = g_strdup_printf(_("Pairing confirmation for '%s'"), name);
 
 	g_free(name);
 
 	if (notification_supports_actions () != FALSE)
 		show_notification(_("Bluetooth device"),
-				    line, _("Confirm passkey"), 0,
+				    line, _("Check passkey"), 0,
 				    G_CALLBACK(notification_closed));
 	else
 		present_notification_dialogs ();
@@ -795,7 +795,7 @@ static gboolean authorize_request(DBusGMethodInvocation *context,
 
 	auth_dialog(adapter, device, address, name, uuid, context);
 
-	line = g_strdup_printf(_("Authorization request for %s"), name);
+	line = g_strdup_printf(_("Authorization request from '%s'"), name);
 
 	g_free(name);
 
@@ -838,7 +838,7 @@ static gboolean cancel_request(DBusGMethodInvocation *context,
 	close_notification();
 
 	result = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-						"Agent callback canceled");
+						"Agent callback cancelled");
 
 	dbus_g_method_return_error(input->context, result);
 
