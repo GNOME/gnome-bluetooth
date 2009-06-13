@@ -45,6 +45,14 @@
  * amount of time before we bail out */
 #define CONNECT_TIMEOUT 3.0
 
+enum {
+	PAGE_INTRO,
+	PAGE_SEARCH,
+	PAGE_SETUP,
+	PAGE_SSP_SETUP,
+	PAGE_SUMMARY
+};
+
 static gboolean set_page_search_complete(void);
 
 static BluetoothClient *client;
@@ -62,14 +70,22 @@ static gchar *user_pincode = NULL;
 static gboolean automatic_pincode = FALSE;
 static char *pincode = NULL;
 
-static GtkWidget *window_assistant = NULL;
+static GtkAssistant *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_setup = NULL;
+static GtkWidget *page_ssp_confirm = NULL;
 static GtkWidget *page_summary = NULL;
 
 static GtkWidget *label_setup = NULL;
 static GtkWidget *label_passkey = NULL;
 static GtkWidget *label_passkey_help = NULL;
+
+static GtkWidget *label_ssp_passkey_help = NULL;
+static GtkWidget *label_ssp_passkey = NULL;
+static GtkWidget *confirm_buttons_box = NULL;
+static GtkWidget *does_not_match_button = NULL;
+static GtkWidget *matches_button = NULL;
+
 static GtkWidget *extra_config_label = NULL;
 static GtkWidget *extra_config_help_label = NULL;
 
@@ -92,6 +108,8 @@ void set_user_pincode(GtkWidget *button);
 void toggle_set_sensitive(GtkWidget *button, gpointer data);
 void passkey_option_button_clicked (GtkButton *button, gpointer data);
 void entry_custom_changed(GtkWidget *entry);
+void does_not_match_cb (GtkButton *button, gpointer user_data);
+void matches_cb (GtkButton *button, gpointer user_data);
 
 static void
 set_large_label (GtkLabel *label, const char *text)
@@ -99,17 +117,41 @@ set_large_label (GtkLabel *label, const char *text)
 	char *str;
 
 	str = g_strdup_printf("<span font_desc=\"50\" color=\"black\" bgcolor=\"white\">  %s  </span>", text);
-	gtk_label_set_markup(GTK_LABEL(label_passkey), str);
+	gtk_label_set_markup(GTK_LABEL(label), str);
 	g_free(str);
 }
 
 static gboolean pincode_callback(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
-	g_message ("got pincode callback");
+	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
+	gtk_assistant_update_buttons_state(window_assistant);
 	dbus_g_method_return(context, pincode);
 
 	return TRUE;
+}
+
+void
+does_not_match_cb (GtkButton *button, gpointer user_data)
+{
+	DBusGMethodInvocation *context;
+	GError *error = NULL;
+
+	context = g_object_get_data (G_OBJECT (button), "context");
+	gtk_widget_set_sensitive (confirm_buttons_box, FALSE);
+	g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
+		    "Agent callback cancelled");
+	dbus_g_method_return(context, error);
+}
+
+void
+matches_cb (GtkButton *button, gpointer user_data)
+{
+	DBusGMethodInvocation *context;
+
+	context = g_object_get_data (G_OBJECT (button), "context");
+	gtk_widget_set_sensitive (confirm_buttons_box, FALSE);
+	dbus_g_method_return(context, "");
 }
 
 static gboolean confirm_callback(DBusGMethodInvocation *context,
@@ -120,24 +162,24 @@ static gboolean confirm_callback(DBusGMethodInvocation *context,
 	char *str, *label;
 
 	target_ssp = TRUE;
+	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
+	gtk_assistant_update_buttons_state(window_assistant);
 
-	gtk_widget_show (label_passkey_help);
+	gtk_widget_show (label_ssp_passkey_help);
 	label = g_strdup_printf (_("Please confirm that the passkey displayed on '%s' matches this one"),
 				 target_name);
-	gtk_label_set_markup(GTK_LABEL(label_passkey_help), label);
+	gtk_label_set_markup(GTK_LABEL(label_ssp_passkey_help), label);
 	g_free (label);
 
-	gtk_widget_show (label_passkey);
+	gtk_widget_show (label_ssp_passkey);
 	str = g_strdup_printf ("%d", passkey);
-	set_large_label (GTK_LABEL (label_passkey), str);
+	set_large_label (GTK_LABEL (label_ssp_passkey), str);
 	g_free (str);
 
-	//FIXME show the buttons,
-	//and call
-	//dbus_g_method_return(context, ""); if match
-	//dbus_g_method_return(context, error); if not (see applet)
+	g_object_set_data (G_OBJECT(does_not_match_button), "context", context);
+	g_object_set_data (G_OBJECT(matches_button), "context", context);
 
-	return FALSE;
+	return TRUE;
 }
 
 static gboolean display_callback(DBusGMethodInvocation *context,
@@ -147,6 +189,10 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 	gchar *text, *done, *code;
 
 	target_ssp = TRUE;
+	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
+	gtk_assistant_update_buttons_state(window_assistant);
+
+	gtk_widget_hide (confirm_buttons_box);
 
 	g_message ("got display callback");
 
@@ -166,9 +212,9 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 
 	gtk_widget_show (label_passkey_help);
 
-	gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
+	gtk_label_set_markup(GTK_LABEL(label_ssp_passkey_help), _("Please enter the following passkey:"));
 	text = g_strdup_printf("%s%s", done, code + entered);
-	set_large_label (GTK_LABEL (label_passkey), text);
+	set_large_label (GTK_LABEL (label_ssp_passkey), text);
 	g_free(text);
 
 	g_free(done);
@@ -323,7 +369,7 @@ void prepare_callback(GtkWidget *assistant,
 	if (page == page_setup) {
 		GValue value = { 0, };
 		char *text, *address, *name, *pin_ret;
-		gboolean legacypairing;
+		int legacypairing;
 		BluetoothType type;
 
 		/* Get the info about the device now,
@@ -331,10 +377,13 @@ void prepare_callback(GtkWidget *assistant,
 		address = bluetooth_chooser_get_selected_device (selector);
 		name = bluetooth_chooser_get_selected_device_name (selector);
 		type = bluetooth_chooser_get_selected_device_type (selector);
-		if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE)
-			legacypairing = g_value_get_boolean (&value);
-		else
+		if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
+			legacypairing = g_value_get_int (&value);
+			if (legacypairing == -1)
+				legacypairing = TRUE;
+		} else {
 			legacypairing = TRUE;
+		}
 
 		g_free(target_address);
 		target_address = address;
@@ -349,7 +398,7 @@ void prepare_callback(GtkWidget *assistant,
 		 * The '%s' is the device name, for example:
 		 * Connecting to 'Sony Bluetooth Headset' now...
 		 */
-		text = g_strdup_printf(_("Connecting to '%s' now..."), target_name);
+		text = g_strdup_printf(_("Connecting to '%s'..."), target_name);
 		gtk_label_set_markup(GTK_LABEL(label_setup), text);
 
 		g_free(text);
@@ -602,7 +651,22 @@ passkey_option_button_clicked (GtkButton *button, gpointer data)
 	gtk_widget_hide(passkey_dialog);
 }
 
-static GtkWidget *create_wizard(void)
+static int
+page_func (gint current_page,
+	   gpointer data)
+{
+	if (current_page == PAGE_SEARCH) {
+		if (target_ssp != FALSE)
+			return PAGE_SSP_SETUP;
+		else
+			return PAGE_SETUP;
+	}
+	if (current_page == PAGE_SETUP)
+		return PAGE_SUMMARY;
+	return current_page + 1;
+}
+
+static GtkAssistant *create_wizard(void)
 {
 	GtkAssistant *assistant;
 	GtkBuilder *builder;
@@ -622,6 +686,8 @@ static GtkWidget *create_wizard(void)
 	}
 
 	assistant = GTK_ASSISTANT(gtk_builder_get_object(builder, "assistant"));
+
+	gtk_assistant_set_forward_page_func (assistant, page_func, NULL, NULL);
 
 	/* Intro page */
 	combo = gtk_combo_box_new();
@@ -657,6 +723,15 @@ static GtkWidget *create_wizard(void)
 	label_passkey_help = GTK_WIDGET(gtk_builder_get_object(builder, "label_passkey_help"));
 	label_passkey = GTK_WIDGET(gtk_builder_get_object(builder, "label_passkey"));
 
+	/* SSP Setup page */
+	page_ssp_confirm = GTK_WIDGET(gtk_builder_get_object(builder, "page_ssp_confirm"));
+	gtk_assistant_set_page_complete(assistant, page_ssp_confirm, FALSE);
+	label_ssp_passkey_help = GTK_WIDGET(gtk_builder_get_object(builder, "label_ssp_passkey_help"));
+	label_ssp_passkey = GTK_WIDGET(gtk_builder_get_object(builder, "label_ssp_passkey"));
+	confirm_buttons_box = GTK_WIDGET(gtk_builder_get_object(builder, "confirm_buttons_box"));
+	does_not_match_button = GTK_WIDGET(gtk_builder_get_object(builder, "does_not_match_button"));
+	matches_button = GTK_WIDGET(gtk_builder_get_object(builder, "matches_button"));
+
 	/* Summary page */
 	page_summary = GTK_WIDGET(gtk_builder_get_object(builder, "page_summary"));
 	extra_config_label = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_label"));
@@ -668,6 +743,7 @@ static GtkWidget *create_wizard(void)
 	gtk_assistant_set_page_header_image (assistant, page_intro, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_search, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_setup, pixbuf);
+	gtk_assistant_set_page_header_image (assistant, page_ssp_confirm, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_summary, pixbuf);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
@@ -693,7 +769,7 @@ static GtkWidget *create_wizard(void)
 
 	gtk_assistant_update_buttons_state(GTK_ASSISTANT(assistant));
 
-	return GTK_WIDGET(assistant);
+	return assistant;
 }
 
 static UniqueResponse
@@ -715,7 +791,6 @@ static GOptionEntry options[] = {
 int main(int argc, char *argv[])
 {
 	UniqueApp *app;
-	GtkWidget *window;
 	GError *error = NULL;
 
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
@@ -757,13 +832,12 @@ int main(int argc, char *argv[])
 
 	bluetooth_plugin_manager_init ();
 
-	window = create_wizard();
-	if (window == NULL)
+	window_assistant = create_wizard();
+	if (window_assistant == NULL)
 		return 1;
-	window_assistant = window;
 
 	g_signal_connect (app, "message-received",
-			  G_CALLBACK (message_received_cb), window);
+			  G_CALLBACK (message_received_cb), window_assistant);
 
 	gtk_main();
 
