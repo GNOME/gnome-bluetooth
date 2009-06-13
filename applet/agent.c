@@ -42,40 +42,6 @@
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
 
-typedef enum {
-	AGENT_ERROR_REJECT
-} AgentError;
-
-#define AGENT_ERROR (agent_error_quark())
-
-#define AGENT_ERROR_TYPE (agent_error_get_type()) 
-
-static GQuark agent_error_quark(void)
-{
-	static GQuark quark = 0;
-	if (!quark)
-		quark = g_quark_from_static_string("agent");
-
-	return quark;
-}
-
-#define ENUM_ENTRY(NAME, DESC) { NAME, "" #NAME "", DESC }
-
-static GType agent_error_get_type(void)
-{
-	static GType etype = 0;
-	if (etype == 0) {
-		static const GEnumValue values[] = {
-			ENUM_ENTRY(AGENT_ERROR_REJECT, "Rejected"),
-			{ 0, 0, 0 }
-		};
-
-		etype = g_enum_register_static("agent", values);
-	}
-
-	return etype;
-}
-
 static GList *input_list = NULL;
 
 typedef struct input_data input_data;

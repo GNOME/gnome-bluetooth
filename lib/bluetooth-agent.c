@@ -528,3 +528,30 @@ void bluetooth_agent_set_cancel_func(BluetoothAgent *agent,
 	priv->cancel_func = func;
 	priv->cancel_data = data;
 }
+
+GQuark bluetooth_agent_error_quark(void)
+{
+	static GQuark quark = 0;
+	if (!quark)
+		quark = g_quark_from_static_string("agent");
+
+	return quark;
+}
+
+#define ENUM_ENTRY(NAME, DESC) { NAME, "" #NAME "", DESC }
+
+GType bluetooth_agent_error_get_type(void)
+{
+	static GType etype = 0;
+	if (etype == 0) {
+		static const GEnumValue values[] = {
+			ENUM_ENTRY(AGENT_ERROR_REJECT, "Rejected"),
+			{ 0, 0, 0 }
+		};
+
+		etype = g_enum_register_static("agent", values);
+	}
+
+	return etype;
+}
+

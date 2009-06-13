@@ -88,6 +88,16 @@ void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,
 void bluetooth_agent_set_cancel_func(BluetoothAgent *agent,
 				BluetoothAgentCancelFunc func, gpointer data);
 
+#define AGENT_ERROR (bluetooth_agent_error_quark())
+#define AGENT_ERROR_TYPE (bluetooth_agent_error_get_type()) 
+
+typedef enum {
+	AGENT_ERROR_REJECT
+} AgentError;
+
+GType bluetooth_agent_error_get_type(void);
+GQuark bluetooth_agent_error_quark(void);
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_AGENT_H */
