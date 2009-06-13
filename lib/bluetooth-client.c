@@ -295,7 +295,8 @@ get_iter_from_proxy(GtkTreeStore *store,
 		    GtkTreeIter *iter,
 		    DBusGProxy *proxy)
 {
-	return iter_search(store, iter, NULL, compare_path, dbus_g_proxy_get_path (proxy));
+	return iter_search(store, iter, NULL, compare_path,
+			   (gpointer) dbus_g_proxy_get_path (proxy));
 }
 
 static void
