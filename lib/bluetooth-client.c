@@ -419,10 +419,16 @@ uuid16_to_string (guint uuid16)
 		return "OBEXFileTransfer";
 	case 0x110B:
 		return "AudioSink";
+	case 0x110c:
+		return "A/V_RemoteControlTarget";
+	case 0x110e:
+		return "A/V_RemoteControl";
 	case 0x1115:
 		return "PANU";
 	case 0x1116:
 		return "NAP";
+	case 0x1117:
+		return "GN";
 	case 0x1124:
 		return "HumanInterfaceDeviceService";
 	case 0x1000: /* ServiceDiscoveryServerServiceClassID */
@@ -430,7 +436,7 @@ uuid16_to_string (guint uuid16)
 		/* Those are ignored */
 		return NULL;
 	default:
-		g_debug ("Unhandled UUID 0x%X", uuid16);
+		g_debug ("Unhandled UUID 0x%x", uuid16);
 		return NULL;
 	}
 }
