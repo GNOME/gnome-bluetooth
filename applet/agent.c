@@ -547,18 +547,21 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 
 	passkey_dialog(adapter, device, address, name, FALSE, context);
 
+	if (notification_supports_actions () == FALSE) {
+		g_free (name);
+		present_notification_dialogs ();
+		return TRUE;
+	}
+
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
 	line = g_strdup_printf(_("Pairing request for '%s'"), name);
 
 	g_free(name);
 
-	if (notification_supports_actions () != FALSE)
-		show_notification(_("Bluetooth device"),
-				    line, _("Enter passkey"), 0,
-				    G_CALLBACK(notification_closed));
-	else
-		present_notification_dialogs ();
+	show_notification(_("Bluetooth device"),
+			  line, _("Enter passkey"), 0,
+			  G_CALLBACK(notification_closed));
 
 	g_free(line);
 
@@ -597,18 +600,21 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 
 	passkey_dialog(adapter, device, address, name, TRUE, context);
 
+	if (notification_supports_actions () == FALSE) {
+		g_free (name);
+		present_notification_dialogs ();
+		return TRUE;
+	}
+
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
 	line = g_strdup_printf(_("Pairing request for '%s'"), name);
 
 	g_free(name);
 
-	if (notification_supports_actions () != FALSE)
-		show_notification(_("Bluetooth device"),
-				    line, _("Enter passkey"), 0,
-				    G_CALLBACK(notification_closed));
-	else
-		present_notification_dialogs ();
+	show_notification(_("Bluetooth device"),
+			  line, _("Enter passkey"), 0,
+			  G_CALLBACK(notification_closed));
 
 	g_free(line);
 
@@ -650,18 +656,21 @@ static gboolean display_request(DBusGMethodInvocation *context,
 	display_dialog(adapter, device, address, name, text, entered, context);
 	g_free(text);
 
+	if (notification_supports_actions () == FALSE) {
+		g_free (name);
+		present_notification_dialogs ();
+		return TRUE;
+	}
+
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
 	line = g_strdup_printf(_("Pairing request for '%s'"), name);
 
 	g_free(name);
 
-	if (notification_supports_actions () != FALSE)
-		show_notification(_("Bluetooth device"),
-				    line, _("Enter passkey"), 0,
-				    G_CALLBACK(notification_closed));
-	else
-		present_notification_dialogs ();
+	show_notification(_("Bluetooth device"),
+			  line, _("Enter passkey"), 0,
+			  G_CALLBACK(notification_closed));
 
 	g_free(line);
 
@@ -752,16 +761,19 @@ static gboolean authorize_request(DBusGMethodInvocation *context,
 
 	auth_dialog(adapter, device, address, name, uuid, context);
 
+	if (notification_supports_actions () == FALSE) {
+		g_free (name);
+		present_notification_dialogs ();
+		return TRUE;
+	}
+
 	line = g_strdup_printf(_("Authorization request from '%s'"), name);
 
 	g_free(name);
 
-	if (notification_supports_actions () != FALSE)
-		show_notification(_("Bluetooth device"),
-				    line, _("Check authorization"), 0,
-				    G_CALLBACK(notification_closed));
-	else
-		present_notification_dialogs ();
+	show_notification(_("Bluetooth device"),
+			  line, _("Check authorization"), 0,
+			  G_CALLBACK(notification_closed));
 
 	g_free(line);
 
