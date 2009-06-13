@@ -64,10 +64,10 @@ int main(int argc, char *argv[])
 	device = dbus_g_proxy_new_from_proxy(adapter,
 			"/hci0/dev_11_22_33_44_55_66", "org.bluez.Device");
 
-	//display_dialog(adapter, device, "00:11:22:33:44:55", "Test", "123456", 0, NULL);
-	passkey_dialog(adapter, device, "00:11:22:33:44:55", "Test", FALSE, NULL);
-	//confirm_dialog(adapter, device, "00:11:22:33:44:55", "Test", "123456", NULL);
-	//auth_dialog(adpater, device, "00:11:22:33:44:55", "Test", "UUID", NULL);
+	//display_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", 0, NULL);
+	passkey_dialog(adapter, device, "Test (00:11:22:33:44:55)", FALSE, NULL);
+	//confirm_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", NULL);
+	//auth_dialog(adpater, device, "Test (00:11:22:33:44:55)", "UUID", NULL);
 
 	gtk_main();
 

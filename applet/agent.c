@@ -198,9 +198,12 @@ static void toggled_callback(GtkWidget *button, gpointer user_data)
 	gtk_entry_set_visibility(GTK_ENTRY(input->entry), mode);
 }
 
-static void passkey_dialog(DBusGProxy *adapter, DBusGProxy *device,
-		const char *address, const char *name, gboolean numeric,
-						DBusGMethodInvocation *context)
+static void
+passkey_dialog (DBusGProxy *adapter,
+		DBusGProxy *device,
+		const char *name,
+		gboolean numeric,
+		DBusGMethodInvocation *context)
 {
 	GtkWidget *dialog;
 	GtkWidget *button;
@@ -305,15 +308,19 @@ static void passkey_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	enable_blinking();
 }
 
+#if 0
 static void display_dialog(DBusGProxy *adapter, DBusGProxy *device,
 		const char *address, const char *name, const char *value,
 				guint entered, DBusGMethodInvocation *context)
 {
 }
-
-static void confirm_dialog(DBusGProxy *adapter, DBusGProxy *device,
-		const char *address, const char *name, const char *value,
-						DBusGMethodInvocation *context)
+#endif
+static void
+confirm_dialog (DBusGProxy *adapter,
+		DBusGProxy *device,
+		const char *name,
+		const char *value,
+		DBusGMethodInvocation *context)
 {
 	GtkWidget *dialog;
 	GtkWidget *button;
@@ -394,9 +401,12 @@ static void confirm_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	enable_blinking();
 }
 
-static void auth_dialog(DBusGProxy *adapter, DBusGProxy *device,
-		const char *address, const char *name, const char *uuid,
-						DBusGMethodInvocation *context)
+static void
+auth_dialog (DBusGProxy *adapter,
+	     DBusGProxy *device,
+	     const char *name,
+	     const char *uuid,
+	     DBusGMethodInvocation *context)
 {
 	GtkWidget *dialog;
 	GtkWidget *button;
@@ -508,44 +518,70 @@ static void notification_closed(GObject *object, gpointer user_data)
 	(dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE))
 #endif
 
-static gboolean device_get_properties(DBusGProxy *proxy,
-					GHashTable **hash, GError **error)
+static char *
+device_get_name(DBusGProxy *proxy, char **ret_alias)
 {
-	return dbus_g_proxy_call(proxy, "GetProperties", error,
-		G_TYPE_INVALID, DBUS_TYPE_G_DICTIONARY, hash, G_TYPE_INVALID);
+	GHashTable *hash;
+	GValue *value;
+	char *alias, *address;
+
+	if (dbus_g_proxy_call (proxy, "GetProperties",  NULL,
+			       G_TYPE_INVALID,
+			       DBUS_TYPE_G_DICTIONARY, &hash,
+			       G_TYPE_INVALID) == FALSE) {
+		return NULL;
+	}
+
+	value = g_hash_table_lookup(hash, "Address");
+	if (value == NULL) {
+		g_hash_table_destroy (hash);
+		return NULL;
+	}
+	address = g_value_dup_string(value);
+
+	value = g_hash_table_lookup(hash, "Alias");
+	alias = value ? g_value_dup_string(value) : NULL;
+
+	g_hash_table_destroy (hash);
+
+	if (ret_alias != NULL)
+		*ret_alias = alias;
+
+	return address;
+}
+
+static char *
+get_name_for_display (DBusGProxy *proxy)
+{
+	char *address, *alias, *name;
+
+	address = device_get_name(proxy, &alias);
+	if (address == NULL)
+		return NULL;
+
+	if (g_strrstr(alias, address)) {
+		g_free (address);
+		return alias;
+	}
+	name = g_strdup_printf("%s (%s)", alias, address);
+
+	g_free (alias);
+	g_free (address);
+
+	return name;
 }
 
 static gboolean pincode_request(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	GHashTable *hash = NULL;
-	GValue *value;
-	const gchar *address, *alias;
-	gchar *name, *line;
+	char *name, *line;
 
-	device_get_properties(device, &hash, NULL);
+	name = get_name_for_display (device);
+	if (name == NULL)
+		return FALSE;
 
-	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
-
-		value = g_hash_table_lookup(hash, "Name");
-		alias = value ? g_value_get_string(value) : NULL;
-	} else {
-		address = NULL;
-		alias = NULL;
-	}
-
-	if (alias) {
-		if (g_strrstr(alias, address))
-			name = g_strdup(alias);
-		else
-			name = g_strdup_printf("%s (%s)", alias, address);
-	} else
-		name = g_strdup(address);
-
-	passkey_dialog(adapter, device, address, name, FALSE, context);
+	passkey_dialog(adapter, device, name, FALSE, context);
 
 	if (notification_supports_actions () == FALSE) {
 		g_free (name);
@@ -572,33 +608,13 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	GHashTable *hash = NULL;
-	GValue *value;
-	const gchar *address, *alias;
-	gchar *name, *line;
+	char *name, *line;
 
-	device_get_properties(device, &hash, NULL);
+	name = get_name_for_display (device);
+	if (name == NULL)
+		return FALSE;
 
-	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
-
-		value = g_hash_table_lookup(hash, "Name");
-		alias = value ? g_value_get_string(value) : NULL;
-	} else {
-		address = NULL;
-		alias = NULL;
-	}
-
-	if (alias) {
-		if (g_strrstr(alias, address))
-			name = g_strdup(alias);
-		else
-			name = g_strdup_printf("%s (%s)", alias, address);
-	} else
-		name = g_strdup(address);
-
-	passkey_dialog(adapter, device, address, name, TRUE, context);
+	passkey_dialog(adapter, device, name, TRUE, context);
 
 	if (notification_supports_actions () == FALSE) {
 		g_free (name);
@@ -625,32 +641,15 @@ static gboolean display_request(DBusGMethodInvocation *context,
 				DBusGProxy *device, guint passkey,
 					guint entered, gpointer user_data)
 {
+	g_warning ("Not implemented, please file a bug at how this happened");
+	return FALSE;
+#if 0
 	DBusGProxy *adapter = user_data;
-	GHashTable *hash = NULL;
-	GValue *value;
-	const gchar *address, *alias;
-	gchar *name, *line, *text;
+	char *name, *text;
 
-	device_get_properties(device, &hash, NULL);
-
-	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
-
-		value = g_hash_table_lookup(hash, "Name");
-		alias = value ? g_value_get_string(value) : NULL;
-	} else {
-		address = NULL;
-		alias = NULL;
-	}
-
-	if (alias) {
-		if (g_strrstr(alias, address))
-			name = g_strdup(alias);
-		else
-			name = g_strdup_printf("%s (%s)", alias, address);
-	} else
-		name = g_strdup(address);
+	name = get_name_for_display (device);
+	if (name == NULL)
+		return FALSE;
 
 	text = g_strdup_printf("%d", passkey);
 	display_dialog(adapter, device, address, name, text, entered, context);
@@ -675,40 +674,21 @@ static gboolean display_request(DBusGMethodInvocation *context,
 	g_free(line);
 
 	return TRUE;
+#endif
 }
 
 static gboolean confirm_request(DBusGMethodInvocation *context,
 			DBusGProxy *device, guint passkey, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	GHashTable *hash = NULL;
-	GValue *value;
-	const gchar *address, *alias;
-	gchar *name, *line, *text;
+	char *name, *line, *text;
 
-	device_get_properties(device, &hash, NULL);
-
-	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
-
-		value = g_hash_table_lookup(hash, "Name");
-		alias = value ? g_value_get_string(value) : NULL;
-	} else {
-		address = NULL;
-		alias = NULL;
-	}
-
-	if (alias) {
-		if (g_strrstr(alias, address))
-			name = g_strdup(alias);
-		else
-			name = g_strdup_printf("%s (%s)", alias, address);
-	} else
-		name = g_strdup(address);
+	name = get_name_for_display (device);
+	if (name == NULL)
+		return FALSE;
 
 	text = g_strdup_printf("%d", passkey);
-	confirm_dialog(adapter, device, address, name, text, context);
+	confirm_dialog(adapter, device, name, text, context);
 	g_free(text);
 
 	/* translators: this is a popup telling you a particular device
@@ -733,33 +713,13 @@ static gboolean authorize_request(DBusGMethodInvocation *context,
 		DBusGProxy *device, const char *uuid, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	GHashTable *hash = NULL;
-	GValue *value;
-	const gchar *address, *alias;
-	gchar *name, *line;
+	char *name, *line;
 
-	device_get_properties(device, &hash, NULL);
+	name = get_name_for_display (device);
+	if (name == NULL)
+		return FALSE;
 
-	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
-
-		value = g_hash_table_lookup(hash, "Name");
-		alias = value ? g_value_get_string(value) : NULL;
-	} else {
-		address = NULL;
-		alias = NULL;
-	}
-
-	if (alias) {
-		if (g_strrstr(alias, address))
-			name = g_strdup(alias);
-		else
-			name = g_strdup_printf("%s (%s)", alias, address);
-	} else
-		name = g_strdup(address);
-
-	auth_dialog(adapter, device, address, name, uuid, context);
+	auth_dialog(adapter, device, name, uuid, context);
 
 	if (notification_supports_actions () == FALSE) {
 		g_free (name);
