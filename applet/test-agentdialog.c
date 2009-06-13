@@ -22,6 +22,7 @@
  */
 
 #include "agent.c"
+#include "notify.h"
 
 static void activate_callback(GObject *widget, gpointer user_data)
 {
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	set_icon (TRUE);
 	statusicon = init_notification();
 
 	g_signal_connect(statusicon, "activate",
@@ -66,8 +68,8 @@ int main(int argc, char *argv[])
 
 	//display_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", 0, NULL);
 	passkey_dialog(adapter, device, "Test (00:11:22:33:44:55)", FALSE, NULL);
-	//confirm_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", NULL);
-	//auth_dialog(adpater, device, "Test (00:11:22:33:44:55)", "UUID", NULL);
+	confirm_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", NULL);
+	auth_dialog(adapter, device, "Test (00:11:22:33:44:55)", "UUID", NULL);
 
 	gtk_main();
 
