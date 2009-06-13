@@ -67,6 +67,7 @@ struct _BluetoothChooserPrivate {
 	int device_type_filter;
 	GtkTreeModel *device_type_filter_model;
 	int device_category_filter;
+	char *device_service_filter;
 
 	guint show_paired : 1;
 	guint show_connected : 1;
@@ -423,12 +424,44 @@ filter_category_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothChooserPr
 }
 
 static gboolean
+filter_service_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothChooserPrivate *priv)
+{
+	char **services;
+	gboolean ret = FALSE;
+	guint i;
+
+	if (priv->device_service_filter == NULL)
+		return TRUE;
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_UUIDS, &services,
+			    -1);
+	if (services == NULL) {
+		/* FIXME we need a way to discover the services here */
+		return FALSE;
+	}
+
+	for (i = 0; services[i] != NULL; i++) {
+		if (g_str_equal (priv->device_service_filter, services[i]) != FALSE) {
+			ret = TRUE;
+			break;
+		}
+	}
+
+	g_strfreev (services);
+
+	return ret;
+}
+
+static gboolean
 filter_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER (data);
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
-	return filter_type_func (model, iter, priv) && filter_category_func (model, iter, priv);
+	return filter_type_func (model, iter, priv)
+		&& filter_category_func (model, iter, priv)
+		&& filter_service_func (model, iter, priv);
 }
 
 static void
@@ -855,6 +888,10 @@ bluetooth_chooser_init(BluetoothChooser *self)
 		gtk_widget_show (priv->device_type);
 	}
 
+	/* The services filter */
+	/* FIXME implement accessors */
+	priv->device_service_filter = NULL; //g_strdup ("OBEXObjectPush");
+
 	/* if filters are not visible hide the vbox */
 	if (!priv->show_device_type && !priv->show_device_category)
 		gtk_widget_hide (priv->filters_vbox);
@@ -886,6 +923,7 @@ bluetooth_chooser_finalize (GObject *object)
 		g_object_unref (priv->model);
 		priv->model = NULL;
 	}
+	g_free (priv->device_service_filter);
 
 	G_OBJECT_CLASS(bluetooth_chooser_parent_class)->finalize(object);
 }
