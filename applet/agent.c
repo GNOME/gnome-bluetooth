@@ -247,9 +247,6 @@ static void passkey_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	gchar *markup;
 
 	input = g_new0(input_data, 1);
-	if (!input)
-		return;
-
 	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
 	input->numeric = numeric;
 	input->context = context;
@@ -362,9 +359,6 @@ static void confirm_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	input_data *input;
 
 	input = g_new0(input_data, 1);
-	if (!input)
-		return;
-
 	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
 	input->device = g_object_ref(device);
 	input->context = context;
@@ -448,9 +442,6 @@ static void auth_dialog(DBusGProxy *adapter, DBusGProxy *device,
 	input_data *input;
 
 	input = g_new0(input_data, 1);
-	if (!input)
-		return;
-
 	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
 	input->uuid = g_strdup(uuid);
 	input->device = g_object_ref(device);
@@ -820,9 +811,6 @@ static gboolean cancel_request(DBusGMethodInvocation *context,
 	input_data *input;
 
 	input = g_new0(input_data, 1);
-	if (!input)
-		return FALSE;
-
 	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
 
 	list = g_list_find_custom(input_list, input, input_compare);
