@@ -201,11 +201,20 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 	if (entered > 0) {
 		GtkEntry *entry;
 		gunichar invisible;
+		GString *str;
+		guint i;
 
 		entry = GTK_ENTRY (gtk_entry_new ());
 		invisible = gtk_entry_get_invisible_char (entry);
-		done = g_strnfill(entered, invisible);
 		g_object_unref (entry);
+
+		str = g_string_new (NULL);
+		for (i = 0; i < entered; i++)
+			g_string_append_unichar (str, invisible);
+		if (entered < strlen (code))
+			g_string_append (str, code + entered);
+
+		done = g_string_free (str, FALSE);
 	} else {
 		done = g_strdup ("");
 	}
