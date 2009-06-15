@@ -33,6 +33,7 @@
 #include "bluetooth-client.h"
 #include "bluetooth-chooser.h"
 #include "gnome-bluetooth-enum-types.h"
+#include "bling-spinner.h"
 
 enum {
 	SELECTED_DEVICE_CHANGED,
@@ -58,7 +59,7 @@ struct _BluetoothChooserPrivate {
 	GtkCellRenderer *bonded_cell;
 	GtkCellRenderer *connected_cell;
 	GtkWidget *treeview;
-	GtkWidget *search_button;
+	GtkWidget *search_hbox, *search_label, *spinner;
 	GtkWidget *device_type_label, *device_type;
 	GtkWidget *device_category_label, *device_category;
 	GtkWidget *filters_vbox;
@@ -71,7 +72,7 @@ struct _BluetoothChooserPrivate {
 
 	guint show_paired : 1;
 	guint show_connected : 1;
-	guint show_search : 1;
+	guint show_searching : 1;
 	guint show_device_type : 1;
 	guint show_device_category : 1;
 	guint disco_rq : 1;
@@ -162,6 +163,27 @@ alias_to_label (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	g_free (alias);
 }
 
+static void
+set_search_label (BluetoothChooser *self, gboolean state)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+
+	if (priv->show_searching == FALSE) {
+		/* Just making sure */
+		bling_spinner_stop (BLING_SPINNER (priv->spinner));
+		return;
+	}
+	if (state == FALSE) {
+		bling_spinner_stop (BLING_SPINNER (priv->spinner));
+		gtk_widget_hide (priv->spinner);
+		gtk_label_set_text (GTK_LABEL (priv->search_label), _("No adapters available"));
+	} else {
+		gtk_widget_show (priv->spinner);
+		bling_spinner_start (BLING_SPINNER (priv->spinner));
+		gtk_label_set_text (GTK_LABEL (priv->search_label), _("Searching for devices..."));
+	}
+}
+
 /**
  * bluetooth_chooser_start_discovery:
  * @self: a #BluetoothChooser widget
@@ -170,19 +192,35 @@ alias_to_label (GtkTreeViewColumn *column, GtkCellRenderer *cell,
  * only work if the Search button is visible, as otherwise the user has no
  * visual feedback that the process is on-going.
  *
- * See also: #BluetoothChooser:show-search
+ * See also: #BluetoothChooser:show-searching
  */
 void
 bluetooth_chooser_start_discovery (BluetoothChooser *self)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
-	g_return_if_fail (priv->show_search);
+	g_return_if_fail (priv->show_searching);
 
 	if (bluetooth_client_start_discovery (priv->client) != FALSE)
-		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
-	else
-		priv->disco_rq = TRUE;
+		set_search_label (self, TRUE);
+	priv->disco_rq = TRUE;
+}
+
+/**
+ * bluetooth_chooser_stop_discovery:
+ * @self: a #BluetoothChooser widget
+ *
+ * Stops a discovery started with #bluetooth_chooser_start_discovery.
+ */
+void
+bluetooth_chooser_stop_discovery (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+
+	g_return_if_fail (priv->show_searching);
+
+	priv->disco_rq = FALSE;
+	bluetooth_client_stop_discovery (priv->client);
 }
 
 static char *
@@ -360,14 +398,6 @@ device_model_row_changed (GtkTreeModel *model,
 		       selection_table_signals[SELECTED_DEVICE_CHANGED],
 		       0, address);
 	g_free (address);
-}
-
-static void
-search_button_clicked (GtkButton *button, gpointer user_data)
-{
-	BluetoothChooser *self = BLUETOOTH_CHOOSER(user_data);
-
-	bluetooth_chooser_start_discovery (self);
 }
 
 static void
@@ -560,8 +590,13 @@ adapter_model_row_changed (GtkTreeModel *model,
 
 	if (is_default == FALSE)
 		return;
-	gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), !discovering && powered);
+	if (powered != FALSE && discovering == FALSE && priv->disco_rq != FALSE) {
+		bluetooth_chooser_start_discovery (self);
+		set_search_label (self, TRUE);
+		return;
+	}
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), powered);
+	set_search_label (self, discovering);
 }
 
 static void default_adapter_changed (GObject    *gobject,
@@ -576,7 +611,7 @@ static void default_adapter_changed (GObject    *gobject,
 
 	if (adapter == NULL) {
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), FALSE);
-		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), FALSE);
+		set_search_label (self, FALSE);
 		gtk_tree_view_set_model (GTK_TREE_VIEW(priv->treeview), NULL);
 	}
 
@@ -600,14 +635,11 @@ static void default_adapter_changed (GObject    *gobject,
 				  G_CALLBACK (device_model_row_changed), self);
 		g_object_unref (priv->filter);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
-		gtk_widget_set_sensitive (GTK_WIDGET(priv->search_button), TRUE);
 
 		/* Start a disovery if it was requested before we
 		 * had an adapter available */
-		if (priv->disco_rq != FALSE) {
+		if (priv->disco_rq != FALSE)
 			bluetooth_chooser_start_discovery (self);
-			priv->disco_rq = FALSE;
-		}
 	}
 }
 
@@ -697,7 +729,7 @@ create_treeview (BluetoothChooser *self)
 		g_object_unref (priv->filter);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (tree), FALSE);
-		gtk_widget_set_sensitive (GTK_WIDGET (priv->search_button), FALSE);
+		set_search_label (self, FALSE);
 	}
 
 	gtk_container_add (GTK_CONTAINER(scrolled), tree);
@@ -724,7 +756,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_push_composite_child ();
 
 	priv->show_paired = FALSE;
-	priv->show_search = FALSE;
+	priv->show_searching = FALSE;
 
 	priv->client = bluetooth_client_new ();
 
@@ -762,15 +794,19 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	g_signal_connect (priv->adapter_model, "row-changed",
 			  G_CALLBACK (adapter_model_row_changed), self);
 
-	/* The search button */
-	priv->search_button = gtk_button_new_with_mnemonic (_("S_earch"));
-	gtk_widget_set_no_show_all (priv->search_button, TRUE);
-	gtk_box_pack_end (GTK_BOX (hbox), priv->search_button, FALSE, TRUE, 0);
-	g_signal_connect (G_OBJECT(priv->search_button), "clicked",
-			  G_CALLBACK(search_button_clicked), self);
-	gtk_widget_set_tooltip_text (priv->search_button, _("Search for Bluetooth devices"));
-	if (priv->show_search)
-		gtk_widget_show (priv->search_button);
+	/* The searching label */
+	priv->search_hbox = gtk_hbox_new (FALSE, 2);
+	gtk_widget_set_no_show_all (priv->search_hbox, TRUE);
+	priv->spinner = bling_spinner_new ();
+	gtk_container_add (GTK_CONTAINER (priv->search_hbox), priv->spinner);
+	gtk_widget_show (priv->spinner);
+	priv->search_label = gtk_label_new (_("Searching for devices..."));
+	gtk_container_add (GTK_CONTAINER (priv->search_hbox), priv->search_label);
+	gtk_widget_show (priv->search_label);
+
+	gtk_box_pack_end (GTK_BOX (hbox), priv->search_hbox, FALSE, TRUE, 0);
+	if (priv->show_searching)
+		gtk_widget_show (priv->search_hbox);
 	//FIXME check whether the default adapter is discovering right now
 
 	/* The treeview */
@@ -934,7 +970,7 @@ enum {
 	PROP_DEVICE_SELECTED,
 	PROP_SHOW_PAIRING,
 	PROP_SHOW_CONNECTED,
-	PROP_SHOW_SEARCH,
+	PROP_SHOW_SEARCHING,
 	PROP_SHOW_DEVICE_TYPE,
 	PROP_SHOW_DEVICE_CATEGORY,
 	PROP_DEVICE_TYPE_FILTER,
@@ -961,9 +997,9 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		if (priv->connected_cell != NULL)
 			g_object_set (G_OBJECT (priv->connected_cell), "visible", priv->show_connected, NULL);
 		break;
-	case PROP_SHOW_SEARCH:
-		priv->show_search = g_value_get_boolean (value);
-		g_object_set (G_OBJECT (priv->search_button), "visible", priv->show_search, NULL);
+	case PROP_SHOW_SEARCHING:
+		priv->show_searching = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (priv->search_hbox), "visible", priv->show_searching, NULL);
 		break;
 	case PROP_SHOW_DEVICE_TYPE:
 		priv->show_device_type = g_value_get_boolean (value);
@@ -1014,8 +1050,8 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 	case PROP_SHOW_CONNECTED:
 		g_value_set_boolean (value, priv->show_connected);
 		break;
-	case PROP_SHOW_SEARCH:
-		g_value_set_boolean (value, priv->show_search);
+	case PROP_SHOW_SEARCHING:
+		g_value_set_boolean (value, priv->show_searching);
 		break;
 	case PROP_SHOW_DEVICE_TYPE:
 		g_value_set_boolean (value, priv->show_device_type);
@@ -1101,13 +1137,13 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 					 PROP_SHOW_CONNECTED, g_param_spec_boolean ("show-connected",
 										    NULL, NULL, FALSE, G_PARAM_READWRITE));
 	/**
-	 * BluetoothChooser:show-search:
+	 * BluetoothChooser:show-searchinging:
 	 *
-	 * Whether to show the Search button, this is necessary if you want to programmatically
+	 * Whether to show the Searching label , this is necessary if you want to programmatically
 	 * start a discovery, using bluetooth_chooser_start_discovery()
 	 **/
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_SHOW_SEARCH, g_param_spec_boolean ("show-search",
+					 PROP_SHOW_SEARCHING, g_param_spec_boolean ("show-searching",
 										 NULL, NULL, FALSE, G_PARAM_READWRITE));
 	/**
 	 * BluetoothChooser:show-device-type:

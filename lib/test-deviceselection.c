@@ -101,7 +101,7 @@ static void
 chooser_created (BluetoothChooserButton *button, BluetoothChooser *chooser, gpointer data)
 {
 	g_object_set(chooser,
-		     "show-search", FALSE,
+		     "show-searching", FALSE,
 		     "show-pairing", FALSE,
 		     "show-device-type", FALSE,
 		     "device-type-filter", BLUETOOTH_TYPE_PHONE,
@@ -196,7 +196,7 @@ create_wizard_dialogue (void)
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
-		     "show-search", TRUE,
+		     "show-searching", TRUE,
 		     "show-device-type", TRUE,
 		     "show-device-category", FALSE,
 		     "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
@@ -230,7 +230,7 @@ create_props_dialogue (void)
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
-		     "show-search", FALSE,
+		     "show-searching", FALSE,
 		     "show-device-type", FALSE,
 		     "show-device-category", FALSE,
 		     "show-pairing", TRUE,
