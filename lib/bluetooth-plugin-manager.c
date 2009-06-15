@@ -29,7 +29,7 @@
 #include <bluetooth-plugin.h>
 #include "bluetooth-plugin-manager.h"
 
-#define UNINSTALLED_PLUGINDIR "../common/plugins"
+#define UNINSTALLED_PLUGINDIR "../lib/plugins"
 
 GList *plugin_list = NULL;
 
@@ -83,7 +83,7 @@ bluetooth_plugin_manager_init (void)
 {
 	if (g_file_test (UNINSTALLED_PLUGINDIR, G_FILE_TEST_IS_DIR) != FALSE) {
 		/* Try to load the local plugins */
-		bluetooth_plugin_dir_process ("../common/plugins/.libs/");
+		bluetooth_plugin_dir_process ("../lib/plugins/.libs/");
 	}
 
 	if (g_list_length (plugin_list) == 0)
