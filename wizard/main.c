@@ -370,9 +370,9 @@ void prepare_callback(GtkWidget *assistant,
 
 	if (page == page_search) {
 		complete = set_page_search_complete ();
-		bluetooth_client_start_discovery(client);
+		bluetooth_chooser_start_discovery(selector);
 	} else {
-		bluetooth_client_stop_discovery(client);
+		bluetooth_chooser_stop_discovery(selector);
 	}
 
 	if (page == page_setup) {
