@@ -133,33 +133,36 @@ static void set_trusted(input_data *input)
 	if (input->device == NULL)
 		return;
 
-	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(input->button));
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (input->button));
 	if (active == FALSE)
 		return;
 
-	g_value_init(&value, G_TYPE_BOOLEAN);
-	g_value_set_boolean(&value, TRUE);
+	g_value_init (&value, G_TYPE_BOOLEAN);
+	g_value_set_boolean (&value, TRUE);
 
-	dbus_g_proxy_call(input->device, "SetProperty", NULL,
-			G_TYPE_STRING, "Trusted",
-			G_TYPE_VALUE, &value, G_TYPE_INVALID, G_TYPE_INVALID);
+	dbus_g_proxy_call (input->device, "SetProperty", NULL,
+			   G_TYPE_STRING, "Trusted",
+			   G_TYPE_VALUE, &value, G_TYPE_INVALID,
+			   G_TYPE_INVALID);
 
-	g_value_unset(&value);
+	g_value_unset (&value);
 }
 
-static void auth_callback(GtkWidget *dialog,
-				gint response, gpointer user_data)
+static void
+auth_callback (GtkWidget *dialog,
+	       gint response,
+	       gpointer user_data)
 {
 	input_data *input = user_data;
 
-	if (response == GTK_RESPONSE_YES) {
-		set_trusted(input);
+	if (response == GTK_RESPONSE_ACCEPT) {
+		set_trusted (input);
 		dbus_g_method_return(input->context);
 	} else {
 		GError *error;
-		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-					"Authorization request rejected");
-		dbus_g_method_return_error(input->context, error);
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+				     "Authorization request rejected");
+		dbus_g_method_return_error (input->context, error);
 	}
 
 	input_free(input);
@@ -349,91 +352,53 @@ static void
 auth_dialog (DBusGProxy *adapter,
 	     DBusGProxy *device,
 	     const char *name,
+	     const char *long_name,
 	     const char *uuid,
 	     DBusGMethodInvocation *context)
 {
+	GtkBuilder *xml;
 	GtkWidget *dialog;
 	GtkWidget *button;
-	GtkWidget *image;
-	GtkWidget *label;
-	GtkWidget *table;
-	GtkWidget *vbox;
-	gchar *markup, *text;
+	char *str;
 	input_data *input;
 
-	input = g_new0(input_data, 1);
-	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
-	input->uuid = g_strdup(uuid);
-	input->device = g_object_ref(device);
+	input = g_new0 (input_data, 1);
+	input->path = g_strdup (dbus_g_proxy_get_path (adapter));
+	input->uuid = g_strdup (uuid);
+	input->device = g_object_ref (device);
 	input->context = context;
 
-	dialog = gtk_dialog_new();
-	gtk_window_set_title(GTK_WINDOW(dialog), _("Authorization request"));
-	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-	gtk_window_set_keep_above(GTK_WINDOW(dialog), TRUE);
-	gtk_window_set_urgency_hint(GTK_WINDOW(dialog), TRUE);
-	gtk_dialog_set_has_separator(GTK_DIALOG(dialog), FALSE);
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "authorisation-dialogue.ui", NULL) == 0)
+		gtk_builder_add_from_file (xml, PKGDATADIR "/authorisation-dialogue.ui", NULL);
+
+	dialog = GTK_WIDGET (gtk_builder_get_object (xml, "dialog"));
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+	if (notification_supports_actions () != FALSE)
+		gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
+	else
+		gtk_window_set_focus_on_map (GTK_WINDOW (dialog), FALSE);
+	gtk_window_set_urgency_hint (GTK_WINDOW (dialog), TRUE);
 	input->dialog = dialog;
 
-	button = gtk_dialog_add_button(GTK_DIALOG(dialog),
-					GTK_STOCK_NO, GTK_RESPONSE_NO);
-	button = gtk_dialog_add_button(GTK_DIALOG(dialog),
-					GTK_STOCK_YES, GTK_RESPONSE_YES);
+	/* translators: Whether to grant access to a particular service */
+	str = g_strdup_printf (_("Grant access to '%s'"), uuid);
+	g_object_set (G_OBJECT (dialog), "text", str, NULL);
+	g_free (str);
 
-	table = gtk_table_new(5, 2, FALSE);
-	gtk_table_set_row_spacings(GTK_TABLE(table), 4);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 20);
-	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("Device %s wants access to the service '%s'."),
+						  long_name, uuid);
 
-	image = gtk_image_new_from_icon_name("bluetooth-paired",
-							GTK_ICON_SIZE_DIALOG);
-	gtk_misc_set_alignment(GTK_MISC(image), 0.0, 0.0);
-	gtk_table_attach(GTK_TABLE(table), image, 0, 1, 0, 5,
-						GTK_SHRINK, GTK_FILL, 0, 0);
-
-	vbox = gtk_vbox_new(FALSE, 6);
-	label = gtk_label_new(_("Authorization request for device:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_table_attach(GTK_TABLE(table), label, 1, 2, 0, 1,
-				GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
-
-	label = gtk_label_new(NULL);
-	markup = g_strdup_printf("<b>%s</b>", name);
-	gtk_label_set_markup(GTK_LABEL(label), markup);
-	g_free(markup);
-	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
-	gtk_label_set_selectable(GTK_LABEL(label), TRUE);
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_widget_set_size_request(GTK_WIDGET(label), 280, -1);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 2, 3,
-				GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
-
-	label = gtk_label_new(NULL);
-	/* translators: Whether to grant access to a particular service
-	 * to the device mentioned */
-	markup = g_strdup_printf("<i>%s</i>", uuid);
-	text = g_strdup_printf(_("Grant access to %s?"), markup);
-	g_free(markup);
-	markup = g_strdup_printf("%s\n", text);
-	gtk_label_set_markup(GTK_LABEL(label), markup);
-	g_free(markup);
-	g_free(text);
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-
-	button = gtk_check_button_new_with_label(_("Always grant access"));
+	button = GTK_WIDGET (gtk_builder_get_object (xml, "always_button"));
 	input->button = button;
-	gtk_container_add(GTK_CONTAINER(vbox), button);
 
-	input_list = g_list_append(input_list, input);
+	input_list = g_list_append (input_list, input);
 
-	g_signal_connect(G_OBJECT(dialog), "response",
-				G_CALLBACK(auth_callback), input);
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (auth_callback), input);
 
-	enable_blinking();
+	enable_blinking ();
 }
 
 static void show_dialog(gpointer data, gpointer user_data)
@@ -650,17 +615,22 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean authorize_request(DBusGMethodInvocation *context,
-		DBusGProxy *device, const char *uuid, gpointer user_data)
+static gboolean
+authorize_request (DBusGMethodInvocation *context,
+		   DBusGProxy *device,
+		   const char *uuid,
+		   gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
 	char *name, *line;
 
-	name = device_get_name (device, NULL);
+	name = device_get_name (device, &long_name);
 	if (name == NULL)
 		return FALSE;
 
-	auth_dialog(adapter, device, name, uuid, context);
+	auth_dialog (adapter, device, name, long_name, uuid, context);
+
+	g_free (long_name);
 
 	if (notification_supports_actions () == FALSE) {
 		g_free (name);
@@ -668,15 +638,15 @@ static gboolean authorize_request(DBusGMethodInvocation *context,
 		return TRUE;
 	}
 
-	line = g_strdup_printf(_("Authorization request from '%s'"), name);
+	line = g_strdup_printf (_("Authorization request from '%s'"), name);
 
-	g_free(name);
+	g_free (name);
 
-	show_notification(_("Bluetooth device"),
-			  line, _("Check authorization"), 0,
-			  G_CALLBACK(notification_closed));
+	show_notification (_("Bluetooth device"),
+			   line, _("Check authorization"), 0,
+			   G_CALLBACK (notification_closed));
 
-	g_free(line);
+	g_free (line);
 
 	return TRUE;
 }

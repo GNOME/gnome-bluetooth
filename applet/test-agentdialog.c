@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	//display_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", 0, NULL);
 	passkey_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", FALSE, NULL);
 	confirm_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", "123456", NULL);
-	auth_dialog(adapter, device, "Test (00:11:22:33:44:55)", "UUID", NULL);
+	auth_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", "UUID", NULL);
 
 	gtk_main();
 
