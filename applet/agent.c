@@ -622,7 +622,7 @@ authorize_request (DBusGMethodInvocation *context,
 		   gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	char *name, *line;
+	char *name, *long_name, *line;
 
 	name = device_get_name (device, &long_name);
 	if (name == NULL)
