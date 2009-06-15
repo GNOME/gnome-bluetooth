@@ -694,6 +694,7 @@ static GtkAssistant *create_wizard(void)
 	GtkTreeModel *model;
 	GtkCellRenderer *renderer;
 	GdkPixbuf *pixbuf;
+	int height;
 
 	builder = gtk_builder_new ();
 	if (gtk_builder_add_from_file (builder, "wizard.ui", NULL) == 0) {
@@ -759,12 +760,14 @@ static GtkAssistant *create_wizard(void)
 	extra_config_frame = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_frame"));
 
 	/* Set page icons (named icons not supported by Glade) */
+	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, NULL, &height);
 	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-					   "bluetooth", 32, 0, NULL);
+					   "bluetooth", height, 0, NULL);
 	gtk_assistant_set_page_header_image (assistant, page_intro, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_search, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_setup, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_ssp_confirm, pixbuf);
+	gtk_assistant_set_page_header_image (assistant, page_failure, pixbuf);
 	gtk_assistant_set_page_header_image (assistant, page_summary, pixbuf);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
