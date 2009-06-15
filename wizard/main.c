@@ -45,6 +45,8 @@
  * amount of time before we bail out */
 #define CONNECT_TIMEOUT 3.0
 
+#define W(x) GTK_WIDGET(gtk_builder_get_object(builder, x))
+
 enum {
 	PAGE_INTRO,
 	PAGE_SEARCH,
@@ -724,42 +726,43 @@ static GtkAssistant *create_wizard(void)
 	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), renderer,
 					"text", BLUETOOTH_COLUMN_NAME, NULL);
 
-	page_intro = GTK_WIDGET(gtk_builder_get_object(builder, "page_intro"));
+	page_intro = W("page_intro");
 	if (gtk_tree_model_iter_n_children(model, NULL) > 1)
 		gtk_box_pack_start(GTK_BOX(page_intro), combo, FALSE, FALSE, 0);
 
 	/* Search page */
-	page_search = GTK_WIDGET(gtk_builder_get_object(builder, "page_search"));
+	page_search = W("page_search");
 
 	/* The selector */
 	selector = BLUETOOTH_CHOOSER (gtk_builder_get_object (builder, "selector"));
 
 	/* Setup page */
-	page_setup = GTK_WIDGET(gtk_builder_get_object(builder, "page_setup"));
-	label_setup = GTK_WIDGET(gtk_builder_get_object(builder, "label_setup"));
-	label_passkey_help = GTK_WIDGET(gtk_builder_get_object(builder, "label_passkey_help"));
-	label_passkey = GTK_WIDGET(gtk_builder_get_object(builder, "label_passkey"));
+	page_setup = W("page_setup");
+	label_setup = W("label_setup");
+	label_passkey_help = W("label_passkey_help");
+	label_passkey = W("label_passkey");
 
 	/* SSP Setup page */
-	page_ssp_confirm = GTK_WIDGET(gtk_builder_get_object(builder, "page_ssp_confirm"));
+	page_ssp_confirm = W("page_ssp_confirm");
 	gtk_assistant_set_page_complete(assistant, page_ssp_confirm, FALSE);
-	label_ssp_passkey_help = GTK_WIDGET(gtk_builder_get_object(builder, "label_ssp_passkey_help"));
-	label_ssp_passkey = GTK_WIDGET(gtk_builder_get_object(builder, "label_ssp_passkey"));
-	confirm_buttons_box = GTK_WIDGET(gtk_builder_get_object(builder, "confirm_buttons_box"));
-	does_not_match_button = GTK_WIDGET(gtk_builder_get_object(builder, "does_not_match_button"));
-	matches_button = GTK_WIDGET(gtk_builder_get_object(builder, "matches_button"));
+	label_ssp_passkey_help = W("label_ssp_passkey_help");
+	label_ssp_passkey = W("label_ssp_passkey");
+	confirm_buttons_box = W("confirm_buttons_box");
+	does_not_match_button = W("does_not_match_button");
+	matches_button = W("matches_button");
 
 	/* Failure page */
-	page_failure = GTK_WIDGET(gtk_builder_get_object(builder, "page_failure"));
+	page_failure = W("page_failure");
 	gtk_assistant_set_page_complete(assistant, page_failure, FALSE);
-	label_failure = GTK_WIDGET(gtk_builder_get_object(builder, "label_failure"));
+	label_failure = W("label_failure");
 
 	/* Summary page */
-	page_summary = GTK_WIDGET(gtk_builder_get_object(builder, "page_summary"));
-	extra_config_vbox = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_vbox"));
-	extra_config_frame = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_frame"));
+	page_summary = W("page_summary");
+	extra_config_vbox = W("extra_config_vbox");
+	extra_config_frame = W("extra_config_frame");
 
 	/* Set page icons (named icons not supported by Glade) */
+	//FIXME move to GtkBuilder
 	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, NULL, &height);
 	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 					   "bluetooth", height, 0, NULL);
@@ -773,13 +776,13 @@ static GtkAssistant *create_wizard(void)
 		g_object_unref (pixbuf);
 
 	/* Passkey dialog */
-	passkey_dialog = GTK_WIDGET(gtk_builder_get_object(builder, "passkey_dialog"));
-	radio_auto = GTK_WIDGET(gtk_builder_get_object(builder, "radio_auto"));
-	radio_0000 = GTK_WIDGET(gtk_builder_get_object(builder, "radio_0000"));
-	radio_1111 = GTK_WIDGET(gtk_builder_get_object(builder, "radio_1111"));
-	radio_1234 = GTK_WIDGET(gtk_builder_get_object(builder, "radio_1234"));
-	radio_custom = GTK_WIDGET(gtk_builder_get_object(builder, "radio_custom"));
-	entry_custom = GTK_WIDGET(gtk_builder_get_object(builder, "entry_custom"));
+	passkey_dialog = W("passkey_dialog");
+	radio_auto = W("radio_auto");
+	radio_0000 = W("radio_0000");
+	radio_1111 = W("radio_1111");
+	radio_1234 = W("radio_1234");
+	radio_custom = W("radio_custom");
+	entry_custom = W("entry_custom");
 
 	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
 	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
