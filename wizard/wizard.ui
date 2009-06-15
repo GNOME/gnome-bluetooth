@@ -71,9 +71,10 @@
         <child>
           <object class="BluetoothChooser" id="selector">
             <property name="title" translatable="yes">Select the device you want to setup</property>
-            <property name="show-search">True</property>
+            <property name="show-searching">True</property>
             <property name="show-device-type">True</property>
             <property name="show-device-category">False</property>
+            <property name="device-category-filter">3</property>
             <property name="visible">True</property>
             <signal name="selected-device-changed" handler="select_device_changed"/>
           </object>

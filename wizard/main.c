@@ -722,9 +722,6 @@ static GtkAssistant *create_wizard(void)
 
 	/* The selector */
 	selector = BLUETOOTH_CHOOSER (gtk_builder_get_object (builder, "selector"));
-	g_object_set (selector,
-		      "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
-		      NULL);
 
 	/* Setup page */
 	page_setup = GTK_WIDGET(gtk_builder_get_object(builder, "page_setup"));
