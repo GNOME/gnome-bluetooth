@@ -107,12 +107,14 @@ static void passkey_callback(GtkWidget *dialog,
 	input_free(input);
 }
 
-static void confirm_callback(GtkWidget *dialog,
-				gint response, gpointer user_data)
+static void
+confirm_callback (GtkWidget *dialog,
+		  gint response,
+		  gpointer user_data)
 {
 	input_data *input = user_data;
 
-	if (response != GTK_RESPONSE_YES) {
+	if (response != GTK_RESPONSE_ACCEPT) {
 		GError *error;
 		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
 					"Confirmation request rejected");
@@ -292,90 +294,55 @@ static void display_dialog(DBusGProxy *adapter, DBusGProxy *device,
 {
 }
 #endif
+
 static void
 confirm_dialog (DBusGProxy *adapter,
 		DBusGProxy *device,
 		const char *name,
+		const char *long_name,
 		const char *value,
 		DBusGMethodInvocation *context)
 {
 	GtkWidget *dialog;
-	GtkWidget *button;
-	GtkWidget *image;
-	GtkWidget *label;
-	GtkWidget *table;
-	GtkWidget *vbox;
-	gchar *markup;
+	GtkBuilder *xml;
+	char *str;
 	input_data *input;
 
-	input = g_new0(input_data, 1);
-	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
-	input->device = g_object_ref(device);
+	input = g_new0 (input_data, 1);
+	input->path = g_strdup (dbus_g_proxy_get_path(adapter));
+	input->device = g_object_ref (device);
 	input->context = context;
 
-	dialog = gtk_dialog_new();
-	gtk_window_set_title(GTK_WINDOW(dialog), _("Confirmation request"));
-	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-	gtk_window_set_keep_above(GTK_WINDOW(dialog), TRUE);
-	gtk_window_set_urgency_hint(GTK_WINDOW(dialog), TRUE);
-	gtk_dialog_set_has_separator(GTK_DIALOG(dialog), FALSE);
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "confirm-dialogue.ui", NULL) == 0)
+		gtk_builder_add_from_file (xml, PKGDATADIR "/confirm-dialogue.ui", NULL);
+
+	dialog = GTK_WIDGET (gtk_builder_get_object (xml, "dialog"));
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+	if (notification_supports_actions () != FALSE)
+		gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
+	else
+		gtk_window_set_focus_on_map (GTK_WINDOW (dialog), FALSE);
+	gtk_window_set_urgency_hint (GTK_WINDOW (dialog), TRUE);
 	input->dialog = dialog;
 
-	button = gtk_dialog_add_button(GTK_DIALOG(dialog),
-					GTK_STOCK_NO, GTK_RESPONSE_NO);
-	button = gtk_dialog_add_button(GTK_DIALOG(dialog),
-					GTK_STOCK_YES, GTK_RESPONSE_YES);
+	str = g_strdup_printf (_("Device '%s' wants to pair with this computer"),
+			       name);
+	g_object_set (G_OBJECT (dialog), "text", str, NULL);
+	g_free (str);
 
-	table = gtk_table_new(5, 2, FALSE);
-	gtk_table_set_row_spacings(GTK_TABLE(table), 4);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 20);
-	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
+	str = g_strdup_printf ("<b>%s</b>", value);
+	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+						    _("Please confirm whether the passkey '%s' matches the one on device %s."),
+						    str, long_name);
+	g_free (str);
 
-	image = gtk_image_new_from_icon_name("bluetooth-paired",
-							GTK_ICON_SIZE_DIALOG);
-	gtk_misc_set_alignment(GTK_MISC(image), 0.0, 0.0);
-	gtk_table_attach(GTK_TABLE(table), image, 0, 1, 0, 5,
-						GTK_SHRINK, GTK_FILL, 0, 0);
+	input_list = g_list_append (input_list, input);
 
-	vbox = gtk_vbox_new(FALSE, 6);
-	label = gtk_label_new(_("Pairing request for device:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 0, 1,
-				GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (confirm_callback), input);
 
-	label = gtk_label_new(NULL);
-	markup = g_strdup_printf("<b>%s</b>", name);
-	gtk_label_set_markup(GTK_LABEL(label), markup);
-	g_free(markup);
-	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
-	gtk_label_set_selectable(GTK_LABEL(label), TRUE);
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_widget_set_size_request(GTK_WIDGET(label), 280, -1);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-
-	vbox = gtk_vbox_new(FALSE, 6);
-	label = gtk_label_new(_("Confirm value for authentication:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 2, 3,
-				GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
-
-	label = gtk_label_new(NULL);
-	markup = g_strdup_printf("<b>%s</b>\n", value);
-	gtk_label_set_markup(GTK_LABEL(label), markup);
-	g_free(markup);
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-
-	input_list = g_list_append(input_list, input);
-
-	g_signal_connect(G_OBJECT(dialog), "response",
-				G_CALLBACK(confirm_callback), input);
-
-	enable_blinking();
+	enable_blinking ();
 }
 
 static void
@@ -653,15 +620,17 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 			DBusGProxy *device, guint passkey, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	char *name, *line, *text;
+	char *name, *long_name, *line, *text;
 
-	name = device_get_name (device, NULL);
+	name = device_get_name (device, &long_name);
 	if (name == NULL)
 		return FALSE;
 
 	text = g_strdup_printf("%d", passkey);
-	confirm_dialog(adapter, device, name, text, context);
+	confirm_dialog(adapter, device, name, long_name, text, context);
 	g_free(text);
+
+	g_free (long_name);
 
 	/* translators: this is a popup telling you a particular device
 	 * has asked for pairing */
