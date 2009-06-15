@@ -795,7 +795,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 			  G_CALLBACK (adapter_model_row_changed), self);
 
 	/* The searching label */
-	priv->search_hbox = gtk_hbox_new (FALSE, 2);
+	priv->search_hbox = gtk_hbox_new (FALSE, 6);
 	gtk_widget_set_no_show_all (priv->search_hbox, TRUE);
 	priv->spinner = bling_spinner_new ();
 	gtk_container_add (GTK_CONTAINER (priv->search_hbox), priv->spinner);
