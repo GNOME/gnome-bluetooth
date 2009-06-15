@@ -152,7 +152,8 @@
         </child>
         <child>
           <object class="GtkLabel" id="label_passkey">
-            <property name="label"></property>
+            <property name="label">&lt;span font_desc="50" color="black" bgcolor="white"&gt;  123456  &lt;/span&gt;</property>
+            <property name="use_markup">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -199,7 +200,10 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label_ssp_passkey"/>
+          <object class="GtkLabel" id="label_ssp_passkey">
+            <property name="label">&lt;span font_desc="50" color="black" bgcolor="white"&gt;  123456  &lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
           <packing>
             <property name="expand">True</property>
             <property name="position">2</property>
