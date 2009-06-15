@@ -56,7 +56,7 @@ get_config_widgets (const char *bdaddr, const char **uuids)
 static void
 device_removed (const char *bdaddr)
 {
-	g_message ("Device '%s' got removed");
+	g_message ("Device '%s' got removed", bdaddr);
 }
 
 static GbtPluginInfo plugin_info = {
