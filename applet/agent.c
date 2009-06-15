@@ -86,15 +86,17 @@ static void passkey_callback(GtkWidget *dialog,
 {
 	input_data *input = user_data;
 
-	if (response == GTK_RESPONSE_ACCEPT) {
+	if (response == GTK_RESPONSE_OK) {
 		const char *text;
+
 		text = gtk_entry_get_text(GTK_ENTRY(input->entry));
 
 		if (input->numeric == TRUE) {
 			guint passkey = atoi(text);
 			dbus_g_method_return(input->context, passkey);
-		} else
+		} else {
 			dbus_g_method_return(input->context, text);
+		}
 	} else {
 		GError *error;
 		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
@@ -185,7 +187,9 @@ static void changed_callback(GtkWidget *editable, gpointer user_data)
 
 	text = gtk_entry_get_text(GTK_ENTRY(input->entry));
 
-	gtk_widget_set_sensitive(input->button, *text != '\0' ? TRUE : FALSE);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (input->dialog),
+					   GTK_RESPONSE_OK,
+					   *text != '\0' ? TRUE : FALSE);
 }
 
 static void toggled_callback(GtkWidget *button, gpointer user_data)
@@ -193,117 +197,90 @@ static void toggled_callback(GtkWidget *button, gpointer user_data)
 	input_data *input = user_data;
 	gboolean mode;
 
-	mode = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
+	mode = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-	gtk_entry_set_visibility(GTK_ENTRY(input->entry), mode);
+	gtk_entry_set_visibility (GTK_ENTRY (input->entry), mode);
 }
 
 static void
 passkey_dialog (DBusGProxy *adapter,
 		DBusGProxy *device,
 		const char *name,
+		const char *long_name,
 		gboolean numeric,
 		DBusGMethodInvocation *context)
 {
 	GtkWidget *dialog;
 	GtkWidget *button;
-	GtkWidget *image;
-	GtkWidget *label;
 	GtkWidget *entry;
-	GtkWidget *table;
-	GtkWidget *vbox;
+	GtkBuilder *xml;
+	char *str;
 	input_data *input;
-	gchar *markup;
 
-	input = g_new0(input_data, 1);
-	input->path = g_strdup(dbus_g_proxy_get_path(adapter));
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "passkey-dialogue.ui", NULL) == 0)
+		gtk_builder_add_from_file (xml, PKGDATADIR "/passkey-dialogue.ui", NULL);
+
+	input = g_new0 (input_data, 1);
+	input->path = g_strdup (dbus_g_proxy_get_path(adapter));
 	input->numeric = numeric;
 	input->context = context;
-	input->device = g_object_ref(device);
+	input->device = g_object_ref (device);
 
-	dialog = gtk_dialog_new();
-	gtk_window_set_title(GTK_WINDOW(dialog), _("Authentication request"));
-	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+	dialog = GTK_WIDGET (gtk_builder_get_object (xml, "dialog"));
+
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 	if (notification_supports_actions () != FALSE)
-		gtk_window_set_keep_above(GTK_WINDOW(dialog), TRUE);
+		gtk_window_set_keep_above (GTK_WINDOW (dialog), TRUE);
 	else
-		gtk_window_set_focus_on_map(GTK_WINDOW(dialog), FALSE);
-	gtk_window_set_urgency_hint(GTK_WINDOW(dialog), TRUE);
-	gtk_dialog_set_has_separator(GTK_DIALOG(dialog), FALSE);
+		gtk_window_set_focus_on_map (GTK_WINDOW (dialog), FALSE);
+	gtk_window_set_urgency_hint (GTK_WINDOW (dialog), TRUE);
 	input->dialog = dialog;
 
-	button = gtk_dialog_add_button(GTK_DIALOG(dialog),
-				GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT);
-	button = gtk_dialog_add_button(GTK_DIALOG(dialog),
-					GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
-	gtk_widget_grab_default(button);
-	gtk_widget_set_sensitive(button, FALSE);
-	input->button = button;
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog),
+					 GTK_RESPONSE_OK);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+					   GTK_RESPONSE_OK,
+					   FALSE);
 
-	table = gtk_table_new(5, 2, FALSE);
-	gtk_table_set_row_spacings(GTK_TABLE(table), 4);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 20);
-	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
-	image = gtk_image_new_from_icon_name("bluetooth-paired",
-							GTK_ICON_SIZE_DIALOG);
-	gtk_misc_set_alignment(GTK_MISC(image), 0.0, 0.0);
-	gtk_table_attach(GTK_TABLE(table), image, 0, 1, 0, 5,
-						GTK_SHRINK, GTK_FILL, 0, 0);
-	vbox = gtk_vbox_new(FALSE, 6);
+	str = g_strdup_printf (_("Device '%s' wants to pair with this computer"),
+			       name);
+	g_object_set (G_OBJECT (dialog), "text", str, NULL);
+	g_free (str);
 
-	label = gtk_label_new(_("Pairing request for device:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 0, 1,
-				GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("Please enter the passkey mentioned on device %s."),
+						  long_name);
 
-	label = gtk_label_new(NULL);
-	markup = g_strdup_printf("<b>%s</b>", name);
-	gtk_label_set_markup(GTK_LABEL(label), markup);
-	g_free(markup);
-	gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
-	gtk_label_set_selectable(GTK_LABEL(label), TRUE);
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_widget_set_size_request(GTK_WIDGET(label), 280, -1);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-	vbox = gtk_vbox_new(FALSE, 6);
-
-	label = gtk_label_new(_("Enter passkey for authentication:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
-	gtk_container_add(GTK_CONTAINER(vbox), label);
-	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 2, 3,
-				GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
-
-	entry = gtk_entry_new();
+	entry = GTK_WIDGET (gtk_builder_get_object (xml, "entry"));
 	if (numeric == TRUE) {
-		gtk_entry_set_max_length(GTK_ENTRY(entry), 6);
-		gtk_entry_set_width_chars(GTK_ENTRY(entry), 6);
-		g_signal_connect(G_OBJECT(entry), "insert-text",
-					G_CALLBACK(insert_callback), input);
+		gtk_entry_set_max_length (GTK_ENTRY (entry), 6);
+		gtk_entry_set_width_chars (GTK_ENTRY (entry), 6);
+		g_signal_connect (G_OBJECT (entry), "insert-text",
+				  G_CALLBACK (insert_callback), input);
 	} else {
-		gtk_entry_set_max_length(GTK_ENTRY(entry), 16);
-		gtk_entry_set_width_chars(GTK_ENTRY(entry), 16);
-		gtk_entry_set_visibility(GTK_ENTRY(entry), FALSE);
+		gtk_entry_set_max_length (GTK_ENTRY (entry), 16);
+		gtk_entry_set_width_chars (GTK_ENTRY (entry), 16);
+		gtk_entry_set_visibility (GTK_ENTRY (entry), FALSE);
 	}
-	gtk_entry_set_activates_default(GTK_ENTRY(entry), TRUE);
+	gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
 	input->entry = entry;
-	g_signal_connect(G_OBJECT(entry), "changed",
-				G_CALLBACK(changed_callback), input);
-	gtk_container_add(GTK_CONTAINER(vbox), entry);
+	g_signal_connect (G_OBJECT (entry), "changed",
+			  G_CALLBACK (changed_callback), input);
 
+	button = GTK_WIDGET (gtk_builder_get_object (xml, "showinput_button"));
 	if (numeric == FALSE) {
-		button = gtk_check_button_new_with_label(_("Show input"));
-		g_signal_connect(G_OBJECT(button), "toggled",
-					G_CALLBACK(toggled_callback), input);
-		gtk_container_add(GTK_CONTAINER(vbox), button);
+		g_signal_connect (G_OBJECT (button), "toggled",
+				  G_CALLBACK (toggled_callback), input);
+	} else {
+		gtk_widget_set_no_show_all (button, TRUE);
+		gtk_widget_hide (button);
 	}
 
 	input_list = g_list_append(input_list, input);
 
-	g_signal_connect(G_OBJECT(dialog), "response",
-				G_CALLBACK(passkey_callback), input);
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (passkey_callback), input);
 
 	enable_blinking();
 }
@@ -519,11 +496,14 @@ static void notification_closed(GObject *object, gpointer user_data)
 #endif
 
 static char *
-device_get_name(DBusGProxy *proxy, char **ret_alias)
+device_get_name(DBusGProxy *proxy, char **long_name)
 {
 	GHashTable *hash;
 	GValue *value;
 	char *alias, *address;
+
+	if (long_name != NULL)
+		*long_name = NULL;
 
 	if (dbus_g_proxy_call (proxy, "GetProperties",  NULL,
 			       G_TYPE_INVALID,
@@ -544,44 +524,34 @@ device_get_name(DBusGProxy *proxy, char **ret_alias)
 
 	g_hash_table_destroy (hash);
 
-	if (ret_alias != NULL)
-		*ret_alias = alias;
-
-	return address;
-}
-
-static char *
-get_name_for_display (DBusGProxy *proxy)
-{
-	char *address, *alias, *name;
-
-	address = device_get_name(proxy, &alias);
-	if (address == NULL)
-		return NULL;
-
-	if (g_strrstr(alias, address)) {
-		g_free (address);
-		return alias;
+	if (g_strcmp0 (alias, address) == 0) {
+		g_free (alias);
+		if (*long_name)
+			*long_name = g_strdup_printf ("'%s'", address);
+		return address;
 	}
-	name = g_strdup_printf("%s (%s)", alias, address);
 
-	g_free (alias);
+	if (long_name != NULL)
+		*long_name = g_strdup_printf ("'%s' (%s)", alias, address);
+
 	g_free (address);
 
-	return name;
+	return alias;
 }
 
 static gboolean pincode_request(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	char *name, *line;
+	char *name, *long_name, *line;
 
-	name = get_name_for_display (device);
+	name = device_get_name (device, &long_name);
 	if (name == NULL)
 		return FALSE;
 
-	passkey_dialog(adapter, device, name, FALSE, context);
+	passkey_dialog(adapter, device, name, long_name, FALSE, context);
+
+	g_free (long_name);
 
 	if (notification_supports_actions () == FALSE) {
 		g_free (name);
@@ -608,13 +578,15 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
-	char *name, *line;
+	char *name, *long_name, *line;
 
-	name = get_name_for_display (device);
+	name = device_get_name (device, &long_name);
 	if (name == NULL)
 		return FALSE;
 
-	passkey_dialog(adapter, device, name, TRUE, context);
+	passkey_dialog(adapter, device, name, long_name, TRUE, context);
+
+	g_free (long_name);
 
 	if (notification_supports_actions () == FALSE) {
 		g_free (name);
@@ -683,7 +655,7 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 	DBusGProxy *adapter = user_data;
 	char *name, *line, *text;
 
-	name = get_name_for_display (device);
+	name = device_get_name (device, NULL);
 	if (name == NULL)
 		return FALSE;
 
@@ -715,7 +687,7 @@ static gboolean authorize_request(DBusGMethodInvocation *context,
 	DBusGProxy *adapter = user_data;
 	char *name, *line;
 
-	name = get_name_for_display (device);
+	name = device_get_name (device, NULL);
 	if (name == NULL)
 		return FALSE;
 
