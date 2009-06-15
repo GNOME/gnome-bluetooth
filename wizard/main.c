@@ -50,6 +50,7 @@ enum {
 	PAGE_SEARCH,
 	PAGE_SETUP,
 	PAGE_SSP_SETUP,
+	PAGE_FAILURE,
 	PAGE_SUMMARY
 };
 
@@ -74,6 +75,7 @@ static GtkAssistant *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_setup = NULL;
 static GtkWidget *page_ssp_confirm = NULL;
+static GtkWidget *page_failure = NULL;
 static GtkWidget *page_summary = NULL;
 
 static GtkWidget *label_setup = NULL;
@@ -86,8 +88,10 @@ static GtkWidget *confirm_buttons_box = NULL;
 static GtkWidget *does_not_match_button = NULL;
 static GtkWidget *matches_button = NULL;
 
-static GtkWidget *extra_config_label = NULL;
-static GtkWidget *extra_config_help_label = NULL;
+static GtkWidget *label_failure = NULL;
+
+static GtkWidget *extra_config_vbox = NULL;
+static GtkWidget *extra_config_frame = NULL;
 
 static BluetoothChooser *selector = NULL;
 
@@ -241,6 +245,8 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 
 	g_message ("got cancel_callback");
 
+	gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
+
 	if (target_ssp == FALSE) {
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -248,6 +254,7 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 		 */
 		text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
 	} else {
+		//FIXME why finished when it's been cancelled/failed?
 		/* translators:
 		 * The '%s' is the device name, for example:
 		 * Pairing with 'Sony Bluetooth Headset' finished
@@ -255,15 +262,9 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 		text = g_strdup_printf(_("Pairing with '%s' finished"), target_name);
 	}
 
-	gtk_label_set_markup(GTK_LABEL(label_setup), text);
+	gtk_label_set_text(GTK_LABEL(label_failure), text);
 
 	g_free(text);
-
-	gtk_widget_hide (label_passkey);
-	gtk_widget_hide (label_passkey_help);
-
-	gtk_label_set_markup(GTK_LABEL(label_passkey_help), NULL);
-	gtk_label_set_markup(GTK_LABEL(label_passkey), NULL);
 
 	dbus_g_method_return(context);
 
@@ -303,21 +304,19 @@ static void create_callback(BluetoothClient *_client, const char *path, gpointer
 	gboolean complete = FALSE;
 	gchar *text;
 
-	g_message ("got create_callback");
-
 	if (path != NULL) {
-		gint page;
 		ConnectData *data;
+
+		/* Create was successful */
+		gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
+
+		//FIXME wait for setup should be in its own page
 
 		/* translators:
 		 * The '%s' is the device name, for example:
 		 * Successfully paired with 'Sony Bluetooth Headset'
 		 */
 		text = g_strdup_printf(_("Successfully paired with '%s'"), target_name);
-
-		page = gtk_assistant_get_current_page(assistant);
-		if (page > 0)
-			gtk_assistant_set_current_page(assistant, page + 1);
 
 		bluetooth_client_set_trusted(client, path, TRUE);
 
@@ -337,11 +336,16 @@ static void create_callback(BluetoothClient *_client, const char *path, gpointer
 			complete = TRUE;
 		}
 	} else {
+		gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
+
 		/* translators:
 		 * The '%s' is the device name, for example:
 		 * Pairing with 'Sony Bluetooth Headset' failed
 		 */
 		text = g_strdup_printf(_("Pairing with '%s' failed"), target_name);
+
+		gtk_label_set_markup(GTK_LABEL(label_failure), text);
+		return;
 	}
 
 	gtk_label_set_markup(GTK_LABEL(label_setup), text);
@@ -476,6 +480,10 @@ void prepare_callback(GtkWidget *assistant,
 		}
 	}
 
+	if (page == page_failure) {
+		complete = FALSE;
+	}
+
 	if (page == page_summary) {
 		GList *widgets = NULL;
 		GValue value = { 0, };
@@ -493,18 +501,20 @@ void prepare_callback(GtkWidget *assistant,
 		if (widgets != NULL) {
 			GList *l;
 
-			gtk_widget_show (extra_config_label);
-			gtk_widget_show (extra_config_help_label);
 			for (l = widgets; l != NULL; l = l->next) {
 				GtkWidget *widget = l->data;
-				gtk_box_pack_start (GTK_BOX (page_summary),
+				g_message ("adding a widget");
+				gtk_box_pack_start (GTK_BOX (extra_config_vbox),
 						    widget,
 						    FALSE,
 						    TRUE,
 						    6);
-				gtk_widget_show (widget);
 			}
 			g_list_free (widgets);
+			gtk_widget_show_all (extra_config_frame);
+			g_message ("showing all the widgets");
+		} else {
+			g_message ("got no widgets");
 		}
 	}
 
@@ -738,10 +748,15 @@ static GtkAssistant *create_wizard(void)
 	does_not_match_button = GTK_WIDGET(gtk_builder_get_object(builder, "does_not_match_button"));
 	matches_button = GTK_WIDGET(gtk_builder_get_object(builder, "matches_button"));
 
+	/* Failure page */
+	page_failure = GTK_WIDGET(gtk_builder_get_object(builder, "page_failure"));
+	gtk_assistant_set_page_complete(assistant, page_failure, FALSE);
+	label_failure = GTK_WIDGET(gtk_builder_get_object(builder, "label_failure"));
+
 	/* Summary page */
 	page_summary = GTK_WIDGET(gtk_builder_get_object(builder, "page_summary"));
-	extra_config_label = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_label"));
-	extra_config_help_label = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_help_label"));
+	extra_config_vbox = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_vbox"));
+	extra_config_frame = GTK_WIDGET(gtk_builder_get_object(builder, "extra_config_frame"));
 
 	/* Set page icons (named icons not supported by Glade) */
 	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
