@@ -143,6 +143,9 @@ update_random_pincode (void)
 {
 	target_pincode = g_strdup_printf ("%d", g_random_int_range (pow (10, PIN_NUM_DIGITS - 1),
 								    pow (10, PIN_NUM_DIGITS) - 1));
+	automatic_pincode = FALSE;
+	g_free (user_pincode);
+	user_pincode = NULL;
 }
 
 static gboolean
@@ -564,27 +567,6 @@ void prepare_callback (GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
-		g_free (pincode);
-		pincode = NULL;
-
-
-		if (user_pincode != NULL && *user_pincode != '\0') {
-			pincode = g_strdup (user_pincode);
-		} else {
-			guint max_digits;
-
-			pincode = get_pincode_for_device(target_type, target_address, target_name, &max_digits);
-			if (pincode == NULL) {
-				/* Truncate the default pincode if the device doesn't like long
-				 * PIN codes */
-				if (max_digits != PIN_NUM_DIGITS && max_digits > 0)
-					pincode = g_strndup(target_pincode, max_digits);
-				else
-					pincode = g_strdup(target_pincode);
-			} else if (target_ssp == FALSE) {
-				automatic_pincode = TRUE;
-			}
-		}
 
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
 			gtk_widget_show (label_passkey_help);
@@ -812,6 +794,27 @@ select_device_changed (BluetoothChooser *selector,
 	target_ssp = !legacypairing;
 
 	g_message ("address %s name %s ssp %d", target_address, target_name, target_ssp);
+
+	g_free (pincode);
+	pincode = NULL;
+
+	if (user_pincode != NULL && *user_pincode != '\0') {
+		pincode = g_strdup (user_pincode);
+	} else {
+		guint max_digits;
+
+		pincode = get_pincode_for_device(target_type, target_address, target_name, &max_digits);
+		if (pincode == NULL) {
+			/* Truncate the default pincode if the device doesn't like long
+			 * PIN codes */
+			if (max_digits != PIN_NUM_DIGITS && max_digits > 0)
+				pincode = g_strndup(target_pincode, max_digits);
+			else
+				pincode = g_strdup(target_pincode);
+		} else if (target_ssp == FALSE) {
+			automatic_pincode = TRUE;
+		}
+	}
 }
 
 void
@@ -859,7 +862,7 @@ page_func (gint current_page,
 	   gpointer data)
 {
 	if (current_page == PAGE_SEARCH) {
-		if (target_ssp != FALSE)
+		if (target_ssp != FALSE || automatic_pincode != FALSE)
 			return PAGE_CONNECTING;
 		else
 			return PAGE_SETUP;
