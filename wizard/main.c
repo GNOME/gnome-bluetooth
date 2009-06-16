@@ -186,6 +186,9 @@ does_not_match_cb (GtkButton *button,
 	g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
 		    "Agent callback cancelled");
 	dbus_g_method_return(context, error);
+
+	g_object_set_data (G_OBJECT(does_not_match_button), "context", NULL);
+	g_object_set_data (G_OBJECT(matches_button), "context", NULL);
 }
 
 void
@@ -198,6 +201,9 @@ matches_cb (GtkButton *button,
 	gtk_widget_set_sensitive (does_not_match_button, FALSE);
 	gtk_widget_set_sensitive (matches_button, FALSE);
 	dbus_g_method_return(context, "");
+
+	g_object_set_data (G_OBJECT(does_not_match_button), "context", NULL);
+	g_object_set_data (G_OBJECT(matches_button), "context", NULL);
 }
 
 static gboolean
@@ -212,7 +218,7 @@ confirm_callback (DBusGMethodInvocation *context,
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
 	gtk_widget_show (label_ssp_passkey_help);
-	label = g_strdup_printf (_("Please confirm that the passkey displayed on '%s' matches this one"),
+	label = g_strdup_printf (_("Please confirm that the passkey displayed on '%s' matches this one."),
 				 target_name);
 	gtk_label_set_markup(GTK_LABEL(label_ssp_passkey_help), label);
 	g_free (label);
@@ -236,6 +242,8 @@ display_callback (DBusGMethodInvocation *context,
 		  gpointer user_data)
 {
 	gchar *text, *done, *code;
+
+	//FIXME to update, bleh
 
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
