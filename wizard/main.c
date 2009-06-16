@@ -539,24 +539,14 @@ void prepare_callback (GtkWidget *assistant,
 		complete = FALSE;
 
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
-			gtk_widget_show (label_passkey_help);
-			gtk_widget_show (label_passkey);
-
-			gtk_label_set_markup(GTK_LABEL(label_passkey_help), _("Please enter the following passkey:"));
-			set_large_label (GTK_LABEL (label_passkey), pincode);
-		} else {
 			char *text;
 
-			gtk_widget_show (label_passkey_help);
-			gtk_widget_hide (label_passkey);
-
-			/* translators:
-			 * The '%s' is the device name, for example:
-			 * Please wait whilst 'Sony Bluetooth Headset' is being paired
-			 */
-			text = g_strdup_printf(_("Please wait whilst '%s' is being paired"), target_name);
+			text = g_strdup_printf (_("Please enter the following passkey on '%s':"), target_name);
 			gtk_label_set_markup(GTK_LABEL(label_passkey_help), text);
-			g_free(text);
+			g_free (text);
+			set_large_label (GTK_LABEL (label_passkey), pincode);
+		} else {
+			g_assert_not_reached ();
 		}
 	}
 
