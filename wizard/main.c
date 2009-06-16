@@ -405,6 +405,15 @@ prepare_idle_cb (gpointer data)
 		gtk_widget_show (assistant->close);
 		gtk_widget_set_sensitive (assistant->close, TRUE);
 	}
+	if (page == PAGE_SETUP) {
+		gtk_widget_hide (assistant->forward);
+		gtk_widget_hide (assistant->back);
+		gtk_widget_hide (assistant->apply);
+		gtk_widget_hide (assistant->last);
+		gtk_widget_hide (assistant->close);
+		gtk_widget_show (assistant->cancel);
+		gtk_widget_set_sensitive (assistant->cancel, TRUE);
+	}
 
 	return FALSE;
 }
