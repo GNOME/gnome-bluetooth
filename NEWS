@@ -10,6 +10,7 @@ Applet:
 	- Support notification-daemon without any support for actions, as
 	  used in Ubuntu
 	- Pass the device name to bluetooth-sendto
+	- Rework UI of all the pairing helper dialogues
 
 Preferences:
 	- Fix the adapter page not showing up when restarting bluetoothd
@@ -25,7 +26,7 @@ Send-to:
 Wizard:
 	- Fix handling for devices that use random passkeys, but
 	  can't handle 6 digits (such as Sony CMT-DH5BT)
-	- Add support for Simple Pairing for devices without a display
+	- Add Simple Pairing support
 	- Try harder to connect to devices after pairing them, fixes
 	  the Microsoft Wireless Notebook Presenter Mouse 8000 not
 	  working straight after pairing
@@ -33,6 +34,7 @@ Wizard:
 	  a fixed passkey
 	- Don't allow stepping back in the middle of pairing
 	- Add more instructions on the front page
+	- Many many UI changes
 
 Library:
 	- Allow getting arbitrary data from the backend for
@@ -41,6 +43,7 @@ Library:
 	- Add plugin support, so third-party applications can
 	  be setup, for a particular device, from the preferences
 	  or the wizard
+	- Replace the search button with a "Searching" label and spinner
 
 ver 2.27.5:
 	- Fix some killswitch related bugs
