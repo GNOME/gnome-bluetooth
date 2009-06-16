@@ -41,6 +41,7 @@
 #include "pin.h"
 
 #define AGENT_PATH "/org/bluez/agent/wizard"
+
 /* We'll try to connect to the device repeatedly for that
  * amount of time before we bail out */
 #define CONNECT_TIMEOUT 3.0
@@ -132,12 +133,14 @@ set_large_label (GtkLabel *label, const char *text)
 static void
 update_random_pincode (void)
 {
-	target_pincode = g_strdup_printf("%d", g_random_int_range(pow (10, PIN_NUM_DIGITS - 1),
-								  pow (10, PIN_NUM_DIGITS) - 1));
+	target_pincode = g_strdup_printf ("%d", g_random_int_range (pow (10, PIN_NUM_DIGITS - 1),
+								    pow (10, PIN_NUM_DIGITS) - 1));
 }
 
-static gboolean pincode_callback(DBusGMethodInvocation *context,
-					DBusGProxy *device, gpointer user_data)
+static gboolean
+pincode_callback (DBusGMethodInvocation *context,
+		  DBusGProxy *device,
+		  gpointer user_data)
 {
 	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
 	dbus_g_method_return(context, pincode);
@@ -146,14 +149,16 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 }
 
 void
-restart_button_clicked (GtkButton *button, gpointer user_data)
+restart_button_clicked (GtkButton *button,
+			gpointer user_data)
 {
 	gtk_assistant_set_current_page (window_assistant, PAGE_SEARCH);
 	update_random_pincode ();
 }
 
 void
-does_not_match_cb (GtkButton *button, gpointer user_data)
+does_not_match_cb (GtkButton *button,
+		   gpointer user_data)
 {
 	DBusGMethodInvocation *context;
 	GError *error = NULL;
@@ -176,7 +181,8 @@ does_not_match_cb (GtkButton *button, gpointer user_data)
 }
 
 void
-matches_cb (GtkButton *button, gpointer user_data)
+matches_cb (GtkButton *button,
+	    gpointer user_data)
 {
 	DBusGMethodInvocation *context;
 
@@ -186,10 +192,11 @@ matches_cb (GtkButton *button, gpointer user_data)
 	dbus_g_method_return(context, "");
 }
 
-static gboolean confirm_callback(DBusGMethodInvocation *context,
-				 DBusGProxy *device,
-				 guint passkey,
-				 gpointer user_data)
+static gboolean
+confirm_callback (DBusGMethodInvocation *context,
+		  DBusGProxy *device,
+		  guint passkey,
+		  gpointer user_data)
 {
 	char *str, *label;
 
@@ -213,9 +220,12 @@ static gboolean confirm_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean display_callback(DBusGMethodInvocation *context,
-				 DBusGProxy *device, guint passkey,
-				 guint entered, gpointer user_data)
+static gboolean
+display_callback (DBusGMethodInvocation *context,
+		  DBusGProxy *device,
+		  guint passkey,
+		  guint entered,
+		  gpointer user_data)
 {
 	gchar *text, *done, *code;
 
@@ -262,8 +272,9 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean cancel_callback(DBusGMethodInvocation *context,
-							gpointer user_data)
+static gboolean
+cancel_callback (DBusGMethodInvocation *context,
+		 gpointer user_data)
 {
 	gchar *text;
 
@@ -289,9 +300,10 @@ typedef struct {
 	GTimer *timer;
 } ConnectData;
 
-static void connect_callback(BluetoothClient *_client,
-			     gboolean success,
-			     gpointer user_data)
+static void
+connect_callback (BluetoothClient *_client,
+		  gboolean success,
+		  gpointer user_data)
 {
 	ConnectData *data = (ConnectData *) user_data;
 
@@ -311,7 +323,10 @@ static void connect_callback(BluetoothClient *_client,
 	gtk_assistant_set_page_complete(GTK_ASSISTANT (window_assistant), page_setup, TRUE);
 }
 
-static void create_callback(BluetoothClient *_client, const char *path, gpointer user_data)
+static void
+create_callback (BluetoothClient *_client,
+		 const char *path,
+		 gpointer user_data)
 {
 	GtkAssistant *assistant = user_data;
 	gboolean complete = FALSE;
@@ -371,7 +386,9 @@ static void create_callback(BluetoothClient *_client, const char *path, gpointer
 	gtk_assistant_set_page_complete(assistant, page_setup, complete);
 }
 
-void close_callback(GtkWidget *assistant, gpointer data)
+void
+close_callback (GtkWidget *assistant,
+		gpointer data)
 {
 	gtk_widget_destroy(assistant);
 
@@ -431,9 +448,9 @@ prepare_idle_cb (gpointer data)
 	return FALSE;
 }
 
-void prepare_callback(GtkWidget *assistant,
-		      GtkWidget *page,
-		      gpointer data)
+void prepare_callback (GtkWidget *assistant,
+		       GtkWidget *page,
+		       gpointer data)
 {
 	gboolean complete = TRUE;
 	const char *path = AGENT_PATH;
@@ -627,14 +644,14 @@ set_page_search_complete (void)
 	g_free (address);
 	g_free (name);
 
-	gtk_assistant_set_page_complete(GTK_ASSISTANT (window_assistant),
-					page_search, complete);
+	gtk_assistant_set_page_complete (GTK_ASSISTANT (window_assistant),
+					 page_search, complete);
 
 	return complete;
 }
 
 gboolean
-entry_custom_event(GtkWidget *entry, GdkEventKey *event)
+entry_custom_event (GtkWidget *entry, GdkEventKey *event)
 {
 	if (event->length == 0)
 		return FALSE;
@@ -647,7 +664,7 @@ entry_custom_event(GtkWidget *entry, GdkEventKey *event)
 }
 
 void
-entry_custom_changed(GtkWidget *entry)
+entry_custom_changed (GtkWidget *entry)
 {
 	user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
@@ -656,7 +673,8 @@ entry_custom_changed(GtkWidget *entry)
 }
 
 void
-toggle_set_sensitive(GtkWidget *button, gpointer data)
+toggle_set_sensitive (GtkWidget *button,
+		      gpointer data)
 {
 	gboolean active;
 
@@ -669,7 +687,7 @@ toggle_set_sensitive(GtkWidget *button, gpointer data)
 }
 
 void
-set_user_pincode(GtkWidget *button)
+set_user_pincode (GtkWidget *button)
 {
 	GSList *list, *l;
 
@@ -710,9 +728,10 @@ set_user_pincode(GtkWidget *button)
 	}
 }
 
-void select_device_changed(BluetoothChooser *selector,
-			   gchar *address,
-			   gpointer user_data)
+void
+select_device_changed (BluetoothChooser *selector,
+		       gchar *address,
+		       gpointer user_data)
 {
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
 		return;
@@ -721,7 +740,8 @@ void select_device_changed(BluetoothChooser *selector,
 }
 
 void
-passkey_option_button_clicked (GtkButton *button, gpointer data)
+passkey_option_button_clicked (GtkButton *button,
+			       gpointer data)
 {
 	GtkWidget *radio;
 	char *oldpin;
@@ -774,7 +794,8 @@ page_func (gint current_page,
 	return current_page + 1;
 }
 
-static GtkAssistant *create_wizard(void)
+static GtkAssistant *
+create_wizard (void)
 {
 	const char *pages[] = {
 		"page_intro",
@@ -905,7 +926,7 @@ static GOptionEntry options[] = {
 	{ NULL },
 };
 
-int main(int argc, char *argv[])
+int main (int argc, char **argv)
 {
 	UniqueApp *app;
 	GError *error = NULL;
