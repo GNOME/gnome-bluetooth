@@ -404,7 +404,7 @@ static void
 select_browse_device_callback (GtkTreeSelection *selection, gpointer user_data)
 {
 	BluetoothChooser *self = user_data;
-	gchar *address;
+	char *address;
 
 	g_object_notify (G_OBJECT(self), "device-selected");
 	address = bluetooth_chooser_get_selected_device (self);
