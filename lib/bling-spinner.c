@@ -188,7 +188,7 @@ bling_spinner_expose (GtkWidget *widget, GdkEventExpose *event)
 
 static void 
 bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
-{                       
+{
 	BlingSpinner *spinner;
 	BlingSpinnerPrivate *priv;
 	GdkScreen* new_screen;
@@ -199,7 +199,7 @@ bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
 
 	new_screen = gtk_widget_get_screen (widget);
 	colormap = gdk_screen_get_rgba_colormap (new_screen);
-      
+
 	if (!colormap) {
 		colormap = gdk_screen_get_rgb_colormap (new_screen);
 		priv->have_alpha = FALSE;
@@ -209,7 +209,7 @@ bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
 	gtk_widget_set_colormap (widget, colormap);
 }
 
-gboolean
+static gboolean
 bling_spinner_timeout (gpointer data)
 {
 	BlingSpinner *spinner;
@@ -276,6 +276,8 @@ bling_spinner_start (BlingSpinner *spinner)
 {
 	BlingSpinnerPrivate *priv;
 
+	g_return_if_fail (BLING_IS_SPINNER (spinner));
+
 	priv = BLING_SPINNER_GET_PRIVATE (spinner);
 	if (priv->timeout != 0)
 		return;
@@ -286,10 +288,13 @@ bling_spinner_start (BlingSpinner *spinner)
  * bling_spinner_stop
  *
  * Stops the animation
- */void
+ */
+void
 bling_spinner_stop (BlingSpinner *spinner)
 {
 	BlingSpinnerPrivate *priv;
+
+	g_return_if_fail (BLING_IS_SPINNER (spinner));
 
 	priv = BLING_SPINNER_GET_PRIVATE (spinner);
 	if (priv->timeout == 0)
