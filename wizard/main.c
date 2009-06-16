@@ -56,6 +56,7 @@ enum {
 	PAGE_SETUP,
 	PAGE_SSP_SETUP,
 	PAGE_FAILURE,
+	PAGE_FINISHING,
 	PAGE_SUMMARY
 };
 
@@ -81,12 +82,13 @@ static GtkBuilder *builder = NULL;
 
 static GtkAssistant *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
+static GtkWidget *page_connecting = NULL;
 static GtkWidget *page_setup = NULL;
 static GtkWidget *page_ssp_setup = NULL;
 static GtkWidget *page_failure = NULL;
+static GtkWidget *page_finishing = NULL;
 static GtkWidget *page_summary = NULL;
 
-static GtkWidget *page_connecting = NULL;
 static GtkWidget *label_connecting = NULL;
 static GtkWidget *spinner_connecting = NULL;
 
@@ -99,6 +101,9 @@ static GtkWidget *does_not_match_button = NULL;
 static GtkWidget *matches_button = NULL;
 
 static GtkWidget *label_failure = NULL;
+
+static GtkWidget *label_finishing = NULL;
+static GtkWidget *spinner_finishing = NULL;
 
 static GtkWidget *label_summary = NULL;
 static GtkWidget *extra_config_vbox = NULL;
@@ -392,14 +397,7 @@ create_callback (BluetoothClient *_client,
 	data->timer = g_timer_new ();
 
 	if (bluetooth_client_connect_service(client, path, connect_callback, data) != FALSE) {
-		//FIXME
-		/*
-		char *text;
-		text = g_strdup_printf (_("Please wait while finishing setup on '%s'..."),
-					target_name);
-		gtk_label_set_text (GTK_LABEL (label_finishing), text);
-		g_free (text);
-		*/
+		gtk_assistant_set_current_page (window_assistant, PAGE_FINISHING);
 	} else {
 		gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
 		g_timer_destroy (data->timer);
@@ -475,6 +473,15 @@ prepare_idle_cb (gpointer data)
 		gtk_widget_hide (assistant->last);
 		gtk_widget_hide (assistant->close);
 		gtk_widget_hide (assistant->cancel);
+	}
+	if (page == PAGE_FINISHING) {
+		gtk_widget_hide (assistant->forward);
+		gtk_widget_hide (assistant->back);
+		gtk_widget_hide (assistant->apply);
+		gtk_widget_hide (assistant->last);
+		gtk_widget_hide (assistant->cancel);
+		gtk_widget_show (assistant->close);
+		gtk_widget_set_sensitive (assistant->close, FALSE);
 	}
 	return FALSE;
 }
@@ -558,13 +565,31 @@ void prepare_callback (GtkWidget *assistant,
 		}
 	}
 
+	if (page == page_finishing) {
+		char *text;
+
+		complete = FALSE;
+
+		bling_spinner_start (BLING_SPINNER (spinner_finishing));
+
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+		 */
+		text = g_strdup_printf (_("Please wait while finishing setup on '%s'..."), target_name);
+		gtk_label_set_text (GTK_LABEL (label_finishing), text);
+		g_free (text);
+	} else {
+		bling_spinner_stop (BLING_SPINNER (spinner_finishing));
+	}
+
 	if (page == page_summary) {
 		GList *widgets = NULL;
 		GValue value = { 0, };
 		char **uuids, *text;
 
 		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
-		text = g_strdup_printf ("Successfully configured '%s' device", g_value_get_string (&value));
+		text = g_strdup_printf (_("Successfully configured '%s'"), g_value_get_string (&value));
 		g_value_unset (&value);
 		gtk_label_set_text (GTK_LABEL (label_summary), text);
 		g_free (text);
@@ -846,10 +871,12 @@ create_wizard (void)
 	const char *pages[] = {
 		"page_intro",
 		"page_search",
+		"page_connecting",
 		"page_setup",
 		"page_ssp_setup",
 		"page_failure",
-		"page_summary"
+		"page_finishing",
+		"page_summary",
 	};
 	guint i;
 
@@ -919,6 +946,11 @@ create_wizard (void)
 	page_failure = W("page_failure");
 	gtk_assistant_set_page_complete(assistant, page_failure, FALSE);
 	label_failure = W("label_failure");
+
+	/* Finishing page */
+	page_finishing = W("page_finishing");
+	label_finishing = W("label_finishing");
+	spinner_finishing = W("spinner_finishing");
 
 	/* Summary page */
 	page_summary = W("page_summary");
