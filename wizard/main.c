@@ -152,8 +152,16 @@ void
 restart_button_clicked (GtkButton *button,
 			gpointer user_data)
 {
-	gtk_assistant_set_current_page (window_assistant, PAGE_SEARCH);
+	/* Clean up old state */
 	update_random_pincode ();
+	target_ssp = FALSE;
+	target_type = BLUETOOTH_TYPE_ANY;
+	g_free (target_address);
+	target_address = NULL;
+	g_free (target_name);
+	target_name = NULL;
+
+	gtk_assistant_set_current_page (window_assistant, PAGE_SEARCH);
 }
 
 void
