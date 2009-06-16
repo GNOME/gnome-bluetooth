@@ -90,7 +90,6 @@ static GtkWidget *page_connecting = NULL;
 static GtkWidget *label_connecting = NULL;
 static GtkWidget *spinner_connecting = NULL;
 
-static GtkWidget *label_setup = NULL;
 static GtkWidget *label_passkey = NULL;
 static GtkWidget *label_passkey_help = NULL;
 
@@ -356,8 +355,7 @@ connect_callback (BluetoothClient *_client,
 	g_free (data->path);
 	g_free (data);
 
-	gtk_widget_hide (label_passkey_help);
-	gtk_assistant_set_page_complete(GTK_ASSISTANT (window_assistant), page_setup, TRUE);
+	gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
 }
 
 static void
@@ -365,66 +363,49 @@ create_callback (BluetoothClient *_client,
 		 const char *path,
 		 gpointer user_data)
 {
-	GtkAssistant *assistant = user_data;
-	gboolean complete = FALSE;
-	gchar *text;
+	ConnectData *data;
 
 	g_message ("create_callback '%s'", path);
 
 	create_started = FALSE;
 
-	if (path != NULL) {
-		ConnectData *data;
+	/* Create failed */
+	if (path == NULL) {
+		char *text;
 
-		/* Create was successful */
-		gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
-
-		//FIXME wait for setup should be in its own page
-
-		/* translators:
-		 * The '%s' is the device name, for example:
-		 * Successfully paired with 'Sony Bluetooth Headset'
-		 */
-		text = g_strdup_printf(_("Successfully paired with '%s'"), target_name);
-
-		bluetooth_client_set_trusted(client, path, TRUE);
-
-		data = g_new0 (ConnectData, 1);
-		data->path = g_strdup (path);
-		data->timer = g_timer_new ();
-
-		if (bluetooth_client_connect_service(client, path, connect_callback, data) != FALSE) {
-			gtk_label_set_text (GTK_LABEL (label_passkey_help),
-					    _("Please wait while setting up the device..."));
-			gtk_widget_show (label_passkey_help);
-		} else {
-			g_timer_destroy (data->timer);
-			g_free (data->path);
-			g_free (data);
-
-			complete = TRUE;
-		}
-	} else {
 		gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
 
 		/* translators:
 		 * The '%s' is the device name, for example:
-		 * Pairing with 'Sony Bluetooth Headset' failed
+		 * Setting up 'Sony Bluetooth Headset' failed
 		 */
-		text = g_strdup_printf(_("Pairing with '%s' failed"), target_name);
+		text = g_strdup_printf(_("Setting up '%s' failed"), target_name);
 
 		gtk_label_set_markup(GTK_LABEL(label_failure), text);
 		return;
 	}
 
-	gtk_label_set_markup(GTK_LABEL(label_setup), text);
+	bluetooth_client_set_trusted(client, path, TRUE);
 
-	gtk_widget_hide (label_passkey_help);
-	gtk_widget_hide (label_passkey);
+	data = g_new0 (ConnectData, 1);
+	data->path = g_strdup (path);
+	data->timer = g_timer_new ();
 
-	g_free(text);
-
-	gtk_assistant_set_page_complete(assistant, page_setup, complete);
+	if (bluetooth_client_connect_service(client, path, connect_callback, data) != FALSE) {
+		//FIXME
+		/*
+		char *text;
+		text = g_strdup_printf (_("Please wait while finishing setup on '%s'..."),
+					target_name);
+		gtk_label_set_text (GTK_LABEL (label_finishing), text);
+		g_free (text);
+		*/
+	} else {
+		gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
+		g_timer_destroy (data->timer);
+		g_free (data->path);
+		g_free (data);
+	}
 }
 
 void
@@ -529,20 +510,6 @@ void prepare_callback (GtkWidget *assistant,
 		bling_spinner_stop (BLING_SPINNER (spinner_connecting));
 	}
 
-	if (page == page_setup) {
-		char *text;
-
-		/* translators:
-		 * The '%s' is the device name, for example:
-		 * Connecting to 'Sony Bluetooth Headset' now...
-		 */
-		text = g_strdup_printf(_("Connecting to '%s'..."), target_name);
-		gtk_label_set_markup(GTK_LABEL(label_setup), text);
-		g_free(text);
-
-		complete = FALSE;
-	}
-
 	if ((page == page_setup || page == page_connecting) && (create_started == FALSE)) {
 		const char *path = AGENT_PATH;
 		char *pin_ret;
@@ -567,6 +534,7 @@ void prepare_callback (GtkWidget *assistant,
 	}
 
 	if (page == page_setup) {
+		complete = FALSE;
 
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
 			gtk_widget_show (label_passkey_help);
@@ -936,7 +904,6 @@ create_wizard (void)
 
 	/* Setup page */
 	page_setup = W("page_setup");
-	label_setup = W("label_setup");
 	label_passkey_help = W("label_passkey_help");
 	label_passkey = W("label_passkey");
 
