@@ -71,6 +71,7 @@ static gchar *target_pincode = NULL;
 static guint target_type = BLUETOOTH_TYPE_ANY;
 static gboolean target_ssp = FALSE;
 static gboolean create_started = FALSE;
+static gboolean display_called = FALSE;
 
 /* NULL means automatic, anything else is a pincode specified by the user */
 static gchar *user_pincode = NULL;
@@ -171,6 +172,7 @@ restart_button_clicked (GtkButton *button,
 	update_random_pincode ();
 	target_ssp = FALSE;
 	target_type = BLUETOOTH_TYPE_ANY;
+	display_called = FALSE;
 	g_free (target_address);
 	target_address = NULL;
 	g_free (target_name);
@@ -262,8 +264,7 @@ display_callback (DBusGMethodInvocation *context,
 {
 	gchar *text, *done, *code;
 
-	//FIXME to update, bleh
-
+	display_called = TRUE;
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
@@ -462,7 +463,12 @@ prepare_idle_cb (gpointer data)
 		gtk_widget_hide (assistant->apply);
 		gtk_widget_hide (assistant->last);
 		gtk_widget_hide (assistant->close);
-		gtk_widget_hide (assistant->cancel);
+		if (display_called == FALSE) {
+			gtk_widget_hide (assistant->cancel);
+		} else {
+			gtk_widget_show (assistant->cancel);
+			gtk_widget_set_sensitive (assistant->cancel, TRUE);
+		}
 	}
 	if (page == PAGE_FINISHING) {
 		gtk_widget_hide (assistant->forward);
@@ -614,7 +620,7 @@ void prepare_callback (GtkWidget *assistant,
 			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
 	}
 
-	if (page == page_ssp_setup) {
+	if (page == page_ssp_setup && display_called == FALSE) {
 		complete = FALSE;
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
