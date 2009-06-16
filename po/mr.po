@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2009-06-15 09:29+0000\n"
-"PO-Revision-Date: 2009-06-15 15:04+0530\n"
+"POT-Creation-Date: 2009-06-15 14:44+0000\n"
+"PO-Revision-Date: 2009-06-16 09:08+0530\n"
 "Last-Translator: Sandeep Shedmake <sandeep.shedmake@gmail.com>\n"
 "Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
@@ -74,8 +74,8 @@ msgstr "जॉयपॅड"
 msgid "Tablet"
 msgstr "टॅबलेट"
 
-#: ../lib/bluetooth-client.c:136 ../lib/bluetooth-chooser.c:103
-#: ../lib/bluetooth-chooser.c:137
+#: ../lib/bluetooth-client.c:136 ../lib/bluetooth-chooser.c:104
+#: ../lib/bluetooth-chooser.c:138
 msgid "Unknown"
 msgstr "अपरिचीत"
 
@@ -83,71 +83,71 @@ msgstr "अपरिचीत"
 msgid "Click to select device..."
 msgstr "साधन निवडण्याकरीता क्लिक करा..."
 
-#: ../lib/bluetooth-chooser.c:93
+#: ../lib/bluetooth-chooser.c:94
 msgid "All categories"
 msgstr "सर्व प्रवर्ग"
 
-#: ../lib/bluetooth-chooser.c:95
+#: ../lib/bluetooth-chooser.c:96
 msgid "Paired"
 msgstr "जोडी"
 
-#: ../lib/bluetooth-chooser.c:97
+#: ../lib/bluetooth-chooser.c:98
 msgid "Trusted"
 msgstr "विश्वासर्ह"
 
-#: ../lib/bluetooth-chooser.c:99
+#: ../lib/bluetooth-chooser.c:100
 msgid "Not paired or trusted"
 msgstr "जोडी किंवा विश्वासर्ह नाही"
 
-#: ../lib/bluetooth-chooser.c:101
+#: ../lib/bluetooth-chooser.c:102
 msgid "Paired or trusted"
 msgstr "जोडी केलेले किंवा विश्वासर्ह"
 
-#: ../lib/bluetooth-chooser.c:642
+#: ../lib/bluetooth-chooser.c:179
+msgid "No adapters available"
+msgstr "अडॅप्टर उपलब्ध नाही"
+
+#: ../lib/bluetooth-chooser.c:183 ../lib/bluetooth-chooser.c:803
+#| msgid "Search for Bluetooth devices"
+msgid "Searching for devices..."
+msgstr "साधन करीता शोधत आहे..."
+
+#: ../lib/bluetooth-chooser.c:674
 msgid "Device"
 msgstr "साधन"
 
-#: ../lib/bluetooth-chooser.c:678
+#: ../lib/bluetooth-chooser.c:710
 msgid "Type"
 msgstr "प्रकार"
 
-#. The search button
-#: ../lib/bluetooth-chooser.c:766
-msgid "S_earch"
-msgstr "शोध (_e)"
-
-#: ../lib/bluetooth-chooser.c:771
-msgid "Search for Bluetooth devices"
-msgstr "Bluetooth साधन करीता शोधा"
-
 #. The filters
-#: ../lib/bluetooth-chooser.c:790
+#: ../lib/bluetooth-chooser.c:826
 msgid "Show Only Bluetooth Devices With..."
 msgstr "यानुरूप फक्त Bluetooth साधन दाखवा..."
 
 #. The device category filter
-#: ../lib/bluetooth-chooser.c:810
+#: ../lib/bluetooth-chooser.c:846
 msgid "Device _category:"
 msgstr "साधन प्रवर्ग (_c):"
 
-#: ../lib/bluetooth-chooser.c:825
+#: ../lib/bluetooth-chooser.c:861
 msgid "Select the device category to filter above list"
 msgstr "वरील यादी चाळण्याकरीता साधन प्रवर्ग निवडा"
 
 #. The device type filter
-#: ../lib/bluetooth-chooser.c:839
+#: ../lib/bluetooth-chooser.c:875
 msgid "Device _type:"
 msgstr "साधन प्रकार (_t):"
 
-#: ../lib/bluetooth-chooser.c:860
+#: ../lib/bluetooth-chooser.c:896
 msgid "Select the device type to filter above list"
 msgstr "वरील यादी चाळण्याकरीता साधन निवडा"
 
-#: ../lib/bluetooth-chooser.c:866
+#: ../lib/bluetooth-chooser.c:902
 msgid "Input devices (mice, keyboards, ...)"
 msgstr "इन्पुट साधन (माईस, कळफलक, ...)"
 
-#: ../lib/bluetooth-chooser.c:870
+#: ../lib/bluetooth-chooser.c:906
 msgid "Headphones, headsets and other audio devices"
 msgstr "हेडफोन, हेडसेट व इतर ऑडिओ साधन"
 
@@ -260,78 +260,67 @@ msgstr "Bluetooth: कार्यान्वीत"
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: अकार्यान्वीत"
 
-#: ../applet/agent.c:246
+#: ../applet/agent.c:251 ../applet/agent.c:332
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "साधन '%s' ला या संगणकाशी जुळायचे आहे"
 
-#: ../applet/agent.c:252
+#: ../applet/agent.c:257
 #, c-format
 msgid "Please enter the passkey mentioned on device %s."
 msgstr "कृपया साधन %s वरील passkey प्रविष्ट करा."
 
-#: ../applet/agent.c:317
-msgid "Confirmation request"
-msgstr "निश्चितता विनंती"
-
-#: ../applet/agent.c:343
-msgid "Pairing request for device:"
-msgstr "साधन करीता जोडी बनवण्याची विनंती:"
-
-#: ../applet/agent.c:360
-msgid "Confirm value for authentication:"
-msgstr "ओळख पटवण्याकरीता मूल्य निश्चित करा:"
-
-#: ../applet/agent.c:404
-msgid "Authorization request"
-msgstr "अधिकृत परवानगी करीता विनंती"
-
-#: ../applet/agent.c:430
-msgid "Authorization request for device:"
-msgstr "साधन करीता अधिकृत परवानगी करीता विनंती:"
-
-#: ../applet/agent.c:451
+#: ../applet/agent.c:339
 #, c-format
-msgid "Grant access to %s?"
-msgstr "%s करीता प्रवेश द्या?"
+#| msgid "Please enter the passkey mentioned on device %s."
+msgid "Please confirm whether the passkey '%s' matches the one on device %s."
+msgstr "कृपया passkey '%s' साधन %s वरील passkey सह जुळते हे निश्चित करा."
 
-#: ../applet/agent.c:460
-msgid "Always grant access"
-msgstr "नेहमी प्रवेश करीता परवानगी द्या"
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+#| msgid "Grant access to %s?"
+msgid "Grant access to '%s'"
+msgstr "'%s' करीता परवानगी द्या"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "साधन %s ला सेवा '%s' करीता प्रवेश हवा आहे."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:564 ../applet/agent.c:599 ../applet/agent.c:638
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:570
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "'%s' करीता जोडी बनवण्याची विनंती"
 
-#: ../applet/agent.c:568 ../applet/agent.c:603 ../applet/agent.c:642
-#: ../applet/agent.c:673 ../applet/agent.c:706
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:574
+#: ../applet/agent.c:607 ../applet/agent.c:645
 msgid "Bluetooth device"
 msgstr "Bluetooth साधन"
 
-#: ../applet/agent.c:569 ../applet/agent.c:604 ../applet/agent.c:643
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:575
 msgid "Enter passkey"
 msgstr "पासकि प्रविष्ट करा"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:668
+#: ../applet/agent.c:602
 #, c-format
 msgid "Pairing confirmation for '%s'"
 msgstr "'%s' करीता जोडी बनवण्याची निश्चितता"
 
-#: ../applet/agent.c:674
+#: ../applet/agent.c:608
 msgid "Check passkey"
 msgstr "passkey तपासा"
 
-#: ../applet/agent.c:702
+#: ../applet/agent.c:641
 #, c-format
 msgid "Authorization request from '%s'"
 msgstr "'%s' पासून ओळख पटवण्याची विनंती"
 
-#: ../applet/agent.c:707
+#: ../applet/agent.c:646
 msgid "Check authorization"
 msgstr "अधिकृत परवानगी तपासा"
 
@@ -370,6 +359,33 @@ msgstr "साधन करीता फाइल पाठवा..."
 #: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:422
 msgid "Setup new device..."
 msgstr "नवीन साधनची मांडणी..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+#| msgid "Always grant access"
+msgid "_Always grant access"
+msgstr "नेहमी प्रवेश मान्य करा (_A)"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "मान्य करा (_G)"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "नकार (_R)"
+
+#: ../applet/confirm-dialogue.ui.h:1
+#| msgid "Does not match"
+msgid "_Does not match"
+msgstr "जुळवणी अशक्य (_D)"
+
+#: ../applet/confirm-dialogue.ui.h:2
+#| msgid "Matches"
+msgid "_Matches"
+msgstr "जुळवणी (_M)"
+
+#: ../applet/passkey-dialogue.ui.h:1
+msgid "_Show input"
+msgstr "इनपुट दाखवा (_S)"
 
 #: ../properties/main.c:114
 msgid "A Bluetooth manager for the GNOME desktop"
