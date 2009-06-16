@@ -249,20 +249,11 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 
 	gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
 
-	if (target_ssp == FALSE) {
-		/* translators:
-		 * The '%s' is the device name, for example:
-		 * Pairing with 'Sony Bluetooth Headset' cancelled
-		 */
-		text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
-	} else {
-		//FIXME why finished when it's been cancelled/failed?
-		/* translators:
-		 * The '%s' is the device name, for example:
-		 * Pairing with 'Sony Bluetooth Headset' finished
-		 */
-		text = g_strdup_printf(_("Pairing with '%s' finished"), target_name);
-	}
+	/* translators:
+	 * The '%s' is the device name, for example:
+	 * Pairing with 'Sony Bluetooth Headset' cancelled
+	 */
+	text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
 
 	gtk_label_set_text(GTK_LABEL(label_failure), text);
 
@@ -762,7 +753,6 @@ static GtkAssistant *create_wizard(void)
 	extra_config_frame = W("extra_config_frame");
 
 	/* Set page icons (named icons not supported by Glade) */
-	//FIXME move to GtkBuilder
 	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, NULL, &height);
 	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 					   "bluetooth", height, 0, NULL);
@@ -774,6 +764,11 @@ static GtkAssistant *create_wizard(void)
 	gtk_assistant_set_page_header_image (assistant, page_summary, pixbuf);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
+
+	//FIXME use:
+	// g_signal_connect (G_OBJECT (page), "notify::visible",
+	//                     G_CALLBACK (on_page_notify_visibility), assistant);
+	//to setup our own buttons
 
 	/* Passkey dialog */
 	passkey_dialog = W("passkey_dialog");
