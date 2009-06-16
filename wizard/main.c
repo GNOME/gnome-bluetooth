@@ -33,6 +33,7 @@
 #include <dbus/dbus-glib.h>
 #include <unique/uniqueapp.h>
 
+#include <bling-spinner.h>
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
 #include <bluetooth-agent.h>
@@ -51,6 +52,7 @@
 enum {
 	PAGE_INTRO,
 	PAGE_SEARCH,
+	PAGE_CONNECTING,
 	PAGE_SETUP,
 	PAGE_SSP_SETUP,
 	PAGE_FAILURE,
@@ -67,6 +69,7 @@ static gchar *target_name = NULL;
 static gchar *target_pincode = NULL;
 static guint target_type = BLUETOOTH_TYPE_ANY;
 static gboolean target_ssp = FALSE;
+static gboolean create_started = FALSE;
 
 /* NULL means automatic, anything else is a pincode specified by the user */
 static gchar *user_pincode = NULL;
@@ -83,6 +86,10 @@ static GtkWidget *page_ssp_setup = NULL;
 static GtkWidget *page_failure = NULL;
 static GtkWidget *page_summary = NULL;
 
+static GtkWidget *page_connecting = NULL;
+static GtkWidget *label_connecting = NULL;
+static GtkWidget *spinner_connecting = NULL;
+
 static GtkWidget *label_setup = NULL;
 static GtkWidget *label_passkey = NULL;
 static GtkWidget *label_passkey_help = NULL;
@@ -94,6 +101,7 @@ static GtkWidget *matches_button = NULL;
 
 static GtkWidget *label_failure = NULL;
 
+static GtkWidget *label_summary = NULL;
 static GtkWidget *extra_config_vbox = NULL;
 static GtkWidget *extra_config_frame = NULL;
 
@@ -110,7 +118,7 @@ static GtkWidget *entry_custom = NULL;
 /* Signals */
 void close_callback(GtkWidget *assistant, gpointer data);
 void prepare_callback(GtkWidget *assistant, GtkWidget *page, gpointer data);
-void select_device_changed(BluetoothChooser *selector, gchar *address, gpointer user_data);
+void select_device_changed(BluetoothChooser *selector, const char *address, gpointer user_data);
 gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event);
 void set_user_pincode(GtkWidget *button);
 void toggle_set_sensitive(GtkWidget *button, gpointer data);
@@ -160,6 +168,10 @@ restart_button_clicked (GtkButton *button,
 	target_address = NULL;
 	g_free (target_name);
 	target_name = NULL;
+
+	g_object_set (selector,
+		      "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
+		      NULL);
 
 	gtk_assistant_set_current_page (window_assistant, PAGE_SEARCH);
 }
@@ -214,6 +226,8 @@ confirm_callback (DBusGMethodInvocation *context,
 {
 	char *str, *label;
 
+	g_message ("confirm_callback");
+
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
@@ -242,6 +256,8 @@ display_callback (DBusGMethodInvocation *context,
 		  gpointer user_data)
 {
 	gchar *text, *done, *code;
+
+	g_message ("display_callback");
 
 	//FIXME to update, bleh
 
@@ -296,6 +312,8 @@ cancel_callback (DBusGMethodInvocation *context,
 
 	g_message ("got cancel_callback");
 
+	create_started = FALSE;
+
 	gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
 
 	/* translators:
@@ -347,6 +365,10 @@ create_callback (BluetoothClient *_client,
 	GtkAssistant *assistant = user_data;
 	gboolean complete = FALSE;
 	gchar *text;
+
+	g_message ("create_callback '%s'", path);
+
+	create_started = FALSE;
 
 	if (path != NULL) {
 		ConnectData *data;
@@ -444,6 +466,15 @@ prepare_idle_cb (gpointer data)
 		gtk_widget_show (assistant->close);
 		gtk_widget_set_sensitive (assistant->close, TRUE);
 	}
+	if (page == PAGE_CONNECTING) {
+		gtk_widget_hide (assistant->forward);
+		gtk_widget_hide (assistant->back);
+		gtk_widget_hide (assistant->apply);
+		gtk_widget_hide (assistant->last);
+		gtk_widget_hide (assistant->close);
+		gtk_widget_show (assistant->cancel);
+		gtk_widget_set_sensitive (assistant->cancel, TRUE);
+	}
 	if (page == PAGE_SETUP) {
 		gtk_widget_hide (assistant->forward);
 		gtk_widget_hide (assistant->back);
@@ -469,7 +500,6 @@ void prepare_callback (GtkWidget *assistant,
 		       gpointer data)
 {
 	gboolean complete = TRUE;
-	const char *path = AGENT_PATH;
 
 	if (page == page_search) {
 		complete = set_page_search_complete ();
@@ -478,33 +508,26 @@ void prepare_callback (GtkWidget *assistant,
 		bluetooth_chooser_stop_discovery(selector);
 	}
 
+	if (page == page_connecting) {
+		char *text;
+
+		complete = FALSE;
+
+		bling_spinner_start (BLING_SPINNER (spinner_connecting));
+
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Connecting to 'Sony Bluetooth Headset' now...
+		 */
+		text = g_strdup_printf (_("Connecting to '%s'..."), target_name);
+		gtk_label_set_text (GTK_LABEL (label_connecting), text);
+		g_free (text);
+	} else {
+		bling_spinner_stop (BLING_SPINNER (spinner_connecting));
+	}
+
 	if (page == page_setup) {
-		GValue value = { 0, };
-		char *text, *address, *name, *pin_ret;
-		int legacypairing;
-		BluetoothType type;
-
-		/* Get the info about the device now,
-		 * we can't get here without a valid selection */
-		address = bluetooth_chooser_get_selected_device (selector);
-		name = bluetooth_chooser_get_selected_device_name (selector);
-		type = bluetooth_chooser_get_selected_device_type (selector);
-		if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
-			legacypairing = g_value_get_int (&value);
-			if (legacypairing == -1)
-				legacypairing = TRUE;
-		} else {
-			legacypairing = TRUE;
-		}
-
-		g_free(target_address);
-		target_address = address;
-
-		g_free(target_name);
-		target_name = name;
-
-		target_type = type;
-		target_ssp = !legacypairing;
+		char *text;
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -512,12 +535,20 @@ void prepare_callback (GtkWidget *assistant,
 		 */
 		text = g_strdup_printf(_("Connecting to '%s'..."), target_name);
 		gtk_label_set_markup(GTK_LABEL(label_setup), text);
-
 		g_free(text);
 
 		complete = FALSE;
+	}
 
-		g_object_ref(agent);
+	if ((page == page_setup || page == page_connecting) && (create_started == FALSE)) {
+		const char *path = AGENT_PATH;
+		char *pin_ret;
+
+		/* Set the filter on the selector, so we can use it to get more
+		 * info later, in page_summary */
+		g_object_set (selector,
+			      "device-category-filter", BLUETOOTH_CATEGORY_ALL,
+			      NULL);
 
 		/* Do we pair, or don't we? */
 		pin_ret = get_pincode_for_device (target_type, target_address, target_name, NULL);
@@ -525,19 +556,17 @@ void prepare_callback (GtkWidget *assistant,
 			path = NULL;
 		g_free (pin_ret);
 
-		bluetooth_client_create_device(client, target_address,
-					path, create_callback, assistant);
+		g_object_ref(agent);
+		bluetooth_client_create_device (client, target_address,
+						path, create_callback, assistant);
+		g_message ("create called (address %s, path %s)", target_address, path);
+		create_started = TRUE;
 	}
 
 	if (page == page_setup) {
 		g_free (pincode);
 		pincode = NULL;
 
-		/* Set the filter on the selector, so we can use it to get more
-		 * info later, in page_summary */
-		g_object_set (selector,
-			      "device-category-filter", BLUETOOTH_CATEGORY_ALL,
-			      NULL);
 
 		if (user_pincode != NULL && *user_pincode != '\0') {
 			pincode = g_strdup (user_pincode);
@@ -582,10 +611,13 @@ void prepare_callback (GtkWidget *assistant,
 	if (page == page_summary) {
 		GList *widgets = NULL;
 		GValue value = { 0, };
-		char **uuids;
+		char **uuids, *text;
 
 		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
+		text = g_strdup_printf ("Successfully configured '%s' device", g_value_get_string (&value));
 		g_value_unset (&value);
+		gtk_label_set_text (GTK_LABEL (label_summary), text);
+		g_free (text);
 
 		if (bluetooth_chooser_get_selected_device_info (selector, "uuids", &value) != FALSE) {
 			uuids = g_value_get_boxed (&value);
@@ -621,6 +653,7 @@ void prepare_callback (GtkWidget *assistant,
 		if (gtk_widget_get_parent (W("restart_button")) != NULL)
 			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
 	}
+
 	if (page == page_ssp_setup) {
 		complete = FALSE;
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
@@ -746,13 +779,39 @@ set_user_pincode (GtkWidget *button)
 
 void
 select_device_changed (BluetoothChooser *selector,
-		       gchar *address,
+		       const char *address,
 		       gpointer user_data)
 {
+	GValue value = { 0, };
+	char *name;
+	int legacypairing;
+	BluetoothType type;
+
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
 		return;
 
 	set_page_search_complete ();
+
+	name = bluetooth_chooser_get_selected_device_name (selector);
+	type = bluetooth_chooser_get_selected_device_type (selector);
+	if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
+		legacypairing = g_value_get_int (&value);
+		if (legacypairing == -1)
+			legacypairing = TRUE;
+	} else {
+		legacypairing = TRUE;
+	}
+
+	g_free(target_address);
+	target_address = g_strdup (address);
+
+	g_free(target_name);
+	target_name = name;
+
+	target_type = type;
+	target_ssp = !legacypairing;
+
+	g_message ("address %s name %s ssp %d", target_address, target_name, target_ssp);
 }
 
 void
@@ -801,7 +860,7 @@ page_func (gint current_page,
 {
 	if (current_page == PAGE_SEARCH) {
 		if (target_ssp != FALSE)
-			return PAGE_SSP_SETUP;
+			return PAGE_CONNECTING;
 		else
 			return PAGE_SETUP;
 	}
@@ -865,9 +924,12 @@ create_wizard (void)
 
 	/* Search page */
 	page_search = W("page_search");
-
-	/* The selector */
 	selector = BLUETOOTH_CHOOSER (gtk_builder_get_object (builder, "selector"));
+
+	/* Connecting page */
+	page_connecting = W("page_connecting");
+	label_connecting = W("label_connecting");
+	spinner_connecting = W("spinner_connecting");
 
 	/* Setup page */
 	page_setup = W("page_setup");
@@ -890,6 +952,7 @@ create_wizard (void)
 
 	/* Summary page */
 	page_summary = W("page_summary");
+	label_summary = W("label_summary");
 	extra_config_vbox = W("extra_config_vbox");
 	extra_config_frame = W("extra_config_frame");
 

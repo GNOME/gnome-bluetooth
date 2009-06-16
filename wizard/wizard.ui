@@ -104,6 +104,61 @@
       </packing>
     </child>
     <child>
+      <object class="GtkVBox" id="page_connecting">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkTable" id="table1">
+            <property name="visible">True</property>
+            <property name="n_rows">2</property>
+	    <property name="n_columns">2</property>
+	    <property name="row-spacing">12</property>
+	    <property name="column-spacing">12</property>
+	    <property name="border-width">12</property>
+            <child>
+              <object class="GtkLabel" id="label_connecting">
+                <property name="visible">True</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label" translatable="yes">Connecting to 'Foobar'...</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="BlingSpinner" id="spinner_connecting">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">1</property>
+                <property name="x-options">0</property>
+                <property name="y-options">0</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">0</property>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="padding">12</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title">Device Setup</property>
+      </packing>
+    </child>
+    <child>
       <object class="GtkVBox" id="page_setup">
         <property name="visible">True</property>
         <property name="border_width">24</property>
@@ -209,11 +264,11 @@
         <property name="border_width">24</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkLabel" id="label4">
+          <object class="GtkLabel" id="label_summary">
             <property name="visible">True</property>
             <property name="xalign">0</property>
             <property name="yalign">0</property>
-            <property name="label" translatable="yes">Successfully configured new device</property>
+            <property name="label">Successfully configured 'Foobar' device</property>
             <property name="use_markup">False</property>
           </object>
           <packing>
