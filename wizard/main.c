@@ -233,8 +233,6 @@ confirm_callback (DBusGMethodInvocation *context,
 {
 	char *str, *label;
 
-	g_message ("confirm_callback");
-
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
@@ -264,14 +262,10 @@ display_callback (DBusGMethodInvocation *context,
 {
 	gchar *text, *done, *code;
 
-	g_message ("display_callback");
-
 	//FIXME to update, bleh
 
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
-
-	g_message ("got display callback");
 
 	code = g_strdup_printf("%d", passkey);
 
@@ -316,8 +310,6 @@ cancel_callback (DBusGMethodInvocation *context,
 		 gpointer user_data)
 {
 	gchar *text;
-
-	g_message ("got cancel_callback");
 
 	create_started = FALSE;
 
@@ -369,8 +361,6 @@ create_callback (BluetoothClient *_client,
 		 gpointer user_data)
 {
 	ConnectData *data;
-
-	g_message ("create_callback '%s'", path);
 
 	create_started = FALSE;
 
@@ -536,7 +526,6 @@ void prepare_callback (GtkWidget *assistant,
 		g_object_ref(agent);
 		bluetooth_client_create_device (client, target_address,
 						path, create_callback, assistant);
-		g_message ("create called (address %s, path %s)", target_address, path);
 		create_started = TRUE;
 	}
 
@@ -605,7 +594,6 @@ void prepare_callback (GtkWidget *assistant,
 
 			for (l = widgets; l != NULL; l = l->next) {
 				GtkWidget *widget = l->data;
-				g_message ("adding a widget");
 				gtk_box_pack_start (GTK_BOX (extra_config_vbox),
 						    widget,
 						    FALSE,
@@ -614,9 +602,6 @@ void prepare_callback (GtkWidget *assistant,
 			}
 			g_list_free (widgets);
 			gtk_widget_show_all (extra_config_frame);
-			g_message ("showing all the widgets");
-		} else {
-			g_message ("got no widgets");
 		}
 	}
 
@@ -785,8 +770,6 @@ select_device_changed (BluetoothChooser *selector,
 
 	target_type = type;
 	target_ssp = !legacypairing;
-
-	g_message ("address %s name %s ssp %d", target_address, target_name, target_ssp);
 
 	g_free (pincode);
 	pincode = NULL;
