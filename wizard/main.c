@@ -141,7 +141,6 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
-	gtk_assistant_update_buttons_state(window_assistant);
 	dbus_g_method_return(context, pincode);
 
 	return TRUE;
@@ -186,7 +185,6 @@ static gboolean confirm_callback(DBusGMethodInvocation *context,
 
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
-	gtk_assistant_update_buttons_state(window_assistant);
 
 	gtk_widget_show (label_ssp_passkey_help);
 	label = g_strdup_printf (_("Please confirm that the passkey displayed on '%s' matches this one"),
@@ -213,7 +211,6 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
-	gtk_assistant_update_buttons_state(window_assistant);
 
 	gtk_widget_hide (confirm_buttons_box);
 
@@ -375,6 +372,43 @@ void close_callback(GtkWidget *assistant, gpointer data)
 	gtk_main_quit();
 }
 
+/* HACK, to access the GtkAssistant buttons */
+struct RealGtkAssistant
+{
+	GtkWindow  parent;
+
+	GtkWidget *cancel;
+	GtkWidget *forward;
+	GtkWidget *back;
+	GtkWidget *apply;
+	GtkWidget *close;
+	GtkWidget *last;
+
+	/*< private >*/
+	GtkAssistantPrivate *priv;
+};
+typedef struct RealGtkAssistant RealGtkAssistant;
+
+static gboolean
+prepare_idle_cb (gpointer data)
+{
+	RealGtkAssistant *assistant = (RealGtkAssistant *) window_assistant;
+	gint page;
+
+	page = gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant));
+	if (page == PAGE_FAILURE) {
+		gtk_widget_hide (assistant->cancel);
+		gtk_widget_hide (assistant->forward);
+		gtk_widget_hide (assistant->back);
+		gtk_widget_hide (assistant->apply);
+		gtk_widget_hide (assistant->last);
+		gtk_widget_show (assistant->close);
+		gtk_widget_set_sensitive (assistant->close, TRUE);
+	}
+
+	return FALSE;
+}
+
 void prepare_callback(GtkWidget *assistant,
 		      GtkWidget *page,
 		      gpointer data)
@@ -532,8 +566,13 @@ void prepare_callback(GtkWidget *assistant,
 		}
 	}
 
-	gtk_assistant_set_page_complete(GTK_ASSISTANT(assistant),
-							page, complete);
+	gtk_assistant_set_page_complete (GTK_ASSISTANT(assistant),
+					 page, complete);
+
+	/* HACK to allow hiding/showing the buttons
+	 * instead of relying on the GtkAssistant doing that
+	 * for us */
+	g_idle_add (prepare_idle_cb, NULL);
 }
 
 static gboolean
@@ -642,6 +681,9 @@ void select_device_changed(BluetoothChooser *selector,
 			   gchar *address,
 			   gpointer user_data)
 {
+	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
+		return;
+
 	set_page_search_complete ();
 }
 
