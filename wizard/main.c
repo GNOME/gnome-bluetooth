@@ -73,6 +73,8 @@ static gchar *user_pincode = NULL;
 static gboolean automatic_pincode = FALSE;
 static char *pincode = NULL;
 
+static GtkBuilder *builder = NULL;
+
 static GtkAssistant *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_setup = NULL;
@@ -114,6 +116,7 @@ void set_user_pincode(GtkWidget *button);
 void toggle_set_sensitive(GtkWidget *button, gpointer data);
 void passkey_option_button_clicked (GtkButton *button, gpointer data);
 void entry_custom_changed(GtkWidget *entry);
+void restart_button_clicked (GtkButton *button, gpointer user_data);
 void does_not_match_cb (GtkButton *button, gpointer user_data);
 void matches_cb (GtkButton *button, gpointer user_data);
 
@@ -125,6 +128,13 @@ set_large_label (GtkLabel *label, const char *text)
 	str = g_strdup_printf("<span font_desc=\"50\" color=\"black\" bgcolor=\"white\">  %s  </span>", text);
 	gtk_label_set_markup(GTK_LABEL(label), str);
 	g_free(str);
+}
+
+static void
+update_random_pincode (void)
+{
+	target_pincode = g_strdup_printf("%d", g_random_int_range(pow (10, PIN_NUM_DIGITS - 1),
+								  pow (10, PIN_NUM_DIGITS) - 1));
 }
 
 static gboolean pincode_callback(DBusGMethodInvocation *context,
@@ -148,6 +158,13 @@ does_not_match_cb (GtkButton *button, gpointer user_data)
 	g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
 		    "Agent callback cancelled");
 	dbus_g_method_return(context, error);
+}
+
+void
+restart_button_clicked (GtkButton *button, gpointer user_data)
+{
+	gtk_assistant_set_current_page (window_assistant, PAGE_SEARCH);
+	update_random_pincode ();
 }
 
 void
@@ -475,6 +492,10 @@ void prepare_callback(GtkWidget *assistant,
 
 	if (page == page_failure) {
 		complete = FALSE;
+		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
+	} else {
+		if (gtk_widget_get_parent (W("restart_button")) != NULL)
+			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
 	}
 
 	if (page == page_summary) {
@@ -680,8 +701,17 @@ page_func (gint current_page,
 
 static GtkAssistant *create_wizard(void)
 {
+	const char *pages[] = {
+		"page_intro",
+		"page_search",
+		"page_setup",
+		"page_ssp_confirm",
+		"page_failure",
+		"page_summary"
+	};
+	guint i;
+
 	GtkAssistant *assistant;
-	GtkBuilder *builder;
 	GError *err = NULL;
 	GtkWidget *combo, *page_intro;
 	GtkTreeModel *model;
@@ -752,23 +782,14 @@ static GtkAssistant *create_wizard(void)
 	extra_config_vbox = W("extra_config_vbox");
 	extra_config_frame = W("extra_config_frame");
 
-	/* Set page icons (named icons not supported by Glade) */
+	/* Set page icons */
 	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, NULL, &height);
 	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
 					   "bluetooth", height, 0, NULL);
-	gtk_assistant_set_page_header_image (assistant, page_intro, pixbuf);
-	gtk_assistant_set_page_header_image (assistant, page_search, pixbuf);
-	gtk_assistant_set_page_header_image (assistant, page_setup, pixbuf);
-	gtk_assistant_set_page_header_image (assistant, page_ssp_confirm, pixbuf);
-	gtk_assistant_set_page_header_image (assistant, page_failure, pixbuf);
-	gtk_assistant_set_page_header_image (assistant, page_summary, pixbuf);
+	for (i = 0; i < G_N_ELEMENTS (pages); i++)
+		gtk_assistant_set_page_header_image (assistant, W(pages[i]), pixbuf);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
-
-	//FIXME use:
-	// g_signal_connect (G_OBJECT (page), "notify::visible",
-	//                     G_CALLBACK (on_page_notify_visibility), assistant);
-	//to setup our own buttons
 
 	/* Passkey dialog */
 	passkey_dialog = W("passkey_dialog");
@@ -838,8 +859,7 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-	target_pincode = g_strdup_printf("%d", g_random_int_range(pow (10, PIN_NUM_DIGITS - 1),
-								  pow (10, PIN_NUM_DIGITS) - 1));
+	update_random_pincode ();
 
 	client = bluetooth_client_new();
 

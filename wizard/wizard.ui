@@ -513,4 +513,17 @@
     <property name="visible">True</property>
     <property name="stock">gtk-cancel</property>
   </object>
+  <object class="GtkButton" id="restart_button">
+    <property name="label" translatable="yes">_Restart Setup</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">True</property>
+    <property name="image">image3</property>
+    <property name="use_underline">True</property>
+    <signal name="clicked" handler="restart_button_clicked"/>
+  </object>
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="stock">gtk-goto-first</property>
+  </object>
 </interface>
