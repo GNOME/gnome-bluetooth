@@ -78,7 +78,7 @@ static GtkBuilder *builder = NULL;
 static GtkAssistant *window_assistant = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_setup = NULL;
-static GtkWidget *page_ssp_confirm = NULL;
+static GtkWidget *page_ssp_setup = NULL;
 static GtkWidget *page_failure = NULL;
 static GtkWidget *page_summary = NULL;
 
@@ -88,7 +88,6 @@ static GtkWidget *label_passkey_help = NULL;
 
 static GtkWidget *label_ssp_passkey_help = NULL;
 static GtkWidget *label_ssp_passkey = NULL;
-static GtkWidget *confirm_buttons_box = NULL;
 static GtkWidget *does_not_match_button = NULL;
 static GtkWidget *matches_button = NULL;
 
@@ -147,23 +146,33 @@ static gboolean pincode_callback(DBusGMethodInvocation *context,
 }
 
 void
-does_not_match_cb (GtkButton *button, gpointer user_data)
-{
-	DBusGMethodInvocation *context;
-	GError *error = NULL;
-
-	context = g_object_get_data (G_OBJECT (button), "context");
-	gtk_widget_set_sensitive (confirm_buttons_box, FALSE);
-	g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-		    "Agent callback cancelled");
-	dbus_g_method_return(context, error);
-}
-
-void
 restart_button_clicked (GtkButton *button, gpointer user_data)
 {
 	gtk_assistant_set_current_page (window_assistant, PAGE_SEARCH);
 	update_random_pincode ();
+}
+
+void
+does_not_match_cb (GtkButton *button, gpointer user_data)
+{
+	DBusGMethodInvocation *context;
+	GError *error = NULL;
+	char *text;
+
+	gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
+
+	/* translators:
+	 * The '%s' is the device name, for example:
+	 * Pairing with 'Sony Bluetooth Headset' cancelled
+	 */
+	text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
+	gtk_label_set_text(GTK_LABEL(label_failure), text);
+	g_free(text);
+
+	context = g_object_get_data (G_OBJECT (button), "context");
+	g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
+		    "Agent callback cancelled");
+	dbus_g_method_return(context, error);
 }
 
 void
@@ -172,7 +181,8 @@ matches_cb (GtkButton *button, gpointer user_data)
 	DBusGMethodInvocation *context;
 
 	context = g_object_get_data (G_OBJECT (button), "context");
-	gtk_widget_set_sensitive (confirm_buttons_box, FALSE);
+	gtk_widget_set_sensitive (does_not_match_button, FALSE);
+	gtk_widget_set_sensitive (matches_button, FALSE);
 	dbus_g_method_return(context, "");
 }
 
@@ -211,8 +221,6 @@ static gboolean display_callback(DBusGMethodInvocation *context,
 
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
-
-	gtk_widget_hide (confirm_buttons_box);
 
 	g_message ("got display callback");
 
@@ -268,9 +276,7 @@ static gboolean cancel_callback(DBusGMethodInvocation *context,
 	 * Pairing with 'Sony Bluetooth Headset' cancelled
 	 */
 	text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
-
 	gtk_label_set_text(GTK_LABEL(label_failure), text);
-
 	g_free(text);
 
 	dbus_g_method_return(context);
@@ -414,7 +420,14 @@ prepare_idle_cb (gpointer data)
 		gtk_widget_show (assistant->cancel);
 		gtk_widget_set_sensitive (assistant->cancel, TRUE);
 	}
-
+	if (page == PAGE_SSP_SETUP) {
+		gtk_widget_hide (assistant->forward);
+		gtk_widget_hide (assistant->back);
+		gtk_widget_hide (assistant->apply);
+		gtk_widget_hide (assistant->last);
+		gtk_widget_hide (assistant->close);
+		gtk_widget_hide (assistant->cancel);
+	}
 	return FALSE;
 }
 
@@ -533,14 +546,6 @@ void prepare_callback(GtkWidget *assistant,
 		}
 	}
 
-	if (page == page_failure) {
-		complete = FALSE;
-		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
-	} else {
-		if (gtk_widget_get_parent (W("restart_button")) != NULL)
-			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
-	}
-
 	if (page == page_summary) {
 		GList *widgets = NULL;
 		GValue value = { 0, };
@@ -573,6 +578,25 @@ void prepare_callback(GtkWidget *assistant,
 		} else {
 			g_message ("got no widgets");
 		}
+	}
+
+	/* Setup the buttons some */
+	if (page == page_failure) {
+		complete = FALSE;
+		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
+	} else {
+		if (gtk_widget_get_parent (W("restart_button")) != NULL)
+			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
+	}
+	if (page == page_ssp_setup) {
+		complete = FALSE;
+		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
+		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
+	} else {
+		if (gtk_widget_get_parent (W("does_not_match_button")) != NULL)
+			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
+		if (gtk_widget_get_parent (W("matches_button")) != NULL)
+			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
 	}
 
 	gtk_assistant_set_page_complete (GTK_ASSISTANT(assistant),
@@ -756,7 +780,7 @@ static GtkAssistant *create_wizard(void)
 		"page_intro",
 		"page_search",
 		"page_setup",
-		"page_ssp_confirm",
+		"page_ssp_setup",
 		"page_failure",
 		"page_summary"
 	};
@@ -815,11 +839,10 @@ static GtkAssistant *create_wizard(void)
 	label_passkey = W("label_passkey");
 
 	/* SSP Setup page */
-	page_ssp_confirm = W("page_ssp_confirm");
-	gtk_assistant_set_page_complete(assistant, page_ssp_confirm, FALSE);
+	page_ssp_setup = W("page_ssp_setup");
+	gtk_assistant_set_page_complete(assistant, page_ssp_setup, FALSE);
 	label_ssp_passkey_help = W("label_ssp_passkey_help");
 	label_ssp_passkey = W("label_ssp_passkey");
-	confirm_buttons_box = W("confirm_buttons_box");
 	does_not_match_button = W("does_not_match_button");
 	matches_button = W("matches_button");
 
