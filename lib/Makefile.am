@@ -47,7 +47,9 @@ AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(D
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-client-glue.h \
 		bluetooth-agent-glue.h \
-		obex-agent-glue.h
+		obex-agent-glue.h \
+		gnome-bluetooth-enum-types.h \
+		gnome-bluetooth-enum-types.c
 
 nodist_libcommon_la_SOURCES = $(BUILT_SOURCES)
 
