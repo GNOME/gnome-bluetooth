@@ -17,7 +17,7 @@ INCLUDES = -I$(top_srcdir)/lib
 
 man_MANS = bluetooth-applet.1
 
-ui_DATA = popup-menu.ui
+ui_DATA = popup-menu.ui authorisation-dialogue.ui confirm-dialogue.ui passkey-dialogue.ui
 uidir = $(pkgdatadir)
 
 autostartdir = $(sysconfdir)/xdg/autostart
