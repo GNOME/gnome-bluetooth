@@ -64,7 +64,8 @@ test_deviceselection_LDADD = libgnome-bluetooth.la
 EXTRA_DIST = marshal.list \
 		bluetooth-client.xml \
 		bluetooth-agent.xml \
-		obex-agent.xml
+		obex-agent.xml \
+		gnome-bluetooth.symbols
 
 MAINTAINERCLEANFILES = Makefile.in
 
