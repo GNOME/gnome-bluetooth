@@ -1379,7 +1379,7 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 				devdata, g_free, 90 * 1000,
 				G_TYPE_STRING, address,
 				DBUS_TYPE_G_OBJECT_PATH, agent,
-				G_TYPE_STRING, "DisplayOnly", G_TYPE_INVALID);
+				G_TYPE_STRING, "DisplayYesNo", G_TYPE_INVALID);
 	else
 		call = dbus_g_proxy_begin_call_with_timeout(adapter,
 				"CreateDevice", create_device_callback,
