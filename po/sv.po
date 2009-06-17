@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-13 10:09+0200\n"
-"PO-Revision-Date: 2009-06-13 10:13+0100\n"
+"POT-Creation-Date: 2009-06-17 20:06+0200\n"
+"PO-Revision-Date: 2009-06-17 20:13+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -74,8 +74,8 @@ msgid "Tablet"
 msgstr "Ritbord"
 
 #: ../lib/bluetooth-client.c:136
-#: ../lib/bluetooth-chooser.c:102
-#: ../lib/bluetooth-chooser.c:136
+#: ../lib/bluetooth-chooser.c:104
+#: ../lib/bluetooth-chooser.c:138
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -84,71 +84,71 @@ msgstr "Okänd"
 msgid "Click to select device..."
 msgstr "Klicka för att välja enhet..."
 
-#: ../lib/bluetooth-chooser.c:92
+#: ../lib/bluetooth-chooser.c:94
 msgid "All categories"
 msgstr "Alla kategorier"
 
-#: ../lib/bluetooth-chooser.c:94
+#: ../lib/bluetooth-chooser.c:96
 msgid "Paired"
 msgstr "Ihopparad"
 
-#: ../lib/bluetooth-chooser.c:96
+#: ../lib/bluetooth-chooser.c:98
 msgid "Trusted"
 msgstr "Pålitlig"
 
-#: ../lib/bluetooth-chooser.c:98
+#: ../lib/bluetooth-chooser.c:100
 msgid "Not paired or trusted"
 msgstr "Inte ihopparad eller pålitlig"
 
-#: ../lib/bluetooth-chooser.c:100
+#: ../lib/bluetooth-chooser.c:102
 msgid "Paired or trusted"
 msgstr "Ihopparad eller pålitlig"
 
-#: ../lib/bluetooth-chooser.c:609
+#: ../lib/bluetooth-chooser.c:179
+msgid "No adapters available"
+msgstr "Inga adaptrar finns tillgängliga"
+
+#: ../lib/bluetooth-chooser.c:183
+#: ../lib/bluetooth-chooser.c:803
+msgid "Searching for devices..."
+msgstr "Söker efter enheter..."
+
+#: ../lib/bluetooth-chooser.c:674
 msgid "Device"
 msgstr "Enhet"
 
-#: ../lib/bluetooth-chooser.c:645
+#: ../lib/bluetooth-chooser.c:710
 msgid "Type"
 msgstr "Typ"
 
-#. The search button
-#: ../lib/bluetooth-chooser.c:733
-msgid "S_earch"
-msgstr "S_ök"
-
-#: ../lib/bluetooth-chooser.c:738
-msgid "Search for Bluetooth devices"
-msgstr "Sök efter blåtandsenheter"
-
 #. The filters
-#: ../lib/bluetooth-chooser.c:757
+#: ../lib/bluetooth-chooser.c:826
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Visa endast blåtandsenheter med..."
 
 #. The device category filter
-#: ../lib/bluetooth-chooser.c:777
+#: ../lib/bluetooth-chooser.c:846
 msgid "Device _category:"
 msgstr "Enhets_kategori:"
 
-#: ../lib/bluetooth-chooser.c:792
+#: ../lib/bluetooth-chooser.c:861
 msgid "Select the device category to filter above list"
 msgstr "Välj enhetskategori för att filtrera ovanstående lista"
 
 #. The device type filter
-#: ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-chooser.c:875
 msgid "Device _type:"
 msgstr "Enhets_typ:"
 
-#: ../lib/bluetooth-chooser.c:827
+#: ../lib/bluetooth-chooser.c:896
 msgid "Select the device type to filter above list"
 msgstr "Välj enhetstyp för att filtrera ovanstående lista"
 
-#: ../lib/bluetooth-chooser.c:833
+#: ../lib/bluetooth-chooser.c:902
 msgid "Input devices (mice, keyboards, ...)"
 msgstr "Inmatningsenheter (möss, tangentbord, ...)"
 
-#: ../lib/bluetooth-chooser.c:837
+#: ../lib/bluetooth-chooser.c:906
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hörlurar, headsets och andra ljudenheter"
 
@@ -268,88 +268,73 @@ msgstr "Bluetooth: Aktiverat"
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Inaktiverat"
 
-#: ../applet/agent.c:259
-msgid "Authentication request"
-msgstr "Begäran om autentisering"
-
-#: ../applet/agent.c:290
-#: ../applet/agent.c:399
-msgid "Pairing request for device:"
-msgstr "Ihopparningsbegäran för enhet:"
-
-#: ../applet/agent.c:307
-msgid "Enter passkey for authentication:"
-msgstr "Ange lösennyckel för autentisering:"
-
-#: ../applet/agent.c:331
-msgid "Show input"
-msgstr "Visa inmatning"
-
-#: ../applet/agent.c:373
-msgid "Confirmation request"
-msgstr "Begäran om bekräftelse"
-
-#: ../applet/agent.c:416
-msgid "Confirm value for authentication:"
-msgstr "Bekräfta värde för autentisering:"
-
-#: ../applet/agent.c:460
-msgid "Authorization request"
-msgstr "Begäran om auktorisering"
-
-#: ../applet/agent.c:486
-msgid "Authorization request for device:"
-msgstr "Begäran om auktorisering för enhet:"
-
-#: ../applet/agent.c:507
+#: ../applet/agent.c:251
+#: ../applet/agent.c:332
 #, c-format
-msgid "Grant access to %s?"
-msgstr "Tillåt åtkomst till %s?"
+msgid "Device '%s' wants to pair with this computer"
+msgstr "Enheten \"%s\" vill paras ihop med denna dator"
 
-#: ../applet/agent.c:516
-msgid "Always grant access"
-msgstr "Tillåt alltid åtkomst"
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the passkey mentioned on device %s."
+msgstr "Ange lösennyckeln som nämns på enheten %s."
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the passkey '%s' matches the one on device %s."
+msgstr "Bekräfta huruvida lösennyckeln \"%s\" matchar den på enheten %s."
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+msgid "Grant access to '%s'"
+msgstr "Tillåt åtkomst till \"%s\""
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "Enheten %s begär åtkomst till tjänsten \"%s\"."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:595
-#: ../applet/agent.c:645
-#: ../applet/agent.c:698
+#: ../applet/agent.c:496
+#: ../applet/agent.c:531
+#: ../applet/agent.c:570
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "Ihopparningsbegäran för \"%s\""
 
-#: ../applet/agent.c:600
-#: ../applet/agent.c:650
-#: ../applet/agent.c:703
-#: ../applet/agent.c:755
-#: ../applet/agent.c:803
+#: ../applet/agent.c:500
+#: ../applet/agent.c:535
+#: ../applet/agent.c:574
+#: ../applet/agent.c:607
+#: ../applet/agent.c:645
 msgid "Bluetooth device"
 msgstr "Blåtandsenhet"
 
-#: ../applet/agent.c:601
-#: ../applet/agent.c:651
-#: ../applet/agent.c:704
+#: ../applet/agent.c:501
+#: ../applet/agent.c:536
+#: ../applet/agent.c:575
 msgid "Enter passkey"
 msgstr "Ange lösennyckel"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:750
+#: ../applet/agent.c:602
 #, c-format
 msgid "Pairing confirmation for '%s'"
 msgstr "Ihopparningsbekräftelse för \"%s\""
 
-#: ../applet/agent.c:756
+#: ../applet/agent.c:608
 msgid "Check passkey"
 msgstr "Kontrollera lösennyckel"
 
-#: ../applet/agent.c:798
+#: ../applet/agent.c:641
 #, c-format
 msgid "Authorization request from '%s'"
 msgstr "Auktoriseringsbegäran för \"%s\""
 
-#: ../applet/agent.c:804
+#: ../applet/agent.c:646
 msgid "Check authorization"
 msgstr "Kontrollera auktorisation"
 
@@ -389,6 +374,30 @@ msgstr "Skicka filer till enhet..."
 #: ../properties/adapter.c:422
 msgid "Setup new device..."
 msgstr "Konfigurera ny enhet..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+msgid "_Always grant access"
+msgstr "Tillåt _alltid åtkomst"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "_Tillåt"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "_Neka"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "Matchar _inte"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "_Matchar"
+
+#: ../applet/passkey-dialogue.ui.h:1
+msgid "_Show input"
+msgstr "_Visa inmatning"
 
 #: ../properties/main.c:114
 msgid "A Bluetooth manager for the GNOME desktop"
@@ -484,68 +493,61 @@ msgstr "GConf-fel: %s"
 msgid "All further errors shown only on terminal."
 msgstr "Alla ytterligare fel kommer endast att visas i terminalen."
 
-#: ../wizard/main.c:150
-#: ../wizard/main.c:386
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:202
+#: ../wizard/main.c:323
+#, c-format
+msgid "Pairing with '%s' cancelled"
+msgstr "Ihopparning med \"%s\" avbröts"
+
+#: ../wizard/main.c:242
+#, c-format
+msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgstr "Bekräfta att lösennyckeln som visas på \"%s\" matchar denna."
+
+#: ../wizard/main.c:296
 msgid "Please enter the following passkey:"
 msgstr "Ange följande lösennyckel:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:177
+#: ../wizard/main.c:378
 #, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "Ihopparning med \"%s\" avbröts"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' finished
-#.
-#: ../wizard/main.c:183
-#, c-format
-msgid "Pairing with '%s' finished"
-msgstr "Ihopparning med \"%s\" är färdig"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Successfully paired with 'Sony Bluetooth Headset'
-#.
-#: ../wizard/main.c:244
-#, c-format
-msgid "Successfully paired with '%s'"
-msgstr "Ihopparning med \"%s\" lyckades"
-
-#: ../wizard/main.c:258
-msgid "Please wait while setting up the device..."
-msgstr "Vänta under tiden enheten konfigureras..."
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:272
-#, c-format
-msgid "Pairing with '%s' failed"
-msgstr "Ihopparning med \"%s\" misslyckades"
+msgid "Setting up '%s' failed"
+msgstr "Konfiguration av \"%s\" misslyckades"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:335
+#: ../wizard/main.c:509
 #, c-format
-msgid "Connecting to '%s' now..."
-msgstr "Ansluter nu till \"%s\" ..."
+msgid "Connecting to '%s'..."
+msgstr "Ansluter till \"%s\" ..."
+
+#: ../wizard/main.c:544
+#, c-format
+msgid "Please enter the following passkey on '%s':"
+msgstr "Ange följande lösennyckel på \"%s\":"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:398
+#: ../wizard/main.c:564
 #, c-format
-msgid "Please wait whilst '%s' is being paired"
-msgstr "Vänta under tiden \"%s\" paras ihop"
+msgid "Please wait while finishing setup on '%s'..."
+msgstr "Vänta under tiden konfigurationen av \"%s\" färdigställs ..."
+
+#: ../wizard/main.c:577
+#, c-format
+msgid "Successfully configured '%s'"
+msgstr "Konfigurationen av \"%s\" lyckades"
 
 #: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -560,60 +562,96 @@ msgid "'1234'"
 msgstr "\"1234\""
 
 #: ../wizard/wizard.ui.h:4
-msgid "Additional setup"
-msgstr "Ytterligare konfiguration"
-
-#: ../wizard/wizard.ui.h:5
 msgid "Bluetooth Device Wizard"
 msgstr "Guide för blåtandsenhet"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Connecting to 'Foobar'..."
+msgstr "Ansluter till \"Foobar\" ..."
 
 #: ../wizard/wizard.ui.h:6
 msgid "Custom passkey code:"
 msgstr "Anpassad lösennyckel:"
 
 #: ../wizard/wizard.ui.h:7
+msgid "Device Setup"
+msgstr "Enhetskonfiguration"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device Setup Failed"
+msgstr "Enhetskonfigurationen misslyckades"
+
+#: ../wizard/wizard.ui.h:9
+msgid "Device search"
+msgstr "Enhetssökning"
+
+#: ../wizard/wizard.ui.h:10
+msgid "Does not match"
+msgstr "Matchar inte"
+
+#: ../wizard/wizard.ui.h:11
+msgid "Finishing Device Setup"
+msgstr "Färdigställer enhetskonfiguration"
+
+#: ../wizard/wizard.ui.h:12
+msgid "Finishing setup on 'Foobar'..."
+msgstr "Färdigställer konfiguration på \"Foobar\"..."
+
+#: ../wizard/wizard.ui.h:13
 msgid "Fixed Passkey"
 msgstr "Fast lösennyckel"
 
-#: ../wizard/wizard.ui.h:8
+#: ../wizard/wizard.ui.h:14
+msgid "Introduction"
+msgstr "Introduktion"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Matches"
+msgstr "Matchar"
+
+#: ../wizard/wizard.ui.h:16
 msgid "Passkey Options"
 msgstr "Alternativ för lösennyckel"
 
-#: ../wizard/wizard.ui.h:9
+#: ../wizard/wizard.ui.h:17
 msgid "Passkey _options..."
 msgstr "Alternativ för lösennyc_kel..."
 
-#: ../wizard/wizard.ui.h:10
-msgid "Select the additional services you want to use with your device: "
+#: ../wizard/wizard.ui.h:18
+msgid "Select the additional services you want to use with your device:"
 msgstr "Välj de ytterligare tjänster som du vill använda med din enhet:"
 
-#: ../wizard/wizard.ui.h:11
+#: ../wizard/wizard.ui.h:19
 msgid "Select the device you want to setup"
 msgstr "Välj enheten som du vill konfigurera"
 
-#: ../wizard/wizard.ui.h:12
-msgid "Setting up new device"
-msgstr "Konfigurering av ny enhet"
+#: ../wizard/wizard.ui.h:20
+msgid "Setup Completed"
+msgstr "Konfigurationen är färdig"
 
-#: ../wizard/wizard.ui.h:13
-msgid "Successfully configured new device"
-msgstr "Konfiguration av ny enhet lyckades"
+#: ../wizard/wizard.ui.h:21
+msgid "Setup Finished"
+msgstr "Konfigurationen färdigställdes"
 
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:22
 msgid "The device will need to be within 10 meters of your computer, and be &#xAB;discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the device's manual if in doubt."
 msgstr "Enheten behöver finnas inom 10 meter från din dator och vara &#xAB;möjlig att upptäcka&#xBB; (kallas ibland för &#xAB;synlig&#xBB;). Kontrollera enhetens handbok om du är osäker."
 
-#: ../wizard/wizard.ui.h:15
+#: ../wizard/wizard.ui.h:23
 msgid "The device wizard will walk you through the process of configuring Bluetooth enabled devices for use with this computer."
 msgstr "Enhetsguiden kommer att ta dig genom konfigurationsprocessen för blåtandsenheter för användning med den här datorn."
 
-#: ../wizard/wizard.ui.h:16
+#: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth device setup wizard"
 msgstr "Välkommen till konfigurationsguiden för blåtandsenheter"
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:25
 msgid "_Automatic passkey selection"
 msgstr "_Automatiskt val av lösennyckel"
+
+#: ../wizard/wizard.ui.h:26
+msgid "_Restart Setup"
+msgstr "Starta om _konfigurationen"
 
 #: ../sendto/main.c:98
 #, c-format
@@ -709,6 +747,32 @@ msgstr "Fjärrenhet att använda"
 msgid "Remote device's name"
 msgstr "Fjärrenhetens namn"
 
+#~ msgid "S_earch"
+#~ msgstr "S_ök"
+#~ msgid "Authentication request"
+#~ msgstr "Begäran om autentisering"
+#~ msgid "Pairing request for device:"
+#~ msgstr "Ihopparningsbegäran för enhet:"
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "Ange lösennyckel för autentisering:"
+#~ msgid "Confirmation request"
+#~ msgstr "Begäran om bekräftelse"
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "Bekräfta värde för autentisering:"
+#~ msgid "Authorization request"
+#~ msgstr "Begäran om auktorisering"
+#~ msgid "Authorization request for device:"
+#~ msgstr "Begäran om auktorisering för enhet:"
+#~ msgid "Pairing with '%s' finished"
+#~ msgstr "Ihopparning med \"%s\" är färdig"
+#~ msgid "Successfully paired with '%s'"
+#~ msgstr "Ihopparning med \"%s\" lyckades"
+#~ msgid "Please wait whilst '%s' is being paired"
+#~ msgstr "Vänta under tiden \"%s\" paras ihop"
+#~ msgid "Additional setup"
+#~ msgstr "Ytterligare konfiguration"
+#~ msgid "Setting up new device"
+#~ msgstr "Konfigurering av ny enhet"
 #~ msgid "Pairing request for %s"
 #~ msgstr "Ihopparningsbegäran för %s"
 #~ msgid "Confirmation request for %s"
@@ -745,12 +809,6 @@ msgstr "Fjärrenhetens namn"
 #~ msgstr ""
 #~ "Visningsalternativ för notifieringsikonen. Giltiga alternativ är \"never"
 #~ "\", \"present\" och \"always\"."
-#~ msgid "Introduction"
-#~ msgstr "Introduktion"
-#~ msgid "Device search"
-#~ msgstr "Enhetssökning"
-#~ msgid "Device setup"
-#~ msgstr "Enhetskonfiguration"
 #~ msgid "Summary"
 #~ msgstr "Sammandrag"
 #~ msgid "Unnamed Adapter"
