@@ -30,6 +30,7 @@
 #include <gtk/gtk.h>
 #include <unique/uniqueapp.h>
 
+#include "bluetooth-plugin-manager.h"
 #include "bluetooth-client.h"
 #include "gconf-bridge.h"
 #include "general.h"
@@ -331,6 +332,8 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
+	bluetooth_plugin_manager_init ();
+
 	notebook = gtk_notebook_new();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 
@@ -342,6 +345,8 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (message_received_cb), window);
 
 	gtk_main();
+
+	bluetooth_plugin_manager_cleanup ();
 
 	cleanup_adapter();
 

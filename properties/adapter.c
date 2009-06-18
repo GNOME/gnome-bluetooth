@@ -34,6 +34,7 @@
 #include <bluetooth-client.h>
 #include <bluetooth-killswitch.h>
 #include <bluetooth-chooser.h>
+#include <bluetooth-plugin-manager.h>
 
 #include "adapter.h"
 #include "general.h"
@@ -167,29 +168,24 @@ static void wizard_callback(GtkWidget *button, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
-static gboolean show_confirm_dialog(void)
+static gboolean show_confirm_dialog(const char *name)
 {
 	GtkWidget *dialog;
 	gint response;
-	gchar *text;
 
-	text = g_strdup_printf("<big><b>%s</b></big>\n\n%s",
-				_("Remove from list of known devices?"),
-				_("If you delete the device, you have to "
-					"set it up again before next use."));
-	dialog = gtk_message_dialog_new_with_markup(NULL, GTK_DIALOG_MODAL,
-				GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, NULL);
-	gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(dialog), text);
-	g_free(text);
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+					 _("Remove '%s' from list of known devices?"), name);
+	g_object_set (G_OBJECT (dialog), "secondary-text",
+		      _("If you delete the device, you have to set it up again before next use."),
+		      NULL);
 
-	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_CANCEL,
-							GTK_RESPONSE_CANCEL);
-	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_DELETE,
-							GTK_RESPONSE_ACCEPT);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT);
 
-	response = gtk_dialog_run(GTK_DIALOG(dialog));
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	gtk_widget_destroy(dialog);
+	gtk_widget_destroy (dialog);
 
 	if (response == GTK_RESPONSE_ACCEPT)
 		return TRUE;
@@ -203,9 +199,18 @@ static void delete_callback(GtkWidget *button, gpointer user_data)
 	GValue value = { 0, };
 	DBusGProxy *device;
 	const char *path;
+	char *address, *name;
 
 	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (adapter->chooser),
 							"proxy", &value) == FALSE) {
+		return;
+	}
+	address = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (adapter->chooser));
+	name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (adapter->chooser));
+	if (address == NULL || name == NULL) {
+		g_value_unset (&value);
+		g_free (address);
+		g_free (name);
 		return;
 	}
 	device = g_value_dup_object (&value);
@@ -216,12 +221,21 @@ static void delete_callback(GtkWidget *button, gpointer user_data)
 
 	path = dbus_g_proxy_get_path(device);
 
-	if (show_confirm_dialog() == TRUE) {
-		dbus_g_proxy_call(adapter->proxy, "RemoveDevice", NULL,
-					DBUS_TYPE_G_OBJECT_PATH, path,
-					G_TYPE_INVALID, G_TYPE_INVALID);
+	if (show_confirm_dialog (name) == TRUE) {
+		GError *err = NULL;
+		if (dbus_g_proxy_call (adapter->proxy, "RemoveDevice", &err,
+				       DBUS_TYPE_G_OBJECT_PATH, path,
+				       G_TYPE_INVALID, G_TYPE_INVALID) == FALSE) {
+			g_warning ("Failed to remove device %s: %s", address,
+				   err->message);
+			g_error_free (err);
+		} else {
+			bluetooth_plugin_manager_device_deleted (address);
+		}
 	}
 
+	g_free (address);
+	g_free (name);
 	g_object_unref(device);
 }
 
