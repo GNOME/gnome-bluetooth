@@ -114,6 +114,8 @@ bluetooth_plugin_manager_get_widgets (const char *bdaddr,
 	GList *ret = NULL;
 	GList *l;
 
+	g_return_val_if_fail (bluetooth_verify_address (bdaddr), NULL);
+
 	for (l = plugin_list; l != NULL; l = l->next) {
 		GbtPlugin *p = l->data;
 
@@ -128,6 +130,8 @@ void
 bluetooth_plugin_manager_device_deleted (const char *bdaddr)
 {
 	GList *l;
+
+	g_return_if_fail (bluetooth_verify_address (bdaddr));
 
 	for (l = plugin_list; l != NULL; l = l->next) {
 		GbtPlugin *p = l->data;
