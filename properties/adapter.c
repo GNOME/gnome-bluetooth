@@ -409,7 +409,7 @@ static void create_adapter(adapter_data *adapter)
 	 * adapter, this is on purpose */
 	adapter->chooser = bluetooth_chooser_new (NULL);
 	g_object_set (adapter->chooser,
-		      "show-search", FALSE,
+		      "show-searching", FALSE,
 		      "show-device-type", FALSE,
 		      "show-device-category", FALSE,
 		      "show-pairing", TRUE,
