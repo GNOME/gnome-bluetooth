@@ -1137,7 +1137,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 					 PROP_SHOW_CONNECTED, g_param_spec_boolean ("show-connected",
 										    NULL, NULL, FALSE, G_PARAM_READWRITE));
 	/**
-	 * BluetoothChooser:show-searchinging:
+	 * BluetoothChooser:show-searching:
 	 *
 	 * Whether to show the Searching label , this is necessary if you want to programmatically
 	 * start a discovery, using bluetooth_chooser_start_discovery()
