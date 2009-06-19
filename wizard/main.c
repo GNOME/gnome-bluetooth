@@ -158,7 +158,11 @@ pincode_callback (DBusGMethodInvocation *context,
 		  DBusGProxy *device,
 		  gpointer user_data)
 {
-	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
+	target_ssp = FALSE;
+
+	/* Only show the pincode page if the pincode isn't automatic */
+	if (automatic_pincode == FALSE)
+		gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
 	dbus_g_method_return(context, pincode);
 
 	return TRUE;
