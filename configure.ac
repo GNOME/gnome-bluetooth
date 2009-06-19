@@ -110,6 +110,11 @@ PKG_CHECK_MODULES(COMMON,
 		  gtk+-2.0
 		  hal >= $HAL_REQUIRED)
 
+dnl Requires for the geoclue plugin
+PKG_CHECK_MODULES(GEOCLUE,
+		  gconf-2.0
+		  dbus-glib-1)
+
 dnl Requires for the plugins
 PKG_CHECK_MODULES(PLUGINS,
 		  gtk+-2.0)
