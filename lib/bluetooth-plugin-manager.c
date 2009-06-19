@@ -29,6 +29,8 @@
 #include <bluetooth-plugin.h>
 #include "bluetooth-plugin-manager.h"
 
+#include "bluetooth-client.h"
+
 #define UNINSTALLED_PLUGINDIR "../lib/plugins"
 
 GList *plugin_list = NULL;
@@ -86,8 +88,7 @@ bluetooth_plugin_manager_init (void)
 		bluetooth_plugin_dir_process ("../lib/plugins/.libs/");
 	}
 
-	if (g_list_length (plugin_list) == 0)
-		bluetooth_plugin_dir_process (PLUGINDIR);
+	bluetooth_plugin_dir_process (PLUGINDIR);
 
 	return g_list_length (plugin_list) != 0;
 }
