@@ -776,6 +776,7 @@ select_device_changed (BluetoothChooser *selector,
 
 	if (user_pincode != NULL && *user_pincode != '\0') {
 		pincode = g_strdup (user_pincode);
+		automatic_pincode = TRUE;
 	} else {
 		guint max_digits;
 
