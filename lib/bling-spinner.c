@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * @file libbling/bling-spinner.c A apple-esque spinner widger
  *
@@ -10,18 +11,18 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA  02111-1307, USA.
- * 
- * Code adapted from egg-spinner 
+ *
+ * Code adapted from egg-spinner
  * by Christian Hergert <christian.hergert@gmail.com>
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -79,21 +80,21 @@ draw (GtkWidget *widget, cairo_t *cr)
 	BlingSpinnerPrivate *priv;
 
 	priv = BLING_SPINNER_GET_PRIVATE (widget);
-	
+
 	cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
-	
+
 	width = widget->allocation.width;
 	height = widget->allocation.height;
 
 	if ( (width < 12) || (height <12) )
 		gtk_widget_set_size_request(widget, 12, 12);
-	
+
 	//x = widget->allocation.x + widget->allocation.width / 2;
 	//y = widget->allocation.y + widget->allocation.height / 2;
 	x = widget->allocation.width / 2;
 	y = widget->allocation.height / 2;
-	radius = MIN (widget->allocation.width  / 2,
-	              widget->allocation.height / 2);
+	radius = MIN (widget->allocation.width	/ 2,
+				  widget->allocation.height / 2);
 	half = priv->lines / 2;
 
 	/*FIXME: render in B&W for non transparency */
@@ -102,7 +103,7 @@ draw (GtkWidget *widget, cairo_t *cr)
 		int inset = 0.7 * radius;
 		/* transparency is a function of time and intial value */
 		double t = (double) ((i + priv->lines - priv->current)
-		           % priv->lines) / priv->lines;
+				   % priv->lines) / priv->lines;
 
 		cairo_save (cr);
 
@@ -110,10 +111,10 @@ draw (GtkWidget *widget, cairo_t *cr)
 		//cairo_set_line_width (cr, 2 * cairo_get_line_width (cr));
 		cairo_set_line_width (cr, 2.0);
 		cairo_move_to (cr,
-		               x + (radius - inset) * cos (i * M_PI / half),
+					   x + (radius - inset) * cos (i * M_PI / half),
 					   y + (radius - inset) * sin (i * M_PI / half));
 		cairo_line_to (cr,
-		               x + radius * cos (i * M_PI / half),
+					   x + radius * cos (i * M_PI / half),
 					   y + radius * sin (i * M_PI / half));
 		cairo_stroke (cr);
 
@@ -122,7 +123,7 @@ draw (GtkWidget *widget, cairo_t *cr)
 }
 
 
-/*  GOBJECT INIT CODE */
+/*	GOBJECT INIT CODE */
 static void
 bling_spinner_class_init(BlingSpinnerClass *klass)
 {
@@ -134,7 +135,7 @@ bling_spinner_class_init(BlingSpinnerClass *klass)
 	gobject_class = G_OBJECT_CLASS(klass);
 	g_type_class_add_private (gobject_class, sizeof (BlingSpinnerPrivate));
 	gobject_class->set_property = bling_spinner_set_property;
-	
+
 	widget_class = GTK_WIDGET_CLASS(klass);
 	widget_class->expose_event = bling_spinner_expose;
 	widget_class->screen_changed = bling_spinner_screen_changed;
@@ -157,10 +158,12 @@ static void
 bling_spinner_init (BlingSpinner *spinner)
 {
 	BlingSpinnerPrivate *priv;
-	
+
 	priv = BLING_SPINNER_GET_PRIVATE (spinner);
 	priv->current = 0;
 	priv->timeout = 0;
+
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (spinner), GTK_NO_WINDOW);
 }
 
 static gboolean
@@ -173,9 +176,11 @@ bling_spinner_expose (GtkWidget *widget, GdkEventExpose *event)
 
 	/* set a clip region for the expose event */
 	cairo_rectangle (cr,
-	                 event->area.x, event->area.y,
+					 event->area.x, event->area.y,
 					 event->area.width, event->area.height);
 	cairo_clip (cr);
+
+	cairo_translate (cr, event->area.x, event->area.y);
 
 	/* draw clip region */
 	draw (widget, cr);
@@ -186,14 +191,14 @@ bling_spinner_expose (GtkWidget *widget, GdkEventExpose *event)
 	return FALSE;
 }
 
-static void 
+static void
 bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
 {
 	BlingSpinner *spinner;
 	BlingSpinnerPrivate *priv;
 	GdkScreen* new_screen;
 	GdkColormap* colormap;
-	
+
 	spinner = BLING_SPINNER(widget);
 	priv = BLING_SPINNER_GET_PRIVATE (spinner);
 
@@ -205,7 +210,7 @@ bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
 		priv->have_alpha = FALSE;
 	} else
 		priv->have_alpha = TRUE;
-	
+
 	gtk_widget_set_colormap (widget, colormap);
 }
 
@@ -235,7 +240,7 @@ bling_spinner_set_property(GObject *gobject, guint prop_id,
 {
 	BlingSpinner *spinner;
 	BlingSpinnerPrivate *priv;
-	
+
 	spinner = BLING_SPINNER(gobject);
 	priv = BLING_SPINNER_GET_PRIVATE (spinner);
 
@@ -302,4 +307,3 @@ bling_spinner_stop (BlingSpinner *spinner)
 	g_source_remove (priv->timeout);
 	priv->timeout = 0;
 }
-
