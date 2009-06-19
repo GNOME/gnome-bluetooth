@@ -77,7 +77,6 @@ static char * connectable_interfaces[] = {
 #define BLUEZ_AUDIOSINK_INTERFACE (detectable_interfaces[1])
 
 static DBusGConnection *connection = NULL;
-static BluetoothClient *bluetooth_client = NULL;
 
 #define BLUETOOTH_CLIENT_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 				BLUETOOTH_TYPE_CLIENT, BluetoothClientPrivate))
@@ -1121,11 +1120,14 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 
 BluetoothClient *bluetooth_client_new(void)
 {
+	static BluetoothClient *bluetooth_client = NULL;
+
 	if (bluetooth_client != NULL)
 		return g_object_ref(bluetooth_client);
 
-	bluetooth_client = BLUETOOTH_CLIENT(g_object_new(BLUETOOTH_TYPE_CLIENT,
-									NULL));
+	bluetooth_client = BLUETOOTH_CLIENT (g_object_new (BLUETOOTH_TYPE_CLIENT, NULL));
+	g_object_add_weak_pointer (G_OBJECT (bluetooth_client),
+				   (gpointer) &bluetooth_client);
 
 	DBG("client %p", bluetooth_client);
 
@@ -1338,6 +1340,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
 typedef struct {
 	BluetoothClientCreateDeviceFunc func;
 	gpointer data;
+	BluetoothClient *client;
 } CreateDeviceData;
 
 static void create_device_callback(DBusGProxy *proxy,
@@ -1356,8 +1359,9 @@ static void create_device_callback(DBusGProxy *proxy,
 	}
 
 	if (devdata->func)
-		devdata->func(bluetooth_client, path, devdata->data);
+		devdata->func(devdata->client, path, devdata->data);
 
+	g_object_unref (devdata->client);
 	g_object_unref(proxy);
 }
 
@@ -1384,6 +1388,7 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 
 	devdata->func = func;
 	devdata->data = data;
+	devdata->client = g_object_ref (client);
 
 	if (agent != NULL)
 		call = dbus_g_proxy_begin_call_with_timeout(adapter,
@@ -1436,6 +1441,7 @@ gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 typedef struct {
 	BluetoothClientConnectFunc func;
 	gpointer data;
+	BluetoothClient *client;
 	/* used for disconnect */
 	GList *services;
 } ConnectData;
@@ -1455,8 +1461,9 @@ static void connect_callback(DBusGProxy *proxy,
 	}
 
 	if (conndata->func)
-		conndata->func(bluetooth_client, retval, conndata->data);
+		conndata->func(conndata->client, retval, conndata->data);
 
+	g_object_unref (conndata->client);
 	g_object_unref(proxy);
 }
 
@@ -1513,6 +1520,7 @@ gboolean bluetooth_client_connect_service(BluetoothClient *client,
 
 	conndata->func = func;
 	conndata->data = data;
+	conndata->client = g_object_ref (client);
 
 	dbus_g_proxy_begin_call(proxy, "Connect",
 				connect_callback, conndata, g_free,
@@ -1547,8 +1555,9 @@ static void disconnect_callback(DBusGProxy *proxy,
 	}
 
 	if (conndata->func)
-		conndata->func(bluetooth_client, TRUE, conndata->data);
+		conndata->func(conndata->client, TRUE, conndata->data);
 
+	g_object_unref (conndata->client);
 	g_object_unref(proxy);
 	g_free (conndata);
 }
@@ -1618,6 +1627,7 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 
 	conndata->func = func;
 	conndata->data = data;
+	conndata->client = g_object_ref (client);
 
 	if (table == NULL) {
 		dbus_g_proxy_begin_call(proxy, "Disconnect",
