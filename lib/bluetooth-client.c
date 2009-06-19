@@ -408,35 +408,47 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 /* Short names from Table 2 at:
  * https://www.bluetooth.org/Technical/AssignedNumbers/service_discovery.htm */
 static const char *
-uuid16_to_string (guint uuid16)
+uuid16_to_string (guint uuid16, const char *uuid)
 {
 	switch (uuid16) {
+	case 0x1101:
+		return "SerialPort";
 	case 0x1103:
 		return "DialupNetworking";
+	case 0x1104:
+		return "IrMCSync";
 	case 0x1105:
 		return "OBEXObjectPush";
 	case 0x1106:
 		return "OBEXFileTransfer";
+	case 0x110A:
+		return "AudioSource";
 	case 0x110B:
 		return "AudioSink";
 	case 0x110c:
 		return "A/V_RemoteControlTarget";
 	case 0x110e:
 		return "A/V_RemoteControl";
+	case 0x1112:
+		return "Headset_-_AG";
 	case 0x1115:
 		return "PANU";
 	case 0x1116:
 		return "NAP";
 	case 0x1117:
 		return "GN";
+	case 0x111F:
+		return "HandsfreeAudioGateway";
 	case 0x1124:
 		return "HumanInterfaceDeviceService";
+	case 0x112F:
+		return "Phonebook_Access_-_PSE";
 	case 0x1000: /* ServiceDiscoveryServerServiceClassID */
 	case 0x1200: /* PnPInformation */
 		/* Those are ignored */
 		return NULL;
 	default:
-		g_debug ("Unhandled UUID 0x%x", uuid16);
+		g_debug ("Unhandled UUID %s (0x%x)", uuid, uuid16);
 		return NULL;
 	}
 }
@@ -458,7 +470,7 @@ bluetooth_uuid_to_string (const char *uuid)
 	if (uuid16 == 0)
 		return NULL;
 
-	return uuid16_to_string (uuid16);
+	return uuid16_to_string (uuid16, uuid);
 }
 
 static char **
