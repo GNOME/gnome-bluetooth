@@ -153,16 +153,28 @@ get_config_widgets (const char *bdaddr, const char **uuids)
 {
 	GtkWidget *button;
 	GConfClient *client;
+	char *old_bdaddr;
 
 	client = gconf_client_get_default ();
 	if (client == NULL)
 		return NULL;
 
 	button = gtk_check_button_new_with_label (_("Use this GPS device for Geolocation services"));
-	g_signal_connect (G_OBJECT (button), "toggled",
-			  G_CALLBACK (toggle_button), NULL);
 	g_object_set_data_full (G_OBJECT (button), "bdaddr", g_strdup (bdaddr), g_free);
 	g_object_set_data_full (G_OBJECT (button), "client", client, g_object_unref);
+
+	/* Is it already setup? */
+	old_bdaddr = gconf_client_get_string (client, GPS_KEY, NULL);
+	if (g_strcmp0 (old_bdaddr, bdaddr) == 0) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+		g_object_set_data (G_OBJECT (button), "bdaddr", old_bdaddr);
+	} else {
+		g_free (old_bdaddr);
+	}
+
+	/* And set the signal */
+	g_signal_connect (G_OBJECT (button), "toggled",
+			  G_CALLBACK (toggle_button), NULL);
 
 	return button;
 }
