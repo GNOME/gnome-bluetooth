@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2009-06-15 14:44+0000\n"
-"PO-Revision-Date: 2009-06-16 09:08+0530\n"
+"POT-Creation-Date: 2009-06-19 10:51+0000\n"
+"PO-Revision-Date: 2009-06-23 12:33+0530\n"
 "Last-Translator: Sandeep Shedmake <sandeep.shedmake@gmail.com>\n"
 "Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,6 @@ msgid "No adapters available"
 msgstr "अडॅप्टर उपलब्ध नाही"
 
 #: ../lib/bluetooth-chooser.c:183 ../lib/bluetooth-chooser.c:803
-#| msgid "Search for Bluetooth devices"
 msgid "Searching for devices..."
 msgstr "साधन करीता शोधत आहे..."
 
@@ -150,6 +149,10 @@ msgstr "इन्पुट साधन (माईस, कळफलक, ...)"
 #: ../lib/bluetooth-chooser.c:906
 msgid "Headphones, headsets and other audio devices"
 msgstr "हेडफोन, हेडसेट व इतर ऑडिओ साधन"
+
+#: ../lib/plugins/geoclue.c:161
+msgid "Use this GPS device for Geolocation services"
+msgstr "Geolocation सेवा करीता या GPS साधनचा वापर करा"
 
 #. translators:
 #. * This is in a test plugin, please make sure you add the "(test)" part,
@@ -206,7 +209,7 @@ msgstr "जुळले"
 msgid "Disconnected"
 msgstr "जुळवणी मोडली"
 
-#: ../applet/main.c:760 ../applet/main.c:811 ../properties/adapter.c:431
+#: ../applet/main.c:760 ../applet/main.c:811 ../properties/adapter.c:445
 msgid "Disconnect"
 msgstr "जुळवणी मोडा"
 
@@ -272,14 +275,12 @@ msgstr "कृपया साधन %s वरील passkey प्रविष�
 
 #: ../applet/agent.c:339
 #, c-format
-#| msgid "Please enter the passkey mentioned on device %s."
 msgid "Please confirm whether the passkey '%s' matches the one on device %s."
 msgstr "कृपया passkey '%s' साधन %s वरील passkey सह जुळते हे निश्चित करा."
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:385
 #, c-format
-#| msgid "Grant access to %s?"
 msgid "Grant access to '%s'"
 msgstr "'%s' करीता परवानगी द्या"
 
@@ -356,12 +357,11 @@ msgstr "बाहेर पडा"
 msgid "Send files to device..."
 msgstr "साधन करीता फाइल पाठवा..."
 
-#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:422
+#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:436
 msgid "Setup new device..."
 msgstr "नवीन साधनची मांडणी..."
 
 #: ../applet/authorisation-dialogue.ui.h:1
-#| msgid "Always grant access"
 msgid "_Always grant access"
 msgstr "नेहमी प्रवेश मान्य करा (_A)"
 
@@ -374,12 +374,10 @@ msgid "_Reject"
 msgstr "नकार (_R)"
 
 #: ../applet/confirm-dialogue.ui.h:1
-#| msgid "Does not match"
 msgid "_Does not match"
 msgstr "जुळवणी अशक्य (_D)"
 
 #: ../applet/confirm-dialogue.ui.h:2
-#| msgid "Matches"
 msgid "_Matches"
 msgstr "जुळवणी (_M)"
 
@@ -387,64 +385,66 @@ msgstr "जुळवणी (_M)"
 msgid "_Show input"
 msgstr "इनपुट दाखवा (_S)"
 
-#: ../properties/main.c:114
+#: ../properties/main.c:115
 msgid "A Bluetooth manager for the GNOME desktop"
 msgstr "GNOME डेस्कटॉप करीता Bluetooth व्यवस्थापक"
 
-#: ../properties/main.c:117
+#: ../properties/main.c:118
 msgid "translator-credits"
 msgstr "संदिप शेडमाके <sandeep.shedmake@gmail.com>, 2009."
 
-#: ../properties/main.c:119
+#: ../properties/main.c:120
 msgid "GNOME Bluetooth home page"
 msgstr "GNOME Bluetooth मुख्य पान"
 
-#: ../properties/main.c:132
+#: ../properties/main.c:133
 msgid "Bluetooth Preferences"
 msgstr "Bluetooth आवडनिवड"
 
-#: ../properties/main.c:144
+#: ../properties/main.c:145
 msgid "_Show Bluetooth icon"
 msgstr "Bluetooth साधन दाखवा (_S)"
 
-#: ../properties/main.c:293
+#: ../properties/main.c:294
 msgid "Output a list of currently known devices"
 msgstr "वर्तमानक्षणी परिचीत साधनची यादी आऊटपुट करा"
 
-#: ../properties/main.c:330
+#: ../properties/main.c:331
 msgid "Bluetooth Properties"
 msgstr "Bluetooth गुणधर्म"
 
-#: ../properties/adapter.c:177
-msgid "Remove from list of known devices?"
-msgstr "ओळखीचे साधन यादी पासून काढूण टाकायचे?"
-
 #: ../properties/adapter.c:178
+#, c-format
+#| msgid "Remove from list of known devices?"
+msgid "Remove '%s' from list of known devices?"
+msgstr "परिचीत साधन यादी पासून '%s' काढूण टाकायचे?"
+
+#: ../properties/adapter.c:180
 msgid "If you delete the device, you have to set it up again before next use."
 msgstr "साधन नष्ट केल्यास, पुढिल वापरणी पूर्वी तुम्हाला पुन्हा निश्चित करावे लागेल."
 
 #. The discoverable checkbox
-#: ../properties/adapter.c:337
+#: ../properties/adapter.c:351
 msgid "_Discoverable"
 msgstr "शोधण्याजोगी (_D)"
 
-#: ../properties/adapter.c:360
+#: ../properties/adapter.c:374
 msgid "Friendly name"
 msgstr "मैत्रीपूर्ण नाव"
 
-#: ../properties/adapter.c:390
+#: ../properties/adapter.c:404
 msgid "Known devices"
 msgstr "परिचीत साधन"
 
-#: ../properties/adapter.c:445
+#: ../properties/adapter.c:459
 msgid "Delete"
 msgstr "नष्ट करा"
 
-#: ../properties/adapter.c:720
+#: ../properties/adapter.c:734
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth अकार्यान्वीत आहे"
 
-#: ../properties/adapter.c:756
+#: ../properties/adapter.c:770
 msgid "No Bluetooth adapters present"
 msgstr "Bluetooth अडॅप्टर आढळले नाही"
 
@@ -477,72 +477,65 @@ msgstr "GConf त्रुटी: %s"
 msgid "All further errors shown only on terminal."
 msgstr "सर्व पुढिल त्रुटी फक्त टर्मिनलवर दाखवले जाईल."
 
-#: ../wizard/main.c:169
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:206 ../wizard/main.c:327
 #, c-format
-msgid "Please confirm that the passkey displayed on '%s' matches this one"
-msgstr "कृपया '%s' वरील प्रदर्शित passkey याच्यासह जुळवणीजोगी आहे, हे निश्चित करा"
+msgid "Pairing with '%s' cancelled"
+msgstr "'%s' शी जोडी करणे रद्द केले"
 
-#: ../wizard/main.c:224 ../wizard/main.c:461
+#: ../wizard/main.c:246
+#, c-format
+#| msgid "Please confirm that the passkey displayed on '%s' matches this one"
+msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgstr "कृपया '%s' वरील प्रदर्शित passkey याच्यासह जुळवणीजोगी आहे, हे निश्चित करा."
+
+#: ../wizard/main.c:300
 msgid "Please enter the following passkey:"
 msgstr "कृपया खालिल पासकि प्रविष्ट करा:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:249
+#: ../wizard/main.c:382
 #, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "'%s' शी जोडी करणे रद्द केले"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' finished
-#.
-#: ../wizard/main.c:255
-#, c-format
-msgid "Pairing with '%s' finished"
-msgstr "'%s' शी जोडी करणे समाप्त झाले"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Successfully paired with 'Sony Bluetooth Headset'
-#.
-#: ../wizard/main.c:316
-#, c-format
-msgid "Successfully paired with '%s'"
-msgstr "'%s' शी यशस्वीरित्या जोडी केले"
-
-#: ../wizard/main.c:330
-msgid "Please wait while setting up the device..."
-msgstr "साधन स्थापीत करतेवेळी कृपया थांबा..."
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:344
-#, c-format
-msgid "Pairing with '%s' failed"
-msgstr "'%s' शी जोडी करणे अपयशी"
+#| msgid "Pairing with '%s' failed"
+msgid "Setting up '%s' failed"
+msgstr "'%s' संयोजीत करणे अपयशी"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:410
+#: ../wizard/main.c:513
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s' शी जुळवणी करत आहे..."
 
+#: ../wizard/main.c:548
+#, c-format
+#| msgid "Please enter the following passkey:"
+msgid "Please enter the following passkey on '%s':"
+msgstr "कृपया '%s' वरील खालिल पासकि प्रविष्ट करा:"
+
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:473
+#: ../wizard/main.c:568
 #, c-format
-msgid "Please wait whilst '%s' is being paired"
-msgstr "'%s' ची जोडी करतेवेळी कृपया थांबा"
+#| msgid "Please wait while setting up the device..."
+msgid "Please wait while finishing setup on '%s'..."
+msgstr "कृपया '%s' वरील मांडणी पूर्ण करेपर्यंत थांबा..."
+
+#: ../wizard/main.c:581
+#, c-format
+#| msgid "Successfully configured new device"
+msgid "Successfully configured '%s'"
+msgstr "यशस्वीरित्या '%s' संयोजीत करा"
 
 #: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -557,54 +550,74 @@ msgid "'1234'"
 msgstr "'1234'"
 
 #: ../wizard/wizard.ui.h:4
-msgid "Additional setup"
-msgstr "अगाऊ मांडणी"
-
-#: ../wizard/wizard.ui.h:5
 msgid "Bluetooth Device Wizard"
 msgstr "Bluetooth साधन सहाय्यक"
 
-#: ../wizard/wizard.ui.h:6
+#: ../wizard/wizard.ui.h:5
 msgid "Custom passkey code:"
 msgstr "स्वपसंत passkey कोड:"
 
+#: ../wizard/wizard.ui.h:6
+#| msgid "Device _type:"
+msgid "Device Setup"
+msgstr "साधनची मांडणी"
+
 #: ../wizard/wizard.ui.h:7
+#| msgid "Device _type:"
+msgid "Device Setup Failed"
+msgstr "साधन मांडणी अपयशी"
+
+#: ../wizard/wizard.ui.h:8
+#| msgid "Devices"
+msgid "Device search"
+msgstr "साधन शोध"
+
+#: ../wizard/wizard.ui.h:9
 msgid "Does not match"
 msgstr "जुळवणी अशक्य"
 
-#: ../wizard/wizard.ui.h:8
+#: ../wizard/wizard.ui.h:10
+msgid "Finishing Device Setup"
+msgstr "साधन मांडणी पूर्ण करत आहे"
+
+#: ../wizard/wizard.ui.h:11
 msgid "Fixed Passkey"
 msgstr "ठराविक Passkey"
 
-#: ../wizard/wizard.ui.h:9
+#: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "परिचय"
+
+#: ../wizard/wizard.ui.h:13
 msgid "Matches"
 msgstr "जुळवणी शक्य"
 
-#: ../wizard/wizard.ui.h:10
+#: ../wizard/wizard.ui.h:14
 msgid "Passkey Options"
 msgstr "Passkey पर्याय"
 
-#: ../wizard/wizard.ui.h:11
+#: ../wizard/wizard.ui.h:15
 msgid "Passkey _options..."
 msgstr "Passkey पर्याय (_o)..."
 
-#: ../wizard/wizard.ui.h:12
-msgid "Select the additional services you want to use with your device: "
-msgstr "तुमच्या साधनसह वापरण्याजोगी अगाऊ सेवाची नीवड करा: "
+#: ../wizard/wizard.ui.h:16
+#| msgid "Select the additional services you want to use with your device: "
+msgid "Select the additional services you want to use with your device:"
+msgstr "तुमच्या साधनसह वापरण्याजोगी अगाऊ सेवा नीवडा:"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:17
 msgid "Select the device you want to setup"
 msgstr "मांडणी करण्याजोगी साधन निवडा"
 
-#: ../wizard/wizard.ui.h:14
-msgid "Setting up new device"
-msgstr "नवीन साधन संयोजीत करत आहे"
+#: ../wizard/wizard.ui.h:18
+msgid "Setup Completed"
+msgstr "मांडणी पूर्ण झाली"
 
-#: ../wizard/wizard.ui.h:15
-msgid "Successfully configured new device"
-msgstr "नवीन साधन यशस्वीरित्या संयोजीत केले"
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Finished"
+msgstr "मांडणी पूर्ण झाली"
 
-#: ../wizard/wizard.ui.h:16
+#: ../wizard/wizard.ui.h:20
 msgid ""
 "The device will need to be within 10 meters of your computer, and be &#xAB;"
 "discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the "
@@ -613,7 +626,7 @@ msgstr ""
 "साधन तुमच्या संगणकापासून 10 मीटरच्या अंतरावर, व &#xAB;शोधण्याजोगी&#xBB; असायला हवे "
 "(बहुतांश वेळा यांस &#xAB;दृष्यास्पद&#xBB;). संशय आढळल्यास साधनची पुस्तिका तपासून पहा."
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:21
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer."
@@ -621,13 +634,17 @@ msgstr ""
 "साधन सहाय्यक तुम्हाला या संगणकाशी वापरण्यासाठी Bluetooth कार्यान्वीत साधन संयोजीत "
 "करण्याबाबत मार्गदर्शन करतो."
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:22
 msgid "Welcome to the Bluetooth device setup wizard"
 msgstr "Bluetooth साधन मांडणी सहाय्यकावर आपले स्वागत आहे"
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:23
 msgid "_Automatic passkey selection"
 msgstr "स्वयं passkey नीवड (_A)"
+
+#: ../wizard/wizard.ui.h:24
+msgid "_Restart Setup"
+msgstr "मांडणी पुन्हा सुरू करा (_R)"
 
 #: ../sendto/main.c:98
 #, c-format
