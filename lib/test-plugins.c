@@ -1,13 +1,19 @@
 #include <gtk/gtk.h>
+#include <dbus/dbus-glib.h>
 #include "bluetooth-plugin-manager.h"
 
 int main (int argc, char **argv)
 {
 	GtkWidget *window, *vbox;
 	GList *list, *l;
+	DBusGConnection *bus;
 	const char *uuids[] = { "PANU", NULL};
 
 	gtk_init (&argc, &argv);
+
+	/* Init the dbus-glib types */
+	bus = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
+	dbus_g_connection_unref (bus);
 
 	bluetooth_plugin_manager_init ();
 
