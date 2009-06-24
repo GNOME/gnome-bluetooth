@@ -255,7 +255,7 @@
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkTable" id="table1">
+          <object class="GtkTable" id="table2">
             <property name="visible">True</property>
             <property name="n_rows">2</property>
             <property name="n_columns">2</property>
@@ -309,7 +309,7 @@
       <object class="GtkVBox" id="page_summary">
         <property name="visible">True</property>
         <property name="border_width">24</property>
-        <property name="spacing">6</property>
+        <property name="spacing">12</property>
         <child>
           <object class="GtkLabel" id="label_summary">
             <property name="visible">True</property>
@@ -334,10 +334,12 @@
               <object class="GtkAlignment" id="alignment1">
                 <property name="visible">True</property>
                 <property name="left_padding">12</property>
+                <property name="top_padding">12</property>
                 <child>
                   <object class="GtkVBox" id="extra_config_vbox">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel" id="extra_config_help_label">
                         <property name="xalign">0</property>
