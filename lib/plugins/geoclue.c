@@ -182,7 +182,21 @@ get_config_widgets (const char *bdaddr, const char **uuids)
 static void
 device_removed (const char *bdaddr)
 {
-	g_message ("Device '%s' got removed", bdaddr);
+	GConfClient *client;
+	char *str;
+
+	client = gconf_client_get_default ();
+	if (client == NULL)
+		return;
+
+	str = gconf_client_get_string (client, GPS_KEY, NULL);
+	if (g_strcmp0 (str, bdaddr) == 0) {
+		gconf_client_set_string (client, GPS_KEY, "", NULL);
+		g_message ("Device '%s' got disabled as a Geoclue GPS", bdaddr);
+	}
+
+	g_free (str);
+	g_object_unref (client);
 }
 
 static GbtPluginInfo plugin_info = {
