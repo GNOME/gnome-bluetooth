@@ -2,15 +2,16 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
 # Jaume Villalba <javs@tinet.cat>, 2007.
+# David Planella <david.planella@gmail.com>, 2007, 2008, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bluez-gnome\n"
+"Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 14:31+0200\n"
-"PO-Revision-Date: 2008-02-24 14:54+0000\n"
-"Last-Translator: Marcel Holtmann <marcel@holtmann.org>\n"
-"Language-Team: Catalan <ubuntu-l10n-ca@lists.ubuntu.com>\n"
+"POT-Creation-Date: 2009-06-25 22:45+0200\n"
+"PO-Revision-Date: 2009-06-25 21:06+0200\n"
+"Last-Translator: David Planella <david.planella@gmail.com>\n"
+"Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,26 +19,792 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#~ msgid "All categories"
-#~ msgstr "Totes les categories"
+#: ../lib/bluetooth-client.c:106
+msgid "All types"
+msgstr "Tots els tipus"
 
-#~ msgid "Trusted"
-#~ msgstr "De confiança"
+#: ../lib/bluetooth-client.c:108
+msgid "Phone"
+msgstr "Telèfon"
 
-#~ msgid "Device"
-#~ msgstr "Dispositiu"
+#: ../lib/bluetooth-client.c:110
+msgid "Modem"
+msgstr "Mòdem"
 
-#~ msgid "Device _category:"
-#~ msgstr "_Categoria del dispositiu:"
+#: ../lib/bluetooth-client.c:112
+msgid "Computer"
+msgstr "Ordinador"
 
-#~ msgid "Device _type:"
-#~ msgstr "_Tipus de dispositiu:"
+#: ../lib/bluetooth-client.c:114
+msgid "Network"
+msgstr "Xarxa"
 
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-client.c:117
+msgid "Headset"
+msgstr "Microauricular"
+
+#: ../lib/bluetooth-client.c:119
+msgid "Headphones"
+msgstr "Auriculars"
+
+#: ../lib/bluetooth-client.c:121
+msgid "Audio device"
+msgstr "Dispositiu d'àudio"
+
+#: ../lib/bluetooth-client.c:123
+msgid "Keyboard"
+msgstr "Teclat"
+
+#: ../lib/bluetooth-client.c:125
+msgid "Mouse"
+msgstr "Ratolí"
+
+#: ../lib/bluetooth-client.c:127
+msgid "Camera"
+msgstr "Càmera"
+
+#: ../lib/bluetooth-client.c:129
+msgid "Printer"
+msgstr "Impressora"
+
+#: ../lib/bluetooth-client.c:131
+msgid "Joypad"
+msgstr "Comandament de joc"
+
+#: ../lib/bluetooth-client.c:133
+msgid "Tablet"
+msgstr "Tauleta gràfica"
+
+#: ../lib/bluetooth-client.c:135 ../lib/bluetooth-chooser.c:104
+#: ../lib/bluetooth-chooser.c:138
+msgid "Unknown"
+msgstr "Desconegut"
+
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+msgid "Click to select device..."
+msgstr "Feu clic per a seleccionar un dispositiu..."
+
+#: ../lib/bluetooth-chooser.c:94
+msgid "All categories"
+msgstr "Totes les categories"
+
+#: ../lib/bluetooth-chooser.c:96
+msgid "Paired"
+msgstr "Aparellat"
+
+#: ../lib/bluetooth-chooser.c:98
+msgid "Trusted"
+msgstr "De confiança"
+
+#: ../lib/bluetooth-chooser.c:100
+msgid "Not paired or trusted"
+msgstr "No aparellat o no de confiança"
+
+#: ../lib/bluetooth-chooser.c:102
+msgid "Paired or trusted"
+msgstr "Aparellat o de confiança"
+
+#: ../lib/bluetooth-chooser.c:179
+msgid "No adapters available"
+msgstr "No hi ha cap adaptador disponible"
+
+#: ../lib/bluetooth-chooser.c:183 ../lib/bluetooth-chooser.c:803
+msgid "Searching for devices..."
+msgstr "S'estan cercant dispositius..."
+
+#: ../lib/bluetooth-chooser.c:674
+msgid "Device"
+msgstr "Dispositiu"
+
+#: ../lib/bluetooth-chooser.c:710
+msgid "Type"
+msgstr "Tipus"
+
+#. The filters
+#: ../lib/bluetooth-chooser.c:826
+msgid "Show Only Bluetooth Devices With..."
+msgstr "Mostra només dispositius Bluetooth amb..."
+
+#. The device category filter
+#: ../lib/bluetooth-chooser.c:846
+msgid "Device _category:"
+msgstr "_Categoria del dispositiu:"
+
+#: ../lib/bluetooth-chooser.c:861
+msgid "Select the device category to filter above list"
+msgstr ""
+"Seleccioneu la categoria de dispositius per la qual voleu que es filtri la "
+"llista d'aquí sobre"
+
+#. The device type filter
+#: ../lib/bluetooth-chooser.c:875
+msgid "Device _type:"
+msgstr "_Tipus de dispositiu:"
+
+#: ../lib/bluetooth-chooser.c:896
+msgid "Select the device type to filter above list"
+msgstr ""
+"Seleccioneu el tipus de dispositiu pel qual voleu que es filtri la llista "
+"d'aquí sobre"
+
+#: ../lib/bluetooth-chooser.c:902
+msgid "Input devices (mice, keyboards, ...)"
+msgstr "Dispositius d'entrada (ratolins, teclats, ...)"
+
+#: ../lib/bluetooth-chooser.c:906
+msgid "Headphones, headsets and other audio devices"
+msgstr "Auriculars, microauriculars i altres dispositius d'àudio"
+
+#: ../lib/plugins/geoclue.c:162
+msgid "Use this GPS device for Geolocation services"
+msgstr "Utilitza aquest dispositiu GPS per als serveis de geolocalització"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "Accediu a Internet a través del telèfon mobil (en fase de proves)"
+
+#: ../applet/main.c:111
+msgid "Select Device to Browse"
+msgstr "Seleccioneu el dispositiu pel qual voleu que es navegui"
+
+#: ../applet/main.c:115
+msgid "_Browse"
+msgstr "_Navega"
+
+#: ../applet/main.c:125
+msgid "Select device to browse"
+msgstr "Seleccioneu el dispositiu pel qual voleu que es navegui"
+
+#: ../applet/main.c:280
+msgid "Bluetooth: Unknown"
+msgstr "Bluetooth: desconegut"
+
+#: ../applet/main.c:282 ../properties/properties-adapter-off.ui.h:1
+msgid "Turn On Bluetooth"
+msgstr "Engega el Bluetooth"
+
+#: ../applet/main.c:283
+msgid "Bluetooth: Off"
+msgstr "Bluetooth: apagat"
+
+#: ../applet/main.c:286
+msgid "Turn Off Bluetooth"
+msgstr "Apaga el Bluetooth"
+
+#: ../applet/main.c:287
+msgid "Bluetooth: On"
+msgstr "Bluetooth: engegat"
+
+#: ../applet/main.c:399
+msgid "Disconnecting..."
+msgstr "S'està desconnectant..."
+
+#: ../applet/main.c:402 ../sendto/main.c:212
+msgid "Connecting..."
+msgstr "S'està connectant..."
+
+#: ../applet/main.c:405 ../applet/main.c:746
+msgid "Connected"
+msgstr "Connectat"
+
+#: ../applet/main.c:408 ../applet/main.c:746
+msgid "Disconnected"
+msgstr "Desconnectat"
+
+#: ../applet/main.c:760 ../applet/main.c:811 ../properties/adapter.c:445
+msgid "Disconnect"
+msgstr "Desconnecta"
+
+#: ../applet/main.c:760 ../applet/main.c:811
+msgid "Connect"
+msgstr "Connecta"
+
+#: ../applet/main.c:772
+msgid "Send files..."
+msgstr "Envia fitxers..."
+
+#: ../applet/main.c:782
+msgid "Browse files..."
+msgstr "Navega pels fitxers..."
+
+#: ../applet/main.c:793
+msgid "Open Keyboard Preferences..."
+msgstr "Obre les preferències del teclat..."
+
+#: ../applet/main.c:801
+msgid "Open Mouse Preferences..."
+msgstr "Obre les preferències del ratolí..."
+
+#: ../applet/main.c:924
+msgid "Debug"
+msgstr "Depura"
+
+#. Parse command-line options
+#: ../applet/main.c:944
+msgid "- Bluetooth applet"
+msgstr "- miniaplicació del Bluetooth"
+
+#: ../applet/main.c:949
 #, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Executeu l'ordre «%s --help» per a veure una llista completa de les opcions "
+"de la línia d'ordres disponibles.\n"
+
+#: ../applet/main.c:965
+msgid "Bluetooth Applet"
+msgstr "Miniaplicació del Bluetooth"
+
+#: ../applet/notify.c:148
+msgid "Bluetooth: Enabled"
+msgstr "Bluetooth: habilitat"
+
+#: ../applet/notify.c:148
+msgid "Bluetooth: Disabled"
+msgstr "Bluetooth: inhabilitat"
+
+#: ../applet/agent.c:251 ../applet/agent.c:332
+#, c-format
+msgid "Device '%s' wants to pair with this computer"
+msgstr "El dispositiu «%s» es vol aparellar amb aquest ordinador"
+
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the passkey mentioned on device %s."
+msgstr "Introduïu la clau d'accés mencionada al dispositiu %s."
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the passkey '%s' matches the one on device %s."
+msgstr "Confirmeu si a clau d'accés «%s» concorda amb la del dispositiu %s."
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+msgid "Grant access to '%s'"
+msgstr "Atorga accés a «%s»"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "El dispositiu %s vol accedir al servei «%s»."
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:570
+#, c-format
+msgid "Pairing request for '%s'"
+msgstr "Sol·licitud d'aparellament per a «%s»"
+
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:574
+#: ../applet/agent.c:607 ../applet/agent.c:645
+msgid "Bluetooth device"
+msgstr "Dispositiu Bluetooth"
+
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:575
+msgid "Enter passkey"
+msgstr "Introduïu la clau d'accés"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:602
+#, c-format
+msgid "Pairing confirmation for '%s'"
+msgstr "Confirmació d'aparellament per a «%s»"
+
+#: ../applet/agent.c:608
+msgid "Check passkey"
+msgstr "Comproveu la clau d'accés"
+
+#: ../applet/agent.c:641
+#, c-format
+msgid "Authorization request from '%s'"
+msgstr "Sol·licitud d'autenticació de «%s»"
+
+#: ../applet/agent.c:646
+msgid "Check authorization"
+msgstr "Comproveu l'autorització"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Gestor del Bluetooth"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Miniaplicació gestora del Bluetooth"
+
+#: ../applet/popup-menu.ui.h:1
+msgid "Bluetooth: Checking"
+msgstr "Bluetooth: s'està comprovant"
+
+#: ../applet/popup-menu.ui.h:2
+msgid "Browse files on device..."
+msgstr "Navega pels fitxers del dispositiu..."
+
+#: ../applet/popup-menu.ui.h:3
+msgid "Devices"
+msgstr "Dispositius"
+
+#: ../applet/popup-menu.ui.h:4
+msgid "Preferences..."
+msgstr "Preferències..."
+
+#: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "Surt"
+
+#: ../applet/popup-menu.ui.h:6
+msgid "Send files to device..."
+msgstr "Envia fitxers al dispositiu..."
+
+#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:436
+msgid "Setup new device..."
+msgstr "Configuració d'un dispositiu nou..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+msgid "_Always grant access"
+msgstr "_Atorga-li accés sempre"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "A_torga"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "_Refusa"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "_No concorda"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "_Concorda"
+
+#: ../applet/passkey-dialogue.ui.h:1
+msgid "_Show input"
+msgstr "_Mostra l'entrada"
+
+#: ../properties/main.c:115
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Un gestor del Bluetooth per a l'escriptori del GNOME"
+
+#: ../properties/main.c:118
+msgid "translator-credits"
+msgstr ""
+"David Planella <david.planella@gmail.com>\n"
+"Launchpad Contributions:\n"
+"  David Planella https://launchpad.net/~dpm\n"
+"  Jaume Villalba https://launchpad.net/~jaumet"
+
+#: ../properties/main.c:120
+msgid "GNOME Bluetooth home page"
+msgstr "Pàgina inicial del GNOME Bluetooth"
+
+#: ../properties/main.c:133
+msgid "Bluetooth Preferences"
+msgstr "Preferències del Bluetooth"
+
+#: ../properties/main.c:145
+msgid "_Show Bluetooth icon"
+msgstr "_Mostra la icona del Bluetooth"
+
+#: ../properties/main.c:294
+msgid "Output a list of currently known devices"
+msgstr "Mostra una llista de dispositius coneguts"
+
+#: ../properties/main.c:331
+msgid "Bluetooth Properties"
+msgstr "Propietats del Bluetooth"
+
+#: ../properties/adapter.c:178
+#, c-format
+msgid "Remove '%s' from list of known devices?"
+msgstr "Voleu suprimir «%s» de la llista de dispositius coneguts?"
+
+#: ../properties/adapter.c:180
+msgid "If you delete the device, you have to set it up again before next use."
+msgstr ""
+"Si suprimiu el dispositiu, l'haureu de configurar de nou abans de tornar-lo "
+"a utilitzar."
+
+#. The discoverable checkbox
+#: ../properties/adapter.c:351
+msgid "_Discoverable"
+msgstr "_Descobrible"
+
+#: ../properties/adapter.c:374
+msgid "Friendly name"
+msgstr "Nom llegible"
+
+#: ../properties/adapter.c:404
+msgid "Known devices"
+msgstr "Dispositius coneguts"
+
+#: ../properties/adapter.c:459
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: ../properties/adapter.c:734
+msgid "Bluetooth is disabled"
+msgstr "El Bluetooth està inhabilitat"
+
+#: ../properties/adapter.c:770
+msgid "No Bluetooth adapters present"
+msgstr "No hi ha cap adaptador Bluetooth present"
+
+#: ../properties/properties-no-adapter.ui.h:1
+msgid "Your computer does not have any Bluetooth adapters plugged in."
+msgstr "L'ordinador no té cap adaptador Bluetooth connectat."
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Configura els paràmetres del Bluetooth"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid "Whether to show the notification icon"
+msgstr "Si s'ha de mostrar la icona de notificació"
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "Whether to show the notification icon."
+msgstr "Si s'ha de mostrar la icona de notificació."
+
+#: ../properties/gconf-bridge.c:1223
+#, c-format
+msgid "GConf error: %s"
+msgstr "Error del GConf: %s"
+
+#: ../properties/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "La resta d'errors es mostren només al terminal."
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:206 ../wizard/main.c:327
+#, c-format
+msgid "Pairing with '%s' cancelled"
+msgstr "S'ha cancel·lat l'aparellament amb «%s»"
+
+#: ../wizard/main.c:246
+#, c-format
+msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgstr ""
+"Confirmeu que la clau d'accés que es mostra a «%s» concorda amb aquesta."
+
+#: ../wizard/main.c:300
+msgid "Please enter the following passkey:"
+msgstr "Introduïu la clau d'accés següent:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Setting up 'Sony Bluetooth Headset' failed
+#.
+#: ../wizard/main.c:382
+#, c-format
+msgid "Setting up '%s' failed"
+msgstr "Ha fallat la configuració de «%s»"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Connecting to 'Sony Bluetooth Headset' now...
+#.
+#: ../wizard/main.c:513
+#, c-format
+msgid "Connecting to '%s'..."
+msgstr "S'està connectant a «%s»..."
+
+#: ../wizard/main.c:548
+#, c-format
+msgid "Please enter the following passkey on '%s':"
+msgstr "Introduïu la clau d'accés següent a «%s»:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+#.
+#: ../wizard/main.c:568
+#, c-format
+msgid "Please wait while finishing setup on '%s'..."
+msgstr "Espereu mentre finalitza la configuració a «%s»..."
+
+#: ../wizard/main.c:581
+#, c-format
+msgid "Successfully configured '%s'"
+msgstr "S'ha configurat «%s» amb èxit"
+
+#: ../wizard/wizard.ui.h:1
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "«0000» (la majoria d'auriculars, ratolins i dispositius GPS)"
+
+#: ../wizard/wizard.ui.h:2
+msgid "'1111'"
+msgstr "«1111»"
+
+#: ../wizard/wizard.ui.h:3
+msgid "'1234'"
+msgstr "«1234»"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Bluetooth Device Wizard"
+msgstr "Auxiliar de dispositiu Bluetooth"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Custom passkey code:"
+msgstr "Codi de clau d'accés personalitzat:"
+
+#: ../wizard/wizard.ui.h:6
+msgid "Device Setup"
+msgstr "Configuració del dispositiu"
+
+#: ../wizard/wizard.ui.h:7
+msgid "Device Setup Failed"
+msgstr "Ha fallat la configuració del dispositiu"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device search"
+msgstr "Cerca de dispositius"
+
+#: ../wizard/wizard.ui.h:9
+msgid "Does not match"
+msgstr "No concorda"
+
+#: ../wizard/wizard.ui.h:10
+msgid "Finishing Device Setup"
+msgstr "Finalització de la configuració del dispositiu"
+
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed Passkey"
+msgstr "Clau d'accés fixa"
+
+#: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "Introducció"
+
+#: ../wizard/wizard.ui.h:13
+msgid "Matches"
+msgstr "Concorda"
+
+#: ../wizard/wizard.ui.h:14
+msgid "Passkey Options"
+msgstr "Opcions de la clau d'accés"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Passkey _options..."
+msgstr "_Opcions de la clau d'accés..."
+
+#: ../wizard/wizard.ui.h:16
+msgid "Select the additional services you want to use with your device:"
+msgstr ""
+"Seleccioneu els serveis addicional que vulgueu utilitzar amb el vostre "
+"dispositiu:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "Select the device you want to setup"
+msgstr "Seleccioneu el dispositiu que vulgueu configurar"
+
+#: ../wizard/wizard.ui.h:18
+msgid "Setup Completed"
+msgstr "S'ha completat la configuració"
+
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Finished"
+msgstr "S'ha finalitzat la configuració"
+
+#: ../wizard/wizard.ui.h:20
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#xAB;"
+"discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the "
+"device's manual if in doubt."
+msgstr ""
+"Caldrà que el dispositiu sigui a un radi de 10 metres de l'ordinador, i que "
+"sigui &#xAB;descobrible&#xBB (altrament anomenat &#xABvisible&#xBB). En cas "
+"de dubte, consulteu el manual del dispositiu."
+
+#: ../wizard/wizard.ui.h:21
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer."
+msgstr ""
+"L'auxiliar de dispositius us guiarà durant el procés de configuració dels "
+"dispositius amb Bluetooth per a fer-los servir en aquest ordinador."
+
+#: ../wizard/wizard.ui.h:22
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr ""
+"Us donem la benvinguda a l'auxiliar de configuració de dispositius amb "
+"Bluetooth"
+
+#: ../wizard/wizard.ui.h:23
+msgid "_Automatic passkey selection"
+msgstr "Selecció _automàtica de la clau d'accés"
+
+#: ../wizard/wizard.ui.h:24
+msgid "_Restart Setup"
+msgstr "_Torna a iniciar la configuració"
+
+#: ../sendto/main.c:98
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d segon"
+msgstr[1] "%'d segons"
+
+#: ../sendto/main.c:103 ../sendto/main.c:116
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minut"
+msgstr[1] "%'d minuts"
+
+#: ../sendto/main.c:114
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d hora"
+msgstr[1] "%'d hores"
+
+#: ../sendto/main.c:124
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "aproximadament %'d hora"
+msgstr[1] "aproximadament %'d hores"
+
+#: ../sendto/main.c:150
+msgid "File Transfer"
+msgstr "Transferència de fitxers"
+
+#: ../sendto/main.c:168
+msgid "Sending files via Bluetooth"
+msgstr "Enviament de fitxers per Bluetooth"
+
+#: ../sendto/main.c:180
+msgid "From:"
+msgstr "De:"
+
+#: ../sendto/main.c:196
+msgid "To:"
+msgstr "A:"
+
+#: ../sendto/main.c:242
+msgid "An unknown error occured"
+msgstr "S'ha produït un error desconegut"
+
+#: ../sendto/main.c:252
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+"Assegureu-vos que el dispositiu remot està engegat i que accepta connexions "
+"Bluetooth"
+
+#: ../sendto/main.c:336
+#, c-format
+msgid "Sending %s"
+msgstr "S'està enviant %s"
+
+#: ../sendto/main.c:343 ../sendto/main.c:405
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "S'està enviant el fitxer %d de %d"
+
+#: ../sendto/main.c:401
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:403
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:497
+msgid "Select Device to Send To"
+msgstr "Seleccioneu el dispositiu on enviar"
+
+#: ../sendto/main.c:501
+msgid "Send _To"
+msgstr "Envia _a"
+
+#: ../sendto/main.c:542
+msgid "Choose files to send"
+msgstr "Escolliu els fitxers a enviar"
+
+#: ../sendto/main.c:571
+msgid "Remote device to use"
+msgstr "Dispositiu remot a utilitzar"
+
+#: ../sendto/main.c:573
+msgid "Remote device's name"
+msgstr "Nom del dispositiu remot"
+
+#~ msgid "S_earch"
+#~ msgstr "_Cerca"
+
+#~ msgid "Authentication request"
+#~ msgstr "Sol·licitud d'autenticació"
+
+#~ msgid "Pairing request for device:"
+#~ msgstr "Sol·licitud d'aparellament per al dispositiu:"
+
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "Introduïu la clau d'accés per a l'autenticació:"
+
+#~ msgid "Confirmation request"
+#~ msgstr "Sol·licitud de confirmació"
+
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "Confirmeu el valor per a l'autenticació"
+
+#~ msgid "Authorization request"
+#~ msgstr "Sol·licitud d'autorització"
+
+#~ msgid "Authorization request for device:"
+#~ msgstr "Sol·licitud d'autorització per al dispositiu:"
+
+#~ msgid "Pairing request for %s"
+#~ msgstr "Sol·licitud d'aparellament per a %s"
+
+#~ msgid "Confirmation request for %s"
+#~ msgstr "Sol·licitud de confirmació per a %s"
+
+#~ msgid "Confirm passkey"
+#~ msgstr "Confirmeu la clau d'accés"
+
+#~ msgid "Pairing with '%s' finished"
+#~ msgstr "Ha finalitzat l'aparellament amb «%s»"
+
+#~ msgid "Please wait whilst '%s' is being paired"
+#~ msgstr "Espereu mentre es realitza l'aparellament amb «%s»"
+
+#~ msgid "<b>Setting up new device</b>"
+#~ msgstr "<b>Configuració d'un dispositiu nou</b>"
+
+#~ msgid "<b>Successfully configured new device</b>"
+#~ msgstr "<b>S'ha pogut configurar el nou dispositiu amb èxit</b>"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "Error Occurred"
+#~ msgstr "S'ha produït un error"
+
 #~ msgid "Created bonding with %s"
 #~ msgstr "S'ha creat una connexió amb %s"
 
-#, c-format
 #~ msgid "Removed bonding with %s"
 #~ msgstr "S'ha tancat la connexió amb %s"
 
@@ -59,28 +826,11 @@ msgstr ""
 #~ msgid "Device has been switched into pairing mode"
 #~ msgstr "El dispositiu és en mode d'aparellament"
 
-#, c-format
 #~ msgid "Couldn't execute command: %s\n"
 #~ msgstr "No s'ha pogut executar l'ordre: %s\n"
 
 #~ msgid "Browse Devices"
 #~ msgstr "Navega pels dispositius"
-
-#~ msgid "Select device to browse"
-#~ msgstr "Seleccioneu el dispositiu pel qual voleu que es navegui"
-
-#~ msgid "Send File..."
-#~ msgstr "Envia un fitxer..."
-
-#~ msgid "Browse Device..."
-#~ msgstr "Navega per un dispositiu..."
-
-#~ msgid "Setup New Device"
-#~ msgstr "Configuració d'un dispositiu nou"
-
-#, c-format
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "Sol·licitud d'aparellament per a «%s»"
 
 #~ msgid "Confirm pairing"
 #~ msgstr "Confirmeu l'aparellament"
@@ -109,7 +859,6 @@ msgstr ""
 #~ msgid "1 minute"
 #~ msgstr "1 minut"
 
-#, c-format
 #~ msgid "%g minutes"
 #~ msgstr "%g minuts"
 
@@ -152,17 +901,12 @@ msgstr ""
 #~ msgid "Bonded devices"
 #~ msgstr "Dispositius enllaçats"
 
-#~ msgid "Remove device entry from service?"
-#~ msgstr "Voleu suprimir del servei l'entrada del dispositiu ?"
-
 #~ msgid ""
-#~ "If you delete the device entry, you can't use it with this service anymore."
+#~ "If you delete the device entry, you can't use it with this service "
+#~ "anymore."
 #~ msgstr ""
 #~ "Si suprimiu l'entrada del dispositiu no podreu tornar-lo a utilitzar amb "
 #~ "aquest servei."
-
-#~ msgid "Connecting to device"
-#~ msgstr "S'està connectant al dispositiu"
 
 #~ msgid "Show all devices"
 #~ msgstr "Mostra tots els dispositius"
@@ -170,17 +914,8 @@ msgstr ""
 #~ msgid "Create Device"
 #~ msgstr "Crea un dispositiu"
 
-#~ msgid "Audio devices"
-#~ msgstr "Dispositius d'àudio"
-
-#~ msgid "connected"
-#~ msgstr "connectat"
-
 #~ msgid "Input devices"
 #~ msgstr "Dispositius d'entrada"
-
-#~ msgid "_Disconnect"
-#~ msgstr "_Desconnecta"
 
 #~ msgid "Network devices"
 #~ msgstr "Dispositius de xarxa"
@@ -191,22 +926,22 @@ msgstr ""
 #~ "preferències"
 
 #~ msgid ""
-#~ "If HAL should be used to automatically adjust settings like class of device "
-#~ "etc."
+#~ "If HAL should be used to automatically adjust settings like class of "
+#~ "device etc."
 #~ msgstr ""
-#~ "Si s'ha d'utilitzar el HAL per a ajustar automàticament paràmetres tals com "
-#~ "la classe del dispositiu, etc."
+#~ "Si s'ha d'utilitzar el HAL per a ajustar automàticament paràmetres tals "
+#~ "com la classe del dispositiu, etc."
 
 #~ msgid "If authorization requests should be automatically granted"
 #~ msgstr ""
 #~ "Si s'han d'atorgar l'autorització automàticament en tals sol·licituds"
 
 #~ msgid ""
-#~ "If authorization requests should be granted all the time without asking the "
-#~ "user for confirmation."
+#~ "If authorization requests should be granted all the time without asking "
+#~ "the user for confirmation."
 #~ msgstr ""
-#~ "Si les l'autorització s'ha d'atorgar sempre que n'hi hagi una sol·licitud, "
-#~ "sense demanar la confirmació."
+#~ "Si les l'autorització s'ha d'atorgar sempre que n'hi hagi una "
+#~ "sol·licitud, sense demanar la confirmació."
 
 #~ msgid ""
 #~ "Switched device into\n"
@@ -254,13 +989,6 @@ msgstr ""
 #~ msgstr "Atura el descobriment"
 
 #~ msgid ""
-#~ "The device wizard will walk you through the process of configuring Bluetooth "
-#~ "enabled devices for use with this computer."
-#~ msgstr ""
-#~ "L'assistent de dispositius us guiarà durant el procès de configuració dels "
-#~ "dispositius amb Bluetooth per a fer-los servir en aquest ordinador."
-
-#~ msgid ""
 #~ "\n"
 #~ "Enter passkey for authentication:"
 #~ msgstr ""
@@ -292,12 +1020,6 @@ msgstr ""
 #~ "\n"
 #~ "Cliqueu per a obrir el diàleg de confirmació"
 
-#~ msgid "Search for devices"
-#~ msgstr "Cerca dispositius"
-
-#~ msgid "Select file to send"
-#~ msgstr "Tria un arxiu per a enviar"
-
 #~ msgid "Select type of device you wanna setup"
 #~ msgstr "Escolliu el tipus de dispositiu que voleu configurar"
 
@@ -307,684 +1029,162 @@ msgstr ""
 #~ msgid "Bluetooth device wizard"
 #~ msgstr "Assistent de dispositius Bluetooth"
 
-#~ msgid "Search"
-#~ msgstr "Cerca"
-
-#: ../common/bluetooth-client.c:82
-msgid "All types"
-msgstr "Tots els tipus"
-
-#: ../common/bluetooth-client.c:84
-msgid "Phone"
-msgstr "Telèfon"
-
-#: ../common/bluetooth-client.c:86
-msgid "Modem"
-msgstr "Mòdem"
-
-#: ../common/bluetooth-client.c:88
-msgid "Computer"
-msgstr "Ordinador"
-
-#: ../common/bluetooth-client.c:90
-msgid "Network"
-msgstr "Xarxa"
-
-#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
-msgid "Headset"
-msgstr "Auriculars"
-
-#: ../common/bluetooth-client.c:94
-msgid "Headphone"
-msgstr ""
-
-#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
-msgid "Keyboard"
-msgstr "Teclat"
-
-#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
-msgid "Mouse"
-msgstr "Ratolí"
-
-#: ../common/bluetooth-client.c:100
-msgid "Camera"
-msgstr "Càmera"
-
-#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
-msgid "Printer"
-msgstr "Impressora"
-
-#: ../common/bluetooth-client.c:104
-msgid "Joypad"
-msgstr ""
-
-#: ../common/bluetooth-client.c:106
-msgid "Tablet"
-msgstr ""
-
-#: ../common/bluetooth-client.c:108
-msgid "Unknown"
-msgstr "Desconegut"
-
-#: ../common/helper.c:162
-msgid "Select Device"
-msgstr ""
-
-#: ../common/helper.c:222
-msgid "Choose files to send"
-msgstr ""
-
-#: ../applet/main.c:123
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Un gestor de Bluetooth per a l'escriptori GNOME"
-
-#: ../applet/main.c:126 ../analyzer/dialog.c:128
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  David Planella https://launchpad.net/~dpm\n"
-"  Jaume Villalba https://launchpad.net/~jaumet\n"
-"  animarval https://launchpad.net/~animarval\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Jaume Villalba https://launchpad.net/~jaumet\n"
-"  Marcel Holtmann https://launchpad.net/~holtmann\n"
-"  Octavi Ripollés i Querol https://launchpad.net/~orique\n"
-"  el_libre XDDDDDDDDDDDDDDDDDDDDDDDDDDD https://launchpad.net/~el-libre"
-
-#: ../applet/main.c:177 ../applet/main.c:232
-msgid "Setup new device..."
-msgstr ""
-
-#: ../applet/main.c:242
-msgid "Send files to device..."
-msgstr ""
-
-#: ../applet/main.c:250
-msgid "Browse files on device..."
-msgstr ""
-
-#: ../applet/main.c:373
-msgid "Bluetooth Applet"
-msgstr "Miniaplicació de Bluetooth"
-
-#: ../applet/agent.c:258
-msgid "Authentication request"
-msgstr "Sol·licitud d'autenticació"
-
-#: ../applet/agent.c:286 ../applet/agent.c:395
-msgid "Pairing request for device:"
-msgstr "Sol·licitud d'aparellament per al dispositiu:"
-
-#: ../applet/agent.c:303
-msgid "Enter passkey for authentication:"
-msgstr "Introduïu la contrasenya per a l'autenticació:"
-
-#: ../applet/agent.c:327
-msgid "Show input"
-msgstr "Mostra l'entrada"
-
-#: ../applet/agent.c:369
-msgid "Confirmation request"
-msgstr "Sol·licitud de confirmació"
-
-#: ../applet/agent.c:412
-msgid "Confirm value for authentication:"
-msgstr "Confirmeu el valor per a l'autenticació"
-
-#: ../applet/agent.c:456
-msgid "Authorization request"
-msgstr "Sol·licitud d'autorització"
-
-#: ../applet/agent.c:482
-msgid "Authorization request for device:"
-msgstr "Sol·licitud d'autorització per al dispositiu:"
-
-#: ../applet/agent.c:503
-#, c-format
-msgid "Grant access to %s?"
-msgstr "Voleu atorgar accés a %s?"
-
-#: ../applet/agent.c:512
-msgid "Always grant access"
-msgstr "Atorga-li accés sempre"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
-#, c-format
-msgid "Pairing request for %s"
-msgstr ""
-
-#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
-#: ../applet/agent.c:736 ../applet/agent.c:781
-msgid "Bluetooth device"
-msgstr "Dispositiu Bluetooth"
-
-#: ../applet/agent.c:591
-msgid "Enter PIN code"
-msgstr ""
-
-#: ../applet/agent.c:638 ../applet/agent.c:688
-msgid "Enter passkey"
-msgstr "Introduïu la contrasenya"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:732
-#, c-format
-msgid "Confirmation request for %s"
-msgstr ""
-
-#: ../applet/agent.c:737
-msgid "Confirm passkey"
-msgstr ""
-
-#: ../applet/agent.c:777
-#, c-format
-msgid "Authorization request for %s"
-msgstr "Sol·licitud d'autenticació per a %s"
-
-#: ../applet/agent.c:782
-msgid "Check authorization"
-msgstr "Comproveu l'autorització"
-
-#: ../applet/bluetooth-applet.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Gestor del Bluetooth"
-
-#: ../applet/bluetooth-applet.desktop.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Miniaplicació gestora del Bluetooth"
-
-#: ../properties/main.c:63
-msgid "Bluetooth Preferences"
-msgstr "Preferències del Bluetooth"
-
-#: ../properties/main.c:94
-msgid "General"
-msgstr "General"
-
-#: ../properties/main.c:131
-msgid "Bluetooth Properties"
-msgstr ""
-
-#: ../properties/general.c:172
-msgid "File transfer"
-msgstr ""
-
-#: ../properties/general.c:176
-msgid "Receive files from remote devices"
-msgstr ""
-
-#: ../properties/general.c:184
-msgid "Share files from public folder"
-msgstr ""
-
-#: ../properties/general.c:195
-msgid "Notification area"
-msgstr "Àrea de notificació"
-
-#: ../properties/general.c:199
-msgid "Never display icon"
-msgstr "No mostris mai la icona"
-
-#: ../properties/general.c:206
-msgid "Only display when adapter present"
-msgstr "Mostra-la només quan l'adaptador sigui present"
-
-#: ../properties/general.c:213
-msgid "Always display icon"
-msgstr "Mostra sempre la icona"
-
-#: ../properties/adapter.c:99
-msgid "Adapter"
-msgstr "Adaptador"
-
-#: ../properties/adapter.c:174
-msgid "always"
-msgstr ""
-
-#: ../properties/adapter.c:176
-msgid "hidden"
-msgstr ""
-
-#: ../properties/adapter.c:179
-#, c-format
-msgid "%'g minute"
-msgid_plural "%'g minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../properties/adapter.c:477
-msgid "Visibility setting"
-msgstr ""
-
-#: ../properties/adapter.c:490
-msgid "Hidden"
-msgstr ""
-
-#: ../properties/adapter.c:502
-msgid "Always visible"
-msgstr ""
-
-#: ../properties/adapter.c:514
-msgid "Temporary visible"
-msgstr ""
-
-#: ../properties/adapter.c:566
-msgid "Friendly name"
-msgstr ""
-
-#: ../properties/adapter.c:587
-msgid "Known devices"
-msgstr ""
-
-#: ../properties/dialog.c:41
-msgid "Remove from list of known devices?"
-msgstr ""
-
-#: ../properties/dialog.c:42
-msgid ""
-"If you delete the device, you have to set it up again before next use."
-msgstr ""
-
-#: ../properties/bluetooth-properties.desktop.in.h:1
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth-properties.desktop.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Configura els paràmetres del Bluetooth"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid ""
-"Display options for the notification icon. Valid options are \"never\", "
-"\"present\" and \"always\"."
-msgstr ""
-"Opcions de visualització de la icona de notificació. Les opcions vàlides són "
-"«never» (mai), «present» (present), i «always» (sempre)."
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "If Bluetooth file sharing is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:3
-msgid "If receiving of remote files via Bluetooth is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:4
-msgid ""
-"If the service for receiving remote files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:5
-msgid "If the service for sharing files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:6
-msgid "When to show the notification icon"
-msgstr "Quan mostrar la icona de notificació"
-
-#: ../wizard/main.c:75
-#, c-format
-msgid "Please enter the following PIN code: %s"
-msgstr ""
-
-#: ../wizard/main.c:94
-#, c-format
-msgid "Please enter the following passkey: %s%s"
-msgstr ""
-
-#: ../wizard/main.c:115
-#, c-format
-msgid "Pairing with %s canceled"
-msgstr ""
-
-#: ../wizard/main.c:118
-#, c-format
-msgid "Pairing with %s finished"
-msgstr ""
-
-#: ../wizard/main.c:145
-#, c-format
-msgid "Successfully paired with %s"
-msgstr ""
-
-#: ../wizard/main.c:159
-#, c-format
-msgid "Pairing with %s failed"
-msgstr ""
-
-#: ../wizard/main.c:193
-#, c-format
-msgid "Connecting to %s now ..."
-msgstr ""
-
-#: ../wizard/main.c:264
-msgid "Introduction"
-msgstr "Introducció"
-
-#: ../wizard/main.c:265
-msgid "Welcome to the Bluetooth device setup wizard"
-msgstr ""
-"Us donem la benvingude a l'assistent de configuració de dispositius amb "
-"Bluetooth"
-
-#: ../wizard/main.c:268
-msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer.\n"
-"\n"
-msgstr ""
-
-#: ../wizard/main.c:303
-msgid "Device type"
-msgstr "Tipus de dispositiu"
-
-#: ../wizard/main.c:304
-msgid "Select the type of device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:316
-msgid "Mobile phone"
-msgstr "Telèfon mòbil"
-
-#: ../wizard/main.c:331
-msgid "Any device"
-msgstr "Qualsevol dispositiu"
-
-#: ../wizard/main.c:392
-msgid "Device search"
-msgstr "Cerca de dispositius"
-
-#: ../wizard/main.c:393
-msgid "Select the device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:428
-msgid "Device setup"
-msgstr ""
-
-#: ../wizard/main.c:429
-msgid "Setting up new device"
-msgstr ""
-
-#: ../wizard/main.c:451
-msgid "Summary"
-msgstr "Resum"
-
-#: ../wizard/main.c:452
-msgid "Succesfully configured new device"
-msgstr "S'ha pogut configurar el nou dispositiu amb èxit"
-
-#: ../wizard/main.c:462
-msgid "Bluetooth Device Wizard"
-msgstr ""
-
-#: ../sendto/main.c:93
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:98 ../sendto/main.c:111
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:109
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:119
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:145
-msgid "File Transfer"
-msgstr ""
-
-#: ../sendto/main.c:162
-msgid "Sending files via Bluetooth"
-msgstr ""
-
-#: ../sendto/main.c:174
-msgid "From:"
-msgstr ""
-
-#: ../sendto/main.c:190
-msgid "To:"
-msgstr ""
-
-#: ../sendto/main.c:206
-msgid "Connecting..."
-msgstr ""
-
-#: ../sendto/main.c:254
-#, c-format
-msgid "Sending %s"
-msgstr ""
-
-#: ../sendto/main.c:261 ../sendto/main.c:326
-#, c-format
-msgid "Sending file %d of %d"
-msgstr ""
-
-#: ../sendto/main.c:322
-#, c-format
-msgid "%d KB/s"
-msgstr ""
-
-#: ../sendto/main.c:324
-#, c-format
-msgid "%d B/s"
-msgstr ""
-
-#: ../sendto/main.c:373
-msgid "An unknown error occured"
-msgstr ""
-
-#: ../sendto/main.c:383
-msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr ""
-
-#: ../sendto/main.c:554 ../browse/main.c:38
-msgid "Remote device to use"
-msgstr ""
-
-#: ../analyzer/main.c:166
-msgid "Saving of protocol trace failed"
-msgstr "No s'ha pogut desar la traça de protocol"
-
-#: ../analyzer/main.c:313
-msgid "Loading Trace"
-msgstr "S'està carregant la traça"
-
-#: ../analyzer/main.c:317
-msgid "Live Import"
-msgstr "Importació en viu"
-
-#: ../analyzer/main.c:321
-msgid "Protocol Trace"
-msgstr "Traça de protocol"
-
-#: ../analyzer/main.c:326
-msgid "Unsaved"
-msgstr "Sense desar"
-
-#: ../analyzer/main.c:609
-msgid "Can't live import from"
-msgstr "No es pot fer una importació en viu des de"
-
-#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
-msgid "Bluetooth Analyzer"
-msgstr "Analitzador del Bluetooth"
-
-#: ../analyzer/main.c:856
-msgid "_File"
-msgstr "_Fitxer"
-
-#: ../analyzer/main.c:886
-msgid "Open _Recent"
-msgstr "Obre un fitxer _recent"
-
-#: ../analyzer/main.c:933
-msgid "_Edit"
-msgstr "_Edita"
-
-#: ../analyzer/main.c:942
-msgid "_View"
-msgstr "_Visualitza"
-
-#: ../analyzer/main.c:947
-msgid "_Full Screen"
-msgstr "Pantalla _completa"
-
-#: ../analyzer/main.c:954
-msgid "_Tools"
-msgstr "Ei_nes"
-
-#: ../analyzer/main.c:959
-msgid "_Debug Packet List"
-msgstr ""
-
-#: ../analyzer/main.c:968
-msgid "_Help"
-msgstr "A_juda"
-
-#: ../analyzer/dialog.c:110
-msgid "Bluetooth protocol analyzer"
-msgstr "Analitzador de protocol del Bluetooth"
-
-#: ../analyzer/dialog.c:140
-msgid "All Files"
-msgstr "Tots els fitxers"
-
-#: ../analyzer/dialog.c:145
-msgid "Supported Files"
-msgstr "Fitxers implementats"
-
-#: ../analyzer/dialog.c:154
-msgid "Frontline BTSnoop Files"
-msgstr "Fitxers Frontline BTSnoop"
-
-#: ../analyzer/dialog.c:160
-msgid "Apple Packet Logger Files"
-msgstr "Fitxers de registre de paquets d'Apple"
-
-#: ../analyzer/dialog.c:175
-msgid "By Extension"
-msgstr "Per extensió"
-
-#: ../analyzer/dialog.c:180
-msgid "Frontline BTSnoop Format"
-msgstr "Format Frontline BTSnoop"
-
-#: ../analyzer/dialog.c:185
-msgid "Apple Packet Logger Format"
-msgstr "Format de registre de paquets d'Apple"
-
-#: ../analyzer/dialog.c:249
-msgid "Select File _Type"
-msgstr "Seleccioneu el _tipus de fitxer"
-
-#: ../analyzer/dialog.c:292
-msgid "File Type"
-msgstr "Tipus de fitxer"
-
-#: ../analyzer/dialog.c:297
-msgid "Extensions"
-msgstr "Extensions"
-
-#: ../analyzer/dialog.c:331
-msgid "Save File"
-msgstr "Desa el fitxer"
-
-#: ../analyzer/dialog.c:373
-msgid "Open File"
-msgstr "Obre un fitxer"
-
-#: ../analyzer/dialog.c:455
-msgid "Local connection"
-msgstr "Connexió local"
-
-#: ../analyzer/dialog.c:463
-msgid "Remote connection"
-msgstr "Connexió remota"
-
-#: ../analyzer/dialog.c:497
-msgid "Open Import"
-msgstr "Obre una importació"
-
-#: ../analyzer/dialog.c:537
-msgid "Save the protocol trace before closing?"
-msgstr "Voleu desar la traça de protocol abans de tancar?"
-
-#: ../analyzer/dialog.c:538
-msgid "If you don't save, all information will be permanently lost."
-msgstr "Si no deseu ara, es perdrà tota la informació de manera permanent."
-
-#: ../analyzer/dialog.c:546
-msgid "Close _without Saving"
-msgstr "Tanca se_nse desar"
-
-#: ../analyzer/dialog.c:576
-msgid "There is"
-msgstr "Hi ha"
-
-#: ../analyzer/dialog.c:576
-msgid "There are"
-msgstr "Hi han"
-
-#: ../analyzer/dialog.c:577
-msgid "unsaved protocol trace."
-msgstr "traça de protocol sense desar."
-
-#: ../analyzer/dialog.c:578
-msgid "unsaved protocol traces."
-msgstr "traces de protocol sense desar."
-
-#: ../analyzer/dialog.c:579
-msgid "If you quit now, all information will be lost."
-msgstr "Si sortiu ara, es perdrà tota la informació."
-
-#: ../analyzer/dialog.c:589
-msgid "_Discard Changes"
-msgstr "_Desfés els canvis"
-
-#: ../analyzer/tracer.c:250
-msgid "Type"
-msgstr "Tipus"
-
-#: ../analyzer/tracer.c:258
-msgid "Packet"
-msgstr "Paquet"
-
-#: ../analyzer/tracer.c:267
-msgid "Timestamp"
-msgstr "Marca horària"
-
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
-msgid "Analyze Bluetooth traces"
-msgstr ""
-
-#: ../analyzer/bluetooth-manager.xml.in.h:1
-msgid "Apple Packet Logger File"
-msgstr "Fitxer de registre de paquets d'Apple"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:2
-msgid "Frontline BTSnoop File"
-msgstr "Fitxer Frontline BTSnoop"
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Notification area"
+#~ msgstr "Àrea de notificació"
+
+#~ msgid "Never display icon"
+#~ msgstr "No mostris mai la icona"
+
+#~ msgid "Only display when adapter present"
+#~ msgstr "Mostra-la només quan l'adaptador sigui present"
+
+#~ msgid "Always display icon"
+#~ msgstr "Mostra sempre la icona"
+
+#~ msgid "Adapter"
+#~ msgstr "Adaptador"
+
+#~ msgid ""
+#~ "Display options for the notification icon. Valid options are \"never\", "
+#~ "\"present\" and \"always\"."
+#~ msgstr ""
+#~ "Opcions de visualització de la icona de notificació. Les opcions vàlides "
+#~ "són «never» (mai), «present» (present), i «always» (sempre)."
+
+#~ msgid "Mobile phone"
+#~ msgstr "Telèfon mòbil"
+
+#~ msgid "Any device"
+#~ msgstr "Qualsevol dispositiu"
+
+#~ msgid "Summary"
+#~ msgstr "Resum"
+
+#~ msgid "Saving of protocol trace failed"
+#~ msgstr "No s'ha pogut desar la traça de protocol"
+
+#~ msgid "Loading Trace"
+#~ msgstr "S'està carregant la traça"
+
+#~ msgid "Live Import"
+#~ msgstr "Importació en viu"
+
+#~ msgid "Protocol Trace"
+#~ msgstr "Traça de protocol"
+
+#~ msgid "Unsaved"
+#~ msgstr "Sense desar"
+
+#~ msgid "Can't live import from"
+#~ msgstr "No es pot fer una importació en viu des de"
+
+#~ msgid "_File"
+#~ msgstr "_Fitxer"
+
+#~ msgid "Open _Recent"
+#~ msgstr "Obre un fitxer _recent"
+
+#~ msgid "_Edit"
+#~ msgstr "_Edita"
+
+#~ msgid "_View"
+#~ msgstr "_Visualitza"
+
+#~ msgid "_Full Screen"
+#~ msgstr "Pantalla _completa"
+
+#~ msgid "_Tools"
+#~ msgstr "Ei_nes"
+
+#~ msgid "_Help"
+#~ msgstr "A_juda"
+
+#~ msgid "Bluetooth protocol analyzer"
+#~ msgstr "Analitzador de protocol del Bluetooth"
+
+#~ msgid "All Files"
+#~ msgstr "Tots els fitxers"
+
+#~ msgid "Supported Files"
+#~ msgstr "Fitxers implementats"
+
+#~ msgid "Frontline BTSnoop Files"
+#~ msgstr "Fitxers Frontline BTSnoop"
+
+#~ msgid "Apple Packet Logger Files"
+#~ msgstr "Fitxers de registre de paquets d'Apple"
+
+#~ msgid "By Extension"
+#~ msgstr "Per extensió"
+
+#~ msgid "Frontline BTSnoop Format"
+#~ msgstr "Format Frontline BTSnoop"
+
+#~ msgid "Apple Packet Logger Format"
+#~ msgstr "Format de registre de paquets d'Apple"
+
+#~ msgid "Select File _Type"
+#~ msgstr "Seleccioneu el _tipus de fitxer"
+
+#~ msgid "File Type"
+#~ msgstr "Tipus de fitxer"
+
+#~ msgid "Extensions"
+#~ msgstr "Extensions"
+
+#~ msgid "Save File"
+#~ msgstr "Desa el fitxer"
+
+#~ msgid "Open File"
+#~ msgstr "Obre un fitxer"
+
+#~ msgid "Local connection"
+#~ msgstr "Connexió local"
+
+#~ msgid "Remote connection"
+#~ msgstr "Connexió remota"
+
+#~ msgid "Open Import"
+#~ msgstr "Obre una importació"
+
+#~ msgid "Save the protocol trace before closing?"
+#~ msgstr "Voleu desar la traça de protocol abans de tancar?"
+
+#~ msgid "If you don't save, all information will be permanently lost."
+#~ msgstr "Si no deseu ara, es perdrà tota la informació de manera permanent."
+
+#~ msgid "Close _without Saving"
+#~ msgstr "Tanca se_nse desar"
+
+#~ msgid "There is"
+#~ msgstr "Hi ha"
+
+#~ msgid "There are"
+#~ msgstr "Hi han"
+
+#~ msgid "unsaved protocol trace."
+#~ msgstr "traça de protocol sense desar."
+
+#~ msgid "unsaved protocol traces."
+#~ msgstr "traces de protocol sense desar."
+
+#~ msgid "If you quit now, all information will be lost."
+#~ msgstr "Si sortiu ara, es perdrà tota la informació."
+
+#~ msgid "_Discard Changes"
+#~ msgstr "_Desfés els canvis"
+
+#~ msgid "Packet"
+#~ msgstr "Paquet"
+
+#~ msgid "Timestamp"
+#~ msgstr "Marca horària"
+
+#~ msgid "Apple Packet Logger File"
+#~ msgstr "Fitxer de registre de paquets d'Apple"
+
+#~ msgid "Frontline BTSnoop File"
+#~ msgstr "Fitxer Frontline BTSnoop"
