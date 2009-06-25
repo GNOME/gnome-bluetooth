@@ -11,15 +11,20 @@ INCLUDES =                                      \
 	$(GEOCLUE_CFLAGS)			\
 	$(WARN_CFLAGS)
 
-plugin_LTLIBRARIES = libgbttest.la libgbtgeoclue.la
+plugin_LTLIBRARIES = libgbtgeoclue.la
+
+libgbtgeoclue_la_SOURCES = geoclue.c
+libgbtgeoclue_la_LDFLAGS = -module -avoid-version
+libgbtgeoclue_la_LIBADD = $(PLUGINS_LIBS) $(GEOCLUE_LIBS)
+
+testplugin_LTLIBRARIES = libgbttest.la
+
+testplugindir = $(libdir)/gnome-bluetooth/plugins/
 
 libgbttest_la_SOURCES = test.c
 libgbttest_la_LDFLAGS = -module -avoid-version
 libgbttest_la_LIBADD = $(PLUGINS_LIBS)
 
 # override to _not_ install the test plugins
-install-pluginLTLIBRARIES:
+install-testpluginLTLIBRARIES:
 
-libgbtgeoclue_la_SOURCES = geoclue.c
-libgbtgeoclue_la_LDFLAGS = -module -avoid-version
-libgbtgeoclue_la_LIBADD = $(PLUGINS_LIBS) $(GEOCLUE_LIBS)
