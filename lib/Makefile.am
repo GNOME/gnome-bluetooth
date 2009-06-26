@@ -1,5 +1,8 @@
 SUBDIRS = plugins
 
+EXTRA_DIST = 
+BUILT_GIRSOURCES =
+
 noinst_LTLIBRARIES = libcommon.la
 lib_LTLIBRARIES = libgnome-bluetooth.la
 
@@ -44,6 +47,43 @@ gnomebluetooth_HEADERS =				\
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
 
+BUILT_GIRSOURCES += GnomeBluetooth-2.0.gir
+
+GnomeBluetooth-2.0.gir: $(libgnome_bluetooth_la_SOURCES)
+GnomeBluetooth-2.0.gir: $(gnomebluetooth_HEADERS)
+GnomeBluetooth-2.0.gir: libgnome-bluetooth.la
+GnomeBluetooth-2.0.gir: $(INTROSPECTION_SCANNER)
+	$(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=2.0 \
+		--add-include-path=$(srcdir) --add-include-path=. \
+		--include=GObject-2.0 \
+		--include=Gtk-2.0 \
+		--include=DBus-1.0 \
+		--libtool="$(LIBTOOL)" \
+		--library=gnome-bluetooth \
+		--output $@ \
+		--pkg gobject-2.0 \
+		--pkg gtk+-2.0 \
+		--pkg dbus-glib-1 \
+		-I$(top_srcdir) \
+		$(LIBGNOMEBT_CFLAGS) \
+		$(libgnome_bluetooth_la_SOURCES) \
+		$(gnomebluetooth_HEADERS)
+
+if HAVE_INTROSPECTION
+
+girdir = $(GIRDIR)
+dist_gir_DATA = $(BUILT_GIRSOURCES)
+
+EXTRA_DIST += $(BUILT_GIRSOURCES)
+
+typelibsdir = $(TYPELIBDIR)
+typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+
+%.typelib: %.gir $(G_IR_COMPILER)
+	LD_LIBRARY_PATH=$${LD_LIBRARY_PATH:+$$LD_LIBRARY_PATH:}. $(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=. $(G_IR_COMPILER_OPTS) $< -o $(builddir)/$(@F)
+	
+endif # HAVE_INTROSPECTION
+
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-client-glue.h \
 		bluetooth-agent-glue.h \
@@ -65,7 +105,7 @@ test_deviceselection_LDADD = libgnome-bluetooth.la
 
 test_plugins_LDADD = libcommon.la
 
-EXTRA_DIST = marshal.list \
+EXTRA_DIST += marshal.list \
 		bluetooth-client.xml \
 		bluetooth-agent.xml \
 		obex-agent.xml \
