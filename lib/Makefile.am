@@ -47,26 +47,27 @@ gnomebluetooth_HEADERS =				\
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
 
-BUILT_GIRSOURCES += GnomeBluetooth-2.0.gir
+BUILT_GIRSOURCES += GnomeBluetooth-1.0.gir
 
-GnomeBluetooth-2.0.gir: $(libgnome_bluetooth_la_SOURCES)
-GnomeBluetooth-2.0.gir: $(gnomebluetooth_HEADERS)
-GnomeBluetooth-2.0.gir: libgnome-bluetooth.la
-GnomeBluetooth-2.0.gir: $(INTROSPECTION_SCANNER)
-	$(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=2.0 \
+GnomeBluetooth-1.0.gir: $(libgnome_bluetooth_la_SOURCES)
+GnomeBluetooth-1.0.gir: $(gnomebluetooth_HEADERS)
+GnomeBluetooth-1.0.gir: libgnome-bluetooth.la
+GnomeBluetooth-1.0.gir: $(INTROSPECTION_SCANNER)
+	$(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=1.0 \
 		--add-include-path=$(srcdir) --add-include-path=. \
 		--include=GObject-2.0 \
 		--include=Gtk-2.0 \
-		--include=DBus-1.0 \
+		--include=DBusGLib-1.0 \
+		--include=GModule-2.0 \
 		--libtool="$(LIBTOOL)" \
 		--library=gnome-bluetooth \
 		--output $@ \
 		--pkg gobject-2.0 \
 		--pkg gtk+-2.0 \
 		--pkg dbus-glib-1 \
-		-I$(top_srcdir) \
+		--pkg gmodule-2.0 \
+		-I$(srcdir) \
 		$(LIBGNOMEBT_CFLAGS) \
-		$(libgnome_bluetooth_la_SOURCES) \
 		$(gnomebluetooth_HEADERS)
 
 if HAVE_INTROSPECTION
