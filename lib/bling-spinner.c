@@ -60,7 +60,6 @@ struct _BlingSpinnerPrivate
 /* FORWARDS */
 static void bling_spinner_class_init(BlingSpinnerClass *klass);
 static void bling_spinner_init(BlingSpinner *spinner);
-static void bling_spinner_finalize(GObject *obj);
 static void bling_spinner_set_property(GObject *gobject, guint prop_id, const GValue *value, GParamSpec *pspec);
 static gboolean bling_spinner_expose(GtkWidget *widget, GdkEventExpose *event);
 static void bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen);
