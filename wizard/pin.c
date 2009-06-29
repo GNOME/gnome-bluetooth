@@ -88,7 +88,7 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 			if (g_str_has_prefix (pdata->address, *attr_values) == FALSE)
 				return;
 		} else if (g_str_equal (*attr_names, "name")) {
-			if (g_str_equal (*attr_values, pdata->name) == FALSE)
+			if (g_strcmp0 (*attr_values, pdata->name) != 0)
 				return;
 		} else if (g_str_equal (*attr_names, "pin")) {
 			if (g_str_has_prefix (*attr_values, MAX_DIGITS_PIN_PREFIX) != FALSE) {
@@ -114,6 +114,8 @@ get_pincode_for_device (guint type, const char *address, const char *name, guint
 	char *buf;
 	gsize buf_len;
 	GError *err = NULL;
+
+	g_return_val_if_fail (address != NULL, NULL);
 
 	/* Load the PIN database and split it in lines */
 	if (!g_file_get_contents(PIN_CODE_DB, &buf, &buf_len, NULL)) {
