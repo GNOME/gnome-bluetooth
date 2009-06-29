@@ -149,6 +149,7 @@ AC_OUTPUT(Makefile
 	  docs/Makefile
 	  docs/reference/Makefile
 	  docs/reference/libgnome-bluetooth/Makefile
+	  docs/reference/libgnome-bluetooth/version.xml
 	  po/Makefile.in
 	  help/Makefile
 )
