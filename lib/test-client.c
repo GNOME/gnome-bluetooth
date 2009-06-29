@@ -30,6 +30,7 @@
 #include <dbus/dbus-glib.h>
 
 #include "bluetooth-client.h"
+#include "bluetooth-client-private.h"
 
 static BluetoothClient *client;
 static GtkTreeSelection *selection;

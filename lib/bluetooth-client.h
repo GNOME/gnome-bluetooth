@@ -31,26 +31,6 @@
 
 G_BEGIN_DECLS
 
-typedef enum {
-	BLUETOOTH_COLUMN_PROXY,
-	BLUETOOTH_COLUMN_ADDRESS,
-	BLUETOOTH_COLUMN_ALIAS,
-	BLUETOOTH_COLUMN_NAME,
-	BLUETOOTH_COLUMN_TYPE,
-	BLUETOOTH_COLUMN_ICON,
-	BLUETOOTH_COLUMN_RSSI,
-	BLUETOOTH_COLUMN_DEFAULT,
-	BLUETOOTH_COLUMN_PAIRED,
-	BLUETOOTH_COLUMN_TRUSTED,
-	BLUETOOTH_COLUMN_CONNECTED,
-	BLUETOOTH_COLUMN_DISCOVERING,
-	BLUETOOTH_COLUMN_LEGACYPAIRING,
-	BLUETOOTH_COLUMN_POWERED,
-	BLUETOOTH_COLUMN_SERVICES,
-	BLUETOOTH_COLUMN_UUIDS,
-	_BLUETOOTH_NUM_COLUMNS /*< skip >*/
-} BluetoothColumn;
-
 #define BLUETOOTH_TYPE_CLIENT (bluetooth_client_get_type())
 #define BLUETOOTH_CLIENT(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
 					BLUETOOTH_TYPE_CLIENT, BluetoothClient))
@@ -79,6 +59,7 @@ GType bluetooth_client_get_type(void);
 BluetoothClient *bluetooth_client_new(void);
 
 GtkTreeModel *bluetooth_client_get_model(BluetoothClient *client);
+
 GtkTreeModel *bluetooth_client_get_filter_model(BluetoothClient *client,
 				GtkTreeModelFilterVisibleFunc func,
 				gpointer data, GDestroyNotify destroy);
@@ -88,33 +69,6 @@ GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client,
 GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
 		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
 				gpointer data, GDestroyNotify destroy);
-
-DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client);
-
-gboolean bluetooth_client_start_discovery(BluetoothClient *client);
-gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
-
-typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client, const char *path, gpointer data);
-
-gboolean bluetooth_client_create_device(BluetoothClient *client,
-			const char *address, const char *agent,
-			BluetoothClientCreateDeviceFunc func, gpointer data);
-
-gboolean bluetooth_client_set_trusted(BluetoothClient *client,
-					const char *device, gboolean trusted);
-
-typedef void (*BluetoothClientConnectFunc) (BluetoothClient *client,
-					    gboolean success,
-					    gpointer data);
-
-gboolean bluetooth_client_connect_service(BluetoothClient *client,
-					  const char *device,
-					  BluetoothClientConnectFunc func,
-					  gpointer data);
-gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
-					      const char *device,
-					      BluetoothClientConnectFunc func,
-					      gpointer data);
 
 const gchar *bluetooth_type_to_string(guint type);
 gboolean bluetooth_verify_address (const char *bdaddr);

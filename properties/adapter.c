@@ -32,6 +32,7 @@
 #include <dbus/dbus-glib.h>
 
 #include <bluetooth-client.h>
+#include <bluetooth-client-private.h>
 #include <bluetooth-killswitch.h>
 #include <bluetooth-chooser.h>
 #include <bluetooth-plugin-manager.h>

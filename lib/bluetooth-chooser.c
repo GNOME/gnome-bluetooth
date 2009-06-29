@@ -31,6 +31,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "bluetooth-client.h"
+#include "bluetooth-client-private.h"
 #include "bluetooth-chooser.h"
 #include "gnome-bluetooth-enum-types.h"
 #include "bling-spinner.h"
