@@ -190,7 +190,7 @@ set_search_label (BluetoothChooser *self, gboolean state)
  * @self: a #BluetoothChooser widget
  *
  * Starts a discovery on the default Bluetooth adapter. Note that this will
- * only work if the Search button is visible, as otherwise the user has no
+ * only work if the Search label is visible, as otherwise the user has no
  * visual feedback that the process is on-going.
  *
  * See also: #BluetoothChooser:show-searching
@@ -280,7 +280,7 @@ bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
  * bluetooth_chooser_get_selected_device_type:
  * @self: a #BluetoothChooser widget
  *
- * Return value: the type of the device selected, or '0' if unknown
+ * Return value: the #BluetoothType of the device selected, or '0' if unknown
  */
 BluetoothType
 bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
@@ -302,7 +302,8 @@ bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
  * bluetooth_chooser_get_selected_device_is_connected:
  * @self: a #BluetoothChooser widget
  *
- * Return value: whether the selected device is conncted to this computer, will be %FALSE if no devices are selected
+ * Return value: whether the selected device is conncted to this computer,
+ * will always be %FALSE if no devices are selected
  */
 gboolean
 bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
@@ -1090,11 +1091,12 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	/**
 	 * BluetoothChooser::selected-device-changed:
 	 *
-	 * @bluetoothchooser: a #BluetoothChooser widget
-	 * @arg1: the Bluetooth address for the currently selected device, or %NULL
+	 * @chooser: a #BluetoothChooser widget which received the signal
+	 * @address: the Bluetooth address for the currently selected device, or %NULL
 	 *
 	 * The #BluetoothChooser:selected-device-changed signal is launched when the
-	 * selected device is changed, it will be %NULL is a device was unselected.
+	 * selected device is changed, it will be %NULL if a device was unselected.
+	 *
 	 **/
 	selection_table_signals[SELECTED_DEVICE_CHANGED] =
 		g_signal_new ("selected-device-changed",
