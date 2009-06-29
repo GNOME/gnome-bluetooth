@@ -187,7 +187,7 @@ set_search_label (BluetoothChooser *self, gboolean state)
 
 /**
  * bluetooth_chooser_start_discovery:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
  * Starts a discovery on the default Bluetooth adapter. Note that this will
  * only work if the Search label is visible, as otherwise the user has no
@@ -209,7 +209,7 @@ bluetooth_chooser_start_discovery (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_stop_discovery:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
  * Stops a discovery started with #bluetooth_chooser_start_discovery.
  */
@@ -242,9 +242,10 @@ bluetooth_chooser_get_selected_device_data (BluetoothChooser *self, guint column
 
 /**
  * bluetooth_chooser_get_selected_device:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
- * Return value: the Bluetooth address for the currently selected device, or %NULL
+ * Return value: the Bluetooth address for the currently selected device, or %NULL.
+ *
  */
 gchar *
 bluetooth_chooser_get_selected_device (BluetoothChooser *self)
@@ -254,9 +255,10 @@ bluetooth_chooser_get_selected_device (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_selected_device_name:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
- * Return value: the name for the currently selected device, or %NULL
+ * Return value: the name for the currently selected device, or %NULL.
+ *
  */
 gchar *
 bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
@@ -266,9 +268,10 @@ bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_selected_device_icon:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
- * Return value: the icon name to use to represent the currently selected device, or %NULL
+ * Return value: the icon name to use to represent the currently selected device, or %NULL.
+ *
  */
 gchar *
 bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
@@ -278,9 +281,10 @@ bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_selected_device_type:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
- * Return value: the #BluetoothType of the device selected, or '0' if unknown
+ * Return value: the #BluetoothType of the device selected, or '0' if unknown.
+ *
  */
 BluetoothType
 bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
@@ -300,10 +304,11 @@ bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_selected_device_is_connected:
- * @self: a #BluetoothChooser widget
+ * @self: a #BluetoothChooser widget.
  *
  * Return value: whether the selected device is conncted to this computer,
- * will always be %FALSE if no devices are selected
+ * will always be %FALSE if no devices are selected.
+ *
  */
 gboolean
 bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
@@ -327,6 +332,7 @@ bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
  * @value: An empty #GValue to set.
  *
  * Return value: %TRUE if the @value has been set.
+ *
  */
 gboolean
 bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
@@ -360,8 +366,9 @@ bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 
 /**
  * bluetooth_chooser_set_title:
- * @self: a BluetoothChooser widget
- * @title: the widget header title
+ * @self: a BluetoothChooser widget.
+ * @title: the widget header title.
+ *
  */
 void
 bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
@@ -1107,86 +1114,42 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 			      g_cclosure_marshal_VOID__STRING,
 			      G_TYPE_NONE, 1, G_TYPE_STRING);
 
-	/**
-	 * BluetoothChooser:title:
-	 *
-	 * The widget header title.
-	 **/
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_TITLE, g_param_spec_string ("title",
-									  NULL, NULL, NULL, G_PARAM_WRITABLE));
-	/**
-	 * BluetoothChooser:device-selected:
-	 *
-	 * the Bluetooth address for the currently selected device, or %NULL
-	 **/
+									  "title", "The widget header title.", NULL, G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
-										    NULL, NULL, NULL, G_PARAM_READABLE));
-	/**
-	 * BluetoothChooser:show-pairing:
-	 *
-	 * Whether to show the pairing column in the tree.
-	 **/
+										    "device-selected", "the Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_PAIRING, g_param_spec_boolean ("show-pairing",
-										  NULL, NULL, FALSE, G_PARAM_READWRITE));
-	/**
-	 * BluetoothChooser:show-connected:
-	 *
-	 * Whether to show the connected column in the tree.
-	 **/
+										  "show-pairing", "Whether to show the pairing column in the tree.", FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_CONNECTED, g_param_spec_boolean ("show-connected",
-										    NULL, NULL, FALSE, G_PARAM_READWRITE));
-	/**
-	 * BluetoothChooser:show-searching:
-	 *
-	 * Whether to show the Searching label , this is necessary if you want to programmatically
-	 * start a discovery, using bluetooth_chooser_start_discovery()
-	 **/
+										    "show-connected", "Whether to show the connected column in the tree.", FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_SEARCHING, g_param_spec_boolean ("show-searching",
-										 NULL, NULL, FALSE, G_PARAM_READWRITE));
-	/**
-	 * BluetoothChooser:show-device-type:
-	 *
-	 * Whether to show the device type filter
-	 **/
+										    "show-searching",
+										    "Whether to show the Searching label , this is necessary if you want to programmatically start a discovery, using bluetooth_chooser_start_discovery()",
+										    FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_TYPE, g_param_spec_boolean ("show-device-type",
-										      NULL, NULL, TRUE, G_PARAM_READWRITE));
-	/**
-	 * BluetoothChooser:show-device-category:
-	 *
-	 * Whether to show the device category filter
-	 **/
+										      "show-device-type", "Whether to show the device type filter", TRUE, G_PARAM_READWRITE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_CATEGORY, g_param_spec_boolean ("show-device-category",
-											  NULL, NULL, TRUE, G_PARAM_READWRITE));
-	/**
-	 * BluetoothChooser:device-type-filter:
-	 *
-	 * FIXME
-	 **/
+											  "show-device-category", "Whether to show the device category filter", TRUE, G_PARAM_READWRITE));
 	for (i = 0, max_filter_val = 0 ; i < _BLUETOOTH_TYPE_NUM_TYPES; i++)
 		max_filter_val += 1 << i;
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_TYPE_FILTER, g_param_spec_int ("device-type-filter", NULL, NULL,
-										    1, max_filter_val, 1, G_PARAM_READWRITE));
-	/**
-	 * BluetoothChooser:device-category-filter:
-	 *
-	 * FIXME
-	 **/
+					 PROP_DEVICE_TYPE_FILTER, g_param_spec_int ("device-type-filter",
+					 					    "device-type-filter", "A bitmask of #BluetoothType to show", 1, max_filter_val, 1, G_PARAM_READWRITE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_DEVICE_CATEGORY_FILTER, g_param_spec_int ("device-category-filter", NULL, NULL,
-					 						0, BLUETOOTH_CATEGORY_NUM_CATEGORIES, 0, G_PARAM_READWRITE));
+					 PROP_DEVICE_CATEGORY_FILTER, g_param_spec_enum ("device-category-filter",
+											 "device-category-filter", "The #BluetoothCategory to show", BLUETOOTH_TYPE_CATEGORY, BLUETOOTH_CATEGORY_ALL, G_PARAM_READWRITE));
 }
 
 /**
  * bluetooth_chooser_new:
- * @title: the widget header title
+ * @title: the widget header title, if %NULL, the widget header will be hidden.
  *
  * Return value: A #BluetoothChooser widget
  **/

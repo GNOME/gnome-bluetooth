@@ -63,7 +63,7 @@ void bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title);
 
 char *bluetooth_chooser_get_selected_device (BluetoothChooser *self);
 gboolean bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
-						     const char *info,
+						     const char *field,
 						     GValue *value);
 char *bluetooth_chooser_get_selected_device_name (BluetoothChooser *self);
 char * bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self);
