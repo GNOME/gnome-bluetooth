@@ -139,7 +139,7 @@ create_phone_dialogue (const char *bdaddr)
 			  G_CALLBACK (is_available_changed), NULL);
 	is_available_changed (G_OBJECT (button), NULL, NULL);
 	gtk_widget_show (button);
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), button);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), button);
 
 	return dialog;
 }
@@ -159,7 +159,7 @@ create_dialogue (const char *title)
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
 
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
 
 	return dialog;
 }
@@ -210,7 +210,7 @@ create_wizard_dialogue (void)
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
 	g_signal_connect (G_OBJECT (dialog), "response",
@@ -246,7 +246,7 @@ create_props_dialogue (void)
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), selector);

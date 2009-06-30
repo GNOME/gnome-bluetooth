@@ -171,7 +171,7 @@ bling_spinner_expose (GtkWidget *widget, GdkEventExpose *event)
 	cairo_t *cr;
 
 	/* get cairo context */
-	cr = gdk_cairo_create (widget->window);
+	cr = gdk_cairo_create (gtk_widget_get_window (widget));
 
 	/* set a clip region for the expose event */
 	cairo_rectangle (cr,

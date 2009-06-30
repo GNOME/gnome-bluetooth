@@ -201,7 +201,7 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 	gtk_window_set_default_size (GTK_WINDOW(button->dialog), 480, 400);
 
 	gtk_container_set_border_width (GTK_CONTAINER (button->dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (button->dialog)->vbox), 2);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (button->dialog))), 2);
 
 	/* Create the button->chooser */
 	button->chooser = bluetooth_chooser_new (NULL);
@@ -212,7 +212,7 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 		       0, button->chooser);
 	gtk_container_set_border_width (GTK_CONTAINER(button->chooser), 5);
 	gtk_widget_show (button->chooser);
-	gtk_container_add (GTK_CONTAINER(GTK_DIALOG(button->dialog)->vbox), button->chooser);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (button->dialog))), button->chooser);
 
 	gtk_widget_show (button->dialog);
 }
