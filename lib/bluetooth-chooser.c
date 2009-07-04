@@ -1033,7 +1033,7 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		set_combobox_from_filter (BLUETOOTH_CHOOSER (object));
 		break;
 	case PROP_DEVICE_CATEGORY_FILTER:
-		priv->device_category_filter = g_value_get_int (value);
+		priv->device_category_filter = g_value_get_enum (value);
 		gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_category), priv->device_category_filter);
 		break;
 	default:
