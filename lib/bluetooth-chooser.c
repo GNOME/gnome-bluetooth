@@ -1072,7 +1072,7 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		g_value_set_int (value, priv->device_type_filter);
 		break;
 	case PROP_DEVICE_CATEGORY_FILTER:
-		g_value_set_int (value, priv->device_category_filter);
+		g_value_set_enum (value, priv->device_category_filter);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
