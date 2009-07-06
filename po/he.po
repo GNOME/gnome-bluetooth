@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-09-29 14:31+0200\n"
-"PO-Revision-Date: 2008-07-25 05:02+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
+"POT-Creation-Date: 2009-06-19 10:51+0000\n"
+"PO-Revision-Date: 2009-07-07 02:29+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,133 +18,426 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#~ msgid "Device"
-#~ msgstr "התקן"
-
-#~ msgid "Device has been switched off"
-#~ msgstr "ההתקן כובה"
-
-#~ msgid "Send File..."
-#~ msgstr "שלח קובץ..."
-
-#~ msgid "Services"
-#~ msgstr "שירותים"
-
-#~ msgid "Automatically authorize incoming requests"
-#~ msgstr "אשר בקשות נכנסות באופן אוטומטי"
-
-#~ msgid "Select class of device automatically"
-#~ msgstr "בחר את סוג המכשיר באופן אוטומטי"
-
-#~ msgid "Available services"
-#~ msgstr "שירותים זמינים"
-
-#~ msgid "never"
-#~ msgstr "אף פעם"
-
-#~ msgid "1 minute"
-#~ msgstr "דקה אחת"
-
-#, c-format
-#~ msgid "%g minutes"
-#~ msgstr "%g דקות"
-
-#~ msgid "Mode of operation"
-#~ msgstr "מצב פעולה"
-
-#~ msgid "Other devices can connect"
-#~ msgstr "התקנים אחרים יכולים להתחבר"
-
-#~ msgid "Visible and connectable for other devices"
-#~ msgstr "נראה וניתן לחיבור עבור התקנים אחרים"
-
-#~ msgid "Make adapter invisible after:"
-#~ msgstr "הפוך מתאם לבלתי נראה לאחר:"
-
-#~ msgid "Class of device"
-#~ msgstr "סוג ההתקן"
-
-#~ msgid "Unspecified"
-#~ msgstr "לא מוגדר"
-
-#~ msgid "Desktop workstation"
-#~ msgstr "תחנת עבודה נייחת"
-
-#~ msgid "Laptop computer"
-#~ msgstr "מחשב נייד"
-
-#~ msgid "Search"
-#~ msgstr "חיפוש"
-
-#: ../common/bluetooth-client.c:82
+#: ../lib/bluetooth-client.c:107
 msgid "All types"
 msgstr "כל הסוגים"
 
-#: ../common/bluetooth-client.c:84
+#: ../lib/bluetooth-client.c:109
 msgid "Phone"
 msgstr "טלפון"
 
-#: ../common/bluetooth-client.c:86
+#: ../lib/bluetooth-client.c:111
 msgid "Modem"
 msgstr "מודם"
 
-#: ../common/bluetooth-client.c:88
+#: ../lib/bluetooth-client.c:113
 msgid "Computer"
 msgstr "מחשב"
 
-#: ../common/bluetooth-client.c:90
+#: ../lib/bluetooth-client.c:115
 msgid "Network"
 msgstr "רשת"
 
-#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-client.c:118
 msgid "Headset"
 msgstr "אוזניות"
 
-#: ../common/bluetooth-client.c:94
-msgid "Headphone"
-msgstr ""
+#: ../lib/bluetooth-client.c:120
+msgid "Headphones"
+msgstr "אוזנית"
 
-#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
+#: ../lib/bluetooth-client.c:122
+#| msgid "Bluetooth device"
+msgid "Audio device"
+msgstr "התקן שמע"
+
+#: ../lib/bluetooth-client.c:124
 msgid "Keyboard"
 msgstr "מקלדת"
 
-#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
+#: ../lib/bluetooth-client.c:126
 msgid "Mouse"
 msgstr "עכבר"
 
-#: ../common/bluetooth-client.c:100
+#: ../lib/bluetooth-client.c:128
 msgid "Camera"
 msgstr "מצלמה"
 
-#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
+#: ../lib/bluetooth-client.c:130
 msgid "Printer"
 msgstr "מדפסת"
 
-#: ../common/bluetooth-client.c:104
+#: ../lib/bluetooth-client.c:132
 msgid "Joypad"
 msgstr "התקן משחק"
 
-#: ../common/bluetooth-client.c:106
+#: ../lib/bluetooth-client.c:134
 msgid "Tablet"
 msgstr "משטח שליטה"
 
-#: ../common/bluetooth-client.c:108
+#: ../lib/bluetooth-client.c:136
+#: ../lib/bluetooth-chooser.c:104
+#: ../lib/bluetooth-chooser.c:138
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../common/helper.c:162
-msgid "Select Device"
-msgstr "בחר התקן"
+#: ../lib/bluetooth-chooser-button.c:65
+#: ../lib/bluetooth-chooser-button.c:360
+msgid "Click to select device..."
+msgstr "לחץ כאן לבחירת התקן..."
 
-#: ../common/helper.c:222
-msgid "Choose files to send"
-msgstr "בחר קבצים לשליחה"
+#: ../lib/bluetooth-chooser.c:94
+#| msgid "All types"
+msgid "All categories"
+msgstr "כל הקטגוריות"
 
-#: ../applet/main.c:123
+#: ../lib/bluetooth-chooser.c:96
+msgid "Paired"
+msgstr "צימוד"
+
+#: ../lib/bluetooth-chooser.c:98
+msgid "Trusted"
+msgstr "מהימן"
+
+#: ../lib/bluetooth-chooser.c:100
+msgid "Not paired or trusted"
+msgstr "לא בצימוד ולא מהימן"
+
+#: ../lib/bluetooth-chooser.c:102
+msgid "Paired or trusted"
+msgstr "בצימוד או מהימן"
+
+#: ../lib/bluetooth-chooser.c:179
+msgid "No adapters available"
+msgstr "אין מתאמים זמינים"
+
+#: ../lib/bluetooth-chooser.c:183
+#: ../lib/bluetooth-chooser.c:803
+#| msgid "Pairing request for device:"
+msgid "Searching for devices..."
+msgstr "מחפש אחר התקנים..."
+
+#: ../lib/bluetooth-chooser.c:674
+msgid "Device"
+msgstr "התקן"
+
+#: ../lib/bluetooth-chooser.c:710
+msgid "Type"
+msgstr "סוג"
+
+#. The filters
+#: ../lib/bluetooth-chooser.c:826
+msgid "Show Only Bluetooth Devices With..."
+msgstr "הצג התקני Bluetooth עם..."
+
+#. The device category filter
+#: ../lib/bluetooth-chooser.c:846
+msgid "Device _category:"
+msgstr "_קטגוריית התקן:"
+
+#: ../lib/bluetooth-chooser.c:861
+msgid "Select the device category to filter above list"
+msgstr "בחר את קטגוריית ההתקן כדי לסנן את הרשימה"
+
+#. The device type filter
+#: ../lib/bluetooth-chooser.c:875
+#| msgid "Device"
+msgid "Device _type:"
+msgstr "_סוג ההתקן:"
+
+#: ../lib/bluetooth-chooser.c:896
+msgid "Select the device type to filter above list"
+msgstr "בחר את סוג ההתקן כדי לסנן את הרשימה שלהלן"
+
+#: ../lib/bluetooth-chooser.c:902
+msgid "Input devices (mice, keyboards, ...)"
+msgstr "התקני קלט (עכברים, מקלדות, ...)"
+
+#: ../lib/bluetooth-chooser.c:906
+msgid "Headphones, headsets and other audio devices"
+msgstr "אוזניות, ערכות דיבור והתקני שמע אחרים"
+
+#: ../lib/plugins/geoclue.c:161
+msgid "Use this GPS device for Geolocation services"
+msgstr "השתמש בהתקן GPS זה עבור שרותי איתור גאוגרפי (Geolocation)"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "התחבר לאינטרנט באמצעות הטלפון הסלולרי שלך (תוסף בדיקה)"
+
+#: ../applet/main.c:111
+#| msgid "Select Device"
+msgid "Select Device to Browse"
+msgstr "בחר התקן לעיון"
+
+#: ../applet/main.c:115
+msgid "_Browse"
+msgstr "_עיון"
+
+#: ../applet/main.c:125
+#| msgid "Remote device to use"
+msgid "Select device to browse"
+msgstr "בחר התקן לעיון"
+
+#: ../applet/main.c:280
+#| msgid "Bluetooth"
+msgid "Bluetooth: Unknown"
+msgstr "‏Bluetooth: לא ידוע"
+
+#: ../applet/main.c:282
+#: ../properties/properties-adapter-off.ui.h:1
+#| msgid "Bluetooth"
+msgid "Turn On Bluetooth"
+msgstr "הפעלת ה־Bluetooth"
+
+#: ../applet/main.c:283
+#| msgid "Bluetooth"
+msgid "Bluetooth: Off"
+msgstr "‏Bluetooth: כבוי"
+
+#: ../applet/main.c:286
+#| msgid "Bluetooth"
+msgid "Turn Off Bluetooth"
+msgstr "כבה את ה־Bluetooth"
+
+#: ../applet/main.c:287
+#| msgid "Bluetooth"
+msgid "Bluetooth: On"
+msgstr "‏Bluetooth: פעיל"
+
+#: ../applet/main.c:399
+#| msgid "Connecting..."
+msgid "Disconnecting..."
+msgstr "מתנתק..."
+
+#: ../applet/main.c:402
+#: ../sendto/main.c:212
+msgid "Connecting..."
+msgstr "מתחבר..."
+
+#: ../applet/main.c:405
+#: ../applet/main.c:746
+#| msgid "Connecting..."
+msgid "Connected"
+msgstr "מחובר"
+
+#: ../applet/main.c:408
+#: ../applet/main.c:746
+msgid "Disconnected"
+msgstr "מנותק"
+
+#: ../applet/main.c:760
+#: ../applet/main.c:811
+#: ../properties/adapter.c:445
+msgid "Disconnect"
+msgstr "התנתק"
+
+#: ../applet/main.c:760
+#: ../applet/main.c:811
+#| msgid "Connecting..."
+msgid "Connect"
+msgstr "התחבר"
+
+#: ../applet/main.c:772
+#| msgid "Send File..."
+msgid "Send files..."
+msgstr "שליחת קבצים..."
+
+#: ../applet/main.c:782
+msgid "Browse files..."
+msgstr "עיון בקבצים..."
+
+#: ../applet/main.c:793
+msgid "Open Keyboard Preferences..."
+msgstr "פתיחת העדפות המקלדת..."
+
+#: ../applet/main.c:801
+#| msgid "Bluetooth Preferences"
+msgid "Open Mouse Preferences..."
+msgstr "פתיחת העדפות המקלדת..."
+
+#: ../applet/main.c:924
+msgid "Debug"
+msgstr "ניפוי שגיאות"
+
+#. Parse command-line options
+#: ../applet/main.c:944
+#| msgid "Bluetooth Applet"
+msgid "- Bluetooth applet"
+msgstr "- יישומון Bluetooth"
+
+#: ../applet/main.c:949
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+
+#: ../applet/main.c:965
+msgid "Bluetooth Applet"
+msgstr "יישומון Bluetooth"
+
+#: ../applet/notify.c:148
+#| msgid "Bluetooth Analyzer"
+msgid "Bluetooth: Enabled"
+msgstr "‏Bluetooth: מופעל"
+
+#: ../applet/notify.c:148
+#| msgid "Bluetooth Analyzer"
+msgid "Bluetooth: Disabled"
+msgstr "‏Bluetooth: מכובה"
+
+#: ../applet/agent.c:251
+#: ../applet/agent.c:332
+#, c-format
+msgid "Device '%s' wants to pair with this computer"
+msgstr "ההתקן '%s' מעוניין בצימוד עם מחשב זה"
+
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the passkey mentioned on device %s."
+msgstr "אנא הזן את הסיסמה כפי שצוינה על ההתקן %s."
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the passkey '%s' matches the one on device %s."
+msgstr "נא לוודא שהסיסמה '%s' תואמת לזו שבהתקן %s."
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+#| msgid "Grant access to %s?"
+msgid "Grant access to '%s'"
+msgstr "מתן גישה אל '%s'"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "ההתקן %s מעוניין לגשת אל השירות '%s'."
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:496
+#: ../applet/agent.c:531
+#: ../applet/agent.c:570
+#, c-format
+#| msgid "Pairing request for device:"
+msgid "Pairing request for '%s'"
+msgstr "בקשת צימוד עבור '%s'"
+
+#: ../applet/agent.c:500
+#: ../applet/agent.c:535
+#: ../applet/agent.c:574
+#: ../applet/agent.c:607
+#: ../applet/agent.c:645
+msgid "Bluetooth device"
+msgstr "התקן Bluetooth"
+
+#: ../applet/agent.c:501
+#: ../applet/agent.c:536
+#: ../applet/agent.c:575
+msgid "Enter passkey"
+msgstr "הזן מילת צופן"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:602
+#, c-format
+msgid "Pairing confirmation for '%s'"
+msgstr "אימות צימוד עבור '%s'"
+
+#: ../applet/agent.c:608
+#| msgid "Enter passkey"
+msgid "Check passkey"
+msgstr "בדיקת סיסמה"
+
+#: ../applet/agent.c:641
+#, c-format
+#| msgid "Authorization request for %s"
+msgid "Authorization request from '%s'"
+msgstr "בקשת אימות מ־'%s'"
+
+#: ../applet/agent.c:646
+msgid "Check authorization"
+msgstr "בדוק אימות"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "מנהל Bluetooth"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "מנהל יישומוני Bluetooth"
+
+#: ../applet/popup-menu.ui.h:1
+#| msgid "Bluetooth device"
+msgid "Bluetooth: Checking"
+msgstr "‏Bluetooth: בודק"
+
+#: ../applet/popup-menu.ui.h:2
+msgid "Browse files on device..."
+msgstr "עיון בקבצים שבהתקן..."
+
+#: ../applet/popup-menu.ui.h:3
+#| msgid "Device"
+msgid "Devices"
+msgstr "התקנים"
+
+#: ../applet/popup-menu.ui.h:4
+#| msgid "Bluetooth Preferences"
+msgid "Preferences..."
+msgstr "העדפות..."
+
+#: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "יציאה"
+
+#: ../applet/popup-menu.ui.h:6
+msgid "Send files to device..."
+msgstr "שלח קבצים להתקן..."
+
+#: ../applet/popup-menu.ui.h:7
+#: ../properties/adapter.c:436
+msgid "Setup new device..."
+msgstr "הגדרת התקן חדש..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+#| msgid "Always grant access"
+msgid "_Always grant access"
+msgstr "_תמיד לאשר גישה"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "_אישור"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "_דחייה"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "_אינו תואם"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "_תואם"
+
+#: ../applet/passkey-dialogue.ui.h:1
+#| msgid "Show input"
+msgid "_Show input"
+msgstr "_הצג קלט"
+
+#: ../properties/main.c:115
 msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "מנהל בלוטות' לשולחן העבודה GNOME"
+msgstr "מנהל Bluetooth לשולחן העבודה GNOME"
 
-#: ../applet/main.c:126 ../analyzer/dialog.c:128
+#: ../properties/main.c:118
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -154,596 +447,511 @@ msgstr ""
 "  Marcel Holtmann https://launchpad.net/~holtmann\n"
 "  Yaron https://launchpad.net/~sh-yaron"
 
-#: ../applet/main.c:177 ../applet/main.c:232
-msgid "Setup new device..."
-msgstr ""
+#: ../properties/main.c:120
+#| msgid "Bluetooth Manager"
+msgid "GNOME Bluetooth home page"
+msgstr "דף הבית של GNOME Bluetooth"
 
-#: ../applet/main.c:242
-msgid "Send files to device..."
-msgstr ""
-
-#: ../applet/main.c:250
-msgid "Browse files on device..."
-msgstr ""
-
-#: ../applet/main.c:373
-msgid "Bluetooth Applet"
-msgstr "יישומון בלוטות'"
-
-#: ../applet/agent.c:258
-msgid "Authentication request"
-msgstr "בקשה לאימות"
-
-#: ../applet/agent.c:286 ../applet/agent.c:395
-msgid "Pairing request for device:"
-msgstr "בקשת זוגיות להתקן:"
-
-#: ../applet/agent.c:303
-msgid "Enter passkey for authentication:"
-msgstr "הכנס מילת צופן לאימות:"
-
-#: ../applet/agent.c:327
-msgid "Show input"
-msgstr "הצג קלט"
-
-#: ../applet/agent.c:369
-msgid "Confirmation request"
-msgstr "בקשת אישור"
-
-#: ../applet/agent.c:412
-msgid "Confirm value for authentication:"
-msgstr "ערך אישור לאימות:"
-
-#: ../applet/agent.c:456
-msgid "Authorization request"
-msgstr "בקשת אימות"
-
-#: ../applet/agent.c:482
-msgid "Authorization request for device:"
-msgstr "בקשת אימות להתקן:"
-
-#: ../applet/agent.c:503
-#, c-format
-msgid "Grant access to %s?"
-msgstr "אפשר גישה אל %s?"
-
-#: ../applet/agent.c:512
-msgid "Always grant access"
-msgstr "אפשר גישה תמידית"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
-#, c-format
-msgid "Pairing request for %s"
-msgstr ""
-
-#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
-#: ../applet/agent.c:736 ../applet/agent.c:781
-msgid "Bluetooth device"
-msgstr "התקן בלוטות'"
-
-#: ../applet/agent.c:591
-msgid "Enter PIN code"
-msgstr ""
-
-#: ../applet/agent.c:638 ../applet/agent.c:688
-msgid "Enter passkey"
-msgstr "הזן מילת צופן"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:732
-#, c-format
-msgid "Confirmation request for %s"
-msgstr ""
-
-#: ../applet/agent.c:737
-msgid "Confirm passkey"
-msgstr ""
-
-#: ../applet/agent.c:777
-#, c-format
-msgid "Authorization request for %s"
-msgstr "בקשת אימות עבור %s"
-
-#: ../applet/agent.c:782
-msgid "Check authorization"
-msgstr "בדוק אימות"
-
-#: ../applet/bluetooth-applet.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "מנהל בלוטות'"
-
-#: ../applet/bluetooth-applet.desktop.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "מנהל יישומוני בלוטות'"
-
-#: ../properties/main.c:63
+#: ../properties/main.c:133
 msgid "Bluetooth Preferences"
-msgstr "העדפות בלוטות'"
+msgstr "העדפות Bluetooth"
 
-#: ../properties/main.c:94
-msgid "General"
-msgstr "כללי"
+#: ../properties/main.c:145
+#| msgid "Bluetooth device"
+msgid "_Show Bluetooth icon"
+msgstr "_הצג את הסמל של Bluetooth"
 
-#: ../properties/main.c:131
+#: ../properties/main.c:294
+msgid "Output a list of currently known devices"
+msgstr "הצגת רשימת כל ההתקנים המוכרים"
+
+#: ../properties/main.c:331
 msgid "Bluetooth Properties"
-msgstr ""
+msgstr "מאפייני Bluetooth"
 
-#: ../properties/general.c:172
-msgid "File transfer"
-msgstr "העברת קבצים"
-
-#: ../properties/general.c:176
-msgid "Receive files from remote devices"
-msgstr "קבל קבצים מהתקנים מרוחקים"
-
-#: ../properties/general.c:184
-msgid "Share files from public folder"
-msgstr "שתף קבצים מתיקיה ציבורית"
-
-#: ../properties/general.c:195
-msgid "Notification area"
-msgstr "איזור התראה"
-
-#: ../properties/general.c:199
-msgid "Never display icon"
-msgstr "אל תציג סמל לעולם"
-
-#: ../properties/general.c:206
-msgid "Only display when adapter present"
-msgstr "הצג רק כאשר קיים מתאם"
-
-#: ../properties/general.c:213
-msgid "Always display icon"
-msgstr "הצג סמל תמיד"
-
-#: ../properties/adapter.c:99
-msgid "Adapter"
-msgstr "מתאם"
-
-#: ../properties/adapter.c:174
-msgid "always"
-msgstr ""
-
-#: ../properties/adapter.c:176
-msgid "hidden"
-msgstr ""
-
-#: ../properties/adapter.c:179
+#: ../properties/adapter.c:178
 #, c-format
-msgid "%'g minute"
-msgid_plural "%'g minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Remove '%s' from list of known devices?"
+msgstr "להסיר את '%s' מרשימת ההתקנים המוכרים?"
 
-#: ../properties/adapter.c:477
-msgid "Visibility setting"
-msgstr ""
+#: ../properties/adapter.c:180
+msgid "If you delete the device, you have to set it up again before next use."
+msgstr "אם תמחק התקן זה, תאלץ להגדיר אותו שוב לפני השימוש הבא."
 
-#: ../properties/adapter.c:490
-msgid "Hidden"
-msgstr ""
+#. The discoverable checkbox
+#: ../properties/adapter.c:351
+msgid "_Discoverable"
+msgstr "_גלוי"
 
-#: ../properties/adapter.c:502
-msgid "Always visible"
-msgstr ""
-
-#: ../properties/adapter.c:514
-msgid "Temporary visible"
-msgstr ""
-
-#: ../properties/adapter.c:566
+#: ../properties/adapter.c:374
 msgid "Friendly name"
-msgstr ""
+msgstr "שם ידידותי"
 
-#: ../properties/adapter.c:587
+#: ../properties/adapter.c:404
 msgid "Known devices"
-msgstr ""
+msgstr "התקנים מוכרים"
 
-#: ../properties/dialog.c:41
-msgid "Remove from list of known devices?"
-msgstr ""
+#: ../properties/adapter.c:459
+msgid "Delete"
+msgstr "מחק"
 
-#: ../properties/dialog.c:42
-msgid ""
-"If you delete the device, you have to set it up again before next use."
-msgstr ""
+#: ../properties/adapter.c:734
+#| msgid "Bluetooth device"
+msgid "Bluetooth is disabled"
+msgstr "ה־Bluetooth מכובה."
 
-#: ../properties/bluetooth-properties.desktop.in.h:1
+#: ../properties/adapter.c:770
+#| msgid "Bluetooth Manager applet"
+msgid "No Bluetooth adapters present"
+msgstr "לא קיימים מתאמי Bluetooth"
+
+#: ../properties/properties-no-adapter.ui.h:1
+msgid "Your computer does not have any Bluetooth adapters plugged in."
+msgstr "אין כל מתאמי Bluetooth המחוברים למחשבך."
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:1
 msgid "Bluetooth"
-msgstr "בלוטות'"
+msgstr "Bluetooth"
 
-#: ../properties/bluetooth-properties.desktop.in.h:2
+#: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
-msgstr "הגדר את הגדרות הבלוטות'"
+msgstr "עורך את הגדרות ה־Bluetooth"
 
 #: ../properties/bluetooth-manager.schemas.in.h:1
-msgid ""
-"Display options for the notification icon. Valid options are \"never\", "
-"\"present\" and \"always\"."
-msgstr ""
-"הצג אפשרויות לסמל ההתראה. האפשרויות הן \"never\", \"present\" ו-\"always\"."
+#| msgid "When to show the notification icon"
+msgid "Whether to show the notification icon"
+msgstr "Whether to show the notification icon"
 
 #: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "If Bluetooth file sharing is enabled"
-msgstr "במידה ושיתוף הקבצים באמצעות בלוטות' זמין"
+#| msgid "When to show the notification icon"
+msgid "Whether to show the notification icon."
+msgstr "Whether to show the notification icon."
 
-#: ../properties/bluetooth-manager.schemas.in.h:3
-msgid "If receiving of remote files via Bluetooth is enabled"
-msgstr "האם לקבל קבצים מרוחקים במידה והבלוטות' פעיל"
-
-#: ../properties/bluetooth-manager.schemas.in.h:4
-msgid ""
-"If the service for receiving remote files via Bluetooth is enabled or not."
-msgstr "האם השירות לקבלת קבצים דרך בלוטות' פעיל או לא."
-
-#: ../properties/bluetooth-manager.schemas.in.h:5
-msgid "If the service for sharing files via Bluetooth is enabled or not."
-msgstr "האם השירות לשיתוף קבצים דרך בלוטות' פעיל או לא."
-
-#: ../properties/bluetooth-manager.schemas.in.h:6
-msgid "When to show the notification icon"
-msgstr "מתי להראות את סמל ההתראה"
-
-#: ../wizard/main.c:75
+#: ../properties/gconf-bridge.c:1223
 #, c-format
-msgid "Please enter the following PIN code: %s"
-msgstr ""
+msgid "GConf error: %s"
+msgstr "שגיאת GConf: ‏%s"
 
-#: ../wizard/main.c:94
+#: ../properties/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "כל השגיאות הנוספות מוצגות במסוף בלבד."
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:206
+#: ../wizard/main.c:327
 #, c-format
-msgid "Please enter the following passkey: %s%s"
-msgstr ""
+msgid "Pairing with '%s' cancelled"
+msgstr "הצימוד עם '%s' בוטל"
 
-#: ../wizard/main.c:115
+#: ../wizard/main.c:246
 #, c-format
-msgid "Pairing with %s canceled"
-msgstr ""
+msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgstr "נא לוודא שהסיסמה המופיעה ב־'%s' תואמת לזו."
 
-#: ../wizard/main.c:118
+#: ../wizard/main.c:300
+msgid "Please enter the following passkey:"
+msgstr "נא להזין את הסיסמה הבאה:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Setting up 'Sony Bluetooth Headset' failed
+#.
+#: ../wizard/main.c:382
 #, c-format
-msgid "Pairing with %s finished"
-msgstr ""
+msgid "Setting up '%s' failed"
+msgstr "הגדרת '%s' נכשלה"
 
-#: ../wizard/main.c:145
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Connecting to 'Sony Bluetooth Headset' now...
+#.
+#: ../wizard/main.c:513
 #, c-format
-msgid "Successfully paired with %s"
-msgstr ""
+#| msgid "Connecting..."
+msgid "Connecting to '%s'..."
+msgstr "מתחבר אל '%s'..."
 
-#: ../wizard/main.c:159
+#: ../wizard/main.c:548
 #, c-format
-msgid "Pairing with %s failed"
-msgstr ""
+msgid "Please enter the following passkey on '%s':"
+msgstr "נא להזין את הסיסמה הבאה ב־'%s':"
 
-#: ../wizard/main.c:193
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+#.
+#: ../wizard/main.c:568
 #, c-format
-msgid "Connecting to %s now ..."
-msgstr ""
+msgid "Please wait while finishing setup on '%s'..."
+msgstr "אנא המתן בעת סיום תהליך ההגדרה של '%s'..."
 
-#: ../wizard/main.c:264
-msgid "Introduction"
-msgstr ""
+#: ../wizard/main.c:581
+#, c-format
+msgid "Successfully configured '%s'"
+msgstr "‏'%s' הוגדר בהצלחה"
 
-#: ../wizard/main.c:265
-msgid "Welcome to the Bluetooth device setup wizard"
-msgstr ""
+#: ../wizard/wizard.ui.h:1
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (רב ערכות הדיבור, העכברים והתקני ה־GPS)"
 
-#: ../wizard/main.c:268
-msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer.\n"
-"\n"
-msgstr ""
+#: ../wizard/wizard.ui.h:2
+msgid "'1111'"
+msgstr "'1111'"
 
-#: ../wizard/main.c:303
-msgid "Device type"
-msgstr ""
+#: ../wizard/wizard.ui.h:3
+msgid "'1234'"
+msgstr "'1234'"
 
-#: ../wizard/main.c:304
-msgid "Select the type of device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:316
-msgid "Mobile phone"
-msgstr ""
-
-#: ../wizard/main.c:331
-msgid "Any device"
-msgstr ""
-
-#: ../wizard/main.c:392
-msgid "Device search"
-msgstr ""
-
-#: ../wizard/main.c:393
-msgid "Select the device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:428
-msgid "Device setup"
-msgstr ""
-
-#: ../wizard/main.c:429
-msgid "Setting up new device"
-msgstr ""
-
-#: ../wizard/main.c:451
-msgid "Summary"
-msgstr ""
-
-#: ../wizard/main.c:452
-msgid "Succesfully configured new device"
-msgstr ""
-
-#: ../wizard/main.c:462
+#: ../wizard/wizard.ui.h:4
 msgid "Bluetooth Device Wizard"
-msgstr ""
+msgstr "אשף התקני ה־Bluetooth"
 
-#: ../sendto/main.c:93
+#: ../wizard/wizard.ui.h:5
+msgid "Custom passkey code:"
+msgstr "סיסמה מותאמת אישית:"
+
+#: ../wizard/wizard.ui.h:6
+#| msgid "Device"
+msgid "Device Setup"
+msgstr "הגדרת התקן"
+
+#: ../wizard/wizard.ui.h:7
+msgid "Device Setup Failed"
+msgstr "הגדרת ההתקן נכשלה"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device search"
+msgstr "חיפוש התקנים"
+
+#: ../wizard/wizard.ui.h:9
+msgid "Does not match"
+msgstr "אינו תואם"
+
+#: ../wizard/wizard.ui.h:10
+msgid "Finishing Device Setup"
+msgstr "סיום הגדרת ההתקן"
+
+#: ../wizard/wizard.ui.h:11
+#| msgid "Enter passkey"
+msgid "Fixed Passkey"
+msgstr "סיסמה קבועה"
+
+#: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "הקדמה"
+
+#: ../wizard/wizard.ui.h:13
+msgid "Matches"
+msgstr "תואם"
+
+#: ../wizard/wizard.ui.h:14
+msgid "Passkey Options"
+msgstr "אפשרויות סיסמה"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Passkey _options..."
+msgstr "_אפשרויות סיסמה..."
+
+#: ../wizard/wizard.ui.h:16
+msgid "Select the additional services you want to use with your device:"
+msgstr "בחר את השירותים הנוספים בהם תרצה להשתמש עם ההתקן שלך:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "Select the device you want to setup"
+msgstr "בחר את ההתקן אותו תרצה להגדיר"
+
+#: ../wizard/wizard.ui.h:18
+msgid "Setup Completed"
+msgstr "ההגדרה הושלמה"
+
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Finished"
+msgstr "ההגדרה הסתיימה"
+
+#: ../wizard/wizard.ui.h:20
+msgid "The device will need to be within 10 meters of your computer, and be &#xAB;discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the device's manual if in doubt."
+msgstr "על ההתקן להיות בטווח של עד עשרה מטרים מהמחשב, ועליו להיות &#xAB;גלוי&#xBB; (לעיתים נקרא &#xAB;נראה&#xBB;). יש לעיין במדריך השימוש בהתקן למען הסר ספק."
+
+#: ../wizard/wizard.ui.h:21
+msgid "The device wizard will walk you through the process of configuring Bluetooth enabled devices for use with this computer."
+msgstr "אשף ההתקנים ילווה אותך במהלך הגדרת ההתקנים תומכי ה־Bluetooth שלך לצורך שימוש עם מחשב זה."
+
+#: ../wizard/wizard.ui.h:22
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr "ברוך הבא אל אשף הגדרת התקני Bluetooth"
+
+#: ../wizard/wizard.ui.h:23
+msgid "_Automatic passkey selection"
+msgstr "בחירת סיסמה _אוטומטית"
+
+#: ../wizard/wizard.ui.h:24
+msgid "_Restart Setup"
+msgstr "הגדרה _מחדש"
+
+#: ../sendto/main.c:98
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%'d שניות"
+msgstr[1] "%'d שניות"
 
-#: ../sendto/main.c:98 ../sendto/main.c:111
+#: ../sendto/main.c:103
+#: ../sendto/main.c:116
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%'d דקות"
+msgstr[1] "%'d דקות"
 
-#: ../sendto/main.c:109
+#: ../sendto/main.c:114
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%'d שעות"
+msgstr[1] "%'d שעות"
 
-#: ../sendto/main.c:119
+#: ../sendto/main.c:124
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "בערך %'d שעות"
+msgstr[1] "בערך %'d שעות"
 
-#: ../sendto/main.c:145
+#: ../sendto/main.c:150
 msgid "File Transfer"
 msgstr "העברת קבצים"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:168
 msgid "Sending files via Bluetooth"
-msgstr ""
+msgstr "שולח קבצים בעזרת Bluetooth"
 
-#: ../sendto/main.c:174
+#: ../sendto/main.c:180
 msgid "From:"
-msgstr ""
+msgstr "מ:"
 
-#: ../sendto/main.c:190
+#: ../sendto/main.c:196
 msgid "To:"
-msgstr ""
+msgstr "אל:"
 
-#: ../sendto/main.c:206
-msgid "Connecting..."
-msgstr "מתחבר..."
-
-#: ../sendto/main.c:254
-#, c-format
-msgid "Sending %s"
-msgstr ""
-
-#: ../sendto/main.c:261 ../sendto/main.c:326
-#, c-format
-msgid "Sending file %d of %d"
-msgstr ""
-
-#: ../sendto/main.c:322
-#, c-format
-msgid "%d KB/s"
-msgstr ""
-
-#: ../sendto/main.c:324
-#, c-format
-msgid "%d B/s"
-msgstr ""
-
-#: ../sendto/main.c:373
+#: ../sendto/main.c:242
 msgid "An unknown error occured"
 msgstr "ארעה שגיאה לא ידועה"
 
-#: ../sendto/main.c:383
-msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr ""
+#: ../sendto/main.c:252
+msgid "Make sure that remote device is switched on and that it accepts Bluetooth connections"
+msgstr "אנא ודא כי ההתקן המרוחק פועל ושהוא מקבל חיבורי Bluetooth"
 
-#: ../sendto/main.c:554 ../browse/main.c:38
+#: ../sendto/main.c:336
+#, c-format
+msgid "Sending %s"
+msgstr "שולח את %s"
+
+#: ../sendto/main.c:343
+#: ../sendto/main.c:405
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "שולח קובץ %d מתוך %d"
+
+#: ../sendto/main.c:401
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:403
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:497
+#| msgid "Select Device"
+msgid "Select Device to Send To"
+msgstr "בחר התקן לשליחה"
+
+#: ../sendto/main.c:501
+msgid "Send _To"
+msgstr "שלח _אל"
+
+#: ../sendto/main.c:542
+msgid "Choose files to send"
+msgstr "בחר קבצים לשליחה"
+
+#: ../sendto/main.c:571
 msgid "Remote device to use"
 msgstr "התקן מרוחק לשימוש"
 
-#: ../analyzer/main.c:166
-msgid "Saving of protocol trace failed"
-msgstr "שמירת מעקב הפרוטוקול נכשלה"
+#: ../sendto/main.c:573
+#| msgid "Remote device to use"
+msgid "Remote device's name"
+msgstr "שם ההתקן המרוחק"
 
-#: ../analyzer/main.c:313
-msgid "Loading Trace"
-msgstr "טוען מעקב"
+#~ msgid "Device has been switched off"
+#~ msgstr "ההתקן כובה"
+#~ msgid "Services"
+#~ msgstr "שירותים"
+#~ msgid "Automatically authorize incoming requests"
+#~ msgstr "אשר בקשות נכנסות באופן אוטומטי"
+#~ msgid "Select class of device automatically"
+#~ msgstr "בחר את סוג המכשיר באופן אוטומטי"
+#~ msgid "Available services"
+#~ msgstr "שירותים זמינים"
+#~ msgid "never"
+#~ msgstr "אף פעם"
+#~ msgid "1 minute"
+#~ msgstr "דקה אחת"
+#~ msgid "%g minutes"
+#~ msgstr "%g דקות"
+#~ msgid "Mode of operation"
+#~ msgstr "מצב פעולה"
+#~ msgid "Other devices can connect"
+#~ msgstr "התקנים אחרים יכולים להתחבר"
+#~ msgid "Visible and connectable for other devices"
+#~ msgstr "נראה וניתן לחיבור עבור התקנים אחרים"
+#~ msgid "Make adapter invisible after:"
+#~ msgstr "הפוך מתאם לבלתי נראה לאחר:"
+#~ msgid "Class of device"
+#~ msgstr "סוג ההתקן"
+#~ msgid "Unspecified"
+#~ msgstr "לא מוגדר"
+#~ msgid "Desktop workstation"
+#~ msgstr "תחנת עבודה נייחת"
+#~ msgid "Laptop computer"
+#~ msgstr "מחשב נייד"
+#~ msgid "Search"
+#~ msgstr "חיפוש"
+#~ msgid "Authentication request"
+#~ msgstr "בקשה לאימות"
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "הכנס מילת צופן לאימות:"
+#~ msgid "Confirmation request"
+#~ msgstr "בקשת אישור"
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "ערך אישור לאימות:"
+#~ msgid "Authorization request"
+#~ msgstr "בקשת אימות"
+#~ msgid "Authorization request for device:"
+#~ msgstr "בקשת אימות להתקן:"
+#~ msgid "General"
+#~ msgstr "כללי"
+#~ msgid "File transfer"
+#~ msgstr "העברת קבצים"
+#~ msgid "Receive files from remote devices"
+#~ msgstr "קבל קבצים מהתקנים מרוחקים"
+#~ msgid "Share files from public folder"
+#~ msgstr "שתף קבצים מתיקיה ציבורית"
+#~ msgid "Notification area"
+#~ msgstr "איזור התראה"
+#~ msgid "Never display icon"
+#~ msgstr "אל תציג סמל לעולם"
+#~ msgid "Only display when adapter present"
+#~ msgstr "הצג רק כאשר קיים מתאם"
+#~ msgid "Always display icon"
+#~ msgstr "הצג סמל תמיד"
+#~ msgid "Adapter"
+#~ msgstr "מתאם"
+#~ msgid ""
+#~ "Display options for the notification icon. Valid options are \"never\", "
+#~ "\"present\" and \"always\"."
+#~ msgstr ""
+#~ "הצג אפשרויות לסמל ההתראה. האפשרויות הן \"never\", \"present\" ו-\"always"
+#~ "\"."
+#~ msgid "If Bluetooth file sharing is enabled"
+#~ msgstr "במידה ושיתוף הקבצים באמצעות בלוטות' זמין"
+#~ msgid "If receiving of remote files via Bluetooth is enabled"
+#~ msgstr "האם לקבל קבצים מרוחקים במידה והבלוטות' פעיל"
+#~ msgid ""
+#~ "If the service for receiving remote files via Bluetooth is enabled or not."
+#~ msgstr "האם השירות לקבלת קבצים דרך בלוטות' פעיל או לא."
+#~ msgid "If the service for sharing files via Bluetooth is enabled or not."
+#~ msgstr "האם השירות לשיתוף קבצים דרך בלוטות' פעיל או לא."
+#~ msgid "Saving of protocol trace failed"
+#~ msgstr "שמירת מעקב הפרוטוקול נכשלה"
+#~ msgid "Loading Trace"
+#~ msgstr "טוען מעקב"
+#~ msgid "Live Import"
+#~ msgstr "ייבוא חי"
+#~ msgid "Protocol Trace"
+#~ msgstr "מעקב פרוטוקול"
+#~ msgid "Unsaved"
+#~ msgstr "לא שמור"
+#~ msgid "Can't live import from"
+#~ msgstr "לא ניתן לעשות ייבוא חי מ"
+#~ msgid "_File"
+#~ msgstr "_קובץ"
+#~ msgid "Open _Recent"
+#~ msgstr "נפתחו לא_חרונה"
+#~ msgid "_Edit"
+#~ msgstr "ע_ריכה"
+#~ msgid "_View"
+#~ msgstr "_תצוגה"
+#~ msgid "_Full Screen"
+#~ msgstr "_מסך מלא"
+#~ msgid "_Tools"
+#~ msgstr "_כלים"
+#~ msgid "_Debug Packet List"
+#~ msgstr "ר_שימת חבילות ניפוי השגיאות"
+#~ msgid "_Help"
+#~ msgstr "_עזרה"
+#~ msgid "Bluetooth protocol analyzer"
+#~ msgstr "מנתח פרוטוקול בלוטות'"
+#~ msgid "All Files"
+#~ msgstr "כל הקבצים"
+#~ msgid "Supported Files"
+#~ msgstr "קבצים נתמכים"
+#~ msgid "Frontline BTSnoop Files"
+#~ msgstr "קבצי חזית BTSnoop"
+#~ msgid "Apple Packet Logger Files"
+#~ msgstr "קבצי מדווח החבילות של Apple"
+#~ msgid "By Extension"
+#~ msgstr "לפי סיומת"
+#~ msgid "Frontline BTSnoop Format"
+#~ msgstr "מבנה חזית BTSnoop"
+#~ msgid "Apple Packet Logger Format"
+#~ msgstr "מבנה מדווח החבילות של Apple"
+#~ msgid "Select File _Type"
+#~ msgstr "בחר את _סוג הקובץ"
+#~ msgid "File Type"
+#~ msgstr "סוג הקובץ"
+#~ msgid "Extensions"
+#~ msgstr "הרחבות"
+#~ msgid "Save File"
+#~ msgstr "שמור קובץ"
+#~ msgid "Open File"
+#~ msgstr "פתח קובץ"
+#~ msgid "Local connection"
+#~ msgstr "חיבור מקומי"
+#~ msgid "Remote connection"
+#~ msgstr "חיבור מרוחק"
+#~ msgid "Open Import"
+#~ msgstr "פתח ייבוא"
+#~ msgid "Save the protocol trace before closing?"
+#~ msgstr "האם לשמור את מעקב הפרוטוקול לפני הסגירה?"
+#~ msgid "If you don't save, all information will be permanently lost."
+#~ msgstr "אם לא תשמור, כל המידע ימחק לצמיתות."
+#~ msgid "Close _without Saving"
+#~ msgstr "סגור מ_בלי לשמור"
+#~ msgid "There is"
+#~ msgstr "ישנו"
+#~ msgid "There are"
+#~ msgstr "ישנם"
+#~ msgid "unsaved protocol trace."
+#~ msgstr "מעקב פרוטוקול לא שמור."
+#~ msgid "unsaved protocol traces."
+#~ msgstr "מעקבי פרוטוקול לא שמורים."
+#~ msgid "If you quit now, all information will be lost."
+#~ msgstr "אם תצא עכשיו, כל המידע יאבד."
+#~ msgid "_Discard Changes"
+#~ msgstr "_בטל שינויים"
+#~ msgid "Packet"
+#~ msgstr "חבילה"
+#~ msgid "Timestamp"
+#~ msgstr "חותמת זמן"
+#~ msgid "Analyze Bluetooth traces"
+#~ msgstr "נתח מעקבי בלוטות'"
+#~ msgid "Apple Packet Logger File"
+#~ msgstr "קובץ מדווח החבילות של Apple"
+#~ msgid "Frontline BTSnoop File"
+#~ msgstr "קובץ חזית BTSnoop"
 
-#: ../analyzer/main.c:317
-msgid "Live Import"
-msgstr "ייבוא חי"
-
-#: ../analyzer/main.c:321
-msgid "Protocol Trace"
-msgstr "מעקב פרוטוקול"
-
-#: ../analyzer/main.c:326
-msgid "Unsaved"
-msgstr "לא שמור"
-
-#: ../analyzer/main.c:609
-msgid "Can't live import from"
-msgstr "לא ניתן לעשות ייבוא חי מ"
-
-#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
-msgid "Bluetooth Analyzer"
-msgstr "מנתח בלוטות'"
-
-#: ../analyzer/main.c:856
-msgid "_File"
-msgstr "_קובץ"
-
-#: ../analyzer/main.c:886
-msgid "Open _Recent"
-msgstr "נפתחו לא_חרונה"
-
-#: ../analyzer/main.c:933
-msgid "_Edit"
-msgstr "ע_ריכה"
-
-#: ../analyzer/main.c:942
-msgid "_View"
-msgstr "_תצוגה"
-
-#: ../analyzer/main.c:947
-msgid "_Full Screen"
-msgstr "_מסך מלא"
-
-#: ../analyzer/main.c:954
-msgid "_Tools"
-msgstr "_כלים"
-
-#: ../analyzer/main.c:959
-msgid "_Debug Packet List"
-msgstr "ר_שימת חבילות ניפוי השגיאות"
-
-#: ../analyzer/main.c:968
-msgid "_Help"
-msgstr "_עזרה"
-
-#: ../analyzer/dialog.c:110
-msgid "Bluetooth protocol analyzer"
-msgstr "מנתח פרוטוקול בלוטות'"
-
-#: ../analyzer/dialog.c:140
-msgid "All Files"
-msgstr "כל הקבצים"
-
-#: ../analyzer/dialog.c:145
-msgid "Supported Files"
-msgstr "קבצים נתמכים"
-
-#: ../analyzer/dialog.c:154
-msgid "Frontline BTSnoop Files"
-msgstr "קבצי חזית BTSnoop"
-
-#: ../analyzer/dialog.c:160
-msgid "Apple Packet Logger Files"
-msgstr "קבצי מדווח החבילות של Apple"
-
-#: ../analyzer/dialog.c:175
-msgid "By Extension"
-msgstr "לפי סיומת"
-
-#: ../analyzer/dialog.c:180
-msgid "Frontline BTSnoop Format"
-msgstr "מבנה חזית BTSnoop"
-
-#: ../analyzer/dialog.c:185
-msgid "Apple Packet Logger Format"
-msgstr "מבנה מדווח החבילות של Apple"
-
-#: ../analyzer/dialog.c:249
-msgid "Select File _Type"
-msgstr "בחר את _סוג הקובץ"
-
-#: ../analyzer/dialog.c:292
-msgid "File Type"
-msgstr "סוג הקובץ"
-
-#: ../analyzer/dialog.c:297
-msgid "Extensions"
-msgstr "הרחבות"
-
-#: ../analyzer/dialog.c:331
-msgid "Save File"
-msgstr "שמור קובץ"
-
-#: ../analyzer/dialog.c:373
-msgid "Open File"
-msgstr "פתח קובץ"
-
-#: ../analyzer/dialog.c:455
-msgid "Local connection"
-msgstr "חיבור מקומי"
-
-#: ../analyzer/dialog.c:463
-msgid "Remote connection"
-msgstr "חיבור מרוחק"
-
-#: ../analyzer/dialog.c:497
-msgid "Open Import"
-msgstr "פתח ייבוא"
-
-#: ../analyzer/dialog.c:537
-msgid "Save the protocol trace before closing?"
-msgstr "האם לשמור את מעקב הפרוטוקול לפני הסגירה?"
-
-#: ../analyzer/dialog.c:538
-msgid "If you don't save, all information will be permanently lost."
-msgstr "אם לא תשמור, כל המידע ימחק לצמיתות."
-
-#: ../analyzer/dialog.c:546
-msgid "Close _without Saving"
-msgstr "סגור מ_בלי לשמור"
-
-#: ../analyzer/dialog.c:576
-msgid "There is"
-msgstr "ישנו"
-
-#: ../analyzer/dialog.c:576
-msgid "There are"
-msgstr "ישנם"
-
-#: ../analyzer/dialog.c:577
-msgid "unsaved protocol trace."
-msgstr "מעקב פרוטוקול לא שמור."
-
-#: ../analyzer/dialog.c:578
-msgid "unsaved protocol traces."
-msgstr "מעקבי פרוטוקול לא שמורים."
-
-#: ../analyzer/dialog.c:579
-msgid "If you quit now, all information will be lost."
-msgstr "אם תצא עכשיו, כל המידע יאבד."
-
-#: ../analyzer/dialog.c:589
-msgid "_Discard Changes"
-msgstr "_בטל שינויים"
-
-#: ../analyzer/tracer.c:250
-msgid "Type"
-msgstr "סוג"
-
-#: ../analyzer/tracer.c:258
-msgid "Packet"
-msgstr "חבילה"
-
-#: ../analyzer/tracer.c:267
-msgid "Timestamp"
-msgstr "חותמת זמן"
-
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
-msgid "Analyze Bluetooth traces"
-msgstr "נתח מעקבי בלוטות'"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:1
-msgid "Apple Packet Logger File"
-msgstr "קובץ מדווח החבילות של Apple"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:2
-msgid "Frontline BTSnoop File"
-msgstr "קובץ חזית BTSnoop"
