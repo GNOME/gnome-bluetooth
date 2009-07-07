@@ -603,9 +603,14 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 
 	g_free(name);
 
+	/* translators:
+	 * This message is for Bluetooth 2.1 support, when the
+	 * action is clicked in the notification popup, the user
+	 * will get to check whether the passkey matches the one
+	 * showing on the Bluetooth device */
 	if (notification_supports_actions () != FALSE)
 		show_notification(_("Bluetooth device"),
-				    line, _("Check passkey"), 0,
+				    line, _("Verify passkey"), 0,
 				    G_CALLBACK(notification_closed));
 	else
 		present_notification_dialogs ();
