@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the bluez-gnome package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 #
+# Reinout van Schouwen <reinouts@gnome.org>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-09-29 14:31+0200\n"
-"PO-Revision-Date: 2008-04-25 10:40+0000\n"
-"Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
+"Project-Id-Version: gnome-bluetooth\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&component=general\n"
+"POT-Creation-Date: 2009-06-19 10:51+0000\n"
+"PO-Revision-Date: 2009-07-08 14:42+0100\n"
+"Last-Translator: Vincent van Adrighem <adrighem@gnome.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,20 +21,793 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: Dutch\n"
 
+#: ../lib/bluetooth-client.c:107
+msgid "All types"
+msgstr "Alle types"
+
+#: ../lib/bluetooth-client.c:109
+msgid "Phone"
+msgstr "Telefoon"
+
+#: ../lib/bluetooth-client.c:111
+msgid "Modem"
+msgstr "Modem"
+
+#: ../lib/bluetooth-client.c:113
+msgid "Computer"
+msgstr "Computer"
+
+#: ../lib/bluetooth-client.c:115
+msgid "Network"
+msgstr "Netwerk"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-client.c:118
+msgid "Headset"
+msgstr "Headset"
+
+#: ../lib/bluetooth-client.c:120
+msgid "Headphones"
+msgstr "Koptelefoon"
+
+#: ../lib/bluetooth-client.c:122
+#| msgid "Audio devices"
+msgid "Audio device"
+msgstr "Audio-apparaat"
+
+#: ../lib/bluetooth-client.c:124
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+#: ../lib/bluetooth-client.c:126
+msgid "Mouse"
+msgstr "Muis"
+
+#: ../lib/bluetooth-client.c:128
+msgid "Camera"
+msgstr "Camera"
+
+#: ../lib/bluetooth-client.c:130
+msgid "Printer"
+msgstr "Printer"
+
+#: ../lib/bluetooth-client.c:132
+msgid "Joypad"
+msgstr "Joypad"
+
+#: ../lib/bluetooth-client.c:134
+msgid "Tablet"
+msgstr "Tablet"
+
+#: ../lib/bluetooth-client.c:136 ../lib/bluetooth-chooser.c:104
+#: ../lib/bluetooth-chooser.c:138
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+#| msgid "Select device"
+msgid "Click to select device..."
+msgstr "Selecteer een apparaat"
+
+#: ../lib/bluetooth-chooser.c:94
+#| msgid "All types"
+msgid "All categories"
+msgstr "Alle categorieën"
+
+#: ../lib/bluetooth-chooser.c:96
+msgid "Paired"
+msgstr "Gekoppeld"
+
+#: ../lib/bluetooth-chooser.c:98
+msgid "Trusted"
+msgstr "Vertrouwd"
+
+#: ../lib/bluetooth-chooser.c:100
+msgid "Not paired or trusted"
+msgstr "Niet gekoppeld of vertrouwd"
+
+#: ../lib/bluetooth-chooser.c:102
+msgid "Paired or trusted"
+msgstr "Gekoppeld of vertrouwd"
+
+#: ../lib/bluetooth-chooser.c:179
+msgid "No adapters available"
+msgstr "Geen adapters beschikbaar"
+
+#: ../lib/bluetooth-chooser.c:183 ../lib/bluetooth-chooser.c:803
+#| msgid "Search for devices"
+msgid "Searching for devices..."
+msgstr "Zoeken naar apparaten..."
+
+#: ../lib/bluetooth-chooser.c:674
+msgid "Device"
+msgstr "Apparaat"
+
+#: ../lib/bluetooth-chooser.c:710
+msgid "Type"
+msgstr "Type"
+
+#. The filters
+#: ../lib/bluetooth-chooser.c:826
+#| msgid "Recognized Bluetooth Devices"
+msgid "Show Only Bluetooth Devices With..."
+msgstr "Alleen apparaten weergeven met..."
+
+#. The device category filter
+#: ../lib/bluetooth-chooser.c:846
+#| msgid "Device type"
+msgid "Device _category:"
+msgstr "Apparaat_categorie:"
+
+#: ../lib/bluetooth-chooser.c:861
+#| msgid "_Select a device from the following list:"
+msgid "Select the device category to filter above list"
+msgstr "Selecteer een categorie als filter voor bovenstaande lijst"
+
+#. The device type filter
+#: ../lib/bluetooth-chooser.c:875
+#| msgid "Device type"
+msgid "Device _type:"
+msgstr "Apparaat_type:"
+
+#: ../lib/bluetooth-chooser.c:896
+#| msgid "_Select a device from the following list:"
+msgid "Select the device type to filter above list"
+msgstr "Selecteer een type als filter voor bovenstaande lijst"
+
+#: ../lib/bluetooth-chooser.c:902
+msgid "Input devices (mice, keyboards, ...)"
+msgstr "Invoerapparaten (muis, toetsenbord, ...)"
+
+#: ../lib/bluetooth-chooser.c:906
+msgid "Headphones, headsets and other audio devices"
+msgstr "Audioapparaten (koptelefoon, microfoon, ...)"
+
+#: ../lib/plugins/geoclue.c:161
+msgid "Use this GPS device for Geolocation services"
+msgstr "Gebruik dit GPS-apparaat voor de Geolocatieservice"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "Het internet delen via de mobiele telefoon (test)"
+
+#: ../applet/main.c:111
+#| msgid "Select device to browse"
+msgid "Select Device to Browse"
+msgstr "Selecteer apparaat om te openen"
+
+#: ../applet/main.c:115
+msgid "_Browse"
+msgstr "_Openen"
+
+#: ../applet/main.c:125
+msgid "Select device to browse"
+msgstr "Selecteer het apparaat om door te bladeren"
+
+#: ../applet/main.c:280
+#| msgid "Bluetooth"
+msgid "Bluetooth: Unknown"
+msgstr "Bluetooth: Onbekend"
+
+#: ../applet/main.c:282 ../properties/properties-adapter-off.ui.h:1
+#| msgid "Bluetooth"
+msgid "Turn On Bluetooth"
+msgstr "Bluetooth aanzetten"
+
+#: ../applet/main.c:283
+#| msgid "Bluetooth"
+msgid "Bluetooth: Off"
+msgstr "Bluetooth: Uit"
+
+#: ../applet/main.c:286
+#| msgid "Bluetooth"
+msgid "Turn Off Bluetooth"
+msgstr "Bluetooth uitschakelen"
+
+#: ../applet/main.c:287
+#| msgid "Bluetooth"
+msgid "Bluetooth: On"
+msgstr "Bluetooth: Aan"
+
+#: ../applet/main.c:399
+#| msgid "Connecting..."
+msgid "Disconnecting..."
+msgstr "Verbinding verbreken..."
+
+#: ../applet/main.c:402 ../sendto/main.c:212
+msgid "Connecting..."
+msgstr "Verbinden..."
+
+#: ../applet/main.c:405 ../applet/main.c:746
+msgid "Connected"
+msgstr "Verbonden"
+
+#: ../applet/main.c:408 ../applet/main.c:746
+#| msgid "_Disconnect"
+msgid "Disconnected"
+msgstr "Niet verbonden"
+
+#: ../applet/main.c:760 ../applet/main.c:811 ../properties/adapter.c:445
+#| msgid "_Disconnect"
+msgid "Disconnect"
+msgstr "Verbinding verbreken"
+
+#: ../applet/main.c:760 ../applet/main.c:811
+#| msgid "Connected"
+msgid "Connect"
+msgstr "Verbinden"
+
+#: ../applet/main.c:772
+#| msgid "Send File..."
+msgid "Send files..."
+msgstr "Bestanden verzenden…"
+
+#: ../applet/main.c:782
+#| msgid "Browse Device..."
+msgid "Browse files..."
+msgstr "Apparaat openen…"
+
+#: ../applet/main.c:793
+msgid "Open Keyboard Preferences..."
+msgstr "Toetsenbordvoorkeuren openen..."
+
+#: ../applet/main.c:801
+#| msgid "Bluetooth Preferences"
+msgid "Open Mouse Preferences..."
+msgstr "Muisvoorkeuren openen..."
+
+#: ../applet/main.c:924
+msgid "Debug"
+msgstr "Debug"
+
+#. Parse command-line options
+#: ../applet/main.c:944
+#| msgid "Bluetooth Applet"
+msgid "- Bluetooth applet"
+msgstr "- Bluetooth applet"
+
+#: ../applet/main.c:949
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Start '%s --help' voor een lijst van beschikbare opties.\n"
+
+#: ../applet/main.c:965
+msgid "Bluetooth Applet"
+msgstr "Bluetooth applet"
+
+#: ../applet/notify.c:148
+#| msgid "Bluetooth Analyzer"
+msgid "Bluetooth: Enabled"
+msgstr "Bluetooth: Aan"
+
+#: ../applet/notify.c:148
+#| msgid "Bluetooth Analyzer"
+msgid "Bluetooth: Disabled"
+msgstr "Bluetooth: Uit"
+
+#: ../applet/agent.c:251 ../applet/agent.c:332
+#, c-format
+msgid "Device '%s' wants to pair with this computer"
+msgstr "'%s' wil koppelen met deze computer"
+
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the passkey mentioned on device %s."
+msgstr "Geef de coda zoals aangegeven op het apparaat %s."
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the passkey '%s' matches the one on device %s."
+msgstr "Bevestig dat de code '%s' gelijk is aan de code op het apparaat %s."
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+#| msgid "Grant access to %s?"
+msgid "Grant access to '%s'"
+msgstr "'%s' toegang verlenen"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "Het apparaat %s wil toegang tot de service '%s'."
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:570
+#, c-format
+msgid "Pairing request for '%s'"
+msgstr "Koppelingsaanvraag voor ‘%s’"
+
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:574
+#: ../applet/agent.c:607 ../applet/agent.c:645
+msgid "Bluetooth device"
+msgstr "Bluetooth-apparaat"
+
+# Staat als commentaar
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:575
+msgid "Enter passkey"
+msgstr "Voer code in"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:602
+#, c-format
+#| msgid "Pairing request for '%s'"
+msgid "Pairing confirmation for '%s'"
+msgstr "Koppelingsaanvraag van ‘%s’"
+
+#: ../applet/agent.c:608
+#| msgid "Enter passkey"
+msgid "Verify passkey"
+msgstr "Code controleren"
+
+#: ../applet/agent.c:608
+#| msgid "Enter passkey"
+msgid "Check passkey"
+msgstr "Code controleren"
+
+#: ../applet/agent.c:641
+#, c-format
+#| msgid "Authorization request for %s"
+msgid "Authorization request from '%s'"
+msgstr "Verzoek om toestemming van '%s'"
+
+#: ../applet/agent.c:646
+msgid "Check authorization"
+msgstr "Toestemming verlenen/weigeren"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Bluetooth-beheer"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Bluetooth beheer-applet"
+
+#: ../applet/popup-menu.ui.h:1
+#| msgid "Bluetooth device"
+msgid "Bluetooth: Checking"
+msgstr "Bluetooth: Controleren"
+
+#: ../applet/popup-menu.ui.h:2
+msgid "Browse files on device..."
+msgstr "Apparaat openen..."
+
+#: ../applet/popup-menu.ui.h:3
+#| msgid "Device"
+msgid "Devices"
+msgstr "Apparaten"
+
+#: ../applet/popup-menu.ui.h:4
+#| msgid "Bluetooth Preferences"
+msgid "Preferences..."
+msgstr "Voorkeuren..."
+
+#: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "Sluiten"
+
+#: ../applet/popup-menu.ui.h:6
+msgid "Send files to device..."
+msgstr "Bestanden naar apparaat sturen..."
+
+#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:436
+msgid "Setup new device..."
+msgstr "Nieuw apparaat instellen..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+#| msgid "Always grant access"
+msgid "_Always grant access"
+msgstr "_Altijd toegang verlenen"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "_Accepteren"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "_Weigeren"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "Komt _niet overeen"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "_Komt overeen"
+
+#: ../applet/passkey-dialogue.ui.h:1
+#| msgid "Show input"
+msgid "_Show input"
+msgstr "_Invoer tonen"
+
+#: ../properties/main.c:115
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Een Bluetooth manager voor de GNOME desktop"
+
+#: ../properties/main.c:118
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Bart Cramer https://launchpad.net/~bart-cramer\n"
+"  Frank Groeneveld https://launchpad.net/~frankgroeneveld\n"
+"  Robin Pronk https://launchpad.net/~robin-romaww\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Frank Groeneveld https://launchpad.net/~frankgroeneveld\n"
+"  Meint Miedema https://launchpad.net/~meint-mmiedema\n"
+"\n"
+"Launchpad Contributions:\n"
+"  Frank Groeneveld https://launchpad.net/~frankgroeneveld\n"
+"  Meint Miedema https://launchpad.net/~meint-mmiedema\n"
+"  Reinout van Schouwen https://launchpad.net/~reinouts\n"
+"  Taygeto https://launchpad.net/~taygeto\n"
+"  dvdmeer https://launchpad.net/~dennis-dvdmeer"
+
+#: ../properties/main.c:120
+#| msgid "Bluetooth Manager"
+msgid "GNOME Bluetooth home page"
+msgstr "Gnome Bluetooth webpagina"
+
+#: ../properties/main.c:133
+msgid "Bluetooth Preferences"
+msgstr "Bluetooth-voorkeuren"
+
+#: ../properties/main.c:145
+#| msgid "Bluetooth device"
+msgid "_Show Bluetooth icon"
+msgstr "Bluetooth-pictogram weergeven"
+
+#: ../properties/main.c:294
+msgid "Output a list of currently known devices"
+msgstr "Geeft een lijst van bekende apparaten"
+
+#: ../properties/main.c:331
+msgid "Bluetooth Properties"
+msgstr "Bluetooth eigenschappen"
+
+#: ../properties/adapter.c:178
+#, c-format
+#| msgid "Remove from list of bonded devices?"
+msgid "Remove '%s' from list of known devices?"
+msgstr "'%s' verwijderen uit de lijst van bekende apparaten?"
+
+#: ../properties/adapter.c:180
+msgid "If you delete the device, you have to set it up again before next use."
+msgstr "Na verwijdering dient u het apparaat opnieuw in te stellen voordat u het kunt gebruiken."
+
+#. The discoverable checkbox
+#: ../properties/adapter.c:351
+msgid "_Discoverable"
+msgstr "_Zichtbaar"
+
+#: ../properties/adapter.c:374
+msgid "Friendly name"
+msgstr "Naam"
+
+#: ../properties/adapter.c:404
+msgid "Known devices"
+msgstr "Bekende apparaten"
+
+#: ../properties/adapter.c:459
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: ../properties/adapter.c:734
+#| msgid "Bluetooth device"
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth is uitgeschakeld"
+
+#: ../properties/adapter.c:770
+#| msgid "Bluetooth Manager applet"
+msgid "No Bluetooth adapters present"
+msgstr "Geen Bluetooth gevonden"
+
+#: ../properties/properties-no-adapter.ui.h:1
+msgid "Your computer does not have any Bluetooth adapters plugged in."
+msgstr "Uw computer heeft geen Bluetooth-adapter."
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Bluetooth voorkeuren aanpassen"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+#| msgid "When to show the notification icon"
+msgid "Whether to show the notification icon"
+msgstr "Wanneer het mededelingspictogram te laten zien"
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+#| msgid "When to show the notification icon"
+msgid "Whether to show the notification icon."
+msgstr "Wanneer het mededelingspictogram te laten zien."
+
+#: ../properties/gconf-bridge.c:1223
+#, c-format
+msgid "GConf error: %s"
+msgstr "GConf-fout: %s"
+
+#: ../properties/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "Verdere foutmeldingen worden alleen op de terminal weergegeven."
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:206 ../wizard/main.c:327
+#, c-format
+msgid "Pairing with '%s' cancelled"
+msgstr "Koppeling met '%s' afgebroken"
+
+#: ../wizard/main.c:246
+#, c-format
+msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgstr "Controleer of de weergegeven code op '%s' overeen komt met deze."
+
+#: ../wizard/main.c:300
+#| msgid "_Select a device from the following list:"
+msgid "Please enter the following passkey:"
+msgstr "Voer de volgende code in:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Setting up 'Sony Bluetooth Headset' failed
+#.
+#: ../wizard/main.c:382
+#, c-format
+msgid "Setting up '%s' failed"
+msgstr "Instellen van '%s' mislukt"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Connecting to 'Sony Bluetooth Headset' now...
+#.
+#: ../wizard/main.c:513
+#, c-format
+#| msgid "Connecting..."
+msgid "Connecting to '%s'..."
+msgstr "Verbinden met '%s'..."
+
+#: ../wizard/main.c:548
+#, c-format
+msgid "Please enter the following passkey on '%s':"
+msgstr "Voer op '%s' de volgende code in:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+#.
+#: ../wizard/main.c:568
+#, c-format
+msgid "Please wait while finishing setup on '%s'..."
+msgstr "Een ogenblik geduld alstublieft. Het instellen van '%s' wordt afgerond..."
+
+#: ../wizard/main.c:581
+#, c-format
+#| msgid "Succesfully configured new device"
+msgid "Successfully configured '%s'"
+msgstr "Apparaat '%s' is succesvol ingesteld"
+
+#: ../wizard/wizard.ui.h:1
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "0000 (meeste koptelefoons, muizen, etc.)"
+
+#: ../wizard/wizard.ui.h:2
+msgid "'1111'"
+msgstr "1111"
+
+#: ../wizard/wizard.ui.h:3
+msgid "'1234'"
+msgstr "1234"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Bluetooth Device Wizard"
+msgstr "Bluetooth apparaatassistent"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Custom passkey code:"
+msgstr "Eigen code:"
+
+#: ../wizard/wizard.ui.h:6
+#| msgid "Device type"
+msgid "Device Setup"
+msgstr "Apparaat instellen"
+
+#: ../wizard/wizard.ui.h:7
+#| msgid "Device type"
+msgid "Device Setup Failed"
+msgstr "Instellen mislukt"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device search"
+msgstr "Zoek apparaat"
+
+#: ../wizard/wizard.ui.h:9
+msgid "Does not match"
+msgstr "Komt niet overeen"
+
+#: ../wizard/wizard.ui.h:10
+msgid "Finishing Device Setup"
+msgstr "Afronden van instellen"
+
+#: ../wizard/wizard.ui.h:11
+#| msgid "Enter passkey"
+msgid "Fixed Passkey"
+msgstr "Voorgeconfigureerde code"
+
+#: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "Introductie"
+
+#: ../wizard/wizard.ui.h:13
+msgid "Matches"
+msgstr "Komt overeen"
+
+#: ../wizard/wizard.ui.h:14
+msgid "Passkey Options"
+msgstr "Code-opties"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Passkey _options..."
+msgstr "Code-_opties..."
+
+#: ../wizard/wizard.ui.h:16
+msgid "Select the additional services you want to use with your device:"
+msgstr "Kies de extra services die u wilt gebruiken met dit apparaat:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "Select the device you want to setup"
+msgstr "Kies het apparaat wat u wilt instellen"
+
+#: ../wizard/wizard.ui.h:18
+#| msgid "Completed"
+msgid "Setup Completed"
+msgstr "Instellen voltooid"
+
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Finished"
+msgstr "Instellen voltooid"
+
+#: ../wizard/wizard.ui.h:20
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#xAB;"
+"discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the "
+"device's manual if in doubt."
+msgstr ""
+"Het apparaat dient binnen een straal van 10 meter en &#xAB;zichtbaar&#xBB; "
+"te zijn. Raadpleeg de handleiding voor meer informatie."
+
+#: ../wizard/wizard.ui.h:21
+msgid ""
+"The device wizard will walk you through the process of configuring Bluetooth "
+"enabled devices for use with this computer."
+msgstr ""
+"De apparaat wizard zal u door het instel proces van Bluetooth apparaten voor "
+"gebruik met deze computer leiden."
+
+#: ../wizard/wizard.ui.h:22
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr "Welkom bij de Bluetooth apparaat installatie wizard"
+
+#: ../wizard/wizard.ui.h:23
+msgid "_Automatic passkey selection"
+msgstr "_Automatische codeselectie"
+
+#: ../wizard/wizard.ui.h:24
+msgid "_Restart Setup"
+msgstr "_Opnieuw instellen"
+
+#: ../sendto/main.c:98
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d seconde"
+msgstr[1] "%'d seconden"
+
+#: ../sendto/main.c:103 ../sendto/main.c:116
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minuut"
+msgstr[1] "%'d minuten"
+
+#: ../sendto/main.c:114
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d uur"
+msgstr[1] "%'d uren"
+
+#: ../sendto/main.c:124
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "ongeveer %'d uur"
+msgstr[1] "ongeveer %'d uren"
+
+#: ../sendto/main.c:150
+msgid "File Transfer"
+msgstr "Bestandsoverdracht"
+
+#: ../sendto/main.c:168
+msgid "Sending files via Bluetooth"
+msgstr "Bestanden versturen via Bluetooth"
+
+#: ../sendto/main.c:180
+msgid "From:"
+msgstr "Van:"
+
+#: ../sendto/main.c:196
+msgid "To:"
+msgstr "Aan:"
+
+#: ../sendto/main.c:242
+msgid "An unknown error occured"
+msgstr "Er is een onbekende fout opgetreden"
+
+#: ../sendto/main.c:252
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+"Controleer of het apparaat aan staat en bluetooth-verbindingen accepteert"
+
+#: ../sendto/main.c:336
+#, c-format
+msgid "Sending %s"
+msgstr "%s versturen"
+
+#: ../sendto/main.c:343 ../sendto/main.c:405
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Bestand %d van %d versturen"
+
+#: ../sendto/main.c:401
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:403
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:497
+#| msgid "Select file to send"
+msgid "Select Device to Send To"
+msgstr "Kies het apparaat om naartoe te sturen"
+
+#: ../sendto/main.c:501
+msgid "Send _To"
+msgstr "Sturen _naar"
+
+#: ../sendto/main.c:542
+msgid "Choose files to send"
+msgstr "Kies de te versturen bestanden"
+
+#: ../sendto/main.c:571
+msgid "Remote device to use"
+msgstr "Te gebruiken apparaat op afstand"
+
+#: ../sendto/main.c:573
+#| msgid "Remote device to use"
+msgid "Remote device's name"
+msgstr "Naam van apparaat"
+
 #~ msgid "Bonded"
 #~ msgstr "Gebonden"
-
-#~ msgid "Trusted"
-#~ msgstr "Vertrouwd"
-
-#~ msgid "Device"
-#~ msgstr "Apparaat"
-
-#~ msgid "Recognized Bluetooth Devices"
-#~ msgstr "Herkende Bluetooth-apparaten"
-
-#~ msgid "_Select a device from the following list:"
-#~ msgstr "_Selecteer een apparaat uit de onderstaande lijst:"
 
 #~ msgid "S_earch"
 #~ msgstr "_Zoeken"
@@ -40,11 +815,9 @@ msgstr ""
 #~ msgid "Rescan Bluetooth devices"
 #~ msgstr "Bluetooth-apparaten opnieuw zoeken"
 
-#, c-format
 #~ msgid "Created bonding with %s"
 #~ msgstr "Binding met %s gecreëerd"
 
-#, c-format
 #~ msgid "Removed bonding with %s"
 #~ msgstr "Binding met %s verwijderd"
 
@@ -60,28 +833,14 @@ msgstr ""
 #~ msgid "Device has been switched into pairing mode"
 #~ msgstr "Apparaat is in koppelingsmodus geschakeld"
 
-#, c-format
 #~ msgid "Couldn't execute command: %s\n"
 #~ msgstr "Commando kon niet uitgevoerd worden: %s\n"
 
 #~ msgid "Browse Devices"
 #~ msgstr "Apparaten doorbladeren"
 
-#~ msgid "Select device to browse"
-#~ msgstr "Selecteer het apparaat om door te bladeren"
-
-#~ msgid "Send File..."
-#~ msgstr "Bestand verzenden…"
-
-#~ msgid "Browse Device..."
-#~ msgstr "Apparaat doorbladeren…"
-
 #~ msgid "Setup New Device"
 #~ msgstr "Nieuw apparaat instellen"
-
-#, c-format
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "Koppelingsaanvraag voor ‘%s’"
 
 #~ msgid "Confirm pairing"
 #~ msgstr "Bevestig de koppeling"
@@ -113,7 +872,6 @@ msgstr ""
 #~ msgid "1 minute"
 #~ msgstr "1 minuut"
 
-#, c-format
 #~ msgid "%g minutes"
 #~ msgstr "%g minuten"
 
@@ -144,9 +902,6 @@ msgstr ""
 #~ msgid "Bonded devices"
 #~ msgstr "Gebonden apparaten"
 
-#~ msgid "Remove from list of bonded devices?"
-#~ msgstr "Verwijderen uit de lijst van gebonden apparaten?"
-
 #~ msgid ""
 #~ "If you delete the bonding, you have to re-pair the device before next use."
 #~ msgstr ""
@@ -157,16 +912,14 @@ msgstr ""
 #~ msgstr "Apparaatingang verwijderen uit dienst?"
 
 #~ msgid ""
-#~ "If you delete the device entry, you can't use it with this service anymore."
+#~ "If you delete the device entry, you can't use it with this service "
+#~ "anymore."
 #~ msgstr ""
-#~ "Indien u een apparaatingang verwijdert, kunt u hem niet meer gebruiken met "
-#~ "deze dienst."
+#~ "Indien u een apparaatingang verwijdert, kunt u hem niet meer gebruiken "
+#~ "met deze dienst."
 
 #~ msgid "Connecting to device"
 #~ msgstr "Bezig te verbinden met apparaat"
-
-#~ msgid "Select device"
-#~ msgstr "Selecteer een apparaat"
 
 #~ msgid "Show all devices"
 #~ msgstr "Alle apparaten tonen"
@@ -174,14 +927,8 @@ msgstr ""
 #~ msgid "Create Device"
 #~ msgstr "Apparaat aanmaken"
 
-#~ msgid "Audio devices"
-#~ msgstr "Audio-apparaten"
-
 #~ msgid "Input devices"
 #~ msgstr "Invoerapparaten"
-
-#~ msgid "_Disconnect"
-#~ msgstr "_Verbinding verbreken"
 
 #~ msgid "Network devices"
 #~ msgstr "Netwerkapparaten"
@@ -190,28 +937,20 @@ msgstr ""
 #~ msgstr "Of HAL gebruikt wordt voor het automatisch instellen van voorkeuren"
 
 #~ msgid ""
-#~ "If HAL should be used to automatically adjust settings like class of device "
-#~ "etc."
+#~ "If HAL should be used to automatically adjust settings like class of "
+#~ "device etc."
 #~ msgstr ""
-#~ "Of HAL gebruikt wordt voor het automatisch aanpassen van instellingen zoals "
-#~ "apparaatklasse ec."
+#~ "Of HAL gebruikt wordt voor het automatisch aanpassen van instellingen "
+#~ "zoals apparaatklasse ec."
 
 #~ msgid "Select destination device"
 #~ msgstr "Een doelapparaat selecteren"
 
-#, c-format
 #~ msgid "Starting transfer of %jd bytes"
 #~ msgstr "Overdracht beginnen van %jd bytes"
 
-#, c-format
 #~ msgid "Transfered %jd of %jd bytes"
 #~ msgstr "%jd van %jd bytes overgebracht"
-
-#~ msgid "Completed"
-#~ msgstr "Voltooid"
-
-#~ msgid "Connected"
-#~ msgstr "Verbonden"
 
 #~ msgid "Stopping"
 #~ msgstr "Stoppen"
@@ -274,13 +1013,6 @@ msgstr ""
 #~ msgstr "Stop ontdekking"
 
 #~ msgid ""
-#~ "The device wizard will walk you through the process of configuring Bluetooth "
-#~ "enabled devices for use with this computer."
-#~ msgstr ""
-#~ "De apparaat wizard zal u door het instel proces van Bluetooth apparaten voor "
-#~ "gebruik met deze computer leiden."
-
-#~ msgid ""
 #~ "\n"
 #~ "Enter passkey for authentication:"
 #~ msgstr ""
@@ -312,12 +1044,6 @@ msgstr ""
 #~ "\n"
 #~ "Klik om bevestigings dialoog te openen"
 
-#~ msgid "Search for devices"
-#~ msgstr "Zoek naar apparaten"
-
-#~ msgid "Select file to send"
-#~ msgstr "Selecteer bestand om te verzenden"
-
 #~ msgid "Select type of device you wanna setup"
 #~ msgstr "Selecteer apparaat type om in te stellen"
 
@@ -327,689 +1053,219 @@ msgstr ""
 #~ msgid "Bluetooth device wizard"
 #~ msgstr "Bluetooth apparaat wizard"
 
-#: ../common/bluetooth-client.c:82
-msgid "All types"
-msgstr "Alle types"
-
-#: ../common/bluetooth-client.c:84
-msgid "Phone"
-msgstr "Telefoon"
-
-#: ../common/bluetooth-client.c:86
-msgid "Modem"
-msgstr "Modem"
-
-#: ../common/bluetooth-client.c:88
-msgid "Computer"
-msgstr "Computer"
-
-#: ../common/bluetooth-client.c:90
-msgid "Network"
-msgstr "Netwerk"
-
-#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
-msgid "Headset"
-msgstr "Headset"
-
-#: ../common/bluetooth-client.c:94
-msgid "Headphone"
-msgstr ""
-
-#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
-msgid "Keyboard"
-msgstr "Toetsenbord"
-
-#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
-msgid "Mouse"
-msgstr "Muis"
-
-#: ../common/bluetooth-client.c:100
-msgid "Camera"
-msgstr "Camera"
-
-#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
-msgid "Printer"
-msgstr "Printer"
-
-#: ../common/bluetooth-client.c:104
-msgid "Joypad"
-msgstr "Joypad"
-
-#: ../common/bluetooth-client.c:106
-msgid "Tablet"
-msgstr "Tablet"
-
-#: ../common/bluetooth-client.c:108
-msgid "Unknown"
-msgstr "Onbekend"
-
-#: ../common/helper.c:162
-msgid "Select Device"
-msgstr "Apparaat selecteren"
-
-#: ../common/helper.c:222
-msgid "Choose files to send"
-msgstr "Kies de te versturen bestanden"
-
-#: ../applet/main.c:123
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Een Bluetooth manager voor de GNOME desktop"
-
-#: ../applet/main.c:126 ../analyzer/dialog.c:128
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Bart Cramer https://launchpad.net/~bart-cramer\n"
-"  Frank Groeneveld https://launchpad.net/~frankgroeneveld\n"
-"  Robin Pronk https://launchpad.net/~robin-romaww\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Frank Groeneveld https://launchpad.net/~frankgroeneveld\n"
-"  Meint Miedema https://launchpad.net/~meint-mmiedema\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Frank Groeneveld https://launchpad.net/~frankgroeneveld\n"
-"  Meint Miedema https://launchpad.net/~meint-mmiedema\n"
-"  Reinout van Schouwen https://launchpad.net/~reinouts\n"
-"  Taygeto https://launchpad.net/~taygeto\n"
-"  dvdmeer https://launchpad.net/~dennis-dvdmeer"
-
-#: ../applet/main.c:177 ../applet/main.c:232
-msgid "Setup new device..."
-msgstr ""
-
-#: ../applet/main.c:242
-msgid "Send files to device..."
-msgstr ""
-
-#: ../applet/main.c:250
-msgid "Browse files on device..."
-msgstr ""
-
-#: ../applet/main.c:373
-msgid "Bluetooth Applet"
-msgstr "Bluetooth applet"
-
-#: ../applet/agent.c:258
-msgid "Authentication request"
-msgstr "Authenticatieverzoek"
-
-#: ../applet/agent.c:286 ../applet/agent.c:395
-msgid "Pairing request for device:"
-msgstr "Paring verzoek voor apparaat:"
-
-#: ../applet/agent.c:303
-msgid "Enter passkey for authentication:"
-msgstr "Voer de aanmeldcode in ter controle:"
-
-#: ../applet/agent.c:327
-msgid "Show input"
-msgstr "Toon invoer"
-
-#: ../applet/agent.c:369
-msgid "Confirmation request"
-msgstr "Bevestigingsverzoek"
-
-#: ../applet/agent.c:412
-msgid "Confirm value for authentication:"
-msgstr "Bevestig aanmeldingswaarde:"
-
-#: ../applet/agent.c:456
-msgid "Authorization request"
-msgstr "Autorisatie-aanvraag"
-
-#: ../applet/agent.c:482
-msgid "Authorization request for device:"
-msgstr "Autorisatieverzoek voor apparaat:"
-
-#: ../applet/agent.c:503
-#, c-format
-msgid "Grant access to %s?"
-msgstr "%s toegang verlenen?"
-
-#: ../applet/agent.c:512
-msgid "Always grant access"
-msgstr "Altijd toegang verlenen"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
-#, c-format
-msgid "Pairing request for %s"
-msgstr ""
-
-#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
-#: ../applet/agent.c:736 ../applet/agent.c:781
-msgid "Bluetooth device"
-msgstr "Bluetooth-apparaat"
-
-#: ../applet/agent.c:591
-msgid "Enter PIN code"
-msgstr ""
-
-#: ../applet/agent.c:638 ../applet/agent.c:688
-msgid "Enter passkey"
-msgstr "Voer aanmeldcode in"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:732
-#, c-format
-msgid "Confirmation request for %s"
-msgstr ""
-
-#: ../applet/agent.c:737
-msgid "Confirm passkey"
-msgstr ""
-
-#: ../applet/agent.c:777
-#, c-format
-msgid "Authorization request for %s"
-msgstr "Autorisatie-aanvraag voor %s"
-
-#: ../applet/agent.c:782
-msgid "Check authorization"
-msgstr "Autorisatie controleren"
-
-#: ../applet/bluetooth-applet.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth-beheer"
-
-#: ../applet/bluetooth-applet.desktop.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Bluetooth beheer-applet"
-
-#: ../properties/main.c:63
-msgid "Bluetooth Preferences"
-msgstr "Bluetooth-voorkeuren"
-
-#: ../properties/main.c:94
-msgid "General"
-msgstr "Standaard"
-
-#: ../properties/main.c:131
-msgid "Bluetooth Properties"
-msgstr ""
-
-#: ../properties/general.c:172
-msgid "File transfer"
-msgstr "Bestandsoverdracht"
-
-#: ../properties/general.c:176
-msgid "Receive files from remote devices"
-msgstr "Bestanden ontvangen van apparaten op afstand"
-
-#: ../properties/general.c:184
-msgid "Share files from public folder"
-msgstr "Bestanden uit de publieke map delen"
-
-#: ../properties/general.c:195
-msgid "Notification area"
-msgstr "Mededelingengebied"
-
-#: ../properties/general.c:199
-msgid "Never display icon"
-msgstr "Pictogram nooit tonen"
-
-#: ../properties/general.c:206
-msgid "Only display when adapter present"
-msgstr "Alleen weergeven als adapter aanwezig is"
-
-#: ../properties/general.c:213
-msgid "Always display icon"
-msgstr "Pictogram altijd tonen"
-
-#: ../properties/adapter.c:99
-msgid "Adapter"
-msgstr "Adapter"
-
-#: ../properties/adapter.c:174
-msgid "always"
-msgstr ""
-
-#: ../properties/adapter.c:176
-msgid "hidden"
-msgstr ""
-
-#: ../properties/adapter.c:179
-#, c-format
-msgid "%'g minute"
-msgid_plural "%'g minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../properties/adapter.c:477
-msgid "Visibility setting"
-msgstr ""
-
-#: ../properties/adapter.c:490
-msgid "Hidden"
-msgstr ""
-
-#: ../properties/adapter.c:502
-msgid "Always visible"
-msgstr ""
-
-#: ../properties/adapter.c:514
-msgid "Temporary visible"
-msgstr ""
-
-#: ../properties/adapter.c:566
-msgid "Friendly name"
-msgstr ""
-
-#: ../properties/adapter.c:587
-msgid "Known devices"
-msgstr ""
-
-#: ../properties/dialog.c:41
-msgid "Remove from list of known devices?"
-msgstr ""
-
-#: ../properties/dialog.c:42
-msgid ""
-"If you delete the device, you have to set it up again before next use."
-msgstr ""
-
-#: ../properties/bluetooth-properties.desktop.in.h:1
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth-properties.desktop.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Bluetooth voorkeuren aanpassen"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid ""
-"Display options for the notification icon. Valid options are \"never\", "
-"\"present\" and \"always\"."
-msgstr ""
-"Instelling voor het tonen van het mededelingspictogram. Geldige opties zijn "
-"‘never’, ‘present’ en ‘always’."
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "If Bluetooth file sharing is enabled"
-msgstr "Of Bluetooth-bestandsdeling is ingeschakeld"
-
-#: ../properties/bluetooth-manager.schemas.in.h:3
-msgid "If receiving of remote files via Bluetooth is enabled"
-msgstr ""
-"Of het ontvangen van bestanden van afstand via Bluetooth is ingeschakeld"
-
-#: ../properties/bluetooth-manager.schemas.in.h:4
-msgid ""
-"If the service for receiving remote files via Bluetooth is enabled or not."
-msgstr ""
-"Of de dienst voor het ontvangen van bestanden van afstand via Bluetooth "
-"ingeschakeld is of niet"
-
-#: ../properties/bluetooth-manager.schemas.in.h:5
-msgid "If the service for sharing files via Bluetooth is enabled or not."
-msgstr ""
-"Of de dienst voor het delen van bestanden via Bluetooth is ingeschakeld of "
-"niet"
-
-#: ../properties/bluetooth-manager.schemas.in.h:6
-msgid "When to show the notification icon"
-msgstr "Wanneer het mededelingspictogram te laten zien"
-
-#: ../wizard/main.c:75
-#, c-format
-msgid "Please enter the following PIN code: %s"
-msgstr ""
-
-#: ../wizard/main.c:94
-#, c-format
-msgid "Please enter the following passkey: %s%s"
-msgstr ""
-
-#: ../wizard/main.c:115
-#, c-format
-msgid "Pairing with %s canceled"
-msgstr ""
-
-#: ../wizard/main.c:118
-#, c-format
-msgid "Pairing with %s finished"
-msgstr ""
-
-#: ../wizard/main.c:145
-#, c-format
-msgid "Successfully paired with %s"
-msgstr ""
-
-#: ../wizard/main.c:159
-#, c-format
-msgid "Pairing with %s failed"
-msgstr ""
-
-#: ../wizard/main.c:193
-#, c-format
-msgid "Connecting to %s now ..."
-msgstr ""
-
-#: ../wizard/main.c:264
-msgid "Introduction"
-msgstr "Introductie"
-
-#: ../wizard/main.c:265
-msgid "Welcome to the Bluetooth device setup wizard"
-msgstr "Welkom bij de Bluetooth apparaat installatie wizard"
-
-#: ../wizard/main.c:268
-msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer.\n"
-"\n"
-msgstr ""
-
-#: ../wizard/main.c:303
-msgid "Device type"
-msgstr "Apparaat type"
-
-#: ../wizard/main.c:304
-msgid "Select the type of device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:316
-msgid "Mobile phone"
-msgstr "Mobiele telefoon"
-
-#: ../wizard/main.c:331
-msgid "Any device"
-msgstr "Elk apparaat"
-
-#: ../wizard/main.c:392
-msgid "Device search"
-msgstr "Zoek apparaat"
-
-#: ../wizard/main.c:393
-msgid "Select the device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:428
-msgid "Device setup"
-msgstr ""
-
-#: ../wizard/main.c:429
-msgid "Setting up new device"
-msgstr ""
-
-#: ../wizard/main.c:451
-msgid "Summary"
-msgstr "Overzicht"
-
-#: ../wizard/main.c:452
-msgid "Succesfully configured new device"
-msgstr "Apparaat is succesvol ingesteld"
-
-#: ../wizard/main.c:462
-msgid "Bluetooth Device Wizard"
-msgstr ""
-
-#: ../sendto/main.c:93
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:98 ../sendto/main.c:111
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:109
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:119
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:145
-msgid "File Transfer"
-msgstr "Bestandsoverdracht"
-
-#: ../sendto/main.c:162
-msgid "Sending files via Bluetooth"
-msgstr "Bestanden versturen via Bluetooth"
-
-#: ../sendto/main.c:174
-msgid "From:"
-msgstr "Van:"
-
-#: ../sendto/main.c:190
-msgid "To:"
-msgstr "Aan:"
-
-#: ../sendto/main.c:206
-msgid "Connecting..."
-msgstr "Verbinden..."
-
-#: ../sendto/main.c:254
-#, c-format
-msgid "Sending %s"
-msgstr "%s versturen"
-
-#: ../sendto/main.c:261 ../sendto/main.c:326
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Bestand %d van %d versturen"
-
-#: ../sendto/main.c:322
-#, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
-
-#: ../sendto/main.c:324
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:373
-msgid "An unknown error occured"
-msgstr "Er is een onbekende fout opgetreden"
-
-#: ../sendto/main.c:383
-msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr ""
-
-#: ../sendto/main.c:554 ../browse/main.c:38
-msgid "Remote device to use"
-msgstr "Te gebruiken apparaat op afstand"
-
-#: ../analyzer/main.c:166
-msgid "Saving of protocol trace failed"
-msgstr "Opslaan van protocol-trace mislukt"
-
-#: ../analyzer/main.c:313
-msgid "Loading Trace"
-msgstr "Laden van trace"
-
-#: ../analyzer/main.c:317
-msgid "Live Import"
-msgstr "Live importeren"
-
-#: ../analyzer/main.c:321
-msgid "Protocol Trace"
-msgstr "Protocol-trace"
-
-#: ../analyzer/main.c:326
-msgid "Unsaved"
-msgstr "Niet opgeslagen"
-
-#: ../analyzer/main.c:609
-msgid "Can't live import from"
-msgstr "Kan niet live importeren vanaf"
-
-#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
-msgid "Bluetooth Analyzer"
-msgstr "Bluetooth-analyse"
-
-#: ../analyzer/main.c:856
-msgid "_File"
-msgstr "_Bestand"
-
-#: ../analyzer/main.c:886
-msgid "Open _Recent"
-msgstr "_Recent bestand openen"
-
-#: ../analyzer/main.c:933
-msgid "_Edit"
-msgstr "Be_werken"
-
-#: ../analyzer/main.c:942
-msgid "_View"
-msgstr "Beel_d"
-
-#: ../analyzer/main.c:947
-msgid "_Full Screen"
-msgstr "_Schermvullend"
-
-#: ../analyzer/main.c:954
-msgid "_Tools"
-msgstr "E_xtra"
-
-#: ../analyzer/main.c:959
-msgid "_Debug Packet List"
-msgstr "Pakketlijst _debuggen"
-
-#: ../analyzer/main.c:968
-msgid "_Help"
-msgstr "_Hulp"
-
-#: ../analyzer/dialog.c:110
-msgid "Bluetooth protocol analyzer"
-msgstr "Bluetooth protocolanalyse"
-
-#: ../analyzer/dialog.c:140
-msgid "All Files"
-msgstr "Alle bestanden"
-
-#: ../analyzer/dialog.c:145
-msgid "Supported Files"
-msgstr "Ondersteunde bestanden"
-
-#: ../analyzer/dialog.c:154
-msgid "Frontline BTSnoop Files"
-msgstr "Frontline BTSnoop-bestanden"
-
-#: ../analyzer/dialog.c:160
-msgid "Apple Packet Logger Files"
-msgstr "Apple Packet Logger-bestanden"
-
-#: ../analyzer/dialog.c:175
-msgid "By Extension"
-msgstr "Volgens extensie"
-
-#: ../analyzer/dialog.c:180
-msgid "Frontline BTSnoop Format"
-msgstr "Frontline BTSnoop-formaat"
-
-#: ../analyzer/dialog.c:185
-msgid "Apple Packet Logger Format"
-msgstr "Apple Packet Logger-formaat"
-
-#: ../analyzer/dialog.c:249
-msgid "Select File _Type"
-msgstr "Selecteer bestands_type"
-
-#: ../analyzer/dialog.c:292
-msgid "File Type"
-msgstr "Bestandstype"
-
-#: ../analyzer/dialog.c:297
-msgid "Extensions"
-msgstr "Extensies"
-
-#: ../analyzer/dialog.c:331
-msgid "Save File"
-msgstr "Bestand opslaan"
-
-#: ../analyzer/dialog.c:373
-msgid "Open File"
-msgstr "Bestand openen"
-
-#: ../analyzer/dialog.c:455
-msgid "Local connection"
-msgstr "Lokale verbinding"
-
-#: ../analyzer/dialog.c:463
-msgid "Remote connection"
-msgstr "Verbinding op afstand"
-
-#: ../analyzer/dialog.c:497
-msgid "Open Import"
-msgstr "Import openen"
-
-#: ../analyzer/dialog.c:537
-msgid "Save the protocol trace before closing?"
-msgstr "De protocoltrace opslaan alvorens te sluiten?"
-
-#: ../analyzer/dialog.c:538
-msgid "If you don't save, all information will be permanently lost."
-msgstr "Als u niet opslaat, zijn al uw wijzigingen definitief verloren."
-
-#: ../analyzer/dialog.c:546
-msgid "Close _without Saving"
-msgstr "Sluiten _zonder opslaan"
-
-#: ../analyzer/dialog.c:576
-msgid "There is"
-msgstr "Er is"
-
-#: ../analyzer/dialog.c:576
-msgid "There are"
-msgstr "Er zijn"
-
-#: ../analyzer/dialog.c:577
-msgid "unsaved protocol trace."
-msgstr "niet-opgeslagen protocoltrace."
-
-#: ../analyzer/dialog.c:578
-msgid "unsaved protocol traces."
-msgstr "niet-opgeslagen protocoltraces."
-
-#: ../analyzer/dialog.c:579
-msgid "If you quit now, all information will be lost."
-msgstr "Alle informatie zal verloren gaan als u nu afsluit."
-
-#: ../analyzer/dialog.c:589
-msgid "_Discard Changes"
-msgstr "_Wijzigingen verwerpen"
-
-#: ../analyzer/tracer.c:250
-msgid "Type"
-msgstr "Type"
-
-#: ../analyzer/tracer.c:258
-msgid "Packet"
-msgstr "Pakket"
-
-#: ../analyzer/tracer.c:267
-msgid "Timestamp"
-msgstr "Tijdsaanduiding"
-
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
-msgid "Analyze Bluetooth traces"
-msgstr "Bluetooth-traces analyseren"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:1
-msgid "Apple Packet Logger File"
-msgstr "Apple Packet Logger-bestand"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:2
-msgid "Frontline BTSnoop File"
-msgstr "Frontline BTSnoop-bestand"
+#~ msgid "Select Device"
+#~ msgstr "Apparaat selecteren"
+
+#~ msgid "Authentication request"
+#~ msgstr "Authenticatieverzoek"
+
+#~ msgid "Pairing request for device:"
+#~ msgstr "Paring verzoek voor apparaat:"
+
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "Voer de aanmeldcode in ter controle:"
+
+#~ msgid "Confirmation request"
+#~ msgstr "Bevestigingsverzoek"
+
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "Bevestig aanmeldingswaarde:"
+
+#~ msgid "Authorization request"
+#~ msgstr "Autorisatie-aanvraag"
+
+#~ msgid "Authorization request for device:"
+#~ msgstr "Autorisatieverzoek voor apparaat:"
+
+#~ msgid "General"
+#~ msgstr "Standaard"
+
+#~ msgid "File transfer"
+#~ msgstr "Bestandsoverdracht"
+
+#~ msgid "Receive files from remote devices"
+#~ msgstr "Bestanden ontvangen van apparaten op afstand"
+
+#~ msgid "Share files from public folder"
+#~ msgstr "Bestanden uit de publieke map delen"
+
+#~ msgid "Notification area"
+#~ msgstr "Mededelingengebied"
+
+#~ msgid "Never display icon"
+#~ msgstr "Pictogram nooit tonen"
+
+#~ msgid "Only display when adapter present"
+#~ msgstr "Alleen weergeven als adapter aanwezig is"
+
+#~ msgid "Always display icon"
+#~ msgstr "Pictogram altijd tonen"
+
+#~ msgid "Adapter"
+#~ msgstr "Adapter"
+
+#~ msgid ""
+#~ "Display options for the notification icon. Valid options are \"never\", "
+#~ "\"present\" and \"always\"."
+#~ msgstr ""
+#~ "Instelling voor het tonen van het mededelingspictogram. Geldige opties "
+#~ "zijn ‘never’, ‘present’ en ‘always’."
+
+#~ msgid "If Bluetooth file sharing is enabled"
+#~ msgstr "Of Bluetooth-bestandsdeling is ingeschakeld"
+
+#~ msgid "If receiving of remote files via Bluetooth is enabled"
+#~ msgstr ""
+#~ "Of het ontvangen van bestanden van afstand via Bluetooth is ingeschakeld"
+
+#~ msgid ""
+#~ "If the service for receiving remote files via Bluetooth is enabled or not."
+#~ msgstr ""
+#~ "Of de dienst voor het ontvangen van bestanden van afstand via Bluetooth "
+#~ "ingeschakeld is of niet"
+
+#~ msgid "If the service for sharing files via Bluetooth is enabled or not."
+#~ msgstr ""
+#~ "Of de dienst voor het delen van bestanden via Bluetooth is ingeschakeld "
+#~ "of niet"
+
+#~ msgid "Mobile phone"
+#~ msgstr "Mobiele telefoon"
+
+#~ msgid "Any device"
+#~ msgstr "Elk apparaat"
+
+#~ msgid "Summary"
+#~ msgstr "Overzicht"
+
+#~ msgid "Saving of protocol trace failed"
+#~ msgstr "Opslaan van protocol-trace mislukt"
+
+#~ msgid "Loading Trace"
+#~ msgstr "Laden van trace"
+
+#~ msgid "Live Import"
+#~ msgstr "Live importeren"
+
+#~ msgid "Protocol Trace"
+#~ msgstr "Protocol-trace"
+
+#~ msgid "Unsaved"
+#~ msgstr "Niet opgeslagen"
+
+#~ msgid "Can't live import from"
+#~ msgstr "Kan niet live importeren vanaf"
+
+#~ msgid "_File"
+#~ msgstr "_Bestand"
+
+#~ msgid "Open _Recent"
+#~ msgstr "_Recent bestand openen"
+
+#~ msgid "_Edit"
+#~ msgstr "Be_werken"
+
+#~ msgid "_View"
+#~ msgstr "Beel_d"
+
+#~ msgid "_Full Screen"
+#~ msgstr "_Schermvullend"
+
+#~ msgid "_Tools"
+#~ msgstr "E_xtra"
+
+#~ msgid "_Debug Packet List"
+#~ msgstr "Pakketlijst _debuggen"
+
+#~ msgid "_Help"
+#~ msgstr "_Hulp"
+
+#~ msgid "Bluetooth protocol analyzer"
+#~ msgstr "Bluetooth protocolanalyse"
+
+#~ msgid "All Files"
+#~ msgstr "Alle bestanden"
+
+#~ msgid "Supported Files"
+#~ msgstr "Ondersteunde bestanden"
+
+#~ msgid "Frontline BTSnoop Files"
+#~ msgstr "Frontline BTSnoop-bestanden"
+
+#~ msgid "Apple Packet Logger Files"
+#~ msgstr "Apple Packet Logger-bestanden"
+
+#~ msgid "By Extension"
+#~ msgstr "Volgens extensie"
+
+#~ msgid "Frontline BTSnoop Format"
+#~ msgstr "Frontline BTSnoop-formaat"
+
+#~ msgid "Apple Packet Logger Format"
+#~ msgstr "Apple Packet Logger-formaat"
+
+#~ msgid "Select File _Type"
+#~ msgstr "Selecteer bestands_type"
+
+#~ msgid "File Type"
+#~ msgstr "Bestandstype"
+
+#~ msgid "Extensions"
+#~ msgstr "Extensies"
+
+#~ msgid "Save File"
+#~ msgstr "Bestand opslaan"
+
+#~ msgid "Open File"
+#~ msgstr "Bestand openen"
+
+#~ msgid "Local connection"
+#~ msgstr "Lokale verbinding"
+
+#~ msgid "Remote connection"
+#~ msgstr "Verbinding op afstand"
+
+#~ msgid "Open Import"
+#~ msgstr "Import openen"
+
+#~ msgid "Save the protocol trace before closing?"
+#~ msgstr "De protocoltrace opslaan alvorens te sluiten?"
+
+#~ msgid "If you don't save, all information will be permanently lost."
+#~ msgstr "Als u niet opslaat, zijn al uw wijzigingen definitief verloren."
+
+#~ msgid "Close _without Saving"
+#~ msgstr "Sluiten _zonder opslaan"
+
+#~ msgid "There is"
+#~ msgstr "Er is"
+
+#~ msgid "There are"
+#~ msgstr "Er zijn"
+
+#~ msgid "unsaved protocol trace."
+#~ msgstr "niet-opgeslagen protocoltrace."
+
+#~ msgid "unsaved protocol traces."
+#~ msgstr "niet-opgeslagen protocoltraces."
+
+#~ msgid "If you quit now, all information will be lost."
+#~ msgstr "Alle informatie zal verloren gaan als u nu afsluit."
+
+#~ msgid "_Discard Changes"
+#~ msgstr "_Wijzigingen verwerpen"
+
+#~ msgid "Packet"
+#~ msgstr "Pakket"
+
+#~ msgid "Timestamp"
+#~ msgstr "Tijdsaanduiding"
+
+#~ msgid "Analyze Bluetooth traces"
+#~ msgstr "Bluetooth-traces analyseren"
+
+#~ msgid "Apple Packet Logger File"
+#~ msgstr "Apple Packet Logger-bestand"
+
+#~ msgid "Frontline BTSnoop File"
+#~ msgstr "Frontline BTSnoop-bestand"
