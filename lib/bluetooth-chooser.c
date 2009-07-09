@@ -692,6 +692,7 @@ create_treeview (BluetoothChooser *self)
 	/* The device name */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 	gtk_tree_view_column_set_cell_data_func (column, renderer,
 						 alias_to_label, NULL, NULL);
 
