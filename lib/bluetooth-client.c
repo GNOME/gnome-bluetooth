@@ -421,6 +421,8 @@ uuid16_to_string (guint uuid16, const char *uuid)
 		return "OBEXObjectPush";
 	case 0x1106:
 		return "OBEXFileTransfer";
+	case 0x1108:
+		return "HSP";
 	case 0x110A:
 		return "AudioSource";
 	case 0x110B:
@@ -437,16 +439,25 @@ uuid16_to_string (guint uuid16, const char *uuid)
 		return "NAP";
 	case 0x1117:
 		return "GN";
+	case 0x111e:
+		return "Handsfree";
 	case 0x111F:
 		return "HandsfreeAudioGateway";
 	case 0x1124:
 		return "HumanInterfaceDeviceService";
 	case 0x112F:
 		return "Phonebook_Access_-_PSE";
+	case 0x1203:
+		return "GenericAudio";
 	case 0x1000: /* ServiceDiscoveryServerServiceClassID */
 	case 0x1200: /* PnPInformation */
 		/* Those are ignored */
 		return NULL;
+	case 0x8e771303:
+	case 0x8e771301:
+		return "SEMC HLA";
+	case 0x8e771401:
+		return "SEMC Watch Phone";
 	default:
 		g_debug ("Unhandled UUID %s (0x%x)", uuid, uuid16);
 		return NULL;
