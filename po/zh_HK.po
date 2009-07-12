@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth 2.27.4\n"
+"Project-Id-Version: gnome-bluetooth 2.27.7.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-22 22:24+0800\n"
-"PO-Revision-Date: 2009-04-22 22:25+0800\n"
+"POT-Creation-Date: 2009-07-12 15:44+0800\n"
+"PO-Revision-Date: 2009-07-12 15:45+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,281 +20,317 @@ msgstr ""
 "X-Generator: Pootle 1.2.1\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 
-#: ../common/bluetooth-client.c:106
+#: ../lib/bluetooth-client.c:107
 msgid "All types"
 msgstr "所有類型"
 
-#: ../common/bluetooth-client.c:108
+#: ../lib/bluetooth-client.c:109
 msgid "Phone"
 msgstr "電話"
 
-#: ../common/bluetooth-client.c:110
+#: ../lib/bluetooth-client.c:111
 msgid "Modem"
 msgstr "數據機"
 
-#: ../common/bluetooth-client.c:112
+#: ../lib/bluetooth-client.c:113
 msgid "Computer"
 msgstr "電腦"
 
-#: ../common/bluetooth-client.c:114
+#: ../lib/bluetooth-client.c:115
 msgid "Network"
 msgstr "網絡"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../common/bluetooth-client.c:117
+#: ../lib/bluetooth-client.c:118
 msgid "Headset"
 msgstr "耳機"
 
-#: ../common/bluetooth-client.c:119
+#: ../lib/bluetooth-client.c:120
 msgid "Headphones"
 msgstr "頭戴式耳機"
 
-#: ../common/bluetooth-client.c:121
+#: ../lib/bluetooth-client.c:122
 msgid "Audio device"
 msgstr "音訊裝置"
 
-#: ../common/bluetooth-client.c:123
+#: ../lib/bluetooth-client.c:124
 msgid "Keyboard"
 msgstr "鍵盤"
 
-#: ../common/bluetooth-client.c:125
+#: ../lib/bluetooth-client.c:126
 msgid "Mouse"
 msgstr "滑鼠"
 
-#: ../common/bluetooth-client.c:127
+#: ../lib/bluetooth-client.c:128
 msgid "Camera"
 msgstr "攝影機"
 
-#: ../common/bluetooth-client.c:129
+#: ../lib/bluetooth-client.c:130
 msgid "Printer"
 msgstr "打印機"
 
-#: ../common/bluetooth-client.c:131
+#: ../lib/bluetooth-client.c:132
 msgid "Joypad"
 msgstr "遊戲台"
 
-#: ../common/bluetooth-client.c:133
+#: ../lib/bluetooth-client.c:134
 msgid "Tablet"
 msgstr "平板"
 
-#: ../common/bluetooth-client.c:135 ../common/bluetooth-chooser.c:101
-#: ../common/bluetooth-chooser.c:135
+#: ../lib/bluetooth-client.c:136 ../lib/bluetooth-chooser.c:105
+#: ../lib/bluetooth-chooser.c:139
 msgid "Unknown"
 msgstr "不明"
 
-#: ../common/bluetooth-chooser-button.c:65
-#: ../common/bluetooth-chooser-button.c:361
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
 msgid "Click to select device..."
 msgstr "請按這裏選擇裝置..."
 
-#: ../common/bluetooth-chooser.c:91
+#: ../lib/bluetooth-chooser.c:95
 msgid "All categories"
 msgstr "所有分類"
 
-#: ../common/bluetooth-chooser.c:93
+#: ../lib/bluetooth-chooser.c:97
 msgid "Paired"
 msgstr "已配對"
 
-#: ../common/bluetooth-chooser.c:95
+#: ../lib/bluetooth-chooser.c:99
 msgid "Trusted"
 msgstr "可信任的"
 
-#: ../common/bluetooth-chooser.c:97
+#: ../lib/bluetooth-chooser.c:101
 msgid "Not paired or trusted"
 msgstr "未配對或不受信任"
 
-#: ../common/bluetooth-chooser.c:99
+#: ../lib/bluetooth-chooser.c:103
 msgid "Paired or trusted"
 msgstr "已配對或受信任的"
 
-#: ../common/bluetooth-chooser.c:573
+#: ../lib/bluetooth-chooser.c:180
+msgid "No adapters available"
+msgstr "沒有介面卡可用"
+
+#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+msgid "Searching for devices..."
+msgstr "正在搜尋裝置..."
+
+#: ../lib/bluetooth-chooser.c:683
 msgid "Device"
 msgstr "裝置"
 
-#: ../common/bluetooth-chooser.c:609
+#: ../lib/bluetooth-chooser.c:720
 msgid "Type"
 msgstr "類型"
 
-#. The search button
-#: ../common/bluetooth-chooser.c:697
-msgid "S_earch"
-msgstr "搜尋(_E)"
-
-#: ../common/bluetooth-chooser.c:702
-msgid "Search for Bluetooth devices"
-msgstr "搜尋藍牙裝置"
-
 #. The filters
-#: ../common/bluetooth-chooser.c:721
+#: ../lib/bluetooth-chooser.c:836
 msgid "Show Only Bluetooth Devices With..."
 msgstr "只顯示這樣的藍牙裝置..."
 
 #. The device category filter
-#: ../common/bluetooth-chooser.c:741
+#: ../lib/bluetooth-chooser.c:856
 msgid "Device _category:"
-msgstr "裝置分類 (_c):"
+msgstr "裝置分類(_C):"
 
-#: ../common/bluetooth-chooser.c:756
+#: ../lib/bluetooth-chooser.c:871
 msgid "Select the device category to filter above list"
 msgstr "選擇裝置分類以過濾上列清單"
 
 #. The device type filter
-#: ../common/bluetooth-chooser.c:770
+#: ../lib/bluetooth-chooser.c:885
 msgid "Device _type:"
 msgstr "裝置類型 (_T):"
 
-#: ../common/bluetooth-chooser.c:791
+#: ../lib/bluetooth-chooser.c:906
 msgid "Select the device type to filter above list"
 msgstr "選擇裝置類型以過濾上列清單"
 
-#: ../common/bluetooth-chooser.c:797
+#: ../lib/bluetooth-chooser.c:912
 msgid "Input devices (mice, keyboards, ...)"
 msgstr "輸入裝置（滑鼠、鍵盤、...）"
 
-#: ../common/bluetooth-chooser.c:801
+#: ../lib/bluetooth-chooser.c:916
 msgid "Headphones, headsets and other audio devices"
 msgstr "頭戴式耳機、耳機和其他音效裝置"
 
-#: ../applet/main.c:98
+#: ../lib/plugins/geoclue.c:162
+msgid "Use this GPS device for Geolocation services"
+msgstr "使用這個 GPS 裝置作為全球定位服務"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "使用你的流動電話存取互聯網（測試中）"
+
+#: ../applet/main.c:112
 msgid "Select Device to Browse"
 msgstr "選擇裝置以瀏覽"
 
-#: ../applet/main.c:102
+#: ../applet/main.c:116
 msgid "_Browse"
 msgstr "瀏覽(_B)"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:126
 msgid "Select device to browse"
 msgstr "選擇裝置以瀏覽"
 
-#: ../applet/main.c:220
+#: ../applet/main.c:281
 msgid "Bluetooth: Unknown"
 msgstr "藍牙：不明"
 
-#: ../applet/main.c:222 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:283 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "開啟藍牙"
 
-#: ../applet/main.c:223
+#: ../applet/main.c:284
 msgid "Bluetooth: Off"
 msgstr "藍牙：關閉"
 
-#: ../applet/main.c:226
+#: ../applet/main.c:287
 msgid "Turn Off Bluetooth"
 msgstr "關閉藍牙"
 
-#: ../applet/main.c:227
+#: ../applet/main.c:288
 msgid "Bluetooth: On"
 msgstr "藍牙：開啟"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:400
 msgid "Disconnecting..."
 msgstr "正在中斷..."
 
-#: ../applet/main.c:336 ../sendto/main.c:210
+#: ../applet/main.c:403 ../sendto/main.c:212
 msgid "Connecting..."
 msgstr "連線中"
 
-#: ../applet/main.c:339 ../applet/main.c:548
+#: ../applet/main.c:406 ../applet/main.c:747
 msgid "Connected"
 msgstr "已連線"
 
-#: ../applet/main.c:342 ../applet/main.c:548
+#: ../applet/main.c:409 ../applet/main.c:747
 msgid "Disconnected"
 msgstr "已斷線"
 
-#: ../applet/main.c:570 ../applet/main.c:590 ../properties/adapter.c:415
+#: ../applet/main.c:761 ../applet/main.c:812 ../properties/adapter.c:446
 msgid "Disconnect"
 msgstr "斷線"
 
-#: ../applet/main.c:570 ../applet/main.c:590
+#: ../applet/main.c:761 ../applet/main.c:812
 msgid "Connect"
 msgstr "連線"
 
-#: ../applet/main.c:732
+#: ../applet/main.c:773
+msgid "Send files..."
+msgstr "傳送檔案..."
+
+#: ../applet/main.c:783
+msgid "Browse files..."
+msgstr "瀏覽檔案..."
+
+#: ../applet/main.c:794
+msgid "Open Keyboard Preferences..."
+msgstr "開啟鍵盤偏好設定..."
+
+#: ../applet/main.c:802
+msgid "Open Mouse Preferences..."
+msgstr "開啟滑鼠偏好設定..."
+
+#: ../applet/main.c:925
+msgid "Debug"
+msgstr "偵錯"
+
+#. Parse command-line options
+#: ../applet/main.c:945
+msgid "- Bluetooth applet"
+msgstr "- 藍牙面板程式"
+
+#: ../applet/main.c:950
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"執行「%s --help」可列出命令列中可用的完整選項。\n"
+
+#: ../applet/main.c:966
 msgid "Bluetooth Applet"
 msgstr "藍牙小工具"
 
-#: ../applet/notify.c:99 ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "藍牙管理員"
+#: ../applet/notify.c:148
+msgid "Bluetooth: Enabled"
+msgstr "藍牙：已啟用"
 
-#: ../applet/agent.c:259
-msgid "Authentication request"
-msgstr "認證請求"
+#: ../applet/notify.c:148
+msgid "Bluetooth: Disabled"
+msgstr "藍牙：已停用"
 
-#: ../applet/agent.c:287 ../applet/agent.c:396
-msgid "Pairing request for device:"
-msgstr "裝置配對請求："
-
-#: ../applet/agent.c:304
-msgid "Enter passkey for authentication:"
-msgstr "輸入驗證通行密碼匙:"
-
-#: ../applet/agent.c:328
-msgid "Show input"
-msgstr "顯示輸入"
-
-#: ../applet/agent.c:370
-msgid "Confirmation request"
-msgstr "確認請求"
-
-#: ../applet/agent.c:413
-msgid "Confirm value for authentication:"
-msgstr "驗證確認數值:"
-
-#: ../applet/agent.c:457
-msgid "Authorization request"
-msgstr "授權請求"
-
-#: ../applet/agent.c:483
-msgid "Authorization request for device:"
-msgstr "為裝置請求授權："
-
-#: ../applet/agent.c:504
+#: ../applet/agent.c:251 ../applet/agent.c:332
 #, c-format
-msgid "Grant access to %s?"
-msgstr "允許存取 %s?"
+msgid "Device '%s' wants to pair with this computer"
+msgstr "裝置「%s」想要和這個電腦配對"
 
-#: ../applet/agent.c:513
-msgid "Always grant access"
-msgstr "永遠允許存取"
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the passkey mentioned on device %s."
+msgstr "請輸入裝置 %s 所提及的通行碼。"
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the passkey '%s' matches the one on device %s."
+msgstr "請確認通行碼「%s」是否和裝置 %s 上的相符。"
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+msgid "Grant access to '%s'"
+msgstr "准許存取「%s」"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "裝置 %s 想要存取服務「%s」。"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:587 ../applet/agent.c:634 ../applet/agent.c:684
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:570
 #, c-format
-msgid "Pairing request for %s"
-msgstr "對 %s 的配對要求"
+msgid "Pairing request for '%s'"
+msgstr "'%s' 的配對請求"
 
-#: ../applet/agent.c:591 ../applet/agent.c:638 ../applet/agent.c:688
-#: ../applet/agent.c:737 ../applet/agent.c:782
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:574
+#: ../applet/agent.c:612 ../applet/agent.c:650
 msgid "Bluetooth device"
 msgstr "藍牙裝置"
 
-#: ../applet/agent.c:592 ../applet/agent.c:639 ../applet/agent.c:689
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:575
 msgid "Enter passkey"
 msgstr "輸入驗證碼"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:733
+#: ../applet/agent.c:602
 #, c-format
-msgid "Confirmation request for %s"
-msgstr "%s 的授確認請求"
+msgid "Pairing confirmation for '%s'"
+msgstr "「%s」的配對確認"
 
-#: ../applet/agent.c:738
-msgid "Confirm passkey"
-msgstr "確認通行密碼匙"
+#: ../applet/agent.c:613
+msgid "Verify passkey"
+msgstr "驗證通行碼"
 
-#: ../applet/agent.c:778
+#: ../applet/agent.c:646
 #, c-format
-msgid "Authorization request for %s"
-msgstr "%s 的授權請求"
+msgid "Authorization request from '%s'"
+msgstr "來自「%s」的驗證要求"
 
-#: ../applet/agent.c:783
+#: ../applet/agent.c:651
 msgid "Check authorization"
 msgstr "檢查授權"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "藍牙管理員"
 
 #: ../applet/bluetooth-applet.desktop.in.in.h:2
 msgid "Bluetooth Manager applet"
@@ -317,18 +353,46 @@ msgid "Preferences..."
 msgstr "偏好設定..."
 
 #: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "結束"
+
+#: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
 msgstr "傳送檔案到裝置..."
 
-#: ../applet/popup-menu.ui.h:6 ../properties/adapter.c:406
+#: ../applet/popup-menu.ui.h:7 ../properties/adapter.c:437
 msgid "Setup new device..."
 msgstr "設定新的裝置..."
 
-#: ../properties/main.c:113
+#: ../applet/authorisation-dialogue.ui.h:1
+msgid "_Always grant access"
+msgstr "永遠准許存取(_A)"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "准許(_G)"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "拒絕(_R)"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "不相符(_D)"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "相符(_M)"
+
+#: ../applet/passkey-dialogue.ui.h:1
+msgid "_Show input"
+msgstr "顯示輸入(_S)"
+
+#: ../properties/main.c:115
 msgid "A Bluetooth manager for the GNOME desktop"
 msgstr "一個給 GNOME 桌面使用的藍牙管理員"
 
-#: ../properties/main.c:116
+#: ../properties/main.c:118
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -340,52 +404,57 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Peter Chen https://launchpad.net/~petercpg"
 
-#: ../properties/main.c:118
+#: ../properties/main.c:120
 msgid "GNOME Bluetooth home page"
 msgstr "GNOME Bluetooth 首頁"
 
-#: ../properties/main.c:131
+#: ../properties/main.c:133
 msgid "Bluetooth Preferences"
 msgstr "藍牙偏好設定"
 
-#: ../properties/main.c:143
+#: ../properties/main.c:145
 msgid "_Show Bluetooth icon"
 msgstr "顯示藍牙圖示(_S)"
 
-#: ../properties/main.c:220
+#: ../properties/main.c:294
+msgid "Output a list of currently known devices"
+msgstr "輸出目前未知裝置的清單"
+
+#: ../properties/main.c:331
 msgid "Bluetooth Properties"
 msgstr "藍牙屬性"
 
 #: ../properties/adapter.c:179
-msgid "Remove from list of known devices?"
-msgstr "是否從已知裝置的清單中移除？"
+#, c-format
+msgid "Remove '%s' from list of known devices?"
+msgstr "是否將「%s」從已知裝置清單中移除？"
 
-#: ../properties/adapter.c:180
+#: ../properties/adapter.c:181
 msgid "If you delete the device, you have to set it up again before next use."
 msgstr "如果你刪除此裝置，你下次使用時必須再次設定它。"
 
 #. The discoverable checkbox
-#: ../properties/adapter.c:319
+#: ../properties/adapter.c:352
 msgid "_Discoverable"
 msgstr "可發現的(_D)"
 
-#: ../properties/adapter.c:342
+#: ../properties/adapter.c:375
 msgid "Friendly name"
 msgstr "友善名稱"
 
-#: ../properties/adapter.c:372
+#: ../properties/adapter.c:405
 msgid "Known devices"
 msgstr "已知裝置"
 
-#: ../properties/adapter.c:429
+#: ../properties/adapter.c:460
 msgid "Delete"
 msgstr "刪除"
 
-#: ../properties/adapter.c:710
+#: ../properties/adapter.c:735
 msgid "Bluetooth is disabled"
 msgstr "藍牙已停用"
 
-#: ../properties/adapter.c:746
+#: ../properties/adapter.c:771
 msgid "No Bluetooth adapters present"
 msgstr "沒有發現藍牙配接器"
 
@@ -409,76 +478,69 @@ msgstr "是否顯示通知圖示"
 msgid "Whether to show the notification icon."
 msgstr "是否顯示通知圖示。"
 
-#: ../properties/gconf-bridge.c:1221
+#: ../properties/gconf-bridge.c:1223
 #, c-format
 msgid "GConf error: %s"
 msgstr "GConf 錯誤：%s"
 
-#: ../properties/gconf-bridge.c:1231
+#: ../properties/gconf-bridge.c:1228
 msgid "All further errors shown only on terminal."
 msgstr "所有進一步的錯誤訊息只會在終端機中顯示。"
-
-#: ../wizard/main.c:130 ../wizard/main.c:315
-msgid "Please enter the following passkey:"
-msgstr "請輸入下列通行密碼匙:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:155
+#: ../wizard/main.c:207 ../wizard/main.c:328
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "與「%s」配對已被取消"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' finished
-#.
-#: ../wizard/main.c:161
+#: ../wizard/main.c:247
 #, c-format
-msgid "Pairing with '%s' finished"
-msgstr "與「%s」配對已完成"
+msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgstr "請確認顯示在「%s」上的通行碼與這個相符。"
+
+#: ../wizard/main.c:301
+msgid "Please enter the following passkey:"
+msgstr "請輸入下列通行密碼匙:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Successfully paired with 'Sony Bluetooth Headset'
+#. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:200
+#: ../wizard/main.c:383
 #, c-format
-msgid "Successfully paired with '%s'"
-msgstr "成功的與「%s」配對"
-
-#: ../wizard/main.c:210
-msgid "Please wait while setting up the device..."
-msgstr "請等待設定此裝置..."
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:220
-#, c-format
-msgid "Pairing with '%s' failed"
-msgstr "與「%s」配對失敗"
+msgid "Setting up '%s' failed"
+msgstr "設定「%s」失敗"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:278
+#: ../wizard/main.c:514
 #, c-format
-msgid "Connecting to '%s' now..."
-msgstr "正在連線至「%s」..."
+msgid "Connecting to '%s'..."
+msgstr "正在連接到「%s」..."
+
+#: ../wizard/main.c:549
+#, c-format
+msgid "Please enter the following passkey on '%s':"
+msgstr "請輸入「%s」的下列通行碼："
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:327
+#: ../wizard/main.c:569
 #, c-format
-msgid "Please wait whilst '%s' is being paired"
-msgstr "請等待「%s」完成配對"
+msgid "Please wait while finishing setup on '%s'..."
+msgstr "請等待設定「%s」結束..."
+
+#: ../wizard/main.c:582
+#, c-format
+msgid "Successfully configured '%s'"
+msgstr "成功的設定「%s」"
 
 #: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -493,148 +555,234 @@ msgid "'1234'"
 msgstr "'1234'"
 
 #: ../wizard/wizard.ui.h:4
-msgid "<b>Fixed Passkey</b>"
-msgstr "<b>固定通行密碼匙</b>"
-
-#: ../wizard/wizard.ui.h:5
-msgid "<b>Setting up new device</b>"
-msgstr "<b>設定新的裝置</b>"
-
-#: ../wizard/wizard.ui.h:6
-msgid "<b>Successfully configured new device</b>"
-msgstr "<b>成功設定新的裝置</b>"
-
-#: ../wizard/wizard.ui.h:7
-msgid "<b>Welcome to the Bluetooth device setup wizard</b>"
-msgstr "<b>歡迎使用藍牙裝置設定精靈</b>"
-
-#: ../wizard/wizard.ui.h:8
 msgid "Bluetooth Device Wizard"
 msgstr "藍牙裝置精靈"
 
-#: ../wizard/wizard.ui.h:9
+#: ../wizard/wizard.ui.h:5
 msgid "Custom passkey code:"
 msgstr "自選通行密碼匙碼:"
 
+#: ../wizard/wizard.ui.h:6
+msgid "Device Setup"
+msgstr "裝置設定"
+
+#: ../wizard/wizard.ui.h:7
+msgid "Device Setup Failed"
+msgstr "裝置設定失敗"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device search"
+msgstr "裝置搜尋"
+
+#: ../wizard/wizard.ui.h:9
+msgid "Does not match"
+msgstr "不相符"
+
 #: ../wizard/wizard.ui.h:10
+msgid "Finishing Device Setup"
+msgstr "正在完成裝置設定"
+
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed Passkey"
+msgstr "固定式通行碼"
+
+#: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "導覽"
+
+#: ../wizard/wizard.ui.h:13
+msgid "Matches"
+msgstr "相符"
+
+#: ../wizard/wizard.ui.h:14
 msgid "Passkey Options"
 msgstr "通行密碼匙選項"
 
-#: ../wizard/wizard.ui.h:11
+#: ../wizard/wizard.ui.h:15
 msgid "Passkey _options..."
 msgstr "通行密碼匙選項(_O)..."
 
-#: ../wizard/wizard.ui.h:12
+#: ../wizard/wizard.ui.h:16
+msgid "Select the additional services you want to use with your device:"
+msgstr "選擇想要使用於此裝置的額外服務："
+
+#: ../wizard/wizard.ui.h:17
 msgid "Select the device you want to setup"
 msgstr "選擇想要設定的裝置"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:18
+msgid "Setup Completed"
+msgstr "設定已完成"
+
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Finished"
+msgstr "設定結束"
+
+#: ../wizard/wizard.ui.h:20
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#xAB;"
+"discoverable&#xBB; (sometimes called &#xAB;visible&#xBB;). Check the "
+"device's manual if in doubt."
+msgstr "該裝置需在離電腦 10 米的範圍內，而且應為 &#xAB;可發現&#xBB; (有時稱為 &#xAB;可視的&#xBB;)。如果有疑慮請查閱該裝置的手冊。"
+
+#: ../wizard/wizard.ui.h:21
 msgid ""
 "The device wizard will walk you through the process of configuring Bluetooth "
 "enabled devices for use with this computer."
 msgstr "裝置精靈會帶你完成設定藍牙裝置的程序，以便用於這個電腦。"
 
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:22
+msgid "Welcome to the Bluetooth device setup wizard"
+msgstr "歡迎使用藍牙裝置設定精靈"
+
+#: ../wizard/wizard.ui.h:23
 msgid "_Automatic passkey selection"
 msgstr "自動通行密碼匙選取(_A)"
 
-#: ../wizard/wizard.ui.h:15
-msgid "gtk-close"
-msgstr "gtk-close"
+#: ../wizard/wizard.ui.h:24
+msgid "_Restart Setup"
+msgstr "重新啟動設定(_R)"
 
-#: ../sendto/main.c:97
+#: ../sendto/main.c:98
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d 秒"
 
-#: ../sendto/main.c:102 ../sendto/main.c:115
+#: ../sendto/main.c:103 ../sendto/main.c:116
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d 分鐘"
 
-#: ../sendto/main.c:113
+#: ../sendto/main.c:114
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d 小時"
 
-#: ../sendto/main.c:123
+#: ../sendto/main.c:124
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "大約 %'d 小時"
 
-#: ../sendto/main.c:149
+#: ../sendto/main.c:150
 msgid "File Transfer"
 msgstr "檔案傳輸程式"
 
-#: ../sendto/main.c:166
+#: ../sendto/main.c:168
 msgid "Sending files via Bluetooth"
 msgstr "透過藍牙傳送檔案"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:180
 msgid "From:"
 msgstr "從:"
 
-#: ../sendto/main.c:194
+#: ../sendto/main.c:196
 msgid "To:"
 msgstr "到:"
 
-#: ../sendto/main.c:258 ../sendto/main.c:597
-#, c-format
-msgid "Sending %s"
-msgstr "正在傳送 %s"
-
-#: ../sendto/main.c:265 ../sendto/main.c:330 ../sendto/main.c:604
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "正在傳送檔案 %d / %d"
-
-#: ../sendto/main.c:326
-#, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
-
-#: ../sendto/main.c:328
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:362 ../sendto/main.c:381
-msgid "Error Occurred"
-msgstr "發生錯誤"
-
-#: ../sendto/main.c:411
+#: ../sendto/main.c:242
 msgid "An unknown error occured"
 msgstr "發生不明的錯誤"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:252
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
 msgstr "請確定遠端裝置已開啟而且接受藍牙連線"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:336
+#, c-format
+msgid "Sending %s"
+msgstr "正在傳送 %s"
+
+#: ../sendto/main.c:343 ../sendto/main.c:405
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "正在傳送檔案 %d / %d"
+
+#: ../sendto/main.c:401
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:403
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:497
 msgid "Select Device to Send To"
 msgstr "選擇要傳送的目標裝置"
 
-#: ../sendto/main.c:714
+#: ../sendto/main.c:501
 msgid "Send _To"
 msgstr "傳送給(_T)"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:542
 msgid "Choose files to send"
 msgstr "選擇要傳送的檔案"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:571
 msgid "Remote device to use"
 msgstr "要使用的遠端裝置"
 
-#: ../sendto/main.c:787
-msgid "Remove device's name"
+#: ../sendto/main.c:573
+msgid "Remote device's name"
 msgstr "遠端裝置的名稱"
+
+#~ msgid "S_earch"
+#~ msgstr "搜尋(_E)"
+
+#~ msgid "Authentication request"
+#~ msgstr "認證請求"
+
+#~ msgid "Pairing request for device:"
+#~ msgstr "裝置配對請求："
+
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "輸入驗證通行金鑰:"
+
+#~ msgid "Confirmation request"
+#~ msgstr "確認請求"
+
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "驗證確認數值:"
+
+#~ msgid "Authorization request"
+#~ msgstr "授權請求"
+
+#~ msgid "Authorization request for device:"
+#~ msgstr "為裝置請求授權："
+
+#~ msgid "Pairing request for %s"
+#~ msgstr "對 %s 的配對要求"
+
+#~ msgid "Confirmation request for %s"
+#~ msgstr "%s 的授確認請求"
+
+#~ msgid "Confirm passkey"
+#~ msgstr "確認通行金鑰"
+
+#~ msgid "Pairing with '%s' finished"
+#~ msgstr "與「%s」配對已完成"
+
+#~ msgid "Please wait whilst '%s' is being paired"
+#~ msgstr "請等待「%s」完成配對"
+
+#~ msgid "<b>Setting up new device</b>"
+#~ msgstr "<b>設定新的裝置</b>"
+
+#~ msgid "<b>Successfully configured new device</b>"
+#~ msgstr "<b>成功設定新的裝置</b>"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "Error Occurred"
+#~ msgstr "發生錯誤"
 
 #~ msgid "Created bonding with %s"
 #~ msgstr "已和 %s 建立連結 (bonding)"
@@ -665,15 +813,6 @@ msgstr "遠端裝置的名稱"
 
 #~ msgid "Browse Devices"
 #~ msgstr "瀏覽裝置"
-
-#~ msgid "Send File..."
-#~ msgstr "發送檔案..."
-
-#~ msgid "Browse Device..."
-#~ msgstr "瀏覽裝置..."
-
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "'%s' 的配對請求"
 
 #~ msgid "Confirm pairing"
 #~ msgstr "確認配對"
@@ -783,9 +922,6 @@ msgstr "遠端裝置的名稱"
 
 #~ msgid "Unsaved"
 #~ msgstr "未儲存"
-
-#~ msgid "Bluetooth Analyzer"
-#~ msgstr "藍牙分析器"
 
 #~ msgid "_File"
 #~ msgstr "檔案 (_F)"
