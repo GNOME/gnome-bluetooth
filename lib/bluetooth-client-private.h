@@ -36,7 +36,10 @@ DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client);
 gboolean bluetooth_client_start_discovery(BluetoothClient *client);
 gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
 
-typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client, const char *path, gpointer data);
+typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client,
+						 const char *path,
+						 const GError *error,
+						 gpointer data);
 
 gboolean bluetooth_client_create_device(BluetoothClient *client,
 			const char *address, const char *agent,

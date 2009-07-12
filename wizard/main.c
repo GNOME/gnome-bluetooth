@@ -364,6 +364,7 @@ connect_callback (BluetoothClient *_client,
 static void
 create_callback (BluetoothClient *_client,
 		 const char *path,
+		 const GError *error,
 		 gpointer user_data)
 {
 	ConnectData *data;

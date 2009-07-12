@@ -1365,13 +1365,14 @@ static void create_device_callback(DBusGProxy *proxy,
 	dbus_g_proxy_end_call(proxy, call, &error,
 			DBUS_TYPE_G_OBJECT_PATH, &path, G_TYPE_INVALID);
 
-	if (error != NULL) {
+	if (error != NULL)
 		path = NULL;
-		g_error_free(error);
-	}
 
 	if (devdata->func)
-		devdata->func(devdata->client, path, devdata->data);
+		devdata->func(devdata->client, path, error, devdata->data);
+
+	if (error != NULL)
+		g_error_free (error);
 
 	g_object_unref (devdata->client);
 	g_object_unref(proxy);
