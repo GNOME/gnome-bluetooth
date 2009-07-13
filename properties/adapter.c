@@ -349,7 +349,7 @@ static void create_adapter(adapter_data *adapter)
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, TRUE, 0);
 
 	/* The discoverable checkbox */
-	button = gtk_check_button_new_with_mnemonic (_("_Discoverable"));
+	button = gtk_check_button_new_with_mnemonic (_("Make computer _discoverable"));
 	if (powered == FALSE)
 		discoverable = FALSE;
 	if (discoverable != FALSE && timeout == 0)
