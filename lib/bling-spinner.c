@@ -60,6 +60,7 @@ struct _BlingSpinnerPrivate
 /* FORWARDS */
 static void bling_spinner_class_init(BlingSpinnerClass *klass);
 static void bling_spinner_init(BlingSpinner *spinner);
+static void bling_spinner_finalize (GObject *gobject);
 static void bling_spinner_set_property(GObject *gobject, guint prop_id, const GValue *value, GParamSpec *pspec);
 static gboolean bling_spinner_expose(GtkWidget *widget, GdkEventExpose *event);
 static void bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen);
@@ -134,6 +135,7 @@ bling_spinner_class_init(BlingSpinnerClass *klass)
 	gobject_class = G_OBJECT_CLASS(klass);
 	g_type_class_add_private (gobject_class, sizeof (BlingSpinnerPrivate));
 	gobject_class->set_property = bling_spinner_set_property;
+	gobject_class->finalize = bling_spinner_finalize;
 
 	widget_class = GTK_WIDGET_CLASS(klass);
 	widget_class->expose_event = bling_spinner_expose;
@@ -254,6 +256,21 @@ bling_spinner_set_property(GObject *gobject, guint prop_id,
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID(gobject, prop_id, pspec);
 			break;
+	}
+}
+
+static void
+bling_spinner_finalize (GObject *gobject)
+{
+	BlingSpinner *spinner;
+	BlingSpinnerPrivate *priv;
+
+	spinner = BLING_SPINNER(gobject);
+	priv = BLING_SPINNER_GET_PRIVATE (spinner);
+
+	if (priv->timeout != 0) {
+		g_source_remove (priv->timeout);
+		priv->timeout = 0;
 	}
 }
 
