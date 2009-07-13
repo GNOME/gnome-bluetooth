@@ -125,7 +125,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 		gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 		gtk_widget_show(selector);
 		g_object_set(selector,
-			     "show-search", TRUE,
+			     "show-searching", TRUE,
 			     "show-device-category", TRUE,
 			     "show-device-type", TRUE,
 			     NULL);
