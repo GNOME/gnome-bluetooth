@@ -402,7 +402,7 @@ static void create_adapter(adapter_data *adapter)
 	table = gtk_table_new(2, 2, FALSE);
 	gtk_box_pack_start(GTK_BOX(mainbox), table, TRUE, TRUE, 0);
 
-	label = create_label(_("Known devices"));
+	label = create_label(_("Devices"));
 	gtk_table_attach(GTK_TABLE(table), label, 0, 2, 0, 1,
 			 GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 6);
 
