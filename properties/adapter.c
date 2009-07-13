@@ -178,7 +178,7 @@ static gboolean show_confirm_dialog(const char *name)
 					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
 					 _("Remove '%s' from list of known devices?"), name);
 	g_object_set (G_OBJECT (dialog), "secondary-text",
-		      _("If you delete the device, you have to set it up again before next use."),
+		      _("If you remove the device, you will have to set it up again before next use."),
 		      NULL);
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
@@ -194,7 +194,7 @@ static gboolean show_confirm_dialog(const char *name)
 	return FALSE;
 }
 
-static void delete_callback(GtkWidget *button, gpointer user_data)
+static void remove_callback(GtkWidget *button, gpointer user_data)
 {
 	adapter_data *adapter = user_data;
 	GValue value = { 0, };
@@ -457,8 +457,8 @@ static void create_adapter(adapter_data *adapter)
 
 	adapter->button_disconnect = button;
 
-	button = gtk_button_new_with_label(_("Delete"));
-	image = gtk_image_new_from_stock(GTK_STOCK_DELETE,
+	button = gtk_button_new_with_label(_("_Remove"));
+	image = gtk_image_new_from_stock(GTK_STOCK_REMOVE,
 						GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image(GTK_BUTTON(button), image);
 	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
@@ -467,7 +467,7 @@ static void create_adapter(adapter_data *adapter)
 	gtk_widget_set_sensitive(button, FALSE);
 
 	g_signal_connect(G_OBJECT(button), "clicked",
-				G_CALLBACK(delete_callback), adapter);
+				G_CALLBACK(remove_callback), adapter);
 
 	adapter->button_delete = button;
 
