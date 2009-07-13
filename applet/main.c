@@ -106,7 +106,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 
 	address = g_strdup (g_object_get_data (widget, "address"));
 	if (address == NULL) {
-		GtkWidget *dialog, *selector, *button, *image;
+		GtkWidget *dialog, *selector, *button;
 		int response_id;
 
 		dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
@@ -114,8 +114,6 @@ void browse_callback(GObject *widget, gpointer user_data)
 						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 						     NULL);
 		button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);
-		image = gtk_image_new_from_icon_name (GTK_STOCK_CONNECT, GTK_ICON_SIZE_BUTTON);
-		gtk_button_set_image (GTK_BUTTON (button), image);
 		gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 						  GTK_RESPONSE_ACCEPT, FALSE);
 		gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
