@@ -935,8 +935,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	}
 
 	/* The services filter */
-	/* FIXME implement accessors */
-	priv->device_service_filter = NULL; //g_strdup ("OBEXObjectPush");
+	priv->device_service_filter = NULL;
 
 	/* if filters are not visible hide the vbox */
 	if (!priv->show_device_type && !priv->show_device_category)
@@ -984,7 +983,8 @@ enum {
 	PROP_SHOW_DEVICE_TYPE,
 	PROP_SHOW_DEVICE_CATEGORY,
 	PROP_DEVICE_TYPE_FILTER,
-	PROP_DEVICE_CATEGORY_FILTER
+	PROP_DEVICE_CATEGORY_FILTER,
+	PROP_DEVICE_SERVICE_FILTER
 };
 
 static void
@@ -1037,6 +1037,12 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		priv->device_category_filter = g_value_get_enum (value);
 		gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_category), priv->device_category_filter);
 		break;
+	case PROP_DEVICE_SERVICE_FILTER:
+		g_free (priv->device_service_filter);
+		priv->device_service_filter = g_value_dup_string (value);
+		if (priv->filter)
+			gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
 		break;
@@ -1074,6 +1080,9 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		break;
 	case PROP_DEVICE_CATEGORY_FILTER:
 		g_value_set_enum (value, priv->device_category_filter);
+		break;
+	case PROP_DEVICE_SERVICE_FILTER:
+		g_value_set_string (value, priv->device_service_filter);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
@@ -1117,7 +1126,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_TITLE, g_param_spec_string ("title",
-									  "title", "The widget header title.", NULL, G_PARAM_WRITABLE));
+									  "title", "The widget header title", NULL, G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
 										    "device-selected", "the Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE));
@@ -1146,6 +1155,9 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_CATEGORY_FILTER, g_param_spec_enum ("device-category-filter",
 											 "device-category-filter", "The #BluetoothCategory to show", BLUETOOTH_TYPE_CATEGORY, BLUETOOTH_CATEGORY_ALL, G_PARAM_READWRITE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_DEVICE_SERVICE_FILTER, g_param_spec_string ("device-service-filter",
+											  "device-service-filter", "A string representing the service to filter for", NULL, G_PARAM_WRITABLE));
 }
 
 /**
