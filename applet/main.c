@@ -125,14 +125,15 @@ void browse_callback(GObject *widget, gpointer user_data)
 		gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 		gtk_widget_show(selector);
 		g_object_set(selector,
-			     "show-searching", TRUE,
-			     "show-device-category", TRUE,
+			     "show-searching", FALSE,
+			     "show-device-category", FALSE,
 			     "show-device-type", TRUE,
+			     "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
+			     "device-service-filter", "OBEXFileTransfer",
 			     NULL);
 		g_signal_connect(selector, "selected-device-changed",
 				 G_CALLBACK(select_device_changed), dialog);
 		gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
-		bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
 		address = NULL;
 		response_id = gtk_dialog_run (GTK_DIALOG (dialog));
