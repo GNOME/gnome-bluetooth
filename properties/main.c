@@ -121,6 +121,18 @@ static void about_callback(GtkWidget *item, GtkWindow *parent)
 		"logo-icon-name", "bluetooth", NULL);
 }
 
+static void help_callback(GtkWidget *item)
+{
+	GError *error = NULL;
+
+	if(!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET(item)),
+		"ghelp:gnome-bluetooth",  gtk_get_current_event_time (), &error)) {
+
+		g_printerr("Unable to launch help: %s", error->message);
+		g_error_free(error);
+	}
+}	
+
 static GtkWidget *create_window(GtkWidget *notebook)
 {
 	GtkWidget *window;
@@ -157,18 +169,19 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	g_signal_connect(G_OBJECT(button), "clicked",
 					G_CALLBACK(close_callback), window);
 
+	button = gtk_button_new_from_stock(GTK_STOCK_HELP);
+	gtk_container_add(GTK_CONTAINER(buttonbox), button);
+	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
+								button, TRUE);
+	g_signal_connect(G_OBJECT(button), "clicked",
+					G_CALLBACK(help_callback), window);
+
 	button = gtk_button_new_from_stock(GTK_STOCK_ABOUT);
 	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 								button, TRUE);
 	g_signal_connect(G_OBJECT(button), "clicked",
 					G_CALLBACK(about_callback), window);
-#if 0
-	button = gtk_button_new_from_stock(GTK_STOCK_HELP);
-	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
-								button, TRUE);
-	gtk_container_add(GTK_CONTAINER(buttonbox), button);
-#endif
 
 	gtk_widget_show_all(window);
 
