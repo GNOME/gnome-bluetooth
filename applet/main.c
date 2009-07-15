@@ -738,29 +738,33 @@ update_device_list (GtkTreeIter *parent)
 			g_object_set_data_full (G_OBJECT (action),
 						"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
 
-			if (services != NULL) {
-				/* The status menu item */
-				status = add_menu_item (address,
-							"status",
-							is_connected ? _("Connected") : _("Disconnected"),
-							uimanager,
-							menu_merge_id,
-							NULL);
-				gtk_action_set_sensitive (status, FALSE);
+			/* The status menu item */
+			status = add_menu_item (address,
+						"status",
+						is_connected ? _("Connected") : _("Disconnected"),
+						uimanager,
+						menu_merge_id,
+						NULL);
+			gtk_action_set_sensitive (status, FALSE);
 
+			if (services != NULL) {
 				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
 							       address, address);
 				action_set_bold (uimanager, status, action_path);
 				g_free (action_path);
-
-				/* The connect button */
-				oper = add_menu_item (address,
-						      "action",
-						      is_connected ? _("Disconnect") : _("Connect"),
-						      uimanager,
-						      menu_merge_id,
-						      G_CALLBACK (on_connect_activate));
+			} else {
+				gtk_action_set_visible (status, FALSE);
 			}
+
+			/* The connect button */
+			oper = add_menu_item (address,
+					      "action",
+					      is_connected ? _("Disconnect") : _("Connect"),
+					      uimanager,
+					      menu_merge_id,
+					      G_CALLBACK (on_connect_activate));
+			if (services == NULL)
+				gtk_action_set_visible (oper, FALSE);
 
 			add_separator_item (address, "connect-sep", uimanager, menu_merge_id);
 
@@ -804,10 +808,13 @@ update_device_list (GtkTreeIter *parent)
 			}
 		} else {
 			gtk_action_set_label (action, name);
-			if (status != NULL)
+
+			gtk_action_set_visible (status, services != NULL);
+			gtk_action_set_visible (oper, services != NULL);
+			if (services != NULL) {
 				set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
-			if (oper != NULL)
 				gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
+			}
 		}
 		g_free (name);
 
