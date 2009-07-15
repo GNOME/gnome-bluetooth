@@ -123,10 +123,10 @@ marshal.h: marshal.list
 marshal.c: marshal.list
 	$(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
 
-bluetooth-client-glue.h: bluetooth-client.xml
+bluetooth-client-glue.h: bluetooth-client.xml bluetooth-agent.h bluetooth-agent.c
 	$(DBUS_BINDING_TOOL) --prefix=bluetooth_client --mode=glib-client --output=$@ $<
 
-bluetooth-agent-glue.h: bluetooth-agent.xml
+bluetooth-agent-glue.h: bluetooth-agent.xml bluetooth-agent.h bluetooth-agent.c
 	$(DBUS_BINDING_TOOL) --prefix=bluetooth_agent --mode=glib-server --output=$@ $<
 
 obex-agent-glue.h: obex-agent.xml
