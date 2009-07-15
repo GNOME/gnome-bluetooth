@@ -109,7 +109,6 @@ static GtkWidget *spinner_finishing = NULL;
 
 static GtkWidget *label_summary = NULL;
 static GtkWidget *extra_config_vbox = NULL;
-static GtkWidget *extra_config_frame = NULL;
 
 static BluetoothChooser *selector = NULL;
 
@@ -600,10 +599,10 @@ void prepare_callback (GtkWidget *assistant,
 						    widget,
 						    FALSE,
 						    TRUE,
-						    6);
+						    0);
 			}
 			g_list_free (widgets);
-			gtk_widget_show_all (extra_config_frame);
+			gtk_widget_show_all (extra_config_vbox);
 		}
 	}
 
@@ -942,7 +941,6 @@ create_wizard (void)
 	page_summary = W("page_summary");
 	label_summary = W("label_summary");
 	extra_config_vbox = W("extra_config_vbox");
-	extra_config_frame = W("extra_config_frame");
 
 	/* Set page icons */
 	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, NULL, &height);
