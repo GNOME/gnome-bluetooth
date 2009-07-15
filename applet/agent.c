@@ -81,7 +81,7 @@ static void input_free(input_data *input)
 		disable_blinking();
 }
 
-static void passkey_callback(GtkWidget *dialog,
+static void pin_callback(GtkWidget *dialog,
 				gint response, gpointer user_data)
 {
 	input_data *input = user_data;
@@ -92,8 +92,8 @@ static void passkey_callback(GtkWidget *dialog,
 		text = gtk_entry_get_text(GTK_ENTRY(input->entry));
 
 		if (input->numeric == TRUE) {
-			guint passkey = atoi(text);
-			dbus_g_method_return(input->context, passkey);
+			guint pin = atoi(text);
+			dbus_g_method_return(input->context, pin);
 		} else {
 			dbus_g_method_return(input->context, text);
 		}
@@ -208,7 +208,7 @@ static void toggled_callback(GtkWidget *button, gpointer user_data)
 }
 
 static void
-passkey_dialog (DBusGProxy *adapter,
+pin_dialog (DBusGProxy *adapter,
 		DBusGProxy *device,
 		const char *name,
 		const char *long_name,
@@ -254,7 +254,7 @@ passkey_dialog (DBusGProxy *adapter,
 	g_free (str);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("Please enter the passkey mentioned on device %s."),
+						  _("Please enter the PIN mentioned on device %s."),
 						  long_name);
 
 	entry = GTK_WIDGET (gtk_builder_get_object (xml, "entry"));
@@ -285,7 +285,7 @@ passkey_dialog (DBusGProxy *adapter,
 	input_list = g_list_append(input_list, input);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (passkey_callback), input);
+			  G_CALLBACK (pin_callback), input);
 
 	enable_blinking();
 }
@@ -336,7 +336,7 @@ confirm_dialog (DBusGProxy *adapter,
 
 	str = g_strdup_printf ("<b>%s</b>", value);
 	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
-						    _("Please confirm whether the passkey '%s' matches the one on device %s."),
+						    _("Please confirm whether the PIN '%s' matches the one on device %s."),
 						    str, long_name);
 	g_free (str);
 
@@ -481,7 +481,7 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 	if (name == NULL)
 		return FALSE;
 
-	passkey_dialog(adapter, device, name, long_name, FALSE, context);
+	pin_dialog(adapter, device, name, long_name, FALSE, context);
 
 	g_free (long_name);
 
@@ -498,7 +498,7 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 	g_free(name);
 
 	show_notification(_("Bluetooth device"),
-			  line, _("Enter passkey"), 0,
+			  line, _("Enter PIN"), 0,
 			  G_CALLBACK(notification_closed));
 
 	g_free(line);
@@ -506,7 +506,7 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean passkey_request(DBusGMethodInvocation *context,
+static gboolean pin_request(DBusGMethodInvocation *context,
 					DBusGProxy *device, gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
@@ -516,7 +516,7 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 	if (name == NULL)
 		return FALSE;
 
-	passkey_dialog(adapter, device, name, long_name, TRUE, context);
+	pin_dialog(adapter, device, name, long_name, TRUE, context);
 
 	g_free (long_name);
 
@@ -533,7 +533,7 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 	g_free(name);
 
 	show_notification(_("Bluetooth device"),
-			  line, _("Enter passkey"), 0,
+			  line, _("Enter PIN"), 0,
 			  G_CALLBACK(notification_closed));
 
 	g_free(line);
@@ -541,9 +541,12 @@ static gboolean passkey_request(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean display_request(DBusGMethodInvocation *context,
-				DBusGProxy *device, guint passkey,
-					guint entered, gpointer user_data)
+static gboolean
+display_request (DBusGMethodInvocation *context,
+		 DBusGProxy *device,
+		 guint pin,
+		 guint entered,
+		 gpointer user_data)
 {
 	g_warning ("Not implemented, please file a bug at how this happened");
 	return FALSE;
@@ -555,7 +558,7 @@ static gboolean display_request(DBusGMethodInvocation *context,
 	if (name == NULL)
 		return FALSE;
 
-	text = g_strdup_printf("%d", passkey);
+	text = g_strdup_printf("%d", pin);
 	display_dialog(adapter, device, address, name, text, entered, context);
 	g_free(text);
 
@@ -572,7 +575,7 @@ static gboolean display_request(DBusGMethodInvocation *context,
 	g_free(name);
 
 	show_notification(_("Bluetooth device"),
-			  line, _("Enter passkey"), 0,
+			  line, _("Enter PIN"), 0,
 			  G_CALLBACK(notification_closed));
 
 	g_free(line);
@@ -581,8 +584,11 @@ static gboolean display_request(DBusGMethodInvocation *context,
 #endif
 }
 
-static gboolean confirm_request(DBusGMethodInvocation *context,
-			DBusGProxy *device, guint passkey, gpointer user_data)
+static gboolean
+confirm_request (DBusGMethodInvocation *context,
+		 DBusGProxy *device,
+		 guint pin,
+		 gpointer user_data)
 {
 	DBusGProxy *adapter = user_data;
 	char *name, *long_name, *line, *text;
@@ -591,7 +597,7 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 	if (name == NULL)
 		return FALSE;
 
-	text = g_strdup_printf("%d", passkey);
+	text = g_strdup_printf("%d", pin);
 	confirm_dialog(adapter, device, name, long_name, text, context);
 	g_free(text);
 
@@ -606,11 +612,11 @@ static gboolean confirm_request(DBusGMethodInvocation *context,
 	/* translators:
 	 * This message is for Bluetooth 2.1 support, when the
 	 * action is clicked in the notification popup, the user
-	 * will get to check whether the passkey matches the one
+	 * will get to check whether the PIN matches the one
 	 * showing on the Bluetooth device */
 	if (notification_supports_actions () != FALSE)
 		show_notification(_("Bluetooth device"),
-				    line, _("Verify passkey"), 0,
+				    line, _("Verify PIN"), 0,
 				    G_CALLBACK(notification_closed));
 	else
 		present_notification_dialogs ();
@@ -703,7 +709,7 @@ static gboolean adapter_insert(GtkTreeModel *model, GtkTreePath *path,
 	agent = bluetooth_agent_new();
 
 	bluetooth_agent_set_pincode_func(agent, pincode_request, adapter);
-	bluetooth_agent_set_passkey_func(agent, passkey_request, adapter);
+	bluetooth_agent_set_passkey_func(agent, pin_request, adapter);
 	bluetooth_agent_set_display_func(agent, display_request, adapter);
 	bluetooth_agent_set_confirm_func(agent, confirm_request, adapter);
 	bluetooth_agent_set_authorize_func(agent, authorize_request, adapter);

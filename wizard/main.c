@@ -94,11 +94,11 @@ static GtkWidget *page_summary = NULL;
 static GtkWidget *label_connecting = NULL;
 static GtkWidget *spinner_connecting = NULL;
 
-static GtkWidget *label_passkey = NULL;
-static GtkWidget *label_passkey_help = NULL;
+static GtkWidget *label_pin = NULL;
+static GtkWidget *label_pin_help = NULL;
 
-static GtkWidget *label_ssp_passkey_help = NULL;
-static GtkWidget *label_ssp_passkey = NULL;
+static GtkWidget *label_ssp_pin_help = NULL;
+static GtkWidget *label_ssp_pin = NULL;
 static GtkWidget *does_not_match_button = NULL;
 static GtkWidget *matches_button = NULL;
 
@@ -113,7 +113,7 @@ static GtkWidget *extra_config_frame = NULL;
 
 static BluetoothChooser *selector = NULL;
 
-static GtkWidget *passkey_dialog = NULL;
+static GtkWidget *pin_dialog = NULL;
 static GtkWidget *radio_auto = NULL;
 static GtkWidget *radio_0000 = NULL;
 static GtkWidget *radio_1111 = NULL;
@@ -128,7 +128,7 @@ void select_device_changed(BluetoothChooser *selector, const char *address, gpoi
 gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event);
 void set_user_pincode(GtkWidget *button);
 void toggle_set_sensitive(GtkWidget *button, gpointer data);
-void passkey_option_button_clicked (GtkButton *button, gpointer data);
+void pin_option_button_clicked (GtkButton *button, gpointer data);
 void entry_custom_changed(GtkWidget *entry);
 void restart_button_clicked (GtkButton *button, gpointer user_data);
 void does_not_match_cb (GtkButton *button, gpointer user_data);
@@ -235,7 +235,7 @@ matches_cb (GtkButton *button,
 static gboolean
 confirm_callback (DBusGMethodInvocation *context,
 		  DBusGProxy *device,
-		  guint passkey,
+		  guint pin,
 		  gpointer user_data)
 {
 	char *str, *label;
@@ -243,15 +243,15 @@ confirm_callback (DBusGMethodInvocation *context,
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
-	gtk_widget_show (label_ssp_passkey_help);
-	label = g_strdup_printf (_("Please confirm that the passkey displayed on '%s' matches this one."),
+	gtk_widget_show (label_ssp_pin_help);
+	label = g_strdup_printf (_("Please confirm that the PIN displayed on '%s' matches this one."),
 				 target_name);
-	gtk_label_set_markup(GTK_LABEL(label_ssp_passkey_help), label);
+	gtk_label_set_markup(GTK_LABEL(label_ssp_pin_help), label);
 	g_free (label);
 
-	gtk_widget_show (label_ssp_passkey);
-	str = g_strdup_printf ("%d", passkey);
-	set_large_label (GTK_LABEL (label_ssp_passkey), str);
+	gtk_widget_show (label_ssp_pin);
+	str = g_strdup_printf ("%d", pin);
+	set_large_label (GTK_LABEL (label_ssp_pin), str);
 	g_free (str);
 
 	g_object_set_data (G_OBJECT(does_not_match_button), "context", context);
@@ -263,7 +263,7 @@ confirm_callback (DBusGMethodInvocation *context,
 static gboolean
 display_callback (DBusGMethodInvocation *context,
 		  DBusGProxy *device,
-		  guint passkey,
+		  guint pin,
 		  guint entered,
 		  gpointer user_data)
 {
@@ -273,7 +273,7 @@ display_callback (DBusGMethodInvocation *context,
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
-	code = g_strdup_printf("%d", passkey);
+	code = g_strdup_printf("%d", pin);
 
 	if (entered > 0) {
 		GtkEntry *entry;
@@ -296,11 +296,11 @@ display_callback (DBusGMethodInvocation *context,
 		done = g_strdup ("");
 	}
 
-	gtk_widget_show (label_passkey_help);
+	gtk_widget_show (label_pin_help);
 
-	gtk_label_set_markup(GTK_LABEL(label_ssp_passkey_help), _("Please enter the following passkey:"));
+	gtk_label_set_markup(GTK_LABEL(label_ssp_pin_help), _("Please enter the following PIN:"));
 	text = g_strdup_printf("%s%s", done, code + entered);
-	set_large_label (GTK_LABEL (label_ssp_passkey), text);
+	set_large_label (GTK_LABEL (label_ssp_pin), text);
 	g_free(text);
 
 	g_free(done);
@@ -547,10 +547,10 @@ void prepare_callback (GtkWidget *assistant,
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
 			char *text;
 
-			text = g_strdup_printf (_("Please enter the following passkey on '%s':"), target_name);
-			gtk_label_set_markup(GTK_LABEL(label_passkey_help), text);
+			text = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
+			gtk_label_set_markup(GTK_LABEL(label_pin_help), text);
 			g_free (text);
-			set_large_label (GTK_LABEL (label_passkey), pincode);
+			set_large_label (GTK_LABEL (label_pin), pincode);
 		} else {
 			g_assert_not_reached ();
 		}
@@ -678,7 +678,7 @@ void
 entry_custom_changed (GtkWidget *entry)
 {
 	user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
-	gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (pin_dialog),
 					   GTK_RESPONSE_ACCEPT,
 					   gtk_entry_get_text_length (GTK_ENTRY (entry)) >= 1);
 }
@@ -693,7 +693,7 @@ toggle_set_sensitive (GtkWidget *button,
 	gtk_widget_set_sensitive(entry_custom, active);
 	/* When selecting another PIN, make sure the "Close" button is sensitive */
 	if (!active)
-		gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (pin_dialog),
 						   GTK_RESPONSE_ACCEPT, TRUE);
 }
 
@@ -724,7 +724,7 @@ set_user_pincode (GtkWidget *button)
 		if (entry != NULL) {
 			g_free (user_pincode);
 			user_pincode = g_strdup (gtk_entry_get_text(entry));
-			gtk_dialog_set_response_sensitive (GTK_DIALOG (passkey_dialog),
+			gtk_dialog_set_response_sensitive (GTK_DIALOG (pin_dialog),
 							   GTK_RESPONSE_ACCEPT,
 							   gtk_entry_get_text_length (entry) >= 1);
 		} else if (pin != NULL) {
@@ -797,7 +797,7 @@ select_device_changed (BluetoothChooser *selector,
 }
 
 void
-passkey_option_button_clicked (GtkButton *button,
+pin_option_button_clicked (GtkButton *button,
 			       gpointer data)
 {
 	GtkWidget *radio;
@@ -806,9 +806,9 @@ passkey_option_button_clicked (GtkButton *button,
 	oldpin = user_pincode;
 	user_pincode = NULL;
 
-	gtk_window_set_transient_for (GTK_WINDOW (passkey_dialog),
+	gtk_window_set_transient_for (GTK_WINDOW (pin_dialog),
 				      GTK_WINDOW (window_assistant));
-	gtk_window_present (GTK_WINDOW (passkey_dialog));
+	gtk_window_present (GTK_WINDOW (pin_dialog));
 
 	/* When reopening, try to guess where the pincode was set */
 	if (oldpin == NULL)
@@ -826,14 +826,14 @@ passkey_option_button_clicked (GtkButton *button,
 	if (radio == radio_custom)
 		gtk_entry_set_text (GTK_ENTRY (entry_custom), oldpin);
 
-	if (gtk_dialog_run (GTK_DIALOG (passkey_dialog)) != GTK_RESPONSE_ACCEPT) {
+	if (gtk_dialog_run (GTK_DIALOG (pin_dialog)) != GTK_RESPONSE_ACCEPT) {
 		g_free (user_pincode);
 		user_pincode = oldpin;
 	} else {
 		g_free (oldpin);
 	}
 
-	gtk_widget_hide(passkey_dialog);
+	gtk_widget_hide(pin_dialog);
 }
 
 static int
@@ -917,14 +917,14 @@ create_wizard (void)
 
 	/* Setup page */
 	page_setup = W("page_setup");
-	label_passkey_help = W("label_passkey_help");
-	label_passkey = W("label_passkey");
+	label_pin_help = W("label_pin_help");
+	label_pin = W("label_pin");
 
 	/* SSP Setup page */
 	page_ssp_setup = W("page_ssp_setup");
 	gtk_assistant_set_page_complete(assistant, page_ssp_setup, FALSE);
-	label_ssp_passkey_help = W("label_ssp_passkey_help");
-	label_ssp_passkey = W("label_ssp_passkey");
+	label_ssp_pin_help = W("label_ssp_pin_help");
+	label_ssp_pin = W("label_ssp_pin");
 	does_not_match_button = W("does_not_match_button");
 	matches_button = W("matches_button");
 
@@ -953,8 +953,8 @@ create_wizard (void)
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 
-	/* Passkey dialog */
-	passkey_dialog = W("passkey_dialog");
+	/* PIN dialog */
+	pin_dialog = W("pin_dialog");
 	radio_auto = W("radio_auto");
 	radio_0000 = W("radio_0000");
 	radio_1111 = W("radio_1111");

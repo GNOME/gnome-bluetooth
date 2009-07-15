@@ -83,13 +83,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="passkey_option_button">
-            <property name="label" translatable="yes">Passkey _options...</property>
+          <object class="GtkButton" id="pin_option_button">
+            <property name="label" translatable="yes">PIN _options...</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_underline">True</property>
-            <signal name="clicked" handler="passkey_option_button_clicked"/>
+            <signal name="clicked" handler="pin_option_button_clicked"/>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -165,11 +165,11 @@
         <property name="border_width">24</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkLabel" id="label_passkey_help">
+          <object class="GtkLabel" id="label_pin_help">
             <property name="visible">True</property>
             <property name="xalign">0</property>
             <property name="yalign">0</property>
-            <property name="label">Please enter the following passkey on 'Foobar':</property>
+            <property name="label">Please enter the following PIN on 'Foobar':</property>
             <property name="wrap">True</property>
           </object>
           <packing>
@@ -178,7 +178,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label_passkey">
+          <object class="GtkLabel" id="label_pin">
             <property name="label">&lt;span font_desc="50" color="black" bgcolor="white"&gt;  123456  &lt;/span&gt;</property>
             <property name="use_markup">True</property>
             <property name="visible">True</property>
@@ -199,11 +199,11 @@
         <property name="border_width">24</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkLabel" id="label_ssp_passkey_help">
+          <object class="GtkLabel" id="label_ssp_pin_help">
             <property name="visible">True</property>
             <property name="xalign">0</property>
             <property name="yalign">0</property>
-            <property name="label">Please confirm that the passkey displayed on 'Foobar' matches this one</property>
+            <property name="label">Please confirm that the PIN displayed on 'Foobar' matches this one</property>
             <property name="wrap">True</property>
           </object>
           <packing>
@@ -212,7 +212,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="label_ssp_passkey">
+          <object class="GtkLabel" id="label_ssp_pin">
             <property name="label">&lt;span font_desc="50" color="black" bgcolor="white"&gt;  123456  &lt;/span&gt;</property>
             <property name="use_markup">True</property>
           </object>
@@ -382,9 +382,9 @@
       </packing>
     </child>
   </object>
-  <object class="GtkDialog" id="passkey_dialog">
+  <object class="GtkDialog" id="pin_dialog">
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Passkey Options</property>
+    <property name="title" translatable="yes">PIN Options</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
@@ -401,7 +401,7 @@
             <property name="spacing">6</property>
             <child>
               <object class="GtkRadioButton" id="radio_auto">
-                <property name="label" translatable="yes">_Automatic passkey selection</property>
+                <property name="label" translatable="yes">_Automatic PIN selection</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -418,7 +418,7 @@
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Fixed Passkey</property>
+                <property name="label" translatable="yes">Fixed PIN</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
@@ -478,7 +478,7 @@
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkRadioButton" id="radio_custom">
-                    <property name="label" translatable="yes">Custom passkey code:</property>
+                    <property name="label" translatable="yes">Custom PIN code:</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -576,7 +576,7 @@
     <signal name="clicked" handler="restart_button_clicked"/>
   </object>
   <object class="GtkButton" id="does_not_match_button">
-    <property name="label" comments="This is a button to answer: Does the passkey matches the one on the device?" translatable="yes">Does not match</property>
+    <property name="label" comments="This is a button to answer: Does the PIN matches the one on the device?" translatable="yes">Does not match</property>
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="receives_default">True</property>
@@ -585,7 +585,7 @@
     <signal name="clicked" handler="does_not_match_cb"/>
   </object>
   <object class="GtkButton" id="matches_button">
-    <property name="label" comments="This is a button to answer: Does the passkey matches the one on the device?" translatable="yes">Matches</property>
+    <property name="label" comments="This is a button to answer: Does the PIN matches the one on the device?" translatable="yes">Matches</property>
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="receives_default">True</property>

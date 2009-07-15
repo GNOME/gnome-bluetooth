@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 			"/hci0/dev_11_22_33_44_55_66", "org.bluez.Device");
 
 	//display_dialog(adapter, device, "Test (00:11:22:33:44:55)", "123456", 0, NULL);
-	passkey_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", FALSE, NULL);
+	pin_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", FALSE, NULL);
 	confirm_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", "123456", NULL);
 	auth_dialog(adapter, device, "Test", "'Test' (00:11:22:33:44:55)", "UUID", NULL);
 
