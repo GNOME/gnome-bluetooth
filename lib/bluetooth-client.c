@@ -405,6 +405,20 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 	return table;
 }
 
+static const char *
+uuid16_custom_to_string (guint uuid16, const char *uuid)
+{
+	switch (uuid16) {
+	case 0x2:
+		return "SyncMLClient";
+	case 0x5601:
+		return "Nokia SyncML Server";
+	default:
+		g_debug ("Unhandled custom UUID %s (0x%x)", uuid, uuid16);
+		return NULL;
+	}
+}
+
 /* Short names from Table 2 at:
  * https://www.bluetooth.org/Technical/AssignedNumbers/service_discovery.htm */
 static const char *
@@ -445,6 +459,8 @@ uuid16_to_string (guint uuid16, const char *uuid)
 		return "HandsfreeAudioGateway";
 	case 0x1124:
 		return "HumanInterfaceDeviceService";
+	case 0x112d:
+		return "SIM_Access";
 	case 0x112F:
 		return "Phonebook_Access_-_PSE";
 	case 0x1203:
@@ -453,6 +469,8 @@ uuid16_to_string (guint uuid16, const char *uuid)
 	case 0x1200: /* PnPInformation */
 		/* Those are ignored */
 		return NULL;
+	case 0x1201:
+		return "GenericNetworking";
 	case 0x8e771303:
 	case 0x8e771301:
 		return "SEMC HLA";
@@ -469,6 +487,10 @@ bluetooth_uuid_to_string (const char *uuid)
 {
 	char **parts;
 	guint uuid16;
+	gboolean is_custom = FALSE;
+
+	if (g_str_has_suffix (uuid, "-0000-1000-8000-0002ee000002") != FALSE)
+		is_custom = TRUE;
 
 	parts = g_strsplit (uuid, "-", -1);
 	if (parts == NULL || parts[0] == NULL) {
@@ -481,7 +503,9 @@ bluetooth_uuid_to_string (const char *uuid)
 	if (uuid16 == 0)
 		return NULL;
 
-	return uuid16_to_string (uuid16, uuid);
+	if (is_custom == FALSE)
+		return uuid16_to_string (uuid16, uuid);
+	return uuid16_custom_to_string (uuid16, uuid);
 }
 
 static char **
