@@ -567,7 +567,7 @@ void prepare_callback (GtkWidget *assistant,
 		 * The '%s' is the device name, for example:
 		 * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 		 */
-		text = g_strdup_printf (_("Please wait while finishing setup on '%s'..."), target_name);
+		text = g_strdup_printf (_("Please wait while finishing setup on device '%s'..."), target_name);
 		gtk_label_set_text (GTK_LABEL (label_finishing), text);
 		g_free (text);
 	} else {
@@ -580,7 +580,7 @@ void prepare_callback (GtkWidget *assistant,
 		char **uuids, *text;
 
 		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
-		text = g_strdup_printf (_("Successfully configured '%s'"), g_value_get_string (&value));
+		text = g_strdup_printf (_("Successfully setup new device '%s'"), g_value_get_string (&value));
 		g_value_unset (&value);
 		gtk_label_set_text (GTK_LABEL (label_summary), text);
 		g_free (text);
