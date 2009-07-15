@@ -176,13 +176,13 @@ static gboolean show_confirm_dialog(const char *name)
 
 	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-					 _("Remove '%s' from list of known devices?"), name);
+					 _("Remove '%s' from the list of devices?"), name);
 	g_object_set (G_OBJECT (dialog), "secondary-text",
 		      _("If you remove the device, you will have to set it up again before next use."),
 		      NULL);
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -457,7 +457,7 @@ static void create_adapter(adapter_data *adapter)
 
 	adapter->button_disconnect = button;
 
-	button = gtk_button_new_with_label(_("_Remove"));
+	button = gtk_button_new_with_mnemonic(_("_Remove"));
 	image = gtk_image_new_from_stock(GTK_STOCK_REMOVE,
 						GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image(GTK_BUTTON(button), image);
