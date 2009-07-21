@@ -31,7 +31,6 @@
 #include <math.h>
 
 #include "bling-spinner.h"
-#include "bling-color.h"
 
 #define BLING_SPINNER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), BLING_TYPE_SPINNER, BlingSpinnerPrivate))
 
@@ -40,7 +39,6 @@ G_DEFINE_TYPE (BlingSpinner, bling_spinner, GTK_TYPE_DRAWING_AREA);
 enum
 {
 	PROP_0,
-	PROP_COLOR,
 	PROP_NUM_LINES
 };
 
@@ -48,12 +46,10 @@ enum
 struct _BlingSpinnerPrivate
 {
 	/* state */
-	gboolean have_alpha;
 	guint current;
 	guint timeout;
 
 	/* appearance */
-	BlingColor color;
 	guint lines;
 };
 
@@ -141,12 +137,6 @@ bling_spinner_class_init(BlingSpinnerClass *klass)
 	widget_class->expose_event = bling_spinner_expose;
 	widget_class->screen_changed = bling_spinner_screen_changed;
 
-	g_object_class_install_property(gobject_class, PROP_COLOR,
-		g_param_spec_string("color", "Color",
-							"Main color",
-							"454545C8",
-							G_PARAM_CONSTRUCT | G_PARAM_WRITABLE));
-
 	g_object_class_install_property(gobject_class, PROP_NUM_LINES,
 		g_param_spec_uint("lines", "Num Lines",
 							"The number of lines to animate",
@@ -206,11 +196,8 @@ bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
 	new_screen = gtk_widget_get_screen (widget);
 	colormap = gdk_screen_get_rgba_colormap (new_screen);
 
-	if (!colormap) {
+	if (!colormap)
 		colormap = gdk_screen_get_rgb_colormap (new_screen);
-		priv->have_alpha = FALSE;
-	} else
-		priv->have_alpha = TRUE;
 
 	gtk_widget_set_colormap (widget, colormap);
 }
@@ -247,9 +234,6 @@ bling_spinner_set_property(GObject *gobject, guint prop_id,
 
 	switch (prop_id)
 	{
-		case PROP_COLOR:
-			bling_color_parse_string (&priv->color, g_value_get_string(value));
-			break;
 		case PROP_NUM_LINES:
 			priv->lines = g_value_get_uint(value);
 			break;

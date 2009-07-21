@@ -14,7 +14,6 @@ libcommon_la_SOURCES =						\
 		obex-agent.h obex-agent.c			\
 		bluetooth-plugin-manager.c			\
 		bluetooth-plugin-manager.h			\
-		bling-color.c bling-color.h			\
 		bling-spinner.c bling-spinner.h			\
 		bluetooth-enums.h
 libcommon_la_LIBADD = $(COMMON_LIBS)
@@ -27,7 +26,6 @@ libgnome_bluetooth_la_SOURCES =				\
 	marshal.h marshal.c				\
 	gnome-bluetooth-enum-types.h			\
 	gnome-bluetooth-enum-types.c			\
-	bling-color.c bling-color.h			\
 	bling-spinner.c bling-spinner.h			\
 	bluetooth-chooser.c bluetooth-chooser.h		\
 	bluetooth-chooser-button.c bluetooth-chooser-button.h
