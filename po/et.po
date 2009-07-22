@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth head\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-06-26 12:44+0000\n"
-"PO-Revision-Date: 2009-06-26 22:07+0300\n"
+"POT-Creation-Date: 2009-07-21 16:06+0000\n"
+"PO-Revision-Date: 2009-07-22 10:54+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Gnome Estonian Translation Team <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -213,12 +213,12 @@ msgid "Device '%s' wants to pair with this computer"
 msgstr "Seade '%s' tahab paarduda selle arvutiga"
 
 #, c-format
-msgid "Please enter the passkey mentioned on device %s."
-msgstr "Palun sisesta parool, mille ütleb seade %s."
+msgid "Please enter the PIN mentioned on device %s."
+msgstr "Palun sisesta PIN-kood, mille ütleb seade %s."
 
 #, c-format
-msgid "Please confirm whether the passkey '%s' matches the one on device %s."
-msgstr "Palun kontrolli, et parool '%s' kattuks parooliga seadmel %s."
+msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+msgstr "Palun kontrolli, et PIN-kood '%s' kattuks parooliga seadmel %s."
 
 #. translators: Whether to grant access to a particular service
 #, c-format
@@ -238,8 +238,8 @@ msgstr "Seadmega '%s' paardumise päring"
 msgid "Bluetooth device"
 msgstr "Bluetoothi seade"
 
-msgid "Enter passkey"
-msgstr "Sisesta parool"
+msgid "Enter PIN"
+msgstr "Sisesta PIN-kood"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
@@ -247,8 +247,8 @@ msgstr "Sisesta parool"
 msgid "Pairing confirmation for '%s'"
 msgstr "Paardumise kinnitus seadmele '%s'"
 
-msgid "Check passkey"
-msgstr "Parooli kontroll"
+msgid "Verify PIN"
+msgstr "PIN-koodi kontroll"
 
 #, c-format
 msgid "Authorization request from '%s'"
@@ -326,26 +326,27 @@ msgid "Bluetooth Properties"
 msgstr "Bluetoothi sätted"
 
 #, c-format
-msgid "Remove '%s' from list of known devices?"
+msgid "Remove '%s' from the list of devices?"
 msgstr "Kas eemaldada '%s' tuntud seadmete loendist?"
 
-msgid "If you delete the device, you have to set it up again before next use."
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
 msgstr ""
-"Kui sa kustutad seadme, pead selle enne järgmist kasutamist uuesti "
+"Kui sa eemaldad seadme, pead selle enne järgmist kasutamist uuesti "
 "häälestama."
 
 #. The discoverable checkbox
-msgid "_Discoverable"
-msgstr "_Avastatav"
+msgid "Make computer _discoverable"
+msgstr "_Arvuti on alati nähtav"
 
 msgid "Friendly name"
 msgstr "Hüüdnimi"
 
-msgid "Known devices"
-msgstr "Tuntud seadmed"
+msgid "Setup _new device..."
+msgstr "_Uue seadme häälestamine..."
 
-msgid "Delete"
-msgstr "Kustuta"
+msgid "_Remove"
+msgstr "_Eemalda"
 
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth on keelatud"
@@ -384,12 +385,12 @@ msgid "Pairing with '%s' cancelled"
 msgstr "Paardumine seadmega '%s' katkestati"
 
 #, c-format
-msgid "Please confirm that the passkey displayed on '%s' matches this one."
+msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
-"Kontrolli, kas parool, mida kuvatakse seadmel '%s', kattub sellega siin."
+"Kontrolli, kas PIN-kood, mida kuvatakse seadmel '%s', kattub sellega siin."
 
-msgid "Please enter the following passkey:"
-msgstr "Palun sisesta järgnev parool:"
+msgid "Please enter the following PIN:"
+msgstr "Palun sisesta järgnev PIN-kood:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -408,20 +409,20 @@ msgid "Connecting to '%s'..."
 msgstr "Ühendumine seadmega '%s'..."
 
 #, c-format
-msgid "Please enter the following passkey on '%s':"
-msgstr "Palun sisesta järgnev parool seadmesse '%s':"
+msgid "Please enter the following PIN on '%s':"
+msgstr "Palun sisesta järgnev PIN-kood seadmesse '%s':"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
 #, c-format
-msgid "Please wait while finishing setup on '%s'..."
+msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Palun oota seadme '%s' häälestamise lõppu..."
 
 #, c-format
-msgid "Successfully configured '%s'"
-msgstr "'%s' seadistamine edukas"
+msgid "Successfully setup new device '%s'"
+msgstr "Uue seadme '%s' häälestus edukas"
 
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (enamik peakomplekte, hiiri ja GPS seadmeid)"
@@ -432,11 +433,11 @@ msgstr "'1111'"
 msgid "'1234'"
 msgstr "'1234'"
 
-msgid "Bluetooth Device Wizard"
-msgstr "Bluetoothi seadme nõustaja"
+msgid "Bluetooth New Device Setup"
+msgstr "Uue Bluetooth-seadme häälestus"
 
-msgid "Custom passkey code:"
-msgstr "Oma parool:"
+msgid "Custom PIN code:"
+msgstr "Oma PIN-kood:"
 
 msgid "Device Setup"
 msgstr "Seadme häälestus"
@@ -450,11 +451,11 @@ msgstr "Seadme otsing"
 msgid "Does not match"
 msgstr "Ei kattu"
 
-msgid "Finishing Device Setup"
-msgstr "Seadme häälestuse lõpetamine"
+msgid "Finishing New Device Setup"
+msgstr "Uue seadme häälestuse lõpetamine"
 
-msgid "Fixed Passkey"
-msgstr "Fikseeritud parool"
+msgid "Fixed PIN"
+msgstr "Fikseeritud PIN-kood"
 
 msgid "Introduction"
 msgstr "Sissejuhatus"
@@ -462,11 +463,11 @@ msgstr "Sissejuhatus"
 msgid "Matches"
 msgstr "Kattub"
 
-msgid "Passkey Options"
-msgstr "Parooli valikud"
+msgid "PIN Options"
+msgstr "PIN-koodi valikud"
 
-msgid "Passkey _options..."
-msgstr "Parooli _valikud..."
+msgid "PIN _options..."
+msgstr "PIN-koodi _valikud..."
 
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vali lisateenused, mida tahad selle seadmega kasutada:"
@@ -477,8 +478,12 @@ msgstr "Vali seade, mida tahad tööle seada"
 msgid "Setup Completed"
 msgstr "Häälestamine lõpetatud"
 
-msgid "Setup Finished"
-msgstr "Häälestamine lõpetatud"
+msgid ""
+"The Bluetooth new device setup will walk you through the process of "
+"configuring Bluetooth enabled devices for use with this computer."
+msgstr ""
+"Nõustaja juhatab sind uue Bluetooth-seadme häälestamisel, misjärel saad seda "
+"oma arvutiga kasutada."
 
 msgid ""
 "The device will need to be within 10 meters of your computer, and be &#xAB;"
@@ -489,18 +494,11 @@ msgstr ""
 "discoverable&#xBB; (avastatav, mõnikord öeldakse ka &#xAB;visible&#xBB;, "
 "nähtav). Kahtluse korral uuri seadme kasutajajuhendit."
 
-msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer."
-msgstr ""
-"Nõustaja juhatab sind Bluetooth seadme häälestamisel, misjärel saad seadet "
-"oma arvutiga kasutada."
+msgid "Welcome to the Bluetooth new device setup"
+msgstr "Tere tulemast uue Bluetooth seadme häälestuse nõustajasse"
 
-msgid "Welcome to the Bluetooth device setup wizard"
-msgstr "Tere tulemast Bluetooth seadme häälestuse nõustajasse"
-
-msgid "_Automatic passkey selection"
-msgstr "_Automaatne parooli valimine"
+msgid "_Automatic PIN selection"
+msgstr "_Automaatne PIN-koodi valimine"
 
 msgid "_Restart Setup"
 msgstr "_Seadista uuesti"
@@ -580,3 +578,21 @@ msgstr "Kaugseade, mida kasutada"
 
 msgid "Remote device's name"
 msgstr "Kaugseadme nimi"
+
+#~ msgid "Enter passkey"
+#~ msgstr "Sisesta parool"
+
+#~ msgid "Check passkey"
+#~ msgstr "Parooli kontroll"
+
+#~ msgid "Known devices"
+#~ msgstr "Tuntud seadmed"
+
+#~ msgid "Delete"
+#~ msgstr "Kustuta"
+
+#~ msgid "Bluetooth Device Wizard"
+#~ msgstr "Bluetoothi seadme nõustaja"
+
+#~ msgid "Setup Finished"
+#~ msgstr "Häälestamine lõpetatud"
