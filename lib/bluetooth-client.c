@@ -169,7 +169,8 @@ bluetooth_verify_address (const char *bdaddr)
 	return retval;
 }
 
-static guint class_to_type(guint32 class)
+guint
+bluetooth_class_to_type (guint32 class)
 {
 	switch ((class & 0x1f00) >> 8) {
 	case 0x01:
@@ -638,7 +639,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 		name = value ? g_value_get_string(value) : NULL;
 
 		value = g_hash_table_lookup(hash, "Class");
-		type = class_to_type(g_value_get_uint(value));
+		type = bluetooth_class_to_type(g_value_get_uint(value));
 
 		value = g_hash_table_lookup(hash, "Icon");
 		icon = value ? g_value_get_string(value) : "bluetooth";

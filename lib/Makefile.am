@@ -97,7 +97,7 @@ nodist_libcommon_la_SOURCES = $(BUILT_SOURCES)
 
 CLEANFILES = $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins
+noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins test-class
 
 test_client_LDADD = libcommon.la $(GTK_LIBS) $(DBUS_LIBS)
 
@@ -106,6 +106,8 @@ test_agent_LDADD = libcommon.la $(DBUS_LIBS)
 test_deviceselection_LDADD = libgnome-bluetooth.la
 
 test_plugins_LDADD = libcommon.la
+
+test_class_LDADD = libcommon.la
 
 EXTRA_DIST += marshal.list \
 		bluetooth-client.xml \
