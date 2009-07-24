@@ -1610,6 +1610,10 @@ service_to_index (const char *service)
 		if (g_str_equal (connectable_interfaces[i], service) != FALSE)
 			return i;
 	}
+	for (i = 0; i < G_N_ELEMENTS (detectable_interfaces); i++) {
+		if (g_str_equal (detectable_interfaces[i], service) != FALSE)
+			return i + G_N_ELEMENTS (connectable_interfaces);
+	}
 
 	g_assert_not_reached ();
 
