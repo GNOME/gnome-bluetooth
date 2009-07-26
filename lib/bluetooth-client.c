@@ -34,6 +34,7 @@
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-client-glue.h"
+#include "gnome-bluetooth-enum-types.h"
 
 #include "marshal.h"
 
@@ -311,12 +312,24 @@ device_services_changed (DBusGProxy *iface, const char *property,
 	GtkTreePath *tree_path;
 	GHashTable *table;
 	const char *path;
-	gboolean is_connected;
+	BluetoothStatus status;
 
 	if (g_str_equal (property, "Connected") != FALSE) {
-		is_connected = g_value_get_boolean(value);
+		status = g_value_get_boolean (value) ?
+			BLUETOOTH_STATUS_CONNECTED :
+			BLUETOOTH_STATUS_DISCONNECTED;
 	} else if (g_str_equal (property, "State") != FALSE) {
-		is_connected = (g_strcmp0(g_value_get_string (value), "connected") == 0);
+		GEnumClass *eclass;
+		GEnumValue *ev;
+		eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
+		ev = g_enum_get_value_by_nick (eclass, g_value_get_string (value));
+		if (ev == NULL) {
+			g_warning ("Unknown status '%s'", g_value_get_string (value));
+			status = BLUETOOTH_STATUS_DISCONNECTED;
+		} else {
+			status = ev->value;
+		}
+		g_type_class_unref (eclass);
 	} else
 		return;
 
@@ -330,7 +343,7 @@ device_services_changed (DBusGProxy *iface, const char *property,
 
 	g_hash_table_insert (table,
 			     (gpointer) dbus_g_proxy_get_interface (iface),
-			     GINT_TO_POINTER (is_connected));
+			     GINT_TO_POINTER (status));
 
 	tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
 	gtk_tree_model_row_changed (GTK_TREE_MODEL (priv->store), tree_path, &iter);
@@ -367,21 +380,30 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 				       G_TYPE_INVALID, dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &props,
 				       G_TYPE_INVALID) != FALSE) {
 			GValue *value;
-			gboolean is_connected;
+			BluetoothStatus status;
 
 			value = g_hash_table_lookup(props, "Connected");
 			if (value != NULL) {
-				is_connected = g_value_get_boolean(value);
+				status = g_value_get_boolean(value) ?
+					BLUETOOTH_STATUS_CONNECTED :
+					BLUETOOTH_STATUS_DISCONNECTED;
 			} else {
-				const char *str = "disconnected";
-				value = g_hash_table_lookup(props, "State");
-				if (value != NULL)
-					str = g_value_get_string(value);
+				GEnumClass *eclass;
+				GEnumValue *ev;
 
-				is_connected = (g_strcmp0(str, "connected") == 0);
+				eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
+				value = g_hash_table_lookup(props, "State");
+				ev = g_enum_get_value_by_nick (eclass, g_value_get_string (value));
+				if (ev == NULL) {
+					g_warning ("Unknown status '%s'", g_value_get_string (value));
+					status = BLUETOOTH_STATUS_DISCONNECTED;
+				} else {
+					status = ev->value;
+				}
+				g_type_class_unref (eclass);
 			}
 
-			g_hash_table_insert (table, (gpointer) detectable_interfaces[i], GINT_TO_POINTER (is_connected));
+			g_hash_table_insert (table, (gpointer) detectable_interfaces[i], GINT_TO_POINTER (status));
 
 			if (connect_signal != FALSE) {
 				dbus_g_proxy_add_signal(iface, "PropertyChanged",
