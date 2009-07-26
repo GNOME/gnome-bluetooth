@@ -546,7 +546,11 @@ void prepare_callback (GtkWidget *assistant,
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
 			char *text;
 
-			text = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
+			if (target_type == BLUETOOTH_TYPE_KEYBOARD) {
+				text = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
+			} else {
+				text = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
+			}
 			gtk_label_set_markup(GTK_LABEL(label_pin_help), text);
 			g_free (text);
 			set_large_label (GTK_LABEL (label_pin), pincode);
