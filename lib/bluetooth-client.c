@@ -62,9 +62,9 @@
 #define BLUEZ_DEVICE_INTERFACE	"org.bluez.Device"
 
 static char * detectable_interfaces[] = {
-	"org.bluez.Audio",
 	"org.bluez.Headset",
 	"org.bluez.AudioSink",
+	"org.bluez.Audio",
 	"org.bluez.Input"
 };
 
@@ -369,6 +369,15 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 		if (g_str_equal (detectable_interfaces[i], BLUEZ_INPUT_INTERFACE)
 		    && g_hash_table_size (table) > 0)
 			continue;
+
+		/* Don't add the audio interface if there's no Headset or AudioSink,
+		 * that means that it could only receive audio */
+		if (g_str_equal (detectable_interfaces[i], BLUEZ_AUDIO_INTERFACE)) {
+			if (g_hash_table_lookup (table, BLUEZ_HEADSET_INTERFACE) == NULL &&
+			    g_hash_table_lookup (table, BLUEZ_AUDIOSINK_INTERFACE) == NULL) {
+				continue;
+			}
+		}
 
 		/* And skip interface if it's already in the hash table */
 		if (g_hash_table_lookup (table, detectable_interfaces[i]) != NULL)
