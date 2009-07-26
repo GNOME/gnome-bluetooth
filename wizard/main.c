@@ -351,7 +351,7 @@ connect_callback (BluetoothClient *_client,
 	}
 
 	if (success == FALSE)
-		g_warning ("Failed to connect to device %s, please file a bug", data->path);
+		g_message ("Failed to connect to device %s", data->path);
 
 	g_timer_destroy (data->timer);
 	g_free (data->path);
