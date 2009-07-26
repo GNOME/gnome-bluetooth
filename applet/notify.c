@@ -149,6 +149,7 @@ void set_icon(gboolean enabled)
 
 	if (statusicon == NULL) {
 		g_free (icon_name);
+		g_free (tooltip);
 		icon_name = g_strdup (name);
 		tooltip = g_strdup (_tooltip);
 	} else {
