@@ -79,6 +79,12 @@ typedef enum {
 	_BLUETOOTH_NUM_COLUMNS /*< skip >*/
 } BluetoothColumn;
 
+typedef enum {
+	BLUETOOTH_STATUS_DISCONNECTED = 0,
+	BLUETOOTH_STATUS_CONNECTED,
+	BLUETOOTH_STATUS_CONNECTING
+} BluetoothStatus;
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_ENUMS_H */
