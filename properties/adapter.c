@@ -434,7 +434,7 @@ static void create_adapter(adapter_data *adapter)
 	gtk_table_attach(GTK_TABLE(table), buttonbox, 1, 2, 1, 2,
 			 GTK_FILL, GTK_FILL, 6, 6);
 
-	button = gtk_button_new_with_label(_("Setup _new device..."));
+	button = gtk_button_new_with_label(_("Set up _new device..."));
 	image = gtk_image_new_from_stock(GTK_STOCK_ADD,
 						GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image(GTK_BUTTON(button), image);
