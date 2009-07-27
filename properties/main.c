@@ -27,6 +27,8 @@
 #endif
 
 #include <glib/gi18n.h>
+#include <gdk/gdkkeysyms.h>
+#include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include <unique/uniqueapp.h>
 
@@ -47,6 +49,18 @@ static gboolean delete_callback(GtkWidget *window, GdkEvent *event,
 	gtk_main_quit();
 
 	return FALSE;
+}
+
+static void
+keypress_callback (GtkWidget *window,
+		   GdkEventKey *key,
+		   gpointer user_data)
+{
+	if (key->keyval == GDK_Escape) {
+		gtk_widget_destroy(GTK_WIDGET(window));
+
+		gtk_main_quit();
+	}
 }
 
 static void close_callback(GtkWidget *button, gpointer user_data)
@@ -147,6 +161,9 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_window_set_default_size(GTK_WINDOW(window), 600, 420);
 	g_signal_connect(G_OBJECT(window), "delete-event",
 					G_CALLBACK(delete_callback), NULL);
+
+	g_signal_connect(G_OBJECT(window), "key-press-event",
+			 G_CALLBACK(keypress_callback), NULL);
 
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 12);
