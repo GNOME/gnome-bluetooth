@@ -971,7 +971,9 @@ static void adapter_removed(DBusGProxy *manager,
 	if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL(priv->store), NULL) == 0) {
 		g_free(priv->default_adapter);
 		priv->default_adapter = NULL;
+		priv->default_adapter_powered = FALSE;
 		g_object_notify (G_OBJECT (client), "default-adapter");
+		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 	}
 }
 
