@@ -826,6 +826,18 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 		gtk_tree_store_set(priv->store, &iter,
 				BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
 		notify = TRUE;
+	} else if (g_str_equal(property, "Powered") == TRUE) {
+		gboolean powered = g_value_get_boolean(value);
+		gboolean is_default;
+
+		gtk_tree_store_set(priv->store, &iter,
+				   BLUETOOTH_COLUMN_POWERED, powered, -1);
+		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
+				   BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+		if (is_default != FALSE && powered != priv->default_adapter_powered) {
+			priv->default_adapter_powered = powered;
+			g_object_notify (G_OBJECT (client), "default-adapter-powered");
+		}
 	}
 
 	if (notify != FALSE) {
