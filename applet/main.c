@@ -309,10 +309,23 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 static GtkWidget *create_popupmenu(void)
 {
 	GObject *object;
+	GError *error = NULL;
 
 	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "popup-menu.ui", NULL) == 0)
-		gtk_builder_add_from_file (xml, PKGDATADIR "/popup-menu.ui", NULL);
+	if (gtk_builder_add_from_file (xml, "popup-menu.ui", &error) == 0) {
+		if (error->domain == GTK_BUILDER_ERROR) {
+			g_warning ("Failed to load popup-menu.ui: %s", error->message);
+			g_error_free (error);
+			return NULL;
+		}
+		g_error_free (error);
+		error = NULL;
+		if (gtk_builder_add_from_file (xml, PKGDATADIR "/popup-menu.ui", &error) == 0) {
+			g_warning ("Failed to load popup-menu.ui: %s", error->message);
+			g_error_free (error);
+			return NULL;
+		}
+	}
 
 	gtk_builder_connect_signals (xml, NULL);
 
