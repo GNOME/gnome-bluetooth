@@ -26,8 +26,20 @@
 #include <config.h>
 #endif
 
-#include <dbus/dbus-glib-lowlevel.h>
-#include <hal/libhal.h>
+#include <errno.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+
+#include <glib.h>
+
+#include "rfkill.h"
+
+#ifndef RFKILL_EVENT_SIZE_V1
+#define RFKILL_EVENT_SIZE_V1	8
+#endif
 
 #include "bluetooth-killswitch.h"
 
@@ -43,237 +55,116 @@ static int signals[LAST_SIGNAL] = { 0 };
 
 typedef struct _BluetoothIndKillswitch BluetoothIndKillswitch;
 struct _BluetoothIndKillswitch {
-	char *udi;
-	DBusPendingCall *call;
-	KillswitchState state, target_state;
+	guint index;
+	KillswitchState state;
 };
 
-typedef struct _BluetoothKillswitchPrivate BluetoothKillswitchPrivate;
 struct _BluetoothKillswitchPrivate {
-	LibHalContext *halctx;
-	DBusConnection *connection;
-	guint num_remaining_answers;
+	int fd;
+	GIOChannel *channel;
 	GList *killswitches; /* a GList of BluetoothIndKillswitch */
+	BluetoothKillswitchPrivate *priv;
 };
 
 G_DEFINE_TYPE(BluetoothKillswitch, bluetooth_killswitch, G_TYPE_OBJECT)
 
-static int
-power_to_state (int power)
+static KillswitchState
+event_to_state (guint soft, guint hard)
 {
-	switch (power) {
-	case 1: /* RFKILL_STATE_UNBLOCKED */
-		return KILLSWITCH_STATE_UNBLOCKED;
-	case 0: /* RFKILL_STATE_SOFT_BLOCKED */
-	case 2: /* RFKILL_STATE_HARD_BLOCKED */
+	if (hard)
+		return KILLSWITCH_STATE_HARD_BLOCKED;
+	else if (soft)
 		return KILLSWITCH_STATE_SOFT_BLOCKED;
-	default:
-		g_warning ("Unknown power state %d, please file a bug at "PACKAGE_BUGREPORT, power);
-		return KILLSWITCH_STATE_UNKNOWN;
-	}
+	else
+		return KILLSWITCH_STATE_UNBLOCKED;
 }
 
 static void
-setpower_reply (DBusPendingCall *call, void *user_data)
+update_killswitch (BluetoothKillswitch *killswitch,
+		   guint index, guint soft, guint hard)
 {
-	BluetoothKillswitch *killswitch = BLUETOOTH_KILLSWITCH (user_data);
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
-	DBusMessage *reply;
-	gint32 retval;
 	GList *l;
+	gboolean changed = FALSE;
 
-	priv->num_remaining_answers--;
-
-	reply = dbus_pending_call_steal_reply(call);
-
-	if (dbus_message_get_args(reply, NULL, DBUS_TYPE_INT32, &retval,
-				  DBUS_TYPE_INVALID) == FALSE) {
-		dbus_message_unref(reply);
-		goto done;
-	}
-
-	/* Look for the killswitch */
-	for (l = priv->killswitches; l ; l = l->next) {
+	for (l = priv->killswitches; l != NULL; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
-		if (call != ind->call)
-			continue;
-		ind->call = NULL;
-		if (retval == 0)
-			ind->state = ind->target_state;
-		break;
-	}
 
-	dbus_message_unref(reply);
-	dbus_pending_call_unref (call);
-
-done:
-	if (priv->num_remaining_answers == 0)
-		g_signal_emit (G_OBJECT (killswitch),
-			       signals[STATE_CHANGED],
-			       0, bluetooth_killswitch_get_state (killswitch));
-}
-
-static void
-getpower_reply (DBusPendingCall *call, void *user_data)
-{
-	BluetoothKillswitch *killswitch = BLUETOOTH_KILLSWITCH (user_data);
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
-	DBusMessage *reply;
-	GList *l;
-	gint32 power;
-
-	priv->num_remaining_answers--;
-
-	reply = dbus_pending_call_steal_reply (call);
-
-	if (dbus_message_get_args(reply, NULL, DBUS_TYPE_INT32, &power,
-				  DBUS_TYPE_INVALID) == FALSE) {
-		dbus_message_unref(reply);
-		goto done;
-	}
-
-	/* Look for the killswitch */
-	for (l = priv->killswitches; l ; l = l->next) {
-		BluetoothIndKillswitch *ind = l->data;
-		if (call != ind->call)
-			continue;
-		ind->state = power_to_state (power);
-		ind->call = NULL;
-		break;
-	}
-
-	dbus_message_unref(reply);
-	dbus_pending_call_unref (call);
-
-done:
-	if (priv->num_remaining_answers == 0)
-		g_signal_emit (G_OBJECT (killswitch),
-			       signals[STATE_CHANGED],
-			       0, bluetooth_killswitch_get_state (killswitch));
-}
-
-void
-bluetooth_killswitch_update_state (BluetoothKillswitch *killswitch)
-{
-	BluetoothKillswitchPrivate *priv;
-	GList *l;
-
-	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
-
-	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
-
-	if (priv->num_remaining_answers > 0)
-		return;
-
-	for (l = priv->killswitches ; l ; l = l->next) {
-		BluetoothIndKillswitch *ind = l->data;
-		DBusPendingCall *call;
-		DBusMessage *message;
-
-		/* Already checking status */
-		if (ind->call != NULL)
-			continue;
-
-		message = dbus_message_new_method_call ("org.freedesktop.Hal",
-							ind->udi,
-							"org.freedesktop.Hal.Device.KillSwitch",
-							"GetPower");
-
-		if (message == NULL)
-			continue;
-
-		if (dbus_connection_send_with_reply (priv->connection, message, &call, -1) == FALSE) {
-			dbus_message_unref(message);
-			continue;
+		if (ind->index == index) {
+			KillswitchState state = event_to_state (soft, hard);
+			if (state != ind->state) {
+				ind->state = state;
+				changed = TRUE;
+			}
+			break;
 		}
+	}
 
-		priv->num_remaining_answers++;
-		dbus_pending_call_set_notify (call, getpower_reply, killswitch, NULL);
-
-		dbus_message_unref (message);
+	if (changed != FALSE) {
+		g_message ("updating killswitch status %d", index);
+		g_signal_emit (G_OBJECT (killswitch),
+			       signals[STATE_CHANGED],
+			       0, bluetooth_killswitch_get_state (killswitch));
 	}
 }
 
 void
-bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState state)
+bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch,
+				KillswitchState state)
 {
-	BluetoothKillswitchPrivate *priv;
-	gboolean value;
-	GList *l;
+	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	struct rfkill_event event;
+	ssize_t len;
 
-	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
-	g_return_if_fail (state == KILLSWITCH_STATE_SOFT_BLOCKED || state == KILLSWITCH_STATE_UNBLOCKED);
+	g_return_if_fail (state != KILLSWITCH_STATE_HARD_BLOCKED);
 
-	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	memset (&event, 0, sizeof(event));
+	event.op = RFKILL_OP_CHANGE_ALL;
+	event.type = RFKILL_TYPE_BLUETOOTH;
+	if (state == KILLSWITCH_STATE_SOFT_BLOCKED)
+		event.soft = 1;
+	else if (state == KILLSWITCH_STATE_UNBLOCKED)
+		event.soft = 0;
+	else
+		g_assert_not_reached ();
 
-	if (priv->num_remaining_answers > 0)
-		return;
-
-	value = (state == KILLSWITCH_STATE_UNBLOCKED);
-
-	for (l = priv->killswitches ; l ; l = l->next) {
-		BluetoothIndKillswitch *ind = l->data;
-		DBusPendingCall *call;
-		DBusMessage *message;
-
-		message = dbus_message_new_method_call("org.freedesktop.Hal",
-						       ind->udi,
-						       "org.freedesktop.Hal.Device.KillSwitch",
-						       "SetPower");
-		if (message == NULL)
-			return;
-
-		dbus_message_append_args(message,
-					 DBUS_TYPE_BOOLEAN, &value,
-					 DBUS_TYPE_INVALID);
-
-		if (dbus_connection_send_with_reply(priv->connection, message,
-						    &call, -1) == FALSE) {
-			dbus_message_unref(message);
-			return;
-		}
-
-		ind->call = call;
-		ind->target_state = state;
-		priv->num_remaining_answers++;
-
-		dbus_pending_call_set_notify(call, setpower_reply, killswitch, NULL);
-
-		dbus_message_unref(message);
-	}
+	len = write (priv->fd, &event, sizeof(event));
+	if (len < 0)
+		g_warning ("Failed to change RFKILL state: %s",
+			   g_strerror (errno));
 }
 
 KillswitchState
 bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 {
 	BluetoothKillswitchPrivate *priv;
-	int state = KILLSWITCH_STATE_UNKNOWN;
+	int state = KILLSWITCH_STATE_UNBLOCKED;
 	GList *l;
 
-	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), KILLSWITCH_STATE_UNKNOWN);
+	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), state);
 
 	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
-	if (priv->connection == NULL)
-		return KILLSWITCH_STATE_UNKNOWN;
 
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
 
-		if (ind->state == KILLSWITCH_STATE_SOFT_BLOCKED) {
-			if (state == KILLSWITCH_STATE_UNKNOWN)
-				state = KILLSWITCH_STATE_SOFT_BLOCKED;
-			if (state != KILLSWITCH_STATE_SOFT_BLOCKED)
-				state = KILLSWITCH_STATE_MIXED;
-		} else {
-			if (state == KILLSWITCH_STATE_UNKNOWN)
-				state = KILLSWITCH_STATE_UNBLOCKED;
-			if (state != KILLSWITCH_STATE_UNBLOCKED)
-				state = KILLSWITCH_STATE_MIXED;
+		g_message ("killswitch %d is %d",
+			   ind->index, ind->state);
+
+		if (ind->state == KILLSWITCH_STATE_HARD_BLOCKED) {
+			state = KILLSWITCH_STATE_HARD_BLOCKED;
+			break;
 		}
+
+		if (ind->state == KILLSWITCH_STATE_SOFT_BLOCKED) {
+			state = KILLSWITCH_STATE_SOFT_BLOCKED;
+			continue;
+		}
+
+		state = ind->state;
 	}
 
-	if (state == KILLSWITCH_STATE_UNKNOWN)
-		return KILLSWITCH_STATE_UNKNOWN;
+	g_message ("killswitches state %d", state);
 
 	return state;
 }
@@ -289,97 +180,142 @@ bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch)
 }
 
 static void
-add_killswitch (BluetoothKillswitch *killswitch, const char *udi)
+remove_killswitch (BluetoothKillswitch *killswitch,
+		   guint index)
+{
+	BluetoothKillswitchPrivate *priv = killswitch->priv;
+	GList *l;
+
+	for (l = priv->killswitches; l != NULL; l = l->next) {
+		BluetoothIndKillswitch *ind = l->data;
+		if (ind->index == index) {
+			priv->killswitches = g_list_remove (priv->killswitches, ind);
+			g_message ("removing killswitch idx %d", index);
+			return;
+		}
+	}
+}
+
+static void
+add_killswitch (BluetoothKillswitch *killswitch,
+		guint index,
+		KillswitchState state)
+
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
-	DBusPendingCall *call;
-	DBusMessage *message;
 	BluetoothIndKillswitch *ind;
-	char *type;
 
-	type = libhal_device_get_property_string (priv->halctx,
-						  udi,
-						  "killswitch.type",
-						  NULL);
-	if (type == NULL || g_str_equal(type, "bluetooth") == FALSE) {
-		g_free (type);
-		return;
-	}
-	g_free (type);
-
-	message = dbus_message_new_method_call ("org.freedesktop.Hal",
-						udi,
-						"org.freedesktop.Hal.Device.KillSwitch",
-						"GetPower");
-
-	if (message == NULL)
-		return;
-
-	if (dbus_connection_send_with_reply (priv->connection, message, &call, -1) == FALSE) {
-		dbus_message_unref(message);
-		return;
-	}
-
+	g_message ("adding killswitch idx %d state %d", index, state);
 	ind = g_new0 (BluetoothIndKillswitch, 1);
-	ind->udi = g_strdup (udi);
-	ind->call = call;
+	ind->index = index;
+	ind->state = state;
 	priv->killswitches = g_list_append (priv->killswitches, ind);
-	priv->num_remaining_answers++;
+}
 
-	dbus_pending_call_set_notify (call, getpower_reply, killswitch, NULL);
+static gboolean
+event_cb (GIOChannel *source,
+	  GIOCondition condition,
+	  BluetoothKillswitch *killswitch)
+{
+	if (condition & G_IO_IN) {
+		GIOStatus status;
+		struct rfkill_event event;
 
-	dbus_message_unref (message);
+		status = g_io_channel_read_chars (source,
+						  (char *) &event,
+						  sizeof(event),
+						  NULL,
+						  NULL);
+		if (status == G_IO_STATUS_NORMAL) {
+			g_message ("RFKILL event: idx %u type %u op %u soft %u hard %u\n",
+				   event.idx, event.type, event.op,
+				   event.soft, event.hard);
+
+			if (event.type != RFKILL_TYPE_BLUETOOTH &&
+			    event.type != RFKILL_TYPE_ALL)
+				return TRUE;
+
+			if (event.op == RFKILL_OP_CHANGE) {
+				update_killswitch (killswitch, event.idx, event.soft, event.hard);
+			} else if (event.op == RFKILL_OP_DEL) {
+				remove_killswitch (killswitch, event.idx);
+			} else if (event.op == RFKILL_OP_ADD) {
+				KillswitchState state;
+				state = event_to_state (event.soft, event.hard);
+				add_killswitch (killswitch, event.idx, state);
+			}
+
+			g_signal_emit (G_OBJECT (killswitch),
+				       signals[STATE_CHANGED],
+				       0, bluetooth_killswitch_get_state (killswitch));
+		}
+	} else {
+		g_message ("something else happened");
+		return FALSE;
+	}
+
+	return TRUE;
 }
 
 static void
 bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
-	char **list;
-	int num;
+	struct rfkill_event event;
+	int fd;
 
-	priv->connection = dbus_bus_get(DBUS_BUS_SYSTEM, NULL);
-	if (priv->connection == NULL)
-		return;
+	killswitch->priv = priv;
 
-	priv->halctx = libhal_ctx_new();
-	if (priv->halctx == NULL) {
-		dbus_connection_unref (priv->connection);
-		return;
-	}
-
-	if (libhal_ctx_set_dbus_connection(priv->halctx, priv->connection) == FALSE) {
-		libhal_ctx_free(priv->halctx);
-		dbus_connection_unref (priv->connection);
-		priv->halctx = NULL;
+	fd = open("/dev/rfkill", O_RDWR);
+	if (fd < 0) {
+		if (errno == EACCES)
+			g_warning ("Could not open RFKILL control device, please verify your installation");
 		return;
 	}
 
-	if (libhal_ctx_init(priv->halctx, NULL) == FALSE) {
-		g_printerr("Couldn't init HAL context\n");
-		dbus_connection_unref (priv->connection);
-		libhal_ctx_free(priv->halctx);
-		priv->halctx = NULL;
+	if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0) {
+		g_message ("Can't set RFKILL control device to non-blocking");
+		close(fd);
 		return;
 	}
 
-	list = libhal_find_device_by_capability(priv->halctx, "killswitch", &num, NULL);
-	if (list) {
-		char **tmp = list;
+	while (1) {
+		KillswitchState state;
+		ssize_t len;
 
-		while (*tmp) {
-			add_killswitch (killswitch, *tmp);
-			tmp++;
+		len = read(fd, &event, sizeof(event));
+		if (len < 0) {
+			if (errno == -G_IO_ERROR_AGAIN)
+				break;
+			g_message ("Reading of RFKILL events failed");
+			break;
 		}
 
-		libhal_free_string_array (list);
-	}
-}
+		if (len != RFKILL_EVENT_SIZE_V1) {
+			g_warning("Wrong size of RFKILL event\n");
+			continue;
+		}
 
-static void
-free_ind_killswitch (BluetoothIndKillswitch *ind)
-{
-	g_free (ind->udi);
+		if (event.op != RFKILL_OP_ADD)
+			continue;
+		if (event.type != RFKILL_TYPE_BLUETOOTH)
+			continue;
+		state = event_to_state (event.soft, event.hard);
+
+		add_killswitch (killswitch, event.idx, state);
+	}
+
+	/* Setup monitoring */
+	priv->fd = fd;
+	priv->channel = g_io_channel_unix_new (priv->fd);
+	g_io_add_watch (priv->channel,
+			G_IO_IN | G_IO_HUP | G_IO_ERR,
+			(GIOFunc) event_cb,
+			killswitch);
+
+	g_signal_emit (G_OBJECT (killswitch),
+		       signals[STATE_CHANGED],
+		       0, bluetooth_killswitch_get_state (killswitch));
 }
 
 static void
@@ -387,18 +323,7 @@ bluetooth_killswitch_finalize (GObject *object)
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (object);
 
-	if (priv->halctx != NULL) {
-		libhal_ctx_shutdown(priv->halctx, NULL);
-		libhal_ctx_free(priv->halctx);
-		priv->halctx = NULL;
-	}
-
-	if (priv->connection != NULL) {
-		dbus_connection_unref(priv->connection);
-		priv->connection = NULL;
-	}
-
-	g_list_foreach (priv->killswitches, (GFunc) free_ind_killswitch, NULL);
+	g_list_foreach (priv->killswitches, (GFunc) g_free, NULL);
 	g_list_free (priv->killswitches);
 	priv->killswitches = NULL;
 

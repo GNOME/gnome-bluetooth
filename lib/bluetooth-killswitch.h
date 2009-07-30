@@ -30,10 +30,9 @@
 G_BEGIN_DECLS
 
 typedef enum {
-	KILLSWITCH_STATE_UNKNOWN = -1,
 	KILLSWITCH_STATE_SOFT_BLOCKED = 0,
 	KILLSWITCH_STATE_UNBLOCKED,
-	KILLSWITCH_STATE_MIXED,
+	KILLSWITCH_STATE_HARD_BLOCKED
 } KillswitchState;
 
 #define BLUETOOTH_TYPE_KILLSWITCH (bluetooth_killswitch_get_type())
@@ -50,9 +49,11 @@ typedef enum {
 
 typedef struct _BluetoothKillswitch BluetoothKillswitch;
 typedef struct _BluetoothKillswitchClass BluetoothKillswitchClass;
+typedef struct _BluetoothKillswitchPrivate BluetoothKillswitchPrivate;
 
 struct _BluetoothKillswitch {
 	GObject parent;
+	BluetoothKillswitchPrivate *priv;
 };
 
 struct _BluetoothKillswitchClass {
@@ -66,8 +67,6 @@ GType bluetooth_killswitch_get_type(void);
 BluetoothKillswitch * bluetooth_killswitch_new (void);
 
 gboolean bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch);
-
-void bluetooth_killswitch_update_state (BluetoothKillswitch *killswitch);
 void bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState state);
 KillswitchState bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch);
 

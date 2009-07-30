@@ -107,8 +107,7 @@ dnl Requires for the private library
 PKG_CHECK_MODULES(COMMON,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-2.0
-		  gtk+-2.0
-		  hal >= $HAL_REQUIRED)
+		  gtk+-2.0)
 
 dnl Requires for the geoclue plugin
 PKG_CHECK_MODULES(GEOCLUE,

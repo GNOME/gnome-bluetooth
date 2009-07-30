@@ -274,11 +274,7 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 	gboolean bstate = FALSE;
 	const char *label, *status_label;
 
-	if (state == KILLSWITCH_STATE_UNKNOWN || state == KILLSWITCH_STATE_MIXED) {
-		sensitive = FALSE;
-		label = NULL;
-		status_label = N_("Bluetooth: Unknown");
-	} else if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
+	if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
 		label = N_("Turn On Bluetooth");
 		status_label = N_("Bluetooth: Off");
 		bstate = FALSE;
@@ -286,6 +282,10 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 		label = N_("Turn Off Bluetooth");
 		status_label = N_("Bluetooth: On");
 		bstate = TRUE;
+	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED) {
+		sensitive = FALSE;
+		label = NULL;
+		status_label = N_("Bluetooth: Disabled");
 	} else {
 		g_assert_not_reached ();
 	}
@@ -1011,6 +1011,10 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (device_changed), NULL);
 	/* Set the default */
 	device_changed (devices_model, NULL, NULL, NULL);
+	if (killswitch != NULL) {
+		killswitch_state_changed (killswitch,
+					  bluetooth_killswitch_get_state (killswitch));
+	}
 
 	gconf = gconf_client_get_default();
 
