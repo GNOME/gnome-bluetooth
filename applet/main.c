@@ -350,8 +350,7 @@ update_menu_items (void)
 	if (num_adapters_present == 0)
 		enabled = FALSE;
 	else
-		enabled = (num_adapters_present - num_adapters_powered) >= 0;
-
+		enabled = (num_adapters_present - num_adapters_powered) <= 0;
 
 	object = gtk_builder_get_object (xml, "send-file");
 	gtk_action_set_sensitive (GTK_ACTION (object),
