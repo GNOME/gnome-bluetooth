@@ -20,6 +20,10 @@
 						<signal name="activate" handler="bluetooth_status_callback"/>
 					</object>
 				</child>
+			</object>
+		</child>
+		<child>
+			<object class="GtkActionGroup" id="adapter-action-group">
 				<child>
 					<object class="GtkAction" id="send-file">
 						<property name="label" translatable="yes">Send files to device...</property>
@@ -46,6 +50,10 @@
 						<signal name="activate" handler="wizard_callback"/>
 					</object>
 				</child>
+			</object>
+		</child>
+		<child>
+			<object class="GtkActionGroup" id="preferences-action-group">
 				<child>
 					<object class="GtkAction" id="preferences">
 						<property name="label" translatable="yes">Preferences</property>
