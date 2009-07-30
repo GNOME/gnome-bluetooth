@@ -365,18 +365,21 @@ update_menu_items (void)
 	else
 		enabled = (num_adapters_present - num_adapters_powered) <= 0;
 
+	object = gtk_builder_get_object (xml, "adapter-action-group");
+	gtk_action_group_set_visible (GTK_ACTION_GROUP (object), enabled);
+	gtk_action_group_set_visible (devices_action_group, enabled);
+
+	if (enabled == FALSE)
+		return;
+
 	object = gtk_builder_get_object (xml, "send-file");
 	gtk_action_set_sensitive (GTK_ACTION (object),
-				  enabled &&
-				  (program_available ("obex-data-server")
-				   || program_available ("obexd")));
+				  program_available ("obexd"));
 
 	object = gtk_builder_get_object (xml, "browse-device");
 	gtk_action_set_sensitive (GTK_ACTION (object),
-				  enabled && program_available ("nautilus"));
+				  program_available ("nautilus"));
 
-	object = gtk_builder_get_object (xml, "setup-new");
-	gtk_action_set_sensitive (GTK_ACTION (object), enabled);
 }
 
 static void
