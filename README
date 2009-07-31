@@ -22,7 +22,12 @@ Requirements
 - GLib (with GIO), GTK+, GConf, dbus-glib, libhal
 - libunique and libnotify
 - BlueZ 4.36 is absolutely required
+- kernel 2.6.31 (or pre-releases) with the new rfkill
+  sub-system are required for rfkill to work [1]
 - obexd is required for bluetooth-sendto to work
+
+[1]: Note that read/write access to the /dev/rfkill device is
+required and should be provided by the distribution
 
 Copyright
 ---------
