@@ -372,10 +372,6 @@ update_menu_items (void)
 	if (enabled == FALSE)
 		return;
 
-	object = gtk_builder_get_object (xml, "send-file");
-	gtk_action_set_sensitive (GTK_ACTION (object),
-				  program_available ("obexd"));
-
 	object = gtk_builder_get_object (xml, "browse-device");
 	gtk_action_set_sensitive (GTK_ACTION (object),
 				  program_available ("nautilus"));
