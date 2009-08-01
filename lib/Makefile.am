@@ -15,7 +15,9 @@ libcommon_la_SOURCES =						\
 		bluetooth-plugin-manager.c			\
 		bluetooth-plugin-manager.h			\
 		bling-spinner.c bling-spinner.h			\
-		bluetooth-enums.h
+		bluetooth-enums.h				\
+		rfkill.h
+
 libcommon_la_LIBADD = $(COMMON_LIBS)
 libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 
