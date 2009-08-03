@@ -1,16 +1,18 @@
 # Latvian translation for bluez-gnome
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# Peteris Krisjanis <pecisk@gmail.com>, 2009.
 #
+# Peteris Krisjanis <pecisk@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2008-09-29 14:31+0200\n"
-"PO-Revision-Date: 2008-04-15 10:26+0000\n"
-"Last-Translator: Papuass <Unknown>\n"
-"Language-Team: Latvian <lv@li.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&component=general\n"
+"POT-Creation-Date: 2009-07-26 11:59+0000\n"
+"PO-Revision-Date: 2009-08-03 15:39+0300\n"
+"Last-Translator: Peteris Krisjanis <pecisk@gmail.com>\n"
+"Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,14 +20,775 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#~ msgid "Device"
-#~ msgstr "Iekārta"
+#: ../lib/bluetooth-client.c:108
+msgid "All types"
+msgstr "Visi tipi"
 
+#: ../lib/bluetooth-client.c:110
+msgid "Phone"
+msgstr "Telefons"
+
+#: ../lib/bluetooth-client.c:112
+msgid "Modem"
+msgstr "Modems"
+
+#: ../lib/bluetooth-client.c:114
+msgid "Computer"
+msgstr "Dators"
+
+#: ../lib/bluetooth-client.c:116
+msgid "Network"
+msgstr "Tīkls"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-client.c:119
+msgid "Headset"
+msgstr "Austiņa ar mikrofonu"
+
+#: ../lib/bluetooth-client.c:121
+msgid "Headphones"
+msgstr "Austiņas"
+
+#: ../lib/bluetooth-client.c:123
+#| msgid "Bluetooth device"
+msgid "Audio device"
+msgstr "Audio iekārta"
+
+#: ../lib/bluetooth-client.c:125
+msgid "Keyboard"
+msgstr "Tastatūra"
+
+#: ../lib/bluetooth-client.c:127
+msgid "Mouse"
+msgstr "Pele"
+
+#: ../lib/bluetooth-client.c:129
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../lib/bluetooth-client.c:131
+msgid "Printer"
+msgstr "Printeris"
+
+#: ../lib/bluetooth-client.c:133
+msgid "Joypad"
+msgstr "Spēļu manipulātors"
+
+#: ../lib/bluetooth-client.c:135
+msgid "Tablet"
+msgstr "Planšete"
+
+#: ../lib/bluetooth-client.c:137 ../lib/bluetooth-chooser.c:105
+#: ../lib/bluetooth-chooser.c:139
+msgid "Unknown"
+msgstr "Nezināma"
+
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+msgid "Click to select device..."
+msgstr "Klikšķiniet, lai izvēlētos iekārtu..."
+
+#: ../lib/bluetooth-chooser.c:95
+#| msgid "All Files"
+msgid "All categories"
+msgstr "Visas kategorijas"
+
+#: ../lib/bluetooth-chooser.c:97
+msgid "Paired"
+msgstr "Sapārots"
+
+#: ../lib/bluetooth-chooser.c:99
+#| msgid "Set _Trusted"
+msgid "Trusted"
+msgstr "Uzticams"
+
+#: ../lib/bluetooth-chooser.c:101
+msgid "Not paired or trusted"
+msgstr "Ne sapārots, ne uzticams"
+
+#: ../lib/bluetooth-chooser.c:103
+msgid "Paired or trusted"
+msgstr "Sapārots vai uzticams"
+
+#: ../lib/bluetooth-chooser.c:180
+msgid "No adapters available"
+msgstr "Adapteris nav pieejams"
+
+#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+#| msgid "Pairing request for device:"
+msgid "Searching for devices..."
+msgstr "Meklē iekārtas..."
+
+#: ../lib/bluetooth-chooser.c:683
+msgid "Device"
+msgstr "Iekārta"
+
+#: ../lib/bluetooth-chooser.c:720
+msgid "Type"
+msgstr "Tips"
+
+#. The filters
+#: ../lib/bluetooth-chooser.c:836
+msgid "Show Only Bluetooth Devices With..."
+msgstr "Parādīt Bluetooth iekārtas tikai ar..."
+
+#. The device category filter
+#: ../lib/bluetooth-chooser.c:856
+msgid "Device _category:"
+msgstr "Iekārtas _kategorija:"
+
+#: ../lib/bluetooth-chooser.c:871
+msgid "Select the device category to filter above list"
+msgstr ""
+"Izvēlieties iekārtas kategoriju, lai iestatītu filtru sarakstam augstāk"
+
+#. The device type filter
+#: ../lib/bluetooth-chooser.c:885
+#| msgid "Device"
+msgid "Device _type:"
+msgstr "Iekārtas _tips:"
+
+#: ../lib/bluetooth-chooser.c:906
+#| msgid "Select device to browse"
+msgid "Select the device type to filter above list"
+msgstr "Izvēlieties iekārtas tipu, lai iestatītu filtru sarakstam augstāk"
+
+#: ../lib/bluetooth-chooser.c:912
+msgid "Input devices (mice, keyboards, ...)"
+msgstr "Ievades iekārtas (peles, klaviatūras, ...)"
+
+#: ../lib/bluetooth-chooser.c:916
+msgid "Headphones, headsets and other audio devices"
+msgstr "Austiņas un citas audio iekārtas"
+
+#: ../lib/plugins/geoclue.c:162
+msgid "Use this GPS device for Geolocation services"
+msgstr "Izmantot šo GPS iekārtu ģeolokācijas servisiem"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "Pieslēgties Internet izmantojot jūsu mobilo telefonu (test)"
+
+#: ../applet/main.c:112
+#| msgid "Select device to browse"
+msgid "Select Device to Browse"
+msgstr "Izvēlieties iekārtu, kuru pārlūkot"
+
+#: ../applet/main.c:116
+msgid "_Browse"
+msgstr "_Pārlūkot"
+
+#: ../applet/main.c:124
+msgid "Select device to browse"
+msgstr "Izvēlieties iekārtu, kuru pārlūkot"
+
+#: ../applet/main.c:280
+#| msgid "Bluetooth Manager"
+msgid "Bluetooth: Unknown"
+msgstr "Bluetooth: nezināms"
+
+#: ../applet/main.c:282 ../properties/properties-adapter-off.ui.h:1
+msgid "Turn On Bluetooth"
+msgstr "Ieslēgt Bluetooth"
+
+#: ../applet/main.c:283
+#| msgid "Bluetooth Applet"
+msgid "Bluetooth: Off"
+msgstr "Bluetooth: izslēgts"
+
+#: ../applet/main.c:286
+msgid "Turn Off Bluetooth"
+msgstr "Izslēgt Bluetooth"
+
+#: ../applet/main.c:287
+#| msgid "Bluetooth Manager"
+msgid "Bluetooth: On"
+msgstr "Bluetooth: ieslēgts"
+
+#: ../applet/main.c:399
+msgid "Disconnecting..."
+msgstr "Atvieno..."
+
+#: ../applet/main.c:402 ../sendto/main.c:212
+msgid "Connecting..."
+msgstr "Savieno..."
+
+#: ../applet/main.c:405 ../applet/main.c:745
+msgid "Connected"
+msgstr "Savienots"
+
+#: ../applet/main.c:408 ../applet/main.c:745
+msgid "Disconnected"
+msgstr "Atvienots"
+
+#: ../applet/main.c:763 ../applet/main.c:817 ../properties/adapter.c:446
+msgid "Disconnect"
+msgstr "Atvienot"
+
+#: ../applet/main.c:763 ../applet/main.c:817
+msgid "Connect"
+msgstr "Savienot"
+
+#: ../applet/main.c:776
+#| msgid "Send File..."
+msgid "Send files..."
+msgstr "Sūtīt failus..."
+
+#: ../applet/main.c:786
+#| msgid "Browse Device..."
+msgid "Browse files..."
+msgstr "Pārlūkot failus..."
+
+#: ../applet/main.c:797
+msgid "Open Keyboard Preferences..."
+msgstr "Atvērt tastatūras iestatījumus..."
+
+#: ../applet/main.c:805
+#| msgid "Bluetooth Preferences"
+msgid "Open Mouse Preferences..."
+msgstr "Atvērt peles iestatījumus..."
+
+#: ../applet/main.c:931
+msgid "Debug"
+msgstr "Atkļūdot"
+
+#. Parse command-line options
+#: ../applet/main.c:951
+#| msgid "Bluetooth Applet"
+msgid "- Bluetooth applet"
+msgstr "- Bluetooth sīklietotne"
+
+#: ../applet/main.c:956
 #, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Palaidiet '%s --help', lai redzētu pilnu sarakstu ar pieejamajām "
+"komandrindas opcijām.\n"
+
+#: ../applet/main.c:972
+msgid "Bluetooth Applet"
+msgstr "Bluetooth sīklietotne"
+
+#: ../applet/notify.c:148
+#| msgid "Bluetooth Analyzer"
+msgid "Bluetooth: Enabled"
+msgstr "Bluetooth: ieslēgts"
+
+#: ../applet/notify.c:148
+#| msgid "Bluetooth Analyzer"
+msgid "Bluetooth: Disabled"
+msgstr "Bluetooth: izslēgts"
+
+#: ../applet/agent.c:251 ../applet/agent.c:332
+#, c-format
+msgid "Device '%s' wants to pair with this computer"
+msgstr "Iekārta '%s' pieprasa sapārošanu ar šo datoru"
+
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the PIN mentioned on device %s."
+msgstr "Lūdzu ievadiet PIN, ko dod iekārta %s."
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+msgstr "Lūdzu apstipriniet, vai PIN '%s' sakrīt ar iekārtas %s doto."
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+#| msgid "Grant access to %s?"
+msgid "Grant access to '%s'"
+msgstr "Piešķirt pieeju '%s'"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "Iekārta %s pieprasa pieeju '%s' servisam."
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#, c-format
+msgid "Pairing request for '%s'"
+msgstr "Pārošanas pieprasījums '%s'"
+
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
+#: ../applet/agent.c:618 ../applet/agent.c:656
+msgid "Bluetooth device"
+msgstr "Bluetooth iekārta"
+
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+msgid "Enter PIN"
+msgstr "Ievadiet PIN"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:608
+#, c-format
+#| msgid "Pairing request for '%s'"
+msgid "Pairing confirmation for '%s'"
+msgstr "Pārošanas apstiprinājums '%s'"
+
+#: ../applet/agent.c:619
+msgid "Verify PIN"
+msgstr "Pārbaudat PIN"
+
+#: ../applet/agent.c:652
+#, c-format
+#| msgid "Authorization request for %s"
+msgid "Authorization request from '%s'"
+msgstr "Autorizācijas pieprasījums no '%s'"
+
+#: ../applet/agent.c:657
+msgid "Check authorization"
+msgstr "Pārbaudīt autorizāciju"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Bluetooth pārvaldnieks"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Bluetooth pārvaldnieka sīklietotne"
+
+#: ../applet/popup-menu.ui.h:1
+#| msgid "Bluetooth device"
+msgid "Bluetooth: Checking"
+msgstr "Bluetooth: pārbauda"
+
+#: ../applet/popup-menu.ui.h:2
+msgid "Browse files on device..."
+msgstr "Pārlūkot iekārtas failus..."
+
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:405
+#| msgid "Device"
+msgid "Devices"
+msgstr "Iekārtas"
+
+#: ../applet/popup-menu.ui.h:4
+#| msgid "Bluetooth Preferences"
+msgid "Preferences..."
+msgstr "Iestatījumi..."
+
+#: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "Iziet"
+
+#: ../applet/popup-menu.ui.h:6
+msgid "Send files to device..."
+msgstr "Sūtīt failus uz iekārtu..."
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Setup new device..."
+msgstr "Iestatīt jaunu iekārtu..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+#| msgid "Always grant access"
+msgid "_Always grant access"
+msgstr "_Vienmēr piešķirt pieeju"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "_Piešķirt"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "_Atteikt"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "_Nesakrīt"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "_Sakrīt"
+
+#: ../applet/passkey-dialogue.ui.h:1
+#| msgid "Show input"
+msgid "_Show input"
+msgstr "_Parādīt ievadi"
+
+#: ../properties/main.c:115
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "Bluetooth pārvaldnieks GNOME darbvirsmai"
+
+#: ../properties/main.c:118
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Papuass https://launchpad.net/~martinsb\n"
+"  Peteris Krisjanis https://launchpad.net/~pecisk-gmail"
+
+#: ../properties/main.c:120
+#| msgid "Bluetooth Manager"
+msgid "GNOME Bluetooth home page"
+msgstr "GNOME Bluetooth mājas lapa"
+
+#: ../properties/main.c:145
+msgid "Bluetooth Preferences"
+msgstr "Bluetooth iestatījumi"
+
+#: ../properties/main.c:157
+#| msgid "Bluetooth device"
+msgid "_Show Bluetooth icon"
+msgstr "_Rādīt Bluetooth ikonu"
+
+#: ../properties/main.c:307
+msgid "Output a list of currently known devices"
+msgstr "Izvada šobrīd zināmo iekārtu sarakstu"
+
+#: ../properties/main.c:344
+msgid "Bluetooth Properties"
+msgstr "Bluetooth parametri"
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Izņemt '%s' no iekārtu saraksta?"
+
+#: ../properties/adapter.c:181
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Ja jūs izņemsiet iekārtu no saraksta, nākošajā reizē jums tā būs jāiestata "
+"vēlreiz, lai to varētu izmantot"
+
+#. The discoverable checkbox
+#: ../properties/adapter.c:352
+#| msgid "Device has been made discoverable"
+msgid "Make computer _discoverable"
+msgstr "Padarīt datoru _atklājamu"
+
+#: ../properties/adapter.c:375
+msgid "Friendly name"
+msgstr "Draudzīgs nosaukums"
+
+#: ../properties/adapter.c:437
+#| msgid "Setup New Device"
+msgid "Setup _new device..."
+msgstr "Iestatīt _jaunu iekārtu..."
+
+#: ../properties/adapter.c:460
+#| msgid "Remove _Trust"
+msgid "_Remove"
+msgstr "_Izņemt"
+
+#: ../properties/adapter.c:735
+#| msgid "Bluetooth device"
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth ir izslēgts"
+
+#: ../properties/adapter.c:771
+#| msgid "Bluetooth Manager applet"
+msgid "No Bluetooth adapters present"
+msgstr "Nav pieejams neviens Bluetooth adapteris"
+
+#: ../properties/properties-no-adapter.ui.h:1
+msgid "Your computer does not have any Bluetooth adapters plugged in."
+msgstr "Jūsu datorā nav iesprausts neviens Bluetooth adapteris"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Konfigurēt Bluetooth uzstādījumus"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+#| msgid "When to show the notification icon"
+msgid "Whether to show the notification icon"
+msgstr "Vai rādīt notifikācijas ikonu"
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+#| msgid "When to show the notification icon"
+msgid "Whether to show the notification icon."
+msgstr "Vai rādīt notifikācijas ikonu."
+
+#: ../properties/gconf-bridge.c:1223
+#, c-format
+msgid "GConf error: %s"
+msgstr "GConf kļūda: %s"
+
+#: ../properties/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "Visi turpmākie kļūdu paziņojumi parādīti tikai terminālī"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:206 ../wizard/main.c:327
+#, c-format
+msgid "Pairing with '%s' cancelled"
+msgstr "Pārošana ar '%s' atcelta"
+
+#: ../wizard/main.c:246
+#, c-format
+msgid "Please confirm that the PIN displayed on '%s' matches this one."
+msgstr "Lūdzu apstipriniet, ka '%s' attēlotais PIN sakrīt ar šeit norādīto."
+
+#: ../wizard/main.c:300
+msgid "Please enter the following PIN:"
+msgstr "Lūdzu ievadiet šo PIN:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Setting up 'Sony Bluetooth Headset' failed
+#.
+#: ../wizard/main.c:383
+#, c-format
+msgid "Setting up '%s' failed"
+msgstr "'%s' iestatīšana neizdevās"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Connecting to 'Sony Bluetooth Headset' now...
+#.
+#: ../wizard/main.c:514
+#, c-format
+msgid "Connecting to '%s'..."
+msgstr "Savieno ar '%s'..."
+
+#: ../wizard/main.c:550
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "Lūdzu ievadiet šo PIN '%s' un nospiediet tastatūras Enter taustiņu:"
+
+#: ../wizard/main.c:552
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Lūdzu ievadiet sekojošo PIN '%s':"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+#.
+#: ../wizard/main.c:573
+#, c-format
+msgid "Please wait while finishing setup on device '%s'..."
+msgstr "Lūdzu uzgaidiet, kamēr tiks pabeigta iekārtas '%s' iestatīšana..."
+
+#: ../wizard/main.c:586
+#, c-format
+msgid "Successfully setup new device '%s'"
+msgstr "Jaunā iekārta '%s' ir veiksmīgi iestatīta"
+
+#: ../wizard/wizard.ui.h:1
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (vairākums austiņu, peles un GPS iekārtas)"
+
+#: ../wizard/wizard.ui.h:2
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:3
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:4
+#| msgid "Bluetooth device"
+msgid "Bluetooth New Device Setup"
+msgstr "Jaunas Bluetooth iekārtas iestatīšana"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Custom PIN code:"
+msgstr "Pašrocīgs PIN kods:"
+
+#: ../wizard/wizard.ui.h:6
+#| msgid "Device"
+msgid "Device Setup"
+msgstr "Iekārtas iestatīšana"
+
+#: ../wizard/wizard.ui.h:7
+msgid "Device Setup Failed"
+msgstr "Iekārtas iestatīšana neizdevās"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device search"
+msgstr "Iekārtas meklēšana"
+
+#: ../wizard/wizard.ui.h:9
+msgid "Does not match"
+msgstr "Nesakrīt"
+
+#: ../wizard/wizard.ui.h:10
+msgid "Finishing New Device Setup"
+msgstr "Pabeidz jaunās iekārtas iestatīšanu"
+
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "Fiksēts PIN"
+
+#: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "Ievads"
+
+#: ../wizard/wizard.ui.h:13
+msgid "Matches"
+msgstr "Sakrīt"
+
+#: ../wizard/wizard.ui.h:14
+msgid "PIN Options"
+msgstr "PIN opcijas"
+
+#: ../wizard/wizard.ui.h:15
+msgid "PIN _options..."
+msgstr "Pin _opcijas..."
+
+#: ../wizard/wizard.ui.h:16
+msgid "Select the additional services you want to use with your device:"
+msgstr "Norādiet papildus servisus, kurus jūs vēlētos izmantot ar šo iekārtu:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "Select the device you want to setup"
+msgstr "Izvēlieties iekārtu, kuru jūs vēlaties iestatīt"
+
+#: ../wizard/wizard.ui.h:18
+msgid "Setup Completed"
+msgstr "Iestatīšana pabeigta"
+
+#: ../wizard/wizard.ui.h:19
+msgid ""
+"The Bluetooth new device setup will walk you through the process of "
+"configuring Bluetooth enabled devices for use with this computer."
+msgstr ""
+"Jaunas Bluetooth iekārtas iestatīšana jums palīdzēs iestatīt Bluetooth "
+"iekārtas, lai tās varētu tikt izmantotas ar šo datoru"
+
+#: ../wizard/wizard.ui.h:20
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#8220;"
+"discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
+"device's manual if in doubt."
+msgstr ""
+"Iekārtai jāatrodas 10 metrus no jūsu datora, un jābūt &#8220;"
+"atklājamai&#8221; (dažreiz saka - jābūt &#8220;redzamai&#8221;). Pārbaudiet "
+"iekārtas rokasgrāmatā, ja šaubaties."
+
+#: ../wizard/wizard.ui.h:21
+msgid "Welcome to the Bluetooth new device setup"
+msgstr "Esat aicināti jaunas Bluetooth iekārtas iestatīšanā"
+
+#: ../wizard/wizard.ui.h:22
+msgid "_Automatic PIN selection"
+msgstr "_Automātiska PIN izvēle"
+
+#: ../wizard/wizard.ui.h:23
+msgid "_Restart Setup"
+msgstr "_Pārstartēt iestatīšanu"
+
+#: ../sendto/main.c:98
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d sekunde"
+msgstr[1] "%'d sekundes"
+msgstr[2] "%'d sekunde"
+
+#: ../sendto/main.c:103 ../sendto/main.c:116
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minūte"
+msgstr[1] "%'d minūtes"
+msgstr[2] "%'d minūte"
+
+#: ../sendto/main.c:114
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d stunda"
+msgstr[1] "%'d stundas"
+msgstr[2] "%'d stunda"
+
+#: ../sendto/main.c:124
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "apmēram %'d stunda"
+msgstr[1] "apmēram %'d stundas"
+msgstr[2] "apmēram %'d stunda"
+
+#: ../sendto/main.c:150
+msgid "File Transfer"
+msgstr "Failu pārraide"
+
+#: ../sendto/main.c:168
+msgid "Sending files via Bluetooth"
+msgstr "Failu sūtīšana izmantojot Bluetooth"
+
+#: ../sendto/main.c:180
+msgid "From:"
+msgstr "No:"
+
+#: ../sendto/main.c:196
+msgid "To:"
+msgstr "Uz:"
+
+#: ../sendto/main.c:242
+msgid "An unknown error occured"
+msgstr "Uzradās nezināma kļūda"
+
+#: ../sendto/main.c:252
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+"Pārliecinieties, ka attālinātā iekārta ir ieslēgta un pieņem Bluetooth "
+"savienojumus"
+
+#: ../sendto/main.c:336
+#, c-format
+msgid "Sending %s"
+msgstr "Sūta %s"
+
+#: ../sendto/main.c:343 ../sendto/main.c:405
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Sūta %d. failu no %d"
+
+#: ../sendto/main.c:401
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:403
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:497
+#| msgid "Select device to browse"
+msgid "Select Device to Send To"
+msgstr "Izvēlieties iekārtu, uz kuru sūtīt"
+
+#: ../sendto/main.c:501
+msgid "Send _To"
+msgstr "Sūtīt _uz"
+
+#: ../sendto/main.c:542
+msgid "Choose files to send"
+msgstr "Izvēlieties failus, ko sūtīt"
+
+#: ../sendto/main.c:571
+msgid "Remote device to use"
+msgstr "Izmantojamā attālināta iekārta"
+
+#: ../sendto/main.c:573
+msgid "Remote device's name"
+msgstr "Attālinātās iekārtas nosaukums"
+
 #~ msgid "Created bonding with %s"
 #~ msgstr "Izveidots savienojums ar %s"
 
-#, c-format
 #~ msgid "Removed bonding with %s"
 #~ msgstr "Pārtraukts savienojums ar %s"
 
@@ -38,37 +801,17 @@ msgstr ""
 #~ msgid "Device has been made connectable"
 #~ msgstr "Iekārtai var pieslēgties"
 
-#~ msgid "Device has been made discoverable"
-#~ msgstr "Iekārta tika padarīta redzama"
-
 #~ msgid "Device has been made limited discoverable"
 #~ msgstr "Iekārta tika padarīta limitēti redzama"
 
 #~ msgid "Device has been switched into pairing mode"
 #~ msgstr "Iekārta tika ieslēgta pārošanas režīmā"
 
-#, c-format
 #~ msgid "Couldn't execute command: %s\n"
 #~ msgstr "Nevar palaist komandu: %s\n"
 
 #~ msgid "Browse Devices"
 #~ msgstr "Pārlūkot iekārtas"
-
-#~ msgid "Select device to browse"
-#~ msgstr "Izvēlieties iekārtu, kuru pārlūkot"
-
-#~ msgid "Send File..."
-#~ msgstr "Sūtīt failu..."
-
-#~ msgid "Browse Device..."
-#~ msgstr "Lūkot iekārtu..."
-
-#~ msgid "Setup New Device"
-#~ msgstr "Uzstādīt jaunu iekārtu"
-
-#, c-format
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "Pārošanas pieprasījums '%s'"
 
 #~ msgid "Services"
 #~ msgstr "Servisi"
@@ -94,15 +837,8 @@ msgstr ""
 #~ msgid "1 minute"
 #~ msgstr "1 minūte"
 
-#, c-format
 #~ msgid "%g minutes"
 #~ msgstr "%g minūtes"
-
-#~ msgid "Set _Trusted"
-#~ msgstr "Uzstādīt _uzticamību"
-
-#~ msgid "Remove _Trust"
-#~ msgstr "Noņemt _uzticamību"
 
 #~ msgid "Mode of operation"
 #~ msgstr "Darbības režīms"
@@ -141,8 +877,8 @@ msgstr ""
 #~ msgstr "Vai HAL vajadzētu tikt izmantotam automātiskajiem uzstādījumiem"
 
 #~ msgid ""
-#~ "If HAL should be used to automatically adjust settings like class of device "
-#~ "etc."
+#~ "If HAL should be used to automatically adjust settings like class of "
+#~ "device etc."
 #~ msgstr ""
 #~ "Vai HAL vajadzētu tikt izmantots, lai uzstādītu uzstādījumus tādus kā "
 #~ "iekārtas klase, etc."
@@ -152,8 +888,8 @@ msgstr ""
 #~ "Vai apstiprinājuma pieprasījumiem vajadzētu tikt automātiski akceptētiem"
 
 #~ msgid ""
-#~ "If authorization requests should be granted all the time without asking the "
-#~ "user for confirmation."
+#~ "If authorization requests should be granted all the time without asking "
+#~ "the user for confirmation."
 #~ msgstr ""
 #~ "Vai autorizācijas pieprasījumiem jābūt apstiprinātiem visu laiku bez "
 #~ "lietotāja apstiprinājuma."
@@ -161,675 +897,165 @@ msgstr ""
 #~ msgid "Search"
 #~ msgstr "Meklēt"
 
-#: ../common/bluetooth-client.c:82
-msgid "All types"
-msgstr ""
-
-#: ../common/bluetooth-client.c:84
-msgid "Phone"
-msgstr ""
-
-#: ../common/bluetooth-client.c:86
-msgid "Modem"
-msgstr ""
-
-#: ../common/bluetooth-client.c:88
-msgid "Computer"
-msgstr ""
-
-#: ../common/bluetooth-client.c:90
-msgid "Network"
-msgstr ""
-
-#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
-msgid "Headset"
-msgstr "Austiņas"
-
-#: ../common/bluetooth-client.c:94
-msgid "Headphone"
-msgstr ""
-
-#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
-msgid "Keyboard"
-msgstr "Tastatūra"
-
-#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
-msgid "Mouse"
-msgstr "Pele"
-
-#: ../common/bluetooth-client.c:100
-msgid "Camera"
-msgstr ""
-
-#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
-msgid "Printer"
-msgstr "Printeris"
-
-#: ../common/bluetooth-client.c:104
-msgid "Joypad"
-msgstr ""
-
-#: ../common/bluetooth-client.c:106
-msgid "Tablet"
-msgstr ""
-
-#: ../common/bluetooth-client.c:108
-msgid "Unknown"
-msgstr ""
-
-#: ../common/helper.c:162
-msgid "Select Device"
-msgstr ""
-
-#: ../common/helper.c:222
-msgid "Choose files to send"
-msgstr ""
-
-#: ../applet/main.c:123
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Bluetooth menedžeris GNOME darbvirsmai"
-
-#: ../applet/main.c:126 ../analyzer/dialog.c:128
-msgid "translator-credits"
-msgstr ""
-"Launchpad Contributions:\n"
-"  Peteris Krisjanis https://launchpad.net/~pecisk-gmail\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Papuass https://launchpad.net/~martinsb\n"
-"  Peteris Krisjanis https://launchpad.net/~pecisk-gmail"
-
-#: ../applet/main.c:177 ../applet/main.c:232
-msgid "Set up new device..."
-msgstr ""
-
-#: ../applet/main.c:242
-msgid "Send files to device..."
-msgstr ""
-
-#: ../applet/main.c:250
-msgid "Browse files on device..."
-msgstr ""
-
-#: ../applet/main.c:373
-msgid "Bluetooth Applet"
-msgstr "Bluetooth sīklietotne"
-
-#: ../applet/agent.c:258
-msgid "Authentication request"
-msgstr "Autentifikācijas pieprasījums"
-
-#: ../applet/agent.c:286 ../applet/agent.c:395
-msgid "Pairing request for device:"
-msgstr "Sapārošanas pieprasījums iekārtai:"
-
-#: ../applet/agent.c:303
-msgid "Enter passkey for authentication:"
-msgstr "Ievadi paroles atslēgu autentifikācijai"
-
-#: ../applet/agent.c:327
-msgid "Show input"
-msgstr "Parādīt ievadi"
-
-#: ../applet/agent.c:369
-msgid "Confirmation request"
-msgstr "Apstiprinājuma pieprasījums"
-
-#: ../applet/agent.c:412
-msgid "Confirm value for authentication:"
-msgstr "Apstiprināt vērtību autentifikācijai"
-
-#: ../applet/agent.c:456
-msgid "Authorization request"
-msgstr "Autorizācijas pieprasījums"
-
-#: ../applet/agent.c:482
-msgid "Authorization request for device:"
-msgstr "Autorizācijas pieprasījums iekārtai"
-
-#: ../applet/agent.c:503
-#, c-format
-msgid "Grant access to %s?"
-msgstr "Piešķirt pieeju %s?"
-
-#: ../applet/agent.c:512
-msgid "Always grant access"
-msgstr "Vienmēr piešķirt pieeju"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
-#, c-format
-msgid "Pairing request for %s"
-msgstr ""
-
-#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
-#: ../applet/agent.c:736 ../applet/agent.c:781
-msgid "Bluetooth device"
-msgstr "Bluetooth iekārta"
-
-#: ../applet/agent.c:591
-msgid "Enter PIN code"
-msgstr ""
-
-#: ../applet/agent.c:638 ../applet/agent.c:688
-msgid "Enter passkey"
-msgstr ""
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:732
-#, c-format
-msgid "Confirmation request for %s"
-msgstr ""
-
-#: ../applet/agent.c:737
-msgid "Confirm passkey"
-msgstr ""
-
-#: ../applet/agent.c:777
-#, c-format
-msgid "Authorization request for %s"
-msgstr "Autortizācijas pieprasījums %s"
-
-#: ../applet/agent.c:782
-msgid "Check authorization"
-msgstr ""
-
-#: ../applet/bluetooth-applet.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth pārvaldnieks"
-
-#: ../applet/bluetooth-applet.desktop.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Bluetooth pārvaldnieka sīklietotne"
-
-#: ../properties/main.c:63
-msgid "Bluetooth Preferences"
-msgstr "Bluetooth iestatījumi"
-
-#: ../properties/main.c:94
-msgid "General"
-msgstr "Vispārēji"
-
-#: ../properties/main.c:131
-msgid "Bluetooth Properties"
-msgstr ""
-
-#: ../properties/general.c:172
-msgid "File transfer"
-msgstr ""
-
-#: ../properties/general.c:176
-msgid "Receive files from remote devices"
-msgstr ""
-
-#: ../properties/general.c:184
-msgid "Share files from public folder"
-msgstr ""
-
-#: ../properties/general.c:195
-msgid "Notification area"
-msgstr "Brīdinājuma josla"
-
-#: ../properties/general.c:199
-msgid "Never display icon"
-msgstr "Nekad nerādīt ikonu"
-
-#: ../properties/general.c:206
-msgid "Only display when adapter present"
-msgstr "Rādīt tikai iekārtas esamības gadījumā"
-
-#: ../properties/general.c:213
-msgid "Always display icon"
-msgstr "Vienmēr rādīt ikonu"
-
-#: ../properties/adapter.c:99
-msgid "Adapter"
-msgstr "Adapteris"
-
-#: ../properties/adapter.c:174
-msgid "always"
-msgstr ""
-
-#: ../properties/adapter.c:176
-msgid "hidden"
-msgstr ""
-
-#: ../properties/adapter.c:179
-#, c-format
-msgid "%'g minute"
-msgid_plural "%'g minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../properties/adapter.c:477
-msgid "Visibility setting"
-msgstr ""
-
-#: ../properties/adapter.c:490
-msgid "Hidden"
-msgstr ""
-
-#: ../properties/adapter.c:502
-msgid "Always visible"
-msgstr ""
-
-#: ../properties/adapter.c:514
-msgid "Temporary visible"
-msgstr ""
-
-#: ../properties/adapter.c:566
-msgid "Friendly name"
-msgstr ""
-
-#: ../properties/adapter.c:587
-msgid "Known devices"
-msgstr ""
-
-#: ../properties/dialog.c:41
-msgid "Remove from list of known devices?"
-msgstr ""
-
-#: ../properties/dialog.c:42
-msgid ""
-"If you delete the device, you have to set it up again before next use."
-msgstr ""
-
-#: ../properties/bluetooth-properties.desktop.in.h:1
-msgid "Bluetooth"
-msgstr ""
-
-#: ../properties/bluetooth-properties.desktop.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Konfigurēt Bluetooth uzstādījumus"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid ""
-"Display options for the notification icon. Valid options are \"never\", "
-"\"present\" and \"always\"."
-msgstr ""
-"Attēlošanas opcijas brīdinājuma ikonai. Atļautās opcijas ir \"nekad\", "
-"\"tagad\" un \"vienmēr\"."
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "If Bluetooth file sharing is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:3
-msgid "If receiving of remote files via Bluetooth is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:4
-msgid ""
-"If the service for receiving remote files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:5
-msgid "If the service for sharing files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:6
-msgid "When to show the notification icon"
-msgstr "Kad rādīt brīdinājuma ikonu"
-
-#: ../wizard/main.c:75
-#, c-format
-msgid "Please enter the following PIN code: %s"
-msgstr ""
-
-#: ../wizard/main.c:94
-#, c-format
-msgid "Please enter the following passkey: %s%s"
-msgstr ""
-
-#: ../wizard/main.c:115
-#, c-format
-msgid "Pairing with %s canceled"
-msgstr ""
-
-#: ../wizard/main.c:118
-#, c-format
-msgid "Pairing with %s finished"
-msgstr ""
-
-#: ../wizard/main.c:145
-#, c-format
-msgid "Successfully paired with %s"
-msgstr ""
-
-#: ../wizard/main.c:159
-#, c-format
-msgid "Pairing with %s failed"
-msgstr ""
-
-#: ../wizard/main.c:193
-#, c-format
-msgid "Connecting to %s now ..."
-msgstr ""
-
-#: ../wizard/main.c:264
-msgid "Introduction"
-msgstr ""
-
-#: ../wizard/main.c:265
-msgid "Welcome to the Bluetooth device setup wizard"
-msgstr ""
-
-#: ../wizard/main.c:268
-msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer.\n"
-"\n"
-msgstr ""
-
-#: ../wizard/main.c:303
-msgid "Device type"
-msgstr ""
-
-#: ../wizard/main.c:304
-msgid "Select the type of device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:316
-msgid "Mobile phone"
-msgstr ""
-
-#: ../wizard/main.c:331
-msgid "Any device"
-msgstr ""
-
-#: ../wizard/main.c:392
-msgid "Device search"
-msgstr ""
-
-#: ../wizard/main.c:393
-msgid "Select the device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:428
-msgid "Device setup"
-msgstr ""
-
-#: ../wizard/main.c:429
-msgid "Setting up new device"
-msgstr ""
-
-#: ../wizard/main.c:451
-msgid "Summary"
-msgstr ""
-
-#: ../wizard/main.c:452
-msgid "Succesfully configured new device"
-msgstr ""
-
-#: ../wizard/main.c:462
-msgid "Bluetooth Device Wizard"
-msgstr ""
-
-#: ../sendto/main.c:93
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:98 ../sendto/main.c:111
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:109
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:119
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:145
-msgid "File Transfer"
-msgstr ""
-
-#: ../sendto/main.c:162
-msgid "Sending files via Bluetooth"
-msgstr ""
-
-#: ../sendto/main.c:174
-msgid "From:"
-msgstr ""
-
-#: ../sendto/main.c:190
-msgid "To:"
-msgstr ""
-
-#: ../sendto/main.c:206
-msgid "Connecting..."
-msgstr ""
-
-#: ../sendto/main.c:254
-#, c-format
-msgid "Sending %s"
-msgstr ""
-
-#: ../sendto/main.c:261 ../sendto/main.c:326
-#, c-format
-msgid "Sending file %d of %d"
-msgstr ""
-
-#: ../sendto/main.c:322
-#, c-format
-msgid "%d KB/s"
-msgstr ""
-
-#: ../sendto/main.c:324
-#, c-format
-msgid "%d B/s"
-msgstr ""
-
-#: ../sendto/main.c:373
-msgid "An unknown error occured"
-msgstr ""
-
-#: ../sendto/main.c:383
-msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr ""
-
-#: ../sendto/main.c:554 ../browse/main.c:38
-msgid "Remote device to use"
-msgstr ""
-
-#: ../analyzer/main.c:166
-msgid "Saving of protocol trace failed"
-msgstr "Protokola trases saglabāšana neizdevās"
-
-#: ../analyzer/main.c:313
-msgid "Loading Trace"
-msgstr "Ielādējam trasi"
-
-#: ../analyzer/main.c:317
-msgid "Live Import"
-msgstr "Tiešais imports"
-
-#: ../analyzer/main.c:321
-msgid "Protocol Trace"
-msgstr "Protokola trase"
-
-#: ../analyzer/main.c:326
-msgid "Unsaved"
-msgstr "Nesaglabāts"
-
-#: ../analyzer/main.c:609
-msgid "Can't live import from"
-msgstr "Nevar tieši importēt no"
-
-#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
-msgid "Bluetooth Analyzer"
-msgstr "Bluetooth analizētājs"
-
-#: ../analyzer/main.c:856
-msgid "_File"
-msgstr "_Fails"
-
-#: ../analyzer/main.c:886
-msgid "Open _Recent"
-msgstr "Atvērt _nesenos"
-
-#: ../analyzer/main.c:933
-msgid "_Edit"
-msgstr "R_ediģēt"
-
-#: ../analyzer/main.c:942
-msgid "_View"
-msgstr "_Skatījums"
-
-#: ../analyzer/main.c:947
-msgid "_Full Screen"
-msgstr "Pa visu _ekrānu"
-
-#: ../analyzer/main.c:954
-msgid "_Tools"
-msgstr ""
-
-#: ../analyzer/main.c:959
-msgid "_Debug Packet List"
-msgstr ""
-
-#: ../analyzer/main.c:968
-msgid "_Help"
-msgstr "_Palīdzība"
-
-#: ../analyzer/dialog.c:110
-msgid "Bluetooth protocol analyzer"
-msgstr "Bluetooth protokola analizētājs"
-
-#: ../analyzer/dialog.c:140
-msgid "All Files"
-msgstr "Visi faili"
-
-#: ../analyzer/dialog.c:145
-msgid "Supported Files"
-msgstr "Atbalstītie faili"
-
-#: ../analyzer/dialog.c:154
-msgid "Frontline BTSnoop Files"
-msgstr "Frontline BTSnoop faili"
-
-#: ../analyzer/dialog.c:160
-msgid "Apple Packet Logger Files"
-msgstr "Apple Packet Logger faili"
-
-#: ../analyzer/dialog.c:175
-msgid "By Extension"
-msgstr "Pēc paplašinājuma"
-
-#: ../analyzer/dialog.c:180
-msgid "Frontline BTSnoop Format"
-msgstr "Frontline BTSnoop formāts"
-
-#: ../analyzer/dialog.c:185
-msgid "Apple Packet Logger Format"
-msgstr "Apple Packet Logger formāts"
-
-#: ../analyzer/dialog.c:249
-msgid "Select File _Type"
-msgstr "Izvēlieties faila _tipu"
-
-#: ../analyzer/dialog.c:292
-msgid "File Type"
-msgstr "Faila tips"
-
-#: ../analyzer/dialog.c:297
-msgid "Extensions"
-msgstr "Paplašinājumi"
-
-#: ../analyzer/dialog.c:331
-msgid "Save File"
-msgstr "Saglabāt failu"
-
-#: ../analyzer/dialog.c:373
-msgid "Open File"
-msgstr "Atvērt failu"
-
-#: ../analyzer/dialog.c:455
-msgid "Local connection"
-msgstr "Lokālais savienojums"
-
-#: ../analyzer/dialog.c:463
-msgid "Remote connection"
-msgstr "Attālinātais savienojums"
-
-#: ../analyzer/dialog.c:497
-msgid "Open Import"
-msgstr "Atvērt importēšanu"
-
-#: ../analyzer/dialog.c:537
-msgid "Save the protocol trace before closing?"
-msgstr "Saglabāt protokola trasi pirms aizvēršanas?"
-
-#: ../analyzer/dialog.c:538
-msgid "If you don't save, all information will be permanently lost."
-msgstr "Ja Jūs nesaglabāsiet, visa informācija tiks neatgriezeniski zaudēta"
-
-#: ../analyzer/dialog.c:546
-msgid "Close _without Saving"
-msgstr "Aizvērt _bez saglabāšanas"
-
-#: ../analyzer/dialog.c:576
-msgid "There is"
-msgstr "Te ir"
-
-#: ../analyzer/dialog.c:576
-msgid "There are"
-msgstr "Te ir"
-
-#: ../analyzer/dialog.c:577
-msgid "unsaved protocol trace."
-msgstr "nesaglab'"
-
-#: ../analyzer/dialog.c:578
-msgid "unsaved protocol traces."
-msgstr "nesaglabātās protokola trases."
-
-#: ../analyzer/dialog.c:579
-msgid "If you quit now, all information will be lost."
-msgstr "Ja Jūs tagad iziesiet, visa informācija tiks zaudēta."
-
-#: ../analyzer/dialog.c:589
-msgid "_Discard Changes"
-msgstr "_Atsaukt izmaiņas"
-
-#: ../analyzer/tracer.c:250
-msgid "Type"
-msgstr "Tips"
-
-#: ../analyzer/tracer.c:258
-msgid "Packet"
-msgstr "Pakete"
-
-#: ../analyzer/tracer.c:267
-msgid "Timestamp"
-msgstr "Laika zīmogs"
-
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
-msgid "Analyze Bluetooth traces"
-msgstr ""
-
-#: ../analyzer/bluetooth-manager.xml.in.h:1
-msgid "Apple Packet Logger File"
-msgstr "Apple Packet Logger fails"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:2
-msgid "Frontline BTSnoop File"
-msgstr "Frontline BTSnoop fails"
+#~ msgid "Authentication request"
+#~ msgstr "Autentifikācijas pieprasījums"
+
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "Ievadi paroles atslēgu autentifikācijai"
+
+#~ msgid "Confirmation request"
+#~ msgstr "Apstiprinājuma pieprasījums"
+
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "Apstiprināt vērtību autentifikācijai"
+
+#~ msgid "Authorization request"
+#~ msgstr "Autorizācijas pieprasījums"
+
+#~ msgid "Authorization request for device:"
+#~ msgstr "Autorizācijas pieprasījums iekārtai"
+
+#~ msgid "General"
+#~ msgstr "Vispārēji"
+
+#~ msgid "Notification area"
+#~ msgstr "Brīdinājuma josla"
+
+#~ msgid "Never display icon"
+#~ msgstr "Nekad nerādīt ikonu"
+
+#~ msgid "Only display when adapter present"
+#~ msgstr "Rādīt tikai iekārtas esamības gadījumā"
+
+#~ msgid "Always display icon"
+#~ msgstr "Vienmēr rādīt ikonu"
+
+#~ msgid "Adapter"
+#~ msgstr "Adapteris"
+
+#~ msgid ""
+#~ "Display options for the notification icon. Valid options are \"never\", "
+#~ "\"present\" and \"always\"."
+#~ msgstr ""
+#~ "Attēlošanas opcijas brīdinājuma ikonai. Atļautās opcijas ir \"nekad\", "
+#~ "\"tagad\" un \"vienmēr\"."
+
+#~ msgid "Saving of protocol trace failed"
+#~ msgstr "Protokola trases saglabāšana neizdevās"
+
+#~ msgid "Loading Trace"
+#~ msgstr "Ielādējam trasi"
+
+#~ msgid "Live Import"
+#~ msgstr "Tiešais imports"
+
+#~ msgid "Protocol Trace"
+#~ msgstr "Protokola trase"
+
+#~ msgid "Unsaved"
+#~ msgstr "Nesaglabāts"
+
+#~ msgid "Can't live import from"
+#~ msgstr "Nevar tieši importēt no"
+
+#~ msgid "_File"
+#~ msgstr "_Fails"
+
+#~ msgid "Open _Recent"
+#~ msgstr "Atvērt _nesenos"
+
+#~ msgid "_Edit"
+#~ msgstr "R_ediģēt"
+
+#~ msgid "_View"
+#~ msgstr "_Skatījums"
+
+#~ msgid "_Full Screen"
+#~ msgstr "Pa visu _ekrānu"
+
+#~ msgid "_Help"
+#~ msgstr "_Palīdzība"
+
+#~ msgid "Bluetooth protocol analyzer"
+#~ msgstr "Bluetooth protokola analizētājs"
+
+#~ msgid "Supported Files"
+#~ msgstr "Atbalstītie faili"
+
+#~ msgid "Frontline BTSnoop Files"
+#~ msgstr "Frontline BTSnoop faili"
+
+#~ msgid "Apple Packet Logger Files"
+#~ msgstr "Apple Packet Logger faili"
+
+#~ msgid "By Extension"
+#~ msgstr "Pēc paplašinājuma"
+
+#~ msgid "Frontline BTSnoop Format"
+#~ msgstr "Frontline BTSnoop formāts"
+
+#~ msgid "Apple Packet Logger Format"
+#~ msgstr "Apple Packet Logger formāts"
+
+#~ msgid "Select File _Type"
+#~ msgstr "Izvēlieties faila _tipu"
+
+#~ msgid "File Type"
+#~ msgstr "Faila tips"
+
+#~ msgid "Extensions"
+#~ msgstr "Paplašinājumi"
+
+#~ msgid "Save File"
+#~ msgstr "Saglabāt failu"
+
+#~ msgid "Open File"
+#~ msgstr "Atvērt failu"
+
+#~ msgid "Local connection"
+#~ msgstr "Lokālais savienojums"
+
+#~ msgid "Remote connection"
+#~ msgstr "Attālinātais savienojums"
+
+#~ msgid "Open Import"
+#~ msgstr "Atvērt importēšanu"
+
+#~ msgid "Save the protocol trace before closing?"
+#~ msgstr "Saglabāt protokola trasi pirms aizvēršanas?"
+
+#~ msgid "If you don't save, all information will be permanently lost."
+#~ msgstr "Ja Jūs nesaglabāsiet, visa informācija tiks neatgriezeniski zaudēta"
+
+#~ msgid "Close _without Saving"
+#~ msgstr "Aizvērt _bez saglabāšanas"
+
+#~ msgid "There is"
+#~ msgstr "Te ir"
+
+#~ msgid "There are"
+#~ msgstr "Te ir"
+
+#~ msgid "unsaved protocol trace."
+#~ msgstr "nesaglab'"
+
+#~ msgid "unsaved protocol traces."
+#~ msgstr "nesaglabātās protokola trases."
+
+#~ msgid "If you quit now, all information will be lost."
+#~ msgstr "Ja Jūs tagad iziesiet, visa informācija tiks zaudēta."
+
+#~ msgid "_Discard Changes"
+#~ msgstr "_Atsaukt izmaiņas"
+
+#~ msgid "Packet"
+#~ msgstr "Pakete"
+
+#~ msgid "Timestamp"
+#~ msgstr "Laika zīmogs"
+
+#~ msgid "Apple Packet Logger File"
+#~ msgstr "Apple Packet Logger fails"
+
+#~ msgid "Frontline BTSnoop File"
+#~ msgstr "Frontline BTSnoop fails"
