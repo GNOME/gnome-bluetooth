@@ -2,6 +2,15 @@
 #include <dbus/dbus-glib.h>
 #include "bluetooth-plugin-manager.h"
 
+static gboolean
+delete_event_cb (GtkWidget *widget,
+		 GdkEvent  *event,
+		 gpointer   user_data)
+{
+	gtk_main_quit ();
+	return FALSE;
+}
+
 int main (int argc, char **argv)
 {
 	GtkWidget *window, *vbox;
@@ -18,6 +27,8 @@ int main (int argc, char **argv)
 	bluetooth_plugin_manager_init ();
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	g_signal_connect (G_OBJECT (window), "delete-event",
+			  G_CALLBACK (delete_event_cb), NULL);
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_add (GTK_CONTAINER (window), vbox);
 
