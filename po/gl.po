@@ -1,4 +1,4 @@
-# translation of gnome-bluetooth-master-po-gl.po to Galician
+# translation of gnome-bluetooth.master.po to Galician
 # Galician translations for PACKAGE package.
 # Copyright (C) 2009 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -7,10 +7,10 @@
 # Antón Méixome <meixome@mancomun.org>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth-master-po-gl\n"
+"Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 16:46+0200\n"
-"PO-Revision-Date: 2009-07-10 14:16+0200\n"
+"POT-Creation-Date: 2009-08-10 16:35+0200\n"
+"PO-Revision-Date: 2009-08-10 08:56+0200\n"
 "Last-Translator: Antón Méixome <meixome@mancomun.org>\n"
 "Language-Team: Galician <gnome@mancomun.org>\n"
 "MIME-Version: 1.0\n"
@@ -199,7 +199,7 @@ msgstr "Bluetooth: desactivado"
 msgid "Disconnecting..."
 msgstr "Desconectando..."
 
-#: ../applet/main.c:413 ../sendto/main.c:212
+#: ../applet/main.c:413 ../sendto/main.c:214
 msgid "Connecting..."
 msgstr "Conectando..."
 
@@ -242,7 +242,7 @@ msgstr "Depurar"
 #. Parse command-line options
 #: ../applet/main.c:962
 msgid "- Bluetooth applet"
-msgstr "- miniaplicativo Bluetooth"
+msgstr "- Miniaplicativo Bluetooth"
 
 #: ../applet/main.c:967
 #, c-format
@@ -268,15 +268,14 @@ msgid "Device '%s' wants to pair with this computer"
 msgstr "O dispositivo '%s' que emparellarse con este computador"
 
 #: ../applet/agent.c:257
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter the PIN mentioned on device %s."
-msgstr "Por favor, introduza a chave de paso mencionada no dispositivo %s."
+msgstr "Por favor, introduza o PIN mencionado no dispositivo %s."
 
 #: ../applet/agent.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr ""
-"Confirme por favor cando a chave de paso '%s' coincida coa do dispositivo %s."
+msgstr "Confirme por favor cando o PIN '%s' coincida co do dispositivo %s."
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:385
@@ -303,7 +302,7 @@ msgstr "Dispositivo Bluetooth"
 
 #: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
 msgid "Enter PIN"
-msgstr ""
+msgstr "Introducir PIN"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
@@ -314,7 +313,7 @@ msgstr "Confirmación de emparellamento de %s"
 
 #: ../applet/agent.c:619
 msgid "Verify PIN"
-msgstr ""
+msgstr "Comprobar PIN"
 
 #: ../applet/agent.c:652
 #, c-format
@@ -346,9 +345,8 @@ msgid "Devices"
 msgstr "Dispositivos"
 
 #: ../applet/popup-menu.ui.h:4
-#, fuzzy
 msgid "Preferences"
-msgstr "Preferencias..."
+msgstr "Preferencias"
 
 #: ../applet/popup-menu.ui.h:5
 msgid "Quit"
@@ -359,7 +357,6 @@ msgid "Send files to device..."
 msgstr "Enviar ficheiros ao dispositivo..."
 
 #: ../applet/popup-menu.ui.h:7
-#, fuzzy
 msgid "Set up new device..."
 msgstr "Configurar un novo dispositivo..."
 
@@ -394,7 +391,8 @@ msgstr "Un xestor de Bluetooth para o escritorio GNOME"
 #: ../properties/main.c:132
 msgid "translator-credits"
 msgstr ""
-"Fran Diéguez <fran.dieguez@glug.es>, 2009; Mancomún <g11n@mancomun.org>, 2009"
+"Fran Diéguez <fran.dieguez@glug.es>, 2009\n"
+"Antón Méixome <meixome@mancomun.org>, 2009"
 
 #: ../properties/main.c:134
 msgid "GNOME Bluetooth home page"
@@ -410,28 +408,26 @@ msgstr "_Mostrar icona de Bluetooth"
 
 #: ../properties/main.c:324
 msgid "Output a list of currently known devices"
-msgstr "Sacar unha lista cos dispositivos coñecidos?"
+msgstr "Sacar unha lista cos dispositivos coñecidos"
 
 #: ../properties/main.c:361
 msgid "Bluetooth Properties"
 msgstr "Propiedades de Bluetooth"
 
 #: ../properties/adapter.c:179
-#, fuzzy, c-format
+#, c-format
 msgid "Remove '%s' from the list of devices?"
-msgstr "Eliminar '%s' da lista dos dispositivos coñecidos?"
+msgstr "Eliminar '%s' da lista dos dispositivos?"
 
 #: ../properties/adapter.c:181
-#, fuzzy
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
-"Se quere eliminar o dispositivo. vostede ten que configuralo de novo no "
-"seguinte uso."
+"Se quere eliminar o dispositivo, terá que configuralo de novo antes do "
+"vindeiro uso."
 
 #. The discoverable checkbox
 #: ../properties/adapter.c:352
-#, fuzzy
 msgid "Make computer _discoverable"
 msgstr "_Descubríbel"
 
@@ -440,13 +436,12 @@ msgid "Friendly name"
 msgstr "Nome amigábel"
 
 #: ../properties/adapter.c:437
-#, fuzzy
 msgid "Set up _new device..."
 msgstr "Configurar un novo dispositivo..."
 
 #: ../properties/adapter.c:460
 msgid "_Remove"
-msgstr ""
+msgstr "_Eliminar"
 
 #: ../properties/adapter.c:735
 msgid "Bluetooth is disabled"
@@ -495,14 +490,13 @@ msgid "Pairing with '%s' cancelled"
 msgstr "Emparellado con '%s' cancelado"
 
 #: ../wizard/main.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Confirme que a chave de paso mostrada en '%s' coincide con esta."
+msgstr "Confirme que o PIN mostrado en '%s' coincide con esta."
 
 #: ../wizard/main.c:300
-#, fuzzy
 msgid "Please enter the following PIN:"
-msgstr "Insira a seguinte chave de paso:"
+msgstr "Insira o seguinte PIN:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -523,27 +517,27 @@ msgid "Connecting to '%s'..."
 msgstr "Conectando con '%s' ..."
 
 #: ../wizard/main.c:550
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Insira a seguinte chave de paso:"
+msgstr "Insira o seguinte PIN en '%s' e prema “Intro” no teclado:"
 
 #: ../wizard/main.c:552
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter the following PIN on '%s':"
-msgstr "Insira a seguinte chave de paso en '%s':"
+msgstr "Insira o seguinte PIN en '%s':"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
 #: ../wizard/main.c:573
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Agarde mentres se remata de configurar '%s'..."
+msgstr "Agarde mentres se remata de configurar o dispositivo '%s'..."
 
 #: ../wizard/main.c:586
-#, fuzzy, c-format
+#, c-format
 msgid "Successfully setup new device '%s'"
 msgstr "Configuración correcta de '%s'"
 
@@ -560,14 +554,12 @@ msgid "'1234'"
 msgstr "'1234'"
 
 #: ../wizard/wizard.ui.h:4
-#, fuzzy
 msgid "Bluetooth New Device Setup"
-msgstr "Dispositivo Bluetooth"
+msgstr "Configuración do novo dispositivo bluetooth"
 
 #: ../wizard/wizard.ui.h:5
-#, fuzzy
 msgid "Custom PIN code:"
-msgstr "Código de chave de paso personalizado:"
+msgstr "Código PIN personalizado:"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Device Setup"
@@ -575,7 +567,7 @@ msgstr "Configuración do dispositivo"
 
 #: ../wizard/wizard.ui.h:7
 msgid "Device Setup Failed"
-msgstr "A configuración do dispositivo fallou:"
+msgstr "A configuración do dispositivo fallou"
 
 #: ../wizard/wizard.ui.h:8
 msgid "Device search"
@@ -586,77 +578,72 @@ msgid "Does not match"
 msgstr "Non coincide"
 
 #: ../wizard/wizard.ui.h:10
-#, fuzzy
 msgid "Finishing New Device Setup"
-msgstr "Rematando a configuración do dispositivo"
+msgstr "Rematando a configuración do novo dispositivo"
 
-#: ../wizard/wizard.ui.h:11
-#, fuzzy
-msgid "Fixed PIN"
-msgstr "Estabeleceuse a chave de paso"
-
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:12
+msgid "Fixed PIN"
+msgstr "Estabeleceuse o PIN"
+
+#: ../wizard/wizard.ui.h:13
 msgid "Introduction"
 msgstr "Introdución"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:14
 msgid "Matches"
 msgstr "Coincide"
 
-#: ../wizard/wizard.ui.h:14
-#, fuzzy
-msgid "PIN Options"
-msgstr "Opcións da chave de paso"
-
 #: ../wizard/wizard.ui.h:15
-#, fuzzy
+msgid "PIN Options"
+msgstr "Opcións de PIN"
+
+#: ../wizard/wizard.ui.h:16
 msgid "PIN _options..."
 msgstr "_Opcións da chave de paso..."
 
-#: ../wizard/wizard.ui.h:16
-msgid "Select the additional services you want to use with your device:"
-msgstr "Seleccione os servizos adicionais que quere usar co seu dispositivo"
-
 #: ../wizard/wizard.ui.h:17
+msgid "Select the additional services you want to use with your device:"
+msgstr "Seleccione os servizos adicionais que quere usar co seu dispositivo:"
+
+#: ../wizard/wizard.ui.h:18
 msgid "Select the device you want to setup"
 msgstr "Seleccione o dispositivo que quere configurar"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:19
 msgid "Setup Completed"
 msgstr "Configuración completada"
 
-#: ../wizard/wizard.ui.h:19
-#, fuzzy
+#: ../wizard/wizard.ui.h:20
 msgid ""
 "The Bluetooth new device setup will walk you through the process of "
 "configuring Bluetooth enabled devices for use with this computer."
 msgstr ""
-"O asistente de dispositivo guiarao a través do proceso de configuración dos "
-"dispositivos Bluetooth para o emprego neste computador."
+"A configuración do novo dispositivo guiarao a través do proceso de "
+"configuración dos dispositivos Bluetooth activos para seren empregados neste "
+"computador."
 
-#: ../wizard/wizard.ui.h:20
-#, fuzzy
+#: ../wizard/wizard.ui.h:21
 msgid ""
 "The device will need to be within 10 meters of your computer, and be &#8220;"
 "discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
 "device's manual if in doubt."
 msgstr ""
-"O dispositivo necesitará estar dentro dunha contorna de 10 metros respecto "
+"Cómpre que o dispositivo estea dentro dunha contorna de 10 metros respecto "
 "do seu computador, e estar &#xAB;atopábel&#xBB; (ás veces chamado &#xAB;"
-"visíbel&#xBB;). Comprobe o o manual do dispositivo se ten dúbidas."
-
-#: ../wizard/wizard.ui.h:21
-#, fuzzy
-msgid "Welcome to the Bluetooth new device setup"
-msgstr ""
-"Dámoslle a benvida ao asistente de configuración do dispositivo Bluetooth"
+"visíbel&#xBB;). Comprobe o manual do dispositivo se ten dúbidas."
 
 #: ../wizard/wizard.ui.h:22
-#, fuzzy
-msgid "_Automatic PIN selection"
-msgstr "Selección de chave de paso automática"
+msgid "Welcome to the Bluetooth new device setup"
+msgstr ""
+"Dámoslle a benvida ao asistente de configuración do novo dispositivo "
+"bluetooth"
 
 #: ../wizard/wizard.ui.h:23
+msgid "_Automatic PIN selection"
+msgstr "Selección de PIN automático"
+
+#: ../wizard/wizard.ui.h:24
 msgid "_Restart Setup"
 msgstr "_Reiniciar a configuración"
 
@@ -692,23 +679,23 @@ msgstr[1] "aproximadamente %'d horas"
 msgid "File Transfer"
 msgstr "Transferencia de ficheiro"
 
-#: ../sendto/main.c:168
+#: ../sendto/main.c:170
 msgid "Sending files via Bluetooth"
 msgstr "Enviando ficheiros por Bluetooth"
 
-#: ../sendto/main.c:180
+#: ../sendto/main.c:182
 msgid "From:"
 msgstr "Dende:"
 
-#: ../sendto/main.c:196
+#: ../sendto/main.c:198
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:242
+#: ../sendto/main.c:244
 msgid "An unknown error occured"
 msgstr "Produciuse un erro descoñecido"
 
-#: ../sendto/main.c:252
+#: ../sendto/main.c:254
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -716,64 +703,42 @@ msgstr ""
 "Asegúrese de que o dispositivo remoto está acendido e que acepta conexións "
 "de Bluetooth"
 
-#: ../sendto/main.c:336
+#: ../sendto/main.c:338
 #, c-format
 msgid "Sending %s"
 msgstr "Enviando %s"
 
-#: ../sendto/main.c:343 ../sendto/main.c:405
+#: ../sendto/main.c:345 ../sendto/main.c:407
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Enviando ficheiro %d de %d"
 
-#: ../sendto/main.c:401
+#: ../sendto/main.c:403
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:403
+#: ../sendto/main.c:405
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:497
+#: ../sendto/main.c:499
 msgid "Select Device to Send To"
 msgstr "Seleccione o dispositivo ao que enviar"
 
-#: ../sendto/main.c:501
+#: ../sendto/main.c:503
 msgid "Send _To"
 msgstr "Enviar _a"
 
-#: ../sendto/main.c:542
+#: ../sendto/main.c:544
 msgid "Choose files to send"
 msgstr "Elixa os ficheiros para enviar"
 
-#: ../sendto/main.c:571
+#: ../sendto/main.c:573
 msgid "Remote device to use"
 msgstr "Dispositivo remoto para empregar"
 
-#: ../sendto/main.c:573
+#: ../sendto/main.c:575
 msgid "Remote device's name"
 msgstr "Nome do dispositivo remoto"
-
-#~ msgid "Bluetooth: Unknown"
-#~ msgstr "Bluetooth:descoñecido"
-
-#~ msgid "Enter passkey"
-#~ msgstr "Insira a chave de paso"
-
-#~| msgid "Enter passkey"
-#~ msgid "Verify passkey"
-#~ msgstr "Insira a chave de paso"
-
-#~ msgid "Known devices"
-#~ msgstr "Dispositivos coñecidos"
-
-#~ msgid "Delete"
-#~ msgstr "Eliminar"
-
-#~ msgid "Bluetooth Device Wizard"
-#~ msgstr "Asistente de dispositivo Bluetooth"
-
-#~ msgid "Setup Finished"
-#~ msgstr "Configuración finalizada"
