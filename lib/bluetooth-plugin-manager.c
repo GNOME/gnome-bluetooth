@@ -101,7 +101,9 @@ bluetooth_plugin_manager_cleanup (void)
 	for (l = plugin_list; l != NULL; l = l->next) {
 		GbtPlugin *p = l->data;
 
-		g_module_close (p->module);
+		/* Disabled as it causes crashes when plugins use
+		 * the GObject type system */
+		/* g_module_close (p->module); */
 		g_free (p);
 	}
 	g_list_free (plugin_list);
