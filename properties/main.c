@@ -212,6 +212,7 @@ services_foreach (const char *service, gpointer _value, GString *str)
 static void
 dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 {
+	DBusGProxy *proxy;
 	char *address, *alias, *icon, **uuids;
 	gboolean is_default, paired, trusted, connected, discovering, powered;
 	GHashTable *services;
@@ -230,11 +231,12 @@ dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 			    BLUETOOTH_COLUMN_POWERED, &powered,
 			    BLUETOOTH_COLUMN_SERVICES, &services,
 			    BLUETOOTH_COLUMN_UUIDS, &uuids,
+			    BLUETOOTH_COLUMN_PROXY, &proxy,
 			    -1);
 
 	if (is_adapter != FALSE) {
 		/* Adapter */
-		g_print ("Adapter: %s (%s)\n", alias, address);
+		g_print ("Adapter: %s (%s)\n", alias ? alias : "(No alias)", address);
 		if (is_default)
 			g_print ("\tDefault adapter\n");
 		if (discovering)
@@ -243,6 +245,7 @@ dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 	} else {
 		/* Device */
 		g_print ("Device: %s (%s)\n", alias, address);
+		g_print ("\tD-Bus Path: %s\n", proxy ? dbus_g_proxy_get_path (proxy) : "(none)");
 		g_print ("\tType: %s Icon: %s\n", bluetooth_type_to_string (type), icon);
 		g_print ("\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(paired), BOOL_STR(trusted), BOOL_STR(connected));
 		if (services != NULL) {
@@ -266,6 +269,7 @@ dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 	g_free (alias);
 	g_free (address);
 	g_free (icon);
+	g_object_unref (proxy);
 	if (services != NULL)
 		g_hash_table_unref (services);
 	g_strfreev (uuids);
