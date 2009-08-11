@@ -51,7 +51,7 @@ static gboolean delete_callback(GtkWidget *window, GdkEvent *event,
 	return FALSE;
 }
 
-static void
+static gboolean
 keypress_callback (GtkWidget *window,
 		   GdkEventKey *key,
 		   gpointer user_data)
@@ -61,6 +61,8 @@ keypress_callback (GtkWidget *window,
 
 		gtk_main_quit();
 	}
+
+	return FALSE;
 }
 
 static void close_callback(GtkWidget *button, gpointer user_data)
