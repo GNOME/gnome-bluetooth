@@ -232,7 +232,7 @@ static void
 dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 {
 	DBusGProxy *proxy;
-	char *address, *alias, *icon, **uuids;
+	char *address, *alias, *icon, **uuids, *name;
 	gboolean is_default, paired, trusted, connected, discovering, powered;
 	GHashTable *services;
 	guint type;
@@ -240,6 +240,7 @@ dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 	gtk_tree_model_get (model, iter,
 			    BLUETOOTH_COLUMN_ADDRESS, &address,
 			    BLUETOOTH_COLUMN_ALIAS, &alias,
+			    BLUETOOTH_COLUMN_NAME, &name,
 			    BLUETOOTH_COLUMN_TYPE, &type,
 			    BLUETOOTH_COLUMN_ICON, &icon,
 			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
@@ -255,7 +256,7 @@ dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 
 	if (is_adapter != FALSE) {
 		/* Adapter */
-		g_print ("Adapter: %s (%s)\n", alias ? alias : "(No alias)", address);
+		g_print ("Adapter: %s (%s)\n", name, address);
 		if (is_default)
 			g_print ("\tDefault adapter\n");
 		if (discovering)
@@ -285,6 +286,7 @@ dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
 	}
 	g_print ("\n");
 
+	g_free (name);
 	g_free (alias);
 	g_free (address);
 	g_free (icon);
