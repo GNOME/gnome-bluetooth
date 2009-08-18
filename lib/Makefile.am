@@ -56,7 +56,7 @@ GnomeBluetooth-1.0.gir: $(libgnome_bluetooth_la_SOURCES)
 GnomeBluetooth-1.0.gir: $(gnomebluetooth_HEADERS)
 GnomeBluetooth-1.0.gir: libgnome-bluetooth.la
 GnomeBluetooth-1.0.gir: $(INTROSPECTION_SCANNER)
-	$(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=1.0 \
+	$(AM_V_GEN) $(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=1.0 \
 		--add-include-path=$(srcdir) --add-include-path=. \
 		--include=GObject-2.0 \
 		--include=Gtk-2.0 \
@@ -120,19 +120,19 @@ EXTRA_DIST += marshal.list \
 MAINTAINERCLEANFILES = Makefile.in
 
 marshal.h: marshal.list
-	$(GLIB_GENMARSHAL) --prefix=marshal $< --header > $@
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header > $@
 
 marshal.c: marshal.list
-	$(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
 
 bluetooth-client-glue.h: bluetooth-client.xml bluetooth-agent.h bluetooth-agent.c
-	$(DBUS_BINDING_TOOL) --prefix=bluetooth_client --mode=glib-client --output=$@ $<
+	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=bluetooth_client --mode=glib-client --output=$@ $<
 
 bluetooth-agent-glue.h: bluetooth-agent.xml bluetooth-agent.h bluetooth-agent.c
-	$(DBUS_BINDING_TOOL) --prefix=bluetooth_agent --mode=glib-server --output=$@ $<
+	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=bluetooth_agent --mode=glib-server --output=$@ $<
 
 obex-agent-glue.h: obex-agent.xml
-	$(DBUS_BINDING_TOOL) --prefix=obex_agent --mode=glib-server --output=$@ $<
+	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=obex_agent --mode=glib-server --output=$@ $<
 
 gnome_bluetooth_headers_to_scan_for_enums = bluetooth-enums.h
 # Generate the enums source code, with glib-mkenums:
@@ -144,7 +144,7 @@ gnome_bluetooth_built_cfiles = gnome-bluetooth-enum-types.c
 $(OBJECTS) $(libgnomevfs_2_la_OBJECTS): $(libgnomevfs_built_headers)
 
 gnome-bluetooth-enum-types.h: $(gnome_bluetooth_headers_to_scan_for_enums) Makefile
-	(cd $(srcdir) && glib-mkenums \
+	$(AM_V_GEN) (cd $(srcdir) && glib-mkenums \
 			--fhead "#ifndef __GNOME_BLUETOOTH_ENUM_TYPES_H__\n#define __GNOME_BLUETOOTH_ENUM_TYPES_H__\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n" \
 			--fprod "/* enumerations from \"@filename@\" */\n" \
 			--vhead "GType @enum_name@_get_type (void);\n#define BLUETOOTH_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" 	\
@@ -152,7 +152,7 @@ gnome-bluetooth-enum-types.h: $(gnome_bluetooth_headers_to_scan_for_enums) Makef
 		$(gnome_bluetooth_headers_to_scan_for_enums)) > $@
 
 gnome-bluetooth-enum-types.c: $(gnome_bluetooth_headers_to_scan_for_enums) Makefile gnome-bluetooth-enum-types.h
-	(cd $(srcdir) && glib-mkenums \
+	$(AM_V_GEN) (cd $(srcdir) && glib-mkenums \
 			--fhead "#include <bluetooth-enums.h>\n" \
 			--fhead "#include \"gnome-bluetooth-enum-types.h\"\n" \
 			--fhead "#include \"bluetooth-enums.h\"\n" \
