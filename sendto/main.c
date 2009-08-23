@@ -164,9 +164,8 @@ static void create_window(void)
 
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-	/* translators:
-	 * This is the heading for the progress dialogue */
 	text = g_markup_printf_escaped("<span size=\"larger\"><b>%s</b></span>",
+	/* translators: This is the heading for the progress dialogue */
 					_("Sending files via Bluetooth"));
 	gtk_label_set_markup(GTK_LABEL(label), text);
 	g_free(text);

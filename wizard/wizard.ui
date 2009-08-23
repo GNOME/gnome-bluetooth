@@ -551,7 +551,7 @@
     <signal name="clicked" handler="restart_button_clicked"/>
   </object>
   <object class="GtkButton" id="does_not_match_button">
-    <property name="label" comments="This is a button to answer: Does the PIN matches the one on the device?" translatable="yes">Does not match</property>
+    <property name="label" translatable="yes" comments="This is a button to answer: Does the PIN matches the one on the device?">Does not match</property>
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="receives_default">True</property>
@@ -560,7 +560,7 @@
     <signal name="clicked" handler="does_not_match_cb"/>
   </object>
   <object class="GtkButton" id="matches_button">
-    <property name="label" comments="This is a button to answer: Does the PIN matches the one on the device?" translatable="yes">Matches</property>
+    <property name="label" translatable="yes" comments="This is a button to answer: Does the PIN matches the one on the device?">Matches</property>
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="receives_default">True</property>
