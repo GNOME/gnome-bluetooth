@@ -240,7 +240,7 @@ static gchar *get_error_message(GError *error)
 	const gchar *name;
 
 	if (error == NULL)
-		return g_strdup(_("An unknown error occured"));
+		return g_strdup(_("An unknown error occurred"));
 
 	if (error->code != DBUS_GERROR_REMOTE_EXCEPTION) {
 		message = g_strdup(error->message);
