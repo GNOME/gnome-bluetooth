@@ -1,7 +1,7 @@
-# Serbian translation for bluez-gnome
+# Serbian translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
-# This file is distributed under the same license as the bluez-gnome package.
-# Милош Поповић <gpopac@gmail.com>, 2007, 2008, 2009
+# This file is distributed under the same license as the gnome-bluetooth package.
+# Милош Поповић <gpopac@gmail.com>, 2007-2009
 #
 # Maintainer: Милош Поповић <gpopac@gmail.com>
 #
@@ -11,9 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-10 12:15+0200\n"
+"Project-Id-Version: gnome-bluetooth\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&component=general\n"
+"POT-Creation-Date: 2009-07-30 19:54+0000\n"
 "PO-Revision-Date: 2009-03-25 12:30+0100\n"
 "Last-Translator: Милош Поповић <gpopac@gmail.com>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
@@ -23,281 +24,325 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: ../common/bluetooth-client.c:106
+#: ../lib/bluetooth-client.c:109
 msgid "All types"
 msgstr "Све врсте"
 
-#: ../common/bluetooth-client.c:108
+#: ../lib/bluetooth-client.c:111
 msgid "Phone"
 msgstr "Телефон"
 
-#: ../common/bluetooth-client.c:110
+#: ../lib/bluetooth-client.c:113
 msgid "Modem"
 msgstr "Модем"
 
-#: ../common/bluetooth-client.c:112
+#: ../lib/bluetooth-client.c:115
 msgid "Computer"
 msgstr "Рачунар"
 
-#: ../common/bluetooth-client.c:114
+#: ../lib/bluetooth-client.c:117
 msgid "Network"
 msgstr "Мрежа"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../common/bluetooth-client.c:117
+#: ../lib/bluetooth-client.c:120
 msgid "Headset"
 msgstr "Слушалице са микрофоном"
 
-#: ../common/bluetooth-client.c:119
+#: ../lib/bluetooth-client.c:122
 msgid "Headphones"
 msgstr "Слушалице"
 
-#: ../common/bluetooth-client.c:121
+#: ../lib/bluetooth-client.c:124
 msgid "Audio device"
 msgstr "Звучни уређај"
 
-#: ../common/bluetooth-client.c:123
+#: ../lib/bluetooth-client.c:126
 msgid "Keyboard"
 msgstr "Тастатура"
 
-#: ../common/bluetooth-client.c:125
+#: ../lib/bluetooth-client.c:128
 msgid "Mouse"
 msgstr "Миш"
 
-#: ../common/bluetooth-client.c:127
+#: ../lib/bluetooth-client.c:130
 msgid "Camera"
 msgstr "Камера"
 
-#: ../common/bluetooth-client.c:129
+#: ../lib/bluetooth-client.c:132
 msgid "Printer"
 msgstr "Штампач"
 
-#: ../common/bluetooth-client.c:131
+#: ../lib/bluetooth-client.c:134
 msgid "Joypad"
 msgstr "Џојстик"
 
-#: ../common/bluetooth-client.c:133
+#: ../lib/bluetooth-client.c:136
 msgid "Tablet"
 msgstr "Таблет"
 
-#: ../common/bluetooth-client.c:135 ../common/bluetooth-chooser.c:101
-#: ../common/bluetooth-chooser.c:135
+#: ../lib/bluetooth-client.c:138 ../lib/bluetooth-chooser.c:105
+#: ../lib/bluetooth-chooser.c:139
 msgid "Unknown"
 msgstr "Непознато"
 
-#: ../common/bluetooth-chooser-button.c:65
-#: ../common/bluetooth-chooser-button.c:361
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
 msgid "Click to select device..."
 msgstr "Кликните ради избора уређаја..."
 
-#: ../common/bluetooth-chooser.c:91
+#: ../lib/bluetooth-chooser.c:95
 msgid "All categories"
 msgstr "Све категорије"
 
-#: ../common/bluetooth-chooser.c:93
+#: ../lib/bluetooth-chooser.c:97
 msgid "Paired"
 msgstr "Упарени"
 
-#: ../common/bluetooth-chooser.c:95
+#: ../lib/bluetooth-chooser.c:99
 msgid "Trusted"
 msgstr "Од поверења"
 
-#: ../common/bluetooth-chooser.c:97
+#: ../lib/bluetooth-chooser.c:101
 msgid "Not paired or trusted"
 msgstr "Неупарени или неповерљиви"
 
-#: ../common/bluetooth-chooser.c:99
+#: ../lib/bluetooth-chooser.c:103
 msgid "Paired or trusted"
 msgstr "Упарени или поверљиви"
 
-#: ../common/bluetooth-chooser.c:574
+#: ../lib/bluetooth-chooser.c:180
+msgid "No adapters available"
+msgstr "Не постоје адаптери"
+
+#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+#| msgid "Search for Bluetooth devices"
+msgid "Searching for devices..."
+msgstr "Тражим Блутут уређаје..."
+
+#: ../lib/bluetooth-chooser.c:683
 msgid "Device"
 msgstr "Уређај"
 
-#: ../common/bluetooth-chooser.c:610
+#: ../lib/bluetooth-chooser.c:720
 msgid "Type"
 msgstr "Врста"
 
-#. The search button
-#: ../common/bluetooth-chooser.c:698
-msgid "S_earch"
-msgstr "_Тражи"
-
-#: ../common/bluetooth-chooser.c:703
-msgid "Search for Bluetooth devices"
-msgstr "Тражи Блутут уређаје"
-
 #. The filters
-#: ../common/bluetooth-chooser.c:722
+#: ../lib/bluetooth-chooser.c:836
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Прикажи само Блутут уређаје са..."
 
 #. The device category filter
-#: ../common/bluetooth-chooser.c:742
+#: ../lib/bluetooth-chooser.c:856
 msgid "Device _category:"
 msgstr "_Категорија уређаја:"
 
-#: ../common/bluetooth-chooser.c:757
+#: ../lib/bluetooth-chooser.c:871
 msgid "Select the device category to filter above list"
 msgstr "Изаберите категорију уређаја ради сужавања списка"
 
 #. The device type filter
-#: ../common/bluetooth-chooser.c:771
+#: ../lib/bluetooth-chooser.c:885
 msgid "Device _type:"
 msgstr "_Врста уређаја:"
 
-#: ../common/bluetooth-chooser.c:792
+#: ../lib/bluetooth-chooser.c:906
 msgid "Select the device type to filter above list"
 msgstr "Изаберите врсту уређаја ради сужавања списка"
 
-#: ../common/bluetooth-chooser.c:798
+#: ../lib/bluetooth-chooser.c:912
 msgid "Input devices (mice, keyboards, ...)"
 msgstr "Улазни уређаји (миш, тастатура,...)"
 
-#: ../common/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:916
 msgid "Headphones, headsets and other audio devices"
 msgstr "Слушалице и други звучни уређаји"
 
-#: ../applet/main.c:98
+#: ../lib/plugins/geoclue.c:162
+msgid "Use this GPS device for Geolocation services"
+msgstr "Користи овај GPS уређај за геолоцирање"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your mobile phone (test)"
+msgstr "Приступи Интернету преко мобилног телефона (пробно)"
+
+#: ../applet/main.c:112
 msgid "Select Device to Browse"
 msgstr "Изаберите уређај за разгледање"
 
-#: ../applet/main.c:102
+#: ../applet/main.c:116
 msgid "_Browse"
 msgstr "_Разгледај"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:124
 msgid "Select device to browse"
 msgstr "Изаберите уређај за разгледање"
 
-#: ../applet/main.c:220
-msgid "Bluetooth: Unknown"
-msgstr "Блутут: Непознато"
-
-#: ../applet/main.c:222 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:278 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Укључи Блутут"
 
-#: ../applet/main.c:223
+#: ../applet/main.c:279
 msgid "Bluetooth: Off"
 msgstr "Блутут: искључен"
 
-#: ../applet/main.c:226
+#: ../applet/main.c:282
 msgid "Turn Off Bluetooth"
 msgstr "Искључи Блутут"
 
-#: ../applet/main.c:227
+#: ../applet/main.c:283
 msgid "Bluetooth: On"
 msgstr "Блутут: укључен"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:288 ../applet/notify.c:148
+#| msgid "Bluetooth is disabled"
+msgid "Bluetooth: Disabled"
+msgstr "Блутут: искључен"
+
+#: ../applet/main.c:414
 msgid "Disconnecting..."
 msgstr "Прекидам везу..."
 
-#: ../applet/main.c:336 ../sendto/main.c:210
+#: ../applet/main.c:417 ../sendto/main.c:212
 msgid "Connecting..."
 msgstr "Повезујем се..."
 
-#: ../applet/main.c:339 ../applet/main.c:548
+#: ../applet/main.c:420 ../applet/main.c:760
 msgid "Connected"
 msgstr "Повезан"
 
-#: ../applet/main.c:342 ../applet/main.c:548
+#: ../applet/main.c:423 ../applet/main.c:760
 msgid "Disconnected"
 msgstr "Неповезан"
 
-#: ../applet/main.c:570 ../applet/main.c:590 ../properties/adapter.c:415
+#: ../applet/main.c:778 ../applet/main.c:832 ../properties/adapter.c:446
 msgid "Disconnect"
 msgstr "Прекини везу"
 
-#: ../applet/main.c:570 ../applet/main.c:590
+#: ../applet/main.c:778 ../applet/main.c:832
 msgid "Connect"
 msgstr "Повежи се"
 
-#: ../applet/main.c:730
+#: ../applet/main.c:791
+#| msgid "Send files to device..."
+msgid "Send files..."
+msgstr "Пошаљи датотеке..."
+
+#: ../applet/main.c:801
+#| msgid "Browse files on device..."
+msgid "Browse files..."
+msgstr "Разгледај датотеке..."
+
+#: ../applet/main.c:812
+#| msgid "Preferences..."
+msgid "Open Keyboard Preferences..."
+msgstr "Подеси тастатуру..."
+
+#: ../applet/main.c:820
+#| msgid "Preferences..."
+msgid "Open Mouse Preferences..."
+msgstr "Подеси миша..."
+
+#: ../applet/main.c:946
+msgid "Debug"
+msgstr "Тражи грешке"
+
+#. Parse command-line options
+#: ../applet/main.c:966
+#| msgid "Bluetooth Applet"
+msgid "- Bluetooth applet"
+msgstr "— Блутутово програмче"
+
+#: ../applet/main.c:971
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Покрените „%s --help“ за списак свих доступних опција из командне линије.\n"
+
+#: ../applet/main.c:987
 msgid "Bluetooth Applet"
 msgstr "Блутут програмче"
 
-#: ../applet/notify.c:99 ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Блутутов управник"
+#: ../applet/notify.c:148
+#| msgid "Bluetooth: On"
+msgid "Bluetooth: Enabled"
+msgstr "Блутут: укључен"
 
-#: ../applet/agent.c:259
-msgid "Authentication request"
-msgstr "Захтев за идентификацијом"
-
-#: ../applet/agent.c:287 ../applet/agent.c:396
-msgid "Pairing request for device:"
-msgstr "Захтев за упаривање уређаја:"
-
-#: ../applet/agent.c:304
-msgid "Enter passkey for authentication:"
-msgstr "Унесите лозинку за идентификацију:"
-
-#: ../applet/agent.c:328
-msgid "Show input"
-msgstr "Прикажи унос"
-
-#: ../applet/agent.c:370
-msgid "Confirmation request"
-msgstr "Захтев за потвду"
-
-#: ../applet/agent.c:413
-msgid "Confirm value for authentication:"
-msgstr "Потврди вредност за идентификацију:"
-
-#: ../applet/agent.c:457
-msgid "Authorization request"
-msgstr "Захтев за идентификацију"
-
-#: ../applet/agent.c:483
-msgid "Authorization request for device:"
-msgstr "Захтев за идентификацију уређаја:"
-
-#: ../applet/agent.c:504
+#: ../applet/agent.c:251 ../applet/agent.c:332
 #, c-format
-msgid "Grant access to %s?"
-msgstr "Да дозволим приступ на %s?"
+msgid "Device '%s' wants to pair with this computer"
+msgstr "Уређај  „%s“ жели да се упари са овим рачунаром"
 
-#: ../applet/agent.c:513
-msgid "Always grant access"
-msgstr "Увек дозволи приступ"
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the PIN mentioned on device %s."
+msgstr "Унесите ПИН који је исписан на уређају %s."
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+msgstr "Потврдите да ли се ПИН „%s“ поклапа са оним на уређају %s."
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+#| msgid "Grant access to %s?"
+msgid "Grant access to '%s'"
+msgstr "Да дозволим приступ на „%s“?"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "Уређај %s жели да приступи сервису „%s“."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:587 ../applet/agent.c:634 ../applet/agent.c:684
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
 #, c-format
-msgid "Pairing request for %s"
-msgstr "Захтев за спаривање са %s"
+#| msgid "Pairing request for %s"
+msgid "Pairing request for '%s'"
+msgstr "Захтев за спаривање са „%s“"
 
-#: ../applet/agent.c:591 ../applet/agent.c:638 ../applet/agent.c:688
-#: ../applet/agent.c:737 ../applet/agent.c:782
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
+#: ../applet/agent.c:618 ../applet/agent.c:656
 msgid "Bluetooth device"
 msgstr "Блутут уређај"
 
-#: ../applet/agent.c:592 ../applet/agent.c:639 ../applet/agent.c:689
-msgid "Enter passkey"
-msgstr "Унесите лозинку"
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+msgid "Enter PIN"
+msgstr "Унесите ПИН"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:733
+#: ../applet/agent.c:608
 #, c-format
-msgid "Confirmation request for %s"
-msgstr "Потврда захтева за %s"
+#| msgid "Pairing request for %s"
+msgid "Pairing confirmation for '%s'"
+msgstr "Потврда за спаривање са „%s“"
 
-#: ../applet/agent.c:738
-msgid "Confirm passkey"
-msgstr "Потврди лозинку"
+#: ../applet/agent.c:619
+msgid "Verify PIN"
+msgstr "Провери ПИН"
 
-#: ../applet/agent.c:778
+#: ../applet/agent.c:652
 #, c-format
-msgid "Authorization request for %s"
-msgstr "Захтев за идентификацију са %s"
+#| msgid "Authorization request for %s"
+msgid "Authorization request from '%s'"
+msgstr "Захтев за идентификацијом „%s“"
 
-#: ../applet/agent.c:783
+#: ../applet/agent.c:657
 msgid "Check authorization"
 msgstr "Провери идентификацију"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Блутутов управник"
 
 #: ../applet/bluetooth-applet.desktop.in.in.h:2
 msgid "Bluetooth Manager applet"
@@ -311,78 +356,121 @@ msgstr "Блутут: проверавам"
 msgid "Browse files on device..."
 msgstr "Разгледај датотеке на уређају..."
 
-#: ../applet/popup-menu.ui.h:3
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:405
 msgid "Devices"
 msgstr "Уређаји"
 
 #: ../applet/popup-menu.ui.h:4
-msgid "Preferences..."
-msgstr "Поставке..."
+#| msgid "Preferences..."
+msgid "Preferences"
+msgstr "Поставке"
 
 #: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "Изађи"
+
+#: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
 msgstr "Пошаљи датотеке на уређај..."
 
-#: ../applet/popup-menu.ui.h:6 ../properties/adapter.c:406
+#: ../applet/popup-menu.ui.h:7
 msgid "Set up new device..."
 msgstr "Подеси нови уређај..."
 
-#: ../properties/main.c:113
+#: ../applet/authorisation-dialogue.ui.h:1
+#| msgid "Always grant access"
+msgid "_Always grant access"
+msgstr "_Увек дозволи приступ"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "_Дозволи"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "_Одбиј"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "_Не поклапа се"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "_Поклапа се"
+
+#: ../applet/passkey-dialogue.ui.h:1
+#| msgid "Show input"
+msgid "_Show input"
+msgstr "П_рикажи унос"
+
+#: ../properties/main.c:115
 msgid "A Bluetooth manager for the GNOME desktop"
 msgstr "Блутут управник за Гном"
 
-#: ../properties/main.c:116
+#: ../properties/main.c:118
 msgid "translator-credits"
 msgstr ""
 "Милош Поповић <gpopac@gmail.com>\n"
 "http://prevod.org — превод на српски језик."
 
-#: ../properties/main.c:118
+#: ../properties/main.c:120
 msgid "GNOME Bluetooth home page"
 msgstr "Веб страница Блутута за Гном"
 
-#: ../properties/main.c:131
+#: ../properties/main.c:145
 msgid "Bluetooth Preferences"
 msgstr "Поставке за Блутут"
 
-#: ../properties/main.c:143
+#: ../properties/main.c:157
 msgid "_Show Bluetooth icon"
 msgstr "Прикажи _иконицу за Блутут"
 
-#: ../properties/main.c:220
+#: ../properties/main.c:307
+#| msgid "Remove from list of known devices?"
+msgid "Output a list of currently known devices"
+msgstr "Испиши све познате уређаје"
+
+#: ../properties/main.c:344
 msgid "Bluetooth Properties"
 msgstr "Поставке за Блутут"
 
 #: ../properties/adapter.c:179
-msgid "Remove from list of known devices?"
-msgstr "Да уклоним са списка познатих уређаја?"
+#, c-format
+#| msgid "Remove from list of known devices?"
+msgid "Remove '%s' from the list of devices?"
+msgstr "Да уклоним „%s“ из списка уређаја?"
 
-#: ../properties/adapter.c:180
-msgid "If you delete the device, you have to set it up again before next use."
+#: ../properties/adapter.c:181
+#| msgid ""
+#| "If you delete the device, you have to set it up again before next use."
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
 msgstr "Уколико уклоните уређај, мораћете да га поново подесите пре коришћења."
 
 #. The discoverable checkbox
-#: ../properties/adapter.c:319
-msgid "_Discoverable"
-msgstr "_Видљив"
+#: ../properties/adapter.c:352
+#| msgid "_Discoverable"
+msgid "Make computer _discoverable"
+msgstr "Постави рачунар као _видљив"
 
-#: ../properties/adapter.c:342
+#: ../properties/adapter.c:375
 msgid "Friendly name"
 msgstr "Име за пријатеље"
 
-#: ../properties/adapter.c:372
-msgid "Known devices"
-msgstr "Познати уређаји"
+#: ../properties/adapter.c:437
+#| msgid "Set up new device..."
+msgid "Set up _new device..."
+msgstr "Подеси _нови уређај..."
 
-#: ../properties/adapter.c:429
-msgid "Delete"
-msgstr "Обриши"
+#: ../properties/adapter.c:460
+msgid "_Remove"
+msgstr "_Уклони"
 
-#: ../properties/adapter.c:689
+#: ../properties/adapter.c:735
 msgid "Bluetooth is disabled"
 msgstr "Блутут је онемогућен"
 
-#: ../properties/adapter.c:719
+#: ../properties/adapter.c:771
 msgid "No Bluetooth adapters present"
 msgstr "Није присуран Блутут уређај"
 
@@ -406,76 +494,83 @@ msgstr "Да ли да прикажем иконицу у обавештајно
 msgid "Whether to show the notification icon."
 msgstr "Да ли да прикажем иконицу у обавештајној зони."
 
-#: ../properties/gconf-bridge.c:1221
+#: ../properties/gconf-bridge.c:1223
 #, c-format
 msgid "GConf error: %s"
 msgstr "GConf грешка: %s"
 
-#: ../properties/gconf-bridge.c:1231
+#: ../properties/gconf-bridge.c:1228
 msgid "All further errors shown only on terminal."
 msgstr "Наредне грешке ће се исписивати у терминалу."
-
-#: ../wizard/main.c:118 ../wizard/main.c:163
-msgid "Please enter the following passkey:"
-msgstr "Унесите следећу лозинку:"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait whilst 'Sony Bluetooth Headset' is being paired
-#.
-#: ../wizard/main.c:130
-#, c-format
-msgid "Please wait whilst '%s' is being paired"
-msgstr "Сачекајте док не упарим „%s“"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:188
+#: ../wizard/main.c:206 ../wizard/main.c:327
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Прекинуто је упаривање са „%s“"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' finished
-#.
-#: ../wizard/main.c:194
+#: ../wizard/main.c:246
 #, c-format
-msgid "Pairing with '%s' finished"
-msgstr "Завршено је упаривање са „%s“"
+msgid "Please confirm that the PIN displayed on '%s' matches this one."
+msgstr "Потврдите да ли се ПИН исписан на „%s“ поклапа са овим."
+
+#: ../wizard/main.c:300
+#| msgid "Please enter the following passkey:"
+msgid "Please enter the following PIN:"
+msgstr "Унесите следећи ПИН:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Successfully paired with 'Sony Bluetooth Headset'
+#. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:233
+#: ../wizard/main.c:383
 #, c-format
-msgid "Successfully paired with '%s'"
-msgstr "Упаривање са „%s“ је успело"
-
-#: ../wizard/main.c:243
-msgid "Please wait while setting up the device..."
-msgstr "Сачекајте док не подесим уређај..."
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:253
-#, c-format
-msgid "Pairing with '%s' failed"
-msgstr "Није успело упаривање са „%s“"
+#| msgid "Pairing with '%s' failed"
+msgid "Setting up '%s' failed"
+msgstr "Није успело подеавање „%s“"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:311
+#: ../wizard/main.c:514
 #, c-format
-msgid "Connecting to '%s' now..."
+#| msgid "Connecting to '%s' now..."
+msgid "Connecting to '%s'..."
 msgstr "Повезујем се са „%s“..."
+
+#: ../wizard/main.c:550
+#, c-format
+#| msgid "Please enter the following passkey:"
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr ""
+"Унесите следећи ПИН на „%s“ и притисните „Ентер“ на тастатури:"
+
+#: ../wizard/main.c:552
+#, c-format
+#| msgid "Please enter the following passkey:"
+msgid "Please enter the following PIN on '%s':"
+msgstr "Унесите следећи ПИН на „%s“:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+#.
+#: ../wizard/main.c:573
+#, c-format
+#| msgid "Please wait while setting up the device..."
+msgid "Please wait while finishing setup on device '%s'..."
+msgstr "Сачекајте док не завршим подешавање уређаја „%s“..."
+
+#: ../wizard/main.c:586
+#, c-format
+#| msgid "Successfully paired with '%s'"
+msgid "Successfully setup new device '%s'"
+msgstr "Подеавање новог уређаја „%s“ је успело"
 
 #: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -490,58 +585,108 @@ msgid "'1234'"
 msgstr "„1234“"
 
 #: ../wizard/wizard.ui.h:4
-msgid "<b>Fixed Passkey</b>"
-msgstr "<b>Непромењљива лозинка</b>"
+#| msgid "Bluetooth device"
+msgid "Bluetooth New Device Setup"
+msgstr "Подешавање новог Блутут уређаја"
 
 #: ../wizard/wizard.ui.h:5
-msgid "<b>Setting up new device</b>"
-msgstr "<b>Подешавање новиг уређаја</b>"
+#| msgid "Custom passkey code:"
+msgid "Custom PIN code:"
+msgstr "Произвољан ПИН код:"
 
 #: ../wizard/wizard.ui.h:6
-msgid "<b>Successfully configured new device</b>"
-msgstr "<b>Уређај је успешно подешен</b>"
+#| msgid "Device setup"
+msgid "Device Setup"
+msgstr "Подешавање уређаја"
 
 #: ../wizard/wizard.ui.h:7
-msgid "<b>Welcome to the Bluetooth device setup wizard</b>"
-msgstr "<b>Добродошли код Чаробњака за подешавање Блутут уређаја</b>"
+#| msgid "Device setup"
+msgid "Device Setup Failed"
+msgstr "Није успело подешавање уређаја"
 
 #: ../wizard/wizard.ui.h:8
-msgid "Bluetooth Device Wizard"
-msgstr "Чаробњак за Блутут уређаје"
+msgid "Device search"
+msgstr "Тражим уређај"
 
 #: ../wizard/wizard.ui.h:9
-msgid "Custom passkey code:"
-msgstr "Произвољна лозинка:"
+msgid "Does not match"
+msgstr "Не поклапа се"
 
 #: ../wizard/wizard.ui.h:10
-msgid "Passkey Options"
-msgstr "Опције за лозинку"
+msgid "Finishing New Device Setup"
+msgstr "Завршавам подешавање новог уређаја"
 
 #: ../wizard/wizard.ui.h:11
-msgid "Passkey _options..."
-msgstr "Опције за _лозинку..."
+msgid "Fixed PIN"
+msgstr "Задати ПИН"
 
 #: ../wizard/wizard.ui.h:12
+msgid "Introduction"
+msgstr "Увод"
+
+#: ../wizard/wizard.ui.h:13
+msgid "Matches"
+msgstr "Поклапа се"
+
+#: ../wizard/wizard.ui.h:14
+#| msgid "Passkey Options"
+msgid "PIN Options"
+msgstr "Опције за ПИН"
+
+#: ../wizard/wizard.ui.h:15
+#| msgid "Passkey _options..."
+msgid "PIN _options..."
+msgstr "_Опције за ПИН..."
+
+#: ../wizard/wizard.ui.h:16
+#| msgid "Select the device you want to setup"
+msgid "Select the additional services you want to use with your device:"
+msgstr "Изаберите додатне сервисе за употребу на овом уређају:"
+
+#: ../wizard/wizard.ui.h:17
 msgid "Select the device you want to setup"
 msgstr "Изаберите уређај који желите да подесите"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:18
+msgid "Setup Completed"
+msgstr "Подешавање је завршено"
+
+#: ../wizard/wizard.ui.h:19
+#| msgid ""
+#| "The device wizard will walk you through the process of configuring "
+#| "Bluetooth enabled devices for use with this computer."
 msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer."
+"The Bluetooth new device setup will walk you through the process of "
+"configuring Bluetooth enabled devices for use with this computer."
 msgstr ""
-"Чаробњак за уређаје ће вас провести кроз подешавање Блутут уређаја на овом "
-"рачунару."
+"Подешавање новог Блутут уређаја ће вас провести кроз подешавање "
+"дозвољених Блутут уређаја на овом рачунару."
 
-#: ../wizard/wizard.ui.h:14
-msgid "_Automatic passkey selection"
-msgstr "_Сам унеси лозинку"
+#: ../wizard/wizard.ui.h:20
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#8220;"
+"discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
+"device's manual if in doubt."
+msgstr ""
+"Уређај мора да буде на раздаљини од 10 метара од рачунара, и да буде "
+"означен као „видљив“; Проверите упутство за употребу уређаја уколико "
+"нисте сигурни"
 
-#: ../wizard/wizard.ui.h:15
-msgid "gtk-close"
-msgstr "gtk-close"
+#: ../wizard/wizard.ui.h:21
+#| msgid "<b>Welcome to the Bluetooth device setup wizard</b>"
+msgid "Welcome to the Bluetooth new device setup"
+msgstr "Добродошли у подешавање новог Блутут уређаја"
 
-#: ../sendto/main.c:97
+#: ../wizard/wizard.ui.h:22
+#| msgid "_Automatic passkey selection"
+msgid "_Automatic PIN selection"
+msgstr "_Сам изабери ПИН"
+
+#: ../wizard/wizard.ui.h:23
+msgid "_Restart Setup"
+msgstr "_Поново покрени подешавање"
+
+#: ../sendto/main.c:98
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -549,7 +694,7 @@ msgstr[0] "%'d секунда"
 msgstr[1] "%'d секунде"
 msgstr[2] "%'d секунди"
 
-#: ../sendto/main.c:102 ../sendto/main.c:115
+#: ../sendto/main.c:103 ../sendto/main.c:116
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -557,7 +702,7 @@ msgstr[0] "%'d минут"
 msgstr[1] "%'d минута"
 msgstr[2] "%'d минута"
 
-#: ../sendto/main.c:113
+#: ../sendto/main.c:114
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -565,7 +710,7 @@ msgstr[0] "%'d сат"
 msgstr[1] "%'d сата"
 msgstr[2] "%'d сати"
 
-#: ../sendto/main.c:123
+#: ../sendto/main.c:124
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -573,51 +718,27 @@ msgstr[0] "приближно %'d сат"
 msgstr[1] "приближно %'d сата"
 msgstr[2] "приближно %'d сати"
 
-#: ../sendto/main.c:149
+#: ../sendto/main.c:150
 msgid "File Transfer"
 msgstr "Преноси датотека"
 
-#: ../sendto/main.c:166
+#: ../sendto/main.c:168
 msgid "Sending files via Bluetooth"
 msgstr "Шаљем датотеке преко Блутута"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:180
 msgid "From:"
 msgstr "Шаље:"
 
-#: ../sendto/main.c:194
+#: ../sendto/main.c:196
 msgid "To:"
 msgstr "Прима:"
 
-#: ../sendto/main.c:258 ../sendto/main.c:597
-#, c-format
-msgid "Sending %s"
-msgstr "Шаљем %s"
-
-#: ../sendto/main.c:265 ../sendto/main.c:330 ../sendto/main.c:604
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Шаљем %d од %d датотека"
-
-#: ../sendto/main.c:326
-#, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
-
-#: ../sendto/main.c:328
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:362 ../sendto/main.c:381
-msgid "Error Occurred"
-msgstr "Грешка"
-
-#: ../sendto/main.c:411
+#: ../sendto/main.c:242
 msgid "An unknown error occured"
 msgstr "Непозната грешка"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:252
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -625,25 +746,112 @@ msgstr ""
 "Проверите да ли је удаљени уређај укључен и да ли је подешен тако да "
 "прихвата везе преко Блутута"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:336
+#, c-format
+msgid "Sending %s"
+msgstr "Шаљем %s"
+
+#: ../sendto/main.c:343 ../sendto/main.c:405
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Шаљем %d од %d датотека"
+
+#: ../sendto/main.c:401
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:403
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:497
 msgid "Select Device to Send To"
 msgstr "Изаберите уређај на који да пошаљем"
 
-#: ../sendto/main.c:714
+#: ../sendto/main.c:501
 msgid "Send _To"
 msgstr "Пошаљи _на"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:542
 msgid "Choose files to send"
 msgstr "Изаберите датотеке за слање"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:571
 msgid "Remote device to use"
 msgstr "Жељени удаљени уређај"
 
-#: ../sendto/main.c:787
-msgid "Remove device's name"
-msgstr "Уклони назив уређаја"
+#: ../sendto/main.c:573
+#| msgid "Remove device's name"
+msgid "Remote device's name"
+msgstr "Име удаљеног уређаја"
+
+#~ msgid "S_earch"
+#~ msgstr "_Тражи"
+
+#~ msgid "Bluetooth: Unknown"
+#~ msgstr "Блутут: Непознато"
+
+#~ msgid "Authentication request"
+#~ msgstr "Захтев за идентификацијом"
+
+#~ msgid "Pairing request for device:"
+#~ msgstr "Захтев за упаривање уређаја:"
+
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "Унесите лозинку за идентификацију:"
+
+#~ msgid "Confirmation request"
+#~ msgstr "Захтев за потвду"
+
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "Потврди вредност за идентификацију:"
+
+#~ msgid "Authorization request"
+#~ msgstr "Захтев за идентификацију"
+
+#~ msgid "Authorization request for device:"
+#~ msgstr "Захтев за идентификацију уређаја:"
+
+#~ msgid "Enter passkey"
+#~ msgstr "Унесите лозинку"
+
+#~ msgid "Confirmation request for %s"
+#~ msgstr "Потврда захтева за %s"
+
+#~ msgid "Confirm passkey"
+#~ msgstr "Потврди лозинку"
+
+#~ msgid "Known devices"
+#~ msgstr "Познати уређаји"
+
+#~ msgid "Delete"
+#~ msgstr "Обриши"
+
+#~ msgid "Please wait whilst '%s' is being paired"
+#~ msgstr "Сачекајте док не упарим „%s“"
+
+#~ msgid "Pairing with '%s' finished"
+#~ msgstr "Завршено је упаривање са „%s“"
+
+#~ msgid "<b>Fixed Passkey</b>"
+#~ msgstr "<b>Непромењљива лозинка</b>"
+
+#~ msgid "<b>Setting up new device</b>"
+#~ msgstr "<b>Подешавање новиг уређаја</b>"
+
+#~ msgid "<b>Successfully configured new device</b>"
+#~ msgstr "<b>Уређај је успешно подешен</b>"
+
+#~ msgid "Bluetooth Device Wizard"
+#~ msgstr "Чаробњак за Блутут уређаје"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "Error Occurred"
+#~ msgstr "Грешка"
 
 #~ msgid "General"
 #~ msgstr "Опште"
@@ -675,15 +883,6 @@ msgstr "Уклони назив уређаја"
 #~ msgstr ""
 #~ "Могућности за приказ обавештајне иконице. Доступне су „never“ (никад), "
 #~ "„present“ (када је присутан) и „always“ (увек)."
-
-#~ msgid "Introduction"
-#~ msgstr "Увод"
-
-#~ msgid "Device search"
-#~ msgstr "Тражим уређај"
-
-#~ msgid "Device setup"
-#~ msgstr "Подешавање уређаја"
 
 #~ msgid "Summary"
 #~ msgstr "Сажетак"
