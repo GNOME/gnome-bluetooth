@@ -50,6 +50,7 @@ gnomebluetooth_HEADERS =				\
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
 
+if HAVE_INTROSPECTION
 BUILT_GIRSOURCES += GnomeBluetooth-1.0.gir
 
 GnomeBluetooth-1.0.gir: $(libgnome_bluetooth_la_SOURCES)
@@ -72,8 +73,6 @@ GnomeBluetooth-1.0.gir: $(INTROSPECTION_SCANNER)
 		-I$(srcdir) \
 		$(LIBGNOMEBT_CFLAGS) \
 		$(gnomebluetooth_HEADERS)
-
-if HAVE_INTROSPECTION
 
 girdir = $(GIRDIR)
 dist_gir_DATA = $(BUILT_GIRSOURCES)
