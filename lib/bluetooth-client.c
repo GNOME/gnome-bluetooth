@@ -664,7 +664,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 		name = value ? g_value_get_string(value) : NULL;
 
 		value = g_hash_table_lookup(hash, "Class");
-		type = bluetooth_class_to_type(g_value_get_uint(value));
+		type = value ? bluetooth_class_to_type(g_value_get_uint(value)) : BLUETOOTH_TYPE_ANY;
 
 		value = g_hash_table_lookup(hash, "Icon");
 		icon = value ? g_value_get_string(value) : "bluetooth";
