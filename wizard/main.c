@@ -771,6 +771,7 @@ select_device_changed (BluetoothChooser *selector,
 
 	target_type = type;
 	target_ssp = !legacypairing;
+	automatic_pincode = FALSE;
 
 	g_free (pincode);
 	pincode = NULL;
