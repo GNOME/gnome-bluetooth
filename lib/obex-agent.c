@@ -87,6 +87,7 @@ static gboolean obex_agent_request(ObexAgent *agent, const char *path,
 		proxy = dbus_g_proxy_new_for_name(connection, OBEX_SERVICE,
 						path, OBEX_TRANSFER_INTERFACE);
 
+		//FIXME check result
 		result = priv->request_func(context, proxy,
 						priv->request_data);
 
