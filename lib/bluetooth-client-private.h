@@ -63,6 +63,10 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 					      BluetoothClientConnectFunc func,
 					      gpointer data);
 
+void bluetooth_client_dump_device (GtkTreeModel *model,
+				   GtkTreeIter *iter,
+				   gboolean recurse);
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_CLIENT_PRIVATE_H */

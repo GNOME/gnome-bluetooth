@@ -53,9 +53,13 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	gboolean selected;
 
-	selected = gtk_tree_selection_get_selected(selection, &model, &iter);
+	if (gtk_tree_selection_get_selected(selection, &model, &iter) == FALSE) {
+		g_print ("No devices selected");
+		return;
+	}
+
+	bluetooth_client_dump_device (model, &iter, FALSE);
 }
 
 static void row_inserted(GtkTreeModel *model, GtkTreePath *path,

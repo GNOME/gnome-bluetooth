@@ -34,6 +34,7 @@
 
 #include "bluetooth-plugin-manager.h"
 #include "bluetooth-client.h"
+#include "bluetooth-client-private.h"
 #include "gconf-bridge.h"
 #include "general.h"
 #include "adapter.h"
@@ -220,93 +221,6 @@ message_received_cb (UniqueApp         *app,
 }
 
 static void
-services_foreach (const char *service, gpointer _value, GString *str)
-{
-	gboolean value = GPOINTER_TO_INT (_value);
-	g_string_append_printf (str, "%s (%s) ", service, value ? "connected" : "not connected");
-}
-
-#define BOOL_STR(x) (x ? "True" : "False")
-
-static void
-dump_device (GtkTreeModel *model, GtkTreeIter *iter, gboolean is_adapter)
-{
-	DBusGProxy *proxy;
-	char *address, *alias, *icon, **uuids, *name;
-	gboolean is_default, paired, trusted, connected, discovering, powered;
-	GHashTable *services;
-	guint type;
-
-	gtk_tree_model_get (model, iter,
-			    BLUETOOTH_COLUMN_ADDRESS, &address,
-			    BLUETOOTH_COLUMN_ALIAS, &alias,
-			    BLUETOOTH_COLUMN_NAME, &name,
-			    BLUETOOTH_COLUMN_TYPE, &type,
-			    BLUETOOTH_COLUMN_ICON, &icon,
-			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
-			    BLUETOOTH_COLUMN_PAIRED, &paired,
-			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
-			    BLUETOOTH_COLUMN_CONNECTED, &connected,
-			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
-			    BLUETOOTH_COLUMN_POWERED, &powered,
-			    BLUETOOTH_COLUMN_SERVICES, &services,
-			    BLUETOOTH_COLUMN_UUIDS, &uuids,
-			    BLUETOOTH_COLUMN_PROXY, &proxy,
-			    -1);
-
-	if (is_adapter != FALSE) {
-		/* Adapter */
-		g_print ("Adapter: %s (%s)\n", name, address);
-		if (is_default)
-			g_print ("\tDefault adapter\n");
-		if (discovering)
-			g_print ("\tDiscovery in progress\n");
-		g_print ("\t%s\n", powered ? "Is discovering" : "Not discovering");
-	} else {
-		/* Device */
-		g_print ("Device: %s (%s)\n", alias, address);
-		g_print ("\tD-Bus Path: %s\n", proxy ? dbus_g_proxy_get_path (proxy) : "(none)");
-		g_print ("\tType: %s Icon: %s\n", bluetooth_type_to_string (type), icon);
-		g_print ("\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(paired), BOOL_STR(trusted), BOOL_STR(connected));
-		if (services != NULL) {
-			GString *str;
-
-			str = g_string_new (NULL);
-			g_hash_table_foreach (services, (GHFunc) services_foreach, str);
-			g_print ("\tServices: %s\n", str->str);
-			g_string_free (str, TRUE);
-		}
-		if (uuids != NULL) {
-			guint i;
-			g_print ("\tUUIDs: ");
-			for (i = 0; uuids[i] != NULL; i++)
-				g_print ("%s ", uuids[i]);
-			g_print ("\n");
-		}
-	}
-	g_print ("\n");
-
-	g_free (name);
-	g_free (alias);
-	g_free (address);
-	g_free (icon);
-	g_object_unref (proxy);
-	if (services != NULL)
-		g_hash_table_unref (services);
-	g_strfreev (uuids);
-
-	if (is_adapter != FALSE) {
-		GtkTreeIter child;
-
-		if (gtk_tree_model_iter_children (model, &child, iter) == FALSE)
-			return;
-		dump_device (model, &child, FALSE);
-		while (gtk_tree_model_iter_next (model, &child))
-			dump_device (model, &child, FALSE);
-	}
-}
-
-static void
 dump_devices (void)
 {
 	BluetoothClient *client;
@@ -321,9 +235,9 @@ dump_devices (void)
 		g_print ("Is bluetoothd running, and a Bluetooth adapter enabled?\n");
 		return;
 	}
-	dump_device (model, &iter, TRUE);
+	bluetooth_client_dump_device (model, &iter, TRUE);
 	while (gtk_tree_model_iter_next (model, &iter))
-		dump_device (model, &iter, TRUE);
+		bluetooth_client_dump_device (model, &iter, TRUE);
 }
 
 static gboolean option_dump = FALSE;

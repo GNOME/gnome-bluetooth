@@ -1733,3 +1733,97 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 	return TRUE;
 }
 
+#define BOOL_STR(x) (x ? "True" : "False")
+
+static void
+services_foreach (const char *service, gpointer _value, GString *str)
+{
+	gboolean value = GPOINTER_TO_INT (_value);
+	g_string_append_printf (str, "%s (%s) ", service, value ? "connected" : "not connected");
+}
+
+void
+bluetooth_client_dump_device (GtkTreeModel *model,
+			      GtkTreeIter *iter,
+			      gboolean recurse)
+{
+	DBusGProxy *proxy;
+	char *address, *alias, *name, *icon, **uuids;
+	gboolean is_default, paired, trusted, connected, discovering, powered, is_adapter;
+	GHashTable *services;
+	GtkTreeIter parent;
+	guint type;
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_ADDRESS, &address,
+			    BLUETOOTH_COLUMN_ALIAS, &alias,
+			    BLUETOOTH_COLUMN_NAME, &name,
+			    BLUETOOTH_COLUMN_TYPE, &type,
+			    BLUETOOTH_COLUMN_ICON, &icon,
+			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
+			    BLUETOOTH_COLUMN_PAIRED, &paired,
+			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
+			    BLUETOOTH_COLUMN_CONNECTED, &connected,
+			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
+			    BLUETOOTH_COLUMN_POWERED, &powered,
+			    BLUETOOTH_COLUMN_SERVICES, &services,
+			    BLUETOOTH_COLUMN_UUIDS, &uuids,
+			    BLUETOOTH_COLUMN_PROXY, &proxy,
+			    -1);
+	is_adapter = !gtk_tree_model_iter_parent (model, &parent, iter);
+
+	if (is_adapter != FALSE) {
+		/* Adapter */
+		g_print ("Adapter: %s (%s)\n", name, address);
+		if (is_default)
+			g_print ("\tDefault adapter\n");
+		if (discovering)
+			g_print ("\tDiscovery in progress\n");
+		g_print ("\t%s\n", powered ? "Is powered" : "Is not powered");
+	} else {
+		/* Device */
+		g_print ("Device: %s (%s)\n", alias, address);
+		g_print ("\tD-Bus Path: %s\n", proxy ? dbus_g_proxy_get_path (proxy) : "(none)");
+		g_print ("\tType: %s Icon: %s\n", bluetooth_type_to_string (type), icon);
+		g_print ("\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(paired), BOOL_STR(trusted), BOOL_STR(connected));
+		if (services != NULL) {
+			GString *str;
+
+			str = g_string_new (NULL);
+			g_hash_table_foreach (services, (GHFunc) services_foreach, str);
+			g_print ("\tServices: %s\n", str->str);
+			g_string_free (str, TRUE);
+		}
+		if (uuids != NULL) {
+			guint i;
+			g_print ("\tUUIDs: ");
+			for (i = 0; uuids[i] != NULL; i++)
+				g_print ("%s ", uuids[i]);
+			g_print ("\n");
+		}
+	}
+	g_print ("\n");
+
+	g_free (alias);
+	g_free (address);
+	g_free (icon);
+	g_object_unref (proxy);
+	if (services != NULL)
+		g_hash_table_unref (services);
+	g_strfreev (uuids);
+
+	if (recurse == FALSE)
+		return;
+
+	if (is_adapter != FALSE) {
+		GtkTreeIter child;
+
+		if (gtk_tree_model_iter_children (model, &child, iter) == FALSE)
+			return;
+		bluetooth_client_dump_device (model, &child, FALSE);
+		while (gtk_tree_model_iter_next (model, &child))
+			bluetooth_client_dump_device (model, &child, FALSE);
+	}
+
+}
+
