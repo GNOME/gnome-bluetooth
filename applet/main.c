@@ -106,14 +106,14 @@ void browse_callback(GObject *widget, gpointer user_data)
 
 	address = g_strdup (g_object_get_data (widget, "address"));
 	if (address == NULL) {
-		GtkWidget *dialog, *selector, *button;
+		GtkWidget *dialog, *selector;
 		int response_id;
 
 		dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
 						     GTK_DIALOG_NO_SEPARATOR,
 						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 						     NULL);
-		button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);
+		gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);
 		gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 						  GTK_RESPONSE_ACCEPT, FALSE);
 		gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
