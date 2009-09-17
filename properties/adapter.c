@@ -283,7 +283,7 @@ static void create_adapter(adapter_data *adapter)
 	GHashTable *hash = NULL;
 	GValue *value;
 	DBusGProxy *default_proxy;
-	const gchar *address, *name;
+	const gchar *name;
 	gboolean powered, discoverable;
 	guint timeout;
 
@@ -304,9 +304,6 @@ static void create_adapter(adapter_data *adapter)
 				&hash, G_TYPE_INVALID);
 
 	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
-
 		value = g_hash_table_lookup(hash, "Name");
 		name = value ? g_value_get_string(value) : NULL;
 
@@ -319,7 +316,6 @@ static void create_adapter(adapter_data *adapter)
 		value = g_hash_table_lookup(hash, "DiscoverableTimeout");
 		timeout = value ? g_value_get_uint(value) : 0;
 	} else {
-		address = NULL;
 		name = NULL;
 		powered = FALSE;
 		discoverable = FALSE;
