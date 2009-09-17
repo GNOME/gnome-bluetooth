@@ -458,7 +458,7 @@ device_get_name(DBusGProxy *proxy, char **long_name)
 
 	if (g_strcmp0 (alias, address) == 0) {
 		g_free (alias);
-		if (*long_name)
+		if (long_name != NULL)
 			*long_name = g_strdup_printf ("'%s'", address);
 		return address;
 	}
