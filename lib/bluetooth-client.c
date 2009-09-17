@@ -1448,7 +1448,6 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 {
 	CreateDeviceData *devdata;
 	DBusGProxy *adapter;
-	DBusGProxyCall *call;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (address != NULL, FALSE);
@@ -1468,17 +1467,17 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 	devdata->client = g_object_ref (client);
 
 	if (agent != NULL)
-		call = dbus_g_proxy_begin_call_with_timeout(adapter,
-				"CreatePairedDevice", create_device_callback,
-				devdata, g_free, 90 * 1000,
-				G_TYPE_STRING, address,
-				DBUS_TYPE_G_OBJECT_PATH, agent,
-				G_TYPE_STRING, "DisplayYesNo", G_TYPE_INVALID);
+		dbus_g_proxy_begin_call_with_timeout(adapter,
+						     "CreatePairedDevice", create_device_callback,
+						     devdata, g_free, 90 * 1000,
+						     G_TYPE_STRING, address,
+						     DBUS_TYPE_G_OBJECT_PATH, agent,
+						     G_TYPE_STRING, "DisplayYesNo", G_TYPE_INVALID);
 	else
-		call = dbus_g_proxy_begin_call_with_timeout(adapter,
-				"CreateDevice", create_device_callback,
-				devdata, g_free, 60 * 1000,
-				G_TYPE_STRING, address, G_TYPE_INVALID);
+		dbus_g_proxy_begin_call_with_timeout(adapter,
+						     "CreateDevice", create_device_callback,
+						     devdata, g_free, 60 * 1000,
+						     G_TYPE_STRING, address, G_TYPE_INVALID);
 
 	return TRUE;
 }
