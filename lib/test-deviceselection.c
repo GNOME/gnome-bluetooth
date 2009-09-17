@@ -258,7 +258,6 @@ int main(int argc, char **argv)
 {
 	GtkWidget *dialog;
 	const char *selection;
-	int response;
 
 	gtk_init(&argc, &argv);
 	if (argc < 2)
@@ -282,7 +281,7 @@ int main(int argc, char **argv)
 
 	gtk_widget_show(dialog);
 
-	response = gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_dialog_run(GTK_DIALOG(dialog));
 
 	gtk_widget_destroy(dialog);
 
