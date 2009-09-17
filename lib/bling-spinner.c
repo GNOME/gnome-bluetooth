@@ -186,12 +186,10 @@ static void
 bling_spinner_screen_changed (GtkWidget* widget, GdkScreen* old_screen)
 {
 	BlingSpinner *spinner;
-	BlingSpinnerPrivate *priv;
 	GdkScreen* new_screen;
 	GdkColormap* colormap;
 
 	spinner = BLING_SPINNER(widget);
-	priv = BLING_SPINNER_GET_PRIVATE (spinner);
 
 	new_screen = gtk_widget_get_screen (widget);
 	colormap = gdk_screen_get_rgba_colormap (new_screen);
