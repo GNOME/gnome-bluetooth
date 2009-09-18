@@ -72,7 +72,7 @@ static GtkButtonClass *parent_class;
 
 G_DEFINE_TYPE(BluetoothChooserButton, bluetooth_chooser_button, GTK_TYPE_BUTTON);
 
-#define DEFAULT_STR N_("Click to select device...")
+#define DEFAULT_STR N_("Click to select device…")
 
 static void
 set_btdevname (BluetoothChooserButton *button, const char *bdaddr, const char *name, const char *icon)

@@ -177,7 +177,7 @@ set_search_label (BluetoothChooser *self, gboolean state)
 	} else {
 		gtk_widget_show (priv->spinner);
 		gtk_spinner_start (GTK_SPINNER (priv->spinner));
-		gtk_label_set_text (GTK_LABEL (priv->search_label), _("Searching for devices..."));
+		gtk_label_set_text (GTK_LABEL (priv->search_label), _("Searching for devices…"));
 	}
 }
 
@@ -801,7 +801,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	priv->spinner = gtk_spinner_new ();
 	gtk_container_add (GTK_CONTAINER (hbox), priv->spinner);
 	gtk_widget_show (priv->spinner);
-	priv->search_label = gtk_label_new (_("Searching for devices..."));
+	priv->search_label = gtk_label_new (_("Searching for devices…"));
 	gtk_container_add (GTK_CONTAINER (hbox), priv->search_label);
 	gtk_widget_show (priv->search_label);
 	gtk_widget_show (hbox);

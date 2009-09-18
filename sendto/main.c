@@ -375,7 +375,7 @@ static void response_callback(GtkWidget *dialog,
 
 		/* Reset status and progress bar */
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress),
-					  _("Connecting..."));
+					  _("Connecting…"));
 		gtk_label_set_text (GTK_LABEL (label_status), "");
 		gtk_widget_hide (image_status);
 
@@ -470,7 +470,7 @@ static void create_window(void)
 	gtk_progress_bar_set_ellipsize(GTK_PROGRESS_BAR(progress),
 							PANGO_ELLIPSIZE_END);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
-							_("Connecting..."));
+							_("Connecting…"));
 	gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
