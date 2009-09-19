@@ -444,13 +444,17 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 	if (priv->adapter == NULL)
 		return FALSE;
 
-	dbus_g_proxy_call(priv->adapter, "UnregisterAgent", &error,
-					DBUS_TYPE_G_OBJECT_PATH, priv->path,
-					G_TYPE_INVALID, G_TYPE_INVALID);
+	dbus_g_proxy_call (priv->adapter, "UnregisterAgent", &error,
+			   DBUS_TYPE_G_OBJECT_PATH, priv->path,
+			   G_TYPE_INVALID, G_TYPE_INVALID);
 
 	if (error != NULL) {
-		g_printerr("Agent unregistration failed: %s\n",
-							error->message);
+		/* Ignore errors if the adapter is gone */
+		if (g_error_matches (error, DBUS_GERROR, DBUS_GERROR_UNKNOWN_METHOD) == FALSE) {
+			g_printerr ("Agent unregistration failed: %s '%s'\n",
+				    error->message,
+				    g_quark_to_string (error->domain));
+		}
 		g_error_free(error);
 	}
 

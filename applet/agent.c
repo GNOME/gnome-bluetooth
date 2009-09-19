@@ -40,7 +40,7 @@
 #include "agent.h"
 
 static BluetoothClient *client;
-static GtkTreeModel *adapter_model;
+static BluetoothAgent *agent = NULL;
 
 static GList *input_list = NULL;
 
@@ -695,35 +695,44 @@ static gboolean cancel_request(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean adapter_insert(GtkTreeModel *model, GtkTreePath *path,
-					GtkTreeIter *iter, gpointer user_data)
+static void
+default_adapter_changed (GObject    *gobject,
+			 GParamSpec *pspec,
+			 gpointer    user_data)
 {
-	BluetoothAgent *agent;
-	DBusGProxy *adapter;
+	char *adapter_str;
 
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+	g_object_get (G_OBJECT (gobject), "default-adapter", &adapter_str, NULL);
+	if (agent != NULL) {
+		bluetooth_agent_unregister (agent);
+		g_object_unref (agent);
+		agent = NULL;
+	}
+	if (adapter_str != NULL) {
+		DBusGConnection *connection;
+		DBusGProxy *adapter;
 
-	if (adapter == NULL)
-		return FALSE;
+		connection = dbus_g_bus_get(DBUS_BUS_SYSTEM, NULL);
+		adapter = dbus_g_proxy_new_for_name (connection,
+						     "org.bluez",
+						     adapter_str,
+						     "org.bluez.Adapter");
+		dbus_g_connection_unref (connection);
 
-	agent = bluetooth_agent_new();
+		agent = bluetooth_agent_new();
 
-	bluetooth_agent_set_pincode_func(agent, pincode_request, adapter);
-	bluetooth_agent_set_passkey_func(agent, pin_request, adapter);
-	bluetooth_agent_set_display_func(agent, display_request, adapter);
-	bluetooth_agent_set_confirm_func(agent, confirm_request, adapter);
-	bluetooth_agent_set_authorize_func(agent, authorize_request, adapter);
-	bluetooth_agent_set_cancel_func(agent, cancel_request, adapter);
+		bluetooth_agent_set_pincode_func(agent, pincode_request, adapter);
+		bluetooth_agent_set_passkey_func(agent, pin_request, adapter);
+		bluetooth_agent_set_display_func(agent, display_request, adapter);
+		bluetooth_agent_set_confirm_func(agent, confirm_request, adapter);
+		bluetooth_agent_set_authorize_func(agent, authorize_request, adapter);
+		bluetooth_agent_set_cancel_func(agent, cancel_request, adapter);
 
-	bluetooth_agent_register(agent, adapter);
+		bluetooth_agent_register(agent, adapter);
 
-	return FALSE;
-}
-
-static void adapter_added(GtkTreeModel *model, GtkTreePath *path,
-					GtkTreeIter *iter, gpointer user_data)
-{
-	adapter_insert(model, path, iter, user_data);
+		g_object_unref (adapter);
+	}
+	g_free (adapter_str);
 }
 
 int setup_agents(void)
@@ -732,22 +741,20 @@ int setup_agents(void)
 							AGENT_ERROR_TYPE);
 
 	client = bluetooth_client_new();
-
-	adapter_model = bluetooth_client_get_adapter_model(client);
-
-	g_signal_connect(G_OBJECT(adapter_model), "row-inserted",
-					G_CALLBACK(adapter_added), NULL);
-
-	gtk_tree_model_foreach(adapter_model, adapter_insert, NULL);
+	g_signal_connect (G_OBJECT (client), "notify::default-adapter",
+			  G_CALLBACK (default_adapter_changed), NULL);
+	default_adapter_changed (G_OBJECT (client), NULL, NULL);
 
 	return 0;
 }
 
 void cleanup_agents(void)
 {
-	g_object_unref(adapter_model);
-
-	g_object_unref(client);
+	if (agent != NULL) {
+		bluetooth_agent_unregister (agent);
+		g_object_unref (agent);
+	}
+	g_object_unref (client);
 }
 
 void show_agents(void)
