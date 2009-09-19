@@ -3,9 +3,10 @@ SUBDIRS = icons lib applet properties wizard sendto docs po help
 
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make gnome-doc-utils.make
 
+# FIXME https://bugzilla.gnome.org/show_bug.cgi?id=595675
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update \
-	--enable-gtk-doc --disable-scrollkeeper
+	--enable-gtk-doc --disable-scrollkeeper --enable-introspection=no
 
 DISTCLEANFILES = intltool-extract intltool-update intltool-merge gnome-doc-utils.make
 
