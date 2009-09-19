@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-22 11:25+0200\n"
+"POT-Creation-Date: 2009-09-16 13:08+0200\n"
 "PO-Revision-Date: 2009-08-22 11:35+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -198,7 +198,7 @@ msgstr "Bluetooth: Slått av"
 msgid "Disconnecting..."
 msgstr "Kobler fra..."
 
-#: ../applet/main.c:413 ../sendto/main.c:214
+#: ../applet/main.c:413 ../sendto/main.c:213
 msgid "Connecting..."
 msgstr "Kobler til..."
 
@@ -250,7 +250,8 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Kjør «%s --help» for å se en full liste med tilgjengelige kommandolinjealternativer.\n"
+"Kjør «%s --help» for å se en full liste med tilgjengelige "
+"kommandolinjealternativer.\n"
 
 #: ../applet/main.c:983
 msgid "Bluetooth Applet"
@@ -525,7 +526,8 @@ msgstr "Kobler til «%s»..."
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
+msgstr ""
+"Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
 
 #: ../wizard/main.c:552
 #, c-format
@@ -578,69 +580,76 @@ msgstr "Oppsett av enhet feilet"
 msgid "Device search"
 msgstr "Søk etter enheter"
 
-#: ../wizard/wizard.ui.h:9
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:10
 msgid "Does not match"
 msgstr "Passer ikke"
 
-#: ../wizard/wizard.ui.h:10
+#: ../wizard/wizard.ui.h:11
 msgid "Finishing New Device Setup"
 msgstr "Fullfører oppsett av ny enhet"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:12
+#: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
 msgstr "Fast PIN"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:14
 msgid "Introduction"
 msgstr "Innledning"
 
-#: ../wizard/wizard.ui.h:14
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:16
 msgid "Matches"
 msgstr "Er lik"
 
-#: ../wizard/wizard.ui.h:15
+#: ../wizard/wizard.ui.h:17
 msgid "PIN Options"
 msgstr "Alternativer for PIN"
 
-#: ../wizard/wizard.ui.h:16
+#: ../wizard/wizard.ui.h:18
 msgid "PIN _options..."
 msgstr "Alternativer f_or PIN..."
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:19
 msgid "Select the additional services you want to use with your device:"
 msgstr "Velg tilleggstjenester du vil bruke med din enhet:"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:20
 msgid "Select the device you want to setup"
 msgstr "Velg enhet som skal konfigureres"
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:21
 msgid "Setup Completed"
 msgstr "Oppsett fullført"
 
-#: ../wizard/wizard.ui.h:20
+#: ../wizard/wizard.ui.h:22
 msgid ""
 "The Bluetooth new device setup will walk you through the process of "
 "configuring Bluetooth enabled devices for use with this computer."
-msgstr "Enhetsveiviseren vil hjelpe deg gjennom prosessen med å konfigurere Bluetooth-enheter for bruk med denne datamaskinen."
+msgstr ""
+"Enhetsveiviseren vil hjelpe deg gjennom prosessen med å konfigurere "
+"Bluetooth-enheter for bruk med denne datamaskinen."
 
-#: ../wizard/wizard.ui.h:21
+#: ../wizard/wizard.ui.h:23
 msgid ""
 "The device will need to be within 10 meters of your computer, and be &#8220;"
 "discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
 "device's manual if in doubt."
-msgstr "Enheten må befinne seg innen 10 meter av din datamaskin og være &#8220; oppdagbar&#8221; (noen ganger også kalt &8220;synlig&#8221;. Sjekk enhetens dokumentasjon hvis du er i tvil."
+msgstr ""
+"Enheten må befinne seg innen 10 meter av din datamaskin og være &#8220; "
+"oppdagbar&#8221; (noen ganger også kalt &8220;synlig&#8221;. Sjekk enhetens "
+"dokumentasjon hvis du er i tvil."
 
-#: ../wizard/wizard.ui.h:22
+#: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "Velkommen til konfigurasjonsveiviser for Bluetooth-enheter"
 
-#: ../wizard/wizard.ui.h:23
+#: ../wizard/wizard.ui.h:25
 msgid "_Automatic PIN selection"
 msgstr "_Automatisk valg av PIN"
 
-#: ../wizard/wizard.ui.h:24
+#: ../wizard/wizard.ui.h:26
 msgid "_Restart Setup"
 msgstr "Sta_rt oppsett på nytt"
 
@@ -676,23 +685,24 @@ msgstr[1] "omtrent %'d timer"
 msgid "File Transfer"
 msgstr "Filoverføring"
 
-#: ../sendto/main.c:170
+#. translators: This is the heading for the progress dialogue
+#: ../sendto/main.c:169
 msgid "Sending files via Bluetooth"
 msgstr "Sender filer via Bluetooth"
 
-#: ../sendto/main.c:182
+#: ../sendto/main.c:181
 msgid "From:"
 msgstr "Fra:"
 
-#: ../sendto/main.c:198
+#: ../sendto/main.c:197
 msgid "To:"
 msgstr "Til:"
 
-#: ../sendto/main.c:244
-msgid "An unknown error occurred"
+#: ../sendto/main.c:243
+msgid "An unknown error occured"
 msgstr "En ukjent feil oppsto"
 
-#: ../sendto/main.c:254
+#: ../sendto/main.c:253
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -700,42 +710,42 @@ msgstr ""
 "Sjekk at ekstern enhet er slått på og at den godtar tilkoblinger via "
 "Bluetooth"
 
-#: ../sendto/main.c:338
+#: ../sendto/main.c:337
 #, c-format
 msgid "Sending %s"
 msgstr "Sender %s"
 
-#: ../sendto/main.c:345 ../sendto/main.c:407
+#: ../sendto/main.c:344 ../sendto/main.c:406
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sender fil %d av %d"
 
-#: ../sendto/main.c:403
+#: ../sendto/main.c:402
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:405
+#: ../sendto/main.c:404
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:499
+#: ../sendto/main.c:498
 msgid "Select Device to Send To"
 msgstr "Velg enhet å sende til"
 
-#: ../sendto/main.c:503
+#: ../sendto/main.c:502
 msgid "Send _To"
 msgstr "Send _til"
 
-#: ../sendto/main.c:544
+#: ../sendto/main.c:543
 msgid "Choose files to send"
 msgstr "Velg filer som skal sendes"
 
-#: ../sendto/main.c:573
+#: ../sendto/main.c:572
 msgid "Remote device to use"
 msgstr "Ekstern enhet som skal brukes"
 
-#: ../sendto/main.c:575
+#: ../sendto/main.c:574
 msgid "Remote device's name"
 msgstr "Fjern enhetens navn"
