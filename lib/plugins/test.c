@@ -50,7 +50,7 @@ get_config_widgets (const char *bdaddr, const char **uuids)
 	/* translators:
 	 * This is in a test plugin, please make sure you add the "(test)" part,
 	 * or leave untranslated */
-	return gtk_check_button_new_with_label (_("Access the Internet using your mobile phone (test)"));
+	return gtk_check_button_new_with_label (_("Access the Internet using your cell phone (test)"));
 }
 
 static void
