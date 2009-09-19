@@ -583,7 +583,7 @@ void prepare_callback (GtkWidget *assistant,
 		char **uuids, *text;
 
 		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
-		text = g_strdup_printf (_("Successfully setup new device '%s'"), g_value_get_string (&value));
+		text = g_strdup_printf (_("Successfully set up new device '%s'"), g_value_get_string (&value));
 		g_value_unset (&value);
 		gtk_label_set_text (GTK_LABEL (label_summary), text);
 		g_free (text);
