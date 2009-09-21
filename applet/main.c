@@ -723,8 +723,9 @@ update_device_list (GtkTreeIter *parent)
 
 			list = g_hash_table_get_values (services);
 			for (l = list; l != NULL; l = l->next) {
-				gboolean val = GPOINTER_TO_INT (l->data);
-				if (val != FALSE) {
+				BluetoothStatus val = GPOINTER_TO_INT (l->data);
+				if (val == BLUETOOTH_STATUS_CONNECTED ||
+				    val == BLUETOOTH_STATUS_PLAYING) {
 					is_connected = TRUE;
 					break;
 				}
