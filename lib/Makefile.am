@@ -139,9 +139,6 @@ gnome_bluetooth_headers_to_scan_for_enums = bluetooth-enums.h
 gnome_bluetooth_built_headers = gnome-bluetooth-enum-types.h
 gnome_bluetooth_built_cfiles = gnome-bluetooth-enum-types.c
 
-# Don't build the library until we have built the header that it needs:
-$(OBJECTS) $(libgnomevfs_2_la_OBJECTS): $(libgnomevfs_built_headers)
-
 gnome-bluetooth-enum-types.h: $(gnome_bluetooth_headers_to_scan_for_enums) Makefile
 	$(AM_V_GEN) (cd $(srcdir) && glib-mkenums \
 			--fhead "#ifndef __GNOME_BLUETOOTH_ENUM_TYPES_H__\n#define __GNOME_BLUETOOTH_ENUM_TYPES_H__\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n" \
@@ -154,7 +151,6 @@ gnome-bluetooth-enum-types.c: $(gnome_bluetooth_headers_to_scan_for_enums) Makef
 	$(AM_V_GEN) (cd $(srcdir) && glib-mkenums \
 			--fhead "#include <bluetooth-enums.h>\n" \
 			--fhead "#include \"gnome-bluetooth-enum-types.h\"\n" \
-			--fhead "#include \"bluetooth-enums.h\"\n" \
 			--fhead "#include <glib-object.h>" \
 		      	--fprod "\n/* enumerations from \"@filename@\" */" \
 			--vhead "GType\n@enum_name@_get_type (void)\n{\n  static GType etype = 0;\n  if (etype == 0) {\n    static const G@Type@Value values[] = {" 	\
