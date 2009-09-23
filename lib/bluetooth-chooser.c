@@ -33,6 +33,7 @@
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-chooser.h"
+#include "bluetooth-chooser-private.h"
 #include "gnome-bluetooth-enum-types.h"
 #include "bling-spinner.h"
 
@@ -362,6 +363,34 @@ bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 	g_type_class_unref (eclass);
 
 	return TRUE;
+}
+
+/**
+ * bluetooth_chooser_get_model:
+ * @self: A BluetoothChooser widget.
+ *
+ * Return value: The BluetoothChooser's GtkTreeModel.
+ **/
+GtkTreeModel *
+bluetooth_chooser_get_model (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	
+	return priv->model;
+}
+
+/**
+ * bluetooth_chooser_get_device_column:
+ * @self: A BluetoothChooser widget.
+ *
+ * Return value: A GtkTreeViewColumn pointer to the device column of the BluetoothChooser.
+ **/
+GtkTreeViewColumn *
+bluetooth_chooser_get_device_column (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	
+	return gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 0);
 }
 
 /**
