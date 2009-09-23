@@ -33,6 +33,9 @@
 
 #define UNINSTALLED_PLUGINDIR "../lib/plugins"
 
+#define SOEXT           ("." G_MODULE_SUFFIX)
+#define SOEXT_LEN       (strlen (SOEXT))
+
 GList *plugin_list = NULL;
 
 static void

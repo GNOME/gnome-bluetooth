@@ -1107,13 +1107,11 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 
 	/**
 	 * BluetoothChooser::selected-device-changed:
-	 *
 	 * @chooser: a #BluetoothChooser widget which received the signal
 	 * @address: the Bluetooth address for the currently selected device, or %NULL
 	 *
 	 * The #BluetoothChooser:selected-device-changed signal is launched when the
 	 * selected device is changed, it will be %NULL if a device was unselected.
-	 *
 	 **/
 	selection_table_signals[SELECTED_DEVICE_CHANGED] =
 		g_signal_new ("selected-device-changed",

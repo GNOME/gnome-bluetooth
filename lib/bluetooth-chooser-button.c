@@ -315,15 +315,13 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 	button_class->clicked = bluetooth_chooser_button_clicked;
 
 	/**
-	 * BluetoothChooserButton:chooser-created:
-	 *
-	 * @bluetoothchooserbutton: a #BluetoothChooserButton widget
-	 * @arg1: a #BluetoothChooser widget
+	 * BluetoothChooserButton::chooser-created:
+	 * @self: a #BluetoothChooserButton widget
+	 * @chooser: a #BluetoothChooser widget
 	 *
 	 * The signal is sent when a popup dialogue is created for the user to select
 	 * a device. This signal allows you to change the configuration and filtering
 	 * of the tree from its defaults.
-	 *
 	 **/
 	signals[CHOOSER_CREATED] =
 		g_signal_new ("chooser-created",
