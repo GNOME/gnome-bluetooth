@@ -195,7 +195,7 @@ set_search_label (BluetoothChooser *self, gboolean state)
  * visual feedback that the process is on-going.
  *
  * See also: #BluetoothChooser:show-searching
- */
+ **/
 void
 bluetooth_chooser_start_discovery (BluetoothChooser *self)
 {
@@ -213,7 +213,7 @@ bluetooth_chooser_start_discovery (BluetoothChooser *self)
  * @self: a #BluetoothChooser widget.
  *
  * Stops a discovery started with #bluetooth_chooser_start_discovery.
- */
+ **/
 void
 bluetooth_chooser_stop_discovery (BluetoothChooser *self)
 {
@@ -246,8 +246,7 @@ bluetooth_chooser_get_selected_device_data (BluetoothChooser *self, guint column
  * @self: a #BluetoothChooser widget.
  *
  * Return value: the Bluetooth address for the currently selected device, or %NULL.
- *
- */
+ **/
 gchar *
 bluetooth_chooser_get_selected_device (BluetoothChooser *self)
 {
@@ -259,8 +258,7 @@ bluetooth_chooser_get_selected_device (BluetoothChooser *self)
  * @self: a #BluetoothChooser widget.
  *
  * Return value: the name for the currently selected device, or %NULL.
- *
- */
+ **/
 gchar *
 bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
 {
@@ -272,8 +270,7 @@ bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
  * @self: a #BluetoothChooser widget.
  *
  * Return value: the icon name to use to represent the currently selected device, or %NULL.
- *
- */
+ **/
 gchar *
 bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
 {
@@ -285,8 +282,7 @@ bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
  * @self: a #BluetoothChooser widget.
  *
  * Return value: the #BluetoothType of the device selected, or '0' if unknown.
- *
- */
+ **/
 BluetoothType
 bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
 {
@@ -309,8 +305,7 @@ bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
  *
  * Return value: whether the selected device is conncted to this computer,
  * will always be %FALSE if no devices are selected.
- *
- */
+ **/
 gboolean
 bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
 {
@@ -333,8 +328,7 @@ bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
  * @value: An empty #GValue to set.
  *
  * Return value: %TRUE if the @value has been set.
- *
- */
+ **/
 gboolean
 bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 					    const char *field,
@@ -398,6 +392,7 @@ bluetooth_chooser_get_device_column (BluetoothChooser *self)
  * @self: a BluetoothChooser widget.
  * @title: the widget header title.
  *
+ * Sets the #BluetoothChooser's title.
  */
 void
 bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
