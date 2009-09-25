@@ -727,9 +727,13 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 					BLUETOOTH_COLUMN_TYPE, type,
 					BLUETOOTH_COLUMN_ICON, icon,
 					BLUETOOTH_COLUMN_RSSI, rssi,
-					BLUETOOTH_COLUMN_UUIDS, uuids,
 					BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 					-1);
+			if (uuids != NULL) {
+				gtk_tree_store_set(priv->store, &iter,
+						   BLUETOOTH_COLUMN_UUIDS, uuids,
+						   -1);
+			}
 
 			if (device != NULL) {
 				services = device_list_nodes (device, client, FALSE);
@@ -1889,7 +1893,8 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 	g_free (alias);
 	g_free (address);
 	g_free (icon);
-	g_object_unref (proxy);
+	if (proxy != NULL)
+		g_object_unref (proxy);
 	if (services != NULL)
 		g_hash_table_unref (services);
 	g_strfreev (uuids);
