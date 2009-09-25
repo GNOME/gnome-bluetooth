@@ -32,6 +32,7 @@ libgnome_bluetooth_la_SOURCES =				\
 	bluetooth-chooser.c bluetooth-chooser.h		\
 	bluetooth-chooser-private.h			\
 	seahorse-bind.c seahorse-bind.h 		\
+	bluetooth-filter-widget.c bluetooth-filter-widget.h \
 	bluetooth-chooser-button.c bluetooth-chooser-button.h
 
 libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS)
@@ -47,6 +48,7 @@ gnomebluetooth_HEADERS =				\
 	bluetooth-client.h				\
 	bluetooth-chooser.h				\
 	bluetooth-chooser-button.h			\
+	bluetooth-filter-widget.h			\
 	bluetooth-enums.h				\
 	bluetooth-plugin.h
 
