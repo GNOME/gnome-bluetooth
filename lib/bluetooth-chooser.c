@@ -708,6 +708,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 
 	gtk_widget_push_composite_child ();
 
+	priv->device_type_filter = BLUETOOTH_TYPE_ANY;
 	priv->show_paired = FALSE;
 	priv->show_searching = FALSE;
 
