@@ -770,7 +770,6 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	priv->device_type_filter_model = GTK_TREE_MODEL (gtk_list_store_new (DEVICE_TYPE_FILTER_NUM_COLS,
 						         G_TYPE_STRING, G_TYPE_INT));
 	priv->filters_vbox = bluetooth_filter_widget_new ();
-	bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (priv->filters_vbox), self);
 	gtk_widget_show (priv->filters_vbox);
 	gtk_box_pack_start (GTK_BOX (self), priv->filters_vbox, FALSE, TRUE, 0);
 	gtk_widget_set_no_show_all (priv->filters_vbox, TRUE);
@@ -788,6 +787,26 @@ bluetooth_chooser_init(BluetoothChooser *self)
 			 G_CALLBACK(filter_category_changed_cb), NULL);
 
 	gtk_widget_pop_composite_child ();
+}
+
+static GObject *
+bluetooth_chooser_constructor (GType                  type,
+			       guint                  n_construct_params,
+			       GObjectConstructParam *construct_params)
+{
+	BluetoothChooser *self;
+	BluetoothChooserPrivate *priv;
+	GObject *object;
+
+	object = G_OBJECT_CLASS (bluetooth_chooser_parent_class)->constructor (type,
+									       n_construct_params,
+									       construct_params);
+	self = BLUETOOTH_CHOOSER (object);
+	priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+
+	bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (priv->filters_vbox), self);
+
+	return object;
 }
 
 static void
@@ -939,6 +958,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 
 	g_type_class_add_private(klass, sizeof(BluetoothChooserPrivate));
 
+	G_OBJECT_CLASS(klass)->constructor = bluetooth_chooser_constructor;
 	G_OBJECT_CLASS(klass)->finalize = bluetooth_chooser_finalize;
 
 	G_OBJECT_CLASS(klass)->set_property = bluetooth_chooser_set_property;
