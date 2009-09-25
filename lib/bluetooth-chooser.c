@@ -708,10 +708,6 @@ bluetooth_chooser_init(BluetoothChooser *self)
 
 	gtk_widget_push_composite_child ();
 
-	priv->device_type_filter = BLUETOOTH_TYPE_ANY;
-	priv->show_paired = FALSE;
-	priv->show_searching = FALSE;
-
 	priv->client = bluetooth_client_new ();
 
 	/* Setup the widget itself */
@@ -984,18 +980,18 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 										    FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_TYPE, g_param_spec_boolean ("show-device-type",
-										      "show-device-type", "Whether to show the device type filter", TRUE, G_PARAM_READWRITE));
+										      "show-device-type", "Whether to show the device type filter", TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_CATEGORY, g_param_spec_boolean ("show-device-category",
-											  "show-device-category", "Whether to show the device category filter", TRUE, G_PARAM_READWRITE));
+											  "show-device-category", "Whether to show the device category filter", TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 	for (i = 0, max_filter_val = 0 ; i < _BLUETOOTH_TYPE_NUM_TYPES; i++)
 		max_filter_val += 1 << i;
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_TYPE_FILTER, g_param_spec_int ("device-type-filter",
-					 					    "device-type-filter", "A bitmask of #BluetoothType to show", BLUETOOTH_TYPE_ANY, max_filter_val, 1, G_PARAM_READWRITE));
+										    "device-type-filter", "A bitmask of #BluetoothType to show", BLUETOOTH_TYPE_ANY, max_filter_val, 1, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_CATEGORY_FILTER, g_param_spec_enum ("device-category-filter",
-											 "device-category-filter", "The #BluetoothCategory to show", BLUETOOTH_TYPE_CATEGORY, BLUETOOTH_CATEGORY_ALL, G_PARAM_READWRITE));
+											 "device-category-filter", "The #BluetoothCategory to show", BLUETOOTH_TYPE_CATEGORY, BLUETOOTH_CATEGORY_ALL, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SERVICE_FILTER, g_param_spec_string ("device-service-filter",
 											  "device-service-filter", "A string representing the service to filter for", NULL, G_PARAM_WRITABLE));
