@@ -349,7 +349,7 @@ GtkTreeModel *
 bluetooth_chooser_get_model (BluetoothChooser *self)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	
+
 	return priv->model;
 }
 
@@ -363,7 +363,7 @@ GtkTreeViewColumn *
 bluetooth_chooser_get_device_column (BluetoothChooser *self)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-	
+
 	return gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 0);
 }
 
@@ -784,7 +784,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 
 	priv->default_adapter_changed_id = g_signal_connect (priv->client, "notify::default-adapter",
 							     G_CALLBACK (default_adapter_changed), self);
-							     
+
 	g_signal_connect(self, "notify::device-type-filter",
 			 G_CALLBACK(filter_type_changed_cb), NULL);
 	g_signal_connect(self, "notify::device-category-filter",
@@ -935,7 +935,7 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 static void
 bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 {
-	/* Use to calculate the maximum value for the 
+	/* Use to calculate the maximum value for the
 	 * device-type-filter value */
 	guint i;
 	int max_filter_val;

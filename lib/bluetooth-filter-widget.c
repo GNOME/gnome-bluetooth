@@ -54,7 +54,7 @@ struct _BluetoothFilterWidgetPrivate {
 
 	/* See bluetooth_filter_widget_bind_chooser () */
 	gpointer bindings[4];
-	
+
 	guint show_device_type : 1;
 	guint show_device_category : 1;
 };
@@ -164,7 +164,7 @@ void
 bluetooth_filter_widget_set_title (BluetoothFilterWidget *self, gchar *title)
 {
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
-	
+
 	gtk_label_set_text (GTK_LABEL (priv->title), title);
 	gtk_label_set_use_markup (GTK_LABEL (priv->title), TRUE);
 }
@@ -199,7 +199,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 {
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
 	guint i;
-	
+
 	GtkWidget *label;
 	GtkWidget *alignment;
 	GtkWidget *table;
@@ -211,26 +211,25 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	priv->show_device_type = TRUE;
 	priv->show_device_category = TRUE;
 
-	
 	gtk_box_set_homogeneous (GTK_BOX (self), FALSE);
 	gtk_box_set_spacing (GTK_BOX (self), 6);
-	
+
 	priv->title = gtk_label_new ("");
 	bluetooth_filter_widget_set_title (self, _("<b>Show Only Bluetooth Devices With...</b>"));
 	gtk_widget_show (priv->title);
 	gtk_box_pack_start (GTK_BOX (self), priv->title, TRUE, TRUE, 0);
 	gtk_misc_set_alignment (GTK_MISC (priv->title), 0, 0.5);
-	
+
 	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
 	gtk_widget_show (alignment);
 	gtk_box_pack_start (GTK_BOX (self), alignment, TRUE, TRUE, 0);
-	
+
 	table = gtk_table_new (2, 2, FALSE);
 	gtk_widget_show (table);
 	gtk_container_add (GTK_CONTAINER (alignment), table);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 12);
-	
+
 	/* The device category filter */
 	label = gtk_label_new_with_mnemonic (_("Device _category:"));
 	gtk_widget_set_no_show_all (label, TRUE);
@@ -240,7 +239,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	priv->device_category_label = label;
-	
+
 	priv->device_category = gtk_combo_box_new_text ();
 	gtk_widget_set_no_show_all (priv->device_category, TRUE);
 	gtk_widget_show (priv->device_category);
@@ -259,7 +258,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 		gtk_widget_show (priv->device_category_label);
 		gtk_widget_show (priv->device_category);
 	}
-	
+
 	/* The device type filter */
 	label = gtk_label_new_with_mnemonic (_("Device _type:"));
 	gtk_widget_set_no_show_all (label, TRUE);
@@ -269,14 +268,14 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	priv->device_type_label = label;
-	
+
 	priv->device_type_filter_model = GTK_TREE_MODEL (gtk_list_store_new (DEVICE_TYPE_FILTER_NUM_COLS,
 									     G_TYPE_STRING, G_TYPE_INT));
 	priv->device_type = gtk_combo_box_new_with_model (priv->device_type_filter_model);
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->device_type), renderer, TRUE);
 	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->device_type), renderer, "text", DEVICE_TYPE_FILTER_COL_NAME);
-	
+
 	gtk_widget_set_no_show_all (priv->device_type, TRUE);
 	gtk_widget_show (priv->device_type);
 	gtk_table_attach (GTK_TABLE (table), priv->device_type, 1, 2, 0, 1,
@@ -315,7 +314,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 
 	/* The services filter */
 	priv->device_service_filter = NULL;
-	
+
 	gtk_widget_pop_composite_child ();
 }
 
@@ -323,10 +322,10 @@ static void
 bluetooth_filter_widget_finalize (GObject *object)
 {
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
-	
+
 	g_free (priv->device_service_filter);
 	priv->device_service_filter = NULL;
-	
+
 	G_OBJECT_CLASS(bluetooth_filter_widget_parent_class)->finalize(object);
 }
 
@@ -427,11 +426,11 @@ bluetooth_filter_widget_get_property (GObject *object, guint prop_id,
 static void
 bluetooth_filter_widget_class_init (BluetoothFilterWidgetClass *klass)
 {
-	/* Use to calculate the maximum value for the 
+	/* Use to calculate the maximum value for the
 	 * device-type-filter value */
 	guint i;
 	int max_filter_val;
-	
+
 	g_type_class_add_private(klass, sizeof(BluetoothFilterWidgetPrivate));
 
 	G_OBJECT_CLASS(klass)->dispose = bluetooth_filter_widget_dispose;
@@ -439,7 +438,7 @@ bluetooth_filter_widget_class_init (BluetoothFilterWidgetClass *klass)
 
 	G_OBJECT_CLASS(klass)->set_property = bluetooth_filter_widget_set_property;
 	G_OBJECT_CLASS(klass)->get_property = bluetooth_filter_widget_get_property;
-	
+
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_TYPE, g_param_spec_boolean ("show-device-type",
 										      "show-device-type", "Whether to show the device type filter", TRUE, G_PARAM_READWRITE));
