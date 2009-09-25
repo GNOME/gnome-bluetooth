@@ -31,6 +31,7 @@ libgnome_bluetooth_la_SOURCES =				\
 	bling-spinner.c bling-spinner.h			\
 	bluetooth-chooser.c bluetooth-chooser.h		\
 	bluetooth-chooser-private.h			\
+	seahorse-bind.c seahorse-bind.h 		\
 	bluetooth-chooser-button.c bluetooth-chooser-button.h
 
 libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS)
