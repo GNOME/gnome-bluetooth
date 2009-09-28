@@ -368,6 +368,20 @@ bluetooth_chooser_get_device_column (BluetoothChooser *self)
 }
 
 /**
+ * bluetooth_chooser_get_treeview:
+ * @self: A BluetoothChooser widget.
+ *
+ * Return value: The #GtkTreeView pointer for the #BluetoothChooser.
+ **/
+GtkWidget *
+bluetooth_chooser_get_treeview (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+
+	return priv->treeview;
+}
+
+/**
  * bluetooth_chooser_set_title:
  * @self: a BluetoothChooser widget.
  * @title: the widget header title.
