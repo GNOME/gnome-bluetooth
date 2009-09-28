@@ -77,6 +77,7 @@ struct _BluetoothChooserPrivate {
 	guint show_device_type : 1;
 	guint show_device_category : 1;
 	guint disco_rq : 1;
+	guint internal_filter : 1;
 };
 
 G_DEFINE_TYPE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_VBOX)
@@ -818,8 +819,9 @@ bluetooth_chooser_constructor (GType                  type,
 	self = BLUETOOTH_CHOOSER (object);
 	priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
-	bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (priv->filters_vbox), self);
-
+	if (priv->internal_filter) {
+		bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (priv->filters_vbox), self);
+	}
 	return object;
 }
 
@@ -860,7 +862,8 @@ enum {
 	PROP_SHOW_DEVICE_CATEGORY,
 	PROP_DEVICE_TYPE_FILTER,
 	PROP_DEVICE_CATEGORY_FILTER,
-	PROP_DEVICE_SERVICE_FILTER
+	PROP_DEVICE_SERVICE_FILTER,
+	PROP_INTERNAL_FILTER
 };
 
 static void
@@ -889,17 +892,21 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		break;
 	case PROP_SHOW_DEVICE_TYPE:
 		priv->show_device_type = g_value_get_boolean (value);
-		if (priv->show_device_type || priv->show_device_category)
-			g_object_set (G_OBJECT (priv->filters_vbox), "visible", TRUE, NULL);
-		else
-			g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
+		if (priv->internal_filter) {
+			if (priv->show_device_type || priv->show_device_category)
+				g_object_set (G_OBJECT (priv->filters_vbox), "visible", TRUE, NULL);
+			else
+				g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
+		}
 		break;
 	case PROP_SHOW_DEVICE_CATEGORY:
 		priv->show_device_category = g_value_get_boolean (value);
-		if (priv->show_device_type || priv->show_device_category)
-			g_object_set (G_OBJECT (priv->filters_vbox), "visible", TRUE, NULL);
-		else
-			g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
+		if (priv->internal_filter) {
+			if (priv->show_device_type || priv->show_device_category)
+				g_object_set (G_OBJECT (priv->filters_vbox), "visible", TRUE, NULL);
+			else
+				g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
+		}
 		break;
 	case PROP_DEVICE_TYPE_FILTER:
 		priv->device_type_filter = g_value_get_int (value);
@@ -914,6 +921,10 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		priv->device_service_filter = g_value_dup_string (value);
 		if (priv->filter)
 			gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
+		break;
+	case PROP_INTERNAL_FILTER:
+		priv->internal_filter = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (priv->filters_vbox), "visible", priv->internal_filter, NULL);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
@@ -955,6 +966,9 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		break;
 	case PROP_DEVICE_SERVICE_FILTER:
 		g_value_set_string (value, priv->device_service_filter);
+		break;
+	case PROP_INTERNAL_FILTER:
+		g_value_set_boolean (value, priv->internal_filter);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
@@ -1029,6 +1043,9 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SERVICE_FILTER, g_param_spec_string ("device-service-filter",
 											  "device-service-filter", "A string representing the service to filter for", NULL, G_PARAM_WRITABLE));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_INTERNAL_FILTER, g_param_spec_boolean ("has-internal-device-filter",
+											  "has-internal-device-filter", "Whether the #BluetoothChooser should be constructed with a visible #BluetoothFilterWidget", TRUE, G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE));
 }
 
 /**
