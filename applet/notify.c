@@ -144,7 +144,7 @@ void hide_icon(void)
 
 void set_icon(gboolean enabled)
 {
-	const char *name = (enabled ? "bluetooth" : "bluetooth-disabled");
+	const char *name = (enabled ? "bluetooth-active" : "bluetooth-disabled");
 	const char *_tooltip = enabled ? _("Bluetooth: Enabled") : _("Bluetooth: Disabled");
 
 	if (statusicon == NULL) {
