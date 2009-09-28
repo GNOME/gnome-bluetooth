@@ -283,7 +283,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 					   DEVICE_TYPE_FILTER_COL_MASK, BLUETOOTH_TYPE_ANY,
 					   -1);
 	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
-					   DEVICE_TYPE_FILTER_COL_NAME, _("Input devices (mice, keyboards, ...)"),
+					   DEVICE_TYPE_FILTER_COL_NAME, _("Input devices (mice, keyboards, etc.)"),
 					   DEVICE_TYPE_FILTER_COL_MASK, BLUETOOTH_TYPE_INPUT,
 					   -1);
 	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
