@@ -30,6 +30,7 @@
 
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-button.h"
+#include "bluetooth-chooser-combo.h"
 #include "bluetooth-client.h"
 
 static void dump_selected_device(BluetoothChooser *sel)
@@ -254,6 +255,54 @@ create_props_dialogue (void)
 	return dialog;
 }
 
+static void device_changed_cb (GObject *object,
+			       GParamSpec *spec,
+			       GtkDialog *dialog)
+{
+	char *device;
+
+	g_object_get (G_OBJECT (object), "device", &device, NULL);
+	g_message ("Property \"device\" changed to '%s'", device);
+
+	gtk_dialog_set_response_sensitive (dialog,
+					  GTK_RESPONSE_ACCEPT,
+					  device != NULL);
+	//bluetooth_client_dump_device (model, iter, recurse);
+}
+
+static GtkWidget *
+create_combo_dialogue (const char *bdaddr)
+{
+	GtkWidget *dialog, *selector, *chooser;
+	const char *filter = "OBEXObjectPush";
+//	const char *filter[] = { "OBEXObjectPush", "OBEXFileTransfer", NULL };
+
+	dialog = create_dialogue ("Add a Device");
+
+	selector = bluetooth_chooser_combo_new ();
+	g_object_get (G_OBJECT (selector), "chooser", &chooser, NULL);
+	g_signal_connect (G_OBJECT (selector), "notify::device",
+			  G_CALLBACK (device_changed_cb), dialog);
+	g_object_set(chooser,
+		     "show-searching", TRUE,
+		     "show-device-type", TRUE,
+		     "show-device-category", TRUE,
+		     "show-pairing", TRUE,
+		     "show-connected", FALSE,
+		     "device-service-filter", filter,
+		     NULL);
+	g_object_set (G_OBJECT (selector), "device", bdaddr, NULL);
+	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (chooser));
+	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
+	gtk_widget_show(selector);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
+
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (response_cb), selector);
+
+	return dialog;
+}
+
 int main(int argc, char **argv)
 {
 	GtkWidget *dialog;
@@ -274,8 +323,13 @@ int main(int argc, char **argv)
 		dialog = create_wizard_dialogue ();
 	} else if (g_str_equal (selection, "props")) {
 		dialog = create_props_dialogue ();
+	} else if (g_str_equal (selection, "combo")) {
+		if (argc == 3)
+			dialog = create_combo_dialogue (argv[2]);
+		else
+			dialog = create_combo_dialogue (NULL);
 	} else {
-		g_warning ("Unknown dialogue type, try either \"phone\", \"props\"  or \"wizard\"");
+		g_warning ("Unknown dialogue type, try either \"phone\", \"props\", \"combo\"  or \"wizard\"");
 		return 1;
 	}
 
