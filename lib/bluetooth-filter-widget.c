@@ -53,7 +53,7 @@ struct _BluetoothFilterWidgetPrivate {
 	char *device_service_filter;
 
 	/* See bluetooth_filter_widget_bind_chooser () */
-	gpointer bindings[4];
+	gpointer bindings[8];
 
 	guint show_device_type : 1;
 	guint show_device_category : 1;
@@ -160,6 +160,14 @@ filter_type_changed_cb (GtkComboBox *widget, gpointer data)
 	g_object_notify (G_OBJECT(self), "device-type-filter");
 }
 
+/**
+ * bluetooth_filter_widget_set_title:
+ * @self: a #BluetoothFilterWidget.
+ * @title: Title for the #BluetoothFilterWidget.
+ *
+ * Used to set a different title for the #BluetoothFilterWidget than the default.
+ *
+ **/
 void
 bluetooth_filter_widget_set_title (BluetoothFilterWidget *self, gchar *title)
 {
@@ -173,25 +181,41 @@ static void
 bluetooth_filter_widget_bind_chooser_single (BluetoothFilterWidget *self,
 					     BluetoothChooser *chooser,
 					     const char *property,
-					     guint i)
+					     guint *i)
 {
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
 
-	/* Remember the bindings so we can unbind them later on */
-	priv->bindings[i] = seahorse_bind_property (property, (gpointer) chooser,
+	/* NOTE: We are binding the chooser as the source so that all of it's
+	 * properties are pushed to the filter.
+	 * Remember the bindings so we can unbind them later on */
+	priv->bindings[*i] = seahorse_bind_property (property, (gpointer) chooser,
 						    property, (gpointer) self);
+	priv->bindings[(*i)++] = seahorse_bind_property (property, (gpointer) self,
+		 				      property, (gpointer) chooser);
+	(*i)++;
 }
 
+/**
+ * bluetooth_filter_widget_bind_filter:
+ * @self: a #BluetoothFilterWidget.
+ * @chooser: The #BluetoothChooser widget to bind the filter to.
+ *
+ * Binds a #BluetoothFilterWidget to a #BluetoothChooser such that changing the
+ * #BluetoothFilterWidget results in filters being applied on the #BluetoothChooser.
+ * Any properties set on a bound #BluetoothChooser will also be set on the
+ * #BluetoothFilterWidget.
+ *
+ **/
 void
 bluetooth_filter_widget_bind_filter (BluetoothFilterWidget *self, BluetoothChooser *chooser)
 {
 	guint i;
 
 	i = 0;
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "device-type-filter", i);
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "device-category-filter", i++);
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "show-device-type", i++);
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "show-device-category", i++);
+	bluetooth_filter_widget_bind_chooser_single (self, chooser, "device-type-filter", &i);
+	bluetooth_filter_widget_bind_chooser_single (self, chooser, "device-category-filter", &i);
+	bluetooth_filter_widget_bind_chooser_single (self, chooser, "show-device-type", &i);
+	bluetooth_filter_widget_bind_chooser_single (self, chooser, "show-device-category", &i);
 }
 
 static void
@@ -335,7 +359,7 @@ bluetooth_filter_widget_dispose (GObject *object)
 		g_object_unref (priv->chooser);
 		priv->chooser = NULL;
 	}
-	for (i = 0; i < 4; i++) {
+	for (i = 0; i < 8; i++) {
 		if (priv->bindings[i] != NULL) {
 			seahorse_bind_disconnect (priv->bindings[i]);
 			priv->bindings[i] = NULL;
@@ -459,6 +483,14 @@ bluetooth_filter_widget_class_init (BluetoothFilterWidgetClass *klass)
  * @chooser: The #BluetoothChooser to filter
  *
  * Return value: A #BluetoothFilterWidget widget
+ * 
+ * Creates a new #BluetoothFilterWidget which can be bound to a #BluetoothChooser to
+ * control filtering of that #BluetoothChooser.
+ * Usually used in conjunction with a #BluetoothChooser which has the "has-internal-filter"
+ * property set to FALSE.
+ * 
+ * Note: Must call bluetooth_filter_widget_bind_filter () to bind the #BluetoothFilterWidget
+ * to a #BluetoothChooser.
  **/
 GtkWidget *
 bluetooth_filter_widget_new (void)

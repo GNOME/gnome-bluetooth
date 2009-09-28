@@ -32,6 +32,7 @@
 #include "bluetooth-chooser-button.h"
 #include "bluetooth-chooser-combo.h"
 #include "bluetooth-client.h"
+#include "bluetooth-filter-widget.h"
 
 static void dump_selected_device(BluetoothChooser *sel)
 {
@@ -303,6 +304,56 @@ create_combo_dialogue (const char *bdaddr)
 	return dialog;
 }
 
+static GtkWidget *
+create_filter_dialogue (void)
+{
+	GtkWidget *dialog, *selector, *filter, *vbox, *hbox;
+
+	dialog = create_dialogue ("Add a Device");
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_widget_show (hbox);
+
+	selector = g_object_new (BLUETOOTH_TYPE_CHOOSER,
+				 "title", "Select new device to setup",
+				 NULL);
+	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
+	gtk_widget_show(selector);
+	g_object_set(selector,
+		     "show-searching", TRUE,
+		     "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
+		     NULL);
+	gtk_box_pack_start (GTK_BOX (hbox), selector, FALSE, FALSE, 6);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (vbox);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+	filter = bluetooth_filter_widget_new ();
+	g_object_set (filter,
+		      "show-device-type", TRUE,
+		      "show-device-category", FALSE,
+		      NULL);
+	gtk_widget_show (filter);
+	bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (filter), BLUETOOTH_CHOOSER (selector));
+	gtk_box_pack_start (GTK_BOX (vbox), filter, FALSE, FALSE, 6);
+
+	g_signal_connect(selector, "selected-device-changed",
+			 G_CALLBACK(select_device_changed), dialog);
+	g_signal_connect(selector, "notify::device-selected",
+			 G_CALLBACK(device_selected_cb), dialog);
+	g_signal_connect(selector, "notify::device-type-filter",
+			 G_CALLBACK(device_type_filter_selected_cb), dialog);
+	g_signal_connect(selector, "notify::device-category-filter",
+			 G_CALLBACK(device_category_filter_selected_cb), dialog);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), hbox);
+	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
+
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (response_cb), selector);
+
+	return dialog;
+}
+
 int main(int argc, char **argv)
 {
 	GtkWidget *dialog;
@@ -328,8 +379,10 @@ int main(int argc, char **argv)
 			dialog = create_combo_dialogue (argv[2]);
 		else
 			dialog = create_combo_dialogue (NULL);
+	} else if (g_str_equal (selection, "filter")) {
+		dialog = create_filter_dialogue ();
 	} else {
-		g_warning ("Unknown dialogue type, try either \"phone\", \"props\", \"combo\"  or \"wizard\"");
+		g_warning ("Unknown dialogue type, try either \"phone\", \"props\", \"combo\", \"filter\"  or \"wizard\"");
 		return 1;
 	}
 

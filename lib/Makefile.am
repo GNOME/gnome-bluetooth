@@ -112,7 +112,7 @@ test_client_LDADD = libcommon.la $(GTK_LIBS) $(DBUS_LIBS)
 
 test_agent_LDADD = libcommon.la $(DBUS_LIBS)
 
-test_deviceselection_LDADD = libgnome-bluetooth.la
+test_deviceselection_LDADD = libcommon.la libgnome-bluetooth.la
 
 test_plugins_LDADD = libcommon.la
 
