@@ -40,7 +40,6 @@ typedef struct _BluetoothChooserComboClass {
 GType		bluetooth_chooser_combo_get_type	(void);
 
 GtkWidget *	bluetooth_chooser_combo_new		(void);
-gboolean	bluetooth_chooser_combo_available	(BluetoothChooserCombo *combo);
 
 G_END_DECLS
 

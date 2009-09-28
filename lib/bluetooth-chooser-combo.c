@@ -350,17 +350,3 @@ bluetooth_chooser_combo_new (void)
 	return g_object_new (BLUETOOTH_TYPE_CHOOSER_COMBO, NULL);
 }
 
-/**
- * bluetooth_chooser_combo_available:
- * @combo: a #BluetoothChooserCombo
- *
- * Return value: %TRUE if there is a powered Bluetooth adapter available, and the combo should be sensitive.
- **/
-gboolean
-bluetooth_chooser_combo_available (BluetoothChooserCombo *combo)
-{
-	g_return_val_if_fail (BLUETOOTH_IS_CHOOSER_COMBO (combo), FALSE);
-
-	return combo->is_available;
-}
-
