@@ -72,6 +72,7 @@ AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 GTK_REQUIRED=2.15.0
 DBUS_GLIB_REQUIRED=0.74
 NOTIFY_REQUIRED=0.4.3
+NAUTILUS_SENDTO_REQUIRED=2.28.0.1
 
 dnl Requires for the properties window
 PKG_CHECK_MODULES(PROPS,
@@ -94,6 +95,28 @@ PKG_CHECK_MODULES(SENDTO,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gtk+-2.0
 		  gio-2.0)
+
+dnl nautilus-sendto plugin
+dnl FIXME disabled by default
+AC_ARG_ENABLE(nautilus-sendto,
+              AS_HELP_STRING([--enable-nautilus-sendto=@<:@no/yes/auto@:>@],
+                             [build nautilus-sendto plugin]), ,
+                             enable_nst=no)
+
+if test "x$enable_nst" != "xno"; then
+   PKG_CHECK_MODULES(NST,
+   [
+      nautilus-sendto >= $NAUTILUS_SENDTO_REQUIRED gconf-2.0
+   ], have_nst="yes", have_nst="no")
+else
+   have_nst=no
+fi
+
+if test "x$enable_nst" = "xyes" -a "x$have_nst" != "xyes"; then
+   AC_MSG_ERROR([Couldn't find nautilus-sendto dependencies.])
+fi
+
+AM_CONDITIONAL(HAVE_NST, test "x$have_nst" = "xyes")
 
 dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
@@ -156,4 +179,14 @@ AC_OUTPUT(Makefile
 	  po/Makefile.in
 	  help/Makefile
 )
+
+echo "
+Configure summary:
+
+	Compiler....................:  ${CC}
+	Compiler Flags..............:  ${CFLAGS}
+	Prefix......................:  ${prefix}
+	nautilus-sendto plugin......:  ${have_nst}
+	Documentation...............:  ${enable_gtk_doc}
+"
 
