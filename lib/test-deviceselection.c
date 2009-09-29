@@ -280,9 +280,9 @@ create_combo_dialogue (const char *bdaddr)
 	dialog = create_dialogue ("Add a Device");
 
 	selector = bluetooth_chooser_combo_new ();
-	g_object_get (G_OBJECT (selector), "chooser", &chooser, NULL);
 	g_signal_connect (G_OBJECT (selector), "notify::device",
 			  G_CALLBACK (device_changed_cb), dialog);
+	g_object_get (G_OBJECT (selector), "chooser", &chooser, NULL);
 	g_object_set(chooser,
 		     "show-searching", TRUE,
 		     "show-device-type", TRUE,
