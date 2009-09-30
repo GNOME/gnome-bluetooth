@@ -1,6 +1,12 @@
+DEF_SUBDIRS = icons lib applet properties wizard sendto docs po help
 
-SUBDIRS = icons lib applet properties wizard sendto docs po help
+if WITH_MOBLIN
+MOBLIN_DIR = moblin
+endif
 
+SUBDIRS = icons lib applet properties wizard sendto $(MOBLIN_DIR) docs po help
+
+DIST_SUBDIRS = $(DEF_SUBDIRS) moblin
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make gnome-doc-utils.make
 
 # FIXME https://bugzilla.gnome.org/show_bug.cgi?id=595675

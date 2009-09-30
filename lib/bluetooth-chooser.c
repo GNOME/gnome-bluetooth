@@ -426,17 +426,17 @@ bluetooth_chooser_get_model (BluetoothChooser *self)
 }
 
 /**
- * bluetooth_chooser_get_device_column:
+ * bluetooth_chooser_get_type_column:
  * @self: A BluetoothChooser widget.
  *
- * Return value: A GtkTreeViewColumn pointer to the device column of the BluetoothChooser.
+ * Return value: A GtkTreeViewColumn pointer to the type column of the BluetoothChooser.
  **/
 GtkTreeViewColumn *
-bluetooth_chooser_get_device_column (BluetoothChooser *self)
+bluetooth_chooser_get_type_column (BluetoothChooser *self)
 {
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
-	return gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 0);
+	return gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 1);
 }
 
 /**
