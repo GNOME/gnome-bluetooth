@@ -29,7 +29,6 @@ G_DEFINE_TYPE (MoblinPanel, moblin_panel, GTK_TYPE_HBOX)
 
 struct _MoblinPanelPrivate
 {
-	BluetoothClient *client;
 	BluetoothKillswitch *killswitch;
 	BluetoothAgent *agent;
 
@@ -40,9 +39,7 @@ struct _MoblinPanelPrivate
 	GtkWidget *filter;
 	GtkWidget *action_button;
 	GtkWidget *scan_label;
-	
 	GtkTreeModel *chooser_model;
-	
 	gboolean target_ssp;
 	gchar *pincode;
 	gboolean automatic_pincode;
@@ -100,10 +97,8 @@ selected_device_changed_cb (BluetoothChooser *chooser, const char *address, gpoi
 {
 	MoblinPanel *self = MOBLIN_PANEL (data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	
 	if (!address) {
-		gtk_widget_set_sensitive (priv->action_button, FALSE);	
-	} else {
+		gtk_widget_set_sensitive (priv->action_button, FALSE);	} else {
 		gtk_widget_set_sensitive (priv->action_button, TRUE);
 	}
 }
@@ -140,13 +135,12 @@ set_default_view (GtkButton *button, gpointer user_data)
 	gtk_widget_show (priv->power_label);
 
 	g_signal_handlers_disconnect_by_func (priv->action_button, pin_options_button_clicked_cb,
-                                        	NULL);
+					      NULL);
 	gtk_button_set_label (GTK_BUTTON (priv->action_button), _("Send file from your computer"));
 	gtk_widget_show (priv->action_button);
 	g_signal_connect (priv->action_button, "clicked", G_CALLBACK (send_file_button_clicked_cb),
                     NULL);
 	gtk_widget_hide (priv->scan_label);
-	
 	g_signal_connect (priv->chooser, "selected-device-changed",
 			G_CALLBACK (selected_device_changed_cb), MOBLIN_PANEL (user_data));
 
@@ -166,16 +160,16 @@ set_scanning_view (GtkButton *button, gpointer   user_data)
 	g_signal_handlers_disconnect_by_func (button, set_scanning_view, user_data);
         gtk_button_set_label (button, _("Back to devices"));
 	g_signal_connect (button, "clicked", G_CALLBACK (set_default_view),
-                    	user_data);
+			  user_data);
 
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (priv->chooser));
 	gtk_widget_hide (priv->power_switch);
 	gtk_widget_hide (priv->power_label);
 
 	g_signal_handlers_disconnect_by_func (priv->action_button,
-        	                                send_file_button_clicked_cb, NULL);
+					      send_file_button_clicked_cb, NULL);
         g_signal_handlers_disconnect_by_func (priv->chooser, selected_device_changed_cb,
-        					MOBLIN_PANEL (user_data));
+					      MOBLIN_PANEL (user_data));
 	gtk_button_set_label (GTK_BUTTON (priv->action_button), _("PIN options"));
 	gtk_widget_show (priv->action_button);
 	g_signal_connect (priv->action_button, "clicked",
@@ -185,6 +179,7 @@ set_scanning_view (GtkButton *button, gpointer   user_data)
 	gtk_widget_show (priv->filter);
 }
 
+#if 0
 static void
 set_pairing_view (MoblinPanel *self)
 {
@@ -195,16 +190,16 @@ set_pairing_view (MoblinPanel *self)
 	gtk_widget_hide (priv->chooser);
 
 	g_signal_handlers_disconnect_by_func (priv->action_button,
-        	                                send_file_button_clicked_cb, NULL);
-        g_signal_handlers_disconnect_by_func (priv->chooser, selected_device_changed_cb,
-        					self);
+					      send_file_button_clicked_cb, NULL);
+	g_signal_handlers_disconnect_by_func (priv->chooser, selected_device_changed_cb,
+					      self);
 	gtk_widget_hide (priv->action_button);
 
 	gtk_widget_hide (priv->scan_label);
 
 	gtk_widget_hide (priv->filter);
 }
-
+#endif
 static void
 send_file_button_clicked_cb (GtkButton *button,
                              gpointer   user_data)
@@ -258,11 +253,13 @@ static void
 remove_clicked_cb (GtkCellRenderer *cell, gchar *path, gpointer user_data)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
-	GtkTreeView *view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (priv->chooser));
+	GtkTreeView *view;
 	gchar *address = NULL;
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
 	GtkTreePath *tree_path;
+
+	view = GTK_TREE_VIEW (bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (priv->chooser)));
 
 	/* Set selection */
 	tree_path = gtk_tree_path_new_from_string (path);
@@ -273,10 +270,11 @@ remove_clicked_cb (GtkCellRenderer *cell, gchar *path, gpointer user_data)
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter) == FALSE)
 		return;
 
-	bluetooth_chooser_remove_selected_device (BLUETOOTH_CHOOSER (priv->chooser));
-	//bluetooth_plugin_manager_device_deleted (address);
+	if (bluetooth_chooser_remove_selected_device (BLUETOOTH_CHOOSER (priv->chooser)) != FALSE)
+		bluetooth_plugin_manager_device_deleted (address);
 }
 
+#if 0
 static void
 set_pin_view (MoblinPanel *self)
 {
@@ -290,15 +288,13 @@ pincode_callback (DBusGMethodInvocation *context,
 {
 	MoblinPanel *self = MOBLIN_PANEL (user_data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	
 	priv->target_ssp = FALSE;
 	if (priv->automatic_pincode == FALSE)
 		set_pin_view (self);
 	dbus_g_method_return (context, priv->pincode);
-	
 	return TRUE;
 }
-
+#endif
 static void
 activity_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
@@ -308,7 +304,6 @@ activity_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_da
 	char *address = NULL;
 	char *name = NULL;
 	GtkTreePath *tree_path;
-	
 	tree_path = gtk_tree_path_new_from_string (path);
 	gtk_tree_model_get_iter (priv->chooser_model, &iter, tree_path);
 	gtk_tree_model_get (priv->chooser_model, &iter, BLUETOOTH_COLUMN_PROXY, &proxy,
@@ -321,9 +316,7 @@ activity_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_da
 		g_free (name);
 		return;
 	}
-	
 	g_debug ("Activity clicked on %s", address);
-	
 	g_free (address);
 	g_free (name);
 	g_object_unref (proxy);
@@ -338,7 +331,6 @@ connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_dat
 	char *address = NULL;
 	char *name = NULL;
 	GtkTreePath *tree_path;
-	
 	tree_path = gtk_tree_path_new_from_string (path);
 	gtk_tree_model_get_iter (priv->chooser_model, &iter, tree_path);
 	gtk_tree_model_get (priv->chooser_model, &iter, BLUETOOTH_COLUMN_PROXY, &proxy,
@@ -351,7 +343,6 @@ connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_dat
 		g_free (name);
 		return;
 	}
-	
 	g_debug ("Connect clicked on %s", address);
 
 	/*bluetooth_agent_set_pincode_func (priv->agent, pincode_callback, self);
@@ -359,9 +350,7 @@ connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_dat
 	bluetooth_agent_set_cancel_func (priv->agent, cancel_callback, self);
 	bluetooth_agent_set_confirm_func (priv->agent, confirm_callback, self);
 	bluetooth_agent_setup (priv->agent, bluetooth_path);
-	
 	set_pairing_view (self);*/
-	
 	g_free (address);
 	g_free (name);
 	g_object_unref (proxy);
@@ -372,10 +361,8 @@ remove_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
 	gboolean paired, trusted;
-	
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &paired,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
-	
 	if (paired || trusted) {
 		g_object_set (cell, "icon-name", GTK_STOCK_CLEAR, NULL);
 	} else {
@@ -388,7 +375,6 @@ activity_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
 	gboolean paired, trusted;
-	
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &paired,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
 
@@ -402,7 +388,6 @@ connect_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
 	gboolean paired, trusted;
-	
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &paired,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
 
@@ -415,12 +400,11 @@ static void
 moblin_panel_dispose (GObject *object)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (object);
-	
+
 	bluetooth_plugin_manager_cleanup ();
-	
-	//g_object_unref (priv->agent);
-	//g_object_unref (priv->client);
-	
+
+	g_object_unref (priv->agent);
+
 	G_OBJECT_CLASS (moblin_panel_parent_class)->dispose (object);
 }
 
@@ -428,9 +412,7 @@ static void
 moblin_panel_class_init (MoblinPanelClass *klass)
 {
 	GObjectClass *obj_class = G_OBJECT_CLASS (klass);
-	
 	g_type_class_add_private (klass, sizeof (MoblinPanelPrivate));
-	
 	obj_class->dispose = moblin_panel_dispose;
 }
 
@@ -443,17 +425,14 @@ moblin_panel_init (MoblinPanel *self)
 	GtkWidget *vbox, *hbox;
 	gchar *scan_text = NULL;
 	KillswitchState switch_state;
-	GtkSizeGroup *group;
 	GtkTreeViewColumn *type_column;
 	GtkCellRenderer *cell;
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	
 	priv->target_ssp = FALSE;
 	priv->pincode = FALSE;
 	priv->automatic_pincode = FALSE;
 
-	priv->client = bluetooth_client_new ();
 	priv->killswitch = bluetooth_killswitch_new ();
 	if (bluetooth_killswitch_has_killswitches (priv->killswitch) == FALSE) {
 		g_object_unref (priv->killswitch);
@@ -462,7 +441,6 @@ moblin_panel_init (MoblinPanel *self)
 		g_signal_connect  (priv->killswitch, "state-changed",
                        G_CALLBACK (killswitch_state_changed_cb), self);
 	}
-	
 	priv->agent = bluetooth_agent_new ();
 	bluetooth_plugin_manager_init ();
 
@@ -483,12 +461,10 @@ moblin_panel_init (MoblinPanel *self)
 	/* Device list */
 	priv->chooser = g_object_new (BLUETOOTH_TYPE_CHOOSER,
 				      "has-internal-device-filter", FALSE,
-		      		      "show-device-category", FALSE,
+				      "show-device-category", FALSE,
 				      NULL);
-	
 	priv->chooser_model = bluetooth_chooser_get_model (BLUETOOTH_CHOOSER (priv->chooser));
 	type_column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (priv->chooser));
-	
 	/* Add the activity button */
 	cell = mux_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (type_column, cell, FALSE);
@@ -504,15 +480,12 @@ moblin_panel_init (MoblinPanel *self)
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						 connect_to_text, self, NULL);
 	g_signal_connect (cell, "activated", G_CALLBACK (connect_clicked), self);
-	
 	/* Add the remove button */
 	cell = koto_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_end (type_column, cell, FALSE);
-	
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						remove_to_icon, self, NULL);
 	g_signal_connect (cell, "activated", G_CALLBACK (remove_clicked_cb), self);
-	
 	g_signal_connect (priv->chooser, "selected-device-changed",
 			G_CALLBACK (selected_device_changed_cb), self);
 
@@ -553,7 +526,7 @@ moblin_panel_init (MoblinPanel *self)
 			case KILLSWITCH_STATE_UNBLOCKED:
 				nbtk_gtk_light_switch_set_active
 					(NBTK_GTK_LIGHT_SWITCH (priv->power_switch),
-         					TRUE);
+					 TRUE);
 			break;
 			case KILLSWITCH_STATE_SOFT_BLOCKED:
 				nbtk_gtk_light_switch_set_active
@@ -590,7 +563,7 @@ moblin_panel_init (MoblinPanel *self)
 
 	/* Scanning "help" label */
 	scan_text = g_strdup (_("Searching for devices.\n\n"
-                          	"Please make sure they're nearby and in 'discoverable' or "
+				"Please make sure they're nearby and in 'discoverable' or "
 	                        "'visible' mode. Check your devices manual if you have "
 	                        "problems."));
 	priv->scan_label = gtk_label_new (scan_text);
