@@ -340,6 +340,77 @@ bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 	return TRUE;
 }
 
+static gboolean
+show_confirm_dialog(const char *name)
+{
+	GtkWidget *dialog;
+	gint response;
+
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+					 _("Remove '%s' from the list of devices?"), name);
+	g_object_set (G_OBJECT (dialog), "secondary-text",
+		      _("If you remove the device, you will have to set it up again before next use."),
+		      NULL);
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+
+	if (response == GTK_RESPONSE_ACCEPT)
+		return TRUE;
+
+	return FALSE;
+}
+
+/**
+ * bluetooth_chooser_remove_selected_device:
+ * @self: A #BluetoothChooser widget.
+ *
+ * Return value: %TRUE if the selected device was correctly removed.
+ **/
+gboolean
+bluetooth_chooser_remove_selected_device (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	gboolean ret = FALSE;
+	GError *err = NULL;
+	gchar *name;
+	DBusGProxy *device, *adapter;
+
+	if (gtk_tree_selection_get_selected (priv->selection, NULL, &iter) == FALSE)
+		return FALSE;
+
+	gtk_tree_model_get (priv->filter, &iter,
+			    BLUETOOTH_COLUMN_PROXY, &device,
+			    BLUETOOTH_COLUMN_ALIAS, &name, -1);
+
+	adapter = bluetooth_client_get_default_adapter(priv->client);
+
+	if (show_confirm_dialog (name) != FALSE) {
+		const gchar *device_path;
+
+		device_path = dbus_g_proxy_get_path (device);
+
+		if (dbus_g_proxy_call (adapter, "RemoveDevice", &err,
+				       DBUS_TYPE_G_OBJECT_PATH, device_path,
+				       G_TYPE_INVALID, G_TYPE_INVALID) == FALSE) {
+			g_warning ("Failed to remove device %s: %s", name,
+				   err->message);
+			g_error_free (err);
+		} else {
+			ret = TRUE;
+		}
+		g_object_unref (adapter);
+	}
+
+	return ret;
+}
+
 /**
  * bluetooth_chooser_get_model:
  * @self: A BluetoothChooser widget.
