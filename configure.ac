@@ -188,5 +188,6 @@ Configure summary:
 	Prefix......................:  ${prefix}
 	nautilus-sendto plugin......:  ${have_nst}
 	Documentation...............:  ${enable_gtk_doc}
+	GObject-Introspection.......:  ${found_introspection}
 "
 
