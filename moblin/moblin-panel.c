@@ -2,7 +2,8 @@
  *
  *  BlueZ - Bluetooth protocol stack for Linux
  *
- *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2009  Bastien Nocera <hadess@hadess.net>
+ *  Copyright (C) 2009, Intel Corporation.
  *
  *
  *  This library is free software; you can redistribute it and/or
@@ -359,7 +360,7 @@ connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_dat
 	gtk_tree_model_get (priv->chooser_model, &iter, BLUETOOTH_COLUMN_PROXY, &proxy,
 			   BLUETOOTH_COLUMN_ADDRESS, &address,
 			   BLUETOOTH_COLUMN_NAME, &name, -1);
-			   
+
 	if (address == NULL || name == NULL || proxy == NULL) {
 		g_object_unref (proxy);
 		g_free (address);

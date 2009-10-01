@@ -2,8 +2,7 @@
  *
  *  BlueZ - Bluetooth protocol stack for Linux
  *
- *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
- *
+ *  Copyright (C) 2009, Intel Corporation.
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
