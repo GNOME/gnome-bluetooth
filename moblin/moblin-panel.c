@@ -194,29 +194,41 @@ pin_options_button_clicked_cb (GtkButton *button,
 	g_debug ("PIN options clicked.");
 }
 
+/*
+ * This helper function forces the currently selected row in the chooser to be
+ * the same row which contains the activated cell.
+ */
 static void
-remove_clicked_cb (GtkCellRenderer *cell, gchar *path, gpointer user_data)
+ensure_selection (BluetoothChooser *chooser, const gchar *path)
 {
-	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
 	GtkTreeView *view;
-	gchar *address = NULL;
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
 	GtkTreePath *tree_path;
-
 	view = GTK_TREE_VIEW (bluetooth_chooser_get_treeview (chooser));
 
 	/* Set selection */
 	tree_path = gtk_tree_path_new_from_string (path);
 	gtk_tree_view_set_cursor (view, tree_path, NULL, FALSE);
 	gtk_tree_path_free (tree_path);
-	/* Get address */
-	selection = gtk_tree_view_get_selection (view);
-	if (gtk_tree_selection_get_selected (selection, NULL, &iter) == FALSE)
-		return;
+}
 
-	if (bluetooth_chooser_remove_selected_device (chooser) != FALSE)
+static void
+remove_clicked_cb (GtkCellRenderer *cell, const gchar *path, gpointer user_data)
+{
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
+	const gchar *address;
+	GValue value = { 0, };
+
+	ensure_selection (chooser, path);
+
+	/* Get address */
+	if (bluetooth_chooser_get_selected_device_info (chooser, "address", &value)) {
+		address = g_value_get_string (&value);
+		g_value_unset (&value);
+	}
+
+	if (bluetooth_chooser_remove_selected_device (chooser) != FALSE && address) {
 		bluetooth_plugin_manager_device_deleted (address);
+	}
 }
 #if 0
 static gboolean
@@ -236,22 +248,24 @@ pincode_callback (DBusGMethodInvocation *context,
 static void
 browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
-	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
-	GtkTreeIter iter;
-	char *address = NULL;
-	char *cmd = NULL;
-	GtkTreePath *tree_path;
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
+	const gchar *address;
+	GValue value = { 0, };
+	gchar *cmd;
 
-	tree_path = gtk_tree_path_new_from_string (path);
-	gtk_tree_model_get_iter (priv->chooser_model, &iter, tree_path);
-	gtk_tree_model_get (priv->chooser_model, &iter, BLUETOOTH_COLUMN_ADDRESS, &address, -1);
+	ensure_selection (chooser, path);
+
+	/* Get address */
+	if (bluetooth_chooser_get_selected_device_info (chooser, "address", &value)) {
+		address = g_value_get_string (&value);
+		g_value_unset (&value);
+	}
 
 	if (address == NULL) {
 		cmd = g_strdup_printf ("%s --no-default-window \"obex://[%s]\"",
 				       "nautilus", address);
 		if (!g_spawn_command_line_async (cmd, NULL))
 			g_printerr("Couldn't execute command: %s\n", cmd);
-		g_free (address);
 		g_free (cmd);
 	}
 	g_debug ("Browse clicked on %s", address);
