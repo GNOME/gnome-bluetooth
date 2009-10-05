@@ -28,6 +28,7 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <math.h>
 
 #include <nbtk/nbtk-gtk.h>
 
@@ -37,7 +38,6 @@
 #include "bluetooth-chooser-private.h"
 #include "bluetooth-killswitch.h"
 #include "bluetooth-plugin-manager.h"
-#include "bluetooth-agent.h"
 #include "bluetooth-filter-widget.h"
 
 #include "pin.h"
@@ -55,19 +55,21 @@ G_DEFINE_TYPE (MoblinPanel, moblin_panel, GTK_TYPE_HBOX)
 struct _MoblinPanelPrivate
 {
 	BluetoothKillswitch *killswitch;
-	BluetoothAgent *agent;
+	BluetoothClient *client;
 
 	GtkWidget *power_switch;
 	GtkWidget *notebook;
+	GtkWidget *label_pin_help;
+	GtkWidget *label_pin;
+	GtkWidget *label_failure;
+	GtkWidget *chooser;
 	GtkTreeModel *chooser_model;
 
-	gboolean target_ssp;
 	gchar *pincode;
-	gboolean automatic_pincode;
 };
 
 #define CONNECT_TIMEOUT 3.0
-#define AGENT_PATH "/org/bluez/agent/wizard"
+#define AGENT_PATH "/org/bluez/agent/moblin"
 
 typedef struct {
 	char *path;
@@ -76,10 +78,10 @@ typedef struct {
 } ConnectData;
 
 enum {
-	PROPS_PAGE,
-	ADD_PAGE,
-	SETUP_PAGE,
-	MESSAGE_PAGE
+	PAGE_DEVICES,
+	PAGE_ADD,
+	PAGE_SETUP,
+	PAGE_FAILURE
 } MoblinPages;
 
 static void
@@ -215,7 +217,7 @@ static void
 remove_clicked_cb (GtkCellRenderer *cell, const gchar *path, gpointer user_data)
 {
 	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
-	const gchar *address;
+	const gchar *address = NULL;
 	GValue value = { 0, };
 
 	ensure_selection (chooser, path);
@@ -230,26 +232,12 @@ remove_clicked_cb (GtkCellRenderer *cell, const gchar *path, gpointer user_data)
 		bluetooth_plugin_manager_device_deleted (address);
 	}
 }
-#if 0
-static gboolean
-pincode_callback (DBusGMethodInvocation *context,
-		  DBusGProxy *device,
-		  gpointer user_data)
-{
-	MoblinPanel *self = MOBLIN_PANEL (user_data);
-	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	priv->target_ssp = FALSE;
-	if (priv->automatic_pincode == FALSE)
-		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), SETUP_PAGE);
-	dbus_g_method_return (context, priv->pincode);
-	return TRUE;
-}
-#endif
+
 static void
 browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
 	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
-	const gchar *address;
+	const gchar *address = NULL;
 	GValue value = { 0, };
 	gchar *cmd;
 
@@ -270,28 +258,56 @@ browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data
 	}
 	g_debug ("Browse clicked on %s", address);
 }
-#if 0
+
 static void
 connect_callback (BluetoothClient *client, gboolean success, gpointer user_data)
 {
 	ConnectData *data = (ConnectData *)user_data;
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (data->self);
 
-/*	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
-		if (bluetooth_client_connect_service (client, data->path, connect_callback, data) != FALSE) {
+	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
+		if (bluetooth_client_connect_service (client, data->path, connect_callback, data) != FALSE)
 			return;
-		}
 	}
 
 	if (success == FALSE)
 		g_message ("Failed to connect to device %s", data->path);
 
-	set_failure_view (MOBLIN_PANEL (data->self));
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), MESSAGE_PAGE);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_DEVICES);
 
 	g_timer_destroy (data->timer);
 	g_free (data->path);
-	g_free (data);*/
+	g_object_unref (data->self);
+	g_free (data);
+}
+
+static void
+set_failure_message (MoblinPanel *self, gchar *device)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	gchar *str;
+
+	str = g_strdup_printf (_("Pairing with %s failed."), device);
+	gtk_label_set_text (GTK_LABEL (priv->label_failure), str);
+}
+
+static void
+connect_device (const gchar *device_path, MoblinPanel *self)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	ConnectData *data;
+
+	data = g_new0 (ConnectData, 1);
+	data->path = g_strdup (device_path);
+	data->timer = g_timer_new ();
+	data->self = g_object_ref (self);
+
+	if (bluetooth_client_connect_service (priv->client, device_path, connect_callback, data) == FALSE) {
+		g_timer_destroy (data->timer);
+		g_free (data->path);
+		g_object_unref (data->self);
+		g_free (data);
+	}
 }
 
 static void
@@ -299,60 +315,130 @@ create_callback (BluetoothClient *client, const gchar *path, const GError *error
 {
 	MoblinPanel *self = MOBLIN_PANEL (user_data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	ConnectData *data;
+	gchar *device_name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (priv->chooser));
 
-/*	if (path == NULL) {
-		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), MESSAGE_PAGE);
+	g_debug ("Create callback entered");
+
+	if (path == NULL) {
+		g_debug ("Path is NULL !!!");
+		set_failure_message (self, device_name);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_FAILURE);
 		return;
 	}
-	bluetooth_client_set_trusted (priv->client, path, TRUE);
 
-	data = g_new0 (ConnectData, 1);
-	data->path = g_strdup (path);
-	data->timer = g_timer_new ();
+	bluetooth_client_set_trusted (client, path, TRUE);
 
-	if (bluetooth_client_connect_service (client, path, connect_callback, data) == FALSE) {
-		g_timer_destroy (data->timer);
-		g_free (data->path);
-		g_free (data);
-	}*/
+	connect_device (path, self);
 
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PROPS_PAGE);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_DEVICES);
 }
-#endif
+
+static void
+set_large_label (GtkLabel *label, const char *text)
+{
+	char *str;
+
+	str = g_strdup_printf("<span font_desc=\"50\" color=\"black\" bgcolor=\"white\">  %s  </span>", text);
+	gtk_label_set_markup(GTK_LABEL(label), str);
+	g_free(str);
+}
+
 static void
 pair_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
-	/*MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
 	const gchar *agent_path = AGENT_PATH;
+	gchar *name;
+	BluetoothType type;
+	guint legacy_pairing;
+	gboolean target_ssp, automatic_pincode;
+	const gchar *address = NULL;
+	gchar *pincode = NULL;
+	gchar *pin_ret;
+	gchar *target_pincode;
+	GValue value = { 0, };
 
-	gchar *pin_ret = NULL;
+	ensure_selection (BLUETOOTH_CHOOSER (priv->chooser), path);
 
-	pin_ret = get_pincode_for_device (target_type, target_address, target_name, NULL);
-	if (pin_ret != NULL && g_str_equal (pin_ret, "NULL"))
-		path = NULL;
-
-	g_object_ref (priv->agent);
-	bluetooth_client_create_device (priv->client, target_address, agent_path,
-					create_callback, user_data);*/
 	g_debug ("Pair clicked");
+
+	target_pincode = g_strdup_printf ("%d", g_random_int_range (pow (10, PIN_NUM_DIGITS - 1),
+								    pow (10, PIN_NUM_DIGITS) - 1));
+
+	name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (priv->chooser));
+	type = bluetooth_chooser_get_selected_device_type (BLUETOOTH_CHOOSER (priv->chooser));
+	bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->chooser), "address", &value);
+	address = g_value_dup_string (&value);
+	g_value_unset (&value);
+	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->chooser), "legacypairing", &value) != FALSE) {
+		legacy_pairing = g_value_get_int (&value);
+		if (legacy_pairing == -1)
+			target_ssp = TRUE;
+	} else {
+		target_ssp = TRUE;
+	}
+	g_value_unset (&value);
+
+	if (priv->pincode != NULL && *priv->pincode != '\0') {
+		pincode = g_strdup (priv->pincode);
+		automatic_pincode = TRUE;
+	} else if (address != NULL) {
+		guint max_digits;
+		pincode = get_pincode_for_device (type, address, name, &max_digits);
+		if (target_pincode == NULL) {
+			/* Truncate the default pincode if the device doesn't like long
+			 * PIN codes */
+			if (max_digits != PIN_NUM_DIGITS && max_digits > 0)
+				pincode = g_strndup(target_pincode, max_digits);
+			else
+				pincode = g_strdup(target_pincode);
+		} else if (target_ssp == FALSE) {
+			automatic_pincode = TRUE;
+		}
+	}
+
+	pin_ret = get_pincode_for_device (type, address, name, NULL);
+	if (pin_ret != NULL && g_str_equal (pin_ret, "NULL")) {
+		agent_path = NULL;
+		g_debug ("Setting agent_path to NULL");
+	}
+	g_free (pin_ret);
+
+	bluetooth_client_create_device (priv->client, address, agent_path,
+					create_callback, user_data);
+
+	if (automatic_pincode == FALSE && target_ssp == FALSE) {
+		char *text;
+
+		if (type == BLUETOOTH_TYPE_KEYBOARD) {
+			text = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), name);
+		} else {
+			text = g_strdup_printf (_("Please enter the following PIN on '%s':"), name);
+		}
+		gtk_label_set_markup(GTK_LABEL(priv->label_pin_help), text);
+		g_free (text);
+		set_large_label (GTK_LABEL (priv->label_pin), pincode);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_SETUP);
+	}
 }
 
 static void
 connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
-	/*MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	MoblinPanel *self = MOBLIN_PANEL (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	GValue value = { 0, };
+	DBusGProxy *device;
+	const gchar *device_path = NULL;
 
-	gchar *pin_ret = NULL;
+	ensure_selection (BLUETOOTH_CHOOSER (priv->chooser), path);
 
-	pin_ret = get_pincode_for_device (target_type, target_address, target_name, NULL);
-	if (pin_ret != NULL && g_str_equal (pin_ret, "NULL"))
-		path = NULL;
+	bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->chooser), "proxy", &value);
+	device = g_value_get_object (&value);
+	device_path = dbus_g_proxy_get_path (device);
+	g_value_unset (&value);
 
-	g_object_ref (priv->agent);
-	bluetooth_client_create_device (priv->client, target_address, agent_path,
-					create_callback, user_data);*/
-	g_debug ("Connect clicked");
+	connect_device (device_path, self);
 }
 
 static void
@@ -416,38 +502,86 @@ static void
 set_scanning_view (GtkButton *button, MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), ADD_PAGE);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_ADD);
 }
 
 static void
-set_properties_view (GtkButton *button, MoblinPanel *self)
+set_device_view (GtkButton *button, MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PROPS_PAGE);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_DEVICES);
 }
 
-#if 0
 static GtkWidget *
-create_message_page (MoblinPanel *self)
+create_failure_page (MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv;
-	GtkWidget *label;
+	GtkWidget *page;
+	GtkWidget *page_title;
+	GtkWidget *vbox, *hbox;
+	GtkWidget *back_button;
 
-	label = gtk_label_new ("Zing");
+	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	return label;
+	page = nbtk_gtk_frame_new ();
+	page_title = gtk_label_new ("");
+	gtk_frame_set_label_widget (GTK_FRAME (page), page_title);
+	set_frame_title (GTK_FRAME (page), _("Device setup failed"));
+	gtk_widget_show (page);
+
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_widget_show (vbox);
+	gtk_container_add (GTK_CONTAINER (page), vbox);
+	priv->label_failure = gtk_label_new ("");
+	gtk_widget_show (priv->label_failure);
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_widget_show (hbox);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, FALSE, 6);
+	back_button = gtk_button_new_with_label (_("Back to devices"));
+	gtk_widget_show (back_button);
+	gtk_box_pack_start (GTK_BOX (hbox), back_button, FALSE, FALSE, 6);
+	g_signal_connect (back_button, "clicked", G_CALLBACK (set_device_view), self);
+
+	return page;
 }
 
 static GtkWidget *
 create_setup_page (MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv;
-	GtkWidget *label;
+	GtkWidget *page, *page_title;
+	GtkWidget *vbox, *hbox;
+	GtkWidget *back_button;
 
-	label = gtk_label_new ("Zing");
-	return label;
+	priv = MOBLIN_PANEL_GET_PRIVATE (self);
+
+	page = nbtk_gtk_frame_new ();
+	page_title = gtk_label_new ("");
+	gtk_frame_set_label_widget (GTK_FRAME (page), page_title);
+	set_frame_title (GTK_FRAME (page), _("Device setup"));
+	gtk_widget_show (page);
+
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_widget_show (vbox);
+	gtk_container_add (GTK_CONTAINER (page), vbox);
+	priv->label_pin_help = gtk_label_new ("");
+	gtk_widget_show (priv->label_pin_help);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->label_pin_help, FALSE, FALSE, 6);
+	priv->label_pin = gtk_label_new ("");
+	gtk_widget_show (priv->label_pin);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->label_pin, FALSE, FALSE, 6);
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_widget_show (hbox);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, FALSE, 6);
+	back_button = gtk_button_new_with_label (_("Back to devices"));
+	gtk_widget_show (back_button);
+	gtk_box_pack_start (GTK_BOX (hbox), back_button, FALSE, FALSE, 6);
+	g_signal_connect (back_button, "clicked", G_CALLBACK (set_device_view), self);
+
+	return page;
 }
-#endif
 
 static GtkWidget *
 create_add_page (MoblinPanel *self)
@@ -455,7 +589,7 @@ create_add_page (MoblinPanel *self)
 	MoblinPanelPrivate *priv;
 	GtkWidget *page;
 	GtkWidget *vbox, *hbox;
-	GtkWidget *chooser, *filter;
+	GtkWidget *filter;
 	GtkWidget *frame_title;
 	GtkWidget *frame;
 	GtkWidget *back_button;
@@ -480,17 +614,16 @@ create_add_page (MoblinPanel *self)
 	set_frame_title (GTK_FRAME (frame), _("Devices"));
 
 	/* Device list */
-	chooser = g_object_new (BLUETOOTH_TYPE_CHOOSER,
+	priv->chooser = g_object_new (BLUETOOTH_TYPE_CHOOSER,
 				"has-internal-device-filter", FALSE,
 				"show-device-category", FALSE,
 				"show-searching", TRUE,
 				"device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
 				NULL);
-	tree_view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (chooser));
+	tree_view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (priv->chooser));
 	g_object_set (tree_view, "enable-grid-lines", TRUE, "headers-visible", FALSE, NULL);
-	//"grid-line-width", 2, "horizontal-separator", 6, "vertical-separator", 6,
-	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (chooser));
-	type_column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (chooser));
+	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (priv->chooser));
+	type_column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (priv->chooser));
 	/* Add the pair button */
 	cell = mux_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (type_column, cell, FALSE);
@@ -499,8 +632,8 @@ create_add_page (MoblinPanel *self)
 						 pair_to_text, self, NULL);
 	g_signal_connect (cell, "activated", G_CALLBACK (pair_clicked), self);
 
-	gtk_widget_show (chooser);
-	gtk_container_add (GTK_CONTAINER (frame), chooser);
+	gtk_widget_show (priv->chooser);
+	gtk_container_add (GTK_CONTAINER (frame), priv->chooser);
 	gtk_widget_show (frame);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 4);
 
@@ -508,7 +641,7 @@ create_add_page (MoblinPanel *self)
 	back_button = gtk_button_new_with_label (_("Back to devices"));
 	gtk_widget_show (back_button);
 	g_signal_connect (back_button, "clicked",
-			G_CALLBACK (set_properties_view), self);
+			G_CALLBACK (set_device_view), self);
 	gtk_box_pack_start (GTK_BOX (vbox), back_button, FALSE, FALSE, 4);
 
 	/* Right column */
@@ -525,21 +658,21 @@ create_add_page (MoblinPanel *self)
 	gtk_widget_show (filter);
 	bluetooth_filter_widget_set_title (BLUETOOTH_FILTER_WIDGET (filter), _("Only show:"));
 	bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (filter),
-					     BLUETOOTH_CHOOSER (chooser));
+					     BLUETOOTH_CHOOSER (priv->chooser));
 	gtk_box_pack_start (GTK_BOX (vbox), filter, FALSE, FALSE, 4);
 
 	/* Button for PIN options file */
 	pin_button = gtk_button_new_with_label (_("PIN options"));
 	gtk_widget_show (pin_button);
 	g_signal_connect (pin_button, "clicked",
-                    G_CALLBACK (pin_options_button_clicked_cb), chooser);
+                    G_CALLBACK (pin_options_button_clicked_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox), pin_button, FALSE, FALSE, 4);
 
 	return page;
 }
 
 static GtkWidget *
-create_properties_page (MoblinPanel *self)
+create_devices_page (MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv;
 	GtkWidget *page;
@@ -581,7 +714,6 @@ create_properties_page (MoblinPanel *self)
 
 	tree_view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (chooser));
 	g_object_set (tree_view, "enable-grid-lines", TRUE, "headers-visible", FALSE, NULL);
-	//"grid-line-width", 2, "horizontal-separator", 6, "vertical-separator", 6, zebra
 
 	/* Add the browse button */
 	cell = mux_cell_renderer_text_new ();
@@ -589,7 +721,7 @@ create_properties_page (MoblinPanel *self)
 
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						 browse_to_text, self, NULL);
-	g_signal_connect (cell, "activated", G_CALLBACK (browse_clicked), self);
+	g_signal_connect (cell, "activated", G_CALLBACK (browse_clicked), chooser);
 
 	/* Add the connect button */
 	cell = mux_cell_renderer_text_new ();
@@ -684,16 +816,13 @@ static void
 moblin_panel_init (MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv;
-	GtkWidget *properties_page, *add_page; //, *setup_page, *message_page;
+	GtkWidget *devices_page, *add_page, *setup_page, *failure_page;
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	priv->target_ssp = FALSE;
-	priv->pincode = FALSE;
-	priv->automatic_pincode = FALSE;
+	priv->pincode = NULL;
 
+	priv->client = bluetooth_client_new ();
 	priv->killswitch = bluetooth_killswitch_new ();
-
-	priv->agent = bluetooth_agent_new ();
 	bluetooth_plugin_manager_init ();
 
 	gtk_box_set_homogeneous (GTK_BOX (self), FALSE);
@@ -702,23 +831,23 @@ moblin_panel_init (MoblinPanel *self)
 	priv->notebook = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
 
-	properties_page = create_properties_page (self);
-	gtk_widget_show (properties_page);
-	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), properties_page, NULL);
+	devices_page = create_devices_page (self);
+	gtk_widget_show (devices_page);
+	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), devices_page, NULL);
 
 	add_page = create_add_page (self);
 	gtk_widget_show (add_page);
 	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), add_page, NULL);
-#if 0
+
 	setup_page = create_setup_page (self);
 	gtk_widget_show (setup_page);
 	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), setup_page, NULL);
 
-	message_page = create_message_page (self);
-	gtk_widget_show (message_page);
-	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), setup_page, NULL);
-#endif
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PROPS_PAGE);
+	failure_page = create_failure_page (self);
+	gtk_widget_show (failure_page);
+	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), failure_page, NULL);
+
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_DEVICES);
 	gtk_widget_show (priv->notebook);
 	gtk_container_add (GTK_CONTAINER (self), priv->notebook);
 }
@@ -729,8 +858,7 @@ moblin_panel_dispose (GObject *object)
 	//MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (object);
 
 	bluetooth_plugin_manager_cleanup ();
-
-	//g_object_unref (priv->agent);
+	//g_object_unref (priv->client);
 
 	G_OBJECT_CLASS (moblin_panel_parent_class)->dispose (object);
 }

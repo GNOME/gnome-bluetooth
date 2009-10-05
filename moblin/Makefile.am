@@ -5,7 +5,7 @@ bin_PROGRAMS = bluetooth-panel
 bluetooth_panel_SOURCES = main.c moblin-panel.c moblin-panel.h
 
 bluetooth_panel_LDADD = $(top_builddir)/lib/libcommon.la $(top_builddir)/lib/libgnome-bluetooth.la \
-			$(top_builddir)/moblin/moblin-copy-n-paste/libmoblin.la 
+			$(top_builddir)/moblin/moblin-copy-n-paste/libmoblin.la \
 			$(top_builddir)/wizard/libwizard.la $(MOBLIN_LIBS)
 
 AM_CFLAGS = $(MOBLIN_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
