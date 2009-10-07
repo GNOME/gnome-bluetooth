@@ -285,7 +285,7 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 
 		len = read(fd, &event, sizeof(event));
 		if (len < 0) {
-			if (errno == -G_IO_ERROR_AGAIN)
+			if (errno == EAGAIN)
 				break;
 			g_message ("Reading of RFKILL events failed");
 			break;
