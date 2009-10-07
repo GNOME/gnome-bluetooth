@@ -199,6 +199,7 @@ AC_OUTPUT(Makefile
 	  moblin/bluetooth-panel.desktop.in
 	  moblin/theme/Makefile
 	  moblin/moblin-copy-n-paste/Makefile
+	  moblin/moblin-icons/Makefile
 	  docs/Makefile
 	  docs/reference/Makefile
 	  docs/reference/libgnome-bluetooth/Makefile

@@ -1,4 +1,4 @@
-SUBDIRS = moblin-copy-n-paste theme
+SUBDIRS = moblin-copy-n-paste theme moblin-icons
 
 bin_PROGRAMS = bluetooth-panel
 
