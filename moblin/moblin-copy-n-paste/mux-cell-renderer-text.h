@@ -1,7 +1,7 @@
 #ifndef _MUX_CELL_RENDERER_TEXT
 #define _MUX_CELL_RENDERER_TEXT
 
-#include <gtk/gtkcellrenderertext.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

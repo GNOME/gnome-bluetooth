@@ -19,7 +19,7 @@
 #ifndef __KOTO_CELL_RENDERER_PIXBUF_H__
 #define __KOTO_CELL_RENDERER_PIXBUF_H__
 
-#include <gtk/gtkcellrendererpixbuf.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
