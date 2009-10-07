@@ -63,6 +63,8 @@ struct _MoblinPanelPrivate
 	GtkWidget *label_pin;
 	GtkWidget *label_failure;
 	GtkWidget *chooser;
+	GtkWidget *send_button;
+	GtkWidget *add_new_button;
 	GtkTreeModel *chooser_model;
 
 	gchar *pincode;
@@ -111,11 +113,17 @@ killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
 		nbtk_gtk_light_switch_set_active (NBTK_GTK_LIGHT_SWITCH (priv->power_switch),
 	                                      FALSE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
+		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
+		gtk_widget_set_sensitive (priv->send_button, FALSE);
 	} else if (state == KILLSWITCH_STATE_UNBLOCKED) {
 		nbtk_gtk_light_switch_set_active (NBTK_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
+		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
+		gtk_widget_set_sensitive (priv->send_button, TRUE);
 	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED) {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
+		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
+		gtk_widget_set_sensitive (priv->send_button, FALSE);
 	} else {
 		g_assert_not_reached ();
 	}
@@ -680,7 +688,6 @@ create_devices_page (MoblinPanel *self)
 	GtkWidget *chooser;
 	GtkWidget *vbox, *hbox;
 	GtkWidget *frame;
-	GtkWidget *send_button, *add_new_button;
 	GtkWidget *power_label;
 	GtkTreeViewColumn *type_column;
 	GtkCellRenderer *cell;
@@ -743,11 +750,11 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 4);
 
 	/* Add new button */
-	add_new_button = gtk_button_new_with_label (_("Add a new device"));
-	gtk_widget_show (add_new_button);
-	g_signal_connect (add_new_button, "clicked",
+	priv->add_new_button = gtk_button_new_with_label (_("Add a new device"));
+	gtk_widget_show (priv->add_new_button);
+	g_signal_connect (priv->add_new_button, "clicked",
 			G_CALLBACK (set_scanning_view), self);
-	gtk_box_pack_start (GTK_BOX (vbox), add_new_button, FALSE, FALSE, 4);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->add_new_button, FALSE, FALSE, 4);
 
 	/* Right column */
 	vbox = gtk_vbox_new (FALSE, 4);
@@ -801,13 +808,13 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (hbox), priv->power_switch, FALSE, FALSE, 4);
 
 	/* Button for Send file */
-	send_button = gtk_button_new_with_label (_("Send file from your computer"));
-	gtk_widget_show (send_button);
-	g_signal_connect (send_button, "clicked",
+	priv->send_button = gtk_button_new_with_label (_("Send file from your computer"));
+	gtk_widget_show (priv->send_button);
+	g_signal_connect (priv->send_button, "clicked",
                     G_CALLBACK (send_file_button_clicked_cb), chooser);
 	g_signal_connect (chooser, "selected-device-changed",
-			G_CALLBACK (selected_device_changed_cb), send_button);
-	gtk_box_pack_start (GTK_BOX (vbox), send_button, FALSE, FALSE, 4);
+			G_CALLBACK (selected_device_changed_cb), priv->send_button);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
 
 	return page;
 }
