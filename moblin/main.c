@@ -91,10 +91,11 @@ main (int argc, char *argv[])
 		panel = mpl_panel_gtk_new (MPL_PANEL_BLUETOOTH, _("bluetooth"),
 					PKGTHEMEDIR "/bluetooth-panel.css",
 					"state-idle", TRUE);
-		mpl_panel_client_set_height_request (panel, 450);
 		window  = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
 
-		make_window_content (GTK_WIDGET (panel));
+		window = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
+		make_window_content (window);
+		mpl_panel_client_set_height_request (panel, 280);
 	}
 
 	gtk_main ();
