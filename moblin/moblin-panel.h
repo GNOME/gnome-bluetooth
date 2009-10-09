@@ -63,6 +63,8 @@ struct _MoblinPanelClass
 {
   GtkHBoxClass parent_class;
   MoblinPanelPrivate *priv;
+
+  void (*status_connecting) (MoblinPanel *self, gboolean connecting);
 };
 
 GType moblin_panel_get_type (void);

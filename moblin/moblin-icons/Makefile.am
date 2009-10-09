@@ -1,12 +1,10 @@
 iconsdir = $(pkgdatadir)/moblin-icons
 
 icons_DATA = \
-	bluetooth-not-paired-hover.png \
-	bluetooth-not-paired.png \
-	bluetooth-strong-hover.png \
-	bluetooth-strong.png \
-	bluetooth-weak-hover.png \
-	bluetooth-weak.png \
+	bluetooth-idle-hover.png \
+	bluetooth-idle.png \
+	bluetooth-connecting-hover.png \
+	bluetooth-connecting.png \
 	toolbar-button-hover.png \
 	toolbar-button-active.png
 

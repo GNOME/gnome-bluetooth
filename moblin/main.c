@@ -30,29 +30,34 @@
 #include <nbtk/nbtk-gtk.h>
 #include <moblin-panel/mpl-panel-common.h>
 #include <moblin-panel/mpl-panel-gtk.h>
+#include <bluetooth-enums.h>
 
 #include "moblin-panel.h"
 
 #define PKGTHEMEDIR PKGDATADIR"/theme"
 
 static void
-make_window_content (GtkWidget *panel)
+bluetooth_status_changed (MoblinPanel *panel, gboolean connecting, gpointer user_data)
 {
-	GtkWidget *content;
+	MplPanelClient *client = MPL_PANEL_CLIENT (user_data);
+	gchar *style = NULL;
 
-	content = moblin_panel_new ();
-	gtk_widget_set_size_request (content, 800, -1);
-	gtk_widget_show (content);
+	if (connecting) {
+		style = g_strdup ("state-connecting");
+	} else {
+		style = g_strdup ("state-idle");
+	}
 
-	gtk_container_add (GTK_CONTAINER (panel), content);
-	gtk_widget_show (panel);
+	mpl_panel_client_request_button_style (client, style);
+	g_free (style);
 }
 
 int
 main (int argc, char *argv[])
 {
 	MplPanelClient *panel;
-	GtkWidget      *window;
+	GtkWidget      *window, *content;
+	GtkRequisition  req;
 	gboolean        standalone = FALSE;
 	GtkSettings    *settings;
 	GError         *error = NULL;
@@ -86,16 +91,26 @@ main (int argc, char *argv[])
 		g_signal_connect (window, "delete-event", (GCallback) gtk_main_quit,
 				NULL);
 		gtk_widget_set_size_request (window, 1000, -1);
-		make_window_content (window);
+		content = moblin_panel_new ();
+		gtk_widget_show (content);
+
+		gtk_container_add (GTK_CONTAINER (window), content);
+		gtk_widget_show (window);
 	}  else {
 		panel = mpl_panel_gtk_new (MPL_PANEL_BLUETOOTH, _("bluetooth"),
 					PKGTHEMEDIR "/bluetooth-panel.css",
 					"state-idle", TRUE);
 		window  = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
 
-		window = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
-		make_window_content (window);
-		mpl_panel_client_set_height_request (panel, 280);
+		content = moblin_panel_new ();
+		g_signal_connect (content, "state-changed",
+				G_CALLBACK (bluetooth_status_changed), panel);
+		gtk_widget_show (content);
+
+		gtk_container_add (GTK_CONTAINER (window), content);
+		gtk_widget_show (window);
+		gtk_widget_size_request (window, &req);
+		mpl_panel_client_set_height_request (panel, req.height);
 	}
 
 	gtk_main ();

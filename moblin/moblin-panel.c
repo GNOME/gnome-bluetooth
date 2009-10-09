@@ -39,6 +39,7 @@
 #include "bluetooth-killswitch.h"
 #include "bluetooth-plugin-manager.h"
 #include "bluetooth-filter-widget.h"
+#include "gnome-bluetooth-enum-types.h"
 
 #include "pin.h"
 
@@ -69,6 +70,8 @@ struct _MoblinPanelPrivate
 	GtkTreeModel *chooser_model;
 
 	gchar *pincode;
+
+	gboolean connecting;
 };
 
 #define CONNECT_TIMEOUT 3.0
@@ -86,6 +89,13 @@ enum {
 	PAGE_SETUP,
 	PAGE_FAILURE
 } MoblinPages;
+
+enum {
+	STATUS_CONNECTING,
+	LAST_SIGNAL
+};
+
+static guint _signals[LAST_SIGNAL] = {0, };
 
 static void
 power_switch_toggled_cb (NbtkGtkLightSwitch *light_switch,
@@ -547,6 +557,56 @@ set_device_view (GtkButton *button, MoblinPanel *self)
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), PAGE_DEVICES);
 }
 
+static void
+determine_connecting (const gchar *key, gpointer value, gpointer user_data)
+{
+	BluetoothStatus status = GPOINTER_TO_INT (value);
+	BluetoothStatus *other_status = user_data;
+
+	if (status == BLUETOOTH_STATUS_CONNECTING)
+		(*other_status) = status;
+}
+
+static void
+have_connecting_device (MoblinPanel *self)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	GHashTable *states;
+	GtkTreeIter iter;
+	BluetoothStatus status = BLUETOOTH_STATUS_INVALID;
+	gboolean connecting = FALSE;
+
+	gtk_tree_model_get_iter_first (priv->chooser_model, &iter);
+	gtk_tree_model_get(priv->chooser_model, &iter, BLUETOOTH_COLUMN_SERVICES, &states, -1);
+
+	if (states) {
+		g_hash_table_foreach (states, (GHFunc) determine_connecting, &status);
+
+		g_hash_table_unref (states);
+	}
+
+	if (status == BLUETOOTH_STATUS_CONNECTING)
+		connecting = TRUE;
+
+	if (connecting != priv->connecting) {
+		priv->connecting = connecting;
+		g_signal_emit (self, _signals[STATUS_CONNECTING], 0,
+			priv->connecting);
+	}
+}
+
+static void
+model_changed_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer user_data)
+{
+	have_connecting_device (MOBLIN_PANEL (user_data));
+}
+
+static void
+row_deleted_cb (GtkTreeModel *model, GtkTreePath *path, gpointer user_data)
+{
+	have_connecting_device (MOBLIN_PANEL (user_data));
+}
+
 static GtkWidget *
 create_failure_page (MoblinPanel *self)
 {
@@ -744,6 +804,9 @@ create_devices_page (MoblinPanel *self)
 	type_column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (priv->display));
 	if (!priv->chooser_model) {
 		priv->chooser_model = bluetooth_chooser_get_model (BLUETOOTH_CHOOSER (priv->display));
+		g_signal_connect (priv->chooser_model, "row-changed", G_CALLBACK (model_changed_cb), self);
+		g_signal_connect (priv->chooser_model, "row-deleted", G_CALLBACK (row_deleted_cb), self);
+		g_signal_connect (priv->chooser_model, "row-inserted", G_CALLBACK (model_changed_cb), self);
 	}
 
 	tree_view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (priv->display));
@@ -837,11 +900,10 @@ create_devices_page (MoblinPanel *self)
 	/* Button for Send file */
 	priv->send_button = gtk_button_new_with_label (_("Send file from your computer"));
 	gtk_widget_show (priv->send_button);
-	gtk_widget_set_sensitive (priv->send_button, FALSE);
 	g_signal_connect (priv->send_button, "clicked",
                     G_CALLBACK (send_file_button_clicked_cb), priv->display);
 	g_signal_connect (priv->display, "selected-device-changed",
-			G_CALLBACK (selected_device_changed_cb), self);
+			G_CALLBACK (selected_device_changed_cb), priv->send_button);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
 
 	return page;
@@ -855,6 +917,7 @@ moblin_panel_init (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 	priv->pincode = NULL;
+	priv->connecting = FALSE;
 
 	priv->client = bluetooth_client_new ();
 	priv->killswitch = bluetooth_killswitch_new ();
@@ -904,6 +967,12 @@ moblin_panel_class_init (MoblinPanelClass *klass)
 	GObjectClass *obj_class = G_OBJECT_CLASS (klass);
 	g_type_class_add_private (klass, sizeof (MoblinPanelPrivate));
 	obj_class->dispose = moblin_panel_dispose;
+
+	_signals[STATUS_CONNECTING] = g_signal_new ("status-connecting", MOBLIN_TYPE_PANEL,
+						G_SIGNAL_RUN_FIRST,
+						G_STRUCT_OFFSET (MoblinPanelClass, status_connecting),
+						NULL, NULL, g_cclosure_marshal_VOID__BOOLEAN,
+						G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 }
 
 /**

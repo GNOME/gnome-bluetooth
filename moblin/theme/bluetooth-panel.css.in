@@ -11,15 +11,17 @@ MnbToolbarButton:hover, MnbToolbarButton:active {
 }
 
 MnbToolbarButton#state-idle {
-  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-not-paired.png");
+  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-idle.png");
 }
 
 MnbToolbarButton#state-idle:hover, MnbToolbarButton#state-idle:active, MnbToolbarButton#state-idle:checked  {
-  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-not-paired-hover.png");
-
-MnbToolbarButton#state-paired {
-  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-strong.png");
+  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-idle-hover.png");
 }
 
-MnbToolbarButton#state-paired:hover, MnbToolbarButton#state-paired:active, MnbToolbarButton#state-paired:checked  {
-  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-strong-hover.png");
+MnbToolbarButton#state-connecting {
+  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-connecting.png");
+}
+
+MnbToolbarButton#state-connecting:hover, MnbToolbarButton#state-connecting:active, MnbToolbarButton#state-connecting:checked  {
+  background-image: url("file://@pkgdatadir@/moblin-icons/bluetooth-connecting-hover.png");
+}
