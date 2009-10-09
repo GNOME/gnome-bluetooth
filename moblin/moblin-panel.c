@@ -197,7 +197,8 @@ static void
 send_file_button_clicked_cb (GtkButton *button,
                              gpointer   user_data)
 {
-	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (priv->display);
 	GPtrArray *a;
 	GError *err = NULL;
 	guint i;
@@ -261,7 +262,8 @@ ensure_selection (BluetoothChooser *chooser, const gchar *path)
 static void
 remove_clicked_cb (GtkCellRenderer *cell, const gchar *path, gpointer user_data)
 {
-	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (priv->display);
 	const gchar *address = NULL;
 	GValue value = { 0, };
 
@@ -281,7 +283,8 @@ remove_clicked_cb (GtkCellRenderer *cell, const gchar *path, gpointer user_data)
 static void
 browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
-	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (priv->display);
 	const gchar *address = NULL;
 	GValue value = { 0, };
 	gchar *cmd;
@@ -821,7 +824,7 @@ create_devices_page (MoblinPanel *self)
 
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						 browse_to_text, self, NULL);
-	g_signal_connect (cell, "activated", G_CALLBACK (browse_clicked), priv->display);
+	g_signal_connect (cell, "activated", G_CALLBACK (browse_clicked), self);
 
 	/* Add the connect button */
 	cell = mux_cell_renderer_text_new ();
@@ -835,7 +838,7 @@ create_devices_page (MoblinPanel *self)
 	gtk_tree_view_column_pack_end (type_column, cell, FALSE);
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						remove_to_icon, self, NULL);
-	g_signal_connect (cell, "activated", G_CALLBACK (remove_clicked_cb), priv->display);
+	g_signal_connect (cell, "activated", G_CALLBACK (remove_clicked_cb), self);
 
 	gtk_widget_show (priv->display);
 	gtk_container_add (GTK_CONTAINER (frame), priv->display);
@@ -910,9 +913,9 @@ create_devices_page (MoblinPanel *self)
 	priv->send_button = gtk_button_new_with_label (_("Send file from your computer"));
 	gtk_widget_show (priv->send_button);
 	g_signal_connect (priv->send_button, "clicked",
-                    G_CALLBACK (send_file_button_clicked_cb), priv->display);
+                    G_CALLBACK (send_file_button_clicked_cb), self);
 	g_signal_connect (priv->display, "selected-device-changed",
-			G_CALLBACK (selected_device_changed_cb), priv->send_button);
+			G_CALLBACK (selected_device_changed_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
 
 	return page;
