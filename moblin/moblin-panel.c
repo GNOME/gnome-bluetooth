@@ -740,9 +740,12 @@ create_add_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (vbox), back_button, FALSE, FALSE, 4);
 
 	/* Right column */
+	frame = nbtk_gtk_frame_new ();
+	gtk_widget_show (frame);
 	vbox = gtk_vbox_new (FALSE, 4);
 	gtk_widget_show (vbox);
-	gtk_box_pack_start (GTK_BOX (page), vbox, FALSE, FALSE, 4);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 4);
 
 	hbox = gtk_hbox_new (FALSE, 4);
 	gtk_widget_show (hbox);
@@ -847,16 +850,22 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (vbox), priv->add_new_button, FALSE, FALSE, 4);
 
 	/* Right column */
+	frame = nbtk_gtk_frame_new ();
+	gtk_widget_show (frame);
 	vbox = gtk_vbox_new (FALSE, 4);
 	gtk_widget_show (vbox);
-	gtk_box_pack_start (GTK_BOX (page), vbox, FALSE, FALSE, 4);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 4);
 
 	hbox = gtk_hbox_new (FALSE, 4);
 	gtk_widget_show (hbox);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 4);
 
 	/* Power switch */
-	power_label = gtk_label_new (_("Turn Bluetooth"));
+	/* Translators: This string appears next to a toggle switch which controls
+	 * enabling/disabling Bluetooth radio's on the device. Akin to the power
+	 * switches in the Network UI of Moblin */
+	power_label = gtk_label_new (_("Bluetooth"));
 	gtk_widget_show (power_label);
 	gtk_box_pack_start (GTK_BOX (hbox), power_label, FALSE, FALSE, 4);
 
