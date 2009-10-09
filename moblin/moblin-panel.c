@@ -63,6 +63,7 @@ struct _MoblinPanelPrivate
 	GtkWidget *label_pin;
 	GtkWidget *label_failure;
 	GtkWidget *chooser;
+	GtkWidget *display;
 	GtkWidget *send_button;
 	GtkWidget *add_new_button;
 	GtkTreeModel *chooser_model;
@@ -101,11 +102,41 @@ power_switch_toggled_cb (NbtkGtkLightSwitch *light_switch,
 }
 
 static void
+enable_send_file (MoblinPanel *self)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (priv->display);
+	GValue value = {0, };
+	gchar *name = NULL;
+	gboolean enabled = FALSE;
+
+	name = bluetooth_chooser_get_selected_device_name (chooser);
+	if (name != NULL) {
+		guint i;
+		const char **uuids;
+
+		bluetooth_chooser_get_selected_device_info (chooser, "uuids", &value);
+
+		uuids = (const char **) g_value_get_boxed (&value);
+		if (uuids != NULL) {
+			for (i = 0; uuids[i] != NULL; i++)
+				if (g_str_equal (uuids[i], "OBEXObjectPush")) {
+					enabled = TRUE;
+					break;
+				}
+			g_value_unset (&value);
+		}
+	}
+	gtk_widget_set_sensitive (priv->send_button, enabled);
+}
+
+static void
 killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
                              KillswitchState      state,
                              gpointer             user_data)
 {
-	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	MoblinPanel *self = MOBLIN_PANEL (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
 	g_signal_handlers_block_by_func (priv->power_switch, power_switch_toggled_cb, user_data);
 
@@ -119,7 +150,7 @@ killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
 		nbtk_gtk_light_switch_set_active (NBTK_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
-		gtk_widget_set_sensitive (priv->send_button, TRUE);
+		enable_send_file (self);
 	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED) {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
@@ -132,14 +163,10 @@ killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
 }
 
 static void
-selected_device_changed_cb (BluetoothChooser *chooser, const char *address, gpointer data)
+selected_device_changed_cb (BluetoothChooser *chooser, const char *address, gpointer user_data)
 {
-	GtkWidget *send_button = GTK_WIDGET (data);
-
-	if (!address) {
-		gtk_widget_set_sensitive (send_button, FALSE);	} else {
-		gtk_widget_set_sensitive (send_button, TRUE);
-	}
+	MoblinPanel *self = MOBLIN_PANEL (user_data);
+	enable_send_file (MOBLIN_PANEL (self));
 }
 
 static void
@@ -439,9 +466,9 @@ connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_dat
 	DBusGProxy *device;
 	const gchar *device_path = NULL;
 
-	ensure_selection (BLUETOOTH_CHOOSER (priv->chooser), path);
+	ensure_selection (BLUETOOTH_CHOOSER (priv->display), path);
 
-	bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->chooser), "proxy", &value);
+	bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->display), "proxy", &value);
 	device = g_value_get_object (&value);
 	device_path = dbus_g_proxy_get_path (device);
 	g_value_unset (&value);
@@ -685,7 +712,6 @@ create_devices_page (MoblinPanel *self)
 	MoblinPanelPrivate *priv;
 	GtkWidget *page;
 	GtkWidget *frame_title;
-	GtkWidget *chooser;
 	GtkWidget *vbox, *hbox;
 	GtkWidget *frame;
 	GtkWidget *power_label;
@@ -709,17 +735,18 @@ create_devices_page (MoblinPanel *self)
 	set_frame_title (GTK_FRAME (frame), _("Devices"));
 
 	/* Device list */
-	chooser = g_object_new (BLUETOOTH_TYPE_CHOOSER,
+	priv->display = g_object_new (BLUETOOTH_TYPE_CHOOSER,
 			        "has-internal-device-filter", FALSE,
 				"show-device-category", FALSE,
 				"show-searching", FALSE,
 				"device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
 				NULL);
-	type_column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (chooser));
-	if (!priv->chooser_model)
-		priv->chooser_model = bluetooth_chooser_get_model (BLUETOOTH_CHOOSER (chooser));
+	type_column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (priv->display));
+	if (!priv->chooser_model) {
+		priv->chooser_model = bluetooth_chooser_get_model (BLUETOOTH_CHOOSER (priv->display));
+	}
 
-	tree_view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (chooser));
+	tree_view = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (priv->display));
 	g_object_set (tree_view, "enable-grid-lines", TRUE, "headers-visible", FALSE, NULL);
 
 	/* Add the browse button */
@@ -728,7 +755,7 @@ create_devices_page (MoblinPanel *self)
 
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						 browse_to_text, self, NULL);
-	g_signal_connect (cell, "activated", G_CALLBACK (browse_clicked), chooser);
+	g_signal_connect (cell, "activated", G_CALLBACK (browse_clicked), priv->display);
 
 	/* Add the connect button */
 	cell = mux_cell_renderer_text_new ();
@@ -742,10 +769,10 @@ create_devices_page (MoblinPanel *self)
 	gtk_tree_view_column_pack_end (type_column, cell, FALSE);
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
 						remove_to_icon, self, NULL);
-	g_signal_connect (cell, "activated", G_CALLBACK (remove_clicked_cb), chooser);
+	g_signal_connect (cell, "activated", G_CALLBACK (remove_clicked_cb), priv->display);
 
-	gtk_widget_show (chooser);
-	gtk_container_add (GTK_CONTAINER (frame), chooser);
+	gtk_widget_show (priv->display);
+	gtk_container_add (GTK_CONTAINER (frame), priv->display);
 	gtk_widget_show (frame);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 4);
 
@@ -810,10 +837,11 @@ create_devices_page (MoblinPanel *self)
 	/* Button for Send file */
 	priv->send_button = gtk_button_new_with_label (_("Send file from your computer"));
 	gtk_widget_show (priv->send_button);
+	gtk_widget_set_sensitive (priv->send_button, FALSE);
 	g_signal_connect (priv->send_button, "clicked",
-                    G_CALLBACK (send_file_button_clicked_cb), chooser);
-	g_signal_connect (chooser, "selected-device-changed",
-			G_CALLBACK (selected_device_changed_cb), priv->send_button);
+                    G_CALLBACK (send_file_button_clicked_cb), priv->display);
+	g_signal_connect (priv->display, "selected-device-changed",
+			G_CALLBACK (selected_device_changed_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
 
 	return page;
