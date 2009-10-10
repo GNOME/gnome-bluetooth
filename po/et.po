@@ -6,7 +6,7 @@
 # package.
 #
 # Mattias Põldaru <mahfiaz gmail com>, 2008-2009.
-# Priit Laes <plaes+gi18n@plaes.org>, 2008.
+# Priit Laes <plaes plaes org>, 2008-2009
 # Ivar Smolin <okul linux ee>, 2009.
 #
 msgid ""
@@ -14,9 +14,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth head\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-07-27 22:20+0000\n"
-"PO-Revision-Date: 2009-08-01 23:00+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2009-10-09 14:18+0000\n"
+"PO-Revision-Date: 2009-10-10 16:30+0300\n"
+"Last-Translator: Priit Laes <plaes@plaes.org>\n"
 "Language-Team: Gnome Estonian Translation Team <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,56 +73,27 @@ msgstr "Tundmatu"
 msgid "Click to select device..."
 msgstr "Klõpsa seadme valimiseks..."
 
-msgid "All categories"
-msgstr "Kõik kategooriad"
-
-msgid "Paired"
-msgstr "Paardunud"
-
-msgid "Trusted"
-msgstr "Usaldusväärne"
-
-msgid "Not paired or trusted"
-msgstr "Pole paardunud ega usaldusväärne"
-
-msgid "Paired or trusted"
-msgstr "Paardunud või usaldusväärne"
-
 msgid "No adapters available"
 msgstr "Adapter pole saadaval"
 
 msgid "Searching for devices..."
 msgstr "Seadmete otsimine..."
 
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Kas eemaldada '%s' tuntud seadmete loendist?"
+
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Kui sa eemaldad seadme, pead selle enne järgmist kasutamist uuesti "
+"häälestama."
+
 msgid "Device"
 msgstr "Seade"
 
 msgid "Type"
 msgstr "Liik"
-
-#. The filters
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Näidatakse ainult Bluetoothi seadmeid, millel..."
-
-#. The device category filter
-msgid "Device _category:"
-msgstr "Seadme _kategooria:"
-
-msgid "Select the device category to filter above list"
-msgstr "Ülal asuva loendi lühendamiseks vali seadmekategooria"
-
-#. The device type filter
-msgid "Device _type:"
-msgstr "Seadme _liik:"
-
-msgid "Select the device type to filter above list"
-msgstr "Ülal asuva loendi lühendamiseks vali seadme liik"
-
-msgid "Input devices (mice, keyboards, ...)"
-msgstr "Sisendseadmed (hiired, klaviatuurid, ...)"
-
-msgid "Headphones, headsets and other audio devices"
-msgstr "Kõrvaklapid, peakomplektid ja teised heliseadmed"
 
 msgid "Use this GPS device for Geolocation services"
 msgstr "Seda GPS seadet kasutatakse Geopositsioneerimise teenuse jaoks"
@@ -142,9 +113,6 @@ msgstr "_Sirvi"
 msgid "Select device to browse"
 msgstr "Vali seade, mida lehitseda"
 
-msgid "Bluetooth: Unknown"
-msgstr "Bluetooth: tundmatu"
-
 msgid "Turn On Bluetooth"
 msgstr "Lülita Bluetooth sisse"
 
@@ -156,6 +124,9 @@ msgstr "Lülita Bluetooth välja"
 
 msgid "Bluetooth: On"
 msgstr "Bluetooth: sees"
+
+msgid "Bluetooth: Disabled"
+msgstr "Bluetooth: keelatud"
 
 msgid "Disconnecting..."
 msgstr "Ühenduse katkestamine..."
@@ -207,9 +178,6 @@ msgstr "Bluetoothi rakend"
 
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: lubatud"
-
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: keelatud"
 
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
@@ -310,8 +278,8 @@ msgstr "GNOME töölaua Bluetoothi haldur"
 
 msgid "translator-credits"
 msgstr ""
-"Mattias Põldaru <mahfiaz@gmail.com>, 2008-2009.\n"
-"Priit Laes <plaes+gi18n@plaes.org, 2008.\n"
+"Mattias Põldaru <mahfiaz gmail com>, 2008-2009.\n"
+"Priit Laes <plaes plaes org, 2008, 2009.\n"
 "Ivar Smolin <okul linux ee>, 2009."
 
 msgid "GNOME Bluetooth home page"
@@ -328,16 +296,6 @@ msgstr "Väljasta praegu tuntud seadmete loend"
 
 msgid "Bluetooth Properties"
 msgstr "Bluetoothi sätted"
-
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Kas eemaldada '%s' tuntud seadmete loendist?"
-
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Kui sa eemaldad seadme, pead selle enne järgmist kasutamist uuesti "
-"häälestama."
 
 #. The discoverable checkbox
 msgid "Make computer _discoverable"
@@ -361,6 +319,10 @@ msgstr "Ühtegi Bluetoothi adapterit pole saadaval"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Sinu arvuti külge pole ühendatud ühtegi Bluetoothi adapterit."
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -446,8 +408,9 @@ msgstr "'1234'"
 msgid "Bluetooth New Device Setup"
 msgstr "Uue Bluetooth-seadme häälestus"
 
-msgid "Custom PIN code:"
-msgstr "Oma PIN-kood:"
+#| msgid "Custom PIN code:"
+msgid "Custom PIN:"
+msgstr "Kohandatud PIN-kood:"
 
 msgid "Device Setup"
 msgstr "Seadme häälestus"
@@ -458,18 +421,21 @@ msgstr "Seadme häälestamine nurjus"
 msgid "Device search"
 msgstr "Seadme otsing"
 
+#. This is a button to answer: Does the PIN matches the one on the device?
 msgid "Does not match"
 msgstr "Ei kattu"
 
 msgid "Finishing New Device Setup"
 msgstr "Uue seadme häälestuse lõpetamine"
 
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
 msgid "Fixed PIN"
 msgstr "Fikseeritud PIN-kood"
 
 msgid "Introduction"
 msgstr "Sissejuhatus"
 
+#. This is a button to answer: Does the PIN matches the one on the device?
 msgid "Matches"
 msgstr "Kattub"
 
@@ -540,6 +506,7 @@ msgstr[1] "ligikaudu %'d tundi"
 msgid "File Transfer"
 msgstr "Failiülekanne"
 
+#. translators: This is the heading for the progress dialogue
 msgid "Sending files via Bluetooth"
 msgstr "Failide saatmine üle Bluetoothi"
 
@@ -588,3 +555,101 @@ msgstr "Kasutatav kaugseade"
 
 msgid "Remote device's name"
 msgstr "Kaugseadme nimi"
+
+msgid "Run in standalone mode"
+msgstr ""
+
+#| msgid "Bluetooth Manager"
+msgid "Moblin Bluetooth Panel"
+msgstr "Moblin bluetoothi haldur"
+
+#| msgid "- Bluetooth applet"
+msgid "- Moblin Bluetooth Panel"
+msgstr "- Moblin Bluetooth rakend"
+
+#| msgid "Bluetooth"
+msgid "bluetooth"
+msgstr "Bluetooth"
+
+#, c-format
+#| msgid "Pairing with '%s' cancelled"
+msgid "Pairing with %s failed."
+msgstr "Paardumine seadmega '%s' nurjus."
+
+#| msgid "Paired"
+msgid "Pair"
+msgstr "Paardunud"
+
+#| msgid "_Browse"
+msgid "Browse"
+msgstr "Sirvi"
+
+#| msgid "Device Setup Failed"
+msgid "Device setup failed"
+msgstr "Seadme häälestamine nurjus"
+
+#. Back button
+#| msgid "Bluetooth device"
+msgid "Back to devices"
+msgstr "Tagasi seadmete juurde"
+
+#| msgid "Device Setup"
+msgid "Device setup"
+msgstr "Seadme häälestus"
+
+msgid "Only show:"
+msgstr "Näita ainult:"
+
+#. Button for PIN options file
+#| msgid "PIN Options"
+msgid "PIN options"
+msgstr "PIN-koodi sätted"
+
+#. Add new button
+#| msgid "Set up new device..."
+msgid "Add a new device"
+msgstr "Lisa uus seade"
+
+#. Button for Send file
+msgid "Send file from your computer"
+msgstr "Failide saatmine arvutist"
+
+#| msgid "Bluetooth Manager applet"
+msgid "Bluetooth Manager Panel"
+msgstr "Bluetoothi halduri paneel"
+
+#~ msgid "All categories"
+#~ msgstr "Kõik kategooriad"
+
+#~ msgid "Trusted"
+#~ msgstr "Usaldusväärne"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "Pole paardunud ega usaldusväärne"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "Paardunud või usaldusväärne"
+
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "Näidatakse ainult Bluetoothi seadmeid, millel..."
+
+#~ msgid "Device _category:"
+#~ msgstr "Seadme _kategooria:"
+
+#~ msgid "Select the device category to filter above list"
+#~ msgstr "Ülal asuva loendi lühendamiseks vali seadmekategooria"
+
+#~ msgid "Device _type:"
+#~ msgstr "Seadme _liik:"
+
+#~ msgid "Select the device type to filter above list"
+#~ msgstr "Ülal asuva loendi lühendamiseks vali seadme liik"
+
+#~ msgid "Input devices (mice, keyboards, ...)"
+#~ msgstr "Sisendseadmed (hiired, klaviatuurid, ...)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "Kõrvaklapid, peakomplektid ja teised heliseadmed"
+
+#~ msgid "Bluetooth: Unknown"
+#~ msgstr "Bluetooth: tundmatu"
