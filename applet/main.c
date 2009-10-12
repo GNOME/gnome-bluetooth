@@ -986,13 +986,8 @@ int main(int argc, char *argv[])
 	gtk_window_set_default_icon_name("bluetooth");
 
 	killswitch = bluetooth_killswitch_new ();
-	if (bluetooth_killswitch_has_killswitches (killswitch) == FALSE) {
-		g_object_unref (killswitch);
-		killswitch = NULL;
-	} else {
-		g_signal_connect (G_OBJECT (killswitch), "state-changed",
-				  G_CALLBACK (killswitch_state_changed), NULL);
-	}
+	g_signal_connect (G_OBJECT (killswitch), "state-changed",
+			  G_CALLBACK (killswitch_state_changed), NULL);
 
 	menu = create_popupmenu();
 
