@@ -62,6 +62,7 @@ struct _BluetoothIndKillswitch {
 struct _BluetoothKillswitchPrivate {
 	int fd;
 	GIOChannel *channel;
+	guint watch_id;
 	GList *killswitches; /* a GList of BluetoothIndKillswitch */
 	BluetoothKillswitchPrivate *priv;
 };
@@ -308,10 +309,10 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 	/* Setup monitoring */
 	priv->fd = fd;
 	priv->channel = g_io_channel_unix_new (priv->fd);
-	g_io_add_watch (priv->channel,
-			G_IO_IN | G_IO_HUP | G_IO_ERR,
-			(GIOFunc) event_cb,
-			killswitch);
+	priv->watch_id = g_io_add_watch (priv->channel,
+				G_IO_IN | G_IO_HUP | G_IO_ERR,
+				(GIOFunc) event_cb,
+				killswitch);
 
 	g_signal_emit (G_OBJECT (killswitch),
 		       signals[STATE_CHANGED],
@@ -322,6 +323,12 @@ static void
 bluetooth_killswitch_finalize (GObject *object)
 {
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (object);
+
+	/* cleanup monitoring */
+	g_source_remove(priv->watch_id);
+	g_io_channel_shutdown(priv->channel, FALSE, NULL);
+	g_io_channel_unref(priv->channel);
+	close(priv->fd);
 
 	g_list_foreach (priv->killswitches, (GFunc) g_free, NULL);
 	g_list_free (priv->killswitches);
