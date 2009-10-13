@@ -329,7 +329,7 @@ static GtkWidget *create_popupmenu(void)
 
 	gtk_builder_connect_signals (xml, NULL);
 
-	if (killswitch != NULL) {
+	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
 		GObject *object;
 
 		object = gtk_builder_get_object (xml, "killswitch-label");
@@ -387,7 +387,8 @@ update_icon_visibility (void)
 		set_icon (TRUE);
 
 	if (show_icon_pref != FALSE) {
-		if (num_adapters_present > 0 || killswitch != NULL) {
+		if (num_adapters_present > 0 ||
+		    bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
 			show_icon ();
 			return;
 		}
@@ -1003,7 +1004,7 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (device_changed), NULL);
 	/* Set the default */
 	device_changed (devices_model, NULL, NULL, NULL);
-	if (killswitch != NULL) {
+	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
 		killswitch_state_changed (killswitch,
 					  bluetooth_killswitch_get_state (killswitch));
 	}
