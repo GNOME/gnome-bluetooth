@@ -875,8 +875,6 @@ create_devices_page (MoblinPanel *self)
 	priv->power_switch = nbtk_gtk_light_switch_new ();
 	if (priv->killswitch != NULL) {
 		if (bluetooth_killswitch_has_killswitches (priv->killswitch) == FALSE) {
-			g_object_unref (priv->killswitch);
-			priv->killswitch = NULL;
 			gtk_widget_set_sensitive (priv->power_switch, FALSE);
 		} else {
 			switch_state = bluetooth_killswitch_get_state (priv->killswitch);
@@ -897,15 +895,14 @@ create_devices_page (MoblinPanel *self)
 					gtk_widget_set_sensitive (priv->power_switch, FALSE);
 				break;
 			}
-
-			g_signal_connect  (priv->killswitch, "state-changed",
-				G_CALLBACK (killswitch_state_changed_cb), self);
-			g_signal_connect (priv->power_switch, "switch-flipped",
-				G_CALLBACK (power_switch_toggled_cb), self);
 		}
 	} else {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
 	}
+	g_signal_connect  (priv->killswitch, "state-changed",
+			G_CALLBACK (killswitch_state_changed_cb), self);
+	g_signal_connect (priv->power_switch, "switch-flipped",
+			G_CALLBACK (power_switch_toggled_cb), self);
 	gtk_widget_show (priv->power_switch);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->power_switch, FALSE, FALSE, 4);
 
