@@ -325,9 +325,12 @@ bluetooth_killswitch_finalize (GObject *object)
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (object);
 
 	/* cleanup monitoring */
-	g_source_remove(priv->watch_id);
-	g_io_channel_shutdown(priv->channel, FALSE, NULL);
-	g_io_channel_unref(priv->channel);
+	if (priv->watch_id > 0) {
+		g_source_remove (priv->watch_id);
+		priv->watch_id = 0;
+		g_io_channel_shutdown (priv->channel, FALSE, NULL);
+		g_io_channel_unref (priv->channel);
+	}
 	close(priv->fd);
 
 	g_list_foreach (priv->killswitches, (GFunc) g_free, NULL);
