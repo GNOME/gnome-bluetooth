@@ -1,13 +1,13 @@
-# Indonesian translation for bluez-gnome
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
-# This file is distributed under the same license as the bluez-gnome package.
-# Andika Triwidada <andika@gmail.com>, 2007.
+# Indonesian translation for gnome bluetooth
+# Copyright (c)
+# This file is distributed under the same license as the gnome bluetooth package.
+# Andika Triwidada <andika@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-21 15:36+0300\n"
-"PO-Revision-Date: 2009-09-20 12:35+0700\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
+"POT-Creation-Date: 2009-10-13 11:28+0000\n"
+"PO-Revision-Date: 2009-10-13 20:34+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,141 +18,101 @@ msgstr ""
 "X-Poedit-Country: Indonesia\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../lib/bluetooth-client.c:109
+#: ../lib/bluetooth-client.c:115
 msgid "All types"
 msgstr "Semua tipe"
 
-#: ../lib/bluetooth-client.c:111
+#: ../lib/bluetooth-client.c:117
 msgid "Phone"
 msgstr "Telepon"
 
-#: ../lib/bluetooth-client.c:113
+#: ../lib/bluetooth-client.c:119
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-client.c:115
+#: ../lib/bluetooth-client.c:121
 msgid "Computer"
 msgstr "Komputer"
 
-#: ../lib/bluetooth-client.c:117
+#: ../lib/bluetooth-client.c:123
 msgid "Network"
 msgstr "Jaringan"
 
 # #-#-#-#-#  gnome-bluetooth.master.id.po (bluez-gnome)  #-#-#-#-#
 # speaker + mic
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:120
+#: ../lib/bluetooth-client.c:126
 msgid "Headset"
 msgstr "Headset"
 
 # speaker saja
-#: ../lib/bluetooth-client.c:122
+#: ../lib/bluetooth-client.c:128
 msgid "Headphones"
 msgstr "Headphone"
 
-#: ../lib/bluetooth-client.c:124
+#: ../lib/bluetooth-client.c:130
 msgid "Audio device"
 msgstr "Perangkat audio"
 
-#: ../lib/bluetooth-client.c:126
+#: ../lib/bluetooth-client.c:132
 msgid "Keyboard"
 msgstr "Papan ketik"
 
-#: ../lib/bluetooth-client.c:128
+#: ../lib/bluetooth-client.c:134
 msgid "Mouse"
 msgstr "Tetikus"
 
-#: ../lib/bluetooth-client.c:130
+#: ../lib/bluetooth-client.c:136
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../lib/bluetooth-client.c:132
+#: ../lib/bluetooth-client.c:138
 msgid "Printer"
 msgstr "Pencetak"
 
-#: ../lib/bluetooth-client.c:134
+#: ../lib/bluetooth-client.c:140
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../lib/bluetooth-client.c:136
+#: ../lib/bluetooth-client.c:142
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../lib/bluetooth-client.c:138 ../lib/bluetooth-chooser.c:105
-#: ../lib/bluetooth-chooser.c:139
+#: ../lib/bluetooth-client.c:144
+#: ../lib/bluetooth-chooser.c:121
 msgid "Unknown"
 msgstr "Tak dikenal"
 
-#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+#: ../lib/bluetooth-chooser-button.c:65
+#: ../lib/bluetooth-chooser-button.c:358
 msgid "Click to select device..."
 msgstr "Klik untuk memilih perangkat..."
 
-#: ../lib/bluetooth-chooser.c:95
-msgid "All categories"
-msgstr "Semua katagori"
-
-#: ../lib/bluetooth-chooser.c:97
-msgid "Paired"
-msgstr "Dipasangkan"
-
-#: ../lib/bluetooth-chooser.c:99
-msgid "Trusted"
-msgstr "Terpercaya"
-
-#: ../lib/bluetooth-chooser.c:101
-msgid "Not paired or trusted"
-msgstr "Tak dipasangkan atau dipercaya"
-
-#: ../lib/bluetooth-chooser.c:103
-msgid "Paired or trusted"
-msgstr "DIpasangkan atau dipercaya"
-
-#: ../lib/bluetooth-chooser.c:180
+#: ../lib/bluetooth-chooser.c:162
 msgid "No adapters available"
 msgstr "Tak tersedia adaptor"
 
-#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+#: ../lib/bluetooth-chooser.c:166
+#: ../lib/bluetooth-chooser.c:839
 msgid "Searching for devices..."
 msgstr "Mencari perangkat..."
 
-#: ../lib/bluetooth-chooser.c:683
+#: ../lib/bluetooth-chooser.c:351
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Hapus '%s' dari daftar perangkat?"
+
+#: ../lib/bluetooth-chooser.c:353
+msgid "If you remove the device, you will have to set it up again before next use."
+msgstr "Bila Anda menghapus perangkat, Anda harus menyiapkannya lagi sebelum dipakai lagi."
+
+#: ../lib/bluetooth-chooser.c:717
 msgid "Device"
 msgstr "Perangkat"
 
-#: ../lib/bluetooth-chooser.c:720
+#: ../lib/bluetooth-chooser.c:754
 msgid "Type"
 msgstr "Tipe"
-
-#. The filters
-#: ../lib/bluetooth-chooser.c:836
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Hanya Tampilkan Perangkat Bluetooth Dengan..."
-
-#. The device category filter
-#: ../lib/bluetooth-chooser.c:856
-msgid "Device _category:"
-msgstr "_Katagori perangkat:"
-
-#: ../lib/bluetooth-chooser.c:871
-msgid "Select the device category to filter above list"
-msgstr "Pilih kategori perangkat untuk menyaring daftar di atas"
-
-#. The device type filter
-#: ../lib/bluetooth-chooser.c:885
-msgid "Device _type:"
-msgstr "_Tipe perangkat:"
-
-#: ../lib/bluetooth-chooser.c:906
-msgid "Select the device type to filter above list"
-msgstr "Pilih tipe perangkat untuk menyaring daftar di atas"
-
-#: ../lib/bluetooth-chooser.c:912
-msgid "Input devices (mice, keyboards, ...)"
-msgstr "Perangkat masukan (mouse, papan ketik, ...)"
-
-#: ../lib/bluetooth-chooser.c:916
-msgid "Headphones, headsets and other audio devices"
-msgstr "Headphone, headset, dan perangkat audio lainnya"
 
 #: ../lib/plugins/geoclue.c:162
 msgid "Use this GPS device for Geolocation services"
@@ -177,7 +137,8 @@ msgstr "Ram_ban"
 msgid "Select device to browse"
 msgstr "Pilih perangkat untuk diramban"
 
-#: ../applet/main.c:278 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:278
+#: ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Nyalakan Bluetooth"
 
@@ -193,70 +154,77 @@ msgstr "Matikan Bluetooth"
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Nyala"
 
-#: ../applet/main.c:288 ../applet/notify.c:148
+#: ../applet/main.c:288
+#: ../applet/notify.c:148
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Dinon-aktifkan"
 
-#: ../applet/main.c:410
+#: ../applet/main.c:411
 msgid "Disconnecting..."
 msgstr "Memutus..."
 
-#: ../applet/main.c:413 ../sendto/main.c:213
+#: ../applet/main.c:414
+#: ../sendto/main.c:213
 msgid "Connecting..."
 msgstr "Menyambung..."
 
-#: ../applet/main.c:416 ../applet/main.c:756
+#: ../applet/main.c:417
+#: ../applet/main.c:758
 msgid "Connected"
 msgstr "Tersambung"
 
-#: ../applet/main.c:419 ../applet/main.c:756
+#: ../applet/main.c:420
+#: ../applet/main.c:758
 msgid "Disconnected"
 msgstr "Diputus"
 
-#: ../applet/main.c:774 ../applet/main.c:828 ../properties/adapter.c:442
+#: ../applet/main.c:776
+#: ../applet/main.c:830
+#: ../properties/adapter.c:390
 msgid "Disconnect"
 msgstr "Putus"
 
-#: ../applet/main.c:774 ../applet/main.c:828
+#: ../applet/main.c:776
+#: ../applet/main.c:830
+#: ../moblin/moblin-panel.c:529
 msgid "Connect"
 msgstr "Sambung"
 
-#: ../applet/main.c:787
+#: ../applet/main.c:789
 msgid "Send files..."
 msgstr "Kirim berkas..."
 
-#: ../applet/main.c:797
+#: ../applet/main.c:799
 msgid "Browse files..."
 msgstr "Ramban berkas..."
 
-#: ../applet/main.c:808
+#: ../applet/main.c:810
 msgid "Open Keyboard Preferences..."
 msgstr "Buka Preferensi Papan Ketik"
 
-#: ../applet/main.c:816
+#: ../applet/main.c:818
 msgid "Open Mouse Preferences..."
 msgstr "Buka Preferensi Tetikus"
 
-#: ../applet/main.c:942
+#: ../applet/main.c:944
 msgid "Debug"
 msgstr "Debug"
 
 #. Parse command-line options
-#: ../applet/main.c:962
+#: ../applet/main.c:964
 msgid "- Bluetooth applet"
 msgstr "- Applet Bluetooth"
 
-#: ../applet/main.c:967
+#: ../applet/main.c:969
 #, c-format
 msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Jalankan '%s·--help' untuk melihat daftar lengkap dari pilihan perintah "
-"baris yang tersedia.\n"
+"Jalankan '%s·--help' untuk melihat daftar lengkap dari pilihan perintah baris yang tersedia.\n"
 
-#: ../applet/main.c:983
+#: ../applet/main.c:985
 msgid "Bluetooth Applet"
 msgstr "Aplet Bluetooth"
 
@@ -264,7 +232,8 @@ msgstr "Aplet Bluetooth"
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: Diaktifkan"
 
-#: ../applet/agent.c:251 ../applet/agent.c:332
+#: ../applet/agent.c:251
+#: ../applet/agent.c:332
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "Perangkat '%s' ingin berpasangan dengan komputer ini"
@@ -292,17 +261,24 @@ msgstr "Perangkat %s ingin mengakses layanan '%s'."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#: ../applet/agent.c:496
+#: ../applet/agent.c:531
+#: ../applet/agent.c:573
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "Permintaan pasangan untuk '%s'"
 
-#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
-#: ../applet/agent.c:618 ../applet/agent.c:656
+#: ../applet/agent.c:500
+#: ../applet/agent.c:535
+#: ../applet/agent.c:577
+#: ../applet/agent.c:618
+#: ../applet/agent.c:656
 msgid "Bluetooth device"
 msgstr "Perangkat Bluetooth"
 
-#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+#: ../applet/agent.c:501
+#: ../applet/agent.c:536
+#: ../applet/agent.c:578
 msgid "Enter PIN"
 msgstr "Masukkan PIN"
 
@@ -342,7 +318,10 @@ msgstr "Bluetooth: Memeriksa"
 msgid "Browse files on device..."
 msgstr "Ramban berkas pada perangkat..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:401
+#: ../applet/popup-menu.ui.h:3
+#: ../properties/adapter.c:349
+#: ../moblin/moblin-panel.c:712
+#: ../moblin/moblin-panel.c:801
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -417,40 +396,28 @@ msgstr "Keluarkan daftar dari perangkat yang kini dikenal"
 msgid "Bluetooth Properties"
 msgstr "Properti Bluetooth"
 
-#: ../properties/adapter.c:179
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Hapus '%s' dari daftar perangkat?"
-
-#: ../properties/adapter.c:181
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Bila Anda menghapus perangkat, Anda harus menyiapkannya lagi sebelum dipakai "
-"lagi."
-
 #. The discoverable checkbox
-#: ../properties/adapter.c:348
+#: ../properties/adapter.c:296
 msgid "Make computer _discoverable"
 msgstr "Buat komputer dapat-_dicari"
 
-#: ../properties/adapter.c:371
+#: ../properties/adapter.c:319
 msgid "Friendly name"
 msgstr "Nama akrab"
 
-#: ../properties/adapter.c:433
+#: ../properties/adapter.c:381
 msgid "Set up _new device..."
 msgstr "Siapkan pera_ngkat baru..."
 
-#: ../properties/adapter.c:456
+#: ../properties/adapter.c:404
 msgid "_Remove"
 msgstr "_Hapus"
 
-#: ../properties/adapter.c:731
+#: ../properties/adapter.c:679
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth dinon-aktifkan"
 
-#: ../properties/adapter.c:767
+#: ../properties/adapter.c:715
 msgid "No Bluetooth adapters present"
 msgstr "Tak ada adapter Bluetooth"
 
@@ -458,7 +425,12 @@ msgstr "Tak ada adapter Bluetooth"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Tak ada adapter Bluetooth ditancapkan ke komputer Anda."
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:871
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -487,7 +459,8 @@ msgstr "Seluruh kesalahan selanjutnya hanya ditampilkan pada terminal."
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:206 ../wizard/main.c:327
+#: ../wizard/main.c:206
+#: ../wizard/main.c:327
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Pemasangan dengan '%s' dibatalkan"
@@ -520,12 +493,13 @@ msgid "Connecting to '%s'..."
 msgstr "Menyambung ke '%s'..."
 
 #: ../wizard/main.c:550
+#: ../moblin/moblin-panel.c:462
 #, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Masukkan PIN berikut pada '%s' dan tekan \"Enter\" pada papak ketik:"
 
 #: ../wizard/main.c:552
+#: ../moblin/moblin-panel.c:464
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Masukkan PIN berikut pada '%s':"
@@ -561,8 +535,8 @@ msgid "Bluetooth New Device Setup"
 msgstr "Penyiapan Perangkat Baru Bluetooth"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Custom PIN code:"
-msgstr "Kode PIN gubahan:"
+msgid "Custom PIN:"
+msgstr "PIN gubahan:"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Device Setup"
@@ -620,22 +594,12 @@ msgid "Setup Completed"
 msgstr "Pernyiapan Komplit"
 
 #: ../wizard/wizard.ui.h:22
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"Penyiapan perangkat Bluetooth baru akan memandu Anda melalui proses mengatur "
-"perangkat yang mempunyai Bluetooth untuk dipakai di komputer ini."
+msgid "The Bluetooth new device setup will walk you through the process of configuring Bluetooth enabled devices for use with this computer."
+msgstr "Penyiapan perangkat Bluetooth baru akan memandu Anda melalui proses mengatur perangkat yang mempunyai Bluetooth untuk dipakai di komputer ini."
 
 #: ../wizard/wizard.ui.h:23
-msgid ""
-"The device will need to be within 10 meters of your computer, and be &#8220;"
-"discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
-"device's manual if in doubt."
-msgstr ""
-"Perangkat perlu berada sekitar 10 meter dari komputer anda, &#8220;dapat-"
-"dicari/discoverable&#8221; (kadang disebut &#8220;nampak/visible&#8221;). "
-"Periksa manual perangkat bila ragu."
+msgid "The device will need to be within 10 meters of your computer, and be &#8220;discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the device's manual if in doubt."
+msgstr "Perangkat perlu berada sekitar 10 meter dari komputer anda, &#8220;dapat-dicari/discoverable&#8221; (kadang disebut &#8220;nampak/visible&#8221;). Periksa manual perangkat bila ragu."
 
 #: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
@@ -655,7 +619,8 @@ msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d detik"
 
-#: ../sendto/main.c:103 ../sendto/main.c:116
+#: ../sendto/main.c:103
+#: ../sendto/main.c:116
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -695,18 +660,16 @@ msgid "An unknown error occurred"
 msgstr "Galat tak dikenal terjadi"
 
 #: ../sendto/main.c:253
-msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr ""
-"Pastikan bahwa perangkat sudah dinyalakan dan menerima sambungan Bluetooth"
+msgid "Make sure that remote device is switched on and that it accepts Bluetooth connections"
+msgstr "Pastikan bahwa perangkat sudah dinyalakan dan menerima sambungan Bluetooth"
 
 #: ../sendto/main.c:337
 #, c-format
 msgid "Sending %s"
 msgstr "Mengirim %s"
 
-#: ../sendto/main.c:344 ../sendto/main.c:406
+#: ../sendto/main.c:344
+#: ../sendto/main.c:406
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Mengirim berkas %d dari %d"
@@ -740,3 +703,72 @@ msgstr "Perangkat remote yang dipakai"
 #: ../sendto/main.c:574
 msgid "Remote device's name"
 msgstr "Hapus entri perangkat dari layanan?"
+
+#: ../moblin/main.c:66
+msgid "Run in standalone mode"
+msgstr "Jalankan pada mode mandiri"
+
+#: ../moblin/main.c:74
+#: ../moblin/bluetooth-panel.desktop.in.in.h:2
+msgid "Moblin Bluetooth Panel"
+msgstr "Panel Bluetooth Moblin"
+
+#: ../moblin/main.c:75
+msgid "- Moblin Bluetooth Panel"
+msgstr "- Panel Bluetooth Moblin"
+
+#: ../moblin/main.c:100
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#: ../moblin/moblin-panel.c:338
+#, c-format
+msgid "Pairing with %s failed."
+msgstr "Berpasangan dengan '%s' gagal."
+
+#: ../moblin/moblin-panel.c:515
+msgid "Pair"
+msgstr "Pasangan"
+
+#: ../moblin/moblin-panel.c:544
+msgid "Browse"
+msgstr "Ramban"
+
+#: ../moblin/moblin-panel.c:627
+msgid "Device setup failed"
+msgstr "Penyiapan perangkat gagal"
+
+#. Back button
+#: ../moblin/moblin-panel.c:639
+#: ../moblin/moblin-panel.c:676
+#: ../moblin/moblin-panel.c:739
+msgid "Back to devices"
+msgstr "Kembali ke perangkat"
+
+#: ../moblin/moblin-panel.c:660
+msgid "Device setup"
+msgstr "Penyiapan perangkat"
+
+#: ../moblin/moblin-panel.c:760
+msgid "Only show:"
+msgstr "Hanya tampilkan:"
+
+#. Button for PIN options file
+#: ../moblin/moblin-panel.c:766
+msgid "PIN options"
+msgstr "Opsi PIN"
+
+#. Add new button
+#: ../moblin/moblin-panel.c:849
+msgid "Add a new device"
+msgstr "Tambahkan sebuah perangkat baru"
+
+#. Button for Send file
+#: ../moblin/moblin-panel.c:913
+msgid "Send file from your computer"
+msgstr "Kirim berkas dari komputer Anda"
+
+#: ../moblin/bluetooth-panel.desktop.in.in.h:1
+msgid "Bluetooth Manager Panel"
+msgstr "Panel Manajer Bluetooth"
+
