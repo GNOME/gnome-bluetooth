@@ -139,12 +139,12 @@ static void create_selected_device (MoblinPanel *self);
 
 static void
 power_switch_toggled_cb (NbtkGtkLightSwitch *light_switch,
+			 gboolean 	     state,
                          gpointer            user_data)
 {
-	g_assert (MOBLIN_IS_PANEL (user_data));
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE(user_data);
 
-	if (nbtk_gtk_light_switch_get_active (NBTK_GTK_LIGHT_SWITCH (priv->power_switch))) {
+	if (state == TRUE) {
 		bluetooth_killswitch_set_state (priv->killswitch, KILLSWITCH_STATE_UNBLOCKED);
 	} else {
 		bluetooth_killswitch_set_state (priv->killswitch, KILLSWITCH_STATE_SOFT_BLOCKED);
