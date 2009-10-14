@@ -1366,6 +1366,8 @@ create_devices_page (MoblinPanel *self)
 			G_CALLBACK (selected_device_changed_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
 
+	enable_send_file (self);
+
 	return page;
 }
 
