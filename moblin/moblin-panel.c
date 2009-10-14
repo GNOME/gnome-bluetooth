@@ -838,6 +838,7 @@ browse_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 				found = TRUE;
 				break;
 			}
+		g_strfreev (uuids);
 	}
 
 	if (found == FALSE)
