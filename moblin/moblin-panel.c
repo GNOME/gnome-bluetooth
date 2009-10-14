@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <math.h>
-
+#include <gdk/gdkkeysyms.h>
 #include <nbtk/nbtk-gtk.h>
 
 #include "bluetooth-client.h"
@@ -67,10 +67,20 @@ struct _MoblinPanelPrivate
 	GtkWidget *display;
 	GtkWidget *send_button;
 	GtkWidget *add_new_button;
+	/* Widgets for use in lazy-loading the pin options dialog from the GtkBuilder UI file */
 	GtkTreeModel *chooser_model;
 
+	/* Widgets for use in lazy-loading the pin options dialog from the GtkBuilder UI file */
+	GtkWidget *pin_dialog;
+	GtkWidget *entry_custom;
+	GtkWidget *radio_auto;
+	GtkWidget *radio_0000;
+	GtkWidget *radio_1111;
+	GtkWidget *radio_1234;
+	GtkWidget *radio_custom;
 	gchar *pincode;
 
+	gchar *user_pincode;
 	gboolean connecting;
 };
 
@@ -235,11 +245,158 @@ send_file_button_clicked_cb (GtkButton *button,
 	g_ptr_array_free (a, TRUE);
 }
 
+static gboolean
+entry_custom_event (GtkWidget *entry, GdkEventKey *event)
+{
+	if (event->length == 0)
+		return FALSE;
+
+	if ((event->keyval >= GDK_0 && event->keyval <= GDK_9) ||
+	    (event->keyval >= GDK_KP_0 && event->keyval <= GDK_KP_9))
+		return FALSE;
+
+	return TRUE;
+}
+
+static void
+entry_custom_changed (GtkWidget *entry, gpointer user_data)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	priv->user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->pin_dialog),
+					   GTK_RESPONSE_ACCEPT,
+					   gtk_entry_get_text_length (GTK_ENTRY (entry)) >= 1);
+}
+
+static void
+toggle_set_sensitive (GtkWidget *button, gpointer user_data)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	gboolean active;
+
+	active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button));
+	gtk_widget_set_sensitive(priv->entry_custom, active);
+	/* When selecting another PIN, make sure the "Close" button is sensitive */
+	if (!active)
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->pin_dialog),
+						   GTK_RESPONSE_ACCEPT, TRUE);
+}
+
+static void
+set_user_pincode (GtkWidget *button, gpointer user_data)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
+	GSList *list, *l;
+
+	list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (button));
+	for (l = list; l ; l = l->next) {
+		GtkEntry *entry;
+		GtkWidget *radio;
+		const char *pin;
+
+		if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
+			continue;
+
+		/* Is it radio_fixed that changed? */
+		radio = g_object_get_data (G_OBJECT (button), "button");
+		if (radio != NULL) {
+			set_user_pincode (radio, user_data);
+			return;
+		}
+
+		pin = g_object_get_data (G_OBJECT (button), "pin");
+		entry = g_object_get_data (G_OBJECT (button), "entry");
+
+		if (entry != NULL) {
+			g_free (priv->user_pincode);
+			priv->user_pincode = g_strdup (gtk_entry_get_text(entry));
+			gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->pin_dialog),
+							   GTK_RESPONSE_ACCEPT,
+							   gtk_entry_get_text_length (entry) >= 1);
+		} else if (pin != NULL) {
+			g_free (priv->user_pincode);
+			if (*pin == '\0')
+				priv->user_pincode = NULL;
+			else
+				priv->user_pincode = g_strdup (pin);
+		}
+
+		break;
+	}
+}
+
 static void
 pin_options_button_clicked_cb (GtkButton *button,
                              gpointer   user_data)
 {
-	g_debug ("PIN options clicked.");
+	MoblinPanel *self = MOBLIN_PANEL (user_data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	GtkWidget *radio;
+	gchar *oldpin;
+	GtkBuilder *builder;
+	GError *err = NULL;
+
+	if (priv->pin_dialog == NULL) {
+		builder = gtk_builder_new ();
+		if (gtk_builder_add_from_file (builder, "pin.ui", NULL) == 0) {
+			if (gtk_builder_add_from_file (builder, PKGDATADIR "/pin.ui", &err) == 0) {
+				g_warning ("Could not load PIN dialog UI form %s: %s",
+					PKGDATADIR "/pin.ui", err->message);
+				g_error_free (err);
+			}
+		}
+
+		priv->pin_dialog = GTK_WIDGET (gtk_builder_get_object (builder, "pin_dialog"));
+		priv->radio_auto  = GTK_WIDGET (gtk_builder_get_object (builder, "radio_auto"));
+		g_signal_connect (priv->radio_auto, "toggled", G_CALLBACK (set_user_pincode), self);
+		priv->radio_0000 = GTK_WIDGET (gtk_builder_get_object (builder, "radio_0000"));
+		g_signal_connect (priv->radio_0000, "toggled", G_CALLBACK (set_user_pincode), self);
+		priv->radio_1111 = GTK_WIDGET (gtk_builder_get_object (builder, "radio_1111"));
+		g_signal_connect (priv->radio_1111, "toggled", G_CALLBACK (set_user_pincode), self);
+		priv->radio_1234 = GTK_WIDGET (gtk_builder_get_object (builder, "radio_1234"));
+		g_signal_connect (priv->radio_1234, "toggled", G_CALLBACK (set_user_pincode), self);
+		priv->radio_custom = GTK_WIDGET (gtk_builder_get_object (builder, "radio_custom"));
+		g_signal_connect (priv->radio_custom, "toggled", G_CALLBACK (set_user_pincode), self);
+		g_signal_connect (priv->radio_custom, "toggled", G_CALLBACK (toggle_set_sensitive), self);
+		priv->entry_custom = GTK_WIDGET (gtk_builder_get_object (builder, "entry_custom"));
+		g_signal_connect (priv->entry_custom, "key-press-event", G_CALLBACK (entry_custom_event), self);
+		g_signal_connect (priv->entry_custom, "changed", G_CALLBACK (entry_custom_changed), self);
+
+		g_object_set_data (G_OBJECT (priv->radio_auto), "pin", "");
+		g_object_set_data (G_OBJECT (priv->radio_0000), "pin", "0000");
+		g_object_set_data (G_OBJECT (priv->radio_1111), "pin", "1111");
+		g_object_set_data (G_OBJECT (priv->radio_1234), "pin", "1234");
+		g_object_set_data (G_OBJECT (priv->radio_custom), "entry", priv->entry_custom);
+	}
+
+	oldpin = priv->user_pincode;
+	priv->user_pincode = NULL;
+
+	gtk_window_present (GTK_WINDOW (priv->pin_dialog));
+
+	if (oldpin == NULL)
+		radio = priv->radio_auto;
+	else if (g_str_equal (oldpin, "0000"))
+		radio = priv->radio_0000;
+	else if (g_str_equal (oldpin, "1111"))
+		radio = priv->radio_1111;
+	else if (g_str_equal (oldpin, "1234"))
+		radio = priv->radio_1234;
+	else
+		radio = priv->radio_custom;
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+	if (radio == priv->radio_custom)
+		gtk_entry_set_text (GTK_ENTRY (priv->entry_custom), oldpin);
+
+	if (gtk_dialog_run (GTK_DIALOG (priv->pin_dialog)) != GTK_RESPONSE_ACCEPT) {
+		g_free (priv->user_pincode);
+		priv->user_pincode = oldpin;
+	} else {
+		g_free (oldpin);
+	}
+
+	gtk_widget_hide (priv->pin_dialog);
 }
 
 /*

@@ -19,10 +19,13 @@ autostart_in_files = bluetooth-panel.desktop.in
 
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
+ui_DATA = pin.ui
+uidir = $(pkgdatadir)
+
 @INTLTOOL_DESKTOP_RULE@
 
 CLEANFILES = $(autostart_DATA)
 
-EXTRA_DIST = $(autostart_in_in_files)
+EXTRA_DIST = $(autostart_in_in_files) $(ui_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
