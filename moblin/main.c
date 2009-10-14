@@ -18,6 +18,8 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
+ *  Written by: Joshua Lock <josh@linux.intel.com>
+ *
  */
 
 #ifdef HAVE_CONFIG_H
@@ -80,6 +82,8 @@ main (int argc, char *argv[])
 		g_error_free (error);
 		return 1;
 	}
+
+	gtk_window_set_default_icon_name ("bluetooth");
 
 	/* Force to correct theme */
 	settings = gtk_settings_get_default ();
