@@ -1431,7 +1431,7 @@ pincode_callback (DBusGMethodInvocation *context,
 	if (priv->automatic_pincode == FALSE)
 		set_current_page (self, PAGE_SETUP);
 
-	dbus_g_method_return (context, priv->target_pincode);
+	dbus_g_method_return (context, priv->pincode);
 
 	return TRUE;
 }
