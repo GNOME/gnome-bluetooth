@@ -827,7 +827,7 @@ browse_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 {
 	gboolean found = FALSE;
 	guint i;
-	const char **uuids = NULL;
+	char **uuids = NULL;
 
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_UUIDS, &uuids, -1);
 
