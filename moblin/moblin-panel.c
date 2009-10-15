@@ -883,27 +883,29 @@ static void
 have_connecting_device (MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	GHashTable *states;
+	GHashTable *states = NULL;
 	GtkTreeIter iter;
 	BluetoothStatus status = BLUETOOTH_STATUS_INVALID;
 	gboolean connecting = FALSE;
 
-	gtk_tree_model_get_iter_first (priv->chooser_model, &iter);
-	gtk_tree_model_get(priv->chooser_model, &iter, BLUETOOTH_COLUMN_SERVICES, &states, -1);
+	if (gtk_tree_model_get_iter_first (priv->chooser_model, &iter) == TRUE)
+	{
+		gtk_tree_model_get(priv->chooser_model, &iter, BLUETOOTH_COLUMN_SERVICES, &states, -1);
 
-	if (states) {
-		g_hash_table_foreach (states, (GHFunc) determine_connecting, &status);
+		if (states) {
+			g_hash_table_foreach (states, (GHFunc) determine_connecting, &status);
 
-		g_hash_table_unref (states);
-	}
+			g_hash_table_unref (states);
+		}
 
-	if (status == BLUETOOTH_STATUS_CONNECTING)
-		connecting = TRUE;
+		if (status == BLUETOOTH_STATUS_CONNECTING)
+			connecting = TRUE;
 
-	if (connecting != priv->connecting) {
-		priv->connecting = connecting;
-		g_signal_emit (self, _signals[STATUS_CONNECTING], 0,
-			priv->connecting);
+		if (connecting != priv->connecting) {
+			priv->connecting = connecting;
+			g_signal_emit (self, _signals[STATUS_CONNECTING], 0,
+				priv->connecting);
+		}
 	}
 }
 
