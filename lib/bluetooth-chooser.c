@@ -341,12 +341,13 @@ bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 }
 
 static gboolean
-show_confirm_dialog(const char *name)
+show_confirm_dialog (BluetoothChooser *chooser, const char *name)
 {
-	GtkWidget *dialog;
+	GtkWidget *dialog, *parent;
 	gint response;
 
-	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+	parent = gtk_widget_get_toplevel (GTK_WIDGET (chooser));
+	dialog = gtk_message_dialog_new (GTK_WINDOW (parent), GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
 					 _("Remove '%s' from the list of devices?"), name);
 	g_object_set (G_OBJECT (dialog), "secondary-text",
@@ -391,7 +392,7 @@ bluetooth_chooser_remove_selected_device (BluetoothChooser *self)
 
 	adapter = bluetooth_client_get_default_adapter(priv->client);
 
-	if (show_confirm_dialog (name) != FALSE) {
+	if (show_confirm_dialog (self, name) != FALSE) {
 		const gchar *device_path;
 
 		device_path = dbus_g_proxy_get_path (device);
