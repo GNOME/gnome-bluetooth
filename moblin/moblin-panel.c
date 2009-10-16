@@ -649,6 +649,19 @@ set_current_page (MoblinPanel *self, MoblinPages page)
 		gtk_widget_hide (priv->does_not_match_button);
 	}
 
+	if (page == PAGE_DEVICES) {
+		/* Clean up old state */
+		update_random_pincode (self);
+		priv->target_ssp = FALSE;
+		priv->target_type = BLUETOOTH_TYPE_ANY;
+		priv->display_called = FALSE;
+		g_free (priv->target_address);
+		priv->target_address = NULL;
+		g_free (priv->target_name);
+		priv->target_name = NULL;
+		g_object_set (priv->chooser, "device-type-filter", BLUETOOTH_TYPE_ANY, NULL);
+	}
+
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), page);
 }
 
@@ -856,18 +869,6 @@ set_scanning_view (GtkButton *button, MoblinPanel *self)
 static void
 set_device_view (GtkButton *button, MoblinPanel *self)
 {
-	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-
-	/* Clean up old state */
-	update_random_pincode (self);
-	priv->target_ssp = FALSE;
-	priv->target_type = BLUETOOTH_TYPE_ANY;
-	priv->display_called = FALSE;
-	g_free (priv->target_address);
-	priv->target_address = NULL;
-	g_free (priv->target_name);
-	priv->target_name = NULL;
-
 	set_current_page (self, PAGE_DEVICES);
 }
 
@@ -1448,8 +1449,6 @@ update_random_pincode (MoblinPanel *self)
 	priv->target_pincode = g_strdup_printf ("%d", g_random_int_range (pow (10, PIN_NUM_DIGITS - 1),
 						pow (10, PIN_NUM_DIGITS) - 1));
 	priv->automatic_pincode = FALSE;
-	g_free (priv->user_pincode);
-	priv->user_pincode = NULL;
 }
 
 static void
