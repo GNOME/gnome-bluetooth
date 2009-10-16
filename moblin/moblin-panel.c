@@ -1483,10 +1483,11 @@ moblin_panel_init (MoblinPanel *self)
 	bluetooth_plugin_manager_init ();
 
 	gtk_box_set_homogeneous (GTK_BOX (self), FALSE);
-	gtk_box_set_spacing (GTK_BOX (self), 4);
+	gtk_box_set_spacing (GTK_BOX (self), 0);
 
 	priv->notebook = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
+	gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->notebook), FALSE);
 
 	devices_page = create_devices_page (self);
 	gtk_widget_show (devices_page);
@@ -1514,7 +1515,7 @@ moblin_panel_init (MoblinPanel *self)
 
 	set_current_page (self, PAGE_DEVICES);
 	gtk_widget_show (priv->notebook);
-	gtk_container_add (GTK_CONTAINER (self), priv->notebook);
+	gtk_box_pack_start (GTK_BOX (self), priv->notebook, TRUE, TRUE, 0);
 }
 
 static void
