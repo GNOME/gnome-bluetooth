@@ -397,6 +397,8 @@ pin_options_button_clicked_cb (GtkButton *button,
 		g_object_set_data (G_OBJECT (priv->radio_1111), "pin", "1111");
 		g_object_set_data (G_OBJECT (priv->radio_1234), "pin", "1234");
 		g_object_set_data (G_OBJECT (priv->radio_custom), "entry", priv->entry_custom);
+
+		gtk_dialog_add_button (GTK_DIALOG (priv->pin_dialog), GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
 	}
 
 	oldpin = priv->user_pincode;
