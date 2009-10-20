@@ -71,6 +71,8 @@ GType moblin_panel_get_type (void);
 
 GtkWidget *moblin_panel_new (void);
 
+void moblin_panel_reset_view (MoblinPanel *self);
+
 G_END_DECLS
 
 #endif /* _MOBLIN_PANEL_H */

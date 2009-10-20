@@ -1560,3 +1560,15 @@ moblin_panel_new (void)
 {
 	return g_object_new (MOBLIN_TYPE_PANEL, NULL);
 }
+
+/**
+ *
+ * moblin_panel_reset_view:
+ *
+ * @self: A #MoblinPanel widget
+ **/
+void
+moblin_panel_reset_view (MoblinPanel *self)
+{
+	set_current_page (self, PAGE_DEVICES);
+}

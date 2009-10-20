@@ -54,6 +54,18 @@ bluetooth_status_changed (MoblinPanel *panel, gboolean connecting, gpointer user
 	g_free (style);
 }
 
+/*
+ * When the panel is hidden we should re-set the MoblinPanel to its default state.
+ * i.e. stop any discovery and show the defaults devices view
+ */
+static void
+_reset_view_cb (MplPanelClient *client, gpointer user_data)
+{
+	MoblinPanel *panel = MOBLIN_PANEL (user_data);
+
+	moblin_panel_reset_view (panel);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -107,6 +119,7 @@ main (int argc, char *argv[])
 		window  = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
 
 		content = moblin_panel_new ();
+		g_signal_connect (panel, "hide-end", (GCallback) _reset_view_cb, content);
 		g_signal_connect (content, "state-changed",
 				G_CALLBACK (bluetooth_status_changed), panel);
 		gtk_widget_show (content);
