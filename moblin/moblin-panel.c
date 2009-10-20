@@ -1458,13 +1458,18 @@ moblin_panel_init (MoblinPanel *self)
 	GtkWidget *devices_page, *add_page, *setup_page, *ssp_setup_page, *failure_page, *connecting_page;
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	priv->connecting = FALSE;
-	priv->target_pincode = NULL;
-	priv->target_name = NULL;
-	priv->target_ssp = FALSE;
-	priv->automatic_pincode = FALSE;
 	priv->pin_dialog = NULL;
+	priv->target_address = NULL;
+	priv->target_name = NULL;
+	priv->target_pincode = NULL;
+	priv->target_type = BLUETOOTH_TYPE_ANY;
+	priv->target_ssp = FALSE;
+	priv->create_started = FALSE;
 	priv->display_called = FALSE;
+	priv->user_pincode = NULL;
+	priv->automatic_pincode = FALSE;
+	priv->pincode = NULL;
+	priv->connecting = FALSE;
 
 	update_random_pincode (self);
 
