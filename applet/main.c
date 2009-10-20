@@ -290,6 +290,13 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 		g_assert_not_reached ();
 	}
 
+	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
+		GObject *object;
+
+		object = gtk_builder_get_object (xml, "killswitch-label");
+		gtk_action_set_visible (GTK_ACTION (object), TRUE);
+	}
+
 	object = gtk_builder_get_object (xml, "killswitch-label");
 	gtk_action_set_label (GTK_ACTION (object), _(status_label));
 
