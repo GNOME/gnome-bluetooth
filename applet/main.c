@@ -274,6 +274,12 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 	gboolean bstate = FALSE;
 	const char *label, *status_label;
 
+	if (state == KILLSWITCH_STATE_NO_ADAPTER) {
+		object = gtk_builder_get_object (xml, "bluetooth-applet-popup");
+		gtk_menu_popdown (GTK_MENU (object));
+		return;
+	}
+
 	if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
 		label = N_("Turn On Bluetooth");
 		status_label = N_("Bluetooth: Off");
@@ -290,15 +296,9 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 		g_assert_not_reached ();
 	}
 
-	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
-		GObject *object;
-
-		object = gtk_builder_get_object (xml, "killswitch-label");
-		gtk_action_set_visible (GTK_ACTION (object), TRUE);
-	}
-
 	object = gtk_builder_get_object (xml, "killswitch-label");
 	gtk_action_set_label (GTK_ACTION (object), _(status_label));
+	gtk_action_set_visible (GTK_ACTION (object), TRUE);
 
 	object = gtk_builder_get_object (xml, "killswitch");
 	gtk_action_set_visible (GTK_ACTION (object), sensitive);
@@ -342,6 +342,7 @@ static GtkWidget *create_popupmenu(void)
 		object = gtk_builder_get_object (xml, "killswitch-label");
 		gtk_action_set_visible (GTK_ACTION (object), TRUE);
 	}
+
 	if (option_debug != FALSE) {
 		GObject *object;
 
