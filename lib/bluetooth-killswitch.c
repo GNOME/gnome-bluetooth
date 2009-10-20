@@ -146,6 +146,9 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 
 	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 
+	if (priv->killswitches == NULL)
+		return KILLSWITCH_STATE_NO_ADAPTER;
+
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
 
@@ -192,6 +195,9 @@ remove_killswitch (BluetoothKillswitch *killswitch,
 		if (ind->index == index) {
 			priv->killswitches = g_list_remove (priv->killswitches, ind);
 			g_message ("removing killswitch idx %d", index);
+			g_signal_emit (G_OBJECT (killswitch),
+				       signals[STATE_CHANGED],
+				       0, bluetooth_killswitch_get_state (killswitch));
 			return;
 		}
 	}
