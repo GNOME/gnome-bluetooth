@@ -42,11 +42,31 @@ mux_cell_renderer_text_activate (GtkCellRenderer     *cell,
 }
 
 static void
+mux_cell_renderer_text_render (GtkCellRenderer     *cell,
+			       GdkDrawable         *window,
+			       GtkWidget           *widget,
+			       GdkRectangle        *bg_area,
+			       GdkRectangle        *cell_area,
+			       GdkRectangle        *expose_area,
+			       GtkCellRendererState flags)
+{
+  GTK_CELL_RENDERER_CLASS (mux_cell_renderer_text_parent_class)->render (cell,
+                                                                         window,
+                                                                         widget,
+                                                                         bg_area,
+                                                                         cell_area,
+                                                                         expose_area,
+                                                                         GTK_CELL_RENDERER_SELECTED);
+}
+
+
+static void
 mux_cell_renderer_text_class_init (MuxCellRendererTextClass *klass)
 {
   GtkCellRendererClass *cell_class = GTK_CELL_RENDERER_CLASS (klass);
 
   cell_class->activate = mux_cell_renderer_text_activate;
+  cell_class->render = mux_cell_renderer_text_render;
 
   signals[ACTIVATED] =
     g_signal_new ("activated",

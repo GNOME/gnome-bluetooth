@@ -816,7 +816,7 @@ pair_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
 
 	if (!paired && !trusted) {
-		g_object_set (cell, "markup", _("Pair"), NULL);
+		g_object_set (cell, "markup", _("<u>Pair</u>"), NULL);
 	}
 }
 
@@ -830,7 +830,7 @@ connect_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
 
 	if ((paired || trusted) && connected == FALSE) {
-		g_object_set (cell, "markup", _("Connect"), NULL);
+		g_object_set (cell, "markup", _("<u>Connect</u>"), NULL);
 	} else {
 		g_object_set (cell, "markup", "", NULL);
 	}
@@ -849,7 +849,7 @@ browse_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	if (uuids != NULL) {
 		for (i = 0; uuids[i] != NULL; i++)
 			if (g_str_equal (uuids[i], "OBEXFileTransfer")) {
-				g_object_set (cell, "markup", _("Browse"), NULL);
+				g_object_set (cell, "markup", _("<u>Browse</u>"), NULL);
 				found = TRUE;
 				break;
 			}
