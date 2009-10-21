@@ -201,7 +201,7 @@ killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 		enable_send_file (self);
-	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED) {
+	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED || state == KILLSWITCH_STATE_NO_ADAPTER) {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		gtk_widget_set_sensitive (priv->send_button, FALSE);
@@ -1343,6 +1343,7 @@ create_devices_page (MoblinPanel *self)
 	if (priv->killswitch != NULL) {
 		if (bluetooth_killswitch_has_killswitches (priv->killswitch) == FALSE) {
 			gtk_widget_set_sensitive (priv->power_switch, FALSE);
+			gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		} else {
 			switch_state = bluetooth_killswitch_get_state (priv->killswitch);
 
@@ -1351,6 +1352,8 @@ create_devices_page (MoblinPanel *self)
 					nbtk_gtk_light_switch_set_active
 						(NBTK_GTK_LIGHT_SWITCH (priv->power_switch),
 						 TRUE);
+					gtk_widget_set_sensitive (priv->add_new_button, TRUE);
+					gtk_widget_set_sensitive (priv->power_switch, TRUE);
 				break;
 				case KILLSWITCH_STATE_SOFT_BLOCKED:
 					nbtk_gtk_light_switch_set_active
@@ -1358,13 +1361,16 @@ create_devices_page (MoblinPanel *self)
 							FALSE);
 				break;
 				case KILLSWITCH_STATE_HARD_BLOCKED:
+				case KILLSWITCH_STATE_NO_ADAPTER:
 				default:
 					gtk_widget_set_sensitive (priv->power_switch, FALSE);
+					gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 				break;
 			}
 		}
 	} else {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
+		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 	}
 	g_signal_connect  (priv->killswitch, "state-changed",
 			G_CALLBACK (killswitch_state_changed_cb), self);
