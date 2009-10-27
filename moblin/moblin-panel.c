@@ -430,6 +430,8 @@ pin_options_button_clicked_cb (GtkButton *button,
 	}
 
 	gtk_widget_hide (priv->pin_dialog);
+
+        g_signal_emit (self, _signals[REQUEST_FOCUS], 0);
 }
 
 /*
