@@ -71,6 +71,7 @@ void settings_callback(GObject *widget, gpointer user_data);
 void quit_callback(GObject *widget, gpointer user_data);
 void browse_callback(GObject *widget, gpointer user_data);
 void bluetooth_status_callback (GObject *widget, gpointer user_data);
+void bluetooth_discoverable_callback (GtkToggleAction *toggleaction, gpointer user_data);
 void wizard_callback(GObject *widget, gpointer user_data);
 void sendto_callback(GObject *widget, gpointer user_data);
 
@@ -229,6 +230,15 @@ void bluetooth_status_callback (GObject *widget, gpointer user_data)
 	bluetooth_killswitch_set_state (killswitch,
 					active ? KILLSWITCH_STATE_UNBLOCKED : KILLSWITCH_STATE_SOFT_BLOCKED);
 	g_object_set_data (object, "bt-active", GINT_TO_POINTER (active));
+}
+
+void
+bluetooth_discoverable_callback (GtkToggleAction *toggleaction, gpointer user_data)
+{
+	gboolean discoverable;
+
+	discoverable = gtk_toggle_action_get_active (toggleaction);
+	bluetooth_client_set_discoverable (client, discoverable);
 }
 
 static gboolean program_available(const char *program)
@@ -402,6 +412,27 @@ update_icon_visibility (void)
 		}
 	}
 	hide_icon ();
+}
+
+static void
+update_discoverability (GtkTreeIter *iter)
+{
+	gboolean discoverable;
+	GObject *object;
+
+	object = gtk_builder_get_object (xml, "discoverable");
+
+	if (iter == NULL) {
+		gtk_action_set_visible (GTK_ACTION (object), FALSE);
+		return;
+	}
+
+	gtk_tree_model_get (devices_model, iter,
+			    BLUETOOTH_COLUMN_DISCOVERABLE, &discoverable,
+			    -1);
+
+	gtk_action_set_visible (GTK_ACTION (object), TRUE);
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (object), discoverable);
 }
 
 static void
@@ -909,6 +940,7 @@ static void device_changed (GtkTreeModel *model,
 		cont = gtk_tree_model_iter_next (model, &iter);
 	}
 
+	update_discoverability (default_iter);
 	update_icon_visibility ();
 	update_menu_items ();
 	update_device_list (default_iter);

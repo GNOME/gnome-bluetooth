@@ -25,6 +25,13 @@
 		<child>
 			<object class="GtkActionGroup" id="adapter-action-group">
 				<child>
+					<object class="GtkToggleAction" id="discoverable">
+						<property name="label" translatable="yes">Visible</property>
+						<property name="active">false</property>
+						<signal name="toggled" handler="bluetooth_discoverable_callback"/>
+					</object>
+				</child>
+				<child>
 					<object class="GtkAction" id="send-file">
 						<property name="label" translatable="yes">Send files to device...</property>
 						<property name="icon-name">document-send</property>
@@ -77,6 +84,10 @@
 				<menuitem name="killswitch" action="killswitch"/>
 
 				<separator name="killswitch-separator"/>
+
+				<menuitem name="discoverable" action="discoverable"/>
+
+				<separator name="discoverable-separator"/>
 
 				<menuitem name="send-file" action="send-file"/>
 				<menuitem name="browse-device" action="browse-device"/>
