@@ -656,7 +656,6 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 	gboolean paired, trusted, connected;
 	int legacypairing;
 	guint type;
-	gint rssi;
 	GtkTreeIter iter;
 	gboolean cont;
 
@@ -686,9 +685,6 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 
 		value = g_hash_table_lookup(hash, "Icon");
 		icon = value ? g_value_get_string(value) : "bluetooth";
-
-		value = g_hash_table_lookup(hash, "RSSI");
-		rssi = value ? g_value_get_int(value) : 0;
 
 		value = g_hash_table_lookup(hash, "Paired");
 		paired = value ? g_value_get_boolean(value) : FALSE;
@@ -726,7 +722,6 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 					BLUETOOTH_COLUMN_NAME, name,
 					BLUETOOTH_COLUMN_TYPE, type,
 					BLUETOOTH_COLUMN_ICON, icon,
-					BLUETOOTH_COLUMN_RSSI, rssi,
 					BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 					-1);
 			if (uuids != NULL) {
@@ -763,7 +758,6 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
 				BLUETOOTH_COLUMN_NAME, name,
 				BLUETOOTH_COLUMN_TYPE, type,
 				BLUETOOTH_COLUMN_ICON, icon,
-				BLUETOOTH_COLUMN_RSSI, rssi,
 				BLUETOOTH_COLUMN_PAIRED, paired,
 				BLUETOOTH_COLUMN_TRUSTED, trusted,
 				BLUETOOTH_COLUMN_CONNECTED, connected,
@@ -1086,7 +1080,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 
 	priv->store = gtk_tree_store_new(_BLUETOOTH_NUM_COLUMNS, G_TYPE_OBJECT,
 					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-					 G_TYPE_UINT, G_TYPE_STRING, G_TYPE_INT,
+					 G_TYPE_UINT, G_TYPE_STRING,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_INT,
 					 G_TYPE_BOOLEAN, G_TYPE_HASH_TABLE, G_TYPE_STRV);

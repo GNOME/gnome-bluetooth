@@ -222,10 +222,6 @@ static void create_window(void)
 					"text", BLUETOOTH_COLUMN_ICON, NULL);
 
 	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
-					"RSSI", gtk_cell_renderer_text_new(),
-					"text", BLUETOOTH_COLUMN_RSSI, NULL);
-
-	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
 					"Default", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_DEFAULT, NULL);
 
@@ -263,8 +259,6 @@ static void create_window(void)
 
 	model = bluetooth_client_get_model(client);
 	sorted = gtk_tree_model_sort_new_with_model(model);
-	gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(sorted),
-				BLUETOOTH_COLUMN_RSSI, GTK_SORT_DESCENDING);
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree), sorted);
 	g_signal_connect(G_OBJECT(model), "row-inserted",
 					G_CALLBACK(row_inserted), tree);

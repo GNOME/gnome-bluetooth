@@ -96,7 +96,6 @@ typedef enum {
  * @BLUETOOTH_COLUMN_NAME: a string representing the device or adapter's name
  * @BLUETOOTH_COLUMN_TYPE: the #BluetoothType of the device. Only available for devices.
  * @BLUETOOTH_COLUMN_ICON: a string representing the icon name for the device. Only available for devices.
- * @BLUETOOTH_COLUMN_RSSI: an indication of signal strength
  * @BLUETOOTH_COLUMN_DEFAULT: whether the adapter is the default one. Only available for adapters.
  * @BLUETOOTH_COLUMN_PAIRED: whether the device is paired to its parent adapter. Only available for devices.
  * @BLUETOOTH_COLUMN_TRUSTED: whether the device is trusted. Only available for devices.
@@ -116,7 +115,6 @@ typedef enum {
 	BLUETOOTH_COLUMN_NAME,
 	BLUETOOTH_COLUMN_TYPE,
 	BLUETOOTH_COLUMN_ICON,
-	BLUETOOTH_COLUMN_RSSI,
 	BLUETOOTH_COLUMN_DEFAULT,
 	BLUETOOTH_COLUMN_PAIRED,
 	BLUETOOTH_COLUMN_TRUSTED,
