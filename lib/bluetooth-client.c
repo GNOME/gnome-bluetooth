@@ -854,6 +854,12 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 			priv->default_adapter_powered = powered;
 			g_object_notify (G_OBJECT (client), "default-adapter-powered");
 		}
+	} else if (g_str_equal(property, "Discoverable") == TRUE) {
+		gboolean discoverable = g_value_get_boolean(value);
+
+		gtk_tree_store_set(priv->store, &iter,
+				BLUETOOTH_COLUMN_DISCOVERABLE, discoverable, -1);
+		notify = TRUE;
 	}
 
 	if (notify != FALSE) {
@@ -877,7 +883,7 @@ static void adapter_added(DBusGProxy *manager,
 	GHashTable *hash = NULL;
 	GValue *value;
 	const gchar *address, *name;
-	gboolean discovering, powered;
+	gboolean discovering, discoverable, powered;
 
 	DBG("client %p path %s", client, path);
 
@@ -900,10 +906,14 @@ static void adapter_added(DBusGProxy *manager,
 
 		value = g_hash_table_lookup(hash, "Devices");
 		devices = value ? g_value_get_boxed (value) : NULL;
+
+		value = g_hash_table_lookup (hash, "Discoverable");
+		discoverable = value ? g_value_get_boolean (value) : FALSE;
 	} else {
 		address = NULL;
 		name = NULL;
 		discovering = FALSE;
+		discoverable = FALSE;
 		powered = FALSE;
 		devices = NULL;
 	}
@@ -913,6 +923,7 @@ static void adapter_added(DBusGProxy *manager,
 					  BLUETOOTH_COLUMN_ADDRESS, address,
 					  BLUETOOTH_COLUMN_NAME, name,
 					  BLUETOOTH_COLUMN_DISCOVERING, discovering,
+					  BLUETOOTH_COLUMN_DISCOVERABLE, discoverable,
 					  BLUETOOTH_COLUMN_POWERED, powered,
 					  -1);
 
@@ -1082,7 +1093,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
 					 G_TYPE_UINT, G_TYPE_STRING,
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_INT,
+					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_INT,
 					 G_TYPE_BOOLEAN, G_TYPE_HASH_TABLE, G_TYPE_STRV);
 
 	priv->dbus = dbus_g_proxy_new_for_name(connection, DBUS_SERVICE_DBUS,
@@ -1493,6 +1504,59 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
 	return TRUE;
 }
 
+/**
+ * bluetooth_client_set_discoverable:
+ * @client: a #BluetoothClient object
+ * @discoverable: whether the device should be discoverable
+ *
+ * Sets the default adapter's discoverable status.
+ *
+ * Return value: Whether setting the state on the default adapter was successful.
+ **/
+gboolean
+bluetooth_client_set_discoverable (BluetoothClient *client,
+				   gboolean discoverable)
+{
+	DBusGProxy *adapter;
+	GValue disco = { 0 };
+	GValue timeout = { 0 };
+	gboolean ret;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+
+	DBG("client %p", client);
+
+	adapter = bluetooth_client_get_default_adapter (client);
+	if (adapter == NULL)
+		return FALSE;
+
+	g_value_init (&disco, G_TYPE_BOOLEAN);
+	g_value_init (&timeout, G_TYPE_UINT);
+
+	g_value_set_boolean (&disco, discoverable);
+	g_value_set_uint (&timeout, 0);
+
+	ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
+				 G_TYPE_STRING, "Discoverable",
+				 G_TYPE_VALUE, &disco,
+				 G_TYPE_INVALID, G_TYPE_INVALID);
+	if (ret == FALSE)
+		goto bail;
+
+	ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
+				 G_TYPE_STRING, "DiscoverableTimeout",
+				 G_TYPE_VALUE, &timeout,
+				 G_TYPE_INVALID, G_TYPE_INVALID);
+
+bail:
+	g_value_unset (&disco);
+	g_value_unset (&timeout);
+
+	g_object_unref(adapter);
+
+	return ret;
+}
+
 typedef struct {
 	BluetoothClientCreateDeviceFunc func;
 	gpointer data;
@@ -1829,7 +1893,7 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 {
 	DBusGProxy *proxy;
 	char *address, *alias, *name, *icon, **uuids;
-	gboolean is_default, paired, trusted, connected, discovering, powered, is_adapter;
+	gboolean is_default, paired, trusted, connected, discoverable, discovering, powered, is_adapter;
 	GHashTable *services;
 	GtkTreeIter parent;
 	guint type;
@@ -1844,6 +1908,7 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 			    BLUETOOTH_COLUMN_PAIRED, &paired,
 			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
 			    BLUETOOTH_COLUMN_CONNECTED, &connected,
+			    BLUETOOTH_COLUMN_DISCOVERABLE, &discoverable,
 			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
 			    BLUETOOTH_COLUMN_POWERED, &powered,
 			    BLUETOOTH_COLUMN_SERVICES, &services,
@@ -1857,6 +1922,7 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 		g_print ("Adapter: %s (%s)\n", name, address);
 		if (is_default)
 			g_print ("\tDefault adapter\n");
+		g_print ("\tDiscoverable: %s\n", BOOL_STR (discoverable));
 		if (discovering)
 			g_print ("\tDiscovery in progress\n");
 		g_print ("\t%s\n", powered ? "Is powered" : "Is not powered");
