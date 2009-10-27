@@ -84,29 +84,10 @@ static void unblock_signals(adapter_data *adapter)
 
 static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
 {
-	adapter_data *adapter = user_data;
-	GValue discoverable = { 0 };
-	GValue timeout = { 0 };
-
-	g_value_init(&discoverable, G_TYPE_BOOLEAN);
-	g_value_init(&timeout, G_TYPE_UINT);
-
+	/* Note that this would be broken if we showed more than
+	 * one adapter, but we don't care */
 	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (button), FALSE);
-	g_value_set_boolean(&discoverable, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
-	g_value_set_uint(&timeout, 0);
-
-	dbus_g_proxy_call(adapter->proxy, "SetProperty", NULL,
-					G_TYPE_STRING, "Discoverable",
-					G_TYPE_VALUE, &discoverable,
-					G_TYPE_INVALID, G_TYPE_INVALID);
-
-	dbus_g_proxy_call(adapter->proxy, "SetProperty", NULL,
-					G_TYPE_STRING, "DiscoverableTimeout",
-					G_TYPE_VALUE, &timeout,
-					G_TYPE_INVALID, G_TYPE_INVALID);
-
-	g_value_unset(&discoverable);
-	g_value_unset(&timeout);
+	bluetooth_client_set_discoverable (client, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
 }
 
 static void name_callback(GtkWidget *editable, gpointer user_data)
@@ -428,6 +409,7 @@ static void create_adapter(adapter_data *adapter)
 static void update_visibility(adapter_data *adapter)
 {
 	gboolean inconsistent, enabled;
+
 	block_signals(adapter);
 
 	/* Switch off a few widgets */
