@@ -126,6 +126,7 @@ typedef enum {
 
 enum {
 	STATUS_CONNECTING,
+        REQUEST_FOCUS,
 	LAST_SIGNAL
 };
 
@@ -1554,6 +1555,12 @@ moblin_panel_class_init (MoblinPanelClass *klass)
 						G_STRUCT_OFFSET (MoblinPanelClass, status_connecting),
 						NULL, NULL, g_cclosure_marshal_VOID__BOOLEAN,
 						G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+
+	_signals[REQUEST_FOCUS] = g_signal_new ("request-focus", MOBLIN_TYPE_PANEL,
+						G_SIGNAL_RUN_FIRST,
+                                                0,
+						NULL, NULL, g_cclosure_marshal_VOID__VOID,
+						G_TYPE_NONE, 0);
 }
 
 /**
