@@ -1,16 +1,18 @@
-# Japanese translation for bluez-gnome
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# Japanese translation for gnome-bluetooth
+# Copyright (c) 2007-2009 Rosetta Contributors and Canonical Ltd 2007-2009
 # This file is distributed under the same license as the bluez-gnome package.
 # CHIKAMA Masaki <masaki.chikama@gmail.com>, 2008.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 14:31+0200\n"
-"PO-Revision-Date: 2008-02-24 09:27+0000\n"
-"Last-Translator: Marcel Holtmann <marcel@holtmann.org>\n"
-"Language-Team: Japanese Translators <ja@li.org>\n"
+"Project-Id-Version: gnome-bluetooth gnome-2.28\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&component=general\n"
+"POT-Creation-Date: 2009-10-30 23:28+0900\n"
+"PO-Revision-Date: 2009-11-01 01:53+0900\n"
+"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,50 +20,745 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#~ msgid "All categories"
-#~ msgstr "すべてのカテゴリ"
+#: ../lib/bluetooth-client.c:115
+msgid "All types"
+msgstr "全てのタイプ"
+
+#: ../lib/bluetooth-client.c:117
+msgid "Phone"
+msgstr "電話"
+
+#: ../lib/bluetooth-client.c:119
+msgid "Modem"
+msgstr "モデム"
+
+#: ../lib/bluetooth-client.c:121
+msgid "Computer"
+msgstr "コンピュータ"
+
+#: ../lib/bluetooth-client.c:123
+msgid "Network"
+msgstr "ネットワーク"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-client.c:126
+msgid "Headset"
+msgstr "ヘッドセット"
+
+#: ../lib/bluetooth-client.c:128
+msgid "Headphones"
+msgstr "ヘッドフォン"
+
+#: ../lib/bluetooth-client.c:130
+msgid "Audio device"
+msgstr "オーディオデバイス"
+
+#: ../lib/bluetooth-client.c:132
+msgid "Keyboard"
+msgstr "キーボード"
+
+#: ../lib/bluetooth-client.c:134
+msgid "Mouse"
+msgstr "マウス"
+
+#: ../lib/bluetooth-client.c:136
+msgid "Camera"
+msgstr "カメラ"
+
+#: ../lib/bluetooth-client.c:138
+msgid "Printer"
+msgstr "プリンタ"
+
+#: ../lib/bluetooth-client.c:140
+msgid "Joypad"
+msgstr "ジョイパッド"
+
+#: ../lib/bluetooth-client.c:142
+msgid "Tablet"
+msgstr "タブレット"
+
+#: ../lib/bluetooth-client.c:144 ../lib/bluetooth-chooser.c:106
+#: ../lib/bluetooth-chooser.c:140
+msgid "Unknown"
+msgstr "未知"
+
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:358
+msgid "Click to select device..."
+msgstr "クリックしてデバイスの選択..."
+
+#: ../lib/bluetooth-chooser.c:96
+msgid "All categories"
+msgstr "すべてのカテゴリ"
+
+#: ../lib/bluetooth-chooser.c:98
+msgid "Paired"
+msgstr "ペアリング済"
+
+#: ../lib/bluetooth-chooser.c:100
+msgid "Trusted"
+msgstr "認証済み"
+
+#: ../lib/bluetooth-chooser.c:102
+msgid "Not paired or trusted"
+msgstr "未ペアリングあるいは未認証"
+
+#: ../lib/bluetooth-chooser.c:104
+msgid "Paired or trusted"
+msgstr "ペアリング済あるいは認証済"
+
+#: ../lib/bluetooth-chooser.c:181
+msgid "No adapters available"
+msgstr "アダプタが利用できません"
+
+#: ../lib/bluetooth-chooser.c:185 ../lib/bluetooth-chooser.c:838
+msgid "Searching for devices..."
+msgstr "デバイスを検索しています..."
+
+#: ../lib/bluetooth-chooser.c:707
+msgid "Device"
+msgstr "デバイス"
+
+#: ../lib/bluetooth-chooser.c:744
+msgid "Type"
+msgstr "種類"
+
+#. The filters
+#: ../lib/bluetooth-chooser.c:861
+msgid "Show Only Bluetooth Devices With..."
+msgstr "以下のBluetoothデバイスのみを表示"
+
+#. The device category filter
+#: ../lib/bluetooth-chooser.c:881
+msgid "Device _category:"
+msgstr "デバイスのカテゴリ(_C)"
+
+#: ../lib/bluetooth-chooser.c:896
+msgid "Select the device category to filter above list"
+msgstr "上のリストを絞り込むためのデバイスのカテゴリを選択して下さい"
+
+#. The device type filter
+#: ../lib/bluetooth-chooser.c:910
+msgid "Device _type:"
+msgstr "デバイスの種類(_T)"
+
+#: ../lib/bluetooth-chooser.c:931
+msgid "Select the device type to filter above list"
+msgstr "上のリストを絞り込むためのデバイスの種類を選択して下さい"
+
+#: ../lib/bluetooth-chooser.c:937
+msgid "Input devices (mice, keyboards, ...)"
+msgstr "入力デバイス (マウス、キーボード、など)"
+
+#: ../lib/bluetooth-chooser.c:941
+msgid "Headphones, headsets and other audio devices"
+msgstr "ヘッドフォン、ヘッドセット、その他のオーディオ・デバイス"
+
+#: ../lib/plugins/geoclue.c:162
+msgid "Use this GPS device for Geolocation services"
+msgstr "このGPSデバイスをGeolocationサービスに使用する"
+
+#. translators:
+#. * This is in a test plugin, please make sure you add the "(test)" part,
+#. * or leave untranslated
+#: ../lib/plugins/test.c:53
+msgid "Access the Internet using your cell phone (test)"
+msgstr "携帯電話を使ってインターネットにアクセス(テスト)"
+
+#: ../applet/main.c:112
+msgid "Select Device to Browse"
+msgstr "閲覧したいデバイスの選択"
+
+#: ../applet/main.c:116
+msgid "_Browse"
+msgstr "閲覧(_B)"
+
+#: ../applet/main.c:124
+msgid "Select device to browse"
+msgstr "閲覧したいデバイスを選択して下さい"
+
+#: ../applet/main.c:284 ../properties/properties-adapter-off.ui.h:1
+msgid "Turn On Bluetooth"
+msgstr "Bluetooth をオンにする"
+
+#: ../applet/main.c:285
+msgid "Bluetooth: Off"
+msgstr "Bluetooth: 切"
+
+#: ../applet/main.c:288
+msgid "Turn Off Bluetooth"
+msgstr "Bluetooth を切る"
+
+#: ../applet/main.c:289
+msgid "Bluetooth: On"
+msgstr "Bluetooth: 入"
+
+#: ../applet/main.c:294 ../applet/notify.c:148
+msgid "Bluetooth: Disabled"
+msgstr "Bluetooth: 無効"
+
+#: ../applet/main.c:419
+msgid "Disconnecting..."
+msgstr "切断中..."
+
+#: ../applet/main.c:422 ../sendto/main.c:213
+msgid "Connecting..."
+msgstr "接続中..."
+
+#: ../applet/main.c:425 ../applet/main.c:766
+msgid "Connected"
+msgstr "接続しました"
+
+#: ../applet/main.c:428 ../applet/main.c:766
+msgid "Disconnected"
+msgstr "切断しました"
+
+#: ../applet/main.c:784 ../applet/main.c:838 ../properties/adapter.c:442
+msgid "Disconnect"
+msgstr "切断する"
+
+#: ../applet/main.c:784 ../applet/main.c:838
+msgid "Connect"
+msgstr "接続する"
+
+#: ../applet/main.c:797
+msgid "Send files..."
+msgstr "ファイルの送信..."
+
+#: ../applet/main.c:807
+msgid "Browse files..."
+msgstr "ファイルの閲覧..."
+
+#: ../applet/main.c:818
+msgid "Open Keyboard Preferences..."
+msgstr "キーボードの設定を開く..."
+
+#: ../applet/main.c:826
+msgid "Open Mouse Preferences..."
+msgstr "マウスの設定を開く..."
+
+#: ../applet/main.c:952
+msgid "Debug"
+msgstr "デバッグ"
+
+#. Parse command-line options
+#: ../applet/main.c:972
+msgid "- Bluetooth applet"
+msgstr "- Bluetooth アプレット"
+
+#: ../applet/main.c:977
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"%s --help で利用可能なコマンドラインのオプションの全部を一覧できます。\n"
+
+#: ../applet/main.c:993
+msgid "Bluetooth Applet"
+msgstr "Bluetooth アプレット"
+
+#: ../applet/notify.c:148
+msgid "Bluetooth: Enabled"
+msgstr "Bluetooth: 有効"
+
+#: ../applet/agent.c:251 ../applet/agent.c:332
+#, c-format
+msgid "Device '%s' wants to pair with this computer"
+msgstr "デバイス '%s' がこのコンピュータとのペアリングを要求しています"
+
+#: ../applet/agent.c:257
+#, c-format
+msgid "Please enter the PIN mentioned on device %s."
+msgstr "デバイス %s に表示されている PIN を入力してください。"
+
+#: ../applet/agent.c:339
+#, c-format
+msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+msgstr "PIN '%s' がデバイス '%s' のものと一致するかどうか確認してください。"
+
+#. translators: Whether to grant access to a particular service
+#: ../applet/agent.c:385
+#, c-format
+msgid "Grant access to '%s'"
+msgstr "'%s' に対してアクセスを許可しますか？"
+
+#: ../applet/agent.c:390
+#, c-format
+msgid "Device %s wants access to the service '%s'."
+msgstr "デバイス %s がサービス '%s' へのアクセスを求めています。"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#, c-format
+msgid "Pairing request for '%s'"
+msgstr "%s に対するペアリング要求:"
+
+#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
+#: ../applet/agent.c:618 ../applet/agent.c:656
+msgid "Bluetooth device"
+msgstr "Bluetooth デバイス"
+
+#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+msgid "Enter PIN"
+msgstr "PIN を入力"
+
+#. translators: this is a popup telling you a particular device
+#. * has asked for pairing
+#: ../applet/agent.c:608
+#, c-format
+msgid "Pairing confirmation for '%s'"
+msgstr "'%s' のペアリング確認"
+
+#: ../applet/agent.c:619
+msgid "Verify PIN"
+msgstr "PINの確認"
+
+#: ../applet/agent.c:652
+#, c-format
+msgid "Authorization request from '%s'"
+msgstr "'%s' の認証要求"
+
+#: ../applet/agent.c:657
+msgid "Check authorization"
+msgstr "認証を確認する"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:1
+msgid "Bluetooth Manager"
+msgstr "Bluetooth マネージャー"
+
+#: ../applet/bluetooth-applet.desktop.in.in.h:2
+msgid "Bluetooth Manager applet"
+msgstr "Bluetooth マネージャー アプレット"
+
+#: ../applet/popup-menu.ui.h:1
+msgid "Bluetooth: Checking"
+msgstr "Bluetooth: 確認中"
+
+#: ../applet/popup-menu.ui.h:2
+msgid "Browse files on device..."
+msgstr "デバイスのファイルを閲覧..."
+
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:401
+msgid "Devices"
+msgstr "デバイス"
+
+#: ../applet/popup-menu.ui.h:4
+msgid "Preferences"
+msgstr "設定"
+
+#: ../applet/popup-menu.ui.h:5
+msgid "Quit"
+msgstr "終了"
+
+#: ../applet/popup-menu.ui.h:6
+msgid "Send files to device..."
+msgstr "ファイルをデバイスへ送信..."
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Set up new device..."
+msgstr "新しいデバイスを設定..."
+
+#: ../applet/authorisation-dialogue.ui.h:1
+msgid "_Always grant access"
+msgstr "常にアクセスを許可する(_A)"
+
+#: ../applet/authorisation-dialogue.ui.h:2
+msgid "_Grant"
+msgstr "許可(_G)"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Reject"
+msgstr "拒否(_R)"
+
+#: ../applet/confirm-dialogue.ui.h:1
+msgid "_Does not match"
+msgstr "不一致(_D)"
+
+#: ../applet/confirm-dialogue.ui.h:2
+msgid "_Matches"
+msgstr "一致(_M)"
+
+#: ../applet/passkey-dialogue.ui.h:1
+msgid "_Show input"
+msgstr "入力中の文字を表示(_S)"
+
+#: ../properties/main.c:132
+msgid "A Bluetooth manager for the GNOME desktop"
+msgstr "GNOME デスクトップ用 Bluetooth マネージャー"
+
+#: ../properties/main.c:135
+msgid "translator-credits"
+msgstr ""
+"翻訳者クレジット\n"
+"草野 貴之 <AE5T-KSN@asahi-net.or.jp>\n"
+"日本GNOMEユーザ会 http://www.gnome.gr.jp/\n"
+"Launchpad Contributions:\n"
+"  Atsushi Odawara https://launchpad.net/~a-odawara\n"
+"  CHIKAMA Masaki https://launchpad.net/~masaki-chikama\n"
+"  John M https://launchpad.net/~curryrice71\n"
+"  Makoto Kato https://launchpad.net/~makoto-kt\n"
+"  Marcel Holtmann https://launchpad.net/~holtmann\n"
+"  Takahiro Sugimoto https://launchpad.net/~keyaki\n"
+"  yngd https://launchpad.net/~yanagida"
+
+#: ../properties/main.c:137
+msgid "GNOME Bluetooth home page"
+msgstr "GNOME Bluetooth ホームページ"
+
+#: ../properties/main.c:162
+msgid "Bluetooth Preferences"
+msgstr "Bluetooth 設定"
+
+#: ../properties/main.c:177
+msgid "_Show Bluetooth icon"
+msgstr "Bluetooth アイコンを表示(_S)"
+
+#: ../properties/main.c:246
+msgid "Output a list of currently known devices"
+msgstr "現在知られているデバイスの一覧を出力"
+
+#: ../properties/main.c:283
+msgid "Bluetooth Properties"
+msgstr "Bluetooth 設定"
+
+#: ../properties/adapter.c:179
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "'%s' をデバイスのリストから削除しますか？"
+
+#: ../properties/adapter.c:181
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"デバイスを削除すると、次回使用時にデバイスを再設定しなければなりません。"
+
+#. The discoverable checkbox
+#: ../properties/adapter.c:348
+msgid "Make computer _discoverable"
+msgstr "コンピュータを検出可能にする"
+
+#: ../properties/adapter.c:371
+msgid "Friendly name"
+msgstr "わかりやすい名称"
+
+#: ../properties/adapter.c:433
+msgid "Set up _new device..."
+msgstr "新規デバイスの設定(_N)..."
+
+#: ../properties/adapter.c:456
+msgid "_Remove"
+msgstr "削除(_R)"
+
+#: ../properties/adapter.c:731
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth は無効です"
+
+#: ../properties/adapter.c:767
+msgid "No Bluetooth adapters present"
+msgstr "Bluetooth アダプターが存在しません"
+
+#: ../properties/properties-no-adapter.ui.h:1
+msgid "Your computer does not have any Bluetooth adapters plugged in."
+msgstr "コンピュータに Bluetooth のアダプタが接続されていません。"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:1
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth-properties.desktop.in.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Bluetoothの設定の変更"
+
+#: ../properties/bluetooth-manager.schemas.in.h:1
+msgid "Whether to show the notification icon"
+msgstr "通知アイコンを表示するかどうか"
+
+#: ../properties/bluetooth-manager.schemas.in.h:2
+msgid "Whether to show the notification icon."
+msgstr "通知アイコンを表示するかどうか。"
+
+#: ../properties/gconf-bridge.c:1223
+#, c-format
+msgid "GConf error: %s"
+msgstr "GConf エラー: %s"
+
+#: ../properties/gconf-bridge.c:1228
+msgid "All further errors shown only on terminal."
+msgstr "これ以上のエラーは端末にだけ表示されます。"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Pairing with 'Sony Bluetooth Headset' cancelled
+#.
+#: ../wizard/main.c:206 ../wizard/main.c:327
+#, c-format
+msgid "Pairing with '%s' cancelled"
+msgstr "'%s' とのペアリングがキャンセルされました"
+
+#: ../wizard/main.c:246
+#, c-format
+msgid "Please confirm that the PIN displayed on '%s' matches this one."
+msgstr "'%s' に表示されているPINがこれと一致するかどうか確認してください。"
+
+#: ../wizard/main.c:300
+msgid "Please enter the following PIN:"
+msgstr "以下のPINを入力してください:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Setting up 'Sony Bluetooth Headset' failed
+#.
+#: ../wizard/main.c:383
+#, c-format
+msgid "Setting up '%s' failed"
+msgstr "'%s' の設定に失敗しました"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Connecting to 'Sony Bluetooth Headset' now...
+#.
+#: ../wizard/main.c:514
+#, c-format
+msgid "Connecting to '%s'..."
+msgstr "'%s' に接続しています..."
+
+#: ../wizard/main.c:550
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "以下のPINを'%s'に入力し、キーボードで \"Enter\" を押してください:"
+
+#: ../wizard/main.c:552
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "以下のPINを'%s'に入力してください:"
+
+#. translators:
+#. * The '%s' is the device name, for example:
+#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
+#.
+#: ../wizard/main.c:573
+#, c-format
+msgid "Please wait while finishing setup on device '%s'..."
+msgstr "デバイス '%s' の設定が完了するまでお待ちください..."
+
+#: ../wizard/main.c:586
+#, c-format
+msgid "Successfully set up new device '%s'"
+msgstr "新しいデバイス '%s' の設定が成功"
+
+#: ../wizard/wizard.ui.h:1
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (ほとんどのヘッドセット、マウス、GPS デバイス)"
+
+#: ../wizard/wizard.ui.h:2
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:3
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Bluetooth New Device Setup"
+msgstr "Bluetooth 新規デバイス設定"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Custom PIN code:"
+msgstr "PIN コード手動設定:"
+
+#: ../wizard/wizard.ui.h:6
+msgid "Device Setup"
+msgstr "デバイスの設定"
+
+#: ../wizard/wizard.ui.h:7
+msgid "Device Setup Failed"
+msgstr "デバイスの設定失敗"
+
+#: ../wizard/wizard.ui.h:8
+msgid "Device search"
+msgstr "デバイス検索"
+
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:10
+msgid "Does not match"
+msgstr "一致しない"
+
+#: ../wizard/wizard.ui.h:11
+msgid "Finishing New Device Setup"
+msgstr "新規デバイス設定を終了中"
+
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:13
+msgid "Fixed PIN"
+msgstr "固定 PIN"
+
+#: ../wizard/wizard.ui.h:14
+msgid "Introduction"
+msgstr "はじめに"
+
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:16
+msgid "Matches"
+msgstr "一致"
+
+#: ../wizard/wizard.ui.h:17
+msgid "PIN Options"
+msgstr "PIN オプション"
+
+#: ../wizard/wizard.ui.h:18
+msgid "PIN _options..."
+msgstr "PIN オプション(_O)..."
+
+#: ../wizard/wizard.ui.h:19
+msgid "Select the additional services you want to use with your device:"
+msgstr "デバイスで追加で使用したいサービスを選択してください:"
+
+#: ../wizard/wizard.ui.h:20
+msgid "Select the device you want to setup"
+msgstr "設定したいデバイスを選択してください"
+
+#: ../wizard/wizard.ui.h:21
+msgid "Setup Completed"
+msgstr "設定完了"
+
+#: ../wizard/wizard.ui.h:22
+msgid ""
+"The Bluetooth new device setup will walk you through the process of "
+"configuring Bluetooth enabled devices for use with this computer."
+msgstr ""
+"「Bluetooth 新規デバイス設定」では、このコンピュータで Bluetooth 経由で使うこ"
+"とのできるデバイスの設定していきます。"
+
+#: ../wizard/wizard.ui.h:23
+msgid ""
+"The device will need to be within 10 meters of your computer, and be &#8220;"
+"discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
+"device's manual if in doubt."
+msgstr ""
+"デバイスはコンピュータから10メートル以内になくてはなりません。そして「検出可"
+"能 (見える、とも呼ばれます)」になっていないといけません。確信が持てない場合"
+"は、デバイスのマニュアルをチェックしてください。"
+
+#: ../wizard/wizard.ui.h:24
+msgid "Welcome to the Bluetooth new device setup"
+msgstr "Bluetooth 新規デバイス設定へようこそ"
+
+#: ../wizard/wizard.ui.h:25
+msgid "_Automatic PIN selection"
+msgstr "自動で PIN を選択(_A)"
+
+#: ../wizard/wizard.ui.h:26
+msgid "_Restart Setup"
+msgstr "設定のやり直し(_R)"
+
+#: ../sendto/main.c:98
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d 秒"
+
+#: ../sendto/main.c:103 ../sendto/main.c:116
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d 分"
+
+#: ../sendto/main.c:114
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d 時間"
+
+#: ../sendto/main.c:124
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "約 %'d 時間"
+
+#: ../sendto/main.c:150
+msgid "File Transfer"
+msgstr "ファイル転送"
+
+#. translators: This is the heading for the progress dialogue
+#: ../sendto/main.c:169
+msgid "Sending files via Bluetooth"
+msgstr "ファイルをBluetoothで送信"
+
+#: ../sendto/main.c:181
+msgid "From:"
+msgstr "送信元:"
+
+#: ../sendto/main.c:197
+msgid "To:"
+msgstr "送信先:"
+
+#: ../sendto/main.c:243
+msgid "An unknown error occurred"
+msgstr "不明なエラーが発生しました"
+
+#: ../sendto/main.c:253
+msgid ""
+"Make sure that remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr ""
+"リモート・デバイスのスイッチが入っていて Bluetooth の接続を受け付ける状態にあ"
+"ることを確認してください"
+
+#: ../sendto/main.c:337
+#, c-format
+msgid "Sending %s"
+msgstr "%s を送信中"
+
+#: ../sendto/main.c:344 ../sendto/main.c:406
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "ファイル送信 %2$d 中 %1$d"
+
+#: ../sendto/main.c:402
+#, c-format
+msgid "%d KB/s"
+msgstr "%d KB/秒"
+
+#: ../sendto/main.c:404
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/秒"
+
+#: ../sendto/main.c:498
+msgid "Select Device to Send To"
+msgstr "送信先のデバイスを選択して下さい"
+
+#: ../sendto/main.c:502
+msgid "Send _To"
+msgstr "送信(_T)"
+
+#: ../sendto/main.c:543
+msgid "Choose files to send"
+msgstr "送信するファイルを選択"
+
+#: ../sendto/main.c:572
+msgid "Remote device to use"
+msgstr "使用するリモート・デバイス"
+
+#: ../sendto/main.c:574
+msgid "Remote device's name"
+msgstr "リモート・デバイスの名前"
 
 #~ msgid "Bonded"
 #~ msgstr "ボンディング済み"
 
-#~ msgid "Trusted"
-#~ msgstr "信頼済み"
-
-#~ msgid "Device"
-#~ msgstr "デバイス"
-
 #~ msgid "Recognized Bluetooth Devices"
 #~ msgstr "認識されたBluetooth デバイス"
 
-#~ msgid "_Select a device from the following list:"
-#~ msgstr "以下のリストからデバイスを選択(_S)"
-
 #~ msgid "S_earch"
-#~ msgstr "検索(_e)"
+#~ msgstr "検索(_E)"
 
-#~ msgid "Rescan Bluetooth devices"
-#~ msgstr "Bluetooth デバイスの再スキャン"
-
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "以下のBluetoothデバイスのみを表示"
-
-#~ msgid "Device _category:"
-#~ msgstr "デバイスのカテゴリ(_c)"
-
-#~ msgid "Select the device category to filter above list"
-#~ msgstr "上のリストにかけるデバイスカテゴリのフィルターを選択して下さい"
-
-#~ msgid "Device _type:"
-#~ msgstr "デバイスの種類(_t)"
-
-#~ msgid "Select the device type to filter above list"
-#~ msgstr "上のリストにかけるデバイスの種類のフィルターを選択して下さい"
-
-#, c-format
 #~ msgid "Created bonding with %s"
 #~ msgstr "%sとボンディングを生成しました"
 
-#, c-format
 #~ msgid "Removed bonding with %s"
 #~ msgstr "%sとのボンディングを解除しました"
 
@@ -74,37 +771,17 @@ msgstr ""
 #~ msgid "Device has been made connectable"
 #~ msgstr "デバイスは接続可能に設定されています"
 
-#~ msgid "Device has been made discoverable"
-#~ msgstr "デバイスは発見可能に設定されています"
-
 #~ msgid "Device has been made limited discoverable"
 #~ msgstr "デバイスは限定的に発見可能に設定されています"
 
 #~ msgid "Device has been switched into pairing mode"
 #~ msgstr "デバイスはペアリングモードに変更されました"
 
-#, c-format
 #~ msgid "Couldn't execute command: %s\n"
 #~ msgstr "コマンド: %s を実行できませんでした\n"
 
 #~ msgid "Browse Devices"
 #~ msgstr "デバイスの閲覧"
-
-#~ msgid "Select device to browse"
-#~ msgstr "閲覧したいデバイスを選択して下さい"
-
-#~ msgid "Send File..."
-#~ msgstr "ファイルの送信..."
-
-#~ msgid "Browse Device..."
-#~ msgstr "デバイスの閲覧..."
-
-#~ msgid "Setup New Device"
-#~ msgstr "新規デバイスの設定"
-
-#, c-format
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "%s に対するペアリング要求:"
 
 #~ msgid "Confirm pairing"
 #~ msgstr "ペアリングの確認"
@@ -133,15 +810,11 @@ msgstr ""
 #~ msgid "1 minute"
 #~ msgstr "1分"
 
-#, c-format
 #~ msgid "%g minutes"
 #~ msgstr "%g 分"
 
 #~ msgid "Set _Trusted"
 #~ msgstr "信頼済みに設定(_T)"
-
-#~ msgid "Remove _Trust"
-#~ msgstr "信頼済みを解除(_T)"
 
 #~ msgid "Mode of operation"
 #~ msgstr "操作モード"
@@ -182,25 +855,12 @@ msgstr ""
 #~ msgid "Bonded devices"
 #~ msgstr "ボンディングされているデバイス"
 
-#~ msgid "Remove from list of bonded devices?"
-#~ msgstr "ボンディングされているデバイスのリストから削除しますか？"
-
 #~ msgid ""
-#~ "If you delete the bonding, you have to re-pair the device before next use."
-#~ msgstr "ボンディングを解除すると、次回使用時にデバイスを再ペアリングしなければなりません。"
-
-#~ msgid "Remove device entry from service?"
-#~ msgstr "サービスからデバイスのエントリを削除しますか？"
-
-#~ msgid ""
-#~ "If you delete the device entry, you can't use it with this service anymore."
-#~ msgstr "デバイスのエントリを削除すると、デバイスをこのサービスで使用できなくなります。"
-
-#~ msgid "Connecting to device"
-#~ msgstr "デバイスに接続しています"
-
-#~ msgid "Select device"
-#~ msgstr "デバイスの選択"
+#~ "If you delete the device entry, you can't use it with this service "
+#~ "anymore."
+#~ msgstr ""
+#~ "デバイスのエントリを削除すると、デバイスをこのサービスで使用できなくなりま"
+#~ "す。"
 
 #~ msgid "Show all devices"
 #~ msgstr "全てのデバイスの表示"
@@ -208,17 +868,8 @@ msgstr ""
 #~ msgid "Create Device"
 #~ msgstr "デバイスの生成"
 
-#~ msgid "Audio devices"
-#~ msgstr "オーディオデバイス"
-
-#~ msgid "connected"
-#~ msgstr "接続しました"
-
 #~ msgid "Input devices"
 #~ msgstr "入力デバイス"
-
-#~ msgid "_Disconnect"
-#~ msgstr "切断(_D)"
 
 #~ msgid "Network devices"
 #~ msgstr "ネットワークデバイス"
@@ -227,691 +878,195 @@ msgstr ""
 #~ msgstr "HALが自動的に設定を使用できるようにするか"
 
 #~ msgid ""
-#~ "If HAL should be used to automatically adjust settings like class of device "
-#~ "etc."
+#~ "If HAL should be used to automatically adjust settings like class of "
+#~ "device etc."
 #~ msgstr "HALがデバイスのクラスなどを自動的に変更できるようにするか"
 
 #~ msgid "If authorization requests should be automatically granted"
 #~ msgstr "認証要求を自動的に許可するか"
 
 #~ msgid ""
-#~ "If authorization requests should be granted all the time without asking the "
-#~ "user for confirmation."
+#~ "If authorization requests should be granted all the time without asking "
+#~ "the user for confirmation."
 #~ msgstr "認証要求をユーザの確認無しに常に許可するか"
 
-#: ../common/bluetooth-client.c:82
-msgid "All types"
-msgstr "全てのタイプ"
-
-#: ../common/bluetooth-client.c:84
-msgid "Phone"
-msgstr "電話"
-
-#: ../common/bluetooth-client.c:86
-msgid "Modem"
-msgstr "モデム"
-
-#: ../common/bluetooth-client.c:88
-msgid "Computer"
-msgstr "コンピュータ"
-
-#: ../common/bluetooth-client.c:90
-msgid "Network"
-msgstr "ネットワーク"
-
-#: ../common/bluetooth-client.c:92 ../wizard/main.c:326
-msgid "Headset"
-msgstr "ヘッドセット"
-
-#: ../common/bluetooth-client.c:94
-msgid "Headphone"
-msgstr ""
-
-#: ../common/bluetooth-client.c:96 ../wizard/main.c:311
-msgid "Keyboard"
-msgstr "キーボード"
-
-#: ../common/bluetooth-client.c:98 ../wizard/main.c:306
-msgid "Mouse"
-msgstr "マウス"
-
-#: ../common/bluetooth-client.c:100
-msgid "Camera"
-msgstr "カメラ"
-
-#: ../common/bluetooth-client.c:102 ../wizard/main.c:321
-msgid "Printer"
-msgstr "プリンタ"
-
-#: ../common/bluetooth-client.c:104
-msgid "Joypad"
-msgstr ""
-
-#: ../common/bluetooth-client.c:106
-msgid "Tablet"
-msgstr ""
-
-#: ../common/bluetooth-client.c:108
-msgid "Unknown"
-msgstr "未知"
-
-#: ../common/helper.c:162
-msgid "Select Device"
-msgstr ""
-
-#: ../common/helper.c:222
-msgid "Choose files to send"
-msgstr ""
-
-#: ../applet/main.c:123
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "GNOME デスクトップ用 Bluetooth マネージャー"
-
-#: ../applet/main.c:126 ../analyzer/dialog.c:128
-msgid "translator-credits"
-msgstr ""
-"翻訳者クレジット\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Atsushi Odawara https://launchpad.net/~a-odawara\n"
-"  CHIKAMA Masaki https://launchpad.net/~masaki-chikama\n"
-"  John M https://launchpad.net/~curryrice71\n"
-"  Makoto Kato https://launchpad.net/~makoto-kt\n"
-"  Marcel Holtmann https://launchpad.net/~holtmann\n"
-"  Takahiro Sugimoto https://launchpad.net/~keyaki\n"
-"  yngd https://launchpad.net/~yanagida"
-
-#: ../applet/main.c:177 ../applet/main.c:232
-msgid "Set up new device..."
-msgstr ""
-
-#: ../applet/main.c:242
-msgid "Send files to device..."
-msgstr ""
-
-#: ../applet/main.c:250
-msgid "Browse files on device..."
-msgstr ""
-
-#: ../applet/main.c:373
-msgid "Bluetooth Applet"
-msgstr "Bluetooth アプレット"
-
-#: ../applet/agent.c:258
-msgid "Authentication request"
-msgstr "認証要求"
-
-#: ../applet/agent.c:286 ../applet/agent.c:395
-msgid "Pairing request for device:"
-msgstr "デバイスに対するペアリング要求:"
-
-#: ../applet/agent.c:303
-msgid "Enter passkey for authentication:"
-msgstr "認証用パスキーを入力してください:"
-
-#: ../applet/agent.c:327
-msgid "Show input"
-msgstr "入力中の文字を表示"
-
-#: ../applet/agent.c:369
-msgid "Confirmation request"
-msgstr "確認要求"
-
-#: ../applet/agent.c:412
-msgid "Confirm value for authentication:"
-msgstr "認証確認用の値:"
-
-#: ../applet/agent.c:456
-msgid "Authorization request"
-msgstr "認証要求"
-
-#: ../applet/agent.c:482
-msgid "Authorization request for device:"
-msgstr "デバイスに対する認証要求:"
-
-#: ../applet/agent.c:503
-#, c-format
-msgid "Grant access to %s?"
-msgstr "%sに対してアクセスを許可しますか？"
-
-#: ../applet/agent.c:512
-msgid "Always grant access"
-msgstr "常にアクセスを許可する"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:586 ../applet/agent.c:633 ../applet/agent.c:683
-#, c-format
-msgid "Pairing request for %s"
-msgstr ""
-
-#: ../applet/agent.c:590 ../applet/agent.c:637 ../applet/agent.c:687
-#: ../applet/agent.c:736 ../applet/agent.c:781
-msgid "Bluetooth device"
-msgstr "Bluetooth デバイス"
-
-#: ../applet/agent.c:591
-msgid "Enter PIN code"
-msgstr ""
-
-#: ../applet/agent.c:638 ../applet/agent.c:688
-msgid "Enter passkey"
-msgstr "パスキーの入力"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:732
-#, c-format
-msgid "Confirmation request for %s"
-msgstr ""
-
-#: ../applet/agent.c:737
-msgid "Confirm passkey"
-msgstr ""
-
-#: ../applet/agent.c:777
-#, c-format
-msgid "Authorization request for %s"
-msgstr "%s に対する認証要求"
-
-#: ../applet/agent.c:782
-msgid "Check authorization"
-msgstr "認証を確認する"
-
-#: ../applet/bluetooth-applet.desktop.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth マネージャー"
-
-#: ../applet/bluetooth-applet.desktop.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Bluetooth マネージャー アプレット"
-
-#: ../properties/main.c:63
-msgid "Bluetooth Preferences"
-msgstr "Bluetooth 設定"
-
-#: ../properties/main.c:94
-msgid "General"
-msgstr "一般"
-
-#: ../properties/main.c:131
-msgid "Bluetooth Properties"
-msgstr ""
-
-#: ../properties/general.c:172
-msgid "File transfer"
-msgstr ""
-
-#: ../properties/general.c:176
-msgid "Receive files from remote devices"
-msgstr ""
-
-#: ../properties/general.c:184
-msgid "Share files from public folder"
-msgstr ""
-
-#: ../properties/general.c:195
-msgid "Notification area"
-msgstr "通知エリア"
-
-#: ../properties/general.c:199
-msgid "Never display icon"
-msgstr "アイコンを常に非表示"
-
-#: ../properties/general.c:206
-msgid "Only display when adapter present"
-msgstr "アダプタが存在するときだけ表示"
-
-#: ../properties/general.c:213
-msgid "Always display icon"
-msgstr "アイコンを常に表示"
-
-#: ../properties/adapter.c:99
-msgid "Adapter"
-msgstr "アダプター"
-
-#: ../properties/adapter.c:174
-msgid "always"
-msgstr ""
-
-#: ../properties/adapter.c:176
-msgid "hidden"
-msgstr ""
-
-#: ../properties/adapter.c:179
-#, c-format
-msgid "%'g minute"
-msgid_plural "%'g minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../properties/adapter.c:477
-msgid "Visibility setting"
-msgstr ""
-
-#: ../properties/adapter.c:490
-msgid "Hidden"
-msgstr ""
-
-#: ../properties/adapter.c:502
-msgid "Always visible"
-msgstr ""
-
-#: ../properties/adapter.c:514
-msgid "Temporary visible"
-msgstr ""
-
-#: ../properties/adapter.c:566
-msgid "Friendly name"
-msgstr ""
-
-#: ../properties/adapter.c:587
-msgid "Known devices"
-msgstr ""
-
-#: ../properties/dialog.c:41
-msgid "Remove from list of known devices?"
-msgstr ""
-
-#: ../properties/dialog.c:42
-msgid ""
-"If you delete the device, you have to set it up again before next use."
-msgstr ""
-
-#: ../properties/bluetooth-properties.desktop.in.h:1
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth-properties.desktop.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Bluetoothの設定の変更"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid ""
-"Display options for the notification icon. Valid options are \"never\", "
-"\"present\" and \"always\"."
-msgstr ""
-"通知アイコンの表示オプション。設定可能なオプションは「表示しない(never)」「存在時のみ表示(present)」「常に表示(always)」のいずれか"
-"。"
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "If Bluetooth file sharing is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:3
-msgid "If receiving of remote files via Bluetooth is enabled"
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:4
-msgid ""
-"If the service for receiving remote files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:5
-msgid "If the service for sharing files via Bluetooth is enabled or not."
-msgstr ""
-
-#: ../properties/bluetooth-manager.schemas.in.h:6
-msgid "When to show the notification icon"
-msgstr "通知アイコンをいつ表示するか"
-
-#: ../wizard/main.c:75
-#, c-format
-msgid "Please enter the following PIN code: %s"
-msgstr ""
-
-#: ../wizard/main.c:94
-#, c-format
-msgid "Please enter the following passkey: %s%s"
-msgstr ""
-
-#: ../wizard/main.c:115
-#, c-format
-msgid "Pairing with %s canceled"
-msgstr ""
-
-#: ../wizard/main.c:118
-#, c-format
-msgid "Pairing with %s finished"
-msgstr ""
-
-#: ../wizard/main.c:145
-#, c-format
-msgid "Successfully paired with %s"
-msgstr ""
-
-#: ../wizard/main.c:159
-#, c-format
-msgid "Pairing with %s failed"
-msgstr ""
-
-#: ../wizard/main.c:193
-#, c-format
-msgid "Connecting to %s now ..."
-msgstr ""
-
-#: ../wizard/main.c:264
-msgid "Introduction"
-msgstr ""
-
-#: ../wizard/main.c:265
-msgid "Welcome to the Bluetooth device setup wizard"
-msgstr ""
-
-#: ../wizard/main.c:268
-msgid ""
-"The device wizard will walk you through the process of configuring Bluetooth "
-"enabled devices for use with this computer.\n"
-"\n"
-msgstr ""
-
-#: ../wizard/main.c:303
-msgid "Device type"
-msgstr ""
-
-#: ../wizard/main.c:304
-msgid "Select the type of device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:316
-msgid "Mobile phone"
-msgstr ""
-
-#: ../wizard/main.c:331
-msgid "Any device"
-msgstr ""
-
-#: ../wizard/main.c:392
-msgid "Device search"
-msgstr ""
-
-#: ../wizard/main.c:393
-msgid "Select the device you want to setup"
-msgstr ""
-
-#: ../wizard/main.c:428
-msgid "Device setup"
-msgstr ""
-
-#: ../wizard/main.c:429
-msgid "Setting up new device"
-msgstr ""
-
-#: ../wizard/main.c:451
-msgid "Summary"
-msgstr ""
-
-#: ../wizard/main.c:452
-msgid "Succesfully configured new device"
-msgstr ""
-
-#: ../wizard/main.c:462
-msgid "Bluetooth Device Wizard"
-msgstr ""
-
-#: ../sendto/main.c:93
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:98 ../sendto/main.c:111
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:109
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:119
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../sendto/main.c:145
-msgid "File Transfer"
-msgstr ""
-
-#: ../sendto/main.c:162
-msgid "Sending files via Bluetooth"
-msgstr ""
-
-#: ../sendto/main.c:174
-msgid "From:"
-msgstr ""
-
-#: ../sendto/main.c:190
-msgid "To:"
-msgstr ""
-
-#: ../sendto/main.c:206
-msgid "Connecting..."
-msgstr ""
-
-#: ../sendto/main.c:254
-#, c-format
-msgid "Sending %s"
-msgstr ""
-
-#: ../sendto/main.c:261 ../sendto/main.c:326
-#, c-format
-msgid "Sending file %d of %d"
-msgstr ""
-
-#: ../sendto/main.c:322
-#, c-format
-msgid "%d KB/s"
-msgstr ""
-
-#: ../sendto/main.c:324
-#, c-format
-msgid "%d B/s"
-msgstr ""
-
-#: ../sendto/main.c:373
-msgid "An unknown error occurred"
-msgstr ""
-
-#: ../sendto/main.c:383
-msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr ""
-
-#: ../sendto/main.c:554 ../browse/main.c:38
-msgid "Remote device to use"
-msgstr ""
-
-#: ../analyzer/main.c:166
-msgid "Saving of protocol trace failed"
-msgstr "トレースに失敗したプロトコルを保存しています"
-
-#: ../analyzer/main.c:313
-msgid "Loading Trace"
-msgstr "トレースをロードしています"
-
-#: ../analyzer/main.c:317
-msgid "Live Import"
-msgstr "ライブインポート"
-
-#: ../analyzer/main.c:321
-msgid "Protocol Trace"
-msgstr "プロトコルトレース"
-
-#: ../analyzer/main.c:326
-msgid "Unsaved"
-msgstr "未保存"
-
-#: ../analyzer/main.c:609
-msgid "Can't live import from"
-msgstr "ライブインポートできません"
-
-#: ../analyzer/main.c:842 ../analyzer/main.c:1032 ../analyzer/dialog.c:102
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:2
-msgid "Bluetooth Analyzer"
-msgstr "Bluetooth アナライザー"
-
-#: ../analyzer/main.c:856
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#: ../analyzer/main.c:886
-msgid "Open _Recent"
-msgstr "最近開いたもの(_R)"
-
-#: ../analyzer/main.c:933
-msgid "_Edit"
-msgstr "編集(_E)"
-
-#: ../analyzer/main.c:942
-msgid "_View"
-msgstr "表示(_V)"
-
-#: ../analyzer/main.c:947
-msgid "_Full Screen"
-msgstr "全画面表示(_F)"
-
-#: ../analyzer/main.c:954
-msgid "_Tools"
-msgstr "ツール(_T)"
-
-#: ../analyzer/main.c:959
-msgid "_Debug Packet List"
-msgstr "パケットリストのデバッグ(_D)"
-
-#: ../analyzer/main.c:968
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: ../analyzer/dialog.c:110
-msgid "Bluetooth protocol analyzer"
-msgstr "Bluetooth プロトコルアナライザー"
-
-#: ../analyzer/dialog.c:140
-msgid "All Files"
-msgstr "全てのファイル"
-
-#: ../analyzer/dialog.c:145
-msgid "Supported Files"
-msgstr "サポートしているファイル"
-
-#: ../analyzer/dialog.c:154
-msgid "Frontline BTSnoop Files"
-msgstr "Frontline BTSnoop ファイル"
-
-#: ../analyzer/dialog.c:160
-msgid "Apple Packet Logger Files"
-msgstr "Apple パケットロガーファイル"
-
-#: ../analyzer/dialog.c:175
-msgid "By Extension"
-msgstr "拡張子で"
-
-#: ../analyzer/dialog.c:180
-msgid "Frontline BTSnoop Format"
-msgstr "Frontline BTSnoopフォーマット"
-
-#: ../analyzer/dialog.c:185
-msgid "Apple Packet Logger Format"
-msgstr "Apple パケットロガーフォーマット"
-
-#: ../analyzer/dialog.c:249
-msgid "Select File _Type"
-msgstr "ファイルタイプの選択(_T)"
-
-#: ../analyzer/dialog.c:292
-msgid "File Type"
-msgstr "ファイルの種類"
-
-#: ../analyzer/dialog.c:297
-msgid "Extensions"
-msgstr "拡張子"
-
-#: ../analyzer/dialog.c:331
-msgid "Save File"
-msgstr "ファイルの保存"
-
-#: ../analyzer/dialog.c:373
-msgid "Open File"
-msgstr "ファイルを開く"
-
-#: ../analyzer/dialog.c:455
-msgid "Local connection"
-msgstr "ローカル接続"
-
-#: ../analyzer/dialog.c:463
-msgid "Remote connection"
-msgstr "リモート接続"
-
-#: ../analyzer/dialog.c:497
-msgid "Open Import"
-msgstr "インポートを開く"
-
-#: ../analyzer/dialog.c:537
-msgid "Save the protocol trace before closing?"
-msgstr "閉じる前にプロトコルトレースを保存しますか？"
-
-#: ../analyzer/dialog.c:538
-msgid "If you don't save, all information will be permanently lost."
-msgstr "保存しないと、全ての情報が永遠に失われます。"
-
-#: ../analyzer/dialog.c:546
-msgid "Close _without Saving"
-msgstr "保存せずに終了(_w)"
-
-#: ../analyzer/dialog.c:576
-msgid "There is"
-msgstr "保存していないプロトコルトレースが"
-
-#: ../analyzer/dialog.c:576
-msgid "There are"
-msgstr "保存していないプロトコルトレースが"
-
-#: ../analyzer/dialog.c:577
-msgid "unsaved protocol trace."
-msgstr "個あります"
-
-#: ../analyzer/dialog.c:578
-msgid "unsaved protocol traces."
-msgstr "個あります"
-
-#: ../analyzer/dialog.c:579
-msgid "If you quit now, all information will be lost."
-msgstr "今終了すると、全ての情報が失われます。"
-
-#: ../analyzer/dialog.c:589
-msgid "_Discard Changes"
-msgstr "変更の破棄(_D)"
-
-#: ../analyzer/tracer.c:250
-msgid "Type"
-msgstr "種類"
-
-#: ../analyzer/tracer.c:258
-msgid "Packet"
-msgstr "パケット"
-
-#: ../analyzer/tracer.c:267
-msgid "Timestamp"
-msgstr "タイムスタンプ"
-
-#: ../analyzer/bluetooth-analyzer.desktop.in.h:1
-msgid "Analyze Bluetooth traces"
-msgstr "Bluetooth のトレースの解析"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:1
-msgid "Apple Packet Logger File"
-msgstr "Apple パケットロガーファイル"
-
-#: ../analyzer/bluetooth-manager.xml.in.h:2
-msgid "Frontline BTSnoop File"
-msgstr "Frontline BTSnoop ファイル"
+#~ msgid "Authentication request"
+#~ msgstr "認証要求"
+
+#~ msgid "Pairing request for device:"
+#~ msgstr "デバイスに対するペアリング要求:"
+
+#~ msgid "Enter passkey for authentication:"
+#~ msgstr "認証用パスキーを入力してください:"
+
+#~ msgid "Confirmation request"
+#~ msgstr "確認要求"
+
+#~ msgid "Confirm value for authentication:"
+#~ msgstr "認証確認用の値:"
+
+#~ msgid "Authorization request"
+#~ msgstr "認証要求"
+
+#~ msgid "Authorization request for device:"
+#~ msgstr "デバイスに対する認証要求:"
+
+#~ msgid "Enter passkey"
+#~ msgstr "パスキーの入力"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "Notification area"
+#~ msgstr "通知エリア"
+
+#~ msgid "Never display icon"
+#~ msgstr "アイコンを常に非表示"
+
+#~ msgid "Only display when adapter present"
+#~ msgstr "アダプタが存在するときだけ表示"
+
+#~ msgid "Always display icon"
+#~ msgstr "アイコンを常に表示"
+
+#~ msgid "Adapter"
+#~ msgstr "アダプター"
+
+#~ msgid ""
+#~ "Display options for the notification icon. Valid options are \"never\", "
+#~ "\"present\" and \"always\"."
+#~ msgstr ""
+#~ "通知アイコンの表示オプション。設定可能なオプションは「表示しない(never)」"
+#~ "「存在時のみ表示(present)」「常に表示(always)」のいずれか。"
+
+#~ msgid "Saving of protocol trace failed"
+#~ msgstr "トレースに失敗したプロトコルを保存しています"
+
+#~ msgid "Loading Trace"
+#~ msgstr "トレースをロードしています"
+
+#~ msgid "Live Import"
+#~ msgstr "ライブインポート"
+
+#~ msgid "Protocol Trace"
+#~ msgstr "プロトコルトレース"
+
+#~ msgid "Unsaved"
+#~ msgstr "未保存"
+
+#~ msgid "Can't live import from"
+#~ msgstr "ライブインポートできません"
+
+#~ msgid "_File"
+#~ msgstr "ファイル(_F)"
+
+#~ msgid "Open _Recent"
+#~ msgstr "最近開いたもの(_R)"
+
+#~ msgid "_Edit"
+#~ msgstr "編集(_E)"
+
+#~ msgid "_View"
+#~ msgstr "表示(_V)"
+
+#~ msgid "_Full Screen"
+#~ msgstr "全画面表示(_F)"
+
+#~ msgid "_Tools"
+#~ msgstr "ツール(_T)"
+
+#~ msgid "_Debug Packet List"
+#~ msgstr "パケットリストのデバッグ(_D)"
+
+#~ msgid "_Help"
+#~ msgstr "ヘルプ(_H)"
+
+#~ msgid "Bluetooth protocol analyzer"
+#~ msgstr "Bluetooth プロトコルアナライザー"
+
+#~ msgid "All Files"
+#~ msgstr "全てのファイル"
+
+#~ msgid "Supported Files"
+#~ msgstr "サポートしているファイル"
+
+#~ msgid "Frontline BTSnoop Files"
+#~ msgstr "Frontline BTSnoop ファイル"
+
+#~ msgid "Apple Packet Logger Files"
+#~ msgstr "Apple パケットロガーファイル"
+
+#~ msgid "By Extension"
+#~ msgstr "拡張子で"
+
+#~ msgid "Frontline BTSnoop Format"
+#~ msgstr "Frontline BTSnoopフォーマット"
+
+#~ msgid "Apple Packet Logger Format"
+#~ msgstr "Apple パケットロガーフォーマット"
+
+#~ msgid "Select File _Type"
+#~ msgstr "ファイルタイプの選択(_T)"
+
+#~ msgid "File Type"
+#~ msgstr "ファイルの種類"
+
+#~ msgid "Extensions"
+#~ msgstr "拡張子"
+
+#~ msgid "Save File"
+#~ msgstr "ファイルの保存"
+
+#~ msgid "Open File"
+#~ msgstr "ファイルを開く"
+
+#~ msgid "Local connection"
+#~ msgstr "ローカル接続"
+
+#~ msgid "Remote connection"
+#~ msgstr "リモート接続"
+
+#~ msgid "Open Import"
+#~ msgstr "インポートを開く"
+
+#~ msgid "Save the protocol trace before closing?"
+#~ msgstr "閉じる前にプロトコルトレースを保存しますか？"
+
+#~ msgid "If you don't save, all information will be permanently lost."
+#~ msgstr "保存しないと、全ての情報が永遠に失われます。"
+
+#~ msgid "Close _without Saving"
+#~ msgstr "保存せずに終了(_w)"
+
+#~ msgid "There is"
+#~ msgstr "保存していないプロトコルトレースが"
+
+#~ msgid "There are"
+#~ msgstr "保存していないプロトコルトレースが"
+
+#~ msgid "unsaved protocol trace."
+#~ msgstr "個あります"
+
+#~ msgid "unsaved protocol traces."
+#~ msgstr "個あります"
+
+#~ msgid "If you quit now, all information will be lost."
+#~ msgstr "今終了すると、全ての情報が失われます。"
+
+#~ msgid "_Discard Changes"
+#~ msgstr "変更の破棄(_D)"
+
+#~ msgid "Packet"
+#~ msgstr "パケット"
+
+#~ msgid "Timestamp"
+#~ msgstr "タイムスタンプ"
+
+#~ msgid "Analyze Bluetooth traces"
+#~ msgstr "Bluetooth のトレースの解析"
+
+#~ msgid "Apple Packet Logger File"
+#~ msgstr "Apple パケットロガーファイル"
+
+#~ msgid "Frontline BTSnoop File"
+#~ msgstr "Frontline BTSnoop ファイル"
