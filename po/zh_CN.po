@@ -1,155 +1,114 @@
 # Chinese (China) translation for gnome-bluetooth.
-# Copyright (c) 200-2009 Free Software Foundation, Inc.
+# Copyright (c) 2007, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Aron Xu <aronxu@gnome.org>, 2007.
 # fujianwzh <fujianwzh@gmail.com>, 2009.
+# Richard Ma <richard.ma.19850509@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bluez-gnome\n"
+"Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-07-26 15:28+0000\n"
-"PO-Revision-Date: 2009-07-27 00:05+0800\n"
-"Last-Translator: fujianwzh <fujianwzh@gmail.com>\n"
+"POT-Creation-Date: 2009-10-28 12:20+0000\n"
+"PO-Revision-Date: 2009-11-14 17:49+0800\n"
+"Last-Translator: Richard Ma <richard.ma.19850509@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../lib/bluetooth-client.c:109
+#: ../lib/bluetooth-client.c:115
 msgid "All types"
 msgstr "所有类型"
 
-#: ../lib/bluetooth-client.c:111
+#: ../lib/bluetooth-client.c:117
 msgid "Phone"
 msgstr "电话"
 
-#: ../lib/bluetooth-client.c:113
+#: ../lib/bluetooth-client.c:119
 msgid "Modem"
 msgstr "调制解调器"
 
-#: ../lib/bluetooth-client.c:115
+#: ../lib/bluetooth-client.c:121
 msgid "Computer"
 msgstr "计算机"
 
-#: ../lib/bluetooth-client.c:117
+#: ../lib/bluetooth-client.c:123
 msgid "Network"
 msgstr "网络"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:120
+#: ../lib/bluetooth-client.c:126
 msgid "Headset"
 msgstr "耳机"
 
-#: ../lib/bluetooth-client.c:122
+#: ../lib/bluetooth-client.c:128
 msgid "Headphones"
 msgstr "听筒"
 
-#: ../lib/bluetooth-client.c:124
+#: ../lib/bluetooth-client.c:130
 msgid "Audio device"
 msgstr "音频设备"
 
-#: ../lib/bluetooth-client.c:126
+#: ../lib/bluetooth-client.c:132
 msgid "Keyboard"
 msgstr "键盘"
 
-#: ../lib/bluetooth-client.c:128
+#: ../lib/bluetooth-client.c:134
 msgid "Mouse"
 msgstr "鼠标"
 
-#: ../lib/bluetooth-client.c:130
+#: ../lib/bluetooth-client.c:136
 msgid "Camera"
 msgstr "相机"
 
-#: ../lib/bluetooth-client.c:132
+#: ../lib/bluetooth-client.c:138
 msgid "Printer"
 msgstr "打印机"
 
-#: ../lib/bluetooth-client.c:134
+#: ../lib/bluetooth-client.c:140
 msgid "Joypad"
 msgstr "游戏手柄"
 
-#: ../lib/bluetooth-client.c:136
+#: ../lib/bluetooth-client.c:142
 msgid "Tablet"
 msgstr "触摸板"
 
-#: ../lib/bluetooth-client.c:138 ../lib/bluetooth-chooser.c:105
-#: ../lib/bluetooth-chooser.c:139
+#: ../lib/bluetooth-client.c:144 ../lib/bluetooth-chooser.c:121
 msgid "Unknown"
 msgstr "未知"
 
-#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:358
 msgid "Click to select device..."
 msgstr "点击选择设备..."
 
-#: ../lib/bluetooth-chooser.c:95
-msgid "All categories"
-msgstr "所有类别"
-
-#: ../lib/bluetooth-chooser.c:97
-msgid "Paired"
-msgstr "已配对"
-
-#: ../lib/bluetooth-chooser.c:99
-msgid "Trusted"
-msgstr "信任的"
-
-#: ../lib/bluetooth-chooser.c:101
-msgid "Not paired or trusted"
-msgstr "未配对或未信任"
-
-#: ../lib/bluetooth-chooser.c:103
-msgid "Paired or trusted"
-msgstr "已配对或已信任"
-
-#: ../lib/bluetooth-chooser.c:180
+#: ../lib/bluetooth-chooser.c:162
 msgid "No adapters available"
 msgstr "无可用的适配器"
 
-#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+#: ../lib/bluetooth-chooser.c:166 ../lib/bluetooth-chooser.c:840
 msgid "Searching for devices..."
 msgstr "正在查找设备..."
 
-#: ../lib/bluetooth-chooser.c:683
+#: ../lib/bluetooth-chooser.c:352
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "从设备列表中移除 '%s'？"
+
+#: ../lib/bluetooth-chooser.c:354
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr "如果你移除此设备，下次使用时需要重新进行设置。"
+
+#: ../lib/bluetooth-chooser.c:718
 msgid "Device"
 msgstr "设备"
 
-#: ../lib/bluetooth-chooser.c:720
+#: ../lib/bluetooth-chooser.c:755
 msgid "Type"
 msgstr "类型"
-
-#. The filters
-#: ../lib/bluetooth-chooser.c:836
-msgid "Show Only Bluetooth Devices With..."
-msgstr "只显示带有此功能的蓝牙设备..."
-
-#. The device category filter
-#: ../lib/bluetooth-chooser.c:856
-msgid "Device _category:"
-msgstr "设备类别(_C)："
-
-#: ../lib/bluetooth-chooser.c:871
-msgid "Select the device category to filter above list"
-msgstr "选择设备类别来过滤上面的列表"
-
-#. The device type filter
-#: ../lib/bluetooth-chooser.c:885
-msgid "Device _type:"
-msgstr "设备类型(_T)："
-
-#: ../lib/bluetooth-chooser.c:906
-msgid "Select the device type to filter above list"
-msgstr "选择设备类型来过滤上面的列表"
-
-#: ../lib/bluetooth-chooser.c:912
-msgid "Input devices (mice, keyboards, ...)"
-msgstr "输入设备(鼠标，键盘...)"
-
-#: ../lib/bluetooth-chooser.c:916
-msgid "Headphones, headsets and other audio devices"
-msgstr "听筒，耳机或其它音频设备"
 
 #: ../lib/plugins/geoclue.c:162
 msgid "Use this GPS device for Geolocation services"
@@ -162,88 +121,88 @@ msgstr "为 Geolocation 服务使用该 GPS 设备"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "通过你的移动电话访问互联网 (测试)"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:113
 msgid "Select Device to Browse"
 msgstr "选择要浏览的设备"
 
-#: ../applet/main.c:116
+#: ../applet/main.c:117
 msgid "_Browse"
 msgstr "浏览(_B)"
 
-#: ../applet/main.c:124
+#: ../applet/main.c:125
 msgid "Select device to browse"
 msgstr "选择要浏览的设备"
 
-#: ../applet/main.c:280
-msgid "Bluetooth: Unknown"
-msgstr "蓝牙：未知"
-
-#: ../applet/main.c:282 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:294 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "打开蓝牙"
 
-#: ../applet/main.c:283
+#: ../applet/main.c:295
 msgid "Bluetooth: Off"
 msgstr "蓝牙：关"
 
-#: ../applet/main.c:286
+#: ../applet/main.c:298
 msgid "Turn Off Bluetooth"
 msgstr "关闭蓝牙"
 
-#: ../applet/main.c:287
+#: ../applet/main.c:299
 msgid "Bluetooth: On"
 msgstr "蓝牙：开"
 
-#: ../applet/main.c:399
+#: ../applet/main.c:304 ../applet/notify.c:148
+msgid "Bluetooth: Disabled"
+msgstr "蓝牙：已停用"
+
+#: ../applet/main.c:450
 msgid "Disconnecting..."
 msgstr "正在断开连接..."
 
-#: ../applet/main.c:402 ../sendto/main.c:212
+#: ../applet/main.c:453 ../sendto/main.c:213
 msgid "Connecting..."
 msgstr "正在连接..."
 
-#: ../applet/main.c:405 ../applet/main.c:745
+#: ../applet/main.c:456 ../applet/main.c:797
 msgid "Connected"
 msgstr "已连接"
 
-#: ../applet/main.c:408 ../applet/main.c:745
+#: ../applet/main.c:459 ../applet/main.c:797
 msgid "Disconnected"
 msgstr "已断开"
 
-#: ../applet/main.c:763 ../applet/main.c:817 ../properties/adapter.c:446
+#: ../applet/main.c:815 ../applet/main.c:869 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "断开"
 
-#: ../applet/main.c:763 ../applet/main.c:817
+#: ../applet/main.c:815 ../applet/main.c:869
 msgid "Connect"
 msgstr "连接"
 
-#: ../applet/main.c:776
+#: ../applet/main.c:828
 msgid "Send files..."
 msgstr "发送文件..."
 
-#: ../applet/main.c:786
+#: ../applet/main.c:838
 msgid "Browse files..."
 msgstr "浏览文件..."
 
-#: ../applet/main.c:797
+#: ../applet/main.c:849
 msgid "Open Keyboard Preferences..."
 msgstr "打开键盘参数选择..."
 
-#: ../applet/main.c:805
+#: ../applet/main.c:857
 msgid "Open Mouse Preferences..."
 msgstr "打开鼠标首选项..."
 
-#: ../applet/main.c:931
+#: ../applet/main.c:984
 msgid "Debug"
 msgstr "调试"
 
 #. Parse command-line options
-#: ../applet/main.c:951
+#: ../applet/main.c:1004
 msgid "- Bluetooth applet"
 msgstr "- 蓝牙小程序"
 
-#: ../applet/main.c:956
+#: ../applet/main.c:1009
 #, c-format
 msgid ""
 "%s\n"
@@ -252,17 +211,13 @@ msgstr ""
 "%s\n"
 "运行 '%s --help' 查看命令行可用选项的完整列表。\n"
 
-#: ../applet/main.c:972
+#: ../applet/main.c:1025
 msgid "Bluetooth Applet"
 msgstr "蓝牙小程序"
 
 #: ../applet/notify.c:148
 msgid "Bluetooth: Enabled"
 msgstr "蓝牙：已启用"
-
-#: ../applet/notify.c:148
-msgid "Bluetooth: Disabled"
-msgstr "蓝牙：已停用"
 
 #: ../applet/agent.c:251 ../applet/agent.c:332
 #, c-format
@@ -342,12 +297,13 @@ msgstr "蓝牙：正在检查"
 msgid "Browse files on device..."
 msgstr "浏览设备上的文件..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:405
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
+#: ../moblin/moblin-panel.c:1183 ../moblin/moblin-panel.c:1271
 msgid "Devices"
 msgstr "设备"
 
 #: ../applet/popup-menu.ui.h:4
-msgid "Preferences..."
+msgid "Preferences"
 msgstr "首选项..."
 
 #: ../applet/popup-menu.ui.h:5
@@ -361,6 +317,10 @@ msgstr "发送文件到设备..."
 #: ../applet/popup-menu.ui.h:7
 msgid "Set up new device..."
 msgstr "设置新的设备..."
+
+#: ../applet/popup-menu.ui.h:8
+msgid "Visible"
+msgstr ""
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
@@ -386,68 +346,58 @@ msgstr "匹配(_M)"
 msgid "_Show input"
 msgstr "显示输入(_S)"
 
-#: ../properties/main.c:115
+#: ../properties/main.c:132
 msgid "A Bluetooth manager for the GNOME desktop"
 msgstr "适用于 GNOME 桌面的蓝牙管理器"
 
-#: ../properties/main.c:118
+#: ../properties/main.c:135
 msgid "translator-credits"
 msgstr ""
 "Aron Xu <aronxu@gnome.org>\n"
 "fujianwzh <fujianwzh@gmail.com>"
 
-#: ../properties/main.c:120
+#: ../properties/main.c:137
 msgid "GNOME Bluetooth home page"
 msgstr "GNOME 蓝牙主页"
 
-#: ../properties/main.c:145
+#: ../properties/main.c:162
 msgid "Bluetooth Preferences"
 msgstr "蓝牙首选项"
 
-#: ../properties/main.c:157
+#: ../properties/main.c:177
 msgid "_Show Bluetooth icon"
 msgstr "显示蓝牙图标(_S)"
 
-#: ../properties/main.c:307
+#: ../properties/main.c:246
 msgid "Output a list of currently known devices"
 msgstr "输出当前已知设备的列表"
 
-#: ../properties/main.c:344
+#: ../properties/main.c:283
 msgid "Bluetooth Properties"
 msgstr "蓝牙属性"
 
-#: ../properties/adapter.c:179
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "从设备列表中移除 '%s'？"
-
-#: ../properties/adapter.c:181
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr "如果你移除此设备，下次使用时需要重新进行设置。"
-
 #. The discoverable checkbox
-#: ../properties/adapter.c:352
-msgid "Make computer _discoverable"
+#: ../properties/adapter.c:277
+msgid "Make computer _visible"
 msgstr "使计算机可被发现(_D)"
 
-#: ../properties/adapter.c:375
+#: ../properties/adapter.c:300
 msgid "Friendly name"
 msgstr "友好名称"
 
-#: ../properties/adapter.c:437
+#: ../properties/adapter.c:362
 msgid "Set up _new device..."
 msgstr "设置新设备(_N)..."
 
-#: ../properties/adapter.c:460
+#: ../properties/adapter.c:385
 msgid "_Remove"
 msgstr "移除(_R)"
 
-#: ../properties/adapter.c:735
+#: ../properties/adapter.c:661
 msgid "Bluetooth is disabled"
 msgstr "蓝牙已停用"
 
-#: ../properties/adapter.c:771
+#: ../properties/adapter.c:697
 msgid "No Bluetooth adapters present"
 msgstr "未出现蓝牙适配器"
 
@@ -455,7 +405,12 @@ msgstr "未出现蓝牙适配器"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "你的计算机未插入任何蓝牙适配器。"
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:1341
 msgid "Bluetooth"
 msgstr "蓝牙"
 
@@ -489,12 +444,12 @@ msgstr "全部的更多错误只显示在终端。"
 msgid "Pairing with '%s' cancelled"
 msgstr "已取消和 '%s' 配对"
 
-#: ../wizard/main.c:246
+#: ../wizard/main.c:246 ../moblin/moblin-panel.c:976
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "请确认显示于 '%s' 的 PIN 与此匹配。 "
 
-#: ../wizard/main.c:300
+#: ../wizard/main.c:300 ../moblin/moblin-panel.c:1027
 msgid "Please enter the following PIN:"
 msgstr "请输入如下的 PIN："
 
@@ -516,13 +471,13 @@ msgstr "设置 '%s' 失败"
 msgid "Connecting to '%s'..."
 msgstr "正在连接到 '%s' ..."
 
-#: ../wizard/main.c:550
+#: ../wizard/main.c:550 ../moblin/moblin-panel.c:634
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "请在 '%s' 输入如下 PIN 并按下键盘上的 “Enter” 键："
 
-#: ../wizard/main.c:552
+#: ../wizard/main.c:552 ../moblin/moblin-panel.c:636
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "请在 '%s' 输入如下的 PIN ："
@@ -558,7 +513,7 @@ msgid "Bluetooth New Device Setup"
 msgstr "蓝牙新设备设置"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Custom PIN code:"
+msgid "Custom PIN:"
 msgstr "自定义 PIN 码："
 
 #: ../wizard/wizard.ui.h:6
@@ -573,70 +528,73 @@ msgstr "设备设置失败"
 msgid "Device search"
 msgstr "设备搜索"
 
-#: ../wizard/wizard.ui.h:9
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1139
 msgid "Does not match"
 msgstr "不匹配"
 
-#: ../wizard/wizard.ui.h:10
+#: ../wizard/wizard.ui.h:11
 msgid "Finishing New Device Setup"
 msgstr "即将完成新设备设置"
 
-#: ../wizard/wizard.ui.h:11
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
 msgstr "固定的 PIN"
 
-#: ../wizard/wizard.ui.h:12
+#: ../wizard/wizard.ui.h:14
 msgid "Introduction"
 msgstr "介绍"
 
-#: ../wizard/wizard.ui.h:13
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1135
 msgid "Matches"
 msgstr "匹配"
 
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:17
 msgid "PIN Options"
 msgstr "PIN 码选项"
 
-#: ../wizard/wizard.ui.h:15
+#: ../wizard/wizard.ui.h:18
 msgid "PIN _options..."
 msgstr "PIN 选项(_O)..."
 
-#: ../wizard/wizard.ui.h:16
+#: ../wizard/wizard.ui.h:19
 msgid "Select the additional services you want to use with your device:"
 msgstr "为你的设备选择要用的附加服务："
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:20
 msgid "Select the device you want to setup"
 msgstr "选择你要设置的设备"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:21
 msgid "Setup Completed"
 msgstr "设置完成"
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:22
 msgid ""
 "The Bluetooth new device setup will walk you through the process of "
 "configuring Bluetooth enabled devices for use with this computer."
 msgstr "本设备安装向导将帮助您在这台电脑上配置带有蓝牙功能的相关设备。"
 
-#: ../wizard/wizard.ui.h:20
+#: ../wizard/wizard.ui.h:23
 msgid ""
 "The device will need to be within 10 meters of your computer, and be &#8220;"
-"discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
+"visible&#8221; (sometimes called &#8220;discoverable&#8221;). Check the "
 "device's manual if in doubt."
 msgstr ""
-"该设备必须位于你的计算机10米范围内，并 &#8220;可被发现#8221;(有时称为 "
-"&#8220;可见的&#8221;)。如有疑问请检查设备手册。"
+"该设备必须位于你的计算机10米范围内，并 &#8220;可被发现#8221;(有时称为 &#8220;"
+"可见的&#8221;)。如有疑问请检查设备手册。"
 
-#: ../wizard/wizard.ui.h:21
+#: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "欢迎来到蓝牙新设备安装向导"
 
-#: ../wizard/wizard.ui.h:22
+#: ../wizard/wizard.ui.h:25
 msgid "_Automatic PIN selection"
 msgstr "自动选择 PIN(_A)"
 
-#: ../wizard/wizard.ui.h:23
+#: ../wizard/wizard.ui.h:26
 msgid "_Restart Setup"
 msgstr "重新启动安装程序(_R)"
 
@@ -668,67 +626,180 @@ msgstr[0] "大约 %'d 小时"
 msgid "File Transfer"
 msgstr "文件传输"
 
-#: ../sendto/main.c:168
+#. translators: This is the heading for the progress dialogue
+#: ../sendto/main.c:169
 msgid "Sending files via Bluetooth"
 msgstr "通过蓝牙传输文件"
 
-#: ../sendto/main.c:180
+#: ../sendto/main.c:181
 msgid "From:"
 msgstr "从："
 
-#: ../sendto/main.c:196
+#: ../sendto/main.c:197
 msgid "To:"
 msgstr "到："
 
-#: ../sendto/main.c:242
+#: ../sendto/main.c:243
 msgid "An unknown error occurred"
 msgstr "发生了未知错误"
 
-#: ../sendto/main.c:252
+#: ../sendto/main.c:253
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
 msgstr "请确认远程设备已开启并接受蓝牙连接"
 
-#: ../sendto/main.c:336
+#: ../sendto/main.c:337
 #, c-format
 msgid "Sending %s"
 msgstr "发送 %s"
 
-#: ../sendto/main.c:343 ../sendto/main.c:405
+#: ../sendto/main.c:344 ../sendto/main.c:406
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "发送中 %d / %d"
 
-#: ../sendto/main.c:401
+#: ../sendto/main.c:402
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:403
+#: ../sendto/main.c:404
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:497
+#: ../sendto/main.c:498
 msgid "Select Device to Send To"
 msgstr "选择要发送到的设备"
 
-#: ../sendto/main.c:501
+#: ../sendto/main.c:502
 msgid "Send _To"
 msgstr "发送到(_T)"
 
-#: ../sendto/main.c:542
+#: ../sendto/main.c:543
 msgid "Choose files to send"
 msgstr "选择要发送的文件"
 
-#: ../sendto/main.c:571
+#: ../sendto/main.c:572
 msgid "Remote device to use"
 msgstr "使用远程设备"
 
-#: ../sendto/main.c:573
+#: ../sendto/main.c:574
 msgid "Remote device's name"
 msgstr "远程设备名称"
+
+#: ../moblin/main.c:88
+msgid "Run in standalone mode"
+msgstr "使用独立模式运行"
+
+#: ../moblin/main.c:96 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Moblin Bluetooth Panel"
+msgstr "蓝牙管理器"
+
+#: ../moblin/main.c:97
+msgid "- Moblin Bluetooth Panel"
+msgstr "- 蓝牙控制面板"
+
+#: ../moblin/main.c:124
+msgid "bluetooth"
+msgstr "蓝牙"
+
+#: ../moblin/moblin-panel.c:526
+#, c-format
+msgid "Pairing with %s failed."
+msgstr "和 '%s' 配对失败"
+
+#: ../moblin/moblin-panel.c:822
+msgid "<u>Pair</u>"
+msgstr "配对"
+
+#: ../moblin/moblin-panel.c:836
+#, fuzzy
+msgid "<u>Connect</u>"
+msgstr "连接"
+
+#: ../moblin/moblin-panel.c:855
+msgid "<u>Browse</u>"
+msgstr "<u>浏览</u>"
+
+#: ../moblin/moblin-panel.c:1049
+msgid "Device setup failed"
+msgstr "设备设置失败"
+
+#. Back button
+#: ../moblin/moblin-panel.c:1061 ../moblin/moblin-panel.c:1098
+#: ../moblin/moblin-panel.c:1147 ../moblin/moblin-panel.c:1209
+#: ../moblin/moblin-panel.c:1426
+msgid "Back to devices"
+msgstr "返回设备"
+
+#: ../moblin/moblin-panel.c:1082 ../moblin/moblin-panel.c:1119
+msgid "Device setup"
+msgstr "设备设置"
+
+#: ../moblin/moblin-panel.c:1230
+msgid "Only show:"
+msgstr "只显示："
+
+#. Button for PIN options file
+#: ../moblin/moblin-panel.c:1236
+msgid "PIN options"
+msgstr "PIN 码选项"
+
+#. Add new button
+#: ../moblin/moblin-panel.c:1319
+msgid "Add a new device"
+msgstr "添加新设备"
+
+#. Button for Send file
+#: ../moblin/moblin-panel.c:1386
+msgid "Send file from your computer"
+msgstr "从你的计算机上发送文件"
+
+#: ../moblin/bluetooth-panel.desktop.in.in.h:1
+msgid "Bluetooth Manager Panel"
+msgstr "蓝牙管理器控制面板"
+
+#~ msgid "All categories"
+#~ msgstr "所有类别"
+
+#~ msgid "Paired"
+#~ msgstr "已配对"
+
+#~ msgid "Trusted"
+#~ msgstr "信任的"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "未配对或未信任"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "已配对或已信任"
+
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "只显示带有此功能的蓝牙设备..."
+
+#~ msgid "Device _category:"
+#~ msgstr "设备类别(_C)："
+
+#~ msgid "Select the device category to filter above list"
+#~ msgstr "选择设备类别来过滤上面的列表"
+
+#~ msgid "Device _type:"
+#~ msgstr "设备类型(_T)："
+
+#~ msgid "Select the device type to filter above list"
+#~ msgstr "选择设备类型来过滤上面的列表"
+
+#~ msgid "Input devices (mice, keyboards, ...)"
+#~ msgstr "输入设备(鼠标，键盘...)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "听筒，耳机或其它音频设备"
+
+#~ msgid "Bluetooth: Unknown"
+#~ msgstr "蓝牙：未知"
 
 #~ msgid "Bonded"
 #~ msgstr "已配对"
@@ -843,9 +914,6 @@ msgstr "远程设备名称"
 
 #~ msgid "Handheld device"
 #~ msgstr "掌上电脑设备"
-
-#~ msgid "Bonded devices"
-#~ msgstr "结合的设备"
 
 #~ msgid "Remove device entry from service?"
 #~ msgstr "从服务中删除设备条目？"
@@ -1029,9 +1097,6 @@ msgstr "远程设备名称"
 #~ msgid "Receive files from remote devices"
 #~ msgstr "从远程设备接收文件"
 
-#~ msgid "Share files from public folder"
-#~ msgstr "从公共文件夹共享文件"
-
 #~ msgid "Notification area"
 #~ msgstr "通知区域"
 
@@ -1067,9 +1132,6 @@ msgstr "远程设备名称"
 
 #~ msgid "Mobile phone"
 #~ msgstr "移动电话"
-
-#~ msgid "Any device"
-#~ msgstr "任何设备"
 
 #~ msgid "Summary"
 #~ msgstr "汇总"
