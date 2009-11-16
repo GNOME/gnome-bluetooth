@@ -1123,6 +1123,8 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	guint i;
 	int max_filter_val;
 
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+
 	g_type_class_add_private(klass, sizeof(BluetoothChooserPrivate));
 
 	G_OBJECT_CLASS(klass)->finalize = bluetooth_chooser_finalize;
