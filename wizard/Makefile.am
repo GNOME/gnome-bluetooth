@@ -5,7 +5,9 @@ libwizard_la_SOURCES = pin.c pin.h
 libwizard_la_LIBADD = $(WIZARD_LIBS)
 libwizard_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 
-bin_PROGRAMS = bluetooth-wizard test-input
+noinst_PROGRAMS = test-input
+
+bin_PROGRAMS = bluetooth-wizard
 
 bluetooth_wizard_SOURCES = main.c
 
