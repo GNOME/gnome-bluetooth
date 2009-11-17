@@ -29,7 +29,6 @@
 #include "bluetooth-client.h"
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-private.h"
-#include "seahorse-bind.h"
 #include "marshal.h"
 
 struct _BluetoothChooserCombo {
@@ -42,7 +41,6 @@ struct _BluetoothChooserCombo {
 	guint              model_notify_id;
 	GtkTreeSelection  *selection;
 
-	gpointer           expander_state;
 	char              *bdaddr;
 };
 
@@ -80,7 +78,10 @@ bluetooth_chooser_combo_set_device (BluetoothChooserCombo *combo,
 		gtk_widget_set_sensitive (combo->drop_box, TRUE);
 
 		g_free (combo->bdaddr);
-		combo->bdaddr = g_strdup (bdaddr);
+		if (g_strcmp0 (BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE, bdaddr) != 0)
+			combo->bdaddr = g_strdup (bdaddr);
+		else
+			combo->bdaddr = NULL;
 
 		cont = gtk_tree_model_iter_children (combo->model, &iter, NULL);
 		while (cont == TRUE) {
@@ -88,6 +89,13 @@ bluetooth_chooser_combo_set_device (BluetoothChooserCombo *combo,
 
 			gtk_tree_model_get (GTK_TREE_MODEL (combo->model), &iter,
 					    BLUETOOTH_COLUMN_ADDRESS, &value, -1);
+
+			if (combo->bdaddr == NULL) {
+				gtk_tree_selection_select_iter (combo->selection, &iter);
+				combo->bdaddr = value;
+				break;
+			}
+
 			if (g_ascii_strcasecmp(bdaddr, value) == 0) {
 				gtk_tree_selection_select_iter (combo->selection, &iter);
 				g_free (value);
@@ -115,6 +123,10 @@ bluetooth_chooser_combo_dispose (GObject *object)
 	if (combo->model != NULL) {
 		g_object_unref (combo->model);
 		combo->model = NULL;
+	}
+	if (combo->chooser != NULL) {
+		g_object_unref (combo->chooser);
+		combo->chooser = NULL;
 	}
 
 	G_OBJECT_CLASS (parent_class)->dispose (object);
@@ -276,19 +288,9 @@ drop_changed_cb (GtkComboBox *widget,
 	}
 }
 
-static gboolean
-invert_property (const GValue *src, GValue *dest)
-{
-	gboolean value;
-	value = g_value_get_boolean (src);
-	g_value_set_boolean (dest, !value);
-	return TRUE;
-}
-
 static void
 bluetooth_chooser_combo_init (BluetoothChooserCombo *combo)
 {
-	GtkWidget *triangle;
 	GtkWidget *treeview;
 	GtkCellRenderer *renderer;
 
@@ -298,7 +300,7 @@ bluetooth_chooser_combo_init (BluetoothChooserCombo *combo)
 	/* Setup the combo itself */
 	combo->drop = gtk_combo_box_new ();
 	gtk_box_pack_start (GTK_BOX (combo->drop_box), combo->drop,
-			    TRUE, TRUE, 8);
+			    TRUE, TRUE, 0);
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo->drop),
 				    renderer,
@@ -316,13 +318,7 @@ bluetooth_chooser_combo_init (BluetoothChooserCombo *combo)
 					"text", BLUETOOTH_COLUMN_ALIAS,
 					NULL);
 
-	triangle = gtk_expander_new_with_mnemonic (_("Show more widget options"));
-	gtk_container_add (GTK_CONTAINER (combo), triangle);
-	combo->expander_state = seahorse_bind_property_full ("expanded", triangle,
-							     invert_property,
-							     "sensitive", combo->drop, NULL);
 	combo->chooser = bluetooth_chooser_new ("");
-	gtk_container_add (GTK_CONTAINER (triangle), combo->chooser);
 
 	treeview = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (combo->chooser));
 	combo->model_notify_id = g_signal_connect (G_OBJECT (treeview), "notify::model",
