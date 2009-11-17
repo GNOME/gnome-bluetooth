@@ -29,6 +29,8 @@ G_BEGIN_DECLS
 #define BLUETOOTH_CHOOSER_COMBO(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BLUETOOTH_TYPE_CHOOSER_COMBO, BluetoothChooserCombo))
 #define BLUETOOTH_IS_CHOOSER_COMBO(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BLUETOOTH_TYPE_CHOOSER_COMBO))
 
+#define BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE "00:00:00:00:00:00"
+
 typedef struct _BluetoothChooserCombo BluetoothChooserCombo;
 
 typedef struct _BluetoothChooserComboClass {
