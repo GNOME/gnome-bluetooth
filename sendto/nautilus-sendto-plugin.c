@@ -26,15 +26,11 @@
 
 #include <bluetooth-chooser-combo.h>
 #include <bluetooth-chooser.h>
-//#include <bluetooth-marshal.h>
-//#include <dbus/dbus-glib.h>
 #include <glib/gi18n-lib.h>
 #include <gconf/gconf-client.h>
 
 #include "nautilus-sendto-plugin.h"
 
-//#define OBEX_PUSH_SVCLASS_ID_STR "0x1105"
-//#define OBEX_FILETRANS_SVCLASS_ID_STR "0x1106"
 #define LAST_OBEX_DEVICE "/desktop/gnome/nautilus-sendto/last_obex_device"
 
 static GtkWidget *combo;
@@ -65,8 +61,9 @@ set_last_used_device (void)
 	g_object_unref (gconfclient);
 
 	if (bdaddr != NULL && *bdaddr != '\0') {
-		g_message ("address %s", bdaddr);
 		g_object_set (G_OBJECT (combo), "device", bdaddr, NULL);
+	} else {
+		g_object_set (G_OBJECT (combo), "device", BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE, NULL);
 	}
 	g_free (bdaddr);
 }
@@ -89,7 +86,7 @@ get_contacts_widget (NstPlugin *plugin)
 		      NULL);
 	set_last_used_device ();
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (chooser));
-	gtk_container_set_border_width (GTK_CONTAINER (combo), 5);
+	gtk_container_set_border_width (GTK_CONTAINER (combo), 0);
 	gtk_widget_show (combo);
 
 	return combo;
@@ -121,7 +118,6 @@ send_files (NstPlugin *plugin,
 	GError *err = NULL;
 
 	g_object_get (G_OBJECT (combo), "device", &bdaddr, NULL);
-	g_message ("bdaddr %s", bdaddr);
 	if (bdaddr == NULL)
 		return FALSE;
 
