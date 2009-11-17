@@ -111,6 +111,63 @@ supports_xinput_devices (void)
 				&error);
 }
 
+static gboolean
+bluetooth_input_device_get_type (XDeviceInfo *info,
+				 gboolean *is_mouse,
+				 gboolean *is_keyboard)
+{
+	*is_mouse = FALSE;
+	*is_keyboard = FALSE;
+
+	if (info->num_classes > 0) {
+		XAnyClassPtr any;
+		guint i;
+		any = (XAnyClassPtr) (info->inputclassinfo);
+		for (i = 0; i < info->num_classes; i++) {
+			switch (any->class) {
+			case KeyClass: {
+#if 0
+				XKeyInfoPtr k;
+				k = (XKeyInfoPtr) any;
+				printf("\tNum_keys is %d\n", k->num_keys);
+#endif
+				/* FIXME there should be a better way */
+				if (g_str_has_prefix (info->name, "UVC Camera") == FALSE &&
+				    g_strcmp0 (info->name, "USB Audio") != 0)
+					*is_keyboard = TRUE;
+				break;
+			}
+			case ButtonClass:
+				*is_mouse = TRUE;
+				break;
+			default:
+				;;
+			}
+			any = (XAnyClassPtr) ((char *) any + any->length);
+		}
+	}
+
+	return (*is_mouse || *is_keyboard);
+}
+
+static gboolean
+bluetooth_input_ignore_device (const char *name)
+{
+	guint i;
+	const char const *names[] = {
+		"Virtual core XTEST pointer",
+		"Macintosh mouse button emulation",
+		"Virtual core XTEST keyboard",
+		"Power Button"
+	};
+
+	for (i = 0 ; i < G_N_ELEMENTS (names); i++) {
+		if (g_strcmp0 (name, names[i]) == 0)
+			return TRUE;
+	}
+	return FALSE;
+}
+
 void
 bluetooth_input_check_for_devices (BluetoothInput *input)
 {
@@ -124,23 +181,20 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 
 	device_info = XListInputDevices (GDK_DISPLAY (), &n_devices);
 	for (i = 0; i < n_devices; i++) {
-		if (device_info[i].use == IsXExtensionPointer) {
-			/* XTest */
-			if (g_strcmp0 ("Virtual core XTEST pointer", device_info[i].name) == 0)
-				continue;
-			/* Linux mouse button emulation */
-			if (g_strcmp0 ("Macintosh mouse button emulation", device_info[i].name) == 0)
-				continue;
+		gboolean is_mouse, is_keyboard;
+		if (device_info[i].use != IsXExtensionKeyboard &&
+		    device_info[i].use != IsXExtensionPointer)
+			continue;
+		if (bluetooth_input_ignore_device (device_info[i].name) != FALSE)
+			continue;
+		if (bluetooth_input_device_get_type (&device_info[i], &is_mouse, &is_keyboard) == FALSE)
+			continue;
+		if (is_mouse != FALSE) {
 			g_message ("has mouse: %s (id = %d)", device_info[i].name, device_info[i].id);
 			has_mouse = TRUE;
 			//break;
-		} else if (device_info[i].use == IsXExtensionKeyboard) {
-			/* XTest */
-			if (g_strcmp0 ("Virtual core XTEST keyboard", device_info[i].name) == 0)
-				continue;
-			/* ACPI Power buttons */
-			if (g_strcmp0 ("Power Button", device_info[i].name) == 0)
-				continue;
+		}
+		if (is_keyboard != FALSE) {
 			g_message ("has keyboard: %s (id = %d)", device_info[i].name, device_info[i].id);
 			has_keyboard = TRUE;
 			//break;
