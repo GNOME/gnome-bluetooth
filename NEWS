@@ -1,3 +1,19 @@
+ver 2.29.2:
+- Add Moblin front-end for gnome-bluetooth
+- Add experimental nautilus-sendto plugin
+
+Applet:
+	- Fix applet showing the wrong connection information
+	- Use separate icon for the status icon, for monochromatic themes
+	- Add discoverable menu item
+	- Fix a number of rfkill related bugs
+
+Library:
+	- Make it possible use another widget for device filtering
+	- Don't overwrite UUIDs when discovering known devices
+	- Add BluetoothChooserCombo widget
+	- Fix usage under non-UTF-8 locales
+
 ver 2.28.0:
 Applet:
 	- Applet fails to connect to disconnected audio devices
