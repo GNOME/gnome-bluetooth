@@ -378,7 +378,7 @@ int main(int argc, char **argv)
 		if (argc == 3)
 			dialog = create_combo_dialogue (argv[2]);
 		else
-			dialog = create_combo_dialogue (NULL);
+			dialog = create_combo_dialogue (BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE);
 	} else if (g_str_equal (selection, "filter")) {
 		dialog = create_filter_dialogue ();
 	} else {
