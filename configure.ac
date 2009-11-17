@@ -101,7 +101,7 @@ dnl FIXME disabled by default
 AC_ARG_ENABLE(nautilus-sendto,
               AS_HELP_STRING([--enable-nautilus-sendto=@<:@no/yes/auto@:>@],
                              [build nautilus-sendto plugin]), ,
-                             enable_nst=no)
+                             enable_nst=yes)
 
 if test "x$enable_nst" != "xno"; then
    PKG_CHECK_MODULES(NST,
