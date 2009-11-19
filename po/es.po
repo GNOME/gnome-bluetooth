@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-10-27 21:52+0000\n"
-"PO-Revision-Date: 2009-10-29 18:46+0100\n"
+"POT-Creation-Date: 2009-11-17 16:41+0000\n"
+"PO-Revision-Date: 2009-11-19 20:04+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -78,6 +78,7 @@ msgid "Tablet"
 msgstr "Tableta"
 
 #: ../lib/bluetooth-client.c:144 ../lib/bluetooth-chooser.c:121
+#: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -112,6 +113,61 @@ msgstr "Dispositivo"
 #: ../lib/bluetooth-chooser.c:755
 msgid "Type"
 msgstr "Tipo"
+
+#: ../lib/bluetooth-filter-widget.c:75
+msgid "All categories"
+msgstr "Todas las categorías"
+
+#: ../lib/bluetooth-filter-widget.c:77
+#| msgid "Pair"
+msgid "Paired"
+msgstr "Emparejado"
+
+#: ../lib/bluetooth-filter-widget.c:79
+msgid "Trusted"
+msgstr "De confianza"
+
+#: ../lib/bluetooth-filter-widget.c:81
+msgid "Not paired or trusted"
+msgstr "Ni emparejados ni de confianza"
+
+#: ../lib/bluetooth-filter-widget.c:83
+msgid "Paired or trusted"
+msgstr "Emparejados o de confianza"
+
+#: ../lib/bluetooth-filter-widget.c:238
+#| msgid "Show Only Bluetooth Devices With..."
+msgid "<b>Show Only Bluetooth Devices With...</b>"
+msgstr "<b>Mostrar sólo dispositivos Bluetooth que…</b>"
+
+#. The device category filter
+#: ../lib/bluetooth-filter-widget.c:254
+msgid "Device _category:"
+msgstr "_Categoría de dispositivo:"
+
+#: ../lib/bluetooth-filter-widget.c:269
+#| msgid "Select the device category to filter above list"
+msgid "Select the device category to filter"
+msgstr "Seleccionar la categoría de dispositivo por la que filtrar"
+
+#. The device type filter
+#: ../lib/bluetooth-filter-widget.c:283
+msgid "Device _type:"
+msgstr "_Tipo de dispositivo:"
+
+#: ../lib/bluetooth-filter-widget.c:304
+#| msgid "Select the device type to filter above list"
+msgid "Select the device type to filter"
+msgstr "Seleccionar el tipo de dispositivo por el que filtrar"
+
+#: ../lib/bluetooth-filter-widget.c:310
+#| msgid "Input devices (mice, keyboards, ...)"
+msgid "Input devices (mice, keyboards, etc.)"
+msgstr "Dispositivos de entrada (ratones, teclados, etc.)"
+
+#: ../lib/bluetooth-filter-widget.c:314
+msgid "Headphones, headsets and other audio devices"
+msgstr "Auriculares, auriculares con micrófono y otros dispositivos de sonido"
 
 #: ../lib/plugins/geoclue.c:162
 msgid "Use this GPS device for Geolocation services"
@@ -303,7 +359,7 @@ msgid "Browse files on device..."
 msgstr "Examinar archivos en el dispositivo…"
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1180 ../moblin/moblin-panel.c:1268
+#: ../moblin/moblin-panel.c:1183 ../moblin/moblin-panel.c:1271
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -440,7 +496,7 @@ msgstr "Su equipo no tiene ningún adaptador de Bluetooth conectado."
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
 #. * switches in the Network UI of Moblin
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1338
+#: ../moblin/moblin-panel.c:1341
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -474,12 +530,12 @@ msgstr "En adelante todos los errores sólo se mostrarán en el terminal."
 msgid "Pairing with '%s' cancelled"
 msgstr "Emparejamiento con «%s» cancelado"
 
-#: ../wizard/main.c:246 ../moblin/moblin-panel.c:973
+#: ../wizard/main.c:246 ../moblin/moblin-panel.c:976
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Confirme que el PIN mostrado en «%s» coincide con este."
 
-#: ../wizard/main.c:300 ../moblin/moblin-panel.c:1024
+#: ../wizard/main.c:300 ../moblin/moblin-panel.c:1027
 msgid "Please enter the following PIN:"
 msgstr "Introduzca el siguiente PIN:"
 
@@ -501,13 +557,13 @@ msgstr "Falló al configurar «%s»"
 msgid "Connecting to '%s'..."
 msgstr "Conectando con «%s»…"
 
-#: ../wizard/main.c:550 ../moblin/moblin-panel.c:631
+#: ../wizard/main.c:550 ../moblin/moblin-panel.c:634
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Introduzca el siguiente PIN en «%s» y pulse «Intro» en el teclado:"
 
-#: ../wizard/main.c:552 ../moblin/moblin-panel.c:633
+#: ../wizard/main.c:552 ../moblin/moblin-panel.c:636
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Introduzca el siguiente PIN en «%s»:"
@@ -559,7 +615,7 @@ msgid "Device search"
 msgstr "Búsqueda de dispositivos"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1136
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1139
 msgid "Does not match"
 msgstr "No coincide"
 
@@ -577,7 +633,7 @@ msgid "Introduction"
 msgstr "Introducción"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1132
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1135
 msgid "Matches"
 msgstr "Coincide"
 
@@ -730,116 +786,90 @@ msgstr "Dispositivo remoto que usar"
 msgid "Remote device's name"
 msgstr "Nombre del dispositivo remoto"
 
-#: ../moblin/main.c:80
+#: ../sendto/nautilus-sendto-plugin.c:172
+msgid "Programming error, could not find the device in the list"
+msgstr "Error de programación, no se pudo obtener la lista de dispositivos"
+
+#: ../sendto/nautilus-sendto-plugin.c:247
+#, c-format
+msgid "Obex Push file transfer unsupported"
+msgstr "No se soporta la transferencia de archivos con OBEX Push"
+
+#: ../sendto/nautilus-sendto-plugin.c:266
+#| msgid "Bluetooth Status"
+msgid "Bluetooth (OBEX Push)"
+msgstr "Bluetooth (OBEX Push)"
+
+#: ../moblin/main.c:88
 msgid "Run in standalone mode"
 msgstr "Ejecutar en modo independiente"
 
-#: ../moblin/main.c:88 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:96 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "Panel Bluetooth de Moblin"
 
-#: ../moblin/main.c:89
+#: ../moblin/main.c:97
 msgid "- Moblin Bluetooth Panel"
 msgstr "- Panel Bluetooth de Moblin"
 
-#: ../moblin/main.c:116
+#: ../moblin/main.c:124
 msgid "bluetooth"
 msgstr "Bluetooth"
 
-#: ../moblin/moblin-panel.c:523
+#: ../moblin/moblin-panel.c:526
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "Falló el emparejamiento con %s."
 
-#: ../moblin/moblin-panel.c:819
+#: ../moblin/moblin-panel.c:822
 msgid "<u>Pair</u>"
 msgstr "<u>Emparejar</u>"
 
-#: ../moblin/moblin-panel.c:833
+#: ../moblin/moblin-panel.c:836
 msgid "<u>Connect</u>"
 msgstr "<u>Conectar</u>"
 
-#: ../moblin/moblin-panel.c:852
+#: ../moblin/moblin-panel.c:855
 msgid "<u>Browse</u>"
 msgstr "<u>Examinar</u>"
 
-#: ../moblin/moblin-panel.c:1046
+#: ../moblin/moblin-panel.c:1049
 msgid "Device setup failed"
 msgstr "Falló la configuración del dispositivo"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1058 ../moblin/moblin-panel.c:1095
-#: ../moblin/moblin-panel.c:1144 ../moblin/moblin-panel.c:1206
-#: ../moblin/moblin-panel.c:1423
+#: ../moblin/moblin-panel.c:1061 ../moblin/moblin-panel.c:1098
+#: ../moblin/moblin-panel.c:1147 ../moblin/moblin-panel.c:1209
+#: ../moblin/moblin-panel.c:1426
 msgid "Back to devices"
 msgstr "Volver a los dispositivos"
 
-#: ../moblin/moblin-panel.c:1079 ../moblin/moblin-panel.c:1116
+#: ../moblin/moblin-panel.c:1082 ../moblin/moblin-panel.c:1119
 msgid "Device setup"
 msgstr "Configuración del dispositivo"
 
-#: ../moblin/moblin-panel.c:1227
+#: ../moblin/moblin-panel.c:1230
 msgid "Only show:"
 msgstr "Mostrar sólo:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1233
+#: ../moblin/moblin-panel.c:1236
 msgid "PIN options"
 msgstr "Opciones del PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1316
+#: ../moblin/moblin-panel.c:1319
 msgid "Add a new device"
 msgstr "Añadir un dispositivo nuevo"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1383
+#: ../moblin/moblin-panel.c:1386
 msgid "Send file from your computer"
 msgstr "Enviar un archivo desde el equipo"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel de gestión de Bluetooth"
-
-#~| msgid "Paired"
-#~ msgid "Pair"
-#~ msgstr "Pareja"
-
-#~ msgid "All categories"
-#~ msgstr "Todas las categorías"
-
-#~ msgid "Trusted"
-#~ msgstr "De confianza"
-
-#~ msgid "Not paired or trusted"
-#~ msgstr "Ni emparejados ni de confianza"
-
-#~ msgid "Paired or trusted"
-#~ msgstr "Emparejados o de confianza"
-
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Mostrar sólo dispositivos Bluetooth que…"
-
-#~ msgid "Device _category:"
-#~ msgstr "_Categoría de dispositivo:"
-
-#~ msgid "Select the device category to filter above list"
-#~ msgstr ""
-#~ "Seleccionar la categoría de dispositivo por la que filtrar la lista "
-#~ "anterior"
-
-#~ msgid "Device _type:"
-#~ msgstr "_Tipo de dispositivo:"
-
-#~ msgid "Select the device type to filter above list"
-#~ msgstr "Seleccionar"
-
-#~ msgid "Input devices (mice, keyboards, ...)"
-#~ msgstr "Dispositivos de entrada (ratones, teclados, …)"
-
-#~ msgid "Headphones, headsets and other audio devices"
-#~ msgstr ""
-#~ "Auriculares, auriculares con micrófono y otros dispositivos de sonido"
 
 #~ msgid "Bluetooth: Unknown"
 #~ msgstr "Bluetooth: Desconocido"
@@ -944,6 +974,3 @@ msgstr "Panel de gestión de Bluetooth"
 
 #~ msgid "Unnamed Adapter"
 #~ msgstr "Adaptador sin nombre"
-
-#~ msgid "Bluetooth Status"
-#~ msgstr "Estado del Bluetooth"
