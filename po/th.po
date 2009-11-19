@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-11-05 06:25+0000\n"
-"PO-Revision-Date: 2009-11-15 15:44+0700\n"
+"POT-Creation-Date: 2009-11-18 06:41+0000\n"
+"PO-Revision-Date: 2009-11-19 09:14+0700\n"
 "Last-Translator: อาคม โชติพันธวานนท์ <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -75,6 +75,7 @@ msgid "Tablet"
 msgstr "แท็บเล็ต"
 
 #: ../lib/bluetooth-client.c:144 ../lib/bluetooth-chooser.c:121
+#: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
@@ -107,6 +108,56 @@ msgstr "อุปกรณ์"
 #: ../lib/bluetooth-chooser.c:755
 msgid "Type"
 msgstr "ชนิด"
+
+#: ../lib/bluetooth-filter-widget.c:75
+msgid "All categories"
+msgstr "ทุกประเภท"
+
+#: ../lib/bluetooth-filter-widget.c:77
+msgid "Paired"
+msgstr "จับคู่แล้ว"
+
+#: ../lib/bluetooth-filter-widget.c:79
+msgid "Trusted"
+msgstr "เชื่อถือ"
+
+#: ../lib/bluetooth-filter-widget.c:81
+msgid "Not paired or trusted"
+msgstr "ยังไม่จับคู่หรือไม่เชื่อถือ"
+
+#: ../lib/bluetooth-filter-widget.c:83
+msgid "Paired or trusted"
+msgstr "จับคู่แล้วหรือเชื่อถือ"
+
+#: ../lib/bluetooth-filter-widget.c:238
+msgid "<b>Show Only Bluetooth Devices With...</b>"
+msgstr "<b>แสดงเฉพาะอุปกรณ์บลูทูทที่มี...</b>"
+
+#. The device category filter
+#: ../lib/bluetooth-filter-widget.c:254
+msgid "Device _category:"
+msgstr "_ประเภทอุปกรณ์:"
+
+#: ../lib/bluetooth-filter-widget.c:269
+msgid "Select the device category to filter"
+msgstr "เลือกประเภทอุปกรณ์ที่จะกรอง"
+
+#. The device type filter
+#: ../lib/bluetooth-filter-widget.c:283
+msgid "Device _type:"
+msgstr "_ชนิดอุปกรณ์:"
+
+#: ../lib/bluetooth-filter-widget.c:304
+msgid "Select the device type to filter"
+msgstr "เลือกชนิดอุปกรณ์ที่จะกรอง"
+
+#: ../lib/bluetooth-filter-widget.c:310
+msgid "Input devices (mice, keyboards, etc.)"
+msgstr "อุปกรณ์อินพุต (เมาส์ แป้นพิมพ์ เป็นต้น)"
+
+#: ../lib/bluetooth-filter-widget.c:314
+msgid "Headphones, headsets and other audio devices"
+msgstr "หูฟัง ชุดหูฟัง และอุปกรณ์เสียงอื่น"
 
 #: ../lib/plugins/geoclue.c:162
 msgid "Use this GPS device for Geolocation services"
@@ -688,6 +739,19 @@ msgstr "อุปกรณ์อีกฝ่ายที่จะใช้"
 msgid "Remote device's name"
 msgstr "ชื่อของอุปกรณ์อีกฝ่าย"
 
+#: ../sendto/nautilus-sendto-plugin.c:172
+msgid "Programming error, could not find the device in the list"
+msgstr "เกิดข้อผิดพลาดของการเขียนโปรแกรม ไม่พบอุปกรณ์ในรายชื่อ"
+
+#: ../sendto/nautilus-sendto-plugin.c:247
+#, c-format
+msgid "Obex Push file transfer unsupported"
+msgstr "ไม่รองรับการถ่ายโอนแฟ้มผ่าน Obex Push"
+
+#: ../sendto/nautilus-sendto-plugin.c:266
+msgid "Bluetooth (OBEX Push)"
+msgstr "บลูทูท (OBEX Push)"
+
 #: ../moblin/main.c:88
 msgid "Run in standalone mode"
 msgstr "เรียกในโหมดทำงานเดี่ยว"
@@ -758,42 +822,6 @@ msgstr "ส่งแฟ้มจากคอมพิวเตอร์ของ
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "พาเนลจัดการบลูทูท"
-
-#~ msgid "All categories"
-#~ msgstr "ทุกประเภท"
-
-#~ msgid "Paired"
-#~ msgstr "จับคู่แล้ว"
-
-#~ msgid "Trusted"
-#~ msgstr "เชื่อถือ"
-
-#~ msgid "Not paired or trusted"
-#~ msgstr "ยังไม่จับคู่หรือไม่เชื่อถือ"
-
-#~ msgid "Paired or trusted"
-#~ msgstr "จับคู่แล้วหรือเชื่อถือ"
-
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "แสดงเฉพาะอุปกรณ์บลูทูทที่มี..."
-
-#~ msgid "Device _category:"
-#~ msgstr "_ประเภทอุปกรณ์:"
-
-#~ msgid "Select the device category to filter above list"
-#~ msgstr "เลือกประเภทอุปกรณ์เพื่อกรองรายการข้างบน"
-
-#~ msgid "Device _type:"
-#~ msgstr "_ชนิดอุปกรณ์:"
-
-#~ msgid "Select the device type to filter above list"
-#~ msgstr "เลือกชนิดอุปกรณ์เพื่อกรองรายการข้างบน"
-
-#~ msgid "Input devices (mice, keyboards, ...)"
-#~ msgstr "อุปกรณ์อินพุต (เมาส์ แป้นพิมพ์...)"
-
-#~ msgid "Headphones, headsets and other audio devices"
-#~ msgstr "หูฟัง ชุดหูฟัง และอุปกรณ์เสียงอื่น"
 
 #~ msgid "Bluetooth: Unknown"
 #~ msgstr "บลูทูท: ไม่ทราบ"
