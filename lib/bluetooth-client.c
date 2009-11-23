@@ -298,6 +298,23 @@ static gboolean compare_path(GtkTreeStore *store,
 }
 
 static gboolean
+compare_address (GtkTreeStore *store,
+		 GtkTreeIter *iter,
+		 gpointer user_data)
+{
+	const char *address = user_data;
+	char *tmp_address;
+	gboolean found = FALSE;
+
+	gtk_tree_model_get (GTK_TREE_MODEL(store), iter,
+			    BLUETOOTH_COLUMN_ADDRESS, &tmp_address, -1);
+	found = g_str_equal (address, tmp_address);
+	g_free (tmp_address);
+
+	return found;
+}
+
+static gboolean
 get_iter_from_path (GtkTreeStore *store,
 		    GtkTreeIter *iter,
 		    const char *path)
@@ -312,6 +329,20 @@ get_iter_from_proxy(GtkTreeStore *store,
 {
 	return iter_search(store, iter, NULL, compare_path,
 			   (gpointer) dbus_g_proxy_get_path (proxy));
+}
+
+static gboolean
+get_iter_from_address (GtkTreeStore *store,
+		       GtkTreeIter  *iter,
+		       const char   *address,
+		       DBusGProxy   *adapter)
+{
+	GtkTreeIter parent_iter;
+
+	if (get_iter_from_proxy (store, &parent_iter, adapter) == FALSE)
+		return FALSE;
+
+	return iter_search (store, iter, &parent_iter, compare_address, (gpointer) address);
 }
 
 static void
@@ -1586,12 +1617,16 @@ static void create_device_callback(DBusGProxy *proxy,
 	g_object_unref(proxy);
 }
 
-gboolean bluetooth_client_create_device(BluetoothClient *client,
-			const char *address, const char *agent,
-			BluetoothClientCreateDeviceFunc func, gpointer data)
+gboolean bluetooth_client_create_device (BluetoothClient *client,
+					 const char *address,
+					 const char *agent,
+					 BluetoothClientCreateDeviceFunc func,
+					 gpointer data)
 {
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	CreateDeviceData *devdata;
 	DBusGProxy *adapter;
+	GtkTreeIter iter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (address != NULL, FALSE);
@@ -1601,6 +1636,27 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 	adapter = bluetooth_client_get_default_adapter(client);
 	if (adapter == NULL)
 		return FALSE;
+
+	/* Remove the pairing if it already exists, but only for pairings */
+	if (agent != NULL &&
+	    get_iter_from_address(priv->store, &iter, address, adapter) == TRUE) {
+		DBusGProxy *device;
+		gboolean paired;
+		GError *err = NULL;
+
+		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+				    BLUETOOTH_COLUMN_PROXY, &device,
+				    BLUETOOTH_COLUMN_PAIRED, &paired, -1);
+		if (paired != FALSE &&
+		    dbus_g_proxy_call (adapter, "RemoveDevice", &err,
+				       DBUS_TYPE_G_OBJECT_PATH, dbus_g_proxy_get_path (device),
+				       G_TYPE_INVALID, G_TYPE_INVALID) == FALSE) {
+			g_warning ("Failed to remove device '%s': %s", address,
+				   err->message);
+			g_error_free (err);
+		}
+		g_object_unref (device);
+	}
 
 	devdata = g_try_new0(CreateDeviceData, 1);
 	if (devdata == NULL)
