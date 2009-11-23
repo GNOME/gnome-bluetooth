@@ -582,6 +582,9 @@ void prepare_callback (GtkWidget *assistant,
 		GValue value = { 0, };
 		char **uuids, *text;
 
+		/* FIXME remove this code when bluetoothd has pair/unpair code */
+		g_object_set (G_OBJECT (selector), "device-selected", target_address, NULL);
+
 		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
 		text = g_strdup_printf (_("Successfully set up new device '%s'"), g_value_get_string (&value));
 		g_value_unset (&value);
