@@ -210,6 +210,7 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 	g_signal_emit (G_OBJECT (button),
 		       signals[CHOOSER_CREATED],
 		       0, button->chooser);
+	g_object_set (G_OBJECT (button->chooser), "device-selected", button->bdaddr, NULL);
 	gtk_container_set_border_width (GTK_CONTAINER(button->chooser), 5);
 	gtk_widget_show (button->chooser);
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (button->dialog))), button->chooser);
