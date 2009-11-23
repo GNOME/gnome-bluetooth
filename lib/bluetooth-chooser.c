@@ -942,9 +942,45 @@ static void
 bluetooth_chooser_set_property (GObject *object, guint prop_id,
 					 const GValue *value, GParamSpec *pspec)
 {
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
+	BluetoothChooser *self = BLUETOOTH_CHOOSER (object);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE (object);
 
 	switch (prop_id) {
+	case PROP_DEVICE_SELECTED: {
+		const char *address;
+		char *selected;
+		GtkTreeIter iter;
+		gboolean cont;
+
+		address = g_value_get_string (value);
+		if (address == NULL) {
+			gtk_tree_selection_unselect_all (priv->selection);
+			return;
+		}
+
+		selected = bluetooth_chooser_get_selected_device (self);
+		if (g_strcmp0 (selected, address) == 0) {
+			g_free (selected);
+			return;
+		}
+		g_free (selected);
+
+		cont = gtk_tree_model_get_iter_first (priv->filter, &iter);
+		while (cont == TRUE) {
+			char *iaddress;
+			gtk_tree_model_get (priv->filter, &iter,
+					    BLUETOOTH_COLUMN_ADDRESS, &iaddress, -1);
+			if (g_strcmp0 (iaddress, address) == 0) {
+				gtk_tree_selection_select_iter (priv->selection, &iter);
+				g_free (iaddress);
+				return;
+			}
+			g_free (iaddress);
+
+			cont = gtk_tree_model_iter_next (priv->filter, &iter);
+		}
+		break;
+	}
 	case PROP_TITLE:
 		bluetooth_chooser_set_title (BLUETOOTH_CHOOSER (object), g_value_get_string (value));
 		break;
@@ -1088,7 +1124,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 									  "title", "The widget header title", NULL, G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
-										    "device-selected", "the Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE));
+										    "device-selected", "the Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE | G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_PAIRING, g_param_spec_boolean ("show-pairing",
 										  "show-pairing", "Whether to show the pairing column in the tree.", FALSE, G_PARAM_READWRITE));
