@@ -75,67 +75,39 @@ static void close_callback(GtkWidget *button, gpointer user_data)
 	gtk_main_quit();
 }
 
-static void about_url_hook (GtkAboutDialog *about,
-			    const gchar *link,
-			    gpointer data)
+static void
+receive_callback (GtkWidget *item, GtkWindow *window)
 {
-	GError *error = NULL;
+	GtkWidget *dialog, *hbox, *image, *label;
+	const char *command = "gnome-file-share-properties";
 
-	if (!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (about)),
-			   link,
-			   gtk_get_current_event_time (),
-			   &error))
-	{
-		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new (GTK_WINDOW (about),
-						GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_CLOSE, NULL);
-		gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG(dialog),
-					      error->message);
+	if (!g_spawn_command_line_async(command, NULL)) {
+		/* translators:
+		 * This is the name of the preferences dialogue for gnome-user-share */
+		dialog = gtk_dialog_new_with_buttons(_("Cannot start \"Personal File Sharing\" Preferences"), window,
+						     GTK_DIALOG_NO_SEPARATOR,
+						     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
+
+		hbox = gtk_hbox_new (FALSE, 4);
+
+		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_ERROR, GTK_ICON_SIZE_MENU);
+		gtk_box_pack_start(GTK_BOX (hbox), image, FALSE, FALSE, 4);
+
+		/* translators:
+		 * This is the name of the preferences dialogue for gnome-user-share */
+		label = gtk_label_new (_("Please verify that the \"Personal File Sharing\" program is correctly installed."));
+		gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+		gtk_box_pack_start(GTK_BOX (hbox), label, TRUE, TRUE, 4);
+
+		gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+
+		gtk_widget_show_all(hbox);
+		gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+		gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-		g_error_free (error);
 	}
-}
-
-static void about_email_hook(GtkAboutDialog *about,
-			     const char *email_address,
-			     gpointer data)
-{
-	char *escaped, *uri;
-
-	escaped = g_uri_escape_string (email_address, NULL, FALSE);
-	uri = g_strdup_printf ("mailto:%s", escaped);
-	g_free (escaped);
-
-	about_url_hook (about, uri, data);
-	g_free (uri);
-}
-
-static void about_callback(GtkWidget *item, GtkWindow *parent)
-{
-	const gchar *authors[] = {
-		"Bastien Nocera <hadess@hadess.net>",
-		"Marcel Holtmann <marcel@holtmann.org>",
-		NULL
-	};
-	const gchar *artists[] = {
-		"Andreas Nilsson <nisses.mail@home.se>",
-		NULL,
-	};
-
-	gtk_about_dialog_set_url_hook(about_url_hook, NULL, NULL);
-	gtk_about_dialog_set_email_hook(about_email_hook, NULL, NULL);
-
-	gtk_show_about_dialog(parent, "version", VERSION,
-		"copyright", "Copyright \xc2\xa9 2005-2008 Marcel Holtmann, 2006-2009 Bastien Nocera",
-		"comments", _("A Bluetooth manager for the GNOME desktop"),
-		"authors", authors,
-		"artists", artists,
-		"translator-credits", _("translator-credits"),
-		"website", "http://live.gnome.org/GnomeBluetooth",
-		"website-label", _("GNOME Bluetooth home page"),
-		"logo-icon-name", "bluetooth", NULL);
 }
 
 static void help_callback(GtkWidget *item)
@@ -156,6 +128,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	GtkWidget *vbox;
 	GtkWidget *buttonbox;
 	GtkWidget *button;
+	GtkWidget *image;
 	GConfBridge *bridge;
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -196,12 +169,15 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	g_signal_connect(G_OBJECT(button), "clicked",
 					G_CALLBACK(help_callback), window);
 
-	button = gtk_button_new_from_stock(GTK_STOCK_ABOUT);
+	image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
+					  GTK_ICON_SIZE_BUTTON);
+	button = gtk_button_new_with_label (_("Receive Files"));
+	gtk_button_set_image (GTK_BUTTON (button), image);
 	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 								button, TRUE);
 	g_signal_connect(G_OBJECT(button), "clicked",
-					G_CALLBACK(about_callback), window);
+					G_CALLBACK(receive_callback), window);
 
 	gtk_widget_show_all(window);
 
