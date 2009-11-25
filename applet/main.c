@@ -1015,6 +1015,7 @@ int main(int argc, char *argv[])
 	if (option_debug == FALSE) {
 		app = unique_app_new ("org.gnome.Bluetooth.applet", NULL);
 		if (unique_app_is_running (app)) {
+			gdk_notify_startup_complete ();
 			g_warning ("Applet is already running, exiting");
 			return 0;
 		}

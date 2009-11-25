@@ -1021,6 +1021,7 @@ int main (int argc, char **argv)
 
 	app = unique_app_new ("org.gnome.Bluetooth.wizard", NULL);
 	if (unique_app_is_running (app)) {
+		gdk_notify_startup_complete ();
 		unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
 		return 0;
 	}
