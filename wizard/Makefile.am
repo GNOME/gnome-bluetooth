@@ -14,9 +14,9 @@ bluetooth_wizard_SOURCES = main.c
 bluetooth_wizard_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la libwizard.la $(WIZARD_LIBS)
 
 test_input_SOURCES = test-input.c bluetooth-input.c bluetooth-input.h
-test_input_LDADD = $(WIZARD_LIBS)
+test_input_LDADD = $(INPUT_LIBS)
 
-AM_CFLAGS = $(WIZARD_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
+AM_CFLAGS = $(WIZARD_CFLAGS) $(INPUT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
 pin_DATA = pin-code-database.xml
 pindir = $(pkgdatadir)

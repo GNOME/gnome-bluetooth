@@ -125,6 +125,11 @@ PKG_CHECK_MODULES(WIZARD,
 		  gtk+-2.0
 		  unique-1.0)
 
+dnl Requires for the input helper
+PKG_CHECK_MODULES(INPUT,
+		  xi
+		  gtk+-2.0)
+
 dnl Requires for the public library
 PKG_CHECK_MODULES(LIBGNOMEBT,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
