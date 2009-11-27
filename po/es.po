@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-11-17 16:41+0000\n"
-"PO-Revision-Date: 2009-11-19 20:04+0100\n"
+"POT-Creation-Date: 2009-11-25 18:57+0000\n"
+"PO-Revision-Date: 2009-11-27 01:33+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "Tableta"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:358
+#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:359
 msgid "Click to select device..."
 msgstr "Pulse para seleccionar el dispositivo…"
 
@@ -119,7 +119,6 @@ msgid "All categories"
 msgstr "Todas las categorías"
 
 #: ../lib/bluetooth-filter-widget.c:77
-#| msgid "Pair"
 msgid "Paired"
 msgstr "Emparejado"
 
@@ -136,7 +135,6 @@ msgid "Paired or trusted"
 msgstr "Emparejados o de confianza"
 
 #: ../lib/bluetooth-filter-widget.c:238
-#| msgid "Show Only Bluetooth Devices With..."
 msgid "<b>Show Only Bluetooth Devices With...</b>"
 msgstr "<b>Mostrar sólo dispositivos Bluetooth que…</b>"
 
@@ -146,7 +144,6 @@ msgid "Device _category:"
 msgstr "_Categoría de dispositivo:"
 
 #: ../lib/bluetooth-filter-widget.c:269
-#| msgid "Select the device category to filter above list"
 msgid "Select the device category to filter"
 msgstr "Seleccionar la categoría de dispositivo por la que filtrar"
 
@@ -156,12 +153,10 @@ msgid "Device _type:"
 msgstr "_Tipo de dispositivo:"
 
 #: ../lib/bluetooth-filter-widget.c:304
-#| msgid "Select the device type to filter above list"
 msgid "Select the device type to filter"
 msgstr "Seleccionar el tipo de dispositivo por el que filtrar"
 
 #: ../lib/bluetooth-filter-widget.c:310
-#| msgid "Input devices (mice, keyboards, ...)"
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Dispositivos de entrada (ratones, teclados, etc.)"
 
@@ -271,7 +266,7 @@ msgstr ""
 "Ejecute «%s --help» para ver una lista completa de todas las opciones "
 "disponibles de la línea de comandos.\n"
 
-#: ../applet/main.c:1025
+#: ../applet/main.c:1026
 msgid "Bluetooth Applet"
 msgstr "Miniaplicación para Bluetooth"
 
@@ -407,58 +402,40 @@ msgstr "C_oincide"
 msgid "_Show input"
 msgstr "_Mostrar entrada"
 
-#: ../properties/main.c:132
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Un gestor de Bluetooth para el escritorio GNOME"
+#. translators:
+#. * This is the name of the preferences dialogue for gnome-user-share
+#: ../properties/main.c:87
+msgid "Cannot start \"Personal File Sharing\" Preferences"
+msgstr ""
+"No se pueden iniciar las preferencias de «Compartición de archivos personales»"
+
+#. translators:
+#. * This is the name of the preferences dialogue for gnome-user-share
+#: ../properties/main.c:98
+msgid ""
+"Please verify that the \"Personal File Sharing\" program is correctly "
+"installed."
+msgstr ""
+"Compruebe que el programa «Compartición de archivos personales» está "
+"correctamente instalado."
 
 #: ../properties/main.c:135
-msgid "translator-credits"
-msgstr ""
-"Jorge González <jorgegonz@svn.gnome.org>, 2009\n"
-"\n"
-"Contribuciones en Launchpad:\n"
-"  Alvaro Lazaro https://launchpad.net/~alazaro\n"
-"  Chema https://launchpad.net/~chema2\n"
-"  Cuadrado https://launchpad.net/~soydavid86\n"
-"  Dante Díaz https://launchpad.net/~dante.df\n"
-"  Deisy Yekaterina https://launchpad.net/~onlyone342\n"
-"  Gonzalo L. Campos Medina https://launchpad.net/~gcamposm\n"
-"  JM Rivas https://launchpad.net/~guelote\n"
-"  Jago (Carlos S. Melón) https://launchpad.net/~jago84\n"
-"  Jorge González González https://launchpad.net/~jorge-gonzalez-gonzalez\n"
-"  Julián Alarcón https://launchpad.net/~alarconj\n"
-"  Martin Albisetti https://launchpad.net/~beuno\n"
-"  Paco Molinero https://launchpad.net/~franciscomol\n"
-"  RICARDO https://launchpad.net/~rjvidela\n"
-"  Ricardo González Castro https://launchpad.net/~rickgc\n"
-"  Ricardo Pérez López https://launchpad.net/~ricardo\n"
-"  Sargate Kanogan https://launchpad.net/~sargate\n"
-"  Wilfredo Ernesto Guerrero Campos https://launchpad.net/~wolffkrieger\n"
-"  José Luis Flores Pineda https://launchpad.net/~peker\n"
-"  Michael Castielli https://launchpad.net/~mickyx\n"
-"  Nacho Blanco https://launchpad.net/~nako\n"
-"  Ricardo Varas Santana https://launchpad.net/~rvaras81\n"
-"  Rodrigo Garcia Gonzalez https://launchpad.net/~nibblesmx\n"
-"  fr85710 https://launchpad.net/~fr85710\n"
-"  maaark https://launchpad.net/~tremolodehendrik"
-
-#: ../properties/main.c:137
-msgid "GNOME Bluetooth home page"
-msgstr "Página web de GNOME Bluetooth"
-
-#: ../properties/main.c:162
 msgid "Bluetooth Preferences"
 msgstr "Preferencias de Bluetooth"
 
-#: ../properties/main.c:177
+#: ../properties/main.c:150
 msgid "_Show Bluetooth icon"
 msgstr "_Mostrar icono Bluetooth"
 
-#: ../properties/main.c:246
+#: ../properties/main.c:174
+msgid "Receive Files"
+msgstr "Recibir archivos"
+
+#: ../properties/main.c:222
 msgid "Output a list of currently known devices"
 msgstr "Mostrar una lista de los dispositivos conocidos actualmente"
 
-#: ../properties/main.c:283
+#: ../properties/main.c:260
 msgid "Bluetooth Properties"
 msgstr "Propiedades del Bluetooth"
 
@@ -577,7 +554,7 @@ msgstr "Introduzca el siguiente PIN en «%s»:"
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Espere mientras se termina de configurar el dispositivo «%s»…"
 
-#: ../wizard/main.c:586
+#: ../wizard/main.c:589
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Dispositivo nuevo «%s» configurado correctamente"
@@ -796,7 +773,6 @@ msgid "Obex Push file transfer unsupported"
 msgstr "No se soporta la transferencia de archivos con OBEX Push"
 
 #: ../sendto/nautilus-sendto-plugin.c:266
-#| msgid "Bluetooth Status"
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
@@ -870,6 +846,42 @@ msgstr "Enviar un archivo desde el equipo"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel de gestión de Bluetooth"
+
+#~ msgid "A Bluetooth manager for the GNOME desktop"
+#~ msgstr "Un gestor de Bluetooth para el escritorio GNOME"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Jorge González <jorgegonz@svn.gnome.org>, 2009\n"
+#~ "\n"
+#~ "Contribuciones en Launchpad:\n"
+#~ "  Alvaro Lazaro https://launchpad.net/~alazaro\n"
+#~ "  Chema https://launchpad.net/~chema2\n"
+#~ "  Cuadrado https://launchpad.net/~soydavid86\n"
+#~ "  Dante Díaz https://launchpad.net/~dante.df\n"
+#~ "  Deisy Yekaterina https://launchpad.net/~onlyone342\n"
+#~ "  Gonzalo L. Campos Medina https://launchpad.net/~gcamposm\n"
+#~ "  JM Rivas https://launchpad.net/~guelote\n"
+#~ "  Jago (Carlos S. Melón) https://launchpad.net/~jago84\n"
+#~ "  Jorge González González https://launchpad.net/~jorge-gonzalez-gonzalez\n"
+#~ "  Julián Alarcón https://launchpad.net/~alarconj\n"
+#~ "  Martin Albisetti https://launchpad.net/~beuno\n"
+#~ "  Paco Molinero https://launchpad.net/~franciscomol\n"
+#~ "  RICARDO https://launchpad.net/~rjvidela\n"
+#~ "  Ricardo González Castro https://launchpad.net/~rickgc\n"
+#~ "  Ricardo Pérez López https://launchpad.net/~ricardo\n"
+#~ "  Sargate Kanogan https://launchpad.net/~sargate\n"
+#~ "  Wilfredo Ernesto Guerrero Campos https://launchpad.net/~wolffkrieger\n"
+#~ "  José Luis Flores Pineda https://launchpad.net/~peker\n"
+#~ "  Michael Castielli https://launchpad.net/~mickyx\n"
+#~ "  Nacho Blanco https://launchpad.net/~nako\n"
+#~ "  Ricardo Varas Santana https://launchpad.net/~rvaras81\n"
+#~ "  Rodrigo Garcia Gonzalez https://launchpad.net/~nibblesmx\n"
+#~ "  fr85710 https://launchpad.net/~fr85710\n"
+#~ "  maaark https://launchpad.net/~tremolodehendrik"
+
+#~ msgid "GNOME Bluetooth home page"
+#~ msgstr "Página web de GNOME Bluetooth"
 
 #~ msgid "Bluetooth: Unknown"
 #~ msgstr "Bluetooth: Desconocido"
