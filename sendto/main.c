@@ -221,7 +221,7 @@ static void create_window(void)
 
 	label_status = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label_status), 0, 0.5);
-	gtk_label_set_ellipsize(GTK_LABEL(label_status), PANGO_ELLIPSIZE_END);
+	gtk_label_set_line_wrap(GTK_LABEL(label_status), TRUE);
 	gtk_box_pack_start(GTK_BOX (hbox), label_status, TRUE, TRUE, 4);
 
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 2);
