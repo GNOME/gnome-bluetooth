@@ -29,6 +29,8 @@ INCLUDES = -I$(top_srcdir)/lib
 man_MANS = bluetooth-wizard.1
 
 all: check
+
+check:
 	@if test -n $(XMLLINT) ; then \
 		xmllint --noout --valid $(srcdir)/pin-code-database.xml ;	\
 	fi
