@@ -35,7 +35,6 @@
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-private.h"
 #include "gnome-bluetooth-enum-types.h"
-#include "bling-spinner.h"
 #include "bluetooth-filter-widget.h"
 
 enum {
@@ -153,16 +152,16 @@ set_search_label (BluetoothChooser *self, gboolean state)
 
 	if (priv->show_searching == FALSE) {
 		/* Just making sure */
-		bling_spinner_stop (BLING_SPINNER (priv->spinner));
+		gtk_spinner_stop (GTK_SPINNER (priv->spinner));
 		return;
 	}
 	if (state == FALSE) {
-		bling_spinner_stop (BLING_SPINNER (priv->spinner));
+		gtk_spinner_stop (GTK_SPINNER (priv->spinner));
 		gtk_widget_hide (priv->spinner);
 		gtk_label_set_text (GTK_LABEL (priv->search_label), _("No adapters available"));
 	} else {
 		gtk_widget_show (priv->spinner);
-		bling_spinner_start (BLING_SPINNER (priv->spinner));
+		gtk_spinner_start (GTK_SPINNER (priv->spinner));
 		gtk_label_set_text (GTK_LABEL (priv->search_label), _("Searching for devices..."));
 	}
 }
@@ -834,7 +833,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	/* The searching label */
 	priv->search_hbox = gtk_hbox_new (FALSE, 6);
 	gtk_widget_set_no_show_all (priv->search_hbox, TRUE);
-	priv->spinner = bling_spinner_new ();
+	priv->spinner = gtk_spinner_new ();
 	gtk_container_add (GTK_CONTAINER (priv->search_hbox), priv->spinner);
 	gtk_widget_show (priv->spinner);
 	priv->search_label = gtk_label_new (_("Searching for devices..."));

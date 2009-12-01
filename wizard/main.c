@@ -33,7 +33,6 @@
 #include <dbus/dbus-glib.h>
 #include <unique/uniqueapp.h>
 
-#include <bling-spinner.h>
 #include <bluetooth-client.h>
 #include <bluetooth-client-private.h>
 #include <bluetooth-chooser.h>
@@ -505,7 +504,7 @@ void prepare_callback (GtkWidget *assistant,
 
 		complete = FALSE;
 
-		bling_spinner_start (BLING_SPINNER (spinner_connecting));
+		gtk_spinner_start (GTK_SPINNER (spinner_connecting));
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -515,7 +514,7 @@ void prepare_callback (GtkWidget *assistant,
 		gtk_label_set_text (GTK_LABEL (label_connecting), text);
 		g_free (text);
 	} else {
-		bling_spinner_stop (BLING_SPINNER (spinner_connecting));
+		gtk_spinner_stop (GTK_SPINNER (spinner_connecting));
 	}
 
 	if ((page == page_setup || page == page_connecting) && (create_started == FALSE)) {
@@ -564,7 +563,7 @@ void prepare_callback (GtkWidget *assistant,
 
 		complete = FALSE;
 
-		bling_spinner_start (BLING_SPINNER (spinner_finishing));
+		gtk_spinner_start (GTK_SPINNER (spinner_finishing));
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -574,7 +573,7 @@ void prepare_callback (GtkWidget *assistant,
 		gtk_label_set_text (GTK_LABEL (label_finishing), text);
 		g_free (text);
 	} else {
-		bling_spinner_stop (BLING_SPINNER (spinner_finishing));
+		gtk_spinner_stop (GTK_SPINNER (spinner_finishing));
 	}
 
 	if (page == page_summary) {

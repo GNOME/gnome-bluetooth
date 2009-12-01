@@ -43,7 +43,6 @@
 #include "bluetooth-filter-widget.h"
 #include "bluetooth-agent.h"
 #include "gnome-bluetooth-enum-types.h"
-#include "bling-spinner.h"
 
 #include "pin.h"
 
@@ -616,9 +615,9 @@ set_current_page (MoblinPanel *self, MoblinPages page)
 	}
 
 	if (page == PAGE_CONNECTING)
-		bling_spinner_start (BLING_SPINNER (priv->spinner));
+		gtk_spinner_start (GTK_SPINNER (priv->spinner));
 	else
-		bling_spinner_stop (BLING_SPINNER (priv->spinner));
+		gtk_spinner_stop (GTK_SPINNER (priv->spinner));
 
 	if ((page == PAGE_SETUP || page == PAGE_SSP_SETUP || page == PAGE_CONNECTING) && (priv->create_started == FALSE)) {
 		create_selected_device (self);
@@ -1415,7 +1414,7 @@ create_connecting_page (MoblinPanel *self)
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (page), vbox);
-	priv->spinner = bling_spinner_new ();
+	priv->spinner = gtk_spinner_new ();
 	gtk_widget_set_size_request (priv->spinner, 150, 150);
 	gtk_widget_show (priv->spinner);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->spinner, FALSE, FALSE, 6);
