@@ -380,8 +380,40 @@
 		</itemizedlist>
 	    </para>
 	</sect2>
+	
+	<sect2 id="gnome-bluetooth-prefs-show-icon">
+	    <title>Show Bluetooth icon</title>
+	    <para>
+		You can show or hide Bluetooth icon in the panel. See <xref linkend="gnome-bluetooth-applet"/> for the
+		applet features.
+	    </para>
+	    
+	    <important>
+		<para>
+		    If you disable the icon in the panel, only limited set of actions will remain available.
+		</para>
+	    </important>
+	</sect2>
+
+	<sect2 id="gnome-bluetooth-prefs-receive">
+	    <title>Receive Files</title>
+	    
+	    <para>
+		Click on the <guilabel>Receive Files</guilabel> button and the <guilabel>Personal File Sharing Preferences</guilabel> dialog will appear. You can configure Bluetooth file reception and sharing there.
+	    </para>
+	    <important>
+		<para>
+		    This feature is not provided by <application>gnome-bluetooth</application>.
+		    <application>gnome-user-share</application> must be installed to use this feature.
+		</para>
+		<para>
+		    Read more in the <ulink type="help" url="ghelp:gnome-user-share">Personal File Sharing Manual</ulink>:
+		    <ulink type="help" url="ghelp:gnome-user-share#gnome-user-share-bluetooth-receiving">receiving</ulink> and <ulink type="help" url="ghelp:gnome-user-share#gnome-user-share-enabling-bluetooth">sharing</ulink>.
+		</para>
+	    </important>
+	</sect2>
     </sect1>
-    
+
     <sect1 id="gnome-bluetooth-FAQ">
         <title>Frequently Asked Questions</title>
         <qandaset>
@@ -392,7 +424,7 @@
                 <answer>
                     <para>
 			File reception is not implemented in <application>gnome-bluetooth</application>, but in <application>gnome-user-share</application>,
-			so you have to install this application to be able to received files over Bluetooth.
+			so you have to install this application to be able to receive files over Bluetooth. Button explained in the <xref linkend="gnome-bluetooth-prefs-receive"/> is just a launcher of its configuration dialog.
                     </para>
                 </answer>
             </qandaentry>
