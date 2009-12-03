@@ -80,12 +80,12 @@ GnomeBluetooth-1.0.gir: $(INTROSPECTION_SCANNER)
 		$(LIBGNOMEBT_CFLAGS) \
 		$(gnomebluetooth_HEADERS)
 
-girdir = $(GIRDIR)
+girdir = $(INTROSPECTION_GIRDIR)
 dist_gir_DATA = $(BUILT_GIRSOURCES)
 
 EXTRA_DIST += $(BUILT_GIRSOURCES)
 
-typelibsdir = $(TYPELIBDIR)
+typelibsdir = $(INTROSPECTION_TYPELIBDIR)
 typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
 
 %.typelib: %.gir $(G_IR_COMPILER)
