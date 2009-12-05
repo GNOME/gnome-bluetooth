@@ -679,6 +679,62 @@ set_user_pincode (GtkWidget *button)
 	}
 }
 
+static char *
+get_default_adapter_address (void)
+{
+	BluetoothClient *client;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean cont;
+
+	client = bluetooth_client_new ();
+	model = bluetooth_client_get_adapter_model (client);
+	cont = gtk_tree_model_get_iter_first(model, &iter);
+
+	while (cont == TRUE) {
+		char *address;
+		gboolean is_default;
+
+		gtk_tree_model_get (model, &iter,
+				    BLUETOOTH_COLUMN_ADDRESS, &address,
+				    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+
+		if (is_default == TRUE) {
+			g_object_unref (model);
+			g_object_unref (client);
+			return address;
+		}
+
+		g_free (address);
+
+		cont = gtk_tree_model_iter_next (model, &iter);
+	}
+
+	g_object_unref (model);
+	g_object_unref (client);
+
+	return NULL;
+}
+
+static char *
+pin_from_adapter (const char *bdaddr)
+{
+	char **items;
+	GString *s;
+	char *ret;
+	int i;
+
+	items = g_strsplit (bdaddr, ":", -1);
+	g_assert (g_strv_length (items) == 6);
+	s = g_string_new ("$");
+	for (i = 5; i >= 0; i--)
+		g_string_append (s, items[i]);
+	g_strfreev (items);
+	ret = g_string_free (s, FALSE);
+
+	return ret;
+}
+
 void
 select_device_changed (BluetoothChooser *selector,
 		       const char *address,
@@ -731,6 +787,13 @@ select_device_changed (BluetoothChooser *selector,
 				pincode = g_strndup(target_pincode, max_digits);
 			else
 				pincode = g_strdup(target_pincode);
+		} else if (g_str_equal (pincode, "WII")) {
+			char *default_adapter;
+
+			g_free (pincode);
+			default_adapter = get_default_adapter_address ();
+			pincode = pin_from_adapter (default_adapter);
+			g_free (default_adapter);
 		} else if (target_ssp == FALSE) {
 			automatic_pincode = TRUE;
 		}
