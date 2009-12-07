@@ -1655,7 +1655,8 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 				   err->message);
 			g_error_free (err);
 		}
-		g_object_unref (device);
+		if (device != NULL)
+			g_object_unref (device);
 	}
 
 	devdata = g_try_new0(CreateDeviceData, 1);
