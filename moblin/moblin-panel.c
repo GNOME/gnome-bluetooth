@@ -167,6 +167,7 @@ enable_send_file (MoblinPanel *self)
 		guint i;
 		const char **uuids;
 
+		g_free (name);
 		bluetooth_chooser_get_selected_device_info (chooser, "uuids", &value);
 
 		uuids = (const char **) g_value_get_boxed (&value);
@@ -244,7 +245,7 @@ send_file_button_clicked_cb (GtkButton *button,
 	GPtrArray *a;
 	GError *err = NULL;
 	guint i;
-	const char *address, *name;
+	char *address, *name;
 
 	address = bluetooth_chooser_get_selected_device (chooser);
 	name = bluetooth_chooser_get_selected_device_name (chooser);
@@ -264,6 +265,9 @@ send_file_button_clicked_cb (GtkButton *button,
 		g_ptr_array_add (a, s);
 	}
 	g_ptr_array_add (a, NULL);
+
+	g_free (address);
+	g_free (name);
 
 	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
 			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
@@ -487,7 +491,6 @@ browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data
 	/* Get address */
 	if (bluetooth_chooser_get_selected_device_info (chooser, "address", &value)) {
 		address = g_value_get_string (&value);
-		g_value_unset (&value);
 	}
 
 	if (address == NULL) {
@@ -497,6 +500,8 @@ browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data
 			g_printerr("Couldn't execute command: %s\n", cmd);
 		g_free (cmd);
 	}
+
+	g_value_unset (&value);
 }
 
 static void
@@ -726,12 +731,14 @@ create_callback (BluetoothClient *client, const gchar *path, const GError *error
 {
 	MoblinPanel *self = MOBLIN_PANEL (user_data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	gchar *device_name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (priv->chooser));
+	gchar *device_name;
 
 	priv->create_started = FALSE;
 
 	if (path == NULL) {
+		device_name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (priv->chooser));
 		set_failure_message (self, device_name);
+		g_free (device_name);
 		set_current_page (self, PAGE_FAILURE);
 		return;
 	}
@@ -798,10 +805,10 @@ pair_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 	}
 
 	g_free (priv->target_address);
-	priv->target_address = g_strdup (address);
+	priv->target_address = address;
 
 	g_free (priv->target_name);
-	priv->target_name = g_strdup (name);
+	priv->target_name = name;
 
 	priv->target_type = type;
 	priv->target_ssp = !legacy_pairing;
@@ -1113,7 +1120,9 @@ create_failure_page (MoblinPanel *self)
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (page), vbox);
 	priv->label_failure = gtk_label_new ("");
+	gtk_misc_set_alignment (GTK_MISC (priv->label_failure), 0.0, 0.5);
 	gtk_widget_show (priv->label_failure);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->label_failure, FALSE, FALSE, 6);
 
 	hbox = gtk_hbox_new (FALSE, 6);
 	gtk_widget_show (hbox);
