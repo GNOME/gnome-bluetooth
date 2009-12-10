@@ -52,6 +52,8 @@ static gboolean show_icon_pref = TRUE;
 
 #define KEYBOARD_PREFS		"gnome-keyboard-properties"
 #define MOUSE_PREFS		"gnome-mouse-properties"
+#define SOUND_PREFS		"gnome-volume-control"
+#define SOUND_PREFS_CMDLINE	SOUND_PREFS " -p hardware"
 
 enum {
 	CONNECTED,
@@ -206,6 +208,14 @@ static void keyboard_callback(GObject *widget, gpointer user_data)
 static void mouse_callback(GObject *widget, gpointer user_data)
 {
 	const char *command = MOUSE_PREFS;
+
+	if (!g_spawn_command_line_async(command, NULL))
+		g_printerr("Couldn't execute command: %s\n", command);
+}
+
+static void sound_callback(GObject *widget, gpointer user_data)
+{
+	const char *command = SOUND_PREFS_CMDLINE;
 
 	if (!g_spawn_command_line_async(command, NULL))
 		g_printerr("Couldn't execute command: %s\n", command);
@@ -858,6 +868,16 @@ update_device_list (GtkTreeIter *parent)
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (mouse_callback));
+			}
+			if ((type == BLUETOOTH_TYPE_HEADSET ||
+			     type == BLUETOOTH_TYPE_HEADPHONES ||
+			     type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (SOUND_PREFS)) {
+				add_menu_item (address,
+					       "sound",
+					       _("Open Sound Preferences..."),
+					       uimanager,
+					       menu_merge_id,
+					       G_CALLBACK (sound_callback));
 			}
 		} else {
 			gtk_action_set_label (action, name);
