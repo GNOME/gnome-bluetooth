@@ -29,7 +29,7 @@
 #define RFKILL_STATE_UNBLOCKED		1
 #define RFKILL_STATE_HARD_BLOCKED	2
 
-/**
+/*
  * enum rfkill_type - type of rfkill switch.
  *
  * @RFKILL_TYPE_ALL: toggles all switches (userspace only)
@@ -50,7 +50,7 @@ enum rfkill_type {
 	NUM_RFKILL_TYPES,
 };
 
-/**
+/*
  * enum rfkill_operation - operation types
  * @RFKILL_OP_ADD: a device was added
  * @RFKILL_OP_DEL: a device was removed
@@ -64,7 +64,7 @@ enum rfkill_operation {
 	RFKILL_OP_CHANGE_ALL,
 };
 
-/**
+/*
  * struct rfkill_event - events for userspace on /dev/rfkill
  * @idx: index of dev rfkill
  * @type: type of the rfkill struct
@@ -109,7 +109,7 @@ enum rfkill_user_states {
 /* this is opaque */
 struct rfkill;
 
-/**
+/*
  * struct rfkill_ops - rfkill driver methods
  *
  * @poll: poll the rfkill block state(s) -- only assign this method
@@ -134,7 +134,7 @@ struct rfkill_ops {
 };
 
 #if defined(CONFIG_RFKILL) || defined(CONFIG_RFKILL_MODULE)
-/**
+/*
  * rfkill_alloc - allocate rfkill structure
  * @name: name of the struct -- the string is not copied internally
  * @parent: device that has rf switch on it
@@ -151,7 +151,7 @@ struct rfkill * __must_check rfkill_alloc(const char *name,
 					  const struct rfkill_ops *ops,
 					  void *ops_data);
 
-/**
+/*
  * rfkill_register - Register a rfkill structure.
  * @rfkill: rfkill structure to be registered
  *
@@ -161,7 +161,7 @@ struct rfkill * __must_check rfkill_alloc(const char *name,
  */
 int __must_check rfkill_register(struct rfkill *rfkill);
 
-/**
+/*
  * rfkill_pause_polling(struct rfkill *rfkill)
  *
  * Pause polling -- say transmitter is off for other reasons.
@@ -170,7 +170,7 @@ int __must_check rfkill_register(struct rfkill *rfkill);
  */
 void rfkill_pause_polling(struct rfkill *rfkill);
 
-/**
+/*
  * rfkill_resume_polling(struct rfkill *rfkill)
  *
  * Pause polling -- say transmitter is off for other reasons.
@@ -180,7 +180,7 @@ void rfkill_pause_polling(struct rfkill *rfkill);
 void rfkill_resume_polling(struct rfkill *rfkill);
 
 
-/**
+/*
  * rfkill_unregister - Unregister a rfkill structure.
  * @rfkill: rfkill structure to be unregistered
  *
@@ -190,7 +190,7 @@ void rfkill_resume_polling(struct rfkill *rfkill);
  */
 void rfkill_unregister(struct rfkill *rfkill);
 
-/**
+/*
  * rfkill_destroy - free rfkill structure
  * @rfkill: rfkill structure to be destroyed
  *
@@ -198,7 +198,7 @@ void rfkill_unregister(struct rfkill *rfkill);
  */
 void rfkill_destroy(struct rfkill *rfkill);
 
-/**
+/*
  * rfkill_set_hw_state - Set the internal rfkill hardware block state
  * @rfkill: pointer to the rfkill class to modify.
  * @state: the current hardware block state to set
@@ -219,7 +219,7 @@ void rfkill_destroy(struct rfkill *rfkill);
  */
 bool __must_check rfkill_set_hw_state(struct rfkill *rfkill, bool blocked);
 
-/**
+/*
  * rfkill_set_sw_state - Set the internal rfkill software block state
  * @rfkill: pointer to the rfkill class to modify.
  * @state: the current software block state to set
@@ -238,7 +238,7 @@ bool __must_check rfkill_set_hw_state(struct rfkill *rfkill, bool blocked);
  */
 bool rfkill_set_sw_state(struct rfkill *rfkill, bool blocked);
 
-/**
+/*
  * rfkill_set_states - Set the internal rfkill block states
  * @rfkill: pointer to the rfkill class to modify.
  * @sw: the current software block state to set
@@ -249,7 +249,7 @@ bool rfkill_set_sw_state(struct rfkill *rfkill, bool blocked);
  */
 void rfkill_set_states(struct rfkill *rfkill, bool sw, bool hw);
 
-/**
+/*
  * rfkill_set_global_sw_state - set global sw block default
  * @type: rfkill type to set default for
  * @blocked: default to set
@@ -262,7 +262,7 @@ void rfkill_set_states(struct rfkill *rfkill, bool sw, bool hw);
  */
 void rfkill_set_global_sw_state(const enum rfkill_type type, bool blocked);
 
-/**
+/*
  * rfkill_blocked - query rfkill block
  *
  * @rfkill: rfkill struct to query
@@ -329,14 +329,14 @@ static inline bool rfkill_blocked(struct rfkill *rfkill)
 
 
 #ifdef CONFIG_RFKILL_LEDS
-/**
+/*
  * rfkill_get_led_trigger_name - Get the LED trigger name for the button's LED.
  * This function might return a NULL pointer if registering of the
  * LED trigger failed. Use this as "default_trigger" for the LED.
  */
 const char *rfkill_get_led_trigger_name(struct rfkill *rfkill);
 
-/**
+/*
  * rfkill_set_led_trigger_name -- set the LED trigger name
  * @rfkill: rfkill struct
  * @name: LED trigger name

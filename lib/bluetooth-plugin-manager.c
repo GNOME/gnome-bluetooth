@@ -21,6 +21,16 @@
  *
  */
 
+/**
+ * SECTION:bluetooth-plugin-manager
+ * @short_description: Bluetooth plug-in manager
+ * @stability: Stable
+ * @include: bluetooth-plugin-manager.h
+ *
+ * The plugin manager is used to extend set up wizards, or preferences.
+ **/
+
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -83,6 +93,13 @@ bluetooth_plugin_dir_process (const char *plugindir)
 	}
 }
 
+/**
+ * bluetooth_plugin_manager_init:
+ *
+ * Initialise the plugin manager for Bluetooth plugins.
+ *
+ * Return value: %TRUE if the initialisation succedeed, %FALSE otherwise.
+ **/
 gboolean
 bluetooth_plugin_manager_init (void)
 {
@@ -96,6 +113,11 @@ bluetooth_plugin_manager_init (void)
 	return g_list_length (plugin_list) != 0;
 }
 
+/**
+ * bluetooth_plugin_manager_cleanup:
+ *
+ * Free all the resources used by the Bluetooth plugins.
+ **/
 void
 bluetooth_plugin_manager_cleanup (void)
 {
@@ -113,6 +135,16 @@ bluetooth_plugin_manager_cleanup (void)
 	plugin_list = NULL;
 }
 
+/**
+ * bluetooth_plugin_manager_get_widgets:
+ * @bdaddr: a Bluetooth address representing a device
+ * @uuids: an array of UUIDs supported by the device.
+ *
+ * Returns a list of widgets suitable for configuring the device
+ * represented by @address, for the services listed in @uuids.
+ *
+ * Return value: a #GList of #GtkWidget, or %NULL is none.
+ **/
 GList *
 bluetooth_plugin_manager_get_widgets (const char *bdaddr,
 				      const char **uuids)
@@ -132,6 +164,13 @@ bluetooth_plugin_manager_get_widgets (const char *bdaddr,
 	return ret;
 }
 
+/**
+ * bluetooth_plugin_manager_device_deleted:
+ * @bdaddr: a Bluetooth address representing a device
+ *
+ * Removes all existing configuration for the device, as
+ * supported by the plug-ins.
+ **/
 void
 bluetooth_plugin_manager_device_deleted (const char *bdaddr)
 {

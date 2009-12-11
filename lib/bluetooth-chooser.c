@@ -22,6 +22,15 @@
  *
  */
 
+/**
+ * SECTION:bluetooth-chooser
+ * @short_description: a Bluetooth chooser widget
+ * @stability: Stable
+ * @include: bluetooth-plugin.h
+ *
+ * A tree-like widget used to select Bluetooth devices.
+ **/
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -225,6 +234,8 @@ bluetooth_chooser_get_selected_device_data (BluetoothChooser *self, guint column
  * bluetooth_chooser_get_selected_device:
  * @self: a #BluetoothChooser widget.
  *
+ * Returns the Bluetooth address for the currently selected device.
+ *
  * Return value: the Bluetooth address for the currently selected device, or %NULL.
  **/
 gchar *
@@ -236,6 +247,8 @@ bluetooth_chooser_get_selected_device (BluetoothChooser *self)
 /**
  * bluetooth_chooser_get_selected_device_name:
  * @self: a #BluetoothChooser widget.
+ *
+ * Returns the name for the currently selected device.
  *
  * Return value: the name for the currently selected device, or %NULL.
  **/
@@ -249,6 +262,8 @@ bluetooth_chooser_get_selected_device_name (BluetoothChooser *self)
  * bluetooth_chooser_get_selected_device_icon:
  * @self: a #BluetoothChooser widget.
  *
+ * Returns the icon name to use to represent the currently selected device.
+ *
  * Return value: the icon name to use to represent the currently selected device, or %NULL.
  **/
 gchar *
@@ -260,6 +275,8 @@ bluetooth_chooser_get_selected_device_icon (BluetoothChooser *self)
 /**
  * bluetooth_chooser_get_selected_device_type:
  * @self: a #BluetoothChooser widget.
+ *
+ * Returns the #BluetoothType of the device selected.
  *
  * Return value: the #BluetoothType of the device selected, or '0' if unknown.
  **/
@@ -283,7 +300,9 @@ bluetooth_chooser_get_selected_device_type (BluetoothChooser *self)
  * bluetooth_chooser_get_selected_device_is_connected:
  * @self: a #BluetoothChooser widget.
  *
- * Return value: whether the selected device is conncted to this computer,
+ * Returns whether the selected device is connected to this computer.
+ *
+ * Return value: whether the selected device is connected to this computer,
  * will always be %FALSE if no devices are selected.
  **/
 gboolean
@@ -306,6 +325,8 @@ bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self)
  * @self: A #BluetoothChooser widget.
  * @field: The identifier for the field to get data for.
  * @value: An empty #GValue to set.
+ *
+ * Returns whether the @value has been set.
  *
  * Return value: %TRUE if the @value has been set.
  **/
@@ -370,6 +391,8 @@ show_confirm_dialog (BluetoothChooser *chooser, const char *name)
  * bluetooth_chooser_remove_selected_device:
  * @self: A #BluetoothChooser widget.
  *
+ * Returns whether the removal was successful.
+ *
  * Return value: %TRUE if the selected device was correctly removed.
  **/
 gboolean
@@ -413,9 +436,11 @@ bluetooth_chooser_remove_selected_device (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_model:
- * @self: A BluetoothChooser widget.
+ * @self: A #BluetoothChooser widget.
  *
- * Return value: The BluetoothChooser's GtkTreeModel.
+ * Returns the #BluetoothChooser's #GtkTreeModel.
+ *
+ * Return value: a #GtkTreeModel object.
  **/
 GtkTreeModel *
 bluetooth_chooser_get_model (BluetoothChooser *self)
@@ -427,9 +452,11 @@ bluetooth_chooser_get_model (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_type_column:
- * @self: A BluetoothChooser widget.
+ * @self: A #BluetoothChooser widget.
  *
- * Return value: A GtkTreeViewColumn pointer to the type column of the BluetoothChooser.
+ * Returns a #GtkTreeViewColumn object to the type column of the #BluetoothChooser.
+ *
+ * Return value: a #GtkTreeViewColumn object.
  **/
 GtkTreeViewColumn *
 bluetooth_chooser_get_type_column (BluetoothChooser *self)
@@ -441,9 +468,11 @@ bluetooth_chooser_get_type_column (BluetoothChooser *self)
 
 /**
  * bluetooth_chooser_get_treeview:
- * @self: A BluetoothChooser widget.
+ * @self: A #BluetoothChooser widget.
  *
- * Return value: The #GtkTreeView pointer for the #BluetoothChooser.
+ * Returns the #GtkTreeView object for the #BluetoothChooser.
+ *
+ * Return value: a #GtkTreeView object.
  **/
 GtkWidget *
 bluetooth_chooser_get_treeview (BluetoothChooser *self)
@@ -1160,6 +1189,8 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 /**
  * bluetooth_chooser_new:
  * @title: the widget header title, if %NULL, the widget header will be hidden.
+ *
+ * Returns a new #BluetoothChooser widget.
  *
  * Return value: A #BluetoothChooser widget
  **/

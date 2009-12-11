@@ -338,7 +338,9 @@ bluetooth_chooser_combo_init (BluetoothChooserCombo *combo)
 /**
  * bluetooth_chooser_combo_new:
  *
- * Return value: a #BluetoothChooserCombo
+ * Returns a new #BluetoothChooserCombo widget.
+ *
+ * Return value: a #BluetoothChooserCombo widget.
  **/
 GtkWidget *
 bluetooth_chooser_combo_new (void)

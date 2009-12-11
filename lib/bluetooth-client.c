@@ -21,6 +21,16 @@
  *
  */
 
+/**
+ * SECTION:bluetooth-client
+ * @short_description: Bluetooth client object
+ * @stability: Stable
+ * @include: bluetooth-client.h
+ *
+ * The #BluetoothClient object is used to query the state of Bluetooth
+ * devices and adapters.
+ **/
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -106,7 +116,9 @@ G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
  * bluetooth_type_to_string:
  * @type: a #BluetoothType
  *
- * Return value: the string representation of the @type passed. Do not free the return value.
+ * Returns the string representation of the @type passed. Do not free the return value.
+ *
+ * Return value: a string.
  **/
 const gchar *bluetooth_type_to_string(BluetoothType type)
 {
@@ -149,7 +161,9 @@ const gchar *bluetooth_type_to_string(BluetoothType type)
  * bluetooth_verify_address:
  * @bdaddr: a string representing a Bluetooth address
  *
- * Return value: Whether the string is a valid Bluetooth address. This does not contact the device in any way.
+ * Returns whether the string is a valid Bluetooth address. This does not contact the device in any way.
+ *
+ * Return value: %TRUE if the address is valid, %FALSE if not.
  **/
 gboolean
 bluetooth_verify_address (const char *bdaddr)
@@ -555,7 +569,9 @@ uuid16_to_string (guint uuid16, const char *uuid)
  * bluetooth_uuid_to_string:
  * @uuid: a string representing a Bluetooth UUID
  *
- * Return value: a string representing a human-readable (but not usable for display to users) version of the @uuid. Do not free the return value.
+ * Returns a string representing a human-readable (but not usable for display to users) version of the @uuid. Do not free the return value.
+ *
+ * Return value: a string.
  **/
 const char *
 bluetooth_uuid_to_string (const char *uuid)
@@ -1255,7 +1271,9 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 /**
  * bluetooth_client_new:
  *
- * Return value: a reference to the #BluetoothClient singleton. Unref the object when done.
+ * Returns a reference to the #BluetoothClient singleton. Use #g_object_unref() the object when done.
+ *
+ * Return value: a #BluetoothClient object.
  **/
 BluetoothClient *bluetooth_client_new(void)
 {
@@ -1277,7 +1295,9 @@ BluetoothClient *bluetooth_client_new(void)
  * bluetooth_client_get_model:
  * @client: a #BluetoothClient object
  *
- * Return value: an unfiltered #GtkTreeModel representing the adapter and devices available on the system.
+ * Returns an unfiltered #GtkTreeModel representing the adapter and devices available on the system.
+ *
+ * Return value: a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
 {
@@ -1301,7 +1321,9 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
  * @data: user data to pass to gtk_tree_model_filter_set_visible_func()
  * @destroy: a destroy function for gtk_tree_model_filter_set_visible_func()
  *
- * Return value: a #GtkTreeModel of devices filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
+ * Returns a #GtkTreeModel of devices filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
+ *
+ * Return value: a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_filter_model (BluetoothClient *client,
 						 GtkTreeModelFilterVisibleFunc func,
@@ -1346,7 +1368,9 @@ static gboolean adapter_filter(GtkTreeModel *model,
  * bluetooth_client_get_adapter_model:
  * @client: a #BluetoothClient object
  *
- * Return value: a filtered #GtkTreeModel with only adapters present.
+ * Returns a filtered #GtkTreeModel with only adapters present.
+ *
+ * Return value: a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
 {
@@ -1361,7 +1385,9 @@ GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
  * @client: a #BluetoothClient object
  * @adapter: a #DBusGProxy of the adapter object, or %NULL to get the default adapter.
  *
- * Return value: a filtered #GtkTreeModel with only devices belonging to the selected adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter when %NULL is passed.
+ * Returns a filtered #GtkTreeModel with only devices belonging to the selected adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter when %NULL is passed.
+ *
+ * Return value: a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
 						 DBusGProxy *adapter)
@@ -1418,11 +1444,15 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
 /**
  * bluetooth_client_get_device_filter_model:
  * @client: a #BluetoothClient object
+ * @adapter: a #DBusGProxy representing a particular adapter, or %NULL for the default adapter.
  * @func: a #GtkTreeModelFilterVisibleFunc
  * @data: user data to pass to gtk_tree_model_filter_set_visible_func()
  * @destroy: a destroy function for gtk_tree_model_filter_set_visible_func()
  *
- * Return value: a #GtkTreeModel of adapters filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
+ * Returns a #GtkTreeModel of adapters filtered using the @func, @data and
+ * @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
+ *
+ * Return value: a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
 		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
@@ -1446,7 +1476,9 @@ GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
  * bluetooth_client_get_default_adapter:
  * @client: a #BluetoothClient object
  *
- * Return value: a #DBusGProxy object representing the default adapter, or %NULL if no adapters are present.
+ * Returns a #DBusGProxy object representing the default adapter, or %NULL if no adapters are present.
+ *
+ * Return value: a #DBusGProxy object.
  **/
 DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client)
 {

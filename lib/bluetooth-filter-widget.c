@@ -480,14 +480,13 @@ bluetooth_filter_widget_class_init (BluetoothFilterWidgetClass *klass)
 
 /**
  * bluetooth_filter_widget_new:
- * @chooser: The #BluetoothChooser to filter
  *
- * Return value: A #BluetoothFilterWidget widget
- * 
  * Creates a new #BluetoothFilterWidget which can be bound to a #BluetoothChooser to
  * control filtering of that #BluetoothChooser.
  * Usually used in conjunction with a #BluetoothChooser which has the "has-internal-filter"
  * property set to FALSE.
+ *
+ * Return value: A #BluetoothFilterWidget widget
  * 
  * Note: Must call bluetooth_filter_widget_bind_filter () to bind the #BluetoothFilterWidget
  * to a #BluetoothChooser.

@@ -4,6 +4,15 @@
 #include <gmodule.h>
 #include <gtk/gtk.h>
 
+/**
+ * SECTION:bluetooth-plugin
+ * @short_description: Bluetooth plug-in
+ * @stability: Stable
+ * @include: bluetooth-plugin.h
+ *
+ * Plug-ins can be used to extend set up wizards and preferences.
+ **/
+
 typedef struct _GbtPluginInfo GbtPluginInfo;
 typedef struct _GbtPlugin GbtPlugin;
 

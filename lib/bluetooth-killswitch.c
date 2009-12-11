@@ -22,6 +22,15 @@
  *
  */
 
+/**
+ * SECTION:bluetooth-killswitch
+ * @short_description: a Bluetooth killswitch object
+ * @stability: Stable
+ * @include: bluetooth-killswitch.h
+ *
+ * An object to manipulate Bluetooth killswitches.
+ **/
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

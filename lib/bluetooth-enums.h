@@ -29,6 +29,15 @@
 G_BEGIN_DECLS
 
 /**
+ * SECTION:bluetooth-enums
+ * @short_description: Bluetooth related enumerations
+ * @stability: Stable
+ * @include: bluetooth-enums.h
+ *
+ * Enumerations related to Bluetooth.
+ **/
+
+/**
  * BluetoothCategory:
  * @BLUETOOTH_CATEGORY_ALL: all devices
  * @BLUETOOTH_CATEGORY_PAIRED: paired devices

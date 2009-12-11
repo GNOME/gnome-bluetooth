@@ -18,6 +18,16 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * SECTION:bluetooth-chooser-button
+ * @short_description: a Bluetooth chooser button
+ * @stability: Stable
+ * @include: bluetooth-plugin.h
+ *
+ * A button used to select Bluetooth devices which will pop-up a
+ * #BluetoothChooser widget inside a dialogue when clicked.
+ **/
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -379,7 +389,9 @@ bluetooth_chooser_button_init (BluetoothChooserButton *button)
 /**
  * bluetooth_chooser_button_new:
  *
- * Return value: a #BluetoothChooserButton
+ * Returns a new #BluetoothChooserButton widget.
+ *
+ * Return value: a #BluetoothChooserButton widget.
  **/
 GtkWidget *
 bluetooth_chooser_button_new (void)
@@ -392,6 +404,8 @@ bluetooth_chooser_button_new (void)
 /**
  * bluetooth_chooser_button_available:
  * @button: a #BluetoothChooserButton
+ *
+ * Returns whether there is a powered Bluetooth adapter.
  *
  * Return value: %TRUE if there is a powered Bluetooth adapter available, and the button should be sensitive.
  **/
