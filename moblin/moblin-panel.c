@@ -71,6 +71,7 @@ struct _MoblinPanelPrivate
 	GtkWidget *label_pin;
 	GtkWidget *label_ssp_pin_help;
 	GtkWidget *label_ssp_pin;
+	GtkWidget *summary_frame;
 	GtkWidget *extra_config_vbox;
 	GtkWidget *label_failure;
 	GtkWidget *chooser;
@@ -679,7 +680,12 @@ set_current_page (MoblinPanel *self, MoblinPages page)
 		GValue value = { 0, };
 		const char **uuids;
 		GList *widgets;
+		char *title;
 		gboolean have_additional_widgets = FALSE;
+
+		title = g_strdup_printf (_("Successfully set up new device '%s'"), priv->target_name);
+		set_frame_title (GTK_FRAME (priv->summary_frame), title);
+		g_free (title);
 
 		if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->chooser), "uuids", &value))
 			uuids = g_value_get_boxed (&value);
@@ -1148,8 +1154,8 @@ create_summary_page (MoblinPanel *self)
 	page = nbtk_gtk_frame_new ();
 	w = gtk_label_new (NULL);
 	gtk_frame_set_label_widget (GTK_FRAME (page), w);
-	set_frame_title (GTK_FRAME (page), _("Successfully setup new device 'Foobar'"));
 	gtk_widget_show (page);
+	priv->summary_frame = page;
 
 	vbox = gtk_vbox_new (FALSE, 12);
 	gtk_widget_show (vbox);
