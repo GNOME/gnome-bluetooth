@@ -65,6 +65,9 @@ struct _ObexAgentPrivate {
 
 	ObexAgentCompleteFunc complete_func;
 	gpointer complete_data;
+
+	ObexAgentErrorFunc error_func;
+	gpointer error_data;
 };
 
 G_DEFINE_TYPE(ObexAgent, obex_agent, G_TYPE_OBJECT)
@@ -194,6 +197,40 @@ static gboolean obex_agent_release(ObexAgent *agent,
 		dbus_g_method_return(context);
 
 	g_object_unref(agent);
+
+	return result;
+}
+
+static gboolean obex_agent_error(ObexAgent *agent,
+				 const char *path,
+				 const char *message,
+				 DBusGMethodInvocation *context)
+{
+	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
+	char *sender = dbus_g_method_get_sender(context);
+	gboolean result = FALSE;
+
+	DBG("agent %p sender %s", agent, sender);
+
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
+		return FALSE;
+	}
+
+	g_free (sender);
+
+	if (priv->error_func) {
+		DBusGProxy *proxy;
+
+		proxy = dbus_g_proxy_new_for_name(connection, OBEX_SERVICE,
+						path, OBEX_TRANSFER_INTERFACE);
+
+		result = priv->error_func(context, proxy, message,
+							priv->progress_data);
+
+		g_object_unref(proxy);
+	} else
+		dbus_g_method_return(context);
 
 	return result;
 }
@@ -330,4 +367,15 @@ void obex_agent_set_complete_func(ObexAgent *agent,
 
 	priv->complete_func = func;
 	priv->complete_data = data;
+}
+
+void obex_agent_set_error_func(ObexAgent *agent,
+			       ObexAgentErrorFunc func, gpointer data)
+{
+	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
+
+	DBG("agent %p", agent);
+
+	priv->error_func = func;
+	priv->error_data = data;
 }
