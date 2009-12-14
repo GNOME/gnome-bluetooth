@@ -73,13 +73,17 @@ static gboolean obex_agent_request(ObexAgent *agent, const char *path,
 						DBusGMethodInvocation *context)
 {
 	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->request_func) {
 		DBusGProxy *proxy;
@@ -102,13 +106,17 @@ static gboolean obex_agent_progress(ObexAgent *agent, const char *path,
 			guint64 transferred, DBusGMethodInvocation *context)
 {
 	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->progress_func) {
 		DBusGProxy *proxy;
@@ -130,13 +138,17 @@ static gboolean obex_agent_complete(ObexAgent *agent, const char *path,
 						DBusGMethodInvocation *context)
 {
 	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->complete_func) {
 		DBusGProxy *proxy;
@@ -158,13 +170,17 @@ static gboolean obex_agent_release(ObexAgent *agent,
 						DBusGMethodInvocation *context)
 {
 	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->release_func)
 		result = priv->release_func(context, priv->release_data);
