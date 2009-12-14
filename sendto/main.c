@@ -281,7 +281,6 @@ static void create_window(void)
 static gchar *get_error_message(GError *error)
 {
 	char *message;
-	const gchar *name;
 
 	if (error == NULL)
 		return g_strdup(_("An unknown error occurred"));
@@ -291,8 +290,7 @@ static gchar *get_error_message(GError *error)
 		goto done;
 	}
 
-	name = dbus_g_error_get_name(error);
-	if (g_str_equal(name, OPENOBEX_CONNECTION_FAILED) == TRUE &&
+	if (dbus_g_error_has_name(error, OPENOBEX_CONNECTION_FAILED) == TRUE &&
 					is_palm_device(option_device)) {
 		message = g_strdup(_("Make sure that remote device "
 					"is switched on and that it "
@@ -300,7 +298,10 @@ static gchar *get_error_message(GError *error)
 		goto done;
 	}
 
-	message = g_strdup(error->message);
+	if (*error->message == '\0')
+		message = g_strdup(_("An unknown error occurred"));
+	else
+		message = g_strdup(error->message);
 
 done:
 	g_error_free(error);
