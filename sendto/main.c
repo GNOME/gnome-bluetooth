@@ -43,6 +43,7 @@
 #define AGENT_PATH "/org/bluez/agent/sendto"
 
 static DBusGConnection *conn = NULL;
+static ObexAgent *agent = NULL;
 
 static GtkWidget *dialog;
 static GtkWidget *label_from;
@@ -54,6 +55,7 @@ static gchar *option_device = NULL;
 static gchar *option_device_name = NULL;
 static gchar **option_files = NULL;
 
+static DBusGProxy *current_transfer = NULL;
 static guint64 current_size = 0;
 static guint64 total_size = 0;
 static guint64 total_sent = 0;
@@ -139,6 +141,12 @@ set_response_visible (GtkDialog *dialog,
 static void response_callback(GtkWidget *dialog,
 					gint response, gpointer user_data)
 {
+	if (current_transfer != NULL) {
+		obex_agent_set_error_func(agent, NULL, NULL);
+		dbus_g_proxy_call_no_reply (current_transfer, "Cancel", G_TYPE_INVALID);
+		g_object_unref (current_transfer);
+		current_transfer = NULL;
+	}
 	gtk_widget_destroy(dialog);
 
 	gtk_main_quit();
@@ -363,9 +371,13 @@ static void get_properties_callback (DBusGProxy *proxy,
 static gboolean request_callback(DBusGMethodInvocation *context,
 				DBusGProxy *transfer, gpointer user_data)
 {
+	g_assert (current_transfer == NULL);
+
 	dbus_g_proxy_begin_call(transfer, "GetProperties",
 				get_properties_callback, NULL, NULL,
 				G_TYPE_INVALID);
+
+	current_transfer = g_object_ref (transfer);
 
 	dbus_g_method_return(context, "");
 
@@ -437,6 +449,10 @@ static gboolean complete_callback(DBusGMethodInvocation *context,
 	total_sent += current_size;
 
 	file_index++;
+
+	/* And we're done with the transfer */
+	g_object_unref (current_transfer);
+	current_transfer = NULL;
 
 	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
@@ -608,7 +624,6 @@ int main(int argc, char *argv[])
 	DBusGProxy *proxy;
 	GHashTable *hash = NULL;
 	GValue *value;
-	ObexAgent *agent;
 	GError *error = NULL;
 	int i;
 
