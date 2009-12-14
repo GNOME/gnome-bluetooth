@@ -67,6 +67,10 @@ typedef gboolean (*ObexAgentProgressFunc) (DBusGMethodInvocation *context,
 					guint64 transferred, gpointer data);
 typedef gboolean (*ObexAgentCompleteFunc) (DBusGMethodInvocation *context,
 					DBusGProxy *transfer, gpointer data);
+typedef gboolean (*ObexAgentErrorFunc) (DBusGMethodInvocation *context,
+					DBusGProxy *transfer,
+					const char *message,
+					gpointer data);
 
 void obex_agent_set_release_func(ObexAgent *agent,
 				ObexAgentReleaseFunc func, gpointer data);
@@ -76,7 +80,8 @@ void obex_agent_set_progress_func(ObexAgent *agent,
 				ObexAgentProgressFunc func, gpointer data);
 void obex_agent_set_complete_func(ObexAgent *agent,
 				ObexAgentCompleteFunc func, gpointer data);
-
+void obex_agent_set_error_func(ObexAgent *agent,
+			       ObexAgentErrorFunc func, gpointer data);
 G_END_DECLS
 
 #endif /* __OBEX_AGENT_H */

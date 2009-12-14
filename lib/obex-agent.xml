@@ -22,5 +22,11 @@
     <method name="Release">
       <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
     </method>
+
+    <method name="Error">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <arg type="o" name="transfer"/>
+      <arg type="s" name="message"/>
+    </method>
   </interface>
 </node>
