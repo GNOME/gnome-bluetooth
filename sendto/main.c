@@ -290,9 +290,6 @@ static void create_window(void)
 	label_from = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label_from), 0, 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label_from), PANGO_ELLIPSIZE_MIDDLE);
-	text = g_get_current_dir();
-	gtk_label_set_markup(GTK_LABEL(label_from), text);
-	g_free(text);
 	gtk_table_attach_defaults(GTK_TABLE(table), label_from, 1, 2, 0, 1);
 
 	label = gtk_label_new(NULL);
@@ -415,6 +412,7 @@ static void get_properties_callback (DBusGProxy *proxy,
 {
 	GError *error = NULL;
 	gchar *filename = option_files[file_index];
+	GFile *file, *dir;
 	gchar *basename, *text, *markup;
 	GHashTable *hash;
 
@@ -433,9 +431,19 @@ static void get_properties_callback (DBusGProxy *proxy,
 		g_hash_table_destroy(hash);
 	}
 
-	text = g_path_get_dirname(filename);
-	gtk_label_set_markup(GTK_LABEL(label_from), text);
-	g_free(text);
+	file = g_file_new_for_path (filename);
+	dir = g_file_get_parent (file);
+	g_object_unref (file);
+	if (g_file_has_uri_scheme (dir, "file") != FALSE) {
+		text = g_file_get_path (dir);
+	} else {
+		text = g_file_get_uri (dir);
+	}
+	markup = g_markup_escape_text (text, -1);
+	g_free (text);
+	g_object_unref (dir);
+	gtk_label_set_markup(GTK_LABEL(label_from), markup);
+	g_free(markup);
 
 	basename = g_path_get_basename(filename);
 	text = g_strdup_printf(_("Sending %s"), basename);
