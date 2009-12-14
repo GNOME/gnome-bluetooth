@@ -478,7 +478,8 @@ static gboolean complete_callback(DBusGMethodInvocation *context,
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
 
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
+	if (file_index == file_count)
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
 	dbus_g_method_return(context);
 
