@@ -446,6 +446,18 @@ static gboolean release_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
+static gboolean error_callback(DBusGMethodInvocation *context,
+			       DBusGProxy *transfer,
+			       const char *message,
+			       gpointer user_data)
+{
+	g_message ("Error message: %s", message);
+
+	dbus_g_method_return(context);
+
+	return TRUE;
+}
+
 static void send_notify(DBusGProxy *proxy,
 				DBusGProxyCall *call, void *user_data)
 {
@@ -700,6 +712,7 @@ int main(int argc, char *argv[])
 	obex_agent_set_request_func(agent, request_callback, NULL);
 	obex_agent_set_progress_func(agent, progress_callback, NULL);
 	obex_agent_set_complete_func(agent, complete_callback, NULL);
+	obex_agent_set_error_func(agent, error_callback, NULL);
 
 	obex_agent_setup(agent, AGENT_PATH);
 
