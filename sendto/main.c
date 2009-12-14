@@ -537,7 +537,8 @@ static gboolean complete_callback(DBusGMethodInvocation *context,
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
 
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
+	if (file_index == file_count)
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
 	dbus_g_method_return(context);
 
@@ -566,7 +567,7 @@ static gboolean error_callback(DBusGMethodInvocation *context,
 	gtk_widget_show (image_status);
 	gtk_label_set_markup(GTK_LABEL(label_status), message);
 
-	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, FALSE);
+	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
 	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 
@@ -595,7 +596,7 @@ static void send_notify(DBusGProxy *proxy,
 		gtk_label_set_markup(GTK_LABEL(label_status), message);
 		g_free (message);
 
-		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, FALSE);
+		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
 		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 		return;
