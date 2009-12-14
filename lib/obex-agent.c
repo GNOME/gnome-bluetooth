@@ -78,12 +78,18 @@ static gboolean obex_agent_request(ObexAgent *agent, const char *path,
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
+	if (priv->busname == NULL) {
+		/* When we get called the first time, if OBEX_SERVICE
+		 * was not available, we get its name here */
+		priv->busname = sender;
+	} else {
+		if (g_str_equal(sender, priv->busname) == FALSE) {
+			g_free (sender);
+			return FALSE;
+		}
 
-	g_free (sender);
+		g_free (sender);
+	}
 
 	if (priv->request_func) {
 		DBusGProxy *proxy;
