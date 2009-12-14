@@ -66,6 +66,29 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
+static void value_free(GValue *value)
+{
+	g_value_unset(value);
+	g_free(value);
+}
+
+static GHashTable *
+new_hash_table_for_address (const char *address)
+{
+	GHashTable *hash;
+	GValue *value;
+
+	hash = g_hash_table_new_full(g_str_hash, g_str_equal,
+				     g_free, (GDestroyNotify) value_free);
+
+	value = g_new0(GValue, 1);
+	g_value_init(value, G_TYPE_STRING);
+	g_value_set_string(value, address);
+	g_hash_table_insert(hash, g_strdup("Destination"), value);
+
+	return hash;
+}
+
 static gchar *filename_to_path(const gchar *filename)
 {
 	GFile *file;
@@ -511,12 +534,6 @@ static void send_notify(DBusGProxy *proxy,
 	first_update = get_system_time();
 }
 
-static void value_free(GValue *value)
-{
-	g_value_unset(value);
-	g_free(value);
-}
-
 static void
 select_device_changed(BluetoothChooser *sel,
 		      char *address,
@@ -622,8 +639,6 @@ static GOptionEntry options[] = {
 int main(int argc, char *argv[])
 {
 	DBusGProxy *proxy;
-	GHashTable *hash = NULL;
-	GValue *value;
 	GError *error = NULL;
 	int i;
 
@@ -743,17 +758,10 @@ int main(int argc, char *argv[])
 
 	obex_agent_setup(agent, AGENT_PATH);
 
-	hash = g_hash_table_new_full(g_str_hash, g_str_equal,
-				     g_free, (GDestroyNotify) value_free);
-
-	value = g_new0(GValue, 1);
-	g_value_init(value, G_TYPE_STRING);
-	g_value_set_string(value, option_device);
-	g_hash_table_insert(hash, g_strdup("Destination"), value);
-
 	dbus_g_proxy_begin_call(proxy, "SendFiles",
 				send_notify, NULL, NULL,
-				dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), hash,
+				dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE),
+				new_hash_table_for_address (option_device),
 				G_TYPE_STRV, option_files,
 				DBUS_TYPE_G_OBJECT_PATH, AGENT_PATH,
 				G_TYPE_INVALID);
