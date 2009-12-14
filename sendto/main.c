@@ -550,6 +550,8 @@ static gboolean release_callback(DBusGMethodInvocation *context,
 {
 	dbus_g_method_return(context);
 
+	agent = NULL;
+
 	gtk_label_set_markup(GTK_LABEL(label_status), NULL);
 
 	gtk_widget_destroy(dialog);
@@ -574,8 +576,10 @@ static gboolean error_callback(DBusGMethodInvocation *context,
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
 
-	obex_agent_set_release_func(agent, NULL, NULL);
-	agent = NULL;
+	if (agent != NULL) {
+		obex_agent_set_release_func(agent, NULL, NULL);
+		agent = NULL;
+	}
 
 	dbus_g_method_return(context);
 
