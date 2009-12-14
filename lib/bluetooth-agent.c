@@ -80,14 +80,18 @@ static gboolean bluetooth_agent_request_pin_code(BluetoothAgent *agent,
 			const char *path, DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	DBusGProxy *device;
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->pincode_func) {
 		if (priv->adapter != NULL)
@@ -110,14 +114,18 @@ static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
 			const char *path, DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	DBusGProxy *device;
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->passkey_func) {
 		if (priv->adapter != NULL)
@@ -141,14 +149,18 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 						DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	DBusGProxy *device;
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->display_func) {
 		if (priv->adapter != NULL)
@@ -172,14 +184,18 @@ static gboolean bluetooth_agent_request_confirmation(BluetoothAgent *agent,
 						DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	DBusGProxy *device;
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->confirm_func) {
 		if (priv->adapter != NULL)
@@ -203,14 +219,18 @@ static gboolean bluetooth_agent_authorize(BluetoothAgent *agent,
 						DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	DBusGProxy *device;
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->authorize_func) {
 		if (priv->adapter != NULL)
@@ -233,12 +253,16 @@ static gboolean bluetooth_agent_confirm_mode(BluetoothAgent *agent,
 			const char *mode, DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	dbus_g_method_return(context);
 
@@ -249,13 +273,17 @@ static gboolean bluetooth_agent_cancel(BluetoothAgent *agent,
 						DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 	gboolean result = FALSE;
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	if (priv->cancel_func)
 		result = priv->cancel_func(context, priv->cancel_data);
@@ -267,12 +295,16 @@ static gboolean bluetooth_agent_release(BluetoothAgent *agent,
 						DBusGMethodInvocation *context)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	const char *sender = dbus_g_method_get_sender(context);
+	char *sender = dbus_g_method_get_sender(context);
 
 	DBG("agent %p sender %s", agent, sender);
 
-	if (g_str_equal(sender, priv->busname) == FALSE)
+	if (g_str_equal(sender, priv->busname) == FALSE) {
+		g_free (sender);
 		return FALSE;
+	}
+
+	g_free (sender);
 
 	g_object_unref(agent);
 
