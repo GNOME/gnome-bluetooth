@@ -45,7 +45,6 @@
 static DBusGConnection *conn = NULL;
 
 static GtkWidget *dialog;
-static GtkWidget *button;
 static GtkWidget *label_from;
 static GtkWidget *image_status;
 static GtkWidget *label_status;
@@ -125,6 +124,18 @@ static gchar *format_time(gint seconds)
 				"approximately %'d hours", hours), hours);
 }
 
+static void
+set_response_visible (GtkDialog *dialog,
+		      int response_id,
+		      gboolean visible)
+{
+	GtkWidget *widget;
+
+	widget = gtk_dialog_get_widget_for_response (dialog, response_id);
+	gtk_widget_set_no_show_all (widget, TRUE);
+	gtk_widget_set_visible (widget, visible);
+}
+
 static void response_callback(GtkWidget *dialog,
 					gint response, gpointer user_data)
 {
@@ -149,8 +160,10 @@ static void create_window(void)
 
 	dialog = gtk_dialog_new_with_buttons(_("File Transfer"), NULL,
 				GTK_DIALOG_NO_SEPARATOR,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 				NULL);
-	button = gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 	gtk_window_set_type_hint(GTK_WINDOW(dialog),
 						GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
@@ -472,9 +485,8 @@ static void send_notify(DBusGProxy *proxy,
 		gtk_label_set_markup(GTK_LABEL(label_status), message);
 		g_free (message);
 
-		gtk_button_set_label (GTK_BUTTON (button), GTK_STOCK_CLOSE);
-		gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						GTK_RESPONSE_CANCEL, TRUE);
+		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, FALSE);
+		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, TRUE);
 		return;
 	}
 
