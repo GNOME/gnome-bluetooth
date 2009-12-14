@@ -42,8 +42,11 @@
 
 #define AGENT_PATH "/org/bluez/agent/sendto"
 
+#define RESPONSE_RETRY 1
+
 static DBusGConnection *conn = NULL;
 static ObexAgent *agent = NULL;
+static DBusGProxy *client_proxy = NULL;
 
 static GtkWidget *dialog;
 static GtkWidget *label_from;
@@ -66,6 +69,21 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
+static void send_notify(DBusGProxy *proxy, DBusGProxyCall *call, void *user_data);
+
+/* Agent callbacks */
+static gboolean release_callback(DBusGMethodInvocation *context, gpointer user_data);
+static gboolean request_callback(DBusGMethodInvocation *context, DBusGProxy *transfer, gpointer user_data);
+static gboolean progress_callback(DBusGMethodInvocation *context,
+				  DBusGProxy *transfer,
+				  guint64 transferred,
+				  gpointer user_data);
+static gboolean complete_callback(DBusGMethodInvocation *context, DBusGProxy *transfer, gpointer user_data);
+static gboolean error_callback(DBusGMethodInvocation *context,
+			       DBusGProxy *transfer,
+			       const char *message,
+			       gpointer user_data);
+
 static void value_free(GValue *value)
 {
 	g_value_unset(value);
@@ -73,7 +91,7 @@ static void value_free(GValue *value)
 }
 
 static GHashTable *
-new_hash_table_for_address (const char *address)
+send_files (void)
 {
 	GHashTable *hash;
 	GValue *value;
@@ -83,10 +101,32 @@ new_hash_table_for_address (const char *address)
 
 	value = g_new0(GValue, 1);
 	g_value_init(value, G_TYPE_STRING);
-	g_value_set_string(value, address);
+	g_value_set_string(value, option_device);
 	g_hash_table_insert(hash, g_strdup("Destination"), value);
 
+	dbus_g_proxy_begin_call(client_proxy, "SendFiles",
+				send_notify, NULL, NULL,
+				dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), hash,
+				G_TYPE_STRV, option_files,
+				DBUS_TYPE_G_OBJECT_PATH, AGENT_PATH,
+				G_TYPE_INVALID);
+
 	return hash;
+}
+
+static void
+setup_agent (void)
+{
+	if (agent == NULL)
+		agent = obex_agent_new();
+
+	obex_agent_set_release_func(agent, release_callback, NULL);
+	obex_agent_set_request_func(agent, request_callback, NULL);
+	obex_agent_set_progress_func(agent, progress_callback, NULL);
+	obex_agent_set_complete_func(agent, complete_callback, NULL);
+	obex_agent_set_error_func(agent, error_callback, NULL);
+
+	obex_agent_setup(agent, AGENT_PATH);
 }
 
 static gchar *filename_to_path(const gchar *filename)
@@ -164,14 +204,31 @@ set_response_visible (GtkDialog *dialog,
 static void response_callback(GtkWidget *dialog,
 					gint response, gpointer user_data)
 {
+	if (response == RESPONSE_RETRY) {
+		setup_agent ();
+
+		/* Reset buttons */
+		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
+		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
+		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
+
+		/* Reset status and progress bar */
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress),
+					  _("Connecting..."));
+		gtk_label_set_text (GTK_LABEL (label_status), "");
+		gtk_widget_hide (image_status);
+		send_files ();
+		return;
+	}
+
 	if (current_transfer != NULL) {
 		obex_agent_set_error_func(agent, NULL, NULL);
 		dbus_g_proxy_call_no_reply (current_transfer, "Cancel", G_TYPE_INVALID);
 		g_object_unref (current_transfer);
 		current_transfer = NULL;
 	}
-	gtk_widget_destroy(dialog);
 
+	gtk_widget_destroy(dialog);
 	gtk_main_quit();
 }
 
@@ -193,8 +250,10 @@ static void create_window(void)
 				GTK_DIALOG_NO_SEPARATOR,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				_("_Retry"), RESPONSE_RETRY,
 				NULL);
 	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
+	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 	gtk_window_set_type_hint(GTK_WINDOW(dialog),
 						GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
@@ -504,7 +563,18 @@ static gboolean error_callback(DBusGMethodInvocation *context,
 			       const char *message,
 			       gpointer user_data)
 {
-	g_message ("Error message: %s", message);
+	gtk_widget_show (image_status);
+	gtk_label_set_markup(GTK_LABEL(label_status), message);
+
+	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, FALSE);
+	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
+	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
+
+	g_object_unref (current_transfer);
+	current_transfer = NULL;
+
+	obex_agent_set_release_func(agent, NULL, NULL);
+	agent = NULL;
 
 	dbus_g_method_return(context);
 
@@ -526,7 +596,8 @@ static void send_notify(DBusGProxy *proxy,
 		g_free (message);
 
 		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, FALSE);
-		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, TRUE);
+		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
+		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 		return;
 	}
 
@@ -639,7 +710,6 @@ static GOptionEntry options[] = {
 
 int main(int argc, char *argv[])
 {
-	DBusGProxy *proxy;
 	GError *error = NULL;
 	int i;
 
@@ -746,30 +816,16 @@ int main(int argc, char *argv[])
 
 	create_window();
 
-	proxy = dbus_g_proxy_new_for_name(conn, "org.openobex.client",
+	client_proxy = dbus_g_proxy_new_for_name(conn, "org.openobex.client",
 					"/", "org.openobex.Client");
 
-	agent = obex_agent_new();
+	setup_agent ();
 
-	obex_agent_set_release_func(agent, release_callback, NULL);
-	obex_agent_set_request_func(agent, request_callback, NULL);
-	obex_agent_set_progress_func(agent, progress_callback, NULL);
-	obex_agent_set_complete_func(agent, complete_callback, NULL);
-	obex_agent_set_error_func(agent, error_callback, NULL);
-
-	obex_agent_setup(agent, AGENT_PATH);
-
-	dbus_g_proxy_begin_call(proxy, "SendFiles",
-				send_notify, NULL, NULL,
-				dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE),
-				new_hash_table_for_address (option_device),
-				G_TYPE_STRV, option_files,
-				DBUS_TYPE_G_OBJECT_PATH, AGENT_PATH,
-				G_TYPE_INVALID);
+	send_files ();
 
 	gtk_main();
 
-	g_object_unref(proxy);
+	g_object_unref(client_proxy);
 
 	dbus_g_connection_unref(conn);
 
