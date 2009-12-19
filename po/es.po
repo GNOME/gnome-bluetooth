@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-12-11 16:57+0000\n"
-"PO-Revision-Date: 2009-12-13 23:29+0100\n"
+"POT-Creation-Date: 2009-12-14 19:40+0000\n"
+"PO-Revision-Date: 2009-12-19 13:42+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -211,7 +211,7 @@ msgstr "Bluetooth: Desactivado"
 msgid "Disconnecting..."
 msgstr "Desconectando…"
 
-#: ../applet/main.c:463 ../sendto/main.c:213
+#: ../applet/main.c:463 ../sendto/main.c:217 ../sendto/main.c:313
 msgid "Connecting..."
 msgstr "Conectando…"
 
@@ -248,7 +248,6 @@ msgid "Open Mouse Preferences..."
 msgstr "Abrir las Preferencias del ratón…"
 
 #: ../applet/main.c:877
-#| msgid "Open Mouse Preferences..."
 msgid "Open Sound Preferences..."
 msgstr "Abrir las Preferencias de sonido…"
 
@@ -671,56 +670,61 @@ msgstr "Selección _automática del PIN"
 msgid "_Restart Setup"
 msgstr "_Reiniciar la configuración"
 
-#: ../sendto/main.c:98
+#: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d segundo"
 msgstr[1] "%'d segundos"
 
-#: ../sendto/main.c:103 ../sendto/main.c:116
+#: ../sendto/main.c:167 ../sendto/main.c:180
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minuto"
 msgstr[1] "%'d minutos"
 
-#: ../sendto/main.c:114
+#: ../sendto/main.c:178
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d hora"
 msgstr[1] "%'d horas"
 
-#: ../sendto/main.c:124
+#: ../sendto/main.c:188
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
-#: ../sendto/main.c:150
+#: ../sendto/main.c:249
 msgid "File Transfer"
 msgstr "Transferencia de archivos"
 
+#: ../sendto/main.c:253
+#| msgid "_Reject"
+msgid "_Retry"
+msgstr "_Reintentar"
+
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:169
+#: ../sendto/main.c:272
 msgid "Sending files via Bluetooth"
 msgstr "Enviando archivos vía Bluetooth"
 
-#: ../sendto/main.c:181
+#: ../sendto/main.c:284
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:197
+#: ../sendto/main.c:297
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:243
+#: ../sendto/main.c:342 ../sendto/main.c:358
 msgid "An unknown error occurred"
 msgstr "Ocurrió un error desconocido"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:351
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -728,43 +732,43 @@ msgstr ""
 "Asegúrese de que el dispositivo remoto está encendido y que acepta "
 "conexiones Bluetooth"
 
-#: ../sendto/main.c:337
+#: ../sendto/main.c:449
 #, c-format
 msgid "Sending %s"
 msgstr "Enviando %s"
 
-#: ../sendto/main.c:344 ../sendto/main.c:406
+#: ../sendto/main.c:456 ../sendto/main.c:522
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Enviando archivo %d de %d"
 
-#: ../sendto/main.c:402
+#: ../sendto/main.c:518
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:404
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:498
+#: ../sendto/main.c:640
 msgid "Select Device to Send To"
 msgstr "Seleccionar el dispositivo al que enviar"
 
-#: ../sendto/main.c:502
+#: ../sendto/main.c:644
 msgid "Send _To"
 msgstr "_Enviar a"
 
-#: ../sendto/main.c:543
+#: ../sendto/main.c:685
 msgid "Choose files to send"
 msgstr "Seleccionar los archivos para enviar"
 
-#: ../sendto/main.c:572
+#: ../sendto/main.c:714
 msgid "Remote device to use"
 msgstr "Dispositivo remoto que usar"
 
-#: ../sendto/main.c:574
+#: ../sendto/main.c:716
 msgid "Remote device's name"
 msgstr "Nombre del dispositivo remoto"
 
@@ -826,7 +830,6 @@ msgid "Back to devices"
 msgstr "Volver a los dispositivos"
 
 #: ../moblin/moblin-panel.c:1175
-#| msgid "Phone"
 msgid "Done"
 msgstr "Realizado"
 
