@@ -263,7 +263,8 @@ static void create_window(void)
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_box_set_spacing(GTK_BOX(vbox), 6);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), vbox);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
+	                   vbox);
 
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
@@ -633,7 +634,7 @@ select_device_changed(BluetoothChooser *sel,
 static char *
 show_browse_dialog (char **device_name)
 {
-	GtkWidget *dialog, *selector, *send_button, *image;
+	GtkWidget *dialog, *selector, *send_button, *image, *content_area;
 	char *bdaddr;
 	int response_id;
 
@@ -649,7 +650,8 @@ show_browse_dialog (char **device_name)
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
 
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_set_spacing (GTK_BOX (content_area), 2);
 
 	selector = bluetooth_chooser_new("Select device to send files to");
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
@@ -661,7 +663,7 @@ show_browse_dialog (char **device_name)
 		     NULL);
 	g_signal_connect(selector, "selected-device-changed",
 			 G_CALLBACK(select_device_changed), dialog);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+	gtk_container_add (GTK_CONTAINER (content_area), selector);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
 	bdaddr = NULL;

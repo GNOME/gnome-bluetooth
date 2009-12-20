@@ -109,7 +109,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 
 	address = g_strdup (g_object_get_data (widget, "address"));
 	if (address == NULL) {
-		GtkWidget *dialog, *selector;
+		GtkWidget *dialog, *selector, *content_area;
 		int response_id;
 
 		dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
@@ -122,7 +122,8 @@ void browse_callback(GObject *widget, gpointer user_data)
 		gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
 
 		gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-		gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+		content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+		gtk_box_set_spacing (GTK_BOX (content_area), 2);
 
 		selector = bluetooth_chooser_new(_("Select device to browse"));
 		gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
@@ -136,7 +137,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 			     NULL);
 		g_signal_connect(selector, "selected-device-changed",
 				 G_CALLBACK(select_device_changed), dialog);
-		gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), selector);
+		gtk_container_add (GTK_CONTAINER (content_area), selector);
 
 		address = NULL;
 		response_id = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -557,7 +558,7 @@ action_set_bold (GtkUIManager *manager, GtkAction *action, const char *path)
 
 	label = gtk_action_get_label (action);
 	str = g_strdup_printf ("<b>%s</b>", label);
-	gtk_label_set_markup (GTK_LABEL (GTK_BIN (widget)->child), str);
+	gtk_label_set_markup (GTK_LABEL (gtk_bin_get_child (GTK_BIN (widget))), str);
 	g_free (str);
 }
 
