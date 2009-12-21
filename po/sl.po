@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: damned-lies\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2009-12-11 16:57+0000\n"
-"PO-Revision-Date: 2009-12-16 14:40+0100\n"
+"POT-Creation-Date: 2009-12-19 12:43+0000\n"
+"PO-Revision-Date: 2009-12-21 22:40+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -212,7 +212,8 @@ msgid "Disconnecting..."
 msgstr "Prekinjanje povezave ..."
 
 #: ../applet/main.c:463
-#: ../sendto/main.c:213
+#: ../sendto/main.c:217
+#: ../sendto/main.c:313
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
@@ -243,7 +244,7 @@ msgstr "Pošlji datoteke ..."
 
 #: ../applet/main.c:848
 msgid "Browse files..."
-msgstr "Brskajnje datotek ..."
+msgstr "Brskanje datotek ..."
 
 #: ../applet/main.c:859
 msgid "Open Keyboard Preferences..."
@@ -675,7 +676,7 @@ msgstr "_Samodejni izbor prehodnega gesla"
 msgid "_Restart Setup"
 msgstr "_Ponovni zagon namestitve"
 
-#: ../sendto/main.c:98
+#: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -684,8 +685,8 @@ msgstr[1] "%'d sekunda"
 msgstr[2] "%'d sekundi"
 msgstr[3] "%'d sekunde"
 
-#: ../sendto/main.c:103
-#: ../sendto/main.c:116
+#: ../sendto/main.c:167
+#: ../sendto/main.c:180
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -694,7 +695,7 @@ msgstr[1] "%'d minuta"
 msgstr[2] "%'d minuti"
 msgstr[3] "%'d minute"
 
-#: ../sendto/main.c:114
+#: ../sendto/main.c:178
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -703,7 +704,7 @@ msgstr[1] "%'d ura"
 msgstr[2] "%'d uri"
 msgstr[3] "%'d ure"
 
-#: ../sendto/main.c:124
+#: ../sendto/main.c:188
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -712,69 +713,74 @@ msgstr[1] "približno %'d ura"
 msgstr[2] "približno %'d uri"
 msgstr[3] "približno %'d ure"
 
-#: ../sendto/main.c:150
+#: ../sendto/main.c:249
 msgid "File Transfer"
 msgstr "Prenos datotek"
 
+#: ../sendto/main.c:253
+msgid "_Retry"
+msgstr "_Poskusi znova"
+
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:169
+#: ../sendto/main.c:272
 msgid "Sending files via Bluetooth"
 msgstr "Pošiljanje datotek prek Bluetooth"
 
-#: ../sendto/main.c:181
+#: ../sendto/main.c:284
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:197
+#: ../sendto/main.c:297
 msgid "To:"
 msgstr "Za:"
 
-#: ../sendto/main.c:243
+#: ../sendto/main.c:342
+#: ../sendto/main.c:358
 msgid "An unknown error occurred"
 msgstr "Prišlo je do neznane napake."
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:351
 msgid "Make sure that remote device is switched on and that it accepts Bluetooth connections"
 msgstr "Prepričajte se, da je oddaljena naprava priključena in da omogoča sprejemanje Bluetooth povezav"
 
-#: ../sendto/main.c:337
+#: ../sendto/main.c:449
 #, c-format
 msgid "Sending %s"
 msgstr "Pošiljanje %s"
 
-#: ../sendto/main.c:344
-#: ../sendto/main.c:406
+#: ../sendto/main.c:456
+#: ../sendto/main.c:522
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Pošiljanje %d od %d datotek"
 
-#: ../sendto/main.c:402
+#: ../sendto/main.c:518
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:404
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:498
+#: ../sendto/main.c:640
 msgid "Select Device to Send To"
 msgstr "Izbor naprave za prejemanje"
 
-#: ../sendto/main.c:502
+#: ../sendto/main.c:644
 msgid "Send _To"
 msgstr "Pošlji _na"
 
-#: ../sendto/main.c:543
+#: ../sendto/main.c:685
 msgid "Choose files to send"
 msgstr "Izbor datotek za pošiljanje"
 
-#: ../sendto/main.c:572
+#: ../sendto/main.c:714
 msgid "Remote device to use"
 msgstr "Uporabi oddaljeno napravo"
 
-#: ../sendto/main.c:574
+#: ../sendto/main.c:716
 msgid "Remote device's name"
 msgstr "Ime oddaljene naprave"
 
@@ -839,7 +845,6 @@ msgid "Back to devices"
 msgstr "Nazaj na naprave"
 
 #: ../moblin/moblin-panel.c:1175
-#, fuzzy
 msgid "Done"
 msgstr "Končano"
 
