@@ -149,6 +149,43 @@ static gchar *format_time(gint seconds)
 				"approximately %'d hours", hours), hours);
 }
 
+typedef struct _ResponseData ResponseData;
+struct _ResponseData {
+	gint response_id;
+};
+
+static GtkWidget *
+get_widget_for_response (GtkDialog *dialog,
+			 int response_id)
+{
+	GList *children;
+	GList *tmp_list;
+
+	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
+
+	children = gtk_container_get_children (GTK_CONTAINER (gtk_dialog_get_action_area (dialog)));
+
+	tmp_list = children;
+	while (tmp_list != NULL) {
+		GtkWidget *widget = tmp_list->data;
+		ResponseData *rd = g_object_get_data (G_OBJECT (widget),
+						      "gtk-dialog-response-data");
+
+		if (rd && rd->response_id == response_id) {
+			g_list_free (children);
+			return widget;
+		}
+
+		tmp_list = g_list_next (tmp_list);
+	}
+
+	g_list_free (children);
+
+	return NULL;
+
+
+}
+
 static void
 set_response_visible (GtkDialog *dialog,
 		      int response_id,
@@ -156,7 +193,7 @@ set_response_visible (GtkDialog *dialog,
 {
 	GtkWidget *widget;
 
-	widget = gtk_dialog_get_widget_for_response (dialog, response_id);
+	widget = get_widget_for_response (dialog, response_id);
 	gtk_widget_set_no_show_all (widget, TRUE);
 	gtk_widget_set_visible (widget, visible);
 }
