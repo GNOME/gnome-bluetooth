@@ -112,36 +112,36 @@ const gchar *bluetooth_type_to_string(BluetoothType type)
 {
 	switch (type) {
 	case BLUETOOTH_TYPE_ANY:
-		return N_("All types");
+		return _("All types");
 	case BLUETOOTH_TYPE_PHONE:
-		return N_("Phone");
+		return _("Phone");
 	case BLUETOOTH_TYPE_MODEM:
-		return N_("Modem");
+		return _("Modem");
 	case BLUETOOTH_TYPE_COMPUTER:
-		return N_("Computer");
+		return _("Computer");
 	case BLUETOOTH_TYPE_NETWORK:
-		return N_("Network");
+		return _("Network");
 	case BLUETOOTH_TYPE_HEADSET:
 		/* translators: a hands-free headset, a combination of a single speaker with a microphone */
-		return N_("Headset");
+		return _("Headset");
 	case BLUETOOTH_TYPE_HEADPHONES:
-		return N_("Headphones");
+		return _("Headphones");
 	case BLUETOOTH_TYPE_OTHER_AUDIO:
-		return N_("Audio device");
+		return _("Audio device");
 	case BLUETOOTH_TYPE_KEYBOARD:
-		return N_("Keyboard");
+		return _("Keyboard");
 	case BLUETOOTH_TYPE_MOUSE:
-		return N_("Mouse");
+		return _("Mouse");
 	case BLUETOOTH_TYPE_CAMERA:
-		return N_("Camera");
+		return _("Camera");
 	case BLUETOOTH_TYPE_PRINTER:
-		return N_("Printer");
+		return _("Printer");
 	case BLUETOOTH_TYPE_JOYPAD:
-		return N_("Joypad");
+		return _("Joypad");
 	case BLUETOOTH_TYPE_TABLET:
-		return N_("Tablet");
+		return _("Tablet");
 	default:
-		return N_("Unknown");
+		return _("Unknown");
 	}
 }
 
