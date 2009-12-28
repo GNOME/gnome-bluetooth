@@ -78,32 +78,22 @@ static void close_callback(GtkWidget *button, gpointer user_data)
 static void
 receive_callback (GtkWidget *item, GtkWindow *window)
 {
-	GtkWidget *dialog, *hbox, *image, *label;
+	GtkWidget *dialog;
 	const char *command = "gnome-file-share-properties";
 
 	if (!g_spawn_command_line_async(command, NULL)) {
 		/* translators:
 		 * This is the name of the preferences dialogue for gnome-user-share */
-		dialog = gtk_dialog_new_with_buttons(_("Cannot start \"Personal File Sharing\" Preferences"), window,
-						     GTK_DIALOG_NO_SEPARATOR,
-						     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
-
-		hbox = gtk_hbox_new (FALSE, 4);
-
-		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_ERROR, GTK_ICON_SIZE_MENU);
-		gtk_box_pack_start(GTK_BOX (hbox), image, FALSE, FALSE, 4);
+		dialog = gtk_message_dialog_new (window,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 _("Cannot start \"Personal File Sharing\" Preferences"));
 
 		/* translators:
 		 * This is the name of the preferences dialogue for gnome-user-share */
-		label = gtk_label_new (_("Please verify that the \"Personal File Sharing\" program is correctly installed."));
-		gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-		gtk_box_pack_start(GTK_BOX (hbox), label, TRUE, TRUE, 4);
-
-		gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
-
-		gtk_widget_show_all(hbox);
-		gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-		gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox);
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+			_("Please verify that the \"Personal File Sharing\" program is correctly installed."));
 
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
