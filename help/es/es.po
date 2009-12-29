@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-help.master\n"
-"POT-Creation-Date: 2009-05-23 18:20+0000\n"
-"PO-Revision-Date: 2009-06-04 07:20+0200\n"
+"POT-Creation-Date: 2009-12-01 18:02+0000\n"
+"PO-Revision-Date: 2009-12-29 20:06+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,6 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Report-Msgid-Bugs-To: \n"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -569,11 +570,77 @@ msgstr ""
 "que ha emparejado y le permite gestionarlos, como borrarlos, conectarse con "
 "ellos o añadir uno nuevo. <placeholder-1/>"
 
-#: C/gnome-bluetooth.xml:386(title)
+#: C/gnome-bluetooth.xml:385(title)
+#| msgid "Browsing Bluetooth device"
+msgid "Show Bluetooth icon"
+msgstr "Mostrar el icono de Bluetooth"
+
+#: C/gnome-bluetooth.xml:386(para)
+msgid ""
+"You can show or hide Bluetooth icon in the panel. See <xref linkend=\"gnome-"
+"bluetooth-applet\"/> for the applet features."
+msgstr ""
+"Puede mostrar u ocultar el icono de Bluetooth en el panel. Consulte la <xref "
+"linkend=\"gnome-bluetooth-applet\"/> para las características de la "
+"miniaplicación."
+
+#: C/gnome-bluetooth.xml:392(para)
+msgid ""
+"If you disable the icon in the panel, only limited set of actions will "
+"remain available."
+msgstr ""
+"Si desactiva el icono en el panel sólo quedará disponible un conjunto "
+"limitado de acciones."
+
+#: C/gnome-bluetooth.xml:399(title)
+msgid "Receive Files"
+msgstr "Recibir archivos"
+
+#: C/gnome-bluetooth.xml:401(para)
+msgid ""
+"Click on the <guilabel>Receive Files</guilabel> button and the "
+"<guilabel>Personal File Sharing Preferences</guilabel> dialog will appear. "
+"You can configure Bluetooth file reception and sharing there."
+msgstr ""
+"Pulse el botón <guilabel>Recibir archivos</guilabel> y aparecerá el diálogo "
+"<guilabel>Preferencias de Compartición de archivos personales</guilabel>. "
+"Aquí puede configurar la recepción de archivos a través de Bluetooth y la "
+"compartición."
+
+#: C/gnome-bluetooth.xml:405(para)
+#| msgid ""
+#| "File reception is not implemented in <application>gnome-bluetooth</"
+#| "application>, but in <application>gnome-user-share</application>, so you "
+#| "have to install this application to be able to received files over "
+#| "Bluetooth."
+msgid ""
+"This feature is not provided by <application>gnome-bluetooth</application>. "
+"<application>gnome-user-share</application> must be installed to use this "
+"feature."
+msgstr ""
+"Esta característica no la proporciona <application>gnome-bluetooth</"
+"application>, debe instalar <application>gnome-user-share</application> para "
+"usar esta característica."
+
+#: C/gnome-bluetooth.xml:409(para)
+msgid ""
+"Read more in the <ulink type=\"help\" url=\"ghelp:gnome-user-share"
+"\">Personal File Sharing Manual</ulink>: <ulink type=\"help\" url=\"ghelp:"
+"gnome-user-share#gnome-user-share-bluetooth-receiving\">receiving</ulink> "
+"and <ulink type=\"help\" url=\"ghelp:gnome-user-share#gnome-user-share-"
+"enabling-bluetooth\">sharing</ulink>."
+msgstr ""
+"Lea más en el <ulink type=\"help\" url=\"ghelp:gnome-user-share\">Manual de "
+"Compartición de archivos personales</ulink>: <ulink type=\"help\" url="
+"\"ghelp:gnome-user-share#gnome-user-share-bluetooth-receiving\">recepción</"
+"ulink> y <ulink type=\"help\" url=\"ghelp:gnome-user-share#gnome-user-share-"
+"enabling-bluetooth\">compartición</ulink>."
+
+#: C/gnome-bluetooth.xml:418(title)
 msgid "Frequently Asked Questions"
 msgstr "Preguntas más frecuentes"
 
-#: C/gnome-bluetooth.xml:390(para)
+#: C/gnome-bluetooth.xml:422(para)
 msgid ""
 "I don't see how to receive files over Bluetooth on my computer in "
 "<application>gnome-bluetooth</application>, am I blind?"
@@ -581,25 +648,34 @@ msgstr ""
 "No veo cómo recibir archivos a través de Bluetooth en mi equipo usando "
 "<application>gnome-bluetooth</application>, ¿estoy ciego?"
 
-#: C/gnome-bluetooth.xml:393(para)
+#: C/gnome-bluetooth.xml:425(para)
+#| msgid ""
+#| "File reception is not implemented in <application>gnome-bluetooth</"
+#| "application>, but in <application>gnome-user-share</application>, so you "
+#| "have to install this application to be able to received files over "
+#| "Bluetooth."
 msgid ""
 "File reception is not implemented in <application>gnome-bluetooth</"
 "application>, but in <application>gnome-user-share</application>, so you "
-"have to install this application to be able to received files over Bluetooth."
+"have to install this application to be able to receive files over Bluetooth. "
+"Button explained in the <xref linkend=\"gnome-bluetooth-prefs-receive\"/> is "
+"just a launcher of its configuration dialog."
 msgstr ""
 "La recepción de archivos no está implementada en <application>gnome-"
-"bluetooth</application> sino en <application>gnome-user-share</application> "
-"(Compartición de archivos personales), de tal forma que tiene que instalar "
-"esta aplicación para poder recibir archivos a través de Bluetooth."
+"bluetooth</application> sino en <application>gnome-user-share</application>, "
+"de tal forma que tiene que instalar esta aplicación para poder recibir "
+"archivos a través de Bluetooth. El botón descrito en la <xref linkend="
+"\"gnome-bluetooth-prefs-receive\"/> es simplemente un lanzador para su "
+"diálogo de confirmación."
 
-#: C/gnome-bluetooth.xml:401(para)
+#: C/gnome-bluetooth.xml:433(para)
 msgid ""
 "I found a bug in <application>gnome-bluetooth</application> what I can do?"
 msgstr ""
 "Encontré un error en <application>gnome-bluetooth</application>, ¿qué puedo "
 "hacer?"
 
-#: C/gnome-bluetooth.xml:404(para)
+#: C/gnome-bluetooth.xml:436(para)
 msgid ""
 "You should submit a bug report to <ulink url=\"http://bugzilla.gnome.org/"
 "enter_bug.cgi?product=gnome-bluetooth\"/>."
@@ -607,7 +683,7 @@ msgstr ""
 "Debería enviar el informe de error a <ulink url=\"http://bugzilla.gnome.org/"
 "enter_bug.cgi?product=gnome-bluetooth\"/>."
 
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/gnome-bluetooth.xml:0(None)
 msgid "translator-credits"
 msgstr "Jorge González <jorgegonz@svn.gnome.org>, 2007-2008"
