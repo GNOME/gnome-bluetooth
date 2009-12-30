@@ -8,9 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth gnome-2-28\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-15 17:22+0200\n"
-"PO-Revision-Date: 2009-08-15 17:23+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&component=general\n"
+"POT-Creation-Date: 2009-12-14 17:46+0000\n"
+"PO-Revision-Date: 2009-11-15 19:14+0100\n"
 "Last-Translator: Andre Klapper <ak-47@gmx.net>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,136 +23,155 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../lib/bluetooth-client.c:109
+#: ../lib/bluetooth-client.c:127
 msgid "All types"
 msgstr "Všechny typy"
 
-#: ../lib/bluetooth-client.c:111
+#: ../lib/bluetooth-client.c:129
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-client.c:113
+#: ../lib/bluetooth-client.c:131
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-client.c:115
+#: ../lib/bluetooth-client.c:133
 msgid "Computer"
 msgstr "Počítač"
 
-#: ../lib/bluetooth-client.c:117
+#: ../lib/bluetooth-client.c:135
 msgid "Network"
 msgstr "Síť"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:120
+#: ../lib/bluetooth-client.c:138
 msgid "Headset"
 msgstr "Sluchátko s mikrofonem"
 
-#: ../lib/bluetooth-client.c:122
+#: ../lib/bluetooth-client.c:140
 msgid "Headphones"
 msgstr "Sluchátka"
 
-#: ../lib/bluetooth-client.c:124
+#: ../lib/bluetooth-client.c:142
 msgid "Audio device"
 msgstr "Zvukové zařízení"
 
-#: ../lib/bluetooth-client.c:126
+#: ../lib/bluetooth-client.c:144
 msgid "Keyboard"
 msgstr "Klávesnice"
 
-#: ../lib/bluetooth-client.c:128
+#: ../lib/bluetooth-client.c:146
 msgid "Mouse"
 msgstr "Myš"
 
-#: ../lib/bluetooth-client.c:130
+#: ../lib/bluetooth-client.c:148
 msgid "Camera"
 msgstr "Fotoaparát"
 
-#: ../lib/bluetooth-client.c:132
+#: ../lib/bluetooth-client.c:150
 msgid "Printer"
 msgstr "Tiskárna"
 
-#: ../lib/bluetooth-client.c:134
+#: ../lib/bluetooth-client.c:152
 msgid "Joypad"
 msgstr "Herní ovladač"
 
-#: ../lib/bluetooth-client.c:136
+#: ../lib/bluetooth-client.c:154
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../lib/bluetooth-client.c:138 ../lib/bluetooth-chooser.c:105
-#: ../lib/bluetooth-chooser.c:139
+#: ../lib/bluetooth-client.c:156 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
 msgid "Click to select device..."
-msgstr "Klikněte pro výběr zařízení..."
+msgstr "Klikněte pro výběr zařízení…"
 
-#: ../lib/bluetooth-chooser.c:95
-msgid "All categories"
-msgstr "Všechny kategorie"
-
-#: ../lib/bluetooth-chooser.c:97
-msgid "Paired"
-msgstr "Spárovaná"
-
-#: ../lib/bluetooth-chooser.c:99
-msgid "Trusted"
-msgstr "Důvěryhodná"
-
-#: ../lib/bluetooth-chooser.c:101
-msgid "Not paired or trusted"
-msgstr "Nespárovaná nebo důvěryhodná"
-
-#: ../lib/bluetooth-chooser.c:103
-msgid "Paired or trusted"
-msgstr "Spárovaná nebo důvěryhodná"
-
-#: ../lib/bluetooth-chooser.c:180
+#: ../lib/bluetooth-chooser.c:170
 msgid "No adapters available"
 msgstr "Není dostupný žádný adaptér"
 
-#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
 msgid "Searching for devices..."
-msgstr "Vyhledávají se zařízení..."
+msgstr "Vyhledávají se zařízení…"
 
-#: ../lib/bluetooth-chooser.c:683
+#: ../lib/bluetooth-chooser.c:372
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Odebrat „%s“ ze seznamu zařízení?"
+
+#: ../lib/bluetooth-chooser.c:374
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Pokud zařízení odeberete, budete ho muset před příštím použitím znovu "
+"nastavit."
+
+#: ../lib/bluetooth-chooser.c:746
 msgid "Device"
 msgstr "Zařízení"
 
-#: ../lib/bluetooth-chooser.c:720
+#: ../lib/bluetooth-chooser.c:783
 msgid "Type"
 msgstr "Typ"
 
-#. The filters
-#: ../lib/bluetooth-chooser.c:836
-msgid "Show Only Bluetooth Devices With..."
+#: ../lib/bluetooth-filter-widget.c:75
+msgid "All categories"
+msgstr "Všechny kategorie"
+
+#: ../lib/bluetooth-filter-widget.c:77
+msgid "Paired"
+msgstr "Spárovaná"
+
+#: ../lib/bluetooth-filter-widget.c:79
+msgid "Trusted"
+msgstr "Důvěryhodná"
+
+#: ../lib/bluetooth-filter-widget.c:81
+msgid "Not paired or trusted"
+msgstr "Nespárovaná nebo důvěryhodná"
+
+#: ../lib/bluetooth-filter-widget.c:83
+msgid "Paired or trusted"
+msgstr "Spárovaná nebo důvěryhodná"
+
+#: ../lib/bluetooth-filter-widget.c:238
+#, fuzzy
+#| msgid "Show Only Bluetooth Devices With..."
+msgid "<b>Show Only Bluetooth Devices With...</b>"
 msgstr "Omezit zobrazená zařízení Bluetooth na..."
 
 #. The device category filter
-#: ../lib/bluetooth-chooser.c:856
+#: ../lib/bluetooth-filter-widget.c:254
 msgid "Device _category:"
 msgstr "_Kategorie zařízení:"
 
-#: ../lib/bluetooth-chooser.c:871
-msgid "Select the device category to filter above list"
+#: ../lib/bluetooth-filter-widget.c:269
+#, fuzzy
+#| msgid "Select the device category to filter above list"
+msgid "Select the device category to filter"
 msgstr "Zvolte kategorii zařízení, na kterou chcete seznam omezit"
 
 #. The device type filter
-#: ../lib/bluetooth-chooser.c:885
+#: ../lib/bluetooth-filter-widget.c:283
 msgid "Device _type:"
 msgstr "_Typ zařízení:"
 
-#: ../lib/bluetooth-chooser.c:906
-msgid "Select the device type to filter above list"
+#: ../lib/bluetooth-filter-widget.c:304
+#, fuzzy
+#| msgid "Select the device type to filter above list"
+msgid "Select the device type to filter"
 msgstr "Zvolte typ zařízení, na který chcete seznam omezit"
 
-#: ../lib/bluetooth-chooser.c:912
-msgid "Input devices (mice, keyboards, ...)"
+#: ../lib/bluetooth-filter-widget.c:310
+#, fuzzy
+#| msgid "Input devices (mice, keyboards, ...)"
+msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Vstupní zařízení (myš, klávesnice, ...)"
 
-#: ../lib/bluetooth-chooser.c:916
+#: ../lib/bluetooth-filter-widget.c:314
 msgid "Headphones, headsets and other audio devices"
 msgstr "Sluchátka, sluchátka s mikrofonem a další zvuková zařízení"
 
@@ -166,88 +186,94 @@ msgstr "Použít toto zařízení GPS pro služby určení polohy"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Přistupovat k internetu pomocí vašeho mobilu (test)"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:115
 msgid "Select Device to Browse"
 msgstr "Výběr zařízení k procházení"
 
-#: ../applet/main.c:116
+#: ../applet/main.c:119
 msgid "_Browse"
 msgstr "_Procházet"
 
-#: ../applet/main.c:124
+#: ../applet/main.c:127
 msgid "Select device to browse"
 msgstr "Vyberte zařízení, které chcete procházet"
 
-#: ../applet/main.c:278 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:304 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Zapnout Bluetooth"
 
-#: ../applet/main.c:279
+#: ../applet/main.c:305
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Vypnuto"
 
-#: ../applet/main.c:282
+#: ../applet/main.c:308
 msgid "Turn Off Bluetooth"
 msgstr "Vypnout: Bluetooth"
 
-#: ../applet/main.c:283
+#: ../applet/main.c:309
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Zapnuto"
 
-#: ../applet/main.c:288 ../applet/notify.c:148
+#: ../applet/main.c:314 ../applet/notify.c:148
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Zakázáno"
 
-#: ../applet/main.c:410
+#: ../applet/main.c:460
 msgid "Disconnecting..."
-msgstr "Odpojování..."
+msgstr "Odpojování…"
 
-#: ../applet/main.c:413 ../sendto/main.c:214
+#: ../applet/main.c:463 ../sendto/main.c:217 ../sendto/main.c:313
 msgid "Connecting..."
-msgstr "Připojování..."
+msgstr "Připojování…"
 
-#: ../applet/main.c:416 ../applet/main.c:756
+#: ../applet/main.c:466 ../applet/main.c:807
 msgid "Connected"
 msgstr "Připojeno"
 
-#: ../applet/main.c:419 ../applet/main.c:756
+#: ../applet/main.c:469 ../applet/main.c:807
 msgid "Disconnected"
 msgstr "Odpojeno"
 
-#: ../applet/main.c:774 ../applet/main.c:828 ../properties/adapter.c:446
+#: ../applet/main.c:825 ../applet/main.c:889 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: ../applet/main.c:774 ../applet/main.c:828
+#: ../applet/main.c:825 ../applet/main.c:889
 msgid "Connect"
 msgstr "Připojit"
 
-#: ../applet/main.c:787
+#: ../applet/main.c:838
 msgid "Send files..."
-msgstr "Odeslat soubory..."
+msgstr "Odeslat soubory…"
 
-#: ../applet/main.c:797
+#: ../applet/main.c:848
 msgid "Browse files..."
-msgstr "Procházet soubory..."
+msgstr "Procházet soubory…"
 
-#: ../applet/main.c:808
+#: ../applet/main.c:859
 msgid "Open Keyboard Preferences..."
-msgstr "Otevřít předvolby klávesnice..."
+msgstr "Otevřít předvolby klávesnice…"
 
-#: ../applet/main.c:816
+#: ../applet/main.c:867
 msgid "Open Mouse Preferences..."
-msgstr "Otevřít předvolby myši..."
+msgstr "Otevřít předvolby myši…"
 
-#: ../applet/main.c:942
+#: ../applet/main.c:877
+#, fuzzy
+#| msgid "Open Mouse Preferences..."
+msgid "Open Sound Preferences..."
+msgstr "Otevřít předvolby myši…"
+
+#: ../applet/main.c:1004
 msgid "Debug"
 msgstr "Ladit"
 
 #. Parse command-line options
-#: ../applet/main.c:962
+#: ../applet/main.c:1024
 msgid "- Bluetooth applet"
 msgstr "- applet Bluetooth"
 
-#: ../applet/main.c:967
+#: ../applet/main.c:1029
 #, c-format
 msgid ""
 "%s\n"
@@ -257,7 +283,7 @@ msgstr ""
 "Spusťte „%s --help“ pro výpis úplného seznamu dostupných přepínačů příkazové "
 "řádky.\n"
 
-#: ../applet/main.c:983
+#: ../applet/main.c:1046
 msgid "Bluetooth Applet"
 msgstr "Applet Bluetooth"
 
@@ -341,9 +367,10 @@ msgstr "Bluetooth: Kontroluje se"
 
 #: ../applet/popup-menu.ui.h:2
 msgid "Browse files on device..."
-msgstr "Procházet soubory v zařízení..."
+msgstr "Procházet soubory v zařízení…"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:405
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
+#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -357,11 +384,15 @@ msgstr "Ukončit"
 
 #: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
-msgstr "Odeslat soubory do zařízení..."
+msgstr "Odeslat soubory do zařízení…"
 
 #: ../applet/popup-menu.ui.h:7
 msgid "Set up new device..."
-msgstr "Nastavit nové zařízení..."
+msgstr "Nastavit nové zařízení…"
+
+#: ../applet/popup-menu.ui.h:8
+msgid "Visible"
+msgstr "Viditelný"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
@@ -387,79 +418,62 @@ msgstr "_Souhlasí"
 msgid "_Show input"
 msgstr "Zobrazovat v_stup"
 
-#: ../properties/main.c:131
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Správce Bluetooth pro GNOME"
-
-#: ../properties/main.c:134
-msgid "translator-credits"
+#. translators:
+#. * This is the name of the preferences dialogue for gnome-user-share
+#: ../properties/main.c:87
+msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr ""
-"Marek Černocký <marek@manet.cz>\n"
-"\n"
-"Launchpad Contributions:\n"
-"  Kamil Páral https://launchpad.net/~kamil.paral\n"
-"  clever_fox https://launchpad.net/~clever-fox\n"
-"  Jiziii https://launchpad.net/~zeero\n"
-"  Konki https://launchpad.net/~pavel-konkol\n"
-"  Petr Zemek https://launchpad.net/~jashin91\n"
-"  Vladimír Burian https://launchpad.net/~vburian\n"
-"  Zdeněk Dlauhý https://launchpad.net/~zdlauhy\n"
-"  jan.benedek https://launchpad.net/~jan-benedek"
 
-#: ../properties/main.c:136
-msgid "GNOME Bluetooth home page"
-msgstr "Domovská stránka GNOME Bluetooth"
+#. translators:
+#. * This is the name of the preferences dialogue for gnome-user-share
+#: ../properties/main.c:98
+msgid ""
+"Please verify that the \"Personal File Sharing\" program is correctly "
+"installed."
+msgstr ""
 
-#: ../properties/main.c:161
+#: ../properties/main.c:135
 msgid "Bluetooth Preferences"
 msgstr "Předvolby Bluetooth"
 
-#: ../properties/main.c:176
+#: ../properties/main.c:150
 msgid "_Show Bluetooth icon"
 msgstr "_Zobrazit ikonu Bluetooth"
 
-#: ../properties/main.c:332
+#: ../properties/main.c:174
+msgid "Receive Files"
+msgstr ""
+
+#: ../properties/main.c:222
 msgid "Output a list of currently known devices"
 msgstr "Vypsat seznam v současnosti známých zařízení"
 
-#: ../properties/main.c:369
+#: ../properties/main.c:260
 msgid "Bluetooth Properties"
 msgstr "Vlastnosti Bluetooth"
 
-#: ../properties/adapter.c:179
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Odebrat „%s“ ze seznamu zařízení?"
-
-#: ../properties/adapter.c:181
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Pokud zařízení odeberete, budete ho muset před příštím použitím znovu "
-"nastavit."
-
 #. The discoverable checkbox
-#: ../properties/adapter.c:352
-msgid "Make computer _discoverable"
-msgstr "Umožnit vyhle_dání tohoto počítače"
+#: ../properties/adapter.c:277
+msgid "Make computer _visible"
+msgstr "Udělat počítač _viditelným"
 
-#: ../properties/adapter.c:375
+#: ../properties/adapter.c:300
 msgid "Friendly name"
 msgstr "Přívětivý název"
 
-#: ../properties/adapter.c:437
+#: ../properties/adapter.c:362
 msgid "Set up _new device..."
-msgstr "Nastavit _nové zařízení..."
+msgstr "Nastavit _nové zařízení…"
 
-#: ../properties/adapter.c:460
+#: ../properties/adapter.c:385
 msgid "_Remove"
 msgstr "Odeb_rat"
 
-#: ../properties/adapter.c:735
+#: ../properties/adapter.c:661
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth je zakázáno"
 
-#: ../properties/adapter.c:771
+#: ../properties/adapter.c:697
 msgid "No Bluetooth adapters present"
 msgstr "Není k dispozici žádný adaptér Bluetooth"
 
@@ -467,7 +481,12 @@ msgstr "Není k dispozici žádný adaptér Bluetooth"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Váš počítač nemá zapojený žádný adaptér Bluetooth."
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:1455
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -496,17 +515,17 @@ msgstr "Všechny další chyby se zobrazí pouze na terminálu."
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:206 ../wizard/main.c:327
+#: ../wizard/main.c:205 ../wizard/main.c:326
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Párování se zařízením „%s“ zrušeno"
 
-#: ../wizard/main.c:246
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Potvrďte prosím, zda PIN zobrazený na „%s“ souhlasí s tímto."
 
-#: ../wizard/main.c:300
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
 msgid "Please enter the following PIN:"
 msgstr "Zadejte prosím následující PIN:"
 
@@ -514,7 +533,7 @@ msgstr "Zadejte prosím následující PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:383
+#: ../wizard/main.c:382
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Nastavení zařízení „%s“ se nezdařilo"
@@ -523,19 +542,19 @@ msgstr "Nastavení zařízení „%s“ se nezdařilo"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:514
+#: ../wizard/main.c:513
 #, c-format
 msgid "Connecting to '%s'..."
-msgstr "Připojování k zařízení „%s“..."
+msgstr "Připojování k zařízení „%s“…"
 
-#: ../wizard/main.c:550
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Vložte prosím na zařízení „%s“ následující PIN a stiskněte klávesu „Enter“:"
 
-#: ../wizard/main.c:552
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Vložte prosím na zařízení „%s“ následující PIN:"
@@ -544,12 +563,12 @@ msgstr "Vložte prosím na zařízení „%s“ následující PIN:"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:573
+#: ../wizard/main.c:572
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Čekejte prosím, než se dokončí nastavení zařízení „%s“..."
+msgstr "Čekejte prosím, než se dokončí nastavení zařízení „%s“…"
 
-#: ../wizard/main.c:586
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Úspěšně nastaveno nové zařízení „%s“"
@@ -571,8 +590,8 @@ msgid "Bluetooth New Device Setup"
 msgstr "Nastavení nového zařízení Bluetooth"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Custom PIN code:"
-msgstr "Vlastní kód PIN:"
+msgid "Custom PIN:"
+msgstr "Vlastní PIN:"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Device Setup"
@@ -586,48 +605,50 @@ msgstr "Nastavení zařízení se nezdařilo"
 msgid "Device search"
 msgstr "Vyhledání zařízení"
 
-#: ../wizard/wizard.ui.h:9
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
 msgid "Does not match"
 msgstr "Nesouhlasí"
 
-#: ../wizard/wizard.ui.h:10
+#: ../wizard/wizard.ui.h:11
 msgid "Finishing New Device Setup"
 msgstr "Dokončování nastavení nového zařízení"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:12
+#: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
 msgstr "Pevný PIN"
 
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:14
 msgid "Introduction"
 msgstr "Úvod"
 
-#: ../wizard/wizard.ui.h:14
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
 msgid "Matches"
 msgstr "Souhlasí"
 
-#: ../wizard/wizard.ui.h:15
+#: ../wizard/wizard.ui.h:17
 msgid "PIN Options"
 msgstr "Volby kódu PIN"
 
-#: ../wizard/wizard.ui.h:16
+#: ../wizard/wizard.ui.h:18
 msgid "PIN _options..."
-msgstr "V_olby kódu PIN..."
+msgstr "V_olby kódu PIN…"
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vyberte další služby, které chcete se svým zařízením využívat:"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:20
 msgid "Select the device you want to setup"
 msgstr "Vyberte zařízení, které chcete nastavit"
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:21
 msgid "Setup Completed"
 msgstr "Nastavení dokončeno"
 
-#: ../wizard/wizard.ui.h:20
+#: ../wizard/wizard.ui.h:22
 msgid ""
 "The Bluetooth new device setup will walk you through the process of "
 "configuring Bluetooth enabled devices for use with this computer."
@@ -635,29 +656,29 @@ msgstr ""
 "Průvodce novým zařízením Bluetooth vás provede postupem nastavení Bluetooth, "
 "který zprovozní zařízení pro použití s tímto počítačem."
 
-#: ../wizard/wizard.ui.h:21
+#: ../wizard/wizard.ui.h:23
 msgid ""
 "The device will need to be within 10 meters of your computer, and be &#8220;"
-"discoverable&#8221; (sometimes called &#8220;visible&#8221;). Check the "
+"visible&#8221; (sometimes called &#8220;discoverable&#8221;). Check the "
 "device's manual if in doubt."
 msgstr ""
 "Zařízení musí být do vzdálenosti 10 metrů od počítače a nastavené jako "
-"„vyhledatelné“ (někdy označováno jak „viditelné“). Pokud si nejste jistí, "
+"„viditelné“ (někdy označováno jak „vyhledatelné“). Pokud si nejste jistí, "
 "nahlédněte do příručky daného zařízení."
 
-#: ../wizard/wizard.ui.h:22
+#: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "Vítáme vás v průvodci nastavením zařízení Bluetooth"
 
-#: ../wizard/wizard.ui.h:23
+#: ../wizard/wizard.ui.h:25
 msgid "_Automatic PIN selection"
 msgstr "_Automatický výběr PIN"
 
-#: ../wizard/wizard.ui.h:24
+#: ../wizard/wizard.ui.h:26
 msgid "_Restart Setup"
 msgstr "_Nastavit znovu"
 
-#: ../sendto/main.c:98
+#: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -665,7 +686,7 @@ msgstr[0] "%'d sekunda"
 msgstr[1] "%'d sekundy"
 msgstr[2] "%'d sekund"
 
-#: ../sendto/main.c:103 ../sendto/main.c:116
+#: ../sendto/main.c:167 ../sendto/main.c:180
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -673,7 +694,7 @@ msgstr[0] "%'d minuta"
 msgstr[1] "%'d minuty"
 msgstr[2] "%'d minut"
 
-#: ../sendto/main.c:114
+#: ../sendto/main.c:178
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -681,7 +702,7 @@ msgstr[0] "%'d hodina"
 msgstr[1] "%'d hodiny"
 msgstr[2] "%'d hodin"
 
-#: ../sendto/main.c:124
+#: ../sendto/main.c:188
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -689,72 +710,183 @@ msgstr[0] "přibližně %'d hodina"
 msgstr[1] "přibližně %'d hodiny"
 msgstr[2] "přibližně %'d hodin"
 
-#: ../sendto/main.c:150
+#: ../sendto/main.c:249
 msgid "File Transfer"
 msgstr "Přenos souborů"
 
-#: ../sendto/main.c:170
+#: ../sendto/main.c:253
+#, fuzzy
+#| msgid "_Reject"
+msgid "_Retry"
+msgstr "_Zamítnout"
+
+#. translators: This is the heading for the progress dialogue
+#: ../sendto/main.c:272
 msgid "Sending files via Bluetooth"
 msgstr "Posílání souborů přes Bluetooth"
 
-#: ../sendto/main.c:182
+#: ../sendto/main.c:284
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:198
+#: ../sendto/main.c:297
 msgid "To:"
 msgstr "Pro:"
 
-#: ../sendto/main.c:244
+#: ../sendto/main.c:342 ../sendto/main.c:358
 msgid "An unknown error occurred"
 msgstr "Došlo k neznámé chybě"
 
-#: ../sendto/main.c:254
+#: ../sendto/main.c:351
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
 msgstr ""
 "Ujistěte se, že vzdálené zařízení je zapnuté a přijímá spojení přes Bluetooth"
 
-#: ../sendto/main.c:338
+#: ../sendto/main.c:449
 #, c-format
 msgid "Sending %s"
 msgstr "Odesílání %s"
 
-#: ../sendto/main.c:345 ../sendto/main.c:407
+#: ../sendto/main.c:456 ../sendto/main.c:522
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Odesílání souboru %d z %d"
 
-#: ../sendto/main.c:403
+#: ../sendto/main.c:518
 #, c-format
 msgid "%d KB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:405
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:499
+#: ../sendto/main.c:640
 msgid "Select Device to Send To"
 msgstr "Vyberte zařízení, do kterého chcete soubory odeslat"
 
-#: ../sendto/main.c:503
+#: ../sendto/main.c:644
 msgid "Send _To"
 msgstr "Odesla_t do"
 
-#: ../sendto/main.c:544
+#: ../sendto/main.c:685
 msgid "Choose files to send"
 msgstr "Výběr souborů k odeslání"
 
-#: ../sendto/main.c:573
+#: ../sendto/main.c:714
 msgid "Remote device to use"
 msgstr "Použít zadané vzdálené zařízení"
 
-#: ../sendto/main.c:575
+#: ../sendto/main.c:716
 msgid "Remote device's name"
 msgstr "Název vzdáleného zařízení"
 
-#~ msgid "Bluetooth: Unknown"
-#~ msgstr "Bluetooth: Neznámo"
+#: ../sendto/nautilus-sendto-plugin.c:172
+msgid "Programming error, could not find the device in the list"
+msgstr ""
+
+#: ../sendto/nautilus-sendto-plugin.c:247
+#, c-format
+msgid "Obex Push file transfer unsupported"
+msgstr ""
+
+#: ../sendto/nautilus-sendto-plugin.c:266
+#, fuzzy
+#| msgid "Bluetooth: On"
+msgid "Bluetooth (OBEX Push)"
+msgstr "Bluetooth: Zapnuto"
+
+#: ../moblin/main.c:88
+msgid "Run in standalone mode"
+msgstr "Spustit jako samostatnou aplikaci"
+
+#: ../moblin/main.c:96 ../moblin/bluetooth-panel.desktop.in.in.h:2
+msgid "Moblin Bluetooth Panel"
+msgstr "Panel Moblin Bluetooth"
+
+#: ../moblin/main.c:97
+msgid "- Moblin Bluetooth Panel"
+msgstr "- Panel Moblin Bluetooth"
+
+#: ../moblin/main.c:124
+msgid "bluetooth"
+msgstr "Bluetooth"
+
+#: ../moblin/moblin-panel.c:533
+#, c-format
+msgid "Pairing with %s failed."
+msgstr "Párování se zařízením „%s“ selhalo."
+
+#: ../moblin/moblin-panel.c:895
+msgid "<u>Pair</u>"
+msgstr "<u>Spárovat</u>"
+
+#: ../moblin/moblin-panel.c:909
+msgid "<u>Connect</u>"
+msgstr "<u>Připojit</u>"
+
+#: ../moblin/moblin-panel.c:928
+msgid "<u>Browse</u>"
+msgstr "<u>Procházet</u>"
+
+#: ../moblin/moblin-panel.c:1122
+msgid "Device setup failed"
+msgstr "Nastavení zařízení selhalo"
+
+#. Back button
+#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
+#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
+#: ../moblin/moblin-panel.c:1540
+msgid "Back to devices"
+msgstr "Zpět na zařízení"
+
+#: ../moblin/moblin-panel.c:1175
+#, fuzzy
+#| msgid "Phone"
+msgid "Done"
+msgstr "Telefon"
+
+#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
+msgid "Device setup"
+msgstr "Nastavení zařízení"
+
+#: ../moblin/moblin-panel.c:1344
+msgid "Only show:"
+msgstr "Zobrazit pouze:"
+
+#. Button for PIN options file
+#: ../moblin/moblin-panel.c:1350
+msgid "PIN options"
+msgstr "Volby kódu PIN"
+
+#. Add new button
+#: ../moblin/moblin-panel.c:1433
+msgid "Add a new device"
+msgstr "Přidat nové zařízení"
+
+#. Button for Send file
+#: ../moblin/moblin-panel.c:1500
+msgid "Send file from your computer"
+msgstr "Odeslat soubor z vašeho počítače"
+
+#: ../moblin/bluetooth-panel.desktop.in.in.h:1
+msgid "Bluetooth Manager Panel"
+msgstr "Panel Správce Bluetooth"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Marek Černocký <marek@manet.cz>\n"
+#~ "\n"
+#~ "Launchpad Contributions:\n"
+#~ "  Kamil Páral https://launchpad.net/~kamil.paral\n"
+#~ "  clever_fox https://launchpad.net/~clever-fox\n"
+#~ "  Jiziii https://launchpad.net/~zeero\n"
+#~ "  Konki https://launchpad.net/~pavel-konkol\n"
+#~ "  Petr Zemek https://launchpad.net/~jashin91\n"
+#~ "  Vladimír Burian https://launchpad.net/~vburian\n"
+#~ "  Zdeněk Dlauhý https://launchpad.net/~zdlauhy\n"
+#~ "  jan.benedek https://launchpad.net/~jan-benedek"
+
