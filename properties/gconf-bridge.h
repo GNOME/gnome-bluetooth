@@ -1,4 +1,4 @@
-/* 
+/*
  * (C) 2005 OpenedHand Ltd.
  *
  * Author: Jorn Baayen <jorn@openedhand.com>
@@ -15,8 +15,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
  */
 
 #ifndef __GCONF_BRIDGE_H__
@@ -81,7 +81,7 @@ guint        gconf_bridge_bind_window            (GConfBridge  *bridge,
  * @bridge: A #GConfBridge
  * @key_prefix: The prefix of the GConf keys
  * @window: A #GtkWindow
- * 
+ *
  * On calling this function @window will be resized to the values specified by
  * "@key_prefix<!-- -->_width" and "@key_prefix<!-- -->_height".  The respective
  * GConf values will be updated when the window is resized. See
@@ -95,7 +95,7 @@ guint        gconf_bridge_bind_window            (GConfBridge  *bridge,
  * @bridge: A #GConfBridge
  * @key_prefix: The prefix of the GConf keys
  * @window: A #GtkWindow
- * 
+ *
  * On calling this function @window will be moved to the values specified by
  * "@key_prefix<!-- -->_x" and "@key_prefix<!-- -->_y". The respective GConf
  * values will be updated when the window is moved. See

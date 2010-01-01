@@ -1,4 +1,4 @@
-/* 
+/*
  * (C) 2005 OpenedHand Ltd.
  *
  * Author: Jorn Baayen <jorn@openedhand.com>
@@ -15,8 +15,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
  */
 
 #include <config.h>
@@ -29,7 +29,7 @@
 
 struct _GConfBridge {
         GConfClient *client;
-        
+
         GHashTable *bindings;
 };
 
@@ -43,7 +43,7 @@ typedef enum {
 typedef struct {
         BindingType type;
         guint id;
-        
+
         gboolean delayed_mode;
 
         char *key;
@@ -154,7 +154,7 @@ gconf_bridge_get (void)
  * gconf_bridge_get_client
  * @bridge: A #GConfBridge
  *
- * Returns the #GConfClient used by @bridge. This is the same #GConfClient 
+ * Returns the #GConfClient used by @bridge. This is the same #GConfClient
  * as returned by gconf_client_get_default().
  *
  * Return value: A #GConfClient.
@@ -188,7 +188,7 @@ prop_binding_sync_pref_to_prop (PropBinding *binding,
                                 GConfValue  *pref_value)
 {
         GValue src_value, value;
-        
+
         /* Make sure we don't enter an infinite synchronizing loop */
         g_signal_handler_block (binding->object, binding->prop_notify_id);
 
@@ -234,7 +234,7 @@ prop_binding_sync_pref_to_prop (PropBinding *binding,
                                    "transform a \"%s\" to a \"%s\".",
                                    g_type_name (src_value.g_type),
                                    g_type_name (value.g_type));
-                        
+
                         goto done;
                 }
 
@@ -244,7 +244,7 @@ prop_binding_sync_pref_to_prop (PropBinding *binding,
                 g_object_set_property (binding->object,
                                        binding->prop->name, &src_value);
         }
-        
+
 done:
         g_value_unset (&src_value);
         g_value_unset (&value);
@@ -402,7 +402,7 @@ prop_binding_pref_changed (GConfClient *client,
         prop_binding_sync_pref_to_prop (binding, gconf_value);
 }
 
-/* Performs a scheduled prop-to-pref sync for a prop binding in 
+/* Performs a scheduled prop-to-pref sync for a prop binding in
  * delay mode */
 static gboolean
 prop_binding_perform_scheduled_sync (PropBinding *binding)
@@ -412,7 +412,7 @@ prop_binding_perform_scheduled_sync (PropBinding *binding)
         binding->sync_timeout_id = 0;
 
         g_object_unref (binding->object);
-        
+
         return FALSE;
 }
 
@@ -456,7 +456,7 @@ prop_binding_object_destroyed (gpointer user_data,
         binding = (PropBinding *) user_data;
         binding->object = NULL; /* Don't do anything with the object
                                    at unbind() */
-        
+
         g_hash_table_remove (bridge->bindings,
                              GUINT_TO_POINTER (binding->id));
 }
@@ -521,7 +521,7 @@ gconf_bridge_bind_property_full (GConfBridge *bridge,
         binding->object = object;
         binding->prop = pspec;
         binding->sync_timeout_id = 0;
-        
+
         /* Watch GConf key */
         binding->val_notify_id =
                 gconf_client_notify_add (bridge->client, key,
@@ -562,7 +562,7 @@ prop_binding_unbind (PropBinding *binding)
         if (binding->delayed_mode && binding->sync_timeout_id > 0) {
                 /* Perform any scheduled syncs */
                 g_source_remove (binding->sync_timeout_id);
-                        
+
                 /* The object will still be around as we have
                  * a reference */
                 prop_binding_perform_scheduled_sync (binding);
@@ -602,7 +602,11 @@ window_binding_perform_scheduled_sync (WindowBinding *binding)
                 char *key;
                 GdkWindowState state;
 
+#if GTK_CHECK_VERSION (2,14,0)
+                state = gdk_window_get_state (gtk_widget_get_window (GTK_WIDGET (binding->window)));
+#else
                 state = gdk_window_get_state (GTK_WIDGET (binding->window)->window);
+#endif
 
                 if (state & GDK_WINDOW_STATE_MAXIMIZED) {
                         key = g_strconcat (binding->key_prefix, "_maximized", NULL);
@@ -654,14 +658,14 @@ window_binding_configure_event_cb (GtkWindow         *window,
                                    GdkEventConfigure *event,
                                    WindowBinding     *binding)
 {
+	/* Re-postpone by cancel of the previous request */
+	if (binding->sync_timeout_id > 0)
+		g_source_remove (binding->sync_timeout_id);
+
         /* Schedule a sync */
-        if (binding->sync_timeout_id == 0) {
-                binding->sync_timeout_id =
-                        g_timeout_add (WINDOW_BINDING_SYNC_DELAY,
-                                       (GSourceFunc)
-                                          window_binding_perform_scheduled_sync,
-                                       binding);
-        }
+        binding->sync_timeout_id = g_timeout_add (WINDOW_BINDING_SYNC_DELAY,
+						  (GSourceFunc)window_binding_perform_scheduled_sync,
+						  binding);
 
         return FALSE;
 }
@@ -672,6 +676,9 @@ window_binding_state_event_cb (GtkWindow           *window,
                                GdkEventWindowState *event,
                                WindowBinding       *binding)
 {
+        if (binding->sync_timeout_id > 0)
+                g_source_remove (binding->sync_timeout_id);
+
         window_binding_perform_scheduled_sync (binding);
 
         return FALSE;
@@ -701,7 +708,10 @@ window_binding_window_destroyed (gpointer user_data,
         binding = (WindowBinding *) user_data;
         binding->window = NULL; /* Don't do anything with the window
                                    at unbind() */
-        
+
+        if (binding->sync_timeout_id > 0)
+                g_source_remove (binding->sync_timeout_id);
+
         g_hash_table_remove (bridge->bindings,
                              GUINT_TO_POINTER (binding->id));
 }
@@ -713,7 +723,7 @@ window_binding_window_destroyed (gpointer user_data,
  * @window: A #GtkWindow
  * @bind_size: TRUE to bind the size of @window
  * @bind_pos: TRUE to bind the position of @window
- * 
+ *
  * On calling this function @window will be resized to the values
  * specified by "@key_prefix<!-- -->_width" and "@key_prefix<!-- -->_height"
  * and maximixed if "@key_prefix<!-- -->_maximized is TRUE if
@@ -789,7 +799,7 @@ gconf_bridge_bind_window (GConfBridge *bridge,
         if (bind_pos) {
                 char *key;
                 GConfValue *x_val, *y_val;
-                
+
                 key = g_strconcat (key_prefix, "_x", NULL);
                 x_val = gconf_client_get (bridge->client, key, NULL);
                 g_free (key);
@@ -884,7 +894,7 @@ list_store_binding_sync_pref_to_store (ListStoreBinding *binding,
                                 binding->row_inserted_id);
         g_signal_handler_block (binding->list_store,
                                 binding->row_deleted_id);
-        
+
         gtk_list_store_clear (binding->list_store);
 
         list = gconf_value_get_list (value);
@@ -1001,7 +1011,7 @@ list_store_binding_store_destroyed (gpointer user_data,
         binding = (ListStoreBinding *) user_data;
         binding->list_store = NULL; /* Don't do anything with the store
                                        at unbind() */
-        
+
         g_hash_table_remove (bridge->bindings,
                              GUINT_TO_POINTER (binding->id));
 }
@@ -1024,7 +1034,7 @@ list_store_binding_store_changed_cb (ListStoreBinding *binding)
  * @bridge: A #GConfBridge
  * @key: A GConf key to be bound
  * @list_store: A #GtkListStore
- * 
+ *
  * On calling this function single string column #GtkListStore @list_store
  * will be kept synchronized with the GConf string list value pointed to by
  * @key. On calling this function @list_store will be populated with the
@@ -1197,7 +1207,7 @@ gconf_bridge_unbind (GConfBridge *bridge,
 
         /* This will trigger the hash tables value destruction
          * function, which will take care of further cleanup */
-        g_hash_table_remove (bridge->bindings, 
+        g_hash_table_remove (bridge->bindings,
                              GUINT_TO_POINTER (binding_id));
 }
 
