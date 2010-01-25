@@ -38,7 +38,7 @@
 #include "bluetooth-client-private.h"
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-private.h"
-#include "bluetooth-killswitch.h"
+#include "bluetooth-powerswitch.h"
 #include "bluetooth-plugin-manager.h"
 #include "bluetooth-filter-widget.h"
 #include "bluetooth-agent.h"
@@ -59,7 +59,7 @@ G_DEFINE_TYPE (MoblinPanel, moblin_panel, GTK_TYPE_HBOX)
 struct _MoblinPanelPrivate
 {
 	/* Bluetooth objects for interacting with BlueZ */
-	BluetoothKillswitch *killswitch;
+	BluetoothPowerswitch *powerswitch;
 	BluetoothClient *client;
 	BluetoothAgent *agent;
 	GtkTreeModel *chooser_model;
@@ -148,9 +148,9 @@ power_switch_toggled_cb (MxGtkLightSwitch *light_switch,
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE(user_data);
 
 	if (state == TRUE) {
-		bluetooth_killswitch_set_state (priv->killswitch, KILLSWITCH_STATE_UNBLOCKED);
+		bluetooth_powerswitch_set_state (priv->powerswitch, POWERSWITCH_STATE_ON);
 	} else {
-		bluetooth_killswitch_set_state (priv->killswitch, KILLSWITCH_STATE_SOFT_BLOCKED);
+		bluetooth_powerswitch_set_state (priv->powerswitch, POWERSWITCH_STATE_OFF);
 	}
 }
 
@@ -185,8 +185,8 @@ enable_send_file (MoblinPanel *self)
 }
 
 static void
-killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
-                             KillswitchState      state,
+powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
+                             PowerswitchState      state,
                              gpointer             user_data)
 {
 	MoblinPanel *self = MOBLIN_PANEL (user_data);
@@ -194,18 +194,18 @@ killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
 
 	g_signal_handlers_block_by_func (priv->power_switch, power_switch_toggled_cb, user_data);
 
-	if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
+	if (state == POWERSWITCH_STATE_OFF) {
 		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch),
 	                                      FALSE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		gtk_widget_set_sensitive (priv->send_button, FALSE);
-	} else if (state == KILLSWITCH_STATE_UNBLOCKED) {
+	} else if (state == POWERSWITCH_STATE_ON) {
 		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 		enable_send_file (self);
-	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED || state == KILLSWITCH_STATE_NO_ADAPTER) {
+	} else if (state == POWERSWITCH_STATE_NO_ADAPTER) {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		gtk_widget_set_sensitive (priv->send_button, FALSE);
@@ -1367,7 +1367,6 @@ create_devices_page (MoblinPanel *self)
 	GtkWidget *power_label;
 	GtkTreeViewColumn *type_column;
 	GtkCellRenderer *cell;
-	KillswitchState switch_state;
 	GtkWidget *tree_view;
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
@@ -1457,40 +1456,8 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (hbox), power_label, FALSE, FALSE, 4);
 
 	priv->power_switch = mx_gtk_light_switch_new ();
-	if (priv->killswitch != NULL) {
-		if (bluetooth_killswitch_has_killswitches (priv->killswitch) == FALSE) {
-			gtk_widget_set_sensitive (priv->power_switch, FALSE);
-			gtk_widget_set_sensitive (priv->add_new_button, FALSE);
-		} else {
-			switch_state = bluetooth_killswitch_get_state (priv->killswitch);
-
-			switch (switch_state) {
-				case KILLSWITCH_STATE_UNBLOCKED:
-					mx_gtk_light_switch_set_active
-						(MX_GTK_LIGHT_SWITCH (priv->power_switch),
-						 TRUE);
-					gtk_widget_set_sensitive (priv->add_new_button, TRUE);
-					gtk_widget_set_sensitive (priv->power_switch, TRUE);
-				break;
-				case KILLSWITCH_STATE_SOFT_BLOCKED:
-					mx_gtk_light_switch_set_active
-						(MX_GTK_LIGHT_SWITCH (priv->power_switch),
-							FALSE);
-				break;
-				case KILLSWITCH_STATE_HARD_BLOCKED:
-				case KILLSWITCH_STATE_NO_ADAPTER:
-				default:
-					gtk_widget_set_sensitive (priv->power_switch, FALSE);
-					gtk_widget_set_sensitive (priv->add_new_button, FALSE);
-				break;
-			}
-		}
-	} else {
-		gtk_widget_set_sensitive (priv->power_switch, FALSE);
-		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
-	}
-	g_signal_connect  (priv->killswitch, "state-changed",
-			G_CALLBACK (killswitch_state_changed_cb), self);
+	g_signal_connect  (priv->powerswitch, "state-changed",
+			G_CALLBACK (powerswitch_state_changed_cb), self);
 	g_signal_connect (priv->power_switch, "switch-flipped",
 			G_CALLBACK (power_switch_toggled_cb), self);
 	gtk_widget_show (priv->power_switch);
@@ -1505,7 +1472,9 @@ create_devices_page (MoblinPanel *self)
 			G_CALLBACK (selected_device_changed_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
 
-	enable_send_file (self);
+        powerswitch_state_changed_cb (priv->powerswitch,
+                                      bluetooth_powerswitch_get_state (priv->powerswitch),
+                                      self);
 
 	return page;
 }
@@ -1607,7 +1576,7 @@ moblin_panel_init (MoblinPanel *self)
 
 	bluetooth_agent_setup (priv->agent, AGENT_PATH);
 
-	priv->killswitch = bluetooth_killswitch_new ();
+	priv->powerswitch = bluetooth_powerswitch_new ();
 	bluetooth_plugin_manager_init ();
 
 	gtk_box_set_homogeneous (GTK_BOX (self), FALSE);
@@ -1657,9 +1626,9 @@ moblin_panel_dispose (GObject *object)
 
 	bluetooth_plugin_manager_cleanup ();
 
-	if (priv->killswitch != NULL) {
-		g_object_unref (priv->killswitch);
-		priv->killswitch = NULL;
+	if (priv->powerswitch != NULL) {
+		g_object_unref (priv->powerswitch);
+		priv->powerswitch = NULL;
 	}
 
 	if (priv->agent != NULL) {
