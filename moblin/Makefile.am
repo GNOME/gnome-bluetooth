@@ -2,7 +2,9 @@ SUBDIRS = moblin-copy-n-paste theme moblin-icons
 
 bin_PROGRAMS = bluetooth-panel
 
-bluetooth_panel_SOURCES = main.c moblin-panel.c moblin-panel.h
+bluetooth_panel_SOURCES = main.c \
+	moblin-panel.c moblin-panel.h \
+	bluetooth-powerswitch.c bluetooth-powerswitch.h
 
 bluetooth_panel_LDADD = $(top_builddir)/lib/libcommon.la $(top_builddir)/lib/libgnome-bluetooth.la \
 			$(top_builddir)/moblin/moblin-copy-n-paste/libmoblin.la \
