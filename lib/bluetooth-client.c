@@ -560,6 +560,8 @@ uuid16_to_string (guint uuid16, const char *uuid)
 		return NULL;
 	case 0x1201:
 		return "GenericNetworking";
+	case 0x1303:
+		return "VideoSource";
 	case 0x8e771303:
 	case 0x8e771301:
 		return "SEMC HLA";
