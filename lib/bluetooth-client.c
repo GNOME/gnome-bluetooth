@@ -152,6 +152,8 @@ const gchar *bluetooth_type_to_string(BluetoothType type)
 		return _("Joypad");
 	case BLUETOOTH_TYPE_TABLET:
 		return _("Tablet");
+	case BLUETOOTH_TYPE_VIDEO:
+		return _("Video device");
 	default:
 		return _("Unknown");
 	}
@@ -223,6 +225,10 @@ bluetooth_class_to_type (guint32 class)
 			return BLUETOOTH_TYPE_HEADSET;
 		case 0x06:
 			return BLUETOOTH_TYPE_HEADPHONES;
+		case 0x0b: /* VCR */
+		case 0x0c: /* Video Camera */
+		case 0x0d: /* Camcorder */
+			return BLUETOOTH_TYPE_VIDEO;
 		default:
 			return BLUETOOTH_TYPE_OTHER_AUDIO;
 		}
