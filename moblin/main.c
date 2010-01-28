@@ -135,7 +135,6 @@ main (int argc, char *argv[])
 		gtk_widget_show (content);
 
 		gtk_container_add (GTK_CONTAINER (window), content);
-		gtk_widget_show (window);
 		gtk_widget_size_request (window, &req);
 		mpl_panel_client_set_height_request (panel, req.height);
 	}
