@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: damned-lies\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2009-12-19 12:43+0000\n"
-"PO-Revision-Date: 2009-12-21 22:40+0100\n"
+"POT-Creation-Date: 2010-01-28 18:02+0000\n"
+"PO-Revision-Date: 2010-01-28 20:43+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -76,6 +76,10 @@ msgid "Tablet"
 msgstr "Tablični računalnik"
 
 #: ../lib/bluetooth-client.c:156
+msgid "Video device"
+msgstr "Video naprava"
+
+#: ../lib/bluetooth-client.c:158
 #: ../lib/bluetooth-chooser.c:129
 #: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
@@ -173,101 +177,101 @@ msgstr "Uporabi napravo GPS za določevanje položaja nahajanja"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Dostop do spleta z uporabo mobilnega telefona (preizkusno)"
 
-#: ../applet/main.c:115
+#: ../applet/main.c:139
 msgid "Select Device to Browse"
 msgstr "Izbor naprave za brskanje"
 
-#: ../applet/main.c:119
+#: ../applet/main.c:143
 msgid "_Browse"
 msgstr "_Prebrskaj"
 
-#: ../applet/main.c:127
+#: ../applet/main.c:152
 msgid "Select device to browse"
 msgstr "Izbor naprave za brskanje"
 
-#: ../applet/main.c:304
+#: ../applet/main.c:329
 #: ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Vklopi Bluetooth"
 
-#: ../applet/main.c:305
+#: ../applet/main.c:330
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: izklopljen"
 
-#: ../applet/main.c:308
+#: ../applet/main.c:333
 msgid "Turn Off Bluetooth"
 msgstr "Izklopi Bluetooth"
 
-#: ../applet/main.c:309
+#: ../applet/main.c:334
 msgid "Bluetooth: On"
-msgstr "Bluetooth: Vklopljen"
+msgstr "Bluetooth: vklopljen"
 
-#: ../applet/main.c:314
+#: ../applet/main.c:339
 #: ../applet/notify.c:148
 msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: onemogočen"
+msgstr "Bluetooth: onemogočeno"
 
-#: ../applet/main.c:460
+#: ../applet/main.c:482
 msgid "Disconnecting..."
 msgstr "Prekinjanje povezave ..."
 
-#: ../applet/main.c:463
+#: ../applet/main.c:485
 #: ../sendto/main.c:217
-#: ../sendto/main.c:313
+#: ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
-#: ../applet/main.c:466
-#: ../applet/main.c:807
+#: ../applet/main.c:488
+#: ../applet/main.c:829
 msgid "Connected"
 msgstr "Povezano"
 
-#: ../applet/main.c:469
-#: ../applet/main.c:807
+#: ../applet/main.c:491
+#: ../applet/main.c:829
 msgid "Disconnected"
 msgstr "Prekinjena povezava"
 
-#: ../applet/main.c:825
-#: ../applet/main.c:889
+#: ../applet/main.c:847
+#: ../applet/main.c:911
 #: ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#: ../applet/main.c:825
-#: ../applet/main.c:889
+#: ../applet/main.c:847
+#: ../applet/main.c:911
 msgid "Connect"
 msgstr "Povezava"
 
-#: ../applet/main.c:838
+#: ../applet/main.c:860
 msgid "Send files..."
 msgstr "Pošlji datoteke ..."
 
-#: ../applet/main.c:848
+#: ../applet/main.c:870
 msgid "Browse files..."
 msgstr "Brskanje datotek ..."
 
-#: ../applet/main.c:859
+#: ../applet/main.c:881
 msgid "Open Keyboard Preferences..."
 msgstr "Odpri možnosti tipkovnice ..."
 
-#: ../applet/main.c:867
+#: ../applet/main.c:889
 msgid "Open Mouse Preferences..."
 msgstr "Odpri možnosti miške ..."
 
-#: ../applet/main.c:877
+#: ../applet/main.c:899
 msgid "Open Sound Preferences..."
 msgstr "Odpri možnosti zvoka ..."
 
-#: ../applet/main.c:1004
+#: ../applet/main.c:1026
 msgid "Debug"
 msgstr "Razhroščevanje"
 
 #. Parse command-line options
-#: ../applet/main.c:1024
+#: ../applet/main.c:1046
 msgid "- Bluetooth applet"
 msgstr "- Bluetooth aplet"
 
-#: ../applet/main.c:1029
+#: ../applet/main.c:1051
 #, c-format
 msgid ""
 "%s\n"
@@ -276,7 +280,7 @@ msgstr ""
 "%s\n"
 "Zaženite '%s --help' za podroben pregled celotnega seznama možnosti ukazne vrstice.\n"
 
-#: ../applet/main.c:1046
+#: ../applet/main.c:1068
 msgid "Bluetooth Applet"
 msgstr "Bluetooth aplet"
 
@@ -421,35 +425,31 @@ msgstr "_Zadetki"
 msgid "_Show input"
 msgstr "_Pokaži vnos"
 
-#. translators:
-#. * This is the name of the preferences dialogue for gnome-user-share
-#: ../properties/main.c:87
+#: ../properties/main.c:91
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr "Ni mogoče zagnati možnosti \"osebne souporabe datotek\"."
 
-#. translators:
-#. * This is the name of the preferences dialogue for gnome-user-share
-#: ../properties/main.c:98
+#: ../properties/main.c:96
 msgid "Please verify that the \"Personal File Sharing\" program is correctly installed."
 msgstr "Potrdite, da je program \"Osebna souporaba datotek\" pravilno nameščen."
 
-#: ../properties/main.c:135
+#: ../properties/main.c:125
 msgid "Bluetooth Preferences"
 msgstr "Možnosti Bluetooth"
 
-#: ../properties/main.c:150
+#: ../properties/main.c:140
 msgid "_Show Bluetooth icon"
 msgstr "_Pokaži Bluetooth ikono"
 
-#: ../properties/main.c:174
+#: ../properties/main.c:164
 msgid "Receive Files"
 msgstr "Sprejmi datoteke"
 
-#: ../properties/main.c:222
+#: ../properties/main.c:212
 msgid "Output a list of currently known devices"
 msgstr "Izpis seznama trenutno nastavljenih naprav"
 
-#: ../properties/main.c:260
+#: ../properties/main.c:250
 msgid "Bluetooth Properties"
 msgstr "Lastnosti Bluetooth"
 
@@ -503,12 +503,12 @@ msgstr "Ali naj bo prikazana ikona obveščanja"
 msgid "Whether to show the notification icon."
 msgstr "Ali naj bo prikazana ikona obveščanja."
 
-#: ../properties/gconf-bridge.c:1223
+#: ../properties/gconf-bridge.c:1233
 #, c-format
 msgid "GConf error: %s"
 msgstr "Napaka gconf: %s"
 
-#: ../properties/gconf-bridge.c:1228
+#: ../properties/gconf-bridge.c:1238
 msgid "All further errors shown only on terminal."
 msgstr "Vse nadaljnje napake so izpisane le v terminalu."
 
@@ -722,65 +722,65 @@ msgid "_Retry"
 msgstr "_Poskusi znova"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:272
+#: ../sendto/main.c:273
 msgid "Sending files via Bluetooth"
 msgstr "Pošiljanje datotek prek Bluetooth"
 
-#: ../sendto/main.c:284
+#: ../sendto/main.c:285
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:297
+#: ../sendto/main.c:298
 msgid "To:"
 msgstr "Za:"
 
-#: ../sendto/main.c:342
-#: ../sendto/main.c:358
+#: ../sendto/main.c:343
+#: ../sendto/main.c:359
 msgid "An unknown error occurred"
 msgstr "Prišlo je do neznane napake."
 
-#: ../sendto/main.c:351
+#: ../sendto/main.c:352
 msgid "Make sure that remote device is switched on and that it accepts Bluetooth connections"
 msgstr "Prepričajte se, da je oddaljena naprava priključena in da omogoča sprejemanje Bluetooth povezav"
 
-#: ../sendto/main.c:449
+#: ../sendto/main.c:450
 #, c-format
 msgid "Sending %s"
 msgstr "Pošiljanje %s"
 
-#: ../sendto/main.c:456
-#: ../sendto/main.c:522
+#: ../sendto/main.c:457
+#: ../sendto/main.c:523
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Pošiljanje %d od %d datotek"
 
-#: ../sendto/main.c:518
+#: ../sendto/main.c:519
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:521
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:640
+#: ../sendto/main.c:641
 msgid "Select Device to Send To"
 msgstr "Izbor naprave za prejemanje"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:645
 msgid "Send _To"
 msgstr "Pošlji _na"
 
-#: ../sendto/main.c:685
+#: ../sendto/main.c:687
 msgid "Choose files to send"
 msgstr "Izbor datotek za pošiljanje"
 
-#: ../sendto/main.c:714
+#: ../sendto/main.c:716
 msgid "Remote device to use"
 msgstr "Uporabi oddaljeno napravo"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:718
 msgid "Remote device's name"
 msgstr "Ime oddaljene naprave"
 
