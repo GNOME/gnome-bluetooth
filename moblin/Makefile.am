@@ -12,15 +12,19 @@ AM_CFLAGS = $(MOBLIN_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="
 
 INCLUDES = -I$(top_srcdir)/lib -I$(top_srcdir)/wizard -I$(top_srcdir)/moblin/moblin-copy-n-paste
 
-autostartdir = $(sysconfdir)/xdg/autostart
-
-autostart_in_in_files = bluetooth-panel.desktop.in.in
-autostart_in_files = bluetooth-panel.desktop.in
-
-autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
-
 ui_DATA = pin.ui
 uidir = $(pkgdatadir)
+
+
+desktop_in_files = bluetooth-panel.desktop.in.in
+desktop_data = $(desktop_in_files:.desktop.in.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
+autostartdir = $(sysconfdir)/xdg/autostart
+autostart_DATA = $(desktop_data)
+
+paneldir = @PANEL_DIR@
+panel_DATA = $(desktop_data)
 
 servicedir = $(datadir)/dbus-1/services
 service_in_files = org.moblin.UX.Shell.Panels.bluetooth.service.in
