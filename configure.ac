@@ -164,9 +164,13 @@ if test "x$enable_moblin" != "xno"; then
       nbtk-gtk-1.2
       moblin-panel
    ], have_moblin="yes", have_moblin="no")
+
    THEME_DIR="${datadir}/${PACKAGE}/theme"
    AS_AC_EXPAND(THEME_DIR, $THEME_DIR)
    AC_DEFINE_UNQUOTED([THEME_DIR], "$THEME_DIR", [Carrick theme directory])
+
+   PANEL_DIR=$($PKG_CONFIG moblin-panel --variable=moblin_panel_panels_dir)
+   AC_SUBST(PANEL_DIR)
 else
    have_moblin=no
 fi
