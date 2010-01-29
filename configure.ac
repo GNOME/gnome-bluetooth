@@ -161,7 +161,7 @@ if test "x$enable_moblin" != "xno"; then
    [
       dbus-glib-1,
       gtk+-2.0,
-      nbtk-gtk-1.2
+      mx-gtk-1.0
       moblin-panel
    ], have_moblin="yes", have_moblin="no")
 

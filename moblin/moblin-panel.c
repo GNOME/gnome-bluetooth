@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 #include <math.h>
 #include <gdk/gdkkeysyms.h>
-#include <nbtk/nbtk-gtk.h>
+#include <mx/mx-gtk.h>
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
@@ -141,7 +141,7 @@ static void update_random_pincode (MoblinPanel *self);
 static void create_selected_device (MoblinPanel *self);
 
 static void
-power_switch_toggled_cb (NbtkGtkLightSwitch *light_switch,
+power_switch_toggled_cb (MxGtkLightSwitch *light_switch,
 			 gboolean 	     state,
                          gpointer            user_data)
 {
@@ -195,13 +195,13 @@ killswitch_state_changed_cb (BluetoothKillswitch *killswitch,
 	g_signal_handlers_block_by_func (priv->power_switch, power_switch_toggled_cb, user_data);
 
 	if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
-		nbtk_gtk_light_switch_set_active (NBTK_GTK_LIGHT_SWITCH (priv->power_switch),
+		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch),
 	                                      FALSE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		gtk_widget_set_sensitive (priv->send_button, FALSE);
 	} else if (state == KILLSWITCH_STATE_UNBLOCKED) {
-		nbtk_gtk_light_switch_set_active (NBTK_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
+		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 		enable_send_file (self);
@@ -1116,7 +1116,7 @@ create_failure_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = nbtk_gtk_frame_new ();
+	page = mx_gtk_frame_new ();
 	page_title = gtk_label_new ("");
 	gtk_frame_set_label_widget (GTK_FRAME (page), page_title);
 	set_frame_title (GTK_FRAME (page), _("Device setup failed"));
@@ -1151,7 +1151,7 @@ create_summary_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = nbtk_gtk_frame_new ();
+	page = mx_gtk_frame_new ();
 	w = gtk_label_new (NULL);
 	gtk_frame_set_label_widget (GTK_FRAME (page), w);
 	gtk_widget_show (page);
@@ -1190,7 +1190,7 @@ create_setup_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = nbtk_gtk_frame_new ();
+	page = mx_gtk_frame_new ();
 	page_title = gtk_label_new ("");
 	gtk_frame_set_label_widget (GTK_FRAME (page), page_title);
 	set_frame_title (GTK_FRAME (page), _("Device setup"));
@@ -1227,7 +1227,7 @@ create_ssp_setup_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = nbtk_gtk_frame_new ();
+	page = mx_gtk_frame_new ();
 	page_title = gtk_label_new ("");
 	gtk_frame_set_label_widget (GTK_FRAME (page), page_title);
 	set_frame_title (GTK_FRAME (page), _("Device setup"));
@@ -1291,7 +1291,7 @@ create_add_page (MoblinPanel *self)
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 4);
 
-	frame = nbtk_gtk_frame_new ();
+	frame = mx_gtk_frame_new ();
 	frame_title = gtk_label_new ("");
 	gtk_frame_set_label_widget (GTK_FRAME (frame), frame_title);
 	set_frame_title (GTK_FRAME (frame), _("Devices"));
@@ -1327,7 +1327,7 @@ create_add_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (vbox), back_button, FALSE, FALSE, 4);
 
 	/* Right column */
-	frame = nbtk_gtk_frame_new ();
+	frame = mx_gtk_frame_new ();
 	gtk_widget_show (frame);
 	vbox = gtk_vbox_new (FALSE, 4);
 	gtk_widget_show (vbox);
@@ -1379,7 +1379,7 @@ create_devices_page (MoblinPanel *self)
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 4);
 
-	frame = nbtk_gtk_frame_new ();
+	frame = mx_gtk_frame_new ();
 	frame_title = gtk_label_new ("");
 	gtk_frame_set_label_widget (GTK_FRAME (frame), frame_title);
 	set_frame_title (GTK_FRAME (frame), _("Devices"));
@@ -1437,7 +1437,7 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (vbox), priv->add_new_button, FALSE, FALSE, 4);
 
 	/* Right column */
-	frame = nbtk_gtk_frame_new ();
+	frame = mx_gtk_frame_new ();
 	gtk_widget_show (frame);
 	vbox = gtk_vbox_new (FALSE, 4);
 	gtk_widget_show (vbox);
@@ -1456,7 +1456,7 @@ create_devices_page (MoblinPanel *self)
 	gtk_widget_show (power_label);
 	gtk_box_pack_start (GTK_BOX (hbox), power_label, FALSE, FALSE, 4);
 
-	priv->power_switch = nbtk_gtk_light_switch_new ();
+	priv->power_switch = mx_gtk_light_switch_new ();
 	if (priv->killswitch != NULL) {
 		if (bluetooth_killswitch_has_killswitches (priv->killswitch) == FALSE) {
 			gtk_widget_set_sensitive (priv->power_switch, FALSE);
@@ -1466,15 +1466,15 @@ create_devices_page (MoblinPanel *self)
 
 			switch (switch_state) {
 				case KILLSWITCH_STATE_UNBLOCKED:
-					nbtk_gtk_light_switch_set_active
-						(NBTK_GTK_LIGHT_SWITCH (priv->power_switch),
+					mx_gtk_light_switch_set_active
+						(MX_GTK_LIGHT_SWITCH (priv->power_switch),
 						 TRUE);
 					gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 					gtk_widget_set_sensitive (priv->power_switch, TRUE);
 				break;
 				case KILLSWITCH_STATE_SOFT_BLOCKED:
-					nbtk_gtk_light_switch_set_active
-						(NBTK_GTK_LIGHT_SWITCH (priv->power_switch),
+					mx_gtk_light_switch_set_active
+						(MX_GTK_LIGHT_SWITCH (priv->power_switch),
 							FALSE);
 				break;
 				case KILLSWITCH_STATE_HARD_BLOCKED:
@@ -1520,7 +1520,7 @@ create_connecting_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = nbtk_gtk_frame_new ();
+	page = mx_gtk_frame_new ();
 	page_title = gtk_label_new ("");
 	gtk_frame_set_label_widget (GTK_FRAME (page), page_title);
 	//set_frame_title (GTK_FRAME (page), _("Connecting"));

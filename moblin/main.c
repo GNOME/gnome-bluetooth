@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
-#include <nbtk/nbtk-gtk.h>
+#include <mx/mx-gtk.h>
 #include <moblin-panel/mpl-panel-common.h>
 #include <moblin-panel/mpl-panel-gtk.h>
 #include <bluetooth-enums.h>
