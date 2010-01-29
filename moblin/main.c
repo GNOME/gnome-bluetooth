@@ -36,8 +36,6 @@
 
 #include "moblin-panel.h"
 
-#define PKGTHEMEDIR PKGDATADIR"/theme"
-
 static void
 bluetooth_status_changed (MoblinPanel *panel, gboolean connecting, gpointer user_data)
 {
@@ -122,7 +120,7 @@ main (int argc, char *argv[])
 		gtk_widget_show (window);
 	}  else {
 		panel = mpl_panel_gtk_new (MPL_PANEL_BLUETOOTH, _("bluetooth"),
-					PKGTHEMEDIR "/bluetooth-panel.css",
+					THEME_DIR "/bluetooth-panel.css",
 					"state-idle", TRUE);
 		window  = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
 
