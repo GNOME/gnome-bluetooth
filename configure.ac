@@ -172,6 +172,8 @@ if test "x$enable_moblin" != "xno"; then
 
    PANEL_DIR=$($PKG_CONFIG moblin-panel --variable=moblin_panel_panels_dir)
    AC_SUBST(PANEL_DIR)
+
+   AS_AC_EXPAND(LIBEXECDIR, $libexecdir)
 else
    have_moblin=no
 fi
@@ -210,6 +212,7 @@ AC_OUTPUT(Makefile
 	  sendto/Makefile
 	  moblin/Makefile
 	  moblin/bluetooth-panel.desktop.in
+          moblin/org.moblin.UX.Shell.Panels.bluetooth.service
 	  moblin/theme/Makefile
 	  moblin/moblin-copy-n-paste/Makefile
 	  moblin/moblin-icons/Makefile

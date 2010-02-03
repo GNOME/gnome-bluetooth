@@ -1,6 +1,6 @@
 SUBDIRS = moblin-copy-n-paste theme moblin-icons
 
-bin_PROGRAMS = bluetooth-panel
+libexec_PROGRAMS = bluetooth-panel
 
 bluetooth_panel_SOURCES = main.c \
 	moblin-panel.c moblin-panel.h \
@@ -29,18 +29,12 @@ paneldir = @PANEL_DIR@
 panel_DATA = $(desktop_data)
 
 servicedir = $(datadir)/dbus-1/services
-service_in_files = org.moblin.UX.Shell.Panels.bluetooth.service.in
 service_DATA = org.moblin.UX.Shell.Panels.bluetooth.service
 
-@INTLTOOL_DESKTOP_RULE@
-
-CLEANFILES = $(autostart_DATA)
+CLEANFILES = $(desktop_DATA)
 
 EXTRA_DIST = $(autostart_in_in_files) $(ui_DATA) $(service_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
 
 DISTCLEANFILES = $(service_DATA)
-
-%.service: %.service.in
-	$(QUIET_GEN)sed -e "s|\@bindir\@|$(bindir)|" $< > $@
