@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 2.29.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-07 06:45+0800\n"
-"PO-Revision-Date: 2010-02-06 13:04+0800\n"
+"POT-Creation-Date: 2010-02-12 06:01+0800\n"
+"PO-Revision-Date: 2010-02-10 20:18+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -127,7 +127,7 @@ msgstr "已配對"
 
 #: ../lib/bluetooth-filter-widget.c:79
 msgid "Trusted"
-msgstr "可信任的"
+msgstr "受信任的"
 
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Not paired or trusted"
@@ -144,7 +144,7 @@ msgstr "<b>只顯示這樣的藍牙裝置...</b>"
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:254
 msgid "Device _category:"
-msgstr "裝置分類(_C):"
+msgstr "裝置分類(_C)："
 
 #: ../lib/bluetooth-filter-widget.c:269
 msgid "Select the device category to filter"
@@ -153,7 +153,7 @@ msgstr "選擇裝置分類以過濾上列清單"
 #. The device type filter
 #: ../lib/bluetooth-filter-widget.c:283
 msgid "Device _type:"
-msgstr "裝置類型 (_T):"
+msgstr "裝置類型 (_T)："
 
 #: ../lib/bluetooth-filter-widget.c:304
 msgid "Select the device type to filter"
@@ -165,7 +165,7 @@ msgstr "輸入裝置（滑鼠、鍵盤...等。）"
 
 #: ../lib/bluetooth-filter-widget.c:314
 msgid "Headphones, headsets and other audio devices"
-msgstr "頭戴式耳機、耳機和其他音效裝置"
+msgstr "頭戴式耳機、耳機麥克風和其他音效裝置"
 
 #: ../lib/plugins/geoclue.c:162
 msgid "Use this GPS device for Geolocation services"
@@ -176,7 +176,7 @@ msgstr "使用這個 GPS 裝置作為全球定位服務"
 #. * or leave untranslated
 #: ../lib/plugins/test.c:53
 msgid "Access the Internet using your cell phone (test)"
-msgstr "使用您的行動電話存取網際網路（測試中）"
+msgstr "使用您的行動電話存取網際網路（測試）"
 
 #: ../applet/main.c:139
 msgid "Select Device to Browse"
@@ -274,7 +274,7 @@ msgstr ""
 
 #: ../applet/main.c:1068
 msgid "Bluetooth Applet"
-msgstr "藍牙小工具"
+msgstr "藍牙面板程式"
 
 #: ../applet/notify.c:148
 msgid "Bluetooth: Enabled"
@@ -288,12 +288,12 @@ msgstr "裝置「%s」想要和這個電腦配對"
 #: ../applet/agent.c:257
 #, c-format
 msgid "Please enter the PIN mentioned on device %s."
-msgstr "請輸入裝置 %s 所提及的 PIN。"
+msgstr "請輸入裝置 %s 所提及的 PIN 碼。"
 
 #: ../applet/agent.c:339
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "請確認 PIN「%s」是否和裝置 %s 上的相符。"
+msgstr "請確認 PIN 碼「%s」是否和裝置 %s 上的相符。"
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:385
@@ -311,7 +311,7 @@ msgstr "裝置 %s 想要存取服務「%s」。"
 #: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
 #, c-format
 msgid "Pairing request for '%s'"
-msgstr "'%s' 的配對請求"
+msgstr "「%s」的配對請求"
 
 #: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
 #: ../applet/agent.c:618 ../applet/agent.c:656
@@ -559,7 +559,7 @@ msgstr "成功的設定新的裝置「%s」"
 
 #: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (多數耳機、滑鼠與 GPS 裝置)"
+msgstr "'0000' (多數的耳機麥克風、滑鼠與 GPS 裝置)"
 
 #: ../wizard/wizard.ui.h:2
 msgid "'1111'"
@@ -601,7 +601,7 @@ msgstr "正在結束新裝置設定"
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
-msgstr "固定式 PIN"
+msgstr "固定式 PIN 碼"
 
 #: ../wizard/wizard.ui.h:14
 msgid "Introduction"
@@ -614,11 +614,11 @@ msgstr "相符"
 
 #: ../wizard/wizard.ui.h:17
 msgid "PIN Options"
-msgstr "PIN  選項"
+msgstr "PIN 碼選項"
 
 #: ../wizard/wizard.ui.h:18
 msgid "PIN _options..."
-msgstr "PI_N 選項..."
+msgstr "PIN 碼選項(_O)..."
 
 #: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
 msgid "Select the additional services you want to use with your device:"
@@ -653,7 +653,7 @@ msgstr "歡迎使用藍牙新裝置設定精靈"
 
 #: ../wizard/wizard.ui.h:25
 msgid "_Automatic PIN selection"
-msgstr "自動選擇 _PIN"
+msgstr "自動選取 PIN 碼(_A)"
 
 #: ../wizard/wizard.ui.h:26
 msgid "_Restart Setup"
@@ -698,11 +698,11 @@ msgstr "透過藍牙傳送檔案"
 
 #: ../sendto/main.c:285
 msgid "From:"
-msgstr "從:"
+msgstr "從："
 
 #: ../sendto/main.c:298
 msgid "To:"
-msgstr "到:"
+msgstr "到："
 
 #: ../sendto/main.c:343 ../sendto/main.c:359
 msgid "An unknown error occurred"
@@ -736,11 +736,11 @@ msgstr "%d B/s"
 
 #: ../sendto/main.c:641
 msgid "Select Device to Send To"
-msgstr "選擇要傳送的目標裝置"
+msgstr "選擇要傳送到的目標裝置"
 
 #: ../sendto/main.c:645
 msgid "Send _To"
-msgstr "傳送給(_T)"
+msgstr "傳送到(_T)"
 
 #: ../sendto/main.c:687
 msgid "Choose files to send"
@@ -773,11 +773,11 @@ msgstr "以獨立模式執行"
 
 #: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
-msgstr "Moblin 藍牙面板程式"
+msgstr "Moblin 藍牙面板"
 
 #: ../moblin/main.c:95
 msgid "- Moblin Bluetooth Panel"
-msgstr "- Moblin 藍牙面板程式"
+msgstr "- Moblin 藍牙面板"
 
 #: ../moblin/main.c:122
 msgid "bluetooth"
@@ -840,7 +840,7 @@ msgstr "從您的電腦傳送檔案"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
-msgstr "藍牙管理員面板程式"
+msgstr "藍牙管理員面板"
 
 #~ msgid "A Bluetooth manager for the GNOME desktop"
 #~ msgstr "一個給 GNOME 桌面使用的藍牙管理員"
