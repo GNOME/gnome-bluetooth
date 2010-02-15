@@ -128,6 +128,7 @@ PKG_CHECK_MODULES(WIZARD,
 dnl Requires for the input helper
 PKG_CHECK_MODULES(INPUT,
 		  xi
+		  x11
 		  gtk+-2.0)
 
 dnl Requires for the public library
