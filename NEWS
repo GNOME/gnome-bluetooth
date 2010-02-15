@@ -1,3 +1,29 @@
+ver 2.29.91:
+- Mention gnome-user-share in the documentation
+
+Applet:
+	- Link to the sound preferences for audio devices
+	- Remove hard-coded use of nautilus
+
+Library:
+	- Use spinner from GTK+
+	- Install introspection data properly
+	- API documentation fixes
+	- Fix some parts of the UI not being translated at run-time
+
+Wizard:
+	- Fix run-time warning when pairing a new device
+
+Moblin applet:
+	- Add summary page support
+	- Fix a number of memory leaks and possible crashers
+
+Sendto:
+	- Fix crash when obex-client isn't already running
+	- Make Cancel button actually work
+	- Implement "retry" when sending fails
+	- Fix progress bar when sending multiple files
+
 ver 2.29.3:
 - Build and install nautilus-sendto plugin by default
 
