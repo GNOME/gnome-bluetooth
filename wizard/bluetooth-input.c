@@ -256,14 +256,24 @@ static void bluetooth_input_init(BluetoothInput *input)
 /**
  * bluetooth_input_new:
  *
- * Return value: a reference to the #BluetoothInput singleton. Unref the object when done.
+ * Return value: a reference to the #BluetoothInput singleton or %NULL when XInput is not supported. Unref the object when done.
  **/
 BluetoothInput *bluetooth_input_new(void)
 {
+	static BluetoothInput *bluetooth_input = NULL;
+
+	if (bluetooth_input != NULL)
+		return g_object_ref (bluetooth_input);
+
 	if (supports_xinput_devices () == FALSE) {
 		g_warning ("XInput not supported, input device helper disabled");
 		return NULL;
 	}
-	return BLUETOOTH_INPUT (g_object_new (BLUETOOTH_TYPE_INPUT, NULL));
+
+	bluetooth_input = BLUETOOTH_INPUT (g_object_new (BLUETOOTH_TYPE_INPUT, NULL));
+	g_object_add_weak_pointer (G_OBJECT (bluetooth_input),
+				   (gpointer) &bluetooth_input);
+
+	return bluetooth_input;
 }
 
