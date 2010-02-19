@@ -65,11 +65,19 @@ panel_request_focus (MoblinPanel *panel, gpointer user_data)
  * i.e. stop any discovery and show the defaults devices view
  */
 static void
-_reset_view_cb (MplPanelClient *client, gpointer user_data)
+panel_hidden_cb (MplPanelClient *client, gpointer user_data)
 {
 	MoblinPanel *panel = MOBLIN_PANEL (user_data);
 
-	moblin_panel_reset_view (panel);
+	moblin_panel_hidden (panel);
+}
+
+static void
+panel_shown_cb (MplPanelClient *client, gpointer user_data)
+{
+	MoblinPanel *panel = MOBLIN_PANEL (user_data);
+
+        moblin_panel_shown (panel);
 }
 
 int
@@ -118,6 +126,8 @@ main (int argc, char *argv[])
 
 		gtk_container_add (GTK_CONTAINER (window), content);
 		gtk_widget_show (window);
+
+                moblin_panel_shown (MOBLIN_PANEL (content));
 	}  else {
 		panel = mpl_panel_gtk_new (MPL_PANEL_BLUETOOTH, _("bluetooth"),
 					THEME_DIR "/bluetooth-panel.css",
@@ -125,7 +135,8 @@ main (int argc, char *argv[])
 		window  = mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
 
 		content = moblin_panel_new ();
-		g_signal_connect (panel, "hide-end", (GCallback) _reset_view_cb, content);
+		g_signal_connect (panel, "show", (GCallback) panel_shown_cb, content);
+		g_signal_connect (panel, "hide-end", (GCallback) panel_hidden_cb, content);
 		g_signal_connect (content, "state-changed",
 				G_CALLBACK (bluetooth_status_changed), panel);
 		g_signal_connect (content, "request-focus",

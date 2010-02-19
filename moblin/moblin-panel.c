@@ -66,6 +66,9 @@ struct _MoblinPanelPrivate
 
 	/* Page widgets that need to be "globally" accessible */
 	GtkWidget *power_switch;
+	guint      visible_countdown; /* seconds */
+	GtkWidget *visible_label;
+	GtkWidget *visible_button;
 	GtkWidget *notebook;
 	GtkWidget *label_pin_help;
 	GtkWidget *label_pin;
@@ -152,6 +155,52 @@ power_switch_toggled_cb (MxGtkLightSwitch *light_switch,
 	} else {
 		bluetooth_powerswitch_set_state (priv->powerswitch, POWERSWITCH_STATE_OFF);
 	}
+}
+
+static gboolean
+update_visible (gpointer data)
+{
+	MoblinPanel *panel = MOBLIN_PANEL (data);
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (panel);
+	char *s;
+
+	if (priv->visible_countdown -= 5) {
+		gtk_widget_hide (priv->visible_button);
+		gtk_widget_show (priv->visible_label);
+
+		/* TODO: better display formatting */
+		s = g_strdup_printf (_("Your computer is visible on Bluetooth for %d seconds."),
+				     priv->visible_countdown);
+		gtk_label_set_text (GTK_LABEL (priv->visible_label), s);
+		g_free (s);
+		return TRUE;
+	} else {
+		bluetooth_client_set_discoverable (priv->client, FALSE);
+
+		gtk_widget_show (priv->visible_button);
+		gtk_widget_hide (priv->visible_label);
+
+		return FALSE;
+	}
+}
+
+static void
+make_discoverable (MoblinPanel *panel)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (panel);
+
+	bluetooth_client_set_discoverable (priv->client, TRUE);
+
+	priv->visible_countdown = 60 * 2; /* 2 minutes */
+
+	update_visible (panel);
+	g_timeout_add_seconds (5, update_visible, panel);
+}
+
+static void
+visible_button_cb (GtkButton *button, gpointer user_data)
+{
+	make_discoverable (MOBLIN_PANEL (user_data));
 }
 
 static void
@@ -1463,6 +1512,14 @@ create_devices_page (MoblinPanel *self)
 	gtk_widget_show (priv->power_switch);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->power_switch, FALSE, FALSE, 4);
 
+	priv->visible_label = gtk_label_new (NULL);
+	gtk_label_set_line_wrap (GTK_LABEL (priv->visible_label), TRUE);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->visible_label, FALSE, FALSE, 4);
+
+	priv->visible_button = gtk_button_new_with_label (_("Make visible on Bluetooth"));
+	g_signal_connect (priv->visible_button, "clicked", G_CALLBACK (visible_button_cb), self);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->visible_button, FALSE, FALSE, 4);
+
 	/* Button for Send file */
 	priv->send_button = gtk_button_new_with_label (_("Send file from your computer"));
 	gtk_widget_show (priv->send_button);
@@ -1677,12 +1734,19 @@ moblin_panel_new (void)
 
 /**
  *
- * moblin_panel_reset_view:
+ * moblin_panel_hidden:
  *
  * @self: A #MoblinPanel widget
  **/
 void
-moblin_panel_reset_view (MoblinPanel *self)
+moblin_panel_hidden (MoblinPanel *self)
 {
 	set_current_page (self, PAGE_DEVICES);
+}
+
+void
+moblin_panel_shown (MoblinPanel *self)
+{
+	set_current_page (self, PAGE_DEVICES);
+	make_discoverable (self);
 }
