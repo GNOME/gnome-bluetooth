@@ -38,7 +38,8 @@ DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client);
 gboolean bluetooth_client_start_discovery(BluetoothClient *client);
 gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
 gboolean bluetooth_client_set_discoverable (BluetoothClient *client,
-					    gboolean discoverable);
+					    gboolean discoverable,
+                                            guint timeout);
 
 typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client,
 						 const char *path,

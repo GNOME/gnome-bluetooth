@@ -87,7 +87,7 @@ static void discoverable_changed_cb(GtkWidget *button, gpointer user_data)
 	/* Note that this would be broken if we showed more than
 	 * one adapter, but we don't care */
 	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (button), FALSE);
-	bluetooth_client_set_discoverable (client, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)));
+	bluetooth_client_set_discoverable (client, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)), 0);
 }
 
 static void name_callback(GtkWidget *editable, gpointer user_data)

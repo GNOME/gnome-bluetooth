@@ -1579,6 +1579,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
  * bluetooth_client_set_discoverable:
  * @client: a #BluetoothClient object
  * @discoverable: whether the device should be discoverable
+ * @timeout: timeout in seconds for making undiscoverable, or 0 for never.
  *
  * Sets the default adapter's discoverable status.
  *
@@ -1586,11 +1587,12 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
  **/
 gboolean
 bluetooth_client_set_discoverable (BluetoothClient *client,
-				   gboolean discoverable)
+				   gboolean discoverable,
+                                   guint timeout)
 {
 	DBusGProxy *adapter;
 	GValue disco = { 0 };
-	GValue timeout = { 0 };
+	GValue timeoutv = { 0 };
 	gboolean ret;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
@@ -1602,10 +1604,19 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 		return FALSE;
 
 	g_value_init (&disco, G_TYPE_BOOLEAN);
-	g_value_init (&timeout, G_TYPE_UINT);
+	g_value_init (&timeoutv, G_TYPE_UINT);
 
 	g_value_set_boolean (&disco, discoverable);
-	g_value_set_uint (&timeout, 0);
+	g_value_set_uint (&timeoutv, timeout);
+
+        if (discoverable) {
+		ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
+					 G_TYPE_STRING, "DiscoverableTimeout",
+					 G_TYPE_VALUE, &timeoutv,
+					 G_TYPE_INVALID, G_TYPE_INVALID);
+		if (ret == FALSE)
+			goto bail;
+	}
 
 	ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
 				 G_TYPE_STRING, "Discoverable",
@@ -1614,14 +1625,9 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (ret == FALSE)
 		goto bail;
 
-	ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
-				 G_TYPE_STRING, "DiscoverableTimeout",
-				 G_TYPE_VALUE, &timeout,
-				 G_TYPE_INVALID, G_TYPE_INVALID);
-
 bail:
 	g_value_unset (&disco);
-	g_value_unset (&timeout);
+	g_value_unset (&timeoutv);
 
 	g_object_unref(adapter);
 

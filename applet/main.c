@@ -275,7 +275,7 @@ bluetooth_discoverable_callback (GtkToggleAction *toggleaction, gpointer user_da
 
 	discoverable = gtk_toggle_action_get_active (toggleaction);
 	discover_lock = TRUE;
-	bluetooth_client_set_discoverable (client, discoverable);
+	bluetooth_client_set_discoverable (client, discoverable, 0);
 	discover_lock = FALSE;
 }
 
