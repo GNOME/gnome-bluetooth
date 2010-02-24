@@ -165,7 +165,7 @@ validate_destination (NstPlugin *plugin,
 	g_return_val_if_fail (error != NULL, FALSE);
 
 	if (get_select_device (NULL, &bdaddr) == FALSE) {
-		*error = g_strdup (_("Programming error, could not find the device in the list"));
+		*error = g_strdup (_("Programming error: could not find the device in the list"));
 		return FALSE;
 	}
 
@@ -240,7 +240,7 @@ bail:
 	g_object_unref (device);
 
 	if (found == FALSE)
-		*error = g_strdup_printf (_("Obex Push file transfer unsupported"));
+		*error = g_strdup_printf (_("OBEX Push file transfer unsupported"));
 
 	return found;
 #endif

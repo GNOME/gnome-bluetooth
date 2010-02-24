@@ -349,7 +349,7 @@ static gchar *get_error_message(GError *error)
 
 	if (dbus_g_error_has_name(error, OPENOBEX_CONNECTION_FAILED) == TRUE &&
 					is_palm_device(option_device)) {
-		message = g_strdup(_("Make sure that remote device "
+		message = g_strdup(_("Make sure that the remote device "
 					"is switched on and that it "
 					"accepts Bluetooth connections"));
 		goto done;

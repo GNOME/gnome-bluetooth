@@ -126,7 +126,7 @@ main (int argc, char *argv[])
 		GtkWidget *box, *label;
 		GdkScreen *screen;
 		char *s;
-		panel = mpl_panel_gtk_new (MPL_PANEL_BLUETOOTH, _("bluetooth"),
+		panel = mpl_panel_gtk_new (MPL_PANEL_BLUETOOTH, _("Bluetooth"),
 					THEME_DIR "/bluetooth-panel.css",
 					"state-idle", TRUE);
 		window	= mpl_panel_gtk_get_window (MPL_PANEL_GTK (panel));
