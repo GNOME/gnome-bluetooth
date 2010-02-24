@@ -167,9 +167,13 @@ filter_type_changed_cb (GtkComboBox *widget, gpointer data)
 void
 bluetooth_filter_widget_set_title (BluetoothFilterWidget *self, gchar *title)
 {
+	gchar *markup;
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
 
-	gtk_label_set_text (GTK_LABEL (priv->title), title);
+	markup = g_strdup_printf ("<b>%s</b>", title);
+	gtk_label_set_text (GTK_LABEL (priv->title), markup);
+	g_free (markup);
+
 	gtk_label_set_use_markup (GTK_LABEL (priv->title), TRUE);
 }
 
@@ -224,7 +228,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	gtk_box_set_spacing (GTK_BOX (self), 6);
 
 	priv->title = gtk_label_new ("");
-	bluetooth_filter_widget_set_title (self, _("<b>Show Only Bluetooth Devices With...</b>"));
+	bluetooth_filter_widget_set_title (self, _("Show Only Bluetooth Devices With..."));
 	gtk_widget_show (priv->title);
 	gtk_box_pack_start (GTK_BOX (self), priv->title, TRUE, TRUE, 0);
 	gtk_misc_set_alignment (GTK_MISC (priv->title), 0, 0.5);
