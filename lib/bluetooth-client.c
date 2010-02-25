@@ -1590,6 +1590,7 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 				   gboolean discoverable,
                                    guint timeout)
 {
+	GError *error = NULL;
 	DBusGProxy *adapter;
 	GValue disco = { 0 };
 	GValue timeoutv = { 0 };
@@ -1609,8 +1610,8 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 	g_value_set_boolean (&disco, discoverable);
 	g_value_set_uint (&timeoutv, timeout);
 
-        if (discoverable) {
-		ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
+	if (discoverable) {
+		ret = dbus_g_proxy_call (adapter, "SetProperty", &error,
 					 G_TYPE_STRING, "DiscoverableTimeout",
 					 G_TYPE_VALUE, &timeoutv,
 					 G_TYPE_INVALID, G_TYPE_INVALID);
@@ -1618,18 +1619,22 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 			goto bail;
 	}
 
-	ret = dbus_g_proxy_call (adapter, "SetProperty", NULL,
+	ret = dbus_g_proxy_call (adapter, "SetProperty", &error,
 				 G_TYPE_STRING, "Discoverable",
 				 G_TYPE_VALUE, &disco,
 				 G_TYPE_INVALID, G_TYPE_INVALID);
-	if (ret == FALSE)
-		goto bail;
+
 
 bail:
 	g_value_unset (&disco);
 	g_value_unset (&timeoutv);
 
 	g_object_unref(adapter);
+
+	if (error) {
+		g_warning ("Cannot set discoverable: %s", error->message);
+		g_error_free (error);
+	}
 
 	return ret;
 }
