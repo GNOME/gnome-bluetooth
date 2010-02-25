@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  *
  *  BlueZ - Bluetooth protocol stack for Linux
@@ -111,6 +112,7 @@ struct _MoblinPanelPrivate
 };
 
 #define CONNECT_TIMEOUT 3.0
+#define DISCOVER_TIMEOUT (2 * 60)
 #define AGENT_PATH "/org/bluez/agent/moblin"
 
 typedef struct {
@@ -157,25 +159,71 @@ power_switch_toggled_cb (MxGtkLightSwitch *light_switch,
 	}
 }
 
+static char *
+totem_time_to_string_text (gint64 msecs)
+{
+	char *secs, *mins, *hours, *string;
+	int sec, min, hour, _time;
+
+	_time = (int) (msecs / 1000);
+	sec = _time % 60;
+	_time = _time - sec;
+	min = (_time % (60*60)) / 60;
+	_time = _time - (min * 60);
+	hour = _time / (60*60);
+
+	hours = g_strdup_printf (ngettext ("%d hour", "%d hours", hour), hour);
+
+	mins = g_strdup_printf (ngettext ("%d minute",
+					  "%d minutes", min), min);
+
+	secs = g_strdup_printf (ngettext ("%d second",
+					  "%d seconds", sec), sec);
+
+	if (hour > 0)
+	{
+		/* hour:minutes:seconds */
+		string = g_strdup_printf (_("%s %s %s"), hours, mins, secs);
+	} else if (min > 0) {
+		/* minutes:seconds */
+		string = g_strdup_printf (_("%s %s"), mins, secs);
+	} else if (sec > 0) {
+		/* seconds */
+		string = g_strdup_printf (_("%s"), secs);
+	} else {
+		/* 0 seconds */
+		string = g_strdup (_("0 seconds"));
+	}
+
+	g_free (hours);
+	g_free (mins);
+	g_free (secs);
+
+	return string;
+}
+
 static gboolean
 update_visible (gpointer data)
 {
 	MoblinPanel *panel = MOBLIN_PANEL (data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (panel);
-	char *s;
+	char *label, *time;
 
-	if (priv->visible_countdown -= 5) {
+	if (priv->visible_countdown > 0) {
 		gtk_widget_hide (priv->visible_button);
 		gtk_widget_show (priv->visible_label);
 
-		/* TODO: better display formatting */
-		s = g_strdup_printf (_("Your computer is visible on Bluetooth for %d seconds."),
-				     priv->visible_countdown);
-		gtk_label_set_text (GTK_LABEL (priv->visible_label), s);
-		g_free (s);
+		time = totem_time_to_string_text (priv->visible_countdown * 1000);
+		label = g_strdup_printf (_("Your computer is visible on Bluetooth for %s."), time);
+		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
+		g_free (label);
+		g_free (time);
+
+		priv->visible_countdown -= 5;
+
 		return TRUE;
 	} else {
-		bluetooth_client_set_discoverable (priv->client, FALSE);
+		bluetooth_client_set_discoverable (priv->client, FALSE, 0);
 
 		gtk_widget_show (priv->visible_button);
 		gtk_widget_hide (priv->visible_label);
@@ -189,9 +237,9 @@ make_discoverable (MoblinPanel *panel)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (panel);
 
-	bluetooth_client_set_discoverable (priv->client, TRUE);
+	bluetooth_client_set_discoverable (priv->client, TRUE, DISCOVER_TIMEOUT);
 
-	priv->visible_countdown = 60 * 2; /* 2 minutes */
+	priv->visible_countdown = DISCOVER_TIMEOUT;
 
 	update_visible (panel);
 	g_timeout_add_seconds (5, update_visible, panel);
@@ -1518,6 +1566,7 @@ create_devices_page (MoblinPanel *self)
 
 	priv->visible_button = gtk_button_new_with_label (_("Make visible on Bluetooth"));
 	g_signal_connect (priv->visible_button, "clicked", G_CALLBACK (visible_button_cb), self);
+	gtk_widget_show (priv->visible_button);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->visible_button, FALSE, FALSE, 4);
 
 	/* Button for Send file */
