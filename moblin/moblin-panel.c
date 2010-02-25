@@ -300,15 +300,18 @@ powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
 		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch),
 	                                      FALSE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
+		gtk_widget_set_sensitive (priv->visible_button, FALSE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		gtk_widget_set_sensitive (priv->send_button, FALSE);
 	} else if (state == POWERSWITCH_STATE_ON) {
 		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
+		gtk_widget_set_sensitive (priv->visible_button, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 		enable_send_file (self);
 	} else if (state == POWERSWITCH_STATE_NO_ADAPTER) {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
+		gtk_widget_set_sensitive (priv->visible_button, FALSE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
 		gtk_widget_set_sensitive (priv->send_button, FALSE);
 	} else {
