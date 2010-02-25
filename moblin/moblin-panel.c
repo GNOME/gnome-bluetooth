@@ -242,6 +242,9 @@ make_discoverable (MoblinPanel *panel)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (panel);
 
+	if (bluetooth_powerswitch_get_state (priv->powerswitch) != POWERSWITCH_STATE_ON)
+		return;
+
 	bluetooth_client_set_discoverable (priv->client, TRUE, DISCOVER_TIMEOUT);
 
 	priv->visible_countdown = DISCOVER_TIMEOUT;
