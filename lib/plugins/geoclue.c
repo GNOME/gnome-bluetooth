@@ -47,7 +47,7 @@ get_name_and_type (const char *address, BluetoothType *ret_type)
 	found_name = NULL;
 	*ret_type = 0;
 	client = bluetooth_client_new (); 
-	model = bluetooth_client_get_model (client);
+	model = bluetooth_client_get_device_model (client, NULL);
 	if (model == NULL) {
 		g_object_unref (client);
 		return NULL;
@@ -106,7 +106,7 @@ has_config_widget (const char *bdaddr, const char **uuids)
 
 	/* Type is ANY, probably a GPS device */
 	name = get_name_and_type (bdaddr, &type);
-	if (type == BLUETOOTH_TYPE_ANY) {
+	if (name != NULL && type == BLUETOOTH_TYPE_ANY) {
 		g_free (name);
 		return TRUE;
 	}
