@@ -46,6 +46,7 @@ static GtkTreeModel *devices_model;
 static guint num_adapters_present = 0;
 static guint num_adapters_powered = 0;
 static gboolean show_icon_pref = TRUE;
+static gboolean discover_lock = FALSE;
 
 #define PREF_DIR		"/apps/bluetooth-manager"
 #define PREF_SHOW_ICON		PREF_DIR "/show_icon"
@@ -273,7 +274,9 @@ bluetooth_discoverable_callback (GtkToggleAction *toggleaction, gpointer user_da
 	gboolean discoverable;
 
 	discoverable = gtk_toggle_action_get_active (toggleaction);
+	discover_lock = TRUE;
 	bluetooth_client_set_discoverable (client, discoverable);
+	discover_lock = FALSE;
 }
 
 static gboolean program_available(const char *program)
@@ -452,6 +455,12 @@ update_discoverability (GtkTreeIter *iter)
 	gboolean discoverable;
 	GObject *object;
 
+	/* Avoid loops from changing the UI */
+	if (discover_lock != FALSE)
+		return;
+
+	discover_lock = TRUE;
+
 	object = gtk_builder_get_object (xml, "discoverable");
 
 	if (iter == NULL) {
@@ -465,6 +474,8 @@ update_discoverability (GtkTreeIter *iter)
 
 	gtk_action_set_visible (GTK_ACTION (object), TRUE);
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (object), discoverable);
+
+	discover_lock = FALSE;
 }
 
 static void
