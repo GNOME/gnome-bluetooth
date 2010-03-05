@@ -428,7 +428,7 @@ update_menu_items (void)
 	if (enabled == FALSE)
 		return;
 
-	gtk_action_set_sensitive (GTK_ACTION (object), TRUE);
+	gtk_action_group_set_sensitive (GTK_ACTION_GROUP (object), TRUE);
 }
 
 static void
