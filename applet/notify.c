@@ -111,6 +111,8 @@ GtkStatusIcon *init_notification(void)
 	notify_init("bluetooth-manager");
 
 	statusicon = gtk_status_icon_new_from_icon_name(icon_name);
+	gtk_status_icon_set_title (GTK_STATUS_ICON (statusicon),
+				   _("Bluetooth"));
 	gtk_status_icon_set_tooltip_markup(statusicon, tooltip);
 
 	return statusicon;
