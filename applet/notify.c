@@ -31,8 +31,12 @@
 #include <libnotify/notify.h>
 #include "notify.h"
 
+#define ACTIVE_ICON_NAME "bluetooth-active"
+#define DISABLE_ICON_NAME "bluetooth-disabled"
+
 static GtkStatusIcon *statusicon = NULL;
-static char *icon_name = NULL;
+static gboolean bt_enabled = FALSE;
+static GIcon *icon_enabled = NULL, *icon_disabled = NULL;
 static char *tooltip = NULL;
 static NotifyNotification *notify = NULL;
 
@@ -71,7 +75,7 @@ void show_notification(const gchar *summary, const gchar *message,
 		notify_notification_close(notify, NULL);
 	}
 
-	notify = notify_notification_new(summary, message, icon_name, NULL);
+	notify = notify_notification_new(summary, message, ACTIVE_ICON_NAME, NULL);
 
 	notify_notification_set_timeout(notify, timeout);
 
@@ -110,7 +114,10 @@ GtkStatusIcon *init_notification(void)
 {
 	notify_init("bluetooth-manager");
 
-	statusicon = gtk_status_icon_new_from_icon_name(icon_name);
+	icon_enabled = g_themed_icon_new_with_default_fallbacks (ACTIVE_ICON_NAME"-symbolic");
+	icon_disabled = g_themed_icon_new_with_default_fallbacks (DISABLE_ICON_NAME"-symbolic");
+
+	statusicon = gtk_status_icon_new_from_gicon(bt_enabled ? icon_enabled : icon_disabled);
 	gtk_status_icon_set_title (GTK_STATUS_ICON (statusicon),
 				   _("Bluetooth"));
 	gtk_status_icon_set_tooltip_markup(statusicon, tooltip);
@@ -122,10 +129,9 @@ void cleanup_notification(void)
 {
 	close_notification();
 
-	g_object_unref(statusicon);
-
-	g_free (icon_name);
-	icon_name = NULL;
+	g_object_unref (statusicon);
+	g_object_unref (icon_enabled);
+	g_object_unref (icon_disabled);
 	g_free (tooltip);
 	tooltip = NULL;
 
@@ -146,16 +152,15 @@ void hide_icon(void)
 
 void set_icon(gboolean enabled)
 {
-	const char *name = (enabled ? "bluetooth-active" : "bluetooth-disabled");
 	const char *_tooltip = enabled ? _("Bluetooth: Enabled") : _("Bluetooth: Disabled");
 
+	bt_enabled = enabled;
+
 	if (statusicon == NULL) {
-		g_free (icon_name);
 		g_free (tooltip);
-		icon_name = g_strdup (name);
 		tooltip = g_strdup (_tooltip);
 	} else {
-		gtk_status_icon_set_from_icon_name (statusicon, name);
+		gtk_status_icon_set_from_gicon (statusicon, enabled ? icon_enabled : icon_disabled);
 		gtk_status_icon_set_tooltip_markup(statusicon, _tooltip);
 	}
 }
