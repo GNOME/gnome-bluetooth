@@ -204,6 +204,7 @@ remove_killswitch (BluetoothKillswitch *killswitch,
 		if (ind->index == index) {
 			priv->killswitches = g_list_remove (priv->killswitches, ind);
 			g_message ("removing killswitch idx %d", index);
+			g_free (ind);
 			g_signal_emit (G_OBJECT (killswitch),
 				       signals[STATE_CHANGED],
 				       0, bluetooth_killswitch_get_state (killswitch));
