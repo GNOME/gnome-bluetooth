@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-04 17:23+0200\n"
-"PO-Revision-Date: 2009-07-07 18:40+0300\n"
-"Last-Translator: Kyrylo Polezhajev <polezhajev@ukr.net>, 2009.\n"
-"Language-Team: ukrainian <Ukrainian <uk@li.org>>\n"
+"POT-Creation-Date: 2010-03-26 18:22+0200\n"
+"PO-Revision-Date: 2010-03-26 18:40+0300\n"
+"Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>, 2009.\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -77,7 +77,11 @@ msgstr "Джойстик"
 msgid "Tablet"
 msgstr "Планшет"
 
-#: ../lib/bluetooth-client.c:156 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:156
+msgid "Video device"
+msgstr "Відеопристрій"
+
+#: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
 #: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
 msgstr "Невідомо"
@@ -177,92 +181,92 @@ msgid "Access the Internet using your cell phone (test)"
 msgstr ""
 "Доступ до мережі Інтернет за допомогою вашого мобільного телефону (test)"
 
-#: ../applet/main.c:115
+#: ../applet/main.c:140
 msgid "Select Device to Browse"
 msgstr "Виберіть пристрій для перегляду"
 
-#: ../applet/main.c:119
+#: ../applet/main.c:144
 msgid "_Browse"
 msgstr "П_ереглянути"
 
-#: ../applet/main.c:128
+#: ../applet/main.c:153
 msgid "Select device to browse"
 msgstr "Виберіть пристрій для перегляду"
 
-#: ../applet/main.c:305 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:332 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Увімкнути Bluetooth"
 
-#: ../applet/main.c:306
+#: ../applet/main.c:333
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Вимкнений"
 
-#: ../applet/main.c:309
+#: ../applet/main.c:336
 msgid "Turn Off Bluetooth"
 msgstr "Вимкнути Bluetooth"
 
-#: ../applet/main.c:310
+#: ../applet/main.c:337
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Увімкнений"
 
-#: ../applet/main.c:315 ../applet/notify.c:148
+#: ../applet/main.c:342 ../applet/notify.c:150
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Недоступний"
 
-#: ../applet/main.c:461
+#: ../applet/main.c:493
 msgid "Disconnecting..."
 msgstr "Роз'єднання..."
 
-#: ../applet/main.c:464 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:496 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "З'єднання..."
 
-#: ../applet/main.c:467 ../applet/main.c:808
+#: ../applet/main.c:499 ../applet/main.c:840
 msgid "Connected"
 msgstr "Підключено"
 
-#: ../applet/main.c:470 ../applet/main.c:808
+#: ../applet/main.c:502 ../applet/main.c:840
 msgid "Disconnected"
 msgstr "Роз'єднано"
 
-#: ../applet/main.c:826 ../applet/main.c:890 ../properties/adapter.c:371
+#: ../applet/main.c:858 ../applet/main.c:922 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "Роз'єднати"
 
-#: ../applet/main.c:826 ../applet/main.c:890
+#: ../applet/main.c:858 ../applet/main.c:922
 msgid "Connect"
 msgstr "З'єднати"
 
-#: ../applet/main.c:839
+#: ../applet/main.c:871
 msgid "Send files..."
 msgstr "Надіслати файли..."
 
-#: ../applet/main.c:849
+#: ../applet/main.c:881
 msgid "Browse files..."
 msgstr "Переглянути файли..."
 
-#: ../applet/main.c:860
+#: ../applet/main.c:892
 msgid "Open Keyboard Preferences..."
 msgstr "Відкрити налаштування клавіатури..."
 
-#: ../applet/main.c:868
+#: ../applet/main.c:900
 msgid "Open Mouse Preferences..."
 msgstr "Відкрити налаштування миші..."
 
-#: ../applet/main.c:878
+#: ../applet/main.c:910
 msgid "Open Sound Preferences..."
 msgstr "Відкрити налаштування аудіо..."
 
-#: ../applet/main.c:1005
+#: ../applet/main.c:1037
 msgid "Debug"
 msgstr "Відлагодження"
 
 #. Parse command-line options
-#: ../applet/main.c:1025
+#: ../applet/main.c:1057
 msgid "- Bluetooth applet"
 msgstr "- Програма керування Bluetooth"
 
-#: ../applet/main.c:1030
+#: ../applet/main.c:1062
 #, c-format
 msgid ""
 "%s\n"
@@ -272,11 +276,20 @@ msgstr ""
 "Введіть '%s --help' щоб подивитися повний список доступних опцій командної "
 "строки.\n"
 
-#: ../applet/main.c:1047
+#: ../applet/main.c:1079
 msgid "Bluetooth Applet"
 msgstr "Програма керування Bluetooth"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:1455
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../applet/notify.c:150
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: Доступний"
 
@@ -469,15 +482,6 @@ msgstr "Відсутні адаптери Bluetooth"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "На вашому комп'ютері не знайдено жодного адаптера Bluetooth."
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "Налаштувати параметри Bluetooth"
@@ -647,13 +651,13 @@ msgstr ""
 
 #: ../wizard/wizard.ui.h:23
 msgid ""
-"The device will need to be within 10 meters of your computer, and be “"
-"visible” (sometimes called “discoverable”). Check the "
-"device's manual if in doubt."
+"The device will need to be within 10 meters of your computer, and be "
+"“visible” (sometimes called “discoverable”). Check the device's manual if in "
+"doubt."
 msgstr ""
 "Пристрій повинен бути в радіусі 10 метрів від комп'ютера і бути у стані "
-"“видимий”. Якщо необхідно, перевірте посібник користувача для "
-"вашого пристрою."
+"“видимий”. Якщо необхідно, перевірте посібник користувача для вашого "
+"пристрою."
 
 #: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
@@ -785,19 +789,19 @@ msgstr "Передачі типу Obex Push не підтримуються"
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
-#: ../moblin/main.c:88
+#: ../moblin/main.c:86
 msgid "Run in standalone mode"
 msgstr "Запустити у самостійному режимі"
 
-#: ../moblin/main.c:96 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "Панель Moblin Bluetooth"
 
-#: ../moblin/main.c:97
+#: ../moblin/main.c:95
 msgid "- Moblin Bluetooth Panel"
 msgstr "- Панель Moblin Bluetooth"
 
-#: ../moblin/main.c:124
+#: ../moblin/main.c:122
 msgid "bluetooth"
 msgstr "bluetooth"
 
