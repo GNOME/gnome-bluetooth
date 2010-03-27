@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-13 02:33+0200\n"
-"PO-Revision-Date: 2009-09-13 02:33+0200\n"
+"POT-Creation-Date: 2010-03-27 16:15+0100\n"
+"PO-Revision-Date: 2010-03-25 23:55+0100\n"
 "Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -22,136 +22,151 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-09-12 15:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/bluetooth-client.c:109
+#: ../lib/bluetooth-client.c:127
 msgid "All types"
 msgstr "Alle typer"
 
-#: ../lib/bluetooth-client.c:111
+#: ../lib/bluetooth-client.c:129
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-client.c:113
+#: ../lib/bluetooth-client.c:131
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-client.c:115
+#: ../lib/bluetooth-client.c:133
 msgid "Computer"
 msgstr "Computer"
 
-#: ../lib/bluetooth-client.c:117
+#: ../lib/bluetooth-client.c:135
 msgid "Network"
 msgstr "Netværk"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:120
+#: ../lib/bluetooth-client.c:138
 msgid "Headset"
 msgstr "Headset"
 
-#: ../lib/bluetooth-client.c:122
+#: ../lib/bluetooth-client.c:140
 msgid "Headphones"
 msgstr "Hovedtelefoner"
 
-#: ../lib/bluetooth-client.c:124
+#: ../lib/bluetooth-client.c:142
 msgid "Audio device"
 msgstr "Lydenhed"
 
-#: ../lib/bluetooth-client.c:126
+#: ../lib/bluetooth-client.c:144
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../lib/bluetooth-client.c:128
+#: ../lib/bluetooth-client.c:146
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../lib/bluetooth-client.c:130
+#: ../lib/bluetooth-client.c:148
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../lib/bluetooth-client.c:132
+#: ../lib/bluetooth-client.c:150
 msgid "Printer"
 msgstr "Printer"
 
-#: ../lib/bluetooth-client.c:134
+#: ../lib/bluetooth-client.c:152
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../lib/bluetooth-client.c:136
+#: ../lib/bluetooth-client.c:154
 msgid "Tablet"
 msgstr "Skriveplade"
 
-#: ../lib/bluetooth-client.c:138 ../lib/bluetooth-chooser.c:105
-#: ../lib/bluetooth-chooser.c:139
+#: ../lib/bluetooth-client.c:156
+msgid "Video device"
+msgstr "Videoenhed"
+
+#: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
 msgstr "Ukendt"
 
-#: ../lib/bluetooth-chooser-button.c:65 ../lib/bluetooth-chooser-button.c:360
+#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
 msgid "Click to select device..."
 msgstr "Klik for at vælge enhed..."
 
-#: ../lib/bluetooth-chooser.c:95
-msgid "All categories"
-msgstr "Alle kategorier"
-
-#: ../lib/bluetooth-chooser.c:97
-msgid "Paired"
-msgstr "Parvis"
-
-#: ../lib/bluetooth-chooser.c:99
-msgid "Trusted"
-msgstr "Betroet"
-
-#: ../lib/bluetooth-chooser.c:101
-msgid "Not paired or trusted"
-msgstr "Hverken parvis eller betroet"
-
-#: ../lib/bluetooth-chooser.c:103
-msgid "Paired or trusted"
-msgstr "Parvis eller betroet"
-
-#: ../lib/bluetooth-chooser.c:180
+#: ../lib/bluetooth-chooser.c:170
 msgid "No adapters available"
 msgstr "Ingen tilgængelige adaptere"
 
-#: ../lib/bluetooth-chooser.c:184 ../lib/bluetooth-chooser.c:813
+#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
 msgid "Searching for devices..."
 msgstr "Søger efter enheder..."
 
-#: ../lib/bluetooth-chooser.c:683
+#: ../lib/bluetooth-chooser.c:372
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Fjern \"%s\" fra listen over enheder?"
+
+#: ../lib/bluetooth-chooser.c:374
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Hvis du fjerner enheden, skal du sætte den op igen, før den kan bruges næste "
+"gang."
+
+#: ../lib/bluetooth-chooser.c:746
 msgid "Device"
 msgstr "Enhed"
 
-#: ../lib/bluetooth-chooser.c:720
+#: ../lib/bluetooth-chooser.c:783
 msgid "Type"
 msgstr "Type"
 
-#. The filters
-#: ../lib/bluetooth-chooser.c:836
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Vis kun Bluetooth-enheder med..."
+#: ../lib/bluetooth-filter-widget.c:75
+msgid "All categories"
+msgstr "Alle kategorier"
+
+#: ../lib/bluetooth-filter-widget.c:77
+msgid "Paired"
+msgstr "Parvis"
+
+#: ../lib/bluetooth-filter-widget.c:79
+msgid "Trusted"
+msgstr "Betroet"
+
+#: ../lib/bluetooth-filter-widget.c:81
+msgid "Not paired or trusted"
+msgstr "Hverken parvis eller betroet"
+
+#: ../lib/bluetooth-filter-widget.c:83
+msgid "Paired or trusted"
+msgstr "Parvis eller betroet"
+
+#: ../lib/bluetooth-filter-widget.c:238
+msgid "<b>Show Only Bluetooth Devices With...</b>"
+msgstr "<b>Vis kun Bluetooth-enheder med...</b>"
 
 #. The device category filter
-#: ../lib/bluetooth-chooser.c:856
+#: ../lib/bluetooth-filter-widget.c:254
 msgid "Device _category:"
 msgstr "Enheds_kategori:"
 
-#: ../lib/bluetooth-chooser.c:871
-msgid "Select the device category to filter above list"
-msgstr "Vælg den enhedskategori, som ovenstående skal filtreres efter"
+#: ../lib/bluetooth-filter-widget.c:269
+msgid "Select the device category to filter"
+msgstr "Vælg den enhedskategori, der skal filtreres"
 
 #. The device type filter
-#: ../lib/bluetooth-chooser.c:885
+#: ../lib/bluetooth-filter-widget.c:283
 msgid "Device _type:"
 msgstr "Enheds_type:"
 
-#: ../lib/bluetooth-chooser.c:906
-msgid "Select the device type to filter above list"
-msgstr "Vælg den enhedstype, som ovenstående liste skal filtreres efter"
+#: ../lib/bluetooth-filter-widget.c:304
+msgid "Select the device type to filter"
+msgstr "Vælg den enhedstype, der skal filtreres"
 
-#: ../lib/bluetooth-chooser.c:912
-msgid "Input devices (mice, keyboards, ...)"
-msgstr "Inputenhed (mus, tastatur, ...)"
+#: ../lib/bluetooth-filter-widget.c:310
+msgid "Input devices (mice, keyboards, etc.)"
+msgstr "Inputenheder (mus, tastaturer, osv.)"
 
-#: ../lib/bluetooth-chooser.c:916
+#: ../lib/bluetooth-filter-widget.c:314
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hovedtelefoner, headset og andre lydenheder"
 
@@ -166,88 +181,92 @@ msgstr "Brug denne GPS-enhed til geolokationstjenester"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Gå på internettet ved hjælp af din mobiltelefon (test)"
 
-#: ../applet/main.c:112
+#: ../applet/main.c:140
 msgid "Select Device to Browse"
 msgstr "Vælg enhed at gennemse"
 
-#: ../applet/main.c:116
+#: ../applet/main.c:144
 msgid "_Browse"
 msgstr "_Gennemse"
 
-#: ../applet/main.c:124
+#: ../applet/main.c:153
 msgid "Select device to browse"
 msgstr "Vælg enhed at gennemse"
 
-#: ../applet/main.c:278 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:332 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Aktivér Bluetooth"
 
-#: ../applet/main.c:279
+#: ../applet/main.c:333
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Slukket"
 
-#: ../applet/main.c:282
+#: ../applet/main.c:336
 msgid "Turn Off Bluetooth"
 msgstr "Deaktivér Bluetooth"
 
-#: ../applet/main.c:283
+#: ../applet/main.c:337
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Tændt"
 
-#: ../applet/main.c:288 ../applet/notify.c:148
+#: ../applet/main.c:342 ../applet/notify.c:150
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Slået fra"
 
-#: ../applet/main.c:410
+#: ../applet/main.c:493
 msgid "Disconnecting..."
 msgstr "Kobler af..."
 
-#: ../applet/main.c:413 ../sendto/main.c:213
+#: ../applet/main.c:496 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Kobler på..."
 
-#: ../applet/main.c:416 ../applet/main.c:756
+#: ../applet/main.c:499 ../applet/main.c:840
 msgid "Connected"
 msgstr "Opkoblet"
 
-#: ../applet/main.c:419 ../applet/main.c:756
+#: ../applet/main.c:502 ../applet/main.c:840
 msgid "Disconnected"
 msgstr "Afkoblet"
 
-#: ../applet/main.c:774 ../applet/main.c:828 ../properties/adapter.c:446
+#: ../applet/main.c:858 ../applet/main.c:922 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "Kobl af"
 
-#: ../applet/main.c:774 ../applet/main.c:828
+#: ../applet/main.c:858 ../applet/main.c:922
 msgid "Connect"
 msgstr "Kobl på"
 
-#: ../applet/main.c:787
+#: ../applet/main.c:871
 msgid "Send files..."
 msgstr "Send filer..."
 
-#: ../applet/main.c:797
+#: ../applet/main.c:881
 msgid "Browse files..."
 msgstr "Gennemse filer..."
 
-#: ../applet/main.c:808
+#: ../applet/main.c:892
 msgid "Open Keyboard Preferences..."
 msgstr "Åbn tastaturindstillinger..."
 
-#: ../applet/main.c:816
+#: ../applet/main.c:900
 msgid "Open Mouse Preferences..."
 msgstr "Åbn museindstillinger..."
 
-#: ../applet/main.c:942
+#: ../applet/main.c:910
+msgid "Open Sound Preferences..."
+msgstr "Åbn lydindstillinger..."
+
+#: ../applet/main.c:1037
 msgid "Debug"
 msgstr "Fejlsøg"
 
 #. Parse command-line options
-#: ../applet/main.c:962
+#: ../applet/main.c:1057
 msgid "- Bluetooth applet"
 msgstr "- Bluetooth-panelprogram"
 
-#: ../applet/main.c:967
+#: ../applet/main.c:1062
 #, c-format
 msgid ""
 "%s\n"
@@ -257,11 +276,20 @@ msgstr ""
 "Kør '%s --help' for at få en komplet liste over tilgængelige "
 "kommandolinjetilvalg.\n"
 
-#: ../applet/main.c:983
+#: ../applet/main.c:1079
 msgid "Bluetooth Applet"
 msgstr "Bluetooth-panelprogram"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:1455
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../applet/notify.c:150
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: Slået til"
 
@@ -343,7 +371,8 @@ msgstr "Bluetooth: Tjekker"
 msgid "Browse files on device..."
 msgstr "Gennemse filer på enhed..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:405
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
+#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
 msgid "Devices"
 msgstr "Enheder"
 
@@ -362,6 +391,10 @@ msgstr "Send filer til enhed..."
 #: ../applet/popup-menu.ui.h:7
 msgid "Set up new device..."
 msgstr "Opsætning af ny enhed..."
+
+#: ../applet/popup-menu.ui.h:8
+msgid "Visible"
+msgstr "Synlig"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
@@ -387,86 +420,66 @@ msgstr "_Matcher"
 msgid "_Show input"
 msgstr "_Vis indtastning"
 
-#: ../properties/main.c:131
-msgid "A Bluetooth manager for the GNOME desktop"
-msgstr "Bluetooth-håndtering for GNOME-skrivebordsmiljøet"
+#: ../properties/main.c:91
+msgid "Cannot start \"Personal File Sharing\" Preferences"
+msgstr "Kan ikke starte indstillinger for \"Personlig Fildeling\""
 
-#: ../properties/main.c:134
-msgid "translator-credits"
+#: ../properties/main.c:96
+msgid ""
+"Please verify that the \"Personal File Sharing\" program is correctly "
+"installed."
 msgstr ""
-"Andreas Dalsgaard\n"
-"Hans-Jørgen Martinus Hansen\n"
-"Mads Lundby\n"
-"Marcel Holtmann\n"
-"Kenneth Nielsen\n"
-"\n"
-"Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
-"Mere info: http://www.dansk-gruppen.dk"
+"Kontrollér venligst at programmet \"Personlig Fildeling\" (Personal File "
+"Sharing) er korrekt installeret."
 
-#: ../properties/main.c:136
-msgid "GNOME Bluetooth home page"
-msgstr "Hjemmeside for GNOME Bluetooth"
-
-#: ../properties/main.c:161
+#: ../properties/main.c:125
 msgid "Bluetooth Preferences"
 msgstr "Bluetooth-indstillinger"
 
-#: ../properties/main.c:176
+#: ../properties/main.c:140
 msgid "_Show Bluetooth icon"
 msgstr "_Vis Bluetooth-ikon"
 
-#: ../properties/main.c:332
+#: ../properties/main.c:164
+msgid "Receive Files"
+msgstr "Modtag filer"
+
+#: ../properties/main.c:212
 msgid "Output a list of currently known devices"
 msgstr "Vis en liste over kendte enheder"
 
-#: ../properties/main.c:369
+#: ../properties/main.c:250
 msgid "Bluetooth Properties"
 msgstr "Egenskaber for Bluetooth"
 
-#: ../properties/adapter.c:179
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Fjern \"%s\" fra listen over enheder?"
-
-#: ../properties/adapter.c:181
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Hvis du fjerner enheden, skal du sætte den op igen, før den kan bruges næste "
-"gang."
-
 #. The discoverable checkbox
-#: ../properties/adapter.c:352
-msgid "Make computer _discoverable"
-msgstr "Gør computeren _synlig for andre"
+#: ../properties/adapter.c:277
+msgid "Make computer _visible"
+msgstr "Gør computeren _synlig"
 
-#: ../properties/adapter.c:375
+#: ../properties/adapter.c:300
 msgid "Friendly name"
 msgstr "Venskabeligt navn"
 
-#: ../properties/adapter.c:437
+#: ../properties/adapter.c:362
 msgid "Set up _new device..."
 msgstr "Opsætning af _ny enhed..."
 
-#: ../properties/adapter.c:460
+#: ../properties/adapter.c:385
 msgid "_Remove"
 msgstr "_Fjern"
 
-#: ../properties/adapter.c:735
+#: ../properties/adapter.c:661
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth er slået fra"
 
-#: ../properties/adapter.c:771
+#: ../properties/adapter.c:697
 msgid "No Bluetooth adapters present"
 msgstr "Ingen tilgængelige Bluetooth-adaptere"
 
 #: ../properties/properties-no-adapter.ui.h:1
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Der er ikke sluttet nogen Bluetooth-adapter til din computer."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-msgid "Bluetooth"
-msgstr "Bluetooth"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -480,12 +493,12 @@ msgstr "Om statusikonet skal vises"
 msgid "Whether to show the notification icon."
 msgstr "Om statusikonet skal vises."
 
-#: ../properties/gconf-bridge.c:1223
+#: ../properties/gconf-bridge.c:1233
 #, c-format
 msgid "GConf error: %s"
 msgstr "GConf-fejl: %s"
 
-#: ../properties/gconf-bridge.c:1228
+#: ../properties/gconf-bridge.c:1238
 msgid "All further errors shown only on terminal."
 msgstr "Alle efterfølgende fejl vil kun blive vist i terminalen."
 
@@ -493,17 +506,17 @@ msgstr "Alle efterfølgende fejl vil kun blive vist i terminalen."
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:206 ../wizard/main.c:327
+#: ../wizard/main.c:205 ../wizard/main.c:326
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Pardannelse med \"%s\" afbrudt"
 
-#: ../wizard/main.c:246
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Bekræft venligst at PIN-koden vist på \"%s\" matcher denne her."
 
-#: ../wizard/main.c:300
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
 msgid "Please enter the following PIN:"
 msgstr "Indtast venligst følgende PIN-kode:"
 
@@ -511,7 +524,7 @@ msgstr "Indtast venligst følgende PIN-kode:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:383
+#: ../wizard/main.c:382
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Opsætning af \"%s\" mislykkedes"
@@ -520,19 +533,19 @@ msgstr "Opsætning af \"%s\" mislykkedes"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset' now...
 #.
-#: ../wizard/main.c:514
+#: ../wizard/main.c:513
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Tilslutter til \"%s\"..."
 
-#: ../wizard/main.c:550
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Indtast venligst følgende PIN-kode på \"%s\" og tryk “Enter” på tastaturet:"
 
-#: ../wizard/main.c:552
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Indtast venligst følgende PIN-kode på \"%s\":"
@@ -541,12 +554,12 @@ msgstr "Indtast venligst følgende PIN-kode på \"%s\":"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:573
+#: ../wizard/main.c:572
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Vent venligst mens opsætningen af enheden \"%s\" færdiggøres..."
 
-#: ../wizard/main.c:586
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Opsætning af den nye enhed \"%s\" er fuldført"
@@ -568,8 +581,8 @@ msgid "Bluetooth New Device Setup"
 msgstr "Opsætning af ny Bluetooth-enhed"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Custom PIN code:"
-msgstr "Tilpasset PIN-kode:"
+msgid "Custom PIN:"
+msgstr "Tilpasset PIN:"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Device Setup"
@@ -584,7 +597,7 @@ msgid "Device search"
 msgstr "Søgning efter enhed"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
 msgid "Does not match"
 msgstr "Matcher ikke"
 
@@ -602,7 +615,7 @@ msgid "Introduction"
 msgstr "Introduktion"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
 msgid "Matches"
 msgstr "Matcher"
 
@@ -614,7 +627,7 @@ msgstr "Indstillinger for PIN-kode"
 msgid "PIN _options..."
 msgstr "_Indstillinger for PIN-kode..."
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vælg yderligere tjenester du ønsker at bruge på din enhed:"
 
@@ -636,13 +649,13 @@ msgstr ""
 
 #: ../wizard/wizard.ui.h:23
 msgid ""
-"The device will need to be within 10 meters of your computer, and be “"
-"discoverable” (sometimes called “visible”). Check the "
-"device's manual if in doubt."
+"The device will need to be within 10 meters of your computer, and be "
+"“visible” (sometimes called “discoverable”). Check the device's manual if in "
+"doubt."
 msgstr ""
-"Enheden skal være indenfor 10 meter afstand af din computer og skal være "
-"“synlig” (eng. discovereable eller visible). I tvivlstilfælde "
-"bør enhedens manual konsulteres."
+"Enheden skal være inden for 10 meters afstand af din computer, og skal være "
+"“synlig” (eng. “discoverable” eller “visible”). I tvivlstilfælde bør "
+"enhedens manual konsulteres."
 
 #: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
@@ -656,56 +669,60 @@ msgstr "_Automatisk valg af PIN-kode"
 msgid "_Restart Setup"
 msgstr "_Genstart opsætning"
 
-#: ../sendto/main.c:98
+#: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekund"
 msgstr[1] "%'d sekunder"
 
-#: ../sendto/main.c:103 ../sendto/main.c:116
+#: ../sendto/main.c:167 ../sendto/main.c:180
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minut"
 msgstr[1] "%'d minutter"
 
-#: ../sendto/main.c:114
+#: ../sendto/main.c:178
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d time"
 msgstr[1] "%'d timer"
 
-#: ../sendto/main.c:124
+#: ../sendto/main.c:188
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ca. %'d time"
 msgstr[1] "ca. %'d timer"
 
-#: ../sendto/main.c:150
+#: ../sendto/main.c:249
 msgid "File Transfer"
 msgstr "Filoverførsel"
 
+#: ../sendto/main.c:253
+msgid "_Retry"
+msgstr "_Prøv igen"
+
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:169
+#: ../sendto/main.c:273
 msgid "Sending files via Bluetooth"
 msgstr "Sender filer via Bluetooth"
 
-#: ../sendto/main.c:181
+#: ../sendto/main.c:285
 msgid "From:"
 msgstr "Fra:"
 
-#: ../sendto/main.c:197
+#: ../sendto/main.c:298
 msgid "To:"
 msgstr "Til:"
 
-#: ../sendto/main.c:243
+#: ../sendto/main.c:343 ../sendto/main.c:359
 msgid "An unknown error occurred"
 msgstr "Der opstod en ukendt fejl"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:352
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -713,45 +730,150 @@ msgstr ""
 "Kontrollér at fjernenhed er tændt, og at den accepterer Bluetooth-"
 "forbindelser"
 
-#: ../sendto/main.c:337
+#: ../sendto/main.c:450
 #, c-format
 msgid "Sending %s"
 msgstr "Sender %s"
 
-#: ../sendto/main.c:344 ../sendto/main.c:406
+#: ../sendto/main.c:457 ../sendto/main.c:523
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sender fil %d ud af %d"
 
-#: ../sendto/main.c:402
+#: ../sendto/main.c:519
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:404
+#: ../sendto/main.c:521
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:498
+#: ../sendto/main.c:641
 msgid "Select Device to Send To"
 msgstr "Vælg enhed der skal sendes til"
 
-#: ../sendto/main.c:502
+#: ../sendto/main.c:645
 msgid "Send _To"
 msgstr "Send _til"
 
-#: ../sendto/main.c:543
+#: ../sendto/main.c:687
 msgid "Choose files to send"
 msgstr "Vælg filer til afsendelse"
 
-#: ../sendto/main.c:572
+#: ../sendto/main.c:716
 msgid "Remote device to use"
 msgstr "Fjernenhed som skal anvendes"
 
-#: ../sendto/main.c:574
+#: ../sendto/main.c:718
 msgid "Remote device's name"
 msgstr "Fjernenheds navn"
+
+#: ../sendto/nautilus-sendto-plugin.c:172
+msgid "Programming error, could not find the device in the list"
+msgstr "Programmørfejl, kunne ikke finde enheden i listen"
+
+#: ../sendto/nautilus-sendto-plugin.c:247
+#, c-format
+msgid "Obex Push file transfer unsupported"
+msgstr "Obex Push-filoverførsel understøttes ikke"
+
+#: ../sendto/nautilus-sendto-plugin.c:266
+msgid "Bluetooth (OBEX Push)"
+msgstr "Bluetooth (OBEX Push)"
+
+#: ../moblin/main.c:86
+msgid "Run in standalone mode"
+msgstr "Kør i selvstændig tilstand"
+
+#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
+msgid "Moblin Bluetooth Panel"
+msgstr "Moblins Bluetoothpanel"
+
+#: ../moblin/main.c:95
+msgid "- Moblin Bluetooth Panel"
+msgstr "- Moblins Bluetoothpanel"
+
+#: ../moblin/main.c:122
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#: ../moblin/moblin-panel.c:533
+#, c-format
+msgid "Pairing with %s failed."
+msgstr "Pardannelse med %s mislykkedes."
+
+#: ../moblin/moblin-panel.c:895
+msgid "<u>Pair</u>"
+msgstr "<u>Par</u>"
+
+#: ../moblin/moblin-panel.c:909
+msgid "<u>Connect</u>"
+msgstr "<u>Tilslut</u>"
+
+#: ../moblin/moblin-panel.c:928
+msgid "<u>Browse</u>"
+msgstr "<u>Gennemse</u>"
+
+#: ../moblin/moblin-panel.c:1122
+msgid "Device setup failed"
+msgstr "Enhedsopsætning mislykkedes"
+
+#. Back button
+#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
+#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
+#: ../moblin/moblin-panel.c:1540
+msgid "Back to devices"
+msgstr "Tilbage til enheder"
+
+#: ../moblin/moblin-panel.c:1175
+msgid "Done"
+msgstr "Færdig"
+
+#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
+msgid "Device setup"
+msgstr "Enhedsopsætning"
+
+#: ../moblin/moblin-panel.c:1344
+msgid "Only show:"
+msgstr "Vis kun:"
+
+#. Button for PIN options file
+#: ../moblin/moblin-panel.c:1350
+msgid "PIN options"
+msgstr "PIN-indstillinger"
+
+#. Add new button
+#: ../moblin/moblin-panel.c:1433
+msgid "Add a new device"
+msgstr "Tilføj en ny enhed"
+
+#. Button for Send file
+#: ../moblin/moblin-panel.c:1500
+msgid "Send file from your computer"
+msgstr "Send fil fra din computer"
+
+#: ../moblin/bluetooth-panel.desktop.in.in.h:1
+msgid "Bluetooth Manager Panel"
+msgstr "Bluetooth-håndteringspanel"
+
+#~ msgid "A Bluetooth manager for the GNOME desktop"
+#~ msgstr "Bluetooth-håndtering for GNOME-skrivebordsmiljøet"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Andreas Dalsgaard\n"
+#~ "Hans-Jørgen Martinus Hansen\n"
+#~ "Mads Lundby\n"
+#~ "Marcel Holtmann\n"
+#~ "Kenneth Nielsen\n"
+#~ "\n"
+#~ "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+#~ "Mere info: http://www.dansk-gruppen.dk"
+
+#~ msgid "GNOME Bluetooth home page"
+#~ msgstr "Hjemmeside for GNOME Bluetooth"
 
 #~ msgid "Authentication request"
 #~ msgstr "Forespørgsel om godkendelse"
@@ -791,9 +913,6 @@ msgstr "Fjernenheds navn"
 
 #~ msgid "Receive files from remote devices"
 #~ msgstr "Modtag filer fra fjernenheder"
-
-#~ msgid "Share files from public folder"
-#~ msgstr "Del filer fra en offentlig mappe"
 
 #~ msgid "Notification area"
 #~ msgstr "Statusfelt"
@@ -871,9 +990,6 @@ msgstr "Fjernenheds navn"
 
 #~ msgid "Successfully paired with %s"
 #~ msgstr "Koblet problemfrit med %s"
-
-#~ msgid "Pairing with %s failed"
-#~ msgstr "Kobling med %s mislykkedes"
 
 #~ msgid "Select the type of device you want to setup"
 #~ msgstr "Vælg typen af enhed du vil sætte op"
@@ -958,9 +1074,6 @@ msgstr "Fjernenheds navn"
 
 #~ msgid "Extensions"
 #~ msgstr "Filendelser"
-
-#~ msgid "Save File"
-#~ msgstr "Gem fil"
 
 #~ msgid "Open File"
 #~ msgstr "Åbn fil"
