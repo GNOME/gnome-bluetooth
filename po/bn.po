@@ -5,13 +5,14 @@
 # Runa Bhattacharjee <runab@redhat.com>, 2009.
 # Loba Yeasmeen <loba@ankur.org.bd>, 2009.
 # Sadia Afroz <sadia@ankur.org.bd>, 2010.
+# Israt Jahan <israt@ankur.org.bd>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2009-12-14 16:29+0000\n"
+"POT-Creation-Date: 2010-03-20 08:38+0000\n"
 "PO-Revision-Date: 2010-01-21 16:02+0600\n"
 "Last-Translator: Sadia Afroz <sadia@ankur.org.bd>\n"
 "Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
@@ -31,7 +32,7 @@ msgstr "ফোন"
 
 #: ../lib/bluetooth-client.c:131
 msgid "Modem"
-msgstr "মোডেম"
+msgstr "মডেম"
 
 #: ../lib/bluetooth-client.c:133
 msgid "Computer"
@@ -79,7 +80,12 @@ msgstr "জয়প্যাড"
 msgid "Tablet"
 msgstr "ট্যাবলেট"
 
-#: ../lib/bluetooth-client.c:156 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:156
+#| msgid "Audio device"
+msgid "Video device"
+msgstr "ভিডিও ডিভাইস"
+
+#: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
 #: ../lib/bluetooth-filter-widget.c:85
 msgid "Unknown"
 msgstr "অজানা"
@@ -181,92 +187,92 @@ msgstr "ভৌগলিক অবস্থান সার্ভিসের জ
 msgid "Access the Internet using your cell phone (test)"
 msgstr "আপনার মোবাইল ফোন ব্যবহার করে ইন্টারনেটে প্রবেশ করুন (পরীক্ষামূলক)"
 
-#: ../applet/main.c:115
+#: ../applet/main.c:140
 msgid "Select Device to Browse"
 msgstr "ব্রাউজ করার জন্য একটি ডিভাইস নির্বাচন করুন"
 
-#: ../applet/main.c:119
+#: ../applet/main.c:144
 msgid "_Browse"
-msgstr "_Browse"
+msgstr "ব্রাউজ (_B)"
 
-#: ../applet/main.c:127
+#: ../applet/main.c:153
 msgid "Select device to browse"
 msgstr "ব্রাউজ করার জন্য একটি ডিভাইস নির্বাচন করুন"
 
-#: ../applet/main.c:304 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:332 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "ব্লু-টুথ সক্রিয় করুন"
 
-#: ../applet/main.c:305
+#: ../applet/main.c:333
 msgid "Bluetooth: Off"
 msgstr "ব্লু-টুথ: নিষ্ক্রিয়"
 
-#: ../applet/main.c:308
+#: ../applet/main.c:336
 msgid "Turn Off Bluetooth"
 msgstr "ব্লু-টুথ নিষ্ক্রিয় করুন"
 
-#: ../applet/main.c:309
+#: ../applet/main.c:337
 msgid "Bluetooth: On"
 msgstr "ব্লু-টুথ: সক্রিয়"
 
-#: ../applet/main.c:314 ../applet/notify.c:148
+#: ../applet/main.c:342 ../applet/notify.c:150
 msgid "Bluetooth: Disabled"
 msgstr "ব্লু-টুথ: নিষ্ক্রিয়"
 
-#: ../applet/main.c:460
+#: ../applet/main.c:493
 msgid "Disconnecting..."
 msgstr "বিচ্ছিন্ন করা হচ্ছে..."
 
-#: ../applet/main.c:463 ../sendto/main.c:217 ../sendto/main.c:316
+#: ../applet/main.c:496 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "সংযোজন করা হচ্ছে..."
 
-#: ../applet/main.c:466 ../applet/main.c:807
+#: ../applet/main.c:499 ../applet/main.c:840
 msgid "Connected"
 msgstr "সংযুক্ত"
 
-#: ../applet/main.c:469 ../applet/main.c:807
+#: ../applet/main.c:502 ../applet/main.c:840
 msgid "Disconnected"
 msgstr "বিচ্ছিন্ন"
 
-#: ../applet/main.c:825 ../applet/main.c:889 ../properties/adapter.c:371
+#: ../applet/main.c:858 ../applet/main.c:922 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "বিচ্ছিন্ন করুন"
 
-#: ../applet/main.c:825 ../applet/main.c:889
+#: ../applet/main.c:858 ../applet/main.c:922
 msgid "Connect"
 msgstr "সংযুক্ত করুন"
 
-#: ../applet/main.c:838
+#: ../applet/main.c:871
 msgid "Send files..."
 msgstr "ফাইল প্রেরণ করা হবে..."
 
-#: ../applet/main.c:848
+#: ../applet/main.c:881
 msgid "Browse files..."
 msgstr "ফাইল ব্রাউজ করুন..."
 
-#: ../applet/main.c:859
+#: ../applet/main.c:892
 msgid "Open Keyboard Preferences..."
 msgstr "কীবোর্ড সংক্রান্ত পছন্দসমূহ খুলুন..."
 
-#: ../applet/main.c:867
+#: ../applet/main.c:900
 msgid "Open Mouse Preferences..."
 msgstr "মাউস সংক্রান্ত পছন্দসমূহ খুলুন..."
 
-#: ../applet/main.c:877
+#: ../applet/main.c:910
 msgid "Open Sound Preferences..."
 msgstr "শব্দ সংক্রান্ত পছন্দসমূহ খুলুন..."
 
-#: ../applet/main.c:1004
+#: ../applet/main.c:1037
 msgid "Debug"
 msgstr "ডিবাগ করা হবে"
 
 #. Parse command-line options
-#: ../applet/main.c:1024
+#: ../applet/main.c:1057
 msgid "- Bluetooth applet"
 msgstr "- ব্লু-টুথ অ্যাপ্লেট"
 
-#: ../applet/main.c:1029
+#: ../applet/main.c:1062
 #, c-format
 msgid ""
 "%s\n"
@@ -275,11 +281,20 @@ msgstr ""
 "%s\n"
 "উপস্থিত কমান্ড-লাইন অপশনের সম্পূর্ণ তালিকা দেখার জন্য '%s --help' রান করান।\n"
 
-#: ../applet/main.c:1046
+#: ../applet/main.c:1079
 msgid "Bluetooth Applet"
 msgstr "ব্লু-টুথ অ্যাপ্লেট"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:1455
+msgid "Bluetooth"
+msgstr "ব্লু-টুথ"
+
+#: ../applet/notify.c:150
 msgid "Bluetooth: Enabled"
 msgstr "ব্লু-টুথ: সক্রিয়"
 
@@ -409,41 +424,37 @@ msgstr "মিলে যায় (_M)"
 
 #: ../applet/passkey-dialogue.ui.h:1
 msgid "_Show input"
-msgstr "_Show input"
+msgstr "ইনপুট প্রদর্শন (_S)"
 
-#. translators:
-#. * This is the name of the preferences dialogue for gnome-user-share
-#: ../properties/main.c:87
+#: ../properties/main.c:91
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr "\"ব্যক্তিগত ফাইল শেয়ারকরণ\" এর পছন্দসমূহ আরম্ভ করা যাচ্ছে না"
 
-#. translators:
-#. * This is the name of the preferences dialogue for gnome-user-share
-#: ../properties/main.c:98
+#: ../properties/main.c:96
 msgid ""
 "Please verify that the \"Personal File Sharing\" program is correctly "
 "installed."
 msgstr ""
-"অনুগ্রহ করে যাচাই করুন যে \"ব্যক্তিগত ফাইল শেয়ারকরণ\" এর প্রোগ্রামটি সঠিকভাবে "
-"ইনস্টল করা আছে।"
+"অনুগ্রহ করে যাচাই করুন যে \"ব্যক্তিগত ফাইল শেয়ারকরণ\" এর প্রোগ্রামটি সঠিকভাবে ইনস্টল "
+"করা আছে।"
 
-#: ../properties/main.c:135
+#: ../properties/main.c:125
 msgid "Bluetooth Preferences"
 msgstr "ব্লু-টুথ সংক্রান্ত পছন্দসমূহ"
 
-#: ../properties/main.c:150
+#: ../properties/main.c:140
 msgid "_Show Bluetooth icon"
 msgstr "ব্লু-টুথ আইকন প্রদর্শন করা হবে (_S)"
 
-#: ../properties/main.c:174
+#: ../properties/main.c:164
 msgid "Receive Files"
 msgstr "ফাইল গ্রহণ"
 
-#: ../properties/main.c:222
+#: ../properties/main.c:212
 msgid "Output a list of currently known devices"
 msgstr "বর্তমানে জানা ডিভাইসের তালিকার আউটপুট প্রদান করা হবে"
 
-#: ../properties/main.c:260
+#: ../properties/main.c:250
 msgid "Bluetooth Properties"
 msgstr "ব্ল-টুথের বৈশিষ্ট্যাবলী"
 
@@ -477,15 +488,6 @@ msgstr "কোনো ব্লু-টুথ অ্যাডাপ্টার �
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "আপনার কম্পিউটারের সাথে কোনো ব্লু-টুথ অ্যাডাপ্টার সংযুক্ত করা নেই।"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
-msgid "Bluetooth"
-msgstr "ব্লু-টুথ"
-
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "ব্লু-টুথ সেটিং কনফিগার করুন"
@@ -498,12 +500,12 @@ msgstr "নোটিফিকেশন আইকন প্রদর্শন ক
 msgid "Whether to show the notification icon."
 msgstr "নোটিফিকেশন আইকন প্রদর্শন করা হবে কি না"
 
-#: ../properties/gconf-bridge.c:1223
+#: ../properties/gconf-bridge.c:1233
 #, c-format
 msgid "GConf error: %s"
 msgstr "GConf ত্রুটি: %s"
 
-#: ../properties/gconf-bridge.c:1228
+#: ../properties/gconf-bridge.c:1238
 msgid "All further errors shown only on terminal."
 msgstr "পরবর্তীতে সংঘটিত সকল ত্রুটি টার্মিনালের মাধ্যমে প্রদর্শন করা হবে।"
 
@@ -655,13 +657,13 @@ msgstr ""
 # Translated by sadia
 #: ../wizard/wizard.ui.h:23
 msgid ""
-"The device will need to be within 10 meters of your computer, and be “"
-"visible” (sometimes called “discoverable”). Check the "
-"device's manual if in doubt."
+"The device will need to be within 10 meters of your computer, and be "
+"“visible” (sometimes called “discoverable”). Check the device's manual if in "
+"doubt."
 msgstr ""
-"ডিভাইসটি আপনার কম্পিউটারের ১০ মিটারের মধ্যে থাকতে হবে, এবং “"
-"visible&#x8221; (কিছু ক্ষেত্রে &#x8220;discoverable”) হতে হবে। কোনো রকম "
-"সন্দেহ থাকলে ডিভাইসের ম্যানুয়েল দেখুন।"
+"ডিভাইসটি আপনার কম্পিউটারের ১০ মিটারের মধ্যে থাকতে হবে, এবং “visible&#x8221; "
+"(কিছু ক্ষেত্রে &#x8220;discoverable”) হতে হবে। কোনো রকম সন্দেহ থাকলে ডিভাইসের "
+"ম্যানুয়েল দেখুন।"
 
 #: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
@@ -712,23 +714,23 @@ msgid "_Retry"
 msgstr "পুনঃপ্রচেষ্টা (_R)"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:272
+#: ../sendto/main.c:273
 msgid "Sending files via Bluetooth"
 msgstr "ব্লু-টুথের মাধ্যমে ফাইল পাঠানো হচ্ছে"
 
-#: ../sendto/main.c:284
+#: ../sendto/main.c:285
 msgid "From:"
 msgstr "থেকে:"
 
-#: ../sendto/main.c:300
+#: ../sendto/main.c:298
 msgid "To:"
 msgstr "প্রতি:"
 
-#: ../sendto/main.c:345 ../sendto/main.c:361
+#: ../sendto/main.c:343 ../sendto/main.c:359
 msgid "An unknown error occurred"
 msgstr "অজানা ত্রুটি সংঘটিত হয়েছে"
 
-#: ../sendto/main.c:354
+#: ../sendto/main.c:352
 msgid ""
 "Make sure that remote device is switched on and that it accepts Bluetooth "
 "connections"
@@ -736,43 +738,43 @@ msgstr ""
 "দূরবর্তী ডিভাইসটি সক্রিয় কিনা এবং ডিভাইসটি ব্লু-টুথ দ্বারা সংযুক্ত হচ্ছে কি না তা "
 "নিশ্চিত করুন"
 
-#: ../sendto/main.c:441
+#: ../sendto/main.c:450
 #, c-format
 msgid "Sending %s"
 msgstr "%s পাঠানো হচ্ছে"
 
-#: ../sendto/main.c:448 ../sendto/main.c:514
+#: ../sendto/main.c:457 ../sendto/main.c:523
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%2d এর %1d ফাইল পাঠানো হচ্ছে"
 
-#: ../sendto/main.c:510
+#: ../sendto/main.c:519
 #, c-format
 msgid "%d KB/s"
 msgstr "%d কিলোবাইট/সেকেন্ড"
 
-#: ../sendto/main.c:512
+#: ../sendto/main.c:521
 #, c-format
 msgid "%d B/s"
 msgstr "%d বাইট/সেকেন্ড"
 
-#: ../sendto/main.c:627
+#: ../sendto/main.c:641
 msgid "Select Device to Send To"
 msgstr "প্রেরণ করার জন্য ডিভাইস নির্বাচন করুন"
 
-#: ../sendto/main.c:631
+#: ../sendto/main.c:645
 msgid "Send _To"
 msgstr "প্রেরণ (_T)"
 
-#: ../sendto/main.c:672
+#: ../sendto/main.c:687
 msgid "Choose files to send"
 msgstr "প্রেরণের জন্য ফাইল নির্বাচন করুন"
 
-#: ../sendto/main.c:701
+#: ../sendto/main.c:716
 msgid "Remote device to use"
 msgstr "ব্যবহার করার জন্য দূরবর্তী ডিভাইস"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:718
 msgid "Remote device's name"
 msgstr "দূরবর্তী ডিভাইসের নাম"
 
@@ -793,22 +795,22 @@ msgid "Bluetooth (OBEX Push)"
 msgstr "ব্লু-টুথ (ওবিইএক্স পুশ)"
 
 # Translated by sadia
-#: ../moblin/main.c:88
+#: ../moblin/main.c:86
 msgid "Run in standalone mode"
 msgstr "স্ট্যান্ড অ্যালোন মুডে চালান"
 
 # Translated by sadia
-#: ../moblin/main.c:96 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "মবলিন ব্লু-টুথ প্যানেল"
 
 # Translated by sadia
-#: ../moblin/main.c:97
+#: ../moblin/main.c:95
 msgid "- Moblin Bluetooth Panel"
 msgstr "- মবলিন ব্লু-টুথ প্যানেল"
 
 # Translated by sadia
-#: ../moblin/main.c:124
+#: ../moblin/main.c:122
 msgid "bluetooth"
 msgstr "ব্লু-টুথ "
 
