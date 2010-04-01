@@ -5,4 +5,6 @@ libmoblin_la_LIBADD = $(MOBLIN_LIBS)
 libmoblin_la_SOURCES = koto-cell-renderer-pixbuf.c \
 		       koto-cell-renderer-pixbuf.h \
 		       mux-cell-renderer-text.c \
-		       mux-cell-renderer-text.h
+		       mux-cell-renderer-text.h \
+		       mux-banner.c \
+		       mux-banner.h
