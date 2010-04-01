@@ -48,6 +48,7 @@
 #include "pin.h"
 
 #include "mux-cell-renderer-text.h"
+#include "mux-banner.h"
 #include "koto-cell-renderer-pixbuf.h"
 
 #include "moblin-panel.h"
@@ -1470,7 +1471,7 @@ create_devices_page (MoblinPanel *self)
 {
 	MoblinPanelPrivate *priv;
 	GtkWidget *page;
-	GtkWidget *frame_title;
+	GtkWidget *banner;
 	GtkWidget *vbox, *hbox;
 	GtkWidget *frame;
 	GtkWidget *power_label;
@@ -1480,17 +1481,21 @@ create_devices_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = gtk_hbox_new (FALSE, 0);
+	page = gtk_hbox_new (FALSE, 8);
+	gtk_container_set_border_width (GTK_CONTAINER (page), 8);
 	gtk_widget_show (page);
-	/* Add child widgetry */
-	vbox = gtk_vbox_new (FALSE, 4);
-	gtk_widget_show (vbox);
-	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 4);
 
-	frame = mx_gtk_frame_new ();
-	frame_title = gtk_label_new ("");
-	gtk_frame_set_label_widget (GTK_FRAME (frame), frame_title);
-	set_frame_title (GTK_FRAME (frame), _("Devices"));
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	gtk_widget_show (frame);
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (vbox);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_box_pack_start (GTK_BOX (page), frame, TRUE, TRUE, 4);
+
+	banner = mux_banner_new (_("Devices"));
+	gtk_widget_show (banner);
+	gtk_box_pack_start (GTK_BOX (vbox), banner, FALSE, FALSE, 0);
 
 	/* Device list */
 	priv->display = g_object_new (BLUETOOTH_TYPE_CHOOSER,
@@ -1533,9 +1538,7 @@ create_devices_page (MoblinPanel *self)
 	g_signal_connect (cell, "activated", G_CALLBACK (remove_clicked_cb), self);
 
 	gtk_widget_show (priv->display);
-	gtk_container_add (GTK_CONTAINER (frame), priv->display);
-	gtk_widget_show (frame);
-	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 4);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->display, TRUE, TRUE, 4);
 
 	/* Add new button */
 	priv->add_new_button = gtk_button_new_with_label (_("Add a new device"));
@@ -1545,12 +1548,17 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (vbox), priv->add_new_button, FALSE, FALSE, 4);
 
 	/* Right column */
-	frame = mx_gtk_frame_new ();
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
 	gtk_widget_show (frame);
-	vbox = gtk_vbox_new (FALSE, 4);
+	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 4);
+
+	banner = mux_banner_new (_("Settings"));
+	gtk_widget_show (banner);
+	gtk_box_pack_start (GTK_BOX (vbox), banner, FALSE, FALSE, 0);
 
 	hbox = gtk_hbox_new (FALSE, 4);
 	gtk_widget_show (hbox);
