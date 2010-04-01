@@ -87,7 +87,6 @@ main (int argc, char *argv[])
 	GtkWidget      *window, *content;
 	GtkRequisition	req;
 	gboolean	standalone = FALSE;
-	GtkSettings    *settings;
 	GError	       *error = NULL;
 	GOptionEntry	entries[] = {
 		{ "standalone", 's', 0, G_OPTION_ARG_NONE, &standalone,
@@ -110,11 +109,6 @@ main (int argc, char *argv[])
 	}
 
 	gtk_window_set_default_icon_name ("bluetooth");
-
-	/* Force to correct theme */
-	settings = gtk_settings_get_default ();
-	gtk_settings_set_string_property (settings, "gtk-theme-name",
-					"Moblin-Netbook", NULL);
 
 	if (standalone) {
 		window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
