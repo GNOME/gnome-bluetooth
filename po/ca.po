@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-08 18:48+0100\n"
-"PO-Revision-Date: 2010-03-06 21:08+0100\n"
+"POT-Creation-Date: 2010-04-02 17:30+0200\n"
+"PO-Revision-Date: 2010-04-02 17:31+0200\n"
 "Last-Translator: David Planella <david.planella@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -207,7 +207,7 @@ msgstr "Apaga el Bluetooth"
 msgid "Bluetooth: On"
 msgstr "Bluetooth: engegat"
 
-#: ../applet/main.c:342 ../applet/notify.c:148
+#: ../applet/main.c:342 ../applet/notify.c:150
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: inhabilitat"
 
@@ -278,7 +278,16 @@ msgstr ""
 msgid "Bluetooth Applet"
 msgstr "Miniaplicació del Bluetooth"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/moblin-panel.c:1455
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../applet/notify.c:150
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: habilitat"
 
@@ -471,15 +480,6 @@ msgstr "No hi ha cap adaptador Bluetooth present"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "L'ordinador no té cap adaptador Bluetooth connectat."
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "Configura els paràmetres del Bluetooth"
@@ -607,7 +607,7 @@ msgstr "Finalització de la configuració del dispositiu nou"
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
-msgstr "PIN fixe"
+msgstr "PIN fix"
 
 #: ../wizard/wizard.ui.h:14
 msgid "Introduction"
