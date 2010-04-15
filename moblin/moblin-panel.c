@@ -219,7 +219,8 @@ update_visible (gpointer data)
 		gtk_widget_show (priv->visible_label);
 
 		time = totem_time_to_string_text (priv->visible_countdown * 1000);
-		label = g_strdup_printf (_("Your computer is visible on Bluetooth for %s."), time);
+		label = g_strdup_printf (_("Your computer is visible on\n"
+					   "Bluetooth for %s."), time);
 		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
 		g_free (label);
 		g_free (time);
@@ -1572,7 +1573,9 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (hbox), priv->power_switch, FALSE, FALSE, 4);
 
 	priv->visible_label = gtk_label_new (NULL);
+	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 0.0, 0.5);
 	gtk_label_set_line_wrap (GTK_LABEL (priv->visible_label), TRUE);
+	gtk_label_set_width_chars (GTK_LABEL (priv->visible_label), 30);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->visible_label, FALSE, FALSE, 4);
 
 	priv->visible_button = gtk_button_new_with_label (_("Make visible on Bluetooth"));
