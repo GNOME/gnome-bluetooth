@@ -1540,13 +1540,6 @@ create_devices_page (MoblinPanel *self)
 	gtk_widget_show (priv->display);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->display, TRUE, TRUE, 4);
 
-	/* Add new button */
-	priv->add_new_button = gtk_button_new_with_label (_("Add a new device"));
-	gtk_widget_show (priv->add_new_button);
-	g_signal_connect (priv->add_new_button, "clicked",
-			G_CALLBACK (set_scanning_view), self);
-	gtk_box_pack_start (GTK_BOX (vbox), priv->add_new_button, FALSE, FALSE, 4);
-
 	/* Right column */
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
@@ -1599,6 +1592,13 @@ create_devices_page (MoblinPanel *self)
 	g_signal_connect (priv->display, "selected-device-changed",
 			G_CALLBACK (selected_device_changed_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox), priv->send_button, FALSE, FALSE, 4);
+
+	/* Add new button */
+	priv->add_new_button = gtk_button_new_with_label (_("Add a new device"));
+	gtk_widget_show (priv->add_new_button);
+	g_signal_connect (priv->add_new_button, "clicked",
+			G_CALLBACK (set_scanning_view), self);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->add_new_button, FALSE, FALSE, 4);
 
         powerswitch_state_changed_cb (priv->powerswitch,
                                       bluetooth_powerswitch_get_state (priv->powerswitch),
