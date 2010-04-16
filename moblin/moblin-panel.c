@@ -1383,8 +1383,10 @@ create_add_page (MoblinPanel *self)
 	GtkWidget *page;
 	GtkWidget *vbox, *hbox;
 	GtkWidget *filter;
-	GtkWidget *frame_title;
+	GtkWidget *frame_vbox;
+	GtkWidget *banner;
 	GtkWidget *frame;
+	GtkWidget *alignment;
 	GtkWidget *back_button;
 	GtkWidget *pin_button;
 	GtkWidget *tree_view;
@@ -1393,18 +1395,34 @@ create_add_page (MoblinPanel *self)
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
-	page = gtk_hbox_new (FALSE, 0);
+	page = gtk_hbox_new (FALSE, 8);
+	gtk_container_set_border_width (GTK_CONTAINER (page), 8);
 	gtk_widget_show (page);
 
 	/* Add child widgetry */
 	vbox = gtk_vbox_new (FALSE, 4);
 	gtk_widget_show (vbox);
-	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 4);
+	gtk_box_pack_start (GTK_BOX (page), vbox, TRUE, TRUE, 0);
 
-	frame = mx_gtk_frame_new ();
-	frame_title = gtk_label_new ("");
-	gtk_frame_set_label_widget (GTK_FRAME (frame), frame_title);
-	set_frame_title (GTK_FRAME (frame), _("Devices"));
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	gtk_widget_show (frame);
+	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
+
+	frame_vbox = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (frame_vbox);
+	gtk_container_add (GTK_CONTAINER (frame), frame_vbox);
+
+	banner = mux_banner_new (_("Devices"));
+	gtk_widget_show (banner);
+	gtk_box_pack_start (GTK_BOX (frame_vbox), banner, FALSE, FALSE, 0);
+
+	/* BluetoothChooser adds its own alignment on the left, so balance it
+	   out... */
+	alignment = gtk_alignment_new (0.0, 0.0, 1.0, 1.0);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 0, 12);
+	gtk_widget_show (alignment);
+	gtk_box_pack_start (GTK_BOX (frame_vbox), alignment, TRUE, TRUE, 0);
 
 	/* Device list */
 	priv->chooser = g_object_new (BLUETOOTH_TYPE_CHOOSER,
@@ -1425,28 +1443,38 @@ create_add_page (MoblinPanel *self)
 	g_signal_connect (cell, "activated", G_CALLBACK (pair_clicked), self);
 
 	gtk_widget_show (priv->chooser);
-	gtk_container_add (GTK_CONTAINER (frame), priv->chooser);
-	gtk_widget_show (frame);
-	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 4);
+	gtk_container_add (GTK_CONTAINER (alignment), priv->chooser);
 
 	/* Back button */
 	back_button = gtk_button_new_with_label (_("Back to devices"));
 	gtk_widget_show (back_button);
 	g_signal_connect (back_button, "clicked",
 			G_CALLBACK (set_device_view), self);
-	gtk_box_pack_start (GTK_BOX (vbox), back_button, FALSE, FALSE, 4);
+	gtk_box_pack_start (GTK_BOX (vbox), back_button, FALSE, FALSE, 0);
 
 	/* Right column */
-	frame = mx_gtk_frame_new ();
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
 	gtk_widget_show (frame);
-	vbox = gtk_vbox_new (FALSE, 4);
+	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 0);
+
+	frame_vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_vbox), 0);
+	gtk_widget_show (frame_vbox);
+	gtk_container_add (GTK_CONTAINER (frame), frame_vbox);
+
+	banner = mux_banner_new (_("Settings"));
+	gtk_widget_show (banner);
+	gtk_box_pack_start (GTK_BOX (frame_vbox), banner, FALSE, FALSE, 0);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 	gtk_widget_show (vbox);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 4);
+	gtk_container_add (GTK_CONTAINER (frame_vbox), vbox);
 
 	hbox = gtk_hbox_new (FALSE, 4);
 	gtk_widget_show (hbox);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 4);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 	/* Filter combo */
 	filter = bluetooth_filter_widget_new ();
@@ -1454,14 +1482,13 @@ create_add_page (MoblinPanel *self)
 	bluetooth_filter_widget_set_title (BLUETOOTH_FILTER_WIDGET (filter), _("Only show:"));
 	bluetooth_filter_widget_bind_filter (BLUETOOTH_FILTER_WIDGET (filter),
 					     BLUETOOTH_CHOOSER (priv->chooser));
-	gtk_box_pack_start (GTK_BOX (vbox), filter, FALSE, FALSE, 4);
+	gtk_box_pack_start (GTK_BOX (vbox), filter, FALSE, FALSE, 0);
 
 	/* Button for PIN options file */
 	pin_button = gtk_button_new_with_label (_("PIN options"));
 	gtk_widget_show (pin_button);
-	g_signal_connect (pin_button, "clicked",
-                    G_CALLBACK (pin_options_button_clicked_cb), self);
-	gtk_box_pack_start (GTK_BOX (vbox), pin_button, FALSE, FALSE, 4);
+	g_signal_connect (pin_button, "clicked", G_CALLBACK (pin_options_button_clicked_cb), self);
+	gtk_box_pack_start (GTK_BOX (vbox), pin_button, FALSE, FALSE, 0);
 
 	return page;
 }
