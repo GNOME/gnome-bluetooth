@@ -1505,12 +1505,15 @@ create_devices_page (MoblinPanel *self)
 	GtkTreeViewColumn *type_column;
 	GtkCellRenderer *cell;
 	GtkWidget *tree_view;
+	GtkSizeGroup *size;
 
 	priv = MOBLIN_PANEL_GET_PRIVATE (self);
 
 	page = gtk_hbox_new (FALSE, 8);
 	gtk_container_set_border_width (GTK_CONTAINER (page), 8);
 	gtk_widget_show (page);
+
+	size = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
@@ -1522,7 +1525,15 @@ create_devices_page (MoblinPanel *self)
 
 	banner = mux_banner_new (_("Devices"));
 	gtk_widget_show (banner);
+	gtk_size_group_add_widget (size, banner);
 	gtk_box_pack_start (GTK_BOX (vbox), banner, FALSE, FALSE, 0);
+
+	/* Add new button */
+	priv->add_new_button = gtk_button_new_with_label (_("Add a new device"));
+	gtk_widget_show (priv->add_new_button);
+	g_signal_connect (priv->add_new_button, "clicked",
+			G_CALLBACK (set_scanning_view), self);
+	gtk_box_pack_end (GTK_BOX (banner), priv->add_new_button, FALSE, FALSE, 0);
 
 	/* BluetoothChooser adds its own alignment on the left, so balance it
 	   out... */
@@ -1584,6 +1595,7 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 0);
 
 	banner = mux_banner_new (_("Settings"));
+	gtk_size_group_add_widget (size, banner);
 	gtk_widget_show (banner);
 	gtk_box_pack_start (GTK_BOX (vbox), banner, FALSE, FALSE, 0);
 
@@ -1631,13 +1643,6 @@ create_devices_page (MoblinPanel *self)
 	g_signal_connect (priv->display, "selected-device-changed",
 			G_CALLBACK (selected_device_changed_cb), self);
 	gtk_box_pack_start (GTK_BOX (vbox2), priv->send_button, FALSE, FALSE, 4);
-
-	/* Add new button */
-	priv->add_new_button = gtk_button_new_with_label (_("Add a new device"));
-	gtk_widget_show (priv->add_new_button);
-	g_signal_connect (priv->add_new_button, "clicked",
-			G_CALLBACK (set_scanning_view), self);
-	gtk_box_pack_start (GTK_BOX (vbox2), priv->add_new_button, FALSE, FALSE, 4);
 
         powerswitch_state_changed_cb (priv->powerswitch,
                                       bluetooth_powerswitch_get_state (priv->powerswitch),
