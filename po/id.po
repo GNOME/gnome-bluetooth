@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2010-04-02 15:31+0000\n"
-"PO-Revision-Date: 2010-04-03 18:51+0700\n"
+"POT-Creation-Date: 2010-04-16 16:49+0000\n"
+"PO-Revision-Date: 2010-04-17 18:31+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +293,8 @@ msgstr "Aplet Bluetooth"
 #. * switches in the Network UI of Moblin
 #: ../applet/notify.c:115
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
+#: ../moblin/main.c:141
+#: ../moblin/moblin-panel.c:1615
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -389,8 +390,8 @@ msgstr "Ramban berkas pada perangkat..."
 
 #: ../applet/popup-menu.ui.h:3
 #: ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1297
-#: ../moblin/moblin-panel.c:1385
+#: ../moblin/moblin-panel.c:1416
+#: ../moblin/moblin-panel.c:1526
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -527,13 +528,13 @@ msgid "Pairing with '%s' cancelled"
 msgstr "Pemasangan dengan '%s' dibatalkan"
 
 #: ../wizard/main.c:245
-#: ../moblin/moblin-panel.c:1049
+#: ../moblin/moblin-panel.c:1159
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Pastikan PIN yang ditayangkan pada '%s' cocok dengan yang ini."
 
 #: ../wizard/main.c:299
-#: ../moblin/moblin-panel.c:1100
+#: ../moblin/moblin-panel.c:1210
 msgid "Please enter the following PIN:"
 msgstr "Silahkan masukkan PIN berikut:"
 
@@ -556,13 +557,13 @@ msgid "Connecting to '%s'..."
 msgstr "Menyambung ke '%s'..."
 
 #: ../wizard/main.c:549
-#: ../moblin/moblin-panel.c:658
+#: ../moblin/moblin-panel.c:768
 #, c-format
 msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Masukkan PIN berikut pada '%s' dan tekan \"Enter\" pada papak ketik:"
 
 #: ../wizard/main.c:551
-#: ../moblin/moblin-panel.c:660
+#: ../moblin/moblin-panel.c:770
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Masukkan PIN berikut pada '%s':"
@@ -577,7 +578,7 @@ msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Mohon tunggu ketika menyelesaikan penyiapan pada perangkat '%s'..."
 
 #: ../wizard/main.c:588
-#: ../moblin/moblin-panel.c:686
+#: ../moblin/moblin-panel.c:796
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Berhasil menyiapkan perangkat baru '%s'"
@@ -616,7 +617,7 @@ msgstr "Pencarian perangkat"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:10
-#: ../moblin/moblin-panel.c:1253
+#: ../moblin/moblin-panel.c:1363
 msgid "Does not match"
 msgstr "Tak cocok"
 
@@ -635,7 +636,7 @@ msgstr "Pengantar"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:16
-#: ../moblin/moblin-panel.c:1249
+#: ../moblin/moblin-panel.c:1359
 msgid "Matches"
 msgstr "Cocok"
 
@@ -648,7 +649,7 @@ msgid "PIN _options..."
 msgstr "_Opsi PIN..."
 
 #: ../wizard/wizard.ui.h:19
-#: ../moblin/moblin-panel.c:1163
+#: ../moblin/moblin-panel.c:1273
 msgid "Select the additional services you want to use with your device:"
 msgstr "Pilih layanan tambahan yang ingin Anda pakai dengan perangkat Anda:"
 
@@ -789,78 +790,139 @@ msgstr "Pengiriman berkas menggunakan Obex Push tak didukung"
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (Push OBEX)"
 
-#: ../moblin/main.c:86
+#: ../moblin/main.c:93
 msgid "Run in standalone mode"
 msgstr "Jalankan pada mode mandiri"
 
-#: ../moblin/main.c:94
+#: ../moblin/main.c:101
 #: ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "Panel Bluetooth Moblin"
 
-#: ../moblin/main.c:95
+#: ../moblin/main.c:102
 msgid "- Moblin Bluetooth Panel"
 msgstr "- Panel Bluetooth Moblin"
 
-#: ../moblin/main.c:122
+#: ../moblin/main.c:129
 msgid "bluetooth"
 msgstr "bluetooth"
 
-#: ../moblin/moblin-panel.c:533
+#: ../moblin/moblin-panel.c:176
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d jam"
+
+#: ../moblin/moblin-panel.c:178
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d menit"
+
+#: ../moblin/moblin-panel.c:181
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d detik"
+
+#. hour:minutes:seconds
+#: ../moblin/moblin-panel.c:187
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../moblin/moblin-panel.c:191
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. minutes
+#. seconds
+#: ../moblin/moblin-panel.c:194
+#: ../moblin/moblin-panel.c:198
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../moblin/moblin-panel.c:201
+msgid "0 seconds"
+msgstr "0 detik"
+
+#: ../moblin/moblin-panel.c:223
+#, c-format
+msgid ""
+"Your computer is visible on\n"
+"Bluetooth for %s."
+msgstr ""
+"Komputer Anda nampak pada\n"
+"Bluetooth bagi %s."
+
+#: ../moblin/moblin-panel.c:643
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "Pemasangan dengan %s gagal."
 
-#: ../moblin/moblin-panel.c:895
+#: ../moblin/moblin-panel.c:1005
 msgid "<u>Pair</u>"
 msgstr "<u>Pasangkan</u>"
 
-#: ../moblin/moblin-panel.c:909
+#: ../moblin/moblin-panel.c:1019
 msgid "<u>Connect</u>"
 msgstr "<u>Sambung</u>"
 
-#: ../moblin/moblin-panel.c:928
+#: ../moblin/moblin-panel.c:1038
 msgid "<u>Browse</u>"
 msgstr "<u>Ramban</u>"
 
-#: ../moblin/moblin-panel.c:1122
+#: ../moblin/moblin-panel.c:1232
 msgid "Device setup failed"
 msgstr "Penyiapan perangkat gagal"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1136
-#: ../moblin/moblin-panel.c:1212
-#: ../moblin/moblin-panel.c:1261
-#: ../moblin/moblin-panel.c:1323
-#: ../moblin/moblin-panel.c:1540
+#: ../moblin/moblin-panel.c:1246
+#: ../moblin/moblin-panel.c:1322
+#: ../moblin/moblin-panel.c:1371
+#: ../moblin/moblin-panel.c:1449
+#: ../moblin/moblin-panel.c:1681
 msgid "Back to devices"
 msgstr "Kembali ke perangkat"
 
-#: ../moblin/moblin-panel.c:1175
+#: ../moblin/moblin-panel.c:1285
 msgid "Done"
 msgstr "Selesai"
 
-#: ../moblin/moblin-panel.c:1196
-#: ../moblin/moblin-panel.c:1233
+#: ../moblin/moblin-panel.c:1306
+#: ../moblin/moblin-panel.c:1343
 msgid "Device setup"
 msgstr "Penyiapan perangkat"
 
-#: ../moblin/moblin-panel.c:1344
+#: ../moblin/moblin-panel.c:1466
+#: ../moblin/moblin-panel.c:1597
+msgid "Settings"
+msgstr "Tatanan"
+
+#: ../moblin/moblin-panel.c:1482
 msgid "Only show:"
 msgstr "Hanya tampilkan:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1488
 msgid "PIN options"
 msgstr "Opsi PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1433
+#: ../moblin/moblin-panel.c:1532
 msgid "Add a new device"
 msgstr "Tambahkan perangkat baru"
 
+#: ../moblin/moblin-panel.c:1633
+msgid "Make visible on Bluetooth"
+msgstr "Jadikan nampak pada Bluetooth"
+
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1500
+#: ../moblin/moblin-panel.c:1639
 msgid "Send file from your computer"
 msgstr "Kirim berkas dari komputer Anda"
 
