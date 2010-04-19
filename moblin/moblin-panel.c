@@ -77,6 +77,7 @@ struct _MoblinPanelPrivate
 	GtkWidget *label_ssp_pin_help;
 	GtkWidget *label_ssp_pin;
 	GtkWidget *summary_frame;
+	GtkWidget *extra_config_label;
 	GtkWidget *extra_config_vbox;
 	GtkWidget *label_failure;
 	GtkWidget *chooser;
@@ -791,7 +792,6 @@ set_current_page (MoblinPanel *self, MoblinPages page)
 		const char **uuids;
 		GList *widgets;
 		char *title;
-		gboolean have_additional_widgets = FALSE;
 
 		title = g_strdup_printf (_("Successfully set up new device '%s'"), priv->target_name);
 		set_frame_title (GTK_FRAME (priv->summary_frame), title);
@@ -814,15 +814,14 @@ set_current_page (MoblinPanel *self, MoblinPages page)
 						    0);
 
 			g_list_free (widgets);
+			gtk_widget_show (priv->extra_config_label);
 			gtk_widget_show_all (priv->extra_config_vbox);
-			have_additional_widgets = TRUE;
+		} else {
+			gtk_widget_hide (priv->extra_config_label);
+			gtk_widget_hide (priv->extra_config_vbox);
 		}
 
 		g_value_unset (&value);
-
-		if (!have_additional_widgets)
-			/* Show the devices page if we don't have any extra information to present. */
-			page = PAGE_DEVICES;
 	}
 
 	if (page == PAGE_DEVICES) {
@@ -1270,10 +1269,10 @@ create_summary_page (MoblinPanel *self)
 	vbox = gtk_vbox_new (FALSE, 12);
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (page), vbox);
-	w = gtk_label_new (_("Select the additional services you want to use with your device:"));
-	gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
-	gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 6);
-	gtk_widget_show (w);
+	priv->extra_config_label = gtk_label_new (_("Select the additional services you want to use with your device:"));
+	gtk_misc_set_alignment (GTK_MISC (priv->extra_config_label), 0.0, 0.5);
+	gtk_widget_show (priv->extra_config_label);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->extra_config_label, FALSE, FALSE, 6);
 
 	priv->extra_config_vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (priv->extra_config_vbox);
