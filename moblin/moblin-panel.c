@@ -434,42 +434,27 @@ static void
 set_user_pincode (GtkWidget *button, gpointer user_data)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
-	GSList *list, *l;
+	GtkEntry *entry;
+	const char *pin;
 
-	list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (button));
-	for (l = list; l ; l = l->next) {
-		GtkEntry *entry;
-		GtkWidget *radio;
-		const char *pin;
+	if (! gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+		return;
 
-		if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
-			continue;
+	pin = g_object_get_data (G_OBJECT (button), "pin");
+	entry = g_object_get_data (G_OBJECT (button), "entry");
 
-		/* Is it radio_fixed that changed? */
-		radio = g_object_get_data (G_OBJECT (button), "button");
-		if (radio != NULL) {
-			set_user_pincode (radio, user_data);
-			return;
-		}
-
-		pin = g_object_get_data (G_OBJECT (button), "pin");
-		entry = g_object_get_data (G_OBJECT (button), "entry");
-
-		if (entry != NULL) {
-			g_free (priv->user_pincode);
-			priv->user_pincode = g_strdup (gtk_entry_get_text(entry));
-			gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->pin_dialog),
-							   GTK_RESPONSE_ACCEPT,
-							   gtk_entry_get_text_length (entry) >= 1);
-		} else if (pin != NULL) {
-			g_free (priv->user_pincode);
-			if (*pin == '\0')
-				priv->user_pincode = NULL;
-			else
-				priv->user_pincode = g_strdup (pin);
-		}
-
-		break;
+	if (entry != NULL) {
+		g_free (priv->user_pincode);
+		priv->user_pincode = g_strdup (gtk_entry_get_text(entry));
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (priv->pin_dialog),
+						   GTK_RESPONSE_ACCEPT,
+						   gtk_entry_get_text_length (entry) >= 1);
+	} else if (pin != NULL) {
+		g_free (priv->user_pincode);
+		if (*pin == '\0')
+			priv->user_pincode = NULL;
+		else
+			priv->user_pincode = g_strdup (pin);
 	}
 }
 
@@ -515,31 +500,27 @@ pin_options_button_clicked_cb (GtkButton *button,
 		g_object_set_data (G_OBJECT (priv->radio_1111), "pin", "1111");
 		g_object_set_data (G_OBJECT (priv->radio_1234), "pin", "1234");
 		g_object_set_data (G_OBJECT (priv->radio_custom), "entry", priv->entry_custom);
-
-		gtk_dialog_add_button (GTK_DIALOG (priv->pin_dialog), GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
 	}
 
-	oldpin = priv->user_pincode;
-	priv->user_pincode = NULL;
+	oldpin = g_strdup (priv->user_pincode);
 
 	gtk_window_present (GTK_WINDOW (priv->pin_dialog));
 
-	if (oldpin == NULL)
+	if (priv->user_pincode == NULL) {
 		radio = priv->radio_auto;
-	else if (g_str_equal (oldpin, "0000"))
+	} else if (g_str_equal (priv->user_pincode, "0000")) {
 		radio = priv->radio_0000;
-	else if (g_str_equal (oldpin, "1111"))
+	} else if (g_str_equal (priv->user_pincode, "1111")) {
 		radio = priv->radio_1111;
-	else if (g_str_equal (oldpin, "1234"))
+	} else if (g_str_equal (priv->user_pincode, "1234")) {
 		radio = priv->radio_1234;
-	else
+	} else {
 		radio = priv->radio_custom;
-
+		gtk_entry_set_text (GTK_ENTRY (priv->entry_custom), priv->user_pincode);
+	}
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-	if (radio == priv->radio_custom)
-		gtk_entry_set_text (GTK_ENTRY (priv->entry_custom), oldpin);
 
-	if (gtk_dialog_run (GTK_DIALOG (priv->pin_dialog)) != GTK_RESPONSE_ACCEPT) {
+	if (gtk_dialog_run (GTK_DIALOG (priv->pin_dialog)) != GTK_RESPONSE_OK) {
 		g_free (priv->user_pincode);
 		priv->user_pincode = oldpin;
 	} else {

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="pin_dialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">PIN Options</property>
@@ -119,8 +120,8 @@
                     <property name="can_focus">True</property>
                     <property name="max_length">20</property>
                     <property name="width_chars">20</property>
-                    <signal name="key-press-event" handler="entry_custom_event"/>
                     <signal name="changed" handler="entry_custom_changed"/>
+                    <signal name="key_press_event" handler="entry_custom_event"/>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -144,11 +145,22 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <placeholder/>
+              <object class="GtkButton" id="button2">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
               <object class="GtkButton" id="button1">
-                <property name="label">gtk-close</property>
+                <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -170,7 +182,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-3">button1</action-widget>
+      <action-widget response="-6">button2</action-widget>
+      <action-widget response="-5">button1</action-widget>
     </action-widgets>
   </object>
 </interface>
