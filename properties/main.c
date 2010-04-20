@@ -35,12 +35,11 @@
 #include "bluetooth-plugin-manager.h"
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
-#include "gconf-bridge.h"
 #include "general.h"
 #include "adapter.h"
 
-#define PREF_DIR		"/apps/bluetooth-manager"
-#define PREF_SHOW_ICON		PREF_DIR "/show_icon"
+#define SCHEMA_NAME		"org.gnome.Bluetooth"
+#define PREF_SHOW_ICON		"show-icon"
 
 static gboolean delete_callback(GtkWidget *window, GdkEvent *event,
 							gpointer user_data)
@@ -110,7 +109,7 @@ static void help_callback(GtkWidget *item)
 		g_printerr("Unable to launch help: %s", error->message);
 		g_error_free(error);
 	}
-}	
+}
 
 static GtkWidget *create_window(GtkWidget *notebook)
 {
@@ -119,7 +118,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	GtkWidget *buttonbox;
 	GtkWidget *button;
 	GtkWidget *image;
-	GConfBridge *bridge;
+	GSettings *settings;
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), _("Bluetooth Preferences"));
@@ -138,10 +137,10 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
 
 	button = gtk_check_button_new_with_mnemonic (_("_Show Bluetooth icon"));
-	bridge = gconf_bridge_get ();
 	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-	gconf_bridge_bind_property_full (bridge, PREF_SHOW_ICON, G_OBJECT (button),
-					 "active", FALSE);
+	settings = g_settings_new (SCHEMA_NAME);
+	g_settings_bind (settings, PREF_SHOW_ICON, G_OBJECT (button), "active",
+			 G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
 
 	buttonbox = gtk_hbutton_box_new();
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox), GTK_BUTTONBOX_END);
@@ -219,6 +218,8 @@ int main(int argc, char *argv[])
 	GtkWidget *window;
 	GtkWidget *notebook;
 	GError *error = NULL;
+
+	g_setenv ("GSETTINGS_BACKEND", "gconf", FALSE);
 
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");

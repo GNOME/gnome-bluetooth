@@ -47,8 +47,6 @@ AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
 
 AC_PATH_PROG([XMLLINT],[xmllint])
-AC_PATH_PROG(GCONFTOOL, [gconftool-2])
-AM_GCONF_SOURCE_2
 
 dnl gtk-doc checks
 GTK_DOC_CHECK(1.9)
@@ -69,23 +67,32 @@ if (test "$enable_icon_update" != no); then
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
+AC_SUBST(gsettingsschemadir, `pkg-config --variable gsettingsschemadir gio-2.0`)
+AC_SUBST(gsettingsupdateschemacache, `pkg-config --variable gsettingsupdateschemacache gio-2.0`)
+
 GTK_REQUIRED=2.19.1
+GLIB_REQUIRED=2.25.1
 DBUS_GLIB_REQUIRED=0.74
 NOTIFY_REQUIRED=0.4.3
 NAUTILUS_SENDTO_REQUIRED=2.28.0.1
+GCONF_REQUIRED=2.31.1
+
+dnl Requires for the GConf GSettings backend
+PKG_CHECK_MODULES(GCONF,
+		  gconf-2.0 >= $GCONF_REQUIRED)
 
 dnl Requires for the properties window
 PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  gconf-2.0
+		  glib-2.0 >= $GLIB_REQUIRED
 		  gtk+-2.0
 		  unique-1.0)
 
 dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  gconf-2.0
 		  gmodule-export-2.0
+		  glib-2.0 >= $GLIB_REQUIRED
 		  gtk+-2.0 >= $GTK_REQUIRED
 		  libnotify >= $NOTIFY_REQUIRED
 		  unique-1.0)
