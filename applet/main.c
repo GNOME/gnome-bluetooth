@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include <gconf/gconf-client.h>
 #include <unique/uniqueapp.h>
 
 #include <bluetooth-client.h>
@@ -48,8 +47,8 @@ static guint num_adapters_powered = 0;
 static gboolean show_icon_pref = TRUE;
 static gboolean discover_lock = FALSE;
 
-#define PREF_DIR		"/apps/bluetooth-manager"
-#define PREF_SHOW_ICON		PREF_DIR "/show_icon"
+#define SCHEMA_NAME		"org.gnome.Bluetooth"
+#define PREF_SHOW_ICON		"show-icon"
 
 #define KEYBOARD_PREFS		"gnome-keyboard-properties"
 #define MOUSE_PREFS		"gnome-mouse-properties"
@@ -63,7 +62,7 @@ enum {
 	DISCONNECTING
 };
 
-static GConfClient* gconf;
+static GSettings *settings;
 static BluetoothKillswitch *killswitch = NULL;
 
 static GtkBuilder *xml = NULL;
@@ -1017,20 +1016,13 @@ static void device_removed(GtkTreeModel *model,
 	device_changed (model, path, NULL, user_data);
 }
 
-static void gconf_callback(GConfClient *client, guint cnxn_id,
-					GConfEntry *entry, gpointer user_data)
+static void
+show_icon_changed (GSettings *settings,
+		   const char *key,
+		   gpointer   user_data)
 {
-	GConfValue *value;
-
-	value = gconf_entry_get_value(entry);
-	if (value == NULL)
-		return;
-
-	if (g_str_equal(entry->key, PREF_SHOW_ICON) == TRUE) {
-		show_icon_pref = gconf_value_get_bool(value);
-		update_icon_visibility();
-		return;
-	}
+	show_icon_pref = g_settings_get_boolean (settings, PREF_SHOW_ICON);
+	update_icon_visibility();
 }
 
 static GOptionEntry options[] = {
@@ -1043,7 +1035,6 @@ int main(int argc, char *argv[])
 	UniqueApp *app;
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
-	GConfValue *value;
 	GOptionContext *context;
 	GError *error = NULL;
 
@@ -1103,20 +1094,11 @@ int main(int argc, char *argv[])
 					  bluetooth_killswitch_get_state (killswitch));
 	}
 
-	gconf = gconf_client_get_default();
+	settings = g_settings_new (SCHEMA_NAME);
+	show_icon_pref = g_settings_get_boolean (settings, PREF_SHOW_ICON);
 
-	value = gconf_client_get (gconf, PREF_SHOW_ICON, NULL);
-	if (value == NULL) {
-		show_icon_pref = TRUE;
-	} else {
-		show_icon_pref = gconf_value_get_bool (value);
-		gconf_value_free (value);
-	}
-
-	gconf_client_add_dir(gconf, PREF_DIR, GCONF_CLIENT_PRELOAD_NONE, NULL);
-
-	gconf_client_notify_add(gconf, PREF_DIR,
-					gconf_callback, NULL, NULL, NULL);
+	g_signal_connect (G_OBJECT (settings), "changed::" PREF_SHOW_ICON,
+			  G_CALLBACK (show_icon_changed), NULL);
 
 	statusicon = init_notification();
 
@@ -1133,7 +1115,7 @@ int main(int argc, char *argv[])
 
 	gtk_widget_destroy(menu);
 
-	g_object_unref(gconf);
+	g_object_unref(settings);
 
 	cleanup_agents();
 
