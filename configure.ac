@@ -45,6 +45,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 
 AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
+AM_GSETTINGS
 
 AC_PATH_PROG([XMLLINT],[xmllint])
 
@@ -66,9 +67,6 @@ if (test "$enable_icon_update" != no); then
 	AC_PATH_PROG(UPDATE_ICON_CACHE, [gtk-update-icon-cache])
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
-
-AC_SUBST(gsettingsschemadir, `pkg-config --variable gsettingsschemadir gio-2.0`)
-AC_SUBST(gsettingsupdateschemacache, `pkg-config --variable gsettingsupdateschemacache gio-2.0`)
 
 GTK_REQUIRED=2.19.1
 GLIB_REQUIRED=2.25.1
