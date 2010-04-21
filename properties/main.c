@@ -140,7 +140,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
 	settings = g_settings_new (SCHEMA_NAME);
 	g_settings_bind (settings, PREF_SHOW_ICON, G_OBJECT (button), "active",
-			 G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
+			 G_SETTINGS_BIND_DEFAULT);
 
 	buttonbox = gtk_hbutton_box_new();
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox), GTK_BUTTONBOX_END);
