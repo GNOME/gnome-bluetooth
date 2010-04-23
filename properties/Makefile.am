@@ -20,7 +20,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 ui_DATA = properties-no-adapter.ui properties-adapter-off.ui
 uidir = $(pkgdatadir)
 
-convertdir=$(datadir)/gsettings-data-convert/
+convertdir=$(datadir)/GConf/gsettings
 convert_DATA=gnome-bluetooth
 
 gsettingsschema_in_files = org.gnome.Bluetooth.gschema.xml.in
