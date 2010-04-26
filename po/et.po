@@ -5,7 +5,7 @@
 # This file is distributed under the same license as the gnome-bluetooth
 # package.
 #
-# Mattias Põldaru <mahfiaz gmail com>, 2008, 2009.
+# Mattias Põldaru <mahfiaz gmail com>, 2008-2010.
 # Priit Laes <plaes plaes org>, 2008, 2009
 # Ivar Smolin <okul linux ee>, 2009, 2010.
 #
@@ -14,9 +14,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2010-02-25 21:07+0000\n"
-"PO-Revision-Date: 2010-03-03 08:57+0200\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
+"POT-Creation-Date: 2010-04-23 11:05+0000\n"
+"PO-Revision-Date: 2010-04-24 09:28+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Gnome Estonian Translation Team <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -220,6 +220,13 @@ msgstr ""
 msgid "Bluetooth Applet"
 msgstr "Bluetoothi rakend"
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: lubatud"
 
@@ -367,28 +374,8 @@ msgstr "Ühtegi Bluetoothi adapterit pole saadaval"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Sinu arvuti külge pole ühendatud ühtegi Bluetoothi adapterit."
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
 msgid "Configure Bluetooth settings"
 msgstr "Bluetoothi häälestamine"
-
-msgid "Whether to show the notification icon"
-msgstr "Kas teateala ikooni näidatakse"
-
-msgid "Whether to show the notification icon."
-msgstr "Kas teateala ikooni näidata."
-
-#, c-format
-msgid "GConf error: %s"
-msgstr "GConf'i viga: %s"
-
-msgid "All further errors shown only on terminal."
-msgstr "Kõiki edasisi vigu näidatakse ainult terminalis."
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -629,6 +616,52 @@ msgid "bluetooth"
 msgstr "Bluetooth"
 
 #, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d tund"
+msgstr[1] "%d tundi"
+
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minut"
+msgstr[1] "%d minutit"
+
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekund"
+msgstr[1] "%d sekundit"
+
+#. hour:minutes:seconds
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. minutes
+#. seconds
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+msgid "0 seconds"
+msgstr "0 sekundit"
+
+#, c-format
+msgid ""
+"Your computer is visible on\n"
+"Bluetooth for %s."
+msgstr ""
+"Sinu arvuti on nähtav üle\n"
+"Bluetoothi nimega %s."
+
+#, c-format
 msgid "Pairing with %s failed."
 msgstr "Paardumine seadmega '%s' nurjus."
 
@@ -655,6 +688,9 @@ msgstr "Valmis"
 msgid "Device setup"
 msgstr "Seadme häälestus"
 
+msgid "Settings"
+msgstr "Sätted"
+
 msgid "Only show:"
 msgstr "Näita ainult:"
 
@@ -666,12 +702,27 @@ msgstr "PIN-koodi sätted"
 msgid "Add a new device"
 msgstr "Lisa uus seade"
 
+msgid "Make visible on Bluetooth"
+msgstr "Tee Bluetooth nähtavaks"
+
 #. Button for Send file
 msgid "Send file from your computer"
 msgstr "Failide saatmine arvutist"
 
 msgid "Bluetooth Manager Panel"
 msgstr "Bluetoothi halduri paneel"
+
+#~ msgid "Whether to show the notification icon"
+#~ msgstr "Kas teateala ikooni näidatakse"
+
+#~ msgid "Whether to show the notification icon."
+#~ msgstr "Kas teateala ikooni näidata."
+
+#~ msgid "GConf error: %s"
+#~ msgstr "GConf'i viga: %s"
+
+#~ msgid "All further errors shown only on terminal."
+#~ msgstr "Kõiki edasisi vigu näidatakse ainult terminalis."
 
 #~ msgid "translator-credits"
 #~ msgstr ""
