@@ -571,13 +571,35 @@ remove_clicked_cb (GtkCellRenderer *cell, const gchar *path, gpointer user_data)
 }
 
 static void
+mount_finish_cb (GObject *source_object,
+                 GAsyncResult *res,
+                 gpointer user_data)
+{
+        GError *error = NULL;
+        char *uri;
+
+        if (g_file_mount_enclosing_volume_finish (G_FILE (source_object),
+                                                  res, &error) == FALSE) {
+                g_message ("Failed to mount OBEX volume: %s", error->message);
+                g_error_free (error);
+                return;
+        }
+
+        uri = g_file_get_uri (G_FILE (source_object));
+        if (gtk_show_uri (NULL, uri, GDK_CURRENT_TIME, &error) == FALSE) {
+                g_message ("Failed to open %s: %s", uri, error->message);
+                g_error_free (error);
+        }
+        g_free (uri);
+}
+
+static void
 browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (user_data);
 	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (priv->display);
 	const gchar *address = NULL;
 	GValue value = { 0, };
-	gchar *cmd;
 
 	ensure_selection (chooser, path);
 
@@ -586,12 +608,16 @@ browse_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_data
 		address = g_value_get_string (&value);
 	}
 
-	if (address == NULL) {
-		cmd = g_strdup_printf ("%s --no-default-window \"obex://[%s]\"",
-				       "nautilus", address);
-		if (!g_spawn_command_line_async (cmd, NULL))
-			g_printerr("Couldn't execute command: %s\n", cmd);
-		g_free (cmd);
+	if (address) {
+		char *uri;
+		GFile *file;
+
+		uri = g_strdup_printf ("obex://[%s]/", address);
+		file = g_file_new_for_uri (uri);
+		g_free (uri);
+
+		g_file_mount_enclosing_volume (file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_finish_cb, NULL);
+		g_object_unref (file);
 	}
 
 	g_value_unset (&value);
