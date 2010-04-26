@@ -33,7 +33,7 @@
 #include <glib/gi18n.h>
 #include <math.h>
 #include <gdk/gdkkeysyms.h>
-#include <mx/mx-gtk.h>
+#include <mx-gtk/mx-gtk.h>
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
