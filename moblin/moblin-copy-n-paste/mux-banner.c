@@ -100,7 +100,7 @@ mux_banner_set_text (MuxBanner *banner, const char *text)
 {
   char *s;
 
-  s = g_strconcat ("<big><b>", text, "</b></big>", NULL);
+  s = g_markup_printf_escaped ("<span foreground=\"#616261\" weight=\"bold\" size=\"larger\">%s</span>", text);
   gtk_label_set_markup (GTK_LABEL (banner->priv->label), s);
   g_free (s);
 }
