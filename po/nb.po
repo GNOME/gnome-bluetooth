@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 2.29.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-13 16:50+0100\n"
-"PO-Revision-Date: 2010-01-31 20:08+0100\n"
+"POT-Creation-Date: 2010-05-01 20:42+0200\n"
+"PO-Revision-Date: 2010-05-01 20:44+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -177,92 +177,92 @@ msgstr "Bruk denne GPS-enheten for Geolocation-tjenester"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Koble på internett med mobiltelefon (test)"
 
-#: ../applet/main.c:140
+#: ../applet/main.c:139
 msgid "Select Device to Browse"
 msgstr "Velg enhet å bla gjennom"
 
-#: ../applet/main.c:144
+#: ../applet/main.c:143
 msgid "_Browse"
 msgstr "_Bla gjennom"
 
-#: ../applet/main.c:153
+#: ../applet/main.c:152
 msgid "Select device to browse"
 msgstr "Velg enhet å bla gjennom"
 
-#: ../applet/main.c:332 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:331 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Slå på Bluetooth"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:332
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Av"
 
-#: ../applet/main.c:336
+#: ../applet/main.c:335
 msgid "Turn Off Bluetooth"
 msgstr "Slå av Bluetooth"
 
-#: ../applet/main.c:337
+#: ../applet/main.c:336
 msgid "Bluetooth: On"
 msgstr "Bluetooth: På"
 
-#: ../applet/main.c:342 ../applet/notify.c:148
+#: ../applet/main.c:341 ../applet/notify.c:150
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Slått av"
 
-#: ../applet/main.c:493
+#: ../applet/main.c:492
 msgid "Disconnecting..."
 msgstr "Kobler fra..."
 
-#: ../applet/main.c:496 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:495 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Kobler til..."
 
-#: ../applet/main.c:499 ../applet/main.c:840
+#: ../applet/main.c:498 ../applet/main.c:839
 msgid "Connected"
 msgstr "Tilkoblet"
 
-#: ../applet/main.c:502 ../applet/main.c:840
+#: ../applet/main.c:501 ../applet/main.c:839
 msgid "Disconnected"
 msgstr "Frakoblet"
 
-#: ../applet/main.c:858 ../applet/main.c:922 ../properties/adapter.c:371
+#: ../applet/main.c:857 ../applet/main.c:921 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "Koble fra"
 
-#: ../applet/main.c:858 ../applet/main.c:922
+#: ../applet/main.c:857 ../applet/main.c:921
 msgid "Connect"
 msgstr "Koble til"
 
-#: ../applet/main.c:871
+#: ../applet/main.c:870
 msgid "Send files..."
 msgstr "Send filer..."
 
-#: ../applet/main.c:881
+#: ../applet/main.c:880
 msgid "Browse files..."
 msgstr "Bla gjennom filer..."
 
-#: ../applet/main.c:892
+#: ../applet/main.c:891
 msgid "Open Keyboard Preferences..."
 msgstr "Åpne brukervalg for tastatur..."
 
-#: ../applet/main.c:900
+#: ../applet/main.c:899
 msgid "Open Mouse Preferences..."
 msgstr "Åpne brukervalg for mus..."
 
-#: ../applet/main.c:910
+#: ../applet/main.c:909
 msgid "Open Sound Preferences..."
 msgstr "Åpne brukervalg for lyd..."
 
-#: ../applet/main.c:1037
+#: ../applet/main.c:1029
 msgid "Debug"
 msgstr "Feilsøk"
 
 #. Parse command-line options
-#: ../applet/main.c:1057
+#: ../applet/main.c:1050
 msgid "- Bluetooth applet"
 msgstr "- Panelprogram for Bluetooth"
 
-#: ../applet/main.c:1062
+#: ../applet/main.c:1055
 #, c-format
 msgid ""
 "%s\n"
@@ -272,11 +272,20 @@ msgstr ""
 "Kjør «%s --help» for å se en full liste med tilgjengelige "
 "kommandolinjealternativer.\n"
 
-#: ../applet/main.c:1079
+#: ../applet/main.c:1072
 msgid "Bluetooth Applet"
 msgstr "Panelprogram for Bluetooth"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/main.c:141 ../moblin/moblin-panel.c:1595
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../applet/notify.c:150
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: Slått på"
 
@@ -359,7 +368,7 @@ msgid "Browse files on device..."
 msgstr "Bla gjennom filer på enhet..."
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
+#: ../moblin/moblin-panel.c:1396 ../moblin/moblin-panel.c:1506
 msgid "Devices"
 msgstr "Enheter"
 
@@ -407,34 +416,34 @@ msgstr "Er _lik"
 msgid "_Show input"
 msgstr "Vi_s inndata"
 
-#: ../properties/main.c:91
+#: ../properties/main.c:90
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr "Kan ikke starte brukervalg for «Personlig fildeling»"
 
-#: ../properties/main.c:96
+#: ../properties/main.c:95
 msgid ""
 "Please verify that the \"Personal File Sharing\" program is correctly "
 "installed."
 msgstr ""
 "Vennligst sjekk at programmet «Personlig fildeling» er riktig installert."
 
-#: ../properties/main.c:125
+#: ../properties/main.c:124
 msgid "Bluetooth Preferences"
 msgstr "Brukervalg for Bluetooth"
 
-#: ../properties/main.c:140
+#: ../properties/main.c:139
 msgid "_Show Bluetooth icon"
 msgstr "Vi_s Bluetooth-ikon"
 
-#: ../properties/main.c:164
+#: ../properties/main.c:163
 msgid "Receive Files"
 msgstr "Motta filer"
 
-#: ../properties/main.c:212
+#: ../properties/main.c:211
 msgid "Output a list of currently known devices"
 msgstr "Vis en liste med kjente enheter"
 
-#: ../properties/main.c:250
+#: ../properties/main.c:251
 msgid "Bluetooth Properties"
 msgstr "Egenskaper for Bluetooth"
 
@@ -467,35 +476,9 @@ msgstr "Ingen Bluetooth-kontrollere tilstede"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Din datamaskin har ingen Bluetooth-enheter koblet til."
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "Konfigurer innstillinger for Bluetooth"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid "Whether to show the notification icon"
-msgstr "Om varslingsikonet skal vises"
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "Whether to show the notification icon."
-msgstr "Om varslingsikonet skal vises."
-
-#: ../properties/gconf-bridge.c:1233
-#, c-format
-msgid "GConf error: %s"
-msgstr "GConf-feil: %s"
-
-#: ../properties/gconf-bridge.c:1238
-msgid "All further errors shown only on terminal."
-msgstr "Alle feil vises kun på konsollet."
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -506,12 +489,12 @@ msgstr "Alle feil vises kun på konsollet."
 msgid "Pairing with '%s' cancelled"
 msgstr "Sammenkobling med «%s» avbrutt"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1139
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Vennligst bekreft at PIN som vises på «%s» er lik denne."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1190
 msgid "Please enter the following PIN:"
 msgstr "Vennligst oppgi følgende PIN:"
 
@@ -533,14 +516,14 @@ msgstr "Oppsett av «%s» feilet"
 msgid "Connecting to '%s'..."
 msgstr "Kobler til «%s»..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Vennligst oppgi følgende PIN på «%s»:"
@@ -554,7 +537,7 @@ msgstr "Vennligst oppgi følgende PIN på «%s»:"
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Vennligst vent mens oppsett sluttføres på enhet «%s»..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Oppsett av ny enhet «%s» fullført"
@@ -592,7 +575,7 @@ msgid "Device search"
 msgstr "Søk etter enheter"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1343
 msgid "Does not match"
 msgstr "Passer ikke"
 
@@ -610,7 +593,7 @@ msgid "Introduction"
 msgstr "Innledning"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1339
 msgid "Matches"
 msgstr "Er lik"
 
@@ -622,7 +605,7 @@ msgstr "Alternativer for PIN"
 msgid "PIN _options..."
 msgstr "Alternativer f_or PIN..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1253
 msgid "Select the additional services you want to use with your device:"
 msgstr "Velg tilleggstjenester du vil bruke med din enhet:"
 
@@ -778,74 +761,136 @@ msgstr "Filoverføring med Obex Push er ikke støttet"
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
-#: ../moblin/main.c:86
+#: ../moblin/main.c:93
 msgid "Run in standalone mode"
 msgstr "Kjør frittstående"
 
-#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "Moblin Bluetooth-panel"
 
-#: ../moblin/main.c:95
+#: ../moblin/main.c:102
 msgid "- Moblin Bluetooth Panel"
 msgstr "- Moblin Bluetooth-panel"
 
-#: ../moblin/main.c:122
+#: ../moblin/main.c:129
 msgid "bluetooth"
 msgstr "bluetooth"
 
-#: ../moblin/moblin-panel.c:533
+#: ../moblin/moblin-panel.c:177
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d time"
+msgstr[1] "%d timer"
+
+#: ../moblin/moblin-panel.c:179
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minutt"
+msgstr[1] "%d minutter"
+
+#: ../moblin/moblin-panel.c:182
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekund"
+msgstr[1] "%d sekunder"
+
+#. hour:minutes:seconds
+#: ../moblin/moblin-panel.c:188
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../moblin/moblin-panel.c:192
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. minutes
+#. seconds
+#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../moblin/moblin-panel.c:202
+msgid "0 seconds"
+msgstr "0 sekunder"
+
+#: ../moblin/moblin-panel.c:224
+#, c-format
+msgid ""
+"Your computer is visible on\n"
+"Bluetooth for %s."
+msgstr ""
+"Din datamaskin er synlig via\n"
+"Bluetooth for %s."
+
+#: ../moblin/moblin-panel.c:625
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "Sammenkobling med «%s» feilet."
 
-#: ../moblin/moblin-panel.c:895
+#: ../moblin/moblin-panel.c:985
 msgid "<u>Pair</u>"
 msgstr "<u>Koble sammen</u>"
 
-#: ../moblin/moblin-panel.c:909
+#: ../moblin/moblin-panel.c:999
 msgid "<u>Connect</u>"
 msgstr "<u>Koble til</u>"
 
-#: ../moblin/moblin-panel.c:928
+#: ../moblin/moblin-panel.c:1018
 msgid "<u>Browse</u>"
 msgstr "<u>Bla gjennom</u>"
 
-#: ../moblin/moblin-panel.c:1122
+#: ../moblin/moblin-panel.c:1212
 msgid "Device setup failed"
 msgstr "Oppsett av enhet feilet"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
-#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
-#: ../moblin/moblin-panel.c:1540
+#: ../moblin/moblin-panel.c:1226 ../moblin/moblin-panel.c:1302
+#: ../moblin/moblin-panel.c:1351 ../moblin/moblin-panel.c:1429
+#: ../moblin/moblin-panel.c:1661
 msgid "Back to devices"
 msgstr "Tilbake til enheter"
 
-#: ../moblin/moblin-panel.c:1175
+#: ../moblin/moblin-panel.c:1265
 msgid "Done"
 msgstr "Ferdig"
 
-#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
+#: ../moblin/moblin-panel.c:1286 ../moblin/moblin-panel.c:1323
 msgid "Device setup"
 msgstr "Oppsett av enhet"
 
-#: ../moblin/moblin-panel.c:1344
+#: ../moblin/moblin-panel.c:1446 ../moblin/moblin-panel.c:1577
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: ../moblin/moblin-panel.c:1462
 msgid "Only show:"
 msgstr "Vis kun:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1468
 msgid "PIN options"
 msgstr "Alternativer for PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1433
+#: ../moblin/moblin-panel.c:1512
 msgid "Add a new device"
 msgstr "Legg til ny enhet"
 
+#: ../moblin/moblin-panel.c:1613
+msgid "Make visible on Bluetooth"
+msgstr "Gjør synlig via Bluetooth"
+
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1500
+#: ../moblin/moblin-panel.c:1619
 msgid "Send file from your computer"
 msgstr "Send fil fra din datamaskin"
 
