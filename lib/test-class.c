@@ -25,10 +25,24 @@
 #include <config.h>
 #endif
 
+#include <string.h>
 #include <gtk/gtk.h>
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
+
+static const char *
+byte_to_binary (int x)
+{
+	static char b[9] = {0};
+
+	int z;
+	for (z = 256; z > 0; z >>= 1) {
+		strcat(b, ((x & z) == z) ? "1" : "0");
+	}
+
+	return b;
+}
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +56,8 @@ int main(int argc, char *argv[])
 	g_log_set_always_fatal (fatal_mask);
 
 	class = g_ascii_strtoull (argv[1], NULL, 0);
+
+	g_message ("major class: 0x%X %s", (class & 0x1f00) >> 8, byte_to_binary ((class & 0x1f00) >> 8));
 
 	g_message ("%d %s", bluetooth_class_to_type (class), bluetooth_type_to_string (bluetooth_class_to_type (class)));
 
