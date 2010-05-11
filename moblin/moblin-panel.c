@@ -1041,7 +1041,7 @@ browse_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	if (uuids != NULL) {
 		for (i = 0; uuids[i] != NULL; i++)
 			if (g_str_equal (uuids[i], "OBEXFileTransfer")) {
-				g_object_set (cell, "markup", _("<u>Browse</u>"), NULL);
+				g_object_set (cell, "text", _("Browse"), NULL);
 				found = TRUE;
 				break;
 			}
@@ -1049,7 +1049,7 @@ browse_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	}
 
 	if (found == FALSE)
-		g_object_set (cell, "markup", "", NULL);
+		g_object_set (cell, "text", "", NULL);
 }
 
 static void
@@ -1568,6 +1568,7 @@ create_devices_page (MoblinPanel *self)
 
 	/* Add the browse button */
 	cell = mux_cell_renderer_text_new ();
+	g_object_set (cell, "underline", PANGO_UNDERLINE_SINGLE, NULL);
 	gtk_tree_view_column_pack_start (type_column, cell, FALSE);
 
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
