@@ -1022,9 +1022,9 @@ connect_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
 
 	if ((paired || trusted) && connected == FALSE) {
-		g_object_set (cell, "markup", _("<u>Connect</u>"), NULL);
+		g_object_set (cell, "text", _("Connect"), NULL);
 	} else {
-		g_object_set (cell, "markup", "", NULL);
+		g_object_set (cell, "text", "", NULL);
 	}
 }
 
@@ -1576,6 +1576,7 @@ create_devices_page (MoblinPanel *self)
 
 	/* Add the connect button */
 	cell = mux_cell_renderer_text_new ();
+	g_object_set (cell, "underline", PANGO_UNDERLINE_SINGLE, NULL);
 	gtk_tree_view_column_pack_start (type_column, cell, FALSE);
 
 	gtk_tree_view_column_set_cell_data_func (type_column, cell,
