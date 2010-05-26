@@ -24,13 +24,9 @@ convertdir=$(datadir)/GConf/gsettings
 convert_DATA=gnome-bluetooth
 
 gsettingsschema_in_files = org.gnome.Bluetooth.gschema.xml.in
-gsettingsschema_DATA = $(gsettingsschema_in_files:.xml.in=.xml)
+gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
 @INTLTOOL_XML_NOMERGE_RULE@
-@GSETTINGS_CHECK_RULE@
-if GSETTINGS_SCHEMAS_INSTALL
-install-data-hook:
-	$(gsettingsupdateschemacache) $(DESTDIR)$(gsettingsschemadir) --targetdir=$(DESTDIR)$(gsettingsschemadir)
-endif
+@GSETTINGS_RULES@
 
 CLEANFILES = $(desktop_DATA) $(schema_DATA)
 
