@@ -113,9 +113,16 @@ mount_finish_cb (GObject *source_object,
 
 	if (g_file_mount_enclosing_volume_finish (G_FILE (source_object),
 						  res, &error) == FALSE) {
-		g_printerr ("Failed to mount OBEX volume: %s", error->message);
-		g_error_free (error);
-		return;
+		/* Ignore "already mounted" error */
+		if (error->domain == G_IO_ERROR &&
+		    error->code == G_IO_ERROR_ALREADY_MOUNTED) {
+			g_error_free (error);
+			error = NULL;
+		} else {
+			g_printerr ("Failed to mount OBEX volume: %s", error->message);
+			g_error_free (error);
+			return;
+		}
 	}
 
 	uri = g_file_get_uri (G_FILE (source_object));
