@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2010-01-28 18:02+0000\n"
-"PO-Revision-Date: 2010-02-07 21:38+0700\n"
-"Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
+"POT-Creation-Date: 2010-06-14 02:57+0000\n"
+"PO-Revision-Date: 2010-06-15 17:52+0700\n"
+"Last-Translator: อาคม โชติพันธวานนท์ <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,92 +174,92 @@ msgstr "ใช้อุปกรณ์ GPS นี้กับบริการ 
 msgid "Access the Internet using your cell phone (test)"
 msgstr "เข้าถึงอินเทอร์เน็ตโดยใช้โทรศัพท์มือถือของคุณ (ทดสอบ)"
 
-#: ../applet/main.c:139
+#: ../applet/main.c:146
 msgid "Select Device to Browse"
 msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
 
-#: ../applet/main.c:143
+#: ../applet/main.c:150
 msgid "_Browse"
 msgstr "เ_รียกดู"
 
-#: ../applet/main.c:152
+#: ../applet/main.c:159
 msgid "Select device to browse"
 msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
 
-#: ../applet/main.c:329 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:338 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "เปิดบลูทูท"
 
-#: ../applet/main.c:330
+#: ../applet/main.c:339
 msgid "Bluetooth: Off"
 msgstr "บลูทูท: ปิด"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:342
 msgid "Turn Off Bluetooth"
 msgstr "ปิดบลูทูท"
 
-#: ../applet/main.c:334
+#: ../applet/main.c:343
 msgid "Bluetooth: On"
 msgstr "บลูทูท: เปิด"
 
-#: ../applet/main.c:339 ../applet/notify.c:148
+#: ../applet/main.c:348 ../applet/notify.c:155
 msgid "Bluetooth: Disabled"
 msgstr "บลูทูท: ปิดใช้"
 
-#: ../applet/main.c:482
+#: ../applet/main.c:499
 msgid "Disconnecting..."
 msgstr "กำลังตัดการเชื่อมต่อ..."
 
-#: ../applet/main.c:485 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:502 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
-#: ../applet/main.c:488 ../applet/main.c:829
+#: ../applet/main.c:505 ../applet/main.c:846
 msgid "Connected"
 msgstr "เชื่อมต่ออยู่"
 
-#: ../applet/main.c:491 ../applet/main.c:829
+#: ../applet/main.c:508 ../applet/main.c:846
 msgid "Disconnected"
 msgstr "ไม่ได้เชื่อมต่อ"
 
-#: ../applet/main.c:847 ../applet/main.c:911 ../properties/adapter.c:371
+#: ../applet/main.c:864 ../applet/main.c:928 ../properties/adapter.c:371
 msgid "Disconnect"
 msgstr "ตัดการเชื่อมต่อ"
 
-#: ../applet/main.c:847 ../applet/main.c:911
+#: ../applet/main.c:864 ../applet/main.c:928
 msgid "Connect"
 msgstr "เชื่อมต่อ"
 
-#: ../applet/main.c:860
+#: ../applet/main.c:877
 msgid "Send files..."
 msgstr "ส่งแฟ้ม..."
 
-#: ../applet/main.c:870
+#: ../applet/main.c:887
 msgid "Browse files..."
 msgstr "เรียกดูแฟ้ม..."
 
-#: ../applet/main.c:881
+#: ../applet/main.c:898
 msgid "Open Keyboard Preferences..."
 msgstr "เปิดการปรับแต่งแป้นพิมพ์..."
 
-#: ../applet/main.c:889
+#: ../applet/main.c:906
 msgid "Open Mouse Preferences..."
 msgstr "เปิดการปรับแต่งเมาส์..."
 
-#: ../applet/main.c:899
+#: ../applet/main.c:916
 msgid "Open Sound Preferences..."
 msgstr "เปิดการปรับแต่งเสียง..."
 
-#: ../applet/main.c:1026
+#: ../applet/main.c:1036
 msgid "Debug"
 msgstr "ดีบั๊ก"
 
 #. Parse command-line options
-#: ../applet/main.c:1046
+#: ../applet/main.c:1055
 msgid "- Bluetooth applet"
 msgstr "- แอพเพล็ตบลูทูท"
 
-#: ../applet/main.c:1051
+#: ../applet/main.c:1060
 #, c-format
 msgid ""
 "%s\n"
@@ -268,11 +268,20 @@ msgstr ""
 "%s\n"
 "เรียก '%s --help' เพื่อดูตัวเลือกบรรทัดคำสั่งทั้งหมดที่ใช้ได้\n"
 
-#: ../applet/main.c:1068
+#: ../applet/main.c:1077
 msgid "Bluetooth Applet"
 msgstr "แอพเพล็ตบลูทูท"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/main.c:141 ../moblin/moblin-panel.c:1595
+msgid "Bluetooth"
+msgstr "บลูทูท"
+
+#: ../applet/notify.c:155
 msgid "Bluetooth: Enabled"
 msgstr "บลูทูท: เปิดใช้งาน"
 
@@ -355,7 +364,7 @@ msgid "Browse files on device..."
 msgstr "เรียกดูแฟ้มในอุปกรณ์ ..."
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
+#: ../moblin/moblin-panel.c:1396 ../moblin/moblin-panel.c:1506
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -403,33 +412,33 @@ msgstr "_ตรงกัน"
 msgid "_Show input"
 msgstr "แ_สดงอักขระที่ป้อน"
 
-#: ../properties/main.c:91
+#: ../properties/main.c:90
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr "ไม่สามารถเปิดเครื่องมือปรับแต่ง \"การแบ่งปันแฟ้มส่วนตัว\""
 
-#: ../properties/main.c:96
+#: ../properties/main.c:95
 msgid ""
 "Please verify that the \"Personal File Sharing\" program is correctly "
 "installed."
 msgstr "กรุณาตรวจสอบว่าโปรแกรม \"แบ่งปันแฟ้มส่วนตัว\" ได้ติดตั้งอย่างถูกต้องแล้ว"
 
-#: ../properties/main.c:125
+#: ../properties/main.c:124
 msgid "Bluetooth Preferences"
 msgstr "ปรับแต่งบลูทูท"
 
-#: ../properties/main.c:140
+#: ../properties/main.c:139
 msgid "_Show Bluetooth icon"
 msgstr "แ_สดงไอคอนบลูทูท"
 
-#: ../properties/main.c:164
+#: ../properties/main.c:163
 msgid "Receive Files"
 msgstr "รับแฟ้ม"
 
-#: ../properties/main.c:212
+#: ../properties/main.c:211
 msgid "Output a list of currently known devices"
 msgstr "แสดงรายชื่ออุปกรณ์ปัจจุบันที่รู้จัก"
 
-#: ../properties/main.c:250
+#: ../properties/main.c:249
 msgid "Bluetooth Properties"
 msgstr "คุณสมบัติบลูทูท"
 
@@ -462,35 +471,9 @@ msgstr "ไม่มีอะแดปเตอร์บลูทูท"
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "คอมพิวเตอร์ของคุณไม่มีอะแดปเตอร์บลูทูทเสียบอยู่เลย"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
-msgid "Bluetooth"
-msgstr "บลูทูท"
-
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "ตั้งค่าบลูทูท"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid "Whether to show the notification icon"
-msgstr "จะแสดงไอคอนแจ้งเหตุหรือไม่"
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "Whether to show the notification icon."
-msgstr "จะแสดงไอคอนแจ้งเหตุหรือไม่"
-
-#: ../properties/gconf-bridge.c:1233
-#, c-format
-msgid "GConf error: %s"
-msgstr "ข้อผิดพลาดของ GConf: %s"
-
-#: ../properties/gconf-bridge.c:1238
-msgid "All further errors shown only on terminal."
-msgstr "ข้อผิดพลาดที่เหลือทั้งหมดแสดงไว้ในเทอร์มินัลเท่านั้น"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -501,12 +484,12 @@ msgstr "ข้อผิดพลาดที่เหลือทั้งหม
 msgid "Pairing with '%s' cancelled"
 msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1139
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "กรุณายืนยันว่า PIN ที่แสดงบน '%s' ตรงกันกับ PIN นี้"
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1190
 msgid "Please enter the following PIN:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 
@@ -528,13 +511,13 @@ msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
 msgid "Connecting to '%s'..."
 msgstr "กำลังเชื่อมต่อไปยัง '%s'..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s' แล้วกด “Enter” บนแป้นพิมพ์:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
@@ -548,7 +531,7 @@ msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "กรุณารอสักครู่ขณะเสร็จสิ้นการตั้งค่าอุปกรณ์ '%s' ..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "ตั้งค่าอุปกรณ์ใหม่ '%s' สำเร็จแล้ว"
@@ -586,7 +569,7 @@ msgid "Device search"
 msgstr "ค้นหาอุปกรณ์"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1343
 msgid "Does not match"
 msgstr "ไม่ตรงกัน"
 
@@ -604,7 +587,7 @@ msgid "Introduction"
 msgstr "เกริ่นนำ"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1339
 msgid "Matches"
 msgstr "ตรงกัน"
 
@@ -616,7 +599,7 @@ msgstr "ตัวเลือกของ PIN"
 msgid "PIN _options..."
 msgstr "_ตัวเลือกของ PIN..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1253
 msgid "Select the additional services you want to use with your device:"
 msgstr "เลือกบริการเสริมที่คุณต้องการใช้กับอุปกรณ์ของคุณ:"
 
@@ -638,13 +621,12 @@ msgstr ""
 
 #: ../wizard/wizard.ui.h:23
 msgid ""
-"The device will need to be within 10 meters of your computer, and be “"
-"visible” (sometimes called “discoverable”). Check the "
-"device's manual if in doubt."
+"The device will need to be within 10 meters of your computer, and be "
+"“visible” (sometimes called “discoverable”). Check the device's manual if in "
+"doubt."
 msgstr ""
-"อุปกรณ์จะต้องอยู่ภายในระยะ 10 เมตร จากเครื่องคอมพิวเตอร์ของคุณ และ “"
-"มองเห็นได้” (บางครั้งเรียกว่า “เปิดให้ตรวจพบได้”) "
-"กรุณาตรวจสอบกับคู่มืออุปกรณ์หากมีข้อสงสัย"
+"อุปกรณ์จะต้องอยู่ภายในระยะ 10 เมตร จากเครื่องคอมพิวเตอร์ของคุณ และ "
+"“มองเห็นได้” (บางครั้งเรียกว่า “เปิดให้ตรวจพบได้”) กรุณาตรวจสอบกับคู่มืออุปกรณ์หากมีข้อสงสัย"
 
 #: ../wizard/wizard.ui.h:24
 msgid "Welcome to the Bluetooth new device setup"
@@ -766,80 +748,151 @@ msgstr "ไม่รองรับการถ่ายโอนแฟ้มผ
 msgid "Bluetooth (OBEX Push)"
 msgstr "บลูทูท (OBEX Push)"
 
-#: ../moblin/main.c:88
+#: ../moblin/main.c:93
 msgid "Run in standalone mode"
 msgstr "เรียกในโหมดทำงานเดี่ยว"
 
-#: ../moblin/main.c:96 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "พาเนลบลูทูท Moblin"
 
-#: ../moblin/main.c:97
+#: ../moblin/main.c:102
 msgid "- Moblin Bluetooth Panel"
 msgstr "- พาเนลบลูทูท Moblin"
 
-#: ../moblin/main.c:124
+#: ../moblin/main.c:129
 msgid "bluetooth"
 msgstr "บลูทูท"
 
-#: ../moblin/moblin-panel.c:533
+#: ../moblin/moblin-panel.c:177
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d ชั่วโมง"
+
+#: ../moblin/moblin-panel.c:179
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d นาที"
+
+#: ../moblin/moblin-panel.c:182
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d วินาที"
+
+#. hour:minutes:seconds
+#: ../moblin/moblin-panel.c:188
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../moblin/moblin-panel.c:192
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. minutes
+#. seconds
+#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../moblin/moblin-panel.c:202
+msgid "0 seconds"
+msgstr "0 วินาที"
+
+#: ../moblin/moblin-panel.c:224
+#, c-format
+msgid ""
+"Your computer is visible on\n"
+"Bluetooth for %s."
+msgstr ""
+"คอมพิวเตอร์ของคุณมองเห็นได้ผ่าน\n"
+"บลูทูทเป็นเวลา %s"
+
+#: ../moblin/moblin-panel.c:625
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "การจับคู่กับ %s ล้มเหลว"
 
-#: ../moblin/moblin-panel.c:895
+#: ../moblin/moblin-panel.c:985
 msgid "<u>Pair</u>"
 msgstr "<u>จับคู่</u>"
 
-#: ../moblin/moblin-panel.c:909
+#: ../moblin/moblin-panel.c:999
 msgid "<u>Connect</u>"
 msgstr "<u>เชื่อมต่อ</u>"
 
-#: ../moblin/moblin-panel.c:928
+#: ../moblin/moblin-panel.c:1018
 msgid "<u>Browse</u>"
 msgstr "<u>เรียกดู</u>"
 
-#: ../moblin/moblin-panel.c:1122
+#: ../moblin/moblin-panel.c:1212
 msgid "Device setup failed"
 msgstr "ตั้งค่าอุปกรณ์ไม่สำเร็จ"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
-#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
-#: ../moblin/moblin-panel.c:1540
+#: ../moblin/moblin-panel.c:1226 ../moblin/moblin-panel.c:1302
+#: ../moblin/moblin-panel.c:1351 ../moblin/moblin-panel.c:1429
+#: ../moblin/moblin-panel.c:1661
 msgid "Back to devices"
 msgstr "กลับไปยังรายชื่ออุปกรณ์"
 
-#: ../moblin/moblin-panel.c:1175
+#: ../moblin/moblin-panel.c:1265
 msgid "Done"
 msgstr "เรียบร้อย"
 
-#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
+#: ../moblin/moblin-panel.c:1286 ../moblin/moblin-panel.c:1323
 msgid "Device setup"
 msgstr "ตั้งค่าอุปกรณ์"
 
-#: ../moblin/moblin-panel.c:1344
+#: ../moblin/moblin-panel.c:1446 ../moblin/moblin-panel.c:1577
+msgid "Settings"
+msgstr "ค่าตั้ง"
+
+#: ../moblin/moblin-panel.c:1462
 msgid "Only show:"
 msgstr "แสดงเฉพาะ:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1468
 msgid "PIN options"
 msgstr "ตัวเลือกของ PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1433
+#: ../moblin/moblin-panel.c:1512
 msgid "Add a new device"
 msgstr "เพิ่มอุปกรณ์ใหม่"
 
+#: ../moblin/moblin-panel.c:1613
+msgid "Make visible on Bluetooth"
+msgstr "ทำให้มองเห็นได้ผ่านบลูทูท"
+
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1500
+#: ../moblin/moblin-panel.c:1619
 msgid "Send file from your computer"
 msgstr "ส่งแฟ้มจากคอมพิวเตอร์ของคุณ"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "พาเนลจัดการบลูทูท"
+
+#~ msgid "Whether to show the notification icon"
+#~ msgstr "จะแสดงไอคอนแจ้งเหตุหรือไม่"
+
+#~ msgid "Whether to show the notification icon."
+#~ msgstr "จะแสดงไอคอนแจ้งเหตุหรือไม่"
+
+#~ msgid "GConf error: %s"
+#~ msgstr "ข้อผิดพลาดของ GConf: %s"
+
+#~ msgid "All further errors shown only on terminal."
+#~ msgstr "ข้อผิดพลาดที่เหลือทั้งหมดแสดงไว้ในเทอร์มินัลเท่านั้น"
 
 #~ msgid "A Bluetooth manager for the GNOME desktop"
 #~ msgstr "เครื่องมือจัดการบลูทูทสำหรับเดสก์ท็อป GNOME"
