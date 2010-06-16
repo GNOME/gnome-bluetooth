@@ -10,7 +10,8 @@ bluetooth_panel_LDADD = $(top_builddir)/lib/libcommon.la $(top_builddir)/lib/lib
 			$(top_builddir)/moblin/moblin-copy-n-paste/libmoblin.la \
 			$(top_builddir)/wizard/libwizard.la $(MOBLIN_LIBS)
 
-AM_CFLAGS = $(MOBLIN_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
+AM_CFLAGS = $(MOBLIN_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) \
+	-DPKGDATADIR="\"$(pkgdatadir)\"" -DLIBEXECDIR="\"$(LIBEXECDIR)\""
 
 INCLUDES = -I$(top_srcdir)/lib -I$(top_srcdir)/wizard -I$(top_srcdir)/moblin/moblin-copy-n-paste
 

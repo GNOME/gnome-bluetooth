@@ -293,6 +293,18 @@ enable_send_file (MoblinPanel *self)
 }
 
 static void
+start_user_share (MoblinPanel *self)
+{
+	char *argv[] = { LIBEXECDIR "/gnome-user-share", NULL};
+	GError *error = NULL;
+
+	if (!g_spawn_async (NULL, argv, NULL, 0, NULL, NULL, NULL, &error)) {
+		g_message ("Cannot start gnome-user-share: %s", error->message);
+		g_error_free (error);
+	}
+}
+
+static void
 powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
                              PowerswitchState      state,
                              gpointer             user_data)
@@ -315,6 +327,7 @@ powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
 		gtk_widget_set_sensitive (priv->visible_button, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 		enable_send_file (self);
+		start_user_share (self);
 	} else if (state == POWERSWITCH_STATE_NO_ADAPTER) {
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
 		gtk_widget_set_sensitive (priv->visible_button, FALSE);
