@@ -83,7 +83,7 @@ koto_cell_renderer_pixbuf_class_init (KotoCellRendererPixbufClass *class)
 static void
 koto_cell_renderer_pixbuf_init (KotoCellRendererPixbuf *cellpixbuf)
 {
-  GTK_CELL_RENDERER (cellpixbuf)->mode = GTK_CELL_RENDERER_MODE_ACTIVATABLE;
+  g_object_set (cellpixbuf, "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE, NULL);
 }
 
 /*

@@ -82,7 +82,7 @@ mux_cell_renderer_text_class_init (MuxCellRendererTextClass *klass)
 static void
 mux_cell_renderer_text_init (MuxCellRendererText *self)
 {
-  GTK_CELL_RENDERER (self)->mode = GTK_CELL_RENDERER_MODE_ACTIVATABLE;
+  g_object_set (self, "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE, NULL);
 }
 
 GtkCellRenderer*

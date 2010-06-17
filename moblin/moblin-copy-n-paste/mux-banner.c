@@ -47,12 +47,14 @@ static gboolean
 mux_banner_expose (GtkWidget *widget, GdkEventExpose *event)
 {
   MuxBanner *banner = MUX_BANNER (widget);
+  GdkWindow *window;
   GdkGC *gc;
 
-  gc = gdk_gc_new (widget->window);
+  window = gtk_widget_get_window (widget);
+  gc = gdk_gc_new (window);
   gdk_gc_set_foreground (gc, &banner->priv->colour);
 
-  gdk_draw_rectangle (widget->window, gc, TRUE,
+  gdk_draw_rectangle (window, gc, TRUE,
                       event->area.x, event->area.y,
                       event->area.width, event->area.height);
 
