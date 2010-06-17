@@ -40,6 +40,7 @@
 #include "agent.h"
 
 static gboolean option_debug = FALSE;
+static gboolean option_dump = FALSE;
 static BluetoothClient *client;
 static GtkTreeModel *devices_model;
 static guint num_adapters_present = 0;
@@ -1032,8 +1033,29 @@ show_icon_changed (GSettings *settings,
 	update_icon_visibility();
 }
 
+static void
+dump_devices (void)
+{
+	BluetoothClient *client;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	client = bluetooth_client_new ();
+	model = bluetooth_client_get_model (client);
+
+	if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
+		g_print ("No known devices\n");
+		g_print ("Is bluetoothd running, and a Bluetooth adapter enabled?\n");
+		return;
+	}
+	bluetooth_client_dump_device (model, &iter, TRUE);
+	while (gtk_tree_model_iter_next (model, &iter))
+		bluetooth_client_dump_device (model, &iter, TRUE);
+}
+
 static GOptionEntry options[] = {
 	{ "debug", 'd', 0, G_OPTION_ARG_NONE, &option_debug, N_("Debug"), NULL },
+	{ "dump-devices", 'u', 0, G_OPTION_ARG_NONE, &option_dump, N_("Output a list of currently known devices"), NULL },
 	{ NULL },
 };
 
@@ -1072,6 +1094,11 @@ int main(int argc, char *argv[])
 		}
 	} else {
 		app = NULL;
+	}
+
+	if (option_dump != FALSE) {
+		dump_devices ();
+		return 0;
 	}
 
 	g_set_application_name(_("Bluetooth Applet"));
