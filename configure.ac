@@ -73,11 +73,6 @@ GLIB_REQUIRED=2.25.7
 DBUS_GLIB_REQUIRED=0.74
 NOTIFY_REQUIRED=0.4.3
 NAUTILUS_SENDTO_REQUIRED=2.28.0.1
-GCONF_REQUIRED=2.31.1
-
-dnl Requires for the GConf GSettings backend
-PKG_CHECK_MODULES(GCONF,
-		  gconf-2.0 >= $GCONF_REQUIRED)
 
 dnl Requires for the properties window
 PANELS_DIR="${libdir}/control-center-1/panels"
