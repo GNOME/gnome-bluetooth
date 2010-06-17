@@ -1,15 +1,21 @@
 
-bin_PROGRAMS = bluetooth-properties
+ccpanelsdir = $(PANELS_DIR)
+ccpanels_LTLIBRARIES = libbluetooth.la
 
-bluetooth_properties_SOURCES = main.c general.h general.c adapter.h adapter.c
+libbluetooth_la_SOURCES =			\
+	cc-bluetooth-panel.c			\
+	cc-bluetooth-panel.h			\
+	general.h				\
+	general.c				\
+	adapter.h				\
+	adapter.c
 
-bluetooth_properties_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la $(PROPS_LIBS)
+libbluetooth_la_LIBADD = $(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la $(PROPS_LIBS)
+libbluetooth_la_LDFLAGS = -avoid-version -module
 
 AM_CFLAGS = $(PROPS_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
 INCLUDES = -I$(top_srcdir)/lib
-
-man_MANS = bluetooth-properties.1
 
 desktopdir = $(datadir)/applications
 desktop_in_in_files = bluetooth-properties.desktop.in.in

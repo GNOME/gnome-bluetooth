@@ -80,11 +80,14 @@ PKG_CHECK_MODULES(GCONF,
 		  gconf-2.0 >= $GCONF_REQUIRED)
 
 dnl Requires for the properties window
+PANELS_DIR="${libdir}/control-center-1/panels"
+AC_SUBST(PANELS_DIR)
+
 PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  glib-2.0 >= $GLIB_REQUIRED
 		  gtk+-2.0
-		  unique-1.0)
+		  libgnome-control-center)
 
 dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
