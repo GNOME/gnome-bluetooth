@@ -109,7 +109,7 @@ AC_ARG_ENABLE(nautilus-sendto,
 if test "x$enable_nst" != "xno"; then
    PKG_CHECK_MODULES(NST,
    [
-      nautilus-sendto >= $NAUTILUS_SENDTO_REQUIRED gconf-2.0
+      nautilus-sendto >= $NAUTILUS_SENDTO_REQUIRED
    ], have_nst="yes", have_nst="no")
 else
    have_nst=no

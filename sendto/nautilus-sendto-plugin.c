@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/* 
+/*
  * Copyright (C) 2004 Roberto Majadas
  * Copyright (C) 2005, 2009 Bastien Nocera
  *
@@ -27,11 +27,11 @@
 #include <bluetooth-chooser-combo.h>
 #include <bluetooth-chooser.h>
 #include <glib/gi18n-lib.h>
-#include <gconf/gconf-client.h>
 
 #include "nautilus-sendto-plugin.h"
 
-#define LAST_OBEX_DEVICE "/desktop/gnome/nautilus-sendto/last_obex_device"
+#define SCHEMA_NAME "org.gnome.Bluetooth.nst"
+#define PREF_LAST_USED "last-used"
 
 static GtkWidget *combo;
 static char *cmd = NULL;
@@ -54,11 +54,11 @@ static void
 set_last_used_device (void)
 {
 	char *bdaddr;
-	GConfClient *gconfclient;
+	GSettings *settings;
 
-	gconfclient = gconf_client_get_default (); 
-	bdaddr = gconf_client_get_string (gconfclient, LAST_OBEX_DEVICE, NULL);
-	g_object_unref (gconfclient);
+	settings = g_settings_new (SCHEMA_NAME);
+	bdaddr = g_settings_get_string (settings, PREF_LAST_USED);
+	g_object_unref (settings);
 
 	if (bdaddr != NULL && *bdaddr != '\0') {
 		g_object_set (G_OBJECT (combo), "device", bdaddr, NULL);
@@ -95,15 +95,11 @@ get_contacts_widget (NstPlugin *plugin)
 static void
 save_last_used_obex_device (const char *bdaddr)
 {
-	GConfClient *client;
+	GSettings *settings;
 
-	client = gconf_client_get_default ();
-	gconf_client_set_string (client,
-				 LAST_OBEX_DEVICE,
-				 bdaddr,
-				 NULL);
-
-	g_object_unref (client);
+	settings = g_settings_new (SCHEMA_NAME);
+	g_settings_set (settings, PREF_LAST_USED, bdaddr);
+	g_object_unref (settings);
 }
 
 static gboolean
@@ -272,7 +268,7 @@ NstPluginInfo plugin_info = {
 	validate_destination,
 	send_files,
 	destroy
-}; 
+};
 
 NST_INIT_PLUGIN (plugin_info)
 
