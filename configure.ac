@@ -20,7 +20,7 @@ AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip check-news])
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-GNOMEBT_LT_VERSION=7:2:0
+GNOMEBT_LT_VERSION=8:0:0
 AC_SUBST(GNOMEBT_LT_VERSION)
 
 AM_MAINTAINER_MODE
