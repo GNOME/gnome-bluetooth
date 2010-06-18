@@ -44,6 +44,7 @@
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
 static BluetoothKillswitch *killswitch;
+static GtkNotebook *notebook;
 
 #define KILLSWITCH_PAGE_NUM(n) (gtk_notebook_get_n_pages (n) - 2)
 #define NO_ADAPTERS_PAGE_NUM(n) (-1)
@@ -197,7 +198,8 @@ static void
 set_current_page (GtkNotebook *notebook)
 {
 	if (gtk_tree_model_iter_n_children (adapter_model, NULL) == 0) {
-		if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
+		if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE &&
+		    bluetooth_killswitch_get_state (killswitch) != KILLSWITCH_STATE_HARD_BLOCKED) {
 			gtk_notebook_set_current_page (notebook,
 						       KILLSWITCH_PAGE_NUM(notebook));
 		} else {
@@ -633,6 +635,7 @@ killswitch_state_changed (BluetoothKillswitch *killswitch,
 {
 	if (state != KILLSWITCH_STATE_UNBLOCKED)
 		g_timeout_add_seconds (3, set_sensitive_now, user_data);
+	set_current_page (GTK_NOTEBOOK (notebook));
 }
 
 static void
@@ -704,9 +707,10 @@ create_no_adapter_page (GtkNotebook *notebook)
 	gtk_notebook_append_page(notebook, mainbox, NULL);
 }
 
-void setup_adapter(GtkNotebook *notebook)
+void setup_adapter(GtkNotebook *_notebook)
 {
 	killswitch = bluetooth_killswitch_new ();
+	notebook = _notebook;
 
 	/* Create our static pages first */
 	create_killswitch_page (notebook);
