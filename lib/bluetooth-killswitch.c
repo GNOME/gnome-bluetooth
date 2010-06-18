@@ -80,6 +80,23 @@ event_to_state (guint soft, guint hard)
 		return KILLSWITCH_STATE_UNBLOCKED;
 }
 
+static const char *
+state_to_string (KillswitchState state)
+{
+	switch (state) {
+	case KILLSWITCH_STATE_NO_ADAPTER:
+		return "KILLSWITCH_STATE_NO_ADAPTER";
+	case KILLSWITCH_STATE_SOFT_BLOCKED:
+		return "KILLSWITCH_STATE_SOFT_BLOCKED";
+	case KILLSWITCH_STATE_UNBLOCKED:
+		return "KILLSWITCH_STATE_UNBLOCKED";
+	case KILLSWITCH_STATE_HARD_BLOCKED:
+		return "KILLSWITCH_STATE_HARD_BLOCKED";
+	default:
+		g_assert_not_reached ();
+	}
+}
+
 static void
 update_killswitch (BluetoothKillswitch *killswitch,
 		   guint index, guint soft, guint hard)
@@ -102,7 +119,9 @@ update_killswitch (BluetoothKillswitch *killswitch,
 	}
 
 	if (changed != FALSE) {
-		g_message ("updating killswitch status %d", index);
+		g_message ("updating killswitch status %d to %s",
+			   index,
+			   state_to_string (bluetooth_killswitch_get_state (killswitch)));
 		g_signal_emit (G_OBJECT (killswitch),
 			       signals[STATE_CHANGED],
 			       0, bluetooth_killswitch_get_state (killswitch));
@@ -152,8 +171,8 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
 
-		g_message ("killswitch %d is %d",
-			   ind->index, ind->state);
+		g_message ("killswitch %d is %s",
+			   ind->index, state_to_string (ind->state));
 
 		if (ind->state == KILLSWITCH_STATE_HARD_BLOCKED) {
 			state = KILLSWITCH_STATE_HARD_BLOCKED;
@@ -168,7 +187,7 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 		state = ind->state;
 	}
 
-	g_message ("killswitches state %d", state);
+	g_message ("killswitches state %s", state_to_string (state));
 
 	return state;
 }
@@ -212,7 +231,7 @@ add_killswitch (BluetoothKillswitch *killswitch,
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 	BluetoothIndKillswitch *ind;
 
-	g_message ("adding killswitch idx %d state %d", index, state);
+	g_message ("adding killswitch idx %d state %s", index, state_to_string (state));
 	ind = g_new0 (BluetoothIndKillswitch, 1);
 	ind->index = index;
 	ind->state = state;
