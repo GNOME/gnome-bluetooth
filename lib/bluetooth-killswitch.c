@@ -248,6 +248,54 @@ add_killswitch (BluetoothKillswitch *killswitch,
 	priv->killswitches = g_list_append (priv->killswitches, ind);
 }
 
+static const char *
+type_to_string (unsigned int type)
+{
+	switch (type) {
+	case RFKILL_TYPE_ALL:
+		return "ALL";
+	case RFKILL_TYPE_WLAN:
+		return "WLAN";
+	case RFKILL_TYPE_BLUETOOTH:
+		return "BLUETOOTH";
+	case RFKILL_TYPE_UWB:
+		return "UWB";
+	case RFKILL_TYPE_WIMAX:
+		return "WIMAX";
+	case RFKILL_TYPE_WWAN:
+		return "WWAN";
+	default:
+		g_assert_not_reached ();
+	}
+}
+
+static const char *
+op_to_string (unsigned int op)
+{
+	switch (op) {
+	case RFKILL_OP_ADD:
+		return "ADD";
+	case RFKILL_OP_DEL:
+		return "DEL";
+	case RFKILL_OP_CHANGE:
+		return "CHANGE";
+	case RFKILL_OP_CHANGE_ALL:
+		return "CHANGE_ALL";
+	default:
+		g_assert_not_reached ();
+	}
+}
+
+static void
+print_event (struct rfkill_event *event)
+{
+	g_message ("RFKILL event: idx %u type %u (%s) op %u (%s) soft %u hard %u",
+		   event->idx,
+		   event->type, type_to_string (event->type),
+		   event->op, op_to_string (event->op),
+		   event->soft, event->hard);
+}
+
 static gboolean
 event_cb (GIOChannel *source,
 	  GIOCondition condition,
@@ -263,9 +311,7 @@ event_cb (GIOChannel *source,
 						  NULL,
 						  NULL);
 		if (status == G_IO_STATUS_NORMAL) {
-			g_message ("RFKILL event: idx %u type %u op %u soft %u hard %u\n",
-				   event.idx, event.type, event.op,
-				   event.soft, event.hard);
+			print_event (&event);
 
 			if (event.type != RFKILL_TYPE_BLUETOOTH &&
 			    event.type != RFKILL_TYPE_ALL)
