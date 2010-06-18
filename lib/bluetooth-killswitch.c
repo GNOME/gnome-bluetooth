@@ -294,18 +294,23 @@ event_cb (GIOChannel *source,
 	if (condition & G_IO_IN) {
 		GIOStatus status;
 		struct rfkill_event event;
+		gsize read;
+		gboolean changed = FALSE;
 
 		status = g_io_channel_read_chars (source,
 						  (char *) &event,
 						  sizeof(event),
-						  NULL,
+						  &read,
 						  NULL);
-		if (status == G_IO_STATUS_NORMAL) {
-			print_event (&event);
 
+		while (status == G_IO_STATUS_NORMAL && read == sizeof(event)) {
 			if (event.type != RFKILL_TYPE_BLUETOOTH &&
 			    event.type != RFKILL_TYPE_ALL)
-				return TRUE;
+				goto carry_on;
+
+			print_event (&event);
+
+			changed = TRUE;
 
 			if (event.op == RFKILL_OP_CHANGE) {
 				update_killswitch (killswitch, event.idx, event.soft, event.hard);
@@ -317,10 +322,18 @@ event_cb (GIOChannel *source,
 				add_killswitch (killswitch, event.idx, state);
 			}
 
+carry_on:
+			status = g_io_channel_read_chars (source,
+							  (char *) &event,
+							  sizeof(event),
+							  &read,
+							  NULL);
+		}
+
+		if (changed)
 			g_signal_emit (G_OBJECT (killswitch),
 				       signals[STATE_CHANGED],
 				       0, bluetooth_killswitch_get_state (killswitch));
-		}
 	} else {
 		g_message ("something else happened");
 		return FALSE;
