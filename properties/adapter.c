@@ -46,8 +46,9 @@ static GtkTreeModel *adapter_model;
 static BluetoothKillswitch *killswitch;
 static GtkNotebook *notebook;
 
-#define KILLSWITCH_PAGE_NUM(n) (gtk_notebook_get_n_pages (n) - 2)
-#define NO_ADAPTERS_PAGE_NUM(n) (-1)
+#define KILLSWITCH_PAGE_NUM(n) (gtk_notebook_get_n_pages (n) - 3)
+#define NO_ADAPTERS_PAGE_NUM(n) (gtk_notebook_get_n_pages (n) - 2)
+#define KILLSWITCHED_PAGE_NUM(n) (-1)
 
 typedef struct adapter_data adapter_data;
 struct adapter_data {
@@ -198,10 +199,16 @@ static void
 set_current_page (GtkNotebook *notebook)
 {
 	if (gtk_tree_model_iter_n_children (adapter_model, NULL) == 0) {
+		KillswitchState state;
+
+		state = bluetooth_killswitch_get_state (killswitch);
 		if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE &&
-		    bluetooth_killswitch_get_state (killswitch) != KILLSWITCH_STATE_HARD_BLOCKED) {
+		    state != KILLSWITCH_STATE_HARD_BLOCKED) {
 			gtk_notebook_set_current_page (notebook,
 						       KILLSWITCH_PAGE_NUM(notebook));
+		} else if (state == KILLSWITCH_STATE_HARD_BLOCKED) {
+			gtk_notebook_set_current_page (notebook,
+						       KILLSWITCHED_PAGE_NUM(notebook));
 		} else {
 			gtk_notebook_set_current_page (notebook,
 						       NO_ADAPTERS_PAGE_NUM(notebook));
@@ -678,7 +685,7 @@ create_killswitch_page (GtkNotebook *notebook)
 }
 
 static void
-create_no_adapter_page (GtkNotebook *notebook)
+create_no_adapter_page (GtkNotebook *notebook, const char *filename)
 {
 	GtkWidget *mainbox;
 	GtkWidget *vbox;
@@ -686,11 +693,15 @@ create_no_adapter_page (GtkNotebook *notebook)
 	GtkBuilder *xml;
 
 	xml = gtk_builder_new ();
-	if (gtk_builder_add_from_file (xml, "properties-no-adapter.ui", NULL) == 0) {
-		if (gtk_builder_add_from_file (xml, PKGDATADIR "/properties-no-adapter.ui", NULL) == 0) {
+	if (gtk_builder_add_from_file (xml, filename, NULL) == 0) {
+		char *path;
+		path = g_build_filename (PKGDATADIR, filename, NULL);
+		if (gtk_builder_add_from_file (xml, path, NULL) == 0) {
+			g_free (path);
 			g_warning ("Failed to load properties-no-adapter.ui");
 			return;
 		}
+		g_free (path);
 	}
 	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
 
@@ -714,7 +725,8 @@ void setup_adapter(GtkNotebook *_notebook)
 
 	/* Create our static pages first */
 	create_killswitch_page (notebook);
-	create_no_adapter_page (notebook);
+	create_no_adapter_page (notebook, "properties-no-adapter.ui");
+	create_no_adapter_page (notebook, "properties-killed-adapter.ui");
 
 	client = bluetooth_client_new();
 
