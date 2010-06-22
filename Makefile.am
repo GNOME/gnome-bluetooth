@@ -1,6 +1,6 @@
 DEF_SUBDIRS = icons lib applet properties wizard sendto docs po help
 
-if WITH_MOBLIN
+if WITH_MEEGO
 MOBLIN_DIR = moblin
 endif
 

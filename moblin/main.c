@@ -29,8 +29,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
-#include <moblin-panel/mpl-panel-common.h>
-#include <moblin-panel/mpl-panel-gtk.h>
+#include <meego-panel/mpl-panel-common.h>
+#include <meego-panel/mpl-panel-gtk.h>
 #include <bluetooth-enums.h>
 
 #include "moblin-panel.h"
@@ -97,8 +97,8 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	g_set_application_name (_("Moblin Bluetooth Panel"));
-	gtk_init_with_args (&argc, &argv, _("- Moblin Bluetooth Panel"),
+	g_set_application_name (_("MeeGo Bluetooth Panel"));
+	gtk_init_with_args (&argc, &argv, _("- MeeGo Bluetooth Panel"),
 				entries, GETTEXT_PACKAGE, &error);
 
 	if (error) {

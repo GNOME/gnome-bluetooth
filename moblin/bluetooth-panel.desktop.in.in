@@ -1,16 +1,16 @@
 [Desktop Entry]
 Version=1.0
-_Name=Moblin Bluetooth Panel
+_Name=Bluetooth Panel
 _Comment=Bluetooth Manager Panel
 Icon=bluetooth
 Exec=@LIBEXECDIR@/bluetooth-panel
 Terminal=false
 Type=Application
-OnlyShowIn=MOBLIN;
+OnlyShowIn=MEEGO-NB;
 X-GNOME-Autostart-enable=true
-X-Moblin-Priority=Low
-X-Moblin-Service=org.moblin.UX.Shell.Panels.bluetooth
-X-Moblin-Panel-Optional=true
-X-Moblin-Panel-Type=applet
-X-Moblin-Panel-Stylesheet=@THEME_DIR@/bluetooth-panel.css
-X-Moblin-Panel-Button-Style=state-idle
+X-Meego-Priority=Low
+X-Meego-Service=com.meego.UX.Shell.Panels.bluetooth
+X-Meego-Panel-Optional=true
+X-Meego-Panel-Type=applet
+X-Meego-Panel-Stylesheet=@THEME_DIR@/bluetooth-panel.css
+X-Meego-Panel-Button-Style=state-idle

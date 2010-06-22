@@ -8,9 +8,9 @@ bluetooth_panel_SOURCES = main.c \
 
 bluetooth_panel_LDADD = $(top_builddir)/lib/libcommon.la $(top_builddir)/lib/libgnome-bluetooth.la \
 			$(top_builddir)/moblin/moblin-copy-n-paste/libmoblin.la \
-			$(top_builddir)/wizard/libwizard.la $(MOBLIN_LIBS)
+			$(top_builddir)/wizard/libwizard.la $(MEEGO_LIBS)
 
-AM_CFLAGS = $(MOBLIN_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) \
+AM_CFLAGS = $(MEEGO_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) \
 	-DPKGDATADIR="\"$(pkgdatadir)\"" -DLIBEXECDIR="\"$(LIBEXECDIR)\""
 
 INCLUDES = -I$(top_srcdir)/lib -I$(top_srcdir)/wizard -I$(top_srcdir)/moblin/moblin-copy-n-paste
@@ -30,7 +30,7 @@ paneldir = @PANEL_DIR@
 panel_DATA = $(desktop_data)
 
 servicedir = $(datadir)/dbus-1/services
-service_DATA = org.moblin.UX.Shell.Panels.bluetooth.service
+service_DATA = com.meego.UX.Shell.Panels.bluetooth.service
 
 CLEANFILES = $(desktop_DATA)
 

@@ -1632,7 +1632,7 @@ create_devices_page (MoblinPanel *self)
 	/* Power switch */
 	/* Translators: This string appears next to a toggle switch which controls
 	 * enabling/disabling Bluetooth radio's on the device. Akin to the power
-	 * switches in the Network UI of Moblin */
+	 * switches in the Network UI of MeeGo */
 	power_label = gtk_label_new (_("Bluetooth"));
 	gtk_widget_show (power_label);
 	gtk_box_pack_start (GTK_BOX (hbox), power_label, FALSE, FALSE, 4);
