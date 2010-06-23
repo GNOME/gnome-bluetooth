@@ -31,7 +31,6 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <dbus/dbus-glib.h>
-#include <unique/uniqueapp.h>
 
 #include <bluetooth-client.h>
 #include <bluetooth-client-private.h>
@@ -982,16 +981,12 @@ create_wizard (void)
 	return assistant;
 }
 
-static UniqueResponse
-message_received_cb (UniqueApp         *app,
-                     int                command,
-                     UniqueMessageData *message_data,
-                     guint              time_,
-                     gpointer           user_data)
+static void
+activated_cb (GtkApplication    *app,
+	      GVariant          *variant,
+	      gpointer           user_data)
 {
         gtk_window_present (GTK_WINDOW (user_data));
-
-        return UNIQUE_RESPONSE_OK;
 }
 
 static GOptionEntry options[] = {
@@ -1000,7 +995,7 @@ static GOptionEntry options[] = {
 
 int main (int argc, char **argv)
 {
-	UniqueApp *app;
+	GtkApplication *app;
 	GError *error = NULL;
 
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
@@ -1018,10 +1013,9 @@ int main (int argc, char **argv)
 		return 1;
 	}
 
-	app = unique_app_new ("org.gnome.Bluetooth.wizard", NULL);
-	if (unique_app_is_running (app)) {
+	app = gtk_application_new ("org.gnome.Bluetooth.wizard", &argc, &argv);
+	if (g_application_is_remote (G_APPLICATION (app))) {
 		gdk_notify_startup_complete ();
-		unique_app_send_message (app, UNIQUE_ACTIVATE, NULL);
 		return 0;
 	}
 
@@ -1045,11 +1039,13 @@ int main (int argc, char **argv)
 	window_assistant = create_wizard();
 	if (window_assistant == NULL)
 		return 1;
+	gtk_application_add_window (app,
+				    GTK_WINDOW (window_assistant));
 
-	g_signal_connect (app, "message-received",
-			  G_CALLBACK (message_received_cb), window_assistant);
+	g_signal_connect (app, "activated",
+			  G_CALLBACK (activated_cb), window_assistant);
 
-	gtk_main();
+	gtk_application_run (app);
 
 	bluetooth_plugin_manager_cleanup ();
 

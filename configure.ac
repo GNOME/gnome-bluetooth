@@ -123,8 +123,7 @@ dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-export-2.0
-		  gtk+-3.0
-		  unique-3.0)
+		  gtk+-3.0)
 
 dnl Requires for the input helper
 PKG_CHECK_MODULES(INPUT,
