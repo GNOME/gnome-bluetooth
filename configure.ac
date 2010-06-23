@@ -100,7 +100,6 @@ PKG_CHECK_MODULES(SENDTO,
 		  gio-2.0)
 
 dnl nautilus-sendto plugin
-dnl FIXME disabled by default
 AC_ARG_ENABLE(nautilus-sendto,
               AS_HELP_STRING([--enable-nautilus-sendto=@<:@no/yes/auto@:>@],
                              [build nautilus-sendto plugin]), ,
