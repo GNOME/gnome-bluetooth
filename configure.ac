@@ -81,7 +81,7 @@ AC_SUBST(PANELS_DIR)
 PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  glib-2.0 >= $GLIB_REQUIRED
-		  gtk+-2.0
+		  gtk+-3.0
 		  libgnome-control-center)
 
 dnl Requires for the applet
@@ -89,14 +89,14 @@ PKG_CHECK_MODULES(APPLET,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-export-2.0
 		  glib-2.0 >= $GLIB_REQUIRED
-		  gtk+-2.0 >= $GTK_REQUIRED
+		  gtk+-3.0 >= $GTK_REQUIRED
 		  libnotify >= $NOTIFY_REQUIRED
-		  unique-1.0)
+		  unique-3.0)
 
 dnl Requires for the sendto app
 PKG_CHECK_MODULES(SENDTO,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  gtk+-2.0
+		  gtk+-3.0
 		  gio-2.0)
 
 dnl nautilus-sendto plugin
@@ -124,25 +124,25 @@ dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-export-2.0
-		  gtk+-2.0
-		  unique-1.0)
+		  gtk+-3.0
+		  unique-3.0)
 
 dnl Requires for the input helper
 PKG_CHECK_MODULES(INPUT,
 		  xi
 		  x11
-		  gtk+-2.0)
+		  gtk+-3.0)
 
 dnl Requires for the public library
 PKG_CHECK_MODULES(LIBGNOMEBT,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  gtk+-2.0)
+		  gtk+-3.0)
 
 dnl Requires for the private library
 PKG_CHECK_MODULES(COMMON,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-2.0
-		  gtk+-2.0)
+		  gtk+-3.0)
 
 dnl Requires for the geoclue plugin
 PKG_CHECK_MODULES(GEOCLUE,
@@ -151,7 +151,7 @@ PKG_CHECK_MODULES(GEOCLUE,
 
 dnl Requires for the plugins
 PKG_CHECK_MODULES(PLUGINS,
-		  gtk+-2.0)
+		  gtk+-3.0)
 
 dnl Requires for the moblin interface
 AC_ARG_ENABLE(moblin,
@@ -163,7 +163,7 @@ if test "x$enable_moblin" != "xno"; then
    PKG_CHECK_MODULES(MOBLIN,
    [
       dbus-glib-1,
-      gtk+-2.0,
+      gtk+-3.0,
       mx-gtk-1.0
       moblin-panel
    ], have_moblin="yes", have_moblin="no")
