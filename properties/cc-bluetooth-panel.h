@@ -42,8 +42,6 @@ typedef struct _CcBluetoothPanelPrivate CcBluetoothPanelPrivate;
 
 struct _CcBluetoothPanel {
 	CcPanel parent;
-
-	CcBluetoothPanelPrivate *priv;
 };
 
 struct _CcBluetoothPanelClass {
