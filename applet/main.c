@@ -29,8 +29,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include <unique/uniqueapp.h>
-
 #include <bluetooth-client.h>
 #include <bluetooth-client-private.h>
 #include <bluetooth-chooser.h>
@@ -1061,7 +1059,7 @@ static GOptionEntry options[] = {
 
 int main(int argc, char *argv[])
 {
-	UniqueApp *app;
+	GtkApplication *app;
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
 	GOptionContext *context;
@@ -1086,8 +1084,9 @@ int main(int argc, char *argv[])
 	}
 
 	if (option_debug == FALSE) {
-		app = unique_app_new ("org.gnome.Bluetooth.applet", NULL);
-		if (unique_app_is_running (app)) {
+		app = gtk_application_new ("org.gnome.Bluetooth.applet",
+					   &argc, &argv);
+		if (g_application_is_remote (G_APPLICATION (app))) {
 			gdk_notify_startup_complete ();
 			g_warning ("Applet is already running, exiting");
 			return 0;

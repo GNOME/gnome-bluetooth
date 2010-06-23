@@ -90,8 +90,7 @@ PKG_CHECK_MODULES(APPLET,
 		  gmodule-export-2.0
 		  glib-2.0 >= $GLIB_REQUIRED
 		  gtk+-3.0 >= $GTK_REQUIRED
-		  libnotify >= $NOTIFY_REQUIRED
-		  unique-3.0)
+		  libnotify >= $NOTIFY_REQUIRED)
 
 dnl Requires for the sendto app
 PKG_CHECK_MODULES(SENDTO,
