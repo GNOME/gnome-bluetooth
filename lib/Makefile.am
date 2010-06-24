@@ -66,14 +66,14 @@ GnomeBluetooth-1.0.gir: $(INTROSPECTION_SCANNER)
 	$(AM_V_GEN) $(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=1.0 \
 		--add-include-path=$(srcdir) --add-include-path=. \
 		--include=GObject-2.0 \
-		--include=Gtk-2.0 \
+		--include=Gtk-3.0 \
 		--include=DBusGLib-1.0 \
 		--include=GModule-2.0 \
 		--libtool="$(LIBTOOL)" \
 		--library=gnome-bluetooth \
 		--output $@ \
 		--pkg gobject-2.0 \
-		--pkg gtk+-2.0 \
+		--pkg gtk+-3.0 \
 		--pkg dbus-glib-1 \
 		--pkg gmodule-2.0 \
 		-I$(srcdir) \
