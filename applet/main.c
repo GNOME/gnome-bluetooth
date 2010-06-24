@@ -49,10 +49,10 @@ static gboolean discover_lock = FALSE;
 #define SCHEMA_NAME		"org.gnome.Bluetooth"
 #define PREF_SHOW_ICON		"show-icon"
 
-#define KEYBOARD_PREFS		"gnome-keyboard-properties"
-#define MOUSE_PREFS		"gnome-mouse-properties"
-#define SOUND_PREFS		"gnome-volume-control"
-#define SOUND_PREFS_CMDLINE	SOUND_PREFS " -p hardware"
+#define GNOMECC			"gnome-control-center"
+#define KEYBOARD_PREFS		GNOMECC " keyboard"
+#define MOUSE_PREFS		GNOMECC " mouse"
+#define SOUND_PREFS		GNOMECC " sound"
 
 enum {
 	CONNECTED,
@@ -246,7 +246,7 @@ static void mouse_callback(GObject *widget, gpointer user_data)
 
 static void sound_callback(GObject *widget, gpointer user_data)
 {
-	const char *command = SOUND_PREFS_CMDLINE;
+	const char *command = SOUND_PREFS;
 
 	if (!g_spawn_command_line_async(command, NULL))
 		g_printerr("Couldn't execute command: %s\n", command);
@@ -891,7 +891,7 @@ update_device_list (GtkTreeIter *parent)
 
 			add_separator_item (address, "files-sep", uimanager, menu_merge_id);
 
-			if (type == BLUETOOTH_TYPE_KEYBOARD && program_available (KEYBOARD_PREFS)) {
+			if (type == BLUETOOTH_TYPE_KEYBOARD && program_available (GNOMECC)) {
 				add_menu_item (address,
 					       "keyboard",
 					       _("Open Keyboard Preferences..."),
@@ -899,7 +899,7 @@ update_device_list (GtkTreeIter *parent)
 					       menu_merge_id,
 					       G_CALLBACK (keyboard_callback));
 			}
-			if (type == BLUETOOTH_TYPE_MOUSE && program_available (MOUSE_PREFS)) {
+			if (type == BLUETOOTH_TYPE_MOUSE && program_available (GNOMECC)) {
 				add_menu_item (address,
 					       "mouse",
 					       _("Open Mouse Preferences..."),
@@ -909,7 +909,7 @@ update_device_list (GtkTreeIter *parent)
 			}
 			if ((type == BLUETOOTH_TYPE_HEADSET ||
 			     type == BLUETOOTH_TYPE_HEADPHONES ||
-			     type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (SOUND_PREFS)) {
+			     type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (GNOMECC)) {
 				add_menu_item (address,
 					       "sound",
 					       _("Open Sound Preferences..."),
