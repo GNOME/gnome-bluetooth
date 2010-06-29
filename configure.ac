@@ -1,7 +1,7 @@
 AC_PREREQ(2.52)
 
 m4_define(gnomebt_version_major, 2)
-m4_define(gnomebt_version_minor, 30)
+m4_define(gnomebt_version_minor, 90)
 m4_define(gnomebt_version_micro, 0)
 
 AC_INIT([gnome-bluetooth],
@@ -72,7 +72,7 @@ GTK_REQUIRED=2.19.1
 GLIB_REQUIRED=2.25.7
 DBUS_GLIB_REQUIRED=0.74
 NOTIFY_REQUIRED=0.5.1
-NAUTILUS_SENDTO_REQUIRED=2.28.0.1
+NAUTILUS_SENDTO_REQUIRED=2.29.0
 
 dnl Requires for the properties window
 PANELS_DIR="${libdir}/control-center-1/panels"
