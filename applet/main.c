@@ -85,7 +85,7 @@ void quit_callback(GObject *widget, gpointer user_data)
 
 void settings_callback(GObject *widget, gpointer user_data)
 {
-	const char *command = "bluetooth-properties";
+	const char *command = "gnome-control-center bluetooth";
 
 	if (!g_spawn_command_line_async(command, NULL))
 		g_printerr("Couldn't execute command: %s\n", command);
