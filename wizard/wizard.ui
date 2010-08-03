@@ -448,6 +448,21 @@
               </packing>
             </child>
             <child>
+              <object class="GtkRadioButton" id="radio_none">
+                <property name="label" translatable="yes">Do not pair</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <property name="group">radio_auto</property>
+                <signal name="toggled" handler="set_user_pincode"/>
+              </object>
+              <packing>
+                <property name="position">6</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkHBox" id="hbox1">
                 <property name="visible">True</property>
                 <property name="spacing">12</property>

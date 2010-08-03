@@ -116,6 +116,7 @@ static GtkWidget *radio_auto = NULL;
 static GtkWidget *radio_0000 = NULL;
 static GtkWidget *radio_1111 = NULL;
 static GtkWidget *radio_1234 = NULL;
+static GtkWidget *radio_none = NULL;
 static GtkWidget *radio_custom = NULL;
 static GtkWidget *entry_custom = NULL;
 
@@ -964,6 +965,7 @@ create_wizard (void)
 	radio_0000 = W("radio_0000");
 	radio_1111 = W("radio_1111");
 	radio_1234 = W("radio_1234");
+	radio_none = W("radio_none");
 	radio_custom = W("radio_custom");
 	entry_custom = W("entry_custom");
 
@@ -971,6 +973,7 @@ create_wizard (void)
 	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
 	g_object_set_data (G_OBJECT (radio_1111), "pin", "1111");
 	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
+	g_object_set_data (G_OBJECT (radio_none), "pin", "NULL");
 	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
 
 	gtk_builder_connect_signals(builder, NULL);
