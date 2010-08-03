@@ -260,6 +260,45 @@ void wizard_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
+static gboolean
+set_powered_foreach (GtkTreeModel *model,
+		     GtkTreePath  *path,
+		     GtkTreeIter  *iter,
+		     gpointer      data)
+{
+	DBusGProxy *proxy = NULL;
+	GValue value = { 0, };
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_PROXY, &proxy, -1);
+	if (proxy == NULL)
+		return FALSE;
+
+	g_value_init (&value, G_TYPE_BOOLEAN);
+	g_value_set_boolean (&value, TRUE);
+
+	dbus_g_proxy_call_no_reply (proxy, "SetProperty",
+				    G_TYPE_STRING, "Powered",
+				    G_TYPE_VALUE, &value,
+				    G_TYPE_INVALID,
+				    G_TYPE_INVALID);
+
+	g_value_unset (&value);
+	g_object_unref (proxy);
+
+	return FALSE;
+}
+
+static void
+bluetooth_set_adapter_powered (void)
+{
+	GtkTreeModel *adapters;
+
+	adapters = bluetooth_client_get_adapter_model (client);
+	gtk_tree_model_foreach (adapters, set_powered_foreach, NULL);
+	g_object_unref (adapters);
+}
+
 void bluetooth_status_callback (GObject *widget, gpointer user_data)
 {
 	GObject *object;
@@ -271,6 +310,7 @@ void bluetooth_status_callback (GObject *widget, gpointer user_data)
 	bluetooth_killswitch_set_state (killswitch,
 					active ? KILLSWITCH_STATE_UNBLOCKED : KILLSWITCH_STATE_SOFT_BLOCKED);
 	g_object_set_data (object, "bt-active", GINT_TO_POINTER (active));
+	bluetooth_set_adapter_powered ();
 }
 
 void
