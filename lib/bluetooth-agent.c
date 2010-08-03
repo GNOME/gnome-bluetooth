@@ -512,7 +512,7 @@ void bluetooth_agent_set_pincode_func(BluetoothAgent *agent,
 {
 	BluetoothAgentPrivate *priv;
 
-	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
@@ -527,7 +527,7 @@ void bluetooth_agent_set_passkey_func(BluetoothAgent *agent,
 {
 	BluetoothAgentPrivate *priv;
 
-	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
@@ -542,7 +542,7 @@ void bluetooth_agent_set_display_func(BluetoothAgent *agent,
 {
 	BluetoothAgentPrivate *priv;
 
-	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
@@ -557,7 +557,7 @@ void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
 {
 	BluetoothAgentPrivate *priv;
 
-	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
@@ -572,7 +572,7 @@ void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,
 {
 	BluetoothAgentPrivate *priv;
 
-	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
@@ -587,7 +587,7 @@ void bluetooth_agent_set_cancel_func(BluetoothAgent *agent,
 {
 	BluetoothAgentPrivate *priv;
 
-	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
