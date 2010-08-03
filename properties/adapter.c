@@ -698,7 +698,7 @@ create_no_adapter_page (GtkNotebook *notebook, const char *filename)
 		path = g_build_filename (PKGDATADIR, filename, NULL);
 		if (gtk_builder_add_from_file (xml, path, NULL) == 0) {
 			g_free (path);
-			g_warning ("Failed to load properties-no-adapter.ui");
+			g_warning ("Failed to load '%s'", filename);
 			return;
 		}
 		g_free (path);
