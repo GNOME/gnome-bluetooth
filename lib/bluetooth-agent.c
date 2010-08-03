@@ -332,6 +332,7 @@ static void bluetooth_agent_finalize(GObject *agent)
 					G_TYPE_INVALID, G_TYPE_INVALID);
 
 		g_object_unref(priv->adapter);
+		priv->adapter = NULL;
 	}
 
 	g_free(priv->path);
@@ -419,6 +420,9 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, DBusGProxy *adapter)
 	GError *error = NULL;
 	gchar *path;
 
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_val_if_fail (DBUS_IS_G_PROXY (adapter), FALSE);
+
 	DBG("agent %p", agent);
 
 	if (priv->adapter != NULL)
@@ -471,10 +475,14 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 	GError *error = NULL;
 
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
 	DBG("agent %p", agent);
 
 	if (priv->adapter == NULL)
 		return FALSE;
+
+	DBG("unregistering agent for path '%s'", priv->path);
 
 	dbus_g_proxy_call (priv->adapter, "UnregisterAgent", &error,
 			   DBUS_TYPE_G_OBJECT_PATH, priv->path,
@@ -502,7 +510,11 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 void bluetooth_agent_set_pincode_func(BluetoothAgent *agent,
 				BluetoothAgentPasskeyFunc func, gpointer data)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
+
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	DBG("agent %p", agent);
 
@@ -513,7 +525,11 @@ void bluetooth_agent_set_pincode_func(BluetoothAgent *agent,
 void bluetooth_agent_set_passkey_func(BluetoothAgent *agent,
 				BluetoothAgentPasskeyFunc func, gpointer data)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
+
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	DBG("agent %p", agent);
 
@@ -524,7 +540,11 @@ void bluetooth_agent_set_passkey_func(BluetoothAgent *agent,
 void bluetooth_agent_set_display_func(BluetoothAgent *agent,
 				BluetoothAgentDisplayFunc func, gpointer data)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
+
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	DBG("agent %p", agent);
 
@@ -535,7 +555,11 @@ void bluetooth_agent_set_display_func(BluetoothAgent *agent,
 void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
 				BluetoothAgentConfirmFunc func, gpointer data)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
+
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	DBG("agent %p", agent);
 
@@ -546,7 +570,11 @@ void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
 void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,
 				BluetoothAgentAuthorizeFunc func, gpointer data)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
+
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	DBG("agent %p", agent);
 
@@ -557,7 +585,11 @@ void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,
 void bluetooth_agent_set_cancel_func(BluetoothAgent *agent,
 				BluetoothAgentCancelFunc func, gpointer data)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
+
+	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	DBG("agent %p", agent);
 
