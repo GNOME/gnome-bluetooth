@@ -513,6 +513,7 @@ update_discoverability (GtkTreeIter *iter)
 	object = gtk_builder_get_object (xml, "discoverable");
 
 	if (iter == NULL) {
+		discover_lock = FALSE;
 		gtk_action_set_visible (GTK_ACTION (object), FALSE);
 		return;
 	}
