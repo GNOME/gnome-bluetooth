@@ -122,6 +122,10 @@ GtkStatusIcon *init_notification(void)
 				   _("Bluetooth"));
 	gtk_status_icon_set_tooltip_markup(statusicon, tooltip);
 
+	/* XXX: Make sure the status icon is actually shown */
+	gtk_status_icon_set_visible(statusicon, FALSE);
+	gtk_status_icon_set_visible(statusicon, TRUE);
+
 	return statusicon;
 }
 
