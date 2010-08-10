@@ -75,6 +75,7 @@ void wizard_callback(GObject *widget, gpointer user_data);
 void sendto_callback(GObject *widget, gpointer user_data);
 
 static void action_set_bold (GtkUIManager *manager, GtkAction *action, const char *path);
+static void update_icon_visibility (void);
 
 void quit_callback(GObject *widget, gpointer user_data)
 {
@@ -348,6 +349,7 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 	if (state == KILLSWITCH_STATE_NO_ADAPTER) {
 		object = gtk_builder_get_object (xml, "bluetooth-applet-popup");
 		gtk_menu_popdown (GTK_MENU (object));
+		update_icon_visibility ();
 		return;
 	}
 
@@ -382,6 +384,8 @@ killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state
 
 	object = gtk_builder_get_object (xml, "bluetooth-applet-ui-manager");
 	gtk_ui_manager_ensure_update (GTK_UI_MANAGER (object));
+
+	update_icon_visibility ();
 }
 
 static GtkWidget *create_popupmenu(void)
