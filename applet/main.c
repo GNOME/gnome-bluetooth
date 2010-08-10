@@ -1082,12 +1082,18 @@ int main(int argc, char *argv[])
 			 G_CALLBACK(device_removed), NULL);
 	g_signal_connect (G_OBJECT (devices_model), "row-changed",
 			  G_CALLBACK (device_changed), NULL);
-	/* Set the default */
+
+	/* Set the default adapter */
 	device_changed (devices_model, NULL, NULL, NULL);
 	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
 		killswitch_state_changed (killswitch,
 					  bluetooth_killswitch_get_state (killswitch));
 	}
+
+	/* Make sure all the unblocked adapters are powered,
+	 * so as to avoid seeing unpowered, but unblocked
+	 * devices */
+	bluetooth_set_adapter_powered ();
 
 	gconf = gconf_client_get_default();
 
