@@ -113,6 +113,10 @@ GtkStatusIcon *init_notification(void)
 	statusicon = gtk_status_icon_new_from_icon_name(icon_name);
 	gtk_status_icon_set_tooltip_markup(statusicon, tooltip);
 
+	/* XXX: Make sure the status icon is actually shown */
+	gtk_status_icon_set_visible(statusicon, FALSE);
+	gtk_status_icon_set_visible(statusicon, TRUE);
+
 	return statusicon;
 }
 
