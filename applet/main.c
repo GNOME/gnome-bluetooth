@@ -1128,6 +1128,11 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	if (option_dump != FALSE) {
+		dump_devices ();
+		return 0;
+	}
+
 	if (option_debug == FALSE) {
 		app = gtk_application_new ("org.gnome.Bluetooth.applet",
 					   &argc, &argv);
@@ -1138,11 +1143,6 @@ int main(int argc, char *argv[])
 		}
 	} else {
 		app = NULL;
-	}
-
-	if (option_dump != FALSE) {
-		dump_devices ();
-		return 0;
 	}
 
 	g_set_application_name(_("Bluetooth Applet"));
