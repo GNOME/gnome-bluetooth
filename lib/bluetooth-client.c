@@ -1990,8 +1990,17 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 static void
 services_foreach (const char *service, gpointer _value, GString *str)
 {
-	gboolean value = GPOINTER_TO_INT (_value);
-	g_string_append_printf (str, "%s (%s) ", service, value ? "connected" : "not connected");
+	GEnumClass *eclass;
+	GEnumValue *ev;
+	BluetoothStatus status = GPOINTER_TO_INT (_value);
+
+	eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
+	ev = g_enum_get_value (eclass, status);
+	if (ev == NULL)
+		g_warning ("Unknown status value %d", status);
+
+	g_string_append_printf (str, "%s (%s) ", service, ev ? ev->value_nick : "unknown");
+	g_type_class_unref (eclass);
 }
 
 void
