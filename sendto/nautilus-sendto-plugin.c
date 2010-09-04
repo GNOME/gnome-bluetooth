@@ -60,7 +60,7 @@ set_last_used_device (void)
 	bdaddr = g_settings_get_string (settings, PREF_LAST_USED);
 	g_object_unref (settings);
 
-	if (bdaddr != NULL && *bdaddr != '\0') {
+	if (*bdaddr != '\0') {
 		g_object_set (G_OBJECT (combo), "device", bdaddr, NULL);
 	} else {
 		g_object_set (G_OBJECT (combo), "device", BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE, NULL);
