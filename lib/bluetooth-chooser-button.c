@@ -201,7 +201,7 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 	parent = gtk_widget_get_toplevel (GTK_WIDGET (button));
 	//FIXME title
 	button->dialog = gtk_dialog_new_with_buttons("", GTK_WINDOW (parent),
-						     GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
+						     GTK_DIALOG_MODAL,
 						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 						     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 	g_signal_connect (button->dialog, "response",

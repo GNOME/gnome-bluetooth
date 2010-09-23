@@ -144,7 +144,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 		int response_id;
 
 		dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
-						     GTK_DIALOG_NO_SEPARATOR,
+						     0,
 						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 						     NULL);
 		gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);

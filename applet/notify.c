@@ -171,15 +171,19 @@ void set_icon(gboolean enabled)
 
 void enable_blinking(void)
 {
-	gtk_status_icon_set_blinking(statusicon, TRUE);
+	/* FIXME
+	gtk_status_icon_set_blinking(statusicon, TRUE); */
 }
 
 void disable_blinking(void)
 {
-	gtk_status_icon_set_blinking(statusicon, FALSE);
+	/* FIXME
+	gtk_status_icon_set_blinking(statusicon, FALSE); */
 }
 
 gboolean query_blinking(void)
 {
-	return gtk_status_icon_get_blinking(statusicon);
+	/* FIXME
+	 * return gtk_status_icon_get_blinking(statusicon); */
+	return FALSE;
 }

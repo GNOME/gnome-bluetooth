@@ -130,7 +130,7 @@ create_phone_dialogue (const char *bdaddr)
 	GtkWidget *dialog, *button;
 
 	dialog = gtk_dialog_new_with_buttons("My test prefs", NULL,
-					     GTK_DIALOG_NO_SEPARATOR,
+					     0,
 					     GTK_STOCK_CLOSE, GTK_RESPONSE_ACCEPT, NULL);
 	button = bluetooth_chooser_button_new ();
 	if (bdaddr != NULL)
@@ -153,7 +153,7 @@ create_dialogue (const char *title)
 	GtkWidget *dialog;
 
 	dialog = gtk_dialog_new_with_buttons(title, NULL,
-					     GTK_DIALOG_NO_SEPARATOR,
+					     0,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 					     GTK_STOCK_CONNECT, GTK_RESPONSE_ACCEPT, NULL);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),

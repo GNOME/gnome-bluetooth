@@ -672,8 +672,8 @@ entry_custom_event (GtkWidget *entry, GdkEventKey *event)
 	if (event->length == 0)
 		return FALSE;
 
-	if ((event->keyval >= GDK_0 && event->keyval <= GDK_9) ||
-	    (event->keyval >= GDK_KP_0 && event->keyval <= GDK_KP_9))
+	if ((event->keyval >= GDK_KEY_0 && event->keyval <= GDK_KEY_9) ||
+	    (event->keyval >= GDK_KEY_KP_0 && event->keyval <= GDK_KEY_KP_9))
 		return FALSE;
 
 	return TRUE;

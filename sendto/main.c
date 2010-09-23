@@ -247,7 +247,7 @@ static void create_window(void)
 	gchar *text;
 
 	dialog = gtk_dialog_new_with_buttons(_("File Transfer"), NULL,
-				GTK_DIALOG_NO_SEPARATOR,
+				0,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 				_("_Retry"), RESPONSE_RETRY,
@@ -639,7 +639,7 @@ show_browse_dialog (char **device_name)
 	int response_id;
 
 	dialog = gtk_dialog_new_with_buttons(_("Select Device to Send To"), NULL,
-					     GTK_DIALOG_NO_SEPARATOR,
+					     0,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 					     NULL);
 	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Send _To"), GTK_RESPONSE_ACCEPT);
