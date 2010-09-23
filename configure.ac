@@ -81,7 +81,7 @@ AC_SUBST(PANELS_DIR)
 PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  glib-2.0 >= $GLIB_REQUIRED
-		  gtk+-3.0
+		  gtk+-3.0 >= 2.90.7
 		  libgnome-control-center)
 
 dnl Requires for the applet
