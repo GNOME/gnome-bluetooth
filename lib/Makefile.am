@@ -21,7 +21,7 @@ libcommon_la_LIBADD = $(COMMON_LIBS)
 libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 
 # will be scanned for introspection annotation, but won't be installed
-libgnome_bluetooth_c_sources = 		\
+libgnome_bluetooth_c_sources =		\
 	bluetooth-client.c		\
 	bluetooth-agent.c		\
 	bluetooth-killswitch.c		\
@@ -32,17 +32,16 @@ libgnome_bluetooth_c_sources = 		\
 	bluetooth-chooser-button.c	\
 	bluetooth-chooser-combo.c
 
-libgnome_bluetooth_private_headers = 	\
+libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
 	bluetooth-agent.h		\
 	bluetooth-killswitch.h		\
 	marshal.h			\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h
-EXTRA_DIST += $(libgnome_bluetooth_private_headers)
 
 # public headers don't need to be listed, are handled by _HEADERS
-libgnome_bluetooth_la_SOURCES = 		\
+libgnome_bluetooth_la_SOURCES =			\
 	$(libgnome_bluetooth_private_headers)	\
 	$(libgnome_bluetooth_c_sources)
 
@@ -54,13 +53,16 @@ libgnome_bluetooth_la_LDFLAGS =				\
 	$(AM_LDFLAGS)					\
 	-export-symbols $(srcdir)/gnome-bluetooth.symbols
 
-gnomebluetoothdir = $(pkgincludedir)
-gnomebluetooth_HEADERS =				\
+libgnome_bluetooth_introspect_headers =			\
 	bluetooth-client.h				\
 	bluetooth-chooser.h				\
 	bluetooth-chooser-button.h			\
 	bluetooth-filter-widget.h			\
-	bluetooth-enums.h				\
+	bluetooth-enums.h
+
+gnomebluetoothdir = $(pkgincludedir)
+gnomebluetooth_HEADERS =				\
+	$(libgnome_bluetooth_introspect_headers)	\
 	bluetooth-plugin.h
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
@@ -71,22 +73,23 @@ INTROSPECTION_SCANNER_ARGS = --warn-all --add-include-path=$(srcdir)
 INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 
 if HAVE_INTROSPECTION
-introspection_files =			\
-	$(gnomebluetooth_HEADERS) 		\
+introspection_files =				 \
+	$(libgnome_bluetooth_introspect_headers) \
 	$(libgnome_bluetooth_c_sources)
 
 GnomeBluetooth-1.0.gir: libgnome-bluetooth.la
 GnomeBluetooth_1_0_gir_INCLUDES = GObject-2.0 Gtk-3.0 DBusGLib-1.0 GModule-2.0
-GnomeBluetooth_1_0_gir_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS)
+GnomeBluetooth_1_0_gir_PACKAGES = gobject-2.0 gtk+-3.0 dbus-glib-1 gmodule-2.0 glib-2.0
+GnomeBluetooth_1_0_gir_CFLAGS = -I$(srcdir)
 GnomeBluetooth_1_0_gir_LIBS = libgnome-bluetooth.la
-GnomeBluetooth_1_0_gir_SCANNERFLAGS = --strip-prefix=Bluetooth --pkg-export=gnome-bluetooth-1.0
+GnomeBluetooth_1_0_gir_SCANNERFLAGS = --symbol-prefix=bluetooth_ --identifier-prefix=Bluetooth --pkg-export=gnome-bluetooth-1.0
 GnomeBluetooth_1_0_gir_FILES = $(introspection_files)
 INTROSPECTION_GIRS += GnomeBluetooth-1.0.gir
 
-girdir = $(INTROSPECTION_GIRDIR)
+girdir = $(datadir)/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
 
-typelibdir = $(INTROSPECTION_TYPELIBDIR)
+typelibdir = $(libdir)/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES += $(gir_DATA) $(typelibs_DATA)
