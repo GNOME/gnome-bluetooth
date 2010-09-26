@@ -1305,7 +1305,7 @@ BluetoothClient *bluetooth_client_new(void)
  *
  * Returns an unfiltered #GtkTreeModel representing the adapter and devices available on the system.
  *
- * Return value: a #GtkTreeModel object.
+ * Return value: (transfer full): a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
 {
@@ -1331,7 +1331,7 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
  *
  * Returns a #GtkTreeModel of devices filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
  *
- * Return value: a #GtkTreeModel object.
+ * Return value: (transfer full): a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_filter_model (BluetoothClient *client,
 						 GtkTreeModelFilterVisibleFunc func,
@@ -1378,7 +1378,7 @@ static gboolean adapter_filter(GtkTreeModel *model,
  *
  * Returns a filtered #GtkTreeModel with only adapters present.
  *
- * Return value: a #GtkTreeModel object.
+ * Return value: (transfer full): a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
 {
@@ -1395,7 +1395,7 @@ GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
  *
  * Returns a filtered #GtkTreeModel with only devices belonging to the selected adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter when %NULL is passed.
  *
- * Return value: a #GtkTreeModel object.
+ * Return value: (transfer full): a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
 						 DBusGProxy *adapter)
@@ -1460,7 +1460,7 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
  * Returns a #GtkTreeModel of adapters filtered using the @func, @data and
  * @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
  *
- * Return value: a #GtkTreeModel object.
+ * Return value: (transfer full): a #GtkTreeModel object.
  **/
 GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
 		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
@@ -1795,6 +1795,16 @@ static void connect_callback(DBusGProxy *proxy,
 	g_object_unref(proxy);
 }
 
+/**
+ * bluetooth_client_connect_service:
+ *
+ * @client: a #BluetoothClient
+ * @device: the DBUS path on which to operate
+ * @func: (scope async): a callback to call when the connection is complete
+ * @user_data:
+ *
+ * Returns: TRUE if the operation was started successfully, FALSE otherwise
+ */
 gboolean bluetooth_client_connect_service(BluetoothClient *client,
 					  const char *device,
 					  BluetoothClientConnectFunc func,
@@ -1926,6 +1936,16 @@ rev_sort_services (const char *servicea, const char *serviceb)
 	return 0;
 }
 
+/**
+ * bluetooth_client_disconnect_service:
+ *
+ * @client: a #BluetoothClient
+ * @device: the DBUS path on which to operate
+ * @func: (scope async): a callback to call when the disconnection is complete
+ * @user_data:
+ *
+ * Returns: TRUE if the operation was started successfully, FALSE otherwise
+ */
 gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 					      const char *device,
 					      BluetoothClientConnectFunc func,

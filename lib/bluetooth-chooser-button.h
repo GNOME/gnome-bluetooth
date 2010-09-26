@@ -31,11 +31,13 @@ G_BEGIN_DECLS
 
 typedef struct _BluetoothChooserButton BluetoothChooserButton;
 
-typedef struct _BluetoothChooserButtonClass {
+typedef struct _BluetoothChooserButtonClass BluetoothChooserButtonClass;
+
+struct _BluetoothChooserButtonClass {
   GtkButtonClass parent_class;
 
   void (*chooser_created) (BluetoothChooserButton *self, GtkWidget *chooser);
-} BluetoothChooserButtonClass;
+};
 
 GType		bluetooth_chooser_button_get_type	(void);
 
