@@ -104,7 +104,7 @@ supports_xinput_devices (void)
 {
 	gint op_code, event, error;
 
-	return XQueryExtension (GDK_DISPLAY (),
+	return XQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
 				"XInputExtension",
 				&op_code,
 				&event,
@@ -179,7 +179,7 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 	has_keyboard = FALSE;
 	has_mouse = FALSE;
 
-	device_info = XListInputDevices (GDK_DISPLAY (), &n_devices);
+	device_info = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &n_devices);
 	for (i = 0; i < n_devices; i++) {
 		gboolean is_mouse, is_keyboard;
 		if (device_info[i].use != IsXExtensionKeyboard &&
