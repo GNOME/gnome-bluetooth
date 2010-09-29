@@ -1,3 +1,4 @@
+SUBDIRS = lib
 
 bin_PROGRAMS = bluetooth-applet
 
