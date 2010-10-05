@@ -22,7 +22,8 @@
  *
  */
 
-int setup_agents(void);
-void cleanup_agents(void);
+#include <lib/bluetooth-applet.h>
+
+int setup_agents(BluetoothApplet* applet);
 
 void show_agents(void);

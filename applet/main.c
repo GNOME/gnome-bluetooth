@@ -29,20 +29,15 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include <bluetooth-client.h>
-#include <bluetooth-client-private.h>
+#include <lib/bluetooth-applet.h>
 #include <bluetooth-chooser.h>
-#include <bluetooth-killswitch.h>
 
 #include "notify.h"
 #include "agent.h"
 
 static gboolean option_debug = FALSE;
-static gboolean option_dump = FALSE;
-static BluetoothClient *client;
-static GtkTreeModel *devices_model;
-static guint num_adapters_present = 0;
-static guint num_adapters_powered = 0;
+static BluetoothApplet *applet = NULL;
+static GSettings *settings = NULL;
 static gboolean show_icon_pref = TRUE;
 static gboolean discover_lock = FALSE;
 
@@ -60,9 +55,6 @@ enum {
 	CONNECTING,
 	DISCONNECTING
 };
-
-static GSettings *settings;
-static BluetoothKillswitch *killswitch = NULL;
 
 static GtkBuilder *xml = NULL;
 static GtkActionGroup *devices_action_group = NULL;
@@ -261,45 +253,6 @@ void wizard_callback(GObject *widget, gpointer user_data)
 		g_printerr("Couldn't execute command: %s\n", command);
 }
 
-static gboolean
-set_powered_foreach (GtkTreeModel *model,
-		     GtkTreePath  *path,
-		     GtkTreeIter  *iter,
-		     gpointer      data)
-{
-	DBusGProxy *proxy = NULL;
-	GValue value = { 0, };
-
-	gtk_tree_model_get (model, iter,
-			    BLUETOOTH_COLUMN_PROXY, &proxy, -1);
-	if (proxy == NULL)
-		return FALSE;
-
-	g_value_init (&value, G_TYPE_BOOLEAN);
-	g_value_set_boolean (&value, TRUE);
-
-	dbus_g_proxy_call_no_reply (proxy, "SetProperty",
-				    G_TYPE_STRING, "Powered",
-				    G_TYPE_VALUE, &value,
-				    G_TYPE_INVALID,
-				    G_TYPE_INVALID);
-
-	g_value_unset (&value);
-	g_object_unref (proxy);
-
-	return FALSE;
-}
-
-static void
-bluetooth_set_adapter_powered (void)
-{
-	GtkTreeModel *adapters;
-
-	adapters = bluetooth_client_get_adapter_model (client);
-	gtk_tree_model_foreach (adapters, set_powered_foreach, NULL);
-	g_object_unref (adapters);
-}
-
 void bluetooth_status_callback (GObject *widget, gpointer user_data)
 {
 	GObject *object;
@@ -308,10 +261,9 @@ void bluetooth_status_callback (GObject *widget, gpointer user_data)
 	object = gtk_builder_get_object (xml, "killswitch");
 	active = GPOINTER_TO_INT (g_object_get_data (object, "bt-active"));
 	active = !active;
-	bluetooth_killswitch_set_state (killswitch,
-					active ? KILLSWITCH_STATE_UNBLOCKED : KILLSWITCH_STATE_SOFT_BLOCKED);
+	bluetooth_applet_set_killswitch_state (applet,
+					active ? BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED : BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED);
 	g_object_set_data (object, "bt-active", GINT_TO_POINTER (active));
-	bluetooth_set_adapter_powered ();
 }
 
 void
@@ -321,7 +273,7 @@ bluetooth_discoverable_callback (GtkToggleAction *toggleaction, gpointer user_da
 
 	discoverable = gtk_toggle_action_get_active (toggleaction);
 	discover_lock = TRUE;
-	bluetooth_client_set_discoverable (client, discoverable, 0);
+	bluetooth_applet_set_discoverable (applet, discoverable);
 	discover_lock = FALSE;
 }
 
@@ -352,38 +304,41 @@ static void activate_callback(GObject *widget, gpointer user_data)
 {
 	guint32 activate_time = gtk_get_current_event_time();
 
-	if (query_blinking() == TRUE) {
-		show_agents();
-		return;
-	}
-
+	/* Always show the menu, whatever button is pressed.
+	 * Agent dialog can be shown from the notification (or should
+	 * be shown automatically in the background).
+	 */
 	popup_callback(widget, 0, activate_time, user_data);
 }
 
 static void
-killswitch_state_changed (BluetoothKillswitch *killswitch, KillswitchState state)
+killswitch_state_changed (GObject    *gobject,
+                          GParamSpec *pspec,
+                          gpointer    user_data)
 {
 	GObject *object;
+	BluetoothApplet *applet = BLUETOOTH_APPLET (gobject);
+	BluetoothKillswitchState state = bluetooth_applet_get_killswitch_state (applet);
 	gboolean sensitive = TRUE;
 	gboolean bstate = FALSE;
 	const char *label, *status_label;
 
-	if (state == KILLSWITCH_STATE_NO_ADAPTER) {
+	if (state == BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER) {
 		object = gtk_builder_get_object (xml, "bluetooth-applet-popup");
 		gtk_menu_popdown (GTK_MENU (object));
 		update_icon_visibility ();
 		return;
 	}
 
-	if (state == KILLSWITCH_STATE_SOFT_BLOCKED) {
+	if (state == BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED) {
 		label = N_("Turn On Bluetooth");
 		status_label = N_("Bluetooth: Off");
 		bstate = FALSE;
-	} else if (state == KILLSWITCH_STATE_UNBLOCKED) {
+	} else if (state == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED) {
 		label = N_("Turn Off Bluetooth");
 		status_label = N_("Bluetooth: On");
 		bstate = TRUE;
-	} else if (state == KILLSWITCH_STATE_HARD_BLOCKED) {
+	} else if (state == BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED) {
 		sensitive = FALSE;
 		label = NULL;
 		status_label = N_("Bluetooth: Disabled");
@@ -433,7 +388,7 @@ static GtkWidget *create_popupmenu(void)
 
 	gtk_builder_connect_signals (xml, NULL);
 
-	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
+	if (bluetooth_applet_get_killswitch_state (applet) != BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER) {
 		GObject *object;
 
 		object = gtk_builder_get_object (xml, "killswitch-label");
@@ -460,15 +415,15 @@ static GtkWidget *create_popupmenu(void)
 }
 
 static void
-update_menu_items (void)
+update_menu_items (GObject    *gobject,
+                   GParamSpec *pspec,
+                   gpointer    user_data)
 {
+	BluetoothApplet *applet = BLUETOOTH_APPLET (gobject);
 	gboolean enabled;
 	GObject *object;
 
-	if (num_adapters_present == 0)
-		enabled = FALSE;
-	else
-		enabled = (num_adapters_present - num_adapters_powered) <= 0;
+	enabled = bluetooth_applet_get_show_full_menu (applet);
 
 	object = gtk_builder_get_object (xml, "adapter-action-group");
 	gtk_action_group_set_visible (GTK_ACTION_GROUP (object), enabled);
@@ -481,16 +436,16 @@ update_menu_items (void)
 }
 
 static void
-update_icon_visibility (void)
+update_icon_visibility ()
 {
-	if (num_adapters_powered == 0)
+	gboolean state = bluetooth_applet_get_killswitch_state (applet);
+	if (state != BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED)
 		set_icon (FALSE);
 	else
 		set_icon (TRUE);
 
 	if (show_icon_pref != FALSE) {
-		if (num_adapters_present > 0 ||
-		    bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
+		if (state != BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER) {
 			show_icon ();
 			return;
 		}
@@ -499,8 +454,11 @@ update_icon_visibility (void)
 }
 
 static void
-update_discoverability (GtkTreeIter *iter)
+update_discoverability (GObject    *gobject,
+                        GParamSpec *pspec,
+                        gpointer    user_data)
 {
+	BluetoothApplet *applet = BLUETOOTH_APPLET (gobject);
 	gboolean discoverable;
 	GObject *object;
 
@@ -512,15 +470,7 @@ update_discoverability (GtkTreeIter *iter)
 
 	object = gtk_builder_get_object (xml, "discoverable");
 
-	if (iter == NULL) {
-		discover_lock = FALSE;
-		gtk_action_set_visible (GTK_ACTION (object), FALSE);
-		return;
-	}
-
-	gtk_tree_model_get (devices_model, iter,
-			    BLUETOOTH_COLUMN_DISCOVERABLE, &discoverable,
-			    -1);
+	discoverable = bluetooth_applet_get_discoverable (applet);
 
 	gtk_action_set_visible (GTK_ACTION (object), TRUE);
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (object), discoverable);
@@ -570,7 +520,7 @@ set_device_status_label (const char *address, int connected)
 }
 
 static void
-connection_action_callback (BluetoothClient *_client,
+connection_action_callback (BluetoothApplet *_client,
 			    gboolean success,
 			    gpointer user_data)
 {
@@ -579,7 +529,10 @@ connection_action_callback (BluetoothClient *_client,
 	int connected;
 
 	/* Revert to the previous state and wait for the
-	 * BluetoothClient to catch up */
+	 * BluetoothApplet to catch up */
+	/* XXX: wouldn't it make more sense just to set the new state if
+	 * the operation succeded?
+	 */
 	connected = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "connected"));
 	if (connected == DISCONNECTING)
 		connected = CONNECTED;
@@ -609,10 +562,10 @@ on_connect_activate (GtkAction *action, gpointer data)
 	path = g_object_get_data (G_OBJECT (action), "device-path");
 
 	if (connected == DISCONNECTED) {
-		if (bluetooth_client_connect_service (client, path, connection_action_callback, action) != FALSE)
+		if (bluetooth_applet_connect_device (applet, path, connection_action_callback, action) != FALSE)
 			connected = DISCONNECTING;
 	} else if (connected == CONNECTED) {
-		if (bluetooth_client_disconnect_service (client, path, connection_action_callback, action) != FALSE)
+		if (bluetooth_applet_disconnect_device (applet, path, connection_action_callback, action) != FALSE)
 			connected = CONNECTING;
 	} else {
 		g_assert_not_reached ();
@@ -682,32 +635,18 @@ escape_label_for_action (const char *alias)
 }
 
 static gboolean
-device_has_uuid (const char **uuids, const char *uuid)
+device_has_submenu (BluetoothSimpleDevice *dev)
 {
-	guint i;
-
-	if (uuids == NULL)
-		return FALSE;
-
-	for (i = 0; uuids[i] != NULL; i++) {
-		if (g_str_equal (uuid, uuids[i]) != FALSE)
-			return TRUE;
-	}
-	return FALSE;
-}
-
-static gboolean
-device_has_submenu (const char **uuids, GHashTable *services, BluetoothType type)
-{
-	if (services != NULL)
+	if (dev->can_connect)
 		return TRUE;
-	if (device_has_uuid (uuids, "OBEXObjectPush") != FALSE)
+	if (dev->capabilities != BLUETOOTH_CAPABILITIES_NONE)
 		return TRUE;
-	if (device_has_uuid (uuids, "OBEXFileTransfer") != FALSE)
+	if (dev->type == BLUETOOTH_TYPE_KEYBOARD ||
+		dev->type == BLUETOOTH_TYPE_MOUSE ||
+		dev->type == BLUETOOTH_TYPE_HEADSET ||
+		dev->type == BLUETOOTH_TYPE_HEADPHONES ||
+		dev->type == BLUETOOTH_TYPE_OTHER_AUDIO)
 		return TRUE;
-	if (type == BLUETOOTH_TYPE_KEYBOARD ||
-	    type == BLUETOOTH_TYPE_MOUSE)
-	    	return TRUE;
 	return FALSE;
 }
 
@@ -770,24 +709,57 @@ add_separator_item (const char *address,
 	g_free (action_name);
 }
 
+static gboolean
+verify_address (const char *bdaddr)
+{
+	gboolean retval = TRUE;
+	char **elems;
+	guint i;
+
+	g_return_val_if_fail (bdaddr != NULL, FALSE);
+
+	if (strlen (bdaddr) != 17)
+		return FALSE;
+
+	elems = g_strsplit (bdaddr, ":", -1);
+	if (elems == NULL)
+		return FALSE;
+	if (g_strv_length (elems) != 6) {
+		g_strfreev (elems);
+		return FALSE;
+	}
+	for (i = 0; i < 6; i++) {
+		if (strlen (elems[i]) != 2 ||
+		    g_ascii_isxdigit (elems[i][0]) == FALSE ||
+		    g_ascii_isxdigit (elems[i][1]) == FALSE) {
+			retval = FALSE;
+			break;
+		}
+	}
+
+	g_strfreev (elems);
+	return retval;
+}
+
+
 static void
-update_device_list (GtkTreeIter *parent)
+update_device_list (BluetoothApplet *applet,
+					gpointer user_data)
 {
 	GtkUIManager *uimanager;
-	GtkTreeIter iter;
-	gboolean cont;
-	guint num_devices;
-	GList *actions, *l;
-
-	num_devices = 0;
+	GList *actions, *devices, *l;
+	gboolean has_devices = TRUE;
 
 	uimanager = GTK_UI_MANAGER (gtk_builder_get_object (xml, "bluetooth-applet-ui-manager"));
 
-	if (parent == NULL) {
-		/* No default adapter? Remove everything */
+	devices = bluetooth_applet_get_devices (applet);
+
+	if (devices == NULL) {
+		/* No devices? Remove everything */
 		actions = gtk_action_group_list_actions (devices_action_group);
 		g_list_foreach (actions, (GFunc) remove_action_item, uimanager);
 		g_list_free (actions);
+		has_devices = FALSE;
 		goto done;
 	}
 
@@ -795,44 +767,22 @@ update_device_list (GtkTreeIter *parent)
 	 * device in the list. We remove the submenu items first */
 	actions = gtk_action_group_list_actions (devices_action_group);
 	for (l = actions; l != NULL; l = l->next) {
-		if (bluetooth_verify_address (gtk_action_get_name (l->data)) == FALSE)
+		if (verify_address (gtk_action_get_name (l->data)) == FALSE)
 			l->data = NULL;
 	}
 	actions = g_list_remove_all (actions, NULL);
 
-	cont = gtk_tree_model_iter_children (devices_model, &iter, parent);
-	while (cont) {
-		GHashTable *services;
-		DBusGProxy *proxy;
-		char *alias, *address, **uuids, *name;
-		gboolean is_connected;
-		BluetoothType type;
+	for (l = devices; l != NULL; l = g_list_next (l)) {
+		BluetoothSimpleDevice *device = l->data;
 		GtkAction *action, *status, *oper;
+		char *name;
 
-		gtk_tree_model_get (devices_model, &iter,
-				    BLUETOOTH_COLUMN_PROXY, &proxy,
-				    BLUETOOTH_COLUMN_ADDRESS, &address,
-				    BLUETOOTH_COLUMN_SERVICES, &services,
-				    BLUETOOTH_COLUMN_ALIAS, &alias,
-				    BLUETOOTH_COLUMN_UUIDS, &uuids,
-				    BLUETOOTH_COLUMN_TYPE, &type,
-				    -1);
-
-		if (device_has_submenu ((const char **) uuids, services, type) == FALSE ||
-		    address == NULL || proxy == NULL || alias == NULL) {
-			if (proxy != NULL)
-				g_object_unref (proxy);
-
-			if (services != NULL)
-				g_hash_table_unref (services);
-			g_strfreev (uuids);
-			g_free (alias);
-			g_free (address);
-			cont = gtk_tree_model_iter_next (devices_model, &iter);
+		if (device_has_submenu (device) == FALSE) {
+			g_boxed_free (BLUETOOTH_TYPE_SIMPLE_DEVICE, device);
 			continue;
 		}
 
-		action = gtk_action_group_get_action (devices_action_group, address);
+		action = gtk_action_group_get_action (devices_action_group, device->bdaddr);
 		oper = NULL;
 		status = NULL;
 		if (action) {
@@ -840,62 +790,45 @@ update_device_list (GtkTreeIter *parent)
 
 			actions = g_list_remove (actions, action);
 
-			action_name = g_strdup_printf ("%s-status", address);
+			action_name = g_strdup_printf ("%s-status", device->bdaddr);
 			status = gtk_action_group_get_action (devices_action_group, action_name);
 			g_free (action_name);
 
-			action_name = g_strdup_printf ("%s-action", address);
+			action_name = g_strdup_printf ("%s-action", device->bdaddr);
 			oper = gtk_action_group_get_action (devices_action_group, action_name);
 			g_free (action_name);
 		}
 
-		/* If one service is connected, then we're connected */
-		is_connected = FALSE;
-		if (services != NULL) {
-			GList *list, *l;
-
-			list = g_hash_table_get_values (services);
-			for (l = list; l != NULL; l = l->next) {
-				BluetoothStatus val = GPOINTER_TO_INT (l->data);
-				if (val == BLUETOOTH_STATUS_CONNECTED ||
-				    val == BLUETOOTH_STATUS_PLAYING) {
-					is_connected = TRUE;
-					break;
-				}
-			}
-			g_list_free (list);
-		}
-
-		name = escape_label_for_action (alias);
+		name = escape_label_for_action (device->alias);
 
 		if (action == NULL) {
 			guint menu_merge_id;
 			char *action_path;
 
 			/* The menu item with descendants */
-			action = gtk_action_new (address, name, NULL, NULL);
+			action = gtk_action_new (device->bdaddr, name, NULL, NULL);
 
 			gtk_action_group_add_action (devices_action_group, action);
 			g_object_unref (action);
 			menu_merge_id = gtk_ui_manager_new_merge_id (uimanager);
 			gtk_ui_manager_add_ui (uimanager, menu_merge_id,
-					       "/bluetooth-applet-popup/devices-placeholder", address, address,
+					       "/bluetooth-applet-popup/devices-placeholder", device->bdaddr, device->bdaddr,
 					       GTK_UI_MANAGER_MENU, FALSE);
 			g_object_set_data_full (G_OBJECT (action),
 						"merge-id", GUINT_TO_POINTER (menu_merge_id), NULL);
 
 			/* The status menu item */
-			status = add_menu_item (address,
+			status = add_menu_item (device->bdaddr,
 						"status",
-						is_connected ? _("Connected") : _("Disconnected"),
+						device->connected ? _("Connected") : _("Disconnected"),
 						uimanager,
 						menu_merge_id,
 						NULL);
 			gtk_action_set_sensitive (status, FALSE);
 
-			if (services != NULL) {
+			if (device->can_connect) {
 				action_path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s/%s-status",
-							       address, address);
+							       device->bdaddr, device->bdaddr);
 				action_set_bold (uimanager, status, action_path);
 				g_free (action_path);
 			} else {
@@ -903,30 +836,30 @@ update_device_list (GtkTreeIter *parent)
 			}
 
 			/* The connect button */
-			oper = add_menu_item (address,
+			oper = add_menu_item (device->bdaddr,
 					      "action",
-					      is_connected ? _("Disconnect") : _("Connect"),
+					      device->connected ? _("Disconnect") : _("Connect"),
 					      uimanager,
 					      menu_merge_id,
 					      G_CALLBACK (on_connect_activate));
-			if (services == NULL)
+			if (!device->can_connect)
 				gtk_action_set_visible (oper, FALSE);
 
-			add_separator_item (address, "connect-sep", uimanager, menu_merge_id);
+			add_separator_item (device->bdaddr, "connect-sep", uimanager, menu_merge_id);
 
 			/* The Send to... button */
-			if (device_has_uuid ((const char **) uuids, "OBEXObjectPush") != FALSE) {
-				add_menu_item (address,
+			if (device->capabilities & BLUETOOTH_CAPABILITIES_OBEX_PUSH) {
+				add_menu_item (device->bdaddr,
 					       "sendto",
 					       _("Send files..."),
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (sendto_callback));
 				g_object_set_data_full (G_OBJECT (action),
-							"alias", g_strdup (alias), g_free);
+							"alias", g_strdup (device->alias), g_free);
 			}
-			if (device_has_uuid ((const char **) uuids, "OBEXFileTransfer") != FALSE) {
-				add_menu_item (address,
+			if (device->capabilities & BLUETOOTH_CAPABILITIES_OBEX_FILE_TRANSFER) {
+				add_menu_item (device->bdaddr,
 					       "browse",
 					       _("Browse files..."),
 					       uimanager,
@@ -934,28 +867,28 @@ update_device_list (GtkTreeIter *parent)
 					       G_CALLBACK (browse_callback));
 			}
 
-			add_separator_item (address, "files-sep", uimanager, menu_merge_id);
+			add_separator_item (device->bdaddr, "files-sep", uimanager, menu_merge_id);
 
-			if (type == BLUETOOTH_TYPE_KEYBOARD && program_available (GNOMECC)) {
-				add_menu_item (address,
+			if (device->type == BLUETOOTH_TYPE_KEYBOARD && program_available (GNOMECC)) {
+				add_menu_item (device->bdaddr,
 					       "keyboard",
 					       _("Open Keyboard Preferences..."),
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (keyboard_callback));
 			}
-			if (type == BLUETOOTH_TYPE_MOUSE && program_available (GNOMECC)) {
-				add_menu_item (address,
+			if (device->type == BLUETOOTH_TYPE_MOUSE && program_available (GNOMECC)) {
+				add_menu_item (device->bdaddr,
 					       "mouse",
 					       _("Open Mouse Preferences..."),
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (mouse_callback));
 			}
-			if ((type == BLUETOOTH_TYPE_HEADSET ||
-			     type == BLUETOOTH_TYPE_HEADPHONES ||
-			     type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (GNOMECC)) {
-				add_menu_item (address,
+			if ((device->type == BLUETOOTH_TYPE_HEADSET ||
+				 device->type == BLUETOOTH_TYPE_HEADPHONES ||
+				 device->type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (GNOMECC)) {
+				add_menu_item (device->bdaddr,
 					       "sound",
 					       _("Open Sound Preferences..."),
 					       uimanager,
@@ -965,106 +898,48 @@ update_device_list (GtkTreeIter *parent)
 		} else {
 			gtk_action_set_label (action, name);
 
-			gtk_action_set_visible (status, services != NULL);
-			gtk_action_set_visible (oper, services != NULL);
-			if (services != NULL) {
-				set_device_status_label (address, is_connected ? CONNECTED : DISCONNECTED);
-				gtk_action_set_label (oper, is_connected ? _("Disconnect") : _("Connect"));
+			if (device->can_connect) {
+				gtk_action_set_visible (status, TRUE);
+				gtk_action_set_visible (oper, TRUE);
+				set_device_status_label (device->bdaddr, device->connected ? CONNECTED : DISCONNECTED);
+				gtk_action_set_label (oper, device->connected ? _("Disconnect") : _("Connect"));
+			} else {
+				gtk_action_set_visible (status, FALSE);
+				gtk_action_set_visible (oper, FALSE);
 			}
 		}
 		g_free (name);
 
 		if (oper != NULL) {
 			g_object_set_data_full (G_OBJECT (oper),
-						"connected", GINT_TO_POINTER (is_connected ? CONNECTED : DISCONNECTED), NULL);
+						"connected", GINT_TO_POINTER (device->connected ? CONNECTED : DISCONNECTED), NULL);
 			g_object_set_data_full (G_OBJECT (oper),
-						"device-path", g_strdup (dbus_g_proxy_get_path (proxy)), g_free);
+						"device-path", g_strdup (device->device_path), g_free);
 		}
 
 		/* And now for the trick of the day */
-		if (is_connected != FALSE) {
+		if (device->connected != FALSE) {
 			char *path;
 
-			path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", address);
+			path = g_strdup_printf ("/bluetooth-applet-popup/devices-placeholder/%s", device->bdaddr);
 			action_set_bold (uimanager, action, path);
 			g_free (path);
 		}
 
-		num_devices++;
-
-		if (proxy != NULL)
-			g_object_unref (proxy);
-
-		if (services != NULL)
-			g_hash_table_unref (services);
-		g_strfreev (uuids);
-		g_free (alias);
-		g_free (address);
-		cont = gtk_tree_model_iter_next (devices_model, &iter);
+		g_boxed_free (BLUETOOTH_TYPE_SIMPLE_DEVICE, device);
 	}
 
 	/* Remove the left-over devices */
 	g_list_foreach (actions, (GFunc) remove_action_item, uimanager);
 	g_list_free (actions);
 
+	/* Cleanup */
+	g_list_free (devices);
 done:
 	gtk_ui_manager_ensure_update (uimanager);
 
 	gtk_action_set_visible (GTK_ACTION (gtk_builder_get_object (xml, "devices-label")),
-				num_devices > 0);
-}
-
-static void device_changed (GtkTreeModel *model,
-			     GtkTreePath  *path,
-			     GtkTreeIter  *_iter,
-			     gpointer      data)
-{
-	GtkTreeIter iter, *default_iter;
-	gboolean powered, cont;
-
-	default_iter = NULL;
-	num_adapters_present = num_adapters_powered = 0;
-
-	cont = gtk_tree_model_get_iter_first (model, &iter);
-	while (cont) {
-		gboolean is_default;
-
-		num_adapters_present++;
-
-		gtk_tree_model_get (model, &iter,
-				    BLUETOOTH_COLUMN_DEFAULT, &is_default,
-				    BLUETOOTH_COLUMN_POWERED, &powered,
-				    -1);
-		if (powered)
-			num_adapters_powered++;
-		if (is_default && powered)
-			default_iter = gtk_tree_iter_copy (&iter);
-
-		cont = gtk_tree_model_iter_next (model, &iter);
-	}
-
-	update_discoverability (default_iter);
-	update_icon_visibility ();
-	update_menu_items ();
-	update_device_list (default_iter);
-
-	if (default_iter != NULL)
-		gtk_tree_iter_free (default_iter);
-}
-
-static void device_added(GtkTreeModel *model,
-			  GtkTreePath *path,
-			  GtkTreeIter *iter,
-			  gpointer user_data)
-{
-	device_changed (model, path, iter, user_data);
-}
-
-static void device_removed(GtkTreeModel *model,
-			    GtkTreePath *path,
-			    gpointer user_data)
-{
-	device_changed (model, path, NULL, user_data);
+				has_devices);
 }
 
 static void
@@ -1076,29 +951,8 @@ show_icon_changed (GSettings *settings,
 	update_icon_visibility();
 }
 
-static void
-dump_devices (void)
-{
-	BluetoothClient *client;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	client = bluetooth_client_new ();
-	model = bluetooth_client_get_model (client);
-
-	if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
-		g_print ("No known devices\n");
-		g_print ("Is bluetoothd running, and a Bluetooth adapter enabled?\n");
-		return;
-	}
-	bluetooth_client_dump_device (model, &iter, TRUE);
-	while (gtk_tree_model_iter_next (model, &iter))
-		bluetooth_client_dump_device (model, &iter, TRUE);
-}
-
 static GOptionEntry options[] = {
 	{ "debug", 'd', 0, G_OPTION_ARG_NONE, &option_debug, N_("Debug"), NULL },
-	{ "dump-devices", 'u', 0, G_OPTION_ARG_NONE, &option_dump, N_("Output a list of currently known devices"), NULL },
 	{ NULL },
 };
 
@@ -1128,11 +982,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	if (option_dump != FALSE) {
-		dump_devices ();
-		return 0;
-	}
-
 	if (option_debug == FALSE) {
 		app = gtk_application_new ("org.gnome.Bluetooth.applet",
 					   &argc, &argv);
@@ -1149,34 +998,23 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
-	killswitch = bluetooth_killswitch_new ();
-	g_signal_connect (G_OBJECT (killswitch), "state-changed",
-			  G_CALLBACK (killswitch_state_changed), NULL);
+	applet = g_object_new (BLUETOOTH_TYPE_APPLET, NULL);
+	g_signal_connect (G_OBJECT (applet), "notify::killswitch-state",
+			G_CALLBACK (killswitch_state_changed), NULL);
 
 	menu = create_popupmenu();
 
-	client = bluetooth_client_new();
+	g_signal_connect (G_OBJECT (applet), "devices-changed",
+			G_CALLBACK (update_device_list), NULL);
+	g_signal_connect (G_OBJECT (applet), "notify::discoverable",
+			G_CALLBACK (update_discoverability), NULL);
+	g_signal_connect (G_OBJECT (applet), "notify::show-full-menu",
+			G_CALLBACK (update_menu_items), NULL);
 
-	devices_model = bluetooth_client_get_model(client);
-
-	g_signal_connect(G_OBJECT(devices_model), "row-inserted",
-			 G_CALLBACK(device_added), NULL);
-	g_signal_connect(G_OBJECT(devices_model), "row-deleted",
-			 G_CALLBACK(device_removed), NULL);
-	g_signal_connect (G_OBJECT (devices_model), "row-changed",
-			  G_CALLBACK (device_changed), NULL);
-
-	/* Set the default adapter */
-	device_changed (devices_model, NULL, NULL, NULL);
-	if (bluetooth_killswitch_has_killswitches (killswitch) != FALSE) {
-		killswitch_state_changed (killswitch,
-					  bluetooth_killswitch_get_state (killswitch));
-	}
-
-	/* Make sure all the unblocked adapters are powered,
-	 * so as to avoid seeing unpowered, but unblocked
-	 * devices */
-	bluetooth_set_adapter_powered ();
+	killswitch_state_changed ((GObject*) applet, NULL, NULL);
+	update_menu_items ((GObject*) applet, NULL, NULL);
+	update_discoverability ((GObject*) applet, NULL, NULL);
+	update_device_list (applet, NULL);
 
 	settings = g_settings_new (SCHEMA_NAME);
 	show_icon_pref = g_settings_get_boolean (settings, PREF_SHOW_ICON);
@@ -1193,7 +1031,7 @@ int main(int argc, char *argv[])
 	g_signal_connect(statusicon, "popup-menu",
 				G_CALLBACK(popup_callback), menu);
 
-	setup_agents();
+	setup_agents(applet);
 
 	gtk_main();
 
@@ -1201,13 +1039,9 @@ int main(int argc, char *argv[])
 
 	g_object_unref(settings);
 
-	cleanup_agents();
-
 	cleanup_notification();
 
-	g_object_unref(devices_model);
-
-	g_object_unref(client);
+	g_object_unref(applet);
 
 	if (app != NULL)
 		g_object_unref (app);

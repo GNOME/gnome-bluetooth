@@ -168,22 +168,3 @@ void set_icon(gboolean enabled)
 		gtk_status_icon_set_tooltip_markup(statusicon, _tooltip);
 	}
 }
-
-void enable_blinking(void)
-{
-	/* FIXME
-	gtk_status_icon_set_blinking(statusicon, TRUE); */
-}
-
-void disable_blinking(void)
-{
-	/* FIXME
-	gtk_status_icon_set_blinking(statusicon, FALSE); */
-}
-
-gboolean query_blinking(void)
-{
-	/* FIXME
-	 * return gtk_status_icon_get_blinking(statusicon); */
-	return FALSE;
-}

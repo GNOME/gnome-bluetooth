@@ -4,15 +4,15 @@ bin_PROGRAMS = bluetooth-applet
 
 bluetooth_applet_SOURCES = main.c notify.h notify.c agent.h agent.c
 
-bluetooth_applet_LDADD = $(top_builddir)/lib/libcommon.la $(top_builddir)/lib/libgnome-bluetooth.la $(APPLET_LIBS)
+bluetooth_applet_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(builddir)/lib/libgnome-bluetooth-applet.la $(APPLET_LIBS)
 
 noinst_PROGRAMS = test-agentdialog test-icon
 
 test_agentdialog_SOURCES = test-agentdialog.c notify.h notify.c
-test_agentdialog_LDADD = $(top_builddir)/lib/libcommon.la $(APPLET_LIBS)
+test_agentdialog_LDADD = $(builddir)/lib/libgnome-bluetooth-applet.la $(APPLET_LIBS)
 
 test_icon_SOURCES = test-icon.c notify.h notify.c
-test_icon_LDADD = $(top_builddir)/lib/libcommon.la $(APPLET_LIBS)
+test_icon_LDADD = $(APPLET_LIBS)
 
 AM_CFLAGS = $(APPLET_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
