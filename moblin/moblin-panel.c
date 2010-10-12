@@ -867,14 +867,11 @@ create_callback (BluetoothClient *client, const gchar *path, const GError *error
 {
 	MoblinPanel *self = MOBLIN_PANEL (user_data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
-	gchar *device_name;
 
 	priv->create_started = FALSE;
 
 	if (path == NULL) {
-		device_name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (priv->chooser));
-		set_failure_message (self, device_name);
-		g_free (device_name);
+		set_failure_message (self, priv->target_name);
 		set_current_page (self, PAGE_FAILURE);
 		return;
 	}
