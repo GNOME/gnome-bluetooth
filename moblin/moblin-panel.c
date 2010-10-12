@@ -663,6 +663,7 @@ set_failure_message (MoblinPanel *self, gchar *device)
 
 	str = g_strdup_printf (_("Pairing with %s failed."), device);
 	gtk_label_set_text (GTK_LABEL (priv->label_failure), str);
+	g_free (str);
 }
 
 static void
