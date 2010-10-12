@@ -218,10 +218,9 @@ update_visible (gpointer data)
 
 	if (priv->visible_countdown > 0) {
 		gtk_widget_hide (priv->visible_button);
-		gtk_widget_show (priv->visible_label);
 
 		time = totem_time_to_string_text (priv->visible_countdown * 1000);
-		label = g_strdup_printf (_("Your computer is visible on\n"
+		label = g_strdup_printf (_("Your computer is visible on "
 					   "Bluetooth for %s."), time);
 		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
 		g_free (label);
@@ -234,7 +233,8 @@ update_visible (gpointer data)
 		bluetooth_client_set_discoverable (priv->client, FALSE, 0);
 
 		gtk_widget_show (priv->visible_button);
-		gtk_widget_hide (priv->visible_label);
+
+		gtk_label_set_text (GTK_LABEL (priv->visible_label), "");
 
 		return FALSE;
 	}
@@ -1647,9 +1647,10 @@ create_devices_page (MoblinPanel *self)
 	gtk_box_pack_start (GTK_BOX (hbox), priv->power_switch, FALSE, FALSE, 4);
 
 	priv->visible_label = gtk_label_new (NULL);
+	gtk_widget_set_size_request (priv->visible_label, 200, -1);
 	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 0.0, 0.5);
 	gtk_label_set_line_wrap (GTK_LABEL (priv->visible_label), TRUE);
-	gtk_label_set_width_chars (GTK_LABEL (priv->visible_label), 30);
+	gtk_widget_show (priv->visible_label);
 	gtk_box_pack_start (GTK_BOX (vbox2), priv->visible_label, FALSE, FALSE, 4);
 
 	priv->visible_button = gtk_button_new_with_label (_("Make visible on Bluetooth"));
