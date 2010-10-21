@@ -77,6 +77,7 @@ GLIB_REQUIRED=2.25.7
 DBUS_GLIB_REQUIRED=0.74
 NOTIFY_REQUIRED=0.5.1
 NAUTILUS_SENDTO_REQUIRED=2.29.0
+NAUTILUS_SENDTO_MAX_REQUIRED=2.91.0
 
 dnl Requires for the properties window
 PANELS_DIR="${libdir}/control-center-1/panels"
@@ -106,12 +107,12 @@ dnl nautilus-sendto plugin
 AC_ARG_ENABLE(nautilus-sendto,
               AS_HELP_STRING([--enable-nautilus-sendto=@<:@no/yes/auto@:>@],
                              [build nautilus-sendto plugin]), ,
-                             enable_nst=yes)
+                             enable_nst=auto)
 
 if test "x$enable_nst" != "xno"; then
    PKG_CHECK_MODULES(NST,
    [
-      nautilus-sendto >= $NAUTILUS_SENDTO_REQUIRED
+      nautilus-sendto >= $NAUTILUS_SENDTO_REQUIRED < NAUTILUS_SENDTO_MAX_REQUIRED
    ], have_nst="yes", have_nst="no")
 else
    have_nst=no
