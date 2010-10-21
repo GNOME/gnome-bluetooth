@@ -249,7 +249,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	priv->device_category_label = label;
 
-	priv->device_category = gtk_combo_box_new_text ();
+	priv->device_category = gtk_combo_box_text_new ();
 	gtk_widget_set_no_show_all (priv->device_category, TRUE);
 	gtk_widget_show (priv->device_category);
 	gtk_table_attach (GTK_TABLE (table), priv->device_category, 1, 2, 1, 2,
@@ -257,8 +257,8 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 	gtk_widget_set_tooltip_text (priv->device_category, _("Select the device category to filter"));
 	for (i = 0; i < BLUETOOTH_CATEGORY_NUM_CATEGORIES; i++) {
-		gtk_combo_box_append_text (GTK_COMBO_BOX (priv->device_category),
-					   _(bluetooth_device_category_to_string (i)));
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (priv->device_category),
+					        _(bluetooth_device_category_to_string (i)));
 	}
 	g_signal_connect (G_OBJECT (priv->device_category), "changed",
 			  G_CALLBACK (filter_category_changed_cb), self);
