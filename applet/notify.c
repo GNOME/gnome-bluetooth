@@ -75,7 +75,7 @@ void show_notification(const gchar *summary, const gchar *message,
 		notify_notification_close(notify, NULL);
 	}
 
-	notify = notify_notification_new(summary, message, ACTIVE_ICON_NAME, NULL);
+	notify = notify_notification_new(summary, message, ACTIVE_ICON_NAME);
 
 	notify_notification_set_timeout(notify, timeout);
 
