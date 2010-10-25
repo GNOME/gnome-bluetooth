@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2010-02-11 22:02+0000\n"
+"POT-Creation-Date: 2010-10-13 07:53+0000\n"
 "PO-Revision-Date: 2010-02-12 15:51+0300\n"
 "Last-Translator: Lucian Adrian Grijincu <lucian.grijincu@gmail.com>\n"
 "Language-Team: Romanian GNOME Team <gnomero-list@lists.sourceforge.net>\n"
@@ -83,7 +83,7 @@ msgid "Video device"
 msgstr "Dispozitiv video"
 
 #: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
-#: ../lib/bluetooth-filter-widget.c:85
+#: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -119,53 +119,53 @@ msgstr "Dispozitiv"
 msgid "Type"
 msgstr "Tip"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-filter-widget.c:71
 msgid "All categories"
 msgstr "Toate categoriile"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:73
 msgid "Paired"
 msgstr "Asociat"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:75
 msgid "Trusted"
 msgstr "De încredere"
 
-#: ../lib/bluetooth-filter-widget.c:81
+#: ../lib/bluetooth-filter-widget.c:77
 msgid "Not paired or trusted"
 msgstr "Nici asociat, nici de încredere"
 
-#: ../lib/bluetooth-filter-widget.c:83
+#: ../lib/bluetooth-filter-widget.c:79
 msgid "Paired or trusted"
 msgstr "Asociat sau de încredere"
 
-#: ../lib/bluetooth-filter-widget.c:238
+#: ../lib/bluetooth-filter-widget.c:227
 msgid "<b>Show Only Bluetooth Devices With...</b>"
 msgstr "<b>Afișează doar dispozitivele Bluetooth cu...</b>"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:254
+#: ../lib/bluetooth-filter-widget.c:243
 msgid "Device _category:"
 msgstr "_Categorie dispozitiv:"
 
-#: ../lib/bluetooth-filter-widget.c:269
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Alegeți categoria dispozitivului pentru filtrare"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:283
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "_Tip dispozitiv:"
 
-#: ../lib/bluetooth-filter-widget.c:304
+#: ../lib/bluetooth-filter-widget.c:293
 msgid "Select the device type to filter"
 msgstr "Alegeți tipul dispozitivului pentru filtrare"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Dispozitive de intrare (mauși, tastaturi, etc.)"
 
-#: ../lib/bluetooth-filter-widget.c:314
+#: ../lib/bluetooth-filter-widget.c:303
 msgid "Headphones, headsets and other audio devices"
 msgstr "Căști și alte dispozitive audio"
 
@@ -180,92 +180,96 @@ msgstr "Folosește acest dispozitiv GPS pentru servicii de geolocație"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Acesează Internetul utilizând telefonul mobil (test)"
 
-#: ../applet/main.c:139
+#: ../applet/main.c:146
 msgid "Select Device to Browse"
 msgstr "Alegeți dispozitivul de răsfoit"
 
-#: ../applet/main.c:143
+#: ../applet/main.c:150
 msgid "_Browse"
 msgstr "_Răsfoiește"
 
-#: ../applet/main.c:152
+#: ../applet/main.c:159
 msgid "Select device to browse"
 msgstr "Alegeți dispozitivul de răsfoit"
 
-#: ../applet/main.c:329 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:379 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Pornește Bluetooth"
 
-#: ../applet/main.c:330
+#: ../applet/main.c:380
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: oprit"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:383
 msgid "Turn Off Bluetooth"
 msgstr "Oprește Bluetooth"
 
-#: ../applet/main.c:334
+#: ../applet/main.c:384
 msgid "Bluetooth: On"
 msgstr "Bluetooth: pornit"
 
-#: ../applet/main.c:339 ../applet/notify.c:148
+#: ../applet/main.c:389 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: dezactivat"
 
-#: ../applet/main.c:482
+#: ../applet/main.c:543
 msgid "Disconnecting..."
 msgstr "Se deconectează..."
 
-#: ../applet/main.c:485 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:546 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Se conectează..."
 
-#: ../applet/main.c:488 ../applet/main.c:829
+#: ../applet/main.c:549 ../applet/main.c:890
 msgid "Connected"
 msgstr "Conectat"
 
-#: ../applet/main.c:491 ../applet/main.c:829
+#: ../applet/main.c:552 ../applet/main.c:890
 msgid "Disconnected"
 msgstr "Deconectat"
 
-#: ../applet/main.c:847 ../applet/main.c:911 ../properties/adapter.c:371
+#: ../applet/main.c:908 ../applet/main.c:972 ../properties/adapter.c:380
 msgid "Disconnect"
 msgstr "Deconectează"
 
-#: ../applet/main.c:847 ../applet/main.c:911
+#: ../applet/main.c:908 ../applet/main.c:972
 msgid "Connect"
 msgstr "Conectează"
 
-#: ../applet/main.c:860
+#: ../applet/main.c:921
 msgid "Send files..."
 msgstr "Trimite fișiere..."
 
-#: ../applet/main.c:870
+#: ../applet/main.c:931
 msgid "Browse files..."
 msgstr "Răsfoiește fișiere..."
 
-#: ../applet/main.c:881
+#: ../applet/main.c:942
 msgid "Open Keyboard Preferences..."
 msgstr "Deschide preferințele tastaturii..."
 
-#: ../applet/main.c:889
+#: ../applet/main.c:950
 msgid "Open Mouse Preferences..."
 msgstr "Deschide preferințele mausului..."
 
-#: ../applet/main.c:899
+#: ../applet/main.c:960
 msgid "Open Sound Preferences..."
 msgstr "Deschide preferințele sunetului..."
 
-#: ../applet/main.c:1026
+#: ../applet/main.c:1100
 msgid "Debug"
 msgstr "Depanează"
 
+#: ../applet/main.c:1101
+msgid "Output a list of currently known devices"
+msgstr "Afișează o listă a dispozitivelor cunoscute acum"
+
 #. Parse command-line options
-#: ../applet/main.c:1046
+#: ../applet/main.c:1120
 msgid "- Bluetooth applet"
 msgstr "- Miniaplicație Bluetooth"
 
-#: ../applet/main.c:1051
+#: ../applet/main.c:1125
 #, c-format
 msgid ""
 "%s\n"
@@ -275,11 +279,20 @@ msgstr ""
 "Executați „%s --help” pentru a vedea întreaga lista a comenzilor "
 "disponibile.\n"
 
-#: ../applet/main.c:1068
+#: ../applet/main.c:1148
 msgid "Bluetooth Applet"
 msgstr "Miniaplicație Bluetooth"
 
-#: ../applet/notify.c:148
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/main.c:141 ../moblin/moblin-panel.c:1595
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../applet/notify.c:159
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: activat"
 
@@ -361,8 +374,8 @@ msgstr "Bluetooth: verificare"
 msgid "Browse files on device..."
 msgstr "Navigare fișiere de pe un dispozitiv..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
+#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:339
+#: ../moblin/moblin-panel.c:1396 ../moblin/moblin-panel.c:1506
 msgid "Devices"
 msgstr "Dispozitive"
 
@@ -410,95 +423,61 @@ msgstr "_Potriviri"
 msgid "_Show input"
 msgstr "A_fișează intrările"
 
-#: ../properties/main.c:91
+#. The discoverable checkbox
+#: ../properties/adapter.c:286
+msgid "Make computer _visible"
+msgstr "Fă calculatorul _vizibil"
+
+#: ../properties/adapter.c:309
+msgid "Friendly name"
+msgstr "Nume afișat"
+
+#: ../properties/adapter.c:371
+msgid "Set up _new device..."
+msgstr "Configurare dispozitiv _nou..."
+
+#: ../properties/adapter.c:394
+msgid "_Remove"
+msgstr "Ște_rge"
+
+#: ../properties/adapter.c:671
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth este dezactivat"
+
+#: ../properties/adapter.c:711
+msgid "No Bluetooth adapters present"
+msgstr "Niciun adaptor Bluetooth prezent"
+
+#: ../properties/cc-bluetooth-panel.c:59
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr "Nu s-au putut porni preferințele de „Partajare fișiere personale”"
 
-#: ../properties/main.c:96
+#: ../properties/cc-bluetooth-panel.c:64
 msgid ""
 "Please verify that the \"Personal File Sharing\" program is correctly "
 "installed."
 msgstr ""
 "Verificați că programul „Partajare fișiere personale” este instalat corect."
 
-#: ../properties/main.c:125
-msgid "Bluetooth Preferences"
-msgstr "Preferințe Bluetooth"
-
-#: ../properties/main.c:140
+#: ../properties/cc-bluetooth-panel.c:96
 msgid "_Show Bluetooth icon"
 msgstr "Afișează iconița _Bluetooth"
 
-#: ../properties/main.c:164
+#: ../properties/cc-bluetooth-panel.c:115
 msgid "Receive Files"
 msgstr "Primire fișiere"
-
-#: ../properties/main.c:212
-msgid "Output a list of currently known devices"
-msgstr "Afișează o listă a dispozitivelor cunoscute acum"
-
-#: ../properties/main.c:250
-msgid "Bluetooth Properties"
-msgstr "Proprietăți Bluetooth"
-
-#. The discoverable checkbox
-#: ../properties/adapter.c:277
-msgid "Make computer _visible"
-msgstr "Fă calculatorul _vizibil"
-
-#: ../properties/adapter.c:300
-msgid "Friendly name"
-msgstr "Nume afișat"
-
-#: ../properties/adapter.c:362
-msgid "Set up _new device..."
-msgstr "Configurare dispozitiv _nou..."
-
-#: ../properties/adapter.c:385
-msgid "_Remove"
-msgstr "Ște_rge"
-
-#: ../properties/adapter.c:661
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth este dezactivat"
-
-#: ../properties/adapter.c:697
-msgid "No Bluetooth adapters present"
-msgstr "Niciun adaptor Bluetooth prezent"
 
 #: ../properties/properties-no-adapter.ui.h:1
 msgid "Your computer does not have any Bluetooth adapters plugged in."
 msgstr "Calculatorul dumneavoastră nu are conectat nici un adaptor Bluetooth"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
-msgid "Bluetooth"
-msgstr "Bluetooth"
+#: ../properties/properties-killed-adapter.ui.h:1
+msgid "Bluetooth has been disabled by a switch on your computer."
+msgstr ""
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "Configurează parametrii Bluetooth"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid "Whether to show the notification icon"
-msgstr "Dacă se afișează sau nu pictograma de notificare"
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "Whether to show the notification icon."
-msgstr "Dacă se afișează sau nu pictograma de notificare."
-
-#: ../properties/gconf-bridge.c:1233
-#, c-format
-msgid "GConf error: %s"
-msgstr "Eroare GConf: %s"
-
-#: ../properties/gconf-bridge.c:1238
-msgid "All further errors shown only on terminal."
-msgstr "Toate erorile următoare sunt afișate doar în terminal."
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -509,12 +488,12 @@ msgstr "Toate erorile următoare sunt afișate doar în terminal."
 msgid "Pairing with '%s' cancelled"
 msgstr "Asocierea cu „%s” a fost anulată"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1139
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Confirmați dacă PIN-ul afișat pe „%s” este acesta."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1190
 msgid "Please enter the following PIN:"
 msgstr "Introduceți următorul cod PIN:"
 
@@ -536,13 +515,13 @@ msgstr "Configurarea dispozitivului „%s” a eșuat"
 msgid "Connecting to '%s'..."
 msgstr "Acum se conectează la „%s”..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Introduceți următorul cod PIN pe „%s” și apăsați „Enter” pe tastatură:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Introduceți următorul cod PIN pe „%s”:"
@@ -556,7 +535,7 @@ msgstr "Introduceți următorul cod PIN pe „%s”:"
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Așteptați până se termină configurarea dispozitivului „%s”..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Noul dispozitiv „%s” a fost configurat cu succes"
@@ -593,52 +572,58 @@ msgstr "Configurarea dispozitivului a eșuat"
 msgid "Device search"
 msgstr "Căutare dispozitive"
 
+#: ../wizard/wizard.ui.h:9
+#, fuzzy
+#| msgid "Does not match"
+msgid "Do not pair"
+msgstr "Nu se potrivesc"
+
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1343
 msgid "Does not match"
 msgstr "Nu se potrivesc"
 
-#: ../wizard/wizard.ui.h:11
+#: ../wizard/wizard.ui.h:12
 msgid "Finishing New Device Setup"
 msgstr "Se încheie configurarea noului dispozitiv"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:13
+#: ../wizard/wizard.ui.h:14
 msgid "Fixed PIN"
 msgstr "PIN predefinit"
 
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:15
 msgid "Introduction"
 msgstr "Introducere"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1339
 msgid "Matches"
 msgstr "Se potrivesc"
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:18
 msgid "PIN Options"
 msgstr "Opțiuni PIN"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:19
 msgid "PIN _options..."
 msgstr "_Opțiuni PIN..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1253
 msgid "Select the additional services you want to use with your device:"
 msgstr ""
 "Alegeți serviciile adiționale pe care doriți să le folosiți cu dispozitivul "
 "dumneavoastră:"
 
-#: ../wizard/wizard.ui.h:20
+#: ../wizard/wizard.ui.h:21
 msgid "Select the device you want to setup"
 msgstr "Alegeți dispozitivul pe care doriți să îl configurați"
 
-#: ../wizard/wizard.ui.h:21
+#: ../wizard/wizard.ui.h:22
 msgid "Setup Completed"
 msgstr "Configurare completă"
 
-#: ../wizard/wizard.ui.h:22
+#: ../wizard/wizard.ui.h:23
 msgid ""
 "The Bluetooth new device setup will walk you through the process of "
 "configuring Bluetooth enabled devices for use with this computer."
@@ -647,26 +632,25 @@ msgstr ""
 "procesul de configurare a dispozitivelor Bluetooth active pentru a fi "
 "folosite de acest calculator."
 
-#: ../wizard/wizard.ui.h:23
+#: ../wizard/wizard.ui.h:24
 msgid ""
-"The device will need to be within 10 meters of your computer, and be “"
-"visible” (sometimes called “discoverable”). Check the "
-"device's manual if in doubt."
+"The device will need to be within 10 meters of your computer, and be "
+"“visible” (sometimes called “discoverable”). Check the device's manual if in "
+"doubt."
 msgstr ""
 "Dispozitivul trebuie să se afle la mai puțin de 10 metri față de "
-"calculatorul dumneavoastră și trebuie să fie “vizibil” "
-"(câteodată întâlnit și ca “descoperibil”). Verificați manualul "
-"dispozitivului dacă aveți dubii."
+"calculatorul dumneavoastră și trebuie să fie “vizibil” (câteodată întâlnit "
+"și ca “descoperibil”). Verificați manualul dispozitivului dacă aveți dubii."
 
-#: ../wizard/wizard.ui.h:24
+#: ../wizard/wizard.ui.h:25
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "Bine ați venit la asistentul de instalare de noi dispozitive Bluetooth"
 
-#: ../wizard/wizard.ui.h:25
+#: ../wizard/wizard.ui.h:26
 msgid "_Automatic PIN selection"
 msgstr "Selectare _automată PIN"
 
-#: ../wizard/wizard.ui.h:26
+#: ../wizard/wizard.ui.h:27
 msgid "_Restart Setup"
 msgstr "_Repornește instalarea"
 
@@ -775,93 +759,188 @@ msgstr "Dispozitiv la distanță de folosit"
 msgid "Remote device's name"
 msgstr "Numele dispozitivului la distanță de folosit"
 
-#: ../sendto/nautilus-sendto-plugin.c:172
+#: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error, could not find the device in the list"
 msgstr "Eroare de programare, nu s-a putut găsi dispozitivul în listă"
 
-#: ../sendto/nautilus-sendto-plugin.c:247
+#: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
 msgid "Obex Push file transfer unsupported"
 msgstr "Transferul de fișiere prin Obex Push nu este suportat"
 
-#: ../sendto/nautilus-sendto-plugin.c:266
+#: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
-#: ../moblin/main.c:86
+#: ../moblin/main.c:93
 msgid "Run in standalone mode"
 msgstr "Rulează în mod autonom"
 
-#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "Administrator Bluetooth Moblin"
 
-#: ../moblin/main.c:95
+#: ../moblin/main.c:102
 msgid "- Moblin Bluetooth Panel"
 msgstr "- Miniaplicație Bluetooth Moblin"
 
-#: ../moblin/main.c:122
+#: ../moblin/main.c:129
 msgid "bluetooth"
 msgstr "bluetooth"
 
-#: ../moblin/moblin-panel.c:533
+#: ../moblin/moblin-panel.c:177
+#, fuzzy, c-format
+#| msgid "%'d hour"
+#| msgid_plural "%'d hours"
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%'d oră"
+msgstr[1] "%'d ore"
+msgstr[2] "%'d de ore"
+
+#: ../moblin/moblin-panel.c:179
+#, fuzzy, c-format
+#| msgid "%'d minute"
+#| msgid_plural "%'d minutes"
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%'d minut"
+msgstr[1] "%'d minute"
+msgstr[2] "%'d de minute"
+
+#: ../moblin/moblin-panel.c:182
+#, fuzzy, c-format
+#| msgid "%'d second"
+#| msgid_plural "%'d seconds"
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%'d secundă"
+msgstr[1] "%'d secunde"
+msgstr[2] "%'d de secunde"
+
+#. hour:minutes:seconds
+#: ../moblin/moblin-panel.c:188
+#, c-format
+msgid "%s %s %s"
+msgstr ""
+
+#. minutes:seconds
+#: ../moblin/moblin-panel.c:192
+#, c-format
+msgid "%s %s"
+msgstr ""
+
+#. minutes
+#. seconds
+#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
+#, c-format
+msgid "%s"
+msgstr ""
+
+#. 0 seconds
+#: ../moblin/moblin-panel.c:202
+#, fuzzy
+#| msgid "%'d second"
+#| msgid_plural "%'d seconds"
+msgid "0 seconds"
+msgstr "%'d secundă"
+
+#: ../moblin/moblin-panel.c:224
+#, fuzzy, c-format
+#| msgid "Your computer does not have any Bluetooth adapters plugged in."
+msgid ""
+"Your computer is visible on\n"
+"Bluetooth for %s."
+msgstr "Calculatorul dumneavoastră nu are conectat nici un adaptor Bluetooth"
+
+#: ../moblin/moblin-panel.c:625
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "Asocierea cu „%s” a eșuat."
 
-#: ../moblin/moblin-panel.c:895
+#: ../moblin/moblin-panel.c:985
 msgid "<u>Pair</u>"
 msgstr "<u>Asociază</u>"
 
-#: ../moblin/moblin-panel.c:909
+#: ../moblin/moblin-panel.c:999
 msgid "<u>Connect</u>"
 msgstr "<u>Conectează</u>"
 
-#: ../moblin/moblin-panel.c:928
+#: ../moblin/moblin-panel.c:1018
 msgid "<u>Browse</u>"
 msgstr "<u>Răsfoiește</u>"
 
-#: ../moblin/moblin-panel.c:1122
+#: ../moblin/moblin-panel.c:1212
 msgid "Device setup failed"
 msgstr "Configurarea dispozitivului a eșuat"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
-#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
-#: ../moblin/moblin-panel.c:1540
+#: ../moblin/moblin-panel.c:1226 ../moblin/moblin-panel.c:1302
+#: ../moblin/moblin-panel.c:1351 ../moblin/moblin-panel.c:1429
+#: ../moblin/moblin-panel.c:1661
 msgid "Back to devices"
 msgstr "Înapoi la dispozitive"
 
-#: ../moblin/moblin-panel.c:1175
+#: ../moblin/moblin-panel.c:1265
 msgid "Done"
 msgstr "Făcut"
 
-#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
+#: ../moblin/moblin-panel.c:1286 ../moblin/moblin-panel.c:1323
 msgid "Device setup"
 msgstr "Configurare dispozitiv"
 
-#: ../moblin/moblin-panel.c:1344
+#: ../moblin/moblin-panel.c:1446 ../moblin/moblin-panel.c:1577
+#, fuzzy
+#| msgid "Sending %s"
+msgid "Settings"
+msgstr "Se trimite %s"
+
+#: ../moblin/moblin-panel.c:1462
 msgid "Only show:"
 msgstr "Afișează doar:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1468
 msgid "PIN options"
 msgstr "Opțiuni PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1433
+#: ../moblin/moblin-panel.c:1512
 msgid "Add a new device"
 msgstr "Adaugă un dispozitiv nou"
 
+#: ../moblin/moblin-panel.c:1613
+#, fuzzy
+#| msgid "Sending files via Bluetooth"
+msgid "Make visible on Bluetooth"
+msgstr "Se trimit fișiere prin Bluetooth"
+
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1500
+#: ../moblin/moblin-panel.c:1619
 msgid "Send file from your computer"
 msgstr "Trimite un fișier de pe calculator"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Miniaplicație Administrator Bluetooth"
+
+#~ msgid "Bluetooth Preferences"
+#~ msgstr "Preferințe Bluetooth"
+
+#~ msgid "Bluetooth Properties"
+#~ msgstr "Proprietăți Bluetooth"
+
+#~ msgid "Whether to show the notification icon"
+#~ msgstr "Dacă se afișează sau nu pictograma de notificare"
+
+#~ msgid "Whether to show the notification icon."
+#~ msgstr "Dacă se afișează sau nu pictograma de notificare."
+
+#~ msgid "GConf error: %s"
+#~ msgstr "Eroare GConf: %s"
+
+#~ msgid "All further errors shown only on terminal."
+#~ msgstr "Toate erorile următoare sunt afișate doar în terminal."
 
 #~ msgid "A Bluetooth manager for the GNOME desktop"
 #~ msgstr "Un administrator Bluetooth pentru GNOME"
