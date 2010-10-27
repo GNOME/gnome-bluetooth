@@ -839,7 +839,7 @@ bluetooth_applet_init (BluetoothApplet *self)
 	self->client_model = bluetooth_client_get_model (self->client);
 
 	self->default_adapter = NULL;
-	self->agent = bluetooth_agent_new ();
+	self->agent = NULL;
 
 	self->killswitch_manager = bluetooth_killswitch_new();
 	g_signal_connect (self->killswitch_manager, "state-changed", G_CALLBACK(killswitch_state_change), self);
