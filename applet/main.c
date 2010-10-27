@@ -748,7 +748,7 @@ update_device_list (BluetoothApplet *applet,
 {
 	GtkUIManager *uimanager;
 	GList *actions, *devices, *l;
-	gboolean has_devices = TRUE;
+	gboolean has_devices = FALSE;
 
 	uimanager = GTK_UI_MANAGER (gtk_builder_get_object (xml, "bluetooth-applet-ui-manager"));
 
@@ -759,7 +759,6 @@ update_device_list (BluetoothApplet *applet,
 		actions = gtk_action_group_list_actions (devices_action_group);
 		g_list_foreach (actions, (GFunc) remove_action_item, uimanager);
 		g_list_free (actions);
-		has_devices = FALSE;
 		goto done;
 	}
 
@@ -781,6 +780,8 @@ update_device_list (BluetoothApplet *applet,
 			g_boxed_free (BLUETOOTH_TYPE_SIMPLE_DEVICE, device);
 			continue;
 		}
+
+		has_devices = TRUE;
 
 		action = gtk_action_group_get_action (devices_action_group, device->bdaddr);
 		oper = NULL;
