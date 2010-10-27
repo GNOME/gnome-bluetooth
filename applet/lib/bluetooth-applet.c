@@ -427,6 +427,9 @@ find_default_adapter (BluetoothApplet* self)
     gtk_tree_model_get (self->client_model, self->default_adapter,
 			BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
+    /* This makes sure that the agent is NULL when released */
+    g_object_add_weak_pointer (G_OBJECT (self->agent), (gpointer *) (&self->agent));
+
     self->agent = bluetooth_agent_new();
 
     bluetooth_agent_set_pincode_func (self->agent, pincode_request, self);
