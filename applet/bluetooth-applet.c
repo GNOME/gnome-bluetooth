@@ -65,23 +65,21 @@ G_DEFINE_BOXED_TYPE(BluetoothSimpleDevice, bluetooth_simple_device, bluetooth_si
 
 struct _BluetoothApplet
 {
-  GObject parent_instance;
+	GObject parent_instance;
 
-  BluetoothKillswitch* killswitch_manager;
-  BluetoothClient* client;
-  GtkTreeModel* client_model;
-  GtkTreeIter* default_adapter;
-  BluetoothAgent* agent;
-  GHashTable* pending_requests;
+	BluetoothKillswitch* killswitch_manager;
+	BluetoothClient* client;
+	GtkTreeModel* client_model;
+	GtkTreeIter* default_adapter;
+	BluetoothAgent* agent;
+	GHashTable* pending_requests;
 
-  gint num_adapters_powered;
-  gint num_adapters_present;
+	gint num_adapters_powered;
+	gint num_adapters_present;
 };
 
-struct _BluetoothAppletClass
-{
-  GObjectClass parent_class;
-
+struct _BluetoothAppletClass {
+	GObjectClass parent_class;
 };
 
 G_DEFINE_TYPE(BluetoothApplet, bluetooth_applet, G_TYPE_OBJECT)
@@ -105,6 +103,7 @@ enum {
 
 	SIGNAL_LAST
 };
+
 guint signals[SIGNAL_LAST];
 
 /**
@@ -115,7 +114,9 @@ guint signals[SIGNAL_LAST];
  * @passkey: (transfer full) (allow-none): the passkey entered by the user, or NULL if the dialog was dismissed
  */
 void
-bluetooth_applet_agent_reply_passkey(BluetoothApplet* self, gchar* request_key, gchar* passkey)
+bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
+				      char            *request_key,
+				      char            *passkey)
 {
 	DBusGMethodInvocation* context;
 
@@ -128,8 +129,8 @@ bluetooth_applet_agent_reply_passkey(BluetoothApplet* self, gchar* request_key, 
 		dbus_g_method_return (context, passkey);
 	} else {
 		GError *error;
-		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-				"Pairing request rejected");
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+				     "Pairing request rejected");
 		dbus_g_method_return_error (context, error);
 	}
 
@@ -146,7 +147,9 @@ bluetooth_applet_agent_reply_passkey(BluetoothApplet* self, gchar* request_key, 
  * @pincode: the PIN code entered by the user, or -1 if the dialog was dismissed
  */
 void
-bluetooth_applet_agent_reply_pincode(BluetoothApplet* self, gchar* request_key, gint pincode)
+bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
+				      char            *request_key,
+				      int              pincode)
 {
 	DBusGMethodInvocation* context;
 
@@ -159,8 +162,8 @@ bluetooth_applet_agent_reply_pincode(BluetoothApplet* self, gchar* request_key, 
 		dbus_g_method_return (context, pincode);
 	} else {
 		GError *error;
-		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-				"Pairing request rejected");
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+				     "Pairing request rejected");
 		dbus_g_method_return_error (context, error);
 	}
 
@@ -176,7 +179,9 @@ bluetooth_applet_agent_reply_pincode(BluetoothApplet* self, gchar* request_key, 
  * @confirm: TRUE if operation was confirmed, FALSE otherwise
  */
 void
-bluetooth_applet_agent_reply_confirm(BluetoothApplet* self, gchar* request_key, gboolean confirm)
+bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
+				      char            *request_key,
+				      gboolean         confirm)
 {
 	DBusGMethodInvocation* context;
 
@@ -189,8 +194,8 @@ bluetooth_applet_agent_reply_confirm(BluetoothApplet* self, gchar* request_key, 
 		dbus_g_method_return (context);
 	} else {
 		GError *error;
-		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-				"Confirmation request rejected");
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+				     "Confirmation request rejected");
 		dbus_g_method_return_error (context, error);
 	}
 
@@ -207,7 +212,10 @@ bluetooth_applet_agent_reply_confirm(BluetoothApplet* self, gchar* request_key, 
  * @trusted: TRUE if the operation should be authorized automatically in the future
  */
 void
-bluetooth_applet_agent_reply_auth(BluetoothApplet* self, gchar* request_key, gboolean auth, gboolean trusted)
+bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
+				   char            *request_key,
+				   gboolean         auth,
+				   gboolean         trusted)
 {
 	DBusGMethodInvocation* context;
 
@@ -223,8 +231,8 @@ bluetooth_applet_agent_reply_auth(BluetoothApplet* self, gchar* request_key, gbo
 		dbus_g_method_return (context);
 	} else {
 		GError *error;
-		error = g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-				"Confirmation request rejected");
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+				     "Confirmation request rejected");
 		dbus_g_method_return_error (context, error);
 	}
 
@@ -238,7 +246,7 @@ bluetooth_applet_agent_reply_auth(BluetoothApplet* self, gchar* request_key, gbo
 #endif
 
 static char *
-device_get_name(DBusGProxy *proxy, char **long_name)
+device_get_name (DBusGProxy *proxy, char **long_name)
 {
 	GHashTable *hash;
 	GValue *value;
@@ -253,15 +261,15 @@ device_get_name(DBusGProxy *proxy, char **long_name)
 		return NULL;
 	}
 
-	value = g_hash_table_lookup(hash, "Address");
+	value = g_hash_table_lookup (hash, "Address");
 	if (value == NULL) {
 		g_hash_table_destroy (hash);
 		return NULL;
 	}
-	address = g_value_dup_string(value);
+	address = g_value_dup_string (value);
 
-	value = g_hash_table_lookup(hash, "Name");
-	alias = value ? g_value_dup_string(value) : address;
+	value = g_hash_table_lookup (hash, "Name");
+	alias = value ? g_value_dup_string (value) : address;
 
 	g_hash_table_destroy (hash);
 
@@ -275,8 +283,10 @@ device_get_name(DBusGProxy *proxy, char **long_name)
 	return alias;
 }
 
-static gboolean pincode_request(DBusGMethodInvocation *context,
-					DBusGProxy *device, gpointer user_data)
+static gboolean
+pincode_request (DBusGMethodInvocation *context,
+		 DBusGProxy            *device,
+		 gpointer               user_data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (user_data);
 	char *name;
@@ -295,8 +305,10 @@ static gboolean pincode_request(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean passkey_request(DBusGMethodInvocation *context,
-					DBusGProxy *device, gpointer user_data)
+static gboolean
+passkey_request (DBusGMethodInvocation *context,
+		 DBusGProxy            *device,
+		 gpointer               user_data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (user_data);
 	char *name;
@@ -390,58 +402,58 @@ cancel_request(DBusGMethodInvocation *context,
 static void
 find_default_adapter (BluetoothApplet* self)
 {
-  GtkTreeIter iter;
-  gboolean cont;
+	GtkTreeIter iter;
+	gboolean cont;
 
-  if (self->default_adapter) {
-    gtk_tree_iter_free (self->default_adapter);
-    self->default_adapter = NULL;
-  }
-  if (self->agent) {
-	  g_object_unref (self->agent);
-	  self->agent = NULL;
-  }
-  self->num_adapters_present = self->num_adapters_powered = 0;
+	if (self->default_adapter) {
+		gtk_tree_iter_free (self->default_adapter);
+		self->default_adapter = NULL;
+	}
+	if (self->agent) {
+		g_object_unref (self->agent);
+		self->agent = NULL;
+	}
+	self->num_adapters_present = self->num_adapters_powered = 0;
 
-  cont = gtk_tree_model_get_iter_first (self->client_model, &iter);
-  while (cont) {
-    gboolean is_default, powered;
+	cont = gtk_tree_model_get_iter_first (self->client_model, &iter);
+	while (cont) {
+		gboolean is_default, powered;
 
-    self->num_adapters_present++;
+		self->num_adapters_present++;
 
-    gtk_tree_model_get (self->client_model, &iter,
-			BLUETOOTH_COLUMN_DEFAULT, &is_default,
-			BLUETOOTH_COLUMN_POWERED, &powered,
-			-1);
-    if (powered)
-      self->num_adapters_powered++;
-    if (is_default && powered)
-      self->default_adapter = gtk_tree_iter_copy (&iter);
+		gtk_tree_model_get (self->client_model, &iter,
+				    BLUETOOTH_COLUMN_DEFAULT, &is_default,
+				    BLUETOOTH_COLUMN_POWERED, &powered,
+				    -1);
+		if (powered)
+			self->num_adapters_powered++;
+		if (is_default && powered)
+			self->default_adapter = gtk_tree_iter_copy (&iter);
 
-    cont = gtk_tree_model_iter_next (self->client_model, &iter);
-  }
+		cont = gtk_tree_model_iter_next (self->client_model, &iter);
+	}
 
-  if (self->default_adapter) {
-    DBusGProxy* adapter;
+	if (self->default_adapter) {
+		DBusGProxy* adapter;
 
-    gtk_tree_model_get (self->client_model, self->default_adapter,
-			BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+		gtk_tree_model_get (self->client_model, self->default_adapter,
+				    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
-    /* This makes sure that the agent is NULL when released */
-    g_object_add_weak_pointer (G_OBJECT (self->agent), (gpointer *) (&self->agent));
+		/* This makes sure that the agent is NULL when released */
+		g_object_add_weak_pointer (G_OBJECT (self->agent), (gpointer *) (&self->agent));
 
-    self->agent = bluetooth_agent_new();
+		self->agent = bluetooth_agent_new();
 
-    bluetooth_agent_set_pincode_func (self->agent, pincode_request, self);
-    bluetooth_agent_set_passkey_func (self->agent, passkey_request, self);
-    bluetooth_agent_set_confirm_func (self->agent, confirm_request, self);
-    bluetooth_agent_set_authorize_func (self->agent, authorize_request, self);
-    bluetooth_agent_set_cancel_func (self->agent, cancel_request, self);
+		bluetooth_agent_set_pincode_func (self->agent, pincode_request, self);
+		bluetooth_agent_set_passkey_func (self->agent, passkey_request, self);
+		bluetooth_agent_set_confirm_func (self->agent, confirm_request, self);
+		bluetooth_agent_set_authorize_func (self->agent, authorize_request, self);
+		bluetooth_agent_set_cancel_func (self->agent, cancel_request, self);
 
-    bluetooth_agent_register (self->agent, adapter);
+		bluetooth_agent_register (self->agent, adapter);
 
-    g_object_unref (adapter);
-  }
+		g_object_unref (adapter);
+	}
 }
 
 static void
@@ -459,11 +471,11 @@ device_added_or_changed (GtkTreeModel *model,
 	find_default_adapter (self);
 
 	if (bluetooth_applet_get_discoverable (self) != prev_visibility)
-		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DISCOVERABLE]);
+		g_object_notify (G_OBJECT (self), "discoverable");
 	if (prev_num_adapters_powered != self->num_adapters_powered ||
-			prev_num_adapters_present != self->num_adapters_present) {
-		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_KILLSWITCH_STATE]);
-		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_FULL_MENU]);
+	    prev_num_adapters_present != self->num_adapters_present) {
+		g_object_notify (G_OBJECT (self), "killswitch-state");
+		g_object_notify (G_OBJECT (self), "show-full-menu");
 	}
 
 	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
@@ -536,7 +548,7 @@ killswitch_state_change (BluetoothKillswitch *kill_switch, KillswitchState state
 {
   BluetoothApplet *self = BLUETOOTH_APPLET (user_data);
 
-  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_KILLSWITCH_STATE]);
+  g_object_notify (G_OBJECT (self), "killswitch-state");
 }
 
 typedef struct {
@@ -685,8 +697,8 @@ bluetooth_applet_set_killswitch_state (BluetoothApplet* self, BluetoothKillswitc
 	if (bluetooth_killswitch_has_killswitches (self->killswitch_manager)) {
 		bluetooth_killswitch_set_state (self->killswitch_manager, state);
 		return TRUE;
-	} else
-		return FALSE;
+	}
+	return FALSE;
 }
 
 /**
@@ -705,11 +717,9 @@ bluetooth_applet_get_show_full_menu (BluetoothApplet* self)
 
 	if (self->num_adapters_present == 0)
 		return FALSE;
-	else
-		/* the original code had <=, but does it make sense to have less
-		 * adapters at all than adapters powered? */
-		return (self->num_adapters_present == self->num_adapters_powered) &&
-               (bluetooth_applet_get_killswitch_state(self) == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED);
+
+	return (self->num_adapters_present <= self->num_adapters_powered) &&
+		(bluetooth_applet_get_killswitch_state(self) == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED);
 }
 
 /**
@@ -799,7 +809,10 @@ bluetooth_applet_get_devices (BluetoothApplet* self)
 }
 
 static void
-bluetooth_applet_get_property (GObject* self, guint property_id, GValue* value, GParamSpec* pspec)
+bluetooth_applet_get_property (GObject    *self,
+			       guint       property_id,
+			       GValue     *value,
+			       GParamSpec *pspec)
 {
 	switch (property_id) {
 	case PROP_FULL_MENU:
@@ -817,7 +830,10 @@ bluetooth_applet_get_property (GObject* self, guint property_id, GValue* value, 
 }
 
 static void
-bluetooth_applet_set_property (GObject* gobj, guint property_id, const GValue* value, GParamSpec* pspec)
+bluetooth_applet_set_property (GObject      *gobj,
+			       guint         property_id,
+			       const GValue *value,
+			       GParamSpec   *pspec)
 {
 	BluetoothApplet *self = BLUETOOTH_APPLET (gobj);
 
@@ -903,41 +919,41 @@ bluetooth_applet_class_init (BluetoothAppletClass *klass)
 
 	/* should be enum, but KillswitchState is not registered */
 	properties[PROP_KILLSWITCH_STATE] = g_param_spec_int ("killswitch-state",
-			"Killswitch state",
-			"State of Bluetooth hardware switches",
-			KILLSWITCH_STATE_NO_ADAPTER, KILLSWITCH_STATE_HARD_BLOCKED, KILLSWITCH_STATE_NO_ADAPTER, G_PARAM_READABLE | G_PARAM_WRITABLE);
+							      "Killswitch state",
+							      "State of Bluetooth hardware switches",
+							      KILLSWITCH_STATE_NO_ADAPTER, KILLSWITCH_STATE_HARD_BLOCKED, KILLSWITCH_STATE_NO_ADAPTER, G_PARAM_READABLE | G_PARAM_WRITABLE);
 	g_object_class_install_property (gobject_class, PROP_KILLSWITCH_STATE, properties[PROP_KILLSWITCH_STATE]);
 
 	properties[PROP_DISCOVERABLE] = g_param_spec_boolean ("discoverable",
-			"Adapter visibility",
-			"Wheter the adapter is visible or not",
-			FALSE, G_PARAM_READABLE | G_PARAM_WRITABLE);
+							      "Adapter visibility",
+							      "Wheter the adapter is visible or not",
+							      FALSE, G_PARAM_READABLE | G_PARAM_WRITABLE);
 	g_object_class_install_property (gobject_class, PROP_DISCOVERABLE, properties[PROP_DISCOVERABLE]);
 
 	properties[PROP_FULL_MENU] = g_param_spec_boolean ("show-full-menu",
-			"Show the full applet menu",
-			"Show actions related to the adapter and other miscellanous in the main menu",
-			TRUE, G_PARAM_READABLE);
+							   "Show the full applet menu",
+							   "Show actions related to the adapter and other miscellanous in the main menu",
+							   TRUE, G_PARAM_READABLE);
 	g_object_class_install_property (gobject_class, PROP_FULL_MENU, properties[PROP_FULL_MENU]);
 
 	signals[SIGNAL_DEVICES_CHANGED] = g_signal_new ("devices-changed", G_TYPE_FROM_CLASS (gobject_class),
-			G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE, 0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
-			G_TYPE_NONE, 0);
+							G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE, 0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+							G_TYPE_NONE, 0);
 
 	signals[SIGNAL_PINCODE_REQUEST] = g_signal_new ("pincode-request", G_TYPE_FROM_CLASS (gobject_class),
-			G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_BOOLEAN,
-			G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
+							G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_BOOLEAN,
+							G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
 
 	signals[SIGNAL_CONFIRM_REQUEST] = g_signal_new ("confirm-request", G_TYPE_FROM_CLASS (gobject_class),
-			G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_UINT,
-			G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
+							G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_UINT,
+							G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
 
 	signals[SIGNAL_AUTHORIZE_REQUEST] = g_signal_new ("auth-request", G_TYPE_FROM_CLASS (gobject_class),
-			G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_STRING,
-			G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+							  G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_STRING,
+							  G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	signals[SIGNAL_CANCEL_REQUEST] = g_signal_new ("cancel-request", G_TYPE_FROM_CLASS (gobject_class),
-			G_SIGNAL_RUN_FIRST, 0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
-			G_TYPE_NONE, 0);
+						       G_SIGNAL_RUN_FIRST, 0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+						       G_TYPE_NONE, 0);
 }
 

@@ -530,9 +530,6 @@ connection_action_callback (BluetoothApplet *_client,
 
 	/* Revert to the previous state and wait for the
 	 * BluetoothApplet to catch up */
-	/* XXX: wouldn't it make more sense just to set the new state if
-	 * the operation succeded?
-	 */
 	connected = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), "connected"));
 	if (connected == DISCONNECTING)
 		connected = CONNECTED;
