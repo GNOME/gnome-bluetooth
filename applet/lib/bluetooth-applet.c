@@ -726,7 +726,8 @@ bluetooth_applet_get_devices (BluetoothApplet* self)
 
 	g_return_val_if_fail (BLUETOOTH_IS_APPLET (self), NULL);
 
-	if(self->default_adapter == NULL) // no adapter
+	/* No adapter */
+	if (self->default_adapter == NULL)
 		return NULL;
 
 	cont = gtk_tree_model_iter_children (self->client_model, &iter, self->default_adapter);
