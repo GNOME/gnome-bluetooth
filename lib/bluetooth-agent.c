@@ -322,21 +322,9 @@ static void bluetooth_agent_init(BluetoothAgent *agent)
 
 static void bluetooth_agent_finalize(GObject *agent)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-
 	DBG("agent %p", agent);
 
-	if (priv->adapter != NULL) {
-		dbus_g_proxy_call(priv->adapter, "UnregisterAgent", NULL,
-					DBUS_TYPE_G_OBJECT_PATH, priv->path,
-					G_TYPE_INVALID, G_TYPE_INVALID);
-
-		g_object_unref(priv->adapter);
-		priv->adapter = NULL;
-	}
-
-	g_free(priv->path);
-	g_free(priv->busname);
+	bluetooth_agent_unregister (BLUETOOTH_AGENT (agent));
 
 	G_OBJECT_CLASS(bluetooth_agent_parent_class)->finalize(agent);
 }
@@ -472,12 +460,14 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, DBusGProxy *adapter)
 
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
 	GError *error = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
 	DBG("agent %p", agent);
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	if (priv->adapter == NULL)
 		return FALSE;
@@ -503,6 +493,9 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 
 	g_free(priv->path);
 	priv->path = NULL;
+
+	g_free(priv->busname);
+	priv->busname = NULL;
 
 	return TRUE;
 }
