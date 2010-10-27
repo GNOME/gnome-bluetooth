@@ -1029,6 +1029,7 @@ int main (int argc, char **argv)
 	client = bluetooth_client_new();
 
 	agent = bluetooth_agent_new();
+	g_object_add_weak_pointer (G_OBJECT (agent), (gpointer *) (&agent));
 
 	bluetooth_agent_set_pincode_func(agent, pincode_callback, NULL);
 	bluetooth_agent_set_display_func(agent, display_callback, NULL);
@@ -1052,7 +1053,8 @@ int main (int argc, char **argv)
 
 	bluetooth_plugin_manager_cleanup ();
 
-	g_object_unref(agent);
+	if (agent != NULL)
+		g_object_unref (agent);
 
 	g_object_unref(client);
 
