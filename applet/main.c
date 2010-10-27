@@ -958,7 +958,7 @@ static GOptionEntry options[] = {
 
 int main(int argc, char *argv[])
 {
-	GtkApplication *app;
+	GApplication *app;
 	GtkStatusIcon *statusicon;
 	GtkWidget *menu;
 	GOptionContext *context;
@@ -983,10 +983,18 @@ int main(int argc, char *argv[])
 	}
 
 	if (option_debug == FALSE) {
-		app = gtk_application_new ("org.gnome.Bluetooth.applet",
-					   &argc, &argv);
-		if (g_application_is_remote (G_APPLICATION (app))) {
-			gdk_notify_startup_complete ();
+		GError *error = NULL;
+
+		app = g_application_new ("org.gnome.Bluetooth.applet",
+					 G_APPLICATION_FLAGS_NONE);
+		if (!g_application_register (app, NULL, &error)) {
+			g_object_unref (app);
+			g_warning ("%s", error->message);
+			g_error_free (error);
+			return 1;
+		}
+		if (g_application_get_is_remote (app)) {
+			g_object_unref (app);
 			g_warning ("Applet is already running, exiting");
 			return 0;
 		}
