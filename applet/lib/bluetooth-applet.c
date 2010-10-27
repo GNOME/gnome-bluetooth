@@ -765,8 +765,9 @@ bluetooth_applet_get_devices (BluetoothApplet* self)
 		dev->connected = FALSE;
 		dev->can_connect = FALSE;
 		if (services != NULL) {
-			dev->can_connect = TRUE;
 			GList *list, *l;
+
+			dev->can_connect = TRUE;
 			list = g_hash_table_get_values (services);
 			for (l = list; l != NULL; l = l->next) {
 				BluetoothStatus val = GPOINTER_TO_INT (l->data);
