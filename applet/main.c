@@ -637,15 +637,9 @@ escape_label_for_action (const char *alias)
 static gboolean
 device_has_submenu (BluetoothSimpleDevice *dev)
 {
-	if (dev->can_connect)
+	if (dev->can_connect != FALSE)
 		return TRUE;
 	if (dev->capabilities != BLUETOOTH_CAPABILITIES_NONE)
-		return TRUE;
-	if (dev->type == BLUETOOTH_TYPE_KEYBOARD ||
-		dev->type == BLUETOOTH_TYPE_MOUSE ||
-		dev->type == BLUETOOTH_TYPE_HEADSET ||
-		dev->type == BLUETOOTH_TYPE_HEADPHONES ||
-		dev->type == BLUETOOTH_TYPE_OTHER_AUDIO)
 		return TRUE;
 	return FALSE;
 }
