@@ -21,7 +21,7 @@
  *
  */
 
-#include <lib/bluetooth-applet.h>
+#include "bluetooth-applet.h"
 #include "agent.c"
 #include "notify.h"
 

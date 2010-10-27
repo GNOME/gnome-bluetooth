@@ -31,8 +31,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include <lib/bluetooth-applet.h>
-
+#include "bluetooth-applet.h"
 #include "notify.h"
 #include "agent.h"
 

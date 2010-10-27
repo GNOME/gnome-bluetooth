@@ -22,7 +22,7 @@
  *
  */
 
-#include <lib/bluetooth-applet.h>
+#include <bluetooth-applet.h>
 
 int setup_agents(BluetoothApplet* applet);
 

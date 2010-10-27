@@ -209,7 +209,6 @@ AC_OUTPUT(Makefile
 	  icons/Makefile
 	  lib/Makefile
 	  lib/plugins/Makefile
-	  applet/lib/Makefile
 	  applet/Makefile
 	  applet/bluetooth-applet.desktop.in
 	  properties/Makefile
