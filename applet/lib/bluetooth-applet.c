@@ -398,9 +398,8 @@ find_default_adapter (BluetoothApplet* self)
     self->default_adapter = NULL;
   }
   if (self->agent) {
-		bluetooth_agent_unregister (self->agent);
-		g_object_unref (self->agent);
-		self->agent = NULL;
+	  g_object_unref (self->agent);
+	  self->agent = NULL;
   }
   self->num_adapters_present = self->num_adapters_powered = 0;
 
@@ -885,7 +884,6 @@ bluetooth_applet_dispose (GObject* self)
 	}
 
 	if (applet->agent) {
-		bluetooth_agent_unregister (applet->agent);
 		g_object_unref (applet->agent);
 		applet->agent = NULL;
 	}
