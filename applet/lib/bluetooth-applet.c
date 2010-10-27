@@ -746,6 +746,18 @@ bluetooth_applet_get_devices (BluetoothApplet* self)
 				BLUETOOTH_COLUMN_TYPE, &dev->type,
 				-1);
 
+		if (proxy == NULL || dev->bdaddr == NULL || dev->alias == NULL) {
+			if (proxy != NULL)
+				g_object_unref (proxy);
+			g_strfreev (uuids);
+			if (services != NULL)
+				g_hash_table_unref (services);
+			bluetooth_simple_device_free (dev);
+
+			cont = gtk_tree_model_iter_next(self->client_model, &iter);
+			continue;
+		}
+
 		dev->device_path = g_strdup (dbus_g_proxy_get_path (proxy));
 		g_object_unref (proxy);
 
