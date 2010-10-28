@@ -985,11 +985,10 @@ create_wizard (void)
 }
 
 static void
-activated_cb (GtkApplication    *app,
-	      GVariant          *variant,
-	      gpointer           user_data)
+activate_cb (GApplication      *app,
+	     gpointer           user_data)
 {
-        gtk_window_present (GTK_WINDOW (user_data));
+	gtk_window_present_with_time (GTK_WINDOW (user_data), GDK_CURRENT_TIME);
 }
 
 static GOptionEntry options[] = {
@@ -1016,8 +1015,15 @@ int main (int argc, char **argv)
 		return 1;
 	}
 
-	app = gtk_application_new ("org.gnome.Bluetooth.wizard", &argc, &argv);
-	if (g_application_is_remote (G_APPLICATION (app))) {
+	app = gtk_application_new ("org.gnome.Bluetooth.wizard", G_APPLICATION_FLAGS_NONE);
+	if (g_application_register (G_APPLICATION (app), NULL, &error) == FALSE) {
+		g_warning ("Could not register application: %s", error->message);
+		g_error_free (error);
+		return 1;
+	}
+
+	if (g_application_get_is_remote (G_APPLICATION (app))) {
+		g_application_activate (G_APPLICATION (app));
 		gdk_notify_startup_complete ();
 		return 0;
 	}
@@ -1046,10 +1052,10 @@ int main (int argc, char **argv)
 	gtk_application_add_window (app,
 				    GTK_WINDOW (window_assistant));
 
-	g_signal_connect (app, "activated",
-			  G_CALLBACK (activated_cb), window_assistant);
+	g_signal_connect (app, "activate",
+			  G_CALLBACK (activate_cb), window_assistant);
 
-	gtk_application_run (app);
+	g_application_run (G_APPLICATION (app), argc, argv);
 
 	bluetooth_plugin_manager_cleanup ();
 
