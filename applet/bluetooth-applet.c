@@ -722,6 +722,72 @@ bluetooth_applet_get_show_full_menu (BluetoothApplet* self)
 		(bluetooth_applet_get_killswitch_state(self) == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED);
 }
 
+static BluetoothSimpleDevice *
+bluetooth_applet_create_device_from_iter (GtkTreeModel *model,
+					  GtkTreeIter  *iter,
+					  gboolean      check_proxy)
+{
+	BluetoothSimpleDevice* dev = g_new (BluetoothSimpleDevice, 1);
+	GHashTable *services;
+	DBusGProxy *proxy;
+	char **uuids;
+
+	gtk_tree_model_get (model, iter,
+			    BLUETOOTH_COLUMN_ADDRESS, &dev->bdaddr,
+			    BLUETOOTH_COLUMN_PROXY, &proxy,
+			    BLUETOOTH_COLUMN_SERVICES, &services,
+			    BLUETOOTH_COLUMN_ALIAS, &dev->alias,
+			    BLUETOOTH_COLUMN_UUIDS, &uuids,
+			    BLUETOOTH_COLUMN_TYPE, &dev->type,
+			    -1);
+
+	if (dev->bdaddr == NULL || dev->alias == NULL ||
+	    (check_proxy != FALSE && proxy == NULL)) {
+		if (proxy != NULL)
+			g_object_unref (proxy);
+		g_strfreev (uuids);
+		if (services != NULL)
+			g_hash_table_unref (services);
+		bluetooth_simple_device_free (dev);
+
+		return NULL;
+	}
+
+	if (proxy != NULL) {
+		dev->device_path = g_strdup (dbus_g_proxy_get_path (proxy));
+		g_object_unref (proxy);
+	}
+
+	/* If one service is connected, then we're connected */
+	dev->connected = FALSE;
+	dev->can_connect = FALSE;
+	if (services != NULL) {
+		GList *list, *l;
+
+		dev->can_connect = TRUE;
+		list = g_hash_table_get_values (services);
+		for (l = list; l != NULL; l = l->next) {
+			BluetoothStatus val = GPOINTER_TO_INT (l->data);
+			if (val == BLUETOOTH_STATUS_CONNECTED ||
+			    val == BLUETOOTH_STATUS_PLAYING) {
+				dev->connected = TRUE;
+				break;
+			}
+		}
+		g_list_free (list);
+	}
+
+	dev->capabilities = 0;
+	dev->capabilities |= device_has_uuid ((const char **) uuids, "OBEXObjectPush") ? BLUETOOTH_CAPABILITIES_OBEX_PUSH : 0;
+	dev->capabilities |= device_has_uuid ((const char **) uuids, "OBEXFileTransfer") ? BLUETOOTH_CAPABILITIES_OBEX_FILE_TRANSFER : 0;
+
+	if (services != NULL)
+		g_hash_table_unref (services);
+	g_strfreev (uuids);
+
+	return dev;
+}
+
 /**
  * bluetooth_applet_get_devices:
  *
@@ -744,65 +810,16 @@ bluetooth_applet_get_devices (BluetoothApplet* self)
 
 	cont = gtk_tree_model_iter_children (self->client_model, &iter, self->default_adapter);
 	while (cont) {
-		BluetoothSimpleDevice* dev = g_new (BluetoothSimpleDevice, 1);
-		GHashTable *services;
-		DBusGProxy *proxy;
-		char **uuids;
+		BluetoothSimpleDevice *dev;
 
-		gtk_tree_model_get (self->client_model, &iter,
-				BLUETOOTH_COLUMN_ADDRESS, &dev->bdaddr,
-				BLUETOOTH_COLUMN_PROXY, &proxy,
-				BLUETOOTH_COLUMN_SERVICES, &services,
-				BLUETOOTH_COLUMN_ALIAS, &dev->alias,
-				BLUETOOTH_COLUMN_UUIDS, &uuids,
-				BLUETOOTH_COLUMN_TYPE, &dev->type,
-				-1);
+		dev = bluetooth_applet_create_device_from_iter (self->client_model, &iter, TRUE);
 
-		if (proxy == NULL || dev->bdaddr == NULL || dev->alias == NULL) {
-			if (proxy != NULL)
-				g_object_unref (proxy);
-			g_strfreev (uuids);
-			if (services != NULL)
-				g_hash_table_unref (services);
-			bluetooth_simple_device_free (dev);
-
-			cont = gtk_tree_model_iter_next(self->client_model, &iter);
-			continue;
-		}
-
-		dev->device_path = g_strdup (dbus_g_proxy_get_path (proxy));
-		g_object_unref (proxy);
-
-		/* If one service is connected, then we're connected */
-		dev->connected = FALSE;
-		dev->can_connect = FALSE;
-		if (services != NULL) {
-			GList *list, *l;
-
-			dev->can_connect = TRUE;
-			list = g_hash_table_get_values (services);
-			for (l = list; l != NULL; l = l->next) {
-				BluetoothStatus val = GPOINTER_TO_INT (l->data);
-				if (val == BLUETOOTH_STATUS_CONNECTED ||
-					val == BLUETOOTH_STATUS_PLAYING) {
-						dev->connected = TRUE;
-						break;
-				}
-			}
-			g_list_free (list);
-		}
-
-		dev->capabilities = 0;
-		dev->capabilities |= device_has_uuid ((const char **) uuids, "OBEXObjectPush") ? BLUETOOTH_CAPABILITIES_OBEX_PUSH : 0;
-		dev->capabilities |= device_has_uuid ((const char **) uuids, "OBEXFileTransfer") ? BLUETOOTH_CAPABILITIES_OBEX_FILE_TRANSFER : 0;
-
-		result = g_list_prepend (result, dev);
-		if (services != NULL)
-		  g_hash_table_unref (services);
-		g_strfreev (uuids);
+		if (dev != NULL)
+			result = g_list_prepend (result, dev);
 
 		cont = gtk_tree_model_iter_next(self->client_model, &iter);
 	}
+
 	result = g_list_reverse (result);
 
 	return result;
@@ -860,11 +877,11 @@ bluetooth_applet_init (BluetoothApplet *self)
 	self->default_adapter = NULL;
 	self->agent = NULL;
 
-	self->killswitch_manager = bluetooth_killswitch_new();
+	self->killswitch_manager = bluetooth_killswitch_new ();
 	g_signal_connect (self->killswitch_manager, "state-changed", G_CALLBACK(killswitch_state_change), self);
 
 	self->pending_requests = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
-	dbus_g_error_domain_register(AGENT_ERROR, "org.bluez.Error", AGENT_ERROR_TYPE);
+	dbus_g_error_domain_register (AGENT_ERROR, "org.bluez.Error", AGENT_ERROR_TYPE);
 
 	/* Make sure all the unblocked adapters are powered,
 	 * so as to avoid seeing unpowered, but unblocked
@@ -874,11 +891,11 @@ bluetooth_applet_init (BluetoothApplet *self)
 
 	gobject_client_model = G_OBJECT (self->client_model);
 	g_signal_connect(gobject_client_model, "row-inserted",
-			G_CALLBACK(device_added_or_changed), self);
+			 G_CALLBACK(device_added_or_changed), self);
 	g_signal_connect(gobject_client_model, "row-deleted",
-			G_CALLBACK(device_removed), self);
+			 G_CALLBACK(device_removed), self);
 	g_signal_connect (gobject_client_model, "row-changed",
-			G_CALLBACK (device_added_or_changed), self);
+			  G_CALLBACK (device_added_or_changed), self);
 }
 
 static void
