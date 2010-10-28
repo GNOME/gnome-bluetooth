@@ -30,6 +30,7 @@
 #include <gtk/gtk.h>
 
 #include <bluetooth-chooser.h>
+#include <bluetooth-client.h>
 
 #include "bluetooth-applet.h"
 #include "notify.h"
@@ -436,7 +437,7 @@ update_menu_items (GObject    *gobject,
 }
 
 static void
-update_icon_visibility ()
+update_icon_visibility (void)
 {
 	gboolean state = bluetooth_applet_get_killswitch_state (applet);
 	if (state != BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED)
@@ -700,39 +701,6 @@ add_separator_item (const char *address,
 	g_free (action_name);
 }
 
-static gboolean
-verify_address (const char *bdaddr)
-{
-	gboolean retval = TRUE;
-	char **elems;
-	guint i;
-
-	g_return_val_if_fail (bdaddr != NULL, FALSE);
-
-	if (strlen (bdaddr) != 17)
-		return FALSE;
-
-	elems = g_strsplit (bdaddr, ":", -1);
-	if (elems == NULL)
-		return FALSE;
-	if (g_strv_length (elems) != 6) {
-		g_strfreev (elems);
-		return FALSE;
-	}
-	for (i = 0; i < 6; i++) {
-		if (strlen (elems[i]) != 2 ||
-		    g_ascii_isxdigit (elems[i][0]) == FALSE ||
-		    g_ascii_isxdigit (elems[i][1]) == FALSE) {
-			retval = FALSE;
-			break;
-		}
-	}
-
-	g_strfreev (elems);
-	return retval;
-}
-
-
 static void
 update_device_list (BluetoothApplet *applet,
 					gpointer user_data)
@@ -757,7 +725,7 @@ update_device_list (BluetoothApplet *applet,
 	 * device in the list. We remove the submenu items first */
 	actions = gtk_action_group_list_actions (devices_action_group);
 	for (l = actions; l != NULL; l = l->next) {
-		if (verify_address (gtk_action_get_name (l->data)) == FALSE)
+		if (bluetooth_verify_address (gtk_action_get_name (l->data)) == FALSE)
 			l->data = NULL;
 	}
 	actions = g_list_remove_all (actions, NULL);
@@ -878,8 +846,8 @@ update_device_list (BluetoothApplet *applet,
 					       G_CALLBACK (mouse_callback));
 			}
 			if ((device->type == BLUETOOTH_TYPE_HEADSET ||
-				 device->type == BLUETOOTH_TYPE_HEADPHONES ||
-				 device->type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (GNOMECC)) {
+			     device->type == BLUETOOTH_TYPE_HEADPHONES ||
+			     device->type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (GNOMECC)) {
 				add_menu_item (device->bdaddr,
 					       "sound",
 					       _("Open Sound Preferences..."),
