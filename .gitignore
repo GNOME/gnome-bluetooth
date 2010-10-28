@@ -28,12 +28,22 @@ missing
 mkinstalldirs
 stamp-h1
 autom4te.cache
+ABOUT-NLS
+config.rpath
 
 po/*.gmo
 po/Makefile.in.in
 po/POTFILES
 po/stamp-it
 po/.intltool-merge-cache
+po/Makevars.template
+po/Rules-quot
+po/boldquot.sed
+po/en@boldquot.header
+po/en@quot.header
+po/insert-header.sin
+po/quot.sed
+po/remove-potcdate.sin
 
 lib/test-class
 lib/test-client
@@ -50,8 +60,8 @@ applet/bluetooth-applet
 applet/bluetooth-applet.desktop.in
 applet/test-agentdialog
 applet/test-icon
-applet/lib/GnomeBluetoothApplet-1.0.gir
-applet/lib/GnomeBluetoothApplet-1.0.typelib
+applet/GnomeBluetoothApplet-1.0.gir
+applet/GnomeBluetoothApplet-1.0.typelib
 
 properties/bluetooth-properties
 properties/bluetooth-properties.desktop.in
@@ -68,6 +78,9 @@ wizard/test-input
 
 sendto/bluetooth-sendto
 browse/bluetooth-browse
+
+sendto/org.gnome.Bluetooth.nst.gschema.xml
+sendto/org.gnome.Bluetooth.nst.gschema.valid
 
 help/*/.xml2po.mo
 help/*/gnome-bluetooth.xml
