@@ -1,12 +1,7 @@
 CLEANFILES =
 BUILT_SOURCES = marshal.h marshal.c
 
-# This is where private libraries and typelibs for gnome-shell are installed
-# (provided that gnome-bluetooth and gnome-shell are configured with the same
-# libdir)
-gnomeshelldir = $(libdir)/gnome-shell
-
-gnomeshell_LTLIBRARIES = libgnome-bluetooth-applet.la
+pkglib_LTLIBRARIES = libgnome-bluetooth-applet.la
 
 libgnome_bluetooth_applet_la_SOURCES = 	\
 	bluetooth-applet.c		\
@@ -40,7 +35,7 @@ GnomeBluetoothApplet_1_0_gir_LIBS = libgnome-bluetooth-applet.la
 GnomeBluetoothApplet_1_0_gir_FILES = $(libgnome_bluetooth_applet_la_SOURCES) ../lib/bluetooth-enums.h
 INTROSPECTION_GIRS += GnomeBluetoothApplet-1.0.gir
 
-gnomeshell_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+pkglib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
-CLEANFILES += $(gnomeshell_DATA)
+CLEANFILES += $(pkglib_DATA)
 endif # HAVE_INTROSPECTION
