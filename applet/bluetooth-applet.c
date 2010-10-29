@@ -1,4 +1,4 @@
-/*
+/* -*- tab-width: 8 -*-
  *
  *  BlueZ - Bluetooth protocol stack for Linux
  *
@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 
 #include <bluetooth-applet.h>
 #include <lib/bluetooth-client.h>
@@ -105,6 +106,135 @@ enum {
 };
 
 guint signals[SIGNAL_LAST];
+
+typedef struct {
+  GSimpleAsyncResult *result;
+  guint timestamp;
+} MountClosure;
+
+static void
+mount_ready_cb (GObject *object,
+		GAsyncResult *result,
+		gpointer user_data)
+{
+	GError *error;
+	GFile *file = G_FILE (object);
+	char *uri = g_file_get_uri (file);
+	MountClosure *closure = user_data;
+
+	if (g_file_mount_enclosing_volume_finish (file, result, &error) == FALSE) {
+		/* Ignore "already mounted" error */
+		if (error->domain == G_IO_ERROR &&
+		    error->code == G_IO_ERROR_ALREADY_MOUNTED) {
+			g_error_free (error);
+			error = NULL;
+		}
+	}
+
+	if (!error) {
+		gtk_show_uri (NULL, uri, closure->timestamp, &error);
+	}
+
+	if (error) {
+		g_simple_async_result_set_from_error (closure->result, error);
+		g_error_free (error);
+	} else {
+		g_simple_async_result_set_op_res_gboolean (closure->result, TRUE);
+	}
+
+	g_simple_async_result_complete (closure->result);
+
+	g_free (uri);
+	g_object_unref (closure->result);
+	g_free (closure);
+}
+
+/**
+ * bluetooth_applet_browse_address_finish:
+ *
+ * @applet: a #BluetoothApplet
+ * @result: the #GAsyncResult from the callback
+ * @error:
+ *
+ * Returns: TRUE if the operation was successful, FALSE if error is set
+ */
+gboolean
+bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
+					GAsyncResult *result,
+					GError **error)
+{
+	GSimpleAsyncResult *simple;
+
+	g_return_val_if_fail (BLUETOOTH_IS_APPLET (applet), FALSE);
+	g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (applet), bluetooth_applet_browse_address), FALSE);
+
+	simple = G_SIMPLE_ASYNC_RESULT (result);
+	if (g_simple_async_result_propagate_error (simple, error))
+		return FALSE;
+	else
+		return TRUE;
+}
+
+/**
+ * bluetooth_applet_browse_address:
+ *
+ * Opens a Bluetooth device in Nautilus
+ * @applet: a #BluetoothApplet
+ * @address: the bluetooth device to browse
+ * @callback: (scope async): the completion callback
+ * @user_data:
+ */
+void bluetooth_applet_browse_address (BluetoothApplet *applet,
+				      const char *address,
+				      guint timestamp,
+				      GAsyncReadyCallback callback,
+				      gpointer user_data)
+{
+	  GFile *file;
+	  char *uri;
+	  MountClosure *closure;
+	  g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
+	  g_return_if_fail (address != NULL);
+
+	  uri = g_strdup_printf ("obex://[%s]/", address);
+	  file = g_file_new_for_uri (uri);
+
+	  closure = g_new (MountClosure, 1);
+	  closure->result = g_simple_async_result_new (G_OBJECT (applet), callback, user_data, bluetooth_applet_browse_address);
+	  closure->timestamp = timestamp;
+	  g_file_mount_enclosing_volume(file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_ready_cb, closure);
+
+	  g_free (uri);
+	  g_object_unref (file);
+}
+
+/**
+ * bluetooth_applet_send_to_address:
+ *
+ * Send a file to a bluetooth device
+ * @applet: a #BluetoothApplet
+ * @address: the target
+ * @alias: the string to display for the device
+ */
+void bluetooth_applet_send_to_address (BluetoothApplet *applet,
+				       const char *address,
+				       const char *alias)
+{
+	    char *command;
+	    char *quoted_address;
+	    char *quoted_alias;
+	    g_return_if_fail (address != NULL);
+	    g_return_if_fail (alias != NULL);
+	    g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
+
+	    quoted_address = g_shell_quote (address);
+	    quoted_alias = g_shell_quote (alias);
+	    command = g_strdup_printf ("bluetooth-sendto --device=%s --name=%s", quoted_address, quoted_alias);
+	    g_spawn_command_line_async (command, NULL);
+	    g_free (command);
+	    g_free (quoted_address);
+	    g_free (quoted_alias);
+}
 
 /**
  * bluetooth_applet_agent_reply_passkey:
