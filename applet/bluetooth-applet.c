@@ -190,22 +190,23 @@ void bluetooth_applet_browse_address (BluetoothApplet *applet,
 				      GAsyncReadyCallback callback,
 				      gpointer user_data)
 {
-	  GFile *file;
-	  char *uri;
-	  MountClosure *closure;
-	  g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
-	  g_return_if_fail (address != NULL);
+	GFile *file;
+	char *uri;
+	MountClosure *closure;
 
-	  uri = g_strdup_printf ("obex://[%s]/", address);
-	  file = g_file_new_for_uri (uri);
+	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
+	g_return_if_fail (address != NULL);
 
-	  closure = g_new (MountClosure, 1);
-	  closure->result = g_simple_async_result_new (G_OBJECT (applet), callback, user_data, bluetooth_applet_browse_address);
-	  closure->timestamp = timestamp;
-	  g_file_mount_enclosing_volume(file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_ready_cb, closure);
+	uri = g_strdup_printf ("obex://[%s]/", address);
+	file = g_file_new_for_uri (uri);
 
-	  g_free (uri);
-	  g_object_unref (file);
+	closure = g_new (MountClosure, 1);
+	closure->result = g_simple_async_result_new (G_OBJECT (applet), callback, user_data, bluetooth_applet_browse_address);
+	closure->timestamp = timestamp;
+	g_file_mount_enclosing_volume(file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_ready_cb, closure);
+
+	g_free (uri);
+	g_object_unref (file);
 }
 
 /**
@@ -220,20 +221,38 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 				       const char *address,
 				       const char *alias)
 {
-	    char *command;
-	    char *quoted_address;
-	    char *quoted_alias;
-	    g_return_if_fail (address != NULL);
-	    g_return_if_fail (alias != NULL);
-	    g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
+	GPtrArray *a;
+	GError *err = NULL;
+	guint i;
 
-	    quoted_address = g_shell_quote (address);
-	    quoted_alias = g_shell_quote (alias);
-	    command = g_strdup_printf ("bluetooth-sendto --device=%s --name=%s", quoted_address, quoted_alias);
-	    g_spawn_command_line_async (command, NULL);
-	    g_free (command);
-	    g_free (quoted_address);
-	    g_free (quoted_alias);
+	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
+
+	a = g_ptr_array_new ();
+	g_ptr_array_add (a, "bluetooth-sendto");
+	if (address != NULL) {
+		char *s;
+
+		s = g_strdup_printf ("--device=\"%s\"", address);
+		g_ptr_array_add (a, s);
+	}
+	if (address != NULL && alias != NULL) {
+		char *s;
+
+		s = g_strdup_printf ("--name=\"%s\"", alias);
+		g_ptr_array_add (a, s);
+	}
+	g_ptr_array_add (a, NULL);
+
+	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
+			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
+		g_printerr("Couldn't execute command: %s\n", err->message);
+		g_error_free (err);
+	}
+
+	for (i = 1; a->pdata[i] != NULL; i++)
+		g_free (a->pdata[i]);
+
+	g_ptr_array_free (a, TRUE);
 }
 
 /**
