@@ -104,18 +104,10 @@ mount_finish_cb (GObject *source_object,
 	GError *error = NULL;
 	char *uri;
 
-	if (g_file_mount_enclosing_volume_finish (G_FILE (source_object),
-						  res, &error) == FALSE) {
-		/* Ignore "already mounted" error */
-		if (error->domain == G_IO_ERROR &&
-		    error->code == G_IO_ERROR_ALREADY_MOUNTED) {
-			g_error_free (error);
-			error = NULL;
-		} else {
-			g_printerr ("Failed to mount OBEX volume: %s", error->message);
-			g_error_free (error);
-			return;
-		}
+	if (bluetooth_applet_browse_address_finish (applet, res, &error) == FALSE) {
+		g_printerr ("Failed to mount OBEX volume: %s", error->message);
+		g_error_free (error);
+		return;
 	}
 
 	uri = g_file_get_uri (G_FILE (source_object));
@@ -128,8 +120,7 @@ mount_finish_cb (GObject *source_object,
 
 void browse_callback(GObject *widget, gpointer user_data)
 {
-	GFile *file;
-	char *address, *uri;
+	char *address;
 
 	address = g_strdup (g_object_get_data (widget, "address"));
 	if (address == NULL) {
@@ -174,52 +165,19 @@ void browse_callback(GObject *widget, gpointer user_data)
 			return;
 	}
 
-	uri = g_strdup_printf ("obex://[%s]/", address);
-	g_free (address);
+	bluetooth_applet_browse_address (applet, address,
+					 GDK_CURRENT_TIME, mount_finish_cb, NULL);
 
-	file = g_file_new_for_uri (uri);
-	g_free (uri);
-
-	g_file_mount_enclosing_volume (file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_finish_cb, NULL);
-	g_object_unref (file);
 }
 
 void sendto_callback(GObject *widget, gpointer user_data)
 {
-	GPtrArray *a;
-	GError *err = NULL;
-	guint i;
 	const char *address, *alias;
 
 	address = g_object_get_data (widget, "address");
 	alias = g_object_get_data (widget, "alias");
 
-	a = g_ptr_array_new ();
-	g_ptr_array_add (a, "bluetooth-sendto");
-	if (address != NULL) {
-		char *s;
-
-		s = g_strdup_printf ("--device=\"%s\"", address);
-		g_ptr_array_add (a, s);
-	}
-	if (address != NULL && alias != NULL) {
-		char *s;
-
-		s = g_strdup_printf ("--name=\"%s\"", alias);
-		g_ptr_array_add (a, s);
-	}
-	g_ptr_array_add (a, NULL);
-
-	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
-			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
-		g_printerr("Couldn't execute command: %s\n", err->message);
-		g_error_free (err);
-	}
-
-	for (i = 1; a->pdata[i] != NULL; i++)
-		g_free (a->pdata[i]);
-
-	g_ptr_array_free (a, TRUE);
+	bluetooth_applet_send_to_address (applet, address, alias);
 }
 
 static void keyboard_callback(GObject *widget, gpointer user_data)
