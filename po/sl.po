@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2010-10-05 23:48+0000\n"
-"PO-Revision-Date: 2010-10-16 18:28+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"POT-Creation-Date: 2010-10-31 16:19+0000\n"
+"PO-Revision-Date: 2010-10-31 20:11+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -180,105 +180,101 @@ msgstr "Uporabi napravo GPS za določevanje položaja nahajanja"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Dostop do spleta z uporabo mobilnega telefona (preizkusno)"
 
-#: ../applet/main.c:146
+#: ../applet/main.c:130
 msgid "Select Device to Browse"
 msgstr "Izbor naprave za brskanje"
 
-#: ../applet/main.c:150
+#: ../applet/main.c:134
 msgid "_Browse"
 msgstr "_Prebrskaj"
 
-#: ../applet/main.c:159
+#: ../applet/main.c:143
 msgid "Select device to browse"
 msgstr "Izbor naprave za brskanje"
 
-#: ../applet/main.c:379
+#: ../applet/main.c:293
 #: ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Vklopi Bluetooth"
 
-#: ../applet/main.c:380
+#: ../applet/main.c:294
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: izklopljeno"
 
-#: ../applet/main.c:383
+#: ../applet/main.c:297
 msgid "Turn Off Bluetooth"
 msgstr "Izklopi Bluetooth"
 
-#: ../applet/main.c:384
+#: ../applet/main.c:298
 msgid "Bluetooth: On"
 msgstr "Bluetooth: vklopljeno"
 
-#: ../applet/main.c:389
+#: ../applet/main.c:303
 #: ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: onemogočeno"
 
-#: ../applet/main.c:543
+#: ../applet/main.c:452
 msgid "Disconnecting..."
 msgstr "Prekinjanje povezave ..."
 
-#: ../applet/main.c:546
+#: ../applet/main.c:455
 #: ../sendto/main.c:217
 #: ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
-#: ../applet/main.c:549
-#: ../applet/main.c:890
+#: ../applet/main.c:458
+#: ../applet/main.c:741
 msgid "Connected"
 msgstr "Povezano"
 
-#: ../applet/main.c:552
-#: ../applet/main.c:890
+#: ../applet/main.c:461
+#: ../applet/main.c:741
 msgid "Disconnected"
 msgstr "Prekinjena povezava"
 
-#: ../applet/main.c:908
-#: ../applet/main.c:972
+#: ../applet/main.c:759
+#: ../applet/main.c:823
 #: ../properties/adapter.c:380
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#: ../applet/main.c:908
-#: ../applet/main.c:972
+#: ../applet/main.c:759
+#: ../applet/main.c:823
 msgid "Connect"
 msgstr "Povezava"
 
-#: ../applet/main.c:921
+#: ../applet/main.c:772
 msgid "Send files..."
 msgstr "Pošlji datoteke ..."
 
-#: ../applet/main.c:931
+#: ../applet/main.c:782
 msgid "Browse files..."
 msgstr "Brskanje datotek ..."
 
-#: ../applet/main.c:942
+#: ../applet/main.c:793
 msgid "Open Keyboard Preferences..."
 msgstr "Odpri možnosti tipkovnice ..."
 
-#: ../applet/main.c:950
+#: ../applet/main.c:801
 msgid "Open Mouse Preferences..."
 msgstr "Odpri možnosti miške ..."
 
-#: ../applet/main.c:960
+#: ../applet/main.c:811
 msgid "Open Sound Preferences..."
 msgstr "Odpri možnosti zvoka ..."
 
-#: ../applet/main.c:1100
+#: ../applet/main.c:873
 msgid "Debug"
 msgstr "Razhroščevanje"
 
-#: ../applet/main.c:1101
-msgid "Output a list of currently known devices"
-msgstr "Izpis seznama trenutno nastavljenih naprav"
-
 #. Parse command-line options
-#: ../applet/main.c:1120
+#: ../applet/main.c:892
 msgid "- Bluetooth applet"
 msgstr "- aplet Bluetooth"
 
-#: ../applet/main.c:1125
+#: ../applet/main.c:897
 #, c-format
 msgid ""
 "%s\n"
@@ -287,7 +283,7 @@ msgstr ""
 "%s\n"
 "Zaženite '%s --help' za podroben pregled celotnega seznama možnosti ukazne vrstice.\n"
 
-#: ../applet/main.c:1148
+#: ../applet/main.c:923
 msgid "Bluetooth Applet"
 msgstr "Bluetooth aplet"
 
@@ -306,73 +302,67 @@ msgstr "Bluetooth"
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: omogočeno"
 
-#: ../applet/agent.c:251
-#: ../applet/agent.c:332
+#: ../applet/agent.c:196
+#: ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "Naprava '%s' se skuša povezati z računalnikom"
 
-#: ../applet/agent.c:257
+#: ../applet/agent.c:202
 #, c-format
 msgid "Please enter the PIN mentioned on device %s."
 msgstr "Vnesite prehodno geslo naprave %s."
 
-#: ../applet/agent.c:339
+#: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgstr "Potrdite, ali se prehodno geslo '%s' sklada z geslom naprave %s."
 
 #. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:385
+#: ../applet/agent.c:314
 #, c-format
 msgid "Grant access to '%s'"
 msgstr "Odobritev dostopa do '%s'"
 
-#: ../applet/agent.c:390
+#: ../applet/agent.c:319
 #, c-format
 msgid "Device %s wants access to the service '%s'."
 msgstr "Naprava %s čaka na dostop do storitve '%s'."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:496
-#: ../applet/agent.c:531
-#: ../applet/agent.c:573
+#: ../applet/agent.c:369
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "Zahteva za povezovanje z napravo '%s'"
 
-#: ../applet/agent.c:500
-#: ../applet/agent.c:535
-#: ../applet/agent.c:577
-#: ../applet/agent.c:618
-#: ../applet/agent.c:656
+#: ../applet/agent.c:371
+#: ../applet/agent.c:404
+#: ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "Naprava Bluetooth"
 
-#: ../applet/agent.c:501
-#: ../applet/agent.c:536
-#: ../applet/agent.c:578
+#: ../applet/agent.c:372
 msgid "Enter PIN"
 msgstr "Vnos prehodnega gesla"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:608
+#: ../applet/agent.c:396
 #, c-format
 msgid "Pairing confirmation for '%s'"
 msgstr "Potrditev povezovanja z napravo '%s'"
 
-#: ../applet/agent.c:619
+#: ../applet/agent.c:405
 msgid "Verify PIN"
 msgstr "Potrditev prehodnega gesla"
 
-#: ../applet/agent.c:652
+#: ../applet/agent.c:432
 #, c-format
 msgid "Authorization request from '%s'"
 msgstr "Zahteva za overitev '%s'"
 
-#: ../applet/agent.c:657
+#: ../applet/agent.c:435
 msgid "Check authorization"
 msgstr "Preveri overitev"
 
@@ -500,19 +490,19 @@ msgstr "Nastavitve za Bluetooth"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:205
-#: ../wizard/main.c:326
+#: ../wizard/main.c:207
+#: ../wizard/main.c:328
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Povezovanje z napravo '%s' je preklicano"
 
-#: ../wizard/main.c:245
+#: ../wizard/main.c:247
 #: ../moblin/moblin-panel.c:1139
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Potrdite, da se prehodno geslo '%s' sklada s tem."
 
-#: ../wizard/main.c:299
+#: ../wizard/main.c:301
 #: ../moblin/moblin-panel.c:1190
 msgid "Please enter the following PIN:"
 msgstr "Vnesite naslednje prehodno geslo:"
@@ -521,27 +511,27 @@ msgstr "Vnesite naslednje prehodno geslo:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:382
+#: ../wizard/main.c:384
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Nastavljanje naprave '%s' ni uspelo."
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset' now...
+#. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:513
+#: ../wizard/main.c:442
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Povezovanje z napravo '%s' ..."
 
-#: ../wizard/main.c:549
+#: ../wizard/main.c:480
 #: ../moblin/moblin-panel.c:750
 #, c-format
 msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Vnesite naslednje prehodno geslo na '%s' in pritisnite tipko “Enter”:"
 
-#: ../wizard/main.c:551
+#: ../wizard/main.c:482
 #: ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
@@ -551,12 +541,12 @@ msgstr "Vnesite naslednje prehodno geslo na '%s':"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:572
+#: ../wizard/main.c:505
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Počakajte na nastavljanje naprave '%s' ..."
 
-#: ../wizard/main.c:588
+#: ../wizard/main.c:523
 #: ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
@@ -661,6 +651,14 @@ msgid "_Automatic PIN selection"
 msgstr "_Samodejni izbor prehodnega gesla"
 
 #: ../wizard/wizard.ui.h:27
+msgid "_Cancel"
+msgstr "_Prekliči"
+
+#: ../wizard/wizard.ui.h:28
+msgid "_Close"
+msgstr "_Zapri"
+
+#: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
 msgstr "_Ponovni zagon namestitve"
 
@@ -934,6 +932,8 @@ msgstr "Pošlji datoteko iz računalnika"
 msgid "Bluetooth Manager Panel"
 msgstr "Pult Bluetooth upravljalnika"
 
+#~ msgid "Output a list of currently known devices"
+#~ msgstr "Izpis seznama trenutno nastavljenih naprav"
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "Možnosti Bluetooth"
 #~ msgid "Bluetooth Properties"
