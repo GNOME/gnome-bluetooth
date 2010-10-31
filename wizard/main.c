@@ -81,6 +81,8 @@ static char *pincode = NULL;
 static GtkBuilder *builder = NULL;
 
 static GtkAssistant *window_assistant = NULL;
+static GtkWidget *button_close = NULL;
+static GtkWidget *button_cancel = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_connecting = NULL;
 static GtkWidget *page_setup = NULL;
@@ -410,87 +412,14 @@ close_callback (GtkWidget *assistant,
 	gtk_main_quit();
 }
 
-/* HACK, to access the GtkAssistant buttons */
-struct RealGtkAssistant
-{
-	GtkWindow  parent;
-
-	GtkWidget *cancel;
-	GtkWidget *forward;
-	GtkWidget *back;
-	GtkWidget *apply;
-	GtkWidget *close;
-	GtkWidget *last;
-
-	/*< private >*/
-	GtkAssistantPrivate *priv;
-};
-typedef struct RealGtkAssistant RealGtkAssistant;
-
-static gboolean
-prepare_idle_cb (gpointer data)
-{
-	RealGtkAssistant *assistant = (RealGtkAssistant *) window_assistant;
-	gint page;
-
-	page = gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant));
-	if (page == PAGE_FAILURE) {
-		gtk_widget_hide (assistant->cancel);
-		gtk_widget_hide (assistant->forward);
-		gtk_widget_hide (assistant->back);
-		gtk_widget_hide (assistant->apply);
-		gtk_widget_hide (assistant->last);
-		gtk_widget_show (assistant->close);
-		gtk_widget_set_sensitive (assistant->close, TRUE);
-	}
-	if (page == PAGE_CONNECTING) {
-		gtk_widget_hide (assistant->forward);
-		gtk_widget_hide (assistant->back);
-		gtk_widget_hide (assistant->apply);
-		gtk_widget_hide (assistant->last);
-		gtk_widget_hide (assistant->close);
-		gtk_widget_show (assistant->cancel);
-		gtk_widget_set_sensitive (assistant->cancel, TRUE);
-	}
-	if (page == PAGE_SETUP) {
-		gtk_widget_hide (assistant->forward);
-		gtk_widget_hide (assistant->back);
-		gtk_widget_hide (assistant->apply);
-		gtk_widget_hide (assistant->last);
-		gtk_widget_hide (assistant->close);
-		gtk_widget_show (assistant->cancel);
-		gtk_widget_set_sensitive (assistant->cancel, TRUE);
-	}
-	if (page == PAGE_SSP_SETUP) {
-		gtk_widget_hide (assistant->forward);
-		gtk_widget_hide (assistant->back);
-		gtk_widget_hide (assistant->apply);
-		gtk_widget_hide (assistant->last);
-		gtk_widget_hide (assistant->close);
-		if (display_called == FALSE) {
-			gtk_widget_hide (assistant->cancel);
-		} else {
-			gtk_widget_show (assistant->cancel);
-			gtk_widget_set_sensitive (assistant->cancel, TRUE);
-		}
-	}
-	if (page == PAGE_FINISHING) {
-		gtk_widget_hide (assistant->forward);
-		gtk_widget_hide (assistant->back);
-		gtk_widget_hide (assistant->apply);
-		gtk_widget_hide (assistant->last);
-		gtk_widget_hide (assistant->cancel);
-		gtk_widget_show (assistant->close);
-		gtk_widget_set_sensitive (assistant->close, FALSE);
-	}
-	return FALSE;
-}
-
 void prepare_callback (GtkWidget *assistant,
 		       GtkWidget *page,
 		       gpointer data)
 {
 	gboolean complete = TRUE;
+
+	gtk_widget_hide (button_close);
+	gtk_widget_hide (button_cancel);
 
 	if (page == page_search) {
 		complete = set_page_search_complete ();
@@ -508,11 +437,13 @@ void prepare_callback (GtkWidget *assistant,
 
 		/* translators:
 		 * The '%s' is the device name, for example:
-		 * Connecting to 'Sony Bluetooth Headset' now...
+		 * Connecting to 'Sony Bluetooth Headset'...
 		 */
 		text = g_strdup_printf (_("Connecting to '%s'..."), target_name);
 		gtk_label_set_text (GTK_LABEL (label_connecting), text);
 		g_free (text);
+
+		gtk_widget_show (button_cancel);
 	} else {
 		gtk_spinner_stop (GTK_SPINNER (spinner_connecting));
 	}
@@ -556,6 +487,8 @@ void prepare_callback (GtkWidget *assistant,
 		} else {
 			g_assert_not_reached ();
 		}
+
+		gtk_widget_show (button_cancel);
 	}
 
 	if (page == page_finishing) {
@@ -572,6 +505,8 @@ void prepare_callback (GtkWidget *assistant,
 		text = g_strdup_printf (_("Please wait while finishing setup on device '%s'..."), target_name);
 		gtk_label_set_text (GTK_LABEL (label_finishing), text);
 		g_free (text);
+
+		gtk_widget_show (button_close);
 	} else {
 		gtk_spinner_stop (GTK_SPINNER (spinner_finishing));
 	}
@@ -616,15 +551,20 @@ void prepare_callback (GtkWidget *assistant,
 	if (page == page_failure) {
 		complete = FALSE;
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
+		gtk_widget_show (button_close);
 	} else {
 		if (gtk_widget_get_parent (W("restart_button")) != NULL)
 			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
 	}
 
-	if (page == page_ssp_setup && display_called == FALSE) {
-		complete = FALSE;
-		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
-		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
+	if (page == page_ssp_setup) {
+		if (display_called == FALSE) {
+			complete = FALSE;
+			gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
+			gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
+		} else {
+			gtk_widget_show (button_cancel);
+		}
 	} else {
 		if (gtk_widget_get_parent (W("does_not_match_button")) != NULL)
 			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
@@ -634,11 +574,6 @@ void prepare_callback (GtkWidget *assistant,
 
 	gtk_assistant_set_page_complete (GTK_ASSISTANT(assistant),
 					 page, complete);
-
-	/* HACK to allow hiding/showing the buttons
-	 * instead of relying on the GtkAssistant doing that
-	 * for us */
-	g_idle_add (prepare_idle_cb, NULL);
 }
 
 static gboolean
@@ -892,6 +827,14 @@ create_wizard (void)
 	assistant = GTK_ASSISTANT(gtk_builder_get_object(builder, "assistant"));
 
 	gtk_assistant_set_forward_page_func (assistant, page_func, NULL, NULL);
+
+	/* The 2 custom buttons */
+	button_close = W("close_button");
+	button_cancel = W("cancel_button");
+	gtk_assistant_add_action_widget (assistant, button_close);
+	gtk_assistant_add_action_widget (assistant, button_cancel);
+	gtk_widget_hide (button_close);
+	gtk_widget_hide (button_cancel);
 
 	/* Intro page */
 	combo = gtk_combo_box_new();

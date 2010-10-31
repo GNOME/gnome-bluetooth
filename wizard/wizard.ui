@@ -157,6 +157,7 @@
       </object>
       <packing>
         <property name="title" translatable="yes">Device Setup</property>
+        <property name="page_type">custom</property>
       </packing>
     </child>
     <child>
@@ -191,6 +192,7 @@
       </object>
       <packing>
         <property name="title" translatable="yes">Device Setup</property>
+        <property name="page_type">custom</property>
       </packing>
     </child>
     <child>
@@ -224,6 +226,7 @@
       </object>
       <packing>
         <property name="title" translatable="yes">Device Setup</property>
+        <property name="page_type">custom</property>
       </packing>
     </child>
     <child>
@@ -247,6 +250,7 @@
       </object>
       <packing>
         <property name="title" translatable="yes">Device Setup Failed</property>
+        <property name="page_type">custom</property>
       </packing>
     </child>
     <child>
@@ -303,6 +307,7 @@
       </object>
       <packing>
         <property name="title" translatable="yes">Finishing New Device Setup</property>
+        <property name="page_type">custom</property>
       </packing>
     </child>
     <child>
@@ -563,6 +568,22 @@
     <property name="image">image3</property>
     <property name="use_underline">True</property>
     <signal name="clicked" handler="restart_button_clicked"/>
+  </object>
+  <object class="GtkButton" id="close_button">
+    <property name="label" translatable="yes">_Close</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">True</property>
+    <property name="use_underline">True</property>
+    <signal name="clicked" handler="close_callback"/>
+  </object>
+  <object class="GtkButton" id="cancel_button">
+    <property name="label" translatable="yes">_Cancel</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">True</property>
+    <property name="use_underline">True</property>
+    <signal name="clicked" handler="close_callback"/>
   </object>
   <object class="GtkButton" id="does_not_match_button">
     <property name="label" translatable="yes" comments="This is a button to answer: Does the PIN matches the one on the device?">Does not match</property>
