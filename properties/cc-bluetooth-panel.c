@@ -107,7 +107,7 @@ create_window (GtkWidget *notebook,
 	g_settings_bind (settings, PREF_SHOW_ICON, G_OBJECT (button), "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	buttonbox = gtk_hbutton_box_new();
+	buttonbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox), GTK_BUTTONBOX_END);
 	gtk_box_pack_start(GTK_BOX(vbox), buttonbox, FALSE, FALSE, 0);
 

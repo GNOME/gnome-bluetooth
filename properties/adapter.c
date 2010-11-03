@@ -360,7 +360,7 @@ static void create_adapter(adapter_data *adapter)
 
 	adapter->devices_table = table;
 
-	buttonbox = gtk_vbutton_box_new();
+	buttonbox = gtk_button_box_new (GTK_ORIENTATION_VERTICAL);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox),
 						GTK_BUTTONBOX_START);
 	gtk_box_set_spacing(GTK_BOX(buttonbox), 6);
