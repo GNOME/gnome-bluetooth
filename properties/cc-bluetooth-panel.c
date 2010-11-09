@@ -27,6 +27,7 @@
 #endif
 
 #include <glib/gi18n-lib.h>
+#include <libgnome-control-center/cc-shell.h>
 
 #include "cc-bluetooth-panel.h"
 
@@ -80,13 +81,20 @@ static void help_callback(GtkWidget *item)
 	}
 }
 
-static GtkWidget *create_window(GtkWidget *notebook)
+static GtkWidget *
+create_window (GtkWidget *notebook,
+	       CcPanel   *panel)
 {
 	GtkWidget *vbox;
 	GtkWidget *buttonbox;
 	GtkWidget *button;
 	GtkWidget *image;
+	CcShell *shell;
+	GtkWidget *toplevel;
 	GSettings *settings;
+
+	shell = cc_panel_get_shell (CC_PANEL (panel));
+	toplevel = cc_shell_get_toplevel (shell);
 
 	vbox = gtk_vbox_new(FALSE, 6);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 12);
@@ -108,7 +116,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 					   button, TRUE);
 	g_signal_connect(G_OBJECT(button), "clicked",
-			 G_CALLBACK(help_callback), NULL); //FIXME parent?
+			 G_CALLBACK(help_callback), toplevel);
 
 	image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
 					  GTK_ICON_SIZE_BUTTON);
@@ -118,7 +126,7 @@ static GtkWidget *create_window(GtkWidget *notebook)
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
 					   button, TRUE);
 	g_signal_connect(G_OBJECT(button), "clicked",
-			 G_CALLBACK(receive_callback), NULL); //FIXME parent?
+			 G_CALLBACK(receive_callback), toplevel);
 
 	gtk_widget_show_all(vbox);
 
@@ -159,7 +167,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	notebook = gtk_notebook_new();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 	setup_adapter(GTK_NOTEBOOK(notebook));
-	widget = create_window(notebook);
+	widget = create_window(notebook, CC_PANEL (self));
 
 	gtk_container_add (GTK_CONTAINER (self), widget);
 }
