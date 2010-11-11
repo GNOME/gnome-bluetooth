@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
-#include <mx/mx-gtk.h>
+#include <mx-gtk/mx-gtk.h>
 #include <moblin-panel/mpl-panel-common.h>
 #include <moblin-panel/mpl-panel-gtk.h>
 #include <bluetooth-enums.h>
@@ -114,7 +114,7 @@ main (int argc, char *argv[])
 		window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 		g_signal_connect (window, "delete-event", (GCallback) gtk_main_quit,
 				NULL);
-		gtk_widget_set_size_request (window, 1000, -1);
+		gtk_window_set_default_size (GTK_WINDOW (window), 1000, -1);
 		content = moblin_panel_new ();
 		gtk_widget_show (content);
 
@@ -160,7 +160,7 @@ main (int argc, char *argv[])
 		gtk_widget_show (content);
 		gtk_box_pack_start (GTK_BOX (box), content, TRUE, TRUE, 0);
 
-		gtk_widget_size_request (window, &req);
+		gtk_widget_get_preferred_size (window, NULL, &req);
 		mpl_panel_client_set_height_request (panel, req.height);
 	}
 

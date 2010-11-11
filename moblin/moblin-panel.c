@@ -33,7 +33,7 @@
 #include <glib/gi18n.h>
 #include <math.h>
 #include <gdk/gdkkeysyms.h>
-#include <mx/mx-gtk.h>
+#include <mx-gtk/mx-gtk.h>
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
@@ -399,8 +399,8 @@ entry_custom_event (GtkWidget *entry, GdkEventKey *event)
 	if (event->length == 0)
 		return FALSE;
 
-	if ((event->keyval >= GDK_0 && event->keyval <= GDK_9) ||
-	    (event->keyval >= GDK_KP_0 && event->keyval <= GDK_KP_9))
+	if ((event->keyval >= GDK_KEY_0 && event->keyval <= GDK_KEY_9) ||
+	    (event->keyval >= GDK_KEY_KP_0 && event->keyval <= GDK_KEY_KP_9))
 		return FALSE;
 
 	return TRUE;
