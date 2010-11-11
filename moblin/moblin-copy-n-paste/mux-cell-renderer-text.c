@@ -12,7 +12,7 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static gboolean
-contains (GdkRectangle *rect, gint x, gint y)
+contains (const GdkRectangle *rect, gint x, gint y)
 {
   return (rect->x + rect->width) > x && rect->x <= x &&
   	 (rect->y + rect->height) > y && rect->y <= y;
@@ -23,8 +23,8 @@ mux_cell_renderer_text_activate (GtkCellRenderer     *cell,
 				 GdkEvent            *event,
 				 GtkWidget           *widget,
 				 const gchar         *path,
-				 GdkRectangle        *bg_area,
-				 GdkRectangle        *cell_area,
+				 const GdkRectangle  *bg_area,
+				 const GdkRectangle  *cell_area,
 				 GtkCellRendererState flags)
 {
   gdouble x, y;
@@ -43,19 +43,17 @@ mux_cell_renderer_text_activate (GtkCellRenderer     *cell,
 
 static void
 mux_cell_renderer_text_render (GtkCellRenderer     *cell,
-			       GdkDrawable         *window,
+			       cairo_t             *cr,
 			       GtkWidget           *widget,
-			       GdkRectangle        *bg_area,
-			       GdkRectangle        *cell_area,
-			       GdkRectangle        *expose_area,
+			       const GdkRectangle  *bg_area,
+			       const GdkRectangle  *cell_area,
 			       GtkCellRendererState flags)
 {
   GTK_CELL_RENDERER_CLASS (mux_cell_renderer_text_parent_class)->render (cell,
-                                                                         window,
+                                                                         cr,
                                                                          widget,
                                                                          bg_area,
                                                                          cell_area,
-                                                                         expose_area,
                                                                          GTK_CELL_RENDERER_SELECTED);
 }
 
