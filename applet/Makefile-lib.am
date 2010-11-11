@@ -1,4 +1,5 @@
 CLEANFILES =
+EXTRA_DIST =
 BUILT_SOURCES = marshal.h marshal.c
 
 pkglib_LTLIBRARIES = libgnome-bluetooth-applet.la
@@ -19,6 +20,8 @@ marshal.h: marshal.list
 
 marshal.c: marshal.list
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
+
+EXTRA_DIST += marshal.list
 
 include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =

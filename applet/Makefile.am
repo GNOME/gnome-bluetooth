@@ -34,6 +34,6 @@ autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
 CLEANFILES += $(autostart_DATA)
 
-EXTRA_DIST = $(man_MANS) $(autostart_in_in_files) $(ui_DATA)
+EXTRA_DIST += $(man_MANS) $(autostart_in_in_files) $(ui_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
