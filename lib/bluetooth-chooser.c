@@ -54,7 +54,7 @@ enum {
 static int selection_table_signals[LAST_SIGNAL] = { 0 };
 
 #define BLUETOOTH_CHOOSER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
-										 BLUETOOTH_TYPE_CHOOSER, BluetoothChooserPrivate))
+									BLUETOOTH_TYPE_CHOOSER, BluetoothChooserPrivate))
 
 typedef struct _BluetoothChooserPrivate BluetoothChooserPrivate;
 

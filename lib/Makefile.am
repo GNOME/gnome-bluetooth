@@ -57,6 +57,7 @@ libgnome_bluetooth_introspect_headers =			\
 	bluetooth-client.h				\
 	bluetooth-chooser.h				\
 	bluetooth-chooser-button.h			\
+	bluetooth-chooser-combo.h			\
 	bluetooth-filter-widget.h			\
 	bluetooth-enums.h
 

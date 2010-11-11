@@ -28,16 +28,27 @@ G_BEGIN_DECLS
 #define BLUETOOTH_TYPE_CHOOSER_COMBO     (bluetooth_chooser_combo_get_type ())
 #define BLUETOOTH_CHOOSER_COMBO(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BLUETOOTH_TYPE_CHOOSER_COMBO, BluetoothChooserCombo))
 #define BLUETOOTH_IS_CHOOSER_COMBO(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BLUETOOTH_TYPE_CHOOSER_COMBO))
+#define BLUETOOTH_IS_CHOOSER_COMBO_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
+									 BLUETOOTH_TYPE_CHOOSER_COMBO))
+#define BLUETOOTH_GET_CHOOSER_COMBO_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
+				BLUETOOTH_TYPE_CHOOSER_COMBO, BluetoothChooserComboClass))
 
 #define BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE "00:00:00:00:00:00"
 
-typedef struct _BluetoothChooserCombo BluetoothChooserCombo;
+typedef struct _BluetoothChooserComboPrivate BluetoothChooserComboPrivate;
+typedef struct _BluetoothChooserComboClass BluetoothChooserComboClass;
 
-typedef struct _BluetoothChooserComboClass {
+typedef struct _BluetoothChooserCombo {
+	GtkVBox            parent;
+
+	BluetoothChooserComboPrivate *priv;
+} BluetoothChooserCombo;
+
+struct _BluetoothChooserComboClass {
   GtkVBoxClass parent_class;
 
   void (*chooser_created) (BluetoothChooserCombo *self, GtkWidget *chooser);
-} BluetoothChooserComboClass;
+};
 
 GType		bluetooth_chooser_combo_get_type	(void);
 
