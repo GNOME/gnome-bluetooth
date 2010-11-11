@@ -38,28 +38,21 @@ mux_banner_realize (GtkWidget *widget)
   GTK_WIDGET_CLASS (mux_banner_parent_class)->realize (widget);
 
   gdk_color_parse ("#d7d9d6", &banner->priv->colour);
-  gdk_colormap_alloc_color (gtk_widget_get_colormap (widget),
-                            &banner->priv->colour,
-                            FALSE, TRUE);
 }
 
 static gboolean
-mux_banner_expose (GtkWidget *widget, GdkEventExpose *event)
+mux_banner_draw (GtkWidget *widget, cairo_t *cr)
 {
   MuxBanner *banner = MUX_BANNER (widget);
-  GdkWindow *window;
-  GdkGC *gc;
+  GtkAllocation allocation;
 
-  window = gtk_widget_get_window (widget);
-  gc = gdk_gc_new (window);
-  gdk_gc_set_foreground (gc, &banner->priv->colour);
+  gtk_widget_get_allocation (widget, &allocation);
 
-  gdk_draw_rectangle (window, gc, TRUE,
-                      event->area.x, event->area.y,
-                      event->area.width, event->area.height);
+  gdk_cairo_set_source_color (cr, &banner->priv->colour);
+  cairo_rectangle (cr, 0, 0, allocation.width, allocation.height);
+  cairo_paint (cr);
 
-
-  return GTK_WIDGET_CLASS (mux_banner_parent_class)->expose_event (widget, event);
+  return GTK_WIDGET_CLASS (mux_banner_parent_class)->draw (widget, cr);
 }
 
 static void
@@ -68,7 +61,7 @@ mux_banner_class_init (MuxBannerClass *klass)
     GtkWidgetClass *w_class = (GtkWidgetClass *)klass;
 
     w_class->realize = mux_banner_realize;
-    w_class->expose_event = mux_banner_expose;
+    w_class->draw = mux_banner_draw;
 
     g_type_class_add_private (klass, sizeof (MuxBannerPrivate));
 }
