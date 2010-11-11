@@ -1,3 +1,17 @@
+ver 2.91.2:
+- Update command to launch Bluetooth panel
+- Fix i18n in the panel
+- Make test-plugins test command more useful
+- Fix adapter not going powered when coming back from hard-block
+- Allow setup of devices that don't support pairing
+- Make sure the icon is shown/hidden when killswitch state changes
+- Make sure all the unblocked adapters get powered on startup
+- Fix visible menu item disappearing after suspend
+- Make --dump-devices work again in the applet, and
+  fix its output for some services
+- Refactor applet as a library, for use in gnome-shell
+- Build fixes
+
 ver 2.90.0:
 - Port to GSettings, GTK+ 3.x and GtkApplication
 - Use GBinding instead of copy/paste Seahorse code
