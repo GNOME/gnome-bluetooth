@@ -28,7 +28,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gio/gio.h>
-#include <lib/bluetooth-enums.h>
+#include <bluetooth-enums.h>
 
 /**
  * BluetoothCapabilities:

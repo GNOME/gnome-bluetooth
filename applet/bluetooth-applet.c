@@ -27,10 +27,10 @@
 #include <gio/gio.h>
 
 #include <bluetooth-applet.h>
-#include <lib/bluetooth-client.h>
-#include <lib/bluetooth-client-private.h>
-#include <lib/bluetooth-killswitch.h>
-#include <lib/bluetooth-agent.h>
+#include <bluetooth-client.h>
+#include <bluetooth-client-private.h>
+#include <bluetooth-killswitch.h>
+#include <bluetooth-agent.h>
 
 #include <marshal.h>
 
