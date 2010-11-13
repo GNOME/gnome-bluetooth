@@ -4,17 +4,18 @@
 #
 # Antón Méixome <meixome@mancomun.org>, 2009.
 # Antón Méixome <meixome@certima.net>, 2010.
-# Fran Diéguez <frandieguez@ubuntu.com>, 2009, 2010.
 # Fran Dieguez <frandieguez@ubuntu.com>, 2010.
+# Fran Diéguez <frandieguez@ubuntu.com>, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-16 18:04+0200\n"
-"PO-Revision-Date: 2010-08-05 16:13+0200\n"
-"Last-Translator: Fran Dieguez <frandieguez@ubuntu.com>\n"
+"POT-Creation-Date: 2010-11-13 01:30+0100\n"
+"PO-Revision-Date: 2010-11-13 01:30+0100\n"
+"Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -180,96 +181,92 @@ msgstr "Use un dispositivo GPS para os servizos de xeolocalización"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Acceder á Internet usando o seu teléfono móbil (test)"
 
-#: ../applet/main.c:146
+#: ../applet/main.c:130
 msgid "Select Device to Browse"
 msgstr "Escoller o dispositivo para explorar"
 
-#: ../applet/main.c:150
+#: ../applet/main.c:134
 msgid "_Browse"
 msgstr "_Explorar"
 
-#: ../applet/main.c:159
+#: ../applet/main.c:143
 msgid "Select device to browse"
 msgstr "Seleccione o dispositivo explorábel"
 
-#: ../applet/main.c:379 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:293 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Activar bluetooth"
 
-#: ../applet/main.c:380
+#: ../applet/main.c:294
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: desactivado"
 
-#: ../applet/main.c:383
+#: ../applet/main.c:297
 msgid "Turn Off Bluetooth"
 msgstr "Desactivar Bluetooth"
 
-#: ../applet/main.c:384
+#: ../applet/main.c:298
 msgid "Bluetooth: On"
 msgstr "Bluetooth: activado"
 
-#: ../applet/main.c:389 ../applet/notify.c:159
+#: ../applet/main.c:303 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: desactivado"
 
-#: ../applet/main.c:543
+#: ../applet/main.c:452
 msgid "Disconnecting..."
 msgstr "Desconectando..."
 
-#: ../applet/main.c:546 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:455 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../applet/main.c:549 ../applet/main.c:890
+#: ../applet/main.c:458 ../applet/main.c:741
 msgid "Connected"
 msgstr "Conectado"
 
-#: ../applet/main.c:552 ../applet/main.c:890
+#: ../applet/main.c:461 ../applet/main.c:741
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../applet/main.c:908 ../applet/main.c:972 ../properties/adapter.c:380
+#: ../applet/main.c:759 ../applet/main.c:823 ../properties/adapter.c:380
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: ../applet/main.c:908 ../applet/main.c:972
+#: ../applet/main.c:759 ../applet/main.c:823
 msgid "Connect"
 msgstr "Conectar"
 
-#: ../applet/main.c:921
+#: ../applet/main.c:772
 msgid "Send files..."
 msgstr "Enviar ficheiros..."
 
-#: ../applet/main.c:931
+#: ../applet/main.c:782
 msgid "Browse files..."
 msgstr "Explorar os ficheiros..."
 
-#: ../applet/main.c:942
+#: ../applet/main.c:793
 msgid "Open Keyboard Preferences..."
 msgstr "Abrir as preferencias do teclado..."
 
-#: ../applet/main.c:950
+#: ../applet/main.c:801
 msgid "Open Mouse Preferences..."
 msgstr "Abrir as preferencias do rato..."
 
-#: ../applet/main.c:960
+#: ../applet/main.c:811
 msgid "Open Sound Preferences..."
 msgstr "Abrir as preferencias de son..."
 
-#: ../applet/main.c:1100
+#: ../applet/main.c:873
 msgid "Debug"
 msgstr "Depurar"
 
-#: ../applet/main.c:1101
-msgid "Output a list of currently known devices"
-msgstr "Sacar unha lista cos dispositivos coñecidos"
-
 #. Parse command-line options
-#: ../applet/main.c:1120
+#: ../applet/main.c:892
 msgid "- Bluetooth applet"
 msgstr "- Miniaplicativo Bluetooth"
 
-#: ../applet/main.c:1125
+#: ../applet/main.c:897
 #, c-format
 msgid ""
 "%s\n"
@@ -279,7 +276,7 @@ msgstr ""
 "Execute «%s --help» para ver a lista completa de opcións de liña de ordes "
 "dispoñíbeis.\n"
 
-#: ../applet/main.c:1148
+#: ../applet/main.c:923
 msgid "Bluetooth Applet"
 msgstr "Miniaplicativo de Bluetooth"
 
@@ -296,65 +293,64 @@ msgstr "Bluetooth"
 msgid "Bluetooth: Enabled"
 msgstr "Bluetooth: activado"
 
-#: ../applet/agent.c:251 ../applet/agent.c:332
+#: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "O dispositivo «%s» que emparellarse con este computador"
 
-#: ../applet/agent.c:257
+#: ../applet/agent.c:202
 #, c-format
 msgid "Please enter the PIN mentioned on device %s."
 msgstr "Introduza o PIN mencionado no dispositivo %s."
 
-#: ../applet/agent.c:339
+#: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgstr "Confirme cando o PIN «%s» coincida co do dispositivo %s."
 
 #. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:385
+#: ../applet/agent.c:314
 #, c-format
 msgid "Grant access to '%s'"
 msgstr "Permitirlle o acceso a «%s»"
 
-#: ../applet/agent.c:390
+#: ../applet/agent.c:319
 #, c-format
 msgid "Device %s wants access to the service '%s'."
 msgstr "O dispositivo %s quere acceder ao servizo «%s»."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#: ../applet/agent.c:369
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "Solicitude de emparellamento de «%s»"
 
-#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
-#: ../applet/agent.c:618 ../applet/agent.c:656
+#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "Dispositivo Bluetooth"
 
-#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+#: ../applet/agent.c:372
 msgid "Enter PIN"
 msgstr "Introducir PIN"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:608
+#: ../applet/agent.c:396
 #, c-format
 msgid "Pairing confirmation for '%s'"
 msgstr "Confirmación de emparellamento de «%s»"
 
-#: ../applet/agent.c:619
+#: ../applet/agent.c:405
 msgid "Verify PIN"
 msgstr "Comprobar PIN"
 
-#: ../applet/agent.c:652
+#: ../applet/agent.c:432
 #, c-format
 msgid "Authorization request from '%s'"
 msgstr "Solicitude de autorización de %s"
 
-#: ../applet/agent.c:657
+#: ../applet/agent.c:435
 msgid "Check authorization"
 msgstr "Comprobar autorización"
 
@@ -448,11 +444,12 @@ msgstr "O Bluetooth está desactivado"
 msgid "No Bluetooth adapters present"
 msgstr "Non hai ningún dispositivo Bluetooth presente"
 
-#: ../properties/cc-bluetooth-panel.c:59
+#: ../properties/cc-bluetooth-panel.c:60
 msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "Non é posíbel inicar Preferencias de «Compartición de ficheiro persoal»"
+msgstr ""
+"Non é posíbel inicar Preferencias de «Compartición de ficheiro persoal»"
 
-#: ../properties/cc-bluetooth-panel.c:64
+#: ../properties/cc-bluetooth-panel.c:65
 msgid ""
 "Please verify that the \"Personal File Sharing\" program is correctly "
 "installed."
@@ -460,11 +457,11 @@ msgstr ""
 "Verifique que o programa \"Compartición de ficheiro persoal\" está instalado "
 "correctamente."
 
-#: ../properties/cc-bluetooth-panel.c:96
+#: ../properties/cc-bluetooth-panel.c:104
 msgid "_Show Bluetooth icon"
 msgstr "_Mostrar icona de Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:115
+#: ../properties/cc-bluetooth-panel.c:123
 msgid "Receive Files"
 msgstr "Recibir ficheiros"
 
@@ -484,17 +481,17 @@ msgstr "Configurar as opcións de Bluetooth"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:205 ../wizard/main.c:326
+#: ../wizard/main.c:207 ../wizard/main.c:328
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Emparellamento con «%s» cancelado"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1139
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1139
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Confirme que o PIN mostrado en «%s» coincide con este."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1190
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1190
 msgid "Please enter the following PIN:"
 msgstr "Insira o seguinte PIN:"
 
@@ -502,27 +499,27 @@ msgstr "Insira o seguinte PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:382
+#: ../wizard/main.c:384
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "A configuración de «%s» fallou"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset' now...
+#. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:513
+#: ../wizard/main.c:442
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Conectando con «%s» ..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Insira o seguinte PIN en «%s» e prema «Intro» no teclado:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:752
+#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Insira o seguinte PIN en «%s»:"
@@ -531,12 +528,12 @@ msgstr "Insira o seguinte PIN en «%s»:"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:572
+#: ../wizard/main.c:505
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Agarde mentres se remata de configurar o dispositivo «%s»..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Configuración correcta de «%s»"
@@ -650,6 +647,14 @@ msgid "_Automatic PIN selection"
 msgstr "Selección de PIN _automática"
 
 #: ../wizard/wizard.ui.h:27
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../wizard/wizard.ui.h:28
+msgid "_Close"
+msgstr "_Pechar"
+
+#: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
 msgstr "_Reiniciar a configuración"
 
@@ -905,6 +910,9 @@ msgstr "Enviar ficheiro desde o seu computador"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel do xestor de Bluetooth"
+
+#~ msgid "Output a list of currently known devices"
+#~ msgstr "Sacar unha lista cos dispositivos coñecidos"
 
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "Preferencias de Bluetooth"
