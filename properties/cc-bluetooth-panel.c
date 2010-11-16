@@ -133,11 +133,35 @@ create_window (GtkWidget *notebook,
 	return vbox;
 }
 
+static GObject *
+cc_bluetooth_panel_constructor (GType                  gtype,
+				guint                  n_properties,
+				GObjectConstructParam *properties)
+{
+	GObject *obj;
+	GtkWidget *widget;
+	GtkWidget *notebook;
+
+	obj = G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->constructor (gtype, n_properties, properties);
+
+	bluetooth_plugin_manager_init ();
+
+	notebook = gtk_notebook_new();
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	setup_adapter(GTK_NOTEBOOK(notebook));
+	widget = create_window(notebook, CC_PANEL (obj));
+
+	gtk_container_add (GTK_CONTAINER (obj), widget);
+
+	return obj;
+}
+
 static void
 cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->constructor = cc_bluetooth_panel_constructor;
 	object_class->finalize = cc_bluetooth_panel_finalize;
 }
 
@@ -159,17 +183,6 @@ cc_bluetooth_panel_finalize (GObject *object)
 static void
 cc_bluetooth_panel_init (CcBluetoothPanel *self)
 {
-	GtkWidget *widget;
-	GtkWidget *notebook;
-
-	bluetooth_plugin_manager_init ();
-
-	notebook = gtk_notebook_new();
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-	setup_adapter(GTK_NOTEBOOK(notebook));
-	widget = create_window(notebook, CC_PANEL (self));
-
-	gtk_container_add (GTK_CONTAINER (self), widget);
 }
 
 void
