@@ -444,7 +444,7 @@ pincode_request (DBusGMethodInvocation *context,
 
 	name = device_get_name (device, &long_name);
 	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), g_object_ref (context));
+	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
 
 	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, TRUE);
 
@@ -466,7 +466,7 @@ passkey_request (DBusGMethodInvocation *context,
 
 	name = device_get_name (device, &long_name);
 	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), g_object_ref (context));
+	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
 
 	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, FALSE);
 
@@ -489,7 +489,7 @@ confirm_request (DBusGMethodInvocation *context,
 
 	name = device_get_name (device, &long_name);
 	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), g_object_ref (context));
+	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
 
 	g_signal_emit (self, signals[SIGNAL_CONFIRM_REQUEST], 0, path, name, long_name, pin);
 
@@ -512,7 +512,7 @@ authorize_request (DBusGMethodInvocation *context,
 
 	name = device_get_name (device, &long_name);
 	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), g_object_ref (context));
+	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
 
 	g_signal_emit (self, signals[SIGNAL_AUTHORIZE_REQUEST], 0, path, name, long_name, uuid);
 
@@ -528,9 +528,10 @@ cancel_request_single (gpointer key, gpointer value, gpointer user_data)
 	DBusGMethodInvocation* request_context = value;
 	GError* result;
 
-	result = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT, "Agent callback cancelled");
-
-	dbus_g_method_return_error (request_context, result);
+	if (value) {
+		result = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT, "Agent callback cancelled");
+		dbus_g_method_return_error (request_context, result);
+	}
 }
 
 static gboolean
@@ -588,10 +589,10 @@ find_default_adapter (BluetoothApplet* self)
 		gtk_tree_model_get (self->client_model, self->default_adapter,
 				    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
+		self->agent = bluetooth_agent_new();
+
 		/* This makes sure that the agent is NULL when released */
 		g_object_add_weak_pointer (G_OBJECT (self->agent), (gpointer *) (&self->agent));
-
-		self->agent = bluetooth_agent_new();
 
 		bluetooth_agent_set_pincode_func (self->agent, pincode_request, self);
 		bluetooth_agent_set_passkey_func (self->agent, passkey_request, self);
@@ -620,11 +621,11 @@ device_added_or_changed (GtkTreeModel *model,
 	find_default_adapter (self);
 
 	if (bluetooth_applet_get_discoverable (self) != prev_visibility)
-		g_object_notify (G_OBJECT (self), "discoverable");
+		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DISCOVERABLE]);
 	if (prev_num_adapters_powered != self->num_adapters_powered ||
 	    prev_num_adapters_present != self->num_adapters_present) {
-		g_object_notify (G_OBJECT (self), "killswitch-state");
-		g_object_notify (G_OBJECT (self), "show-full-menu");
+		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_KILLSWITCH_STATE]);
+		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_FULL_MENU]);
 	}
 
 	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
@@ -1031,7 +1032,7 @@ bluetooth_applet_init (BluetoothApplet *self)
 	self->killswitch_manager = bluetooth_killswitch_new ();
 	g_signal_connect (self->killswitch_manager, "state-changed", G_CALLBACK(killswitch_state_change), self);
 
-	self->pending_requests = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+	self->pending_requests = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 	dbus_g_error_domain_register (AGENT_ERROR, "org.bluez.Error", AGENT_ERROR_TYPE);
 
 	/* Make sure all the unblocked adapters are powered,
@@ -1089,19 +1090,20 @@ bluetooth_applet_class_init (BluetoothAppletClass *klass)
 	properties[PROP_KILLSWITCH_STATE] = g_param_spec_int ("killswitch-state",
 							      "Killswitch state",
 							      "State of Bluetooth hardware switches",
-							      KILLSWITCH_STATE_NO_ADAPTER, KILLSWITCH_STATE_HARD_BLOCKED, KILLSWITCH_STATE_NO_ADAPTER, G_PARAM_READABLE | G_PARAM_WRITABLE);
+							      KILLSWITCH_STATE_NO_ADAPTER, KILLSWITCH_STATE_HARD_BLOCKED, KILLSWITCH_STATE_NO_ADAPTER,
+							      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 	g_object_class_install_property (gobject_class, PROP_KILLSWITCH_STATE, properties[PROP_KILLSWITCH_STATE]);
 
 	properties[PROP_DISCOVERABLE] = g_param_spec_boolean ("discoverable",
 							      "Adapter visibility",
-							      "Wheter the adapter is visible or not",
-							      FALSE, G_PARAM_READABLE | G_PARAM_WRITABLE);
+							      "Whether the adapter is visible or not",
+							      FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 	g_object_class_install_property (gobject_class, PROP_DISCOVERABLE, properties[PROP_DISCOVERABLE]);
 
 	properties[PROP_FULL_MENU] = g_param_spec_boolean ("show-full-menu",
 							   "Show the full applet menu",
 							   "Show actions related to the adapter and other miscellanous in the main menu",
-							   TRUE, G_PARAM_READABLE);
+							   TRUE, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 	g_object_class_install_property (gobject_class, PROP_FULL_MENU, properties[PROP_FULL_MENU]);
 
 	signals[SIGNAL_DEVICES_CHANGED] = g_signal_new ("devices-changed", G_TYPE_FROM_CLASS (gobject_class),
