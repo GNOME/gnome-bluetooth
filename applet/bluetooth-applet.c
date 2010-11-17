@@ -876,10 +876,12 @@ bluetooth_applet_create_device_from_iter (GtkTreeModel *model,
 					  GtkTreeIter  *iter,
 					  gboolean      check_proxy)
 {
-	BluetoothSimpleDevice* dev = g_new (BluetoothSimpleDevice, 1);
+	BluetoothSimpleDevice *dev;
 	GHashTable *services;
 	DBusGProxy *proxy;
 	char **uuids;
+
+	dev = g_new0 (BluetoothSimpleDevice, 1);
 
 	gtk_tree_model_get (model, iter,
 			    BLUETOOTH_COLUMN_ADDRESS, &dev->bdaddr,
