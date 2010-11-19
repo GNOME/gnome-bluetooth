@@ -4,15 +4,17 @@
 # fujianwzh <fujianwzh@gmail.com>, 2009.
 # Richard Ma <richard.ma.19850509@gmail.com>, 2009.
 # Aron Xu <aronxu@gnome.org>, 2007, 2010.
+# YunQiang Su <wzssyqa@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-11 18:25+0800\n"
-"PO-Revision-Date: 2010-08-11 18:25+0800\n"
-"Last-Translator: Tao Wei <weitao1979@gmail.com>\n"
-"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"POT-Creation-Date: 2010-11-20 00:19+0800\n"
+"PO-Revision-Date: 2010-11-19 21:52+0800\n"
+"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -136,7 +138,7 @@ msgstr "已配对或已信任"
 
 #: ../lib/bluetooth-filter-widget.c:227
 msgid "<b>Show Only Bluetooth Devices With...</b>"
-msgstr "<b>只显示蓝牙设备带有...</b>"
+msgstr "<b>只显示带有...的蓝牙设备</b>"
 
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:243
@@ -166,7 +168,7 @@ msgstr "听筒，耳机或其它音频设备"
 
 #: ../lib/plugins/geoclue.c:162
 msgid "Use this GPS device for Geolocation services"
-msgstr "为 Geolocation 服务使用该 GPS 设备"
+msgstr "使用该 GPS 设备来进行地理定位"
 
 #. translators:
 #. * This is in a test plugin, please make sure you add the "(test)" part,
@@ -175,96 +177,92 @@ msgstr "为 Geolocation 服务使用该 GPS 设备"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "通过您的移动电话访问互联网 (测试)"
 
-#: ../applet/main.c:146
+#: ../applet/main.c:130
 msgid "Select Device to Browse"
 msgstr "选择要浏览的设备"
 
-#: ../applet/main.c:150
+#: ../applet/main.c:134
 msgid "_Browse"
 msgstr "浏览(_B)"
 
-#: ../applet/main.c:159
+#: ../applet/main.c:143
 msgid "Select device to browse"
 msgstr "选择要浏览的设备"
 
-#: ../applet/main.c:379 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:293 ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "打开蓝牙"
 
-#: ../applet/main.c:380
+#: ../applet/main.c:294
 msgid "Bluetooth: Off"
 msgstr "蓝牙：关"
 
-#: ../applet/main.c:383
+#: ../applet/main.c:297
 msgid "Turn Off Bluetooth"
 msgstr "关闭蓝牙"
 
-#: ../applet/main.c:384
+#: ../applet/main.c:298
 msgid "Bluetooth: On"
 msgstr "蓝牙：开"
 
-#: ../applet/main.c:389 ../applet/notify.c:159
+#: ../applet/main.c:303 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "蓝牙：已停用"
 
-#: ../applet/main.c:542
+#: ../applet/main.c:452
 msgid "Disconnecting..."
 msgstr "正在断开连接..."
 
-#: ../applet/main.c:545 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:455 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "正在连接..."
 
-#: ../applet/main.c:548 ../applet/main.c:889
+#: ../applet/main.c:458 ../applet/main.c:741
 msgid "Connected"
 msgstr "已连接"
 
-#: ../applet/main.c:551 ../applet/main.c:889
+#: ../applet/main.c:461 ../applet/main.c:741
 msgid "Disconnected"
 msgstr "已断开"
 
-#: ../applet/main.c:907 ../applet/main.c:971 ../properties/adapter.c:380
+#: ../applet/main.c:759 ../applet/main.c:823 ../properties/adapter.c:380
 msgid "Disconnect"
 msgstr "断开"
 
-#: ../applet/main.c:907 ../applet/main.c:971
+#: ../applet/main.c:759 ../applet/main.c:823
 msgid "Connect"
 msgstr "连接"
 
-#: ../applet/main.c:920
+#: ../applet/main.c:772
 msgid "Send files..."
 msgstr "发送文件..."
 
-#: ../applet/main.c:930
+#: ../applet/main.c:782
 msgid "Browse files..."
 msgstr "浏览文件..."
 
-#: ../applet/main.c:941
+#: ../applet/main.c:793
 msgid "Open Keyboard Preferences..."
-msgstr "打开键盘参数选择..."
+msgstr "打开键盘首选项..."
 
-#: ../applet/main.c:949
+#: ../applet/main.c:801
 msgid "Open Mouse Preferences..."
 msgstr "打开鼠标首选项..."
 
-#: ../applet/main.c:959
+#: ../applet/main.c:811
 msgid "Open Sound Preferences..."
 msgstr "开放声音系统首选项..."
 
-#: ../applet/main.c:1099
+#: ../applet/main.c:873
 msgid "Debug"
 msgstr "调试"
 
-#: ../applet/main.c:1100
-msgid "Output a list of currently known devices"
-msgstr "输出当前已知设备的列表"
-
 #. Parse command-line options
-#: ../applet/main.c:1119
+#: ../applet/main.c:892
 msgid "- Bluetooth applet"
 msgstr "- 蓝牙小程序"
 
-#: ../applet/main.c:1124
+#: ../applet/main.c:897
 #, c-format
 msgid ""
 "%s\n"
@@ -273,7 +271,7 @@ msgstr ""
 "%s\n"
 "运行 '%s --help' 查看命令行可用选项的完整列表。\n"
 
-#: ../applet/main.c:1147
+#: ../applet/main.c:923
 msgid "Bluetooth Applet"
 msgstr "蓝牙小程序"
 
@@ -290,67 +288,66 @@ msgstr "蓝牙"
 msgid "Bluetooth: Enabled"
 msgstr "蓝牙：已启用"
 
-#: ../applet/agent.c:251 ../applet/agent.c:332
+#: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "'%s' 设备要和该计算机配对"
 
-#: ../applet/agent.c:257
+#: ../applet/agent.c:202
 #, c-format
 msgid "Please enter the PIN mentioned on device %s."
 msgstr "请输入在 %s 设备上提到的 PIN 码。"
 
-#: ../applet/agent.c:339
+#: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgstr "请确认 PIN 码 '%s' 是否和 %s 设备上的匹配。"
 
 #. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:385
+#: ../applet/agent.c:314
 #, c-format
 msgid "Grant access to '%s'"
 msgstr "是否允许访问 %s ？"
 
-#: ../applet/agent.c:390
+#: ../applet/agent.c:319
 #, c-format
 msgid "Device %s wants access to the service '%s'."
 msgstr "%s 设备要访问 '%s' 服务。"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#: ../applet/agent.c:369
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "来自 %s 的配对请求"
 
-#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
-#: ../applet/agent.c:618 ../applet/agent.c:656
+#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "蓝牙设备"
 
-#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+#: ../applet/agent.c:372
 msgid "Enter PIN"
 msgstr "输入 PIN 码"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:608
+#: ../applet/agent.c:396
 #, c-format
 msgid "Pairing confirmation for '%s'"
-msgstr "来自 %s 的配对请求"
+msgstr "来自 %s 的配对确认"
 
-#: ../applet/agent.c:619
+#: ../applet/agent.c:405
 msgid "Verify PIN"
 msgstr "检验 PIN 码"
 
-#: ../applet/agent.c:652
+#: ../applet/agent.c:432
 #, c-format
 msgid "Authorization request from '%s'"
-msgstr "%s 的认证请求"
+msgstr "来自 %s 的认证请求"
 
-#: ../applet/agent.c:657
+#: ../applet/agent.c:435
 msgid "Check authorization"
-msgstr "检查许可"
+msgstr "检查认证"
 
 #: ../applet/bluetooth-applet.desktop.in.in.h:1
 msgid "Bluetooth Manager"
@@ -399,7 +396,7 @@ msgstr "总是允许访问(_A)"
 
 #: ../applet/authorisation-dialogue.ui.h:2
 msgid "_Grant"
-msgstr "同意(_G)"
+msgstr "允许(_G)"
 
 #: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
@@ -442,21 +439,21 @@ msgstr "蓝牙已停用"
 msgid "No Bluetooth adapters present"
 msgstr "未出现蓝牙适配器"
 
-#: ../properties/cc-bluetooth-panel.c:59
+#: ../properties/cc-bluetooth-panel.c:60
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr "不能启动“个人文件共享”首选项"
 
-#: ../properties/cc-bluetooth-panel.c:64
+#: ../properties/cc-bluetooth-panel.c:65
 msgid ""
 "Please verify that the \"Personal File Sharing\" program is correctly "
 "installed."
 msgstr "请验证“个人文件共享”程序已经正确安装了。"
 
-#: ../properties/cc-bluetooth-panel.c:96
+#: ../properties/cc-bluetooth-panel.c:104
 msgid "_Show Bluetooth icon"
 msgstr "显示蓝牙图标(_S)"
 
-#: ../properties/cc-bluetooth-panel.c:115
+#: ../properties/cc-bluetooth-panel.c:123
 msgid "Receive Files"
 msgstr "接收文件"
 
@@ -476,17 +473,17 @@ msgstr "配置蓝牙设定"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:205 ../wizard/main.c:326
+#: ../wizard/main.c:207 ../wizard/main.c:328
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "已取消和 '%s' 配对"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1139
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1139
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "请确认显示于 '%s' 的 PIN 与此匹配。 "
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1190
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1190
 msgid "Please enter the following PIN:"
 msgstr "请输入如下的 PIN："
 
@@ -494,27 +491,27 @@ msgstr "请输入如下的 PIN："
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:382
+#: ../wizard/main.c:384
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "设置 '%s' 失败"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset' now...
+#. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:513
+#: ../wizard/main.c:442
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "正在连接到 '%s' ..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "请在 '%s' 输入如下 PIN 并按下键盘上的 “Enter” 键："
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:752
+#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "请在 '%s' 输入如下的 PIN ："
@@ -523,12 +520,12 @@ msgstr "请在 '%s' 输入如下的 PIN ："
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:572
+#: ../wizard/main.c:505
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "即将完成 '%s' 设备的设置，请稍候..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "成功设置新设备 '%s'"
@@ -624,8 +621,8 @@ msgid ""
 "“visible” (sometimes called “discoverable”). Check the device's manual if in "
 "doubt."
 msgstr ""
-"该设备必须位于您的计算机10米范围内，并 “可被发现#8221;(有时称为 “可见的”)。如"
-"有疑问请检查设备手册。"
+"该设备必须位于您的计算机10米范围内，并 “可被发现”(有时称为 “可见的”)。如有疑"
+"问请检查设备手册。"
 
 #: ../wizard/wizard.ui.h:25
 msgid "Welcome to the Bluetooth new device setup"
@@ -636,8 +633,16 @@ msgid "_Automatic PIN selection"
 msgstr "自动选择 PIN(_A)"
 
 #: ../wizard/wizard.ui.h:27
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: ../wizard/wizard.ui.h:28
+msgid "_Close"
+msgstr "关闭(_C)"
+
+#: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
-msgstr "重新启动安装程序(_R)"
+msgstr "重新开始设置(_R)"
 
 #: ../sendto/main.c:162
 #, c-format
@@ -702,7 +707,7 @@ msgstr "发送 %s"
 #: ../sendto/main.c:457 ../sendto/main.c:523
 #, c-format
 msgid "Sending file %d of %d"
-msgstr "发送中 %d / %d"
+msgstr "文件发送中 %d / %d"
 
 #: ../sendto/main.c:519
 #, c-format
@@ -728,7 +733,7 @@ msgstr "选择要发送的文件"
 
 #: ../sendto/main.c:716
 msgid "Remote device to use"
-msgstr "使用远程设备"
+msgstr "要使用的远程设备"
 
 #: ../sendto/main.c:718
 msgid "Remote device's name"
@@ -811,8 +816,8 @@ msgid ""
 "Your computer is visible on\n"
 "Bluetooth for %s."
 msgstr ""
-"您的计算机为 %s 而在\n"
-"蓝牙网络上可见。"
+"您的计算机在蓝牙网络上\n"
+"对 %s 可见。"
 
 #: ../moblin/moblin-panel.c:625
 #, c-format
@@ -821,7 +826,7 @@ msgstr "和 %s 配对失败。"
 
 #: ../moblin/moblin-panel.c:985
 msgid "<u>Pair</u>"
-msgstr "配对"
+msgstr "<u>配对</u>"
 
 #: ../moblin/moblin-panel.c:999
 msgid "<u>Connect</u>"
@@ -880,6 +885,9 @@ msgstr "从您的计算机上发送文件"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "蓝牙管理器控制面板"
+
+#~ msgid "Output a list of currently known devices"
+#~ msgstr "输出当前已知设备的列表"
 
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "蓝牙首选项"
