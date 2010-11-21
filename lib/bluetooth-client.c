@@ -3,6 +3,7 @@
  *  BlueZ - Bluetooth protocol stack for Linux
  *
  *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2010       Giovanni Campagna <scampa.giovanni@gmail.com>
  *
  *
  *  This library is free software; you can redistribute it and/or
@@ -100,14 +101,14 @@ struct _BluetoothClientPrivate {
 	DBusGProxy *dbus;
 	DBusGProxy *manager;
 	GtkTreeStore *store;
-	char *default_adapter;
-	gboolean default_adapter_powered;
+	GtkTreeRowReference *default_adapter;
 };
 
 enum {
 	PROP_0,
 	PROP_DEFAULT_ADAPTER,
 	PROP_DEFAULT_ADAPTER_POWERED,
+	PROP_DEFAULT_ADAPTER_DISCOVERABLE,
 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
@@ -905,15 +906,19 @@ static void adapter_changed(DBusGProxy *adapter, const char *property,
 				   BLUETOOTH_COLUMN_POWERED, powered, -1);
 		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
 				   BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-		if (is_default != FALSE && powered != priv->default_adapter_powered) {
-			priv->default_adapter_powered = powered;
+		if (is_default != FALSE)
 			g_object_notify (G_OBJECT (client), "default-adapter-powered");
-		}
+		notify = TRUE;
 	} else if (g_str_equal(property, "Discoverable") == TRUE) {
 		gboolean discoverable = g_value_get_boolean(value);
+		gboolean is_default;
 
 		gtk_tree_store_set(priv->store, &iter,
-				BLUETOOTH_COLUMN_DISCOVERABLE, discoverable, -1);
+				   BLUETOOTH_COLUMN_DISCOVERABLE, discoverable, -1);
+		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
+				   BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+		if (is_default != FALSE)
+			g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 		notify = TRUE;
 	}
 
@@ -1031,10 +1036,11 @@ static void adapter_removed(DBusGProxy *manager,
 	while (cont == TRUE) {
 		DBusGProxy *adapter;
 		const char *adapter_path;
-		gboolean found;
+		gboolean found, was_default;
 
 		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-					BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+				   BLUETOOTH_COLUMN_PROXY, &adapter,
+				   BLUETOOTH_COLUMN_DEFAULT, &was_default, -1);
 
 		adapter_path = dbus_g_proxy_get_path(adapter);
 
@@ -1053,21 +1059,19 @@ static void adapter_removed(DBusGProxy *manager,
 		g_object_unref(adapter);
 
 		if (found == TRUE) {
-			cont = gtk_tree_store_remove(priv->store, &iter);
-			continue;
+			if (was_default) {
+				gtk_tree_row_reference_free (priv->default_adapter);
+				priv->default_adapter = NULL;
+				g_object_notify (G_OBJECT (client), "default-adapter");
+				g_object_notify (G_OBJECT (client), "default-adapter-powered");
+				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+			}
+			gtk_tree_store_remove(priv->store, &iter);
+			break;
 		}
 
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
 									&iter);
-	}
-
-	/* No adapters left in the tree? */
-	if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL(priv->store), NULL) == 0) {
-		g_free(priv->default_adapter);
-		priv->default_adapter = NULL;
-		priv->default_adapter_powered = FALSE;
-		g_object_notify (G_OBJECT (client), "default-adapter");
-		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 	}
 }
 
@@ -1083,6 +1087,10 @@ static void default_adapter_changed(DBusGProxy *manager,
 
 	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
 									&iter);
+	if (priv->default_adapter) {
+		gtk_tree_row_reference_free (priv->default_adapter);
+		priv->default_adapter = NULL;
+	}
 
 	while (cont == TRUE) {
 		DBusGProxy *adapter;
@@ -1099,8 +1107,11 @@ static void default_adapter_changed(DBusGProxy *manager,
 
 		g_object_unref(adapter);
 
-		if (found != FALSE)
-			priv->default_adapter_powered = powered;
+		if (found != FALSE) {
+			GtkTreePath *tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+			priv->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), tree_path);
+			gtk_tree_path_free (tree_path);
+		}
 
 		gtk_tree_store_set(priv->store, &iter,
 					BLUETOOTH_COLUMN_DEFAULT, found, -1);
@@ -1110,10 +1121,9 @@ static void default_adapter_changed(DBusGProxy *manager,
 	}
 
 	/* Record the new default adapter */
-	g_free(priv->default_adapter);
-	priv->default_adapter = g_strdup(path);
 	g_object_notify (G_OBJECT (client), "default-adapter");
 	g_object_notify (G_OBJECT (client), "default-adapter-powered");
+	g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 }
 
 static void name_owner_changed(DBusGProxy *dbus, const char *name,
@@ -1128,6 +1138,11 @@ static void name_owner_changed(DBusGProxy *dbus, const char *name,
 		return;
 
 	DBG("client %p name %s", client, name);
+
+	if (priv->default_adapter) {
+		gtk_tree_row_reference_free (priv->default_adapter);
+		priv->default_adapter = NULL;
+	}
 
 	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
 									&iter);
@@ -1196,20 +1211,72 @@ static void bluetooth_client_init(BluetoothClient *client)
 	}
 }
 
+static const char*
+_bluetooth_client_get_default_adapter_path (BluetoothClient *self)
+{
+	DBusGProxy *adapter = bluetooth_client_get_default_adapter (self);
+
+	if (adapter != NULL) {
+		const char *ret = dbus_g_proxy_get_path (adapter);
+		g_object_unref (adapter);
+		return ret;
+	}
+	return NULL;
+}
+
+static gboolean
+_bluetooth_client_get_default_adapter_powered (BluetoothClient *self)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (self);
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gboolean ret;
+
+	if (priv->default_adapter == NULL)
+		return FALSE;
+
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter, BLUETOOTH_COLUMN_POWERED, &ret, -1);
+	
+	return ret;
+}
+
 static void
 bluetooth_client_get_property (GObject        *object,
 			       guint           property_id,
 			       GValue         *value,
 			       GParamSpec     *pspec)
 {
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(object);
+	BluetoothClient *self = BLUETOOTH_CLIENT (object);
 
 	switch (property_id) {
 	case PROP_DEFAULT_ADAPTER:
-		g_value_set_string (value, priv->default_adapter);
+		g_value_set_string (value, _bluetooth_client_get_default_adapter_path (self));
 		break;
 	case PROP_DEFAULT_ADAPTER_POWERED:
-		g_value_set_boolean (value, priv->default_adapter_powered);
+		g_value_set_boolean (value, _bluetooth_client_get_default_adapter_powered (self));
+		break;
+	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
+		g_value_set_boolean (value, bluetooth_client_get_discoverable (self));
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
+		break;
+	}
+}
+
+static void
+bluetooth_client_set_property (GObject        *object,
+			       guint           property_id,
+			       const GValue   *value,
+			       GParamSpec     *pspec)
+{
+	BluetoothClient *self = BLUETOOTH_CLIENT (object);
+
+	switch (property_id) {
+	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
+	        bluetooth_client_set_discoverable (self, g_value_get_boolean (value), 0);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -1237,8 +1304,8 @@ static void bluetooth_client_finalize(GObject *client)
 
 	g_object_unref(priv->store);
 
-	g_free (priv->default_adapter);
-	priv->default_adapter = NULL;
+	if (priv->default_adapter)
+		gtk_tree_row_reference_free (priv->default_adapter);
 
 	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize(client);
 }
@@ -1254,7 +1321,7 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 
 	object_class->finalize = bluetooth_client_finalize;
 	object_class->get_property = bluetooth_client_get_property;
-
+	object_class->set_property = bluetooth_client_set_property;
 
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER,
 					 g_param_spec_string ("default-adapter", NULL, NULL,
@@ -1262,6 +1329,9 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_POWERED,
 					 g_param_spec_boolean ("default-adapter-powered", NULL, NULL,
 					 		       FALSE, G_PARAM_READABLE));
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERABLE,
+					 g_param_spec_boolean ("default-adapter-discoverable", NULL, NULL,
+							       FALSE, G_PARAM_READWRITE));
 
 	dbus_g_object_register_marshaller(marshal_VOID__STRING_BOXED,
 						G_TYPE_NONE, G_TYPE_STRING,
@@ -1281,7 +1351,7 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
  *
  * Returns a reference to the #BluetoothClient singleton. Use #g_object_unref() the object when done.
  *
- * Return value: a #BluetoothClient object.
+ * Return value: (transfer full): a #BluetoothClient object.
  **/
 BluetoothClient *bluetooth_client_new(void)
 {
@@ -1486,39 +1556,28 @@ GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
  *
  * Returns a #DBusGProxy object representing the default adapter, or %NULL if no adapters are present.
  *
- * Return value: a #DBusGProxy object.
+ * Return value: (transfer full): a #DBusGProxy object.
  **/
 DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GtkTreePath *path;
 	GtkTreeIter iter;
-	gboolean cont;
+	DBusGProxy *adapter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
 
 	DBG("client %p", client);
 
-	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
-									&iter);
+	if (priv->default_adapter == NULL)
+		return NULL;
 
-	while (cont == TRUE) {
-		DBusGProxy *adapter;
-		gboolean is_default;
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				BLUETOOTH_COLUMN_PROXY, &adapter,
-				BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-
-		if (is_default == TRUE)
-			return adapter;
-
-		g_object_unref(adapter);
-
-		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
-									&iter);
-	}
-
-	return NULL;
+	return adapter;
 }
 
 /**
@@ -1573,6 +1632,36 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
 	g_object_unref(adapter);
 
 	return TRUE;
+}
+
+/**
+ * bluetooth_client_get_discoverable:
+ * @client: a #BluetoothClient
+ *
+ * Gets the default adapter's discoverable status, cached in the adapter model.
+ *
+ * Returns: the discoverable status, or FALSE if no default adapter exists
+ */
+gboolean
+bluetooth_client_get_discoverable (BluetoothClient *client)
+{
+	BluetoothClientPrivate *priv;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gboolean ret;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+
+	priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
+	if (priv->default_adapter == NULL)
+		return FALSE;
+
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+                            BLUETOOTH_COLUMN_DISCOVERABLE, &ret, -1);
+
+	return ret;
 }
 
 /**

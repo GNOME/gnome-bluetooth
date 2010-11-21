@@ -70,6 +70,8 @@ GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
 		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
 				gpointer data, GDestroyNotify destroy);
 
+gboolean bluetooth_client_get_discoverable (BluetoothClient *client);
+
 const gchar *bluetooth_type_to_string(guint type);
 gboolean bluetooth_verify_address (const char *bdaddr);
 const char *bluetooth_uuid_to_string (const char *uuid);

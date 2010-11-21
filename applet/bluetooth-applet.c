@@ -70,8 +70,11 @@ struct _BluetoothApplet
 
 	BluetoothKillswitch* killswitch_manager;
 	BluetoothClient* client;
-	GtkTreeModel* client_model;
-	GtkTreeIter* default_adapter;
+	GtkTreeModel* device_model;
+	gulong signal_row_added;
+	gulong signal_row_changed;
+	gulong signal_row_deleted;
+	DBusGProxy* default_adapter;
 	BluetoothAgent* agent;
 	GHashTable* pending_requests;
 
@@ -548,95 +551,91 @@ cancel_request(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-
 static void
-find_default_adapter (BluetoothApplet* self)
+device_added_or_changed (GtkTreeModel *model,
+			 GtkTreePath  *path,
+			 GtkTreeIter  *iter,
+			 gpointer      data)
 {
-	GtkTreeIter iter;
-	gboolean cont;
+	BluetoothApplet *self = BLUETOOTH_APPLET (data);
 
-	if (self->default_adapter) {
-		gtk_tree_iter_free (self->default_adapter);
-		self->default_adapter = NULL;
-	}
-	if (self->agent) {
-		g_object_unref (self->agent);
-		self->agent = NULL;
-	}
-	self->num_adapters_present = self->num_adapters_powered = 0;
-
-	cont = gtk_tree_model_get_iter_first (self->client_model, &iter);
-	while (cont) {
-		gboolean is_default, powered;
-
-		self->num_adapters_present++;
-
-		gtk_tree_model_get (self->client_model, &iter,
-				    BLUETOOTH_COLUMN_DEFAULT, &is_default,
-				    BLUETOOTH_COLUMN_POWERED, &powered,
-				    -1);
-		if (powered)
-			self->num_adapters_powered++;
-		if (is_default && powered)
-			self->default_adapter = gtk_tree_iter_copy (&iter);
-
-		cont = gtk_tree_model_iter_next (self->client_model, &iter);
-	}
-
-	if (self->default_adapter) {
-		DBusGProxy* adapter;
-
-		gtk_tree_model_get (self->client_model, self->default_adapter,
-				    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
-
-		self->agent = bluetooth_agent_new();
-
-		/* This makes sure that the agent is NULL when released */
-		g_object_add_weak_pointer (G_OBJECT (self->agent), (gpointer *) (&self->agent));
-
-		bluetooth_agent_set_pincode_func (self->agent, pincode_request, self);
-		bluetooth_agent_set_passkey_func (self->agent, passkey_request, self);
-		bluetooth_agent_set_confirm_func (self->agent, confirm_request, self);
-		bluetooth_agent_set_authorize_func (self->agent, authorize_request, self);
-		bluetooth_agent_set_cancel_func (self->agent, cancel_request, self);
-
-		bluetooth_agent_register (self->agent, adapter);
-
-		g_object_unref (adapter);
-	}
+	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
 }
 
 static void
-device_added_or_changed (GtkTreeModel *model,
-                         GtkTreePath  *path,
-                         GtkTreeIter  *iter,
-                         gpointer      data)
+device_removed (GtkTreeModel *model,
+	        GtkTreePath *path,
+	        gpointer user_data)
+{
+	device_added_or_changed (model, path, NULL, user_data);
+}
+
+static void
+default_adapter_changed (GObject    *client,
+			 GParamSpec *spec,
+			 gpointer    data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (data);
 
-	gboolean prev_visibility = bluetooth_applet_get_discoverable (self);
-	gint prev_num_adapters_powered = self->num_adapters_powered;
-	gint prev_num_adapters_present = self->num_adapters_present;
+	if (self->default_adapter)
+		g_object_unref (self->default_adapter);
+	self->default_adapter = bluetooth_client_get_default_adapter (self->client);
 
-	find_default_adapter (self);
+	if (self->device_model) {
+		g_signal_handler_disconnect (self->device_model, self->signal_row_added);
+		g_signal_handler_disconnect (self->device_model, self->signal_row_changed);
+		g_signal_handler_disconnect (self->device_model, self->signal_row_deleted);
+		g_object_unref (self->device_model);
+	}
+	if (self->default_adapter)
+		self->device_model = bluetooth_client_get_device_model (self->client, self->default_adapter);
 
-	if (bluetooth_applet_get_discoverable (self) != prev_visibility)
-		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DISCOVERABLE]);
-	if (prev_num_adapters_powered != self->num_adapters_powered ||
-	    prev_num_adapters_present != self->num_adapters_present) {
-		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_KILLSWITCH_STATE]);
-		g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_FULL_MENU]);
+	if (self->device_model) {
+		self->signal_row_added = g_signal_connect (self->device_model, "row-inserted",
+							   G_CALLBACK(device_added_or_changed), self);
+		self->signal_row_deleted = g_signal_connect (self->device_model, "row-deleted",
+							     G_CALLBACK(device_removed), self);
+		self->signal_row_changed = g_signal_connect (self->device_model, "row-changed",
+							     G_CALLBACK (device_added_or_changed), self);
+	}
+
+	if (self->agent)
+		g_object_unref (self->agent);
+
+	if (self->default_adapter) {
+		self->agent = bluetooth_agent_new ();
+		g_object_add_weak_pointer (G_OBJECT (self->agent), (void**) &(self->agent));
+
+		bluetooth_agent_set_pincode_func (self->agent, pincode_request, self);
+		bluetooth_agent_set_passkey_func (self->agent, passkey_request, self);
+		bluetooth_agent_set_authorize_func (self->agent, authorize_request, self);
+		bluetooth_agent_set_confirm_func (self->agent, confirm_request, self);
+		bluetooth_agent_set_cancel_func (self->agent, cancel_request, self);
+
+		bluetooth_agent_register (self->agent, self->default_adapter);
 	}
 
 	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
 }
 
 static void
-device_removed(GtkTreeModel *model,
-			   GtkTreePath *path,
-			   gpointer user_data)
+default_adapter_powered_changed (GObject    *client,
+				 GParamSpec *spec,
+				 gpointer    data)
 {
-	device_added_or_changed (model, path, NULL, user_data);
+        BluetoothApplet *self = BLUETOOTH_APPLET (data);
+
+	g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_FULL_MENU]);
+}
+
+static void
+default_adapter_discoverable_changed (GObject    *client,
+				 GParamSpec *spec,
+				 gpointer    data)
+{
+        BluetoothApplet *self = BLUETOOTH_APPLET (data);
+
+	g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DISCOVERABLE]);
 }
 
 static gboolean
@@ -783,18 +782,9 @@ bluetooth_applet_disconnect_device (BluetoothApplet* applet,
 gboolean
 bluetooth_applet_get_discoverable (BluetoothApplet* self)
 {
-	gboolean res = FALSE;
-
 	g_return_val_if_fail (BLUETOOTH_IS_APPLET (self), FALSE);
 
-	if (self->default_adapter == NULL)
-		return FALSE;
-
-	gtk_tree_model_get (self->client_model, self->default_adapter,
-			BLUETOOTH_COLUMN_DISCOVERABLE, &res,
-			-1);
-
-	return res;
+       	return bluetooth_client_get_discoverable (self->client);
 }
 
 /**
@@ -862,14 +852,17 @@ bluetooth_applet_set_killswitch_state (BluetoothApplet* self, BluetoothKillswitc
 gboolean
 bluetooth_applet_get_show_full_menu (BluetoothApplet* self)
 {
-
+	gboolean has_adapter, has_powered_adapter;
 	g_return_val_if_fail (BLUETOOTH_IS_APPLET (self), FALSE);
 
-	if (self->num_adapters_present == 0)
+	has_adapter = self->default_adapter != NULL;
+	g_object_get (G_OBJECT (self->client), "default-adapter-powered", &has_powered_adapter, NULL);
+
+	if (!has_adapter)
 		return FALSE;
 
-	return (self->num_adapters_present <= self->num_adapters_powered) &&
-		(bluetooth_applet_get_killswitch_state(self) == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED);
+	return has_powered_adapter &&
+		bluetooth_applet_get_killswitch_state(self) == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
 }
 
 static BluetoothSimpleDevice *
@@ -960,16 +953,16 @@ bluetooth_applet_get_devices (BluetoothApplet* self)
 	if (self->default_adapter == NULL)
 		return NULL;
 
-	cont = gtk_tree_model_iter_children (self->client_model, &iter, self->default_adapter);
+	cont = gtk_tree_model_get_iter_first (self->device_model, &iter);
 	while (cont) {
 		BluetoothSimpleDevice *dev;
 
-		dev = bluetooth_applet_create_device_from_iter (self->client_model, &iter, TRUE);
+		dev = bluetooth_applet_create_device_from_iter (self->device_model, &iter, TRUE);
 
 		if (dev != NULL)
 			result = g_list_prepend (result, dev);
 
-		cont = gtk_tree_model_iter_next(self->client_model, &iter);
+		cont = gtk_tree_model_iter_next (self->device_model, &iter);
 	}
 
 	result = g_list_reverse (result);
@@ -1021,10 +1014,8 @@ bluetooth_applet_set_property (GObject      *gobj,
 static void
 bluetooth_applet_init (BluetoothApplet *self)
 {
-	GObject* gobject_client_model = NULL;
-
 	self->client = bluetooth_client_new ();
-	self->client_model = bluetooth_client_get_model (self->client);
+	self->device_model = NULL;
 
 	self->default_adapter = NULL;
 	self->agent = NULL;
@@ -1039,15 +1030,11 @@ bluetooth_applet_init (BluetoothApplet *self)
 	 * so as to avoid seeing unpowered, but unblocked
 	 * devices */
 	set_adapter_powered (self);
-	find_default_adapter (self);
+	default_adapter_changed (NULL, NULL, self);
 
-	gobject_client_model = G_OBJECT (self->client_model);
-	g_signal_connect(gobject_client_model, "row-inserted",
-			 G_CALLBACK(device_added_or_changed), self);
-	g_signal_connect(gobject_client_model, "row-deleted",
-			 G_CALLBACK(device_removed), self);
-	g_signal_connect (gobject_client_model, "row-changed",
-			  G_CALLBACK (device_added_or_changed), self);
+	g_signal_connect (self->client, "notify::default-adapter", G_CALLBACK (default_adapter_changed), self);
+	g_signal_connect (self->client, "notify::default-adapter-powered", G_CALLBACK (default_adapter_powered_changed), self);
+	g_signal_connect (self->client, "notify::default-adapter-discoverable", G_CALLBACK (default_adapter_discoverable_changed), self);
 }
 
 static void
@@ -1066,9 +1053,9 @@ bluetooth_applet_dispose (GObject* self)
 		applet->killswitch_manager = NULL;
 	}
 
-	if (applet->client_model) {
-		g_object_unref (applet->client_model);
-		applet->client_model = NULL;
+	if (applet->device_model) {
+		g_object_unref (applet->device_model);
+		applet->device_model = NULL;
 	}
 
 	if (applet->agent) {
