@@ -131,9 +131,9 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 
 gboolean bluetooth_applet_get_show_full_menu(BluetoothApplet* self);
 
-void bluetooth_applet_agent_reply_passkey(BluetoothApplet* self, gchar* request_key, gchar* passkey);
-void bluetooth_applet_agent_reply_pincode(BluetoothApplet* self, gchar* request_key, gint pincode);
-void bluetooth_applet_agent_reply_confirm(BluetoothApplet* self, gchar* request_key, gboolean confirm);
-void bluetooth_applet_agent_reply_auth(BluetoothApplet* self, gchar* request_key, gboolean auth, gboolean trusted);
+void bluetooth_applet_agent_reply_pincode(BluetoothApplet* self, const gchar* request_key, const gchar* pincode);
+void bluetooth_applet_agent_reply_passkey(BluetoothApplet* self, const gchar* request_key, gint passkey);
+void bluetooth_applet_agent_reply_confirm(BluetoothApplet* self, const gchar* request_key, gboolean confirm);
+void bluetooth_applet_agent_reply_auth(BluetoothApplet* self, const gchar* request_key, gboolean auth, gboolean trusted);
 
 #endif /* __BLUETOOTH_APPLET_H__ */

@@ -74,14 +74,14 @@ static void pin_callback(GtkWidget *dialog,
 
 		if (input->numeric == TRUE) {
 			guint pin = atoi(text);
-			bluetooth_applet_agent_reply_pincode (input->applet, input->path, pin);
+			bluetooth_applet_agent_reply_passkey (input->applet, input->path, pin);
 		} else
-			bluetooth_applet_agent_reply_passkey (input->applet, input->path, g_strdup (text));
+			bluetooth_applet_agent_reply_pincode (input->applet, input->path, text);
 	} else {
 		if (input->numeric == TRUE)
-			bluetooth_applet_agent_reply_pincode (input->applet, input->path, -1);
+			bluetooth_applet_agent_reply_passkey (input->applet, input->path, -1);
 		else
-			bluetooth_applet_agent_reply_passkey (input->applet, input->path, NULL);
+			bluetooth_applet_agent_reply_pincode (input->applet, input->path, NULL);
 	}
 
 	input_free(input);

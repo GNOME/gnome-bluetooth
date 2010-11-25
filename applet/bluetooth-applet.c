@@ -120,7 +120,7 @@ mount_ready_cb (GObject *object,
 		GAsyncResult *result,
 		gpointer user_data)
 {
-	GError *error;
+	GError *error = NULL;
 	GFile *file = G_FILE (object);
 	char *uri = g_file_get_uri (file);
 	MountClosure *closure = user_data;
@@ -259,49 +259,16 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 }
 
 /**
- * bluetooth_applet_agent_reply_passkey:
- *
- * @self: a #BluetoothApplet
- * @request_key: (transfer full): an opaque token given in the pincode-request signal
- * @passkey: (transfer full) (allow-none): the passkey entered by the user, or NULL if the dialog was dismissed
- */
-void
-bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
-				      char            *request_key,
-				      char            *passkey)
-{
-	DBusGMethodInvocation* context;
-
-	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
-	g_return_if_fail (request_key != NULL);
-
-	context = g_hash_table_lookup (self->pending_requests, request_key);
-
-	if (passkey != NULL) {
-		dbus_g_method_return (context, passkey);
-	} else {
-		GError *error;
-		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
-				     "Pairing request rejected");
-		dbus_g_method_return_error (context, error);
-	}
-
-	g_hash_table_remove (self->pending_requests, request_key);
-	g_free (request_key);
-	g_free (passkey);
-}
-
-/**
  * bluetooth_applet_agent_reply_pincode:
  *
  * @self: a #BluetoothApplet
- * @request_key: (transfer full): an opaque token given in the pincode-request signal
- * @pincode: the PIN code entered by the user, or -1 if the dialog was dismissed
+ * @request_key: an opaque token given in the pincode-request signal
+ * @pincode: (allow-none): the PIN code entered by the user, as a string, or NULL if the dialog was dismissed
  */
 void
 bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
-				      char            *request_key,
-				      int              pincode)
+				      const char      *request_key,
+				      const char      *pincode)
 {
 	DBusGMethodInvocation* context;
 
@@ -310,7 +277,7 @@ bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
 
 	context = g_hash_table_lookup (self->pending_requests, request_key);
 
-	if (pincode != -1) {
+	if (pincode != NULL) {
 		dbus_g_method_return (context, pincode);
 	} else {
 		GError *error;
@@ -320,19 +287,49 @@ bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
-	g_free (request_key);
+}
+
+/**
+ * bluetooth_applet_agent_reply_passkey:
+ *
+ * @self: a #BluetoothApplet
+ * @request_key: an opaque token given in the pincode-request signal
+ * @passkey: the numeric PIN code entered by the user, or -1 if the dialog was dismissed
+ */
+void
+bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
+				      const char      *request_key,
+				      int              passkey)
+{
+	DBusGMethodInvocation* context;
+
+	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
+	g_return_if_fail (request_key != NULL);
+
+	context = g_hash_table_lookup (self->pending_requests, request_key);
+
+	if (passkey != -1) {
+		dbus_g_method_return (context, passkey);
+	} else {
+		GError *error;
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+				     "Pairing request rejected");
+		dbus_g_method_return_error (context, error);
+	}
+
+	g_hash_table_remove (self->pending_requests, request_key);
 }
 
 /**
  * bluetooth_applet_agent_reply_confirm:
  *
  * @self: a #BluetoothApplet
- * @request_key: (transfer full): an opaque token given in the pincode-request signal
+ * @request_key: an opaque token given in the pincode-request signal
  * @confirm: TRUE if operation was confirmed, FALSE otherwise
  */
 void
 bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
-				      char            *request_key,
+				      const char      *request_key,
 				      gboolean         confirm)
 {
 	DBusGMethodInvocation* context;
@@ -352,20 +349,19 @@ bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
-	g_free (request_key);
 }
 
 /**
  * bluetooth_applet_agent_reply_auth:
  *
  * @self: a #BluetoothApplet
- * @request_key: (transfer full): an opaque token given in the pincode-request signal
+ * @request_key: an opaque token given in the pincode-request signal
  * @auth: TRUE if operation was authorized, FALSE otherwise
  * @trusted: TRUE if the operation should be authorized automatically in the future
  */
 void
 bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
-				   char            *request_key,
+				   const char      *request_key,
 				   gboolean         auth,
 				   gboolean         trusted)
 {
@@ -389,7 +385,6 @@ bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
-	g_free (request_key);
 }
 
 #ifndef DBUS_TYPE_G_DICTIONARY
@@ -449,7 +444,7 @@ pincode_request (DBusGMethodInvocation *context,
 	path = dbus_g_proxy_get_path (device);
 	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
 
-	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, TRUE);
+	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, FALSE);
 
 	g_free (name);
 	g_free (long_name);
@@ -471,7 +466,7 @@ passkey_request (DBusGMethodInvocation *context,
 	path = dbus_g_proxy_get_path (device);
 	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
 
-	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, FALSE);
+	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, TRUE);
 
 	g_free (name);
 	g_free (long_name);
