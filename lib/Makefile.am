@@ -55,41 +55,29 @@ gnomebluetooth_HEADERS =				\
 
 AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
 
-if HAVE_INTROSPECTION
-BUILT_GIRSOURCES += GnomeBluetooth-1.0.gir
+-include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS =
+INTROSPECTION_SCANNER_ARGS = --warn-all --add-include-path=$(srcdir)
+INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 
-GnomeBluetooth-1.0.gir: $(libgnome_bluetooth_la_SOURCES)
-GnomeBluetooth-1.0.gir: $(gnomebluetooth_HEADERS)
+if HAVE_INTROSPECTION
+introspection_sources = $(gnomebluetooth_HEADERS)
+
 GnomeBluetooth-1.0.gir: libgnome-bluetooth.la
-GnomeBluetooth-1.0.gir: $(INTROSPECTION_SCANNER)
-	$(AM_V_GEN) $(INTROSPECTION_SCANNER) -v --namespace GnomeBluetooth --nsversion=1.0 \
-		--add-include-path=$(srcdir) --add-include-path=. \
-		--include=GObject-2.0 \
-		--include=Gtk-2.0 \
-		--include=DBusGLib-1.0 \
-		--include=GModule-2.0 \
-		--libtool="$(LIBTOOL)" \
-		--library=gnome-bluetooth \
-		--output $@ \
-		--pkg gobject-2.0 \
-		--pkg gtk+-2.0 \
-		--pkg dbus-glib-1 \
-		--pkg gmodule-2.0 \
-		-I$(srcdir) \
-		$(LIBGNOMEBT_CFLAGS) \
-		$(gnomebluetooth_HEADERS)
+GnomeBluetooth_1_0_gir_INCLUDES = GObject-2.0 Gtk-2.0 DBusGLib-1.0 GModule-2.0
+GnomeBluetooth_1_0_gir_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS)
+GnomeBluetooth_1_0_gir_LIBS = libgnome-bluetooth.la
+GnomeBluetooth_1_0_gir_SCANNERFLAGS = --strip-prefix=Bluetooth --pkg-export=gnome-bluetooth-1.0
+GnomeBluetooth_1_0_gir_FILES = $(introspection_sources)
+INTROSPECTION_GIRS += GnomeBluetooth-1.0.gir
 
 girdir = $(INTROSPECTION_GIRDIR)
-dist_gir_DATA = $(BUILT_GIRSOURCES)
 
-EXTRA_DIST += $(BUILT_GIRSOURCES)
+gir_DATA = $(INTROSPECTION_GIRS)
 
-typelibsdir = $(INTROSPECTION_TYPELIBDIR)
-typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+typelibdir = $(INTROSPECTION_TYPELIBDIR)
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
-%.typelib: %.gir $(G_IR_COMPILER)
-	$(AM_V_GEN) LD_LIBRARY_PATH=$${LD_LIBRARY_PATH:+$$LD_LIBRARY_PATH:}. $(INTROSPECTION_COMPILER) --includedir=$(srcdir) --includedir=. $(G_IR_COMPILER_OPTS) $< -o $@
-	
 endif # HAVE_INTROSPECTION
 
 BUILT_SOURCES = marshal.h marshal.c \
@@ -101,7 +89,7 @@ BUILT_SOURCES = marshal.h marshal.c \
 
 nodist_libcommon_la_SOURCES = $(BUILT_SOURCES)
 
-CLEANFILES = $(BUILT_SOURCES)
+CLEANFILES = $(BUILT_SOURCES) $(gir_DATA) $(typelib_DATA)
 
 noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins test-class
 
