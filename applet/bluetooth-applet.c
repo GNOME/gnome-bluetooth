@@ -584,6 +584,8 @@ default_adapter_changed (GObject    *client,
 	}
 	if (self->default_adapter)
 		self->device_model = bluetooth_client_get_device_model (self->client, self->default_adapter);
+	else
+		self->device_model = NULL;
 
 	if (self->device_model) {
 		self->signal_row_added = g_signal_connect (self->device_model, "row-inserted",
