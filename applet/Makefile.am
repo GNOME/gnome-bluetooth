@@ -14,7 +14,7 @@ test_agentdialog_LDADD = $(builddir)/libgnome-bluetooth-applet.la $(APPLET_LIBS)
 test_icon_SOURCES = test-icon.c notify.h notify.c
 test_icon_LDADD = $(APPLET_LIBS)
 
-AM_CFLAGS += $(APPLET_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
+AM_CFLAGS += $(APPLET_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\"" -DG_LOG_DOMAIN=\"BluetoothApplet\"
 
 INCLUDES = -I$(top_srcdir)/lib
 

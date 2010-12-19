@@ -192,7 +192,7 @@ device_removed (const char *bdaddr)
 	str = gconf_client_get_string (client, GPS_KEY, NULL);
 	if (g_strcmp0 (str, bdaddr) == 0) {
 		gconf_client_set_string (client, GPS_KEY, "", NULL);
-		g_message ("Device '%s' got disabled as a Geoclue GPS", bdaddr);
+		g_debug ("Device '%s' got disabled as a Geoclue GPS", bdaddr);
 	}
 
 	g_free (str);

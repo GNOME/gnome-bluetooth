@@ -73,7 +73,7 @@ AM_CFLAGS =						\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)				\
 	-DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\" \
-	-DG_LOG_DOMAIN=\"libgnome-bluetooth\"
+	-DG_LOG_DOMAIN=\"Bluetooth\"
 
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =

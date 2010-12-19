@@ -190,12 +190,12 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 		if (bluetooth_input_device_get_type (&device_info[i], &is_mouse, &is_keyboard) == FALSE)
 			continue;
 		if (is_mouse != FALSE) {
-			g_message ("has mouse: %s (id = %d)", device_info[i].name, device_info[i].id);
+			g_debug ("has mouse: %s (id = %d)", device_info[i].name, device_info[i].id);
 			has_mouse = TRUE;
 			//break;
 		}
 		if (is_keyboard != FALSE) {
-			g_message ("has keyboard: %s (id = %d)", device_info[i].name, device_info[i].id);
+			g_debug ("has keyboard: %s (id = %d)", device_info[i].name, device_info[i].id);
 			has_keyboard = TRUE;
 			//break;
 		}

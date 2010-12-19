@@ -128,9 +128,8 @@ update_killswitch (BluetoothKillswitch *killswitch,
 	}
 
 	if (changed != FALSE) {
-		g_message ("updating killswitch status %d to %s",
-			   index,
-			   state_to_string (bluetooth_killswitch_get_state (killswitch)));
+		g_debug ("updating killswitch status %d to %s",
+			 index, state_to_string (bluetooth_killswitch_get_state (killswitch)));
 		g_signal_emit (G_OBJECT (killswitch),
 			       signals[STATE_CHANGED],
 			       0, bluetooth_killswitch_get_state (killswitch));
@@ -180,8 +179,8 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
 
-		g_message ("killswitch %d is %s",
-			   ind->index, state_to_string (ind->state));
+		g_debug ("killswitch %d is %s",
+			 ind->index, state_to_string (ind->state));
 
 		if (ind->state == KILLSWITCH_STATE_HARD_BLOCKED) {
 			state = KILLSWITCH_STATE_HARD_BLOCKED;
@@ -196,7 +195,7 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 		state = ind->state;
 	}
 
-	g_message ("killswitches state %s", state_to_string (state));
+	g_debug ("killswitches state %s", state_to_string (state));
 
 	return state;
 }
@@ -222,7 +221,7 @@ remove_killswitch (BluetoothKillswitch *killswitch,
 		BluetoothIndKillswitch *ind = l->data;
 		if (ind->index == index) {
 			priv->killswitches = g_list_remove (priv->killswitches, ind);
-			g_message ("removing killswitch idx %d", index);
+			g_debug ("removing killswitch idx %d", index);
 			g_free (ind);
 			g_signal_emit (G_OBJECT (killswitch),
 				       signals[STATE_CHANGED],
@@ -241,7 +240,7 @@ add_killswitch (BluetoothKillswitch *killswitch,
 	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 	BluetoothIndKillswitch *ind;
 
-	g_message ("adding killswitch idx %d state %s", index, state_to_string (state));
+	g_debug ("adding killswitch idx %d state %s", index, state_to_string (state));
 	ind = g_new0 (BluetoothIndKillswitch, 1);
 	ind->index = index;
 	ind->state = state;
@@ -289,11 +288,11 @@ op_to_string (unsigned int op)
 static void
 print_event (struct rfkill_event *event)
 {
-	g_message ("RFKILL event: idx %u type %u (%s) op %u (%s) soft %u hard %u",
-		   event->idx,
-		   event->type, type_to_string (event->type),
-		   event->op, op_to_string (event->op),
-		   event->soft, event->hard);
+	g_debug ("RFKILL event: idx %u type %u (%s) op %u (%s) soft %u hard %u",
+		 event->idx,
+		 event->type, type_to_string (event->type),
+		 event->op, op_to_string (event->op),
+		 event->soft, event->hard);
 }
 
 static gboolean
@@ -345,7 +344,7 @@ carry_on:
 				       signals[STATE_CHANGED],
 				       0, bluetooth_killswitch_get_state (killswitch));
 	} else {
-		g_message ("something else happened");
+		g_debug ("something else happened");
 		return FALSE;
 	}
 
@@ -369,7 +368,7 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 	}
 
 	if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0) {
-		g_message ("Can't set RFKILL control device to non-blocking");
+		g_debug ("Can't set RFKILL control device to non-blocking");
 		close(fd);
 		return;
 	}
@@ -382,12 +381,12 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 		if (len < 0) {
 			if (errno == EAGAIN)
 				break;
-			g_message ("Reading of RFKILL events failed");
+			g_debug ("Reading of RFKILL events failed");
 			break;
 		}
 
 		if (len != RFKILL_EVENT_SIZE_V1) {
-			g_warning("Wrong size of RFKILL event\n");
+			g_warning ("Wrong size of RFKILL event\n");
 			continue;
 		}
 
