@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-20 12:26+0100\n"
-"PO-Revision-Date: 2010-11-20 12:27+0100\n"
+"POT-Creation-Date: 2011-01-02 16:58+0100\n"
+"PO-Revision-Date: 2011-01-02 16:59+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -19,68 +19,68 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/bluetooth-client.c:127
+#: ../lib/bluetooth-client.c:128
 msgid "All types"
 msgstr "Alle typer"
 
-#: ../lib/bluetooth-client.c:129
+#: ../lib/bluetooth-client.c:130
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-client.c:131
+#: ../lib/bluetooth-client.c:132
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-client.c:133
+#: ../lib/bluetooth-client.c:134
 msgid "Computer"
 msgstr "Datamaskin"
 
-#: ../lib/bluetooth-client.c:135
+#: ../lib/bluetooth-client.c:136
 msgid "Network"
 msgstr "Nettverk"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:138
+#: ../lib/bluetooth-client.c:139
 msgid "Headset"
 msgstr "Hodetelefon"
 
-#: ../lib/bluetooth-client.c:140
+#: ../lib/bluetooth-client.c:141
 msgid "Headphones"
 msgstr "Hodetelefoner"
 
-#: ../lib/bluetooth-client.c:142
+#: ../lib/bluetooth-client.c:143
 msgid "Audio device"
 msgstr "Lydenhet"
 
-#: ../lib/bluetooth-client.c:144
+#: ../lib/bluetooth-client.c:145
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../lib/bluetooth-client.c:146
+#: ../lib/bluetooth-client.c:147
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../lib/bluetooth-client.c:148
+#: ../lib/bluetooth-client.c:149
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../lib/bluetooth-client.c:150
+#: ../lib/bluetooth-client.c:151
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../lib/bluetooth-client.c:152
+#: ../lib/bluetooth-client.c:153
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../lib/bluetooth-client.c:154
+#: ../lib/bluetooth-client.c:155
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../lib/bluetooth-client.c:156
+#: ../lib/bluetooth-client.c:157
 msgid "Video device"
 msgstr "Videoenhet"
 
-#: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Ukjent"
@@ -137,33 +137,33 @@ msgstr "Ikke koblet sammen eller i tillitsforhold"
 msgid "Paired or trusted"
 msgstr "Koblet sammen eller i tillitsforhold"
 
-#: ../lib/bluetooth-filter-widget.c:227
-msgid "<b>Show Only Bluetooth Devices With...</b>"
-msgstr "<b>Vis kun Bluetooth-enheter med...</b>"
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show Only Bluetooth Devices With..."
+msgstr "Vis kun Bluetooth-enheter med..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:243
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "Enhets_kategori:"
 
-#: ../lib/bluetooth-filter-widget.c:258
+#: ../lib/bluetooth-filter-widget.c:262
 msgid "Select the device category to filter"
 msgstr "Velg enhetskategori som skal filtreres"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:272
+#: ../lib/bluetooth-filter-widget.c:276
 msgid "Device _type:"
 msgstr "_Type enhet:"
 
-#: ../lib/bluetooth-filter-widget.c:293
+#: ../lib/bluetooth-filter-widget.c:297
 msgid "Select the device type to filter"
 msgstr "Velg enhetstype som skal filtreres"
 
-#: ../lib/bluetooth-filter-widget.c:299
+#: ../lib/bluetooth-filter-widget.c:303
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Inndataenheter (mus, tastatur, etc.)"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:307
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hodetelefoner og andre lydenheter"
 
@@ -230,7 +230,7 @@ msgstr "Frakoblet"
 msgid "Disconnect"
 msgstr "Koble fra"
 
-#: ../applet/main.c:759 ../applet/main.c:823
+#: ../applet/main.c:759 ../applet/main.c:823 ../moblin/moblin-panel.c:1001
 msgid "Connect"
 msgstr "Koble til"
 
@@ -282,7 +282,7 @@ msgstr "Panelprogram for Bluetooth"
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
 #. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:141 ../moblin/moblin-panel.c:1595
+#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1602
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -368,7 +368,7 @@ msgid "Browse files on device..."
 msgstr "Bla gjennom filer på enhet..."
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:339
-#: ../moblin/moblin-panel.c:1396 ../moblin/moblin-panel.c:1506
+#: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "Enheter"
 
@@ -481,12 +481,12 @@ msgstr "Konfigurer innstillinger for Bluetooth"
 msgid "Pairing with '%s' cancelled"
 msgstr "Sammenkobling med «%s» avbrutt"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1139
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1146
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Vennligst bekreft at PIN som vises på «%s» er lik denne."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1190
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
 msgid "Please enter the following PIN:"
 msgstr "Vennligst oppgi følgende PIN:"
 
@@ -571,7 +571,7 @@ msgid "Do not pair"
 msgstr "Ikke koble sammen"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1343
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1350
 msgid "Does not match"
 msgstr "Passer ikke"
 
@@ -589,7 +589,7 @@ msgid "Introduction"
 msgstr "Innledning"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1339
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1346
 msgid "Matches"
 msgstr "Er lik"
 
@@ -601,13 +601,13 @@ msgstr "Alternativer for PIN"
 msgid "PIN _options..."
 msgstr "Alternativer f_or PIN..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1253
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1260
 msgid "Select the additional services you want to use with your device:"
 msgstr "Velg tilleggstjenester du vil bruke med din enhet:"
 
 #: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to setup"
-msgstr "Velg enhet som skal konfigureres"
+msgid "Select the device you want to set up"
+msgstr "Velg enheten som skal settes opp"
 
 #: ../wizard/wizard.ui.h:22
 msgid "Setup Completed"
@@ -706,8 +706,8 @@ msgstr "En ukjent feil oppsto"
 
 #: ../sendto/main.c:352
 msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
 msgstr ""
 "Sjekk at ekstern enhet er slått på og at den godtar tilkoblinger via "
 "Bluetooth"
@@ -753,13 +753,13 @@ msgid "Remote device's name"
 msgstr "Fjern enhetens navn"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error, could not find the device in the list"
-msgstr "Programmeringsfeil. Kunne ikke finne enheten i listen"
+msgid "Programming error: could not find the device in the list"
+msgstr "Programmeringsfeil: Kunne ikke finne enheten i listen"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-msgid "Obex Push file transfer unsupported"
-msgstr "Filoverføring med Obex Push er ikke støttet"
+msgid "OBEX Push file transfer unsupported"
+msgstr "Filoverføring med OBEX Push er ikke støttet"
 
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
@@ -776,10 +776,6 @@ msgstr "Moblin Bluetooth-panel"
 #: ../moblin/main.c:102
 msgid "- Moblin Bluetooth Panel"
 msgstr "- Moblin Bluetooth-panel"
-
-#: ../moblin/main.c:129
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #: ../moblin/moblin-panel.c:177
 #, c-format
@@ -841,60 +837,56 @@ msgid "Pairing with %s failed."
 msgstr "Sammenkobling med «%s» feilet."
 
 #: ../moblin/moblin-panel.c:985
-msgid "<u>Pair</u>"
-msgstr "<u>Koble sammen</u>"
+msgid "Pair"
+msgstr "Koble sammen"
 
-#: ../moblin/moblin-panel.c:999
-msgid "<u>Connect</u>"
-msgstr "<u>Koble til</u>"
+#: ../moblin/moblin-panel.c:1022
+msgid "Browse"
+msgstr "Bla gjennom"
 
-#: ../moblin/moblin-panel.c:1018
-msgid "<u>Browse</u>"
-msgstr "<u>Bla gjennom</u>"
-
-#: ../moblin/moblin-panel.c:1212
+#: ../moblin/moblin-panel.c:1219
 msgid "Device setup failed"
 msgstr "Oppsett av enhet feilet"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1226 ../moblin/moblin-panel.c:1302
-#: ../moblin/moblin-panel.c:1351 ../moblin/moblin-panel.c:1429
-#: ../moblin/moblin-panel.c:1661
+#: ../moblin/moblin-panel.c:1233 ../moblin/moblin-panel.c:1309
+#: ../moblin/moblin-panel.c:1358 ../moblin/moblin-panel.c:1436
+#: ../moblin/moblin-panel.c:1668
 msgid "Back to devices"
 msgstr "Tilbake til enheter"
 
-#: ../moblin/moblin-panel.c:1265
+#: ../moblin/moblin-panel.c:1272
 msgid "Done"
 msgstr "Ferdig"
 
-#: ../moblin/moblin-panel.c:1286 ../moblin/moblin-panel.c:1323
+#: ../moblin/moblin-panel.c:1293 ../moblin/moblin-panel.c:1330
 msgid "Device setup"
 msgstr "Oppsett av enhet"
 
-#: ../moblin/moblin-panel.c:1446 ../moblin/moblin-panel.c:1577
+#: ../moblin/moblin-panel.c:1453 ../moblin/moblin-panel.c:1584
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: ../moblin/moblin-panel.c:1462
+#: ../moblin/moblin-panel.c:1469
 msgid "Only show:"
 msgstr "Vis kun:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1468
+#: ../moblin/moblin-panel.c:1475
 msgid "PIN options"
 msgstr "Alternativer for PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1512
+#: ../moblin/moblin-panel.c:1519
 msgid "Add a new device"
 msgstr "Legg til ny enhet"
 
-#: ../moblin/moblin-panel.c:1613
+#: ../moblin/moblin-panel.c:1620
 msgid "Make visible on Bluetooth"
 msgstr "Gjør synlig via Bluetooth"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1619
+#: ../moblin/moblin-panel.c:1626
 msgid "Send file from your computer"
 msgstr "Send fil fra din datamaskin"
 
