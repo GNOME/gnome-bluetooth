@@ -66,7 +66,14 @@ gnomebluetooth_HEADERS =				\
 	$(libgnome_bluetooth_introspect_headers)	\
 	bluetooth-plugin.h
 
-AM_CFLAGS = -I$(srcdir) $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\"
+AM_CFLAGS =						\
+	-I$(srcdir)					\
+	$(LIBGNOMEBT_CFLAGS)				\
+	$(COMMON_CFLAGS)				\
+	$(WARN_CFLAGS)					\
+	$(DISABLE_DEPRECATED)				\
+	-DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\" \
+	-DG_LOG_DOMAIN=\"libgnome-bluetooth\"
 
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =
