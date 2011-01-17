@@ -99,8 +99,9 @@ PKG_CHECK_MODULES(SENDTO,
 dnl nautilus-sendto plugin
 AC_ARG_ENABLE(nautilus-sendto,
               AS_HELP_STRING([--enable-nautilus-sendto=@<:@no/yes/auto@:>@],
-                             [build nautilus-sendto plugin]), ,
-                             enable_nst=yes)
+                             [build nautilus-sendto plugin]),
+                             [enable_nst=$enableval],
+                             [enable_nst=auto])
 
 if test "x$enable_nst" != "xno"; then
    PKG_CHECK_MODULES(NST,
