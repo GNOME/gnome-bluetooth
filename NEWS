@@ -1,3 +1,21 @@
+ver 2.91.5:
+Properties:
+- Make dialogue parenting work for errors
+
+Library:
+- Use BluetoothClient to track default adapter
+- Don't free request_key and passkey in agent reply functions
+- Set log domain to differentiate library messages from the lib's ones
+
+Applet:
+- Fix crash in bluetooth_applet_create_device_from_iter()
+- Fix crash when creating an agent
+- Fix crash when unref'ing a DBusGMethodInvocation
+- Fix crash when there's no default adapter
+
+Moblin:
+- Fix compilation of the Moblin front-end
+
 ver 2.91.2:
 - Update command to launch Bluetooth panel
 - Fix i18n in the panel
