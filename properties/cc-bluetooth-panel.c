@@ -69,18 +69,6 @@ receive_callback (GtkWidget *item, GtkWindow *window)
 	}
 }
 
-static void help_callback(GtkWidget *item)
-{
-	GError *error = NULL;
-
-	if(!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET(item)),
-		"ghelp:gnome-bluetooth",  gtk_get_current_event_time (), &error)) {
-
-		g_printerr("Unable to launch help: %s", error->message);
-		g_error_free(error);
-	}
-}
-
 static GtkWidget *
 create_window (GtkWidget *notebook,
 	       CcPanel   *panel)
@@ -110,13 +98,6 @@ create_window (GtkWidget *notebook,
 	buttonbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox), GTK_BUTTONBOX_END);
 	gtk_box_pack_start(GTK_BOX(vbox), buttonbox, FALSE, FALSE, 0);
-
-	button = gtk_button_new_from_stock(GTK_STOCK_HELP);
-	gtk_container_add(GTK_CONTAINER(buttonbox), button);
-	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
-					   button, TRUE);
-	g_signal_connect(G_OBJECT(button), "clicked",
-			 G_CALLBACK(help_callback), toplevel);
 
 	image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
 					  GTK_ICON_SIZE_BUTTON);
