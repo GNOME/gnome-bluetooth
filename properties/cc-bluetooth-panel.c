@@ -101,7 +101,7 @@ create_window (GtkWidget *notebook,
 
 	image = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
 					  GTK_ICON_SIZE_BUTTON);
-	button = gtk_button_new_with_label (_("Receive Files"));
+	button = gtk_button_new_with_label (_("Sharing Settings..."));
 	gtk_button_set_image (GTK_BUTTON (button), image);
 	gtk_container_add(GTK_CONTAINER(buttonbox), button);
 	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
