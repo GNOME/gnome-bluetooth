@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the bluez-gnome package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2010-12-29 11:19+0000\n"
-"PO-Revision-Date: 2010-12-29 13:07+0100\n"
+"POT-Creation-Date: 2011-01-24 18:39+0000\n"
+"PO-Revision-Date: 2011-01-26 13:41+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,6 @@ msgid "Paired or trusted"
 msgstr "Emparejados o de confianza"
 
 #: ../lib/bluetooth-filter-widget.c:231
-#| msgid "<b>Show Only Bluetooth Devices With...</b>"
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Mostrar sólo dispositivos Bluetooth con…"
 
@@ -448,8 +447,7 @@ msgstr "No hay ningún adaptador de Bluetooth presente"
 #: ../properties/cc-bluetooth-panel.c:60
 msgid "Cannot start \"Personal File Sharing\" Preferences"
 msgstr ""
-"No se pueden iniciar las preferencias de «Compartición de archivos "
-"personales»"
+"No se pueden iniciar las preferencias de «Compartición de archivos personales»"
 
 #: ../properties/cc-bluetooth-panel.c:65
 msgid ""
@@ -459,13 +457,14 @@ msgstr ""
 "Compruebe que el programa «Compartición de archivos personales» está "
 "correctamente instalado."
 
-#: ../properties/cc-bluetooth-panel.c:104
+#: ../properties/cc-bluetooth-panel.c:92
 msgid "_Show Bluetooth icon"
 msgstr "_Mostrar icono Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:123
-msgid "Receive Files"
-msgstr "Recibir archivos"
+#: ../properties/cc-bluetooth-panel.c:104
+#| msgid "Searching for devices..."
+msgid "Sharing Settings..."
+msgstr "Configuración de compartición…"
 
 #: ../properties/properties-no-adapter.ui.h:1
 msgid "Your computer does not have any Bluetooth adapters plugged in."
@@ -613,7 +612,6 @@ msgstr ""
 "Seleccionar los servicios adicionales que quiere usar con su dispositivo:"
 
 #: ../wizard/wizard.ui.h:21
-#| msgid "Select the device you want to setup"
 msgid "Select the device you want to set up"
 msgstr "Seleccione el dispositivo que quiere configurar"
 
@@ -714,9 +712,6 @@ msgid "An unknown error occurred"
 msgstr "Ocurrió un error desconocido"
 
 #: ../sendto/main.c:352
-#| msgid ""
-#| "Make sure that remote device is switched on and that it accepts Bluetooth "
-#| "connections"
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -765,13 +760,11 @@ msgid "Remote device's name"
 msgstr "Nombre del dispositivo remoto"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
-#| msgid "Programming error, could not find the device in the list"
 msgid "Programming error: could not find the device in the list"
 msgstr "Error de programación, no se pudo encontrar el dispositivo en la lista"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-#| msgid "Obex Push file transfer unsupported"
 msgid "OBEX Push file transfer unsupported"
 msgstr "No se soporta la transferencia de archivos con OBEX Push"
 
@@ -851,12 +844,10 @@ msgid "Pairing with %s failed."
 msgstr "Falló el emparejamiento con %s."
 
 #: ../moblin/moblin-panel.c:985
-#| msgid "Paired"
 msgid "Pair"
 msgstr "Emparejar"
 
 #: ../moblin/moblin-panel.c:1022
-#| msgid "_Browse"
 msgid "Browse"
 msgstr "Examinar"
 
@@ -909,6 +900,9 @@ msgstr "Enviar un archivo desde el equipo"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel de gestión de Bluetooth"
+
+#~ msgid "Receive Files"
+#~ msgstr "Recibir archivos"
 
 #~ msgid "bluetooth"
 #~ msgstr "Bluetooth"
