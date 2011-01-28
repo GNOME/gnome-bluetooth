@@ -70,6 +70,8 @@ struct adapter_data {
 	int name_changed;
 };
 
+#define WID(x) GTK_WIDGET (gtk_builder_get_object (xml, x))
+
 static void update_visibility(adapter_data *adapter);
 
 static void block_signals(adapter_data *adapter)
@@ -166,7 +168,6 @@ static void remove_callback(GtkWidget *button, gpointer user_data)
 
 	if (bluetooth_chooser_remove_selected_device (BLUETOOTH_CHOOSER (adapter->chooser)))
 		bluetooth_plugin_manager_device_deleted (address);
-		
 
 	g_free (address);
 }
@@ -224,16 +225,13 @@ static void create_adapter(adapter_data *adapter)
 	const gchar *name;
 	gboolean powered, discoverable;
 	guint timeout;
+	GtkBuilder *xml;
 
 	GtkWidget *mainbox;
 	GtkWidget *vbox;
-	GtkWidget *alignment;
 	GtkWidget *table;
-	GtkWidget *label;
-	GtkWidget *image;
 	GtkWidget *button;
 	GtkWidget *entry;
-	GtkWidget *buttonbox;
 	int page_num;
 
 	dbus_g_proxy_call(adapter->proxy, "GetProperties", NULL, G_TYPE_INVALID,
@@ -271,19 +269,26 @@ static void create_adapter(adapter_data *adapter)
 		g_object_unref (default_proxy);
 	}
 
-	mainbox = gtk_vbox_new(FALSE, 6);
-	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
+	xml = gtk_builder_new ();
+	if (gtk_builder_add_from_file (xml, "properties-adapter.ui", NULL) == 0) {
+		if (gtk_builder_add_from_file (xml, PKGDATADIR "/properties-adapter.ui", NULL) == 0) {
+			g_object_unref (xml);
+			g_warning ("Failed to load properties-adapter.ui");
+			return;
+		}
+	}
 
+	/* Set up the main vboxes */
+	mainbox = gtk_vbox_new(FALSE, 6);
 	page_num = gtk_notebook_prepend_page(GTK_NOTEBOOK(adapter->notebook),
 							mainbox, NULL);
 
 	adapter->child = mainbox;
-
-	vbox = gtk_vbox_new(FALSE, 6);
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, TRUE, 0);
+	vbox = WID ("vbox");
+	gtk_widget_reparent (vbox, mainbox);
 
 	/* The discoverable checkbox */
-	button = gtk_check_button_new_with_mnemonic (_("Make computer _visible"));
+	button = WID ("button_discoverable");
 	if (powered == FALSE)
 		discoverable = FALSE;
 	if (discoverable != FALSE && timeout == 0)
@@ -300,30 +305,14 @@ static void create_adapter(adapter_data *adapter)
 	adapter->signal_discoverable = g_signal_connect(G_OBJECT(button), "toggled",
 							G_CALLBACK(discoverable_changed_cb), adapter);
 
-	gtk_box_pack_start(GTK_BOX(vbox), button, FALSE, FALSE, 0);
-
 	/* The friendly name */
-	vbox = gtk_vbox_new(FALSE, 6);
-	gtk_box_pack_start(GTK_BOX(mainbox), vbox, FALSE, FALSE, 0);
-
-	label = create_label(_("Friendly name"));
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-
-	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
-	gtk_widget_show (alignment);
-	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
-	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
-
-	entry = gtk_entry_new();
-	gtk_entry_set_max_length(GTK_ENTRY(entry), 248);
-	gtk_widget_set_size_request(entry, 240, -1);
-	gtk_container_add (GTK_CONTAINER (alignment), entry);
+	entry = WID ("entry");
 
 	if (name != NULL)
 		gtk_entry_set_text(GTK_ENTRY(entry), name);
 
 	adapter->entry = entry;
-	adapter->name_vbox = vbox;
+	adapter->name_vbox = WID ("name_vbox");
 
 	g_signal_connect(G_OBJECT(entry), "changed",
 					G_CALLBACK(name_callback), adapter);
@@ -333,12 +322,7 @@ static void create_adapter(adapter_data *adapter)
 	gtk_widget_set_sensitive (adapter->name_vbox, adapter->powered);
 
 	/* The known devices */
-	table = gtk_table_new(2, 2, FALSE);
-	gtk_box_pack_start(GTK_BOX(mainbox), table, TRUE, TRUE, 0);
-
-	label = create_label(_("Devices"));
-	gtk_table_attach(GTK_TABLE(table), label, 0, 2, 0, 1,
-			 GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 6);
+	table = WID ("devices_table");
 
 	/* Note that this will only ever show the devices on the default
 	 * adapter, this is on purpose */
@@ -360,51 +344,23 @@ static void create_adapter(adapter_data *adapter)
 
 	adapter->devices_table = table;
 
-	buttonbox = gtk_button_box_new (GTK_ORIENTATION_VERTICAL);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(buttonbox),
-						GTK_BUTTONBOX_START);
-	gtk_box_set_spacing(GTK_BOX(buttonbox), 6);
-	gtk_box_set_homogeneous(GTK_BOX(buttonbox), FALSE);
-	gtk_table_attach(GTK_TABLE(table), buttonbox, 1, 2, 1, 2,
-			 GTK_FILL, GTK_FILL, 6, 6);
-
-	button = gtk_button_new_with_mnemonic(_("Set up _new device..."));
-	image = gtk_image_new_from_stock(GTK_STOCK_ADD,
-						GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image(GTK_BUTTON(button), image);
-	gtk_box_pack_start(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
-
+	/* The toolbar for known devices */
+	button = WID ("button_setup");
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(wizard_callback), adapter);
 
-	button = gtk_button_new_with_label(_("Disconnect"));
-	image = gtk_image_new_from_stock(GTK_STOCK_DISCONNECT,
-						GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image(GTK_BUTTON(button), image);
-	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
-	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
-								button, TRUE);
+	button = WID ("button_disconnect");
 	gtk_widget_set_sensitive(button, FALSE);
-
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(disconnect_callback), adapter);
-
 	adapter->button_disconnect = button;
 
-	button = gtk_button_new_with_mnemonic(_("_Remove"));
-	image = gtk_image_new_from_stock(GTK_STOCK_REMOVE,
-						GTK_ICON_SIZE_BUTTON);
-	gtk_button_set_image(GTK_BUTTON(button), image);
-	gtk_box_pack_end(GTK_BOX(buttonbox), button, FALSE, FALSE, 0);
-	gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
-								button, TRUE);
-	gtk_widget_set_sensitive(button, FALSE);
-
+	button = WID ("button_delete");
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(remove_callback), adapter);
-
 	adapter->button_delete = button;
 
+	/* Finish up */
 	gtk_widget_set_sensitive (adapter->devices_table, adapter->powered);
 
 	g_object_set_data(G_OBJECT(mainbox), "adapter", adapter);
@@ -413,6 +369,8 @@ static void create_adapter(adapter_data *adapter)
 
 	if (adapter->is_default != FALSE)
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (adapter->notebook), page_num);
+
+	g_object_unref (xml);
 }
 
 static void update_visibility(adapter_data *adapter)
@@ -658,12 +616,13 @@ create_killswitch_page (GtkNotebook *notebook)
 	xml = gtk_builder_new ();
 	if (gtk_builder_add_from_file (xml, "properties-adapter-off.ui", NULL) == 0) {
 		if (gtk_builder_add_from_file (xml, PKGDATADIR "/properties-adapter-off.ui", NULL) == 0) {
+			g_object_unref (xml);
 			g_warning ("Failed to load properties-adapter-off.ui");
 			return;
 		}
 	}
 
-	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
+	vbox = WID ("table1");
 
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
@@ -673,7 +632,7 @@ create_killswitch_page (GtkNotebook *notebook)
 
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
 
-	button = GTK_WIDGET (gtk_builder_get_object (xml, "button1"));
+	button = WID("button1");
 	g_signal_connect (button, "clicked",
 			  G_CALLBACK (button_clicked_cb), button);
 	g_signal_connect (killswitch, "state-changed",
@@ -703,7 +662,7 @@ create_no_adapter_page (GtkNotebook *notebook, const char *filename)
 		}
 		g_free (path);
 	}
-	vbox = GTK_WIDGET (gtk_builder_get_object (xml, "table1"));
+	vbox = WID ("table1");
 
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
