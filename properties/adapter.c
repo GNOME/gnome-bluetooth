@@ -356,6 +356,7 @@ static void create_adapter(adapter_data *adapter)
 	adapter->button_disconnect = button;
 
 	button = WID ("button_delete");
+	gtk_widget_set_sensitive(button, FALSE);
 	g_signal_connect(G_OBJECT(button), "clicked",
 				G_CALLBACK(remove_callback), adapter);
 	adapter->button_delete = button;
