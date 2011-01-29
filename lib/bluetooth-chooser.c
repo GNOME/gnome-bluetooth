@@ -62,14 +62,14 @@ struct _BluetoothChooserPrivate {
 	BluetoothClient *client;
 	GtkTreeSelection *selection;
 	GtkTreeModel *model, *filter, *adapter_model;
-	GtkWidget *label;
+	GtkWidget *label, *label_align;
 
 	gulong default_adapter_changed_id;
 
 	/* Widgets/UI bits that can be shown or hidden */
 	GtkCellRenderer *bonded_cell;
 	GtkCellRenderer *connected_cell;
-	GtkWidget *treeview;
+	GtkWidget *treeview, *scrolled_window;
 	GtkWidget *search_hbox, *search_label, *spinner;
 	GtkWidget *filters_vbox;
 
@@ -483,6 +483,22 @@ bluetooth_chooser_get_treeview (BluetoothChooser *self)
 }
 
 /**
+ * bluetooth_chooser_get_scrolled_window:
+ * @self: A #BluetoothChooser widget.
+ *
+ * Returns the #GtkScrolledWindow object for the #BluetoothChooser.
+ *
+ * Return value: a #GtkScrolledWindow object.
+ **/
+GtkWidget *
+bluetooth_chooser_get_scrolled_window (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+
+	return priv->scrolled_window;
+}
+
+/**
  * bluetooth_chooser_set_title:
  * @self: a BluetoothChooser widget.
  * @title: the widget header title.
@@ -495,6 +511,7 @@ bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
 	if (title == NULL) {
+		gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 0, 0);
 		gtk_widget_hide (priv->label);
 	} else {
 		char *str;
@@ -503,6 +520,7 @@ bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
 		gtk_label_set_markup (GTK_LABEL(priv->label), str);
 		g_free (str);
 		gtk_widget_show (priv->label);
+		gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 12, 0);
 	}
 }
 
@@ -817,9 +835,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
 
 	GtkWidget *vbox;
-	GtkWidget *alignment;
 	GtkWidget *hbox;
-	GtkWidget *scrolled_window;
 
 	gtk_widget_push_composite_child ();
 
@@ -840,15 +856,15 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_label_set_use_markup (GTK_LABEL (priv->label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (priv->label), 0, 0.5);
 
-	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
-	gtk_widget_show (alignment);
-	gtk_box_pack_start (GTK_BOX (vbox), alignment, TRUE, TRUE, 0);
-	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+	priv->label_align = gtk_alignment_new (0.5, 0.5, 1, 1);
+	gtk_widget_show (priv->label_align);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->label_align, TRUE, TRUE, 0);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 0, 0);
 
 	/* The treeview label */
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox);
-	gtk_container_add (GTK_CONTAINER (alignment), vbox);
+	gtk_container_add (GTK_CONTAINER (priv->label_align), vbox);
 
 	hbox = gtk_hbox_new (FALSE, 24);
 	gtk_widget_show (hbox);
@@ -875,11 +891,11 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	//FIXME check whether the default adapter is discovering right now
 
 	/* The treeview */
-	scrolled_window = create_treeview (self);
-	gtk_widget_show_all (scrolled_window);
-	gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
+	priv->scrolled_window = create_treeview (self);
+	gtk_widget_show_all (priv->scrolled_window);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->scrolled_window, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->scrolled_window), GTK_SHADOW_IN);
 
 	/* The filters */
 	priv->device_type_filter_model = GTK_TREE_MODEL (gtk_list_store_new (DEVICE_TYPE_FILTER_NUM_COLS,
