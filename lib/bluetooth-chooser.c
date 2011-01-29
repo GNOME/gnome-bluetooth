@@ -762,6 +762,7 @@ create_treeview (BluetoothChooser *self)
 	column = gtk_tree_view_column_new ();
 
 	gtk_tree_view_column_set_title (column, _("Device"));
+	gtk_tree_view_column_set_expand (GTK_TREE_VIEW_COLUMN(column), TRUE);
 
 	/* The type icon */
 	renderer = gtk_cell_renderer_pixbuf_new ();
@@ -794,8 +795,6 @@ create_treeview (BluetoothChooser *self)
 	g_object_set (G_OBJECT (priv->bonded_cell), "visible", priv->show_paired, NULL);
 
 	gtk_tree_view_append_column (GTK_TREE_VIEW(tree), column);
-
-	gtk_tree_view_column_set_min_width (GTK_TREE_VIEW_COLUMN(column), 280);
 
 	gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW(tree), -1,
 						    _("Type"), gtk_cell_renderer_text_new(),
