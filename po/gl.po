@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-27 03:45+0100\n"
-"PO-Revision-Date: 2011-01-25 13:26+0100\n"
+"POT-Creation-Date: 2011-02-01 02:53+0100\n"
+"PO-Revision-Date: 2011-02-01 02:54+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "Language: gl\n"
@@ -229,7 +229,7 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../applet/main.c:759 ../applet/main.c:823 ../properties/adapter.c:380
+#: ../applet/main.c:759 ../applet/main.c:823
 msgid "Disconnect"
 msgstr "Desconectar"
 
@@ -370,7 +370,7 @@ msgstr "Bluetooth: comprobando"
 msgid "Browse files on device..."
 msgstr "Explorar os ficheiros no dispositivo…"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:339
+#: ../applet/popup-menu.ui.h:3 ../properties/properties-adapter.ui.h:1
 #: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "Dispositivos"
@@ -419,28 +419,11 @@ msgstr "_Coincide"
 msgid "_Show input"
 msgstr "_Mostrar a entrada"
 
-#. The discoverable checkbox
-#: ../properties/adapter.c:286
-msgid "Make computer _visible"
-msgstr "Facer o computador _visíbel"
-
-#: ../properties/adapter.c:309
-msgid "Friendly name"
-msgstr "Nome amigábel"
-
-#: ../properties/adapter.c:371
-msgid "Set up _new device..."
-msgstr "Configurar un novo dispositivo…"
-
-#: ../properties/adapter.c:394
-msgid "_Remove"
-msgstr "_Eliminar"
-
-#: ../properties/adapter.c:671
+#: ../properties/adapter.c:630
 msgid "Bluetooth is disabled"
 msgstr "O Bluetooth está desactivado"
 
-#: ../properties/adapter.c:711
+#: ../properties/adapter.c:670
 msgid "No Bluetooth adapters present"
 msgstr "Non hai ningún dispositivo Bluetooth presente"
 
@@ -457,13 +440,33 @@ msgstr ""
 "Verifique que o programa \"Compartición de ficheiro persoal\" está instalado "
 "correctamente."
 
-#: ../properties/cc-bluetooth-panel.c:104
+#: ../properties/cc-bluetooth-panel.c:92
 msgid "_Show Bluetooth icon"
 msgstr "_Mostrar icona de Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:123
-msgid "Receive Files"
-msgstr "Recibir ficheiros"
+#: ../properties/cc-bluetooth-panel.c:104
+msgid "Sharing Settings..."
+msgstr "Opcións de compartición…"
+
+#: ../properties/properties-adapter.ui.h:2
+msgid "Friendly name"
+msgstr "Nome amigábel"
+
+#: ../properties/properties-adapter.ui.h:3
+msgid "Make computer _visible"
+msgstr "Facer o computador _visíbel"
+
+#: ../properties/properties-adapter.ui.h:4
+msgid "Set up _new device..."
+msgstr "Configurar un novo dispositivo…"
+
+#: ../properties/properties-adapter.ui.h:5
+msgid "_Disconnect"
+msgstr "_Desconectar"
+
+#: ../properties/properties-adapter.ui.h:6
+msgid "_Remove"
+msgstr "_Eliminar"
 
 #: ../properties/properties-no-adapter.ui.h:1
 msgid "Your computer does not have any Bluetooth adapters plugged in."
@@ -902,6 +905,9 @@ msgstr "Enviar ficheiro desde o seu computador"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel do xestor de Bluetooth"
+
+#~ msgid "Receive Files"
+#~ msgstr "Recibir ficheiros"
 
 #~ msgid "bluetooth"
 #~ msgstr "bluetooth"
