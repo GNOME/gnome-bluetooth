@@ -1,14 +1,14 @@
 # Swedish translation for gnome-bluetooth
-# Copyright (c) 2007-2010 Free Software Foundation, Inc.
+# Copyright (c) 2007-2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
-# Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2010.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 14:44+0100\n"
-"PO-Revision-Date: 2010-12-29 15:40+0100\n"
+"POT-Creation-Date: 2011-02-02 21:53+0100\n"
+"PO-Revision-Date: 2011-02-02 21:53+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -232,7 +232,6 @@ msgstr "Frånkopplad"
 
 #: ../applet/main.c:759
 #: ../applet/main.c:823
-#: ../properties/adapter.c:380
 msgid "Disconnect"
 msgstr "Koppla från"
 
@@ -381,7 +380,7 @@ msgid "Browse files on device..."
 msgstr "Bläddra i filer på enhet..."
 
 #: ../applet/popup-menu.ui.h:3
-#: ../properties/adapter.c:339
+#: ../properties/properties-adapter.ui.h:1
 #: ../moblin/moblin-panel.c:1403
 #: ../moblin/moblin-panel.c:1513
 msgid "Devices"
@@ -431,28 +430,11 @@ msgstr "_Matchar"
 msgid "_Show input"
 msgstr "_Visa inmatning"
 
-#. The discoverable checkbox
-#: ../properties/adapter.c:286
-msgid "Make computer _visible"
-msgstr "Gör datorn _synlig"
-
-#: ../properties/adapter.c:309
-msgid "Friendly name"
-msgstr "Kortnamn"
-
-#: ../properties/adapter.c:371
-msgid "Set up _new device..."
-msgstr "Konfigurera _ny enhet..."
-
-#: ../properties/adapter.c:394
-msgid "_Remove"
-msgstr "_Ta bort"
-
-#: ../properties/adapter.c:671
+#: ../properties/adapter.c:630
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth är inaktiverat"
 
-#: ../properties/adapter.c:711
+#: ../properties/adapter.c:670
 msgid "No Bluetooth adapters present"
 msgstr "Inga blåtandsadaptrar anslutna"
 
@@ -464,13 +446,33 @@ msgstr "Kan inte starta inställningar för \"Personlig fildelning\""
 msgid "Please verify that the \"Personal File Sharing\" program is correctly installed."
 msgstr "Verifiera att programmet \"Personlig fildelning\" är korrekt installerat."
 
-#: ../properties/cc-bluetooth-panel.c:104
+#: ../properties/cc-bluetooth-panel.c:92
 msgid "_Show Bluetooth icon"
 msgstr "_Visa ikon för Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:123
-msgid "Receive Files"
-msgstr "Ta emot filer"
+#: ../properties/cc-bluetooth-panel.c:104
+msgid "Sharing Settings..."
+msgstr "Inställningar för utdelning..."
+
+#: ../properties/properties-adapter.ui.h:2
+msgid "Friendly name"
+msgstr "Kortnamn"
+
+#: ../properties/properties-adapter.ui.h:3
+msgid "Make computer _visible"
+msgstr "Gör datorn _synlig"
+
+#: ../properties/properties-adapter.ui.h:4
+msgid "Set up _new device..."
+msgstr "Konfigurera _ny enhet..."
+
+#: ../properties/properties-adapter.ui.h:5
+msgid "_Disconnect"
+msgstr "_Koppla från"
+
+#: ../properties/properties-adapter.ui.h:6
+msgid "_Remove"
+msgstr "_Ta bort"
 
 #: ../properties/properties-no-adapter.ui.h:1
 msgid "Your computer does not have any Bluetooth adapters plugged in."
@@ -908,6 +910,8 @@ msgstr "Skicka fil från din dator"
 msgid "Bluetooth Manager Panel"
 msgstr "Panelprogram för blåtandshantering"
 
+#~ msgid "Receive Files"
+#~ msgstr "Ta emot filer"
 #~ msgid "bluetooth"
 #~ msgstr "bluetooth"
 #~ msgid "<u>Pair</u>"
