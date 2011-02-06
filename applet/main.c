@@ -38,12 +38,7 @@
 
 static gboolean option_debug = FALSE;
 static BluetoothApplet *applet = NULL;
-static GSettings *settings = NULL;
-static gboolean show_icon_pref = TRUE;
 static gboolean discover_lock = FALSE;
-
-#define SCHEMA_NAME		"org.gnome.Bluetooth"
-#define PREF_SHOW_ICON		"show-icon"
 
 #define GNOMECC			"gnome-control-center"
 #define KEYBOARD_PREFS		GNOMECC " keyboard"
@@ -403,11 +398,9 @@ update_icon_visibility (void)
 	else
 		set_icon (TRUE);
 
-	if (show_icon_pref != FALSE) {
-		if (state != BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER) {
-			show_icon ();
-			return;
-		}
+	if (state != BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER) {
+		show_icon ();
+		return;
 	}
 	hide_icon ();
 }
@@ -860,15 +853,6 @@ done:
 				has_devices);
 }
 
-static void
-show_icon_changed (GSettings *settings,
-		   const char *key,
-		   gpointer   user_data)
-{
-	show_icon_pref = g_settings_get_boolean (settings, PREF_SHOW_ICON);
-	update_icon_visibility();
-}
-
 static GOptionEntry options[] = {
 	{ "debug", 'd', 0, G_OPTION_ARG_NONE, &option_debug, N_("Debug"), NULL },
 	{ NULL },
@@ -942,12 +926,6 @@ int main(int argc, char *argv[])
 	update_discoverability ((GObject*) applet, NULL, NULL);
 	update_device_list (applet, NULL);
 
-	settings = g_settings_new (SCHEMA_NAME);
-	show_icon_pref = g_settings_get_boolean (settings, PREF_SHOW_ICON);
-
-	g_signal_connect (G_OBJECT (settings), "changed::" PREF_SHOW_ICON,
-			  G_CALLBACK (show_icon_changed), NULL);
-
 	statusicon = init_notification();
 
 	update_icon_visibility();
@@ -962,8 +940,6 @@ int main(int argc, char *argv[])
 	gtk_main();
 
 	gtk_widget_destroy(menu);
-
-	g_object_unref(settings);
 
 	cleanup_notification();
 
