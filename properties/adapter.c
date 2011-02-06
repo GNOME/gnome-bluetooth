@@ -232,6 +232,10 @@ static void create_adapter(adapter_data *adapter)
 	GtkWidget *table;
 	GtkWidget *button;
 	GtkWidget *entry;
+	GtkWidget *widget;
+	GtkTreeViewColumn *column;
+	GtkWidget *treeview;
+	GtkStyleContext *context;
 	int page_num;
 
 	dbus_g_proxy_call(adapter->proxy, "GetProperties", NULL, G_TYPE_INVALID,
@@ -335,6 +339,18 @@ static void create_adapter(adapter_data *adapter)
 		      "show-connected", TRUE,
 		      "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
 		      NULL);
+	column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (adapter->chooser));
+	gtk_tree_view_column_set_visible (column, FALSE);
+	treeview = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (adapter->chooser));
+	g_object_set (G_OBJECT (treeview), "headers-visible", FALSE, NULL);
+
+	/* Join treeview and buttons */
+	widget = bluetooth_chooser_get_scrolled_window (BLUETOOTH_CHOOSER (adapter->chooser));;
+	context = gtk_widget_get_style_context (widget);
+	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+	widget = WID ("toolbar1");
+	context = gtk_widget_get_style_context (widget);
+	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
 	g_signal_connect (adapter->chooser, "notify::device-selected",
 			  G_CALLBACK(device_selected_cb), adapter);
