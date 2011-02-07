@@ -244,7 +244,7 @@ default_adapter_changed (GObject *object, GParamSpec *pspec, gpointer data)
 	else
 		button->is_available = FALSE;
 
-	if (adapter != NULL)
+	if (adapter != NULL && button->bdaddr != NULL)
 		set_btdevname (button, button->bdaddr, NULL, NULL);
 	g_free (adapter);
 
@@ -367,7 +367,7 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 static void
 bluetooth_chooser_button_init (BluetoothChooserButton *button)
 {
-	gtk_button_set_label (GTK_BUTTON (button), _("Click to select device..."));
+	gtk_button_set_label (GTK_BUTTON (button), _(DEFAULT_STR));
 
 	button->image = gtk_image_new ();
 	gtk_button_set_image (GTK_BUTTON (button), button->image);
@@ -383,8 +383,6 @@ bluetooth_chooser_button_init (BluetoothChooserButton *button)
 
 	/* And set the default value already */
 	default_adapter_changed (NULL, NULL, button);
-
-	set_btdevname (button, NULL, NULL, NULL);
 }
 
 /**
