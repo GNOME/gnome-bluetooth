@@ -351,7 +351,7 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 	 **/
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_string ("device", "Device", "The Bluetooth address of the selected device.",
-							      NULL, G_PARAM_READWRITE));
+							      NULL, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 	/**
 	 * BluetoothChooserButton:is-available:
 	 *
@@ -396,7 +396,6 @@ GtkWidget *
 bluetooth_chooser_button_new (void)
 {
 	return g_object_new (BLUETOOTH_TYPE_CHOOSER_BUTTON,
-			     "label", _(DEFAULT_STR),
 			     NULL);
 }
 
