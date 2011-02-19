@@ -36,15 +36,16 @@ G_BEGIN_DECLS
 #define CC_IS_BLUETOOTH_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_BLUETOOTH_PANEL))
 #define CC_BLUETOOTH_PANEL_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_BLUETOOTH_PANEL, CcBluetoothPanelClass))
 
-typedef struct _CcBluetoothPanel CcBluetoothPanel;
-typedef struct _CcBluetoothPanelClass CcBluetoothPanelClass;
-typedef struct _CcBluetoothPanelPrivate CcBluetoothPanelPrivate;
+typedef struct CcBluetoothPanel CcBluetoothPanel;
+typedef struct CcBluetoothPanelClass CcBluetoothPanelClass;
+typedef struct CcBluetoothPanelPrivate CcBluetoothPanelPrivate;
 
-struct _CcBluetoothPanel {
+struct CcBluetoothPanel {
 	CcPanel parent;
+	CcBluetoothPanelPrivate *priv;
 };
 
-struct _CcBluetoothPanelClass {
+struct CcBluetoothPanelClass {
 	CcPanelClass parent_class;
 };
 

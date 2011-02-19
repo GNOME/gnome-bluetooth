@@ -23,7 +23,7 @@ desktop_in_files = bluetooth-properties.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-ui_DATA = properties-no-adapter.ui properties-adapter-off.ui properties-killed-adapter.ui properties-adapter.ui
+ui_DATA = bluetooth.ui
 uidir = $(pkgdatadir)
 
 CLEANFILES = $(desktop_DATA) $(schema_DATA)
