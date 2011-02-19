@@ -27,6 +27,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <stdlib.h>
 
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-button.h"
@@ -185,6 +186,11 @@ response_cb (GtkDialog *dialog, gint response_id, BluetoothChooser *selector)
 	} else {
 		g_message ("No selected device");
 	}
+
+	if (response_id == GTK_RESPONSE_DELETE_EVENT)
+		exit (0);
+
+	gtk_main_quit ();
 }
 
 static GtkWidget *
@@ -388,7 +394,7 @@ int main(int argc, char **argv)
 
 	gtk_widget_show(dialog);
 
-	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_main ();
 
 	gtk_widget_destroy(dialog);
 
