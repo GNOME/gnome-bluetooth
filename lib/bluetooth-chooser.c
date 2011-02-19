@@ -865,9 +865,12 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (priv->label_align), vbox);
 
-	hbox = gtk_hbox_new (FALSE, 24);
-	gtk_widget_show (hbox);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
+	priv->search_hbox = gtk_hbox_new (FALSE, 24);
+	gtk_widget_set_name (priv->search_hbox, "search_hbox");
+	if (priv->show_searching)
+		gtk_widget_show (priv->search_hbox);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->search_hbox, FALSE, TRUE, 0);
+	gtk_widget_set_no_show_all (priv->search_hbox, TRUE);
 
 	/* Setup the adapter disco mode callback for the search button */
 	priv->adapter_model = bluetooth_client_get_adapter_model (priv->client);
@@ -875,18 +878,17 @@ bluetooth_chooser_init(BluetoothChooser *self)
 			  G_CALLBACK (adapter_model_row_changed), self);
 
 	/* The searching label */
-	priv->search_hbox = gtk_hbox_new (FALSE, 6);
-	gtk_widget_set_no_show_all (priv->search_hbox, TRUE);
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_widget_set_name (hbox, "searching label hbox");
 	priv->spinner = gtk_spinner_new ();
-	gtk_container_add (GTK_CONTAINER (priv->search_hbox), priv->spinner);
+	gtk_container_add (GTK_CONTAINER (hbox), priv->spinner);
 	gtk_widget_show (priv->spinner);
 	priv->search_label = gtk_label_new (_("Searching for devices..."));
-	gtk_container_add (GTK_CONTAINER (priv->search_hbox), priv->search_label);
+	gtk_container_add (GTK_CONTAINER (hbox), priv->search_label);
 	gtk_widget_show (priv->search_label);
+	gtk_widget_show (hbox);
 
-	gtk_box_pack_end (GTK_BOX (hbox), priv->search_hbox, FALSE, TRUE, 0);
-	if (priv->show_searching)
-		gtk_widget_show (priv->search_hbox);
+	gtk_box_pack_end (GTK_BOX (priv->search_hbox), hbox, FALSE, TRUE, 0);
 	//FIXME check whether the default adapter is discovering right now
 
 	/* The treeview */
