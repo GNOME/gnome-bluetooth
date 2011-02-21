@@ -107,6 +107,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		gtk_label_set_text (GTK_LABEL (WID ("paired_label")), "");
 		gtk_label_set_text (GTK_LABEL (WID ("type_label")), "");
 		gtk_label_set_text (GTK_LABEL (WID ("address_label")), "");
+		gtk_widget_set_sensitive (WID ("button_delete"), FALSE);
 	} else {
 		BluetoothType type;
 		gboolean connected;
@@ -143,6 +144,8 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 
 		gtk_label_set_text (GTK_LABEL (WID ("address_label")), bdaddr);
 		g_free (bdaddr);
+
+		gtk_widget_set_sensitive (WID ("button_delete"), TRUE);
 	}
 }
 
