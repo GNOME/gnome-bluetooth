@@ -93,6 +93,86 @@ cc_bluetooth_panel_finalize (GObject *object)
 }
 
 static void
+cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
+{
+	char *bdaddr;
+
+	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	if (bdaddr == NULL) {
+		//FIXME for loop with other buttons
+		gtk_widget_hide (WID ("keyboard_button"));
+		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
+		gtk_switch_set_active (GTK_SWITCH (WID ("switch_connection")), FALSE);
+		gtk_label_set_text (GTK_LABEL (WID ("paired_label")), "");
+		gtk_label_set_text (GTK_LABEL (WID ("type_label")), "");
+		gtk_label_set_text (GTK_LABEL (WID ("address_label")), "");
+	} else {
+		BluetoothType type;
+		gboolean connected;
+		GValue value = { 0 };
+
+		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
+
+		connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (self->priv->chooser));
+		gtk_switch_set_active (GTK_SWITCH (WID ("switch_connection")), connected);
+
+		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
+							    "paired", &value);
+		gtk_label_set_text (GTK_LABEL (WID ("paired_label")),
+				    g_value_get_boolean (&value) ? _("Yes") : _("No"));
+
+		type = bluetooth_chooser_get_selected_device_type (BLUETOOTH_CHOOSER (self->priv->chooser));
+		gtk_label_set_text (GTK_LABEL (WID ("type_label")), bluetooth_type_to_string (type));
+		switch (type) {
+		case BLUETOOTH_TYPE_KEYBOARD:
+			gtk_widget_show (WID ("keyboard_button"));
+			break;
+		default:
+			/* FIXME add others */
+			;
+		}
+
+		gtk_label_set_text (GTK_LABEL (WID ("address_label")), bdaddr);
+		g_free (bdaddr);
+	}
+}
+
+static void
+cc_bluetooth_panel_update_visibility (CcBluetoothPanel *self)
+{
+	gboolean discoverable;
+	char *name;
+
+	discoverable = bluetooth_client_get_discoverable (self->priv->client);
+	gtk_switch_set_active (GTK_SWITCH (WID ("switch_discoverable")), discoverable);
+
+	name = bluetooth_client_get_name (self->priv->client);
+	if (name == NULL) {
+		gtk_widget_set_sensitive (WID ("switch_discoverable"), FALSE);
+		gtk_widget_set_sensitive (WID ("visible_label"), FALSE);
+		gtk_label_set_text (GTK_LABEL (WID ("visible_label")), _("Visibility"));
+	} else {
+		char *label;
+
+		label = g_strdup_printf (_("Visibility of “%s”"), name);
+		g_free (name);
+		gtk_label_set_text (GTK_LABEL (WID ("visible_label")), label);
+		g_free (label);
+
+		gtk_widget_set_sensitive (WID ("switch_discoverable"), TRUE);
+		gtk_widget_set_sensitive (WID ("visible_label"), TRUE);
+	}
+}
+
+static void
+device_selected_changed (BluetoothChooser *chooser,
+			 GParamSpec       *spec,
+			 CcBluetoothPanel *self)
+{
+	cc_bluetooth_panel_update_properties (self);
+}
+
+static void
 cc_bluetooth_panel_init (CcBluetoothPanel *self)
 {
 	GtkWidget *widget;
@@ -119,6 +199,9 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	widget = WID ("vbox");
 	gtk_widget_reparent (widget, GTK_WIDGET (self));
 
+	/* The discoverable button */
+	cc_bluetooth_panel_update_visibility (self);
+
 	/* The known devices */
 	widget = WID ("devices_table");
 
@@ -141,7 +224,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	g_object_set (G_OBJECT (widget), "headers-visible", FALSE, NULL);
 
 	/* Join treeview and buttons */
-	widget = bluetooth_chooser_get_scrolled_window (BLUETOOTH_CHOOSER (self->priv->chooser));;
+	widget = bluetooth_chooser_get_scrolled_window (BLUETOOTH_CHOOSER (self->priv->chooser));
 	gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), 250);
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
@@ -149,6 +232,11 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
+	g_signal_connect (G_OBJECT (self->priv->chooser), "notify::device-selected",
+			  G_CALLBACK (device_selected_changed), self);
+
+	/* Set the initial state of the dialogue */
+	cc_bluetooth_panel_update_properties (self);
 	gtk_widget_show_all (GTK_WIDGET (self));
 }
 
