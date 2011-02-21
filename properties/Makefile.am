@@ -5,8 +5,6 @@ ccpanels_LTLIBRARIES = libbluetooth.la
 libbluetooth_la_SOURCES =			\
 	cc-bluetooth-panel.c			\
 	cc-bluetooth-panel.h			\
-	general.h				\
-	general.c				\
 	adapter.h				\
 	adapter.c
 

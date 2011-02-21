@@ -39,7 +39,6 @@
 #include <bluetooth-plugin-manager.h>
 
 #include "adapter.h"
-#include "general.h"
 
 static BluetoothClient *client;
 static GtkTreeModel *adapter_model;
@@ -644,7 +643,7 @@ create_killswitch_page (GtkNotebook *notebook)
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
 
-	label = create_label(_("Bluetooth is disabled"));
+	label = gtk_label_new(_("Bluetooth is disabled"));
 	gtk_box_pack_start(GTK_BOX(mainbox), label, FALSE, FALSE, 0);
 
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
@@ -684,7 +683,7 @@ create_no_adapter_page (GtkNotebook *notebook, const char *filename)
 	mainbox = gtk_vbox_new(FALSE, 24);
 	gtk_container_set_border_width(GTK_CONTAINER(mainbox), 12);
 
-	label = create_label(_("No Bluetooth adapters present"));
+	label = gtk_label_new(_("No Bluetooth adapters present"));
 	gtk_box_pack_start(GTK_BOX(mainbox), label, FALSE, FALSE, 0);
 
 	gtk_box_pack_start(GTK_BOX(mainbox), vbox, TRUE, TRUE, 0);
