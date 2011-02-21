@@ -99,8 +99,9 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 
 	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	if (bdaddr == NULL) {
-		//FIXME for loop with other buttons
 		gtk_widget_hide (WID ("keyboard_button"));
+		gtk_widget_hide (WID ("sound_button"));
+		gtk_widget_hide (WID ("mouse_button"));
 		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
 		gtk_switch_set_active (GTK_SWITCH (WID ("switch_connection")), FALSE);
 		gtk_label_set_text (GTK_LABEL (WID ("paired_label")), "");
@@ -127,8 +128,16 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		case BLUETOOTH_TYPE_KEYBOARD:
 			gtk_widget_show (WID ("keyboard_button"));
 			break;
+		case BLUETOOTH_TYPE_MOUSE:
+			/* FIXME what about touchpads */
+			gtk_widget_show (WID ("mouse_button"));
+			break;
+		case BLUETOOTH_TYPE_HEADSET:
+		case BLUETOOTH_TYPE_HEADPHONES:
+		case BLUETOOTH_TYPE_OTHER_AUDIO:
+			gtk_widget_show (WID ("sound_button"));
 		default:
-			/* FIXME add others */
+			/* FIXME others? */
 			;
 		}
 
