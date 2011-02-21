@@ -45,8 +45,10 @@ G_DEFINE_DYNAMIC_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC_TYPE_PANEL)
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
 struct CcBluetoothPanelPrivate {
-	GtkBuilder *builder;
-	GtkWidget  *chooser;
+	GtkBuilder          *builder;
+	GtkWidget           *chooser;
+	BluetoothClient     *client;
+	BluetoothKillswitch *killswitch;
 };
 
 static void cc_bluetooth_panel_finalize (GObject *object);
@@ -78,8 +80,14 @@ cc_bluetooth_panel_finalize (GObject *object)
 		g_object_unref (self->priv->builder);
 		self->priv->builder = NULL;
 	}
-
-//	cleanup_adapter();
+	if (self->priv->killswitch) {
+		g_object_unref (self->priv->killswitch);
+		self->priv->killswitch = NULL;
+	}
+	if (self->priv->client) {
+		g_object_unref (self->priv->client);
+		self->priv->client = NULL;
+	}
 
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
 }
@@ -95,6 +103,8 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	self->priv = BLUETOOTH_PANEL_PRIVATE (self);
 
 	bluetooth_plugin_manager_init ();
+	self->priv->killswitch = bluetooth_killswitch_new ();
+	self->priv->client = bluetooth_client_new ();
 
 	self->priv->builder = gtk_builder_new ();
 	gtk_builder_add_from_file (self->priv->builder,
