@@ -1665,6 +1665,36 @@ bluetooth_client_get_discoverable (BluetoothClient *client)
 }
 
 /**
+ * bluetooth_client_get_name:
+ * @client: a #BluetoothClient
+ *
+ * Gets the default adapter's name, cached in the adapter model.
+ *
+ * Returns: the name of the adapter, or %NULL if no default adapter exists
+ */
+char *
+bluetooth_client_get_name (BluetoothClient *client)
+{
+	BluetoothClientPrivate *priv;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	char *ret;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+
+	priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
+	if (priv->default_adapter == NULL)
+		return NULL;
+
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+                            BLUETOOTH_COLUMN_NAME, &ret, -1);
+
+	return ret;
+}
+
+/**
  * bluetooth_client_set_discoverable:
  * @client: a #BluetoothClient object
  * @discoverable: whether the device should be discoverable

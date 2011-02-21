@@ -40,6 +40,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
 gboolean bluetooth_client_set_discoverable (BluetoothClient *client,
 					    gboolean discoverable,
                                             guint timeout);
+char *bluetooth_client_get_name (BluetoothClient *client);
 
 typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client,
 						 const char *path,
