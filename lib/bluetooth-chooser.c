@@ -48,6 +48,7 @@
 
 enum {
 	SELECTED_DEVICE_CHANGED,
+	SELECTED_DEVICE_ACTIVATED,
 	LAST_SIGNAL
 };
 
@@ -560,6 +561,21 @@ select_browse_device_callback (GtkTreeSelection *selection, gpointer user_data)
 	g_free (address);
 }
 
+static void
+row_activated_cb (GtkTreeView       *tree_view,
+		  GtkTreePath       *path,
+		  GtkTreeViewColumn *column,
+		  BluetoothChooser  *self)
+{
+	char *address;
+
+	address = bluetooth_chooser_get_selected_device (self);
+	g_signal_emit (G_OBJECT (self),
+		       selection_table_signals[SELECTED_DEVICE_ACTIVATED],
+		       0, address);
+	g_free (address);
+}
+
 static gboolean
 filter_type_func (GtkTreeModel *model, GtkTreeIter *iter, BluetoothChooserPrivate *priv)
 {
@@ -758,6 +774,9 @@ create_treeview (BluetoothChooser *self)
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(tree), TRUE);
 
 	g_object_set (tree, "show-expanders", FALSE, NULL);
+
+	g_signal_connect (G_OBJECT (tree), "row-activated",
+			  G_CALLBACK (row_activated_cb), self);
 
 	column = gtk_tree_view_column_new ();
 
@@ -1160,6 +1179,22 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (BluetoothChooserClass, selected_device_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__STRING,
+			      G_TYPE_NONE, 1, G_TYPE_STRING);
+	/**
+	 * BluetoothChooser::selected-device-activated:
+	 * @chooser: a #BluetoothChooser widget which received the signal
+	 * @address: the Bluetooth address for the currently selected device, or %NULL
+	 *
+	 * The #BluetoothChooser:selected-device-activated signal is launched when a
+	 * device is double-clicked in the chooser.
+	 **/
+	selection_table_signals[SELECTED_DEVICE_ACTIVATED] =
+		g_signal_new ("selected-device-activated",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BluetoothChooserClass, selected_device_activated),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__STRING,
 			      G_TYPE_NONE, 1, G_TYPE_STRING);

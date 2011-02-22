@@ -53,6 +53,7 @@ struct _BluetoothChooserClass {
 	GtkVBoxClass parent_class;
 
 	void (*selected_device_changed) (BluetoothChooser *chooser, const char *address);
+	void (*selected_device_activated) (BluetoothChooser *chooser, const char *address);
 };
 
 GType bluetooth_chooser_get_type (void);

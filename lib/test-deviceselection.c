@@ -79,6 +79,14 @@ static void select_device_changed(BluetoothChooser *sel,
 	g_free (name);
 }
 
+static void selected_device_activated(BluetoothChooser *sel,
+				      gchar *address, gpointer user_data)
+{
+	GtkDialog *dialog = user_data;
+
+	gtk_dialog_response(dialog, GTK_RESPONSE_ACCEPT);
+}
+
 static void device_selected_cb(GObject *object,
 			       GParamSpec *spec, gpointer user_data)
 {
@@ -218,6 +226,8 @@ create_wizard_dialogue (void)
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
+	g_signal_connect(selector, "selected-device-activated",
+			 G_CALLBACK(selected_device_activated), dialog);
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
@@ -254,6 +264,8 @@ create_props_dialogue (void)
 			 G_CALLBACK(device_type_filter_selected_cb), dialog);
 	g_signal_connect(selector, "notify::device-category-filter",
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
+	g_signal_connect(selector, "selected-device-activated",
+			 G_CALLBACK(selected_device_activated), dialog);
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
