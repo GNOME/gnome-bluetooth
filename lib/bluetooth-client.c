@@ -2171,13 +2171,21 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 			    BLUETOOTH_COLUMN_UUIDS, &uuids,
 			    BLUETOOTH_COLUMN_PROXY, &proxy,
 			    -1);
-	is_adapter = !gtk_tree_model_iter_parent (model, &parent, iter);
+	if (proxy) {
+		char *basename;
+		basename = g_path_get_basename(dbus_g_proxy_get_path(proxy));
+		is_adapter = !g_str_has_prefix (basename, "dev_");
+		g_free (basename);
+	} else {
+		is_adapter = !gtk_tree_model_iter_parent (model, &parent, iter);
+	}
 
 	if (is_adapter != FALSE) {
 		/* Adapter */
 		g_print ("Adapter: %s (%s)\n", name, address);
 		if (is_default)
 			g_print ("\tDefault adapter\n");
+		g_print ("\tD-Bus Path: %s\n", proxy ? dbus_g_proxy_get_path (proxy) : "(none)");
 		g_print ("\tDiscoverable: %s\n", BOOL_STR (discoverable));
 		if (discovering)
 			g_print ("\tDiscovery in progress\n");
