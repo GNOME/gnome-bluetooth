@@ -130,7 +130,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 			gtk_widget_show (WID ("keyboard_button"));
 			break;
 		case BLUETOOTH_TYPE_MOUSE:
-			/* FIXME what about touchpads */
+			/* FIXME what about Bluetooth touchpads */
 			gtk_widget_show (WID ("mouse_button"));
 			break;
 		case BLUETOOTH_TYPE_HEADSET:
@@ -225,7 +225,7 @@ delete_clicked (GtkToolButton    *button,
 
 static void
 setup_clicked (GtkToolButton    *button,
-		CcBluetoothPanel *self)
+	       CcBluetoothPanel *self)
 {
 	const char *command = "bluetooth-wizard";
 	GError *error = NULL;
@@ -234,6 +234,25 @@ setup_clicked (GtkToolButton    *button,
 		g_warning ("Couldn't execute command '%s': %s\n", command, error->message);
 		g_error_free (error);
 	}
+}
+
+/* Overall device state */
+static void
+cc_bluetooth_panel_update_state (CcBluetoothPanel *self)
+{
+	char *bdaddr;
+
+	g_object_get (G_OBJECT (self->priv->client), "default-adapter", &bdaddr, NULL);
+	gtk_widget_set_sensitive (WID ("toolbar"), (bdaddr != NULL));
+	g_free (bdaddr);
+}
+
+static void
+default_adapter_changed (BluetoothClient  *client,
+			 GParamSpec       *spec,
+			 CcBluetoothPanel *self)
+{
+	cc_bluetooth_panel_update_state (self);
 }
 
 static void
@@ -262,6 +281,11 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	widget = WID ("vbox");
 	gtk_widget_reparent (widget, GTK_WIDGET (self));
+
+	/* Overall device state */
+	cc_bluetooth_panel_update_state (self);
+	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter",
+			  G_CALLBACK (default_adapter_changed), self);
 
 	/* The discoverable button */
 	cc_bluetooth_panel_update_visibility (self);
@@ -296,7 +320,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), 250);
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-	widget = WID ("toolbar1");
+	widget = WID ("toolbar");
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
