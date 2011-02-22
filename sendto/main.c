@@ -631,6 +631,16 @@ select_device_changed(BluetoothChooser *sel,
 				GTK_RESPONSE_ACCEPT, address != NULL);
 }
 
+static void
+select_device_activated(BluetoothChooser *sel,
+			char *address,
+			gpointer user_data)
+{
+	GtkDialog *dialog = user_data;
+
+	gtk_dialog_response(dialog, GTK_RESPONSE_ACCEPT);
+}
+
 static char *
 show_browse_dialog (char **device_name)
 {
@@ -663,6 +673,8 @@ show_browse_dialog (char **device_name)
 		     NULL);
 	g_signal_connect(selector, "selected-device-changed",
 			 G_CALLBACK(select_device_changed), dialog);
+	g_signal_connect(selector, "selected-device-activated",
+			 G_CALLBACK(select_device_activated), dialog);
 	gtk_container_add (GTK_CONTAINER (content_area), selector);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
