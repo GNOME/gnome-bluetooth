@@ -55,6 +55,7 @@ struct CcBluetoothPanelPrivate {
 	GtkWidget           *chooser;
 	BluetoothClient     *client;
 	BluetoothKillswitch *killswitch;
+	gboolean             debug;
 };
 
 static void cc_bluetooth_panel_finalize (GObject *object);
@@ -181,6 +182,21 @@ switch_connected_active_changed (GtkSwitch        *button,
 }
 
 static void
+dump_current_device (CcBluetoothPanel *self)
+{
+	GtkWidget *tree;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+
+	tree = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (self->priv->chooser));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+	gtk_tree_selection_get_selected (selection, &model, &iter);
+
+	bluetooth_client_dump_device (model, &iter, FALSE);
+}
+
+static void
 cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 {
 	char *bdaddr;
@@ -207,6 +223,9 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		gboolean connected;
 		GValue value = { 0 };
 		GHashTable *services;
+
+		if (self->priv->debug)
+			dump_current_device (self);
 
 		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
 
@@ -390,6 +409,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	bluetooth_plugin_manager_init ();
 	self->priv->killswitch = bluetooth_killswitch_new ();
 	self->priv->client = bluetooth_client_new ();
+	self->priv->debug = g_getenv ("BLUETOOTH_DEBUG") != NULL;
 
 	self->priv->builder = gtk_builder_new ();
 	gtk_builder_add_from_file (self->priv->builder,
