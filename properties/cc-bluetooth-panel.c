@@ -189,11 +189,13 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 	button = GTK_SWITCH (WID ("switch_connection"));
 	g_signal_handlers_block_by_func (button, switch_connected_active_changed, self);
 
+	/* Hide all the buttons now, and show them again if we need to */
+	gtk_widget_hide (WID ("keyboard_button"));
+	gtk_widget_hide (WID ("sound_button"));
+	gtk_widget_hide (WID ("mouse_button"));
+
 	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	if (bdaddr == NULL) {
-		gtk_widget_hide (WID ("keyboard_button"));
-		gtk_widget_hide (WID ("sound_button"));
-		gtk_widget_hide (WID ("mouse_button"));
 		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
 		gtk_switch_set_active (button, FALSE);
 		gtk_label_set_text (GTK_LABEL (WID ("paired_label")), "");
