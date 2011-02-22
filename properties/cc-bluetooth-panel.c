@@ -339,7 +339,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 		      "show-device-type", FALSE,
 		      "show-device-category", FALSE,
 		      "show-pairing", FALSE,
-		      "show-connected", TRUE,
+		      "show-connected", FALSE,
 		      "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
 		      NULL);
 	column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (self->priv->chooser));
