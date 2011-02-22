@@ -44,6 +44,12 @@ G_DEFINE_DYNAMIC_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC_TYPE_PANEL)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
+#define GNOMECC			"gnome-control-center"
+#define KEYBOARD_PREFS		GNOMECC " keyboard"
+#define MOUSE_PREFS		GNOMECC " mouse"
+#define SOUND_PREFS		GNOMECC " sound"
+#define WIZARD			"bluetooth-wizard"
+
 struct CcBluetoothPanelPrivate {
 	GtkBuilder          *builder;
 	GtkWidget           *chooser;
@@ -52,6 +58,17 @@ struct CcBluetoothPanelPrivate {
 };
 
 static void cc_bluetooth_panel_finalize (GObject *object);
+
+static void
+launch_command (const char *command)
+{
+	GError *error = NULL;
+
+	if (!g_spawn_command_line_async(command, &error)) {
+		g_warning ("Couldn't execute command '%s': %s\n", command, error->message);
+		g_error_free (error);
+	}
+}
 
 static void
 cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
@@ -149,6 +166,27 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 	}
 }
 
+static void
+keyboard_callback (GtkButton        *button,
+		   CcBluetoothPanel *self)
+{
+	launch_command(KEYBOARD_PREFS);
+}
+
+static void
+mouse_callback (GtkButton        *button,
+		CcBluetoothPanel *self)
+{
+	launch_command(MOUSE_PREFS);
+}
+
+static void
+sound_callback (GtkButton        *button,
+		CcBluetoothPanel *self)
+{
+	launch_command(SOUND_PREFS);
+}
+
 /* Visibility/Discoverable */
 static void
 switch_discoverable_active_changed (GtkSwitch        *button,
@@ -227,13 +265,7 @@ static void
 setup_clicked (GtkToolButton    *button,
 	       CcBluetoothPanel *self)
 {
-	const char *command = "bluetooth-wizard";
-	GError *error = NULL;
-
-	if (!g_spawn_command_line_async(command, &error)) {
-		g_warning ("Couldn't execute command '%s': %s\n", command, error->message);
-		g_error_free (error);
-	}
+	launch_command (WIZARD);
 }
 
 /* Overall device state */
@@ -333,6 +365,13 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	/* Set the initial state of the properties */
 	cc_bluetooth_panel_update_properties (self);
+	g_signal_connect (G_OBJECT (WID ("mouse_button")), "clicked",
+			  G_CALLBACK (mouse_callback), self);
+	g_signal_connect (G_OBJECT (WID ("keyboard_button")), "clicked",
+			  G_CALLBACK (keyboard_callback), self);
+	g_signal_connect (G_OBJECT (WID ("sound_button")), "clicked",
+			  G_CALLBACK (sound_callback), self);
+
 	gtk_widget_show_all (GTK_WIDGET (self));
 }
 
