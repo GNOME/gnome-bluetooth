@@ -206,17 +206,28 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		BluetoothType type;
 		gboolean connected;
 		GValue value = { 0 };
+		GHashTable *services;
 
 		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
 
 		connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (self->priv->chooser));
 		gtk_switch_set_active (button, connected);
 
+		/* Paired */
 		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
 							    "paired", &value);
 		gtk_label_set_text (GTK_LABEL (WID ("paired_label")),
 				    g_value_get_boolean (&value) ? _("Yes") : _("No"));
+		g_value_unset (&value);
 
+		/* Connection */
+		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
+							    "services", &value);
+		services = g_value_get_boxed (&value);
+		gtk_widget_set_sensitive (GTK_WIDGET (button), (services != NULL));
+		g_value_unset (&value);
+
+		/* Type */
 		type = bluetooth_chooser_get_selected_device_type (BLUETOOTH_CHOOSER (self->priv->chooser));
 		gtk_label_set_text (GTK_LABEL (WID ("type_label")), bluetooth_type_to_string (type));
 		switch (type) {
