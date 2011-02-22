@@ -150,13 +150,27 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 }
 
 static void
+switch_discoverable_active_changed (GtkSwitch        *button,
+				    GParamSpec       *spec,
+				    CcBluetoothPanel *self)
+{
+	bluetooth_client_set_discoverable (self->priv->client,
+					   gtk_switch_get_active (button),
+					   0);
+}
+
+static void
 cc_bluetooth_panel_update_visibility (CcBluetoothPanel *self)
 {
 	gboolean discoverable;
+	GtkSwitch *button;
 	char *name;
 
+	button = GTK_SWITCH (WID ("switch_discoverable"));
 	discoverable = bluetooth_client_get_discoverable (self->priv->client);
-	gtk_switch_set_active (GTK_SWITCH (WID ("switch_discoverable")), discoverable);
+	g_signal_handlers_block_by_func (button, switch_discoverable_active_changed, self);
+	gtk_switch_set_active (button, discoverable);
+	g_signal_handlers_unblock_by_func (button, switch_discoverable_active_changed, self);
 
 	name = bluetooth_client_get_name (self->priv->client);
 	if (name == NULL) {
@@ -174,6 +188,14 @@ cc_bluetooth_panel_update_visibility (CcBluetoothPanel *self)
 		gtk_widget_set_sensitive (WID ("switch_discoverable"), TRUE);
 		gtk_widget_set_sensitive (WID ("visible_label"), TRUE);
 	}
+}
+
+static void
+discoverable_changed (BluetoothClient *client,
+		      GParamSpec       *spec,
+		      CcBluetoothPanel *self)
+{
+	cc_bluetooth_panel_update_visibility (self);
 }
 
 static void
@@ -213,6 +235,10 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	/* The discoverable button */
 	cc_bluetooth_panel_update_visibility (self);
+	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter-discoverable",
+			  G_CALLBACK (discoverable_changed), self);
+	g_signal_connect (G_OBJECT (WID ("switch_discoverable")), "notify::active",
+			  G_CALLBACK (switch_discoverable_active_changed), self);
 
 	/* The known devices */
 	widget = WID ("devices_table");
