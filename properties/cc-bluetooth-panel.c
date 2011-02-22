@@ -149,6 +149,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 	}
 }
 
+/* Visibility/Discoverable */
 static void
 switch_discoverable_active_changed (GtkSwitch        *button,
 				    GParamSpec       *spec,
@@ -204,6 +205,35 @@ device_selected_changed (BluetoothChooser *chooser,
 			 CcBluetoothPanel *self)
 {
 	cc_bluetooth_panel_update_properties (self);
+}
+
+/* Treeview buttons */
+static void
+delete_clicked (GtkToolButton    *button,
+		CcBluetoothPanel *self)
+{
+	char *address;
+
+	address = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	g_assert (address);
+
+	if (bluetooth_chooser_remove_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser)))
+		bluetooth_plugin_manager_device_deleted (address);
+
+	g_free (address);
+}
+
+static void
+setup_clicked (GtkToolButton    *button,
+		CcBluetoothPanel *self)
+{
+	const char *command = "bluetooth-wizard";
+	GError *error = NULL;
+
+	if (!g_spawn_command_line_async(command, &error)) {
+		g_warning ("Couldn't execute command '%s': %s\n", command, error->message);
+		g_error_free (error);
+	}
 }
 
 static void
@@ -272,8 +302,12 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	g_signal_connect (G_OBJECT (self->priv->chooser), "notify::device-selected",
 			  G_CALLBACK (device_selected_changed), self);
+	g_signal_connect (G_OBJECT (WID ("button_delete")), "clicked",
+			  G_CALLBACK (delete_clicked), self);
+	g_signal_connect (G_OBJECT (WID ("button_setup")), "clicked",
+			  G_CALLBACK (setup_clicked), self);
 
-	/* Set the initial state of the dialogue */
+	/* Set the initial state of the properties */
 	cc_bluetooth_panel_update_properties (self);
 	gtk_widget_show_all (GTK_WIDGET (self));
 }
