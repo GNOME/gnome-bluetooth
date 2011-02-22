@@ -109,10 +109,85 @@ cc_bluetooth_panel_finalize (GObject *object)
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
 }
 
+typedef struct {
+	char             *bdaddr;
+	CcBluetoothPanel *self;
+} ConnectData;
+
+static void
+connect_done (BluetoothClient  *client,
+	      gboolean          success,
+	      ConnectData      *data)
+{
+	CcBluetoothPanel *self;
+	char *bdaddr;
+
+	self = data->self;
+
+	/* Check whether the same device is now selected */
+	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	if (g_strcmp0 (bdaddr, data->bdaddr) == 0) {
+		GtkSwitch *button;
+
+		button = GTK_SWITCH (WID ("switch_connection"));
+		/* Reset the switch if it failed */
+		if (success == FALSE)
+			gtk_switch_set_active (button, !gtk_switch_get_active (button));
+		gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
+	}
+
+	g_free (bdaddr);
+	g_object_unref (data->self);
+	g_free (data->bdaddr);
+	g_free (data);
+}
+
+static void
+switch_connected_active_changed (GtkSwitch        *button,
+				 GParamSpec       *spec,
+				 CcBluetoothPanel *self)
+{
+	char *proxy;
+	GValue value = { 0, };
+	ConnectData *data;
+
+	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
+							"proxy", &value) == FALSE) {
+		g_warning ("Could not get D-Bus proxy for selected device");
+		return;
+	}
+	proxy = g_strdup (dbus_g_proxy_get_path (g_value_get_object (&value)));
+	g_value_unset (&value);
+
+	if (proxy == NULL)
+		return;
+
+	data = g_new0 (ConnectData, 1);
+	data->bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	data->self = g_object_ref (self);
+
+	if (gtk_switch_get_active (button)) {
+		bluetooth_client_connect_service (self->priv->client, proxy,
+						  (BluetoothClientConnectFunc) connect_done, data);
+	} else {
+		bluetooth_client_disconnect_service (self->priv->client, proxy,
+						     (BluetoothClientConnectFunc) connect_done, data);
+	}
+
+	/* FIXME: make a note somewhere that the button for that
+	 * device should be disabled */
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+	g_free (proxy);
+}
+
 static void
 cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 {
 	char *bdaddr;
+	GtkSwitch *button;
+
+	button = GTK_SWITCH (WID ("switch_connection"));
+	g_signal_handlers_block_by_func (button, switch_connected_active_changed, self);
 
 	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	if (bdaddr == NULL) {
@@ -120,7 +195,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		gtk_widget_hide (WID ("sound_button"));
 		gtk_widget_hide (WID ("mouse_button"));
 		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
-		gtk_switch_set_active (GTK_SWITCH (WID ("switch_connection")), FALSE);
+		gtk_switch_set_active (button, FALSE);
 		gtk_label_set_text (GTK_LABEL (WID ("paired_label")), "");
 		gtk_label_set_text (GTK_LABEL (WID ("type_label")), "");
 		gtk_label_set_text (GTK_LABEL (WID ("address_label")), "");
@@ -133,7 +208,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
 
 		connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (self->priv->chooser));
-		gtk_switch_set_active (GTK_SWITCH (WID ("switch_connection")), connected);
+		gtk_switch_set_active (button, connected);
 
 		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
 							    "paired", &value);
@@ -164,6 +239,8 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 
 		gtk_widget_set_sensitive (WID ("button_delete"), TRUE);
 	}
+
+	g_signal_handlers_unblock_by_func (button, switch_connected_active_changed, self);
 }
 
 static void
@@ -371,6 +448,8 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 			  G_CALLBACK (keyboard_callback), self);
 	g_signal_connect (G_OBJECT (WID ("sound_button")), "clicked",
 			  G_CALLBACK (sound_callback), self);
+	g_signal_connect (G_OBJECT (WID ("switch_connection")), "notify::active",
+			  G_CALLBACK (switch_connected_active_changed), self);
 
 	gtk_widget_show_all (GTK_WIDGET (self));
 }
