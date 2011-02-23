@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-16 22:38+0200\n"
-"PO-Revision-Date: 2011-02-16 22:38+0200\n"
+"POT-Creation-Date: 2011-02-23 07:45+0200\n"
+"PO-Revision-Date: 2011-02-23 07:45+0200\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -80,7 +80,7 @@ msgstr "Таблет"
 msgid "Video device"
 msgstr "Видео устройство"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -89,31 +89,31 @@ msgstr "Неизвестно"
 msgid "Click to select device..."
 msgstr "Натиснете, за да изберете устройство…"
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "Няма налични адаптери"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:883
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "Търсене на устройства…"
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Да се премахне ли „%s“ от списъка с устройства?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Ако премахнете устройството, следващия път ще трябва да го добавите отново, "
 "преди да го използвате."
 
-#: ../lib/bluetooth-chooser.c:764
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Устройство"
 
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Вид"
 
@@ -121,7 +121,7 @@ msgstr "Вид"
 msgid "All categories"
 msgstr "Всички категории"
 
-#: ../lib/bluetooth-filter-widget.c:73
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Сдвоени"
 
@@ -191,7 +191,7 @@ msgstr "_Разглеждане"
 msgid "Select device to browse"
 msgstr "Избиране на устройство за разглеждане"
 
-#: ../applet/main.c:288 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:288
 msgid "Turn On Bluetooth"
 msgstr "Включване на Bluetooth"
 
@@ -367,8 +367,8 @@ msgstr "Bluetooth: проверка"
 msgid "Browse files on device..."
 msgstr "Разглеждане на файлове в устройство…"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/properties-adapter.ui.h:1
-#: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
+#: ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "Устройства"
 
@@ -416,57 +416,54 @@ msgstr "_Съвпада"
 msgid "_Show input"
 msgstr "_Показване на входа"
 
-#: ../properties/adapter.c:631
+#: ../properties/adapter.c:646
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth е забранен"
 
-#: ../properties/adapter.c:671
+#: ../properties/adapter.c:686
 msgid "No Bluetooth adapters present"
 msgstr "Липсват адаптери за Bluetooth "
 
-#: ../properties/cc-bluetooth-panel.c:57
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "Настройките на „Споделяне на файлове“ не могат да се стартират"
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "Да"
 
-#: ../properties/cc-bluetooth-panel.c:62
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr ""
-"Проверете дали програмата „Споделяне на файлове“ е инсталирана правилно."
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "Не"
 
-#: ../properties/cc-bluetooth-panel.c:95
-msgid "Sharing Settings..."
-msgstr "Настройки на споделянето…"
+#: ../properties/cc-bluetooth-panel.c:327
+msgid "Visibility"
+msgstr "Видимост"
 
-#: ../properties/properties-adapter.ui.h:2
-msgid "Friendly name"
-msgstr "Приятелско име"
+#: ../properties/cc-bluetooth-panel.c:331
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Дали „%s“ се вижда"
 
-#: ../properties/properties-adapter.ui.h:3
-msgid "Make computer _visible"
-msgstr "Компютърът да е _откриваем"
+#: ../properties/bluetooth.ui.h:1
+msgid "Address"
+msgstr "Адрес"
 
-#: ../properties/properties-adapter.ui.h:4
-msgid "Set up _new device..."
-msgstr "Добавяне на ново _устройство…"
+#: ../properties/bluetooth.ui.h:2
+msgid "Connection"
+msgstr "Връзка"
 
-#: ../properties/properties-adapter.ui.h:5
-msgid "_Disconnect"
-msgstr "_Прекъсване на връзката"
+#: ../properties/bluetooth.ui.h:3
+msgid "Keyboard Settings"
+msgstr "Настройки на клавиатурата"
 
-#: ../properties/properties-adapter.ui.h:6
-msgid "_Remove"
-msgstr "_Премахване"
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Настройки на мишката и сензорния панел"
 
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "На вашия компютър липсват адаптери за Bluetooth."
+#: ../properties/bluetooth.ui.h:6
+msgid "Power"
+msgstr "Захранване"
 
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr ""
-"Bluetooth е изключен чрез съответния клавиш или бутон на вашия компютър."
+#: ../properties/bluetooth.ui.h:7
+msgid "Sound Settings"
+msgstr "Настройки на звука"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -733,23 +730,23 @@ msgstr "%d KB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
+#: ../sendto/main.c:651
 msgid "Select Device to Send To"
 msgstr "Избор на устройство, към което ще се изпраща"
 
-#: ../sendto/main.c:645
+#: ../sendto/main.c:655
 msgid "Send _To"
 msgstr "Изпращане _до"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:699
 msgid "Choose files to send"
 msgstr "Избор на файлове за изпращане"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:728
 msgid "Remote device to use"
 msgstr "Отдалечено устройство"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:730
 msgid "Remote device's name"
 msgstr "Име на отдалечено устройство"
 
@@ -894,3 +891,37 @@ msgstr "Изпращане на файлове от вашия компютър"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Аплет за управление на устройства с Bluetooth"
+
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr "Настройките на „Споделяне на файлове“ не могат да се стартират"
+
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr ""
+#~ "Проверете дали програмата „Споделяне на файлове“ е инсталирана правилно."
+
+#~ msgid "Sharing Settings..."
+#~ msgstr "Настройки на споделянето…"
+
+#~ msgid "Friendly name"
+#~ msgstr "Приятелско име"
+
+#~ msgid "Make computer _visible"
+#~ msgstr "Компютърът да е _откриваем"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "Добавяне на ново _устройство…"
+
+#~ msgid "_Disconnect"
+#~ msgstr "_Прекъсване на връзката"
+
+#~ msgid "_Remove"
+#~ msgstr "_Премахване"
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "На вашия компютър липсват адаптери за Bluetooth."
+
+#~ msgid "Bluetooth has been disabled by a switch on your computer."
+#~ msgstr ""
+#~ "Bluetooth е изключен чрез съответния клавиш или бутон на вашия компютър."
