@@ -2,20 +2,20 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2009 - 2010.
+# Matej Urbančič <mateju@svn.gnome.org>, 2009 - 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2011-02-12 10:16+0000\n"
-"PO-Revision-Date: 2011-02-12 20:33+0100\n"
+"POT-Creation-Date: 2011-02-21 17:25+0000\n"
+"PO-Revision-Date: 2011-02-25 14:35+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
@@ -97,7 +97,7 @@ msgid "No adapters available"
 msgstr "Ni razpoložljivega vmesnika"
 
 #: ../lib/bluetooth-chooser.c:174
-#: ../lib/bluetooth-chooser.c:883
+#: ../lib/bluetooth-chooser.c:886
 msgid "Searching for devices..."
 msgstr "Iskanje naprav ..."
 
@@ -115,6 +115,7 @@ msgid "Device"
 msgstr "Naprava"
 
 #: ../lib/bluetooth-chooser.c:800
+#: ../properties/bluetooth.ui.h:5
 msgid "Type"
 msgstr "Vrsta"
 
@@ -123,6 +124,7 @@ msgid "All categories"
 msgstr "Vse kategorije"
 
 #: ../lib/bluetooth-filter-widget.c:73
+#: ../properties/bluetooth.ui.h:4
 msgid "Paired"
 msgstr "Povezano"
 
@@ -192,7 +194,6 @@ msgid "Select device to browse"
 msgstr "Izbor naprave za brskanje"
 
 #: ../applet/main.c:288
-#: ../properties/properties-adapter-off.ui.h:1
 msgid "Turn On Bluetooth"
 msgstr "Vklopi Bluetooth"
 
@@ -383,7 +384,6 @@ msgid "Browse files on device..."
 msgstr "Brskanje med datotekami na napravi ..."
 
 #: ../applet/popup-menu.ui.h:3
-#: ../properties/properties-adapter.ui.h:1
 #: ../moblin/moblin-panel.c:1403
 #: ../moblin/moblin-panel.c:1513
 msgid "Devices"
@@ -433,53 +433,25 @@ msgstr "_Zadetki"
 msgid "_Show input"
 msgstr "_Pokaži vnos"
 
-#: ../properties/adapter.c:631
+#: ../properties/adapter.c:647
 msgid "Bluetooth is disabled"
 msgstr "Naprava Bluetooth je onemogočena"
 
-#: ../properties/adapter.c:671
+#: ../properties/adapter.c:687
 msgid "No Bluetooth adapters present"
 msgstr "Ni navzočih Bluetooth naprav"
 
-#: ../properties/cc-bluetooth-panel.c:57
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "Ni mogoče zagnati možnosti \"osebne souporabe datotek\"."
+#: ../properties/bluetooth.ui.h:1
+msgid "Active"
+msgstr "Dejavno"
 
-#: ../properties/cc-bluetooth-panel.c:62
-msgid "Please verify that the \"Personal File Sharing\" program is correctly installed."
-msgstr "Potrdite, da je program \"Osebna souporaba datotek\" pravilno nameščen."
+#: ../properties/bluetooth.ui.h:2
+msgid "Connection"
+msgstr "Povezava"
 
-#: ../properties/cc-bluetooth-panel.c:95
-msgid "Sharing Settings..."
-msgstr "Nastavitve souporabe ..."
-
-#: ../properties/properties-adapter.ui.h:2
-msgid "Friendly name"
-msgstr "Ime naprave"
-
-#: ../properties/properties-adapter.ui.h:3
-msgid "Make computer _visible"
-msgstr "_Računalnik naj bo viden drugim napravam"
-
-#: ../properties/properties-adapter.ui.h:4
-msgid "Set up _new device..."
-msgstr "Nastavitev _nove naprave ..."
-
-#: ../properties/properties-adapter.ui.h:5
-msgid "_Disconnect"
-msgstr "_Prekini povezavo"
-
-#: ../properties/properties-adapter.ui.h:6
-msgid "_Remove"
-msgstr "_Odstrani"
-
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "V računalnik ni priklopljenih Bluetooth vmesnikov."
-
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr "Bluetooth ne onemogočen z gumbom na računalniku."
+#: ../properties/bluetooth.ui.h:3
+msgid "Keyboard Settings"
+msgstr "Nastavitve tipkovnice"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -923,42 +895,90 @@ msgstr "Pošlji datoteko iz računalnika"
 msgid "Bluetooth Manager Panel"
 msgstr "Pult Bluetooth upravljalnika"
 
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr "Ni mogoče zagnati možnosti \"osebne souporabe datotek\"."
+
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr ""
+#~ "Potrdite, da je program \"Osebna souporaba datotek\" pravilno nameščen."
+
+#~ msgid "Sharing Settings..."
+#~ msgstr "Nastavitve souporabe ..."
+
+#~ msgid "Friendly name"
+#~ msgstr "Ime naprave"
+
+#~ msgid "Make computer _visible"
+#~ msgstr "_Računalnik naj bo viden drugim napravam"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "Nastavitev _nove naprave ..."
+
+#~ msgid "_Disconnect"
+#~ msgstr "_Prekini povezavo"
+
+#~ msgid "_Remove"
+#~ msgstr "_Odstrani"
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "V računalnik ni priklopljenih Bluetooth vmesnikov."
+
+#~ msgid "Bluetooth has been disabled by a switch on your computer."
+#~ msgstr "Bluetooth ne onemogočen z gumbom na računalniku."
+
 #~ msgid "_Show Bluetooth icon"
 #~ msgstr "_Pokaži Bluetooth ikono"
+
 #~ msgid "Receive Files"
 #~ msgstr "Sprejmi datoteke"
+
 #~ msgid "bluetooth"
 #~ msgstr "bluetooth"
+
 #~ msgid "<u>Pair</u>"
 #~ msgstr "<u>Povezovanje</u>"
+
 #~ msgid "<u>Connect</u>"
 #~ msgstr "<u>Poveži</u>"
+
 #~ msgid "<u>Browse</u>"
 #~ msgstr "<u>Brskanje</u>"
+
 #~ msgid "Output a list of currently known devices"
 #~ msgstr "Izpis seznama trenutno nastavljenih naprav"
+
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "Možnosti Bluetooth"
+
 #~ msgid "Bluetooth Properties"
 #~ msgstr "Lastnosti Bluetooth"
+
 #~ msgid "Whether to show the notification icon"
 #~ msgstr "Ali naj bo prikazana ikona obveščanja"
+
 #~ msgid "Whether to show the notification icon."
 #~ msgstr "Ali naj bo prikazana ikona obveščanja."
+
 #~ msgid "GConf error: %s"
 #~ msgstr "Napaka gconf: %s"
+
 #~ msgid "All further errors shown only on terminal."
 #~ msgstr "Vse nadaljnje napake so izpisane le v terminalu."
+
 #~ msgid "A Bluetooth manager for the GNOME desktop"
 #~ msgstr "Upravljalnik naprav Bluetooth za namizje GNOME"
+
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Launchpad Contributions:\n"
 #~ "  cupacup https://launchpad.net/~janez-troha\n"
 #~ "  Štefan Baebler https://launchpad.net/~stefanba\n"
 #~ "  Matej Urbančič <mateju@svn.gnome.org>"
+
 #~ msgid "GNOME Bluetooth home page"
 #~ msgstr "Spletišče GNOME Bluetooth"
+
 #~ msgid "S_earch"
 #~ msgstr "_iskanje"
-
