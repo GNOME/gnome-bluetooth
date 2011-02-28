@@ -648,12 +648,12 @@ show_browse_dialog (char **device_name)
 	char *bdaddr;
 	int response_id;
 
-	dialog = gtk_dialog_new_with_buttons(_("Select Device to Send To"), NULL,
+	dialog = gtk_dialog_new_with_buttons(_("Select device to send to"), NULL,
 					     0,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 					     NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
-	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Send _To"), GTK_RESPONSE_ACCEPT);
+	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Send"), GTK_RESPONSE_ACCEPT);
 	image = gtk_image_new_from_icon_name ("document-send", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (send_button), image);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
@@ -664,7 +664,7 @@ show_browse_dialog (char **device_name)
 	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 	gtk_box_set_spacing (GTK_BOX (content_area), 2);
 
-	selector = bluetooth_chooser_new(_("Select Device to Send To"));
+	selector = bluetooth_chooser_new(NULL);
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
@@ -700,8 +700,8 @@ show_select_dialog(void)
 	dialog = gtk_file_chooser_dialog_new(_("Choose files to send"), NULL,
 				GTK_FILE_CHOOSER_ACTION_OPEN,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
-
+				_("Select"), GTK_RESPONSE_ACCEPT, NULL);
+	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_file_chooser_set_select_multiple(GTK_FILE_CHOOSER(dialog), TRUE);
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
