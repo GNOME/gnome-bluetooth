@@ -675,7 +675,7 @@ show_browse_dialog (char **device_name)
 			 G_CALLBACK(select_device_changed), dialog);
 	g_signal_connect(selector, "selected-device-activated",
 			 G_CALLBACK(select_device_activated), dialog);
-	gtk_container_add (GTK_CONTAINER (content_area), selector);
+	gtk_box_pack_start (GTK_BOX (content_area), selector, TRUE, TRUE, 0);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
 	bdaddr = NULL;
