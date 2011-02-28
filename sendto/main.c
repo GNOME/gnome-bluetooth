@@ -652,6 +652,7 @@ show_browse_dialog (char **device_name)
 					     0,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 					     NULL);
+	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("Send _To"), GTK_RESPONSE_ACCEPT);
 	image = gtk_image_new_from_icon_name ("document-send", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_image (GTK_BUTTON (send_button), image);
