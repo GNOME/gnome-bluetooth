@@ -19,6 +19,12 @@ bluetooth_sendto_LDADD = $(top_builddir)/lib/libcommon.la $(top_builddir)/lib/li
 
 man_MANS = bluetooth-sendto.1
 
+desktopdir = $(datadir)/applications
+desktop_in_in_files = bluetooth-sendto.desktop.in.in
+desktop_in_files = bluetooth-sendto.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
 if HAVE_NST
 plugindir = $(libdir)/nautilus-sendto/plugins
 
@@ -38,6 +44,6 @@ gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
 
 endif
 
-EXTRA_DIST = $(man_MANS) gnome-bluetooth-nst org.gnome.Bluetooth.nst.gschema.xml.in nautilus-sendto-plugin.c
+EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) gnome-bluetooth-nst org.gnome.Bluetooth.nst.gschema.xml.in nautilus-sendto-plugin.c
 
 MAINTAINERCLEANFILES = Makefile.in

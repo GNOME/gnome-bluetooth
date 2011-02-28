@@ -214,7 +214,9 @@ AC_OUTPUT(Makefile
 	  properties/Makefile
 	  properties/bluetooth-properties.desktop.in
 	  wizard/Makefile
+	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile
+	  sendto/bluetooth-sendto.desktop.in
 	  moblin/Makefile
 	  moblin/bluetooth-panel.desktop.in
           moblin/org.moblin.UX.Shell.Panels.bluetooth.service

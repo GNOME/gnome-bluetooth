@@ -24,6 +24,12 @@ pindir = $(pkgdatadir)
 ui_DATA = wizard.ui
 uidir = $(pkgdatadir)
 
+desktopdir = $(datadir)/applications
+desktop_in_in_files = bluetooth-wizard.desktop.in.in
+desktop_in_files = bluetooth-wizard.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
 INCLUDES = -I$(top_srcdir)/lib
 
 man_MANS = bluetooth-wizard.1
@@ -35,6 +41,6 @@ check:
 		xmllint --noout --valid $(srcdir)/pin-code-database.xml ;	\
 	fi
 
-EXTRA_DIST = $(man_MANS) $(pin_DATA) $(ui_DATA)
+EXTRA_DIST = $(man_MANS) $(pin_DATA) $(ui_DATA) $(desktop_in_in_files)
 
 MAINTAINERCLEANFILES = Makefile.in
