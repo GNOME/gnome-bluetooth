@@ -663,7 +663,7 @@ show_browse_dialog (char **device_name)
 	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 	gtk_box_set_spacing (GTK_BOX (content_area), 2);
 
-	selector = bluetooth_chooser_new("Select device to send files to");
+	selector = bluetooth_chooser_new(_("Select Device to Send To"));
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
