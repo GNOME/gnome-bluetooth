@@ -228,7 +228,8 @@ create_wizard_dialogue (void)
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
 	g_signal_connect(selector, "selected-device-activated",
 			 G_CALLBACK(selected_device_activated), dialog);
-	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector,
+			    TRUE, TRUE, 0);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
 
 	g_signal_connect (G_OBJECT (dialog), "response",
@@ -266,7 +267,8 @@ create_props_dialogue (void)
 			 G_CALLBACK(device_category_filter_selected_cb), dialog);
 	g_signal_connect(selector, "selected-device-activated",
 			 G_CALLBACK(selected_device_activated), dialog);
-	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog))), selector,
+			    TRUE, TRUE, 0);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), selector);
@@ -341,7 +343,7 @@ create_filter_dialogue (void)
 		     "show-searching", TRUE,
 		     "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
 		     NULL);
-	gtk_box_pack_start (GTK_BOX (hbox), selector, FALSE, FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (hbox), selector, TRUE, TRUE, 6);
 
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (vbox);
