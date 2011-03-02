@@ -2,17 +2,17 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
-# Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
+# Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2011-02-21 17:25+0000\n"
-"PO-Revision-Date: 2011-02-22 09:47+0100\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2011-03-02 19:26+0000\n"
+"PO-Revision-Date: 2011-03-02 20:44+0100\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +82,7 @@ msgstr "Tableta"
 msgid "Video device"
 msgstr "Dispositivo de vídeo"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Desconocido"
@@ -91,31 +91,31 @@ msgstr "Desconocido"
 msgid "Click to select device..."
 msgstr "Pulse para seleccionar el dispositivo…"
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "No hay ningún adaptador disponible"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:886
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "Buscando dispositivos…"
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "¿Quitar «%s» de la lista de dispositivos?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Si quita el dispositivo tendrá que configurarlo de nuevo antes de poder "
 "usarlo la próxima vez."
 
-#: ../lib/bluetooth-chooser.c:764
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:800 ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Tipo"
 
@@ -123,7 +123,7 @@ msgstr "Tipo"
 msgid "All categories"
 msgstr "Todas las categorías"
 
-#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Emparejado"
 
@@ -419,27 +419,57 @@ msgstr "C_oincide"
 msgid "_Show input"
 msgstr "_Mostrar entrada"
 
-#: ../properties/adapter.c:647
+#: ../properties/adapter.c:646
 msgid "Bluetooth is disabled"
 msgstr "El Bluetooth está desconectado"
 
-#: ../properties/adapter.c:687
+#: ../properties/adapter.c:686
 msgid "No Bluetooth adapters present"
 msgstr "No hay ningún adaptador de Bluetooth presente"
 
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "Sí"
+
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "No"
+
+#: ../properties/cc-bluetooth-panel.c:327
+#| msgid "Visible"
+msgid "Visibility"
+msgstr "Visibilidad"
+
+#: ../properties/cc-bluetooth-panel.c:331
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Visibilidad de «%s»"
+
 #: ../properties/bluetooth.ui.h:1
-msgid "Active"
-msgstr "Activar"
+msgid "Address"
+msgstr "Dirección"
 
 #: ../properties/bluetooth.ui.h:2
-#| msgid "Connect"
 msgid "Connection"
 msgstr "Conexión"
 
 #: ../properties/bluetooth.ui.h:3
-#| msgid "Keyboard"
 msgid "Keyboard Settings"
 msgstr "Configuración del teclado"
+
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Ajustes del ratón y del «touchpad»"
+
+#: ../properties/bluetooth.ui.h:6
+#| msgid "_Powered"
+msgid "Power"
+msgstr ""
+
+#: ../properties/bluetooth.ui.h:7
+#| msgid "Settings"
+msgid "Sound Settings"
+msgstr "Configuración del sonido"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -625,6 +655,16 @@ msgstr "_Cerrar"
 msgid "_Restart Setup"
 msgstr "_Reiniciar la configuración"
 
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+#| msgid "Bluetooth New Device Setup"
+msgid "Bluetooth Device Setup"
+msgstr "Configuración de dispositivo Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+#| msgid "Bluetooth device"
+msgid "Setup Bluetooth devices"
+msgstr "Configurar dispositivos Bluetooth"
+
 #: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
@@ -706,23 +746,30 @@ msgstr "%d KB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
+#: ../sendto/main.c:651
+#| msgid "Select Device to Send To"
+msgid "Select device to send to"
 msgstr "Seleccionar el dispositivo al que enviar"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "_Enviar a"
+#: ../sendto/main.c:656
+#| msgid "Send _To"
+msgid "_Send"
+msgstr "_Enviar"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Seleccionar los archivos para enviar"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+#| msgid "Delete"
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Dispositivo remoto que usar"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Nombre del dispositivo remoto"
 
@@ -738,6 +785,16 @@ msgstr "No se soporta la transferencia de archivos con OBEX Push"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+#| msgid "Bluetooth Manager"
+msgid "Bluetooth Transfer"
+msgstr "Transferencia Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+#| msgid "Sending files via Bluetooth"
+msgid "Send files via Bluetooth"
+msgstr "Enviando archivos vía Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -868,6 +925,9 @@ msgstr "Enviar un archivo desde el equipo"
 msgid "Bluetooth Manager Panel"
 msgstr "Panel de gestión de Bluetooth"
 
+#~ msgid "Active"
+#~ msgstr "Activar"
+
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr ""
 #~ "No se pueden iniciar las preferencias de «Compartición de archivos "
@@ -993,9 +1053,6 @@ msgstr "Panel de gestión de Bluetooth"
 #~ msgid "Known devices"
 #~ msgstr "Dispositivos conocidos"
 
-#~ msgid "Delete"
-#~ msgstr "Borrar"
-
 #~ msgid "Successfully configured '%s'"
 #~ msgstr "«%s» se configuró correctamente"
 
@@ -1067,9 +1124,6 @@ msgstr "Panel de gestión de Bluetooth"
 
 #~ msgid "Always display icon"
 #~ msgstr "Mostrar siempre el icono"
-
-#~ msgid "_Powered"
-#~ msgstr "_Encendido"
 
 #~ msgid ""
 #~ "Display options for the notification icon. Valid options are \"never\", "
