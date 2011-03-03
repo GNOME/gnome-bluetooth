@@ -2,21 +2,23 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
-#
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-30 23:06+0200\n"
-"PO-Revision-Date: 2011-01-30 23:07+0200\n"
+"POT-Creation-Date: 2011-03-03 13:12+0200\n"
+"PO-Revision-Date: 2011-03-03 13:16+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"Language-Team: Gezer (Hebrew)\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.0-beta4\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Project-Style: gnome\n"
 
 #: ../lib/bluetooth-client.c:128
 msgid "All types"
@@ -79,38 +81,38 @@ msgstr "משטח שליטה"
 msgid "Video device"
 msgstr "התקן וידאו"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "נא ללחוץ כאן לבחירת התקן..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "אין מתאמים זמינים"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "חיפוש אחר התקנים..."
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "להסיר את '%s' מרשימת ההתקנים?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "אם התקן זה ימחק, יהיה עליך להגדיר אותו שוב לפני השימוש הבא."
 
-#: ../lib/bluetooth-chooser.c:746
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "התקן"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "סוג"
 
@@ -118,7 +120,7 @@ msgstr "סוג"
 msgid "All categories"
 msgstr "כל הקטגוריות"
 
-#: ../lib/bluetooth-filter-widget.c:73
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "צימוד"
 
@@ -175,92 +177,92 @@ msgstr "שימוש בהתקן GPS זה עבור שרותי איתור גאוגר
 msgid "Access the Internet using your cell phone (test)"
 msgstr "התחברות לאינטרנט באמצעות הטלפון הסלולרי שלך (תוסף בדיקה)"
 
-#: ../applet/main.c:130
+#: ../applet/main.c:125
 msgid "Select Device to Browse"
 msgstr "בחירת התקן לעיון"
 
-#: ../applet/main.c:134
+#: ../applet/main.c:129
 msgid "_Browse"
 msgstr "_עיון"
 
-#: ../applet/main.c:143
+#: ../applet/main.c:138
 msgid "Select device to browse"
 msgstr "בחירת התקן לעיון"
 
-#: ../applet/main.c:293 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:288
 msgid "Turn On Bluetooth"
 msgstr "הפעלת ה־Bluetooth"
 
-#: ../applet/main.c:294
+#: ../applet/main.c:289
 msgid "Bluetooth: Off"
 msgstr "‏Bluetooth: כבוי"
 
-#: ../applet/main.c:297
+#: ../applet/main.c:292
 msgid "Turn Off Bluetooth"
 msgstr "כיבוי ה־Bluetooth"
 
-#: ../applet/main.c:298
+#: ../applet/main.c:293
 msgid "Bluetooth: On"
 msgstr "‏Bluetooth: פעיל"
 
-#: ../applet/main.c:303 ../applet/notify.c:159
+#: ../applet/main.c:298 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "‏Bluetooth: כבוי"
 
-#: ../applet/main.c:452
+#: ../applet/main.c:445
 msgid "Disconnecting..."
 msgstr "בניתוק..."
 
-#: ../applet/main.c:455 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "בהתחברות..."
 
-#: ../applet/main.c:458 ../applet/main.c:741
+#: ../applet/main.c:451 ../applet/main.c:734
 msgid "Connected"
 msgstr "חיבור פעיל"
 
-#: ../applet/main.c:461 ../applet/main.c:741
+#: ../applet/main.c:454 ../applet/main.c:734
 msgid "Disconnected"
 msgstr "חיבור כבוי"
 
-#: ../applet/main.c:759 ../applet/main.c:823
+#: ../applet/main.c:752 ../applet/main.c:816
 msgid "Disconnect"
 msgstr "הינתקות"
 
-#: ../applet/main.c:759 ../applet/main.c:823 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
 msgid "Connect"
 msgstr "התחברות"
 
-#: ../applet/main.c:772
+#: ../applet/main.c:765
 msgid "Send files..."
 msgstr "שליחת קבצים..."
 
-#: ../applet/main.c:782
+#: ../applet/main.c:775
 msgid "Browse files..."
 msgstr "עיון בקבצים..."
 
-#: ../applet/main.c:793
+#: ../applet/main.c:786
 msgid "Open Keyboard Preferences..."
 msgstr "פתיחת העדפות המקלדת..."
 
-#: ../applet/main.c:801
+#: ../applet/main.c:794
 msgid "Open Mouse Preferences..."
 msgstr "פתיחת העדפות המקלדת..."
 
-#: ../applet/main.c:811
+#: ../applet/main.c:804
 msgid "Open Sound Preferences..."
 msgstr "פתיחת העדפות השמע..."
 
-#: ../applet/main.c:873
+#: ../applet/main.c:857
 msgid "Debug"
 msgstr "ניפוי שגיאות"
 
 #. Parse command-line options
-#: ../applet/main.c:892
+#: ../applet/main.c:876
 msgid "- Bluetooth applet"
 msgstr "- יישומון Bluetooth"
 
-#: ../applet/main.c:897
+#: ../applet/main.c:881
 #, c-format
 msgid ""
 "%s\n"
@@ -269,7 +271,7 @@ msgstr ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 
-#: ../applet/main.c:923
+#: ../applet/main.c:907
 msgid "Bluetooth Applet"
 msgstr "יישומון Bluetooth"
 
@@ -363,8 +365,8 @@ msgstr "‏Bluetooth: בבדיקה"
 msgid "Browse files on device..."
 msgstr "עיון בקבצים שבהתקן..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/properties-adapter.ui.h:1
-#: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
+#: ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "התקנים"
 
@@ -412,59 +414,54 @@ msgstr "_תואם"
 msgid "_Show input"
 msgstr "ה_צגת קלט"
 
-#: ../properties/adapter.c:630
+#: ../properties/adapter.c:646
 msgid "Bluetooth is disabled"
 msgstr "ה־Bluetooth כבוי."
 
-#: ../properties/adapter.c:670
+#: ../properties/adapter.c:686
 msgid "No Bluetooth adapters present"
 msgstr "לא קיימים מתאמי Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:60
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "לא ניתן להפעיל את ההעדפות של \"שיתוף קבצים אישי\""
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "כן"
 
-#: ../properties/cc-bluetooth-panel.c:65
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr "נא לאמת כי התכנית \"שיתוף קבצים אישי\" מותקנת כראוי."
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "לא"
 
-#: ../properties/cc-bluetooth-panel.c:92
-msgid "_Show Bluetooth icon"
-msgstr "ה_צגת הסמל של Bluetooth"
+#: ../properties/cc-bluetooth-panel.c:327
+msgid "Visibility"
+msgstr "גילוי"
 
-#: ../properties/cc-bluetooth-panel.c:104
-msgid "Sharing Settings..."
-msgstr "הגדרות שיתוף..."
+#: ../properties/cc-bluetooth-panel.c:331
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "האפשרות לגילוי “%s”"
 
-#: ../properties/properties-adapter.ui.h:2
-msgid "Friendly name"
-msgstr "שם ידידותי"
+#: ../properties/bluetooth.ui.h:1
+msgid "Address"
+msgstr "כתובת"
 
-#: ../properties/properties-adapter.ui.h:3
-msgid "Make computer _visible"
-msgstr "הפיכת המחשב ל_גלוי"
+#: ../properties/bluetooth.ui.h:2
+msgid "Connection"
+msgstr "חיבור"
 
-#: ../properties/properties-adapter.ui.h:4
-msgid "Set up _new device..."
-msgstr "הגדרת התקן _חדש..."
+#: ../properties/bluetooth.ui.h:3
+msgid "Keyboard Settings"
+msgstr "הגדרות מקלדת"
 
-#: ../properties/properties-adapter.ui.h:5
-msgid "_Disconnect"
-msgstr "_ניתוק"
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "הגדרות העכבר ומשטח המגע"
 
-#: ../properties/properties-adapter.ui.h:6
-msgid "_Remove"
-msgstr "ה_סרה"
+#: ../properties/bluetooth.ui.h:6
+msgid "Power"
+msgstr "צריכת חשמל"
 
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "אין כל מתאמי Bluetooth המחוברים למחשבך."
-
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr "קישורית ה־Blutooth בוטלה על ידי מפסק במחשב שלך."
+#: ../properties/bluetooth.ui.h:7
+msgid "Sound Settings"
+msgstr "הגדרות שמע"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -647,25 +644,33 @@ msgstr "ס_גירה"
 msgid "_Restart Setup"
 msgstr "הגדרה _מחדש"
 
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "הגדרת התקן Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "הגדרת התקני Bluetooth"
+
 #: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
-msgstr[0] "%'d שניות"
+msgstr[0] "שנייה אחת"
 msgstr[1] "%'d שניות"
 
 #: ../sendto/main.c:167 ../sendto/main.c:180
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
-msgstr[0] "%'d דקות"
+msgstr[0] "דקה אחת"
 msgstr[1] "%'d דקות"
 
 #: ../sendto/main.c:178
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
-msgstr[0] "%'d שעות"
+msgstr[0] "שעה אחת"
 msgstr[1] "%'d שעות"
 
 #: ../sendto/main.c:188
@@ -726,23 +731,27 @@ msgstr "%d ק״ב/ש׳"
 msgid "%d B/s"
 msgstr "%d ב׳/ש׳"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
-msgstr "בחר התקן לשליחה"
+#: ../sendto/main.c:651
+msgid "Select device to send to"
+msgstr "נא לבחור התקן לשליחה אליו"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "שלח _אל"
+#: ../sendto/main.c:656
+msgid "_Send"
+msgstr "_שליחה"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "בחירת קבצים לשליחה"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+msgid "Select"
+msgstr "בחירה"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "התקן מרוחק לשימוש"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "שם ההתקן המרוחק"
 
@@ -758,6 +767,14 @@ msgstr "העברת קבצים בדחיפת OBEX אינה נתמכת"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (דחיפת OBEX)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "העברה דרך Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "שליחת קבצים דרך Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -887,6 +904,41 @@ msgstr "שליחת קובץ ממחשבך"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "לוח ניהול ה־Bluetooth"
+
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr "לא ניתן להפעיל את ההעדפות של \"שיתוף קבצים אישי\""
+
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr "נא לאמת כי התכנית \"שיתוף קבצים אישי\" מותקנת כראוי."
+
+#~ msgid "_Show Bluetooth icon"
+#~ msgstr "ה_צגת הסמל של Bluetooth"
+
+#~ msgid "Sharing Settings..."
+#~ msgstr "הגדרות שיתוף..."
+
+#~ msgid "Friendly name"
+#~ msgstr "שם ידידותי"
+
+#~ msgid "Make computer _visible"
+#~ msgstr "הפיכת המחשב ל_גלוי"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "הגדרת התקן _חדש..."
+
+#~ msgid "_Disconnect"
+#~ msgstr "_ניתוק"
+
+#~ msgid "_Remove"
+#~ msgstr "ה_סרה"
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "אין כל מתאמי Bluetooth המחוברים למחשבך."
+
+#~ msgid "Bluetooth has been disabled by a switch on your computer."
+#~ msgstr "קישורית ה־Blutooth בוטלה על ידי מפסק במחשב שלך."
 
 #~ msgid "Receive Files"
 #~ msgstr "קבלת קבצים"
