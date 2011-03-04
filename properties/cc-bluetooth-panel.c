@@ -276,6 +276,65 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 }
 
 static void
+power_callback (GObject          *object,
+		GParamSpec       *spec,
+		CcBluetoothPanel *self)
+{
+	gboolean state;
+
+	state = gtk_switch_get_active (GTK_SWITCH (WID ("switch_bluetooth")));
+	g_debug ("Power switched to %s", state ? "off" : "on");
+	bluetooth_killswitch_set_state (self->priv->killswitch,
+					state ? KILLSWITCH_STATE_UNBLOCKED : KILLSWITCH_STATE_SOFT_BLOCKED);
+}
+
+static void
+cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
+{
+	KillswitchState state;
+	char *bdaddr;
+	gboolean powered, sensitive;
+	GtkSwitch *button;
+
+	g_object_get (G_OBJECT (self->priv->client),
+		      "default-adapter", &bdaddr,
+		      "default-adapter-powered", &powered,
+		      NULL);
+	state = bluetooth_killswitch_get_state (self->priv->killswitch);
+
+	g_debug ("Updating power, default adapter: %s (powered: %s), killswitch: %s",
+		 bdaddr ? bdaddr : "(none)",
+		 powered ? "on" : "off",
+		 bluetooth_killswitch_state_to_string (state));
+
+	if (bdaddr == NULL &&
+	    bluetooth_killswitch_has_killswitches (self->priv->killswitch) &&
+	    state != KILLSWITCH_STATE_HARD_BLOCKED) {
+		g_debug ("Default adapter is unpowered, but should be available");
+		sensitive = TRUE;
+	} else if (bdaddr == NULL &&
+		   state == KILLSWITCH_STATE_HARD_BLOCKED) {
+		g_debug ("Bluetooth is Hard blocked");
+		sensitive = FALSE;
+	} else if (bdaddr == NULL) {
+		sensitive = FALSE;
+		g_debug ("No Bluetooth available");
+	} else {
+		sensitive = TRUE;
+		g_debug ("Bluetooth is available and powered");
+	}
+
+	g_free (bdaddr);
+	gtk_widget_set_sensitive (WID ("hbox2") , sensitive);
+
+	button = GTK_SWITCH (WID ("switch_bluetooth"));
+
+	g_signal_handlers_block_by_func (button, power_callback, self);
+	gtk_switch_set_active (button, powered);
+	g_signal_handlers_unblock_by_func (button, power_callback, self);
+}
+
+static void
 keyboard_callback (GtkButton        *button,
 		   CcBluetoothPanel *self)
 {
@@ -382,8 +441,12 @@ static void
 cc_bluetooth_panel_update_state (CcBluetoothPanel *self)
 {
 	char *bdaddr;
+	gboolean powered;
 
-	g_object_get (G_OBJECT (self->priv->client), "default-adapter", &bdaddr, NULL);
+	g_object_get (G_OBJECT (self->priv->client),
+		      "default-adapter", &bdaddr,
+		      "default-adapter-powered", &powered,
+		      NULL);
 	gtk_widget_set_sensitive (WID ("toolbar"), (bdaddr != NULL));
 	g_free (bdaddr);
 }
@@ -394,6 +457,16 @@ default_adapter_changed (BluetoothClient  *client,
 			 CcBluetoothPanel *self)
 {
 	cc_bluetooth_panel_update_state (self);
+	cc_bluetooth_panel_update_power (self);
+}
+
+static void
+killswitch_changed (BluetoothKillswitch *killswitch,
+		    KillswitchState      state,
+		    CcBluetoothPanel    *self)
+{
+	cc_bluetooth_panel_update_state (self);
+	cc_bluetooth_panel_update_power (self);
 }
 
 static void
@@ -483,6 +556,13 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 			  G_CALLBACK (sound_callback), self);
 	g_signal_connect (G_OBJECT (WID ("switch_connection")), "notify::active",
 			  G_CALLBACK (switch_connected_active_changed), self);
+
+	/* Set the initial state of power */
+	g_signal_connect (G_OBJECT (WID ("switch_bluetooth")), "notify::active",
+			  G_CALLBACK (power_callback), self);
+	g_signal_connect (G_OBJECT (self->priv->killswitch), "state-changed",
+			  G_CALLBACK (killswitch_changed), self);
+	cc_bluetooth_panel_update_power (self);
 
 	gtk_widget_show_all (GTK_WIDGET (self));
 }
