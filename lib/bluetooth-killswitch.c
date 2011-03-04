@@ -106,6 +106,15 @@ state_to_string (KillswitchState state)
 	}
 }
 
+const char *
+bluetooth_killswitch_state_to_string (KillswitchState state)
+{
+	g_return_val_if_fail (state >= KILLSWITCH_STATE_NO_ADAPTER, NULL);
+	g_return_val_if_fail (state <= KILLSWITCH_STATE_HARD_BLOCKED, NULL);
+
+	return state_to_string (state);
+}
+
 static void
 update_killswitch (BluetoothKillswitch *killswitch,
 		   guint index, guint soft, guint hard)
