@@ -289,6 +289,22 @@ power_callback (GObject          *object,
 }
 
 static void
+cc_bluetooth_panel_update_treeview_message (CcBluetoothPanel *self,
+					    const char       *message)
+{
+	if (message != NULL) {
+		gtk_widget_hide (self->priv->chooser);
+		gtk_widget_show (WID ("message_scrolledwindow"));
+
+		gtk_label_set_text (GTK_LABEL (WID ("message_label")),
+				    message);
+	} else {
+		gtk_widget_hide (WID ("message_scrolledwindow"));
+		gtk_widget_show (self->priv->chooser);
+	}
+}
+
+static void
 cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 {
 	KillswitchState state;
@@ -312,16 +328,20 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 	    state != KILLSWITCH_STATE_HARD_BLOCKED) {
 		g_debug ("Default adapter is unpowered, but should be available");
 		sensitive = TRUE;
+		cc_bluetooth_panel_update_treeview_message (self, _("Bluetooth is disabled"));
 	} else if (bdaddr == NULL &&
 		   state == KILLSWITCH_STATE_HARD_BLOCKED) {
 		g_debug ("Bluetooth is Hard blocked");
 		sensitive = FALSE;
+		cc_bluetooth_panel_update_treeview_message (self, _("Bluetooth is disabled by hardware switch"));
 	} else if (bdaddr == NULL) {
 		sensitive = FALSE;
 		g_debug ("No Bluetooth available");
+		cc_bluetooth_panel_update_treeview_message (self, _("No Bluetooth adapters found"));
 	} else {
 		sensitive = TRUE;
 		g_debug ("Bluetooth is available and powered");
+		cc_bluetooth_panel_update_treeview_message (self, NULL);
 	}
 
 	g_free (bdaddr);
@@ -512,11 +532,13 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	/* The known devices */
 	widget = WID ("devices_table");
 
+	context = gtk_widget_get_style_context (WID ("message_scrolledwindow"));
+	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
 	/* Note that this will only ever show the devices on the default
 	 * adapter, this is on purpose */
 	self->priv->chooser = bluetooth_chooser_new (NULL);
-	gtk_table_attach (GTK_TABLE (widget), self->priv->chooser, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+	gtk_box_pack_start (GTK_BOX (WID ("box1")), self->priv->chooser, TRUE, TRUE, 0);
 	g_object_set (self->priv->chooser,
 		      "show-searching", FALSE,
 		      "show-device-type", FALSE,
@@ -524,6 +546,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 		      "show-pairing", FALSE,
 		      "show-connected", FALSE,
 		      "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
+		      "no-show-all", TRUE,
 		      NULL);
 	column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (self->priv->chooser));
 	gtk_tree_view_column_set_visible (column, FALSE);
