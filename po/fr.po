@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2011-02-21 17:25+0000\n"
-"PO-Revision-Date: 2011-01-28 18:06+0100\n"
+"POT-Creation-Date: 2011-03-05 10:30+0000\n"
+"PO-Revision-Date: 2011-03-05 22:26+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Tablette"
 msgid "Video device"
 msgstr "Périphérique vidéo"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Inconnu"
@@ -94,31 +94,31 @@ msgstr "Inconnu"
 msgid "Click to select device..."
 msgstr "Cliquez pour choisir un périphérique..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "Aucun adaptateur disponible"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:886
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "Recherche de périphériques..."
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Supprimer « %s » de la liste des périphériques ?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Si vous enlevez le périphérique, vous devrez le reconfigurer pour un usage "
 "ultérieur."
 
-#: ../lib/bluetooth-chooser.c:764
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Périphérique"
 
-#: ../lib/bluetooth-chooser.c:800 ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Type"
 
@@ -126,7 +126,7 @@ msgstr "Type"
 msgid "All categories"
 msgstr "Toutes les catégories"
 
-#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Apparié"
 
@@ -311,8 +311,8 @@ msgstr ""
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgstr ""
-"Veuillez confirmer que le numéro d'identification personnel « %s » "
-"correspond à celui du périphérique %s."
+"Veuillez confirmer que le numéro d'identification personnel « %s » correspond "
+"à celui du périphérique %s."
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:314
@@ -425,17 +425,38 @@ msgstr "_Correspond"
 msgid "_Show input"
 msgstr "A_fficher les caractères saisis"
 
-#: ../properties/adapter.c:647
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "Oui"
+
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "Non"
+
+#: ../properties/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth est désactivé"
 
-#: ../properties/adapter.c:687
-msgid "No Bluetooth adapters present"
+#: ../properties/cc-bluetooth-panel.c:336
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Bluetooth est désactivé par un interrupteur matériel"
+
+#: ../properties/cc-bluetooth-panel.c:340
+msgid "No Bluetooth adapters found"
 msgstr "Aucun adaptateur Bluetooth détecté"
 
+#: ../properties/cc-bluetooth-panel.c:406
+msgid "Visibility"
+msgstr "Visibilité"
+
+#: ../properties/cc-bluetooth-panel.c:410
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Visibilité de « %s »"
+
 #: ../properties/bluetooth.ui.h:1
-msgid "Active"
-msgstr "Actif"
+msgid "Address"
+msgstr "Adresse"
 
 #: ../properties/bluetooth.ui.h:2
 msgid "Connection"
@@ -444,6 +465,18 @@ msgstr "Connexion"
 #: ../properties/bluetooth.ui.h:3
 msgid "Keyboard Settings"
 msgstr "Paramétrage du clavier"
+
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Paramètres de la souris et du pavé tactile"
+
+#: ../properties/bluetooth.ui.h:6
+msgid "Power"
+msgstr "Alimentation"
+
+#: ../properties/bluetooth.ui.h:7
+msgid "Sound Settings"
+msgstr "Paramètres du son"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -462,8 +495,8 @@ msgstr "Appairage de « %s » annulé"
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
-"Veuillez confirmer que le numéro d'identification personnel affiché sur "
-"« %s » correspond à celui-ci."
+"Veuillez confirmer que le numéro d'identification personnel affiché sur « %"
+"s » correspond à celui-ci."
 
 #: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
 msgid "Please enter the following PIN:"
@@ -634,6 +667,14 @@ msgstr "_Fermer"
 msgid "_Restart Setup"
 msgstr "_Redémarrer la configuration"
 
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "Configuration de périphérique Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "Configurer des périphériques Bluetooth"
+
 #: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
@@ -716,24 +757,28 @@ msgid "%d B/s"
 msgstr "%d o/s"
 
 # Titre de fenêtre
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
+#: ../sendto/main.c:651
+msgid "Select device to send to"
 msgstr "Choix du périphérique cible"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "_Envoyer à"
+#: ../sendto/main.c:656
+msgid "_Send"
+msgstr "_Envoyer"
 
 # Titre de fenêtre
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Choix des fichiers à envoyer"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+msgid "Select"
+msgstr "Sélectionner"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Périphérique distant à utiliser"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Nom du périphérique distant"
 
@@ -750,6 +795,14 @@ msgstr "Le transfert de fichiers « OBEX Push » n'est pas pris en charge"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Transfert Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Envoi de fichiers par Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -879,38 +932,3 @@ msgstr "Envoyer un ficher depuis l'ordinateur"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panneau de gestion Bluetooth"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "Rendre l'ordinateur _visible"
-
-#~ msgid "Friendly name"
-#~ msgstr "Nom convivial"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "Configurer un _nouveau périphérique..."
-
-#~ msgid "_Remove"
-#~ msgstr "_Enlever"
-
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr ""
-#~ "Impossible d'ouvrir les préférences du partage de fichiers personnels"
-
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
-#~ msgstr ""
-#~ "Contrôlez que le programme de partage des fichiers personnels est "
-#~ "correctement installé."
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "_Afficher l'icône Bluetooth"
-
-#~ msgid "Sharing Settings..."
-#~ msgstr "Paramètres de partage..."
-
-#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
-#~ msgstr "Votre ordinateur n'est pas équipé d'adaptateur Bluetooth."
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr "Bluetooth a été désactivé sur votre ordinateur par un interrupteur."
