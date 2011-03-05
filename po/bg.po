@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-23 07:45+0200\n"
-"PO-Revision-Date: 2011-02-23 07:45+0200\n"
+"POT-Creation-Date: 2011-03-05 22:54+0200\n"
+"PO-Revision-Date: 2011-03-05 22:54+0200\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -303,7 +303,7 @@ msgstr "Въведете кода на устройството %s."
 #: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Потвърдете кодът „%s“ съвпада с този на %s."
+msgstr "Потвърдете дали кодът „%s“ съвпада с този на %s."
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:314
@@ -416,14 +416,6 @@ msgstr "_Съвпада"
 msgid "_Show input"
 msgstr "_Показване на входа"
 
-#: ../properties/adapter.c:646
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth е забранен"
-
-#: ../properties/adapter.c:686
-msgid "No Bluetooth adapters present"
-msgstr "Липсват адаптери за Bluetooth "
-
 #: ../properties/cc-bluetooth-panel.c:239
 msgid "Yes"
 msgstr "Да"
@@ -432,11 +424,23 @@ msgstr "Да"
 msgid "No"
 msgstr "Не"
 
-#: ../properties/cc-bluetooth-panel.c:327
+#: ../properties/cc-bluetooth-panel.c:331
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth е забранен"
+
+#: ../properties/cc-bluetooth-panel.c:336
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Bluetooth е забранен чрез хардуерен ключ"
+
+#: ../properties/cc-bluetooth-panel.c:340
+msgid "No Bluetooth adapters found"
+msgstr "Липсват адаптери за Bluetooth "
+
+#: ../properties/cc-bluetooth-panel.c:406
 msgid "Visibility"
 msgstr "Видимост"
 
-#: ../properties/cc-bluetooth-panel.c:331
+#: ../properties/cc-bluetooth-panel.c:410
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Дали „%s“ се вижда"
@@ -650,6 +654,14 @@ msgstr "_Затваряне"
 msgid "_Restart Setup"
 msgstr "_Започване на добавянето отново"
 
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "Настройки на устройство за Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "Настройки на устройства за Bluetooth"
+
 #: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
@@ -731,22 +743,26 @@ msgid "%d B/s"
 msgstr "%d B/s"
 
 #: ../sendto/main.c:651
-msgid "Select Device to Send To"
+msgid "Select device to send to"
 msgstr "Избор на устройство, към което ще се изпраща"
 
-#: ../sendto/main.c:655
-msgid "Send _To"
+#: ../sendto/main.c:656
+msgid "_Send"
 msgstr "Изпращане _до"
 
-#: ../sendto/main.c:699
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Избор на файлове за изпращане"
 
-#: ../sendto/main.c:728
+#: ../sendto/main.c:703
+msgid "Select"
+msgstr "Избор"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Отдалечено устройство"
 
-#: ../sendto/main.c:730
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Име на отдалечено устройство"
 
@@ -762,6 +778,14 @@ msgstr "Не се поддръжка прехвърляне на файлове 
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Предаване чрез Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Изпращане на файлове чрез Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -891,37 +915,3 @@ msgstr "Изпращане на файлове от вашия компютър"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Аплет за управление на устройства с Bluetooth"
-
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr "Настройките на „Споделяне на файлове“ не могат да се стартират"
-
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
-#~ msgstr ""
-#~ "Проверете дали програмата „Споделяне на файлове“ е инсталирана правилно."
-
-#~ msgid "Sharing Settings..."
-#~ msgstr "Настройки на споделянето…"
-
-#~ msgid "Friendly name"
-#~ msgstr "Приятелско име"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "Компютърът да е _откриваем"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "Добавяне на ново _устройство…"
-
-#~ msgid "_Disconnect"
-#~ msgstr "_Прекъсване на връзката"
-
-#~ msgid "_Remove"
-#~ msgstr "_Премахване"
-
-#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
-#~ msgstr "На вашия компютър липсват адаптери за Bluetooth."
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr ""
-#~ "Bluetooth е изключен чрез съответния клавиш или бутон на вашия компютър."
