@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2011-02-21 17:25+0000\n"
-"PO-Revision-Date: 2011-02-25 14:35+0100\n"
+"POT-Creation-Date: 2011-03-10 01:37+0000\n"
+"PO-Revision-Date: 2011-03-10 17:00+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgid "Video device"
 msgstr "Video naprava"
 
 #: ../lib/bluetooth-client.c:159
-#: ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Neznano"
@@ -92,30 +92,30 @@ msgstr "Neznano"
 msgid "Click to select device..."
 msgstr "Kliknite za izbor naprave ..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "Ni razpoložljivega vmesnika"
 
-#: ../lib/bluetooth-chooser.c:174
-#: ../lib/bluetooth-chooser.c:886
+#: ../lib/bluetooth-chooser.c:175
+#: ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "Iskanje naprav ..."
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Ali naj se naprava '%s' odstrani s seznama?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "V primeru, da napravo odstranite, jo bo treba pred naslednjo uporabo, ponovno nastaviti."
 
-#: ../lib/bluetooth-chooser.c:764
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Naprava"
 
-#: ../lib/bluetooth-chooser.c:800
-#: ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-chooser.c:819
+#: ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Vrsta"
 
@@ -124,7 +124,7 @@ msgid "All categories"
 msgstr "Vse kategorije"
 
 #: ../lib/bluetooth-filter-widget.c:73
-#: ../properties/bluetooth.ui.h:4
+#: ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Povezano"
 
@@ -433,17 +433,38 @@ msgstr "_Zadetki"
 msgid "_Show input"
 msgstr "_Pokaži vnos"
 
-#: ../properties/adapter.c:647
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "Da"
+
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "Ne"
+
+#: ../properties/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled"
 msgstr "Naprava Bluetooth je onemogočena"
 
-#: ../properties/adapter.c:687
-msgid "No Bluetooth adapters present"
+#: ../properties/cc-bluetooth-panel.c:336
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Naprava Bluetooth je onemogočena s strojnim stikalom"
+
+#: ../properties/cc-bluetooth-panel.c:340
+msgid "No Bluetooth adapters found"
 msgstr "Ni navzočih Bluetooth naprav"
 
+#: ../properties/cc-bluetooth-panel.c:406
+msgid "Visibility"
+msgstr "Vidnost"
+
+#: ../properties/cc-bluetooth-panel.c:410
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Vidnost “%s”"
+
 #: ../properties/bluetooth.ui.h:1
-msgid "Active"
-msgstr "Dejavno"
+msgid "Address"
+msgstr "Naslov"
 
 #: ../properties/bluetooth.ui.h:2
 msgid "Connection"
@@ -452,6 +473,18 @@ msgstr "Povezava"
 #: ../properties/bluetooth.ui.h:3
 msgid "Keyboard Settings"
 msgstr "Nastavitve tipkovnice"
+
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Nastavitve miške in sledilne ploščice"
+
+#: ../properties/bluetooth.ui.h:6
+msgid "Power"
+msgstr "Napajanje"
+
+#: ../properties/bluetooth.ui.h:7
+msgid "Sound Settings"
+msgstr "Nastavitve zvoka"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -633,6 +666,14 @@ msgstr "_Zapri"
 msgid "_Restart Setup"
 msgstr "_Ponovni zagon namestitve"
 
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "namestitev naprav Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "Namestitev naprav Bluetooth"
+
 #: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
@@ -721,23 +762,27 @@ msgstr "%d KB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
-msgstr "Izbor naprave za prejemanje"
+#: ../sendto/main.c:651
+msgid "Select device to send to"
+msgstr "Izbor naprave za pošiljanje"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "Pošlji _na"
+#: ../sendto/main.c:656
+msgid "_Send"
+msgstr "_Pošlji"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Izbor datotek za pošiljanje"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+msgid "Select"
+msgstr "Izberi"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Uporabi oddaljeno napravo"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Ime oddaljene naprave"
 
@@ -753,6 +798,14 @@ msgstr "Prenos datotek Obex Push ni podprt"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Prenos Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Pošiljanje datotek preko Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -894,6 +947,9 @@ msgstr "Pošlji datoteko iz računalnika"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Pult Bluetooth upravljalnika"
+
+#~ msgid "Active"
+#~ msgstr "Dejavno"
 
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr "Ni mogoče zagnati možnosti \"osebne souporabe datotek\"."
