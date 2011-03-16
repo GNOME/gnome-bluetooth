@@ -119,7 +119,7 @@ else
 fi
 
 if test "x$enable_nautilus_sendto" = "xyes" -a "x$have_nst" != "xyes"; then
-   AC_MSG_ERROR([Couldn't find nautilus-sendto dependencies.])
+   AC_MSG_ERROR([Could not find nautilus-sendto dependencies.])
 fi
 
 AM_CONDITIONAL(HAVE_NST, test "x$have_nst" = "xyes")
@@ -149,7 +149,7 @@ PKG_CHECK_MODULES(COMMON,
 
 dnl Requires for the geoclue plugin
 PKG_CHECK_MODULES(GEOCLUE,
-		  gconf-2.0
+		  gio-2.0
 		  dbus-glib-1)
 
 dnl Requires for the plugins
