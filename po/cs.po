@@ -2,25 +2,27 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007.
 # Copyright (C) 2009 the author(s) of gnome-bluetooth.
 # This file is distributed under the same license as the gnome-bluetooth package.
+#
 # Kamil Páral <ripper42@gmail.com>, 2008.
-# Marek Černocký <marek@manet.cz>, 2009, 2010.
 # Petr Kovar <pknbe@volny.cz>, 2009.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth gnome-2-28\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 19:57+0200\n"
-"PO-Revision-Date: 2010-05-17 10:21+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-16 19:23+0000\n"
+"PO-Revision-Date: 2011-03-17 11:28+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
+"Language: cs\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Generator: Lokalize 0.3\n"
-"X-Poedit-Language: Czech\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../lib/bluetooth-client.c:127
 msgid "All types"
@@ -233,7 +235,7 @@ msgstr "Odpojeno"
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: ../applet/main.c:858 ../applet/main.c:922 ../moblin/moblin-panel.c:1025
+#: ../applet/main.c:858 ../applet/main.c:922 ../moblin/moblin-panel.c:1036
 msgid "Connect"
 msgstr "Připojit"
 
@@ -283,9 +285,9 @@ msgstr "Applet Bluetooth"
 #. Power switch
 #. Translators: This string appears next to a toggle switch which controls
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
+#. * switches in the Network UI of MeeGo
 #: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:140 ../moblin/moblin-panel.c:1623
+#: ../moblin/main.c:140 ../moblin/moblin-panel.c:1634
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -372,7 +374,7 @@ msgid "Browse files on device..."
 msgstr "Procházet soubory v zařízení…"
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1422 ../moblin/moblin-panel.c:1532
+#: ../moblin/moblin-panel.c:1433 ../moblin/moblin-panel.c:1543
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -511,12 +513,12 @@ msgstr "Všechny další chyby se zobrazí pouze na terminálu."
 msgid "Pairing with '%s' cancelled"
 msgstr "Párování se zařízením „%s“ zrušeno"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1165
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1176
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Potvrďte prosím, zda PIN zobrazený na „%s“ souhlasí s tímto."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1216
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1227
 msgid "Please enter the following PIN:"
 msgstr "Zadejte prosím následující PIN:"
 
@@ -538,14 +540,14 @@ msgstr "Nastavení zařízení „%s“ se nezdařilo"
 msgid "Connecting to '%s'..."
 msgstr "Připojování k zařízení „%s“…"
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:776
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:790
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Vložte prosím na zařízení „%s“ následující PIN a stiskněte klávesu „Enter“:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:778
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:792
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Vložte prosím na zařízení „%s“ následující PIN:"
@@ -559,7 +561,7 @@ msgstr "Vložte prosím na zařízení „%s“ následující PIN:"
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Čekejte prosím, než se dokončí nastavení zařízení „%s“…"
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:803
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:817
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Úspěšně nastaveno nové zařízení „%s“"
@@ -597,7 +599,7 @@ msgid "Device search"
 msgstr "Vyhledání zařízení"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1369
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1380
 msgid "Does not match"
 msgstr "Nesouhlasí"
 
@@ -615,7 +617,7 @@ msgid "Introduction"
 msgstr "Úvod"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1365
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1376
 msgid "Matches"
 msgstr "Souhlasí"
 
@@ -627,7 +629,7 @@ msgstr "Volby kódu PIN"
 msgid "PIN _options..."
 msgstr "V_olby kódu PIN…"
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1279
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1290
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vyberte další služby, které chcete se svým zařízením využívat:"
 
@@ -790,13 +792,15 @@ msgstr "Bluetooth (OBEX Push)"
 msgid "Run in standalone mode"
 msgstr "Spustit jako samostatnou aplikaci"
 
-#: ../moblin/main.c:100 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "Panel Moblin Bluetooth"
+#: ../moblin/main.c:100
+#| msgid "Moblin Bluetooth Panel"
+msgid "MeeGo Bluetooth Panel"
+msgstr "Panel MeeGo Bluetooth"
 
 #: ../moblin/main.c:101
-msgid "- Moblin Bluetooth Panel"
-msgstr "- Panel Moblin Bluetooth"
+#| msgid "- Moblin Bluetooth Panel"
+msgid "- MeeGo Bluetooth Panel"
+msgstr "- Panel MeeGo Bluetooth"
 
 #: ../moblin/main.c:128
 msgid "bluetooth"
@@ -850,75 +854,78 @@ msgstr "%s"
 msgid "0 seconds"
 msgstr "0 sekund"
 
-#: ../moblin/moblin-panel.c:224
+#: ../moblin/moblin-panel.c:223
 #, c-format
-msgid ""
-"Your computer is visible on "
-"Bluetooth for %s."
+msgid "Your computer is visible on Bluetooth for %s."
 msgstr "Váš počítač je viditelný přes Bluetooth na %s."
 
-#: ../moblin/moblin-panel.c:651
+#: ../moblin/moblin-panel.c:664
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "Párování se zařízením „%s“ selhalo."
 
-#: ../moblin/moblin-panel.c:1011
+#: ../moblin/moblin-panel.c:1022
 msgid "<u>Pair</u>"
 msgstr "<u>Spárovat</u>"
 
-#: ../moblin/moblin-panel.c:1044
+#: ../moblin/moblin-panel.c:1055
 msgid "Browse"
 msgstr "Procházet"
 
-#: ../moblin/moblin-panel.c:1238
+#: ../moblin/moblin-panel.c:1249
 msgid "Device setup failed"
 msgstr "Nastavení zařízení selhalo"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1252 ../moblin/moblin-panel.c:1328
-#: ../moblin/moblin-panel.c:1377 ../moblin/moblin-panel.c:1455
-#: ../moblin/moblin-panel.c:1689
+#: ../moblin/moblin-panel.c:1263 ../moblin/moblin-panel.c:1339
+#: ../moblin/moblin-panel.c:1388 ../moblin/moblin-panel.c:1466
+#: ../moblin/moblin-panel.c:1701
 msgid "Back to devices"
 msgstr "Zpět na zařízení"
 
-#: ../moblin/moblin-panel.c:1291
+#: ../moblin/moblin-panel.c:1302
 msgid "Done"
 msgstr "Hotovo"
 
-#: ../moblin/moblin-panel.c:1312 ../moblin/moblin-panel.c:1349
+#: ../moblin/moblin-panel.c:1323 ../moblin/moblin-panel.c:1360
 msgid "Device setup"
 msgstr "Nastavení zařízení"
 
-#: ../moblin/moblin-panel.c:1472 ../moblin/moblin-panel.c:1605
+#: ../moblin/moblin-panel.c:1483 ../moblin/moblin-panel.c:1616
 msgid "Settings"
 msgstr "Nastavení"
 
-#: ../moblin/moblin-panel.c:1488
+#: ../moblin/moblin-panel.c:1499
 msgid "Only show:"
 msgstr "Zobrazit pouze:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1494
+#: ../moblin/moblin-panel.c:1505
 msgid "PIN options"
 msgstr "Volby kódu PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1538
+#: ../moblin/moblin-panel.c:1549
 msgid "Add a new device"
 msgstr "Přidat nové zařízení"
 
-#: ../moblin/moblin-panel.c:1641
+#: ../moblin/moblin-panel.c:1653
 msgid "Make visible on Bluetooth"
 msgstr "Nastavit viditelnost přes Bluetooth"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1647
+#: ../moblin/moblin-panel.c:1659
 msgid "Send file from your computer"
 msgstr "Odeslat soubor z vašeho počítače"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel Správce Bluetooth"
+
+#: ../moblin/bluetooth-panel.desktop.in.in.h:2
+#| msgid "Bluetooth Manager"
+msgid "Bluetooth Panel"
+msgstr "Panel Bluetooth"
 
 #~ msgid "<u>Connect</u>"
 #~ msgstr "<u>Připojit</u>"
