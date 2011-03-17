@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&component=general\n"
-"POT-Creation-Date: 2011-01-28 23:25+0000\n"
-"PO-Revision-Date: 2011-01-30 17:59+0100\n"
+"POT-Creation-Date: 2011-03-09 19:48+0000\n"
+"PO-Revision-Date: 2011-03-17 07:50+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,40 +85,40 @@ msgstr "Tablet"
 msgid "Video device"
 msgstr "Zařízení pro práci s videem"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Klikněte pro výběr zařízení…"
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "Není dostupný žádný adaptér"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "Vyhledávají se zařízení…"
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Odebrat „%s“ ze seznamu zařízení?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Pokud zařízení odeberete, budete ho muset před příštím použitím znovu "
 "nastavit."
 
-#: ../lib/bluetooth-chooser.c:746
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Zařízení"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Typ"
 
@@ -126,7 +126,7 @@ msgstr "Typ"
 msgid "All categories"
 msgstr "Všechny kategorie"
 
-#: ../lib/bluetooth-filter-widget.c:73
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Spárovaná"
 
@@ -183,92 +183,92 @@ msgstr "Použít toto zařízení GPS pro služby určení polohy"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Přistupovat k internetu pomocí vašeho mobilu (test)"
 
-#: ../applet/main.c:130
+#: ../applet/main.c:125
 msgid "Select Device to Browse"
 msgstr "Výběr zařízení k procházení"
 
-#: ../applet/main.c:134
+#: ../applet/main.c:129
 msgid "_Browse"
 msgstr "_Procházet"
 
-#: ../applet/main.c:143
+#: ../applet/main.c:138
 msgid "Select device to browse"
 msgstr "Vyberte zařízení, které chcete procházet"
 
-#: ../applet/main.c:293 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:288
 msgid "Turn On Bluetooth"
 msgstr "Zapnout Bluetooth"
 
-#: ../applet/main.c:294
+#: ../applet/main.c:289
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Vypnuto"
 
-#: ../applet/main.c:297
+#: ../applet/main.c:292
 msgid "Turn Off Bluetooth"
 msgstr "Vypnout: Bluetooth"
 
-#: ../applet/main.c:298
+#: ../applet/main.c:293
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Zapnuto"
 
-#: ../applet/main.c:303 ../applet/notify.c:159
+#: ../applet/main.c:298 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Zakázáno"
 
-#: ../applet/main.c:452
+#: ../applet/main.c:445
 msgid "Disconnecting..."
 msgstr "Odpojování…"
 
-#: ../applet/main.c:455 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Připojování…"
 
-#: ../applet/main.c:458 ../applet/main.c:741
+#: ../applet/main.c:451 ../applet/main.c:734
 msgid "Connected"
 msgstr "Připojeno"
 
-#: ../applet/main.c:461 ../applet/main.c:741
+#: ../applet/main.c:454 ../applet/main.c:734
 msgid "Disconnected"
 msgstr "Odpojeno"
 
-#: ../applet/main.c:759 ../applet/main.c:823
+#: ../applet/main.c:752 ../applet/main.c:816
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: ../applet/main.c:759 ../applet/main.c:823 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
 msgid "Connect"
 msgstr "Připojit"
 
-#: ../applet/main.c:772
+#: ../applet/main.c:765
 msgid "Send files..."
 msgstr "Odeslat soubory…"
 
-#: ../applet/main.c:782
+#: ../applet/main.c:775
 msgid "Browse files..."
 msgstr "Procházet soubory…"
 
-#: ../applet/main.c:793
+#: ../applet/main.c:786
 msgid "Open Keyboard Preferences..."
 msgstr "Otevřít předvolby klávesnice…"
 
-#: ../applet/main.c:801
+#: ../applet/main.c:794
 msgid "Open Mouse Preferences..."
 msgstr "Otevřít předvolby myši…"
 
-#: ../applet/main.c:811
+#: ../applet/main.c:804
 msgid "Open Sound Preferences..."
 msgstr "Otevřít předvolby zvuku…"
 
-#: ../applet/main.c:873
+#: ../applet/main.c:857
 msgid "Debug"
 msgstr "Ladit"
 
 #. Parse command-line options
-#: ../applet/main.c:892
+#: ../applet/main.c:876
 msgid "- Bluetooth applet"
 msgstr "- applet Bluetooth"
 
-#: ../applet/main.c:897
+#: ../applet/main.c:881
 #, c-format
 msgid ""
 "%s\n"
@@ -278,7 +278,7 @@ msgstr ""
 "Spusťte „%s --help“ pro výpis úplného seznamu dostupných přepínačů příkazové "
 "řádky.\n"
 
-#: ../applet/main.c:923
+#: ../applet/main.c:907
 msgid "Bluetooth Applet"
 msgstr "Applet Bluetooth"
 
@@ -372,8 +372,8 @@ msgstr "Bluetooth: Kontroluje se"
 msgid "Browse files on device..."
 msgstr "Procházet soubory v zařízení…"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/properties-adapter.ui.h:1
-#: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
+#: ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -421,62 +421,65 @@ msgstr "_Souhlasí"
 msgid "_Show input"
 msgstr "Zobrazovat v_stup"
 
-#: ../properties/adapter.c:630
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "Ano"
+
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "Ne"
+
+#: ../properties/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth je zakázáno"
 
-#: ../properties/adapter.c:670
-msgid "No Bluetooth adapters present"
-msgstr "Není k dispozici žádný adaptér Bluetooth"
+#: ../properties/cc-bluetooth-panel.c:336
+#| msgid "Bluetooth is disabled"
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Bluetooth je vypnuto hardwarovým vypínačem"
 
-#: ../properties/cc-bluetooth-panel.c:60
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "Nelze spustit předvolby „Sdílení osobních souborů“"
+#: ../properties/cc-bluetooth-panel.c:340
+#| msgid "No Bluetooth adapters present"
+msgid "No Bluetooth adapters found"
+msgstr "Nenalezen žádný adaptér Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:65
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr ""
-"Zkontrolujte prosím, zda je správně nainstalovaný program „Sdílení osobních "
-"souborů“."
+#: ../properties/cc-bluetooth-panel.c:406
+#| msgid "Visible"
+msgid "Visibility"
+msgstr "Viditelnost"
 
-#: ../properties/cc-bluetooth-panel.c:92
-msgid "_Show Bluetooth icon"
-msgstr "_Zobrazit ikonu Bluetooth"
+#: ../properties/cc-bluetooth-panel.c:410
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Viditelnost klienta „%s“"
 
-#: ../properties/cc-bluetooth-panel.c:104
-msgid "Sharing Settings..."
-msgstr "Nastavení sdílení…"
+#: ../properties/bluetooth.ui.h:1
+msgid "Address"
+msgstr "Adresa"
 
-#: ../properties/properties-adapter.ui.h:2
-msgid "Friendly name"
-msgstr "Přívětivý název"
+#: ../properties/bluetooth.ui.h:2
+#| msgid "Connect"
+msgid "Connection"
+msgstr "Připojení"
 
-#: ../properties/properties-adapter.ui.h:3
-msgid "Make computer _visible"
-msgstr "Udělat počítač _viditelným"
+#: ../properties/bluetooth.ui.h:3
+#| msgid "Keyboard"
+msgid "Keyboard Settings"
+msgstr "Nastavení klávesnice"
 
-#: ../properties/properties-adapter.ui.h:4
-msgid "Set up _new device..."
-msgstr "Nastavit _nové zařízení…"
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Nastavení myši a touchpadu"
 
-#: ../properties/properties-adapter.ui.h:5
-#| msgid "Disconnect"
-msgid "_Disconnect"
-msgstr "O_dpojit"
+#: ../properties/bluetooth.ui.h:6
+#| msgid "Phone"
+msgid "Power"
+msgstr "Výkon"
 
-#: ../properties/properties-adapter.ui.h:6
-msgid "_Remove"
-msgstr "Odeb_rat"
-
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "Váš počítač nemá zapojený žádný adaptér Bluetooth."
-
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr "Bluetooth bylo vypnuto přepínačem na vašem počítači"
+#: ../properties/bluetooth.ui.h:7
+#| msgid "Settings"
+msgid "Sound Settings"
+msgstr "Nastavení zvuku"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -661,6 +664,16 @@ msgstr "_Zavřít"
 msgid "_Restart Setup"
 msgstr "_Nastavit znovu"
 
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+#| msgid "Bluetooth New Device Setup"
+msgid "Bluetooth Device Setup"
+msgstr "Nastavení zařízení Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+#| msgid "Bluetooth device"
+msgid "Setup Bluetooth devices"
+msgstr "Nastavit zařízení Bluetooth"
+
 #: ../sendto/main.c:162
 #, c-format
 msgid "%'d second"
@@ -745,23 +758,30 @@ msgstr "%d kB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
-msgstr "Vyberte zařízení, do kterého chcete soubory odeslat"
+#: ../sendto/main.c:651
+#| msgid "Select Device to Send To"
+msgid "Select device to send to"
+msgstr "Výběr zařízení pro odeslání"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "Odesla_t do"
+#: ../sendto/main.c:656
+#| msgid "Send _To"
+msgid "_Send"
+msgstr "Ode_slat"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Výběr souborů k odeslání"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+#| msgid "_Reject"
+msgid "Select"
+msgstr "Vybrat"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Použít zadané vzdálené zařízení"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Název vzdáleného zařízení"
 
@@ -777,6 +797,16 @@ msgstr "Přenos souborů Obex Push není podporován"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+#| msgid "Bluetooth Manager"
+msgid "Bluetooth Transfer"
+msgstr "Přenos přes Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+#| msgid "Sending files via Bluetooth"
+msgid "Send files via Bluetooth"
+msgstr "Posílat soubory přes Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -907,6 +937,44 @@ msgstr "Odeslat soubor z vašeho počítače"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel Správce Bluetooth"
+
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr "Nelze spustit předvolby „Sdílení osobních souborů“"
+
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr ""
+#~ "Zkontrolujte prosím, zda je správně nainstalovaný program „Sdílení "
+#~ "osobních souborů“."
+
+#~ msgid "_Show Bluetooth icon"
+#~ msgstr "_Zobrazit ikonu Bluetooth"
+
+#~ msgid "Sharing Settings..."
+#~ msgstr "Nastavení sdílení…"
+
+#~ msgid "Friendly name"
+#~ msgstr "Přívětivý název"
+
+#~ msgid "Make computer _visible"
+#~ msgstr "Udělat počítač _viditelným"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "Nastavit _nové zařízení…"
+
+#~| msgid "Disconnect"
+#~ msgid "_Disconnect"
+#~ msgstr "O_dpojit"
+
+#~ msgid "_Remove"
+#~ msgstr "Odeb_rat"
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "Váš počítač nemá zapojený žádný adaptér Bluetooth."
+
+#~ msgid "Bluetooth has been disabled by a switch on your computer."
+#~ msgstr "Bluetooth bylo vypnuto přepínačem na vašem počítači"
 
 #~ msgid "Receive Files"
 #~ msgstr "Přijmout soubory"
