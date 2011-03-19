@@ -1,21 +1,22 @@
 # Indonesian translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the gnome-bluetooth package.
+#
 # Andika Triwidada <andika@gmail.com>, 2007, 2011.
-# Dirgita <dirgitadevina@gmail.com>, 2010.
 # Dirgita <dirgitadevina@yahoo.co.id>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"bluetooth&component=general\n"
-"POT-Creation-Date: 2011-02-07 00:12+0000\n"
-"PO-Revision-Date: 2011-02-01 22:33+0700\n"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-14 17:48+0000\n"
+"PO-Revision-Date: 2011-03-05 22:14+0700\n"
 "Last-Translator: Dirgita <dirgitadevina@yahoo.co.id>\n"
-"Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
+"Language-Team: GNOME Indonesian Translation Team <gnome@i15n.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Language: Indonesian\n"
 "X-Poedit-Country: Indonesia\n"
@@ -86,7 +87,7 @@ msgstr "Tablet"
 msgid "Video device"
 msgstr "Perangkat video"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Tak dikenal"
@@ -95,31 +96,31 @@ msgstr "Tak dikenal"
 msgid "Click to select device..."
 msgstr "Klik untuk memilih perangkat..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "Tidak tersedia adaptor"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:883
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "Mencari perangkat..."
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Hapus '%s' dari daftar perangkat?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Bila Anda menghapus suatu perangkat, maka Anda harus menyiapkannya lagi "
 "sebelum dipakai."
 
-#: ../lib/bluetooth-chooser.c:764
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Perangkat"
 
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Jenis"
 
@@ -127,7 +128,7 @@ msgstr "Jenis"
 msgid "All categories"
 msgstr "Semua katagori"
 
-#: ../lib/bluetooth-filter-widget.c:73
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Dipasangkan"
 
@@ -196,7 +197,7 @@ msgstr "_Telusur"
 msgid "Select device to browse"
 msgstr "Memilih perangkat untuk ditelusur"
 
-#: ../applet/main.c:288 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:288
 msgid "Turn On Bluetooth"
 msgstr "Nyalakan Bluetooth"
 
@@ -372,8 +373,8 @@ msgstr "Bluetooth: Memeriksa"
 msgid "Browse files on device..."
 msgstr "Telusur berkas pada perangkat..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/properties-adapter.ui.h:1
-#: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
+#: ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -421,56 +422,58 @@ msgstr "_Cocok"
 msgid "_Show input"
 msgstr "Tampilkan ma_sukan"
 
-#: ../properties/adapter.c:631
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "Ya"
+
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "Tidak"
+
+#: ../properties/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth dinonaktifkan"
 
-#: ../properties/adapter.c:671
-msgid "No Bluetooth adapters present"
+#: ../properties/cc-bluetooth-panel.c:336
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Bluetooth dinonaktifkan oleh saklar perangkat keras"
+
+#: ../properties/cc-bluetooth-panel.c:340
+msgid "No Bluetooth adapters found"
 msgstr "Adaptor Bluetooth tidak ditemukan"
 
-#: ../properties/cc-bluetooth-panel.c:57
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "Tidak dapat menjalankan Preferensi \"Berbagi Berkas Pribadi\""
+#: ../properties/cc-bluetooth-panel.c:406
+msgid "Visibility"
+msgstr "Kenampakan"
 
-#: ../properties/cc-bluetooth-panel.c:62
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr ""
-"Pastikan bahwa program \"Berbagi Berkas Pribadi\" terpasang dengan benar."
+#: ../properties/cc-bluetooth-panel.c:410
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Kenampakan “%s”"
 
-#: ../properties/cc-bluetooth-panel.c:95
-msgid "Sharing Settings..."
-msgstr "Pengaturan Berbagi..."
+#: ../properties/bluetooth.ui.h:1
+msgid "Address"
+msgstr "Alamat"
 
-#: ../properties/properties-adapter.ui.h:2
-msgid "Friendly name"
-msgstr "Nama akrab"
+#: ../properties/bluetooth.ui.h:2
+msgid "Connection"
+msgstr "Koneksi"
 
-#: ../properties/properties-adapter.ui.h:3
-msgid "Make computer _visible"
-msgstr "Komputer dapat _terlihat"
+#: ../properties/bluetooth.ui.h:3
+msgid "Keyboard Settings"
+msgstr "Pengaturan Papan Ketik"
 
-#: ../properties/properties-adapter.ui.h:4
-msgid "Set up _new device..."
-msgstr "Setel pera_ngkat baru..."
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Pengaturan Tetikus dan Touchpad"
 
-#: ../properties/properties-adapter.ui.h:5
-msgid "_Disconnect"
-msgstr "_Putus"
+#: ../properties/bluetooth.ui.h:6
+msgid "Power"
+msgstr "Daya"
 
-#: ../properties/properties-adapter.ui.h:6
-msgid "_Remove"
-msgstr "_Hapus"
-
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "Komputer Anda tidak memiliki adaptor Bluetooth yang tersambung."
-
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr "Bluetooth dinonaktifkan pada komputer Anda."
+#: ../properties/bluetooth.ui.h:7
+msgid "Sound Settings"
+msgstr "Pengaturan Suara"
 
 # Komentar untuk berkas .desktop-nya.
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
@@ -538,15 +541,15 @@ msgstr "Mohon tunggu, sedang melengkapi setelan pada '%s'..."
 msgid "Successfully set up new device '%s'"
 msgstr "Berhasil menyetel perangkat baru '%s'"
 
-#: ../wizard/wizard.ui.h:1
+#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (kebanyakan headset, tetikus, dan perangkat GPS)"
 
-#: ../wizard/wizard.ui.h:2
+#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
 msgid "'1111'"
 msgstr "'1111'"
 
-#: ../wizard/wizard.ui.h:3
+#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
 msgid "'1234'"
 msgstr "'1234'"
 
@@ -554,7 +557,7 @@ msgstr "'1234'"
 msgid "Bluetooth New Device Setup"
 msgstr "Penyetelan Perangkat Baru Bluetooth"
 
-#: ../wizard/wizard.ui.h:5
+#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
 msgid "Custom PIN:"
 msgstr "PIN ubahan:"
 
@@ -584,7 +587,7 @@ msgid "Finishing New Device Setup"
 msgstr "Menyelesaikan Menyetel Perangkat Baru"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
 msgid "Fixed PIN"
 msgstr "PIN Tetap"
 
@@ -597,7 +600,7 @@ msgstr "Pendahuluan"
 msgid "Matches"
 msgstr "Cocok"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
 msgid "PIN Options"
 msgstr "Opsi PIN"
 
@@ -640,7 +643,7 @@ msgstr ""
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "Selamat datang di wahana penyetelan perangkat Bluetooth"
 
-#: ../wizard/wizard.ui.h:26
+#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
 msgid "_Automatic PIN selection"
 msgstr "Seleksi PIN otom_atis"
 
@@ -655,6 +658,14 @@ msgstr "_Tutup"
 #: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
 msgstr "_Jalankan Kembali Wahana"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "Penyetelan Perangkat Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "Menyetel perangkat Bluetooth"
 
 #: ../sendto/main.c:162
 #, c-format
@@ -733,23 +744,27 @@ msgstr "%d KB/det"
 msgid "%d B/s"
 msgstr "%d B/det"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
-msgstr "Pilih Perangkat untuk Dikirimi"
+#: ../sendto/main.c:651
+msgid "Select device to send to"
+msgstr "Pilih perangkat yang hendak dikirimi"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "Kirim _Ke"
+#: ../sendto/main.c:656
+msgid "_Send"
+msgstr "_Kirim"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Pilih berkas untuk dikirim"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+msgid "Select"
+msgstr "Pilih"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Perangkat jarak jauh yang hendak dipakai"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Nama perangkat jarak jauh"
 
@@ -765,6 +780,14 @@ msgstr "Transfer berkas melalui Obex Push tidak didukung"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Transfer Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Mengirim berkas melalui Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
