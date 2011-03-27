@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2010-12-17 17:48+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-22 06:45+0000\n"
 "PO-Revision-Date: 2010-09-20 15:52+0600\n"
 "Last-Translator: OmarjanTk <omarjan14@qq.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -73,44 +73,44 @@ msgstr "قول"
 
 #: ../lib/bluetooth-client.c:155
 msgid "Tablet"
-msgstr "سەزمە تاختا"
+msgstr "سەزگۈر تاختا"
 
 #: ../lib/bluetooth-client.c:157
 msgid "Video device"
 msgstr "ئاۋاز ئۈسكۈنىسى"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "نامەلۇم"
 
-#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "چېكىلسە ئۈسكۈنە تاللىنىدۇ"
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "ئىشلەتكىلى بولمايدىغان ماسلاشتۇرغۇچ"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "ئۈسكۈنە ئىزدەۋاتىدۇ..."
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "'%s' نى ئۈسكۈنە قاتارىدىن ئۆچۈرسۇنمۇ؟"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "ئەگەر سىز بۇ ئۈسكىنىنى ئۆچۈرۈۋەتسىڭىز،كىيىن ئىشلەتكەندە قايتا تەڭشەش زۆرۈر بولىدۇ."
 
-#: ../lib/bluetooth-chooser.c:746
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "ئۈسكۈنە"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "تىپى"
 
@@ -118,7 +118,7 @@ msgstr "تىپى"
 msgid "All categories"
 msgstr "بارلىق كاتېگورىيىلەر"
 
-#: ../lib/bluetooth-filter-widget.c:73
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "جۈپلەنگەن"
 
@@ -134,37 +134,38 @@ msgstr "جۈپلەنمىگەن ياكى ئىشەنچسىز"
 msgid "Paired or trusted"
 msgstr "جۈپلەنگەن ياكى ئىشەنچلىك"
 
-#: ../lib/bluetooth-filter-widget.c:227
-msgid "<b>Show Only Bluetooth Devices With...</b>"
-msgstr "<b>پەقەت كۆكچىش ئىقتىدارى بولغان ئۈسكۈنىنىلا كۆرسەت...</b>"
+#: ../lib/bluetooth-filter-widget.c:231
+#| msgid "<b>Show Only Bluetooth Devices With...</b>"
+msgid "Show Only Bluetooth Devices With..."
+msgstr "پەقەت كۆكچىش ئىقتىدارى بولغان ئۈسكۈنىنىلا كۆرسەت..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:243
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "ئۈسكۈنە كاتېگورىيىسى(_C):"
 
-#: ../lib/bluetooth-filter-widget.c:258
+#: ../lib/bluetooth-filter-widget.c:262
 msgid "Select the device category to filter"
 msgstr "سۈزىدىغان ئۈسكىنە كاتېگورىيىسىنى تاللايدۇ"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:272
+#: ../lib/bluetooth-filter-widget.c:276
 msgid "Device _type:"
 msgstr "ئۈسكۈنە تىپى(_T):"
 
-#: ../lib/bluetooth-filter-widget.c:293
+#: ../lib/bluetooth-filter-widget.c:297
 msgid "Select the device type to filter"
 msgstr "سۈزىدىغان ئۈسكىنە تىپىنى تاللايدۇ"
 
-#: ../lib/bluetooth-filter-widget.c:299
+#: ../lib/bluetooth-filter-widget.c:303
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "كىرگۈزۈش ئۈسكۈنىسى (مىكروفون،ھەرپ تاختا قاتارلىقلار)"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:307
 msgid "Headphones, headsets and other audio devices"
 msgstr "تىڭشىغۇچ، تىڭشىغۇچ-مىكروفون ۋە باشقا ئاۋاز ئۈسكۈنىسى"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "Geolocation مۇلازىمىتى ئۈچۈن بۇ GPS نى ئىشلەت"
 
@@ -175,92 +176,92 @@ msgstr "Geolocation مۇلازىمىتى ئۈچۈن بۇ GPS نى ئىشلەت"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "كۆچمە تېلېفونىڭىزنى ئىشلىتىپ تور زىيارەت قىلىڭ (سىناق)"
 
-#: ../applet/main.c:130
+#: ../applet/main.c:125
 msgid "Select Device to Browse"
 msgstr "كۆرىدىغان ئۈسكىنىنى تاللاڭ"
 
-#: ../applet/main.c:134
+#: ../applet/main.c:129
 msgid "_Browse"
 msgstr "كۆز يۈگۈرت(_B)"
 
-#: ../applet/main.c:143
+#: ../applet/main.c:138
 msgid "Select device to browse"
 msgstr "كۆرىدىغان ئۈسكىنىنى تاللايدۇ"
 
-#: ../applet/main.c:293 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:288
 msgid "Turn On Bluetooth"
 msgstr "كۆكچىشنى ئاچ"
 
-#: ../applet/main.c:294
+#: ../applet/main.c:289
 msgid "Bluetooth: Off"
 msgstr "كۆكچىش:تاقاق"
 
-#: ../applet/main.c:297
+#: ../applet/main.c:292
 msgid "Turn Off Bluetooth"
 msgstr "كۆكچىشنى تاقا"
 
-#: ../applet/main.c:298
+#: ../applet/main.c:293
 msgid "Bluetooth: On"
 msgstr "كۆكچىش:ئوچۇق"
 
-#: ../applet/main.c:303 ../applet/notify.c:159
+#: ../applet/main.c:298 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "كۆكچىش: ئىناۋەتسىز"
 
-#: ../applet/main.c:452
+#: ../applet/main.c:445
 msgid "Disconnecting..."
 msgstr "ئۈزۈۋاتىدۇ…"
 
-#: ../applet/main.c:455 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
-msgstr "باغلىنىۋاتىدۇ..."
+msgstr "ئۇلىنىۋاتىدۇ"
 
-#: ../applet/main.c:458 ../applet/main.c:741
+#: ../applet/main.c:451 ../applet/main.c:734
 msgid "Connected"
-msgstr "باغلاندى"
+msgstr "ئۇلاندى"
 
-#: ../applet/main.c:461 ../applet/main.c:741
+#: ../applet/main.c:454 ../applet/main.c:734
 msgid "Disconnected"
 msgstr "ئۈزۈلدى"
 
-#: ../applet/main.c:759 ../applet/main.c:823 ../properties/adapter.c:380
+#: ../applet/main.c:752 ../applet/main.c:816
 msgid "Disconnect"
 msgstr "ئۈز"
 
-#: ../applet/main.c:759 ../applet/main.c:823
+#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
 msgid "Connect"
-msgstr "باغلا"
+msgstr "باغلان"
 
-#: ../applet/main.c:772
+#: ../applet/main.c:765
 msgid "Send files..."
 msgstr "ھۆججەت يوللاۋاتىدۇ..."
 
-#: ../applet/main.c:782
+#: ../applet/main.c:775
 msgid "Browse files..."
 msgstr "ھۆججەتكە كۆز يۈگۈرت..."
 
-#: ../applet/main.c:793
+#: ../applet/main.c:786
 msgid "Open Keyboard Preferences..."
 msgstr "ھەرپتاختا مايىللىقىنى ئاچ..."
 
-#: ../applet/main.c:801
+#: ../applet/main.c:794
 msgid "Open Mouse Preferences..."
 msgstr "چاشقىنەك مايىللىقىنى ئاچ..."
 
-#: ../applet/main.c:811
+#: ../applet/main.c:804
 msgid "Open Sound Preferences..."
 msgstr "ئاۋاز مايىللىقىنى ئاچ..."
 
-#: ../applet/main.c:873
+#: ../applet/main.c:857
 msgid "Debug"
 msgstr "سازلا"
 
 #. Parse command-line options
-#: ../applet/main.c:892
+#: ../applet/main.c:876
 msgid "- Bluetooth applet"
 msgstr "- كۆكچىش قوللانچىقى"
 
-#: ../applet/main.c:897
+#: ../applet/main.c:881
 #, c-format
 msgid ""
 "%s\n"
@@ -268,7 +269,7 @@ msgid ""
 msgstr "%s\n"
 "'%s --help' ئىجرا قىلىپ بۇيرۇق قۇرىنىڭ تولۇق تاللانما تىزىملىكىنى كۆرۈڭ\n"
 
-#: ../applet/main.c:923
+#: ../applet/main.c:907
 msgid "Bluetooth Applet"
 msgstr "كۆكچىش قوللانچىقى"
 
@@ -277,7 +278,7 @@ msgstr "كۆكچىش قوللانچىقى"
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
 #. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:141 ../moblin/moblin-panel.c:1595
+#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1602
 msgid "Bluetooth"
 msgstr "كۆكچىش"
 
@@ -362,8 +363,8 @@ msgstr "كۆكچىش: تەكشۈرۈۋاتىدۇ"
 msgid "Browse files on device..."
 msgstr "ئۈسكىنىدىكى ھۆججەتنى كۆرۈش..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:339
-#: ../moblin/moblin-panel.c:1396 ../moblin/moblin-panel.c:1506
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
+#: ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "ئۈسكۈنىلەر"
 
@@ -411,56 +412,65 @@ msgstr "جۈپلە(_M)"
 msgid "_Show input"
 msgstr "كىرگۈزگەننى كۆرسەت(_S)"
 
-#. The discoverable checkbox
-#: ../properties/adapter.c:286
-msgid "Make computer _visible"
-msgstr "كومپيۇتېرنى كۆرۈنىدىغان قىل(_V)"
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "Yes"
+msgstr "ھەئە"
 
-#: ../properties/adapter.c:309
-msgid "Friendly name"
-msgstr "دوستانە ئات"
+#: ../properties/cc-bluetooth-panel.c:239
+msgid "No"
+msgstr "ياق"
 
-#: ../properties/adapter.c:371
-msgid "Set up _new device..."
-msgstr "يېڭى ئۈسكىنىنى تەڭشەش(_N)..."
-
-#: ../properties/adapter.c:394
-msgid "_Remove"
-msgstr "ئۆچۈر(_R)"
-
-#: ../properties/adapter.c:671
+#: ../properties/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled"
 msgstr "كۆكچىش ئىناۋەتسىز قىلىندى"
 
-#: ../properties/adapter.c:711
-msgid "No Bluetooth adapters present"
+#: ../properties/cc-bluetooth-panel.c:336
+#| msgid "Bluetooth is disabled"
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "كۆكچىش قاتتىق ئۈزچات تەرىپىدىن چەكلەنگەن"
+
+#: ../properties/cc-bluetooth-panel.c:340
+#| msgid "No Bluetooth adapters present"
+msgid "No Bluetooth adapters found"
 msgstr "كۆكچىش ماسلاشتۇرغۇچىسى تېپىلمىدى"
 
-#: ../properties/cc-bluetooth-panel.c:60
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "\"شەخسى ھۆججەت ھەمبەھرى\" تاللىقىنى قوزغاتقىلى بولمىدى"
+#: ../properties/cc-bluetooth-panel.c:406
+#| msgid "Visible"
+msgid "Visibility"
+msgstr "كۆرۈشچانلىقى"
 
-#: ../properties/cc-bluetooth-panel.c:65
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr "\"شەخسى ھۆججەت ھەمبەھرى\" پروگراممىسىنىڭ توغرا قاچىلانغانلىقىنى تەكشۈرۈپ بېقىڭ."
+#: ../properties/cc-bluetooth-panel.c:410
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "«%s» نىڭ كۆرۈنۈشچانلىقى"
 
-#: ../properties/cc-bluetooth-panel.c:104
-msgid "_Show Bluetooth icon"
-msgstr "كۆكچىش سىنبەلگىسىنى كۆرسەت(_S)"
+#: ../properties/bluetooth.ui.h:1
+msgid "Address"
+msgstr "ئادرېس"
 
-#: ../properties/cc-bluetooth-panel.c:123
-msgid "Receive Files"
-msgstr "ھۆججەت قوبۇللاش"
+#: ../properties/bluetooth.ui.h:2
+#| msgid "Connect"
+msgid "Connection"
+msgstr "باغلىنىش"
 
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "كومپيۇتېرىڭىزغا ھېچقانداق كۆكچىش ماسلاشتۇرغۇچى ئۇلانماپتۇ."
+#: ../properties/bluetooth.ui.h:3
+#| msgid "Keyboard"
+msgid "Keyboard Settings"
+msgstr "ھەرپتاختا تەڭشىكى"
 
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr "كۆكچىش -  سىستېما باشقۇرغۇچىسى تەرەپتىن چەكلەنگەن."
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "چاشقىنەك ۋە سېزىمچان تاختا تەڭشىكى"
+
+#: ../properties/bluetooth.ui.h:6
+#| msgid "Phone"
+msgid "Power"
+msgstr "توڭ مەنبەسى"
+
+#: ../properties/bluetooth.ui.h:7
+#| msgid "Settings"
+msgid "Sound Settings"
+msgstr "ئاۋاز تەڭشىكى"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -475,12 +485,12 @@ msgstr "كۆكچىش تەڭشىكىنى تەڭشەش"
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' بىلەن جۈپلىنىش بىكار قىلىندى"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1139
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1146
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "'%s' دا كۆرسىتىلگەن PIN مۇشۇنىڭغا ماس كېلەمدۇ جەزملەڭ."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1190
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
 msgid "Please enter the following PIN:"
 msgstr "تۆۋەندىكى PIN نومۇرىنى كىرگۈزۈڭ:"
 
@@ -527,15 +537,15 @@ msgstr "'%s' نى تەڭشەش ھازىرلا تۈگەيدۇ،سەل ساقلا�
 msgid "Successfully set up new device '%s'"
 msgstr "يېڭى ئۈسكۈنە '%s' مۇۋەپپەقىيەتلىك تەڭشەلدى"
 
-#: ../wizard/wizard.ui.h:1
+#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (كۆپ ساندىكى تىڭشىغۇچ، چاشقىنەك ۋە GPS ئۈسكۈنىسى)"
 
-#: ../wizard/wizard.ui.h:2
+#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
 msgid "'1111'"
 msgstr "'1111'"
 
-#: ../wizard/wizard.ui.h:3
+#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
 msgid "'1234'"
 msgstr "'1234'"
 
@@ -543,7 +553,7 @@ msgstr "'1234'"
 msgid "Bluetooth New Device Setup"
 msgstr "كۆكچىش يېڭى ئۈسكۈنىسىنى تەڭشەش"
 
-#: ../wizard/wizard.ui.h:5
+#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
 msgid "Custom PIN:"
 msgstr "ئۆزى بەلگىلىگەن PIN نومۇرى:"
 
@@ -564,16 +574,16 @@ msgid "Do not pair"
 msgstr "جۈپلىمە"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1343
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1350
 msgid "Does not match"
-msgstr "جۈپلىمە"
+msgstr "ماسلاشمىدى"
 
 #: ../wizard/wizard.ui.h:12
 msgid "Finishing New Device Setup"
 msgstr "كۆكچىش ئۈسكۈنىسىنى تەڭشەش ھازىرلا تۈگەيدۇ"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
 msgid "Fixed PIN"
 msgstr "مۇقىم PIN"
 
@@ -582,11 +592,11 @@ msgid "Introduction"
 msgstr "تونۇشتۇرۇش"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1339
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1346
 msgid "Matches"
-msgstr "جۈپلەش تۈرى"
+msgstr "تېپىلغانلىرى"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
 msgid "PIN Options"
 msgstr "PIN تاللانمىلىرى"
 
@@ -594,13 +604,14 @@ msgstr "PIN تاللانمىلىرى"
 msgid "PIN _options..."
 msgstr "PIN تاللانمىلىرى(_O)..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1253
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1260
 msgid "Select the additional services you want to use with your device:"
 msgstr "ئۈسكىنىڭىز ئۈچۈن ئىشلىتىدىغان قوشۇمچە مۇلازىمەتنى تاللاڭ:"
 
 #: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to setup"
-msgstr "تەڭشىمەكچى بولغان ئۈسكىنىنى تاللاڭ"
+#| msgid "Select the device you want to setup"
+msgid "Select the device you want to set up"
+msgstr "تەڭشەيدىغان ئۈسكۈنىنى تاللاڭ"
 
 #: ../wizard/wizard.ui.h:22
 msgid "Setup Completed"
@@ -623,7 +634,7 @@ msgstr "بۇ ئۈسكۈنە چوقۇم كومپيۇتېرىڭىزدىكى 10 م�
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "يېڭى كۆكچىش ئۈسكۈنىسىنى تەڭشەشكە كەلگىنىڭىزگە مەرھابا"
 
-#: ../wizard/wizard.ui.h:26
+#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
 msgid "_Automatic PIN selection"
 msgstr "PIN نومۇرىنى ئاپتوماتىك تاللا(_A)"
 
@@ -638,6 +649,16 @@ msgstr "ياپ(_C)"
 #: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
 msgstr "قاچىلاش پروگراممىسىنى قايتا قوزغات(_R)"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+#| msgid "Bluetooth New Device Setup"
+msgid "Bluetooth Device Setup"
+msgstr "كۆكچىش ئۈسكۈنىسىنى تەڭشەش"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+#| msgid "Bluetooth device"
+msgid "Setup Bluetooth devices"
+msgstr "كۆكچىش ئۈسكۈنلىرىنى تەڭشە"
 
 #: ../sendto/main.c:162
 #, c-format
@@ -678,7 +699,7 @@ msgstr "كۆكچىش بىلەن ھۆججەت يوللاش"
 
 #: ../sendto/main.c:285
 msgid "From:"
-msgstr "ئەۋەتكۈچى:"
+msgstr "يوللىغۇچى:"
 
 #: ../sendto/main.c:298
 msgid "To:"
@@ -689,10 +710,13 @@ msgid "An unknown error occurred"
 msgstr "نامەلۇم خاتالىق يۈز بەردى"
 
 #: ../sendto/main.c:352
+#| msgid ""
+#| "Make sure that remote device is switched on and that it accepts Bluetooth "
+#| "connections"
 msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
-msgstr "يىراقتىكى ئۈسكۈنىنىڭ كۆكچىش ئىقتىدارىنى ئېچىڭ ھەمدە قوبۇللاڭ"
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr "يىراقتىكى ئۈسكۈنىنىڭ كۆكچىش ئىقتىدارىنى ئېچىڭ ھەمدە كۆكچىش باشلىنىشىنى قوبۇل قىلىدىغانلىقىنى جەزملەڭ"
 
 #: ../sendto/main.c:450
 #, c-format
@@ -714,38 +738,57 @@ msgstr "%d KB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
+#: ../sendto/main.c:651
+#| msgid "Select Device to Send To"
+msgid "Select device to send to"
 msgstr "يوللايدىغان ئۈسكىنىنى تاللاڭ"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "يوللا(_T)"
+#: ../sendto/main.c:656
+#| msgid "Send _To"
+msgid "_Send"
+msgstr "يوللا(_S)"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "يوللايدىغان ھۆججەتنى تاللاڭ"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+#| msgid "_Reject"
+msgid "Select"
+msgstr "تاللا"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "يىراقتىكى ئۈسكىنىنى ئىشلەت"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "يىراقتىكى ئۈسكۈنە ئىسمى"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error, could not find the device in the list"
-msgstr "پروگرامما خاتالىقى، تىزىملىكتىكى ئۈسكىنىنى تاپالمايدۇ"
+#| msgid "Programming error, could not find the device in the list"
+msgid "Programming error: could not find the device in the list"
+msgstr "پروگرامما خاتالىقى: تىزىمدىكى ئۈسكىنىنى تاپالمىدى"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-msgid "Obex Push file transfer unsupported"
+#| msgid "Obex Push file transfer unsupported"
+msgid "OBEX Push file transfer unsupported"
 msgstr "Obex ھۆججەت ئۇزىتىشنى قوللىمايدۇ"
 
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "كۆكچىش (OBEX Push)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+#| msgid "Bluetooth Manager"
+msgid "Bluetooth Transfer"
+msgstr "كۆكچىش ئۇزىتىشى"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+#| msgid "Sending files via Bluetooth"
+msgid "Send files via Bluetooth"
+msgstr "كۆكچىش بىلەن ھۆججەت يوللاش"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -758,10 +801,6 @@ msgstr "Moblin كۆكچىش تاختىسى"
 #: ../moblin/main.c:102
 msgid "- Moblin Bluetooth Panel"
 msgstr "Moblin كۆكچىش تاختىسى -"
-
-#: ../moblin/main.c:129
-msgid "bluetooth"
-msgstr "كۆكچىش"
 
 #: ../moblin/moblin-panel.c:177
 #, c-format
@@ -819,66 +858,110 @@ msgid "Pairing with %s failed."
 msgstr "%s بىلەن جۈپلەش مەغلۇپ بولدى."
 
 #: ../moblin/moblin-panel.c:985
-msgid "<u>Pair</u>"
-msgstr "<u>جۈپلەش</u>"
+#| msgid "Paired"
+msgid "Pair"
+msgstr "جۈپ"
 
-#: ../moblin/moblin-panel.c:999
-msgid "<u>Connect</u>"
-msgstr "<u>باغلاش</u>"
+#: ../moblin/moblin-panel.c:1022
+#| msgid "_Browse"
+msgid "Browse"
+msgstr "كۆز يۈگۈرت"
 
-#: ../moblin/moblin-panel.c:1018
-msgid "<u>Browse</u>"
-msgstr "<u>كۆز يۈگۈرتۈش</u>"
-
-#: ../moblin/moblin-panel.c:1212
+#: ../moblin/moblin-panel.c:1219
 msgid "Device setup failed"
 msgstr "ئۈسكۈنە تەڭشەش مەغلۇپ بولدى"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1226 ../moblin/moblin-panel.c:1302
-#: ../moblin/moblin-panel.c:1351 ../moblin/moblin-panel.c:1429
-#: ../moblin/moblin-panel.c:1661
+#: ../moblin/moblin-panel.c:1233 ../moblin/moblin-panel.c:1309
+#: ../moblin/moblin-panel.c:1358 ../moblin/moblin-panel.c:1436
+#: ../moblin/moblin-panel.c:1668
 msgid "Back to devices"
 msgstr "ئۈسكىنىگە قايتىش"
 
-#: ../moblin/moblin-panel.c:1265
+#: ../moblin/moblin-panel.c:1272
 msgid "Done"
 msgstr "تامام"
 
-#: ../moblin/moblin-panel.c:1286 ../moblin/moblin-panel.c:1323
+#: ../moblin/moblin-panel.c:1293 ../moblin/moblin-panel.c:1330
 msgid "Device setup"
 msgstr "ئۈسكۈنە تەڭشەش"
 
-#: ../moblin/moblin-panel.c:1446 ../moblin/moblin-panel.c:1577
+#: ../moblin/moblin-panel.c:1453 ../moblin/moblin-panel.c:1584
 msgid "Settings"
 msgstr "تەڭشەكلەر"
 
-#: ../moblin/moblin-panel.c:1462
+#: ../moblin/moblin-panel.c:1469
 msgid "Only show:"
 msgstr "پەقەتلا كۆرۈنىدۇ:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1468
+#: ../moblin/moblin-panel.c:1475
 msgid "PIN options"
 msgstr "PIN تاللانمىسى"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1512
+#: ../moblin/moblin-panel.c:1519
 msgid "Add a new device"
 msgstr "يېڭى ئۈسكۈنە قوشۇش"
 
-#: ../moblin/moblin-panel.c:1613
+#: ../moblin/moblin-panel.c:1620
 msgid "Make visible on Bluetooth"
 msgstr "كۆكچىشتا كۆرۈنسۇن"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1619
+#: ../moblin/moblin-panel.c:1626
 msgid "Send file from your computer"
 msgstr "كومپيۇتېرىڭىزدىن ھۆججەت يوللايدۇ"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "كۆكچىش باشقۇرۇش تاختىسى"
+
+#~ msgid "Make computer _visible"
+#~ msgstr "كومپيۇتېرنى كۆرۈنىدىغان قىل(_V)"
+
+#~ msgid "Friendly name"
+#~ msgstr "دوستانە ئات"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "يېڭى ئۈسكىنىنى تەڭشەش(_N)..."
+
+#~ msgid "_Remove"
+#~ msgstr "ئۆچۈر(_R)"
+
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr "\"شەخسى ھۆججەت ھەمبەھرى\" تاللىقىنى قوزغاتقىلى بولمىدى"
+
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr ""
+#~ "\"شەخسى ھۆججەت ھەمبەھرى\" پروگراممىسىنىڭ توغرا قاچىلانغانلىقىنى تەكشۈرۈپ "
+#~ "بېقىڭ."
+
+#~ msgid "_Show Bluetooth icon"
+#~ msgstr "كۆكچىش سىنبەلگىسىنى كۆرسەت(_S)"
+
+#~ msgid "Receive Files"
+#~ msgstr "ھۆججەت قوبۇللاش"
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "كومپيۇتېرىڭىزغا ھېچقانداق كۆكچىش ماسلاشتۇرغۇچى ئۇلانماپتۇ."
+
+#~ msgid "Bluetooth has been disabled by a switch on your computer."
+#~ msgstr "كۆكچىش -  سىستېما باشقۇرغۇچىسى تەرەپتىن چەكلەنگەن."
+
+#~ msgid "bluetooth"
+#~ msgstr "كۆكچىش"
+
+#~ msgid "<u>Pair</u>"
+#~ msgstr "<u>جۈپلەش</u>"
+
+#~ msgid "<u>Connect</u>"
+#~ msgstr "<u>باغلاش</u>"
+
+#~ msgid "<u>Browse</u>"
+#~ msgstr "<u>كۆز يۈگۈرتۈش</u>"
 
 #~ msgid "Output a list of currently known devices"
 #~ msgstr "نۆۋەتتىكى مەلۇم بولغان ئۈسكۈنە تىزىملىكىنى چىقىرىش"
