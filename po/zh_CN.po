@@ -3,17 +3,18 @@
 # This file is distributed under the same license as the gnome-bluetooth package.
 # fujianwzh <fujianwzh@gmail.com>, 2009.
 # Richard Ma <richard.ma.19850509@gmail.com>, 2009.
-# Aron Xu <aronxu@gnome.org>, 2007, 2010.
+# Aron Xu <aronxu@gnome.org>, 2007, 2010, 2011.
 # YunQiang Su <wzssyqa@gmail.com>, 2010.
+# liu zhen <liuzhen1191@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-14 17:48+0000\n"
-"PO-Revision-Date: 2011-03-18 19:08+0800\n"
-"Last-Translator: chiachen <luojiazhen@gmail.com>\n"
+"POT-Creation-Date: 2011-03-27 17:41+0000\n"
+"PO-Revision-Date: 2011-03-28 16:36+0000\n"
+"Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,9 +139,8 @@ msgid "Paired or trusted"
 msgstr "已配对或已信任"
 
 #: ../lib/bluetooth-filter-widget.c:231
-#, fuzzy
 msgid "Show Only Bluetooth Devices With..."
-msgstr "<b>只显示带有...的蓝牙设备</b>"
+msgstr "仅显示这些蓝牙设备..."
 
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:247
@@ -168,7 +168,7 @@ msgstr "输入设备(麦克风，键盘，等)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "听筒，耳机或其它音频设备"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "使用该 GPS 设备来进行地理定位"
 
@@ -418,15 +418,15 @@ msgstr "显示输入(_S)"
 
 #: ../properties/cc-bluetooth-panel.c:239
 msgid "Yes"
-msgstr "确认"
+msgstr "是"
 
 #: ../properties/cc-bluetooth-panel.c:239
 msgid "No"
-msgstr "取消"
+msgstr "否"
 
 #: ../properties/cc-bluetooth-panel.c:331
 msgid "Bluetooth is disabled"
-msgstr "蓝牙已禁用"
+msgstr "蓝牙已停用"
 
 #: ../properties/cc-bluetooth-panel.c:336
 msgid "Bluetooth is disabled by hardware switch"
@@ -434,7 +434,7 @@ msgstr "蓝牙已通过硬件开关禁用"
 
 #: ../properties/cc-bluetooth-panel.c:340
 msgid "No Bluetooth adapters found"
-msgstr "未发现蓝牙适配器"
+msgstr "未找到蓝牙适配器"
 
 #: ../properties/cc-bluetooth-panel.c:406
 msgid "Visibility"
@@ -443,7 +443,7 @@ msgstr "可见性"
 #: ../properties/cc-bluetooth-panel.c:410
 #, c-format
 msgid "Visibility of “%s”"
-msgstr "“%s”的可见性"
+msgstr "%s 的可见性"
 
 #: ../properties/bluetooth.ui.h:1
 msgid "Address"
@@ -654,7 +654,7 @@ msgstr "蓝牙设备设置"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:2
 msgid "Setup Bluetooth devices"
-msgstr "设置蓝牙设备"
+msgstr "蓝牙设备"
 
 #: ../sendto/main.c:162
 #, c-format
@@ -733,11 +733,11 @@ msgstr "%d B/s"
 
 #: ../sendto/main.c:651
 msgid "Select device to send to"
-msgstr "选择目标设备"
+msgstr "选择要发送到的设备"
 
 #: ../sendto/main.c:656
 msgid "_Send"
-msgstr "发送(_T)"
+msgstr "发送(_S)"
 
 #: ../sendto/main.c:700
 msgid "Choose files to send"
@@ -757,12 +757,12 @@ msgstr "远程设备名称"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
-msgstr "程序错误：不能在列表中找到设备"
+msgstr "编程错误：无法找到该列表中的设备"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
 msgid "OBEX Push file transfer unsupported"
-msgstr "不支持 OBEX 文件推送"
+msgstr "不支持 OBEX 文件推送传输"
 
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
@@ -774,7 +774,7 @@ msgstr "蓝牙传输"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
-msgstr "用蓝牙传输文件"
+msgstr "通过蓝牙传输文件"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -901,6 +901,9 @@ msgstr "从您的计算机上发送文件"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "蓝牙管理器控制面板"
+
+#~ msgid "Active"
+#~ msgstr "激活"
 
 #~ msgid "Make computer _visible"
 #~ msgstr "使计算机可被发现(_D)"
