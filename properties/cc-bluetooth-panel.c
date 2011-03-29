@@ -267,7 +267,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 			gtk_widget_show (WID ("keyboard_button"));
 			break;
 		case BLUETOOTH_TYPE_MOUSE:
-			/* FIXME what about Bluetooth touchpads */
+		case BLUETOOTH_TYPE_TABLET:
 			gtk_widget_show (WID ("mouse_button"));
 			break;
 		case BLUETOOTH_TYPE_HEADSET:
