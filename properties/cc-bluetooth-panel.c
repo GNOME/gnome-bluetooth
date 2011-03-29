@@ -196,6 +196,18 @@ dump_current_device (CcBluetoothPanel *self)
 	bluetooth_client_dump_device (model, &iter, FALSE);
 }
 
+enum {
+	NOTEBOOK_PAGE_EMPTY = 0,
+	NOTEBOOK_PAGE_PROPS = 1
+};
+
+static void
+set_notebook_page (CcBluetoothPanel *self,
+		   int               page)
+{
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("props_notebook")), page);
+}
+
 static void
 cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 {
@@ -218,6 +230,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		gtk_label_set_text (GTK_LABEL (WID ("type_label")), "");
 		gtk_label_set_text (GTK_LABEL (WID ("address_label")), "");
 		gtk_widget_set_sensitive (WID ("button_delete"), FALSE);
+		set_notebook_page (self, NOTEBOOK_PAGE_EMPTY);
 	} else {
 		BluetoothType type;
 		gboolean connected;
@@ -270,6 +283,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		g_free (bdaddr);
 
 		gtk_widget_set_sensitive (WID ("button_delete"), TRUE);
+		set_notebook_page (self, NOTEBOOK_PAGE_PROPS);
 	}
 
 	g_signal_handlers_unblock_by_func (button, switch_connected_active_changed, self);
