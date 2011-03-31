@@ -209,6 +209,47 @@ set_notebook_page (CcBluetoothPanel *self,
 }
 
 static void
+add_extra_setup_widgets (CcBluetoothPanel *self,
+			 const char       *bdaddr)
+{
+	GValue value = { 0 };
+	char **uuids;
+	GList *list, *l;
+	GtkWidget *container;
+
+	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
+							"uuids", &value) == FALSE)
+		return;
+
+	uuids = (char **) g_value_get_boxed (&value);
+	list = bluetooth_plugin_manager_get_widgets (bdaddr, (const char **) uuids);
+	if (list == NULL) {
+		g_value_unset (&value);
+		return;
+	}
+
+	container = WID ("additional_setup_box");
+	for (l = list; l != NULL; l = l->next) {
+		GtkWidget *widget = l->data;
+		gtk_box_pack_start (GTK_BOX (container), widget,
+				    FALSE, FALSE, 0);
+		gtk_widget_show (widget);
+	}
+	gtk_widget_show (container);
+	g_value_unset (&value);
+}
+
+static void
+remove_extra_setup_widgets (CcBluetoothPanel *self)
+{
+	GtkWidget *box;
+
+	box = WID ("additional_setup_box");
+	gtk_container_forall (GTK_CONTAINER (box), (GtkCallback) gtk_widget_destroy, NULL);
+	gtk_widget_hide (WID ("additional_setup_box"));
+}
+
+static void
 cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 {
 	char *bdaddr;
@@ -222,13 +263,13 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 	gtk_widget_hide (WID ("sound_button"));
 	gtk_widget_hide (WID ("mouse_button"));
 
+	/* Remove the extra setup widgets */
+	remove_extra_setup_widgets (self);
+
 	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	if (bdaddr == NULL) {
 		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
 		gtk_switch_set_active (button, FALSE);
-		gtk_label_set_text (GTK_LABEL (WID ("paired_label")), "");
-		gtk_label_set_text (GTK_LABEL (WID ("type_label")), "");
-		gtk_label_set_text (GTK_LABEL (WID ("address_label")), "");
 		gtk_widget_set_sensitive (WID ("button_delete"), FALSE);
 		set_notebook_page (self, NOTEBOOK_PAGE_EMPTY);
 	} else {
@@ -278,6 +319,9 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 			/* FIXME others? */
 			;
 		}
+
+		/* Extra widgets */
+		add_extra_setup_widgets (self, bdaddr);
 
 		gtk_label_set_text (GTK_LABEL (WID ("address_label")), bdaddr);
 		g_free (bdaddr);
