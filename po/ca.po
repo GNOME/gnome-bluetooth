@@ -2,14 +2,14 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
 # Jaume Villalba <javs@tinet.cat>, 2007.
-# David Planella <david.planella@gmail.com>, 2007, 2008, 2009, 2010.
+# David Planella <david.planella@gmail.com>, 2007, 2008, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-26 09:40+0100\n"
-"PO-Revision-Date: 2011-01-24 23:53+0100\n"
+"POT-Creation-Date: 2011-04-02 09:16+0200\n"
+"PO-Revision-Date: 2011-03-07 11:42+0100\n"
 "Last-Translator: David Planella <david.planella@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -81,40 +81,40 @@ msgstr "Tauleta gràfica"
 msgid "Video device"
 msgstr "Dispositiu de vídeo"
 
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:129
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Feu clic per seleccionar un dispositiu..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "No hi ha cap adaptador disponible"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
 msgstr "S'estan cercant dispositius..."
 
-#: ../lib/bluetooth-chooser.c:372
+#: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Voleu suprimir «%s» de la llista de dispositius?"
 
-#: ../lib/bluetooth-chooser.c:374
+#: ../lib/bluetooth-chooser.c:375
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Si suprimiu el dispositiu, l'haureu de configurar de nou abans de tornar-lo "
 "a utilitzar."
 
-#: ../lib/bluetooth-chooser.c:746
+#: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Dispositiu"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Tipus"
 
@@ -122,7 +122,7 @@ msgstr "Tipus"
 msgid "All categories"
 msgstr "Totes les categories"
 
-#: ../lib/bluetooth-filter-widget.c:73
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Aparellat"
 
@@ -169,7 +169,7 @@ msgstr "Dispositius d'entrada (ratolins, teclats, etc.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Auriculars, microauriculars i altres dispositius d'àudio"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "Utilitza aquest dispositiu GPS per als serveis de geolocalització"
 
@@ -180,92 +180,92 @@ msgstr "Utilitza aquest dispositiu GPS per als serveis de geolocalització"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Accediu a Internet a través del telèfon mòbil (en fase de proves)"
 
-#: ../applet/main.c:130
+#: ../applet/main.c:125
 msgid "Select Device to Browse"
 msgstr "Seleccioneu el dispositiu pel qual voleu que es navegui"
 
-#: ../applet/main.c:134
+#: ../applet/main.c:129
 msgid "_Browse"
 msgstr "_Navega"
 
-#: ../applet/main.c:143
+#: ../applet/main.c:138
 msgid "Select device to browse"
 msgstr "Seleccioneu el dispositiu pel qual voleu que es navegui"
 
-#: ../applet/main.c:293 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:288
 msgid "Turn On Bluetooth"
 msgstr "Engega el Bluetooth"
 
-#: ../applet/main.c:294
+#: ../applet/main.c:289
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: apagat"
 
-#: ../applet/main.c:297
+#: ../applet/main.c:292
 msgid "Turn Off Bluetooth"
 msgstr "Apaga el Bluetooth"
 
-#: ../applet/main.c:298
+#: ../applet/main.c:293
 msgid "Bluetooth: On"
 msgstr "Bluetooth: engegat"
 
-#: ../applet/main.c:303 ../applet/notify.c:159
+#: ../applet/main.c:298 ../applet/notify.c:159
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: inhabilitat"
 
-#: ../applet/main.c:452
+#: ../applet/main.c:445
 msgid "Disconnecting..."
 msgstr "S'està desconnectant..."
 
-#: ../applet/main.c:455 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "S'està connectant..."
 
-#: ../applet/main.c:458 ../applet/main.c:741
+#: ../applet/main.c:451 ../applet/main.c:734
 msgid "Connected"
 msgstr "Connectat"
 
-#: ../applet/main.c:461 ../applet/main.c:741
+#: ../applet/main.c:454 ../applet/main.c:734
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: ../applet/main.c:759 ../applet/main.c:823 ../properties/adapter.c:380
+#: ../applet/main.c:752 ../applet/main.c:816
 msgid "Disconnect"
 msgstr "Desconnecta"
 
-#: ../applet/main.c:759 ../applet/main.c:823 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
 msgid "Connect"
 msgstr "Connecta"
 
-#: ../applet/main.c:772
+#: ../applet/main.c:765
 msgid "Send files..."
 msgstr "Envia fitxers..."
 
-#: ../applet/main.c:782
+#: ../applet/main.c:775
 msgid "Browse files..."
 msgstr "Navega pels fitxers..."
 
-#: ../applet/main.c:793
+#: ../applet/main.c:786
 msgid "Open Keyboard Preferences..."
 msgstr "Obre les preferències del teclat..."
 
-#: ../applet/main.c:801
+#: ../applet/main.c:794
 msgid "Open Mouse Preferences..."
 msgstr "Obre les preferències del ratolí..."
 
-#: ../applet/main.c:811
+#: ../applet/main.c:804
 msgid "Open Sound Preferences..."
 msgstr "Obre les preferències de so..."
 
-#: ../applet/main.c:873
+#: ../applet/main.c:857
 msgid "Debug"
 msgstr "Depura"
 
 #. Parse command-line options
-#: ../applet/main.c:892
+#: ../applet/main.c:876
 msgid "- Bluetooth applet"
 msgstr "- miniaplicació del Bluetooth"
 
-#: ../applet/main.c:897
+#: ../applet/main.c:881
 #, c-format
 msgid ""
 "%s\n"
@@ -275,7 +275,7 @@ msgstr ""
 "Executeu l'ordre «%s --help» per veure una llista completa de les opcions de "
 "la línia d'ordres disponibles.\n"
 
-#: ../applet/main.c:923
+#: ../applet/main.c:907
 msgid "Bluetooth Applet"
 msgstr "Miniaplicació del Bluetooth"
 
@@ -369,8 +369,8 @@ msgstr "Bluetooth: s'està comprovant"
 msgid "Browse files on device..."
 msgstr "Navega pels fitxers del dispositiu..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:339
-#: ../moblin/moblin-panel.c:1403 ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
+#: ../moblin/moblin-panel.c:1513
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -418,60 +418,58 @@ msgstr "_Concorda"
 msgid "_Show input"
 msgstr "_Mostra l'entrada"
 
-#. The discoverable checkbox
-#: ../properties/adapter.c:286
-msgid "Make computer _visible"
-msgstr "Fes que l'ordinador sigui _visible"
+#: ../properties/cc-bluetooth-panel.c:252
+msgid "Yes"
+msgstr "Sí"
 
-#: ../properties/adapter.c:309
-msgid "Friendly name"
-msgstr "Nom llegible"
+#: ../properties/cc-bluetooth-panel.c:252
+msgid "No"
+msgstr "No"
 
-#: ../properties/adapter.c:371
-msgid "Set up _new device..."
-msgstr "Configuració d'un dispositiu _nou..."
-
-#: ../properties/adapter.c:394
-msgid "_Remove"
-msgstr "_Suprimeix"
-
-#: ../properties/adapter.c:671
+#: ../properties/cc-bluetooth-panel.c:345
 msgid "Bluetooth is disabled"
 msgstr "El Bluetooth està inhabilitat"
 
-#: ../properties/adapter.c:711
-msgid "No Bluetooth adapters present"
-msgstr "No hi ha cap adaptador Bluetooth present"
+#: ../properties/cc-bluetooth-panel.c:350
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "El Bluetooth està inhabilitat per l'interruptor de maquinari"
 
-#: ../properties/cc-bluetooth-panel.c:60
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr ""
-"No es poden iniciar les preferències de la compartició de fitxers personals"
+#: ../properties/cc-bluetooth-panel.c:354
+msgid "No Bluetooth adapters found"
+msgstr "No s'ha trobat cap adaptador de Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:65
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr ""
-"Comproveu que el programa «Compartició de fitxers personals» estigui "
-"instal·lat correctament."
+#: ../properties/cc-bluetooth-panel.c:420
+msgid "Visibility"
+msgstr "Visibilitat"
 
-#: ../properties/cc-bluetooth-panel.c:92
-msgid "_Show Bluetooth icon"
-msgstr "_Mostra la icona del Bluetooth"
+#: ../properties/cc-bluetooth-panel.c:424
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Visibilitat de «%s»"
 
-#: ../properties/cc-bluetooth-panel.c:104
-msgid "Sharing Settings..."
-msgstr "Preferències de compartició..."
+#: ../properties/bluetooth.ui.h:1
+msgid "Address"
+msgstr "Adreça"
 
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "L'ordinador no té cap adaptador Bluetooth connectat."
+#: ../properties/bluetooth.ui.h:2
+msgid "Connection"
+msgstr "Connexió"
 
-#: ../properties/properties-killed-adapter.ui.h:1
-msgid "Bluetooth has been disabled by a switch on your computer."
-msgstr ""
-"S'ha inhabilitat el Bluetooth a través d'un interruptor de l'ordinador."
+#: ../properties/bluetooth.ui.h:3
+msgid "Keyboard Settings"
+msgstr "Paràmetres del teclat"
+
+#: ../properties/bluetooth.ui.h:4
+msgid "Mouse and Touchpad Settings"
+msgstr "Paràmetres del ratolí i el ratolí tàctil"
+
+#: ../properties/bluetooth.ui.h:6
+msgid "Power"
+msgstr "Energia"
+
+#: ../properties/bluetooth.ui.h:7
+msgid "Sound Settings"
+msgstr "Paràmetres del so"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -539,15 +537,15 @@ msgstr "Espereu mentre es finalitza la configuració al dispositiu «%s»..."
 msgid "Successfully set up new device '%s'"
 msgstr "S'ha configurat correctament el dispositiu nou «%s»"
 
-#: ../wizard/wizard.ui.h:1
+#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "«0000» (la majoria de microauriculars, ratolins i dispositius GPS)"
 
-#: ../wizard/wizard.ui.h:2
+#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
 msgid "'1111'"
 msgstr "«1111»"
 
-#: ../wizard/wizard.ui.h:3
+#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
 msgid "'1234'"
 msgstr "«1234»"
 
@@ -555,7 +553,7 @@ msgstr "«1234»"
 msgid "Bluetooth New Device Setup"
 msgstr "Configuració d'un dispositiu Bluetooth nou"
 
-#: ../wizard/wizard.ui.h:5
+#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
 msgid "Custom PIN:"
 msgstr "Codi PIN personalitzat:"
 
@@ -585,7 +583,7 @@ msgid "Finishing New Device Setup"
 msgstr "Finalització de la configuració del dispositiu nou"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
 msgid "Fixed PIN"
 msgstr "PIN fix"
 
@@ -598,7 +596,7 @@ msgstr "Introducció"
 msgid "Matches"
 msgstr "Concorda"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
 msgid "PIN Options"
 msgstr "Opcions del PIN"
 
@@ -645,7 +643,7 @@ msgstr ""
 "Us donem la benvinguda a l'auxiliar de configuració de dispositius Bluetooth "
 "nous"
 
-#: ../wizard/wizard.ui.h:26
+#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
 msgid "_Automatic PIN selection"
 msgstr "Selecció _automàtica del PIN"
 
@@ -660,6 +658,14 @@ msgstr "_Tanca"
 #: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
 msgstr "_Torna a iniciar la configuració"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "Configuració de dispositius Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "Configureu dispositius Bluetooth"
 
 #: ../sendto/main.c:162
 #, c-format
@@ -742,23 +748,27 @@ msgstr "%d KB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
+#: ../sendto/main.c:651
+msgid "Select device to send to"
 msgstr "Seleccioneu el dispositiu on enviar"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "Envia _a"
+#: ../sendto/main.c:656
+msgid "_Send"
+msgstr "En_via"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Escolliu els fitxers a enviar"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:703
+msgid "Select"
+msgstr "Seleccioneu"
+
+#: ../sendto/main.c:729
 msgid "Remote device to use"
 msgstr "Dispositiu remot a utilitzar"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:731
 msgid "Remote device's name"
 msgstr "Nom del dispositiu remot"
 
@@ -776,6 +786,14 @@ msgstr "No s'admet la transferència de fitxers per enviament OBEX"
 #: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (enviament OBEX)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Transferència per Bluetooth"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Envia fitxers a través del Bluetooth"
 
 #: ../moblin/main.c:93
 msgid "Run in standalone mode"
@@ -906,6 +924,43 @@ msgstr "Envia un fitxer des de l'ordinador"
 msgid "Bluetooth Manager Panel"
 msgstr "Quadre del gestor del Bluetooth"
 
+#~ msgid "Make computer _visible"
+#~ msgstr "Fes que l'ordinador sigui _visible"
+
+#~ msgid "Friendly name"
+#~ msgstr "Nom llegible"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "Configuració d'un dispositiu _nou..."
+
+#~ msgid "_Remove"
+#~ msgstr "_Suprimeix"
+
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr ""
+#~ "No es poden iniciar les preferències de la compartició de fitxers "
+#~ "personals"
+
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr ""
+#~ "Comproveu que el programa «Compartició de fitxers personals» estigui "
+#~ "instal·lat correctament."
+
+#~ msgid "_Show Bluetooth icon"
+#~ msgstr "_Mostra la icona del Bluetooth"
+
+#~ msgid "Sharing Settings..."
+#~ msgstr "Preferències de compartició..."
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "L'ordinador no té cap adaptador Bluetooth connectat."
+
+#~ msgid "Bluetooth has been disabled by a switch on your computer."
+#~ msgstr ""
+#~ "S'ha inhabilitat el Bluetooth a través d'un interruptor de l'ordinador."
+
 #~ msgid "Output a list of currently known devices"
 #~ msgstr "Mostra una llista de dispositius coneguts"
 
@@ -986,9 +1041,6 @@ msgstr "Quadre del gestor del Bluetooth"
 
 #~ msgid "Known devices"
 #~ msgstr "Dispositius coneguts"
-
-#~ msgid "Delete"
-#~ msgstr "Suprimeix"
 
 #~ msgid "Bluetooth Device Wizard"
 #~ msgstr "Auxiliar de dispositiu Bluetooth"
