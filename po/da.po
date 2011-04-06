@@ -1,26 +1,30 @@
-# Danish translation for bluez-gnome
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
-# This file is distributed under the same license as the bluez-gnome package.
+# Danish translation for gnome-bluetooth.meego.
+# Copyright (c) 2011 gnome-bluetooth.meego og nedenstående oversættere.
+# This file is distributed under the same license as the gnome-bluetooth.meego package.
 # Mads Bille Lundby <lundbymads@gmail.com>, 2009.
 # Kenneth Nielsen <k.nielsen81@gmail.com>, 2009.
+# Joe Hansen (joedalton2@yahoo.dk), 2011.
 #
 # paired -> parvis
-# to pair -> at danne par (Man kan måske synes at denne formulering er en lille smule mærkelig på grund af sammenhængen man ellers kan tale om at danne par. Men formuleringer som denne bruges også i f.eks. Apples danske IPhone dokumentation http://support.apple.com/kb/HT1838?viewlocale=da_DK så det bør være ok)
+# to pair -> at danne par (Man kan måske synes at denne formulering er en 
+# lille smule mærkelig på grund af sammenhængen man ellers kan tale om at 
+# danne par. Men formuleringer som denne bruges også i f.eks. Apples danske 
+# IPhone dokumentation http://support.apple.com/kb/HT1838?viewlocale=da_DK 
+# så det bør være ok)
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bluez-gnome\n"
+"Project-Id-Version: gnome-bluetooth.meego\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-27 16:15+0100\n"
-"PO-Revision-Date: 2010-03-25 23:55+0100\n"
-"Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
+"POT-Creation-Date: 2011-04-06 22:38+0200\n"
+"PO-Revision-Date: 2011-04-02 23:55+0100\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2009-09-12 15:44+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../lib/bluetooth-client.c:127
 msgid "All types"
@@ -233,7 +237,7 @@ msgstr "Afkoblet"
 msgid "Disconnect"
 msgstr "Kobl af"
 
-#: ../applet/main.c:858 ../applet/main.c:922
+#: ../applet/main.c:858 ../applet/main.c:922 ../moblin/moblin-panel.c:1036
 msgid "Connect"
 msgstr "Kobl på"
 
@@ -283,9 +287,9 @@ msgstr "Bluetooth-panelprogram"
 #. Power switch
 #. Translators: This string appears next to a toggle switch which controls
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
+#. * switches in the Network UI of MeeGo
 #: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
+#: ../moblin/main.c:140 ../moblin/moblin-panel.c:1634
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -372,7 +376,7 @@ msgid "Browse files on device..."
 msgstr "Gennemse filer på enhed..."
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
+#: ../moblin/moblin-panel.c:1433 ../moblin/moblin-panel.c:1543
 msgid "Devices"
 msgstr "Enheder"
 
@@ -511,12 +515,12 @@ msgstr "Alle efterfølgende fejl vil kun blive vist i terminalen."
 msgid "Pairing with '%s' cancelled"
 msgstr "Pardannelse med \"%s\" afbrudt"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1176
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Bekræft venligst at PIN-koden vist på \"%s\" matcher denne her."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1227
 msgid "Please enter the following PIN:"
 msgstr "Indtast venligst følgende PIN-kode:"
 
@@ -538,14 +542,14 @@ msgstr "Opsætning af \"%s\" mislykkedes"
 msgid "Connecting to '%s'..."
 msgstr "Tilslutter til \"%s\"..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:790
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Indtast venligst følgende PIN-kode på \"%s\" og tryk “Enter” på tastaturet:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:792
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Indtast venligst følgende PIN-kode på \"%s\":"
@@ -559,7 +563,7 @@ msgstr "Indtast venligst følgende PIN-kode på \"%s\":"
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Vent venligst mens opsætningen af enheden \"%s\" færdiggøres..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:817
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Opsætning af den nye enhed \"%s\" er fuldført"
@@ -597,7 +601,7 @@ msgid "Device search"
 msgstr "Søgning efter enhed"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1380
 msgid "Does not match"
 msgstr "Matcher ikke"
 
@@ -615,7 +619,7 @@ msgid "Introduction"
 msgstr "Introduktion"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1376
 msgid "Matches"
 msgstr "Matcher"
 
@@ -627,7 +631,7 @@ msgstr "Indstillinger for PIN-kode"
 msgid "PIN _options..."
 msgstr "_Indstillinger for PIN-kode..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1290
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vælg yderligere tjenester du ønsker at bruge på din enhed:"
 
@@ -783,74 +787,132 @@ msgstr "Obex Push-filoverførsel understøttes ikke"
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
-#: ../moblin/main.c:86
+#: ../moblin/main.c:92
 msgid "Run in standalone mode"
 msgstr "Kør i selvstændig tilstand"
 
-#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
+#: ../moblin/main.c:100
+#, fuzzy
+msgid "MeeGo Bluetooth Panel"
 msgstr "Moblins Bluetoothpanel"
 
-#: ../moblin/main.c:95
-msgid "- Moblin Bluetooth Panel"
+#: ../moblin/main.c:101
+#, fuzzy
+msgid "- MeeGo Bluetooth Panel"
 msgstr "- Moblins Bluetoothpanel"
 
-#: ../moblin/main.c:122
+#: ../moblin/main.c:128
 msgid "bluetooth"
 msgstr "bluetooth"
 
-#: ../moblin/moblin-panel.c:533
+#: ../moblin/moblin-panel.c:177
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d time"
+msgstr[1] "%d timer"
+
+#: ../moblin/moblin-panel.c:179
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minut"
+msgstr[1] "%d minutter"
+
+#: ../moblin/moblin-panel.c:182
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekund"
+msgstr[1] "%d sekunder"
+
+#. hour:minutes:seconds
+#: ../moblin/moblin-panel.c:188
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../moblin/moblin-panel.c:192
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. minutes
+#. seconds
+#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../moblin/moblin-panel.c:202
+msgid "0 seconds"
+msgstr "0 sekunder"
+
+#: ../moblin/moblin-panel.c:223
+#, fuzzy, c-format
+msgid "Your computer is visible on Bluetooth for %s."
+msgstr ""
+"Din computer er synlig på\n"
+"Bluetooth for %s."
+
+#: ../moblin/moblin-panel.c:664
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "Pardannelse med %s mislykkedes."
 
-#: ../moblin/moblin-panel.c:895
+#: ../moblin/moblin-panel.c:1022
 msgid "<u>Pair</u>"
 msgstr "<u>Par</u>"
 
-#: ../moblin/moblin-panel.c:909
-msgid "<u>Connect</u>"
-msgstr "<u>Tilslut</u>"
-
-#: ../moblin/moblin-panel.c:928
+#: ../moblin/moblin-panel.c:1055
 msgid "Browse"
 msgstr "Gennemse"
 
-#: ../moblin/moblin-panel.c:1122
+#: ../moblin/moblin-panel.c:1249
 msgid "Device setup failed"
 msgstr "Enhedsopsætning mislykkedes"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
-#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
-#: ../moblin/moblin-panel.c:1540
+#: ../moblin/moblin-panel.c:1263 ../moblin/moblin-panel.c:1339
+#: ../moblin/moblin-panel.c:1388 ../moblin/moblin-panel.c:1466
+#: ../moblin/moblin-panel.c:1701
 msgid "Back to devices"
 msgstr "Tilbage til enheder"
 
-#: ../moblin/moblin-panel.c:1175
+#: ../moblin/moblin-panel.c:1302
 msgid "Done"
 msgstr "Færdig"
 
-#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
+#: ../moblin/moblin-panel.c:1323 ../moblin/moblin-panel.c:1360
 msgid "Device setup"
 msgstr "Enhedsopsætning"
 
-#: ../moblin/moblin-panel.c:1344
+#: ../moblin/moblin-panel.c:1483 ../moblin/moblin-panel.c:1616
+msgid "Settings"
+msgstr "Opsætning"
+
+#: ../moblin/moblin-panel.c:1499
 msgid "Only show:"
 msgstr "Vis kun:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1505
 msgid "PIN options"
 msgstr "PIN-indstillinger"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1433
+#: ../moblin/moblin-panel.c:1549
 msgid "Add a new device"
 msgstr "Tilføj en ny enhed"
 
+#: ../moblin/moblin-panel.c:1653
+msgid "Make visible on Bluetooth"
+msgstr "Gør synlig på Bluetooth"
+
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1500
+#: ../moblin/moblin-panel.c:1659
 msgid "Send file from your computer"
 msgstr "Send fil fra din computer"
 
@@ -858,273 +920,7 @@ msgstr "Send fil fra din computer"
 msgid "Bluetooth Manager Panel"
 msgstr "Bluetooth-håndteringspanel"
 
-#~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "Bluetooth-håndtering for GNOME-skrivebordsmiljøet"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Andreas Dalsgaard\n"
-#~ "Hans-Jørgen Martinus Hansen\n"
-#~ "Mads Lundby\n"
-#~ "Marcel Holtmann\n"
-#~ "Kenneth Nielsen\n"
-#~ "\n"
-#~ "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
-#~ "Mere info: http://www.dansk-gruppen.dk"
-
-#~ msgid "GNOME Bluetooth home page"
-#~ msgstr "Hjemmeside for GNOME Bluetooth"
-
-#~ msgid "Authentication request"
-#~ msgstr "Forespørgsel om godkendelse"
-
-#~ msgid "Pairing request for device:"
-#~ msgstr "Forespørgsel om kobling for enhed:"
-
-#~ msgid "Enter passkey for authentication:"
-#~ msgstr "Indtast adgangsnøgle for godkendelse:"
-
-#~ msgid "Confirmation request"
-#~ msgstr "Forespørgsel om bekræftelse"
-
-#~ msgid "Confirm value for authentication:"
-#~ msgstr "Bekræft værdi for godkendelse:"
-
-#~ msgid "Authorization request"
-#~ msgstr "Forespørgsel om autorisation"
-
-#~ msgid "Authorization request for device:"
-#~ msgstr "Forespørgsel om autorisation for enhed:"
-
-#~ msgid "Enter passkey"
-#~ msgstr "Indtast adgangsnøgle"
-
-#~ msgid "Confirmation request for %s"
-#~ msgstr "Forespørgsel om bekræftelse for %s"
-
-#~ msgid "Confirm passkey"
-#~ msgstr "Bekræft adgangsnøgle"
-
-#~ msgid "General"
-#~ msgstr "Generelt"
-
-#~ msgid "File transfer"
-#~ msgstr "Filoverførsel"
-
-#~ msgid "Receive files from remote devices"
-#~ msgstr "Modtag filer fra fjernenheder"
-
-#~ msgid "Notification area"
-#~ msgstr "Statusfelt"
-
-#~ msgid "Never display icon"
-#~ msgstr "Vis aldrig ikon"
-
-#~ msgid "Only display when adapter present"
-#~ msgstr "Vis kun når adapter er til stede"
-
-#~ msgid "Always display icon"
-#~ msgstr "Vis altid ikon"
-
-#~ msgid "Power switches"
-#~ msgstr "Strømkontakter"
-
-#~ msgid "Adapter"
-#~ msgstr "Adapter"
-
-#~ msgid "always"
-#~ msgstr "altid"
-
-#~ msgid "hidden"
-#~ msgstr "skjult"
-
-#~ msgid "%'g minute"
-#~ msgid_plural "%'g minutes"
-#~ msgstr[0] "%' g minut"
-#~ msgstr[1] "%' g minutter"
-
-#~ msgid "Visibility setting"
-#~ msgstr "Opsætning af synlighed"
-
-#~ msgid "Hidden"
-#~ msgstr "Skjult"
-
-#~ msgid "Always visible"
-#~ msgstr "Altid synlig"
-
-#~ msgid "Temporary visible"
-#~ msgstr "Midlertidig synlig"
-
-#~ msgid "Known devices"
-#~ msgstr "Kendte enheder"
-
-#~ msgid ""
-#~ "Display options for the notification icon. Valid options are \"never\", "
-#~ "\"present\" and \"always\"."
-#~ msgstr ""
-#~ "Vis indstillinger for statusfeltet. Gyldige indstillinger er \"aldrig\","
-#~ "\"til stede\" eller \"altid\"."
-
-#~ msgid "If Bluetooth file sharing is enabled"
-#~ msgstr "Hvorvidt Bluetooth-fildeling er aktiveret"
-
-#~ msgid "If receiving of remote files via Bluetooth is enabled"
-#~ msgstr "Hvorvidt modtagelse af fjerne filer via Bluetooth er aktiveret"
-
-#~ msgid ""
-#~ "If the service for receiving remote files via Bluetooth is enabled or not."
-#~ msgstr ""
-#~ "Hvorvidt tjenesten for modtagelse af fjerne filer via Bluetooth er "
-#~ "aktiveret eller ej."
-
-#~ msgid "If the service for sharing files via Bluetooth is enabled or not."
-#~ msgstr ""
-#~ "Hvorvidt tjenesten for deling af filer via Bluetooth er aktiveret eller "
-#~ "ej."
-
-#~ msgid "Please enter the following passkey: %s%s"
-#~ msgstr "Indtast følgende adgangsnøgle: %s%s"
-
-#~ msgid "Pairing with %s finished"
-#~ msgstr "Kobling med %s er afsluttet"
-
-#~ msgid "Successfully paired with %s"
-#~ msgstr "Koblet problemfrit med %s"
-
-#~ msgid "Select the type of device you want to setup"
-#~ msgstr "Vælg typen af enhed du vil sætte op"
-
-#~ msgid "Mobile phone"
-#~ msgstr "Mobiltelefon"
-
-#~ msgid "Summary"
-#~ msgstr "Sammendrag"
-
-#~ msgid "Saving of protocol trace failed"
-#~ msgstr "Arkivering af protokolspor mislykkedes"
-
-#~ msgid "Loading Trace"
-#~ msgstr "Indlæser spor"
-
-#~ msgid "Live Import"
-#~ msgstr "Direkte import"
-
-#~ msgid "Protocol Trace"
-#~ msgstr "Protokolspor"
-
-#~ msgid "Unsaved"
-#~ msgstr "Ikke gemt"
-
-#~ msgid "Can't live import from"
-#~ msgstr "Kan ikke importere direkte fra"
-
-#~ msgid "_File"
-#~ msgstr "_Fil"
-
-#~ msgid "Open _Recent"
-#~ msgstr "Åbn _seneste"
-
-#~ msgid "_Edit"
-#~ msgstr "_Redigér"
-
-#~ msgid "_View"
-#~ msgstr "_Vis"
-
-#~ msgid "_Full Screen"
-#~ msgstr "_Fuldskærm"
-
-#~ msgid "_Tools"
-#~ msgstr "Værk_tøjer"
-
-#~ msgid "_Debug Packet List"
-#~ msgstr "_Fejlsøg pakkeliste"
-
-#~ msgid "_Help"
-#~ msgstr "_Hjælp"
-
-#~ msgid "Bluetooth protocol analyzer"
-#~ msgstr "Bluetooth-protokolanalysator"
-
-#~ msgid "All Files"
-#~ msgstr "Alle Filer"
-
-#~ msgid "Supported Files"
-#~ msgstr "Understøttede filer"
-
-#~ msgid "Frontline BTSnoop Files"
-#~ msgstr "Frontline BTSnoop-filer"
-
-#~ msgid "Apple Packet Logger Files"
-#~ msgstr "Apple Packet Logger-filer"
-
-#~ msgid "By Extension"
-#~ msgstr "Efter filendelse"
-
-#~ msgid "Frontline BTSnoop Format"
-#~ msgstr "Frontline BTSnoop-format"
-
-#~ msgid "Apple Packet Logger Format"
-#~ msgstr "Apple Packet Logger-format"
-
-#~ msgid "Select File _Type"
-#~ msgstr "Vælg fil_type"
-
-#~ msgid "File Type"
-#~ msgstr "Filtype"
-
-#~ msgid "Extensions"
-#~ msgstr "Filendelser"
-
-#~ msgid "Open File"
-#~ msgstr "Åbn fil"
-
-#~ msgid "Local connection"
-#~ msgstr "Lokal forbindelse"
-
-#~ msgid "Remote connection"
-#~ msgstr "Ekstern forbindelse"
-
-#~ msgid "Open Import"
-#~ msgstr "Åbn import"
-
-#~ msgid "Save the protocol trace before closing?"
-#~ msgstr "Gem protokolsporet før lukning?"
-
-#~ msgid "If you don't save, all information will be permanently lost."
-#~ msgstr "Hvis du ikke gemmer, vil alle informationer gå tabt permanent."
-
-#~ msgid "Close _without Saving"
-#~ msgstr "Luk _uden at gemme"
-
-#~ msgid "There is"
-#~ msgstr "Der er"
-
-#~ msgid "There are"
-#~ msgstr "Der er"
-
-#~ msgid "unsaved protocol trace."
-#~ msgstr "ugemt protokolspor."
-
-#~ msgid "unsaved protocol traces."
-#~ msgstr "ugemte protokolspor."
-
-#~ msgid "If you quit now, all information will be lost."
-#~ msgstr "Hvis du afslutter nu, vil alle informationer gå tabt."
-
-#~ msgid "_Discard Changes"
-#~ msgstr "_Forkast ændringer"
-
-#~ msgid "Packet"
-#~ msgstr "Pakke"
-
-#~ msgid "Timestamp"
-#~ msgstr "Tidsstempel"
-
-#~ msgid "Analyze Bluetooth traces"
-#~ msgstr "Analysér Bluetooth-spor"
-
-#~ msgid "Apple Packet Logger File"
-#~ msgstr "Apple Packet Logger-fil"
-
-#~ msgid "Frontline BTSnoop File"
-#~ msgstr "Frontline BTSnoop-fil"
+#: ../moblin/bluetooth-panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Bluetooth Panel"
+msgstr "Bluetooth-håndtering"
