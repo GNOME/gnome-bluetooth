@@ -1290,6 +1290,8 @@ static void bluetooth_client_finalize(GObject *client)
 
 	DBG("client %p", client);
 
+	g_type_class_unref (g_type_class_peek (BLUETOOTH_TYPE_STATUS));
+
 	g_signal_handlers_disconnect_by_func(priv->dbus,
 					name_owner_changed, client);
 	g_object_unref(priv->dbus);
@@ -1316,6 +1318,8 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	GError *error = NULL;
 
 	DBG("class %p", klass);
+
+	g_type_class_ref (BLUETOOTH_TYPE_STATUS);
 
 	g_type_class_add_private(klass, sizeof(BluetoothClientPrivate));
 
