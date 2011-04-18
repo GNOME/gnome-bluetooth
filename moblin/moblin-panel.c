@@ -675,6 +675,32 @@ connect_callback (BluetoothClient *client, gboolean success, gpointer user_data)
 }
 
 static void
+disconnect_callback  (BluetoothClient *client, gboolean success,
+		      gpointer user_data)
+{
+	ConnectData *data = (ConnectData *)user_data;
+	gboolean ret;
+
+	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
+		ret = bluetooth_client_disconnect_service (client,
+							   data->path,
+							   disconnect_callback,
+							   data);
+
+		if (ret != FALSE)
+			return;
+	}
+
+	if (success == FALSE)
+		g_message ("Failed to disconnect device %s", data->path);
+
+	g_timer_destroy (data->timer);
+	g_free (data->path);
+	g_object_unref (data->self);
+	g_free (data);
+}
+
+static void
 set_failure_message (MoblinPanel *self, gchar *device)
 {
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
@@ -755,6 +781,29 @@ connect_device (const gchar *device_path, MoblinPanel *self)
 	data->self = g_object_ref (self);
 
 	if (bluetooth_client_connect_service (priv->client, device_path, connect_callback, data) == FALSE) {
+		g_timer_destroy (data->timer);
+		g_free (data->path);
+		g_object_unref (data->self);
+		g_free (data);
+	}
+}
+
+static void
+disconnect_device (const gchar *device_path, MoblinPanel *self)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	ConnectData *data;
+	gboolean ret;
+
+	data = g_new0 (ConnectData, 1);
+	data->path = g_strdup (device_path);
+	data->timer = g_timer_new ();
+	data->self = g_object_ref (self);
+
+	ret = bluetooth_client_disconnect_service (priv->client,
+						   device_path,
+						   disconnect_callback, data);
+	if (ret == FALSE) {
 		g_timer_destroy (data->timer);
 		g_free (data->path);
 		g_object_unref (data->self);
@@ -1001,18 +1050,27 @@ connect_clicked (GtkCellRenderer *renderer, const gchar *path, gpointer user_dat
 {
 	MoblinPanel *self = MOBLIN_PANEL (user_data);
 	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+	BluetoothChooser *chooser = BLUETOOTH_CHOOSER (priv->display);
 	GValue value = { 0, };
 	DBusGProxy *device;
 	const gchar *device_path = NULL;
+	gboolean connected;
 
-	ensure_selection (BLUETOOTH_CHOOSER (priv->display), path);
+	ensure_selection (chooser, path);
 
 	bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (priv->display), "proxy", &value);
 	device = g_value_get_object (&value);
 	device_path = dbus_g_proxy_get_path (device);
 	g_value_unset (&value);
 
-	connect_device (device_path, self);
+	connected =
+		bluetooth_chooser_get_selected_device_is_connected (chooser);
+
+	if (connected) {
+		disconnect_device (device_path, self);
+	} else {
+		connect_device (device_path, self);
+	}
 }
 
 static void
@@ -1047,14 +1105,22 @@ connect_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
 	gboolean paired, trusted, connected;
+	GHashTable *table;
+
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_PAIRED, &paired,
 			BLUETOOTH_COLUMN_CONNECTED, &connected,
-			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
+			BLUETOOTH_COLUMN_TRUSTED, &trusted,
+			BLUETOOTH_COLUMN_SERVICES, &table, -1);
 
-	if ((paired || trusted) && connected == FALSE) {
-		g_object_set (cell, "text", _("Connect"), NULL);
+	if (table) {
+		if ((paired || trusted) && connected == FALSE) {
+			g_object_set (cell, "text", _("Connect"), NULL);
+		} else {
+			g_object_set (cell, "text", _("Disconnect"), NULL);
+		}
+		g_hash_table_unref (table);
 	} else {
-		g_object_set (cell, "text", "", NULL);
+		g_object_set (cell, "text", _(""), NULL);
 	}
 }
 
