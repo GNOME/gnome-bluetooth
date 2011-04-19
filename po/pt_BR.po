@@ -4,13 +4,16 @@
 # Luiz Augusto von Dentz <luiz.dentz@indt.org.br>, 2007.
 # Henrique P Machado <hpmachado@gnome.org>, 2009-2010.
 # Flamarion Jorge <jorge.flamarion@gmail.com>, 2010.
+# Rodrigo Padula <contato@rodrigopadula.com>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-17 19:49-0300\n"
-"PO-Revision-Date: 2010-05-17 18:53-0300\n"
-"Last-Translator: Henrique P. Machado <hpmachado@gnome.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-21 18:29+0000\n"
+"PO-Revision-Date: 2011-04-05 02:56-0300\n"
+"Last-Translator: Rodrigo Padula de Oliveira <contato@rodrigopadula.com>\n"
 "Language-Team: gnome-pt_br-list@gnome.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -237,7 +240,7 @@ msgstr "Desconectado"
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: ../applet/main.c:858 ../applet/main.c:922 ../moblin/moblin-panel.c:1025
+#: ../applet/main.c:858 ../applet/main.c:922 ../moblin/moblin-panel.c:1036
 msgid "Connect"
 msgstr "Conectar"
 
@@ -287,9 +290,9 @@ msgstr "Miniaplicativo Bluetooth"
 #. Power switch
 #. Translators: This string appears next to a toggle switch which controls
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
+#. * switches in the Network UI of MeeGo
 #: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:140 ../moblin/moblin-panel.c:1623
+#: ../moblin/main.c:140 ../moblin/moblin-panel.c:1634
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -376,7 +379,7 @@ msgid "Browse files on device..."
 msgstr "Navegar nos arquivos do dispositivo..."
 
 #: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1422 ../moblin/moblin-panel.c:1532
+#: ../moblin/moblin-panel.c:1433 ../moblin/moblin-panel.c:1543
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -520,12 +523,12 @@ msgstr "Todos os demais erros serão mostrados apenas no terminal."
 msgid "Pairing with '%s' cancelled"
 msgstr "O emparelhamento com \"%s\" foi cancelado"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1165
+#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1176
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Por favor, confirme se o PIN exibido em \"%s\" corresponde com este."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1216
+#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1227
 msgid "Please enter the following PIN:"
 msgstr "Por favor, digite o seguinte PIN:"
 
@@ -547,14 +550,14 @@ msgstr "Falha na configuração de \"%s\""
 msgid "Connecting to '%s'..."
 msgstr "Conectando com \"%s\"..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:776
+#: ../wizard/main.c:549 ../moblin/moblin-panel.c:790
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Por favor, digite o seguinte PIN em \"%s\" e pressione “Enter” no teclado:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:778
+#: ../wizard/main.c:551 ../moblin/moblin-panel.c:792
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Por favor, digite o seguinte PIN em \"%s\":"
@@ -569,7 +572,7 @@ msgid "Please wait while finishing setup on device '%s'..."
 msgstr ""
 "Por favor, aguarde a finalização das configurações do dispositivo \"%s\"..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:803
+#: ../wizard/main.c:588 ../moblin/moblin-panel.c:817
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Novo dispositivo \"%s\" configurado com sucesso"
@@ -609,7 +612,7 @@ msgid "Device search"
 msgstr "Procura de dispositivo"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1369
+#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1380
 msgid "Does not match"
 msgstr "Não corresponde"
 
@@ -627,7 +630,7 @@ msgid "Introduction"
 msgstr "Introdução"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1365
+#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1376
 msgid "Matches"
 msgstr "Corresponde"
 
@@ -639,7 +642,7 @@ msgstr "Opções de PIN"
 msgid "PIN _options..."
 msgstr "_Opções de PIN..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1279
+#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1290
 msgid "Select the additional services you want to use with your device:"
 msgstr ""
 "Selecione os serviços adicionais que você deseja utilizar com o dispositivo:"
@@ -802,13 +805,13 @@ msgstr "Bluetooth: (OBEX Push)"
 msgid "Run in standalone mode"
 msgstr "Executar em modo autônomo"
 
-#: ../moblin/main.c:100 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "Painel Moblin Bluetooth"
+#: ../moblin/main.c:100
+msgid "MeeGo Bluetooth Panel"
+msgstr "Painel Meego Bluetooth"
 
 #: ../moblin/main.c:101
-msgid "- Moblin Bluetooth Panel"
-msgstr "- Painel Moblin Bluetooth"
+msgid "- MeeGo Bluetooth Panel"
+msgstr "- Painel Meego Bluetooth"
 
 #: ../moblin/main.c:128
 msgid "bluetooth"
@@ -859,78 +862,78 @@ msgstr "%s"
 msgid "0 seconds"
 msgstr "0 segundo"
 
-#: ../moblin/moblin-panel.c:224
+#: ../moblin/moblin-panel.c:223
 #, c-format
-msgid ""
-"Your computer is visible on "
-"Bluetooth for %s."
-msgstr ""
-"Seu computador está visível por "
-"Bluetooth para %s."
+msgid "Your computer is visible on Bluetooth for %s."
+msgstr "Seu computador está visível por Bluetooth para %s."
 
-#: ../moblin/moblin-panel.c:651
+#: ../moblin/moblin-panel.c:664
 #, c-format
 msgid "Pairing with %s failed."
 msgstr "O emparelhamento com \"%s\" falhou."
 
-#: ../moblin/moblin-panel.c:1011
+#: ../moblin/moblin-panel.c:1022
 msgid "<u>Pair</u>"
 msgstr "<u>Par</u>"
 
 # Underline alterada para a letra "N".
-#: ../moblin/moblin-panel.c:1044
+#: ../moblin/moblin-panel.c:1055
 msgid "Browse"
 msgstr "Navega"
 
-#: ../moblin/moblin-panel.c:1238
+#: ../moblin/moblin-panel.c:1249
 msgid "Device setup failed"
 msgstr "A configuração do dispositivo falhou"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1252 ../moblin/moblin-panel.c:1328
-#: ../moblin/moblin-panel.c:1377 ../moblin/moblin-panel.c:1455
-#: ../moblin/moblin-panel.c:1689
+#: ../moblin/moblin-panel.c:1263 ../moblin/moblin-panel.c:1339
+#: ../moblin/moblin-panel.c:1388 ../moblin/moblin-panel.c:1466
+#: ../moblin/moblin-panel.c:1701
 msgid "Back to devices"
 msgstr "Voltar para dispositivos"
 
-#: ../moblin/moblin-panel.c:1291
+#: ../moblin/moblin-panel.c:1302
 msgid "Done"
 msgstr "Feito"
 
-#: ../moblin/moblin-panel.c:1312 ../moblin/moblin-panel.c:1349
+#: ../moblin/moblin-panel.c:1323 ../moblin/moblin-panel.c:1360
 msgid "Device setup"
 msgstr "Configuração do dispositivo"
 
-#: ../moblin/moblin-panel.c:1472 ../moblin/moblin-panel.c:1605
+#: ../moblin/moblin-panel.c:1483 ../moblin/moblin-panel.c:1616
 msgid "Settings"
 msgstr "Configurações"
 
-#: ../moblin/moblin-panel.c:1488
+#: ../moblin/moblin-panel.c:1499
 msgid "Only show:"
 msgstr "Somente exibir:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1494
+#: ../moblin/moblin-panel.c:1505
 msgid "PIN options"
 msgstr "Opções de PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1538
+#: ../moblin/moblin-panel.c:1549
 msgid "Add a new device"
 msgstr "Adicionar novo dispositivo"
 
-#: ../moblin/moblin-panel.c:1641
+#: ../moblin/moblin-panel.c:1653
 msgid "Make visible on Bluetooth"
 msgstr "Tornar visível por Bluetooth"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1647
+#: ../moblin/moblin-panel.c:1659
 msgid "Send file from your computer"
 msgstr "Enviar arquivo do seu computador"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Painel gerenciador de Bluetooth"
+
+#: ../moblin/bluetooth-panel.desktop.in.in.h:2
+msgid "Bluetooth Panel"
+msgstr "Painel Bluetooth"
 
 #~ msgid "<u>Connect</u>"
 #~ msgstr "<u>Conectar<u>"
