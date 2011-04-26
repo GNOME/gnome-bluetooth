@@ -982,6 +982,7 @@ pair_to_text (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			BLUETOOTH_COLUMN_TRUSTED, &trusted, -1);
 
 	if (!paired && !trusted) {
+		/* Translators: this is a verb (just like "Connect"), not a noun. */
 		gchar *markup = g_strdup_printf ("<u>%s</u>", _("Pair"));
 		g_object_set (cell, "markup", markup, NULL);
 		g_free (markup);
