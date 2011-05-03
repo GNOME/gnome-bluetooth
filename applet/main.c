@@ -97,20 +97,12 @@ mount_finish_cb (GObject *source_object,
 		 gpointer user_data)
 {
 	GError *error = NULL;
-	char *uri;
 
 	if (bluetooth_applet_browse_address_finish (applet, res, &error) == FALSE) {
 		g_printerr ("Failed to mount OBEX volume: %s", error->message);
 		g_error_free (error);
 		return;
 	}
-
-	uri = g_file_get_uri (G_FILE (source_object));
-	if (gtk_show_uri (NULL, uri, GDK_CURRENT_TIME, &error) == FALSE) {
-		g_printerr ("Failed to open %s: %s", uri, error->message);
-		g_error_free (error);
-	}
-	g_free (uri);
 }
 
 void browse_callback(GObject *widget, gpointer user_data)
