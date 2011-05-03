@@ -111,6 +111,7 @@ struct _MoblinPanelPrivate
 	BluetoothType target_type;
 	gboolean connecting;
 	gboolean display_called;
+	guint update_visible_source_id;
 };
 
 #define CONNECT_TIMEOUT 3.0
@@ -236,6 +237,8 @@ update_visible (gpointer data)
 
 		gtk_label_set_text (GTK_LABEL (priv->visible_label), "");
 
+		priv->update_visible_source_id = 0;
+
 		return FALSE;
 	}
 }
@@ -253,7 +256,8 @@ make_discoverable (MoblinPanel *panel)
 	priv->visible_countdown = DISCOVER_TIMEOUT;
 
 	update_visible (panel);
-	g_timeout_add_seconds (5, update_visible, panel);
+	priv->update_visible_source_id =
+		g_timeout_add_seconds (5, update_visible, panel);
 }
 
 static void
@@ -305,6 +309,18 @@ start_user_share (MoblinPanel *self)
 }
 
 static void
+cancel_visible_updates (MoblinPanel *self)
+{
+	MoblinPanelPrivate *priv = MOBLIN_PANEL_GET_PRIVATE (self);
+
+	if (priv->update_visible_source_id != 0) {
+		g_source_remove (priv->update_visible_source_id);
+		gtk_label_set_text (GTK_LABEL (priv->visible_label), "");
+		priv->update_visible_source_id = 0;
+	}
+}
+
+static void
 powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
                              PowerswitchState      state,
                              gpointer             user_data)
@@ -315,6 +331,7 @@ powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
 	g_signal_handlers_block_by_func (priv->power_switch, power_switch_toggled_cb, user_data);
 
 	if (state == POWERSWITCH_STATE_OFF) {
+		cancel_visible_updates (self);
 		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch),
 	                                      FALSE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
@@ -324,11 +341,13 @@ powerswitch_state_changed_cb (BluetoothPowerswitch *powerswitch,
 	} else if (state == POWERSWITCH_STATE_ON) {
 		mx_gtk_light_switch_set_active (MX_GTK_LIGHT_SWITCH (priv->power_switch), TRUE);
 		gtk_widget_set_sensitive (priv->power_switch, TRUE);
+		gtk_widget_show (priv->visible_button);
 		gtk_widget_set_sensitive (priv->visible_button, TRUE);
 		gtk_widget_set_sensitive (priv->add_new_button, TRUE);
 		enable_send_file (self);
 		start_user_share (self);
 	} else if (state == POWERSWITCH_STATE_NO_ADAPTER) {
+		cancel_visible_updates (self);
 		gtk_widget_set_sensitive (priv->power_switch, FALSE);
 		gtk_widget_set_sensitive (priv->visible_button, FALSE);
 		gtk_widget_set_sensitive (priv->add_new_button, FALSE);
@@ -1755,6 +1774,7 @@ moblin_panel_init (MoblinPanel *self)
 	priv->automatic_pincode = FALSE;
 	priv->pincode = NULL;
 	priv->connecting = FALSE;
+	priv->update_visible_source_id = 0;
 
 	update_random_pincode (self);
 
