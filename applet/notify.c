@@ -156,7 +156,7 @@ void hide_icon(void)
 
 void set_icon(gboolean enabled)
 {
-	const char *_tooltip = enabled ? _("Bluetooth: Enabled") : _("Bluetooth: Disabled");
+	const char *_tooltip = enabled ? _("Bluetooth: On") : _("Bluetooth: Off");
 
 	bt_enabled = enabled;
 
