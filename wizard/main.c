@@ -604,11 +604,16 @@ set_page_search_complete (void)
 gboolean
 entry_custom_event (GtkWidget *entry, GdkEventKey *event)
 {
+	gunichar c;
+
 	if (event->length == 0)
 		return FALSE;
 
-	if ((event->keyval >= GDK_KEY_0 && event->keyval <= GDK_KEY_9) ||
-	    (event->keyval >= GDK_KEY_KP_0 && event->keyval <= GDK_KEY_KP_9))
+	/* Not a printable character? */
+	c = gdk_keyval_to_unicode (event->keyval);
+	if (c == 0 ||
+	    g_unichar_iscntrl (c) ||
+	    g_unichar_isdigit (c))
 		return FALSE;
 
 	return TRUE;
