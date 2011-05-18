@@ -799,6 +799,7 @@ select_device_changed (BluetoothChooser *selector,
 			default_adapter = get_default_adapter_address ();
 			pincode = pin_from_adapter (default_adapter);
 			g_free (default_adapter);
+			automatic_pincode = TRUE;
 		} else if (target_ssp == FALSE) {
 			automatic_pincode = TRUE;
 		}
