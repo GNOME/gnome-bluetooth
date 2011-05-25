@@ -387,7 +387,7 @@ confirm_request (BluetoothApplet *applet,
 {
 	char *text, *line;
 
-	text = g_strdup_printf("%d", pin);
+	text = g_strdup_printf("%06d", pin);
 	confirm_dialog(applet, path, name, long_name, text);
 	g_free(text);
 
