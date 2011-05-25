@@ -250,7 +250,7 @@ confirm_callback (DBusGMethodInvocation *context,
 	g_free (label);
 
 	gtk_widget_show (label_ssp_pin);
-	str = g_strdup_printf ("%d", pin);
+	str = g_strdup_printf ("%06d", pin);
 	set_large_label (GTK_LABEL (label_ssp_pin), str);
 	g_free (str);
 
@@ -273,7 +273,7 @@ display_callback (DBusGMethodInvocation *context,
 	target_ssp = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
-	code = g_strdup_printf("%d", pin);
+	code = g_strdup_printf("%06d", pin);
 
 	if (entered > 0) {
 		GtkEntry *entry;
