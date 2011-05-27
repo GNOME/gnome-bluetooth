@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-18 14:24+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-27 17:39+0300\n"
 "PO-Revision-Date: 2011-05-27 17:07+0200\n"
 "Last-Translator: Giannis Katsampirhs <juankatsampirhs@gmail.com>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
@@ -86,40 +86,40 @@ msgstr "Πινακίδα αφής"
 msgid "Video device"
 msgstr "Συσκευή βίντεο"
 
-#: ../lib/bluetooth-client.c:159
-#: ../lib/bluetooth-chooser.c:130
+#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
 #: ../lib/bluetooth-filter-widget.c:81
 msgid "Unknown"
 msgstr "Άγνωστο"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
-msgstr "Κάνε κλικ για να επιλέξετε συσκευή..."
+msgstr "Κάνε κλικ για να επιλέξετε συσκευή…"
 
 #: ../lib/bluetooth-chooser.c:171
 msgid "No adapters available"
 msgstr "Δεν υπάρχουν διαθέσιμοι προσαρμογείς"
 
-#: ../lib/bluetooth-chooser.c:175
-#: ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
 msgid "Searching for devices..."
-msgstr "Αναζήτηση για συσκευές..."
+msgstr "Αναζήτηση για συσκευές…"
 
 #: ../lib/bluetooth-chooser.c:373
 #, c-format
 msgid "Remove '%s' from the list of devices?"
-msgstr "Να απομακρυνθεί το '%s' από τη λίστα των συσκευών;"
+msgstr "Να απομακρυνθεί το «%s» από τη λίστα των συσκευών;"
 
 #: ../lib/bluetooth-chooser.c:375
-msgid "If you remove the device, you will have to set it up again before next use."
-msgstr "Εάν αφαιρέσετε τη συσκευή, θα πρέπει να τη ρυθμίσετε ξανά την επόμενη φορά που θα την χρησιμοποιήσετε."
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Εάν αφαιρέσετε τη συσκευή, θα πρέπει να τη ρυθμίσετε ξανά την επόμενη φορά "
+"που θα την χρησιμοποιήσετε."
 
 #: ../lib/bluetooth-chooser.c:783
 msgid "Device"
 msgstr "Συσκευή"
 
-#: ../lib/bluetooth-chooser.c:819
-#: ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
 msgid "Type"
 msgstr "Τύπος"
 
@@ -127,8 +127,7 @@ msgstr "Τύπος"
 msgid "All categories"
 msgstr "Όλες οι κατηγορίες"
 
-#: ../lib/bluetooth-filter-widget.c:73
-#: ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
 msgid "Paired"
 msgstr "Συζευγμένα"
 
@@ -145,9 +144,8 @@ msgid "Paired or trusted"
 msgstr "Συζευγμένα ή αξιόπιστα"
 
 #: ../lib/bluetooth-filter-widget.c:231
-#| msgid "<b>Show Only Bluetooth Devices With...</b>"
 msgid "Show Only Bluetooth Devices With..."
-msgstr "Εμφάνιση μόνο των συσκευών Bluetooth με..."
+msgstr "Εμφάνιση μόνο των συσκευών Bluetooth με…"
 
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:247
@@ -186,109 +184,102 @@ msgstr "Χρήση αυτής της συσκευής GPS για γεωτοπι�
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Πρόσβαση στο διαδίκτυο με χρήση του κινητού τηλεφώνου σας (δοκιμή)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:117
 msgid "Select Device to Browse"
 msgstr "Επιλογή συσκευής για περιήγηση"
 
-#: ../applet/main.c:129
+#: ../applet/main.c:121
 msgid "_Browse"
 msgstr "_Περιήγηση"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:130
 msgid "Select device to browse"
 msgstr "Επιλέξτε συσκευή για περιήγηση"
 
-#: ../applet/main.c:288
+#: ../applet/main.c:280
 msgid "Turn On Bluetooth"
 msgstr "Ενεργοποίηση Bluetooth"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:281 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Κλειστό"
 
-#: ../applet/main.c:292
+#: ../applet/main.c:284
 msgid "Turn Off Bluetooth"
 msgstr "Απενεργοποίηση Bluetooth"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:285 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Ενεργό"
 
-#: ../applet/main.c:298
-#: ../applet/notify.c:159
+#: ../applet/main.c:290
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Απενεργοποιημένο"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:437
 msgid "Disconnecting..."
-msgstr "Γίνεται αποσύνδεση..."
+msgstr "Γίνεται αποσύνδεση…"
 
-#: ../applet/main.c:448
-#: ../sendto/main.c:217
-#: ../sendto/main.c:314
+#: ../applet/main.c:440 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
-msgstr "Γίνεται σύνδεση..."
+msgstr "Γίνεται σύνδεση…"
 
-#: ../applet/main.c:451
-#: ../applet/main.c:734
+#: ../applet/main.c:443 ../applet/main.c:726
 msgid "Connected"
 msgstr "Συνδέθηκε"
 
-#: ../applet/main.c:454
-#: ../applet/main.c:734
+#: ../applet/main.c:446 ../applet/main.c:726
 msgid "Disconnected"
 msgstr "Αποσυνδέθηκε"
 
-#: ../applet/main.c:752
-#: ../applet/main.c:816
+#: ../applet/main.c:744 ../applet/main.c:808
 msgid "Disconnect"
 msgstr "Αποσύνδεση"
 
-#: ../applet/main.c:752
-#: ../applet/main.c:816
-#: ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:744 ../applet/main.c:808 ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "Σύνδεση"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:757
 msgid "Send files..."
-msgstr "Αποστολή αρχείων..."
+msgstr "Αποστολή αρχείων…"
 
-#: ../applet/main.c:775
+#: ../applet/main.c:767
 msgid "Browse files..."
-msgstr "Περιήγηση αρχείων..."
+msgstr "Περιήγηση αρχείων…"
+
+#: ../applet/main.c:778
+msgid "Open Keyboard Preferences..."
+msgstr "Άνοιγμα των προτιμήσεων πληκτρολογίου…"
 
 #: ../applet/main.c:786
-msgid "Open Keyboard Preferences..."
-msgstr "Άνοιγμα των προτιμήσεων πληκτρολογίου..."
-
-#: ../applet/main.c:794
 msgid "Open Mouse Preferences..."
-msgstr "Άνοιγμα των προτιμήσεων ποντικιού..."
+msgstr "Άνοιγμα των προτιμήσεων ποντικιού…"
 
-#: ../applet/main.c:804
+#: ../applet/main.c:796
 msgid "Open Sound Preferences..."
-msgstr "Άνοιγμα των προτιμήσεων ήχου..."
+msgstr "Άνοιγμα των προτιμήσεων ήχου…"
 
-#: ../applet/main.c:857
+#: ../applet/main.c:849
 msgid "Debug"
 msgstr "Αποσφαλμάτωση"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:868
 msgid "- Bluetooth applet"
 msgstr "- Μικροεφαρμογή Bluetooth"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:873
 #, c-format
 msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Εκτελέστε '%s --help' για να δείτε την πλήρη λίστα των διαθέσιμων επιλογών της γραμμής εντολών.\n"
+"Εκτελέστε «%s --help» για να δείτε την πλήρη λίστα των διαθέσιμων επιλογών "
+"της γραμμής εντολών.\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:899
 msgid "Bluetooth Applet"
 msgstr "Μικροεφαρμογή Bluetooth"
 
@@ -296,23 +287,15 @@ msgstr "Μικροεφαρμογή Bluetooth"
 #. Translators: This string appears next to a toggle switch which controls
 #. * enabling/disabling Bluetooth radio's on the device. Akin to the power
 #. * switches in the Network UI of Moblin
-#: ../applet/notify.c:122
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129
-#: ../moblin/main.c:141
-#: ../moblin/moblin-panel.c:1602
+#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
+#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1603
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "Bluetooth: Ενεργοποιημένο"
-
-#: ../applet/agent.c:196
-#: ../applet/agent.c:265
+#: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
-msgstr "Η συσκευή '%s' προσπαθεί να συνδεθεί με αυτό τον υπολογιστή"
+msgstr "Η συσκευή «%s» προσπαθεί να συνδεθεί με αυτό τον υπολογιστή"
 
 #: ../applet/agent.c:202
 #, c-format
@@ -322,29 +305,29 @@ msgstr "Παρακαλώ εισάγετε το PIN που είναι σημει�
 #: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Παρακαλώ επιβαιβεώστε ότι το PIN '%s' ταιριάζει με αυτό που είναι στη συσκευή %s."
+msgstr ""
+"Παρακαλώ επιβαιβεώστε ότι το PIN «%s» ταιριάζει με αυτό που είναι στη συσκευή "
+"%s."
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:314
 #, c-format
 msgid "Grant access to '%s'"
-msgstr "Χορήγηση πρόσβασης στο  '%s'"
+msgstr "Χορήγηση πρόσβασης στο «%s»"
 
 #: ../applet/agent.c:319
 #, c-format
 msgid "Device %s wants access to the service '%s'."
-msgstr "Η συσκευή %s απαιτεί πρόσβαση στην υπηρεσία '%s'."
+msgstr "Η συσκευή %s απαιτεί πρόσβαση στην υπηρεσία «%s»."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
 #: ../applet/agent.c:369
 #, c-format
 msgid "Pairing request for '%s'"
-msgstr "Αίτηση σύζευξης για '%s'"
+msgstr "Αίτηση σύζευξης για «%s»"
 
-#: ../applet/agent.c:371
-#: ../applet/agent.c:404
-#: ../applet/agent.c:434
+#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "Συσκευή Bluetooth"
 
@@ -357,7 +340,7 @@ msgstr "Εισαγωγή PIN"
 #: ../applet/agent.c:396
 #, c-format
 msgid "Pairing confirmation for '%s'"
-msgstr "Επικύρωση σύζευξης για '%s'"
+msgstr "Επικύρωση σύζευξης για «%s»"
 
 #: ../applet/agent.c:405
 msgid "Verify PIN"
@@ -366,7 +349,7 @@ msgstr "Επιβεβαίωση PIN"
 #: ../applet/agent.c:432
 #, c-format
 msgid "Authorization request from '%s'"
-msgstr "Αίτηση εξουσιοδότησης από '%s'"
+msgstr "Αίτηση εξουσιοδότησης από «%s»"
 
 #: ../applet/agent.c:435
 msgid "Check authorization"
@@ -386,11 +369,10 @@ msgstr "Bluetooth: Γίνεται έλεγχος"
 
 #: ../applet/popup-menu.ui.h:2
 msgid "Browse files on device..."
-msgstr "Περιήγηση αρχείων στη συσκευή..."
+msgstr "Περιήγηση αρχείων στη συσκευή…"
 
-#: ../applet/popup-menu.ui.h:3
-#: ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1404
+#: ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "Συσκευές"
 
@@ -404,11 +386,11 @@ msgstr "Έξοδος"
 
 #: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
-msgstr "Αποστολή αρχείων στη συσκευή..."
+msgstr "Αποστολή αρχείων στη συσκευή…"
 
 #: ../applet/popup-menu.ui.h:7
 msgid "Set up new device..."
-msgstr "Εγκατάσταση νέας συσκευής..."
+msgstr "Εγκατάσταση νέας συσκευής…"
 
 #: ../applet/popup-menu.ui.h:8
 msgid "Visible"
@@ -438,49 +420,44 @@ msgstr "_Ταιριάζει"
 msgid "_Show input"
 msgstr "_Εμφάνιση εισόδου"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:293
 msgid "Yes"
 msgstr "Ναι"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:293
 msgid "No"
-msgstr "Όχι"
+msgstr "Όχι"
 
-#: ../properties/cc-bluetooth-panel.c:331
+#: ../properties/cc-bluetooth-panel.c:389
 msgid "Bluetooth is disabled"
 msgstr "To Bluetooth είναι απενεργοποιημένο"
 
-#: ../properties/cc-bluetooth-panel.c:336
-#| msgid "Bluetooth is disabled"
+#: ../properties/cc-bluetooth-panel.c:394
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "To Bluetooth είναι απενεργοποιημένο από διακόπτη στο σύστημά σας"
 
-#: ../properties/cc-bluetooth-panel.c:340
-#| msgid "No Bluetooth adapters present"
+#: ../properties/cc-bluetooth-panel.c:398
 msgid "No Bluetooth adapters found"
 msgstr "Δεν βρέθηκε προσαρμογέας Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:406
-#| msgid "Visible"
+#: ../properties/cc-bluetooth-panel.c:464
 msgid "Visibility"
-msgstr "Ορατότητα"
+msgstr "Ορατότητα"
 
-#: ../properties/cc-bluetooth-panel.c:410
+#: ../properties/cc-bluetooth-panel.c:468
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Ορατότητα του \"%s\""
 
 #: ../properties/bluetooth.ui.h:1
 msgid "Address"
-msgstr "Διεύθυνση"
+msgstr "Διεύθυνση"
 
 #: ../properties/bluetooth.ui.h:2
-#| msgid "Connect"
 msgid "Connection"
-msgstr "Σύνδεση"
+msgstr "Σύνδεση"
 
 #: ../properties/bluetooth.ui.h:3
-#| msgid "Keyboard"
 msgid "Keyboard Settings"
 msgstr "Ρυθμίσεις πληκτρολογίου"
 
@@ -489,14 +466,12 @@ msgid "Mouse and Touchpad Settings"
 msgstr "Ρυθμίσεις ποντικιού και πινακίδας αφής"
 
 #: ../properties/bluetooth.ui.h:6
-#| msgid "Phone"
 msgid "Power"
-msgstr "Ισχύς"
+msgstr "Ισχύς"
 
 #: ../properties/bluetooth.ui.h:7
-#| msgid "Settings"
 msgid "Sound Settings"
-msgstr "Ρυθμίσεις ήχου"
+msgstr "Ρυθμίσεις ήχου"
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -506,20 +481,18 @@ msgstr "Προσρμογή ρυθμίσεων Bluetooth"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207
-#: ../wizard/main.c:328
+#: ../wizard/main.c:207 ../wizard/main.c:328
 #, c-format
 msgid "Pairing with '%s' cancelled"
-msgstr "Η σύζευξη με το '%s' ακυρώθηκε"
+msgstr "Η σύζευξη με το «%s» ακυρώθηκε"
 
-#: ../wizard/main.c:247
-#: ../moblin/moblin-panel.c:1146
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Παρακαλώ επιβεβαιώστε ότι το PIN που εμφανίζεται στο '%s' ταιριάζει με αυτό."
+msgstr ""
+"Παρακαλώ επιβεβαιώστε ότι το PIN που εμφανίζεται στο «%s» ταιριάζει με αυτό."
 
-#: ../wizard/main.c:301
-#: ../moblin/moblin-panel.c:1197
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "Παρακαλώ εισάγετε το ακόλουθο PIN:"
 
@@ -530,7 +503,7 @@ msgstr "Παρακαλώ εισάγετε το ακόλουθο PIN:"
 #: ../wizard/main.c:384
 #, c-format
 msgid "Setting up '%s' failed"
-msgstr "Η ρύθμιση '%s' απέτυχε"
+msgstr "Η ρύθμιση του «%s» απέτυχε"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -539,19 +512,19 @@ msgstr "Η ρύθμιση '%s' απέτυχε"
 #: ../wizard/main.c:442
 #, c-format
 msgid "Connecting to '%s'..."
-msgstr "Γίνεται σύνδεση με '%s'..."
+msgstr "Γίνεται σύνδεση με «%s»…"
 
-#: ../wizard/main.c:480
-#: ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
 #, c-format
-msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Παρακαλώ εισάγετε το ακόλουθο PIN στο '%s' και πιέστε το πλήκτρο \"Enter\":"
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr ""
+"Παρακαλώ εισάγετε το ακόλουθο PIN στο «%s» και πιέστε το πλήκτρο \"Enter\":"
 
-#: ../wizard/main.c:482
-#: ../moblin/moblin-panel.c:752
+#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
-msgstr "Παρακαλώ εισάγετε το ακόλουθο PIN στο '%s':"
+msgstr "Παρακαλώ εισάγετε το ακόλουθο PIN στο «%s»:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -560,35 +533,30 @@ msgstr "Παρακαλώ εισάγετε το ακόλουθο PIN στο '%s':
 #: ../wizard/main.c:505
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Παρακαλώ περιμένετε μέχρι το πέρας της ρύθμισης στη συσκευή '%s'..."
+msgstr "Παρακαλώ περιμένετε μέχρι το πέρας της ρύθμισης στη συσκευή «%s»…"
 
-#: ../wizard/main.c:523
-#: ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
-msgstr "Επιτυχημένη ρύθμιση στη συσκευή '%s'"
+msgstr "Επιτυχημένη ρύθμιση στη συσκευή «%s»"
 
-#: ../wizard/wizard.ui.h:1
-#: ../moblin/pin.ui.h:1
+#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (τα περισσότερα ακουστικά, ποντίκια και συσκευές GPS)"
+msgstr "«0000» (τα περισσότερα ακουστικά, ποντίκια και συσκευές GPS)"
 
-#: ../wizard/wizard.ui.h:2
-#: ../moblin/pin.ui.h:2
+#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
 msgid "'1111'"
-msgstr "'1111'"
+msgstr "«1111»"
 
-#: ../wizard/wizard.ui.h:3
-#: ../moblin/pin.ui.h:3
+#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
 msgid "'1234'"
-msgstr "'1234'"
+msgstr "«1234»"
 
 #: ../wizard/wizard.ui.h:4
 msgid "Bluetooth New Device Setup"
 msgstr "Ρύθμιση νέας συσκευής Bluetooth"
 
-#: ../wizard/wizard.ui.h:5
-#: ../moblin/pin.ui.h:4
+#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
 msgid "Custom PIN:"
 msgstr "Προσαρμοσμένο PIN:"
 
@@ -609,8 +577,7 @@ msgid "Do not pair"
 msgstr "Δε γίνεται σύζευξη"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11
-#: ../moblin/moblin-panel.c:1350
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "Δεν ταιριάζει"
 
@@ -619,8 +586,7 @@ msgid "Finishing New Device Setup"
 msgstr "Ολοκλήρωση ρύθμισης νέας συσκευής"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
-#: ../moblin/pin.ui.h:6
+#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
 msgid "Fixed PIN"
 msgstr "Σταθερό PIN"
 
@@ -629,27 +595,25 @@ msgid "Introduction"
 msgstr "Εισαγωγή"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17
-#: ../moblin/moblin-panel.c:1346
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "Ταιριάζει"
 
-#: ../wizard/wizard.ui.h:18
-#: ../moblin/pin.ui.h:7
+#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
 msgid "PIN Options"
 msgstr "Επιλογές PIN"
 
 #: ../wizard/wizard.ui.h:19
 msgid "PIN _options..."
-msgstr "_Επιλογές PIN..."
+msgstr "_Επιλογές PIN…"
 
-#: ../wizard/wizard.ui.h:20
-#: ../moblin/moblin-panel.c:1260
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
-msgstr "Επιλέξτε τις πρόσθετες υπηρεσίες που επιθυμείτε να χρησιμοποιήσετε με τη συσκευή σας:"
+msgstr ""
+"Επιλέξτε τις πρόσθετες υπηρεσίες που επιθυμείτε να χρησιμοποιήσετε με τη "
+"συσκευή σας:"
 
 #: ../wizard/wizard.ui.h:21
-#| msgid "Select the device you want to setup"
 msgid "Select the device you want to set up"
 msgstr "Επιλέξτε τη συσκευή που επιθυμείτε να ρυθμίσετε"
 
@@ -658,41 +622,49 @@ msgid "Setup Completed"
 msgstr "Η ρύθμιση ολοκληρώθηκε"
 
 #: ../wizard/wizard.ui.h:23
-msgid "The Bluetooth new device setup will walk you through the process of configuring Bluetooth enabled devices for use with this computer."
-msgstr "Η εγκατάσταση της νέας συσκευής Bluetooth θα σας καθοδηγήσει στην διαδικασία ρύθμισης συσκευών με ενεργοποιημένο το Bluetooth ώστε να χρησιμοποιηθούν με αυτό τον υπολογιστή."
+msgid ""
+"The Bluetooth new device setup will walk you through the process of "
+"configuring Bluetooth enabled devices for use with this computer."
+msgstr ""
+"Η εγκατάσταση της νέας συσκευής Bluetooth θα σας καθοδηγήσει στην διαδικασία "
+"ρύθμισης συσκευών με ενεργοποιημένο το Bluetooth ώστε να χρησιμοποιηθούν με "
+"αυτό τον υπολογιστή."
 
 #: ../wizard/wizard.ui.h:24
-msgid "The device will need to be within 10 meters of your computer, and be “visible” (sometimes called “discoverable”). Check the device's manual if in doubt."
-msgstr "Η συσκευή πρέπει να βρίσκεται το πολύ 10 μέτρα μακριά από τον υπολογιστή σας και να είναι “ορατή” (μερικές φορές λέγεται και “ανιχνεύσιμη”). Αν αμφιβάλλετε, ελέγξτε το εγχειρίδιο της συσκευής."
+msgid ""
+"The device will need to be within 10 meters of your computer, and be "
+"“visible” (sometimes called “discoverable”). Check the device's manual if in "
+"doubt."
+msgstr ""
+"Η συσκευή πρέπει να βρίσκεται το πολύ 10 μέτρα μακριά από τον υπολογιστή σας "
+"και να είναι “ορατή” (μερικές φορές λέγεται και “ανιχνεύσιμη”). Αν "
+"αμφιβάλλετε, ελέγξτε το εγχειρίδιο της συσκευής."
 
 #: ../wizard/wizard.ui.h:25
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "Καλωσήλθατε στη ρύθμιση νέας συσκευής Bluetooth"
 
-#: ../wizard/wizard.ui.h:26
-#: ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
 msgid "_Automatic PIN selection"
 msgstr "_Αυτόματη επιλογή PIN"
 
 #: ../wizard/wizard.ui.h:27
 msgid "_Cancel"
-msgstr "_Ακύρωση"
+msgstr "_Ακύρωση"
 
 #: ../wizard/wizard.ui.h:28
 msgid "_Close"
-msgstr "_Κλείσιμο"
+msgstr "_Κλείσιμο"
 
 #: ../wizard/wizard.ui.h:29
 msgid "_Restart Setup"
 msgstr "_Επανεκκίνηση ρύθμισης"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-#| msgid "Bluetooth New Device Setup"
 msgid "Bluetooth Device Setup"
 msgstr "Ρύθμιση νέας συσκευής Bluetooth"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-#| msgid "Bluetooth device"
 msgid "Setup Bluetooth devices"
 msgstr "Ρύθμιση συσκευών Bluetooth"
 
@@ -703,8 +675,7 @@ msgid_plural "%'d seconds"
 msgstr[0] "%'d δευτερόλεπτο"
 msgstr[1] "%'d δευτερόλεπτα"
 
-#: ../sendto/main.c:167
-#: ../sendto/main.c:180
+#: ../sendto/main.c:167 ../sendto/main.c:180
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -746,25 +717,24 @@ msgstr "Από:"
 msgid "To:"
 msgstr "Προς:"
 
-#: ../sendto/main.c:343
-#: ../sendto/main.c:359
+#: ../sendto/main.c:343 ../sendto/main.c:359
 msgid "An unknown error occurred"
 msgstr "Προέκυψε ένα άγνωστο σφάλμα"
 
 #: ../sendto/main.c:352
-#| msgid ""
-#| "Make sure that remote device is switched on and that it accepts Bluetooth "
-#| "connections"
-msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
-msgstr "Βεβαιωθείτε ότι η απομακρυσμένη συσκευή είναι ενεργοποιημένη και ότι δέχεται συνδέσεις Bluetooth"
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr ""
+"Βεβαιωθείτε ότι η απομακρυσμένη συσκευή είναι ενεργοποιημένη και ότι δέχεται "
+"συνδέσεις Bluetooth"
 
 #: ../sendto/main.c:450
 #, c-format
 msgid "Sending %s"
 msgstr "Αποστολή %s"
 
-#: ../sendto/main.c:457
-#: ../sendto/main.c:523
+#: ../sendto/main.c:457 ../sendto/main.c:523
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Αποστολή αρχείου %d από %d"
@@ -780,23 +750,20 @@ msgid "%d B/s"
 msgstr "%d B/δευτ."
 
 #: ../sendto/main.c:651
-#| msgid "Select Device to Send To"
 msgid "Select device to send to"
 msgstr "Επιλέξτε την συσκευή που θα γίνει αποστολή"
 
 #: ../sendto/main.c:656
-#| msgid "Send _To"
 msgid "_Send"
-msgstr "Α_ποστολή"
+msgstr "Α_ποστολή"
 
 #: ../sendto/main.c:700
 msgid "Choose files to send"
 msgstr "Επιλογή αρχείων  για αποστολή"
 
 #: ../sendto/main.c:703
-#| msgid "_Reject"
 msgid "Select"
-msgstr "Επιλογή"
+msgstr "Επιλογή"
 
 #: ../sendto/main.c:729
 msgid "Remote device to use"
@@ -807,13 +774,11 @@ msgid "Remote device's name"
 msgstr "Το όνομα της απομακρυσμένης συσκευής"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
-#| msgid "Programming error, could not find the device in the list"
 msgid "Programming error: could not find the device in the list"
 msgstr "Σφάλμα προγραμματισμού: αδυναμία εντοπισμού της συσκευής στη λίστα"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-#| msgid "Obex Push file transfer unsupported"
 msgid "OBEX Push file transfer unsupported"
 msgstr "Η μεταφορά αρχείων με Obex Push δεν υποστηρίζεται"
 
@@ -822,12 +787,10 @@ msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
-#| msgid "Bluetooth Manager"
 msgid "Bluetooth Transfer"
-msgstr "Μεταφορά bluetooth"
+msgstr "Μεταφορά Bluetooth"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
-#| msgid "Sending files via Bluetooth"
 msgid "Send files via Bluetooth"
 msgstr "Αποστολή αρχείων μέσω Bluetooth"
 
@@ -835,8 +798,7 @@ msgstr "Αποστολή αρχείων μέσω Bluetooth"
 msgid "Run in standalone mode"
 msgstr "Εκτέλεση σε αυτόνομη κατάσταση λειτουργίας"
 
-#: ../moblin/main.c:101
-#: ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
 msgid "Moblin Bluetooth Panel"
 msgstr "Πίνακας Bluetooth του Moblin"
 
@@ -879,8 +841,7 @@ msgstr "%s %s"
 
 #. minutes
 #. seconds
-#: ../moblin/moblin-panel.c:195
-#: ../moblin/moblin-panel.c:199
+#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
 #, c-format
 msgid "%s"
 msgstr "%s"
@@ -888,7 +849,7 @@ msgstr "%s"
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
 msgid "0 seconds"
-msgstr "0 δευτερόλεπτα"
+msgstr "0 δευτερόλεπτα"
 
 #: ../moblin/moblin-panel.c:224
 #, c-format
@@ -904,69 +865,70 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "Η σύζευξη με το %s απέτυχε."
 
-#: ../moblin/moblin-panel.c:985
-#| msgid "Paired"
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "Σύζευξη"
 
-#: ../moblin/moblin-panel.c:1022
-#| msgid "_Browse"
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "Περιήγηση"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "Η ρύθμιση της συσκευής απέτυχε"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233
-#: ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358
-#: ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "Πίσω στις συσκευές"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "Έγινε"
 
-#: ../moblin/moblin-panel.c:1293
-#: ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "Ρύθμιση συσκευής"
 
-#: ../moblin/moblin-panel.c:1453
-#: ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
 msgid "Settings"
-msgstr "Ρυθμίσεις"
+msgstr "Ρυθμίσεις"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "Μόνο εμφάνιση:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "Επιλογές PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "Προσθήκη νέας συσκευής"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "Κάντε το ορατό στο Bluetooth"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
 msgstr "Αποστολή αρχείου από τον υπολογιστή σας"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Πίνακας διαχείρισης Bluetooth"
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "Bluetooth: Ενεργοποιημένο"
+
+#~ msgid "«1234»"
+#~ msgstr "«1234»"
 
 #~ msgid "Make computer _visible"
 #~ msgstr "Κάνε τον υπολογιστή _ορατό"
