@@ -51,12 +51,12 @@ typedef struct _MuxBanner      MuxBanner;
 typedef struct _MuxBannerClass MuxBannerClass;
 
 struct _MuxBanner {
-  GtkHBox parent;
+  GtkBox parent;
   MuxBannerPrivate *priv;
 };
 
 struct _MuxBannerClass {
-  GtkHBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 GType mux_banner_get_type (void) G_GNUC_CONST;

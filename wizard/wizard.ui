@@ -11,7 +11,8 @@
     <signal name="cancel" handler="close_callback"/>
     <signal name="close" handler="close_callback"/>
     <child>
-      <object class="GtkVBox" id="page_intro">
+      <object class="GtkBox" id="page_intro">
+        <property name="orientation">vertical</property>
         <property name="visible">True</property>
         <property name="border_width">24</property>
         <property name="spacing">6</property>
@@ -64,7 +65,8 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_search">
+      <object class="GtkBox" id="page_search">
+	<property name="orientation">vertical</property>
         <property name="visible">True</property>
         <property name="border_width">24</property>
         <property name="spacing">6</property>
@@ -104,7 +106,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_connecting">
+      <object class="GtkBox" id="page_connecting">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
@@ -161,7 +163,8 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_setup">
+      <object class="GtkBox" id="page_setup">
+	<property name="orientation">vertical</property>
         <property name="visible">True</property>
         <property name="border_width">24</property>
         <property name="spacing">6</property>
@@ -196,7 +199,8 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_ssp_setup">
+      <object class="GtkBox" id="page_ssp_setup">
+	<property name="orientation">vertical</property>
         <property name="visible">True</property>
         <property name="border_width">24</property>
         <property name="spacing">6</property>
@@ -230,7 +234,8 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_failure">
+      <object class="GtkBox" id="page_failure">
+	<property name="orientation">vertical</property>
         <property name="visible">True</property>
         <property name="border_width">24</property>
         <property name="spacing">6</property>
@@ -254,7 +259,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_finishing">
+      <object class="GtkBox" id="page_finishing">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
@@ -311,7 +316,8 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVBox" id="page_summary">
+      <object class="GtkBox" id="page_summary">
+	<property name="orientation">vertical</property>
         <property name="visible">True</property>
         <property name="border_width">24</property>
         <property name="spacing">12</property>
@@ -330,7 +336,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="extra_config_vbox">
+          <object class="GtkBox" id="extra_config_vbox">
             <property name="visible">True</property>
             <property name="orientation">vertical</property>
             <property name="spacing">6</property>
@@ -368,12 +374,12 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">normal</property>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="border_width">12</property>
             <property name="orientation">vertical</property>
@@ -467,7 +473,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="hbox1">
+              <object class="GtkBox" id="hbox1">
+		<property name="orientation">horizontal</property>
                 <property name="visible">True</property>
                 <property name="spacing">12</property>
                 <child>

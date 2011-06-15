@@ -58,9 +58,9 @@ static int signals[LAST_SIGNAL] = { 0 };
 static void	bluetooth_chooser_combo_class_init	(BluetoothChooserComboClass * klass);
 static void	bluetooth_chooser_combo_init		(BluetoothChooserCombo      * combo);
 
-static GtkVBoxClass *parent_class;
+static GtkBoxClass *parent_class;
 
-G_DEFINE_TYPE(BluetoothChooserCombo, bluetooth_chooser_combo, GTK_TYPE_VBOX);
+G_DEFINE_TYPE(BluetoothChooserCombo, bluetooth_chooser_combo, GTK_TYPE_BOX);
 
 #define BLUETOOTH_CHOOSER_COMBO_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 									BLUETOOTH_TYPE_CHOOSER_COMBO, BluetoothChooserComboPrivate))
@@ -299,7 +299,8 @@ bluetooth_chooser_combo_init (BluetoothChooserCombo *combo)
 
 	combo->priv = BLUETOOTH_CHOOSER_COMBO_GET_PRIVATE (combo);
 
-	combo->priv->drop_box = gtk_hbox_new (TRUE, 0);
+	combo->priv->drop_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+	gtk_box_set_homogeneous (GTK_BOX (combo->priv->drop_box), TRUE);
 	gtk_box_pack_start (GTK_BOX (combo), combo->priv->drop_box,
 			    TRUE, FALSE, 0);
 	/* Setup the combo itself */

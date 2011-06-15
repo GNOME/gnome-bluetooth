@@ -55,7 +55,7 @@ struct _BluetoothFilterWidgetPrivate {
 	guint show_device_category : 1;
 };
 
-G_DEFINE_TYPE(BluetoothFilterWidget, bluetooth_filter_widget, GTK_TYPE_VBOX)
+G_DEFINE_TYPE(BluetoothFilterWidget, bluetooth_filter_widget, GTK_TYPE_BOX)
 
 enum {
 	DEVICE_TYPE_FILTER_COL_NAME = 0,
@@ -481,5 +481,6 @@ GtkWidget *
 bluetooth_filter_widget_new (void)
 {
 	return g_object_new(BLUETOOTH_TYPE_FILTER_WIDGET,
+			    "orientation", GTK_ORIENTATION_VERTICAL,
 			    NULL);
 }

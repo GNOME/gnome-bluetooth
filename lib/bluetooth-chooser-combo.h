@@ -39,13 +39,13 @@ typedef struct _BluetoothChooserComboPrivate BluetoothChooserComboPrivate;
 typedef struct _BluetoothChooserComboClass BluetoothChooserComboClass;
 
 typedef struct _BluetoothChooserCombo {
-	GtkVBox            parent;
+	GtkBox            parent;
 
 	BluetoothChooserComboPrivate *priv;
 } BluetoothChooserCombo;
 
 struct _BluetoothChooserComboClass {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 
   void (*chooser_created) (BluetoothChooserCombo *self, GtkWidget *chooser);
 };

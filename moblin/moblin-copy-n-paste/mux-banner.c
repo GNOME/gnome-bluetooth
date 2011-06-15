@@ -28,7 +28,7 @@ struct _MuxBannerPrivate {
 };
 
 #define GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), MUX_TYPE_BANNER, MuxBannerPrivate))
-G_DEFINE_TYPE (MuxBanner, mux_banner, GTK_TYPE_HBOX);
+G_DEFINE_TYPE (MuxBanner, mux_banner, GTK_TYPE_BOX);
 
 static void
 mux_banner_realize (GtkWidget *widget)
@@ -84,7 +84,7 @@ mux_banner_new (const char *text)
 {
   GtkWidget *widget;
 
-  widget = g_object_new (MUX_TYPE_BANNER, NULL);
+  widget = g_object_new (MUX_TYPE_BANNER, "orientation", GTK_ORIENTATION_HORIZONTAL, NULL);
   if (text)
     mux_banner_set_text ((MuxBanner *)widget, text);
   return widget;

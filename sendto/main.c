@@ -260,7 +260,7 @@ static void create_window(void)
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 400, -1);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
 
-	vbox = gtk_vbox_new(FALSE, 0);
+	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_set_spacing(GTK_BOX(vbox), 6);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
@@ -314,7 +314,7 @@ static void create_window(void)
 							_("Connecting..."));
 	gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
 
-	hbox = gtk_hbox_new (FALSE, 4);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
 
 	image_status = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_MENU);
 	gtk_widget_set_no_show_all (image_status, TRUE);

@@ -89,7 +89,7 @@ struct _BluetoothChooserPrivate {
 	guint internal_filter : 1;
 };
 
-G_DEFINE_TYPE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_VBOX)
+G_DEFINE_TYPE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_BOX)
 
 enum {
 	DEVICE_TYPE_FILTER_COL_NAME = 0,
@@ -863,7 +863,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_box_set_spacing (GTK_BOX(self), 18);
 	gtk_container_set_border_width (GTK_CONTAINER(self), 0);
 
-	vbox = gtk_vbox_new (FALSE, 0);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (self), vbox, TRUE, TRUE, 0);
 
@@ -880,11 +880,11 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 0, 0);
 
 	/* The treeview label */
-	vbox = gtk_vbox_new (FALSE, 6);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (priv->label_align), vbox);
 
-	priv->search_hbox = gtk_hbox_new (FALSE, 24);
+	priv->search_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 24);
 	gtk_widget_set_name (priv->search_hbox, "search_hbox");
 	if (priv->show_searching)
 		gtk_widget_show (priv->search_hbox);
@@ -897,7 +897,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 			  G_CALLBACK (adapter_model_row_changed), self);
 
 	/* The searching label */
-	hbox = gtk_hbox_new (FALSE, 6);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	gtk_widget_set_name (hbox, "searching label hbox");
 	priv->spinner = gtk_spinner_new ();
 	gtk_container_add (GTK_CONTAINER (hbox), priv->spinner);
@@ -1250,6 +1250,7 @@ GtkWidget *
 bluetooth_chooser_new (const gchar *title)
 {
 	return g_object_new(BLUETOOTH_TYPE_CHOOSER,
+			    "orientation", GTK_ORIENTATION_VERTICAL,
 			    "title", title,
 			    NULL);
 }

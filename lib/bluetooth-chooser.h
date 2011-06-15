@@ -46,11 +46,11 @@ typedef struct _BluetoothChooser BluetoothChooser;
 typedef struct _BluetoothChooserClass BluetoothChooserClass;
 
 struct _BluetoothChooser {
-	GtkVBox parent;
+	GtkBox parent;
 };
 
 struct _BluetoothChooserClass {
-	GtkVBoxClass parent_class;
+	GtkBoxClass parent_class;
 
 	void (*selected_device_changed) (BluetoothChooser *chooser, const char *address);
 	void (*selected_device_activated) (BluetoothChooser *chooser, const char *address);

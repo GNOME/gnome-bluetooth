@@ -53,7 +53,7 @@
 
 #include "moblin-panel.h"
 
-G_DEFINE_TYPE (MoblinPanel, moblin_panel, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (MoblinPanel, moblin_panel, GTK_TYPE_BOX)
 
 #define MOBLIN_PANEL_GET_PRIVATE(o)                                         \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), MOBLIN_TYPE_PANEL, MoblinPanelPrivate))
@@ -1832,7 +1832,7 @@ moblin_panel_class_init (MoblinPanelClass *klass)
 GtkWidget *
 moblin_panel_new (void)
 {
-	return g_object_new (MOBLIN_TYPE_PANEL, NULL);
+	return g_object_new (MOBLIN_TYPE_PANEL, "orientation", GTK_ORIENTATION_HORIZONTAL, NULL);
 }
 
 /**

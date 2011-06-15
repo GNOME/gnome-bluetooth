@@ -864,25 +864,11 @@ page_func (gint current_page,
 static GtkAssistant *
 create_wizard (void)
 {
-	const char *pages[] = {
-		"page_intro",
-		"page_search",
-		"page_connecting",
-		"page_setup",
-		"page_ssp_setup",
-		"page_failure",
-		"page_finishing",
-		"page_summary",
-	};
-	guint i;
-
 	GtkAssistant *assistant;
 	GError *err = NULL;
 	GtkWidget *combo, *page_intro;
 	GtkTreeModel *model;
 	GtkCellRenderer *renderer;
-	GdkPixbuf *pixbuf;
-	int height;
 
 	builder = gtk_builder_new ();
 	if (gtk_builder_add_from_file (builder, "wizard.ui", NULL) == 0) {
@@ -960,15 +946,6 @@ create_wizard (void)
 	page_summary = W("page_summary");
 	label_summary = W("label_summary");
 	extra_config_vbox = W("extra_config_vbox");
-
-	/* Set page icons */
-	gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, NULL, &height);
-	pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
-					   "bluetooth", height, 0, NULL);
-	for (i = 0; i < G_N_ELEMENTS (pages); i++)
-		gtk_assistant_set_page_header_image (assistant, W(pages[i]), pixbuf);
-	if (pixbuf != NULL)
-		g_object_unref (pixbuf);
 
 	/* PIN dialog */
 	pin_dialog = W("pin_dialog");

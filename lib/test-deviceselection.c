@@ -331,7 +331,7 @@ create_filter_dialogue (void)
 
 	dialog = create_dialogue ("Add a Device");
 
-	hbox = gtk_hbox_new (FALSE, 6);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	gtk_widget_show (hbox);
 
 	selector = g_object_new (BLUETOOTH_TYPE_CHOOSER,
@@ -345,7 +345,7 @@ create_filter_dialogue (void)
 		     NULL);
 	gtk_box_pack_start (GTK_BOX (hbox), selector, TRUE, TRUE, 6);
 
-	vbox = gtk_vbox_new (FALSE, 0);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 	filter = bluetooth_filter_widget_new ();

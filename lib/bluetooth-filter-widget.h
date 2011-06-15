@@ -47,11 +47,11 @@ typedef struct _BluetoothFilterWidget BluetoothFilterWidget;
 typedef struct _BluetoothFilterWidgetClass BluetoothFilterWidgetClass;
 
 struct _BluetoothFilterWidget {
-	GtkVBox parent;
+	GtkBox parent;
 };
 
 struct _BluetoothFilterWidgetClass {
-	GtkVBoxClass parent_class;
+	GtkBoxClass parent_class;
 };
 
 GType bluetooth_filter_widget_get_type (void);

@@ -85,7 +85,7 @@ int main (int argc, char **argv)
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	g_signal_connect (G_OBJECT (window), "delete-event",
 			  G_CALLBACK (delete_event_cb), NULL);
-	vbox = gtk_vbox_new (FALSE, 6);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_container_add (GTK_CONTAINER (window), vbox);
 
 	list = bluetooth_plugin_manager_get_widgets (bdaddr, (const char **) uuids);
