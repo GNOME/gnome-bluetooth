@@ -857,6 +857,8 @@ bluetooth_chooser_init(BluetoothChooser *self)
 
 	gtk_widget_push_composite_child ();
 
+	g_object_set (G_OBJECT (self), "orientation", GTK_ORIENTATION_VERTICAL, NULL);
+
 	priv->client = bluetooth_client_new ();
 
 	/* Setup the widget itself */
@@ -1250,7 +1252,6 @@ GtkWidget *
 bluetooth_chooser_new (const gchar *title)
 {
 	return g_object_new(BLUETOOTH_TYPE_CHOOSER,
-			    "orientation", GTK_ORIENTATION_VERTICAL,
 			    "title", title,
 			    NULL);
 }

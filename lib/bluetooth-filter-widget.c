@@ -224,6 +224,8 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 
 	gtk_widget_push_composite_child ();
 
+	g_object_set (G_OBJECT (self), "orientation", GTK_ORIENTATION_VERTICAL, NULL);
+
 	gtk_box_set_homogeneous (GTK_BOX (self), FALSE);
 	gtk_box_set_spacing (GTK_BOX (self), 6);
 
@@ -481,6 +483,5 @@ GtkWidget *
 bluetooth_filter_widget_new (void)
 {
 	return g_object_new(BLUETOOTH_TYPE_FILTER_WIDGET,
-			    "orientation", GTK_ORIENTATION_VERTICAL,
 			    NULL);
 }
