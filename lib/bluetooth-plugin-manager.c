@@ -41,12 +41,7 @@
 
 #include "bluetooth-client.h"
 
-#define UNINSTALLED_PLUGINDIR "../lib/plugins"
-
-#define SOEXT           ("." G_MODULE_SUFFIX)
-#define SOEXT_LEN       (strlen (SOEXT))
-
-GList *plugin_list = NULL;
+static GList *plugin_list = NULL;
 
 static void
 bluetooth_plugin_dir_process (const char *plugindir)
@@ -65,7 +60,7 @@ bluetooth_plugin_dir_process (const char *plugindir)
 			g_error_free (err);
 	} else {
 		while ((item = g_dir_read_name(dir))) {
-			if (g_str_has_suffix (item, SOEXT)) {
+			if (g_str_has_suffix (item, "." G_MODULE_SUFFIX)) {
 				char *module_path;
 
 				p = g_new0(GbtPlugin, 1); 
@@ -86,7 +81,7 @@ bluetooth_plugin_dir_process (const char *plugindir)
 
 				gbt_init_plugin (p);
 
-				plugin_list = g_list_append (plugin_list, p); 
+				plugin_list = g_list_append (plugin_list, p);
 			}
 		}
 		g_dir_close (dir);
@@ -103,11 +98,6 @@ bluetooth_plugin_dir_process (const char *plugindir)
 gboolean
 bluetooth_plugin_manager_init (void)
 {
-	if (g_file_test (UNINSTALLED_PLUGINDIR, G_FILE_TEST_IS_DIR) != FALSE) {
-		/* Try to load the local plugins */
-		bluetooth_plugin_dir_process ("../lib/plugins/.libs/");
-	}
-
 	bluetooth_plugin_dir_process (PLUGINDIR);
 
 	return g_list_length (plugin_list) != 0;
