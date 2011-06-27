@@ -403,7 +403,8 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 	}
 
 	g_free (bdaddr);
-	gtk_widget_set_sensitive (WID ("hbox2") , sensitive);
+	gtk_widget_set_sensitive (WID ("box_power") , sensitive);
+	gtk_widget_set_sensitive (WID ("box_vis") , sensitive);
 
 	button = GTK_SWITCH (WID ("switch_bluetooth"));
 
@@ -597,7 +598,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	/* Note that this will only ever show the devices on the default
 	 * adapter, this is on purpose */
 	self->priv->chooser = bluetooth_chooser_new (NULL);
-	gtk_box_pack_start (GTK_BOX (WID ("box1")), self->priv->chooser, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (WID ("box_devices")), self->priv->chooser, TRUE, TRUE, 0);
 	g_object_set (self->priv->chooser,
 		      "show-searching", FALSE,
 		      "show-device-type", FALSE,
@@ -616,6 +617,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	/* Join treeview and buttons */
 	widget = bluetooth_chooser_get_scrolled_window (BLUETOOTH_CHOOSER (self->priv->chooser));
 	gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget), 250);
+	gtk_scrolled_window_set_min_content_width (GTK_SCROLLED_WINDOW (widget), 200);
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
 	widget = WID ("toolbar");
