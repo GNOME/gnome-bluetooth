@@ -32,6 +32,7 @@
 G_BEGIN_DECLS
 
 GtkTreeModel *bluetooth_chooser_get_model (BluetoothChooser *self);
+GtkTreeViewColumn *bluetooth_chooser_get_device_column (BluetoothChooser *self);
 GtkTreeViewColumn *bluetooth_chooser_get_type_column (BluetoothChooser *self);
 GtkWidget *bluetooth_chooser_get_treeview (BluetoothChooser *self);
 GtkWidget *bluetooth_chooser_get_scrolled_window (BluetoothChooser *self);
