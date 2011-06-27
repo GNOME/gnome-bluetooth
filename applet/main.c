@@ -200,13 +200,13 @@ void sendto_callback(GObject *widget, gpointer user_data)
 	if (address != NULL) {
 		char *s;
 
-		s = g_strdup_printf ("--device=\"%s\"", address);
+		s = g_strdup_printf ("--device=%s", address);
 		g_ptr_array_add (a, s);
 	}
 	if (address != NULL && alias != NULL) {
 		char *s;
 
-		s = g_strdup_printf ("--name=\"%s\"", alias);
+		s = g_strdup_printf ("--name=%s", alias);
 		g_ptr_array_add (a, s);
 	}
 	g_ptr_array_add (a, NULL);
