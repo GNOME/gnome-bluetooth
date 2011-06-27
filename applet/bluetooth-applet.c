@@ -235,7 +235,7 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 	if (address != NULL) {
 		char *s;
 
-		s = g_strdup_printf ("--device=\"%s\"", address);
+		s = g_strdup_printf ("--device=%s", address);
 		g_ptr_array_add (a, s);
 	}
 	if (address != NULL && alias != NULL) {
