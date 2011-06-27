@@ -367,13 +367,13 @@ send_file_button_clicked_cb (GtkButton *button,
 	if (address != NULL) {
 		char *s;
 
-		s = g_strdup_printf ("--device=\"%s\"", address);
+		s = g_strdup_printf ("--device=%s", address);
 		g_ptr_array_add (a, s);
 	}
 	if (address != NULL && name != NULL) {
 		char *s;
 
-		s = g_strdup_printf ("--name=\"%s\"", name);
+		s = g_strdup_printf ("--name=%s", name);
 		g_ptr_array_add (a, s);
 	}
 	g_ptr_array_add (a, NULL);
