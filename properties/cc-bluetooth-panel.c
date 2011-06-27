@@ -233,7 +233,7 @@ add_extra_setup_widgets (CcBluetoothPanel *self,
 		GtkWidget *widget = l->data;
 		gtk_box_pack_start (GTK_BOX (container), widget,
 				    FALSE, FALSE, 0);
-		gtk_widget_show (widget);
+		gtk_widget_show_all (widget);
 	}
 	gtk_widget_show (container);
 	g_value_unset (&value);
