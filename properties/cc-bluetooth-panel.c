@@ -610,7 +610,8 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (self->priv->chooser));
 	gtk_tree_view_column_set_visible (column, FALSE);
 	widget = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (self->priv->chooser));
-	g_object_set (G_OBJECT (widget), "headers-visible", FALSE, NULL);
+	column = bluetooth_chooser_get_device_column (BLUETOOTH_CHOOSER (self->priv->chooser));
+	gtk_tree_view_column_set_title (column, _("Devices"));
 
 	/* Join treeview and buttons */
 	widget = bluetooth_chooser_get_scrolled_window (BLUETOOTH_CHOOSER (self->priv->chooser));
