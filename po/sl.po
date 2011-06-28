@@ -7,15 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&component=general\n"
-"POT-Creation-Date: 2011-03-10 01:37+0000\n"
-"PO-Revision-Date: 2011-03-10 17:00+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-06-28 19:39+0000\n"
+"PO-Revision-Date: 2011-06-28 22:21+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
@@ -97,7 +97,7 @@ msgid "No adapters available"
 msgstr "Ni razpoložljivega vmesnika"
 
 #: ../lib/bluetooth-chooser.c:175
-#: ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:923
 msgid "Searching for devices..."
 msgstr "Iskanje naprav ..."
 
@@ -110,12 +110,12 @@ msgstr "Ali naj se naprava '%s' odstrani s seznama?"
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "V primeru, da napravo odstranite, jo bo treba pred naslednjo uporabo, ponovno nastaviti."
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:799
 msgid "Device"
 msgstr "Naprava"
 
-#: ../lib/bluetooth-chooser.c:819
-#: ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:835
+#: ../properties/bluetooth.ui.h:9
 msgid "Type"
 msgstr "Vrsta"
 
@@ -140,37 +140,37 @@ msgstr "Ni povezana oziroma zaupljiva"
 msgid "Paired or trusted"
 msgstr "Povezana oziroma zaupljiva"
 
-#: ../lib/bluetooth-filter-widget.c:231
+#: ../lib/bluetooth-filter-widget.c:233
 msgid "Show Only Bluetooth Devices With..."
 msgstr "Pokaži le Bluetooth naprave z ..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: ../lib/bluetooth-filter-widget.c:249
 msgid "Device _category:"
 msgstr "_Kategorija naprav:"
 
-#: ../lib/bluetooth-filter-widget.c:262
+#: ../lib/bluetooth-filter-widget.c:264
 msgid "Select the device category to filter"
 msgstr "Izbor kategorije naprav za filtriranje seznama"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:276
+#: ../lib/bluetooth-filter-widget.c:278
 msgid "Device _type:"
 msgstr "_Vrsta naprave:"
 
-#: ../lib/bluetooth-filter-widget.c:297
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Select the device type to filter"
 msgstr "Izbor vrste naprave za filtriranje seznama"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:305
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Vhodne naprave (miška, tipkovnica ...)"
 
-#: ../lib/bluetooth-filter-widget.c:307
+#: ../lib/bluetooth-filter-widget.c:309
 msgid "Headphones, headsets and other audio devices"
 msgstr "Slušalke, mikrofoni in druge zvočne naprave"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "Uporabi napravo GPS za določevanje položaja nahajanja"
 
@@ -181,100 +181,101 @@ msgstr "Uporabi napravo GPS za določevanje položaja nahajanja"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Dostop do spleta z uporabo mobilnega telefona (preizkusno)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:117
 msgid "Select Device to Browse"
 msgstr "Izbor naprave za brskanje"
 
-#: ../applet/main.c:129
+#: ../applet/main.c:121
 msgid "_Browse"
 msgstr "_Prebrskaj"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:130
 msgid "Select device to browse"
 msgstr "Izbor naprave za brskanje"
 
-#: ../applet/main.c:288
+#: ../applet/main.c:280
 msgid "Turn On Bluetooth"
 msgstr "Vklopi Bluetooth"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:281
+#: ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: izklopljeno"
 
-#: ../applet/main.c:292
+#: ../applet/main.c:284
 msgid "Turn Off Bluetooth"
 msgstr "Izklopi Bluetooth"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:285
+#: ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: vklopljeno"
 
-#: ../applet/main.c:298
-#: ../applet/notify.c:159
+#: ../applet/main.c:290
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: onemogočeno"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:437
 msgid "Disconnecting..."
 msgstr "Prekinjanje povezave ..."
 
-#: ../applet/main.c:448
+#: ../applet/main.c:440
 #: ../sendto/main.c:217
 #: ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
-#: ../applet/main.c:451
-#: ../applet/main.c:734
+#: ../applet/main.c:443
+#: ../applet/main.c:726
 msgid "Connected"
 msgstr "Povezano"
 
-#: ../applet/main.c:454
-#: ../applet/main.c:734
+#: ../applet/main.c:446
+#: ../applet/main.c:726
 msgid "Disconnected"
 msgstr "Prekinjena povezava"
 
-#: ../applet/main.c:752
-#: ../applet/main.c:816
+#: ../applet/main.c:744
+#: ../applet/main.c:808
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#: ../applet/main.c:752
-#: ../applet/main.c:816
-#: ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:744
+#: ../applet/main.c:808
+#: ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "Povezava"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:757
 msgid "Send files..."
 msgstr "Pošlji datoteke ..."
 
-#: ../applet/main.c:775
+#: ../applet/main.c:767
 msgid "Browse files..."
 msgstr "Brskanje datotek ..."
 
-#: ../applet/main.c:786
+#: ../applet/main.c:778
 msgid "Open Keyboard Preferences..."
 msgstr "Odpri možnosti tipkovnice ..."
 
-#: ../applet/main.c:794
+#: ../applet/main.c:786
 msgid "Open Mouse Preferences..."
 msgstr "Odpri možnosti miške ..."
 
-#: ../applet/main.c:804
+#: ../applet/main.c:796
 msgid "Open Sound Preferences..."
 msgstr "Odpri možnosti zvoka ..."
 
-#: ../applet/main.c:857
+#: ../applet/main.c:849
 msgid "Debug"
 msgstr "Razhroščevanje"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:868
 msgid "- Bluetooth applet"
 msgstr "- aplet Bluetooth"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:873
 #, c-format
 msgid ""
 "%s\n"
@@ -283,25 +284,16 @@ msgstr ""
 "%s\n"
 "Zaženite '%s --help' za podroben pregled celotnega seznama možnosti ukazne vrstice.\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:899
 msgid "Bluetooth Applet"
 msgstr "Bluetooth aplet"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
 #: ../moblin/main.c:129
 #: ../moblin/main.c:141
-#: ../moblin/moblin-panel.c:1602
 msgid "Bluetooth"
 msgstr "Bluetooth"
-
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "Bluetooth: omogočeno"
 
 #: ../applet/agent.c:196
 #: ../applet/agent.c:265
@@ -384,8 +376,9 @@ msgid "Browse files on device..."
 msgstr "Brskanje med datotekami na napravi ..."
 
 #: ../applet/popup-menu.ui.h:3
-#: ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../properties/cc-bluetooth-panel.c:615
+#: ../moblin/moblin-panel.c:1404
+#: ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "Naprave"
 
@@ -433,31 +426,31 @@ msgstr "_Zadetki"
 msgid "_Show input"
 msgstr "_Pokaži vnos"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:293
 msgid "Yes"
 msgstr "Da"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:293
 msgid "No"
 msgstr "Ne"
 
-#: ../properties/cc-bluetooth-panel.c:331
+#: ../properties/cc-bluetooth-panel.c:389
 msgid "Bluetooth is disabled"
 msgstr "Naprava Bluetooth je onemogočena"
 
-#: ../properties/cc-bluetooth-panel.c:336
+#: ../properties/cc-bluetooth-panel.c:394
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Naprava Bluetooth je onemogočena s strojnim stikalom"
 
-#: ../properties/cc-bluetooth-panel.c:340
+#: ../properties/cc-bluetooth-panel.c:398
 msgid "No Bluetooth adapters found"
 msgstr "Ni navzočih Bluetooth naprav"
 
-#: ../properties/cc-bluetooth-panel.c:406
+#: ../properties/cc-bluetooth-panel.c:465
 msgid "Visibility"
 msgstr "Vidnost"
 
-#: ../properties/cc-bluetooth-panel.c:410
+#: ../properties/cc-bluetooth-panel.c:469
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Vidnost “%s”"
@@ -478,11 +471,18 @@ msgstr "Nastavitve tipkovnice"
 msgid "Mouse and Touchpad Settings"
 msgstr "Nastavitve miške in sledilne ploščice"
 
-#: ../properties/bluetooth.ui.h:6
-msgid "Power"
-msgstr "Napajanje"
-
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
 #: ../properties/bluetooth.ui.h:7
+#: ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../properties/bluetooth.ui.h:8
 msgid "Sound Settings"
 msgstr "Nastavitve zvoka"
 
@@ -501,13 +501,13 @@ msgid "Pairing with '%s' cancelled"
 msgstr "Povezovanje z napravo '%s' je preklicano"
 
 #: ../wizard/main.c:247
-#: ../moblin/moblin-panel.c:1146
+#: ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Potrdite, da se prehodno geslo '%s' sklada s tem."
 
 #: ../wizard/main.c:301
-#: ../moblin/moblin-panel.c:1197
+#: ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "Vnesite naslednje prehodno geslo:"
 
@@ -557,14 +557,17 @@ msgid "Successfully set up new device '%s'"
 msgstr "Uspešna namestitev naprave '%s'"
 
 #: ../wizard/wizard.ui.h:1
+#: ../moblin/pin.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (večino slušalk, mišk in naprav GPS)"
 
 #: ../wizard/wizard.ui.h:2
+#: ../moblin/pin.ui.h:2
 msgid "'1111'"
 msgstr "'1111'"
 
 #: ../wizard/wizard.ui.h:3
+#: ../moblin/pin.ui.h:3
 msgid "'1234'"
 msgstr "'1234'"
 
@@ -573,6 +576,7 @@ msgid "Bluetooth New Device Setup"
 msgstr "Namestitev nove naprave Bluetooth"
 
 #: ../wizard/wizard.ui.h:5
+#: ../moblin/pin.ui.h:4
 msgid "Custom PIN:"
 msgstr "Prehodno geslo po meri:"
 
@@ -594,7 +598,7 @@ msgstr "Ne poveži"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:11
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "Se ne sklada"
 
@@ -604,6 +608,7 @@ msgstr "Zaključevanje nameščanja nove naprave"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:14
+#: ../moblin/pin.ui.h:6
 msgid "Fixed PIN"
 msgstr "Določeno prehodno geslo"
 
@@ -613,11 +618,12 @@ msgstr "Uvod"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:17
-#: ../moblin/moblin-panel.c:1346
+#: ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "Zadetki"
 
 #: ../wizard/wizard.ui.h:18
+#: ../moblin/pin.ui.h:7
 msgid "PIN Options"
 msgstr "Možnosti prehodnega gesla"
 
@@ -626,7 +632,7 @@ msgid "PIN _options..."
 msgstr "_Možnosti prehodnega gesla ..."
 
 #: ../wizard/wizard.ui.h:20
-#: ../moblin/moblin-panel.c:1260
+#: ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
 msgstr "Izbor storitev za uporabo z napravo:"
 
@@ -651,6 +657,7 @@ msgid "Welcome to the Bluetooth new device setup"
 msgstr "Dobrodošli v čarovniku za nameščanje Bluetooth naprav"
 
 #: ../wizard/wizard.ui.h:26
+#: ../moblin/pin.ui.h:8
 msgid "_Automatic PIN selection"
 msgstr "_Samodejni izbor prehodnega gesla"
 
@@ -847,25 +854,19 @@ msgstr[1] "%d sekunda"
 msgstr[2] "%d sekundi"
 msgstr[3] "%d sekunde"
 
-#. hour:minutes:seconds
+#. 5 hours 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:188
 #, c-format
+msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#. minutes:seconds
+#. 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:192
 #, c-format
+msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195
-#: ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
@@ -886,67 +887,77 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "Povezovanje z napravo '%s' ni uspelo."
 
-#: ../moblin/moblin-panel.c:985
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "Združi"
 
-#: ../moblin/moblin-panel.c:1022
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "Prebrskaj"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "Neuspešna namestitev naprave"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233
-#: ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358
-#: ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234
+#: ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359
+#: ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "Nazaj na naprave"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "Končano"
 
-#: ../moblin/moblin-panel.c:1293
-#: ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294
+#: ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "Namestitev naprave"
 
-#: ../moblin/moblin-panel.c:1453
-#: ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454
+#: ../moblin/moblin-panel.c:1585
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "Pokaži le:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "Možnosti prehodnega gesla"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "Dodaj napravo"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "Omogoči kot vidno na napravah Bluetooth"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
 msgstr "Pošlji datoteko iz računalnika"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Pult Bluetooth upravljalnika"
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "Bluetooth: omogočeno"
+
+#~ msgid "Power"
+#~ msgstr "Napajanje"
+
+#~ msgid "%s"
+#~ msgstr "%s"
 
 #~ msgid "Active"
 #~ msgstr "Dejavno"
