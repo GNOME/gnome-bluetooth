@@ -349,9 +349,10 @@
                             <property name="can_focus">False</property>
                             <property name="margin_right">6</property>
                             <property name="margin_bottom">6</property>
+                            <property name="spacing">6</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkBox" id="hbox5">
+                              <object class="GtkBox" id="mouse_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -362,7 +363,6 @@
                                     <property name="label" translatable="yes">Mouse and Touchpad Settings</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="use_action_appearance">False</property>
                                   </object>
                                   <packing>
@@ -380,7 +380,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox3">
+                              <object class="GtkBox" id="sound_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -391,7 +391,6 @@
                                     <property name="label" translatable="yes">Sound Settings</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="use_action_appearance">False</property>
                                   </object>
                                   <packing>
@@ -409,7 +408,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="hbox4">
+                              <object class="GtkBox" id="keyboard_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -420,7 +419,6 @@
                                     <property name="label" translatable="yes">Keyboard Settings</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="use_action_appearance">False</property>
                                   </object>
                                   <packing>
@@ -435,6 +433,62 @@
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
                                 <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="send_box">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="send_button">
+                                    <property name="label" translatable="yes">Send Files...</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="use_action_appearance">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox" id="browse_box">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="browse_button">
+                                    <property name="label" translatable="yes">Browse Files...</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="use_action_appearance">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </object>

@@ -2,7 +2,6 @@
  *
  *  BlueZ - Bluetooth protocol stack for Linux
  *
- *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
  *  Copyright (C) 2006-2010  Bastien Nocera <hadess@hadess.net>
  *
  *
@@ -32,6 +31,7 @@
 #include "cc-bluetooth-panel.h"
 
 #include <bluetooth-client.h>
+#include <bluetooth-utils.h>
 #include <bluetooth-client-private.h>
 #include <bluetooth-killswitch.h>
 #include <bluetooth-chooser.h>
@@ -259,9 +259,11 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 	g_signal_handlers_block_by_func (button, switch_connected_active_changed, self);
 
 	/* Hide all the buttons now, and show them again if we need to */
-	gtk_widget_hide (WID ("keyboard_button"));
-	gtk_widget_hide (WID ("sound_button"));
-	gtk_widget_hide (WID ("mouse_button"));
+	gtk_widget_hide (WID ("keyboard_box"));
+	gtk_widget_hide (WID ("sound_box"));
+	gtk_widget_hide (WID ("mouse_box"));
+	gtk_widget_hide (WID ("browse_box"));
+	gtk_widget_hide (WID ("send_box"));
 
 	/* Remove the extra setup widgets */
 	remove_extra_setup_widgets (self);
@@ -300,23 +302,39 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		gtk_widget_set_sensitive (GTK_WIDGET (button), (services != NULL));
 		g_value_unset (&value);
 
+		/* UUIDs */
+		if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
+								"uuids", &value)) {
+			const char **uuids;
+			guint i;
+
+			uuids = (const char **) g_value_get_boxed (&value);
+			for (i = 0; uuids[i] != NULL; i++) {
+				if (g_str_equal (uuids[i], "OBEXObjectPush"))
+					gtk_widget_show (WID ("send_box"));
+				else if (g_str_equal (uuids[i], "OBEXFileTransfer"))
+					gtk_widget_show (WID ("browse_box"));
+			}
+			g_value_unset (&value);
+		}
+
 		/* Type */
 		type = bluetooth_chooser_get_selected_device_type (BLUETOOTH_CHOOSER (self->priv->chooser));
 		gtk_label_set_text (GTK_LABEL (WID ("type_label")), bluetooth_type_to_string (type));
 		switch (type) {
 		case BLUETOOTH_TYPE_KEYBOARD:
-			gtk_widget_show (WID ("keyboard_button"));
+			gtk_widget_show (WID ("keyboard_box"));
 			break;
 		case BLUETOOTH_TYPE_MOUSE:
 		case BLUETOOTH_TYPE_TABLET:
-			gtk_widget_show (WID ("mouse_button"));
+			gtk_widget_show (WID ("mouse_box"));
 			break;
 		case BLUETOOTH_TYPE_HEADSET:
 		case BLUETOOTH_TYPE_HEADPHONES:
 		case BLUETOOTH_TYPE_OTHER_AUDIO:
-			gtk_widget_show (WID ("sound_button"));
+			gtk_widget_show (WID ("sound_box"));
 		default:
-			/* FIXME others? */
+			/* others? */
 			;
 		}
 
@@ -417,21 +435,64 @@ static void
 keyboard_callback (GtkButton        *button,
 		   CcBluetoothPanel *self)
 {
-	launch_command(KEYBOARD_PREFS);
+	launch_command (KEYBOARD_PREFS);
 }
 
 static void
 mouse_callback (GtkButton        *button,
 		CcBluetoothPanel *self)
 {
-	launch_command(MOUSE_PREFS);
+	launch_command (MOUSE_PREFS);
 }
 
 static void
 sound_callback (GtkButton        *button,
 		CcBluetoothPanel *self)
 {
-	launch_command(SOUND_PREFS);
+	launch_command (SOUND_PREFS);
+}
+
+static void
+send_callback (GtkButton        *button,
+	       CcBluetoothPanel *self)
+{
+	char *bdaddr, *alias;
+
+	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	alias = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (self->priv->chooser));
+
+	bluetooth_send_to_address (bdaddr, alias);
+
+	g_free (bdaddr);
+	g_free (alias);
+}
+
+static void
+mount_finish_cb (GObject *source_object,
+		 GAsyncResult *res,
+		 gpointer user_data)
+{
+	GError *error = NULL;
+
+	if (bluetooth_browse_address_finish (source_object, res, &error) == FALSE) {
+		g_printerr ("Failed to mount OBEX volume: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+}
+
+static void
+browse_callback (GtkButton        *button,
+		 CcBluetoothPanel *self)
+{
+	char *bdaddr;
+
+	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+
+	bluetooth_browse_address (G_OBJECT (self), bdaddr,
+				  GDK_CURRENT_TIME, mount_finish_cb, NULL);
+
+	g_free (bdaddr);
 }
 
 /* Visibility/Discoverable */
@@ -639,6 +700,10 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 			  G_CALLBACK (keyboard_callback), self);
 	g_signal_connect (G_OBJECT (WID ("sound_button")), "clicked",
 			  G_CALLBACK (sound_callback), self);
+	g_signal_connect (G_OBJECT (WID ("browse_button")), "clicked",
+			  G_CALLBACK (browse_callback), self);
+	g_signal_connect (G_OBJECT (WID ("send_button")), "clicked",
+			  G_CALLBACK (send_callback), self);
 	g_signal_connect (G_OBJECT (WID ("switch_connection")), "notify::active",
 			  G_CALLBACK (switch_connected_active_changed), self);
 
