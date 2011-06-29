@@ -29,6 +29,7 @@
 #include <bluetooth-applet.h>
 #include <bluetooth-client.h>
 #include <bluetooth-client-private.h>
+#include <bluetooth-utils.h>
 #include <bluetooth-killswitch.h>
 #include <bluetooth-agent.h>
 
@@ -110,48 +111,6 @@ enum {
 
 guint signals[SIGNAL_LAST];
 
-typedef struct {
-  GSimpleAsyncResult *result;
-  guint timestamp;
-} MountClosure;
-
-static void
-mount_ready_cb (GObject *object,
-		GAsyncResult *result,
-		gpointer user_data)
-{
-	GError *error = NULL;
-	GFile *file = G_FILE (object);
-	char *uri = g_file_get_uri (file);
-	MountClosure *closure = user_data;
-
-	if (g_file_mount_enclosing_volume_finish (file, result, &error) == FALSE) {
-		/* Ignore "already mounted" error */
-		if (error->domain == G_IO_ERROR &&
-		    error->code == G_IO_ERROR_ALREADY_MOUNTED) {
-			g_error_free (error);
-			error = NULL;
-		}
-	}
-
-	if (!error) {
-		gtk_show_uri (NULL, uri, closure->timestamp, &error);
-	}
-
-	if (error) {
-		g_simple_async_result_set_from_error (closure->result, error);
-		g_error_free (error);
-	} else {
-		g_simple_async_result_set_op_res_gboolean (closure->result, TRUE);
-	}
-
-	g_simple_async_result_complete (closure->result);
-
-	g_free (uri);
-	g_object_unref (closure->result);
-	g_free (closure);
-}
-
 /**
  * bluetooth_applet_browse_address_finish:
  *
@@ -166,16 +125,9 @@ bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
 					GAsyncResult *result,
 					GError **error)
 {
-	GSimpleAsyncResult *simple;
-
 	g_return_val_if_fail (BLUETOOTH_IS_APPLET (applet), FALSE);
-	g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (applet), bluetooth_applet_browse_address), FALSE);
 
-	simple = G_SIMPLE_ASYNC_RESULT (result);
-	if (g_simple_async_result_propagate_error (simple, error))
-		return FALSE;
-	else
-		return TRUE;
+	return bluetooth_browse_address_finish (G_OBJECT (applet), result, error);
 }
 
 /**
@@ -193,23 +145,13 @@ void bluetooth_applet_browse_address (BluetoothApplet *applet,
 				      GAsyncReadyCallback callback,
 				      gpointer user_data)
 {
-	GFile *file;
-	char *uri;
-	MountClosure *closure;
-
 	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
-	g_return_if_fail (address != NULL);
 
-	uri = g_strdup_printf ("obex://[%s]/", address);
-	file = g_file_new_for_uri (uri);
-
-	closure = g_new (MountClosure, 1);
-	closure->result = g_simple_async_result_new (G_OBJECT (applet), callback, user_data, bluetooth_applet_browse_address);
-	closure->timestamp = timestamp;
-	g_file_mount_enclosing_volume(file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_ready_cb, closure);
-
-	g_free (uri);
-	g_object_unref (file);
+	bluetooth_applet_browse_address (applet,
+					 address,
+					 timestamp,
+					 callback,
+					 user_data);
 }
 
 /**
@@ -224,27 +166,9 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 				       const char *address,
 				       const char *alias)
 {
-	GPtrArray *a;
-	GError *err = NULL;
-
 	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
 
-	a = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
-
-	g_ptr_array_add (a, g_strdup ("bluetooth-sendto"));
-	if (address != NULL)
-		g_ptr_array_add (a, g_strdup_printf ("--device=%s", address));
-	if (address != NULL && alias != NULL)
-		g_ptr_array_add (a, g_strdup_printf ("--name=%s", alias));
-	g_ptr_array_add (a, NULL);
-
-	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
-			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
-		g_printerr("Couldn't execute command: %s\n", err->message);
-		g_error_free (err);
-	}
-
-	g_ptr_array_free (a, TRUE);
+	bluetooth_send_to_address (address, alias);
 }
 
 /**
