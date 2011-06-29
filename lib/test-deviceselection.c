@@ -33,6 +33,7 @@
 #include "bluetooth-chooser-button.h"
 #include "bluetooth-chooser-combo.h"
 #include "bluetooth-client.h"
+#include "bluetooth-utils.h"
 #include "bluetooth-filter-widget.h"
 
 static void dump_selected_device(BluetoothChooser *sel)
