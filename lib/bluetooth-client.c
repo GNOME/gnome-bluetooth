@@ -171,8 +171,6 @@ const gchar *bluetooth_type_to_string(BluetoothType type)
 gboolean
 bluetooth_verify_address (const char *bdaddr)
 {
-	gboolean retval = TRUE;
-	char **elems;
 	guint i;
 
 	g_return_val_if_fail (bdaddr != NULL, FALSE);
@@ -180,24 +178,17 @@ bluetooth_verify_address (const char *bdaddr)
 	if (strlen (bdaddr) != 17)
 		return FALSE;
 
-	elems = g_strsplit (bdaddr, ":", -1);
-	if (elems == NULL)
-		return FALSE;
-	if (g_strv_length (elems) != 6) {
-		g_strfreev (elems);
-		return FALSE;
-	}
-	for (i = 0; i < 6; i++) {
-		if (strlen (elems[i]) != 2 ||
-		    g_ascii_isxdigit (elems[i][0]) == FALSE ||
-		    g_ascii_isxdigit (elems[i][1]) == FALSE) {
-			retval = FALSE;
-			break;
+	for (i = 0; i < 17; i++) {
+		if (((i + 1) % 3) == 0) {
+			if (bdaddr[i] != ':')
+				return FALSE;
+			continue;
 		}
+		if (g_ascii_isxdigit (bdaddr[i]) == FALSE)
+			return FALSE;
 	}
 
-	g_strfreev (elems);
-	return retval;
+	return TRUE;
 }
 
 guint
