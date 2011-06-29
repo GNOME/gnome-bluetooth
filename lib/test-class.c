@@ -30,6 +30,7 @@
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
+#include "bluetooth-utils.h"
 
 static const char *
 byte_to_binary (int x)
