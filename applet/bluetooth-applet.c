@@ -226,24 +226,16 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 {
 	GPtrArray *a;
 	GError *err = NULL;
-	guint i;
 
 	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
 
-	a = g_ptr_array_new ();
-	g_ptr_array_add (a, "bluetooth-sendto");
-	if (address != NULL) {
-		char *s;
+	a = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
 
-		s = g_strdup_printf ("--device=%s", address);
-		g_ptr_array_add (a, s);
-	}
-	if (address != NULL && alias != NULL) {
-		char *s;
-
-		s = g_strdup_printf ("--name=%s", alias);
-		g_ptr_array_add (a, s);
-	}
+	g_ptr_array_add (a, g_strdup ("bluetooth-sendto"));
+	if (address != NULL)
+		g_ptr_array_add (a, g_strdup_printf ("--device=%s", address));
+	if (address != NULL && alias != NULL)
+		g_ptr_array_add (a, g_strdup_printf ("--name=%s", alias));
 	g_ptr_array_add (a, NULL);
 
 	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
@@ -251,9 +243,6 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 		g_printerr("Couldn't execute command: %s\n", err->message);
 		g_error_free (err);
 	}
-
-	for (i = 1; a->pdata[i] != NULL; i++)
-		g_free (a->pdata[i]);
 
 	g_ptr_array_free (a, TRUE);
 }
