@@ -31,6 +31,7 @@
 
 #include "bluetooth-filter-widget.h"
 #include "bluetooth-client.h"
+#include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 
 #define BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
