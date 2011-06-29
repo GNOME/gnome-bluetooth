@@ -41,6 +41,7 @@
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
+#include "bluetooth-utils.h"
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-private.h"
 #include "gnome-bluetooth-enum-types.h"
