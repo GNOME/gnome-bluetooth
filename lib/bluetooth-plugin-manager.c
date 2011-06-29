@@ -40,6 +40,7 @@
 #include "bluetooth-plugin-manager.h"
 
 #include "bluetooth-client.h"
+#include "bluetooth-utils.h"
 
 static GList *plugin_list = NULL;
 
