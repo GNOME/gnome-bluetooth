@@ -25,7 +25,7 @@
 #ifndef __BLUETOOTH_UTILS_H
 #define __BLUETOOTH_UTILS_H
 
-#include <glib-object.h>
+#include <gio/gio.h>
 #include <bluetooth-enums.h>
 
 G_BEGIN_DECLS
@@ -34,6 +34,17 @@ BluetoothType  bluetooth_class_to_type  (guint32 class);
 const gchar   *bluetooth_type_to_string (guint type);
 gboolean       bluetooth_verify_address (const char *bdaddr);
 const char    *bluetooth_uuid_to_string (const char *uuid);
+
+gboolean bluetooth_browse_address_finish (GObject *object,
+					  GAsyncResult *result,
+					  GError **error);
+void bluetooth_browse_address (GObject *object,
+			       const char *address,
+			       guint timestamp,
+			       GAsyncReadyCallback callback,
+			       gpointer user_data);
+void bluetooth_send_to_address (const char *address,
+				const char *alias);
 
 G_END_DECLS
 

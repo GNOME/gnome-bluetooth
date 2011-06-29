@@ -37,6 +37,7 @@
 #endif
 
 #include <glib/gi18n-lib.h>
+#include <gtk/gtk.h>
 
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
@@ -298,4 +299,130 @@ bluetooth_uuid_to_string (const char *uuid)
 	return uuid16_custom_to_string (uuid16, uuid);
 }
 
+void
+bluetooth_send_to_address (const char *address,
+			   const char *alias)
+{
+	GPtrArray *a;
+	GError *err = NULL;
 
+	a = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
+
+	g_ptr_array_add (a, g_strdup ("bluetooth-sendto"));
+	if (address != NULL)
+		g_ptr_array_add (a, g_strdup_printf ("--device=%s", address));
+	if (address != NULL && alias != NULL)
+		g_ptr_array_add (a, g_strdup_printf ("--name=%s", alias));
+	g_ptr_array_add (a, NULL);
+
+	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
+			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
+		g_printerr("Couldn't execute command: %s\n", err->message);
+		g_error_free (err);
+	}
+
+	g_ptr_array_free (a, TRUE);
+}
+
+typedef struct {
+  GSimpleAsyncResult *result;
+  guint timestamp;
+} MountClosure;
+
+static void
+mount_ready_cb (GObject *object,
+		GAsyncResult *result,
+		gpointer user_data)
+{
+	GError *error = NULL;
+	GFile *file = G_FILE (object);
+	char *uri = g_file_get_uri (file);
+	MountClosure *closure = user_data;
+
+	if (g_file_mount_enclosing_volume_finish (file, result, &error) == FALSE) {
+		/* Ignore "already mounted" error */
+		if (error->domain == G_IO_ERROR &&
+		    error->code == G_IO_ERROR_ALREADY_MOUNTED) {
+			g_error_free (error);
+			error = NULL;
+		}
+	}
+
+	if (!error) {
+		gtk_show_uri (NULL, uri, closure->timestamp, &error);
+	}
+
+	if (error) {
+		g_simple_async_result_set_from_error (closure->result, error);
+		g_error_free (error);
+	} else {
+		g_simple_async_result_set_op_res_gboolean (closure->result, TRUE);
+	}
+
+	g_simple_async_result_complete (closure->result);
+
+	g_free (uri);
+	g_object_unref (closure->result);
+	g_free (closure);
+}
+
+/**
+ * bluetooth_browse_address_finish:
+ *
+ * @object: a #GObject
+ * @result: the #GAsyncResult from the callback
+ * @error: a #GError
+ *
+ * Returns: TRUE if the operation was successful, FALSE if error is set
+ */
+gboolean
+bluetooth_browse_address_finish (GObject      *object,
+				 GAsyncResult *result,
+				 GError      **error)
+{
+	GSimpleAsyncResult *simple;
+
+	g_return_val_if_fail (G_IS_OBJECT (object), FALSE);
+	g_return_val_if_fail (g_simple_async_result_is_valid (result, object, bluetooth_browse_address), FALSE);
+
+	simple = G_SIMPLE_ASYNC_RESULT (result);
+	if (g_simple_async_result_propagate_error (simple, error))
+		return FALSE;
+	else
+		return TRUE;
+}
+
+/**
+ * bluetooth_browse_address:
+ *
+ * Opens a Bluetooth device in Nautilus
+ * @object: a #GObject, such as the top-level of your management application.
+ * @address: the bluetooth device to browse
+ * @callback: (scope async): the completion callback
+ * @user_data:
+ */
+void
+bluetooth_browse_address (GObject             *object,
+			  const char          *address,
+			  guint                timestamp,
+			  GAsyncReadyCallback  callback,
+			  gpointer             user_data)
+{
+	GFile *file;
+	char *uri;
+	MountClosure *closure;
+
+	g_return_if_fail (G_IS_OBJECT (object));
+	g_return_if_fail (address != NULL);
+
+	uri = g_strdup_printf ("obex://[%s]/", address);
+	file = g_file_new_for_uri (uri);
+
+	closure = g_new (MountClosure, 1);
+	closure->result = g_simple_async_result_new (object, callback, user_data, bluetooth_browse_address);
+	closure->timestamp = timestamp;
+	g_file_mount_enclosing_volume(file, G_MOUNT_MOUNT_NONE, NULL, NULL, mount_ready_cb, closure);
+
+	g_free (uri);
+	g_object_unref (file);
+}
