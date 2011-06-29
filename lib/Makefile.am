@@ -8,6 +8,7 @@ lib_LTLIBRARIES = libgnome-bluetooth.la
 
 libcommon_la_SOURCES =						\
 		bluetooth-client.h bluetooth-client.c		\
+		bluetooth-utils.h bluetooth-utils.c		\
 		bluetooth-client-private.h			\
 		bluetooth-agent.h bluetooth-agent.c		\
 		bluetooth-killswitch.h bluetooth-killswitch.c	\
@@ -23,6 +24,7 @@ libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 # will be scanned for introspection annotation, but won't be installed
 libgnome_bluetooth_c_sources =		\
 	bluetooth-client.c		\
+	bluetooth-utils.c		\
 	bluetooth-agent.c		\
 	bluetooth-killswitch.c		\
 	marshal.c			\
@@ -59,7 +61,8 @@ libgnome_bluetooth_introspect_headers =			\
 	bluetooth-chooser-button.h			\
 	bluetooth-chooser-combo.h			\
 	bluetooth-filter-widget.h			\
-	bluetooth-enums.h
+	bluetooth-enums.h				\
+	bluetooth-utils.h
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS =				\
