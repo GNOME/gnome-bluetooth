@@ -31,6 +31,7 @@
 
 #include <bluetooth-chooser.h>
 #include <bluetooth-client.h>
+#include <bluetooth-utils.h>
 
 #include "bluetooth-applet.h"
 #include "notify.h"
