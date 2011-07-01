@@ -147,6 +147,7 @@ static void set_current_page (MoblinPanel *self, MoblinPages page);
 static void create_callback (BluetoothClient *client, const gchar *path, const GError *error, gpointer user_data);
 static void update_random_pincode (MoblinPanel *self);
 static void create_selected_device (MoblinPanel *self);
+static void cancel_visible_updates (MoblinPanel *self);
 
 static void
 power_switch_toggled_cb (MxGtkLightSwitch *light_switch,
@@ -253,8 +254,9 @@ make_discoverable (MoblinPanel *panel)
 
 	bluetooth_client_set_discoverable (priv->client, TRUE, DISCOVER_TIMEOUT);
 
-	priv->visible_countdown = DISCOVER_TIMEOUT;
+	cancel_visible_updates (panel);
 
+	priv->visible_countdown = DISCOVER_TIMEOUT;
 	update_visible (panel);
 	priv->update_visible_source_id =
 		g_timeout_add_seconds (5, update_visible, panel);
