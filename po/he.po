@@ -7,166 +7,166 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-10 18:45+0200\n"
-"PO-Revision-Date: 2011-03-10 18:46+0200\n"
+"POT-Creation-Date: 2011-07-02 10:51+0300\n"
+"PO-Revision-Date: 2011-07-02 10:52+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Gezer (Hebrew)\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: he\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Virtaal 0.7.0-beta4\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-client.c:128
-msgid "All types"
-msgstr "כל הסוגים"
-
-#: ../lib/bluetooth-client.c:130
-msgid "Phone"
-msgstr "טלפון"
-
-#: ../lib/bluetooth-client.c:132
-msgid "Modem"
-msgstr "מודם"
-
-#: ../lib/bluetooth-client.c:134
-msgid "Computer"
-msgstr "מחשב"
-
-#: ../lib/bluetooth-client.c:136
-msgid "Network"
-msgstr "רשת"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:139
-msgid "Headset"
-msgstr "אוזניות"
-
-#: ../lib/bluetooth-client.c:141
-msgid "Headphones"
-msgstr "אוזנית"
-
-#: ../lib/bluetooth-client.c:143
-msgid "Audio device"
-msgstr "התקן שמע"
-
-#: ../lib/bluetooth-client.c:145
-msgid "Keyboard"
-msgstr "מקלדת"
-
-#: ../lib/bluetooth-client.c:147
-msgid "Mouse"
-msgstr "עכבר"
-
-#: ../lib/bluetooth-client.c:149
-msgid "Camera"
-msgstr "מצלמה"
-
-#: ../lib/bluetooth-client.c:151
-msgid "Printer"
-msgstr "מדפסת"
-
-#: ../lib/bluetooth-client.c:153
-msgid "Joypad"
-msgstr "התקן משחק"
-
-#: ../lib/bluetooth-client.c:155
-msgid "Tablet"
-msgstr "משטח שליטה"
-
-#: ../lib/bluetooth-client.c:157
-msgid "Video device"
-msgstr "התקן וידאו"
-
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
-#: ../lib/bluetooth-filter-widget.c:81
-msgid "Unknown"
-msgstr "לא ידוע"
-
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "נא ללחוץ כאן לבחירת התקן..."
 
-#: ../lib/bluetooth-chooser.c:171
+#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:89
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: ../lib/bluetooth-chooser.c:172
 msgid "No adapters available"
 msgstr "אין מתאמים זמינים"
 
-#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
 msgid "Searching for devices..."
 msgstr "חיפוש אחר התקנים..."
 
-#: ../lib/bluetooth-chooser.c:373
+#: ../lib/bluetooth-chooser.c:374
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "להסיר את '%s' מרשימת ההתקנים?"
 
-#: ../lib/bluetooth-chooser.c:375
+#: ../lib/bluetooth-chooser.c:376
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "אם התקן זה ימחק, יהיה עליך להגדיר אותו שוב לפני השימוש הבא."
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:800
 msgid "Device"
 msgstr "התקן"
 
-#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
 msgid "Type"
 msgstr "סוג"
 
-#: ../lib/bluetooth-filter-widget.c:71
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "כל הקטגוריות"
 
-#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "צימוד"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "מהימן"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "לא בצימוד ולא מהימן"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "בצימוד או מהימן"
 
-#: ../lib/bluetooth-filter-widget.c:231
+#: ../lib/bluetooth-filter-widget.c:234
 msgid "Show Only Bluetooth Devices With..."
 msgstr "יש להציג אך ורק התקני Bluetooth בעלי..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: ../lib/bluetooth-filter-widget.c:250
 msgid "Device _category:"
 msgstr "_קטגוריית התקן:"
 
-#: ../lib/bluetooth-filter-widget.c:262
+#: ../lib/bluetooth-filter-widget.c:265
 msgid "Select the device category to filter"
 msgstr "יש לבחור קטגוריית התקנים לסינון"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:276
+#: ../lib/bluetooth-filter-widget.c:279
 msgid "Device _type:"
 msgstr "_סוג ההתקן:"
 
-#: ../lib/bluetooth-filter-widget.c:297
+#: ../lib/bluetooth-filter-widget.c:300
 msgid "Select the device type to filter"
 msgstr "יש לבחור את סוג ההתקן לסינון"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:306
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "התקני קלט (עכברים, מקלדות וכו')"
 
-#: ../lib/bluetooth-filter-widget.c:307
+#: ../lib/bluetooth-filter-widget.c:310
 msgid "Headphones, headsets and other audio devices"
 msgstr "אוזניות, ערכות דיבור והתקני שמע אחרים"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/bluetooth-utils.c:58
+msgid "All types"
+msgstr "כל הסוגים"
+
+#: ../lib/bluetooth-utils.c:60
+msgid "Phone"
+msgstr "טלפון"
+
+#: ../lib/bluetooth-utils.c:62
+msgid "Modem"
+msgstr "מודם"
+
+#: ../lib/bluetooth-utils.c:64
+msgid "Computer"
+msgstr "מחשב"
+
+#: ../lib/bluetooth-utils.c:66
+msgid "Network"
+msgstr "רשת"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:69
+msgid "Headset"
+msgstr "אוזניות"
+
+#: ../lib/bluetooth-utils.c:71
+msgid "Headphones"
+msgstr "אוזנית"
+
+#: ../lib/bluetooth-utils.c:73
+msgid "Audio device"
+msgstr "התקן שמע"
+
+#: ../lib/bluetooth-utils.c:75
+msgid "Keyboard"
+msgstr "מקלדת"
+
+#: ../lib/bluetooth-utils.c:77
+msgid "Mouse"
+msgstr "עכבר"
+
+#: ../lib/bluetooth-utils.c:79
+msgid "Camera"
+msgstr "מצלמה"
+
+#: ../lib/bluetooth-utils.c:81
+msgid "Printer"
+msgstr "מדפסת"
+
+#: ../lib/bluetooth-utils.c:83
+msgid "Joypad"
+msgstr "התקן משחק"
+
+#: ../lib/bluetooth-utils.c:85
+msgid "Tablet"
+msgstr "משטח שליטה"
+
+#: ../lib/bluetooth-utils.c:87
+msgid "Video device"
+msgstr "התקן וידאו"
+
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "שימוש בהתקן GPS זה עבור שרותי איתור גאוגרפי (Geolocation)"
 
@@ -177,92 +177,92 @@ msgstr "שימוש בהתקן GPS זה עבור שרותי איתור גאוגר
 msgid "Access the Internet using your cell phone (test)"
 msgstr "התחברות לאינטרנט באמצעות הטלפון הסלולרי שלך (תוסף בדיקה)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:118
 msgid "Select Device to Browse"
 msgstr "בחירת התקן לעיון"
 
-#: ../applet/main.c:129
+#: ../applet/main.c:122
 msgid "_Browse"
 msgstr "_עיון"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:131
 msgid "Select device to browse"
 msgstr "בחירת התקן לעיון"
 
-#: ../applet/main.c:288
+#: ../applet/main.c:281
 msgid "Turn On Bluetooth"
 msgstr "הפעלת ה־Bluetooth"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:282 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "‏Bluetooth: כבוי"
 
-#: ../applet/main.c:292
+#: ../applet/main.c:285
 msgid "Turn Off Bluetooth"
 msgstr "כיבוי ה־Bluetooth"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:286 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "‏Bluetooth: פעיל"
 
-#: ../applet/main.c:298 ../applet/notify.c:159
+#: ../applet/main.c:291
 msgid "Bluetooth: Disabled"
 msgstr "‏Bluetooth: כבוי"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:438
 msgid "Disconnecting..."
 msgstr "בניתוק..."
 
-#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "בהתחברות..."
 
-#: ../applet/main.c:451 ../applet/main.c:734
+#: ../applet/main.c:444 ../applet/main.c:727
 msgid "Connected"
 msgstr "חיבור פעיל"
 
-#: ../applet/main.c:454 ../applet/main.c:734
+#: ../applet/main.c:447 ../applet/main.c:727
 msgid "Disconnected"
 msgstr "חיבור כבוי"
 
-#: ../applet/main.c:752 ../applet/main.c:816
+#: ../applet/main.c:745 ../applet/main.c:809
 msgid "Disconnect"
 msgstr "הינתקות"
 
-#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "התחברות"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:758
 msgid "Send files..."
 msgstr "שליחת קבצים..."
 
-#: ../applet/main.c:775
+#: ../applet/main.c:768
 msgid "Browse files..."
 msgstr "עיון בקבצים..."
 
-#: ../applet/main.c:786
+#: ../applet/main.c:779
 msgid "Open Keyboard Preferences..."
 msgstr "פתיחת העדפות המקלדת..."
 
-#: ../applet/main.c:794
+#: ../applet/main.c:787
 msgid "Open Mouse Preferences..."
 msgstr "פתיחת העדפות המקלדת..."
 
-#: ../applet/main.c:804
+#: ../applet/main.c:797
 msgid "Open Sound Preferences..."
 msgstr "פתיחת העדפות השמע..."
 
-#: ../applet/main.c:857
+#: ../applet/main.c:850
 msgid "Debug"
 msgstr "ניפוי שגיאות"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:869
 msgid "- Bluetooth applet"
 msgstr "- יישומון Bluetooth"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:874
 #, c-format
 msgid ""
 "%s\n"
@@ -271,22 +271,14 @@ msgstr ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:900
 msgid "Bluetooth Applet"
 msgstr "יישומון Bluetooth"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1602
+#: ../moblin/main.c:129 ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "Bluetooth"
-
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "‏Bluetooth: מופעל"
 
 #: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
@@ -365,8 +357,8 @@ msgstr "‏Bluetooth: בבדיקה"
 msgid "Browse files on device..."
 msgstr "עיון בקבצים שבהתקן..."
 
-#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
+#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "התקנים"
 
@@ -414,31 +406,31 @@ msgstr "_תואם"
 msgid "_Show input"
 msgstr "ה_צגת קלט"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "Yes"
 msgstr "כן"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "No"
 msgstr "לא"
 
-#: ../properties/cc-bluetooth-panel.c:331
+#: ../properties/cc-bluetooth-panel.c:407
 msgid "Bluetooth is disabled"
 msgstr "ה־Bluetooth כבוי."
 
-#: ../properties/cc-bluetooth-panel.c:336
+#: ../properties/cc-bluetooth-panel.c:412
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "ה־Bluetooth נוטרל על ידי מתג חומרה"
 
-#: ../properties/cc-bluetooth-panel.c:340
+#: ../properties/cc-bluetooth-panel.c:416
 msgid "No Bluetooth adapters found"
 msgstr "לא נמצאו מתאמי Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:406
+#: ../properties/cc-bluetooth-panel.c:526
 msgid "Visibility"
 msgstr "גילוי"
 
-#: ../properties/cc-bluetooth-panel.c:410
+#: ../properties/cc-bluetooth-panel.c:530
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "האפשרות לגילוי “%s”"
@@ -448,22 +440,36 @@ msgid "Address"
 msgstr "כתובת"
 
 #: ../properties/bluetooth.ui.h:2
+msgid "Browse Files..."
+msgstr "עיון בקבצים..."
+
+#: ../properties/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "חיבור"
 
-#: ../properties/bluetooth.ui.h:3
+#: ../properties/bluetooth.ui.h:4
 msgid "Keyboard Settings"
 msgstr "הגדרות מקלדת"
 
-#: ../properties/bluetooth.ui.h:4
+#: ../properties/bluetooth.ui.h:5
 msgid "Mouse and Touchpad Settings"
 msgstr "הגדרות העכבר ומשטח המגע"
 
-#: ../properties/bluetooth.ui.h:6
-msgid "Power"
-msgstr "צריכת חשמל"
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
-#: ../properties/bluetooth.ui.h:7
+#: ../properties/bluetooth.ui.h:9
+msgid "Send Files..."
+msgstr "שליחת קבצים..."
+
+#: ../properties/bluetooth.ui.h:10
 msgid "Sound Settings"
 msgstr "הגדרות שמע"
 
@@ -480,12 +486,12 @@ msgstr "עורך את הגדרות ה־Bluetooth"
 msgid "Pairing with '%s' cancelled"
 msgstr "הצימוד עם '%s' בוטל"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1146
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "נא לוודא שהסיסמה המופיעה ב־'%s' תואמת לזו."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "נא להזין את הסיסמה הבאה:"
 
@@ -532,15 +538,15 @@ msgstr "נא להמתין בעת סיום תהליך ההגדרה של '%s'..."
 msgid "Successfully set up new device '%s'"
 msgstr "המכשיר החדש ‏'%s' הוגדר בהצלחה"
 
-#: ../wizard/wizard.ui.h:1
+#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (רב ערכות הדיבור, העכברים והתקני ה־GPS)"
 
-#: ../wizard/wizard.ui.h:2
+#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
 msgid "'1111'"
 msgstr "'1111'"
 
-#: ../wizard/wizard.ui.h:3
+#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
 msgid "'1234'"
 msgstr "'1234'"
 
@@ -548,7 +554,7 @@ msgstr "'1234'"
 msgid "Bluetooth New Device Setup"
 msgstr "הגדרת התקן Bluetooth חדש"
 
-#: ../wizard/wizard.ui.h:5
+#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
 msgid "Custom PIN:"
 msgstr "ססמה מותאמת אישית:"
 
@@ -569,7 +575,7 @@ msgid "Do not pair"
 msgstr "אינו בצימוד"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1350
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "אינו תואם"
 
@@ -578,7 +584,7 @@ msgid "Finishing New Device Setup"
 msgstr "סיום הגדרת ההתקן החדש"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
+#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
 msgid "Fixed PIN"
 msgstr "ססמה קבועה"
 
@@ -587,11 +593,11 @@ msgid "Introduction"
 msgstr "הקדמה"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1346
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "תואם"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
 msgid "PIN Options"
 msgstr "אפשרויות ססמה"
 
@@ -599,7 +605,7 @@ msgstr "אפשרויות ססמה"
 msgid "PIN _options..."
 msgstr "_אפשרויות ססמה..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1260
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
 msgstr "נא לבחור את השירותים הנוספים בהם ברצונך להשתמש עם ההתקן שלך:"
 
@@ -632,7 +638,7 @@ msgstr ""
 msgid "Welcome to the Bluetooth new device setup"
 msgstr "ברוך בואך אל אשף הגדרת התקני Bluetooth"
 
-#: ../wizard/wizard.ui.h:26
+#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
 msgid "_Automatic PIN selection"
 msgstr "בחירת ססמה _אוטומטית"
 
@@ -813,24 +819,19 @@ msgid_plural "%d seconds"
 msgstr[0] "שנייה אחת"
 msgstr[1] "%d שניות"
 
-#. hour:minutes:seconds
+#. 5 hours 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:188
 #, c-format
+msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#. minutes:seconds
+#. 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:192
 #, c-format
+msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
@@ -851,63 +852,73 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "הצימוד עם %s בוטל"
 
-#: ../moblin/moblin-panel.c:985
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "צימוד"
 
-#: ../moblin/moblin-panel.c:1022
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "עיון"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "הגדרת ההתקן נכשלה"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233 ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358 ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "חזרה להתקנים"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "הושלם"
 
-#: ../moblin/moblin-panel.c:1293 ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "הגדרת התקן"
 
-#: ../moblin/moblin-panel.c:1453 ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
 msgid "Settings"
 msgstr "הגדרות"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "להציג אך ורק:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "אפשרויות ססמה"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "הגדרת התקן חדש"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "הפיכה לגלוי דרך Bluetooth"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
 msgstr "שליחת קובץ ממחשבך"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "לוח ניהול ה־Bluetooth"
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "‏Bluetooth: מופעל"
+
+#~ msgid "Power"
+#~ msgstr "צריכת חשמל"
+
+#~ msgid "%s"
+#~ msgstr "%s"
 
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr "לא ניתן להפעיל את ההעדפות של \"שיתוף קבצים אישי\""
