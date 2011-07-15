@@ -29,6 +29,7 @@
 #include "bluetooth-client.h"
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-private.h"
+#include "bluetooth-utils.h"
 #include "marshal.h"
 
 struct _BluetoothChooserComboPrivate {

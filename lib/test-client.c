@@ -32,6 +32,7 @@
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "gnome-bluetooth-enum-types.h"
+#include "bluetooth-utils.h"
 
 static BluetoothClient *client;
 static GtkTreeSelection *selection;
