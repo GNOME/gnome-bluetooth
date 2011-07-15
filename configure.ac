@@ -83,11 +83,12 @@ dnl Requires for the properties window
 PANELS_DIR="${libdir}/control-center-1/panels"
 AC_SUBST(PANELS_DIR)
 
+dnl Missing libgnome-control-center
+dnl which will be resolved at run-time
 PKG_CHECK_MODULES(PROPS,
 		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  glib-2.0 >= $GLIB_REQUIRED
-		  gtk+-3.0 >= 2.90.7
-		  libgnome-control-center)
+		  gtk+-3.0 >= 2.90.7)
 
 dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
@@ -213,6 +214,7 @@ AC_OUTPUT(Makefile
 	  applet/bluetooth-applet.desktop.in
 	  properties/Makefile
 	  properties/bluetooth-properties.desktop.in
+	  properties/cut-n-paste/Makefile
 	  wizard/Makefile
 	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile

@@ -1,4 +1,6 @@
 
+SUBDIRS = cut-n-paste
+
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libbluetooth.la
 
