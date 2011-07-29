@@ -309,7 +309,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 			guint i;
 
 			uuids = (const char **) g_value_get_boxed (&value);
-			for (i = 0; uuids[i] != NULL; i++) {
+			for (i = 0; uuids && uuids[i] != NULL; i++) {
 				if (g_str_equal (uuids[i], "OBEXObjectPush"))
 					gtk_widget_show (WID ("send_box"));
 				else if (g_str_equal (uuids[i], "OBEXFileTransfer"))
