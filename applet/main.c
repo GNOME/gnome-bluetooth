@@ -776,7 +776,7 @@ update_device_list (BluetoothApplet *applet,
 			if (device->type == BLUETOOTH_TYPE_KEYBOARD && program_available (GNOMECC)) {
 				add_menu_item (device->bdaddr,
 					       "keyboard",
-					       _("Open Keyboard Preferences..."),
+					       _("Keyboard Settings"),
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (keyboard_callback));
@@ -784,7 +784,7 @@ update_device_list (BluetoothApplet *applet,
 			if (device->type == BLUETOOTH_TYPE_MOUSE && program_available (GNOMECC)) {
 				add_menu_item (device->bdaddr,
 					       "mouse",
-					       _("Open Mouse Preferences..."),
+					       _("Mouse and Touchpad Settings"),
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (mouse_callback));
@@ -794,7 +794,7 @@ update_device_list (BluetoothApplet *applet,
 			     device->type == BLUETOOTH_TYPE_OTHER_AUDIO) && program_available (GNOMECC)) {
 				add_menu_item (device->bdaddr,
 					       "sound",
-					       _("Open Sound Preferences..."),
+					       _("Sound Settings"),
 					       uimanager,
 					       menu_merge_id,
 					       G_CALLBACK (sound_callback));
