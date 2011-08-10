@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-04-19 14:40+0000\n"
-"PO-Revision-Date: 2011-04-24 13:18+0700\n"
+"POT-Creation-Date: 2011-08-04 20:20+0000\n"
+"PO-Revision-Date: 2011-08-10 21:06+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,151 +17,151 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../lib/bluetooth-client.c:128
-msgid "All types"
-msgstr "ทุกชนิด"
-
-#: ../lib/bluetooth-client.c:130
-msgid "Phone"
-msgstr "โทรศัพท์"
-
-#: ../lib/bluetooth-client.c:132
-msgid "Modem"
-msgstr "โมเด็ม"
-
-#: ../lib/bluetooth-client.c:134
-msgid "Computer"
-msgstr "คอมพิวเตอร์"
-
-#: ../lib/bluetooth-client.c:136
-msgid "Network"
-msgstr "เครือข่าย"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:139
-msgid "Headset"
-msgstr "ชุดหูฟัง"
-
-#: ../lib/bluetooth-client.c:141
-msgid "Headphones"
-msgstr "หูฟัง"
-
-#: ../lib/bluetooth-client.c:143
-msgid "Audio device"
-msgstr "อุปกรณ์เสียง"
-
-#: ../lib/bluetooth-client.c:145
-msgid "Keyboard"
-msgstr "แป้นพิมพ์"
-
-#: ../lib/bluetooth-client.c:147
-msgid "Mouse"
-msgstr "เมาส์"
-
-#: ../lib/bluetooth-client.c:149
-msgid "Camera"
-msgstr "กล้องถ่ายรูป"
-
-#: ../lib/bluetooth-client.c:151
-msgid "Printer"
-msgstr "เครื่องพิมพ์"
-
-#: ../lib/bluetooth-client.c:153
-msgid "Joypad"
-msgstr "จอยแพ็ด"
-
-#: ../lib/bluetooth-client.c:155
-msgid "Tablet"
-msgstr "แท็บเล็ต"
-
-#: ../lib/bluetooth-client.c:157
-msgid "Video device"
-msgstr "อุปกรณ์วีดิทัศน์"
-
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
-#: ../lib/bluetooth-filter-widget.c:81
-msgid "Unknown"
-msgstr "ไม่ทราบ"
-
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:76
 msgid "Click to select device..."
 msgstr "คลิกเพื่อเลือกอุปกรณ์..."
 
-#: ../lib/bluetooth-chooser.c:171
+#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:89
+msgid "Unknown"
+msgstr "ไม่ทราบ"
+
+#: ../lib/bluetooth-chooser.c:172
 msgid "No adapters available"
 msgstr "ไม่มีอะแดปเตอร์"
 
-#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
 msgid "Searching for devices..."
 msgstr "กำลังค้นหาอุปกรณ์..."
 
-#: ../lib/bluetooth-chooser.c:373
+#: ../lib/bluetooth-chooser.c:374
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "ลบ '%s' ออกจากรายชื่ออุปกรณ์หรือไม่?"
 
-#: ../lib/bluetooth-chooser.c:375
+#: ../lib/bluetooth-chooser.c:376
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "ถ้าคุณลบอุปกรณ์นี้ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งก่อนใช้ครั้งต่อไป"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:800
 msgid "Device"
 msgstr "อุปกรณ์"
 
-#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
 msgid "Type"
 msgstr "ชนิด"
 
-#: ../lib/bluetooth-filter-widget.c:71
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "ทุกประเภท"
 
-#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "จับคู่แล้ว"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "เชื่อถือ"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "ยังไม่จับคู่หรือไม่เชื่อถือ"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "จับคู่แล้วหรือเชื่อถือ"
 
-#: ../lib/bluetooth-filter-widget.c:231
+#: ../lib/bluetooth-filter-widget.c:234
 msgid "Show Only Bluetooth Devices With..."
 msgstr "แสดงเฉพาะอุปกรณ์บลูทูทที่มี..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: ../lib/bluetooth-filter-widget.c:250
 msgid "Device _category:"
 msgstr "_ประเภทอุปกรณ์:"
 
-#: ../lib/bluetooth-filter-widget.c:262
+#: ../lib/bluetooth-filter-widget.c:265
 msgid "Select the device category to filter"
 msgstr "เลือกประเภทอุปกรณ์ที่จะกรอง"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:276
+#: ../lib/bluetooth-filter-widget.c:279
 msgid "Device _type:"
 msgstr "_ชนิดอุปกรณ์:"
 
-#: ../lib/bluetooth-filter-widget.c:297
+#: ../lib/bluetooth-filter-widget.c:300
 msgid "Select the device type to filter"
 msgstr "เลือกชนิดอุปกรณ์ที่จะกรอง"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:306
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "อุปกรณ์อินพุต (เมาส์ แป้นพิมพ์ เป็นต้น)"
 
-#: ../lib/bluetooth-filter-widget.c:307
+#: ../lib/bluetooth-filter-widget.c:310
 msgid "Headphones, headsets and other audio devices"
 msgstr "หูฟัง ชุดหูฟัง และอุปกรณ์เสียงอื่น"
+
+#: ../lib/bluetooth-utils.c:58
+msgid "All types"
+msgstr "ทุกชนิด"
+
+#: ../lib/bluetooth-utils.c:60
+msgid "Phone"
+msgstr "โทรศัพท์"
+
+#: ../lib/bluetooth-utils.c:62
+msgid "Modem"
+msgstr "โมเด็ม"
+
+#: ../lib/bluetooth-utils.c:64
+msgid "Computer"
+msgstr "คอมพิวเตอร์"
+
+#: ../lib/bluetooth-utils.c:66
+msgid "Network"
+msgstr "เครือข่าย"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:69
+msgid "Headset"
+msgstr "ชุดหูฟัง"
+
+#: ../lib/bluetooth-utils.c:71
+msgid "Headphones"
+msgstr "หูฟัง"
+
+#: ../lib/bluetooth-utils.c:73
+msgid "Audio device"
+msgstr "อุปกรณ์เสียง"
+
+#: ../lib/bluetooth-utils.c:75
+msgid "Keyboard"
+msgstr "แป้นพิมพ์"
+
+#: ../lib/bluetooth-utils.c:77
+msgid "Mouse"
+msgstr "เมาส์"
+
+#: ../lib/bluetooth-utils.c:79
+msgid "Camera"
+msgstr "กล้องถ่ายรูป"
+
+#: ../lib/bluetooth-utils.c:81
+msgid "Printer"
+msgstr "เครื่องพิมพ์"
+
+#: ../lib/bluetooth-utils.c:83
+msgid "Joypad"
+msgstr "จอยแพ็ด"
+
+#: ../lib/bluetooth-utils.c:85
+msgid "Tablet"
+msgstr "แท็บเล็ต"
+
+#: ../lib/bluetooth-utils.c:87
+msgid "Video device"
+msgstr "อุปกรณ์วีดิทัศน์"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
@@ -174,92 +174,92 @@ msgstr "ใช้อุปกรณ์ GPS นี้กับบริการ 
 msgid "Access the Internet using your cell phone (test)"
 msgstr "เข้าถึงอินเทอร์เน็ตโดยใช้โทรศัพท์มือถือของคุณ (ทดสอบ)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:118
 msgid "Select Device to Browse"
 msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
 
-#: ../applet/main.c:129
+#: ../applet/main.c:122
 msgid "_Browse"
 msgstr "เ_รียกดู"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:131
 msgid "Select device to browse"
 msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
 
-#: ../applet/main.c:288
+#: ../applet/main.c:281
 msgid "Turn On Bluetooth"
 msgstr "เปิดบลูทูท"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:282 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "บลูทูท: ปิด"
 
-#: ../applet/main.c:292
+#: ../applet/main.c:285
 msgid "Turn Off Bluetooth"
 msgstr "ปิดบลูทูท"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:286 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "บลูทูท: เปิด"
 
-#: ../applet/main.c:298 ../applet/notify.c:159
+#: ../applet/main.c:291
 msgid "Bluetooth: Disabled"
 msgstr "บลูทูท: ปิดใช้"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:438
 msgid "Disconnecting..."
 msgstr "กำลังตัดการเชื่อมต่อ..."
 
-#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
-#: ../applet/main.c:451 ../applet/main.c:734
+#: ../applet/main.c:444 ../applet/main.c:727
 msgid "Connected"
 msgstr "เชื่อมต่ออยู่"
 
-#: ../applet/main.c:454 ../applet/main.c:734
+#: ../applet/main.c:447 ../applet/main.c:727
 msgid "Disconnected"
 msgstr "ไม่ได้เชื่อมต่อ"
 
-#: ../applet/main.c:752 ../applet/main.c:816
+#: ../applet/main.c:745 ../applet/main.c:809
 msgid "Disconnect"
 msgstr "ตัดการเชื่อมต่อ"
 
-#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "เชื่อมต่อ"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:758
 msgid "Send files..."
 msgstr "ส่งแฟ้ม..."
 
-#: ../applet/main.c:775
+#: ../applet/main.c:768
 msgid "Browse files..."
 msgstr "เรียกดูแฟ้ม..."
 
-#: ../applet/main.c:786
-msgid "Open Keyboard Preferences..."
-msgstr "เปิดการปรับแต่งแป้นพิมพ์..."
+#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+msgid "Keyboard Settings"
+msgstr "ค่าตั้งแป้นพิมพ์"
 
-#: ../applet/main.c:794
-msgid "Open Mouse Preferences..."
-msgstr "เปิดการปรับแต่งเมาส์..."
+#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+msgid "Mouse and Touchpad Settings"
+msgstr "ค่าตั้งเมาส์และทัชแพด"
 
-#: ../applet/main.c:804
-msgid "Open Sound Preferences..."
-msgstr "เปิดการปรับแต่งเสียง..."
+#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+msgid "Sound Settings"
+msgstr "ค่าตั้งเสียง"
 
-#: ../applet/main.c:857
+#: ../applet/main.c:850
 msgid "Debug"
 msgstr "ดีบั๊ก"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:869
 msgid "- Bluetooth applet"
 msgstr "- แอพเพล็ตบลูทูท"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:874
 #, c-format
 msgid ""
 "%s\n"
@@ -268,22 +268,14 @@ msgstr ""
 "%s\n"
 "เรียก '%s --help' เพื่อดูตัวเลือกบรรทัดคำสั่งทั้งหมดที่ใช้ได้\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:900
 msgid "Bluetooth Applet"
 msgstr "แอพเพล็ตบลูทูท"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1602
+#: ../moblin/main.c:129 ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "บลูทูท"
-
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "บลูทูท: เปิดใช้งาน"
 
 #: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
@@ -362,8 +354,8 @@ msgstr "บลูทูท: การตรวจสอบ"
 msgid "Browse files on device..."
 msgstr "เรียกดูแฟ้มในอุปกรณ์ ..."
 
-#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
+#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -411,31 +403,31 @@ msgstr "_ตรงกัน"
 msgid "_Show input"
 msgstr "แ_สดงอักขระที่ป้อน"
 
-#: ../properties/cc-bluetooth-panel.c:293
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "Yes"
 msgstr "ใช่"
 
-#: ../properties/cc-bluetooth-panel.c:293
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "No"
 msgstr "ไม่ใช่"
 
-#: ../properties/cc-bluetooth-panel.c:389
+#: ../properties/cc-bluetooth-panel.c:407
 msgid "Bluetooth is disabled"
 msgstr "บลูทูทถูกปิดใช้งาน"
 
-#: ../properties/cc-bluetooth-panel.c:394
+#: ../properties/cc-bluetooth-panel.c:412
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "บลูทูทถูกปิดใช้งานโดยสวิตช์ฮาร์ดแวร์"
 
-#: ../properties/cc-bluetooth-panel.c:398
+#: ../properties/cc-bluetooth-panel.c:416
 msgid "No Bluetooth adapters found"
 msgstr "ไม่พบอะแดปเตอร์บลูทูท"
 
-#: ../properties/cc-bluetooth-panel.c:464
+#: ../properties/cc-bluetooth-panel.c:526
 msgid "Visibility"
 msgstr "ความปรากฏเห็น"
 
-#: ../properties/cc-bluetooth-panel.c:468
+#: ../properties/cc-bluetooth-panel.c:530
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "ความปรากฏเห็นของ “%s”"
@@ -445,24 +437,26 @@ msgid "Address"
 msgstr "ที่อยู่"
 
 #: ../properties/bluetooth.ui.h:2
+msgid "Browse Files..."
+msgstr "เรียกดูแฟ้ม..."
+
+#: ../properties/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "การเชื่อมต่อ"
 
-#: ../properties/bluetooth.ui.h:3
-msgid "Keyboard Settings"
-msgstr "ค่าตั้งแป้นพิมพ์"
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "บลูทูท"
 
-#: ../properties/bluetooth.ui.h:4
-msgid "Mouse and Touchpad Settings"
-msgstr "ค่าตั้งเมาส์และทัชแพด"
-
-#: ../properties/bluetooth.ui.h:6
-msgid "Power"
-msgstr "พลังงาน"
-
-#: ../properties/bluetooth.ui.h:7
-msgid "Sound Settings"
-msgstr "ค่าตั้งเสียง"
+#: ../properties/bluetooth.ui.h:9
+msgid "Send Files..."
+msgstr "ส่งแฟ้ม..."
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -477,12 +471,12 @@ msgstr "ตั้งค่าบลูทูท"
 msgid "Pairing with '%s' cancelled"
 msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1146
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "กรุณายืนยันว่า PIN ที่แสดงบน '%s' ตรงกันกับ PIN นี้"
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 
@@ -566,7 +560,7 @@ msgid "Do not pair"
 msgstr "ไม่ต้องจับคู่"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1350
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "ไม่ตรงกัน"
 
@@ -584,7 +578,7 @@ msgid "Introduction"
 msgstr "เกริ่นนำ"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1346
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "ตรงกัน"
 
@@ -596,7 +590,7 @@ msgstr "ตัวเลือกของ PIN"
 msgid "PIN _options..."
 msgstr "_ตัวเลือกของ PIN..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1260
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
 msgstr "เลือกบริการเสริมที่คุณต้องการใช้กับอุปกรณ์ของคุณ:"
 
@@ -803,24 +797,19 @@ msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d วินาที"
 
-#. hour:minutes:seconds
+#. 5 hours 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:188
 #, c-format
+msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#. minutes:seconds
+#. 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:192
 #, c-format
+msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
@@ -841,63 +830,82 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "การจับคู่กับ %s ล้มเหลว"
 
-#: ../moblin/moblin-panel.c:985
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "จับคู่"
 
-#: ../moblin/moblin-panel.c:1022
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "เรียกดู"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "ตั้งค่าอุปกรณ์ไม่สำเร็จ"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233 ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358 ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "กลับไปยังรายชื่ออุปกรณ์"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "เรียบร้อย"
 
-#: ../moblin/moblin-panel.c:1293 ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "ตั้งค่าอุปกรณ์"
 
-#: ../moblin/moblin-panel.c:1453 ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
 msgid "Settings"
 msgstr "ค่าตั้ง"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "แสดงเฉพาะ:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "ตัวเลือกของ PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "เพิ่มอุปกรณ์ใหม่"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "ทำให้มองเห็นได้ผ่านบลูทูท"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
 msgstr "ส่งแฟ้มจากคอมพิวเตอร์ของคุณ"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "พาเนลจัดการบลูทูท"
+
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "เปิดการปรับแต่งแป้นพิมพ์..."
+
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "เปิดการปรับแต่งเมาส์..."
+
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "เปิดการปรับแต่งเสียง..."
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "บลูทูท: เปิดใช้งาน"
+
+#~ msgid "Power"
+#~ msgstr "พลังงาน"
+
+#~ msgid "%s"
+#~ msgstr "%s"
 
 #~ msgid "Make computer _visible"
 #~ msgstr "เ_ปิดคอมพิวเตอร์ให้มองเห็นได้"
