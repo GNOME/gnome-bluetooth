@@ -7,167 +7,167 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-04-16 20:37+0000\n"
-"PO-Revision-Date: 2011-04-19 18:38+0330\n"
+"POT-Creation-Date: 2011-08-29 13:37+0000\n"
+"PO-Revision-Date: 2011-08-31 17:04+0330\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian <translate@ifsug.org>\n"
-"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../lib/bluetooth-client.c:128
-msgid "All types"
-msgstr "تمامی انواع"
-
-#: ../lib/bluetooth-client.c:130
-msgid "Phone"
-msgstr "تلفن"
-
-#: ../lib/bluetooth-client.c:132
-msgid "Modem"
-msgstr "مودم"
-
-#: ../lib/bluetooth-client.c:134
-msgid "Computer"
-msgstr "رایانه"
-
-#: ../lib/bluetooth-client.c:136
-msgid "Network"
-msgstr "شبکه"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:139
-msgid "Headset"
-msgstr "هدست"
-
-#: ../lib/bluetooth-client.c:141
-msgid "Headphones"
-msgstr "هدفون"
-
-#: ../lib/bluetooth-client.c:143
-msgid "Audio device"
-msgstr "دستگاه صوتی"
-
-#: ../lib/bluetooth-client.c:145
-msgid "Keyboard"
-msgstr "صفحه‌کلید"
-
-#: ../lib/bluetooth-client.c:147
-msgid "Mouse"
-msgstr "موشی"
-
-#: ../lib/bluetooth-client.c:149
-msgid "Camera"
-msgstr "دوربین"
-
-#: ../lib/bluetooth-client.c:151
-msgid "Printer"
-msgstr "چاپگر"
-
-#: ../lib/bluetooth-client.c:153
-msgid "Joypad"
-msgstr "دسته بازی"
-
-#: ../lib/bluetooth-client.c:155
-msgid "Tablet"
-msgstr "تبلت"
-
-#: ../lib/bluetooth-client.c:157
-msgid "Video device"
-msgstr "دستگاه ویدئویی"
-
-#: ../lib/bluetooth-client.c:159
-#: ../lib/bluetooth-chooser.c:130
-#: ../lib/bluetooth-filter-widget.c:81
-msgid "Unknown"
-msgstr "ناشناس"
-
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:76
 msgid "Click to select device..."
 msgstr "برای انتخاب دستگاه کلیک کنید..."
 
-#: ../lib/bluetooth-chooser.c:171
+#: ../lib/bluetooth-chooser.c:131
+#: ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:89
+msgid "Unknown"
+msgstr "ناشناس"
+
+#: ../lib/bluetooth-chooser.c:172
 msgid "No adapters available"
 msgstr "هیچ آداپتوری موجود نیست"
 
-#: ../lib/bluetooth-chooser.c:175
-#: ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:176
+#: ../lib/bluetooth-chooser.c:924
 msgid "Searching for devices..."
 msgstr "درحال جستجو برای دستگاه..."
 
-#: ../lib/bluetooth-chooser.c:373
+#: ../lib/bluetooth-chooser.c:374
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "حذف «%s» از فهرست دستگاه‌ها؟"
 
-#: ../lib/bluetooth-chooser.c:375
+#: ../lib/bluetooth-chooser.c:376
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "اگر دستگاه را حذف کنید، قبل از استفاده دوباره باید مجددا آن را برپاسازی کنید."
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:800
 msgid "Device"
 msgstr "دستگاه"
 
-#: ../lib/bluetooth-chooser.c:819
-#: ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:836
+#: ../properties/bluetooth.ui.h:11
 msgid "Type"
 msgstr "نوع"
 
-#: ../lib/bluetooth-filter-widget.c:71
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "تمامی دسته‌ها"
 
-#: ../lib/bluetooth-filter-widget.c:73
-#: ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74
+#: ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "جفت شد"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "مورد اعتماد"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "جفت شده یا قابل اعتماد نیست"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "جفت شده یا قابل اعتماد"
 
-#: ../lib/bluetooth-filter-widget.c:231
+#: ../lib/bluetooth-filter-widget.c:234
 msgid "Show Only Bluetooth Devices With..."
 msgstr "تنها نمایش دستگاه‌های بلوتوث با..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: ../lib/bluetooth-filter-widget.c:250
 msgid "Device _category:"
 msgstr "_دسته‌بندی دستگاه:"
 
-#: ../lib/bluetooth-filter-widget.c:262
+#: ../lib/bluetooth-filter-widget.c:265
 msgid "Select the device category to filter"
 msgstr "برای فیلتر کردن دسته‌بندی دستگاه را انتخاب کنید"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:276
+#: ../lib/bluetooth-filter-widget.c:279
 msgid "Device _type:"
 msgstr "_نوع دستگاه:"
 
-#: ../lib/bluetooth-filter-widget.c:297
+#: ../lib/bluetooth-filter-widget.c:300
 msgid "Select the device type to filter"
 msgstr "برای فیلتر کردن نوع دستگاه را انتخاب کنید"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:306
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "دستگاه‌های ورودی (موشی‌ها، صفحه‌کلیدها و...)"
 
-#: ../lib/bluetooth-filter-widget.c:307
+#: ../lib/bluetooth-filter-widget.c:310
 msgid "Headphones, headsets and other audio devices"
 msgstr "هدفون‌ها، هدست‌ها و دستگاه‌های صوتی دیگر"
+
+#: ../lib/bluetooth-utils.c:58
+msgid "All types"
+msgstr "تمامی انواع"
+
+#: ../lib/bluetooth-utils.c:60
+msgid "Phone"
+msgstr "تلفن"
+
+#: ../lib/bluetooth-utils.c:62
+msgid "Modem"
+msgstr "مودم"
+
+#: ../lib/bluetooth-utils.c:64
+msgid "Computer"
+msgstr "رایانه"
+
+#: ../lib/bluetooth-utils.c:66
+msgid "Network"
+msgstr "شبکه"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:69
+msgid "Headset"
+msgstr "هدست"
+
+#: ../lib/bluetooth-utils.c:71
+msgid "Headphones"
+msgstr "هدفون"
+
+#: ../lib/bluetooth-utils.c:73
+msgid "Audio device"
+msgstr "دستگاه صوتی"
+
+#: ../lib/bluetooth-utils.c:75
+msgid "Keyboard"
+msgstr "صفحه‌کلید"
+
+#: ../lib/bluetooth-utils.c:77
+msgid "Mouse"
+msgstr "موشی"
+
+#: ../lib/bluetooth-utils.c:79
+msgid "Camera"
+msgstr "دوربین"
+
+#: ../lib/bluetooth-utils.c:81
+msgid "Printer"
+msgstr "چاپگر"
+
+#: ../lib/bluetooth-utils.c:83
+msgid "Joypad"
+msgstr "دسته بازی"
+
+#: ../lib/bluetooth-utils.c:85
+msgid "Tablet"
+msgstr "تبلت"
+
+#: ../lib/bluetooth-utils.c:87
+msgid "Video device"
+msgstr "دستگاه ویدئویی"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
@@ -180,100 +180,104 @@ msgstr "استفاده از این دستگاه جی‌پی‌اس برای سر
 msgid "Access the Internet using your cell phone (test)"
 msgstr "دسترسی به اینترنت از طریق تلفن همراه (آزمایشی)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:118
 msgid "Select Device to Browse"
 msgstr "برای مرور دستگاه را انتخاب کنید"
 
-#: ../applet/main.c:129
+#: ../applet/main.c:122
 msgid "_Browse"
 msgstr "_مرور"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:131
 msgid "Select device to browse"
 msgstr "برای مرور دستگاه را انتخاب کنید"
 
-#: ../applet/main.c:288
+#: ../applet/main.c:281
 msgid "Turn On Bluetooth"
 msgstr "روشن کردن بلوتوث"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:282
+#: ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "بلوتوث: خاموش"
 
-#: ../applet/main.c:292
+#: ../applet/main.c:285
 msgid "Turn Off Bluetooth"
 msgstr "خاموش کردن بلوتوث"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:286
+#: ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "بلوتوث: روشن"
 
-#: ../applet/main.c:298
-#: ../applet/notify.c:159
+#: ../applet/main.c:291
 msgid "Bluetooth: Disabled"
 msgstr "بلوتوث: غیرفعال"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:438
 msgid "Disconnecting..."
 msgstr "در حال قطع ارتباط..."
 
-#: ../applet/main.c:448
+#: ../applet/main.c:441
 #: ../sendto/main.c:217
 #: ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "در حال برقراری ارتباط..."
 
-#: ../applet/main.c:451
-#: ../applet/main.c:734
+#: ../applet/main.c:444
+#: ../applet/main.c:727
 msgid "Connected"
 msgstr "ارتباط برقرار شد"
 
-#: ../applet/main.c:454
-#: ../applet/main.c:734
+#: ../applet/main.c:447
+#: ../applet/main.c:727
 msgid "Disconnected"
 msgstr "ارتباط قطع شد"
 
-#: ../applet/main.c:752
-#: ../applet/main.c:816
+#: ../applet/main.c:745
+#: ../applet/main.c:809
 msgid "Disconnect"
 msgstr "قطع ارتباط"
 
-#: ../applet/main.c:752
-#: ../applet/main.c:816
-#: ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:745
+#: ../applet/main.c:809
+#: ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "برقراری ارتباط"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:758
 msgid "Send files..."
 msgstr "ارسال پرونده..."
 
-#: ../applet/main.c:775
+#: ../applet/main.c:768
 msgid "Browse files..."
 msgstr "مرور پرونده‌ها..."
 
-#: ../applet/main.c:786
-msgid "Open Keyboard Preferences..."
-msgstr "باز کردن ترجیحات صفحه‌کلید..."
+#: ../applet/main.c:779
+#: ../properties/bluetooth.ui.h:4
+msgid "Keyboard Settings"
+msgstr "تنظیمات صفحه‌کلید"
 
-#: ../applet/main.c:794
-msgid "Open Mouse Preferences..."
-msgstr "باز کردن ترجیحات موشی..."
+#: ../applet/main.c:787
+#: ../properties/bluetooth.ui.h:5
+msgid "Mouse and Touchpad Settings"
+msgstr "تنظیمات موس و صفحه‌لمسی"
 
-#: ../applet/main.c:804
-msgid "Open Sound Preferences..."
-msgstr "باز کردن ترجیحات صوت..."
+#: ../applet/main.c:797
+#: ../properties/bluetooth.ui.h:10
+msgid "Sound Settings"
+msgstr "تنظیمات صوت"
 
-#: ../applet/main.c:857
+#: ../applet/main.c:850
 msgid "Debug"
 msgstr "رفع اشکال"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:869
 msgid "- Bluetooth applet"
 msgstr "- برنامک بلوتوث"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:874
 #, c-format
 msgid ""
 "%s\n"
@@ -282,25 +286,16 @@ msgstr ""
 "%s\n"
 "برای نمایش تمام گزینه‌های موجود خط فرمان «%s --help» را اجرا کنید.\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:900
 msgid "Bluetooth Applet"
 msgstr "برنامک بلوتوث"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122
 #: ../properties/bluetooth-properties.desktop.in.in.h:1
 #: ../moblin/main.c:129
 #: ../moblin/main.c:141
-#: ../moblin/moblin-panel.c:1602
 msgid "Bluetooth"
 msgstr "بلوتوث"
-
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "بلوتوث: فعال شد"
 
 #: ../applet/agent.c:196
 #: ../applet/agent.c:265
@@ -383,8 +378,9 @@ msgid "Browse files on device..."
 msgstr "مرور پرونده‌های روی دستگاه..."
 
 #: ../applet/popup-menu.ui.h:3
-#: ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../properties/cc-bluetooth-panel.c:676
+#: ../moblin/moblin-panel.c:1404
+#: ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "دستگاه‌ها"
 
@@ -432,31 +428,31 @@ msgstr "_مطابقت‌ها"
 msgid "_Show input"
 msgstr "_نمایش ورودی"
 
-#: ../properties/cc-bluetooth-panel.c:293
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "Yes"
 msgstr "بله"
 
-#: ../properties/cc-bluetooth-panel.c:293
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "No"
 msgstr "خیر"
 
-#: ../properties/cc-bluetooth-panel.c:389
+#: ../properties/cc-bluetooth-panel.c:407
 msgid "Bluetooth is disabled"
 msgstr "بلوتوث غیرفعال است"
 
-#: ../properties/cc-bluetooth-panel.c:394
+#: ../properties/cc-bluetooth-panel.c:412
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "بلوتوث از طریق کلید فیزیکی غیرفعال است"
 
-#: ../properties/cc-bluetooth-panel.c:398
+#: ../properties/cc-bluetooth-panel.c:416
 msgid "No Bluetooth adapters found"
 msgstr "هیچ آداپتور بلوتوثی پیدا نشد"
 
-#: ../properties/cc-bluetooth-panel.c:464
+#: ../properties/cc-bluetooth-panel.c:526
 msgid "Visibility"
 msgstr "قابلیت روئیت"
 
-#: ../properties/cc-bluetooth-panel.c:468
+#: ../properties/cc-bluetooth-panel.c:530
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "قابلیت روئیت «%s»"
@@ -466,24 +462,30 @@ msgid "Address"
 msgstr "آدرس"
 
 #: ../properties/bluetooth.ui.h:2
+#| msgid "Browse files..."
+msgid "Browse Files..."
+msgstr "مرور پرونده‌ها..."
+
+#: ../properties/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "ارتباط"
 
-#: ../properties/bluetooth.ui.h:3
-msgid "Keyboard Settings"
-msgstr "تنظیمات صفحه‌کلید"
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../properties/bluetooth.ui.h:8
+#: ../moblin/moblin-panel.c:1603
+#| msgid "Bluetooth"
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "بلوتوث"
 
-#: ../properties/bluetooth.ui.h:4
-msgid "Mouse and Touchpad Settings"
-msgstr "تنظیمات موس و صفحه‌لمسی"
-
-#: ../properties/bluetooth.ui.h:6
-msgid "Power"
-msgstr "انرژی"
-
-#: ../properties/bluetooth.ui.h:7
-msgid "Sound Settings"
-msgstr "تنظیمات صوت"
+#: ../properties/bluetooth.ui.h:9
+#| msgid "Send files..."
+msgid "Send Files..."
+msgstr "ارسال پرونده..."
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -500,13 +502,13 @@ msgid "Pairing with '%s' cancelled"
 msgstr "جفت شدن با «%s» لغو شد"
 
 #: ../wizard/main.c:247
-#: ../moblin/moblin-panel.c:1146
+#: ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "لطفا تایید کنید که PIN نمایش داده شده بر روی «%s» با این یکی مطابقت دارد."
 
 #: ../wizard/main.c:301
-#: ../moblin/moblin-panel.c:1197
+#: ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "لطفا PIN مقابل را وارد کنید:"
 
@@ -597,7 +599,7 @@ msgstr "جفت نکن"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:11
-#: ../moblin/moblin-panel.c:1350
+#: ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "مطابقت ندارد"
 
@@ -617,7 +619,7 @@ msgstr "معرفی"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:17
-#: ../moblin/moblin-panel.c:1346
+#: ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "مطابقت‌ها"
 
@@ -631,7 +633,7 @@ msgid "PIN _options..."
 msgstr "_گزینه‌های PIN..."
 
 #: ../wizard/wizard.ui.h:20
-#: ../moblin/moblin-panel.c:1260
+#: ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
 msgstr "سرویس‌های اضافی که میخواهید همراه با دستگاهتان از آنها استفاده کنید را انتخاب کنید:"
 
@@ -832,25 +834,21 @@ msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%Id ثانیه"
 
-#. hour:minutes:seconds
+#. 5 hours 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:188
 #, c-format
+#| msgid "%s %s %s"
+msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#. minutes:seconds
+#. 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:192
 #, c-format
+#| msgid "%s %s"
+msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195
-#: ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
@@ -871,67 +869,86 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "جفت شدن با «%s» شکست خورد."
 
-#: ../moblin/moblin-panel.c:985
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "جفت شدن"
 
-#: ../moblin/moblin-panel.c:1022
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "مرور"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "برپاسازی دستگاه شکست خورد"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233
-#: ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358
-#: ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234
+#: ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359
+#: ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "برگشت به دستگاه‌ها"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "انجام شد"
 
-#: ../moblin/moblin-panel.c:1293
-#: ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294
+#: ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "برپاسازی دستگاه"
 
-#: ../moblin/moblin-panel.c:1453
-#: ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454
+#: ../moblin/moblin-panel.c:1585
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "تنها نمایش:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "ترجیحات PIN"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "اضافه کردن دستگاه جدید"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "قابل روئیت بر روی بلوتوث"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
 msgstr "ارسال پرونده از رایانه شما"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "تابلو مدیریت بلوتوث"
+
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "باز کردن ترجیحات صفحه‌کلید..."
+
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "باز کردن ترجیحات موشی..."
+
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "باز کردن ترجیحات صوت..."
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "بلوتوث: فعال شد"
+
+#~ msgid "Power"
+#~ msgstr "انرژی"
+
+#~ msgid "%s"
+#~ msgstr "%s"
 
 #~ msgid "Make computer _visible"
 #~ msgstr "رایانه قابل _روئیت شود"
