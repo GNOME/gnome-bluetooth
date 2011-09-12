@@ -10,6 +10,7 @@
 #
 # Update in gnome-bluetooth:
 # Changwoo Ryu <cwryu@debian.org>, 2009, 2010, 2011.
+# Seong-ho, Cho <darkcircle.0426@gmail.com>, 2011.
 #
 # 새로 번역하시는 분은 아래 "translator-credits"에 추가하세요.
 #
@@ -22,9 +23,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-18 14:24+0000\n"
-"PO-Revision-Date: 2011-03-19 22:48+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"POT-Creation-Date: 2011-09-02 19:41+0000\n"
+"PO-Revision-Date: 2011-09-13 08:55+0900\n"
+"Last-Translator: Seong-ho, Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,151 +33,151 @@ msgstr ""
 "Language: Korean\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../lib/bluetooth-client.c:128
-msgid "All types"
-msgstr "모든 종류"
-
-#: ../lib/bluetooth-client.c:130
-msgid "Phone"
-msgstr "전화"
-
-#: ../lib/bluetooth-client.c:132
-msgid "Modem"
-msgstr "모뎀"
-
-#: ../lib/bluetooth-client.c:134
-msgid "Computer"
-msgstr "컴퓨터"
-
-#: ../lib/bluetooth-client.c:136
-msgid "Network"
-msgstr "네트워크"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:139
-msgid "Headset"
-msgstr "헤드셋"
-
-#: ../lib/bluetooth-client.c:141
-msgid "Headphones"
-msgstr "헤드폰"
-
-#: ../lib/bluetooth-client.c:143
-msgid "Audio device"
-msgstr "오디오 장치"
-
-#: ../lib/bluetooth-client.c:145
-msgid "Keyboard"
-msgstr "키보드"
-
-#: ../lib/bluetooth-client.c:147
-msgid "Mouse"
-msgstr "마우스"
-
-#: ../lib/bluetooth-client.c:149
-msgid "Camera"
-msgstr "카메라"
-
-#: ../lib/bluetooth-client.c:151
-msgid "Printer"
-msgstr "프린터"
-
-#: ../lib/bluetooth-client.c:153
-msgid "Joypad"
-msgstr "조이패드"
-
-#: ../lib/bluetooth-client.c:155
-msgid "Tablet"
-msgstr "타블렛"
-
-#: ../lib/bluetooth-client.c:157
-msgid "Video device"
-msgstr "비디오 장치"
-
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
-#: ../lib/bluetooth-filter-widget.c:81
-msgid "Unknown"
-msgstr "알 수 없음"
-
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:76
 msgid "Click to select device..."
 msgstr "장치를 선택하려면 누르십시오..."
 
-#: ../lib/bluetooth-chooser.c:171
+#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:89
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: ../lib/bluetooth-chooser.c:172
 msgid "No adapters available"
 msgstr "어댑터가 없습니다"
 
-#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
 msgid "Searching for devices..."
 msgstr "장치를 검색하는 중입니다..."
 
-#: ../lib/bluetooth-chooser.c:373
+#: ../lib/bluetooth-chooser.c:374
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "장치 목록에서 '%s'을(를) 제거합니까?"
 
-#: ../lib/bluetooth-chooser.c:375
+#: ../lib/bluetooth-chooser.c:376
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "장치를 제거하면, 다음에 사용할 때 다시 준비해야 합니다."
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:800
 msgid "Device"
 msgstr "장치"
 
-#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
 msgid "Type"
 msgstr "종류"
 
-#: ../lib/bluetooth-filter-widget.c:71
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "모든 분류"
 
-#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "결합"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "신뢰"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "결합이나 신뢰 아님"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "결합 혹은 신뢰"
 
-#: ../lib/bluetooth-filter-widget.c:231
+#: ../lib/bluetooth-filter-widget.c:234
 msgid "Show Only Bluetooth Devices With..."
 msgstr "기준에 맞는 블루투스 장치만 표시..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: ../lib/bluetooth-filter-widget.c:250
 msgid "Device _category:"
 msgstr "장치 분류(_C):"
 
-#: ../lib/bluetooth-filter-widget.c:262
+#: ../lib/bluetooth-filter-widget.c:265
 msgid "Select the device category to filter"
 msgstr "필터링할 장치 분류를 선택하십시오"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:276
+#: ../lib/bluetooth-filter-widget.c:279
 msgid "Device _type:"
 msgstr "장치 종류(_T):"
 
-#: ../lib/bluetooth-filter-widget.c:297
+#: ../lib/bluetooth-filter-widget.c:300
 msgid "Select the device type to filter"
 msgstr "필터링할 장치 종류를 선택하십시오"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:306
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "입력 장치 (마우스, 키보드 등)"
 
-#: ../lib/bluetooth-filter-widget.c:307
+#: ../lib/bluetooth-filter-widget.c:310
 msgid "Headphones, headsets and other audio devices"
 msgstr "헤드폰, 헤드셋 및 기타 오디오 장치"
+
+#: ../lib/bluetooth-utils.c:58
+msgid "All types"
+msgstr "모든 종류"
+
+#: ../lib/bluetooth-utils.c:60
+msgid "Phone"
+msgstr "전화"
+
+#: ../lib/bluetooth-utils.c:62
+msgid "Modem"
+msgstr "모뎀"
+
+#: ../lib/bluetooth-utils.c:64
+msgid "Computer"
+msgstr "컴퓨터"
+
+#: ../lib/bluetooth-utils.c:66
+msgid "Network"
+msgstr "네트워크"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:69
+msgid "Headset"
+msgstr "헤드셋"
+
+#: ../lib/bluetooth-utils.c:71
+msgid "Headphones"
+msgstr "헤드폰"
+
+#: ../lib/bluetooth-utils.c:73
+msgid "Audio device"
+msgstr "오디오 장치"
+
+#: ../lib/bluetooth-utils.c:75
+msgid "Keyboard"
+msgstr "키보드"
+
+#: ../lib/bluetooth-utils.c:77
+msgid "Mouse"
+msgstr "마우스"
+
+#: ../lib/bluetooth-utils.c:79
+msgid "Camera"
+msgstr "카메라"
+
+#: ../lib/bluetooth-utils.c:81
+msgid "Printer"
+msgstr "프린터"
+
+#: ../lib/bluetooth-utils.c:83
+msgid "Joypad"
+msgstr "조이패드"
+
+#: ../lib/bluetooth-utils.c:85
+msgid "Tablet"
+msgstr "타블렛"
+
+#: ../lib/bluetooth-utils.c:87
+msgid "Video device"
+msgstr "비디오 장치"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
@@ -189,95 +190,95 @@ msgstr "위치 서비스에 이 GPS 장치 사용"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "이 휴대 전화를 사용해 인터넷 사용 (test)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:118
 msgid "Select Device to Browse"
 msgstr "살펴볼 장치 선택"
 
 # 주의: file browse가 아니라서 찾아보기라고 번역하지 않음
-#: ../applet/main.c:129
+#: ../applet/main.c:122
 msgid "_Browse"
 msgstr "살펴보기(_B)"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:131
 msgid "Select device to browse"
 msgstr "살펴볼 장치를 선택하십시오"
 
 # 메뉴 아이템 - 문장으로 번역하지 않는다
-#: ../applet/main.c:288
+#: ../applet/main.c:281
 msgid "Turn On Bluetooth"
 msgstr "블루투스 켜기"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:282 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "블루투스: 꺼짐"
 
 # 메뉴 아이템 - 문장으로 번역하지 않는다
-#: ../applet/main.c:292
+#: ../applet/main.c:285
 msgid "Turn Off Bluetooth"
 msgstr "블루투스 끄기"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:286 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "블루투스: 켜짐"
 
-#: ../applet/main.c:298 ../applet/notify.c:159
+#: ../applet/main.c:291
 msgid "Bluetooth: Disabled"
 msgstr "블루투스: 사용하지 않음"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:438
 msgid "Disconnecting..."
 msgstr "연결 끊는 중..."
 
-#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "연결하는 중..."
 
-#: ../applet/main.c:451 ../applet/main.c:734
+#: ../applet/main.c:444 ../applet/main.c:727
 msgid "Connected"
 msgstr "연결"
 
-#: ../applet/main.c:454 ../applet/main.c:734
+#: ../applet/main.c:447 ../applet/main.c:727
 msgid "Disconnected"
 msgstr "연결 끊김"
 
-#: ../applet/main.c:752 ../applet/main.c:816
+#: ../applet/main.c:745 ../applet/main.c:809
 msgid "Disconnect"
 msgstr "연결 끊기"
 
-#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "연결"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:758
 msgid "Send files..."
 msgstr "파일 보내기..."
 
-#: ../applet/main.c:775
+#: ../applet/main.c:768
 msgid "Browse files..."
 msgstr "파일 찾아보기..."
 
-#: ../applet/main.c:786
-msgid "Open Keyboard Preferences..."
-msgstr "키보드 기본 설정 열기..."
+#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+msgid "Keyboard Settings"
+msgstr "키보드 설정"
 
-#: ../applet/main.c:794
-msgid "Open Mouse Preferences..."
-msgstr "마우스 기본 설정 열기..."
+#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+msgid "Mouse and Touchpad Settings"
+msgstr "마우스 및 터치패드 설정"
 
-#: ../applet/main.c:804
-msgid "Open Sound Preferences..."
-msgstr "사운드 기본 설정 열기..."
+#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+msgid "Sound Settings"
+msgstr "사운드 설정"
 
-#: ../applet/main.c:857
+#: ../applet/main.c:850
 msgid "Debug"
 msgstr "디버깅"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:869
 msgid "- Bluetooth applet"
 msgstr "- 블루투스 애플릿"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:874
 #, c-format
 msgid ""
 "%s\n"
@@ -286,22 +287,14 @@ msgstr ""
 "%s\n"
 "전체 명령행 옵션 목록을 보려면 '%s --help' 명령을 실행하십시오.\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:900
 msgid "Bluetooth Applet"
 msgstr "블루투스 애플릿"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1602
+#: ../moblin/main.c:129 ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "블루투스"
-
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "블루투스: 사용"
 
 #: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
@@ -380,8 +373,8 @@ msgstr "블루투스: 확인 중"
 msgid "Browse files on device..."
 msgstr "장치의 파일 찾아보기..."
 
-#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
+#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "장치"
 
@@ -429,31 +422,31 @@ msgstr "일치(_M)"
 msgid "_Show input"
 msgstr "입력 표시(_S)"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "Yes"
 msgstr "예"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:295
 msgid "No"
 msgstr "아니요"
 
-#: ../properties/cc-bluetooth-panel.c:331
+#: ../properties/cc-bluetooth-panel.c:407
 msgid "Bluetooth is disabled"
 msgstr "블루투스를 사용하지 않습니다"
 
-#: ../properties/cc-bluetooth-panel.c:336
+#: ../properties/cc-bluetooth-panel.c:412
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "하드웨어 스위치에 따라 블루투스를 사용하지 않습니다"
 
-#: ../properties/cc-bluetooth-panel.c:340
+#: ../properties/cc-bluetooth-panel.c:416
 msgid "No Bluetooth adapters found"
 msgstr "블루투스 어댑터가 없습니다"
 
-#: ../properties/cc-bluetooth-panel.c:406
+#: ../properties/cc-bluetooth-panel.c:526
 msgid "Visibility"
 msgstr "보이기"
 
-#: ../properties/cc-bluetooth-panel.c:410
+#: ../properties/cc-bluetooth-panel.c:530
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "“%s” 보이기"
@@ -463,24 +456,26 @@ msgid "Address"
 msgstr "주소"
 
 #: ../properties/bluetooth.ui.h:2
+msgid "Browse Files..."
+msgstr "파일 찾아보기..."
+
+#: ../properties/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "연결"
 
-#: ../properties/bluetooth.ui.h:3
-msgid "Keyboard Settings"
-msgstr "키보드 설정"
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "블루투스"
 
-#: ../properties/bluetooth.ui.h:4
-msgid "Mouse and Touchpad Settings"
-msgstr "마우스 및 터치패드 설정"
-
-#: ../properties/bluetooth.ui.h:6
-msgid "Power"
-msgstr "전원"
-
-#: ../properties/bluetooth.ui.h:7
-msgid "Sound Settings"
-msgstr "사운드 설정"
+#: ../properties/bluetooth.ui.h:9
+msgid "Send Files..."
+msgstr "파일 보내기..."
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -495,12 +490,12 @@ msgstr "블루투스 설정"
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' 장치와 결합을 취소했습니다"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1146
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "'%s'에 표시된 PIN이 이 PIN과 일치하는지 확인하십시오."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "다음 PIN을 입력하십시오:"
 
@@ -584,7 +579,7 @@ msgid "Do not pair"
 msgstr "결합하지 않기"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1350
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "일치하지 않음"
 
@@ -602,7 +597,7 @@ msgid "Introduction"
 msgstr "소개"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1346
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "일치"
 
@@ -614,7 +609,7 @@ msgstr "PIN 옵션"
 msgid "PIN _options..."
 msgstr "PIN 옵션(_O)..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1260
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
 msgstr "이 장치에 사용하려는 서비스가 더 있으면 선택하십시오:"
 
@@ -825,24 +820,19 @@ msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d초"
 
-#. hour:minutes:seconds
+#. 5 hours 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:188
 #, c-format
+msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#. minutes:seconds
+#. 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:192
 #, c-format
+msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
@@ -863,58 +853,59 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "%s 장치와 결합이 실패했습니다."
 
-#: ../moblin/moblin-panel.c:985
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "결합"
 
 # 주의: file browse가 아니라서 찾아보기라고 번역하지 않음
-#: ../moblin/moblin-panel.c:1022
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "살펴보기"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "장치 준비가 실패했습니다"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233 ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358 ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "뒤로 (장치)"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "완료"
 
-#: ../moblin/moblin-panel.c:1293 ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "장치 준비"
 
-#: ../moblin/moblin-panel.c:1453 ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
 msgid "Settings"
 msgstr "설정"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "보이기 조건:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "PIN 옵션"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "새 장치 추가"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "블루투스에서 보이게 하기"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
 msgstr "컴퓨터에서 파일 보내기"
 
@@ -922,58 +913,23 @@ msgstr "컴퓨터에서 파일 보내기"
 msgid "Bluetooth Manager Panel"
 msgstr "블루투스 관리자 애플릿"
 
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "키보드 기본 설정 열기..."
+
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "마우스 기본 설정 열기..."
+
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "사운드 기본 설정 열기..."
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "블루투스: 사용"
+
+#~ msgid "Power"
+#~ msgstr "전원"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
 #~ msgid "Active"
 #~ msgstr "동작"
-
-# gnome-user-share에 들어 있는 프로그램, "개인 파일 공유"
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr "\"개인 파일 공유\" 기본 설정을 시작할 수 없습니다"
-
-# gnome-user-share에 들어 있는 프로그램, "개인 파일 공유"
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
-#~ msgstr "\"개인 파일 공유\" 프로그램을 올바르게 설치했는지 확인하십시오."
-
-#~ msgid "Bluetooth Preferences"
-#~ msgstr "블루투스 기본 설정"
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "블루투스 아이콘 표시(_S)"
-
-#~ msgid "Receive Files"
-#~ msgstr "파일 받기"
-
-#~ msgid "Output a list of currently known devices"
-#~ msgstr "현재 알려진 장치의 목록을 출력합니다"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "블루투스 속성"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "컴퓨터 보이기(_V)"
-
-#~ msgid "Friendly name"
-#~ msgstr "지정 이름"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "새 장치 준비(_N)..."
-
-#~ msgid "_Remove"
-#~ msgstr "제거(_R)"
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr "블루투스를 사용하지 않도록 컴퓨터의 스위치로 선택했습니다."
-
-#~ msgid "bluetooth"
-#~ msgstr "블루투스"
-
-#~ msgid "<u>Pair</u>"
-#~ msgstr "<u>결합</u>"
-
-#~ msgid "<u>Connect</u>"
-#~ msgstr "<u>연결</u>"
-
-# file browse가 아니라서 찾아보기라고 번역하지 않음
-#~ msgid "<u>Browse</u>"
-#~ msgstr "<u>살펴보기</u>"
