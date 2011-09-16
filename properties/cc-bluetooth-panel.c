@@ -445,25 +445,28 @@ switch_panel (CcBluetoothPanel *self,
     }
 }
 
-static void
+static gboolean
 keyboard_callback (GtkButton        *button,
 		   CcBluetoothPanel *self)
 {
 	switch_panel (self, KEYBOARD_PREFS);
+	return TRUE;
 }
 
-static void
+static gboolean
 mouse_callback (GtkButton        *button,
 		CcBluetoothPanel *self)
 {
 	switch_panel (self, MOUSE_PREFS);
+	return TRUE;
 }
 
-static void
+static gboolean
 sound_callback (GtkButton        *button,
 		CcBluetoothPanel *self)
 {
 	switch_panel (self, SOUND_PREFS);
+	return TRUE;
 }
 
 static void
@@ -708,11 +711,11 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	/* Set the initial state of the properties */
 	cc_bluetooth_panel_update_properties (self);
-	g_signal_connect (G_OBJECT (WID ("mouse_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("mouse_link")), "activate-link",
 			  G_CALLBACK (mouse_callback), self);
-	g_signal_connect (G_OBJECT (WID ("keyboard_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("keyboard_link")), "activate-link",
 			  G_CALLBACK (keyboard_callback), self);
-	g_signal_connect (G_OBJECT (WID ("sound_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("sound_link")), "activate-link",
 			  G_CALLBACK (sound_callback), self);
 	g_signal_connect (G_OBJECT (WID ("browse_button")), "clicked",
 			  G_CALLBACK (browse_callback), self);
