@@ -652,7 +652,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 		return;
 	}
 
-	widget = WID ("vbox");
+	widget = WID ("grid");
 	gtk_widget_reparent (widget, GTK_WIDGET (self));
 
 	/* Overall device state */
