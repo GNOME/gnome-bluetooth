@@ -44,10 +44,9 @@ G_DEFINE_DYNAMIC_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC_TYPE_PANEL)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (self->priv->builder, s))
 
-#define GNOMECC			"gnome-control-center"
-#define KEYBOARD_PREFS		GNOMECC " keyboard"
-#define MOUSE_PREFS		GNOMECC " mouse"
-#define SOUND_PREFS		GNOMECC " sound"
+#define KEYBOARD_PREFS		"keyboard"
+#define MOUSE_PREFS		"mouse"
+#define SOUND_PREFS		"sound"
 #define WIZARD			"bluetooth-wizard"
 
 struct CcBluetoothPanelPrivate {
@@ -432,24 +431,39 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 }
 
 static void
+switch_panel (CcBluetoothPanel *self,
+	      const char       *panel)
+{
+  CcShell *shell;
+  GError *error = NULL;
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
+    {
+      g_warning ("Failed to activate Region panel: %s", error->message);
+      g_error_free (error);
+    }
+}
+
+static void
 keyboard_callback (GtkButton        *button,
 		   CcBluetoothPanel *self)
 {
-	launch_command (KEYBOARD_PREFS);
+	switch_panel (self, KEYBOARD_PREFS);
 }
 
 static void
 mouse_callback (GtkButton        *button,
 		CcBluetoothPanel *self)
 {
-	launch_command (MOUSE_PREFS);
+	switch_panel (self, MOUSE_PREFS);
 }
 
 static void
 sound_callback (GtkButton        *button,
 		CcBluetoothPanel *self)
 {
-	launch_command (SOUND_PREFS);
+	switch_panel (self, SOUND_PREFS);
 }
 
 static void
