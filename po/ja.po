@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-22 11:24+0000\n"
-"PO-Revision-Date: 2011-03-22 21:14+0900\n"
-"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
+"POT-Creation-Date: 2011-09-16 15:24+0000\n"
+"PO-Revision-Date: 2011-09-11 07:04+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,152 +20,152 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../lib/bluetooth-client.c:128
-msgid "All types"
-msgstr "すべてのタイプ"
-
-#: ../lib/bluetooth-client.c:130
-msgid "Phone"
-msgstr "電話"
-
-#: ../lib/bluetooth-client.c:132
-msgid "Modem"
-msgstr "モデム"
-
-#: ../lib/bluetooth-client.c:134
-msgid "Computer"
-msgstr "コンピュータ"
-
-#: ../lib/bluetooth-client.c:136
-msgid "Network"
-msgstr "ネットワーク"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:139
-msgid "Headset"
-msgstr "ヘッドセット"
-
-#: ../lib/bluetooth-client.c:141
-msgid "Headphones"
-msgstr "ヘッドフォン"
-
-#: ../lib/bluetooth-client.c:143
-msgid "Audio device"
-msgstr "オーディオデバイス"
-
-#: ../lib/bluetooth-client.c:145
-msgid "Keyboard"
-msgstr "キーボード"
-
-#: ../lib/bluetooth-client.c:147
-msgid "Mouse"
-msgstr "マウス"
-
-#: ../lib/bluetooth-client.c:149
-msgid "Camera"
-msgstr "カメラ"
-
-#: ../lib/bluetooth-client.c:151
-msgid "Printer"
-msgstr "プリンタ"
-
-#: ../lib/bluetooth-client.c:153
-msgid "Joypad"
-msgstr "ジョイパッド"
-
-#: ../lib/bluetooth-client.c:155
-msgid "Tablet"
-msgstr "タブレット"
-
-#: ../lib/bluetooth-client.c:157
-msgid "Video device"
-msgstr "ビデオデバイス"
-
-#: ../lib/bluetooth-client.c:159 ../lib/bluetooth-chooser.c:130
-#: ../lib/bluetooth-filter-widget.c:81
-msgid "Unknown"
-msgstr "未知"
-
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:76
 msgid "Click to select device..."
 msgstr "クリックしてデバイスの選択..."
 
-#: ../lib/bluetooth-chooser.c:171
-msgid "No adapters available"
-msgstr "アダプタが利用できません"
+#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:89
+msgid "Unknown"
+msgstr "未知"
 
-#: ../lib/bluetooth-chooser.c:175 ../lib/bluetooth-chooser.c:905
+#: ../lib/bluetooth-chooser.c:172
+msgid "No adapters available"
+msgstr "アダプターが利用できません"
+
+#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
 msgid "Searching for devices..."
 msgstr "デバイスを検索しています..."
 
-#: ../lib/bluetooth-chooser.c:373
+#: ../lib/bluetooth-chooser.c:374
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "'%s' をデバイスのリストから削除しますか?"
 
-#: ../lib/bluetooth-chooser.c:375
+#: ../lib/bluetooth-chooser.c:376
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "デバイスを削除すると、次回使用時にデバイスを再設定しなければなりません。"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:800
 msgid "Device"
 msgstr "デバイス"
 
-#: ../lib/bluetooth-chooser.c:819 ../properties/bluetooth.ui.h:8
+#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
 msgid "Type"
 msgstr "種類"
 
-#: ../lib/bluetooth-filter-widget.c:71
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "すべてのカテゴリ"
 
-#: ../lib/bluetooth-filter-widget.c:73 ../properties/bluetooth.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "ペアリング済"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "認証済み"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "未ペアリングあるいは未認証"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "ペアリング済あるいは認証済"
 
-#: ../lib/bluetooth-filter-widget.c:231
+#: ../lib/bluetooth-filter-widget.c:234
 msgid "Show Only Bluetooth Devices With..."
 msgstr "以下のBluetoothデバイスのみを表示..."
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: ../lib/bluetooth-filter-widget.c:250
 msgid "Device _category:"
 msgstr "デバイスのカテゴリ(_C)"
 
-#: ../lib/bluetooth-filter-widget.c:262
+#: ../lib/bluetooth-filter-widget.c:265
 msgid "Select the device category to filter"
 msgstr "リストを絞り込むためデバイスのカテゴリを選択してください"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:276
+#: ../lib/bluetooth-filter-widget.c:279
 msgid "Device _type:"
 msgstr "デバイスの種類(_T)"
 
-#: ../lib/bluetooth-filter-widget.c:297
+#: ../lib/bluetooth-filter-widget.c:300
 msgid "Select the device type to filter"
 msgstr "リストを絞り込むためデバイスの種類を選択してください"
 
-#: ../lib/bluetooth-filter-widget.c:303
+#: ../lib/bluetooth-filter-widget.c:306
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "入力デバイス (マウス、キーボード、など)"
 
-#: ../lib/bluetooth-filter-widget.c:307
+#: ../lib/bluetooth-filter-widget.c:310
 msgid "Headphones, headsets and other audio devices"
 msgstr "ヘッドフォン、ヘッドセット、その他のオーディオ・デバイス"
+
+#: ../lib/bluetooth-utils.c:58
+msgid "All types"
+msgstr "すべてのタイプ"
+
+#: ../lib/bluetooth-utils.c:60
+msgid "Phone"
+msgstr "電話"
+
+#: ../lib/bluetooth-utils.c:62
+msgid "Modem"
+msgstr "モデム"
+
+#: ../lib/bluetooth-utils.c:64
+msgid "Computer"
+msgstr "コンピューター"
+
+#: ../lib/bluetooth-utils.c:66
+msgid "Network"
+msgstr "ネットワーク"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:69
+msgid "Headset"
+msgstr "ヘッドセット"
+
+#: ../lib/bluetooth-utils.c:71
+msgid "Headphones"
+msgstr "ヘッドフォン"
+
+#: ../lib/bluetooth-utils.c:73
+msgid "Audio device"
+msgstr "オーディオデバイス"
+
+#: ../lib/bluetooth-utils.c:75
+msgid "Keyboard"
+msgstr "キーボード"
+
+#: ../lib/bluetooth-utils.c:77
+msgid "Mouse"
+msgstr "マウス"
+
+#: ../lib/bluetooth-utils.c:79
+msgid "Camera"
+msgstr "カメラ"
+
+#: ../lib/bluetooth-utils.c:81
+msgid "Printer"
+msgstr "プリンター"
+
+#: ../lib/bluetooth-utils.c:83
+msgid "Joypad"
+msgstr "ジョイパッド"
+
+#: ../lib/bluetooth-utils.c:85
+msgid "Tablet"
+msgstr "タブレット"
+
+#: ../lib/bluetooth-utils.c:87
+msgid "Video device"
+msgstr "ビデオデバイス"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
@@ -178,92 +178,92 @@ msgstr "このGPSデバイスをGeolocationサービスに使用する"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "携帯電話を使ってインターネットにアクセス(テスト)"
 
-#: ../applet/main.c:125
+#: ../applet/main.c:118
 msgid "Select Device to Browse"
 msgstr "閲覧したいデバイスの選択"
 
-#: ../applet/main.c:129
+#: ../applet/main.c:122
 msgid "_Browse"
 msgstr "閲覧(_B)"
 
-#: ../applet/main.c:138
+#: ../applet/main.c:131
 msgid "Select device to browse"
 msgstr "閲覧したいデバイスを選択してください"
 
-#: ../applet/main.c:288
+#: ../applet/main.c:281
 msgid "Turn On Bluetooth"
 msgstr "Bluetooth をオンにする"
 
-#: ../applet/main.c:289
+#: ../applet/main.c:282 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: 切"
 
-#: ../applet/main.c:292
+#: ../applet/main.c:285
 msgid "Turn Off Bluetooth"
 msgstr "Bluetooth を切る"
 
-#: ../applet/main.c:293
+#: ../applet/main.c:286 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: 入"
 
-#: ../applet/main.c:298 ../applet/notify.c:159
+#: ../applet/main.c:291
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: 無効"
 
-#: ../applet/main.c:445
+#: ../applet/main.c:438
 msgid "Disconnecting..."
 msgstr "切断中..."
 
-#: ../applet/main.c:448 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
 msgid "Connecting..."
 msgstr "接続中..."
 
-#: ../applet/main.c:451 ../applet/main.c:734
+#: ../applet/main.c:444 ../applet/main.c:727
 msgid "Connected"
 msgstr "接続しました"
 
-#: ../applet/main.c:454 ../applet/main.c:734
+#: ../applet/main.c:447 ../applet/main.c:727
 msgid "Disconnected"
 msgstr "切断しました"
 
-#: ../applet/main.c:752 ../applet/main.c:816
+#: ../applet/main.c:745 ../applet/main.c:809
 msgid "Disconnect"
 msgstr "切断する"
 
-#: ../applet/main.c:752 ../applet/main.c:816 ../moblin/moblin-panel.c:1001
+#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
 msgid "Connect"
 msgstr "接続する"
 
-#: ../applet/main.c:765
+#: ../applet/main.c:758
 msgid "Send files..."
 msgstr "ファイルの送信..."
 
-#: ../applet/main.c:775
+#: ../applet/main.c:768
 msgid "Browse files..."
 msgstr "ファイルの閲覧..."
 
-#: ../applet/main.c:786
-msgid "Open Keyboard Preferences..."
-msgstr "キーボードの設定を開く..."
+#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+msgid "Keyboard Settings"
+msgstr "キーボードの設定"
 
-#: ../applet/main.c:794
-msgid "Open Mouse Preferences..."
-msgstr "マウスの設定を開く..."
+#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+msgid "Mouse and Touchpad Settings"
+msgstr "マウスやタッチパッドの設定"
 
-#: ../applet/main.c:804
-msgid "Open Sound Preferences..."
-msgstr "サウンドの設定を開く..."
+#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+msgid "Sound Settings"
+msgstr "音の設定"
 
-#: ../applet/main.c:857
+#: ../applet/main.c:850
 msgid "Debug"
 msgstr "デバッグ"
 
 #. Parse command-line options
-#: ../applet/main.c:876
+#: ../applet/main.c:869
 msgid "- Bluetooth applet"
 msgstr "- Bluetooth アプレット"
 
-#: ../applet/main.c:881
+#: ../applet/main.c:874
 #, c-format
 msgid ""
 "%s\n"
@@ -272,27 +272,19 @@ msgstr ""
 "%s\n"
 "%s --help で利用可能なコマンドラインのオプションの全部を一覧できます。\n"
 
-#: ../applet/main.c:907
+#: ../applet/main.c:900
 msgid "Bluetooth Applet"
 msgstr "Bluetooth アプレット"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
 #: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141 ../moblin/moblin-panel.c:1602
+#: ../moblin/main.c:129 ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "Bluetooth"
-
-#: ../applet/notify.c:159
-msgid "Bluetooth: Enabled"
-msgstr "Bluetooth: 有効"
 
 #: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
-msgstr "デバイス '%s' がこのコンピュータとのペアリングを要求しています"
+msgstr "デバイス '%s' がこのコンピューターとのペアリングを要求しています"
 
 #: ../applet/agent.c:202
 #, c-format
@@ -366,8 +358,8 @@ msgstr "Bluetooth: 確認中"
 msgid "Browse files on device..."
 msgstr "デバイスのファイルを閲覧..."
 
-#: ../applet/popup-menu.ui.h:3 ../moblin/moblin-panel.c:1403
-#: ../moblin/moblin-panel.c:1513
+#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:693
+#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "デバイス"
 
@@ -415,31 +407,31 @@ msgstr "一致(_M)"
 msgid "_Show input"
 msgstr "入力中の文字を表示(_S)"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:294
 msgid "Yes"
 msgstr "はい"
 
-#: ../properties/cc-bluetooth-panel.c:239
+#: ../properties/cc-bluetooth-panel.c:294
 msgid "No"
 msgstr "いいえ"
 
-#: ../properties/cc-bluetooth-panel.c:331
+#: ../properties/cc-bluetooth-panel.c:406
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth は無効です"
 
-#: ../properties/cc-bluetooth-panel.c:336
+#: ../properties/cc-bluetooth-panel.c:411
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth はハードウェアスイッチで無効になっています"
 
-#: ../properties/cc-bluetooth-panel.c:340
+#: ../properties/cc-bluetooth-panel.c:415
 msgid "No Bluetooth adapters found"
 msgstr "Bluetooth アダプターが存在しません"
 
-#: ../properties/cc-bluetooth-panel.c:406
+#: ../properties/cc-bluetooth-panel.c:543
 msgid "Visibility"
 msgstr "可視状態"
 
-#: ../properties/cc-bluetooth-panel.c:410
+#: ../properties/cc-bluetooth-panel.c:547
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "“%s”の可視状態"
@@ -449,24 +441,32 @@ msgid "Address"
 msgstr "アドレス"
 
 #: ../properties/bluetooth.ui.h:2
+#, fuzzy
+#| msgid "Browse files..."
+msgid "Browse Files..."
+msgstr "ファイルの閲覧..."
+
+#: ../properties/bluetooth.ui.h:3
 msgid "Connection"
 msgstr "接続"
 
-#: ../properties/bluetooth.ui.h:3
-msgid "Keyboard Settings"
-msgstr "キーボードの設定"
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
+#, fuzzy
+#| msgid "Bluetooth"
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
-#: ../properties/bluetooth.ui.h:4
-msgid "Mouse and Touchpad Settings"
-msgstr "マウスやタッチパッドの設定"
-
-#: ../properties/bluetooth.ui.h:6
-msgid "Power"
-msgstr "電源"
-
-#: ../properties/bluetooth.ui.h:7
-msgid "Sound Settings"
-msgstr "音の設定"
+#: ../properties/bluetooth.ui.h:9
+#, fuzzy
+#| msgid "Send files..."
+msgid "Send Files..."
+msgstr "ファイルの送信..."
 
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
@@ -481,12 +481,12 @@ msgstr "Bluetoothの設定の変更"
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' とのペアリングがキャンセルされました"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1146
+#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "'%s' に表示されているPINがこれと一致するかどうか確認してください。"
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1197
+#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "以下のPINを入力してください:"
 
@@ -570,7 +570,7 @@ msgid "Do not pair"
 msgstr "ペアリングしない"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1350
+#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
 msgid "Does not match"
 msgstr "一致しない"
 
@@ -588,7 +588,7 @@ msgid "Introduction"
 msgstr "はじめに"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1346
+#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
 msgid "Matches"
 msgstr "一致"
 
@@ -600,7 +600,7 @@ msgstr "PIN オプション"
 msgid "PIN _options..."
 msgstr "PIN オプション(_O)..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1260
+#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
 msgstr "デバイスで追加で使用したいサービスを選択してください:"
 
@@ -617,8 +617,8 @@ msgid ""
 "The Bluetooth new device setup will walk you through the process of "
 "configuring Bluetooth enabled devices for use with this computer."
 msgstr ""
-"「Bluetooth 新規デバイス設定」では、このコンピュータで Bluetooth 経由で使うこ"
-"とのできるデバイスの設定していきます。"
+"「Bluetooth 新規デバイス設定」では、このコンピューターで Bluetooth 経由で使う"
+"ことのできるデバイスの設定していきます。"
 
 #: ../wizard/wizard.ui.h:24
 msgid ""
@@ -626,8 +626,8 @@ msgid ""
 "“visible” (sometimes called “discoverable”). Check the device's manual if in "
 "doubt."
 msgstr ""
-"デバイスはコンピュータから10メートル以内に存在し、加えて “可視状態”  (“検出可"
-"能”、とも呼ばれます) になっていないといけません。不明な場合は、デバイスのマ"
+"デバイスはコンピューターから10メートル以内に存在し、加えて “可視状態”  (“検出"
+"可能”、とも呼ばれます) になっていないといけません。不明な場合は、デバイスのマ"
 "ニュアルをチェックしてください。"
 
 #: ../wizard/wizard.ui.h:25
@@ -810,24 +810,21 @@ msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d 秒"
 
-#. hour:minutes:seconds
+#. 5 hours 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:188
-#, c-format
+#, fuzzy, c-format
+#| msgid "%s %s %s"
+msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
-#. minutes:seconds
+#. 2 minutes 12 seconds
 #: ../moblin/moblin-panel.c:192
-#, c-format
+#, fuzzy, c-format
+#| msgid "%s %s"
+msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #. 0 seconds
 #: ../moblin/moblin-panel.c:202
@@ -840,7 +837,7 @@ msgid ""
 "Your computer is visible on\n"
 "Bluetooth for %s."
 msgstr ""
-"このコンピュータが Bluetooth で\n"
+"このコンピューターが Bluetooth で\n"
 "%s として見えています。"
 
 #: ../moblin/moblin-panel.c:625
@@ -848,60 +845,79 @@ msgstr ""
 msgid "Pairing with %s failed."
 msgstr "%s とのペアリングが失敗しました。"
 
-#: ../moblin/moblin-panel.c:985
+#. Translators: this is a verb (just like "Connect"), not a noun.
+#: ../moblin/moblin-panel.c:986
 msgid "Pair"
 msgstr "ペア"
 
-#: ../moblin/moblin-panel.c:1022
+#: ../moblin/moblin-panel.c:1023
 msgid "Browse"
 msgstr "参照"
 
-#: ../moblin/moblin-panel.c:1219
+#: ../moblin/moblin-panel.c:1220
 msgid "Device setup failed"
 msgstr "デバイスの設定失敗"
 
 #. Back button
-#: ../moblin/moblin-panel.c:1233 ../moblin/moblin-panel.c:1309
-#: ../moblin/moblin-panel.c:1358 ../moblin/moblin-panel.c:1436
-#: ../moblin/moblin-panel.c:1668
+#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
+#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
+#: ../moblin/moblin-panel.c:1669
 msgid "Back to devices"
 msgstr "デバイスヘ戻る"
 
-#: ../moblin/moblin-panel.c:1272
+#: ../moblin/moblin-panel.c:1273
 msgid "Done"
 msgstr "完了"
 
-#: ../moblin/moblin-panel.c:1293 ../moblin/moblin-panel.c:1330
+#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
 msgid "Device setup"
 msgstr "デバイスの設定"
 
-#: ../moblin/moblin-panel.c:1453 ../moblin/moblin-panel.c:1584
+#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
 msgid "Settings"
 msgstr "設定"
 
-#: ../moblin/moblin-panel.c:1469
+#: ../moblin/moblin-panel.c:1470
 msgid "Only show:"
 msgstr "次のものだけ表示:"
 
 #. Button for PIN options file
-#: ../moblin/moblin-panel.c:1475
+#: ../moblin/moblin-panel.c:1476
 msgid "PIN options"
 msgstr "PIN オプション"
 
 #. Add new button
-#: ../moblin/moblin-panel.c:1519
+#: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "新しいデバイスを追加"
 
-#: ../moblin/moblin-panel.c:1620
+#: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "Bluetooth で見えるようにする"
 
 #. Button for Send file
-#: ../moblin/moblin-panel.c:1626
+#: ../moblin/moblin-panel.c:1627
 msgid "Send file from your computer"
-msgstr "このコンピュータからファイルを送る"
+msgstr "このコンピューターからファイルを送る"
 
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Bluetooth マネージャー パネル"
+
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "キーボードの設定を開く..."
+
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "マウスの設定を開く..."
+
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "サウンドの設定を開く..."
+
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "Bluetooth: 有効"
+
+#~ msgid "Power"
+#~ msgstr "電源"
+
+#~ msgid "%s"
+#~ msgstr "%s"
