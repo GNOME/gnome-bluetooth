@@ -66,9 +66,6 @@ GtkTreeModel *bluetooth_client_get_filter_model(BluetoothClient *client,
 GtkTreeModel *bluetooth_client_get_adapter_model(BluetoothClient *client);
 GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client,
 							DBusGProxy *adapter);
-GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
-		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
-				gpointer data, GDestroyNotify destroy);
 
 gboolean bluetooth_client_get_discoverable (BluetoothClient *client);
 

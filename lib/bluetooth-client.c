@@ -1260,37 +1260,6 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
 }
 
 /**
- * bluetooth_client_get_device_filter_model:
- * @client: a #BluetoothClient object
- * @adapter: a #DBusGProxy representing a particular adapter, or %NULL for the default adapter.
- * @func: a #GtkTreeModelFilterVisibleFunc
- * @data: user data to pass to gtk_tree_model_filter_set_visible_func()
- * @destroy: a destroy function for gtk_tree_model_filter_set_visible_func()
- *
- * Returns a #GtkTreeModel of adapters filtered using the @func, @data and
- * @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
- *
- * Return value: (transfer full): a #GtkTreeModel object.
- **/
-GtkTreeModel *bluetooth_client_get_device_filter_model(BluetoothClient *client,
-		DBusGProxy *adapter, GtkTreeModelFilterVisibleFunc func,
-				gpointer data, GDestroyNotify destroy)
-{
-	GtkTreeModel *model;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	DBG("client %p", client);
-
-	model = bluetooth_client_get_device_model(client, adapter);
-
-	gtk_tree_model_filter_set_visible_func(GTK_TREE_MODEL_FILTER(model),
-							func, data, destroy);
-
-	return model;
-}
-
-/**
  * bluetooth_client_get_default_adapter:
  * @client: a #BluetoothClient object
  *
