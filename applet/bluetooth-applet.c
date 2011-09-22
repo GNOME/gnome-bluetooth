@@ -147,7 +147,7 @@ void bluetooth_applet_browse_address (BluetoothApplet *applet,
 {
 	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
 
-	bluetooth_browse_address (applet,
+	bluetooth_browse_address (G_OBJECT (applet),
 				  address,
 				  timestamp,
 				  callback,
