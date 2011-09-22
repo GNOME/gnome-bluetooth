@@ -27,10 +27,6 @@
   connected to and marked as trusted. This is for devices such as mice
   and joypads where there is no encryption
 
-  The special "WII" pin means that the device will use the host's Bluetooth
-  address to compute the pin code as explained at:
-  http://wiibrew.org/wiki/Wiimote#Sync_Button
-
   If a device can use a random PIN but is limited in the number of digits that
   can be entered, then set the "pin" attribute should be set to "max:X" where X
   is the maximum number of digits, for example max:4 for 4 digits.
@@ -75,9 +71,6 @@
 
 	<!-- Lenovo Ideacenter remote -->
 	<device oui="00:08:1B:" name="lenovo_RC" pin="0000"/>
-
-	<!-- Wiimote -->
-	<device name="Nintendo RVL-CNT-01" pin="WII"/>
 
 <!-- GPS devices -->
 	<device oui="00:0D:B5:" name="TomTom Wireless GPS MkII" pin="0000"/>
