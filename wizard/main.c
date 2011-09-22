@@ -828,23 +828,7 @@ create_wizard (void)
 	gtk_widget_hide (button_cancel);
 
 	/* Intro page */
-	combo = gtk_combo_box_new();
-
-	model = bluetooth_client_get_adapter_model(client);
-	gtk_combo_box_set_model(GTK_COMBO_BOX(combo), model);
-	g_object_unref(model);
-
-	gtk_combo_box_set_active(GTK_COMBO_BOX(combo), 0);
-	gtk_cell_layout_clear(GTK_CELL_LAYOUT(combo));
-
-	renderer = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo), renderer, TRUE);
-	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo), renderer,
-					"text", BLUETOOTH_COLUMN_NAME, NULL);
-
 	page_intro = W("page_intro");
-	if (gtk_tree_model_iter_n_children(model, NULL) > 1)
-		gtk_box_pack_start(GTK_BOX(page_intro), combo, FALSE, FALSE, 0);
 
 	/* Search page */
 	page_search = W("page_search");
