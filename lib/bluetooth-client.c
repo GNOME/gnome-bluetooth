@@ -1201,14 +1201,12 @@ GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
 /**
  * bluetooth_client_get_device_model:
  * @client: a #BluetoothClient object
- * @adapter: a #DBusGProxy of the adapter object, or %NULL to get the default adapter.
  *
- * Returns a filtered #GtkTreeModel with only devices belonging to the selected adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter when %NULL is passed.
+ * Returns a filtered #GtkTreeModel with only devices belonging to the default adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter.
  *
  * Return value: (transfer full): a #GtkTreeModel object.
  **/
-GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
-						 DBusGProxy *adapter)
+GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv;
 	GtkTreeModel *model;
@@ -1225,23 +1223,15 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client,
 									&iter);
 
 	while (cont == TRUE) {
-		DBusGProxy *proxy;
 		gboolean is_default;
 
 		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				BLUETOOTH_COLUMN_PROXY, &proxy,
 				BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
 
-		if (adapter == NULL && is_default == TRUE)
+		if (is_default == TRUE) {
 			found = TRUE;
-
-		if (proxy == adapter)
-			found = TRUE;
-
-		g_object_unref(proxy);
-
-		if (found == TRUE)
 			break;
+		}
 
 		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
 									&iter);

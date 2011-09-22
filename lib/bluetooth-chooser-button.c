@@ -88,7 +88,7 @@ set_btdevname (BluetoothChooserButton *button, const char *bdaddr, const char *n
 		GtkTreeIter iter;
 		gboolean cont = FALSE;
 
-		model = bluetooth_client_get_device_model (button->client, NULL);
+		model = bluetooth_client_get_device_model (button->client);
 		if (model != NULL) {
 			cont = gtk_tree_model_iter_children (GTK_TREE_MODEL(model),
 							     &iter, NULL);

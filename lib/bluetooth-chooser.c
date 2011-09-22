@@ -748,7 +748,7 @@ static void default_adapter_changed (GObject    *gobject,
 
 	g_free (adapter);
 
-	priv->model = bluetooth_client_get_device_model (priv->client, NULL);
+	priv->model = bluetooth_client_get_device_model (priv->client);
 	if (priv->model) {
 		priv->filter = gtk_tree_model_filter_new (priv->model, NULL);
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
@@ -844,7 +844,7 @@ create_treeview (BluetoothChooser *self)
 			  G_CALLBACK(select_browse_device_callback), self);
 
 	/* Set the model, and filter */
-	priv->model = bluetooth_client_get_device_model (priv->client, NULL);
+	priv->model = bluetooth_client_get_device_model (priv->client);
 	if (priv->model) {
 		priv->filter = gtk_tree_model_filter_new (priv->model, NULL);
 		gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->filter),
