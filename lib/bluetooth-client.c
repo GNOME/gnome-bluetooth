@@ -1553,6 +1553,41 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 	return TRUE;
 }
 
+gboolean bluetooth_client_remove_device (BluetoothClient *client,
+					 const char      *address)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GtkTreeIter iter;
+	DBusGProxy *adapter, *device;
+	GError *err = NULL;
+
+	adapter = bluetooth_client_get_default_adapter(client);
+	if (adapter == NULL)
+		return FALSE;
+
+	if (get_iter_from_address(priv->store, &iter, address, adapter) == FALSE)
+		return FALSE;
+
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &device, -1);
+	if (device == NULL)
+		return FALSE;
+
+	if (dbus_g_proxy_call (adapter, "RemoveDevice", &err,
+			       DBUS_TYPE_G_OBJECT_PATH, dbus_g_proxy_get_path (device),
+			       G_TYPE_INVALID, G_TYPE_INVALID) == FALSE) {
+		g_object_unref (device);
+		g_warning ("Failed to remove device '%s': %s", address,
+			   err->message);
+		g_error_free (err);
+		return FALSE;
+	}
+
+	g_object_unref (device);
+
+	return TRUE;
+}
+
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted)
 {
