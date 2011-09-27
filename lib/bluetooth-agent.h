@@ -25,7 +25,7 @@
 #define __BLUETOOTH_AGENT_H
 
 #include <glib-object.h>
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 
@@ -58,21 +58,21 @@ BluetoothAgent *bluetooth_agent_new(void);
 
 gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path);
 
-gboolean bluetooth_agent_register(BluetoothAgent *agent, DBusGProxy *adapter);
+gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter);
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent);
 
-typedef gboolean (*BluetoothAgentPasskeyFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *device, gpointer data);
-typedef gboolean (*BluetoothAgentDisplayFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *device, guint passkey,
+typedef gboolean (*BluetoothAgentPasskeyFunc) (GDBusMethodInvocation *invocation,
+					       GDBusProxy *device, gpointer data);
+typedef gboolean (*BluetoothAgentDisplayFunc) (GDBusMethodInvocation *invocation,
+					GDBusProxy *device, guint passkey,
 						guint entered, gpointer data);
-typedef gboolean (*BluetoothAgentConfirmFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *device, guint passkey,
+typedef gboolean (*BluetoothAgentConfirmFunc) (GDBusMethodInvocation *invocation,
+					GDBusProxy *device, guint passkey,
 								gpointer data);
-typedef gboolean (*BluetoothAgentAuthorizeFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *device, const char *uuid,
+typedef gboolean (*BluetoothAgentAuthorizeFunc) (GDBusMethodInvocation *invocation,
+					GDBusProxy *device, const char *uuid,
 								gpointer data);
-typedef gboolean (*BluetoothAgentCancelFunc) (DBusGMethodInvocation *context,
+typedef gboolean (*BluetoothAgentCancelFunc) (GDBusMethodInvocation *invocation,
 								gpointer data);
 
 void bluetooth_agent_set_pincode_func(BluetoothAgent *agent,

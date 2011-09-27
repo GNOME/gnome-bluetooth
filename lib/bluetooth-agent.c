@@ -26,8 +26,7 @@
 #endif
 
 #include <stdio.h>
-#include <dbus/dbus-glib.h>
-#include <dbus/dbus-glib-lowlevel.h>
+#include <gio/gio.h>
 
 #include "bluetooth-agent.h"
 
@@ -43,7 +42,34 @@
 #define BLUEZ_MANAGER_INTERFACE	"org.bluez.Manager"
 #define BLUEZ_DEVICE_INTERFACE	"org.bluez.Device"
 
-static DBusGConnection *connection = NULL;
+static const gchar introspection_xml[] =
+"<node>"
+"  <interface name='org.bluez.Agent'>"
+"    <method name='Release'/>"
+"    <method name='RequestPinCode'>"
+"      <arg type='o' name='device' direction='in'/>"
+"      <arg type='s' name='pincode' direction='out'/>"
+"    </method>"
+"    <method name='RequestPasskey'>"
+"      <arg type='o' name='device' direction='in'/>"
+"      <arg type='u' name='passkey' direction='out'/>"
+"    </method>"
+"    <method name='DisplayPasskey'>"
+"      <arg type='o' name='device' direction='in'/>"
+"      <arg type='u' name='passkey' direction='in'/>"
+"      <arg type='y' name='entered' direction='in'/>"
+"    </method>"
+"    <method name='RequestConfirmation'>"
+"      <arg type='o' name='device' direction='in'/>"
+"      <arg type='u' name='passkey' direction='in'/>"
+"    </method>"
+"    <method name='Authorize'>"
+"      <arg type='o' name='device' direction='in'/>"
+"      <arg type='s' name='uuid' direction='in'/>"
+"    </method>"
+"    <method name='Cancel'/>"
+"  </interface>"
+"</node>";
 
 #define BLUETOOTH_AGENT_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 				BLUETOOTH_TYPE_AGENT, BluetoothAgentPrivate))
@@ -53,7 +79,9 @@ typedef struct _BluetoothAgentPrivate BluetoothAgentPrivate;
 struct _BluetoothAgentPrivate {
 	gchar *busname;
 	gchar *path;
-	DBusGProxy *adapter;
+	GDBusProxy *adapter;
+	GDBusNodeInfo *introspection_data;
+	guint id;
 
 	BluetoothAgentPasskeyFunc pincode_func;
 	gpointer pincode_data;
@@ -76,31 +104,38 @@ struct _BluetoothAgentPrivate {
 
 G_DEFINE_TYPE(BluetoothAgent, bluetooth_agent, G_TYPE_OBJECT)
 
-static gboolean bluetooth_agent_request_pin_code(BluetoothAgent *agent,
-			const char *path, DBusGMethodInvocation *context)
+static GDBusProxy *
+get_device_from_adapter (BluetoothAgent *agent,
+			 const char *path)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-	DBusGProxy *device;
+
+	if (priv->adapter == NULL)
+		return NULL;
+
+	return g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+					      NULL,
+					      g_dbus_proxy_get_name (priv->adapter),
+					      path,
+					      BLUEZ_DEVICE_INTERFACE,
+					      NULL,
+					      NULL);
+}
+
+static gboolean bluetooth_agent_request_pin_code(BluetoothAgent *agent,
+			const char *path, GDBusMethodInvocation *invocation)
+{
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	GDBusProxy *device;
 	gboolean result = FALSE;
 
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
+	DBG("agent %p", agent);
 
 	if (priv->pincode_func) {
-		if (priv->adapter != NULL)
-			device = dbus_g_proxy_new_from_proxy(priv->adapter,
-						BLUEZ_DEVICE_INTERFACE, path);
-		else
-			device = NULL;
+		device = get_device_from_adapter (agent, path);
 
-		result = priv->pincode_func(context, device,
+		result = priv->pincode_func(invocation, device,
 							priv->pincode_data);
 
 		if (device != NULL)
@@ -111,30 +146,18 @@ static gboolean bluetooth_agent_request_pin_code(BluetoothAgent *agent,
 }
 
 static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
-			const char *path, DBusGMethodInvocation *context)
+			const char *path, GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-	DBusGProxy *device;
+	GDBusProxy *device;
 	gboolean result = FALSE;
 
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
+	DBG("agent %p", agent);
 
 	if (priv->passkey_func) {
-		if (priv->adapter != NULL)
-			device = dbus_g_proxy_new_from_proxy(priv->adapter,
-						BLUEZ_DEVICE_INTERFACE, path);
-		else
-			device = NULL;
+		device = get_device_from_adapter (agent, path);
 
-		result = priv->passkey_func(context, device,
+		result = priv->passkey_func(invocation, device,
 							priv->passkey_data);
 
 		if (device != NULL)
@@ -146,30 +169,18 @@ static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
 
 static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 			const char *path, guint passkey, guint8 entered,
-						DBusGMethodInvocation *context)
+						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-	DBusGProxy *device;
+	GDBusProxy *device;
 	gboolean result = FALSE;
 
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
+	DBG("agent %p", agent);
 
 	if (priv->display_func) {
-		if (priv->adapter != NULL)
-			device = dbus_g_proxy_new_from_proxy(priv->adapter,
-						BLUEZ_DEVICE_INTERFACE, path);
-		else
-			device = NULL;
+		device = get_device_from_adapter (agent, path);
 
-		result = priv->display_func(context, device, passkey, entered,
+		result = priv->display_func(invocation, device, passkey, entered,
 							priv->display_data);
 
 		if (device != NULL)
@@ -181,30 +192,18 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 
 static gboolean bluetooth_agent_request_confirmation(BluetoothAgent *agent,
 					const char *path, guint passkey,
-						DBusGMethodInvocation *context)
+						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-	DBusGProxy *device;
+	GDBusProxy *device;
 	gboolean result = FALSE;
 
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
+	DBG("agent %p", agent);
 
 	if (priv->confirm_func) {
-		if (priv->adapter != NULL)
-			device = dbus_g_proxy_new_from_proxy(priv->adapter,
-						BLUEZ_DEVICE_INTERFACE, path);
-		else
-			device = NULL;
+		device = get_device_from_adapter (agent, path);
 
-		result = priv->confirm_func(context, device, passkey,
+		result = priv->confirm_func(invocation, device, passkey,
 							priv->confirm_data);
 
 		if (device != NULL)
@@ -216,30 +215,18 @@ static gboolean bluetooth_agent_request_confirmation(BluetoothAgent *agent,
 
 static gboolean bluetooth_agent_authorize(BluetoothAgent *agent,
 					const char *path, const char *uuid,
-						DBusGMethodInvocation *context)
+						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-	DBusGProxy *device;
+	GDBusProxy *device;
 	gboolean result = FALSE;
 
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
+	DBG("agent %p", agent);
 
 	if (priv->authorize_func) {
-		if (priv->adapter != NULL)
-			device = dbus_g_proxy_new_from_proxy(priv->adapter,
-						BLUEZ_DEVICE_INTERFACE, path);
-		else
-			device = NULL;
+		device = get_device_from_adapter (agent, path);
 
-		result = priv->authorize_func(context, device, uuid,
+		result = priv->authorize_func(invocation, device, uuid,
 							priv->authorize_data);
 
 		if (device != NULL)
@@ -249,82 +236,38 @@ static gboolean bluetooth_agent_authorize(BluetoothAgent *agent,
 	return result;
 }
 
-static gboolean bluetooth_agent_confirm_mode(BluetoothAgent *agent,
-			const char *mode, DBusGMethodInvocation *context)
-{
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
-
-	dbus_g_method_return(context);
-
-	return TRUE;
-}
-
 static gboolean bluetooth_agent_cancel(BluetoothAgent *agent,
-						DBusGMethodInvocation *context)
+						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
 	gboolean result = FALSE;
 
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
+	DBG("agent %p", agent);
 
 	if (priv->cancel_func)
-		result = priv->cancel_func(context, priv->cancel_data);
+		result = priv->cancel_func(invocation, priv->cancel_data);
 
 	return result;
 }
 
-static gboolean bluetooth_agent_release(BluetoothAgent *agent,
-						DBusGMethodInvocation *context)
-{
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *sender = dbus_g_method_get_sender(context);
-
-	DBG("agent %p sender %s", agent, sender);
-
-	if (g_str_equal(sender, priv->busname) == FALSE) {
-		g_free (sender);
-		return FALSE;
-	}
-
-	g_free (sender);
-
-	g_object_unref(agent);
-
-	dbus_g_method_return(context);
-
-	return TRUE;
-}
-
-#include "bluetooth-agent-glue.h"
-
 static void bluetooth_agent_init(BluetoothAgent *agent)
 {
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+
 	DBG("agent %p", agent);
+
+	priv->introspection_data = g_dbus_node_info_new_for_xml (introspection_xml, NULL);
 }
 
 static void bluetooth_agent_finalize(GObject *agent)
 {
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+
 	DBG("agent %p", agent);
 
 	bluetooth_agent_unregister (BLUETOOTH_AGENT (agent));
+
+	g_dbus_node_info_unref (priv->introspection_data);
 
 	G_OBJECT_CLASS(bluetooth_agent_parent_class)->finalize(agent);
 }
@@ -332,27 +275,12 @@ static void bluetooth_agent_finalize(GObject *agent)
 static void bluetooth_agent_class_init(BluetoothAgentClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
-	GError *error = NULL;
 
 	DBG("class %p", klass);
 
 	g_type_class_add_private(klass, sizeof(BluetoothAgentPrivate));
 
 	object_class->finalize = bluetooth_agent_finalize;
-
-	connection = dbus_g_bus_get(DBUS_BUS_SYSTEM, &error);
-
-	if (error != NULL) {
-		g_printerr("Connecting to system bus failed: %s\n",
-							error->message);
-		g_error_free(error);
-	}
-
-	dbus_g_object_type_install_info(BLUETOOTH_TYPE_AGENT,
-				&dbus_glib_bluetooth_agent_object_info);
-
-	//dbus_g_error_domain_register(AGENT_ERROR, "org.bluez.Error",
-	//						AGENT_ERROR_TYPE);
 }
 
 BluetoothAgent *bluetooth_agent_new(void)
@@ -366,11 +294,74 @@ BluetoothAgent *bluetooth_agent_new(void)
 	return agent;
 }
 
+static void
+handle_method_call (GDBusConnection       *connection,
+		    const gchar           *sender,
+		    const gchar           *object_path,
+		    const gchar           *interface_name,
+		    const gchar           *method_name,
+		    GVariant              *parameters,
+		    GDBusMethodInvocation *invocation,
+		    gpointer               user_data)
+{
+	BluetoothAgent *agent = (BluetoothAgent *) user_data;
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+
+	if (g_str_equal (sender, priv->busname) == FALSE) {
+		g_assert_not_reached ();
+		/* FIXME, should this just be a D-Bus Error instead? */
+	}
+
+	if (g_strcmp0 (method_name, "Release") == 0) {
+		g_dbus_method_invocation_return_value (invocation, NULL);
+	} else if (g_strcmp0 (method_name, "RequestPinCode") == 0) {
+		char *path;
+		g_variant_get (parameters, "(o)", &path);
+		bluetooth_agent_request_pin_code (agent, path, invocation);
+		g_free (path);
+	} else if (g_strcmp0 (method_name, "RequestPasskey") == 0) {
+		char *path;
+		g_variant_get (parameters, "(o)", &path);
+		bluetooth_agent_request_passkey (agent, path, invocation);
+		g_free (path);
+	} else if (g_strcmp0 (method_name, "DisplayPasskey") == 0) {
+		char *path;
+		guint32 passkey;
+		guint8 entered;
+
+		g_variant_get (parameters, "(ouy)", &path, &passkey, &entered);
+		bluetooth_agent_display_passkey (agent, path, passkey, entered, invocation);
+		g_free (path);
+	} else if (g_strcmp0 (method_name, "RequestConfirmation") == 0) {
+		char *path;
+		guint32 passkey;
+
+		g_variant_get (parameters, "(ou)", &path, &passkey);
+		bluetooth_agent_request_confirmation (agent, path, passkey, invocation);
+		g_free (path);
+	} else if (g_strcmp0 (method_name, "Authorize") == 0) {
+		char *path, *uuid;
+		g_variant_get (parameters, "(os)", &path, &uuid);
+		bluetooth_agent_authorize (agent, path, uuid, invocation);
+		g_free (path);
+		g_free (uuid);
+	} else if (g_strcmp0 (method_name, "Cancel") == 0) {
+		bluetooth_agent_cancel (agent, invocation);
+	}
+}
+
+static const GDBusInterfaceVTable interface_vtable =
+{
+	handle_method_call,
+	NULL, /* GetProperty */
+	NULL, /* SetProperty */
+};
+
 gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	DBusGProxy *proxy;
-	GObject *object;
+	GDBusConnection *conn;
+	char *owner;
 
 	DBG("agent %p", agent);
 
@@ -379,37 +370,30 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 
 	priv->path = g_strdup(path);
 
-	proxy = dbus_g_proxy_new_for_name_owner(connection, BLUEZ_SERVICE,
-			BLUEZ_MANAGER_PATH, BLUEZ_MANAGER_INTERFACE, NULL);
+	g_free (priv->busname);
+	owner = g_dbus_proxy_get_name_owner (priv->adapter);
+	if (owner == NULL)
+		priv->busname = g_strdup (g_dbus_proxy_get_name (priv->adapter));
+	else
+		priv->busname = owner;
+	g_free (owner);
 
-	g_free(priv->busname);
-
-	if (proxy != NULL) {
-		priv->busname = g_strdup(dbus_g_proxy_get_bus_name(proxy));
-		g_object_unref(proxy);
-	} else
-		priv->busname = NULL;
-
-	object = dbus_g_connection_lookup_g_object(connection, priv->path);
-	if (object != NULL)
-		g_object_unref(object);
-
-	dbus_g_connection_register_g_object(connection,
-						priv->path, G_OBJECT(agent));
+	conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+	priv->id = g_dbus_connection_register_object (conn, priv->path, priv->introspection_data->interfaces[0], &interface_vtable, agent, NULL, NULL);
+	g_object_unref (conn);
 
 	return TRUE;
 }
 
-gboolean bluetooth_agent_register(BluetoothAgent *agent, DBusGProxy *adapter)
+gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	DBusGProxy *proxy;
-	GObject *object;
+	GDBusConnection *conn;
 	GError *error = NULL;
-	gchar *path;
+	char *path, *owner;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
-	g_return_val_if_fail (DBUS_IS_G_PROXY (adapter), FALSE);
+	g_return_val_if_fail (G_IS_DBUS_PROXY (adapter), FALSE);
 
 	DBG("agent %p", agent);
 
@@ -418,41 +402,28 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, DBusGProxy *adapter)
 
 	priv->adapter = g_object_ref(adapter);
 
-	path = g_path_get_basename(dbus_g_proxy_get_path(adapter));
-
+	path = g_path_get_basename(g_dbus_proxy_get_object_path(adapter));
 	priv->path = g_strdup_printf("/org/bluez/agent/%s", path);
-
 	g_free(path);
 
-	proxy = dbus_g_proxy_new_for_name_owner(connection,
-			dbus_g_proxy_get_bus_name(priv->adapter),
-			dbus_g_proxy_get_path(priv->adapter),
-			dbus_g_proxy_get_interface(priv->adapter), NULL);
+	g_free (priv->busname);
+	owner = g_dbus_proxy_get_name_owner (priv->adapter);
+	if (owner == NULL)
+		priv->busname = g_strdup (g_dbus_proxy_get_name (priv->adapter));
+	else
+		priv->busname = owner;
+	g_free (owner);
 
-	g_free(priv->busname);
+	conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+	priv->id = g_dbus_connection_register_object (conn, priv->path, priv->introspection_data->interfaces[0], &interface_vtable, agent, NULL, NULL);
+	g_object_unref (conn);
 
-	if (proxy != NULL) {
-		priv->busname = g_strdup(dbus_g_proxy_get_bus_name(proxy));
-		g_object_unref(proxy);
-	} else
-		priv->busname = g_strdup(dbus_g_proxy_get_bus_name(adapter));
-
-	object = dbus_g_connection_lookup_g_object(connection, priv->path);
-	if (object != NULL)
-		g_object_unref(object);
-
-	dbus_g_connection_register_g_object(connection,
-						priv->path, G_OBJECT(agent));
-
-	dbus_g_proxy_call(priv->adapter, "RegisterAgent", &error,
-					DBUS_TYPE_G_OBJECT_PATH, priv->path,
-					G_TYPE_STRING, "DisplayYesNo",
-					G_TYPE_INVALID, G_TYPE_INVALID);
-
-	if (error != NULL) {
-		g_printerr("Agent registration failed: %s\n",
-							error->message);
-		g_error_free(error);
+	if (g_dbus_proxy_call_sync (priv->adapter, "RegisterAgent",
+				    g_variant_new ("(os)", priv->path, "DisplayYesNo"),
+				    G_DBUS_CALL_FLAGS_NONE,
+				    -1, NULL, &error) == FALSE) {
+		g_printerr ("Agent registration failed: %s\n", error->message);
+		g_error_free (error);
 	}
 
 	return TRUE;
@@ -461,6 +432,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, DBusGProxy *adapter)
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv;
+	GDBusConnection *conn;
 	GError *error = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
@@ -474,13 +446,12 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 
 	DBG("unregistering agent for path '%s'", priv->path);
 
-	dbus_g_proxy_call (priv->adapter, "UnregisterAgent", &error,
-			   DBUS_TYPE_G_OBJECT_PATH, priv->path,
-			   G_TYPE_INVALID, G_TYPE_INVALID);
-
-	if (error != NULL) {
+	if (g_dbus_proxy_call_sync (priv->adapter, "UnregisterAgent",
+				    g_variant_new ("(o)", priv->path),
+				    G_DBUS_CALL_FLAGS_NONE,
+				    -1, NULL, &error) == FALSE) {
 		/* Ignore errors if the adapter is gone */
-		if (g_error_matches (error, DBUS_GERROR, DBUS_GERROR_UNKNOWN_METHOD) == FALSE) {
+		if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD) == FALSE) {
 			g_printerr ("Agent unregistration failed: %s '%s'\n",
 				    error->message,
 				    g_quark_to_string (error->domain));
@@ -496,6 +467,11 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 
 	g_free(priv->busname);
 	priv->busname = NULL;
+
+	conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+	g_dbus_connection_unregister_object (conn, priv->id);
+	g_object_unref (conn);
+	priv->id = 0;
 
 	return TRUE;
 }

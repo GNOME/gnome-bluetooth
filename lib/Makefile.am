@@ -109,7 +109,6 @@ endif # HAVE_INTROSPECTION
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-client-glue.h \
-		bluetooth-agent-glue.h \
 		obex-agent-glue.h \
 		gnome-bluetooth-enum-types.h \
 		gnome-bluetooth-enum-types.c
@@ -132,7 +131,6 @@ test_class_LDADD = libcommon.la
 
 EXTRA_DIST += marshal.list \
 		bluetooth-client.xml \
-		bluetooth-agent.xml \
 		obex-agent.xml \
 		gnome-bluetooth.symbols
 
@@ -146,9 +144,6 @@ marshal.c: marshal.list
 
 bluetooth-client-glue.h: bluetooth-client.xml bluetooth-agent.h bluetooth-agent.c
 	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=bluetooth_client --mode=glib-client --output=$@ $<
-
-bluetooth-agent-glue.h: bluetooth-agent.xml bluetooth-agent.h bluetooth-agent.c
-	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=bluetooth_agent --mode=glib-server --output=$@ $<
 
 obex-agent-glue.h: obex-agent.xml
 	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=obex_agent --mode=glib-server --output=$@ $<

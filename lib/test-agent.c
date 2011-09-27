@@ -33,14 +33,16 @@
 #include "bluetooth-agent.h"
 #include "bluetooth-client-glue.h"
 
-static gboolean agent_pincode(DBusGMethodInvocation *context,
-					DBusGProxy *device, gpointer user_data)
+static gboolean agent_pincode(GDBusMethodInvocation *invocation,
+					GDBusProxy *device, gpointer user_data)
 {
 	GHashTable *hash = NULL;
 	GValue *value;
 	const gchar *address, *name;
 
-	device_get_properties(device, &hash, NULL);
+//FIXME
+//	device_get_properties(device, &hash, NULL);
+	hash = NULL;
 
 	if (hash != NULL) {
 		value = g_hash_table_lookup(hash, "Address");
@@ -55,7 +57,7 @@ static gboolean agent_pincode(DBusGMethodInvocation *context,
 
 	printf("address %s name %s\n", address, name);
 
-	dbus_g_method_return(context, "1234");
+	g_dbus_method_invocation_return_value (invocation, g_variant_new_string ("1234"));
 
 	return TRUE;
 }
@@ -71,9 +73,7 @@ int main(int argc, char *argv[])
 {
 	struct sigaction sa;
 	BluetoothAgent *agent;
-	DBusGConnection *conn;
-	DBusGProxy *proxy;
-	GError *error = NULL;
+	GDBusProxy *proxy;
 
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_flags = SA_NOCLDSTOP;
@@ -85,17 +85,14 @@ int main(int argc, char *argv[])
 
 	mainloop = g_main_loop_new(NULL, FALSE);
 
-	conn = dbus_g_bus_get(DBUS_BUS_SYSTEM, &error);
-	if (error != NULL) {
-		g_printerr("Connecting to system bus failed: %s\n",
-							error->message);
-		g_main_loop_unref(mainloop);
-		g_error_free(error);
-		exit(1);
-	}
-
-	proxy = dbus_g_proxy_new_for_name(conn, "org.bluez", "/hci0",
-							"org.bluez.Adapter");
+	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+					       NULL,
+					       "org.bluez",
+					       "/hci0",
+					       "org.bluez.Adapter",
+					       NULL,
+					       NULL);
 
 	agent = bluetooth_agent_new();
 
@@ -110,8 +107,6 @@ int main(int argc, char *argv[])
 	g_object_unref(agent);
 
 	g_object_unref(proxy);
-
-	dbus_g_connection_unref(conn);
 
 	g_main_loop_unref(mainloop);
 
