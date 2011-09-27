@@ -155,8 +155,8 @@ update_random_pincode (void)
 }
 
 static gboolean
-pincode_callback (DBusGMethodInvocation *context,
-		  DBusGProxy *device,
+pincode_callback (GDBusMethodInvocation *invocation,
+		  GDBusProxy *device,
 		  gpointer user_data)
 {
 	target_ssp = FALSE;
@@ -164,7 +164,7 @@ pincode_callback (DBusGMethodInvocation *context,
 	/* Only show the pincode page if the pincode isn't automatic */
 	if (automatic_pincode == FALSE)
 		gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
-	dbus_g_method_return(context, pincode);
+	g_dbus_method_invocation_return_value (invocation, g_variant_new_string (pincode));
 
 	return TRUE;
 }
@@ -194,7 +194,7 @@ void
 does_not_match_cb (GtkButton *button,
 		   gpointer user_data)
 {
-	DBusGMethodInvocation *context;
+	GDBusMethodInvocation *invocation;
 	GError *error = NULL;
 	char *text;
 
@@ -208,33 +208,34 @@ does_not_match_cb (GtkButton *button,
 	gtk_label_set_text(GTK_LABEL(label_failure), text);
 	g_free(text);
 
-	context = g_object_get_data (G_OBJECT (button), "context");
-	g_error_new(AGENT_ERROR, AGENT_ERROR_REJECT,
-		    "Agent callback cancelled");
-	dbus_g_method_return(context, error);
+	invocation = g_object_get_data (G_OBJECT (button), "invocation");
+	error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+			     "Agent callback cancelled");
+	g_dbus_method_invocation_return_gerror (invocation, error);
+	g_error_free (error);
 
-	g_object_set_data (G_OBJECT(does_not_match_button), "context", NULL);
-	g_object_set_data (G_OBJECT(matches_button), "context", NULL);
+	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", NULL);
+	g_object_set_data (G_OBJECT(matches_button), "invocation", NULL);
 }
 
 void
 matches_cb (GtkButton *button,
 	    gpointer user_data)
 {
-	DBusGMethodInvocation *context;
+	GDBusMethodInvocation *invocation;
 
-	context = g_object_get_data (G_OBJECT (button), "context");
+	invocation = g_object_get_data (G_OBJECT (button), "invocation");
 	gtk_widget_set_sensitive (does_not_match_button, FALSE);
 	gtk_widget_set_sensitive (matches_button, FALSE);
-	dbus_g_method_return(context, "");
+	g_dbus_method_invocation_return_value (invocation, g_variant_new_string (""));
 
-	g_object_set_data (G_OBJECT(does_not_match_button), "context", NULL);
-	g_object_set_data (G_OBJECT(matches_button), "context", NULL);
+	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", NULL);
+	g_object_set_data (G_OBJECT(matches_button), "invocation", NULL);
 }
 
 static gboolean
-confirm_callback (DBusGMethodInvocation *context,
-		  DBusGProxy *device,
+confirm_callback (GDBusMethodInvocation *invocation,
+		  GDBusProxy *device,
 		  guint pin,
 		  gpointer user_data)
 {
@@ -254,15 +255,15 @@ confirm_callback (DBusGMethodInvocation *context,
 	set_large_label (GTK_LABEL (label_ssp_pin), str);
 	g_free (str);
 
-	g_object_set_data (G_OBJECT(does_not_match_button), "context", context);
-	g_object_set_data (G_OBJECT(matches_button), "context", context);
+	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", invocation);
+	g_object_set_data (G_OBJECT(matches_button), "invocation", invocation);
 
 	return TRUE;
 }
 
 static gboolean
-display_callback (DBusGMethodInvocation *context,
-		  DBusGProxy *device,
+display_callback (GDBusMethodInvocation *invocation,
+		  GDBusProxy *device,
 		  guint pin,
 		  guint entered,
 		  gpointer user_data)
@@ -306,13 +307,13 @@ display_callback (DBusGMethodInvocation *context,
 	g_free(done);
 	g_free(code);
 
-	dbus_g_method_return(context);
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	return TRUE;
 }
 
 static gboolean
-cancel_callback (DBusGMethodInvocation *context,
+cancel_callback (GDBusMethodInvocation *invocation,
 		 gpointer user_data)
 {
 	gchar *text;
@@ -329,7 +330,7 @@ cancel_callback (DBusGMethodInvocation *context,
 	gtk_label_set_text(GTK_LABEL(label_failure), text);
 	g_free(text);
 
-	dbus_g_method_return(context);
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	return TRUE;
 }
