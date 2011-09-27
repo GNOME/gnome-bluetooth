@@ -802,9 +802,6 @@ create_wizard (void)
 {
 	GtkAssistant *assistant;
 	GError *err = NULL;
-	GtkWidget *combo, *page_intro;
-	GtkTreeModel *model;
-	GtkCellRenderer *renderer;
 
 	builder = gtk_builder_new ();
 	if (gtk_builder_add_from_file (builder, "wizard.ui", NULL) == 0) {
@@ -827,8 +824,7 @@ create_wizard (void)
 	gtk_widget_hide (button_close);
 	gtk_widget_hide (button_cancel);
 
-	/* Intro page */
-	page_intro = W("page_intro");
+	/* Intro page, nothing to do */
 
 	/* Search page */
 	page_search = W("page_search");
