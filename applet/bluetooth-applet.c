@@ -183,20 +183,22 @@ bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
 				      const char      *request_key,
 				      const char      *pincode)
 {
-	DBusGMethodInvocation* context;
+	GDBusMethodInvocation* invocation;
 
 	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
 	g_return_if_fail (request_key != NULL);
 
-	context = g_hash_table_lookup (self->pending_requests, request_key);
+	invocation = g_hash_table_lookup (self->pending_requests, request_key);
 
 	if (pincode != NULL) {
-		dbus_g_method_return (context, pincode);
+		g_dbus_method_invocation_return_value (invocation,
+						       g_variant_new_string (pincode));
 	} else {
 		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
 				     "Pairing request rejected");
-		dbus_g_method_return_error (context, error);
+		g_dbus_method_invocation_return_gerror (invocation, error);
+		g_error_free (error);
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
@@ -214,20 +216,22 @@ bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
 				      const char      *request_key,
 				      int              passkey)
 {
-	DBusGMethodInvocation* context;
+	GDBusMethodInvocation* invocation;
 
 	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
 	g_return_if_fail (request_key != NULL);
 
-	context = g_hash_table_lookup (self->pending_requests, request_key);
+	invocation = g_hash_table_lookup (self->pending_requests, request_key);
 
 	if (passkey != -1) {
-		dbus_g_method_return (context, passkey);
+		g_dbus_method_invocation_return_value (invocation,
+						       g_variant_new_int32 (passkey));
 	} else {
 		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
 				     "Pairing request rejected");
-		dbus_g_method_return_error (context, error);
+		g_dbus_method_invocation_return_gerror (invocation, error);
+		g_error_free (error);
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
@@ -245,20 +249,21 @@ bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
 				      const char      *request_key,
 				      gboolean         confirm)
 {
-	DBusGMethodInvocation* context;
+	GDBusMethodInvocation* invocation;
 
 	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
 	g_return_if_fail (request_key != NULL);
 
-	context = g_hash_table_lookup (self->pending_requests, request_key);
+	invocation = g_hash_table_lookup (self->pending_requests, request_key);
 
 	if (confirm) {
-		dbus_g_method_return (context);
+		g_dbus_method_invocation_return_value (invocation, NULL);
 	} else {
 		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
 				     "Confirmation request rejected");
-		dbus_g_method_return_error (context, error);
+		g_dbus_method_invocation_return_gerror (invocation, error);
+		g_error_free (error);
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
@@ -278,23 +283,24 @@ bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
 				   gboolean         auth,
 				   gboolean         trusted)
 {
-	DBusGMethodInvocation* context;
+	GDBusMethodInvocation* invocation;
 
 	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
 	g_return_if_fail (request_key != NULL);
 
-	context = g_hash_table_lookup (self->pending_requests, request_key);
+	invocation = g_hash_table_lookup (self->pending_requests, request_key);
 
 	if (auth) {
 		if (trusted)
 			bluetooth_client_set_trusted (self->client, request_key, TRUE);
 
-		dbus_g_method_return (context);
+		g_dbus_method_invocation_return_value (invocation, NULL);
 	} else {
 		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
 				     "Confirmation request rejected");
-		dbus_g_method_return_error (context, error);
+		g_dbus_method_invocation_return_gerror (invocation, error);
+		g_error_free (error);
 	}
 
 	g_hash_table_remove (self->pending_requests, request_key);
@@ -306,46 +312,43 @@ bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
 #endif
 
 static char *
-device_get_name (DBusGProxy *proxy, char **long_name)
+device_get_name (GDBusProxy *proxy, char **long_name)
 {
-	GHashTable *hash;
-	GValue *value;
+	GVariant *value;
+	GVariant *result;
 	char *alias, *address;
 
 	g_return_val_if_fail (long_name != NULL, NULL);
 
-	if (dbus_g_proxy_call (proxy, "GetProperties",  NULL,
-			       G_TYPE_INVALID,
-			       DBUS_TYPE_G_DICTIONARY, &hash,
-			       G_TYPE_INVALID) == FALSE) {
+	result = g_dbus_proxy_call_sync (proxy, "GetProperties",  NULL,
+					 G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+	if (result == NULL)
 		return NULL;
-	}
 
-	value = g_hash_table_lookup (hash, "Address");
+	value = g_variant_lookup_value (result, "Address", G_VARIANT_TYPE_STRING);
 	if (value == NULL) {
-		g_hash_table_destroy (hash);
+		g_variant_unref (result);
 		return NULL;
 	}
-	address = g_value_dup_string (value);
+	address = g_strdup (g_variant_get_string (value, NULL));
 
-	value = g_hash_table_lookup (hash, "Name");
-	alias = value ? g_value_dup_string (value) : address;
+	value = g_variant_lookup_value (result, "Name", G_VARIANT_TYPE_STRING);
+	alias = value ? g_strdup (g_variant_get_string (value, NULL)) : g_strdup (address);
 
-	g_hash_table_destroy (hash);
+	g_variant_unref (result);
 
 	if (value)
 		*long_name = g_strdup_printf ("'%s' (%s)", alias, address);
 	else
 		*long_name = g_strdup_printf ("'%s'", address);
 
-	if (alias != address)
-		g_free (address);
+	g_free (address);
 	return alias;
 }
 
 static gboolean
-pincode_request (DBusGMethodInvocation *context,
-		 DBusGProxy            *device,
+pincode_request (GDBusMethodInvocation *invocation,
+		 GDBusProxy            *device,
 		 gpointer               user_data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (user_data);
@@ -354,8 +357,8 @@ pincode_request (DBusGMethodInvocation *context,
 	const char *path;
 
 	name = device_get_name (device, &long_name);
-	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
+	path = g_dbus_proxy_get_object_path (device);
+	g_hash_table_insert (self->pending_requests, g_strdup (path), invocation);
 
 	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, FALSE);
 
@@ -366,8 +369,8 @@ pincode_request (DBusGMethodInvocation *context,
 }
 
 static gboolean
-passkey_request (DBusGMethodInvocation *context,
-		 DBusGProxy            *device,
+passkey_request (GDBusMethodInvocation *invocation,
+		 GDBusProxy            *device,
 		 gpointer               user_data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (user_data);
@@ -376,8 +379,8 @@ passkey_request (DBusGMethodInvocation *context,
 	const char *path;
 
 	name = device_get_name (device, &long_name);
-	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
+	path = g_dbus_proxy_get_object_path (device);
+	g_hash_table_insert (self->pending_requests, g_strdup (path), invocation);
 
 	g_signal_emit (self, signals[SIGNAL_PINCODE_REQUEST], 0, path, name, long_name, TRUE);
 
@@ -388,8 +391,8 @@ passkey_request (DBusGMethodInvocation *context,
 }
 
 static gboolean
-confirm_request (DBusGMethodInvocation *context,
-		 DBusGProxy *device,
+confirm_request (GDBusMethodInvocation *invocation,
+		 GDBusProxy *device,
 		 guint pin,
 		 gpointer user_data)
 {
@@ -399,8 +402,8 @@ confirm_request (DBusGMethodInvocation *context,
 	const char *path;
 
 	name = device_get_name (device, &long_name);
-	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
+	path = g_dbus_proxy_get_object_path (device);
+	g_hash_table_insert (self->pending_requests, g_strdup (path), invocation);
 
 	g_signal_emit (self, signals[SIGNAL_CONFIRM_REQUEST], 0, path, name, long_name, pin);
 
@@ -411,8 +414,8 @@ confirm_request (DBusGMethodInvocation *context,
 }
 
 static gboolean
-authorize_request (DBusGMethodInvocation *context,
-		   DBusGProxy *device,
+authorize_request (GDBusMethodInvocation *invocation,
+		   GDBusProxy *device,
 		   const char *uuid,
 		   gpointer user_data)
 {
@@ -422,8 +425,8 @@ authorize_request (DBusGMethodInvocation *context,
 	const char *path;
 
 	name = device_get_name (device, &long_name);
-	path = dbus_g_proxy_get_path (device);
-	g_hash_table_insert (self->pending_requests, g_strdup (path), context);
+	path = g_dbus_proxy_get_object_path (device);
+	g_hash_table_insert (self->pending_requests, g_strdup (path), invocation);
 
 	g_signal_emit (self, signals[SIGNAL_AUTHORIZE_REQUEST], 0, path, name, long_name, uuid);
 
@@ -436,17 +439,18 @@ authorize_request (DBusGMethodInvocation *context,
 static void
 cancel_request_single (gpointer key, gpointer value, gpointer user_data)
 {
-	DBusGMethodInvocation* request_context = value;
-	GError* result;
+	GDBusMethodInvocation* request_invocation = value;
+	GError* error;
 
 	if (value) {
-		result = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT, "Agent callback cancelled");
-		dbus_g_method_return_error (request_context, result);
+		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT, "Agent callback cancelled");
+		g_dbus_method_invocation_return_gerror (request_invocation, error);
+		g_error_free (error);
 	}
 }
 
 static gboolean
-cancel_request(DBusGMethodInvocation *context,
+cancel_request(GDBusMethodInvocation *invocation,
                gpointer user_data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (user_data);
