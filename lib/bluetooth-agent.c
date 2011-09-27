@@ -371,12 +371,14 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 	priv->path = g_strdup(path);
 
 	g_free (priv->busname);
-	owner = g_dbus_proxy_get_name_owner (priv->adapter);
-	if (owner == NULL)
-		priv->busname = g_strdup (g_dbus_proxy_get_name (priv->adapter));
-	else
-		priv->busname = owner;
-	g_free (owner);
+	if (priv->adapter) {
+		owner = g_dbus_proxy_get_name_owner (priv->adapter);
+		if (owner == NULL)
+			priv->busname = g_strdup (g_dbus_proxy_get_name (priv->adapter));
+		else
+			priv->busname = owner;
+		g_free (owner);
+	}
 
 	conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
 	priv->id = g_dbus_connection_register_object (conn, priv->path, priv->introspection_data->interfaces[0], &interface_vtable, agent, NULL, NULL);
