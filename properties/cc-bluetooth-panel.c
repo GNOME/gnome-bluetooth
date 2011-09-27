@@ -570,20 +570,53 @@ device_selected_changed (BluetoothChooser *chooser,
 	cc_bluetooth_panel_update_properties (self);
 }
 
+static gboolean
+show_confirm_dialog (CcBluetoothPanel *self,
+		     const char *name)
+{
+	GtkWidget *dialog, *parent;
+	gint response;
+
+	parent = gtk_widget_get_toplevel (GTK_WIDGET (self));
+	dialog = gtk_message_dialog_new (GTK_WINDOW (parent), GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+					 _("Remove '%s' from the list of devices?"), name);
+	g_object_set (G_OBJECT (dialog), "secondary-text",
+		      _("If you remove the device, you will have to set it up again before next use."),
+		      NULL);
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+
+	if (response == GTK_RESPONSE_ACCEPT)
+		return TRUE;
+
+	return FALSE;
+}
+
 /* Treeview buttons */
 static void
 delete_clicked (GtkToolButton    *button,
 		CcBluetoothPanel *self)
 {
-	char *address;
+	char *address, *name;
 
 	address = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	g_assert (address);
 
-	if (bluetooth_chooser_remove_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser)))
-		bluetooth_plugin_manager_device_deleted (address);
+	name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (self->priv->chooser));
+
+	if (show_confirm_dialog (self, name) != FALSE) {
+		if (bluetooth_client_remove_device (self->priv->client, address))
+			bluetooth_plugin_manager_device_deleted (address);
+	}
 
 	g_free (address);
+	g_free (name);
 }
 
 static void
