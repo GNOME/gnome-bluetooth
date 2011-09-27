@@ -383,6 +383,8 @@ create_callback (BluetoothClient *_client,
 		 */
 		text = g_strdup_printf(_("Setting up '%s' failed"), target_name);
 
+		g_warning ("Setting up '%s' failed: %s", target_name, error->message);
+
 		gtk_label_set_markup(GTK_LABEL(label_failure), text);
 		return;
 	}
