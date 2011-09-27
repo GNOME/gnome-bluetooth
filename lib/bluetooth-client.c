@@ -1516,7 +1516,8 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
 				    BLUETOOTH_COLUMN_PROXY, &device,
 				    BLUETOOTH_COLUMN_PAIRED, &paired, -1);
-		if (paired != FALSE &&
+		if (device != NULL &&
+		    paired != FALSE &&
 		    dbus_g_proxy_call (adapter, "RemoveDevice", &err,
 				       DBUS_TYPE_G_OBJECT_PATH, dbus_g_proxy_get_path (device),
 				       G_TYPE_INVALID, G_TYPE_INVALID) == FALSE) {
