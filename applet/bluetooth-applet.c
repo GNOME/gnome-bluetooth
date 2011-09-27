@@ -691,7 +691,7 @@ bluetooth_applet_get_discoverable (BluetoothApplet* self)
 {
 	g_return_val_if_fail (BLUETOOTH_IS_APPLET (self), FALSE);
 
-       	return bluetooth_client_get_discoverable (self->client);
+	return bluetooth_client_get_discoverable (self->client);
 }
 
 /**
