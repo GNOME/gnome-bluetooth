@@ -404,8 +404,10 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter)
 
 	DBG("agent %p", agent);
 
-	if (priv->adapter != NULL)
+	if (priv->path != NULL) {
+		g_warning ("Agent already setup on '%s'", priv->path);
 		return FALSE;
+	}
 
 	priv->adapter = g_object_ref(adapter);
 
