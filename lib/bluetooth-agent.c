@@ -85,7 +85,8 @@ struct _BluetoothAgentPrivate {
 	gchar *path;
 	GDBusProxy *adapter;
 	GDBusNodeInfo *introspection_data;
-	guint id;
+	guint reg_id;
+	guint watch_id;
 
 	BluetoothAgentPasskeyFunc pincode_func;
 	gpointer pincode_data;
@@ -254,6 +255,29 @@ static gboolean bluetooth_agent_cancel(BluetoothAgent *agent,
 	return result;
 }
 
+static void
+name_appeared_cb (GDBusConnection *connection,
+		  const gchar     *name,
+		  const gchar     *name_owner,
+		  BluetoothAgent  *agent)
+{
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+
+	g_free (priv->busname);
+	priv->busname = g_strdup (name_owner);
+}
+
+static void
+name_vanished_cb (GDBusConnection *connection,
+		  const gchar     *name,
+		  BluetoothAgent  *agent)
+{
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+
+	g_free (priv->busname);
+	priv->busname = NULL;
+}
+
 static void bluetooth_agent_init(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
@@ -263,6 +287,13 @@ static void bluetooth_agent_init(BluetoothAgent *agent)
 	priv->introspection_data = g_dbus_node_info_new_for_xml (introspection_xml, NULL);
 	g_assert (priv->introspection_data);
 	priv->conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+	priv->watch_id = g_bus_watch_name_on_connection (priv->conn,
+							 BLUEZ_SERVICE,
+							 G_BUS_NAME_WATCHER_FLAGS_NONE,
+							 (GBusNameAppearedCallback) name_appeared_cb,
+							 (GBusNameVanishedCallback) name_vanished_cb,
+							 agent,
+							 NULL);
 }
 
 static void bluetooth_agent_finalize(GObject *agent)
@@ -273,6 +304,8 @@ static void bluetooth_agent_finalize(GObject *agent)
 
 	bluetooth_agent_unregister (BLUETOOTH_AGENT (agent));
 
+	g_bus_unwatch_name (priv->watch_id);
+	g_free (priv->busname);
 	g_dbus_node_info_unref (priv->introspection_data);
 	g_object_unref (priv->conn);
 
@@ -375,17 +408,14 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 
 	priv->path = g_strdup(path);
 
-	g_free (priv->busname);
-	priv->busname = g_strdup (BLUEZ_SERVICE);
-
-	priv->id = g_dbus_connection_register_object (priv->conn,
+	priv->reg_id = g_dbus_connection_register_object (priv->conn,
 						      priv->path,
 						      priv->introspection_data->interfaces[0],
 						      &interface_vtable,
 						      agent,
 						      NULL,
 						      &error);
-	if (priv->id == 0) {
+	if (priv->reg_id == 0) {
 		g_warning ("Failed to register object: %s", error->message);
 		g_error_free (error);
 	}
@@ -397,7 +427,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 	GError *error = NULL;
-	char *path, *owner;
+	char *path;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 	g_return_val_if_fail (G_IS_DBUS_PROXY (adapter), FALSE);
@@ -415,21 +445,14 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter)
 	priv->path = g_strdup_printf("/org/bluez/agent/%s", path);
 	g_free(path);
 
-	g_free (priv->busname);
-	owner = g_dbus_proxy_get_name_owner (priv->adapter);
-	if (owner == NULL)
-		priv->busname = g_strdup (g_dbus_proxy_get_name (priv->adapter));
-	else
-		priv->busname = owner;
-
-	priv->id = g_dbus_connection_register_object (priv->conn,
+	priv->reg_id = g_dbus_connection_register_object (priv->conn,
 						      priv->path,
 						      priv->introspection_data->interfaces[0],
 						      &interface_vtable,
 						      agent,
 						      NULL,
 						      &error);
-	if (priv->id == 0) {
+	if (priv->reg_id == 0) {
 		g_warning ("Failed to register object: %s", error->message);
 		g_error_free (error);
 		error = NULL;
@@ -484,9 +507,9 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 	g_free(priv->busname);
 	priv->busname = NULL;
 
-	if (priv->id > 0) {
-		g_dbus_connection_unregister_object (priv->conn, priv->id);
-		priv->id = 0;
+	if (priv->reg_id > 0) {
+		g_dbus_connection_unregister_object (priv->conn, priv->reg_id);
+		priv->reg_id = 0;
 	}
 
 	return TRUE;
