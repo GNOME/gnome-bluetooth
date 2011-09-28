@@ -99,7 +99,7 @@ static DBusGConnection *connection = NULL;
 typedef struct _BluetoothClientPrivate BluetoothClientPrivate;
 
 struct _BluetoothClientPrivate {
-	DBusGProxy *dbus;
+	guint owner_change_id;
 	DBusGProxy *manager;
 	GtkTreeStore *store;
 	GtkTreeRowReference *default_adapter;
@@ -862,15 +862,16 @@ static void default_adapter_changed(DBusGProxy *manager,
 	g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 }
 
-static void name_owner_changed(DBusGProxy *dbus, const char *name,
-			const char *prev, const char *new, gpointer user_data)
+static void
+bluez_vanished_cb (GDBusConnection *connection,
+		   const gchar     *name,
+		   BluetoothClient *client)
 {
-	BluetoothClient *client = user_data;
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 	gboolean cont;
 
-	if (g_str_equal(name, BLUEZ_SERVICE) == FALSE || *new != '\0')
+	if (g_str_equal(name, BLUEZ_SERVICE) == FALSE)
 		return;
 
 	DBG("client %p name %s", client, name);
@@ -902,14 +903,12 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_INT,
 					 G_TYPE_BOOLEAN, G_TYPE_HASH_TABLE, G_TYPE_STRV);
 
-	priv->dbus = dbus_g_proxy_new_for_name(connection, DBUS_SERVICE_DBUS,
-				DBUS_PATH_DBUS, DBUS_INTERFACE_DBUS);
-
-	dbus_g_proxy_add_signal(priv->dbus, "NameOwnerChanged",
-					G_TYPE_STRING, G_TYPE_STRING,
-					G_TYPE_STRING, G_TYPE_INVALID);
-	dbus_g_proxy_connect_signal(priv->dbus, "NameOwnerChanged",
-				G_CALLBACK(name_owner_changed), client, NULL);
+	priv->owner_change_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
+						  BLUEZ_SERVICE,
+						  G_BUS_NAME_WATCHER_FLAGS_NONE,
+						  NULL,
+						  (GBusNameVanishedCallback) bluez_vanished_cb,
+						  client, NULL);
 
 	priv->manager = dbus_g_proxy_new_for_name(connection, BLUEZ_SERVICE,
 				BLUEZ_MANAGER_PATH, BLUEZ_MANAGER_INTERFACE);
@@ -1026,11 +1025,9 @@ static void bluetooth_client_finalize(GObject *client)
 
 	DBG("client %p", client);
 
-	g_type_class_unref (g_type_class_peek (BLUETOOTH_TYPE_STATUS));
+	g_bus_unwatch_name (priv->owner_change_id);
 
-	g_signal_handlers_disconnect_by_func(priv->dbus,
-					name_owner_changed, client);
-	g_object_unref(priv->dbus);
+	g_type_class_unref (g_type_class_peek (BLUETOOTH_TYPE_STATUS));
 
 	g_signal_handlers_disconnect_by_func(priv->manager,
 						adapter_added, client);
