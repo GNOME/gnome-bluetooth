@@ -7,7 +7,7 @@
     </method>
 
     <method name="FindAdapter">
-      <arg type="s" name="pattern"/>
+      <arg type="s" name="pattern" direction="in"/>
       <arg type="o" direction="out"/>
     </method>
 
@@ -28,19 +28,19 @@
     </method>
 
     <method name="CreateDevice">
-      <arg type="s" name="address"/>
+      <arg type="s" name="address" direction="in"/>
       <arg type="o" direction="out"/>
     </method>
 
     <method name="CreatePairedDevice">
-      <arg type="s" name="address"/>
-      <arg type="o" name="agent"/>
-      <arg type="s" name="capability"/>
+      <arg type="s" name="address" direction="in"/>
+      <arg type="o" name="agent" direction="in"/>
+      <arg type="s" name="capability" direction="in"/>
       <arg type="o" direction="out"/>
     </method>
 
     <method name="RemoveDevice">
-      <arg type="o" name="device"/>
+      <arg type="o" name="device" direction="in"/>
     </method>
   </interface>
 
