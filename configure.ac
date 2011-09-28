@@ -185,7 +185,7 @@ else
 fi
 
 if test "x$enable_moblin" = "xyes" -a "x$have_moblin" != "xyes"; then
-   AC_MSG_ERROR([Couldn't find Moblin dependencies.])
+   AC_MSG_ERROR([Could not find Moblin dependencies.])
 fi
 AM_CONDITIONAL(WITH_MOBLIN, test "x$have_moblin" = "xyes")
 
