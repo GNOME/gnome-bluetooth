@@ -368,11 +368,14 @@ static const GDBusInterfaceVTable interface_vtable =
 gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	GError *error = NULL;
 
 	DBG("agent %p", agent);
 
-	if (priv->path != NULL)
+	if (priv->path != NULL) {
+		g_warning ("Agent already setup on '%s'", priv->path);
 		return FALSE;
+	}
 
 	priv->path = g_strdup(path);
 
@@ -385,7 +388,11 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 						      &interface_vtable,
 						      agent,
 						      NULL,
-						      NULL);
+						      &error);
+	if (priv->id == 0) {
+		g_warning ("Failed to register object: %s", error->message);
+		g_error_free (error);
+	}
 
 	return TRUE;
 }
@@ -423,7 +430,12 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter)
 						      &interface_vtable,
 						      agent,
 						      NULL,
-						      NULL);
+						      &error);
+	if (priv->id == 0) {
+		g_warning ("Failed to register object: %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
 
 	if (g_dbus_proxy_call_sync (priv->adapter, "RegisterAgent",
 				    g_variant_new ("(os)", priv->path, "DisplayYesNo"),
