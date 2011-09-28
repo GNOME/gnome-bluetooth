@@ -67,6 +67,9 @@ static const gchar introspection_xml[] =
 "      <arg type='o' name='device' direction='in'/>"
 "      <arg type='s' name='uuid' direction='in'/>"
 "    </method>"
+"    <method name='ConfirmMode'>"
+"      <arg type='s' name='mode'/>"
+"    </method>"
 "    <method name='Cancel'/>"
 "  </interface>"
 "</node>";
@@ -350,6 +353,8 @@ handle_method_call (GDBusConnection       *connection,
 		g_free (uuid);
 	} else if (g_strcmp0 (method_name, "Cancel") == 0) {
 		bluetooth_agent_cancel (agent, invocation);
+	} else if (g_strcmp0 (method_name, "ConfirmMode") == 0) {
+		g_dbus_method_invocation_return_value (invocation, NULL);
 	}
 }
 
