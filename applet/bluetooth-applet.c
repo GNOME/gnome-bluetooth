@@ -75,7 +75,7 @@ struct _BluetoothApplet
 	gulong signal_row_added;
 	gulong signal_row_changed;
 	gulong signal_row_deleted;
-	DBusGProxy* default_adapter;
+	GDBusProxy* default_adapter;
 	BluetoothAgent* agent;
 	GHashTable* pending_requests;
 
@@ -486,7 +486,7 @@ default_adapter_changed (GObject    *client,
 
 	if (self->default_adapter)
 		g_object_unref (self->default_adapter);
-	self->default_adapter = bluetooth_client_get_default_adapter (self->client);
+	self->default_adapter = bluetooth_client_get_default_adapter_gdbus (self->client);
 
 	if (self->device_model) {
 		g_signal_handler_disconnect (self->device_model, self->signal_row_added);
