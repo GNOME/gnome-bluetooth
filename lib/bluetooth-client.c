@@ -1279,6 +1279,37 @@ DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client)
 	return adapter;
 }
 
+/* XXX */
+GDBusProxy *bluetooth_client_get_default_adapter_gdbus (BluetoothClient *client)
+{
+	DBusGProxy *proxy;
+	GDBusProxy *ret;
+	GError *error = NULL;
+
+	proxy = bluetooth_client_get_default_adapter (client);
+	if (proxy == NULL)
+		return NULL;
+
+	ret = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					     G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+					     NULL,
+					     dbus_g_proxy_get_bus_name (proxy),
+					     dbus_g_proxy_get_path (proxy),
+					     dbus_g_proxy_get_interface (proxy),
+					     NULL,
+					     &error);
+
+	g_object_unref (proxy);
+
+	if (ret == NULL) {
+		g_warning ("Failed to create proxy for default adapter: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
+
+	return ret;
+}
+
 /**
  * bluetooth_client_start_discovery:
  * @client: a #BluetoothClient object

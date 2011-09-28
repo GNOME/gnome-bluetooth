@@ -32,6 +32,7 @@
 G_BEGIN_DECLS
 
 DBusGProxy *bluetooth_client_get_default_adapter(BluetoothClient *client);
+GDBusProxy *bluetooth_client_get_default_adapter_gdbus (BluetoothClient *client);
 
 gboolean bluetooth_client_start_discovery(BluetoothClient *client);
 gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
