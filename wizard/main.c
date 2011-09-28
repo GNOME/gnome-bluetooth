@@ -164,7 +164,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 	/* Only show the pincode page if the pincode isn't automatic */
 	if (automatic_pincode == FALSE)
 		gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
-	g_dbus_method_invocation_return_value (invocation, g_variant_new_string (pincode));
+	g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", pincode));
 
 	return TRUE;
 }
@@ -227,7 +227,7 @@ matches_cb (GtkButton *button,
 	invocation = g_object_get_data (G_OBJECT (button), "invocation");
 	gtk_widget_set_sensitive (does_not_match_button, FALSE);
 	gtk_widget_set_sensitive (matches_button, FALSE);
-	g_dbus_method_invocation_return_value (invocation, g_variant_new_string (""));
+	g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", ""));
 
 	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", NULL);
 	g_object_set_data (G_OBJECT(matches_button), "invocation", NULL);
