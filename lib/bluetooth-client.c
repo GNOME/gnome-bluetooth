@@ -1494,18 +1494,22 @@ typedef struct {
 	BluetoothClient *client;
 } CreateDeviceData;
 
-static void create_device_callback(DBusGProxy *proxy,
-					DBusGProxyCall *call, void *user_data)
+static void
+create_device_callback (GDBusProxy       *proxy,
+			GAsyncResult     *res,
+			CreateDeviceData *devdata)
 {
-	CreateDeviceData *devdata = user_data;
 	GError *error = NULL;
 	char *path = NULL;
+	GVariant *ret;
 
-	dbus_g_proxy_end_call(proxy, call, &error,
-			DBUS_TYPE_G_OBJECT_PATH, &path, G_TYPE_INVALID);
-
-	if (error != NULL)
+	ret = g_dbus_proxy_call_finish (proxy, res, &error);
+	if (ret == NULL) {
+		g_warning ("CreateDevice failed: %s", error->message);
 		path = NULL;
+	} else {
+		g_variant_get (ret, "(o)", &path);
+	}
 
 	if (devdata->func)
 		devdata->func(devdata->client, path, error, devdata->data);
@@ -1513,8 +1517,11 @@ static void create_device_callback(DBusGProxy *proxy,
 	if (error != NULL)
 		g_error_free (error);
 
+
+	if (ret != NULL)
+		g_object_unref (ret);
 	g_object_unref (devdata->client);
-	g_object_unref(proxy);
+	g_free (devdata);
 }
 
 gboolean bluetooth_client_create_device (BluetoothClient *client,
@@ -1523,16 +1530,16 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 					 BluetoothClientCreateDeviceFunc func,
 					 gpointer data)
 {
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	CreateDeviceData *devdata;
-	DBusGProxy *adapter;
-	GtkTreeIter iter;
+	GDBusProxy *adapter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (address != NULL, FALSE);
 
 	DBG("client %p", client);
 
+	/* FIXME */
+#if 0
 	adapter = bluetooth_client_get_default_adapter(client);
 	if (adapter == NULL)
 		return FALSE;
@@ -1559,6 +1566,10 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 		if (device != NULL)
 			g_object_unref (device);
 	}
+#endif
+	adapter = bluetooth_client_get_default_adapter_gdbus (client);
+	if (adapter == NULL)
+		return FALSE;
 
 	devdata = g_new0 (CreateDeviceData, 1);
 	devdata->func = func;
@@ -1566,17 +1577,24 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 	devdata->client = g_object_ref (client);
 
 	if (agent != NULL)
-		dbus_g_proxy_begin_call_with_timeout(adapter,
-						     "CreatePairedDevice", create_device_callback,
-						     devdata, g_free, 90 * 1000,
-						     G_TYPE_STRING, address,
-						     DBUS_TYPE_G_OBJECT_PATH, agent,
-						     G_TYPE_STRING, "DisplayYesNo", G_TYPE_INVALID);
+		g_dbus_proxy_call (adapter,
+				   "CreatePairedDevice",
+				   g_variant_new ("(sos)", address, agent, "DisplayYesNo"),
+				   G_DBUS_CALL_FLAGS_NONE,
+				   90 * 1000,
+				   NULL,
+				   (GAsyncReadyCallback) create_device_callback,
+				   devdata);
 	else
-		dbus_g_proxy_begin_call_with_timeout(adapter,
-						     "CreateDevice", create_device_callback,
-						     devdata, g_free, 60 * 1000,
-						     G_TYPE_STRING, address, G_TYPE_INVALID);
+		g_dbus_proxy_call (adapter,
+				   "CreateDevice",
+				   g_variant_new ("(s)", address),
+				   G_DBUS_CALL_FLAGS_NONE,
+				   90 * 1000,
+				   NULL,
+				   (GAsyncReadyCallback) create_device_callback,
+				   devdata);
+	g_object_unref (adapter);
 
 	return TRUE;
 }
