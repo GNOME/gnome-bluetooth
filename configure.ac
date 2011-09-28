@@ -192,6 +192,9 @@ AM_CONDITIONAL(WITH_MOBLIN, test "x$have_moblin" = "xyes")
 DBUS_BINDING_TOOL="dbus-binding-tool"
 AC_SUBST(DBUS_BINDING_TOOL)
 
+GDBUS_CODEGEN="gdbus-codegen"
+AC_SUBST(GDBUS_CODEGEN)
+
 GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
 AC_SUBST(GLIB_GENMARSHAL)
 
