@@ -290,15 +290,10 @@ static void bluetooth_agent_class_init(BluetoothAgentClass *klass)
 	object_class->finalize = bluetooth_agent_finalize;
 }
 
-BluetoothAgent *bluetooth_agent_new(void)
+BluetoothAgent *
+bluetooth_agent_new (void)
 {
-	BluetoothAgent *agent;
-
-	agent = BLUETOOTH_AGENT(g_object_new(BLUETOOTH_TYPE_AGENT, NULL));
-
-	DBG("agent %p", agent);
-
-	return agent;
+	return BLUETOOTH_AGENT (g_object_new (BLUETOOTH_TYPE_AGENT, NULL));
 }
 
 static void
