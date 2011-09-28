@@ -868,24 +868,13 @@ bluez_vanished_cb (GDBusConnection *connection,
 		   BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
-	gboolean cont;
-
-	if (g_str_equal(name, BLUEZ_SERVICE) == FALSE)
-		return;
-
-	DBG("client %p name %s", client, name);
 
 	if (priv->default_adapter) {
 		gtk_tree_row_reference_free (priv->default_adapter);
 		priv->default_adapter = NULL;
 	}
 
-	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
-									&iter);
-
-	while (cont == TRUE)
-		cont = gtk_tree_store_remove(priv->store, &iter);
+	gtk_tree_store_clear (priv->store);
 }
 
 static void bluetooth_client_init(BluetoothClient *client)
