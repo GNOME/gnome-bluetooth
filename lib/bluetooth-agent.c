@@ -261,6 +261,7 @@ static void bluetooth_agent_init(BluetoothAgent *agent)
 	DBG("agent %p", agent);
 
 	priv->introspection_data = g_dbus_node_info_new_for_xml (introspection_xml, NULL);
+	g_assert (priv->introspection_data);
 	priv->conn = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
 }
 
