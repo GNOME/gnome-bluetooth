@@ -43,7 +43,7 @@
 #define BLUEZ_DEVICE_INTERFACE	"org.bluez.Device"
 
 static const gchar introspection_xml[] =
-"<node>"
+"<node name='/'>"
 "  <interface name='org.bluez.Agent'>"
 "    <method name='Release'/>"
 "    <method name='RequestPinCode'>"
