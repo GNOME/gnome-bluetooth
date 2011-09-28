@@ -1529,10 +1529,7 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 			g_object_unref (device);
 	}
 
-	devdata = g_try_new0(CreateDeviceData, 1);
-	if (devdata == NULL)
-		return FALSE;
-
+	devdata = g_new0 (CreateDeviceData, 1);
 	devdata->func = func;
 	devdata->data = data;
 	devdata->client = g_object_ref (client);
