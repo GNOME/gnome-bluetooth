@@ -23,7 +23,6 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <dbus/dbus-glib.h>
 #include <gio/gio.h>
 
 #include <bluetooth-applet.h>
