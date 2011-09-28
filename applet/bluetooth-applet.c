@@ -306,11 +306,6 @@ bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
 	g_hash_table_remove (self->pending_requests, request_key);
 }
 
-#ifndef DBUS_TYPE_G_DICTIONARY
-#define DBUS_TYPE_G_DICTIONARY \
-	(dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE))
-#endif
-
 static char *
 device_get_name (GDBusProxy *proxy, char **long_name)
 {
