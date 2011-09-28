@@ -59,7 +59,7 @@ agent_pincode (GDBusMethodInvocation *invocation,
 			   g_dbus_proxy_get_object_path (device));
 	}
 
-	g_dbus_method_invocation_return_value (invocation, g_variant_new_string ("1234"));
+	g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", "1234"));
 
 	return TRUE;
 }
