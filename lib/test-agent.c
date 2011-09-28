@@ -33,29 +33,31 @@
 #include "bluetooth-agent.h"
 #include "bluetooth-client-glue.h"
 
-static gboolean agent_pincode(GDBusMethodInvocation *invocation,
-					GDBusProxy *device, gpointer user_data)
+static gboolean
+agent_pincode (GDBusMethodInvocation *invocation,
+	       GDBusProxy *device,
+	       gpointer user_data)
 {
-	GHashTable *hash = NULL;
-	GValue *value;
-	const gchar *address, *name;
+	GVariant *value;
+	GVariant *result;
+	const char *alias, *address;
 
-//FIXME
-//	device_get_properties(device, &hash, NULL);
-	hash = NULL;
+	result = g_dbus_proxy_call_sync (device, "GetProperties",  NULL,
+					 G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+	if (result != NULL) {
+		value = g_variant_lookup_value (result, "Address", G_VARIANT_TYPE_STRING);
+		address = value ? g_variant_get_string (value, NULL) : "No address";
 
-	if (hash != NULL) {
-		value = g_hash_table_lookup(hash, "Address");
-		address = value ? g_value_get_string(value) : NULL;
+		value = g_variant_lookup_value (result, "Name", G_VARIANT_TYPE_STRING);
+		alias = value ? g_variant_get_string (value, NULL) : address;
 
-		value = g_hash_table_lookup(hash, "Name");
-		name = value ? g_value_get_string(value) : NULL;
+		printf("address %s name %s\n", address, alias);
+
+		g_variant_unref (result);
 	} else {
-		address = NULL;
-		name = NULL;
+		g_message ("Could not get address or name for '%s'",
+			   g_dbus_proxy_get_object_path (device));
 	}
-
-	printf("address %s name %s\n", address, name);
 
 	g_dbus_method_invocation_return_value (invocation, g_variant_new_string ("1234"));
 
@@ -64,12 +66,13 @@ static gboolean agent_pincode(GDBusMethodInvocation *invocation,
 
 static GMainLoop *mainloop = NULL;
 
-static void sig_term(int sig)
+static void
+sig_term (int sig)
 {
 	g_main_loop_quit(mainloop);
 }
 
-int main(int argc, char *argv[])
+int main (int argc, char **argv)
 {
 	struct sigaction sa;
 	BluetoothAgent *agent;
@@ -102,7 +105,7 @@ int main(int argc, char *argv[])
 
 	g_main_loop_run(mainloop);
 
-	//bluetooth_agent_unregister(agent);
+	bluetooth_agent_unregister(agent);
 
 	g_object_unref(agent);
 
