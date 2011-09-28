@@ -192,7 +192,7 @@ bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
 
 	if (pincode != NULL) {
 		g_dbus_method_invocation_return_value (invocation,
-						       g_variant_new_string (pincode));
+						       g_variant_new ("(s)", pincode));
 	} else {
 		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
@@ -225,7 +225,7 @@ bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
 
 	if (passkey != -1) {
 		g_dbus_method_invocation_return_value (invocation,
-						       g_variant_new_int32 (passkey));
+						       g_variant_new ("(u)", passkey));
 	} else {
 		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
