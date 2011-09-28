@@ -363,7 +363,6 @@ static const GDBusInterfaceVTable interface_vtable =
 gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	char *owner;
 
 	DBG("agent %p", agent);
 
@@ -373,14 +372,7 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 	priv->path = g_strdup(path);
 
 	g_free (priv->busname);
-	if (priv->adapter) {
-		owner = g_dbus_proxy_get_name_owner (priv->adapter);
-		if (owner == NULL)
-			priv->busname = g_strdup (g_dbus_proxy_get_name (priv->adapter));
-		else
-			priv->busname = owner;
-		g_free (owner);
-	}
+	priv->busname = g_strdup (BLUEZ_SERVICE);
 
 	priv->id = g_dbus_connection_register_object (priv->conn,
 						      priv->path,
