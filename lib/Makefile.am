@@ -32,7 +32,8 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-chooser.c		\
 	bluetooth-filter-widget.c	\
 	bluetooth-chooser-button.c	\
-	bluetooth-chooser-combo.c
+	bluetooth-chooser-combo.c	\
+	bluetooth-client-glue.c
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
@@ -40,7 +41,8 @@ libgnome_bluetooth_private_headers =	\
 	bluetooth-killswitch.h		\
 	marshal.h			\
 	gnome-bluetooth-enum-types.h	\
-	bluetooth-chooser-private.h
+	bluetooth-chooser-private.h	\
+	bluetooth-client-glue.h
 
 # public headers don't need to be listed, are handled by _HEADERS
 libgnome_bluetooth_la_SOURCES =			\
@@ -109,6 +111,7 @@ endif # HAVE_INTROSPECTION
 
 BUILT_SOURCES = marshal.h marshal.c \
 		bluetooth-client-glue.h \
+		bluetooth-client-glue.c \
 		obex-agent-glue.h \
 		gnome-bluetooth-enum-types.h \
 		gnome-bluetooth-enum-types.c
@@ -142,8 +145,10 @@ marshal.h: marshal.list
 marshal.c: marshal.list
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
 
-bluetooth-client-glue.h: bluetooth-client.xml bluetooth-agent.h bluetooth-agent.c
-	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=bluetooth_client --mode=glib-client --output=$@ $<
+bluetooth-client-glue.c: bluetooth-client-glue.h
+
+bluetooth-client-glue.h: bluetooth-client.xml
+	$(AM_V_GEN) $(GDBUS_CODEGEN) --c-namespace= --generate-c-code=bluetooth-client-glue --interface-prefix=org.bluez $<
 
 obex-agent-glue.h: obex-agent.xml
 	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=obex_agent --mode=glib-server --output=$@ $<
