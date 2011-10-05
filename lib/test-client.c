@@ -74,7 +74,7 @@ static void row_inserted(GtkTreeModel *model, GtkTreePath *path,
 static void proxy_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
 {
-	DBusGProxy *proxy;
+	GDBusProxy *proxy;
 	gchar *path;
 
 	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PROXY, &proxy, -1);
@@ -84,7 +84,7 @@ static void proxy_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 		return;
 	}
 
-	path = g_path_get_basename(dbus_g_proxy_get_path(proxy));
+	path = g_path_get_basename(g_dbus_proxy_get_object_path(proxy));
 
 	g_object_set(cell, "text", path, NULL);
 
