@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <node name="/">
-  <interface name="manager">
+  <interface name="org.bluez.Manager">
     <method name="DefaultAdapter">
-      <arg type="o" direction="out"/>
-    </method>
-
-    <method name="FindAdapter">
-      <arg type="s" name="pattern" direction="in"/>
       <arg type="o" direction="out"/>
     </method>
 
     <method name="ListAdapters">
       <arg type="ao" direction="out"/>
     </method>
+
+    <signal name="AdapterAdded">
+      <arg type="o"/>
+    </signal>
+    <signal name="AdapterRemoved">
+      <arg type="o"/>
+    </signal>
+    <signal name="DefaultAdapterChanged">
+      <arg type="o"/>
+    </signal>
   </interface>
 
-  <interface name="adapter">
+  <interface name="org.bluez.Adapter">
     <method name="GetProperties">
       <arg type="a{sv}" direction="out"/>
+    </method>
+
+    <method name="SetProperty">
+      <arg type="s" direction="in"/>
+      <arg type="v" direction="in"/>
     </method>
 
     <method name="StartDiscovery">
@@ -27,26 +37,42 @@
     <method name="StopDiscovery">
     </method>
 
-    <method name="CreateDevice">
-      <arg type="s" name="address" direction="in"/>
-      <arg type="o" direction="out"/>
-    </method>
-
-    <method name="CreatePairedDevice">
-      <arg type="s" name="address" direction="in"/>
-      <arg type="o" name="agent" direction="in"/>
-      <arg type="s" name="capability" direction="in"/>
-      <arg type="o" direction="out"/>
-    </method>
-
     <method name="RemoveDevice">
       <arg type="o" name="device" direction="in"/>
     </method>
+
+    <signal name="PropertyChanged">
+      <arg type="s"/>
+      <arg type="v"/>
+    </signal>
+    <signal name="DeviceCreated">
+      <arg type="o"/>
+    </signal>
+    <signal name="DeviceRemoved">
+      <arg type="o"/>
+    </signal>
+    <signal name="DeviceFound">
+      <arg type="s"/>
+      <arg type="a{sv}"/>
+    </signal>
   </interface>
 
-  <interface name="device">
+  <interface name="org.bluez.Device">
     <method name="GetProperties">
       <arg type="a{sv}" direction="out"/>
     </method>
+
+    <method name="SetProperty">
+      <arg type="s" direction="in"/>
+      <arg type="v" direction="in"/>
+    </method>
+
+    <method name="Connect"/>
+    <method name="Disconnect"/>
+
+    <signal name="PropertyChanged">
+      <arg type="s"/>
+      <arg type="v"/>
+    </signal>
   </interface>
 </node>
