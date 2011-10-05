@@ -485,7 +485,7 @@ default_adapter_changed (GObject    *client,
 
 	if (self->default_adapter)
 		g_object_unref (self->default_adapter);
-	self->default_adapter = bluetooth_client_get_default_adapter_gdbus (self->client);
+	self->default_adapter = bluetooth_client_get_default_adapter (self->client);
 
 	if (self->device_model) {
 		g_signal_handler_disconnect (self->device_model, self->signal_row_added);
@@ -549,24 +549,23 @@ set_powered_foreach (GtkTreeModel *model,
                      GtkTreeIter  *iter,
                      gpointer      data)
 {
-	DBusGProxy *proxy = NULL;
-	GValue value = { 0, };
+	GDBusProxy *proxy = NULL;
 
 	gtk_tree_model_get (model, iter,
 			    BLUETOOTH_COLUMN_PROXY, &proxy, -1);
+
 	if (proxy == NULL)
 		return FALSE;
 
-	g_value_init (&value, G_TYPE_BOOLEAN);
-	g_value_set_boolean (&value, TRUE);
+	g_dbus_proxy_call (proxy,
+			   "SetProperty",
+			   g_variant_new ("sv", "Powered", g_variant_new_boolean (TRUE)),
+			   G_DBUS_CALL_FLAGS_NO_AUTO_START,
+			   -1,
+			   NULL,
+			   NULL,
+			   NULL);
 
-	dbus_g_proxy_call_no_reply (proxy, "SetProperty",
-				    G_TYPE_STRING, "Powered",
-				    G_TYPE_VALUE, &value,
-				    G_TYPE_INVALID,
-				    G_TYPE_INVALID);
-
-	g_value_unset (&value);
 	g_object_unref (proxy);
 
 	return FALSE;
@@ -777,7 +776,7 @@ bluetooth_applet_create_device_from_iter (GtkTreeModel *model,
 {
 	BluetoothSimpleDevice *dev;
 	GHashTable *services;
-	DBusGProxy *proxy;
+	GDBusProxy *proxy;
 	char **uuids;
 
 	dev = g_new0 (BluetoothSimpleDevice, 1);
@@ -804,7 +803,7 @@ bluetooth_applet_create_device_from_iter (GtkTreeModel *model,
 	}
 
 	if (proxy != NULL) {
-		dev->device_path = g_strdup (dbus_g_proxy_get_path (proxy));
+		dev->device_path = g_strdup (g_dbus_proxy_get_object_path (proxy));
 		g_object_unref (proxy);
 	}
 
@@ -929,7 +928,7 @@ bluetooth_applet_init (BluetoothApplet *self)
 	g_signal_connect (self->killswitch_manager, "state-changed", G_CALLBACK(killswitch_state_change), self);
 
 	self->pending_requests = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-	dbus_g_error_domain_register (AGENT_ERROR, "org.bluez.Error", AGENT_ERROR_TYPE);
+	g_dbus_error_register_error (AGENT_ERROR, AGENT_ERROR_REJECT, "org.bluez.Error.Rejected");
 
 	/* Make sure all the unblocked adapters are powered,
 	 * so as to avoid seeing unpowered, but unblocked
