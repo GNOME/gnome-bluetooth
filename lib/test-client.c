@@ -27,8 +27,6 @@
 
 #include <gtk/gtk.h>
 
-#include <dbus/dbus-glib.h>
-
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "gnome-bluetooth-enum-types.h"
