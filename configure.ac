@@ -86,13 +86,11 @@ AC_SUBST(PANELS_DIR)
 dnl Missing libgnome-control-center
 dnl which will be resolved at run-time
 PKG_CHECK_MODULES(PROPS,
-		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  glib-2.0 >= $GLIB_REQUIRED
 		  gtk+-3.0 >= 2.90.7)
 
 dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
-		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-export-2.0
 		  glib-2.0 >= $GLIB_REQUIRED
 		  gtk+-3.0 >= $GTK_REQUIRED
@@ -127,7 +125,6 @@ AM_CONDITIONAL(HAVE_NST, test "x$have_nst" = "xyes")
 
 dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
-		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-export-2.0
 		  gtk+-3.0)
 
