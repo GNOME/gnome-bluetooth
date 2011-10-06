@@ -48,12 +48,6 @@
 
 #include "marshal.h"
 
-#ifdef DEBUG
-#define DBG(fmt, arg...) printf("%s:%s() " fmt "\n", __FILE__, __FUNCTION__ , ## arg)
-#else
-#define DBG(fmt...)
-#endif
-
 #define BLUEZ_SERVICE			"org.bluez"
 #define BLUEZ_MANAGER_PATH		"/"
 #define BLUEZ_MANAGER_INTERFACE		"org.bluez.Manager"
@@ -439,8 +433,6 @@ device_changed (Device          *device,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 
-	DBG("client %p property %s", client, property);
-
 	if (get_iter_from_proxy(priv->store, &iter, G_DBUS_PROXY (device)) == FALSE)
 		return;
 
@@ -626,8 +618,6 @@ device_found (Adapter         *adapter,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 
-	DBG("client %p address %s", client, address);
-
 	if (get_iter_from_proxy(priv->store, &iter, G_DBUS_PROXY (adapter)) == TRUE)
 		add_device(adapter, &iter, client, NULL, dict);
 }
@@ -640,8 +630,6 @@ device_created (Adapter         *adapter,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 
-	DBG("client %p path %s", client, path);
-
 	if (get_iter_from_proxy(priv->store, &iter, G_DBUS_PROXY (adapter)) == TRUE)
 		add_device(adapter, &iter, client, path, NULL);
 }
@@ -653,8 +641,6 @@ device_removed (GDBusProxy      *adapter,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-
-	DBG("client %p path %s", client, path);
 
 	if (get_iter_from_path(priv->store, &iter, path) == TRUE)
 		gtk_tree_store_remove(priv->store, &iter);
@@ -669,8 +655,6 @@ adapter_changed (GDBusProxy      *adapter,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 	gboolean notify = FALSE;
-
-	DBG("client %p property %s", client, property);
 
 	if (get_iter_from_proxy(priv->store, &iter, adapter) == FALSE)
 		return;
@@ -768,8 +752,6 @@ adapter_added (Manager         *manager,
 	const gchar *address, *name;
 	gboolean discovering, discoverable, powered;
 
-	DBG("client %p path %s", client, path);
-
 	adapter = adapter_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 						  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
 						  BLUEZ_SERVICE,
@@ -842,8 +824,6 @@ adapter_removed (Manager         *manager,
 	GtkTreeIter iter;
 	gboolean cont;
 
-	DBG("client %p path %s", client, path);
-
 	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
 									&iter);
 
@@ -886,8 +866,6 @@ default_adapter_changed (Manager         *manager,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 	gboolean cont;
-
-	DBG("client %p path %s", client, path);
 
 	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
 									&iter);
@@ -1018,8 +996,6 @@ static void bluetooth_client_init(BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
-	DBG("client %p", client);
-
 	priv->store = gtk_tree_store_new(_BLUETOOTH_NUM_COLUMNS, G_TYPE_OBJECT,
 					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
 					 G_TYPE_UINT, G_TYPE_STRING,
@@ -1113,8 +1089,6 @@ static void bluetooth_client_finalize(GObject *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
-	DBG("client %p", client);
-
 	g_bus_unwatch_name (priv->owner_change_id);
 
 	g_type_class_unref (g_type_class_peek (BLUETOOTH_TYPE_STATUS));
@@ -1133,8 +1107,6 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
 	GError *error = NULL;
-
-	DBG("class %p", klass);
 
 	g_type_class_ref (BLUETOOTH_TYPE_STATUS);
 
@@ -1179,8 +1151,6 @@ BluetoothClient *bluetooth_client_new(void)
 	g_object_add_weak_pointer (G_OBJECT (bluetooth_client),
 				   (gpointer) &bluetooth_client);
 
-	DBG("client %p", bluetooth_client);
-
 	return bluetooth_client;
 }
 
@@ -1198,8 +1168,6 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
 	GtkTreeModel *model;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	DBG("client %p", client);
 
 	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	model = g_object_ref(priv->store);
@@ -1226,8 +1194,6 @@ GtkTreeModel *bluetooth_client_get_filter_model (BluetoothClient *client,
 	GtkTreeModel *model;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	DBG("client %p", client);
 
 	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	model = gtk_tree_model_filter_new(GTK_TREE_MODEL(priv->store), NULL);
@@ -1267,8 +1233,6 @@ static gboolean adapter_filter(GtkTreeModel *model,
  **/
 GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
 {
-	DBG("client %p", client);
-
 	return bluetooth_client_get_filter_model (client, adapter_filter,
 						  NULL, NULL);
 }
@@ -1290,8 +1254,6 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
 	gboolean cont, found = FALSE;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	DBG("client %p", client);
 
 	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
@@ -1341,8 +1303,6 @@ GDBusProxy *bluetooth_client_get_default_adapter(BluetoothClient *client)
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
 
-	DBG("client %p", client);
-
 	if (priv->default_adapter == NULL)
 		return NULL;
 
@@ -1369,8 +1329,6 @@ gboolean bluetooth_client_start_discovery(BluetoothClient *client)
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	DBG("client %p", client);
-
 	adapter = bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return FALSE;
@@ -1395,8 +1353,6 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
 	GDBusProxy *adapter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	DBG("client %p", client);
 
 	adapter = bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
@@ -1490,8 +1446,6 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	DBG("client %p", client);
-
 	adapter = bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return FALSE;
@@ -1570,8 +1524,6 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (address != NULL, FALSE);
-
-	DBG("client %p", client);
 
 	adapter = bluetooth_client_get_default_adapter(client);
 	if (adapter == NULL)
@@ -1675,8 +1627,6 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device != NULL, FALSE);
 
-	DBG("client %p", client);
-
 	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
 		return FALSE;
 
@@ -1752,8 +1702,6 @@ bluetooth_client_connect_service (BluetoothClient            *client,
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device != NULL, FALSE);
-
-	DBG("client %p", client);
 
 	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
 		return FALSE;
@@ -1900,8 +1848,6 @@ bluetooth_client_disconnect_service (BluetoothClient            *client,
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device != NULL, FALSE);
-
-	DBG("client %p", client);
 
 	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
 		return FALSE;
