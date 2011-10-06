@@ -26,7 +26,6 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <dbus/dbus-glib.h>
 #include <bluetooth-enums.h>
 
 G_BEGIN_DECLS
