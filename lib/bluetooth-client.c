@@ -418,6 +418,8 @@ device_list_uuids (GVariant *variant)
 			continue;
 		g_ptr_array_add (ret, g_strdup (uuid));
 	}
+	g_free (uuids);
+
 	if (ret->len == 0) {
 		g_ptr_array_free (ret, TRUE);
 		return NULL;
@@ -824,6 +826,7 @@ adapter_added (Manager         *manager,
 		for (i = 0; devices[i] != NULL; i++) {
 			device_created (adapter, devices[i], client);
 		}
+		g_free (devices);
 	}
 	g_variant_unref (variant);
 
