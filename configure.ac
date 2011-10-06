@@ -135,9 +135,7 @@ PKG_CHECK_MODULES(INPUT,
 		  gtk+-3.0)
 
 dnl Requires for the public library
-PKG_CHECK_MODULES(LIBGNOMEBT,
-		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
-		  gtk+-3.0)
+PKG_CHECK_MODULES(LIBGNOMEBT, gtk+-3.0)
 
 dnl Requires for the private library
 PKG_CHECK_MODULES(COMMON,
