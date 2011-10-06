@@ -30,8 +30,6 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
-#include <dbus/dbus-glib.h>
-
 #include <bluetooth-client.h>
 #include <bluetooth-client-private.h>
 #include <bluetooth-chooser.h>
