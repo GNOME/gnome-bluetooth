@@ -1,5 +1,4 @@
 #include <gtk/gtk.h>
-#include <dbus/dbus-glib.h>
 #include "bluetooth-plugin-manager.h"
 
 static gchar *bdaddr = NULL;
@@ -29,7 +28,6 @@ int main (int argc, char **argv)
 {
 	GtkWidget *window, *vbox;
 	GList *list, *l;
-	DBusGConnection *bus;
 	GError *error = NULL;
 
 	if (gtk_init_with_args (&argc, &argv, NULL,
@@ -75,10 +73,6 @@ int main (int argc, char **argv)
 
 		return 0;
 	}
-
-	/* Init the dbus-glib types */
-	bus = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
-	dbus_g_connection_unref (bus);
 
 	bluetooth_plugin_manager_init ();
 
