@@ -40,8 +40,6 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#include <dbus/dbus-glib.h>
-
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-client-glue.h"
