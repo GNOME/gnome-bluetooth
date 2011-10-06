@@ -4,25 +4,25 @@
 #
 # Antón Méixome <meixome@mancomun.org>, 2009.
 # Antón Méixome <meixome@certima.net>, 2010.
-# Fran Dieguez <frandieguez@ubuntu.com>, 2010.
 # Fran Diéguez <frandieguez@gnome.org>, 2009, 2010, 2011.
+# Fran Dieguez <frandieguez@gnome.org>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 21:48+0200\n"
-"PO-Revision-Date: 2011-07-04 21:48+0200\n"
-"Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
+"POT-Creation-Date: 2011-10-07 01:42+0200\n"
+"PO-Revision-Date: 2011-10-07 01:43+0200\n"
+"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:76
 msgid "Click to select device..."
 msgstr "Prema para seleccionar o dispositivo…"
 
@@ -33,7 +33,7 @@ msgstr "Descoñecido"
 
 #: ../lib/bluetooth-chooser.c:172
 msgid "No adapters available"
-msgstr "Non hai adaptadores dispoñíbeis"
+msgstr "Non hai ningún adaptador dispoñíbel"
 
 #: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
 msgid "Searching for devices..."
@@ -42,14 +42,14 @@ msgstr "Buscando dispositivos…"
 #: ../lib/bluetooth-chooser.c:374
 #, c-format
 msgid "Remove '%s' from the list of devices?"
-msgstr "Quere eliminar «%s» da lista dos dispositivos?"
+msgstr "Quere quitar «%s» da lista de dispositivos?"
 
 #: ../lib/bluetooth-chooser.c:376
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
-"Se quere eliminar o dispositivo, terá que configuralo de novo antes do "
-"seguinte uso."
+"Se quere quitar o dispositivo terá que configuralo de novo antes de poder "
+"usalo a próxima vez."
 
 #: ../lib/bluetooth-chooser.c:800
 msgid "Device"
@@ -245,17 +245,17 @@ msgstr "Enviar ficheiros…"
 msgid "Browse files..."
 msgstr "Explorar os ficheiros…"
 
-#: ../applet/main.c:779
-msgid "Open Keyboard Preferences..."
-msgstr "Abrir as preferencias do teclado…"
+#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+msgid "Keyboard Settings"
+msgstr "Configuración do teclado"
 
-#: ../applet/main.c:787
-msgid "Open Mouse Preferences..."
-msgstr "Abrir as preferencias do rato…"
+#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+msgid "Mouse and Touchpad Settings"
+msgstr "Axustes do rato e do «touchpad»"
 
-#: ../applet/main.c:797
-msgid "Open Sound Preferences..."
-msgstr "Abrir as preferencias de son…"
+#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+msgid "Sound Settings"
+msgstr "Configuración do son"
 
 #: ../applet/main.c:850
 msgid "Debug"
@@ -362,7 +362,7 @@ msgstr "Bluetooth: comprobando"
 msgid "Browse files on device..."
 msgstr "Explorar os ficheiros no dispositivo…"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
+#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:693
 #: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
 msgid "Devices"
 msgstr "Dispositivos"
@@ -411,31 +411,31 @@ msgstr "_Coincide"
 msgid "_Show input"
 msgstr "_Mostrar a entrada"
 
-#: ../properties/cc-bluetooth-panel.c:295
+#: ../properties/cc-bluetooth-panel.c:294
 msgid "Yes"
 msgstr "Sí"
 
-#: ../properties/cc-bluetooth-panel.c:295
+#: ../properties/cc-bluetooth-panel.c:294
 msgid "No"
 msgstr "Non"
 
-#: ../properties/cc-bluetooth-panel.c:407
+#: ../properties/cc-bluetooth-panel.c:406
 msgid "Bluetooth is disabled"
 msgstr "O Bluetooth está desactivado"
 
-#: ../properties/cc-bluetooth-panel.c:412
+#: ../properties/cc-bluetooth-panel.c:411
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "O Bluetooth está desactivado polo interruptor físico"
 
-#: ../properties/cc-bluetooth-panel.c:416
+#: ../properties/cc-bluetooth-panel.c:415
 msgid "No Bluetooth adapters found"
 msgstr "Non se encontrou ningún adaptador Bluetooth"
 
-#: ../properties/cc-bluetooth-panel.c:526
+#: ../properties/cc-bluetooth-panel.c:543
 msgid "Visibility"
 msgstr "Visibilidade"
 
-#: ../properties/cc-bluetooth-panel.c:530
+#: ../properties/cc-bluetooth-panel.c:547
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibilidade de «%s»"
@@ -452,14 +452,6 @@ msgstr "Explorar ficheiros…"
 msgid "Connection"
 msgstr "Conexión"
 
-#: ../properties/bluetooth.ui.h:4
-msgid "Keyboard Settings"
-msgstr "Configuración do teclado"
-
-#: ../properties/bluetooth.ui.h:5
-msgid "Mouse and Touchpad Settings"
-msgstr "Axustes do rato e do «touchpad»"
-
 #. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
 #. Power switch
 #. Translators: This string appears next to a toggle switch which controls
@@ -474,13 +466,9 @@ msgstr "Bluetooth"
 msgid "Send Files..."
 msgstr "Enviar ficheiros…"
 
-#: ../properties/bluetooth.ui.h:10
-msgid "Sound Settings"
-msgstr "Configuración do son"
-
 #: ../properties/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
-msgstr "Configurar as opcións de Bluetooth"
+msgstr "Configurar preferencias de Bluetooth"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -608,7 +596,7 @@ msgstr "Opcións de PIN"
 
 #: ../wizard/wizard.ui.h:19
 msgid "PIN _options..."
-msgstr "_Opcións da chave de paso…"
+msgstr "_Opcións do PIN…"
 
 #: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
 msgid "Select the additional services you want to use with your device:"
@@ -923,6 +911,15 @@ msgstr "Enviar ficheiro desde o seu computador"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panel do xestor de Bluetooth"
+
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "Abrir as preferencias do teclado…"
+
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "Abrir as preferencias do rato…"
+
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "Abrir as preferencias de son…"
 
 #~ msgid "Bluetooth: Enabled"
 #~ msgstr "Bluetooth: activado"
