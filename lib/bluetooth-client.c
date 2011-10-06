@@ -1152,10 +1152,6 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 					 g_param_spec_boolean ("default-adapter-discoverable", NULL, NULL,
 							       FALSE, G_PARAM_READWRITE));
 
-	dbus_g_object_register_marshaller(marshal_VOID__STRING_BOXED,
-						G_TYPE_NONE, G_TYPE_STRING,
-						G_TYPE_VALUE, G_TYPE_INVALID);
-
 	if (error != NULL) {
 		g_printerr("Connecting to system bus failed: %s\n",
 							error->message);
