@@ -1021,6 +1021,37 @@ bluetooth_client_set_property (GObject        *object,
 	}
 }
 
+static gboolean
+disconnect_from_proxy_helper (GtkTreeModel *model,
+			      GtkTreePath  *path,
+			      GtkTreeIter  *iter,
+			      gpointer      data)
+{
+	BluetoothClient *client = data;
+	DBusGProxy *proxy;
+
+	gtk_tree_model_get(model, iter,
+			   BLUETOOTH_COLUMN_PROXY, &proxy, -1);
+
+	/* adapters */
+	g_signal_handlers_disconnect_by_func(proxy,
+				adapter_changed, client);
+	g_signal_handlers_disconnect_by_func(proxy,
+				device_created, client);
+	g_signal_handlers_disconnect_by_func(proxy,
+				device_removed, client);
+	g_signal_handlers_disconnect_by_func(proxy,
+				device_found, client);
+
+	/* devices */
+	g_signal_handlers_disconnect_by_func(proxy,
+				device_changed, client);
+
+	g_object_unref(proxy);
+
+	return FALSE;
+}
+
 static void bluetooth_client_finalize(GObject *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
@@ -1040,6 +1071,8 @@ static void bluetooth_client_finalize(GObject *client)
 	g_signal_handlers_disconnect_by_func(priv->manager,
 					default_adapter_changed, client);
 	g_object_unref(priv->manager);
+
+	gtk_tree_model_foreach (GTK_TREE_MODEL(priv->store), disconnect_from_proxy_helper, client);
 
 	g_object_unref(priv->store);
 
