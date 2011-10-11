@@ -103,6 +103,7 @@ struct _BluetoothClientPrivate {
 	DBusGProxy *manager;
 	GtkTreeStore *store;
 	GtkTreeRowReference *default_adapter;
+	GSList *horrible_workaround_for_leaked_ifaces;
 };
 
 enum {
@@ -266,6 +267,7 @@ device_services_changed (DBusGProxy *iface, const char *property,
 static GHashTable *
 device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect_signal)
 {
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GHashTable *table;
 	guint i;
 
@@ -333,6 +335,8 @@ device_list_nodes (DBusGProxy *device, BluetoothClient *client, gboolean connect
 				dbus_g_proxy_connect_signal(iface, "PropertyChanged",
 							    G_CALLBACK(device_services_changed), client, NULL);
 			}
+
+			priv->horrible_workaround_for_leaked_ifaces = g_slist_append (priv->horrible_workaround_for_leaked_ifaces, iface);
 		}
 	}
 
@@ -1055,6 +1059,7 @@ disconnect_from_proxy_helper (GtkTreeModel *model,
 static void bluetooth_client_finalize(GObject *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GSList *l;
 
 	DBG("client %p", client);
 
@@ -1078,6 +1083,15 @@ static void bluetooth_client_finalize(GObject *client)
 
 	if (priv->default_adapter)
 		gtk_tree_row_reference_free (priv->default_adapter);
+
+	for (l = priv->horrible_workaround_for_leaked_ifaces; l != NULL; l = l->next) {
+		DBusGProxy *iface = l->data;
+
+		g_signal_handlers_disconnect_by_func(iface,
+					device_services_changed, client);
+		g_object_unref (iface);
+	}
+	g_slist_free (priv->horrible_workaround_for_leaked_ifaces);
 
 	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize(client);
 }
