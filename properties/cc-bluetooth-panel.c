@@ -555,7 +555,7 @@ cc_bluetooth_panel_update_visibility (CcBluetoothPanel *self)
 }
 
 static void
-discoverable_changed (BluetoothClient *client,
+discoverable_changed (BluetoothClient  *client,
 		      GParamSpec       *spec,
 		      CcBluetoothPanel *self)
 {
