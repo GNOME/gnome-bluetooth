@@ -35,7 +35,6 @@
 #include <obex-agent.h>
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
-#include "marshal.h"
 
 #define AGENT_PATH "/org/bluez/agent/sendto"
 
