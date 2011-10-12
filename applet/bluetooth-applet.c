@@ -74,7 +74,7 @@ struct _BluetoothApplet
 	gulong signal_row_added;
 	gulong signal_row_changed;
 	gulong signal_row_deleted;
-	GDBusProxy* default_adapter;
+	char* default_adapter;
 	BluetoothAgent* agent;
 	GHashTable* pending_requests;
 
@@ -483,9 +483,11 @@ default_adapter_changed (GObject    *client,
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (data);
 
-	if (self->default_adapter)
-		g_object_unref (self->default_adapter);
-	self->default_adapter = bluetooth_client_get_default_adapter (self->client);
+	if (self->default_adapter) {
+		g_free (self->default_adapter);
+		self->default_adapter = NULL;
+	}
+	g_object_get (G_OBJECT (self->client), "default-adapter", &self->default_adapter, NULL);
 
 	if (self->device_model) {
 		g_signal_handler_disconnect (self->device_model, self->signal_row_added);
@@ -517,7 +519,7 @@ default_adapter_changed (GObject    *client,
 		bluetooth_agent_set_confirm_func (self->agent, confirm_request, self);
 		bluetooth_agent_set_cancel_func (self->agent, cancel_request, self);
 
-		bluetooth_agent_register (self->agent, self->default_adapter);
+		bluetooth_agent_register (self->agent);
 	}
 
 	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
