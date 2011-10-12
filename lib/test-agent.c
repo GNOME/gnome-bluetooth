@@ -76,7 +76,6 @@ int main (int argc, char **argv)
 {
 	struct sigaction sa;
 	BluetoothAgent *agent;
-	GDBusProxy *proxy;
 
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_flags = SA_NOCLDSTOP;
@@ -88,28 +87,17 @@ int main (int argc, char **argv)
 
 	mainloop = g_main_loop_new(NULL, FALSE);
 
-	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-					       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-					       NULL,
-					       "org.bluez",
-					       "/hci0",
-					       "org.bluez.Adapter",
-					       NULL,
-					       NULL);
-
 	agent = bluetooth_agent_new();
 
 	bluetooth_agent_set_pincode_func(agent, agent_pincode, NULL);
 
-	bluetooth_agent_register(agent, proxy);
+	bluetooth_agent_register(agent);
 
 	g_main_loop_run(mainloop);
 
 	bluetooth_agent_unregister(agent);
 
 	g_object_unref(agent);
-
-	g_object_unref(proxy);
 
 	g_main_loop_unref(mainloop);
 
