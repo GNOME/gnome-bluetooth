@@ -45,7 +45,7 @@ static void delete_callback(GtkWidget *window, GdkEvent *event,
 
 static void scan_callback(GtkWidget *button, gpointer user_data)
 {
-	bluetooth_client_start_discovery(client);
+	g_object_set (G_OBJECT (client), "default-adapter-discovering", TRUE, NULL);
 }
 
 static void select_callback(GtkTreeSelection *selection, gpointer user_data)

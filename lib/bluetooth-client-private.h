@@ -30,9 +30,6 @@
 
 G_BEGIN_DECLS
 
-gboolean bluetooth_client_start_discovery(BluetoothClient *client);
-gboolean bluetooth_client_stop_discovery(BluetoothClient *client);
-
 typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client,
 						 const char *path,
 						 const GError *error,

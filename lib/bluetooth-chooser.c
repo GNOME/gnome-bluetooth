@@ -194,8 +194,8 @@ bluetooth_chooser_start_discovery (BluetoothChooser *self)
 
 	g_return_if_fail (priv->show_searching);
 
-	if (bluetooth_client_start_discovery (priv->client) != FALSE)
-		set_search_label (self, TRUE);
+	g_object_set (G_OBJECT (priv->client), "default-adapter-discovering", TRUE, NULL);
+	set_search_label (self, TRUE);
 	priv->disco_rq = TRUE;
 }
 
@@ -213,7 +213,7 @@ bluetooth_chooser_stop_discovery (BluetoothChooser *self)
 	g_return_if_fail (priv->show_searching);
 
 	priv->disco_rq = FALSE;
-	bluetooth_client_stop_discovery (priv->client);
+	g_object_set (G_OBJECT (priv->client), "default-adapter-discovering", FALSE, NULL);
 }
 
 static char *
@@ -640,7 +640,7 @@ adapter_model_row_changed (GtkTreeModel *model,
 	if (is_default == FALSE)
 		return;
 	if (powered != FALSE && discovering == FALSE && priv->disco_rq != FALSE) {
-		bluetooth_chooser_start_discovery (self);
+		g_object_set (G_OBJECT (priv->client), "default-adapter-discovering", TRUE, NULL);
 		set_search_label (self, TRUE);
 		return;
 	}
@@ -915,7 +915,7 @@ bluetooth_chooser_finalize (GObject *object)
 		g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
 		priv->default_adapter_changed_id = 0;
 
-		bluetooth_client_stop_discovery (priv->client);
+		g_object_set (G_OBJECT (priv->client), "default-adapter-discovering", FALSE, NULL);
 		g_object_unref (priv->client);
 		priv->client = NULL;
 	}

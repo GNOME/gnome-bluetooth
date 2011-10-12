@@ -87,7 +87,8 @@ enum {
 	PROP_DEFAULT_ADAPTER,
 	PROP_DEFAULT_ADAPTER_POWERED,
 	PROP_DEFAULT_ADAPTER_DISCOVERABLE,
-	PROP_DEFAULT_ADAPTER_NAME
+	PROP_DEFAULT_ADAPTER_NAME,
+	PROP_DEFAULT_ADAPTER_DISCOVERING
 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
@@ -1170,6 +1171,43 @@ bail:
 }
 
 static void
+_bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
+						   gboolean         discover)
+{
+	GDBusProxy *adapter;
+
+	adapter = _bluetooth_client_get_default_adapter (client);
+	if (adapter == NULL)
+		return;
+
+	if (discover)
+		adapter_call_start_discovery_sync (ADAPTER (adapter), NULL, NULL);
+	else
+		adapter_call_stop_discovery_sync (ADAPTER (adapter), NULL, NULL);
+
+	g_object_unref(adapter);
+}
+
+static gboolean
+_bluetooth_client_get_default_adapter_discovering (BluetoothClient *self)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (self);
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gboolean ret;
+
+	if (priv->default_adapter == NULL)
+		return FALSE;
+
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter, BLUETOOTH_COLUMN_DISCOVERING, &ret, -1);
+	gtk_tree_path_free (path);
+
+	return ret;
+}
+
+static void
 bluetooth_client_get_property (GObject        *object,
 			       guint           property_id,
 			       GValue         *value,
@@ -1190,6 +1228,9 @@ bluetooth_client_get_property (GObject        *object,
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
 		g_value_set_boolean (value, _bluetooth_client_get_discoverable (self));
 		break;
+	case PROP_DEFAULT_ADAPTER_DISCOVERING:
+		g_value_set_boolean (value, _bluetooth_client_get_default_adapter_discovering (self));
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
@@ -1207,6 +1248,9 @@ bluetooth_client_set_property (GObject        *object,
 	switch (property_id) {
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
 	        _bluetooth_client_set_discoverable (self, g_value_get_boolean (value), 0);
+		break;
+	case PROP_DEFAULT_ADAPTER_DISCOVERING:
+		_bluetooth_client_set_default_adapter_discovering (self, g_value_get_boolean (value));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -1257,6 +1301,9 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_NAME,
 					 g_param_spec_string ("default-adapter-name", NULL, NULL,
 							      NULL, G_PARAM_READABLE));
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERING,
+					 g_param_spec_boolean ("default-adapter-discovering", NULL, NULL,
+							       FALSE, G_PARAM_READWRITE));
 
 	if (error != NULL) {
 		g_printerr("Connecting to system bus failed: %s\n",
@@ -1416,56 +1463,6 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
 		model = NULL;
 
 	return model;
-}
-
-/**
- * bluetooth_client_start_discovery:
- * @client: a #BluetoothClient object
- *
- * Start a discovery on the default adapter.
- *
- * Return value: Whether a discovery was successfully started on the default adapter.
- **/
-gboolean bluetooth_client_start_discovery(BluetoothClient *client)
-{
-	GDBusProxy *adapter;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	adapter = _bluetooth_client_get_default_adapter (client);
-	if (adapter == NULL)
-		return FALSE;
-
-	adapter_call_start_discovery_sync (ADAPTER (adapter), NULL, NULL);
-
-	g_object_unref(adapter);
-
-	return TRUE;
-}
-
-/**
- * bluetooth_client_stop_discovery:
- * @client: a #BluetoothClient object
- *
- * Stop a discovery started on the default adapter.
- *
- * Return value: Whether a discovery was successfully stopped on the default adapter.
- **/
-gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
-{
-	GDBusProxy *adapter;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	adapter = _bluetooth_client_get_default_adapter (client);
-	if (adapter == NULL)
-		return FALSE;
-
-	adapter_call_stop_discovery_sync (ADAPTER (adapter), NULL, NULL);
-
-	g_object_unref(adapter);
-
-	return TRUE;
 }
 
 typedef struct {
