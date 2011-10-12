@@ -39,7 +39,6 @@
 #include "bluetooth-client.h"
 #include "bluetooth-chooser.h"
 #include "bluetooth-utils.h"
-#include "marshal.h"
 
 struct _BluetoothChooserButton {
 	GtkButton          parent;

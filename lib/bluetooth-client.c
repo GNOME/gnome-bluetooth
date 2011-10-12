@@ -46,8 +46,6 @@
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 
-#include "marshal.h"
-
 #define BLUEZ_SERVICE			"org.bluez"
 #define BLUEZ_MANAGER_PATH		"/"
 #define BLUEZ_MANAGER_INTERFACE		"org.bluez.Manager"
