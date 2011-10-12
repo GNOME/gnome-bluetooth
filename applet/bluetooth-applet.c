@@ -688,9 +688,11 @@ bluetooth_applet_disconnect_device (BluetoothApplet* applet,
 gboolean
 bluetooth_applet_get_discoverable (BluetoothApplet* self)
 {
+	gboolean ret;
 	g_return_val_if_fail (BLUETOOTH_IS_APPLET (self), FALSE);
 
-	return bluetooth_client_get_discoverable (self->client);
+	g_object_get (G_OBJECT (self->client), "discoverable", &ret, NULL);
+	return ret;
 }
 
 /**
@@ -704,7 +706,7 @@ bluetooth_applet_set_discoverable (BluetoothApplet* self, gboolean disc)
 {
 	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
 
-	bluetooth_client_set_discoverable (self->client, disc, 0);
+	g_object_set (G_OBJECT (self->client), "discoverable", disc, NULL);
 }
 
 /**
