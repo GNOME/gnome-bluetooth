@@ -1016,10 +1016,32 @@ static void bluetooth_client_init(BluetoothClient *client)
 						  client, NULL);
 }
 
+static GDBusProxy *
+_bluetooth_client_get_default_adapter(BluetoothClient *client)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	GDBusProxy *adapter;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
+
+	if (priv->default_adapter == NULL)
+		return NULL;
+
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+	gtk_tree_path_free (path);
+
+	return adapter;
+}
+
 static const char*
 _bluetooth_client_get_default_adapter_path (BluetoothClient *self)
 {
-	GDBusProxy *adapter = bluetooth_client_get_default_adapter (self);
+	GDBusProxy *adapter = _bluetooth_client_get_default_adapter (self);
 
 	if (adapter != NULL) {
 		const char *ret = g_dbus_proxy_get_object_path (adapter);
@@ -1317,35 +1339,6 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
 }
 
 /**
- * bluetooth_client_get_default_adapter:
- * @client: a #BluetoothClient object
- *
- * Returns a #GDBusProxy object representing the default adapter, or %NULL if no adapters are present.
- *
- * Return value: (transfer full): a #GDBusProxy object.
- **/
-GDBusProxy *bluetooth_client_get_default_adapter(BluetoothClient *client)
-{
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	GDBusProxy *adapter;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	if (priv->default_adapter == NULL)
-		return NULL;
-
-	path = gtk_tree_row_reference_get_path (priv->default_adapter);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
-	gtk_tree_path_free (path);
-
-	return adapter;
-}
-
-/**
  * bluetooth_client_start_discovery:
  * @client: a #BluetoothClient object
  *
@@ -1359,7 +1352,7 @@ gboolean bluetooth_client_start_discovery(BluetoothClient *client)
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	adapter = bluetooth_client_get_default_adapter (client);
+	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return FALSE;
 
@@ -1384,7 +1377,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	adapter = bluetooth_client_get_default_adapter (client);
+	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return FALSE;
 
@@ -1446,7 +1439,7 @@ bluetooth_client_set_discoverable (BluetoothClient *client,
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	adapter = bluetooth_client_get_default_adapter (client);
+	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return FALSE;
 
@@ -1525,7 +1518,7 @@ gboolean bluetooth_client_create_device (BluetoothClient *client,
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (address != NULL, FALSE);
 
-	adapter = bluetooth_client_get_default_adapter(client);
+	adapter = _bluetooth_client_get_default_adapter(client);
 	if (adapter == NULL)
 		return FALSE;
 
@@ -1588,7 +1581,7 @@ gboolean bluetooth_client_remove_device (BluetoothClient *client,
 	GDBusProxy *adapter, *device;
 	GError *err = NULL;
 
-	adapter = bluetooth_client_get_default_adapter(client);
+	adapter = _bluetooth_client_get_default_adapter(client);
 	if (adapter == NULL)
 		return FALSE;
 
