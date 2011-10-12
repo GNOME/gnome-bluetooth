@@ -156,7 +156,7 @@ switch_connected_active_changed (GtkSwitch        *button,
 		g_warning ("Could not get D-Bus proxy for selected device");
 		return;
 	}
-	proxy = g_strdup (dbus_g_proxy_get_path (g_value_get_object (&value)));
+	proxy = g_strdup (g_dbus_proxy_get_object_path (g_value_get_object (&value)));
 	g_value_unset (&value);
 
 	if (proxy == NULL)
