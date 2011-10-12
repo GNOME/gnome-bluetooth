@@ -65,8 +65,6 @@ GtkTreeModel *bluetooth_client_get_filter_model(BluetoothClient *client,
 GtkTreeModel *bluetooth_client_get_adapter_model(BluetoothClient *client);
 GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client);
 
-gboolean bluetooth_client_get_discoverable (BluetoothClient *client);
-
 G_END_DECLS
 
 #endif /* __BLUETOOTH_CLIENT_H */

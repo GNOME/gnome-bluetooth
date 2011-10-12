@@ -1089,6 +1089,86 @@ _bluetooth_client_get_default_adapter_name (BluetoothClient *self)
 	return ret;
 }
 
+/**
+ * _bluetooth_client_get_discoverable:
+ * @client: a #BluetoothClient
+ *
+ * Gets the default adapter's discoverable status, cached in the adapter model.
+ *
+ * Returns: the discoverable status, or FALSE if no default adapter exists
+ */
+static gboolean
+_bluetooth_client_get_discoverable (BluetoothClient *client)
+{
+	BluetoothClientPrivate *priv;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gboolean ret;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+
+	priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
+	if (priv->default_adapter == NULL)
+		return FALSE;
+
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+                            BLUETOOTH_COLUMN_DISCOVERABLE, &ret, -1);
+
+	return ret;
+}
+
+/**
+ * _bluetooth_client_set_discoverable:
+ * @client: a #BluetoothClient object
+ * @discoverable: whether the device should be discoverable
+ * @timeout: timeout in seconds for making undiscoverable, or 0 for never.
+ *
+ * Sets the default adapter's discoverable status.
+ *
+ * Return value: Whether setting the state on the default adapter was successful.
+ **/
+static gboolean
+_bluetooth_client_set_discoverable (BluetoothClient *client,
+				    gboolean discoverable,
+				    guint timeout)
+{
+	GError *error = NULL;
+	GDBusProxy *adapter;
+	gboolean ret;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+
+	adapter = _bluetooth_client_get_default_adapter (client);
+	if (adapter == NULL)
+		return FALSE;
+
+	if (discoverable) {
+		ret = adapter_call_set_property_sync (ADAPTER (adapter),
+						      "DiscoverableTimeout",
+						      g_variant_new_uint32 (timeout),
+						      NULL, &error);
+		if (ret == FALSE)
+			goto bail;
+	}
+
+	ret = adapter_call_set_property_sync (ADAPTER (adapter),
+					      "Discoverable",
+					      g_variant_new_boolean (discoverable),
+					      NULL, &error);
+
+bail:
+	g_object_unref(adapter);
+
+	if (error) {
+		g_warning ("Cannot set discoverable: %s", error->message);
+		g_error_free (error);
+	}
+
+	return ret;
+}
+
 static void
 bluetooth_client_get_property (GObject        *object,
 			       guint           property_id,
@@ -1108,7 +1188,7 @@ bluetooth_client_get_property (GObject        *object,
 		g_value_take_string (value, _bluetooth_client_get_default_adapter_name (self));
 		break;
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-		g_value_set_boolean (value, bluetooth_client_get_discoverable (self));
+		g_value_set_boolean (value, _bluetooth_client_get_discoverable (self));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -1126,7 +1206,7 @@ bluetooth_client_set_property (GObject        *object,
 
 	switch (property_id) {
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-	        bluetooth_client_set_discoverable (self, g_value_get_boolean (value), 0);
+	        _bluetooth_client_set_discoverable (self, g_value_get_boolean (value), 0);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -1386,86 +1466,6 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
 	g_object_unref(adapter);
 
 	return TRUE;
-}
-
-/**
- * bluetooth_client_get_discoverable:
- * @client: a #BluetoothClient
- *
- * Gets the default adapter's discoverable status, cached in the adapter model.
- *
- * Returns: the discoverable status, or FALSE if no default adapter exists
- */
-gboolean
-bluetooth_client_get_discoverable (BluetoothClient *client)
-{
-	BluetoothClientPrivate *priv;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gboolean ret;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
-	if (priv->default_adapter == NULL)
-		return FALSE;
-
-	path = gtk_tree_row_reference_get_path (priv->default_adapter);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-                            BLUETOOTH_COLUMN_DISCOVERABLE, &ret, -1);
-
-	return ret;
-}
-
-/**
- * bluetooth_client_set_discoverable:
- * @client: a #BluetoothClient object
- * @discoverable: whether the device should be discoverable
- * @timeout: timeout in seconds for making undiscoverable, or 0 for never.
- *
- * Sets the default adapter's discoverable status.
- *
- * Return value: Whether setting the state on the default adapter was successful.
- **/
-gboolean
-bluetooth_client_set_discoverable (BluetoothClient *client,
-				   gboolean discoverable,
-                                   guint timeout)
-{
-	GError *error = NULL;
-	GDBusProxy *adapter;
-	gboolean ret;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	adapter = _bluetooth_client_get_default_adapter (client);
-	if (adapter == NULL)
-		return FALSE;
-
-	if (discoverable) {
-		ret = adapter_call_set_property_sync (ADAPTER (adapter),
-						      "DiscoverableTimeout",
-						      g_variant_new_uint32 (timeout),
-						      NULL, &error);
-		if (ret == FALSE)
-			goto bail;
-	}
-
-	ret = adapter_call_set_property_sync (ADAPTER (adapter),
-					      "Discoverable",
-					      g_variant_new_boolean (discoverable),
-					      NULL, &error);
-
-bail:
-	g_object_unref(adapter);
-
-	if (error) {
-		g_warning ("Cannot set discoverable: %s", error->message);
-		g_error_free (error);
-	}
-
-	return ret;
 }
 
 typedef struct {
