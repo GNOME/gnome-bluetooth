@@ -58,7 +58,7 @@ BluetoothAgent *bluetooth_agent_new(void);
 
 gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path);
 
-gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter);
+gboolean bluetooth_agent_register(BluetoothAgent *agent);
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent);
 
 typedef gboolean (*BluetoothAgentPasskeyFunc) (GDBusMethodInvocation *invocation,

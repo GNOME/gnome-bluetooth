@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <gio/gio.h>
 
+#include "bluetooth-client-glue.h"
 #include "bluetooth-agent.h"
 
 #define BLUEZ_SERVICE	"org.bluez"
@@ -397,23 +398,56 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path)
 	return TRUE;
 }
 
-gboolean bluetooth_agent_register(BluetoothAgent *agent, GDBusProxy *adapter)
+#define BLUEZ_SERVICE			"org.bluez"
+#define BLUEZ_MANAGER_INTERFACE		"org.bluez.Manager"
+
+static GDBusProxy *
+get_default_adapter (void)
+{
+	Manager *manager;
+	char *adapter_path;
+	Adapter *adapter;
+
+	manager = manager_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+						  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+						  BLUEZ_SERVICE,
+						  BLUEZ_MANAGER_PATH,
+						  NULL,
+						  NULL);
+	if (manager == NULL)
+		return NULL;
+	if (manager_call_default_adapter_sync (manager, &adapter_path, NULL, NULL) == FALSE) {
+		g_object_unref (manager);
+		return NULL;
+	}
+	adapter = adapter_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+						  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+						  BLUEZ_SERVICE,
+						  adapter_path,
+						  NULL,
+						  NULL);
+	g_object_unref (manager);
+	g_free (adapter_path);
+
+	return G_DBUS_PROXY (adapter);
+}
+
+gboolean bluetooth_agent_register(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 	GError *error = NULL;
 	char *path;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
-	g_return_val_if_fail (G_IS_DBUS_PROXY (adapter), FALSE);
 
 	if (priv->path != NULL) {
 		g_warning ("Agent already setup on '%s'", priv->path);
 		return FALSE;
 	}
 
-	priv->adapter = g_object_ref(adapter);
+	priv->adapter = get_default_adapter ();
 
-	path = g_path_get_basename(g_dbus_proxy_get_object_path(adapter));
+	path = g_path_get_basename(g_dbus_proxy_get_object_path(priv->adapter));
 	priv->path = g_strdup_printf("/org/bluez/agent/%s", path);
 	g_free(path);
 
