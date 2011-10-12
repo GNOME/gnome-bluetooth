@@ -74,7 +74,6 @@ AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
 GTK_REQUIRED=2.91.3
 GLIB_REQUIRED=2.25.7
-DBUS_GLIB_REQUIRED=0.74
 NOTIFY_REQUIRED=0.7.0
 NAUTILUS_SENDTO_REQUIRED=2.29.0
 NAUTILUS_SENDTO_MAX_REQUIRED=3.1.0
@@ -98,7 +97,6 @@ PKG_CHECK_MODULES(APPLET,
 
 dnl Requires for the sendto app
 PKG_CHECK_MODULES(SENDTO,
-		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gtk+-3.0
 		  gio-2.0)
 
@@ -139,15 +137,13 @@ PKG_CHECK_MODULES(LIBGNOMEBT, gtk+-3.0)
 
 dnl Requires for the private library
 PKG_CHECK_MODULES(COMMON,
-		  dbus-glib-1 >= $DBUS_GLIB_REQUIRED
 		  gmodule-2.0
 		  gio-unix-2.0
 		  gtk+-3.0)
 
 dnl Requires for the geoclue plugin
 PKG_CHECK_MODULES(GEOCLUE,
-		  gio-2.0
-		  dbus-glib-1)
+		  gio-2.0)
 
 dnl Requires for the plugins
 PKG_CHECK_MODULES(PLUGINS,
@@ -190,9 +186,6 @@ AC_SUBST(DBUS_BINDING_TOOL)
 
 GDBUS_CODEGEN="gdbus-codegen"
 AC_SUBST(GDBUS_CODEGEN)
-
-GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
-AC_SUBST(GLIB_GENMARSHAL)
 
 GOBJECT_INTROSPECTION_CHECK([0.9.5])
 

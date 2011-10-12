@@ -25,7 +25,7 @@
 #define __OBEX_AGENT_H
 
 #include <glib-object.h>
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 
@@ -58,17 +58,17 @@ ObexAgent *obex_agent_new(void);
 
 gboolean obex_agent_setup(ObexAgent *agent, const char *path);
 
-typedef gboolean (*ObexAgentReleaseFunc) (DBusGMethodInvocation *context,
+typedef gboolean (*ObexAgentReleaseFunc) (GDBusMethodInvocation *context,
 								gpointer data);
-typedef gboolean (*ObexAgentRequestFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *transfer, gpointer data);
-typedef gboolean (*ObexAgentProgressFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *transfer,
+typedef gboolean (*ObexAgentRequestFunc) (GDBusMethodInvocation *context,
+					GDBusProxy *transfer, gpointer data);
+typedef gboolean (*ObexAgentProgressFunc) (GDBusMethodInvocation *context,
+					GDBusProxy *transfer,
 					guint64 transferred, gpointer data);
-typedef gboolean (*ObexAgentCompleteFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *transfer, gpointer data);
-typedef gboolean (*ObexAgentErrorFunc) (DBusGMethodInvocation *context,
-					DBusGProxy *transfer,
+typedef gboolean (*ObexAgentCompleteFunc) (GDBusMethodInvocation *context,
+					GDBusProxy *transfer, gpointer data);
+typedef gboolean (*ObexAgentErrorFunc) (GDBusMethodInvocation *context,
+					GDBusProxy *transfer,
 					const char *message,
 					gpointer data);
 

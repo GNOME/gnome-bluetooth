@@ -32,9 +32,6 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include <dbus/dbus-glib.h>
-#include <dbus/dbus-glib-lowlevel.h>
-
 #include <obex-agent.h>
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
@@ -44,9 +41,9 @@
 
 #define RESPONSE_RETRY 1
 
-static DBusGConnection *conn = NULL;
+static GDBusConnection *conn = NULL;
 static ObexAgent *agent = NULL;
-static DBusGProxy *client_proxy = NULL;
+static GDBusProxy *client_proxy = NULL;
 
 static GtkWidget *dialog;
 static GtkWidget *label_from;
@@ -58,7 +55,7 @@ static gchar *option_device = NULL;
 static gchar *option_device_name = NULL;
 static gchar **option_files = NULL;
 
-static DBusGProxy *current_transfer = NULL;
+static GDBusProxy *current_transfer = NULL;
 static guint64 current_size = 0;
 static guint64 total_size = 0;
 static guint64 total_sent = 0;
@@ -69,49 +66,42 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
-static void send_notify(DBusGProxy *proxy, DBusGProxyCall *call, void *user_data);
+static void send_notify(GDBusProxy *proxy, GAsyncResult *res, gpointer user_data);
 
 /* Agent callbacks */
-static gboolean release_callback(DBusGMethodInvocation *context, gpointer user_data);
-static gboolean request_callback(DBusGMethodInvocation *context, DBusGProxy *transfer, gpointer user_data);
-static gboolean progress_callback(DBusGMethodInvocation *context,
-				  DBusGProxy *transfer,
+static gboolean release_callback(GDBusMethodInvocation *context, gpointer user_data);
+static gboolean request_callback(GDBusMethodInvocation *context, GDBusProxy *transfer, gpointer user_data);
+static gboolean progress_callback(GDBusMethodInvocation *context,
+				  GDBusProxy *transfer,
 				  guint64 transferred,
 				  gpointer user_data);
-static gboolean complete_callback(DBusGMethodInvocation *context, DBusGProxy *transfer, gpointer user_data);
-static gboolean error_callback(DBusGMethodInvocation *context,
-			       DBusGProxy *transfer,
+static gboolean complete_callback(GDBusMethodInvocation *context, GDBusProxy *transfer, gpointer user_data);
+static gboolean error_callback(GDBusMethodInvocation *context,
+			       GDBusProxy *transfer,
 			       const char *message,
 			       gpointer user_data);
 
-static void value_free(GValue *value)
-{
-	g_value_unset(value);
-	g_free(value);
-}
-
-static GHashTable *
+static void
 send_files (void)
 {
-	GHashTable *hash;
-	GValue *value;
+	GVariant *parameters;
+	GVariantBuilder *builder;
 
-	hash = g_hash_table_new_full(g_str_hash, g_str_equal,
-				     g_free, (GDestroyNotify) value_free);
+	builder = g_variant_builder_new (G_VARIANT_TYPE_DICTIONARY);
+	g_variant_builder_add (builder, "{sv}", "Destination", g_variant_new_string (option_device));
 
-	value = g_new0(GValue, 1);
-	g_value_init(value, G_TYPE_STRING);
-	g_value_set_string(value, option_device);
-	g_hash_table_insert(hash, g_strdup("Destination"), value);
+	parameters = g_variant_new ("(a{sv}^aso)", builder, option_files, AGENT_PATH);
 
-	dbus_g_proxy_begin_call(client_proxy, "SendFiles",
-				send_notify, NULL, NULL,
-				dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), hash,
-				G_TYPE_STRV, option_files,
-				DBUS_TYPE_G_OBJECT_PATH, AGENT_PATH,
-				G_TYPE_INVALID);
+	g_dbus_proxy_call (client_proxy,
+			   "SendFiles",
+			   parameters,
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   NULL,
+			   (GAsyncReadyCallback) send_notify,
+			   NULL);
 
-	return hash;
+	g_variant_builder_unref (builder);
 }
 
 static void
@@ -223,7 +213,14 @@ static void response_callback(GtkWidget *dialog,
 
 	if (current_transfer != NULL) {
 		obex_agent_set_error_func(agent, NULL, NULL);
-		dbus_g_proxy_call_no_reply (current_transfer, "Cancel", G_TYPE_INVALID);
+		g_dbus_proxy_call (current_transfer,
+				   "Cancel",
+				   NULL,
+				   G_DBUS_CALL_FLAGS_NONE,
+				   -1,
+				   NULL,
+				   (GAsyncReadyCallback) NULL,
+				   NULL);
 		g_object_unref (current_transfer);
 		current_transfer = NULL;
 	}
@@ -235,8 +232,8 @@ static void response_callback(GtkWidget *dialog,
 static gboolean is_palm_device(const gchar *bdaddr)
 {
 	return (g_str_has_prefix(bdaddr, "00:04:6B") ||
-			g_str_has_prefix(bdaddr, "00:07:E0") ||
-				g_str_has_prefix(bdaddr, "00:0E:20"));
+		g_str_has_prefix(bdaddr, "00:07:E0") ||
+		g_str_has_prefix(bdaddr, "00:0E:20"));
 }
 
 static void create_window(void)
@@ -342,19 +339,21 @@ static gchar *get_error_message(GError *error)
 	if (error == NULL)
 		return g_strdup(_("An unknown error occurred"));
 
-	if (error->code != DBUS_GERROR_REMOTE_EXCEPTION) {
+	if (g_dbus_error_is_remote_error (error) == FALSE) {
 		message = g_strdup(error->message);
 		goto done;
 	}
 
+	/* FIXME */
+#if 0
 	if (dbus_g_error_has_name(error, OPENOBEX_CONNECTION_FAILED) == TRUE &&
-					is_palm_device(option_device)) {
+	    is_palm_device(option_device)) {
 		message = g_strdup(_("Make sure that the remote device "
 					"is switched on and that it "
 					"accepts Bluetooth connections"));
 		goto done;
 	}
-
+#endif
 	if (*error->message == '\0')
 		message = g_strdup(_("An unknown error occurred"));
 	else
@@ -407,29 +406,29 @@ static gchar *get_device_name(const gchar *address)
 	return found_name;
 }
 
-static void get_properties_callback (DBusGProxy *proxy,
-				     DBusGProxyCall *call,
-				     void *user_data)
+static void get_properties_callback (GDBusProxy   *proxy,
+				     GAsyncResult *res,
+				     gpointer      user_data)
 {
 	GError *error = NULL;
 	gchar *filename = option_files[file_index];
 	GFile *file, *dir;
 	gchar *basename, *text, *markup;
-	GHashTable *hash;
+	GVariant *variant;
 
-	if (dbus_g_proxy_end_call (proxy, call, &error,
-				   dbus_g_type_get_map("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &hash,
-				   G_TYPE_INVALID) != FALSE) {
-		GValue *value;
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
 
-		value = g_hash_table_lookup(hash, "Size");
-		if (value) {
-			current_size = g_value_get_uint64(value);
+	if (variant) {
+		GVariant *dict, *size;
 
+		g_variant_get (variant, "(@a{sv})", &dict);
+		size = g_variant_lookup_value (dict, "Size", G_VARIANT_TYPE_UINT64);
+		if (size) {
+			current_size = g_variant_get_uint64 (size);
 			last_update = get_system_time();
 		}
 
-		g_hash_table_destroy(hash);
+		g_variant_unref (variant);
 	}
 
 	file = g_file_new_for_path (filename);
@@ -460,24 +459,29 @@ static void get_properties_callback (DBusGProxy *proxy,
 	g_free(text);
 }
 
-static gboolean request_callback(DBusGMethodInvocation *context,
-				DBusGProxy *transfer, gpointer user_data)
+static gboolean request_callback(GDBusMethodInvocation *invocation,
+				GDBusProxy *transfer, gpointer user_data)
 {
 	g_assert (current_transfer == NULL);
 
-	dbus_g_proxy_begin_call(transfer, "GetProperties",
-				get_properties_callback, NULL, NULL,
-				G_TYPE_INVALID);
-
 	current_transfer = g_object_ref (transfer);
+	g_dbus_proxy_call (current_transfer,
+			   "GetProperties",
+			   NULL,
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   NULL,
+			   (GAsyncReadyCallback) get_properties_callback,
+			   NULL);
 
-	dbus_g_method_return(context, "");
+	g_dbus_method_invocation_return_value (invocation,
+					       g_variant_new ("(s)", ""));
 
 	return TRUE;
 }
 
-static gboolean progress_callback(DBusGMethodInvocation *context,
-				DBusGProxy *transfer, guint64 transferred,
+static gboolean progress_callback(GDBusMethodInvocation *invocation,
+				GDBusProxy *transfer, guint64 transferred,
 							gpointer user_data)
 {
 	gint64 current_time;
@@ -530,13 +534,13 @@ static gboolean progress_callback(DBusGMethodInvocation *context,
 	g_free(text);
 
 done:
-	dbus_g_method_return(context);
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	return TRUE;
 }
 
-static gboolean complete_callback(DBusGMethodInvocation *context,
-				DBusGProxy *transfer, gpointer user_data)
+static gboolean complete_callback(GDBusMethodInvocation *invocation,
+				GDBusProxy *transfer, gpointer user_data)
 {
 	total_sent += current_size;
 
@@ -549,15 +553,15 @@ static gboolean complete_callback(DBusGMethodInvocation *context,
 	if (file_index == file_count)
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
-	dbus_g_method_return(context);
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	return TRUE;
 }
 
-static gboolean release_callback(DBusGMethodInvocation *context,
+static gboolean release_callback(GDBusMethodInvocation *invocation,
 							gpointer user_data)
 {
-	dbus_g_method_return(context);
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	agent = NULL;
 
@@ -570,8 +574,8 @@ static gboolean release_callback(DBusGMethodInvocation *context,
 	return TRUE;
 }
 
-static gboolean error_callback(DBusGMethodInvocation *context,
-			       DBusGProxy *transfer,
+static gboolean error_callback(GDBusMethodInvocation *invocation,
+			       GDBusProxy *transfer,
 			       const char *message,
 			       gpointer user_data)
 {
@@ -590,18 +594,22 @@ static gboolean error_callback(DBusGMethodInvocation *context,
 		agent = NULL;
 	}
 
-	dbus_g_method_return(context);
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	return TRUE;
 }
 
-static void send_notify(DBusGProxy *proxy,
-				DBusGProxyCall *call, void *user_data)
+static void
+send_notify (GDBusProxy   *proxy,
+	     GAsyncResult *res,
+	     gpointer      user_data)
 {
 	GError *error = NULL;
+	GVariant *variant;
 
-	if (dbus_g_proxy_end_call(proxy, call, &error,
-						G_TYPE_INVALID) == FALSE) {
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
+
+	if (variant == NULL) {
 		char *message;
 
 		message = get_error_message(error);
@@ -618,6 +626,8 @@ static void send_notify(DBusGProxy *proxy,
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), NULL);
 
 	first_update = get_system_time();
+
+	g_variant_unref (variant);
 }
 
 static void
@@ -807,7 +817,7 @@ int main(int argc, char *argv[])
 			total_size += st.st_size;
 	}
 
-	conn = dbus_g_bus_get(DBUS_BUS_SESSION, &error);
+	conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
 	if (conn == NULL) {
 		if (error != NULL) {
 			g_printerr("Connecting to session bus failed: %s\n",
@@ -819,24 +829,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	dbus_g_object_register_marshaller(marshal_VOID__STRING_STRING,
-					G_TYPE_NONE, G_TYPE_STRING,
-					G_TYPE_STRING, G_TYPE_INVALID);
-
-	dbus_g_object_register_marshaller(marshal_VOID__STRING_STRING_UINT64,
-				G_TYPE_NONE, G_TYPE_STRING,
-				G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_INVALID);
-
-	dbus_g_object_register_marshaller(marshal_VOID__UINT64,
-				G_TYPE_NONE, G_TYPE_UINT64, G_TYPE_INVALID);
-
-	dbus_g_object_register_marshaller(marshal_VOID__STRING_STRING_STRING,
-					  G_TYPE_NONE,
-					  DBUS_TYPE_G_OBJECT_PATH,
-					  G_TYPE_STRING,
-					  G_TYPE_STRING,
-					  G_TYPE_INVALID);
-
 	if (option_device_name == NULL)
 		option_device_name = get_device_name(option_device);
 	if (option_device_name == NULL)
@@ -844,8 +836,14 @@ int main(int argc, char *argv[])
 
 	create_window();
 
-	client_proxy = dbus_g_proxy_new_for_name(conn, "org.openobex.client",
-					"/", "org.openobex.Client");
+	client_proxy = g_dbus_proxy_new_sync (conn,
+					      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
+					      NULL,
+					      "org.openobex.client",
+					      "/",
+					      "org.openobex.Client",
+					      NULL,
+					      NULL);
 
 	setup_agent ();
 
@@ -853,9 +851,8 @@ int main(int argc, char *argv[])
 
 	gtk_main();
 
-	g_object_unref(client_proxy);
-
-	dbus_g_connection_unref(conn);
+	g_object_unref (client_proxy);
+	g_object_unref (conn);
 
 	g_strfreev(option_files);
 	g_free(option_device);

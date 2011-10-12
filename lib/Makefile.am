@@ -12,7 +12,6 @@ libcommon_la_SOURCES =						\
 		bluetooth-client-private.h			\
 		bluetooth-agent.h bluetooth-agent.c		\
 		bluetooth-killswitch.h bluetooth-killswitch.c	\
-		obex-agent.h obex-agent.c			\
 		bluetooth-plugin-manager.c			\
 		bluetooth-plugin-manager.h			\
 		bluetooth-enums.h				\
@@ -27,7 +26,6 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-utils.c		\
 	bluetooth-agent.c		\
 	bluetooth-killswitch.c		\
-	marshal.c			\
 	gnome-bluetooth-enum-types.c	\
 	bluetooth-chooser.c		\
 	bluetooth-filter-widget.c	\
@@ -39,7 +37,6 @@ libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
 	bluetooth-agent.h		\
 	bluetooth-killswitch.h		\
-	marshal.h			\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
 	bluetooth-client-glue.h
@@ -109,10 +106,8 @@ CLEANFILES += $(gir_DATA) $(typelib_DATA)
 
 endif # HAVE_INTROSPECTION
 
-BUILT_SOURCES = marshal.h marshal.c \
-		bluetooth-client-glue.h \
+BUILT_SOURCES = bluetooth-client-glue.h \
 		bluetooth-client-glue.c \
-		obex-agent-glue.h \
 		gnome-bluetooth-enum-types.h \
 		gnome-bluetooth-enum-types.c
 
@@ -132,26 +127,14 @@ test_plugins_LDADD = libcommon.la
 
 test_class_LDADD = libcommon.la
 
-EXTRA_DIST += marshal.list \
-		bluetooth-client.xml \
-		obex-agent.xml \
-		gnome-bluetooth.symbols
+EXTRA_DIST += bluetooth-client.xml gnome-bluetooth.symbols
 
 MAINTAINERCLEANFILES = Makefile.in
-
-marshal.h: marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header > $@
-
-marshal.c: marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
 
 bluetooth-client-glue.c: bluetooth-client-glue.h
 
 bluetooth-client-glue.h: bluetooth-client.xml
 	$(AM_V_GEN) $(GDBUS_CODEGEN) --c-namespace= --generate-c-code=bluetooth-client-glue --interface-prefix=org.bluez $<
-
-obex-agent-glue.h: obex-agent.xml
-	$(AM_V_GEN) $(DBUS_BINDING_TOOL) --prefix=obex_agent --mode=glib-server --output=$@ $<
 
 gnome_bluetooth_headers_to_scan_for_enums = bluetooth-enums.h
 # Generate the enums source code, with glib-mkenums:
