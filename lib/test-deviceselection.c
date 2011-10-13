@@ -284,7 +284,7 @@ static void device_changed_cb (GObject *object,
 {
 	char *device;
 
-	g_object_get (G_OBJECT (object), "device", &device, NULL);
+	g_object_get (object, "device", &device, NULL);
 	g_message ("Property \"device\" changed to '%s'", device);
 
 	gtk_dialog_set_response_sensitive (dialog,
