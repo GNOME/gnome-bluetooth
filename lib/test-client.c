@@ -58,7 +58,7 @@ static void select_callback(GtkTreeSelection *selection, gpointer user_data)
 		return;
 	}
 
-	bluetooth_client_dump_device (model, &iter, FALSE);
+	bluetooth_client_dump_device (model, &iter);
 }
 
 static void row_inserted(GtkTreeModel *model, GtkTreePath *path,
