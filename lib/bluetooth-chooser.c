@@ -871,8 +871,14 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (priv->search_label);
 	gtk_widget_show (hbox);
 
+	if (priv->show_searching) {
+		gboolean discovering;
+
+		g_object_get (G_OBJECT (priv->client), "default-adapter-discovering", &discovering, NULL);
+		set_search_label (self, discovering);
+	}
+
 	gtk_box_pack_start (GTK_BOX (priv->search_hbox), hbox, FALSE, TRUE, 0);
-	//FIXME check whether the default adapter is discovering right now
 
 	/* The treeview */
 	priv->scrolled_window = create_treeview (self);
