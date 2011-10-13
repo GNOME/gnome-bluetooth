@@ -363,6 +363,25 @@ bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 }
 
 /**
+ * bluetooth_chooser_dump_selected_device:
+ * @self: A #BluetoothChooser widget.
+ *
+ * Prints all the known attributes for the currently selected device
+ * on the standard output. Useful for debugging.
+ **/
+void
+bluetooth_chooser_dump_selected_device (BluetoothChooser *self)
+{
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+
+	gtk_tree_selection_get_selected (priv->selection, &model, &iter);
+
+	bluetooth_client_dump_device (model, &iter);
+}
+
+/**
  * bluetooth_chooser_get_model:
  * @self: A #BluetoothChooser widget.
  *
