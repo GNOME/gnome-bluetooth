@@ -518,7 +518,7 @@ switch_discoverable_active_changed (GtkSwitch        *button,
 				    GParamSpec       *spec,
 				    CcBluetoothPanel *self)
 {
-	g_object_set (G_OBJECT (self->priv->client), "discoverable",
+	g_object_set (G_OBJECT (self->priv->client), "default-adapter-discoverable",
 		      gtk_switch_get_active (button), NULL);
 }
 
@@ -530,7 +530,7 @@ cc_bluetooth_panel_update_visibility (CcBluetoothPanel *self)
 	char *name;
 
 	button = GTK_SWITCH (WID ("switch_discoverable"));
-	g_object_get (G_OBJECT (self->priv->client), "discoverable", &discoverable, NULL);
+	g_object_get (G_OBJECT (self->priv->client), "default-adapter-discoverable", &discoverable, NULL);
 	g_signal_handlers_block_by_func (button, switch_discoverable_active_changed, self);
 	gtk_switch_set_active (button, discoverable);
 	g_signal_handlers_unblock_by_func (button, switch_discoverable_active_changed, self);
