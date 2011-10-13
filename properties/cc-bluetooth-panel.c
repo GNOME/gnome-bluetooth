@@ -605,6 +605,59 @@ show_confirm_dialog (CcBluetoothPanel *self,
 	return FALSE;
 }
 
+static gboolean
+remove_selected_device (CcBluetoothPanel *self)
+{
+	GValue value = { 0, };
+	char *device, *adapter;
+	GDBusProxy *adapter_proxy;
+	GError *error = NULL;
+	GVariant *ret;
+
+	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
+							"proxy", &value) == FALSE) {
+		return FALSE;
+	}
+	device = g_strdup (g_dbus_proxy_get_object_path (g_value_get_object (&value)));
+	g_value_unset (&value);
+
+	g_object_get (G_OBJECT (self->priv->client), "default-adapter", &adapter, NULL);
+	adapter_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+						       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+						       NULL,
+						       "org.bluez",
+						       adapter,
+						       "org.bluez.Adapter",
+						       NULL,
+						       &error);
+	g_free (adapter);
+	if (adapter_proxy == NULL) {
+		g_warning ("Failed to create a GDBusProxy for the default adapter: %s", error->message);
+		g_error_free (error);
+		g_free (device);
+		return FALSE;
+	}
+
+	ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (adapter_proxy),
+				      "RemoveDevice",
+				      g_variant_new ("(o)", device),
+				      G_DBUS_CALL_FLAGS_NONE,
+				      -1,
+				      NULL,
+				      &error);
+	if (ret == NULL) {
+		g_warning ("Failed to remove device '%s': %s", device, error->message);
+		g_error_free (error);
+	} else {
+		g_variant_unref (ret);
+	}
+
+	g_object_unref (adapter_proxy);
+	g_free (device);
+
+	return (ret != NULL);
+}
+
 /* Treeview buttons */
 static void
 delete_clicked (GtkToolButton    *button,
@@ -618,7 +671,7 @@ delete_clicked (GtkToolButton    *button,
 	name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (self->priv->chooser));
 
 	if (show_confirm_dialog (self, name) != FALSE) {
-		if (bluetooth_client_remove_device (self->priv->client, address))
+		if (remove_selected_device (self))
 			bluetooth_plugin_manager_device_deleted (address);
 	}
 
