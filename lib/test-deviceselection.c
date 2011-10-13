@@ -32,7 +32,9 @@
 #include "bluetooth-chooser.h"
 #include "bluetooth-chooser-button.h"
 #include "bluetooth-chooser-combo.h"
+#include "bluetooth-chooser-private.h"
 #include "bluetooth-client.h"
+#include "bluetooth-client-private.h"
 #include "bluetooth-utils.h"
 #include "bluetooth-filter-widget.h"
 
@@ -283,6 +285,11 @@ static void device_changed_cb (GObject *object,
 			       GtkDialog *dialog)
 {
 	char *device;
+	BluetoothChooser *chooser;
+	GtkWidget *tree;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
 
 	g_object_get (object, "device", &device, NULL);
 	g_message ("Property \"device\" changed to '%s'", device);
@@ -290,7 +297,14 @@ static void device_changed_cb (GObject *object,
 	gtk_dialog_set_response_sensitive (dialog,
 					  GTK_RESPONSE_ACCEPT,
 					  device != NULL);
-	//bluetooth_client_dump_device (model, iter, recurse);
+
+	g_object_get (object, "chooser", &chooser, NULL);
+	tree = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (chooser));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
+	gtk_tree_selection_get_selected (selection, &model, &iter);
+	if (model == NULL)
+		return;
+	bluetooth_client_dump_device (model, &iter, FALSE);
 }
 
 static GtkWidget *
