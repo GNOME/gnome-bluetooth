@@ -383,33 +383,33 @@ static void
 cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 {
 	KillswitchState state;
-	char *bdaddr;
+	char *path;
 	gboolean powered, sensitive;
 	GtkSwitch *button;
 
 	g_object_get (G_OBJECT (self->priv->client),
-		      "default-adapter", &bdaddr,
+		      "default-adapter", &path,
 		      "default-adapter-powered", &powered,
 		      NULL);
 	state = bluetooth_killswitch_get_state (self->priv->killswitch);
 
 	g_debug ("Updating power, default adapter: %s (powered: %s), killswitch: %s",
-		 bdaddr ? bdaddr : "(none)",
+		 path ? path : "(none)",
 		 powered ? "on" : "off",
 		 bluetooth_killswitch_state_to_string (state));
 
-	if (bdaddr == NULL &&
+	if (path == NULL &&
 	    bluetooth_killswitch_has_killswitches (self->priv->killswitch) &&
 	    state != KILLSWITCH_STATE_HARD_BLOCKED) {
 		g_debug ("Default adapter is unpowered, but should be available");
 		sensitive = TRUE;
 		cc_bluetooth_panel_update_treeview_message (self, _("Bluetooth is disabled"));
-	} else if (bdaddr == NULL &&
+	} else if (path == NULL &&
 		   state == KILLSWITCH_STATE_HARD_BLOCKED) {
 		g_debug ("Bluetooth is Hard blocked");
 		sensitive = FALSE;
 		cc_bluetooth_panel_update_treeview_message (self, _("Bluetooth is disabled by hardware switch"));
-	} else if (bdaddr == NULL) {
+	} else if (path == NULL) {
 		sensitive = FALSE;
 		g_debug ("No Bluetooth available");
 		cc_bluetooth_panel_update_treeview_message (self, _("No Bluetooth adapters found"));
@@ -419,7 +419,7 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 		cc_bluetooth_panel_update_treeview_message (self, NULL);
 	}
 
-	g_free (bdaddr);
+	g_free (path);
 	gtk_widget_set_sensitive (WID ("box_power") , sensitive);
 	gtk_widget_set_sensitive (WID ("box_vis") , sensitive);
 
