@@ -180,21 +180,6 @@ switch_connected_active_changed (GtkSwitch        *button,
 	g_free (proxy);
 }
 
-static void
-dump_current_device (CcBluetoothPanel *self)
-{
-	GtkWidget *tree;
-	GtkTreeModel *model;
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-
-	tree = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (self->priv->chooser));
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
-	gtk_tree_selection_get_selected (selection, &model, &iter);
-
-	bluetooth_client_dump_device (model, &iter, FALSE);
-}
-
 enum {
 	NOTEBOOK_PAGE_EMPTY = 0,
 	NOTEBOOK_PAGE_PROPS = 1
@@ -280,7 +265,7 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		GHashTable *services;
 
 		if (self->priv->debug)
-			dump_current_device (self);
+			bluetooth_chooser_dump_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 
 		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
 
