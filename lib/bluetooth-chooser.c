@@ -827,7 +827,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_box_set_spacing (GTK_BOX(self), 18);
 	gtk_container_set_border_width (GTK_CONTAINER(self), 0);
 
-	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (self), vbox, TRUE, TRUE, 0);
 
@@ -852,7 +852,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_set_name (priv->search_hbox, "search_hbox");
 	if (priv->show_searching)
 		gtk_widget_show (priv->search_hbox);
-	gtk_box_pack_start (GTK_BOX (vbox), priv->search_hbox, FALSE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (vbox), priv->search_hbox, FALSE, TRUE, 0);
 	gtk_widget_set_no_show_all (priv->search_hbox, TRUE);
 
 	/* Setup the adapter disco mode callback for the search button */
@@ -871,7 +871,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (priv->search_label);
 	gtk_widget_show (hbox);
 
-	gtk_box_pack_end (GTK_BOX (priv->search_hbox), hbox, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (priv->search_hbox), hbox, FALSE, TRUE, 0);
 	//FIXME check whether the default adapter is discovering right now
 
 	/* The treeview */
