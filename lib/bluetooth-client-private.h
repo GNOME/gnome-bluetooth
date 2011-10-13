@@ -38,8 +38,6 @@ typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client,
 gboolean bluetooth_client_create_device(BluetoothClient *client,
 			const char *address, const char *agent,
 			BluetoothClientCreateDeviceFunc func, gpointer data);
-gboolean bluetooth_client_remove_device (BluetoothClient *client,
-					 const char      *address);
 
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
