@@ -1872,8 +1872,7 @@ services_foreach (const char *service, gpointer _value, GString *str)
 
 void
 bluetooth_client_dump_device (GtkTreeModel *model,
-			      GtkTreeIter *iter,
-			      gboolean recurse)
+			      GtkTreeIter *iter)
 {
 	GDBusProxy *proxy;
 	char *address, *alias, *name, *icon, **uuids;
@@ -1950,19 +1949,5 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 	if (services != NULL)
 		g_hash_table_unref (services);
 	g_strfreev (uuids);
-
-	if (recurse == FALSE)
-		return;
-
-	if (is_adapter != FALSE) {
-		GtkTreeIter child;
-
-		if (gtk_tree_model_iter_children (model, &child, iter) == FALSE)
-			return;
-		bluetooth_client_dump_device (model, &child, FALSE);
-		while (gtk_tree_model_iter_next (model, &child))
-			bluetooth_client_dump_device (model, &child, FALSE);
-	}
-
 }
 

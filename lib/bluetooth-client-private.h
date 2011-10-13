@@ -56,8 +56,7 @@ gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
 					      gpointer data);
 
 void bluetooth_client_dump_device (GtkTreeModel *model,
-				   GtkTreeIter *iter,
-				   gboolean recurse);
+				   GtkTreeIter *iter);
 
 G_END_DECLS
 
