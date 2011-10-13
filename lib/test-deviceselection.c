@@ -304,7 +304,7 @@ static void device_changed_cb (GObject *object,
 	gtk_tree_selection_get_selected (selection, &model, &iter);
 	if (model == NULL)
 		return;
-	bluetooth_client_dump_device (model, &iter, FALSE);
+	bluetooth_client_dump_device (model, &iter);
 }
 
 static GtkWidget *
