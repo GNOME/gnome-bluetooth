@@ -1148,24 +1148,26 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (discoverable) {
 		ret = adapter_call_set_property_sync (ADAPTER (adapter),
 						      "DiscoverableTimeout",
-						      g_variant_new_uint32 (timeout),
+						      g_variant_new_variant (g_variant_new_uint32 (timeout)),
 						      NULL, &error);
-		if (ret == FALSE)
-			goto bail;
+		if (ret == FALSE) {
+			g_warning ("Failed to set DiscoverableTimeout to %d: %s", timeout, error->message);
+			g_error_free (error);
+			g_object_unref (adapter);
+			return ret;
+		}
 	}
 
 	ret = adapter_call_set_property_sync (ADAPTER (adapter),
 					      "Discoverable",
-					      g_variant_new_boolean (discoverable),
+					      g_variant_new_variant (g_variant_new_boolean (discoverable)),
 					      NULL, &error);
-
-bail:
-	g_object_unref(adapter);
-
-	if (error) {
-		g_warning ("Cannot set discoverable: %s", error->message);
+	if (ret == FALSE) {
+		g_warning ("Failed to set Discoverable to %d: %s", discoverable, error->message);
 		g_error_free (error);
 	}
+
+	g_object_unref(adapter);
 
 	return ret;
 }
