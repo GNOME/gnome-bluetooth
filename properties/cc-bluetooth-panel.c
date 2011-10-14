@@ -498,13 +498,19 @@ browse_callback (GtkButton        *button,
 }
 
 /* Visibility/Discoverable */
+static void discoverable_changed (BluetoothClient  *client,
+				  GParamSpec       *spec,
+				  CcBluetoothPanel *self);
+
 static void
 switch_discoverable_active_changed (GtkSwitch        *button,
 				    GParamSpec       *spec,
 				    CcBluetoothPanel *self)
 {
+	g_signal_handlers_block_by_func (self->priv->client, discoverable_changed, self);
 	g_object_set (G_OBJECT (self->priv->client), "default-adapter-discoverable",
 		      gtk_switch_get_active (button), NULL);
+	g_signal_handlers_unblock_by_func (self->priv->client, discoverable_changed, self);
 }
 
 static void
