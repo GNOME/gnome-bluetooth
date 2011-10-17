@@ -32,8 +32,6 @@
 #include <bluetooth-killswitch.h>
 #include <bluetooth-agent.h>
 
-#include <marshal.h>
-
 static gpointer
 bluetooth_simple_device_copy (gpointer boxed)
 {
@@ -1002,23 +1000,23 @@ bluetooth_applet_class_init (BluetoothAppletClass *klass)
 	g_object_class_install_property (gobject_class, PROP_FULL_MENU, properties[PROP_FULL_MENU]);
 
 	signals[SIGNAL_DEVICES_CHANGED] = g_signal_new ("devices-changed", G_TYPE_FROM_CLASS (gobject_class),
-							G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE, 0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+							G_SIGNAL_RUN_FIRST | G_SIGNAL_NO_RECURSE, 0, NULL, NULL, NULL,
 							G_TYPE_NONE, 0);
 
 	signals[SIGNAL_PINCODE_REQUEST] = g_signal_new ("pincode-request", G_TYPE_FROM_CLASS (gobject_class),
-							G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_BOOLEAN,
+							G_SIGNAL_RUN_FIRST, 0, NULL, NULL, NULL,
 							G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
 
 	signals[SIGNAL_CONFIRM_REQUEST] = g_signal_new ("confirm-request", G_TYPE_FROM_CLASS (gobject_class),
-							G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_UINT,
+							G_SIGNAL_RUN_FIRST, 0, NULL, NULL, NULL,
 							G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
 
 	signals[SIGNAL_AUTHORIZE_REQUEST] = g_signal_new ("auth-request", G_TYPE_FROM_CLASS (gobject_class),
-							  G_SIGNAL_RUN_FIRST, 0, NULL, NULL, marshal_VOID__STRING_STRING_STRING_STRING,
+							  G_SIGNAL_RUN_FIRST, 0, NULL, NULL, NULL,
 							  G_TYPE_NONE, 4, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	signals[SIGNAL_CANCEL_REQUEST] = g_signal_new ("cancel-request", G_TYPE_FROM_CLASS (gobject_class),
-						       G_SIGNAL_RUN_FIRST, 0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+						       G_SIGNAL_RUN_FIRST, 0, NULL, NULL, NULL,
 						       G_TYPE_NONE, 0);
 }
 

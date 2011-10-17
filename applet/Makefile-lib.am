@@ -1,27 +1,17 @@
 CLEANFILES =
 EXTRA_DIST =
-BUILT_SOURCES = marshal.h marshal.c
 
 pkglib_LTLIBRARIES = libgnome-bluetooth-applet.la
 
 libgnome_bluetooth_applet_la_SOURCES = 	\
 	bluetooth-applet.c		\
-	bluetooth-applet.h		\
-	marshal.c
+	bluetooth-applet.h
 
 libgnome_bluetooth_applet_la_LIBADD = $(LIBGNOMEBT_LIBS) $(top_builddir)/lib/libcommon.la
 
 libgnome_bluetooth_applet_la_LDFLAGS = -no-undefined
 
 AM_CFLAGS = -I$(srcdir) -I$(top_srcdir)/lib $(LIBGNOMEBT_CFLAGS) $(COMMON_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
-
-marshal.h: marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header > $@
-
-marshal.c: marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=marshal $< --header --body > $@
-
-EXTRA_DIST += marshal.list
 
 include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =
