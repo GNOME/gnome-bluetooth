@@ -98,6 +98,11 @@ enum {
 	DEVICE_TYPE_FILTER_NUM_COLS
 };
 
+enum {
+	TREEVIEW_COLUMN_DEVICE = 0,
+	TREEVIEW_COLUMN_TYPE = 1
+};
+
 static void
 bonded_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	      GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
@@ -1029,10 +1034,20 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 				g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
 		}
 		break;
-	case PROP_SHOW_DEVICE_TYPE_COLUMN:
-		gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 1),
+	case PROP_SHOW_DEVICE_TYPE_COLUMN: {
+		GtkTreeViewColumn *column;
+
+		column = gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), TREEVIEW_COLUMN_TYPE);
+		gtk_tree_view_column_set_visible (column,
 						  g_value_get_boolean (value));
+
+		column = gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), TREEVIEW_COLUMN_DEVICE);
+		if (g_value_get_boolean (value))
+			gtk_tree_view_column_set_title (column, _("Device"));
+		else
+			gtk_tree_view_column_set_title (column, _("Devices"));
 		break;
+		}
 	case PROP_SHOW_DEVICE_CATEGORY:
 		priv->show_device_category = g_value_get_boolean (value);
 		if (priv->internal_filter) {
@@ -1091,7 +1106,7 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		break;
 	case PROP_SHOW_DEVICE_TYPE_COLUMN:
 		g_value_set_boolean (value,
-				     gtk_tree_view_column_get_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 1)));
+				     gtk_tree_view_column_get_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), TREEVIEW_COLUMN_TYPE)));
 		break;
 	case PROP_SHOW_DEVICE_CATEGORY:
 		g_value_set_boolean (value, priv->show_device_category);
