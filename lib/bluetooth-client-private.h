@@ -42,19 +42,6 @@ gboolean bluetooth_client_create_device(BluetoothClient *client,
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
 
-typedef void (*BluetoothClientConnectFunc) (BluetoothClient *client,
-					    gboolean success,
-					    gpointer data);
-
-gboolean bluetooth_client_connect_service(BluetoothClient *client,
-					  const char *device,
-					  BluetoothClientConnectFunc func,
-					  gpointer data);
-gboolean bluetooth_client_disconnect_service (BluetoothClient *client,
-					      const char *device,
-					      BluetoothClientConnectFunc func,
-					      gpointer data);
-
 void bluetooth_client_dump_device (GtkTreeModel *model,
 				   GtkTreeIter *iter);
 

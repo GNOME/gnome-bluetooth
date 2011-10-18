@@ -1605,9 +1605,7 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 }
 
 typedef struct {
-	BluetoothClientConnectFunc func;
-	gpointer data;
-	BluetoothClient *client;
+	GSimpleAsyncResult *simple;
 	/* used for disconnect */
 	GList *services;
 } ConnectData;
@@ -1617,91 +1615,16 @@ connect_callback (GDBusProxy   *proxy,
 		  GAsyncResult *res,
 		  ConnectData  *conndata)
 {
-	GError *error = NULL;
-	gboolean retval = TRUE;
+	gboolean retval;
 
-	if (device_call_connect_finish (DEVICE (proxy), res, &error) == FALSE) {
-		retval = FALSE;
-		g_error_free (error);
-	}
+	retval = device_call_connect_finish (DEVICE (proxy), res, NULL);
 
-	if (conndata->func)
-		conndata->func(conndata->client, retval, conndata->data);
+	g_simple_async_result_set_op_res_gboolean (conndata->simple, retval);
+	g_simple_async_result_complete_in_idle (conndata->simple);
 
-	g_object_unref (conndata->client);
+	g_object_unref (conndata->simple);
 	g_object_unref (proxy);
 	g_free (conndata);
-}
-
-/**
- * bluetooth_client_connect_service:
- *
- * @client: a #BluetoothClient
- * @device: the DBUS path on which to operate
- * @func: (scope async): a callback to call when the connection is complete
- * @user_data:
- *
- * Returns: TRUE if the operation was started successfully, FALSE otherwise
- */
-gboolean
-bluetooth_client_connect_service (BluetoothClient            *client,
-				  const char                 *device,
-				  BluetoothClientConnectFunc  func,
-				  gpointer                    data)
-{
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	ConnectData *conndata;
-	GDBusProxy *proxy;
-	GHashTable *table;
-	GtkTreeIter iter;
-	const char *iface_name;
-	guint i;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-	g_return_val_if_fail (device != NULL, FALSE);
-
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
-		return FALSE;
-
-	gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
-			   BLUETOOTH_COLUMN_SERVICES, &table,
-			   BLUETOOTH_COLUMN_PROXY, &proxy,
-			   -1);
-	if (table == NULL) {
-		if (proxy != NULL)
-			g_object_unref (proxy);
-		return FALSE;
-	}
-
-	conndata = g_new0 (ConnectData, 1);
-
-	iface_name = NULL;
-	for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
-		if (g_hash_table_lookup_extended (table, connectable_interfaces[i], NULL, NULL) != FALSE) {
-			iface_name = connectable_interfaces[i];
-			break;
-		}
-	}
-	g_hash_table_unref (table);
-
-	if (iface_name == NULL) {
-		g_printerr("No supported services on the '%s' device\n", device);
-		g_free (conndata);
-		if (proxy != NULL)
-			g_object_unref (proxy);
-		return FALSE;
-	}
-
-	conndata->func = func;
-	conndata->data = data;
-	conndata->client = g_object_ref (client);
-
-	device_call_connect (DEVICE (proxy),
-			     NULL,
-			     (GAsyncReadyCallback) connect_callback,
-			     conndata);
-
-	return TRUE;
 }
 
 static void
@@ -1709,18 +1632,17 @@ disconnect_callback (GDBusProxy   *proxy,
 		     GAsyncResult *res,
 		     ConnectData  *conndata)
 {
-	GError *error = NULL;
-	gboolean retval = TRUE;
+	gboolean retval;
 
-	if (device_call_disconnect_finish (DEVICE (proxy), res, &error) == FALSE) {
-		retval = FALSE;
-		g_error_free (error);
-	}
+	retval = device_call_disconnect_finish (DEVICE (proxy), res, NULL);
 
 	if (conndata->services != NULL) {
 		GDBusProxy *service;
+		BluetoothClient *client;
 
-		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, conndata->client);
+		client = (BluetoothClient *) g_async_result_get_source_object (G_ASYNC_RESULT (conndata->simple));
+		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, client);
+		g_object_unref (client);
 
 		conndata->services = g_list_remove (conndata->services, conndata->services->data);
 
@@ -1738,11 +1660,11 @@ disconnect_callback (GDBusProxy   *proxy,
 		return;
 	}
 
-	if (conndata->func)
-		conndata->func(conndata->client, retval, conndata->data);
+	g_simple_async_result_set_op_res_gboolean (conndata->simple, retval);
+	g_simple_async_result_complete_in_idle (conndata->simple);
 
-	g_object_unref (conndata->client);
 	g_object_unref (proxy);
+	g_object_unref (conndata->simple);
 	g_free (conndata);
 }
 
@@ -1782,50 +1704,107 @@ rev_sort_services (const char *servicea, const char *serviceb)
 }
 
 /**
- * bluetooth_client_disconnect_service:
+ * bluetooth_client_connect_service:
  *
  * @client: a #BluetoothClient
  * @device: the DBUS path on which to operate
- * @func: (scope async): a callback to call when the disconnection is complete
- * @user_data:
+ * @connect: Whether try to connect or disconnect from services on a device
+ * @cancellable: optional #GCancellable object, %NULL to ignore.
+ * @callback: (scope async): a #GAsyncReadyCallback to call when the connection is complete
+ * @user_data: the data to pass to callback function
  *
- * Returns: TRUE if the operation was started successfully, FALSE otherwise
- */
-gboolean
-bluetooth_client_disconnect_service (BluetoothClient            *client,
-				     const char                 *device,
-				     BluetoothClientConnectFunc  func,
-				     gpointer                    data)
+ * When the connection operation is finished, @callback will be called. You can
+ * then call bluetooth_client_connect_service_finish() to get the result of the
+ * operation.
+ **/
+void
+bluetooth_client_connect_service (BluetoothClient     *client,
+				  const char          *device,
+				  gboolean             connect,
+				  GCancellable        *cancellable,
+				  GAsyncReadyCallback  callback,
+				  gpointer             user_data)
 {
+	GSimpleAsyncResult *simple;
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	ConnectData *conndata;
 	GDBusProxy *proxy;
 	GHashTable *table;
 	GtkTreeIter iter;
+	guint i;
 
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-	g_return_val_if_fail (device != NULL, FALSE);
+	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
+	g_return_if_fail (device != NULL);
 
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
-		return FALSE;
+	simple = g_simple_async_result_new (G_OBJECT (client),
+					    callback,
+					    user_data,
+					    bluetooth_client_connect_service);
 
-	gtk_tree_model_get(GTK_TREE_MODEL (priv->store), &iter,
-			   BLUETOOTH_COLUMN_PROXY, &proxy,
-			   BLUETOOTH_COLUMN_SERVICES, &table,
-			   -1);
+	if (get_iter_from_path (priv->store, &iter, device) == FALSE) {
+		g_simple_async_result_set_op_res_gboolean (simple, FALSE);
+		g_object_unref (simple);
+		return;
+	}
+
+	if (cancellable != NULL) {
+		g_object_set_data_full (G_OBJECT (simple), "cancellable",
+					g_object_ref (cancellable), g_object_unref);
+		g_object_set_data_full (G_OBJECT (simple), "device",
+					g_strdup (device), g_free);
+	}
+
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &proxy,
+			    BLUETOOTH_COLUMN_SERVICES, &table,
+			    -1);
+
+	/* No proxy? Let's leave it there */
 	if (proxy == NULL) {
 		if (table != NULL)
 			g_hash_table_unref (table);
-		return FALSE;
+		g_simple_async_result_set_op_res_gboolean (simple, FALSE);
+		g_object_unref (simple);
+		return;
+	}
+
+	if (connect && table == NULL) {
+		if (proxy != NULL)
+			g_object_unref (proxy);
+		g_simple_async_result_set_op_res_gboolean (simple, FALSE);
+		g_object_unref (simple);
+		return;
+	} else if (connect) {
+		const char *iface_name;
+
+		iface_name = NULL;
+		for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
+			if (g_hash_table_lookup_extended (table, connectable_interfaces[i], NULL, NULL) != FALSE) {
+				iface_name = connectable_interfaces[i];
+				break;
+			}
+		}
+		g_hash_table_unref (table);
+
+		if (iface_name == NULL) {
+			g_printerr("No supported services on the '%s' device\n", device);
+			if (proxy != NULL)
+				g_object_unref (proxy);
+			g_simple_async_result_set_op_res_gboolean (simple, FALSE);
+			g_object_unref (simple);
+			return;
+		}
 	}
 
 	conndata = g_new0 (ConnectData, 1);
+	conndata->simple = simple;
 
-	conndata->func = func;
-	conndata->data = data;
-	conndata->client = g_object_ref (client);
-
-	if (table == NULL) {
+	if (connect) {
+		device_call_connect (DEVICE (proxy),
+				     NULL,
+				     (GAsyncReadyCallback) connect_callback,
+				     conndata);
+	} else if (table == NULL) {
 		device_call_disconnect (DEVICE (proxy),
 					NULL,
 					(GAsyncReadyCallback) disconnect_callback,
@@ -1837,7 +1816,7 @@ bluetooth_client_disconnect_service (BluetoothClient            *client,
 		g_hash_table_unref (table);
 		conndata->services = g_list_sort (conndata->services, (GCompareFunc) rev_sort_services);
 
-		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, conndata->client);
+		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, client);
 
 		conndata->services = g_list_remove (conndata->services, conndata->services->data);
 
@@ -1850,8 +1829,30 @@ bluetooth_client_disconnect_service (BluetoothClient            *client,
 				   (GAsyncReadyCallback) disconnect_callback,
 				   conndata);
 	}
+}
 
-	return TRUE;
+/**
+ * bluetooth_client_connect_service_finish:
+ * @client: a #BluetoothClient
+ * @res: a #GAsyncResult.
+ * @error: a #GError.
+ *
+ * Finishes the connection operation, See bluetooth_client_connect_service().
+ *
+ * Returns: %TRUE if the connection operation succeeded, %FALSE otherwise.
+ **/
+gboolean
+bluetooth_client_connect_service_finish (BluetoothClient *client,
+					 GAsyncResult    *res,
+					 GError         **error)
+{
+	GSimpleAsyncResult *simple;
+
+	simple = (GSimpleAsyncResult *) res;
+
+	g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == bluetooth_client_connect_service);
+
+	return g_simple_async_result_get_op_res_gboolean (simple);
 }
 
 #define BOOL_STR(x) (x ? "True" : "False")
