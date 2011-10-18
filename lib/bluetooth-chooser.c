@@ -414,22 +414,6 @@ bluetooth_chooser_get_device_column (BluetoothChooser *self)
 }
 
 /**
- * bluetooth_chooser_get_type_column:
- * @self: A #BluetoothChooser widget.
- *
- * Returns a #GtkTreeViewColumn object to the type column of the #BluetoothChooser.
- *
- * Return value: a #GtkTreeViewColumn object.
- **/
-GtkTreeViewColumn *
-bluetooth_chooser_get_type_column (BluetoothChooser *self)
-{
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-
-	return gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 1);
-}
-
-/**
  * bluetooth_chooser_get_treeview:
  * @self: A #BluetoothChooser widget.
  *
@@ -965,6 +949,7 @@ enum {
 	PROP_SHOW_CONNECTED,
 	PROP_SHOW_SEARCHING,
 	PROP_SHOW_DEVICE_TYPE,
+	PROP_SHOW_DEVICE_TYPE_COLUMN,
 	PROP_SHOW_DEVICE_CATEGORY,
 	PROP_DEVICE_TYPE_FILTER,
 	PROP_DEVICE_CATEGORY_FILTER,
@@ -1041,6 +1026,10 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 				g_object_set (G_OBJECT (priv->filters_vbox), "visible", FALSE, NULL);
 		}
 		break;
+	case PROP_SHOW_DEVICE_TYPE_COLUMN:
+		gtk_tree_view_column_set_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 1),
+						  g_value_get_boolean (value));
+		break;
 	case PROP_SHOW_DEVICE_CATEGORY:
 		priv->show_device_category = g_value_get_boolean (value);
 		if (priv->internal_filter) {
@@ -1096,6 +1085,10 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 		break;
 	case PROP_SHOW_DEVICE_TYPE:
 		g_value_set_boolean (value, priv->show_device_type);
+		break;
+	case PROP_SHOW_DEVICE_TYPE_COLUMN:
+		g_value_set_boolean (value,
+				     gtk_tree_view_column_get_visible (gtk_tree_view_get_column (GTK_TREE_VIEW (priv->treeview), 1)));
 		break;
 	case PROP_SHOW_DEVICE_CATEGORY:
 		g_value_set_boolean (value, priv->show_device_category);
@@ -1189,6 +1182,9 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_TYPE, g_param_spec_boolean ("show-device-type",
 										      "show-device-type", "Whether to show the device type filter", TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+	g_object_class_install_property (G_OBJECT_CLASS(klass),
+					 PROP_SHOW_DEVICE_TYPE_COLUMN, g_param_spec_boolean ("show-device-type-column",
+											     "show-device-type-column", "Whether to show the device type column", TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_DEVICE_CATEGORY, g_param_spec_boolean ("show-device-category",
 											  "show-device-category", "Whether to show the device category filter", TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
