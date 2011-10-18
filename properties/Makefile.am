@@ -8,7 +8,7 @@ libbluetooth_la_SOURCES =			\
 	cc-bluetooth-panel.c			\
 	cc-bluetooth-panel.h
 
-libbluetooth_la_LIBADD = $(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la $(PROPS_LIBS)
+libbluetooth_la_LIBADD = $(top_builddir)/lib/libgnome-bluetooth.la $(PROPS_LIBS)
 libbluetooth_la_LDFLAGS = -avoid-version -module
 
 AM_CFLAGS = $(PROPS_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
