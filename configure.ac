@@ -78,16 +78,6 @@ NOTIFY_REQUIRED=0.7.0
 NAUTILUS_SENDTO_REQUIRED=2.29.0
 NAUTILUS_SENDTO_MAX_REQUIRED=3.1.0
 
-dnl Requires for the properties window
-PANELS_DIR="${libdir}/control-center-1/panels"
-AC_SUBST(PANELS_DIR)
-
-dnl Missing libgnome-control-center
-dnl which will be resolved at run-time
-PKG_CHECK_MODULES(PROPS,
-		  glib-2.0 >= $GLIB_REQUIRED
-		  gtk+-3.0 >= 2.90.7)
-
 dnl Requires for the applet
 PKG_CHECK_MODULES(APPLET,
 		  gmodule-export-2.0
@@ -204,9 +194,6 @@ AC_OUTPUT(Makefile
 	  lib/plugins/Makefile
 	  applet/Makefile
 	  applet/bluetooth-applet.desktop.in
-	  properties/Makefile
-	  properties/bluetooth-properties.desktop.in
-	  properties/cut-n-paste/Makefile
 	  wizard/Makefile
 	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile
