@@ -32,7 +32,6 @@
 
 #include <bluetooth-client.h>
 #include <bluetooth-utils.h>
-#include <bluetooth-client-private.h>
 #include <bluetooth-killswitch.h>
 #include <bluetooth-chooser.h>
 #include <bluetooth-chooser-private.h>
@@ -115,12 +114,17 @@ typedef struct {
 } ConnectData;
 
 static void
-connect_done (BluetoothClient  *client,
-	      gboolean          success,
-	      ConnectData      *data)
+connect_done (GObject      *source_object,
+	      GAsyncResult *res,
+	      gpointer      user_data)
 {
 	CcBluetoothPanel *self;
 	char *bdaddr;
+	gboolean success;
+	ConnectData *data = (ConnectData *) user_data;
+
+	success = bluetooth_client_connect_service_finish (BLUETOOTH_CLIENT (source_object),
+							   res, NULL);
 
 	self = data->self;
 
@@ -166,13 +170,12 @@ switch_connected_active_changed (GtkSwitch        *button,
 	data->bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	data->self = g_object_ref (self);
 
-	if (gtk_switch_get_active (button)) {
-		bluetooth_client_connect_service (self->priv->client, proxy,
-						  (BluetoothClientConnectFunc) connect_done, data);
-	} else {
-		bluetooth_client_disconnect_service (self->priv->client, proxy,
-						     (BluetoothClientConnectFunc) connect_done, data);
-	}
+	bluetooth_client_connect_service (self->priv->client,
+					  proxy,
+					  gtk_switch_get_active (button),
+					  NULL,
+					  connect_done,
+					  data);
 
 	/* FIXME: make a note somewhere that the button for that
 	 * device should be disabled */
