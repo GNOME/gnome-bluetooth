@@ -339,15 +339,17 @@ typedef struct {
 } ConnectData;
 
 static void
-connect_callback (BluetoothClient *_client,
-		  gboolean success,
-		  gpointer user_data)
+connect_callback (GObject      *source_object,
+		  GAsyncResult *res,
+		  gpointer      user_data)
 {
 	ConnectData *data = (ConnectData *) user_data;
+	gboolean success;
+
+	success = bluetooth_client_connect_service_finish (client, res, NULL);
 
 	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
-		if (bluetooth_client_connect_service(client, data->path, connect_callback, data) != FALSE)
-			return;
+		bluetooth_client_connect_service (client, data->path, TRUE, NULL, connect_callback, data);
 	}
 
 	if (success == FALSE)
@@ -394,14 +396,8 @@ create_callback (BluetoothClient *_client,
 	data->path = g_strdup (path);
 	data->timer = g_timer_new ();
 
-	if (bluetooth_client_connect_service(client, path, connect_callback, data) != FALSE) {
-		gtk_assistant_set_current_page (window_assistant, PAGE_FINISHING);
-	} else {
-		gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
-		g_timer_destroy (data->timer);
-		g_free (data->path);
-		g_free (data);
-	}
+	bluetooth_client_connect_service (client, path, TRUE, NULL, connect_callback, data);
+	gtk_assistant_set_current_page (window_assistant, PAGE_FINISHING);
 }
 
 void
