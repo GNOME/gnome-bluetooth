@@ -11,9 +11,6 @@ libcommon_la_SOURCES =						\
 		bluetooth-utils.h bluetooth-utils.c		\
 		bluetooth-client-private.h			\
 		bluetooth-agent.h bluetooth-agent.c		\
-		bluetooth-killswitch.h bluetooth-killswitch.c	\
-		bluetooth-plugin-manager.c			\
-		bluetooth-plugin-manager.h			\
 		bluetooth-enums.h				\
 		rfkill.h
 
@@ -31,12 +28,13 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-filter-widget.c	\
 	bluetooth-chooser-button.c	\
 	bluetooth-chooser-combo.c	\
-	bluetooth-client-glue.c
+	bluetooth-client-glue.c		\
+	bluetooth-plugin-manager.c
+
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
 	bluetooth-agent.h		\
-	bluetooth-killswitch.h		\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
 	bluetooth-client-glue.h
@@ -61,7 +59,9 @@ libgnome_bluetooth_introspect_headers =			\
 	bluetooth-chooser-combo.h			\
 	bluetooth-filter-widget.h			\
 	bluetooth-enums.h				\
-	bluetooth-utils.h
+	bluetooth-utils.h				\
+	bluetooth-plugin-manager.h			\
+	bluetooth-killswitch.h
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS =				\
@@ -123,7 +123,7 @@ test_agent_LDADD = libcommon.la $(DBUS_LIBS)
 
 test_deviceselection_LDADD = libcommon.la libgnome-bluetooth.la
 
-test_plugins_LDADD = libcommon.la
+test_plugins_LDADD = libcommon.la libgnome-bluetooth.la
 
 test_class_LDADD = libcommon.la
 
