@@ -767,7 +767,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	g_object_set (self->priv->chooser,
 		      "show-searching", FALSE,
 		      "show-device-type", FALSE,
-		      "show-device-type-columnt", FALSE,
+		      "show-device-type-column", FALSE,
 		      "show-device-category", FALSE,
 		      "show-pairing", FALSE,
 		      "show-connected", FALSE,
