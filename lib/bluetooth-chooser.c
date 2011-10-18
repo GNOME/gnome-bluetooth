@@ -438,7 +438,7 @@ bluetooth_chooser_get_treeview (BluetoothChooser *self)
  * gtk_scrolled_window_set_min_content_height() or to join the
  * chooser with a toolbar.
  *
- * Return value: a #GtkScrolledWindow object.
+ * Return value: (transfer none): a #GtkScrolledWindow object.
  **/
 GtkWidget *
 bluetooth_chooser_get_scrolled_window (BluetoothChooser *self)
