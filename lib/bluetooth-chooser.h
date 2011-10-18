@@ -72,6 +72,8 @@ BluetoothType bluetooth_chooser_get_selected_device_type (BluetoothChooser *self
 gboolean bluetooth_chooser_get_selected_device_is_connected (BluetoothChooser *self);
 void bluetooth_chooser_dump_selected_device (BluetoothChooser *self);
 
+GtkWidget *bluetooth_chooser_get_scrolled_window (BluetoothChooser *self);
+
 void bluetooth_chooser_start_discovery (BluetoothChooser *self);
 void bluetooth_chooser_stop_discovery (BluetoothChooser *self);
 
