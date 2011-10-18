@@ -72,6 +72,7 @@ typedef enum {
  * @BLUETOOTH_TYPE_PRINTER: a printer
  * @BLUETOOTH_TYPE_JOYPAD: a joypad, joystick, or other game controller
  * @BLUETOOTH_TYPE_TABLET: a drawing tablet
+ * @BLUETOOTH_TYPE_VIDEO: a video device, such as a webcam
  *
  * The type of a Bluetooth device. See also %BLUETOOTH_TYPE_INPUT and %BLUETOOTH_TYPE_AUDIO
  **/
