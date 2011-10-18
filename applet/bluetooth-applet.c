@@ -611,9 +611,15 @@ typedef struct {
 } ConnectionClosure;
 
 static void
-connection_callback (BluetoothClient* client, gboolean success, gpointer data)
+
+connection_callback (GObject      *source_object,
+		     GAsyncResult *res,
+		     gpointer      user_data)
 {
-	ConnectionClosure *closure = (ConnectionClosure*) data;
+	ConnectionClosure *closure = (ConnectionClosure*) user_data;
+	gboolean success;
+
+	success = bluetooth_client_connect_service_finish (BLUETOOTH_CLIENT (source_object), res, NULL);
 
 	(*(closure->func)) (closure->self, success, closure->user_data);
 
@@ -645,7 +651,9 @@ bluetooth_applet_connect_device (BluetoothApplet* applet,
 	closure->func = func;
 	closure->user_data = data;
 
-	return bluetooth_client_connect_service (applet->client, device, connection_callback, closure);
+	bluetooth_client_connect_service (applet->client, device, TRUE, NULL, connection_callback, closure);
+
+	return TRUE;
 }
 
 /**
@@ -673,7 +681,9 @@ bluetooth_applet_disconnect_device (BluetoothApplet* applet,
 	closure->func = func;
 	closure->user_data = data;
 
-	return bluetooth_client_disconnect_service (applet->client, device, connection_callback, closure);
+	bluetooth_client_connect_service (applet->client, device, FALSE, NULL, connection_callback, closure);
+
+	return TRUE;
 }
 
 /**
