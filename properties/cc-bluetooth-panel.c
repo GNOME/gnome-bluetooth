@@ -34,7 +34,6 @@
 #include <bluetooth-utils.h>
 #include <bluetooth-killswitch.h>
 #include <bluetooth-chooser.h>
-#include <bluetooth-chooser-private.h>
 #include <bluetooth-plugin-manager.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC_TYPE_PANEL)
