@@ -769,14 +769,13 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	g_object_set (self->priv->chooser,
 		      "show-searching", FALSE,
 		      "show-device-type", FALSE,
+		      "show-device-type-column", FALSE,
 		      "show-device-category", FALSE,
 		      "show-pairing", FALSE,
 		      "show-connected", FALSE,
 		      "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
 		      "no-show-all", TRUE,
 		      NULL);
-	column = bluetooth_chooser_get_type_column (BLUETOOTH_CHOOSER (self->priv->chooser));
-	gtk_tree_view_column_set_visible (column, FALSE);
 	column = bluetooth_chooser_get_device_column (BLUETOOTH_CHOOSER (self->priv->chooser));
 	gtk_tree_view_column_set_title (column, _("Devices"));
 
