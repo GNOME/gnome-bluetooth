@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-05 00:55+0300\n"
-"PO-Revision-Date: 2011-09-05 00:54+0300\n"
+"POT-Creation-Date: 2011-10-20 22:50+0300\n"
+"PO-Revision-Date: 2011-10-20 22:50+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -16,48 +16,41 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Пстрыкніце, каб выбраць прыстасаванне..."
 
-#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:136 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "Невядома"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:177
 msgid "No adapters available"
 msgstr "Адаптары адсутнічаюць"
 
-#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:181 ../lib/bluetooth-chooser.c:845
 msgid "Searching for devices..."
 msgstr "Пошук прыстасаванняў..."
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Выдаліць \"%s\" са спіса прыстасаванняў?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Калі вы выдаліце прыстасаванне, для наступнага выкарыстання прыйдзецца "
-"паўтарыць яго настройку."
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:721 ../lib/bluetooth-chooser.c:1030
 msgid "Device"
 msgstr "Прыстасаванне"
 
-#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:757
 msgid "Type"
 msgstr "Тып"
+
+#: ../lib/bluetooth-chooser.c:1032 ../applet/popup-menu.ui.h:3
+#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
+msgid "Devices"
+msgstr "Прыстасаванні"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Усе катэгорыі"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "Спараныя"
 
@@ -73,33 +66,35 @@ msgstr "Няспараныя ці не вартыя даверу"
 msgid "Paired or trusted"
 msgstr "Спараныя ці вартыя даверу"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Паказаць толькі Bluetooth-прыстасаванні з..."
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Паказваць:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_Катэгорыя прыстасавання:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:262
 msgid "Select the device category to filter"
 msgstr "Выберыце катэгорыю прыстасаванняў для фільтру"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:276
 msgid "Device _type:"
 msgstr "_Тып прыстасавання:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:297
 msgid "Select the device type to filter"
 msgstr "Выберыце тып прыстасавання для фільтру"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:303
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Прыстасаванні ўводу (мышы, клавіятуры і інш.)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:307
 msgid "Headphones, headsets and other audio devices"
 msgstr "Навушнікі, аўдыягарнітуры і іншыя аўдыяпрыстасаванні"
 
@@ -212,7 +207,7 @@ msgstr "Bluetooth: выключаны"
 msgid "Disconnecting..."
 msgstr "Адлучэнне..."
 
-#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:441 ../sendto/main.c:206 ../sendto/main.c:310
 msgid "Connecting..."
 msgstr "Злучэнне..."
 
@@ -240,15 +235,15 @@ msgstr "Паслаць файлы..."
 msgid "Browse files..."
 msgstr "Агляд файлаў..."
 
-#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+#: ../applet/main.c:779
 msgid "Keyboard Settings"
 msgstr "Настройкі клавіятуры"
 
-#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+#: ../applet/main.c:787
 msgid "Mouse and Touchpad Settings"
 msgstr "Настройкі мышы і чулай панэлі"
 
-#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+#: ../applet/main.c:797
 msgid "Sound Settings"
 msgstr "Настройкі гуку"
 
@@ -275,8 +270,7 @@ msgstr ""
 msgid "Bluetooth Applet"
 msgstr "Аплет Bluetooth"
 
-#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122 ../moblin/main.c:129 ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -359,11 +353,6 @@ msgstr "Bluetooth: праверка"
 msgid "Browse files on device..."
 msgstr "Агляд файлаў на прыстасаванні..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "Прыстасаванні"
-
 #: ../applet/popup-menu.ui.h:4
 msgid "Preferences"
 msgstr "Настройкі"
@@ -408,82 +397,23 @@ msgstr "_Адпавядае"
 msgid "_Show input"
 msgstr "_Паказаць увод"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "Так"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "Не"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth выключаны"
-
-#: ../properties/cc-bluetooth-panel.c:412
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth выключаны з дапамогай апаратнага пераключальніка"
-
-#: ../properties/cc-bluetooth-panel.c:416
-msgid "No Bluetooth adapters found"
-msgstr "Bluetooth-адаптары не знойдзены"
-
-#: ../properties/cc-bluetooth-panel.c:526
-msgid "Visibility"
-msgstr "Бачнасць"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "Бачнасць \"%s\""
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "Адрас"
-
-#: ../properties/bluetooth.ui.h:2
-msgid "Browse Files..."
-msgstr "Агляд файлаў..."
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "Злучэнне"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth.ui.h:9
-msgid "Send Files..."
-msgstr "Паслаць файлы..."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Настройка Bluetooth"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207 ../wizard/main.c:328
+#: ../wizard/main.c:205 ../wizard/main.c:327
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Спарванне з \"%s\" скасавана"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:246 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
 "Пацвердзіце адпаведнасць гэтага коду PIN-коду, прапанаванаму прыстасаваннем "
 "\"%s\"."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:300 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "Упішыце наступны PIN-код:"
 
@@ -491,7 +421,7 @@ msgstr "Упішыце наступны PIN-код:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:385
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Не ўдалося настроіць \"%s\""
@@ -500,12 +430,12 @@ msgstr "Не ўдалося настроіць \"%s\""
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:439
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Злучэнне з \"%s\"..."
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:477 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
@@ -513,7 +443,7 @@ msgstr ""
 "Упішыце наступны PIN-код на прыстасаванні \"%s\" і націсніце клавішу \"Enter"
 "\":"
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
+#: ../wizard/main.c:479 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Упішыце наступны PIN-код на прыстасаванні \"%s\":"
@@ -522,12 +452,12 @@ msgstr "Упішыце наступны PIN-код на прыстасаванн
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:502
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Пачакайце заканчэння настройкі прыстасавання \"%s\"..."
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:520 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Новае прыстасаванне \"%s\" паспяхова настроена"
@@ -657,7 +587,7 @@ msgstr "Настройка новага Bluetooth-прыстасавання"
 msgid "Setup Bluetooth devices"
 msgstr "Настройка Bluetooth-прыстасаванняў"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -665,7 +595,7 @@ msgstr[0] "%'d секунда"
 msgstr[1] "%'d секунды"
 msgstr[2] "%'d секунд"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -673,7 +603,7 @@ msgstr[0] "%'d хвіліна"
 msgstr[1] "%'d хвіліны"
 msgstr[2] "%'d хвілін"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -681,7 +611,7 @@ msgstr[0] "%'d гадзіна"
 msgstr[1] "%'d гадзіны"
 msgstr[2] "%'d гадзін"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -689,79 +619,79 @@ msgstr[0] "прыблізна %'d гадзіна"
 msgstr[1] "прыблізна %'d гадзіны"
 msgstr[2] "прыблізна %'d гадзін"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "Перадача файла"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "_Паўтарыць"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "Пасылка файлаў праз Bluetooth"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "Ад:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:294
 msgid "To:"
 msgstr "Каму:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:339 ../sendto/main.c:357
 msgid "An unknown error occurred"
 msgstr "Узнікла невядомая памылка"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:350
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Праверце, што аддаленае прыстасаванне ўключана і прымае Bluetooth-злучэнні"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:448
 #, c-format
 msgid "Sending %s"
 msgstr "Пасылка %s"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:455 ../sendto/main.c:526
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Пасылка файла %d з %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d KB/s"
 msgstr "%d кб/с"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:524
 #, c-format
 msgid "%d B/s"
 msgstr "%d б/с"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:660
 msgid "Select device to send to"
 msgstr "Выбар прыстасавання-атрымальніка"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:665
 msgid "_Send"
 msgstr "_Паслаць"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:709
 msgid "Choose files to send"
 msgstr "Выбар файлаў для пасылкі"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:712
 msgid "Select"
 msgstr "Выбраць"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:738
 msgid "Remote device to use"
 msgstr "Аддаленае прыстасаванне"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:740
 msgid "Remote device's name"
 msgstr "Назва аддаленага прыстасавання"
 
@@ -900,6 +830,15 @@ msgstr "Опцыі PIN-коду"
 #: ../moblin/moblin-panel.c:1520
 msgid "Add a new device"
 msgstr "Дадаць новае прыстасаванне"
+
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
 #: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
