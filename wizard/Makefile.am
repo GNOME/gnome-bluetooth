@@ -11,7 +11,7 @@ bin_PROGRAMS = bluetooth-wizard
 
 bluetooth_wizard_SOURCES = main.c
 
-bluetooth_wizard_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la libwizard.la $(WIZARD_LIBS)
+bluetooth_wizard_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la libwizard.la $(WIZARD_LIBS)
 
 test_input_SOURCES = test-input.c bluetooth-input.c bluetooth-input.h
 test_input_LDADD = $(INPUT_LIBS)
