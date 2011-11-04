@@ -3,19 +3,7 @@ SUBDIRS = plugins
 EXTRA_DIST = 
 CLEANFILES =
 
-noinst_LTLIBRARIES = libcommon.la
 lib_LTLIBRARIES = libgnome-bluetooth.la
-
-libcommon_la_SOURCES =						\
-		bluetooth-client.h bluetooth-client.c		\
-		bluetooth-utils.h bluetooth-utils.c		\
-		bluetooth-client-private.h			\
-		bluetooth-agent.h bluetooth-agent.c		\
-		bluetooth-enums.h				\
-		rfkill.h
-
-libcommon_la_LIBADD = $(COMMON_LIBS)
-libcommon_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 
 # will be scanned for introspection annotation, but won't be installed
 libgnome_bluetooth_c_sources =		\
@@ -31,13 +19,13 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-client-glue.c		\
 	bluetooth-plugin-manager.c
 
-
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
 	bluetooth-agent.h		\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
-	bluetooth-client-glue.h
+	bluetooth-client-glue.h		\
+	rfkill.h
 
 # public headers don't need to be listed, are handled by _HEADERS
 libgnome_bluetooth_la_SOURCES =			\
@@ -111,21 +99,19 @@ BUILT_SOURCES = bluetooth-client-glue.h \
 		gnome-bluetooth-enum-types.h \
 		gnome-bluetooth-enum-types.c
 
-nodist_libcommon_la_SOURCES = $(BUILT_SOURCES)
-
 CLEANFILES += $(BUILT_SOURCES)
 
 noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins test-class
 
-test_client_LDADD = libcommon.la $(GTK_LIBS) $(DBUS_LIBS)
+test_client_LDADD = libgnome-bluetooth.la $(GTK_LIBS)
 
-test_agent_LDADD = libcommon.la $(DBUS_LIBS)
+test_agent_LDADD = libgnome-bluetooth.la
 
-test_deviceselection_LDADD = libcommon.la libgnome-bluetooth.la
+test_deviceselection_LDADD = libgnome-bluetooth.la
 
-test_plugins_LDADD = libcommon.la libgnome-bluetooth.la
+test_plugins_LDADD = libgnome-bluetooth.la
 
-test_class_LDADD = libcommon.la
+test_class_LDADD = libgnome-bluetooth.la
 
 EXTRA_DIST += bluetooth-client.xml gnome-bluetooth.symbols
 
