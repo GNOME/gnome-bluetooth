@@ -75,7 +75,7 @@ expand_content_files=
 # e.g. GTKDOC_CFLAGS=-I$(top_srcdir) -I$(top_builddir) $(GTK_DEBUG_FLAGS)
 # e.g. GTKDOC_LIBS=$(top_builddir)/gtk/$(gtktargetlib)
 GTKDOC_CFLAGS=$(LIBGNOMEBT_CFLAGS)
-GTKDOC_LIBS=$(top_builddir)/lib/libgnome-bluetooth.la $(top_builddir)/lib/libcommon.la
+GTKDOC_LIBS=$(top_builddir)/lib/libgnome-bluetooth.la
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
 include $(top_srcdir)/gtk-doc.make
