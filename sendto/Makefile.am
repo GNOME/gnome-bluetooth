@@ -7,7 +7,6 @@ AM_CFLAGS =                                     \
 	$(SENDTO_CFLAGS)                        \
         $(NST_CFLAGS)                           \
 	$(BLUETOOTH_CFLAGS)			\
-	$(DBUS_CFLAGS)				\
 	$(DISABLE_DEPRECATED)			\
 	$(WARN_CFLAGS)
 
