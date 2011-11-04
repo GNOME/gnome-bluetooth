@@ -271,9 +271,9 @@ static void create_window(void)
 	g_free(text);
 	gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
 
-	table = gtk_table_new(2, 2, FALSE);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 4);
-	gtk_table_set_row_spacings(GTK_TABLE(table), 4);
+	table = gtk_grid_new();
+	gtk_grid_set_column_spacing(GTK_GRID(table), 4);
+	gtk_grid_set_row_spacing(GTK_GRID(table), 4);
 	gtk_box_pack_start(GTK_BOX(vbox), table, TRUE, TRUE, 9);
 
 	label = gtk_label_new(NULL);
@@ -281,27 +281,25 @@ static void create_window(void)
 	text = g_markup_printf_escaped("<b>%s</b>", _("From:"));
 	gtk_label_set_markup(GTK_LABEL(label), text);
 	g_free(text);
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 0, 1,
-							GTK_FILL, 0, 0, 0);
+	gtk_grid_attach(GTK_GRID(table), label, 0, 0, 1, 1);
 
 	label_from = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label_from), 0, 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label_from), PANGO_ELLIPSIZE_MIDDLE);
-	gtk_table_attach_defaults(GTK_TABLE(table), label_from, 1, 2, 0, 1);
+	gtk_grid_attach(GTK_GRID(table), label_from, 1, 0, 1, 1);
 
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 1, 0.5);
 	text = g_markup_printf_escaped("<b>%s</b>", _("To:"));
 	gtk_label_set_markup(GTK_LABEL(label), text);
 	g_free(text);
-	gtk_table_attach(GTK_TABLE(table), label, 0, 1, 1, 2,
-							GTK_FILL, 0, 0, 0);
+	gtk_grid_attach(GTK_GRID(table), label, 0, 1, 1, 1);
 
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label), PANGO_ELLIPSIZE_END);
 	gtk_label_set_text(GTK_LABEL(label), option_device_name);
-	gtk_table_attach_defaults(GTK_TABLE(table), label, 1, 2, 1, 2);
+	gtk_grid_attach(GTK_GRID(table), label, 1, 1, 1, 1);
 
 	progress = gtk_progress_bar_new();
 	gtk_progress_bar_set_ellipsize(GTK_PROGRESS_BAR(progress),
