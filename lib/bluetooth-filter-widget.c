@@ -237,28 +237,24 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	gtk_widget_show (alignment);
 	gtk_box_pack_start (GTK_BOX (self), alignment, TRUE, TRUE, 0);
 
-	table = gtk_table_new (2, 2, FALSE);
+	table = gtk_grid_new ();
 	gtk_widget_show (table);
 	gtk_container_add (GTK_CONTAINER (alignment), table);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 12);
+	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
+	gtk_grid_set_column_spacing (GTK_GRID (table), 12);
 
 	/* The device category filter */
 	label = gtk_label_new_with_mnemonic (_("Device _category:"));
 	gtk_widget_set_no_show_all (label, TRUE);
 	gtk_widget_show (label);
-	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 1, 2,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	priv->device_category_label = label;
 
 	priv->device_category = gtk_combo_box_text_new ();
 	gtk_widget_set_no_show_all (priv->device_category, TRUE);
 	gtk_widget_show (priv->device_category);
-	gtk_table_attach (GTK_TABLE (table), priv->device_category, 1, 2, 1, 2,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_grid_attach (GTK_GRID (table), priv->device_category, 1, 0, 1, 1);
 	gtk_widget_set_tooltip_text (priv->device_category, _("Select the device category to filter"));
 	for (i = 0; i < BLUETOOTH_CATEGORY_NUM_CATEGORIES; i++) {
 		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (priv->device_category),
@@ -276,9 +272,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	label = gtk_label_new_with_mnemonic (_("Device _type:"));
 	gtk_widget_set_no_show_all (label, TRUE);
 	gtk_widget_show (label);
-	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 	priv->device_type_label = label;
 
@@ -291,9 +285,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 
 	gtk_widget_set_no_show_all (priv->device_type, TRUE);
 	gtk_widget_show (priv->device_type);
-	gtk_table_attach (GTK_TABLE (table), priv->device_type, 1, 2, 0, 1,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+	gtk_grid_attach (GTK_GRID (table), priv->device_type, 1, 1, 1, 1);
 	gtk_widget_set_tooltip_text (priv->device_type, _("Select the device type to filter"));
 	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
 					   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_string (BLUETOOTH_TYPE_ANY)),
