@@ -620,6 +620,7 @@ entry_custom_event (GtkWidget *entry, GdkEventKey *event)
 void
 entry_custom_changed (GtkWidget *entry)
 {
+	g_free (user_pincode);
 	user_pincode = g_strdup (gtk_entry_get_text(GTK_ENTRY(entry)));
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (pin_dialog),
 					   GTK_RESPONSE_ACCEPT,
