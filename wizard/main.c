@@ -145,6 +145,7 @@ set_large_label (GtkLabel *label, const char *text)
 static void
 update_random_pincode (void)
 {
+	g_free (target_pincode);
 	target_pincode = g_strdup_printf ("%d", g_random_int_range (pow (10, PIN_NUM_DIGITS - 1),
 								    pow (10, PIN_NUM_DIGITS) - 1));
 	automatic_pincode = FALSE;
@@ -387,6 +388,8 @@ create_callback (BluetoothClient *_client,
 		g_warning ("Setting up '%s' failed: %s", target_name, error->message);
 
 		gtk_label_set_markup(GTK_LABEL(label_failure), text);
+		g_free (text);
+
 		return;
 	}
 
