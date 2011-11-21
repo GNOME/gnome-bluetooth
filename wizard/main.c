@@ -406,6 +406,7 @@ close_callback (GtkWidget *assistant,
 {
 	gtk_widget_destroy(assistant);
 
+	//FIXME doesn't work with a GtkApplication
 	gtk_main_quit();
 }
 
