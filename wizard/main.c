@@ -745,39 +745,30 @@ pin_option_button_clicked (GtkButton *button,
 			       gpointer data)
 {
 	GtkWidget *radio;
-	char *oldpin;
-
-	oldpin = user_pincode;
-	user_pincode = NULL;
 
 	gtk_window_set_transient_for (GTK_WINDOW (pin_dialog),
 				      GTK_WINDOW (window_assistant));
 	gtk_window_present (GTK_WINDOW (pin_dialog));
 
 	/* When reopening, try to guess where the pincode was set */
-	if (oldpin == NULL)
+	if (user_pincode == NULL)
 		radio = radio_auto;
-	else if (g_str_equal (oldpin, "0000"))
+	else if (g_str_equal (user_pincode, "0000"))
 		radio = radio_0000;
-	else if (g_str_equal (oldpin, "1111"))
+	else if (g_str_equal (user_pincode, "1111"))
 		radio = radio_1111;
-	else if (g_str_equal (oldpin, "1234"))
+	else if (g_str_equal (user_pincode, "1234"))
 		radio = radio_1234;
-	else
+	else if (g_str_equal (user_pincode, "NULL"))
+		radio = radio_none;
+	else {
 		radio = radio_custom;
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-	if (radio == radio_custom)
-		gtk_entry_set_text (GTK_ENTRY (entry_custom), oldpin);
-
-	if (gtk_dialog_run (GTK_DIALOG (pin_dialog)) != GTK_RESPONSE_ACCEPT) {
-		g_free (user_pincode);
-		user_pincode = oldpin;
-	} else {
-		g_free (oldpin);
+		gtk_entry_set_text (GTK_ENTRY (entry_custom), user_pincode);
 	}
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
 
-	gtk_widget_hide(pin_dialog);
+	gtk_dialog_run (GTK_DIALOG (pin_dialog));
+	gtk_widget_hide (pin_dialog);
 }
 
 static int
