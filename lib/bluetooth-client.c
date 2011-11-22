@@ -765,9 +765,7 @@ adapter_added (Manager         *manager,
 						  NULL,
 						  NULL);
 
-	adapter_call_get_properties_sync (adapter, &variant, NULL, NULL);
-
-	if (variant != NULL) {
+	if (adapter_call_get_properties_sync (adapter, &variant, NULL, NULL) == TRUE) {
 		GVariant *v;
 
 		v = g_variant_lookup_value (variant, "Address", G_VARIANT_TYPE_STRING);
@@ -787,6 +785,8 @@ adapter_added (Manager         *manager,
 
 		v = g_variant_lookup_value (variant, "Discoverable", G_VARIANT_TYPE_BOOLEAN);
 		discoverable = v ? g_variant_get_boolean (v) : FALSE;
+
+		g_variant_unref (variant);
 	} else {
 		address = NULL;
 		name = NULL;
@@ -816,7 +816,6 @@ adapter_added (Manager         *manager,
 		}
 		g_free (devices);
 	}
-	g_variant_unref (variant);
 
 	g_object_unref (adapter);
 }
