@@ -701,6 +701,10 @@ select_device_changed (BluetoothChooser *selector,
 
 	set_page_search_complete ();
 
+	/* Device was deselected */
+	if (address == NULL)
+		return;
+
 	name = bluetooth_chooser_get_selected_device_name (selector);
 	type = bluetooth_chooser_get_selected_device_type (selector);
 	if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
