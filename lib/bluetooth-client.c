@@ -1484,20 +1484,18 @@ create_device_callback (GDBusProxy       *proxy,
 	ret = g_dbus_proxy_call_finish (proxy, res, &error);
 	if (ret == NULL) {
 		g_warning ("CreateDevice failed: %s", error->message);
-		path = NULL;
 	} else {
 		g_variant_get (ret, "(o)", &path);
+		g_variant_unref (ret);
 	}
 
 	if (devdata->func)
 		devdata->func(devdata->client, path, error, devdata->data);
+	g_free (path);
 
 	if (error != NULL)
 		g_error_free (error);
 
-
-	if (ret != NULL)
-		g_object_unref (ret);
 	g_object_unref (devdata->client);
 	g_free (devdata);
 }
