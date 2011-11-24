@@ -1593,7 +1593,7 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 
 	device_call_set_property_sync (DEVICE (proxy),
 				       "Trusted",
-				       g_variant_new_boolean (trusted),
+				       g_variant_new_variant (g_variant_new_boolean (trusted)),
 				       NULL, NULL);
 
 	g_object_unref(proxy);
