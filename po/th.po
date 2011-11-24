@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-08-04 20:20+0000\n"
-"PO-Revision-Date: 2011-08-10 21:06+0700\n"
+"POT-Creation-Date: 2011-10-18 17:47+0000\n"
+"PO-Revision-Date: 2011-11-24 14:07+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,46 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "คลิกเพื่อเลือกอุปกรณ์..."
 
-#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:136 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:177
 msgid "No adapters available"
 msgstr "ไม่มีอะแดปเตอร์"
 
-#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:181 ../lib/bluetooth-chooser.c:845
 msgid "Searching for devices..."
 msgstr "กำลังค้นหาอุปกรณ์..."
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "ลบ '%s' ออกจากรายชื่ออุปกรณ์หรือไม่?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr "ถ้าคุณลบอุปกรณ์นี้ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งก่อนใช้ครั้งต่อไป"
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:721 ../lib/bluetooth-chooser.c:1030
 msgid "Device"
 msgstr "อุปกรณ์"
 
-#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:757
 msgid "Type"
 msgstr "ชนิด"
+
+#: ../lib/bluetooth-chooser.c:1032 ../applet/popup-menu.ui.h:3
+#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
+msgid "Devices"
+msgstr "อุปกรณ์"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "ทุกประเภท"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "จับคู่แล้ว"
 
@@ -72,33 +67,35 @@ msgstr "ยังไม่จับคู่หรือไม่เชื่อ
 msgid "Paired or trusted"
 msgstr "จับคู่แล้วหรือเชื่อถือ"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "แสดงเฉพาะอุปกรณ์บลูทูทที่มี..."
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "แสดง:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_ประเภทอุปกรณ์:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:262
 msgid "Select the device category to filter"
 msgstr "เลือกประเภทอุปกรณ์ที่จะกรอง"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:276
 msgid "Device _type:"
 msgstr "_ชนิดอุปกรณ์:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:297
 msgid "Select the device type to filter"
 msgstr "เลือกชนิดอุปกรณ์ที่จะกรอง"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:303
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "อุปกรณ์อินพุต (เมาส์ แป้นพิมพ์ เป็นต้น)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:307
 msgid "Headphones, headsets and other audio devices"
 msgstr "หูฟัง ชุดหูฟัง และอุปกรณ์เสียงอื่น"
 
@@ -210,7 +207,7 @@ msgstr "บลูทูท: ปิดใช้"
 msgid "Disconnecting..."
 msgstr "กำลังตัดการเชื่อมต่อ..."
 
-#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:441 ../sendto/main.c:206 ../sendto/main.c:310
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
@@ -238,15 +235,15 @@ msgstr "ส่งแฟ้ม..."
 msgid "Browse files..."
 msgstr "เรียกดูแฟ้ม..."
 
-#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+#: ../applet/main.c:779
 msgid "Keyboard Settings"
 msgstr "ค่าตั้งแป้นพิมพ์"
 
-#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+#: ../applet/main.c:787
 msgid "Mouse and Touchpad Settings"
 msgstr "ค่าตั้งเมาส์และทัชแพด"
 
-#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+#: ../applet/main.c:797
 msgid "Sound Settings"
 msgstr "ค่าตั้งเสียง"
 
@@ -272,8 +269,7 @@ msgstr ""
 msgid "Bluetooth Applet"
 msgstr "แอพเพล็ตบลูทูท"
 
-#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122 ../moblin/main.c:129 ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "บลูทูท"
 
@@ -354,11 +350,6 @@ msgstr "บลูทูท: การตรวจสอบ"
 msgid "Browse files on device..."
 msgstr "เรียกดูแฟ้มในอุปกรณ์ ..."
 
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "อุปกรณ์"
-
 #: ../applet/popup-menu.ui.h:4
 msgid "Preferences"
 msgstr "ปรับแต่ง"
@@ -403,80 +394,21 @@ msgstr "_ตรงกัน"
 msgid "_Show input"
 msgstr "แ_สดงอักขระที่ป้อน"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "ใช่"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "ไม่ใช่"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "บลูทูทถูกปิดใช้งาน"
-
-#: ../properties/cc-bluetooth-panel.c:412
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "บลูทูทถูกปิดใช้งานโดยสวิตช์ฮาร์ดแวร์"
-
-#: ../properties/cc-bluetooth-panel.c:416
-msgid "No Bluetooth adapters found"
-msgstr "ไม่พบอะแดปเตอร์บลูทูท"
-
-#: ../properties/cc-bluetooth-panel.c:526
-msgid "Visibility"
-msgstr "ความปรากฏเห็น"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "ความปรากฏเห็นของ “%s”"
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "ที่อยู่"
-
-#: ../properties/bluetooth.ui.h:2
-msgid "Browse Files..."
-msgstr "เรียกดูแฟ้ม..."
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "การเชื่อมต่อ"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "บลูทูท"
-
-#: ../properties/bluetooth.ui.h:9
-msgid "Send Files..."
-msgstr "ส่งแฟ้ม..."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "ตั้งค่าบลูทูท"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207 ../wizard/main.c:328
+#: ../wizard/main.c:205 ../wizard/main.c:327
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:246 ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "กรุณายืนยันว่า PIN ที่แสดงบน '%s' ตรงกันกับ PIN นี้"
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:300 ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 
@@ -484,7 +416,7 @@ msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:385
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
@@ -493,18 +425,18 @@ msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:439
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "กำลังเชื่อมต่อไปยัง '%s'..."
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:477 ../moblin/moblin-panel.c:750
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s' แล้วกด “Enter” บนแป้นพิมพ์:"
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
+#: ../wizard/main.c:479 ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
@@ -513,12 +445,12 @@ msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:502
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "กรุณารอสักครู่ขณะเสร็จสิ้นการตั้งค่าอุปกรณ์ '%s' ..."
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:520 ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "ตั้งค่าอุปกรณ์ใหม่ '%s' สำเร็จแล้ว"
@@ -647,102 +579,102 @@ msgstr "ตั้งค่าอุปกรณ์บลูทูท"
 msgid "Setup Bluetooth devices"
 msgstr "ตั้งค่าอุปกรณ์บลูทูท"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d วินาที"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d นาที"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d ชั่วโมง"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ประมาณ %'d ชั่วโมง"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "การถ่ายโอนแฟ้ม"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "_ลองใหม่"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "การส่งแฟ้มทางบลูทูท"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "จาก:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:294
 msgid "To:"
 msgstr "ถึง:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:339 ../sendto/main.c:357
 msgid "An unknown error occurred"
 msgstr "เกิดข้อผิดพลาดไม่ทราบสาเหตุ"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:350
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าอุปกรณ์อีกฝ่ายหนึ่งเปิดทำงานอยู่ และรับการเชื่อมต่อบลูทูท"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:448
 #, c-format
 msgid "Sending %s"
 msgstr "กำลังส่ง %s"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:455 ../sendto/main.c:526
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "กำลังส่งแฟ้มที่ %d จาก %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:524
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:660
 msgid "Select device to send to"
 msgstr "เลือกอุปกรณ์ที่จะรับการส่ง"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:665
 msgid "_Send"
 msgstr "_ส่ง"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:709
 msgid "Choose files to send"
 msgstr "เลือกแฟ้มที่จะส่ง"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:712
 msgid "Select"
 msgstr "เลือก"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:738
 msgid "Remote device to use"
 msgstr "อุปกรณ์อีกฝ่ายที่จะใช้"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:740
 msgid "Remote device's name"
 msgstr "ชื่อของอุปกรณ์อีกฝ่าย"
 
@@ -876,6 +808,15 @@ msgstr "ตัวเลือกของ PIN"
 msgid "Add a new device"
 msgstr "เพิ่มอุปกรณ์ใหม่"
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "บลูทูท"
+
 #: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "ทำให้มองเห็นได้ผ่านบลูทูท"
@@ -888,6 +829,53 @@ msgstr "ส่งแฟ้มจากคอมพิวเตอร์ของ
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "พาเนลจัดการบลูทูท"
+
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "ลบ '%s' ออกจากรายชื่ออุปกรณ์หรือไม่?"
+
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr "ถ้าคุณลบอุปกรณ์นี้ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งก่อนใช้ครั้งต่อไป"
+
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "แสดงเฉพาะอุปกรณ์บลูทูทที่มี..."
+
+#~ msgid "Yes"
+#~ msgstr "ใช่"
+
+#~ msgid "No"
+#~ msgstr "ไม่ใช่"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "บลูทูทถูกปิดใช้งาน"
+
+#~ msgid "Bluetooth is disabled by hardware switch"
+#~ msgstr "บลูทูทถูกปิดใช้งานโดยสวิตช์ฮาร์ดแวร์"
+
+#~ msgid "No Bluetooth adapters found"
+#~ msgstr "ไม่พบอะแดปเตอร์บลูทูท"
+
+#~ msgid "Visibility"
+#~ msgstr "ความปรากฏเห็น"
+
+#~ msgid "Visibility of “%s”"
+#~ msgstr "ความปรากฏเห็นของ “%s”"
+
+#~ msgid "Address"
+#~ msgstr "ที่อยู่"
+
+#~ msgid "Browse Files..."
+#~ msgstr "เรียกดูแฟ้ม..."
+
+#~ msgid "Connection"
+#~ msgstr "การเชื่อมต่อ"
+
+#~ msgid "Send Files..."
+#~ msgstr "ส่งแฟ้ม..."
+
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "ตั้งค่าบลูทูท"
 
 #~ msgid "Open Keyboard Preferences..."
 #~ msgstr "เปิดการปรับแต่งแป้นพิมพ์..."
