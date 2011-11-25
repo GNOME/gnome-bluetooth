@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 10:14+0200\n"
-"PO-Revision-Date: 2011-07-29 10:15+0100\n"
+"POT-Creation-Date: 2011-11-25 10:06+0100\n"
+"PO-Revision-Date: 2011-11-25 10:06+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,49 +17,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Klicka för att välja enhet..."
 
-#: ../lib/bluetooth-chooser.c:131
+#: ../lib/bluetooth-chooser.c:136
 #: ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:177
 msgid "No adapters available"
 msgstr "Inga adaptrar finns tillgängliga"
 
-#: ../lib/bluetooth-chooser.c:176
-#: ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:181
+#: ../lib/bluetooth-chooser.c:845
 msgid "Searching for devices..."
 msgstr "Söker efter enheter..."
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Ta bort \"%s\" från listan över enheter?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid "If you remove the device, you will have to set it up again before next use."
-msgstr "Om du tar bort enheten så måste du konfigurera den igen innan du kan använda den."
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:721
+#: ../lib/bluetooth-chooser.c:1030
 msgid "Device"
 msgstr "Enhet"
 
-#: ../lib/bluetooth-chooser.c:836
-#: ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:757
 msgid "Type"
 msgstr "Typ"
+
+#: ../lib/bluetooth-chooser.c:1032
+#: ../applet/popup-menu.ui.h:3
+#: ../moblin/moblin-panel.c:1404
+#: ../moblin/moblin-panel.c:1514
+msgid "Devices"
+msgstr "Enheter"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Alla kategorier"
 
 #: ../lib/bluetooth-filter-widget.c:74
-#: ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "Ihopparad"
 
@@ -75,33 +72,35 @@ msgstr "Inte ihopparad eller pålitlig"
 msgid "Paired or trusted"
 msgstr "Ihopparad eller pålitlig"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Visa endast blåtandsenheter med..."
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Visa:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "Enhets_kategori:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Välj enhetskategori för att filtrera"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "Enhets_typ:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Välj enhetstyp för att filtrera"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Inmatningsenheter (möss, tangentbord, etc.)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hörlurar, headsets och andra ljudenheter"
 
@@ -216,8 +215,8 @@ msgid "Disconnecting..."
 msgstr "Kopplar från..."
 
 #: ../applet/main.c:441
-#: ../sendto/main.c:217
-#: ../sendto/main.c:314
+#: ../sendto/main.c:206
+#: ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "Ansluter..."
 
@@ -251,16 +250,16 @@ msgid "Browse files..."
 msgstr "Bläddra filer..."
 
 #: ../applet/main.c:779
-msgid "Open Keyboard Preferences..."
-msgstr "Öppna tangentbordsinställningar..."
+msgid "Keyboard Settings"
+msgstr "Tangentbordsinställningar"
 
 #: ../applet/main.c:787
-msgid "Open Mouse Preferences..."
-msgstr "Öppna musinställningar..."
+msgid "Mouse and Touchpad Settings"
+msgstr "Inställningar för mus och pekplatta"
 
 #: ../applet/main.c:797
-msgid "Open Sound Preferences..."
-msgstr "Öppna ljudinställningar..."
+msgid "Sound Settings"
+msgstr "Ljudinställningar"
 
 #: ../applet/main.c:850
 msgid "Debug"
@@ -285,7 +284,6 @@ msgid "Bluetooth Applet"
 msgstr "Panelprogram för Bluetooth"
 
 #: ../applet/notify.c:122
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
 #: ../moblin/main.c:129
 #: ../moblin/main.c:141
 msgid "Bluetooth"
@@ -371,13 +369,6 @@ msgstr "Bluetooth: Kontrollerar"
 msgid "Browse files on device..."
 msgstr "Bläddra i filer på enhet..."
 
-#: ../applet/popup-menu.ui.h:3
-#: ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404
-#: ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "Enheter"
-
 #: ../applet/popup-menu.ui.h:4
 msgid "Preferences"
 msgstr "Inställningar"
@@ -422,95 +413,23 @@ msgstr "_Matchar"
 msgid "_Show input"
 msgstr "_Visa inmatning"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "Ja"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "Nej"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth är inaktiverat"
-
-#: ../properties/cc-bluetooth-panel.c:412
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth är inaktiverat av maskinvaruknapp"
-
-#: ../properties/cc-bluetooth-panel.c:416
-msgid "No Bluetooth adapters found"
-msgstr "Inga blåtandsadaptrar hittades"
-
-#: ../properties/cc-bluetooth-panel.c:526
-msgid "Visibility"
-msgstr "Synlighet"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "Synlighet för \"%s\""
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "Adress"
-
-#: ../properties/bluetooth.ui.h:2
-msgid "Browse Files..."
-msgstr "Bläddra filer..."
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "Anslutning"
-
-#: ../properties/bluetooth.ui.h:4
-msgid "Keyboard Settings"
-msgstr "Tangentbordsinställningar"
-
-#: ../properties/bluetooth.ui.h:5
-msgid "Mouse and Touchpad Settings"
-msgstr "Inställningar för mus och pekplatta"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8
-#: ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth.ui.h:9
-msgid "Send Files..."
-msgstr "Skicka filer..."
-
-#: ../properties/bluetooth.ui.h:10
-msgid "Sound Settings"
-msgstr "Ljudinställningar"
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Konfigurera blåtandsinställningar"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207
-#: ../wizard/main.c:328
+#: ../wizard/main.c:205
+#: ../wizard/main.c:327
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Ihopparning med \"%s\" avbröts"
 
-#: ../wizard/main.c:247
+#: ../wizard/main.c:246
 #: ../moblin/moblin-panel.c:1147
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Bekräfta att PIN-koden som visas på \"%s\" matchar denna."
 
-#: ../wizard/main.c:301
+#: ../wizard/main.c:300
 #: ../moblin/moblin-panel.c:1198
 msgid "Please enter the following PIN:"
 msgstr "Ange följande PIN-kod:"
@@ -519,7 +438,7 @@ msgstr "Ange följande PIN-kod:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:385
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Konfiguration av \"%s\" misslyckades"
@@ -528,18 +447,18 @@ msgstr "Konfiguration av \"%s\" misslyckades"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:440
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Ansluter till \"%s\" ..."
 
-#: ../wizard/main.c:480
+#: ../wizard/main.c:478
 #: ../moblin/moblin-panel.c:750
 #, c-format
 msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Ange följande PIN-kod på \"%s\" och tryck \"Enter\" på tangentbordet:"
 
-#: ../wizard/main.c:482
+#: ../wizard/main.c:480
 #: ../moblin/moblin-panel.c:752
 #, c-format
 msgid "Please enter the following PIN on '%s':"
@@ -549,12 +468,12 @@ msgstr "Ange följande PIN-kod på \"%s\":"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:503
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Vänta under tiden konfigurationen av \"%s\" färdigställs..."
 
-#: ../wizard/main.c:523
+#: ../wizard/main.c:521
 #: ../moblin/moblin-panel.c:777
 #, c-format
 msgid "Successfully set up new device '%s'"
@@ -685,107 +604,107 @@ msgstr "Konfiguration av blåtandsenhet"
 msgid "Setup Bluetooth devices"
 msgstr "Konfigurera blåtandsenheter"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekund"
 msgstr[1] "%'d sekunder"
 
-#: ../sendto/main.c:167
-#: ../sendto/main.c:180
+#: ../sendto/main.c:156
+#: ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minut"
 msgstr[1] "%'d minuter"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d timme"
 msgstr[1] "%'d timmar"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ungefär %'d timme"
 msgstr[1] "ungefär %'d timmar"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "Filöverföring"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "Försök _igen"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "Skickar filer via Bluetooth"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "Från:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "Till:"
 
-#: ../sendto/main.c:343
-#: ../sendto/main.c:359
+#: ../sendto/main.c:337
+#: ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "Ett okänt fel inträffade"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:348
 msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
 msgstr "Försäkra dig om att fjärrenheten är påslagen samt att den accepterar blåtandsanslutningar"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "Skickar %s"
 
-#: ../sendto/main.c:457
-#: ../sendto/main.c:523
+#: ../sendto/main.c:453
+#: ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Skickar fil %d av %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:658
 msgid "Select device to send to"
 msgstr "Välj enhet att skicka till"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:663
 msgid "_Send"
 msgstr "_Skicka"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "Välj filer att skicka"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:710
 msgid "Select"
 msgstr "Välj"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "Fjärrenhet att använda"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "Fjärrenhetens namn"
 
@@ -927,6 +846,15 @@ msgstr "Alternativ för PIN-kod"
 msgid "Add a new device"
 msgstr "Lägg till en ny enhet"
 
+#. Power switch
+#. Translators: This string appears next to a toggle switch which controls
+#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
+#. * switches in the Network UI of Moblin
+#: ../moblin/moblin-panel.c:1603
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
 #: ../moblin/moblin-panel.c:1621
 msgid "Make visible on Bluetooth"
 msgstr "Gör synlig via Bluetooth"
@@ -939,6 +867,64 @@ msgstr "Skicka fil från din dator"
 #: ../moblin/bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth Manager Panel"
 msgstr "Panelprogram för blåtandshantering"
+
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "Ta bort \"%s\" från listan över enheter?"
+
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr ""
+#~ "Om du tar bort enheten så måste du konfigurera den igen innan du kan "
+#~ "använda den."
+
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "Visa endast blåtandsenheter med..."
+
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "Öppna tangentbordsinställningar..."
+
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "Öppna musinställningar..."
+
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "Öppna ljudinställningar..."
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "No"
+#~ msgstr "Nej"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth är inaktiverat"
+
+#~ msgid "Bluetooth is disabled by hardware switch"
+#~ msgstr "Bluetooth är inaktiverat av maskinvaruknapp"
+
+#~ msgid "No Bluetooth adapters found"
+#~ msgstr "Inga blåtandsadaptrar hittades"
+
+#~ msgid "Visibility"
+#~ msgstr "Synlighet"
+
+#~ msgid "Visibility of “%s”"
+#~ msgstr "Synlighet för \"%s\""
+
+#~ msgid "Address"
+#~ msgstr "Adress"
+
+#~ msgid "Browse Files..."
+#~ msgstr "Bläddra filer..."
+
+#~ msgid "Connection"
+#~ msgstr "Anslutning"
+
+#~ msgid "Send Files..."
+#~ msgstr "Skicka filer..."
+
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "Konfigurera blåtandsinställningar"
 
 #~ msgid "Bluetooth: Enabled"
 #~ msgstr "Bluetooth: Aktiverat"
