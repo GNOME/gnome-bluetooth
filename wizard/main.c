@@ -351,6 +351,7 @@ connect_callback (GObject      *source_object,
 
 	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
 		bluetooth_client_connect_service (client, data->path, TRUE, NULL, connect_callback, data);
+		return;
 	}
 
 	if (success == FALSE)
