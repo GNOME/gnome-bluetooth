@@ -140,7 +140,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 			     NULL);
 		g_signal_connect(selector, "selected-device-changed",
 				 G_CALLBACK(select_device_changed), dialog);
-		gtk_container_add (GTK_CONTAINER (content_area), selector);
+		gtk_box_pack_start (GTK_BOX (content_area), selector, TRUE, TRUE, 0);
 
 		address = NULL;
 		response_id = gtk_dialog_run (GTK_DIALOG (dialog));
