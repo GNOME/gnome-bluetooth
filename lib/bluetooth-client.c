@@ -1738,11 +1738,8 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 					    user_data,
 					    bluetooth_client_connect_service);
 
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE) {
-		g_simple_async_result_set_op_res_gboolean (simple, FALSE);
-		g_object_unref (simple);
-		return;
-	}
+	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
+		goto bail;
 
 	if (cancellable != NULL) {
 		g_object_set_data_full (G_OBJECT (simple), "cancellable",
@@ -1760,17 +1757,13 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	if (proxy == NULL) {
 		if (table != NULL)
 			g_hash_table_unref (table);
-		g_simple_async_result_set_op_res_gboolean (simple, FALSE);
-		g_object_unref (simple);
-		return;
+		goto bail;
 	}
 
 	if (connect && table == NULL) {
 		if (proxy != NULL)
 			g_object_unref (proxy);
-		g_simple_async_result_set_op_res_gboolean (simple, FALSE);
-		g_object_unref (simple);
-		return;
+		goto bail;
 	} else if (connect) {
 		const char *iface_name;
 
@@ -1787,9 +1780,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 			g_printerr("No supported services on the '%s' device\n", device);
 			if (proxy != NULL)
 				g_object_unref (proxy);
-			g_simple_async_result_set_op_res_gboolean (simple, FALSE);
-			g_object_unref (simple);
-			return;
+			goto bail;
 		}
 	}
 
@@ -1826,6 +1817,13 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 				   (GAsyncReadyCallback) disconnect_callback,
 				   conndata);
 	}
+
+	return;
+
+bail:
+	g_simple_async_result_set_op_res_gboolean (simple, FALSE);
+	g_simple_async_result_complete (simple);
+	g_object_unref (simple);
 }
 
 /**
