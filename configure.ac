@@ -123,17 +123,10 @@ PKG_CHECK_MODULES(INPUT,
 		  gtk+-3.0)
 
 dnl Requires for the public library
-PKG_CHECK_MODULES(LIBGNOMEBT, gtk+-3.0)
-
-dnl Requires for the private library
-PKG_CHECK_MODULES(COMMON,
-		  gmodule-2.0
-		  gio-unix-2.0
-		  gtk+-3.0)
+PKG_CHECK_MODULES(LIBGNOMEBT, gmodule-2.0 gio-unix-2.0 gtk+-3.0)
 
 dnl Requires for the geoclue plugin
-PKG_CHECK_MODULES(GEOCLUE,
-		  gio-2.0)
+PKG_CHECK_MODULES(GEOCLUE, gio-2.0 gtk+-3.0)
 
 dnl Requires for the plugins
 PKG_CHECK_MODULES(PLUGINS,

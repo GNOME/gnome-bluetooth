@@ -59,7 +59,6 @@ gnomebluetooth_HEADERS =				\
 AM_CFLAGS =						\
 	-I$(srcdir)					\
 	$(LIBGNOMEBT_CFLAGS)				\
-	$(COMMON_CFLAGS)				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)				\
 	-DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\" \
