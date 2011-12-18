@@ -648,35 +648,11 @@ toggle_set_sensitive (GtkWidget *button,
 void
 set_user_pincode (GtkWidget *button)
 {
-	GSList *list, *l;
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+		return;
 
-	list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (button));
-	for (l = list; l ; l = l->next) {
-		GtkEntry *entry;
-		const char *pin;
-
-		if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
-			continue;
-
-		pin = g_object_get_data (G_OBJECT (button), "pin");
-		entry = g_object_get_data (G_OBJECT (button), "entry");
-
-		if (entry != NULL) {
-			g_free (user_pincode);
-			user_pincode = g_strdup (gtk_entry_get_text(entry));
-			gtk_dialog_set_response_sensitive (GTK_DIALOG (pin_dialog),
-							   GTK_RESPONSE_ACCEPT,
-							   gtk_entry_get_text_length (entry) >= 1);
-		} else if (pin != NULL) {
-			g_free (user_pincode);
-			if (*pin == '\0')
-				user_pincode = NULL;
-			else
-				user_pincode = g_strdup (pin);
-		}
-
-		break;
-	}
+	g_free (user_pincode);
+	user_pincode = g_strdup (g_object_get_data (G_OBJECT (button), "pin"));
 }
 
 void
