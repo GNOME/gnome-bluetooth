@@ -641,6 +641,8 @@ toggle_set_sensitive (GtkWidget *button,
 	if (!active)
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (pin_dialog),
 						   GTK_RESPONSE_ACCEPT, TRUE);
+	else
+		entry_custom_changed (entry_custom);
 }
 
 void
