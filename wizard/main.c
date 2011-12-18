@@ -653,18 +653,10 @@ set_user_pincode (GtkWidget *button)
 	list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (button));
 	for (l = list; l ; l = l->next) {
 		GtkEntry *entry;
-		GtkWidget *radio;
 		const char *pin;
 
 		if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
 			continue;
-
-		/* Is it radio_fixed that changed? */
-		radio = g_object_get_data (G_OBJECT (button), "button");
-		if (radio != NULL) {
-			set_user_pincode (radio);
-			return;
-		}
 
 		pin = g_object_get_data (G_OBJECT (button), "pin");
 		entry = g_object_get_data (G_OBJECT (button), "entry");
