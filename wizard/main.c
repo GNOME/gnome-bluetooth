@@ -64,7 +64,6 @@ static BluetoothAgent *agent;
 
 static gchar *target_address = NULL;
 static gchar *target_name = NULL;
-static gchar *target_pincode = NULL;
 static guint target_max_digits = 0;
 static guint target_type = BLUETOOTH_TYPE_ANY;
 static gboolean target_ssp = FALSE;
@@ -143,15 +142,13 @@ set_large_label (GtkLabel *label, const char *text)
 	g_free(str);
 }
 
-static void
-update_random_pincode (void)
+static gchar* 
+get_random_pincode (guint num_digits)
 {
-	g_free (target_pincode);
-	target_pincode = g_strdup_printf ("%d", g_random_int_range (pow (10, PIN_NUM_DIGITS - 1),
-								    pow (10, PIN_NUM_DIGITS) - 1));
-	automatic_pincode = FALSE;
-	g_free (user_pincode);
-	user_pincode = NULL;
+	if (num_digits == 0)
+		num_digits = PIN_NUM_DIGITS;
+	return g_strdup_printf ("%d", g_random_int_range (pow (10, num_digits - 1),
+							  pow (10, num_digits)));
 }
 
 static gboolean
@@ -175,7 +172,6 @@ restart_button_clicked (GtkButton *button,
 			gpointer user_data)
 {
 	/* Clean up old state */
-	update_random_pincode ();
 	target_ssp = FALSE;
 	target_type = BLUETOOTH_TYPE_ANY;
 	display_called = FALSE;
@@ -476,6 +472,9 @@ void prepare_callback (GtkWidget *assistant,
 
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
 			char *text;
+
+			g_free (pincode);
+			pincode = get_random_pincode (target_max_digits);
 
 			if (target_type == BLUETOOTH_TYPE_KEYBOARD) {
 				text = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
@@ -920,8 +919,6 @@ int main (int argc, char **argv)
 	}
 
 	gtk_window_set_default_icon_name("bluetooth");
-
-	update_random_pincode ();
 
 	client = bluetooth_client_new();
 
