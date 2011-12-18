@@ -661,9 +661,7 @@ select_device_changed (BluetoothChooser *selector,
 		       gpointer user_data)
 {
 	GValue value = { 0, };
-	char *name;
 	int legacypairing;
-	BluetoothType type;
 
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
 		return;
@@ -674,8 +672,6 @@ select_device_changed (BluetoothChooser *selector,
 	if (address == NULL)
 		return;
 
-	name = bluetooth_chooser_get_selected_device_name (selector);
-	type = bluetooth_chooser_get_selected_device_type (selector);
 	if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
 		legacypairing = g_value_get_int (&value);
 		if (legacypairing == -1)
@@ -688,9 +684,9 @@ select_device_changed (BluetoothChooser *selector,
 	target_address = g_strdup (address);
 
 	g_free(target_name);
-	target_name = name;
+	target_name = bluetooth_chooser_get_selected_device_name (selector);
 
-	target_type = type;
+	target_type = bluetooth_chooser_get_selected_device_type (selector);
 	target_ssp = !legacypairing;
 	automatic_pincode = FALSE;
 
