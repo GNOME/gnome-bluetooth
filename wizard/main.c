@@ -454,7 +454,6 @@ void prepare_callback (GtkWidget *assistant,
 
 	if ((page == page_setup || page == page_connecting) && (create_started == FALSE)) {
 		const char *path = AGENT_PATH;
-		char *pin_ret;
 
 		/* Set the filter on the selector, so we can use it to get more
 		 * info later, in page_summary */
@@ -463,10 +462,8 @@ void prepare_callback (GtkWidget *assistant,
 			      NULL);
 
 		/* Do we pair, or don't we? */
-		pin_ret = get_pincode_for_device (target_type, target_address, target_name, NULL);
-		if (pin_ret != NULL && g_str_equal (pin_ret, "NULL"))
+		if (g_strcmp0 (user_pincode, "NULL") == 0)
 			path = NULL;
-		g_free (pin_ret);
 
 		g_object_ref(agent);
 		bluetooth_client_create_device (client, target_address,
