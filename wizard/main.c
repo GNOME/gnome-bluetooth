@@ -65,6 +65,7 @@ static BluetoothAgent *agent;
 static gchar *target_address = NULL;
 static gchar *target_name = NULL;
 static gchar *target_pincode = NULL;
+static guint target_max_digits = 0;
 static guint target_type = BLUETOOTH_TYPE_ANY;
 static gboolean target_ssp = FALSE;
 static gboolean create_started = FALSE;
@@ -730,24 +731,10 @@ select_device_changed (BluetoothChooser *selector,
 	g_free (pincode);
 	pincode = NULL;
 
-	if (user_pincode != NULL && *user_pincode != '\0') {
-		pincode = g_strdup (user_pincode);
-		automatic_pincode = TRUE;
-	} else if (address != NULL) {
-		guint max_digits;
-
-		pincode = get_pincode_for_device(target_type, target_address, target_name, &max_digits);
-		if (pincode == NULL) {
-			/* Truncate the default pincode if the device doesn't like long
-			 * PIN codes */
-			if (max_digits != PIN_NUM_DIGITS && max_digits > 0)
-				pincode = g_strndup(target_pincode, max_digits);
-			else
-				pincode = g_strdup(target_pincode);
-		} else if (target_ssp == FALSE) {
-			automatic_pincode = TRUE;
-		}
-	}
+	g_free (user_pincode);
+	user_pincode = get_pincode_for_device (target_type, target_address, target_name, &target_max_digits);
+	automatic_pincode = user_pincode != NULL;
+	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
 }
 
 void
