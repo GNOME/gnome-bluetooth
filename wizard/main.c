@@ -828,11 +828,12 @@ create_wizard (void)
 	radio_custom = W("radio_custom");
 	entry_custom = W("entry_custom");
 
-	g_object_set_data (G_OBJECT (radio_auto), "pin", "");
+	g_object_set_data (G_OBJECT (radio_auto), "pin", NULL);
 	g_object_set_data (G_OBJECT (radio_0000), "pin", "0000");
 	g_object_set_data (G_OBJECT (radio_1111), "pin", "1111");
 	g_object_set_data (G_OBJECT (radio_1234), "pin", "1234");
 	g_object_set_data (G_OBJECT (radio_none), "pin", "NULL");
+	g_object_set_data (G_OBJECT (radio_custom), "pin", "");
 	g_object_set_data (G_OBJECT (radio_custom), "entry", entry_custom);
 
 	gtk_builder_connect_signals(builder, NULL);
