@@ -116,6 +116,9 @@ PKG_CHECK_MODULES(WIZARD,
 		  gmodule-export-2.0
 		  gtk+-3.0)
 
+AC_CHECK_LIBM
+AC_SUBST(LIBM)
+
 dnl Requires for the input helper
 PKG_CHECK_MODULES(INPUT,
 		  xi
