@@ -75,8 +75,8 @@ introspection_files =				 \
 	$(libgnome_bluetooth_c_sources)
 
 GnomeBluetooth-1.0.gir: libgnome-bluetooth.la
-GnomeBluetooth_1_0_gir_INCLUDES = GObject-2.0 Gtk-3.0 DBusGLib-1.0 GModule-2.0
-GnomeBluetooth_1_0_gir_PACKAGES = gobject-2.0 gtk+-3.0 dbus-glib-1 gmodule-2.0 glib-2.0
+GnomeBluetooth_1_0_gir_INCLUDES = GObject-2.0 Gtk-3.0 GModule-2.0
+GnomeBluetooth_1_0_gir_PACKAGES = gobject-2.0 gtk+-3.0 gmodule-2.0 glib-2.0
 GnomeBluetooth_1_0_gir_CFLAGS = -I$(srcdir)
 GnomeBluetooth_1_0_gir_LIBS = libgnome-bluetooth.la
 GnomeBluetooth_1_0_gir_SCANNERFLAGS = --symbol-prefix=bluetooth_ --identifier-prefix=Bluetooth --pkg-export=gnome-bluetooth-1.0
