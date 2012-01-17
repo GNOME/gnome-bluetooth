@@ -1612,9 +1612,19 @@ connect_callback (GDBusProxy   *proxy,
 		  GAsyncResult *res,
 		  ConnectData  *conndata)
 {
+	GVariant *variant;
 	gboolean retval;
+	GError *error = NULL;
 
-	retval = device_call_connect_finish (DEVICE (proxy), res, NULL);
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
+	if (variant == NULL) {
+		retval = FALSE;
+		g_debug ("Connect failed: %s", error->message);
+		g_error_free (error);
+	} else {
+		g_variant_unref (variant);
+		retval = TRUE;
+	}
 
 	g_simple_async_result_set_op_res_gboolean (conndata->simple, retval);
 	g_simple_async_result_complete_in_idle (conndata->simple);
@@ -1630,12 +1640,28 @@ disconnect_callback (GDBusProxy   *proxy,
 		     ConnectData  *conndata)
 {
 	gboolean retval;
+	GError *error = NULL;
 
-	retval = device_call_disconnect_finish (DEVICE (proxy), res, NULL);
-
-	if (conndata->services != NULL) {
+	if (conndata->services == NULL) {
+		retval = device_call_disconnect_finish (DEVICE (proxy), res, &error);
+		if (retval == FALSE) {
+			g_debug ("Disconnect failed: %s", error->message);
+			g_error_free (error);
+		}
+	} else {
 		GDBusProxy *service;
 		BluetoothClient *client;
+		GVariant *variant;
+
+		variant = g_dbus_proxy_call_finish (proxy, res, &error);
+		if (variant == NULL) {
+			retval = FALSE;
+			g_debug ("Disconnect failed: %s", error->message);
+			g_error_free (error);
+		} else {
+			g_variant_unref (variant);
+			retval = TRUE;
+		}
 
 		client = (BluetoothClient *) g_async_result_get_source_object (G_ASYNC_RESULT (conndata->simple));
 		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, client);
@@ -1767,7 +1793,13 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 		g_object_unref (proxy);
 		res = TRUE;
 		goto bail;
-	} else if (connect) {
+	}
+
+	conndata = g_new0 (ConnectData, 1);
+	conndata->simple = simple;
+
+	if (connect) {
+		GDBusProxy *service;
 		const char *iface_name;
 
 		iface_name = NULL;
@@ -1777,29 +1809,26 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 				break;
 			}
 		}
-		g_hash_table_unref (table);
 
 		if (iface_name == NULL) {
 			g_printerr("No supported services on the '%s' device\n", device);
+			g_hash_table_unref (table);
+			g_free (conndata);
 			g_object_unref (proxy);
 			goto bail;
 		}
-	}
 
-	conndata = g_new0 (ConnectData, 1);
-	conndata->simple = simple;
+		service = get_proxy_for_iface (DEVICE (proxy), iface_name, client);
 
-	if (connect) {
-		device_call_connect (DEVICE (proxy),
-				     NULL,
-				     (GAsyncReadyCallback) connect_callback,
-				     conndata);
-	} else if (table == NULL) {
-		device_call_disconnect (DEVICE (proxy),
-					NULL,
-					(GAsyncReadyCallback) disconnect_callback,
-					conndata);
-	} else {
+		g_dbus_proxy_call (G_DBUS_PROXY (service),
+				   "Connect",
+				   NULL,
+				   G_DBUS_CALL_FLAGS_NONE,
+				   -1,
+				   NULL,
+				   (GAsyncReadyCallback) connect_callback,
+				   conndata);
+	} else if (table != NULL) {
 		GDBusProxy *service;
 
 		conndata->services = g_hash_table_get_keys (table);
@@ -1812,12 +1841,17 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 
 		g_dbus_proxy_call (G_DBUS_PROXY (service),
 				   "Disconnect",
-				   g_variant_new ("()"),
+				   NULL,
 				   G_DBUS_CALL_FLAGS_NONE,
 				   -1,
 				   NULL,
 				   (GAsyncReadyCallback) disconnect_callback,
 				   conndata);
+	} else if (table == NULL) {
+		device_call_disconnect (DEVICE (proxy),
+					NULL,
+					(GAsyncReadyCallback) disconnect_callback,
+					conndata);
 	}
 
 	return;
