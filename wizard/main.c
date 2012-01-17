@@ -412,8 +412,6 @@ close_callback (GtkWidget *assistant,
 		gpointer data)
 {
 	gtk_widget_destroy(assistant);
-
-	gtk_main_quit();
 }
 
 void prepare_callback (GtkWidget *assistant,
