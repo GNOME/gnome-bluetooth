@@ -407,9 +407,6 @@ close_callback (GtkWidget *assistant,
 		gpointer data)
 {
 	gtk_widget_destroy(assistant);
-
-	//FIXME doesn't work with a GtkApplication
-	gtk_main_quit();
 }
 
 void prepare_callback (GtkWidget *assistant,
