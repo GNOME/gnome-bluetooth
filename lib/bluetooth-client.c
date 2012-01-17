@@ -1729,6 +1729,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	GHashTable *table;
 	GtkTreeIter iter;
 	guint i;
+	gboolean res;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 	g_return_if_fail (device != NULL);
@@ -1737,6 +1738,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 					    callback,
 					    user_data,
 					    bluetooth_client_connect_service);
+	res = FALSE;
 
 	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
 		goto bail;
@@ -1762,6 +1764,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 
 	if (connect && table == NULL) {
 		g_object_unref (proxy);
+		res = TRUE;
 		goto bail;
 	} else if (connect) {
 		const char *iface_name;
@@ -1819,7 +1822,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	return;
 
 bail:
-	g_simple_async_result_set_op_res_gboolean (simple, FALSE);
+	g_simple_async_result_set_op_res_gboolean (simple, res);
 	g_simple_async_result_complete (simple);
 	g_object_unref (simple);
 }
