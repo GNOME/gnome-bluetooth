@@ -1759,6 +1759,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	if (proxy == NULL) {
 		if (table != NULL)
 			g_hash_table_unref (table);
+		g_debug ("Device '%s' has a services table, but no proxy", device);
 		goto bail;
 	}
 
