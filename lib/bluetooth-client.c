@@ -1761,8 +1761,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	}
 
 	if (connect && table == NULL) {
-		if (proxy != NULL)
-			g_object_unref (proxy);
+		g_object_unref (proxy);
 		goto bail;
 	} else if (connect) {
 		const char *iface_name;
@@ -1778,8 +1777,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 
 		if (iface_name == NULL) {
 			g_printerr("No supported services on the '%s' device\n", device);
-			if (proxy != NULL)
-				g_object_unref (proxy);
+			g_object_unref (proxy);
 			goto bail;
 		}
 	}
