@@ -78,7 +78,7 @@ static char *pincode = NULL;
 static GtkBuilder *builder = NULL;
 
 static GtkAssistant *window_assistant = NULL;
-static GtkWidget *button_close = NULL;
+static GtkWidget *button_quit = NULL;
 static GtkWidget *button_cancel = NULL;
 static GtkWidget *page_search = NULL;
 static GtkWidget *page_connecting = NULL;
@@ -117,7 +117,7 @@ static GtkWidget *radio_custom = NULL;
 static GtkWidget *entry_custom = NULL;
 
 /* Signals */
-void close_callback(GtkWidget *assistant, gpointer data);
+void quit_callback(GtkWidget *assistant, gpointer data);
 void prepare_callback(GtkWidget *assistant, GtkWidget *page, gpointer data);
 void select_device_changed(BluetoothChooser *selector, const char *address, gpointer user_data);
 gboolean entry_custom_event(GtkWidget *entry, GdkEventKey *event);
@@ -404,7 +404,7 @@ create_callback (BluetoothClient *_client,
 }
 
 void
-close_callback (GtkWidget *widget,
+quit_callback (GtkWidget *widget,
 		gpointer data)
 {
 	gtk_widget_destroy(GTK_WIDGET (window_assistant));
@@ -416,7 +416,7 @@ void prepare_callback (GtkWidget *assistant,
 {
 	gboolean complete = TRUE;
 
-	gtk_widget_hide (button_close);
+	gtk_widget_hide (button_quit);
 	gtk_widget_hide (button_cancel);
 
 	if (page == page_search) {
@@ -504,7 +504,7 @@ void prepare_callback (GtkWidget *assistant,
 		gtk_label_set_text (GTK_LABEL (label_finishing), text);
 		g_free (text);
 
-		gtk_widget_show (button_close);
+		gtk_widget_show (button_quit);
 	} else {
 		gtk_spinner_stop (GTK_SPINNER (spinner_finishing));
 	}
@@ -543,14 +543,14 @@ void prepare_callback (GtkWidget *assistant,
 			g_list_free (widgets);
 			gtk_widget_show_all (extra_config_vbox);
 		}
-		gtk_widget_show (button_close);
+		gtk_widget_show (button_quit);
 	}
 
 	/* Setup the buttons some */
 	if (page == page_summary && summary_failure) {
 		complete = FALSE;
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
-		gtk_widget_show (button_close);
+		gtk_widget_show (button_quit);
 	} else {
 		if (gtk_widget_get_parent (W("restart_button")) != NULL)
 			gtk_assistant_remove_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
@@ -767,11 +767,11 @@ create_wizard (void)
 	gtk_assistant_set_forward_page_func (assistant, page_func, NULL, NULL);
 
 	/* The 2 custom buttons */
-	button_close = W("close_button");
+	button_quit = W("quit_button");
 	button_cancel = W("cancel_button");
-	gtk_assistant_add_action_widget (assistant, button_close);
+	gtk_assistant_add_action_widget (assistant, button_quit);
 	gtk_assistant_add_action_widget (assistant, button_cancel);
-	gtk_widget_hide (button_close);
+	gtk_widget_hide (button_quit);
 	gtk_widget_hide (button_cancel);
 
 	/* Intro page, nothing to do */
