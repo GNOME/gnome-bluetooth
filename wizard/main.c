@@ -52,7 +52,6 @@ enum {
 	PAGE_CONNECTING,
 	PAGE_SETUP,
 	PAGE_SSP_SETUP,
-	PAGE_FAILURE,
 	PAGE_FINISHING,
 	PAGE_SUMMARY
 };
@@ -85,7 +84,6 @@ static GtkWidget *page_search = NULL;
 static GtkWidget *page_connecting = NULL;
 static GtkWidget *page_setup = NULL;
 static GtkWidget *page_ssp_setup = NULL;
-static GtkWidget *page_failure = NULL;
 static GtkWidget *page_finishing = NULL;
 static GtkWidget *page_summary = NULL;
 
@@ -100,11 +98,10 @@ static GtkWidget *label_ssp_pin = NULL;
 static GtkWidget *does_not_match_button = NULL;
 static GtkWidget *matches_button = NULL;
 
-static GtkWidget *label_failure = NULL;
-
 static GtkWidget *label_finishing = NULL;
 static GtkWidget *spinner_finishing = NULL;
 
+static gboolean   summary_failure = FALSE;
 static GtkWidget *label_summary = NULL;
 static GtkWidget *extra_config_vbox = NULL;
 
@@ -179,6 +176,7 @@ restart_button_clicked (GtkButton *button,
 	target_address = NULL;
 	g_free (target_name);
 	target_name = NULL;
+	summary_failure = FALSE;
 
 	g_object_set (selector,
 		      "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
@@ -195,14 +193,15 @@ does_not_match_cb (GtkButton *button,
 	GError *error = NULL;
 	char *text;
 
-	gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
+	summary_failure = TRUE;
+	gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
 
 	/* translators:
 	 * The '%s' is the device name, for example:
 	 * Pairing with 'Sony Bluetooth Headset' cancelled
 	 */
 	text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
-	gtk_label_set_text(GTK_LABEL(label_failure), text);
+	gtk_label_set_text(GTK_LABEL(label_summary), text);
 	g_free(text);
 
 	invocation = g_object_get_data (G_OBJECT (button), "invocation");
@@ -317,14 +316,15 @@ cancel_callback (GDBusMethodInvocation *invocation,
 
 	create_started = FALSE;
 
-	gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
+	summary_failure = TRUE;
+	gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
 
 	/* translators:
 	 * The '%s' is the device name, for example:
 	 * Pairing with 'Sony Bluetooth Headset' cancelled
 	 */
 	text = g_strdup_printf(_("Pairing with '%s' cancelled"), target_name);
-	gtk_label_set_text(GTK_LABEL(label_failure), text);
+	gtk_label_set_text(GTK_LABEL(label_summary), text);
 	g_free(text);
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
@@ -376,7 +376,8 @@ create_callback (BluetoothClient *_client,
 	if (path == NULL) {
 		char *text;
 
-		gtk_assistant_set_current_page (window_assistant, PAGE_FAILURE);
+		summary_failure = TRUE;
+		gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -386,7 +387,7 @@ create_callback (BluetoothClient *_client,
 
 		g_warning ("Setting up '%s' failed: %s", target_name, error->message);
 
-		gtk_label_set_markup(GTK_LABEL(label_failure), text);
+		gtk_label_set_markup(GTK_LABEL(label_summary), text);
 		g_free (text);
 
 		return;
@@ -508,7 +509,7 @@ void prepare_callback (GtkWidget *assistant,
 		gtk_spinner_stop (GTK_SPINNER (spinner_finishing));
 	}
 
-	if (page == page_summary) {
+	if (page == page_summary && summary_failure == FALSE) {
 		GList *widgets = NULL;
 		GValue value = { 0, };
 		char **uuids, *text;
@@ -542,10 +543,11 @@ void prepare_callback (GtkWidget *assistant,
 			g_list_free (widgets);
 			gtk_widget_show_all (extra_config_vbox);
 		}
+		gtk_widget_show (button_close);
 	}
 
 	/* Setup the buttons some */
-	if (page == page_failure) {
+	if (page == page_summary && summary_failure) {
 		complete = FALSE;
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
 		gtk_widget_show (button_close);
@@ -795,11 +797,6 @@ create_wizard (void)
 	label_ssp_pin = W("label_ssp_pin");
 	does_not_match_button = W("does_not_match_button");
 	matches_button = W("matches_button");
-
-	/* Failure page */
-	page_failure = W("page_failure");
-	gtk_assistant_set_page_complete(assistant, page_failure, FALSE);
-	label_failure = W("label_failure");
 
 	/* Finishing page */
 	page_finishing = W("page_finishing");
