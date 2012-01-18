@@ -214,7 +214,7 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (button->dialog))), 2);
 
 	/* Create the button->chooser */
-	button->chooser = bluetooth_chooser_new (NULL);
+	button->chooser = bluetooth_chooser_new ();
 	g_signal_connect(button->chooser, "selected-device-changed",
 			 G_CALLBACK(select_device_changed), button);
 	g_signal_emit (G_OBJECT (button),

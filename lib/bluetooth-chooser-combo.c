@@ -324,7 +324,7 @@ bluetooth_chooser_combo_init (BluetoothChooserCombo *combo)
 					"text", BLUETOOTH_COLUMN_ALIAS,
 					NULL);
 
-	combo->priv->chooser = bluetooth_chooser_new ("");
+	combo->priv->chooser = bluetooth_chooser_new ();
 
 	treeview = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (combo->priv->chooser));
 	combo->priv->model_notify_id = g_signal_connect (G_OBJECT (treeview), "notify::model",

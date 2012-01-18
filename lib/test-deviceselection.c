@@ -212,7 +212,7 @@ create_wizard_dialogue (void)
 
 	dialog = create_dialogue ("Add a Device");
 
-	selector = bluetooth_chooser_new("Select new device to setup");
+	selector = bluetooth_chooser_new();
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
@@ -249,7 +249,7 @@ create_props_dialogue (void)
 
 	dialog = create_dialogue ("Add a Device");
 
-	selector = bluetooth_chooser_new(NULL);
+	selector = bluetooth_chooser_new();
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,

@@ -64,7 +64,6 @@ struct _BluetoothChooserPrivate {
 	BluetoothClient *client;
 	GtkTreeSelection *selection;
 	GtkTreeModel *model, *filter, *adapter_model;
-	GtkWidget *label, *label_align;
 
 	gulong default_adapter_changed_id;
 
@@ -437,32 +436,6 @@ bluetooth_chooser_get_scrolled_window (BluetoothChooser *self)
 	return priv->scrolled_window;
 }
 
-/**
- * bluetooth_chooser_set_title:
- * @self: a BluetoothChooser widget.
- * @title: the widget header title.
- *
- * Sets the #BluetoothChooser's title.
- */
-void
-bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title)
-{
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
-
-	if (title == NULL) {
-		gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 0, 0);
-		gtk_widget_hide (priv->label);
-	} else {
-		char *str;
-
-		str = g_strdup_printf ("<b>%s</b>", title);
-		gtk_label_set_markup (GTK_LABEL(priv->label), str);
-		g_free (str);
-		gtk_widget_show (priv->label);
-		gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 12, 0);
-	}
-}
-
 static void
 device_model_row_changed (GtkTreeModel *model,
 			   GtkTreePath  *path,
@@ -807,23 +780,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (self), vbox, TRUE, TRUE, 0);
 
-	/* The top level label */
-	priv->label = gtk_label_new ("");
-	gtk_widget_set_no_show_all (priv->label, TRUE);
-	gtk_box_pack_start (GTK_BOX (vbox), priv->label, FALSE, TRUE, 0);
-	gtk_label_set_use_markup (GTK_LABEL (priv->label), TRUE);
-	gtk_misc_set_alignment (GTK_MISC (priv->label), 0, 0.5);
-
-	priv->label_align = gtk_alignment_new (0.5, 0.5, 1, 1);
-	gtk_widget_show (priv->label_align);
-	gtk_box_pack_start (GTK_BOX (vbox), priv->label_align, TRUE, TRUE, 0);
-	gtk_alignment_set_padding (GTK_ALIGNMENT (priv->label_align), 0, 0, 0, 0);
-
 	/* The treeview label */
-	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-	gtk_widget_show (vbox);
-	gtk_container_add (GTK_CONTAINER (priv->label_align), vbox);
-
 	priv->search_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 24);
 	gtk_widget_set_name (priv->search_hbox, "search_hbox");
 	if (priv->show_searching)
@@ -935,7 +892,6 @@ bluetooth_chooser_finalize (GObject *object)
 
 enum {
 	PROP_0,
-	PROP_TITLE,
 	PROP_DEVICE_SELECTED,
 	PROP_SHOW_PAIRING,
 	PROP_SHOW_CONNECTED,
@@ -992,9 +948,6 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 		}
 		break;
 	}
-	case PROP_TITLE:
-		bluetooth_chooser_set_title (BLUETOOTH_CHOOSER (object), g_value_get_string (value));
-		break;
 	case PROP_SHOW_PAIRING:
 		priv->show_paired = g_value_get_boolean (value);
 		if (priv->bonded_cell != NULL)
@@ -1165,9 +1118,6 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 			      G_TYPE_NONE, 1, G_TYPE_STRING);
 
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
-					 PROP_TITLE, g_param_spec_string ("title",
-									  "title", "The widget header title", NULL, G_PARAM_WRITABLE));
-	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
 										    "device-selected", "the Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE | G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
@@ -1208,17 +1158,14 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 
 /**
  * bluetooth_chooser_new:
- * @title: the widget header title, if %NULL, the widget header will be hidden.
  *
  * Returns a new #BluetoothChooser widget.
  *
  * Return value: A #BluetoothChooser widget
  **/
 GtkWidget *
-bluetooth_chooser_new (const gchar *title)
+bluetooth_chooser_new (void)
 {
-	return g_object_new(BLUETOOTH_TYPE_CHOOSER,
-			    "title", title,
-			    NULL);
+	return g_object_new(BLUETOOTH_TYPE_CHOOSER, NULL);
 }
 

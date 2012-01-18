@@ -58,7 +58,7 @@ struct _BluetoothChooserClass {
 
 GType bluetooth_chooser_get_type (void);
 
-GtkWidget *bluetooth_chooser_new (const char *title);
+GtkWidget *bluetooth_chooser_new (void);
 
 void bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title);
 
