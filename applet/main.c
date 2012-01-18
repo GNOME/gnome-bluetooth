@@ -155,6 +155,7 @@ void browse_callback(GObject *widget, gpointer user_data)
 
 	bluetooth_applet_browse_address (applet, address,
 					 GDK_CURRENT_TIME, mount_finish_cb, NULL);
+	g_free (address);
 
 }
 
