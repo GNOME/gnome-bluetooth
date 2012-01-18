@@ -1,3 +1,21 @@
+ver 3.3.4:
+
+Applet:
+- Fix newly paired devices not appearing in menus
+- Update fallback menu to match GNOME Shell's
+
+Library:
+- Make the Connect/Disconnect helper function work
+- Do not use dbus-glib-1 when building introspection data
+- Remove header from chooser widget, breaks API
+
+Wizard:
+- Fix assertion when exiting
+- Remove "Device Setup Failed" label from the sidebar
+- A number of UI tweaks
+
+Plus build fixes, and the removal of the unmaintained Moblin UI
+
 ver 3.3.3:
 Library:
 - GVariant fixes
