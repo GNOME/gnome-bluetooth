@@ -1364,7 +1364,7 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
  * @data: user data to pass to gtk_tree_model_filter_set_visible_func()
  * @destroy: a destroy function for gtk_tree_model_filter_set_visible_func()
  *
- * Returns a #GtkTreeModel of devices filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
+ * Returns a #GtkTreeModelFilter of devices filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
  *
  * Return value: (transfer full): a #GtkTreeModel object.
  **/
@@ -1409,7 +1409,7 @@ static gboolean adapter_filter(GtkTreeModel *model,
  * bluetooth_client_get_adapter_model:
  * @client: a #BluetoothClient object
  *
- * Returns a filtered #GtkTreeModel with only adapters present.
+ * Returns a #GtkTreeModelFilter with only adapters present.
  *
  * Return value: (transfer full): a #GtkTreeModel object.
  **/
@@ -1423,7 +1423,10 @@ GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
  * bluetooth_client_get_device_model:
  * @client: a #BluetoothClient object
  *
- * Returns a filtered #GtkTreeModel with only devices belonging to the default adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter.
+ * Returns a #GtkTreeModelFilter with only devices belonging to the default adapter listed.
+ * Note that the model will follow a specific adapter, and will not follow the default adapter.
+ * Also note that due to the way #GtkTreeModelFilter works, you will probably want to
+ * monitor signals on the "child-model" #GtkTreeModel to monitor for changes.
  *
  * Return value: (transfer full): a #GtkTreeModel object.
  **/
