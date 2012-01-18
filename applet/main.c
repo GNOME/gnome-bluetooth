@@ -82,17 +82,6 @@ void settings_callback(GObject *widget, gpointer user_data)
 }
 
 static void
-select_device_changed(BluetoothChooser *sel,
-		      char *address,
-		      gpointer user_data)
-{
-	GtkDialog *dialog = user_data;
-
-	gtk_dialog_set_response_sensitive(dialog,
-				GTK_RESPONSE_ACCEPT, address != NULL);
-}
-
-static void
 mount_finish_cb (GObject *source_object,
 		 GAsyncResult *res,
 		 gpointer user_data)
@@ -108,54 +97,14 @@ mount_finish_cb (GObject *source_object,
 
 void browse_callback(GObject *widget, gpointer user_data)
 {
-	char *address;
+	const char *address;
 
-	address = g_strdup (g_object_get_data (widget, "address"));
-	if (address == NULL) {
-		GtkWidget *dialog, *selector, *content_area;
-		int response_id;
-
-		dialog = gtk_dialog_new_with_buttons(_("Select Device to Browse"), NULL,
-						     0,
-						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
-						     NULL);
-		gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Browse"), GTK_RESPONSE_ACCEPT);
-		gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-						  GTK_RESPONSE_ACCEPT, FALSE);
-		gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
-
-		gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-		content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-		gtk_box_set_spacing (GTK_BOX (content_area), 2);
-
-		selector = bluetooth_chooser_new(_("Select device to browse"));
-		gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
-		gtk_widget_show(selector);
-		g_object_set(selector,
-			     "show-searching", FALSE,
-			     "show-device-category", FALSE,
-			     "show-device-type", TRUE,
-			     "device-category-filter", BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
-			     "device-service-filter", "OBEXFileTransfer",
-			     NULL);
-		g_signal_connect(selector, "selected-device-changed",
-				 G_CALLBACK(select_device_changed), dialog);
-		gtk_box_pack_start (GTK_BOX (content_area), selector, TRUE, TRUE, 0);
-
-		response_id = gtk_dialog_run (GTK_DIALOG (dialog));
-		if (response_id == GTK_RESPONSE_ACCEPT)
-			g_object_get (G_OBJECT (selector), "device-selected", &address, NULL);
-
-		gtk_widget_destroy (dialog);
-
-		if (response_id != GTK_RESPONSE_ACCEPT)
-			return;
-	}
+	address = g_object_get_data (widget, "address");
+	if (address == NULL)
+		return;
 
 	bluetooth_applet_browse_address (applet, address,
 					 GDK_CURRENT_TIME, mount_finish_cb, NULL);
-	g_free (address);
-
 }
 
 void sendto_callback(GObject *widget, gpointer user_data)
