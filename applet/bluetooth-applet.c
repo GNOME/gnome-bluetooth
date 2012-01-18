@@ -460,22 +460,40 @@ cancel_request(DBusGMethodInvocation *context,
 }
 
 static void
-device_added_or_changed (GtkTreeModel *model,
-			 GtkTreePath  *path,
-			 GtkTreeIter  *iter,
-			 gpointer      data)
+device_added_or_changed (GtkTreeModel    *model,
+			 GtkTreePath     *path,
+			 GtkTreeIter     *child_iter,
+			 BluetoothApplet *self)
 {
-	BluetoothApplet *self = BLUETOOTH_APPLET (data);
+	GtkTreeIter iter;
 
+	/* The line that changed isn't in the filtered view */
+	if (gtk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (self->device_model),
+							      &iter,
+							      child_iter) == FALSE)
+		return;
 	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
 }
 
 static void
-device_removed (GtkTreeModel *model,
-	        GtkTreePath *path,
-	        gpointer user_data)
+device_removed (GtkTreeModel    *model,
+	        GtkTreePath     *path,
+	        BluetoothApplet *self)
 {
-	device_added_or_changed (model, path, NULL, user_data);
+	/* We cannot check whether the row still exists, because
+	 * it's already gone */
+	g_signal_emit (self, signals[SIGNAL_DEVICES_CHANGED], 0);
+}
+
+static GtkTreeModel *
+get_child_model (GtkTreeModel *model)
+{
+	GtkTreeModel *child_model;
+
+	if (model == NULL)
+		return NULL;
+	g_object_get (model, "child-model", &child_model, NULL);
+	return child_model;
 }
 
 static void
@@ -484,28 +502,36 @@ default_adapter_changed (GObject    *client,
 			 gpointer    data)
 {
 	BluetoothApplet* self = BLUETOOTH_APPLET (data);
+	GtkTreeModel *child_model;
 
 	if (self->default_adapter)
 		g_object_unref (self->default_adapter);
 	self->default_adapter = bluetooth_client_get_default_adapter (self->client);
 
-	if (self->device_model) {
-		g_signal_handler_disconnect (self->device_model, self->signal_row_added);
-		g_signal_handler_disconnect (self->device_model, self->signal_row_changed);
-		g_signal_handler_disconnect (self->device_model, self->signal_row_deleted);
-		g_object_unref (self->device_model);
+	/* The old model */
+	child_model = get_child_model (self->device_model);
+	if (child_model) {
+		g_signal_handler_disconnect (child_model, self->signal_row_added);
+		g_signal_handler_disconnect (child_model, self->signal_row_changed);
+		g_signal_handler_disconnect (child_model, self->signal_row_deleted);
+		g_object_unref (child_model);
 	}
+	if (self->device_model)
+		g_object_unref (self->device_model);
+
+	/* The new model */
 	if (self->default_adapter)
 		self->device_model = bluetooth_client_get_device_model (self->client, self->default_adapter);
 	else
 		self->device_model = NULL;
 
-	if (self->device_model) {
-		self->signal_row_added = g_signal_connect (self->device_model, "row-inserted",
+	child_model = get_child_model (self->device_model);
+	if (child_model) {
+		self->signal_row_added = g_signal_connect (child_model, "row-inserted",
 							   G_CALLBACK(device_added_or_changed), self);
-		self->signal_row_deleted = g_signal_connect (self->device_model, "row-deleted",
+		self->signal_row_deleted = g_signal_connect (child_model, "row-deleted",
 							     G_CALLBACK(device_removed), self);
-		self->signal_row_changed = g_signal_connect (self->device_model, "row-changed",
+		self->signal_row_changed = g_signal_connect (child_model, "row-changed",
 							     G_CALLBACK (device_added_or_changed), self);
 	}
 
