@@ -47,7 +47,6 @@
 #define W(x) GTK_WIDGET(gtk_builder_get_object(builder, x))
 
 enum {
-	PAGE_INTRO,
 	PAGE_SEARCH,
 	PAGE_CONNECTING,
 	PAGE_SETUP,
@@ -747,7 +746,7 @@ page_func (gint current_page,
 	return current_page + 1;
 }
 
-static GtkAssistant *
+static gboolean
 create_wizard (void)
 {
 	GtkAssistant *assistant;
@@ -758,11 +757,12 @@ create_wizard (void)
 		if (gtk_builder_add_from_file (builder, PKGDATADIR "/wizard.ui", &err) == 0) {
 			g_warning ("Could not load UI from %s: %s", PKGDATADIR "/wizard.ui", err->message);
 			g_error_free(err);
-			return NULL;
+			return FALSE;
 		}
 	}
 
-	assistant = GTK_ASSISTANT(gtk_builder_get_object(builder, "assistant"));
+	window_assistant = GTK_ASSISTANT(gtk_builder_get_object(builder, "assistant"));
+	assistant = window_assistant;
 
 	gtk_assistant_set_forward_page_func (assistant, page_func, NULL, NULL);
 
@@ -832,7 +832,7 @@ create_wizard (void)
 
 	gtk_assistant_update_buttons_state(GTK_ASSISTANT(assistant));
 
-	return assistant;
+	return TRUE;
 }
 
 static void
@@ -895,8 +895,7 @@ int main (int argc, char **argv)
 
 	bluetooth_plugin_manager_init ();
 
-	window_assistant = create_wizard();
-	if (window_assistant == NULL)
+	if (create_wizard() == FALSE)
 		return 1;
 	gtk_application_add_window (app,
 				    GTK_WINDOW (window_assistant));
