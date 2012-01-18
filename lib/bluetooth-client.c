@@ -478,6 +478,8 @@ device_changed (Device          *device,
 		g_strfreev (uuids);
 		if (services != NULL)
 			g_hash_table_unref (services);
+	} else {
+		g_debug ("Unhandled property: %s", property);
 	}
 }
 
