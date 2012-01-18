@@ -408,10 +408,10 @@ create_callback (BluetoothClient *_client,
 }
 
 void
-close_callback (GtkWidget *assistant,
+close_callback (GtkWidget *widget,
 		gpointer data)
 {
-	gtk_widget_destroy(assistant);
+	gtk_widget_destroy(GTK_WIDGET (window_assistant));
 }
 
 void prepare_callback (GtkWidget *assistant,
