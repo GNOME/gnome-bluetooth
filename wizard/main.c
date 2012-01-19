@@ -57,7 +57,8 @@ enum {
 
 typedef enum {
 	PAIRING_UI_NORMAL,
-	PAIRING_UI_KEYBOARD
+	PAIRING_UI_KEYBOARD,
+	PAIRING_UI_ICADE
 } PairingUIBehaviour;
 
 static gboolean set_page_search_complete(void);
@@ -143,13 +144,46 @@ set_large_label (GtkLabel *label, const char *text)
 	g_free(str);
 }
 
-static gchar* 
+static char *
 get_random_pincode (guint num_digits)
 {
 	if (num_digits == 0)
 		num_digits = PIN_NUM_DIGITS;
 	return g_strdup_printf ("%d", g_random_int_range (pow (10, num_digits - 1),
 							  pow (10, num_digits)));
+}
+
+static char *
+get_icade_pincode (char **pin_display_str)
+{
+	GString *pin, *pin_display;
+	guint i;
+	static char *arrows[] = {
+		NULL,
+		"⬆", /* up = 1    */
+		"⬇", /* down = 2  */
+		"⬅", /* left = 3  */
+		"➡"  /* right = 4 */
+	};
+
+	pin = g_string_new (NULL);
+	pin_display = g_string_new (NULL);
+
+	for (i = 0; i < PIN_NUM_DIGITS; i++) {
+		int r;
+		char *c;
+
+		r = g_random_int_range (1, 4);
+
+		c = g_strdup_printf ("%d", r);
+		g_string_append (pin, c);
+		g_free (c);
+
+		g_string_append (pin_display, arrows[r]);
+	}
+
+	*pin_display_str = g_string_free (pin_display, FALSE);
+	return g_string_free (pin, FALSE);
 }
 
 static gboolean
@@ -488,6 +522,10 @@ void prepare_callback (GtkWidget *assistant,
 				pincode = get_random_pincode (target_max_digits);
 				pincode_display = g_strdup_printf ("%s⏎", pincode);
 				break;
+			case PAIRING_UI_ICADE:
+				help = g_strdup (_("Please move the joystick of your iCade in the following directions:"));
+				pincode = get_icade_pincode (&pincode_display);
+				break;
 			}
 
 			if (pincode == NULL)
@@ -713,9 +751,10 @@ select_device_changed (BluetoothChooser *selector,
 	user_pincode = get_pincode_for_device (target_type, target_address, target_name, &target_max_digits);
 	if (user_pincode != NULL &&
 	    g_str_equal (user_pincode, "NULL") == FALSE) {
-		if (g_str_equal (user_pincode, "KEYBOARD")) {
+		if (g_str_equal (user_pincode, "KEYBOARD"))
 			target_ui_behaviour = PAIRING_UI_KEYBOARD;
-		}
+		else if (g_str_equal (user_pincode, "ICADE"));
+			target_ui_behaviour = PAIRING_UI_ICADE;
 		g_free (user_pincode);
 		user_pincode = NULL;
 	}
