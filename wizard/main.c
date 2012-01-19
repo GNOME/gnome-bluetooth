@@ -55,6 +55,11 @@ enum {
 	PAGE_SUMMARY
 };
 
+typedef enum {
+	PAIRING_UI_NORMAL,
+	PAIRING_UI_KEYBOARD
+} PairingUIBehaviour;
+
 static gboolean set_page_search_complete(void);
 
 static BluetoothClient *client;
@@ -63,7 +68,7 @@ static BluetoothAgent *agent;
 static gchar *target_address = NULL;
 static gchar *target_name = NULL;
 static guint target_max_digits = 0;
-static guint target_type = BLUETOOTH_TYPE_ANY;
+static PairingUIBehaviour target_ui_behaviour = PAIRING_UI_NORMAL;
 static gboolean target_ssp = FALSE;
 static gboolean create_started = FALSE;
 static gboolean display_called = FALSE;
@@ -169,13 +174,13 @@ restart_button_clicked (GtkButton *button,
 {
 	/* Clean up old state */
 	target_ssp = FALSE;
-	target_type = BLUETOOTH_TYPE_ANY;
 	display_called = FALSE;
 	g_free (target_address);
 	target_address = NULL;
 	g_free (target_name);
 	target_name = NULL;
 	summary_failure = FALSE;
+	target_ui_behaviour = PAIRING_UI_NORMAL;
 
 	g_object_set (selector,
 		      "device-category-filter", BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
@@ -468,19 +473,28 @@ void prepare_callback (GtkWidget *assistant,
 		complete = FALSE;
 
 		if (automatic_pincode == FALSE && target_ssp == FALSE) {
-			char *text;
+			char *help, *pincode_display;
 
 			g_free (pincode);
-			pincode = get_random_pincode (target_max_digits);
+			pincode = NULL;
+			pincode_display = NULL;
 
-			if (target_type == BLUETOOTH_TYPE_KEYBOARD) {
-				text = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
-			} else {
-				text = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
+			switch (target_ui_behaviour) {
+			case PAIRING_UI_NORMAL:
+				help = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
+				break;
+			case PAIRING_UI_KEYBOARD:
+				help = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
+				break;
 			}
-			gtk_label_set_markup(GTK_LABEL(label_pin_help), text);
-			g_free (text);
-			set_large_label (GTK_LABEL (label_pin), pincode);
+
+			if (pincode == NULL)
+				pincode = get_random_pincode (target_max_digits);
+
+			gtk_label_set_markup(GTK_LABEL(label_pin_help), help);
+			g_free (help);
+			set_large_label (GTK_LABEL (label_pin), pincode_display ? pincode_display : pincode);
+			g_free (pincode_display);
 		} else {
 			g_assert_not_reached ();
 		}
@@ -659,6 +673,7 @@ select_device_changed (BluetoothChooser *selector,
 		       gpointer user_data)
 {
 	GValue value = { 0, };
+	guint target_type = BLUETOOTH_TYPE_ANY;
 	int legacypairing;
 
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
@@ -687,12 +702,21 @@ select_device_changed (BluetoothChooser *selector,
 	target_type = bluetooth_chooser_get_selected_device_type (selector);
 	target_ssp = !legacypairing;
 	automatic_pincode = FALSE;
+	target_ui_behaviour = PAIRING_UI_NORMAL;
 
 	g_free (pincode);
 	pincode = NULL;
 
 	g_free (user_pincode);
 	user_pincode = get_pincode_for_device (target_type, target_address, target_name, &target_max_digits);
+	if (user_pincode != NULL &&
+	    g_str_equal (user_pincode, "NULL") == FALSE) {
+		if (g_str_equal (user_pincode, "KEYBOARD")) {
+			target_ui_behaviour = PAIRING_UI_KEYBOARD;
+		}
+		g_free (user_pincode);
+		user_pincode = NULL;
+	}
 	automatic_pincode = user_pincode != NULL;
 	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
 }

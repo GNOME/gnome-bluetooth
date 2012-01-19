@@ -27,6 +27,10 @@
   connected to and marked as trusted. This is for devices such as mice
   and joypads where there is no encryption
 
+  The special "KEYBOARD" pin means that the device needs a specific handling
+  in the UI (in this case, needs to mention the necessity to type "Enter" after
+  entering the PIN).
+
   If a device can use a random PIN but is limited in the number of digits that
   can be entered, then set the "pin" attribute should be set to "max:X" where X
   is the maximum number of digits, for example max:4 for 4 digits.
@@ -161,5 +165,8 @@
 
 	<!-- Mice don't need pincodes -->
 	<device type="mouse" pin="NULL"/>
+
+	<!-- Keyboard need a special help text -->
+	<device type="keyboard" pin="KEYBOARD"/>
 
 </devices>
