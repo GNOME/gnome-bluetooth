@@ -485,6 +485,8 @@ void prepare_callback (GtkWidget *assistant,
 				break;
 			case PAIRING_UI_KEYBOARD:
 				help = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
+				pincode = get_random_pincode (target_max_digits);
+				pincode_display = g_strdup_printf ("%s⏎", pincode);
 				break;
 			}
 
