@@ -1036,6 +1036,8 @@ disconnect_from_proxy_helper (GtkTreeModel *model,
 
 	gtk_tree_model_get(model, iter,
 			   BLUETOOTH_COLUMN_PROXY, &proxy, -1);
+	if (proxy == NULL)
+		return FALSE;
 
 	/* adapters */
 	g_signal_handlers_disconnect_by_func(proxy,
