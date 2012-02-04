@@ -8,10 +8,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth 3.3.3\n"
+"Project-Id-Version: gnome-bluetooth 3.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-14 20:27+0800\n"
-"PO-Revision-Date: 2012-01-14 00:42+0800\n"
+"POT-Creation-Date: 2012-02-04 15:11+0800\n"
+"PO-Revision-Date: 2012-01-31 20:38+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -26,29 +26,28 @@ msgstr ""
 msgid "Click to select device..."
 msgstr "請按這裡選擇裝置…"
 
-#: ../lib/bluetooth-chooser.c:136 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "不明"
 
-#: ../lib/bluetooth-chooser.c:177
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "沒有介面卡可用"
 
-#: ../lib/bluetooth-chooser.c:181 ../lib/bluetooth-chooser.c:845
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "正在搜尋裝置…"
 
-#: ../lib/bluetooth-chooser.c:721 ../lib/bluetooth-chooser.c:1030
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "裝置"
 
-#: ../lib/bluetooth-chooser.c:757
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "類型"
 
-#: ../lib/bluetooth-chooser.c:1032 ../applet/popup-menu.ui.h:3
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:2
 msgid "Devices"
 msgstr "裝置"
 
@@ -176,92 +175,80 @@ msgstr "使用這個 GPS 裝置作為全球定位服務"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "使用您的行動電話存取網際網路 (測試)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "選擇裝置以瀏覽"
-
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "瀏覽(_B)"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "選擇裝置以瀏覽"
-
-#: ../applet/main.c:281
+#: ../applet/main.c:230
 msgid "Turn On Bluetooth"
 msgstr "開啟藍牙"
 
-#: ../applet/main.c:282 ../applet/notify.c:159
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "藍牙：關閉"
 
-#: ../applet/main.c:285
+#: ../applet/main.c:234
 msgid "Turn Off Bluetooth"
 msgstr "關閉藍牙"
 
-#: ../applet/main.c:286 ../applet/notify.c:159
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "藍牙：開啟"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "藍牙：已停用"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "正在中斷…"
 
-#: ../applet/main.c:441 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "連線中"
 
-#: ../applet/main.c:444 ../applet/main.c:727
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "已連線"
 
-#: ../applet/main.c:447 ../applet/main.c:727
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "已斷線"
 
-#: ../applet/main.c:745 ../applet/main.c:809
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "斷線"
 
-#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "連線"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "傳送檔案…"
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "瀏覽檔案…"
 
-#: ../applet/main.c:779
+#: ../applet/main.c:728
 msgid "Keyboard Settings"
 msgstr "鍵盤設定"
 
-#: ../applet/main.c:787
+#: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
 msgstr "滑鼠與觸控板設定"
 
-#: ../applet/main.c:797
+#: ../applet/main.c:746
 msgid "Sound Settings"
 msgstr "音效設定"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "偵錯"
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- 藍牙面板程式"
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -270,11 +257,11 @@ msgstr ""
 "%s\n"
 "執行「%s --help」可列出命令列中可用的完整選項。\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "藍牙面板程式"
 
-#: ../applet/notify.c:122 ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "藍牙"
 
@@ -351,27 +338,23 @@ msgstr "藍牙管理員面板程式"
 msgid "Bluetooth: Checking"
 msgstr "藍牙：檢查中"
 
-#: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "在裝置上瀏覽…"
-
-#: ../applet/popup-menu.ui.h:4
+#: ../applet/popup-menu.ui.h:3
 msgid "Preferences"
 msgstr "偏好設定"
 
-#: ../applet/popup-menu.ui.h:5
+#: ../applet/popup-menu.ui.h:4
 msgid "Quit"
 msgstr "結束"
 
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:5
 msgid "Send files to device..."
 msgstr "傳送檔案到裝置…"
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:6
 msgid "Set up new device..."
 msgstr "設定新的裝置…"
 
-#: ../applet/popup-menu.ui.h:8
+#: ../applet/popup-menu.ui.h:7
 msgid "Visible"
 msgstr "顯示"
 
@@ -403,17 +386,17 @@ msgstr "顯示輸入(_S)"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:204 ../wizard/main.c:326
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "與「%s」配對已被取消"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "請確認顯示在「%s」上的 PIN 碼與這個相符。"
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "請輸入下列 PIN 碼："
 
@@ -421,7 +404,7 @@ msgstr "請輸入下列 PIN 碼："
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:385
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "設定「%s」失敗"
@@ -430,45 +413,49 @@ msgstr "設定「%s」失敗"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "正在連接到「%s」…"
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "請在「%s」上輸入下列 PIN 碼："
+
+#: ../wizard/main.c:521
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "請在「%s」上輸入下列 PIN 碼並按鍵盤上的「Enter」鍵："
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "請在「%s」上輸入下列 PIN 碼："
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "請根據下列方向移動您 iCade 的搖桿："
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "請等待裝置「%s」設定結束…"
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "成功的設定新的裝置「%s」"
 
-#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
+#: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (多數的耳機麥克風、滑鼠與 GPS 裝置)"
 
-#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
+#: ../wizard/wizard.ui.h:2
 msgid "'1111'"
 msgstr "'1111'"
 
-#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
+#: ../wizard/wizard.ui.h:3
 msgid "'1234'"
 msgstr "'1234'"
 
@@ -476,103 +463,72 @@ msgstr "'1234'"
 msgid "Bluetooth New Device Setup"
 msgstr "藍牙新裝置設定"
 
-#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
+#: ../wizard/wizard.ui.h:5
 msgid "Custom PIN:"
 msgstr "自訂 PIN 碼："
 
 #: ../wizard/wizard.ui.h:6
+msgid "Device Search"
+msgstr "裝置搜尋"
+
+#: ../wizard/wizard.ui.h:7
 msgid "Device Setup"
 msgstr "裝置設定"
 
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "裝置設定失敗"
-
 #: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "裝置搜尋"
-
-#: ../wizard/wizard.ui.h:9
 msgid "Do not pair"
 msgstr "不要配對"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
+#: ../wizard/wizard.ui.h:10
 msgid "Does not match"
 msgstr "不相符"
 
-#: ../wizard/wizard.ui.h:12
+#: ../wizard/wizard.ui.h:11
 msgid "Finishing New Device Setup"
 msgstr "正在結束新裝置設定"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
+#: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
 msgstr "固定式 PIN 碼"
 
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "導覽"
-
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
+#: ../wizard/wizard.ui.h:15
 msgid "Matches"
 msgstr "相符"
 
-#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
+#: ../wizard/wizard.ui.h:16
 msgid "PIN Options"
 msgstr "PIN 碼選項"
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:17
 msgid "PIN _options..."
 msgstr "PIN 碼選項(_O)…"
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:18
 msgid "Select the additional services you want to use with your device:"
 msgstr "選擇想要使用於此裝置的額外服務："
 
-#: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to set up"
-msgstr "選擇您想要設定的裝置"
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Summary"
+msgstr "設置摘要"
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "設定已完成"
-
-#: ../wizard/wizard.ui.h:23
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr "藍牙新裝置設定精靈會帶您完成設定藍牙裝置的程序，以便用於這個電腦。"
-
-#: ../wizard/wizard.ui.h:24
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"該裝置需在離電腦 10 公尺的範圍內，而且應為「顯示」 (有時稱為「可發現」、「可"
-"探查」)。如果有疑慮請查閱該裝置的手冊。"
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "歡迎使用藍牙新裝置設定精靈"
-
-#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:20
 msgid "_Automatic PIN selection"
 msgstr "自動選取 PIN 碼(_A)"
 
-#: ../wizard/wizard.ui.h:27
+#: ../wizard/wizard.ui.h:21
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../wizard/wizard.ui.h:28
-msgid "_Close"
-msgstr "關閉(_C)"
+#: ../wizard/wizard.ui.h:22
+msgid "_Quit"
+msgstr "結束(_Q)"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "重新啟動設定(_R)"
+#: ../wizard/wizard.ui.h:23
+msgid "_Try Again"
+msgstr "重試(_T)"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -702,136 +658,136 @@ msgstr "藍牙傳輸"
 msgid "Send files via Bluetooth"
 msgstr "透過藍牙傳送檔案"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "以獨立模式執行"
+#~ msgid "Select Device to Browse"
+#~ msgstr "選擇裝置以瀏覽"
 
-#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "Moblin 藍牙面板"
+#~ msgid "_Browse"
+#~ msgstr "瀏覽(_B)"
 
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "- Moblin 藍牙面板"
+#~ msgid "Select device to browse"
+#~ msgstr "選擇裝置以瀏覽"
 
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d 小時"
+#~ msgid "Browse files on device..."
+#~ msgstr "在裝置上瀏覽…"
 
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d 分鐘"
+#~ msgid "Device Setup Failed"
+#~ msgstr "裝置設定失敗"
 
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d 秒"
+#~ msgid "Introduction"
+#~ msgstr "導覽"
 
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
+#~ msgid "Select the device you want to set up"
+#~ msgstr "選擇您想要設定的裝置"
 
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
+#~ msgid "Setup Completed"
+#~ msgstr "設定已完成"
 
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "0 秒"
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr "藍牙新裝置設定精靈會帶您完成設定藍牙裝置的程序，以便用於這個電腦。"
 
-#: ../moblin/moblin-panel.c:224
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"您的電腦可顯示於\n"
-"%s 的藍牙上。"
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "該裝置需在離電腦 10 公尺的範圍內，而且應為「顯示」 (有時稱為「可發現」、"
+#~ "「可探查」)。如果有疑慮請查閱該裝置的手冊。"
 
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "與 %s 配對失敗。"
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "歡迎使用藍牙新裝置設定精靈"
 
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-msgid "Pair"
-msgstr "配對"
+#~ msgid "_Close"
+#~ msgstr "關閉(_C)"
 
-#: ../moblin/moblin-panel.c:1023
-msgid "Browse"
-msgstr "瀏覽"
+#~ msgid "_Restart Setup"
+#~ msgstr "重新啟動設定(_R)"
 
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "裝置設定失敗"
+#~ msgid "Run in standalone mode"
+#~ msgstr "以獨立模式執行"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "返回裝置"
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "Moblin 藍牙面板"
 
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "完成"
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "- Moblin 藍牙面板"
 
-#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "裝置設定"
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d 小時"
 
-#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
-msgid "Settings"
-msgstr "設定值"
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d 分鐘"
 
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "只顯示："
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d 秒"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "PIN 碼選項"
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "加入新的裝置"
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "藍牙"
+#~ msgid "0 seconds"
+#~ msgstr "0 秒"
 
-#: ../moblin/moblin-panel.c:1621
-msgid "Make visible on Bluetooth"
-msgstr "讓它在藍牙裝置中為可顯示的"
+#~ msgid ""
+#~ "Your computer is visible on\n"
+#~ "Bluetooth for %s."
+#~ msgstr ""
+#~ "您的電腦可顯示於\n"
+#~ "%s 的藍牙上。"
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "從您的電腦傳送檔案"
+#~ msgid "Pairing with %s failed."
+#~ msgstr "與 %s 配對失敗。"
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "藍牙管理員面板"
+#~ msgid "Pair"
+#~ msgstr "配對"
+
+#~ msgid "Browse"
+#~ msgstr "瀏覽"
+
+#~ msgid "Device setup failed"
+#~ msgstr "裝置設定失敗"
+
+#~ msgid "Back to devices"
+#~ msgstr "返回裝置"
+
+#~ msgid "Done"
+#~ msgstr "完成"
+
+#~ msgid "Device setup"
+#~ msgstr "裝置設定"
+
+#~ msgid "Settings"
+#~ msgstr "設定值"
+
+#~ msgid "Only show:"
+#~ msgstr "只顯示："
+
+#~ msgid "PIN options"
+#~ msgstr "PIN 碼選項"
+
+#~ msgid "Add a new device"
+#~ msgstr "加入新的裝置"
+
+#~ msgctxt "Power"
+#~ msgid "Bluetooth"
+#~ msgstr "藍牙"
+
+#~ msgid "Make visible on Bluetooth"
+#~ msgstr "讓它在藍牙裝置中為可顯示的"
+
+#~ msgid "Send file from your computer"
+#~ msgstr "從您的電腦傳送檔案"
+
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "藍牙管理員面板"
 
 #~ msgid "Remove '%s' from the list of devices?"
 #~ msgstr "是否從裝置的清單中移除「%s」？"
