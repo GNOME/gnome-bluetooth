@@ -2,181 +2,175 @@
 # Copyright (c) 2007 Luiz Augusto von Dentz
 # This file is distributed under the same license as the bluez-gnome package.
 # Luiz Augusto von Dentz <luiz.dentz@indt.org.br>, 2007.
-# Henrique P Machado <hpmachado@gnome.org>, 2009-2010.
+# Henrique P Machado <zehrique@gmail.com>, 2009.
 # Flamarion Jorge <jorge.flamarion@gmail.com>, 2010.
-# Rodrigo Padula <contato@rodrigopadula.com>, 2010.
+# Djavan Fagundes <djavan@comum.org>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-21 18:29+0000\n"
-"PO-Revision-Date: 2011-04-05 02:56-0300\n"
-"Last-Translator: Rodrigo Padula de Oliveira <contato@rodrigopadula.com>\n"
-"Language-Team: gnome-pt_br-list@gnome.org\n"
+"POT-Creation-Date: 2012-01-19 20:33+0000\n"
+"PO-Revision-Date: 2012-01-17 23:54-0300\n"
+"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Virtaal 0.5.1\n"
+"X-Generator: Virtaal 0.6.1\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../lib/bluetooth-client.c:127
-msgid "All types"
-msgstr "Todos os tipos"
-
-#: ../lib/bluetooth-client.c:129
-msgid "Phone"
-msgstr "Telefone"
-
-#: ../lib/bluetooth-client.c:131
-msgid "Modem"
-msgstr "Modem"
-
-#: ../lib/bluetooth-client.c:133
-msgid "Computer"
-msgstr "Computador"
-
-#: ../lib/bluetooth-client.c:135
-msgid "Network"
-msgstr "Rede"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:138
-msgid "Headset"
-msgstr "Fone de ouvido com microfone"
-
-#: ../lib/bluetooth-client.c:140
-msgid "Headphones"
-msgstr "Fones de ouvido"
-
-#: ../lib/bluetooth-client.c:142
-msgid "Audio device"
-msgstr "Dispositivo de áudio"
-
-#: ../lib/bluetooth-client.c:144
-msgid "Keyboard"
-msgstr "Teclado"
-
-#: ../lib/bluetooth-client.c:146
-msgid "Mouse"
-msgstr "Mouse"
-
-#: ../lib/bluetooth-client.c:148
-msgid "Camera"
-msgstr "Câmera"
-
-#: ../lib/bluetooth-client.c:150
-msgid "Printer"
-msgstr "Impressora"
-
-#: ../lib/bluetooth-client.c:152
-msgid "Joypad"
-msgstr "Controle de jogos"
-
-#: ../lib/bluetooth-client.c:154
-msgid "Tablet"
-msgstr "Tablet"
-
-#: ../lib/bluetooth-client.c:156
-msgid "Video device"
-msgstr "Dispositivo de vídeo"
-
-#: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
-#: ../lib/bluetooth-filter-widget.c:85
-msgid "Unknown"
-msgstr "Desconhecido"
-
-#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Clique para selecionar o dispositivo..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:89
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Nenhum adaptador disponível"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "Pesquisando por dispositivos..."
 
-#: ../lib/bluetooth-chooser.c:372
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Remover \"%s\" da lista de dispositivos?"
-
-#: ../lib/bluetooth-chooser.c:374
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Se você remover o dispositivo, você terá de configurá-lo novamente antes da "
-"próxima utilização."
-
-#: ../lib/bluetooth-chooser.c:746
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:2
+msgid "Devices"
+msgstr "Dispositivos"
+
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Todas as categorias"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "Emparelhado"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "Confiável"
 
-#: ../lib/bluetooth-filter-widget.c:81
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "Não emparelhado ou confiável"
 
-#: ../lib/bluetooth-filter-widget.c:83
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "Emparelhado ou confiável"
 
-#: ../lib/bluetooth-filter-widget.c:238
-msgid "<b>Show Only Bluetooth Devices With...</b>"
-msgstr "<b>Mostrar somente dispositivos Bluetooth com...</b>"
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Exibir:"
 
 # Mantida underline na letra "C", preservando-se a formatação original.
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:254
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_Categoria do dispositivo:"
 
-#: ../lib/bluetooth-filter-widget.c:269
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Selecione a categoria do dispositivo para filtrar"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:283
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "_Tipo de dispositivo:"
 
-#: ../lib/bluetooth-filter-widget.c:304
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Selecione o tipo do dispositivo para filtrar na lista acima"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Dispositivos de entrada (mouses, teclados, etc.)"
 
-#: ../lib/bluetooth-filter-widget.c:314
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr ""
 "Fones de ouvido, fones de ouvido com microfone e outros dispositivos de áudio"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/bluetooth-utils.c:58
+msgid "All types"
+msgstr "Todos os tipos"
+
+#: ../lib/bluetooth-utils.c:60
+msgid "Phone"
+msgstr "Telefone"
+
+#: ../lib/bluetooth-utils.c:62
+msgid "Modem"
+msgstr "Modem"
+
+#: ../lib/bluetooth-utils.c:64
+msgid "Computer"
+msgstr "Computador"
+
+#: ../lib/bluetooth-utils.c:66
+msgid "Network"
+msgstr "Rede"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:69
+msgid "Headset"
+msgstr "Fone de ouvido com microfone"
+
+#: ../lib/bluetooth-utils.c:71
+msgid "Headphones"
+msgstr "Fones de ouvido"
+
+#: ../lib/bluetooth-utils.c:73
+msgid "Audio device"
+msgstr "Dispositivo de áudio"
+
+#: ../lib/bluetooth-utils.c:75
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../lib/bluetooth-utils.c:77
+msgid "Mouse"
+msgstr "Mouse"
+
+#: ../lib/bluetooth-utils.c:79
+msgid "Camera"
+msgstr "Câmera"
+
+#: ../lib/bluetooth-utils.c:81
+msgid "Printer"
+msgstr "Impressora"
+
+#: ../lib/bluetooth-utils.c:83
+msgid "Joypad"
+msgstr "Controle de jogos"
+
+#: ../lib/bluetooth-utils.c:85
+msgid "Tablet"
+msgstr "Tablet"
+
+#: ../lib/bluetooth-utils.c:87
+msgid "Video device"
+msgstr "Dispositivo de vídeo"
+
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "Usa esse dispositivo GPS para serviços de localização terrestre"
 
@@ -187,93 +181,80 @@ msgstr "Usa esse dispositivo GPS para serviços de localização terrestre"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Acessa a Internet usando seu celular (em teste)"
 
-#: ../applet/main.c:140
-msgid "Select Device to Browse"
-msgstr "Selecionar dispositivo para navegar"
-
-# Underline alterada para a letra "N".
-#: ../applet/main.c:144
-msgid "_Browse"
-msgstr "_Navegar"
-
-#: ../applet/main.c:153
-msgid "Select device to browse"
-msgstr "Selecione o dispositivo para navegar"
-
-#: ../applet/main.c:332 ../properties/properties-adapter-off.ui.h:1
+#: ../applet/main.c:230
 msgid "Turn On Bluetooth"
 msgstr "Ligar o Bluetooth"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: desligado"
 
-#: ../applet/main.c:336
+#: ../applet/main.c:234
 msgid "Turn Off Bluetooth"
 msgstr "Desligar o Bluetooth"
 
-#: ../applet/main.c:337
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Ligado"
 
-#: ../applet/main.c:342 ../applet/notify.c:150
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: desabilitado"
+msgstr "Bluetooth: Desabilitado"
 
-#: ../applet/main.c:493
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "Desconectando..."
 
-#: ../applet/main.c:496 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: ../applet/main.c:499 ../applet/main.c:840
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "Conectado"
 
-#: ../applet/main.c:502 ../applet/main.c:840
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../applet/main.c:858 ../applet/main.c:922 ../properties/adapter.c:371
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: ../applet/main.c:858 ../applet/main.c:922 ../moblin/moblin-panel.c:1036
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "Conectar"
 
-#: ../applet/main.c:871
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "Enviar arquivos..."
 
-#: ../applet/main.c:881
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "Navegar nos arquivos..."
 
-#: ../applet/main.c:892
-msgid "Open Keyboard Preferences..."
-msgstr "Abrir preferências do teclado..."
+#: ../applet/main.c:728
+msgid "Keyboard Settings"
+msgstr "Configurações de teclado"
 
-#: ../applet/main.c:900
-msgid "Open Mouse Preferences..."
-msgstr "Abrir preferências do mouse..."
+#: ../applet/main.c:736
+msgid "Mouse and Touchpad Settings"
+msgstr "Configurações de Mouse e Touchpad"
 
-#: ../applet/main.c:910
-msgid "Open Sound Preferences..."
-msgstr "Abrir preferências do som..."
+#: ../applet/main.c:746
+msgid "Sound Settings"
+msgstr "Configurações de som"
 
-#: ../applet/main.c:1037
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "Depurar"
 
 #. Parse command-line options
-#: ../applet/main.c:1057
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- miniaplicativo Bluetooth"
 
-#: ../applet/main.c:1062
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -283,82 +264,72 @@ msgstr ""
 "Execute \"%s --help\" para ver uma lista completa de opções de linha de "
 "comando disponíveis.\n"
 
-#: ../applet/main.c:1079
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "Miniaplicativo Bluetooth"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of MeeGo
-#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:140 ../moblin/moblin-panel.c:1634
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../applet/notify.c:150
-msgid "Bluetooth: Enabled"
-msgstr "Bluetooth: habilitado"
-
-#: ../applet/agent.c:251 ../applet/agent.c:332
+#: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "O dispositivo \"%s\" deseja emparelhar com esse computador"
 
-#: ../applet/agent.c:257
+#: ../applet/agent.c:202
 #, c-format
 msgid "Please enter the PIN mentioned on device %s."
 msgstr "Por favor, entre com o PIN mencionado no dispositivo %s."
 
-#: ../applet/agent.c:339
+#: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgstr "Por favor, confirme se o PIN \"%s\" corresponde com o dispositivo %s."
 
 #. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:385
+#: ../applet/agent.c:314
 #, c-format
 msgid "Grant access to '%s'"
 msgstr "Conceder acesso a \"%s\""
 
-#: ../applet/agent.c:390
+#: ../applet/agent.c:319
 #, c-format
 msgid "Device %s wants access to the service '%s'."
 msgstr "O dispositivo %s deseja acesso ao serviço \"%s\"."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#: ../applet/agent.c:369
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "Pedido de emparelhamento para \"%s\""
 
-#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
-#: ../applet/agent.c:618 ../applet/agent.c:656
+#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "Dispositivo Bluetooth"
 
-#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+#: ../applet/agent.c:372
 msgid "Enter PIN"
 msgstr "Digite o PIN"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:608
+#: ../applet/agent.c:396
 #, c-format
 msgid "Pairing confirmation for '%s'"
 msgstr "Confirmação de emparelhamento para \"%s\""
 
-#: ../applet/agent.c:619
+#: ../applet/agent.c:405
 msgid "Verify PIN"
 msgstr "Verificar PIN"
 
-#: ../applet/agent.c:652
+#: ../applet/agent.c:432
 #, c-format
 msgid "Authorization request from '%s'"
 msgstr "Pedido de autorização de \"%s\""
 
-#: ../applet/agent.c:657
+#: ../applet/agent.c:435
 msgid "Check authorization"
 msgstr "Verificar autorização"
 
@@ -374,32 +345,23 @@ msgstr "Miniaplicativo gerenciador de Bluetooth"
 msgid "Bluetooth: Checking"
 msgstr "Bluetooth: verificando"
 
-#: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "Navegar nos arquivos do dispositivo..."
-
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1433 ../moblin/moblin-panel.c:1543
-msgid "Devices"
-msgstr "Dispositivos"
-
-#: ../applet/popup-menu.ui.h:4
+#: ../applet/popup-menu.ui.h:3
 msgid "Preferences"
 msgstr "Preferências"
 
-#: ../applet/popup-menu.ui.h:5
+#: ../applet/popup-menu.ui.h:4
 msgid "Quit"
 msgstr "Sair"
 
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:5
 msgid "Send files to device..."
 msgstr "Enviar arquivos para o dispositivo..."
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:6
 msgid "Set up new device..."
 msgstr "Configurar novo dispositivo..."
 
-#: ../applet/popup-menu.ui.h:8
+#: ../applet/popup-menu.ui.h:7
 msgid "Visible"
 msgstr "Visível"
 
@@ -428,107 +390,21 @@ msgstr "Correspo_nde"
 msgid "_Show input"
 msgstr "E_xibir entrada"
 
-#: ../properties/main.c:91
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr ""
-"Impossível inicializar as preferências do \"Compartilhamento de arquivos "
-"pessoais\""
-
-#: ../properties/main.c:96
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr ""
-"Por favor verifique se o programa \"Compartilhamento de arquivos pessoais\" "
-"está instalado corretamente"
-
-#: ../properties/main.c:125
-msgid "Bluetooth Preferences"
-msgstr "Preferências de Bluetooth"
-
-# Mantida underline na letra "S", preservando-se a formatação original.
-#: ../properties/main.c:140
-msgid "_Show Bluetooth icon"
-msgstr "Mo_strar ícone do Bluetooth"
-
-#: ../properties/main.c:164
-msgid "Receive Files"
-msgstr "Receber arquivos"
-
-#: ../properties/main.c:212
-msgid "Output a list of currently known devices"
-msgstr "Lista os dispositivos conhecidos atualmente"
-
-#: ../properties/main.c:250
-msgid "Bluetooth Properties"
-msgstr "Propriedades de Bluetooth"
-
-# Mantida underline na letra "D", preservando-se a formatação original.
-#. The discoverable checkbox
-#: ../properties/adapter.c:277
-msgid "Make computer _visible"
-msgstr "Tornar computador _visível"
-
-#: ../properties/adapter.c:300
-msgid "Friendly name"
-msgstr "Nome amigável"
-
-#: ../properties/adapter.c:362
-msgid "Set up _new device..."
-msgstr "Configurar _novo dispositivo..."
-
-#: ../properties/adapter.c:385
-msgid "_Remove"
-msgstr "_Remover"
-
-#: ../properties/adapter.c:661
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth está desabilitado"
-
-#: ../properties/adapter.c:697
-msgid "No Bluetooth adapters present"
-msgstr "Nenhum adaptador Bluetooth presente"
-
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "Seu computador não possui qualquer adaptador Bluetooth acoplado."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Configurar as propriedades de Bluetooth"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid "Whether to show the notification icon"
-msgstr "Se exibe o ícone de notificação"
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "Whether to show the notification icon."
-msgstr "Se exibe o ícone de notificação."
-
-#: ../properties/gconf-bridge.c:1233
-#, c-format
-msgid "GConf error: %s"
-msgstr "Erro do GConf: %s"
-
-#: ../properties/gconf-bridge.c:1238
-msgid "All further errors shown only on terminal."
-msgstr "Todos os demais erros serão mostrados apenas no terminal."
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:205 ../wizard/main.c:326
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "O emparelhamento com \"%s\" foi cancelado"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1176
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Por favor, confirme se o PIN exibido em \"%s\" corresponde com este."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1227
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "Por favor, digite o seguinte PIN:"
 
@@ -536,43 +412,47 @@ msgstr "Por favor, digite o seguinte PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:382
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Falha na configuração de \"%s\""
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset' now...
+#. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:513
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Conectando com \"%s\"..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:790
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Por favor, digite o seguinte PIN em \"%s\":"
+
+#: ../wizard/main.c:521
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Por favor, digite o seguinte PIN em \"%s\" e pressione “Enter” no teclado:"
 
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:792
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Por favor, digite o seguinte PIN em \"%s\":"
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Por favor, mova o joystick do seu iCade nas seguintes direções:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:572
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr ""
 "Por favor, aguarde a finalização das configurações do dispositivo \"%s\"..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:817
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Novo dispositivo \"%s\" configurado com sucesso"
@@ -600,19 +480,20 @@ msgid "Custom PIN:"
 msgstr "PIN personalizado:"
 
 #: ../wizard/wizard.ui.h:6
+#| msgid "Device search"
+msgid "Device Search"
+msgstr "Procura de dispositivos"
+
+#: ../wizard/wizard.ui.h:7
 msgid "Device Setup"
 msgstr "Configuração do dispositivo"
 
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "A configuração do dispositivo falhou"
-
 #: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "Procura de dispositivo"
+msgid "Do not pair"
+msgstr "Não parear"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1380
+#: ../wizard/wizard.ui.h:10
 msgid "Does not match"
 msgstr "Não corresponde"
 
@@ -625,701 +506,177 @@ msgstr "Finalizando a configuração do novo dispositivo"
 msgid "Fixed PIN"
 msgstr "PIN fixo"
 
-#: ../wizard/wizard.ui.h:14
-msgid "Introduction"
-msgstr "Introdução"
-
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1376
+#: ../wizard/wizard.ui.h:15
 msgid "Matches"
 msgstr "Corresponde"
 
-#: ../wizard/wizard.ui.h:17
+#: ../wizard/wizard.ui.h:16
 msgid "PIN Options"
 msgstr "Opções de PIN"
 
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:17
 msgid "PIN _options..."
 msgstr "_Opções de PIN..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1290
+#: ../wizard/wizard.ui.h:18
 msgid "Select the additional services you want to use with your device:"
 msgstr ""
 "Selecione os serviços adicionais que você deseja utilizar com o dispositivo:"
 
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Summary"
+msgstr "Resumo da instalação"
+
 #: ../wizard/wizard.ui.h:20
-msgid "Select the device you want to setup"
-msgstr "Selecione o dispositivo que deseja configurar"
-
-#: ../wizard/wizard.ui.h:21
-msgid "Setup Completed"
-msgstr "Configuração completa"
-
-#: ../wizard/wizard.ui.h:22
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"O configurador de novo dispositivo Bluetooth irá guiá-lo através do processo "
-"de configuração de dispositivos com Bluetooth habilitado para uso com este "
-"computador."
-
-#: ../wizard/wizard.ui.h:23
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"O dispositivo deverá estar no máximo a 10 metros de seu computador e estar "
-"“visível” (algumas vezes chamado “encontrável”). Verifique o manual do "
-"dispositivo em caso de dúvida."
-
-#: ../wizard/wizard.ui.h:24
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "Bem-vindo ao configurador de novo dispositivo Bluetooth"
-
-#: ../wizard/wizard.ui.h:25
 msgid "_Automatic PIN selection"
 msgstr "Seleção _automática de PIN"
 
-#: ../wizard/wizard.ui.h:26
-msgid "_Restart Setup"
-msgstr "_Reiniciar configuração"
+#: ../wizard/wizard.ui.h:21
+msgid "_Cancel"
+msgstr "_Cancelar"
 
-#: ../sendto/main.c:162
+#: ../wizard/wizard.ui.h:22
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "Sa_ir"
+
+#: ../wizard/wizard.ui.h:23
+msgid "_Try Again"
+msgstr "_Tente novamente"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+msgid "Bluetooth Device Setup"
+msgstr "Configuração de dispositivo Bluetooth"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+msgid "Setup Bluetooth devices"
+msgstr "Configura dispositivos Bluetooth"
+
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d segundo"
 msgstr[1] "%'d segundos"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minuto"
 msgstr[1] "%'d minutes"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d hora"
 msgstr[1] "%'d horas"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "Transferência de arquivo"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "Tenta_r novamente"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "Enviando arquivos via Bluetooth"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:337 ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "Ocorreu um erro desconhecido"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:348
 msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
 msgstr ""
-"Certifique-se de que o dispositivo remoto está ligado e aceita conexões "
-"Bluetooth"
+"Certifique-se de que o dispositivo remoto está alternado e que aceita "
+"conexões Bluetooth"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "Enviando %s"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:453 ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Enviando arquivo %d de %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
-msgstr "Escolher para qual dispositivo enviar"
+#: ../sendto/main.c:658
+msgid "Select device to send to"
+msgstr "Escolher o dispositivo para envio"
 
 # Underline alterada para a letra "V'.
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "En_viar para"
+#: ../sendto/main.c:663
+msgid "_Send"
+msgstr "En_viar"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "Escolha os arquivos para enviar"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:710
+msgid "Select"
+msgstr "_Selecionar"
+
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "Dispositivo remoto para usar"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "Nome do dispositivo remoto"
 
-#: ../sendto/nautilus-sendto-plugin.c:172
-msgid "Programming error, could not find the device in the list"
-msgstr "Erro de programação, não foi possível localizar o dispositivo na lista"
+#: ../sendto/nautilus-sendto-plugin.c:168
+msgid "Programming error: could not find the device in the list"
+msgstr "Erro de programação: não foi possível localizar o dispositivo na lista"
 
-#: ../sendto/nautilus-sendto-plugin.c:247
+#: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-msgid "Obex Push file transfer unsupported"
+msgid "OBEX Push file transfer unsupported"
 msgstr "Sem suporte a transferência de arquivos via Obex Push"
 
-#: ../sendto/nautilus-sendto-plugin.c:266
+#: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth: (OBEX Push)"
 
-#: ../moblin/main.c:92
-msgid "Run in standalone mode"
-msgstr "Executar em modo autônomo"
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Transferência Bluetooth"
 
-#: ../moblin/main.c:100
-msgid "MeeGo Bluetooth Panel"
-msgstr "Painel Meego Bluetooth"
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Enviar arquivos via Bluetooth"
 
-#: ../moblin/main.c:101
-msgid "- MeeGo Bluetooth Panel"
-msgstr "- Painel Meego Bluetooth"
-
-#: ../moblin/main.c:128
-msgid "bluetooth"
-msgstr "bluetooth"
-
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d hora"
-msgstr[1] "%d horas"
-
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d minuto"
-msgstr[1] "%d minutos"
-
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d segundo"
-msgstr[1] "%d segundos"
-
-#. hour:minutes:seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-msgid "%s %s %s"
-msgstr "%s:%s:%s"
-
-#. minutes:seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-msgid "%s %s"
-msgstr "%s:%s"
-
-#. minutes
-#. seconds
-#: ../moblin/moblin-panel.c:195 ../moblin/moblin-panel.c:199
-#, c-format
-msgid "%s"
-msgstr "%s"
-
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "0 segundo"
-
-#: ../moblin/moblin-panel.c:223
-#, c-format
-msgid "Your computer is visible on Bluetooth for %s."
-msgstr "Seu computador está visível por Bluetooth para %s."
-
-#: ../moblin/moblin-panel.c:664
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "O emparelhamento com \"%s\" falhou."
-
-#: ../moblin/moblin-panel.c:1022
-msgid "<u>Pair</u>"
-msgstr "<u>Par</u>"
-
-# Underline alterada para a letra "N".
-#: ../moblin/moblin-panel.c:1055
-msgid "Browse"
-msgstr "Navega"
-
-#: ../moblin/moblin-panel.c:1249
-msgid "Device setup failed"
-msgstr "A configuração do dispositivo falhou"
-
-#. Back button
-#: ../moblin/moblin-panel.c:1263 ../moblin/moblin-panel.c:1339
-#: ../moblin/moblin-panel.c:1388 ../moblin/moblin-panel.c:1466
-#: ../moblin/moblin-panel.c:1701
-msgid "Back to devices"
-msgstr "Voltar para dispositivos"
-
-#: ../moblin/moblin-panel.c:1302
-msgid "Done"
-msgstr "Feito"
-
-#: ../moblin/moblin-panel.c:1323 ../moblin/moblin-panel.c:1360
-msgid "Device setup"
-msgstr "Configuração do dispositivo"
-
-#: ../moblin/moblin-panel.c:1483 ../moblin/moblin-panel.c:1616
-msgid "Settings"
-msgstr "Configurações"
-
-#: ../moblin/moblin-panel.c:1499
-msgid "Only show:"
-msgstr "Somente exibir:"
-
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1505
-msgid "PIN options"
-msgstr "Opções de PIN"
-
-#. Add new button
-#: ../moblin/moblin-panel.c:1549
-msgid "Add a new device"
-msgstr "Adicionar novo dispositivo"
-
-#: ../moblin/moblin-panel.c:1653
-msgid "Make visible on Bluetooth"
-msgstr "Tornar visível por Bluetooth"
-
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1659
-msgid "Send file from your computer"
-msgstr "Enviar arquivo do seu computador"
-
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "Painel gerenciador de Bluetooth"
-
-#: ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Bluetooth Panel"
-msgstr "Painel Bluetooth"
-
-#~ msgid "<u>Connect</u>"
-#~ msgstr "<u>Conectar<u>"
-
-#~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "Gerenciador Bluetooth para o GNOME"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Luiz Augusto von Dentz <luiz.dentz@indt.org.br>\n"
-#~ "Henrique P. Machado <zehrique@gmail.com>"
-
-#~ msgid "GNOME Bluetooth home page"
-#~ msgstr "Página inicial do GNOME Bluetooth"
-
-#~ msgid "Created bonding with %s"
-#~ msgstr "Relacionamento com %s criado"
-
-#~ msgid "Removed bonding with %s"
-#~ msgstr "Relacionamento com %s removido"
-
-#~ msgid "Device has been switched off"
-#~ msgstr "Dispositivo desativado"
-
-#~ msgid "Device has been made non-discoverable"
-#~ msgstr "O dispositivo foi ocultado"
-
-#~ msgid "Device has been made connectable"
-#~ msgstr "Dispositivo invisível"
-
-#~ msgid "Device has been made limited discoverable"
-#~ msgstr "O dispositivo foi parcialmente ocultado"
-
-#~ msgid "Device has been switched into pairing mode"
-#~ msgstr "O dispositivo está em modo de emparelhamento"
-
-#~ msgid "Couldn't execute command: %s\n"
-#~ msgstr "Comando não pode ser executado: %s\n"
-
-#~ msgid "Browse Devices"
-#~ msgstr "Explorar Dispositivos"
-
-#~ msgid "Services"
-#~ msgstr "Serviços"
-
-#~ msgid "Authorization requests"
-#~ msgstr "Pedido de autorização"
-
-#~ msgid "Automatically authorize incoming requests"
-#~ msgstr "Autorização automatica"
-
-#~ msgid "Hardware database"
-#~ msgstr "Banco de dados de hardware"
-
-#~ msgid "Select class of device automatically"
-#~ msgstr "Seleção automatica de classe de dispositivo"
-
-#~ msgid "Available services"
-#~ msgstr "Serviços disponiveis"
-
-#~ msgid "never"
-#~ msgstr "nunca"
-
-#~ msgid "1 minute"
-#~ msgstr "1 minuto"
-
-#~ msgid "%g minutes"
-#~ msgstr "%g minutos"
-
-#~ msgid "Mode of operation"
-#~ msgstr "Modo de operação"
-
-#~ msgid "Other devices can connect"
-#~ msgstr "Invisível para outros dispositivos"
-
-#~ msgid "Visible and connectable for other devices"
-#~ msgstr "Visível para outros dispositivos"
-
-#~ msgid "Limited discoverable and connectable"
-#~ msgstr "Visibilidade e conectividade limitadas"
-
-#~ msgid "Make adapter invisible after:"
-#~ msgstr "Adaptador invisível após:"
-
-#~ msgid "Adapter name"
-#~ msgstr "Nome do adaptador"
-
-#~ msgid "Class of device"
-#~ msgstr "Classe do dispositivo"
-
-#~ msgid "Unspecified"
-#~ msgstr "Não especificado"
-
-#~ msgid "Desktop workstation"
-#~ msgstr "Estação de trabalho"
-
-#~ msgid "Laptop computer"
-#~ msgstr "Laptop"
-
-#~ msgid "If HAL should be used for automatic preferences settings"
-#~ msgstr "Se HAL deve ser usado para configuração automática de preferências"
-
-#~ msgid ""
-#~ "If HAL should be used to automatically adjust settings like class of "
-#~ "device etc."
-#~ msgstr ""
-#~ "Se HAL deve ser usado para ajustar automaticamente configurações como "
-#~ "classe do dispositivo etc."
-
-#~ msgid "If authorization requests should be automatically granted"
-#~ msgstr "Se pedidos de autorização devem ser aprovados automaticamente"
-
-#~ msgid ""
-#~ "If authorization requests should be granted all the time without asking "
-#~ "the user for confirmation."
-#~ msgstr ""
-#~ "Se os pedidos de autorização devem ser sempre aprovados, sem confirmação "
-#~ "do usuário."
-
-#~ msgid "Connecting to system bus failed: %s\n"
-#~ msgstr "Conexão com o system bus falhou: %s\n"
-
-#~ msgid "<b>Notification area</b>"
-#~ msgstr "<b>Área de notificação</b>"
-
-#~ msgid "Bluetooth preferences"
-#~ msgstr "Preferências Bluetooth"
-
-#~ msgid "Service properties"
-#~ msgstr "Propriedades de serviço"
-
-#~ msgid "Service path"
-#~ msgstr "Caminho do serviço"
-
-#~ msgid ""
-#~ "\n"
-#~ "Description"
-#~ msgstr ""
-#~ "\n"
-#~ "Descrição"
-
-#~ msgid ""
-#~ "\n"
-#~ "Enter passkey for authentication:"
-#~ msgstr ""
-#~ "\n"
-#~ "Entre com a senha para autenticação:"
-
-#~ msgid ""
-#~ "\n"
-#~ "Confirm value for authentication:"
-#~ msgstr ""
-#~ "\n"
-#~ "Confirmar valor de autenticação:"
-
-#~ msgid ""
-#~ "Pairing request for %s\n"
-#~ "\n"
-#~ "Click to open passkey entry dialog"
-#~ msgstr ""
-#~ "Pareamento com %s\n"
-#~ "\n"
-#~ "Clique para abrir o dialogo de entrada de chave"
-
-#~ msgid ""
-#~ "Pairing request for %s\n"
-#~ "\n"
-#~ "Click to open confirmation dialog"
-#~ msgstr ""
-#~ "Pedido para pareamento %s\n"
-#~ "\n"
-#~ "Clique para abrir o dialogo de confirmação"
-
-#~ msgid "Search"
-#~ msgstr "Pesquisar"
-
-#~ msgid "Grant access to"
-#~ msgstr "Acesso permitido a"
-
-#~ msgid ""
-#~ "Authorization request for %s\n"
-#~ "\n"
-#~ "Click to open authorization dialog"
-#~ msgstr ""
-#~ "Pedido de autorização %s\n"
-#~ "\n"
-#~ "Clique para abrir o dialogo de autorização"
-
-#~ msgid ""
-#~ "\n"
-#~ "Hardware database"
-#~ msgstr ""
-#~ "\n"
-#~ "Bando de dados de Hardware"
-
-#~ msgid ""
-#~ "\n"
-#~ "Notification area"
-#~ msgstr ""
-#~ "\n"
-#~ "Area de notificação"
-
-#~ msgid "Trusted devices"
-#~ msgstr "Dispositivos autorizados"
-
-#~ msgid ""
-#~ "\n"
-#~ "Adapter name"
-#~ msgstr ""
-#~ "\n"
-#~ "Nome do adaptador"
-
-#~ msgid ""
-#~ "\n"
-#~ "Class of device"
-#~ msgstr ""
-#~ "\n"
-#~ "Classe do dispositivo"
-
-#~ msgid "Authentication request"
-#~ msgstr "Requisição de autenticação"
-
-#~ msgid "Enter passkey for authentication:"
-#~ msgstr "Digite a senha para autenticação:"
-
-#~ msgid "Confirmation request"
-#~ msgstr "Requesição de confirmação"
-
-#~ msgid "Confirm value for authentication:"
-#~ msgstr "Confirme o valor para autenticação:"
-
-#~ msgid "Authorization request"
-#~ msgstr "Pedido de autenticação"
-
-#~ msgid "Authorization request for device:"
-#~ msgstr "Pedido de autorização para o dispositivo:"
-
-#~ msgid "General"
-#~ msgstr "Geral"
-
-#~ msgid "Notification area"
-#~ msgstr "Área de notificação"
-
-#~ msgid "Never display icon"
-#~ msgstr "Não mostre o icone"
-
-#~ msgid "Only display when adapter present"
-#~ msgstr "Mostre o icone somente quando algum adaptador esteja presente"
-
-#~ msgid "Always display icon"
-#~ msgstr "Sempre mostre o icone"
-
-#~ msgid "Adapter"
-#~ msgstr "Adaptador"
-
-#~ msgid ""
-#~ "Display options for the notification icon. Valid options are \"never\", "
-#~ "\"present\" and \"always\"."
-#~ msgstr ""
-#~ "Exibir opções para o ícone de notificação. As opções válidas são \"nunca"
-#~ "\", \"presente\" e \"sempre\"."
-
-#~ msgid "Mobile phone"
-#~ msgstr "Telefone Celular"
-
-#~ msgid "Summary"
-#~ msgstr "Sumário"
-
-#~ msgid "Saving of protocol trace failed"
-#~ msgstr "Falha na gravação de rastreamento de protocolo"
-
-#~ msgid "Loading Trace"
-#~ msgstr "Carregando Rastreamento"
-
-#~ msgid "Live Import"
-#~ msgstr "Importação Imediata"
-
-#~ msgid "Protocol Trace"
-#~ msgstr "Rastreamento de Protocolo"
-
-#~ msgid "Unsaved"
-#~ msgstr "Não salvo"
-
-#~ msgid "Can't live import from"
-#~ msgstr "Não foi possível fazer importação imediata de"
-
-#~ msgid "_File"
-#~ msgstr "_Arquivo"
-
-#~ msgid "Open _Recent"
-#~ msgstr "Abrir_Recente"
-
-#~ msgid "_Edit"
-#~ msgstr "_Editar"
-
-#~ msgid "_View"
-#~ msgstr "_Visualização"
-
-#~ msgid "_Full Screen"
-#~ msgstr "_Tela cheia"
-
-#~ msgid "_Help"
-#~ msgstr "Aj_uda"
-
-#~ msgid "Bluetooth protocol analyzer"
-#~ msgstr "Analizador de protocolo Bluetooth"
-
-#~ msgid "Supported Files"
-#~ msgstr "Arquivos Suportados"
-
-#~ msgid "Frontline BTSnoop Files"
-#~ msgstr "Arquivos Frontline BTSnoop"
-
-#~ msgid "Apple Packet Logger Files"
-#~ msgstr "Arquivos Apple Packet Logger"
-
-#~ msgid "By Extension"
-#~ msgstr "Por Extensão"
-
-#~ msgid "Frontline BTSnoop Format"
-#~ msgstr "Formato Frontline BTSnoop"
-
-#~ msgid "Apple Packet Logger Format"
-#~ msgstr "Formato Apple Packet Logger"
-
-#~ msgid "Select File _Type"
-#~ msgstr "Selecionar Tipo de _Arquivo"
-
-#~ msgid "File Type"
-#~ msgstr "Tipo de Arquivo"
-
-#~ msgid "Extensions"
-#~ msgstr "Extensões"
-
-#~ msgid "Open File"
-#~ msgstr "Abrir Arquivo"
-
-#~ msgid "Local connection"
-#~ msgstr "Conexão local"
-
-#~ msgid "Remote connection"
-#~ msgstr "Conexão remota"
-
-#~ msgid "Open Import"
-#~ msgstr "Abrir Importar"
-
-#~ msgid "Save the protocol trace before closing?"
-#~ msgstr "Salvar o rastreamento de protocolo antes de sair?"
-
-#~ msgid "If you don't save, all information will be permanently lost."
-#~ msgstr ""
-#~ "Se não forem gravadas, todas as informações serão perdidas "
-#~ "definitivamente."
-
-#~ msgid "Close _without Saving"
-#~ msgstr "Fechar _sem Salvar"
-
-#~ msgid "There is"
-#~ msgstr "Há"
-
-#~ msgid "There are"
-#~ msgstr "Há"
-
-#~ msgid "unsaved protocol trace."
-#~ msgstr "rastreamento de protocolo não salvo."
-
-#~ msgid "unsaved protocol traces."
-#~ msgstr "rastreamentos de protocolo não salvos."
-
-#~ msgid "If you quit now, all information will be lost."
-#~ msgstr "Se sair agora, todas as informações serão perdidas."
-
-#~ msgid "_Discard Changes"
-#~ msgstr "_Descartar Alterações"
-
-#~ msgid "Packet"
-#~ msgstr "Pacote"
-
-#~ msgid "Timestamp"
-#~ msgstr "Registro de hora"
-
-#~ msgid "Apple Packet Logger File"
-#~ msgstr "Arquivo Apple Packet Logger"
-
-#~ msgid "Frontline BTSnoop File"
-#~ msgstr "Arquivo Frontline BTSnoop"
-
-#~ msgid "Bluetooth: Unknown"
-#~ msgstr "Bluetooth: Desconhecido"
