@@ -7,15 +7,15 @@
 #
 # Priit Laes <plaes plaes org>, 2008, 2009
 # Ivar Smolin <okul linux ee>, 2009–2011.
-# Mattias Põldaru <mahfiaz@gmail.com>, 2008, 2009, 2010, 2011.
+# Mattias Põldaru <mahfiaz@gmail.com>, 2008, 2009, 2010, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-11-04 19:30+0000\n"
-"PO-Revision-Date: 2011-11-06 11:44+0200\n"
+"POT-Creation-Date: 2012-02-04 07:12+0000\n"
+"PO-Revision-Date: 2012-02-08 09:42+0200\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <>\n"
 "Language: \n"
@@ -140,15 +140,6 @@ msgstr "Seda GPS-seadet kasutatakse Geopositsioneerimise teenuse jaoks"
 #. * or leave untranslated
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Ligipääs internetti selle mobiili kaudu (testimisel)"
-
-msgid "Select Device to Browse"
-msgstr "Seadme valimine sirvimiseks"
-
-msgid "_Browse"
-msgstr "_Sirvi"
-
-msgid "Select device to browse"
-msgstr "Vali seade, mida lehitseda"
 
 msgid "Turn On Bluetooth"
 msgstr "Lülita Bluetooth sisse"
@@ -277,9 +268,6 @@ msgstr "Bluetoothi halduri rakend"
 msgid "Bluetooth: Checking"
 msgstr "Bluetooth: kontroll"
 
-msgid "Browse files on device..."
-msgstr "Failide lehitsemine seadmes..."
-
 msgid "Preferences"
 msgstr "Eelistused"
 
@@ -345,15 +333,18 @@ msgid "Connecting to '%s'..."
 msgstr "Ühendumine seadmega '%s'..."
 
 #, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Palun sisesta järgnev PIN-kood seadmesse '%s':"
+
+#, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Palun sisesta järgnev PIN-kood seadmesse '%s' ja vajuta klaviatuuril klahvi "
 "„Enter“:"
 
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Palun sisesta järgnev PIN-kood seadmesse '%s':"
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Palun liiguta oma iCade'i juhtkangi järgnevas suunas:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -382,14 +373,11 @@ msgstr "Uue Bluetooth-seadme häälestus"
 msgid "Custom PIN:"
 msgstr "Muu PIN-kood:"
 
+msgid "Device Search"
+msgstr "Seadme otsing"
+
 msgid "Device Setup"
 msgstr "Seadme häälestus"
-
-msgid "Device Setup Failed"
-msgstr "Seadme häälestamine nurjus"
-
-msgid "Device search"
-msgstr "Seadme otsing"
 
 msgid "Do not pair"
 msgstr "Ei paardu"
@@ -405,9 +393,6 @@ msgstr "Uue seadme häälestuse lõpetamine"
 msgid "Fixed PIN"
 msgstr "Fikseeritud PIN-kood"
 
-msgid "Introduction"
-msgstr "Sissejuhatus"
-
 #. This is a button to answer: Does the PIN matches the one on the device?
 msgid "Matches"
 msgstr "Kattub"
@@ -421,30 +406,8 @@ msgstr "PIN-koodi _valikud..."
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vali lisateenused, mida tahad selle seadmega kasutada:"
 
-msgid "Select the device you want to set up"
-msgstr "Vali häälestamiseks seade"
-
-msgid "Setup Completed"
-msgstr "Häälestamine lõpetatud"
-
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"Nõustaja juhatab sind uue Bluetooth-seadme häälestamisel, misjärel saad seda "
-"oma arvutiga kasutada."
-
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"Seade peab olema arvutile lähemal kui 10 meetrit ning „visible“ (nähtav, "
-"mõnikord öeldakse ka „discoverable“, avastatav). Kahtluse korral uuri seadme "
-"kasutusjuhendit."
-
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "Tere tulemast uue Bluetooth-seadme häälestuse nõustajasse"
+msgid "Setup Summary"
+msgstr "Seadistuse kokkuvõte"
 
 msgid "_Automatic PIN selection"
 msgstr "_Automaatselt valitud PIN-kood"
@@ -452,11 +415,11 @@ msgstr "_Automaatselt valitud PIN-kood"
 msgid "_Cancel"
 msgstr "_Loobu"
 
-msgid "_Close"
-msgstr "Sul_ge"
+msgid "_Quit"
+msgstr "_Lõpeta"
 
-msgid "_Restart Setup"
-msgstr "_Seadista uuesti"
+msgid "_Try Again"
+msgstr "_Proovi uuesti"
 
 msgid "Bluetooth Device Setup"
 msgstr "Bluetooth-seadme häälestus"
@@ -562,217 +525,3 @@ msgstr "Bluetoothi failiülekanne"
 
 msgid "Send files via Bluetooth"
 msgstr "Failide saatmine üle Bluetoothi"
-
-msgid "Run in standalone mode"
-msgstr "Töötab autonoomses režiimis"
-
-msgid "Moblin Bluetooth Panel"
-msgstr "Moblin bluetoothi haldur"
-
-msgid "- Moblin Bluetooth Panel"
-msgstr "- Moblin Bluetooth rakend"
-
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d tund"
-msgstr[1] "%d tundi"
-
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d minut"
-msgstr[1] "%d minutit"
-
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d sekund"
-msgstr[1] "%d sekundit"
-
-#. 5 hours 2 minutes 12 seconds
-#, c-format
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
-
-#. 2 minutes 12 seconds
-#, c-format
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
-
-#. 0 seconds
-msgid "0 seconds"
-msgstr "0 sekundit"
-
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"Sinu arvuti on nähtav üle\n"
-"Bluetoothi nimega %s."
-
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "Paardumine seadmega '%s' nurjus."
-
-# pole sugugi kindel, kas see on õige vorm
-#. Translators: this is a verb (just like "Connect"), not a noun.
-msgid "Pair"
-msgstr "Paardumine"
-
-msgid "Browse"
-msgstr "Sirvi"
-
-msgid "Device setup failed"
-msgstr "Seadme häälestamine nurjus"
-
-#. Back button
-msgid "Back to devices"
-msgstr "Tagasi seadmete juurde"
-
-msgid "Done"
-msgstr "Valmis"
-
-msgid "Device setup"
-msgstr "Seadme häälestus"
-
-msgid "Settings"
-msgstr "Sätted"
-
-msgid "Only show:"
-msgstr "Näita ainult:"
-
-#. Button for PIN options file
-msgid "PIN options"
-msgstr "PIN-koodi sätted"
-
-#. Add new button
-msgid "Add a new device"
-msgstr "Lisa uus seade"
-
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-msgid "Make visible on Bluetooth"
-msgstr "Tee Bluetooth nähtavaks"
-
-#. Button for Send file
-msgid "Send file from your computer"
-msgstr "Failide saatmine arvutist"
-
-msgid "Bluetooth Manager Panel"
-msgstr "Bluetoothi halduri paneel"
-
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "Kas eemaldada '%s' tuntud seadmete loendist?"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr ""
-#~ "Kui sa eemaldad seadme, pead selle enne järgmist kasutamist uuesti "
-#~ "häälestama."
-
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Näidatakse ainult Bluetooth-seadmeid, mis on..."
-
-#~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Klaviatuurieelistuste avamine..."
-
-#~ msgid "Open Mouse Preferences..."
-#~ msgstr "Hiire-eelistuste avamine..."
-
-#~ msgid "Open Sound Preferences..."
-#~ msgstr "Helieelistuste avamine..."
-
-#~ msgid "Bluetooth: Enabled"
-#~ msgstr "Bluetooth: lubatud"
-
-#~ msgid "Yes"
-#~ msgstr "Jah"
-
-#~ msgid "No"
-#~ msgstr "Ei"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "Bluetooth on keelatud"
-
-#~ msgid "Bluetooth is disabled by hardware switch"
-#~ msgstr "Bluetooth on keelatud raudvaralisest lülitist"
-
-#~ msgid "No Bluetooth adapters found"
-#~ msgstr "Bluetoothi adaptereid ei leitud"
-
-#~ msgid "Visibility"
-#~ msgstr "Nähtavus"
-
-#~ msgid "Visibility of “%s”"
-#~ msgstr "Seadme “%s” nähtavus"
-
-#~ msgid "Address"
-#~ msgstr "Aadress"
-
-#~ msgid "Connection"
-#~ msgstr "Ühendus"
-
-# või signaali tugevus või midagi muud?
-#, fuzzy
-#~ msgid "Power"
-#~ msgstr "Vool"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "Bluetoothi häälestamine"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Active"
-#~ msgstr "Aktiivne"
-
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr "\"Isiklike failide jagamise\" eelistusi pole võimalik käivitada"
-
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
-#~ msgstr ""
-#~ "Palun veendu, et \"Isiklike failide jagamise\" programm on korralikult "
-#~ "paigaldatud."
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "_Bluetoothi ikooni näidatakse"
-
-#~ msgid "Sharing Settings..."
-#~ msgstr "Jagamissätted..."
-
-#~ msgid "Friendly name"
-#~ msgstr "Hüüdnimi"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "_Arvuti on alati nähtav"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "_Uue seadme häälestamine..."
-
-#~ msgid "_Disconnect"
-#~ msgstr "_Katkesta ühendus"
-
-#~ msgid "_Remove"
-#~ msgstr "_Eemalda"
-
-#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
-#~ msgstr "Sinu arvuti külge pole ühendatud ühtegi Bluetoothi adapterit."
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr "Sinu arvuti Bluetoothi lüliti on välja lülitatud."
-
-#~ msgid "Receive Files"
-#~ msgstr "Failide vastuvõtmine"
