@@ -227,11 +227,11 @@ killswitch_state_changed (GObject    *gobject,
 	}
 
 	if (state == BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED) {
-		label = N_("Turn On Bluetooth");
+		label = N_("Turn on Bluetooth");
 		status_label = N_("Bluetooth: Off");
 		bstate = FALSE;
 	} else if (state == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED) {
-		label = N_("Turn Off Bluetooth");
+		label = N_("Turn off Bluetooth");
 		status_label = N_("Bluetooth: On");
 		bstate = TRUE;
 	} else if (state == BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED) {
