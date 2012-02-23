@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# A S Alam <aalam@users.sf.net>, 2009, 2010, 2011.
+# A S Alam <aalam@users.sf.net>, 2009, 2010, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-08-01 22:27+0000\n"
-"PO-Revision-Date: 2011-08-21 09:13+0530\n"
+"POT-Creation-Date: 2012-02-18 12:55+0000\n"
+"PO-Revision-Date: 2012-02-23 21:05+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,47 +18,40 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Language: pa\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "ਜੰਤਰ ਚੁਣਨ ਲਈ ਕਲਿੱਕ ਕਰੋ…"
 
-#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "ਐਡਪਟਰ ਉਪਲੱਬਧ ਨਹੀਂ"
 
-#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "ਜੰਤਰਾਂ ਲਈ ਖੋਜ ਜਾਰੀ…"
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "ਕੀ ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਵਿੱਚੋਂ '%s' ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"ਜੇ ਤੁਸੀਂ ਜੰਤਰ ਹਟਾਇਆ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਅਗਲੀ ਵਾਰ ਵਰਤਣ ਸਮੇਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਪਵੇਗਾ।"
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "ਜੰਤਰ"
 
-#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "ਟਾਈਪ"
+
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+msgid "Devices"
+msgstr "ਜੰਤਰ"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "ਸਭ ਕੈਟਾਗਰੀਆਂ"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "ਪੇਅਰ ਕੀਤੇ"
 
@@ -74,33 +67,35 @@ msgstr "ਕੋਈ ਪੇਅਰ ਜਾਂ ਟਰੱਸਟ ਨਹੀਂ"
 msgid "Paired or trusted"
 msgstr "ਪੇਅਰ ਜਾਂ ਟਰੱਸਟ ਕੀਤੇ"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "…ਨਾਲ ਹੀ ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਵੇਖੋ"
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "ਵੇਖਾਓ:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "ਜੰਤਰ ਕੈਟਾਗਰੀ(_c):"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "ਫਿਲਟਰ ਕਰਨ ਲਈ ਜੰਤਰ ਕੈਟਾਗਰੀ ਚੁਣੋ"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "ਜੰਤਰ ਟਾਈਪ(_t):"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "ਫਿਲਟਰ ਕਰਨ ਲਈ ਜੰਤਰ ਕਿਸਮ ਚੁਣੋ"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "ਇੰਪੁੱਟ ਜੰਤਰ (ਮਾਊਸ, ਕੀਬੋਰਡ ਆਦਿ)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "ਹੈੱਡਫੋਨ, ਹੈੱਡਸੈੱਟ ਅਤੇ ਹੋਰ ਆਡੀਓ ਜੰਤਰ"
 
@@ -176,92 +171,82 @@ msgstr "ਭੂਗੋਲਿਕ-ਟਿਕਾਣਾ ਸਰਵਿਸਾਂ ਲਈ �
 msgid "Access the Internet using your cell phone (test)"
 msgstr "ਆਪਣੇ ਮੋਬਾਇਲ ਫੋਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੰਟਰਨੈੱਟ ਵਰਤੋਂ (ਟੈਸਟ)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "ਬਰਾਊਜ਼ ਕਰਨ ਵਾਸਤੇ ਜੰਤਰ ਚੁਣੋ"
-
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "ਬਰਾਊਜ਼(_B)"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "ਬਰਾਊਜ਼ ਕਰਨ ਲਈ ਜੰਤਰ ਚੁਣੋ"
-
-#: ../applet/main.c:281
-msgid "Turn On Bluetooth"
+#: ../applet/main.c:230
+#| msgid "Turn On Bluetooth"
+msgid "Turn on Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ ਚਾਲੂ ਕਰੋ"
 
-#: ../applet/main.c:282 ../applet/notify.c:159
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "ਬਲਿਊਟੁੱਥ: ਬੰਦ"
 
-#: ../applet/main.c:285
-msgid "Turn Off Bluetooth"
+#: ../applet/main.c:234
+#| msgid "Turn Off Bluetooth"
+msgid "Turn off Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ ਬੰਦ ਕਰੋ"
 
-#: ../applet/main.c:286 ../applet/notify.c:159
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "ਬਲਿਊਟੁੱਥ: ਚਾਲੂ"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "ਬਲਿਊਟੁੱਥ: ਆਯੋਗ"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
 
-#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
 
-#: ../applet/main.c:444 ../applet/main.c:727
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "ਕੁਨੈਕਟ ਹੈ"
 
-#: ../applet/main.c:447 ../applet/main.c:727
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
 
-#: ../applet/main.c:745 ../applet/main.c:809
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ"
 
-#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "ਕੁਨੈਕਟ ਕਰੋ"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "ਫਾਇਲਾਂ ਭੇਜੋ…"
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "ਫਾਇਲਾਂ ਬਰਾਊਜ਼ ਕਰੋ…"
 
-#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+#: ../applet/main.c:728
 msgid "Keyboard Settings"
 msgstr "ਕੀਬੋਰਡ ਸੈਟਿੰਗ"
 
-#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+#: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
 msgstr "ਮਾਊਸ ਅਤੇ ਟੱਚਪੈਡ ਸੈਟਿੰਗ"
 
-#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+#: ../applet/main.c:746
 msgid "Sound Settings"
 msgstr "ਸਾਊਂਡ ਸੈਟਿੰਗ"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "ਡੀਬੱਗ"
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- ਬਲਿਊਟੁੱਥ ਐਪਲਿਟ"
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -270,12 +255,11 @@ msgstr ""
 "%s\n"
 "ਪੂਰੀਆਂ ਕਮਾਂਡ ਲਾਈਨ ਚੋਣਂ ਦੀ ਲਿਸਟ ਵੇਖਣ ਵਾਸਤੇ '%s --help' ਚਲਾਉ।\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "ਬਲਿਊਟੁੱਥ ਐਪਲਿਟ"
 
-#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ"
 
@@ -353,45 +337,37 @@ msgid "Bluetooth: Checking"
 msgstr "ਬਲਿਊਟੁੱਥ: ਚੈੱਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "ਜੰਤਰ ਉੱਤੇ ਫਾਇਲਾਂ ਬਰਾਊਜ਼ਰ ਕਰੋ…"
+msgid "Visible"
+msgstr "ਦਿੱਖ"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "ਜੰਤਰ"
-
-#: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "ਮੇਰੀ ਪਸੰਦ"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Quit"
-msgstr "ਬਾਹਰ"
-
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:3
 msgid "Send files to device..."
 msgstr "ਜੰਤਰ ਨੂੰ ਫਾਇਲਾਂ ਭੇਜੋ…"
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:5
 msgid "Set up new device..."
 msgstr "ਨਵਾਂ ਜੰਤਰ ਸੈੱਟਅੱਪ…"
 
-#: ../applet/popup-menu.ui.h:8
-msgid "Visible"
-msgstr "ਦਿੱਖ"
+#: ../applet/popup-menu.ui.h:6
+#| msgid "Bluetooth: Checking"
+msgid "Bluetooth Settings"
+msgstr "ਬਲਿਊਟੁੱਥ ਸੈਟਿੰਗ"
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Quit"
+msgstr "ਬਾਹਰ"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
 msgstr "ਹਮੇਸ਼ਾ ਪਹੁੰਚ ਮਨਜ਼ੂਰ(_A)"
 
 #: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Grant"
-msgstr "ਮਨਜ਼ੂਰ(_G)"
-
-#: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
 msgstr "ਇਨਕਾਰ(_R)"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Grant"
+msgstr "ਮਨਜ਼ੂਰ(_G)"
 
 #: ../applet/confirm-dialogue.ui.h:1
 msgid "_Does not match"
@@ -405,83 +381,21 @@ msgstr "ਮਿਲਦਾ(_M)"
 msgid "_Show input"
 msgstr "ਇੰਪੁੱਟ ਵੇਖੋ(_S)"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "ਹਾਂ"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "ਨਹੀਂ"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "ਬਲਿਊਟੁੱਥ ਆਯੋਗ ਹੈ"
-
-#: ../properties/cc-bluetooth-panel.c:412
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "ਬਲਿਊਟੁੱਥ ਨੂੰ ਹਾਰਡਵੇਅਰ ਸਵਿੱਚ ਰਾਹੀਂ ਬੰਦ ਕੀਤਾ ਹੋਇਆ ਹੈ"
-
-#: ../properties/cc-bluetooth-panel.c:416
-msgid "No Bluetooth adapters found"
-msgstr "ਕੋਈ ਬਲਿਊਟੁੱਥ ਐਡਪਟਰ ਮੌਜੂਦ ਨਹੀਂ"
-
-#: ../properties/cc-bluetooth-panel.c:526
-msgid "Visibility"
-msgstr "ਦਿੱਖ"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "“%s” ਦੀ ਦਿੱਖ"
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "ਐਡਰੈੱਸ"
-
-#: ../properties/bluetooth.ui.h:2
-#| msgid "Browse files..."
-msgid "Browse Files..."
-msgstr "ਫਾਇਲਾਂ ਬਰਾਊਜ਼ ਕਰੋ…"
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "ਕੁਨੈਕਸ਼ਨ"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
-#| msgid "Bluetooth"
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "ਬਲਿਊਟੁੱਥ"
-
-#: ../properties/bluetooth.ui.h:9
-#| msgid "Send files..."
-msgid "Send Files..."
-msgstr "ਫਾਇਲਾਂ ਭੇਜੋ…"
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "ਬਲਿਊਟੁੱਥ ਸੈਟਿੰਗ ਸੰਰਚਨਾ"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207 ../wizard/main.c:328
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' ਨਾਲ ਪੇਅਰ ਕਰਨਾ ਰੱਦ ਕੀਤਾ"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "ਯਕੀਨੀ ਬਣਾਉਣ ਕਿ '%s' ਉੱਤੇ ਵੇਖਾਇਆ PIN ਇਸ ਨਾਲ ਮਿਲਦਾ ਹੈ।"
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) ਦਿਓ:"
 
@@ -489,7 +403,7 @@ msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) ਦਿਓ:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s' ਲਈ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
@@ -498,155 +412,124 @@ msgstr "'%s' ਲਈ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s' ਨਾਲ ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "'%s' ਉੱਤੇ ਅੱਗੇ ਦਿੱਤਾ ਪਿੰਨ ਲਿਖੋ ਜੀ:"
+
+#: ../wizard/main.c:521
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) '%s' ਉੱਤੇ ਦਿਓ ਅਤੇ ਕੀਬੋਰਡ ਤੋਂ \"ਐਂਟਰ' ਦੱਬੋ:"
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "'%s' ਉੱਤੇ ਅੱਗੇ ਦਿੱਤਾ ਪਿੰਨ ਲਿਖੋ ਜੀ:"
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "ਆਪਣੇ iCade ਦੀ ਜਾਏਸਟਿੱਕ ਨੂੰ ਅੱਗੇ ਦਿੱਤੀਆਂ ਦਿਸ਼ਾਵਾਂ ਵਿੱਚ ਘੁੰਮਾਉ ਜੀ:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "ਜੰਤਰ '%s' ਉੱਤੇ ਸੈਟਅੱਪ ਦੇ ਪੂਰਾ ਹੋਣ ਤੱਕ ਉਡੀਕੋ ਜੀ…"
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "ਨਵਾਂ ਜੰਤਰ '%s' ਠੀਕ ਤਰ੍ਹਾਂ ਸੈੱਟਅੱਪ ਕੀਤਾ ਗਿਆ"
 
-#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (ਬਹੁਤੇ ਹੈੱਡਸੈੱਟ, ਮਾਊਸ ਅਤੇ GPS ਜੰਤਰ)"
-
-#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:4
+#: ../wizard/wizard.ui.h:1
 msgid "Bluetooth New Device Setup"
 msgstr "ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ"
 
-#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
-msgid "Custom PIN:"
-msgstr "ਪਸੰਦੀਦਾ ਪਿੰਨ:"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Device Setup"
-msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "ਜੰਤਰ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
-
-#: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "ਜੰਤਰ ਖੋਜ"
-
-#: ../wizard/wizard.ui.h:9
-msgid "Do not pair"
-msgstr "ਪੇਅਰ ਨਾ ਕਰੋ"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
-msgid "Does not match"
-msgstr "ਮਿਲਦਾ ਨਹੀਂ"
-
-#: ../wizard/wizard.ui.h:12
-msgid "Finishing New Device Setup"
-msgstr "ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ ਮੁਕੰਮਲ ਹੋਇਆ"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
-msgid "Fixed PIN"
-msgstr "ਪੱਕਾ ਪਿੰਨ"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "ਜਾਣ ਪਛਾਣ"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
-msgid "Matches"
-msgstr "ਮਿਲਦਾ"
-
-#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
-msgid "PIN Options"
-msgstr "ਪਿੰਨ ਚੋਣਾਂ"
-
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
 msgstr "ਪਿੰਨ ਚੋਣਾਂ(_o)…"
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:3
+#| msgid "Device search"
+msgid "Device Search"
+msgstr "ਜੰਤਰ ਖੋਜ"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Device Setup"
+msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Finishing New Device Setup"
+msgstr "ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ ਮੁਕੰਮਲ ਹੋਇਆ"
+
+#: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr "ਹੋਰ ਸਰਵਿਸਾਂ ਚੁਣੋ, ਜੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਜੰਤਰ ਨਾਲ ਵਰਤਣੀਆਂ ਚਾਹੁੰਦੇ ਹੋ:"
 
-#: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to set up"
-msgstr "ਜੰਤਰ ਚੁਣੋ, ਜੋ ਤੁਸੀਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ"
+#: ../wizard/wizard.ui.h:7
+msgid "Setup Summary"
+msgstr "ਸੈਟਅੱਪ ਸਾਰ"
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "ਸੈਟਅੱਪ ਮੁਕੰਮਲ ਹੋਇਆ"
+#: ../wizard/wizard.ui.h:8
+msgid "PIN Options"
+msgstr "ਪਿੰਨ ਚੋਣਾਂ"
 
-#: ../wizard/wizard.ui.h:23
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ ਤੁਹਾਨੂੰ ਇਸ ਕੰਪਿਊਟਰ ਨਾਲ ਵਰਤਣ ਲਈ ਬਲਿਊਟੁੱਥ ਵਾਲੇ ਜੰਤਰਾਂ "
-"ਦੀ ਸੰਰਚਨਾ ਕਰਨ "
-"ਦੀ ਕਾਰਵਾਈ ਲਈ ਮੱਦਦ ਕਰੇਗਾ।"
-
-#: ../wizard/wizard.ui.h:24
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"ਜੰਤਰ ਨੂੰ ਤੁਹਾਡੇ ਕੰਪਿਊਟਰ ਤੋਂ 10 ਮੀਟਰ ਦੀ ਦੂਰੀ ਵਿੱਚ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ ਅਤੇ “ਦਿੱਖ "
-"(visible)” (ਕੁਝ "
-"ਵਾਰ “ਖੋਜ ਯੋਗ(discoverable)” ਵੀ ਕਹਿੰਦੇ ਹਨ) ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਜੇ ਕੋਈ ਸ਼ੱਕ ਹੋਵੇ "
-"ਤਾਂ ਜੰਤਰ ਦਾ "
-"ਦਸਤਾਵੇਜ਼ ਵੇਖੋ।"
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
-
-#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
 msgstr "ਆਟੋਮੈਟਿਕ ਪਿੰਨ(PIN) ਚੋਣ(_A)"
 
-#: ../wizard/wizard.ui.h:27
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "ਪੱਕਾ ਪਿੰਨ"
+
+#: ../wizard/wizard.ui.h:12
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (ਬਹੁਤੇ ਹੈੱਡਸੈੱਟ, ਮਾਊਸ ਅਤੇ GPS ਜੰਤਰ)"
+
+#: ../wizard/wizard.ui.h:13
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:14
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Do not pair"
+msgstr "ਪੇਅਰ ਨਾ ਕਰੋ"
+
+#: ../wizard/wizard.ui.h:16
+msgid "Custom PIN:"
+msgstr "ਪਸੰਦੀਦਾ ਪਿੰਨ:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "_Try Again"
+msgstr "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ(_T)"
+
+#: ../wizard/wizard.ui.h:18
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "ਬੰਦ ਕਰੋ(_Q)"
+
+#: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
-#: ../wizard/wizard.ui.h:28
-msgid "_Close"
-msgstr "ਬੰਦ ਕਰੋ(_C)"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:21
+msgid "Does not match"
+msgstr "ਮਿਲਦਾ ਨਹੀਂ"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "ਸੈਟਅੱਪ ਮੁੜ-ਚਾਲੂ(_R)"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:23
+msgid "Matches"
+msgstr "ਮਿਲਦਾ"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -656,107 +539,107 @@ msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਸੈਟਅੱਪ"
 msgid "Setup Bluetooth devices"
 msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਸੈਟਅੱਪ"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d ਸਕਿੰਟ"
 msgstr[1] "%'d ਸਕਿੰਟ"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d ਮਿੰਟ"
 msgstr[1] "%'d ਮਿੰਟ"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d ਘੰਟਾ"
 msgstr[1] "%'d ਘੰਟੇ"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ਅੰਦਾਜ਼ਨ %'d ਘੰਟਾ"
 msgstr[1] "ਅੰਦਾਜ਼ਨ %'d ਘੰਟੇ"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "ਫਾਇਲ ਟਰਾਂਸਫਰ"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ਼(_R)"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "ਫਾਇਲਾਂ ਨੂੰ ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਭੇਜੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "ਤੋਂ:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "ਵੱਲ:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:337 ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "ਇੱਕ ਅਣਜਾਣੀ ਗਲਤੀ ਆਈ ਹੈ"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:348
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "ਯਕੀਨੀ ਬਣਾਉ ਕਿ ਰਿਮੋਟ ਜੰਤਰ ਚਾਲੂ ਹੈ ਅਤੇ ਇਹ ਬਲਿਊਟੁੱਥ ਕੁਨੈਕਸ਼ਨ ਮਨਜ਼ੂਰ ਕਰਦਾ ਹੈ।"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "%s ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:453 ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%2$d ਵਿੱਚੋਂ %1$d ਫਾਇਲ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:658
 msgid "Select device to send to"
 msgstr "ਭੇਜਣ ਲਈ ਜੰਤਰ ਚੁਣੋ"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:663
 msgid "_Send"
 msgstr "ਭੇਜੋ(_S)"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "ਭੇਜਣ ਲਈ ਫਾਇਲਾਂ ਚੁਣੋ"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:710
 msgid "Select"
 msgstr "ਚੁਣੋ"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "ਵਰਤਣ ਲਈ ਰਿਮੋਟ ਜੰਤਰ"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "ਰਿਮੋਟ ਜੰਤਰ ਦਾ ਨਾਂ"
 
@@ -781,132 +664,197 @@ msgstr "ਬਲਿਊਟੁੱਥ ਟਰਾਂਸਫਰ"
 msgid "Send files via Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "ਇੱਕਲੇ ਮੋਡ ਵਿੱਚ ਚਲਾਓ"
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "ਕੀ ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਵਿੱਚੋਂ '%s' ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
 
-#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "ਮੋਬਲਿਨ ਬਲਿਊਟੁੱਥ ਪੈਨਲ"
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr "ਜੇ ਤੁਸੀਂ ਜੰਤਰ ਹਟਾਇਆ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਅਗਲੀ ਵਾਰ ਵਰਤਣ ਸਮੇਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਪਵੇਗਾ।"
 
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "- ਮੋਬਲਿਨ ਬਲਿਊਟੁੱਥ ਪੈਨਲ"
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "…ਨਾਲ ਹੀ ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਵੇਖੋ"
 
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d ਘੰਟਾ"
-msgstr[1] "%d ਘੰਟੇ"
+#~ msgid "Select Device to Browse"
+#~ msgstr "ਬਰਾਊਜ਼ ਕਰਨ ਵਾਸਤੇ ਜੰਤਰ ਚੁਣੋ"
 
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d ਮਿੰਟ"
-msgstr[1] "%d ਮਿੰਟ"
+#~ msgid "_Browse"
+#~ msgstr "ਬਰਾਊਜ਼(_B)"
 
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d ਸਕਿੰਟ"
-msgstr[1] "%d ਸਕਿੰਟ"
+#~ msgid "Select device to browse"
+#~ msgstr "ਬਰਾਊਜ਼ ਕਰਨ ਲਈ ਜੰਤਰ ਚੁਣੋ"
 
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-#| msgid "%s %s %s"
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
+#~ msgid "Browse files on device..."
+#~ msgstr "ਜੰਤਰ ਉੱਤੇ ਫਾਇਲਾਂ ਬਰਾਊਜ਼ਰ ਕਰੋ…"
 
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-#| msgid "%s %s"
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
+#~ msgid "Preferences"
+#~ msgstr "ਮੇਰੀ ਪਸੰਦ"
 
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "੦ ਸਕਿੰਟ"
+#~ msgid "Yes"
+#~ msgstr "ਹਾਂ"
 
-#: ../moblin/moblin-panel.c:224
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"ਤੁਹਾਡਾ ਕੰਪਿਊਟਰ %s\n"
-"ਲਈ ਬਲਿਊਟੁੱਥ ਉੱਤੇ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ"
+#~ msgid "No"
+#~ msgstr "ਨਹੀਂ"
 
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "%s ਨਾਲ ਪੇਅਰ ਕਰਨਾ  ਫੇਲ੍ਹ ਹੈ।"
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਆਯੋਗ ਹੈ"
 
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-msgid "Pair"
-msgstr "ਪੇਅਰ ਕਰੋ"
+#~ msgid "Bluetooth is disabled by hardware switch"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਨੂੰ ਹਾਰਡਵੇਅਰ ਸਵਿੱਚ ਰਾਹੀਂ ਬੰਦ ਕੀਤਾ ਹੋਇਆ ਹੈ"
 
-#: ../moblin/moblin-panel.c:1023
-msgid "Browse"
-msgstr "ਬਰਾਊਜ਼"
+#~ msgid "No Bluetooth adapters found"
+#~ msgstr "ਕੋਈ ਬਲਿਊਟੁੱਥ ਐਡਪਟਰ ਮੌਜੂਦ ਨਹੀਂ"
 
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "ਜੰਤਰ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
+#~ msgid "Visibility"
+#~ msgstr "ਦਿੱਖ"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "ਜੰਤਰ ਉੱਤੇ ਵਾਪਸ"
+#~ msgid "Visibility of “%s”"
+#~ msgstr "“%s” ਦੀ ਦਿੱਖ"
 
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "ਮੁਕੰਮਲ"
+#~ msgid "Address"
+#~ msgstr "ਐਡਰੈੱਸ"
 
-#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
+#~| msgid "Browse files..."
+#~ msgid "Browse Files..."
+#~ msgstr "ਫਾਇਲਾਂ ਬਰਾਊਜ਼ ਕਰੋ…"
 
-#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
-msgid "Settings"
-msgstr "ਸੈਟਿੰਗ"
+#~ msgid "Connection"
+#~ msgstr "ਕੁਨੈਕਸ਼ਨ"
 
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "ਕੇਵਲ ਵੇਖੋ:"
+#~| msgid "Bluetooth"
+#~ msgctxt "Power"
+#~ msgid "Bluetooth"
+#~ msgstr "ਬਲਿਊਟੁੱਥ"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "ਪਿੰਨ ਚੋਣਾਂ"
+#~| msgid "Send files..."
+#~ msgid "Send Files..."
+#~ msgstr "ਫਾਇਲਾਂ ਭੇਜੋ…"
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "ਨਵਾਂ ਜੰਤਰ ਸ਼ਾਮਲ ਕਰੋ"
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਸੈਟਿੰਗ ਸੰਰਚਨਾ"
 
-#: ../moblin/moblin-panel.c:1621
-msgid "Make visible on Bluetooth"
-msgstr "ਬਲਿਊਟੁੱਥ ਉੱਤੇ ਦਿੱਖ ਬਣਾਉ"
+#~ msgid "Device Setup Failed"
+#~ msgstr "ਜੰਤਰ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "ਆਪਣੇ ਕੰਪਿਊਟਰ ਤੋਂ ਫਾਇਲ ਭੇਜੋ"
+#~ msgid "Introduction"
+#~ msgstr "ਜਾਣ ਪਛਾਣ"
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "ਬਲਿਊਟੁੱਥ ਮੈਨੇਜਰ ਪੈਨਲ"
+#~ msgid "Select the device you want to set up"
+#~ msgstr "ਜੰਤਰ ਚੁਣੋ, ਜੋ ਤੁਸੀਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ"
+
+#~ msgid "Setup Completed"
+#~ msgstr "ਸੈਟਅੱਪ ਮੁਕੰਮਲ ਹੋਇਆ"
+
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr ""
+#~ "ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ ਤੁਹਾਨੂੰ ਇਸ ਕੰਪਿਊਟਰ ਨਾਲ ਵਰਤਣ ਲਈ ਬਲਿਊਟੁੱਥ ਵਾਲੇ ਜੰਤਰਾਂ ਦੀ ਸੰਰਚਨਾ "
+#~ "ਕਰਨ ਦੀ ਕਾਰਵਾਈ ਲਈ ਮੱਦਦ ਕਰੇਗਾ।"
+
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "ਜੰਤਰ ਨੂੰ ਤੁਹਾਡੇ ਕੰਪਿਊਟਰ ਤੋਂ 10 ਮੀਟਰ ਦੀ ਦੂਰੀ ਵਿੱਚ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ ਅਤੇ “ਦਿੱਖ "
+#~ "(visible)” (ਕੁਝ ਵਾਰ “ਖੋਜ ਯੋਗ(discoverable)” ਵੀ ਕਹਿੰਦੇ ਹਨ) ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ। ਜੇ ਕੋਈ "
+#~ "ਸ਼ੱਕ ਹੋਵੇ ਤਾਂ ਜੰਤਰ ਦਾ ਦਸਤਾਵੇਜ਼ ਵੇਖੋ।"
+
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
+
+#~ msgid "_Close"
+#~ msgstr "ਬੰਦ ਕਰੋ(_C)"
+
+#~ msgid "_Restart Setup"
+#~ msgstr "ਸੈਟਅੱਪ ਮੁੜ-ਚਾਲੂ(_R)"
+
+#~ msgid "Run in standalone mode"
+#~ msgstr "ਇੱਕਲੇ ਮੋਡ ਵਿੱਚ ਚਲਾਓ"
+
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "ਮੋਬਲਿਨ ਬਲਿਊਟੁੱਥ ਪੈਨਲ"
+
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "- ਮੋਬਲਿਨ ਬਲਿਊਟੁੱਥ ਪੈਨਲ"
+
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d ਘੰਟਾ"
+#~ msgstr[1] "%d ਘੰਟੇ"
+
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d ਮਿੰਟ"
+#~ msgstr[1] "%d ਮਿੰਟ"
+
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d ਸਕਿੰਟ"
+#~ msgstr[1] "%d ਸਕਿੰਟ"
+
+#~| msgid "%s %s %s"
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
+
+#~| msgid "%s %s"
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#~ msgid "0 seconds"
+#~ msgstr "੦ ਸਕਿੰਟ"
+
+#~ msgid ""
+#~ "Your computer is visible on\n"
+#~ "Bluetooth for %s."
+#~ msgstr ""
+#~ "ਤੁਹਾਡਾ ਕੰਪਿਊਟਰ %s\n"
+#~ "ਲਈ ਬਲਿਊਟੁੱਥ ਉੱਤੇ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ"
+
+#~ msgid "Pairing with %s failed."
+#~ msgstr "%s ਨਾਲ ਪੇਅਰ ਕਰਨਾ  ਫੇਲ੍ਹ ਹੈ।"
+
+#~ msgid "Pair"
+#~ msgstr "ਪੇਅਰ ਕਰੋ"
+
+#~ msgid "Browse"
+#~ msgstr "ਬਰਾਊਜ਼"
+
+#~ msgid "Device setup failed"
+#~ msgstr "ਜੰਤਰ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
+
+#~ msgid "Back to devices"
+#~ msgstr "ਜੰਤਰ ਉੱਤੇ ਵਾਪਸ"
+
+#~ msgid "Done"
+#~ msgstr "ਮੁਕੰਮਲ"
+
+#~ msgid "Device setup"
+#~ msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
+
+#~ msgid "Settings"
+#~ msgstr "ਸੈਟਿੰਗ"
+
+#~ msgid "Only show:"
+#~ msgstr "ਕੇਵਲ ਵੇਖੋ:"
+
+#~ msgid "PIN options"
+#~ msgstr "ਪਿੰਨ ਚੋਣਾਂ"
+
+#~ msgid "Add a new device"
+#~ msgstr "ਨਵਾਂ ਜੰਤਰ ਸ਼ਾਮਲ ਕਰੋ"
+
+#~ msgid "Make visible on Bluetooth"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਉੱਤੇ ਦਿੱਖ ਬਣਾਉ"
+
+#~ msgid "Send file from your computer"
+#~ msgstr "ਆਪਣੇ ਕੰਪਿਊਟਰ ਤੋਂ ਫਾਇਲ ਭੇਜੋ"
+
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਮੈਨੇਜਰ ਪੈਨਲ"
 
 #~ msgid "Open Keyboard Preferences..."
 #~ msgstr "ਕੀਬੋਰਡ ਪਸੰਦ ਖੋਲ੍ਹੋ..."
