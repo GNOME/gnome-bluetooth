@@ -4,14 +4,14 @@
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
 # I. Felix <ifelix@redhat.com>, 2009.
-# Dr.T.Vasudevan <agnihot3@gmail.com>, 2009, 2010, 2011.
+# Dr.T.Vasudevan <agnihot3@gmail.com>, 2009, 2010, 2011, 2012.
 # Dr,T,Vasudevan <agnihot3@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-13 14:47+0530\n"
-"PO-Revision-Date: 2011-09-13 14:49+0530\n"
+"POT-Creation-Date: 2012-02-28 16:06+0530\n"
+"PO-Revision-Date: 2012-02-28 16:10+0530\n"
 "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -28,45 +28,40 @@ msgstr ""
 "\n"
 "X-Generator: Lokalize 1.1\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "சாதனத்தை தேர்ந்தெடுக்க கிளிக் செய்யவும்..."
 
-#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "தெரியாத"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "தகவிகள் கிடைக்கப் பெறவில்லை"
 
-#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "சாதனங்களுக்காக தேடுகிறது..."
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "சாதனங்களின் பட்டியலிருந்து '%s' ஐ நீக்கவா?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid "If you remove the device, you will have to set it up again before next use."
-msgstr "இந்த சாதனத்தை நீங்கள் நீக்கினால்,அடுத்த பயன்பாட்டிற்கு முன் நீங்கள் அதை அமைக்க வேண்டும்."
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "சாதனம்"
 
-#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "வகை"
+
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:3
+msgid "Devices"
+msgstr "சாதனங்கள்"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "அனைத்து வகைகள்"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "பிணை"
 
@@ -82,33 +77,35 @@ msgstr "பிணயும் இல்லை நம்பகமும் இல
 msgid "Paired or trusted"
 msgstr "பிணை  அல்லது நம்பகம்"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "இதனுடன் கூடிய ப்ளூடூத் சாதனங்களை மட்டும் காட்டு..."
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "காட்டு:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_c சாதன வகையினம்:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "வடிகட்ட சாதன  வகையினத்தை தேர்ந்தெடு"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "_t சாதன வகை:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "வடிகட்ட சாதன  வகையை தேர்ந்தெடு"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "உள்ளீட்டு சாதனங்கள் (சொடுக்கி, விசைப்பலகை, போன்றன)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "தலையணி கேட்பொறி, தலை அணிகள் மற்ற ஒலி சாதனங்கள்"
 
@@ -184,92 +181,80 @@ msgstr "இந்த ஜிபிஎஸ்(GPS) சாதனத்தை இர�
 msgid "Access the Internet using your cell phone (test)"
 msgstr "உங்களது மொபைல் ஃபோனில் இணைய அணுகலை பயன்படுத்துகிறது (சோதனை)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "உலாவுவதற்கு சாதனத்தை தேர்ந்தெடுக்கவும்"
+#: ../applet/main.c:230
+msgid "Turn on Bluetooth"
+msgstr "ப்ளூடூத்தை இயக்கு"
 
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "உலாவு  (_B)"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "உலாவுவதற்கு சாதனத்தை தேர்ந்தெடுக்கவும்"
-
-#: ../applet/main.c:281
-msgid "Turn On Bluetooth"
-msgstr "ப்ளூடூத்துக்கு திரும்பு"
-
-#: ../applet/main.c:282 ../applet/notify.c:159
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "ப்ளூடூத்: சக்திநீக்கி  உள்ளது"
 
-#: ../applet/main.c:285
-msgid "Turn Off Bluetooth"
+#: ../applet/main.c:234
+msgid "Turn off Bluetooth"
 msgstr "ப்ளூடூத்தை நிறுத்து"
 
-#: ../applet/main.c:286 ../applet/notify.c:159
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: உயிரூட்டப்பட்டு  உள்ளது"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: செயல்நீக்கப்பட்டது"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "துண்டிக்கப்படுகிறது..."
 
-#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "இணைக்கிறது..."
 
-#: ../applet/main.c:444 ../applet/main.c:727
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "இணைக்கப்பட்டது"
 
-#: ../applet/main.c:447 ../applet/main.c:727
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "துண்டிக்கப்பட்டது"
 
-#: ../applet/main.c:745 ../applet/main.c:809
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "துண்டிக்கவும்"
 
-#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "இணைக்கவும்"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "கோப்புகளை அனுப்பு..."
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "கோப்புகளை உலாவி..."
 
-#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+#: ../applet/main.c:728
 msgid "Keyboard Settings"
 msgstr "விசைப்பலகை  அமைப்பு"
 
-#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+#: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
 msgstr "சொடுக்கி மற்றும் தொடுதிட்டு அமைப்புகள்"
 
-#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+#: ../applet/main.c:746
 msgid "Sound Settings"
 msgstr "ஒலி அமைப்புகள்"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "வழு நீக்கு "
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- ப்ளூடூத் குறுநிரல் "
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -278,12 +263,11 @@ msgstr ""
 "%s\n"
 "'%s --உதவிக்கு ஒரு முழு பட்டியலில் இருக்கும் கட்டளை வரி விருப்பங்களை இயக்குகிறது.\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "ப்ளூடூத் குறுநிரல்"
 
-#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "ப்ளூடூத்"
 
@@ -357,35 +341,26 @@ msgid "Bluetooth Manager applet"
 msgstr "ப்ளூடூத் மேலாளர் அப்லெட்"
 
 #: ../applet/popup-menu.ui.h:1
+msgid "Bluetooth Settings"
+msgstr "ப்ளூடூத் அமைப்புகள்"
+
+#: ../applet/popup-menu.ui.h:2
 msgid "Bluetooth: Checking"
 msgstr "ப்ளூடூத்: சரிபார்க்கிறது"
 
-#: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "சாதனத்தில் கோப்புகளை உலாவு..."
-
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "சாதனங்கள்"
-
 #: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "முன்னுரிமைகள்"
-
-#: ../applet/popup-menu.ui.h:5
 msgid "Quit"
 msgstr "நிறுத்து"
 
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:5
 msgid "Send files to device..."
 msgstr "சாதனத்தில் கோப்புகளை அனுப்பு..."
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:6
 msgid "Set up new device..."
 msgstr "புதிய சாதனத்தை அமைக்கவும்..."
 
-#: ../applet/popup-menu.ui.h:8
+#: ../applet/popup-menu.ui.h:7
 msgid "Visible"
 msgstr "பார்வையில் உள்ள"
 
@@ -413,80 +388,21 @@ msgstr "பொருத்தங்கள் (_M)"
 msgid "_Show input"
 msgstr "உள்ளீட்டைக் காட்டு (_S)"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "ஆம்"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "இல்லை"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "ப்ளூடூத் செயல்படவில்லை"
-
-#: ../properties/cc-bluetooth-panel.c:412
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "ப்ளூடூத்  வண்பொருள் மாற்றியால் செயல்படவில்லை"
-
-#: ../properties/cc-bluetooth-panel.c:416
-msgid "No Bluetooth adapters found"
-msgstr "ப்ளூடூத் தகைவிகள் ஏதும் இல்லை"
-
-#: ../properties/cc-bluetooth-panel.c:526
-msgid "Visibility"
-msgstr "தெரிவு"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "“%s” இன் தெளிவு"
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "முகவரி"
-
-#: ../properties/bluetooth.ui.h:2
-msgid "Browse Files..."
-msgstr "கோப்புகளில் உலாவு..."
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "இணைப்பு"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "ப்ளூடூத்"
-
-#: ../properties/bluetooth.ui.h:9
-msgid "Send Files..."
-msgstr "கோப்புகளை அனுப்பவும்..."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "கட்டமைக்கப்பட்ட ப்ளூடூத் அமைவுகள்"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207 ../wizard/main.c:328
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' உடன் பிணைத்தல் ரத்து செய்யப்பட்டது"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr " '%s' இல் காட்டப்பட்ட பின் எண்இதனுடன் பொருந்துகிறதா என உறுதி செய்யவும்."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "பின்வரும் பின் ஐ உள்ளிடவும்:"
 
@@ -494,7 +410,7 @@ msgstr "பின்வரும் பின் ஐ உள்ளிடவும
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s'ஐ அமைப்பது தோல்வியுற்றது"
@@ -503,44 +419,48 @@ msgstr "'%s'ஐ அமைப்பது தோல்வியுற்றது
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s'க்கு இணைக்கப்படுகிறது..."
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "'%s' மீது உள்ள பின்வரும் பின் ஐ உள்ளிடவும்:"
+
+#: ../wizard/main.c:521
 #, c-format
 msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "'%s' மீது உள்ள பின்வரும் பின் ஐ உள்ளிட்டு உள்ளீட்டு விசையை அழுத்துக:"
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "'%s' மீது உள்ள பின்வரும் பின் ஐ உள்ளிடவும்:"
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "தயை செய்து உங்கள் ஐகேட் இன் ஜாய்குச்சியை ஐ கீழ் வரும் திசைகளில் நகர்த்துக"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "'%s'அமைவு முடிவடையும் வரை தயவு செய்து காத்திருக்கவும்..."
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "வெற்றிகரமாக கட்டமைக்கப்பட்ட புதிய சாதனம் '%s'"
 
-#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
+#: ../wizard/wizard.ui.h:1
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "'0000' (பெரும்பாலும் ஹெட்செட்களில், சுட்டி மற்றும் GPS சாதனங்கள்)"
 
-#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
+#: ../wizard/wizard.ui.h:2
 msgid "'1111'"
 msgstr "'1111'"
 
-#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
+#: ../wizard/wizard.ui.h:3
 msgid "'1234'"
 msgstr "'1234'"
 
@@ -548,106 +468,72 @@ msgstr "'1234'"
 msgid "Bluetooth New Device Setup"
 msgstr "ப்ளூடூத்  புதிய சாதனம் அமைப்பு"
 
-#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
+#: ../wizard/wizard.ui.h:5
 msgid "Custom PIN:"
 msgstr "தனிப்பயன் பின் குறியீடு:"
 
 #: ../wizard/wizard.ui.h:6
+msgid "Device Search"
+msgstr "சாதன தேடல்"
+
+#: ../wizard/wizard.ui.h:7
 msgid "Device Setup"
 msgstr "சாதன அமைப்பு"
 
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "சாதனத்தை அமைப்பதில் தோல்வி"
-
 #: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "சாதனத்தை தேடு"
-
-#: ../wizard/wizard.ui.h:9
 msgid "Do not pair"
 msgstr "பொருத்த வேண்டாம்"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
+#: ../wizard/wizard.ui.h:10
 msgid "Does not match"
 msgstr "பொருந்தவில்லை"
 
-#: ../wizard/wizard.ui.h:12
+#: ../wizard/wizard.ui.h:11
 msgid "Finishing New Device Setup"
 msgstr "புதிய சாதன அமைவை முடிக்கிறது"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
+#: ../wizard/wizard.ui.h:13
 msgid "Fixed PIN"
 msgstr "நிலையான பின் எண்"
 
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "அறிமுகம்"
-
 #. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
+#: ../wizard/wizard.ui.h:15
 msgid "Matches"
 msgstr "பொருத்தங்கள்"
 
-#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
+#: ../wizard/wizard.ui.h:16
 msgid "PIN Options"
 msgstr "பின் எண் விருப்பங்கள்"
 
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:17
 msgid "PIN _options..."
 msgstr "பின் எண் விருப்பங்கள் (_o)..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:18
 msgid "Select the additional services you want to use with your device:"
 msgstr "உங்கள் சாதனத்துடன் பயன்படுத்த விரும்பும் கூடுதல் சேவைகளை தேர்ந்தெடுக்கவும்:"
 
-#: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to set up"
-msgstr "நீங்கள் அமைக்க விரும்பும் சாதனத்தை தேர்ந்தெடு"
+#: ../wizard/wizard.ui.h:19
+msgid "Setup Summary"
+msgstr "வடிவமைப்பு சுருக்கம்"
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "அமைவு முடிந்தது"
-
-#: ../wizard/wizard.ui.h:23
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"புதிய ப்ளூடூத் சாதன வழிகாட்டி  ப்ளூடூத் செயல்படுத்தப்பட்ட சாதனங்களை இந்த கணினியில் பயன் "
-"படுத்த  கட்டமைக்க உடன் அழைத்துச்செல்லும். "
-
-#: ../wizard/wizard.ui.h:24
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"சாதனம் உங்கள் கணீனியில் இருந்து 10 மீட்டர் தொலைவுக்குள் இருக்க வேண்டும். மேலும் அது  “ காண "
-"முடியவேண்டும்.” (சில சமயம்  “ என அழைக்கப்படும். கண்டு பிடிக்கக்கூடியது ”). "
-"சந்தேகமிருந்தால் சாதனத்தின் கையேட்டை பார்க்கவும்.."
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "ப்ளூடூத் புதிய சாதன அமைவு வழிகாட்டிக்கு வரவேற்கிறது"
-
-#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:20
 msgid "_Automatic PIN selection"
 msgstr "தானியக்கி பின் எண் தேர்ந்தெடுத்தல் (_A)"
 
-#: ../wizard/wizard.ui.h:27
+#: ../wizard/wizard.ui.h:21
 msgid "_Cancel"
 msgstr "_C ரத்து செய்"
 
-#: ../wizard/wizard.ui.h:28
-msgid "_Close"
-msgstr "_C  மூடுக"
+#: ../wizard/wizard.ui.h:22
+msgid "_Quit"
+msgstr "வெளியேறு (_Q)"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "அமைவை மறுதுவக்கு (_R)"
+#: ../wizard/wizard.ui.h:23
+msgid "_Try Again"
+msgstr "_T மீண்டும் முயற்சிசெய்"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -657,60 +543,60 @@ msgstr "ப்ளூடூத்  சாதனம் அமைப்பு"
 msgid "Setup Bluetooth devices"
 msgstr "ப்ளூடூத் சாதனங்களை அமை"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d விநாடி"
 msgstr[1] "%'d விநாடிகள்"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d நிமிடம்"
 msgstr[1] "%'d நிமிடங்கள்"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d மணி"
 msgstr[1] "%'d மணிகள்"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "தோராயமாக %'d மணி"
 msgstr[1] "தோராயமாக %'d மணிகள்"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "கோப்பை மாற்று"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "மறுமுயற்சி (_R)"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "ப்ளூடூத் வழியாக கோப்புகள் அனுப்பப்படுகிறது"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "அனுப்புனர்:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "பெறுனர்:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:337 ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "ஒரு தெரியாத பிழை ஏற்பட்டது"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:348
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -718,47 +604,47 @@ msgstr ""
 "தொலை சாதனம் உயிரூட்டப்பட்டு  உள்ளதா மற்றும் அது ப்ளூடூத் இணைப்புகளை ஏற்றுக் கொள்ளுகிறதா "
 "என பார்க்கவும்"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "%s ஐ அனுப்புகிறது"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:453 ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%d %d இல் கோப்பை அனுப்புகிறது"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:658
 msgid "Select device to send to"
 msgstr "அனுப்புவதற்கு சானத்தை தேர்ந்தெடுக்கவும்"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:663
 msgid "_Send"
 msgstr "அனுப்பு (_S)"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "கோப்புகளை அனுப்புவதற்கு தேர்ந்தெடு"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:710
 msgid "Select"
 msgstr "தேர்வு செய்க"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "பயன்படுத்துவதற்கான தொலைச் சாதனம்"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "தொலை சாதனங்களின் பெயர்"
 
@@ -783,130 +669,193 @@ msgstr "ப்ளூடூத் பரிமாற்றம்"
 msgid "Send files via Bluetooth"
 msgstr "ப்ளூடூத் வழியாக கோப்புகள் அனுப்பு"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "தனித்த இயக்க பாங்கில் இயக்கு"
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "சாதனங்களின் பட்டியலிருந்து '%s' ஐ நீக்கவா?"
 
-#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "மோப்ளின் ப்ளூடூத் பலகம்"
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr ""
+#~ "இந்த சாதனத்தை நீங்கள் நீக்கினால்,அடுத்த பயன்பாட்டிற்கு முன் நீங்கள் அதை அமைக்க வேண்டும்."
 
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "- மோப்ளின்  ப்ளூடூத் பலகம்"
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "இதனுடன் கூடிய ப்ளூடூத் சாதனங்களை மட்டும் காட்டு..."
 
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d மணி நேரம்"
-msgstr[1] "%d மணிகள்"
+#~ msgid "Select Device to Browse"
+#~ msgstr "உலாவுவதற்கு சாதனத்தை தேர்ந்தெடுக்கவும்"
 
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d நிமிடம்"
-msgstr[1] "%d நிமிடங்கள்"
+#~ msgid "_Browse"
+#~ msgstr "உலாவு  (_B)"
 
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d விநாடி"
-msgstr[1] "%d விநாடிகள்"
+#~ msgid "Select device to browse"
+#~ msgstr "உலாவுவதற்கு சாதனத்தை தேர்ந்தெடுக்கவும்"
 
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
+#~ msgid "Browse files on device..."
+#~ msgstr "சாதனத்தில் கோப்புகளை உலாவு..."
 
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
+#~ msgid "Preferences"
+#~ msgstr "முன்னுரிமைகள்"
 
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "0 விநாடிகள்"
+#~ msgid "Yes"
+#~ msgstr "ஆம்"
 
-#: ../moblin/moblin-panel.c:224
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"%s க்கு உங்கள் கணினி \n"
-"எந்த ப்ளூடூத் இல் தெரிகிறது "
+#~ msgid "No"
+#~ msgstr "இல்லை"
 
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "%s உடன் பிணைத்தல் ரத்து செய்யப்பட்டது"
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "ப்ளூடூத் செயல்படவில்லை"
 
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-msgid "Pair"
-msgstr "பிணை"
+#~ msgid "Bluetooth is disabled by hardware switch"
+#~ msgstr "ப்ளூடூத்  வண்பொருள் மாற்றியால் செயல்படவில்லை"
 
-#: ../moblin/moblin-panel.c:1023
-msgid "Browse"
-msgstr "உலாவு"
+#~ msgid "No Bluetooth adapters found"
+#~ msgstr "ப்ளூடூத் தகைவிகள் ஏதும் இல்லை"
 
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "சாதன அமைப்பு தோல்வியடைந்தது"
+#~ msgid "Visibility"
+#~ msgstr "தெரிவு"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "சாதனத்துக்கு பின் செல்க"
+#~ msgid "Visibility of “%s”"
+#~ msgstr "“%s” இன் தெளிவு"
 
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "முடிந்தது"
+#~ msgid "Address"
+#~ msgstr "முகவரி"
 
-#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "சாதன அமைப்பு"
+#~ msgid "Browse Files..."
+#~ msgstr "கோப்புகளில் உலாவு..."
 
-#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
-msgid "Settings"
-msgstr "அமைப்புகள்"
+#~ msgid "Connection"
+#~ msgstr "இணைப்பு"
 
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "காட்டுதல் இது மட்டும்:"
+#~ msgctxt "Power"
+#~ msgid "Bluetooth"
+#~ msgstr "ப்ளூடூத்"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "பின் எண் தேர்வுகள்"
+#~ msgid "Send Files..."
+#~ msgstr "கோப்புகளை அனுப்பவும்..."
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "புதிய சாதனத்தை சேர்க்கவும்"
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "கட்டமைக்கப்பட்ட ப்ளூடூத் அமைவுகள்"
 
-#: ../moblin/moblin-panel.c:1621
-msgid "Make visible on Bluetooth"
-msgstr "ப்ளூடூத் வழியாக தெரியச்செய்"
+#~ msgid "Device Setup Failed"
+#~ msgstr "சாதனத்தை அமைப்பதில் தோல்வி"
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "உங்கள் கணினியிலிருந்து கோப்பை அனுப்புக"
+#~ msgid "Introduction"
+#~ msgstr "அறிமுகம்"
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "ப்ளூடூத் மேலாளர் பலகம்"
+#~ msgid "Select the device you want to set up"
+#~ msgstr "நீங்கள் அமைக்க விரும்பும் சாதனத்தை தேர்ந்தெடு"
+
+#~ msgid "Setup Completed"
+#~ msgstr "அமைவு முடிந்தது"
+
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr ""
+#~ "புதிய ப்ளூடூத் சாதன வழிகாட்டி  ப்ளூடூத் செயல்படுத்தப்பட்ட சாதனங்களை இந்த கணினியில் "
+#~ "பயன் படுத்த  கட்டமைக்க உடன் அழைத்துச்செல்லும். "
+
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "சாதனம் உங்கள் கணீனியில் இருந்து 10 மீட்டர் தொலைவுக்குள் இருக்க வேண்டும். மேலும் அது  “ "
+#~ "காண முடியவேண்டும்.” (சில சமயம்  “ என அழைக்கப்படும். கண்டு பிடிக்கக்கூடியது ”). "
+#~ "சந்தேகமிருந்தால் சாதனத்தின் கையேட்டை பார்க்கவும்.."
+
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "ப்ளூடூத் புதிய சாதன அமைவு வழிகாட்டிக்கு வரவேற்கிறது"
+
+#~ msgid "_Close"
+#~ msgstr "_C  மூடுக"
+
+#~ msgid "_Restart Setup"
+#~ msgstr "அமைவை மறுதுவக்கு (_R)"
+
+#~ msgid "Run in standalone mode"
+#~ msgstr "தனித்த இயக்க பாங்கில் இயக்கு"
+
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "மோப்ளின் ப்ளூடூத் பலகம்"
+
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "- மோப்ளின்  ப்ளூடூத் பலகம்"
+
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d மணி நேரம்"
+#~ msgstr[1] "%d மணிகள்"
+
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d நிமிடம்"
+#~ msgstr[1] "%d நிமிடங்கள்"
+
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d விநாடி"
+#~ msgstr[1] "%d விநாடிகள்"
+
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
+
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#~ msgid "0 seconds"
+#~ msgstr "0 விநாடிகள்"
+
+#~ msgid ""
+#~ "Your computer is visible on\n"
+#~ "Bluetooth for %s."
+#~ msgstr ""
+#~ "%s க்கு உங்கள் கணினி \n"
+#~ "எந்த ப்ளூடூத் இல் தெரிகிறது "
+
+#~ msgid "Pairing with %s failed."
+#~ msgstr "%s உடன் பிணைத்தல் ரத்து செய்யப்பட்டது"
+
+#~ msgid "Pair"
+#~ msgstr "பிணை"
+
+#~ msgid "Browse"
+#~ msgstr "உலாவு"
+
+#~ msgid "Device setup failed"
+#~ msgstr "சாதன அமைப்பு தோல்வியடைந்தது"
+
+#~ msgid "Back to devices"
+#~ msgstr "சாதனத்துக்கு பின் செல்க"
+
+#~ msgid "Done"
+#~ msgstr "முடிந்தது"
+
+#~ msgid "Device setup"
+#~ msgstr "சாதன அமைப்பு"
+
+#~ msgid "Settings"
+#~ msgstr "அமைப்புகள்"
+
+#~ msgid "Only show:"
+#~ msgstr "காட்டுதல் இது மட்டும்:"
+
+#~ msgid "PIN options"
+#~ msgstr "பின் எண் தேர்வுகள்"
+
+#~ msgid "Add a new device"
+#~ msgstr "புதிய சாதனத்தை சேர்க்கவும்"
+
+#~ msgid "Make visible on Bluetooth"
+#~ msgstr "ப்ளூடூத் வழியாக தெரியச்செய்"
+
+#~ msgid "Send file from your computer"
+#~ msgstr "உங்கள் கணினியிலிருந்து கோப்பை அனுப்புக"
+
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "ப்ளூடூத் மேலாளர் பலகம்"
 
 #~ msgid "Open Keyboard Preferences..."
 #~ msgstr "விசைப்பலகை முன்னுரிமைகளை திறக்கவும்..."
