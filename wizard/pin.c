@@ -29,6 +29,7 @@
 #include <string.h>
 #include <glib.h>
 #include <bluetooth-enums.h>
+#include <bluetooth-utils.h>
 
 #include "pin.h"
 
@@ -118,6 +119,9 @@ get_pincode_for_device (guint type, const char *address, const char *name, guint
 
 	g_return_val_if_fail (address != NULL, NULL);
 
+	g_debug ("Getting pincode for device '%s' (type: %s address: %s)",
+		 name ? name : "", address, bluetooth_type_to_string (type));
+
 	/* Load the PIN database and split it in lines */
 	if (!g_file_get_contents(PIN_CODE_DB, &buf, &buf_len, NULL)) {
 		char *filename;
@@ -149,6 +153,10 @@ get_pincode_for_device (guint type, const char *address, const char *name, guint
 
 	if (max_digits != NULL)
 		*max_digits = data.max_digits;
+
+	g_debug ("Got pin '%s' (max digits: %d) for device '%s' (type: %s address: %s)",
+		 data.ret_pin, data.max_digits,
+		 name ? name : "", address, bluetooth_type_to_string (type));
 
 	return data.ret_pin;
 }
