@@ -753,7 +753,7 @@ select_device_changed (BluetoothChooser *selector,
 	    g_str_equal (user_pincode, "NULL") == FALSE) {
 		if (g_str_equal (user_pincode, "KEYBOARD"))
 			target_ui_behaviour = PAIRING_UI_KEYBOARD;
-		else if (g_str_equal (user_pincode, "ICADE"));
+		else if (g_str_equal (user_pincode, "ICADE"))
 			target_ui_behaviour = PAIRING_UI_ICADE;
 		g_free (user_pincode);
 		user_pincode = NULL;
