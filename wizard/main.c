@@ -714,6 +714,7 @@ select_device_changed (BluetoothChooser *selector,
 {
 	GValue value = { 0, };
 	guint target_type = BLUETOOTH_TYPE_ANY;
+	gboolean is_custom_pin = FALSE;
 	int legacypairing;
 
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
@@ -751,14 +752,25 @@ select_device_changed (BluetoothChooser *selector,
 	user_pincode = get_pincode_for_device (target_type, target_address, target_name, &target_max_digits);
 	if (user_pincode != NULL &&
 	    g_str_equal (user_pincode, "NULL") == FALSE) {
-		if (g_str_equal (user_pincode, "KEYBOARD"))
+		if (g_str_equal (user_pincode, "KEYBOARD")) {
 			target_ui_behaviour = PAIRING_UI_KEYBOARD;
-		else if (g_str_equal (user_pincode, "ICADE"))
+			is_custom_pin = TRUE;
+		} else if (g_str_equal (user_pincode, "ICADE")) {
 			target_ui_behaviour = PAIRING_UI_ICADE;
-		g_free (user_pincode);
-		user_pincode = NULL;
+			is_custom_pin = TRUE;
+		} else {
+			pincode = g_strdup (user_pincode);
+		}
 	}
-	automatic_pincode = user_pincode != NULL;
+
+	if (is_custom_pin)
+		automatic_pincode = FALSE;
+	else
+		automatic_pincode = user_pincode != NULL;
+
+	g_free (user_pincode);
+	user_pincode = NULL;
+
 	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
 }
 
