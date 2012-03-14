@@ -9,12 +9,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-07-02 07:52+0000\n"
-"PO-Revision-Date: 2011-07-10 10:47+0300\n"
-"Last-Translator: Rūdofls Mazurs <rudolfs.mazurs@gmail.com>\n"
-"Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-02-18 12:55+0000\n"
+"PO-Revision-Date: 2012-03-09 23:59+0200\n"
+"Last-Translator: Anita Reitere <nitalynx@gmail.com>\n"
+"Language-Team: Latviešu <lata-l10n@goglegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,44 +26,36 @@ msgstr ""
 msgid "Click to select device..."
 msgstr "Klikšķiniet, lai izvēlētos ierīci..."
 
-#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "Nezināma"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Nav pieejamu adapteru"
 
-#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "Meklē ierīces..."
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Izņemt '%s' no ierīču saraksta?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Ja izņemsiet ierīci no saraksta, nākamajā lietošanas reizē tā būs atkal "
-"jāiestata."
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "Ierīce"
 
-#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "Tips"
+
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+msgid "Devices"
+msgstr "Ierīces"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Visas kategorijas"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "Sapārots"
 
@@ -79,33 +71,35 @@ msgstr "Ne sapārots, ne uzticams"
 msgid "Paired or trusted"
 msgstr "Sapārots vai uzticams"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Rādīt tikai šādas Bluetooth ierīces..."
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Rādīt:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "Ierīces _kategorija:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Izvēlieties ierīču kategoriju atlasei"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "Ierīces _tips:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Izvēlieties ierīču tipu atlasei"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Ievades ierīces (peles, tastatūras u.c.)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Austiņas un citas audio ierīces"
 
@@ -181,92 +175,82 @@ msgstr "Izmantot šo GPS ierīci ģeolokācijai"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Pieslēgties Internet, izmantojot mobilo telefonu (test)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "Izvēlieties pārlūkojamo ierīci"
-
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "_Pārlūkot"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "Izvēlieties ierīci, kuru pārlūkot"
-
-#: ../applet/main.c:281
-msgid "Turn On Bluetooth"
+#: ../applet/main.c:230
+#| msgid "Turn On Bluetooth"
+msgid "Turn on Bluetooth"
 msgstr "Ieslēgt Bluetooth"
 
-#: ../applet/main.c:282 ../applet/notify.c:159
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: atslēgts"
 
-#: ../applet/main.c:285
-msgid "Turn Off Bluetooth"
+#: ../applet/main.c:234
+#| msgid "Turn Off Bluetooth"
+msgid "Turn off Bluetooth"
 msgstr "Atslēgt Bluetooth"
 
-#: ../applet/main.c:286 ../applet/notify.c:159
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: ieslēgts"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: atslēgts"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "Atvieno..."
 
-#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "Savieno..."
 
-#: ../applet/main.c:444 ../applet/main.c:727
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "Savienots"
 
-#: ../applet/main.c:447 ../applet/main.c:727
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "Atvienots"
 
-#: ../applet/main.c:745 ../applet/main.c:809
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "Atvienot"
 
-#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "Savienot"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "Sūtīt failus..."
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "Pārlūkot failus..."
 
-#: ../applet/main.c:779
-msgid "Open Keyboard Preferences..."
-msgstr "Atvērt tastatūras iestatījumus..."
+#: ../applet/main.c:728
+msgid "Keyboard Settings"
+msgstr "Tastatūras iestatījumi"
 
-#: ../applet/main.c:787
-msgid "Open Mouse Preferences..."
-msgstr "Atvērt peles iestatījumus..."
+#: ../applet/main.c:736
+msgid "Mouse and Touchpad Settings"
+msgstr "Peles un skārienpaliktņa iestatījumi"
 
-#: ../applet/main.c:797
-msgid "Open Sound Preferences..."
-msgstr "Atvērt skaņas iestatījumus..."
+#: ../applet/main.c:746
+msgid "Sound Settings"
+msgstr "Skaņas iestatījumi"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "Atkļūdot"
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- Bluetooth sīkrīks"
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -276,12 +260,11 @@ msgstr ""
 "Palaidiet '%s --help', lai redzētu pilnu sarakstu ar pieejamajām "
 "komandrindas opcijām.\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "Bluetooth sīkrīks"
 
-#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -359,45 +342,37 @@ msgid "Bluetooth: Checking"
 msgstr "Bluetooth: pārbauda"
 
 #: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "Pārlūkot ierīces failus..."
+msgid "Visible"
+msgstr "Redzams"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "Ierīces"
-
-#: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "Iestatījumi"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Quit"
-msgstr "Iziet"
-
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:3
 msgid "Send files to device..."
 msgstr "Sūtīt failus uz ierīci..."
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:5
 msgid "Set up new device..."
 msgstr "Iestatīt jaunu ierīci..."
 
-#: ../applet/popup-menu.ui.h:8
-msgid "Visible"
-msgstr "Redzams"
+#: ../applet/popup-menu.ui.h:6
+#| msgid "Bluetooth: Checking"
+msgid "Bluetooth Settings"
+msgstr "Bluetooth iestatījumi"
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Quit"
+msgstr "Iziet"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
 msgstr "_Vienmēr piešķirt pieeju"
 
 #: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Grant"
-msgstr "_Piešķirt"
-
-#: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
 msgstr "_Atteikt"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Grant"
+msgstr "_Piešķirt"
 
 #: ../applet/confirm-dialogue.ui.h:1
 msgid "_Does not match"
@@ -411,95 +386,21 @@ msgstr "_Sakrīt"
 msgid "_Show input"
 msgstr "_Parādīt ievadi"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "Jā"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "Nē"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth ir atslēgts"
-
-#: ../properties/cc-bluetooth-panel.c:412
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth ir atslēgts ar slēdzi datorā"
-
-#: ../properties/cc-bluetooth-panel.c:416
-msgid "No Bluetooth adapters found"
-msgstr "Nav atrastu Bluetooth adapteru"
-
-#: ../properties/cc-bluetooth-panel.c:526
-msgid "Visibility"
-msgstr "Redzamība"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "“%s” redzamība"
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "Adrese"
-
-#: ../properties/bluetooth.ui.h:2
-#| msgid "Browse files..."
-msgid "Browse Files..."
-msgstr "Pārlūkot failus..."
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "Savienojums"
-
-#: ../properties/bluetooth.ui.h:4
-msgid "Keyboard Settings"
-msgstr "Tastatūras iestatījumi"
-
-#: ../properties/bluetooth.ui.h:5
-msgid "Mouse and Touchpad Settings"
-msgstr "Peles un skārienpaliktņa iestatījumi"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
-#| msgid "Bluetooth"
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth.ui.h:9
-#| msgid "Send files..."
-msgid "Send Files..."
-msgstr "Sūtīt failus..."
-
-#: ../properties/bluetooth.ui.h:10
-msgid "Sound Settings"
-msgstr "Skaņas iestatījumi"
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Konfigurēt Bluetooth iestatījumus"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207 ../wizard/main.c:328
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Pārošana ar '%s' atcelta"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Lūdzu, apstipriniet, ka '%s' attēlotais PIN sakrīt ar šeit norādīto."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "Lūdzu, ievadiet šo PIN:"
 
@@ -507,7 +408,7 @@ msgstr "Lūdzu, ievadiet šo PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s' iestatīšana neizdevās"
@@ -516,151 +417,124 @@ msgstr "'%s' iestatīšana neizdevās"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Savieno ar '%s'..."
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Lūdzu, ievadiet šo PIN '%s':"
+
+#: ../wizard/main.c:521
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Lūdzu, ievadiet šo PIN '%s' un nospiediet tastatūras Enter taustiņu:"
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Lūdzu, ievadiet šo PIN '%s':"
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Lūdzu, kustiniet sava iCade kursorsviru šajos virzienos:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Lūdzu, uzgaidiet, kamēr tiks pabeigta ierīces '%s' iestatīšana..."
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Jaunā ierīce '%s' ir sekmīgi iestatīta"
 
-#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (vairums austiņu, peļu un GPS ierīču)"
-
-#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:4
+#: ../wizard/wizard.ui.h:1
 msgid "Bluetooth New Device Setup"
 msgstr "Jaunas Bluetooth ierīces iestatīšana"
 
-#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
-msgid "Custom PIN:"
-msgstr "Cits PIN kods:"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Device Setup"
-msgstr "Ierīces iestatīšana"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "Ierīces iestatīšana neizdevās"
-
-#: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "Ierīces meklēšana"
-
-#: ../wizard/wizard.ui.h:9
-msgid "Do not pair"
-msgstr "Nesapārot"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
-msgid "Does not match"
-msgstr "Nesakrīt"
-
-#: ../wizard/wizard.ui.h:12
-msgid "Finishing New Device Setup"
-msgstr "Pabeidz jaunās ierīces iestatīšanu"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
-msgid "Fixed PIN"
-msgstr "Fiksēts PIN"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "Ievads"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
-msgid "Matches"
-msgstr "Sakrīt"
-
-#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
-msgid "PIN Options"
-msgstr "PIN opcijas"
-
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
 msgstr "PIN _opcijas..."
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:3
+#| msgid "Device search"
+msgid "Device Search"
+msgstr "Ierīces meklēšana"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Device Setup"
+msgstr "Ierīces iestatīšana"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Finishing New Device Setup"
+msgstr "Pabeidz jaunās ierīces iestatīšanu"
+
+#: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr "Izvēlieties, ko vēl izmantosiet ar šo ierīci:"
 
-#: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to set up"
-msgstr "Izvēlieties ierīci, kuru jūs vēlaties iestatīt"
+#: ../wizard/wizard.ui.h:7
+msgid "Setup Summary"
+msgstr "Iestatīšanas kopsavilkums"
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "Iestatīšana pabeigta"
+#: ../wizard/wizard.ui.h:8
+msgid "PIN Options"
+msgstr "PIN opcijas"
 
-#: ../wizard/wizard.ui.h:23
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"Jaunas Bluetooth ierīces iestatīšana palīdzēs jums iestatīt Bluetooth "
-"ierīces, lai tās varētu izmantot ar šo datoru."
-
-#: ../wizard/wizard.ui.h:24
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"Ierīcei jāatrodas 10 metrus no jūsu datora un jābūt “atklājamai” jeb "
-"“redzamai”. Ja rodas neskaidrības, ieskatieties ierīces rokasgrāmatā."
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "Laipni lūdzam jaunas Bluetooth ierīces iestatīšanā"
-
-#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
 msgstr "_Automātiska PIN izvēle"
 
-#: ../wizard/wizard.ui.h:27
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "Fiksēts PIN"
+
+#: ../wizard/wizard.ui.h:12
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (vairums austiņu, peļu un GPS ierīču)"
+
+#: ../wizard/wizard.ui.h:13
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:14
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Do not pair"
+msgstr "Nesapārot"
+
+#: ../wizard/wizard.ui.h:16
+msgid "Custom PIN:"
+msgstr "Cits PIN kods:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "_Try Again"
+msgstr "_Mēģināt vēlreiz"
+
+#: ../wizard/wizard.ui.h:18
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "_Iziet"
+
+#: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
 msgstr "At_celt"
 
-#: ../wizard/wizard.ui.h:28
-msgid "_Close"
-msgstr "_Aizvērt"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:21
+msgid "Does not match"
+msgstr "Nesakrīt"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "_Sākt iestatīšanu no jauna"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:23
+msgid "Matches"
+msgstr "Sakrīt"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -670,7 +544,7 @@ msgstr "Bluetooth ierīces iestatīšana"
 msgid "Setup Bluetooth devices"
 msgstr "Iestatīt Bluetooth ierīci"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -678,7 +552,7 @@ msgstr[0] "%'d sekunde"
 msgstr[1] "%'d sekundes"
 msgstr[2] "%'d sekundes"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -686,7 +560,7 @@ msgstr[0] "%'d minūte"
 msgstr[1] "%'d minūtes"
 msgstr[2] "%'d minūtes"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -694,7 +568,7 @@ msgstr[0] "%'d stunda"
 msgstr[1] "%'d stundas"
 msgstr[2] "%'d stundas"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -702,32 +576,32 @@ msgstr[0] "apmēram %'d stunda"
 msgstr[1] "apmēram %'d stundas"
 msgstr[2] "apmēram %'d stundas"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "Failu pārraide"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "_Mēģināt vēlreiz"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "Failu sūtīšana caur Bluetooth"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "No:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "Uz:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:337 ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "Gadījās nezināma kļūda"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:348
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -735,47 +609,47 @@ msgstr ""
 "Pārliecinieties, ka attālinātā ierīce ir ieslēgta un pieņem Bluetooth "
 "savienojumus"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "Sūta %s"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:453 ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sūta %d. failu no %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:658
 msgid "Select device to send to"
 msgstr "Izvēlieties ierīci, uz kuru sūtīt"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:663
 msgid "_Send"
 msgstr "_Sūtīt"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "Izvēlieties failus, ko sūtīt"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:710
 msgid "Select"
 msgstr "Izvēlieties"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "Izmantojamā attālināta ierīce"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "Attālinātās ierīces nosaukums"
 
@@ -800,135 +674,210 @@ msgstr "Bluetooth pārsūtīšana"
 msgid "Send files via Bluetooth"
 msgstr "Sūtīt failus caur Bluetooth"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "Darboties savrupā režīmā"
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "Izņemt '%s' no ierīču saraksta?"
 
-#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "Moblin Bluetooth panelis"
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr ""
+#~ "Ja izņemsiet ierīci no saraksta, nākamajā lietošanas reizē tā būs atkal "
+#~ "jāiestata."
 
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "- Moblin Bluetooth panelis"
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "Rādīt tikai šādas Bluetooth ierīces..."
 
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d stunda"
-msgstr[1] "%d stundas"
-msgstr[2] "%d stundas"
+#~ msgid "Select Device to Browse"
+#~ msgstr "Izvēlieties pārlūkojamo ierīci"
 
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d minūte"
-msgstr[1] "%d minūtes"
-msgstr[2] "%d minūtes"
+#~ msgid "_Browse"
+#~ msgstr "_Pārlūkot"
 
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d sekunde"
-msgstr[1] "%d sekundes"
-msgstr[2] "%d sekundes"
+#~ msgid "Select device to browse"
+#~ msgstr "Izvēlieties ierīci, kuru pārlūkot"
 
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-#| msgid "%s %s %s"
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "Atvērt tastatūras iestatījumus..."
 
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-#| msgid "%s %s"
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "Atvērt peles iestatījumus..."
 
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "0 sekunde"
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "Atvērt skaņas iestatījumus..."
 
-#: ../moblin/moblin-panel.c:224
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"Dators ir redzams uz\n"
-"Bluetooth kā %s."
+#~ msgid "Browse files on device..."
+#~ msgstr "Pārlūkot ierīces failus..."
 
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "Pārošana ar %s neizdevās."
+#~ msgid "Preferences"
+#~ msgstr "Iestatījumi"
 
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-msgid "Pair"
-msgstr "Sapārot"
+#~ msgid "Yes"
+#~ msgstr "Jā"
 
-#: ../moblin/moblin-panel.c:1023
-msgid "Browse"
-msgstr "Pārlūkot"
+#~ msgid "No"
+#~ msgstr "Nē"
 
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "Ierīces iestatīšana neizdevās"
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth ir atslēgts"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "Atgriezties pie ierīcēm"
+#~ msgid "Bluetooth is disabled by hardware switch"
+#~ msgstr "Bluetooth ir atslēgts ar slēdzi datorā"
 
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "Gatavs"
+#~ msgid "No Bluetooth adapters found"
+#~ msgstr "Nav atrastu Bluetooth adapteru"
 
-#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "Ierīces iestatīšana"
+#~ msgid "Visibility"
+#~ msgstr "Redzamība"
 
-#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
-msgid "Settings"
-msgstr "Iestatījumi"
+#~ msgid "Visibility of “%s”"
+#~ msgstr "“%s” redzamība"
 
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "Rādīt tikai:"
+#~ msgid "Address"
+#~ msgstr "Adrese"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "PIN opcijas"
+#~| msgid "Browse files..."
+#~ msgid "Browse Files..."
+#~ msgstr "Pārlūkot failus..."
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "Pievienot jaunu ierīci"
+#~ msgid "Connection"
+#~ msgstr "Savienojums"
 
-#: ../moblin/moblin-panel.c:1621
-msgid "Make visible on Bluetooth"
-msgstr "Padarīt redzamu caur Bluetooth"
+#~| msgid "Bluetooth"
+#~ msgctxt "Power"
+#~ msgid "Bluetooth"
+#~ msgstr "Bluetooth"
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "Sūtīt failu no jūsu datora"
+#~| msgid "Send files..."
+#~ msgid "Send Files..."
+#~ msgstr "Sūtīt failus..."
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "Bluetooth pārvaldnieka panelis"
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "Konfigurēt Bluetooth iestatījumus"
+
+#~ msgid "Device Setup Failed"
+#~ msgstr "Ierīces iestatīšana neizdevās"
+
+#~ msgid "Introduction"
+#~ msgstr "Ievads"
+
+#~ msgid "Select the device you want to set up"
+#~ msgstr "Izvēlieties ierīci, kuru jūs vēlaties iestatīt"
+
+#~ msgid "Setup Completed"
+#~ msgstr "Iestatīšana pabeigta"
+
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr ""
+#~ "Jaunas Bluetooth ierīces iestatīšana palīdzēs jums iestatīt Bluetooth "
+#~ "ierīces, lai tās varētu izmantot ar šo datoru."
+
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "Ierīcei jāatrodas 10 metrus no jūsu datora un jābūt “atklājamai” jeb "
+#~ "“redzamai”. Ja rodas neskaidrības, ieskatieties ierīces rokasgrāmatā."
+
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "Laipni lūdzam jaunas Bluetooth ierīces iestatīšanā"
+
+#~ msgid "_Close"
+#~ msgstr "_Aizvērt"
+
+#~ msgid "_Restart Setup"
+#~ msgstr "_Sākt iestatīšanu no jauna"
+
+#~ msgid "Run in standalone mode"
+#~ msgstr "Darboties savrupā režīmā"
+
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "Moblin Bluetooth panelis"
+
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "- Moblin Bluetooth panelis"
+
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d stunda"
+#~ msgstr[1] "%d stundas"
+#~ msgstr[2] "%d stundas"
+
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d minūte"
+#~ msgstr[1] "%d minūtes"
+#~ msgstr[2] "%d minūtes"
+
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d sekunde"
+#~ msgstr[1] "%d sekundes"
+#~ msgstr[2] "%d sekundes"
+
+#~| msgid "%s %s %s"
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
+
+#~| msgid "%s %s"
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#~ msgid "0 seconds"
+#~ msgstr "0 sekunde"
+
+#~ msgid ""
+#~ "Your computer is visible on\n"
+#~ "Bluetooth for %s."
+#~ msgstr ""
+#~ "Dators ir redzams uz\n"
+#~ "Bluetooth kā %s."
+
+#~ msgid "Pairing with %s failed."
+#~ msgstr "Pārošana ar %s neizdevās."
+
+#~ msgid "Pair"
+#~ msgstr "Sapārot"
+
+#~ msgid "Browse"
+#~ msgstr "Pārlūkot"
+
+#~ msgid "Device setup failed"
+#~ msgstr "Ierīces iestatīšana neizdevās"
+
+#~ msgid "Back to devices"
+#~ msgstr "Atgriezties pie ierīcēm"
+
+#~ msgid "Done"
+#~ msgstr "Gatavs"
+
+#~ msgid "Device setup"
+#~ msgstr "Ierīces iestatīšana"
+
+#~ msgid "Settings"
+#~ msgstr "Iestatījumi"
+
+#~ msgid "Only show:"
+#~ msgstr "Rādīt tikai:"
+
+#~ msgid "PIN options"
+#~ msgstr "PIN opcijas"
+
+#~ msgid "Add a new device"
+#~ msgstr "Pievienot jaunu ierīci"
+
+#~ msgid "Make visible on Bluetooth"
+#~ msgstr "Padarīt redzamu caur Bluetooth"
+
+#~ msgid "Send file from your computer"
+#~ msgstr "Sūtīt failu no jūsu datora"
+
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "Bluetooth pārvaldnieka panelis"
 
 #~ msgid "Bluetooth: Enabled"
 #~ msgstr "Bluetooth: ieslēgts"
