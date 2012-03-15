@@ -1,57 +1,52 @@
 # translation of gnome-bluetooth.master.te.po to Telugu
-# Copyright (C) 2011 Gnome-bluetooth
+# Copyright (C) 2011, 2012 Swecha localisation team.
 # This file is distributed under the same license as the Gnome-bluetooth package.
 #
 # Krishna Babu K <kkrothap@redhat.com>, 2009.
-# Praveen Illa <mail2ipn@gmail.com>, 2011.
 # Hari Krishna <hari@swecha.net>, 2011.
-#
+# Praveen Illa <mail2ipn@gmail.com>, 2011, 2012.
+# Sasi Bhushan Boddepalli <sasi@swecha.net>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master.te\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-11-25 10:41+0000\n"
-"PO-Revision-Date: 2011-11-27 08:45+0530\n"
-"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-02-18 12:55+0000\n"
+"PO-Revision-Date: 2012-03-14 08:12+0530\n"
+"Last-Translator: Sasi Bhushan Boddepalli <sasi@swecha.net>\n"
 "Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
-"Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: te\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "పరికరాన్ని ఎంచుకోవడానికి నొక్కండి..."
 
-#: ../lib/bluetooth-chooser.c:136
-#: ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "తెలియదు"
 
-#: ../lib/bluetooth-chooser.c:177
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "ఏ ఎడాప్టర్స్ అందుబాటులో లేవు"
 
-#: ../lib/bluetooth-chooser.c:181
-#: ../lib/bluetooth-chooser.c:845
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "పరికరముల కొరకు శోధించుచున్నది..."
 
-#: ../lib/bluetooth-chooser.c:721
-#: ../lib/bluetooth-chooser.c:1030
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "పరికరం"
 
-#: ../lib/bluetooth-chooser.c:757
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "రకం"
 
-#: ../lib/bluetooth-chooser.c:1032
-#: ../applet/popup-menu.ui.h:3
-#: ../moblin/moblin-panel.c:1404
-#: ../moblin/moblin-panel.c:1514
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "పరికరములు"
 
@@ -179,101 +174,82 @@ msgstr "జియోలొకేషన్ సేవల కొరకు ఈ GPS �
 msgid "Access the Internet using your cell phone (test)"
 msgstr "మీ సెల్ ఫోన్ ఉపయోగించి అంతర్జాలాన్ని వాడుకొను (పరీక్షించు)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "అన్వేషించుటకు పరికరమును ఎంచుకొను"
+#: ../applet/main.c:230
+#| msgid "Turn On Bluetooth"
+msgid "Turn on Bluetooth"
+msgstr "బ్లూటూత్ మొదలు పెట్టు "
 
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "విహరించు (_B)"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "అన్వేషించుటకు పరికరాన్ని ఎంచుకోండి"
-
-#: ../applet/main.c:281
-msgid "Turn On Bluetooth"
-msgstr "బ్లూటూత్ ఆన్ చేయి"
-
-#: ../applet/main.c:282
-#: ../applet/notify.c:159
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "బ్లూటూత్: ఆపబడింది"
 
-#: ../applet/main.c:285
-msgid "Turn Off Bluetooth"
-msgstr "బ్లూటూత్ ఆఫ్ చేయి"
+#: ../applet/main.c:234
+#| msgid "Turn Off Bluetooth"
+msgid "Turn off Bluetooth"
+msgstr "బ్లూటూత్ ఆఫ్ చేయి "
 
-#: ../applet/main.c:286
-#: ../applet/notify.c:159
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "బ్లూటూత్: ఆన్‌చేయబడింది"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "బ్లూటూత్: అచేతనపరచబడింది"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "అననుసంధానిస్తోంది..."
 
-#: ../applet/main.c:441
-#: ../sendto/main.c:206
-#: ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "అనుసంధానిస్తోంది..."
 
-#: ../applet/main.c:444
-#: ../applet/main.c:727
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "అనుసంధానించబడింది"
 
-#: ../applet/main.c:447
-#: ../applet/main.c:727
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "అననుసంధానించబడింది"
 
-#: ../applet/main.c:745
-#: ../applet/main.c:809
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "అననుసంధానించు"
 
-#: ../applet/main.c:745
-#: ../applet/main.c:809
-#: ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "అనుసంధానించు"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "ఫైళ్ళను పంపు..."
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "ఫైళ్ళను అన్వేషించు..."
 
-#: ../applet/main.c:779
+#: ../applet/main.c:728
 msgid "Keyboard Settings"
 msgstr "కీబోర్డు అమరికలు"
 
-#: ../applet/main.c:787
+#: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
 msgstr "మౌస్ మరియు టచ్‌ప్యాడ్ అమరికలు"
 
-#: ../applet/main.c:797
+#: ../applet/main.c:746
 msgid "Sound Settings"
 msgstr "శబ్దపు అమరికలు"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "దోషశుద్ది"
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- బ్లూటూత్ ఆప్లెట్"
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -282,18 +258,15 @@ msgstr ""
 "%s\n"
 "అందుబాటులో వున్న ఆదేశ వరుస ఐచ్చికాల పూర్తి జాబితా కొరకు '%s --help' నడుపుము.\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "బ్లూటూత్ ఆప్లెట్"
 
 #: ../applet/notify.c:122
-#: ../moblin/main.c:129
-#: ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "బ్లూటూత్"
 
-#: ../applet/agent.c:196
-#: ../applet/agent.c:265
+#: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "పరికరము '%s' ఈ కంప్యూటర్‌తో జతపడాలని అనుకుంటోంది"
@@ -326,9 +299,7 @@ msgstr "%s పరికరము '%s' సేవను వాడుటకు అ�
 msgid "Pairing request for '%s'"
 msgstr "'%s' కొరకు జతపరచు అభ్యర్ధన"
 
-#: ../applet/agent.c:371
-#: ../applet/agent.c:404
-#: ../applet/agent.c:434
+#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "బ్లూటూత్ పరికరము"
 
@@ -369,40 +340,37 @@ msgid "Bluetooth: Checking"
 msgstr "బ్లూటూత్: పరిశీలించుచున్నది"
 
 #: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "పరికరము పైన ఫైళ్ళను అన్వేషించుము..."
+msgid "Visible"
+msgstr "కనిపించు"
 
-#: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "ప్రాధాన్యతలు"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Quit"
-msgstr "నిష్క్రమించు"
-
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:3
 msgid "Send files to device..."
 msgstr "పరికరానికి ఫైళ్ళను పంపుము..."
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:5
 msgid "Set up new device..."
 msgstr "కొత్త పరికరమును అమర్చు..."
 
-#: ../applet/popup-menu.ui.h:8
-msgid "Visible"
-msgstr "కనిపించు"
+#: ../applet/popup-menu.ui.h:6
+#| msgid "Bluetooth: Checking"
+msgid "Bluetooth Settings"
+msgstr "బ్లూటూత్ సెట్టింగులు "
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Quit"
+msgstr "నిష్క్రమించు"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
 msgstr "ఎల్లప్పుడు ప్రవేశ సౌలభ్యతను అనుమతించు (_A)"
 
 #: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Grant"
-msgstr "అనుమతించు (_G)"
-
-#: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
 msgstr "తిరస్కరించు (_R)"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Grant"
+msgstr "అనుమతించు (_G)"
 
 #: ../applet/confirm-dialogue.ui.h:1
 msgid "_Does not match"
@@ -420,20 +388,17 @@ msgstr "ఇన్‌పుట్‌ను చూపించు (_S)"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:206
-#: ../wizard/main.c:328
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s'తో జతపరచుట రద్దుచేయబడింది"
 
-#: ../wizard/main.c:247
-#: ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "'%s' పైన ప్రదర్శించబడిన PIN దీనిని సరిపోలుతుందని దయచేసి నిర్ధారించండి."
 
-#: ../wizard/main.c:301
-#: ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "దయచేసి క్రింద పేర్కొన్న PIN ప్రవేశపెట్టండి:"
 
@@ -441,7 +406,7 @@ msgstr "దయచేసి క్రింద పేర్కొన్న PIN �
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:386
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s'ను అమర్చుట విఫలమైంది"
@@ -450,154 +415,124 @@ msgstr "'%s'ను అమర్చుట విఫలమైంది"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:443
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s'కు అనుసంధానిస్తున్నది..."
 
-#: ../wizard/main.c:481
-#: ../moblin/moblin-panel.c:750
-#, c-format
-msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "దయచేసి క్రింది పేర్కొన్న PIN '%s' పైన ప్రవేశపెట్టి కీబోర్డు పైన “Enter” వత్తండి:"
-
-#: ../wizard/main.c:483
-#: ../moblin/moblin-panel.c:752
+#: ../wizard/main.c:518
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "'%s'పైన దయచేసి క్రింది PIN ప్రవేశపెట్టండి:"
+
+#: ../wizard/main.c:521
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "దయచేసి క్రింది పేర్కొన్న PIN '%s' పైన ప్రవేశపెట్టి కీబోర్డు పైన “Enter” వత్తండి:"
+
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "దయచేసి కింది దిశలలో  ఐకేడ్ జాయ్ స్టిక్కును తరలించండి. "
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:506
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "'%s' పరికరము పైన అమర్పును పూర్తిచేసేంతవరకూ దయచేసి వేచివుండండి..."
 
-#: ../wizard/main.c:524
-#: ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "సమర్ధవంతంగా కొత్త పరికరము '%s' అమర్చబడింది"
 
 #: ../wizard/wizard.ui.h:1
-#: ../moblin/pin.ui.h:1
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (హెడ్‌సెట్లు, మైక్ మరియు GPS పరికరాలు)"
-
-#: ../wizard/wizard.ui.h:2
-#: ../moblin/pin.ui.h:2
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:3
-#: ../moblin/pin.ui.h:3
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:4
 msgid "Bluetooth New Device Setup"
 msgstr "బ్లూటూత్ కొత్త పరికర అమర్పు"
 
-#: ../wizard/wizard.ui.h:5
-#: ../moblin/pin.ui.h:4
-msgid "Custom PIN:"
-msgstr "మలచిన PIN:"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Device Setup"
-msgstr "పరికరము అమర్పు"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "పరికరము అమర్పు విఫలమైంది"
-
-#: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "పరికరము శోధన"
-
-#: ../wizard/wizard.ui.h:9
-msgid "Do not pair"
-msgstr "జతపరుచవద్దు"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11
-#: ../moblin/moblin-panel.c:1351
-msgid "Does not match"
-msgstr "సరిపోల లేదు"
-
-#: ../wizard/wizard.ui.h:12
-msgid "Finishing New Device Setup"
-msgstr "కొత్త పరికర అమరికను పూర్తిచేస్తున్నది"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
-#: ../moblin/pin.ui.h:6
-msgid "Fixed PIN"
-msgstr "PIN అమర్చబడింది"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "పరిచయం"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17
-#: ../moblin/moblin-panel.c:1347
-msgid "Matches"
-msgstr "సరిపోలినది"
-
-#: ../wizard/wizard.ui.h:18
-#: ../moblin/pin.ui.h:7
-msgid "PIN Options"
-msgstr "PIN ఐచ్చికాలు"
-
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
 msgstr "PIN ఐచ్చికాలు...(_o)"
 
-#: ../wizard/wizard.ui.h:20
-#: ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:3
+#| msgid "Device search"
+msgid "Device Search"
+msgstr "పరికరము గురించి  శోధన"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Device Setup"
+msgstr "పరికరము అమర్పు"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Finishing New Device Setup"
+msgstr "కొత్త పరికర అమరికను పూర్తిచేస్తున్నది"
+
+#: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr "మీ పరికరముతో ఉపయోగించాలనుకుంటున్న అదనపు సేవలను ఎంచుకోండి:"
 
-#: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to set up"
-msgstr "మీరు అమర్చదలచిన పరికరమును ఎంచుకోండి"
+#: ../wizard/wizard.ui.h:7
+msgid "Setup Summary"
+msgstr "సెటప్ సారాంశం "
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "అమరిక పూర్తయింది"
+#: ../wizard/wizard.ui.h:8
+msgid "PIN Options"
+msgstr "PIN ఐచ్చికాలు"
 
-#: ../wizard/wizard.ui.h:23
-msgid "The Bluetooth new device setup will walk you through the process of configuring Bluetooth enabled devices for use with this computer."
-msgstr "బ్లూటూత్ చేతనముగా కలిగిన పరికరములను ఈ కంప్యూటరుతో వుపయోగించుటకు చేయవలసిన ఆకృతీకరణను ఈ బ్లూటూత్ కొత్త పరికర అమర్పు మీకు చూపుతుంది."
-
-#: ../wizard/wizard.ui.h:24
-msgid "The device will need to be within 10 meters of your computer, and be “visible” (sometimes called “discoverable”). Check the device's manual if in doubt."
-msgstr "పరికరము మీ కంప్యూటర్‌నుండి 10 మీటర్ల లోపల వుండవలసి వుంటుంది, మరియు “కనిపించునట్లు” (కొన్నిసార్లు “కనుగొనదగునట్లు” అని పిలువబడుతుంది). ఇంకా అనుమానము వుంటే పరికరపు మాన్యువల్‌ను చూడుము."
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "బ్లూటూత్ కొత్త పరికరము అమర్పునకు సుస్వాగతము"
-
-#: ../wizard/wizard.ui.h:26
-#: ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
 msgstr "స్వయంచాలక PIN ఎంపిక (_A)"
 
-#: ../wizard/wizard.ui.h:27
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "PIN అమర్చబడింది"
+
+#: ../wizard/wizard.ui.h:12
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (హెడ్‌సెట్లు, మైక్ మరియు GPS పరికరాలు)"
+
+#: ../wizard/wizard.ui.h:13
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:14
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Do not pair"
+msgstr "జతపరుచవద్దు"
+
+#: ../wizard/wizard.ui.h:16
+msgid "Custom PIN:"
+msgstr "మలచిన PIN:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "_Try Again"
+msgstr "మళ్ళీ ప్రయత్నించు(_T) "
+
+#: ../wizard/wizard.ui.h:18
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "నిష్క్రమించు(_Q)"
+
+#: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
 msgstr "రద్దుచేయి (_C)"
 
-#: ../wizard/wizard.ui.h:28
-msgid "_Close"
-msgstr "మూసివేయి (_C)"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:21
+msgid "Does not match"
+msgstr "సరిపోల లేదు"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "అమరికను పునఃప్రారంభించు (_R)"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:23
+msgid "Matches"
+msgstr "సరిపోలినది"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -614,8 +549,7 @@ msgid_plural "%'d seconds"
 msgstr[0] "%'d సెకను"
 msgstr[1] "%'d సెకనులు"
 
-#: ../sendto/main.c:156
-#: ../sendto/main.c:169
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -657,22 +591,23 @@ msgstr "నుండి:"
 msgid "To:"
 msgstr "ఇచటకు:"
 
-#: ../sendto/main.c:337
-#: ../sendto/main.c:355
+#: ../sendto/main.c:337 ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "ఒక తెలియని దోషము ఎదురైంది"
 
 #: ../sendto/main.c:348
-msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
-msgstr "దూరస్థ పరికరము ఆన్ అయివుండునట్లు మరియు అది బ్లూటూత్ అనుసంధానములను ఆమోదించునట్లు చూడండి"
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr ""
+"దూరస్థ పరికరము ఆన్ అయివుండునట్లు మరియు అది బ్లూటూత్ అనుసంధానములను ఆమోదించునట్లు చూడండి"
 
 #: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "%s పంపుచున్నది"
 
-#: ../sendto/main.c:453
-#: ../sendto/main.c:524
+#: ../sendto/main.c:453 ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%2$d లో %1$d ఫైళ్ళను పంపుచున్నది"
@@ -732,141 +667,142 @@ msgstr "బ్లూటూత్ బదిలీకరణ"
 msgid "Send files via Bluetooth"
 msgstr "బ్లూటూత్ ద్వారా ఫైళ్ళను పంపు"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "స్టాండలోన్ విధములో నడుపు"
+#~ msgid "Select Device to Browse"
+#~ msgstr "అన్వేషించుటకు పరికరమును ఎంచుకొను"
 
-#: ../moblin/main.c:101
-#: ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "మొబ్లిన్ బ్లూటూత్ ప్యానల్"
+#~ msgid "_Browse"
+#~ msgstr "విహరించు (_B)"
 
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "- మొబ్లిన్ బ్లూటూత్ పానల్"
+#~ msgid "Select device to browse"
+#~ msgstr "అన్వేషించుటకు పరికరాన్ని ఎంచుకోండి"
 
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d గంట"
-msgstr[1] "%d గంటలు"
+#~ msgid "Browse files on device..."
+#~ msgstr "పరికరము పైన ఫైళ్ళను అన్వేషించుము..."
 
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d నిమిషం"
-msgstr[1] "%d నిమిషాలు"
+#~ msgid "Preferences"
+#~ msgstr "ప్రాధాన్యతలు"
 
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d సెకను"
-msgstr[1] "%d సెకనులు"
+#~ msgid "Device Setup Failed"
+#~ msgstr "పరికరము అమర్పు విఫలమైంది"
 
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
+#~ msgid "Introduction"
+#~ msgstr "పరిచయం"
 
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
+#~ msgid "Select the device you want to set up"
+#~ msgstr "మీరు అమర్చదలచిన పరికరమును ఎంచుకోండి"
 
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "0 సెకన్లు"
+#~ msgid "Setup Completed"
+#~ msgstr "అమరిక పూర్తయింది"
 
-#: ../moblin/moblin-panel.c:224
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"మీ కంప్యూటర్ బ్లూటూత్ పై %s కొరకు\n"
-"కనిపిస్తున్నది."
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr ""
+#~ "బ్లూటూత్ చేతనముగా కలిగిన పరికరములను ఈ కంప్యూటరుతో వుపయోగించుటకు చేయవలసిన ఆకృతీకరణను ఈ "
+#~ "బ్లూటూత్ కొత్త పరికర అమర్పు మీకు చూపుతుంది."
 
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "%s తో జతపరచుట విఫలమైంది."
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "పరికరము మీ కంప్యూటర్‌నుండి 10 మీటర్ల లోపల వుండవలసి వుంటుంది, మరియు "
+#~ "“కనిపించునట్లు” (కొన్నిసార్లు “కనుగొనదగునట్లు” అని పిలువబడుతుంది). ఇంకా అనుమానము వుంటే "
+#~ "పరికరపు మాన్యువల్‌ను చూడుము."
 
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-msgid "Pair"
-msgstr "జతపరుచు"
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "బ్లూటూత్ కొత్త పరికరము అమర్పునకు సుస్వాగతము"
 
-#: ../moblin/moblin-panel.c:1023
-msgid "Browse"
-msgstr "విహరించు"
+#~ msgid "_Close"
+#~ msgstr "మూసివేయి (_C)"
 
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "పరికరము అమరిక విఫలమైంది"
+#~ msgid "_Restart Setup"
+#~ msgstr "అమరికను పునఃప్రారంభించు (_R)"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1234
-#: ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359
-#: ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "పరికరముల తిరిగి వెళ్ళు"
+#~ msgid "Run in standalone mode"
+#~ msgstr "స్టాండలోన్ విధములో నడుపు"
 
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "అయినది"
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "మొబ్లిన్ బ్లూటూత్ ప్యానల్"
 
-#: ../moblin/moblin-panel.c:1294
-#: ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "పరికరము అమర్పు"
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "- మొబ్లిన్ బ్లూటూత్ పానల్"
 
-#: ../moblin/moblin-panel.c:1454
-#: ../moblin/moblin-panel.c:1585
-msgid "Settings"
-msgstr "అమరికలు"
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d గంట"
+#~ msgstr[1] "%d గంటలు"
 
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "వీటిని మాత్రమే చూపించు:"
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d నిమిషం"
+#~ msgstr[1] "%d నిమిషాలు"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "PIN ఐచ్చికాలు"
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d సెకను"
+#~ msgstr[1] "%d సెకనులు"
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "కొత్త పరికరమును జతచేయి"
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "బ్లూటూత్"
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
 
-#: ../moblin/moblin-panel.c:1621
-msgid "Make visible on Bluetooth"
-msgstr "బ్లూటూత్ పై కనిపించునట్లు చేయి"
+#~ msgid "0 seconds"
+#~ msgstr "0 సెకన్లు"
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "మీ కంప్యూటర్ నుండి ఫైలును పంపండి"
+#~ msgid ""
+#~ "Your computer is visible on\n"
+#~ "Bluetooth for %s."
+#~ msgstr ""
+#~ "మీ కంప్యూటర్ బ్లూటూత్ పై %s కొరకు\n"
+#~ "కనిపిస్తున్నది."
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "బ్లూటూత్ నిర్వాహక ప్యానల్"
+#~ msgid "Pairing with %s failed."
+#~ msgstr "%s తో జతపరచుట విఫలమైంది."
+
+#~ msgid "Pair"
+#~ msgstr "జతపరుచు"
+
+#~ msgid "Browse"
+#~ msgstr "విహరించు"
+
+#~ msgid "Device setup failed"
+#~ msgstr "పరికరము అమరిక విఫలమైంది"
+
+#~ msgid "Back to devices"
+#~ msgstr "పరికరముల తిరిగి వెళ్ళు"
+
+#~ msgid "Done"
+#~ msgstr "అయినది"
+
+#~ msgid "Device setup"
+#~ msgstr "పరికరము అమర్పు"
+
+#~ msgid "Settings"
+#~ msgstr "అమరికలు"
+
+#~ msgid "Only show:"
+#~ msgstr "వీటిని మాత్రమే చూపించు:"
+
+#~ msgid "PIN options"
+#~ msgstr "PIN ఐచ్చికాలు"
+
+#~ msgid "Add a new device"
+#~ msgstr "కొత్త పరికరమును జతచేయి"
+
+#~ msgctxt "Power"
+#~ msgid "Bluetooth"
+#~ msgstr "బ్లూటూత్"
+
+#~ msgid "Make visible on Bluetooth"
+#~ msgstr "బ్లూటూత్ పై కనిపించునట్లు చేయి"
+
+#~ msgid "Send file from your computer"
+#~ msgstr "మీ కంప్యూటర్ నుండి ఫైలును పంపండి"
+
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "బ్లూటూత్ నిర్వాహక ప్యానల్"
