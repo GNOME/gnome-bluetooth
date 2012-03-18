@@ -4,13 +4,13 @@
 # Oleksandr Kovalenko <alx.kovalenko@gmail.com>, 2009.
 # Kyrylo Polezhajev <polezhajev@ukr.net>, 2009.
 # wanderlust <wanderlust@ukr.net>, 2009.
-# Korostil Daniel <ted.korostiled@gmail.com>, 2011.
+# Korostil Daniel <ted.korostiled@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-20 19:04+0300\n"
-"PO-Revision-Date: 2011-09-20 19:05+0300\n"
+"POT-Creation-Date: 2012-03-18 17:45+0200\n"
+"PO-Revision-Date: 2012-03-18 17:49+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
 "Language: uk\n"
@@ -19,52 +19,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Virtaal 0.6.1\n"
+"X-Generator: Virtaal 0.7.1\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Натисніть, щоб вибрати пристрій…"
 
-#: ../lib/bluetooth-chooser.c:131 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Немає доступних адаптерів"
 
-#: ../lib/bluetooth-chooser.c:176 ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "Пошук пристроїв…"
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Вилучити «%s» з переліку пристроїв?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Якщо вилучите цей пристрій, перед наступним використанням потрібно буде "
-"встановити його знову."
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "Пристрій"
 
-#: ../lib/bluetooth-chooser.c:836 ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "Тип"
+
+#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+msgid "Devices"
+msgstr "Пристрої"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Всі категорії"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../properties/bluetooth.ui.h:6
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "Пов'язані"
 
@@ -80,33 +73,35 @@ msgstr "Непов'язані або недостовірні"
 msgid "Paired or trusted"
 msgstr "Пов'язані або довірені"
 
-#: ../lib/bluetooth-filter-widget.c:234
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Показувати тільки пристрої Bluetooth з…"
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Показ:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_Категорія пристрою:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Виберіть категорію пристрою для фільтрування"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "_Тип пристрою:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Виберіть тип пристрою для фільтрування"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Пристрої вводу (миша, клавіатура тощо.)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Навушники, гарнітури та інші аудіопристрої"
 
@@ -183,92 +178,80 @@ msgstr ""
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Доступ до інтернету за допомогою вашого мобільного телефону (test)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "Виберіть пристрій для перегляду"
-
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "П_ереглянути"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "Виберіть пристрій для перегляду"
-
-#: ../applet/main.c:281
-msgid "Turn On Bluetooth"
+#: ../applet/main.c:230
+msgid "Turn on Bluetooth"
 msgstr "Увімкнути Bluetooth"
 
-#: ../applet/main.c:282 ../applet/notify.c:159
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: Вимкнено"
 
-#: ../applet/main.c:285
-msgid "Turn Off Bluetooth"
+#: ../applet/main.c:234
+msgid "Turn off Bluetooth"
 msgstr "Вимкнути Bluetooth"
 
-#: ../applet/main.c:286 ../applet/notify.c:159
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: Увімкнено"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: Недоступно"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "Роз'єднання…"
 
-#: ../applet/main.c:441 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "З'єднання…"
 
-#: ../applet/main.c:444 ../applet/main.c:727
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "З'єднано"
 
-#: ../applet/main.c:447 ../applet/main.c:727
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "Роз'єднано"
 
-#: ../applet/main.c:745 ../applet/main.c:809
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "Роз'єднати"
 
-#: ../applet/main.c:745 ../applet/main.c:809 ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "З'єднати"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "Надіслати файли…"
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "Оглянути файли…"
 
-#: ../applet/main.c:779 ../properties/bluetooth.ui.h:4
+#: ../applet/main.c:728
 msgid "Keyboard Settings"
 msgstr "Налаштування клавіатури"
 
-#: ../applet/main.c:787 ../properties/bluetooth.ui.h:5
+#: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
 msgstr "Налаштування миші та сенсорного пристрою"
 
-#: ../applet/main.c:797 ../properties/bluetooth.ui.h:10
+#: ../applet/main.c:746
 msgid "Sound Settings"
 msgstr "Налаштування звуку"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "Зневадження"
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "— Програма керування Bluetooth"
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -278,12 +261,11 @@ msgstr ""
 "Введіть «%s --help», щоб подивитися повний список доступних параметрів "
 "командного рядка.\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "Програма керування Bluetooth"
 
-#: ../applet/notify.c:122 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129 ../moblin/main.c:141
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -361,45 +343,36 @@ msgid "Bluetooth: Checking"
 msgstr "Bluetooth: Перевіряння"
 
 #: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "Оглянути файли на пристрої…"
+msgid "Visible"
+msgstr "Видимий"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/cc-bluetooth-panel.c:693
-#: ../moblin/moblin-panel.c:1404 ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "Пристрої"
-
-#: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "Параметри"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Quit"
-msgstr "Вийти"
-
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:3
 msgid "Send files to device..."
 msgstr "Надіслати файли до пристрою…"
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:5
 msgid "Set up new device..."
 msgstr "Встановити новий пристрій…"
 
-#: ../applet/popup-menu.ui.h:8
-msgid "Visible"
-msgstr "Видимий"
+#: ../applet/popup-menu.ui.h:6
+msgid "Bluetooth Settings"
+msgstr "Параметри Bluetooth"
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Quit"
+msgstr "Вийти"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
 msgstr "Завжди надавати _доступ"
 
 #: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Grant"
-msgstr "_Надати доступ"
-
-#: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
 msgstr "_Відхилити"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Grant"
+msgstr "_Надати доступ"
 
 #: ../applet/confirm-dialogue.ui.h:1
 msgid "_Does not match"
@@ -413,80 +386,21 @@ msgstr "_Збігаються"
 msgid "_Show input"
 msgstr "_Показувати ввід"
 
-#: ../properties/cc-bluetooth-panel.c:294
-msgid "Yes"
-msgstr "Так"
-
-#: ../properties/cc-bluetooth-panel.c:294
-msgid "No"
-msgstr "Ні"
-
-#: ../properties/cc-bluetooth-panel.c:406
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth недоступний"
-
-#: ../properties/cc-bluetooth-panel.c:411
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth недоступний апаратно"
-
-#: ../properties/cc-bluetooth-panel.c:415
-msgid "No Bluetooth adapters found"
-msgstr "Не знайдено жодного адаптера Bluetooth"
-
-#: ../properties/cc-bluetooth-panel.c:543
-msgid "Visibility"
-msgstr "Видимість"
-
-#: ../properties/cc-bluetooth-panel.c:547
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "Видимість «%s»"
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "Адреса"
-
-#: ../properties/bluetooth.ui.h:2
-msgid "Browse Files..."
-msgstr "Оглянути файли…"
-
-#: ../properties/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "З'єднання"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8 ../moblin/moblin-panel.c:1603
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth.ui.h:9
-msgid "Send Files..."
-msgstr "Надіслати файли…"
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Налаштувати Bluetooth"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207 ../wizard/main.c:328
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Пов'язання з «%s» скасовано"
 
-#: ../wizard/main.c:247 ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Підтвердьте, що PIN, показаний на пристрої «%s» збігається з цим."
 
-#: ../wizard/main.c:301 ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "Введіть такий PIN:"
 
@@ -494,7 +408,7 @@ msgstr "Введіть такий PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Помилка при налаштуванні пристрою «%s»"
@@ -503,152 +417,123 @@ msgstr "Помилка при налаштуванні пристрою «%s»"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "З'єднання з «%s»…"
 
-#: ../wizard/main.c:480 ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Введіть такий PIN на пристрої «%s»:"
+
+#: ../wizard/main.c:521
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Введіть такий PIN на пристрої «%s» та натисніть «Enter» на клавіатурі:"
 
-#: ../wizard/main.c:482 ../moblin/moblin-panel.c:752
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Введіть такий PIN на пристрої «%s»:"
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Перемістіть джойстик вашого iCade у такі напрямки:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Дочекайтесь закінчення встановлення пристрою «%s»…"
 
-#: ../wizard/main.c:523 ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Пристрій «%s» успішно встановлено"
 
-#: ../wizard/wizard.ui.h:1 ../moblin/pin.ui.h:1
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (більшість гарнітур, мишей та пристроїв GPS)"
-
-#: ../wizard/wizard.ui.h:2 ../moblin/pin.ui.h:2
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:3 ../moblin/pin.ui.h:3
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:4
+#: ../wizard/wizard.ui.h:1
 msgid "Bluetooth New Device Setup"
 msgstr "Налаштовування нового пристрою Bluetooth"
 
-#: ../wizard/wizard.ui.h:5 ../moblin/pin.ui.h:4
-msgid "Custom PIN:"
-msgstr "Вказаний користувачем PIN:"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Device Setup"
-msgstr "Встановлення пристроїв"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "Не вдалось налаштувати пристрої "
-
-#: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "Пошук пристроїв"
-
-#: ../wizard/wizard.ui.h:9
-msgid "Do not pair"
-msgstr "Не пов'язувати"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11 ../moblin/moblin-panel.c:1351
-msgid "Does not match"
-msgstr "Не збігаються"
-
-#: ../wizard/wizard.ui.h:12
-msgid "Finishing New Device Setup"
-msgstr "Закінчення встановлення нового пристрою"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14 ../moblin/pin.ui.h:6
-msgid "Fixed PIN"
-msgstr "Фіксований PIN"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "Вступ"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17 ../moblin/moblin-panel.c:1347
-msgid "Matches"
-msgstr "Збігаються"
-
-#: ../wizard/wizard.ui.h:18 ../moblin/pin.ui.h:7
-msgid "PIN Options"
-msgstr "Параметри PIN"
-
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
 msgstr "_Параметри PIN…"
 
-#: ../wizard/wizard.ui.h:20 ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:3
+msgid "Device Search"
+msgstr "Пошук пристроїв"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Device Setup"
+msgstr "Встановлення пристроїв"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Finishing New Device Setup"
+msgstr "Закінчення встановлення нового пристрою"
+
+#: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr ""
 "Виберіть додаткові служби, які ви бажаєте використовувати з вашим пристроєм:"
 
-#: ../wizard/wizard.ui.h:21
-msgid "Select the device you want to set up"
-msgstr "Виберіть пристрій, який ви бажаєте налаштувати"
+#: ../wizard/wizard.ui.h:7
+msgid "Setup Summary"
+msgstr "Підсумок параметрів"
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "Встановлення завершено"
+#: ../wizard/wizard.ui.h:8
+msgid "PIN Options"
+msgstr "Параметри PIN"
 
-#: ../wizard/wizard.ui.h:23
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr ""
-"Майстер налаштовування пристроїв допоможе налаштувати пристрій Bluetooth, "
-"для використання його з цим комп'ютером."
-
-#: ../wizard/wizard.ui.h:24
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr ""
-"Пристрій повинен бути в радіусі 10 метрів від комп'ютера і бути у стані "
-"«видимий». Якщо потрібно, перевірте посібник користувача для вашого пристрою."
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "Ласкаво просимо до майстра встановлення нових пристроїв Bluetooth"
-
-#: ../wizard/wizard.ui.h:26 ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
 msgstr "_Автоматичний вибір PIN"
 
-#: ../wizard/wizard.ui.h:27
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "Фіксований PIN"
+
+#: ../wizard/wizard.ui.h:12
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (більшість гарнітур, мишей та пристроїв GPS)"
+
+#: ../wizard/wizard.ui.h:13
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:14
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Do not pair"
+msgstr "Не пов'язувати"
+
+#: ../wizard/wizard.ui.h:16
+msgid "Custom PIN:"
+msgstr "Вказаний користувачем PIN:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "_Try Again"
+msgstr "_Спробувати знову"
+
+#: ../wizard/wizard.ui.h:18
+msgid "_Quit"
+msgstr "Ви_йти"
+
+#: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: ../wizard/wizard.ui.h:28
-msgid "_Close"
-msgstr "_Закрити"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:21
+msgid "Does not match"
+msgstr "Не збігаються"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "_Почати встановлення спочатку"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:23
+msgid "Matches"
+msgstr "Збігаються"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -658,7 +543,7 @@ msgstr "Налаштовування пристрою Bluetooth"
 msgid "Setup Bluetooth devices"
 msgstr "Налаштувати пристрої Bluetooth"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -666,7 +551,7 @@ msgstr[0] "%'d секунда"
 msgstr[1] "%'d секунди"
 msgstr[2] "%'d секунд"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -674,7 +559,7 @@ msgstr[0] "%'d хвилина"
 msgstr[1] "%'d хвилини"
 msgstr[2] "%'d хвилин"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -682,7 +567,7 @@ msgstr[0] "%'d година"
 msgstr[1] "%'d години"
 msgstr[2] "%'d годин"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -690,32 +575,32 @@ msgstr[0] "приблизно %'d година"
 msgstr[1] "приблизно %'d години"
 msgstr[2] "приблизно %'d годин"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "Передача файлів"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "_Повторити"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "Надсилання файлів через Bluetooth"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "Від:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "До:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
+#: ../sendto/main.c:337 ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "Трапилась невідома помилка"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:348
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -723,47 +608,47 @@ msgstr ""
 "Переконайтеся, що віддалений пристрій увімкнено та приймає з'єднання "
 "Bluetooth"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "Надсилання %s"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:453 ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Надсилання файла %d з %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d КБ/с"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d Б/с"
 
-#: ../sendto/main.c:651
+#: ../sendto/main.c:658
 msgid "Select device to send to"
 msgstr "Виберіть пристрій, якому надіслати"
 
-#: ../sendto/main.c:656
+#: ../sendto/main.c:663
 msgid "_Send"
 msgstr "_Надіслати "
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "Виберіть файли, які потрібно надіслати"
 
-#: ../sendto/main.c:703
+#: ../sendto/main.c:710
 msgid "Select"
 msgstr "Вибрати"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "Використати віддалений пристрій"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "Назва віддаленого пристрою"
 
@@ -788,133 +673,197 @@ msgstr "Передача файлів через Bluetooth"
 msgid "Send files via Bluetooth"
 msgstr "Надіслати файли через Bluetooth"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "Запустити у самостійному режимі"
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "Вилучити «%s» з переліку пристроїв?"
 
-#: ../moblin/main.c:101 ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "Панель Moblin Bluetooth"
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr ""
+#~ "Якщо вилучите цей пристрій, перед наступним використанням потрібно буде "
+#~ "встановити його знову."
 
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "— Панель Moblin Bluetooth"
+#~ msgid "Show Only Bluetooth Devices With..."
+#~ msgstr "Показувати тільки пристрої Bluetooth з…"
 
-#: ../moblin/moblin-panel.c:177
-#, c-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d година"
-msgstr[1] "%d години"
-msgstr[2] "%d годин"
+#~ msgid "Select Device to Browse"
+#~ msgstr "Виберіть пристрій для перегляду"
 
-#: ../moblin/moblin-panel.c:179
-#, c-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d хвилина"
-msgstr[1] "%d хвилини"
-msgstr[2] "%d хвилин"
+#~ msgid "_Browse"
+#~ msgstr "П_ереглянути"
 
-#: ../moblin/moblin-panel.c:182
-#, c-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d секунда"
-msgstr[1] "%d секунди"
-msgstr[2] "%d секунд"
+#~ msgid "Select device to browse"
+#~ msgstr "Виберіть пристрій для перегляду"
 
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
+#~ msgid "Browse files on device..."
+#~ msgstr "Оглянути файли на пристрої…"
 
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
+#~ msgid "Preferences"
+#~ msgstr "Параметри"
 
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-msgid "0 seconds"
-msgstr "0 секунд"
+#~ msgid "Yes"
+#~ msgstr "Так"
 
-#: ../moblin/moblin-panel.c:224
-#, c-format
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"Ваш комп'ютер видимий через \n"
-"Bluetooth для %s."
+#~ msgid "No"
+#~ msgstr "Ні"
 
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "Не вдалось пов'язатись із %s."
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "Bluetooth недоступний"
 
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-msgid "Pair"
-msgstr "Пов'язані"
+#~ msgid "Bluetooth is disabled by hardware switch"
+#~ msgstr "Bluetooth недоступний апаратно"
 
-#: ../moblin/moblin-panel.c:1023
-msgid "Browse"
-msgstr "Огляд"
+#~ msgid "No Bluetooth adapters found"
+#~ msgstr "Не знайдено жодного адаптера Bluetooth"
 
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "Не вдалось налаштувати пристрій"
+#~ msgid "Visibility"
+#~ msgstr "Видимість"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1234 ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359 ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "Назад до списку пристроїв"
+#~ msgid "Visibility of “%s”"
+#~ msgstr "Видимість «%s»"
 
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "Завершено"
+#~ msgid "Address"
+#~ msgstr "Адреса"
 
-#: ../moblin/moblin-panel.c:1294 ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "Встановлення пристрою"
+#~ msgid "Browse Files..."
+#~ msgstr "Оглянути файли…"
 
-#: ../moblin/moblin-panel.c:1454 ../moblin/moblin-panel.c:1585
-msgid "Settings"
-msgstr "Параметри"
+#~ msgid "Connection"
+#~ msgstr "З'єднання"
 
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "Показувати лише:"
+#~ msgctxt "Power"
+#~ msgid "Bluetooth"
+#~ msgstr "Bluetooth"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "Параметри PIN"
+#~ msgid "Send Files..."
+#~ msgstr "Надіслати файли…"
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "Додати пристрій"
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "Налаштувати Bluetooth"
 
-#: ../moblin/moblin-panel.c:1621
-msgid "Make visible on Bluetooth"
-msgstr "Зробити видимим через Bluetooth"
+#~ msgid "Device Setup Failed"
+#~ msgstr "Не вдалось налаштувати пристрої "
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "Надіслати файл з вашого комп'ютера"
+#~ msgid "Introduction"
+#~ msgstr "Вступ"
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "Панель менеджера Bluetooth"
+#~ msgid "Select the device you want to set up"
+#~ msgstr "Виберіть пристрій, який ви бажаєте налаштувати"
+
+#~ msgid "Setup Completed"
+#~ msgstr "Встановлення завершено"
+
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr ""
+#~ "Майстер налаштовування пристроїв допоможе налаштувати пристрій Bluetooth, "
+#~ "для використання його з цим комп'ютером."
+
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "Пристрій повинен бути в радіусі 10 метрів від комп'ютера і бути у стані "
+#~ "«видимий». Якщо потрібно, перевірте посібник користувача для вашого "
+#~ "пристрою."
+
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "Ласкаво просимо до майстра встановлення нових пристроїв Bluetooth"
+
+#~ msgid "_Close"
+#~ msgstr "_Закрити"
+
+#~ msgid "_Restart Setup"
+#~ msgstr "_Почати встановлення спочатку"
+
+#~ msgid "Run in standalone mode"
+#~ msgstr "Запустити у самостійному режимі"
+
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "Панель Moblin Bluetooth"
+
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "— Панель Moblin Bluetooth"
+
+#~ msgid "%d hour"
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d година"
+#~ msgstr[1] "%d години"
+#~ msgstr[2] "%d годин"
+
+#~ msgid "%d minute"
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d хвилина"
+#~ msgstr[1] "%d хвилини"
+#~ msgstr[2] "%d хвилин"
+
+#~ msgid "%d second"
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d секунда"
+#~ msgstr[1] "%d секунди"
+#~ msgstr[2] "%d секунд"
+
+#~ msgctxt "time"
+#~ msgid "%s %s %s"
+#~ msgstr "%s %s %s"
+
+#~ msgctxt "time"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#~ msgid "0 seconds"
+#~ msgstr "0 секунд"
+
+#~ msgid ""
+#~ "Your computer is visible on\n"
+#~ "Bluetooth for %s."
+#~ msgstr ""
+#~ "Ваш комп'ютер видимий через \n"
+#~ "Bluetooth для %s."
+
+#~ msgid "Pairing with %s failed."
+#~ msgstr "Не вдалось пов'язатись із %s."
+
+#~ msgid "Pair"
+#~ msgstr "Пов'язані"
+
+#~ msgid "Browse"
+#~ msgstr "Огляд"
+
+#~ msgid "Device setup failed"
+#~ msgstr "Не вдалось налаштувати пристрій"
+
+#~ msgid "Back to devices"
+#~ msgstr "Назад до списку пристроїв"
+
+#~ msgid "Done"
+#~ msgstr "Завершено"
+
+#~ msgid "Device setup"
+#~ msgstr "Встановлення пристрою"
+
+#~ msgid "Settings"
+#~ msgstr "Параметри"
+
+#~ msgid "Only show:"
+#~ msgstr "Показувати лише:"
+
+#~ msgid "PIN options"
+#~ msgstr "Параметри PIN"
+
+#~ msgid "Add a new device"
+#~ msgstr "Додати пристрій"
+
+#~ msgid "Make visible on Bluetooth"
+#~ msgstr "Зробити видимим через Bluetooth"
+
+#~ msgid "Send file from your computer"
+#~ msgstr "Надіслати файл з вашого комп'ютера"
+
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "Панель менеджера Bluetooth"
 
 #~ msgid "Open Keyboard Preferences..."
 #~ msgstr "Відкрити налаштування клавіатури…"
