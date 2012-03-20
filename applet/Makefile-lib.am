@@ -13,8 +13,8 @@ libgnome_bluetooth_applet_la_LDFLAGS = -no-undefined
 
 AM_CFLAGS = -I$(srcdir) -I$(top_srcdir)/lib $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
-install-data-hook:
-	rm $(DESTDIR)$(pkglibdir)/libgnome-bluetooth-applet.la
+install-exec-hook:
+	rm -f $(DESTDIR)$(pkglibdir)/libgnome-bluetooth-applet.la
 uninstall-hook:
 	rm -f $(DESTDIR)$(pkglibdir)/libgnome-bluetooth-applet.so*
 
