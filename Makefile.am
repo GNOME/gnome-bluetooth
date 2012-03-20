@@ -1,12 +1,9 @@
 DEF_SUBDIRS = icons lib applet wizard sendto docs po help
 
 SUBDIRS = icons lib applet wizard sendto docs po
-DIST_SUBDIRS = 
 
 if ENABLE_DOCUMENTATION
 SUBDIRS += help
-else
-DIST_SUBDIRS += help
 endif
 
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make gnome-doc-utils.make
