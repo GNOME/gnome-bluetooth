@@ -41,6 +41,8 @@ gsettings_SCHEMAS = $(gsettingsschema_in_files:.xml.in=.xml)
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
+CLEANFILES = $(gsettings_SCHEMAS) $(desktop_DATA)
+
 endif
 
 EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) gnome-bluetooth-nst org.gnome.Bluetooth.nst.gschema.xml.in nautilus-sendto-plugin.c

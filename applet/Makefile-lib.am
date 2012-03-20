@@ -36,5 +36,5 @@ INTROSPECTION_GIRS += GnomeBluetoothApplet-1.0.gir
 typelibdir = $(pkglibdir)
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
-CLEANFILES += $(typelib_DATA)
+CLEANFILES += $(typelib_DATA) $(INTROSPECTION_GIRS)
 endif # HAVE_INTROSPECTION

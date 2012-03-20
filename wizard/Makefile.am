@@ -42,5 +42,6 @@ check:
 	fi
 
 EXTRA_DIST = $(man_MANS) $(pin_DATA) $(ui_DATA) $(desktop_in_in_files)
+CLEANFILES = $(desktop_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
