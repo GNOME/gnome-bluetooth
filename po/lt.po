@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bluetooth Applet 1.8\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-08-01 22:27+0000\n"
-"PO-Revision-Date: 2011-08-13 17:34+0300\n"
+"POT-Creation-Date: 2012-02-18 12:55+0000\n"
+"PO-Revision-Date: 2012-03-21 23:25+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "MIME-Version: 1.0\n"
@@ -18,49 +18,44 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Virtaal 0.5.2\n"
 
-#: ../lib/bluetooth-chooser-button.c:76
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "Pasirinkite įrenginį..."
 
-#: ../lib/bluetooth-chooser.c:131
+#: ../lib/bluetooth-chooser.c:135
 #: ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:89
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#: ../lib/bluetooth-chooser.c:172
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Nėra prieinamų įrenginių"
 
-#: ../lib/bluetooth-chooser.c:176
-#: ../lib/bluetooth-chooser.c:924
+#: ../lib/bluetooth-chooser.c:180
+#: ../lib/bluetooth-chooser.c:802
 msgid "Searching for devices..."
 msgstr "Ieškoma įrenginių..."
 
-#: ../lib/bluetooth-chooser.c:374
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "Pašalinti „%s“ iš įrenginių sąrašo?"
-
-#: ../lib/bluetooth-chooser.c:376
-msgid "If you remove the device, you will have to set it up again before next use."
-msgstr "Jei pašalinsite šį įrenginį, prieš kitą naudojimą jį vėl turėsite iš naujo nustatyti."
-
-#: ../lib/bluetooth-chooser.c:800
+#: ../lib/bluetooth-chooser.c:694
+#: ../lib/bluetooth-chooser.c:983
 msgid "Device"
 msgstr "Įrenginys"
 
-#: ../lib/bluetooth-chooser.c:836
-#: ../properties/bluetooth.ui.h:11
+#: ../lib/bluetooth-chooser.c:730
 msgid "Type"
 msgstr "Tipas"
+
+#: ../lib/bluetooth-chooser.c:985
+#: ../applet/popup-menu.ui.h:4
+msgid "Devices"
+msgstr "Įrenginiai"
 
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Visos kategorijos"
 
 #: ../lib/bluetooth-filter-widget.c:74
-#: ../properties/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "Sujungta"
 
@@ -76,34 +71,35 @@ msgstr "Nesujungtas arba nepatikimas"
 msgid "Paired or trusted"
 msgstr "Sujungtas arba patikimas"
 
-#: ../lib/bluetooth-filter-widget.c:234
-#| msgid "<b>Show Only Bluetooth Devices With...</b>"
-msgid "Show Only Bluetooth Devices With..."
-msgstr "Rodyti tik Bluetooth įrenginius su..."
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Rodyti:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:250
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "Įrenginio _kategorija:"
 
-#: ../lib/bluetooth-filter-widget.c:265
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Pasirinkite filtruotiną įrenginių kategoriją"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:279
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "Įrenginio _tipas:"
 
-#: ../lib/bluetooth-filter-widget.c:300
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Pasirinkite filtruotiną įrenginių tipą"
 
-#: ../lib/bluetooth-filter-widget.c:306
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Įvesties įrenginiai (pelės, klaviatūros ir t. t.)"
 
-#: ../lib/bluetooth-filter-widget.c:310
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Ausinės, ausinės su mikrofonu ir kiti garso įrenginiai"
 
@@ -179,105 +175,90 @@ msgstr "Naudoti šį GPS įrenginį geolokacijos paslaugoms"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Jungtis prie interneto naudojant jūsų mobilųjį telefoną (bandymas)"
 
-#: ../applet/main.c:118
-msgid "Select Device to Browse"
-msgstr "Pasirinkite naršytiną įrenginį"
-
-#: ../applet/main.c:122
-msgid "_Browse"
-msgstr "_Naršyti"
-
-#: ../applet/main.c:131
-msgid "Select device to browse"
-msgstr "Pasirinkite naršytiną įrenginį"
-
-#: ../applet/main.c:281
-msgid "Turn On Bluetooth"
+#: ../applet/main.c:230
+#| msgid "Turn On Bluetooth"
+msgid "Turn on Bluetooth"
 msgstr "Įjungti Bluetooth"
 
-#: ../applet/main.c:282
+#: ../applet/main.c:231
 #: ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "Bluetooth: išjungta"
 
-#: ../applet/main.c:285
-msgid "Turn Off Bluetooth"
+#: ../applet/main.c:234
+#| msgid "Turn Off Bluetooth"
+msgid "Turn off Bluetooth"
 msgstr "Išjungti Bluetooth"
 
-#: ../applet/main.c:286
+#: ../applet/main.c:235
 #: ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "Bluetooth: įjungta"
 
-#: ../applet/main.c:291
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "Bluetooth: išjungta"
 
-#: ../applet/main.c:438
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "Atsijungiama..."
 
-#: ../applet/main.c:441
-#: ../sendto/main.c:217
-#: ../sendto/main.c:314
+#: ../applet/main.c:390
+#: ../sendto/main.c:206
+#: ../sendto/main.c:308
 msgid "Connecting..."
 msgstr "Jungiamasi..."
 
-#: ../applet/main.c:444
-#: ../applet/main.c:727
+#: ../applet/main.c:393
+#: ../applet/main.c:676
 msgid "Connected"
 msgstr "Prisijungta"
 
-#: ../applet/main.c:447
-#: ../applet/main.c:727
+#: ../applet/main.c:396
+#: ../applet/main.c:676
 msgid "Disconnected"
 msgstr "Atsijungta"
 
-#: ../applet/main.c:745
-#: ../applet/main.c:809
+#: ../applet/main.c:694
+#: ../applet/main.c:758
 msgid "Disconnect"
 msgstr "Atsijungti"
 
-#: ../applet/main.c:745
-#: ../applet/main.c:809
-#: ../moblin/moblin-panel.c:1002
+#: ../applet/main.c:694
+#: ../applet/main.c:758
 msgid "Connect"
 msgstr "Prisijungti"
 
-#: ../applet/main.c:758
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "Siųsti failus..."
 
-#: ../applet/main.c:768
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "Naršyti failus..."
 
-#: ../applet/main.c:779
-#: ../properties/bluetooth.ui.h:4
-#| msgid "Keyboard"
+#: ../applet/main.c:728
 msgid "Keyboard Settings"
 msgstr "Klaviatūros nustatymai"
 
-#: ../applet/main.c:787
-#: ../properties/bluetooth.ui.h:5
+#: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
 msgstr "Pelės ir jutiklinio kilimėlio nustatymai"
 
-#: ../applet/main.c:797
-#: ../properties/bluetooth.ui.h:10
+#: ../applet/main.c:746
 msgid "Sound Settings"
 msgstr "Garso nustatymai"
 
-#: ../applet/main.c:850
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "Derinti"
 
 #. Parse command-line options
-#: ../applet/main.c:869
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "– Bluetooth įtaisas"
 
-#: ../applet/main.c:874
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -286,14 +267,11 @@ msgstr ""
 "%s\n"
 "Norėdami pamatyti visą galimų komandų eilutės parinkčių sąrašą, paleiskite „%s --help“.\n"
 
-#: ../applet/main.c:900
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "Bluetooth įtaisas"
 
 #: ../applet/notify.c:122
-#: ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/main.c:129
-#: ../moblin/main.c:141
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -374,47 +352,37 @@ msgid "Bluetooth: Checking"
 msgstr "Bluetooth: tikrinama"
 
 #: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "Naršyti failus įrenginyje..."
+msgid "Visible"
+msgstr "Matoma"
 
 #: ../applet/popup-menu.ui.h:3
-#: ../properties/cc-bluetooth-panel.c:676
-#: ../moblin/moblin-panel.c:1404
-#: ../moblin/moblin-panel.c:1514
-msgid "Devices"
-msgstr "Įrenginiai"
-
-#: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "Nustatymai"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Quit"
-msgstr "Išeiti"
-
-#: ../applet/popup-menu.ui.h:6
 msgid "Send files to device..."
 msgstr "Siųsti failus į įrenginį..."
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:5
 msgid "Set up new device..."
 msgstr "Nustatyti naują įrenginį..."
 
-#: ../applet/popup-menu.ui.h:8
-msgid "Visible"
-msgstr "Matoma"
+#: ../applet/popup-menu.ui.h:6
+#| msgid "Bluetooth: Checking"
+msgid "Bluetooth Settings"
+msgstr "Bluetooth nustatymai"
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Quit"
+msgstr "Išeiti"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
 msgstr "_Visada suteikti prieigą"
 
 #: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Grant"
-msgstr "_Suteikti"
-
-#: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
 msgstr "_Atmesti"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Grant"
+msgstr "_Suteikti"
 
 #: ../applet/confirm-dialogue.ui.h:1
 msgid "_Does not match"
@@ -428,91 +396,22 @@ msgstr "_Sutampa"
 msgid "_Show input"
 msgstr "_Rodyti įvestį"
 
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "Yes"
-msgstr "Taip"
-
-#: ../properties/cc-bluetooth-panel.c:295
-msgid "No"
-msgstr "Ne"
-
-#: ../properties/cc-bluetooth-panel.c:407
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth yra išjungtas"
-
-#: ../properties/cc-bluetooth-panel.c:412
-#| msgid "Bluetooth is disabled"
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth yra išjungtas aparatiniu jungikliu"
-
-#: ../properties/cc-bluetooth-panel.c:416
-#| msgid "No Bluetooth adapters present"
-msgid "No Bluetooth adapters found"
-msgstr "Nėra Bluetooth adapterių"
-
-#: ../properties/cc-bluetooth-panel.c:526
-#| msgid "Visible"
-msgid "Visibility"
-msgstr "Matomumas"
-
-#: ../properties/cc-bluetooth-panel.c:530
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "„%s“ matomumas"
-
-#: ../properties/bluetooth.ui.h:1
-msgid "Address"
-msgstr "Adresas"
-
-#: ../properties/bluetooth.ui.h:2
-#| msgid "Browse files..."
-msgid "Browse Files..."
-msgstr "Naršyti failus..."
-
-#: ../properties/bluetooth.ui.h:3
-#| msgid "Connect"
-msgid "Connection"
-msgstr "Ryšys"
-
-#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../properties/bluetooth.ui.h:8
-#: ../moblin/moblin-panel.c:1603
-#| msgid "Bluetooth"
-msgctxt "Power"
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../properties/bluetooth.ui.h:9
-#| msgid "Send files..."
-msgid "Send Files..."
-msgstr "Siųsti failus..."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Konfigūruoti Bluetooth parametrus"
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:207
-#: ../wizard/main.c:328
+#: ../wizard/main.c:241
+#: ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Sujungimas su „%s“ atšauktas"
 
-#: ../wizard/main.c:247
-#: ../moblin/moblin-panel.c:1147
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Patvirtinkite, kad „%s“ rodomas PIN sutampa su šiuo."
 
-#: ../wizard/main.c:301
-#: ../moblin/moblin-panel.c:1198
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "Įveskite šį PIN:"
 
@@ -520,7 +419,7 @@ msgstr "Įveskite šį PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:384
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Nustatyti „%s“ nepavyko"
@@ -529,168 +428,133 @@ msgstr "Nustatyti „%s“ nepavyko"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:442
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Jungiamasi prie „%s“..."
 
-#: ../wizard/main.c:480
-#: ../moblin/moblin-panel.c:750
+#: ../wizard/main.c:518
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Įveskite šį PIN įrenginyje „%s“:"
+
+#: ../wizard/main.c:521
 #, c-format
 msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Įveskite šį PIN įrenginyje „%s“ ir spaukite „Enter“:"
 
-#: ../wizard/main.c:482
-#: ../moblin/moblin-panel.c:752
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Įveskite šį PIN įrenginyje „%s“:"
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Pajudinkite jūsų iCade vairasvirtę šiomis kryptimis:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:505
+#: ../wizard/main.c:556
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Palaukite, baigiama sąranga įrenginyje „%s“..."
 
-#: ../wizard/main.c:523
-#: ../moblin/moblin-panel.c:777
+#: ../wizard/main.c:574
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "„%s“ sėkmingai sukonfigūruotas"
 
 #: ../wizard/wizard.ui.h:1
-#: ../moblin/pin.ui.h:1
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "„0000“ (dauguma ausinių su mikrofonu, pelių ir GPS įrenginių)"
-
-#: ../wizard/wizard.ui.h:2
-#: ../moblin/pin.ui.h:2
-msgid "'1111'"
-msgstr "„1111“"
-
-#: ../wizard/wizard.ui.h:3
-#: ../moblin/pin.ui.h:3
-msgid "'1234'"
-msgstr "„1234“"
-
-#: ../wizard/wizard.ui.h:4
 msgid "Bluetooth New Device Setup"
 msgstr "Bluetooth naujo įrenginio sąranga"
 
-#: ../wizard/wizard.ui.h:5
-#: ../moblin/pin.ui.h:4
-msgid "Custom PIN:"
-msgstr "Pasirinktinis PIN:"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Device Setup"
-msgstr "Įrenginio sąranga"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "Įrenginio sąranga nesėkminga"
-
-#: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "Įrenginių paieška"
-
-#: ../wizard/wizard.ui.h:9
-msgid "Do not pair"
-msgstr "Nesujungti"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:11
-#: ../moblin/moblin-panel.c:1351
-msgid "Does not match"
-msgstr "Nesutampa"
-
-#: ../wizard/wizard.ui.h:12
-msgid "Finishing New Device Setup"
-msgstr "Baigiama naujo įrenginio sąranga"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:14
-#: ../moblin/pin.ui.h:6
-msgid "Fixed PIN"
-msgstr "Fiksuotas PIN"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Introduction"
-msgstr "Įžanga"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:17
-#: ../moblin/moblin-panel.c:1347
-msgid "Matches"
-msgstr "Sutampa"
-
-#: ../wizard/wizard.ui.h:18
-#: ../moblin/pin.ui.h:7
-msgid "PIN Options"
-msgstr "PIN parinktys"
-
-#: ../wizard/wizard.ui.h:19
+#: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
 msgstr "PIN _parinktys..."
 
-#: ../wizard/wizard.ui.h:20
-#: ../moblin/moblin-panel.c:1261
+#: ../wizard/wizard.ui.h:3
+#| msgid "Device search"
+msgid "Device Search"
+msgstr "Įrenginių paieška"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Device Setup"
+msgstr "Įrenginio sąranga"
+
+#: ../wizard/wizard.ui.h:5
+msgid "Finishing New Device Setup"
+msgstr "Baigiama naujo įrenginio sąranga"
+
+#: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr "Pasirinkite papildomas su savo įrenginiu pageidaujamas naudoti paslaugas:"
 
-#: ../wizard/wizard.ui.h:21
-#| msgid "Select the device you want to setup"
-msgid "Select the device you want to set up"
-msgstr "Pasirinkite norimą nustatyti įrenginį"
+#: ../wizard/wizard.ui.h:7
+msgid "Setup Summary"
+msgstr "Nustatymų suvestinė"
 
-#: ../wizard/wizard.ui.h:22
-msgid "Setup Completed"
-msgstr "Sąranga baigta"
+#: ../wizard/wizard.ui.h:8
+msgid "PIN Options"
+msgstr "PIN parinktys"
 
-#: ../wizard/wizard.ui.h:23
-msgid "The Bluetooth new device setup will walk you through the process of configuring Bluetooth enabled devices for use with this computer."
-msgstr "Bluetooth naujų įrenginių sąrangos vediklis padės sukonfigūruoti Bluetooth įrenginius naudojimui šiame kompiuteryje."
-
-#: ../wizard/wizard.ui.h:24
-msgid "The device will need to be within 10 meters of your computer, and be “visible” (sometimes called “discoverable”). Check the device's manual if in doubt."
-msgstr "Šis įrenginys turi būti ne daugiau kaip už 10 metrų nuo jūsų kompiuterio ir turi būti “matomas” (kartais vadinamas “aptinkamas”). Jei abejojate, žiūrėkite įrenginio žinyną."
-
-#: ../wizard/wizard.ui.h:25
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "Sveiki, jūs paleidote Bluetooth įrenginių sąrangos vediklį"
-
-#: ../wizard/wizard.ui.h:26
-#: ../moblin/pin.ui.h:8
+#: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
 msgstr "_Automatinis PIN parinkimas"
 
-#: ../wizard/wizard.ui.h:27
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "Fiksuotas PIN"
+
+#: ../wizard/wizard.ui.h:12
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "„0000“ (dauguma ausinių su mikrofonu, pelių ir GPS įrenginių)"
+
+#: ../wizard/wizard.ui.h:13
+msgid "'1111'"
+msgstr "„1111“"
+
+#: ../wizard/wizard.ui.h:14
+msgid "'1234'"
+msgstr "„1234“"
+
+#: ../wizard/wizard.ui.h:15
+msgid "Do not pair"
+msgstr "Nesujungti"
+
+#: ../wizard/wizard.ui.h:16
+msgid "Custom PIN:"
+msgstr "Pasirinktinis PIN:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "_Try Again"
+msgstr "_Bandyti vėl"
+
+#: ../wizard/wizard.ui.h:18
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "_Išeiti"
+
+#: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
 msgstr "_Atšaukti"
 
-#: ../wizard/wizard.ui.h:28
-#| msgid "_Browse"
-msgid "_Close"
-msgstr "_Užverti"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:21
+msgid "Does not match"
+msgstr "Nesutampa"
 
-#: ../wizard/wizard.ui.h:29
-msgid "_Restart Setup"
-msgstr "_Paleisti sąrangą iš naujo"
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:23
+msgid "Matches"
+msgstr "Sutampa"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-#| msgid "Bluetooth New Device Setup"
 msgid "Bluetooth Device Setup"
 msgstr "Bluetooth įrenginio sąranga"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-#| msgid "Bluetooth device"
 msgid "Setup Bluetooth devices"
 msgstr "Bluetooth įrenginių nustatymas"
 
-#: ../sendto/main.c:162
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -698,8 +562,8 @@ msgstr[0] "%'d sekundė"
 msgstr[1] "%'d sekundės"
 msgstr[2] "%'d sekundžių"
 
-#: ../sendto/main.c:167
-#: ../sendto/main.c:180
+#: ../sendto/main.c:156
+#: ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -707,7 +571,7 @@ msgstr[0] "%'d minutė"
 msgstr[1] "%'d minutės"
 msgstr[2] "%'d minučių"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -715,7 +579,7 @@ msgstr[0] "%'d valanda"
 msgstr[1] "%'d valandos"
 msgstr[2] "%'d valandų"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -723,95 +587,87 @@ msgstr[0] "apie %'d valandą"
 msgstr[1] "apie %'d valandas"
 msgstr[2] "apie %'d valandų"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:245
 msgid "File Transfer"
 msgstr "Failų siuntimas"
 
-#: ../sendto/main.c:253
+#: ../sendto/main.c:249
 msgid "_Retry"
 msgstr "_Bandyti dar kartą"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:269
 msgid "Sending files via Bluetooth"
 msgstr "Siunčiami failai Bluetooth sąsaja"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:281
 msgid "From:"
 msgstr "Iš:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:293
 msgid "To:"
 msgstr "Į:"
 
-#: ../sendto/main.c:343
-#: ../sendto/main.c:359
+#: ../sendto/main.c:337
+#: ../sendto/main.c:355
 msgid "An unknown error occurred"
 msgstr "Įvyko nežinoma klaida"
 
-#: ../sendto/main.c:352
-#| msgid ""
-#| "Make sure that remote device is switched on and that it accepts Bluetooth "
-#| "connections"
+#: ../sendto/main.c:348
 msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
 msgstr "Įsitikinkite, kad nutolęs įrenginys yra įjungtas ir priima Bluetooth ryšius"
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:446
 #, c-format
 msgid "Sending %s"
 msgstr "Siunčiamas %s"
 
-#: ../sendto/main.c:457
-#: ../sendto/main.c:523
+#: ../sendto/main.c:453
+#: ../sendto/main.c:524
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Siunčiamas %d failas iš %d"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:520
 #, c-format
 msgid "%d KB/s"
 msgstr "%d KB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:522
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:651
-#| msgid "Select Device to Send To"
+#: ../sendto/main.c:658
 msgid "Select device to send to"
 msgstr "Pasirinkite įrenginį, į kurį siųsti"
 
-#: ../sendto/main.c:656
-#| msgid "Send _To"
+#: ../sendto/main.c:663
 msgid "_Send"
 msgstr "S_iųsti"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:707
 msgid "Choose files to send"
 msgstr "Pasirinkite siųstinus failus"
 
-#: ../sendto/main.c:703
-#| msgid "Delete"
+#: ../sendto/main.c:710
 msgid "Select"
 msgstr "Pasirinkti"
 
-#: ../sendto/main.c:729
+#: ../sendto/main.c:736
 msgid "Remote device to use"
 msgstr "Naudotinas nutolęs įrenginys"
 
-#: ../sendto/main.c:731
+#: ../sendto/main.c:738
 msgid "Remote device's name"
 msgstr "Nutolusio įrenginio pavadinimas"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
-#| msgid "Programming error, could not find the device in the list"
 msgid "Programming error: could not find the device in the list"
 msgstr "Programavimo klaida, nepavyko rasti įrenginio sąraše"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-#| msgid "Obex Push file transfer unsupported"
 msgid "OBEX Push file transfer unsupported"
 msgstr "OBEX Push failų perdavimas nepalaikomas"
 
@@ -820,260 +676,19 @@ msgid "Bluetooth (OBEX Push)"
 msgstr "Bluetooth (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
-#| msgid "Bluetooth Manager"
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth perdavimas"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
-#| msgid "Sending files via Bluetooth"
 msgid "Send files via Bluetooth"
 msgstr "Siųsti failus per Bluetooth"
 
-#: ../moblin/main.c:93
-msgid "Run in standalone mode"
-msgstr "Paleisti atskiroje veiksenoje"
-
-#: ../moblin/main.c:101
-#: ../moblin/bluetooth-panel.desktop.in.in.h:2
-msgid "Moblin Bluetooth Panel"
-msgstr "Moblin Bluetooth skydelis"
-
-#: ../moblin/main.c:102
-msgid "- Moblin Bluetooth Panel"
-msgstr "– Moblin Bluetooth skydelis"
-
-#: ../moblin/moblin-panel.c:177
-#, c-format
-#| msgid "%'d hour"
-#| msgid_plural "%'d hours"
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] "%d valanda"
-msgstr[1] "%d valandos"
-msgstr[2] "%d valandų"
-
-#: ../moblin/moblin-panel.c:179
-#, c-format
-#| msgid "%'d minute"
-#| msgid_plural "%'d minutes"
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d minutė"
-msgstr[1] "%d minutės"
-msgstr[2] "%d minučių"
-
-#: ../moblin/moblin-panel.c:182
-#, c-format
-#| msgid "%'d second"
-#| msgid_plural "%'d seconds"
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d sekundė"
-msgstr[1] "%d sekundės"
-msgstr[2] "%d sekundžių"
-
-#. 5 hours 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:188
-#, c-format
-msgctxt "time"
-msgid "%s %s %s"
-msgstr "%s %s %s"
-
-#. 2 minutes 12 seconds
-#: ../moblin/moblin-panel.c:192
-#, c-format
-msgctxt "time"
-msgid "%s %s"
-msgstr "%s %s"
-
-#. 0 seconds
-#: ../moblin/moblin-panel.c:202
-#| msgid "%'d second"
-#| msgid_plural "%'d seconds"
-msgid "0 seconds"
-msgstr "0 sekundžių"
-
-#: ../moblin/moblin-panel.c:224
-#, c-format
-#| msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgid ""
-"Your computer is visible on\n"
-"Bluetooth for %s."
-msgstr ""
-"Jūsų kompiuteris matomas per\n"
-"Bluetooth %s."
-
-#: ../moblin/moblin-panel.c:625
-#, c-format
-msgid "Pairing with %s failed."
-msgstr "Sujungimas su „%s“ nesėkmingas."
-
-#. Translators: this is a verb (just like "Connect"), not a noun.
-#: ../moblin/moblin-panel.c:986
-#| msgid "Paired"
-msgid "Pair"
-msgstr "Sujungti"
-
-#: ../moblin/moblin-panel.c:1023
-#| msgid "_Browse"
-msgid "Browse"
-msgstr "Naršyti"
-
-#: ../moblin/moblin-panel.c:1220
-msgid "Device setup failed"
-msgstr "Įrenginio sukonfigūruoti nepavyko"
-
-#. Back button
-#: ../moblin/moblin-panel.c:1234
-#: ../moblin/moblin-panel.c:1310
-#: ../moblin/moblin-panel.c:1359
-#: ../moblin/moblin-panel.c:1437
-#: ../moblin/moblin-panel.c:1669
-msgid "Back to devices"
-msgstr "Grįžti prie įrenginių"
-
-#: ../moblin/moblin-panel.c:1273
-msgid "Done"
-msgstr "Atlikta"
-
-#: ../moblin/moblin-panel.c:1294
-#: ../moblin/moblin-panel.c:1331
-msgid "Device setup"
-msgstr "Įrenginio sąranga"
-
-#: ../moblin/moblin-panel.c:1454
-#: ../moblin/moblin-panel.c:1585
-#| msgid "Sending %s"
-msgid "Settings"
-msgstr "Nustatymai"
-
-#: ../moblin/moblin-panel.c:1470
-msgid "Only show:"
-msgstr "﻿Rodyti tik:"
-
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1476
-msgid "PIN options"
-msgstr "PIN parinktys"
-
-#. Add new button
-#: ../moblin/moblin-panel.c:1520
-msgid "Add a new device"
-msgstr "Pridėti naują įrenginį"
-
-#: ../moblin/moblin-panel.c:1621
-#| msgid "Sending files via Bluetooth"
-msgid "Make visible on Bluetooth"
-msgstr "Padaryti matomu per Bluetooth"
-
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1627
-msgid "Send file from your computer"
-msgstr "Siųsti failą iš savo kompiuterio"
-
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-msgid "Bluetooth Manager Panel"
-msgstr "Bluetooth valdymo skydelis"
-
-#~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Atverti klaviatūros nustatymus..."
-
-#~ msgid "Open Mouse Preferences..."
-#~ msgstr "Atverti pelės nustatymus..."
-
-#~ msgid "Open Sound Preferences..."
-#~ msgstr "Atverti garso nustatymus..."
-
-#~ msgid "Bluetooth: Enabled"
-#~ msgstr "Bluetooth: įjungta"
-
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr "Nepavyko paleisti „Asmeninio failų bendrinimo“ nustatymų"
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "Pašalinti „%s“ iš įrenginių sąrašo?"
 
 #~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
 #~ msgstr ""
-#~ "Įsitikinkite, kad „Asmeninio failų bendrinimo“ programa tinkamai įdiegta."
-
-#~ msgid "Bluetooth Preferences"
-#~ msgstr "Bluetooth nustatymai"
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "_Rodyti Bluetooth piktogramą"
-
-#~ msgid "Receive Files"
-#~ msgstr "Gauti failus"
-
-#~ msgid "Output a list of currently known devices"
-#~ msgstr "Rodyti šiuo metu žinomų įrenginių sąrašą"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "Bluetooth ypatybės"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "Padaryti kompiuterį _matomu"
-
-#~ msgid "Friendly name"
-#~ msgstr "Patogus pavadinimas"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "Nustatyti _naują įrenginį..."
-
-#~ msgid "_Remove"
-#~ msgstr "_Pašalinti"
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr "Bluetooth jūsų kompiuteryje buvo išjungta jungikliu."
-
-#~ msgid "bluetooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "<u>Pair</u>"
-#~ msgstr "<u>Sujungti</u>"
-
-#~ msgid "<u>Connect</u>"
-#~ msgstr "<u>Prisijungti</u>"
-
-#~ msgid "<u>Browse</u>"
-#~ msgstr "﻿<u>Naršyti</u>"
-
-#~ msgid "Whether to show the notification icon"
-#~ msgstr "Ar rodyti pranešimų piktogramą"
-
-#~ msgid "Whether to show the notification icon."
-#~ msgstr "Ar rodyti pranešimų piktogramą."
-
-#~ msgid "GConf error: %s"
-#~ msgstr "GConf klaida: %s"
-
-#~ msgid "All further errors shown only on terminal."
-#~ msgstr "Visos kitos klaidos rodomos tik terminale."
-
-#~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "GNOME darbo aplinkai skirta Bluetooth valdyklė"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Tadas Masiulionis <tadzikaz@gmail.com>Žygimantas Beručka <zygis@gnome.org>"
-
-#~ msgid "GNOME Bluetooth home page"
-#~ msgstr "GNOME Bluetooth tinklalapis"
-
-#~ msgid "Bluetooth: Unknown"
-#~ msgstr "Bluetooth: nežinoma"
-
-#~ msgid "Enter passkey"
-#~ msgstr "Įveskite visraktį"
-
-#~ msgid "Check passkey"
-#~ msgstr "Patikrinkite visraktį"
-
-#~ msgid "Known devices"
-#~ msgstr "Žinomi įrenginiai"
-
-#~ msgid "Bluetooth Device Wizard"
-#~ msgstr "Bluetooth įrenginių vediklis"
-
-#~ msgid "Setup Finished"
-#~ msgstr "Sąranga baigta"
+#~ "Jei pašalinsite šį įrenginį, prieš kitą naudojimą jį vėl turėsite iš "
+#~ "naujo nustatyti."
