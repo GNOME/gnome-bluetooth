@@ -2,7 +2,7 @@ AC_PREREQ(2.52)
 
 m4_define(gnomebt_version_major, 3)
 m4_define(gnomebt_version_minor, 4)
-m4_define(gnomebt_version_micro, 0)
+m4_define(gnomebt_version_micro, 1)
 
 AC_INIT([gnome-bluetooth],
         [gnomebt_version_major.gnomebt_version_minor.gnomebt_version_micro],
