@@ -106,7 +106,7 @@ enum {
 	SIGNAL_LAST
 };
 
-guint signals[SIGNAL_LAST];
+static guint signals[SIGNAL_LAST];
 
 /**
  * bluetooth_applet_browse_address_finish:
