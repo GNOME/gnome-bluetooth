@@ -447,6 +447,9 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 
 	priv->adapter = get_default_adapter ();
 
+	if (priv->adapter == NULL)
+		return FALSE;
+
 	path = g_path_get_basename(g_dbus_proxy_get_object_path(priv->adapter));
 	priv->path = g_strdup_printf("/org/bluez/agent/%s", path);
 	g_free(path);
