@@ -302,9 +302,11 @@ static void device_changed_cb (GObject *object,
 	tree = bluetooth_chooser_get_treeview (BLUETOOTH_CHOOSER (chooser));
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree));
 	gtk_tree_selection_get_selected (selection, &model, &iter);
-	if (model == NULL)
-		return;
-	bluetooth_client_dump_device (model, &iter);
+	if (model != NULL)
+		bluetooth_client_dump_device (model, &iter);
+
+	g_object_unref (chooser);
+	g_free (device);
 }
 
 static GtkWidget *
@@ -330,6 +332,7 @@ create_combo_dialogue (const char *bdaddr)
 		     NULL);
 	g_object_set (G_OBJECT (selector), "device", bdaddr, NULL);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (chooser));
+	g_object_unref (chooser);
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
