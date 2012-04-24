@@ -125,6 +125,9 @@ create_phone_dialogue (const char *bdaddr)
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
 			    button, TRUE, TRUE, 0);
 
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (gtk_main_quit), NULL);
+
 	return dialog;
 }
 
