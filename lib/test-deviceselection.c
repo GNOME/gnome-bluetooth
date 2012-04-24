@@ -105,6 +105,19 @@ is_available_changed (GObject    *gobject,
 	gtk_widget_set_sensitive (GTK_WIDGET (gobject), is_available);
 }
 
+static void
+device_changed (GObject    *gobject,
+		GParamSpec *pspec,
+		gpointer    user_data)
+{
+	char *device;
+
+	g_object_get (gobject, "device", &device, NULL);
+	g_message ("Property \"device\" changed to '%s'", device);
+
+	g_free (device);
+}
+
 static GtkWidget *
 create_phone_dialogue (const char *bdaddr)
 {
@@ -120,6 +133,8 @@ create_phone_dialogue (const char *bdaddr)
 			  G_CALLBACK (chooser_created), NULL);
 	g_signal_connect (G_OBJECT (button), "notify::is-available",
 			  G_CALLBACK (is_available_changed), NULL);
+	g_signal_connect (G_OBJECT (button), "notify::device",
+			  G_CALLBACK (device_changed), NULL);
 	is_available_changed (G_OBJECT (button), NULL, NULL);
 	gtk_widget_show (button);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
