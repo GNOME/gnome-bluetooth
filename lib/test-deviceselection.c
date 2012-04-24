@@ -351,9 +351,7 @@ create_filter_dialogue (void)
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	gtk_widget_show (hbox);
 
-	selector = g_object_new (BLUETOOTH_TYPE_CHOOSER,
-				 "title", "Select new device to setup",
-				 NULL);
+	selector = bluetooth_chooser_new();
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	g_object_set(selector,
