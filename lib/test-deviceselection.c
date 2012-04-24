@@ -332,14 +332,13 @@ create_combo_dialogue (const char *bdaddr)
 		     NULL);
 	g_object_set (G_OBJECT (selector), "device", bdaddr, NULL);
 	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (chooser));
-	g_object_unref (chooser);
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
 			    selector, TRUE, TRUE, 0);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
-			  G_CALLBACK (response_cb), selector);
+			  G_CALLBACK (response_cb), chooser);
 
 	return dialog;
 }
