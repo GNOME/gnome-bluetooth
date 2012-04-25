@@ -54,8 +54,6 @@ lib/gnome-bluetooth-enum-types.*
 lib/GnomeBluetooth-1.0.gir
 lib/GnomeBluetooth-1.0.typelib
 
-moblin/bluetooth-panel.desktop.in
-
 applet/bluetooth-applet
 applet/bluetooth-applet.desktop.in
 applet/test-agentdialog
@@ -63,22 +61,17 @@ applet/test-icon
 applet/GnomeBluetoothApplet-1.0.gir
 applet/GnomeBluetoothApplet-1.0.typelib
 
-properties/bluetooth-properties
-properties/bluetooth-properties.desktop.in
-properties/org.gnome.Bluetooth.gschema.xml
-properties/org.gnome.Bluetooth.gschema.valid
-
 moblin/bluetooth-panel
 moblin/bluetooth-panel.desktop.in
 moblin/org.moblin.UX.Shell.Panels.bluetooth.service
 moblin/theme/bluetooth-panel.css
 
 wizard/bluetooth-wizard
+wizard/bluetooth-wizard.desktop.in
 wizard/test-input
 
 sendto/bluetooth-sendto
-browse/bluetooth-browse
-
+sendto/bluetooth-sendto.desktop.in
 sendto/org.gnome.Bluetooth.nst.gschema.xml
 sendto/org.gnome.Bluetooth.nst.gschema.valid
 
@@ -88,20 +81,18 @@ help/*/*.mo
 !help/C/gnome-bluetooth.xml
 help/gnome-bluetooth-*.omf
 
+docs/reference/libgnome-bluetooth/gnome-bluetooth-overrides.txt
 docs/reference/libgnome-bluetooth/version.xml
 
-marshal.h
-marshal.c
+*-glue.c
 *-glue.h
 *.desktop
-*.schemas
 *~
 *.rej
 *.orig
 *.lo
 *.la
-bluetooth-manager.xml
-docs/reference/libgnome-bluetooth/version.xml
+*.sgml
 gnome-bluetooth-1.0.pc
 gnome-doc-utils.make
 gtk-doc.make
