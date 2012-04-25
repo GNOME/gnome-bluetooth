@@ -434,21 +434,23 @@ get_default_adapter (void)
 
 gboolean bluetooth_agent_register(BluetoothAgent *agent)
 {
-	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	BluetoothAgentPrivate *priv;
 	GError *error = NULL;
 	char *path;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
-	if (priv->path != NULL) {
-		g_warning ("Agent already setup on '%s'", priv->path);
-		return FALSE;
-	}
+	priv = BLUETOOTH_AGENT_GET_PRIVATE (agent);
 
 	priv->adapter = get_default_adapter ();
 
 	if (priv->adapter == NULL)
 		return FALSE;
+
+	if (priv->path != NULL) {
+		g_warning ("Agent already setup on '%s'", priv->path);
+		return FALSE;
+	}
 
 	path = g_path_get_basename(g_dbus_proxy_get_object_path(priv->adapter));
 	priv->path = g_strdup_printf("/org/bluez/agent/%s", path);
