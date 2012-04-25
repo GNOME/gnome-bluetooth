@@ -134,7 +134,7 @@ bluetooth_plugin_manager_cleanup (void)
  * Returns a list of widgets suitable for configuring the device
  * represented by @address, for the services listed in @uuids.
  *
- * Return value: (element-type Gtk.Widget) (transfer none) (allow-null): a #GList of #GtkWidget, or %NULL if none.
+ * Return value: (element-type Gtk.Widget) (transfer none): a #GList of #GtkWidget, or %NULL if none.
  **/
 GList *
 bluetooth_plugin_manager_get_widgets (const char *bdaddr,
