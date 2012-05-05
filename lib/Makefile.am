@@ -118,7 +118,7 @@ MAINTAINERCLEANFILES = Makefile.in
 
 bluetooth-client-glue.c: bluetooth-client-glue.h
 
-bluetooth-client-glue.h: bluetooth-client.xml
+bluetooth-client-glue.c bluetooth-client-glue.h: bluetooth-client.xml
 	$(AM_V_GEN) $(GDBUS_CODEGEN) --c-namespace= --generate-c-code=bluetooth-client-glue --interface-prefix=org.bluez $<
 
 gnome_bluetooth_headers_to_scan_for_enums = bluetooth-enums.h
