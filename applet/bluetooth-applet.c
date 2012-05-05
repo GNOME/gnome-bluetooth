@@ -1031,7 +1031,7 @@ bluetooth_applet_class_init (BluetoothAppletClass *klass)
 
 	properties[PROP_FULL_MENU] = g_param_spec_boolean ("show-full-menu",
 							   "Show the full applet menu",
-							   "Show actions related to the adapter and other miscellanous in the main menu",
+							   "Show actions related to the adapter and other miscellaneous in the main menu",
 							   TRUE, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 	g_object_class_install_property (gobject_class, PROP_FULL_MENU, properties[PROP_FULL_MENU]);
 

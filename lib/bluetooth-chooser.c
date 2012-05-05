@@ -653,7 +653,7 @@ static void default_adapter_changed (GObject    *gobject,
 		g_object_unref (priv->filter);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->treeview), TRUE);
 
-		/* Start a disovery if it was requested before we
+		/* Start a discovery if it was requested before we
 		 * had an adapter available */
 		if (priv->disco_rq != FALSE)
 			bluetooth_chooser_start_discovery (self);

@@ -821,7 +821,7 @@ int main(int argc, char *argv[])
 							error->message);
 			g_error_free(error);
 		} else
-			g_print("An unknown error occured\n");
+			g_print("An unknown error occurred\n");
 
 		return 1;
 	}
