@@ -304,7 +304,7 @@ create_combo_dialogue (const char *bdaddr)
 	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
 	gtk_widget_show(selector);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-			    selector, TRUE, TRUE, 0);
+			    selector, TRUE, FALSE, 6);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (response_cb), chooser);
