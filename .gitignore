@@ -4,6 +4,7 @@
 *.bak
 .deps
 .libs
+ChangeLog
 Makefile
 Makefile.in
 aclocal.m4
@@ -54,17 +55,14 @@ lib/gnome-bluetooth-enum-types.*
 lib/GnomeBluetooth-1.0.gir
 lib/GnomeBluetooth-1.0.typelib
 
+m4/
+
 applet/bluetooth-applet
 applet/bluetooth-applet.desktop.in
 applet/test-agentdialog
 applet/test-icon
 applet/GnomeBluetoothApplet-1.0.gir
 applet/GnomeBluetoothApplet-1.0.typelib
-
-moblin/bluetooth-panel
-moblin/bluetooth-panel.desktop.in
-moblin/org.moblin.UX.Shell.Panels.bluetooth.service
-moblin/theme/bluetooth-panel.css
 
 wizard/bluetooth-wizard
 wizard/bluetooth-wizard.desktop.in
@@ -81,8 +79,22 @@ help/*/*.mo
 !help/C/gnome-bluetooth.xml
 help/gnome-bluetooth-*.omf
 
+docs/reference/libgnome-bluetooth/gnome-bluetooth.args
+docs/reference/libgnome-bluetooth/gnome-bluetooth-decl-list.txt
+docs/reference/libgnome-bluetooth/gnome-bluetooth-decl.txt
+docs/reference/libgnome-bluetooth/gnome-bluetooth.hierarchy
+docs/reference/libgnome-bluetooth/gnome-bluetooth.interfaces
 docs/reference/libgnome-bluetooth/gnome-bluetooth-overrides.txt
+docs/reference/libgnome-bluetooth/gnome-bluetooth.prerequisites
+docs/reference/libgnome-bluetooth/gnome-bluetooth.signals
+docs/reference/libgnome-bluetooth/gnome-bluetooth-undeclared.txt
+docs/reference/libgnome-bluetooth/gnome-bluetooth-undocumented.txt
+docs/reference/libgnome-bluetooth/gnome-bluetooth-unused.txt
 docs/reference/libgnome-bluetooth/version.xml
+
+docs/reference/libgnome-bluetooth/html/
+docs/reference/libgnome-bluetooth/tmpl/
+docs/reference/libgnome-bluetooth/xml/
 
 *-glue.c
 *-glue.h
@@ -92,7 +104,6 @@ docs/reference/libgnome-bluetooth/version.xml
 *.orig
 *.lo
 *.la
-*.sgml
 gnome-bluetooth-1.0.pc
 gnome-doc-utils.make
 gtk-doc.make
