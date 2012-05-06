@@ -129,7 +129,7 @@ bluetooth_plugin_manager_cleanup (void)
 /**
  * bluetooth_plugin_manager_get_widgets:
  * @bdaddr: a Bluetooth address representing a device
- * @uuids: an array of UUIDs supported by the device.
+ * @uuids: an array of UUIDs supported by the device
  *
  * Returns a list of widgets suitable for configuring the device
  * represented by @address, for the services listed in @uuids.

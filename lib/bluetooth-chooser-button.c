@@ -22,7 +22,7 @@
  * SECTION:bluetooth-chooser-button
  * @short_description: a Bluetooth chooser button
  * @stability: Stable
- * @include: bluetooth-plugin.h
+ * @include: bluetooth-chooser-button.h
  *
  * A button used to select Bluetooth devices which will pop-up a
  * #BluetoothChooser widget inside a dialogue when clicked.
@@ -348,7 +348,7 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 	/**
 	 * BluetoothChooserButton:device:
 	 *
-	 * The Bluetooth address of the selected device or %NULL
+	 * The Bluetooth address of the selected device or %NULL.
 	 **/
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_string ("device", "Device", "The Bluetooth address of the selected device.",

@@ -46,7 +46,8 @@
  * bluetooth_type_to_string:
  * @type: a #BluetoothType
  *
- * Returns the string representation of the @type passed. Do not free the return value.
+ * Returns a human-readable string representation of @type usable for display to users. Do not free the return value.
+ * The returned string is already translated with gettext().
  *
  * Return value: a string.
  **/
@@ -121,6 +122,14 @@ bluetooth_verify_address (const char *bdaddr)
 	return TRUE;
 }
 
+/**
+ * bluetooth_class_to_type:
+ * @class: a Bluetooth device class
+ *
+ * Returns the type of device corresponding to the given @class value.
+ *
+ * Return value: a #BluetoothType.
+ **/
 BluetoothType
 bluetooth_class_to_type (guint32 class)
 {
@@ -299,6 +308,13 @@ bluetooth_uuid_to_string (const char *uuid)
 	return uuid16_custom_to_string (uuid16, uuid);
 }
 
+/**
+ * bluetooth_send_to_address:
+ * @address: Remote device to use
+ * @alias: Remote device's name
+ *
+ * Start a GUI application for transfering files over Bluetooth.
+ **/
 void
 bluetooth_send_to_address (const char *address,
 			   const char *alias)
@@ -368,12 +384,13 @@ mount_ready_cb (GObject *object,
 
 /**
  * bluetooth_browse_address_finish:
- *
  * @object: a #GObject
  * @result: the #GAsyncResult from the callback
  * @error: a #GError
  *
- * Returns: TRUE if the operation was successful, FALSE if error is set
+ * Finishes the browse operation, See bluetooth_browse_address().
+ *
+ * Returns: %TRUE if the operation was successful, %FALSE if error is set.
  */
 gboolean
 bluetooth_browse_address_finish (GObject      *object,
@@ -394,12 +411,16 @@ bluetooth_browse_address_finish (GObject      *object,
 
 /**
  * bluetooth_browse_address:
- *
- * Opens a Bluetooth device in Nautilus
- * @object: a #GObject, such as the top-level of your management application.
- * @address: the bluetooth device to browse
+ * @object: a #GObject, such as the top-level of your management application
+ * @address: the Bluetooth device to browse
+ * @timestamp: a timestamp to prevent focus stealing
  * @callback: (scope async): the completion callback
- * @user_data:
+ * @user_data: the data to pass to callback function
+ *
+ * Opens a Bluetooth device in Nautilus.
+ *
+ * Ideally the timestamp is taken from the event triggering the call to this function.
+ * If timestamp is not known you can take #GDK_CURRENT_TIME.
  */
 void
 bluetooth_browse_address (GObject             *object,

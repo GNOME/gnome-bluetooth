@@ -53,6 +53,7 @@ typedef enum {
 	BLUETOOTH_CATEGORY_TRUSTED,
 	BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
 	BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
+	/* < private > */
 	BLUETOOTH_CATEGORY_NUM_CATEGORIES /*< skip >*/
 } BluetoothCategory;
 
@@ -137,12 +138,12 @@ typedef enum {
 	BLUETOOTH_COLUMN_POWERED,
 	BLUETOOTH_COLUMN_SERVICES,
 	BLUETOOTH_COLUMN_UUIDS,
+	/* < private > */
 	_BLUETOOTH_NUM_COLUMNS /*< skip >*/
 } BluetoothColumn;
 
 /**
  * BluetoothStatus:
- *
  * @BLUETOOTH_STATUS_INVALID: whether the status has been set yet
  * @BLUETOOTH_STATUS_DISCONNECTED: whether the service is disconnected
  * @BLUETOOTH_STATUS_CONNECTED: whether the service is connected

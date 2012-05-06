@@ -40,7 +40,7 @@ typedef struct _BluetoothChooserComboClass BluetoothChooserComboClass;
 
 typedef struct _BluetoothChooserCombo {
 	GtkBox            parent;
-
+	/* < private > */
 	BluetoothChooserComboPrivate *priv;
 } BluetoothChooserCombo;
 

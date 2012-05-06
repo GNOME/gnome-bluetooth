@@ -1125,7 +1125,7 @@ _bluetooth_client_get_discoverable (BluetoothClient *client)
  * _bluetooth_client_set_discoverable:
  * @client: a #BluetoothClient object
  * @discoverable: whether the device should be discoverable
- * @timeout: timeout in seconds for making undiscoverable, or 0 for never.
+ * @timeout: timeout in seconds for making undiscoverable, or 0 for never
  *
  * Sets the default adapter's discoverable status.
  *
@@ -1318,7 +1318,7 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 /**
  * bluetooth_client_new:
  *
- * Returns a reference to the #BluetoothClient singleton. Use #g_object_unref() the object when done.
+ * Returns a reference to the #BluetoothClient singleton. Use g_object_unref() when done with the object.
  *
  * Return value: (transfer full): a #BluetoothClient object.
  **/
@@ -1733,11 +1733,10 @@ rev_sort_services (const char *servicea, const char *serviceb)
 
 /**
  * bluetooth_client_connect_service:
- *
  * @client: a #BluetoothClient
  * @device: the DBUS path on which to operate
  * @connect: Whether try to connect or disconnect from services on a device
- * @cancellable: optional #GCancellable object, %NULL to ignore.
+ * @cancellable: optional #GCancellable object, %NULL to ignore
  * @callback: (scope async): a #GAsyncReadyCallback to call when the connection is complete
  * @user_data: the data to pass to callback function
  *
@@ -1870,8 +1869,8 @@ bail:
 /**
  * bluetooth_client_connect_service_finish:
  * @client: a #BluetoothClient
- * @res: a #GAsyncResult.
- * @error: a #GError.
+ * @res: a #GAsyncResult
+ * @error: a #GError
  *
  * Finishes the connection operation, See bluetooth_client_connect_service().
  *

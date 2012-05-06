@@ -60,8 +60,6 @@ GType bluetooth_chooser_get_type (void);
 
 GtkWidget *bluetooth_chooser_new (void);
 
-void bluetooth_chooser_set_title (BluetoothChooser  *self, const char *title);
-
 char *bluetooth_chooser_get_selected_device (BluetoothChooser *self);
 gboolean bluetooth_chooser_get_selected_device_info (BluetoothChooser *self,
 						     const char *field,

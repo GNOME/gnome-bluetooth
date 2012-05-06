@@ -26,7 +26,7 @@
  * SECTION:bluetooth-chooser
  * @short_description: a Bluetooth chooser widget
  * @stability: Stable
- * @include: bluetooth-plugin.h
+ * @include: bluetooth-chooser.h
  *
  * A tree-like widget used to select Bluetooth devices.
  **/
@@ -1089,7 +1089,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	 * @chooser: a #BluetoothChooser widget which received the signal
 	 * @address: the Bluetooth address for the currently selected device, or %NULL
 	 *
-	 * The #BluetoothChooser:selected-device-changed signal is launched when the
+	 * The #BluetoothChooser::selected-device-changed signal is launched when the
 	 * selected device is changed, it will be %NULL if a device was unselected.
 	 **/
 	selection_table_signals[SELECTED_DEVICE_CHANGED] =
@@ -1105,7 +1105,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	 * @chooser: a #BluetoothChooser widget which received the signal
 	 * @address: the Bluetooth address for the currently selected device, or %NULL
 	 *
-	 * The #BluetoothChooser:selected-device-activated signal is launched when a
+	 * The #BluetoothChooser::selected-device-activated signal is launched when a
 	 * device is double-clicked in the chooser.
 	 **/
 	selection_table_signals[SELECTED_DEVICE_ACTIVATED] =
@@ -1119,7 +1119,7 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_DEVICE_SELECTED, g_param_spec_string ("device-selected",
-										    "device-selected", "the Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE | G_PARAM_WRITABLE));
+										    "device-selected", "The Bluetooth address for the currently selected device, or %NULL", NULL, G_PARAM_READABLE | G_PARAM_WRITABLE));
 	g_object_class_install_property (G_OBJECT_CLASS(klass),
 					 PROP_SHOW_PAIRING, g_param_spec_boolean ("show-pairing",
 										  "show-pairing", "Whether to show the pairing column in the tree.", FALSE, G_PARAM_READWRITE));

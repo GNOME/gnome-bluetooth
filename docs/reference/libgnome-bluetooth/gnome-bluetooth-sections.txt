@@ -4,7 +4,8 @@ BLUETOOTH_GET_CHOOSER_CLASS
 <TITLE>BluetoothChooser</TITLE>
 BluetoothChooser
 bluetooth_chooser_new
-bluetooth_chooser_set_title
+bluetooth_chooser_dump_selected_device
+bluetooth_chooser_get_scrolled_window
 bluetooth_chooser_get_selected_device
 bluetooth_chooser_get_selected_device_info
 bluetooth_chooser_get_selected_device_name
@@ -28,13 +29,12 @@ BLUETOOTH_GET_CLIENT_CLASS
 <TITLE>BluetoothClient</TITLE>
 BluetoothClient
 bluetooth_client_new
+bluetooth_client_connect_service
+bluetooth_client_connect_service_finish
 bluetooth_client_get_model
 bluetooth_client_get_filter_model
 bluetooth_client_get_adapter_model
 bluetooth_client_get_device_model
-bluetooth_type_to_string
-bluetooth_verify_address
-bluetooth_uuid_to_string
 <SUBSECTION Standard>
 BLUETOOTH_CLIENT
 BLUETOOTH_IS_CLIENT
@@ -54,6 +54,7 @@ bluetooth_killswitch_new
 bluetooth_killswitch_has_killswitches
 bluetooth_killswitch_set_state
 bluetooth_killswitch_get_state
+bluetooth_killswitch_state_to_string
 <SUBSECTION Standard>
 BLUETOOTH_KILLSWITCH
 BLUETOOTH_IS_KILLSWITCH
@@ -77,6 +78,20 @@ bluetooth_chooser_button_get_type
 </SECTION>
 
 <SECTION>
+<FILE>bluetooth-chooser-combo</FILE>
+BLUETOOTH_GET_CHOOSER_COMBO_CLASS
+<TITLE>BluetoothChooserCombo</TITLE>
+BluetoothChooserCombo
+bluetooth_chooser_combo_get_type
+bluetooth_chooser_combo_new
+<SUBSECTION Standard>
+BLUETOOTH_CHOOSER_COMBO
+BLUETOOTH_IS_CHOOSER_COMBO
+BLUETOOTH_TYPE_CHOOSER_COMBO
+BLUETOOTH_IS_CHOOSER_COMBO_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>gnome-bluetooth-enum-types</FILE>
 bluetooth_category_get_type
 BLUETOOTH_TYPE_CATEGORY
@@ -84,6 +99,8 @@ bluetooth_type_get_type
 BLUETOOTH_TYPE_TYPE
 bluetooth_column_get_type
 BLUETOOTH_TYPE_COLUMN
+bluetooth_status_get_type
+BLUETOOTH_TYPE_STATUS
 </SECTION>
 
 <SECTION>
@@ -91,8 +108,6 @@ BLUETOOTH_TYPE_COLUMN
 GbtPluginInfo
 GbtPlugin
 GBT_INIT_PLUGIN
-SOEXT
-SOEXT_LEN
 </SECTION>
 
 <SECTION>
@@ -102,6 +117,7 @@ BluetoothType
 BLUETOOTH_TYPE_INPUT
 BLUETOOTH_TYPE_AUDIO
 BluetoothColumn
+BluetoothStatus
 </SECTION>
 
 <SECTION>
@@ -112,3 +128,13 @@ bluetooth_plugin_manager_get_widgets
 bluetooth_plugin_manager_device_deleted
 </SECTION>
 
+<SECTION>
+<FILE>bluetooth-utils</FILE>
+bluetooth_browse_address
+bluetooth_browse_address_finish
+bluetooth_class_to_type
+bluetooth_send_to_address
+bluetooth_type_to_string
+bluetooth_verify_address
+bluetooth_uuid_to_string
+</SECTION>

@@ -18,6 +18,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * SECTION:bluetooth-chooser-combo
+ * @short_description: a Bluetooth chooser combo button
+ * @stability: Stable
+ * @include: bluetooth-chooser-combo.h
+ *
+ * A combo box used to select Bluetooth devices.
+ **/
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

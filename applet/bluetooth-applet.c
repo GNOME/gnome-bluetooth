@@ -113,9 +113,9 @@ static guint signals[SIGNAL_LAST];
  *
  * @applet: a #BluetoothApplet
  * @result: the #GAsyncResult from the callback
- * @error:
+ * @error: a #GError
  *
- * Returns: TRUE if the operation was successful, FALSE if error is set
+ * Returns: %TRUE if the operation was successful, %FALSE if error is set
  */
 gboolean
 bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
@@ -130,11 +130,16 @@ bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
 /**
  * bluetooth_applet_browse_address:
  *
- * Opens a Bluetooth device in Nautilus
  * @applet: a #BluetoothApplet
  * @address: the bluetooth device to browse
+ * @timestamp: a timestamp to prevent focus stealing
  * @callback: (scope async): the completion callback
- * @user_data:
+ * @user_data: the data to pass to callback function
+ *
+ * Opens a Bluetooth device in Nautilus.
+ *
+ * Ideally the timestamp is taken from the event triggering the call to this function.
+ * If timestamp is not known you can take #GDK_CURRENT_TIME.
  */
 void bluetooth_applet_browse_address (BluetoothApplet *applet,
 				      const char *address,
@@ -239,7 +244,7 @@ bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
  *
  * @self: a #BluetoothApplet
  * @request_key: an opaque token given in the pincode-request signal
- * @confirm: TRUE if operation was confirmed, FALSE otherwise
+ * @confirm: %TRUE if operation was confirmed, %FALSE otherwise
  */
 void
 bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
@@ -271,8 +276,8 @@ bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
  *
  * @self: a #BluetoothApplet
  * @request_key: an opaque token given in the pincode-request signal
- * @auth: TRUE if operation was authorized, FALSE otherwise
- * @trusted: TRUE if the operation should be authorized automatically in the future
+ * @auth: %TRUE if operation was authorized, %FALSE otherwise
+ * @trusted: %TRUE if the operation should be authorized automatically in the future
  */
 void
 bluetooth_applet_agent_reply_auth (BluetoothApplet *self,
@@ -717,7 +722,7 @@ bluetooth_applet_disconnect_device (BluetoothApplet* applet,
  *
  * @self: a #BluetoothApplet
  *
- * Returns: TRUE if the default adapter is discoverable, false otherwise
+ * Returns: %TRUE if the default adapter is discoverable, %FALSE otherwise
  */
 gboolean
 bluetooth_applet_get_discoverable (BluetoothApplet* self)
@@ -768,7 +773,7 @@ bluetooth_applet_get_killswitch_state (BluetoothApplet* self)
  * @self: a #BluetoothApplet
  * @state: the new state
  *
- * Returns: TRUE if the operation could be performed, FALSE otherwise
+ * Returns: %TRUE if the operation could be performed, %FALSE otherwise
  */
 gboolean
 bluetooth_applet_set_killswitch_state (BluetoothApplet* self, BluetoothKillswitchState state)
@@ -788,7 +793,7 @@ bluetooth_applet_set_killswitch_state (BluetoothApplet* self, BluetoothKillswitc
  *
  * @self: a #BluetoothApplet
  *
- * Returns: TRUE if the full menu is to be shown, FALSE otherwise
+ * Returns: %TRUE if the full menu is to be shown, %FALSE otherwise
  * (full menu includes device submenus and global actions)
  */
 gboolean
