@@ -38,38 +38,6 @@
 #include "bluetooth-utils.h"
 #include "bluetooth-filter-widget.h"
 
-static void dump_selected_device(BluetoothChooser *sel)
-{
-	GValue value = { 0, };
-
-	g_print ("Info dumped\n");
-	if (bluetooth_chooser_get_selected_device_info (sel, "address", &value)) {
-		g_print ("\tAddress: '%s'\n", g_value_get_string (&value));
-		g_value_unset (&value);
-	}
-	if (bluetooth_chooser_get_selected_device_info (sel, "name", &value)) {
-		g_print ("\tName: '%s'\n", g_value_get_string (&value));
-		g_value_unset (&value);
-	}
-	if (bluetooth_chooser_get_selected_device_info (sel, "connected", &value)) {
-		g_print ("\tConnected: %s\n", g_value_get_boolean (&value) ? "True" : "False");
-		g_value_unset (&value);
-	}
-	if (bluetooth_chooser_get_selected_device_info (sel, "uuids", &value)) {
-		guint i;
-		const char **uuids;
-
-		uuids = (const char **) g_value_get_boxed (&value);
-		if (uuids != NULL) {
-			g_print ("\tUUIDs: ");
-			for (i = 0; uuids[i] != NULL; i++)
-				g_print ("%s, ", uuids[i]);
-			g_print ("\n");
-		}
-		g_value_unset (&value);
-	}
-}
-
 static void select_device_changed(BluetoothChooser *sel,
 				  gchar *address, gpointer user_data)
 {
@@ -94,7 +62,8 @@ static void device_selected_cb(GObject *object,
 			       GParamSpec *spec, gpointer user_data)
 {
 	g_message ("Property \"device-selected\" changed");
-	dump_selected_device(BLUETOOTH_CHOOSER (object));
+	if (bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (object)))
+		bluetooth_chooser_dump_selected_device (BLUETOOTH_CHOOSER (object));
 }
 
 static void device_type_filter_selected_cb(GObject *object,
