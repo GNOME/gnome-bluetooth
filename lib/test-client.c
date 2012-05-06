@@ -102,6 +102,26 @@ static void type_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 }
 
 static void
+legacypairing_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
+		      GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
+{
+	gint legacypairing;
+
+	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_LEGACYPAIRING, &legacypairing, -1);
+
+	switch (legacypairing) {
+	case -1:
+		g_object_set(cell, "text", "UNSET", NULL);
+		break;
+	case 0:
+		g_object_set(cell, "text", "FALSE", NULL);
+		break;
+	default:
+		g_object_set(cell, "text", "TRUE", NULL);
+	}
+}
+
+static void
 services_foreach (const char *service, gpointer value, GString *str)
 {
 	GEnumClass *eclass;
@@ -236,9 +256,9 @@ static void create_window(void)
 					"Connected", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_CONNECTED, NULL);
 
-	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
+	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
 					"Legacy Pairing", gtk_cell_renderer_text_new(),
-					"text", BLUETOOTH_COLUMN_LEGACYPAIRING, NULL);
+						legacypairing_to_text, NULL, NULL);
 
 	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
 					"Discoverable", gtk_cell_renderer_text_new(),
