@@ -517,7 +517,7 @@ static gboolean progress_callback(GDBusMethodInvocation *invocation,
 	time = format_time(remaining_time);
 
 	if (transfer_rate >= 3000)
-		rate = g_strdup_printf(_("%d KB/s"), transfer_rate / 1000);
+		rate = g_strdup_printf(_("%d kB/s"), transfer_rate / 1000);
 	else
 		rate = g_strdup_printf(_("%d B/s"), transfer_rate);
 
