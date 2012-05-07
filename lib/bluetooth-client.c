@@ -1269,7 +1269,8 @@ static void bluetooth_client_finalize(GObject *client)
 
 	g_type_class_unref (g_type_class_peek (BLUETOOTH_TYPE_STATUS));
 
-	g_object_unref(priv->manager);
+	if (priv->manager)
+		g_object_unref (priv->manager);
 
 	g_object_unref(priv->store);
 
