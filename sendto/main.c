@@ -198,7 +198,6 @@ static void response_callback(GtkWidget *dialog,
 
 		/* Reset buttons */
 		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
-		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
 
 		/* Reset status and progress bar */
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress),
@@ -576,7 +575,6 @@ static gboolean error_callback(GDBusMethodInvocation *invocation,
 	gtk_widget_show (image_status);
 	gtk_label_set_markup(GTK_LABEL(label_status), message);
 
-	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
 	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 
 	g_object_unref (current_transfer);
@@ -610,7 +608,6 @@ send_notify (GDBusProxy   *proxy,
 		gtk_label_set_markup(GTK_LABEL(label_status), message);
 		g_free (message);
 
-		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
 		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 		return;
 	}
