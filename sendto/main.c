@@ -197,7 +197,6 @@ static void response_callback(GtkWidget *dialog,
 		setup_agent ();
 
 		/* Reset buttons */
-		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
 
@@ -245,10 +244,8 @@ static void create_window(void)
 	dialog = gtk_dialog_new_with_buttons(_("File Transfer"), NULL,
 				0,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 				_("_Retry"), RESPONSE_RETRY,
 				NULL);
-	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 	gtk_window_set_type_hint(GTK_WINDOW(dialog),
 						GDK_WINDOW_TYPE_HINT_NORMAL);
@@ -580,7 +577,6 @@ static gboolean error_callback(GDBusMethodInvocation *invocation,
 	gtk_label_set_markup(GTK_LABEL(label_status), message);
 
 	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
-	set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 
 	g_object_unref (current_transfer);
@@ -615,7 +611,6 @@ send_notify (GDBusProxy   *proxy,
 		g_free (message);
 
 		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL, TRUE);
-		set_response_visible (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE, FALSE);
 		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 		return;
 	}
