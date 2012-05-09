@@ -178,18 +178,6 @@ static gchar *format_time(gint seconds)
 				"approximately %'d hours", hours), hours);
 }
 
-static void
-set_response_visible (GtkDialog *dialog,
-		      int response_id,
-		      gboolean visible)
-{
-	GtkWidget *widget;
-
-	widget = gtk_dialog_get_widget_for_response (dialog, response_id);
-	gtk_widget_set_no_show_all (widget, TRUE);
-	gtk_widget_set_visible (widget, visible);
-}
-
 static void response_callback(GtkWidget *dialog,
 					gint response, gpointer user_data)
 {
@@ -197,7 +185,7 @@ static void response_callback(GtkWidget *dialog,
 		setup_agent ();
 
 		/* Reset buttons */
-		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 
 		/* Reset status and progress bar */
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress),
@@ -245,7 +233,7 @@ static void create_window(void)
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				_("_Retry"), RESPONSE_RETRY,
 				NULL);
-	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 	gtk_window_set_type_hint(GTK_WINDOW(dialog),
 						GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
@@ -575,7 +563,7 @@ static gboolean error_callback(GDBusMethodInvocation *invocation,
 	gtk_widget_show (image_status);
 	gtk_label_set_markup(GTK_LABEL(label_status), message);
 
-	set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
@@ -608,7 +596,8 @@ send_notify (GDBusProxy   *proxy,
 		gtk_label_set_markup(GTK_LABEL(label_status), message);
 		g_free (message);
 
-		set_response_visible (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
+
 		return;
 	}
 
