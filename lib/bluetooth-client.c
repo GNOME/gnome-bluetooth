@@ -1003,6 +1003,8 @@ static void bluetooth_client_init(BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
+	g_type_class_ref (BLUETOOTH_TYPE_STATUS);
+
 	priv->store = gtk_tree_store_new(_BLUETOOTH_NUM_COLUMNS, G_TYPE_OBJECT,
 					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
 					 G_TYPE_UINT, G_TYPE_STRING,
@@ -1283,8 +1285,6 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
 	GError *error = NULL;
-
-	g_type_class_ref (BLUETOOTH_TYPE_STATUS);
 
 	g_type_class_add_private(klass, sizeof(BluetoothClientPrivate));
 
