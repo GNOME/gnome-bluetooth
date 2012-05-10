@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-21 10:32+0000\n"
-"PO-Revision-Date: 2012-02-21 22:19+0100\n"
+"POT-Creation-Date: 2012-05-09 12:08+0000\n"
+"PO-Revision-Date: 2012-05-10 09:40+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -27,7 +27,7 @@ msgstr "Kliknite za izbor naprave ..."
 
 #: ../lib/bluetooth-chooser.c:135
 #: ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:89
+#: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -106,64 +106,64 @@ msgstr "Vhodne naprave (miška, tipkovnica ...)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Slušalke, mikrofoni in druge zvočne naprave"
 
-#: ../lib/bluetooth-utils.c:58
+#: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Vse vrste"
 
-#: ../lib/bluetooth-utils.c:60
+#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-utils.c:62
+#: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:64
+#: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Računalnik"
 
-#: ../lib/bluetooth-utils.c:66
+#: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Omrežje"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:69
+#: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Slušalka"
 
-#: ../lib/bluetooth-utils.c:71
+#: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Slušalke"
 
-#: ../lib/bluetooth-utils.c:73
+#: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Zvočna naprava"
 
-#: ../lib/bluetooth-utils.c:75
+#: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
-#: ../lib/bluetooth-utils.c:77
+#: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Miška"
 
-#: ../lib/bluetooth-utils.c:79
+#: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Fotoaparat"
 
-#: ../lib/bluetooth-utils.c:81
+#: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Tiskalnik"
 
-#: ../lib/bluetooth-utils.c:83
+#: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Igralna konzola"
 
-#: ../lib/bluetooth-utils.c:85
+#: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Tablični računalnik"
 
-#: ../lib/bluetooth-utils.c:87
+#: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Video naprava"
 
@@ -205,8 +205,8 @@ msgid "Disconnecting..."
 msgstr "Prekinjanje povezave ..."
 
 #: ../applet/main.c:390
-#: ../sendto/main.c:206
-#: ../sendto/main.c:308
+#: ../sendto/main.c:192
+#: ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
@@ -589,80 +589,92 @@ msgstr[1] "približno %'d ura"
 msgstr[2] "približno %'d uri"
 msgstr[3] "približno %'d ure"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Prenos datotek"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Poskusi znova"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Pošiljanje datotek prek Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Za:"
 
-#: ../sendto/main.c:337
-#: ../sendto/main.c:355
+#: ../sendto/main.c:321
+#: ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Prišlo je do neznane napake."
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
 msgstr "Prepričajte se, da je oddaljena naprava priključena in da omogoča sprejemanje Bluetooth povezav"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Pošiljanje %s"
 
-#: ../sendto/main.c:453
-#: ../sendto/main.c:524
+#: ../sendto/main.c:437
+#: ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Pošiljanje %d od %d datotek"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Izbor naprave za pošiljanje"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Pošlji"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Izbor datotek za pošiljanje"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Izberi"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Uporabi oddaljeno napravo"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "NASLOV"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Ime oddaljene naprave"
+
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "IME"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[DATOTEKA ...]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
@@ -684,6 +696,9 @@ msgstr "Prenos Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Pošiljanje datotek preko Bluetooth"
+
+#~ msgid "%d KB/s"
+#~ msgstr "%d KB/s"
 
 #~ msgid "Preferences"
 #~ msgstr "Možnosti"
