@@ -98,7 +98,7 @@ save_last_used_obex_device (const char *bdaddr)
 	GSettings *settings;
 
 	settings = g_settings_new (SCHEMA_NAME);
-	g_settings_set (settings, PREF_LAST_USED, bdaddr);
+	g_settings_set_string (settings, PREF_LAST_USED, bdaddr);
 	g_object_unref (settings);
 }
 
