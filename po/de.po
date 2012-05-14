@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-18 12:55+0000\n"
-"PO-Revision-Date: 2012-03-04 15:57+0100\n"
-"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
+"POT-Creation-Date: 2012-05-14 08:04+0000\n"
+"PO-Revision-Date: 2012-05-14 12:53+0100\n"
+"Last-Translator: Daniel Winzen <d@winzen4.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgid "Click to select device..."
 msgstr "Klicken, um Gerät auszuwählen …"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:89
+#: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -107,64 +107,64 @@ msgstr "Eingabegeräte (Mäuse, Tastaturen, usw.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Kopfhörer, Headsets und andere Audio-Geräte"
 
-#: ../lib/bluetooth-utils.c:58
+#: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Alle Typen"
 
-#: ../lib/bluetooth-utils.c:60
+#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-utils.c:62
+#: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:64
+#: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Rechner"
 
-#: ../lib/bluetooth-utils.c:66
+#: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Netzwerk"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:69
+#: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Headset"
 
-#: ../lib/bluetooth-utils.c:71
+#: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Kopfhörer"
 
-#: ../lib/bluetooth-utils.c:73
+#: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Audio-Gerät"
 
-#: ../lib/bluetooth-utils.c:75
+#: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../lib/bluetooth-utils.c:77
+#: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Maus"
 
-#: ../lib/bluetooth-utils.c:79
+#: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../lib/bluetooth-utils.c:81
+#: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Drucker"
 
-#: ../lib/bluetooth-utils.c:83
+#: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../lib/bluetooth-utils.c:85
+#: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../lib/bluetooth-utils.c:87
+#: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Video-Gerät"
 
@@ -203,7 +203,7 @@ msgstr "Bluetooth: Deaktiviert"
 msgid "Disconnecting..."
 msgstr "Verbindung wird getrennt ..."
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Verbindung wird hergestellt ..."
 
@@ -579,82 +579,94 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "ungefähr %'d Stunde"
 msgstr[1] "ungefähr %'d Stunden"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Dateiübertragung"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "E_rneut versuchen"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Dateien über Bluetooth versenden"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "Von:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "An:"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Ein unbekannter Fehler ist aufgetreten"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
-"Make sure that the remote device is switched on and that it accepts Bluetooth "
-"connections"
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
 msgstr ""
 "Stellen Sie sicher, dass das entfernte Gerät eingeschaltet ist und Bluetooth-"
 "Verbindungen akzeptiert"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "%s wird gesendet"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Datei %d von %d wird gesendet"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
+msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Gerät als Empfänger auswählen"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Senden"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Dateien zum Senden auswählen"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Auswahl"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Zu verwendendes entferntes Gerät"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "ADRESSE"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Name des entfernten Gerätes"
+
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "NAME"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[Datei...]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
@@ -677,11 +689,15 @@ msgstr "Bluetooth-Übertragung"
 msgid "Send files via Bluetooth"
 msgstr "Dateien über Bluetooth versenden"
 
+#~ msgid "%d KB/s"
+#~ msgstr "%d kB/s"
+
 #~ msgid "Remove '%s' from the list of devices?"
 #~ msgstr "»%s« aus der Liste der bekannten Geräte entfernen?"
 
 #~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next use."
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
 #~ msgstr ""
 #~ "Falls Sie das Gerät entfernen, müssen Sie es vor der nächsten Benutzung "
 #~ "erneut konfigurieren."
@@ -760,8 +776,9 @@ msgstr "Dateien über Bluetooth versenden"
 #~ "The Bluetooth new device setup will walk you through the process of "
 #~ "configuring Bluetooth enabled devices for use with this computer."
 #~ msgstr ""
-#~ "Der Bluetooth-Geräteassistent wird Sie durch den Vorgang der Konfiguration "
-#~ "von Bluetooth-Geräten zur Benutzung mit diesem Rechner führen."
+#~ "Der Bluetooth-Geräteassistent wird Sie durch den Vorgang der "
+#~ "Konfiguration von Bluetooth-Geräten zur Benutzung mit diesem Rechner "
+#~ "führen."
 
 #~ msgid ""
 #~ "The device will need to be within 10 meters of your computer, and be "
