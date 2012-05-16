@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-18 12:55+0000\n"
+"POT-Creation-Date: 2012-05-09 12:08+0000\n"
 "PO-Revision-Date: 2012-03-07 12:55+0100\n"
 "Last-Translator: Bruno Brouard <annoa.b@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -30,7 +30,7 @@ msgid "Click to select device..."
 msgstr "Cliquez pour choisir un périphérique..."
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:89
+#: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -106,64 +106,64 @@ msgstr "Périphériques de saisie (souris, claviers, etc.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Écouteurs, casques audio et autres périphériques audio"
 
-#: ../lib/bluetooth-utils.c:58
+#: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Tous les types"
 
-#: ../lib/bluetooth-utils.c:60
+#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Téléphone"
 
-#: ../lib/bluetooth-utils.c:62
+#: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:64
+#: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Ordinateur"
 
-#: ../lib/bluetooth-utils.c:66
+#: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Réseau"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:69
+#: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Casque audio"
 
-#: ../lib/bluetooth-utils.c:71
+#: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Écouteurs"
 
-#: ../lib/bluetooth-utils.c:73
+#: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Périphérique audio"
 
-#: ../lib/bluetooth-utils.c:75
+#: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Clavier"
 
-#: ../lib/bluetooth-utils.c:77
+#: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Souris"
 
-#: ../lib/bluetooth-utils.c:79
+#: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Appareil photo"
 
-#: ../lib/bluetooth-utils.c:81
+#: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Imprimante"
 
-#: ../lib/bluetooth-utils.c:83
+#: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Manette de jeu"
 
-#: ../lib/bluetooth-utils.c:85
+#: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Tablette"
 
-#: ../lib/bluetooth-utils.c:87
+#: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Périphérique vidéo"
 
@@ -202,7 +202,7 @@ msgstr "Bluetooth : désactivé"
 msgid "Disconnecting..."
 msgstr "Déconnexion en cours..."
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Connexion en cours..."
 
@@ -580,32 +580,32 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "environ %'d heure"
 msgstr[1] "environ %'d heures"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Transfert de fichier"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Essayer à nouveau"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Envoi de fichiers par Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "De :"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Vers :"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Une erreur inconnue est survenue"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -613,51 +613,63 @@ msgstr ""
 "Vérifiez que le périphérique est allumé et qu'il accepte les connexions "
 "Bluetooth"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Envoi de %s"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Envoi du fichier %d sur %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
+msgid "%d kB/s"
 msgstr "%d Ko/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d o/s"
 
 # Titre de fenêtre
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Choix du périphérique cible"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Envoyer"
 
 # Titre de fenêtre
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Choix des fichiers à envoyer"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Périphérique distant à utiliser"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "ADRESSE"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Nom du périphérique distant"
+
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "NOM"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[FICHIER...]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
