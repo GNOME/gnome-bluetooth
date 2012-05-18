@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 19:30+0100\n"
-"PO-Revision-Date: 2012-02-19 19:31+0100\n"
+"POT-Creation-Date: 2012-05-18 10:02+0200\n"
+"PO-Revision-Date: 2012-05-18 10:03+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -23,7 +23,7 @@ msgstr "Klicka för att välja enhet..."
 
 #: ../lib/bluetooth-chooser.c:135
 #: ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:89
+#: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -102,64 +102,64 @@ msgstr "Inmatningsenheter (möss, tangentbord, etc.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hörlurar, headsets och andra ljudenheter"
 
-#: ../lib/bluetooth-utils.c:58
+#: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Alla typer"
 
-#: ../lib/bluetooth-utils.c:60
+#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-utils.c:62
+#: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:64
+#: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Dator"
 
-#: ../lib/bluetooth-utils.c:66
+#: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Nätverk"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:69
+#: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Headset"
 
-#: ../lib/bluetooth-utils.c:71
+#: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Hörlurar"
 
-#: ../lib/bluetooth-utils.c:73
+#: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Ljudenhet"
 
-#: ../lib/bluetooth-utils.c:75
+#: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Tangentbord"
 
-#: ../lib/bluetooth-utils.c:77
+#: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../lib/bluetooth-utils.c:79
+#: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../lib/bluetooth-utils.c:81
+#: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Skrivare"
 
-#: ../lib/bluetooth-utils.c:83
+#: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Styrspak"
 
-#: ../lib/bluetooth-utils.c:85
+#: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Ritbord"
 
-#: ../lib/bluetooth-utils.c:87
+#: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Videoenhet"
 
@@ -201,8 +201,8 @@ msgid "Disconnecting..."
 msgstr "Kopplar från..."
 
 #: ../applet/main.c:390
-#: ../sendto/main.c:206
-#: ../sendto/main.c:308
+#: ../sendto/main.c:192
+#: ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Ansluter..."
 
@@ -577,80 +577,92 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "ungefär %'d timme"
 msgstr[1] "ungefär %'d timmar"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Filöverföring"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "Försök _igen"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Skickar filer via Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "Från:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Till:"
 
-#: ../sendto/main.c:337
-#: ../sendto/main.c:355
+#: ../sendto/main.c:321
+#: ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Ett okänt fel inträffade"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
 msgstr "Försäkra dig om att fjärrenheten är påslagen samt att den accepterar blåtandsanslutningar"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Skickar %s"
 
-#: ../sendto/main.c:453
-#: ../sendto/main.c:524
+#: ../sendto/main.c:437
+#: ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Skickar fil %d av %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Välj enhet att skicka till"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Skicka"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Välj filer att skicka"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Välj"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Fjärrenhet att använda"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "ADRESS"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Fjärrenhetens namn"
+
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "NAMN"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[FIL...]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
@@ -672,6 +684,9 @@ msgstr "Blåtandsöverföring"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Skicka filer via Bluetooth"
+
+#~ msgid "%d KB/s"
+#~ msgstr "%d KB/s"
 
 #~ msgid "Select Device to Browse"
 #~ msgstr "Välj enhet att bläddra"
