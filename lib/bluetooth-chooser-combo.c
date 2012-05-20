@@ -150,8 +150,8 @@ bluetooth_chooser_combo_set_property (GObject *object, guint property_id, const 
 	g_return_if_fail (BLUETOOTH_IS_CHOOSER_COMBO (object));
 	combo = BLUETOOTH_CHOOSER_COMBO (object);
 
-	switch (property_id)
-	case PROP_DEVICE: {
+	switch (property_id) {
+	case PROP_DEVICE:
 		g_return_if_fail (bluetooth_verify_address (g_value_get_string (value)) || g_value_get_string (value) == NULL);
 		bluetooth_chooser_combo_set_device (combo, g_value_get_string (value));
 		break;
