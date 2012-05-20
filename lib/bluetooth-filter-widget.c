@@ -178,10 +178,10 @@ bluetooth_filter_widget_bind_chooser_single (BluetoothFilterWidget *self,
 					     BluetoothChooser *chooser,
 					     const char *property)
 {
-	/* NOTE: We are binding the chooser as the source so that all of it's
+	/* NOTE: We are binding the chooser as the source so that all of its
 	 * properties are pushed to the filter.
 	 * The bindings will be automatically removed when one of the
-	 * objects go away */
+	 * objects goes away */
 	g_object_bind_property ((gpointer) chooser, property,
 				(gpointer) self, property,
 				G_BINDING_BIDIRECTIONAL);
