@@ -655,8 +655,10 @@ static void default_adapter_changed (GObject    *gobject,
 
 		/* Start a discovery if it was requested before we
 		 * had an adapter available */
-		if (priv->disco_rq != FALSE)
+		if (priv->disco_rq != FALSE) {
 			bluetooth_chooser_start_discovery (self);
+			set_search_label (self, TRUE);
+		}
 	}
 }
 
