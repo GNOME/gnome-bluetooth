@@ -526,6 +526,8 @@ void prepare_callback (GtkWidget *assistant,
 				help = g_strdup (_("Please move the joystick of your iCade in the following directions:"));
 				pincode = get_icade_pincode (&pincode_display);
 				break;
+			default:
+				g_assert_not_reached ();
 			}
 
 			if (pincode == NULL)
