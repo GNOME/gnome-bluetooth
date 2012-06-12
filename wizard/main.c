@@ -494,7 +494,7 @@ void prepare_callback (GtkWidget *assistant,
 			      NULL);
 
 		/* Do we pair, or don't we? */
-		if (g_strcmp0 (user_pincode, "NULL") == 0)
+		if (automatic_pincode && pincode == NULL)
 			path = NULL;
 
 		g_object_ref(agent);
