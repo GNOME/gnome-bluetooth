@@ -949,7 +949,8 @@ bluez_appeared_cb (GDBusConnection *connection,
 		   BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	char **array = NULL;
+	GVariant *variant;
+	const char **array;
 	gchar *default_path = NULL;
 
 	priv->manager = manager_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -962,13 +963,21 @@ bluez_appeared_cb (GDBusConnection *connection,
 	g_signal_connect (G_OBJECT (priv->manager), "g-signal",
 			  G_CALLBACK (manager_g_signal), client);
 
-	if (manager_call_list_adapters_sync (priv->manager, &array, NULL, NULL)) {
+	manager_call_get_properties_sync (MANAGER (priv->manager), &variant, NULL, NULL);
+	if (variant != NULL) {
+		GVariant *v;
 		guint i;
 
-		for (i = 0; array[i] != NULL; i++)
-			adapter_added(priv->manager, array[i], client);
+		v = g_variant_lookup_value (variant, "Adapters", G_VARIANT_TYPE_OBJECT_PATH_ARRAY);
+		array = v ? g_variant_get_objv (v, NULL) : NULL;
 
-		g_strfreev (array);
+		if (array != NULL) {
+			for (i = 0; array[i] != NULL; i++)
+				adapter_added(priv->manager, array[i], client);
+			g_free (array);
+		}
+
+		g_object_unref (variant);
 	}
 
 	manager_call_default_adapter_sync (priv->manager, &default_path, NULL, NULL);
@@ -976,7 +985,6 @@ bluez_appeared_cb (GDBusConnection *connection,
 		default_adapter_changed (priv->manager, default_path, client);
 		g_free(default_path);
 	}
-
 }
 
 static void
