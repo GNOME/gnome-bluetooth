@@ -977,7 +977,7 @@ bluez_appeared_cb (GDBusConnection *connection,
 			g_free (array);
 		}
 
-		g_object_unref (variant);
+		g_variant_unref (variant);
 	}
 
 	manager_call_default_adapter_sync (priv->manager, &default_path, NULL, NULL);
