@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-06 21:47+0000\n"
-"PO-Revision-Date: 2012-05-07 12:46+0200\n"
+"POT-Creation-Date: 2012-06-27 21:41+0000\n"
+"PO-Revision-Date: 2012-06-28 13:13+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Gtranslator 2.91.5\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -34,19 +34,19 @@ msgstr "Desconocido"
 msgid "No adapters available"
 msgstr "No hay ningún adaptador disponible"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "Buscando dispositivos…"
 
-#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:730
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -198,7 +198,7 @@ msgstr "Bluetooth: Desactivado"
 msgid "Disconnecting..."
 msgstr "Desconectando…"
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Conectando…"
 
@@ -438,12 +438,12 @@ msgstr "Mueva el joystick de su iCade en las siguientes direcciones:"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:556
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Espere mientras se termina de configurar el dispositivo «%s»…"
 
-#: ../wizard/main.c:574
+#: ../wizard/main.c:576
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Dispositivo nuevo «%s» configurado correctamente"
@@ -465,8 +465,9 @@ msgid "Device Setup"
 msgstr "Configuración del dispositivo"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Finishing New Device Setup"
-msgstr "Finalizando la configuración del dispositivo nuevo"
+#| msgid "Finishing New Device Setup"
+msgid "Finishing Setup"
+msgstr "Finalizando la configuración"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -568,32 +569,32 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Transferencia de archivos"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Reintentar"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Enviando archivos vía Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Ocurrió un error desconocido"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -601,60 +602,59 @@ msgstr ""
 "Asegúrese de que el dispositivo remoto está encendido y que acepta "
 "conexiones Bluetooth"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Enviando %s"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Enviando archivo %d de %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-#| msgid "%d B/s"
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Seleccionar el dispositivo al que enviar"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Enviar"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Seleccionar los archivos para enviar"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Dispositivo remoto que usar"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "ADDRESS"
 msgstr "DIRECCIÓN"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Nombre del dispositivo remoto"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:719
 msgid "NAME"
 msgstr "NOMBRE"
 
-#: ../sendto/main.c:757
+#: ../sendto/main.c:738
 msgid "[FILE...]"
 msgstr "[ARCHIVO…]"
 
