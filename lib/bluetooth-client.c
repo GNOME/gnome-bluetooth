@@ -1870,7 +1870,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 
 bail:
 	g_simple_async_result_set_op_res_gboolean (simple, res);
-	g_simple_async_result_complete (simple);
+	g_simple_async_result_complete_in_idle (simple);
 	g_object_unref (simple);
 }
 
