@@ -261,7 +261,7 @@ matches_cb (GtkButton *button,
 	invocation = g_object_get_data (G_OBJECT (button), "invocation");
 	gtk_widget_set_sensitive (does_not_match_button, FALSE);
 	gtk_widget_set_sensitive (matches_button, FALSE);
-	g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", ""));
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", NULL);
 	g_object_set_data (G_OBJECT(matches_button), "invocation", NULL);
