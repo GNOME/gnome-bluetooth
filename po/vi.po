@@ -1,15 +1,16 @@
 # Vietnamese translation of gnome-bluetooth.
 # Copyright (C) 2009 gnome-bluetooth's GNOME i18n Project for Vietnamse
 # This file is distributed under the same license as the gnome-bluetooth package.
-# Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.
+# Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.
+# Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2012-06-27 21:41+0000\n"
-"PO-Revision-Date: 2012-07-01 10:14+0700\n"
-"Last-Translator: Bùi Xuân Dương <buixuanduong1983@gmail.com>\n"
+"PO-Revision-Date: 2012-07-01 10:24+0700\n"
+"Last-Translator: Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,7 +72,7 @@ msgstr "Đã kết nối hoặc tin cậy"
 #. * It used to say Show Only Bluetooth Devices With...
 #: ../lib/bluetooth-filter-widget.c:231
 msgid "Show:"
-msgstr ""
+msgstr "Hiện:"
 
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:247
@@ -79,10 +80,9 @@ msgid "Device _category:"
 msgstr "_Chủng loại thiết bị..."
 
 #: ../lib/bluetooth-filter-widget.c:258
-#, fuzzy
 #| msgid "Select the device category to filter above list"
 msgid "Select the device category to filter"
-msgstr "Chọn chủng loại thiết bị để hiển thị trong danh sách bên trên"
+msgstr "Chọn loại thiết bị để lọc"
 
 #. The device type filter
 #: ../lib/bluetooth-filter-widget.c:272
@@ -90,13 +90,11 @@ msgid "Device _type:"
 msgstr "_Loại thiết bị:"
 
 #: ../lib/bluetooth-filter-widget.c:289
-#, fuzzy
 #| msgid "Select the device type to filter above list"
 msgid "Select the device type to filter"
-msgstr "Chọn loại thiết bị để hiển thị trong danh sách bên trên"
+msgstr "Chọn loại thiết bị để lọc"
 
 #: ../lib/bluetooth-filter-widget.c:295
-#, fuzzy
 #| msgid "Input devices (mice, keyboards, ...)"
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Thiết bị nhập liệu (chuột, bàn phím, ...)"
@@ -163,10 +161,9 @@ msgid "Tablet"
 msgstr "Bảng tính"
 
 #: ../lib/bluetooth-utils.c:88
-#, fuzzy
 #| msgid "Audio device"
 msgid "Video device"
-msgstr "Thiết bị âm thanh"
+msgstr "Thiết bị hình"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
@@ -180,7 +177,6 @@ msgid "Access the Internet using your cell phone (test)"
 msgstr "Truy cập Internet bằng điện thoại di động (thử nghiệm)"
 
 #: ../applet/main.c:230
-#, fuzzy
 #| msgid "Turn On Bluetooth"
 msgid "Turn on Bluetooth"
 msgstr "Bật Bluetooth"
@@ -190,7 +186,6 @@ msgid "Bluetooth: Off"
 msgstr "Bluetooth: Tắt"
 
 #: ../applet/main.c:234
-#, fuzzy
 #| msgid "Turn Off Bluetooth"
 msgid "Turn off Bluetooth"
 msgstr "Tắt Bluetooth"
@@ -236,18 +231,17 @@ msgid "Browse files..."
 msgstr "Duyệt tập tin..."
 
 #: ../applet/main.c:728
-#, fuzzy
 #| msgid "Keyboard"
 msgid "Keyboard Settings"
-msgstr "Bàn phím"
+msgstr "Thiết lập bàn phím"
 
 #: ../applet/main.c:736
 msgid "Mouse and Touchpad Settings"
-msgstr ""
+msgstr "Thiết lập chuột và touchpad"
 
 #: ../applet/main.c:746
 msgid "Sound Settings"
-msgstr ""
+msgstr "Thiết lập âm thanh"
 
 #: ../applet/main.c:799
 msgid "Debug"
@@ -281,17 +275,17 @@ msgid "Device '%s' wants to pair with this computer"
 msgstr "Thiết bị '%s' muốn kết nối với máy tính này"
 
 #: ../applet/agent.c:202
-#, fuzzy, c-format
+#, c-format
 #| msgid "Please enter the passkey mentioned on device %s."
 msgid "Please enter the PIN mentioned on device %s."
-msgstr "Nhập mật khẩu do thiết bị %s tạo ra."
+msgstr "Nhập PIN đề cập trên thiết bị %s."
 
 #: ../applet/agent.c:272
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| "Please confirm whether the passkey '%s' matches the one on device %s."
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Kiểm tra mật khẩu '%s' có đúng với mật khẩu của %s."
+msgstr "Kiểm tra PIN '%s' có đúng với PIN trên thiết bị %s không."
 
 #. translators: Whether to grant access to a particular service
 #: ../applet/agent.c:314
@@ -317,7 +311,7 @@ msgstr "Thiết bị Bluetooth"
 
 #: ../applet/agent.c:372
 msgid "Enter PIN"
-msgstr ""
+msgstr "Nhập PIN"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
@@ -328,7 +322,7 @@ msgstr "Khẳng định kết nối từ '%s'"
 
 #: ../applet/agent.c:405
 msgid "Verify PIN"
-msgstr ""
+msgstr "Xác minh PIN"
 
 #: ../applet/agent.c:432
 #, c-format
@@ -353,7 +347,7 @@ msgstr "Bluetooth: Đang kiểm tra"
 
 #: ../applet/popup-menu.ui.h:2
 msgid "Visible"
-msgstr ""
+msgstr "Hiện"
 
 #: ../applet/popup-menu.ui.h:3
 msgid "Send files to device..."
@@ -364,10 +358,9 @@ msgid "Set up new device..."
 msgstr "Cài đặt thiết bị mới..."
 
 #: ../applet/popup-menu.ui.h:6
-#, fuzzy
 #| msgid "Bluetooth: Checking"
 msgid "Bluetooth Settings"
-msgstr "Bluetooth: Đang kiểm tra"
+msgstr "Thiết lập Bluetooth"
 
 #: ../applet/popup-menu.ui.h:7
 msgid "Quit"
@@ -407,16 +400,15 @@ msgid "Pairing with '%s' cancelled"
 msgstr "Kết nối tới '%s' bị hủy"
 
 #: ../wizard/main.c:282
-#, fuzzy, c-format
+#, c-format
 #| msgid "Please confirm that the passkey displayed on '%s' matches this one"
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Kiểm tra mật khẩu của '%s' trùng với mật khẩu này"
+msgstr "Kiểm tra PIN hiển thị trên '%s' trùng với cái này này."
 
 #: ../wizard/main.c:336
-#, fuzzy
 #| msgid "Please enter the following passkey:"
 msgid "Please enter the following PIN:"
-msgstr "Hãy điền mật khẩu sau:"
+msgstr "Hãy điền PIN sau:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
@@ -437,52 +429,49 @@ msgid "Connecting to '%s'..."
 msgstr "Đang kết nối tới '%s'..."
 
 #: ../wizard/main.c:518
-#, fuzzy, c-format
+#, c-format
 #| msgid "Please enter the following passkey on '%s':"
 msgid "Please enter the following PIN on '%s':"
-msgstr "Hãy điền mật khẩu sau ở '%s':"
+msgstr "Hãy điền PIN sau trên '%s':"
 
 #: ../wizard/main.c:521
-#, fuzzy, c-format
+#, c-format
 #| msgid "Please enter the following passkey:"
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Hãy điền mật khẩu sau:"
+msgstr "Hãy điền PIN sau trên '%s' và nhấn “Enter” trên bàn phím:"
 
 #: ../wizard/main.c:526
 msgid "Please move the joystick of your iCade in the following directions:"
-msgstr ""
+msgstr "Vui lòng di chuyển cần điều khiển của iCade theo hướng sau:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
 #: ../wizard/main.c:558
-#, fuzzy, c-format
+#, c-format
 #| msgid "Please wait while finishing setup on '%s'..."
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Đang cài đặt '%s'..."
+msgstr "Vui lòng chờ hoàn tất cài đặt trên thiết bị '%s'..."
 
 #: ../wizard/main.c:576
-#, fuzzy, c-format
+#, c-format
 #| msgid "Successfully paired with '%s'"
 msgid "Successfully set up new device '%s'"
-msgstr "Kết nối với '%s' thành công"
+msgstr "Cài đặt thiết bị mới '%s' thành công"
 
 #: ../wizard/wizard.ui.h:1
-#, fuzzy
 #| msgid "Bluetooth device"
 msgid "Bluetooth New Device Setup"
-msgstr "Thiết bị Bluetooth"
+msgstr "Cài đặt thiết bị Bluetooth mới"
 
 #: ../wizard/wizard.ui.h:2
-#, fuzzy
 #| msgid "Passkey _options..."
 msgid "PIN _options..."
-msgstr "_Tùy chọn mật khẩu..."
+msgstr "_Tùy chọn PIN..."
 
 #: ../wizard/wizard.ui.h:3
-#, fuzzy
 #| msgid "Device search"
 msgid "Device Search"
 msgstr "Tìm thiết bị"
@@ -492,10 +481,9 @@ msgid "Device Setup"
 msgstr "Cài đặt thiết bị"
 
 #: ../wizard/wizard.ui.h:5
-#, fuzzy
 #| msgid "Finishing Device Setup"
 msgid "Finishing Setup"
-msgstr "Kết thúc cài đặt thiết bị"
+msgstr "Kết thúc cài đặt"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -503,26 +491,23 @@ msgstr "Chọn các dịch vụ dùng cùng với thiết bị:"
 
 #: ../wizard/wizard.ui.h:7
 msgid "Setup Summary"
-msgstr ""
+msgstr "Tóm tắt thiết lập"
 
 #: ../wizard/wizard.ui.h:8
-#, fuzzy
 #| msgid "Passkey Options"
 msgid "PIN Options"
-msgstr "Tùy chọn mật khẩu"
+msgstr "Tùy chọn PIN"
 
 #: ../wizard/wizard.ui.h:9
-#, fuzzy
 #| msgid "_Automatic passkey selection"
 msgid "_Automatic PIN selection"
-msgstr "_Tự động chọn mật khẩu"
+msgstr "_Tự động chọn PIN"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:11
-#, fuzzy
 #| msgid "Fixed Passkey"
 msgid "Fixed PIN"
-msgstr "Mật khẩu cố định"
+msgstr "PIN cố định"
 
 #: ../wizard/wizard.ui.h:12
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -537,28 +522,26 @@ msgid "'1234'"
 msgstr "'1234'"
 
 #: ../wizard/wizard.ui.h:15
-#, fuzzy
 #| msgid "Does not match"
 msgid "Do not pair"
-msgstr "Không khớp"
+msgstr "Không cặp"
 
 #: ../wizard/wizard.ui.h:16
 msgid "Custom PIN:"
-msgstr ""
+msgstr "PIN tự chọn:"
 
 #: ../wizard/wizard.ui.h:17
 msgid "_Try Again"
-msgstr ""
+msgstr "_Thử lại"
 
 #: ../wizard/wizard.ui.h:18
-#, fuzzy
 #| msgid "Quit"
 msgid "_Quit"
-msgstr "Thoát"
+msgstr "T_hoát"
 
 #: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
-msgstr ""
+msgstr "T_hôi"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:21
@@ -571,16 +554,14 @@ msgid "Matches"
 msgstr "Khớp"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-#, fuzzy
 #| msgid "Bluetooth device"
 msgid "Bluetooth Device Setup"
-msgstr "Thiết bị Bluetooth"
+msgstr "Cài đặt thiết bị Bluetooth"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-#, fuzzy
 #| msgid "Bluetooth device"
 msgid "Setup Bluetooth devices"
-msgstr "Thiết bị Bluetooth"
+msgstr "Cài đặt thiết bị Bluetooth"
 
 #: ../sendto/main.c:151
 #, c-format
@@ -611,10 +592,9 @@ msgid "File Transfer"
 msgstr "Trao đổi tập tin"
 
 #: ../sendto/main.c:234
-#, fuzzy
 #| msgid "_Reject"
 msgid "_Retry"
-msgstr "_Từ chối"
+msgstr "_Thử lại"
 
 #. translators: This is the heading for the progress dialogue
 #: ../sendto/main.c:253
@@ -634,14 +614,13 @@ msgid "An unknown error occurred"
 msgstr "Lỗi không xác định"
 
 #: ../sendto/main.c:332
-#, fuzzy
 #| msgid ""
 #| "Make sure that remote device is switched on and that it accepts Bluetooth "
 #| "connections"
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
-msgstr "Kiểm tra thiết bị đã được bật và có thể kết nối bằng Bluetooth"
+msgstr "Kiểm tra thiết bị từ xa đã bật và chấp nhận kết nối Bluetooth"
 
 #: ../sendto/main.c:430
 #, c-format
@@ -654,10 +633,10 @@ msgid "Sending file %d of %d"
 msgstr "Đang gửi tập tin %d / %d"
 
 #: ../sendto/main.c:504
-#, fuzzy, c-format
+#, c-format
 #| msgid "%d B/s"
 msgid "%d kB/s"
-msgstr "%d B/s"
+msgstr "%d kB/s"
 
 #: ../sendto/main.c:506
 #, c-format
@@ -665,26 +644,23 @@ msgid "%d B/s"
 msgstr "%d B/s"
 
 #: ../sendto/main.c:639
-#, fuzzy
 #| msgid "Select Device to Send To"
 msgid "Select device to send to"
-msgstr "Chọn Thiết Bị để Gửi"
+msgstr "Chọn thiết bị để gửi đến"
 
 #: ../sendto/main.c:644
-#, fuzzy
 #| msgid "Send _To"
 msgid "_Send"
-msgstr "_Gửi tới:"
+msgstr "_Gửi"
 
 #: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Chọn tập tin để gửi"
 
 #: ../sendto/main.c:691
-#, fuzzy
 #| msgid "Delete"
 msgid "Select"
-msgstr "Xóa"
+msgstr "Chọn"
 
 #: ../sendto/main.c:717
 msgid "Remote device to use"
@@ -692,7 +668,7 @@ msgstr "Thiết bị từ xa sẽ dùng"
 
 #: ../sendto/main.c:717
 msgid "ADDRESS"
-msgstr ""
+msgstr "ĐỊA CHỈ"
 
 #: ../sendto/main.c:719
 msgid "Remote device's name"
@@ -700,35 +676,32 @@ msgstr "Tên của thiết bị từ xa"
 
 #: ../sendto/main.c:719
 msgid "NAME"
-msgstr ""
+msgstr "TÊN"
 
 #: ../sendto/main.c:738
 msgid "[FILE...]"
-msgstr ""
+msgstr "[TẬP TIN...]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
-msgstr ""
+msgstr "Lỗi lập trình: không thể tìm thiết bị trong danh sách"
 
 #: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
 msgid "OBEX Push file transfer unsupported"
-msgstr ""
+msgstr "Không hỗ trợ truyền tập tin dạng đẩy OBEX"
 
 #: ../sendto/nautilus-sendto-plugin.c:262
-#, fuzzy
 #| msgid "Bluetooth: On"
 msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth: Bật"
+msgstr "Bluetooth (Đẩy OBEX)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
-#, fuzzy
 #| msgid "Bluetooth Manager"
 msgid "Bluetooth Transfer"
-msgstr "Trình quản lí Bluetooth"
+msgstr "Truyền Bluetooth"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
-#, fuzzy
 #| msgid "Sending files via Bluetooth"
 msgid "Send files via Bluetooth"
 msgstr "Gửi tập tin qua Bluetooth"
