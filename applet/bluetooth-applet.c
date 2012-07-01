@@ -313,6 +313,7 @@ device_get_name (GDBusProxy *proxy, char **long_name)
 {
 	GVariant *value;
 	GVariant *result;
+	GVariant *dict;
 	char *alias, *address;
 
 	g_return_val_if_fail (long_name != NULL, NULL);
@@ -322,14 +323,17 @@ device_get_name (GDBusProxy *proxy, char **long_name)
 	if (result == NULL)
 		return NULL;
 
-	value = g_variant_lookup_value (result, "Address", G_VARIANT_TYPE_STRING);
+	/* Retrieve the dictionary */
+	dict  = g_variant_get_child_value (result, 0);
+
+	value = g_variant_lookup_value (dict, "Address", G_VARIANT_TYPE_STRING);
 	if (value == NULL) {
 		g_variant_unref (result);
 		return NULL;
 	}
 	address = g_strdup (g_variant_get_string (value, NULL));
 
-	value = g_variant_lookup_value (result, "Name", G_VARIANT_TYPE_STRING);
+	value = g_variant_lookup_value (dict, "Name", G_VARIANT_TYPE_STRING);
 	alias = value ? g_strdup (g_variant_get_string (value, NULL)) : g_strdup (address);
 
 	g_variant_unref (result);
