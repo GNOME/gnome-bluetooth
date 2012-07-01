@@ -437,6 +437,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 	BluetoothAgentPrivate *priv;
 	GError *error = NULL;
 	char *path;
+	GVariant *r;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
@@ -469,13 +470,15 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 		error = NULL;
 	}
 
-	if (g_dbus_proxy_call_sync (priv->adapter, "RegisterAgent",
+	r = g_dbus_proxy_call_sync (priv->adapter, "RegisterAgent",
 				    g_variant_new ("(os)", priv->path, "DisplayYesNo"),
 				    G_DBUS_CALL_FLAGS_NONE,
-				    -1, NULL, &error) == FALSE) {
+				    -1, NULL, &error);
+	if (r == NULL) {
 		g_printerr ("Agent registration failed: %s\n", error->message);
 		g_error_free (error);
 	}
+	g_variant_unref (r);
 
 	return TRUE;
 }
