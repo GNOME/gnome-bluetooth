@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-07 07:07+0300\n"
-"PO-Revision-Date: 2012-05-07 07:07+0300\n"
+"POT-Creation-Date: 2012-07-04 07:09+0300\n"
+"PO-Revision-Date: 2012-07-04 07:09+0300\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -32,19 +32,19 @@ msgstr "Неизвестно"
 msgid "No adapters available"
 msgstr "Няма налични адаптери"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "Търсене на устройства…"
 
-#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Устройство"
 
-#: ../lib/bluetooth-chooser.c:730
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "Вид"
 
-#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "Устройства"
 
@@ -197,7 +197,7 @@ msgstr "Bluetooth: забранен"
 msgid "Disconnecting..."
 msgstr "Прекъсване на връзката…"
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Свързване…"
 
@@ -436,12 +436,12 @@ msgstr "Придвижете джойстика на устройството iC
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:556
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Изчакайте докато се завърши добавянето на устройство „%s“…"
 
-#: ../wizard/main.c:574
+#: ../wizard/main.c:576
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Устройството „%s е добавено успешно"
@@ -463,8 +463,8 @@ msgid "Device Setup"
 msgstr "Добавяне на устройство"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Finishing New Device Setup"
-msgstr "Завършване на добавяне на ново устройство"
+msgid "Finishing Setup"
+msgstr "Завършване на добавянето на ново устройство"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -567,91 +567,91 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "приблизително %'d час"
 msgstr[1] "приблизително %'d часа"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Прехвърляне на файл"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Повторен опит"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Изпращане на файлове чрез Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "От:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Към:"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Възникна неизвестна грешка"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Проверете дали другото устройство е включено и приема връзки по Bluetooth"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Изпращане на %s"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Изпращане на файл %d от %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Избор на устройство, към което ще се изпраща"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "Изпращане _до"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Избор на файлове за изпращане"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Избор"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Отдалечено устройство"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "ADDRESS"
 msgstr "АДРЕС"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Име на отдалечено устройство"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:719
 msgid "NAME"
 msgstr "ИМЕ"
 
-#: ../sendto/main.c:757
+#: ../sendto/main.c:738
 msgid "[FILE...]"
 msgstr "[ФАЙЛ…]"
 
