@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-10 16:08+0000\n"
-"PO-Revision-Date: 2012-05-17 21:12+0200\n"
+"POT-Creation-Date: 2012-06-27 21:41+0000\n"
+"PO-Revision-Date: 2012-07-22 08:08+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
-"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%"
+"10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
@@ -37,19 +37,19 @@ msgstr "Nepoznato"
 msgid "No adapters available"
 msgstr "Ne postoje adapteri"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "Tražim Blutut uređaje..."
 
-#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Uređaj"
 
-#: ../lib/bluetooth-chooser.c:730
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "Uređaji"
 
@@ -148,7 +148,7 @@ msgstr "Miš"
 
 #: ../lib/bluetooth-utils.c:80
 msgid "Camera"
-msgstr "Kamera"
+msgstr "Fotoaparat"
 
 #: ../lib/bluetooth-utils.c:82
 msgid "Printer"
@@ -243,7 +243,7 @@ msgstr "Podešavanja zvuka"
 
 #: ../applet/main.c:799
 msgid "Debug"
-msgstr "Traži greške"
+msgstr "Uklanjanje grešaka"
 
 #. Parse command-line options
 #: ../applet/main.c:818
@@ -257,7 +257,8 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Pokrenite „%s --help“ za spisak svih dostupnih opcija iz komandne linije.\n"
+"Pokrenite „%s --help“ da ​​vidite potpun spisak dostupnih opcija linije "
+"naredbi.\n"
 
 #: ../applet/main.c:849
 msgid "Bluetooth Applet"
@@ -330,7 +331,7 @@ msgstr "Proveri identifikaciju"
 
 #: ../applet/bluetooth-applet.desktop.in.in.h:1
 msgid "Bluetooth Manager"
-msgstr "Blututov upravnik"
+msgstr "Upravnik blututa"
 
 #: ../applet/bluetooth-applet.desktop.in.in.h:2
 msgid "Bluetooth Manager applet"
@@ -439,12 +440,12 @@ msgstr "Pomerajte džojstik vašeg iKejda u sledećim pravcima:"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:556
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Sačekajte dok ne završim podešavanje uređaja „%s“..."
 
-#: ../wizard/main.c:574
+#: ../wizard/main.c:576
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Podeavanje novog uređaja „%s“ je uspelo"
@@ -466,7 +467,7 @@ msgid "Device Setup"
 msgstr "Podešavanje uređaja"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Finishing New Device Setup"
+msgid "Finishing Setup"
 msgstr "Završavam podešavanje novog uređaja"
 
 #: ../wizard/wizard.ui.h:6
@@ -587,7 +588,7 @@ msgstr "_Probaj ponovo"
 #. translators: This is the heading for the progress dialogue
 #: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
-msgstr "Šaljem datoteke preko Blututa"
+msgstr "Šaljem datoteke preko blututa"
 
 #: ../sendto/main.c:265
 msgid "From:"
@@ -599,7 +600,7 @@ msgstr "Prima:"
 
 #: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
-msgstr "Nepoznata greška"
+msgstr "Došlo je do nepoznate greške"
 
 #: ../sendto/main.c:332
 msgid ""
@@ -617,11 +618,10 @@ msgstr "Šaljem „%s“"
 #: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
-msgstr "Šaljem %d od %d datoteka"
+msgstr "Šaljem datoteku %d od %d"
 
 #: ../sendto/main.c:504
 #, c-format
-#| msgid "%d B/s"
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
@@ -686,377 +686,3 @@ msgstr "Blutut prenos"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Šaljem datoteke preko Blututa"
-
-#~ msgid "%d KB/s"
-#~ msgstr "%d KB/s"
-
-#~ msgid "Preferences"
-#~ msgstr "Postavke"
-
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "Da uklonim „%s“ iz spiska uređaja?"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr ""
-#~ "Ukoliko uklonite uređaj, moraćete da ga ponovo podesite pre korišćenja."
-
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Prikaži samo Blutut uređaje sa..."
-
-#~ msgid "Select Device to Browse"
-#~ msgstr "Izaberite uređaj za razgledanje"
-
-#~ msgid "_Browse"
-#~ msgstr "_Razgledaj"
-
-#~ msgid "Select device to browse"
-#~ msgstr "Izaberite uređaj za razgledanje"
-
-#~ msgid "Browse files on device..."
-#~ msgstr "Razgledaj datoteke na uređaju..."
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "No"
-#~ msgstr "Ne"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "Blutut je onemogućen"
-
-#~ msgid "Bluetooth is disabled by hardware switch"
-#~ msgstr "Blutut je onemogućen hardverskim prekidačem"
-
-#~ msgid "No Bluetooth adapters found"
-#~ msgstr "Nisu pronađeni Blutut adapteri"
-
-#~ msgid "Visibility"
-#~ msgstr "Vidljivost"
-
-#~ msgid "Visibility of “%s”"
-#~ msgstr "Vidljivost za „%s“"
-
-#~ msgid "Address"
-#~ msgstr "Adresa"
-
-#~ msgid "Browse Files..."
-#~ msgstr "Razgledaj datoteke..."
-
-#~ msgid "Connection"
-#~ msgstr "Veza"
-
-#~ msgctxt "Power"
-#~ msgid "Bluetooth"
-#~ msgstr "Blutut"
-
-#~ msgid "Send Files..."
-#~ msgstr "Pošalji datoteke..."
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "Izmeni podešavanja za Blutut"
-
-#~ msgid "Device Setup Failed"
-#~ msgstr "Nije uspelo podešavanje uređaja"
-
-#~ msgid "Introduction"
-#~ msgstr "Uvod"
-
-#~ msgid "Select the device you want to set up"
-#~ msgstr "Izaberite uređaj koji želite da podesite"
-
-#~ msgid "Setup Completed"
-#~ msgstr "Podešavanje je završeno"
-
-#~ msgid ""
-#~ "The Bluetooth new device setup will walk you through the process of "
-#~ "configuring Bluetooth enabled devices for use with this computer."
-#~ msgstr ""
-#~ "Podešavanje novog Blutut uređaja će vas provesti kroz podešavanje "
-#~ "dozvoljenih Blutut uređaja na ovom računaru."
-
-#~ msgid ""
-#~ "The device will need to be within 10 meters of your computer, and be "
-#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
-#~ "in doubt."
-#~ msgstr ""
-#~ "Uređaj mora da bude na najviše 10 metara od računara, i da bude podešen "
-#~ "kao „vidljiv“; Proverite uputstvo za upotrebu uređaja ukoliko niste "
-#~ "sigurni."
-
-#~ msgid "Welcome to the Bluetooth new device setup"
-#~ msgstr "Dobrodošli u podešavanje novog Blutut uređaja"
-
-#~ msgid "_Close"
-#~ msgstr "_Zatvori"
-
-#~ msgid "_Restart Setup"
-#~ msgstr "_Ponovo pokreni podešavanje"
-
-#~ msgid "Run in standalone mode"
-#~ msgstr "Pokreni u samostalnom režimu"
-
-#~ msgid "Moblin Bluetooth Panel"
-#~ msgstr "Moblin površ za blutut"
-
-#~ msgid "- Moblin Bluetooth Panel"
-#~ msgstr "— Moblin površ za blutut"
-
-#~ msgid "%d hour"
-#~ msgid_plural "%d hours"
-#~ msgstr[0] "%'d sat"
-#~ msgstr[1] "%'d sata"
-#~ msgstr[2] "%'d sati"
-#~ msgstr[3] "%'d sat"
-
-#~ msgid "%d minute"
-#~ msgid_plural "%d minutes"
-#~ msgstr[0] "%'d minut"
-#~ msgstr[1] "%'d minuta"
-#~ msgstr[2] "%'d minuta"
-#~ msgstr[3] "%'d minuta"
-
-#~ msgid "%d second"
-#~ msgid_plural "%d seconds"
-#~ msgstr[0] "%'d sekunda"
-#~ msgstr[1] "%'d sekunde"
-#~ msgstr[2] "%'d sekundi"
-#~ msgstr[3] "%'d sekunda"
-
-#~ msgctxt "time"
-#~ msgid "%s %s %s"
-#~ msgstr "%s %s %s"
-
-#~ msgctxt "time"
-#~ msgid "%s %s"
-#~ msgstr "%s %s"
-
-#~ msgid "0 seconds"
-#~ msgstr "%'d sekundi"
-
-#~ msgid ""
-#~ "Your computer is visible on\n"
-#~ "Bluetooth for %s."
-#~ msgstr ""
-#~ "Vaš računar je vidljiv na\n"
-#~ "Blututu za „%s“."
-
-#~ msgid "Pairing with %s failed."
-#~ msgstr "Nije uspelo uparivanje sa „%s“."
-
-#~ msgid "Pair"
-#~ msgstr "Upareni"
-
-#~ msgid "Browse"
-#~ msgstr "Razgledaj"
-
-#~ msgid "Device setup failed"
-#~ msgstr "Nije uspelo podešavanje uređaja"
-
-#~ msgid "Back to devices"
-#~ msgstr "Nazad na uređaje"
-
-#~ msgid "Done"
-#~ msgstr "Gotovo"
-
-#~ msgid "Device setup"
-#~ msgstr "Podešavanje uređaja"
-
-#~ msgid "Settings"
-#~ msgstr "Podešavanja"
-
-#~ msgid "Only show:"
-#~ msgstr "Prikaži samo:"
-
-#~ msgid "PIN options"
-#~ msgstr "Opcije za PIN"
-
-#~ msgid "Add a new device"
-#~ msgstr "Dodaj novi uređaj"
-
-#~ msgid "Make visible on Bluetooth"
-#~ msgstr "Učini ga vidljivim na Blututu"
-
-#~ msgid "Send file from your computer"
-#~ msgstr "Pošalji datoteku sa računara"
-
-#~ msgid "Bluetooth Manager Panel"
-#~ msgstr "Programče za upravljanje Blututom"
-
-#~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Podesi tastaturu..."
-
-#~ msgid "Open Mouse Preferences..."
-#~ msgstr "Podesi miša..."
-
-#~ msgid "Open Sound Preferences..."
-#~ msgstr "Otvori postavke zvuka..."
-
-#~ msgid "Bluetooth: Enabled"
-#~ msgstr "Blutut: uključen"
-
-#~ msgid "Power"
-#~ msgstr "Snaga"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr "Ne mogu da pokrenem postavke deljenja ličnih datoteka"
-
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
-#~ msgstr ""
-#~ "Proverite da li je program „Deljenje ličnih datoteka“ pravilno instaliran."
-
-#~ msgid "Bluetooth Preferences"
-#~ msgstr "Postavke za Blutut"
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "Prikaži _ikonicu za Blutut"
-
-#~ msgid "Receive Files"
-#~ msgstr "Primaj datoteke"
-
-#~ msgid "Output a list of currently known devices"
-#~ msgstr "Ispiši sve poznate uređaje"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "Postavke za Blutut"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "Postavi računar kao _vidljiv"
-
-#~ msgid "Friendly name"
-#~ msgstr "Ime za prijatelje"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "Podesi _novi uređaj..."
-
-#~ msgid "_Remove"
-#~ msgstr "_Ukloni"
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr "Blutut je isključen preko dugmeta na računaru."
-
-#~ msgid "bluetooth"
-#~ msgstr "blutut"
-
-#~ msgid "<u>Pair</u>"
-#~ msgstr "<u>Upari</u>"
-
-#~ msgid "<u>Connect</u>"
-#~ msgstr "<u>Poveži se</u>"
-
-#~ msgid "<u>Browse</u>"
-#~ msgstr "<u>Razgledaj</u>"
-
-#~ msgid "Whether to show the notification icon"
-#~ msgstr "Da li da prikažem ikonicu u obaveštajnoj zoni"
-
-#~ msgid "Whether to show the notification icon."
-#~ msgstr "Da li da prikažem ikonicu u obaveštajnoj zoni."
-
-#~ msgid "GConf error: %s"
-#~ msgstr "GConf greška: %s"
-
-#~ msgid "All further errors shown only on terminal."
-#~ msgstr "Naredne greške će se ispisivati u terminalu."
-
-#~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "Blutut upravnik za Gnom"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Miloš Popović <gpopac@gmail.com>\n"
-#~ "http://prevod.org — prevod na srpski jezik."
-
-#~ msgid "GNOME Bluetooth home page"
-#~ msgstr "Veb stranica Blututa za Gnom"
-
-#~ msgid "S_earch"
-#~ msgstr "_Traži"
-
-#~ msgid "Bluetooth: Unknown"
-#~ msgstr "Blutut: Nepoznato"
-
-#~ msgid "Authentication request"
-#~ msgstr "Zahtev za identifikacijom"
-
-#~ msgid "Pairing request for device:"
-#~ msgstr "Zahtev za uparivanje uređaja:"
-
-#~ msgid "Enter passkey for authentication:"
-#~ msgstr "Unesite lozinku za identifikaciju:"
-
-#~ msgid "Confirmation request"
-#~ msgstr "Zahtev za potvdu"
-
-#~ msgid "Confirm value for authentication:"
-#~ msgstr "Potvrdi vrednost za identifikaciju:"
-
-#~ msgid "Authorization request"
-#~ msgstr "Zahtev za identifikaciju"
-
-#~ msgid "Authorization request for device:"
-#~ msgstr "Zahtev za identifikaciju uređaja:"
-
-#~ msgid "Enter passkey"
-#~ msgstr "Unesite lozinku"
-
-#~ msgid "Confirmation request for %s"
-#~ msgstr "Potvrda zahteva za %s"
-
-#~ msgid "Confirm passkey"
-#~ msgstr "Potvrdi lozinku"
-
-#~ msgid "Known devices"
-#~ msgstr "Poznati uređaji"
-
-#~ msgid "Please wait whilst '%s' is being paired"
-#~ msgstr "Sačekajte dok ne uparim „%s“"
-
-#~ msgid "<b>Fixed Passkey</b>"
-#~ msgstr "<b>Nepromenjljiva lozinka</b>"
-
-#~ msgid "<b>Setting up new device</b>"
-#~ msgstr "<b>Podešavanje novig uređaja</b>"
-
-#~ msgid "<b>Successfully configured new device</b>"
-#~ msgstr "<b>Uređaj je uspešno podešen</b>"
-
-#~ msgid "Bluetooth Device Wizard"
-#~ msgstr "Čarobnjak za Blutut uređaje"
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
-#~ msgid "Error Occurred"
-#~ msgstr "Greška"
-
-#~ msgid "General"
-#~ msgstr "Opšte"
-
-#~ msgid "Notification area"
-#~ msgstr "Obaveštajna zona"
-
-#~ msgid "Never display icon"
-#~ msgstr "Nikad ne prikazuj ikonicu"
-
-#~ msgid "Only display when adapter present"
-#~ msgstr "Prikaži samo kada je adapter prisutan"
-
-#~ msgid "Always display icon"
-#~ msgstr "Uvek prikaži ikonicu"
-
-#~ msgid "Unnamed Adapter"
-#~ msgstr "Neimenovano adapter"
-
-#~ msgid ""
-#~ "Display options for the notification icon. Valid options are \"never\", "
-#~ "\"present\" and \"always\"."
-#~ msgstr ""
-#~ "Mogućnosti za prikaz obaveštajne ikonice. Dostupne su „never“ (nikad), "
-#~ "„present“ (kada je prisutan) i „always“ (uvek)."
