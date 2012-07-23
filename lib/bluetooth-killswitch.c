@@ -319,11 +319,19 @@ event_cb (GIOChannel *source,
 	  GIOCondition condition,
 	  BluetoothKillswitch *killswitch)
 {
+	BluetoothKillswitchState state;
+	gboolean changed;
+
+	changed = FALSE;
+
+	/* Gather the previous killswitch so we can
+	 * see what really changed */
+	state = bluetooth_killswitch_get_state (killswitch);
+
 	if (condition & G_IO_IN) {
 		GIOStatus status;
 		struct rfkill_event event;
 		gsize read;
-		gboolean changed = FALSE;
 
 		status = g_io_channel_read_chars (source,
 						  (char *) &event,
@@ -338,16 +346,18 @@ event_cb (GIOChannel *source,
 
 			print_event (&event);
 
-			changed = TRUE;
-
 			if (event.op == RFKILL_OP_CHANGE) {
 				update_killswitch (killswitch, event.idx, event.soft, event.hard);
+				/* No changed here because update_killswitch
+				 * handles sending the state-changed signal */
 			} else if (event.op == RFKILL_OP_DEL) {
 				remove_killswitch (killswitch, event.idx);
+				changed = TRUE;
 			} else if (event.op == RFKILL_OP_ADD) {
 				BluetoothKillswitchState state;
 				state = event_to_state (event.soft, event.hard);
 				add_killswitch (killswitch, event.idx, state);
+				changed = TRUE;
 			}
 
 carry_on:
@@ -357,14 +367,20 @@ carry_on:
 							  &read,
 							  NULL);
 		}
-
-		if (changed)
-			g_signal_emit (G_OBJECT (killswitch),
-				       signals[STATE_CHANGED],
-				       0, bluetooth_killswitch_get_state (killswitch));
 	} else {
 		g_debug ("something else happened");
 		return FALSE;
+	}
+
+	if (changed) {
+		BluetoothKillswitchState new_state;
+
+		new_state = bluetooth_killswitch_get_state (killswitch);
+		if (new_state != state) {
+			g_signal_emit (G_OBJECT (killswitch),
+				       signals[STATE_CHANGED],
+				       0, bluetooth_killswitch_get_state (killswitch));
+		}
 	}
 
 	return TRUE;
