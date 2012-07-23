@@ -412,9 +412,14 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 
 		if (event.op != RFKILL_OP_ADD)
 			continue;
+		state = event_to_state (event.soft, event.hard);
+
+		g_debug ("Read killswitch of type '%s' (idx=%d): %s",
+			 type_to_string (event.type),
+			 event.idx, bluetooth_killswitch_state_to_string (state));
+
 		if (event.type != RFKILL_TYPE_BLUETOOTH)
 			continue;
-		state = event_to_state (event.soft, event.hard);
 
 		add_killswitch (killswitch, event.idx, state);
 	}
