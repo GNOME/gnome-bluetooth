@@ -119,9 +119,12 @@ static void
 update_killswitch (BluetoothKillswitch *killswitch,
 		   guint index, guint soft, guint hard)
 {
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	BluetoothKillswitchPrivate *priv;
+	gboolean changed;
 	GList *l;
-	gboolean changed = FALSE;
+
+	priv = killswitch->priv;
+	changed = FALSE;
 
 	for (l = priv->killswitches; l != NULL; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
@@ -149,11 +152,13 @@ void
 bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch,
 				KillswitchState state)
 {
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	BluetoothKillswitchPrivate *priv;
 	struct rfkill_event event;
 	ssize_t len;
 
 	g_return_if_fail (state != KILLSWITCH_STATE_HARD_BLOCKED);
+
+	priv = killswitch->priv;
 
 	memset (&event, 0, sizeof(event));
 	event.op = RFKILL_OP_CHANGE_ALL;
@@ -180,7 +185,7 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 
 	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), state);
 
-	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	priv = killswitch->priv;
 
 	if (priv->killswitches == NULL)
 		return KILLSWITCH_STATE_NO_ADAPTER;
@@ -212,7 +217,7 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 gboolean
 bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch)
 {
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	BluetoothKillswitchPrivate *priv = killswitch->priv;
 
 	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), FALSE);
 
@@ -223,8 +228,10 @@ static void
 remove_killswitch (BluetoothKillswitch *killswitch,
 		   guint index)
 {
-	BluetoothKillswitchPrivate *priv = killswitch->priv;
+	BluetoothKillswitchPrivate *priv;
 	GList *l;
+
+	priv = killswitch->priv;
 
 	for (l = priv->killswitches; l != NULL; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
@@ -246,8 +253,10 @@ add_killswitch (BluetoothKillswitch *killswitch,
 		KillswitchState state)
 
 {
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	BluetoothKillswitchPrivate *priv;
 	BluetoothIndKillswitch *ind;
+
+	priv = killswitch->priv;
 
 	g_debug ("adding killswitch idx %d state %s", index, state_to_string (state));
 	ind = g_new0 (BluetoothIndKillswitch, 1);
@@ -363,10 +372,11 @@ carry_on:
 static void
 bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 {
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
+	BluetoothKillswitchPrivate *priv;
 	struct rfkill_event event;
 	int fd;
 
+	priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (killswitch);
 	killswitch->priv = priv;
 
 	fd = open("/dev/rfkill", O_RDWR);
@@ -424,7 +434,11 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 static void
 bluetooth_killswitch_finalize (GObject *object)
 {
-	BluetoothKillswitchPrivate *priv = BLUETOOTH_KILLSWITCH_GET_PRIVATE (object);
+	BluetoothKillswitch *killswitch;
+	BluetoothKillswitchPrivate *priv;
+
+	killswitch = BLUETOOTH_KILLSWITCH (object);
+	priv = killswitch->priv;
 
 	/* cleanup monitoring */
 	if (priv->watch_id > 0) {
