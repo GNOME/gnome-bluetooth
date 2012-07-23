@@ -632,7 +632,7 @@ device_has_uuid (const char **uuids, const char *uuid)
 }
 
 static void
-killswitch_state_change (BluetoothKillswitch *kill_switch, KillswitchState state, gpointer user_data)
+killswitch_state_change (BluetoothKillswitch *kill_switch, BluetoothKillswitchState state, gpointer user_data)
 {
   BluetoothApplet *self = BLUETOOTH_APPLET (user_data);
 
@@ -1024,11 +1024,11 @@ bluetooth_applet_class_init (BluetoothAppletClass *klass)
 	gobject_class->get_property = bluetooth_applet_get_property;
 	gobject_class->set_property = bluetooth_applet_set_property;
 
-	/* should be enum, but KillswitchState is not registered */
+	/* should be enum, but BluetoothKillswitchState is not registered */
 	properties[PROP_KILLSWITCH_STATE] = g_param_spec_int ("killswitch-state",
 							      "Killswitch state",
 							      "State of Bluetooth hardware switches",
-							      KILLSWITCH_STATE_NO_ADAPTER, KILLSWITCH_STATE_HARD_BLOCKED, KILLSWITCH_STATE_NO_ADAPTER,
+							      BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER, BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED, BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER,
 							      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 	g_object_class_install_property (gobject_class, PROP_KILLSWITCH_STATE, properties[PROP_KILLSWITCH_STATE]);
 

@@ -29,6 +29,7 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 #include <bluetooth-enums.h>
+#include <bluetooth-killswitch.h>
 
 /**
  * BluetoothCapabilities:
@@ -61,19 +62,6 @@ typedef struct {
 #define BLUETOOTH_TYPE_SIMPLE_DEVICE	(bluetooth_simple_device_get_type ())
 
 GType bluetooth_simple_device_get_type (void) G_GNUC_CONST;
-
-/**
- * BluetoothKillswitchState:
- *
- * public version of that found in bluetooth-killswitch.h
- */
-
-typedef enum {
-  BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER = -1,
-  BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED = 0,
-  BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED,
-  BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED
-} BluetoothKillswitchState;
 
 /*
  * Type macros.
