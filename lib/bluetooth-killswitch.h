@@ -67,10 +67,11 @@ GType bluetooth_killswitch_get_type(void);
 
 BluetoothKillswitch * bluetooth_killswitch_new (void);
 
-gboolean bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch);
-void bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, BluetoothKillswitchState state);
-BluetoothKillswitchState bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch);
-const char *bluetooth_killswitch_state_to_string (BluetoothKillswitchState state);
+gboolean                  bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch);
+void                      bluetooth_killswitch_set_state        (BluetoothKillswitch *killswitch,
+								 BluetoothKillswitchState state);
+BluetoothKillswitchState  bluetooth_killswitch_get_state        (BluetoothKillswitch *killswitch);
+const char               *bluetooth_killswitch_state_to_string  (BluetoothKillswitchState state);
 
 G_END_DECLS
 
