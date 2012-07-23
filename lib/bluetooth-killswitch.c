@@ -156,6 +156,7 @@ bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch,
 	struct rfkill_event event;
 	ssize_t len;
 
+	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
 	g_return_if_fail (state != KILLSWITCH_STATE_HARD_BLOCKED);
 
 	priv = killswitch->priv;
