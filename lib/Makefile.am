@@ -100,7 +100,7 @@ BUILT_SOURCES = bluetooth-client-glue.h \
 
 CLEANFILES += $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins test-class
+noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins test-class test-killswitch
 
 test_client_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
@@ -111,6 +111,8 @@ test_deviceselection_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 test_plugins_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_class_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
+
+test_killswitch_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 EXTRA_DIST += bluetooth-client.xml gnome-bluetooth.symbols
 
