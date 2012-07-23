@@ -282,12 +282,13 @@ bluetooth_chooser_button_set_property (GObject *object, guint property_id, const
 	g_return_if_fail (BLUETOOTH_IS_CHOOSER_BUTTON (object));
 	button = BLUETOOTH_CHOOSER_BUTTON (object);
 
-	switch (property_id)
+	switch (property_id) {
 	case PROP_DEVICE: {
 		const char *str = g_value_get_string (value);
 		g_return_if_fail (str == NULL || bluetooth_verify_address (str));
 		set_btdevname (button, str, NULL, NULL);
 		break;
+		}
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 	}
