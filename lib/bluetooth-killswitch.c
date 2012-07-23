@@ -65,7 +65,7 @@ static int signals[LAST_SIGNAL] = { 0 };
 typedef struct _BluetoothIndKillswitch BluetoothIndKillswitch;
 struct _BluetoothIndKillswitch {
 	guint index;
-	KillswitchState state;
+	BluetoothKillswitchState state;
 };
 
 struct _BluetoothKillswitchPrivate {
@@ -78,39 +78,39 @@ struct _BluetoothKillswitchPrivate {
 
 G_DEFINE_TYPE(BluetoothKillswitch, bluetooth_killswitch, G_TYPE_OBJECT)
 
-static KillswitchState
+static BluetoothKillswitchState
 event_to_state (guint soft, guint hard)
 {
 	if (hard)
-		return KILLSWITCH_STATE_HARD_BLOCKED;
+		return BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED;
 	else if (soft)
-		return KILLSWITCH_STATE_SOFT_BLOCKED;
+		return BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED;
 	else
-		return KILLSWITCH_STATE_UNBLOCKED;
+		return BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
 }
 
 static const char *
-state_to_string (KillswitchState state)
+state_to_string (BluetoothKillswitchState state)
 {
 	switch (state) {
-	case KILLSWITCH_STATE_NO_ADAPTER:
-		return "KILLSWITCH_STATE_NO_ADAPTER";
-	case KILLSWITCH_STATE_SOFT_BLOCKED:
-		return "KILLSWITCH_STATE_SOFT_BLOCKED";
-	case KILLSWITCH_STATE_UNBLOCKED:
-		return "KILLSWITCH_STATE_UNBLOCKED";
-	case KILLSWITCH_STATE_HARD_BLOCKED:
-		return "KILLSWITCH_STATE_HARD_BLOCKED";
+	case BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER:
+		return "BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER";
+	case BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED:
+		return "BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED";
+	case BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED:
+		return "BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED";
+	case BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED:
+		return "BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED";
 	default:
 		g_assert_not_reached ();
 	}
 }
 
 const char *
-bluetooth_killswitch_state_to_string (KillswitchState state)
+bluetooth_killswitch_state_to_string (BluetoothKillswitchState state)
 {
-	g_return_val_if_fail (state >= KILLSWITCH_STATE_NO_ADAPTER, NULL);
-	g_return_val_if_fail (state <= KILLSWITCH_STATE_HARD_BLOCKED, NULL);
+	g_return_val_if_fail (state >= BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER, NULL);
+	g_return_val_if_fail (state <= BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED, NULL);
 
 	return state_to_string (state);
 }
@@ -130,7 +130,7 @@ update_killswitch (BluetoothKillswitch *killswitch,
 		BluetoothIndKillswitch *ind = l->data;
 
 		if (ind->index == index) {
-			KillswitchState state = event_to_state (soft, hard);
+			BluetoothKillswitchState state = event_to_state (soft, hard);
 			if (state != ind->state) {
 				ind->state = state;
 				changed = TRUE;
@@ -150,23 +150,23 @@ update_killswitch (BluetoothKillswitch *killswitch,
 
 void
 bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch,
-				KillswitchState state)
+				BluetoothKillswitchState state)
 {
 	BluetoothKillswitchPrivate *priv;
 	struct rfkill_event event;
 	ssize_t len;
 
 	g_return_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch));
-	g_return_if_fail (state != KILLSWITCH_STATE_HARD_BLOCKED);
+	g_return_if_fail (state != BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED);
 
 	priv = killswitch->priv;
 
 	memset (&event, 0, sizeof(event));
 	event.op = RFKILL_OP_CHANGE_ALL;
 	event.type = RFKILL_TYPE_BLUETOOTH;
-	if (state == KILLSWITCH_STATE_SOFT_BLOCKED)
+	if (state == BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED)
 		event.soft = 1;
-	else if (state == KILLSWITCH_STATE_UNBLOCKED)
+	else if (state == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED)
 		event.soft = 0;
 	else
 		g_assert_not_reached ();
@@ -177,11 +177,11 @@ bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch,
 			   g_strerror (errno));
 }
 
-KillswitchState
+BluetoothKillswitchState
 bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 {
 	BluetoothKillswitchPrivate *priv;
-	int state = KILLSWITCH_STATE_UNBLOCKED;
+	int state = BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
 	GList *l;
 
 	g_return_val_if_fail (BLUETOOTH_IS_KILLSWITCH (killswitch), state);
@@ -189,7 +189,7 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 	priv = killswitch->priv;
 
 	if (priv->killswitches == NULL)
-		return KILLSWITCH_STATE_NO_ADAPTER;
+		return BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER;
 
 	for (l = priv->killswitches ; l ; l = l->next) {
 		BluetoothIndKillswitch *ind = l->data;
@@ -197,13 +197,13 @@ bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch)
 		g_debug ("killswitch %d is %s",
 			 ind->index, state_to_string (ind->state));
 
-		if (ind->state == KILLSWITCH_STATE_HARD_BLOCKED) {
-			state = KILLSWITCH_STATE_HARD_BLOCKED;
+		if (ind->state == BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED) {
+			state = BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED;
 			break;
 		}
 
-		if (ind->state == KILLSWITCH_STATE_SOFT_BLOCKED) {
-			state = KILLSWITCH_STATE_SOFT_BLOCKED;
+		if (ind->state == BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED) {
+			state = BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED;
 			continue;
 		}
 
@@ -251,7 +251,7 @@ remove_killswitch (BluetoothKillswitch *killswitch,
 static void
 add_killswitch (BluetoothKillswitch *killswitch,
 		guint index,
-		KillswitchState state)
+		BluetoothKillswitchState state)
 
 {
 	BluetoothKillswitchPrivate *priv;
@@ -345,7 +345,7 @@ event_cb (GIOChannel *source,
 			} else if (event.op == RFKILL_OP_DEL) {
 				remove_killswitch (killswitch, event.idx);
 			} else if (event.op == RFKILL_OP_ADD) {
-				KillswitchState state;
+				BluetoothKillswitchState state;
 				state = event_to_state (event.soft, event.hard);
 				add_killswitch (killswitch, event.idx, state);
 			}
@@ -394,7 +394,7 @@ bluetooth_killswitch_init (BluetoothKillswitch *killswitch)
 	}
 
 	while (1) {
-		KillswitchState state;
+		BluetoothKillswitchState state;
 		ssize_t len;
 
 		len = read(fd, &event, sizeof(event));

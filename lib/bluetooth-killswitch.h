@@ -30,11 +30,11 @@
 G_BEGIN_DECLS
 
 typedef enum {
-	KILLSWITCH_STATE_NO_ADAPTER = -1,
-	KILLSWITCH_STATE_SOFT_BLOCKED = 0,
-	KILLSWITCH_STATE_UNBLOCKED,
-	KILLSWITCH_STATE_HARD_BLOCKED
-} KillswitchState;
+	BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER = -1,
+	BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED = 0,
+	BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED,
+	BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED
+} BluetoothKillswitchState;
 
 #define BLUETOOTH_TYPE_KILLSWITCH (bluetooth_killswitch_get_type())
 #define BLUETOOTH_KILLSWITCH(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -60,7 +60,7 @@ struct _BluetoothKillswitch {
 struct _BluetoothKillswitchClass {
 	GObjectClass parent_class;
 
-	void (*state_changed) (BluetoothKillswitch *killswitch, KillswitchState state);
+	void (*state_changed) (BluetoothKillswitch *killswitch, BluetoothKillswitchState state);
 };
 
 GType bluetooth_killswitch_get_type(void);
@@ -68,9 +68,9 @@ GType bluetooth_killswitch_get_type(void);
 BluetoothKillswitch * bluetooth_killswitch_new (void);
 
 gboolean bluetooth_killswitch_has_killswitches (BluetoothKillswitch *killswitch);
-void bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, KillswitchState state);
-KillswitchState bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch);
-const char *bluetooth_killswitch_state_to_string (KillswitchState state);
+void bluetooth_killswitch_set_state (BluetoothKillswitch *killswitch, BluetoothKillswitchState state);
+BluetoothKillswitchState bluetooth_killswitch_get_state (BluetoothKillswitch *killswitch);
+const char *bluetooth_killswitch_state_to_string (BluetoothKillswitchState state);
 
 G_END_DECLS
 
