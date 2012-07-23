@@ -742,14 +742,14 @@ bluetooth_applet_get_discoverable (BluetoothApplet* self)
  * bluetooth_applet_set_discoverable:
  *
  * @self: a #BluetoothApplet
- * @disc:
+ * @visible:
  */
 void
-bluetooth_applet_set_discoverable (BluetoothApplet* self, gboolean disc)
+bluetooth_applet_set_discoverable (BluetoothApplet* self, gboolean visible)
 {
 	g_return_if_fail (BLUETOOTH_IS_APPLET (self));
 
-	g_object_set (G_OBJECT (self->client), "default-adapter-discoverable", disc, NULL);
+	g_object_set (G_OBJECT (self->client), "default-adapter-discoverable", visible, NULL);
 }
 
 /**
