@@ -21,7 +21,8 @@
 
 <!--
   The wizard will match devices, following the order of the XML file [1],
-  on any combination of type, OUI, or name.
+  on any combination of type, OUI, or name. The name is matched through a
+  sub-string search (it should contain the name mentioned in this file if any).
 
   The special NULL pin means that the devices will not be paired, but
   connected to and marked as trusted. This is for devices such as mice

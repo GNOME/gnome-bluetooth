@@ -90,7 +90,9 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 			if (g_str_has_prefix (pdata->address, *attr_values) == FALSE)
 				return;
 		} else if (g_str_equal (*attr_names, "name")) {
-			if (g_strcmp0 (*attr_values, pdata->name) != 0)
+			if (*attr_values == NULL)
+				return;
+			if (strstr (*attr_values, pdata->name) == NULL)
 				return;
 		} else if (g_str_equal (*attr_names, "pin")) {
 			if (g_str_has_prefix (*attr_values, MAX_DIGITS_PIN_PREFIX) != FALSE) {
