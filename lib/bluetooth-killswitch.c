@@ -94,13 +94,13 @@ state_to_string (BluetoothKillswitchState state)
 {
 	switch (state) {
 	case BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER:
-		return "BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER";
+		return "no-adapter";
 	case BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED:
-		return "BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED";
+		return "soft-blocked";
 	case BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED:
-		return "BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED";
+		return "unblocked";
 	case BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED:
-		return "BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED";
+		return "hard-blocked";
 	default:
 		g_assert_not_reached ();
 	}
