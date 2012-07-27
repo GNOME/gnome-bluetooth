@@ -21,6 +21,10 @@ int main (int argc, char **argv)
 	mainloop = g_main_loop_new (NULL, FALSE);
 
 	ks = bluetooth_killswitch_new ();
+	if (bluetooth_killswitch_has_killswitches (ks) == FALSE) {
+		g_message ("No killswitches");
+		return 0;
+	}
 	g_signal_connect (G_OBJECT (ks), "state-changed",
 			  G_CALLBACK (state_changed_cb), NULL);
 
