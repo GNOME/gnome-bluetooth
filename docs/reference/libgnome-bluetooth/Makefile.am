@@ -54,7 +54,7 @@ CFILE_GLOB=$(top_srcdir)/lib/*.c
 
 # Header files to ignore when scanning.
 # e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
-IGNORE_HFILES=bluetooth-agent-glue.h bluetooth-agent.h bluetooth-client-glue.h bluetooth-client-private.h bluetooth-chooser-private.h bluetooth-instance-glue.h bluetooth-instance.h bluetooth-killswitch.h helper.h marshal.h obex-agent-glue.h obex-agent.h rfkill.h bluetooth-filter-widget.h
+IGNORE_HFILES=bluetooth-agent.h bluetooth-client-glue.h bluetooth-client-private.h bluetooth-chooser-private.h bluetooth-killswitch.h bluetooth-filter-widget.h obex-agent.h rfkill.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
