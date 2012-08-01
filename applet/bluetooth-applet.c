@@ -110,7 +110,6 @@ static guint signals[SIGNAL_LAST];
 
 /**
  * bluetooth_applet_browse_address_finish:
- *
  * @applet: a #BluetoothApplet
  * @result: the #GAsyncResult from the callback
  * @error: a #GError
@@ -129,7 +128,6 @@ bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
 
 /**
  * bluetooth_applet_browse_address:
- *
  * @applet: a #BluetoothApplet
  * @address: the bluetooth device to browse
  * @timestamp: a timestamp to prevent focus stealing
@@ -158,11 +156,11 @@ void bluetooth_applet_browse_address (BluetoothApplet *applet,
 
 /**
  * bluetooth_applet_send_to_address:
- *
- * Send a file to a bluetooth device
  * @applet: a #BluetoothApplet
  * @address: the target
  * @alias: the string to display for the device
+ *
+ * Send a file to a bluetooth device
  */
 void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 				       const char *address,
@@ -175,7 +173,6 @@ void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 
 /**
  * bluetooth_applet_agent_reply_pincode:
- *
  * @self: a #BluetoothApplet
  * @request_key: an opaque token given in the pincode-request signal
  * @pincode: (allow-none): the PIN code entered by the user, as a string, or NULL if the dialog was dismissed
@@ -208,7 +205,6 @@ bluetooth_applet_agent_reply_pincode (BluetoothApplet *self,
 
 /**
  * bluetooth_applet_agent_reply_passkey:
- *
  * @self: a #BluetoothApplet
  * @request_key: an opaque token given in the pincode-request signal
  * @passkey: the numeric PIN code entered by the user, or -1 if the dialog was dismissed
@@ -241,7 +237,6 @@ bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
 
 /**
  * bluetooth_applet_agent_reply_confirm:
- *
  * @self: a #BluetoothApplet
  * @request_key: an opaque token given in the pincode-request signal
  * @confirm: %TRUE if operation was confirmed, %FALSE otherwise
@@ -273,7 +268,6 @@ bluetooth_applet_agent_reply_confirm (BluetoothApplet *self,
 
 /**
  * bluetooth_applet_agent_reply_auth:
- *
  * @self: a #BluetoothApplet
  * @request_key: an opaque token given in the pincode-request signal
  * @auth: %TRUE if operation was authorized, %FALSE otherwise
@@ -663,7 +657,6 @@ connection_callback (GObject      *source_object,
 
 /**
  * bluetooth_applet_connect_device:
- *
  * @applet: a #BluetoothApplet
  * @device: the device to connect
  * @func: (scope async): a completion callback
@@ -693,7 +686,6 @@ bluetooth_applet_connect_device (BluetoothApplet* applet,
 
 /**
  * bluetooth_applet_disconnect_device:
- *
  * @applet: a #BluetoothApplet
  * @device: the device to disconnect
  * @func: (scope async): a completion callback
@@ -723,7 +715,6 @@ bluetooth_applet_disconnect_device (BluetoothApplet* applet,
 
 /**
  * bluetooth_applet_get_discoverable:
- *
  * @self: a #BluetoothApplet
  *
  * Returns: %TRUE if the default adapter is discoverable, %FALSE otherwise
@@ -740,7 +731,6 @@ bluetooth_applet_get_discoverable (BluetoothApplet* self)
 
 /**
  * bluetooth_applet_set_discoverable:
- *
  * @self: a #BluetoothApplet
  * @visible:
  */
@@ -754,7 +744,6 @@ bluetooth_applet_set_discoverable (BluetoothApplet* self, gboolean visible)
 
 /**
  * bluetooth_applet_get_killswitch_state:
- *
  * @self: a #BluetoothApplet
  *
  * Returns: the state of the killswitch, if one is present, or BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER otherwise
@@ -773,7 +762,6 @@ bluetooth_applet_get_killswitch_state (BluetoothApplet* self)
 
 /**
  * bluetooth_applet_set_killswitch_state:
- *
  * @self: a #BluetoothApplet
  * @state: the new state
  *
@@ -794,7 +782,6 @@ bluetooth_applet_set_killswitch_state (BluetoothApplet* self, BluetoothKillswitc
 
 /**
  * bluetooth_applet_get_show_full_menu:
- *
  * @self: a #BluetoothApplet
  *
  * Returns: %TRUE if the full menu is to be shown, %FALSE otherwise
@@ -886,7 +873,6 @@ bluetooth_applet_create_device_from_iter (GtkTreeModel *model,
 
 /**
  * bluetooth_applet_get_devices:
- *
  * @self: a #BluetoothApplet
  *
  * Returns: (element-type GnomeBluetoothApplet.SimpleDevice) (transfer full): Returns the devices which should be shown to the user
