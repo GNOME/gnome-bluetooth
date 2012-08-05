@@ -1300,20 +1300,50 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	object_class->get_property = bluetooth_client_get_property;
 	object_class->set_property = bluetooth_client_set_property;
 
+	/**
+	 * BluetoothClient:default-adapter:
+	 *
+	 * The D-Bus path of the default Bluetooth adapter or %NULL.
+	 */
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER,
-					 g_param_spec_string ("default-adapter", NULL, NULL,
+					 g_param_spec_string ("default-adapter", NULL,
+							      "The D-Bus path of the default adapter",
 							      NULL, G_PARAM_READABLE));
+	/**
+	 * BluetoothClient:default-adapter-powered:
+	 *
+	 * %TRUE if the default Bluetooth adapter is powered.
+	 */
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_POWERED,
-					 g_param_spec_boolean ("default-adapter-powered", NULL, NULL,
+					 g_param_spec_boolean ("default-adapter-powered", NULL,
+							      "Whether the default adapter is powered",
 							       FALSE, G_PARAM_READABLE));
+	/**
+	 * BluetoothClient:default-adapter-discoverable:
+	 *
+	 * %TRUE if the default Bluetooth adapter is discoverable.
+	 */
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERABLE,
-					 g_param_spec_boolean ("default-adapter-discoverable", NULL, NULL,
+					 g_param_spec_boolean ("default-adapter-discoverable", NULL,
+							      "Whether the default adapter is visible by other devices",
 							       FALSE, G_PARAM_READWRITE));
+	/**
+	 * BluetoothClient:default-adapter-name:
+	 *
+	 * The name of the default Bluetooth adapter or %NULL.
+	 */
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_NAME,
-					 g_param_spec_string ("default-adapter-name", NULL, NULL,
+					 g_param_spec_string ("default-adapter-name", NULL,
+							      "The human readable name of the default adapter",
 							      NULL, G_PARAM_READABLE));
+	/**
+	 * BluetoothClient:default-adapter-discovering:
+	 *
+	 * %TRUE if the default Bluetooth adapter is discovering.
+	 */
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERING,
-					 g_param_spec_boolean ("default-adapter-discovering", NULL, NULL,
+					 g_param_spec_boolean ("default-adapter-discovering", NULL,
+							      "Whether the default adapter is searching for devices",
 							       FALSE, G_PARAM_READWRITE));
 
 	if (error != NULL) {

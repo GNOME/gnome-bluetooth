@@ -97,7 +97,17 @@ typedef enum {
 
 #define _BLUETOOTH_TYPE_NUM_TYPES 15
 
+/**
+ * BLUETOOTH_TYPE_INPUT:
+ *
+ * Use this value to select any Bluetooth input device where a #BluetoothType enum is required.
+ */
 #define BLUETOOTH_TYPE_INPUT (BLUETOOTH_TYPE_KEYBOARD | BLUETOOTH_TYPE_MOUSE | BLUETOOTH_TYPE_TABLET | BLUETOOTH_TYPE_JOYPAD)
+/**
+ * BLUETOOTH_TYPE_AUDIO:
+ *
+ * Use this value to select any Bluetooth audio device where a #BluetoothType enum is required.
+ */
 #define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO)
 
 /**

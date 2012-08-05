@@ -33,6 +33,11 @@ G_BEGIN_DECLS
 #define BLUETOOTH_GET_CHOOSER_COMBO_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
 				BLUETOOTH_TYPE_CHOOSER_COMBO, BluetoothChooserComboClass))
 
+/**
+* BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE:
+*
+* A convenience value used to select the first device regardless of its address.
+**/
 #define BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE "00:00:00:00:00:00"
 
 typedef struct _BluetoothChooserComboPrivate BluetoothChooserComboPrivate;
