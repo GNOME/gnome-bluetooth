@@ -6,13 +6,13 @@ if ENABLE_DOCUMENTATION
 SUBDIRS += help
 endif
 
-EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make gnome-doc-utils.make
+EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update \
 	--enable-gtk-doc --disable-scrollkeeper --enable-introspection
 
-DISTCLEANFILES = intltool-extract intltool-update intltool-merge gnome-doc-utils.make
+DISTCLEANFILES = intltool-extract intltool-update intltool-merge
 
 MAINTAINERCLEANFILES = Makefile.in \
 	aclocal.m4 configure config.h.in config.sub config.guess \

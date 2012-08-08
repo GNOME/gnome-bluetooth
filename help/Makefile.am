@@ -1,12 +1,10 @@
-include $(top_srcdir)/gnome-doc-utils.make
-dist-hook: doc-dist-hook
-DOC_MODULE = gnome-bluetooth
-DOC_ENTITIES = legal.xml
-DOC_H_DOCS = C/gnome-bluetooth.xml
-DOC_INCLUDES = 
-DOC_FIGURES = \
+@YELP_HELP_RULES@
+
+HELP_ID = gnome-bluetooth
+HELP_FILES = legal.xml index.docbook
+HELP_MEDIA = \
 	figures/bluetooth-applet.png		\
 	figures/bluetooth-properties.png	\
 	figures/bluetooth-wizard.png
-	
-DOC_LINGUAS = ca cs da de el es fi fr gl id ko pa ro ru sl sv te th zh_CN zh_HK zh_TW
+
+HELP_LINGUAS = ca cs da de el es fi fr gl id ko pa ro ru sl sv te th zh_CN zh_HK zh_TW
