@@ -2,7 +2,7 @@ AC_PREREQ(2.52)
 
 m4_define(gnomebt_version_major, 3)
 m4_define(gnomebt_version_minor, 5)
-m4_define(gnomebt_version_micro, 4)
+m4_define(gnomebt_version_micro, 5)
 
 AC_INIT([gnome-bluetooth],
         [gnomebt_version_major.gnomebt_version_minor.gnomebt_version_micro],
@@ -20,7 +20,7 @@ AM_INIT_AUTOMAKE([1.8 dist-xz no-dist-gzip check-news tar-ustar])
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-GNOMEBT_LT_VERSION=10:0:0
+GNOMEBT_LT_VERSION=11:0:0
 AC_SUBST(GNOMEBT_LT_VERSION)
 
 AM_MAINTAINER_MODE
