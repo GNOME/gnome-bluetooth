@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.4\n"
+"Project-Id-Version: 3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-17 00:23+0000\n"
-"PO-Revision-Date: 2012-03-17 00:25+0000\n"
+"POT-Creation-Date: 2012-09-01 00:35+0100\n"
+"PO-Revision-Date: 2012-09-01 00:40+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "Language: pt\n"
@@ -24,7 +24,7 @@ msgid "Click to select device..."
 msgstr "Clique para seleccionar um dispositivo..."
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:89
+#: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -32,19 +32,19 @@ msgstr "Desconhecido"
 msgid "No adapters available"
 msgstr "Nenhum adaptador disponível"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "A procurar dispositivos..."
 
-#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:730
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -100,64 +100,64 @@ msgstr "Dispositivos de entrada (ratos, teclados, etc.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Auscultadores, microfones e outros dispositivos áudio"
 
-#: ../lib/bluetooth-utils.c:58
+#: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Todos os tipos"
 
-#: ../lib/bluetooth-utils.c:60
+#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Telefone"
 
-#: ../lib/bluetooth-utils.c:62
+#: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:64
+#: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Computador"
 
-#: ../lib/bluetooth-utils.c:66
+#: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Rede"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:69
+#: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Auscultadores/microfone"
 
-#: ../lib/bluetooth-utils.c:71
+#: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Auscultadores"
 
-#: ../lib/bluetooth-utils.c:73
+#: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Dispositivo audio"
 
-#: ../lib/bluetooth-utils.c:75
+#: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Teclado"
 
-#: ../lib/bluetooth-utils.c:77
+#: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Rato"
 
-#: ../lib/bluetooth-utils.c:79
+#: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Câmara"
 
-#: ../lib/bluetooth-utils.c:81
+#: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Impressora"
 
-#: ../lib/bluetooth-utils.c:83
+#: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Joystick"
 
-#: ../lib/bluetooth-utils.c:85
+#: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../lib/bluetooth-utils.c:87
+#: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Dispositivo vídeo"
 
@@ -196,7 +196,7 @@ msgstr "Bluetooth: Desactivado"
 msgid "Disconnecting..."
 msgstr "A desligar..."
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "A estabelecer ligação..."
 
@@ -435,12 +435,12 @@ msgstr "Mova o joystick do seu iCade nas seguintes direcções:"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:556
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Aguarde enquanto é terminada a configuração do dispositivo '%s'..."
 
-#: ../wizard/main.c:574
+#: ../wizard/main.c:576
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Novo dispositivo '%s' configurado com sucesso"
@@ -462,8 +462,8 @@ msgid "Device Setup"
 msgstr "Configuração de Dispositivo"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Finishing New Device Setup"
-msgstr "A Finalizar a Configuração de Novo Dispositivo"
+msgid "Finishing Setup"
+msgstr "A Finalizar a Configuração"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -565,32 +565,32 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Transferência de Ficheiro"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Tentar Novamente"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "A enviar ficheiros através do Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Ocorreu um erro desconhecido"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -598,49 +598,61 @@ msgstr ""
 "Certifique-se de que o dispositivo remoto está ligado e está a aceitar "
 "ligações Bluetooth"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "A enviar %s"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "A enviar o ficheiro %d de %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Seleccione o dispositivo para onde enviar"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Enviar"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Seleccione os ficheiros a enviar"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Dispositivo remoto a utilizar"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "ENDEREÇO"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Nome do dispositivo remoto"
+
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "NOME"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[FICHEIRO...]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
@@ -662,6 +674,9 @@ msgstr "Transferência por Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Enviar ficheiros através do Bluetooth"
+
+#~ msgid "%d KB/s"
+#~ msgstr "%d KB/s"
 
 #~ msgid "Remove '%s' from the list of devices?"
 #~ msgstr "Remover '%s' da lista de dispositivos?"
