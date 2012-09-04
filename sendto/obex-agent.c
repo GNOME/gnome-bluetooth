@@ -368,6 +368,7 @@ gboolean obex_agent_setup(ObexAgent *agent, const char *path)
 {
 	ObexAgentPrivate *priv = OBEX_AGENT_GET_PRIVATE(agent);
 	GError *error = NULL;
+	char *xml;
 
 	DBG("agent %p path %s", agent, path);
 
@@ -378,7 +379,6 @@ gboolean obex_agent_setup(ObexAgent *agent, const char *path)
 
 	priv->path = g_strdup (path);
 
-	char *xml;
 	xml = g_strdup_printf (introspection_xml, path);
 	priv->introspection_data = g_dbus_node_info_new_for_xml (xml, NULL);
 	g_free (xml);
