@@ -468,6 +468,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 		g_warning ("Failed to register object: %s", error->message);
 		g_error_free (error);
 		error = NULL;
+		return FALSE;
 	}
 
 	r = g_dbus_proxy_call_sync (priv->adapter, "RegisterAgent",
@@ -477,6 +478,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 	if (r == NULL) {
 		g_printerr ("Agent registration failed: %s\n", error->message);
 		g_error_free (error);
+		return FALSE;
 	}
 	g_variant_unref (r);
 
