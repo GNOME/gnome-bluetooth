@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-06 21:47+0000\n"
-"PO-Revision-Date: 2012-05-07 15:35+0200\n"
+"POT-Creation-Date: 2012-06-27 21:41+0000\n"
+"PO-Revision-Date: 2012-09-07 10:12+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,19 +35,19 @@ msgstr "Neznámé"
 msgid "No adapters available"
 msgstr "Není dostupný žádný adaptér"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "Vyhledávají se zařízení…"
 
-#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Zařízení"
 
-#: ../lib/bluetooth-chooser.c:730
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -199,7 +199,7 @@ msgstr "Bluetooth: Zakázáno"
 msgid "Disconnecting..."
 msgstr "Odpojování…"
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "Připojování…"
 
@@ -441,12 +441,12 @@ msgstr ""
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:556
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Čekejte prosím, než se dokončí nastavení zařízení „%s“…"
 
-#: ../wizard/main.c:574
+#: ../wizard/main.c:576
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Úspěšně nastaveno nové zařízení „%s“"
@@ -468,8 +468,8 @@ msgid "Device Setup"
 msgstr "Nastavení zařízení"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Finishing New Device Setup"
-msgstr "Dokončování nastavení nového zařízení"
+msgid "Finishing Setup"
+msgstr "Dokončení nastavení"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -574,91 +574,91 @@ msgstr[0] "přibližně %'d hodina"
 msgstr[1] "přibližně %'d hodiny"
 msgstr[2] "přibližně %'d hodin"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Přenos souborů"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Zkusit znovu"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Posílání souborů přes Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "Pro:"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Došlo k neznámé chybě"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Ujistěte se, že vzdálené zařízení je zapnuté a přijímá spojení přes Bluetooth"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Odesílání %s"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Odesílání souboru %d z %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Výběr zařízení pro odeslání"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "Ode_slat"
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Výběr souborů k odeslání"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Vybrat"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Použít zadané vzdálené zařízení"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "ADDRESS"
 msgstr "ADRESA"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Název vzdáleného zařízení"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:719
 msgid "NAME"
 msgstr "NÁZEV"
 
-#: ../sendto/main.c:757
+#: ../sendto/main.c:738
 msgid "[FILE...]"
 msgstr "[SOUBOR…]"
 
