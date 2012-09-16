@@ -5,175 +5,165 @@
 # This file is distributed under the same license as the gnome-bluetooth package.
 # rine joseph <rinejoseph@trystnetworks.com>, 2009.
 # Ani Peter|അനി പീറ്റര്‍ <apeter@redhat.com>, 2009.
-# Praveen Arimbrathodiyil <pravi.a@gmail.com>, 2010.
+# Praveen Arimbrathodiyil <pravi.a@gmail.com>, 2010, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master.ml\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"bluetooth&component=general\n"
-"POT-Creation-Date: 2010-03-18 21:12+0000\n"
-"PO-Revision-Date: 2010-03-27 17:10+0530\n"
-"Last-Translator: Praveen Arimbrathodiyil <pravi.a@gmail.com>\n"
-"Language-Team:  <smc-discuss@googlegroups.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-06-27 21:41+0000\n"
+"PO-Revision-Date: 2012-09-16 21:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
 
-#: ../lib/bluetooth-client.c:127
-msgid "All types"
-msgstr "എല്ലാ തരങ്ങളും"
-
-#: ../lib/bluetooth-client.c:129
-msgid "Phone"
-msgstr "ഫോണ്‍"
-
-#: ../lib/bluetooth-client.c:131
-msgid "Modem"
-msgstr "മോഡം"
-
-#: ../lib/bluetooth-client.c:133
-msgid "Computer"
-msgstr "കമ്പ്യൂട്ടര്‍"
-
-#: ../lib/bluetooth-client.c:135
-msgid "Network"
-msgstr "ശൃംഖല"
-
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-client.c:138
-msgid "Headset"
-msgstr "ഹെഡ്‌സെറ്റ്"
-
-#: ../lib/bluetooth-client.c:140
-msgid "Headphones"
-msgstr "ഹെഡ്‌ഫോണുകള്‍"
-
-#: ../lib/bluetooth-client.c:142
-msgid "Audio device"
-msgstr "ശബ്ദോപകരണം"
-
-#: ../lib/bluetooth-client.c:144
-msgid "Keyboard"
-msgstr "കീ ബോര്‍ഡ്‌"
-
-#: ../lib/bluetooth-client.c:146
-msgid "Mouse"
-msgstr "മൌസ്"
-
-#: ../lib/bluetooth-client.c:148
-msgid "Camera"
-msgstr "ക്യാമറ"
-
-#: ../lib/bluetooth-client.c:150
-msgid "Printer"
-msgstr "പ്രിന്റര്‍"
-
-#: ../lib/bluetooth-client.c:152
-msgid "Joypad"
-msgstr "ജോയ് പാഡ്"
-
-#: ../lib/bluetooth-client.c:154
-msgid "Tablet"
-msgstr "ടാബ്ലെറ്റ്‌"
-
-#: ../lib/bluetooth-client.c:156
-#| msgid "Audio device"
-msgid "Video device"
-msgstr "ചലച്ചിത്രോപകരണം"
-
-#: ../lib/bluetooth-client.c:158 ../lib/bluetooth-chooser.c:129
-#: ../lib/bluetooth-filter-widget.c:85
-msgid "Unknown"
-msgstr "അറിയാത്ത"
-
-#: ../lib/bluetooth-chooser-button.c:75 ../lib/bluetooth-chooser-button.c:369
+#: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
 msgstr "ഉപകരണം തെരഞ്ഞെടുക്കുന്നതിനായി ക്ലിക്ക് ചെയ്യുക..."
 
-#: ../lib/bluetooth-chooser.c:170
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:90
+msgid "Unknown"
+msgstr "അറിയാത്ത"
+
+#: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "അഡാപ്ടറുകള്‍ ലഭ്യമല്ല"
 
-#: ../lib/bluetooth-chooser.c:174 ../lib/bluetooth-chooser.c:868
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "ഉപകരണങ്ങള്‍ക്കായി തെരയുന്നു..."
 
-#: ../lib/bluetooth-chooser.c:372
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "ഉപകരണങ്ങളുടെ പട്ടികയില്‍ നിന്നും '%s' നീക്കം ചെയ്യുക?"
-
-#: ../lib/bluetooth-chooser.c:374
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"നിങ്ങള്‍ ഉപകരണം നീക്കം ചെയ്താല്‍, അടുത്ത തവണ ഉപയോഗിക്കുന്നതിനു് മുമ്പു് അതു് വീണ്ടും സജ്ജമാക്കണം."
-
-#: ../lib/bluetooth-chooser.c:746
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "ഉപകരണം"
 
-#: ../lib/bluetooth-chooser.c:783
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "തരം"
 
-#: ../lib/bluetooth-filter-widget.c:75
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+msgid "Devices"
+msgstr "ഉപകരണങ്ങള്‍"
+
+#: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "എല്ലാ വിഭാഗങ്ങളും"
 
-#: ../lib/bluetooth-filter-widget.c:77
+#: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "ജോടികള്‍"
 
-#: ../lib/bluetooth-filter-widget.c:79
+#: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "വിശ്വാസമുള്ളവ"
 
-#: ../lib/bluetooth-filter-widget.c:81
+#: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "ജോടിയല്ലത്തവയോ വിശ്വാസമുള്ളവയോ"
 
-#: ../lib/bluetooth-filter-widget.c:83
+#: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "ജോടികളോ വിശ്വാസമുള്ളവയോ"
 
-#: ../lib/bluetooth-filter-widget.c:238
-#| msgid "Show Only Bluetooth Devices With..."
-msgid "<b>Show Only Bluetooth Devices With...</b>"
-msgstr "<b>ബ്ലൂടൂത് ഉപകരണങ്ങള്‍ മാത്രം കാണിക്കുക...</b>"
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "കാണിയ്ക്കേണ്ടവ"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:254
+#: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "ഉപകരണ _വിഭാഗം:"
 
-#: ../lib/bluetooth-filter-widget.c:269
-#| msgid "Select the device category to filter above list"
+#: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "ഫില്‍റ്റര്‍ ചെയ്യുന്നതിനായി ഉപകരണ വിഭാഗം തെരഞ്ഞെടുക്കുക"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:283
+#: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "ഉപകരണം ഏതു് _തരം:"
 
-#: ../lib/bluetooth-filter-widget.c:304
-#| msgid "Select the device type to filter above list"
+#: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "ഏതു് തരം ഉപകരണം ഫില്‍റ്റര്‍ ചെയ്യേണമെന്നു് തെരഞ്ഞെടുക്കുക"
 
-#: ../lib/bluetooth-filter-widget.c:310
-#| msgid "Input devices (mice, keyboards, ...)"
+#: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "ഇന്‍പുട്ട് ഉപകരണങ്ങള്‍ (മൌസുകള്‍, കീബോര്‍ഡുകള്‍ മുതലായവ)"
 
-#: ../lib/bluetooth-filter-widget.c:314
+#: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "ഹെഡ്ഫോണുകള്‍, ഹെഡ്സെറ്റുകള്‍, മറ്റു് ശബ്ദോപകരണങ്ങള്‍"
 
-#: ../lib/plugins/geoclue.c:162
+#: ../lib/bluetooth-utils.c:59
+msgid "All types"
+msgstr "എല്ലാ തരങ്ങളും"
+
+#: ../lib/bluetooth-utils.c:61
+msgid "Phone"
+msgstr "ഫോണ്‍"
+
+#: ../lib/bluetooth-utils.c:63
+msgid "Modem"
+msgstr "മോഡം"
+
+#: ../lib/bluetooth-utils.c:65
+msgid "Computer"
+msgstr "കമ്പ്യൂട്ടര്‍"
+
+#: ../lib/bluetooth-utils.c:67
+msgid "Network"
+msgstr "ശൃംഖല"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:70
+msgid "Headset"
+msgstr "ഹെഡ്‌സെറ്റ്"
+
+#: ../lib/bluetooth-utils.c:72
+msgid "Headphones"
+msgstr "ഹെഡ്‌ഫോണുകള്‍"
+
+#: ../lib/bluetooth-utils.c:74
+msgid "Audio device"
+msgstr "ശബ്ദോപകരണം"
+
+#: ../lib/bluetooth-utils.c:76
+msgid "Keyboard"
+msgstr "കീ ബോര്‍ഡ്‌"
+
+#: ../lib/bluetooth-utils.c:78
+msgid "Mouse"
+msgstr "മൌസ്"
+
+#: ../lib/bluetooth-utils.c:80
+msgid "Camera"
+msgstr "ക്യാമറ"
+
+#: ../lib/bluetooth-utils.c:82
+msgid "Printer"
+msgstr "പ്രിന്റര്‍"
+
+#: ../lib/bluetooth-utils.c:84
+msgid "Joypad"
+msgstr "ജോയ് പാഡ്"
+
+#: ../lib/bluetooth-utils.c:86
+msgid "Tablet"
+msgstr "ടാബ്ലെറ്റ്‌"
+
+#: ../lib/bluetooth-utils.c:88
+msgid "Video device"
+msgstr "ചലച്ചിത്രോപകരണം"
+
+#: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
 msgstr "ഭൂസ്ഥാന സേവനങ്ങള്‍ക്കായി ഈ ജിപിഎസ് ഉപകരണം ഉപയോഗിക്കുക"
 
@@ -181,97 +171,86 @@ msgstr "ഭൂസ്ഥാന സേവനങ്ങള്‍ക്കായി �
 #. * This is in a test plugin, please make sure you add the "(test)" part,
 #. * or leave untranslated
 #: ../lib/plugins/test.c:53
-#| msgid "Access the Internet using your mobile phone (test)"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "നിങ്ങളുടെ മൊബൈല്‍ ഫോണുപയോഗിച്ചു് ഇന്റര്‍നെറ്റ് ലഭ്യമാക്കുക (പരീക്ഷണം)"
 
-#: ../applet/main.c:140
-msgid "Select Device to Browse"
-msgstr "ഏതു് ഉപകരണത്തില്‍ നോക്കണം"
-
-#: ../applet/main.c:144
-msgid "_Browse"
-msgstr "_നോക്കുക"
-
-#: ../applet/main.c:153
-msgid "Select device to browse"
-msgstr "ഏതു് ഉപകരണത്തില്‍ നോക്കണം"
-
-#: ../applet/main.c:332 ../properties/properties-adapter-off.ui.h:1
-msgid "Turn On Bluetooth"
+#: ../applet/main.c:230
+#| msgid "Turn On Bluetooth"
+msgid "Turn on Bluetooth"
 msgstr "ബ്ലൂടൂത് ഓണ്‍ ചെയ്യുക"
 
-#: ../applet/main.c:333
+#: ../applet/main.c:231 ../applet/notify.c:159
 msgid "Bluetooth: Off"
 msgstr "ബ്ലൂടൂത്: ഓഫ്"
 
-#: ../applet/main.c:336
-msgid "Turn Off Bluetooth"
+#: ../applet/main.c:234
+#| msgid "Turn Off Bluetooth"
+msgid "Turn off Bluetooth"
 msgstr "ബ്ലൂടൂത് ഓഫ് ചെയ്യുക"
 
-#: ../applet/main.c:337
+#: ../applet/main.c:235 ../applet/notify.c:159
 msgid "Bluetooth: On"
 msgstr "ബ്ലൂടൂത്: ഓണ്‍"
 
-#: ../applet/main.c:342 ../applet/notify.c:150
+#: ../applet/main.c:240
 msgid "Bluetooth: Disabled"
 msgstr "ബ്ലൂടൂത്: പ്രവര്‍ത്തന രഹിതം"
 
-#: ../applet/main.c:493
+#: ../applet/main.c:387
 msgid "Disconnecting..."
 msgstr "വിഛേദിക്കുന്നു..."
 
-#: ../applet/main.c:496 ../sendto/main.c:217 ../sendto/main.c:314
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "ബന്ധിപ്പിയ്ക്കുന്നു..."
 
-#: ../applet/main.c:499 ../applet/main.c:840
+#: ../applet/main.c:393 ../applet/main.c:676
 msgid "Connected"
 msgstr "ബന്ധപ്പെട്ടു"
 
-#: ../applet/main.c:502 ../applet/main.c:840
+#: ../applet/main.c:396 ../applet/main.c:676
 msgid "Disconnected"
 msgstr "വിഛേദിച്ചു"
 
-#: ../applet/main.c:858 ../applet/main.c:922 ../properties/adapter.c:371
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Disconnect"
 msgstr "വിഛേദിക്കുക"
 
-#: ../applet/main.c:858 ../applet/main.c:922
+#: ../applet/main.c:694 ../applet/main.c:758
 msgid "Connect"
 msgstr "ബന്ധിപ്പിയ്ക്കുക"
 
-#: ../applet/main.c:871
+#: ../applet/main.c:707
 msgid "Send files..."
 msgstr "ഫയലുകള്‍ അയയ്ക്കുക..."
 
-#: ../applet/main.c:881
+#: ../applet/main.c:717
 msgid "Browse files..."
 msgstr "ഫയലുകള്‍ നോക്കുക..."
 
-#: ../applet/main.c:892
-msgid "Open Keyboard Preferences..."
-msgstr "കീബോര്‍ഡ് മുന്‍ഗണനകള്‍ തുറക്കുക..."
+#: ../applet/main.c:728
+#| msgid "Keyboard"
+msgid "Keyboard Settings"
+msgstr "കീ ബോര്‍ഡ്‌ സജ്ജീകരണങ്ങള്‍"
 
-#: ../applet/main.c:900
-msgid "Open Mouse Preferences..."
-msgstr "മൌസ് മുന്‍ഗണനകള്‍ തുറക്കുക..."
+#: ../applet/main.c:736
+msgid "Mouse and Touchpad Settings"
+msgstr "മൌസും ടച്ച്പാഡ് ക്രമീകരണങ്ങളും"
 
-#: ../applet/main.c:910
-#| msgid "Open Mouse Preferences..."
-msgid "Open Sound Preferences..."
-msgstr "ശബ്ദ മുന്‍ഗണനകള്‍ തുറക്കുക..."
+#: ../applet/main.c:746
+msgid "Sound Settings"
+msgstr "ശബ്ദ ക്രമീകരണങ്ങള്‍"
 
-#: ../applet/main.c:1037
+#: ../applet/main.c:799
 msgid "Debug"
 msgstr "പിഴവു് തിരുത്തുക"
 
 #. Parse command-line options
-#: ../applet/main.c:1057
+#: ../applet/main.c:818
 msgid "- Bluetooth applet"
 msgstr "- ബ്ലൂടൂത് ലഘുപ്രയോഗം"
 
-#: ../applet/main.c:1062
+#: ../applet/main.c:823
 #, c-format
 msgid ""
 "%s\n"
@@ -280,82 +259,72 @@ msgstr ""
 "%s\n"
 "ലഭ്യമായ കമാന്‍ഡ് ലൈന്‍ ഐച്ഛികങ്ങള്‍ക്കായി '%s --help' പ്രവര്‍ത്തിപ്പിയ്ക്കുക.\n"
 
-#: ../applet/main.c:1079
+#: ../applet/main.c:849
 msgid "Bluetooth Applet"
 msgstr "ബ്ലൂടൂത് ലഘുപ്രയോഗം"
 
-#. Power switch
-#. Translators: This string appears next to a toggle switch which controls
-#. * enabling/disabling Bluetooth radio's on the device. Akin to the power
-#. * switches in the Network UI of Moblin
-#: ../applet/notify.c:115 ../properties/bluetooth-properties.desktop.in.in.h:1
-#: ../moblin/moblin-panel.c:1455
+#: ../applet/notify.c:122
 msgid "Bluetooth"
 msgstr "ബ്ലൂടൂത്"
 
-#: ../applet/notify.c:150
-msgid "Bluetooth: Enabled"
-msgstr "ബ്ലൂടൂത്: പ്രവര്‍ത്തന സജ്ജം"
-
-#: ../applet/agent.c:251 ../applet/agent.c:332
+#: ../applet/agent.c:196 ../applet/agent.c:265
 #, c-format
 msgid "Device '%s' wants to pair with this computer"
 msgstr "'%s' ഉപകരണത്തിനു് ഈ കമ്പ്യൂട്ടറുമായി ജോടി ചേരണം"
 
-#: ../applet/agent.c:257
+#: ../applet/agent.c:202
 #, c-format
 msgid "Please enter the PIN mentioned on device %s."
 msgstr "%s ഉപകരണത്തില്‍ പറഞ്ഞിരിക്കുന്ന പിന്‍ ദയവായി നല്‍കുക."
 
-#: ../applet/agent.c:339
+#: ../applet/agent.c:272
 #, c-format
 msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgstr "'%s' എന്ന പിന്‍ %s ഉപകരണത്തിലുള്ളതുമായി ചേരുന്നു എന്നു് ദയവായി ഉറപ്പാക്കുക."
 
 #. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:385
+#: ../applet/agent.c:314
 #, c-format
 msgid "Grant access to '%s'"
 msgstr "'%s'-നു് അനുവാദം നല്‍കുക"
 
-#: ../applet/agent.c:390
+#: ../applet/agent.c:319
 #, c-format
 msgid "Device %s wants access to the service '%s'."
 msgstr "%s ഉപകരണത്തിനു് '%s' സേവനത്തിനുള്ള അനുവാദം ആവശ്യമുണ്ടു്."
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:496 ../applet/agent.c:531 ../applet/agent.c:573
+#: ../applet/agent.c:369
 #, c-format
 msgid "Pairing request for '%s'"
 msgstr "'%s'-നുള്ള ജോടി ആവശ്യപ്പെടുന്നു"
 
-#: ../applet/agent.c:500 ../applet/agent.c:535 ../applet/agent.c:577
-#: ../applet/agent.c:618 ../applet/agent.c:656
+#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
 msgid "Bluetooth device"
 msgstr "ബ്ലൂടൂത് ഉപകരണം"
 
-#: ../applet/agent.c:501 ../applet/agent.c:536 ../applet/agent.c:578
+#: ../applet/agent.c:372
 msgid "Enter PIN"
 msgstr "പിന്‍ നല്‍കുക"
 
 #. translators: this is a popup telling you a particular device
 #. * has asked for pairing
-#: ../applet/agent.c:608
+#: ../applet/agent.c:396
 #, c-format
 msgid "Pairing confirmation for '%s'"
 msgstr "'%s'-നുള്ള ജോടി ഉറപ്പിക്കല്‍"
 
-#: ../applet/agent.c:619
+#: ../applet/agent.c:405
 msgid "Verify PIN"
 msgstr "പിന്‍ ഉറപ്പാക്കുക"
 
-#: ../applet/agent.c:652
+#: ../applet/agent.c:432
 #, c-format
 msgid "Authorization request from '%s'"
 msgstr "'%s' അനുവാദം ചോദിയ്ക്കുന്നു"
 
-#: ../applet/agent.c:657
+#: ../applet/agent.c:435
 msgid "Check authorization"
 msgstr "അനുവാദം പരിശോധിക്കുക"
 
@@ -372,45 +341,37 @@ msgid "Bluetooth: Checking"
 msgstr "ബ്ലൂടൂത്: പരിശോധിക്കുന്നു"
 
 #: ../applet/popup-menu.ui.h:2
-msgid "Browse files on device..."
-msgstr "ഉപകരണത്തില്‍ ഫയലുകള്‍ക്കായി നോക്കുക..."
+msgid "Visible"
+msgstr "കാണാവുന്ന"
 
-#: ../applet/popup-menu.ui.h:3 ../properties/adapter.c:330
-#: ../moblin/moblin-panel.c:1297 ../moblin/moblin-panel.c:1385
-msgid "Devices"
-msgstr "ഉപകരണങ്ങള്‍"
-
-#: ../applet/popup-menu.ui.h:4
-msgid "Preferences"
-msgstr "മുന്‍ഗണനകള്‍"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Quit"
-msgstr "പുറത്തു് കടക്കുക"
-
-#: ../applet/popup-menu.ui.h:6
+#: ../applet/popup-menu.ui.h:3
 msgid "Send files to device..."
 msgstr "ഉപകരണത്തിലേക്ക് ഫയലുകള്‍ അയയ്ക്കുക..."
 
-#: ../applet/popup-menu.ui.h:7
+#: ../applet/popup-menu.ui.h:5
 msgid "Set up new device..."
 msgstr "പുതിയ ഉപകരണം സജ്ജമാക്കുക..."
 
-#: ../applet/popup-menu.ui.h:8
-msgid "Visible"
-msgstr "കാണാവുന്ന"
+#: ../applet/popup-menu.ui.h:6
+#| msgid "Bluetooth: Checking"
+msgid "Bluetooth Settings"
+msgstr "ബ്ലൂടൂത് സജ്ജീകരണങ്ങള്‍"
+
+#: ../applet/popup-menu.ui.h:7
+msgid "Quit"
+msgstr "പുറത്തു് കടക്കുക"
 
 #: ../applet/authorisation-dialogue.ui.h:1
 msgid "_Always grant access"
 msgstr "_എപ്പോഴും കയറുവാന്‍ അനുവാദം നല്‍കുക"
 
 #: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Grant"
-msgstr "_അനുമതി നല്‍കുക"
-
-#: ../applet/authorisation-dialogue.ui.h:3
 msgid "_Reject"
 msgstr "_നിഷേധിക്കുക"
+
+#: ../applet/authorisation-dialogue.ui.h:3
+msgid "_Grant"
+msgstr "_അനുമതി നല്‍കുക"
 
 #: ../applet/confirm-dialogue.ui.h:1
 msgid "_Does not match"
@@ -424,102 +385,21 @@ msgstr "_പൊരുത്തപ്പെട്ടു"
 msgid "_Show input"
 msgstr "ഇന്‍പുട്ട് _കാണിക്കുക"
 
-#: ../properties/main.c:91
-msgid "Cannot start \"Personal File Sharing\" Preferences"
-msgstr "\"സ്വകാര്യ ഫയല്‍ പങ്കിടലിനുള്ള\" മുന്‍ഗണനകള്‍ തുടങ്ങാന്‍ സാധിച്ചില്ല"
-
-#: ../properties/main.c:96
-msgid ""
-"Please verify that the \"Personal File Sharing\" program is correctly "
-"installed."
-msgstr "ദയവായി \"സ്വാര്യ ഫയല്‍ പങ്കിടലിനുള്ള\" പ്രോഗ്രാം ശരിയായി ഇന്‍സ്റ്റോള്‍ ചെയ്തിട്ടുണ്ടെന്നുറപ്പാക്കുക."
-
-#: ../properties/main.c:125
-msgid "Bluetooth Preferences"
-msgstr "ബ്ലൂടൂത് മുന്‍ഗണനകള്‍"
-
-#: ../properties/main.c:140
-msgid "_Show Bluetooth icon"
-msgstr "ബ്ലൂടൂത് ചിഹ്നം _കാണിക്കുക"
-
-#: ../properties/main.c:164
-msgid "Receive Files"
-msgstr "ഫയലുകള്‍ സ്വീകരിയ്ക്കുക"
-
-#: ../properties/main.c:212
-msgid "Output a list of currently known devices"
-msgstr "ഇപ്പോള്‍ അറിയാവുന്ന ഉപകരണങ്ങളുടെ പട്ടിക കാണിയ്ക്കുക"
-
-#: ../properties/main.c:250
-msgid "Bluetooth Properties"
-msgstr "ബ്ലൂടൂത് ഗുണഗണങ്ങള്‍"
-
-#. The discoverable checkbox
-#: ../properties/adapter.c:277
-#| msgid "Make computer _discoverable"
-msgid "Make computer _visible"
-msgstr "കമ്പ്യൂട്ടര്‍ _കാണാവുന്നതാക്കുക"
-
-#: ../properties/adapter.c:300
-msgid "Friendly name"
-msgstr "എളുപ്പമുള്ള പേരു്"
-
-#: ../properties/adapter.c:362
-msgid "Set up _new device..."
-msgstr "_പുതിയ ഉപകരണം സജ്ജമാക്കുക..."
-
-#: ../properties/adapter.c:385
-msgid "_Remove"
-msgstr "_നീക്കം ചെയ്യുക"
-
-#: ../properties/adapter.c:661
-msgid "Bluetooth is disabled"
-msgstr "ബ്ലൂടൂത് പ്രവര്‍ത്തന രഹിതമാണു്"
-
-#: ../properties/adapter.c:697
-msgid "No Bluetooth adapters present"
-msgstr "ബ്ലൂടൂത് അഡാപ്ടറുകള്‍ ലഭ്യമല്ല"
-
-#: ../properties/properties-no-adapter.ui.h:1
-msgid "Your computer does not have any Bluetooth adapters plugged in."
-msgstr "നിങ്ങളുടെ കമ്പ്യൂട്ടറില്‍ ബ്ലൂടൂത് അഡാപ്ടറുകള്‍ ലഭ്യമല്ല."
-
-#: ../properties/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "ബ്ലൂടൂത് സജ്ജീകരണങ്ങള്‍ ക്രമീകരിക്കുക"
-
-#: ../properties/bluetooth-manager.schemas.in.h:1
-msgid "Whether to show the notification icon"
-msgstr "അറിയിപ്പിനുള്ള ചിഹ്നം കാണിക്കണമോ എന്നു്"
-
-#: ../properties/bluetooth-manager.schemas.in.h:2
-msgid "Whether to show the notification icon."
-msgstr "അറിയിപ്പിനുള്ള ചിഹ്നം കാണിക്കണമോ എന്നു്."
-
-#: ../properties/gconf-bridge.c:1233
-#, c-format
-msgid "GConf error: %s"
-msgstr "GConf പിശക്: %s"
-
-#: ../properties/gconf-bridge.c:1238
-msgid "All further errors shown only on terminal."
-msgstr "ഇനിയുള്ള പിശകുകള്‍ ടെര്‍മിനലില്‍ മാത്രമേ കാണിക്കുകയുള്ളൂ."
-
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:205 ../wizard/main.c:326
+#: ../wizard/main.c:241 ../wizard/main.c:364
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s'-മായുള്ള ജോടി റദ്ദാക്കിയിരിക്കുന്നു"
 
-#: ../wizard/main.c:245 ../moblin/moblin-panel.c:1049
+#: ../wizard/main.c:282
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "'%s'-ല്‍ കാണിക്കുന്ന പിന്‍ ഇതുമായി പൊരുത്തപ്പെടുന്നു എന്നുറപ്പാക്കുക."
 
-#: ../wizard/main.c:299 ../moblin/moblin-panel.c:1100
+#: ../wizard/main.c:336
 msgid "Please enter the following PIN:"
 msgstr "ദയവായി താഴെ പറയുന്ന പിന്‍ നല്‍കുക:"
 
@@ -527,353 +407,501 @@ msgstr "ദയവായി താഴെ പറയുന്ന പിന്‍ �
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:382
+#: ../wizard/main.c:424
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s' സജ്ജീകരണം പരാജയപ്പെട്ടു"
 
 #. translators:
 #. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset' now...
+#. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:513
+#: ../wizard/main.c:478
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s'-ലേക്ക് കണക്ട് ചെയ്യുന്നു..."
 
-#: ../wizard/main.c:549 ../moblin/moblin-panel.c:658
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "ദയവായി '%s'-ല്‍ ഈ പിന്‍ നല്‍കി കീബോര്‍ഡില്‍ “Enter” അമര്‍ത്തുക:"
-
-#: ../wizard/main.c:551 ../moblin/moblin-panel.c:660
+#: ../wizard/main.c:518
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "ദയവായി '%s'-ല്‍ ഈ പിന്‍ നല്‍കുക:"
+
+#: ../wizard/main.c:521
+#, c-format
+msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "ദയവായി '%s'-ല്‍ ഈ പിന്‍ നല്‍കി കീബോര്‍ഡില്‍ “Enter” അമര്‍ത്തുക:"
+
+#: ../wizard/main.c:526
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr ""
+"താഴെ പറഞ്ഞിരിയ്ക്കുന്ന നിര്‍ദ്ദേശങ്ങള്‍ അനുസരിച്ചു് ദയവായി നിങ്ങളുടെ iCade-നുള്ള ജോസ്ടിക്ക് "
+"നീക്കുക:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:572
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "'%s' ഉപകരണത്തില്‍ സജ്ജീകരണം പൂര്‍ത്തിയാകുന്നതു് വരെ ദയവായി കാത്തിരിക്കുക..."
 
-#: ../wizard/main.c:588 ../moblin/moblin-panel.c:686
+#: ../wizard/main.c:576
 #, c-format
-#| msgid "Successfully setup new device '%s'"
 msgid "Successfully set up new device '%s'"
 msgstr "പുതിയ ഉപകരണം '%s'-ന്റെ സജ്ജീകരണം വിജയിച്ചു"
 
 #: ../wizard/wizard.ui.h:1
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (മിക്ക ഹെഡ്സെറ്റുകള്‍, മൌസുകള്‍, ജിപിഎസ് ഉപകരണങ്ങള്‍)"
-
-#: ../wizard/wizard.ui.h:2
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:3
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:4
 msgid "Bluetooth New Device Setup"
 msgstr "ബ്ലൂടൂത് പുതിയ ഉപകരണ ക്രമീകരണം"
 
-#: ../wizard/wizard.ui.h:5
-#| msgid "Custom PIN code:"
-msgid "Custom PIN:"
-msgstr "പിന്‍ കോഡ് സജ്ജമാക്കുക:"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Device Setup"
-msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Device Setup Failed"
-msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം പരാജയപ്പെട്ടു"
-
-#: ../wizard/wizard.ui.h:8
-msgid "Device search"
-msgstr "ഉപകരണം തെരച്ചില്‍"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:10 ../moblin/moblin-panel.c:1253
-msgid "Does not match"
-msgstr "ചേരുന്നില്ല"
-
-#: ../wizard/wizard.ui.h:11
-msgid "Finishing New Device Setup"
-msgstr "പുതിയ ഉപകരണത്തിന്റെ സജ്ജീകരണം പൂര്‍ത്തിയാകുന്നു"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:13
-msgid "Fixed PIN"
-msgstr "സ്ഥിരമായ പിന്‍"
-
-#: ../wizard/wizard.ui.h:14
-msgid "Introduction"
-msgstr "അവതരണം"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:16 ../moblin/moblin-panel.c:1249
-msgid "Matches"
-msgstr "ചേരുന്നു"
-
-#: ../wizard/wizard.ui.h:17
-msgid "PIN Options"
-msgstr "പിന്‍ ഐച്ഛികങ്ങള്‍"
-
-#: ../wizard/wizard.ui.h:18
+#: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
 msgstr "പിന്‍ _ഐച്ഛികങ്ങള്‍..."
 
-#: ../wizard/wizard.ui.h:19 ../moblin/moblin-panel.c:1163
+#: ../wizard/wizard.ui.h:3
+#| msgid "Device search"
+msgid "Device Search"
+msgstr "ഉപകരണം തെരച്ചില്‍"
+
+#: ../wizard/wizard.ui.h:4
+msgid "Device Setup"
+msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം"
+
+#: ../wizard/wizard.ui.h:5
+#| msgid "Finishing New Device Setup"
+msgid "Finishing Setup"
+msgstr "സജ്ജീകരണം പൂര്‍ത്തിയാകുന്നു"
+
+#: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr "നിങ്ങളുടെ ഉപകരണത്തിനൊപ്പം ഉപയോഗിക്കുവാനുള്ള അധികമായ സേവനങ്ങള്‍ തെരഞ്ഞെടുക്കുക:"
 
-#: ../wizard/wizard.ui.h:20
-msgid "Select the device you want to setup"
-msgstr "നിങ്ങള്‍ക്കു് സജ്ജമാക്കുവാനുള്ള ഉപകരണം തെരഞ്ഞെടുക്കുക"
+#: ../wizard/wizard.ui.h:7
+msgid "Setup Summary"
+msgstr "സജ്ജീകരണ ചുരുക്കം"
 
-#: ../wizard/wizard.ui.h:21
-msgid "Setup Completed"
-msgstr "സജ്ജീകരണം പൂര്‍ത്തിയായി"
+#: ../wizard/wizard.ui.h:8
+msgid "PIN Options"
+msgstr "പിന്‍ ഐച്ഛികങ്ങള്‍"
 
-#: ../wizard/wizard.ui.h:22
-msgid ""
-"The Bluetooth new device setup will walk you through the process of "
-"configuring Bluetooth enabled devices for use with this computer."
-msgstr "ബ്ലൂടൂത് പുതിയ ഉപകരണ സജ്ജീകരണം നിങ്ങളെ ഈ കമ്പ്യൂട്ടറിനൊപ്പം ഉപയോഗിക്കുന്നതിനുള്ള ബ്ലൂടൂത് സജ്ജമായ ഉപകരണങ്ങളുടെ ക്രമീകരണത്തിലൂടെ കൊണ്ടുപോകുന്നു."
-
-#: ../wizard/wizard.ui.h:23
-#| msgid ""
-#| "The device will need to be within 10 meters of your computer, and be "
-#| "&#8220;discoverable&#8221; (sometimes called &#8220;visible&#8221;). "
-#| "Check the device's manual if in doubt."
-msgid ""
-"The device will need to be within 10 meters of your computer, and be "
-"“visible” (sometimes called “discoverable”). Check the device's manual if in "
-"doubt."
-msgstr "ഉപകരണം നിങ്ങളുടെ കമ്പ്യൂട്ടറിന്റെ 10 മീറ്റര്‍ ചുറ്റളവിലുണ്ടായിരിക്കണം, കൂടാതെ “കാണാവുന്നതു്” എന്ന (ചിലപ്പോള്‍ “കാണ്ടുപിടിയ്ക്കാവുന്നതു്” എന്നും വിളിക്കുന്ന) അവസ്ഥയിലായിരിയ്ക്കണം. സംശയമുണ്ടെങ്കില്‍, ഉപകരണത്തിന്റെ മാനുവല്‍ കാണുക."
-
-#: ../wizard/wizard.ui.h:24
-msgid "Welcome to the Bluetooth new device setup"
-msgstr "ബ്ലൂടൂത് പുതിയ ഉപകരണത്തിനുള്ള സജ്ജീകരണത്തിലേക്ക് സ്വാഗതം"
-
-#: ../wizard/wizard.ui.h:25
+#: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
 msgstr "_സ്വയമേയുള്ള പിന്‍ തെരഞ്ഞെടുക്കല്‍"
 
-#: ../wizard/wizard.ui.h:26
-msgid "_Restart Setup"
-msgstr "സജ്ജീകരണം _വീണ്ടും ആരംഭിക്കുക"
+#. Translators: this is a PIN with a set value, such as 1111, or 0000
+#: ../wizard/wizard.ui.h:11
+msgid "Fixed PIN"
+msgstr "സ്ഥിരമായ പിന്‍"
 
-#: ../sendto/main.c:162
+#: ../wizard/wizard.ui.h:12
+msgid "'0000' (most headsets, mice and GPS devices)"
+msgstr "'0000' (മിക്ക ഹെഡ്സെറ്റുകള്‍, മൌസുകള്‍, ജിപിഎസ് ഉപകരണങ്ങള്‍)"
+
+#: ../wizard/wizard.ui.h:13
+msgid "'1111'"
+msgstr "'1111'"
+
+#: ../wizard/wizard.ui.h:14
+msgid "'1234'"
+msgstr "'1234'"
+
+#: ../wizard/wizard.ui.h:15
+#| msgid "Does not match"
+msgid "Do not pair"
+msgstr "ചേര്‍ക്കുവാന്‍ പാടില്ല"
+
+#: ../wizard/wizard.ui.h:16
+msgid "Custom PIN:"
+msgstr "പിന്‍ കോഡ് സജ്ജമാക്കുക:"
+
+#: ../wizard/wizard.ui.h:17
+msgid "_Try Again"
+msgstr "വീണ്ടും ശ്രമിയ്ക്കു_ക"
+
+#: ../wizard/wizard.ui.h:18
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "പു_റത്തു് കടക്കുക"
+
+#: ../wizard/wizard.ui.h:19
+msgid "_Cancel"
+msgstr "_റദ്ദാക്കുക"
+
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:21
+msgid "Does not match"
+msgstr "ചേരുന്നില്ല"
+
+#. This is a button to answer: Does the PIN matches the one on the device?
+#: ../wizard/wizard.ui.h:23
+msgid "Matches"
+msgstr "ചേരുന്നു"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
+#| msgid "Bluetooth New Device Setup"
+msgid "Bluetooth Device Setup"
+msgstr "ബ്ലൂടൂത് ഉപകരണ ക്രമീകരണം"
+
+#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
+#| msgid "Bluetooth device"
+msgid "Setup Bluetooth devices"
+msgstr "ബ്ലൂടൂത് ഉപകരണങ്ങള്‍ സജ്ജമാക്കുക"
+
+#: ../sendto/main.c:151
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d സെക്കന്‍ഡ്"
 msgstr[1] "%'d സെക്കന്‍ഡുകള്‍"
 
-#: ../sendto/main.c:167 ../sendto/main.c:180
+#: ../sendto/main.c:156 ../sendto/main.c:169
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d മിനിറ്റ്"
 msgstr[1] "%'d മിനിറ്റുകള്‍"
 
-#: ../sendto/main.c:178
+#: ../sendto/main.c:167
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d മണിക്കൂര്‍"
 msgstr[1] "%'d മണിക്കൂറുകള്‍"
 
-#: ../sendto/main.c:188
+#: ../sendto/main.c:177
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ഏകദേശം %'d മണിക്കൂര്‍"
 msgstr[1] "ഏകദേശം %'d മണിക്കൂറുകള്‍"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "ഫയല്‍ ഇടപാടു്"
 
-#: ../sendto/main.c:253
-#| msgid "_Reject"
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_വീണ്ടും ശ്രമിയ്ക്കുക"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:273
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "ബ്ലൂടൂത് വഴി ഫയലുകള്‍ അയയ്ക്കുന്നു"
 
-#: ../sendto/main.c:285
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "എവിടെ നിന്നു്:"
 
-#: ../sendto/main.c:298
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "എങ്ങോട്ട്:"
 
-#: ../sendto/main.c:343 ../sendto/main.c:359
-#| msgid "An unknown error occured"
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "അപരിചിതമായ പിശകുണ്ടായി"
 
-#: ../sendto/main.c:352
+#: ../sendto/main.c:332
+#| msgid ""
+#| "Make sure that remote device is switched on and that it accepts Bluetooth "
+#| "connections"
 msgid ""
-"Make sure that remote device is switched on and that it accepts Bluetooth "
-"connections"
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
 msgstr "വിദൂര ഉപകരണങ്ങള്‍ ഓണ്‍ ആണെന്നും അതു് ബ്ലൂടൂത് കണക്ഷനുകള്‍ സ്വീകരിക്കുന്നെന്നും ഉറപ്പാക്കുക."
 
-#: ../sendto/main.c:450
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "%s അയയ്ക്കുന്നു"
 
-#: ../sendto/main.c:457 ../sendto/main.c:523
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%2$d ഫയലിലെ %1$d അയയ്ക്കുന്നു"
 
-#: ../sendto/main.c:519
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
-msgstr "%d KB/s"
+#| msgid "%d B/s"
+msgid "%d kB/s"
+msgstr "%d kB/s"
 
-#: ../sendto/main.c:521
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:641
-msgid "Select Device to Send To"
+#: ../sendto/main.c:639
+#| msgid "Select Device to Send To"
+msgid "Select device to send to"
 msgstr "അയയ്ക്കുവാനുള്ള ഉപകരണം തെരഞ്ഞെടുക്കുക"
 
-#: ../sendto/main.c:645
-msgid "Send _To"
-msgstr "_എങ്ങോട്ട് അയയ്ക്കണം"
+#: ../sendto/main.c:644
+#| msgid "Send _To"
+msgid "_Send"
+msgstr "_അയയ്ക്കുക"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "അയയ്ക്കുവാനുള്ള ഫയലുകള്‍ തെരഞ്ഞെടുക്കുക"
 
-#: ../sendto/main.c:716
+#: ../sendto/main.c:691
+#| msgid "_Reject"
+msgid "Select"
+msgstr "തെ_രഞ്ഞെടുക്കുക"
+
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "ഉപയോഗത്തിനുള്ള വിദൂര ഉപകരണം"
 
-#: ../sendto/main.c:718
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "വിലാസം"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "വിദൂരത്തുള്ള ഉപകരണത്തിന്റെ പേരു്"
 
-#: ../sendto/nautilus-sendto-plugin.c:172
-msgid "Programming error, could not find the device in the list"
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "പേരു്"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[ഫയല്‍...]"
+
+#: ../sendto/nautilus-sendto-plugin.c:168
+#| msgid "Programming error, could not find the device in the list"
+msgid "Programming error: could not find the device in the list"
 msgstr "പ്രോഗ്രാമിങ്ങിലെ പിശകു്, പട്ടികയില്‍ ഉപകരണം കണ്ടുപിടിയ്ക്കാന്‍ സാധിച്ചില്ല"
 
-#: ../sendto/nautilus-sendto-plugin.c:247
+#: ../sendto/nautilus-sendto-plugin.c:243
 #, c-format
-msgid "Obex Push file transfer unsupported"
+#| msgid "Obex Push file transfer unsupported"
+msgid "OBEX Push file transfer unsupported"
 msgstr "ഒബെക്സ് പുഷ് ഫയല്‍ ഇടപാടു് പിന്തുണയ്ക്കുന്നില്ല"
 
-#: ../sendto/nautilus-sendto-plugin.c:266
-#| msgid "Bluetooth: On"
+#: ../sendto/nautilus-sendto-plugin.c:262
 msgid "Bluetooth (OBEX Push)"
 msgstr "ബ്ലൂടൂത് (ഒബെക്സ് പുഷ്)"
 
-#: ../moblin/main.c:86
-msgid "Run in standalone mode"
-msgstr "ഒറ്റയ്ക്കുള്ള ദശയില്‍ പ്രവര്‍ത്തിപ്പിയ്ക്കുക"
-
-#: ../moblin/main.c:94 ../moblin/bluetooth-panel.desktop.in.in.h:2
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 #| msgid "Bluetooth Manager"
-msgid "Moblin Bluetooth Panel"
-msgstr "മോബ്ലിന്‍ ബ്ലൂടൂത് പാളി"
+msgid "Bluetooth Transfer"
+msgstr "ബ്ലൂടൂത് പാലകന്‍"
 
-#: ../moblin/main.c:95
-#| msgid "- Bluetooth applet"
-msgid "- Moblin Bluetooth Panel"
-msgstr "- മോബ്ലിന്‍ ബ്ലൂടൂത് പാളി"
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+#| msgid "Sending files via Bluetooth"
+msgid "Send files via Bluetooth"
+msgstr "ബ്ലൂടൂത് വഴി ഫയലുകള്‍ അയയ്ക്കുക"
 
-#: ../moblin/main.c:122
-#| msgid "Bluetooth"
-msgid "bluetooth"
-msgstr "ബ്ലൂടൂത്"
+#~ msgid "Remove '%s' from the list of devices?"
+#~ msgstr "ഉപകരണങ്ങളുടെ പട്ടികയില്‍ നിന്നും '%s' നീക്കം ചെയ്യുക?"
 
-#: ../moblin/moblin-panel.c:533
-#, c-format
-#| msgid "Pairing with '%s' cancelled"
-msgid "Pairing with %s failed."
-msgstr "'%s'-മായുള്ള ജോടി പരാജയപ്പെട്ടു."
+#~ msgid ""
+#~ "If you remove the device, you will have to set it up again before next "
+#~ "use."
+#~ msgstr ""
+#~ "നിങ്ങള്‍ ഉപകരണം നീക്കം ചെയ്താല്‍, അടുത്ത തവണ ഉപയോഗിക്കുന്നതിനു് മുമ്പു് അതു് വീണ്ടും സജ്ജമാക്കണം."
 
-#: ../moblin/moblin-panel.c:895
-msgid "<u>Pair</u>"
-msgstr "<u>ജോടി</u>"
+#~| msgid "Show Only Bluetooth Devices With..."
+#~ msgid "<b>Show Only Bluetooth Devices With...</b>"
+#~ msgstr "<b>ബ്ലൂടൂത് ഉപകരണങ്ങള്‍ മാത്രം കാണിക്കുക...</b>"
 
-#: ../moblin/moblin-panel.c:909
-#| msgid "Connect"
-msgid "<u>Connect</u>"
-msgstr "<u>ബന്ധിയ്ക്കുക</u>"
+#~ msgid "Select Device to Browse"
+#~ msgstr "ഏതു് ഉപകരണത്തില്‍ നോക്കണം"
 
-#: ../moblin/moblin-panel.c:928
-#| msgid "_Browse"
-msgid "<u>Browse</u>"
-msgstr "<u>നോക്കുക</u>"
+#~ msgid "_Browse"
+#~ msgstr "_നോക്കുക"
 
-#: ../moblin/moblin-panel.c:1122
-#| msgid "Device Setup Failed"
-msgid "Device setup failed"
-msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം പരാജയപ്പെട്ടു"
+#~ msgid "Select device to browse"
+#~ msgstr "ഏതു് ഉപകരണത്തില്‍ നോക്കണം"
 
-#. Back button
-#: ../moblin/moblin-panel.c:1136 ../moblin/moblin-panel.c:1212
-#: ../moblin/moblin-panel.c:1261 ../moblin/moblin-panel.c:1323
-#: ../moblin/moblin-panel.c:1540
-#| msgid "Bluetooth device"
-msgid "Back to devices"
-msgstr "ഉപകരണങ്ങളിലേയ്ക്കു് തിരിച്ചു് പോകുക"
+#~ msgid "Open Keyboard Preferences..."
+#~ msgstr "കീബോര്‍ഡ് മുന്‍ഗണനകള്‍ തുറക്കുക..."
 
-#: ../moblin/moblin-panel.c:1175
-#| msgid "Phone"
-msgid "Done"
-msgstr "തീര്‍ന്നു"
+#~ msgid "Open Mouse Preferences..."
+#~ msgstr "മൌസ് മുന്‍ഗണനകള്‍ തുറക്കുക..."
 
-#: ../moblin/moblin-panel.c:1196 ../moblin/moblin-panel.c:1233
-#| msgid "Device Setup"
-msgid "Device setup"
-msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം"
+#~| msgid "Open Mouse Preferences..."
+#~ msgid "Open Sound Preferences..."
+#~ msgstr "ശബ്ദ മുന്‍ഗണനകള്‍ തുറക്കുക..."
 
-#: ../moblin/moblin-panel.c:1344
-msgid "Only show:"
-msgstr "ഇവ മാത്രം കാണിയ്ക്കുക:"
+#~ msgid "Bluetooth: Enabled"
+#~ msgstr "ബ്ലൂടൂത്: പ്രവര്‍ത്തന സജ്ജം"
 
-#. Button for PIN options file
-#: ../moblin/moblin-panel.c:1350
-#| msgid "PIN Options"
-msgid "PIN options"
-msgstr "പിന്‍ ഐച്ഛികങ്ങള്‍"
+#~ msgid "Browse files on device..."
+#~ msgstr "ഉപകരണത്തില്‍ ഫയലുകള്‍ക്കായി നോക്കുക..."
 
-#. Add new button
-#: ../moblin/moblin-panel.c:1433
-#| msgid "Set up new device..."
-msgid "Add a new device"
-msgstr "പുതിയ ഉപകരണം ചേര്‍ക്കുക..."
+#~ msgid "Preferences"
+#~ msgstr "മുന്‍ഗണനകള്‍"
 
-#. Button for Send file
-#: ../moblin/moblin-panel.c:1500
-msgid "Send file from your computer"
-msgstr "നിങ്ങളുടെ കമ്പ്യൂട്ടറില്‍ നിന്നും ഫയല്‍ അയയ്ക്കുക"
+#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
+#~ msgstr "\"സ്വകാര്യ ഫയല്‍ പങ്കിടലിനുള്ള\" മുന്‍ഗണനകള്‍ തുടങ്ങാന്‍ സാധിച്ചില്ല"
 
-#: ../moblin/bluetooth-panel.desktop.in.in.h:1
-#| msgid "Bluetooth Manager applet"
-msgid "Bluetooth Manager Panel"
-msgstr "ബ്ലൂടൂത് പാലകന്റെ ലഘുപ്രയോഗം"
+#~ msgid ""
+#~ "Please verify that the \"Personal File Sharing\" program is correctly "
+#~ "installed."
+#~ msgstr ""
+#~ "ദയവായി \"സ്വാര്യ ഫയല്‍ പങ്കിടലിനുള്ള\" പ്രോഗ്രാം ശരിയായി ഇന്‍സ്റ്റോള്‍ "
+#~ "ചെയ്തിട്ടുണ്ടെന്നുറപ്പാക്കുക."
+
+#~ msgid "Bluetooth Preferences"
+#~ msgstr "ബ്ലൂടൂത് മുന്‍ഗണനകള്‍"
+
+#~ msgid "_Show Bluetooth icon"
+#~ msgstr "ബ്ലൂടൂത് ചിഹ്നം _കാണിക്കുക"
+
+#~ msgid "Receive Files"
+#~ msgstr "ഫയലുകള്‍ സ്വീകരിയ്ക്കുക"
+
+#~ msgid "Output a list of currently known devices"
+#~ msgstr "ഇപ്പോള്‍ അറിയാവുന്ന ഉപകരണങ്ങളുടെ പട്ടിക കാണിയ്ക്കുക"
+
+#~ msgid "Bluetooth Properties"
+#~ msgstr "ബ്ലൂടൂത് ഗുണഗണങ്ങള്‍"
+
+#~| msgid "Make computer _discoverable"
+#~ msgid "Make computer _visible"
+#~ msgstr "കമ്പ്യൂട്ടര്‍ _കാണാവുന്നതാക്കുക"
+
+#~ msgid "Friendly name"
+#~ msgstr "എളുപ്പമുള്ള പേരു്"
+
+#~ msgid "Set up _new device..."
+#~ msgstr "_പുതിയ ഉപകരണം സജ്ജമാക്കുക..."
+
+#~ msgid "_Remove"
+#~ msgstr "_നീക്കം ചെയ്യുക"
+
+#~ msgid "Bluetooth is disabled"
+#~ msgstr "ബ്ലൂടൂത് പ്രവര്‍ത്തന രഹിതമാണു്"
+
+#~ msgid "No Bluetooth adapters present"
+#~ msgstr "ബ്ലൂടൂത് അഡാപ്ടറുകള്‍ ലഭ്യമല്ല"
+
+#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
+#~ msgstr "നിങ്ങളുടെ കമ്പ്യൂട്ടറില്‍ ബ്ലൂടൂത് അഡാപ്ടറുകള്‍ ലഭ്യമല്ല."
+
+#~ msgid "Configure Bluetooth settings"
+#~ msgstr "ബ്ലൂടൂത് സജ്ജീകരണങ്ങള്‍ ക്രമീകരിക്കുക"
+
+#~ msgid "Whether to show the notification icon"
+#~ msgstr "അറിയിപ്പിനുള്ള ചിഹ്നം കാണിക്കണമോ എന്നു്"
+
+#~ msgid "Whether to show the notification icon."
+#~ msgstr "അറിയിപ്പിനുള്ള ചിഹ്നം കാണിക്കണമോ എന്നു്."
+
+#~ msgid "GConf error: %s"
+#~ msgstr "GConf പിശക്: %s"
+
+#~ msgid "All further errors shown only on terminal."
+#~ msgstr "ഇനിയുള്ള പിശകുകള്‍ ടെര്‍മിനലില്‍ മാത്രമേ കാണിക്കുകയുള്ളൂ."
+
+#~ msgid "Device Setup Failed"
+#~ msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം പരാജയപ്പെട്ടു"
+
+#~ msgid "Introduction"
+#~ msgstr "അവതരണം"
+
+#~ msgid "Select the device you want to setup"
+#~ msgstr "നിങ്ങള്‍ക്കു് സജ്ജമാക്കുവാനുള്ള ഉപകരണം തെരഞ്ഞെടുക്കുക"
+
+#~ msgid "Setup Completed"
+#~ msgstr "സജ്ജീകരണം പൂര്‍ത്തിയായി"
+
+#~ msgid ""
+#~ "The Bluetooth new device setup will walk you through the process of "
+#~ "configuring Bluetooth enabled devices for use with this computer."
+#~ msgstr ""
+#~ "ബ്ലൂടൂത് പുതിയ ഉപകരണ സജ്ജീകരണം നിങ്ങളെ ഈ കമ്പ്യൂട്ടറിനൊപ്പം ഉപയോഗിക്കുന്നതിനുള്ള ബ്ലൂടൂത് "
+#~ "സജ്ജമായ ഉപകരണങ്ങളുടെ ക്രമീകരണത്തിലൂടെ കൊണ്ടുപോകുന്നു."
+
+#~| msgid ""
+#~| "The device will need to be within 10 meters of your computer, and be "
+#~| "&#8220;discoverable&#8221; (sometimes called &#8220;visible&#8221;). "
+#~| "Check the device's manual if in doubt."
+#~ msgid ""
+#~ "The device will need to be within 10 meters of your computer, and be "
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
+#~ "in doubt."
+#~ msgstr ""
+#~ "ഉപകരണം നിങ്ങളുടെ കമ്പ്യൂട്ടറിന്റെ 10 മീറ്റര്‍ ചുറ്റളവിലുണ്ടായിരിക്കണം, കൂടാതെ “കാണാവുന്നതു്” "
+#~ "എന്ന (ചിലപ്പോള്‍ “കാണ്ടുപിടിയ്ക്കാവുന്നതു്” എന്നും വിളിക്കുന്ന) അവസ്ഥയിലായിരിയ്ക്കണം. "
+#~ "സംശയമുണ്ടെങ്കില്‍, ഉപകരണത്തിന്റെ മാനുവല്‍ കാണുക."
+
+#~ msgid "Welcome to the Bluetooth new device setup"
+#~ msgstr "ബ്ലൂടൂത് പുതിയ ഉപകരണത്തിനുള്ള സജ്ജീകരണത്തിലേക്ക് സ്വാഗതം"
+
+#~ msgid "_Restart Setup"
+#~ msgstr "സജ്ജീകരണം _വീണ്ടും ആരംഭിക്കുക"
+
+#~ msgid "%d KB/s"
+#~ msgstr "%d KB/s"
+
+#~ msgid "Run in standalone mode"
+#~ msgstr "ഒറ്റയ്ക്കുള്ള ദശയില്‍ പ്രവര്‍ത്തിപ്പിയ്ക്കുക"
+
+#~| msgid "Bluetooth Manager"
+#~ msgid "Moblin Bluetooth Panel"
+#~ msgstr "മോബ്ലിന്‍ ബ്ലൂടൂത് പാളി"
+
+#~| msgid "- Bluetooth applet"
+#~ msgid "- Moblin Bluetooth Panel"
+#~ msgstr "- മോബ്ലിന്‍ ബ്ലൂടൂത് പാളി"
+
+#~| msgid "Bluetooth"
+#~ msgid "bluetooth"
+#~ msgstr "ബ്ലൂടൂത്"
+
+#~| msgid "Pairing with '%s' cancelled"
+#~ msgid "Pairing with %s failed."
+#~ msgstr "'%s'-മായുള്ള ജോടി പരാജയപ്പെട്ടു."
+
+#~ msgid "<u>Pair</u>"
+#~ msgstr "<u>ജോടി</u>"
+
+#~| msgid "Connect"
+#~ msgid "<u>Connect</u>"
+#~ msgstr "<u>ബന്ധിയ്ക്കുക</u>"
+
+#~| msgid "_Browse"
+#~ msgid "<u>Browse</u>"
+#~ msgstr "<u>നോക്കുക</u>"
+
+#~| msgid "Device Setup Failed"
+#~ msgid "Device setup failed"
+#~ msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം പരാജയപ്പെട്ടു"
+
+#~| msgid "Bluetooth device"
+#~ msgid "Back to devices"
+#~ msgstr "ഉപകരണങ്ങളിലേയ്ക്കു് തിരിച്ചു് പോകുക"
+
+#~| msgid "Phone"
+#~ msgid "Done"
+#~ msgstr "തീര്‍ന്നു"
+
+#~| msgid "Device Setup"
+#~ msgid "Device setup"
+#~ msgstr "ഉപകരണത്തിന്റെ സജ്ജീകരണം"
+
+#~ msgid "Only show:"
+#~ msgstr "ഇവ മാത്രം കാണിയ്ക്കുക:"
+
+#~| msgid "PIN Options"
+#~ msgid "PIN options"
+#~ msgstr "പിന്‍ ഐച്ഛികങ്ങള്‍"
+
+#~| msgid "Set up new device..."
+#~ msgid "Add a new device"
+#~ msgstr "പുതിയ ഉപകരണം ചേര്‍ക്കുക..."
+
+#~ msgid "Send file from your computer"
+#~ msgstr "നിങ്ങളുടെ കമ്പ്യൂട്ടറില്‍ നിന്നും ഫയല്‍ അയയ്ക്കുക"
+
+#~| msgid "Bluetooth Manager applet"
+#~ msgid "Bluetooth Manager Panel"
+#~ msgstr "ബ്ലൂടൂത് പാലകന്റെ ലഘുപ്രയോഗം"
 
 #~ msgid "A Bluetooth manager for the GNOME desktop"
 #~ msgstr "ഗ്നോം പണിയിടത്തിനുള്ളൊരു ബ്ലൂടൂത് പാലകന്‍"
