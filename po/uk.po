@@ -5,14 +5,15 @@
 # Kyrylo Polezhajev <polezhajev@ukr.net>, 2009.
 # wanderlust <wanderlust@ukr.net>, 2009.
 # Korostil Daniel <ted.korostiled@gmail.com>, 2011, 2012.
+# Daniel Korostil <ted.korostiled@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-18 17:45+0200\n"
-"PO-Revision-Date: 2012-03-18 17:49+0300\n"
-"Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
-"Language-Team: translation@linux.org.ua\n"
+"POT-Creation-Date: 2012-09-26 09:50+0300\n"
+"PO-Revision-Date: 2012-09-26 09:51+0300\n"
+"Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
+"Language-Team: linux.org.ua\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgid "Click to select device..."
 msgstr "Натисніть, щоб вибрати пристрій…"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:89
+#: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Невідомо"
 
@@ -37,19 +38,19 @@ msgstr "Невідомо"
 msgid "No adapters available"
 msgstr "Немає доступних адаптерів"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:802
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
 msgstr "Пошук пристроїв…"
 
-#: ../lib/bluetooth-chooser.c:694 ../lib/bluetooth-chooser.c:983
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Пристрій"
 
-#: ../lib/bluetooth-chooser.c:730
+#: ../lib/bluetooth-chooser.c:732
 msgid "Type"
 msgstr "Тип"
 
-#: ../lib/bluetooth-chooser.c:985 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -105,64 +106,64 @@ msgstr "Пристрої вводу (миша, клавіатура тощо.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Навушники, гарнітури та інші аудіопристрої"
 
-#: ../lib/bluetooth-utils.c:58
+#: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Всі типи"
 
-#: ../lib/bluetooth-utils.c:60
+#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Телефон"
 
-#: ../lib/bluetooth-utils.c:62
+#: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Модем"
 
-#: ../lib/bluetooth-utils.c:64
+#: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#: ../lib/bluetooth-utils.c:66
+#: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Мережа"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:69
+#: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Гарнітура"
 
-#: ../lib/bluetooth-utils.c:71
+#: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Навушники"
 
-#: ../lib/bluetooth-utils.c:73
+#: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Аудіопристрій"
 
-#: ../lib/bluetooth-utils.c:75
+#: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Клавіатура"
 
-#: ../lib/bluetooth-utils.c:77
+#: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Миша"
 
-#: ../lib/bluetooth-utils.c:79
+#: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Камера"
 
-#: ../lib/bluetooth-utils.c:81
+#: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Принтер"
 
-#: ../lib/bluetooth-utils.c:83
+#: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Джойстик"
 
-#: ../lib/bluetooth-utils.c:85
+#: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Планшет"
 
-#: ../lib/bluetooth-utils.c:87
+#: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Відеопристрій"
 
@@ -202,7 +203,7 @@ msgstr "Bluetooth: Недоступно"
 msgid "Disconnecting..."
 msgstr "Роз'єднання…"
 
-#: ../applet/main.c:390 ../sendto/main.c:206 ../sendto/main.c:308
+#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
 msgid "Connecting..."
 msgstr "З'єднання…"
 
@@ -441,12 +442,12 @@ msgstr "Перемістіть джойстик вашого iCade у такі �
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:556
+#: ../wizard/main.c:558
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Дочекайтесь закінчення встановлення пристрою «%s»…"
 
-#: ../wizard/main.c:574
+#: ../wizard/main.c:576
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Пристрій «%s» успішно встановлено"
@@ -468,8 +469,8 @@ msgid "Device Setup"
 msgstr "Встановлення пристроїв"
 
 #: ../wizard/wizard.ui.h:5
-msgid "Finishing New Device Setup"
-msgstr "Закінчення встановлення нового пристрою"
+msgid "Finishing Setup"
+msgstr "Завершення налаштування"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -575,32 +576,32 @@ msgstr[0] "приблизно %'d година"
 msgstr[1] "приблизно %'d години"
 msgstr[2] "приблизно %'d годин"
 
-#: ../sendto/main.c:245
+#: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Передача файлів"
 
-#: ../sendto/main.c:249
+#: ../sendto/main.c:234
 msgid "_Retry"
 msgstr "_Повторити"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:269
+#: ../sendto/main.c:253
 msgid "Sending files via Bluetooth"
 msgstr "Надсилання файлів через Bluetooth"
 
-#: ../sendto/main.c:281
+#: ../sendto/main.c:265
 msgid "From:"
 msgstr "Від:"
 
-#: ../sendto/main.c:293
+#: ../sendto/main.c:277
 msgid "To:"
 msgstr "До:"
 
-#: ../sendto/main.c:337 ../sendto/main.c:355
+#: ../sendto/main.c:321 ../sendto/main.c:339
 msgid "An unknown error occurred"
 msgstr "Трапилась невідома помилка"
 
-#: ../sendto/main.c:348
+#: ../sendto/main.c:332
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -608,49 +609,61 @@ msgstr ""
 "Переконайтеся, що віддалений пристрій увімкнено та приймає з'єднання "
 "Bluetooth"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:430
 #, c-format
 msgid "Sending %s"
 msgstr "Надсилання %s"
 
-#: ../sendto/main.c:453 ../sendto/main.c:524
+#: ../sendto/main.c:437 ../sendto/main.c:508
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Надсилання файла %d з %d"
 
-#: ../sendto/main.c:520
+#: ../sendto/main.c:504
 #, c-format
-msgid "%d KB/s"
+msgid "%d kB/s"
 msgstr "%d КБ/с"
 
-#: ../sendto/main.c:522
+#: ../sendto/main.c:506
 #, c-format
 msgid "%d B/s"
 msgstr "%d Б/с"
 
-#: ../sendto/main.c:658
+#: ../sendto/main.c:639
 msgid "Select device to send to"
 msgstr "Виберіть пристрій, якому надіслати"
 
-#: ../sendto/main.c:663
+#: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Надіслати "
 
-#: ../sendto/main.c:707
+#: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Виберіть файли, які потрібно надіслати"
 
-#: ../sendto/main.c:710
+#: ../sendto/main.c:691
 msgid "Select"
 msgstr "Вибрати"
 
-#: ../sendto/main.c:736
+#: ../sendto/main.c:717
 msgid "Remote device to use"
 msgstr "Використати віддалений пристрій"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:717
+msgid "ADDRESS"
+msgstr "АДРЕСА"
+
+#: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Назва віддаленого пристрою"
+
+#: ../sendto/main.c:719
+msgid "NAME"
+msgstr "НАЗВА"
+
+#: ../sendto/main.c:738
+msgid "[FILE...]"
+msgstr "[ФАЙЛ…]"
 
 #: ../sendto/nautilus-sendto-plugin.c:168
 msgid "Programming error: could not find the device in the list"
@@ -672,6 +685,9 @@ msgstr "Передача файлів через Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Надіслати файли через Bluetooth"
+
+#~ msgid "%d KB/s"
+#~ msgstr "%d КБ/с"
 
 #~ msgid "Remove '%s' from the list of devices?"
 #~ msgstr "Вилучити «%s» з переліку пристроїв?"
