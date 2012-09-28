@@ -109,52 +109,6 @@ enum {
 static guint signals[SIGNAL_LAST];
 
 /**
- * bluetooth_applet_browse_address_finish:
- * @applet: a #BluetoothApplet
- * @result: the #GAsyncResult from the callback
- * @error: a #GError
- *
- * Returns: %TRUE if the operation was successful, %FALSE if error is set
- */
-gboolean
-bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
-					GAsyncResult *result,
-					GError **error)
-{
-	g_return_val_if_fail (BLUETOOTH_IS_APPLET (applet), FALSE);
-
-	return bluetooth_browse_address_finish (G_OBJECT (applet), result, error);
-}
-
-/**
- * bluetooth_applet_browse_address:
- * @applet: a #BluetoothApplet
- * @address: the bluetooth device to browse
- * @timestamp: a timestamp to prevent focus stealing
- * @callback: (scope async): the completion callback
- * @user_data: the data to pass to callback function
- *
- * Opens a Bluetooth device in Nautilus.
- *
- * Ideally the timestamp is taken from the event triggering the call to this function.
- * If timestamp is not known you can take #GDK_CURRENT_TIME.
- */
-void bluetooth_applet_browse_address (BluetoothApplet *applet,
-				      const char *address,
-				      guint timestamp,
-				      GAsyncReadyCallback callback,
-				      gpointer user_data)
-{
-	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
-
-	bluetooth_browse_address (G_OBJECT (applet),
-				  address,
-				  timestamp,
-				  callback,
-				  user_data);
-}
-
-/**
  * bluetooth_applet_send_to_address:
  * @applet: a #BluetoothApplet
  * @address: the target

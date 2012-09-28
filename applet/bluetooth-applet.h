@@ -105,14 +105,6 @@ gboolean bluetooth_applet_disconnect_device (BluetoothApplet *applet,
 					      BluetoothAppletConnectFunc func,
 					      gpointer data);
 
-gboolean bluetooth_applet_browse_address_finish (BluetoothApplet *applet,
-						 GAsyncResult *result,
-						 GError **error);
-void bluetooth_applet_browse_address (BluetoothApplet *applet,
-				      const char *address,
-				      guint timestamp,
-				      GAsyncReadyCallback callback,
-				      gpointer user_data);
 void bluetooth_applet_send_to_address (BluetoothApplet *applet,
 				       const char *address,
 				       const char *alias);
