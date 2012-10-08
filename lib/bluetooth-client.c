@@ -524,6 +524,7 @@ add_device (Adapter         *adapter,
 		return;
 
 	if (path != NULL) {
+		ret = NULL;
 		device = device_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
 							BLUEZ_SERVICE,
@@ -760,6 +761,7 @@ adapter_added (Manager         *manager,
 	const gchar *address, *name;
 	gboolean discovering, discoverable, powered;
 
+	variant = NULL;
 	adapter = adapter_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 						  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
 						  BLUEZ_SERVICE,
@@ -963,6 +965,7 @@ bluez_appeared_cb (GDBusConnection *connection,
 	g_signal_connect (G_OBJECT (priv->manager), "g-signal",
 			  G_CALLBACK (manager_g_signal), client);
 
+	variant = NULL;
 	manager_call_get_properties_sync (MANAGER (priv->manager), &variant, NULL, NULL);
 	if (variant != NULL) {
 		GVariant *v;
