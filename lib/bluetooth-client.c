@@ -1699,7 +1699,6 @@ disconnect_callback (GDBusProxy   *proxy,
 			g_debug ("Disconnect failed for %s: %s",
 				 g_dbus_proxy_get_object_path (G_DBUS_PROXY (conndata->device)),
 				 error->message);
-			g_debug ("Disconnect failed: %s", error->message);
 			g_error_free (error);
 		} else {
 			g_debug ("Disconnect succeeded for %s",
