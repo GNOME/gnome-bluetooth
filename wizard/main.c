@@ -181,6 +181,7 @@ get_icade_pincode (char **pin_display_str)
 
 		g_string_append (pin_display, arrows[r]);
 	}
+	g_string_append (pin_display, "❍");
 
 	*pin_display_str = g_string_free (pin_display, FALSE);
 	return g_string_free (pin, FALSE);
