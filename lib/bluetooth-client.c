@@ -1667,9 +1667,12 @@ connect_callback (GDBusProxy   *proxy,
 	variant = g_dbus_proxy_call_finish (proxy, res, &error);
 	if (variant == NULL) {
 		retval = FALSE;
-		g_debug ("Connect failed: %s", error->message);
+		g_debug ("Connect failed for %s: %s",
+			 g_dbus_proxy_get_object_path (proxy), error->message);
 		g_error_free (error);
 	} else {
+		g_debug ("Connect succeeded for %s",
+			 g_dbus_proxy_get_object_path (proxy));
 		g_variant_unref (variant);
 		retval = TRUE;
 	}
@@ -1693,8 +1696,14 @@ disconnect_callback (GDBusProxy   *proxy,
 	if (conndata->services == NULL) {
 		retval = device_call_disconnect_finish (conndata->device, res, &error);
 		if (retval == FALSE) {
+			g_debug ("Disconnect failed for %s: %s",
+				 g_dbus_proxy_get_object_path (G_DBUS_PROXY (conndata->device)),
+				 error->message);
 			g_debug ("Disconnect failed: %s", error->message);
 			g_error_free (error);
+		} else {
+			g_debug ("Disconnect succeeded for %s",
+				 g_dbus_proxy_get_object_path (G_DBUS_PROXY (conndata->device)));
 		}
 	} else {
 		GDBusProxy *service;
@@ -1704,9 +1713,15 @@ disconnect_callback (GDBusProxy   *proxy,
 		variant = g_dbus_proxy_call_finish (proxy, res, &error);
 		if (variant == NULL) {
 			retval = FALSE;
-			g_debug ("Disconnect failed: %s", error->message);
+			g_debug ("Disconnect failed for %s on %s: %s",
+				 g_dbus_proxy_get_object_path (proxy),
+				 g_dbus_proxy_get_interface_name (proxy),
+				 error->message);
 			g_error_free (error);
 		} else {
+			g_debug ("Disconnect succeeded for %s on %s",
+				 g_dbus_proxy_get_object_path (proxy),
+				 g_dbus_proxy_get_interface_name (proxy));
 			g_variant_unref (variant);
 			retval = TRUE;
 		}
@@ -1867,6 +1882,9 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 
 		service = get_proxy_for_iface (DEVICE (proxy), iface_name, client);
 
+		g_debug ("Calling 'Connect' on interface %s for %s",
+			 iface_name, g_dbus_proxy_get_object_path (service));
+
 		g_dbus_proxy_call (G_DBUS_PROXY (service),
 				   "Connect",
 				   NULL,
@@ -1885,6 +1903,9 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 
 		service = get_proxy_for_iface (conndata->device, conndata->services->data, client);
 
+		g_debug ("Calling 'Disconnect' on interface %s for %s",
+			 (char *) conndata->services->data, g_dbus_proxy_get_object_path (service));
+
 		conndata->services = g_list_remove (conndata->services, conndata->services->data);
 
 		g_dbus_proxy_call (G_DBUS_PROXY (service),
@@ -1896,6 +1917,8 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 				   (GAsyncReadyCallback) disconnect_callback,
 				   conndata);
 	} else if (table == NULL) {
+		g_debug ("Calling device_call_disconnect() for %s",
+			 g_dbus_proxy_get_object_path (proxy));
 		device_call_disconnect (DEVICE (proxy),
 					NULL,
 					(GAsyncReadyCallback) disconnect_callback,
