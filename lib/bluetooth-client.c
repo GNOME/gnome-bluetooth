@@ -278,7 +278,7 @@ get_proxy_for_iface (Device          *device,
 
 	proxy = g_object_get_data (G_OBJECT (device), interface);
 	if (proxy != NULL)
-		return proxy;
+		return g_object_ref (proxy);
 
 	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 					       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
@@ -296,7 +296,7 @@ get_proxy_for_iface (Device          *device,
 	g_signal_connect (G_OBJECT (proxy), "g-signal",
 			  G_CALLBACK (proxy_g_signal), client);
 
-	return proxy;
+	return g_object_ref (proxy);
 }
 
 static GVariant *
@@ -378,6 +378,7 @@ device_list_nodes (Device *device, BluetoothClient *client)
 				g_hash_table_insert (table, (gpointer) detectable_interfaces[i], GINT_TO_POINTER (status));
 			g_variant_unref (props);
 		}
+		g_object_unref (iface);
 	}
 
 	if (g_hash_table_size (table) == 0) {
@@ -1618,6 +1619,7 @@ typedef struct {
 	GSimpleAsyncResult *simple;
 	/* used for disconnect */
 	GList *services;
+	Device *device;
 } ConnectData;
 
 static void
@@ -1656,7 +1658,7 @@ disconnect_callback (GDBusProxy   *proxy,
 	GError *error = NULL;
 
 	if (conndata->services == NULL) {
-		retval = device_call_disconnect_finish (DEVICE (proxy), res, &error);
+		retval = device_call_disconnect_finish (conndata->device, res, &error);
 		if (retval == FALSE) {
 			g_debug ("Disconnect failed: %s", error->message);
 			g_error_free (error);
@@ -1675,9 +1677,10 @@ disconnect_callback (GDBusProxy   *proxy,
 			g_variant_unref (variant);
 			retval = TRUE;
 		}
+		g_object_unref (proxy);
 
 		client = (BluetoothClient *) g_async_result_get_source_object (G_ASYNC_RESULT (conndata->simple));
-		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, client);
+		service = get_proxy_for_iface (DEVICE (conndata->device), conndata->services->data, client);
 		g_object_unref (client);
 
 		conndata->services = g_list_remove (conndata->services, conndata->services->data);
@@ -1691,8 +1694,6 @@ disconnect_callback (GDBusProxy   *proxy,
 				   (GAsyncReadyCallback) disconnect_callback,
 				   conndata);
 
-		g_object_unref (service);
-
 		return;
 	}
 
@@ -1700,6 +1701,7 @@ disconnect_callback (GDBusProxy   *proxy,
 	g_simple_async_result_complete_in_idle (conndata->simple);
 
 	g_object_unref (proxy);
+	g_clear_object (&conndata->device);
 	g_object_unref (conndata->simple);
 	g_free (conndata);
 }
@@ -1843,11 +1845,12 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	} else if (table != NULL) {
 		GDBusProxy *service;
 
+		conndata->device = g_object_ref (DEVICE (proxy));
 		conndata->services = g_hash_table_get_keys (table);
 		g_hash_table_unref (table);
 		conndata->services = g_list_sort (conndata->services, (GCompareFunc) rev_sort_services);
 
-		service = get_proxy_for_iface (DEVICE (proxy), conndata->services->data, client);
+		service = get_proxy_for_iface (conndata->device, conndata->services->data, client);
 
 		conndata->services = g_list_remove (conndata->services, conndata->services->data);
 
