@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-10-08 12:30+0000\n"
-"PO-Revision-Date: 2012-10-20 20:04+0100\n"
-"Last-Translator: Pavol Klačanský <pavol@klacansky.com>\n"
+"POT-Creation-Date: 2012-11-09 14:44+0000\n"
+"PO-Revision-Date: 2012-11-09 10:27+0000\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -23,20 +23,22 @@ msgstr ""
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
-msgstr "Kliknite, aby ste vybrali zariadenie..."
+msgstr "Kliknutím vyberte zariadenie…"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:90
 msgid "Unknown"
 msgstr "Neznáme"
 
+# GtkLabel label
 #: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Nie sú k dispozícií žiadne adaptéry"
 
+# GtkLabel label
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
-msgstr "Hľadajú sa zariadenia..."
+msgstr "Hľadajú sa zariadenia…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
@@ -46,26 +48,31 @@ msgstr "Zariadenie"
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "Zariadenia"
 
+# ComboBox item
 #: ../lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Všetky kategórie"
 
+# ComboBox item
 #: ../lib/bluetooth-filter-widget.c:74
 msgid "Paired"
 msgstr "Spárované"
 
+# ComboBox item
 #: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "Dôveryhodné"
 
+# ComboBox item
 #: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "Nespárované alebo nedôveryhodné"
 
+# ComboBox item
 #: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "Spárované alebo dôveryhodné"
@@ -79,8 +86,9 @@ msgstr "Zobraziť:"
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
-msgstr "_Kategóriu zariadenia:"
+msgstr "Zariadenie s _kategóriu:"
 
+# GtkComboBox tooltip_text
 #: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Vyberte kategóriu zariadenia na vyfiltrovanie"
@@ -90,85 +98,103 @@ msgstr "Vyberte kategóriu zariadenia na vyfiltrovanie"
 msgid "Device _type:"
 msgstr "_Typ zariadenia:"
 
+# GtkComboBox tooltip_text
 #: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Vyberte typ zariadenia na vyfiltrovanie"
 
+# GtkListStore
 #: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Vstupné zariadenia (myši, klávesnice, atď.)"
 
+# GtkListStore
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Slúchadlá, slúchadlá s mikrofónom a iné zvukové zariadenia"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Všetky typy"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Telefón"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:63
 msgid "Modem"
 msgstr "Modem"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:65
 msgid "Computer"
 msgstr "Počítač"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:67
 msgid "Network"
 msgstr "Sieť"
 
+# ListStore item
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
 #: ../lib/bluetooth-utils.c:70
 msgid "Headset"
 msgstr "Slúchadlo s mikrofónom"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
 msgstr "Slúchadlá"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:74
 msgid "Audio device"
 msgstr "Zvukové zariadenie"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:76
 msgid "Keyboard"
 msgstr "Klávesnica"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:78
 msgid "Mouse"
 msgstr "Myš"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:80
 msgid "Camera"
 msgstr "Fotoaparát"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:82
 msgid "Printer"
 msgstr "Tlačiareň"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
 msgstr "Herný ovládač"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
 msgstr "Tablet"
 
+# ListStore item
 #: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Video zariadenie"
 
+# GtkCheckButton label
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
-msgstr "Použiť toto GPS zariadenie na geolokalizačné služby"
+msgstr "Použiť toto zariadenie GPS na geolokalizačné služby"
 
-# DK: ten "test" by som nahradil niecim ako Skúšobná prevádzka alebo podobne
-# PK: je to testovaci plugin, necham test
+# GtkCheckButton label
 #. translators:
 #. * This is in a test plugin, please make sure you add the "(test)" part,
 #. * or leave untranslated
@@ -176,269 +202,62 @@ msgstr "Použiť toto GPS zariadenie na geolokalizačné služby"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Prístup k internetu pomocou vášho mobilného telefónu (test)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "Zapnúť Bluetooth"
-
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "Bluetooth: Vypnutý"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "Vypnúť Bluetooth"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "Bluetooth: Zapnutý"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: Zakázaný"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "Odpája sa..."
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "Pripája sa..."
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "Pripojené"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "Odpojené"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "Odpojiť"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "Pripojiť"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "Odoslať súbory..."
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "Prehliadať súbory..."
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "Nastavenia klávesnice"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "Nastavenia myši a touchpadu"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "Nastavenia zvuku"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "Ladiť"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- Bluetooth aplet"
-
-# PM: neznie mi to prirodzene dal by som Uplny zoznam... zobrazíte spustením...
-#: ../applet/main.c:823
-#, fuzzy, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Spustite „%s --help“ na zobrazenie úplného zoznamu volieb príkazového "
-"riadka.\n"
-
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "Bluetooth aplet"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "Zariadenie „%s“ sa chce spárovať s týmto počítačom"
-
-#     mňa by teda nenapadlo, aké heslo to chce; v kontexte párovania bluetooth zariadení je podľa mňa PIN jasný
-# DK:jednoznacne ponechat PIN. tak je to oznacene v kazdom zariadeni
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "Prosím, zadajte PIN uvedený na zariadení %s."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Prosím, potvrďte či PIN „%s“ zodpovedá tomu na zariadení %s."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "Povoliť prístup k „%s“"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "Zariadenie %s chce pristupovať k službe „%s“."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "Požiadavka na spárovanie pre „%s“"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "Zariadenie Bluetooth"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "Zadajte PIN"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "Potvrdenie spárovania pre „%s“"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "Overiť PIN"
-
-# DK: pokial viem, tak "Authorization" prekladame ako "Overenie totožnosti". Ale myslim ze tu sa hodi lepsie tvoj preklad. necham na kontrolorovi druheho stupna
-# PK: authorization -> potvrdenie pristupu, authentication -> overenie totoznosti
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "Požiadavka na potvrdenie prístupu z „%s“"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "Preveriť potvrdenie prístupu"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Správca Bluetooth"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Aplet pre správcu Bluetooth"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "Bluetooth: Kontroluje sa"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "Viditeľný"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "Odoslať súbory do zariadenia..."
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "Nastaviť nové zariadenie..."
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "Nastavenia Bluetooth"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "Ukončiť"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "_Vždy povoliť prístup"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_Odmietnuť"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "_Udeliť"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "_Nezhoduje sa"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "_Zhoduje sa"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "_Zobraziť vstup"
-
+# GtkLabel label
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:242 ../wizard/main.c:365
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Párovanie so zariadením „%s“ zrušené"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:283
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
-"Prosím, potvrďte, že PIN zobrazený na zariadení „%s“ sa zhoduje s týmto."
+"Prosím, potvrďte, že kód PIN zobrazený na zariadení „%s“ sa zhoduje s týmto."
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:337
 msgid "Please enter the following PIN:"
-msgstr "Prosím, zadajte nasledujúci PIN:"
+msgstr "Prosím, zadajte nasledujúci kód PIN:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:425
 #, c-format
 msgid "Setting up '%s' failed"
-msgstr "Nastavenie „%s“ zlyhalo"
+msgstr "Nastavenie zariadenia „%s“ zlyhalo"
 
+# PM: prebieha pripájanie k zariadeniu %s
+# PK: ja by som nechal takto, kedze dane zariadenie sa pripaja
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:479
 #, c-format
 msgid "Connecting to '%s'..."
-msgstr "Pripája sa k „%s“..."
+msgstr "Pripája sa k zariadeniu „%s“…"
 
-#: ../wizard/main.c:518
+#: ../wizard/main.c:519
 #, c-format
 msgid "Please enter the following PIN on '%s':"
-msgstr "Prosím, zadajte nasledujúci PIN na „%s“:"
+msgstr "Prosím, zadajte nasledujúci kód PIN na zariadení „%s“:"
 
-#: ../wizard/main.c:521
+#: ../wizard/main.c:522
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
-"Prosím, zadajte nasledujúci PIN na „%s“ a stlačte „Enter“ na klávesnici:"
+"Prosím, zadajte nasledujúci kód PIN na zariadení „%s“ a stlačte „Enter“ na "
+"klávesnici:"
 
-#: ../wizard/main.c:526
+# PM: joystick je po slovensky džojstik alebo pákový ovládač
+# PK: :D, ten preklad je dobry
+#: ../wizard/main.c:527
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Prosím, hýbte s pákou na vašom iCade nasledujúcimi smermi:"
 
@@ -446,108 +265,131 @@ msgstr "Prosím, hýbte s pákou na vašom iCade nasledujúcimi smermi:"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:559
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Prosím, počkajte, pokým sa nedokončí nastavovanie zariadenia „%s“..."
+msgstr "Prosím, počkajte, pokým sa nedokončí nastavovanie zariadenia „%s“…"
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:577
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Nové zariadenie „%s“ bolo úspešne nastavené"
 
+# GtkAssistant title
 #: ../wizard/wizard.ui.h:1
 msgid "Bluetooth New Device Setup"
 msgstr "Nastavenie nového zariadenia Bluetooth"
 
+# GtkButton label
 #: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
-msgstr "_Voľby PIN..."
+msgstr "_Voľby pre kód PIN…"
 
+# title
 #: ../wizard/wizard.ui.h:3
 msgid "Device Search"
 msgstr "Hľadanie zariadenia"
 
+# title
 #: ../wizard/wizard.ui.h:4
 msgid "Device Setup"
 msgstr "Nastavovanie zariadenia"
 
+# title
 #: ../wizard/wizard.ui.h:5
 msgid "Finishing Setup"
 msgstr "Dokončenie nastavenia"
 
+# GtkLabel label
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
 msgstr "Vyberte ďalšie služby, ktoré chcete použiť s vašim zariadením:"
 
+# title
 #: ../wizard/wizard.ui.h:7
 msgid "Setup Summary"
 msgstr "Zhrnutie nastavenia"
 
-# DK: co tak skor "Možnosti" ?
-# PK: Options prekladame ako volby
+# GtkDialog title
 #: ../wizard/wizard.ui.h:8
 msgid "PIN Options"
-msgstr "Voľby PIN"
+msgstr "Voľby pre kód PIN"
 
+# GtkRadioButton label
 #: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
-msgstr "_Automatický výber PINu"
+msgstr "_Automatický výber kódu PIN"
 
+# GtkLabel label
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:11
 msgid "Fixed PIN"
-msgstr "Pevný PIN"
+msgstr "Pevný kód PIN"
 
+# GtkRadioButton label
 #: ../wizard/wizard.ui.h:12
 msgid "'0000' (most headsets, mice and GPS devices)"
 msgstr "„0000“ (väčšina slúchadiel s mikrofónom, myší a GPS zariadení)"
 
+# GtkRadioButton label
 #: ../wizard/wizard.ui.h:13
 msgid "'1111'"
 msgstr "„1111“"
 
+# GtkRadioButton label
 #: ../wizard/wizard.ui.h:14
 msgid "'1234'"
 msgstr "„1234“"
 
+# PM: V kontexte ostatných možnosti sa mi tu viac hodí nepárovať
+# GtkRadioButton label
 #: ../wizard/wizard.ui.h:15
 msgid "Do not pair"
-msgstr "Nespárovať"
+msgstr "Nepárovať"
 
+# GtkRadioButton label
 #: ../wizard/wizard.ui.h:16
 msgid "Custom PIN:"
-msgstr "Vlastný PIN:"
+msgstr "Vlastný kód PIN:"
 
+# GtkButton label
 #: ../wizard/wizard.ui.h:17
 msgid "_Try Again"
 msgstr "_Skúsiť znovu"
 
+# GtkButton label
 #: ../wizard/wizard.ui.h:18
 msgid "_Quit"
 msgstr "U_končiť"
 
+# GtkButton label
 #: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
+# GtkButton label
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:21
 msgid "Does not match"
 msgstr "Nezhoduje sa"
 
+# GtkButton label
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:23
 msgid "Matches"
 msgstr "Zhoduje sa"
 
+# PM: podľa popisu to nestavuje samotné zariadenie bluetooth ale zariadenia ktoré sa ku nemu pripájajú takže by balo byť Nastavenie bluetothových zariadení
+# PK: neznasilnoval by som to slovo
+# desktop entry name
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
-msgstr "Nastavenie zariadenia Bluetooth"
+msgstr "Nastavenie Bluetooth zariadenia"
 
+# desktop entry comment
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:2
 msgid "Setup Bluetooth devices"
-msgstr "Nastaviť zariadenia Bluetooth"
+msgstr "Nastavuje zariadenia, ktoré komunikujú cez Bluetooth"
 
 #: ../sendto/main.c:151
 #, c-format
@@ -581,13 +423,20 @@ msgstr[0] "približne %'d hodín"
 msgstr[1] "približne %'d hodina"
 msgstr[2] "približne %'d hodiny"
 
+# GtkAction label
+#: ../sendto/main.c:192 ../sendto/main.c:292
+msgid "Connecting..."
+msgstr "Pripája sa…"
+
+# GtkDialog title
 #: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Prenos súborov"
 
+# GtlButton label
 #: ../sendto/main.c:234
 msgid "_Retry"
-msgstr "_Skúsiť znovu"
+msgstr "_Skúsiť znova"
 
 #. translators: This is the heading for the progress dialogue
 #: ../sendto/main.c:253
@@ -634,32 +483,36 @@ msgstr "%d kB/s"
 msgid "%d B/s"
 msgstr "%d B/s"
 
-# window title
+# GtkDialog title
 #: ../sendto/main.c:639
 msgid "Select device to send to"
-msgstr "Výber zariadenia, do ktorého odoslať"
+msgstr "Výber cieľového zariadenia"
 
+# GtkButton label
 #: ../sendto/main.c:644
 msgid "_Send"
 msgstr "_Odoslať"
 
-# window title
+# GtkDialog title
 #: ../sendto/main.c:688
 msgid "Choose files to send"
 msgstr "Výber súborov na odoslanie"
 
+# GtkButton label
 #: ../sendto/main.c:691
 msgid "Select"
 msgstr "Vybrať"
 
+# cmd desc
 #: ../sendto/main.c:717
 msgid "Remote device to use"
-msgstr "Vzdialené zariadenie, ktoré použiť"
+msgstr "Vzdialené zariadenie, ktoré sa má použiť"
 
 #: ../sendto/main.c:717
 msgid "ADDRESS"
 msgstr "ADRESA"
 
+# cmd desc
 #: ../sendto/main.c:719
 msgid "Remote device's name"
 msgstr "Názov vzdialeného zariadenia"
@@ -670,25 +523,209 @@ msgstr "NÁZOV"
 
 #: ../sendto/main.c:738
 msgid "[FILE...]"
-msgstr "[SÚBOR...]"
+msgstr "[SÚBOR…]"
 
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "Programátorská chyba: nepodarilo sa nájsť zariadenie v zozname"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "Prenos súborov Obex Push nepodporovaný"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth (OBEX Push)"
-
+# desktop entry name
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
 msgstr "Prenos cez Bluetooth"
 
+# desktop entry comment
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Posielanie súborov cez Bluetooth"
+
+# GtkAction label
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "Zapnúť Bluetooth"
+
+# GtkAction label
+#~ msgid "Bluetooth: Off"
+#~ msgstr "Bluetooth: Vypnutý"
+
+# GtkAction label
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "Vypnúť Bluetooth"
+
+# GtkAction label
+#~ msgid "Bluetooth: On"
+#~ msgstr "Bluetooth: Zapnutý"
+
+# GtkAction label
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "Bluetooth: Zakázaný"
+
+# GtkAction label
+#~ msgid "Disconnecting..."
+#~ msgstr "Odpája sa…"
+
+# GtkAction label; menu item
+#~ msgid "Connected"
+#~ msgstr "Pripojené"
+
+# GtkAction label; menu item
+#~ msgid "Disconnected"
+#~ msgstr "Odpojené"
+
+# GtkAction label; menu item
+#~ msgid "Disconnect"
+#~ msgstr "Odpojiť"
+
+# GtkAction label; menu item
+#~ msgid "Connect"
+#~ msgstr "Pripojiť"
+
+# menu item
+#~ msgid "Send files..."
+#~ msgstr "Odoslať súbory…"
+
+# menu item
+#~ msgid "Browse files..."
+#~ msgstr "Prehliadať súbory…"
+
+# menu item
+#~ msgid "Keyboard Settings"
+#~ msgstr "Nastavenia klávesnice"
+
+# menu item
+#~ msgid "Mouse and Touchpad Settings"
+#~ msgstr "Nastavenia myši a touchpadu"
+
+# menu item
+#~ msgid "Sound Settings"
+#~ msgstr "Nastavenia zvuku"
+
+# cmd desc
+#~ msgid "Debug"
+#~ msgstr "Ladenie"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "- aplet Bluetooth"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Úplný zoznam dostupných volieb príkazového riadka zobrazíte spustením „%s "
+#~ "--help“.\n"
+
+# application name
+#~ msgid "Bluetooth Applet"
+#~ msgstr "Aplet Bluetooth"
+
+# GtkStatusIcon title
+#~ msgid "Bluetooth"
+#~ msgstr "Bluetooth"
+
+#~ msgid "Device '%s' wants to pair with this computer"
+#~ msgstr "Zariadenie „%s“ sa chce spárovať s týmto počítačom"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "Prosím, zadajte kód PIN uvedený na zariadení %s."
+
+#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#~ msgstr "Prosím, potvrďte či kód PIN „%s“ zodpovedá tomu na zariadení %s."
+
+# PM: je to text v jednom okne s nasledujúcim reťazcom skôr by mi tu sedelo Udelenie
+#~ msgid "Grant access to '%s'"
+#~ msgstr "Udelenie prístupu k „%s“"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "Zariadenie %s chce pristupovať k službe „%s“."
+
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Požiadavka na spárovanie pre „%s“"
+
+# nadpis notifikácie
+#~ msgid "Bluetooth device"
+#~ msgstr "Zariadenie Bluetooth"
+
+# button v notifikácii
+#~ msgid "Enter PIN"
+#~ msgstr "Zadať PIN"
+
+# text notifikácie
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "Potvrdenie spárovania pre „%s“"
+
+# button v notifikácii
+#~ msgid "Verify PIN"
+#~ msgstr "Overiť PIN"
+
+# text notifikácie
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "Požiadavka na potvrdenie prístupu z „%s“"
+
+# PM: nedáva mi to zmysel. čo to robí?
+# PK: to je ked nejake zariadenie napr. mys ziada o potvrdenie pristupu
+# button v notifikácii
+#~ msgid "Check authorization"
+#~ msgstr "Skontrolovať potvrdenie prístupu"
+
+# desktop entry name
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Správca Bluetooth"
+
+# desktop entry comment
+# PM: rozmýšlam či sa bluetooth nedá považovať už za všeobecné podstatné meno podobne ako internet asi otázka na JULS
+# PK: nechal by som velkym, kedze je to tak zauzivane
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "Aplet na správu Bluetooth"
+
+# GtkAction label
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "Bluetooth: Kontroluje sa"
+
+# GtkToggleAction label
+#~ msgid "Visible"
+#~ msgstr "Viditeľný"
+
+# GtkAction label
+#~ msgid "Send files to device..."
+#~ msgstr "Odoslať súbory do zariadenia…"
+
+# GtkAction label
+#~ msgid "Set up new device..."
+#~ msgstr "Nastaviť nové zariadenie…"
+
+# GtkAction label
+#~ msgid "Bluetooth Settings"
+#~ msgstr "Nastavenia Bluetooth"
+
+# GtkAction label
+#~ msgid "Quit"
+#~ msgstr "Ukončiť"
+
+# GtkCheckButton label
+#~ msgid "_Always grant access"
+#~ msgstr "_Vždy udeliť prístup"
+
+# GtkButton label
+#~ msgid "_Reject"
+#~ msgstr "_Odmietnuť"
+
+# GtkButton label
+#~ msgid "_Grant"
+#~ msgstr "_Udeliť"
+
+# GtkButton label
+#~ msgid "_Does not match"
+#~ msgstr "_Nezhoduje sa"
+
+# GtkButton label
+#~ msgid "_Matches"
+#~ msgstr "_Zhoduje sa"
+
+# GtkCheckButton label
+#~ msgid "_Show input"
+#~ msgstr "_Zobraziť vstup"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "Chyba programovania: nepodarilo sa nájsť zariadenie v zozname"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "Prenos súborov OBEX Push nepodporovaný"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "Bluetooth (OBEX Push)"
