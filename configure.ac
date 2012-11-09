@@ -8,7 +8,7 @@ AC_INIT([gnome-bluetooth],
         [gnomebt_version_major.gnomebt_version_minor.gnomebt_version_micro],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth])
 
-AC_CONFIG_SRCDIR([applet/main.c])
+AC_CONFIG_SRCDIR([applet/bluetooth-applet.c])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.8 dist-xz no-dist-gzip check-news tar-ustar])
@@ -77,13 +77,6 @@ GLIB_REQUIRED=2.29.90
 NOTIFY_REQUIRED=0.7.0
 NAUTILUS_SENDTO_REQUIRED=2.29.0
 NAUTILUS_SENDTO_MAX_REQUIRED=3.7.0
-
-dnl Requires for the applet
-PKG_CHECK_MODULES(APPLET,
-		  gmodule-export-2.0
-		  glib-2.0 >= $GLIB_REQUIRED
-		  gtk+-3.0 >= $GTK_REQUIRED
-		  libnotify >= $NOTIFY_REQUIRED)
 
 dnl Requires for the sendto app
 PKG_CHECK_MODULES(SENDTO,
@@ -159,7 +152,6 @@ AC_OUTPUT(Makefile
 	  lib/Makefile
 	  lib/plugins/Makefile
 	  applet/Makefile
-	  applet/bluetooth-applet.desktop.in
 	  wizard/Makefile
 	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile

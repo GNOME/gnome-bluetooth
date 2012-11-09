@@ -1,39 +1,40 @@
-include Makefile-lib.am
+CLEANFILES =
+EXTRA_DIST =
 
-bin_PROGRAMS = bluetooth-applet
+pkglib_LTLIBRARIES = libgnome-bluetooth-applet.la
 
-bluetooth_applet_SOURCES = main.c notify.h notify.c agent.h agent.c
+libgnome_bluetooth_applet_la_SOURCES = 	\
+	bluetooth-applet.c		\
+	bluetooth-applet.h
 
-bluetooth_applet_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(builddir)/libgnome-bluetooth-applet.la $(APPLET_LIBS)
+libgnome_bluetooth_applet_la_LIBADD = $(LIBGNOMEBT_LIBS) $(top_builddir)/lib/libgnome-bluetooth.la
 
-noinst_PROGRAMS = test-agentdialog test-icon
+libgnome_bluetooth_applet_la_LDFLAGS = -no-undefined
 
-test_agentdialog_SOURCES = test-agentdialog.c notify.h notify.c
-test_agentdialog_LDADD = $(builddir)/libgnome-bluetooth-applet.la $(APPLET_LIBS)
+AM_CFLAGS = -I$(srcdir) -I$(top_srcdir)/lib $(LIBGNOMEBT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED)
 
-test_icon_SOURCES = test-icon.c notify.h notify.c
-test_icon_LDADD = $(APPLET_LIBS)
+install-exec-hook:
+	rm -f $(DESTDIR)$(pkglibdir)/libgnome-bluetooth-applet.la
+uninstall-hook:
+	rm -f $(DESTDIR)$(pkglibdir)/libgnome-bluetooth-applet.so*
 
-AM_CFLAGS += $(APPLET_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\"" -DG_LOG_DOMAIN=\"BluetoothApplet\"
+include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS =
+INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir)
+INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir) --includedir=$(top_builddir)/lib
 
-INCLUDES = -I$(top_srcdir)/lib
+if HAVE_INTROSPECTION
+GnomeBluetoothApplet-1.0.gir: libgnome-bluetooth-applet.la
+GnomeBluetoothApplet_1_0_gir_SCANNERFLAGS = --warn-all --symbol-prefix=bluetooth_ --identifier-prefix=Bluetooth --include-uninstalled=$(top_builddir)/lib/GnomeBluetooth-1.0.gir
+GnomeBluetoothApplet_1_0_gir_INCLUDES = GObject-2.0 Gtk-3.0 GModule-2.0
+GnomeBluetoothApplet_1_0_gir_PACKAGES = gobject-2.0 gtk+-3.0 gmodule-2.0 glib-2.0
+GnomeBluetoothApplet_1_0_gir_CFLAGS = -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/lib
+GnomeBluetoothApplet_1_0_gir_LIBS = libgnome-bluetooth-applet.la
+GnomeBluetoothApplet_1_0_gir_FILES = $(libgnome_bluetooth_applet_la_SOURCES) ../lib/bluetooth-enums.h
+INTROSPECTION_GIRS += GnomeBluetoothApplet-1.0.gir
 
-man_MANS = bluetooth-applet.1
+typelibdir = $(pkglibdir)
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
-ui_DATA = popup-menu.ui authorisation-dialogue.ui confirm-dialogue.ui passkey-dialogue.ui
-uidir = $(pkgdatadir)
-
-autostartdir = $(sysconfdir)/xdg/autostart
-
-autostart_in_in_files = bluetooth-applet.desktop.in.in
-autostart_in_files = bluetooth-applet.desktop.in
-
-autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
-
-@INTLTOOL_DESKTOP_RULE@
-
-CLEANFILES += $(autostart_DATA)
-
-EXTRA_DIST += $(man_MANS) $(autostart_in_in_files) $(ui_DATA)
-
-MAINTAINERCLEANFILES = Makefile.in
+CLEANFILES += $(typelib_DATA) $(INTROSPECTION_GIRS)
+endif # HAVE_INTROSPECTION
