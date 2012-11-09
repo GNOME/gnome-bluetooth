@@ -46,10 +46,6 @@
 
 #include "rfkill.h"
 
-#ifndef RFKILL_EVENT_SIZE_V1
-#define RFKILL_EVENT_SIZE_V1	8
-#endif
-
 #include "bluetooth-killswitch.h"
 
 enum {
