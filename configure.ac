@@ -83,27 +83,6 @@ PKG_CHECK_MODULES(SENDTO,
 		  gtk+-3.0
 		  gio-2.0)
 
-dnl nautilus-sendto plugin
-AC_ARG_ENABLE(nautilus-sendto,
-              AS_HELP_STRING([--enable-nautilus-sendto=@<:@no/yes/auto@:>@],
-                             [build nautilus-sendto plugin]))
-
-if test "x$enable_nautilus_sendto" != "xno"; then
-   PKG_CHECK_MODULES(NST,
-   [
-      nautilus-sendto >= $NAUTILUS_SENDTO_REQUIRED
-      nautilus-sendto < $NAUTILUS_SENDTO_MAX_REQUIRED
-   ], have_nst="yes", have_nst="no")
-else
-   have_nst=no
-fi
-
-if test "x$enable_nautilus_sendto" = "xyes" -a "x$have_nst" != "xyes"; then
-   AC_MSG_ERROR([Could not find nautilus-sendto dependencies.])
-fi
-
-AM_CONDITIONAL(HAVE_NST, test "x$have_nst" = "xyes")
-
 dnl Requires for the wizard dialogue
 PKG_CHECK_MODULES(WIZARD,
 		  gmodule-export-2.0
@@ -170,7 +149,6 @@ Configure summary:
 	Compiler....................:  ${CC}
 	Compiler Flags..............:  ${CFLAGS}
 	Prefix......................:  ${prefix}
-	nautilus-sendto plugin......:  ${have_nst}
 	Documentation...............:  ${enable_gtk_doc}
 	GObject-Introspection.......:  ${found_introspection}
 "
