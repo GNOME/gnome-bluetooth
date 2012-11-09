@@ -158,6 +158,7 @@ event_cb (GIOChannel   *source,
 							  &read,
 							  NULL);
 		}
+		events = g_list_reverse (events);
 	} else {
 		g_debug ("something else happened");
 		return FALSE;
@@ -244,6 +245,7 @@ rfkill_glib_open (RfkillGlib *rfkill)
 					 (GIOFunc) event_cb,
 					 rfkill);
 
+	events = g_list_reverse (events);
 	emit_changed_signal_and_free (rfkill, events);
 
 	return fd;
