@@ -17,7 +17,8 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-chooser-button.c	\
 	bluetooth-chooser-combo.c	\
 	bluetooth-client-glue.c		\
-	bluetooth-plugin-manager.c
+	bluetooth-plugin-manager.c	\
+	rfkill-glib.c
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
@@ -25,6 +26,7 @@ libgnome_bluetooth_private_headers =	\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
 	bluetooth-client-glue.h		\
+	rfkill-glib.h			\
 	rfkill.h
 
 # public headers don't need to be listed, are handled by _HEADERS
