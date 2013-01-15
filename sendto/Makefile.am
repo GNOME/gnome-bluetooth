@@ -24,6 +24,7 @@ desktop_in_files = bluetooth-sendto.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) gnome-bluetooth-nst org.gnome.Bluetooth.nst.gschema.xml.in nautilus-sendto-plugin.c
+EXTRA_DIST = $(man_MANS) $(desktop_in_in_files)
+DISTCLEANFILES = bluetooth-sendto.desktop
 
 MAINTAINERCLEANFILES = Makefile.in
