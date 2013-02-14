@@ -25,7 +25,7 @@ INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir) --includedir=$(top_builddir
 
 if HAVE_INTROSPECTION
 GnomeBluetoothApplet-1.0.gir: libgnome-bluetooth-applet.la
-GnomeBluetoothApplet_1_0_gir_SCANNERFLAGS = --warn-all --symbol-prefix=bluetooth_ --identifier-prefix=Bluetooth --include-uninstalled=$(top_builddir)/lib/GnomeBluetooth-1.0.gir
+GnomeBluetoothApplet_1_0_gir_SCANNERFLAGS = --warn-all --symbol-prefix=bluetooth --identifier-prefix=Bluetooth --include-uninstalled=$(top_builddir)/lib/GnomeBluetooth-1.0.gir
 GnomeBluetoothApplet_1_0_gir_INCLUDES = GObject-2.0 Gtk-3.0 GModule-2.0
 GnomeBluetoothApplet_1_0_gir_PACKAGES = gobject-2.0 gtk+-3.0 gmodule-2.0 glib-2.0
 GnomeBluetoothApplet_1_0_gir_CFLAGS = -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/lib
