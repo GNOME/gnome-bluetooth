@@ -495,8 +495,10 @@ void prepare_callback (GtkWidget *assistant,
 			      NULL);
 
 		/* Do we pair, or don't we? */
-		if (automatic_pincode && pincode == NULL)
+		if (automatic_pincode && pincode == NULL) {
+			g_debug ("Not pairing as %s", automatic_pincode ? "pincode is NULL" : "automatic_pincode is FALSE");
 			path = NULL;
+		}
 
 		g_object_ref(agent);
 		bluetooth_client_create_device (client, target_address,
