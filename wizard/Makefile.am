@@ -5,7 +5,7 @@ libwizard_la_SOURCES = pin.c pin.h
 libwizard_la_LIBADD = $(WIZARD_LIBS)
 libwizard_la_LDFLAGS = -no-undefined $(AM_LDFLAGS)
 
-noinst_PROGRAMS = test-input
+# noinst_PROGRAMS = test-input
 
 bin_PROGRAMS = bluetooth-wizard
 
@@ -13,8 +13,8 @@ bluetooth_wizard_SOURCES = main.c
 
 bluetooth_wizard_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la libwizard.la $(WIZARD_LIBS) $(LIBM)
 
-test_input_SOURCES = test-input.c bluetooth-input.c bluetooth-input.h
-test_input_LDADD = $(INPUT_LIBS)
+# test_input_SOURCES = test-input.c bluetooth-input.c bluetooth-input.h
+# test_input_LDADD = $(INPUT_LIBS)
 
 AM_CFLAGS = $(WIZARD_CFLAGS) $(INPUT_CFLAGS) $(WARN_CFLAGS) $(DISABLE_DEPRECATED) -DPKGDATADIR="\"$(pkgdatadir)\""
 
