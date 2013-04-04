@@ -5,14 +5,14 @@
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
-# Piotr Drąg <piotrdrag@gmail.com>, 2010-2012.
-# Aviary.pl <gnomepl@aviary.pl>, 2007-2012.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2013.
+# Aviary.pl <gnomepl@aviary.pl>, 2007-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-03 22:50+0200\n"
-"PO-Revision-Date: 2012-09-03 22:51+0200\n"
+"POT-Creation-Date: 2013-04-05 00:26+0200\n"
+"PO-Revision-Date: 2013-04-05 00:27+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -49,7 +49,7 @@ msgstr "Urządzenie"
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "Urządzenia"
 
@@ -175,238 +175,25 @@ msgstr "Używanie tego urządzenia GPS do usług geolokalizacji"
 #. * or leave untranslated
 #: ../lib/plugins/test.c:53
 msgid "Access the Internet using your cell phone (test)"
-msgstr "Dostęp do Internetu używając telefonu komórkowego (test)"
-
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "Włącz Bluetooth"
-
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "Bluetooth: wyłączony"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "Wyłącz Bluetooth"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "Bluetooth: włączony"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: wyłączony"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "Rozłączanie..."
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "Łączenie..."
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "Połączono"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "Rozłączono"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "Rozłącz"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "Połącz"
-
-# pozycja w wysuwanym menu
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "Wyślij pliki..."
-
-# pozycja w wysuwanym menu
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "Przeglądaj pliki..."
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "Ustawienia klawiatury"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "Ustawienia myszy i panelu dotykowego"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "Ustawienia dźwięku"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "Debugowanie"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- Aplet Bluetooth"
-
-#: ../applet/main.c:823
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Wykonanie polecenia \"%s --help\" wyświetli pełną listę dostępnych opcji "
-"wiersza poleceń.\n"
-
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "Aplet Bluetooth"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "Urządzenie \"%s\" żąda powiązania z tym komputerem"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "Proszę wprowadzić kod PIN z urządzenia %s."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr ""
-"Proszę potwierdzić, czy kod PIN \"%s\" jest identyczny z kodem urządzenia %s."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "Zezwolenie na dostęp do \"%s\""
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "Urządzenie %s żąda dostępu do usługi \"%s\"."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "Żądanie wiązania dla urządzenia \"%s\""
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "Urządzenie Bluetooth"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "Proszę wprowadzić kod PIN"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "Żądanie potwierdzenia wiązania dla urządzenia \"%s\""
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "Proszę sprawdzić kod PIN"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "Żądanie upoważnienia od \"%s\""
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "Sprawdzenie upoważnienia"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Menedżer Bluetooth"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Aplet menedżera Bluetooth"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "Bluetooth: sprawdzanie"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "Widoczny"
-
-# pozycja w wysuwanym menu
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "Wyślij pliki do urządzenia..."
-
-# pozycja w wysuwanym menu
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "Ustaw nowe urządzenie..."
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "Ustawienia Bluetooth"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "Zakończ"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "_Stałe zezwolenie na dostęp"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_Odrzuć"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "_Zezwól"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "I_nny"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "I_dentyczny"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "_Wyświetlanie wprowadzanych danych"
+msgstr "Dostęp do Internetu przy użyciu telefonu komórkowego (test)"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:242 ../wizard/main.c:365
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Anulowano wiązanie z \"%s\""
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:283
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
 "Proszę potwierdzić, że kod PIN wyświetlony na urządzeniu \"%s\" jest "
 "identyczny z tym."
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:337
 msgid "Please enter the following PIN:"
 msgstr "Proszę wprowadzić następujący kod PIN:"
 
@@ -414,7 +201,7 @@ msgstr "Proszę wprowadzić następujący kod PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:425
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Ustawienie \"%s\" się nie powiodło"
@@ -423,17 +210,17 @@ msgstr "Ustawienie \"%s\" się nie powiodło"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:479
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Łączenie z \"%s\"..."
 
-#: ../wizard/main.c:518
+#: ../wizard/main.c:521
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Proszę wprowadzić następujący kod PIN w \"%s\":"
 
-#: ../wizard/main.c:521
+#: ../wizard/main.c:524
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
@@ -441,7 +228,7 @@ msgstr ""
 "Proszę wprowadzić następujący kod PIN w \"%s\" i nacisnąć klawisz \"Enter\" "
 "na klawiaturze:"
 
-#: ../wizard/main.c:526
+#: ../wizard/main.c:529
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Proszę przesunąć joystick urządzenia iCade w następujących kierunkach:"
 
@@ -449,12 +236,12 @@ msgstr "Proszę przesunąć joystick urządzenia iCade w następujących kierunk
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:561
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Proszę czekać, kończenie ustawiania urządzenia \"%s\"..."
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:579
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Ustawienie nowego urządzenia \"%s\" powiodło się"
@@ -583,6 +370,10 @@ msgstr[0] "około %'d godzina"
 msgstr[1] "około %'d godziny"
 msgstr[2] "około %'d godzin"
 
+#: ../sendto/main.c:192 ../sendto/main.c:292
+msgid "Connecting..."
+msgstr "Łączenie..."
+
 #: ../sendto/main.c:231
 msgid "File Transfer"
 msgstr "Przesyłanie plików"
@@ -671,19 +462,6 @@ msgstr "NAZWA"
 #: ../sendto/main.c:738
 msgid "[FILE...]"
 msgstr "[PLIK...]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "Błąd programistyczny: nie można odnaleźć urządzenia na liście"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "Przesyłanie plików za pomocą OBEX Push jest nieobsługiwane"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
