@@ -3,6 +3,7 @@
  *  BlueZ - Bluetooth protocol stack for Linux
  *
  *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2013 Intel Corporation.
  *
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -32,17 +33,22 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include <obex-agent.h>
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
 
-#define AGENT_PATH "/org/bluez/agent/sendto"
+#define OBEX_SERVICE	"org.bluez.obex"
+#define OBEX_PATH	"/org/bluez/obex"
+#define TRANSFER_IFACE	"org.bluez.obex.Transfer1"
+#define OPP_IFACE	"org.bluez.obex.ObjectPush1"
+#define CLIENT_IFACE	"org.bluez.obex.Client1"
 
 #define RESPONSE_RETRY 1
 
 static GDBusConnection *conn = NULL;
-static ObexAgent *agent = NULL;
 static GDBusProxy *client_proxy = NULL;
+static GDBusProxy *session = NULL;
+static GDBusProxy *current_transfer = NULL;
+static GCancellable *cancellable = NULL;
 
 static GtkWidget *dialog;
 static GtkWidget *label_from;
@@ -54,7 +60,6 @@ static gchar *option_device = NULL;
 static gchar *option_device_name = NULL;
 static gchar **option_files = NULL;
 
-static GDBusProxy *current_transfer = NULL;
 static guint64 current_size = 0;
 static guint64 total_size = 0;
 static guint64 total_sent = 0;
@@ -65,20 +70,12 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
-static void send_notify(GDBusProxy *proxy, GAsyncResult *res, gpointer user_data);
+static char *get_error_message (GError *error);
 
-/* Agent callbacks */
-static gboolean release_callback(GDBusMethodInvocation *context, gpointer user_data);
-static gboolean request_callback(GDBusMethodInvocation *context, GDBusProxy *transfer, gpointer user_data);
-static gboolean progress_callback(GDBusMethodInvocation *context,
-				  GDBusProxy *transfer,
-				  guint64 transferred,
-				  gpointer user_data);
-static gboolean complete_callback(GDBusMethodInvocation *context, GDBusProxy *transfer, gpointer user_data);
-static gboolean error_callback(GDBusMethodInvocation *context,
-			       GDBusProxy *transfer,
-			       const char *message,
-			       gpointer user_data);
+static void on_transfer_properties (GVariant *props);
+static void on_transfer_progress (guint64 transferred);
+static void on_transfer_complete (void);
+static void on_transfer_error (void);
 
 static gint64
 get_system_time (void)
@@ -92,41 +89,202 @@ get_system_time (void)
 }
 
 static void
+handle_error (GError *error)
+{
+	char *message;
+
+	message = get_error_message (error);
+	gtk_widget_show (image_status);
+	gtk_label_set_markup (GTK_LABEL (label_status), message);
+	g_free (message);
+
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
+}
+
+static void
+transfer_properties_changed (GDBusProxy *proxy,
+			     GVariant *changed_properties,
+			     GStrv invalidated_properties,
+			     gpointer user_data)
+{
+	GVariantIter iter;
+	const char *key;
+	GVariant *value;
+
+	g_variant_iter_init (&iter, changed_properties);
+	while (g_variant_iter_next (&iter, "{&sv}", &key, &value)) {
+		if (g_str_equal (key, "Status")) {
+			const char *status;
+
+			status = g_variant_get_string (value, NULL);
+
+			if (g_str_equal (status, "complete")) {
+				on_transfer_complete ();
+			} else if (g_str_equal (status, "error")) {
+				on_transfer_error ();
+			}
+		} else if (g_str_equal (key, "Transferred")) {
+			guint64 transferred = g_variant_get_uint64 (value);
+
+			on_transfer_progress (transferred);
+		}
+
+		g_variant_unref (value);
+	}
+}
+
+static void
+transfer_proxy (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
+{
+	GError *error = NULL;
+
+	current_transfer = g_dbus_proxy_new_finish (res, &error);
+
+	if (current_transfer != NULL) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_error_free (error);
+			return;
+		}
+
+		handle_error (error);
+		return;
+	}
+
+	g_signal_connect (G_OBJECT (current_transfer), "g-properties-changed",
+		G_CALLBACK (transfer_properties_changed), NULL);
+}
+
+static void
+transfer_created (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
+{
+	GError *error = NULL;
+	GVariant *variant, *properties;
+	const char *transfer;
+
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
+
+	if (variant == NULL) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_error_free (error);
+			return;
+		}
+
+		handle_error (error);
+		return;
+	}
+
+	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress), NULL);
+
+	first_update = get_system_time ();
+
+	g_variant_get (variant, "(&o@a{sv})", &transfer, &properties);
+
+	on_transfer_properties (properties);
+
+	g_dbus_proxy_new (conn,
+			  G_DBUS_PROXY_FLAGS_NONE,
+			  NULL,
+			  OBEX_SERVICE,
+			  transfer,
+			  TRANSFER_IFACE,
+			  cancellable,
+			  (GAsyncReadyCallback) transfer_proxy,
+			  NULL);
+
+	g_variant_unref (properties);
+	g_variant_unref (variant);
+}
+
+static void
+send_next_file (void)
+{
+	g_dbus_proxy_call (session,
+			   "SendFile",
+			   g_variant_new ("(s)", option_files[file_index]),
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   cancellable,
+			   (GAsyncReadyCallback) transfer_created,
+			   NULL);
+}
+
+static void
+session_proxy (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
+{
+	GError *error = NULL;
+
+	g_clear_object (&session);
+	session = g_dbus_proxy_new_finish (res, &error);
+
+	if (session == NULL) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_error_free (error);
+			return;
+		}
+
+		handle_error (error);
+		return;
+	}
+
+	send_next_file ();
+}
+
+static void
+session_created (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
+{
+	GError *error = NULL;
+	GVariant *variant;
+	const char *session;
+
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
+
+	if (variant == NULL) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_error_free (error);
+			return;
+		}
+
+		handle_error (error);
+		return;
+	}
+
+	g_variant_get (variant, "(&o)", &session);
+
+	g_dbus_proxy_new (conn,
+			  G_DBUS_PROXY_FLAGS_NONE,
+			  NULL,
+			  OBEX_SERVICE,
+			  session,
+			  OPP_IFACE,
+			  cancellable,
+			  (GAsyncReadyCallback) session_proxy,
+			  NULL);
+
+	g_variant_unref (variant);
+}
+
+static void
 send_files (void)
 {
 	GVariant *parameters;
 	GVariantBuilder *builder;
 
 	builder = g_variant_builder_new (G_VARIANT_TYPE_DICTIONARY);
-	g_variant_builder_add (builder, "{sv}", "Destination", g_variant_new_string (option_device));
+	g_variant_builder_add (builder, "{sv}", "Target",
+						g_variant_new_string ("opp"));
 
-	parameters = g_variant_new ("(a{sv}^aso)", builder, option_files, AGENT_PATH);
+	parameters = g_variant_new ("(sa{sv})", option_device, builder);
 
 	g_dbus_proxy_call (client_proxy,
-			   "SendFiles",
+			   "CreateSession",
 			   parameters,
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
-			   NULL,
-			   (GAsyncReadyCallback) send_notify,
+			   cancellable,
+			   (GAsyncReadyCallback) session_created,
 			   NULL);
 
 	g_variant_builder_unref (builder);
-}
-
-static void
-setup_agent (void)
-{
-	if (agent == NULL)
-		agent = obex_agent_new();
-
-	obex_agent_set_release_func(agent, release_callback, NULL);
-	obex_agent_set_request_func(agent, request_callback, NULL);
-	obex_agent_set_progress_func(agent, progress_callback, NULL);
-	obex_agent_set_complete_func(agent, complete_callback, NULL);
-	obex_agent_set_error_func(agent, error_callback, NULL);
-
-	obex_agent_setup(agent, AGENT_PATH);
 }
 
 static gchar *filename_to_path(const gchar *filename)
@@ -183,8 +341,6 @@ static void response_callback(GtkWidget *dialog,
 					gint response, gpointer user_data)
 {
 	if (response == RESPONSE_RETRY) {
-		setup_agent ();
-
 		/* Reset buttons */
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 
@@ -197,8 +353,10 @@ static void response_callback(GtkWidget *dialog,
 		return;
 	}
 
+	/* Cancel any ongoing dbus calls we may have */
+	g_cancellable_cancel (cancellable);
+
 	if (current_transfer != NULL) {
-		obex_agent_set_error_func(agent, NULL, NULL);
 		g_dbus_proxy_call (current_transfer,
 				   "Cancel",
 				   NULL,
@@ -287,6 +445,7 @@ static void create_window(void)
 	gtk_grid_attach(GTK_GRID(table), label, 1, 1, 1, 1);
 
 	progress = gtk_progress_bar_new();
+	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress), TRUE);
 	gtk_progress_bar_set_ellipsize(GTK_PROGRESS_BAR(progress),
 							PANGO_ELLIPSIZE_END);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
@@ -388,29 +547,18 @@ static gchar *get_device_name(const gchar *address)
 	return found_name;
 }
 
-static void get_properties_callback (GDBusProxy   *proxy,
-				     GAsyncResult *res,
-				     gpointer      user_data)
+static void
+on_transfer_properties (GVariant *props)
 {
-	GError *error = NULL;
-	gchar *filename = option_files[file_index];
+	char *filename = option_files[file_index];
 	GFile *file, *dir;
-	gchar *basename, *text, *markup;
-	GVariant *variant;
+	char *basename, *text, *markup;
+	GVariant *size;
 
-	variant = g_dbus_proxy_call_finish (proxy, res, &error);
-
-	if (variant) {
-		GVariant *dict, *size;
-
-		g_variant_get (variant, "(@a{sv})", &dict);
-		size = g_variant_lookup_value (dict, "Size", G_VARIANT_TYPE_UINT64);
-		if (size) {
-			current_size = g_variant_get_uint64 (size);
-			last_update = get_system_time();
-		}
-
-		g_variant_unref (variant);
+	size = g_variant_lookup_value (props, "Size", G_VARIANT_TYPE_UINT64);
+	if (size) {
+		current_size = g_variant_get_uint64 (size);
+		last_update = get_system_time ();
 	}
 
 	file = g_file_new_for_path (filename);
@@ -441,30 +589,8 @@ static void get_properties_callback (GDBusProxy   *proxy,
 	g_free(text);
 }
 
-static gboolean request_callback(GDBusMethodInvocation *invocation,
-				GDBusProxy *transfer, gpointer user_data)
-{
-	g_assert (current_transfer == NULL);
-
-	current_transfer = g_object_ref (transfer);
-	g_dbus_proxy_call (current_transfer,
-			   "GetProperties",
-			   NULL,
-			   G_DBUS_CALL_FLAGS_NONE,
-			   -1,
-			   NULL,
-			   (GAsyncReadyCallback) get_properties_callback,
-			   NULL);
-
-	g_dbus_method_invocation_return_value (invocation,
-					       g_variant_new ("(s)", ""));
-
-	return TRUE;
-}
-
-static gboolean progress_callback(GDBusMethodInvocation *invocation,
-				GDBusProxy *transfer, guint64 transferred,
-							gpointer user_data)
+static void
+on_transfer_progress (guint64 transferred)
 {
 	gint64 current_time;
 	gint elapsed_time;
@@ -485,17 +611,17 @@ static gboolean progress_callback(GDBusMethodInvocation *invocation,
 	elapsed_time = (current_time - first_update) / 1000000;
 
 	if (current_time < last_update + 1000000)
-		goto done;
+		return;
 
 	last_update = current_time;
 
 	if (elapsed_time == 0)
-		goto done;
+		return;
 
 	transfer_rate = current_sent / elapsed_time;
 
 	if (transfer_rate == 0)
-		goto done;
+		return;
 
 	remaining_time = (total_size - current_sent) / transfer_rate;
 
@@ -514,15 +640,10 @@ static gboolean progress_callback(GDBusMethodInvocation *invocation,
 	g_free(time);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), text);
 	g_free(text);
-
-done:
-	g_dbus_method_invocation_return_value (invocation, NULL);
-
-	return TRUE;
 }
 
-static gboolean complete_callback(GDBusMethodInvocation *invocation,
-				GDBusProxy *transfer, gpointer user_data)
+static void
+on_transfer_complete (void)
 {
 	total_sent += current_size;
 
@@ -534,79 +655,20 @@ static gboolean complete_callback(GDBusMethodInvocation *invocation,
 
 	if (file_index == file_count)
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
-
-	g_dbus_method_invocation_return_value (invocation, NULL);
-
-	return TRUE;
+	else
+		send_next_file ();
 }
 
-static gboolean release_callback(GDBusMethodInvocation *invocation,
-							gpointer user_data)
-{
-	g_dbus_method_invocation_return_value (invocation, NULL);
-
-	agent = NULL;
-
-	gtk_label_set_markup(GTK_LABEL(label_status), NULL);
-
-	gtk_widget_destroy(dialog);
-
-	gtk_main_quit();
-
-	return TRUE;
-}
-
-static gboolean error_callback(GDBusMethodInvocation *invocation,
-			       GDBusProxy *transfer,
-			       const char *message,
-			       gpointer user_data)
+static void
+on_transfer_error (void)
 {
 	gtk_widget_show (image_status);
-	gtk_label_set_markup(GTK_LABEL(label_status), message);
+	gtk_label_set_markup (GTK_LABEL (label_status), _("There was an error"));
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
-
-	if (agent != NULL) {
-		obex_agent_set_release_func(agent, NULL, NULL);
-		agent = NULL;
-	}
-
-	g_dbus_method_invocation_return_value (invocation, NULL);
-
-	return TRUE;
-}
-
-static void
-send_notify (GDBusProxy   *proxy,
-	     GAsyncResult *res,
-	     gpointer      user_data)
-{
-	GError *error = NULL;
-	GVariant *variant;
-
-	variant = g_dbus_proxy_call_finish (proxy, res, &error);
-
-	if (variant == NULL) {
-		char *message;
-
-		message = get_error_message(error);
-		gtk_widget_show (image_status);
-		gtk_label_set_markup(GTK_LABEL(label_status), message);
-		g_free (message);
-
-		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
-
-		return;
-	}
-
-	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), NULL);
-
-	first_update = get_system_time();
-
-	g_variant_unref (variant);
 }
 
 static void
@@ -749,6 +811,8 @@ int main(int argc, char *argv[])
 
 	gtk_window_set_default_icon_name("bluetooth");
 
+	cancellable = g_cancellable_new ();
+
 	/* A device name, but no device? */
 	if (option_device == NULL && option_device_name != NULL) {
 		if (option_files != NULL)
@@ -818,18 +882,22 @@ int main(int argc, char *argv[])
 	client_proxy = g_dbus_proxy_new_sync (conn,
 					      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
 					      NULL,
-					      "org.openobex.client",
-					      "/",
-					      "org.openobex.Client",
-					      NULL,
+					      OBEX_SERVICE,
+					      OBEX_PATH,
+					      CLIENT_IFACE,
+					      cancellable,
 					      NULL);
 
-	setup_agent ();
-
-	send_files ();
+	if (client_proxy)
+		send_files ();
 
 	gtk_main();
 
+	g_cancellable_cancel (cancellable);
+
+	g_clear_object (&cancellable);
+	g_clear_object (&current_transfer);
+	g_clear_object (&session);
 	g_object_unref (client_proxy);
 	g_object_unref (conn);
 
