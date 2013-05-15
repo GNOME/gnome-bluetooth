@@ -817,15 +817,17 @@ static int
 page_func (gint current_page,
 	   gpointer data)
 {
-	if (current_page == PAGE_SEARCH) {
+	switch (current_page) {
+	case PAGE_SEARCH:
 		if (target_ssp != FALSE || automatic_pincode != FALSE)
 			return PAGE_CONNECTING;
 		else
 			return PAGE_SETUP;
-	}
-	if (current_page == PAGE_SETUP)
+	case PAGE_SETUP:
 		return PAGE_SUMMARY;
-	return current_page + 1;
+	default:
+		return current_page + 1;
+	}
 }
 
 static gboolean
