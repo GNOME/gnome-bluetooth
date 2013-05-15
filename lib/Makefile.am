@@ -17,6 +17,7 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-chooser-button.c	\
 	bluetooth-chooser-combo.c	\
 	bluetooth-client-glue.c		\
+	bluetooth-fdo-glue.c		\
 	bluetooth-plugin-manager.c	\
 	rfkill-glib.c
 
@@ -26,6 +27,7 @@ libgnome_bluetooth_private_headers =	\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
 	bluetooth-client-glue.h		\
+	bluetooth-fdo-glue.h		\
 	rfkill-glib.h			\
 	rfkill.h
 
@@ -97,6 +99,8 @@ endif # HAVE_INTROSPECTION
 
 BUILT_SOURCES = bluetooth-client-glue.h \
 		bluetooth-client-glue.c \
+		bluetooth-fdo-glue.h \
+		bluetooth-fdo-glue.c \
 		gnome-bluetooth-enum-types.h \
 		gnome-bluetooth-enum-types.c
 
@@ -116,7 +120,7 @@ test_class_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_killswitch_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
-EXTRA_DIST += bluetooth-client.xml gnome-bluetooth.symbols
+EXTRA_DIST += bluetooth-client.xml bluetooth-fdo.xml gnome-bluetooth.symbols
 
 MAINTAINERCLEANFILES = Makefile.in
 
@@ -124,6 +128,11 @@ bluetooth-client-glue.c: bluetooth-client-glue.h
 
 bluetooth-client-glue.c bluetooth-client-glue.h: bluetooth-client.xml
 	$(AM_V_GEN) $(GDBUS_CODEGEN) --c-namespace= --generate-c-code=bluetooth-client-glue --interface-prefix=org.bluez $<
+
+bluetooth-fdo-glue.c: bluetooth-fdo-glue.h
+
+bluetooth-fdo-glue.c bluetooth-fdo-glue.h: bluetooth-fdo.xml
+	$(AM_V_GEN) $(GDBUS_CODEGEN) --c-namespace= --generate-c-code=bluetooth-fdo-glue --interface-prefix=org.freedesktop.DBus $<
 
 gnome_bluetooth_headers_to_scan_for_enums = bluetooth-enums.h
 # Generate the enums source code, with glib-mkenums:
