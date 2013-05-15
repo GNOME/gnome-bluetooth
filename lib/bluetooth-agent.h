@@ -70,6 +70,8 @@ typedef gboolean (*BluetoothAgentConfirmFunc) (GDBusMethodInvocation *invocation
 					GDBusProxy *device, guint passkey,
 								gpointer data);
 typedef gboolean (*BluetoothAgentAuthorizeFunc) (GDBusMethodInvocation *invocation,
+				  GDBusProxy *device, gpointer data);
+typedef gboolean (*BluetoothAgentAuthorizeServiceFunc) (GDBusMethodInvocation *invocation,
 					GDBusProxy *device, const char *uuid,
 								gpointer data);
 typedef gboolean (*BluetoothAgentCancelFunc) (GDBusMethodInvocation *invocation,
@@ -85,6 +87,8 @@ void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
 				BluetoothAgentConfirmFunc func, gpointer data);
 void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,
 				BluetoothAgentAuthorizeFunc func, gpointer data);
+void bluetooth_agent_set_authorize_service_func(BluetoothAgent *agent,
+				BluetoothAgentAuthorizeServiceFunc func, gpointer data);
 void bluetooth_agent_set_cancel_func(BluetoothAgent *agent,
 				BluetoothAgentCancelFunc func, gpointer data);
 
