@@ -76,9 +76,6 @@ static gboolean display_called = FALSE;
 
 /* NULL means automatic, anything else is a pincode specified by the user */
 static gchar *user_pincode = NULL;
-/* If TRUE, then we won't display the PIN code to the user when pairing */
-static gboolean automatic_pincode = FALSE;
-static char *pincode = NULL;
 
 static GtkBuilder *builder = NULL;
 
@@ -112,7 +109,10 @@ static GtkWidget *extra_config_vbox = NULL;
 
 static BluetoothChooser *selector = NULL;
 
+static GtkWidget *pin_option_button = NULL;
+
 static GtkWidget *pin_dialog = NULL;
+static GtkWidget *label_fixed = NULL;
 static GtkWidget *radio_auto = NULL;
 static GtkWidget *radio_0000 = NULL;
 static GtkWidget *radio_1111 = NULL;
@@ -192,13 +192,43 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
 {
-	legacypairing = TRUE;
+	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
 
-	/* Only show the pincode page if the pincode isn't automatic */
-	if (automatic_pincode == FALSE)
-		gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
-	g_debug ("Using pincode \"%s\"", pincode);
-	g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", pincode));
+	if (user_pincode == NULL) {
+		char *help, *pincode_display;
+
+		pincode_display = NULL;
+
+		switch (target_ui_behaviour) {
+		case PAIRING_UI_NORMAL:
+			help = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
+			user_pincode = get_random_pincode (target_max_digits);
+			break;
+		case PAIRING_UI_KEYBOARD:
+			help = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
+			user_pincode = get_random_pincode (target_max_digits);
+			pincode_display = g_strdup_printf ("%s⏎", user_pincode);
+			break;
+		case PAIRING_UI_ICADE:
+			help = g_strdup (_("Please move the joystick of your iCade in the following directions:"));
+			user_pincode = get_icade_pincode (&pincode_display);
+			break;
+		default:
+			g_assert_not_reached ();
+		}
+
+		gtk_label_set_markup(GTK_LABEL(label_pin_help), help);
+		g_free (help);
+		set_large_label (GTK_LABEL (label_pin), pincode_display ? pincode_display : user_pincode);
+		g_free (pincode_display);
+
+	}
+
+	gtk_widget_show (button_cancel);
+
+	g_debug ("Using pincode \"%s\"", user_pincode);
+	g_dbus_method_invocation_return_value (invocation,
+																				 g_variant_new ("(s)", user_pincode));
 
 	return TRUE;
 }
@@ -208,7 +238,6 @@ restart_button_clicked (GtkButton *button,
 			gpointer user_data)
 {
 	/* Clean up old state */
-	legacypairing = FALSE;
 	display_called = FALSE;
 	g_free (target_address);
 	target_address = NULL;
@@ -276,7 +305,6 @@ confirm_callback (GDBusMethodInvocation *invocation,
 {
 	char *str, *label;
 
-	legacypairing = FALSE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
 	gtk_widget_show (label_ssp_pin_help);
@@ -306,7 +334,6 @@ display_callback (GDBusMethodInvocation *invocation,
 	gchar *text, *done, *code;
 
 	display_called = TRUE;
-	legacypairing = FALSE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
 	code = g_strdup_printf("%06d", pin);
@@ -372,7 +399,7 @@ cancel_callback (GDBusMethodInvocation *invocation,
 }
 
 typedef struct {
-	char *path;
+	const char *device;
 	GTimer *timer;
 } ConnectData;
 
@@ -387,15 +414,14 @@ connect_callback (GObject      *source_object,
 	success = bluetooth_client_connect_service_finish (client, res, NULL);
 
 	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
-		bluetooth_client_connect_service (client, data->path, TRUE, NULL, connect_callback, data);
+		bluetooth_client_connect_service (client, data->device, TRUE, NULL, connect_callback, data);
 		return;
 	}
 
 	if (success == FALSE)
-		g_debug ("Failed to connect to device %s", data->path);
+		g_debug ("Failed to connect to device %s", data->device);
 
 	g_timer_destroy (data->timer);
-	g_free (data->path);
 	g_free (data);
 
 	gtk_assistant_set_current_page (window_assistant, PAGE_SUMMARY);
@@ -403,16 +429,15 @@ connect_callback (GObject      *source_object,
 
 static void
 create_callback (BluetoothClient *_client,
-		 const char *path,
 		 const GError *error,
-		 gpointer user_data)
+		 const char *device)
 {
 	ConnectData *data;
 
 	create_started = FALSE;
 
 	/* Create failed */
-	if (path == NULL) {
+	if (error != NULL) {
 		char *text;
 
 		summary_failure = TRUE;
@@ -432,13 +457,13 @@ create_callback (BluetoothClient *_client,
 		return;
 	}
 
-	bluetooth_client_set_trusted(client, path, TRUE);
+	bluetooth_client_set_trusted(client, device, TRUE);
 
 	data = g_new0 (ConnectData, 1);
-	data->path = g_strdup (path);
+	data->device = device;
 	data->timer = g_timer_new ();
 
-	bluetooth_client_connect_service (client, path, TRUE, NULL, connect_callback, data);
+	bluetooth_client_connect_service (client, device, TRUE, NULL, connect_callback, data);
 	gtk_assistant_set_current_page (window_assistant, PAGE_FINISHING);
 }
 
@@ -453,7 +478,7 @@ void prepare_callback (GtkWidget *assistant,
 		       GtkWidget *page,
 		       gpointer data)
 {
-	gboolean complete = TRUE;
+	gboolean complete = FALSE;
 
 	gtk_widget_hide (button_quit);
 	gtk_widget_hide (button_cancel);
@@ -465,12 +490,18 @@ void prepare_callback (GtkWidget *assistant,
 		bluetooth_chooser_stop_discovery(selector);
 	}
 
-	if (page == page_connecting) {
+	if (page == page_connecting && create_started == FALSE) {
+		const char *device, *path = AGENT_PATH;
 		char *text;
-
-		complete = FALSE;
+		GValue value = { 0, };
+		GDBusProxy *proxy;
+		guint target_type = BLUETOOTH_TYPE_ANY;
+		gboolean pair = TRUE;
 
 		gtk_spinner_start (GTK_SPINNER (spinner_connecting));
+
+		g_free(target_name);
+		target_name = bluetooth_chooser_get_selected_device_name (selector);
 
 		/* translators:
 		 * The '%s' is the device name, for example:
@@ -481,76 +512,62 @@ void prepare_callback (GtkWidget *assistant,
 		g_free (text);
 
 		gtk_widget_show (button_cancel);
-	} else {
-		gtk_spinner_stop (GTK_SPINNER (spinner_connecting));
-	}
 
-	if ((page == page_setup || page == page_connecting) && (create_started == FALSE)) {
-		const char *path = AGENT_PATH;
+		bluetooth_chooser_get_selected_device_info (selector, "proxy", &value);
+
+		proxy = g_value_get_object(&value);
+		device = g_dbus_proxy_get_object_path(proxy);
 
 		/* Set the filter on the selector, so we can use it to get more
 		 * info later, in page_summary */
 		g_object_set (selector,
-			      "device-category-filter", BLUETOOTH_CATEGORY_ALL,
+			      "device-category-filter",
+			      BLUETOOTH_CATEGORY_ALL,
 			      NULL);
 
-		/* Do we pair, or don't we? */
-		if (automatic_pincode && pincode == NULL) {
-			g_debug ("Not pairing as %s", automatic_pincode ? "pincode is NULL" : "automatic_pincode is FALSE");
-			path = NULL;
+		g_free(target_address);
+		target_address = bluetooth_chooser_get_selected_device (selector);
+
+		g_free(target_name);
+		target_name = bluetooth_chooser_get_selected_device_name (selector);
+
+		target_type = bluetooth_chooser_get_selected_device_type (selector);
+
+		target_ui_behaviour = PAIRING_UI_NORMAL;
+
+		if (legacypairing == TRUE) {
+			const char *pincode = get_pincode_for_device (target_type,
+								      target_address,
+								      target_name,
+								      &target_max_digits);
+			if (pincode != NULL) {
+				if (g_str_equal (pincode, "KEYBOARD"))
+					target_ui_behaviour = PAIRING_UI_KEYBOARD;
+				else if (g_str_equal (pincode, "ICADE"))
+					target_ui_behaviour = PAIRING_UI_ICADE;
+
+				gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
+			}
 		}
 
 		g_object_ref(agent);
-		bluetooth_client_create_device (client, target_address,
-						path, create_callback, assistant);
+
+		if (user_pincode != NULL && g_str_equal (user_pincode, "NULL"))
+			pair = FALSE;
+
+		bluetooth_client_setup_device (client,
+					       device,
+					       path,
+					       create_callback,
+					       pair);
+
 		create_started = TRUE;
-	}
-
-	if (page == page_setup) {
-		complete = FALSE;
-
-		if (automatic_pincode == FALSE && legacypairing != FALSE) {
-			char *help, *pincode_display;
-
-			g_free (pincode);
-			pincode = NULL;
-			pincode_display = NULL;
-
-			switch (target_ui_behaviour) {
-			case PAIRING_UI_NORMAL:
-				help = g_strdup_printf (_("Please enter the following PIN on '%s':"), target_name);
-				break;
-			case PAIRING_UI_KEYBOARD:
-				help = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), target_name);
-				pincode = get_random_pincode (target_max_digits);
-				pincode_display = g_strdup_printf ("%s⏎", pincode);
-				break;
-			case PAIRING_UI_ICADE:
-				help = g_strdup (_("Please move the joystick of your iCade in the following directions:"));
-				pincode = get_icade_pincode (&pincode_display);
-				break;
-			default:
-				g_assert_not_reached ();
-			}
-
-			if (pincode == NULL)
-				pincode = get_random_pincode (target_max_digits);
-
-			gtk_label_set_markup(GTK_LABEL(label_pin_help), help);
-			g_free (help);
-			set_large_label (GTK_LABEL (label_pin), pincode_display ? pincode_display : pincode);
-			g_free (pincode_display);
-		} else {
-			g_assert_not_reached ();
-		}
-
-		gtk_widget_show (button_cancel);
+	} else {
+		gtk_spinner_stop (GTK_SPINNER (spinner_connecting));
 	}
 
 	if (page == page_finishing) {
 		char *text;
-
-		complete = FALSE;
 
 		gtk_spinner_start (GTK_SPINNER (spinner_finishing));
 
@@ -606,7 +623,6 @@ void prepare_callback (GtkWidget *assistant,
 
 	/* Setup the buttons some */
 	if (page == page_summary && summary_failure) {
-		complete = FALSE;
 		gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("restart_button"));
 		gtk_widget_show (button_quit);
 	} else {
@@ -616,7 +632,6 @@ void prepare_callback (GtkWidget *assistant,
 
 	if (page == page_ssp_setup) {
 		if (display_called == FALSE) {
-			complete = FALSE;
 			gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("matches_button"));
 			gtk_assistant_add_action_widget (GTK_ASSISTANT (assistant), W("does_not_match_button"));
 		} else {
@@ -718,8 +733,6 @@ select_device_changed (BluetoothChooser *selector,
 		       gpointer user_data)
 {
 	GValue value = { 0, };
-	guint target_type = BLUETOOTH_TYPE_ANY;
-	gboolean is_custom_pin = FALSE;
 	int lp;
 
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
@@ -743,44 +756,25 @@ select_device_changed (BluetoothChooser *selector,
 		lp = TRUE;
 	}
 
-	g_free(target_address);
-	target_address = g_strdup (address);
-
-	g_free(target_name);
-	target_name = bluetooth_chooser_get_selected_device_name (selector);
-
-	target_type = bluetooth_chooser_get_selected_device_type (selector);
 	legacypairing = lp;
-	automatic_pincode = FALSE;
-	target_ui_behaviour = PAIRING_UI_NORMAL;
 
-	g_free (pincode);
-	pincode = NULL;
-
-	g_free (user_pincode);
-	user_pincode = get_pincode_for_device (target_type, target_address, target_name, &target_max_digits);
-	if (user_pincode != NULL &&
-	    g_str_equal (user_pincode, "NULL") == FALSE) {
-		if (g_str_equal (user_pincode, "KEYBOARD")) {
-			target_ui_behaviour = PAIRING_UI_KEYBOARD;
-			is_custom_pin = TRUE;
-		} else if (g_str_equal (user_pincode, "ICADE")) {
-			target_ui_behaviour = PAIRING_UI_ICADE;
-			is_custom_pin = TRUE;
-		} else {
-			pincode = g_strdup (user_pincode);
-		}
+	if (legacypairing == TRUE) {
+		gtk_widget_show(label_fixed);
+		gtk_widget_show(radio_0000);
+		gtk_widget_show(radio_1111);
+		gtk_widget_show(radio_1234);
+		gtk_widget_show(radio_custom);
+		gtk_widget_show(entry_custom);
+	} else {
+		gtk_widget_hide(label_fixed);
+		gtk_widget_hide(radio_0000);
+		gtk_widget_hide(radio_1111);
+		gtk_widget_hide(radio_1234);
+		gtk_widget_hide(radio_custom);
+		gtk_widget_hide(entry_custom);
 	}
 
-	if (is_custom_pin)
-		automatic_pincode = FALSE;
-	else
-		automatic_pincode = user_pincode != NULL;
-
-	g_free (user_pincode);
-	user_pincode = NULL;
-
-	gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
+	return;
 }
 
 void
@@ -812,9 +806,6 @@ pin_option_button_clicked (GtkButton *button,
 
 	gtk_dialog_run (GTK_DIALOG (pin_dialog));
 	gtk_widget_hide (pin_dialog);
-	g_free (pincode);
-	pincode = g_strdup (user_pincode);
-	automatic_pincode = user_pincode != NULL;
 }
 
 static int
@@ -822,11 +813,6 @@ page_func (gint current_page,
 	   gpointer data)
 {
 	switch (current_page) {
-	case PAGE_SEARCH:
-		if (legacypairing == FALSE || automatic_pincode != FALSE)
-			return PAGE_CONNECTING;
-		else
-			return PAGE_SETUP;
 	case PAGE_SETUP:
 		return PAGE_SUMMARY;
 	default:
@@ -897,12 +883,15 @@ create_wizard (void)
 	extra_config_vbox = W("extra_config_vbox");
 
 	/* PIN dialog */
+	pin_option_button = W("pin_option_button");
+
 	pin_dialog = W("pin_dialog");
 	radio_auto = W("radio_auto");
 	radio_0000 = W("radio_0000");
 	radio_1111 = W("radio_1111");
 	radio_1234 = W("radio_1234");
 	radio_none = W("radio_none");
+	label_fixed = W("label_fixed_len");
 	radio_custom = W("radio_custom");
 	entry_custom = W("entry_custom");
 
@@ -972,6 +961,9 @@ int main (int argc, char **argv)
 	client = bluetooth_client_new();
 
 	agent = bluetooth_agent_new();
+	if (bluetooth_agent_register(agent) == FALSE)
+		return 1;
+
 	g_object_add_weak_pointer (G_OBJECT (agent), (gpointer *) (&agent));
 
 	bluetooth_agent_set_pincode_func(agent, pincode_callback, NULL);
