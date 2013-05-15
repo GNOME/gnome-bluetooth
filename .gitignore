@@ -51,6 +51,7 @@ lib/test-client
 lib/test-agent
 lib/test-deviceselection
 lib/test-plugins
+lib/test-killswitch
 lib/gnome-bluetooth-enum-types.*
 lib/GnomeBluetooth-1.0.gir
 lib/GnomeBluetooth-1.0.typelib
@@ -75,8 +76,11 @@ sendto/org.gnome.Bluetooth.nst.gschema.valid
 
 help/*/.xml2po.mo
 help/*/gnome-bluetooth.xml
+help/*/*.xml
+help/*/*.docbook
 help/*/*.mo
-!help/C/gnome-bluetooth.xml
+!help/C/*.xml
+!help/C/*.docbook
 help/gnome-bluetooth-*.omf
 
 docs/reference/libgnome-bluetooth/gnome-bluetooth.args
