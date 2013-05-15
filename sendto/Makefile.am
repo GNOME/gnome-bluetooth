@@ -12,7 +12,7 @@ AM_CFLAGS =                                     \
 
 bin_PROGRAMS = bluetooth-sendto
 
-bluetooth_sendto_SOURCES = main.c obex-agent.c obex-agent.h
+bluetooth_sendto_SOURCES = main.c
 
 bluetooth_sendto_LDADD = $(top_builddir)/lib/libgnome-bluetooth.la $(SENDTO_LIBS)
 
