@@ -298,6 +298,16 @@ matches_cb (GtkButton *button,
 }
 
 static gboolean
+authorize_callback (GDBusMethodInvocation *invocation,
+		  GDBusProxy *device,
+		  gpointer user_data)
+{
+	g_dbus_method_invocation_return_value (invocation, NULL);
+
+	return TRUE;
+}
+
+static gboolean
 confirm_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  guint pin,
@@ -970,6 +980,7 @@ int main (int argc, char **argv)
 	bluetooth_agent_set_display_func(agent, display_callback, NULL);
 	bluetooth_agent_set_cancel_func(agent, cancel_callback, NULL);
 	bluetooth_agent_set_confirm_func(agent, confirm_callback, NULL);
+	bluetooth_agent_set_authorize_func(agent, authorize_callback, NULL);
 
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
