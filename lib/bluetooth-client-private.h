@@ -30,17 +30,21 @@
 
 G_BEGIN_DECLS
 
-typedef void (*BluetoothClientCreateDeviceFunc) (BluetoothClient *client,
-						 const char *path,
-						 const GError *error,
-						 gpointer data);
+typedef void (*BluetoothClientSetupFunc) (BluetoothClient *client,
+					  const GError    *error,
+					  const char      *device_path);
 
-gboolean bluetooth_client_create_device(BluetoothClient *client,
-			const char *address, const char *agent,
-			BluetoothClientCreateDeviceFunc func, gpointer data);
+gboolean bluetooth_client_setup_device (BluetoothClient          *client,
+					const char               *device_path,
+					const char               *agent,
+					BluetoothClientSetupFunc  func,
+					gboolean                  pair);
 
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
+
+GDBusProxy *bluetooth_client_get_device (BluetoothClient *client,
+					 const char      *path);
 
 void bluetooth_client_dump_device (GtkTreeModel *model,
 				   GtkTreeIter *iter);

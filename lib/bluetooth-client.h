@@ -66,7 +66,7 @@ GtkTreeModel *bluetooth_client_get_adapter_model(BluetoothClient *client);
 GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client);
 
 void bluetooth_client_connect_service (BluetoothClient     *client,
-				       const char          *device,
+				       const char          *path,
 				       gboolean             connect,
 				       GCancellable        *cancellable,
 				       GAsyncReadyCallback  callback,

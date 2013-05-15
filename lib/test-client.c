@@ -121,42 +121,6 @@ legacypairing_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	}
 }
 
-static void
-services_foreach (const char *service, gpointer value, GString *str)
-{
-	GEnumClass *eclass;
-	GEnumValue *ev;
-	BluetoothStatus status = GPOINTER_TO_INT (value);
-
-	eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
-	ev = g_enum_get_value (eclass, status);
-	if (ev == NULL)
-		g_warning ("Unknown status value %d", status);
-
-	g_string_append_printf (str, "%s (%s) ", service, ev ? ev->value_nick : "unknown");
-	g_type_class_unref (eclass);
-}
-
-static void services_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
-		GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
-{
-	GString *str;
-	GHashTable *services;
-
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_SERVICES, &services, -1);
-	if (services == NULL) {
-		g_object_set(cell, "text", NULL, NULL);
-		return;
-	}
-
-	str = g_string_new (NULL);
-	g_hash_table_foreach (services, (GHFunc) services_foreach, str);
-	g_object_set(cell, "text", str->str, NULL);
-	g_string_free (str, TRUE);
-
-	g_hash_table_unref (services);
-}
-
 static void uuids_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			  GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
 {
@@ -271,10 +235,6 @@ static void create_window(void)
 	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
 					"Powered", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_POWERED, NULL);
-
-	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
-					"Services", gtk_cell_renderer_text_new(),
-						services_to_text, NULL, NULL);
 
 	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
 					"UUIDs", gtk_cell_renderer_text_new(),

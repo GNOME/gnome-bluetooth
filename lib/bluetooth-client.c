@@ -4,6 +4,7 @@
  *
  *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
  *  Copyright (C) 2010       Giovanni Campagna <scampa.giovanni@gmail.com>
+ *  Copyright (C) 2013       Intel Corporation.
  *
  *
  *  This library is free software; you can redistribute it and/or
@@ -43,32 +44,15 @@
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-client-glue.h"
+#include "bluetooth-fdo-glue.h"
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 
 #define BLUEZ_SERVICE			"org.bluez"
 #define BLUEZ_MANAGER_PATH		"/"
-#define BLUEZ_MANAGER_INTERFACE		"org.bluez.Manager"
-#define BLUEZ_ADAPTER_INTERFACE		"org.bluez.Adapter"
-#define BLUEZ_DEVICE_INTERFACE		"org.bluez.Device"
-
-static char * detectable_interfaces[] = {
-	"org.bluez.Headset",
-	"org.bluez.AudioSink",
-	"org.bluez.Audio",
-	"org.bluez.Input",
-};
-
-static char * connectable_interfaces[] = {
-	"org.bluez.Audio",
-	"org.bluez.Input"
-};
-
-/* Keep in sync with above */
-#define BLUEZ_INPUT_INTERFACE	(connectable_interfaces[1])
-#define BLUEZ_AUDIO_INTERFACE (connectable_interfaces[0])
-#define BLUEZ_HEADSET_INTERFACE (detectable_interfaces[0])
-#define BLUEZ_AUDIOSINK_INTERFACE (detectable_interfaces[1])
+#define BLUEZ_ADAPTER_INTERFACE		"org.bluez.Adapter1"
+#define BLUEZ_DEVICE_INTERFACE		"org.bluez.Device1"
+#define FDO_PROPERTIES_INTERFACE	"org.freedesktop.DBus.Properties"
 
 #define BLUETOOTH_CLIENT_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 				BLUETOOTH_TYPE_CLIENT, BluetoothClientPrivate))
@@ -77,7 +61,7 @@ typedef struct _BluetoothClientPrivate BluetoothClientPrivate;
 
 struct _BluetoothClientPrivate {
 	guint owner_change_id;
-	Manager *manager;
+	ObjectManager *manager;
 	GtkTreeStore *store;
 	GtkTreeRowReference *default_adapter;
 };
@@ -194,201 +178,6 @@ get_iter_from_address (GtkTreeStore *store,
 	return iter_search (store, iter, &parent_iter, compare_address, (gpointer) address);
 }
 
-static BluetoothStatus
-status_from_variant (const char *property,
-		     GVariant   *variant)
-{
-	BluetoothStatus status;
-
-	status = BLUETOOTH_STATUS_INVALID;
-
-	if (g_str_equal (property, "Connected") != FALSE) {
-		status = g_variant_get_boolean (variant) ?
-			BLUETOOTH_STATUS_CONNECTED :
-			BLUETOOTH_STATUS_DISCONNECTED;
-	} else if (g_str_equal (property, "State") != FALSE) {
-		GEnumClass *eclass;
-		GEnumValue *ev;
-		eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
-		ev = g_enum_get_value_by_nick (eclass, g_variant_get_string (variant, NULL));
-		if (ev == NULL) {
-			g_warning ("Unknown status '%s'", g_variant_get_string (variant, NULL));
-			status = BLUETOOTH_STATUS_DISCONNECTED;
-		} else {
-			status = ev->value;
-		}
-		g_type_class_unref (eclass);
-	}
-
-	return status;
-}
-
-static void
-proxy_g_signal (GDBusProxy      *proxy,
-		gchar           *sender_name,
-		gchar           *signal_name,
-		GVariant        *parameters,
-		BluetoothClient *client)
-{
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
-	GtkTreePath *tree_path;
-	GHashTable *table;
-	const char *path;
-	char *property;
-	GVariant *variant;
-	BluetoothStatus status;
-
-	if (g_strcmp0 (signal_name, "PropertyChanged") != 0)
-		return;
-
-	g_variant_get (parameters, "(sv)", &property, &variant);
-
-	path = g_dbus_proxy_get_object_path (proxy);
-	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
-		return;
-
-	status = status_from_variant (property, variant);
-	if (status == BLUETOOTH_STATUS_INVALID)
-		goto end;
-
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_SERVICES, &table,
-			    -1);
-
-	g_hash_table_insert (table,
-			     (gpointer) g_dbus_proxy_get_interface_name (proxy),
-			     GINT_TO_POINTER (status));
-
-	tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
-	gtk_tree_model_row_changed (GTK_TREE_MODEL (priv->store), tree_path, &iter);
-	gtk_tree_path_free (tree_path);
-
-end:
-	g_free (property);
-	g_variant_unref (variant);
-}
-
-static GDBusProxy *
-get_proxy_for_iface (Device          *device,
-		     const char      *interface,
-		     BluetoothClient *client)
-{
-	GDBusProxy *proxy;
-
-	proxy = g_object_get_data (G_OBJECT (device), interface);
-	if (proxy != NULL)
-		return g_object_ref (proxy);
-
-	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-					       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-					       NULL,
-					       g_dbus_proxy_get_name (G_DBUS_PROXY (device)),
-					       g_dbus_proxy_get_object_path (G_DBUS_PROXY (device)),
-					       interface,
-					       NULL,
-					       NULL);
-
-	if (proxy == NULL)
-		return NULL;
-
-	g_object_set_data_full (G_OBJECT (device), interface, proxy, g_object_unref);
-	g_signal_connect (G_OBJECT (proxy), "g-signal",
-			  G_CALLBACK (proxy_g_signal), client);
-
-	return g_object_ref (proxy);
-}
-
-static GVariant *
-get_properties_for_iface (GDBusProxy *proxy)
-{
-	GVariant *ret, *variant;
-
-	variant = g_dbus_proxy_call_sync (proxy,
-					  "GetProperties",
-					  g_variant_new ("()"),
-					  G_DBUS_CALL_FLAGS_NONE,
-					  -1,
-					  NULL,
-					  NULL);
-	if (variant == NULL)
-		return NULL;
-	g_variant_get (variant,
-		       "(@a{sv})",
-		       &ret);
-	g_variant_unref (variant);
-	return ret;
-}
-
-static GHashTable *
-device_list_nodes (Device *device, BluetoothClient *client)
-{
-	GHashTable *table;
-	guint i;
-
-	if (device == NULL)
-		return NULL;
-
-	table = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
-
-	for (i = 0; i < G_N_ELEMENTS (detectable_interfaces); i++) {
-		GDBusProxy *iface;
-		GVariant *props;
-
-		/* Don't add the input interface for devices that already have
-		 * audio stuff */
-		if (g_str_equal (detectable_interfaces[i], BLUEZ_INPUT_INTERFACE)
-		    && g_hash_table_size (table) > 0)
-			continue;
-
-		/* Don't add the audio interface if there's no Headset or AudioSink,
-		 * that means that it could only receive audio */
-		if (g_str_equal (detectable_interfaces[i], BLUEZ_AUDIO_INTERFACE)) {
-			if (g_hash_table_lookup (table, BLUEZ_HEADSET_INTERFACE) == NULL &&
-			    g_hash_table_lookup (table, BLUEZ_AUDIOSINK_INTERFACE) == NULL) {
-				continue;
-			}
-		}
-
-		/* And skip interface if it's already in the hash table */
-		if (g_hash_table_lookup (table, detectable_interfaces[i]) != NULL)
-			continue;
-
-		/* No such interface for this device? */
-		iface = get_proxy_for_iface (device, detectable_interfaces[i], client);
-		if (iface == NULL)
-			continue;
-
-		props = get_properties_for_iface (iface);
-		if (props) {
-			GVariant *value;
-			BluetoothStatus status;
-
-			status = BLUETOOTH_STATUS_INVALID;
-			value = g_variant_lookup_value (props, "Connected", G_VARIANT_TYPE_BOOLEAN);
-			if (value != NULL) {
-				status = status_from_variant ("Connected", value);
-			} else {
-				value = g_variant_lookup_value (props, "State", G_VARIANT_TYPE_STRING);
-				if (value != NULL)
-					status = status_from_variant ("State", value);
-			}
-
-			if (status != BLUETOOTH_STATUS_INVALID)
-				g_hash_table_insert (table, (gpointer) detectable_interfaces[i], GINT_TO_POINTER (status));
-			g_variant_unref (props);
-		}
-		g_object_unref (iface);
-	}
-
-	if (g_hash_table_size (table) == 0) {
-		g_hash_table_destroy (table);
-		return NULL;
-	}
-
-	return table;
-}
-
 static char **
 device_list_uuids (GVariant *variant)
 {
@@ -426,156 +215,140 @@ device_list_uuids (GVariant *variant)
 }
 
 static void
-device_changed (Device          *device,
-		const char      *property,
-		GVariant        *variant,
-		BluetoothClient *client)
+device_g_properties_changed (GDBusProxy      *device,
+			     GVariant        *changed_p,
+			     GStrv            invalidated_p,
+			     BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GVariantIter i;
+	const char *property;
 	GtkTreeIter iter;
+	GVariant *v;
 
-	if (get_iter_from_proxy(priv->store, &iter, G_DBUS_PROXY (device)) == FALSE)
+	if (get_iter_from_proxy (priv->store, &iter, device) == FALSE)
 		return;
 
-	if (g_str_equal(property, "Name") == TRUE) {
-		const gchar *name = g_variant_get_string (variant, NULL);
+	g_variant_iter_init (&i, changed_p);
+	while (g_variant_iter_next (&i, "{&sv}", &property, &v)) {
 
-		gtk_tree_store_set(priv->store, &iter,
-					BLUETOOTH_COLUMN_NAME, name, -1);
-	} else if (g_str_equal(property, "Alias") == TRUE) {
-		const gchar *alias = g_variant_get_string(variant, NULL);
+		if (g_str_equal (property, "Name") == TRUE) {
+			const gchar *name = g_variant_get_string (v, NULL);
 
-		gtk_tree_store_set(priv->store, &iter,
-					BLUETOOTH_COLUMN_ALIAS, alias, -1);
-	} else if (g_str_equal(property, "Icon") == TRUE) {
-		const gchar *icon = g_variant_get_string(variant, NULL);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_NAME, name, -1);
+		} else if (g_str_equal (property, "Alias") == TRUE) {
+			const gchar *alias = g_variant_get_string (v, NULL);
 
-		gtk_tree_store_set(priv->store, &iter,
-					BLUETOOTH_COLUMN_ICON, icon, -1);
-	} else if (g_str_equal(property, "Paired") == TRUE) {
-		gboolean paired = g_variant_get_boolean(variant);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_ALIAS, alias, -1);
+		} else if (g_str_equal (property, "Icon") == TRUE) {
+			const gchar *icon = g_variant_get_string (v, NULL);
 
-		gtk_tree_store_set(priv->store, &iter,
-				BLUETOOTH_COLUMN_PAIRED, paired, -1);
-	} else if (g_str_equal(property, "Trusted") == TRUE) {
-		gboolean trusted = g_variant_get_boolean(variant);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_ICON, icon, -1);
+		} else if (g_str_equal (property, "Paired") == TRUE) {
+			gboolean paired = g_variant_get_boolean (v);
 
-		gtk_tree_store_set(priv->store, &iter,
-				BLUETOOTH_COLUMN_TRUSTED, trusted, -1);
-	} else if (g_str_equal(property, "Connected") == TRUE) {
-		gboolean connected = g_variant_get_boolean(variant);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_PAIRED, paired, -1);
+		} else if (g_str_equal (property, "Trusted") == TRUE) {
+			gboolean trusted = g_variant_get_boolean (v);
 
-		gtk_tree_store_set(priv->store, &iter,
-				BLUETOOTH_COLUMN_CONNECTED, connected, -1);
-	} else if (g_str_equal (property, "UUIDs") == TRUE) {
-		GHashTable *services;
-		char **uuids;
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_TRUSTED, trusted, -1);
+		} else if (g_str_equal (property, "Connected") == TRUE) {
+			gboolean connected = g_variant_get_boolean (v);
 
-		uuids = device_list_uuids (variant);
-		services = device_list_nodes (device, client);
-		gtk_tree_store_set (priv->store, &iter,
-				    BLUETOOTH_COLUMN_SERVICES, services,
-				    BLUETOOTH_COLUMN_UUIDS, uuids, -1);
-		g_strfreev (uuids);
-		if (services != NULL)
-			g_hash_table_unref (services);
-	} else {
-		g_debug ("Unhandled property: %s", property);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_CONNECTED, connected, -1);
+		} else if (g_str_equal (property, "UUIDs") == TRUE) {
+			char **uuids;
+
+			uuids = device_list_uuids (v);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_UUIDS, uuids, -1);
+			g_strfreev (uuids);
+		} else {
+			g_debug ("Unhandled property: %s", property);
+		}
+
+		g_variant_unref (v);
 	}
 }
 
 static void
-device_g_signal (GDBusProxy      *proxy,
-		 gchar           *sender_name,
-		 gchar           *signal_name,
-		 GVariant        *parameters,
-		 BluetoothClient *client)
-{
-	char *property;
-	GVariant *variant;
-
-	if (g_strcmp0 (signal_name, "PropertyChanged") != 0)
-		return;
-
-	g_variant_get (parameters, "(sv)", &property, &variant);
-	device_changed (DEVICE (proxy), property, variant, client);
-	g_free (property);
-	g_variant_unref (variant);
-}
-
-static void
-add_device (Adapter         *adapter,
-	    GtkTreeIter     *parent,
-	    BluetoothClient *client,
-	    const char      *path,
-	    GVariant        *dict)
+device_added (ObjectManager   *manager,
+	      BluetoothClient *client,
+	      const char      *path,
+	      GVariant        *variant)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	Device *device;
-	GVariant *v;
-	const gchar *address, *alias, *name, *icon;
+	GDBusProxy *adapter;
+	Device1 *device;
+	GVariant *v, *dict;
+	const char *adapter_path, *address, *alias, *name, *icon;
 	char **uuids;
 	gboolean paired, trusted, connected;
 	int legacypairing;
 	guint type;
-	GtkTreeIter iter;
-	GVariant *ret;
+	GtkTreeIter iter, parent;
 
-	if (path == NULL && dict == NULL)
+	device = device1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+						 G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+						 BLUEZ_SERVICE,
+						 path,
+						 NULL,
+						 NULL);
+	if (device == NULL)
 		return;
 
-	if (path != NULL) {
-		ret = NULL;
-		device = device_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-							BLUEZ_SERVICE,
-							path,
-							NULL,
-							NULL);
-		if (device == NULL)
-			return;
-		device_call_get_properties_sync (DEVICE (device), &ret, NULL, NULL);
-		if (ret == NULL) {
-			g_object_unref (device);
-			return;
-		}
-	} else {
-		device = NULL;
-		ret = g_variant_ref (dict);
-	}
+	dict = g_variant_lookup_value (variant, BLUEZ_DEVICE_INTERFACE,
+				       G_VARIANT_TYPE_DICTIONARY);
 
-	v = g_variant_lookup_value (ret, "Address", G_VARIANT_TYPE_STRING);
+	v = g_variant_lookup_value (dict, "Adapter", G_VARIANT_TYPE_OBJECT_PATH);
+	adapter_path = v ? g_variant_get_string (v, NULL) : NULL;
+
+	v = g_variant_lookup_value (dict, "Address", G_VARIANT_TYPE_STRING);
 	address = v ? g_variant_get_string (v, NULL) : NULL;
 
-	v = g_variant_lookup_value (ret, "Alias", G_VARIANT_TYPE_STRING);
+	v = g_variant_lookup_value (dict, "Alias", G_VARIANT_TYPE_STRING);
 	alias = v ? g_variant_get_string (v, NULL) : NULL;
 
-	v = g_variant_lookup_value (ret, "Name", G_VARIANT_TYPE_STRING);
+	v = g_variant_lookup_value (dict, "Name", G_VARIANT_TYPE_STRING);
 	name = v ? g_variant_get_string (v, NULL) : NULL;
 
-	v = g_variant_lookup_value (ret, "Class", G_VARIANT_TYPE_UINT32);
+	v = g_variant_lookup_value (dict, "Class", G_VARIANT_TYPE_UINT32);
 	type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
 
-	v = g_variant_lookup_value (ret, "Icon", G_VARIANT_TYPE_STRING);
+	v = g_variant_lookup_value (dict, "Icon", G_VARIANT_TYPE_STRING);
 	icon = v ? g_variant_get_string (v, NULL) : "bluetooth";
 
-	v = g_variant_lookup_value (ret, "Paired", G_VARIANT_TYPE_BOOLEAN);
+	v = g_variant_lookup_value (dict, "Paired", G_VARIANT_TYPE_BOOLEAN);
 	paired = v ? g_variant_get_boolean (v) : FALSE;
 
-	v = g_variant_lookup_value (ret, "Trusted", G_VARIANT_TYPE_BOOLEAN);
+	v = g_variant_lookup_value (dict, "Trusted", G_VARIANT_TYPE_BOOLEAN);
 	trusted = v ? g_variant_get_boolean (v) : FALSE;
 
-	v = g_variant_lookup_value (ret, "Connected", G_VARIANT_TYPE_BOOLEAN);
+	v = g_variant_lookup_value (dict, "Connected", G_VARIANT_TYPE_BOOLEAN);
 	connected = v ? g_variant_get_boolean (v) : FALSE;
 
-	v = g_variant_lookup_value (ret, "UUIDs", G_VARIANT_TYPE_STRING_ARRAY);
+	v = g_variant_lookup_value (dict, "UUIDs", G_VARIANT_TYPE_STRING_ARRAY);
 	uuids = device_list_uuids (v);
 
-	v = g_variant_lookup_value (ret, "LegacyPairing", G_VARIANT_TYPE_BOOLEAN);
+	v = g_variant_lookup_value (dict, "LegacyPairing", G_VARIANT_TYPE_BOOLEAN);
 	legacypairing = v ? g_variant_get_boolean (v) : -1;
 
-	if (get_iter_from_address (priv->store, &iter, address, G_DBUS_PROXY (adapter)) == FALSE)
-		gtk_tree_store_insert (priv->store, &iter, parent, -1);
+	if (get_iter_from_path (priv->store, &parent, adapter_path) == FALSE) {
+		g_object_unref (device);
+		return;
+	}
+
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &parent,
+			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+
+	if (get_iter_from_address (priv->store, &iter, address, adapter) == FALSE)
+		gtk_tree_store_insert (priv->store, &iter, &parent, -1);
 
 	gtk_tree_store_set(priv->store, &iter,
 			   BLUETOOTH_COLUMN_ADDRESS, address,
@@ -586,61 +359,21 @@ add_device (Adapter         *adapter,
 			   BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 			   BLUETOOTH_COLUMN_UUIDS, uuids,
 			   BLUETOOTH_COLUMN_PAIRED, paired,
+			   BLUETOOTH_COLUMN_CONNECTED, connected,
+			   BLUETOOTH_COLUMN_TRUSTED, trusted,
+			   BLUETOOTH_COLUMN_PROXY, device,
 			   -1);
 	g_strfreev (uuids);
 
-	if (device != NULL) {
-		GHashTable *services;
+	g_signal_connect (G_OBJECT (device), "g-properties-changed",
+			  G_CALLBACK (device_g_properties_changed), client);
 
-		services = device_list_nodes (device, client);
-
-		gtk_tree_store_set(priv->store, &iter,
-				   BLUETOOTH_COLUMN_PROXY, device,
-				   BLUETOOTH_COLUMN_CONNECTED, connected,
-				   BLUETOOTH_COLUMN_TRUSTED, trusted,
-				   BLUETOOTH_COLUMN_SERVICES, services,
-				   -1);
-
-		if (services != NULL)
-			g_hash_table_unref (services);
-	}
-	g_variant_unref (ret);
-
-	if (device != NULL) {
-		g_signal_connect (G_OBJECT (device), "g-signal",
-				  G_CALLBACK (device_g_signal), client);
-		g_object_unref (device);
-	}
+	g_object_unref (device);
+	g_object_unref (adapter);
 }
 
 static void
-device_found (Adapter         *adapter,
-	      const char      *address,
-	      GVariant        *dict,
-	      BluetoothClient *client)
-{
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
-
-	if (get_iter_from_proxy(priv->store, &iter, G_DBUS_PROXY (adapter)) == TRUE)
-		add_device(adapter, &iter, client, NULL, dict);
-}
-
-static void
-device_created (Adapter         *adapter,
-		const char      *path,
-		BluetoothClient *client)
-{
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
-
-	if (get_iter_from_proxy(priv->store, &iter, G_DBUS_PROXY (adapter)) == TRUE)
-		add_device(adapter, &iter, client, path, NULL);
-}
-
-static void
-device_removed (GDBusProxy      *adapter,
-		const char      *path,
+device_removed (const char      *path,
 		BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
@@ -651,155 +384,162 @@ device_removed (GDBusProxy      *adapter,
 }
 
 static void
-adapter_changed (GDBusProxy      *adapter,
-		 const char      *property,
-		 GVariant        *value,
-		 BluetoothClient *client)
+default_adapter_changed (ObjectManager   *manager,
+			 const char      *path,
+			 BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
+	gboolean cont;
+
+	if (priv->default_adapter) {
+		gtk_tree_row_reference_free (priv->default_adapter);
+		priv->default_adapter = NULL;
+	}
+
+	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(priv->store), &iter);
+
+	while (cont == TRUE) {
+		GDBusProxy *adapter;
+		const char *adapter_path;
+		gboolean found, powered;
+
+		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
+				   BLUETOOTH_COLUMN_PROXY, &adapter,
+				   BLUETOOTH_COLUMN_POWERED, &powered, -1);
+
+		adapter_path = g_dbus_proxy_get_object_path (adapter);
+
+		found = g_str_equal (path, adapter_path);
+
+		g_object_unref (adapter);
+
+		if (found != FALSE) {
+			GtkTreePath *tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+			priv->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), tree_path);
+			gtk_tree_path_free (tree_path);
+		}
+
+		gtk_tree_store_set (priv->store, &iter,
+				    BLUETOOTH_COLUMN_DEFAULT, found, -1);
+
+		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(priv->store), &iter);
+	}
+
+	/* Record the new default adapter */
+	g_object_notify (G_OBJECT (client), "default-adapter");
+	g_object_notify (G_OBJECT (client), "default-adapter-powered");
+	g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+}
+
+static void
+adapter_g_properties_changed (GDBusProxy      *adapter,
+			      GVariant        *changed_p,
+			      GStrv            invalidated_p,
+			      BluetoothClient *client)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GVariantIter i;
+	const char *property;
+	GtkTreeIter iter;
+	GVariant *v;
 	gboolean notify = FALSE;
 
-	if (get_iter_from_proxy(priv->store, &iter, adapter) == FALSE)
+	if (get_iter_from_proxy (priv->store, &iter, adapter) == FALSE)
 		return;
 
-	if (g_str_equal(property, "Name") == TRUE) {
-		const gchar *name = g_variant_get_string (value, NULL);
-		gboolean is_default;
+	g_variant_iter_init (&i, changed_p);
+	while (g_variant_iter_next (&i, "{&sv}", &property, &v)) {
+		if (g_str_equal (property, "Name") == TRUE) {
+			const gchar *name = g_variant_get_string (v, NULL);
+			gboolean is_default;
 
-		gtk_tree_store_set(priv->store, &iter,
-					BLUETOOTH_COLUMN_NAME, name, -1);
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				   BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-		if (is_default != FALSE)
-			g_object_notify (G_OBJECT (client), "default-adapter-powered");
-		notify = TRUE;
-	} else if (g_str_equal(property, "Discovering") == TRUE) {
-		gboolean discovering = g_variant_get_boolean(value);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_NAME, name, -1);
+			gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+			if (is_default != FALSE)
+				g_object_notify (G_OBJECT (client), "default-adapter-powered");
+			notify = TRUE;
+		} else if (g_str_equal (property, "Discovering") == TRUE) {
+			gboolean discovering = g_variant_get_boolean (v);
 
-		gtk_tree_store_set(priv->store, &iter,
-				BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
-		notify = TRUE;
-	} else if (g_str_equal(property, "Powered") == TRUE) {
-		gboolean powered = g_variant_get_boolean(value);
-		gboolean is_default;
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+			notify = TRUE;
+		} else if (g_str_equal (property, "Powered") == TRUE) {
+			gboolean powered = g_variant_get_boolean (v);
+			gboolean is_default;
 
-		gtk_tree_store_set(priv->store, &iter,
-				   BLUETOOTH_COLUMN_POWERED, powered, -1);
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				   BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-		if (is_default != FALSE)
-			g_object_notify (G_OBJECT (client), "default-adapter-powered");
-		notify = TRUE;
-	} else if (g_str_equal(property, "Discoverable") == TRUE) {
-		gboolean discoverable = g_variant_get_boolean(value);
-		gboolean is_default;
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_POWERED, powered, -1);
+			gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+			if (is_default != FALSE)
+				g_object_notify (G_OBJECT (client), "default-adapter-powered");
+			notify = TRUE;
+		} else if (g_str_equal (property, "Discoverable") == TRUE) {
+			gboolean discoverable = g_variant_get_boolean (v);
+			gboolean is_default;
 
-		gtk_tree_store_set(priv->store, &iter,
-				   BLUETOOTH_COLUMN_DISCOVERABLE, discoverable, -1);
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				   BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-		if (is_default != FALSE)
-			g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
-		notify = TRUE;
-	}
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_DISCOVERABLE, discoverable, -1);
+			gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+			if (is_default != FALSE)
+				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+			notify = TRUE;
+		}
 
-	if (notify != FALSE) {
-		GtkTreePath *path;
+		if (notify != FALSE) {
+			GtkTreePath *path;
 
-		/* Tell the world */
-		path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (priv->store), path, &iter);
-		gtk_tree_path_free (path);
-	}
-}
-
-static void
-adapter_g_signal (GDBusProxy      *proxy,
-		  gchar           *sender_name,
-		  gchar           *signal_name,
-		  GVariant        *parameters,
-		  BluetoothClient *client)
-{
-	if (g_strcmp0 (signal_name, "PropertyChanged") == 0) {
-		char *property;
-		GVariant *variant;
-
-		g_variant_get (parameters, "(sv)", &property, &variant);
-		adapter_changed (proxy, property, variant, client);
-		g_free (property);
-		g_variant_unref (variant);
-	} else if (g_strcmp0 (signal_name, "DeviceCreated") == 0) {
-		char *object_path;
-		g_variant_get (parameters, "(o)", &object_path);
-		device_created (ADAPTER (proxy), object_path, client);
-		g_free (object_path);
-	} else if (g_strcmp0 (signal_name, "DeviceRemoved") == 0) {
-		char *object_path;
-		g_variant_get (parameters, "(o)", &object_path);
-		device_removed (proxy, object_path, client);
-		g_free (object_path);
-	} else if (g_strcmp0 (signal_name, "DeviceFound") == 0) {
-		char *address;
-		GVariant *dict;
-		g_variant_get (parameters, "(s@a{sv})", &address, &dict);
-		device_found (ADAPTER (proxy), address, dict, client);
-		g_free (address);
-		g_variant_unref (dict);
+			/* Tell the world */
+			path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+			gtk_tree_model_row_changed (GTK_TREE_MODEL (priv->store), path, &iter);
+			gtk_tree_path_free (path);
+		}
+		g_variant_unref (v);
 	}
 }
 
 static void
-adapter_added (Manager         *manager,
+adapter_added (ObjectManager   *manager,
 	       const char      *path,
+	       GVariant        *variant,
 	       BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-	Adapter *adapter;
-	const char **devices;
-	GVariant *variant;
+	Adapter1 *adapter;
 	const gchar *address, *name;
+	GVariant *v, *dict;
 	gboolean discovering, discoverable, powered;
 
-	variant = NULL;
-	adapter = adapter_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-						  BLUEZ_SERVICE,
-						  path,
-						  NULL,
-						  NULL);
+	adapter = adapter1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+						   G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+						   BLUEZ_SERVICE,
+						   path,
+						   NULL,
+						   NULL);
 
-	if (adapter_call_get_properties_sync (adapter, &variant, NULL, NULL) == TRUE) {
-		GVariant *v;
+	dict = g_variant_lookup_value (variant, BLUEZ_ADAPTER_INTERFACE,
+                              G_VARIANT_TYPE_DICTIONARY);
 
-		v = g_variant_lookup_value (variant, "Address", G_VARIANT_TYPE_STRING);
-		address = v ? g_variant_get_string (v, NULL) : NULL;
+	v = g_variant_lookup_value (dict, "Address", G_VARIANT_TYPE_STRING);
+	address = v ? g_variant_get_string (v, NULL) : NULL;
 
-		v = g_variant_lookup_value (variant, "Name", G_VARIANT_TYPE_STRING);
-		name = v ? g_variant_get_string (v, NULL) : NULL;
+	v = g_variant_lookup_value (dict, "Name", G_VARIANT_TYPE_STRING);
+	name = v ? g_variant_get_string (v, NULL) : NULL;
 
-		v = g_variant_lookup_value (variant, "Discovering", G_VARIANT_TYPE_BOOLEAN);
-		discovering = v ? g_variant_get_boolean (v) : FALSE;
+	v = g_variant_lookup_value (dict, "Discovering", G_VARIANT_TYPE_BOOLEAN);
+	discovering = v ? g_variant_get_boolean (v) : FALSE;
 
-		v = g_variant_lookup_value (variant, "Powered", G_VARIANT_TYPE_BOOLEAN);
-		powered = v ? g_variant_get_boolean (v) : FALSE;
+	v = g_variant_lookup_value (dict, "Powered", G_VARIANT_TYPE_BOOLEAN);
+	powered = v ? g_variant_get_boolean (v) : FALSE;
 
-		v = g_variant_lookup_value (variant, "Devices", G_VARIANT_TYPE_OBJECT_PATH_ARRAY);
-		devices = v ? g_variant_get_objv (v, NULL) : NULL;
-
-		v = g_variant_lookup_value (variant, "Discoverable", G_VARIANT_TYPE_BOOLEAN);
-		discoverable = v ? g_variant_get_boolean (v) : FALSE;
-
-		g_variant_unref (variant);
-	} else {
-		address = NULL;
-		name = NULL;
-		discovering = FALSE;
-		discoverable = FALSE;
-		powered = FALSE;
-		devices = NULL;
-	}
+	v = g_variant_lookup_value (dict, "Discoverable", G_VARIANT_TYPE_BOOLEAN);
+	discoverable = v ? g_variant_get_boolean (v) : FALSE;
 
 	gtk_tree_store_insert_with_values(priv->store, &iter, NULL, -1,
 					  BLUETOOTH_COLUMN_PROXY, adapter,
@@ -810,23 +550,16 @@ adapter_added (Manager         *manager,
 					  BLUETOOTH_COLUMN_POWERED, powered,
 					  -1);
 
-	g_signal_connect (G_OBJECT (adapter), "g-signal",
-			  G_CALLBACK (adapter_g_signal), client);
+	g_signal_connect (G_OBJECT (adapter), "g-properties-changed",
+			  G_CALLBACK (adapter_g_properties_changed), client);
 
-	if (devices != NULL) {
-		guint i;
-
-		for (i = 0; devices[i] != NULL; i++) {
-			device_created (adapter, devices[i], client);
-		}
-		g_free (devices);
-	}
+	default_adapter_changed (manager, path, client);
 
 	g_object_unref (adapter);
 }
 
 static void
-adapter_removed (Manager         *manager,
+adapter_removed (ObjectManager   *manager,
 		 const char      *path,
 		 BluetoothClient *client)
 {
@@ -834,8 +567,7 @@ adapter_removed (Manager         *manager,
 	GtkTreeIter iter;
 	gboolean cont;
 
-	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
-									&iter);
+	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(priv->store), &iter);
 
 	while (cont == TRUE) {
 		GDBusProxy *adapter;
@@ -863,81 +595,72 @@ adapter_removed (Manager         *manager,
 			break;
 		}
 
-		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
-									&iter);
+		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(priv->store), &iter);
 	}
 }
 
 static void
-default_adapter_changed (Manager         *manager,
-			 const char      *path,
-			 BluetoothClient *client)
+interface_added (BluetoothClient *client,
+		 const char *path,
+		 GVariant   *variant)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
-	gboolean cont;
 
-	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
-									&iter);
-	if (priv->default_adapter) {
-		gtk_tree_row_reference_free (priv->default_adapter);
-		priv->default_adapter = NULL;
+	if (g_variant_lookup_value (variant, BLUEZ_ADAPTER_INTERFACE,
+				    G_VARIANT_TYPE_DICTIONARY)) {
+		g_debug ("New Adapter interface added.\n");
+		adapter_added (priv->manager, path, variant, client);
+		return;
 	}
 
-	while (cont == TRUE) {
-		GDBusProxy *adapter;
-		const char *adapter_path;
-		gboolean found, powered;
-
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				   BLUETOOTH_COLUMN_PROXY, &adapter,
-				   BLUETOOTH_COLUMN_POWERED, &powered, -1);
-
-		adapter_path = g_dbus_proxy_get_object_path(adapter);
-
-		found = g_str_equal(path, adapter_path);
-
-		g_object_unref(adapter);
-
-		if (found != FALSE) {
-			GtkTreePath *tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
-			priv->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), tree_path);
-			gtk_tree_path_free (tree_path);
-		}
-
-		gtk_tree_store_set(priv->store, &iter,
-					BLUETOOTH_COLUMN_DEFAULT, found, -1);
-
-		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
-									&iter);
+	if (g_variant_lookup_value (variant, BLUEZ_DEVICE_INTERFACE,
+				    G_VARIANT_TYPE_DICTIONARY)) {
+		g_debug ("New Device interface added.\n");
+		device_added (priv->manager, client, path, variant);
+		return;
 	}
-
-	/* Record the new default adapter */
-	g_object_notify (G_OBJECT (client), "default-adapter");
-	g_object_notify (G_OBJECT (client), "default-adapter-powered");
-	g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 }
 
 static void
-manager_g_signal (GDBusProxy      *proxy,
-		  gchar           *sender_name,
-		  gchar           *signal_name,
-		  GVariant        *parameters,
-		  BluetoothClient *client)
+interface_removed (BluetoothClient *client,
+		   const char      *path,
+		   GVariant        *variant)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	const char **ifaces;
+	int i;
+
+	ifaces = g_variant_get_strv (variant, NULL);
+
+	for (i = 0 ; ifaces[i] != NULL ; i++) {
+		if (g_strcmp0(ifaces[i], BLUEZ_ADAPTER_INTERFACE) == 0) {
+			adapter_removed(priv->manager, path, client);
+			return;
+		}
+
+		if (g_strcmp0(ifaces[i], BLUEZ_DEVICE_INTERFACE) == 0) {
+			device_removed (path, client);
+			return;
+		}
+	}
+}
+
+static void
+object_manager_g_signal (GDBusProxy      *proxy,
+			 gchar           *sender_name,
+			 gchar           *signal_name,
+			 GVariant        *parameters,
+			 BluetoothClient *client)
 {
 	char *object_path;
+	GVariant *variant;
 
-	if (g_strcmp0 (signal_name, "PropertyChanged") == 0)
-		return;
+	g_variant_get (parameters, "(o*)", &object_path, &variant);
 
-	g_variant_get (parameters, "(o)", &object_path);
-
-	if (g_strcmp0 (signal_name, "AdapterAdded") == 0) {
-		adapter_added (MANAGER (proxy), object_path, client);
-	} else if (g_strcmp0 (signal_name, "AdapterRemoved") == 0) {
-		adapter_removed (MANAGER (proxy), object_path, client);
-	} else if (g_strcmp0 (signal_name, "DefaultAdapterChanged") == 0) {
-		default_adapter_changed (MANAGER (proxy), object_path, client);
+	if (g_strcmp0 (signal_name, "InterfacesAdded") == 0) {
+		interface_added (client, object_path, variant);
+	} else if (g_strcmp0 (signal_name, "InterfacesRemoved") == 0) {
+		interface_removed (client, object_path, variant);
 	} else {
 		g_assert_not_reached ();
 	}
@@ -952,43 +675,33 @@ bluez_appeared_cb (GDBusConnection *connection,
 		   BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GVariant *variant;
-	const char **array;
-	gchar *default_path = NULL;
+	GVariantIter iter;
+	GVariant *variant, *v, *ifaces;
+	char *key;
 
-	priv->manager = manager_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-							BLUEZ_SERVICE,
-							BLUEZ_MANAGER_PATH,
-							NULL,
-							NULL);
+	priv->manager = object_manager_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+							       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+							       BLUEZ_SERVICE,
+							       BLUEZ_MANAGER_PATH,
+							       NULL,
+							       NULL);
 
 	g_signal_connect (G_OBJECT (priv->manager), "g-signal",
-			  G_CALLBACK (manager_g_signal), client);
+			  G_CALLBACK (object_manager_g_signal), client);
 
 	variant = NULL;
-	manager_call_get_properties_sync (MANAGER (priv->manager), &variant, NULL, NULL);
-	if (variant != NULL) {
-		GVariant *v;
-		guint i;
+	object_manager_call_get_managed_objects_sync (OBJECT_MANAGER (priv->manager),
+						      &variant, NULL, NULL);
+	if (variant == NULL)
+		return;
 
-		v = g_variant_lookup_value (variant, "Adapters", G_VARIANT_TYPE_OBJECT_PATH_ARRAY);
-		array = v ? g_variant_get_objv (v, NULL) : NULL;
-
-		if (array != NULL) {
-			for (i = 0; array[i] != NULL; i++)
-				adapter_added(priv->manager, array[i], client);
-			g_free (array);
-		}
-
-		g_variant_unref (variant);
+	g_variant_iter_init (&iter, variant);
+	while ((v = g_variant_iter_next_value (&iter))) {
+		g_variant_get (v, "{o*}", &key, &ifaces);
+		interface_added (client, key, ifaces);
 	}
 
-	manager_call_default_adapter_sync (priv->manager, &default_path, NULL, NULL);
-	if (default_path != NULL) {
-		default_adapter_changed (priv->manager, default_path, client);
-		g_free(default_path);
-	}
+	g_variant_unref (variant);
 }
 
 static void
@@ -1014,8 +727,6 @@ bluez_vanished_cb (GDBusConnection *connection,
 static void bluetooth_client_init(BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-
-	g_type_class_ref (BLUETOOTH_TYPE_STATUS);
 
 	priv->store = gtk_tree_store_new(_BLUETOOTH_NUM_COLUMNS, G_TYPE_OBJECT,
 					 G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
@@ -1152,6 +863,8 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 {
 	GError *error = NULL;
 	GDBusProxy *adapter;
+	Properties *properties;
+	const char *path;
 	gboolean ret;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
@@ -1160,24 +873,22 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (adapter == NULL)
 		return FALSE;
 
-	if (discoverable) {
-		ret = adapter_call_set_property_sync (ADAPTER (adapter),
-						      "DiscoverableTimeout",
-						      g_variant_new_variant (g_variant_new_uint32 (timeout)),
-						      NULL, &error);
-		if (ret == FALSE) {
-			g_warning ("Failed to set DiscoverableTimeout to %d: %s", timeout, error->message);
-			g_error_free (error);
-			g_object_unref (adapter);
-			return ret;
-		}
-	}
+	path = g_dbus_proxy_get_object_path (adapter);
 
-	ret = adapter_call_set_property_sync (ADAPTER (adapter),
-					      "Discoverable",
-					      g_variant_new_variant (g_variant_new_boolean (discoverable)),
-					      NULL, &error);
+	properties = properties_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+							BLUEZ_SERVICE, path, NULL, NULL);
+
+	if (properties == NULL)
+		return FALSE;
+
+	ret = properties_call_set_sync (properties,
+					BLUEZ_ADAPTER_INTERFACE,
+					"Discoverable",
+					g_variant_new_variant (g_variant_new_boolean (discoverable)),
+					NULL, &error);
 	if (ret == FALSE) {
+
 		g_warning ("Failed to set Discoverable to %d: %s", discoverable, error->message);
 		g_error_free (error);
 	}
@@ -1198,9 +909,9 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 		return;
 
 	if (discover)
-		adapter_call_start_discovery_sync (ADAPTER (adapter), NULL, NULL);
+		adapter1_call_start_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
 	else
-		adapter_call_stop_discovery_sync (ADAPTER (adapter), NULL, NULL);
+		adapter1_call_stop_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
 
 	g_object_unref(adapter);
 }
@@ -1280,8 +991,6 @@ static void bluetooth_client_finalize(GObject *client)
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
 	g_bus_unwatch_name (priv->owner_change_id);
-
-	g_type_class_unref (g_type_class_peek (BLUETOOTH_TYPE_STATUS));
 
 	if (priv->manager)
 		g_object_unref (priv->manager);
@@ -1483,30 +1192,26 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
 
 	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	cont = gtk_tree_model_get_iter_first(GTK_TREE_MODEL(priv->store),
-									&iter);
+	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(priv->store), &iter);
 
 	while (cont == TRUE) {
 		gboolean is_default;
 
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+				    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
 
 		if (is_default == TRUE) {
 			found = TRUE;
 			break;
 		}
 
-		cont = gtk_tree_model_iter_next(GTK_TREE_MODEL(priv->store),
-									&iter);
+		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(priv->store), &iter);
 	}
 
 	if (found == TRUE) {
-		path = gtk_tree_model_get_path(GTK_TREE_MODEL(priv->store),
-									&iter);
-		model = gtk_tree_model_filter_new(GTK_TREE_MODEL(priv->store),
-									path);
-		gtk_tree_path_free(path);
+		path = gtk_tree_model_get_path (GTK_TREE_MODEL(priv->store), &iter);
+		model = gtk_tree_model_filter_new (GTK_TREE_MODEL(priv->store), path);
+		gtk_tree_path_free (path);
 	} else
 		model = NULL;
 
@@ -1514,31 +1219,24 @@ GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
 }
 
 typedef struct {
-	BluetoothClientCreateDeviceFunc func;
-	gpointer data;
+	BluetoothClientSetupFunc func;
 	BluetoothClient *client;
 } CreateDeviceData;
 
 static void
-create_device_callback (GDBusProxy       *proxy,
-			GAsyncResult     *res,
-			CreateDeviceData *devdata)
+device_pair_callback (GDBusProxy       *proxy,
+		      GAsyncResult     *res,
+		      CreateDeviceData *devdata)
 {
 	GError *error = NULL;
-	char *path = NULL;
-	GVariant *ret;
+	const char *path;
 
-	ret = g_dbus_proxy_call_finish (proxy, res, &error);
-	if (ret == NULL) {
-		g_warning ("CreateDevice failed: %s", error->message);
-	} else {
-		g_variant_get (ret, "(o)", &path);
-		g_variant_unref (ret);
-	}
+	if (device1_call_pair_finish (DEVICE1(proxy), res, &error) == FALSE)
+		g_warning ("Pair() failed: %s", error->message);
 
+	path = g_dbus_proxy_get_object_path(proxy);
 	if (devdata->func)
-		devdata->func(devdata->client, path, error, devdata->data);
-	g_free (path);
+		devdata->func (devdata->client, error, path);
 
 	if (error != NULL)
 		g_error_free (error);
@@ -1547,72 +1245,59 @@ create_device_callback (GDBusProxy       *proxy,
 	g_free (devdata);
 }
 
-gboolean bluetooth_client_create_device (BluetoothClient *client,
-					 const char *address,
-					 const char *agent,
-					 BluetoothClientCreateDeviceFunc func,
-					 gpointer data)
+gboolean
+bluetooth_client_setup_device (BluetoothClient          *client,
+			       const char               *path,
+			       const char               *agent,
+			       BluetoothClientSetupFunc  func,
+			       gboolean                  pair)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	CreateDeviceData *devdata;
-	GDBusProxy *adapter;
-	GtkTreeIter iter;
+	GDBusProxy *adapter, *device;
+	GtkTreeIter iter, adapter_iter;
+	gboolean paired;
+	GError *err = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-	g_return_val_if_fail (address != NULL, FALSE);
 
-	adapter = _bluetooth_client_get_default_adapter(client);
-	if (adapter == NULL)
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
 		return FALSE;
 
-	/* Remove the pairing if it already exists, but only for pairings */
-	if (agent != NULL &&
-	    get_iter_from_address(priv->store, &iter, address, adapter) == TRUE) {
-		GDBusProxy *device;
-		gboolean paired;
-		GError *err = NULL;
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &device,
+			    BLUETOOTH_COLUMN_PAIRED, &paired, -1);
 
-		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
-				    BLUETOOTH_COLUMN_PROXY, &device,
-				    BLUETOOTH_COLUMN_PAIRED, &paired, -1);
-		if (device != NULL &&
-		    paired != FALSE &&
-		    adapter_call_remove_device_sync (ADAPTER (adapter),
-		    				     g_dbus_proxy_get_object_path (device),
-		    				     NULL, &err) == FALSE) {
-			g_warning ("Failed to remove device '%s': %s", address,
-				   err->message);
+	if (paired != FALSE &&
+			gtk_tree_model_iter_parent (GTK_TREE_MODEL(priv->store),
+						    &adapter_iter, &iter)) {
+		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &adapter_iter,
+				    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+		adapter1_call_remove_device_sync (ADAPTER1 (adapter),
+						  path,
+						  NULL, &err);
+		if (err != NULL) {
+			g_warning ("Failed to remove device: %s", err->message);
 			g_error_free (err);
 		}
-		if (device != NULL)
-			g_object_unref (device);
+		g_object_unref (adapter);
 	}
 
-	devdata = g_new0 (CreateDeviceData, 1);
-	devdata->func = func;
-	devdata->data = data;
-	devdata->client = g_object_ref (client);
+	if (pair == TRUE) {
+		devdata = g_new0 (CreateDeviceData, 1);
+		devdata->func = func;
+		devdata->client = g_object_ref (client);
 
-	if (agent != NULL)
-		g_dbus_proxy_call (adapter,
-				   "CreatePairedDevice",
-				   g_variant_new ("(sos)", address, agent, "DisplayYesNo"),
-				   G_DBUS_CALL_FLAGS_NONE,
-				   90 * 1000,
+		device1_call_pair (DEVICE1(device),
 				   NULL,
-				   (GAsyncReadyCallback) create_device_callback,
+				   (GAsyncReadyCallback) device_pair_callback,
 				   devdata);
-	else
-		g_dbus_proxy_call (adapter,
-				   "CreateDevice",
-				   g_variant_new ("(s)", address),
-				   G_DBUS_CALL_FLAGS_NONE,
-				   90 * 1000,
-				   NULL,
-				   (GAsyncReadyCallback) create_device_callback,
-				   devdata);
-	g_object_unref (adapter);
+	} else {
+		if (func)
+			func (client, NULL, path);
+	}
 
+	g_object_unref (device);
 	return TRUE;
 }
 
@@ -1621,177 +1306,104 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 			      const char      *device,
 			      gboolean         trusted)
 {
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
-	GDBusProxy *proxy;
+	Properties *properties;
+	GError     *error = NULL;
+	gboolean   ret;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device != NULL, FALSE);
 
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
+	properties = properties_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+							BLUEZ_SERVICE, device, NULL, NULL);
+
+	if (properties == NULL)
 		return FALSE;
 
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_PROXY, &proxy,
-			    -1);
+	ret = properties_call_set_sync (properties, BLUEZ_DEVICE_INTERFACE, "Trusted",
+					g_variant_new_variant (g_variant_new_boolean (trusted)),
+					NULL, &error);
+	if (ret == FALSE) {
+		g_warning ("Failed to set Trusted to %d: %s", trusted, error->message);
+		g_error_free (error);
+	}
 
-	if (proxy == NULL)
-		return FALSE;
-
-	device_call_set_property_sync (DEVICE (proxy),
-				       "Trusted",
-				       g_variant_new_variant (g_variant_new_boolean (trusted)),
-				       NULL, NULL);
-
-	g_object_unref(proxy);
-
-	return TRUE;
+	g_object_unref (properties);
+	return ret;
 }
 
-typedef struct {
-	GSimpleAsyncResult *simple;
-	/* used for disconnect */
-	GList *services;
-	Device *device;
-} ConnectData;
+GDBusProxy *
+bluetooth_client_get_device (BluetoothClient *client,
+			     const char       *path)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GtkTreeIter iter;
+	GDBusProxy *proxy;
+
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE) {
+		return NULL;
+	}
+
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			                BLUETOOTH_COLUMN_PROXY, &proxy,
+			                -1);
+	return proxy;
+}
 
 static void
 connect_callback (GDBusProxy   *proxy,
 		  GAsyncResult *res,
-		  ConnectData  *conndata)
+		  GSimpleAsyncResult *simple)
 {
-	GVariant *variant;
 	gboolean retval;
 	GError *error = NULL;
 
-	variant = g_dbus_proxy_call_finish (proxy, res, &error);
-	if (variant == NULL) {
-		retval = FALSE;
+	retval = device1_call_connect_finish (DEVICE1(proxy), res, &error);
+	if (retval == FALSE) {
 		g_debug ("Connect failed for %s: %s",
 			 g_dbus_proxy_get_object_path (proxy), error->message);
 		g_error_free (error);
 	} else {
 		g_debug ("Connect succeeded for %s",
 			 g_dbus_proxy_get_object_path (proxy));
-		g_variant_unref (variant);
-		retval = TRUE;
 	}
 
-	g_simple_async_result_set_op_res_gboolean (conndata->simple, retval);
-	g_simple_async_result_complete_in_idle (conndata->simple);
+	g_simple_async_result_set_op_res_gboolean (simple, retval);
+	g_simple_async_result_complete_in_idle (simple);
 
-	g_object_unref (conndata->simple);
+	g_object_unref (simple);
 	g_object_unref (proxy);
-	g_free (conndata);
 }
 
 static void
 disconnect_callback (GDBusProxy   *proxy,
 		     GAsyncResult *res,
-		     ConnectData  *conndata)
+		     GSimpleAsyncResult *simple)
 {
 	gboolean retval;
 	GError *error = NULL;
 
-	if (conndata->services == NULL) {
-		retval = device_call_disconnect_finish (conndata->device, res, &error);
-		if (retval == FALSE) {
-			g_debug ("Disconnect failed for %s: %s",
-				 g_dbus_proxy_get_object_path (G_DBUS_PROXY (conndata->device)),
-				 error->message);
-			g_error_free (error);
-		} else {
-			g_debug ("Disconnect succeeded for %s",
-				 g_dbus_proxy_get_object_path (G_DBUS_PROXY (conndata->device)));
-		}
+	retval = device1_call_disconnect_finish (DEVICE1(proxy), res, &error);
+	if (retval == FALSE) {
+		g_debug ("Disconnect failed for %s: %s",
+			 g_dbus_proxy_get_object_path (proxy),
+			 error->message);
+		g_error_free (error);
 	} else {
-		GDBusProxy *service;
-		BluetoothClient *client;
-		GVariant *variant;
-
-		variant = g_dbus_proxy_call_finish (proxy, res, &error);
-		if (variant == NULL) {
-			retval = FALSE;
-			g_debug ("Disconnect failed for %s on %s: %s",
-				 g_dbus_proxy_get_object_path (proxy),
-				 g_dbus_proxy_get_interface_name (proxy),
-				 error->message);
-			g_error_free (error);
-		} else {
-			g_debug ("Disconnect succeeded for %s on %s",
-				 g_dbus_proxy_get_object_path (proxy),
-				 g_dbus_proxy_get_interface_name (proxy));
-			g_variant_unref (variant);
-			retval = TRUE;
-		}
-		g_object_unref (proxy);
-
-		client = (BluetoothClient *) g_async_result_get_source_object (G_ASYNC_RESULT (conndata->simple));
-		service = get_proxy_for_iface (DEVICE (conndata->device), conndata->services->data, client);
-		g_object_unref (client);
-
-		conndata->services = g_list_remove (conndata->services, conndata->services->data);
-
-		g_dbus_proxy_call (G_DBUS_PROXY (service),
-				   "Disconnect",
-				   g_variant_new ("()"),
-				   G_DBUS_CALL_FLAGS_NONE,
-				   -1,
-				   NULL,
-				   (GAsyncReadyCallback) disconnect_callback,
-				   conndata);
-
-		return;
+		g_debug ("Disconnect succeeded for %s",
+			 g_dbus_proxy_get_object_path (proxy));
 	}
-
-	g_simple_async_result_set_op_res_gboolean (conndata->simple, retval);
-	g_simple_async_result_complete_in_idle (conndata->simple);
+	g_simple_async_result_set_op_res_gboolean (simple, retval);
+	g_simple_async_result_complete_in_idle (simple);
 
 	g_object_unref (proxy);
-	g_clear_object (&conndata->device);
-	g_object_unref (conndata->simple);
-	g_free (conndata);
-}
-
-static int
-service_to_index (const char *service)
-{
-	guint i;
-
-	g_return_val_if_fail (service != NULL, -1);
-
-	for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
-		if (g_str_equal (connectable_interfaces[i], service) != FALSE)
-			return i;
-	}
-	for (i = 0; i < G_N_ELEMENTS (detectable_interfaces); i++) {
-		if (g_str_equal (detectable_interfaces[i], service) != FALSE)
-			return i + G_N_ELEMENTS (connectable_interfaces);
-	}
-	g_assert_not_reached ();
-
-	return -1;
-}
-
-static int
-rev_sort_services (const char *servicea, const char *serviceb)
-{
-	int a, b;
-
-	a = service_to_index (servicea);
-	b = service_to_index (serviceb);
-
-	if (a < b)
-		return 1;
-	if (a > b)
-		return -1;
-	return 0;
+	g_object_unref (simple);
 }
 
 /**
  * bluetooth_client_connect_service:
  * @client: a #BluetoothClient
- * @device: the DBUS path on which to operate
+ * @path: the object path on which to operate
  * @connect: Whether try to connect or disconnect from services on a device
  * @cancellable: optional #GCancellable object, %NULL to ignore
  * @callback: (scope async): a #GAsyncReadyCallback to call when the connection is complete
@@ -1803,133 +1415,52 @@ rev_sort_services (const char *servicea, const char *serviceb)
  **/
 void
 bluetooth_client_connect_service (BluetoothClient     *client,
-				  const char          *device,
+				  const char          *path,
 				  gboolean             connect,
 				  GCancellable        *cancellable,
 				  GAsyncReadyCallback  callback,
 				  gpointer             user_data)
 {
-	GSimpleAsyncResult *simple;
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	ConnectData *conndata;
-	GDBusProxy *proxy;
-	GHashTable *table;
 	GtkTreeIter iter;
-	guint i;
-	gboolean res;
+	GSimpleAsyncResult *simple;
+	GDBusProxy *device;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
-	g_return_if_fail (device != NULL);
+	g_return_if_fail (path != NULL);
+
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
+		return;
+
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &device,
+			    -1);
 
 	simple = g_simple_async_result_new (G_OBJECT (client),
 					    callback,
 					    user_data,
 					    bluetooth_client_connect_service);
-	res = FALSE;
-
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
-		goto bail;
 
 	if (cancellable != NULL) {
 		g_object_set_data_full (G_OBJECT (simple), "cancellable",
 					g_object_ref (cancellable), g_object_unref);
-		g_object_set_data_full (G_OBJECT (simple), "device",
-					g_strdup (device), g_free);
 	}
 
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_PROXY, &proxy,
-			    BLUETOOTH_COLUMN_SERVICES, &table,
-			    -1);
-
-	/* No proxy? Let's leave it there */
-	if (proxy == NULL) {
-		if (table != NULL)
-			g_hash_table_unref (table);
-		g_debug ("Device '%s' has a services table, but no proxy", device);
-		goto bail;
-	}
-
-	if (connect && table == NULL) {
-		g_object_unref (proxy);
-		res = TRUE;
-		goto bail;
-	}
-
-	conndata = g_new0 (ConnectData, 1);
-	conndata->simple = simple;
+	simple = simple;
 
 	if (connect) {
-		GDBusProxy *service;
-		const char *iface_name;
-
-		iface_name = NULL;
-		for (i = 0; i < G_N_ELEMENTS (connectable_interfaces); i++) {
-			if (g_hash_table_lookup_extended (table, connectable_interfaces[i], NULL, NULL) != FALSE) {
-				iface_name = connectable_interfaces[i];
-				break;
-			}
-		}
-
-		if (iface_name == NULL) {
-			g_printerr("No supported services on the '%s' device\n", device);
-			g_hash_table_unref (table);
-			g_free (conndata);
-			g_object_unref (proxy);
-			goto bail;
-		}
-
-		service = get_proxy_for_iface (DEVICE (proxy), iface_name, client);
-
-		g_debug ("Calling 'Connect' on interface %s for %s",
-			 iface_name, g_dbus_proxy_get_object_path (service));
-
-		g_dbus_proxy_call (G_DBUS_PROXY (service),
-				   "Connect",
-				   NULL,
-				   G_DBUS_CALL_FLAGS_NONE,
-				   -1,
-				   NULL,
-				   (GAsyncReadyCallback) connect_callback,
-				   conndata);
-	} else if (table != NULL) {
-		GDBusProxy *service;
-
-		conndata->device = g_object_ref (DEVICE (proxy));
-		conndata->services = g_hash_table_get_keys (table);
-		g_hash_table_unref (table);
-		conndata->services = g_list_sort (conndata->services, (GCompareFunc) rev_sort_services);
-
-		service = get_proxy_for_iface (conndata->device, conndata->services->data, client);
-
-		g_debug ("Calling 'Disconnect' on interface %s for %s",
-			 (char *) conndata->services->data, g_dbus_proxy_get_object_path (service));
-
-		conndata->services = g_list_remove (conndata->services, conndata->services->data);
-
-		g_dbus_proxy_call (G_DBUS_PROXY (service),
-				   "Disconnect",
-				   NULL,
-				   G_DBUS_CALL_FLAGS_NONE,
-				   -1,
-				   NULL,
-				   (GAsyncReadyCallback) disconnect_callback,
-				   conndata);
-	} else if (table == NULL) {
-		g_debug ("Calling device_call_disconnect() for %s",
-			 g_dbus_proxy_get_object_path (proxy));
-		device_call_disconnect (DEVICE (proxy),
-					NULL,
-					(GAsyncReadyCallback) disconnect_callback,
-					conndata);
+		device1_call_connect (DEVICE1(device),
+				      NULL,
+				      (GAsyncReadyCallback) connect_callback,
+				      simple);
+	} else {
+		device1_call_disconnect (DEVICE1(device),
+					 NULL,
+					 (GAsyncReadyCallback) disconnect_callback,
+					 simple);
 	}
 
-	return;
-
-bail:
-	g_simple_async_result_set_op_res_gboolean (simple, res);
-	g_simple_async_result_complete_in_idle (simple);
-	g_object_unref (simple);
+	g_object_unref (device);
 }
 
 /**
@@ -1958,22 +1489,6 @@ bluetooth_client_connect_service_finish (BluetoothClient *client,
 
 #define BOOL_STR(x) (x ? "True" : "False")
 
-static void
-services_foreach (const char *service, gpointer _value, GString *str)
-{
-	GEnumClass *eclass;
-	GEnumValue *ev;
-	BluetoothStatus status = GPOINTER_TO_INT (_value);
-
-	eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
-	ev = g_enum_get_value (eclass, status);
-	if (ev == NULL)
-		g_warning ("Unknown status value %d", status);
-
-	g_string_append_printf (str, "%s (%s) ", service, ev ? ev->value_nick : "unknown");
-	g_type_class_unref (eclass);
-}
-
 void
 bluetooth_client_dump_device (GtkTreeModel *model,
 			      GtkTreeIter *iter)
@@ -1981,7 +1496,6 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 	GDBusProxy *proxy;
 	char *address, *alias, *name, *icon, **uuids;
 	gboolean is_default, paired, trusted, connected, discoverable, discovering, powered, is_adapter;
-	GHashTable *services;
 	GtkTreeIter parent;
 	guint type;
 
@@ -1998,7 +1512,6 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 			    BLUETOOTH_COLUMN_DISCOVERABLE, &discoverable,
 			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
 			    BLUETOOTH_COLUMN_POWERED, &powered,
-			    BLUETOOTH_COLUMN_SERVICES, &services,
 			    BLUETOOTH_COLUMN_UUIDS, &uuids,
 			    BLUETOOTH_COLUMN_PROXY, &proxy,
 			    -1);
@@ -2027,14 +1540,6 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 		g_print ("\tD-Bus Path: %s\n", proxy ? g_dbus_proxy_get_object_path (proxy) : "(none)");
 		g_print ("\tType: %s Icon: %s\n", bluetooth_type_to_string (type), icon);
 		g_print ("\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(paired), BOOL_STR(trusted), BOOL_STR(connected));
-		if (services != NULL) {
-			GString *str;
-
-			str = g_string_new (NULL);
-			g_hash_table_foreach (services, (GHFunc) services_foreach, str);
-			g_print ("\tServices: %s\n", str->str);
-			g_string_free (str, TRUE);
-		}
 		if (uuids != NULL) {
 			guint i;
 			g_print ("\tUUIDs: ");
@@ -2050,8 +1555,6 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 	g_free (icon);
 	if (proxy != NULL)
 		g_object_unref (proxy);
-	if (services != NULL)
-		g_hash_table_unref (services);
 	g_strfreev (uuids);
 }
 
