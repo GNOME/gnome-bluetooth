@@ -349,7 +349,13 @@ static void response_callback(GtkWidget *dialog,
 					  _("Connecting..."));
 		gtk_label_set_text (GTK_LABEL (label_status), "");
 		gtk_widget_hide (image_status);
-		send_files ();
+
+		/* If we have a session, we don't need to create another one. */
+		if (session)
+			send_next_file ();
+		else
+			send_files ();
+
 		return;
 	}
 
