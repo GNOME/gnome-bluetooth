@@ -220,6 +220,8 @@ transfer_created (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
 static void
 send_next_file (void)
 {
+	update_from_label ();
+
 	g_dbus_proxy_call (session,
 			   "SendFile",
 			   g_variant_new ("(s)", option_files[file_index]),
@@ -459,6 +461,8 @@ static void create_window(void)
 	gtk_label_set_ellipsize(GTK_LABEL(label_from), PANGO_ELLIPSIZE_MIDDLE);
 	gtk_grid_attach(GTK_GRID(table), label_from, 1, 0, 1, 1);
 
+	update_from_label ();
+
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 1, 0.5);
 	text = g_markup_printf_escaped("<b>%s</b>", _("To:"));
@@ -587,8 +591,6 @@ on_transfer_properties (GVariant *props)
 		current_size = g_variant_get_uint64 (size);
 		last_update = get_system_time ();
 	}
-
-	update_from_label ();
 
 	basename = g_path_get_basename(filename);
 	text = g_strdup_printf(_("Sending %s"), basename);
