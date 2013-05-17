@@ -120,6 +120,10 @@ handle_error (GError *error)
 	gtk_label_set_markup (GTK_LABEL (label_status), message);
 	g_free (message);
 
+	/* Clear the progress bar as it may be saying 'Connecting' or
+	 * 'Sending file 1 of 1' which is not true. */
+	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress), "");
+
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 }
 
