@@ -940,10 +940,10 @@ int main (int argc, char **argv)
 	if (gtk_init_with_args(&argc, &argv, NULL,
 				options, GETTEXT_PACKAGE, &error) == FALSE) {
 		if (error) {
-			g_print("%s\n", error->message);
+			g_printerr("%s\n", error->message);
 			g_error_free(error);
 		} else
-			g_print("An unknown error occurred\n");
+			g_printerr("An unknown error occurred\n");
 
 		return 1;
 	}
