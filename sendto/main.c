@@ -80,6 +80,17 @@ static gboolean error_callback(GDBusMethodInvocation *context,
 			       const char *message,
 			       gpointer user_data);
 
+static gint64
+get_system_time (void)
+{
+	struct timeval tmp;
+
+	gettimeofday(&tmp, NULL);
+
+	return (gint64) tmp.tv_usec +
+		(gint64) tmp.tv_sec * G_GINT64_CONSTANT(1000000);
+}
+
 static void
 send_files (void)
 {
@@ -128,16 +139,6 @@ static gchar *filename_to_path(const gchar *filename)
 	g_object_unref(file);
 
 	return path;
-}
-
-static gint64 get_system_time(void)
-{
-	struct timeval tmp;
-
-	gettimeofday(&tmp, NULL);
-
-	return (gint64) tmp.tv_usec +
-			(gint64) tmp.tv_sec * G_GINT64_CONSTANT(1000000);
 }
 
 static gchar *format_time(gint seconds)
