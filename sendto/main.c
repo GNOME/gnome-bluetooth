@@ -889,13 +889,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	if (option_device_name == NULL)
-		option_device_name = get_device_name(option_device);
-	if (option_device_name == NULL)
-		option_device_name = g_strdup(option_device);
-
-	create_window();
-
 	client_proxy = g_dbus_proxy_new_sync (conn,
 					      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
 					      NULL,
@@ -903,9 +896,21 @@ int main(int argc, char *argv[])
 					      OBEX_PATH,
 					      CLIENT_IFACE,
 					      cancellable,
-					      NULL);
+					      &error);
+	if (client_proxy == NULL) {
+		g_printerr("Acquiring proxy failed: %s\n", error->message);
+		g_error_free (error);
+		return 1;
+	}
 
-	if (client_proxy)
+	if (option_device_name == NULL)
+		option_device_name = get_device_name(option_device);
+	if (option_device_name == NULL)
+		option_device_name = g_strdup(option_device);
+
+	create_window();
+
+	if (!g_cancellable_is_cancelled (cancellable))
 		send_files ();
 
 	gtk_main();
