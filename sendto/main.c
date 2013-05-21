@@ -421,7 +421,7 @@ static void create_window(void)
 	GtkWidget *label;
 	gchar *text;
 
-	dialog = gtk_dialog_new_with_buttons(_("File Transfer"), NULL,
+	dialog = gtk_dialog_new_with_buttons(_("Bluetooth File Transfer"), NULL,
 				0,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				_("_Retry"), RESPONSE_RETRY,
@@ -438,15 +438,6 @@ static void create_window(void)
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
 	                   vbox);
-
-	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-	text = g_markup_printf_escaped("<span size=\"larger\"><b>%s</b></span>",
-	/* translators: This is the heading for the progress dialogue */
-					_("Sending files via Bluetooth"));
-	gtk_label_set_markup(GTK_LABEL(label), text);
-	g_free(text);
-	gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
 
 	table = gtk_grid_new();
 	gtk_grid_set_column_spacing(GTK_GRID(table), 4);
