@@ -192,7 +192,7 @@ bluetooth_applet_agent_reply_passkey (BluetoothApplet *self,
 /**
  * bluetooth_applet_agent_reply_confirm:
  * @self: a #BluetoothApplet
- * @request_key: an opaque token given in the pincode-request signal
+ * @request_key: an opaque token given in the confirm-request signal
  * @confirm: %TRUE if operation was confirmed, %FALSE otherwise
  */
 void
