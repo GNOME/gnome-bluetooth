@@ -83,8 +83,6 @@ int main (int argc, char **argv)
 	sigaction(SIGTERM, &sa, NULL);
 	sigaction(SIGINT,  &sa, NULL);
 
-	g_type_init();
-
 	mainloop = g_main_loop_new(NULL, FALSE);
 
 	agent = bluetooth_agent_new();
