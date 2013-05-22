@@ -665,10 +665,21 @@ on_transfer_complete (void)
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
 
-	if (file_index == file_count)
+	if (file_index == file_count) {
+		char *complete;
+
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
-	else
+
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), "");
+
+		complete = g_strdup_printf (ngettext ("%u transfer complete",
+						      "%u transfers complete",
+						      file_count), file_count);
+		gtk_label_set_text (GTK_LABEL (label_status), complete);
+		g_free (complete);
+	} else {
 		send_next_file ();
+	}
 }
 
 static void
