@@ -728,8 +728,12 @@ select_device_changed (BluetoothChooser *selector,
 	set_page_search_complete ();
 
 	/* Device was deselected */
-	if (address == NULL)
+	if (address == NULL) {
+		gtk_widget_set_sensitive (pin_option_button, FALSE);
 		return;
+	}
+
+	gtk_widget_set_sensitive (pin_option_button, TRUE);
 
 	if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
 		legacypairing = g_value_get_int (&value);
