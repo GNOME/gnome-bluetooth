@@ -89,6 +89,28 @@ get_system_time (void)
 }
 
 static void
+update_from_label (void)
+{
+	char *filename = option_files[file_index];
+	GFile *file, *dir;
+	char *text, *markup;
+
+	file = g_file_new_for_path (filename);
+	dir = g_file_get_parent (file);
+	g_object_unref (file);
+	if (g_file_has_uri_scheme (dir, "file") != FALSE) {
+		text = g_file_get_path (dir);
+	} else {
+		text = g_file_get_uri (dir);
+	}
+	markup = g_markup_escape_text (text, -1);
+	g_free (text);
+	g_object_unref (dir);
+	gtk_label_set_markup (GTK_LABEL (label_from), markup);
+	g_free (markup);
+}
+
+static void
 handle_error (GError *error)
 {
 	char *message;
@@ -557,7 +579,6 @@ static void
 on_transfer_properties (GVariant *props)
 {
 	char *filename = option_files[file_index];
-	GFile *file, *dir;
 	char *basename, *text, *markup;
 	GVariant *size;
 
@@ -567,19 +588,7 @@ on_transfer_properties (GVariant *props)
 		last_update = get_system_time ();
 	}
 
-	file = g_file_new_for_path (filename);
-	dir = g_file_get_parent (file);
-	g_object_unref (file);
-	if (g_file_has_uri_scheme (dir, "file") != FALSE) {
-		text = g_file_get_path (dir);
-	} else {
-		text = g_file_get_uri (dir);
-	}
-	markup = g_markup_escape_text (text, -1);
-	g_free (text);
-	g_object_unref (dir);
-	gtk_label_set_markup(GTK_LABEL(label_from), markup);
-	g_free(markup);
+	update_from_label ();
 
 	basename = g_path_get_basename(filename);
 	text = g_strdup_printf(_("Sending %s"), basename);
