@@ -70,7 +70,7 @@ static gchar *target_address = NULL;
 static gchar *target_name = NULL;
 static guint target_max_digits = 0;
 static PairingUIBehaviour target_ui_behaviour = PAIRING_UI_NORMAL;
-static gboolean target_ssp = FALSE;
+static gboolean legacypairing = FALSE;
 static gboolean create_started = FALSE;
 static gboolean display_called = FALSE;
 
@@ -192,7 +192,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
 {
-	target_ssp = FALSE;
+	legacypairing = TRUE;
 
 	/* Only show the pincode page if the pincode isn't automatic */
 	if (automatic_pincode == FALSE)
@@ -208,7 +208,7 @@ restart_button_clicked (GtkButton *button,
 			gpointer user_data)
 {
 	/* Clean up old state */
-	target_ssp = FALSE;
+	legacypairing = FALSE;
 	display_called = FALSE;
 	g_free (target_address);
 	target_address = NULL;
@@ -276,7 +276,7 @@ confirm_callback (GDBusMethodInvocation *invocation,
 {
 	char *str, *label;
 
-	target_ssp = TRUE;
+	legacypairing = FALSE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
 	gtk_widget_show (label_ssp_pin_help);
@@ -306,7 +306,7 @@ display_callback (GDBusMethodInvocation *invocation,
 	gchar *text, *done, *code;
 
 	display_called = TRUE;
-	target_ssp = TRUE;
+	legacypairing = FALSE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
 	code = g_strdup_printf("%06d", pin);
@@ -509,7 +509,7 @@ void prepare_callback (GtkWidget *assistant,
 	if (page == page_setup) {
 		complete = FALSE;
 
-		if (automatic_pincode == FALSE && target_ssp == FALSE) {
+		if (automatic_pincode == FALSE && legacypairing != FALSE) {
 			char *help, *pincode_display;
 
 			g_free (pincode);
@@ -720,7 +720,7 @@ select_device_changed (BluetoothChooser *selector,
 	GValue value = { 0, };
 	guint target_type = BLUETOOTH_TYPE_ANY;
 	gboolean is_custom_pin = FALSE;
-	int legacypairing;
+	int lp;
 
 	if (gtk_assistant_get_current_page (GTK_ASSISTANT (window_assistant)) != PAGE_SEARCH)
 		return;
@@ -736,11 +736,11 @@ select_device_changed (BluetoothChooser *selector,
 	gtk_widget_set_sensitive (pin_option_button, TRUE);
 
 	if (bluetooth_chooser_get_selected_device_info (selector, "legacypairing", &value) != FALSE) {
-		legacypairing = g_value_get_int (&value);
-		if (legacypairing == -1)
-			legacypairing = TRUE;
+		lp = g_value_get_int (&value);
+		if (lp == -1)
+			lp = TRUE;
 	} else {
-		legacypairing = TRUE;
+		lp = TRUE;
 	}
 
 	g_free(target_address);
@@ -750,7 +750,7 @@ select_device_changed (BluetoothChooser *selector,
 	target_name = bluetooth_chooser_get_selected_device_name (selector);
 
 	target_type = bluetooth_chooser_get_selected_device_type (selector);
-	target_ssp = !legacypairing;
+	legacypairing = lp;
 	automatic_pincode = FALSE;
 	target_ui_behaviour = PAIRING_UI_NORMAL;
 
@@ -823,7 +823,7 @@ page_func (gint current_page,
 {
 	switch (current_page) {
 	case PAGE_SEARCH:
-		if (target_ssp != FALSE || automatic_pincode != FALSE)
+		if (legacypairing == FALSE || automatic_pincode != FALSE)
 			return PAGE_CONNECTING;
 		else
 			return PAGE_SETUP;
