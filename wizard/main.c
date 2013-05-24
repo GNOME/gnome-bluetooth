@@ -750,6 +750,8 @@ select_device_changed (BluetoothChooser *selector,
 
 	set_page_search_complete ();
 
+	gtk_widget_hide (pin_dialog);
+
 	/* Device was deselected */
 	if (address == NULL) {
 		gtk_widget_set_sensitive (pin_option_button, FALSE);
