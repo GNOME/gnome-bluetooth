@@ -16,7 +16,6 @@ int main (int argc, char **argv)
 	BluetoothKillswitch *ks;
 
 	g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
-	g_type_init ();
 
 	mainloop = g_main_loop_new (NULL, FALSE);
 
