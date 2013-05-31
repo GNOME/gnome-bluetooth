@@ -1005,7 +1005,6 @@ static void bluetooth_client_finalize(GObject *client)
 static void bluetooth_client_class_init(BluetoothClientClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
-	GError *error = NULL;
 
 	g_type_class_add_private(klass, sizeof(BluetoothClientPrivate));
 
@@ -1058,12 +1057,6 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 					 g_param_spec_boolean ("default-adapter-discovering", NULL,
 							      "Whether the default adapter is searching for devices",
 							       FALSE, G_PARAM_READWRITE));
-
-	if (error != NULL) {
-		g_printerr("Connecting to system bus failed: %s\n",
-							error->message);
-		g_error_free(error);
-	}
 }
 
 /**
