@@ -215,53 +215,53 @@ static const char *
 uuid16_to_string (guint uuid16, const char *uuid)
 {
 	switch (uuid16) {
-	case 0x1101:
+	case BLUETOOTH_UUID_SPP:
 		return "SerialPort";
-	case 0x1103:
+	case BLUETOOTH_UUID_DUN:
 		return "DialupNetworking";
-	case 0x1104:
+	case BLUETOOTH_UUID_IRMC:
 		return "IrMCSync";
-	case 0x1105:
+	case BLUETOOTH_UUID_OPP:
 		return "OBEXObjectPush";
-	case 0x1106:
+	case BLUETOOTH_UUID_FTP:
 		return "OBEXFileTransfer";
-	case 0x1108:
+	case BLUETOOTH_UUID_HSP:
 		return "HSP";
-	case 0x110A:
+	case BLUETOOTH_UUID_A2DP_SOURCE:
 		return "AudioSource";
-	case 0x110B:
+	case BLUETOOTH_UUID_A2DP_SINK:
 		return "AudioSink";
-	case 0x110c:
+	case BLUETOOTH_UUID_AVRCP_TARGET:
 		return "A/V_RemoteControlTarget";
-	case 0x110e:
+	case BLUETOOTH_UUID_AVRCP_CONTROL:
 		return "A/V_RemoteControl";
-	case 0x1112:
+	case BLUETOOTH_UUID_HSP_AG:
 		return "Headset_-_AG";
-	case 0x1115:
+	case BLUETOOTH_UUID_PAN_PANU:
 		return "PANU";
-	case 0x1116:
+	case BLUETOOTH_UUID_PAN_NAP:
 		return "NAP";
-	case 0x1117:
+	case BLUETOOTH_UUID_PAN_GN:
 		return "GN";
-	case 0x111e:
+	case BLUETOOTH_UUID_HFP_HF:
 		return "Handsfree";
-	case 0x111F:
+	case BLUETOOTH_UUID_HFP_AG:
 		return "HandsfreeAudioGateway";
-	case 0x1124:
+	case BLUETOOTH_UUID_HID:
 		return "HumanInterfaceDeviceService";
-	case 0x112d:
+	case BLUETOOTH_UUID_SAP:
 		return "SIM_Access";
-	case 0x112F:
+	case BLUETOOTH_UUID_PBAP:
 		return "Phonebook_Access_-_PSE";
-	case 0x1203:
+	case BLUETOOTH_UUID_GENERIC_AUDIO:
 		return "GenericAudio";
-	case 0x1000: /* ServiceDiscoveryServerServiceClassID */
-	case 0x1200: /* PnPInformation */
+	case BLUETOOTH_UUID_SDP: /* ServiceDiscoveryServerServiceClassID */
+	case BLUETOOTH_UUID_PNP: /* PnPInformation */
 		/* Those are ignored */
 		return NULL;
-	case 0x1201:
+	case BLUETOOTH_UUID_GENERIC_NET:
 		return "GenericNetworking";
-	case 0x1303:
+	case BLUETOOTH_UUID_VDP_SOURCE:
 		return "VideoSource";
 	case 0x8e771303:
 	case 0x8e771301:
