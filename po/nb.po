@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth 3.5.x\n"
+"Project-Id-Version: gnome-bluetooth 3.9.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 14:38+0200\n"
-"PO-Revision-Date: 2012-07-09 14:38+0200\n"
+"POT-Creation-Date: 2013-06-02 01:38+0200\n"
+"PO-Revision-Date: 2013-06-02 01:42+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -42,7 +42,7 @@ msgstr "Enhet"
 msgid "Type"
 msgstr "Type"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "Enheter"
 
@@ -170,229 +170,37 @@ msgstr "Bruk denne GPS-enheten for Geolocation-tjenester"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Koble på internett med mobiltelefon (test)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "Slå på Bluetooth"
+#: ../wizard/main.c:204
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Vennligst oppgi følgende PIN på «%s»:"
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "Bluetooth: Av"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "Slå av Bluetooth"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "Bluetooth: På"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: Slått av"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "Kobler fra …"
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "Kobler til …"
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "Tilkoblet"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "Frakoblet"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "Koble fra"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "Koble til"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "Send filer …"
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "Bla gjennom filer …"
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "Innstillinger for tastatur"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "Innstillinger for mus og pekeplate"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "Innstillinger for lyd"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "Feilsøk"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- Panelprogram for Bluetooth"
-
-#: ../applet/main.c:823
+#: ../wizard/main.c:208
 #, c-format
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
-"%s\n"
-"Kjør «%s --help» for å se en full liste med tilgjengelige "
-"kommandolinjealternativer.\n"
+"Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "Panelprogram for Bluetooth"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "Enhet «%s» ønsker å koble seg til denne datamaskinen"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "Vennligst oppgi PIN som vises på enhet %s."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Vennligst bekreft om PIN «%s» er lik den på enhet %s."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "Gi tilgang til «%s»"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "Enhet %s vil ha tilgang til tjeneste «%s»."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "Forespørsel om sammenkobling for «%s»"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "Bluetooth enhet"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "Oppgi PIN"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "Bekreftelse om sammenkobling for «%s»"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "Verifiser PIN"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "Autoriseringsforespørsel fra «%s»"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "Sjekk autorisering"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Håndtering av Bluetooth"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Panelprogram for Bluetooth"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "Bluetooth: Sjekker"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "Synlig"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "Send filer til enhet …"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "Konfigurer ny enhet …"
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "Innstillinger for Bluetooth"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "Avslutt"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "_Alltid gi tilgang"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_Nekt"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "_Tillat"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "_Er ikke lik"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "Er _lik"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "Vi_s inndata"
+#: ../wizard/main.c:213
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:271 ../wizard/main.c:402
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Sammenkobling med «%s» avbrutt"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:321
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Vennligst bekreft at PIN som vises på «%s» er lik denne."
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:374
 msgid "Please enter the following PIN:"
 msgstr "Vennligst oppgi følgende PIN:"
 
@@ -400,7 +208,7 @@ msgstr "Vennligst oppgi følgende PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:460
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Oppsett av «%s» feilet"
@@ -409,37 +217,21 @@ msgstr "Oppsett av «%s» feilet"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:520
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Kobler til «%s» …"
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Vennligst oppgi følgende PIN på «%s»:"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:588
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Vennligst vent mens oppsett sluttføres på enhet «%s» …"
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:606
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Oppsett av ny enhet «%s» fullført"
@@ -535,60 +327,64 @@ msgstr "Oppsett av Bluetooth-enhet"
 msgid "Setup Bluetooth devices"
 msgstr "Sett opp Bluetooth-enheter"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekund"
 msgstr[1] "%'d sekunder"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minutt"
 msgstr[1] "%'d minutter"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d time"
 msgstr[1] "%'d timer"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "omtrent %'d time"
 msgstr[1] "omtrent %'d timer"
 
-#: ../sendto/main.c:231
+#: ../sendto/main.c:377 ../sendto/main.c:488
+msgid "Connecting..."
+msgstr "Kobler til …"
+
+#: ../sendto/main.c:424
 msgid "File Transfer"
 msgstr "Filoverføring"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "P_røv igjen"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
+#: ../sendto/main.c:446
 msgid "Sending files via Bluetooth"
 msgstr "Sender filer via Bluetooth"
 
-#: ../sendto/main.c:265
+#: ../sendto/main.c:458
 msgid "From:"
 msgstr "Fra:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:472
 msgid "To:"
 msgstr "Til:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:517 ../sendto/main.c:535
 msgid "An unknown error occurred"
 msgstr "En ukjent feil oppsto"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:528
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -596,74 +392,65 @@ msgstr ""
 "Sjekk at ekstern enhet er slått på og at den godtar tilkoblinger via "
 "Bluetooth"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:600
 #, c-format
 msgid "Sending %s"
 msgstr "Sender %s"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:607 ../sendto/main.c:656
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sender fil %d av %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:652
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:654
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:687
+msgid "There was an error"
+msgstr "En feil oppsto"
+
+#: ../sendto/main.c:723
 msgid "Select device to send to"
 msgstr "Velg enhet å sende til"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:728
 msgid "_Send"
 msgstr "_Send"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:772
 msgid "Choose files to send"
 msgstr "Velg filer som skal sendes"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:775
 msgid "Select"
 msgstr "Velg"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:801
 msgid "Remote device to use"
 msgstr "Ekstern enhet som skal brukes"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:801
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:803
 msgid "Remote device's name"
 msgstr "Fjern enhetens navn"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:803
 msgid "NAME"
 msgstr "NAVN"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:822
 msgid "[FILE...]"
 msgstr "[FIL …]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "Programmeringsfeil: Kunne ikke finne enheten i listen"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "Filoverføring med OBEX Push er ikke støttet"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
