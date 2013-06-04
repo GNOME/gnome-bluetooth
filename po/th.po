@@ -1,15 +1,15 @@
 # Thai translation of gnome-bluetooth.
-# Copyright (C) 2009-2011 Free Software Foundation, Inc.
+# Copyright (C) 2009-2013 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
-# Akom Chotiphantawanon <knight2000@gmail.com>, 2009-2012.
+# Akom Chotiphantawanon <knight2000@gmail.com>, 2009-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-15 14:53+0000\n"
-"PO-Revision-Date: 2012-09-16 16:36+0700\n"
+"POT-Creation-Date: 2013-06-01 23:42+0000\n"
+"PO-Revision-Date: 2013-06-04 12:14+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -43,7 +43,7 @@ msgstr "อุปกรณ์"
 msgid "Type"
 msgstr "ชนิด"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -171,228 +171,36 @@ msgstr "ใช้อุปกรณ์ GPS นี้กับบริการ 
 msgid "Access the Internet using your cell phone (test)"
 msgstr "เข้าถึงอินเทอร์เน็ตโดยใช้โทรศัพท์มือถือของคุณ (ทดสอบ)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "เปิดบลูทูท"
+#: ../wizard/main.c:204
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "บลูทูท: ปิด"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "ปิดบลูทูท"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "บลูทูท: เปิด"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "บลูทูท: ปิดใช้"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "กำลังตัดการเชื่อมต่อ..."
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "กำลังเชื่อมต่อ..."
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "เชื่อมต่ออยู่"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "ไม่ได้เชื่อมต่อ"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "ตัดการเชื่อมต่อ"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "เชื่อมต่อ"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "ส่งแฟ้ม..."
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "เรียกดูแฟ้ม..."
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "ค่าตั้งแป้นพิมพ์"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "ค่าตั้งเมาส์และทัชแพด"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "ค่าตั้งเสียง"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "ดีบั๊ก"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- แอพเพล็ตบลูทูท"
-
-#: ../applet/main.c:823
+#: ../wizard/main.c:208
 #, c-format
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"เรียก '%s --help' เพื่อดูตัวเลือกบรรทัดคำสั่งทั้งหมดที่ใช้ได้\n"
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s' แล้วกด “Enter” บนแป้นพิมพ์:"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "แอพเพล็ตบลูทูท"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "บลูทูท"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "อุปกรณ์ '%s' ต้องการจับคู่กับคอมพิวเตอร์นี้"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "กรุณาป้อน PIN ที่ระบุบนอุปกรณ์ %s"
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "กรุณายืนยันว่า PIN '%s' ตรงกับกุญแจในอุปกรณ์ %s หรือไม่"
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "อนุญาตให้ '%s' เข้าถึงได้"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "อุปกรณ์ %s ต้องการเข้าถึงบริการ '%s'"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "การขอการจับคู่สำหรับ '%s'"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "อุปกรณ์บลูทูท"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "ป้อน PIN"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "การยืนยันการจับคู่สำหรับ '%s'"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "ตรวจสอบ PIN"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "การขอยืนยันสิทธิ์จาก %s"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "ตรวจสอบการยืนยันสิทธิ์"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "เครื่องมือจัดการบลูทูท"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "แอพเพล็ตจัดการบลูทูท"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "บลูทูท: การตรวจสอบ"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "มองเห็น"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "ส่งแฟ้มไปยังอุปกรณ์..."
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "ตั้งค่าอุปกรณ์ใหม่..."
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "ตั้งค่าบลูทูท"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "ออก"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "อนุญาตให้เข้าถึงเ_สมอ"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_ปฏิเสธ"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "_อนุญาต"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "ไ_ม่ตรงกัน"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "_ตรงกัน"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "แ_สดงอักขระที่ป้อน"
+#: ../wizard/main.c:213
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "กรุณาเลื่อนก้านควบคุม iCade ของคุณในทิศทางต่อไปนี้:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:271 ../wizard/main.c:402
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:321
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "กรุณายืนยันว่า PIN ที่แสดงบน '%s' ตรงกันกับ PIN นี้"
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:374
 msgid "Please enter the following PIN:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 
@@ -400,7 +208,7 @@ msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:460
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
@@ -409,36 +217,21 @@ msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:520
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "กำลังเชื่อมต่อไปยัง '%s'..."
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s' แล้วกด “Enter” บนแป้นพิมพ์:"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "กรุณาเลื่อนก้านควบคุม iCade ของคุณในทิศทางต่อไปนี้:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:588
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "กรุณารอสักครู่ขณะเสร็จสิ้นการตั้งค่าอุปกรณ์ '%s' ..."
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:606
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "ตั้งค่าอุปกรณ์ใหม่ '%s' สำเร็จแล้ว"
@@ -534,129 +327,124 @@ msgstr "ตั้งค่าอุปกรณ์บลูทูท"
 msgid "Setup Bluetooth devices"
 msgstr "ตั้งค่าอุปกรณ์บลูทูท"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d วินาที"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d นาที"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d ชั่วโมง"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ประมาณ %'d ชั่วโมง"
 
-#: ../sendto/main.c:231
+#: ../sendto/main.c:377 ../sendto/main.c:488
+msgid "Connecting..."
+msgstr "กำลังเชื่อมต่อ..."
+
+#: ../sendto/main.c:424
 msgid "File Transfer"
 msgstr "การถ่ายโอนแฟ้ม"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_ลองใหม่"
 
 #. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
+#: ../sendto/main.c:446
 msgid "Sending files via Bluetooth"
 msgstr "การส่งแฟ้มทางบลูทูท"
 
-#: ../sendto/main.c:265
+#: ../sendto/main.c:458
 msgid "From:"
 msgstr "จาก:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:472
 msgid "To:"
 msgstr "ถึง:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:517 ../sendto/main.c:535
 msgid "An unknown error occurred"
 msgstr "เกิดข้อผิดพลาดไม่ทราบสาเหตุ"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:528
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าอุปกรณ์อีกฝ่ายหนึ่งเปิดทำงานอยู่ และรับการเชื่อมต่อบลูทูท"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:600
 #, c-format
 msgid "Sending %s"
 msgstr "กำลังส่ง %s"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:607 ../sendto/main.c:656
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "กำลังส่งแฟ้มที่ %d จาก %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:652
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:654
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:687
+msgid "There was an error"
+msgstr "เกิดข้อผิดพลาด"
+
+#: ../sendto/main.c:723
 msgid "Select device to send to"
 msgstr "เลือกอุปกรณ์ที่จะรับการส่ง"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:728
 msgid "_Send"
 msgstr "_ส่ง"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:772
 msgid "Choose files to send"
 msgstr "เลือกแฟ้มที่จะส่ง"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:775
 msgid "Select"
 msgstr "เลือก"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:801
 msgid "Remote device to use"
 msgstr "อุปกรณ์อีกฝ่ายที่จะใช้"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:801
 msgid "ADDRESS"
 msgstr "แอดเดรส"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:803
 msgid "Remote device's name"
 msgstr "ชื่อของอุปกรณ์อีกฝ่าย"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:803
 msgid "NAME"
 msgstr "ชื่อ"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:822
 msgid "[FILE...]"
 msgstr "[แฟ้ม...]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "เกิดข้อผิดพลาดของการเขียนโปรแกรม: ไม่พบอุปกรณ์ในรายชื่อ"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "ไม่รองรับการถ่ายโอนแฟ้มผ่าน OBEX Push"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "บลูทูท (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -665,6 +453,157 @@ msgstr "ถ่ายโอนผ่านบลูทูท"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "ส่งแฟ้มทางบลูทูท"
+
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "เปิดบลูทูท"
+
+#~ msgid "Bluetooth: Off"
+#~ msgstr "บลูทูท: ปิด"
+
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "ปิดบลูทูท"
+
+#~ msgid "Bluetooth: On"
+#~ msgstr "บลูทูท: เปิด"
+
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "บลูทูท: ปิดใช้"
+
+#~ msgid "Disconnecting..."
+#~ msgstr "กำลังตัดการเชื่อมต่อ..."
+
+#~ msgid "Connected"
+#~ msgstr "เชื่อมต่ออยู่"
+
+#~ msgid "Disconnected"
+#~ msgstr "ไม่ได้เชื่อมต่อ"
+
+#~ msgid "Disconnect"
+#~ msgstr "ตัดการเชื่อมต่อ"
+
+#~ msgid "Connect"
+#~ msgstr "เชื่อมต่อ"
+
+#~ msgid "Send files..."
+#~ msgstr "ส่งแฟ้ม..."
+
+#~ msgid "Browse files..."
+#~ msgstr "เรียกดูแฟ้ม..."
+
+#~ msgid "Keyboard Settings"
+#~ msgstr "ค่าตั้งแป้นพิมพ์"
+
+#~ msgid "Mouse and Touchpad Settings"
+#~ msgstr "ค่าตั้งเมาส์และทัชแพด"
+
+#~ msgid "Sound Settings"
+#~ msgstr "ค่าตั้งเสียง"
+
+#~ msgid "Debug"
+#~ msgstr "ดีบั๊ก"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "- แอพเพล็ตบลูทูท"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "เรียก '%s --help' เพื่อดูตัวเลือกบรรทัดคำสั่งทั้งหมดที่ใช้ได้\n"
+
+#~ msgid "Bluetooth Applet"
+#~ msgstr "แอพเพล็ตบลูทูท"
+
+#~ msgid "Bluetooth"
+#~ msgstr "บลูทูท"
+
+#~ msgid "Device '%s' wants to pair with this computer"
+#~ msgstr "อุปกรณ์ '%s' ต้องการจับคู่กับคอมพิวเตอร์นี้"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "กรุณาป้อน PIN ที่ระบุบนอุปกรณ์ %s"
+
+#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#~ msgstr "กรุณายืนยันว่า PIN '%s' ตรงกับกุญแจในอุปกรณ์ %s หรือไม่"
+
+#~ msgid "Grant access to '%s'"
+#~ msgstr "อนุญาตให้ '%s' เข้าถึงได้"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "อุปกรณ์ %s ต้องการเข้าถึงบริการ '%s'"
+
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "การขอการจับคู่สำหรับ '%s'"
+
+#~ msgid "Bluetooth device"
+#~ msgstr "อุปกรณ์บลูทูท"
+
+#~ msgid "Enter PIN"
+#~ msgstr "ป้อน PIN"
+
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "การยืนยันการจับคู่สำหรับ '%s'"
+
+#~ msgid "Verify PIN"
+#~ msgstr "ตรวจสอบ PIN"
+
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "การขอยืนยันสิทธิ์จาก %s"
+
+#~ msgid "Check authorization"
+#~ msgstr "ตรวจสอบการยืนยันสิทธิ์"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "เครื่องมือจัดการบลูทูท"
+
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "แอพเพล็ตจัดการบลูทูท"
+
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "บลูทูท: การตรวจสอบ"
+
+#~ msgid "Visible"
+#~ msgstr "มองเห็น"
+
+#~ msgid "Send files to device..."
+#~ msgstr "ส่งแฟ้มไปยังอุปกรณ์..."
+
+#~ msgid "Set up new device..."
+#~ msgstr "ตั้งค่าอุปกรณ์ใหม่..."
+
+#~ msgid "Bluetooth Settings"
+#~ msgstr "ตั้งค่าบลูทูท"
+
+#~ msgid "Quit"
+#~ msgstr "ออก"
+
+#~ msgid "_Always grant access"
+#~ msgstr "อนุญาตให้เข้าถึงเ_สมอ"
+
+#~ msgid "_Reject"
+#~ msgstr "_ปฏิเสธ"
+
+#~ msgid "_Grant"
+#~ msgstr "_อนุญาต"
+
+#~ msgid "_Does not match"
+#~ msgstr "ไ_ม่ตรงกัน"
+
+#~ msgid "_Matches"
+#~ msgstr "_ตรงกัน"
+
+#~ msgid "_Show input"
+#~ msgstr "แ_สดงอักขระที่ป้อน"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "เกิดข้อผิดพลาดของการเขียนโปรแกรม: ไม่พบอุปกรณ์ในรายชื่อ"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "ไม่รองรับการถ่ายโอนแฟ้มผ่าน OBEX Push"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "บลูทูท (OBEX Push)"
 
 #~ msgid "Select Device to Browse"
 #~ msgstr "เลือกอุปกรณ์ที่จะเรียกดู"
