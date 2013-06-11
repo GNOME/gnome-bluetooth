@@ -475,44 +475,25 @@ default_adapter_changed (ObjectManager   *manager,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-	gboolean cont;
-	gboolean powered = FALSE;
-	gboolean found = FALSE;
+	GtkTreePath *tree_path;
+	gboolean powered;
 
-	if (priv->default_adapter) {
-		gtk_tree_row_reference_free (priv->default_adapter);
-		priv->default_adapter = NULL;
-	}
+	g_assert (!priv->default_adapter);
 
-	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(priv->store), &iter);
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
+		return;
 
-	while (cont == TRUE) {
-		GDBusProxy *adapter;
-		const char *adapter_path;
+	tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+	priv->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), tree_path);
+	gtk_tree_path_free (tree_path);
 
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				   BLUETOOTH_COLUMN_PROXY, &adapter,
-				   BLUETOOTH_COLUMN_POWERED, &powered, -1);
+	gtk_tree_store_set (priv->store, &iter,
+			    BLUETOOTH_COLUMN_DEFAULT, TRUE, -1);
 
-		adapter_path = g_dbus_proxy_get_object_path (adapter);
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			   BLUETOOTH_COLUMN_POWERED, &powered, -1);
 
-		found = g_str_equal (path, adapter_path);
-
-		g_object_unref (adapter);
-
-		if (found != FALSE) {
-			GtkTreePath *tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
-			priv->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), tree_path);
-			gtk_tree_path_free (tree_path);
-		}
-
-		gtk_tree_store_set (priv->store, &iter,
-				    BLUETOOTH_COLUMN_DEFAULT, found, -1);
-
-		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(priv->store), &iter);
-	}
-
-	if (found && powered) {
+	if (powered) {
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
@@ -570,7 +551,7 @@ adapter_g_properties_changed (GDBusProxy      *adapter,
 					    BLUETOOTH_COLUMN_POWERED, powered, -1);
 			gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
 					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-			if (is_default != FALSE) {
+			if (is_default != FALSE && powered) {
 				g_object_notify (G_OBJECT (client), "default-adapter");
 				g_object_notify (G_OBJECT (client), "default-adapter-powered");
 				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
@@ -660,7 +641,8 @@ adapter_added (ObjectManager   *manager,
 	g_signal_connect (G_OBJECT (adapter), "g-properties-changed",
 			  G_CALLBACK (adapter_g_properties_changed), client);
 
-	default_adapter_changed (manager, path, client);
+	if (!priv->default_adapter)
+		default_adapter_changed (manager, path, client);
 
 	g_object_unref (properties);
 	g_object_unref (adapter);
@@ -673,37 +655,36 @@ adapter_removed (ObjectManager   *manager,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-	gboolean cont;
+	gboolean was_default;
 
-	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(priv->store), &iter);
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
+		return;
 
-	while (cont == TRUE) {
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			   BLUETOOTH_COLUMN_DEFAULT, &was_default, -1);
+
+	if (!was_default)
+		return;
+
+	g_clear_pointer (&priv->default_adapter, gtk_tree_row_reference_free);
+	gtk_tree_store_remove (priv->store, &iter);
+
+	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL(priv->store),
+					   &iter)) {
 		GDBusProxy *adapter;
 		const char *adapter_path;
-		gboolean found, was_default;
 
-		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
-				   BLUETOOTH_COLUMN_PROXY, &adapter,
-				   BLUETOOTH_COLUMN_DEFAULT, &was_default, -1);
+		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+				   BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
-		adapter_path = g_dbus_proxy_get_object_path(adapter);
+		adapter_path = g_dbus_proxy_get_object_path (adapter);
+		default_adapter_changed (manager, adapter_path, client);
 
-		found = g_str_equal(path, adapter_path);
 		g_object_unref(adapter);
-
-		if (found) {
-			if (was_default) {
-				gtk_tree_row_reference_free (priv->default_adapter);
-				priv->default_adapter = NULL;
-				g_object_notify (G_OBJECT (client), "default-adapter");
-				g_object_notify (G_OBJECT (client), "default-adapter-powered");
-				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
-			}
-			gtk_tree_store_remove(priv->store, &iter);
-			break;
-		}
-
-		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(priv->store), &iter);
+	} else {
+		g_object_notify (G_OBJECT (client), "default-adapter");
+		g_object_notify (G_OBJECT (client), "default-adapter-powered");
+		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 	}
 }
 
@@ -819,10 +800,9 @@ bluez_vanished_cb (GDBusConnection *connection,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
-	if (priv->default_adapter) {
-		gtk_tree_row_reference_free (priv->default_adapter);
-		priv->default_adapter = NULL;
-	}
+	if (priv->default_adapter)
+		g_clear_pointer (&priv->default_adapter,
+				 gtk_tree_row_reference_free);
 
 	gtk_tree_store_clear (priv->store);
 
