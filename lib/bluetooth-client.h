@@ -76,6 +76,8 @@ gboolean bluetooth_client_connect_service_finish (BluetoothClient *client,
 						  GAsyncResult    *res,
 						  GError         **error);
 
+gboolean bluetooth_client_get_connectable(const char **uuids);
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_CLIENT_H */

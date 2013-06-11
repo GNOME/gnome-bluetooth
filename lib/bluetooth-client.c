@@ -75,6 +75,18 @@ enum {
 	PROP_DEFAULT_ADAPTER_DISCOVERING
 };
 
+static const char *connectable_uuids[] = {
+	"HSP",
+	"AudioSource",
+	"AudioSink",
+	"A/V_RemoteControlTarget",
+	"A/V_RemoteControl",
+	"Headset_-_AG",
+	"Handsfree",
+	"HandsfreeAudioGateway",
+	"HumanInterfaceDeviceService",
+};
+
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
 
 typedef gboolean (*IterSearchFunc) (GtkTreeStore *store,
@@ -212,6 +224,21 @@ device_list_uuids (GVariant *variant)
 	g_ptr_array_add (ret, NULL);
 
 	return (char **) g_ptr_array_free (ret, FALSE);
+}
+
+gboolean
+bluetooth_client_get_connectable(const char **uuids)
+{
+	int i, j;
+
+	for (i = 0; uuids && uuids[i] != NULL; i++) {
+		for (j = 0; j < G_N_ELEMENTS (connectable_uuids); j++) {
+			if (g_str_equal (connectable_uuids[j], uuids[i]))
+				return TRUE;
+		}
+	}
+
+	return FALSE;
 }
 
 static void
