@@ -421,6 +421,54 @@ device_removed (const char      *path,
 }
 
 static void
+powered_callback (GDBusProxy   *proxy,
+		  GAsyncResult *res,
+		  gpointer	data)
+{
+	GError *error = NULL;
+
+	if (!properties_call_set_finish (PROPERTIES(proxy), res, &error)) {
+		g_debug ("Call to Set Powered failed %s: %s",
+			 g_dbus_proxy_get_object_path (proxy), error->message);
+		g_error_free (error);
+	}
+
+	g_object_unref (proxy);
+}
+
+static gboolean
+adapter_set_powered (BluetoothClient *client,
+		     const char *path,
+		     gboolean powered)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	Properties *properties;
+	GtkTreeIter iter;
+
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
+		return FALSE;
+
+	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
+
+	if (properties == NULL)
+		return FALSE;
+
+
+	properties_call_set (properties,
+			     BLUEZ_ADAPTER_INTERFACE,
+			     "Powered",
+			     g_variant_new_variant (g_variant_new_boolean (powered)),
+			     NULL,
+			     (GAsyncReadyCallback) powered_callback,
+			     NULL);
+
+	return TRUE;
+}
+
+static void
 default_adapter_changed (ObjectManager   *manager,
 			 const char      *path,
 			 BluetoothClient *client)
@@ -428,6 +476,8 @@ default_adapter_changed (ObjectManager   *manager,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 	gboolean cont;
+	gboolean powered = FALSE;
+	gboolean found = FALSE;
 
 	if (priv->default_adapter) {
 		gtk_tree_row_reference_free (priv->default_adapter);
@@ -439,7 +489,6 @@ default_adapter_changed (ObjectManager   *manager,
 	while (cont == TRUE) {
 		GDBusProxy *adapter;
 		const char *adapter_path;
-		gboolean found, powered;
 
 		gtk_tree_model_get(GTK_TREE_MODEL(priv->store), &iter,
 				   BLUETOOTH_COLUMN_PROXY, &adapter,
@@ -463,10 +512,19 @@ default_adapter_changed (ObjectManager   *manager,
 		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(priv->store), &iter);
 	}
 
-	/* Record the new default adapter */
-	g_object_notify (G_OBJECT (client), "default-adapter");
-	g_object_notify (G_OBJECT (client), "default-adapter-powered");
-	g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+	if (found && powered) {
+		g_object_notify (G_OBJECT (client), "default-adapter");
+		g_object_notify (G_OBJECT (client), "default-adapter-powered");
+		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+		return;
+	}
+
+	/*
+	 * If the adapter is turn off (Powered = False in bluetooth) object
+	 * notifications will be sent only when a Powered = True signal arrives
+	 * from bluetoothd
+	 */
+	adapter_set_powered (client, path, TRUE);
 }
 
 static void
@@ -512,8 +570,11 @@ adapter_g_properties_changed (GDBusProxy      *adapter,
 					    BLUETOOTH_COLUMN_POWERED, powered, -1);
 			gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
 					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-			if (is_default != FALSE)
+			if (is_default != FALSE) {
+				g_object_notify (G_OBJECT (client), "default-adapter");
 				g_object_notify (G_OBJECT (client), "default-adapter-powered");
+				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+			}
 			notify = TRUE;
 		} else if (g_str_equal (property, "Discoverable") == TRUE) {
 			gboolean discoverable = g_variant_get_boolean (v);
