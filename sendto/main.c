@@ -166,7 +166,7 @@ transfer_proxy (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
 
 	current_transfer = g_dbus_proxy_new_finish (res, &error);
 
-	if (current_transfer != NULL) {
+	if (current_transfer == NULL) {
 		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
 			g_error_free (error);
 			return;
