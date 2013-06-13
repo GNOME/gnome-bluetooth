@@ -1478,8 +1478,6 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 					g_object_ref (cancellable), g_object_unref);
 	}
 
-	simple = simple;
-
 	if (connect) {
 		device1_call_connect (DEVICE1(device),
 				      NULL,
