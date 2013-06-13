@@ -2,7 +2,6 @@
 <FILE>bluetooth-chooser</FILE>
 <TITLE>BluetoothChooser</TITLE>
 BluetoothChooser
-BluetoothChooserClass
 bluetooth_chooser_dump_selected_device
 bluetooth_chooser_get_scrolled_window
 bluetooth_chooser_get_selected_device
@@ -15,6 +14,7 @@ bluetooth_chooser_new
 bluetooth_chooser_start_discovery
 bluetooth_chooser_stop_discovery
 <SUBSECTION Standard>
+BluetoothChooserClass
 BLUETOOTH_CHOOSER
 BLUETOOTH_CHOOSER_CLASS
 BLUETOOTH_GET_CHOOSER_CLASS
@@ -28,10 +28,10 @@ bluetooth_chooser_get_type
 <FILE>bluetooth-chooser-button</FILE>
 <TITLE>BluetoothChooserButton</TITLE>
 BluetoothChooserButton
-BluetoothChooserButtonClass
 bluetooth_chooser_button_available
 bluetooth_chooser_button_new
 <SUBSECTION Standard>
+BluetoothChooserButtonClass
 BLUETOOTH_CHOOSER_BUTTON
 BLUETOOTH_IS_CHOOSER_BUTTON
 BLUETOOTH_TYPE_CHOOSER_BUTTON
@@ -43,9 +43,9 @@ bluetooth_chooser_button_get_type
 <TITLE>BluetoothChooserCombo</TITLE>
 BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE
 BluetoothChooserCombo
-BluetoothChooserComboClass
 bluetooth_chooser_combo_new
 <SUBSECTION Standard>
+BluetoothChooserComboClass
 BLUETOOTH_CHOOSER_COMBO
 BLUETOOTH_GET_CHOOSER_COMBO_CLASS
 BLUETOOTH_IS_CHOOSER_COMBO
@@ -59,7 +59,6 @@ bluetooth_chooser_combo_get_type
 <FILE>bluetooth-client</FILE>
 <TITLE>BluetoothClient</TITLE>
 BluetoothClient
-BluetoothClientClass
 bluetooth_client_connect_service
 bluetooth_client_connect_service_finish
 bluetooth_client_get_adapter_model
@@ -68,6 +67,7 @@ bluetooth_client_get_filter_model
 bluetooth_client_get_model
 bluetooth_client_new
 <SUBSECTION Standard>
+BluetoothClientClass
 BLUETOOTH_CLIENT
 BLUETOOTH_CLIENT_CLASS
 BLUETOOTH_GET_CLIENT_CLASS
