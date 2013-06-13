@@ -538,9 +538,6 @@ void prepare_callback (GtkWidget *assistant,
 		g_free(target_address);
 		target_address = bluetooth_chooser_get_selected_device (selector);
 
-		g_free(target_name);
-		target_name = bluetooth_chooser_get_selected_device_name (selector);
-
 		target_type = bluetooth_chooser_get_selected_device_type (selector);
 
 		target_ui_behaviour = PAIRING_UI_NORMAL;
