@@ -187,12 +187,25 @@ get_icade_pincode (char **pin_display_str)
 	return g_string_free (pin, FALSE);
 }
 
+static void
+replace_target_name_for_device (GDBusProxy *device)
+{
+	GVariant *value;
+
+	g_free (target_name);
+	value = g_dbus_proxy_get_cached_property (device, "Name");
+	target_name = g_variant_dup_string (value, NULL);
+	g_variant_unref (value);
+}
+
 static gboolean
 pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
 {
 	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
+
+	replace_target_name_for_device (device);
 
 	if (user_pincode == NULL) {
 		char *help, *pincode_display;
@@ -304,6 +317,8 @@ authorize_callback (GDBusMethodInvocation *invocation,
 {
 	g_dbus_method_invocation_return_value (invocation, NULL);
 
+	replace_target_name_for_device (device);
+
 	return TRUE;
 }
 
@@ -317,7 +332,10 @@ confirm_callback (GDBusMethodInvocation *invocation,
 
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
 
+	replace_target_name_for_device (device);
+
 	gtk_widget_show (label_ssp_pin_help);
+
 	label = g_strdup_printf (_("Please confirm that the PIN displayed on '%s' matches this one."),
 				 target_name);
 	gtk_label_set_markup(GTK_LABEL(label_ssp_pin_help), label);
@@ -345,6 +363,8 @@ display_callback (GDBusMethodInvocation *invocation,
 
 	display_called = TRUE;
 	gtk_assistant_set_current_page (window_assistant, PAGE_SSP_SETUP);
+
+	replace_target_name_for_device (device);
 
 	code = g_strdup_printf("%06d", pin);
 
