@@ -29,6 +29,12 @@ G_BEGIN_DECLS
 #define BLUETOOTH_CHOOSER_BUTTON(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BLUETOOTH_TYPE_CHOOSER_BUTTON, BluetoothChooserButton))
 #define BLUETOOTH_IS_CHOOSER_BUTTON(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BLUETOOTH_TYPE_CHOOSER_BUTTON))
 
+/**
+ * BluetoothChooserButton:
+ *
+ * The <structname>BluetoothChooserButton</structname> struct contains
+ * only private fields and should not be directly accessed.
+ */
 typedef struct _BluetoothChooserButton BluetoothChooserButton;
 
 typedef struct _BluetoothChooserButtonClass BluetoothChooserButtonClass;

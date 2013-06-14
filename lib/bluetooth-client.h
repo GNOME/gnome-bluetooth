@@ -42,6 +42,12 @@ G_BEGIN_DECLS
 #define BLUETOOTH_GET_CLIENT_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
 					BLUETOOTH_TYPE_CLIENT, BluetoothClientClass))
 
+/**
+ * BluetoothClient:
+ *
+ * The <structname>BluetoothClient</structname> struct contains
+ * only private fields and should not be directly accessed.
+ */
 typedef struct _BluetoothClient BluetoothClient;
 typedef struct _BluetoothClientClass BluetoothClientClass;
 

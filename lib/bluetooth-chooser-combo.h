@@ -43,6 +43,12 @@ G_BEGIN_DECLS
 typedef struct _BluetoothChooserComboPrivate BluetoothChooserComboPrivate;
 typedef struct _BluetoothChooserComboClass BluetoothChooserComboClass;
 
+/**
+ * BluetoothChooserCombo:
+ *
+ * The <structname>BluetoothChooserCombo</structname> struct contains
+ * only private fields and should not be directly accessed.
+ */
 typedef struct _BluetoothChooserCombo {
 	GtkBox            parent;
 	BluetoothChooserComboPrivate *priv;

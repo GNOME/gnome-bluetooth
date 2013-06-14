@@ -42,6 +42,12 @@ G_BEGIN_DECLS
 #define BLUETOOTH_GET_CHOOSER_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
 				BLUETOOTH_TYPE_CHOOSER, BluetoothChooserClass))
 
+/**
+ * BluetoothChooser:
+ *
+ * The <structname>BluetoothChooser</structname> struct contains
+ * only private fields and should not be directly accessed.
+ */
 typedef struct _BluetoothChooser BluetoothChooser;
 typedef struct _BluetoothChooserClass BluetoothChooserClass;
 
