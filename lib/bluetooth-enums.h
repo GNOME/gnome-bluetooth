@@ -113,6 +113,7 @@ typedef enum {
 /**
  * BluetoothColumn:
  * @BLUETOOTH_COLUMN_PROXY: a #GDBusProxy object
+ * @BLUETOOTH_COLUMN_PROPERTIES: a #GDBusProxy object for DBus.Properties
  * @BLUETOOTH_COLUMN_ADDRESS: a string representing a Bluetooth address
  * @BLUETOOTH_COLUMN_ALIAS: a string to use for display (the name of the device, or its address if the name is not known). Only available for devices.
  * @BLUETOOTH_COLUMN_NAME: a string representing the device or adapter's name
@@ -133,6 +134,7 @@ typedef enum {
  **/
 typedef enum {
 	BLUETOOTH_COLUMN_PROXY,
+	BLUETOOTH_COLUMN_PROPERTIES,
 	BLUETOOTH_COLUMN_ADDRESS,
 	BLUETOOTH_COLUMN_ALIAS,
 	BLUETOOTH_COLUMN_NAME,
