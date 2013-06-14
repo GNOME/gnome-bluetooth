@@ -117,9 +117,10 @@ static guint signals[SIGNAL_LAST];
  *
  * Send a file to a bluetooth device
  */
-void bluetooth_applet_send_to_address (BluetoothApplet *applet,
-				       const char *address,
-				       const char *alias)
+void
+bluetooth_applet_send_to_address (BluetoothApplet *applet,
+				  const char *address,
+				  const char *alias)
 {
 	g_return_if_fail (BLUETOOTH_IS_APPLET (applet));
 
