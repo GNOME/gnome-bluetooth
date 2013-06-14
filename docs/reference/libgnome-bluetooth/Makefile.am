@@ -54,7 +54,17 @@ CFILE_GLOB=$(top_srcdir)/lib/*.c
 
 # Header files to ignore when scanning.
 # e.g. IGNORE_HFILES=gtkdebug.h gtkintl.h
-IGNORE_HFILES=bluetooth-agent.h bluetooth-client-glue.h bluetooth-client-private.h bluetooth-chooser-private.h bluetooth-killswitch.h bluetooth-filter-widget.h gnome-bluetooth-enum-types.h rfkill.h
+# Please keep this list in sync with libgnome_bluetooth_private_headers
+# variable in $(top_srcdir)/lib/Makefile.am
+IGNORE_HFILES= \
+        bluetooth-client-private.h      \
+        bluetooth-agent.h               \
+        gnome-bluetooth-enum-types.h    \
+        bluetooth-chooser-private.h     \
+        bluetooth-client-glue.h         \
+        bluetooth-fdo-glue.h            \
+        rfkill-glib.h                   \
+        rfkill.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
