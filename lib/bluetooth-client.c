@@ -1499,7 +1499,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
  * @res: a #GAsyncResult
  * @error: a #GError
  *
- * Finishes the connection operation, See bluetooth_client_connect_service().
+ * Finishes the connection operation. See bluetooth_client_connect_service().
  *
  * Returns: %TRUE if the connection operation succeeded, %FALSE otherwise.
  **/
