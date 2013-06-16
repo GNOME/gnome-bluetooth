@@ -3,22 +3,23 @@
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009, 2010, 2011, 2012.
+# Balázs Úr <urbalazs at gmail dot com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-27 21:41+0000\n"
-"PO-Revision-Date: 2012-09-04 11:37+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
+"POT-Creation-Date: 2013-06-14 09:30+0000\n"
+"PO-Revision-Date: 2013-06-16 20:36+0200\n"
+"Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -45,7 +46,7 @@ msgstr "Eszköz"
 msgid "Type"
 msgstr "Típus"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "Eszközök"
 
@@ -173,228 +174,38 @@ msgstr "Ezen GPS eszköz használata Geolocation szolgáltatásokhoz"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Az internet elérése a mobiltelefonnal (teszt)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "Bluetooth bekapcsolása"
+#: ../wizard/main.c:204
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Adja meg a következő PIN-kódot a(z) „%s” eszközön:"
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "Bluetooth: ki"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "Bluetooth kikapcsolása"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "Bluetooth: be"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: letiltva"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "Bontás…"
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "Kapcsolódás…"
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "Kapcsolódva"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "Bontva"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "Bontás"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "Kapcsolódás"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "Fájlok küldése…"
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "Fájlok tallózása…"
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "Billentyűzetbeállítások"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "Egér és érintőtábla beállításai"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "Hangbeállítások"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "Hibakeresés"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "– Bluetooth kisalkalmazás"
-
-#: ../applet/main.c:823
+#: ../wizard/main.c:208
 #, c-format
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
-"%s\n"
-"A parancssori kapcsolók teljes listájáért adja ki a „%s --help” parancsot.\n"
+"Adja meg a következő PIN-kódot a(z) „%s” eszközön, majd nyomja meg az Enter "
+"billentyűt:"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "Bluetooth kisalkalmazás"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "A(z) „%s” eszköz párosítást kezdeményez a számítógéppel"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "Adja meg a(z) %s eszköz PIN-kódját."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Erősítse meg, hogy a(z) „%s” PIN egyezik az eszköz (%s) PIN-jével."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "Ad hozzáférést a(z) „%s” eszközhöz?"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "A(z) %s eszköz hozzá akar férni a(z) „%s” szolgáltatáshoz."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "Párosításkérés a(z) „%s” eszköztől"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "Bluetooth eszköz"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "Adja meg a PIN-kódot"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "A(z) „%s” eszköz párosításának megerősítése"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "Ellenőrizze a PIN-t"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "Felhatalmazási kérés a következőtől: „%s”"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "Felhatalmazás ellenőrzése"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth-kezelő"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Bluetooth-kezelő kisalkalmazás"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "Bluetooth: ellenőrzés"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "Látható"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "Fájlok küldése az eszközre…"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "Új eszköz beállítása…"
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "Bluetooth-beállítások"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "Kilépés"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "_Mindig adok hozzáférést"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_Elutasítás"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "_Megadás"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "_Nem egyezik"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "_Megegyezik"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "B_emenet megjelenítése"
+#: ../wizard/main.c:213
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Mozgassa az iCade joystickját a következő irányokba:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:271 ../wizard/main.c:402
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "A(z) „%s” eszközzel való párosítás megszakítva"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:321
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Erősítse meg, hogy a(z) „%s” eszközön megjelenített PIN egyezik ezzel."
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:374
 msgid "Please enter the following PIN:"
 msgstr "Adja meg a következő PIN-kódot:"
 
@@ -402,7 +213,7 @@ msgstr "Adja meg a következő PIN-kódot:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:460
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "A„%s” beállítása meghiúsult"
@@ -411,38 +222,21 @@ msgstr "A„%s” beállítása meghiúsult"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:520
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Csatlakozás a(z) „%s” eszközhöz…"
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Adja meg a következő PIN-kódot a(z) „%s” eszközön:"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Adja meg a következő PIN-kódot a(z) „%s” eszközön, majd nyomja meg az Enter "
-"billentyűt:"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Mozgassa az iCade joystickját a következő irányokba:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:585
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Várja meg a(z) „%s” eszköz beállításának befejezését…"
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:603
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Az új „%s” eszköz sikeresen beállítva"
@@ -464,7 +258,6 @@ msgid "Device Setup"
 msgstr "Eszköz beállítása"
 
 #: ../wizard/wizard.ui.h:5
-#| msgid "Finishing New Device Setup"
 msgid "Finishing Setup"
 msgstr "Beállítás befejezése"
 
@@ -539,60 +332,60 @@ msgstr "Bluetooth eszköz beállítása"
 msgid "Setup Bluetooth devices"
 msgstr "Bluetooth eszközök beállítása"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d másodperc"
 msgstr[1] "%'d másodperc"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d perc"
 msgstr[1] "%'d perc"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d óra"
 msgstr[1] "%'d óra"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "megközelítőleg %'d óra"
 msgstr[1] "megközelítőleg %'d óra"
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Fájlátvitel"
+#: ../sendto/main.c:377 ../sendto/main.c:479
+msgid "Connecting..."
+msgstr "Kapcsolódás…"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:424
+#| msgid "Bluetooth Transfer"
+msgid "Bluetooth File Transfer"
+msgstr "Bluetooth fájlátvitel"
+
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "Ú_jra"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Fájlok küldése Bluetoothon"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Feladó:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Címzett:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Ismeretlen hiba történt"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -600,75 +393,72 @@ msgstr ""
 "Ellenőrizze, hogy a távoli eszköz be van kapcsolva, illetve fogadja a "
 "Bluetooth kapcsolatokat"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "%s küldése"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%d. fájl küldése, összesen %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
-#| msgid "%d B/s"
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u átvitel befejezve"
+msgstr[1] "%u átvitel befejezve"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Hiba történt"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Válassza ki a küldés cél eszközét"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Küldés"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Válassza ki a küldeni kívánt fájlokat"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Kijelölés"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Használandó távoli eszköz"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "CÍM"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Távoli eszköz neve"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "NÉV"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[FÁJL…]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "Programhiba: az eszköz nem található a listában"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "Az OBEX küldés fájlátvitel nem támogatott"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth (OBEX küldés)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -677,6 +467,164 @@ msgstr "Bluetooth átvitel"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Fájlok küldése Bluetoothon"
+
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "Bluetooth bekapcsolása"
+
+#~ msgid "Bluetooth: Off"
+#~ msgstr "Bluetooth: ki"
+
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "Bluetooth kikapcsolása"
+
+#~ msgid "Bluetooth: On"
+#~ msgstr "Bluetooth: be"
+
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "Bluetooth: letiltva"
+
+#~ msgid "Disconnecting..."
+#~ msgstr "Bontás…"
+
+#~ msgid "Connected"
+#~ msgstr "Kapcsolódva"
+
+#~ msgid "Disconnected"
+#~ msgstr "Bontva"
+
+#~ msgid "Disconnect"
+#~ msgstr "Bontás"
+
+#~ msgid "Connect"
+#~ msgstr "Kapcsolódás"
+
+#~ msgid "Send files..."
+#~ msgstr "Fájlok küldése…"
+
+#~ msgid "Browse files..."
+#~ msgstr "Fájlok tallózása…"
+
+#~ msgid "Keyboard Settings"
+#~ msgstr "Billentyűzetbeállítások"
+
+#~ msgid "Mouse and Touchpad Settings"
+#~ msgstr "Egér és érintőtábla beállításai"
+
+#~ msgid "Sound Settings"
+#~ msgstr "Hangbeállítások"
+
+#~ msgid "Debug"
+#~ msgstr "Hibakeresés"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "– Bluetooth kisalkalmazás"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "A parancssori kapcsolók teljes listájáért adja ki a „%s --help” "
+#~ "parancsot.\n"
+
+#~ msgid "Bluetooth Applet"
+#~ msgstr "Bluetooth kisalkalmazás"
+
+#~ msgid "Bluetooth"
+#~ msgstr "Bluetooth"
+
+#~ msgid "Device '%s' wants to pair with this computer"
+#~ msgstr "A(z) „%s” eszköz párosítást kezdeményez a számítógéppel"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "Adja meg a(z) %s eszköz PIN-kódját."
+
+#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#~ msgstr "Erősítse meg, hogy a(z) „%s” PIN egyezik az eszköz (%s) PIN-jével."
+
+#~ msgid "Grant access to '%s'"
+#~ msgstr "Ad hozzáférést a(z) „%s” eszközhöz?"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "A(z) %s eszköz hozzá akar férni a(z) „%s” szolgáltatáshoz."
+
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Párosításkérés a(z) „%s” eszköztől"
+
+#~ msgid "Bluetooth device"
+#~ msgstr "Bluetooth eszköz"
+
+#~ msgid "Enter PIN"
+#~ msgstr "Adja meg a PIN-kódot"
+
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "A(z) „%s” eszköz párosításának megerősítése"
+
+#~ msgid "Verify PIN"
+#~ msgstr "Ellenőrizze a PIN-t"
+
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "Felhatalmazási kérés a következőtől: „%s”"
+
+#~ msgid "Check authorization"
+#~ msgstr "Felhatalmazás ellenőrzése"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Bluetooth-kezelő"
+
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "Bluetooth-kezelő kisalkalmazás"
+
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "Bluetooth: ellenőrzés"
+
+#~ msgid "Visible"
+#~ msgstr "Látható"
+
+#~ msgid "Send files to device..."
+#~ msgstr "Fájlok küldése az eszközre…"
+
+#~ msgid "Set up new device..."
+#~ msgstr "Új eszköz beállítása…"
+
+#~ msgid "Bluetooth Settings"
+#~ msgstr "Bluetooth-beállítások"
+
+#~ msgid "Quit"
+#~ msgstr "Kilépés"
+
+#~ msgid "_Always grant access"
+#~ msgstr "_Mindig adok hozzáférést"
+
+#~ msgid "_Reject"
+#~ msgstr "_Elutasítás"
+
+#~ msgid "_Grant"
+#~ msgstr "_Megadás"
+
+#~ msgid "_Does not match"
+#~ msgstr "_Nem egyezik"
+
+#~ msgid "_Matches"
+#~ msgstr "_Megegyezik"
+
+#~ msgid "_Show input"
+#~ msgstr "B_emenet megjelenítése"
+
+#~ msgid "File Transfer"
+#~ msgstr "Fájlátvitel"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Fájlok küldése Bluetoothon"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "Programhiba: az eszköz nem található a listában"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "Az OBEX küldés fájlátvitel nem támogatott"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "Bluetooth (OBEX küldés)"
 
 #~ msgid "%d KB/s"
 #~ msgstr "%d KB/s"
