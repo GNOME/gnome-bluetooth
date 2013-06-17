@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-05-30 23:07+0000\n"
-"PO-Revision-Date: 2013-05-31 14:07+0100\n"
+"POT-Creation-Date: 2013-06-14 20:50+0000\n"
+"PO-Revision-Date: 2013-06-15 11:43+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -202,12 +202,12 @@ msgstr "Použiť toto zariadenie GPS na geolokalizačné služby"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Prístup k internetu pomocou vášho mobilného telefónu (test)"
 
-#: ../wizard/main.c:204
+#: ../wizard/main.c:217
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Prosím, zadajte nasledujúci kód PIN na zariadení „%s“:"
 
-#: ../wizard/main.c:208
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
@@ -217,7 +217,7 @@ msgstr ""
 
 # PM: joystick je po slovensky džojstik alebo pákový ovládač
 # PK: :D, ten preklad je dobry
-#: ../wizard/main.c:213
+#: ../wizard/main.c:226
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Prosím, hýbte s pákou na vašom iCade nasledujúcimi smermi:"
 
@@ -226,18 +226,18 @@ msgstr "Prosím, hýbte s pákou na vašom iCade nasledujúcimi smermi:"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:271 ../wizard/main.c:402
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Párovanie so zariadením „%s“ zrušené"
 
-#: ../wizard/main.c:321
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
 "Prosím, potvrďte, že kód PIN zobrazený na zariadení „%s“ sa zhoduje s týmto."
 
-#: ../wizard/main.c:374
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Prosím, zadajte nasledujúci kód PIN:"
 
@@ -245,7 +245,7 @@ msgstr "Prosím, zadajte nasledujúci kód PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:460
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Nastavenie zariadenia „%s“ zlyhalo"
@@ -256,7 +256,7 @@ msgstr "Nastavenie zariadenia „%s“ zlyhalo"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:520
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Pripája sa k zariadeniu „%s“…"
@@ -265,12 +265,12 @@ msgstr "Pripája sa k zariadeniu „%s“…"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:588
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Prosím, počkajte, pokým sa nedokončí nastavovanie zariadenia „%s“…"
 
-#: ../wizard/main.c:606
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Nové zariadenie „%s“ bolo úspešne nastavené"
@@ -424,108 +424,111 @@ msgstr[1] "približne %'d hodina"
 msgstr[2] "približne %'d hodiny"
 
 # GtkAction label
-#: ../sendto/main.c:377 ../sendto/main.c:488
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Pripája sa…"
 
-# GtkDialog title
+# desktop entry name
 #: ../sendto/main.c:424
-msgid "File Transfer"
-msgstr "Prenos súborov"
+msgid "Bluetooth File Transfer"
+msgstr "Prenos súborov cez bluetooth"
 
 # GtlButton label
 #: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_Skúsiť znova"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:446
-msgid "Sending files via Bluetooth"
-msgstr "Posielanie súborov cez bluetooth"
-
 # je to zdrojový priečinok
-#: ../sendto/main.c:458
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Z:"
 
-#: ../sendto/main.c:472
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Do:"
 
-#: ../sendto/main.c:517 ../sendto/main.c:535
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Nastala neznáma chyba"
 
-#: ../sendto/main.c:528
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Uistite sa, že vzdialené zariadenie je zapnuté a prijíma bluetooth spojenia"
 
-#: ../sendto/main.c:600
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "Odosiela sa %s"
 
-#: ../sendto/main.c:607 ../sendto/main.c:656
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Odosiela sa %d. súbor z %d"
 
-#: ../sendto/main.c:652
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:654
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u prenosov dokončených"
+msgstr[1] "%u prenos dokončený"
+msgstr[2] "%u prenosy dokončené"
+
+#: ../sendto/main.c:689
 msgid "There was an error"
 msgstr "Vyskytla sa chyba"
 
 # GtkDialog title
-#: ../sendto/main.c:723
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Výber cieľového zariadenia"
 
 # GtkButton label
-#: ../sendto/main.c:728
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Odoslať"
 
 # GtkDialog title
-#: ../sendto/main.c:772
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Výber súborov na odoslanie"
 
 # GtkButton label
-#: ../sendto/main.c:775
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Vybrať"
 
 # cmd desc
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Vzdialené zariadenie, ktoré sa má použiť"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "ADRESA"
 
 # cmd desc
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Názov vzdialeného zariadenia"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "NÁZOV"
 
-#: ../sendto/main.c:822
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[SÚBOR…]"
 
