@@ -1,14 +1,14 @@
 # Norwegian bokmål translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
-# Kjartan Maraas <kmaraas@gnome.org>, 2007-2012.
+# Kjartan Maraas <kmaraas@gnome.org>, 2007-2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.9.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-02 01:38+0200\n"
-"PO-Revision-Date: 2013-06-02 01:42+0200\n"
+"POT-Creation-Date: 2013-06-20 10:22+0200\n"
+"PO-Revision-Date: 2013-06-20 10:23+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -170,19 +170,19 @@ msgstr "Bruk denne GPS-enheten for Geolocation-tjenester"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Koble på internett med mobiltelefon (test)"
 
-#: ../wizard/main.c:204
+#: ../wizard/main.c:217
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Vennligst oppgi følgende PIN på «%s»:"
 
-#: ../wizard/main.c:208
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
 "Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
 
-#: ../wizard/main.c:213
+#: ../wizard/main.c:226
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger:"
 
@@ -190,17 +190,17 @@ msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger:"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:271 ../wizard/main.c:402
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Sammenkobling med «%s» avbrutt"
 
-#: ../wizard/main.c:321
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Vennligst bekreft at PIN som vises på «%s» er lik denne."
 
-#: ../wizard/main.c:374
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Vennligst oppgi følgende PIN:"
 
@@ -208,7 +208,7 @@ msgstr "Vennligst oppgi følgende PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:460
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Oppsett av «%s» feilet"
@@ -217,7 +217,7 @@ msgstr "Oppsett av «%s» feilet"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:520
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Kobler til «%s» …"
@@ -226,12 +226,12 @@ msgstr "Kobler til «%s» …"
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:588
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Vennligst vent mens oppsett sluttføres på enhet «%s» …"
 
-#: ../wizard/main.c:606
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Oppsett av ny enhet «%s» fullført"
@@ -355,36 +355,31 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "omtrent %'d time"
 msgstr[1] "omtrent %'d timer"
 
-#: ../sendto/main.c:377 ../sendto/main.c:488
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Kobler til …"
 
 #: ../sendto/main.c:424
-msgid "File Transfer"
-msgstr "Filoverføring"
+msgid "Bluetooth File Transfer"
+msgstr "Bluetooth-filoverføring"
 
 #: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "P_røv igjen"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:446
-msgid "Sending files via Bluetooth"
-msgstr "Sender filer via Bluetooth"
-
-#: ../sendto/main.c:458
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Fra:"
 
-#: ../sendto/main.c:472
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Til:"
 
-#: ../sendto/main.c:517 ../sendto/main.c:535
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "En ukjent feil oppsto"
 
-#: ../sendto/main.c:528
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -392,63 +387,70 @@ msgstr ""
 "Sjekk at ekstern enhet er slått på og at den godtar tilkoblinger via "
 "Bluetooth"
 
-#: ../sendto/main.c:600
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "Sender %s"
 
-#: ../sendto/main.c:607 ../sendto/main.c:656
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sender fil %d av %d"
 
-#: ../sendto/main.c:652
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:654
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u overføring fullført"
+msgstr[1] "%u overføringer fullført"
+
+#: ../sendto/main.c:689
 msgid "There was an error"
 msgstr "En feil oppsto"
 
-#: ../sendto/main.c:723
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Velg enhet å sende til"
 
-#: ../sendto/main.c:728
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Send"
 
-#: ../sendto/main.c:772
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Velg filer som skal sendes"
 
-#: ../sendto/main.c:775
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Velg"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Ekstern enhet som skal brukes"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Fjern enhetens navn"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "NAVN"
 
-#: ../sendto/main.c:822
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[FIL …]"
 
