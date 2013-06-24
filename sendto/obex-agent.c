@@ -205,8 +205,6 @@ static gboolean obex_agent_release(ObexAgent *agent,
 	else
 		g_dbus_method_invocation_return_value (invocation, NULL);
 
-	g_object_unref(agent);
-
 	return result;
 }
 

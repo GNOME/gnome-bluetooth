@@ -544,7 +544,7 @@ static gboolean release_callback(GDBusMethodInvocation *invocation,
 {
 	g_dbus_method_invocation_return_value (invocation, NULL);
 
-	agent = NULL;
+	g_clear_object (&agent);
 
 	gtk_label_set_markup(GTK_LABEL(label_status), NULL);
 
@@ -570,7 +570,7 @@ static gboolean error_callback(GDBusMethodInvocation *invocation,
 
 	if (agent != NULL) {
 		obex_agent_set_release_func(agent, NULL, NULL);
-		agent = NULL;
+		g_clear_object (&agent);
 	}
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
