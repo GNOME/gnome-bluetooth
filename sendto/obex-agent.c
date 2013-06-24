@@ -281,6 +281,7 @@ static void obex_agent_finalize(GObject *agent)
 
 	DBG("agent %p", agent);
 
+	g_dbus_connection_unregister_object (priv->conn, priv->reg_id);
 	g_bus_unwatch_name (priv->watch_id);
 	g_free (priv->busname);
 	g_free(priv->path);
