@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-01 23:42+0000\n"
-"PO-Revision-Date: 2013-06-04 12:14+0700\n"
+"POT-Creation-Date: 2013-06-24 17:32+0000\n"
+"PO-Revision-Date: 2013-07-02 16:36+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -171,18 +171,18 @@ msgstr "ใช้อุปกรณ์ GPS นี้กับบริการ 
 msgid "Access the Internet using your cell phone (test)"
 msgstr "เข้าถึงอินเทอร์เน็ตโดยใช้โทรศัพท์มือถือของคุณ (ทดสอบ)"
 
-#: ../wizard/main.c:204
+#: ../wizard/main.c:217
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s':"
 
-#: ../wizard/main.c:208
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s' แล้วกด “Enter” บนแป้นพิมพ์:"
 
-#: ../wizard/main.c:213
+#: ../wizard/main.c:226
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "กรุณาเลื่อนก้านควบคุม iCade ของคุณในทิศทางต่อไปนี้:"
 
@@ -190,17 +190,17 @@ msgstr "กรุณาเลื่อนก้านควบคุม iCade �
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:271 ../wizard/main.c:402
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "การจับคู่กับ '%s' ถูกยกเลิก"
 
-#: ../wizard/main.c:321
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "กรุณายืนยันว่า PIN ที่แสดงบน '%s' ตรงกันกับ PIN นี้"
 
-#: ../wizard/main.c:374
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 
@@ -208,7 +208,7 @@ msgstr "กรุณาป้อน PIN ต่อไปนี้:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:460
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
@@ -217,7 +217,7 @@ msgstr "การตั้งค่า '%s' ไม่สำเร็จ"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:520
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "กำลังเชื่อมต่อไปยัง '%s'..."
@@ -226,12 +226,12 @@ msgstr "กำลังเชื่อมต่อไปยัง '%s'..."
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:588
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "กรุณารอสักครู่ขณะเสร็จสิ้นการตั้งค่าอุปกรณ์ '%s' ..."
 
-#: ../wizard/main.c:606
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "ตั้งค่าอุปกรณ์ใหม่ '%s' สำเร็จแล้ว"
@@ -351,98 +351,99 @@ msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ประมาณ %'d ชั่วโมง"
 
-#: ../sendto/main.c:377 ../sendto/main.c:488
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "กำลังเชื่อมต่อ..."
 
 #: ../sendto/main.c:424
-msgid "File Transfer"
-msgstr "การถ่ายโอนแฟ้ม"
+msgid "Bluetooth File Transfer"
+msgstr "การถ่ายโอนแฟ้มผ่านบลูทูท"
 
 #: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_ลองใหม่"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:446
-msgid "Sending files via Bluetooth"
-msgstr "การส่งแฟ้มทางบลูทูท"
-
-#: ../sendto/main.c:458
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "จาก:"
 
-#: ../sendto/main.c:472
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "ถึง:"
 
-#: ../sendto/main.c:517 ../sendto/main.c:535
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "เกิดข้อผิดพลาดไม่ทราบสาเหตุ"
 
-#: ../sendto/main.c:528
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าอุปกรณ์อีกฝ่ายหนึ่งเปิดทำงานอยู่ และรับการเชื่อมต่อบลูทูท"
 
-#: ../sendto/main.c:600
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "กำลังส่ง %s"
 
-#: ../sendto/main.c:607 ../sendto/main.c:656
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "กำลังส่งแฟ้มที่ %d จาก %d"
 
-#: ../sendto/main.c:652
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:654
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "ถ่ายโอนเสร็จสมบูรณ์ %u รายการ"
+
+#: ../sendto/main.c:689
 msgid "There was an error"
 msgstr "เกิดข้อผิดพลาด"
 
-#: ../sendto/main.c:723
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "เลือกอุปกรณ์ที่จะรับการส่ง"
 
-#: ../sendto/main.c:728
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_ส่ง"
 
-#: ../sendto/main.c:772
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "เลือกแฟ้มที่จะส่ง"
 
-#: ../sendto/main.c:775
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "เลือก"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "อุปกรณ์อีกฝ่ายที่จะใช้"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "แอดเดรส"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "ชื่อของอุปกรณ์อีกฝ่าย"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "ชื่อ"
 
-#: ../sendto/main.c:822
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[แฟ้ม...]"
 
@@ -453,6 +454,12 @@ msgstr "ถ่ายโอนผ่านบลูทูท"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "ส่งแฟ้มทางบลูทูท"
+
+#~ msgid "File Transfer"
+#~ msgstr "การถ่ายโอนแฟ้ม"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "การส่งแฟ้มทางบลูทูท"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "เปิดบลูทูท"
