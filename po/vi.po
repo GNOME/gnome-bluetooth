@@ -1,24 +1,25 @@
 # Vietnamese translation of gnome-bluetooth.
-# Copyright (C) 2009 gnome-bluetooth's GNOME i18n Project for Vietnamse
+# Copyright (C) 2013 gnome-bluetooth's GNOME i18n Project for Vietnamse
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2012.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2013.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-14 09:30+0000\n"
-"PO-Revision-Date: 2013-07-06 17:58+0700\n"
-"Last-Translator: Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\n"
+"POT-Creation-Date: 2013-07-02 09:41+0000\n"
+"PO-Revision-Date: 2013-07-06 07:52+0700\n"
+"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-Language: Vietnamese\n"
-"X-Poedit-Country: VIET NAM\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -43,7 +44,7 @@ msgstr "Thiết bị"
 
 #: ../lib/bluetooth-chooser.c:732
 msgid "Type"
-msgstr "Loại"
+msgstr "Kiểu"
 
 #: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
@@ -78,24 +79,24 @@ msgstr "Hiện:"
 #. The device category filter
 #: ../lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
-msgstr "_Chủng loại thiết bị..."
+msgstr "_Chủng loại thiết bị:"
 
 #: ../lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
-msgstr "Chọn loại thiết bị để lọc"
+msgstr "Chọn kiểu thiết bị để lọc"
 
 #. The device type filter
 #: ../lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
-msgstr "_Loại thiết bị:"
+msgstr "_Kiểu thiết bị:"
 
 #: ../lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
-msgstr "Chọn loại thiết bị để lọc"
+msgstr "Chọn kiểu thiết bị để lọc"
 
 #: ../lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
-msgstr "Thiết bị nhập liệu (chuột, bàn phím, ...)"
+msgstr "Thiết bị nhập liệu (con chuột, bàn phím, v.v..)"
 
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
@@ -152,11 +153,11 @@ msgstr "Máy in"
 
 #: ../lib/bluetooth-utils.c:84
 msgid "Joypad"
-msgstr "Cần điều khiển trò chơi"
+msgstr "Tay chơi game"
 
 #: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
-msgstr "Bảng tính"
+msgstr "Máy tính bảng"
 
 #: ../lib/bluetooth-utils.c:88
 msgid "Video device"
@@ -164,7 +165,7 @@ msgstr "Thiết bị hình"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
-msgstr "Dùng thiết bị GPS này cho dịch vụ Geolocation"
+msgstr "Dùng thiết bị GPS này cho dịch vụ Geolocation (Định vị toàn cầu)"
 
 #. translators:
 #. * This is in a test plugin, please make sure you add the "(test)" part,
@@ -173,18 +174,18 @@ msgstr "Dùng thiết bị GPS này cho dịch vụ Geolocation"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Truy cập Internet bằng điện thoại di động (thử nghiệm)"
 
-#: ../wizard/main.c:204
+#: ../wizard/main.c:217
 #, c-format
 msgid "Please enter the following PIN on '%s':"
-msgstr "Hãy điền PIN sau trên '%s':"
+msgstr "Hãy điền PIN sau trên “%s”:"
 
-#: ../wizard/main.c:208
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Hãy điền PIN sau trên '%s' và nhấn “Enter” trên bàn phím:"
+msgstr "Hãy điền PIN sau trên “%s” và nhấn “Enter” trên bàn phím:"
 
-#: ../wizard/main.c:213
+#: ../wizard/main.c:226
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Vui lòng di chuyển cần điều khiển của iCade theo hướng sau:"
 
@@ -192,17 +193,17 @@ msgstr "Vui lòng di chuyển cần điều khiển của iCade theo hướng sa
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:271 ../wizard/main.c:402
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
-msgstr "Kết nối tới '%s' bị hủy"
+msgstr "Kết nối tới “%s” bị hủy"
 
-#: ../wizard/main.c:321
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Kiểm tra PIN hiển thị trên '%s' trùng với cái này này."
+msgstr "Kiểm tra PIN hiển thị trên “%s” trùng với cái này này."
 
-#: ../wizard/main.c:374
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Hãy điền PIN sau:"
 
@@ -210,33 +211,33 @@ msgstr "Hãy điền PIN sau:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:460
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
-msgstr "Cài đặt '%s' không thành công"
+msgstr "Cài đặt “%s” không thành công"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:520
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
-msgstr "Đang kết nối tới '%s'..."
+msgstr "Đang kết nối tới “%s”..."
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:585
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Vui lòng chờ hoàn tất cài đặt trên thiết bị '%s'..."
+msgstr "Vui lòng chờ hoàn tất cài đặt trên thiết bị “%s”..."
 
-#: ../wizard/main.c:603
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
-msgstr "Cài đặt thiết bị mới '%s' thành công"
+msgstr "Cài đặt thiết bị mới “%s” thành công"
 
 #: ../wizard/wizard.ui.h:1
 msgid "Bluetooth New Device Setup"
@@ -256,7 +257,7 @@ msgstr "Cài đặt thiết bị"
 
 #: ../wizard/wizard.ui.h:5
 msgid "Finishing Setup"
-msgstr "Kết thúc cài đặt"
+msgstr "Hoàn tất cài đặt"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
@@ -281,15 +282,15 @@ msgstr "PIN cố định"
 
 #: ../wizard/wizard.ui.h:12
 msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (hầu hết các tai nghe, chuột và thiết bị GPS)"
+msgstr "“0000” (dùng được với hầu hết các tai nghe, chuột và thiết bị GPS)"
 
 #: ../wizard/wizard.ui.h:13
 msgid "'1111'"
-msgstr "'1111'"
+msgstr "“1111”"
 
 #: ../wizard/wizard.ui.h:14
 msgid "'1234'"
-msgstr "'1234'"
+msgstr "“1234”"
 
 #: ../wizard/wizard.ui.h:15
 msgid "Do not pair"
@@ -358,10 +359,8 @@ msgid "Connecting..."
 msgstr "Đang kết nối..."
 
 #: ../sendto/main.c:424
-#, fuzzy
-#| msgid "Bluetooth Transfer"
 msgid "Bluetooth File Transfer"
-msgstr "Truyền Bluetooth"
+msgstr "Truyền Tập tin qua Bluetooth"
 
 #: ../sendto/main.c:427
 msgid "_Retry"
@@ -409,11 +408,11 @@ msgstr "%d B/s"
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
-msgstr[0] ""
+msgstr[0] "đã truyền xong %u"
 
 #: ../sendto/main.c:689
 msgid "There was an error"
-msgstr ""
+msgstr "Đã có một lỗi"
 
 #: ../sendto/main.c:725
 msgid "Select device to send to"
@@ -457,324 +456,4 @@ msgstr "Truyền Bluetooth"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
-msgstr "Gửi tập tin qua Bluetooth"
-
-#~| msgid "Turn On Bluetooth"
-#~ msgid "Turn on Bluetooth"
-#~ msgstr "Bật Bluetooth"
-
-#~ msgid "Bluetooth: Off"
-#~ msgstr "Bluetooth: Tắt"
-
-#~| msgid "Turn Off Bluetooth"
-#~ msgid "Turn off Bluetooth"
-#~ msgstr "Tắt Bluetooth"
-
-#~ msgid "Bluetooth: On"
-#~ msgstr "Bluetooth: Bật"
-
-#~ msgid "Bluetooth: Disabled"
-#~ msgstr "Bluetooth: Chưa sẵn sàng"
-
-#~ msgid "Disconnecting..."
-#~ msgstr "Đang ngắt kết nối..."
-
-#~ msgid "Connected"
-#~ msgstr "Đã kết nối"
-
-#~ msgid "Disconnected"
-#~ msgstr "Đã ngắt kết nối"
-
-#~ msgid "Disconnect"
-#~ msgstr "Ngắt kết nối"
-
-#~ msgid "Connect"
-#~ msgstr "Kết nối"
-
-#~ msgid "Send files..."
-#~ msgstr "Gửi tập tin"
-
-#~ msgid "Browse files..."
-#~ msgstr "Duyệt tập tin..."
-
-#~| msgid "Keyboard"
-#~ msgid "Keyboard Settings"
-#~ msgstr "Thiết lập bàn phím"
-
-#~ msgid "Mouse and Touchpad Settings"
-#~ msgstr "Thiết lập chuột và touchpad"
-
-#~ msgid "Sound Settings"
-#~ msgstr "Thiết lập âm thanh"
-
-#~ msgid "Debug"
-#~ msgstr "Tìm lỗi"
-
-#~ msgid "- Bluetooth applet"
-#~ msgstr "- Ứng dụng Bluetooth"
-
-#~ msgid ""
-#~ "%s\n"
-#~ "Run '%s --help' to see a full list of available command line options.\n"
-#~ msgstr ""
-#~ "%s\n"
-#~ "Chạy '%s --help' để xem các tùy chọn dòng lệnh.\n"
-
-#~ msgid "Bluetooth Applet"
-#~ msgstr "Ứng dụng Bluetooth"
-
-#~ msgid "Bluetooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Device '%s' wants to pair with this computer"
-#~ msgstr "Thiết bị '%s' muốn kết nối với máy tính này"
-
-#~| msgid "Please enter the passkey mentioned on device %s."
-#~ msgid "Please enter the PIN mentioned on device %s."
-#~ msgstr "Nhập PIN đề cập trên thiết bị %s."
-
-#~| msgid ""
-#~| "Please confirm whether the passkey '%s' matches the one on device %s."
-#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-#~ msgstr "Kiểm tra PIN '%s' có đúng với PIN trên thiết bị %s không."
-
-#~ msgid "Grant access to '%s'"
-#~ msgstr "Cho phép kết nối đến '%s'"
-
-#~ msgid "Device %s wants access to the service '%s'."
-#~ msgstr "Thiết bị %s muốn truy cập dịch vụ '%s'."
-
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "Yêu cầu kết nối tới '%s'"
-
-#~ msgid "Bluetooth device"
-#~ msgstr "Thiết bị Bluetooth"
-
-#~ msgid "Enter PIN"
-#~ msgstr "Nhập PIN"
-
-#~ msgid "Pairing confirmation for '%s'"
-#~ msgstr "Khẳng định kết nối từ '%s'"
-
-#~ msgid "Verify PIN"
-#~ msgstr "Xác minh PIN"
-
-#~ msgid "Authorization request from '%s'"
-#~ msgstr "Yêu cầu xác thực từ '%s'"
-
-#~ msgid "Check authorization"
-#~ msgstr "Kiểm tra xác thực"
-
-#~ msgid "Bluetooth Manager"
-#~ msgstr "Trình quản lí Bluetooth"
-
-#~ msgid "Bluetooth Manager applet"
-#~ msgstr "Trình quản lí Bluetooth"
-
-#~ msgid "Bluetooth: Checking"
-#~ msgstr "Bluetooth: Đang kiểm tra"
-
-#~ msgid "Visible"
-#~ msgstr "Hiện"
-
-#~ msgid "Send files to device..."
-#~ msgstr "Gửi tập tin tới thiết bị..."
-
-#~ msgid "Set up new device..."
-#~ msgstr "Cài đặt thiết bị mới..."
-
-#~| msgid "Bluetooth: Checking"
-#~ msgid "Bluetooth Settings"
-#~ msgstr "Thiết lập Bluetooth"
-
-#~ msgid "Quit"
-#~ msgstr "Thoát"
-
-#~ msgid "_Always grant access"
-#~ msgstr "_Luôn cho phép"
-
-#~ msgid "_Reject"
-#~ msgstr "_Từ chối"
-
-#~ msgid "_Grant"
-#~ msgstr "_Cho phép"
-
-#~ msgid "_Does not match"
-#~ msgstr "K_hông khớp"
-
-#~ msgid "_Matches"
-#~ msgstr "_Khớp"
-
-#~ msgid "_Show input"
-#~ msgstr "_Xem dữ liệu"
-
-#~ msgid "File Transfer"
-#~ msgstr "Trao đổi tập tin"
-
-#~ msgid "Sending files via Bluetooth"
-#~ msgstr "Gửi tập tin qua Bluetooth"
-
-#~ msgid "Programming error: could not find the device in the list"
-#~ msgstr "Lỗi lập trình: không thể tìm thiết bị trong danh sách"
-
-#~ msgid "OBEX Push file transfer unsupported"
-#~ msgstr "Không hỗ trợ truyền tập tin dạng đẩy OBEX"
-
-#~| msgid "Bluetooth: On"
-#~ msgid "Bluetooth (OBEX Push)"
-#~ msgstr "Bluetooth (Đẩy OBEX)"
-
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Chỉ Hiển Thị Các Thiết Bị Bluetooth Với..."
-
-#~ msgid "Select Device to Browse"
-#~ msgstr "Chọn Thiết Bị Để Duyệt"
-
-#~ msgid "_Browse"
-#~ msgstr "_Duyệt"
-
-#~ msgid "Select device to browse"
-#~ msgstr "Chọn thiết bị để duyệt"
-
-#~ msgid "Bluetooth: Unknown"
-#~ msgstr "Bluetooth: Không biết"
-
-#~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Tùy chỉnh bàn phím..."
-
-#~ msgid "Open Mouse Preferences..."
-#~ msgstr "Tùy chỉnh chuột..."
-
-#~ msgid "Bluetooth: Enabled"
-#~ msgstr "Bluetooth: Sẵn sàng"
-
-#~ msgid "Enter passkey"
-#~ msgstr "Nhập mật khẩu"
-
-#~ msgid "Check passkey"
-#~ msgstr "Kiểm tra mật khẩu"
-
-#~ msgid "Browse files on device..."
-#~ msgstr "Duyệt tập tin trên thiết bị..."
-
-#~ msgid "Preferences..."
-#~ msgstr "Tùy chỉnh"
-
-#~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "Trình quản lí Bluetooth của GNOME"
-
-#~ msgid "translator-credits"
-#~ msgstr "Những người tham gia dịch"
-
-#~ msgid "GNOME Bluetooth home page"
-#~ msgstr "Trang web của GNOME Bluetooth"
-
-#~ msgid "Bluetooth Preferences"
-#~ msgstr "Tùy chỉnh Bluetooth"
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "_Hiện biểu tượng Bluetooth"
-
-#~ msgid "Output a list of currently known devices"
-#~ msgstr "Xuất danh sách các thiết bị đã biết"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "Thuộc tính"
-
-#~| msgid "Remove from list of known devices?"
-#~ msgid "Remove '%s' from list of known devices?"
-#~ msgstr "Xóa '%s' khỏi danh sách các thiết bị đã biết?"
-
-#~ msgid ""
-#~ "If you delete the device, you have to set it up again before next use."
-#~ msgstr "Nếu xóa thiết bị này, bạn sẽ phải cài đặt lại khi muốn sử dụng nó."
-
-#~ msgid "_Discoverable"
-#~ msgstr "_Có thể tìm được"
-
-#~ msgid "Friendly name"
-#~ msgstr "Tên máy"
-
-#~ msgid "Known devices"
-#~ msgstr "Các thiết bị đã biết"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "Bluetooth đã tắt"
-
-#~ msgid "No Bluetooth adapters present"
-#~ msgstr "Không có bộ chuyển đổi"
-
-#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
-#~ msgstr "Máy tính này không có bộ chuyển đổi Bluetooth."
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "Cấu hình cho Bluetooth"
-
-#~ msgid "Whether to show the notification icon"
-#~ msgstr "Có hay không hiển thị biểu tượng"
-
-#~ msgid "Whether to show the notification icon."
-#~ msgstr "Có hay không hiển thị biểu tượng."
-
-#~ msgid "GConf error: %s"
-#~ msgstr "Lỗi GConf: %s"
-
-#~ msgid "All further errors shown only on terminal."
-#~ msgstr "Các thông báo lỗi tiếp theo chỉ hiển thị ở giao diện dòng lệnh."
-
-#~| msgid "Successfully configured new device"
-#~ msgid "Successfully configured '%s'"
-#~ msgstr "Cài đặt '%s' thành công"
-
-#~ msgid "Bluetooth Device Wizard"
-#~ msgstr "Thuật sĩ thiết bị Bluetooth"
-
-#~ msgid "Custom passkey code:"
-#~ msgstr "Mật khẩu tùy chọn:"
-
-#~| msgid "Device _type:"
-#~ msgid "Device Setup Failed"
-#~ msgstr "Cài đặt thiết bị không thành công"
-
-#~ msgid "Introduction"
-#~ msgstr "Giới thiệu"
-
-#~ msgid "Select the device you want to setup"
-#~ msgstr "Chọn thiết bị muốn cài đặt"
-
-#~ msgid "Setup Completed"
-#~ msgstr "Kết thúc cài đặt"
-
-#~ msgid "Setup Finished"
-#~ msgstr "Kết thúc cài đặt"
-
-#~ msgid ""
-#~ "The device will need to be within 10 meters of your computer, and be "
-#~ "“discoverable” (sometimes called “visible”). Check the device's manual if "
-#~ "in doubt."
-#~ msgstr ""
-#~ "Thiết bị phải đặt cách máy tính dưới 10 m, và phải “có thể tìm được” (hay "
-#~ "là “có thể nhìn thấy được”). Xem thêm hướng dẫn sử dụng của thiết bị nếu "
-#~ "cần."
-
-#~ msgid ""
-#~ "The device wizard will walk you through the process of configuring "
-#~ "Bluetooth enabled devices for use with this computer."
-#~ msgstr ""
-#~ "Thuật sĩ sẽ giúp bạn cấu hình các thiết bị Bluetooth để kết nối với máy "
-#~ "tính."
-
-#~ msgid "Welcome to the Bluetooth device setup wizard"
-#~ msgstr "Chào mừng bạn đến với Thuật sĩ thiết bị Bluetooth"
-
-#~ msgid "_Restart Setup"
-#~ msgstr "_Cài đặt lại"
-
-#~ msgid "%d KB/s"
-#~ msgstr "%d KB/s"
-
-#~ msgid "Please wait whilst '%s' is being paired"
-#~ msgstr "Đang kết nối với '%s'"
-
-#~ msgid "Additional setup"
-#~ msgstr "Cài đặt bổ sung"
+msgstr "Gửi tập tin thông qua Bluetooth"
