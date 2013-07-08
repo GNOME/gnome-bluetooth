@@ -12,20 +12,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-20 17:40+0100\n"
-"PO-Revision-Date: 2012-12-20 17:39+0100\n"
-"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-06-14 11:35+0000\n"
+"PO-Revision-Date: 2013-07-08 17:33+0100\n"
+"Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
-"Language: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Gtranslator 2.91.5\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"X-Generator: Poedit 1.5.7\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -180,23 +179,41 @@ msgstr "Dieses GPS-Gerät für Geopositionsdienste verwenden"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Zugriff auf das Internet über Ihr Mobiltelefon (Test)"
 
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Bitte geben Sie die folgende PIN auf »%s« ein:"
+
+#: ../wizard/main.c:221
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr ""
+"Bitte geben Sie die folgende PIN auf »%s« ein und drücken Sie die "
+"Eingabetaste auf der Tastatur:"
+
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr ""
+"Bitte bewegen Sie den Joystick Ihres iCade in die folgenden Richtungen:"
+
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:242 ../wizard/main.c:365
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Kopplung mit »%s« wurde abgebrochen"
 
-#: ../wizard/main.c:283
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
 "Bitte bestätigen Sie, dass die auf dem Gerät »%s« angezeigte PIN mit dieser "
 "übereinstimmt."
 
-#: ../wizard/main.c:337
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Bitte geben Sie die folgende PIN ein:"
 
@@ -204,7 +221,7 @@ msgstr "Bitte geben Sie die folgende PIN ein:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:425
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Konfiguration von »%s« ist gescheitert"
@@ -213,41 +230,23 @@ msgstr "Konfiguration von »%s« ist gescheitert"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:479
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Verbindung zu »%s« wird hergestellt …"
-
-#: ../wizard/main.c:519
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Bitte geben Sie die folgende PIN auf »%s« ein:"
-
-#: ../wizard/main.c:522
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Bitte geben Sie die folgende PIN auf »%s« ein und drücken Sie die "
-"Eingabetaste auf der Tastatur:"
-
-#: ../wizard/main.c:527
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr ""
-"Bitte bewegen Sie den Joystick Ihres iCade in die folgenden Richtungen:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:559
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr ""
 "Bitte warten Sie, während die Konfiguration des Gerätes »%s« abgeschlossen "
 "wird …"
 
-#: ../wizard/main.c:577
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Neues Gerät »%s« wurde erfolgreich konfiguriert"
@@ -343,64 +342,60 @@ msgstr "Bluetooth-Gerätekonfiguraion"
 msgid "Setup Bluetooth devices"
 msgstr "Bluetooth-Geräte einrichten"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d Sekunde"
 msgstr[1] "%'d Sekunden"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d Minute"
 msgstr[1] "%'d Minuten"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d Stunde"
 msgstr[1] "%'d Stunden"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ungefähr %'d Stunde"
 msgstr[1] "ungefähr %'d Stunden"
 
-#: ../sendto/main.c:192 ../sendto/main.c:292
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Verbindung wird hergestellt ..."
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Dateiübertragung"
+#: ../sendto/main.c:424
+#| msgid "Bluetooth Transfer"
+msgid "Bluetooth File Transfer"
+msgstr "Bluetooth-Dateiübertragung"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "E_rneut versuchen"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Dateien über Bluetooth versenden"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Von:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "An:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Ein unbekannter Fehler ist aufgetreten"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -408,59 +403,70 @@ msgstr ""
 "Stellen Sie sicher, dass das entfernte Gerät eingeschaltet ist und Bluetooth-"
 "Verbindungen akzeptiert"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "%s wird gesendet"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Datei %d von %d wird gesendet"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u Übertragung abgeschlossen"
+msgstr[1] "%u Übertragungen abgeschlossen"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Ein Fehler ist aufgetreten"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Gerät als Empfänger auswählen"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Senden"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Dateien zum Senden auswählen"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Auswahl"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Zu verwendendes entferntes Gerät"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Name des entfernten Gerätes"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "NAME"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[Datei...]"
 
@@ -471,6 +477,12 @@ msgstr "Bluetooth-Übertragung"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Dateien über Bluetooth versenden"
+
+#~ msgid "File Transfer"
+#~ msgstr "Dateiübertragung"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Dateien über Bluetooth versenden"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "Bluetooth einschalten"
