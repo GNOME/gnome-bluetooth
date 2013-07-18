@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Tajik Gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-13 13:36+0000\n"
-"PO-Revision-Date: 2013-05-23 13:54+0500\n"
+"POT-Creation-Date: 2013-06-24 17:32+0000\n"
+"PO-Revision-Date: 2013-07-18 16:44+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: \n"
 "Language: Tajik\n"
@@ -172,23 +172,40 @@ msgstr "Дстифода бурдани ин дастгоҳи GPS барои х�
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Пайдо кардани дастраӣ ба Интернет тавассути телефони мобилӣ (санҷишӣ)"
 
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед:"
+
+#: ../wizard/main.c:221
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr ""
+"Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед, ва тугмаи “Enter”-ро дар "
+"клавиатура пахш намоед:"
+
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Лутфан, ҷойстики iCade-и худро ба самтҳои зерин ҳаракат кунед:"
+
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:242 ../wizard/main.c:365
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Ҷуфткунӣ бо '%s' бекор шудааст"
 
-#: ../wizard/main.c:283
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr ""
 "Лутфан, тасдиқ кунед, ки рамзи PIN-и намоишдодашуда дар '%s', ба ин рамз "
 "мувофиқат мекунад."
 
-#: ../wizard/main.c:337
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Лутфан, рамзи PIN-и зеринро ворид кунед:"
 
@@ -196,7 +213,7 @@ msgstr "Лутфан, рамзи PIN-и зеринро ворид кунед:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:425
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Танзимкуни '%s' қатъ шудааст"
@@ -205,38 +222,21 @@ msgstr "Танзимкуни '%s' қатъ шудааст"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:479
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Пайвастшавӣ ба \"%s\"..."
-
-#: ../wizard/main.c:521
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед:"
-
-#: ../wizard/main.c:524
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед, ва тугмаи “Enter”-ро дар "
-"клавиатура пахш намоед:"
-
-#: ../wizard/main.c:529
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Лутфан, ҷойстики iCade-и худро ба самтҳои зерин ҳаракат кунед:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:561
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Лутфан, интизор шавед то ки танзими дастгоҳи '%s' ба анҷом расад..."
 
-#: ../wizard/main.c:579
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Дастгоҳи нави '%s' бо муваффақият танзим шудааст"
@@ -332,64 +332,60 @@ msgstr "Танзими дастгоҳи Bluetooth"
 msgid "Setup Bluetooth devices"
 msgstr "Танзим кардани дастгоҳҳои Bluetooth"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d сония"
 msgstr[1] "%'d сония"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d дақиқа"
 msgstr[1] "%'d дақиқа"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d соат"
 msgstr[1] "%'d соат"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "тахминан %'d соат"
 msgstr[1] "тахминан %'d соат"
 
-#: ../sendto/main.c:192 ../sendto/main.c:292
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Пайвастшавӣ..."
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Интиқолдиҳии файл"
+#: ../sendto/main.c:424
+#| msgid "Bluetooth Transfer"
+msgid "Bluetooth File Transfer"
+msgstr "Интиқолдиҳи тавассути Bluetooth"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_Аз нав кӯшидан"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Фиристодани файлҳо тавассути Bluetooth"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Аз:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Ба:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Хатогии номаълум ба вуҷуд омад."
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -397,59 +393,70 @@ msgstr ""
 "Мутмаин шавед, ки дастгоҳи дурдаст фаъол аст ва пайвастҳои Bluetooth-ро "
 "қабул мекунад"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "Фиристодани %s"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Фиристодани файл: %d аз %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d КБ/с"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d Б/с"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u интиқол ба анҷом расид"
+msgstr[1] "%u интиқол ба анҷом расиданд"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Хатогӣ ба вуҷуд омад"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Интихоб кардани дастгоҳ барои фиристониш"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Фиристодан"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Интихоб кардани файлҳо барои фиристониш"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Интихоб кардан"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Дастгоҳи дурдаст барои истифода"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "СУРОҒА"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Номи дастгоҳи дурдаст"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "НОМ"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[ФАЙЛ...]"
 
@@ -460,3 +467,9 @@ msgstr "Интиқолдиҳи тавассути Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Фиристодани файлҳо тавассути Bluetooth"
+
+#~ msgid "File Transfer"
+#~ msgstr "Интиқолдиҳии файл"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Фиристодани файлҳо тавассути Bluetooth"
