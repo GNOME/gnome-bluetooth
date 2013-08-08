@@ -241,7 +241,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 
 	g_debug ("Using pincode \"%s\"", user_pincode);
 	g_dbus_method_invocation_return_value (invocation,
-																				 g_variant_new ("(s)", user_pincode));
+					       g_variant_new ("(s)", user_pincode));
 
 	return TRUE;
 }
