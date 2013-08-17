@@ -2,15 +2,15 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2009 - 2013.
+# Matej Urbančič <mateju@svn.gnome.org>, 2009-2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-03 11:49+0000\n"
-"PO-Revision-Date: 2013-06-03 21:13+0100\n"
+"POT-Creation-Date: 2013-08-08 14:59+0000\n"
+"PO-Revision-Date: 2013-08-17 15:56+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -175,18 +175,18 @@ msgstr "Uporabi napravo GPS za določevanje položaja nahajanja"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Dostop do spleta z uporabo mobilnega telefona (preizkusno)"
 
-#: ../wizard/main.c:204
+#: ../wizard/main.c:217
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Vnesite naslednje prehodno geslo na '%s':"
 
-#: ../wizard/main.c:208
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Vnesite naslednje prehodno geslo na '%s' in pritisnite tipko “Enter”:"
 
-#: ../wizard/main.c:213
+#: ../wizard/main.c:226
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Premaknite igralno palico naprave iCade v naslednjih smereh:"
 
@@ -194,17 +194,17 @@ msgstr "Premaknite igralno palico naprave iCade v naslednjih smereh:"
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:271 ../wizard/main.c:402
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Seznanjanje z napravo '%s' je preklicano"
 
-#: ../wizard/main.c:321
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Potrdite, da se prehodno geslo '%s' sklada s tem."
 
-#: ../wizard/main.c:374
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Vnesite naslednje prehodno geslo:"
 
@@ -212,7 +212,7 @@ msgstr "Vnesite naslednje prehodno geslo:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:460
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Nastavljanje naprave '%s' ni uspelo."
@@ -221,7 +221,7 @@ msgstr "Nastavljanje naprave '%s' ni uspelo."
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:520
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Povezovanje z napravo '%s' ..."
@@ -230,12 +230,12 @@ msgstr "Povezovanje z napravo '%s' ..."
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:588
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Počakajte na nastavljanje naprave '%s' ..."
 
-#: ../wizard/main.c:606
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Uspešna namestitev naprave '%s'"
@@ -367,36 +367,31 @@ msgstr[1] "približno %'d ura"
 msgstr[2] "približno %'d uri"
 msgstr[3] "približno %'d ure"
 
-#: ../sendto/main.c:377 ../sendto/main.c:488
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Povezovanje ..."
 
 #: ../sendto/main.c:424
-msgid "File Transfer"
-msgstr "Prenos datotek"
+msgid "Bluetooth File Transfer"
+msgstr "Prenos datoteke preko Bluetooth"
 
 #: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_Poskusi znova"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:446
-msgid "Sending files via Bluetooth"
-msgstr "Pošiljanje datotek prek Bluetooth"
-
-#: ../sendto/main.c:458
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:472
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Za:"
 
-#: ../sendto/main.c:517 ../sendto/main.c:535
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Prišlo je do neznane napake."
 
-#: ../sendto/main.c:528
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -404,63 +399,72 @@ msgstr ""
 "Prepričajte se, da je oddaljena naprava priključena in da omogoča "
 "sprejemanje Bluetooth povezav"
 
-#: ../sendto/main.c:600
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "Pošiljanje %s"
 
-#: ../sendto/main.c:607 ../sendto/main.c:656
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Pošiljanje %d od %d datotek"
 
-#: ../sendto/main.c:652
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:654
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:687
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u prenosov je končanih"
+msgstr[1] "%u prenos je končan"
+msgstr[2] "%u prenosa sta končana"
+msgstr[3] "%u prenosi so končani"
+
+#: ../sendto/main.c:689
 msgid "There was an error"
 msgstr "Prišlo je do napake."
 
-#: ../sendto/main.c:723
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Izbor naprave za pošiljanje"
 
-#: ../sendto/main.c:728
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Pošlji"
 
-#: ../sendto/main.c:772
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Izbor datotek za pošiljanje"
 
-#: ../sendto/main.c:775
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Izberi"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Uporabi oddaljeno napravo"
 
-#: ../sendto/main.c:801
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "NASLOV"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Ime oddaljene naprave"
 
-#: ../sendto/main.c:803
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "IME"
 
-#: ../sendto/main.c:822
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[DATOTEKA ...]"
 
@@ -471,6 +475,12 @@ msgstr "Prenos Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Pošiljanje datotek preko Bluetooth"
+
+#~ msgid "File Transfer"
+#~ msgstr "Prenos datotek"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Pošiljanje datotek prek Bluetooth"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "Vklopi Bluetooth"
