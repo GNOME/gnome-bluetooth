@@ -8,6 +8,7 @@ AC_INIT([gnome-bluetooth],
         [gnomebt_version_major.gnomebt_version_minor.gnomebt_version_micro],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth])
 
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([applet/bluetooth-applet.c])
 AC_CONFIG_HEADERS([config.h])
 
@@ -40,9 +41,6 @@ AM_PROG_LIBTOOL
 
 # i18n stuff
 IT_PROG_INTLTOOL([0.40.0])
-
-AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.17])
 
 GETTEXT_PACKAGE=gnome-bluetooth2
 AC_SUBST(GETTEXT_PACKAGE)

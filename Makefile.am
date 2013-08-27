@@ -6,6 +6,8 @@ if ENABLE_DOCUMENTATION
 SUBDIRS += help
 endif
 
+ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
