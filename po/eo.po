@@ -2,22 +2,22 @@
 # Copyright (C) 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011, 2012.
+# Ryan Lortie <desrt@desrt.ca>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-11-20 07:39+0000\n"
-"PO-Revision-Date: 2012-12-18 22:37+0100\n"
-"Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
+"POT-Creation-Date: 2013-08-29 22:56+0200\n"
+"PO-Revision-Date: 2013-08-29 22:58+0200\n"
+"Last-Translator: Ryan Lortie <desrt@desrt.ca>\n"
 "Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -172,21 +172,38 @@ msgstr "Uzi tiun GPS-aparaton por pozicitrovaj servoj"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Akiri interreton per via poŝtelefono (testo)"
 
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Bonvole tajpu la sekvan PIN de '%s':"
+
+#: ../wizard/main.c:221
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr ""
+"Bonvole tajpu la sekvan PIN de '%s' kaj presi la enigan klavon sur la "
+"klavaro:"
+
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Bonvole movu la stirstangon de via iCade al la venontaj rektoj:"
+
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:242 ../wizard/main.c:365
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Parigado kun '%s' nuligitas"
 
-#: ../wizard/main.c:283
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Bonvole konfirmu, ke la PIN montrita en '%s' kongruas kun tio."
 
-#: ../wizard/main.c:337
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Bonvole tajpu la sekvan PIN:"
 
@@ -194,7 +211,7 @@ msgstr "Bonvole tajpu la sekvan PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:425
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Agordado de '%s' fiaskis"
@@ -203,38 +220,21 @@ msgstr "Agordado de '%s' fiaskis"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:479
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "Konektante al '%s'..."
-
-#: ../wizard/main.c:519
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Bonvole tajpu la sekvan PIN de '%s':"
-
-#: ../wizard/main.c:522
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Bonvole tajpu la sekvan PIN de '%s' kaj presi la enigan klavon sur la "
-"klavaro:"
-
-#: ../wizard/main.c:527
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Bonvole movu la stirstangon de via iCade al la venontaj rektoj:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:559
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Bonvole atendu agordadfinon de aparato '%s'..."
 
-#: ../wizard/main.c:577
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Nova aparato '%s' sukcese agordita"
@@ -330,123 +330,129 @@ msgstr "Bludento-aparata agordaro"
 msgid "Setup Bluetooth devices"
 msgstr "Agordi Bludento-aparatoj"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekundo"
 msgstr[1] "%'d sekundoj"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minuto"
 msgstr[1] "%'d minutoj"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d horo"
 msgstr[1] "%'d horoj"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "proksimume %'d horo"
 msgstr[1] "proksimume %'d horoj"
 
-#: ../sendto/main.c:192 ../sendto/main.c:292
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Konektante..."
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Transsendo de dosieroj"
+#: ../sendto/main.c:424
+msgid "Bluetooth File Transfer"
+msgstr "Bludenta dosiera transigo"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_Reprovi"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Sendi dosierojn per Bludento"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Al:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Okazis nekonata eraro"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Certigu ĉu la fora aparato estas enŝaltite kaj akceptas Bludentajn konektojn"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "Sendante %s"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sendi dosieron %d de %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u transigo kompleta"
+msgstr[1] "%u transigoj kompletaj"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Estis eraro"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Elekti aparaton por sendi al"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Sendi"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Elekti dosierojn por sendi"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Elekti"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Uzota fora aparato"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "ADRESO"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Nomo de la fora aparato"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "NOMO"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[DOSIERO...]"
 
@@ -457,6 +463,12 @@ msgstr "Bludenta transigo"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Sendi dosierojn per Bludento"
+
+#~ msgid "File Transfer"
+#~ msgstr "Transsendo de dosieroj"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Sendi dosierojn per Bludento"
 
 #~ msgid "Remove '%s' from the list of devices?"
 #~ msgstr "Ĉu forigi '%s' de la listo de aparatoj?"
