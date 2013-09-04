@@ -1098,7 +1098,7 @@ static void bluetooth_client_finalize(GObject *client)
 
 	g_object_unref(priv->store);
 
-	gtk_tree_row_reference_free (priv->default_adapter);
+	g_clear_pointer (&priv->default_adapter, gtk_tree_row_reference_free);
 
 	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize(client);
 }
