@@ -800,16 +800,11 @@ bluez_vanished_cb (GDBusConnection *connection,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
-	if (priv->default_adapter)
-		g_clear_pointer (&priv->default_adapter,
-				 gtk_tree_row_reference_free);
+	g_clear_pointer (&priv->default_adapter, gtk_tree_row_reference_free);
 
 	gtk_tree_store_clear (priv->store);
 
-	if (priv->manager) {
-		g_object_unref (priv->manager);
-		priv->manager = NULL;
-	}
+	g_clear_object (&priv->manager);
 }
 
 static void bluetooth_client_init(BluetoothClient *client)
@@ -1092,10 +1087,8 @@ static void bluetooth_client_finalize(GObject *client)
 
 	g_bus_unwatch_name (priv->owner_change_id);
 
-	if (priv->manager)
-		g_object_unref (priv->manager);
-
-	g_object_unref(priv->store);
+	g_clear_object (&priv->manager);
+	g_object_unref (priv->store);
 
 	g_clear_pointer (&priv->default_adapter, gtk_tree_row_reference_free);
 
@@ -1648,8 +1641,7 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 	g_free (alias);
 	g_free (address);
 	g_free (icon);
-	if (proxy != NULL)
-		g_object_unref (proxy);
+	g_clear_object (&proxy);
 	g_strfreev (uuids);
 }
 
