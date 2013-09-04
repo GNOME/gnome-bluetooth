@@ -976,7 +976,6 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 					g_variant_new_variant (g_variant_new_boolean (discoverable)),
 					NULL, &error);
 	if (ret == FALSE) {
-
 		g_warning ("Failed to set Discoverable to %d: %s", discoverable, error->message);
 		g_error_free (error);
 	}
