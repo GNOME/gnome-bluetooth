@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
 # Amitakhya Phukan <aphukan@fedoraproject.org>, 2009.
-# Nilamdyuti Goswami <ngoswami@redhat.com>, 2011, 2012.
+# Nilamdyuti Goswami <ngoswami@redhat.com>, 2011, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-27 21:41+0000\n"
-"PO-Revision-Date: 2012-07-06 14:43+0530\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-07-18 11:46+0000\n"
+"PO-Revision-Date: 2013-09-11 17:02+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
-"Language-Team: as_IN <kde-i18n-doc@kde.org>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -44,7 +45,7 @@ msgstr "ডিভাইচ"
 msgid "Type"
 msgstr "ধৰণ"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "ডিভাইচসমূহ"
 
@@ -172,231 +173,37 @@ msgstr "ভূঅৱস্থান সেৱাৰ বাবে এই GPS ড�
 msgid "Access the Internet using your cell phone (test)"
 msgstr "আপোনাৰ মোবাইল ফোন সহযোগে ইন্টাৰনেট ব্যৱহাৰ কৰক (পৰীক্ষামূলক)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "ব্লুটুথ অন কৰক"
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "অনুগ্ৰহ কৰি '%s' ত নিম্নলিখিত PIN লিখক:"
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "ব্লুটুথ: বন্ধ"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "ব্লুটুথ বন্ধ কৰক"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "ব্লুটুথ: অন"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "ব্লুটুথ: অসামৰ্থবান"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "বিচ্ছিন্নিত কৰা হৈছে..."
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "সংযোত স্থাপন কৰা হৈছে..."
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "সংযুক্ত"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "বিচ্ছিন্ন"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "বিচ্ছিন্ন কৰক"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "সংযোগ কৰক"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "ফাইলসমূহ পঠাওক..."
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "ফাইলসমূহ ব্ৰাউছ কৰক..."
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "কিবৰ্ড সংহতিসমূহ"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "মাউছ আৰু টাচপেড সংহতিসমূহ"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "শব্দ সংহতিসমূহ"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "ডিবাগ কৰক"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- ব্লুটুথ এপ্লেট"
-
-#: ../applet/main.c:823
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"কমান্ড-শাৰীৰ পৰা ব্যৱহাৰযোগ্য সকলো বিকল্পৰ তালিকা চোৱাৰ বাবে '%s --help' কমান্ড "
-"চলাওক।\n"
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "অনুগ্ৰহ কৰি '%s' ত নিম্নলিখিত PIN লিখক আৰু কিবৰ্ডৰ পৰা “Enter” টিপক:"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "ব্লুটুথ এপ্লেট"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "ব্লুটুথ"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "'%s' ডিভাইচে এই কমপিউটাৰৰ সৈতে যোৰ হবলৈ ইচ্ছুক"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "অনুগ্ৰহ কৰি %s ডিভাইচত উল্লিখিত PIN লিখক।"
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr ""
-"অনুগ্ৰহ কৰি, '%s' PIN আৰু %s ডিভাইচত উপস্থিত PIN দুটা একেই হয় নে নহয় সেইটো "
-"সুনিশ্চিত কৰক।"
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "'%s' ক অভিগম প্ৰদান কৰক"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "%s ডিভাইচে  '%s' সেৱালে অভিগম বিচাৰে।"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "'%s ৰ পৰা প্ৰাপ্ত যোৰ বন্ধাৰ অনুৰোধ"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "ব্লুটুথ ডিভাইচ"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "PIN সুমুৱাওক"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "'%s ৰ পৰা প্ৰাপ্ত যোৰ নিৰ্মাণৰ নিশ্চিতি"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "PIN পৰীক্ষা কৰক"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "'%s ৰ পৰা প্ৰাপ্ত প্ৰমাণীকৰণৰ অনুৰোধ"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "প্ৰমাণীকৰণ পৰীক্ষা কৰক"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "ব্লুটুথ ব্যৱস্থাপক"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "ব্লুটুথ ব্যৱস্থাপক এপ্লেট"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "ব্লুটুথ: পৰীক্ষা কৰা হৈছে"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "দৃশ্যমান"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "ডিভাইচত ফাইলসমূহ পঠিয়াওক..."
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "নতুন ডিভাইচ সংস্থাপন কৰক..."
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "ব্লুটুথ সংহতিসমূহ"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "প্ৰস্থান কৰক"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "সদায় অভিগম প্ৰদান কৰক (_A)"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "প্ৰত্যাখ্যান কৰক (_R)"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "প্ৰদান কৰক (_G)"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "মিল নাখায় (_D)"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "মিল পোৱা গৈছে (_M)"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "ইনপুট দেখুৱাওক (_S)"
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "অনুগ্ৰহ কৰি আপোনাৰ iCade ৰ জয়স্টিকক নিম্নলিখিত দিশসমূহত গতি কৰাওক:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' ৰ সৈতে নিৰ্ধাৰিত যোৰ বাতিল কৰা হৈছে"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "অনুগ্ৰহ কৰি নিশ্চিত কৰক, এই PIN আৰু '%s' ত প্ৰদৰ্শিত PIN একেই হয় নে নহয়।"
+msgstr ""
+"অনুগ্ৰহ কৰি নিশ্চিত কৰক, এই PIN আৰু '%s' ত প্ৰদৰ্শিত PIN একেই হয় নে নহয়।"
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "অনুগ্ৰহ কৰি নিম্নলিখিত PIN উল্লেখ কৰক:"
 
@@ -404,7 +211,7 @@ msgstr "অনুগ্ৰহ কৰি নিম্নলিখিত PIN উ�
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s' সংস্থাপন কৰিবলৈ ব্যৰ্থ"
@@ -413,35 +220,21 @@ msgstr "'%s' সংস্থাপন কৰিবলৈ ব্যৰ্থ"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s' ৰ সৈতে সংযোগ স্থাপন কৰা হৈছে..."
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "অনুগ্ৰহ কৰি '%s' ত নিম্নলিখিত PIN লিখক:"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "অনুগ্ৰহ কৰি '%s' ত নিম্নলিখিত PIN লিখক আৰু কিবৰ্ডৰ পৰা “Enter” টিপক:"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "অনুগ্ৰহ কৰি আপোনাৰ iCade ৰ জয়স্টিকক নিম্নলিখিত দিশসমূহত গতি কৰাওক:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "'%s' ডিভাইচ সংস্থাপনৰ সমাপ্তি অবধি অনুগ্ৰহ কৰি অপেক্ষা কৰক..."
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "সফলতাৰে সৈতে নতুন ডিভাইচ '%s' সংস্থাপন কৰক"
@@ -463,7 +256,6 @@ msgid "Device Setup"
 msgstr "ডিভাইচ সংস্থাপন"
 
 #: ../wizard/wizard.ui.h:5
-#| msgid "Finishing New Device Setup"
 msgid "Finishing Setup"
 msgstr "সংস্থাপন সমাপ্ত কৰা হৈছে"
 
@@ -538,135 +330,134 @@ msgstr "ব্লুটুথ ডিভাইচ সংস্থাপন"
 msgid "Setup Bluetooth devices"
 msgstr "ব্লুটুথ ডিভাইচসমূহ সংস্থাপন কৰক"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d ছেকেণ্ড"
 msgstr[1] "%'d ছেকেণ্ড"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d মিনিট"
 msgstr[1] "%'d মিনিট"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d ঘন্টা"
 msgstr[1] "%'d ঘন্টা"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "আনুমানিক %'d ঘন্টা"
 msgstr[1] "আনুমানিক %'d ঘন্টা"
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "ফাইল স্থানান্তৰ"
+#: ../sendto/main.c:377 ../sendto/main.c:479
+msgid "Connecting..."
+msgstr "সংযোত স্থাপন কৰা হৈছে..."
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:424
+#| msgid "Bluetooth Transfer"
+msgid "Bluetooth File Transfer"
+msgstr "ব্লুটুথ ফাইল স্থানান্তৰ"
+
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "পুনৰ চেষ্টা কৰক (_R)"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "ব্লুটুথৰ মাধ্যমে ফাইল পঠিওৱা হৈছে"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "উৎসস্থল:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "গন্তব্যস্থল:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "অজ্ঞাত ত্ৰুটি দেখা দিছে"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
-"দূৰবৰ্তী ডিভাইচটো সামৰ্থবান হয় নে নহয় আৰু ডিভাইচটো দ্বাৰা ব্লুটুথ সংযোগ গ্ৰহণ কৰা "
+"দূৰবৰ্তী ডিভাইচটো সামৰ্থবান হয় নে নহয় আৰু ডিভাইচটো দ্বাৰা ব্লুটুথ সংযোগ গ্ৰহণ "
+"কৰা "
 "হৈছে নে নাই সেইটো পৰীক্ষা কৰক"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "%s পঠিওৱা হৈছে"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%d ৰ %d পঠিওৱা হৈছে"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u স্থানান্তৰ সম্পূৰ্ণ"
+msgstr[1] "%u স্থানান্তৰ সম্পূৰ্ণ"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "এটা ত্ৰুটি আছিল"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "পঠিৱাব লগিয়া ডিভাইচ বাছক"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "পঠাওক (_S)"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "পঠিওৱাৰ উদ্দেশ্যে ফাইল নিৰ্বাচন কৰক"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "বাছক"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "ব্যৱহাৰযোগ্য দূৰবৰ্তী ডিভাইচ"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "ADDRESS"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "দূৰবৰ্তী ডিভাইচৰ নাম"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "NAME"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[FILE...]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "প্ৰগ্ৰামিং ত্ৰুটি: ডিভাইচটো তালিকাত পোৱা নগল"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "OBEX দ্বাৰা ঠেলা মাৰি ফাইল সঞ্চালন অসমৰ্থিত"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "ব্লুটুথ (OBEX ঠেলা)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -675,6 +466,166 @@ msgstr "ব্লুটুথ স্থানান্তৰ"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "ব্লুটুথৰ মাধ্যমে ফাইল পঠিৱাওক"
+
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "ব্লুটুথ অন কৰক"
+
+#~ msgid "Bluetooth: Off"
+#~ msgstr "ব্লুটুথ: বন্ধ"
+
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "ব্লুটুথ বন্ধ কৰক"
+
+#~ msgid "Bluetooth: On"
+#~ msgstr "ব্লুটুথ: অন"
+
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "ব্লুটুথ: অসামৰ্থবান"
+
+#~ msgid "Disconnecting..."
+#~ msgstr "বিচ্ছিন্নিত কৰা হৈছে..."
+
+#~ msgid "Connected"
+#~ msgstr "সংযুক্ত"
+
+#~ msgid "Disconnected"
+#~ msgstr "বিচ্ছিন্ন"
+
+#~ msgid "Disconnect"
+#~ msgstr "বিচ্ছিন্ন কৰক"
+
+#~ msgid "Connect"
+#~ msgstr "সংযোগ কৰক"
+
+#~ msgid "Send files..."
+#~ msgstr "ফাইলসমূহ পঠাওক..."
+
+#~ msgid "Browse files..."
+#~ msgstr "ফাইলসমূহ ব্ৰাউছ কৰক..."
+
+#~ msgid "Keyboard Settings"
+#~ msgstr "কিবৰ্ড সংহতিসমূহ"
+
+#~ msgid "Mouse and Touchpad Settings"
+#~ msgstr "মাউছ আৰু টাচপেড সংহতিসমূহ"
+
+#~ msgid "Sound Settings"
+#~ msgstr "শব্দ সংহতিসমূহ"
+
+#~ msgid "Debug"
+#~ msgstr "ডিবাগ কৰক"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "- ব্লুটুথ এপ্লেট"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "কমান্ড-শাৰীৰ পৰা ব্যৱহাৰযোগ্য সকলো বিকল্পৰ তালিকা চোৱাৰ বাবে '%s --help' "
+#~ "কমান্ড চলাওক।\n"
+
+#~ msgid "Bluetooth Applet"
+#~ msgstr "ব্লুটুথ এপ্লেট"
+
+#~ msgid "Bluetooth"
+#~ msgstr "ব্লুটুথ"
+
+#~ msgid "Device '%s' wants to pair with this computer"
+#~ msgstr "'%s' ডিভাইচে এই কমপিউটাৰৰ সৈতে যোৰ হবলৈ ইচ্ছুক"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "অনুগ্ৰহ কৰি %s ডিভাইচত উল্লিখিত PIN লিখক।"
+
+#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#~ msgstr ""
+#~ "অনুগ্ৰহ কৰি, '%s' PIN আৰু %s ডিভাইচত উপস্থিত PIN দুটা একেই হয় নে নহয় সেইটো "
+#~ "সুনিশ্চিত কৰক।"
+
+#~ msgid "Grant access to '%s'"
+#~ msgstr "'%s' ক অভিগম প্ৰদান কৰক"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "%s ডিভাইচে  '%s' সেৱালে অভিগম বিচাৰে।"
+
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "'%s ৰ পৰা প্ৰাপ্ত যোৰ বন্ধাৰ অনুৰোধ"
+
+#~ msgid "Bluetooth device"
+#~ msgstr "ব্লুটুথ ডিভাইচ"
+
+#~ msgid "Enter PIN"
+#~ msgstr "PIN সুমুৱাওক"
+
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "'%s ৰ পৰা প্ৰাপ্ত যোৰ নিৰ্মাণৰ নিশ্চিতি"
+
+#~ msgid "Verify PIN"
+#~ msgstr "PIN পৰীক্ষা কৰক"
+
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "'%s ৰ পৰা প্ৰাপ্ত প্ৰমাণীকৰণৰ অনুৰোধ"
+
+#~ msgid "Check authorization"
+#~ msgstr "প্ৰমাণীকৰণ পৰীক্ষা কৰক"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "ব্লুটুথ ব্যৱস্থাপক"
+
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "ব্লুটুথ ব্যৱস্থাপক এপ্লেট"
+
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "ব্লুটুথ: পৰীক্ষা কৰা হৈছে"
+
+#~ msgid "Visible"
+#~ msgstr "দৃশ্যমান"
+
+#~ msgid "Send files to device..."
+#~ msgstr "ডিভাইচত ফাইলসমূহ পঠিয়াওক..."
+
+#~ msgid "Set up new device..."
+#~ msgstr "নতুন ডিভাইচ সংস্থাপন কৰক..."
+
+#~ msgid "Bluetooth Settings"
+#~ msgstr "ব্লুটুথ সংহতিসমূহ"
+
+#~ msgid "Quit"
+#~ msgstr "প্ৰস্থান কৰক"
+
+#~ msgid "_Always grant access"
+#~ msgstr "সদায় অভিগম প্ৰদান কৰক (_A)"
+
+#~ msgid "_Reject"
+#~ msgstr "প্ৰত্যাখ্যান কৰক (_R)"
+
+#~ msgid "_Grant"
+#~ msgstr "প্ৰদান কৰক (_G)"
+
+#~ msgid "_Does not match"
+#~ msgstr "মিল নাখায় (_D)"
+
+#~ msgid "_Matches"
+#~ msgstr "মিল পোৱা গৈছে (_M)"
+
+#~ msgid "_Show input"
+#~ msgstr "ইনপুট দেখুৱাওক (_S)"
+
+#~ msgid "File Transfer"
+#~ msgstr "ফাইল স্থানান্তৰ"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "ব্লুটুথৰ মাধ্যমে ফাইল পঠিওৱা হৈছে"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "প্ৰগ্ৰামিং ত্ৰুটি: ডিভাইচটো তালিকাত পোৱা নগল"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "OBEX দ্বাৰা ঠেলা মাৰি ফাইল সঞ্চালন অসমৰ্থিত"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "ব্লুটুথ (OBEX ঠেলা)"
 
 #~ msgid "%d KB/s"
 #~ msgstr "%d কিলোবাইট/ছেকেণ্ড"
