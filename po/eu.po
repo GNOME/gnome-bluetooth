@@ -1,16 +1,18 @@
 # translation of eu.po to Basque
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
+#
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2009, 2010, 2011, 2012, 2013.
 # Julen Ruiz Aizpuru <julenx@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 21:17+0100\n"
-"PO-Revision-Date: 2013-01-03 23:50+0100\n"
+"POT-Creation-Date: 2013-09-16 21:35+0200\n"
+"PO-Revision-Date: 2013-09-16 21:37+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
-"Language-Team: Basque <itzulpena@euskalgnu.org>\n"
+"Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -174,21 +176,36 @@ msgstr "Erabili GPS gailu hau geolokalizazio zerbitzuetarako"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Sarbidetu Internetera telefono mugikorra erabiliz (proba)"
 
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Sartu honako PINa '%s'(e)n:"
+
+#: ../wizard/main.c:221
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "Sartu honako PINa '%s'(e)n eta sakatu teklatuko 'Sartu' tekla:"
+
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Eraman iCade-ren kontrol-palanka honako norabideetara:"
+
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:242 ../wizard/main.c:365
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' parekatzea bertan behera utzi da"
 
-#: ../wizard/main.c:283
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Berretsi '%s'(e)n bistaratutako PINa honekin bat datorrela."
 
-#: ../wizard/main.c:337
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Sartu honako PINa:"
 
@@ -196,7 +213,7 @@ msgstr "Sartu honako PINa:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:425
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Huts egin du '%s' konfiguratzean"
@@ -205,36 +222,21 @@ msgstr "Huts egin du '%s' konfiguratzean"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:479
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s'(e)ra konektatzen..."
-
-#: ../wizard/main.c:519
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Sartu honako PINa '%s'(e)n:"
-
-#: ../wizard/main.c:522
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Sartu honako PINa '%s'(e)n eta sakatu teklatuko 'Sartu' tekla:"
-
-#: ../wizard/main.c:527
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Eraman iCade-ren kontrol-palanka honako norabideetara:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:559
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Itxaron '%s? gailua konfiguratu bitartean..."
 
-#: ../wizard/main.c:577
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "'%s' gailu berria ongi konfiguratu da"
@@ -330,64 +332,59 @@ msgstr "Bluetooth gailuaren konfigurazioa"
 msgid "Setup Bluetooth devices"
 msgstr "Konfiguratu Bluetooth gailuak"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "Segundo %'d"
 msgstr[1] "%'d segundo"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "Minutu %'d"
 msgstr[1] "%'d minutu"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "Ordu %'d"
 msgstr[1] "%'d ordu"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "gutxi gorabehera ordu %'d"
 msgstr[1] "gutxi gorabehera %'d ordu"
 
-#: ../sendto/main.c:192 ../sendto/main.c:292
+#: ../sendto/main.c:377 ../sendto/main.c:479
 msgid "Connecting..."
 msgstr "Konektatzen..."
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Fitxategi-transferentzia"
+#: ../sendto/main.c:424
+msgid "Bluetooth File Transfer"
+msgstr "Bluetooth-en fitxategi-transferentzia"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_Saiatu berriro"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Fitxategiak Bluetooth bidez bidaltzea"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Hemendik:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Hona:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Errore ezezaguna gertatu da"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -395,59 +392,70 @@ msgstr ""
 "Ziurtatu zaitez urruneko gailua piztuta dagoela eta Bluetooth konexioak "
 "onartzen dituela"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "%s bidaltzen"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Fitxategia bidaltzen: %d / %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "Transferentzia %u osatuta"
+msgstr[1] "%u transferentzia osatuta"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Errore bat dago"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Hautatu gailua horra bidaltzeko"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Bidali"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Aukeratu fitxategiak bidaltzeko"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Hautatu"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Urruneko gailua erabiltzeko"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "HELBIDEA"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Urruneko gailuaren izena"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "IZENA"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[FITXATEGIA...]"
 
@@ -458,6 +466,12 @@ msgstr "Bluetooth-en transferentzia"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Fitxategiak Bluetooth bidez bidaltzea"
+
+#~ msgid "File Transfer"
+#~ msgstr "Fitxategi-transferentzia"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Fitxategiak Bluetooth bidez bidaltzea"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "Piztu Bluetooth-a"
