@@ -1462,7 +1462,6 @@ connect_callback (GDBusProxy   *proxy,
 	g_simple_async_result_complete_in_idle (simple);
 
 	g_object_unref (simple);
-	g_object_unref (proxy);
 }
 
 static void
@@ -1487,7 +1486,6 @@ disconnect_callback (GDBusProxy   *proxy,
 
 	g_simple_async_result_complete_in_idle (simple);
 
-	g_object_unref (proxy);
 	g_object_unref (simple);
 }
 
