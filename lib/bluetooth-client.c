@@ -1452,13 +1452,13 @@ connect_callback (GDBusProxy   *proxy,
 	if (retval == FALSE) {
 		g_debug ("Connect failed for %s: %s",
 			 g_dbus_proxy_get_object_path (proxy), error->message);
-		g_error_free (error);
+		g_simple_async_result_take_error (simple, error);
 	} else {
 		g_debug ("Connect succeeded for %s",
 			 g_dbus_proxy_get_object_path (proxy));
+		g_simple_async_result_set_op_res_gboolean (simple, retval);
 	}
 
-	g_simple_async_result_set_op_res_gboolean (simple, retval);
 	g_simple_async_result_complete_in_idle (simple);
 
 	g_object_unref (simple);
@@ -1478,12 +1478,13 @@ disconnect_callback (GDBusProxy   *proxy,
 		g_debug ("Disconnect failed for %s: %s",
 			 g_dbus_proxy_get_object_path (proxy),
 			 error->message);
-		g_error_free (error);
+		g_simple_async_result_take_error (simple, error);
 	} else {
 		g_debug ("Disconnect succeeded for %s",
 			 g_dbus_proxy_get_object_path (proxy));
+		g_simple_async_result_set_op_res_gboolean (simple, retval);
 	}
-	g_simple_async_result_set_op_res_gboolean (simple, retval);
+
 	g_simple_async_result_complete_in_idle (simple);
 
 	g_object_unref (proxy);
@@ -1530,20 +1531,16 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 					    callback,
 					    user_data,
 					    bluetooth_client_connect_service);
-
-	if (cancellable != NULL) {
-		g_object_set_data_full (G_OBJECT (simple), "cancellable",
-					g_object_ref (cancellable), g_object_unref);
-	}
+	g_simple_async_result_set_check_cancellable (simple, cancellable);
 
 	if (connect) {
 		device1_call_connect (DEVICE1(device),
-				      NULL,
+				      cancellable,
 				      (GAsyncReadyCallback) connect_callback,
 				      simple);
 	} else {
 		device1_call_disconnect (DEVICE1(device),
-					 NULL,
+					 cancellable,
 					 (GAsyncReadyCallback) disconnect_callback,
 					 simple);
 	}
@@ -1572,7 +1569,10 @@ bluetooth_client_connect_service_finish (BluetoothClient *client,
 
 	g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == bluetooth_client_connect_service);
 
-	return g_simple_async_result_get_op_res_gboolean (simple);
+	if (g_simple_async_result_get_op_res_gboolean (simple))
+		return TRUE;
+	g_simple_async_result_propagate_error (simple, error);
+	return FALSE;
 }
 
 #define BOOL_STR(x) (x ? "True" : "False")
