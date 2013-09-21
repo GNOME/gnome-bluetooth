@@ -5,13 +5,13 @@
 # Kyrylo Polezhajev <polezhajev@ukr.net>, 2009.
 # wanderlust <wanderlust@ukr.net>, 2009.
 # Korostil Daniel <ted.korostiled@gmail.com>, 2011, 2012.
-# Daniel Korostil <ted.korostiled@gmail.com>, 2012.
+# Daniel Korostil <ted.korostiled@gmail.com>, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-26 09:50+0300\n"
-"PO-Revision-Date: 2012-09-26 09:51+0300\n"
+"POT-Creation-Date: 2013-09-21 12:50+0300\n"
+"PO-Revision-Date: 2013-09-21 12:52+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
 "Language: uk\n"
@@ -50,7 +50,7 @@ msgstr "Пристрій"
 msgid "Type"
 msgstr "Тип"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -179,229 +179,36 @@ msgstr ""
 msgid "Access the Internet using your cell phone (test)"
 msgstr "Доступ до інтернету за допомогою вашого мобільного телефону (test)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "Увімкнути Bluetooth"
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Введіть такий PIN на пристрої «%s»:"
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "Bluetooth: Вимкнено"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "Вимкнути Bluetooth"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "Bluetooth: Увімкнено"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: Недоступно"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "Роз'єднання…"
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "З'єднання…"
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "З'єднано"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "Роз'єднано"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "Роз'єднати"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "З'єднати"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "Надіслати файли…"
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "Оглянути файли…"
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "Налаштування клавіатури"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "Налаштування миші та сенсорного пристрою"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "Налаштування звуку"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "Зневадження"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "— Програма керування Bluetooth"
-
-#: ../applet/main.c:823
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Введіть «%s --help», щоб подивитися повний список доступних параметрів "
-"командного рядка.\n"
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr "Введіть такий PIN на пристрої «%s» та натисніть «Enter» на клавіатурі:"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "Програма керування Bluetooth"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "Пристрій «%s» вимагає пов'язатись з цим комп'ютером"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "Введіть код PIN для пристрою %s."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "Підтвердьте код PIN «%s» на пристрої %s."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "Надати доступ «%s»"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "Пристрій %s вимагає отримати доступ до служби «%s»."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "Запит на пов'язання з «%s»"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "Пристрій Bluetooth"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "Введіть PIN"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "Підтвердження для пов'язання з «%s»"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "Перевіряння PIN"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "Запит на авторизацію від «%s»"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "Перевірка авторизації"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Менеджер Bluetooth"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Програма керування Bluetooth"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "Bluetooth: Перевіряння"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "Видимий"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "Надіслати файли до пристрою…"
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "Встановити новий пристрій…"
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "Параметри Bluetooth"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "Вийти"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "Завжди надавати _доступ"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_Відхилити"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "_Надати доступ"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "_Не збігаються"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "_Збігаються"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "_Показувати ввід"
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Перемістіть джойстик вашого iCade у такі напрямки:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "Пов'язання з «%s» скасовано"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgstr "Підтвердьте, що PIN, показаний на пристрої «%s» збігається з цим."
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Введіть такий PIN:"
 
@@ -409,7 +216,7 @@ msgstr "Введіть такий PIN:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "Помилка при налаштуванні пристрою «%s»"
@@ -418,36 +225,21 @@ msgstr "Помилка при налаштуванні пристрою «%s»"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "З'єднання з «%s»…"
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Введіть такий PIN на пристрої «%s»:"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Введіть такий PIN на пристрої «%s» та натисніть «Enter» на клавіатурі:"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Перемістіть джойстик вашого iCade у такі напрямки:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
 msgstr "Дочекайтесь закінчення встановлення пристрою «%s»…"
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
 msgstr "Пристрій «%s» успішно встановлено"
@@ -544,7 +336,7 @@ msgstr "Налаштовування пристрою Bluetooth"
 msgid "Setup Bluetooth devices"
 msgstr "Налаштувати пристрої Bluetooth"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -552,7 +344,7 @@ msgstr[0] "%'d секунда"
 msgstr[1] "%'d секунди"
 msgstr[2] "%'d секунд"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -560,7 +352,7 @@ msgstr[0] "%'d хвилина"
 msgstr[1] "%'d хвилини"
 msgstr[2] "%'d хвилин"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -568,7 +360,7 @@ msgstr[0] "%'d година"
 msgstr[1] "%'d години"
 msgstr[2] "%'d годин"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -576,32 +368,31 @@ msgstr[0] "приблизно %'d година"
 msgstr[1] "приблизно %'d години"
 msgstr[2] "приблизно %'d годин"
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Передача файлів"
+#: ../sendto/main.c:377 ../sendto/main.c:479
+msgid "Connecting..."
+msgstr "З'єднання…"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:424
+msgid "Bluetooth File Transfer"
+msgstr "Передавання файлів через Bluetooth"
+
+#: ../sendto/main.c:427
 msgid "_Retry"
 msgstr "_Повторити"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Надсилання файлів через Bluetooth"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Від:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "До:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Трапилась невідома помилка"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -609,74 +400,73 @@ msgstr ""
 "Переконайтеся, що віддалений пристрій увімкнено та приймає з'єднання "
 "Bluetooth"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "Надсилання %s"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Надсилання файла %d з %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d КБ/с"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d Б/с"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u передачу завершено"
+msgstr[1] "%u передачі завершено"
+msgstr[2] "%u передач завершено"
+
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Виникла помилка"
+
+#: ../sendto/main.c:725
 msgid "Select device to send to"
 msgstr "Виберіть пристрій, якому надіслати"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Надіслати "
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
 msgstr "Виберіть файли, які потрібно надіслати"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Вибрати"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Використати віддалений пристрій"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "АДРЕСА"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Назва віддаленого пристрою"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "НАЗВА"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[ФАЙЛ…]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "Помилка у програмі: не вдалось знайти пристрій у списку"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "Передачі типу Obex Push не підтримуються"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -685,6 +475,164 @@ msgstr "Передача файлів через Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Надіслати файли через Bluetooth"
+
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "Увімкнути Bluetooth"
+
+#~ msgid "Bluetooth: Off"
+#~ msgstr "Bluetooth: Вимкнено"
+
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "Вимкнути Bluetooth"
+
+#~ msgid "Bluetooth: On"
+#~ msgstr "Bluetooth: Увімкнено"
+
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "Bluetooth: Недоступно"
+
+#~ msgid "Disconnecting..."
+#~ msgstr "Роз'єднання…"
+
+#~ msgid "Connected"
+#~ msgstr "З'єднано"
+
+#~ msgid "Disconnected"
+#~ msgstr "Роз'єднано"
+
+#~ msgid "Disconnect"
+#~ msgstr "Роз'єднати"
+
+#~ msgid "Connect"
+#~ msgstr "З'єднати"
+
+#~ msgid "Send files..."
+#~ msgstr "Надіслати файли…"
+
+#~ msgid "Browse files..."
+#~ msgstr "Оглянути файли…"
+
+#~ msgid "Keyboard Settings"
+#~ msgstr "Налаштування клавіатури"
+
+#~ msgid "Mouse and Touchpad Settings"
+#~ msgstr "Налаштування миші та сенсорного пристрою"
+
+#~ msgid "Sound Settings"
+#~ msgstr "Налаштування звуку"
+
+#~ msgid "Debug"
+#~ msgstr "Зневадження"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "— Програма керування Bluetooth"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Введіть «%s --help», щоб подивитися повний список доступних параметрів "
+#~ "командного рядка.\n"
+
+#~ msgid "Bluetooth Applet"
+#~ msgstr "Програма керування Bluetooth"
+
+#~ msgid "Bluetooth"
+#~ msgstr "Bluetooth"
+
+#~ msgid "Device '%s' wants to pair with this computer"
+#~ msgstr "Пристрій «%s» вимагає пов'язатись з цим комп'ютером"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "Введіть код PIN для пристрою %s."
+
+#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#~ msgstr "Підтвердьте код PIN «%s» на пристрої %s."
+
+#~ msgid "Grant access to '%s'"
+#~ msgstr "Надати доступ «%s»"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "Пристрій %s вимагає отримати доступ до служби «%s»."
+
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "Запит на пов'язання з «%s»"
+
+#~ msgid "Bluetooth device"
+#~ msgstr "Пристрій Bluetooth"
+
+#~ msgid "Enter PIN"
+#~ msgstr "Введіть PIN"
+
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "Підтвердження для пов'язання з «%s»"
+
+#~ msgid "Verify PIN"
+#~ msgstr "Перевіряння PIN"
+
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "Запит на авторизацію від «%s»"
+
+#~ msgid "Check authorization"
+#~ msgstr "Перевірка авторизації"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Менеджер Bluetooth"
+
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "Програма керування Bluetooth"
+
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "Bluetooth: Перевіряння"
+
+#~ msgid "Visible"
+#~ msgstr "Видимий"
+
+#~ msgid "Send files to device..."
+#~ msgstr "Надіслати файли до пристрою…"
+
+#~ msgid "Set up new device..."
+#~ msgstr "Встановити новий пристрій…"
+
+#~ msgid "Bluetooth Settings"
+#~ msgstr "Параметри Bluetooth"
+
+#~ msgid "Quit"
+#~ msgstr "Вийти"
+
+#~ msgid "_Always grant access"
+#~ msgstr "Завжди надавати _доступ"
+
+#~ msgid "_Reject"
+#~ msgstr "_Відхилити"
+
+#~ msgid "_Grant"
+#~ msgstr "_Надати доступ"
+
+#~ msgid "_Does not match"
+#~ msgstr "_Не збігаються"
+
+#~ msgid "_Matches"
+#~ msgstr "_Збігаються"
+
+#~ msgid "_Show input"
+#~ msgstr "_Показувати ввід"
+
+#~ msgid "File Transfer"
+#~ msgstr "Передача файлів"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Надсилання файлів через Bluetooth"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "Помилка у програмі: не вдалось знайти пристрій у списку"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "Передачі типу Obex Push не підтримуються"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "Bluetooth (OBEX Push)"
 
 #~ msgid "%d KB/s"
 #~ msgstr "%d КБ/с"
