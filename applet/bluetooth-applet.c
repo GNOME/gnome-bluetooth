@@ -822,8 +822,7 @@ bluetooth_applet_create_device_from_iter (GtkTreeModel *model,
 
 	if (dev->bdaddr == NULL || dev->alias == NULL ||
 	    (check_proxy != FALSE && proxy == NULL)) {
-		if (proxy != NULL)
-			g_object_unref (proxy);
+		g_clear_object (&proxy);
 		g_strfreev (uuids);
 		bluetooth_simple_device_free (dev);
 
