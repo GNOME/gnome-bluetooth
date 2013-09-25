@@ -5,22 +5,23 @@
 # Baris Cicek <baris@teamforce.name.tr>, 2009, 2011.
 # Osman Karagöz <osmank3@gmail.com>, 2012.
 # Muhammet Kara <muhammetk@acikkaynak.name.tr>, 2011, 2012.
+# Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-10 10:38+0000\n"
-"PO-Revision-Date: 2012-08-12 19:36+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@acikkaynak.name.tr>\n"
+"POT-Creation-Date: 2013-08-31 06:35+0000\n"
+"PO-Revision-Date: 2013-09-01 01:26+0300\n"
+"Last-Translator: Gökhan Gurbetoğlu <ggurbet@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device..."
@@ -33,7 +34,7 @@ msgstr "Bilinmeyen"
 
 #: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
-msgstr "Hiçbir adaptör mevcut değil"
+msgstr "Hiçbir bağdaştırıcı mevcut değil"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
 msgid "Searching for devices..."
@@ -47,7 +48,7 @@ msgstr "Aygıt"
 msgid "Type"
 msgstr "Tür"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:987
 msgid "Devices"
 msgstr "Aygıtlar"
 
@@ -101,7 +102,7 @@ msgstr "Giriş aygıtları (fareler, klavyeler, vb.)"
 
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
-msgstr "Kulaklıklar, kulaklık ve diğer ses cihazları"
+msgstr "Kulaklıklar, mikrofonlu kulaklıklar ve diğer ses cihazları"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -126,7 +127,7 @@ msgstr "Ağ"
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
 #: ../lib/bluetooth-utils.c:70
 msgid "Headset"
-msgstr "Kulaklık/mikrofon"
+msgstr "Kulaklıklı mikrofon"
 
 #: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
@@ -166,7 +167,7 @@ msgstr "Video Aygıtı"
 
 #: ../lib/plugins/geoclue.c:178
 msgid "Use this GPS device for Geolocation services"
-msgstr "Geolocation hizmetleri için bu GPS cihazını kullan"
+msgstr "Coğrafi konumlama hizmetleri için bu GPS cihazını kullan"
 
 #. translators:
 #. * This is in a test plugin, please make sure you add the "(test)" part,
@@ -175,230 +176,40 @@ msgstr "Geolocation hizmetleri için bu GPS cihazını kullan"
 msgid "Access the Internet using your cell phone (test)"
 msgstr "İnternet erişimi için cep telefonunuzu kullanın (test)"
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "Bluetooth'u Aç"
+#: ../wizard/main.c:217
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Lütfen aşağıdaki PIN kodunu '%s' üzerinde girin:"
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "Bluetooth: Kapalı"
-
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "Bluetooth'u Kapat"
-
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "Bluetooth: Açık"
-
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "Bluetooth: Etkin değil"
-
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "Bağlantı kesiliyor..."
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "Bağlanıyor..."
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "Bağlı"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "Bağlantı Kesik"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "Bağlantıyı Kes"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "Bağlan"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "Dosya gönder..."
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "Dosyalara göz at..."
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "Klavye Ayarları"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
-msgstr "Fare ve Touchpad ayarları"
-
-#: ../applet/main.c:746
-msgid "Sound Settings"
-msgstr "Ses Ayarları"
-
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "Hata Ayıklama"
-
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- Bluetooth uygulamacığı"
-
-#: ../applet/main.c:823
+#: ../wizard/main.c:221
 #, c-format
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr ""
-"%s \n"
-"Tüm kullanılabilir komut satırı seçeneklerinin tam listesini görmek için '%s "
-"--help' çalıştırın.\n"
+"Lütfen aşağıdaki PIN kodunu '%s' üzerinde girin ve klavyedeki “Giriş” tuşuna "
+"basın:"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "Bluetooth Programcığı"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "Aygıtı '%s' bu bilgisayar eşleştirmek istiyor"
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "Lütfen cihaz %s üzerinde belirtilen PIN'i girin."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#: ../wizard/main.c:226
+msgid "Please move the joystick of your iCade in the following directions:"
 msgstr ""
-"Lütfen PIN '%s' ile aygıt %s üzerindekinin eşleşip eşleşmediğini onaylayın."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "'%s' için erişim izni ver"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "Cihaz %s '%s' hizmetine erişmek istiyor."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "'%s' için eşleştirme isteği"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "Bluetooth aygıtı"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "PIN kodunu girin"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "'%s' için eşleştirme onayı"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "PIN Doğrula"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "'%s' için yetkilendirme isteği"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "Yetkilendirme kontrol et"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "Bluetooth Yöneticisi"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "Bluetooth Yönetim Programcığı"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "Bluetooth: Kontrol ediliyor"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "Görünür"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "Cihaza dosyalar gönderin..."
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "Yeni bir cihaz kur..."
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "Bluetooth Ayarları"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "Çık"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "_Her zaman erişim izni ver"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "_Reddet"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "İzin _Ver"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "_Eşleşmiyor"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "_Eşleşiyor"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "_Girdi göster"
+"Lütfen iCade'inizin kumanda kolunu belirtilen yönlerde hareket ettirin:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Pairing with 'Sony Bluetooth Headset' cancelled
 #.
-#: ../wizard/main.c:241 ../wizard/main.c:364
+#: ../wizard/main.c:284 ../wizard/main.c:422
 #, c-format
 msgid "Pairing with '%s' cancelled"
 msgstr "'%s' ile eşleştirme iptal edildi"
 
-#: ../wizard/main.c:282
+#: ../wizard/main.c:339
 #, c-format
 msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Lütfen '%s' üzerinde gösterilen PIN ile bunun eşleştiğini onaylayın."
+msgstr ""
+"Lütfen '%s' üzerinde gösterilen PIN kodunun bununla eşleştiğini onaylayın."
 
-#: ../wizard/main.c:336
+#: ../wizard/main.c:394
 msgid "Please enter the following PIN:"
 msgstr "Lütfen aşağıdaki PIN kodunu girin:"
 
@@ -406,7 +217,7 @@ msgstr "Lütfen aşağıdaki PIN kodunu girin:"
 #. * The '%s' is the device name, for example:
 #. * Setting up 'Sony Bluetooth Headset' failed
 #.
-#: ../wizard/main.c:424
+#: ../wizard/main.c:480
 #, c-format
 msgid "Setting up '%s' failed"
 msgstr "'%s' kurulumu başarısız oldu"
@@ -415,50 +226,32 @@ msgstr "'%s' kurulumu başarısız oldu"
 #. * The '%s' is the device name, for example:
 #. * Connecting to 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:478
+#: ../wizard/main.c:540
 #, c-format
 msgid "Connecting to '%s'..."
 msgstr "'%s' aygıtına bağlanılıyor..."
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Lütfen aşağıdaki PIN kodunu '%s' üzerine girin:"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Lütfen aşağıdaki PIN kodunu '%s' üzerine girin ve klavyedeki “Enter” tuşuna "
-"basın:"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr ""
-"Lütfen iCade'inizin kumanda kolunu belirtilen yönlerde hareket ettiriniz:"
 
 #. translators:
 #. * The '%s' is the device name, for example:
 #. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
 #.
-#: ../wizard/main.c:558
+#: ../wizard/main.c:605
 #, c-format
 msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Lütfen cihaz '%s' kurulum bitene kadar bekleyin..."
+msgstr "Lütfen '%s' aygıtındaki kurulum bitene kadar bekleyin..."
 
-#: ../wizard/main.c:576
+#: ../wizard/main.c:623
 #, c-format
 msgid "Successfully set up new device '%s'"
-msgstr "Aygıt '%s' başarıyla kuruldu"
+msgstr "Yeni '%s' aygıtı başarıyla kuruldu"
 
 #: ../wizard/wizard.ui.h:1
 msgid "Bluetooth New Device Setup"
-msgstr "Bluetooth Yeni Aygıt Kurulumu"
+msgstr "Yeni Bluetooth Aygıt Kurulumu"
 
 #: ../wizard/wizard.ui.h:2
 msgid "PIN _options..."
-msgstr "PIN _seçenekleri..."
+msgstr "PIN kodu _seçenekleri..."
 
 #: ../wizard/wizard.ui.h:3
 msgid "Device Search"
@@ -474,7 +267,7 @@ msgstr "Kurulum Tamamlanıyor"
 
 #: ../wizard/wizard.ui.h:6
 msgid "Select the additional services you want to use with your device:"
-msgstr "Cihazınızla kullanmak istediğiniz ek hizmetleri seçin:"
+msgstr "Aygıtınızla birlikte kullanmak istediğiniz ek hizmetleri seçin:"
 
 #: ../wizard/wizard.ui.h:7
 msgid "Setup Summary"
@@ -482,16 +275,16 @@ msgstr "Kurulum Özeti"
 
 #: ../wizard/wizard.ui.h:8
 msgid "PIN Options"
-msgstr "PIN Seçenekleri"
+msgstr "PIN Kodu Seçenekleri"
 
 #: ../wizard/wizard.ui.h:9
 msgid "_Automatic PIN selection"
-msgstr "_Otomatik PIN seçimi"
+msgstr "_Otomatik PIN kodu seçimi"
 
 #. Translators: this is a PIN with a set value, such as 1111, or 0000
 #: ../wizard/wizard.ui.h:11
 msgid "Fixed PIN"
-msgstr "Sabit PIN"
+msgstr "Sabit PIN Kodu"
 
 #: ../wizard/wizard.ui.h:12
 msgid "'0000' (most headsets, mice and GPS devices)"
@@ -507,7 +300,7 @@ msgstr "'1234'"
 
 #: ../wizard/wizard.ui.h:15
 msgid "Do not pair"
-msgstr "Eşleştirme"
+msgstr "Eşleştirme yapma"
 
 #: ../wizard/wizard.ui.h:16
 msgid "Custom PIN:"
@@ -523,7 +316,7 @@ msgstr "_Çık"
 
 #: ../wizard/wizard.ui.h:19
 msgid "_Cancel"
-msgstr "_Vazgeç"
+msgstr "_İptal"
 
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:21
@@ -533,7 +326,7 @@ msgstr "Uyuşmuyor"
 #. This is a button to answer: Does the PIN matches the one on the device?
 #: ../wizard/wizard.ui.h:23
 msgid "Matches"
-msgstr "Eşleşiyor"
+msgstr "Uyuşuyor"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:1
 msgid "Bluetooth Device Setup"
@@ -541,58 +334,57 @@ msgstr "Bluetooth Aygıt Kurulumu"
 
 #: ../wizard/bluetooth-wizard.desktop.in.in.h:2
 msgid "Setup Bluetooth devices"
-msgstr "Bluetooth aygıtı kur"
+msgstr "Bluetooth aygıtlarını kur"
 
-#: ../sendto/main.c:151
+#: ../sendto/main.c:338
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d saniye"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:343 ../sendto/main.c:356
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d dakika"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:354
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d saat"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:364
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "yaklaşık %'d saat"
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "Dosya Transferi"
+#: ../sendto/main.c:377 ../sendto/main.c:479
+msgid "Connecting..."
+msgstr "Bağlanıyor..."
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:424
+msgid "Bluetooth File Transfer"
+msgstr "Bluetooth Dosya Aktarımı"
+
+#: ../sendto/main.c:427
 msgid "_Retry"
-msgstr "_Tekrar Dene"
+msgstr "_Yeniden Dene"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "Bluetooth aracılığıyla dosyalar gönderiliyor"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:449
 msgid "From:"
 msgstr "Gönderen:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:463
 msgid "To:"
 msgstr "Alıcı:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
+#: ../sendto/main.c:508 ../sendto/main.c:526
 msgid "An unknown error occurred"
 msgstr "Bilinmeyen bir hata oluştu"
 
-#: ../sendto/main.c:332
+#: ../sendto/main.c:519
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -600,74 +392,71 @@ msgstr ""
 "Uzaktaki cihazın açık olduğundan ve Bluetooth bağlantıları kabul ettiğinden "
 "emin olun"
 
-#: ../sendto/main.c:430
+#: ../sendto/main.c:591
 #, c-format
 msgid "Sending %s"
 msgstr "%s gönderiliyor"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:598 ../sendto/main.c:647
 #, c-format
 msgid "Sending file %d of %d"
-msgstr "Gönderilen dosya %d / %d"
+msgstr "%2$d dosyadan %1$d. gönderiliyor"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:643
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:645
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:639
-msgid "Select device to send to"
-msgstr "Göndermek İstediğiniz cihazı seçin"
+#: ../sendto/main.c:675
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u aktarım tamamlandı"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:689
+msgid "There was an error"
+msgstr "Bir hata oluştu"
+
+#: ../sendto/main.c:725
+msgid "Select device to send to"
+msgstr "Gönderilecek cihazı seçin"
+
+#: ../sendto/main.c:730
 msgid "_Send"
 msgstr "_Gönder"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:774
 msgid "Choose files to send"
-msgstr "Göndermek için dosya seçin"
+msgstr "Gönderilecek dosyaları seçin"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:777
 msgid "Select"
 msgstr "Seç"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "Remote device to use"
 msgstr "Kullanılacak uzaktaki cihaz"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:803
 msgid "ADDRESS"
 msgstr "ADRES"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "Remote device's name"
 msgstr "Uzaktaki cihazın ismi"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:805
 msgid "NAME"
 msgstr "İSİM"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:824
 msgid "[FILE...]"
 msgstr "[DOSYA...]"
-
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "Programlama hatası: Aygıt, listede bulunamadı"
-
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "OBEX Push dosya aktarımı desteklenmiyor"
-
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "Bluetooth (OBEX Push)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -676,6 +465,166 @@ msgstr "Bluetooth Aktarımı"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Dosyaları Bluetooth ile gönder"
+
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "Bluetooth'u Aç"
+
+#~ msgid "Bluetooth: Off"
+#~ msgstr "Bluetooth: Kapalı"
+
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "Bluetooth'u Kapat"
+
+#~ msgid "Bluetooth: On"
+#~ msgstr "Bluetooth: Açık"
+
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "Bluetooth: Etkin değil"
+
+#~ msgid "Disconnecting..."
+#~ msgstr "Bağlantı kesiliyor..."
+
+#~ msgid "Connected"
+#~ msgstr "Bağlı"
+
+#~ msgid "Disconnected"
+#~ msgstr "Bağlantı Kesik"
+
+#~ msgid "Disconnect"
+#~ msgstr "Bağlantıyı Kes"
+
+#~ msgid "Connect"
+#~ msgstr "Bağlan"
+
+#~ msgid "Send files..."
+#~ msgstr "Dosya gönder..."
+
+#~ msgid "Browse files..."
+#~ msgstr "Dosyalara göz at..."
+
+#~ msgid "Keyboard Settings"
+#~ msgstr "Klavye Ayarları"
+
+#~ msgid "Mouse and Touchpad Settings"
+#~ msgstr "Fare ve Touchpad ayarları"
+
+#~ msgid "Sound Settings"
+#~ msgstr "Ses Ayarları"
+
+#~ msgid "Debug"
+#~ msgstr "Hata Ayıklama"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "- Bluetooth uygulamacığı"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s \n"
+#~ "Tüm kullanılabilir komut satırı seçeneklerinin tam listesini görmek için "
+#~ "'%s --help' çalıştırın.\n"
+
+#~ msgid "Bluetooth Applet"
+#~ msgstr "Bluetooth Programcığı"
+
+#~ msgid "Bluetooth"
+#~ msgstr "Bluetooth"
+
+#~ msgid "Device '%s' wants to pair with this computer"
+#~ msgstr "Aygıtı '%s' bu bilgisayar eşleştirmek istiyor"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "Lütfen cihaz %s üzerinde belirtilen PIN'i girin."
+
+#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+#~ msgstr ""
+#~ "Lütfen PIN '%s' ile aygıt %s üzerindekinin eşleşip eşleşmediğini "
+#~ "onaylayın."
+
+#~ msgid "Grant access to '%s'"
+#~ msgstr "'%s' için erişim izni ver"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "Cihaz %s '%s' hizmetine erişmek istiyor."
+
+#~ msgid "Pairing request for '%s'"
+#~ msgstr "'%s' için eşleştirme isteği"
+
+#~ msgid "Bluetooth device"
+#~ msgstr "Bluetooth aygıtı"
+
+#~ msgid "Enter PIN"
+#~ msgstr "PIN kodunu girin"
+
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "'%s' için eşleştirme onayı"
+
+#~ msgid "Verify PIN"
+#~ msgstr "PIN Doğrula"
+
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "'%s' için yetkilendirme isteği"
+
+#~ msgid "Check authorization"
+#~ msgstr "Yetkilendirme kontrol et"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "Bluetooth Yöneticisi"
+
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "Bluetooth Yönetim Programcığı"
+
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "Bluetooth: Kontrol ediliyor"
+
+#~ msgid "Visible"
+#~ msgstr "Görünür"
+
+#~ msgid "Send files to device..."
+#~ msgstr "Cihaza dosyalar gönderin..."
+
+#~ msgid "Set up new device..."
+#~ msgstr "Yeni bir cihaz kur..."
+
+#~ msgid "Bluetooth Settings"
+#~ msgstr "Bluetooth Ayarları"
+
+#~ msgid "Quit"
+#~ msgstr "Çık"
+
+#~ msgid "_Always grant access"
+#~ msgstr "_Her zaman erişim izni ver"
+
+#~ msgid "_Reject"
+#~ msgstr "_Reddet"
+
+#~ msgid "_Grant"
+#~ msgstr "İzin _Ver"
+
+#~ msgid "_Does not match"
+#~ msgstr "_Eşleşmiyor"
+
+#~ msgid "_Matches"
+#~ msgstr "_Eşleşiyor"
+
+#~ msgid "_Show input"
+#~ msgstr "_Girdi göster"
+
+#~ msgid "File Transfer"
+#~ msgstr "Dosya Transferi"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "Bluetooth aracılığıyla dosyalar gönderiliyor"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "Programlama hatası: Aygıt, listede bulunamadı"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "OBEX Push dosya aktarımı desteklenmiyor"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "Bluetooth (OBEX Push)"
 
 #~ msgid "%d KB/s"
 #~ msgstr "%d KB/s"
