@@ -45,7 +45,8 @@ static int signals[LAST_SIGNAL] = { 0 };
 typedef struct _BluetoothInputPrivate BluetoothInputPrivate;
 
 struct _BluetoothInputPrivate {
-	char *foo;
+	int has_mouse;
+	int has_keyboard;
 };
 
 G_DEFINE_TYPE(BluetoothInput, bluetooth_input, G_TYPE_OBJECT)
@@ -77,6 +78,7 @@ bluetooth_input_ignore_device (const char *name)
 void
 bluetooth_input_check_for_devices (BluetoothInput *input)
 {
+	BluetoothInputPrivate *priv = BLUETOOTH_INPUT_GET_PRIVATE(input);
 	GdkDeviceManager *manager;
 	GList *devices, *l;
 	gboolean has_keyboard, has_mouse;
@@ -94,17 +96,31 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 		if (bluetooth_input_ignore_device (gdk_device_get_name (device)) != FALSE)
 			continue;
 		source = gdk_device_get_source (device);
-		if (source == GDK_SOURCE_KEYBOARD) {
+		if (source == GDK_SOURCE_KEYBOARD && !has_keyboard) {
 			g_debug ("has keyboard: %s", gdk_device_get_name (device));
 			has_keyboard = TRUE;
-			//break;
-		} else {
+		} else if (!has_mouse) {
 			g_debug ("has mouse: %s", gdk_device_get_name (device));
 			has_mouse = TRUE;
-			//break;
 		}
 
-		//List and shit
+		if (has_mouse && has_keyboard)
+			break;
+	}
+
+	if (has_mouse != priv->has_mouse) {
+		priv->has_mouse = has_mouse;
+		if (has_mouse)
+			g_signal_emit_by_name (input, "mouse-appeared");
+		else
+			g_signal_emit_by_name (input, "mouse-disappeared");
+	}
+	if (has_keyboard != priv->has_keyboard) {
+		priv->has_keyboard = has_keyboard;
+		if (has_keyboard)
+			g_signal_emit_by_name (input, "keyboard-appeared");
+		else
+			g_signal_emit_by_name (input, "keyboard-disappeared");
 	}
 
 	g_list_free (devices);
@@ -136,6 +152,8 @@ static void bluetooth_input_init(BluetoothInput *input)
 {
 	BluetoothInputPrivate *priv = BLUETOOTH_INPUT_GET_PRIVATE(input);
 
+	priv->has_mouse = -1;
+	priv->has_keyboard = -1;
 	set_devicepresence_handler (input);
 }
 
