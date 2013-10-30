@@ -143,7 +143,6 @@ static void
 bluetooth_input_finalize (GObject *input)
 {
 	GdkDeviceManager *manager;
-	BluetoothInputPrivate *priv = BLUETOOTH_INPUT_GET_PRIVATE(input);
 
 	manager = gdk_display_get_device_manager (gdk_display_get_default ());
 	g_signal_handlers_disconnect_by_func (manager, device_changed_cb, input);
