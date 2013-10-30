@@ -26,10 +26,6 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
-#include <gdk/gdkx.h>
-
-#include <X11/extensions/XInput.h>
-#include <X11/extensions/XIproto.h>
 
 #include "bluetooth-input.h"
 
@@ -53,18 +49,6 @@ struct _BluetoothInputPrivate {
 };
 
 G_DEFINE_TYPE(BluetoothInput, bluetooth_input, G_TYPE_OBJECT)
-
-static gboolean
-supports_xinput_devices (void)
-{
-	gint op_code, event, error;
-
-	return XQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-				"XInputExtension",
-				&op_code,
-				&event,
-				&error);
-}
 
 static gboolean
 bluetooth_input_ignore_device (const char *name)
@@ -218,11 +202,6 @@ bluetooth_input_new (void)
 
 	if (bluetooth_input != NULL)
 		return g_object_ref (bluetooth_input);
-
-	if (supports_xinput_devices () == FALSE) {
-		g_warning ("XInput not supported, input device helper disabled");
-		return NULL;
-	}
 
 	bluetooth_input = BLUETOOTH_INPUT (g_object_new (BLUETOOTH_TYPE_INPUT, NULL));
 	g_object_add_weak_pointer (G_OBJECT (bluetooth_input),
