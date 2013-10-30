@@ -29,6 +29,8 @@ int main (int argc, char **argv)
 {
 	BluetoothInput *input;
 
+	g_setenv ("G_MESSAGES_DEBUG", "all", FALSE);
+
 	gtk_init (&argc, &argv);
 
 	input = bluetooth_input_new ();
