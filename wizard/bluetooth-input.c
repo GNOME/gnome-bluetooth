@@ -113,7 +113,13 @@ bluetooth_input_ignore_device (const char *name)
 		"Virtual core XTEST pointer",
 		"Macintosh mouse button emulation",
 		"Virtual core XTEST keyboard",
-		"Power Button"
+		"Power Button",
+		"Video Bus",
+		"Sleep Button",
+		"UVC Camera",
+		"USB Audio",
+		"Integrated Camera",
+		"ThinkPad Extra Buttons"
 	};
 
 	for (i = 0 ; i < G_N_ELEMENTS (names); i++) {
