@@ -54,51 +54,6 @@ struct _BluetoothInputPrivate {
 
 G_DEFINE_TYPE(BluetoothInput, bluetooth_input, G_TYPE_OBJECT)
 
-static void bluetooth_input_finalize(GObject *input)
-{
-	BluetoothInputPrivate *priv = BLUETOOTH_INPUT_GET_PRIVATE(input);
-
-	G_OBJECT_CLASS(bluetooth_input_parent_class)->finalize(input);
-}
-
-static void bluetooth_input_class_init(BluetoothInputClass *klass)
-{
-	GObjectClass *object_class = (GObjectClass *) klass;
-
-	g_type_class_add_private(klass, sizeof(BluetoothInputPrivate));
-
-	object_class->finalize = bluetooth_input_finalize;
-
-	signals[KEYBOARD_APPEARED] = g_signal_new ("keyboard-appeared",
-						   G_TYPE_FROM_CLASS (klass),
-						   G_SIGNAL_RUN_LAST,
-						   G_STRUCT_OFFSET (BluetoothInputClass, keyboard_appeared),
-						   NULL, NULL,
-						   g_cclosure_marshal_VOID__VOID,
-						   G_TYPE_NONE, 0, G_TYPE_NONE);
-	signals[KEYBOARD_DISAPPEARED] = g_signal_new ("keyboard-disappeared",
-						   G_TYPE_FROM_CLASS (klass),
-						   G_SIGNAL_RUN_LAST,
-						   G_STRUCT_OFFSET (BluetoothInputClass, keyboard_disappeared),
-						   NULL, NULL,
-						   g_cclosure_marshal_VOID__VOID,
-						   G_TYPE_NONE, 0, G_TYPE_NONE);
-	signals[MOUSE_APPEARED] = g_signal_new ("mouse-appeared",
-						G_TYPE_FROM_CLASS (klass),
-						G_SIGNAL_RUN_LAST,
-						G_STRUCT_OFFSET (BluetoothInputClass, mouse_appeared),
-						NULL, NULL,
-						g_cclosure_marshal_VOID__VOID,
-						G_TYPE_NONE, 0, G_TYPE_NONE);
-	signals[MOUSE_DISAPPEARED] = g_signal_new ("mouse-disappeared",
-						   G_TYPE_FROM_CLASS (klass),
-						   G_SIGNAL_RUN_LAST,
-						   G_STRUCT_OFFSET (BluetoothInputClass, mouse_disappeared),
-						   NULL, NULL,
-						   g_cclosure_marshal_VOID__VOID,
-						   G_TYPE_NONE, 0, G_TYPE_NONE);
-}
-
 static gboolean
 supports_xinput_devices (void)
 {
@@ -207,43 +162,26 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 		XFreeDeviceList (device_info);
 }
 
-static GdkFilterReturn
-devicepresence_filter (GdkXEvent *xevent,
-		       GdkEvent  *event,
-		       BluetoothInput *input)
+static void
+device_changed_cb (GdkDeviceManager *device_manager,
+		   GdkDevice        *device,
+		   BluetoothInput   *input)
 {
-	XEvent *xev = (XEvent *) xevent;
-	XEventClass class_presence;
-	int xi_presence;
-
-	DevicePresence (gdk_x11_get_default_xdisplay (), xi_presence, class_presence);
-
-	if (xev->type == xi_presence) {
-		XDevicePresenceNotifyEvent *dpn = (XDevicePresenceNotifyEvent *) xev;
-		if (dpn->devchange == DeviceEnabled || dpn->devchange == DeviceDisabled)
-			bluetooth_input_check_for_devices (input);
-	}
-	return GDK_FILTER_CONTINUE;
+	bluetooth_input_check_for_devices (input);
 }
 
 static void
 set_devicepresence_handler (BluetoothInput *input)
 {
-	Display *display;
-	XEventClass class_presence;
-	int xi_presence;
+	GdkDeviceManager *manager;
 
-	display = gdk_x11_get_default_xdisplay ();
-
-	gdk_error_trap_push ();
-	DevicePresence (display, xi_presence, class_presence);
-	XSelectExtensionEvent (display,
-			       RootWindow (display, DefaultScreen (display)),
-			       &class_presence, 1);
-
-	gdk_flush ();
-	if (!gdk_error_trap_pop ())
-		gdk_window_add_filter (NULL, (GdkFilterFunc) devicepresence_filter, input);
+	manager = gdk_display_get_device_manager (gdk_display_get_default ());
+	g_signal_connect (manager, "device-added",
+			  G_CALLBACK (device_changed_cb), input);
+	g_signal_connect (manager, "device-removed",
+			  G_CALLBACK (device_changed_cb), input);
+	g_signal_connect (manager, "device-changed",
+			  G_CALLBACK (device_changed_cb), input);
 }
 
 static void bluetooth_input_init(BluetoothInput *input)
@@ -253,12 +191,64 @@ static void bluetooth_input_init(BluetoothInput *input)
 	set_devicepresence_handler (input);
 }
 
+static void
+bluetooth_input_finalize (GObject *input)
+{
+	GdkDeviceManager *manager;
+	BluetoothInputPrivate *priv = BLUETOOTH_INPUT_GET_PRIVATE(input);
+
+	manager = gdk_display_get_device_manager (gdk_display_get_default ());
+	g_signal_handlers_disconnect_by_func (manager, device_changed_cb, input);
+
+	G_OBJECT_CLASS(bluetooth_input_parent_class)->finalize(input);
+}
+
+static void
+bluetooth_input_class_init (BluetoothInputClass *klass)
+{
+	GObjectClass *object_class = (GObjectClass *) klass;
+
+	g_type_class_add_private(klass, sizeof(BluetoothInputPrivate));
+
+	object_class->finalize = bluetooth_input_finalize;
+
+	signals[KEYBOARD_APPEARED] = g_signal_new ("keyboard-appeared",
+						   G_TYPE_FROM_CLASS (klass),
+						   G_SIGNAL_RUN_LAST,
+						   G_STRUCT_OFFSET (BluetoothInputClass, keyboard_appeared),
+						   NULL, NULL,
+						   g_cclosure_marshal_VOID__VOID,
+						   G_TYPE_NONE, 0, G_TYPE_NONE);
+	signals[KEYBOARD_DISAPPEARED] = g_signal_new ("keyboard-disappeared",
+						   G_TYPE_FROM_CLASS (klass),
+						   G_SIGNAL_RUN_LAST,
+						   G_STRUCT_OFFSET (BluetoothInputClass, keyboard_disappeared),
+						   NULL, NULL,
+						   g_cclosure_marshal_VOID__VOID,
+						   G_TYPE_NONE, 0, G_TYPE_NONE);
+	signals[MOUSE_APPEARED] = g_signal_new ("mouse-appeared",
+						G_TYPE_FROM_CLASS (klass),
+						G_SIGNAL_RUN_LAST,
+						G_STRUCT_OFFSET (BluetoothInputClass, mouse_appeared),
+						NULL, NULL,
+						g_cclosure_marshal_VOID__VOID,
+						G_TYPE_NONE, 0, G_TYPE_NONE);
+	signals[MOUSE_DISAPPEARED] = g_signal_new ("mouse-disappeared",
+						   G_TYPE_FROM_CLASS (klass),
+						   G_SIGNAL_RUN_LAST,
+						   G_STRUCT_OFFSET (BluetoothInputClass, mouse_disappeared),
+						   NULL, NULL,
+						   g_cclosure_marshal_VOID__VOID,
+						   G_TYPE_NONE, 0, G_TYPE_NONE);
+}
+
 /**
  * bluetooth_input_new:
  *
  * Return value: a reference to the #BluetoothInput singleton or %NULL when XInput is not supported. Unref the object when done.
  **/
-BluetoothInput *bluetooth_input_new(void)
+BluetoothInput *
+bluetooth_input_new (void)
 {
 	static BluetoothInput *bluetooth_input = NULL;
 
