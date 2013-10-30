@@ -29,6 +29,8 @@
 
 #include "bluetooth-input.h"
 
+#undef FAKE_RUN
+
 enum {
 	KEYBOARD_APPEARED,
 	KEYBOARD_DISAPPEARED,
@@ -93,6 +95,7 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 		GdkDevice *device = l->data;
 		GdkInputSource source;
 
+#ifndef FAKE_RUN
 		if (bluetooth_input_ignore_device (gdk_device_get_name (device)) != FALSE)
 			continue;
 		source = gdk_device_get_source (device);
@@ -103,6 +106,13 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
 			g_debug ("has mouse: %s", gdk_device_get_name (device));
 			has_mouse = TRUE;
 		}
+#else
+		/* No mouse, unless my Bluetooth mouse is there */
+		has_keyboard = TRUE;
+
+		if (g_str_equal ("hadess’s mouse", gdk_device_get_name (device)))
+			has_mouse = TRUE;
+#endif
 
 		if (has_mouse && has_keyboard)
 			break;
