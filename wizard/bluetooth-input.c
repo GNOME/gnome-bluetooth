@@ -67,45 +67,6 @@ supports_xinput_devices (void)
 }
 
 static gboolean
-bluetooth_input_device_get_type (XDeviceInfo *info,
-				 gboolean *is_mouse,
-				 gboolean *is_keyboard)
-{
-	*is_mouse = FALSE;
-	*is_keyboard = FALSE;
-
-	if (info->num_classes > 0) {
-		XAnyClassPtr any;
-		guint i;
-		any = (XAnyClassPtr) (info->inputclassinfo);
-		for (i = 0; i < info->num_classes; i++) {
-			switch (any->class) {
-			case KeyClass: {
-#if 0
-				XKeyInfoPtr k;
-				k = (XKeyInfoPtr) any;
-				printf("\tNum_keys is %d\n", k->num_keys);
-#endif
-				/* FIXME there should be a better way */
-				if (g_str_has_prefix (info->name, "UVC Camera") == FALSE &&
-				    g_strcmp0 (info->name, "USB Audio") != 0)
-					*is_keyboard = TRUE;
-				break;
-			}
-			case ButtonClass:
-				*is_mouse = TRUE;
-				break;
-			default:
-				;;
-			}
-			any = (XAnyClassPtr) ((char *) any + any->length);
-		}
-	}
-
-	return (*is_mouse || *is_keyboard);
-}
-
-static gboolean
 bluetooth_input_ignore_device (const char *name)
 {
 	guint i;
@@ -132,40 +93,37 @@ bluetooth_input_ignore_device (const char *name)
 void
 bluetooth_input_check_for_devices (BluetoothInput *input)
 {
-	XDeviceInfo *device_info;
-	gint n_devices;
-	guint i;
+	GdkDeviceManager *manager;
+	GList *devices, *l;
 	gboolean has_keyboard, has_mouse;
 
 	has_keyboard = FALSE;
 	has_mouse = FALSE;
 
-	device_info = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &n_devices);
-	for (i = 0; i < n_devices; i++) {
-		gboolean is_mouse, is_keyboard;
-		if (device_info[i].use != IsXExtensionKeyboard &&
-		    device_info[i].use != IsXExtensionPointer)
+	manager = gdk_display_get_device_manager (gdk_display_get_default ());
+	devices = gdk_device_manager_list_devices (manager, GDK_DEVICE_TYPE_SLAVE);
+
+	for (l = devices; l != NULL; l = l->next) {
+		GdkDevice *device = l->data;
+		GdkInputSource source;
+
+		if (bluetooth_input_ignore_device (gdk_device_get_name (device)) != FALSE)
 			continue;
-		if (bluetooth_input_ignore_device (device_info[i].name) != FALSE)
-			continue;
-		if (bluetooth_input_device_get_type (&device_info[i], &is_mouse, &is_keyboard) == FALSE)
-			continue;
-		if (is_mouse != FALSE) {
-			g_debug ("has mouse: %s (id = %lu)", device_info[i].name, device_info[i].id);
-			has_mouse = TRUE;
-			//break;
-		}
-		if (is_keyboard != FALSE) {
-			g_debug ("has keyboard: %s (id = %lu)", device_info[i].name, device_info[i].id);
+		source = gdk_device_get_source (device);
+		if (source == GDK_SOURCE_KEYBOARD) {
+			g_debug ("has keyboard: %s", gdk_device_get_name (device));
 			has_keyboard = TRUE;
+			//break;
+		} else {
+			g_debug ("has mouse: %s", gdk_device_get_name (device));
+			has_mouse = TRUE;
 			//break;
 		}
 
 		//List and shit
 	}
 
-	if (device_info != NULL)
-		XFreeDeviceList (device_info);
+	g_list_free (devices);
 }
 
 static void
