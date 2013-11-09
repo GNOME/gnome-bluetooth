@@ -697,14 +697,14 @@ interface_added (BluetoothClient *client,
 
 	if (g_variant_lookup_value (variant, BLUEZ_ADAPTER_INTERFACE,
 				    G_VARIANT_TYPE_DICTIONARY)) {
-		g_debug ("New Adapter interface added.\n");
+		g_debug ("New Adapter interface added.");
 		adapter_added (priv->manager, path, variant, client);
 		return;
 	}
 
 	if (g_variant_lookup_value (variant, BLUEZ_DEVICE_INTERFACE,
 				    G_VARIANT_TYPE_DICTIONARY)) {
-		g_debug ("New Device interface added.\n");
+		g_debug ("New Device interface added.");
 		device_added (priv->manager, client, path, variant);
 		return;
 	}
