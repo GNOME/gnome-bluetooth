@@ -202,12 +202,12 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
 {
-	gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
-
 	replace_target_name_for_device (device);
 
 	if (user_pincode == NULL) {
 		char *help, *pincode_display;
+
+		gtk_assistant_set_current_page (window_assistant, PAGE_SETUP);
 
 		pincode_display = NULL;
 
@@ -233,7 +233,6 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		g_free (help);
 		set_large_label (GTK_LABEL (label_pin), pincode_display ? pincode_display : user_pincode);
 		g_free (pincode_display);
-
 	}
 
 	gtk_widget_show (button_cancel);
