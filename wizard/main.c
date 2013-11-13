@@ -112,7 +112,6 @@ static BluetoothChooser *selector = NULL;
 static GtkWidget *pin_option_button = NULL;
 
 static GtkWidget *pin_dialog = NULL;
-static GtkWidget *label_fixed = NULL;
 static GtkWidget *radio_auto = NULL;
 static GtkWidget *radio_0000 = NULL;
 static GtkWidget *radio_1111 = NULL;
@@ -788,14 +787,12 @@ select_device_changed (BluetoothChooser *selector,
 	legacypairing = lp;
 
 	if (legacypairing == TRUE) {
-		gtk_widget_show(label_fixed);
 		gtk_widget_show(radio_0000);
 		gtk_widget_show(radio_1111);
 		gtk_widget_show(radio_1234);
 		gtk_widget_show(radio_custom);
 		gtk_widget_show(entry_custom);
 	} else {
-		gtk_widget_hide(label_fixed);
 		gtk_widget_hide(radio_0000);
 		gtk_widget_hide(radio_1111);
 		gtk_widget_hide(radio_1234);
@@ -920,7 +917,6 @@ create_wizard (void)
 	radio_1111 = W("radio_1111");
 	radio_1234 = W("radio_1234");
 	radio_none = W("radio_none");
-	label_fixed = W("label_fixed_len");
 	radio_custom = W("radio_custom");
 	entry_custom = W("entry_custom");
 
