@@ -573,6 +573,9 @@ void prepare_callback (GtkWidget *assistant,
 					target_ui_behaviour = PAIRING_UI_ICADE;
 
 				gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
+
+				g_free (user_pincode);
+				user_pincode = g_strdup (pincode);
 			}
 		}
 
