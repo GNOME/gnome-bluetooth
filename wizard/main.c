@@ -429,7 +429,23 @@ cancel_callback (GDBusMethodInvocation *invocation,
 typedef struct {
 	const char *device;
 	GTimer *timer;
+	guint timeout_id;
 } ConnectData;
+
+static void connect_callback (GObject      *source_object,
+			      GAsyncResult *res,
+			      gpointer      user_data);
+
+static gboolean
+connect_timeout_cb (gpointer user_data)
+{
+	ConnectData *data = (ConnectData *) user_data;
+
+	bluetooth_client_connect_service (client, data->device, TRUE, NULL, connect_callback, data);
+	data->timeout_id = 0;
+
+	return G_SOURCE_REMOVE;
+}
 
 static void
 connect_callback (GObject      *source_object,
@@ -442,9 +458,12 @@ connect_callback (GObject      *source_object,
 	success = bluetooth_client_connect_service_finish (client, res, NULL);
 
 	if (success == FALSE && g_timer_elapsed (data->timer, NULL) < CONNECT_TIMEOUT) {
-		bluetooth_client_connect_service (client, data->device, TRUE, NULL, connect_callback, data);
+		g_assert (data->timeout_id == 0);
+		data->timeout_id = g_timeout_add (500, connect_timeout_cb, data);
 		return;
 	}
+	if (data->timeout_id > 0)
+		g_source_remove (data->timeout_id);
 
 	if (success == FALSE)
 		g_debug ("Failed to connect to device %s", data->device);
