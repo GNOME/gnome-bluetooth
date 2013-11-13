@@ -70,8 +70,6 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
-static char *get_error_message (GError *error);
-
 static void on_transfer_properties (GVariant *props);
 static void on_transfer_progress (guint64 transferred);
 static void on_transfer_complete (void);
@@ -113,12 +111,15 @@ update_from_label (void)
 static void
 handle_error (GError *error)
 {
-	char *message;
+	const char *message;
 
-	message = get_error_message (error);
+	if (!error || *error->message == '\0')
+		message = _("An unknown error occurred");
+	else
+		message = error->message;
 	gtk_widget_show (image_status);
 	gtk_label_set_markup (GTK_LABEL (label_status), message);
-	g_free (message);
+	g_clear_error (&error);
 
 	/* Clear the progress bar as it may be saying 'Connecting' or
 	 * 'Sending file 1 of 1' which is not true. */
@@ -407,13 +408,6 @@ static void response_callback(GtkWidget *dialog,
 	gtk_main_quit();
 }
 
-static gboolean is_palm_device(const gchar *bdaddr)
-{
-	return (g_str_has_prefix(bdaddr, "00:04:6B") ||
-		g_str_has_prefix(bdaddr, "00:07:E0") ||
-		g_str_has_prefix(bdaddr, "00:0E:20"));
-}
-
 static void create_window(void)
 {
 	GtkWidget *vbox, *hbox;
@@ -499,39 +493,6 @@ static void create_window(void)
 }
 
 #define OPENOBEX_CONNECTION_FAILED "org.openobex.Error.ConnectionAttemptFailed"
-
-static gchar *get_error_message(GError *error)
-{
-	char *message;
-
-	if (error == NULL)
-		return g_strdup(_("An unknown error occurred"));
-
-	if (g_dbus_error_is_remote_error (error) == FALSE) {
-		message = g_strdup(error->message);
-		goto done;
-	}
-
-	/* FIXME */
-#if 0
-	if (dbus_g_error_has_name(error, OPENOBEX_CONNECTION_FAILED) == TRUE &&
-	    is_palm_device(option_device)) {
-		message = g_strdup(_("Make sure that the remote device "
-					"is switched on and that it "
-					"accepts Bluetooth connections"));
-		goto done;
-	}
-#endif
-	if (*error->message == '\0')
-		message = g_strdup(_("An unknown error occurred"));
-	else
-		message = g_strdup(error->message);
-
-done:
-	g_error_free(error);
-
-	return message;
-}
 
 static gchar *get_device_name(const gchar *address)
 {
