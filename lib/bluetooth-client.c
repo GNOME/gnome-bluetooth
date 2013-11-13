@@ -973,6 +973,16 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (ret == FALSE) {
 		g_warning ("Failed to set Discoverable to %d: %s", discoverable, error->message);
 		g_error_free (error);
+	} else {
+		ret = properties_call_set_sync (properties,
+						BLUEZ_ADAPTER_INTERFACE,
+						"DiscoverableTimeout",
+						g_variant_new_variant (g_variant_new_uint32 (timeout)),
+						NULL, &error);
+		if (ret == FALSE) {
+			g_warning ("Failed to set DiscoverableTimeout to %d: %s", timeout, error->message);
+			g_error_free (error);
+		}
 	}
 
 	g_object_unref (properties);
