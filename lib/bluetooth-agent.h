@@ -66,6 +66,9 @@ typedef gboolean (*BluetoothAgentPasskeyFunc) (GDBusMethodInvocation *invocation
 typedef gboolean (*BluetoothAgentDisplayFunc) (GDBusMethodInvocation *invocation,
 					GDBusProxy *device, guint passkey,
 						guint entered, gpointer data);
+typedef gboolean (*BluetoothAgentDisplayPinCodeFunc) (GDBusMethodInvocation *invocation,
+						      GDBusProxy *device, const char *pincode,
+						      gpointer data);
 typedef gboolean (*BluetoothAgentConfirmFunc) (GDBusMethodInvocation *invocation,
 					GDBusProxy *device, guint passkey,
 								gpointer data);
@@ -83,6 +86,8 @@ void bluetooth_agent_set_passkey_func(BluetoothAgent *agent,
 				BluetoothAgentPasskeyFunc func, gpointer data);
 void bluetooth_agent_set_display_func(BluetoothAgent *agent,
 				BluetoothAgentDisplayFunc func, gpointer data);
+void bluetooth_agent_set_display_pincode_func(BluetoothAgent *agent,
+				BluetoothAgentDisplayPinCodeFunc func, gpointer data);
 void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
 				BluetoothAgentConfirmFunc func, gpointer data);
 void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,

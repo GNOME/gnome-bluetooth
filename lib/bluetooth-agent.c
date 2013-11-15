@@ -53,6 +53,10 @@ static const gchar introspection_xml[] =
 "      <arg type='u' name='passkey' direction='in'/>"
 "      <arg type='y' name='entered' direction='in'/>"
 "    </method>"
+"    <method name='DisplayPinCode'>"
+"      <arg type='o' name='device' direction='in'/>"
+"      <arg type='s' name='pincode' direction='in'/>"
+"    </method>"
 "    <method name='RequestConfirmation'>"
 "      <arg type='o' name='device' direction='in'/>"
 "      <arg type='u' name='passkey' direction='in'/>"
@@ -87,6 +91,9 @@ struct _BluetoothAgentPrivate {
 
 	BluetoothAgentDisplayFunc display_func;
 	gpointer display_data;
+
+	BluetoothAgentDisplayPinCodeFunc display_pincode_func;
+	gpointer display_pincode_data;
 
 	BluetoothAgentPasskeyFunc passkey_func;
 	gpointer passkey_data;
@@ -175,6 +182,28 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 
 	priv->display_func(invocation, device, passkey, entered,
 			   priv->display_data);
+
+	g_object_unref(device);
+
+	return TRUE;
+}
+
+static gboolean bluetooth_agent_display_pincode(BluetoothAgent *agent,
+						const char *path, const char *pincode,
+						GDBusMethodInvocation *invocation)
+{
+	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+	GDBusProxy *device;
+
+	if (priv->display_pincode_func == NULL)
+		return FALSE;
+
+	device = get_device_from_path(path);
+	if (device == NULL)
+		return FALSE;
+
+	priv->display_pincode_func(invocation, device, pincode,
+				   priv->display_data);
 
 	g_object_unref(device);
 
@@ -364,6 +393,13 @@ handle_method_call (GDBusConnection       *connection,
 		g_variant_get (parameters, "(ouy)", &path, &passkey, &entered);
 		bluetooth_agent_display_passkey (agent, path, passkey, entered, invocation);
 		g_free (path);
+	} else if (g_strcmp0 (method_name, "DisplayPinCode") == 0) {
+		char *path;
+		char *pincode;
+
+		g_variant_get (parameters, "(os)", &path, &pincode);
+		bluetooth_agent_display_pincode (agent, path, pincode, invocation);
+		g_free (path);
 	} else if (g_strcmp0 (method_name, "RequestConfirmation") == 0) {
 		char *path;
 		guint32 passkey;
@@ -550,6 +586,19 @@ void bluetooth_agent_set_display_func(BluetoothAgent *agent,
 
 	priv->display_func = func;
 	priv->display_data = data;
+}
+
+void bluetooth_agent_set_display_pincode_func(BluetoothAgent *agent,
+				BluetoothAgentDisplayPinCodeFunc func, gpointer data)
+{
+	BluetoothAgentPrivate *priv;
+
+	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
+
+	priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
+
+	priv->display_pincode_func = func;
+	priv->display_pincode_data = data;
 }
 
 void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
