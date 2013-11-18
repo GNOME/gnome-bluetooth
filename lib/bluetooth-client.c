@@ -296,6 +296,13 @@ device_g_properties_changed (GDBusProxy      *device,
 			gtk_tree_store_set (priv->store, &iter,
 					    BLUETOOTH_COLUMN_UUIDS, uuids, -1);
 			g_strfreev (uuids);
+		} else if (g_str_equal (property, "LegacyPairing") == TRUE) {
+			gboolean legacypairing;
+
+			legacypairing = g_variant_get_boolean (v);
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
+					    -1);
 		} else {
 			g_debug ("Unhandled property: %s", property);
 		}
