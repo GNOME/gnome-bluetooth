@@ -61,23 +61,6 @@
 	<device oui="00:1E:3D:" name="BD Remote Control" pin="NULL"/>
 	<device oui="00:06:F5:" name="BD Remote Control" pin="NULL"/>
 
-	<!-- Apple Wireless and Mighty Mouse
-	     Note: Apple doesn't follow the specs, and requires their mice
-	     to be paired -->
-	<device oui="00:0A:95:" type="mouse" pin="0000"/>
-	<device oui="00:14:51:" type="mouse" pin="0000"/>
-	<device oui="34:15:9E:" type="mouse" pin="0000"/>
-
-	<!-- Apple Magic Trackpad
-	     Note: same as above, tablet needs to be paired -->
-	<device oui="D8:A2:5E:" type="tablet" pin="0000"/>
-	<device oui="28:37:37:" type="tablet" pin="0000"/>
-	<device oui="C8:BC:C8:" type="tablet" pin="0000"/>
-
-	<!-- MS Sculpt Touch Mouse
-	     Again, same as above -->
-	<device oui="7C:1E:52:" type="mouse" name="Microsoft Wedge Touch Mouse" pin="0000"/>
-
 	<!-- BT-GPS8 JENTRO, GPS mouse -->
 	<device oui="00:0D:B5:" name="BT-GPS8 JENTRO" pin="0000"/>
 
@@ -173,9 +156,6 @@
 	<device type="headphones" pin="0000"/>
 	<device type="headset" pin="0000"/>
 	<device type="audio" pin="0000"/>
-
-	<!-- Mice don't need pincodes -->
-	<device type="mouse" pin="NULL"/>
 
 	<!-- Keyboard need a special help text -->
 	<device type="keyboard" pin="KEYBOARD"/>
