@@ -1878,8 +1878,10 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 			g_object_unref (proxy);
 			goto bail;
 		}
+		g_hash_table_unref (table);
 
 		service = get_proxy_for_iface (DEVICE (proxy), iface_name, client);
+		g_object_unref (proxy);
 
 		g_debug ("Calling 'Connect' on interface %s for %s",
 			 iface_name, g_dbus_proxy_get_object_path (service));
@@ -1922,6 +1924,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 					NULL,
 					(GAsyncReadyCallback) disconnect_callback,
 					conndata);
+		g_object_unref (proxy);
 	}
 
 	return;
