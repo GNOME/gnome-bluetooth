@@ -172,7 +172,7 @@ get_icade_pincode (char **pin_display_str)
 		int r;
 		char *c;
 
-		r = g_random_int_range (1, 4);
+		r = g_random_int_range (1, 5);
 
 		c = g_strdup_printf ("%d", r);
 		g_string_append (pin, c);
