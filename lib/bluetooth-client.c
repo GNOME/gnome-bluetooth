@@ -1900,7 +1900,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	} else if (table != NULL) {
 		GDBusProxy *service;
 
-		conndata->device = g_object_ref (DEVICE (proxy));
+		conndata->device = DEVICE (proxy);
 		conndata->services = g_hash_table_get_keys (table);
 		g_hash_table_unref (table);
 		conndata->services = g_list_sort (conndata->services, (GCompareFunc) rev_sort_services);
