@@ -286,8 +286,7 @@ does_not_match_cb (GtkButton *button,
 	invocation = g_object_get_data (G_OBJECT (button), "invocation");
 	error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
 			     "Agent callback cancelled");
-	g_dbus_method_invocation_return_gerror (invocation, error);
-	g_error_free (error);
+	g_dbus_method_invocation_take_error (invocation, error);
 
 	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", NULL);
 	g_object_set_data (G_OBJECT(matches_button), "invocation", NULL);
