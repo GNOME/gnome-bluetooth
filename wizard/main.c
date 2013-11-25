@@ -325,6 +325,19 @@ authorize_callback (GDBusMethodInvocation *invocation,
 }
 
 static gboolean
+authorize_service_callback (GDBusMethodInvocation *invocation,
+			    GDBusProxy *device,
+			    const char *uuid,
+			    gpointer user_data)
+{
+	g_dbus_method_invocation_return_value (invocation, NULL);
+
+	replace_target_properties_for_device (device);
+
+	return TRUE;
+}
+
+static gboolean
 confirm_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  guint pin,
@@ -1039,6 +1052,7 @@ int main (int argc, char **argv)
 	bluetooth_agent_set_cancel_func(agent, cancel_callback, NULL);
 	bluetooth_agent_set_confirm_func(agent, confirm_callback, NULL);
 	bluetooth_agent_set_authorize_func(agent, authorize_callback, NULL);
+	bluetooth_agent_set_authorize_service_func(agent, authorize_service_callback, NULL);
 
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
