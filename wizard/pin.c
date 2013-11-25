@@ -158,7 +158,7 @@ get_pincode_for_device (guint type, const char *address, const char *name, guint
 
 	g_debug ("Got pin '%s' (max digits: %d) for device '%s' (type: %s address: %s)",
 		 data.ret_pin, data.max_digits,
-		 name ? name : "", address, bluetooth_type_to_string (type));
+		 name ? name : "", bluetooth_type_to_string (type), address);
 
 	return data.ret_pin;
 }
