@@ -242,6 +242,8 @@ pincode_callback (GDBusMethodInvocation *invocation,
 
 	gtk_widget_show (button_cancel);
 
+	bluetooth_client_set_trusted (client, g_dbus_proxy_get_object_path (device), TRUE);
+
 	g_debug ("Using pincode \"%s\" for '%s' (%s)", user_pincode, target_name, target_address);
 	g_dbus_method_invocation_return_value (invocation,
 					       g_variant_new ("(s)", user_pincode));
