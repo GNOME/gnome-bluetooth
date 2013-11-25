@@ -407,6 +407,21 @@ display_callback (GDBusMethodInvocation *invocation,
 }
 
 static gboolean
+display_pincode_callback (GDBusMethodInvocation *invocation,
+			  GDBusProxy *device,
+			  const char *pincode,
+			  gpointer user_data)
+{
+	GError *error;
+
+	error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+			     "Agent callback cancelled");
+	g_dbus_method_invocation_take_error (invocation, error);
+
+	return TRUE;
+}
+
+static gboolean
 cancel_callback (GDBusMethodInvocation *invocation,
 		 gpointer user_data)
 {
@@ -1018,6 +1033,7 @@ int main (int argc, char **argv)
 
 	bluetooth_agent_set_pincode_func(agent, pincode_callback, NULL);
 	bluetooth_agent_set_display_func(agent, display_callback, NULL);
+	bluetooth_agent_set_display_pincode_func(agent, display_pincode_callback, NULL);
 	bluetooth_agent_set_cancel_func(agent, cancel_callback, NULL);
 	bluetooth_agent_set_confirm_func(agent, confirm_callback, NULL);
 	bluetooth_agent_set_authorize_func(agent, authorize_callback, NULL);
