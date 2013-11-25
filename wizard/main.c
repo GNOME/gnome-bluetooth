@@ -35,6 +35,7 @@
 #include <bluetooth-chooser.h>
 #include <bluetooth-agent.h>
 #include <bluetooth-plugin-manager.h>
+#include <bluetooth-utils.h>
 
 #include "pin.h"
 
@@ -68,6 +69,7 @@ static BluetoothAgent *agent;
 
 static gchar *target_address = NULL;
 static gchar *target_name = NULL;
+static BluetoothType target_type = BLUETOOTH_TYPE_ANY;
 static guint target_max_digits = 0;
 static PairingUIBehaviour target_ui_behaviour = PAIRING_UI_NORMAL;
 static gboolean legacypairing = FALSE;
@@ -200,6 +202,14 @@ replace_target_properties_for_device (GDBusProxy *device)
 	value = g_dbus_proxy_get_cached_property (device, "Address");
 	target_address = g_variant_dup_string (value, NULL);
 	g_variant_unref (value);
+
+	value = g_dbus_proxy_get_cached_property (device, "Class");
+	if (value != NULL) {
+		target_type = value ? bluetooth_class_to_type (g_variant_get_uint32 (value)) : BLUETOOTH_TYPE_ANY;
+		g_variant_unref (value);
+	} else {
+		target_type = BLUETOOTH_TYPE_ANY;
+	}
 }
 
 static gboolean
@@ -576,7 +586,6 @@ void prepare_callback (GtkWidget *assistant,
 		char *text;
 		GValue value = { 0, };
 		GDBusProxy *proxy;
-		guint target_type = BLUETOOTH_TYPE_ANY;
 		gboolean pair = TRUE;
 
 		gtk_spinner_start (GTK_SPINNER (spinner_connecting));
