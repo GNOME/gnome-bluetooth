@@ -276,7 +276,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 
 	gtk_widget_show (button_cancel);
 
-	g_debug ("Using pincode \"%s\"", user_pincode);
+	g_debug ("Using pincode \"%s\" for '%s' (%s)", user_pincode, target_name, target_address);
 	g_dbus_method_invocation_return_value (invocation,
 					       g_variant_new ("(s)", user_pincode));
 
