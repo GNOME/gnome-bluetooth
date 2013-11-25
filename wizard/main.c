@@ -633,8 +633,10 @@ void prepare_callback (GtkWidget *assistant,
 
 		g_object_ref(agent);
 
-		if (user_pincode != NULL && g_str_equal (user_pincode, "NULL"))
+		if (user_pincode != NULL && g_str_equal (user_pincode, "NULL")) {
+			g_debug ("Got NULL pincode, will not pair with %s", target_name);
 			pair = FALSE;
+		}
 
 		bluetooth_client_setup_device (client,
 					       device,
