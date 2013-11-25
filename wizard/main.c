@@ -212,6 +212,30 @@ replace_target_properties_for_device (GDBusProxy *device)
 	}
 }
 
+static void
+update_user_pincode (void)
+{
+	const char *pincode;
+
+	pincode = get_pincode_for_device (target_type,
+					  target_address,
+					  target_name,
+					  &target_max_digits);
+	if (pincode != NULL) {
+		if (g_str_equal (pincode, "KEYBOARD"))
+			target_ui_behaviour = PAIRING_UI_KEYBOARD;
+		else if (g_str_equal (pincode, "ICADE"))
+			target_ui_behaviour = PAIRING_UI_ICADE;
+
+		gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
+
+		g_free (user_pincode);
+		user_pincode = g_strdup (pincode);
+	} else {
+		target_ui_behaviour = PAIRING_UI_NORMAL;
+	}
+}
+
 static gboolean
 pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
@@ -621,24 +645,8 @@ void prepare_callback (GtkWidget *assistant,
 		target_type = bluetooth_chooser_get_selected_device_type (selector);
 
 		target_ui_behaviour = PAIRING_UI_NORMAL;
-
-		if (legacypairing == TRUE) {
-			const char *pincode = get_pincode_for_device (target_type,
-								      target_address,
-								      target_name,
-								      &target_max_digits);
-			if (pincode != NULL) {
-				if (g_str_equal (pincode, "KEYBOARD"))
-					target_ui_behaviour = PAIRING_UI_KEYBOARD;
-				else if (g_str_equal (pincode, "ICADE"))
-					target_ui_behaviour = PAIRING_UI_ICADE;
-
-				gtk_entry_set_max_length (GTK_ENTRY (entry_custom), target_max_digits);
-
-				g_free (user_pincode);
-				user_pincode = g_strdup (pincode);
-			}
-		}
+		if (legacypairing == TRUE)
+			update_user_pincode ();
 
 		g_object_ref(agent);
 
