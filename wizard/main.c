@@ -241,7 +241,9 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
 {
+	create_started = TRUE;
 	replace_target_properties_for_device (device);
+	update_user_pincode ();
 
 	if (user_pincode == NULL) {
 		char *help, *pincode_display;
@@ -272,6 +274,27 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		g_free (help);
 		set_large_label (GTK_LABEL (label_pin), pincode_display ? pincode_display : user_pincode);
 		g_free (pincode_display);
+	} else {
+		char *text;
+
+		gtk_assistant_set_current_page (window_assistant, PAGE_CONNECTING);
+
+		gtk_spinner_start (GTK_SPINNER (spinner_connecting));
+
+		/* translators:
+		 * The '%s' is the device name, for example:
+		 * Connecting to 'Sony Bluetooth Headset'...
+		 */
+		text = g_strdup_printf (_("Connecting to '%s'..."), target_name);
+		gtk_label_set_text (GTK_LABEL (label_connecting), text);
+		g_free (text);
+
+		/* Set the filter on the selector, so we can use it to get more
+		 * info later, in page_summary */
+		g_object_set (selector,
+			      "device-category-filter",
+			      BLUETOOTH_CATEGORY_ALL,
+			      NULL);
 	}
 
 	gtk_widget_show (button_cancel);
