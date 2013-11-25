@@ -1425,14 +1425,18 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device != NULL, FALSE);
 
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE)
+	if (get_iter_from_path (priv->store, &iter, device) == FALSE) {
+		g_debug ("Couldn't find device '%s' in tree to mark it as trusted", device);
 		return FALSE;
+	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
 			    BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
 
-	if (properties == NULL)
+	if (properties == NULL) {
+		g_debug ("Couldn't find properties for device '%s' in tree to mark it as trusted", device);
 		return FALSE;
+	}
 
 	ret = properties_call_set_sync (properties, BLUEZ_DEVICE_INTERFACE, "Trusted",
 					g_variant_new_variant (g_variant_new_boolean (trusted)),
