@@ -333,7 +333,7 @@ device_added (ObjectManager   *manager,
 	char **uuids;
 	gboolean paired, trusted, connected;
 	int legacypairing;
-	guint type;
+	BluetoothType type;
 	GtkTreeIter iter, parent;
 
 	device = device1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -1607,7 +1607,7 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 	char *address, *alias, *name, *icon, **uuids;
 	gboolean is_default, paired, trusted, connected, discoverable, discovering, powered, is_adapter;
 	GtkTreeIter parent;
-	guint type;
+	BluetoothType type;
 
 	gtk_tree_model_get (model, iter,
 			    BLUETOOTH_COLUMN_ADDRESS, &address,
