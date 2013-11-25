@@ -303,6 +303,13 @@ device_g_properties_changed (GDBusProxy      *device,
 			gtk_tree_store_set (priv->store, &iter,
 					    BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 					    -1);
+		} else if (g_str_equal (property, "Class") == TRUE) {
+			BluetoothType type;
+
+			type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
+			gtk_tree_store_set (priv->store, &iter,
+					    BLUETOOTH_COLUMN_TYPE, type,
+					    -1);
 		} else {
 			g_debug ("Unhandled property: %s", property);
 		}
