@@ -412,11 +412,13 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 			  const char *pincode,
 			  gpointer user_data)
 {
-	GError *error;
+	g_debug ("Reject bluetoothd PIN %s", pincode);
 
-	error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
-			     "Agent callback cancelled");
-	g_dbus_method_invocation_take_error (invocation, error);
+	/* Reject all the calls here, so that we'll get asked about the
+	 * pincode instead of being told the pincode */
+	g_dbus_method_invocation_return_dbus_error (invocation,
+						    "org.bluez.Error.Rejected",
+						    "Rejected bluetoothd generated PIN code");
 
 	return TRUE;
 }
