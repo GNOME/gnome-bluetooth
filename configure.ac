@@ -9,7 +9,7 @@ AC_INIT([gnome-bluetooth],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth])
 
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SRCDIR([applet/bluetooth-applet.c])
+AC_CONFIG_SRCDIR([lib/bluetooth-client.c])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.8 dist-xz no-dist-gzip check-news tar-ustar])
@@ -125,7 +125,6 @@ AC_OUTPUT(Makefile
 	  icons/Makefile
 	  lib/Makefile
 	  lib/plugins/Makefile
-	  applet/Makefile
 	  wizard/Makefile
 	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile

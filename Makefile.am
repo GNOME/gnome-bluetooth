@@ -1,6 +1,6 @@
-DEF_SUBDIRS = icons lib applet wizard sendto docs po help
+DEF_SUBDIRS = icons lib wizard sendto docs po help
 
-SUBDIRS = icons lib applet wizard sendto docs po
+SUBDIRS = icons lib wizard sendto docs po
 
 if ENABLE_DOCUMENTATION
 SUBDIRS += help
