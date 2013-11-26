@@ -150,9 +150,9 @@ typedef enum {
 	BLUETOOTH_COLUMN_POWERED,
 	BLUETOOTH_COLUMN_SERVICES,
 	BLUETOOTH_COLUMN_UUIDS,
-	/* < private > */
-	_BLUETOOTH_NUM_COLUMNS /*< skip >*/
 } BluetoothColumn;
+
+#define _BLUETOOTH_NUM_COLUMNS (BLUETOOTH_COLUMN_UUIDS + 1)
 
 /**
  * BluetoothStatus:
