@@ -203,10 +203,35 @@ replace_target_properties_for_device (GDBusProxy *device)
 }
 
 static gboolean
+is_target_device (GDBusProxy *device)
+{
+	GVariant *value;
+	gboolean ret = FALSE;
+
+	value = g_dbus_proxy_get_cached_property (device, "Address");
+	if (!value)
+		return FALSE;
+
+	if (g_strcmp0 (g_variant_get_string (value, NULL), target_address) == 0)
+		ret = TRUE;
+	g_variant_unref (value);
+
+	return ret;
+}
+
+static gboolean
 pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
 {
+	if (create_started == FALSE ||
+	    !is_target_device (device)) {
+		g_dbus_method_invocation_return_dbus_error (invocation,
+							    "org.bluez.Error.Rejected",
+							    "Rejected remote-initiated pairing");
+		return TRUE;
+	}
+
 	replace_target_properties_for_device (device);
 
 	if (user_pincode == NULL) {
