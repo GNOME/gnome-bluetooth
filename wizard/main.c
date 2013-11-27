@@ -34,7 +34,6 @@
 #include <bluetooth-client-private.h>
 #include <bluetooth-chooser.h>
 #include <bluetooth-agent.h>
-#include <bluetooth-plugin-manager.h>
 #include <bluetooth-utils.h>
 
 #include "pin.h"
@@ -726,39 +725,17 @@ void prepare_callback (GtkWidget *assistant,
 	}
 
 	if (page == page_summary && summary_failure == FALSE) {
-		GList *widgets = NULL;
-		GValue value = { 0, };
-		char **uuids, *text;
+		char *text, *name;
 
 		/* FIXME remove this code when bluetoothd has pair/unpair code */
 		g_object_set (G_OBJECT (selector), "device-selected", target_address, NULL);
 
-		bluetooth_chooser_get_selected_device_info (selector, "name", &value);
-		text = g_strdup_printf (_("Successfully set up new device '%s'"), g_value_get_string (&value));
-		g_value_unset (&value);
+		name = bluetooth_chooser_get_selected_device_name (selector);
+		text = g_strdup_printf (_("Successfully set up new device '%s'"), name);
+		g_free (name);
 		gtk_label_set_text (GTK_LABEL (label_summary), text);
 		g_free (text);
 
-		if (bluetooth_chooser_get_selected_device_info (selector, "uuids", &value) != FALSE) {
-			uuids = g_value_get_boxed (&value);
-			widgets = bluetooth_plugin_manager_get_widgets (target_address,
-									(const char **) uuids);
-			g_value_unset (&value);
-		}
-		if (widgets != NULL) {
-			GList *l;
-
-			for (l = widgets; l != NULL; l = l->next) {
-				GtkWidget *widget = l->data;
-				gtk_box_pack_start (GTK_BOX (extra_config_vbox),
-						    widget,
-						    FALSE,
-						    TRUE,
-						    0);
-			}
-			g_list_free (widgets);
-			gtk_widget_show_all (extra_config_vbox);
-		}
 		gtk_widget_show (button_quit);
 	}
 
@@ -1116,8 +1093,6 @@ int main (int argc, char **argv)
 
 	bluetooth_agent_setup(agent, AGENT_PATH);
 
-	bluetooth_plugin_manager_init ();
-
 	if (create_wizard() == FALSE)
 		return 1;
 	gtk_application_add_window (app,
@@ -1127,8 +1102,6 @@ int main (int argc, char **argv)
 			  G_CALLBACK (activate_cb), window_assistant);
 
 	g_application_run (G_APPLICATION (app), argc, argv);
-
-	bluetooth_plugin_manager_cleanup ();
 
 	if (agent != NULL)
 		g_object_unref (agent);
