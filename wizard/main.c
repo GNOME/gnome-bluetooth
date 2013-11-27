@@ -76,6 +76,8 @@ static gboolean legacypairing = FALSE;
 static gboolean create_started = FALSE;
 static gboolean display_called = FALSE;
 
+static guint pincode_cb_id = 0;
+
 /* NULL means automatic, anything else is a pincode specified by the user */
 static gchar *user_pincode = NULL;
 
@@ -237,10 +239,11 @@ update_user_pincode (void)
 }
 
 static gboolean
-pincode_callback (GDBusMethodInvocation *invocation,
-		  GDBusProxy *device,
-		  gpointer user_data)
+pincode_callback_timeout_cb (gpointer user_data)
 {
+	GDBusMethodInvocation *invocation = user_data;
+	GDBusProxy *device = g_object_get_data (G_OBJECT (invocation), "device");
+
 	create_started = TRUE;
 	replace_target_properties_for_device (device);
 	update_user_pincode ();
@@ -305,6 +308,19 @@ pincode_callback (GDBusMethodInvocation *invocation,
 	g_dbus_method_invocation_return_value (invocation,
 					       g_variant_new ("(s)", user_pincode));
 
+	pincode_cb_id = 0;
+
+	return G_SOURCE_REMOVE;
+}
+
+static gboolean
+pincode_callback (GDBusMethodInvocation *invocation,
+		  GDBusProxy *device,
+		  gpointer user_data)
+{
+	g_assert (pincode_cb_id == 0);
+	g_object_set_data_full (G_OBJECT (invocation), "device", g_object_ref (device), g_object_unref);
+	pincode_cb_id = g_timeout_add (500, pincode_callback_timeout_cb, invocation);
 	return TRUE;
 }
 
