@@ -95,13 +95,6 @@ PKG_CHECK_MODULES(INPUT, gdk-3.0 gtk+-3.0)
 dnl Requires for the public library
 PKG_CHECK_MODULES(LIBGNOMEBT, gmodule-2.0 gio-unix-2.0 gtk+-3.0)
 
-dnl Requires for the geoclue plugin
-PKG_CHECK_MODULES(GEOCLUE, gio-2.0 gtk+-3.0)
-
-dnl Requires for the plugins
-PKG_CHECK_MODULES(PLUGINS,
-		  gtk+-3.0)
-
 GDBUS_CODEGEN="gdbus-codegen"
 AC_SUBST(GDBUS_CODEGEN)
 
@@ -124,7 +117,6 @@ AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
 	  lib/Makefile
-	  lib/plugins/Makefile
 	  wizard/Makefile
 	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile

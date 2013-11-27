@@ -1,5 +1,3 @@
-SUBDIRS = plugins
-
 EXTRA_DIST = 
 CLEANFILES =
 
@@ -18,7 +16,6 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-chooser-combo.c	\
 	bluetooth-client-glue.c		\
 	bluetooth-fdo-glue.c		\
-	bluetooth-plugin-manager.c	\
 	rfkill-glib.c
 
 libgnome_bluetooth_private_headers =	\
@@ -52,20 +49,16 @@ libgnome_bluetooth_introspect_headers =			\
 	bluetooth-filter-widget.h			\
 	bluetooth-enums.h				\
 	bluetooth-utils.h				\
-	bluetooth-plugin-manager.h			\
 	bluetooth-killswitch.h
 
 gnomebluetoothdir = $(pkgincludedir)
-gnomebluetooth_HEADERS =				\
-	$(libgnome_bluetooth_introspect_headers)	\
-	bluetooth-plugin.h
+gnomebluetooth_HEADERS = $(libgnome_bluetooth_introspect_headers)
 
 AM_CFLAGS =						\
 	-I$(srcdir)					\
 	$(LIBGNOMEBT_CFLAGS)				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)				\
-	-DPLUGINDIR=\"$(libdir)/gnome-bluetooth/plugins\" \
 	-DG_LOG_DOMAIN=\"Bluetooth\"
 
 -include $(INTROSPECTION_MAKEFILE)
@@ -106,15 +99,13 @@ BUILT_SOURCES = bluetooth-client-glue.h \
 
 CLEANFILES += $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent test-deviceselection test-plugins test-class test-killswitch
+noinst_PROGRAMS = test-client test-agent test-deviceselection test-class test-killswitch
 
 test_client_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_agent_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_deviceselection_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
-
-test_plugins_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_class_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
