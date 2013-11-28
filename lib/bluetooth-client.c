@@ -403,23 +403,37 @@ device_added (ObjectManager   *manager,
 	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &parent,
 			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
-	if (get_iter_from_address (priv->store, &iter, address, adapter) == FALSE)
-		gtk_tree_store_insert (priv->store, &iter, &parent, -1);
-
-	gtk_tree_store_set(priv->store, &iter,
-			   BLUETOOTH_COLUMN_ADDRESS, address,
-			   BLUETOOTH_COLUMN_ALIAS, alias,
-			   BLUETOOTH_COLUMN_NAME, name,
-			   BLUETOOTH_COLUMN_TYPE, type,
-			   BLUETOOTH_COLUMN_ICON, icon,
-			   BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
-			   BLUETOOTH_COLUMN_UUIDS, uuids,
-			   BLUETOOTH_COLUMN_PAIRED, paired,
-			   BLUETOOTH_COLUMN_CONNECTED, connected,
-			   BLUETOOTH_COLUMN_TRUSTED, trusted,
-			   BLUETOOTH_COLUMN_PROXY, device,
-			   BLUETOOTH_COLUMN_PROPERTIES, properties,
-			   -1);
+	if (get_iter_from_address (priv->store, &iter, address, adapter) == FALSE) {
+		gtk_tree_store_insert_with_values (priv->store, &iter, &parent, -1,
+						   BLUETOOTH_COLUMN_ADDRESS, address,
+						   BLUETOOTH_COLUMN_ALIAS, alias,
+						   BLUETOOTH_COLUMN_NAME, name,
+						   BLUETOOTH_COLUMN_TYPE, type,
+						   BLUETOOTH_COLUMN_ICON, icon,
+						   BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
+						   BLUETOOTH_COLUMN_UUIDS, uuids,
+						   BLUETOOTH_COLUMN_PAIRED, paired,
+						   BLUETOOTH_COLUMN_CONNECTED, connected,
+						   BLUETOOTH_COLUMN_TRUSTED, trusted,
+						   BLUETOOTH_COLUMN_PROXY, device,
+						   BLUETOOTH_COLUMN_PROPERTIES, properties,
+						   -1);
+	} else {
+		gtk_tree_store_set(priv->store, &iter,
+				   BLUETOOTH_COLUMN_ADDRESS, address,
+				   BLUETOOTH_COLUMN_ALIAS, alias,
+				   BLUETOOTH_COLUMN_NAME, name,
+				   BLUETOOTH_COLUMN_TYPE, type,
+				   BLUETOOTH_COLUMN_ICON, icon,
+				   BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
+				   BLUETOOTH_COLUMN_UUIDS, uuids,
+				   BLUETOOTH_COLUMN_PAIRED, paired,
+				   BLUETOOTH_COLUMN_CONNECTED, connected,
+				   BLUETOOTH_COLUMN_TRUSTED, trusted,
+				   BLUETOOTH_COLUMN_PROXY, device,
+				   BLUETOOTH_COLUMN_PROPERTIES, properties,
+				   -1);
+	}
 	g_strfreev (uuids);
 
 	g_signal_connect (G_OBJECT (device), "g-properties-changed",
