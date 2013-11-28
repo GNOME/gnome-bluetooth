@@ -534,6 +534,7 @@ default_adapter_changed (ObjectManager   *manager,
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+		g_object_notify (G_OBJECT (client), "default-adapter-discovering");
 		return;
 	}
 
@@ -576,9 +577,14 @@ adapter_g_properties_changed (GDBusProxy      *adapter,
 			notify = TRUE;
 		} else if (g_str_equal (property, "Discovering") == TRUE) {
 			gboolean discovering = g_variant_get_boolean (v);
+			gboolean is_default;
 
 			gtk_tree_store_set (priv->store, &iter,
 					    BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
+			gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
+			if (is_default != FALSE)
+				g_object_notify (G_OBJECT (client), "default-adapter-discovering");
 			notify = TRUE;
 		} else if (g_str_equal (property, "Powered") == TRUE) {
 			gboolean powered = g_variant_get_boolean (v);
@@ -592,6 +598,7 @@ adapter_g_properties_changed (GDBusProxy      *adapter,
 				g_object_notify (G_OBJECT (client), "default-adapter");
 				g_object_notify (G_OBJECT (client), "default-adapter-powered");
 				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+				g_object_notify (G_OBJECT (client), "default-adapter-discovering");
 			}
 			notify = TRUE;
 		} else if (g_str_equal (property, "Discoverable") == TRUE) {
@@ -722,6 +729,7 @@ adapter_removed (ObjectManager   *manager,
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
+		g_object_notify (G_OBJECT (client), "default-adapter-discovering");
 	}
 }
 
