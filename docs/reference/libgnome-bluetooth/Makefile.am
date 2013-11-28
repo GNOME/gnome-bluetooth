@@ -62,9 +62,7 @@ IGNORE_HFILES= \
         gnome-bluetooth-enum-types.h    \
         bluetooth-chooser-private.h     \
         bluetooth-client-glue.h         \
-        bluetooth-fdo-glue.h            \
-        rfkill-glib.h                   \
-        rfkill.h
+        bluetooth-fdo-glue.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png

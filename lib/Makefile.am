@@ -8,15 +8,13 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-client.c		\
 	bluetooth-utils.c		\
 	bluetooth-agent.c		\
-	bluetooth-killswitch.c		\
 	gnome-bluetooth-enum-types.c	\
 	bluetooth-chooser.c		\
 	bluetooth-filter-widget.c	\
 	bluetooth-chooser-button.c	\
 	bluetooth-chooser-combo.c	\
 	bluetooth-client-glue.c		\
-	bluetooth-fdo-glue.c		\
-	rfkill-glib.c
+	bluetooth-fdo-glue.c
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
@@ -24,9 +22,7 @@ libgnome_bluetooth_private_headers =	\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
 	bluetooth-client-glue.h		\
-	bluetooth-fdo-glue.h		\
-	rfkill-glib.h			\
-	rfkill.h
+	bluetooth-fdo-glue.h
 
 # public headers don't need to be listed, are handled by _HEADERS
 libgnome_bluetooth_la_SOURCES =			\
@@ -48,8 +44,7 @@ libgnome_bluetooth_introspect_headers =			\
 	bluetooth-chooser-combo.h			\
 	bluetooth-filter-widget.h			\
 	bluetooth-enums.h				\
-	bluetooth-utils.h				\
-	bluetooth-killswitch.h
+	bluetooth-utils.h
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS = $(libgnome_bluetooth_introspect_headers)
@@ -99,7 +94,7 @@ BUILT_SOURCES = bluetooth-client-glue.h \
 
 CLEANFILES += $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent test-deviceselection test-class test-killswitch
+noinst_PROGRAMS = test-client test-agent test-deviceselection test-class
 
 test_client_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
@@ -108,8 +103,6 @@ test_agent_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 test_deviceselection_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_class_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
-
-test_killswitch_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 EXTRA_DIST += bluetooth-client.xml bluetooth-fdo.xml gnome-bluetooth.symbols
 
