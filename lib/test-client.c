@@ -284,6 +284,17 @@ default_adapter_powered_changed (GObject    *gobject,
 	g_message ("Default adapter is %s", powered ? "powered" : "switched off");
 }
 
+static void
+default_adapter_discovering_changed (GObject    *gobject,
+				     GParamSpec *pspec,
+				     gpointer    user_data)
+{
+	gboolean discovering;
+
+	g_object_get (G_OBJECT (gobject), "default-adapter-discovering", &discovering, NULL);
+	g_message ("Default adapter is %s", discovering ? "discovering" : "not discovering");
+}
+
 int main(int argc, char *argv[])
 {
 	GLogLevelFlags fatal_mask;
@@ -299,6 +310,8 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (default_adapter_changed), NULL);
 	g_signal_connect (G_OBJECT (client), "notify::default-adapter-powered",
 			  G_CALLBACK (default_adapter_powered_changed), NULL);
+	g_signal_connect (G_OBJECT (client), "notify::default-adapter-discovering",
+			  G_CALLBACK (default_adapter_discovering_changed), NULL);
 
 	default_adapter_changed (G_OBJECT (client), NULL, NULL);
 	default_adapter_powered_changed (G_OBJECT (client), NULL, NULL);
