@@ -53,7 +53,7 @@ enum {
 	LAST_SIGNAL
 };
 
-static int selection_table_signals[LAST_SIGNAL] = { 0 };
+static guint selection_table_signals[LAST_SIGNAL] = { 0 };
 
 #define BLUETOOTH_CHOOSER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
 									BLUETOOTH_TYPE_CHOOSER, BluetoothChooserPrivate))

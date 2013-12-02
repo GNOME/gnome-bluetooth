@@ -81,11 +81,6 @@ PKG_CHECK_MODULES(SENDTO,
 		  gtk+-3.0
 		  gio-2.0)
 
-dnl Requires for the wizard dialogue
-PKG_CHECK_MODULES(WIZARD,
-		  gmodule-export-2.0
-		  gtk+-3.0)
-
 AC_CHECK_LIBM
 AC_SUBST(LIBM)
 
@@ -117,8 +112,6 @@ AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
 	  lib/Makefile
-	  wizard/Makefile
-	  wizard/bluetooth-wizard.desktop.in
 	  sendto/Makefile
 	  sendto/bluetooth-sendto.desktop.in
 	  docs/Makefile

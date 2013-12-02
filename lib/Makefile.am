@@ -1,7 +1,17 @@
 EXTRA_DIST = 
 CLEANFILES =
+BUILT_SOURCES =
 
 lib_LTLIBRARIES = libgnome-bluetooth.la
+
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/settings.gresource.xml)
+bluetooth-settings-resources.c: settings.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name bluetooth_settings $<
+bluetooth-settings-resources.h: settings.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name bluetooth_settings $<
+
+EXTRA_DIST += settings.gresource.xml
+BUILT_SOURCES += bluetooth-settings-resources.c bluetooth-settings-resources.h
 
 # will be scanned for introspection annotation, but won't be installed
 libgnome_bluetooth_c_sources =		\
@@ -14,7 +24,12 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-chooser-button.c	\
 	bluetooth-chooser-combo.c	\
 	bluetooth-client-glue.c		\
-	bluetooth-fdo-glue.c
+	bluetooth-fdo-glue.c		\
+	bluetooth-settings-widget.c	\
+	bluetooth-settings-resources.c	\
+	bluetooth-settings-row.c	\
+	bluetooth-pairing-dialog.c	\
+	pin.c
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
@@ -22,7 +37,11 @@ libgnome_bluetooth_private_headers =	\
 	gnome-bluetooth-enum-types.h	\
 	bluetooth-chooser-private.h	\
 	bluetooth-client-glue.h		\
-	bluetooth-fdo-glue.h
+	bluetooth-fdo-glue.h		\
+	bluetooth-settings-resources.h	\
+	bluetooth-settings-row.h	\
+	bluetooth-pairing-dialog.h	\
+	pin.h
 
 # public headers don't need to be listed, are handled by _HEADERS
 libgnome_bluetooth_la_SOURCES =			\
@@ -44,7 +63,8 @@ libgnome_bluetooth_introspect_headers =			\
 	bluetooth-chooser-combo.h			\
 	bluetooth-filter-widget.h			\
 	bluetooth-enums.h				\
-	bluetooth-utils.h
+	bluetooth-utils.h				\
+	bluetooth-settings-widget.h
 
 gnomebluetoothdir = $(pkgincludedir)
 gnomebluetooth_HEADERS = $(libgnome_bluetooth_introspect_headers)
@@ -54,6 +74,7 @@ AM_CFLAGS =						\
 	$(LIBGNOMEBT_CFLAGS)				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)				\
+	-DPKGDATADIR="\"$(pkgdatadir)\""		\
 	-DG_LOG_DOMAIN=\"Bluetooth\"
 
 -include $(INTROSPECTION_MAKEFILE)
@@ -85,16 +106,16 @@ CLEANFILES += $(gir_DATA) $(typelib_DATA)
 
 endif # HAVE_INTROSPECTION
 
-BUILT_SOURCES = bluetooth-client-glue.h \
-		bluetooth-client-glue.c \
-		bluetooth-fdo-glue.h \
-		bluetooth-fdo-glue.c \
-		gnome-bluetooth-enum-types.h \
-		gnome-bluetooth-enum-types.c
+BUILT_SOURCES += bluetooth-client-glue.h \
+		 bluetooth-client-glue.c \
+		 bluetooth-fdo-glue.h \
+		 bluetooth-fdo-glue.c \
+		 gnome-bluetooth-enum-types.h \
+		 gnome-bluetooth-enum-types.c
 
 CLEANFILES += $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent test-deviceselection test-class
+noinst_PROGRAMS = test-client test-agent test-deviceselection test-class test-settings test-pairing-dialog
 
 test_client_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
@@ -104,7 +125,21 @@ test_deviceselection_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_class_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
-EXTRA_DIST += bluetooth-client.xml bluetooth-fdo.xml gnome-bluetooth.symbols
+test_settings_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
+
+test_pairing_dialog_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
+
+pin_DATA = pin-code-database.xml
+pindir = $(pkgdatadir)
+
+all: check
+
+check:
+	@if test -n $(XMLLINT) ; then \
+		xmllint --noout --valid $(srcdir)/pin-code-database.xml ;	\
+	fi
+
+EXTRA_DIST += bluetooth-client.xml bluetooth-fdo.xml gnome-bluetooth.symbols $(pin_DATA)
 
 MAINTAINERCLEANFILES = Makefile.in
 
