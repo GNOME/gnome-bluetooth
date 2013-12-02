@@ -996,20 +996,21 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
 	GError *error = NULL;
-	GDBusProxy *adapter;
+	GtkTreePath *path;
 	Properties *properties;
 	gboolean ret;
 	GtkTreeIter iter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	adapter = _bluetooth_client_get_default_adapter (client);
-	if (adapter == NULL)
+	if (priv->default_adapter == NULL)
 		return FALSE;
 
-	get_iter_from_proxy (priv->store, &iter, adapter);
+	path = gtk_tree_row_reference_get_path (priv->default_adapter);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
+                            BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
+        gtk_tree_path_free (path);
 
 	if (properties == NULL)
 		return FALSE;
@@ -1035,7 +1036,6 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	}
 
 	g_object_unref (properties);
-	g_object_unref(adapter);
 
 	return ret;
 }
