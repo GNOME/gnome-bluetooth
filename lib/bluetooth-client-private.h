@@ -36,7 +36,6 @@ typedef void (*BluetoothClientSetupFunc) (BluetoothClient *client,
 
 gboolean bluetooth_client_setup_device (BluetoothClient          *client,
 					const char               *device_path,
-					const char               *agent,
 					BluetoothClientSetupFunc  func,
 					gboolean                  pair);
 

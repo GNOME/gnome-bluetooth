@@ -1410,7 +1410,6 @@ device_pair_callback (GDBusProxy       *proxy,
 gboolean
 bluetooth_client_setup_device (BluetoothClient          *client,
 			       const char               *path,
-			       const char               *agent,
 			       BluetoothClientSetupFunc  func,
 			       gboolean                  pair)
 {

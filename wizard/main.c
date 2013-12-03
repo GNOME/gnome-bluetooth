@@ -647,7 +647,7 @@ void prepare_callback (GtkWidget *assistant,
 	}
 
 	if (page == page_connecting && create_started == FALSE) {
-		const char *device, *path = AGENT_PATH;
+		const char *device;
 		char *text;
 		GValue value = { 0, };
 		GDBusProxy *proxy;
@@ -698,7 +698,6 @@ void prepare_callback (GtkWidget *assistant,
 
 		bluetooth_client_setup_device (client,
 					       device,
-					       path,
 					       create_callback,
 					       pair);
 
