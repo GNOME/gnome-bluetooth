@@ -32,7 +32,7 @@
 
 #include "bluetooth-agent.h"
 
-static gboolean
+static void
 agent_confirm (GDBusMethodInvocation *invocation,
 	       GDBusProxy *device,
 	       guint passkey,
@@ -45,8 +45,6 @@ agent_confirm (GDBusMethodInvocation *invocation,
 	g_print ("Confirming passkey %6.6d from %s\n", passkey, path);
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
-
-	return TRUE;
 }
 
 static GMainLoop *mainloop = NULL;
