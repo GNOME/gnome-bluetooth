@@ -1416,7 +1416,7 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	CreateDeviceData *devdata;
-	GDBusProxy *adapter, *device;
+	GDBusProxy *device;
 	GtkTreeIter iter, adapter_iter;
 	gboolean paired;
 	GError *err = NULL;
@@ -1431,10 +1431,12 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 			    BLUETOOTH_COLUMN_PAIRED, &paired, -1);
 
 	if (paired != FALSE &&
-			gtk_tree_model_iter_parent (GTK_TREE_MODEL(priv->store),
-						    &adapter_iter, &iter)) {
+	    gtk_tree_model_iter_parent (GTK_TREE_MODEL(priv->store), &adapter_iter, &iter)) {
+		GDBusProxy *adapter;
+
 		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &adapter_iter,
-				    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+				    BLUETOOTH_COLUMN_PROXY, &adapter,
+				    -1);
 		adapter1_call_remove_device_sync (ADAPTER1 (adapter),
 						  path,
 						  NULL, &err);
