@@ -573,16 +573,22 @@ connect_callback (GObject      *source_object,
 }
 
 static void
-create_callback (BluetoothClient *_client,
-		 const GError *error,
-		 const char *device)
+create_callback (GObject      *source_object,
+		 GAsyncResult *res,
+		 gpointer      user_data)
 {
 	ConnectData *data;
+	GError *error = NULL;
+	gboolean ret;
+	char *path;
 
 	create_started = FALSE;
 
+	ret = bluetooth_client_setup_device_finish (BLUETOOTH_CLIENT (source_object),
+						    res, &path, &error);
+
 	/* Create failed */
-	if (error != NULL) {
+	if (ret == FALSE) {
 		char *text;
 
 		summary_failure = TRUE;
@@ -594,21 +600,24 @@ create_callback (BluetoothClient *_client,
 		 */
 		text = g_strdup_printf(_("Setting up '%s' failed"), target_name);
 
-		g_warning ("Setting up '%s' failed: %s", target_name, error->message);
+		g_warning ("Setting up '%s' (at %s) failed: %s", target_name, path, error->message);
 
 		gtk_label_set_markup(GTK_LABEL(label_summary), text);
 		g_free (text);
 
+		g_error_free (error);
+		g_free (path);
+
 		return;
 	}
 
-	bluetooth_client_set_trusted(client, device, TRUE);
+	bluetooth_client_set_trusted (client, path, TRUE);
 
 	data = g_new0 (ConnectData, 1);
-	data->device = device;
+	data->device = path;
 	data->timer = g_timer_new ();
 
-	bluetooth_client_connect_service (client, device, TRUE, NULL, connect_callback, data);
+	bluetooth_client_connect_service (client, path, TRUE, NULL, connect_callback, data);
 	gtk_assistant_set_current_page (window_assistant, PAGE_FINISHING);
 }
 
@@ -687,8 +696,10 @@ void prepare_callback (GtkWidget *assistant,
 
 		bluetooth_client_setup_device (client,
 					       device,
-					       create_callback,
-					       pair);
+					       pair,
+					       NULL,
+					       (GAsyncReadyCallback) create_callback,
+					       NULL);
 
 		create_started = TRUE;
 	} else {
