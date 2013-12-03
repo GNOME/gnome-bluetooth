@@ -125,7 +125,7 @@ create_phone_dialogue (const char *bdaddr)
 
 	dialog = gtk_dialog_new_with_buttons("My test prefs", NULL,
 					     0,
-					     GTK_STOCK_CLOSE, GTK_RESPONSE_ACCEPT, NULL);
+					     "_Close", GTK_RESPONSE_ACCEPT, NULL);
 	button = bluetooth_chooser_button_new ();
 	if (bdaddr != NULL)
 		g_object_set (G_OBJECT (button), "device", bdaddr, NULL);
@@ -154,8 +154,8 @@ create_dialogue (const char *title)
 
 	dialog = gtk_dialog_new_with_buttons(title, NULL,
 					     0,
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
-					     GTK_STOCK_CONNECT, GTK_RESPONSE_ACCEPT, NULL);
+					     "_Cancel", GTK_RESPONSE_REJECT,
+					     "Connect", GTK_RESPONSE_ACCEPT, NULL);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 					GTK_RESPONSE_ACCEPT, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);

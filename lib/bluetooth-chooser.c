@@ -121,7 +121,7 @@ connected_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
 
-	g_object_set (cell, "icon-name", connected ? GTK_STOCK_CONNECT : NULL, NULL);
+	g_object_set (cell, "icon-name", connected ? "gtk-connected" : NULL, NULL);
 }
 
 static void
