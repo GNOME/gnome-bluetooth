@@ -49,6 +49,8 @@ GDBusProxy *bluetooth_client_get_device (BluetoothClient *client,
 void bluetooth_client_dump_device (GtkTreeModel *model,
 				   GtkTreeIter *iter);
 
+gboolean bluetooth_client_get_connectable(const char **uuids);
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_CLIENT_PRIVATE_H */
