@@ -61,51 +61,66 @@ gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path);
 gboolean bluetooth_agent_register(BluetoothAgent *agent);
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent);
 
-typedef gboolean (*BluetoothAgentPasskeyFunc) (GDBusMethodInvocation *invocation,
-					       GDBusProxy *device, gpointer data);
-typedef gboolean (*BluetoothAgentDisplayFunc) (GDBusMethodInvocation *invocation,
-					GDBusProxy *device, guint passkey,
-						guint entered, gpointer data);
-typedef gboolean (*BluetoothAgentDisplayPinCodeFunc) (GDBusMethodInvocation *invocation,
-						      GDBusProxy *device, const char *pincode,
-						      gpointer data);
-typedef gboolean (*BluetoothAgentConfirmFunc) (GDBusMethodInvocation *invocation,
-					GDBusProxy *device, guint passkey,
-								gpointer data);
-typedef gboolean (*BluetoothAgentAuthorizeFunc) (GDBusMethodInvocation *invocation,
-				  GDBusProxy *device, gpointer data);
-typedef gboolean (*BluetoothAgentAuthorizeServiceFunc) (GDBusMethodInvocation *invocation,
-					GDBusProxy *device, const char *uuid,
-								gpointer data);
+typedef void (*BluetoothAgentPasskeyFunc) (GDBusMethodInvocation *invocation,
+					   GDBusProxy            *device,
+					   gpointer               data);
+typedef void (*BluetoothAgentDisplayFunc) (GDBusMethodInvocation *invocation,
+					   GDBusProxy            *device,
+					   guint                  passkey,
+					   guint                  entered,
+					   gpointer               data);
+typedef void (*BluetoothAgentDisplayPinCodeFunc) (GDBusMethodInvocation *invocation,
+						  GDBusProxy            *device,
+						  const char            *pincode,
+						  gpointer               data);
+typedef void (*BluetoothAgentConfirmFunc) (GDBusMethodInvocation *invocation,
+					   GDBusProxy            *device,
+					   guint                  passkey,
+					   gpointer               data);
+typedef void (*BluetoothAgentAuthorizeFunc) (GDBusMethodInvocation *invocation,
+					     GDBusProxy            *device,
+					     gpointer               data);
+typedef void (*BluetoothAgentAuthorizeServiceFunc) (GDBusMethodInvocation *invocation,
+						    GDBusProxy            *device,
+						    const char            *uuid,
+						    gpointer               data);
 typedef gboolean (*BluetoothAgentCancelFunc) (GDBusMethodInvocation *invocation,
-								gpointer data);
+					      gpointer               data);
 
-void bluetooth_agent_set_pincode_func(BluetoothAgent *agent,
-				BluetoothAgentPasskeyFunc func, gpointer data);
-void bluetooth_agent_set_passkey_func(BluetoothAgent *agent,
-				BluetoothAgentPasskeyFunc func, gpointer data);
-void bluetooth_agent_set_display_func(BluetoothAgent *agent,
-				BluetoothAgentDisplayFunc func, gpointer data);
-void bluetooth_agent_set_display_pincode_func(BluetoothAgent *agent,
-				BluetoothAgentDisplayPinCodeFunc func, gpointer data);
-void bluetooth_agent_set_confirm_func(BluetoothAgent *agent,
-				BluetoothAgentConfirmFunc func, gpointer data);
-void bluetooth_agent_set_authorize_func(BluetoothAgent *agent,
-				BluetoothAgentAuthorizeFunc func, gpointer data);
-void bluetooth_agent_set_authorize_service_func(BluetoothAgent *agent,
-				BluetoothAgentAuthorizeServiceFunc func, gpointer data);
-void bluetooth_agent_set_cancel_func(BluetoothAgent *agent,
-				BluetoothAgentCancelFunc func, gpointer data);
+void bluetooth_agent_set_pincode_func (BluetoothAgent            *agent,
+				       BluetoothAgentPasskeyFunc  func,
+				       gpointer                   data);
+void bluetooth_agent_set_passkey_func (BluetoothAgent            *agent,
+				       BluetoothAgentPasskeyFunc  func,
+				       gpointer                   data);
+void bluetooth_agent_set_display_func (BluetoothAgent            *agent,
+				       BluetoothAgentDisplayFunc  func,
+				       gpointer                   data);
+void bluetooth_agent_set_display_pincode_func (BluetoothAgent                   *agent,
+					       BluetoothAgentDisplayPinCodeFunc  func,
+					       gpointer                          data);
+void bluetooth_agent_set_confirm_func (BluetoothAgent            *agent,
+				       BluetoothAgentConfirmFunc  func,
+				       gpointer                   data);
+void bluetooth_agent_set_authorize_func (BluetoothAgent              *agent,
+					 BluetoothAgentAuthorizeFunc  func,
+					 gpointer                     data);
+void bluetooth_agent_set_authorize_service_func (BluetoothAgent                     *agent,
+						 BluetoothAgentAuthorizeServiceFunc  func,
+						 gpointer                            data);
+void bluetooth_agent_set_cancel_func (BluetoothAgent           *agent,
+				      BluetoothAgentCancelFunc  func,
+				      gpointer                  data);
 
 #define AGENT_ERROR (bluetooth_agent_error_quark())
-#define AGENT_ERROR_TYPE (bluetooth_agent_error_get_type()) 
+#define AGENT_ERROR_TYPE (bluetooth_agent_error_get_type())
 
 typedef enum {
 	AGENT_ERROR_REJECT
 } AgentError;
 
-GType bluetooth_agent_error_get_type(void);
-GQuark bluetooth_agent_error_quark(void);
+GType  bluetooth_agent_error_get_type (void);
+GQuark bluetooth_agent_error_quark    (void);
 
 G_END_DECLS
 
