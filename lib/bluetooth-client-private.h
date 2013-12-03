@@ -34,10 +34,16 @@ typedef void (*BluetoothClientSetupFunc) (BluetoothClient *client,
 					  const GError    *error,
 					  const char      *device_path);
 
-gboolean bluetooth_client_setup_device (BluetoothClient          *client,
-					const char               *device_path,
-					BluetoothClientSetupFunc  func,
-					gboolean                  pair);
+void bluetooth_client_setup_device (BluetoothClient          *client,
+				    const char               *path,
+				    gboolean                  pair,
+				    GCancellable             *cancellable,
+				    GAsyncReadyCallback       callback,
+				    gpointer                  user_data);
+gboolean bluetooth_client_setup_device_finish (BluetoothClient  *client,
+					       GAsyncResult     *res,
+					       char            **path,
+					       GError          **error);
 
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);

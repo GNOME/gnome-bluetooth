@@ -1386,35 +1386,57 @@ typedef struct {
 } CreateDeviceData;
 
 static void
-device_pair_callback (GDBusProxy       *proxy,
-		      GAsyncResult     *res,
-		      CreateDeviceData *devdata)
+device_pair_callback (GDBusProxy         *proxy,
+		      GAsyncResult       *res,
+		      GSimpleAsyncResult *simple)
 {
 	GError *error = NULL;
-	const char *path;
 
-	if (device1_call_pair_finish (DEVICE1(proxy), res, &error) == FALSE)
-		g_warning ("Pair() failed: %s", error->message);
+	if (device1_call_pair_finish (DEVICE1(proxy), res, &error) == FALSE) {
+		g_warning ("Pair() failed for %s: %s",
+			   g_dbus_proxy_get_object_path (proxy),
+			   error->message);
+		g_simple_async_result_take_error (simple, error);
+	} else {
+		g_simple_async_result_set_op_res_gboolean (simple, TRUE);
+	}
 
-	path = g_dbus_proxy_get_object_path(proxy);
-	if (devdata->func)
-		devdata->func (devdata->client, error, path);
+	g_simple_async_result_complete_in_idle (simple);
 
-	if (error != NULL)
-		g_error_free (error);
-
-	g_object_unref (devdata->client);
-	g_free (devdata);
+	g_object_unref (simple);
 }
 
 gboolean
+bluetooth_client_setup_device_finish (BluetoothClient  *client,
+				      GAsyncResult     *res,
+				      char            **path,
+				      GError          **error)
+{
+	GSimpleAsyncResult *simple;
+
+	simple = (GSimpleAsyncResult *) res;
+
+	g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == bluetooth_client_setup_device);
+
+	if (path != NULL)
+		*path = g_object_get_data (G_OBJECT (res), "device-object-path");
+
+	if (g_simple_async_result_get_op_res_gboolean (simple))
+		return TRUE;
+	g_simple_async_result_propagate_error (simple, error);
+	return FALSE;
+}
+
+void
 bluetooth_client_setup_device (BluetoothClient          *client,
 			       const char               *path,
-			       BluetoothClientSetupFunc  func,
-			       gboolean                  pair)
+			       gboolean                  pair,
+			       GCancellable             *cancellable,
+			       GAsyncReadyCallback       callback,
+			       gpointer                  user_data)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	CreateDeviceData *devdata;
+	GSimpleAsyncResult *simple;
 	GDBusProxy *device;
 	GtkTreeIter iter, adapter_iter;
 	gboolean paired;
@@ -1422,8 +1444,21 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 
-	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
-		return FALSE;
+	simple = g_simple_async_result_new (G_OBJECT (client),
+					    callback,
+					    user_data,
+					    bluetooth_client_setup_device);
+	g_simple_async_result_set_check_cancellable (simple, cancellable);
+	g_object_set_data (G_OBJECT (simple), "device-object-path", g_strdup (path));
+
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE) {
+		g_simple_async_result_set_error (simple, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
+						 "Device with object path %s does not exist",
+						 path);
+		g_simple_async_result_complete_in_idle (simple);
+		g_object_unref (simple);
+		return;
+	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
 			    BLUETOOTH_COLUMN_PROXY, &device,
@@ -1447,21 +1482,17 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 	}
 
 	if (pair == TRUE) {
-		devdata = g_new0 (CreateDeviceData, 1);
-		devdata->func = func;
-		devdata->client = g_object_ref (client);
-
 		device1_call_pair (DEVICE1(device),
-				   NULL,
+				   cancellable,
 				   (GAsyncReadyCallback) device_pair_callback,
-				   devdata);
+				   simple);
 	} else {
-		if (func)
-			func (client, NULL, path);
+		g_simple_async_result_set_op_res_gboolean (simple, TRUE);
+		g_simple_async_result_complete_in_idle (simple);
+		g_object_unref (simple);
 	}
 
 	g_object_unref (device);
-	return TRUE;
 }
 
 gboolean
