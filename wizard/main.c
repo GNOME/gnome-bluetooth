@@ -313,7 +313,7 @@ pincode_callback_timeout_cb (gpointer user_data)
 	return G_SOURCE_REMOVE;
 }
 
-static gboolean
+static void
 pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
@@ -321,7 +321,6 @@ pincode_callback (GDBusMethodInvocation *invocation,
 	g_assert (pincode_cb_id == 0);
 	g_object_set_data_full (G_OBJECT (invocation), "device", g_object_ref (device), g_object_unref);
 	pincode_cb_id = g_timeout_add (500, pincode_callback_timeout_cb, invocation);
-	return TRUE;
 }
 
 void
@@ -387,7 +386,7 @@ matches_cb (GtkButton *button,
 	g_object_set_data (G_OBJECT(matches_button), "invocation", NULL);
 }
 
-static gboolean
+static void
 authorize_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  gpointer user_data)
@@ -395,11 +394,9 @@ authorize_callback (GDBusMethodInvocation *invocation,
 	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	replace_target_properties_for_device (device);
-
-	return TRUE;
 }
 
-static gboolean
+static void
 authorize_service_callback (GDBusMethodInvocation *invocation,
 			    GDBusProxy *device,
 			    const char *uuid,
@@ -408,11 +405,9 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 	g_dbus_method_invocation_return_value (invocation, NULL);
 
 	replace_target_properties_for_device (device);
-
-	return TRUE;
 }
 
-static gboolean
+static void
 confirm_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  guint pin,
@@ -438,11 +433,9 @@ confirm_callback (GDBusMethodInvocation *invocation,
 
 	g_object_set_data (G_OBJECT(does_not_match_button), "invocation", invocation);
 	g_object_set_data (G_OBJECT(matches_button), "invocation", invocation);
-
-	return TRUE;
 }
 
-static gboolean
+static void
 display_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy *device,
 		  guint pin,
@@ -490,11 +483,9 @@ display_callback (GDBusMethodInvocation *invocation,
 	g_free(code);
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
-
-	return TRUE;
 }
 
-static gboolean
+static void
 display_pincode_callback (GDBusMethodInvocation *invocation,
 			  GDBusProxy *device,
 			  const char *pincode,
@@ -507,8 +498,6 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 	g_dbus_method_invocation_return_dbus_error (invocation,
 						    "org.bluez.Error.Rejected",
 						    "Rejected bluetoothd generated PIN code");
-
-	return TRUE;
 }
 
 static gboolean
