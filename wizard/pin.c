@@ -62,6 +62,7 @@ typedef struct {
 	guint type;
 	const char *address;
 	const char *name;
+	gboolean confirm;
 } PinParseData;
 
 static void
@@ -94,6 +95,7 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 				return;
 			if (strstr (pdata->name, *attr_values) == NULL)
 				return;
+			pdata->confirm = FALSE;
 		} else if (g_str_equal (*attr_names, "pin")) {
 			if (g_str_has_prefix (*attr_values, MAX_DIGITS_PIN_PREFIX) != FALSE) {
 				pdata->max_digits = strtoul (*attr_values + strlen (MAX_DIGITS_PIN_PREFIX), NULL, 0);
@@ -110,7 +112,11 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 }
 
 char *
-get_pincode_for_device (guint type, const char *address, const char *name, guint *max_digits)
+get_pincode_for_device (guint       type,
+			const char *address,
+			const char *name,
+			guint      *max_digits,
+			gboolean   *confirm)
 {
 	GMarkupParseContext *ctx;
 	GMarkupParser parser = { pin_db_parse_start_tag, NULL, NULL, NULL, NULL };
@@ -142,6 +148,7 @@ get_pincode_for_device (guint type, const char *address, const char *name, guint
 	data.type = type;
 	data.address = address;
 	data.name = name;
+	data.confirm = TRUE;
 
 	ctx = g_markup_parse_context_new (&parser, 0, &data, NULL);
 
@@ -155,6 +162,8 @@ get_pincode_for_device (guint type, const char *address, const char *name, guint
 
 	if (max_digits != NULL)
 		*max_digits = data.max_digits;
+	if (confirm != NULL)
+		*confirm = data.confirm;
 
 	g_debug ("Got pin '%s' (max digits: %d) for device '%s' (type: %s address: %s)",
 		 data.ret_pin, data.max_digits,

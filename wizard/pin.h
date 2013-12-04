@@ -25,5 +25,9 @@
 
 #define PIN_NUM_DIGITS 6
 
-char *get_pincode_for_device (guint type, const char *address, const char *name, guint *max_digits);
+char *get_pincode_for_device (guint       type,
+			      const char *address,
+			      const char *name,
+			      guint      *max_digits,
+			      gboolean   *confirm);
 

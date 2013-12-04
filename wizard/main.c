@@ -221,7 +221,8 @@ update_user_pincode (void)
 	pincode = get_pincode_for_device (target_type,
 					  target_address,
 					  target_name,
-					  &target_max_digits);
+					  &target_max_digits,
+					  NULL);
 	if (pincode != NULL) {
 		if (g_str_equal (pincode, "KEYBOARD"))
 			target_ui_behaviour = PAIRING_UI_KEYBOARD;
