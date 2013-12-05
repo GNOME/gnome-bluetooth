@@ -75,6 +75,13 @@ enum {
 	PROP_DEFAULT_ADAPTER_DISCOVERING
 };
 
+enum {
+	DEVICE_REMOVED,
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
+
 static const char *connectable_uuids[] = {
 	"HSP",
 	"AudioSource",
@@ -430,8 +437,10 @@ device_removed (const char      *path,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 
-	if (get_iter_from_path(priv->store, &iter, path) == TRUE)
+	if (get_iter_from_path(priv->store, &iter, path) == TRUE) {
+		g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
 		gtk_tree_store_remove(priv->store, &iter);
+	}
 }
 
 static void
@@ -1128,6 +1137,23 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	object_class->finalize = bluetooth_client_finalize;
 	object_class->get_property = bluetooth_client_get_property;
 	object_class->set_property = bluetooth_client_set_property;
+
+	/**
+	 * BluetoothClient::device-removed:
+	 * @client: a #BluetoothClient object which received the signal
+	 * @device: the D-Bus object path for the now-removed device
+	 *
+	 * The #BluetoothClient::device-removed signal is launched when a
+	 * device gets removed from the model.
+	 **/
+	signals[DEVICE_REMOVED] =
+		g_signal_new ("device-removed",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__STRING,
+			      G_TYPE_NONE, 1, G_TYPE_STRING);
 
 	/**
 	 * BluetoothClient:default-adapter:
