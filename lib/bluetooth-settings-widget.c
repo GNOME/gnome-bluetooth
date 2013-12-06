@@ -624,7 +624,7 @@ connect_callback (GObject      *source_object,
 		g_debug ("Failed to connect to device %s", data->device);
 	}
 
-	turn_off_pairing (user_data, data->device);
+	turn_off_pairing (data->self, data->device);
 
 bail:
 	if (data->timeout_id > 0)
