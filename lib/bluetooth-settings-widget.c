@@ -1223,7 +1223,7 @@ activate_row (BluetoothSettingsWidget *self,
 		//FIXME pass the row
 		//FIXME add UUIDs to the row
 		//FIXME add icon to the row
-		g_object_get (G_OBJECT (proxy), "proxy", &proxy, NULL);
+		g_object_get (G_OBJECT (row), "proxy", &proxy, NULL);
 		update_properties (self, proxy);
 		g_object_unref (proxy);
 
