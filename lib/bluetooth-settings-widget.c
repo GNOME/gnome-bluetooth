@@ -311,8 +311,6 @@ enter_pin_cb (GtkDialog *dialog,
 		char *pin;
 		BluetoothPairingMode mode;
 
-		g_dbus_method_invocation_return_value (invocation, NULL);
-
 		mode = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog), "mode"));
 		name = g_object_get_data (G_OBJECT (dialog), "name");
 		pin = bluetooth_pairing_dialog_get_pin (BLUETOOTH_PAIRING_DIALOG (dialog));
