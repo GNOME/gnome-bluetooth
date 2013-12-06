@@ -70,7 +70,9 @@ struct _BluetoothSettingsWidgetPrivate {
 	GtkWidget           *device_spinner;
 	GHashTable          *connecting_devices;
 
+	/* Visible */
 	GtkWidget           *visible_label;
+	GtkWidget           *visible_revealer;
 
 	GList               *boxes;
 	GList               *boxes_reverse;
@@ -937,15 +939,20 @@ static void
 update_visibility (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	char *name, *label;
+	char *name;
 
 	g_object_get (G_OBJECT (priv->client), "default-adapter-name", &name, NULL);
-	/* translators: %s is the name of the computer, for example:
-	 * Now visible as “Bastien Nocera's Computer” */
-	label = g_strdup_printf (_("Now visible as “%s”"), name);
-	g_free (name);
-	gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
-	g_free (label);
+	if (name != NULL) {
+		char *label;
+
+		/* translators: %s is the name of the computer, for example:
+		 * Now visible as “Bastien Nocera's Computer” */
+		label = g_strdup_printf (_("Now visible as “%s”"), name);
+		g_free (name);
+		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
+		g_free (label);
+	}
+	gtk_revealer_set_reveal_child (GTK_REVEALER (priv->visible_revealer), name != NULL);
 }
 
 static void
@@ -1614,10 +1621,12 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	gtk_container_set_focus_vadjustment (GTK_CONTAINER (widget), priv->focus_adjustment);
 
 	/* Discoverable label */
+	priv->visible_revealer = gtk_revealer_new ();
 	priv->visible_label = gtk_label_new ("Now visible as “Foobar”");
 	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 0.5, 0.5);
-	gtk_box_pack_start (GTK_BOX (widget), priv->visible_label, FALSE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (priv->visible_revealer), priv->visible_label);
+	gtk_box_pack_start (GTK_BOX (widget), priv->visible_revealer, FALSE, TRUE, 0);
 	update_visibility (self);
 
 	setup_properties_dialog (self);
