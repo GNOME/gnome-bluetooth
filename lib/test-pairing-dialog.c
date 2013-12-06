@@ -51,8 +51,8 @@ int main (int argc, char **argv)
 
 	window = bluetooth_pairing_dialog_new ();
 	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (window),
-					   BLUETOOTH_PAIRING_MODE_YES_NO,
-					   NULL,
+					   BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION,
+					   "123456",
 					   "My device");
 	g_signal_connect (G_OBJECT (window), "response",
 			  G_CALLBACK (response_cb), window);
