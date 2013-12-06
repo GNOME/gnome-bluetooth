@@ -655,6 +655,7 @@ create_callback (GObject      *source_object,
 	/* Create failed */
 	if (ret == FALSE) {
 		//char *text;
+		char *dbus_error;
 
 		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
 			g_error_free (error);
@@ -664,19 +665,22 @@ create_callback (GObject      *source_object,
 
 		turn_off_pairing (user_data, path);
 
-		//FIXME show an error?
+		dbus_error = g_dbus_error_get_remote_error (error);
+		if (g_strcmp0 (dbus_error, "org.bluez.Error.AuthenticationCanceled") != 0) {
+			//FIXME show an error?
+			/* translators:
+			 * The '%s' is the device name, for example:
+			 * Setting up 'Sony Bluetooth Headset' failed
+			 */
+			//text = g_strdup_printf(_("Setting up '%s' failed"), target_name);
 
-		/* translators:
-		 * The '%s' is the device name, for example:
-		 * Setting up 'Sony Bluetooth Headset' failed
-		 */
-		//text = g_strdup_printf(_("Setting up '%s' failed"), target_name);
+			g_warning ("Setting up %s failed: %s", path, error->message);
 
-		g_warning ("Setting up %s failed: %s", path, error->message);
+			//gtk_label_set_markup(GTK_LABEL(label_summary), text);
+			//g_free (text);
+		}
 
-		//gtk_label_set_markup(GTK_LABEL(label_summary), text);
-		//g_free (text);
-
+		g_free (dbus_error);
 		g_error_free (error);
 		g_free (path);
 		return;
