@@ -1553,8 +1553,8 @@ bluetooth_client_get_device (BluetoothClient *client,
 }
 
 static void
-connect_callback (GDBusProxy   *proxy,
-		  GAsyncResult *res,
+connect_callback (GDBusProxy         *proxy,
+		  GAsyncResult       *res,
 		  GSimpleAsyncResult *simple)
 {
 	gboolean retval;
