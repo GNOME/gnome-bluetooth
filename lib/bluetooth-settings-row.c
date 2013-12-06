@@ -124,7 +124,7 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 	gtk_widget_set_margin_end (priv->status, 24);
 	gtk_box_pack_start (GTK_BOX (box), priv->status, FALSE, TRUE, 0);
 	g_object_bind_property (priv->spinner, "visible",
-				priv->status, "visible", G_BINDING_INVERT_BOOLEAN);
+				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
 
 	gtk_widget_show (priv->status);
 	gtk_widget_show_all (GTK_WIDGET (self));
