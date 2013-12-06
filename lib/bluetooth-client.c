@@ -248,6 +248,22 @@ bluetooth_client_get_connectable(const char **uuids)
 	return FALSE;
 }
 
+static const char *
+audio_icon_override (BluetoothType type)
+{
+	/* audio-card, you're ugly */
+	switch (type) {
+	case BLUETOOTH_TYPE_HEADSET:
+		return "audio-headset";
+	case BLUETOOTH_TYPE_HEADPHONES:
+		return "audio-headphones";
+	case BLUETOOTH_TYPE_OTHER_AUDIO:
+		return "audio-speakers";
+	default:
+		return NULL;
+	}
+}
+
 static void
 device_g_properties_changed (GDBusProxy      *device,
 			     GVariant        *changed_p,
@@ -279,8 +295,11 @@ device_g_properties_changed (GDBusProxy      *device,
 		} else if (g_str_equal (property, "Icon") == TRUE) {
 			const gchar *icon = g_variant_get_string (v, NULL);
 
-			gtk_tree_store_set (priv->store, &iter,
-					    BLUETOOTH_COLUMN_ICON, icon, -1);
+			/* See "Class" handling below */
+			if (g_strcmp0 (icon, "audio-card") != 0) {
+				gtk_tree_store_set (priv->store, &iter,
+						    BLUETOOTH_COLUMN_ICON, icon, -1);
+			}
 		} else if (g_str_equal (property, "Paired") == TRUE) {
 			gboolean paired = g_variant_get_boolean (v);
 
@@ -312,11 +331,21 @@ device_g_properties_changed (GDBusProxy      *device,
 					    -1);
 		} else if (g_str_equal (property, "Class") == TRUE) {
 			BluetoothType type;
+			const char *icon = NULL;
 
 			type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
-			gtk_tree_store_set (priv->store, &iter,
-					    BLUETOOTH_COLUMN_TYPE, type,
-					    -1);
+			icon = audio_icon_override (type);
+
+			if (icon) {
+				gtk_tree_store_set (priv->store, &iter,
+						    BLUETOOTH_COLUMN_TYPE, type,
+						    BLUETOOTH_COLUMN_ICON, icon,
+						    -1);
+			} else {
+				gtk_tree_store_set (priv->store, &iter,
+						    BLUETOOTH_COLUMN_TYPE, type,
+						    -1);
+			}
 		} else {
 			g_debug ("Unhandled property: %s", property);
 		}
@@ -376,9 +405,12 @@ device_added (ObjectManager   *manager,
 
 	v = g_variant_lookup_value (dict, "Class", G_VARIANT_TYPE_UINT32);
 	type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
+	icon = audio_icon_override (type);
 
-	v = g_variant_lookup_value (dict, "Icon", G_VARIANT_TYPE_STRING);
-	icon = v ? g_variant_get_string (v, NULL) : "bluetooth";
+	if (icon == NULL) {
+		v = g_variant_lookup_value (dict, "Icon", G_VARIANT_TYPE_STRING);
+		icon = v ? g_variant_get_string (v, NULL) : "bluetooth";
+	}
 
 	v = g_variant_lookup_value (dict, "Paired", G_VARIANT_TYPE_BOOLEAN);
 	paired = v ? g_variant_get_boolean (v) : FALSE;
