@@ -698,6 +698,29 @@ create_callback (GObject      *source_object,
 	//gtk_assistant_set_current_page (window_assistant, PAGE_FINISHING);
 }
 
+static void start_pairing (BluetoothSettingsWidget *self,
+			   GtkListBoxRow           *row);
+
+static void
+device_name_appeared (GObject    *gobject,
+		      GParamSpec *pspec,
+		      gpointer    user_data)
+{
+	char *name;
+
+	g_object_get (G_OBJECT (gobject),
+		      "name", &name,
+		      NULL);
+	if (!name)
+		return;
+
+	g_debug ("Pairing device name is now '%s'", name);
+	start_pairing (user_data, GTK_LIST_BOX_ROW (gobject));
+	g_free (name);
+
+	g_signal_handlers_disconnect_by_func (gobject, device_name_appeared, user_data);
+}
+
 static void
 start_pairing (BluetoothSettingsWidget *self,
 	       GtkListBoxRow           *row)
@@ -717,6 +740,18 @@ start_pairing (BluetoothSettingsWidget *self,
 		      "name", &name,
 		      "legacy-pairing", &legacy_pairing,
 		      NULL);
+
+	if (name == NULL) {
+		g_debug ("No name yet, will start pairing later");
+		g_signal_connect (G_OBJECT (row), "notify::name",
+				  G_CALLBACK (device_name_appeared), self);
+		g_object_unref (proxy);
+		g_free (bdaddr);
+		g_free (name);
+		return;
+	}
+
+	g_debug ("Starting pairing for '%s'", name);
 
 	if (legacy_pairing) {
 		const char *pincode;
@@ -1233,12 +1268,6 @@ activate_row (BluetoothSettingsWidget *self,
 		gtk_window_set_modal (GTK_WINDOW (w), TRUE);
 		gtk_window_present (GTK_WINDOW (w));
 	} else {
-		char *name;
-
-		g_object_get (G_OBJECT (row), "name", &name, NULL);
-		g_debug ("Start pairing '%s'", name);
-		g_free (name);
-
 		start_pairing (self, row);
 	}
 }
