@@ -288,15 +288,8 @@ display_cb (GtkDialog *dialog,
 	    gpointer   user_data)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
-	GDBusMethodInvocation *invocation;
 
-	invocation = g_object_get_data (G_OBJECT (dialog), "invocation");
-
-	g_dbus_method_invocation_return_dbus_error (invocation,
-						    "org.bluez.Error.Canceled",
-						    "User cancelled pairing");
-
-	g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", NULL);
+	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
 }
 
 static void
@@ -328,6 +321,8 @@ enter_pin_cb (GtkDialog *dialog,
 		g_dbus_method_invocation_return_dbus_error (invocation,
 							    "org.bluez.Error.Canceled",
 							    "User cancelled pairing");
+		g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+		return;
 	}
 
 	g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", NULL);
@@ -384,11 +379,11 @@ pincode_callback (GDBusMethodInvocation *invocation,
 
 	setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
 
-	g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", invocation);
 	g_object_set_data_full (G_OBJECT (priv->pairing_dialog), "name", g_strdup (name), g_free);
 	g_object_set_data (G_OBJECT (priv->pairing_dialog), "mode", GUINT_TO_POINTER (mode));
 
 	if (confirm_pin) {
+		g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", invocation);
 		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 						   BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION,
 						   default_pin,
@@ -398,6 +393,8 @@ pincode_callback (GDBusMethodInvocation *invocation,
 	} else {
 		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 						   mode, display_pin, name);
+		g_dbus_method_invocation_return_value (invocation,
+						       g_variant_new ("(s)", default_pin));
 		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
 				  G_CALLBACK (display_cb), user_data);
 	}
