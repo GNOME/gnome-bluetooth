@@ -806,7 +806,7 @@ switch_connected_active_changed (GtkSwitch               *button,
 
 static void
 update_properties (BluetoothSettingsWidget *self,
-		   GDBusProxy       *proxy)
+		   GDBusProxy              *proxy)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	GtkSwitch *button;
