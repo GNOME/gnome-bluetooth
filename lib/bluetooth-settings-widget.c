@@ -1488,6 +1488,10 @@ row_changed_cb (GtkTreeModel *tree_model,
 				      "name", name,
 				      "legacy-pairing", legacy_pairing,
 				      NULL);
+
+			/* Update the properties if necessary */
+			if (g_strcmp0 (priv->selected_object_path, object_path) == 0)
+				update_properties (user_data, proxy);
 			break;
 		}
 	}
