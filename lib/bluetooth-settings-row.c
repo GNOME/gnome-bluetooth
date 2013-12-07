@@ -28,6 +28,7 @@
 
 #include "bluetooth-settings-row.h"
 #include "bluetooth-enums.h"
+#include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 
 #define BLUETOOTH_SETTINGS_ROW_GET_PRIVATE(obj) \
@@ -208,6 +209,10 @@ bluetooth_settings_row_set_property (GObject        *object,
 		break;
 	case PROP_TYPE:
 		priv->type = g_value_get_flags (value);
+		if (priv->name == NULL) {
+			gtk_label_set_text (GTK_LABEL (priv->label),
+					    bluetooth_type_to_string (priv->type));
+		}
 		break;
 	case PROP_CONNECTED:
 		priv->connected = g_value_get_boolean (value);
@@ -216,7 +221,8 @@ bluetooth_settings_row_set_property (GObject        *object,
 	case PROP_NAME:
 		g_free (priv->name);
 		priv->name = g_value_dup_string (value);
-		gtk_label_set_text (GTK_LABEL (priv->label), priv->name);
+		if (priv->name != NULL)
+			gtk_label_set_text (GTK_LABEL (priv->label), priv->name);
 		break;
 	case PROP_ADDRESS:
 		g_free (priv->bdaddr);
@@ -271,7 +277,7 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 	g_object_class_install_property (object_class, PROP_NAME,
 					 g_param_spec_string ("name", NULL,
 							      "Name",
-							      "Placeholder Name", G_PARAM_READWRITE));
+							      NULL, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_ADDRESS,
 					 g_param_spec_string ("address", NULL,
 							      "Address",
