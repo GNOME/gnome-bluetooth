@@ -1580,8 +1580,10 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 
 	priv->agent = bluetooth_agent_new ();
-	if (bluetooth_agent_register (priv->agent) == FALSE)
+	if (bluetooth_agent_register (priv->agent) == FALSE) {
+		g_clear_object (&priv->agent);
 		return;
+	}
 
 	g_object_add_weak_pointer (G_OBJECT (priv->agent), (gpointer *) (&priv->agent));
 
@@ -1679,6 +1681,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (object);
 
+	g_clear_object (&priv->agent);
 	g_clear_pointer (&priv->properties_dialog, gtk_widget_destroy);
 	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
 
