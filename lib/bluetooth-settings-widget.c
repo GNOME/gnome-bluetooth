@@ -1150,6 +1150,15 @@ device_sort_func (gconstpointer a, gconstpointer b, gpointer data)
 		goto out;
 	}
 
+	if (name_a == NULL) {
+		ret = 1;
+		goto out;
+	}
+	if (name_b == NULL) {
+		ret = -1;
+		goto out;
+	}
+
 	/* And all being equal, alphabetically */
 	ret = g_utf8_collate (name_a, name_b);
 
