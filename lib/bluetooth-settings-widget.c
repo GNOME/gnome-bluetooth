@@ -179,11 +179,14 @@ connect_done (GObject      *source_object,
 
 		button = GTK_SWITCH (WID ("switch_connection"));
 		/* Reset the switch if it failed */
-		if (success == FALSE)
+		if (success == FALSE) {
+			g_debug ("Connection failed to %s: %s", data->bdaddr, error->message);
 			gtk_switch_set_active (button, !gtk_switch_get_active (button));
+		}
 		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
 	}
 
+	g_clear_error (&error);
 	remove_connecting (self, data->bdaddr);
 
 	//FIXME show an error if it failed?
