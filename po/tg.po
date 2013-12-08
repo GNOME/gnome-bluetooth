@@ -8,20 +8,30 @@ msgstr ""
 "Project-Id-Version: Tajik Gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-24 17:32+0000\n"
-"PO-Revision-Date: 2013-07-18 16:44+0500\n"
+"POT-Creation-Date: 2013-12-06 16:17+0000\n"
+"PO-Revision-Date: 2013-12-09 02:06+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: \n"
-"Language: Tajik\n"
+"Language: tg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=1;\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.1\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
+#| msgid "Click to select device..."
+msgid "Click to select device…"
 msgstr "Барои интихоби дастгоҳ, зер кунед..."
+
+#: ../lib/bluetooth-chooser-button.c:205
+#: ../lib/bluetooth-settings-widget.c:974
+msgid "_Cancel"
+msgstr "_Бекор кардан"
+
+#: ../lib/bluetooth-chooser-button.c:206
+msgid "_OK"
+msgstr "_OK"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:90
@@ -33,18 +43,19 @@ msgid "No adapters available"
 msgstr "Ягон адаптер дастрас нест"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
+#| msgid "Searching for devices..."
+msgid "Searching for devices…"
 msgstr "Дар ҳоли ҷустуҷӯи дастгоҳҳо..."
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Дастгоҳ"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
 msgid "Type"
 msgstr "Навъ"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1258
 msgid "Devices"
 msgstr "Дастгоҳҳо"
 
@@ -52,7 +63,7 @@ msgstr "Дастгоҳҳо"
 msgid "All categories"
 msgstr "Ҳамаи категорияҳо"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
 msgid "Paired"
 msgstr "Ҷуфтдор"
 
@@ -99,6 +110,105 @@ msgstr "Дастгоҳҳои вурудӣ (микрофонҳо, клавиат�
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Телефонҳо, гӯшмонакҳо ва дастгоҳҳои аудиоии дигар"
+
+#: ../lib/bluetooth-pairing-dialog.c:82
+#: ../lib/bluetooth-settings-widget.c:1492
+msgid "Done"
+msgstr "Тайёр"
+
+#: ../lib/bluetooth-pairing-dialog.c:84
+#, c-format
+#| msgid "Please enter the following PIN on '%s':"
+msgid "Please confirm the PIN to use for '%s':"
+msgstr "Лутфан, рамзи PIN-ро барои истифода дар '%s' тасдиқ кунед:"
+
+#: ../lib/bluetooth-pairing-dialog.c:93
+msgid "Matches"
+msgstr "Мутобиқаткунанда"
+
+#: ../lib/bluetooth-pairing-dialog.c:96
+#, c-format
+#| msgid "Please confirm that the PIN displayed on '%s' matches this one."
+msgid "Please confirm that the PIN displayed on '%s' matches this one:"
+msgstr ""
+"Лутфан, тасдиқ кунед, ки рамзи PIN-и намоишдода дар '%s' ба рамзи зерин "
+"мувофиқат мекунад:"
+
+#: ../lib/bluetooth-pairing-dialog.c:99 ../lib/bluetooth-pairing-dialog.c:239
+msgid "Accept"
+msgstr "Қабул кардан"
+
+#: ../lib/bluetooth-pairing-dialog.c:102
+#, c-format
+msgid "Please confirm that you want to pair with '%s'"
+msgstr "Лутфан, тасдиқ кунед, ки мехоҳед бо '%s' ҷуфт созед"
+
+#: ../lib/bluetooth-pairing-dialog.c:110
+#, c-format
+msgid "Please enter the following PIN on '%s':"
+msgstr "Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед:"
+
+#: ../lib/bluetooth-pairing-dialog.c:113
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgstr ""
+"Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед, ва тугмаи “Enter”-ро дар "
+"клавиатура пахш намоед:"
+
+#: ../lib/bluetooth-pairing-dialog.c:116
+msgid "Please move the joystick of your iCade in the following directions:"
+msgstr "Лутфан, ҷойстики iCade-и худро ба самтҳои зерин ҳаракат кунед:"
+
+#: ../lib/bluetooth-pairing-dialog.c:243
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "Бекор кардан"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:78 ../lib/bluetooth-settings-row.c:119
+msgid "Not Setup"
+msgstr "Танзим нашудааст"
+
+#: ../lib/bluetooth-settings-row.c:80
+#| msgid "Connecting..."
+msgid "Connected"
+msgstr "Пайваст шудааст"
+
+#: ../lib/bluetooth-settings-row.c:82
+msgid "Disconnected"
+msgstr "Қатъ шудааст"
+
+#: ../lib/bluetooth-settings-widget.c:853
+msgid "Yes"
+msgstr "Ҳа"
+
+#: ../lib/bluetooth-settings-widget.c:853
+msgid "No"
+msgstr "Не"
+
+#. translators: %s is the name of the computer, for example:
+#. * Now visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:945
+#, c-format
+msgid "Now visible as “%s”"
+msgstr "Ҳоло ҳамчун “%s” намоён аст"
+
+#: ../lib/bluetooth-settings-widget.c:969
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "'%s'-ро аз рӯйхати дастгоҳҳо тоза мекунед?"
+
+#: ../lib/bluetooth-settings-widget.c:971
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Агар дастгоҳро тоза кунед, шумо бояд онро барои истифодаи оянда аз нав "
+"танзим кунед."
+
+#: ../lib/bluetooth-settings-widget.c:975
+msgid "_Remove"
+msgstr "_Тоза кардан"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -161,304 +271,49 @@ msgstr "Планшет"
 msgid "Video device"
 msgstr "Дастгоҳи видеоӣ"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "Дстифода бурдани ин дастгоҳи GPS барои хидматҳои ҷойгиршавии ҷуғрофӣ"
+#: ../lib/settings.ui.h:1
+#| msgid "Please enter the following PIN on '%s':"
+msgid "Please enter the following PIN on 'Foobar':"
+msgstr "Лутфан, рамзи PIN-и зеринро дар 'Навори рамзҳо' ворид кунед:"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "Пайдо кардани дастраӣ ба Интернет тавассути телефони мобилӣ (санҷишӣ)"
+#: ../lib/settings.ui.h:2
+#| msgid "Connecting..."
+msgid "Connection"
+msgstr "Пайваст"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед:"
+#: ../lib/settings.ui.h:3
+msgid "page 1"
+msgstr "саҳифаи 1"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед, ва тугмаи “Enter”-ро дар "
-"клавиатура пахш намоед:"
+#: ../lib/settings.ui.h:4
+msgid "page 2"
+msgstr "саҳифаи 2"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Лутфан, ҷойстики iCade-и худро ба самтҳои зерин ҳаракат кунед:"
+#: ../lib/settings.ui.h:7
+msgid "Address"
+msgstr "Суроға"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "Ҷуфткунӣ бо '%s' бекор шудааст"
+#: ../lib/settings.ui.h:8
+msgid "_Mouse & Touchpad Settings"
+msgstr "_Танзимоти муш ва панели ламсӣ"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr ""
-"Лутфан, тасдиқ кунед, ки рамзи PIN-и намоишдодашуда дар '%s', ба ин рамз "
-"мувофиқат мекунад."
+#: ../lib/settings.ui.h:9
+msgid "_Sound Settings"
+msgstr "_Танзимоти садо"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "Лутфан, рамзи PIN-и зеринро ворид кунед:"
+#: ../lib/settings.ui.h:10
+#| msgid "Keyboard"
+msgid "_Keyboard Settings"
+msgstr "Танзимоти клавиатура"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "Танзимкуни '%s' қатъ шудааст"
+#: ../lib/settings.ui.h:11
+msgid "Send _Files…"
+msgstr "Фиристодани _файлҳо…"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "Пайвастшавӣ ба \"%s\"..."
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Лутфан, интизор шавед то ки танзими дастгоҳи '%s' ба анҷом расад..."
-
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "Дастгоҳи нави '%s' бо муваффақият танзим шудааст"
-
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "Танзими дастгоҳи нави Bluetooth"
-
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "_Имконоти PIN..."
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "Ҷустуҷӯи дастгоҳҳо"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "Танзимоти дастгоҳ"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "Анҷом додани танзимот"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "Интихоб кардани хидматҳои иловагӣ барои истифода бурдан бо дастгоҳ:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "Хулосаи танзимот"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "Имконоти PIN"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "_Интихоби PIN ба таври худкор"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "PIN-и муқаррар"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (гӯшмонакҳо, микрофонҳо ва дастгоҳҳои GPS)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "Ҷуфт накардан"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "PIN-и фармоишӣ:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "_Амалро аз нав такрор кунед"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "_Баромад"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "_Бекор кардан"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "Мувофиқат намекунад"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "Мутобиқаткунанда"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "Танзими дастгоҳи Bluetooth"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "Танзим кардани дастгоҳҳои Bluetooth"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d сония"
-msgstr[1] "%'d сония"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d дақиқа"
-msgstr[1] "%'d дақиқа"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d соат"
-msgstr[1] "%'d соат"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "тахминан %'d соат"
-msgstr[1] "тахминан %'d соат"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "Пайвастшавӣ..."
-
-#: ../sendto/main.c:424
-#| msgid "Bluetooth Transfer"
-msgid "Bluetooth File Transfer"
-msgstr "Интиқолдиҳи тавассути Bluetooth"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "_Аз нав кӯшидан"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "Аз:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "Ба:"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "Хатогии номаълум ба вуҷуд омад."
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr ""
-"Мутмаин шавед, ки дастгоҳи дурдаст фаъол аст ва пайвастҳои Bluetooth-ро "
-"қабул мекунад"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "Фиристодани %s"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Фиристодани файл: %d аз %d"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d КБ/с"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d Б/с"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "%u интиқол ба анҷом расид"
-msgstr[1] "%u интиқол ба анҷом расиданд"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "Хатогӣ ба вуҷуд омад"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "Интихоб кардани дастгоҳ барои фиристониш"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "_Фиристодан"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "Интихоб кардани файлҳо барои фиристониш"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "Интихоб кардан"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "Дастгоҳи дурдаст барои истифода"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
-msgstr "СУРОҒА"
-
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "Номи дастгоҳи дурдаст"
-
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "НОМ"
-
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[ФАЙЛ...]"
+#: ../lib/settings.ui.h:12
+#| msgid "Remote device to use"
+msgid "_Remove Device"
+msgstr "_Тоза кардани дастгоҳ"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -467,6 +322,219 @@ msgstr "Интиқолдиҳи тавассути Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Фиристодани файлҳо тавассути Bluetooth"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "Хатогии номаълум ба вуҷуд омад."
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d сония"
+msgstr[1] "%'d сония"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d дақиқа"
+msgstr[1] "%'d дақиқа"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d соат"
+msgstr[1] "%'d соат"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "тахминан %'d соат"
+msgstr[1] "тахминан %'d соат"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+#| msgid "Connecting..."
+msgid "Connecting…"
+msgstr "Пайваст шуда истодааст..."
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "Интиқолдиҳи тавассути Bluetooth"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "_Аз нав кӯшидан"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "Аз:"
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "Ба:"
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "Фиристодани %s"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Фиристодани файл: %d аз %d"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d КБ/с"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d Б/с"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u интиқол ба анҷом расид"
+msgstr[1] "%u интиқол ба анҷом расиданд"
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "Хатогӣ ба вуҷуд омад"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "Интихоб кардани дастгоҳ барои фиристониш"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "_Фиристодан"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "Интихоб кардани файлҳо барои фиристониш"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "Интихоб кардан"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "Дастгоҳи дурдаст барои истифода"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "СУРОҒА"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "Номи дастгоҳи дурдаст"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "НОМ"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[ФАЙЛ...]"
+
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr ""
+#~ "Дстифода бурдани ин дастгоҳи GPS барои хидматҳои ҷойгиршавии ҷуғрофӣ"
+
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr ""
+#~ "Пайдо кардани дастраӣ ба Интернет тавассути телефони мобилӣ (санҷишӣ)"
+
+#~ msgid "Pairing with '%s' cancelled"
+#~ msgstr "Ҷуфткунӣ бо '%s' бекор шудааст"
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "Лутфан, рамзи PIN-и зеринро ворид кунед:"
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "Танзимкуни '%s' қатъ шудааст"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "Пайвастшавӣ ба \"%s\"..."
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "Лутфан, интизор шавед то ки танзими дастгоҳи '%s' ба анҷом расад..."
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "Дастгоҳи нави '%s' бо муваффақият танзим шудааст"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "Танзими дастгоҳи нави Bluetooth"
+
+#~ msgid "PIN _options..."
+#~ msgstr "_Имконоти PIN..."
+
+#~ msgid "Device Search"
+#~ msgstr "Ҷустуҷӯи дастгоҳҳо"
+
+#~ msgid "Device Setup"
+#~ msgstr "Танзимоти дастгоҳ"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "Анҷом додани танзимот"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "Интихоб кардани хидматҳои иловагӣ барои истифода бурдан бо дастгоҳ:"
+
+#~ msgid "Setup Summary"
+#~ msgstr "Хулосаи танзимот"
+
+#~ msgid "PIN Options"
+#~ msgstr "Имконоти PIN"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "_Интихоби PIN ба таври худкор"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "PIN-и муқаррар"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "'0000' (гӯшмонакҳо, микрофонҳо ва дастгоҳҳои GPS)"
+
+#~ msgid "'1111'"
+#~ msgstr "'1111'"
+
+#~ msgid "'1234'"
+#~ msgstr "'1234'"
+
+#~ msgid "Do not pair"
+#~ msgstr "Ҷуфт накардан"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "PIN-и фармоишӣ:"
+
+#~ msgid "_Try Again"
+#~ msgstr "_Амалро аз нав такрор кунед"
+
+#~ msgid "_Quit"
+#~ msgstr "_Баромад"
+
+#~ msgid "Does not match"
+#~ msgstr "Мувофиқат намекунад"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "Танзими дастгоҳи Bluetooth"
+
+#~ msgid "Setup Bluetooth devices"
+#~ msgstr "Танзим кардани дастгоҳҳои Bluetooth"
+
+#~ msgid ""
+#~ "Make sure that the remote device is switched on and that it accepts "
+#~ "Bluetooth connections"
+#~ msgstr ""
+#~ "Мутмаин шавед, ки дастгоҳи дурдаст фаъол аст ва пайвастҳои Bluetooth-ро "
+#~ "қабул мекунад"
 
 #~ msgid "File Transfer"
 #~ msgstr "Интиқолдиҳии файл"
