@@ -57,23 +57,18 @@
 	<!-- TomTom Go remote -->
 	<device type="keyboard" oui="00:13:6C:" name="TomTom Remote" pin="0000"/>
 
-	<!-- Sony PlayStation 3 Remote Control -->
-	<device oui="00:19:C1:" name="BD Remote Control" pin="NULL"/>
-	<device oui="00:1E:3D:" name="BD Remote Control" pin="NULL"/>
-	<device oui="00:06:F5:" name="BD Remote Control" pin="NULL"/>
+	<!-- Sony PlayStation 3 Remote Control
+	     with a OUI from Alps Electric -->
+	<device vendor="alps" name="BD Remote Control" pin="NULL"/>
 
 	<!-- Apple Wireless and Mighty Mouse
 	     Note: Apple doesn't follow the specs, and requires their mice
 	     to be paired -->
-	<device oui="00:0A:95:" type="mouse" pin="0000"/>
-	<device oui="00:14:51:" type="mouse" pin="0000"/>
-	<device oui="34:15:9E:" type="mouse" pin="0000"/>
+	<device vendor="apple" type="mouse" pin="0000"/>
 
 	<!-- Apple Magic Trackpad
 	     Note: same as above, tablet needs to be paired -->
-	<device oui="D8:A2:5E:" type="tablet" pin="0000"/>
-	<device oui="28:37:37:" type="tablet" pin="0000"/>
-	<device oui="C8:BC:C8:" type="tablet" pin="0000"/>
+	<device vendor="apple" type="tablet" pin="0000"/>
 
 	<!-- MS Sculpt Touch Mouse
 	     Again, same as above -->
