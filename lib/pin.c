@@ -128,7 +128,7 @@ get_pincode_for_device (guint       type,
 	g_return_val_if_fail (address != NULL, NULL);
 
 	g_debug ("Getting pincode for device '%s' (type: %s address: %s)",
-		 name ? name : "", address, bluetooth_type_to_string (type));
+		 name ? name : "", bluetooth_type_to_string (type), address);
 
 	/* Load the PIN database and split it in lines */
 	if (!g_file_get_contents(PIN_CODE_DB, &buf, &buf_len, NULL)) {
