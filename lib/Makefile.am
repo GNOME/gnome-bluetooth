@@ -115,7 +115,7 @@ BUILT_SOURCES += bluetooth-client-glue.h \
 
 CLEANFILES += $(BUILT_SOURCES)
 
-noinst_PROGRAMS = test-client test-agent test-deviceselection test-class test-settings test-pairing-dialog
+noinst_PROGRAMS = test-client test-agent test-deviceselection test-class test-settings test-pairing-dialog test-pin
 
 test_client_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
@@ -128,6 +128,9 @@ test_class_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 test_settings_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 test_pairing_dialog_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
+
+test_pin_SOURCES = test-pin.c
+test_pin_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 
 pin_DATA = pin-code-database.xml
 pindir = $(pkgdatadir)
