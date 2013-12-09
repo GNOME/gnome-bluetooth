@@ -443,16 +443,22 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		}
 		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
 				  G_CALLBACK (enter_pin_cb), user_data);
-	} else {
+	} else if (!remote_initiated) {
 		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 						   mode, display_pin, name);
 		g_dbus_method_invocation_return_value (invocation,
 						       g_variant_new ("(s)", default_pin));
 		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
 				  G_CALLBACK (display_cb), user_data);
+	} else {
+		g_dbus_method_invocation_return_value (invocation,
+						       g_variant_new ("(s)", default_pin));
+		/* Won't be using it after all */
+		g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
 	}
 
-	gtk_widget_show (priv->pairing_dialog);
+	if (priv->pairing_dialog)
+		gtk_widget_show (priv->pairing_dialog);
 }
 
 static void
