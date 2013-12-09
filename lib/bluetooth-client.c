@@ -47,6 +47,7 @@
 #include "bluetooth-fdo-glue.h"
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
+#include "pin.h"
 
 #define BLUEZ_SERVICE			"org.bluez"
 #define BLUEZ_MANAGER_PATH		"/"
@@ -249,7 +250,29 @@ bluetooth_client_get_connectable(const char **uuids)
 }
 
 static const char *
-audio_icon_override (BluetoothType type)
+phone_oui_to_icon_name (const char *bdaddr)
+{
+	char *vendor;
+	const char *ret = NULL;
+
+	vendor = oui_to_vendor (bdaddr);
+	if (vendor == NULL)
+		return NULL;
+
+	if (strstr (vendor, "Apple") != NULL)
+		ret = "phone-apple-iphone";
+	else if (strstr (vendor, "Samsung") != NULL)
+		ret = "phone-samsung-galaxy-s";
+	else if (strstr (vendor, "Google") != NULL)
+		ret = "phone-google-nexus-one";
+	g_free (vendor);
+
+	return ret;
+}
+
+static const char *
+icon_override (const char    *bdaddr,
+	       BluetoothType  type)
 {
 	/* audio-card, you're ugly */
 	switch (type) {
@@ -259,6 +282,8 @@ audio_icon_override (BluetoothType type)
 		return "audio-headphones";
 	case BLUETOOTH_TYPE_OTHER_AUDIO:
 		return "audio-speakers";
+	case BLUETOOTH_TYPE_PHONE:
+		return phone_oui_to_icon_name (bdaddr);
 	default:
 		return NULL;
 	}
@@ -332,9 +357,16 @@ device_g_properties_changed (GDBusProxy      *device,
 		} else if (g_str_equal (property, "Class") == TRUE) {
 			BluetoothType type;
 			const char *icon = NULL;
+			char *bdaddr;
+
+			gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
+					    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
+					    -1);
 
 			type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
-			icon = audio_icon_override (type);
+			icon = icon_override (bdaddr, type);
+
+			g_free (bdaddr);
 
 			if (icon) {
 				gtk_tree_store_set (priv->store, &iter,
@@ -405,7 +437,7 @@ device_added (ObjectManager   *manager,
 
 	v = g_variant_lookup_value (dict, "Class", G_VARIANT_TYPE_UINT32);
 	type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
-	icon = audio_icon_override (type);
+	icon = icon_override (address, type);
 
 	if (icon == NULL) {
 		v = g_variant_lookup_value (dict, "Icon", G_VARIANT_TYPE_STRING);
