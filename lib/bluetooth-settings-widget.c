@@ -244,6 +244,10 @@ get_properties_for_device (BluetoothSettingsWidget  *self,
 	g_return_val_if_fail (name != NULL, FALSE);
 
 	value = g_dbus_proxy_get_cached_property (device, "Name");
+	if (value == NULL) {
+		/* What?! */
+		return FALSE;
+	}
 	*name = g_variant_dup_string (value, NULL);
 	g_variant_unref (value);
 
