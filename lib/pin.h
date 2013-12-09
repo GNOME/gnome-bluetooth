@@ -25,6 +25,7 @@
 
 #define PIN_NUM_DIGITS 6
 
+char *oui_to_vendor (const char *oui);
 char *get_pincode_for_device (guint       type,
 			      const char *address,
 			      const char *name,

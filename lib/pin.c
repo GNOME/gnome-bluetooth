@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib.h>
+#include <libudev.h>
 #include <bluetooth-enums.h>
 #include <bluetooth-utils.h>
 
@@ -35,6 +36,54 @@
 
 #define PIN_CODE_DB "pin-code-database.xml"
 #define MAX_DIGITS_PIN_PREFIX "max:"
+
+char *
+oui_to_vendor (const char *oui)
+{
+	struct udev *udev;
+	struct udev_hwdb *hwdb;
+	struct udev_list_entry *list, *l;
+	char *modalias;
+	char *vendor = NULL;
+
+	if (oui == NULL ||
+	    strlen (oui) < 8)
+		return NULL;
+
+	udev = udev_new ();
+	if (udev == NULL)
+		goto bail;
+
+	hwdb = udev_hwdb_new (udev);
+	if (hwdb == NULL)
+		goto bail;
+
+	modalias = g_strdup_printf ("OUI:%c%c%c%c%c%c",
+				    g_ascii_toupper (oui[0]),
+				    g_ascii_toupper (oui[1]),
+				    g_ascii_toupper (oui[3]),
+				    g_ascii_toupper (oui[4]),
+				    g_ascii_toupper (oui[6]),
+				    g_ascii_toupper (oui[7]));
+
+	list = udev_hwdb_get_properties_list_entry (hwdb, modalias, 0);
+
+	udev_list_entry_foreach (l, list) {
+		const char *name = udev_list_entry_get_name (l);
+
+		if (g_strcmp0 (name, "ID_OUI_FROM_DATABASE") == 0) {
+			vendor = g_strdup (udev_list_entry_get_value (l));
+			break;
+		}
+	}
+
+bail:
+	g_clear_pointer (&modalias, g_free);
+	g_clear_pointer (&hwdb, udev_hwdb_unref);
+	g_clear_pointer (&udev, udev_unref);
+
+	return vendor;
+}
 
 #define TYPE_IS(x, r) {				\
 	if (g_str_equal(type, x)) return r;	\

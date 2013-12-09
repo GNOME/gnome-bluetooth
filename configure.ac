@@ -88,7 +88,7 @@ dnl Requires for the input helper
 PKG_CHECK_MODULES(INPUT, gdk-3.0 gtk+-3.0)
 
 dnl Requires for the public library
-PKG_CHECK_MODULES(LIBGNOMEBT, gmodule-2.0 gio-unix-2.0 gtk+-3.0)
+PKG_CHECK_MODULES(LIBGNOMEBT, gmodule-2.0 gio-unix-2.0 gtk+-3.0 libudev)
 
 GDBUS_CODEGEN="gdbus-codegen"
 AC_SUBST(GDBUS_CODEGEN)
