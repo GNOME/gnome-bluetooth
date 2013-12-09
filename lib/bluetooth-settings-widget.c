@@ -457,6 +457,11 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
 	}
 
+	g_free (name);
+	g_free (bdaddr);
+	g_free (default_pin);
+	g_free (display_pin);
+
 	if (priv->pairing_dialog)
 		gtk_widget_show (priv->pairing_dialog);
 }
