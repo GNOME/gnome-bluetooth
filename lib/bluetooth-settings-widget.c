@@ -598,13 +598,36 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 			    gpointer               user_data)
 {
 	char *msg;
+	GVariant *value;
+	gboolean paired, trusted;
 
 	g_debug ("authorize_service_callback (%s, %s)", g_dbus_proxy_get_object_path (device), uuid);
 
-	msg = g_strdup_printf ("Rejecting service auth (%s) for %s",
-			       uuid, g_dbus_proxy_get_object_path (device));
-	g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
-	g_free (msg);
+	if (g_strcmp0 (bluetooth_uuid_to_string (uuid), "HumanInterfaceDeviceService") != 0) {
+		msg = g_strdup_printf ("Rejecting service auth (%s) for %s: not HID",
+				       uuid, g_dbus_proxy_get_object_path (device));
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
+		g_free (msg);
+		return;
+	}
+
+	/* We shouldn't get asked, but shizzle happens */
+	value = g_dbus_proxy_get_cached_property (device, "Paired");
+	paired = g_variant_get_boolean (value);
+	g_variant_unref (value);
+
+	value = g_dbus_proxy_get_cached_property (device, "Trusted");
+	trusted = g_variant_get_boolean (value);
+	g_variant_unref (value);
+
+	if (paired || trusted) {
+		g_dbus_method_invocation_return_value (invocation, NULL);
+	} else {
+		msg = g_strdup_printf ("Rejecting service auth (%s) for %s: not paired or trusted",
+				       uuid, g_dbus_proxy_get_object_path (device));
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
+		g_free (msg);
+	}
 }
 
 static void
