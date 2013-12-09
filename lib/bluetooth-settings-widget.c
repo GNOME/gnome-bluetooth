@@ -416,7 +416,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		g_assert_not_reached ();
 	} else {
 		mode = BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_NORMAL;
-		confirm_pin = TRUE;
+		display_pin = g_strdup (default_pin);
 	}
 
 	setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
