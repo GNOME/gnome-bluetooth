@@ -212,12 +212,15 @@ setup_pairing_dialog (BluetoothSettingsWidget *self)
 }
 
 static gboolean
-get_properties_for_device (GDBusProxy     *device,
-			   char          **name,
-			   char          **bdaddr,
-			   BluetoothType  *type)
+get_properties_for_device (BluetoothSettingsWidget  *self,
+			   GDBusProxy               *device,
+			   char                    **name,
+			   char                    **ret_bdaddr,
+			   BluetoothType            *type)
 {
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	GVariant *value;
+	char *bdaddr;
 
 	g_return_val_if_fail (name != NULL, FALSE);
 
@@ -225,17 +228,20 @@ get_properties_for_device (GDBusProxy     *device,
 	*name = g_variant_dup_string (value, NULL);
 	g_variant_unref (value);
 
-	if (bdaddr) {
-		value = g_dbus_proxy_get_cached_property (device, "Address");
-		*bdaddr = g_variant_dup_string (value, NULL);
-		g_variant_unref (value);
-	}
+	value = g_dbus_proxy_get_cached_property (device, "Address");
+	bdaddr = g_variant_dup_string (value, NULL);
+	g_variant_unref (value);
+
+	if (ret_bdaddr)
+		*ret_bdaddr = g_strdup (bdaddr);
 
 	if (type) {
 		value = g_dbus_proxy_get_cached_property (device, "Class");
 		*type = bluetooth_class_to_type (g_variant_get_uint32 (value));
 		g_variant_unref (value);
 	}
+
+	g_free (bdaddr);
 
 	return TRUE;
 }
@@ -341,6 +347,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy            *device,
 		  gpointer               user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	BluetoothType type;
 	char *name, *bdaddr;
@@ -353,7 +360,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 
 	g_debug ("pincode_callback (%s)", g_dbus_proxy_get_object_path (device));
 
-	if (!get_properties_for_device (device, &name, &bdaddr, &type)) {
+	if (!get_properties_for_device (self, device, &name, &bdaddr, &type)) {
 		char *msg;
 
 		msg = g_strdup_printf ("Missing information for %s", g_dbus_proxy_get_object_path (device));
@@ -426,6 +433,7 @@ display_callback (GDBusMethodInvocation *invocation,
 		  guint                  entered,
 		  gpointer               user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	char *pin_str, *name;
 
@@ -436,7 +444,7 @@ display_callback (GDBusMethodInvocation *invocation,
 		setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
 
 	pin_str = g_strdup_printf ("%06d", pin);
-	get_properties_for_device (device, &name, NULL, NULL);
+	get_properties_for_device (self, device, &name, NULL, NULL);
 	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 					   BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD,
 					   pin_str,
@@ -508,6 +516,7 @@ confirm_callback (GDBusMethodInvocation *invocation,
 		  guint                  pin,
 		  gpointer               user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	char *name, *pin_str;
 
@@ -516,7 +525,7 @@ confirm_callback (GDBusMethodInvocation *invocation,
 	setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
 
 	pin_str = g_strdup_printf ("%06d", pin);
-	get_properties_for_device (device, &name, NULL, NULL);
+	get_properties_for_device (self, device, &name, NULL, NULL);
 	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 					   BLUETOOTH_PAIRING_MODE_PIN_MATCH,
 					   pin_str, name);
@@ -536,13 +545,14 @@ authorize_callback (GDBusMethodInvocation *invocation,
 		    GDBusProxy            *device,
 		    gpointer               user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	char *name;
 
 	g_debug ("authorize_callback (%s)", g_dbus_proxy_get_object_path (device));
 
 	setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
-	get_properties_for_device (device, &name, NULL, NULL);
+	get_properties_for_device (self, device, &name, NULL, NULL);
 	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 					   BLUETOOTH_PAIRING_MODE_YES_NO,
 					   NULL, name);
