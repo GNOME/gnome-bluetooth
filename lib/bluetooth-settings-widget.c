@@ -71,6 +71,10 @@ struct _BluetoothSettingsWidgetPrivate {
 	GtkWidget           *device_spinner;
 	GHashTable          *connecting_devices; /* key=bdaddr, value=boolean */
 
+	/* Hack to work-around:
+	 * http://thread.gmane.org/gmane.linux.bluez.kernel/41471 */
+	GHashTable          *devices_type; /* key=bdaddr, value=guint32 */
+
 	/* Visible */
 	GtkWidget           *visible_label;
 	GtkWidget           *visible_revealer;
@@ -199,6 +203,21 @@ out:
 }
 
 static void
+add_device_type (BluetoothSettingsWidget *self,
+		 const char              *bdaddr,
+		 BluetoothType            type)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
+	BluetoothType t;
+
+	t = GPOINTER_TO_UINT (g_hash_table_lookup (priv->devices_type, bdaddr));
+	if (t == 0 || t == BLUETOOTH_TYPE_ANY) {
+		g_hash_table_insert (priv->devices_type, g_strdup (bdaddr), GUINT_TO_POINTER (type));
+		g_debug ("Saving device type %s for %s", bluetooth_type_to_string (type), bdaddr);
+	}
+}
+
+static void
 setup_pairing_dialog (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
@@ -237,8 +256,14 @@ get_properties_for_device (BluetoothSettingsWidget  *self,
 
 	if (type) {
 		value = g_dbus_proxy_get_cached_property (device, "Class");
-		*type = bluetooth_class_to_type (g_variant_get_uint32 (value));
-		g_variant_unref (value);
+		if (value != NULL) {
+			*type = bluetooth_class_to_type (g_variant_get_uint32 (value));
+			g_variant_unref (value);
+		} else {
+			*type = GPOINTER_TO_UINT (g_hash_table_lookup (priv->devices_type, bdaddr));
+			if (*type == 0)
+				*type = BLUETOOTH_TYPE_ANY;
+		}
 	}
 
 	g_free (bdaddr);
@@ -1415,6 +1440,7 @@ row_inserted_cb (GtkTreeModel *tree_model,
 		 GtkTreeIter  *iter,
 		 gpointer      user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	GDBusProxy *proxy;
 	char *name, *bdaddr;
@@ -1444,6 +1470,8 @@ row_inserted_cb (GtkTreeModel *tree_model,
 
 	g_debug ("Adding device %s (%s)", name, g_dbus_proxy_get_object_path (proxy));
 
+	add_device_type (self, bdaddr, type);
+
 	row = g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW,
 			    "proxy", proxy,
 			    "paired", paired,
@@ -1472,6 +1500,7 @@ row_changed_cb (GtkTreeModel *tree_model,
 		GtkTreeIter  *iter,
 		gpointer      user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	GDBusProxy *proxy;
 	GList *l, *children;
@@ -1512,6 +1541,8 @@ row_changed_cb (GtkTreeModel *tree_model,
 					    BLUETOOTH_COLUMN_TYPE, &type,
 					    BLUETOOTH_COLUMN_LEGACYPAIRING, &legacy_pairing,
 					    -1);
+
+			add_device_type (self, bdaddr, type);
 
 			g_object_set (G_OBJECT (l->data),
 				      "paired", paired,
@@ -1667,6 +1698,10 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 						       g_str_equal,
 						       (GDestroyNotify) g_free,
 						       NULL);
+	priv->devices_type = g_hash_table_new_full (g_str_hash,
+						    g_str_equal,
+						    (GDestroyNotify) g_free,
+						    NULL);
 
 	setup_pairing_agent (self);
 	priv->client = bluetooth_client_new ();
@@ -1737,6 +1772,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 	g_clear_object (&priv->client);
 	g_clear_object (&priv->builder);
 
+	g_clear_pointer (&priv->devices_type, g_hash_table_destroy);
 	g_clear_pointer (&priv->connecting_devices, g_hash_table_destroy);
 	g_clear_pointer (&priv->pairing_devices, g_hash_table_destroy);
 	g_clear_pointer (&priv->selected_name, g_free);
