@@ -53,6 +53,7 @@ struct _BluetoothSettingsWidgetPrivate {
 	/* Pairing */
 	BluetoothAgent      *agent;
 	GtkWidget           *pairing_dialog;
+	GHashTable          *pairing_devices; /* key=object-path, value=boolean */
 
 	/* Properties */
 	GtkWidget           *properties_dialog;
@@ -312,6 +313,11 @@ enter_pin_cb (GtkDialog *dialog,
 		pin = bluetooth_pairing_dialog_get_pin (BLUETOOTH_PAIRING_DIALOG (dialog));
 		g_dbus_method_invocation_return_value (invocation,
 						       g_variant_new ("(s)", pin));
+
+		if (bluetooth_pairing_dialog_get_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog)) == BLUETOOTH_PAIRING_MODE_PIN_QUERY) {
+			g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+			return;
+		}
 		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 						   mode, pin, name);
 		g_free (pin);
@@ -343,6 +349,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 	char *default_pin;
 	char *display_pin = NULL;
 	BluetoothPairingMode mode;
+	gboolean remote_initiated;
 
 	g_debug ("pincode_callback (%s)", g_dbus_proxy_get_object_path (device));
 
@@ -354,6 +361,9 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		g_free (msg);
 		return;
 	}
+
+	remote_initiated = !GPOINTER_TO_UINT (g_hash_table_lookup (priv->pairing_devices,
+								   g_dbus_proxy_get_object_path (device)));
 
 	default_pin = get_pincode_for_device (type, bdaddr, name, &max_digits, &confirm_pin);
 	if (g_strcmp0 (default_pin, "KEYBOARD") == 0) {
@@ -384,10 +394,17 @@ pincode_callback (GDBusMethodInvocation *invocation,
 
 	if (confirm_pin) {
 		g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", invocation);
-		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
-						   BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION,
-						   default_pin,
-						   name);
+		if (remote_initiated) {
+			bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
+							   BLUETOOTH_PAIRING_MODE_PIN_QUERY,
+							   default_pin,
+							   name);
+		} else {
+			bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
+							   BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION,
+							   default_pin,
+							   name);
+		}
 		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
 				  G_CALLBACK (enter_pin_cb), user_data);
 	} else {
@@ -650,6 +667,8 @@ create_callback (GObject      *source_object,
 
 	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
 
+	g_hash_table_remove (priv->pairing_devices, path);
+
 	/* Create failed */
 	if (ret == FALSE) {
 		//char *text;
@@ -768,6 +787,10 @@ start_pairing (BluetoothSettingsWidget *self,
 	g_debug ("About to setup %s (legacy pairing: %d pair: %d)",
 		 g_dbus_proxy_get_object_path (proxy),
 		 legacy_pairing, pair);
+
+	g_hash_table_insert (priv->pairing_devices,
+			     g_strdup (g_dbus_proxy_get_object_path (proxy)),
+			     GINT_TO_POINTER (1));
 
 	bluetooth_client_setup_device (priv->client,
 				       g_dbus_proxy_get_object_path (proxy),
@@ -1630,6 +1653,10 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 								g_str_equal,
 								(GDestroyNotify) g_free,
 								NULL);
+	priv->pairing_devices = g_hash_table_new_full (g_str_hash,
+						       g_str_equal,
+						       (GDestroyNotify) g_free,
+						       NULL);
 
 	setup_pairing_agent (self);
 	priv->client = bluetooth_client_new ();
@@ -1701,6 +1728,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 	g_clear_object (&priv->builder);
 
 	g_clear_pointer (&priv->connecting_devices, g_hash_table_destroy);
+	g_clear_pointer (&priv->pairing_devices, g_hash_table_destroy);
 	g_clear_pointer (&priv->selected_name, g_free);
 	g_clear_pointer (&priv->selected_object_path, g_free);
 

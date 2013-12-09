@@ -77,6 +77,12 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 	gtk_label_set_text (GTK_LABEL (priv->label_pin), pin);
 
 	switch (mode) {
+	case BLUETOOTH_PAIRING_MODE_PIN_QUERY:
+		gtk_widget_show (priv->done);
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("Done"));
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), CONFIRMATION_PAGE);
+		help = g_strdup_printf (_("Please enter the PIN code entered on '%s':"), device_name);
+		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION:
 		gtk_widget_show (priv->done);
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Done"));
@@ -136,7 +142,8 @@ bluetooth_pairing_dialog_get_pin (BluetoothPairingDialog *self)
 {
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
 
-	g_assert (priv->mode == BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION);
+	g_assert (priv->mode == BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION ||
+		  priv->mode == BLUETOOTH_PAIRING_MODE_PIN_QUERY);
 	g_assert (gtk_widget_is_sensitive (GTK_WIDGET (priv->done)));
 
 	return g_strdup (gtk_entry_get_text (GTK_ENTRY (priv->entry_pin)));
@@ -199,7 +206,8 @@ text_changed_cb (GObject    *gobject,
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (user_data);
 	const char *text;
 
-	if (priv->mode != BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION)
+	if (priv->mode != BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION &&
+	    priv->mode != BLUETOOTH_PAIRING_MODE_PIN_QUERY)
 		return;
 
 	text = gtk_entry_get_text (GTK_ENTRY (priv->entry_pin));
