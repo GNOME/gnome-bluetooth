@@ -111,6 +111,7 @@ typedef struct {
 	guint type;
 	const char *address;
 	const char *name;
+	char *vendor;
 	gboolean confirm;
 } PinParseData;
 
@@ -138,6 +139,11 @@ pin_db_parse_start_tag (GMarkupParseContext *ctx,
 				return;
 		} else if (g_str_equal (*attr_names, "oui")) {
 			if (g_str_has_prefix (pdata->address, *attr_values) == FALSE)
+				return;
+		} else if (g_str_equal (*attr_names, "vendor")) {
+			if (*attr_values == NULL || pdata->vendor == NULL)
+				return;
+			if (strstr (pdata->vendor, *attr_values) == NULL)
 				return;
 		} else if (g_str_equal (*attr_names, "name")) {
 			if (*attr_values == NULL || pdata->name == NULL)
@@ -197,6 +203,7 @@ get_pincode_for_device (guint       type,
 	data.type = type;
 	data.address = address;
 	data.name = name;
+	data.vendor = oui_to_vendor (address);
 	data.confirm = TRUE;
 
 	ctx = g_markup_parse_context_new (&parser, 0, &data, NULL);
@@ -214,9 +221,11 @@ get_pincode_for_device (guint       type,
 	if (confirm != NULL)
 		*confirm = data.confirm;
 
-	g_debug ("Got pin '%s' (max digits: %d) for device '%s' (type: %s address: %s)",
+	g_debug ("Got pin '%s' (max digits: %d) for device '%s' (type: %s address: %s, vendor: %s)",
 		 data.ret_pin, data.max_digits,
-		 name ? name : "", bluetooth_type_to_string (type), address);
+		 name ? name : "", bluetooth_type_to_string (type), address, data.vendor);
+
+	g_free (data.vendor);
 
 	return data.ret_pin;
 }
