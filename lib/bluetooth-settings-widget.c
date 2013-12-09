@@ -68,7 +68,7 @@ struct _BluetoothSettingsWidgetPrivate {
 	GtkSizeGroup        *row_sizegroup;
 	GtkWidget           *device_revealer;
 	GtkWidget           *device_spinner;
-	GHashTable          *connecting_devices;
+	GHashTable          *connecting_devices; /* key=bdaddr, value=boolean */
 
 	/* Visible */
 	GtkWidget           *visible_label;
