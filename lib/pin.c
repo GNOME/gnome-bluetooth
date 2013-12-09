@@ -179,6 +179,7 @@ get_pincode_for_device (guint       type,
 	char *buf;
 	gsize buf_len;
 	GError *err = NULL;
+	char *tmp_vendor;
 
 	g_return_val_if_fail (address != NULL, NULL);
 
@@ -203,8 +204,11 @@ get_pincode_for_device (guint       type,
 	data.type = type;
 	data.address = address;
 	data.name = name;
-	data.vendor = oui_to_vendor (address);
 	data.confirm = TRUE;
+
+	tmp_vendor = oui_to_vendor (address);
+	data.vendor = g_ascii_strdown (tmp_vendor, -1);
+	g_free (tmp_vendor);
 
 	ctx = g_markup_parse_context_new (&parser, 0, &data, NULL);
 
