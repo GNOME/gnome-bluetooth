@@ -501,13 +501,35 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 			  const char            *pincode,
 			  gpointer               user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+	char *display_pin;
+	char *name;
+
 	g_debug ("display_pincode_callback (%s, %s)", g_dbus_proxy_get_object_path (device), pincode);
 
-	/* Reject all the calls here, so that we'll get asked about the
-	 * pincode instead of being told the pincode */
-	g_dbus_method_invocation_return_dbus_error (invocation,
-						    "org.bluez.Error.Rejected",
-						    "Rejected bluetoothd generated PIN code");
+	if (!get_properties_for_device (self, device, &name, NULL, NULL)) {
+		char *msg;
+
+		msg = g_strdup_printf ("Missing information for %s", g_dbus_proxy_get_object_path (device));
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
+		g_free (msg);
+		return;
+	}
+
+	setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
+
+	display_pin = g_strdup_printf ("%s⏎", pincode);
+	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
+					   BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD,
+					   display_pin,
+					   name);
+	gtk_widget_show (priv->pairing_dialog);
+
+	g_dbus_method_invocation_return_value (invocation, NULL);
+
+	g_free (display_pin);
+	g_free (name);
 }
 
 static gboolean
