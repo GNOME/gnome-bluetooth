@@ -78,9 +78,6 @@ struct _BluetoothSettingsWidgetPrivate {
 	/* Visible */
 	GtkWidget           *visible_label;
 	GtkWidget           *visible_revealer;
-
-	GList               *boxes;
-	GList               *boxes_reverse;
 };
 
 G_DEFINE_TYPE(BluetoothSettingsWidget, bluetooth_settings_widget, GTK_TYPE_BOX)
@@ -1307,60 +1304,21 @@ static gboolean
 keynav_failed (GtkWidget *list, GtkDirectionType direction, BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-  GtkWidget *next_list = NULL;
-  GList *item, *boxes_list;
-  gdouble value, lower, upper, page;
+	GList *children, *item;
 
-  /* Find the list in the list of GtkListBoxes */
-  if (direction == GTK_DIR_DOWN)
-    boxes_list = priv->boxes;
-  else
-    boxes_list = priv->boxes_reverse;
+	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
 
-  item = g_list_find (boxes_list, list);
-  g_assert (item);
-  item = item->next;
-  while (1)
-    {
-      if (item == NULL)
-        item = boxes_list;
+	if (direction == GTK_DIR_DOWN) {
+		item = children;
+	} else {
+		item = g_list_last (children);
+	}
 
-      /* Avoid looping */
-      if (item->data == list)
-        break;
+	gtk_widget_child_focus (item->data, direction);
 
-      if (gtk_widget_is_visible (item->data))
-        {
-          next_list = item->data;
-          break;
-        }
+	g_list_free (children);
 
-    item = item->next;
-  }
-
-  if (next_list)
-    {
-      gtk_widget_child_focus (next_list, direction);
-      return TRUE;
-    }
-
-  value = gtk_adjustment_get_value (priv->focus_adjustment);
-  lower = gtk_adjustment_get_lower (priv->focus_adjustment);
-  upper = gtk_adjustment_get_upper (priv->focus_adjustment);
-  page  = gtk_adjustment_get_page_size (priv->focus_adjustment);
-
-  if (direction == GTK_DIR_UP && value > lower)
-    {
-      gtk_adjustment_set_value (priv->focus_adjustment, lower);
-      return TRUE;
-    }
-  else if (direction == GTK_DIR_DOWN && value < upper - page)
-    {
-      gtk_adjustment_set_value (priv->focus_adjustment, upper - page);
-      return TRUE;
-    }
-
-  return FALSE;
+	return TRUE;
 }
 
 static void
@@ -1437,7 +1395,6 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, TRUE, 0);
 
 	priv->device_list = widget = gtk_list_box_new ();
-	priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, priv->device_list);
 	g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
 	gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
 	gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
@@ -1780,9 +1737,6 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	priv->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
 	add_device_section (self);
-
-	priv->boxes = g_list_copy (priv->boxes_reverse);
-	priv->boxes = g_list_reverse (priv->boxes);
 
 	box = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_set_hexpand (box, TRUE);
