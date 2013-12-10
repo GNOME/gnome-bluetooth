@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
 
 	class = g_ascii_strtoull (argv[1], NULL, 0);
 
+	g_message ("device class: 0x%X", class);
 	g_message ("major class: 0x%X %s", (class & 0x1f00) >> 8, byte_to_binary ((class & 0x1f00) >> 8));
 
 	g_message ("%d %s", bluetooth_class_to_type (class), bluetooth_type_to_string (bluetooth_class_to_type (class)));
