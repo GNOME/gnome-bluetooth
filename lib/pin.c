@@ -225,8 +225,8 @@ get_pincode_for_device (guint       type,
 	if (confirm != NULL)
 		*confirm = data.confirm;
 
-	g_debug ("Got pin '%s' (max digits: %d) for device '%s' (type: %s address: %s, vendor: %s)",
-		 data.ret_pin, data.max_digits,
+	g_debug ("Got pin '%s' (max digits: %d, confirm: %d) for device '%s' (type: %s address: %s, vendor: %s)",
+		 data.ret_pin, data.max_digits, data.confirm,
 		 name ? name : "", bluetooth_type_to_string (type), address, data.vendor);
 
 	g_free (data.vendor);
