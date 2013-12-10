@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-06 16:17+0000\n"
-"PO-Revision-Date: 2013-12-09 10:39+0100\n"
+"POT-Creation-Date: 2013-12-09 17:39+0000\n"
+"PO-Revision-Date: 2013-12-10 12:48+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -23,12 +23,11 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.5\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
-#| msgid "Click to select device..."
 msgid "Click to select device…"
 msgstr "Pulse para seleccionar el dispositivo…"
 
 #: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:974
+#: ../lib/bluetooth-settings-widget.c:1135
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -46,7 +45,6 @@ msgid "No adapters available"
 msgstr "No hay ningún adaptador disponible"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-#| msgid "Searching for devices..."
 msgid "Searching for devices…"
 msgstr "Buscando dispositivos…"
 
@@ -58,7 +56,7 @@ msgstr "Dispositivo"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1258
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1422
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -114,99 +112,100 @@ msgstr "Dispositivos de entrada (ratones, teclados, etc.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Auriculares, auriculares con micrófono y otros dispositivos de sonido"
 
-#: ../lib/bluetooth-pairing-dialog.c:82
-#: ../lib/bluetooth-settings-widget.c:1492
+#: ../lib/bluetooth-pairing-dialog.c:82 ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-settings-widget.c:1666
 msgid "Done"
 msgstr "Realizado"
 
 #: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
-#| msgid "Please enter the following PIN on '%s':"
+#| msgid "Please enter the PIN mentioned on device %s."
+msgid "Please enter the PIN code entered on '%s':"
+msgstr "Introduzca el código PIN introducido en «%s»:"
+
+#: ../lib/bluetooth-pairing-dialog.c:90
+#, c-format
 msgid "Please confirm the PIN to use for '%s':"
 msgstr "Confirme el PIN que usar para «%s»:"
 
-#: ../lib/bluetooth-pairing-dialog.c:93
+#: ../lib/bluetooth-pairing-dialog.c:99
 msgid "Matches"
 msgstr "Coincide"
 
-#: ../lib/bluetooth-pairing-dialog.c:96
+#: ../lib/bluetooth-pairing-dialog.c:102
 #, c-format
-#| msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgid "Please confirm that the PIN displayed on '%s' matches this one:"
 msgstr "Confirme que el PIN mostrado en «%s» coincide con este:"
 
-#: ../lib/bluetooth-pairing-dialog.c:99 ../lib/bluetooth-pairing-dialog.c:239
+#: ../lib/bluetooth-pairing-dialog.c:105 ../lib/bluetooth-pairing-dialog.c:247
 msgid "Accept"
 msgstr "Aceptar"
 
-#: ../lib/bluetooth-pairing-dialog.c:102
+#: ../lib/bluetooth-pairing-dialog.c:108
 #, c-format
 msgid "Please confirm that you want to pair with '%s'"
 msgstr "Confirme que se quiere emparejar con «%s»"
 
-#: ../lib/bluetooth-pairing-dialog.c:110
+#: ../lib/bluetooth-pairing-dialog.c:116
 #, c-format
 msgid "Please enter the following PIN on '%s':"
 msgstr "Introduzca el siguiente PIN en «%s»:"
 
-#: ../lib/bluetooth-pairing-dialog.c:113
+#: ../lib/bluetooth-pairing-dialog.c:119
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgstr "Introduzca el siguiente PIN en «%s» y pulse «Intro» en el teclado:"
 
-#: ../lib/bluetooth-pairing-dialog.c:116
+#: ../lib/bluetooth-pairing-dialog.c:122
 msgid "Please move the joystick of your iCade in the following directions:"
 msgstr "Mueva el joystick de su iCade en las siguientes direcciones:"
 
-#: ../lib/bluetooth-pairing-dialog.c:243
-#| msgid "_Cancel"
+#: ../lib/bluetooth-pairing-dialog.c:252
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. Placeholder text
-#: ../lib/bluetooth-settings-row.c:78 ../lib/bluetooth-settings-row.c:119
-#| msgid "_Restart Setup"
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:120
 msgid "Not Setup"
 msgstr "No configurado"
 
-#: ../lib/bluetooth-settings-row.c:80
+#: ../lib/bluetooth-settings-row.c:81
 msgid "Connected"
 msgstr "Conectado"
 
-#: ../lib/bluetooth-settings-row.c:82
+#: ../lib/bluetooth-settings-row.c:83
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../lib/bluetooth-settings-widget.c:853
+#: ../lib/bluetooth-settings-widget.c:1009
 msgid "Yes"
 msgstr "Sí"
 
-#: ../lib/bluetooth-settings-widget.c:853
+#: ../lib/bluetooth-settings-widget.c:1009
 msgid "No"
 msgstr "No"
 
 #. translators: %s is the name of the computer, for example:
 #. * Now visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:945
+#: ../lib/bluetooth-settings-widget.c:1104
 #, c-format
-#| msgid "Visibility of “%s”"
 msgid "Now visible as “%s”"
 msgstr "Ahora visible como «%s»"
 
-#: ../lib/bluetooth-settings-widget.c:969
+#: ../lib/bluetooth-settings-widget.c:1130
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "¿Quitar «%s» de la lista de dispositivos?"
 
-#: ../lib/bluetooth-settings-widget.c:971
+#: ../lib/bluetooth-settings-widget.c:1132
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Si quita el dispositivo tendrá que configurarlo de nuevo antes de poder "
 "usarlo la próxima vez."
 
-#: ../lib/bluetooth-settings-widget.c:975
+#: ../lib/bluetooth-settings-widget.c:1136
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -272,7 +271,6 @@ msgid "Video device"
 msgstr "Dispositivo de vídeo"
 
 #: ../lib/settings.ui.h:1
-#| msgid "Please enter the following PIN on '%s':"
 msgid "Please enter the following PIN on 'Foobar':"
 msgstr "Introduzca el siguiente PIN en «alguno»:"
 
@@ -293,27 +291,22 @@ msgid "Address"
 msgstr "Dirección"
 
 #: ../lib/settings.ui.h:8
-#| msgid "Mouse and Touchpad Settings"
 msgid "_Mouse & Touchpad Settings"
 msgstr "Configuración del _ratón y del «touchpad»"
 
 #: ../lib/settings.ui.h:9
-#| msgid "Sound Settings"
 msgid "_Sound Settings"
 msgstr "Configuración del _sonido"
 
 #: ../lib/settings.ui.h:10
-#| msgid "Keyboard Settings"
 msgid "_Keyboard Settings"
 msgstr "Configuración del _teclado"
 
 #: ../lib/settings.ui.h:11
-#| msgid "Send Files..."
 msgid "Send _Files…"
 msgstr "Enviar _archivos…"
 
 #: ../lib/settings.ui.h:12
-#| msgid "_Remove"
 msgid "_Remove Device"
 msgstr "_Quitar dispositivo"
 
@@ -358,7 +351,6 @@ msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
 #: ../sendto/main.c:378 ../sendto/main.c:473
-#| msgid "Connection"
 msgid "Connecting…"
 msgstr "Conectando…"
 
@@ -598,9 +590,6 @@ msgstr "[ARCHIVO…]"
 
 #~ msgid "Device '%s' wants to pair with this computer"
 #~ msgstr "El dispositivo «%s» quiere emparejarse con este equipo"
-
-#~ msgid "Please enter the PIN mentioned on device %s."
-#~ msgstr "Introduzca el PIN mencionado en el dispositivo %s."
 
 #~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 #~ msgstr ""
