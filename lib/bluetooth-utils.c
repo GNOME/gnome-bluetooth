@@ -86,9 +86,9 @@ bluetooth_type_to_string (BluetoothType type)
 		return _("Tablet");
 	case BLUETOOTH_TYPE_VIDEO:
 		return _("Video device");
-	default:
-		return _("Unknown");
 	}
+
+	return _("Unknown");
 }
 
 /**
