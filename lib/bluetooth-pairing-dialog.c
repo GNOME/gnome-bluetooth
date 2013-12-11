@@ -69,7 +69,9 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 				   const char             *device_name)
 {
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
+	char *title;
 	char *help;
+	GtkStyleContext *context;
 
 	priv->mode = mode;
 
@@ -81,33 +83,36 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 	switch (mode) {
 	case BLUETOOTH_PAIRING_MODE_PIN_QUERY:
 		gtk_widget_show (priv->done);
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Done"));
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), CONFIRMATION_PAGE);
-		help = g_strdup_printf (_("Please enter the PIN code entered on '%s':"), device_name);
+		title = g_strdup(_("Confirm Bluetooth PIN"));
+		help = g_strdup_printf (_("Please confirm the PIN that was entered on '%s'."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION:
 		gtk_widget_show (priv->done);
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Done"));
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), CONFIRMATION_PAGE);
-		help = g_strdup_printf (_("Please confirm the PIN to use for '%s':"), device_name);
+		title = g_strdup(_("Confirm Bluetooth PIN"));
+		help = g_strdup_printf (_("Confirm the Bluetooth PIN for '%s'. This can usually be found in the device's manual."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_NORMAL:
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD:
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_ICADE:
 		gtk_widget_hide (priv->done);
+		title = g_strdup_printf (_("Pairing '%s'"), device_name);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), DISPLAY_PAGE);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_MATCH:
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Matches"));
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
 		gtk_widget_show (priv->done);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), DISPLAY_PAGE);
-		help = g_strdup_printf (_("Please confirm that the PIN displayed on '%s' matches this one:"), device_name);
+		title = g_strdup(_("Confirm Bluetooth PIN"));
+		help = g_strdup_printf (_("Please confirm that the following PIN matches the one displayed on '%s'."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_YES_NO:
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Accept"));
 		gtk_widget_show (priv->done);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), MESSAGE_PAGE);
-		help = g_strdup_printf (_("Please confirm that you want to pair with '%s'"), device_name);
+		title = g_strdup (_("Bluetooth Pairing Request"));
+		help = g_strdup_printf (_("'%s' wants to pair with this device. Do you want to allow pairing?"), device_name);
 		break;
 	default:
 		g_assert_not_reached ();
@@ -115,19 +120,43 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 
 	switch (mode) {
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_NORMAL:
-		help = g_strdup_printf (_("Please enter the following PIN on '%s':"), device_name);
+		help = g_strdup_printf (_("Please enter the following PIN on '%s'."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD:
-		help = g_strdup_printf (_("Please enter the following PIN on '%s' and press “Enter” on the keyboard:"), device_name);
+		help = g_strdup_printf (_("Please enter the following PIN on '%s'. Then press “Return” on the keyboard."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_ICADE:
-		help = g_strdup (_("Please move the joystick of your iCade in the following directions:"));
+		help = g_strdup (_("Please move the joystick of your iCade in the following directions. Then press any of the white buttons."));
 		break;
 	default:
 		g_assert (help);
 	}
 
+	if (mode == BLUETOOTH_PAIRING_MODE_YES_NO) {
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("Allow"));
+		context = gtk_widget_get_style_context (priv->done);
+		gtk_style_context_remove_class (context, "suggested-action");
+
+		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("Dismiss"));
+		context = gtk_widget_get_style_context (priv->cancel);
+		gtk_style_context_add_class (context, "destructive-action");
+
+		gtk_widget_hide (priv->pin_notebook);
+	} else {
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
+		context = gtk_widget_get_style_context (priv->done);
+		gtk_style_context_add_class (context, "suggested-action");
+
+		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("Cancel"));
+		context = gtk_widget_get_style_context (priv->cancel);
+		gtk_style_context_remove_class (context, "destructive-action");
+
+		gtk_widget_show (priv->pin_notebook);
+	}
+
+	gtk_label_set_text (GTK_LABEL (priv->title), title);
 	gtk_label_set_text (GTK_LABEL (priv->help_label), help);
+	g_free (title);
 	g_free (help);
 }
 
@@ -284,6 +313,7 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 	g_signal_connect (G_OBJECT (priv->entry_pin), "notify::text",
 			  G_CALLBACK (text_changed_cb), self);
 	priv->pin_notebook = WID ("pin_notebook");
+	gtk_widget_set_no_show_all (priv->pin_notebook, TRUE);
 	gtk_widget_hide (buttonbox);
 	gtk_widget_set_no_show_all (buttonbox, TRUE);
 
