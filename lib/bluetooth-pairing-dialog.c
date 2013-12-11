@@ -45,6 +45,7 @@ struct _BluetoothPairingDialogPrivate {
 	GtkWidget            *entry_pin;
 	GtkWidget            *pin_notebook;
 	GtkWidget            *done;
+	GtkWidget            *spinner;
 	GtkWidget            *cancel;
 
 	BluetoothPairingMode  mode;
@@ -255,6 +256,17 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 	g_signal_connect (G_OBJECT (priv->done), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->done);
+
+	/* Spinner */
+	priv->spinner = gtk_spinner_new ();
+	gtk_widget_set_margin_end (priv->spinner, 12);
+	gtk_widget_set_no_show_all (priv->spinner, TRUE);
+	gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->spinner);
+	g_object_bind_property (priv->spinner, "visible",
+				priv->spinner, "active", 0);
+	g_object_bind_property (priv->spinner, "visible",
+				priv->done, "visible",
+				G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
 
 	/* Cancel button */
 	priv->cancel = gtk_button_new_with_label (_("Cancel"));
