@@ -74,6 +74,11 @@ typedef enum {
  * @BLUETOOTH_TYPE_JOYPAD: a joypad, joystick, or other game controller
  * @BLUETOOTH_TYPE_TABLET: a drawing tablet
  * @BLUETOOTH_TYPE_VIDEO: a video device, such as a webcam
+ * @BLUETOOTH_TYPE_REMOTE_CONTROL: a remote control
+ * @BLUETOOTH_TYPE_SCANNER: a scanner
+ * @BLUETOOTH_TYPE_DISPLAY: a display
+ * @BLUETOOTH_TYPE_WEARABLE: a wearable computer
+ * @BLUETOOTH_TYPE_TOY: a toy or game
  *
  * The type of a Bluetooth device. See also %BLUETOOTH_TYPE_INPUT and %BLUETOOTH_TYPE_AUDIO
  **/
@@ -93,9 +98,14 @@ typedef enum {
 	BLUETOOTH_TYPE_JOYPAD		= 1 << 12,
 	BLUETOOTH_TYPE_TABLET		= 1 << 13,
 	BLUETOOTH_TYPE_VIDEO		= 1 << 14,
+	BLUETOOTH_TYPE_REMOTE_CONTROL	= 1 << 15,
+	BLUETOOTH_TYPE_SCANNER		= 1 << 16,
+	BLUETOOTH_TYPE_DISPLAY		= 1 << 17,
+	BLUETOOTH_TYPE_WEARABLE		= 1 << 18,
+	BLUETOOTH_TYPE_TOY		= 1 << 19
 } BluetoothType;
 
-#define _BLUETOOTH_TYPE_NUM_TYPES 15
+#define _BLUETOOTH_TYPE_NUM_TYPES 20
 
 /**
  * BLUETOOTH_TYPE_INPUT:

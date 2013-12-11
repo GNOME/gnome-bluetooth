@@ -86,6 +86,16 @@ bluetooth_type_to_string (BluetoothType type)
 		return _("Tablet");
 	case BLUETOOTH_TYPE_VIDEO:
 		return _("Video device");
+	case BLUETOOTH_TYPE_REMOTE_CONTROL:
+		return _("Remote control");
+	case BLUETOOTH_TYPE_SCANNER:
+		return _("Scanner");
+	case BLUETOOTH_TYPE_DISPLAY:
+		return _("Display");
+	case BLUETOOTH_TYPE_WEARABLE:
+		return _("Wearable");
+	case BLUETOOTH_TYPE_TOY:
+		return _("Toy");
 	}
 
 	return _("Unknown");
@@ -171,6 +181,8 @@ bluetooth_class_to_type (guint32 class)
 			case 0x01:
 			case 0x02:
 				return BLUETOOTH_TYPE_JOYPAD;
+			case 0x03:
+				return BLUETOOTH_TYPE_REMOTE_CONTROL;
 			}
 			break;
 		case 0x01:
@@ -187,9 +199,17 @@ bluetooth_class_to_type (guint32 class)
 	case 0x06:
 		if (class & 0x80)
 			return BLUETOOTH_TYPE_PRINTER;
+		if (class & 0x40)
+			return BLUETOOTH_TYPE_SCANNER;
 		if (class & 0x20)
 			return BLUETOOTH_TYPE_CAMERA;
+		if (class & 0x10)
+			return BLUETOOTH_TYPE_DISPLAY;
 		break;
+	case 0x07:
+		return BLUETOOTH_TYPE_WEARABLE;
+	case 0x08:
+		return BLUETOOTH_TYPE_TOY;
 	}
 
 	return 0;
