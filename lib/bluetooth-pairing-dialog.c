@@ -245,6 +245,7 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 	priv->header = gtk_header_bar_new ();
 	gtk_header_bar_set_custom_title (GTK_HEADER_BAR (priv->header), gtk_label_new (""));
 	priv->done = gtk_button_new_with_label (_("Accept"));
+	gtk_widget_set_no_show_all (priv->done, TRUE);
 	gtk_widget_set_can_default (GTK_WIDGET (priv->done), TRUE);
 	g_signal_connect (G_OBJECT (priv->done), "clicked",
 			  G_CALLBACK (response_cb), self);
@@ -265,7 +266,7 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 			  G_CALLBACK (text_changed_cb), self);
 	priv->pin_notebook = WID ("pin_notebook");
 	gtk_widget_hide (buttonbox);
-	gtk_widget_set_no_show_all (buttonbox, FALSE);
+	gtk_widget_set_no_show_all (buttonbox, TRUE);
 
 	context = gtk_widget_get_style_context (priv->done);
 	gtk_style_context_add_class (context, "suggested-action");
