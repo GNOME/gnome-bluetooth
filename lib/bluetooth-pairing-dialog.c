@@ -39,6 +39,7 @@ typedef struct _BluetoothPairingDialogPrivate BluetoothPairingDialogPrivate;
 struct _BluetoothPairingDialogPrivate {
 	GtkBuilder           *builder;
 	GtkWidget            *header;
+	GtkWidget            *title;
 	GtkWidget            *help_label;
 	GtkWidget            *label_pin;
 	GtkWidget            *entry_pin;
@@ -242,14 +243,20 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 	container = gtk_dialog_get_content_area (GTK_DIALOG (self));
 	buttonbox = gtk_dialog_get_action_area (GTK_DIALOG (self));
 
+	/* Header */
 	priv->header = gtk_header_bar_new ();
-	gtk_header_bar_set_custom_title (GTK_HEADER_BAR (priv->header), gtk_label_new (""));
+	priv->title = gtk_label_new ("");
+	gtk_header_bar_set_custom_title (GTK_HEADER_BAR (priv->header), priv->title);
+
+	/* OK button */
 	priv->done = gtk_button_new_with_label (_("Accept"));
 	gtk_widget_set_no_show_all (priv->done, TRUE);
 	gtk_widget_set_can_default (GTK_WIDGET (priv->done), TRUE);
 	g_signal_connect (G_OBJECT (priv->done), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (priv->header), priv->done);
+
+	/* Cancel button */
 	priv->cancel = gtk_button_new_with_label (_("Cancel"));
 	g_signal_connect (G_OBJECT (priv->cancel), "clicked",
 			  G_CALLBACK (response_cb), self);
@@ -270,6 +277,8 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 
 	context = gtk_widget_get_style_context (priv->done);
 	gtk_style_context_add_class (context, "suggested-action");
+	context = gtk_widget_get_style_context (priv->title);
+	gtk_style_context_add_class (context, "title");
 }
 
 static void
