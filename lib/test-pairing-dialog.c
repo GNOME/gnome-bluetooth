@@ -46,14 +46,44 @@ response_cb (GtkDialog *dialog,
 int main (int argc, char **argv)
 {
 	GtkWidget *window;
+	BluetoothPairingMode mode;
+	const char *pin = "123456";
+	const char *device = "My device";
 
 	gtk_init (&argc, &argv);
 
+	if (g_strcmp0 (argv[1], "pin-confirmation") == 0 ||
+	    argv[1] == NULL) {
+		mode = BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION;
+	} else if (g_strcmp0 (argv[1], "pin-display-keyboard") == 0) {
+		mode = BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD;
+		pin = "123456⏎";
+	} else if (g_strcmp0 (argv[1], "pin-display-icade") == 0) {
+		mode = BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_ICADE;
+		pin = "⬆⬆⬅⬅➡➡❍";
+	} else if (g_strcmp0 (argv[1], "pin-query") == 0) {
+		mode = BLUETOOTH_PAIRING_MODE_PIN_QUERY;
+	} else if (g_strcmp0 (argv[1], "pin-match") == 0) {
+		mode = BLUETOOTH_PAIRING_MODE_PIN_MATCH;
+	} else if (g_strcmp0 (argv[1], "yes-no") == 0) {
+		mode = BLUETOOTH_PAIRING_MODE_YES_NO;
+	} else {
+		g_print ("Mode '%s' not supported, must be one of:\n", argv[1]);
+		g_print ("\tpin-confirmation\n");
+		g_print ("\tpin-display-keyboard\n");
+		g_print ("\tpin-display-icade\n");
+		g_print ("\tpin-query\n");
+		g_print ("\tpin-match\n");
+		g_print ("\tyes-no\n");
+
+		return 1;
+	}
+
 	window = bluetooth_pairing_dialog_new ();
 	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (window),
-					   BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION,
-					   "123456",
-					   "My device");
+					   mode,
+					   pin,
+					   device);
 	g_signal_connect (G_OBJECT (window), "response",
 			  G_CALLBACK (response_cb), window);
 
