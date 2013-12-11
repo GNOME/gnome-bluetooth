@@ -500,18 +500,48 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 {
 	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
-	char *display_pin;
-	char *name;
+	BluetoothType type;
+	char *display_pin = NULL;
+	char *name, *bdaddr;
+	char *db_pin;
 
 	g_debug ("display_pincode_callback (%s, %s)", g_dbus_proxy_get_object_path (device), pincode);
 
-	if (!get_properties_for_device (self, device, &name, NULL, NULL)) {
+	if (!get_properties_for_device (self, device, &name, &bdaddr, &type)) {
 		char *msg;
 
 		msg = g_strdup_printf ("Missing information for %s", g_dbus_proxy_get_object_path (device));
 		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
 		g_free (msg);
 		return;
+	}
+
+	/* Verify PIN code validity */
+	db_pin = get_pincode_for_device (type,
+					 bdaddr,
+					 name,
+					 NULL,
+					 NULL);
+	if (g_strcmp0 (db_pin, "KEYBOARD") == 0) {
+		/* Should work, follow through */
+	} else if (g_strcmp0 (db_pin, "ICADE") == 0) {
+		char *msg;
+
+		msg = g_strdup_printf ("Generated pincode for %s when it shouldn't have", name);
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
+		g_free (msg);
+		goto bail;
+	} else if (g_strcmp0 (db_pin, "0000") == 0) {
+		g_debug ("Ignoring generated keyboard PIN '%s', should get 0000 soon", pincode);
+		g_dbus_method_invocation_return_value (invocation, NULL);
+		goto bail;
+	} else if (g_strcmp0 (db_pin, "NULL") == 0) {
+		char *msg;
+
+		msg = g_strdup_printf ("Attempting pairing for %s that doesn't support pairing", name);
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
+		g_free (msg);
+		goto bail;
 	}
 
 	setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
@@ -525,7 +555,10 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
 
+bail:
+	g_free (db_pin);
 	g_free (display_pin);
+	g_free (bdaddr);
 	g_free (name);
 }
 
