@@ -270,10 +270,6 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 
 	context = gtk_widget_get_style_context (priv->done);
 	gtk_style_context_add_class (context, "suggested-action");
-	context = gtk_widget_get_style_context (priv->entry_pin);
-	gtk_style_context_add_class (context, "pin-entry");
-	context = gtk_widget_get_style_context (priv->label_pin);
-	gtk_style_context_add_class (context, "pin-label");
 }
 
 static void

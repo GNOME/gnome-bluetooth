@@ -39,6 +39,9 @@
                 <property name="input_purpose">digits</property>
                 <property name="input_hints">GTK_INPUT_HINT_NO_SPELLCHECK | GTK_INPUT_HINT_NONE</property>
                 <property name="activates-default">True</property>
+                <style>
+                  <class name="pin-entry"/>
+                </style>
               </object>
             </child>
           </object>
@@ -48,6 +51,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label">123456</property>
+            <style>
+              <class name="pin-label"/>
+            </style>
           </object>
           <packing>
             <property name="position">1</property>
