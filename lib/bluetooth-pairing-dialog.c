@@ -267,8 +267,6 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 	gtk_widget_hide (buttonbox);
 	gtk_widget_set_no_show_all (buttonbox, FALSE);
 
-	context = gtk_widget_get_style_context (priv->cancel);
-	gtk_style_context_add_class (context, "destructive-action");
 	context = gtk_widget_get_style_context (priv->done);
 	gtk_style_context_add_class (context, "suggested-action");
 	context = gtk_widget_get_style_context (priv->entry_pin);
