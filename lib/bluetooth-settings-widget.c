@@ -77,7 +77,6 @@ struct _BluetoothSettingsWidgetPrivate {
 
 	/* Visible */
 	GtkWidget           *visible_label;
-	GtkWidget           *visible_revealer;
 };
 
 G_DEFINE_TYPE(BluetoothSettingsWidget, bluetooth_settings_widget, GTK_TYPE_BOX)
@@ -1169,7 +1168,7 @@ update_visibility (BluetoothSettingsWidget *self)
 		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
 		g_free (label);
 	}
-	gtk_revealer_set_reveal_child (GTK_REVEALER (priv->visible_revealer), name != NULL);
+	gtk_widget_set_visible (priv->visible_label, name != NULL);
 }
 
 static void
@@ -1453,12 +1452,20 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_widget_set_margin_bottom (widget, 6);
 	gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
 
+	/* Discoverable spinner */
 	priv->device_spinner = spinner = gtk_spinner_new ();
 	g_object_bind_property (G_OBJECT (priv->client), "default-adapter-discovering",
 				G_OBJECT (priv->device_spinner), "active",
 				G_BINDING_SYNC_CREATE);
 	gtk_widget_set_margin_bottom (spinner, 6);
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, TRUE, 0);
+
+	/* Discoverable label */
+	priv->visible_label = gtk_label_new ("Now visible as “Foobar”");
+	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 1.0, 0.5);
+	gtk_box_pack_end (GTK_BOX (hbox), priv->visible_label, FALSE, TRUE, 0);
+	update_visibility (self);
 
 	priv->device_list = widget = gtk_list_box_new ();
 	g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
@@ -1821,15 +1828,6 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 
 	priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (box));
 	gtk_container_set_focus_vadjustment (GTK_CONTAINER (widget), priv->focus_adjustment);
-
-	/* Discoverable label */
-	priv->visible_revealer = gtk_revealer_new ();
-	priv->visible_label = gtk_label_new ("Now visible as “Foobar”");
-	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
-	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 0.5, 0.5);
-	gtk_container_add (GTK_CONTAINER (priv->visible_revealer), priv->visible_label);
-	gtk_box_pack_start (GTK_BOX (widget), priv->visible_revealer, FALSE, TRUE, 0);
-	update_visibility (self);
 
 	setup_properties_dialog (self);
 
