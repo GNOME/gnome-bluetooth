@@ -1162,8 +1162,8 @@ update_visibility (BluetoothSettingsWidget *self)
 		char *label;
 
 		/* translators: %s is the name of the computer, for example:
-		 * Now visible as “Bastien Nocera's Computer” */
-		label = g_strdup_printf (_("Now visible as “%s”"), name);
+		 * Visible as “Bastien Nocera's Computer” */
+		label = g_strdup_printf (_("Visible as “%s”"), name);
 		g_free (name);
 		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
 		g_free (label);
@@ -1461,7 +1461,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, TRUE, 0);
 
 	/* Discoverable label */
-	priv->visible_label = gtk_label_new ("Now visible as “Foobar”");
+	priv->visible_label = gtk_label_new ("Visible as “Foobar”");
 	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 1.0, 0.5);
 	gtk_box_pack_end (GTK_BOX (hbox), priv->visible_label, FALSE, TRUE, 0);
