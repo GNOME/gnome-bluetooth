@@ -99,6 +99,7 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 
 	/* Name is already escaped */
 	priv->label = gtk_label_new ("Placeholder Name");
+	gtk_label_set_ellipsize (GTK_LABEL (priv->label), PANGO_ELLIPSIZE_END);
 	gtk_misc_set_alignment (GTK_MISC (priv->label), 0, 0.5);
 	gtk_widget_set_margin_start (priv->label, 20);
 	gtk_widget_set_margin_end (priv->label, 20);
