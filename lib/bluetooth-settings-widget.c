@@ -1657,8 +1657,13 @@ setup_properties_dialog (BluetoothSettingsWidget *self)
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), done);
 	gtk_widget_show_all (header);
 	priv->properties_title = gtk_label_new ("");
+	g_object_set (G_OBJECT (priv->properties_title),
+		      "margin-start", 12,
+		      "margin-end", 12,
+		      NULL);
 	gtk_header_bar_set_custom_title (GTK_HEADER_BAR (header), priv->properties_title);
 	gtk_window_set_titlebar (GTK_WINDOW (priv->properties_dialog), header);
+	gtk_label_set_ellipsize (GTK_LABEL (priv->properties_title), PANGO_ELLIPSIZE_END);
 	gtk_container_add (GTK_CONTAINER (container), WID ("properties_vbox"));
 	gtk_widget_hide (buttonbox);
 	gtk_widget_set_no_show_all (buttonbox, FALSE);
