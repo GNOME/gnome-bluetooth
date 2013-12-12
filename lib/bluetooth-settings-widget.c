@@ -369,6 +369,34 @@ enter_pin_cb (GtkDialog *dialog,
 }
 
 static void
+confirm_remote_pin_cb (GtkDialog *dialog,
+		       int        response,
+		       gpointer   user_data)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+	GDBusMethodInvocation *invocation;
+
+	invocation = g_object_get_data (G_OBJECT (dialog), "invocation");
+
+	if (response == GTK_RESPONSE_ACCEPT) {
+		GDBusProxy *device;
+		const char *pin;
+
+		pin = g_object_get_data (G_OBJECT (invocation), "pin");
+		device = g_object_get_data (G_OBJECT (invocation), "device");
+
+		bluetooth_client_set_trusted (BLUETOOTH_CLIENT (priv->client), g_dbus_proxy_get_object_path (device), TRUE);
+
+		g_dbus_method_invocation_return_value (invocation,
+						       g_variant_new ("(s)", pin));
+	} else {
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", "Pairing refused from settings panel");
+	}
+
+	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+}
+
+static void
 pincode_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy            *device,
 		  gpointer               user_data)
@@ -448,10 +476,16 @@ pincode_callback (GDBusMethodInvocation *invocation,
 		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
 				  G_CALLBACK (display_cb), user_data);
 	} else {
-		g_dbus_method_invocation_return_value (invocation,
-						       g_variant_new ("(s)", default_pin));
-		/* Won't be using it after all */
-		g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
+						   BLUETOOTH_PAIRING_MODE_YES_NO,
+						   default_pin, name);
+
+		g_object_set_data_full (G_OBJECT (invocation), "pin", g_strdup (default_pin), g_free);
+		g_object_set_data_full (G_OBJECT (invocation), "device", g_object_ref (device), g_object_unref);
+		g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", invocation);
+
+		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
+				  G_CALLBACK (confirm_remote_pin_cb), user_data);
 	}
 
 	g_free (name);
@@ -459,8 +493,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 	g_free (default_pin);
 	g_free (display_pin);
 
-	if (priv->pairing_dialog)
-		gtk_widget_show (priv->pairing_dialog);
+	gtk_widget_show (priv->pairing_dialog);
 }
 
 static void
