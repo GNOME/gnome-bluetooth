@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Tajik Gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-09 17:39+0000\n"
-"PO-Revision-Date: 2013-12-10 16:04+0500\n"
+"POT-Creation-Date: 2013-12-12 18:56+0000\n"
+"PO-Revision-Date: 2013-12-14 16:35+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: \n"
 "Language: tg\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.1\n"
+"X-Generator: Poedit 1.6.2\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
 msgid "Click to select device…"
 msgstr "Барои интихоби дастгоҳ, зер кунед..."
 
 #: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1135
+#: ../lib/bluetooth-settings-widget.c:1197
 msgid "_Cancel"
 msgstr "_Бекор кардан"
 
@@ -33,7 +33,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "Номаълум"
 
@@ -53,7 +53,7 @@ msgstr "Дастгоҳ"
 msgid "Type"
 msgstr "Навъ"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1422
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Дастгоҳҳо"
 
@@ -109,65 +109,102 @@ msgstr "Дастгоҳҳои вурудӣ (микрофонҳо, клавиат�
 msgid "Headphones, headsets and other audio devices"
 msgstr "Телефонҳо, гӯшмонакҳо ва дастгоҳҳои аудиоии дигар"
 
-#: ../lib/bluetooth-pairing-dialog.c:82 ../lib/bluetooth-pairing-dialog.c:88
-#: ../lib/bluetooth-settings-widget.c:1666
-msgid "Done"
-msgstr "Тайёр"
-
-#: ../lib/bluetooth-pairing-dialog.c:84
-#, c-format
-#| msgid "Please enter the following PIN on '%s':"
-msgid "Please enter the PIN code entered on '%s':"
-msgstr "Лутфан, рамзи PIN-и дар '%s' воридшударо ворид кунед:"
-
-#: ../lib/bluetooth-pairing-dialog.c:90
-#, c-format
-msgid "Please confirm the PIN to use for '%s':"
-msgstr "Лутфан, рамзи PIN-ро барои истифода дар '%s' тасдиқ кунед:"
-
-#: ../lib/bluetooth-pairing-dialog.c:99
-msgid "Matches"
-msgstr "Мутобиқаткунанда"
-
-#: ../lib/bluetooth-pairing-dialog.c:102
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one:"
-msgstr ""
-"Лутфан, тасдиқ кунед, ки рамзи PIN-и намоишдода дар '%s' ба рамзи зерин "
-"мувофиқат мекунад:"
-
-#: ../lib/bluetooth-pairing-dialog.c:105 ../lib/bluetooth-pairing-dialog.c:247
-msgid "Accept"
-msgstr "Қабул кардан"
-
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
 #: ../lib/bluetooth-pairing-dialog.c:108
-#, c-format
-msgid "Please confirm that you want to pair with '%s'"
-msgstr "Лутфан, тасдиқ кунед, ки мехоҳед бо '%s' ҷуфт созед"
+msgid "Confirm Bluetooth PIN"
+msgstr "Рамзи PIN-и Bluetooth-ро тасдиқ кунед"
 
-#: ../lib/bluetooth-pairing-dialog.c:116
+#: ../lib/bluetooth-pairing-dialog.c:88
 #, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед:"
+#| msgid "Please confirm the PIN to use for '%s':"
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Лутфан, рамзи PIN-ро, ки дар '%s' ворид шудааст, тасдиқ кунед."
 
-#: ../lib/bluetooth-pairing-dialog.c:119
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Тасдиқ кардан"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
 msgstr ""
-"Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед, ва тугмаи “Enter”-ро дар "
-"клавиатура пахш намоед:"
+"Рамзи PIN-и Bluetooth-ро барои '%s' тасдиқ кунед. Одатан, шумо метавонед "
+"онро аз дастури дастгоҳ пайдо кунед."
 
-#: ../lib/bluetooth-pairing-dialog.c:122
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Лутфан, ҷойстики iCade-и худро ба самтҳои зерин ҳаракат кунед:"
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+#| msgid "Pairing with '%s' cancelled"
+msgid "Pairing '%s'"
+msgstr "Ҷуфтсозии '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:252
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+#| msgid "Please confirm that the PIN displayed on '%s' matches this one:"
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr ""
+"Лутфан, тасдиқ кунед, ки рамзи PIN-и намоишдода дар '%s' ба рамзи зерин "
+"мувофиқат мекунад."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+#| msgid "Bluetooth Transfer"
+msgid "Bluetooth Pairing Request"
+msgstr "Дархости ҷуфтсозии Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr ""
+"'%s' мехоҳад, ки ин дастгоҳро ҷуфт кунад. Барои ҷуфтсозӣ иҷозат медиҳед?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+#| msgid "Please enter the following PIN on '%s':"
+msgid "Please enter the following PIN on '%s'."
+msgstr "Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+#| msgid ""
+#| "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr ""
+"Лутфан, рамзи PIN-и зеринро дар '%s' ворид кунед. Баъд тугмаи “Enter”-ро дар "
+"клавиатура пахш намоед."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+#| msgid "Please move the joystick of your iCade in the following directions:"
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Лутфан, ҷойстики iCade-и худро ба самтҳои зерин ҳаракат кунед. Баъд яке аз "
+"тугмаҳои сафедро пахш кунед."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Иҷозат додан"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Рад кардан"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
 msgid "Cancel"
 msgstr "Бекор кардан"
 
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "Қабул кардан"
+
 #. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:120
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
 msgid "Not Setup"
 msgstr "Танзим нашудааст"
 
@@ -179,36 +216,41 @@ msgstr "Пайваст шудааст"
 msgid "Disconnected"
 msgstr "Қатъ шудааст"
 
-#: ../lib/bluetooth-settings-widget.c:1009
+#: ../lib/bluetooth-settings-widget.c:1071
 msgid "Yes"
 msgstr "Ҳа"
 
-#: ../lib/bluetooth-settings-widget.c:1009
+#: ../lib/bluetooth-settings-widget.c:1071
 msgid "No"
 msgstr "Не"
 
 #. translators: %s is the name of the computer, for example:
-#. * Now visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1104
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
 #, c-format
-msgid "Now visible as “%s”"
-msgstr "Ҳоло ҳамчун “%s” намоён аст"
+#| msgid "Now visible as “%s”"
+msgid "Visible as “%s”"
+msgstr "Ҳамчун “%s” намоён аст"
 
-#: ../lib/bluetooth-settings-widget.c:1130
+#: ../lib/bluetooth-settings-widget.c:1192
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "'%s'-ро аз рӯйхати дастгоҳҳо тоза мекунед?"
 
-#: ../lib/bluetooth-settings-widget.c:1132
+#: ../lib/bluetooth-settings-widget.c:1194
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Агар дастгоҳро тоза кунед, шумо бояд онро барои истифодаи оянда аз нав "
 "танзим кунед."
 
-#: ../lib/bluetooth-settings-widget.c:1136
+#: ../lib/bluetooth-settings-widget.c:1198
 msgid "_Remove"
 msgstr "_Тоза кардан"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "Тайёр"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -270,6 +312,27 @@ msgstr "Планшет"
 #: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Дастгоҳи видеоӣ"
+
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Идоракунии дурдаст"
+
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Сканер"
+
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Намоиш"
+
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Васлшаванда"
+
+#: ../lib/bluetooth-utils.c:98
+#| msgid "To:"
+msgid "Toy"
+msgstr "Бозӣ"
 
 #: ../lib/settings.ui.h:1
 msgid "Please enter the following PIN on 'Foobar':"
@@ -438,6 +501,16 @@ msgstr "НОМ"
 msgid "[FILE...]"
 msgstr "[ФАЙЛ...]"
 
+#~| msgid "Please enter the following PIN on '%s':"
+#~ msgid "Please enter the PIN code entered on '%s':"
+#~ msgstr "Лутфан, рамзи PIN-и дар '%s' воридшударо ворид кунед:"
+
+#~ msgid "Matches"
+#~ msgstr "Мутобиқаткунанда"
+
+#~ msgid "Please confirm that you want to pair with '%s'"
+#~ msgstr "Лутфан, тасдиқ кунед, ки мехоҳед бо '%s' ҷуфт созед"
+
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr ""
 #~ "Дстифода бурдани ин дастгоҳи GPS барои хидматҳои ҷойгиршавии ҷуғрофӣ"
@@ -445,9 +518,6 @@ msgstr "[ФАЙЛ...]"
 #~ msgid "Access the Internet using your cell phone (test)"
 #~ msgstr ""
 #~ "Пайдо кардани дастраӣ ба Интернет тавассути телефони мобилӣ (санҷишӣ)"
-
-#~ msgid "Pairing with '%s' cancelled"
-#~ msgstr "Ҷуфткунӣ бо '%s' бекор шудааст"
 
 #~ msgid "Please enter the following PIN:"
 #~ msgstr "Лутфан, рамзи PIN-и зеринро ворид кунед:"
