@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 10:22+0100\n"
-"PO-Revision-Date: 2013-12-11 10:25+0200\n"
+"POT-Creation-Date: 2013-12-15 18:20+0100\n"
+"PO-Revision-Date: 2013-12-15 18:24+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -28,7 +28,7 @@ msgid "Click to select device…"
 msgstr "Prema para seleccionar o dispositivo…"
 
 #: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1132
+#: ../lib/bluetooth-settings-widget.c:1197
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -37,7 +37,7 @@ msgid "_OK"
 msgstr "_Aceptar"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "Descoñecido"
 
@@ -57,7 +57,7 @@ msgstr "Dispositivo"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1380
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -113,60 +113,90 @@ msgstr "Dispositivos de entrada (ratos, teclados, etc.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Auriculares e outros dispositivos de son"
 
-#: ../lib/bluetooth-pairing-dialog.c:82 ../lib/bluetooth-pairing-dialog.c:88
-#: ../lib/bluetooth-settings-widget.c:1623
-msgid "Done"
-msgstr "Feito"
-
-#: ../lib/bluetooth-pairing-dialog.c:84
-#, c-format
-msgid "Please enter the PIN code entered on '%s':"
-msgstr "Escriba o PIN escrito no dispositivo «%s»:"
-
-#: ../lib/bluetooth-pairing-dialog.c:90
-#, c-format
-msgid "Please confirm the PIN to use for '%s':"
-msgstr "Confirme o PIN a usar en «%s»:"
-
-#: ../lib/bluetooth-pairing-dialog.c:99
-msgid "Matches"
-msgstr "Coincide"
-
-#: ../lib/bluetooth-pairing-dialog.c:102
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one:"
-msgstr "Confirme que o PIN mostrado en «%s» coincide con este:"
-
-#: ../lib/bluetooth-pairing-dialog.c:105 ../lib/bluetooth-pairing-dialog.c:247
-msgid "Accept"
-msgstr "Aceptar"
-
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
 #: ../lib/bluetooth-pairing-dialog.c:108
-#, c-format
-msgid "Please confirm that you want to pair with '%s'"
-msgstr "Confirme que quere emparellarse con «%s»"
+msgid "Confirm Bluetooth PIN"
+msgstr "Confirmar PIN de Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:116
+#: ../lib/bluetooth-pairing-dialog.c:88
 #, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Insira o seguinte PIN en «%s»:"
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Confirme o PIN que foi escrito en «%s»."
 
-#: ../lib/bluetooth-pairing-dialog.c:119
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Insira o seguinte PIN en «%s» e prema «Intro» no teclado:"
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"Confirmar o PIN de Bluetooth para «%s». Isto pode atoparse normalmente non "
+"manual do dispositivo."
 
-#: ../lib/bluetooth-pairing-dialog.c:122
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Mova o joystick do iCade nas seguintes direccións:"
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "Emparellando «%s»"
 
-#: ../lib/bluetooth-pairing-dialog.c:252
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "Confirme que o PIN coincide co que se mostra no dispositivo «%s»."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "Solicitude de emparellado de Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr ""
+"«%s» que emparellarse con este computador. Desexa permitir o emparellado?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "Escriba o seguinte PIN en «%s»."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "Escriba o seguinte PIN en «%s». Logo prema «Intro» no teclado."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Mova o joystick do seu iCade nas seguintes direccións. Logo prema calquera "
+"botón branco."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Permitir"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Rexeitar"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
 msgid "Cancel"
 msgstr "Cancelar"
 
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "Aceptar"
+
 #. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:120
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
 msgid "Not Setup"
 msgstr "Sen configurar"
 
@@ -178,36 +208,40 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../lib/bluetooth-settings-widget.c:1006
+#: ../lib/bluetooth-settings-widget.c:1071
 msgid "Yes"
 msgstr "Si"
 
-#: ../lib/bluetooth-settings-widget.c:1006
+#: ../lib/bluetooth-settings-widget.c:1071
 msgid "No"
 msgstr "Non"
 
 #. translators: %s is the name of the computer, for example:
-#. * Now visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1101
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
 #, c-format
-msgid "Now visible as “%s”"
-msgstr "Visíbel agora como «%s»"
+msgid "Visible as “%s”"
+msgstr "Visíbel como «%s»"
 
-#: ../lib/bluetooth-settings-widget.c:1127
+#: ../lib/bluetooth-settings-widget.c:1192
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Desexa retirar «%s» da lista de dispositivos?"
 
-#: ../lib/bluetooth-settings-widget.c:1129
+#: ../lib/bluetooth-settings-widget.c:1194
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se retira o dispositivo, deberá configuralo de novo antes de usalo a "
 "seguinte vez."
 
-#: ../lib/bluetooth-settings-widget.c:1133
+#: ../lib/bluetooth-settings-widget.c:1198
 msgid "_Remove"
 msgstr "_Retirar"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "Feito"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -269,6 +303,26 @@ msgstr "Tableta"
 #: ../lib/bluetooth-utils.c:88
 msgid "Video device"
 msgstr "Dispositivo de vídeo"
+
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Control remoto"
+
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Escaner"
+
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Pantalla"
+
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Vestíbel"
+
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "Xoguete"
 
 #: ../lib/settings.ui.h:1
 msgid "Please enter the following PIN on 'Foobar':"
@@ -437,6 +491,18 @@ msgstr "NOME"
 msgid "[FILE...]"
 msgstr "[FICHEIRO...]"
 
+#~ msgid "Please enter the PIN code entered on '%s':"
+#~ msgstr "Escriba o PIN escrito no dispositivo «%s»:"
+
+#~ msgid "Matches"
+#~ msgstr "Coincide"
+
+#~ msgid "Please confirm that the PIN displayed on '%s' matches this one:"
+#~ msgstr "Confirme que o PIN mostrado en «%s» coincide con este:"
+
+#~ msgid "Please confirm that you want to pair with '%s'"
+#~ msgstr "Confirme que quere emparellarse con «%s»"
+
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Use un dispositivo GPS para os servizos de xeolocalización"
 
@@ -535,9 +601,6 @@ msgstr "[FICHEIRO...]"
 #~ msgid "Sending files via Bluetooth"
 #~ msgstr "Enviando ficheiros por Bluetooth"
 
-#~ msgid "Turn on Bluetooth"
-#~ msgstr "Activar o Bluetooth"
-
 #~ msgid "Bluetooth: Off"
 #~ msgstr "Bluetooth: desactivado"
 
@@ -579,20 +642,11 @@ msgstr "[FICHEIRO...]"
 #~ msgid "Bluetooth"
 #~ msgstr "Bluetooth"
 
-#~ msgid "Device '%s' wants to pair with this computer"
-#~ msgstr "O dispositivo «%s» que emparellarse con este computador"
-
-#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-#~ msgstr "Confirme cando o PIN «%s» coincida co do dispositivo %s."
-
 #~ msgid "Grant access to '%s'"
 #~ msgstr "Permitirlle o acceso a «%s»"
 
 #~ msgid "Device %s wants access to the service '%s'."
 #~ msgstr "O dispositivo %s quere acceder ao servizo «%s»."
-
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "Solicitude de emparellamento de «%s»"
 
 #~ msgid "Bluetooth device"
 #~ msgstr "Dispositivo Bluetooth"
@@ -611,9 +665,6 @@ msgstr "[FICHEIRO...]"
 
 #~ msgid "Check authorization"
 #~ msgstr "Comprobar autorización"
-
-#~ msgid "Bluetooth Manager"
-#~ msgstr "Xestor de Bluetooth"
 
 #~ msgid "Bluetooth Manager applet"
 #~ msgstr "Miniaplicativo de xestión de Bluetooth"
