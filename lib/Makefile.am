@@ -10,7 +10,7 @@ bluetooth-settings-resources.c: settings.gresource.xml $(resource_files)
 bluetooth-settings-resources.h: settings.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name bluetooth_settings $<
 
-EXTRA_DIST += settings.gresource.xml
+EXTRA_DIST += settings.gresource.xml settings.ui
 BUILT_SOURCES += bluetooth-settings-resources.c bluetooth-settings-resources.h
 
 # will be scanned for introspection annotation, but won't be installed
