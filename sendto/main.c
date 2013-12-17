@@ -417,7 +417,7 @@ static void create_window(void)
 
 	dialog = gtk_dialog_new_with_buttons(_("Bluetooth File Transfer"), NULL,
 				0,
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				_("_Cancel"), GTK_RESPONSE_CANCEL,
 				_("_Retry"), RESPONSE_RETRY,
 				NULL);
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
@@ -475,7 +475,7 @@ static void create_window(void)
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
 
-	image_status = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_MENU);
+	image_status = gtk_image_new_from_icon_name("dialog-warning", GTK_ICON_SIZE_MENU);
 	gtk_widget_set_no_show_all (image_status, TRUE);
 	gtk_box_pack_start(GTK_BOX (hbox), image_status, FALSE, FALSE, 4);
 
@@ -685,7 +685,7 @@ show_browse_dialog (char **device_name)
 
 	dialog = gtk_dialog_new_with_buttons(_("Select device to send to"), NULL,
 					     0,
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+					     _("_Cancel"), GTK_RESPONSE_REJECT,
 					     NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Send"), GTK_RESPONSE_ACCEPT);
@@ -734,7 +734,7 @@ show_select_dialog(void)
 
 	dialog = gtk_file_chooser_dialog_new(_("Choose files to send"), NULL,
 				GTK_FILE_CHOOSER_ACTION_OPEN,
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				_("_Cancel"), GTK_RESPONSE_CANCEL,
 				_("Select"), GTK_RESPONSE_ACCEPT, NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_file_chooser_set_select_multiple(GTK_FILE_CHOOSER(dialog), TRUE);
