@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-15 10:06+0200\n"
-"PO-Revision-Date: 2013-07-15 10:07+0200\n"
+"POT-Creation-Date: 2013-12-26 10:39+0100\n"
+"PO-Revision-Date: 2013-12-26 10:39+0100\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -32,11 +32,21 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
-msgstr "Fare clic per selezionare il dispositivo..."
+msgid "Click to select device…"
+msgstr "Fare clic per selezionare il dispositivo…"
+
+# FIXME! usare stock
+#: ../lib/bluetooth-chooser-button.c:205
+#: ../lib/bluetooth-settings-widget.c:1197
+msgid "_Cancel"
+msgstr "A_nnulla"
+
+#: ../lib/bluetooth-chooser-button.c:206
+msgid "_OK"
+msgstr "_OK"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "Sconosciuto"
 
@@ -46,18 +56,18 @@ msgstr "Nessun adattatore disponibile"
 
 # [NdT] si riferisci ai dispositivi Bluetooth
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "Ricerca dispositivi..."
+msgid "Searching for devices…"
+msgstr "Ricerca dispositivi…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Dispositivi"
 
@@ -65,7 +75,7 @@ msgstr "Dispositivi"
 msgid "All categories"
 msgstr "Tutte le categorie"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
 msgid "Paired"
 msgstr "Associato"
 
@@ -115,6 +125,139 @@ msgstr "Dispositivo di input (mouse, tastiera, ecc.)"
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Cuffie, auricolari o altro dispositivo audio"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "Conferma PIN Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Confermare il PIN inserito su «%s»."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Conferma"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"Confermare il PIN Bluetooth per «%s»: solitamente può essere trovato nel "
+"manuale del dispositivo."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "Associazione con «%s»"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "Confermare che il PIN visualizzato su «%s» corrisponda a questo."
+
+#
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "Richiesta associazione Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr ""
+"«%s» ha richiesto di essere associato con questo dispositivo. Consentire "
+"l'associazione?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "Inserire il seguente PIN su «%s»."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "Inserire il seguente PIN su «%s» e premere «Invio» sulla tastiera."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Muovere il joystick del proprio iCade nelle seguenti direzioni, quindi "
+"premere uno dei pulsanti bianchi."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Consenti"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Declina"
+
+# FIXME! usare stock
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+msgid "Cancel"
+msgstr "Annulla"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "Accetta"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Setup"
+msgstr "Non configurato"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "Collegato"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "Scollegato"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "Yes"
+msgstr "Sì"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "No"
+msgstr "No"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
+#, c-format
+msgid "Visible as “%s”"
+msgstr "Visibile come «%s»"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Rimuovere «%s» dall'elenco dei dispositivi?"
+
+#: ../lib/bluetooth-settings-widget.c:1194
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Rimuovendo il dispositivo è necessario configurarlo nuovamente per poterlo "
+"riusare."
+
+#: ../lib/bluetooth-settings-widget.c:1198
+msgid "_Remove"
+msgstr "_Rimuovi"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "Fatto"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -180,320 +323,66 @@ msgstr "Tavoletta"
 msgid "Video device"
 msgstr "Dispositivo video"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "Usare questo dispositivo GPS per i servizi di geo-localizzazione"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Telecomando"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "Accedere a Internet usando il telefono cellulare (test)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Scanner"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Inserire il seguente PIN su «%s»:"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Display"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Inserire il seguente PIN su «%s» e premere «Invio» sulla tastiera:"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Indossabile"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Muovere il joystick del proprio iCade nelle seguenti direzioni:"
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "Giocattolo"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "Associazione con «%s» annullata"
+#: ../lib/settings.ui.h:1
+msgid "Please enter the following PIN on 'Foobar':"
+msgstr "Inserire il seguente PIN su «Foobar»:"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Confermare che il PIN visualizzato su «%s» corrisponda a questo."
+#: ../lib/settings.ui.h:2
+msgid "Connection"
+msgstr "Connessione"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "Inserire il seguente PIN:"
+#: ../lib/settings.ui.h:3
+msgid "page 1"
+msgstr "pagina 1"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "Associazione con «%s» non riuscita"
+#: ../lib/settings.ui.h:4
+msgid "page 2"
+msgstr "pagina 2"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "Connessione con «%s»..."
+#: ../lib/settings.ui.h:7
+msgid "Address"
+msgstr "Indirizzo"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr ""
-"Attendere mentre viene completata l'impostazione del dispositivo «%s»..."
+#: ../lib/settings.ui.h:8
+msgid "_Mouse & Touchpad Settings"
+msgstr "Impostazioni _mouse e touchpad"
 
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "Nuovo dispositivo «%s» impostato con successo"
+#: ../lib/settings.ui.h:9
+msgid "_Sound Settings"
+msgstr "Impostazioni _audio"
 
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "Impostazione nuovo dispositivo Bluetooth"
+#: ../lib/settings.ui.h:10
+msgid "_Keyboard Settings"
+msgstr "Impostazioni _tastiera"
 
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "_Opzioni PIN..."
+#: ../lib/settings.ui.h:11
+msgid "Send _Files…"
+msgstr "Invia _file…"
 
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "Ricerca dispositivo"
+#: ../lib/settings.ui.h:12
+msgid "_Remove Device"
+msgstr "_Rimuovi dispositivo"
 
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "Impostazone dispositivo"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "Completamento impostazione"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "Selezionare i servizi aggiuntivi da utilizzare con il dispositivo:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "Riepilogo impostazioni"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "Opzioni PIN"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "Selezione _automatica del PIN"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "PIN fisso"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "0000 (la maggior parte di auricolari, mouse e dispositivi GPS)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "1111"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "1234"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "Non associare"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "PIN personalizzato:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "_Riprova"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "_Esci"
-
-# FIXME! usare stock
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "A_nnulla"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "Non corrisponde"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "Corrisponde"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "Impostazione dispositivo Bluetooth"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "Imposta i dispositivi Bluetooth"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d secondo"
-msgstr[1] "%'d secondi"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d minuto"
-msgstr[1] "%'d minuti"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d ora"
-msgstr[1] "%'d ore"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "approssimativamente %'d ora"
-msgstr[1] "approssimativamente %'d ore"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "Connessione..."
-
-#  When try icon is destroyed, recreate it.  This happens
-#  when the notification area is removed.
-#  *
-#  * TODO:
-#  *
-#  * ensure it only gets invoked once
-#  * display sensible error dialogs
-#  * think about fancy received-file actions
-#  *	 - should we send vcards to evo, etc?
-#: ../sendto/main.c:424
-msgid "Bluetooth File Transfer"
-msgstr "Trasferimento file Bluetooth"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "_Riprova"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "Da:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "A:"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "Si è verificato un errore sconosciuto"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr ""
-"Assicurarsi che il dispositivo remoto sia acceso e che accetti connessioni "
-"Bluetooth"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "Invio di %s"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Invio del file %d di %d"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d kB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "%u trasferimento completato"
-msgstr[1] "%u trasferimenti completati"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "Si è verificato un errore"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "Selezionare il dispositivo a cui inviare"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "In_via"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "Scegliere i file da inviare"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "Seleziona"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "Dispositivo remoto da usare"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
-msgstr "INDIRIZZO"
-
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "Nome del dispositivo remoto"
-
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "NOME"
-
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[FILE...]"
-
-#  When try icon is destroyed, recreate it.  This happens
-#  when the notification area is removed.
-#  *
-#  * TODO:
-#  *
-#  * ensure it only gets invoked once
-#  * display sensible error dialogs
-#  * think about fancy received-file actions
-#  *	 - should we send vcards to evo, etc?
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
 msgstr "Trasferimento Bluetooth"
@@ -501,3 +390,122 @@ msgstr "Trasferimento Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Invia file attraverso Bluetooth"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "Si è verificato un errore sconosciuto"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d secondo"
+msgstr[1] "%'d secondi"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minuto"
+msgstr[1] "%'d minuti"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d ora"
+msgstr[1] "%'d ore"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "approssimativamente %'d ora"
+msgstr[1] "approssimativamente %'d ore"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+msgid "Connecting…"
+msgstr "Connessione…"
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "Trasferimento file Bluetooth"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "_Riprova"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "Da:"
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "A:"
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "Invio di %s"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Invio del file %d di %d"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u trasferimento completato"
+msgstr[1] "%u trasferimenti completati"
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "Si è verificato un errore"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "Selezionare il dispositivo a cui inviare"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "In_via"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "Scegliere i file da inviare"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "Seleziona"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "Dispositivo remoto da usare"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "INDIRIZZO"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "Nome del dispositivo remoto"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "NOME"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[FILE...]"
