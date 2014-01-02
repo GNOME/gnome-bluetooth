@@ -135,12 +135,15 @@ test_pin_LDADD = libgnome-bluetooth.la $(LIBGNOMEBT_LIBS)
 pin_DATA = pin-code-database.xml
 pindir = $(pkgdatadir)
 
-all: check
-
-check:
+pin-code-database.xml.valid: pin-code-database.xml
 	@if test -n $(XMLLINT) ; then \
 		xmllint --noout --valid $(srcdir)/pin-code-database.xml ;	\
 	fi
+	touch $@
+
+CLEANFILES += pin-code-database.xml.valid
+
+all-local: pin-code-database.xml.valid
 
 EXTRA_DIST += bluetooth-client.xml bluetooth-fdo.xml gnome-bluetooth.symbols $(pin_DATA)
 
