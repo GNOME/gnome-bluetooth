@@ -1514,7 +1514,7 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 	gboolean paired;
 	GError *err = NULL;
 
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 
 	simple = g_simple_async_result_new (G_OBJECT (client),
 					    callback,
