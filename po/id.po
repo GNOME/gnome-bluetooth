@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-18 11:46+0000\n"
-"PO-Revision-Date: 2013-08-31 13:32+0700\n"
+"POT-Creation-Date: 2013-12-18 19:58+0000\n"
+"PO-Revision-Date: 2014-01-02 23:00+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -22,11 +22,20 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
+msgid "Click to select device…"
 msgstr "Klik untuk memilih perangkat…"
 
+#: ../lib/bluetooth-chooser-button.c:205
+#: ../lib/bluetooth-settings-widget.c:1197
+msgid "_Cancel"
+msgstr "Ba_tal"
+
+#: ../lib/bluetooth-chooser-button.c:206
+msgid "_OK"
+msgstr "_OK"
+
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "Tak dikenal"
 
@@ -35,18 +44,18 @@ msgid "No adapters available"
 msgstr "Tidak tersedia adaptor"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "Mencari perangkat..."
+msgid "Searching for devices…"
+msgstr "Mencari perangkat…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Perangkat"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
 msgid "Type"
 msgstr "Jenis"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -54,7 +63,7 @@ msgstr "Perangkat"
 msgid "All categories"
 msgstr "Semua katagori"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
 msgid "Paired"
 msgstr "Dipasangkan"
 
@@ -102,6 +111,139 @@ msgstr "Perangkat masukan (tetikus, papan ketik, dsb.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Headphone, headset, dan perangkat audio lainnya"
 
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "Konfirmasikan PIN Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Konfirmasikan PIN yang dimasukkan pada '%s'."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Konfirmasi"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"Konfirmasikan PIN Bluetooth bagi '%s'. Ini biasanya dapat ditemukan dalam "
+"manual perangkat."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "Memperpasangkan dengan '%s'"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr ""
+"Konfirmasikan bahwa PIN berikut sama dengan yang ditampilkan pada '%s'."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "Permintaan Berpasangan Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr ""
+"'%s' ingin memperpasangkan dengan perangkat ini. Apakah Anda ingin "
+"mengijinkan perpasangan?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "Harap masukkan PIN berikut pada '%s':"
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr ""
+"Harap masukkan PIN berikut pada '%s'. Lalu tekan \"Return\" pada papan tik."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Harap gerakkan joystick iCade Anda pada arah-arah berikut. Kemudian tekan "
+"sebarang tombol putih."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Ijinkan"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Tutup"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+msgid "Cancel"
+msgstr "Batal"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "Terima"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Setup"
+msgstr "Tak Disiapkan"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "Tersambung"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "Terputus"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "Yes"
+msgstr "Ya"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "No"
+msgstr "Tidak"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
+#, c-format
+msgid "Visible as “%s”"
+msgstr "Tampak sebagai \"%s\""
+
+#: ../lib/bluetooth-settings-widget.c:1192
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Hapus '%s' dari daftar perangkat?"
+
+#: ../lib/bluetooth-settings-widget.c:1194
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Bila Anda menghapus perangkat, Anda perlu menyiapkannya lagi sebelum memakai "
+"lagi."
+
+#: ../lib/bluetooth-settings-widget.c:1198
+msgid "_Remove"
+msgstr "_Hapus"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "Selesai"
+
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
 msgstr "Semua jenis"
@@ -122,7 +264,6 @@ msgstr "Komputer"
 msgid "Network"
 msgstr "Jaringan"
 
-# #-#-#-#-#  gnome-bluetooth.master.id.po (bluez-gnome)  #-#-#-#-#
 # speaker + mic
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
 #: ../lib/bluetooth-utils.c:70
@@ -166,295 +307,65 @@ msgstr "Tablet"
 msgid "Video device"
 msgstr "Perangkat video"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "Gunakan perangkat GPS ini untuk layanan Geolocation"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Kendali jarak jauh"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "Mengakses Internet melalui telepon genggam Anda (uji)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Pemindai"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Masukkan PIN berikut pada '%s':"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Tampilan"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Masukkan PIN berikut pada '%s', kemudian tekan \"Enter\":"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Wearable"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Coba gerakkan joystick iCade Anda pada arah-arah berikut:"
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "Boneka"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "Pemasangan dengan '%s' dibatalkan"
+#: ../lib/settings.ui.h:1
+msgid "Please enter the following PIN on 'Foobar':"
+msgstr "Harap masukkan PIN berikut pada 'Foobar':"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Pastikan PIN yang ditampilkan pada '%s' cocok dengan yang ini."
+#: ../lib/settings.ui.h:2
+msgid "Connection"
+msgstr "Koneksi"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "Masukkan PIN berikut:"
+#: ../lib/settings.ui.h:3
+msgid "page 1"
+msgstr "halaman 1"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "Gagal menyetel '%s'"
+#: ../lib/settings.ui.h:4
+msgid "page 2"
+msgstr "halaman 2"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "Menyambung ke '%s'..."
+#: ../lib/settings.ui.h:7
+msgid "Address"
+msgstr "Alamat"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Mohon tunggu, sedang melengkapi setelan pada '%s'..."
+#: ../lib/settings.ui.h:8
+msgid "_Mouse & Touchpad Settings"
+msgstr "Pengaturan _Tetikus & Touchpad"
 
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "Berhasil menyetel perangkat baru '%s'"
+#: ../lib/settings.ui.h:9
+msgid "_Sound Settings"
+msgstr "Pengaturan _Suara"
 
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "Penyetelan Perangkat Baru Bluetooth"
+#: ../lib/settings.ui.h:10
+msgid "_Keyboard Settings"
+msgstr "Pengaturan Papan _Ketik"
 
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "_Opsi PIN..."
+#: ../lib/settings.ui.h:11
+msgid "Send _Files…"
+msgstr "Kirim _Berkas…"
 
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "Pencarian Perangkat"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "Penyetelan Perangkat"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "Menyelesaikan Penyiapan"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr ""
-"Pilih layanan tambahan yang ingin dipakai pada perangkat yang Anda miliki:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "Ringkasan Pengaturan"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "Opsi PIN"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "Seleksi PIN otom_atis"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "PIN Tetap"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (kebanyakan headset, tetikus, dan perangkat GPS)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "Jangan pasangkan"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "PIN ubahan:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "_Coba Lagi"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "_Keluar"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "Ba_tal"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "Tidak cocok"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "Cocok"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "Penyetelan Perangkat Bluetooth"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "Menyetel perangkat Bluetooth"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d detik"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d menit"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d jam"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "kira-kira %'d jam"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "Menyambung..."
-
-#: ../sendto/main.c:424
-msgid "Bluetooth File Transfer"
-msgstr "Transfer Berkas Bluetooth"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "_Ulangi"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "Dari:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "Ke:"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "Terjadi galat yang tak dikenal"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr ""
-"Pastikan bahwa perangkat dalam kondisi menyala, serta menerima sambungan "
-"Bluetooth"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "Mengirim %s"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Mengirim berkas %d dari %d"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d kB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/det"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "%u transfer komplit"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "Ada kesalahan"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "Pilih perangkat yang hendak dikirimi"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "_Kirim"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "Pilih berkas untuk dikirim"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "Pilih"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "Perangkat jarak jauh yang hendak dipakai"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
-msgstr "ALAMAT"
-
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "Nama perangkat jarak jauh"
-
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "NAMA"
-
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[BERKAS...]"
+#: ../lib/settings.ui.h:12
+msgid "_Remove Device"
+msgstr "Buang Pe_rangkat"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -463,3 +374,117 @@ msgstr "Transfer Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Mengirim berkas melalui Bluetooth"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "Terjadi galat yang tak dikenal"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d detik"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d menit"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d jam"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "kira-kira %'d jam"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+msgid "Connecting…"
+msgstr "Menyambung…"
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "Transfer Berkas Bluetooth"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "_Ulangi"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "Dari:"
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "Ke:"
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "Mengirim %s"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Mengirim berkas %d dari %d"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/det"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u transfer komplit"
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "Ada kesalahan"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "Pilih perangkat yang hendak dikirimi"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "_Kirim"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "Pilih berkas untuk dikirim"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "Pilih"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "Perangkat jarak jauh yang hendak dipakai"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "ALAMAT"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "Nama perangkat jarak jauh"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "NAMA"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[BERKAS...]"
