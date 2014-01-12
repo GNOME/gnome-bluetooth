@@ -475,7 +475,7 @@ static void create_window(void)
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
 
-	image_status = gtk_image_new_from_icon_name("dialog-warning", GTK_ICON_SIZE_MENU);
+	image_status = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
 	gtk_widget_set_no_show_all (image_status, TRUE);
 	gtk_box_pack_start(GTK_BOX (hbox), image_status, FALSE, FALSE, 4);
 
