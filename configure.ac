@@ -70,7 +70,7 @@ if (test "$enable_icon_update" != no); then
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
-GTK_REQUIRED=2.91.3
+GTK_REQUIRED=3.11.2
 GLIB_REQUIRED=2.36.0
 NOTIFY_REQUIRED=0.7.0
 NAUTILUS_SENDTO_REQUIRED=2.29.0
@@ -88,7 +88,11 @@ dnl Requires for the input helper
 PKG_CHECK_MODULES(INPUT, gdk-3.0 gtk+-3.0)
 
 dnl Requires for the public library
-PKG_CHECK_MODULES(LIBGNOMEBT, gmodule-2.0 gio-unix-2.0 gtk+-3.0 libudev)
+PKG_CHECK_MODULES(LIBGNOMEBT,
+	gmodule-2.0
+	gio-unix-2.0
+	gtk+-3.0 >= $GTK_REQUIRED
+	libudev)
 
 GDBUS_CODEGEN="gdbus-codegen"
 AC_SUBST(GDBUS_CODEGEN)
