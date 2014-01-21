@@ -1,14 +1,14 @@
 # Norwegian bokmål translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
-# Kjartan Maraas <kmaraas@gnome.org>, 2007-2013.
+# Kjartan Maraas <kmaraas@gnome.org>, 2007-2014.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth 3.9.x\n"
+"Project-Id-Version: gnome-bluetooth 3.11.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 10:30+0100\n"
-"PO-Revision-Date: 2013-12-24 10:52+0100\n"
+"POT-Creation-Date: 2014-01-21 20:06+0100\n"
+"PO-Revision-Date: 2014-01-21 20:10+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -22,7 +22,8 @@ msgid "Click to select device…"
 msgstr "Klikk for å velge enhet …"
 
 #: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "A_vbryt"
 
@@ -47,7 +48,7 @@ msgstr "Søker etter enheter …"
 msgid "Device"
 msgstr "Enhet"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Type"
 
@@ -59,7 +60,7 @@ msgstr "Enheter"
 msgid "All categories"
 msgstr "Alle kategorier"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Koblet sammen"
 
@@ -113,9 +114,9 @@ msgid "Confirm Bluetooth PIN"
 msgstr "Bekreft PIN for Bluetooth"
 
 #: ../lib/bluetooth-pairing-dialog.c:88
-#, fuzzy, c-format
+#, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
-msgstr "Vennligst bekreft at PIN som vises på «%s» er lik denne."
+msgstr "Vennligst bekreft PIN-koden som ble skrevet inn på «%s»."
 
 #: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
 #: ../lib/bluetooth-pairing-dialog.c:146
@@ -127,7 +128,7 @@ msgstr "Bekreft"
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
 "device's manual."
-msgstr ""
+msgstr "Bekreft Bluetooth-PIN for «%s». Denne finnes vanligvis i dokumentasjonen for enheten."
 
 #: ../lib/bluetooth-pairing-dialog.c:101
 #, c-format
@@ -135,39 +136,36 @@ msgid "Pairing '%s'"
 msgstr "Kobler sammen med «%s»"
 
 #: ../lib/bluetooth-pairing-dialog.c:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
-msgstr "Vennligst bekreft at PIN som vises på «%s» er lik denne."
+msgstr "Vennligst bekreft at følgende PIN er lik den som vises på «%s»."
 
 #: ../lib/bluetooth-pairing-dialog.c:114
-#, fuzzy
 msgid "Bluetooth Pairing Request"
-msgstr "Bluetooth-overføring"
+msgstr "Forespørsel om Bluetooth-sammenkobling"
 
 #: ../lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
-msgstr ""
+msgstr "«%s» ønsker å koble sammen med denne enheten. Vil du tillate sammenkobling?"
 
 #: ../lib/bluetooth-pairing-dialog.c:123
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter the following PIN on '%s'."
-msgstr "Vennligst oppgi følgende PIN på «%s»:"
+msgstr "Vennligst oppgi følgende PIN på «%s»."
 
 #: ../lib/bluetooth-pairing-dialog.c:126
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
-msgstr ""
-"Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet:"
+msgstr "Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet."
 
 #: ../lib/bluetooth-pairing-dialog.c:129
-#, fuzzy
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
-msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger:"
+msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger. Trykk så på en av de hvite knappene."
 
 #: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Allow"
@@ -218,12 +216,12 @@ msgstr "Synlig som «%s»"
 #: ../lib/bluetooth-settings-widget.c:1192
 #, c-format
 msgid "Remove '%s' from the list of devices?"
-msgstr ""
+msgstr "Fjern «%s» fra enhetslisten?"
 
 #: ../lib/bluetooth-settings-widget.c:1194
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
-msgstr ""
+msgstr "Hvis du fjerner enheten vil du måtte konfigurere den igjen før du bruker den på nytt."
 
 #: ../lib/bluetooth-settings-widget.c:1198
 msgid "_Remove"
@@ -315,44 +313,38 @@ msgid "Toy"
 msgstr "Leketøy"
 
 #: ../lib/settings.ui.h:1
-#, fuzzy
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Vennligst oppgi følgende PIN på «%s»:"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Tilkobling"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "side 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "side 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Adresse"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
-msgstr ""
+msgstr "Innstillinger for _mus og pekeplate"
+
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "Innstillinger for _lyd"
 
 #: ../lib/settings.ui.h:9
-msgid "_Sound Settings"
-msgstr ""
+msgid "_Keyboard Settings"
+msgstr "Innstillinger for _tastatur"
 
 #: ../lib/settings.ui.h:10
-#, fuzzy
-msgid "_Keyboard Settings"
-msgstr "Tastatur"
-
-#: ../lib/settings.ui.h:11
 msgid "Send _Files…"
 msgstr "Send _filer …"
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
 msgstr "Fje_rn enhet"
 
