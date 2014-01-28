@@ -9,24 +9,35 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.3.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-06 19:40+0800\n"
-"PO-Revision-Date: 2013-08-06 19:06+0800\n"
-"Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-01-26 13:35+0000\n"
+"PO-Revision-Date: 2014-01-27 13:14+0800\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
-msgstr "請按這裡選擇裝置…"
+msgid "Click to select device…"
+msgstr "請點按以選擇裝置…"
+
+#: ../lib/bluetooth-chooser-button.c:205
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: ../lib/bluetooth-chooser-button.c:206
+msgid "_OK"
+msgstr "確定(_O)"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "不明"
 
@@ -35,18 +46,18 @@ msgid "No adapters available"
 msgstr "沒有介面卡可用"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
+msgid "Searching for devices…"
 msgstr "正在搜尋裝置…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "裝置"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "類型"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "裝置"
 
@@ -54,7 +65,7 @@ msgstr "裝置"
 msgid "All categories"
 msgstr "所有分類"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "已配對"
 
@@ -101,6 +112,129 @@ msgstr "輸入裝置 (滑鼠、鍵盤…等。)"
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "頭戴式耳機、耳機麥克風和其他音效裝置"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "確認藍牙 PIN 碼"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "請確認在「%s」上輸入的 PIN 碼。"
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "確認"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr "請確認「%s」的藍牙 PIN 碼。這通常可以在裝置的手冊中找到。"
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "與「%s」配對"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "請確認下列 PIN 碼是否和裝置「%s」上的相符。"
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "藍牙配對請求"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr "「%s」想要和這個裝置配對。您是否准許配對？"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "請在「%s」上輸入下列 PIN 碼。"
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "請在「%s」上輸入下列 PIN 碼，接著按下鍵盤上的「Enter」鍵。"
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr "請根據下列方向移動您 iCade 的搖桿，接著按下任一白色按鈕。"
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "允許"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "放棄"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+msgid "Cancel"
+msgstr "取消"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "接受"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Setup"
+msgstr "尚未設置"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "已連線"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "已斷線"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "Yes"
+msgstr "是"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "No"
+msgstr "否"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
+#, c-format
+msgid "Visible as “%s”"
+msgstr "顯示名稱為「%s」"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "是否從裝置的清單中移除「%s」？"
+
+#: ../lib/bluetooth-settings-widget.c:1194
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr "如果您刪除此裝置，下次使用時必須再次設定它。"
+
+#: ../lib/bluetooth-settings-widget.c:1198
+msgid "_Remove"
+msgstr "移除(_R)"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "完成"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -163,292 +297,61 @@ msgstr "平板"
 msgid "Video device"
 msgstr "視訊裝置"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "使用這個 GPS 裝置作為全球定位服務"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "遠端遙控"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "使用您的行動電話存取網際網路 (測試)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "掃描器"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "請在「%s」上輸入下列 PIN 碼："
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "顯示器"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "請在「%s」上輸入下列 PIN 碼並按鍵盤上的「Enter」鍵："
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "穿戴裝置"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "請根據下列方向移動您 iCade 的搖桿："
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "玩具"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "與「%s」配對已被取消"
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "連線"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "請確認顯示在「%s」上的 PIN 碼與這個相符。"
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "第 1 頁"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "請輸入下列 PIN 碼："
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "第 2 頁"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "設定「%s」失敗"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "正在連接到「%s」…"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "請等待裝置「%s」設定結束…"
-
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "成功的設定新的裝置「%s」"
-
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "藍牙新裝置設定"
-
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "PIN 碼選項(_O)…"
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "裝置搜尋"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "裝置設定"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "正在結束設定"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "選擇想要使用於此裝置的額外服務："
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "設置摘要"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "PIN 碼選項"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "自動選取 PIN 碼(_A)"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "固定式 PIN 碼"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (多數的耳機麥克風、滑鼠與 GPS 裝置)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "不要配對"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "自訂 PIN 碼："
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "重試(_T)"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "結束(_Q)"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "取消(_C)"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "不相符"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "相符"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "藍牙裝置設置"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "設置藍牙裝置"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d 秒"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d 分鐘"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d 小時"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "大約 %'d 小時"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "連線中"
-
-#: ../sendto/main.c:424
-msgid "Bluetooth File Transfer"
-msgstr "藍牙檔案傳輸"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "重試(_R)"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "從："
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "到："
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "發生不明的錯誤"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr "請確定遠端裝置已開啟而且接受藍牙連線"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "正在傳送 %s"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "正在傳送檔案 %d / %d"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d KB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "%u 傳輸完畢"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "發生錯誤"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "選擇要傳送到的裝置"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "傳送(_T)"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "選擇要傳送的檔案"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "選取"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "要使用的遠端裝置"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
+#: ../lib/settings.ui.h:6
+msgid "Address"
 msgstr "位址"
 
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "遠端裝置的名稱"
+#: ../lib/settings.ui.h:7
+msgid "_Mouse & Touchpad Settings"
+msgstr "滑鼠與觸控板設定(_M)"
 
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "名稱"
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "音效設定(_S)"
 
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[檔案...]"
+#: ../lib/settings.ui.h:9
+msgid "_Keyboard Settings"
+msgstr "鍵盤設定(_K)"
+
+#: ../lib/settings.ui.h:10
+msgid "Send _Files…"
+msgstr "傳送檔案(_F)…"
+
+#: ../lib/settings.ui.h:11
+msgid "_Remove Device"
+msgstr "移除裝置(_R)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -457,6 +360,218 @@ msgstr "藍牙傳輸"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "透過藍牙傳送檔案"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "發生不明的錯誤"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d 秒"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d 分鐘"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d 小時"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "大約 %'d 小時"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+msgid "Connecting…"
+msgstr "正在連線…"
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "藍牙檔案傳輸"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "重試(_R)"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "從："
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "到："
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "正在傳送 %s"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "正在傳送檔案 %d / %d"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d KB/s"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u 傳輸完畢"
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "發生錯誤"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "選擇要傳送到的裝置"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "傳送(_T)"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "選擇要傳送的檔案"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "選取"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "要使用的遠端裝置"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "位址"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "遠端裝置的名稱"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "名稱"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[檔案...]"
+
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr "使用這個 GPS 裝置作為全球定位服務"
+
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr "使用您的行動電話存取網際網路 (測試)"
+
+#~ msgid "Pairing with '%s' cancelled"
+#~ msgstr "與「%s」配對已被取消"
+
+#~ msgid "Please confirm that the PIN displayed on '%s' matches this one."
+#~ msgstr "請確認顯示在「%s」上的 PIN 碼與這個相符。"
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "請輸入下列 PIN 碼："
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "設定「%s」失敗"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "正在連接到「%s」…"
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "請等待裝置「%s」設定結束…"
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "成功的設定新的裝置「%s」"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "藍牙新裝置設定"
+
+#~ msgid "PIN _options..."
+#~ msgstr "PIN 碼選項(_O)…"
+
+#~ msgid "Device Search"
+#~ msgstr "裝置搜尋"
+
+#~ msgid "Device Setup"
+#~ msgstr "裝置設定"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "正在結束設定"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "選擇想要使用於此裝置的額外服務："
+
+#~ msgid "Setup Summary"
+#~ msgstr "設置摘要"
+
+#~ msgid "PIN Options"
+#~ msgstr "PIN 碼選項"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "自動選取 PIN 碼(_A)"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "固定式 PIN 碼"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "'0000' (多數的耳機麥克風、滑鼠與 GPS 裝置)"
+
+#~ msgid "'1111'"
+#~ msgstr "'1111'"
+
+#~ msgid "'1234'"
+#~ msgstr "'1234'"
+
+#~ msgid "Do not pair"
+#~ msgstr "不要配對"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "自訂 PIN 碼："
+
+#~ msgid "_Try Again"
+#~ msgstr "重試(_T)"
+
+#~ msgid "_Quit"
+#~ msgstr "結束(_Q)"
+
+#~ msgid "Does not match"
+#~ msgstr "不相符"
+
+#~ msgid "Matches"
+#~ msgstr "相符"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "藍牙裝置設置"
+
+#~ msgid "Setup Bluetooth devices"
+#~ msgstr "設置藍牙裝置"
+
+#~ msgid "Connecting..."
+#~ msgstr "連線中"
+
+#~ msgid ""
+#~ "Make sure that the remote device is switched on and that it accepts "
+#~ "Bluetooth connections"
+#~ msgstr "請確定遠端裝置已開啟而且接受藍牙連線"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "開啟藍牙"
@@ -476,12 +591,6 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "Disconnecting..."
 #~ msgstr "正在中斷…"
 
-#~ msgid "Connected"
-#~ msgstr "已連線"
-
-#~ msgid "Disconnected"
-#~ msgstr "已斷線"
-
 #~ msgid "Disconnect"
 #~ msgstr "斷線"
 
@@ -493,15 +602,6 @@ msgstr "透過藍牙傳送檔案"
 
 #~ msgid "Browse files..."
 #~ msgstr "瀏覽檔案…"
-
-#~ msgid "Keyboard Settings"
-#~ msgstr "鍵盤設定"
-
-#~ msgid "Mouse and Touchpad Settings"
-#~ msgstr "滑鼠與觸控板設定"
-
-#~ msgid "Sound Settings"
-#~ msgstr "音效設定"
 
 #~ msgid "Debug"
 #~ msgstr "偵錯"
@@ -522,23 +622,14 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "Bluetooth"
 #~ msgstr "藍牙"
 
-#~ msgid "Device '%s' wants to pair with this computer"
-#~ msgstr "裝置「%s」想要和這個電腦配對"
-
 #~ msgid "Please enter the PIN mentioned on device %s."
 #~ msgstr "請輸入裝置 %s 所提及的 PIN 碼。"
-
-#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-#~ msgstr "請確認 PIN 碼「%s」是否和裝置 %s 上的相符。"
 
 #~ msgid "Grant access to '%s'"
 #~ msgstr "准許存取「%s」"
 
 #~ msgid "Device %s wants access to the service '%s'."
 #~ msgstr "裝置 %s 想要存取服務「%s」。"
-
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "「%s」的配對請求"
 
 #~ msgid "Bluetooth device"
 #~ msgstr "藍牙裝置"
@@ -664,9 +755,6 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "_Close"
 #~ msgstr "關閉(_C)"
 
-#~ msgid "_Restart Setup"
-#~ msgstr "重新啟動設定(_R)"
-
 #~ msgid "Run in standalone mode"
 #~ msgstr "以獨立模式執行"
 
@@ -721,9 +809,6 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "Back to devices"
 #~ msgstr "返回裝置"
 
-#~ msgid "Done"
-#~ msgstr "完成"
-
 #~ msgid "Device setup"
 #~ msgstr "裝置設定"
 
@@ -752,22 +837,8 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "Bluetooth Manager Panel"
 #~ msgstr "藍牙管理員面板"
 
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "是否從裝置的清單中移除「%s」？"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr "如果您刪除此裝置，下次使用時必須再次設定它。"
-
 #~ msgid "Show Only Bluetooth Devices With..."
 #~ msgstr "只顯示這樣的藍牙裝置…"
-
-#~ msgid "Yes"
-#~ msgstr "是"
-
-#~ msgid "No"
-#~ msgstr "否"
 
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "藍牙已停用"
@@ -781,23 +852,8 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "Visibility"
 #~ msgstr "顯示"
 
-#~ msgid "Visibility of “%s”"
-#~ msgstr "顯示「%s」"
-
-#~ msgid "Address"
-#~ msgstr "位址"
-
 #~ msgid "Browse Files..."
 #~ msgstr "瀏覽檔案…"
-
-#~ msgid "Connection"
-#~ msgstr "連線"
-
-#~ msgid "Send Files..."
-#~ msgstr "傳送檔案…"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "調整藍牙設定"
 
 #~ msgid "Open Keyboard Preferences..."
 #~ msgstr "開啟鍵盤偏好設定…"
@@ -840,9 +896,6 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "_Disconnect"
 #~ msgstr "斷線(_D)"
 
-#~ msgid "_Remove"
-#~ msgstr "移除(_R)"
-
 #~ msgid "Your computer does not have any Bluetooth adapters plugged in."
 #~ msgstr "您的電腦沒有連接任何藍牙配接器。"
 
@@ -872,9 +925,6 @@ msgstr "透過藍牙傳送檔案"
 
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "藍牙偏好設定"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "藍牙屬性"
 
 #~ msgid "Whether to show the notification icon"
 #~ msgstr "是否顯示通知圖示"
@@ -952,9 +1002,6 @@ msgstr "透過藍牙傳送檔案"
 
 #~ msgid "Confirmation request for %s"
 #~ msgstr "%s 的授確認請求"
-
-#~ msgid "Confirm passkey"
-#~ msgstr "確認通行金鑰"
 
 #~ msgid "Please wait whilst '%s' is being paired"
 #~ msgstr "請等待「%s」完成配對"
@@ -1063,9 +1110,6 @@ msgstr "透過藍牙傳送檔案"
 #~ msgid "Show all devices"
 #~ msgstr "顯示所有裝置"
 
-#~ msgid "Create Device"
-#~ msgstr "建立裝置"
-
 #~ msgid "Input devices"
 #~ msgstr "輸入裝置"
 
@@ -1148,9 +1192,6 @@ msgstr "透過藍牙傳送檔案"
 
 #~ msgid "Local connection"
 #~ msgstr "本地連線"
-
-#~ msgid "Remote connection"
-#~ msgstr "遠端連線"
 
 #~ msgid "Open Import"
 #~ msgstr "開啟匯入"
