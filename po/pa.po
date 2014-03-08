@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# A S Alam <aalam@users.sf.net>, 2009, 2010, 2011, 2012, 2013.
+# A S Alam <aalam@users.sf.net>, 2009, 2010, 2011, 2012, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-18 11:46+0000\n"
-"PO-Revision-Date: 2013-09-17 21:06-0500\n"
+"POT-Creation-Date: 2014-03-04 19:05+0000\n"
+"PO-Revision-Date: 2014-03-07 20:29-0600\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
@@ -18,12 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
+#: ../lib/bluetooth-chooser-button.c:73
+#| msgid "Click to select device..."
+msgid "Click to select device…"
 msgstr "…ਜੰਤਰ ਚੁਣਨ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
+msgid "_Cancel"
+msgstr "ਰੱਦ ਕਰੋ(_C)"
+
+#: ../lib/bluetooth-chooser-button.c:204
+msgid "_OK"
+msgstr "ਠੀਕ ਹੈ(_O)"
+
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
@@ -32,18 +43,19 @@ msgid "No adapters available"
 msgstr "ਐਡਪਟਰ ਉਪਲੱਬਧ ਨਹੀਂ"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "ਜੰਤਰਾਂ ਲਈ ਖੋਜ ਜਾਰੀ…"
+#| msgid "Searching for devices..."
+msgid "Searching for devices…"
+msgstr "…ਜੰਤਰਾਂ ਲਈ ਖੋਜ ਜਾਰੀ ਹੈ"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "ਜੰਤਰ"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "ਟਾਈਪ"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "ਜੰਤਰ"
 
@@ -51,7 +63,7 @@ msgstr "ਜੰਤਰ"
 msgid "All categories"
 msgstr "ਸਭ ਕੈਟਾਗਰੀਆਂ"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "ਪੇਅਰ ਕੀਤੇ"
 
@@ -98,6 +110,151 @@ msgstr "ਇੰਪੁੱਟ ਜੰਤਰ (ਮਾਊਸ, ਕੀਬੋਰਡ ਆਦ
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "ਹੈੱਡਫੋਨ, ਹੈੱਡਸੈੱਟ ਅਤੇ ਹੋਰ ਆਡੀਓ ਜੰਤਰ"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+#| msgid "Configure Bluetooth settings"
+msgid "Confirm Bluetooth PIN"
+msgstr "ਬਲਿਊਟੁੱਥ ਪਿੰਨ ਪੁਸ਼ਟੀ"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+#| msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "ਪੁਸ਼ਟੀ ਕਰੋ ਜੀ ਕਿ '%s' ਉੱਤੇ PIN ਦਿੱਤਾ ਹੈ।"
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+#| msgid "Confirm passkey"
+msgid "Confirm"
+msgstr "ਪੁਸ਼ਟੀ"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"'%s' ਲਈ ਬਲਿਊਟੁੱਥ ਪਿੰਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ। ਇਹ ਅਕਸਰ ਜੰਤਰ ਦੇ ਦਸਤਾਵੇਜ਼ ਵਿੱਚ ਲੱਭਿਆ ਜਾ "
+"ਸਕਦਾ ਹੈ।"
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+#| msgid "Pairing request for '%s'"
+msgid "Pairing '%s'"
+msgstr "ਪੇਅਰਿੰਗ '%s'"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+#| msgid "Please confirm whether the PIN '%s' matches the one on device %s."
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "ਪੁਸ਼ਟੀ ਕਰੋ ਜੀ ਕਿ '$s' ਉੱਤੇ ਵਿਖਾਈ ਦਿੱਤਾ PIN ਹੇਠ ਦਿੱਤੇ ਨਾਲ ਮਿਲਦਾ ਹੈ।"
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+#| msgid "Bluetooth Properties"
+msgid "Bluetooth Pairing Request"
+msgstr "ਬਲਿਊਟੁੱਥ ਪੇਅਰਿੰਗ ਬੇਨਤੀ"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+#| msgid "Device '%s' wants to pair with this computer"
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr ""
+"'%s' ਇਸ ਜੰਤਰ ਨਾਲ ਪੇਅਰ ਹੋਣਾ ਚਾਹੁੰਦਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਪੇਅਰ ਕਰਨ ਨੂੰ ਮਨਜ਼ੂਰ ਕਰਨਾ "
+"ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+#| msgid "Please enter the following PIN on '%s':"
+msgid "Please enter the following PIN on '%s'."
+msgstr "'%s' ਉੱਤੇ ਅੱਗੇ ਦਿੱਤਾ ਪਿੰਨ ਲਿਖੋ ਜੀ।"
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+#| msgid ""
+#| "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) '%s' ਉੱਤੇ ਦਿਓ। ਤਦ ਕੀਬੋਰਡ ਤੋਂ “ਐਂਟਰ“ ਦੱਬੋ।"
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+#| msgid "Please move the joystick of your iCade in the following directions:"
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"ਆਪਣੇ iCade ਦੀ ਜਾਏਸਟਿੱਕ ਨੂੰ ਅੱਗੇ ਦਿੱਤੀਆਂ ਦਿਸ਼ਾਵਾਂ ਵਿੱਚ ਘੁੰਮਾਉ ਜੀ। ਤਦ ਚਿੱਟੇ "
+"ਬਟਨਾਂ ਵਿੱਚੋਂ "
+"ਕਿਸੇ ਨੂੰ ਵੀ ਦੱਬੋ।"
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "ਮਨਜ਼ੂਰ"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "ਮਨਸੂਖ"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "ਰੱਦ ਕਰੋ"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "ਮਨਜ਼ੂਰ"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#| msgid "_Restart Setup"
+msgid "Not Setup"
+msgstr "ਸੈੱਟਅੱਪ ਨਹੀਂ"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "ਕੁਨੈਕਟ ਹੈ"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "Yes"
+msgstr "ਹਾਂ"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "No"
+msgstr "ਨਹੀਂ"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
+#, c-format
+#| msgid "Visibility of “%s”"
+msgid "Visible as “%s”"
+msgstr "“%s” ਵਜੋਂ ਦਿੱਖ"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "ਕੀ ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਵਿੱਚੋਂ '%s' ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
+
+#: ../lib/bluetooth-settings-widget.c:1194
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"ਜੇ ਤੁਸੀਂ ਜੰਤਰ ਹਟਾਇਆ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਅਗਲੀ ਵਾਰ ਵਰਤਣ ਸਮੇਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਪਵੇਗਾ।"
+
+#: ../lib/bluetooth-settings-widget.c:1198
+msgid "_Remove"
+msgstr "ਹਟਾਓ(_R)"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "ਮੁਕੰਮਲ"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -160,299 +317,67 @@ msgstr "ਟੇਬਲੇਟ"
 msgid "Video device"
 msgstr "ਵਿਡੀਓ ਜੰਤਰ"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "ਭੂਗੋਲਿਕ-ਟਿਕਾਣਾ ਸਰਵਿਸਾਂ ਲਈ ਇਹ GPS ਜੰਤਰ ਵਰਤੋਂ"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "ਰਿਮੋਟ ਕੰਟਰੋਲ"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "ਆਪਣੇ ਮੋਬਾਇਲ ਫੋਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੰਟਰਨੈੱਟ ਵਰਤੋਂ (ਟੈਸਟ)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "ਸਕੈਨਰ"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "'%s' ਉੱਤੇ ਅੱਗੇ ਦਿੱਤਾ ਪਿੰਨ ਲਿਖੋ ਜੀ:"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "ਡਿਸਪਲੇਅ"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) '%s' ਉੱਤੇ ਦਿਓ ਅਤੇ ਕੀਬੋਰਡ ਤੋਂ \"ਐਂਟਰ' ਦੱਬੋ:"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "ਪਹਿਣਨਯੋਗ"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "ਆਪਣੇ iCade ਦੀ ਜਾਏਸਟਿੱਕ ਨੂੰ ਅੱਗੇ ਦਿੱਤੀਆਂ ਦਿਸ਼ਾਵਾਂ ਵਿੱਚ ਘੁੰਮਾਉ ਜੀ:"
+#: ../lib/bluetooth-utils.c:98
+#| msgid "To:"
+msgid "Toy"
+msgstr "ਖਿਡੌਣਾ"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "'%s' ਨਾਲ ਪੇਅਰ ਕਰਨਾ ਰੱਦ ਕੀਤਾ"
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "ਕੁਨੈਕਸ਼ਨ"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "ਯਕੀਨੀ ਬਣਾਉਣ ਕਿ '%s' ਉੱਤੇ ਵੇਖਾਇਆ PIN ਇਸ ਨਾਲ ਮਿਲਦਾ ਹੈ।"
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "ਸਫ਼ਾ 1"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) ਦਿਓ:"
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "ਸਫ਼ਾ 2"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "'%s' ਲਈ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "'%s' ਨਾਲ ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "ਜੰਤਰ '%s' ਉੱਤੇ ਸੈਟਅੱਪ ਦੇ ਪੂਰਾ ਹੋਣ ਤੱਕ ਉਡੀਕੋ ਜੀ…"
-
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "ਨਵਾਂ ਜੰਤਰ '%s' ਠੀਕ ਤਰ੍ਹਾਂ ਸੈੱਟਅੱਪ ਕੀਤਾ ਗਿਆ"
-
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ"
-
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "ਪਿੰਨ ਚੋਣਾਂ(_o)…"
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "ਜੰਤਰ ਖੋਜ"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "ਸੈਟਅੱਪ ਮੁਕੰਮਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "ਹੋਰ ਸਰਵਿਸਾਂ ਚੁਣੋ, ਜੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਜੰਤਰ ਨਾਲ ਵਰਤਣੀਆਂ ਚਾਹੁੰਦੇ ਹੋ:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "ਸੈਟਅੱਪ ਸਾਰ"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "ਪਿੰਨ ਚੋਣਾਂ"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "ਆਟੋਮੈਟਿਕ ਪਿੰਨ(PIN) ਚੋਣ(_A)"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "ਪੱਕਾ ਪਿੰਨ"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (ਬਹੁਤੇ ਹੈੱਡਸੈੱਟ, ਮਾਊਸ ਅਤੇ GPS ਜੰਤਰ)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "ਪੇਅਰ ਨਾ ਕਰੋ"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "ਪਸੰਦੀਦਾ ਪਿੰਨ:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ(_T)"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "ਬੰਦ ਕਰੋ(_Q)"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "ਰੱਦ ਕਰੋ(_C)"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "ਮਿਲਦਾ ਨਹੀਂ"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "ਮਿਲਦਾ"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਸੈਟਅੱਪ"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਸੈਟਅੱਪ"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d ਸਕਿੰਟ"
-msgstr[1] "%'d ਸਕਿੰਟ"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d ਮਿੰਟ"
-msgstr[1] "%'d ਮਿੰਟ"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d ਘੰਟਾ"
-msgstr[1] "%'d ਘੰਟੇ"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "ਅੰਦਾਜ਼ਨ %'d ਘੰਟਾ"
-msgstr[1] "ਅੰਦਾਜ਼ਨ %'d ਘੰਟੇ"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
-
-#: ../sendto/main.c:424
-#| msgid "Bluetooth Transfer"
-msgid "Bluetooth File Transfer"
-msgstr "ਬਲਿਊਟੁੱਥ ਫਾਇਲ ਟਰਾਂਸਫਰ"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ਼(_R)"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "ਤੋਂ:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "ਵੱਲ:"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "ਇੱਕ ਅਣਜਾਣੀ ਗਲਤੀ ਆਈ ਹੈ"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr ""
-"ਯਕੀਨੀ ਬਣਾਉ ਕਿ ਰਿਮੋਟ ਜੰਤਰ ਚਾਲੂ ਹੈ ਅਤੇ ਇਹ ਬਲਿਊਟੁੱਥ ਕੁਨੈਕਸ਼ਨ ਮਨਜ਼ੂਰ ਕਰਦਾ ਹੈ।"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "%s ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "%2$d ਵਿੱਚੋਂ %1$d ਫਾਇਲ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d kB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "%u ਟਰਾਂਸਫਰ ਪੂਰਾ"
-msgstr[1] "%u ਟਰਾਂਸਫਰ ਪੂਰੇ ਹੋਏ"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "ਗਲਤੀ ਆਈ ਸੀ"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "ਭੇਜਣ ਲਈ ਜੰਤਰ ਚੁਣੋ"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "ਭੇਜੋ(_S)"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "ਭੇਜਣ ਲਈ ਫਾਇਲਾਂ ਚੁਣੋ"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "ਚੁਣੋ"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "ਵਰਤਣ ਲਈ ਰਿਮੋਟ ਜੰਤਰ"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
+#: ../lib/settings.ui.h:6
+msgid "Address"
 msgstr "ਐਡਰੈੱਸ"
 
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "ਰਿਮੋਟ ਜੰਤਰ ਦਾ ਨਾਂ"
+#: ../lib/settings.ui.h:7
+#| msgid "Mouse and Touchpad Settings"
+msgid "_Mouse & Touchpad Settings"
+msgstr "ਮਾਊਸ ਅਤੇ ਟੱਚਪੈਡ ਸੈਟਿੰਗ(_M)"
 
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "ਨਾਂ"
+#: ../lib/settings.ui.h:8
+#| msgid "Sound Settings"
+msgid "_Sound Settings"
+msgstr "ਸਾਊਂਡ ਸੈਟਿੰਗ(_S)"
 
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[ਫਾਇਲ...]"
+#: ../lib/settings.ui.h:9
+#| msgid "Keyboard Settings"
+msgid "_Keyboard Settings"
+msgstr "ਕੀਬੋਰਡ ਸੈਟਿੰਗ(_K)"
+
+#: ../lib/settings.ui.h:10
+#| msgid "Send Files..."
+msgid "Send _Files…"
+msgstr "…ਫਾਇਲਾਂ ਭੇਜੋ(_F)"
+
+#: ../lib/settings.ui.h:11
+#| msgid "_Remove"
+msgid "_Remove Device"
+msgstr "ਜੰਤਰ ਹਟਾਓ(_R)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -461,6 +386,224 @@ msgstr "ਬਲਿਊਟੁੱਥ ਟਰਾਂਸਫਰ"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "ਇੱਕ ਅਣਜਾਣੀ ਗਲਤੀ ਆਈ ਹੈ"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d ਸਕਿੰਟ"
+msgstr[1] "%'d ਸਕਿੰਟ"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d ਮਿੰਟ"
+msgstr[1] "%'d ਮਿੰਟ"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d ਘੰਟਾ"
+msgstr[1] "%'d ਘੰਟੇ"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "ਅੰਦਾਜ਼ਨ %'d ਘੰਟਾ"
+msgstr[1] "ਅੰਦਾਜ਼ਨ %'d ਘੰਟੇ"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+#| msgid "Connection"
+msgid "Connecting…"
+msgstr "…ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "ਬਲਿਊਟੁੱਥ ਫਾਇਲ ਟਰਾਂਸਫਰ"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ਼(_R)"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "ਤੋਂ:"
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "ਵੱਲ:"
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "%s ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "%2$d ਵਿੱਚੋਂ %1$d ਫਾਇਲ ਭੇਜੀ ਜਾ ਰਹੀ ਹੈ"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u ਟਰਾਂਸਫਰ ਪੂਰਾ"
+msgstr[1] "%u ਟਰਾਂਸਫਰ ਪੂਰੇ ਹੋਏ"
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "ਗਲਤੀ ਆਈ ਸੀ"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "ਭੇਜਣ ਲਈ ਜੰਤਰ ਚੁਣੋ"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "ਭੇਜੋ(_S)"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "ਭੇਜਣ ਲਈ ਫਾਇਲਾਂ ਚੁਣੋ"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "ਚੁਣੋ"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "ਵਰਤਣ ਲਈ ਰਿਮੋਟ ਜੰਤਰ"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "ਐਡਰੈੱਸ"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "ਰਿਮੋਟ ਜੰਤਰ ਦਾ ਨਾਂ"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "ਨਾਂ"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[ਫਾਇਲ...]"
+
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr "ਭੂਗੋਲਿਕ-ਟਿਕਾਣਾ ਸਰਵਿਸਾਂ ਲਈ ਇਹ GPS ਜੰਤਰ ਵਰਤੋਂ"
+
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr "ਆਪਣੇ ਮੋਬਾਇਲ ਫੋਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੰਟਰਨੈੱਟ ਵਰਤੋਂ (ਟੈਸਟ)"
+
+#~ msgid "Pairing with '%s' cancelled"
+#~ msgstr "'%s' ਨਾਲ ਪੇਅਰ ਕਰਨਾ ਰੱਦ ਕੀਤਾ"
+
+#~ msgid "Please confirm that the PIN displayed on '%s' matches this one."
+#~ msgstr "ਯਕੀਨੀ ਬਣਾਉਣ ਕਿ '%s' ਉੱਤੇ ਵੇਖਾਇਆ PIN ਇਸ ਨਾਲ ਮਿਲਦਾ ਹੈ।"
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "ਹੇਠ ਦਿੱਤਾ ਪਿੰਨ (PIN) ਦਿਓ:"
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "'%s' ਲਈ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "'%s' ਨਾਲ ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "ਜੰਤਰ '%s' ਉੱਤੇ ਸੈਟਅੱਪ ਦੇ ਪੂਰਾ ਹੋਣ ਤੱਕ ਉਡੀਕੋ ਜੀ…"
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "ਨਵਾਂ ਜੰਤਰ '%s' ਠੀਕ ਤਰ੍ਹਾਂ ਸੈੱਟਅੱਪ ਕੀਤਾ ਗਿਆ"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਨਵਾਂ ਜੰਤਰ ਸੈਟਅੱਪ"
+
+#~ msgid "PIN _options..."
+#~ msgstr "ਪਿੰਨ ਚੋਣਾਂ(_o)…"
+
+#~ msgid "Device Search"
+#~ msgstr "ਜੰਤਰ ਖੋਜ"
+
+#~ msgid "Device Setup"
+#~ msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "ਸੈਟਅੱਪ ਮੁਕੰਮਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "ਹੋਰ ਸਰਵਿਸਾਂ ਚੁਣੋ, ਜੋ ਕਿ ਤੁਸੀਂ ਆਪਣੇ ਜੰਤਰ ਨਾਲ ਵਰਤਣੀਆਂ ਚਾਹੁੰਦੇ ਹੋ:"
+
+#~ msgid "Setup Summary"
+#~ msgstr "ਸੈਟਅੱਪ ਸਾਰ"
+
+#~ msgid "PIN Options"
+#~ msgstr "ਪਿੰਨ ਚੋਣਾਂ"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "ਆਟੋਮੈਟਿਕ ਪਿੰਨ(PIN) ਚੋਣ(_A)"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "ਪੱਕਾ ਪਿੰਨ"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "'0000' (ਬਹੁਤੇ ਹੈੱਡਸੈੱਟ, ਮਾਊਸ ਅਤੇ GPS ਜੰਤਰ)"
+
+#~ msgid "'1111'"
+#~ msgstr "'1111'"
+
+#~ msgid "'1234'"
+#~ msgstr "'1234'"
+
+#~ msgid "Do not pair"
+#~ msgstr "ਪੇਅਰ ਨਾ ਕਰੋ"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "ਪਸੰਦੀਦਾ ਪਿੰਨ:"
+
+#~ msgid "_Try Again"
+#~ msgstr "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ(_T)"
+
+#~ msgid "_Quit"
+#~ msgstr "ਬੰਦ ਕਰੋ(_Q)"
+
+#~ msgid "Does not match"
+#~ msgstr "ਮਿਲਦਾ ਨਹੀਂ"
+
+#~ msgid "Matches"
+#~ msgstr "ਮਿਲਦਾ"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਸੈਟਅੱਪ"
+
+#~ msgid "Setup Bluetooth devices"
+#~ msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਸੈਟਅੱਪ"
+
+#~ msgid "Connecting..."
+#~ msgstr "ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
+
+#~ msgid ""
+#~ "Make sure that the remote device is switched on and that it accepts "
+#~ "Bluetooth connections"
+#~ msgstr "ਯਕੀਨੀ ਬਣਾਉ ਕਿ ਰਿਮੋਟ ਜੰਤਰ ਚਾਲੂ ਹੈ ਅਤੇ ਇਹ ਬਲਿਊਟੁੱਥ ਕੁਨੈਕਸ਼ਨ ਮਨਜ਼ੂਰ ਕਰਦਾ ਹੈ।"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "ਬਲਿਊਟੁੱਥ ਚਾਲੂ ਕਰੋ"
@@ -480,12 +623,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "Disconnecting..."
 #~ msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
 
-#~ msgid "Connected"
-#~ msgstr "ਕੁਨੈਕਟ ਹੈ"
-
-#~ msgid "Disconnected"
-#~ msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
-
 #~ msgid "Disconnect"
 #~ msgstr "ਡਿਸ-ਕੁਨੈਕਟ"
 
@@ -497,15 +634,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 
 #~ msgid "Browse files..."
 #~ msgstr "ਫਾਇਲਾਂ ਬਰਾਊਜ਼ ਕਰੋ…"
-
-#~ msgid "Keyboard Settings"
-#~ msgstr "ਕੀਬੋਰਡ ਸੈਟਿੰਗ"
-
-#~ msgid "Mouse and Touchpad Settings"
-#~ msgstr "ਮਾਊਸ ਅਤੇ ਟੱਚਪੈਡ ਸੈਟਿੰਗ"
-
-#~ msgid "Sound Settings"
-#~ msgstr "ਸਾਊਂਡ ਸੈਟਿੰਗ"
 
 #~ msgid "Debug"
 #~ msgstr "ਡੀਬੱਗ"
@@ -526,23 +654,14 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "Bluetooth"
 #~ msgstr "ਬਲਿਊਟੁੱਥ"
 
-#~ msgid "Device '%s' wants to pair with this computer"
-#~ msgstr "ਜੰਤਰ '%s' ਇਸ ਕੰਪਿਊਟਰ ਨਾਲ ਪੇਅਰ ਹੋਣਾ ਚਾਹੁੰਦਾ ਹੈ"
-
 #~ msgid "Please enter the PIN mentioned on device %s."
 #~ msgstr "ਜੰਤਰ %s ਉੱਤੇ PIN ਲਈ ਤਹਿ ਕੀਤਾ ਕੋਡ ਦਿਓ ਜੀ।"
-
-#~ msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-#~ msgstr "ਪੁਸ਼ਟੀ ਕਰੋ ਜੀ ਕਿ ਜੰਤਰ %2$s ਉੱਤੇ PIN '%1$s' ਦਿੱਤਾ ਹੈ।"
 
 #~ msgid "Grant access to '%s'"
 #~ msgstr "'%s' ਲਈ ਪਹੁੰਚ ਮਨਜ਼ੂਰ"
 
 #~ msgid "Device %s wants access to the service '%s'."
 #~ msgstr "ਜੰਤਰ %s ਸਰਵਿਸ '%s' ਨੂੰ ਵਰਤਣੀ ਚਾਹੁੰਦਾ ਹੈ।"
-
-#~ msgid "Pairing request for '%s'"
-#~ msgstr "'%s' ਲਈ ਪੇਅਰ ਕਰਨ ਲਈ ਮੰਗ"
 
 #~ msgid "Bluetooth device"
 #~ msgstr "ਬਲਿਊਟੁੱਥ ਜੰਤਰ"
@@ -622,14 +741,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "%d KB/s"
 #~ msgstr "%d KB/s"
 
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "ਕੀ ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਵਿੱਚੋਂ '%s' ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr "ਜੇ ਤੁਸੀਂ ਜੰਤਰ ਹਟਾਇਆ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਅਗਲੀ ਵਾਰ ਵਰਤਣ ਸਮੇਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਪਵੇਗਾ।"
-
 #~ msgid "Show Only Bluetooth Devices With..."
 #~ msgstr "…ਨਾਲ ਹੀ ਬਲਿਊਟੁੱਥ ਜੰਤਰ ਵੇਖੋ"
 
@@ -648,12 +759,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "Preferences"
 #~ msgstr "ਮੇਰੀ ਪਸੰਦ"
 
-#~ msgid "Yes"
-#~ msgstr "ਹਾਂ"
-
-#~ msgid "No"
-#~ msgstr "ਨਹੀਂ"
-
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "ਬਲਿਊਟੁੱਥ ਆਯੋਗ ਹੈ"
 
@@ -666,30 +771,14 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "Visibility"
 #~ msgstr "ਦਿੱਖ"
 
-#~ msgid "Visibility of “%s”"
-#~ msgstr "“%s” ਦੀ ਦਿੱਖ"
-
-#~ msgid "Address"
-#~ msgstr "ਐਡਰੈੱਸ"
-
 #~| msgid "Browse files..."
 #~ msgid "Browse Files..."
 #~ msgstr "ਫਾਇਲਾਂ ਬਰਾਊਜ਼ ਕਰੋ…"
-
-#~ msgid "Connection"
-#~ msgstr "ਕੁਨੈਕਸ਼ਨ"
 
 #~| msgid "Bluetooth"
 #~ msgctxt "Power"
 #~ msgid "Bluetooth"
 #~ msgstr "ਬਲਿਊਟੁੱਥ"
-
-#~| msgid "Send files..."
-#~ msgid "Send Files..."
-#~ msgstr "ਫਾਇਲਾਂ ਭੇਜੋ…"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "ਬਲਿਊਟੁੱਥ ਸੈਟਿੰਗ ਸੰਰਚਨਾ"
 
 #~ msgid "Device Setup Failed"
 #~ msgstr "ਜੰਤਰ ਸੈਟਅੱਪ ਫੇਲ੍ਹ ਹੋਇਆ"
@@ -724,9 +813,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 
 #~ msgid "_Close"
 #~ msgstr "ਬੰਦ ਕਰੋ(_C)"
-
-#~ msgid "_Restart Setup"
-#~ msgstr "ਸੈਟਅੱਪ ਮੁੜ-ਚਾਲੂ(_R)"
 
 #~ msgid "Run in standalone mode"
 #~ msgstr "ਇੱਕਲੇ ਮੋਡ ਵਿੱਚ ਚਲਾਓ"
@@ -787,9 +873,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "Back to devices"
 #~ msgstr "ਜੰਤਰ ਉੱਤੇ ਵਾਪਸ"
 
-#~ msgid "Done"
-#~ msgstr "ਮੁਕੰਮਲ"
-
 #~ msgid "Device setup"
 #~ msgstr "ਜੰਤਰ ਸੈਟਅੱਪ"
 
@@ -841,9 +924,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 #~ msgid "Set up _new device..."
 #~ msgstr "ਨਵਾਂ ਜੰਤਰ ਸੈੱਟਅੱਪ(_n)..."
 
-#~ msgid "_Remove"
-#~ msgstr "ਹਟਾਓ(_R)"
-
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr "\"ਨਿੱਜੀ ਫਾਇਲ ਸਾਂਝ\" ਪਸੰਦ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
@@ -873,9 +953,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 
 #~ msgid "Output a list of currently known devices"
 #~ msgstr "ਇਸ ਸਮੇਂ ਜਾਣੇ ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਵੇਖੋ"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "ਬਲਿਊਟੁੱਥ ਵਿਸ਼ੇਸ਼ਤਾ"
 
 #~ msgid "bluetooth"
 #~ msgstr "ਬਲਿਊਟੁੱਥ"
@@ -935,9 +1012,6 @@ msgstr "ਬਲਿਊਟੁੱਥ ਰਾਹੀਂ ਫਾਇਲਾਂ ਭੇਜੋ
 
 #~ msgid "Enter passkey"
 #~ msgstr "ਸ਼ਬਦ ਦਿਓ"
-
-#~ msgid "Confirm passkey"
-#~ msgstr "ਸ਼ਬਦ ਪੁਸ਼ਟੀ"
 
 #~ msgid "Known devices"
 #~ msgstr "ਜਾਣੇ ਜੰਤਰ"
