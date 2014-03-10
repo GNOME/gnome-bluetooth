@@ -76,7 +76,7 @@ label_might_change (BluetoothSettingsRow *self)
 	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
 
 	if (!priv->paired && !priv->trusted)
-		gtk_label_set_text (GTK_LABEL (priv->status), _("Not Setup"));
+		gtk_label_set_text (GTK_LABEL (priv->status), _("Not Set Up"));
 	else if (priv->connected)
 		gtk_label_set_text (GTK_LABEL (priv->status), _("Connected"));
 	else
@@ -118,7 +118,7 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 	g_object_set_data (G_OBJECT (self), "spinner", priv->spinner);
 
 	/* Placeholder text */
-	priv->status = gtk_label_new (_("Not Setup"));
+	priv->status = gtk_label_new (_("Not Set Up"));
 
 	gtk_widget_set_no_show_all (priv->status, TRUE);
 	gtk_misc_set_alignment (GTK_MISC (priv->status), 1, 0.5);
