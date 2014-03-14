@@ -10,7 +10,7 @@
 #
 # Update in gnome-bluetooth:
 # Changwoo Ryu <cwryu@debian.org>, 2009, 2010, 2011.
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011-2013.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011, 2012, 2013, 2014.
 #
 # 새로 번역하시는 분은 상단 주석에 추가하세요.
 #
@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-10 10:57+0000\n"
-"PO-Revision-Date: 2013-09-11 19:26+0900\n"
+"POT-Creation-Date: 2014-03-14 07:04+0000\n"
+"PO-Revision-Date: 2014-03-15 01:02+0900\n"
 "Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: Korean\n"
@@ -33,14 +33,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.5\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
-msgstr "장치를 선택하려면 누르십시오..."
+#: ../lib/bluetooth-chooser-button.c:73
+msgid "Click to select device…"
+msgstr "장치를 선택하려면 누르십시오…"
+
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
+msgid "_Cancel"
+msgstr "취소(_C)"
+
+#: ../lib/bluetooth-chooser-button.c:204
+msgid "_OK"
+msgstr "확인(_O)"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "알 수 없음"
 
@@ -49,18 +59,18 @@ msgid "No adapters available"
 msgstr "어댑터가 없습니다"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "장치를 검색하는 중입니다..."
+msgid "Searching for devices…"
+msgstr "장치 검색중…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "장치"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "종류"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "장치"
 
@@ -68,7 +78,7 @@ msgstr "장치"
 msgid "All categories"
 msgstr "모든 분류"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "페어링함"
 
@@ -82,7 +92,7 @@ msgstr "페어링 상태 아니거나 신뢰하지 않음"
 
 #: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
-msgstr " 페어링함 또는 신뢰함"
+msgstr "페어링함 또는 신뢰함"
 
 #. This is the title of the filter section of the Bluetooth device chooser.
 #. * It used to say Show Only Bluetooth Devices With...
@@ -115,6 +125,132 @@ msgstr "입력 장치(마우스, 키보드 등)"
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "헤드폰, 헤드셋 및 기타 오디오 장치"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "블루투스 PIN 확인"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "'%s' 장치에 입력한 PIN을 확인하십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "확인"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"'%s' 장치의 블루투스 PIN을 확인합니다. 장치 설명서에서 찾을 수 있습니다."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "'%s' 장치 페어링중"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "'%s' 장치에 표시된 PIN이 다음 PIN과 일치하는지 확인하십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "블루투스 페어링 요청"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr "'%s' 장치가 이 장치와 페어링하려고 합니다. 페어링을 허용하시겠습니까?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "'%s' 장치에 다음 PIN을 입력하십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "'%s' 장치에 다음 PIN을 입력하고 키보드에서 “Return”을 누르십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"다음 방향을 따라 iCade의 조이스틱을 움직이십시오. 그 다음 흰색 단추 중 아무거"
+"나 누르십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "허용"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "무시"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+msgid "Cancel"
+msgstr "취소"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:282
+msgid "Accept"
+msgstr "수락"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Setup"
+msgstr "설정하지 않음"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "연결함"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "연결 끊김"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "Yes"
+msgstr "예"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "No"
+msgstr "아니요"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
+#, c-format
+msgid "Visible as “%s”"
+msgstr "“%s”(으)로 보이기"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "장치 목록에서 '%s' 장치를 제거하시겠습니까?"
+
+#: ../lib/bluetooth-settings-widget.c:1194
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr "장치를 제거하면 다음에 사용하기 전에 설정해야 합니다."
+
+#: ../lib/bluetooth-settings-widget.c:1198
+msgid "_Remove"
+msgstr "제거(_R)"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "완료"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -177,294 +313,61 @@ msgstr "타블렛"
 msgid "Video device"
 msgstr "비디오 장치"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "위치 서비스에 이 GPS 장치 사용"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "원격 컨트롤"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "이 휴대 전화를 사용해 인터넷 사용(시험용)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "스캐너"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "'%s'의 다음 PIN을 입력하십시오:"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "디스플레이"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "'%s'의 다음 PIN을 입력하고 키보드에서 'Enter'를 누르십시오:"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "착용가능"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "다음 방향대로 여러분의 iCade 조이스틱을 움직여주기 바랍니다:"
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "완구"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "'%s' 장치와 페어링을 취소했습니다"
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "연결"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "'%s'에 표시된 PIN이 이 PIN과 일치하는지 확인하십시오."
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "1 페이지"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "다음 PIN을 입력하십시오:"
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "2 페이지"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "'%s' 준비가 실패했습니다"
+#: ../lib/settings.ui.h:6
+msgid "Address"
+msgstr "주소"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "'%s'에 연결하는 중..."
+#: ../lib/settings.ui.h:7
+msgid "_Mouse & Touchpad Settings"
+msgstr "마우스와 터치패드 설정(_M)"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "'%s' 장치 준비를 마치는 동안 기다리십시오..."
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "소리 설정(_S)"
 
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "새 '%s' 장치 준비를 성공적으로 마쳤습니다"
+#: ../lib/settings.ui.h:9
+msgid "_Keyboard Settings"
+msgstr "키보드 설정(_K)"
 
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "블루투스 새 장치 준비"
+#: ../lib/settings.ui.h:10
+msgid "Send _Files…"
+msgstr "파일 보내기(_F)…"
 
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "PIN 옵션(_O)..."
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "장치 검색 "
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "장치 준비"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "설치를 마치는 중입니다"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "이 장치에 사용하려는 서비스가 더 있으면 선택하십시오:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "설치 요약"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "PIN 옵션"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "자동 PIN 선택(_A)"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "고정 PIN"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (대부분의 헤드셋, 마우스, GPS 장치)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "페어링하지 않기"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "사용자 설정 PIN:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "재시도(_T)"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "끝내기(_Q)"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "취소(_C)"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "일치하지 않음"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "일치"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "블루투스 장치 준비"
-
-# long description
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "블루투스 장치를 준비합니다"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d초"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d분"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d시간"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "약 %'d시간"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "연결하는 중..."
-
-#: ../sendto/main.c:424
-msgid "Bluetooth File Transfer"
-msgstr "블루투스 파일 전송"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "다시 시도(_R)"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "원본:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "대상 :"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "알 수 없는 오류 발생"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr ""
-"원격 장치의 전원을 켰는지, 그리고 블루투스 연결을 받아들이는지 확인하십시오"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "%s 보내는 중"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "파일  %d (전체 %d) 보내는 중"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d kB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "전송 %u건 완료"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "오류가 있습니다"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "보낼 장치를 선택하십시오"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "보내기(_S)"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "보낼 파일을 선택하십시오"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "선택"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "사용할 원격 장치"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
-msgstr "<주소>"
-
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "원격 장치의 이름"
-
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "<이름>"
-
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[<파일>...]"
+#: ../lib/settings.ui.h:11
+msgid "_Remove Device"
+msgstr "장치 제거(_R)"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -474,3 +377,198 @@ msgstr "블루투스 전송"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "블루투스를 통해 파일을 전송합니다"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "알 수 없는 오류 발생"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d초"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d분"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d시간"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "약 %'d시간"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+msgid "Connecting…"
+msgstr "연결하는 중…"
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "블루투스 파일 전송"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "다시 시도(_R)"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "원본:"
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "대상 :"
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "%s 보내는중"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "파일  %d (전체 %d) 보내는중"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "전송 %u건 완료"
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "오류가 있습니다"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "보낼 장치를 선택하십시오"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "보내기(_S)"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "보낼 파일을 선택하십시오"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "선택"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "사용할 원격 장치"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "<주소>"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "원격 장치의 이름"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "<이름>"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[<파일>...]"
+
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr "위치 서비스에 이 GPS 장치 사용"
+
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr "이 휴대 전화를 사용해 인터넷 사용(시험용)"
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "다음 PIN을 입력하십시오:"
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "'%s' 준비가 실패했습니다"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "'%s'에 연결하는 중..."
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "'%s' 장치 준비를 마치는 동안 기다리십시오..."
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "새 '%s' 장치 준비를 성공적으로 마쳤습니다"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "블루투스 새 장치 준비"
+
+#~ msgid "PIN _options..."
+#~ msgstr "PIN 옵션(_O)..."
+
+#~ msgid "Device Search"
+#~ msgstr "장치 검색 "
+
+#~ msgid "Device Setup"
+#~ msgstr "장치 준비"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "설치를 마치는 중입니다"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "이 장치에 사용하려는 서비스가 더 있으면 선택하십시오:"
+
+#~ msgid "Setup Summary"
+#~ msgstr "설치 요약"
+
+#~ msgid "PIN Options"
+#~ msgstr "PIN 옵션"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "자동 PIN 선택(_A)"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "고정 PIN"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "'0000' (대부분의 헤드셋, 마우스, GPS 장치)"
+
+#~ msgid "'1111'"
+#~ msgstr "'1111'"
+
+#~ msgid "'1234'"
+#~ msgstr "'1234'"
+
+#~ msgid "Do not pair"
+#~ msgstr "페어링하지 않기"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "사용자 설정 PIN:"
+
+#~ msgid "_Try Again"
+#~ msgstr "재시도(_T)"
+
+#~ msgid "_Quit"
+#~ msgstr "끝내기(_Q)"
+
+#~ msgid "Does not match"
+#~ msgstr "일치하지 않음"
+
+#~ msgid "Matches"
+#~ msgstr "일치"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "블루투스 장치 준비"
