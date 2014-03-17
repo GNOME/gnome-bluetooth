@@ -252,9 +252,7 @@ static void
 bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 {
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
-	GtkWidget *container, *buttonbox;
 	GError *error = NULL;
-	GtkStyleContext *context;
 
 	g_resources_register (bluetooth_settings_get_resource ());
 	priv->builder = gtk_builder_new ();
@@ -270,6 +268,16 @@ bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 
 	gtk_widget_set_size_request (GTK_WIDGET (self), 380, -1);
 	gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
+}
+
+static void
+bluetooth_pairing_dialog_constructed (GObject *object)
+{
+	BluetoothPairingDialog *self = BLUETOOTH_PAIRING_DIALOG (object);
+	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
+	GtkWidget *container, *buttonbox;
+	GtkStyleContext *context;
+
 	container = gtk_dialog_get_content_area (GTK_DIALOG (self));
 	buttonbox = gtk_dialog_get_action_area (GTK_DIALOG (self));
 
@@ -343,6 +351,7 @@ bluetooth_pairing_dialog_class_init (BluetoothPairingDialogClass *klass)
 
 	g_type_class_add_private (klass, sizeof (BluetoothPairingDialogPrivate));
 
+	object_class->constructed = bluetooth_pairing_dialog_constructed;
 	object_class->finalize = bluetooth_pairing_dialog_finalize;
 }
 
