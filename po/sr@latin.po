@@ -6,14 +6,14 @@
 # Bojan Bogdanović https://launchpad.net/~bojce\n"
 # Marcel Holtmann https://launchpad.net/~holtmann\n"
 # Miloš Popović <gpopac@gmail.com>, 2007-2009, 2010.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011, 2012, 2013.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011—2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-18 11:46+0000\n"
-"PO-Revision-Date: 2013-09-05 08:50+0200\n"
+"POT-Creation-Date: 2014-03-21 07:09+0000\n"
+"PO-Revision-Date: 2014-03-21 18:25+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -24,32 +24,44 @@ msgstr ""
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
-msgstr "Kliknite da izaberete uređaj..."
+#: ../lib/bluetooth-chooser-button.c:73
+#| msgid "Click to select device..."
+msgid "Click to select device…"
+msgstr "Kliknite da izaberete uređaj…"
+
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
+msgid "_Cancel"
+msgstr "_Otkaži"
+
+#: ../lib/bluetooth-chooser-button.c:204
+msgid "_OK"
+msgstr "U _redu"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "Nepoznato"
 
 #: ../lib/bluetooth-chooser.c:176
 msgid "No adapters available"
-msgstr "Ne postoje adapteri"
+msgstr "Ne postoje prilagođivači"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "Tražim Blutut uređaje..."
+#| msgid "Searching for devices..."
+msgid "Searching for devices…"
+msgstr "Tražim uređaje…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Uređaj"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Uređaji"
 
@@ -57,7 +69,7 @@ msgstr "Uređaji"
 msgid "All categories"
 msgstr "Sve kategorije"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Upareni"
 
@@ -67,7 +79,7 @@ msgstr "Od poverenja"
 
 #: ../lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
-msgstr "Neupareni ili nepoverljivi"
+msgstr "Neupareni ili poverljivi"
 
 #: ../lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
@@ -104,6 +116,145 @@ msgstr "Ulazni uređaji (miš, tastatura, itd.)"
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Slušalice i drugi zvučni uređaji"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "Potvrdite PIN blututa"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+#| msgid "Please confirm that the PIN displayed on '%s' matches this one."
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Potvrdite PIN koji je ispisan na „%s“."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Potvrdi"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"Potvrdite PIN blututa za „%s“. Ovo obično možete naći u uputstvu uređaja."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+#| msgid "Pairing with '%s' cancelled"
+msgid "Pairing '%s'"
+msgstr "Uparujem „%s“"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+#| msgid "Please confirm that the PIN displayed on '%s' matches this one."
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "Potvrdite da se sledeći PIN poklapa sa onim prikazanim na „%s“."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+#| msgid "Bluetooth Transfer"
+msgid "Bluetooth Pairing Request"
+msgstr "Zahtev uparivanja Blututa"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr ""
+"„%s“ želi da se upari sa ovim uređajem. Da li želite da dopustite uparivanje?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+#| msgid "Please enter the following PIN on '%s':"
+msgid "Please enter the following PIN on '%s'."
+msgstr "Unesite sledeći PIN na „%s“."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+#| msgid ""
+#| "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "Unesite sledeći PIN na „%s“. Zatim pritisnite „Unesi“ na tastaturi."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+#| msgid "Please move the joystick of your iCade in the following directions:"
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Pomerajte džojstik vašeg iKejda u sledećim pravcima. Zatim pritisnite neko od "
+"belih dugmadi."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Odobri"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Odbaci"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "Otkaži"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:290
+msgid "Accept"
+msgstr "Prihvati"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Setup"
+msgstr "Nije podešeno"
+
+#: ../lib/bluetooth-settings-row.c:81
+#| msgid "Connecting..."
+msgid "Connected"
+msgstr "Povezan"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "Nepovezan"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "Yes"
+msgstr "Da"
+
+#: ../lib/bluetooth-settings-widget.c:1071
+msgid "No"
+msgstr "Ne"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1166
+#, c-format
+msgid "Visible as “%s”"
+msgstr "Vidi se kao „%s“"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Da uklonim „%s“ sa spiska uređaja?"
+
+#: ../lib/bluetooth-settings-widget.c:1194
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Ukoliko uklonite uređaj, moraćete ponovo da ga podesite pre sledećeg "
+"korišćenja."
+
+#: ../lib/bluetooth-settings-widget.c:1198
+msgid "_Remove"
+msgstr "_Ukloni"
+
+#: ../lib/bluetooth-settings-widget.c:1696
+msgid "Done"
+msgstr "Urađeno"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -166,310 +317,65 @@ msgstr "Tablet"
 msgid "Video device"
 msgstr "Video uređaj"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "Koristi ovaj GPS uređaj za geolociranje"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Daljinsko upravljanje"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "Pristupi Internetu preko mobilnog telefona (probno)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Pregledač"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Unesite sledeći PIN na „%s“:"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Prikaz"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Unesite sledeći PIN na „%s“ i pritisnite „Enter“ na tastaturi:"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Ugrejiv"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Pomerajte džojstik vašeg iKejda u sledećim pravcima:"
+#: ../lib/bluetooth-utils.c:98
+#| msgid "To:"
+msgid "Toy"
+msgstr "Sprava"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "Prekinuto je uparivanje sa „%s“"
+#: ../lib/settings.ui.h:1
+#| msgid "Connecting..."
+msgid "Connection"
+msgstr "Veza"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Potvrdite da li se PIN ispisan na „%s“ poklapa sa ovim."
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "stranica 1"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "Unesite sledeći PIN:"
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "stranica 2"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "Nije uspelo podeavanje „%s“"
+#: ../lib/settings.ui.h:6
+msgid "Address"
+msgstr "Adresa"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "Povezujem se sa „%s“..."
+#: ../lib/settings.ui.h:7
+msgid "_Mouse & Touchpad Settings"
+msgstr "Podešavanja _miša i dodirne table"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Sačekajte dok ne završim podešavanje uređaja „%s“..."
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "Podšavanja _zvuka"
 
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "Podeavanje novog uređaja „%s“ je uspelo"
+#: ../lib/settings.ui.h:9
+#| msgid "Keyboard"
+msgid "_Keyboard Settings"
+msgstr "Podešavanja _tastature"
 
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "Podešavanje novog Blutut uređaja"
+#: ../lib/settings.ui.h:10
+msgid "Send _Files…"
+msgstr "Pošalji _datoteke…"
 
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "_Opcije za PIN..."
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "Pretraga uređaja"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "Podešavanje uređaja"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "Završavam podešavanje novog uređaja"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "Izaberite dodatne servise za upotrebu na ovom uređaju:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "Sažetak podešavanja"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "Opcije za PIN"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "_Sam izaberi PIN"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "Zadati PIN"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "„0000“ (većina mikrofona, miševa i GPS uređaja)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "„1111“"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "„1234“"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "Ne uparuj"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "Proizvoljni PIN:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "_Pokušaj opet"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "_Izađi"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "_Otkaži"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "Ne poklapa se"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "Poklapa se"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "Podešavanje Blutut uređaja"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "Podesite Blutut uređaje"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d sekunda"
-msgstr[1] "%'d sekunde"
-msgstr[2] "%'d sekundi"
-msgstr[3] "%'d sekunda"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d minut"
-msgstr[1] "%'d minuta"
-msgstr[2] "%'d minuta"
-msgstr[3] "%'d minut"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d sat"
-msgstr[1] "%'d sata"
-msgstr[2] "%'d sati"
-msgstr[3] "%'d sat"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "približno %'d sat"
-msgstr[1] "približno %'d sata"
-msgstr[2] "približno %'d sati"
-msgstr[3] "približno %'d sat"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "Povezujem se..."
-
-#: ../sendto/main.c:424
-#| msgid "Bluetooth Transfer"
-msgid "Bluetooth File Transfer"
-msgstr "Prenos datoteka blututom"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "_Probaj ponovo"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "Šalje:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "Prima:"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "Došlo je do nepoznate greške"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr ""
-"Proverite da li je udaljeni uređaj uključen i da li je podešen tako da "
-"prihvata veze preko Blututa"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "Šaljem „%s“"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Šaljem datoteku %d od %d"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d kB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "%u prenos je završen"
-msgstr[1] "%u prenosa su završena"
-msgstr[2] "%u prenosa je završeno"
-msgstr[3] ""
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "Došlo je do greške"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "Izaberite uređaj na koji da pošaljem"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "Pošalji _na"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "Izaberite datoteke za slanje"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "Izaberi"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "Željeni udaljeni uređaj"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
-msgstr "ADRESA"
-
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "Ime udaljenog uređaja"
-
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "NAZIV"
-
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[DATOTEKA...]"
+#: ../lib/settings.ui.h:11
+#| msgid "Remote device to use"
+msgid "_Remove Device"
+msgstr "_Ukloni uređaj"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -478,3 +384,224 @@ msgstr "Prenos Blututom"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Šaljem datoteke preko Blututa"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "Došlo je do nepoznate greške"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d sekunda"
+msgstr[1] "%'d sekunde"
+msgstr[2] "%'d sekundi"
+msgstr[3] "%'d sekunda"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minut"
+msgstr[1] "%'d minuta"
+msgstr[2] "%'d minuta"
+msgstr[3] "%'d minut"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d sat"
+msgstr[1] "%'d sata"
+msgstr[2] "%'d sati"
+msgstr[3] "%'d sat"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "približno %'d sat"
+msgstr[1] "približno %'d sata"
+msgstr[2] "približno %'d sati"
+msgstr[3] "približno %'d sat"
+
+#: ../sendto/main.c:378 ../sendto/main.c:473
+#| msgid "Connecting..."
+msgid "Connecting…"
+msgstr "Povezujem se…"
+
+#: ../sendto/main.c:418
+msgid "Bluetooth File Transfer"
+msgstr "Prenos datoteka blututom"
+
+#: ../sendto/main.c:421
+msgid "_Retry"
+msgstr "_Probaj ponovo"
+
+#: ../sendto/main.c:443
+msgid "From:"
+msgstr "Šalje:"
+
+#: ../sendto/main.c:457
+msgid "To:"
+msgstr "Prima:"
+
+#: ../sendto/main.c:552
+#, c-format
+msgid "Sending %s"
+msgstr "Šaljem „%s“"
+
+#: ../sendto/main.c:559 ../sendto/main.c:608
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Šaljem %d. datoteku od %d"
+
+#: ../sendto/main.c:604
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:606
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:636
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u prenos je završen"
+msgstr[1] "%u prenosa su završena"
+msgstr[2] "%u prenosa je završeno"
+msgstr[3] ""
+
+#: ../sendto/main.c:650
+msgid "There was an error"
+msgstr "Došlo je do greške"
+
+#: ../sendto/main.c:686
+msgid "Select device to send to"
+msgstr "Izaberite uređaj na koji da pošaljem"
+
+#: ../sendto/main.c:691
+msgid "_Send"
+msgstr "Pošalji _na"
+
+#: ../sendto/main.c:735
+msgid "Choose files to send"
+msgstr "Izaberite datoteke za slanje"
+
+#: ../sendto/main.c:738
+msgid "Select"
+msgstr "Izaberi"
+
+#: ../sendto/main.c:764
+msgid "Remote device to use"
+msgstr "Željeni udaljeni uređaj"
+
+#: ../sendto/main.c:764
+msgid "ADDRESS"
+msgstr "ADRESA"
+
+#: ../sendto/main.c:766
+msgid "Remote device's name"
+msgstr "Ime udaljenog uređaja"
+
+#: ../sendto/main.c:766
+msgid "NAME"
+msgstr "NAZIV"
+
+#: ../sendto/main.c:785
+msgid "[FILE...]"
+msgstr "[DATOTEKA...]"
+
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr "Koristi ovaj GPS uređaj za geolociranje"
+
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr "Pristupi Internetu preko mobilnog telefona (probno)"
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "Unesite sledeći PIN:"
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "Nije uspelo podeavanje „%s“"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "Povezujem se sa „%s“..."
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "Sačekajte dok ne završim podešavanje uređaja „%s“..."
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "Podeavanje novog uređaja „%s“ je uspelo"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "Podešavanje novog Blutut uređaja"
+
+#~ msgid "PIN _options..."
+#~ msgstr "_Opcije za PIN..."
+
+#~ msgid "Device Search"
+#~ msgstr "Pretraga uređaja"
+
+#~ msgid "Device Setup"
+#~ msgstr "Podešavanje uređaja"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "Završavam podešavanje novog uređaja"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "Izaberite dodatne servise za upotrebu na ovom uređaju:"
+
+#~ msgid "Setup Summary"
+#~ msgstr "Sažetak podešavanja"
+
+#~ msgid "PIN Options"
+#~ msgstr "Opcije za PIN"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "_Sam izaberi PIN"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "Zadati PIN"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "„0000“ (većina mikrofona, miševa i GPS uređaja)"
+
+#~ msgid "'1111'"
+#~ msgstr "„1111“"
+
+#~ msgid "'1234'"
+#~ msgstr "„1234“"
+
+#~ msgid "Do not pair"
+#~ msgstr "Ne uparuj"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "Proizvoljni PIN:"
+
+#~ msgid "_Try Again"
+#~ msgstr "_Pokušaj opet"
+
+#~ msgid "_Quit"
+#~ msgstr "_Izađi"
+
+#~ msgid "Does not match"
+#~ msgstr "Ne poklapa se"
+
+#~ msgid "Matches"
+#~ msgstr "Poklapa se"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "Podešavanje Blutut uređaja"
+
+#~ msgid "Setup Bluetooth devices"
+#~ msgstr "Podesite Blutut uređaje"
+
+#~ msgid ""
+#~ "Make sure that the remote device is switched on and that it accepts "
+#~ "Bluetooth connections"
+#~ msgstr ""
+#~ "Proverite da li je udaljeni uređaj uključen i da li je podešen tako da "
+#~ "prihvata veze preko Blututa"
