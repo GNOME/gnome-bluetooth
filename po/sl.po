@@ -2,15 +2,15 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2009-2013.
+# Matej Urbančič <mateju@svn.gnome.org>, 2009-2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-22 15:14+0000\n"
-"PO-Revision-Date: 2013-12-23 19:49+0100\n"
+"POT-Creation-Date: 2014-03-21 19:10+0000\n"
+"PO-Revision-Date: 2014-03-21 21:48+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -21,16 +21,17 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Kliknite za izbor naprave ..."
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "_Prekliči"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_V redu"
 
@@ -44,7 +45,6 @@ msgid "No adapters available"
 msgstr "Ni razpoložljivega vmesnika"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-#, fuzzy
 msgid "Searching for devices…"
 msgstr "Iskanje naprav ..."
 
@@ -52,7 +52,7 @@ msgstr "Iskanje naprav ..."
 msgid "Device"
 msgstr "Naprava"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Vrsta"
 
@@ -64,7 +64,7 @@ msgstr "Naprave"
 msgid "All categories"
 msgstr "Vse kategorije"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Seznanjeno"
 
@@ -114,14 +114,13 @@ msgstr "Slušalke, mikrofoni in druge zvočne naprave"
 
 #: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
 #: ../lib/bluetooth-pairing-dialog.c:108
-#, fuzzy
 msgid "Confirm Bluetooth PIN"
-msgstr "_Samodejni izbor prehodnega gesla"
+msgstr "Potrdi kodo PIN"
 
 #: ../lib/bluetooth-pairing-dialog.c:88
-#, fuzzy, c-format
+#, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
-msgstr "Potrdite, da se prehodno geslo '%s' sklada s tem."
+msgstr "Potrdite, da je koda PIN skladna z kodo na napravi '%s'."
 
 #: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
 #: ../lib/bluetooth-pairing-dialog.c:146
@@ -138,43 +137,44 @@ msgstr ""
 "zapisana v priročniku naprave."
 
 #: ../lib/bluetooth-pairing-dialog.c:101
-#, fuzzy, c-format
+#, c-format
 msgid "Pairing '%s'"
 msgstr "Zahteva seznanjanja z napravo '%s'"
 
 #: ../lib/bluetooth-pairing-dialog.c:109
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
-msgstr "Potrdite, da se prehodno geslo '%s' sklada s tem."
+msgstr "Potrdite, da je koda PIN skladna z kodo, prikazano na napravi '%s'."
 
 #: ../lib/bluetooth-pairing-dialog.c:114
-#, fuzzy
 msgid "Bluetooth Pairing Request"
-msgstr "Zahteva seznanjanja z napravo '%s'"
+msgstr "Zahteva seznanjanja z napravo"
 
 #: ../lib/bluetooth-pairing-dialog.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
-msgstr "Naprava '%s' se poskuša seznaniti z računalnikom"
+msgstr ""
+"Naprava '%s' se poskuša seznaniti z računalnikom. Ali dovolite seznanjenje?"
 
 #: ../lib/bluetooth-pairing-dialog.c:123
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter the following PIN on '%s'."
-msgstr "Vnesite naslednje prehodno geslo na '%s':"
+msgstr "Vnesite naslednjo kodo PIN na '%s':"
 
 #: ../lib/bluetooth-pairing-dialog.c:126
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
-msgstr "Vnesite naslednje prehodno geslo na '%s' in pritisnite tipko “Enter”:"
+msgstr "Vnesite naslednjo kodo PIN na '%s' in pritisnite vnosno tipko."
 
 #: ../lib/bluetooth-pairing-dialog.c:129
-#, fuzzy
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
-msgstr "Premaknite igralno palico naprave iCade v naslednjih smereh:"
+msgstr ""
+"Premaknite igralno palico naprave iCade v navedenih smereh, nato pa "
+"pritisnite katerikoli beli gumb."
 
 #: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Allow"
@@ -185,12 +185,12 @@ msgid "Dismiss"
 msgstr "Zavrzi"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Prekliči"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Sprejmi"
 
@@ -324,42 +324,38 @@ msgid "Toy"
 msgstr "Igrača"
 
 #: ../lib/settings.ui.h:1
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Vnesite prehodno geslo PIN na 'Napravi':"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Povezava"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "stran 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "stran 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Naslov"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
 msgstr "Nastavitve _miške in sledilne ploščice"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:8
 msgid "_Sound Settings"
 msgstr "_Nastavitve zvoka"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:9
 msgid "_Keyboard Settings"
 msgstr "_Nastavitve tipkovnice"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:10
 msgid "Send _Files…"
 msgstr "Pošlji _datoteke ..."
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
 msgstr "_Odstrani napravo"
 
@@ -499,6 +495,9 @@ msgstr "IME"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[DATOTEKA ...]"
+
+#~ msgid "Please enter the following PIN on 'Foobar':"
+#~ msgstr "Vnesite prehodno geslo PIN na 'Napravi':"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Uporabi napravo GPS za določevanje položaja nahajanja"
