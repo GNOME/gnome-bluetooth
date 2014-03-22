@@ -1867,6 +1867,7 @@ static void
 bluetooth_settings_widget_class_init (BluetoothSettingsWidgetClass *klass)
 {
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 
 	g_type_class_add_private (klass, sizeof (BluetoothSettingsWidgetPrivate));
 
