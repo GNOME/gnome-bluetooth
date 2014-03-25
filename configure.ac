@@ -51,6 +51,8 @@ GLIB_GSETTINGS
 
 AC_PATH_PROG([XMLLINT],[xmllint])
 
+AC_CHECK_LIB([m],[sin])
+
 dnl gtk-doc checks
 GTK_DOC_CHECK(1.9)
 

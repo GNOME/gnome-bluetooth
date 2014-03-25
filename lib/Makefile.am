@@ -48,7 +48,7 @@ libgnome_bluetooth_la_SOURCES =			\
 	$(libgnome_bluetooth_private_headers)	\
 	$(libgnome_bluetooth_c_sources)
 
-libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS)
+libgnome_bluetooth_la_LIBADD = $(LIBGNOMEBT_LIBS) $(LIBS)
 
 libgnome_bluetooth_la_LDFLAGS =				\
 	-version-info $(GNOMEBT_LT_VERSION)		\
