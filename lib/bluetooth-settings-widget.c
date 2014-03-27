@@ -57,8 +57,6 @@ struct _BluetoothSettingsWidgetPrivate {
 
 	/* Properties */
 	GtkWidget           *properties_dialog;
-	GtkWidget           *properties_header;
-	GtkWidget           *properties_title;
 	char                *selected_bdaddr;
 	char                *selected_name;
 	char                *selected_object_path;
@@ -1045,7 +1043,7 @@ update_properties (BluetoothSettingsWidget *self,
 	gtk_widget_hide (WID ("send_button"));
 
 	/* Name */
-	gtk_label_set_text (GTK_LABEL (priv->properties_title), name);
+	gtk_window_set_title (GTK_WINDOW (priv->properties_dialog), name);
 	g_free (priv->selected_name);
 	priv->selected_name = name;
 
@@ -1684,34 +1682,17 @@ static void
 setup_properties_dialog (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	GtkWidget *container, *buttonbox, *header, *done;
+	GtkWidget *container;
 	GtkStyleContext *context;
 
-	priv->properties_dialog = gtk_dialog_new ();
+	priv->properties_dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
 	gtk_widget_set_size_request (priv->properties_dialog, 380, -1);
 	gtk_window_set_resizable (GTK_WINDOW (priv->properties_dialog), FALSE);
 	container = gtk_dialog_get_content_area (GTK_DIALOG (priv->properties_dialog));
-	buttonbox = gtk_dialog_get_action_area (GTK_DIALOG (priv->properties_dialog));
-	priv->properties_header = header = gtk_header_bar_new ();
-	done = gtk_button_new_with_label (_("Done"));
-	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), done);
-	gtk_widget_show_all (header);
-	priv->properties_title = gtk_label_new ("");
-	g_object_set (G_OBJECT (priv->properties_title),
-		      "margin-start", 12,
-		      "margin-end", 12,
-		      NULL);
-	gtk_header_bar_set_custom_title (GTK_HEADER_BAR (header), priv->properties_title);
-	gtk_window_set_titlebar (GTK_WINDOW (priv->properties_dialog), header);
-	gtk_label_set_ellipsize (GTK_LABEL (priv->properties_title), PANGO_ELLIPSIZE_END);
 	gtk_container_add (GTK_CONTAINER (container), WID ("properties_vbox"));
-	gtk_widget_hide (buttonbox);
-	gtk_widget_set_no_show_all (buttonbox, FALSE);
 
 	g_signal_connect (G_OBJECT (priv->properties_dialog), "delete-event",
 			  G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-	g_signal_connect_swapped (G_OBJECT (done), "clicked",
-				  G_CALLBACK (gtk_widget_hide_on_delete), priv->properties_dialog);
 	g_signal_connect (G_OBJECT (WID ("delete_button")), "clicked",
 			  G_CALLBACK (delete_clicked), self);
 	g_signal_connect (G_OBJECT (WID ("mouse_button")), "clicked",
@@ -1730,10 +1711,6 @@ setup_properties_dialog (BluetoothSettingsWidget *self)
 
 	context = gtk_widget_get_style_context (WID ("delete_button"));
 	gtk_style_context_add_class (context, "destructive-action");
-	context = gtk_widget_get_style_context (done);
-	gtk_style_context_add_class (context, "suggested-action");
-	context = gtk_widget_get_style_context (priv->properties_title);
-	gtk_style_context_add_class (context, "title");
 }
 
 static void
