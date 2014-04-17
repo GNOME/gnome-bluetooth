@@ -14,9 +14,9 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-18 19:58+0000\n"
-"PO-Revision-Date: 2013-12-19 23:31+0100\n"
-"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"POT-Creation-Date: 2014-04-16 18:31+0000\n"
+"PO-Revision-Date: 2014-04-17 06:07+0100\n"
+"Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -24,18 +24,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.4\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Klicken, um das Gerät auszuwählen …"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "A_bbrechen"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_OK"
 
@@ -56,11 +57,11 @@ msgstr "Nach Geräten wird gesucht …"
 msgid "Device"
 msgstr "Gerät "
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Geräte"
 
@@ -68,7 +69,7 @@ msgstr "Geräte"
 msgid "All categories"
 msgstr "Alle Typen"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Gekoppelt"
 
@@ -174,8 +175,8 @@ msgstr "Bitte geben Sie die folgende PIN auf »%s« ein."
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr ""
-"Bitte geben Sie die folgende PIN auf »%s« ein und drücken Sie die "
-"Eingabetaste auf der Tastatur."
+"Bitte geben Sie die folgende PIN auf »%s« ein und drücken Sie anschließend "
+"die Eingabetaste auf der Tastatur."
 
 #: ../lib/bluetooth-pairing-dialog.c:129
 msgid ""
@@ -183,7 +184,7 @@ msgid ""
 "press any of the white buttons."
 msgstr ""
 "Bitte bewegen Sie den Joystick Ihres iCade in die folgenden Richtungen und "
-"drücken Sie auf eine der weißen Knöpfe."
+"drücken Sie anschließend auf einen der weißen Knöpfe."
 
 #: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Allow"
@@ -194,12 +195,12 @@ msgid "Dismiss"
 msgstr "Verwerfen"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "A_bbrechen"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Akzeptieren"
 
@@ -216,40 +217,36 @@ msgstr "Verbunden"
 msgid "Disconnected"
 msgstr "Verbindung getrennt"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Ja"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Nein"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Sichtbar als »%s«"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "»%s« aus der Liste der bekannten Geräte entfernen?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Falls Sie das Gerät entfernen, müssen Sie es vor der nächsten Benutzung "
 "erneut konfigurieren."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Entfernen"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Fertig"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -333,44 +330,40 @@ msgid "Toy"
 msgstr "Spielzeug"
 
 #: ../lib/settings.ui.h:1
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Bitte geben Sie die folgende PIN auf »Foobar« ein:"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Verbindung"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "Seite 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "Seite 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Adresse"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
 msgstr "Einstellungen für _Maus und Touchpad"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:8
 msgid "_Sound Settings"
 msgstr "_Klangeinstellungen"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:9
 msgid "_Keyboard Settings"
 msgstr "_Tastatureinstellungen"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:10
 msgid "Send _Files…"
 msgstr "_Dateien senden …"
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
-msgstr "Zu verwendendes _entferntes Gerät"
+msgstr "Gerät _entfernen"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -498,6 +491,12 @@ msgstr "NAME"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[Datei …]"
+
+#~ msgid "Done"
+#~ msgstr "Fertig"
+
+#~ msgid "Please enter the following PIN on 'Foobar':"
+#~ msgstr "Bitte geben Sie die folgende PIN auf »Foobar« ein:"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Dieses GPS-Gerät für Geopositionsdienste verwenden"
