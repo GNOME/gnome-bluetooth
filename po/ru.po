@@ -10,30 +10,30 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth.master.ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-13 08:49+0000\n"
-"PO-Revision-Date: 2014-01-26 17:33+0400\n"
-"Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
+"POT-Creation-Date: 2014-05-19 11:26+0000\n"
+"PO-Revision-Date: 2014-05-19 16:57+0300\n"
+"Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 "X-Launchpad-Export-Date: 2009-04-14 23:23+0000\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Нажмите, чтобы выбрать устройство…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
 #: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "_Отмена"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_OK"
 
@@ -58,7 +58,7 @@ msgstr "Устройство"
 msgid "Type"
 msgstr "Тип"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Устройства"
 
@@ -187,19 +187,19 @@ msgid "Dismiss"
 msgstr "Отклонить"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Отмена"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Принять"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
-msgstr "Не установлено"
+msgid "Not Set Up"
+msgstr "Не настроено"
 
 #: ../lib/bluetooth-settings-row.c:81
 msgid "Connected"
@@ -209,40 +209,36 @@ msgstr "Подключено"
 msgid "Disconnected"
 msgstr "Отключено"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Да"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Нет"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Видимое как «%s»"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Удалить «%s» из списка устройств?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Если вы удалите устройство, вам необходимо будет снова настроить его перед "
 "следующим использованием."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Удалить"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Выполнено"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -492,99 +488,3 @@ msgstr "ИМЯ"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[ФАЙЛ…]"
-
-#~ msgid "Please enter the following PIN on 'Foobar':"
-#~ msgstr "Введите следующий PIN в «Foobar»:"
-
-#~ msgid "Use this GPS device for Geolocation services"
-#~ msgstr "Использовать это устройство GPS для службы Geolocation"
-
-#~ msgid "Access the Internet using your cell phone (test)"
-#~ msgstr "Доступ к интернету при помощи вашего сотового телефона (тест)"
-
-#~ msgid "Please enter the following PIN:"
-#~ msgstr "Введите следующий PIN:"
-
-#~ msgid "Setting up '%s' failed"
-#~ msgstr "Сбой сопряжения с «%s»"
-
-#~ msgid "Connecting to '%s'..."
-#~ msgstr "Подключение к «%s»…"
-
-#~ msgid "Please wait while finishing setup on device '%s'..."
-#~ msgstr "Подождите, пока устанавливается новое устройство «%s»…"
-
-#~ msgid "Successfully set up new device '%s'"
-#~ msgstr "Успешно установлено новое устройство «%s»"
-
-#~ msgid "Bluetooth New Device Setup"
-#~ msgstr "Установка нового устройства Bluetooth"
-
-#~ msgid "PIN _options..."
-#~ msgstr "_Параметры PIN-кода…"
-
-#~ msgid "Device Search"
-#~ msgstr "Поиск устройства"
-
-#~ msgid "Device Setup"
-#~ msgstr "Установка устройства"
-
-#~ msgid "Finishing Setup"
-#~ msgstr "Завершение установки"
-
-#~ msgid "Select the additional services you want to use with your device:"
-#~ msgstr ""
-#~ "Выберите дополнительные службы, которые будут использоваться с "
-#~ "устройством:"
-
-#~ msgid "Setup Summary"
-#~ msgstr "Сводка по установке"
-
-#~ msgid "PIN Options"
-#~ msgstr "Параметры PIN-кода"
-
-#~ msgid "_Automatic PIN selection"
-#~ msgstr "_Автоматический выбор PIN-кода"
-
-#~ msgid "Fixed PIN"
-#~ msgstr "Фиксированный PIN"
-
-#~ msgid "'0000' (most headsets, mice and GPS devices)"
-#~ msgstr "«0000» (большинство гарнитур, мышей и устройств GPS)"
-
-#~ msgid "'1111'"
-#~ msgstr "«1111»"
-
-#~ msgid "'1234'"
-#~ msgstr "«1234»"
-
-#~ msgid "Do not pair"
-#~ msgstr "Не сопрягать"
-
-#~ msgid "Custom PIN:"
-#~ msgstr "Свой PIN:"
-
-#~ msgid "_Try Again"
-#~ msgstr "_Попробовать снова"
-
-#~ msgid "_Quit"
-#~ msgstr "_Закончить"
-
-#~ msgid "Does not match"
-#~ msgstr "Не соответствует"
-
-#~ msgid "Matches"
-#~ msgstr "Соответствует"
-
-#~ msgid "Bluetooth Device Setup"
-#~ msgstr "Настройка устройства Bluetooth"
-
-#~ msgid "Setup Bluetooth devices"
-#~ msgstr "Настроить устройство Bluetooth"
-
-#~ msgid ""
-#~ "Make sure that the remote device is switched on and that it accepts "
-#~ "Bluetooth connections"
-#~ msgstr ""
-#~ "Убедитесь, что удалённое устройство включено и принимает соединения "
-#~ "Bluetooth"
