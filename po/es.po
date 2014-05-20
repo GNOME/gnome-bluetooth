@@ -3,35 +3,36 @@
 # This file is distributed under the same license as the bluez-gnome package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2013.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-12 18:56+0000\n"
-"PO-Revision-Date: 2013-12-13 17:20+0100\n"
+"POT-Creation-Date: 2014-05-20 06:02+0000\n"
+"PO-Revision-Date: 2014-05-20 18:54+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Pulse para seleccionar el dispositivo…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_Aceptar"
 
@@ -52,11 +53,11 @@ msgstr "Buscando dispositivos…"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -64,7 +65,7 @@ msgstr "Dispositivos"
 msgid "All categories"
 msgstr "Todas las categorías"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Emparejado"
 
@@ -186,18 +187,19 @@ msgid "Dismiss"
 msgstr "Descartar"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Aceptar"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+#| msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "No configurado"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -208,41 +210,36 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Sí"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "No"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
-#| msgid "Now visible as “%s”"
 msgid "Visible as “%s”"
 msgstr "Visible como «%s»"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "¿Quitar «%s» de la lista de dispositivos?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Si quita el dispositivo tendrá que configurarlo de nuevo antes de poder "
 "usarlo la próxima vez."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Quitar"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Realizado"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -326,42 +323,38 @@ msgid "Toy"
 msgstr "Juguete"
 
 #: ../lib/settings.ui.h:1
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Introduzca el siguiente PIN en «alguno»:"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Conexión"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "página 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "página 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Dirección"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
 msgstr "Configuración del _ratón y del «touchpad»"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:8
 msgid "_Sound Settings"
 msgstr "Configuración del _sonido"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:9
 msgid "_Keyboard Settings"
 msgstr "Configuración del _teclado"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:10
 msgid "Send _Files…"
 msgstr "Enviar _archivos…"
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
 msgstr "_Quitar dispositivo"
 
@@ -491,6 +484,12 @@ msgstr "NOMBRE"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[ARCHIVO…]"
+
+#~ msgid "Done"
+#~ msgstr "Realizado"
+
+#~ msgid "Please enter the following PIN on 'Foobar':"
+#~ msgstr "Introduzca el siguiente PIN en «alguno»:"
 
 #~| msgid "Please enter the PIN mentioned on device %s."
 #~ msgid "Please enter the PIN code entered on '%s':"
