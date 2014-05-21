@@ -15,29 +15,30 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-12 18:56+0000\n"
-"PO-Revision-Date: 2013-12-12 16:36-0300\n"
-"Last-Translator: Fábio Nogueira <deb-user-ba@ubuntu.com>\n"
+"POT-Creation-Date: 2014-05-21 06:02+0000\n"
+"PO-Revision-Date: 2014-05-21 11:04-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Clique para selecionar o dispositivo…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_OK"
 
@@ -58,11 +59,11 @@ msgstr "Pesquisando por dispositivos…"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -70,7 +71,7 @@ msgstr "Dispositivos"
 msgid "All categories"
 msgstr "Todas as categorias"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Emparelhado"
 
@@ -185,8 +186,8 @@ msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
 msgstr ""
-"Por favor, mova o joystick de seu iCade nas direções que se seguem. Em seguida "
-"pressione qualquer um dos botões brancos."
+"Por favor, mova o joystick de seu iCade nas direções que se seguem. Em "
+"seguida pressione qualquer um dos botões brancos."
 
 #: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Allow"
@@ -197,19 +198,20 @@ msgid "Dismiss"
 msgstr "Descartar"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Aceitar"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
-msgstr "Não configurado"
+#| msgid "Not Setup"
+msgid "Not Set Up"
+msgstr "Não foi configurado"
 
 #: ../lib/bluetooth-settings-row.c:81
 msgid "Connected"
@@ -219,41 +221,36 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Sim"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Não"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
-#| msgid "Now visible as “%s”"
 msgid "Visible as “%s”"
 msgstr "Visível como \"%s\""
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Remover \"%s\" da lista de dispositivos?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se você remover o dispositivo, você terá de configurá-lo novamente antes da "
 "próxima utilização."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Remover"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Concluído"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -337,42 +334,38 @@ msgid "Toy"
 msgstr "Brinquedo"
 
 #: ../lib/settings.ui.h:1
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Por favor, digite o seguinte PIN em \"Foobar\":"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Conexão"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "página 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "página 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Endereço"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
 msgstr "Configurações de _mouse & touchpad"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:8
 msgid "_Sound Settings"
 msgstr "Configurações de _som"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:9
 msgid "_Keyboard Settings"
 msgstr "Configurações de _teclado"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:10
 msgid "Send _Files…"
 msgstr "Enviar _arquivos…"
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
 msgstr "_Remover dispositivo"
 
@@ -503,6 +496,12 @@ msgstr "NOME"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[ARQUIVO...]"
+
+#~ msgid "Done"
+#~ msgstr "Concluído"
+
+#~ msgid "Please enter the following PIN on 'Foobar':"
+#~ msgstr "Por favor, digite o seguinte PIN em \"Foobar\":"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Usa esse dispositivo GPS para serviços de localização terrestre"
