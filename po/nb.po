@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth 3.11.x\n"
+"Project-Id-Version: gnome-bluetooth 3.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-21 20:06+0100\n"
-"PO-Revision-Date: 2014-01-21 20:10+0100\n"
+"POT-Creation-Date: 2014-06-08 10:52+0200\n"
+"PO-Revision-Date: 2014-06-08 10:52+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Klikk for å velge enhet …"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
 #: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "A_vbryt"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_OK"
 
@@ -52,7 +52,7 @@ msgstr "Enhet"
 msgid "Type"
 msgstr "Type"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Enheter"
 
@@ -128,7 +128,9 @@ msgstr "Bekreft"
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
 "device's manual."
-msgstr "Bekreft Bluetooth-PIN for «%s». Denne finnes vanligvis i dokumentasjonen for enheten."
+msgstr ""
+"Bekreft Bluetooth-PIN for «%s». Denne finnes vanligvis i dokumentasjonen for "
+"enheten."
 
 #: ../lib/bluetooth-pairing-dialog.c:101
 #, c-format
@@ -148,7 +150,8 @@ msgstr "Forespørsel om Bluetooth-sammenkobling"
 #: ../lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
-msgstr "«%s» ønsker å koble sammen med denne enheten. Vil du tillate sammenkobling?"
+msgstr ""
+"«%s» ønsker å koble sammen med denne enheten. Vil du tillate sammenkobling?"
 
 #: ../lib/bluetooth-pairing-dialog.c:123
 #, c-format
@@ -159,13 +162,16 @@ msgstr "Vennligst oppgi følgende PIN på «%s»."
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
-msgstr "Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet."
+msgstr ""
+"Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet."
 
 #: ../lib/bluetooth-pairing-dialog.c:129
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
-msgstr "Vennligst beveg styrepinnen på din iCade i følgende retninger. Trykk så på en av de hvite knappene."
+msgstr ""
+"Vennligst beveg styrepinnen på din iCade i følgende retninger. Trykk så på "
+"en av de hvite knappene."
 
 #: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Allow"
@@ -176,18 +182,18 @@ msgid "Dismiss"
 msgstr "Avvis"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Avbryt"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Godta"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Ikke satt opp"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -198,38 +204,36 @@ msgstr "Koblet til"
 msgid "Disconnected"
 msgstr "Koblet fra"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Ja"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Nei"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Synlig som «%s»"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Fjern «%s» fra enhetslisten?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
-msgstr "Hvis du fjerner enheten vil du måtte konfigurere den igjen før du bruker den på nytt."
+msgstr ""
+"Hvis du fjerner enheten vil du måtte konfigurere den igjen før du bruker den "
+"på nytt."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "Fje_rn"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Ferdig"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
