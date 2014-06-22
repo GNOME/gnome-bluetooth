@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.3.3\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-26 13:35+0000\n"
-"PO-Revision-Date: 2014-01-27 13:14+0800\n"
+"POT-Creation-Date: 2014-06-21 18:03+0000\n"
+"PO-Revision-Date: 2014-06-22 15:28+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -22,17 +22,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "請點按以選擇裝置…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
 #: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "確定(_O)"
 
@@ -57,7 +57,7 @@ msgstr "裝置"
 msgid "Type"
 msgstr "類型"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "裝置"
 
@@ -181,18 +181,19 @@ msgid "Dismiss"
 msgstr "放棄"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "取消"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "接受"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+#| msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "尚未設置"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -203,38 +204,34 @@ msgstr "已連線"
 msgid "Disconnected"
 msgstr "已斷線"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "是"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "否"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "顯示名稱為「%s」"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "是否從裝置的清單中移除「%s」？"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "如果您刪除此裝置，下次使用時必須再次設定它。"
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "移除(_R)"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "完成"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -474,6 +471,9 @@ msgstr "名稱"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[檔案...]"
+
+#~ msgid "Done"
+#~ msgstr "完成"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "使用這個 GPS 裝置作為全球定位服務"
