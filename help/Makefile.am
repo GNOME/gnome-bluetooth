@@ -7,4 +7,4 @@ HELP_MEDIA = \
 	figures/bluetooth-properties.png	\
 	figures/bluetooth-wizard.png
 
-HELP_LINGUAS = ca cs da de el es fi fr gl id ko pa ro ru sl sv te th zh_CN zh_HK zh_TW
+HELP_LINGUAS = ca cs da de el es fi fr gl hu id ko pa ro ru sl sv te th zh_CN zh_HK zh_TW
