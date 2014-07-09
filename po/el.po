@@ -12,31 +12,30 @@ msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-20 07:55+0000\n"
-"PO-Revision-Date: 2013-12-20 10:48+0300\n"
-"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"POT-Creation-Date: 2014-06-27 18:01+0000\n"
+"PO-Revision-Date: 2014-06-28 10:14+0200\n"
+"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: team@lists.gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.0\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
-"X-Poedit-Language: Greek\n"
-"X-Poedit-Country: GREECE\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Πατήστε για να επιλέξετε συσκευή…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
+#: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "_Ακύρωση"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_Εντάξει"
 
@@ -57,11 +56,11 @@ msgstr "Αναζήτηση για συσκευές…"
 msgid "Device"
 msgstr "Συσκευή"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Τύπος"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Συσκευές"
 
@@ -69,7 +68,7 @@ msgstr "Συσκευές"
 msgid "All categories"
 msgstr "Όλες οι κατηγορίες"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Συζευγμένα"
 
@@ -120,7 +119,7 @@ msgstr "Ακουστικά και άλλες συσκευές ήχου"
 #: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
 #: ../lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
-msgstr "Επιβεβαιώστε PIN μπλουτούθ"
+msgstr "Επιβεβαιώστε το PIN για Bluetooth "
 
 #: ../lib/bluetooth-pairing-dialog.c:88
 #, c-format
@@ -138,7 +137,7 @@ msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
 "device's manual."
 msgstr ""
-"Επιβεβαιώστε το PIN του μπλουτούθ για το '%s'. Αυτό μπορεί συνήθως να βρεθεί "
+"Επιβεβαιώστε το PIN του Bluetooth για το '%s'. Αυτό μπορεί συνήθως να βρεθεί "
 "στο εγχειρίδιο της συσκευής."
 
 #: ../lib/bluetooth-pairing-dialog.c:101
@@ -156,7 +155,7 @@ msgstr ""
 
 #: ../lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
-msgstr "Αίτημα σύζευξης μπλουτούθ"
+msgstr "Αίτημα σύζευξης Bluetooth "
 
 #: ../lib/bluetooth-pairing-dialog.c:115
 #, c-format
@@ -195,18 +194,18 @@ msgid "Dismiss"
 msgstr "Απόρριψη"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Ακύρωση"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Αποδοχή"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Χωρίς ρύθμιση"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -217,40 +216,36 @@ msgstr "Συνδέθηκε"
 msgid "Disconnected"
 msgstr "Αποσυνδέθηκε"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Ναι"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Όχι"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Ορατό ως “%s”"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
-msgstr "Να απομακρυνθεί το '%s' από τη λίστα των συσκευών;"
+msgstr "Αφαίρεση του '%s' από τη λίστα των συσκευών;"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Εάν αφαιρέσετε τη συσκευή, θα πρέπει να τη ρυθμίσετε ξανά την επόμενη φορά "
 "που θα την χρησιμοποιήσετε."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
-msgstr "_Αφάιρεση"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Έγινε"
+msgstr "_Αφαίρεση"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -275,7 +270,7 @@ msgstr "Δίκτυο"
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
 #: ../lib/bluetooth-utils.c:70
 msgid "Headset"
-msgstr "Ακουστικά"
+msgstr "Ακουστικά ανοιχτής συνομιλίας"
 
 #: ../lib/bluetooth-utils.c:72
 msgid "Headphones"
@@ -307,7 +302,7 @@ msgstr "Χειριστήριο παιχνιδιών"
 
 #: ../lib/bluetooth-utils.c:86
 msgid "Tablet"
-msgstr "Πινακίδα αφής"
+msgstr "Tablet"
 
 #: ../lib/bluetooth-utils.c:88
 msgid "Video device"
@@ -323,7 +318,7 @@ msgstr "Σαρωτής"
 
 #: ../lib/bluetooth-utils.c:94
 msgid "Display"
-msgstr "Εμφάνιση"
+msgstr "Οθόνη"
 
 #: ../lib/bluetooth-utils.c:96
 msgid "Wearable"
@@ -334,42 +329,38 @@ msgid "Toy"
 msgstr "Παιχνίδι"
 
 #: ../lib/settings.ui.h:1
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Παρακαλούμε εισάγετε το ακόλουθο PIN στο 'Foobar':"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Σύνδεση"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "σελίδα 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "σελίδα 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Διεύθυνση"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
 msgstr "Ρυθμίσεις _ποντικιού και πινακίδας αφής"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:8
 msgid "_Sound Settings"
 msgstr "Ρυθμίσεις ή_χου"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:9
 msgid "_Keyboard Settings"
 msgstr "Ρυθμίσεις π_ληκτρολογίου"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:10
 msgid "Send _Files…"
 msgstr "Αποστολή _αρχείων…"
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
 msgstr "Α_φαίρεση συσκευής"
 
@@ -415,11 +406,11 @@ msgstr[1] "περίπου %'d ώρες"
 
 #: ../sendto/main.c:378 ../sendto/main.c:473
 msgid "Connecting…"
-msgstr "Σύνδεση…"
+msgstr "Γίνεται σύνδεση…"
 
 #: ../sendto/main.c:418
 msgid "Bluetooth File Transfer"
-msgstr "Μεταφορά Αρχείων με Bluetooth"
+msgstr "Μεταφορά αρχείων με Bluetooth"
 
 #: ../sendto/main.c:421
 msgid "_Retry"
@@ -499,6 +490,12 @@ msgstr "ΟΝΟΜΑ"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[ΑΡΧΕΙΟ...]"
+
+#~ msgid "Done"
+#~ msgstr "Έγινε"
+
+#~ msgid "Please enter the following PIN on 'Foobar':"
+#~ msgstr "Παρακαλούμε εισάγετε το ακόλουθο PIN στο 'Foobar':"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Χρήση αυτής της συσκευής GPS για γεωτοπικές υπηρεσίες"
