@@ -1,16 +1,19 @@
-# translation of eu.po to Basque
+# Basque translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
 #
 #
-# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2009, 2010, 2011, 2012, 2013, 2014.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2009, 2010, 2011.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013, 2014.
 # Julen Ruiz Aizpuru <julenx@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-21 18:00+0100\n"
-"PO-Revision-Date: 2014-03-21 18:10+0100\n"
+"Project-Id-Version: gnome-bluetooth master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-08-05 14:04+0200\n"
+"PO-Revision-Date: 2014-07-28 19:32+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
@@ -27,7 +30,7 @@ msgid "Click to select device…"
 msgstr "Egin klik gailua hautatzeko…"
 
 #: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
 #: ../sendto/main.c:688 ../sendto/main.c:737
 msgid "_Cancel"
 msgstr "_Utzi"
@@ -57,7 +60,7 @@ msgstr "Gailua"
 msgid "Type"
 msgstr "Mota"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Gailuak"
 
@@ -135,8 +138,8 @@ msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
 "device's manual."
 msgstr ""
-"Berretsi '%s' gailuaren Bluetooth-aren PINa. Gailuaren eskuliburuan "
-"aurkitu ohi da."
+"Berretsi '%s' gailuaren Bluetooth-aren PINa. Gailuaren eskuliburuan aurkitu "
+"ohi da."
 
 #: ../lib/bluetooth-pairing-dialog.c:101
 #, c-format
@@ -157,8 +160,8 @@ msgstr "Bluetooth-a parekatzeko eskaera"
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
-"'%s' gailua ordenagailu honekin pare jartzea nahi du. "
-"Parekatzea baimentzea nahi duzu?"
+"'%s' gailua ordenagailu honekin pare jartzea nahi du. Parekatzea baimentzea "
+"nahi duzu?"
 
 #: ../lib/bluetooth-pairing-dialog.c:123
 #, c-format
@@ -176,8 +179,8 @@ msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
 msgstr ""
-"Eraman iCade-ren kontrol-palanka honako norabideetara. Ondoren, "
-"sakatu zuria koloreko edozein botoi."
+"Eraman iCade-ren kontrol-palanka honako norabideetara. Ondoren, sakatu zuria "
+"koloreko edozein botoi."
 
 #: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Allow"
@@ -199,7 +202,7 @@ msgstr "Onartu"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Ez konfiguratu"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -210,40 +213,36 @@ msgstr "Konektatuta"
 msgid "Disconnected"
 msgstr "Deskonektatuta"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Bai"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Ez"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "\"%s\" gisa ikusgai"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Kendu '%s' gailuen zerrendatik?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Gailua ezabatzen baduzu, berriro konfiguratu beharko duzu hurrengoan erabili "
 "aurretik."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Kendu"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Eginda"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -488,6 +487,9 @@ msgstr "IZENA"
 #: ../sendto/main.c:785
 msgid "[FILE...]"
 msgstr "[FITXATEGIA…]"
+
+#~ msgid "Done"
+#~ msgstr "Eginda"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Erabili GPS gailu hau geolokalizazio zerbitzuetarako"
