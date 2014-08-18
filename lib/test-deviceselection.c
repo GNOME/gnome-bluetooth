@@ -143,6 +143,8 @@ create_phone_dialogue (const char *bdaddr)
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (gtk_main_quit), NULL);
 
+	g_object_add_weak_pointer (G_OBJECT(dialog), (gpointer *) (&dialog));
+
 	return dialog;
 }
 
@@ -415,7 +417,8 @@ int main(int argc, char **argv)
 
 	gtk_main ();
 
-	gtk_widget_destroy(dialog);
+	if (dialog)
+		gtk_widget_destroy(dialog);
 
 	return 0;
 }
