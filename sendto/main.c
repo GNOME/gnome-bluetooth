@@ -630,6 +630,7 @@ on_transfer_complete (void)
 	current_transfer = NULL;
 
 	if (file_index == file_count) {
+		GtkWidget *button;
 		char *complete;
 
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
@@ -641,6 +642,9 @@ on_transfer_complete (void)
 						      file_count), file_count);
 		gtk_label_set_text (GTK_LABEL (label_status), complete);
 		g_free (complete);
+
+		button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+		gtk_button_set_label (GTK_BUTTON (button), _("_Close"));
 	} else {
 		send_next_file ();
 	}
