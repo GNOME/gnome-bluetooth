@@ -123,9 +123,10 @@ create_phone_dialogue (const char *bdaddr)
 {
 	GtkWidget *dialog, *button;
 
-	dialog = gtk_dialog_new_with_buttons("My test prefs", NULL,
-					     0,
-					     "_Close", GTK_RESPONSE_ACCEPT, NULL);
+	dialog = g_object_new(GTK_TYPE_DIALOG,
+			      "use-header-bar", 1,
+			      "title", "My test prefs",
+			      NULL);
 	button = bluetooth_chooser_button_new ();
 	if (bdaddr != NULL)
 		g_object_set (G_OBJECT (button), "device", bdaddr, NULL);
@@ -152,18 +153,26 @@ create_phone_dialogue (const char *bdaddr)
 static GtkWidget *
 create_dialogue (const char *title)
 {
-	GtkWidget *dialog;
+	GtkWidget *dialog, *button;
+	GtkStyleContext *context;
 
-	dialog = gtk_dialog_new_with_buttons(title, NULL,
-					     0,
-					     "_Cancel", GTK_RESPONSE_REJECT,
-					     "Connect", GTK_RESPONSE_ACCEPT, NULL);
+	dialog = g_object_new (GTK_TYPE_DIALOG,
+			       "use-header-bar", 1,
+			       "title", title,
+			       NULL);
+	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
+			       "_Cancel", GTK_RESPONSE_CANCEL,
+			       "Connect", GTK_RESPONSE_ACCEPT, NULL);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 					GTK_RESPONSE_ACCEPT, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
 
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
 	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
+
+	button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
+	context = gtk_widget_get_style_context(button);
+	gtk_style_context_add_class (context, "suggested-action");
 
 	return dialog;
 }
