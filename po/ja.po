@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-17 13:29+0000\n"
-"PO-Revision-Date: 2014-03-25 00:20+0900\n"
+"POT-Creation-Date: 2014-08-18 15:57+0000\n"
+"PO-Revision-Date: 2014-08-20 01:22+0900\n"
 "Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -26,8 +26,8 @@ msgid "Click to select device…"
 msgstr "クリックしてデバイスを選択…"
 
 #: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
 msgid "_Cancel"
 msgstr "中止(_C)"
 
@@ -56,7 +56,7 @@ msgstr "デバイス"
 msgid "Type"
 msgstr "種類"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "デバイス"
 
@@ -185,7 +185,7 @@ msgstr "承認"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "設定されていません"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -196,37 +196,33 @@ msgstr "接続しました"
 msgid "Disconnected"
 msgstr "切断しました"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "はい"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "いいえ"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "“%s”のように表示されます"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "'%s' をデバイスのリストから削除しますか?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "デバイスを削除すると、次回使用時にデバイスを再設定しなければなりません。"
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "削除(_R)"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "完了"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -381,91 +377,98 @@ msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "約 %'d 時間"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "接続中…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth ファイル転送"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "再試行(_R)"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "送信元:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "送信先:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:555
 #, c-format
 msgid "Sending %s"
 msgstr "%s を送信中"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:562 ../sendto/main.c:611
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "ファイル送信 %2$d 中 %1$d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/秒"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:609
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/秒"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:640
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u 件転送完了"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#: ../sendto/main.c:657
 msgid "There was an error"
 msgstr "エラーが発生しました"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:695
 msgid "Select device to send to"
 msgstr "送信先のデバイスを選択してください"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:700
 msgid "_Send"
 msgstr "送信(_S)"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:750
 msgid "Choose files to send"
 msgstr "送信するファイルを選択"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Select"
 msgstr "選択"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "Remote device to use"
 msgstr "使用するリモート・デバイス"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "ADDRESS"
 msgstr "アドレス"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "Remote device's name"
 msgstr "リモート・デバイスの名前"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "NAME"
 msgstr "名前"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:807
 msgid "[FILE...]"
 msgstr "[ファイル...]"
+
+#~ msgid "Done"
+#~ msgstr "完了"
 
 #~ msgid "Please enter the following PIN on 'Foobar':"
 #~ msgstr "以下のPINを'%Foobar'に入力してください:"
