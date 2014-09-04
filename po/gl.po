@@ -6,13 +6,13 @@
 # Antón Méixome <meixome@certima.net>, 2010.
 # Fran Diéguez <frandieguez@gnome.org>, 2009, 2010, 2011, 2012.
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2012.
-# Fran Dieguez <frandieguez@gnome.org>, 2013.
+# Fran Dieguez <frandieguez@gnome.org>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-15 18:20+0100\n"
-"PO-Revision-Date: 2013-12-15 18:24+0200\n"
+"POT-Creation-Date: 2014-09-04 22:46+0200\n"
+"PO-Revision-Date: 2014-09-04 22:46+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -23,16 +23,17 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Prema para seleccionar o dispositivo…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:204
 msgid "_OK"
 msgstr "_Aceptar"
 
@@ -53,11 +54,11 @@ msgstr "Buscando dispositivos…"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:6
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -65,7 +66,7 @@ msgstr "Dispositivos"
 msgid "All categories"
 msgstr "Todas as categorías"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
 msgstr "Emparellado"
 
@@ -186,18 +187,18 @@ msgid "Dismiss"
 msgstr "Rexeitar"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Aceptar"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Sen configurar"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -208,40 +209,36 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Si"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Non"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Visíbel como «%s»"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Desexa retirar «%s» da lista de dispositivos?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se retira o dispositivo, deberá configuralo de novo antes de usalo a "
 "seguinte vez."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Retirar"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Feito"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -325,42 +322,38 @@ msgid "Toy"
 msgstr "Xoguete"
 
 #: ../lib/settings.ui.h:1
-msgid "Please enter the following PIN on 'Foobar':"
-msgstr "Escriba o seguinte PIN en «Foobar»:"
-
-#: ../lib/settings.ui.h:2
 msgid "Connection"
 msgstr "Conexión"
 
-#: ../lib/settings.ui.h:3
+#: ../lib/settings.ui.h:2
 msgid "page 1"
 msgstr "páxina 1"
 
-#: ../lib/settings.ui.h:4
+#: ../lib/settings.ui.h:3
 msgid "page 2"
 msgstr "páxina 2"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:6
 msgid "Address"
 msgstr "Enderezo"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:7
 msgid "_Mouse & Touchpad Settings"
 msgstr "Preferencias do _rato e área táctil"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:8
 msgid "_Sound Settings"
 msgstr "Preferencias de _son"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:9
 msgid "_Keyboard Settings"
 msgstr "Preferencias do _teclado"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:10
 msgid "Send _Files…"
 msgstr "Enviar _ficheiros…"
 
-#: ../lib/settings.ui.h:12
+#: ../lib/settings.ui.h:11
 msgid "_Remove Device"
 msgstr "_Quitar dispositivo"
 
@@ -404,92 +397,102 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "Conectando…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Transferencia de ficheiro por Bluetooth"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "_Reintentar"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "Desde:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:555
 #, c-format
 msgid "Sending %s"
 msgstr "Enviando %s"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:562 ../sendto/main.c:611
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Enviando ficheiro %d de %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:609
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:640
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u transferencia completada"
 msgstr[1] "%u transferencias completadas"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "_Pechar"
+
+#: ../sendto/main.c:657
 msgid "There was an error"
 msgstr "Produciuse un erro"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:695
 msgid "Select device to send to"
 msgstr "Seleccionar o dispositivo ao que enviar"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:700
 msgid "_Send"
 msgstr "_Enviar"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:750
 msgid "Choose files to send"
 msgstr "Elixa os ficheiros para enviar"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "Remote device to use"
 msgstr "Dispositivo remoto para empregar"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "ADDRESS"
 msgstr "ENDEREZO"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "Remote device's name"
 msgstr "Nome do dispositivo remoto"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "NAME"
 msgstr "NOME"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:807
 msgid "[FILE...]"
 msgstr "[FICHEIRO...]"
+
+#~ msgid "Done"
+#~ msgstr "Feito"
+
+#~ msgid "Please enter the following PIN on 'Foobar':"
+#~ msgstr "Escriba o seguinte PIN en «Foobar»:"
 
 #~ msgid "Please enter the PIN code entered on '%s':"
 #~ msgstr "Escriba o PIN escrito no dispositivo «%s»:"
