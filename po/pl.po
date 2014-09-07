@@ -5,7 +5,7 @@
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # Tomasz Dominikowski <dominikowski@gmail.com>, 2007-2009.
-# Piotr Drąg <piotrdrag@gmail.com>, 2010-2013.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2014.
 # Wojciech Szczęsny <wszczesny@aviary.pl>, 2013.
 # Paweł Żołnowski <pawel@zolnowski.name>, 2014.
 # Aviary.pl <gnomepl@aviary.pl>, 2007-2014.
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-16 16:02+0100\n"
-"PO-Revision-Date: 2014-03-16 09:39+0100\n"
-"Last-Translator: Paweł Żołnowski <pawel@zolnowski.name>\n"
+"POT-Creation-Date: 2014-09-07 02:57+0200\n"
+"PO-Revision-Date: 2014-09-07 02:58+0200\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,8 @@ msgid "Click to select device…"
 msgstr "Proszę kliknąć, aby wybrać urządzenie…"
 
 #: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
 msgid "_Cancel"
 msgstr "_Anuluj"
 
@@ -61,7 +61,7 @@ msgstr "Urządzenie"
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Urządzenia"
 
@@ -196,18 +196,18 @@ msgid "Dismiss"
 msgstr "Odrzuć"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Anuluj"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Zaakceptuj"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Nie skonfigurowano"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -218,40 +218,36 @@ msgstr "Połączono"
 msgid "Disconnected"
 msgstr "Rozłączono"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Tak"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Nie"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Widoczny jako \"%s\""
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Usunąć urządzenie \"%s\" z listy?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Jeśli urządzenie zostanie usunięte, następnym razem trzeba będzie je "
 "skonfigurować ponownie."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Usuń"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Gotowe"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -414,47 +410,47 @@ msgstr[0] "około %'d godzina"
 msgstr[1] "około %'d godziny"
 msgstr[2] "około %'d godzin"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "Łączenie…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Przesyłanie plików przez Bluetooth"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "_Ponów"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "Do:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:555
 #, c-format
 msgid "Sending %s"
 msgstr "Wysyłanie %s"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:562 ../sendto/main.c:611
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Wysyłanie pliku %d z %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:609
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:640
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
@@ -462,42 +458,46 @@ msgstr[0] "Ukończono %u przesyłanie"
 msgstr[1] "Ukończono %u przesyłania"
 msgstr[2] "Ukończono %u przesyłań"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "Za_mknij"
+
+#: ../sendto/main.c:657
 msgid "There was an error"
 msgstr "Wystąpił błąd"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:695
 msgid "Select device to send to"
 msgstr "Wybór urządzenia docelowego"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:700
 msgid "_Send"
 msgstr "_Wyślij"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:750
 msgid "Choose files to send"
 msgstr "Wybór plików do wysłania"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Select"
 msgstr "Wybór"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "Remote device to use"
 msgstr "Zdalne urządzenie do użycia"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "ADDRESS"
 msgstr "ADRES"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "Remote device's name"
 msgstr "Nazwa zdalnego urządzenia"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "NAME"
 msgstr "NAZWA"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:807
 msgid "[FILE...]"
 msgstr "[PLIK...]"
