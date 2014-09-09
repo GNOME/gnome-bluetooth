@@ -4,14 +4,15 @@
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009, 2010, 2011, 2012.
 # Balázs Úr <urbalazs at gmail dot com>, 2013, 2014.
+# Balázs Úr <urbalazs@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-04 07:05+0000\n"
-"PO-Revision-Date: 2014-03-04 17:49+0100\n"
-"Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
+"POT-Creation-Date: 2014-09-09 18:04+0000\n"
+"PO-Revision-Date: 2014-09-09 23:55+0200\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -22,13 +23,12 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 
 #: ../lib/bluetooth-chooser-button.c:73
-#| msgid "Click to select device..."
 msgid "Click to select device…"
 msgstr "Kattintson az eszközválasztáshoz…"
 
 #: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
 msgid "_Cancel"
 msgstr "Mé_gse"
 
@@ -46,7 +46,6 @@ msgid "No adapters available"
 msgstr "Nem érhetők el adapterek"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-#| msgid "Searching for devices..."
 msgid "Searching for devices…"
 msgstr "Eszközök keresése…"
 
@@ -58,7 +57,7 @@ msgstr "Eszköz"
 msgid "Type"
 msgstr "Típus"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Eszközök"
 
@@ -116,13 +115,11 @@ msgstr "Fülhallgatók, fejhallgatók és más hangeszközök"
 
 #: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
 #: ../lib/bluetooth-pairing-dialog.c:108
-#| msgid "Configure Bluetooth settings"
 msgid "Confirm Bluetooth PIN"
 msgstr "Bluetooth PIN megerősítése"
 
 #: ../lib/bluetooth-pairing-dialog.c:88
 #, c-format
-#| msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Erősítse meg a(z) „%s” eszközön megadott PIN-t."
 
@@ -142,40 +139,35 @@ msgstr ""
 
 #: ../lib/bluetooth-pairing-dialog.c:101
 #, c-format
-#| msgid "Pairing request for '%s'"
 msgid "Pairing '%s'"
 msgstr "„%s” párosítása"
 
 #: ../lib/bluetooth-pairing-dialog.c:109
 #, c-format
-#| msgid "Please confirm whether the PIN '%s' matches the one on device %s."
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr ""
-"Erősítse meg, hogy következő PIN egyezik-e a(z) „%s” eszközön megjelenítettel."
+"Erősítse meg, hogy következő PIN egyezik-e a(z) „%s” eszközön "
+"megjelenítettel."
 
 #: ../lib/bluetooth-pairing-dialog.c:114
-#| msgid "Bluetooth Manager"
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth párosításkérés"
 
 #: ../lib/bluetooth-pairing-dialog.c:115
 #, c-format
-#| msgid "Device '%s' wants to pair with this computer"
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
-"A(z) „%s” párosítást kezdeményez ezzel az eszközzel. Engedélyezi a párosítást?"
+"A(z) „%s” párosítást kezdeményez ezzel az eszközzel. Engedélyezi a "
+"párosítást?"
 
 #: ../lib/bluetooth-pairing-dialog.c:123
 #, c-format
-#| msgid "Please enter the following PIN on '%s':"
 msgid "Please enter the following PIN on '%s'."
 msgstr "Adja meg a következő PIN-kódot a(z) „%s” eszközön."
 
 #: ../lib/bluetooth-pairing-dialog.c:126
 #, c-format
-#| msgid ""
-#| "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr ""
@@ -183,7 +175,6 @@ msgstr ""
 "„Enter” billentyűt."
 
 #: ../lib/bluetooth-pairing-dialog.c:129
-#| msgid "Please move the joystick of your iCade in the following directions:"
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -200,20 +191,19 @@ msgid "Dismiss"
 msgstr "Eltüntetés"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
-#| msgid "_Cancel"
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
 msgid "Cancel"
 msgstr "Mégse"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:290
 msgid "Accept"
 msgstr "Elfogadás"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-#| msgid "_Restart Setup"
-msgid "Not Setup"
+#| msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Nincs beállítva"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -224,41 +214,36 @@ msgstr "Kapcsolódva"
 msgid "Disconnected"
 msgstr "Bontva"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Igen"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Nem"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
-#| msgid "Visibility of “%s”"
 msgid "Visible as “%s”"
 msgstr "Így látható: „%s”"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Eltávolítja a(z) „%s” eszközt az eszközök listájából?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Ha eltávolítja az eszközt, a következő használat előtt újra be kell majd "
 "állítania."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Eltávolítás"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Kész"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -338,7 +323,6 @@ msgid "Wearable"
 msgstr "Viselhető"
 
 #: ../lib/bluetooth-utils.c:98
-#| msgid "To:"
 msgid "Toy"
 msgstr "Játék"
 
@@ -359,27 +343,22 @@ msgid "Address"
 msgstr "Cím"
 
 #: ../lib/settings.ui.h:7
-#| msgid "Mouse and Touchpad Settings"
 msgid "_Mouse & Touchpad Settings"
 msgstr "_Egér és érintőtábla beállításai"
 
 #: ../lib/settings.ui.h:8
-#| msgid "Sound Settings"
 msgid "_Sound Settings"
 msgstr "_Hangbeállítások"
 
 #: ../lib/settings.ui.h:9
-#| msgid "Keyboard Settings"
 msgid "_Keyboard Settings"
 msgstr "_Billentyűzetbeállítások"
 
 #: ../lib/settings.ui.h:10
-#| msgid "Send Files..."
 msgid "Send _Files…"
 msgstr "_Fájlok küldése…"
 
 #: ../lib/settings.ui.h:11
-#| msgid "Remote device to use"
 msgid "_Remove Device"
 msgstr "Esz_köz eltávolítása"
 
@@ -423,93 +402,99 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "megközelítőleg %'d óra"
 msgstr[1] "megközelítőleg %'d óra"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
-#| msgid "Connection"
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "Kapcsolódás…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth fájlátvitel"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "Ú_jra"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "Feladó:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "Címzett:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:555
 #, c-format
 msgid "Sending %s"
 msgstr "%s küldése"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:562 ../sendto/main.c:611
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "%d. fájl küldése, összesen %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:609
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:640
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u átvitel befejezve"
 msgstr[1] "%u átvitel befejezve"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "_Bezárás"
+
+#: ../sendto/main.c:657
 msgid "There was an error"
 msgstr "Hiba történt"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:695
 msgid "Select device to send to"
 msgstr "Válassza ki a küldés cél eszközét"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:700
 msgid "_Send"
 msgstr "_Küldés"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:750
 msgid "Choose files to send"
 msgstr "Válassza ki a küldeni kívánt fájlokat"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Select"
 msgstr "Kijelölés"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "Remote device to use"
 msgstr "Használandó távoli eszköz"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "ADDRESS"
 msgstr "CÍM"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "Remote device's name"
 msgstr "Távoli eszköz neve"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "NAME"
 msgstr "NÉV"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:807
 msgid "[FILE...]"
 msgstr "[FÁJL…]"
+
+#~ msgid "Done"
+#~ msgstr "Kész"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Ezen GPS eszköz használata Geolocation szolgáltatásokhoz"
@@ -815,9 +800,6 @@ msgstr "[FÁJL…]"
 
 #~ msgid "Welcome to the Bluetooth new device setup"
 #~ msgstr "Üdvözli az Új Bluetooth eszköz beállítása"
-
-#~ msgid "_Close"
-#~ msgstr "_Bezárás"
 
 #~ msgid "Run in standalone mode"
 #~ msgstr "Futtatás önálló módban"
