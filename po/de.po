@@ -8,15 +8,16 @@
 # Hendrik Richter <hendrikr@gnome.org>, 2011.
 # Tobias Endrigkeit <tobiasendrigkeit@googlemail.com>, 2012.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2009, 2012.
+# Wolfgang Stöggl <c72578@yahoo.de>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-04-16 18:31+0000\n"
-"PO-Revision-Date: 2014-04-17 06:07+0100\n"
-"Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
+"POT-Creation-Date: 2014-09-12 06:06+0000\n"
+"PO-Revision-Date: 2014-09-12 10:41+0100\n"
+"Last-Translator: Wolfgang Stoeggl <c72578@yahoo.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -24,15 +25,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.9\n"
 
 #: ../lib/bluetooth-chooser-button.c:73
 msgid "Click to select device…"
 msgstr "Klicken, um das Gerät auszuwählen …"
 
 #: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
 msgid "_Cancel"
 msgstr "A_bbrechen"
 
@@ -206,7 +207,7 @@ msgstr "Akzeptieren"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Nicht eingerichtet"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -405,90 +406,94 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "ungefähr %'d Stunde"
 msgstr[1] "ungefähr %'d Stunden"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "Verbinden …"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth-Dateiübertragung"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "E_rneut versuchen"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "Von:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "An:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:555
 #, c-format
 msgid "Sending %s"
 msgstr "%s wird gesendet"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:562 ../sendto/main.c:611
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Datei %d von %d wird gesendet"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:609
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:640
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u Übertragung abgeschlossen"
 msgstr[1] "%u Übertragungen abgeschlossen"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "S_chließen"
+
+#: ../sendto/main.c:657
 msgid "There was an error"
 msgstr "Ein Fehler ist aufgetreten"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:695
 msgid "Select device to send to"
 msgstr "Gerät als Empfänger auswählen"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:700
 msgid "_Send"
 msgstr "_Senden"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:750
 msgid "Choose files to send"
 msgstr "Dateien zum Senden auswählen"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Select"
 msgstr "Auswahl"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "Remote device to use"
 msgstr "Zu verwendendes entferntes Gerät"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "Remote device's name"
 msgstr "Name des entfernten Gerätes"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "NAME"
 msgstr "NAME"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:807
 msgid "[FILE...]"
 msgstr "[Datei …]"
 
@@ -805,9 +810,6 @@ msgstr "[Datei …]"
 
 #~ msgid "Welcome to the Bluetooth new device setup"
 #~ msgstr "Willkommen zum Bluetooth-Geräteassistenten"
-
-#~ msgid "_Close"
-#~ msgstr "S_chließen"
 
 #~ msgid "Run in standalone mode"
 #~ msgstr "Im unabhängigen Modus ausführen"
