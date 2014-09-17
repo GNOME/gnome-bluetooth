@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-21 07:09+0000\n"
-"PO-Revision-Date: 2014-03-21 18:25+0200\n"
+"POT-Creation-Date: 2014-09-17 18:01+0000\n"
+"PO-Revision-Date: 2014-09-17 21:14+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -25,13 +25,12 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../lib/bluetooth-chooser-button.c:73
-#| msgid "Click to select device..."
 msgid "Click to select device…"
 msgstr "Kliknite da izaberete uređaj…"
 
 #: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
 msgid "_Cancel"
 msgstr "_Otkaži"
 
@@ -49,7 +48,6 @@ msgid "No adapters available"
 msgstr "Ne postoje prilagođivači"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-#| msgid "Searching for devices..."
 msgid "Searching for devices…"
 msgstr "Tražim uređaje…"
 
@@ -61,7 +59,7 @@ msgstr "Uređaj"
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Uređaji"
 
@@ -124,7 +122,6 @@ msgstr "Potvrdite PIN blututa"
 
 #: ../lib/bluetooth-pairing-dialog.c:88
 #, c-format
-#| msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Potvrdite PIN koji je ispisan na „%s“."
 
@@ -143,19 +140,16 @@ msgstr ""
 
 #: ../lib/bluetooth-pairing-dialog.c:101
 #, c-format
-#| msgid "Pairing with '%s' cancelled"
 msgid "Pairing '%s'"
 msgstr "Uparujem „%s“"
 
 #: ../lib/bluetooth-pairing-dialog.c:109
 #, c-format
-#| msgid "Please confirm that the PIN displayed on '%s' matches this one."
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr "Potvrdite da se sledeći PIN poklapa sa onim prikazanim na „%s“."
 
 #: ../lib/bluetooth-pairing-dialog.c:114
-#| msgid "Bluetooth Transfer"
 msgid "Bluetooth Pairing Request"
 msgstr "Zahtev uparivanja Blututa"
 
@@ -167,20 +161,16 @@ msgstr ""
 
 #: ../lib/bluetooth-pairing-dialog.c:123
 #, c-format
-#| msgid "Please enter the following PIN on '%s':"
 msgid "Please enter the following PIN on '%s'."
 msgstr "Unesite sledeći PIN na „%s“."
 
 #: ../lib/bluetooth-pairing-dialog.c:126
 #, c-format
-#| msgid ""
-#| "Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr "Unesite sledeći PIN na „%s“. Zatim pritisnite „Unesi“ na tastaturi."
 
 #: ../lib/bluetooth-pairing-dialog.c:129
-#| msgid "Please move the joystick of your iCade in the following directions:"
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -198,7 +188,6 @@ msgstr "Odbaci"
 
 #. Cancel button
 #: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
-#| msgid "_Cancel"
 msgid "Cancel"
 msgstr "Otkaži"
 
@@ -209,11 +198,11 @@ msgstr "Prihvati"
 
 #. Placeholder text
 #: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+#| msgid "Not Setup"
+msgid "Not Set Up"
 msgstr "Nije podešeno"
 
 #: ../lib/bluetooth-settings-row.c:81
-#| msgid "Connecting..."
 msgid "Connected"
 msgstr "Povezan"
 
@@ -221,40 +210,36 @@ msgstr "Povezan"
 msgid "Disconnected"
 msgstr "Nepovezan"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "Yes"
 msgstr "Da"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1069
 msgid "No"
 msgstr "Ne"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#: ../lib/bluetooth-settings-widget.c:1164
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Vidi se kao „%s“"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1190
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Da uklonim „%s“ sa spiska uređaja?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1192
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Ukoliko uklonite uređaj, moraćete ponovo da ga podesite pre sledećeg "
 "korišćenja."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1196
 msgid "_Remove"
 msgstr "_Ukloni"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Urađeno"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -334,12 +319,10 @@ msgid "Wearable"
 msgstr "Ugrejiv"
 
 #: ../lib/bluetooth-utils.c:98
-#| msgid "To:"
 msgid "Toy"
 msgstr "Sprava"
 
 #: ../lib/settings.ui.h:1
-#| msgid "Connecting..."
 msgid "Connection"
 msgstr "Veza"
 
@@ -364,7 +347,6 @@ msgid "_Sound Settings"
 msgstr "Podšavanja _zvuka"
 
 #: ../lib/settings.ui.h:9
-#| msgid "Keyboard"
 msgid "_Keyboard Settings"
 msgstr "Podešavanja _tastature"
 
@@ -373,7 +355,6 @@ msgid "Send _Files…"
 msgstr "Pošalji _datoteke…"
 
 #: ../lib/settings.ui.h:11
-#| msgid "Remote device to use"
 msgid "_Remove Device"
 msgstr "_Ukloni uređaj"
 
@@ -425,48 +406,47 @@ msgstr[1] "približno %'d sata"
 msgstr[2] "približno %'d sati"
 msgstr[3] "približno %'d sat"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
-#| msgid "Connecting..."
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "Povezujem se…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Prenos datoteka blututom"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "_Probaj ponovo"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "Šalje:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "Prima:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:555
 #, c-format
 msgid "Sending %s"
 msgstr "Šaljem „%s“"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:562 ../sendto/main.c:611
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Šaljem %d. datoteku od %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:609
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:640
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
@@ -475,45 +455,52 @@ msgstr[1] "%u prenosa su završena"
 msgstr[2] "%u prenosa je završeno"
 msgstr[3] ""
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "_Zatvori"
+
+#: ../sendto/main.c:657
 msgid "There was an error"
 msgstr "Došlo je do greške"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:695
 msgid "Select device to send to"
 msgstr "Izaberite uređaj na koji da pošaljem"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:700
 msgid "_Send"
 msgstr "Pošalji _na"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:750
 msgid "Choose files to send"
 msgstr "Izaberite datoteke za slanje"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:756
 msgid "Select"
 msgstr "Izaberi"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "Remote device to use"
 msgstr "Željeni udaljeni uređaj"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:786
 msgid "ADDRESS"
 msgstr "ADRESA"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "Remote device's name"
 msgstr "Ime udaljenog uređaja"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:788
 msgid "NAME"
 msgstr "NAZIV"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:807
 msgid "[FILE...]"
 msgstr "[DATOTEKA...]"
+
+#~ msgid "Done"
+#~ msgstr "Urađeno"
 
 #~ msgid "Use this GPS device for Geolocation services"
 #~ msgstr "Koristi ovaj GPS uređaj za geolociranje"
