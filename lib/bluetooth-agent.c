@@ -376,48 +376,45 @@ handle_method_call (GDBusConnection       *connection,
 	if (g_strcmp0 (method_name, "Release") == 0) {
 		g_dbus_method_invocation_return_value (invocation, NULL);
 	} else if (g_strcmp0 (method_name, "RequestPinCode") == 0) {
-		char *path;
-		g_variant_get (parameters, "(o)", &path);
+		const char *path;
+
+		g_variant_get (parameters, "(&o)", &path);
 		bluetooth_agent_request_pincode (agent, path, invocation);
-		g_free (path);
 	} else if (g_strcmp0 (method_name, "RequestPasskey") == 0) {
-		char *path;
-		g_variant_get (parameters, "(o)", &path);
+		const char *path;
+
+		g_variant_get (parameters, "(&o)", &path);
 		bluetooth_agent_request_passkey (agent, path, invocation);
-		g_free (path);
 	} else if (g_strcmp0 (method_name, "DisplayPasskey") == 0) {
-		char *path;
+		const char *path;
 		guint32 passkey;
 		guint8 entered;
 
-		g_variant_get (parameters, "(ouy)", &path, &passkey, &entered);
+		g_variant_get (parameters, "(&ouy)", &path, &passkey, &entered);
 		bluetooth_agent_display_passkey (agent, path, passkey, entered, invocation);
-		g_free (path);
 	} else if (g_strcmp0 (method_name, "DisplayPinCode") == 0) {
-		char *path;
+		const char *path;
 		char *pincode;
 
-		g_variant_get (parameters, "(os)", &path, &pincode);
+		g_variant_get (parameters, "(&os)", &path, &pincode);
 		bluetooth_agent_display_pincode (agent, path, pincode, invocation);
-		g_free (path);
 	} else if (g_strcmp0 (method_name, "RequestConfirmation") == 0) {
-		char *path;
+		const char *path;
 		guint32 passkey;
 
-		g_variant_get (parameters, "(ou)", &path, &passkey);
+		g_variant_get (parameters, "(&ou)", &path, &passkey);
 		bluetooth_agent_request_confirmation (agent, path, passkey, invocation);
-		g_free (path);
 	} else if (g_strcmp0 (method_name, "RequestAuthorization") == 0) {
-		char *path;
+		const char *path;
 
-		g_variant_get (parameters, "(o)", &path);
+		g_variant_get (parameters, "(&o)", &path);
 		bluetooth_agent_request_authorization (agent, path, invocation);
-		g_free (path);
 	} else if (g_strcmp0 (method_name, "AuthorizeService") == 0) {
-		char *path, *uuid;
-		g_variant_get (parameters, "(os)", &path, &uuid);
+		const char *path;
+		char *uuid;
+
+		g_variant_get (parameters, "(&os)", &path, &uuid);
 		bluetooth_agent_authorize_service (agent, path, uuid, invocation);
-		g_free (path);
 		g_free (uuid);
 	} else if (g_strcmp0 (method_name, "Cancel") == 0) {
 		bluetooth_agent_cancel (agent, invocation);
