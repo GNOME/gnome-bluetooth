@@ -394,9 +394,9 @@ handle_method_call (GDBusConnection       *connection,
 		bluetooth_agent_display_passkey (agent, path, passkey, entered, invocation);
 	} else if (g_strcmp0 (method_name, "DisplayPinCode") == 0) {
 		const char *path;
-		char *pincode;
+		const char *pincode;
 
-		g_variant_get (parameters, "(&os)", &path, &pincode);
+		g_variant_get (parameters, "(&o&s)", &path, &pincode);
 		bluetooth_agent_display_pincode (agent, path, pincode, invocation);
 	} else if (g_strcmp0 (method_name, "RequestConfirmation") == 0) {
 		const char *path;
@@ -411,11 +411,10 @@ handle_method_call (GDBusConnection       *connection,
 		bluetooth_agent_request_authorization (agent, path, invocation);
 	} else if (g_strcmp0 (method_name, "AuthorizeService") == 0) {
 		const char *path;
-		char *uuid;
+		const char *uuid;
 
-		g_variant_get (parameters, "(&os)", &path, &uuid);
+		g_variant_get (parameters, "(&o&s)", &path, &uuid);
 		bluetooth_agent_authorize_service (agent, path, uuid, invocation);
-		g_free (uuid);
 	} else if (g_strcmp0 (method_name, "Cancel") == 0) {
 		bluetooth_agent_cancel (agent, invocation);
 	}
