@@ -1,17 +1,17 @@
 # Vietnamese translation of gnome-bluetooth.
-# Copyright (C) 2013 gnome-bluetooth's GNOME i18n Project for Vietnamse
+# Copyright (C) 2014 GNOME i18n Project for Vietnamse
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2012.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2013.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2013-2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-02 09:41+0000\n"
-"PO-Revision-Date: 2013-07-06 07:52+0700\n"
+"POT-Creation-Date: 2014-11-15 18:50+0000\n"
+"PO-Revision-Date: 2014-11-16 15:11+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "Language: vi\n"
@@ -21,12 +21,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.5\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
-msgstr "Nhấn để chọn thiết bị..."
+#: ../lib/bluetooth-chooser-button.c:73
+msgid "Click to select device…"
+msgstr "Dùng chuột để chọn thiết bị…"
+
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
+msgid "_Cancel"
+msgstr "T_hôi"
+
+#: ../lib/bluetooth-chooser-button.c:204
+msgid "_OK"
+msgstr "_OK"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "Không biết"
 
@@ -35,18 +45,18 @@ msgid "No adapters available"
 msgstr "Không có bộ chuyển đổi"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "Đang tìm thiết bị..."
+msgid "Searching for devices…"
+msgstr "Đang tìm thiết bị…"
 
 #: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
 msgid "Device"
 msgstr "Thiết bị"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Kiểu"
 
-#: ../lib/bluetooth-chooser.c:987
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Thiết bị"
 
@@ -54,9 +64,9 @@ msgstr "Thiết bị"
 msgid "All categories"
 msgstr "Mọi chủng loại"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
 msgid "Paired"
-msgstr "Đã kết nối"
+msgstr "Đã kết đôi"
 
 #: ../lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
@@ -101,6 +111,130 @@ msgstr "Thiết bị nhập liệu (con chuột, bàn phím, v.v..)"
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Tai nghe và các thiết bị âm thanh khác"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "Xác nhận PIN Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Vui lòng xác nhận mã PIN cái đã nhập vào trên “%s”."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Xác nhận"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"Xác nhận mã PIN Bluetooth cho “%s”. Cái này bạn có thể tìm thấy trên quyển "
+"sổ hướng dẫn sử dụng của thiết bị."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "Kết nối tới “%s”"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "Vui lòng xác nhận mã PIN khớp với cái hiển thị trên “%s”."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "Yêu cầu kết đôi Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr "“%s” muốn kết đôi với thiết bị này. Bạn có cho kết đôi không?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "Hãy điền mã PIN sau trên “%s”."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "Hãy điền mã PIN sau trên “%s”. Rồi nhấn “Enter” trên bàn phím."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Vui lòng di chuyển cần điều khiển iCade của bạn theo theo hướng sau. Sau đó "
+"bấm bất kỳ phím trắng nào."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Cho phép"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Bỏ đi"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+msgid "Cancel"
+msgstr "Thôi"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:290
+msgid "Accept"
+msgstr "Chấp nhận"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Set Up"
+msgstr "Chưa cài đặt"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "Đã kết nối"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "Chưa kết nối"
+
+#: ../lib/bluetooth-settings-widget.c:1069
+msgid "Yes"
+msgstr "Có"
+
+#: ../lib/bluetooth-settings-widget.c:1069
+msgid "No"
+msgstr "Không"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1164
+#, c-format
+msgid "Visible as “%s”"
+msgstr "Nhìn thấy là “%s”"
+
+#: ../lib/bluetooth-settings-widget.c:1190
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Xóa “%s” ra khỏi danh sách thiết bị?"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Nếu bạn gỡ bỏ thiết bị, bạn sẽ phải cài đặt lại nó khi dùng nó lần sau."
+
+#: ../lib/bluetooth-settings-widget.c:1196
+msgid "_Remove"
+msgstr "_Xóa bỏ"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -161,294 +295,63 @@ msgstr "Máy tính bảng"
 
 #: ../lib/bluetooth-utils.c:88
 msgid "Video device"
-msgstr "Thiết bị hình"
+msgstr "Thiết bị video"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "Dùng thiết bị GPS này cho dịch vụ Geolocation (Định vị toàn cầu)"
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Điều khiển từ xa"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "Truy cập Internet bằng điện thoại di động (thử nghiệm)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Máy quét"
 
-#: ../wizard/main.c:217
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "Hãy điền PIN sau trên “%s”:"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Màn hình"
 
-#: ../wizard/main.c:221
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr "Hãy điền PIN sau trên “%s” và nhấn “Enter” trên bàn phím:"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Mang được"
 
-#: ../wizard/main.c:226
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "Vui lòng di chuyển cần điều khiển của iCade theo hướng sau:"
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "Đồ chơi"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:284 ../wizard/main.c:422
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "Kết nối tới “%s” bị hủy"
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "Kết nối"
 
-#: ../wizard/main.c:339
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "Kiểm tra PIN hiển thị trên “%s” trùng với cái này này."
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "trang 1"
 
-#: ../wizard/main.c:394
-msgid "Please enter the following PIN:"
-msgstr "Hãy điền PIN sau:"
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "trang 2"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:480
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "Cài đặt “%s” không thành công"
+#: ../lib/settings.ui.h:6
+msgid "Address"
+msgstr "Địa chỉ"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:540
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "Đang kết nối tới “%s”..."
+#: ../lib/settings.ui.h:7
+msgid "_Mouse & Touchpad Settings"
+msgstr "Cài đặt Ch_uột & Touchpad"
 
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:605
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "Vui lòng chờ hoàn tất cài đặt trên thiết bị “%s”..."
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "Cài đặt Â_m thanh"
 
-#: ../wizard/main.c:623
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "Cài đặt thiết bị mới “%s” thành công"
+#: ../lib/settings.ui.h:9
+msgid "_Keyboard Settings"
+msgstr "Cài đặt _Bàn phím"
 
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "Cài đặt thiết bị Bluetooth mới"
+#: ../lib/settings.ui.h:10
+msgid "Send _Files…"
+msgstr "_Gửi tập tin…"
 
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "_Tùy chọn PIN..."
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "Tìm thiết bị"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "Cài đặt thiết bị"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "Hoàn tất cài đặt"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "Chọn các dịch vụ dùng cùng với thiết bị:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "Tóm tắt thiết lập"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "Tùy chọn PIN"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "_Tự động chọn PIN"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "PIN cố định"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "“0000” (dùng được với hầu hết các tai nghe, chuột và thiết bị GPS)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "“1111”"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "“1234”"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "Không cặp"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "PIN tự chọn:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "_Thử lại"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "T_hoát"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "T_hôi"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "Không khớp"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "Khớp"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "Cài đặt thiết bị Bluetooth"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "Cài đặt thiết bị Bluetooth"
-
-#: ../sendto/main.c:338
-#, c-format
-msgid "%'d second"
-msgid_plural "%'d seconds"
-msgstr[0] "%'d giây"
-
-#: ../sendto/main.c:343 ../sendto/main.c:356
-#, c-format
-msgid "%'d minute"
-msgid_plural "%'d minutes"
-msgstr[0] "%'d phút"
-
-#: ../sendto/main.c:354
-#, c-format
-msgid "%'d hour"
-msgid_plural "%'d hours"
-msgstr[0] "%'d giờ"
-
-#: ../sendto/main.c:364
-#, c-format
-msgid "approximately %'d hour"
-msgid_plural "approximately %'d hours"
-msgstr[0] "khoảng %'d giờ"
-
-#: ../sendto/main.c:377 ../sendto/main.c:479
-msgid "Connecting..."
-msgstr "Đang kết nối..."
-
-#: ../sendto/main.c:424
-msgid "Bluetooth File Transfer"
-msgstr "Truyền Tập tin qua Bluetooth"
-
-#: ../sendto/main.c:427
-msgid "_Retry"
-msgstr "_Thử lại"
-
-#: ../sendto/main.c:449
-msgid "From:"
-msgstr "Từ:"
-
-#: ../sendto/main.c:463
-msgid "To:"
-msgstr "Đến:"
-
-#: ../sendto/main.c:508 ../sendto/main.c:526
-msgid "An unknown error occurred"
-msgstr "Lỗi không xác định"
-
-#: ../sendto/main.c:519
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr "Kiểm tra thiết bị từ xa đã bật và chấp nhận kết nối Bluetooth"
-
-#: ../sendto/main.c:591
-#, c-format
-msgid "Sending %s"
-msgstr "Đang gửi %s"
-
-#: ../sendto/main.c:598 ../sendto/main.c:647
-#, c-format
-msgid "Sending file %d of %d"
-msgstr "Đang gửi tập tin %d / %d"
-
-#: ../sendto/main.c:643
-#, c-format
-msgid "%d kB/s"
-msgstr "%d kB/s"
-
-#: ../sendto/main.c:645
-#, c-format
-msgid "%d B/s"
-msgstr "%d B/s"
-
-#: ../sendto/main.c:675
-#, c-format
-msgid "%u transfer complete"
-msgid_plural "%u transfers complete"
-msgstr[0] "đã truyền xong %u"
-
-#: ../sendto/main.c:689
-msgid "There was an error"
-msgstr "Đã có một lỗi"
-
-#: ../sendto/main.c:725
-msgid "Select device to send to"
-msgstr "Chọn thiết bị để gửi đến"
-
-#: ../sendto/main.c:730
-msgid "_Send"
-msgstr "_Gửi"
-
-#: ../sendto/main.c:774
-msgid "Choose files to send"
-msgstr "Chọn tập tin để gửi"
-
-#: ../sendto/main.c:777
-msgid "Select"
-msgstr "Chọn"
-
-#: ../sendto/main.c:803
-msgid "Remote device to use"
-msgstr "Thiết bị từ xa sẽ dùng"
-
-#: ../sendto/main.c:803
-msgid "ADDRESS"
-msgstr "ĐỊA CHỈ"
-
-#: ../sendto/main.c:805
-msgid "Remote device's name"
-msgstr "Tên của thiết bị từ xa"
-
-#: ../sendto/main.c:805
-msgid "NAME"
-msgstr "TÊN"
-
-#: ../sendto/main.c:824
-msgid "[FILE...]"
-msgstr "[TẬP TIN...]"
+#: ../lib/settings.ui.h:11
+msgid "_Remove Device"
+msgstr "Đĩa _di động"
 
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:1
 msgid "Bluetooth Transfer"
@@ -457,3 +360,210 @@ msgstr "Truyền Bluetooth"
 #: ../sendto/bluetooth-sendto.desktop.in.in.h:2
 msgid "Send files via Bluetooth"
 msgstr "Gửi tập tin thông qua Bluetooth"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "Lỗi không xác định"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d giây"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d phút"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d giờ"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "khoảng %'d giờ"
+
+#: ../sendto/main.c:378 ../sendto/main.c:476
+msgid "Connecting…"
+msgstr "Đang kết nối…"
+
+#: ../sendto/main.c:420
+msgid "Bluetooth File Transfer"
+msgstr "Truyền Tập tin qua Bluetooth"
+
+#: ../sendto/main.c:424
+msgid "_Retry"
+msgstr "_Thử lại"
+
+#: ../sendto/main.c:446
+msgid "From:"
+msgstr "Từ:"
+
+#: ../sendto/main.c:460
+msgid "To:"
+msgstr "Đến:"
+
+#: ../sendto/main.c:555
+#, c-format
+msgid "Sending %s"
+msgstr "Đang gửi %s"
+
+#: ../sendto/main.c:562 ../sendto/main.c:611
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Đang gửi tập tin %d / %d"
+
+#: ../sendto/main.c:607
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:609
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:640
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "đã truyền xong %u"
+
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "Đón_g"
+
+#: ../sendto/main.c:657
+msgid "There was an error"
+msgstr "Đã có lỗi xảy ra"
+
+#: ../sendto/main.c:695
+msgid "Select device to send to"
+msgstr "Chọn thiết bị để gửi đến"
+
+#: ../sendto/main.c:700
+msgid "_Send"
+msgstr "_Gửi"
+
+#: ../sendto/main.c:750
+msgid "Choose files to send"
+msgstr "Chọn tập tin để gửi"
+
+#: ../sendto/main.c:756
+msgid "Select"
+msgstr "Chọn"
+
+#: ../sendto/main.c:786
+msgid "Remote device to use"
+msgstr "Thiết bị từ xa sẽ dùng"
+
+#: ../sendto/main.c:786
+msgid "ADDRESS"
+msgstr "ĐỊA_CHỈ"
+
+#: ../sendto/main.c:788
+msgid "Remote device's name"
+msgstr "Tên của thiết bị từ xa"
+
+#: ../sendto/main.c:788
+msgid "NAME"
+msgstr "TÊN"
+
+#: ../sendto/main.c:807
+msgid "[FILE...]"
+msgstr "[TẬP TIN...]"
+
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr "Dùng thiết bị GPS này cho dịch vụ Geolocation (Định vị toàn cầu)"
+
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr "Truy cập Internet bằng điện thoại di động (thử nghiệm)"
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "Hãy điền PIN sau:"
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "Cài đặt “%s” không thành công"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "Đang kết nối tới “%s”..."
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "Vui lòng chờ hoàn tất cài đặt trên thiết bị “%s”..."
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "Cài đặt thiết bị mới “%s” thành công"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "Cài đặt thiết bị Bluetooth mới"
+
+#~ msgid "PIN _options..."
+#~ msgstr "_Tùy chọn PIN..."
+
+#~ msgid "Device Search"
+#~ msgstr "Tìm thiết bị"
+
+#~ msgid "Device Setup"
+#~ msgstr "Cài đặt thiết bị"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "Hoàn tất cài đặt"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "Chọn các dịch vụ dùng cùng với thiết bị:"
+
+#~ msgid "Setup Summary"
+#~ msgstr "Tóm tắt thiết lập"
+
+#~ msgid "PIN Options"
+#~ msgstr "Tùy chọn PIN"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "_Tự động chọn PIN"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "PIN cố định"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "“0000” (dùng được với hầu hết các tai nghe, chuột và thiết bị GPS)"
+
+#~ msgid "'1111'"
+#~ msgstr "“1111”"
+
+#~ msgid "'1234'"
+#~ msgstr "“1234”"
+
+#~ msgid "Do not pair"
+#~ msgstr "Không cặp"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "PIN tự chọn:"
+
+#~ msgid "_Try Again"
+#~ msgstr "_Thử lại"
+
+#~ msgid "_Quit"
+#~ msgstr "T_hoát"
+
+#~ msgid "Does not match"
+#~ msgstr "Không khớp"
+
+#~ msgid "Matches"
+#~ msgstr "Khớp"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "Cài đặt thiết bị Bluetooth"
+
+#~ msgid "Setup Bluetooth devices"
+#~ msgstr "Cài đặt thiết bị Bluetooth"
+
+#~ msgid ""
+#~ "Make sure that the remote device is switched on and that it accepts "
+#~ "Bluetooth connections"
+#~ msgstr "Kiểm tra thiết bị từ xa đã bật và chấp nhận kết nối Bluetooth"
