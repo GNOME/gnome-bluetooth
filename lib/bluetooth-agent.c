@@ -51,7 +51,7 @@ static const gchar introspection_xml[] =
 "    <method name='DisplayPasskey'>"
 "      <arg type='o' name='device' direction='in'/>"
 "      <arg type='u' name='passkey' direction='in'/>"
-"      <arg type='y' name='entered' direction='in'/>"
+"      <arg type='q' name='entered' direction='in'/>"
 "    </method>"
 "    <method name='DisplayPinCode'>"
 "      <arg type='o' name='device' direction='in'/>"
@@ -167,7 +167,7 @@ static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
 }
 
 static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
-			const char *path, guint passkey, guint8 entered,
+			const char *path, guint passkey, guint16 entered,
 						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
@@ -388,9 +388,9 @@ handle_method_call (GDBusConnection       *connection,
 	} else if (g_strcmp0 (method_name, "DisplayPasskey") == 0) {
 		char *path;
 		guint32 passkey;
-		guint8 entered;
+		guint16 entered;
 
-		g_variant_get (parameters, "(ouy)", &path, &passkey, &entered);
+		g_variant_get (parameters, "(ouq)", &path, &passkey, &entered);
 		bluetooth_agent_display_passkey (agent, path, passkey, entered, invocation);
 		g_free (path);
 	} else if (g_strcmp0 (method_name, "DisplayPinCode") == 0) {
