@@ -495,8 +495,6 @@ static void create_window(void)
 	gtk_widget_show_all(dialog);
 }
 
-#define OPENOBEX_CONNECTION_FAILED "org.openobex.Error.ConnectionAttemptFailed"
-
 static gchar *get_device_name(const gchar *address)
 {
 	BluetoothClient *client;
