@@ -274,11 +274,10 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 {
 	BluetoothPairingDialog *self = BLUETOOTH_PAIRING_DIALOG (object);
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
-	GtkWidget *container, *buttonbox, *header;
+	GtkWidget *container, *header;
 	GtkStyleContext *context;
 
 	container = gtk_dialog_get_content_area (GTK_DIALOG (self));
-	buttonbox = gtk_dialog_get_action_area (GTK_DIALOG (self));
 
 	/* Header */
 	header = gtk_dialog_get_header_bar (GTK_DIALOG (self));
@@ -321,8 +320,6 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 			  G_CALLBACK (text_changed_cb), self);
 	priv->pin_notebook = WID ("pin_notebook");
 	gtk_widget_set_no_show_all (priv->pin_notebook, TRUE);
-	gtk_widget_hide (buttonbox);
-	gtk_widget_set_no_show_all (buttonbox, TRUE);
 
 	context = gtk_widget_get_style_context (priv->done);
 	gtk_style_context_add_class (context, "suggested-action");
