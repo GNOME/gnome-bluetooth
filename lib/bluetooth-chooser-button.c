@@ -257,10 +257,8 @@ bluetooth_chooser_button_finalize (GObject *object)
 {
 	BluetoothChooserButton *button = BLUETOOTH_CHOOSER_BUTTON (object);
 
-	if (button->client != NULL) {
-		g_object_unref (button->client);
-		button->client = NULL;
-	}
+	g_clear_object (&button->client);
+
 	if (button->dialog != NULL) {
 		gtk_widget_destroy (button->dialog);
 		button->dialog = NULL;
