@@ -32,7 +32,7 @@
 #include "gnome-bluetooth-enum-types.h"
 
 #define BLUETOOTH_SETTINGS_ROW_GET_PRIVATE(obj) \
-	(G_TYPE_INSTANCE_GET_PRIVATE((obj), BLUETOOTH_TYPE_SETTINGS_ROW, BluetoothSettingsRowPrivate))
+	(bluetooth_settings_row_get_instance_private (obj))
 
 typedef struct _BluetoothSettingsRowPrivate BluetoothSettingsRowPrivate;
 
@@ -68,7 +68,7 @@ enum {
 	PROP_LEGACY_PAIRING
 };
 
-G_DEFINE_TYPE(BluetoothSettingsRow, bluetooth_settings_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE_WITH_PRIVATE(BluetoothSettingsRow, bluetooth_settings_row, GTK_TYPE_LIST_BOX_ROW)
 
 static void
 label_might_change (BluetoothSettingsRow *self)
@@ -135,7 +135,8 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 static void
 bluetooth_settings_row_finalize (GObject *object)
 {
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (object);
+	BluetoothSettingsRow *self = BLUETOOTH_SETTINGS_ROW (object);
+	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
 
 	g_clear_object (&priv->proxy);
 	g_clear_pointer (&priv->name, g_free);
@@ -150,7 +151,8 @@ bluetooth_settings_row_get_property (GObject        *object,
 				     GValue         *value,
 				     GParamSpec     *pspec)
 {
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (object);
+	BluetoothSettingsRow *self = BLUETOOTH_SETTINGS_ROW (object);
+	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
 
 	switch (property_id) {
 	case PROP_PROXY:
@@ -248,8 +250,6 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-
-	g_type_class_add_private (klass, sizeof (BluetoothSettingsRowPrivate));
 
 	object_class->finalize = bluetooth_settings_row_finalize;
 	object_class->get_property = bluetooth_settings_row_get_property;
