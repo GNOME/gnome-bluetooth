@@ -337,7 +337,7 @@ bluetooth_pairing_dialog_finalize (GObject *object)
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (object);
 
 	g_clear_object (&priv->builder);
-	g_clear_pointer (&priv->pin, g_free);
+	g_free (priv->pin);
 
 	G_OBJECT_CLASS(bluetooth_pairing_dialog_parent_class)->finalize(object);
 }
