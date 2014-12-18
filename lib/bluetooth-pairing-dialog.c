@@ -32,7 +32,7 @@
 #include "bluetooth-settings-resources.h"
 
 #define BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE(obj) \
-	(G_TYPE_INSTANCE_GET_PRIVATE((obj), BLUETOOTH_TYPE_PAIRING_DIALOG, BluetoothPairingDialogPrivate))
+	(bluetooth_pairing_dialog_get_instance_private (obj))
 
 typedef struct _BluetoothPairingDialogPrivate BluetoothPairingDialogPrivate;
 
@@ -52,7 +52,7 @@ struct _BluetoothPairingDialogPrivate {
 	char                 *pin;
 };
 
-G_DEFINE_TYPE(BluetoothPairingDialog, bluetooth_pairing_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE(BluetoothPairingDialog, bluetooth_pairing_dialog, GTK_TYPE_DIALOG)
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (priv->builder, s))
 
@@ -334,7 +334,7 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 static void
 bluetooth_pairing_dialog_finalize (GObject *object)
 {
-	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (object);
+	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (BLUETOOTH_PAIRING_DIALOG (object));
 
 	g_clear_object (&priv->builder);
 	g_free (priv->pin);
@@ -348,8 +348,6 @@ bluetooth_pairing_dialog_class_init (BluetoothPairingDialogClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-
-	g_type_class_add_private (klass, sizeof (BluetoothPairingDialogPrivate));
 
 	object_class->constructed = bluetooth_pairing_dialog_constructed;
 	object_class->finalize = bluetooth_pairing_dialog_finalize;
