@@ -66,8 +66,6 @@ static int signals[LAST_SIGNAL] = { 0 };
 static void	bluetooth_chooser_button_class_init	(BluetoothChooserButtonClass * klass);
 static void	bluetooth_chooser_button_init		(BluetoothChooserButton      * button);
 
-static GtkButtonClass *parent_class;
-
 G_DEFINE_TYPE(BluetoothChooserButton, bluetooth_chooser_button, GTK_TYPE_BUTTON);
 
 #define DEFAULT_STR N_("Click to select device…")
@@ -269,7 +267,7 @@ bluetooth_chooser_button_finalize (GObject *object)
 		button->chooser = NULL;
 	}
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (bluetooth_chooser_button_parent_class)->finalize (object);
 }
 
 static void
@@ -317,8 +315,6 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkButtonClass *button_class = GTK_BUTTON_CLASS (klass);
-
-	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = bluetooth_chooser_button_finalize;
 	object_class->set_property = bluetooth_chooser_button_set_property;
