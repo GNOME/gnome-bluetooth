@@ -39,7 +39,7 @@
 #include "pin.h"
 
 #define BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE(obj) \
-	(G_TYPE_INSTANCE_GET_PRIVATE((obj), BLUETOOTH_TYPE_SETTINGS_WIDGET, BluetoothSettingsWidgetPrivate))
+	(bluetooth_settings_widget_get_instance_private (obj))
 
 typedef struct _BluetoothSettingsWidgetPrivate BluetoothSettingsWidgetPrivate;
 
@@ -77,7 +77,7 @@ struct _BluetoothSettingsWidgetPrivate {
 	GtkWidget           *visible_label;
 };
 
-G_DEFINE_TYPE(BluetoothSettingsWidget, bluetooth_settings_widget, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE(BluetoothSettingsWidget, bluetooth_settings_widget, GTK_TYPE_BOX)
 
 enum {
 	PANEL_CHANGED,
@@ -1814,7 +1814,8 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 static void
 bluetooth_settings_widget_finalize (GObject *object)
 {
-	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (object);
+	BluetoothSettingsWidget *widget = BLUETOOTH_SETTINGS_WIDGET(object);
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (widget);
 
 	g_clear_object (&priv->agent);
 	g_clear_pointer (&priv->properties_dialog, gtk_widget_destroy);
@@ -1845,8 +1846,6 @@ bluetooth_settings_widget_class_init (BluetoothSettingsWidgetClass *klass)
 {
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
-
-	g_type_class_add_private (klass, sizeof (BluetoothSettingsWidgetPrivate));
 
 	G_OBJECT_CLASS (klass)->finalize = bluetooth_settings_widget_finalize;
 
