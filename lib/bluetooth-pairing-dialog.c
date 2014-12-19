@@ -37,7 +37,6 @@
 typedef struct _BluetoothPairingDialogPrivate BluetoothPairingDialogPrivate;
 
 struct _BluetoothPairingDialogPrivate {
-	GtkBuilder           *builder;
 	GtkWidget            *title;
 	GtkWidget            *help_label;
 	GtkWidget            *label_pin;
@@ -52,8 +51,6 @@ struct _BluetoothPairingDialogPrivate {
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE(BluetoothPairingDialog, bluetooth_pairing_dialog, GTK_TYPE_DIALOG)
-
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (priv->builder, s))
 
 enum {
 	CONFIRMATION_PAGE,
@@ -250,20 +247,7 @@ text_changed_cb (GObject    *gobject,
 static void
 bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 {
-	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
-	GError *error = NULL;
-
-	g_resources_register (bluetooth_settings_get_resource ());
-	priv->builder = gtk_builder_new ();
-	gtk_builder_set_translation_domain (priv->builder, GETTEXT_PACKAGE);
-	gtk_builder_add_from_resource (priv->builder,
-                                       "/org/gnome/bluetooth/settings.ui",
-                                       &error);
-	if (error != NULL) {
-		g_warning ("Could not load ui: %s", error->message);
-		g_error_free (error);
-		return;
-	}
+	gtk_widget_init_template (GTK_WIDGET (self));
 
 	gtk_widget_set_size_request (GTK_WIDGET (self), 380, -1);
 	gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
@@ -274,10 +258,8 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 {
 	BluetoothPairingDialog *self = BLUETOOTH_PAIRING_DIALOG (object);
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
-	GtkWidget *container, *header;
+	GtkWidget *header;
 	GtkStyleContext *context;
-
-	container = gtk_dialog_get_content_area (GTK_DIALOG (self));
 
 	/* Header */
 	header = gtk_dialog_get_header_bar (GTK_DIALOG (self));
@@ -308,18 +290,10 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	g_signal_connect (G_OBJECT (priv->cancel), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_start (GTK_HEADER_BAR (header), priv->cancel);
-	gtk_widget_show_all (header);
-	gtk_window_set_titlebar (GTK_WINDOW (self), header);
 	gtk_widget_grab_default (GTK_WIDGET (priv->done));
 
-	gtk_container_add (GTK_CONTAINER (container), WID ("pairing_dialog_box"));
-	priv->help_label = WID ("help_label");
-	priv->label_pin = WID ("label_pin");
-	priv->entry_pin = WID ("entry_pin");
 	g_signal_connect (G_OBJECT (priv->entry_pin), "notify::text",
 			  G_CALLBACK (text_changed_cb), self);
-	priv->pin_notebook = WID ("pin_notebook");
-	gtk_widget_set_no_show_all (priv->pin_notebook, TRUE);
 
 	context = gtk_widget_get_style_context (priv->done);
 	gtk_style_context_add_class (context, "suggested-action");
@@ -332,7 +306,6 @@ bluetooth_pairing_dialog_finalize (GObject *object)
 {
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (BLUETOOTH_PAIRING_DIALOG (object));
 
-	g_clear_object (&priv->builder);
 	g_free (priv->pin);
 
 	G_OBJECT_CLASS(bluetooth_pairing_dialog_parent_class)->finalize(object);
@@ -342,11 +315,19 @@ static void
 bluetooth_pairing_dialog_class_init (BluetoothPairingDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	object_class->constructed = bluetooth_pairing_dialog_constructed;
 	object_class->finalize = bluetooth_pairing_dialog_finalize;
+
+	/* Bind class to template */
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/bluetooth/bluetooth-pairing-dialog.ui");
+	gtk_widget_class_bind_template_child_private (widget_class, BluetoothPairingDialog, help_label);
+	gtk_widget_class_bind_template_child_private (widget_class, BluetoothPairingDialog, pin_notebook);
+	gtk_widget_class_bind_template_child_private (widget_class, BluetoothPairingDialog, entry_pin);
+	gtk_widget_class_bind_template_child_private (widget_class, BluetoothPairingDialog, label_pin);
 }
 
 /**

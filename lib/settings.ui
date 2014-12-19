@@ -1,98 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.0 on Thu Dec  5 15:20:37 2013 -->
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="pairing_dialog_box">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_start">50</property>
-    <property name="margin_end">50</property>
-    <property name="margin_top">24</property>
-    <property name="margin_bottom">30</property>
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkLabel" id="help_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <!-- placeholder text: never appears in the actual UI -->
-        <property name="label">Please enter the following PIN on 'Foobar':</property>
-        <property name="justify">center</property>
-        <property name="wrap">True</property>
-        <property name="width_chars">40</property>
-        <property name="max_width_chars">40</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkNotebook" id="pin_notebook">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="margin_top">24</property>
-        <property name="show_tabs">False</property>
-        <property name="show_border">False</property>
-        <child>
-          <object class="GtkAspectFrame" id="aspectframe1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label_xalign">0</property>
-            <property name="shadow_type">none</property>
-            <child>
-              <object class="GtkEntry" id="entry_pin">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="margin_start">25</property>
-                <property name="margin_end">25</property>
-                <property name="max_length">6</property>
-                <property name="width_chars">6</property>
-                <property name="xalign">0.5</property>
-                <property name="input_purpose">digits</property>
-                <property name="input_hints">GTK_INPUT_HINT_NO_SPELLCHECK | GTK_INPUT_HINT_NONE</property>
-                <property name="activates-default">True</property>
-                <style>
-                  <class name="pin-entry"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_pin">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label">123456</property>
-            <style>
-              <class name="pin-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_placeholder">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label"></property>
-          </object>
-          <packing>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-  </object>
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkBox" id="properties_vbox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -461,12 +370,5 @@
     <property name="border_width">12</property>
     <property name="orientation">vertical</property>
     <property name="spacing">3</property>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
-    <property name="mode">both</property>
-    <widgets>
-      <widget name="entry_pin"/>
-      <widget name="label_pin"/>
-    </widgets>
   </object>
 </interface>
