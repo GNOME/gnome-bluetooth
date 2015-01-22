@@ -55,8 +55,7 @@
 #define BLUEZ_DEVICE_INTERFACE		"org.bluez.Device1"
 #define FDO_PROPERTIES_INTERFACE	"org.freedesktop.DBus.Properties"
 
-#define BLUETOOTH_CLIENT_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
-				BLUETOOTH_TYPE_CLIENT, BluetoothClientPrivate))
+#define BLUETOOTH_CLIENT_GET_PRIVATE(obj) bluetooth_client_get_instance_private (obj)
 
 typedef struct _BluetoothClientPrivate BluetoothClientPrivate;
 
@@ -95,7 +94,7 @@ static const char *connectable_uuids[] = {
 	"HumanInterfaceDeviceService",
 };
 
-G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
 
 typedef gboolean (*IterSearchFunc) (GtkTreeStore *store,
 				GtkTreeIter *iter, gpointer user_data);
@@ -1212,9 +1211,10 @@ bluetooth_client_set_property (GObject        *object,
 	}
 }
 
-static void bluetooth_client_finalize(GObject *client)
+static void bluetooth_client_finalize(GObject *object)
 {
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	BluetoothClient *client = BLUETOOTH_CLIENT (object);
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
 
 	g_bus_unwatch_name (priv->owner_change_id);
 
@@ -1223,14 +1223,12 @@ static void bluetooth_client_finalize(GObject *client)
 
 	g_clear_pointer (&priv->default_adapter, gtk_tree_row_reference_free);
 
-	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize(client);
+	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize (object);
 }
 
 static void bluetooth_client_class_init(BluetoothClientClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
-
-	g_type_class_add_private(klass, sizeof(BluetoothClientPrivate));
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = bluetooth_client_finalize;
 	object_class->get_property = bluetooth_client_get_property;
