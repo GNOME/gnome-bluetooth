@@ -520,6 +520,8 @@ display_callback (GDBusMethodInvocation *invocation,
 						  entered);
 	g_free (pin_str);
 	g_free (name);
+
+	gtk_widget_show (priv->pairing_dialog);
 }
 
 static void
