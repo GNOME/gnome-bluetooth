@@ -111,8 +111,6 @@ AC_ARG_ENABLE([documentation],
 	[], [enable_documentation=yes])
 AM_CONDITIONAL(ENABLE_DOCUMENTATION, test x$enable_documentation = xyes)
 
-YELP_HELP_INIT
-
 AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
@@ -124,7 +122,6 @@ AC_OUTPUT(Makefile
 	  docs/reference/libgnome-bluetooth/Makefile
 	  docs/reference/libgnome-bluetooth/version.xml
 	  po/Makefile.in
-	  help/Makefile
 )
 
 echo "

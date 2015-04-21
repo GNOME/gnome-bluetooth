@@ -1273,9 +1273,9 @@ default_adapter_changed (BluetoothClient  *client,
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	char *default_adapter;
 
-	g_debug ("Default adapter changed");
-
 	g_object_get (priv->client, "default-adapter", &default_adapter, NULL);
+
+	g_debug ("Default adapter changed to: %s", default_adapter ? default_adapter : "(none)");
 
 	g_object_set (G_OBJECT (client), "default-adapter-discovering", default_adapter != NULL, NULL);
 

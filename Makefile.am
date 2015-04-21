@@ -1,10 +1,4 @@
-DEF_SUBDIRS = icons lib sendto docs po help
-
 SUBDIRS = icons lib sendto docs po
-
-if ENABLE_DOCUMENTATION
-SUBDIRS += help
-endif
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
