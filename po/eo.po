@@ -1,17 +1,17 @@
 # Esperanto translation for gnome-bluetooth.
 # Copyright (C) 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
-# Ryan Lortie <desrt@desrt.ca>, 2013.
-# Ken Price <kenprice13@sympatico.ca>, 2014.
-# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011, 2012, 2014.
-#
+# Ryan LORTIE <desrt@desrt.ca>, 2013.
+# Ken PRICE <kenprice13@sympatico.ca>, 2014.
+# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011, 2012, 2014, 2015.
+# Daniel PUENTES <blatberk@openmailbox.org>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-22 17:07+0000\n"
-"PO-Revision-Date: 2014-01-25 04:04+0100\n"
+"POT-Creation-Date: 2015-04-20 18:13+0000\n"
+"PO-Revision-Date: 2015-04-23 21:41+0200\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
 "Language: eo\n"
@@ -19,18 +19,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
+#: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Alklaki por elekti aparaton…"
 
-#: ../lib/bluetooth-chooser-button.c:205
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-chooser-button.c:201
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:423
+#: ../sendto/main.c:697 ../sendto/main.c:753
 msgid "_Cancel"
 msgstr "_Nuligi"
 
-#: ../lib/bluetooth-chooser-button.c:206
+#: ../lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "B_one"
 
@@ -43,19 +45,19 @@ msgstr "Nekonate"
 msgid "No adapters available"
 msgstr "Neniu adaptilo disponeblas"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
 msgid "Searching for devices…"
 msgstr "Serĉante aparatojn…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "Aparato"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Aparatoj"
 
@@ -111,22 +113,22 @@ msgstr "Enig-aparatoj (muso, klvaro, ktp.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Kapaŭskultiloj, kaptelefonoj kaj aliaj sonaparatoj"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "Konfirmi la Bludentan PIN"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Bonvolu konfirmi na PIN kiu estis enigita kiel '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:142
 msgid "Confirm"
 msgstr "Konfirmi"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
@@ -135,40 +137,40 @@ msgstr ""
 "Konfirmi la Bludentan PIN por '%s'. Ĉi tiu kutime troveblas en la manlibro "
 "de la aparato."
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "Pariganta '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr "Bonvole konfirmu ke la sekva PIN kongruas kun tiu montrata kiel '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Bludenta Pariĝa Peto"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "'%s' volas pariĝi kun ĉi tiu aparato. Ĉu vi volas permesi pariĝon?"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:119
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "Bonvole tajpu la sekvan PIN de '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:122
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr ""
-"Bonvole tajpu la sekvan PIN de '%s' kaj tiam premi la enigan klavon sur la "
+"Bonvole enigu la sekvan PIN de '%s'. Poste premu la enigan klavon sur la "
 "klavaro."
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:125
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -176,27 +178,26 @@ msgstr ""
 "Bonvolu movi la stirstangon de via iCade en la sekvaj direktoj. Tiam premu "
 "iun ajn el la bankaj butonoj."
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:132
 msgid "Allow"
 msgstr "Permesi"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Dismiss"
 msgstr "Malakcepti"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:301
+#: ../lib/bluetooth-pairing-dialog.c:146 ../lib/bluetooth-pairing-dialog.c:289
 msgid "Cancel"
 msgstr "Nuligi"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:282
+#: ../lib/bluetooth-pairing-dialog.c:270
 msgid "Accept"
 msgstr "Akcepti"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
-msgid "Not Setup"
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
+msgid "Not Set Up"
 msgstr "Ne agordita"
 
 #: ../lib/bluetooth-settings-row.c:81
@@ -236,10 +237,6 @@ msgstr ""
 #: ../lib/bluetooth-settings-widget.c:1198
 msgid "_Remove"
 msgstr "Fo_rigi"
-
-#: ../lib/bluetooth-settings-widget.c:1696
-msgid "Done"
-msgstr "Farite"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -398,89 +395,96 @@ msgid_plural "approximately %'d hours"
 msgstr[0] "proksimume %'d horo"
 msgstr[1] "proksimume %'d horoj"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:378 ../sendto/main.c:476
 msgid "Connecting…"
 msgstr "Konektante…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:420
 msgid "Bluetooth File Transfer"
 msgstr "Bludenta dosiera transigo"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:424
 msgid "_Retry"
 msgstr "_Reprovi"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:446
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:460
 msgid "To:"
 msgstr "Al:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:553
 #, c-format
 msgid "Sending %s"
 msgstr "Sendante %s"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:560 ../sendto/main.c:609
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sendi dosieron %d de %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:605
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:638
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u transigo kompleta"
 msgstr[1] "%u transigoj kompletaj"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:645
+msgid "_Close"
+msgstr "_Fermi"
+
+#: ../sendto/main.c:655
 msgid "There was an error"
 msgstr "Estis eraro"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:693
 msgid "Select device to send to"
 msgstr "Elekti aparaton al kiu sendi"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:698
 msgid "_Send"
 msgstr "_Sendi"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:748
 msgid "Choose files to send"
 msgstr "Elekti dosierojn por sendi"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:754
 msgid "Select"
 msgstr "Elekti"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:784
 msgid "Remote device to use"
 msgstr "Uzota fora aparato"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:784
 msgid "ADDRESS"
 msgstr "ADRESO"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:786
 msgid "Remote device's name"
 msgstr "Nomo de la fora aparato"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:786
 msgid "NAME"
 msgstr "NOMO"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:805
 msgid "[FILE...]"
 msgstr "[DOSIERO...]"
+
+#~ msgid "Done"
+#~ msgstr "Farite"
