@@ -43,7 +43,7 @@ oui_to_vendor (const char *oui)
 	struct udev *udev;
 	struct udev_hwdb *hwdb;
 	struct udev_list_entry *list, *l;
-	char *modalias;
+	char *modalias = NULL;
 	char *vendor = NULL;
 
 	if (oui == NULL ||
