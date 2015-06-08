@@ -690,9 +690,26 @@ select_device_changed(BluetoothChooser *sel,
 		      gpointer user_data)
 {
 	GtkDialog *dialog = user_data;
+	char *icon;
 
-	gtk_dialog_set_response_sensitive(dialog,
-				GTK_RESPONSE_ACCEPT, address != NULL);
+	if (address == NULL)
+		goto bail;
+
+	icon = bluetooth_chooser_get_selected_device_icon (sel);
+	if (icon == NULL)
+		goto bail;
+
+	/* Apple's device don't have OBEX */
+	if (g_str_equal (icon, "phone-apple-iphone"))
+		goto bail;
+
+	gtk_dialog_set_response_sensitive (dialog,
+					   GTK_RESPONSE_ACCEPT, TRUE);
+	return;
+
+bail:
+	gtk_dialog_set_response_sensitive (dialog,
+					   GTK_RESPONSE_ACCEPT, FALSE);
 }
 
 static void
