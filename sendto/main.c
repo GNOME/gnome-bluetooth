@@ -108,18 +108,36 @@ update_from_label (void)
 	g_free (markup);
 }
 
+static char *
+cleanup_error (GError *error)
+{
+	char *remote_error;
+
+	if (!error || *error->message == '\0')
+		return g_strdup (_("An unknown error occurred"));
+	if (g_dbus_error_is_remote_error (error) == FALSE)
+		return g_strdup (error->message);
+
+	remote_error = g_dbus_error_get_remote_error (error);
+	g_debug ("Remote error is: %s", remote_error);
+	g_free (remote_error);
+
+	g_dbus_error_strip_remote_error (error);
+
+	return g_strdup (error->message);
+}
+
 static void
 handle_error (GError *error)
 {
-	const char *message;
+	char *message;
 
-	if (!error || *error->message == '\0')
-		message = _("An unknown error occurred");
-	else
-		message = error->message;
+	message = cleanup_error (error);
+
 	gtk_widget_show (image_status);
 	gtk_label_set_markup (GTK_LABEL (label_status), message);
 	g_clear_error (&error);
+	g_free (message);
 
 	/* Clear the progress bar as it may be saying 'Connecting' or
 	 * 'Sending file 1 of 1' which is not true. */
