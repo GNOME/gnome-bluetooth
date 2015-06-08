@@ -123,6 +123,12 @@ cleanup_error (GError *error)
 	g_free (remote_error);
 
 	g_dbus_error_strip_remote_error (error);
+	g_debug ("Error message is: %s", error->message);
+
+	/* And now, take advantage of the fact that obexd isn't translated */
+	if (g_strcmp0 (error->message, "Unable to find service record") == 0) {
+		return g_strdup (_("Make sure that the remote device is switched on and that it accepts Bluetooth connections"));
+	}
 
 	return g_strdup (error->message);
 }
