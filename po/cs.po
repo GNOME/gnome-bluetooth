@@ -5,15 +5,15 @@
 #
 # Kamil Páral <ripper42@gmail.com>, 2008.
 # Petr Kovar <pknbe@volny.cz>, 2009.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2014.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-22 06:06+0000\n"
-"PO-Revision-Date: 2014-08-22 09:48+0200\n"
+"POT-Creation-Date: 2015-06-18 06:07+0000\n"
+"PO-Revision-Date: 2015-06-18 11:18+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -21,19 +21,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
-#: ../lib/bluetooth-chooser-button.c:73
+#: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Klikněte pro výběr zařízení…"
 
-#: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
-#: ../sendto/main.c:699 ../sendto/main.c:755
+#: ../lib/bluetooth-chooser-button.c:201
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:447
+#: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: ../lib/bluetooth-chooser-button.c:204
+#: ../lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "_Budiž"
 
@@ -46,19 +46,19 @@ msgstr "Neznámé"
 msgid "No adapters available"
 msgstr "Není dostupný žádný adaptér"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
 msgid "Searching for devices…"
 msgstr "Vyhledávají se zařízení…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "Zařízení"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1445
 msgid "Devices"
 msgstr "Zařízení"
 
@@ -114,22 +114,22 @@ msgstr "Vstupní zařízení (myš, klávesnice, apod.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Sluchátka, sluchátka s mikrofonem a další zvuková zařízení"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "Potvrzení PIN od Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Potvrďte prosím PIN, který byl zadán na zařízení „%s“."
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:142
 msgid "Confirm"
 msgstr "Potvrdit"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
@@ -138,12 +138,12 @@ msgstr ""
 "Potvrďte PIN od Bluetooth pro zařízení „%s“. Návod obvykle najdete v "
 "příručce zařízení."
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "Páruje se se zařízením „%s“"
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
@@ -151,29 +151,29 @@ msgstr ""
 "Potvrďte prosím, že následující PIN je stejný, jako ten zobrazený na "
 "zařízení „%s“."
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Požadavek na spárování přes Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
 "Zařízení „%s“ se chce spárovat s tímto zařízením. Chcete spárování povolit?"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:119
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "Vložte prosím na zařízení „%s“ následující PIN."
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:122
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr ""
 "Vložte prosím na zařízení „%s“ následující PIN a zmáčkněte klávesu „Enter“."
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:125
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -181,26 +181,25 @@ msgstr ""
 "Pohněte prosím pákovým ovladačem svého zařízení iCade v následujících "
 "směrech. Po té zmáčkněte některé z bílých tlačítek."
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:132
 msgid "Allow"
 msgstr "Povolit"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Dismiss"
 msgstr "Zamítnout"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#: ../lib/bluetooth-pairing-dialog.c:146 ../lib/bluetooth-pairing-dialog.c:289
 msgid "Cancel"
 msgstr "Zrušit"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:290
+#: ../lib/bluetooth-pairing-dialog.c:270
 msgid "Accept"
 msgstr "Přijmout"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
 msgid "Not Set Up"
 msgstr "Nenastaveno"
 
@@ -212,34 +211,34 @@ msgstr "Spojeno"
 msgid "Disconnected"
 msgstr "Odpojeno"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1071
 msgid "Yes"
 msgstr "Ano"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1071
 msgid "No"
 msgstr "Ne"
 
 #. translators: %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1164
+#: ../lib/bluetooth-settings-widget.c:1166
 #, c-format
 msgid "Visible as “%s”"
 msgstr "Viditelné jako „%s“"
 
-#: ../lib/bluetooth-settings-widget.c:1190
+#: ../lib/bluetooth-settings-widget.c:1192
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Odebrat „%s“ ze seznamu zařízení?"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1194
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Pokud zařízení odeberete, budete jej muset před příštím použitím znovu "
 "nastavit."
 
-#: ../lib/bluetooth-settings-widget.c:1196
+#: ../lib/bluetooth-settings-widget.c:1198
 msgid "_Remove"
 msgstr "Odeb_rat"
 
@@ -372,7 +371,15 @@ msgstr "Posílejte soubory přes Bluetooth"
 msgid "An unknown error occurred"
 msgstr "Došlo k neznámé chybě"
 
-#: ../sendto/main.c:339
+#: ../sendto/main.c:130
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr ""
+"Ujistěte se, že protější zařízení je zapnuté a že přijímá požadavky na "
+"spojení přes Bluetooth"
+
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -380,7 +387,7 @@ msgstr[0] "%'d sekunda"
 msgstr[1] "%'d sekundy"
 msgstr[2] "%'d sekund"
 
-#: ../sendto/main.c:344 ../sendto/main.c:357
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -388,7 +395,7 @@ msgstr[0] "%'d minuta"
 msgstr[1] "%'d minuty"
 msgstr[2] "%'d minut"
 
-#: ../sendto/main.c:355
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -396,7 +403,7 @@ msgstr[0] "%'d hodina"
 msgstr[1] "%'d hodiny"
 msgstr[2] "%'d hodin"
 
-#: ../sendto/main.c:365
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -404,47 +411,47 @@ msgstr[0] "přibližně %'d hodina"
 msgstr[1] "přibližně %'d hodiny"
 msgstr[2] "přibližně %'d hodin"
 
-#: ../sendto/main.c:378 ../sendto/main.c:476
+#: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
 msgstr "Spojuje se…"
 
-#: ../sendto/main.c:420
+#: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "Přenos souboru přes Bluetooth"
 
-#: ../sendto/main.c:424
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "_Zkusit znovu"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "Od:"
 
-#: ../sendto/main.c:460
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "Pro:"
 
-#: ../sendto/main.c:555
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "Odesílání %s"
 
-#: ../sendto/main.c:562 ../sendto/main.c:611
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Odesílání souboru %d z %d"
 
-#: ../sendto/main.c:607
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:609
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:640
+#: ../sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
@@ -452,46 +459,46 @@ msgstr[0] "%u přenos dokončen"
 msgstr[1] "%u přenosy dokončeny"
 msgstr[2] "%u přenosů dokončeno"
 
-#: ../sendto/main.c:647
+#: ../sendto/main.c:669
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: ../sendto/main.c:657
+#: ../sendto/main.c:679
 msgid "There was an error"
 msgstr "Vyskytla se chyba"
 
-#: ../sendto/main.c:695
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "Výběr zařízení pro odeslání"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "Ode_slat"
 
-#: ../sendto/main.c:750
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "Výběr souborů k odeslání"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "Vybrat"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "Použít zadané vzdálené zařízení"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ADRESA"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "Název vzdáleného zařízení"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "NÁZEV"
 
-#: ../sendto/main.c:807
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[SOUBOR…]"
