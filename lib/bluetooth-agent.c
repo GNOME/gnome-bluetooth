@@ -496,7 +496,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 							      BLUEZ_AGENT_PATH,
 							      NULL, &error);
 	if (ret == FALSE) {
-		g_printerr ("Agent registration failed: %s\n", error->message);
+		g_printerr ("Agent registration as default failed: %s\n", error->message);
 		g_error_free (error);
 		return FALSE;
 	}
