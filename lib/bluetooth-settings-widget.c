@@ -700,11 +700,39 @@ authorize_callback (GDBusMethodInvocation *invocation,
 }
 
 static void
+authorize_service_cb (GtkDialog *dialog,
+		      int        response,
+		      gpointer   user_data)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+	GDBusMethodInvocation *invocation;
+
+	invocation = g_object_get_data (G_OBJECT (dialog), "invocation");
+
+	if (response == GTK_RESPONSE_ACCEPT) {
+		GDBusProxy *device;
+
+		device = g_object_get_data (G_OBJECT (invocation), "device");
+		bluetooth_client_set_trusted (BLUETOOTH_CLIENT (priv->client), g_dbus_proxy_get_object_path (device), TRUE);
+		g_dbus_method_invocation_return_value (invocation, NULL);
+	} else {
+		char *msg;
+
+		msg = g_strdup_printf ("Rejecting service auth (HID): not paired or trusted");
+		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
+		g_free (msg);
+	}
+	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+}
+
+static void
 authorize_service_callback (GDBusMethodInvocation *invocation,
 			    GDBusProxy            *device,
 			    const char            *uuid,
 			    gpointer               user_data)
 {
+	BluetoothSettingsWidget *self = user_data;
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	char *msg;
 	GVariant *value;
 	gboolean paired, trusted;
@@ -731,10 +759,22 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 	if (paired || trusted) {
 		g_dbus_method_invocation_return_value (invocation, NULL);
 	} else {
-		msg = g_strdup_printf ("Rejecting service auth (%s) for %s: not paired or trusted",
-				       uuid, g_dbus_proxy_get_object_path (device));
-		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
-		g_free (msg);
+		char *name;
+
+		setup_pairing_dialog (BLUETOOTH_SETTINGS_WIDGET (user_data));
+		get_properties_for_device (self, device, &name, NULL, NULL);
+		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
+						   BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH,
+						   NULL, name);
+
+		g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
+				  G_CALLBACK (authorize_service_cb), user_data);
+		g_object_set_data_full (G_OBJECT (invocation), "device", g_object_ref (device), g_object_unref);
+		g_object_set_data (G_OBJECT (priv->pairing_dialog), "invocation", invocation);
+
+		gtk_widget_show (priv->pairing_dialog);
+
+		g_free (name);
 	}
 }
 
