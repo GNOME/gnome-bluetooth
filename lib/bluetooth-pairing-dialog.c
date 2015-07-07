@@ -110,6 +110,12 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		title = g_strdup (_("Bluetooth Pairing Request"));
 		help = g_strdup_printf (_("'%s' wants to pair with this device. Do you want to allow pairing?"), device_name);
 		break;
+	case BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH:
+		gtk_widget_show (priv->done);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), MESSAGE_PAGE);
+		title = g_strdup (_("Confirm Bluetooth Connection"));
+		help = g_strdup_printf (_("'%s' wants to connect with this device. Do you want to allow it?"), device_name);
+		break;
 	default:
 		g_assert_not_reached ();
 	}
@@ -128,7 +134,8 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		g_assert (help);
 	}
 
-	if (mode == BLUETOOTH_PAIRING_MODE_YES_NO) {
+	if (mode == BLUETOOTH_PAIRING_MODE_YES_NO ||
+	    mode == BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH) {
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Allow"));
 		context = gtk_widget_get_style_context (priv->done);
 		gtk_style_context_remove_class (context, "suggested-action");

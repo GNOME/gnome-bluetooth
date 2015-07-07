@@ -67,6 +67,8 @@ int main (int argc, char **argv)
 		mode = BLUETOOTH_PAIRING_MODE_PIN_MATCH;
 	} else if (g_strcmp0 (argv[1], "yes-no") == 0) {
 		mode = BLUETOOTH_PAIRING_MODE_YES_NO;
+	} else if (g_strcmp0 (argv[1], "confirm-auth") == 0) {
+		mode = BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH;
 	} else {
 		g_print ("Mode '%s' not supported, must be one of:\n", argv[1]);
 		g_print ("\tpin-confirmation\n");
@@ -75,6 +77,7 @@ int main (int argc, char **argv)
 		g_print ("\tpin-query\n");
 		g_print ("\tpin-match\n");
 		g_print ("\tyes-no\n");
+		g_print ("\tconfirm-auth\n");
 
 		return 1;
 	}
