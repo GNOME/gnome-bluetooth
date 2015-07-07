@@ -290,6 +290,7 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	g_signal_connect (G_OBJECT (priv->cancel), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_start (GTK_HEADER_BAR (header), priv->cancel);
+	gtk_widget_show (priv->cancel);
 	gtk_widget_grab_default (GTK_WIDGET (priv->done));
 
 	g_signal_connect (G_OBJECT (priv->entry_pin), "notify::text",
