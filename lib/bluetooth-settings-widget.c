@@ -1460,7 +1460,8 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_widget_set_margin_bottom (spinner, 6);
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, TRUE, 0);
 
-	/* Discoverable label */
+	/* Discoverable label placeholder, the real name is set in update_visibility().
+	 * If you ever see this string during normal use, please file a bug. */
 	priv->visible_label = gtk_label_new ("Visible as “Foobar”");
 	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 1.0, 0.5);
