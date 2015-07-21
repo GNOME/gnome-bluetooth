@@ -12,7 +12,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([lib/bluetooth-client.c])
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE([1.8 dist-xz no-dist-gzip check-news tar-ustar])
+AM_INIT_AUTOMAKE([1.11.2 dist-xz no-dist-gzip check-news tar-ustar])
 
 # Before making a release, the GNOMEBT_LT_VERSION string should be modified.
 # The string is of the form C:R:A.
