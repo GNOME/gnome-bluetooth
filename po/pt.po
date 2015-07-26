@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: 3.14\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-06-07 18:12+0000\n"
+"POT-Creation-Date: 2015-07-26 06:15+0000\n"
 "PO-Revision-Date: 2015-06-09 08:32+0100\n"
 "Last-Translator: Bruno Ramalhete <bram.512@gmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -30,8 +30,8 @@ msgid "Click to select device…"
 msgstr "Clique para selecionar um dispositivo…"
 
 #: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:423
-#: ../sendto/main.c:697 ../sendto/main.c:753
+#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:447
+#: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -370,122 +370,130 @@ msgstr "Enviar ficheiros através do Bluetooth"
 msgid "An unknown error occurred"
 msgstr "Ocorreu um erro desconhecido"
 
-#: ../sendto/main.c:339
+#: ../sendto/main.c:130
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr ""
+"Certifique-se que o dispositivo remoto está ligado e está a aceitar "
+"ligações Bluetooth"
+
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d segundo"
 msgstr[1] "%'d segundos"
 
-#: ../sendto/main.c:344 ../sendto/main.c:357
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minuto"
 msgstr[1] "%'d minutos"
 
-#: ../sendto/main.c:355
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d hora"
 msgstr[1] "%'d horas"
 
-#: ../sendto/main.c:365
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "aproximadamente %'d hora"
 msgstr[1] "aproximadamente %'d horas"
 
-#: ../sendto/main.c:378 ../sendto/main.c:476
+#: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
 msgstr "A ligar…"
 
-#: ../sendto/main.c:420
+#: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "Transferência de ficheiros por Bluetooth"
 
-#: ../sendto/main.c:424
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "_Tentar novamente"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "De:"
 
-#: ../sendto/main.c:460
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "Para:"
 
-#: ../sendto/main.c:553
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "A enviar %s"
 
-#: ../sendto/main.c:560 ../sendto/main.c:609
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "A enviar o ficheiro %d de %d"
 
-#: ../sendto/main.c:605
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:607
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:638
+#: ../sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u transferência concluída"
 msgstr[1] "%u transferências concluídas"
 
-#: ../sendto/main.c:645
+#: ../sendto/main.c:669
 msgid "_Close"
 msgstr "Fe_Char"
 
-#: ../sendto/main.c:655
+#: ../sendto/main.c:679
 msgid "There was an error"
 msgstr "Ocorreu um erro"
 
-#: ../sendto/main.c:693
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "Selecione o dispositivo para onde enviar"
 
-#: ../sendto/main.c:698
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "_Enviar"
 
-#: ../sendto/main.c:748
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "Escolha os ficheiros a enviar"
 
-#: ../sendto/main.c:754
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "Selecionar"
 
-#: ../sendto/main.c:784
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "Dispositivo remoto a utilizar"
 
-#: ../sendto/main.c:784
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ENDEREÇO"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "Nome do dispositivo remoto"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "NOME"
 
-#: ../sendto/main.c:805
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[FICHEIRO...]"
 
@@ -586,13 +594,6 @@ msgstr "[FICHEIRO...]"
 
 #~ msgid "Connecting..."
 #~ msgstr "A estabelecer ligação..."
-
-#~ msgid ""
-#~ "Make sure that the remote device is switched on and that it accepts "
-#~ "Bluetooth connections"
-#~ msgstr ""
-#~ "Certifique-se de que o dispositivo remoto está ligado e está a aceitar "
-#~ "ligações Bluetooth"
 
 #~ msgid "File Transfer"
 #~ msgstr "Transferência de Ficheiro"
