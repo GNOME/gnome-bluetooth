@@ -29,7 +29,8 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-settings-resources.c	\
 	bluetooth-settings-row.c	\
 	bluetooth-pairing-dialog.c	\
-	pin.c
+	pin.c				\
+	bluetooth-settings-obexpush.c
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
@@ -41,7 +42,8 @@ libgnome_bluetooth_private_headers =	\
 	bluetooth-settings-resources.h	\
 	bluetooth-settings-row.h	\
 	bluetooth-pairing-dialog.h	\
-	pin.h
+	pin.h				\
+	bluetooth-settings-obexpush.h
 
 # public headers don't need to be listed, are handled by _HEADERS
 libgnome_bluetooth_la_SOURCES =			\

@@ -35,6 +35,7 @@
 #include "bluetooth-settings-widget.h"
 #include "bluetooth-settings-resources.h"
 #include "bluetooth-settings-row.h"
+#include "bluetooth-settings-obexpush.h"
 #include "bluetooth-pairing-dialog.h"
 #include "pin.h"
 
@@ -75,6 +76,10 @@ struct _BluetoothSettingsWidgetPrivate {
 
 	/* Visible */
 	GtkWidget           *visible_label;
+
+	/* Sharing section */
+	gboolean             has_console;
+	GDBusProxy          *session_proxy;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE(BluetoothSettingsWidget, bluetooth_settings_widget, GTK_TYPE_BOX)
@@ -102,6 +107,10 @@ static guint signals[LAST_SIGNAL] = { 0 };
 #define ADAPTER_IFACE	"org.bluez.Adapter1"
 
 #define AGENT_PATH "/org/gnome/bluetooth/settings"
+
+#define GNOME_SESSION_DBUS_NAME      "org.gnome.SessionManager"
+#define GNOME_SESSION_DBUS_OBJECT    "/org/gnome/SessionManager"
+#define GNOME_SESSION_DBUS_INTERFACE "org.gnome.SessionManager"
 
 enum {
 	CONNECTING_NOTEBOOK_PAGE_SWITCH = 0,
@@ -1159,13 +1168,19 @@ update_visibility (BluetoothSettingsWidget *self)
 
 	g_object_get (G_OBJECT (priv->client), "default-adapter-name", &name, NULL);
 	if (name != NULL) {
-		char *label;
+		char *label, *path, *uri;
 
-		/* translators: %s is the name of the computer, for example:
-		 * Visible as “Bastien Nocera's Computer” */
-		label = g_strdup_printf (_("Visible as “%s”"), name);
+		path = lookup_download_dir ();
+		uri = g_filename_to_uri (path, NULL, NULL);
+		g_free (path);
+
+		/* translators: first %s is the name of the computer, for example:
+		 * Visible as “Bastien Nocera's Computer” followed by the
+		 * location of the Downloads folder.*/
+		label = g_strdup_printf (_("Visible as “%s” and available for Bluetooth file transfers. Transferred files are placed in the <a href=\"%s\">Downloads</a> folder."), name, uri);
+		g_free (uri);
 		g_free (name);
-		gtk_label_set_text (GTK_LABEL (priv->visible_label), label);
+		gtk_label_set_markup (GTK_LABEL (priv->visible_label), label);
 		g_free (label);
 	}
 	gtk_widget_set_visible (priv->visible_label, name != NULL);
@@ -1462,10 +1477,8 @@ add_device_section (BluetoothSettingsWidget *self)
 
 	/* Discoverable label placeholder, the real name is set in update_visibility().
 	 * If you ever see this string during normal use, please file a bug. */
-	priv->visible_label = gtk_label_new ("Visible as “Foobar”");
+	priv->visible_label = WID ("explanation-label");
 	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
-	gtk_misc_set_alignment (GTK_MISC (priv->visible_label), 1.0, 0.5);
-	gtk_box_pack_end (GTK_BOX (hbox), priv->visible_label, FALSE, TRUE, 0);
 	update_visibility (self);
 
 	priv->device_list = widget = gtk_list_box_new ();
@@ -1488,22 +1501,6 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_pack_start (GTK_BOX (box), priv->device_revealer, FALSE, TRUE, 0);
 
 	gtk_widget_show_all (box);
-}
-
-static void
-on_content_size_changed (GtkWidget *widget, GtkAllocation *allocation, gpointer data)
-{
-	GtkWidget *box;
-
-	box = gtk_widget_get_parent (gtk_widget_get_parent (widget));
-	if (allocation->height < 490) {
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-						GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-	} else {
-		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-						GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-		gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 490);
-	}
 }
 
 static gboolean
@@ -1741,10 +1738,77 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 }
 
 static void
+session_properties_changed_cb (GDBusProxy               *session,
+			       GVariant                 *changed,
+			       char                    **invalidated,
+			       BluetoothSettingsWidget  *self)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
+	GVariant *v;
+
+	v = g_variant_lookup_value (changed, "SessionIsActive", G_VARIANT_TYPE_BOOLEAN);
+	if (v) {
+		priv->has_console = g_variant_get_boolean (v);
+		g_debug ("Received session is active change: now %s", priv->has_console ? "active" : "inactive");
+		g_variant_unref (v);
+
+		if (priv->has_console)
+			obex_agent_up ();
+		else
+			obex_agent_down ();
+	}
+}
+
+static gboolean
+is_session_active (BluetoothSettingsWidget *self)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
+	GVariant *variant;
+	gboolean is_session_active = FALSE;
+
+	variant = g_dbus_proxy_get_cached_property (priv->session_proxy,
+						    "SessionIsActive");
+	if (variant) {
+		is_session_active = g_variant_get_boolean (variant);
+		g_variant_unref (variant);
+	}
+
+	return is_session_active;
+}
+
+static void
+setup_obex (BluetoothSettingsWidget *self)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
+	GError *error = NULL;
+
+	priv->session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+							     G_DBUS_PROXY_FLAGS_NONE,
+							     NULL,
+							     GNOME_SESSION_DBUS_NAME,
+							     GNOME_SESSION_DBUS_OBJECT,
+							     GNOME_SESSION_DBUS_INTERFACE,
+							     NULL,
+							     &error);
+
+	if (priv->session_proxy == NULL) {
+		g_warning ("Failed to get session proxy: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+	g_signal_connect (priv->session_proxy, "g-properties-changed",
+			  G_CALLBACK (session_properties_changed_cb), self);
+	priv->has_console = is_session_active (self);
+
+	if (priv->has_console)
+		obex_agent_up ();
+}
+
+static void
 bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	GtkWidget *widget, *box;
+	GtkWidget *widget;
 	GError *error = NULL;
 
 	priv->cancellable = g_cancellable_new ();
@@ -1762,7 +1826,7 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 		return;
 	}
 
-	widget = WID ("vbox_bluetooth");
+	widget = WID ("scrolledwindow1");
 
 	priv->connecting_devices = g_hash_table_new_full (g_str_hash,
 								g_str_equal,
@@ -1796,22 +1860,16 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 
 	add_device_section (self);
 
-	box = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_set_hexpand (box, TRUE);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
+	gtk_widget_set_hexpand (widget, TRUE);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
 					GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-	g_signal_connect (widget, "size-allocate",
-			  G_CALLBACK (on_content_size_changed), NULL);
-	gtk_widget_show (box);
-	gtk_container_add (GTK_CONTAINER (self), box);
-	gtk_container_add (GTK_CONTAINER (box), widget);
-
-	priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (box));
-	gtk_container_set_focus_vadjustment (GTK_CONTAINER (widget), priv->focus_adjustment);
+	gtk_container_add (GTK_CONTAINER (self), widget);
 
 	setup_properties_dialog (self);
 
 	gtk_widget_show_all (GTK_WIDGET (self));
+
+	setup_obex (self);
 }
 
 static void
@@ -1823,6 +1881,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 	g_clear_object (&priv->agent);
 	g_clear_pointer (&priv->properties_dialog, gtk_widget_destroy);
 	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+	g_clear_object (&priv->session_proxy);
 
 	/* See default_adapter_changed () */
 	if (priv->client)

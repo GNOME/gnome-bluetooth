@@ -94,7 +94,9 @@ PKG_CHECK_MODULES(LIBGNOMEBT,
 	gmodule-2.0
 	gio-unix-2.0
 	gtk+-3.0 >= $GTK_REQUIRED
-	libudev)
+	libudev
+	libnotify
+	libcanberra-gtk3)
 
 GDBUS_CODEGEN="gdbus-codegen"
 AC_SUBST(GDBUS_CODEGEN)
