@@ -46,6 +46,7 @@ typedef struct _BluetoothSettingsWidgetPrivate BluetoothSettingsWidgetPrivate;
 
 struct _BluetoothSettingsWidgetPrivate {
 	GtkBuilder          *builder;
+	GtkWidget           *child_box;
 	BluetoothClient     *client;
 	GtkTreeModel        *model;
 	gboolean             debug;
@@ -66,7 +67,7 @@ struct _BluetoothSettingsWidgetPrivate {
 	GtkWidget           *device_list;
 	GtkAdjustment       *focus_adjustment;
 	GtkSizeGroup        *row_sizegroup;
-	GtkWidget           *device_revealer;
+	GtkWidget           *device_stack;
 	GtkWidget           *device_spinner;
 	GHashTable          *connecting_devices; /* key=bdaddr, value=boolean */
 
@@ -111,6 +112,9 @@ static guint signals[LAST_SIGNAL] = { 0 };
 #define GNOME_SESSION_DBUS_NAME      "org.gnome.SessionManager"
 #define GNOME_SESSION_DBUS_OBJECT    "/org/gnome/SessionManager"
 #define GNOME_SESSION_DBUS_INTERFACE "org.gnome.SessionManager"
+
+#define FILLER_PAGE                  "filler-page"
+#define DEVICES_PAGE                 "devices-page"
 
 enum {
 	CONNECTING_NOTEBOOK_PAGE_SWITCH = 0,
@@ -1482,7 +1486,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	GtkWidget *vbox;
 	GtkWidget *widget, *box, *hbox, *spinner;
-	GtkWidget *frame;
+	GtkWidget *frame, *label;
 	gchar *s;
 
 	vbox = WID ("vbox_bluetooth");
@@ -1492,7 +1496,8 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_widget_set_margin_end (box, 50);
 	gtk_widget_set_margin_top (box, 6);
 	gtk_widget_set_margin_bottom (box, 24);
-	gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
+	priv->child_box = box;
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
 	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
@@ -1532,13 +1537,18 @@ add_device_section (BluetoothSettingsWidget *self)
 	g_signal_connect_swapped (widget, "row-activated",
 				  G_CALLBACK (activate_row), self);
 
-	priv->device_revealer = gtk_revealer_new ();
+	priv->device_stack = gtk_stack_new ();
+	gtk_stack_set_homogeneous (GTK_STACK (priv->device_stack), FALSE);
+
+	label = gtk_label_new (_("Searching for devices..."));
+	gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+	gtk_stack_add_named (GTK_STACK (priv->device_stack), label, FILLER_PAGE);
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_add (GTK_CONTAINER (frame), widget);
-	gtk_container_add (GTK_CONTAINER (priv->device_revealer), frame);
-	gtk_box_pack_start (GTK_BOX (box), priv->device_revealer, FALSE, TRUE, 0);
+	gtk_stack_add_named (GTK_STACK (priv->device_stack), frame, DEVICES_PAGE);
+	gtk_box_pack_start (GTK_BOX (box), priv->device_stack, TRUE, TRUE, 0);
 
 	gtk_widget_show_all (box);
 }
@@ -1618,7 +1628,11 @@ row_inserted_cb (GtkTreeModel *tree_model,
 	g_free (name);
 	g_free (bdaddr);
 
-	gtk_revealer_set_reveal_child (GTK_REVEALER (priv->device_revealer), TRUE);
+	gtk_stack_set_transition_type (GTK_STACK (priv->device_stack),
+				       GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN);
+	gtk_container_child_set (GTK_CONTAINER (WID ("vbox_bluetooth")),
+				 priv->child_box, "expand", FALSE, NULL);
+	gtk_stack_set_visible_child_name (GTK_STACK (priv->device_stack), DEVICES_PAGE);
 }
 
 static void
@@ -1697,6 +1711,7 @@ device_removed_cb (BluetoothClient *client,
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	GList *children, *l;
+	gboolean found = FALSE;
 
 	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
 	for (l = children; l != NULL; l = l->next) {
@@ -1711,11 +1726,22 @@ device_removed_cb (BluetoothClient *client,
 			g_free (name);
 
 			gtk_widget_destroy (GTK_WIDGET (l->data));
-			return;
+			found = TRUE;
+			break;
 		}
 	}
 
-	g_debug ("Didn't find a row to remove for tree path %s", object_path);
+	if (found) {
+		if (gtk_container_get_children (GTK_CONTAINER (priv->device_list)) == NULL) {
+			gtk_stack_set_transition_type (GTK_STACK (priv->device_stack),
+						       GTK_STACK_TRANSITION_TYPE_NONE);
+			gtk_container_child_set (GTK_CONTAINER (WID ("vbox_bluetooth")),
+						 priv->child_box, "expand", TRUE, NULL);
+			gtk_stack_set_visible_child_name (GTK_STACK (priv->device_stack), FILLER_PAGE);
+		}
+	} else {
+		g_debug ("Didn't find a row to remove for tree path %s", object_path);
+	}
 }
 
 static void
