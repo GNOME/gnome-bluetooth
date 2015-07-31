@@ -224,27 +224,27 @@ ask_user_on_close (NotifyNotification *notification,
 
 static void
 ask_user (GDBusMethodInvocation *invocation,
-	  const gchar *filename)
+	  const char            *filename,
+	  const char            *name)
 {
 	NotifyNotification *notification;
-	gchar *notification_text;
+	char *summary, *body;
 
-	/* Translators: %s is the name of the filename being received */
-	notification_text = g_strdup_printf(_("You have been sent a file \"%s\" via Bluetooth"), filename);
-	notification = notify_notification_new (_("You have been sent a file"),
-						notification_text,
-						"bluetooth");
+	summary = g_strdup_printf(_("Bluetooth file transfer from %s"), name);
+	body = g_filename_display_basename (filename);
+
+	notification = notify_notification_new (summary, body, "bluetooth");
 
 	notify_notification_set_urgency (notification, NOTIFY_URGENCY_CRITICAL);
 	notify_notification_set_timeout (notification, NOTIFY_EXPIRES_NEVER);
 	notify_notification_set_hint_string (notification, "desktop-entry",
 					     "gnome-bluetooth-panel");
 
-	notify_notification_add_action (notification, "receive", _("Receive"),
-					(NotifyActionCallback) ask_user_transfer_accepted,
-					invocation, NULL);
-	notify_notification_add_action (notification, "cancel", _("Cancel"),
+	notify_notification_add_action (notification, "cancel", _("Decline"),
 					(NotifyActionCallback) ask_user_transfer_rejected,
+					invocation, NULL);
+	notify_notification_add_action (notification, "receive", _("Accept"),
+					(NotifyActionCallback) ask_user_transfer_accepted,
 					invocation, NULL);
 
 	/* We want to reject the transfer if the user closes the notification
@@ -261,11 +261,14 @@ ask_user (GDBusMethodInvocation *invocation,
 	if (!notify_notification_show (notification, NULL))
 		g_warning ("failed to send notification\n");
 
-	g_free (notification_text);
+	g_free (summary);
+	g_free (body);
 }
 
 static gboolean
-get_paired_for_address (const char *adapter, const char *device)
+get_paired_for_address (const char  *adapter,
+			const char  *device,
+			char       **name)
 {
 	GtkTreeModel *model;
 	GtkTreeIter parent;
@@ -290,14 +293,19 @@ get_paired_for_address (const char *adapter, const char *device)
 			     next;
 			     next = gtk_tree_model_iter_next (model, &child)) {
 				gboolean paired;
+				char *alias;
 
 				gtk_tree_model_get (model, &child,
 					BLUETOOTH_COLUMN_ADDRESS, &dev_addr,
 					BLUETOOTH_COLUMN_PAIRED, &paired,
+					BLUETOOTH_COLUMN_ALIAS, &alias,
 					-1);
 				if (g_strcmp0 (dev_addr, device) == 0) {
 					ret = paired;
+					*name = alias;
 					next = FALSE;
+				} else {
+					g_free (alias);
 				}
 				g_free (dev_addr);
 			}
@@ -318,7 +326,7 @@ on_check_bonded_or_ask_session_acquired (GObject *object,
 	GDBusProxy *session;
 	GError *error = NULL;
 	GVariant *v;
-	char *device, *adapter;
+	char *device, *adapter, *name;
 	gboolean paired;
 
 	session = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -355,17 +363,21 @@ on_check_bonded_or_ask_session_acquired (GObject *object,
 		goto out;
 	}
 
-	paired = get_paired_for_address (adapter, device);
+	paired = get_paired_for_address (adapter, device, &name);
 	g_free (device);
 	g_free (adapter);
 
 	if (paired) {
-		g_debug ("Remote device is paired, auto-accepting the transfer");
+		g_debug ("Remote device '%s' is paired, auto-accepting the transfer", name);
 		g_dbus_method_invocation_return_value (invocation,
-			g_variant_new ("(s)", g_object_get_data (G_OBJECT (invocation), "temp-filename")));
+						       g_variant_new ("(s)", g_object_get_data (G_OBJECT (invocation), "temp-filename")));
+		g_free (name);
 		return;
 	} else {
-		ask_user (invocation, g_object_get_data (G_OBJECT (invocation), "filename"));
+		ask_user (invocation,
+			  g_object_get_data (G_OBJECT (invocation), "filename"),
+			  name);
+		g_free (name);
 		return;
 	}
 
