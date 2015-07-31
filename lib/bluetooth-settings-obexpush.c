@@ -814,7 +814,7 @@ obex_agent_up (void)
 	if (agent == NULL)
 		agent = obex_agent_new ();
 
-	if (!notify_init("gnome-user-share")) {
+	if (!notify_init ("gnome-bluetooth")) {
 		g_warning("Unable to initialize the notification system");
 	}
 }
