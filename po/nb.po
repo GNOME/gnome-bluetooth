@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.17.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-30 11:45+0200\n"
-"PO-Revision-Date: 2015-07-30 11:46+0200\n"
+"POT-Creation-Date: 2015-07-31 11:55+0200\n"
+"PO-Revision-Date: 2015-07-31 11:57+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -22,7 +22,7 @@ msgid "Click to select device…"
 msgstr "Klikk for å velge enhet …"
 
 #: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:447
+#: ../lib/bluetooth-settings-widget.c:1212 ../sendto/main.c:447
 #: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_vbryt"
@@ -48,11 +48,11 @@ msgstr "Søker etter enheter …"
 msgid "Device"
 msgstr "Enhet"
 
-#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "Type"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1460
 msgid "Devices"
 msgstr "Enheter"
 
@@ -60,7 +60,7 @@ msgstr "Enheter"
 msgid "All categories"
 msgstr "Alle kategorier"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "Koblet sammen"
 
@@ -183,6 +183,7 @@ msgstr "Avvis"
 
 #. Cancel button
 #: ../lib/bluetooth-pairing-dialog.c:146 ../lib/bluetooth-pairing-dialog.c:289
+#: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -203,36 +204,75 @@ msgstr "Koblet til"
 msgid "Disconnected"
 msgstr "Koblet fra"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1080
 msgid "Yes"
 msgstr "Ja"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1080
 msgid "No"
 msgstr "Nei"
 
-#. translators: %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1180
 #, c-format
-msgid "Visible as “%s”"
-msgstr "Synlig som «%s»"
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred "
+"files are placed in the <a href=\"%s\">Downloads</a> folder."
+msgstr "Synlig som «%s» og tilgjengelig for filoverføringer via Bluetooth. Overførte filer plasseres i mappen <a href=\"%s\">Nedlastinger</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1207
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Fjern «%s» fra enhetslisten?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1209
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Hvis du fjerner enheten vil du måtte konfigurere den igjen før du bruker den "
 "på nytt."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1213
 msgid "_Remove"
 msgstr "Fje_rn"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, c-format
+msgid "You received \"%s\" via Bluetooth"
+msgstr "Du mottok «%s» via Bluetooth"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+msgid "You received a file"
+msgstr "Du mottok en fil"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "Åpne fil"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+msgid "Reveal File"
+msgstr "Vis vil"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr "Mottak av fil fullført"
+
+#. Translators: %s is the name of the filename being received
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, c-format
+msgid "You have been sent a file \"%s\" via Bluetooth"
+msgstr "Du har mottatt en fil «%s» via Bluetooth"
+
+#: ../lib/bluetooth-settings-obexpush.c:234
+msgid "You have been sent a file"
+msgstr "Du har mottatt en fil"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Receive"
+msgstr "Motta"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -319,35 +359,27 @@ msgstr "Leketøy"
 msgid "Connection"
 msgstr "Tilkobling"
 
-#: ../lib/settings.ui.h:2
-msgid "page 1"
-msgstr "side 1"
-
-#: ../lib/settings.ui.h:3
-msgid "page 2"
-msgstr "side 2"
-
-#: ../lib/settings.ui.h:6
+#: ../lib/settings.ui.h:4
 msgid "Address"
 msgstr "Adresse"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:5
 msgid "_Mouse & Touchpad Settings"
 msgstr "Innstillinger for _mus og pekeplate"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:6
 msgid "_Sound Settings"
 msgstr "Innstillinger for _lyd"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:7
 msgid "_Keyboard Settings"
 msgstr "Innstillinger for _tastatur"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:8
 msgid "Send _Files…"
 msgstr "Send _filer …"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:9
 msgid "_Remove Device"
 msgstr "Fje_rn enhet"
 
@@ -367,7 +399,9 @@ msgstr "En ukjent feil oppsto"
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
-msgstr "Sjekk at den eksterne enheten er slått på og at den godtar tilkobling med Bluetooth"
+msgstr ""
+"Sjekk at den eksterne enheten er slått på og at den godtar tilkobling med "
+"Bluetooth"
 
 #: ../sendto/main.c:363
 #, c-format
