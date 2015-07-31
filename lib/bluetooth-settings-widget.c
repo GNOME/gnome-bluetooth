@@ -75,10 +75,8 @@ struct _BluetoothSettingsWidgetPrivate {
 	 * http://thread.gmane.org/gmane.linux.bluez.kernel/41471 */
 	GHashTable          *devices_type; /* key=bdaddr, value=guint32 */
 
-	/* Visible */
-	GtkWidget           *visible_label;
-
 	/* Sharing section */
+	GtkWidget           *visible_label;
 	gboolean             has_console;
 	GDBusProxy          *session_proxy;
 };
