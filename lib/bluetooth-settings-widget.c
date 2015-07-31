@@ -1490,8 +1490,8 @@ add_device_section (BluetoothSettingsWidget *self)
 	vbox = WID ("vbox_bluetooth");
 
 	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_widget_set_margin_start (box, 50);
-	gtk_widget_set_margin_end (box, 50);
+	gtk_widget_set_margin_start (box, 128);
+	gtk_widget_set_margin_end (box, 128);
 	gtk_widget_set_margin_top (box, 6);
 	gtk_widget_set_margin_bottom (box, 24);
 	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
