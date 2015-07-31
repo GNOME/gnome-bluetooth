@@ -789,23 +789,23 @@ obex_agent_new (void)
 void
 obex_agent_down (void)
 {
-	if (agent == NULL)
-		return;
-
-	g_dbus_connection_call (agent->connection,
-				MANAGER_SERVICE,
-				MANAGER_PATH,
-				MANAGER_IFACE,
-				"UnregisterAgent",
-				g_variant_new ("(o)", AGENT_PATH),
-				NULL,
-				G_DBUS_CALL_FLAGS_NONE,
-				-1,
-				NULL,
-				NULL,
-				NULL);
+	if (agent != NULL) {
+		g_dbus_connection_call (agent->connection,
+					MANAGER_SERVICE,
+					MANAGER_PATH,
+					MANAGER_IFACE,
+					"UnregisterAgent",
+					g_variant_new ("(o)", AGENT_PATH),
+					NULL,
+					G_DBUS_CALL_FLAGS_NONE,
+					-1,
+					NULL,
+					NULL,
+					NULL);
+	}
 
 	g_clear_object (&agent);
+	g_clear_object (&client);
 }
 
 void
