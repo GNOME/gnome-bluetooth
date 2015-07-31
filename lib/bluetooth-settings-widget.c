@@ -1923,6 +1923,8 @@ bluetooth_settings_widget_finalize (GObject *object)
 	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
 	g_clear_object (&priv->session_proxy);
 
+	obex_agent_down ();
+
 	/* See default_adapter_changed () */
 	if (priv->client)
 		g_object_set (G_OBJECT (priv->client), "default-adapter-discoverable", FALSE, NULL);
