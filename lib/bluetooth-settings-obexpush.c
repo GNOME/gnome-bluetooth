@@ -363,6 +363,7 @@ on_check_bonded_or_ask_session_acquired (GObject *object,
 		goto out;
 	}
 
+	name = NULL;
 	paired = get_paired_for_address (adapter, device, &name);
 	g_free (device);
 	g_free (adapter);
@@ -376,7 +377,7 @@ on_check_bonded_or_ask_session_acquired (GObject *object,
 	} else {
 		ask_user (invocation,
 			  g_object_get_data (G_OBJECT (invocation), "filename"),
-			  name);
+			  name ? name : device);
 		g_free (name);
 		return;
 	}
