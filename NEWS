@@ -1,3 +1,22 @@
+ver 3.17.90:
+
+This version of the library adds Obex support to the settings
+widget. When the settings panel will be opened, other devices
+will be able to send files to the computer.
+
+- Remove outdated end-user documentation
+
+Settings:
+- Better empty and disabled state views
+- Handle service authorisation requests for HID devices (mice, joypads)
+- Fix phone icon if extra icons aren't installed
+- Add default PIN for Logitech Ultrathin Touch mouse and
+  Microsoft Sculpt Comfort mice
+
+Send-to:
+- Show better error message when sending a file fails
+- Disallow sending files to iDevices, they don't support Obex
+
 ver 3.16.1:
 - Fix Bluetooth 2.1 keyboards not being pairable
 
