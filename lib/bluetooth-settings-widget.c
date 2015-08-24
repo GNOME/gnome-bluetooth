@@ -1538,7 +1538,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	priv->device_stack = gtk_stack_new ();
 	gtk_stack_set_homogeneous (GTK_STACK (priv->device_stack), FALSE);
 
-	label = gtk_label_new (_("Searching for devices..."));
+	label = gtk_label_new (_("Searching for devices…"));
 	gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), label, FILLER_PAGE);
 
