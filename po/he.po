@@ -3,36 +3,36 @@
 # This file is distributed under the same license as the bluez-gnome package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2011.
-# Yosef Or Boczko <yoseforb@gnome.org>, 2014.
+# Yosef Or Boczko <yoseforb@gnome.org>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-20 11:20+0300\n"
-"PO-Revision-Date: 2014-05-20 11:20+0300\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"POT-Creation-Date: 2015-08-30 10:13+0300\n"
+"PO-Revision-Date: 2015-08-30 10:18+0300\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"Plural-Forms: nplurals=2; plural= (n!=1);\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:73
+#: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "נא ללחוץ לבחירת התקן…"
 
-#: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-chooser-button.c:201
+#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: ../lib/bluetooth-chooser-button.c:204
+#: ../lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "_אישור"
 
@@ -45,19 +45,20 @@ msgstr "לא ידוע"
 msgid "No adapters available"
 msgstr "אין מתאמים זמינים"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "מחפש אחר התקנים…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "התקן"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "סוג"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
 msgid "Devices"
 msgstr "התקנים"
 
@@ -65,7 +66,7 @@ msgstr "התקנים"
 msgid "All categories"
 msgstr "כל הקטגוריות"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "צימוד"
 
@@ -113,22 +114,22 @@ msgstr "התקני קלט (עכברים, מקלדות וכו')"
 msgid "Headphones, headsets and other audio devices"
 msgstr "אוזניות, ערכות דיבור והתקני שמע אחרים"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "אישור ססמת Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "נא לוודא שהססמה הוזנה על '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "אישור"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
@@ -136,38 +137,47 @@ msgid ""
 msgstr ""
 "אישור ססמת Bluetooth עבור '%s'. בדרך כלל ניתן למצוא את זה בהוראות ההתקן."
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "צימוד '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr "נא לוודא שהססמה הבאה תואמת לזו שבתצוגה על '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "בקשת צימוד Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "ההתקן '%s' מעוניין בצימוד עם התקן זה. האם ברצונך לאפשר צימוד?"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:116
+msgid "Confirm Bluetooth Connection"
+msgstr "אישור התחברות Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:117
+#, c-format
+msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgstr "ההתקן '%s' מעוניין בהתחברות עם התקן זה. האם ברצונך לאפשר זאת?"
+
+#: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "נא להזין את הססמה הבאה על '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr "נא להזין את הססמה הבאה על '%s'. לאחר מכן ללחוץ „Return” על המקלדת."
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:131
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -175,26 +185,26 @@ msgstr ""
 "נא להזיז את מוט ההיגוי של ה־iCade שלך בכיוונים הבאים. לאחר מכן יש ללחוץ על "
 "אחד מהכפתורים הלבנים."
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "אפשור"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "דחייה"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
 msgid "Cancel"
 msgstr "ביטול"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:290
+#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "אישור"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
 msgid "Not Set Up"
 msgstr "לא מוגדר"
 
@@ -206,34 +216,70 @@ msgstr "חיבור פעיל"
 msgid "Disconnected"
 msgstr "חיבור כבוי"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "Yes"
 msgstr "כן"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "No"
 msgstr "לא"
 
-#. translators: %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1164
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1222
 #, c-format
-msgid "Visible as “%s”"
-msgstr "מוצג בשם „%s”"
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred "
+"files are placed in the <a href=\"%s\">Downloads</a> folder."
+msgstr ""
+"נראה כ־„%s” וזמין עבור העברת קבצי Bluetooth. קבצים שהועברו ממוקמים בתיקיית "
+"ה<a href=\"%s\">הורדות</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1190
+#: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "להסיר את '%s' מרשימת ההתקנים?"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1251
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "אם התקן זה ימחק, יהיה עליך להגדיר אותו שוב לפני השימוש הבא."
 
-#: ../lib/bluetooth-settings-widget.c:1196
+#: ../lib/bluetooth-settings-widget.c:1255
 msgid "_Remove"
 msgstr "ה_סרה"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, c-format
+msgid "You received \"%s\" via Bluetooth"
+msgstr "קבלת את „%s” דרך Bluetooth"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+msgid "You received a file"
+msgstr "קבלת קובץ"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "פתיחת קבוץ"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+msgid "Reveal File"
+msgstr "חשיפת קובץ"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr "קבלת קובץ הושלמה"
+
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, c-format
+msgid "Bluetooth file transfer from %s"
+msgstr "העברת קבצים דרך Bluetooth מ־%s"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Decline"
+msgstr "סירוב"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -320,35 +366,27 @@ msgstr "משחק"
 msgid "Connection"
 msgstr "חיבור"
 
-#: ../lib/settings.ui.h:2
-msgid "page 1"
-msgstr "עמוד 1"
-
-#: ../lib/settings.ui.h:3
-msgid "page 2"
-msgstr "עמוד 2"
-
-#: ../lib/settings.ui.h:6
+#: ../lib/settings.ui.h:4
 msgid "Address"
 msgstr "כתובת"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:5
 msgid "_Mouse & Touchpad Settings"
 msgstr "הגדרות _עכבר ומשטח המגע"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:6
 msgid "_Sound Settings"
 msgstr "הגדרות _שמע"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:7
 msgid "_Keyboard Settings"
 msgstr "הגדרות מ_קלדת"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:8
 msgid "Send _Files…"
 msgstr "שליחת _קבצים…"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:9
 msgid "_Remove Device"
 msgstr "ה_סרת התקן"
 
@@ -364,120 +402,139 @@ msgstr "שליחת קבצים דרך Bluetooth"
 msgid "An unknown error occurred"
 msgstr "אירעה שגיאה לא ידועה"
 
-#: ../sendto/main.c:339
+#: ../sendto/main.c:130
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr "נא לוודא כי ההתקן המרוחק פועל ושהוא מקבל חיבורי Bluetooth"
+
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "שנייה אחת"
 msgstr[1] "%'d שניות"
 
-#: ../sendto/main.c:344 ../sendto/main.c:357
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "דקה אחת"
 msgstr[1] "%'d דקות"
 
-#: ../sendto/main.c:355
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "שעה אחת"
 msgstr[1] "%'d שעות"
 
-#: ../sendto/main.c:365
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "בערך %'d שעות"
 msgstr[1] "בערך %'d שעות"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
 msgstr "מתחבר…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "העברת קבצים דרך Bluetooth"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "_ניסיון חוזר"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "מ:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "אל:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "%s נשלח"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "נשלח קובץ %d מתוך %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d ק״ב/ש׳"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d ב׳/ש׳"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "העברה אחת הושלמה"
 msgstr[1] "%u העברות הושלמו"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:669
+msgid "_Close"
+msgstr "ס_גירה"
+
+#: ../sendto/main.c:679
 msgid "There was an error"
 msgstr "אירעה שגיאה"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "נא לבחור התקן לשליחה אליו"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "_שליחה"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "בחירת קבצים לשליחה"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "בחירה"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "Remote device to use"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ADDRESS"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "Remote device's name"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "NAME"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[FILE...]"
+
+#~ msgid "Visible as “%s”"
+#~ msgstr "מוצג בשם „%s”"
+
+#~ msgid "page 1"
+#~ msgstr "עמוד 1"
+
+#~ msgid "page 2"
+#~ msgstr "עמוד 2"
 
 #~ msgid "Done"
 #~ msgstr "הושלם"
@@ -574,11 +631,6 @@ msgstr "[FILE...]"
 
 #~ msgid "Connecting..."
 #~ msgstr "בהתחברות..."
-
-#~ msgid ""
-#~ "Make sure that the remote device is switched on and that it accepts "
-#~ "Bluetooth connections"
-#~ msgstr "נא לוודא כי ההתקן המרוחק פועל ושהוא מקבל חיבורי Bluetooth"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "הפעלת ה־Bluetooth"
@@ -761,9 +813,6 @@ msgstr "[FILE...]"
 #~ msgid "Welcome to the Bluetooth new device setup"
 #~ msgstr "ברוך בואך אל אשף הגדרת התקני Bluetooth"
 
-#~ msgid "_Close"
-#~ msgstr "ס_גירה"
-
 #~ msgid "Run in standalone mode"
 #~ msgstr "Run in standalone mode"
 
@@ -916,9 +965,6 @@ msgstr "[FILE...]"
 
 #~ msgid "Bluetooth has been disabled by a switch on your computer."
 #~ msgstr "קישורית ה־Blutooth בוטלה על ידי מפסק במחשב שלך."
-
-#~ msgid "Receive Files"
-#~ msgstr "קבלת קבצים"
 
 #~ msgid "bluetooth"
 #~ msgstr "bluetooth"
