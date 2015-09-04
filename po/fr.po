@@ -7,6 +7,8 @@
 # Laurent Coudeur <laurentc@iol.ie>, 2009.
 # Bruno Brouard <annoa.b@gmail.com>, 2012
 # Alain Lojewski <allomervan@gmail.com>, 2014.
+# Claude Paroz <claude@2xlibre.net>, 2015.
+# Erwan Georget <dremor@dremor.info>, 2015.
 #
 # Sites de référence :
 # http://french.bluetooth.com/Bluetooth/Technology/Basics.htm
@@ -17,23 +19,23 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-08-24 06:15+0000\n"
-"PO-Revision-Date: 2015-08-24 18:34+0200\n"
-"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
+"POT-Creation-Date: 2015-08-25 18:15+0000\n"
+"PO-Revision-Date: 2015-09-01 13:03+0200\n"
+"Last-Translator: Erwan Georget <dremor@dremor.info>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Cliquez pour choisir un périphérique…"
 
-#: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
-#: ../sendto/main.c:738 ../sendto/main.c:794
+#: ../lib/bluetooth-chooser-button.c:201 ../lib/bluetooth-settings-widget.c:1254
+#: ../sendto/main.c:447 ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_nnuler"
 
@@ -51,6 +53,7 @@ msgid "No adapters available"
 msgstr "Aucun adaptateur disponible"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "Recherche de périphériques…"
 
@@ -137,8 +140,8 @@ msgstr "Confirmer"
 #: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
-"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
-"device's manual."
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the device's "
+"manual."
 msgstr ""
 "Confirmer le numéro d'identification personnel (PIN) de « %s ». Il est  "
 "normalement indiqué dans le manuel du périphérique."
@@ -150,11 +153,10 @@ msgstr "Liaison de « %s »"
 
 #: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
-msgid ""
-"Please confirm that the following PIN matches the one displayed on '%s'."
+msgid "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr ""
-"Veuillez confirmer que le numéro d'identification personnel suivant "
-"correspond à celui affiché sur « %s »."
+"Veuillez confirmer que le numéro d'identification personnel suivant correspond "
+"à celui affiché sur « %s »."
 
 #: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
@@ -179,8 +181,7 @@ msgstr ""
 #: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
-msgstr ""
-"Veuillez saisir le numéro d'identification personnel suivant sur « %s »."
+msgstr "Veuillez saisir le numéro d'identification personnel suivant sur « %s »."
 
 #: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
@@ -192,8 +193,8 @@ msgstr ""
 
 #: ../lib/bluetooth-pairing-dialog.c:131
 msgid ""
-"Please move the joystick of your iCade in the following directions. Then "
-"press any of the white buttons."
+"Please move the joystick of your iCade in the following directions. Then press "
+"any of the white buttons."
 msgstr ""
 "Déplacez le joystick de votre iCade dans les directions suivantes. Appuyez "
 "ensuite sur n'importe lequel des boutons blancs."
@@ -243,9 +244,12 @@ msgstr "Non"
 #: ../lib/bluetooth-settings-widget.c:1222
 #, c-format
 msgid ""
-"Visible as “%s” and available for Bluetooth file transfers. Transferred "
-"files are placed in the <a href=\"%s\">Downloads</a> folder."
+"Visible as “%s” and available for Bluetooth file transfers. Transferred files "
+"are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
+"Visible en tant que « %s » et disponible pour transfert de fichier Bluetooth. "
+"Les fichiers transférés sont placés dans le dossier <a href=\"%s"
+"\">Téléchargements</a>."
 
 #: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
@@ -256,16 +260,12 @@ msgstr "Supprimer « %s » de la liste des périphériques ?"
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
-"Si vous supprimez ce périphérique, vous devrez le reconfigurer à nouveau "
-"avant utilisation."
+"Si vous supprimez ce périphérique, vous devrez le reconfigurer à nouveau avant "
+"utilisation."
 
 #: ../lib/bluetooth-settings-widget.c:1255
 msgid "_Remove"
 msgstr "_Supprimer"
-
-#: ../lib/bluetooth-settings-widget.c:1541
-msgid "Searching for devices..."
-msgstr "Recherche de périphériques…"
 
 #. Translators: %s is the name of the filename received
 #: ../lib/bluetooth-settings-obexpush.c:145
@@ -283,11 +283,11 @@ msgstr "Ouvrir le fichier"
 
 #: ../lib/bluetooth-settings-obexpush.c:162
 msgid "Reveal File"
-msgstr ""
+msgstr "Révéler le fichier"
 
 #: ../lib/bluetooth-settings-obexpush.c:179
 msgid "File reception complete"
-msgstr ""
+msgstr "Réception du fichier terminée"
 
 #: ../lib/bluetooth-settings-obexpush.c:233
 #, c-format
@@ -296,7 +296,7 @@ msgstr "Transfert de fichier par Bluetooth de %s"
 
 #: ../lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
-msgstr ""
+msgstr "Refuser"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -421,8 +421,8 @@ msgstr "Une erreur inconnue est survenue"
 
 #: ../sendto/main.c:130
 msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
+"Make sure that the remote device is switched on and that it accepts Bluetooth "
+"connections"
 msgstr ""
 "Vérifiez que le périphérique est allumé et qu'il accepte les connexions "
 "Bluetooth"
@@ -548,6 +548,9 @@ msgstr "NOM"
 msgid "[FILE...]"
 msgstr "[FICHIER...]"
 
+#~ msgid "Searching for devices..."
+#~ msgstr "Recherche de périphériques…"
+
 #~ msgid "Visible as “%s”"
 #~ msgstr "Visible en tant que « %s »"
 
@@ -584,8 +587,7 @@ msgstr "[FICHIER...]"
 #~ msgstr "Connexion en cours avec « %s »..."
 
 #~ msgid "Please wait while finishing setup on device '%s'..."
-#~ msgstr ""
-#~ "Veuillez patienter pendant la configuration du périphérique « %s »..."
+#~ msgstr "Veuillez patienter pendant la configuration du périphérique « %s »..."
 
 #~ msgid "Successfully set up new device '%s'"
 #~ msgstr "Configuration du nouveau périphérique « %s » réussie"
@@ -607,8 +609,8 @@ msgstr "[FICHIER...]"
 
 #~ msgid "Select the additional services you want to use with your device:"
 #~ msgstr ""
-#~ "Sélectionnez les services supplémentaires que vous souhaitez utiliser "
-#~ "avec votre périphérique :"
+#~ "Sélectionnez les services supplémentaires que vous souhaitez utiliser avec "
+#~ "votre périphérique :"
 
 #~ msgid "Setup Summary"
 #~ msgstr "Résumé de la configuration"
