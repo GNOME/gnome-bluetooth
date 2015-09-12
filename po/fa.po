@@ -1,7 +1,7 @@
 # Persian translation for gnome-bluetooth.
 # Copyright (C) 2011 Iranian Free Software Users Group (IFSUG.org)translation team.
 # This file is distributed under the same license as the gnome-bluetooth package.
-# Arash Mousavi <mousavi.arash@gmail.com>, 2011, 2012, 2014.
+# Arash Mousavi <mousavi.arash@gmail.com>, 2011, 2012, 2014, 2015.
 # Danial Behzadi <dani.behzi@ubuntu.com>, 2014.
 #
 msgid ""
@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-18 15:57+0000\n"
-"PO-Revision-Date: 2014-10-10 17:39+0330\n"
+"POT-Creation-Date: 2015-09-12 06:19+0000\n"
+"PO-Revision-Date: 2015-09-12 22:57+0430\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -19,19 +19,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.8.4\n"
 
-#: ../lib/bluetooth-chooser-button.c:73
+#: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "برای انتخاب دستگاه کلیک کنید…"
 
-#: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
-#: ../sendto/main.c:699 ../sendto/main.c:755
+#: ../lib/bluetooth-chooser-button.c:201 ../lib/bluetooth-settings-widget.c:1254
+#: ../sendto/main.c:447 ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_لغو"
 
-#: ../lib/bluetooth-chooser-button.c:204
+#: ../lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "_تأیید"
 
@@ -44,19 +43,20 @@ msgstr "ناشناس"
 msgid "No adapters available"
 msgstr "هیچ آداپتوری موجود نیست"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "درحال جست‌وجو برای دستگاه‌ها…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "دستگاه"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "نوع"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
 msgid "Devices"
 msgstr "دستگاه‌ها"
 
@@ -64,7 +64,7 @@ msgstr "دستگاه‌ها"
 msgid "All categories"
 msgstr "همه‌ی دسته‌ها"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "جفت شده"
 
@@ -112,89 +112,95 @@ msgstr "دستگاه‌های ورودی (موشی‌ها، صفحه‌کلید�
 msgid "Headphones, headsets and other audio devices"
 msgstr "هدفون‌ها، هدست‌ها و دستگاه‌های صوتی دیگر"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "تأیید پین بلوتوث"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "لطفا پینی که روی «%s» وارد شده را تأیید کنید."
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "تأیید"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
-"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
-"device's manual."
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the device's "
+"manual."
 msgstr ""
-"پین بلوتوث برای «%s» را تأیید کنید. این پین معمولاً در راهنمای دستگاه درج "
-"می‌شود."
+"پین بلوتوث برای «%s» را تأیید کنید. این پین معمولاً در راهنمای دستگاه درج می‌شود."
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "درحال جفت شدن با «%s»"
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
-msgid ""
-"Please confirm that the following PIN matches the one displayed on '%s'."
+msgid "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr "لطفاً تأیید کنید که این پین با پین نمایش داد شده روی «%s» مطابق است."
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "درخواست جفت کردن بلوتوث فرستاده شد"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "‫«%s» می‌خواهد با این دستگاه جفت شود. اجازه می‌دهید؟"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:116
+msgid "Confirm Bluetooth Connection"
+msgstr "تأیید اتصال بلوتوث"
+
+#: ../lib/bluetooth-pairing-dialog.c:117
+#, c-format
+msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgstr "دستگاه ‫«%s» می‌خواهد با این دستگاه جفت شود. آیا می‌خواهید اجازه دهید؟"
+
+#: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "لطفا این پین را روی «%s» وارد کنید."
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr "لطفا این پین را روی «%s» وارد کنید و Enter را روی صفحه‌کلید بزنید."
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:131
 msgid ""
-"Please move the joystick of your iCade in the following directions. Then "
-"press any of the white buttons."
+"Please move the joystick of your iCade in the following directions. Then press "
+"any of the white buttons."
 msgstr ""
-"لطفا دسته‌ی iCade خود را در این مسیرها حرکت داده، سپس یکی از دکمه‌های سفید را "
-"فشار دهید."
+"لطفا دسته‌ی iCade خود را در این مسیرها حرکت داده، سپس یکی از دکمه‌های سفید را فشار "
+"دهید."
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "اجازه"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "رد"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
 msgid "Cancel"
 msgstr "لغو"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:290
+#: ../lib/bluetooth-pairing-dialog.c:277 ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "قبول"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
 msgid "Not Set Up"
 msgstr "راه‌اندازی نشده"
 
@@ -206,36 +212,70 @@ msgstr "وصل شده"
 msgid "Disconnected"
 msgstr "قطع شده"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "Yes"
 msgstr "بله"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "No"
 msgstr "خیر"
 
-#. translators: %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1164
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1222
 #, c-format
-msgid "Visible as “%s”"
-msgstr "قابل مشاهده به عنوان «%s»"
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred files "
+"are placed in the <a href=\"%s\">Downloads</a> folder."
+msgstr ""
+"قابل روئیت با عنوان «%s» و آماده انتقال بلوتوثی پرونده‌ها. پرونده‌های منتقل شده در "
+"پوشه <a href=\"%s\">بارگیری‌ها</a> قرار می‌گیرند."
 
-#: ../lib/bluetooth-settings-widget.c:1190
+#: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "برداشتن «%s» از فهرست دستگاه‌ها؟"
 
-#: ../lib/bluetooth-settings-widget.c:1192
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
+#: ../lib/bluetooth-settings-widget.c:1251
+msgid "If you remove the device, you will have to set it up again before next use."
 msgstr ""
-"اگر دستگاه را بردارید، پیش از استفاده‌ی دوباره باید مجدّدا آن را راه‌اندازی "
-"کنید."
+"اگر دستگاه را بردارید، پیش از استفاده‌ی دوباره باید مجدّدا آن را راه‌اندازی کنید."
 
-#: ../lib/bluetooth-settings-widget.c:1196
+#: ../lib/bluetooth-settings-widget.c:1255
 msgid "_Remove"
 msgstr "_برداشتن"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, c-format
+msgid "You received \"%s\" via Bluetooth"
+msgstr "شما «%s» را از طریق بلوتوث دریافت کردید"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+msgid "You received a file"
+msgstr "شما یک پرونده دریافت کردید"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "بازکردن پرونده"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+msgid "Reveal File"
+msgstr "بازکردن پرونده"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr "دریافت پرونده کامل شد"
+
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, c-format
+msgid "Bluetooth file transfer from %s"
+msgstr "انتقال پرونده بوسیله بلوتوث از %s"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Decline"
+msgstr "نپذیرفتن"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -322,35 +362,27 @@ msgstr "اسباب‌بازی"
 msgid "Connection"
 msgstr "اتّصال"
 
-#: ../lib/settings.ui.h:2
-msgid "page 1"
-msgstr "صفحه‌ی ۱"
-
-#: ../lib/settings.ui.h:3
-msgid "page 2"
-msgstr "صفحه‌ی ۲"
-
-#: ../lib/settings.ui.h:6
+#: ../lib/settings.ui.h:4
 msgid "Address"
 msgstr "نشانی"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:5
 msgid "_Mouse & Touchpad Settings"
 msgstr "تنظیمات _موشی و صفحه‌ی لمسی"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:6
 msgid "_Sound Settings"
 msgstr "تنظیمات _صدا"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:7
 msgid "_Keyboard Settings"
 msgstr "تنظیمات ص_فحه‌کلید"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:8
 msgid "Send _Files…"
 msgstr "ا_رسال پرونده‌ها…"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:9
 msgid "_Remove Device"
 msgstr "_برداشتن دستگاه"
 
@@ -366,124 +398,139 @@ msgstr "ارسال پرونده‌ها از طریق بلوتوث"
 msgid "An unknown error occurred"
 msgstr "یک خطای ناشناس رخ داد"
 
-#: ../sendto/main.c:339
+#: ../sendto/main.c:130
+msgid ""
+"Make sure that the remote device is switched on and that it accepts Bluetooth "
+"connections"
+msgstr "اطمینان حاصل کنید که دستگاه دوردست روشن است و اتصال‌های بلوتوث را می‌پذیرد"
+
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%I'd ثانیه"
 msgstr[1] "%I'd ثانیه"
 
-#: ../sendto/main.c:344 ../sendto/main.c:357
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%I'd دقیقه"
 msgstr[1] "%I'd دقیقه"
 
-#: ../sendto/main.c:355
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%I'd ساعت"
 msgstr[1] "%I'd ساعت"
 
-#: ../sendto/main.c:365
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "حدودا %I'd ساعت"
 msgstr[1] "حدودا %I'd ساعت"
 
-#: ../sendto/main.c:378 ../sendto/main.c:476
+#: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
 msgstr "در حال اتّصال…"
 
-#: ../sendto/main.c:420
+#: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "انتقال پرونده بلوتوث"
 
-#: ../sendto/main.c:424
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "_تلاش مجدد"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "از:"
 
-#: ../sendto/main.c:460
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "به:"
 
-#: ../sendto/main.c:555
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "درحال ارسال %s"
 
-#: ../sendto/main.c:562 ../sendto/main.c:611
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "ارسال %Id پرونده از %Id"
 
-#: ../sendto/main.c:607
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%Id کیلوبایت/ثانیه"
 
-#: ../sendto/main.c:609
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%Id بایت/ثانیه"
 
-#: ../sendto/main.c:640
+#: ../sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "انتقال %Iu مورد کامل شد"
 msgstr[1] "انتقال‌های %Iu مورد کامل شدند"
 
-#: ../sendto/main.c:647
+#: ../sendto/main.c:669
 msgid "_Close"
 msgstr "_بستن"
 
-#: ../sendto/main.c:657
+#: ../sendto/main.c:679
 msgid "There was an error"
 msgstr "خطایی رخ داد"
 
-#: ../sendto/main.c:695
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "برای ارسال دستگاهی را انتخاب کنید"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "ا_رسال"
 
-#: ../sendto/main.c:750
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "پرونده‌ها را برای ارسال انتخاب کنید"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "انتخاب"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "دستگاه دوردست برای استفاده"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ADDRESS"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "اسامی دستگاه‌های دوردست"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "NAME"
 
-#: ../sendto/main.c:807
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[FILE…]"
+
+#~ msgid "Visible as “%s”"
+#~ msgstr "قابل مشاهده به عنوان «%s»"
+
+#~ msgid "page 1"
+#~ msgstr "صفحه‌ی ۱"
+
+#~ msgid "page 2"
+#~ msgstr "صفحه‌ی ۲"
 
 #~ msgid "Done"
 #~ msgstr "انجام شد"
@@ -533,8 +580,8 @@ msgstr "[FILE…]"
 
 #~ msgid "Select the additional services you want to use with your device:"
 #~ msgstr ""
-#~ "سرویس‌های اضافی که میخواهید همراه با دستگاهتان از آنها استفاده کنید را "
-#~ "انتخاب کنید:"
+#~ "سرویس‌های اضافی که میخواهید همراه با دستگاهتان از آنها استفاده کنید را انتخاب "
+#~ "کنید:"
 
 #~ msgid "Setup Summary"
 #~ msgstr "برپاسازی خلاصه"
@@ -580,12 +627,6 @@ msgstr "[FILE…]"
 
 #~ msgid "Setup Bluetooth devices"
 #~ msgstr "دستگاه بلوتوث را برپاسازی کنید"
-
-#~ msgid ""
-#~ "Make sure that the remote device is switched on and that it accepts "
-#~ "Bluetooth connections"
-#~ msgstr ""
-#~ "اطمینان حاصل کنید که دستگاه دوردست روشن است و اتصال‌های بلوتوث را می‌پذیرد"
 
 #~ msgid "Bluetooth: Off"
 #~ msgstr "بلوتوث: خاموش"
