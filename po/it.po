@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N"
 "+L10N&component=general\n"
-"POT-Creation-Date: 2015-06-10 18:12+0000\n"
-"PO-Revision-Date: 2015-06-10 21:27+0100\n"
+"POT-Creation-Date: 2015-09-01 06:15+0000\n"
+"PO-Revision-Date: 2015-09-01 10:55+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -30,14 +30,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Fare clic per selezionare il dispositivo…"
 
 # FIXME! usare stock
-#: ../lib/bluetooth-chooser-button.c:201 ../lib/bluetooth-settings-widget.c:1197 ../sendto/main.c:447
+#: ../lib/bluetooth-chooser-button.c:201 ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
 #: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_nnulla"
@@ -55,7 +55,7 @@ msgid "No adapters available"
 msgstr "Nessun adattatore disponibile"
 
 # [NdT] si riferisci ai dispositivi Bluetooth
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806 ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "Ricerca dispositivi…"
 
@@ -63,11 +63,11 @@ msgstr "Ricerca dispositivi…"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "Tipo"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1445
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
 msgid "Devices"
 msgstr "Dispositivi"
 
@@ -75,7 +75,7 @@ msgstr "Dispositivi"
 msgid "All categories"
 msgstr "Tutte le categorie"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "Associato"
 
@@ -137,7 +137,7 @@ msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Confermare il PIN inserito su «%s»."
 
 #: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
-#: ../lib/bluetooth-pairing-dialog.c:142
+#: ../lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -166,36 +166,45 @@ msgstr "Richiesta associazione Bluetooth"
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "«%s» ha richiesto di essere associato con questo dispositivo. Consentire l'associazione?"
 
-#: ../lib/bluetooth-pairing-dialog.c:119
+#: ../lib/bluetooth-pairing-dialog.c:116
+msgid "Confirm Bluetooth Connection"
+msgstr "Conferma connessione Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:117
+#, c-format
+msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgstr "«%s» ha richiesto collegarsi con questo dispositivo. Consentire il collegamento?"
+
+#: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "Inserire il seguente PIN su «%s»."
 
-#: ../lib/bluetooth-pairing-dialog.c:122
+#: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr "Inserire il seguente PIN su «%s» e premere «Invio» sulla tastiera."
 
-#: ../lib/bluetooth-pairing-dialog.c:125
+#: ../lib/bluetooth-pairing-dialog.c:131
 msgid "Please move the joystick of your iCade in the following directions. Then press any of the white buttons."
 msgstr "Muovere il joystick del proprio iCade nelle seguenti direzioni, quindi premere uno dei pulsanti bianchi."
 
-#: ../lib/bluetooth-pairing-dialog.c:132
+#: ../lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "Consenti"
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "Declina"
 
 # FIXME! usare stock
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:146 ../lib/bluetooth-pairing-dialog.c:289
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
 msgid "Cancel"
 msgstr "Annulla"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:270
+#: ../lib/bluetooth-pairing-dialog.c:277 ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Accetta"
 
@@ -211,33 +220,69 @@ msgstr "Collegato"
 msgid "Disconnected"
 msgstr "Scollegato"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "Yes"
 msgstr "Sì"
 
-#: ../lib/bluetooth-settings-widget.c:1071
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "No"
 msgstr "No"
 
-#. translators: %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1166
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1222
 #, c-format
-msgid "Visible as “%s”"
-msgstr "Visibile come «%s»"
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred files are placed in the <a href=\"%s"
+"\">Downloads</a> folder."
+msgstr ""
+"Visibile come «%s» e disponibile per trasferimenti file via Bluetooth. I file trasferiti vengono salvati nella "
+"cartella <a href=\"%s\">Scaricati</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Rimuovere «%s» dall'elenco dei dispositivi?"
 
-#: ../lib/bluetooth-settings-widget.c:1194
+#: ../lib/bluetooth-settings-widget.c:1251
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "Rimuovendo il dispositivo è necessario configurarlo nuovamente per poterlo riusare."
 
-#: ../lib/bluetooth-settings-widget.c:1198
+#: ../lib/bluetooth-settings-widget.c:1255
 msgid "_Remove"
 msgstr "_Rimuovi"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, c-format
+msgid "You received \"%s\" via Bluetooth"
+msgstr "Ricevuto «%s» via Bluetooth"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+msgid "You received a file"
+msgstr "Ricevuto un file"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "Apri file"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+msgid "Reveal File"
+msgstr "Mostra file"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr "Ricezione file completata"
+
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, c-format
+msgid "Bluetooth file transfer from %s"
+msgstr "Trasferimento file Bluetooth da %s"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Decline"
+msgstr "Rifiuta"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -327,35 +372,27 @@ msgstr "Giocattolo"
 msgid "Connection"
 msgstr "Connessione"
 
-#: ../lib/settings.ui.h:2
-msgid "page 1"
-msgstr "pagina 1"
-
-#: ../lib/settings.ui.h:3
-msgid "page 2"
-msgstr "pagina 2"
-
-#: ../lib/settings.ui.h:6
+#: ../lib/settings.ui.h:4
 msgid "Address"
 msgstr "Indirizzo"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:5
 msgid "_Mouse & Touchpad Settings"
 msgstr "Impostazioni _mouse e touchpad"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:6
 msgid "_Sound Settings"
 msgstr "Impostazioni _audio"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:7
 msgid "_Keyboard Settings"
 msgstr "Impostazioni _tastiera"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:8
 msgid "Send _Files…"
 msgstr "Invia _file…"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:9
 msgid "_Remove Device"
 msgstr "_Rimuovi dispositivo"
 
@@ -493,6 +530,15 @@ msgstr "NOME"
 #: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[FILE...]"
+
+#~ msgid "Visible as “%s”"
+#~ msgstr "Visibile come «%s»"
+
+#~ msgid "page 1"
+#~ msgstr "pagina 1"
+
+#~ msgid "page 2"
+#~ msgstr "pagina 2"
 
 #~ msgid "Done"
 #~ msgstr "Fatto"
