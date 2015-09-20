@@ -4,6 +4,7 @@
 # Mads Bille Lundby <lundbymads@gmail.com>, 2009.
 # Kenneth Nielsen <k.nielsen81@gmail.com>, 2009-2014.
 # Kris Thomsen <lakristho@gmail.com>, 2011.
+# scootergrisen, 2015.
 #
 # paired -> parvis
 # to pair -> at danne par (Man kan måske synes at denne formulering er en lille smule mærkelig på grund af sammenhængen man ellers kan tale om at danne par. Men formuleringer som denne bruges også i f.eks. Apples danske IPhone dokumentation http://support.apple.com/kb/HT1838?viewlocale=da_DK så det bør være ok)
@@ -12,32 +13,34 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 18:28+0200\n"
-"PO-Revision-Date: 2014-09-16 21:19+0200\n"
-"Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-09-10 06:19+0000\n"
+"PO-Revision-Date: 2015-09-20 16:44+0200\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2009-09-12 15:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"X-Language: da_DK\n"
+"X-Source-Language: C\n"
 
-#: ../lib/bluetooth-chooser-button.c:73
+#: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Klik for at vælge enhed…"
 
-#: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
-#: ../sendto/main.c:699 ../sendto/main.c:755
+#: ../lib/bluetooth-chooser-button.c:201
+#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Annullér"
 
-#: ../lib/bluetooth-chooser-button.c:204
+#: ../lib/bluetooth-chooser-button.c:202
 msgid "_OK"
-msgstr "_O.k."
+msgstr "_OK"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
 #: ../lib/bluetooth-utils.c:101
@@ -48,19 +51,20 @@ msgstr "Ukendt"
 msgid "No adapters available"
 msgstr "Ingen tilgængelige adaptere"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "Søger efter enheder…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "Enhed"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "Type"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
 msgid "Devices"
 msgstr "Enheder"
 
@@ -68,7 +72,7 @@ msgstr "Enheder"
 msgid "All categories"
 msgstr "Alle kategorier"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "Parvis"
 
@@ -116,22 +120,22 @@ msgstr "Inputenheder (mus, tastaturer, osv.)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Hovedtelefoner, headset og andre lydenheder"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "Bekræft PIN-kode for Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Bekræft venligst den PIN-kode som blev indtastet på \"%s\"."
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "Bekræft"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
@@ -140,35 +144,47 @@ msgstr ""
 "Bekræft Bluetooth-PIN-koden for \"%s\". Den kan som regel findes i enhedens "
 "manual."
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "Danner par med \"%s\""
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr ""
-"Kontrollér venligst at følgende PIN-kode matcher den på enheden \"%s\"."
+"Bekræft venligst at følgende PIN-kode matcher den på enheden \"%s\"."
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Forespørgsel om Bluetooth-pardannelse"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
-"Enheden \"%s\" ønsker at danne par med denne enhed. Ønsker du at tillade "
+"\"%s\" vil danne par med denne enhed. Vil du tillade "
 "pardannelse?"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:116
+#| msgid "Confirm Bluetooth PIN"
+msgid "Confirm Bluetooth Connection"
+msgstr "Bekræft Bluetooth-forbindelse"
+
+#: ../lib/bluetooth-pairing-dialog.c:117
+#, c-format
+#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgstr ""
+"\"%s\" vil oprette forbindelse med denne enhed. Vil du give tilladelse?"
+
+#: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "Indtast venligst følgende PIN-kode på \"%s\"."
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
@@ -176,7 +192,7 @@ msgstr ""
 "Indtast venligst følgende PIN-kode på \"%s\". Tryk herefter “Enter” på "
 "tastaturet."
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:131
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -184,26 +200,26 @@ msgstr ""
 "Flyt venligst joysticket på din iCade i følgende retninger. Tryk herefter på "
 "en vilkårlig hvid knap."
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "Tillad"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "Afvis"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
 msgid "Cancel"
 msgstr "Annullér"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:290
+#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Acceptér"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
 msgid "Not Set Up"
 msgstr "Ikke indstillet"
 
@@ -215,36 +231,76 @@ msgstr "Opkoblet"
 msgid "Disconnected"
 msgstr "Afkoblet"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "Yes"
 msgstr "Ja"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "No"
 msgstr "Nej"
 
-#. translators: %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1164
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1222
 #, c-format
-msgid "Visible as “%s”"
-msgstr "Synlig som “%s”"
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred "
+"files are placed in the <a href=\"%s\">Downloads</a> folder."
+msgstr ""
+"Synlig som \"%s\" og tilgængelig for Bluetooth-filoverførsel. Overførte "
+"filer placeres i mappen <a href=\"%s\">Hentninger</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1190
+#: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Fjern \"%s\" fra listen over enheder?"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1251
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Hvis du fjerner enheden, skal du sætte den op igen, før den kan bruges næste "
 "gang."
 
-#: ../lib/bluetooth-settings-widget.c:1196
+#: ../lib/bluetooth-settings-widget.c:1255
 msgid "_Remove"
 msgstr "_Fjern"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, c-format
+#| msgid "Send files via Bluetooth"
+msgid "You received \"%s\" via Bluetooth"
+msgstr "Du modtog \"%s\" via Bluetooth"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+#| msgid "Receive Files"
+msgid "You received a file"
+msgstr "Du modtog en fil"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "Åbn fil"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+#| msgid "Receive Files"
+msgid "Reveal File"
+msgstr "Vis fil"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr "Filmodtagelse fuldført"
+
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, c-format
+#| msgid "Bluetooth File Transfer"
+msgid "Bluetooth file transfer from %s"
+msgstr "Bluetooth-filoverførsel fra %s"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Decline"
+msgstr "Afvis"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -331,35 +387,27 @@ msgstr "Legetøj"
 msgid "Connection"
 msgstr "Forbindelse"
 
-#: ../lib/settings.ui.h:2
-msgid "page 1"
-msgstr "side 1"
-
-#: ../lib/settings.ui.h:3
-msgid "page 2"
-msgstr "side 2"
-
-#: ../lib/settings.ui.h:6
+#: ../lib/settings.ui.h:4
 msgid "Address"
 msgstr "Adresse"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:5
 msgid "_Mouse & Touchpad Settings"
 msgstr "Indstillinger for _mus & pegeplade"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:6
 msgid "_Sound Settings"
 msgstr "Indstillinger for _lyd"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:7
 msgid "_Keyboard Settings"
 msgstr "Indstillinger for _tastatur"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:8
 msgid "Send _Files…"
 msgstr "Send _filer…"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:9
 msgid "_Remove Device"
 msgstr "_Fjern enhed"
 
@@ -375,124 +423,141 @@ msgstr "Send filer via Bluetooth"
 msgid "An unknown error occurred"
 msgstr "Der opstod en ukendt fejl"
 
-#: ../sendto/main.c:339
+#: ../sendto/main.c:130
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr ""
+"Sørg for at fjernenhed er tændt, og at den accepterer "
+"Bluetooth-forbindelser"
+
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekund"
 msgstr[1] "%'d sekunder"
 
-#: ../sendto/main.c:344 ../sendto/main.c:357
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minut"
 msgstr[1] "%'d minutter"
 
-#: ../sendto/main.c:355
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d time"
 msgstr[1] "%'d timer"
 
-#: ../sendto/main.c:365
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ca. %'d time"
 msgstr[1] "ca. %'d timer"
 
-#: ../sendto/main.c:378 ../sendto/main.c:476
+#: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
 msgstr "Danner forbindelse…"
 
-#: ../sendto/main.c:420
+#: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth-filoverførsel"
 
-#: ../sendto/main.c:424
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "_Prøv igen"
 
-#: ../sendto/main.c:446
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "Fra:"
 
-#: ../sendto/main.c:460
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "Til:"
 
-#: ../sendto/main.c:555
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "Sender %s"
 
-#: ../sendto/main.c:562 ../sendto/main.c:611
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sender fil %d ud af %d"
 
-#: ../sendto/main.c:607
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:609
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:640
+#: ../sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
-msgstr[0] "%u overførsel færdiggjort"
-msgstr[1] "%u overførsler færdiggjort"
+msgstr[0] "%u overførsel fuldført"
+msgstr[1] "%u overførsler fuldført"
 
-#: ../sendto/main.c:647
+#: ../sendto/main.c:669
 msgid "_Close"
 msgstr "_Luk"
 
-#: ../sendto/main.c:657
+#: ../sendto/main.c:679
 msgid "There was an error"
 msgstr "Der opstod en fejl"
 
-#: ../sendto/main.c:695
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "Vælg enhed der skal sendes til"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "_Send"
 
-#: ../sendto/main.c:750
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "Vælg filer til afsendelse"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "Vælg"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "Fjernenhed som skal anvendes"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "Fjernenheds navn"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "NAVN"
 
-#: ../sendto/main.c:807
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[FIL...]"
+
+#~ msgid "Visible as “%s”"
+#~ msgstr "Synlig som “%s”"
+
+#~ msgid "page 1"
+#~ msgstr "side 1"
+
+#~ msgid "page 2"
+#~ msgstr "side 2"
 
 #~ msgid "Done"
 #~ msgstr "Færdig"
@@ -589,13 +654,6 @@ msgstr "[FIL...]"
 
 #~ msgid "Connecting..."
 #~ msgstr "Kobler på..."
-
-#~ msgid ""
-#~ "Make sure that the remote device is switched on and that it accepts "
-#~ "Bluetooth connections"
-#~ msgstr ""
-#~ "Kontrollér at fjernenhed er tændt, og at den accepterer Bluetooth-"
-#~ "forbindelser"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "Aktivér Bluetooth"
@@ -787,8 +845,8 @@ msgstr "[FIL...]"
 #~ "The Bluetooth new device setup will walk you through the process of "
 #~ "configuring Bluetooth enabled devices for use with this computer."
 #~ msgstr ""
-#~ "Enhedsguiden vil hjælpe dig gennem processen med at konfigurere Bluetooth-"
-#~ "enheder til anvendelse med denne computer."
+#~ "Enhedsguiden vil hjælpe dig gennem processen med at konfigurere "
+#~ "Bluetooth-enheder til anvendelse med denne computer."
 
 #~ msgid ""
 #~ "The device will need to be within 10 meters of your computer, and be "
@@ -926,9 +984,6 @@ msgstr "[FIL...]"
 #~ msgid "_Show Bluetooth icon"
 #~ msgstr "_Vis Bluetooth-ikon"
 
-#~ msgid "Receive Files"
-#~ msgstr "Modtag filer"
-
 #~ msgid "Your computer does not have any Bluetooth adapters plugged in."
 #~ msgstr "Der er ikke sluttet nogen Bluetooth-adapter til din computer."
 
@@ -1060,8 +1115,8 @@ msgstr "[FIL...]"
 #~ "Display options for the notification icon. Valid options are \"never\", "
 #~ "\"present\" and \"always\"."
 #~ msgstr ""
-#~ "Vis indstillinger for statusfeltet. Gyldige indstillinger er \"aldrig\","
-#~ "\"til stede\" eller \"altid\"."
+#~ "Vis indstillinger for statusfeltet. Gyldige indstillinger er "
+#~ "\"aldrig\",\"til stede\" eller \"altid\"."
 
 #~ msgid "If Bluetooth file sharing is enabled"
 #~ msgstr "Hvorvidt Bluetooth-fildeling er aktiveret"
@@ -1169,9 +1224,6 @@ msgstr "[FIL...]"
 
 #~ msgid "Extensions"
 #~ msgstr "Filendelser"
-
-#~ msgid "Open File"
-#~ msgstr "Åbn fil"
 
 #~ msgid "Local connection"
 #~ msgstr "Lokal forbindelse"
