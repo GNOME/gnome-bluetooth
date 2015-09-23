@@ -1,17 +1,16 @@
 # Arabic translation for bluez-gnome
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the bluez-gnome package.
-# Khaled Hosny <khaledhosny@eglug.org>, 2009, 2010, 2011.
+# Khaled Hosny <khaledhosny@eglug.org>, 2009, 2010, 2011, 2015.
 # Abderrahim Kitouni <a.kitouni@gmail.com>, 2012.
 # Ibrahim Saed <ibraheem5000@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-28 00:02+0000\n"
-"PO-Revision-Date: 2012-09-28 21:19+0200\n"
-"Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-24 00:02+0200\n"
+"PO-Revision-Date: 2015-09-24 00:05+0200\n"
+"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -23,12 +22,22 @@ msgstr ""
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:75
-msgid "Click to select device..."
-msgstr "انقر لاختيار جهاز..."
+#: ../lib/bluetooth-chooser-button.c:71
+msgid "Click to select device…"
+msgstr "انقر لاختيار جهاز…"
+
+#: ../lib/bluetooth-chooser-button.c:201
+#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../sendto/main.c:738 ../sendto/main.c:794
+msgid "_Cancel"
+msgstr "أ_لغِ"
+
+#: ../lib/bluetooth-chooser-button.c:202
+msgid "_OK"
+msgstr "_نعم"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:101
 msgid "Unknown"
 msgstr "مجهول"
 
@@ -36,19 +45,20 @@ msgstr "مجهول"
 msgid "No adapters available"
 msgstr "لا محولات متاحة"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
-msgid "Searching for devices..."
-msgstr "يبحث عن الأجهزة..."
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
+msgid "Searching for devices…"
+msgstr "يبحث عن الأجهزة…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "الجهاز"
 
-#: ../lib/bluetooth-chooser.c:732
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "النوع"
 
-#: ../lib/bluetooth-chooser.c:987 ../applet/popup-menu.ui.h:4
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
 msgid "Devices"
 msgstr "الأجهزة"
 
@@ -56,7 +66,7 @@ msgstr "الأجهزة"
 msgid "All categories"
 msgstr "كلّ الفئات"
 
-#: ../lib/bluetooth-filter-widget.c:74
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "مُزاوَج"
 
@@ -103,6 +113,172 @@ msgstr "أجهزة الدخْل (فأرة، لوحة مفاتيح، إلخ.)"
 #: ../lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "سماعات وأجهزة الصوت الأخرى"
+
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
+msgid "Confirm Bluetooth PIN"
+msgstr "أكد رمز البلوتوث (PIN)"
+
+#: ../lib/bluetooth-pairing-dialog.c:84
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "من فضلك أكد تطابق الرقم مع الموجود على الجهاز %s."
+
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:149
+msgid "Confirm"
+msgstr "أكّد"
+
+#: ../lib/bluetooth-pairing-dialog.c:91
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+
+#: ../lib/bluetooth-pairing-dialog.c:97
+#, c-format
+msgid "Pairing '%s'"
+msgstr "مزاوجة '%s'"
+
+#: ../lib/bluetooth-pairing-dialog.c:105
+#, fuzzy, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "من فضلك أكد تطابق الرقم '%s' مع الموجود على الجهاز %s."
+
+#: ../lib/bluetooth-pairing-dialog.c:110
+msgid "Bluetooth Pairing Request"
+msgstr "طلب مزاوجة بلوتوث"
+
+#: ../lib/bluetooth-pairing-dialog.c:111
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr "يريد الجهاز '%s' المزاوجة مع هذا الحاسوب. أتريد السماح بهذا؟"
+
+#: ../lib/bluetooth-pairing-dialog.c:116
+msgid "Confirm Bluetooth Connection"
+msgstr "أكّد لتصال بلوتوث"
+
+#: ../lib/bluetooth-pairing-dialog.c:117
+#, c-format
+msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgstr "يريد الجهاز '%s' الاتصال بهذا الحاسوب. أتريد السماح بهذا؟"
+
+#: ../lib/bluetooth-pairing-dialog.c:125
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "من فضلك أدخِل الرقم التالي على '%s'."
+
+#: ../lib/bluetooth-pairing-dialog.c:128
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr ""
+"من فضلك أدخل الرقم التالي على '%s' ثم انقر زر ”إدخال“ على لوحة المفاتيح."
+
+#: ../lib/bluetooth-pairing-dialog.c:131
+#, fuzzy
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr "حرّك عصا الألعاب iCade في الاتّجاهات التالية:"
+
+#: ../lib/bluetooth-pairing-dialog.c:139
+msgid "Allow"
+msgstr "اسمح"
+
+#: ../lib/bluetooth-pairing-dialog.c:143
+msgid "Dismiss"
+msgstr "ارفض"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
+msgid "Cancel"
+msgstr "ألغِ"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-settings-obexpush.c:246
+msgid "Accept"
+msgstr "اقبل"
+
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
+msgid "Not Set Up"
+msgstr "غير مُعد"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "متّصل"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "غير متَّصل"
+
+#: ../lib/bluetooth-settings-widget.c:1122
+msgid "Yes"
+msgstr "نعم"
+
+#: ../lib/bluetooth-settings-widget.c:1122
+msgid "No"
+msgstr "لا"
+
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1222
+#, c-format
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred "
+"files are placed in the <a href=\"%s\">Downloads</a> folder."
+msgstr ""
+
+#: ../lib/bluetooth-settings-widget.c:1249
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "أأزيل '%s' من قائمة الأجهزة؟"
+
+#: ../lib/bluetooth-settings-widget.c:1251
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr "إذا أزلت الجهاز فستحتاج لإعداده ثانيا في المرة القادمة."
+
+#: ../lib/bluetooth-settings-widget.c:1255
+msgid "_Remove"
+msgstr "أ_زل"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, fuzzy, c-format
+msgid "You received \"%s\" via Bluetooth"
+msgstr "أرسل الملفات عبر بلوتوث"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+#, fuzzy
+msgid "You received a file"
+msgstr "استقبل الملفات"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "افتح الملف"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+#, fuzzy
+msgid "Reveal File"
+msgstr "استقبل الملفات"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr ""
+
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, fuzzy, c-format
+msgid "Bluetooth file transfer from %s"
+msgstr "نقل بلوتوث"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Decline"
+msgstr ""
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -165,382 +341,80 @@ msgstr "لوح"
 msgid "Video device"
 msgstr "جهاز فديو"
 
-#: ../lib/plugins/geoclue.c:178
-msgid "Use this GPS device for Geolocation services"
-msgstr "استخدم جهاز GPS هذا لخدمات تحديد المكان"
+#: ../lib/bluetooth-utils.c:90
+#, fuzzy
+msgid "Remote control"
+msgstr "اتصال خارجى"
 
-#. translators:
-#. * This is in a test plugin, please make sure you add the "(test)" part,
-#. * or leave untranslated
-#: ../lib/plugins/test.c:53
-msgid "Access the Internet using your cell phone (test)"
-msgstr "اتصل بالإنترنت عبر هاتفك المحمول (اختباري)"
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr ""
 
-#: ../applet/main.c:230
-msgid "Turn on Bluetooth"
-msgstr "شغل بلوتوث"
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr ""
 
-#: ../applet/main.c:231 ../applet/notify.c:159
-msgid "Bluetooth: Off"
-msgstr "بلوتوث: مطفأ"
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr ""
 
-#: ../applet/main.c:234
-msgid "Turn off Bluetooth"
-msgstr "أطفئ بلوتوث"
+#: ../lib/bluetooth-utils.c:98
+#, fuzzy
+msgid "Toy"
+msgstr "إلى:"
 
-#: ../applet/main.c:235 ../applet/notify.c:159
-msgid "Bluetooth: On"
-msgstr "بلوتوث: يعمل"
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "الاتصال"
 
-#: ../applet/main.c:240
-msgid "Bluetooth: Disabled"
-msgstr "بلوتوث: معطّل"
+#: ../lib/settings.ui.h:4
+msgid "Address"
+msgstr "العنوان"
 
-#: ../applet/main.c:387
-msgid "Disconnecting..."
-msgstr "يقطع الاتصال..."
-
-#: ../applet/main.c:390 ../sendto/main.c:192 ../sendto/main.c:292
-msgid "Connecting..."
-msgstr "جاري الاتصال..."
-
-#: ../applet/main.c:393 ../applet/main.c:676
-msgid "Connected"
-msgstr "متّصل"
-
-#: ../applet/main.c:396 ../applet/main.c:676
-msgid "Disconnected"
-msgstr "غير متَّصل"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Disconnect"
-msgstr "اقطع الاتصال"
-
-#: ../applet/main.c:694 ../applet/main.c:758
-msgid "Connect"
-msgstr "اتصل"
-
-#: ../applet/main.c:707
-msgid "Send files..."
-msgstr "أرسل ملفات..."
-
-#: ../applet/main.c:717
-msgid "Browse files..."
-msgstr "تصفح الملفات..."
-
-#: ../applet/main.c:728
-msgid "Keyboard Settings"
-msgstr "إعدادات لوحة المفاتيح"
-
-#: ../applet/main.c:736
-msgid "Mouse and Touchpad Settings"
+#: ../lib/settings.ui.h:5
+#, fuzzy
+msgid "_Mouse & Touchpad Settings"
 msgstr "إعدادات الفأرة ولوحة اللمس"
 
-#: ../applet/main.c:746
-msgid "Sound Settings"
+#: ../lib/settings.ui.h:6
+#, fuzzy
+msgid "_Sound Settings"
 msgstr "إعدادات الصوت"
 
-#: ../applet/main.c:799
-msgid "Debug"
-msgstr "نقّح"
+#: ../lib/settings.ui.h:7
+#, fuzzy
+msgid "_Keyboard Settings"
+msgstr "إعدادات لوحة المفاتيح"
 
-#. Parse command-line options
-#: ../applet/main.c:818
-msgid "- Bluetooth applet"
-msgstr "- بريمج بلوتوث"
+#: ../lib/settings.ui.h:8
+#, fuzzy
+msgid "Send _Files…"
+msgstr "أرسل ملفات..."
 
-#: ../applet/main.c:823
-#, c-format
+#: ../lib/settings.ui.h:9
+#, fuzzy
+msgid "_Remove Device"
+msgstr "أ_زل"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "نقل بلوتوث"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "أرسل الملفات عبر بلوتوث"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "حدث خطأ مجهول"
+
+#: ../sendto/main.c:130
 msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"نفّذ '%s --help' لتحصل على قائمة كاملة بخيارات سطر الأوامر المتاحة.\n"
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr "تأكد من أن الجهاز البعيد مُشغّل وأنه يقبل اتصالات بلوتوث"
 
-#: ../applet/main.c:849
-msgid "Bluetooth Applet"
-msgstr "بريمج بلوتوث"
-
-#: ../applet/notify.c:122
-msgid "Bluetooth"
-msgstr "بلوتوث"
-
-#: ../applet/agent.c:196 ../applet/agent.c:265
-#, c-format
-msgid "Device '%s' wants to pair with this computer"
-msgstr "يريد الجهاز '%s' المزاوجة مع هذا الحاسوب "
-
-#: ../applet/agent.c:202
-#, c-format
-msgid "Please enter the PIN mentioned on device %s."
-msgstr "من فضلك أدخل الرقم المذكور على الجهاز %s."
-
-#: ../applet/agent.c:272
-#, c-format
-msgid "Please confirm whether the PIN '%s' matches the one on device %s."
-msgstr "من فضلك أكد تطابق الرقم '%s' مع الموجود على الجهاز %s."
-
-#. translators: Whether to grant access to a particular service
-#: ../applet/agent.c:314
-#, c-format
-msgid "Grant access to '%s'"
-msgstr "امنح '%s' الصلاحية"
-
-#: ../applet/agent.c:319
-#, c-format
-msgid "Device %s wants access to the service '%s'."
-msgstr "يريد الجهاز %s صلاحية الوصول للخدمة '%s'."
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:369
-#, c-format
-msgid "Pairing request for '%s'"
-msgstr "طلب مزاوجة من '%s'"
-
-#: ../applet/agent.c:371 ../applet/agent.c:404 ../applet/agent.c:434
-msgid "Bluetooth device"
-msgstr "جهاز بلوتوث"
-
-#: ../applet/agent.c:372
-msgid "Enter PIN"
-msgstr "أدخِل الرقم"
-
-#. translators: this is a popup telling you a particular device
-#. * has asked for pairing
-#: ../applet/agent.c:396
-#, c-format
-msgid "Pairing confirmation for '%s'"
-msgstr "تأكيد مزاوجة '%s'"
-
-#: ../applet/agent.c:405
-msgid "Verify PIN"
-msgstr "تحقق من الرقم"
-
-#: ../applet/agent.c:432
-#, c-format
-msgid "Authorization request from '%s'"
-msgstr "طلب تخويل من '%s'"
-
-#: ../applet/agent.c:435
-msgid "Check authorization"
-msgstr "تحقق من التخويل"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:1
-msgid "Bluetooth Manager"
-msgstr "مدير بلوتوث"
-
-#: ../applet/bluetooth-applet.desktop.in.in.h:2
-msgid "Bluetooth Manager applet"
-msgstr "بريمج إدارة بلوتوث"
-
-#: ../applet/popup-menu.ui.h:1
-msgid "Bluetooth: Checking"
-msgstr "بلوتوث: يفحص"
-
-#: ../applet/popup-menu.ui.h:2
-msgid "Visible"
-msgstr "ظاهر"
-
-#: ../applet/popup-menu.ui.h:3
-msgid "Send files to device..."
-msgstr "أرسِل ملفات للجهاز..."
-
-#: ../applet/popup-menu.ui.h:5
-msgid "Set up new device..."
-msgstr "اضبط الجهاز..."
-
-#: ../applet/popup-menu.ui.h:6
-msgid "Bluetooth Settings"
-msgstr "إعدادات بلوتوث"
-
-#: ../applet/popup-menu.ui.h:7
-msgid "Quit"
-msgstr "أنهِ"
-
-#: ../applet/authorisation-dialogue.ui.h:1
-msgid "_Always grant access"
-msgstr "امنح الصلاحية _دائما"
-
-#: ../applet/authorisation-dialogue.ui.h:2
-msgid "_Reject"
-msgstr "ار_فض"
-
-#: ../applet/authorisation-dialogue.ui.h:3
-msgid "_Grant"
-msgstr "ا_منح"
-
-#: ../applet/confirm-dialogue.ui.h:1
-msgid "_Does not match"
-msgstr "لا _تتطابق"
-
-#: ../applet/confirm-dialogue.ui.h:2
-msgid "_Matches"
-msgstr "_تتطابق"
-
-#: ../applet/passkey-dialogue.ui.h:1
-msgid "_Show input"
-msgstr "اعرض الإ_دخال"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Pairing with 'Sony Bluetooth Headset' cancelled
-#.
-#: ../wizard/main.c:241 ../wizard/main.c:364
-#, c-format
-msgid "Pairing with '%s' cancelled"
-msgstr "أُلغِيت المزاوجة مع '%s'"
-
-#: ../wizard/main.c:282
-#, c-format
-msgid "Please confirm that the PIN displayed on '%s' matches this one."
-msgstr "من فضلك أكد أن الرقم المعروض على '%s' يُطابق هذا."
-
-#: ../wizard/main.c:336
-msgid "Please enter the following PIN:"
-msgstr "من فضلك  أدخِل الرقم التالي:"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Setting up 'Sony Bluetooth Headset' failed
-#.
-#: ../wizard/main.c:424
-#, c-format
-msgid "Setting up '%s' failed"
-msgstr "فشل إعداد '%s'"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Connecting to 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:478
-#, c-format
-msgid "Connecting to '%s'..."
-msgstr "يتصل بـ %s..."
-
-#: ../wizard/main.c:518
-#, c-format
-msgid "Please enter the following PIN on '%s':"
-msgstr "من فضلك أدخِل الرقم التالي على '%s':"
-
-#: ../wizard/main.c:521
-#, c-format
-msgid ""
-"Please enter the following PIN on '%s' and press “Enter” on the keyboard:"
-msgstr ""
-"من فضلك أدخل الرقم التالي على '%s' ثم انقر زر “إدخال” على لوحة المفاتيح"
-
-#: ../wizard/main.c:526
-msgid "Please move the joystick of your iCade in the following directions:"
-msgstr "حرّك عصا الألعاب iCade في الاتّجاهات التالية:"
-
-#. translators:
-#. * The '%s' is the device name, for example:
-#. * Please wait while finishing setup on 'Sony Bluetooth Headset'...
-#.
-#: ../wizard/main.c:558
-#, c-format
-msgid "Please wait while finishing setup on device '%s'..."
-msgstr "من فضلك انتظر إعداد الجهاز '%s'..."
-
-#: ../wizard/main.c:576
-#, c-format
-msgid "Successfully set up new device '%s'"
-msgstr "أُعِد الجهاز '%s' بنجاح"
-
-#: ../wizard/wizard.ui.h:1
-msgid "Bluetooth New Device Setup"
-msgstr "إعداد جهاز بلوتوث جديد"
-
-#: ../wizard/wizard.ui.h:2
-msgid "PIN _options..."
-msgstr "_خيارات PIN..."
-
-#: ../wizard/wizard.ui.h:3
-msgid "Device Search"
-msgstr "البحث عن جهاز"
-
-#: ../wizard/wizard.ui.h:4
-msgid "Device Setup"
-msgstr "إعداد الجهاز"
-
-#: ../wizard/wizard.ui.h:5
-msgid "Finishing Setup"
-msgstr "إنهاء الإعداد"
-
-#: ../wizard/wizard.ui.h:6
-msgid "Select the additional services you want to use with your device:"
-msgstr "اختر الخدمات الإضافية التي تريد استخدامها مع هذا الجهاز:"
-
-#: ../wizard/wizard.ui.h:7
-msgid "Setup Summary"
-msgstr "ملخص الإعداد"
-
-#: ../wizard/wizard.ui.h:8
-msgid "PIN Options"
-msgstr "خيارات PIN"
-
-#: ../wizard/wizard.ui.h:9
-msgid "_Automatic PIN selection"
-msgstr "ا_ختيار PIN تلقائي"
-
-#. Translators: this is a PIN with a set value, such as 1111, or 0000
-#: ../wizard/wizard.ui.h:11
-msgid "Fixed PIN"
-msgstr "رقم PIN ثابت"
-
-#: ../wizard/wizard.ui.h:12
-msgid "'0000' (most headsets, mice and GPS devices)"
-msgstr "'0000' (أغلب سماعات الرأس والفأرات وأجهزة GPS)"
-
-#: ../wizard/wizard.ui.h:13
-msgid "'1111'"
-msgstr "'1111'"
-
-#: ../wizard/wizard.ui.h:14
-msgid "'1234'"
-msgstr "'1234'"
-
-#: ../wizard/wizard.ui.h:15
-msgid "Do not pair"
-msgstr "لا تُزاوِج"
-
-#: ../wizard/wizard.ui.h:16
-msgid "Custom PIN:"
-msgstr "رقم PIN مخصص:"
-
-#: ../wizard/wizard.ui.h:17
-msgid "_Try Again"
-msgstr "أعِد الم_حاولة"
-
-#: ../wizard/wizard.ui.h:18
-msgid "_Quit"
-msgstr "أ_نهِ"
-
-#: ../wizard/wizard.ui.h:19
-msgid "_Cancel"
-msgstr "أ_لغِ"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:21
-msgid "Does not match"
-msgstr "لا تتطابق"
-
-#. This is a button to answer: Does the PIN matches the one on the device?
-#: ../wizard/wizard.ui.h:23
-msgid "Matches"
-msgstr "تتطابق"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:1
-msgid "Bluetooth Device Setup"
-msgstr "إعداد جهاز بلوتوث"
-
-#: ../wizard/bluetooth-wizard.desktop.in.in.h:2
-msgid "Setup Bluetooth devices"
-msgstr "اضبط أجهزة بلوتوث"
-
-#: ../sendto/main.c:151
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -551,7 +425,7 @@ msgstr[3] "%'d ثوان"
 msgstr[4] "%'d ثانية"
 msgstr[5] "%'d ثانية"
 
-#: ../sendto/main.c:156 ../sendto/main.c:169
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -562,7 +436,7 @@ msgstr[3] "%'d دقائق"
 msgstr[4] "%'d دقيقة"
 msgstr[5] "%'d دقيقة"
 
-#: ../sendto/main.c:167
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -573,7 +447,7 @@ msgstr[3] "%'d ساعات"
 msgstr[4] "%'d ساعة"
 msgstr[5] "%'d ساعة"
 
-#: ../sendto/main.c:177
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -584,124 +458,328 @@ msgstr[3] "%'d ساعات تقريبا"
 msgstr[4] "%'d ساعة تقريبا"
 msgstr[5] "%'d ساعة تقريبا"
 
-#: ../sendto/main.c:231
-msgid "File Transfer"
-msgstr "نقل الملفات"
+#: ../sendto/main.c:402 ../sendto/main.c:500
+#, fuzzy
+msgid "Connecting…"
+msgstr "الاتصال"
 
-#: ../sendto/main.c:234
+#: ../sendto/main.c:444
+#, fuzzy
+msgid "Bluetooth File Transfer"
+msgstr "نقل بلوتوث"
+
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "أ_عد المحاولة"
 
-#. translators: This is the heading for the progress dialogue
-#: ../sendto/main.c:253
-msgid "Sending files via Bluetooth"
-msgstr "إرسال الملفات عبر بلوتوث"
-
-#: ../sendto/main.c:265
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "من:"
 
-#: ../sendto/main.c:277
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "إلى:"
 
-#: ../sendto/main.c:321 ../sendto/main.c:339
-msgid "An unknown error occurred"
-msgstr "حدث خطأ مجهول"
-
-#: ../sendto/main.c:332
-msgid ""
-"Make sure that the remote device is switched on and that it accepts "
-"Bluetooth connections"
-msgstr "تأكد من أن الجهاز البعيد مُشغّل وأنه يقبل اتصالات بلوتوث"
-
-#: ../sendto/main.c:430
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "يُرسل %s"
 
-#: ../sendto/main.c:437 ../sendto/main.c:508
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "يُرسل الملف %d من %d"
 
-#: ../sendto/main.c:504
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d ك.ب/ث"
 
-#: ../sendto/main.c:506
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d بايت/ث"
 
-#: ../sendto/main.c:639
+#: ../sendto/main.c:662
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: ../sendto/main.c:669
+msgid "_Close"
+msgstr "أ_غلق"
+
+#: ../sendto/main.c:679
+msgid "There was an error"
+msgstr ""
+
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "اختر جهازا للإرسال إليه"
 
-#: ../sendto/main.c:644
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "أ_رسل"
 
-#: ../sendto/main.c:688
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "اختر ملفات لإرسالها"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "اختر"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "الجهاز البعيد الذي سيُستخدم"
 
-#: ../sendto/main.c:717
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "العنوان"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "اسم الجهاز البعيد"
 
-#: ../sendto/main.c:719
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "الاسم"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[ملف...]"
 
-#: ../sendto/nautilus-sendto-plugin.c:168
-msgid "Programming error: could not find the device in the list"
-msgstr "خطأ برمجي: لم أتمكن من العثور على الجهاز في القائمة"
+#~ msgid "Use this GPS device for Geolocation services"
+#~ msgstr "استخدم جهاز GPS هذا لخدمات تحديد المكان"
 
-#: ../sendto/nautilus-sendto-plugin.c:243
-#, c-format
-msgid "OBEX Push file transfer unsupported"
-msgstr "نقل ملفات OBEX Push غير مدعوم"
+#~ msgid "Access the Internet using your cell phone (test)"
+#~ msgstr "اتصل بالإنترنت عبر هاتفك المحمول (اختباري)"
 
-#: ../sendto/nautilus-sendto-plugin.c:262
-msgid "Bluetooth (OBEX Push)"
-msgstr "بلوتوث (OBEX Push)"
+#~ msgid "Turn on Bluetooth"
+#~ msgstr "شغل بلوتوث"
 
-#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
-msgid "Bluetooth Transfer"
-msgstr "نقل بلوتوث"
+#~ msgid "Bluetooth: Off"
+#~ msgstr "بلوتوث: مطفأ"
 
-#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
-msgid "Send files via Bluetooth"
-msgstr "أرسل الملفات عبر بلوتوث"
+#~ msgid "Turn off Bluetooth"
+#~ msgstr "أطفئ بلوتوث"
+
+#~ msgid "Bluetooth: On"
+#~ msgstr "بلوتوث: يعمل"
+
+#~ msgid "Bluetooth: Disabled"
+#~ msgstr "بلوتوث: معطّل"
+
+#~ msgid "Disconnecting..."
+#~ msgstr "يقطع الاتصال..."
+
+#~ msgid "Connecting..."
+#~ msgstr "جاري الاتصال..."
+
+#~ msgid "Disconnect"
+#~ msgstr "اقطع الاتصال"
+
+#~ msgid "Connect"
+#~ msgstr "اتصل"
+
+#~ msgid "Browse files..."
+#~ msgstr "تصفح الملفات..."
+
+#~ msgid "Debug"
+#~ msgstr "نقّح"
+
+#~ msgid "- Bluetooth applet"
+#~ msgstr "- بريمج بلوتوث"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "نفّذ '%s --help' لتحصل على قائمة كاملة بخيارات سطر الأوامر المتاحة.\n"
+
+#~ msgid "Bluetooth Applet"
+#~ msgstr "بريمج بلوتوث"
+
+#~ msgid "Bluetooth"
+#~ msgstr "بلوتوث"
+
+#~ msgid "Please enter the PIN mentioned on device %s."
+#~ msgstr "من فضلك أدخل الرقم المذكور على الجهاز %s."
+
+#~ msgid "Grant access to '%s'"
+#~ msgstr "امنح '%s' الصلاحية"
+
+#~ msgid "Device %s wants access to the service '%s'."
+#~ msgstr "يريد الجهاز %s صلاحية الوصول للخدمة '%s'."
+
+#~ msgid "Bluetooth device"
+#~ msgstr "جهاز بلوتوث"
+
+#~ msgid "Enter PIN"
+#~ msgstr "أدخِل الرقم"
+
+#~ msgid "Pairing confirmation for '%s'"
+#~ msgstr "تأكيد مزاوجة '%s'"
+
+#~ msgid "Verify PIN"
+#~ msgstr "تحقق من الرقم"
+
+#~ msgid "Authorization request from '%s'"
+#~ msgstr "طلب تخويل من '%s'"
+
+#~ msgid "Check authorization"
+#~ msgstr "تحقق من التخويل"
+
+#~ msgid "Bluetooth Manager"
+#~ msgstr "مدير بلوتوث"
+
+#~ msgid "Bluetooth Manager applet"
+#~ msgstr "بريمج إدارة بلوتوث"
+
+#~ msgid "Bluetooth: Checking"
+#~ msgstr "بلوتوث: يفحص"
+
+#~ msgid "Visible"
+#~ msgstr "ظاهر"
+
+#~ msgid "Send files to device..."
+#~ msgstr "أرسِل ملفات للجهاز..."
+
+#~ msgid "Set up new device..."
+#~ msgstr "اضبط الجهاز..."
+
+#~ msgid "Bluetooth Settings"
+#~ msgstr "إعدادات بلوتوث"
+
+#~ msgid "Quit"
+#~ msgstr "أنهِ"
+
+#~ msgid "_Always grant access"
+#~ msgstr "امنح الصلاحية _دائما"
+
+#~ msgid "_Reject"
+#~ msgstr "ار_فض"
+
+#~ msgid "_Grant"
+#~ msgstr "ا_منح"
+
+#~ msgid "_Does not match"
+#~ msgstr "لا _تتطابق"
+
+#~ msgid "_Matches"
+#~ msgstr "_تتطابق"
+
+#~ msgid "_Show input"
+#~ msgstr "اعرض الإ_دخال"
+
+#~ msgid "Pairing with '%s' cancelled"
+#~ msgstr "أُلغِيت المزاوجة مع '%s'"
+
+#~ msgid "Please confirm that the PIN displayed on '%s' matches this one."
+#~ msgstr "من فضلك أكد أن الرقم المعروض على '%s' يُطابق هذا."
+
+#~ msgid "Please enter the following PIN:"
+#~ msgstr "من فضلك  أدخِل الرقم التالي:"
+
+#~ msgid "Setting up '%s' failed"
+#~ msgstr "فشل إعداد '%s'"
+
+#~ msgid "Connecting to '%s'..."
+#~ msgstr "يتصل بـ %s..."
+
+#~ msgid "Please wait while finishing setup on device '%s'..."
+#~ msgstr "من فضلك انتظر إعداد الجهاز '%s'..."
+
+#~ msgid "Successfully set up new device '%s'"
+#~ msgstr "أُعِد الجهاز '%s' بنجاح"
+
+#~ msgid "Bluetooth New Device Setup"
+#~ msgstr "إعداد جهاز بلوتوث جديد"
+
+#~ msgid "PIN _options..."
+#~ msgstr "_خيارات PIN..."
+
+#~ msgid "Device Search"
+#~ msgstr "البحث عن جهاز"
+
+#~ msgid "Device Setup"
+#~ msgstr "إعداد الجهاز"
+
+#~ msgid "Finishing Setup"
+#~ msgstr "إنهاء الإعداد"
+
+#~ msgid "Select the additional services you want to use with your device:"
+#~ msgstr "اختر الخدمات الإضافية التي تريد استخدامها مع هذا الجهاز:"
+
+#~ msgid "Setup Summary"
+#~ msgstr "ملخص الإعداد"
+
+#~ msgid "PIN Options"
+#~ msgstr "خيارات PIN"
+
+#~ msgid "_Automatic PIN selection"
+#~ msgstr "ا_ختيار PIN تلقائي"
+
+#~ msgid "Fixed PIN"
+#~ msgstr "رقم PIN ثابت"
+
+#~ msgid "'0000' (most headsets, mice and GPS devices)"
+#~ msgstr "'0000' (أغلب سماعات الرأس والفأرات وأجهزة GPS)"
+
+#~ msgid "'1111'"
+#~ msgstr "'1111'"
+
+#~ msgid "'1234'"
+#~ msgstr "'1234'"
+
+#~ msgid "Do not pair"
+#~ msgstr "لا تُزاوِج"
+
+#~ msgid "Custom PIN:"
+#~ msgstr "رقم PIN مخصص:"
+
+#~ msgid "_Try Again"
+#~ msgstr "أعِد الم_حاولة"
+
+#~ msgid "_Quit"
+#~ msgstr "أ_نهِ"
+
+#~ msgid "Does not match"
+#~ msgstr "لا تتطابق"
+
+#~ msgid "Matches"
+#~ msgstr "تتطابق"
+
+#~ msgid "Bluetooth Device Setup"
+#~ msgstr "إعداد جهاز بلوتوث"
+
+#~ msgid "Setup Bluetooth devices"
+#~ msgstr "اضبط أجهزة بلوتوث"
+
+#~ msgid "File Transfer"
+#~ msgstr "نقل الملفات"
+
+#~ msgid "Sending files via Bluetooth"
+#~ msgstr "إرسال الملفات عبر بلوتوث"
+
+#~ msgid "Programming error: could not find the device in the list"
+#~ msgstr "خطأ برمجي: لم أتمكن من العثور على الجهاز في القائمة"
+
+#~ msgid "OBEX Push file transfer unsupported"
+#~ msgstr "نقل ملفات OBEX Push غير مدعوم"
+
+#~ msgid "Bluetooth (OBEX Push)"
+#~ msgstr "بلوتوث (OBEX Push)"
 
 #~ msgid "%d KB/s"
 #~ msgstr "%d ك.بايت/ث"
-
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "أأزيل '%s' من قائمة الأجهزة؟"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr "إذا أزلت الجهاز فستحتاج لإعداده ثانيا في المرة القادمة."
 
 #~ msgid "Show Only Bluetooth Devices With..."
 #~ msgstr "أظهر فقط أجهزة بلوتوث التي..."
@@ -733,12 +811,6 @@ msgstr "أرسل الملفات عبر بلوتوث"
 #~ msgid "Preferences"
 #~ msgstr "التفضيلات"
 
-#~ msgid "Yes"
-#~ msgstr "نعم"
-
-#~ msgid "No"
-#~ msgstr "لا"
-
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "البلوتوث معطّل"
 
@@ -754,17 +826,8 @@ msgstr "أرسل الملفات عبر بلوتوث"
 #~ msgid "Visibility of “%s”"
 #~ msgstr "ظهور ”%s“"
 
-#~ msgid "Address"
-#~ msgstr "العنوان"
-
-#~ msgid "Connection"
-#~ msgstr "الاتصال"
-
 #~ msgid "Power"
 #~ msgstr "الطاقة"
-
-#~ msgid "Configure Bluetooth settings"
-#~ msgstr "اضبط إعدادات البلوتوث"
 
 #~ msgid "Device Setup Failed"
 #~ msgstr "فشل إعداد الجهاز"
@@ -795,9 +858,6 @@ msgstr "أرسل الملفات عبر بلوتوث"
 
 #~ msgid "Welcome to the Bluetooth new device setup"
 #~ msgstr "مرحبا في مرشد إعداد جهاز بلوتوث جديد"
-
-#~ msgid "_Close"
-#~ msgstr "أ_غلق"
 
 #~ msgid "_Restart Setup"
 #~ msgstr "أ_عد تشغيل الإعداد"
@@ -927,9 +987,6 @@ msgstr "أرسل الملفات عبر بلوتوث"
 #~ msgid "_Disconnect"
 #~ msgstr "ا_قطع الاتصال"
 
-#~ msgid "_Remove"
-#~ msgstr "أ_زل"
-
 #~ msgid "Your computer does not have any Bluetooth adapters plugged in."
 #~ msgstr "لا تتصل أي محولات بلوتوث بحاسوبك."
 
@@ -939,14 +996,8 @@ msgstr "أرسل الملفات عبر بلوتوث"
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "تفضيلات البلوتوث"
 
-#~ msgid "Receive Files"
-#~ msgstr "استقبل الملفات"
-
 #~ msgid "Output a list of currently known devices"
 #~ msgstr "اعرض قائمة بالأجهزة المعروفة حاليا"
-
-#~ msgid "Bluetooth Properties"
-#~ msgstr "خصائص البلوتوث"
 
 #~ msgid "Whether to show the notification icon"
 #~ msgstr "ما إذا ستعرض أيقونة التنبيه"
@@ -1037,14 +1088,8 @@ msgstr "أرسل الملفات عبر بلوتوث"
 #~ msgid "Extensions"
 #~ msgstr "الامتدادات"
 
-#~ msgid "Open File"
-#~ msgstr "افتح الملف"
-
 #~ msgid "Local connection"
 #~ msgstr "اتصال محلى"
-
-#~ msgid "Remote connection"
-#~ msgstr "اتصال خارجى"
 
 #~ msgid "If you don't save, all information will be permanently lost."
 #~ msgstr "إذا لم تحفظ، كل التغيرات سوف تفقد نهائيا"
