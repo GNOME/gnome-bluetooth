@@ -254,10 +254,20 @@ text_changed_cb (GObject    *gobject,
 static void
 bluetooth_pairing_dialog_init (BluetoothPairingDialog *self)
 {
+	GtkCssProvider *provider;
+
 	gtk_widget_init_template (GTK_WIDGET (self));
 
 	gtk_widget_set_size_request (GTK_WIDGET (self), 380, -1);
 	gtk_window_set_resizable (GTK_WINDOW (self), FALSE);
+
+	provider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_resource (provider, "/org/gnome/bluetooth/bluetooth-settings.css");
+	gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+						   GTK_STYLE_PROVIDER (provider),
+						   GTK_STYLE_PROVIDER_PRIORITY_USER);
+	g_object_unref (provider);
+
 }
 
 static void
