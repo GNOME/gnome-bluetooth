@@ -90,7 +90,7 @@ int main (int argc, char **argv)
 	g_signal_connect (G_OBJECT (window), "response",
 			  G_CALLBACK (response_cb), window);
 
-	gtk_widget_show_all (window);
+	gtk_widget_show (window);
 
 	gtk_main ();
 
