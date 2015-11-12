@@ -1,15 +1,15 @@
 # Thai translation of gnome-bluetooth.
-# Copyright (C) 2009-2014 Free Software Foundation, Inc.
+# Copyright (C) 2009-2015 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
+# Akom Chotiphantawanon <knight2000@gmail.com>, 2009-2015.
 #
-# Akom Chotiphantawanon <knight2000@gmail.com>, 2009-2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-26 06:03+0000\n"
-"PO-Revision-Date: 2014-06-20 15:57+0700\n"
+"POT-Creation-Date: 2015-10-25 07:57+0000\n"
+"PO-Revision-Date: 2015-11-12 12:38+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -17,18 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
-#: ../lib/bluetooth-chooser-button.c:73
+#: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "คลิกเพื่อเลือกอุปกรณ์…"
 
-#: ../lib/bluetooth-chooser-button.c:203
-#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:420
-#: ../sendto/main.c:688 ../sendto/main.c:737
+#: ../lib/bluetooth-chooser-button.c:201
+#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: ../lib/bluetooth-chooser-button.c:204
+#: ../lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "_ตกลง"
 
@@ -41,19 +42,20 @@ msgstr "ไม่ทราบ"
 msgid "No adapters available"
 msgstr "ไม่มีอะแดปเตอร์"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "กำลังค้นหาอุปกรณ์…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "อุปกรณ์"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
 msgid "Type"
 msgstr "ชนิด"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -61,7 +63,7 @@ msgstr "อุปกรณ์"
 msgid "All categories"
 msgstr "ทุกประเภท"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
 msgid "Paired"
 msgstr "จับคู่แล้ว"
 
@@ -109,85 +111,94 @@ msgstr "อุปกรณ์อินพุต (เมาส์ แป้นพ
 msgid "Headphones, headsets and other audio devices"
 msgstr "หูฟัง ชุดหูฟัง และอุปกรณ์เสียงอื่น"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "ยืนยัน PIN บลูทูท"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "กรุณายืนยัน PIN ที่ป้อนไว้ที่ '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "ยืนยัน"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
 "device's manual."
 msgstr "ยืนยัน PIN บลูทูทสำหรับ '%s' ตามปกติสามารถหาได้ในคู่มือของอุปกรณ์"
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "การจับคู่กับ '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr "กรุณายืนยันว่า PIN ต่อไปนี้ตรงกับที่แสดงในอุปกรณ์ '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "การขอจับคู่บลูทูท"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "'%s' ต้องการจับคู่กับอุปกรณ์นี้ คุณต้องการอนุญาตให้จับคู่หรือไม่?"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:116
+msgid "Confirm Bluetooth Connection"
+msgstr "ยืนยันการเชื่อมต่อบลูทูท"
+
+#: ../lib/bluetooth-pairing-dialog.c:117
+#, c-format
+msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgstr "'%s' ต้องการเชื่อมต่อกับอุปกรณ์นี้ คุณต้องการอนุญาตให้เชื่อมต่อหรือไม่?"
+
+#: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ '%s' แล้วกด “Enter” บนแป้นพิมพ์"
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:131
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
 msgstr "กรุณาเลื่อนก้านควบคุม iCade ของคุณในทิศทางต่อไปนี้ แล้วกดปุ่มสีขาวใดๆ"
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "อนุญาต"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "ไม่สนใจ"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
 msgstr "ยกเลิก"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:290
+#: ../lib/bluetooth-pairing-dialog.c:289
+#: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "ยอมรับ"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
 msgid "Not Set Up"
 msgstr "ไม่ได้ตั้งค่า"
 
@@ -199,34 +210,70 @@ msgstr "เชื่อมต่ออยู่"
 msgid "Disconnected"
 msgstr "ไม่ได้เชื่อมต่อ"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "Yes"
 msgstr "ใช่"
 
-#: ../lib/bluetooth-settings-widget.c:1069
+#: ../lib/bluetooth-settings-widget.c:1122
 msgid "No"
 msgstr "ไม่ใช่"
 
-#. translators: %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer”
-#: ../lib/bluetooth-settings-widget.c:1164
+#. translators: first %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * location of the Downloads folder.
+#: ../lib/bluetooth-settings-widget.c:1222
 #, c-format
-msgid "Visible as “%s”"
-msgstr "มองเห็นเป็น “%s”"
+msgid ""
+"Visible as “%s” and available for Bluetooth file transfers. Transferred "
+"files are placed in the <a href=\"%s\">Downloads</a> folder."
+msgstr ""
+"มองเห็นเป็น “%s” และสามารถถ่ายโอนแฟ้มผ่านบลูทูทได้ แฟ้มที่ถ่ายโอนจะอยู่ในโฟลเดอร์ <a href="
+"\"%s\">ดาวน์โหลด</a>"
 
-#: ../lib/bluetooth-settings-widget.c:1190
+#: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "ลบ '%s' ออกจากรายชื่ออุปกรณ์หรือไม่?"
 
-#: ../lib/bluetooth-settings-widget.c:1192
+#: ../lib/bluetooth-settings-widget.c:1251
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "ถ้าคุณลบอุปกรณ์นี้ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งก่อนใช้ครั้งต่อไป"
 
-#: ../lib/bluetooth-settings-widget.c:1196
+#: ../lib/bluetooth-settings-widget.c:1255
 msgid "_Remove"
 msgstr "_ลบ"
+
+#. Translators: %s is the name of the filename received
+#: ../lib/bluetooth-settings-obexpush.c:145
+#, c-format
+msgid "You received \"%s\" via Bluetooth"
+msgstr "คุณได้รับ \"%s\" ผ่านบลูทูท"
+
+#: ../lib/bluetooth-settings-obexpush.c:147
+msgid "You received a file"
+msgstr "คุณได้รับแฟ้ม"
+
+#: ../lib/bluetooth-settings-obexpush.c:158
+msgid "Open File"
+msgstr "เปิดแฟ้ม"
+
+#: ../lib/bluetooth-settings-obexpush.c:162
+msgid "Reveal File"
+msgstr "แสดงแฟ้มในโฟลเดอร์"
+
+#: ../lib/bluetooth-settings-obexpush.c:179
+msgid "File reception complete"
+msgstr "การรับแฟ้มเสร็จสมบูรณ์"
+
+#: ../lib/bluetooth-settings-obexpush.c:233
+#, c-format
+msgid "Bluetooth file transfer from %s"
+msgstr "การถ่ายโอนแฟ้มผ่านบลูทูทจาก %s"
+
+#: ../lib/bluetooth-settings-obexpush.c:243
+msgid "Decline"
+msgstr "ปฏิเสธ"
 
 #: ../lib/bluetooth-utils.c:59
 msgid "All types"
@@ -313,35 +360,27 @@ msgstr "ของเล่น"
 msgid "Connection"
 msgstr "การเชื่อมต่อ"
 
-#: ../lib/settings.ui.h:2
-msgid "page 1"
-msgstr "หน้า 1"
-
-#: ../lib/settings.ui.h:3
-msgid "page 2"
-msgstr "หน้า 2"
-
-#: ../lib/settings.ui.h:6
+#: ../lib/settings.ui.h:4
 msgid "Address"
 msgstr "ที่อยู่"
 
-#: ../lib/settings.ui.h:7
+#: ../lib/settings.ui.h:5
 msgid "_Mouse & Touchpad Settings"
 msgstr "ค่าตั้งเ_มาส์และทัชแพด"
 
-#: ../lib/settings.ui.h:8
+#: ../lib/settings.ui.h:6
 msgid "_Sound Settings"
 msgstr "ค่าตั้งเ_สียง"
 
-#: ../lib/settings.ui.h:9
+#: ../lib/settings.ui.h:7
 msgid "_Keyboard Settings"
 msgstr "ค่าตั้งแ_ป้นพิมพ์"
 
-#: ../lib/settings.ui.h:10
+#: ../lib/settings.ui.h:8
 msgid "Send _Files…"
 msgstr "ส่งแ_ฟ้ม…"
 
-#: ../lib/settings.ui.h:11
+#: ../lib/settings.ui.h:9
 msgid "_Remove Device"
 msgstr "_ลบอุปกรณ์"
 
@@ -357,115 +396,134 @@ msgstr "ส่งแฟ้มทางบลูทูท"
 msgid "An unknown error occurred"
 msgstr "เกิดข้อผิดพลาดไม่ทราบสาเหตุ"
 
-#: ../sendto/main.c:339
+#: ../sendto/main.c:130
+msgid ""
+"Make sure that the remote device is switched on and that it accepts "
+"Bluetooth connections"
+msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าอุปกรณ์อีกฝ่ายหนึ่งเปิดทำงานอยู่ และรับการเชื่อมต่อบลูทูท"
+
+#: ../sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d วินาที"
 
-#: ../sendto/main.c:344 ../sendto/main.c:357
+#: ../sendto/main.c:368 ../sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d นาที"
 
-#: ../sendto/main.c:355
+#: ../sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d ชั่วโมง"
 
-#: ../sendto/main.c:365
+#: ../sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "ประมาณ %'d ชั่วโมง"
 
-#: ../sendto/main.c:378 ../sendto/main.c:473
+#: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
 msgstr "กำลังเชื่อมต่อ…"
 
-#: ../sendto/main.c:418
+#: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "การถ่ายโอนแฟ้มผ่านบลูทูท"
 
-#: ../sendto/main.c:421
+#: ../sendto/main.c:448
 msgid "_Retry"
 msgstr "_ลองใหม่"
 
-#: ../sendto/main.c:443
+#: ../sendto/main.c:470
 msgid "From:"
 msgstr "จาก:"
 
-#: ../sendto/main.c:457
+#: ../sendto/main.c:484
 msgid "To:"
 msgstr "ถึง:"
 
-#: ../sendto/main.c:552
+#: ../sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "กำลังส่ง %s"
 
-#: ../sendto/main.c:559 ../sendto/main.c:608
+#: ../sendto/main.c:584 ../sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "กำลังส่งแฟ้มที่ %d จาก %d"
 
-#: ../sendto/main.c:604
+#: ../sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:606
+#: ../sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:636
+#: ../sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "ถ่ายโอนเสร็จสมบูรณ์ %u รายการ"
 
-#: ../sendto/main.c:650
+#: ../sendto/main.c:669
+msgid "_Close"
+msgstr "ปิ_ด"
+
+#: ../sendto/main.c:679
 msgid "There was an error"
 msgstr "เกิดข้อผิดพลาด"
 
-#: ../sendto/main.c:686
+#: ../sendto/main.c:734
 msgid "Select device to send to"
 msgstr "เลือกอุปกรณ์ที่จะรับการส่ง"
 
-#: ../sendto/main.c:691
+#: ../sendto/main.c:739
 msgid "_Send"
 msgstr "_ส่ง"
 
-#: ../sendto/main.c:735
+#: ../sendto/main.c:789
 msgid "Choose files to send"
 msgstr "เลือกแฟ้มที่จะส่ง"
 
-#: ../sendto/main.c:738
+#: ../sendto/main.c:795
 msgid "Select"
 msgstr "เลือก"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:825
 msgid "Remote device to use"
 msgstr "อุปกรณ์อีกฝ่ายที่จะใช้"
 
-#: ../sendto/main.c:764
+#: ../sendto/main.c:825
 msgid "ADDRESS"
 msgstr "แอดเดรส"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:827
 msgid "Remote device's name"
 msgstr "ชื่อของอุปกรณ์อีกฝ่าย"
 
-#: ../sendto/main.c:766
+#: ../sendto/main.c:827
 msgid "NAME"
 msgstr "ชื่อ"
 
-#: ../sendto/main.c:785
+#: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[แฟ้ม...]"
+
+#~ msgid "Visible as “%s”"
+#~ msgstr "มองเห็นเป็น “%s”"
+
+#~ msgid "page 1"
+#~ msgstr "หน้า 1"
+
+#~ msgid "page 2"
+#~ msgstr "หน้า 2"
 
 #~ msgid "Done"
 #~ msgstr "เรียบร้อย"
@@ -565,11 +623,6 @@ msgstr "[แฟ้ม...]"
 
 #~ msgid "Connecting..."
 #~ msgstr "กำลังเชื่อมต่อ..."
-
-#~ msgid ""
-#~ "Make sure that the remote device is switched on and that it accepts "
-#~ "Bluetooth connections"
-#~ msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าอุปกรณ์อีกฝ่ายหนึ่งเปิดทำงานอยู่ และรับการเชื่อมต่อบลูทูท"
 
 #~ msgid "File Transfer"
 #~ msgstr "การถ่ายโอนแฟ้ม"
@@ -749,9 +802,6 @@ msgstr "[แฟ้ม...]"
 #~ msgid "Welcome to the Bluetooth new device setup"
 #~ msgstr "ยินดีต้อนรับสู่การตั้งค่าอุปกรณ์บลูทูทชิ้นใหม่"
 
-#~ msgid "_Close"
-#~ msgstr "ปิ_ด"
-
 #~ msgid "Run in standalone mode"
 #~ msgstr "เรียกในโหมดทำงานเดี่ยว"
 
@@ -878,9 +928,6 @@ msgstr "[แฟ้ม...]"
 
 #~ msgid "_Show Bluetooth icon"
 #~ msgstr "แ_สดงไอคอนบลูทูท"
-
-#~ msgid "Receive Files"
-#~ msgstr "รับแฟ้ม"
 
 #~ msgid "Your computer does not have any Bluetooth adapters plugged in."
 #~ msgstr "คอมพิวเตอร์ของคุณไม่มีอะแดปเตอร์บลูทูทเสียบอยู่เลย"
