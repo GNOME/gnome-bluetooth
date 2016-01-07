@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-08-11 06:13+0000\n"
-"PO-Revision-Date: 2015-08-11 \n"
+"POT-Creation-Date: 2016-01-06 19:57+0000\n"
+"PO-Revision-Date: 2016-01-06 \n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -46,6 +46,7 @@ msgid "No adapters available"
 msgstr "No hay ningún adaptador disponible"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
+#: ../lib/bluetooth-settings-widget.c:1541
 msgid "Searching for devices…"
 msgstr "Buscando dispositivos…"
 
@@ -160,13 +161,11 @@ msgstr ""
 "El dispositivo «%s» quiere emparejarse con este equipo. ¿Quiere permitirlo?"
 
 #: ../lib/bluetooth-pairing-dialog.c:116
-#| msgid "Confirm Bluetooth PIN"
 msgid "Confirm Bluetooth Connection"
 msgstr "Configurar la conexión Bluetooth"
 
 #: ../lib/bluetooth-pairing-dialog.c:117
 #, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgid "'%s' wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "El dispositivo «%s» quiere emparejarse con este equipo. ¿Quiere permitirlo?"
@@ -199,12 +198,12 @@ msgid "Dismiss"
 msgstr "Descartar"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
 msgstr "Cancelar"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-pairing-dialog.c:289
 #: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Aceptar"
@@ -238,9 +237,9 @@ msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
-"Visible como «%s» y disponible para transferencias de archivos por Bluetooth. "
-"Los archivos transferidos se guardan en la carpeta<a href=\"%s\">Descargas</"
-"a>."
+"Visible como «%s» y disponible para transferencias de archivos por "
+"Bluetooth. Los archivos transferidos se guardan en la carpeta <a href=\"%s"
+"\">Descargas</a>."
 
 #: ../lib/bluetooth-settings-widget.c:1249
 #, c-format
@@ -258,30 +257,21 @@ msgstr ""
 msgid "_Remove"
 msgstr "_Quitar"
 
-#: ../lib/bluetooth-settings-widget.c:1541
-#| msgid "Searching for devices…"
-msgid "Searching for devices..."
-msgstr "Buscando dispositivos…"
-
 #. Translators: %s is the name of the filename received
 #: ../lib/bluetooth-settings-obexpush.c:145
 #, c-format
-#| msgid "Send files via Bluetooth"
 msgid "You received \"%s\" via Bluetooth"
 msgstr "Ha recibido «%s» mediante Bluetooth"
 
 #: ../lib/bluetooth-settings-obexpush.c:147
-#| msgid "Receive Files"
 msgid "You received a file"
 msgstr "Ha recibido un archivo"
 
 #: ../lib/bluetooth-settings-obexpush.c:158
-#| msgid "Send _Files…"
 msgid "Open File"
 msgstr "Abrir archivo"
 
 #: ../lib/bluetooth-settings-obexpush.c:162
-#| msgid "Receive Files"
 msgid "Reveal File"
 msgstr "Mostrar archivo"
 
@@ -291,7 +281,6 @@ msgstr "Recepción del archivo completada"
 
 #: ../lib/bluetooth-settings-obexpush.c:233
 #, c-format
-#| msgid "Bluetooth File Transfer"
 msgid "Bluetooth file transfer from %s"
 msgstr "Transferencia de archivos Bluetooth desde %s"
 
@@ -546,6 +535,10 @@ msgstr "NOMBRE"
 #: ../sendto/main.c:846
 msgid "[FILE...]"
 msgstr "[ARCHIVO…]"
+
+#~| msgid "Searching for devices…"
+#~ msgid "Searching for devices..."
+#~ msgstr "Buscando dispositivos…"
 
 #~ msgid "Visible as “%s”"
 #~ msgstr "Visible como «%s»"
