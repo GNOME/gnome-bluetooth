@@ -58,6 +58,8 @@ GType bluetooth_settings_widget_get_type (void);
 
 GtkWidget *bluetooth_settings_widget_new (void);
 
+gboolean bluetooth_settings_widget_get_default_adapter_powered (BluetoothSettingsWidget *widget);
+
 G_END_DECLS
 
 #endif /* __BLUETOOTH_SETTINGS_WIDGET_H */

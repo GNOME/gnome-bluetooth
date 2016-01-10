@@ -2007,3 +2007,25 @@ bluetooth_settings_widget_new (void)
 {
 	return g_object_new (BLUETOOTH_TYPE_SETTINGS_WIDGET, NULL);
 }
+
+/**
+ * bluetooth_settings_widget_get_default_adapter_powered:
+ * @widget: a #BluetoothSettingsWidget widget.
+ *
+ * Return value: Whether the default Bluetooth adapter is powered.
+ **/
+gboolean
+bluetooth_settings_widget_get_default_adapter_powered (BluetoothSettingsWidget *widget)
+{
+	BluetoothSettingsWidgetPrivate *priv;
+	gboolean ret;
+
+	g_return_val_if_fail (BLUETOOTH_IS_SETTINGS_WIDGET (widget), FALSE);
+
+	priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (widget);
+	g_object_get (G_OBJECT (priv->client),
+		      "default-adapter-powered", &ret,
+		      NULL);
+
+	return ret;
+}
