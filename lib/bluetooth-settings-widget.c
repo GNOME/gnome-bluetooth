@@ -1982,7 +1982,7 @@ bluetooth_settings_widget_class_init (BluetoothSettingsWidgetClass *klass)
 	 * @chooser: a #BluetoothSettingsWidget widget which received the signal
 	 * @panel: the new panel that the Settings application should now open
 	 *
-	 * The #BluetoothChooser::selected-device-changed signal is launched when a
+	 * The #BluetoothChooser::panel-changed signal is launched when a
 	 * link to another settings panel is clicked.
 	 **/
 	signals[PANEL_CHANGED] =
