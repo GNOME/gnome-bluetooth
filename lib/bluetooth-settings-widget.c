@@ -393,7 +393,7 @@ confirm_remote_pin_cb (GtkDialog *dialog,
 		pin = g_object_get_data (G_OBJECT (invocation), "pin");
 		device = g_object_get_data (G_OBJECT (invocation), "device");
 
-		bluetooth_client_set_trusted (BLUETOOTH_CLIENT (priv->client), g_dbus_proxy_get_object_path (device), TRUE);
+		bluetooth_client_set_trusted (priv->client, g_dbus_proxy_get_object_path (device), TRUE);
 
 		g_dbus_method_invocation_return_value (invocation,
 						       g_variant_new ("(s)", pin));
@@ -715,7 +715,7 @@ authorize_service_cb (GtkDialog *dialog,
 		GDBusProxy *device;
 
 		device = g_object_get_data (G_OBJECT (invocation), "device");
-		bluetooth_client_set_trusted (BLUETOOTH_CLIENT (priv->client), g_dbus_proxy_get_object_path (device), TRUE);
+		bluetooth_client_set_trusted (priv->client, g_dbus_proxy_get_object_path (device), TRUE);
 		g_dbus_method_invocation_return_value (invocation, NULL);
 	} else {
 		char *msg;
