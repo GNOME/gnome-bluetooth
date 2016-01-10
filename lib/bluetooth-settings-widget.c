@@ -85,6 +85,7 @@ G_DEFINE_TYPE_WITH_PRIVATE(BluetoothSettingsWidget, bluetooth_settings_widget, G
 
 enum {
 	PANEL_CHANGED,
+	ADAPTER_STATUS_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -1339,6 +1340,8 @@ default_adapter_changed (BluetoothClient  *client,
 	/* FIXME: This should turn off automatically when
 	 * the settings panel goes away */
 	g_object_set (G_OBJECT (client), "default-adapter-discoverable", default_adapter != NULL, NULL);
+
+	g_signal_emit (G_OBJECT (self), signals[ADAPTER_STATUS_CHANGED], 0);
 }
 
 static gint
@@ -1918,6 +1921,8 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 			  G_CALLBACK (device_removed_cb), self);
 	g_signal_connect (G_OBJECT (priv->client), "notify::default-adapter",
 			  G_CALLBACK (default_adapter_changed), self);
+	g_signal_connect (G_OBJECT (priv->client), "notify::default-adapter-powered",
+			  G_CALLBACK (default_adapter_changed), self);
 	default_adapter_changed (priv->client, NULL, self);
 
 	priv->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
@@ -1993,6 +1998,22 @@ bluetooth_settings_widget_class_init (BluetoothSettingsWidgetClass *klass)
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__STRING,
 			      G_TYPE_NONE, 1, G_TYPE_STRING);
+
+	/**
+	 * BluetoothSettingsWidget::adapter-status-changed:
+	 * @chooser: a #BluetoothSettingsWidget widget which received the signal
+	 *
+	 * The #BluetoothChooser::adapter-status-changed signal is launched when the status
+	 * of the adapter changes (powered, available, etc.).
+	 **/
+	signals[ADAPTER_STATUS_CHANGED] =
+		g_signal_new ("adapter-status-changed",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0, G_TYPE_NONE);
 }
 
 /**
