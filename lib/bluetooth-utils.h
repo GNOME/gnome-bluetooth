@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 
 /*
  * The profile UUID list is provided by the Bluetooth SIG:
- * https://www.bluetooth.org/en-us/specification/assigned-numbers-overview/service-discovery
+ * https://www.bluetooth.com/specifications/assigned-numbers/service-discovery
  */
 #define BLUETOOTH_UUID_SPP		0x1101
 #define BLUETOOTH_UUID_DUN		0x1103
