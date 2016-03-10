@@ -253,6 +253,8 @@ uuid16_to_string (guint uuid16, const char *uuid)
 		return "AudioSink";
 	case BLUETOOTH_UUID_AVRCP_TARGET:
 		return "A/V_RemoteControlTarget";
+	case BLUETOOTH_UUID_A2DP:
+		return "AdvancedAudioDistribution";
 	case BLUETOOTH_UUID_AVRCP_CONTROL:
 		return "A/V_RemoteControl";
 	case BLUETOOTH_UUID_HSP_AG:
