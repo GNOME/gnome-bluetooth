@@ -742,6 +742,23 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 
 	g_debug ("authorize_service_callback (%s, %s)", g_dbus_proxy_get_object_path (device), uuid);
 
+	value = g_dbus_proxy_get_cached_property (device, "Paired");
+	paired = g_variant_get_boolean (value);
+	g_variant_unref (value);
+
+	value = g_dbus_proxy_get_cached_property (device, "Trusted");
+	trusted = g_variant_get_boolean (value);
+	g_variant_unref (value);
+
+	/* Device was paired, initiated from the remote device,
+	 * so we didn't get the opportunity to set the trusted bit */
+	if (paired && !trusted) {
+		bluetooth_client_set_trusted (priv->client,
+					      g_dbus_proxy_get_object_path (device), TRUE);
+		g_dbus_method_invocation_return_value (invocation, NULL);
+		return;
+	}
+
 	if (g_strcmp0 (bluetooth_uuid_to_string (uuid), "HumanInterfaceDeviceService") != 0) {
 		msg = g_strdup_printf ("Rejecting service auth (%s) for %s: not HID",
 				       uuid, g_dbus_proxy_get_object_path (device));
@@ -751,14 +768,6 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 	}
 
 	/* We shouldn't get asked, but shizzle happens */
-	value = g_dbus_proxy_get_cached_property (device, "Paired");
-	paired = g_variant_get_boolean (value);
-	g_variant_unref (value);
-
-	value = g_dbus_proxy_get_cached_property (device, "Trusted");
-	trusted = g_variant_get_boolean (value);
-	g_variant_unref (value);
-
 	if (paired || trusted) {
 		g_dbus_method_invocation_return_value (invocation, NULL);
 	} else {
