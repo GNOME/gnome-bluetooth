@@ -908,6 +908,7 @@ bluez_appeared_cb (GDBusConnection *connection,
 	while ((v = g_variant_iter_next_value (&iter))) {
 		g_variant_get (v, "{o*}", &key, &ifaces);
 		interface_added (client, key, ifaces);
+		g_free (key);
 	}
 
 	g_variant_unref (variant);
