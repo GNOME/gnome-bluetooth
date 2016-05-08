@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-08-24 16:33+0000\n"
-"PO-Revision-Date: 2016-02-29 22:18+0200\n"
+"POT-Creation-Date: 2016-04-29 07:17+0000\n"
+"PO-Revision-Date: 2016-05-08 18:37+0200\n"
 "Last-Translator: Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -25,7 +25,7 @@ msgid "Click to select device…"
 msgstr "Clicatz per causir un periferic…"
 
 #: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../lib/bluetooth-settings-widget.c:1264 ../sendto/main.c:447
 #: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_nullar"
@@ -44,7 +44,7 @@ msgid "No adapters available"
 msgstr "Pas cap d'adaptator de disponible"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
-#: ../lib/bluetooth-settings-widget.c:1541
+#: ../lib/bluetooth-settings-widget.c:1553
 msgid "Searching for devices…"
 msgstr "Recèrca de periferics…"
 
@@ -56,7 +56,7 @@ msgstr "Periferic"
 msgid "Type"
 msgstr "Tipe"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1515
 msgid "Devices"
 msgstr "Periferics"
 
@@ -115,17 +115,17 @@ msgstr "Escotadors, casques àudio e autres periferics àudio"
 #: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
 #: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
-msgstr "Confirmer lo numèro d'identificacion personal del Bluetooth"
+msgstr "Confirmar lo numèro d'identificacion personala del Bluetooth"
 
 #: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
-msgstr "Confirmatz lo numèro d'identificacion personal picat dins « %s » ."
+msgstr "Confirmatz lo numèro d'identificacion personala picat dins « %s » ."
 
 #: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
 #: ../lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
-msgstr "Confirmer"
+msgstr "Confirmar"
 
 #: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
@@ -133,7 +133,7 @@ msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
 "device's manual."
 msgstr ""
-"Confirmer lo numèro d'identificacion personal (PIN) de « %s ». Es  "
+"Confirmar lo numèro d'identificacion personala (PIN) de « %s ». Es  "
 "normalament indicat dins lo manual del periferic."
 
 #: ../lib/bluetooth-pairing-dialog.c:97
@@ -146,7 +146,7 @@ msgstr "Ligason de « %s »"
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr ""
-"Confirmatz que lo numèro d'identificacion personal seguent correspond a lo "
+"Confirmatz que lo numèro d'identificacion personala seguent correspond a lo "
 "qu'es afichat sus « %s »."
 
 #: ../lib/bluetooth-pairing-dialog.c:110
@@ -159,27 +159,25 @@ msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "« %s » se vòl connectar a aqueste periferic. Autorizatz la ligason ?"
 
 #: ../lib/bluetooth-pairing-dialog.c:116
-#| msgid "Confirm Bluetooth PIN"
 msgid "Confirm Bluetooth Connection"
-msgstr "Confirmer la connexion al Bluetooth"
+msgstr "Confirmar la connexion al Bluetooth"
 
 #: ../lib/bluetooth-pairing-dialog.c:117
 #, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgid "'%s' wants to connect with this device. Do you want to allow it?"
 msgstr "« %s » se vòl connectar a aqueste periferic. Autorizatz la ligason ?"
 
 #: ../lib/bluetooth-pairing-dialog.c:125
 #, c-format
 msgid "Please enter the following PIN on '%s'."
-msgstr "Picatz lo numèro d'identificacion personal seguent sus « %s »."
+msgstr "Picatz lo numèro d'identificacion personala seguent sus « %s »."
 
 #: ../lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
 msgstr ""
-"Picatz lo numèro d'identificacion personal çaiaprèp sus « %s ». Quichatz "
+"Picatz lo numèro d'identificacion personala çaiaprèp sus « %s ». Quichatz "
 "puèi sus la tòca « Entrada » del clavièr."
 
 #: ../lib/bluetooth-pairing-dialog.c:131
@@ -199,12 +197,12 @@ msgid "Dismiss"
 msgstr "Abandonar"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
 msgstr "Anullar"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-pairing-dialog.c:289
 #: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Acceptar"
@@ -221,44 +219,43 @@ msgstr "Connectat"
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: ../lib/bluetooth-settings-widget.c:1132
 msgid "Yes"
 msgstr "Òc"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: ../lib/bluetooth-settings-widget.c:1132
 msgid "No"
 msgstr "Non"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer” followed by the
 #. * location of the Downloads folder.
-#: ../lib/bluetooth-settings-widget.c:1222
+#: ../lib/bluetooth-settings-widget.c:1232
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
 
-#: ../lib/bluetooth-settings-widget.c:1249
+#: ../lib/bluetooth-settings-widget.c:1259
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Suprimir « %s » de la lista dels periferics ?"
 
-#: ../lib/bluetooth-settings-widget.c:1251
+#: ../lib/bluetooth-settings-widget.c:1261
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se suprimissètz aqueste periferic, vos lo caldrà reconfigurar tornamai abans "
 "utilizacion."
 
-#: ../lib/bluetooth-settings-widget.c:1255
+#: ../lib/bluetooth-settings-widget.c:1265
 msgid "_Remove"
 msgstr "_Suprimir"
 
 #. Translators: %s is the name of the filename received
 #: ../lib/bluetooth-settings-obexpush.c:145
 #, c-format
-#| msgid "Send files via Bluetooth"
 msgid "You received \"%s\" via Bluetooth"
 msgstr "Avètz recebut \"%s\" per Bluetooth"
 
@@ -267,7 +264,6 @@ msgid "You received a file"
 msgstr "Avètz recebut un fichièr"
 
 #: ../lib/bluetooth-settings-obexpush.c:158
-#| msgid "Send _Files…"
 msgid "Open File"
 msgstr "Dobrir un fichièr"
 
@@ -281,7 +277,6 @@ msgstr ""
 
 #: ../lib/bluetooth-settings-obexpush.c:233
 #, c-format
-#| msgid "Bluetooth File Transfer"
 msgid "Bluetooth file transfer from %s"
 msgstr "Transferiment de fichièr per Bluetooth dempuèi %s"
 
@@ -408,7 +403,7 @@ msgstr "Mandadís de fichièrs per Bluetooth"
 
 #: ../sendto/main.c:117
 msgid "An unknown error occurred"
-msgstr "Una error desconeguda s'es producha"
+msgstr "Una error desconeguda s'es produita"
 
 #: ../sendto/main.c:130
 msgid ""
@@ -520,7 +515,7 @@ msgstr "Seleccionar"
 
 #: ../sendto/main.c:825
 msgid "Remote device to use"
-msgstr "Periferic distant a utilizar"
+msgstr "Periferic distant d'utilizar"
 
 #: ../sendto/main.c:825
 msgid "ADDRESS"
@@ -548,71 +543,71 @@ msgstr "[FICHIÈR...]"
 #~ msgstr "pagina 2"
 
 #~ msgid "Done"
-#~ msgstr "Terminé"
+#~ msgstr "Acabat"
 
 #~ msgid "Use this GPS device for Geolocation services"
-#~ msgstr "Utilizar ce periferic GPS per les services de géolocalisation"
+#~ msgstr "Utilizar aqueste periferic GPS pels servicis de geolocalizacion"
 
 #~ msgid "Access the Internet using your cell phone (test)"
-#~ msgstr "Accedir a Internet amb votre téléphone mobile (test)"
+#~ msgstr "Accedir a Internet amb vòstre telefòn mobil (tèst)"
 
 #~ msgid "Pairing with '%s' cancelled"
-#~ msgstr "Appairage de « %s » anullat"
+#~ msgstr "Aparatge de « %s » anullat"
 
 #~ msgid "Please confirm that the PIN displayed on '%s' matches this one."
 #~ msgstr ""
-#~ "Confirmatz que lo numèro d'identification personal affiché sus « %s » "
+#~ "Confirmatz que lo numèro d'identificacion personala afichat sus « %s » "
 #~ "correspond a celui-ci."
 
 #~ msgid "Please enter the following PIN:"
-#~ msgstr "Picatz lo numèro d'identification personal seguent :"
+#~ msgstr "Picatz lo numèro d'identificacion personala seguent :"
 
 #~ msgid "Setting up '%s' failed"
-#~ msgstr "Échec de la configuration de « %s »"
+#~ msgstr "Fracàs de la configuracion de « %s »"
 
 #~ msgid "Connecting to '%s'..."
 #~ msgstr "Connexion en cors amb « %s »..."
 
 #~ msgid "Please wait while finishing setup on device '%s'..."
-#~ msgstr "Pacientatz pendant la configuration del periferic « %s »..."
+#~ msgstr "Pacientatz pendent la configuracion del periferic « %s »..."
 
 #~ msgid "Successfully set up new device '%s'"
-#~ msgstr "Configuration del novèl periferic « %s » réussie"
+#~ msgstr "Configuracion del novèl periferic « %s » réussie"
 
 #~ msgid "Bluetooth New Device Setup"
-#~ msgstr "Configuration del novèl periferic Bluetooth"
+#~ msgstr "Configuracion del novèl periferic Bluetooth"
 
 #~ msgid "PIN _options..."
-#~ msgstr "_Options de numèro d'identification personal..."
+#~ msgstr "_Options de numèro d'identificacion personal..."
 
 #~ msgid "Device Search"
 #~ msgstr "Recèrca de periferic"
 
 #~ msgid "Device Setup"
-#~ msgstr "Configuration del periferic"
+#~ msgstr "Configuracion del periferic"
 
 #~ msgid "Finishing Setup"
-#~ msgstr "Fin de la configuration"
+#~ msgstr "Fin de la configuracion"
 
 #~ msgid "Select the additional services you want to use with your device:"
 #~ msgstr ""
-#~ "Sélectionnez les services supplémentaires que vous souhaitez utilizar amb "
-#~ "votre periferic :"
+#~ "Seleccionatz los servicis suplementaris que volètz utilizar amb "
+#~ "vòstre periferic :"
 
 #~ msgid "Setup Summary"
-#~ msgstr "Résumé de la configuration"
+#~ msgstr "Resumit de la configuracion"
 
 #~ msgid "PIN Options"
-#~ msgstr "Options de numèro d'identification personal"
+#~ msgstr "Opcions de numèro d'identificacion personal"
 
 #~ msgid "_Automatic PIN selection"
-#~ msgstr "Seleccion _automatique del numèro d'identification personal"
+#~ msgstr "Seleccion _automatica del numèro d'identificacion personal"
 
 #~ msgid "Fixed PIN"
-#~ msgstr "Numèro d'identification personal fixe"
+#~ msgstr "Numèro d'identificacion personala fixe"
 
 #~ msgid "'0000' (most headsets, mice and GPS devices)"
-#~ msgstr "0000 (pour la plupart des escotadors, souris e GPS)"
+#~ msgstr "0000 (pour la màger part des escotadors, mirga e GPS)"
 
 #~ msgid "'1111'"
 #~ msgstr "1111"
@@ -624,28 +619,28 @@ msgstr "[FICHIÈR...]"
 #~ msgstr "Ne pas apparier"
 
 #~ msgid "Custom PIN:"
-#~ msgstr "Numèro d'identification personal personalizat :"
+#~ msgstr "Numèro d'identificacion personala personalizat :"
 
 #~ msgid "_Try Again"
-#~ msgstr "E_ssayer a novèl"
+#~ msgstr "En_sajar tornamai"
 
 #~ msgid "_Quit"
 #~ msgstr "_Quitar"
 
 #~ msgid "Does not match"
-#~ msgstr "Ne correspond pas"
+#~ msgstr "Correspond pas"
 
 #~ msgid "Matches"
 #~ msgstr "Correspond"
 
 #~ msgid "Bluetooth Device Setup"
-#~ msgstr "Configuration de periferic Bluetooth"
+#~ msgstr "Configuracion de periferic Bluetooth"
 
 #~ msgid "Setup Bluetooth devices"
-#~ msgstr "Configurer des periferics Bluetooth"
+#~ msgstr "Configurar de periferics Bluetooth"
 
 #~ msgid "Bluetooth: Off"
-#~ msgstr "Bluetooth : désactivé"
+#~ msgstr "Bluetooth : desactivat"
 
 #~ msgid "Turn off Bluetooth"
 #~ msgstr "Desactivar Bluetooth"
@@ -654,19 +649,19 @@ msgstr "[FICHIÈR...]"
 #~ msgstr "Bluetooth : actiu"
 
 #~ msgid "Bluetooth: Disabled"
-#~ msgstr "Bluetooth : désactivé"
+#~ msgstr "Bluetooth : desactivat"
 
 #~ msgid "Disconnecting..."
-#~ msgstr "Déconnexion en cors..."
+#~ msgstr "Desconnexion en cors..."
 
 #~ msgid "Disconnect"
-#~ msgstr "Déconnecter"
+#~ msgstr "Desconnectar"
 
 #~ msgid "Browse files..."
-#~ msgstr "Parcourir los fichièrs..."
+#~ msgstr "Percórrer los fichièrs..."
 
 #~ msgid "Debug"
-#~ msgstr "Débogage"
+#~ msgstr "Desbugatge"
 
 #~ msgid "- Bluetooth applet"
 #~ msgstr "- applet Bluetooth"
@@ -676,7 +671,7 @@ msgstr "[FICHIÈR...]"
 #~ "Run '%s --help' to see a full list of available command line options.\n"
 #~ msgstr ""
 #~ "%s\n"
-#~ "Exécutez « %s --help » per veire una lista complète des options "
+#~ "Exécutez « %s --help » per veire una lista completa des options "
 #~ "disponibles\n"
 #~ "en linha de comanda.\n"
 
@@ -688,37 +683,37 @@ msgstr "[FICHIÈR...]"
 
 #~ msgid "Please enter the PIN mentioned on device %s."
 #~ msgstr ""
-#~ "Picatz lo numèro d'identification personal mentionné sus lo periferic %s."
+#~ "Picatz lo numèro d'identificacion personala mencionat sul periferic %s."
 
 #~ msgid "Grant access to '%s'"
-#~ msgstr "Accorder l'accès a %s"
+#~ msgstr "Acordar l'accès a %s"
 
 #~ msgid "Device %s wants access to the service '%s'."
-#~ msgstr "Lo periferic %s souhaite accedir al service « %s »."
+#~ msgstr "Lo periferic %s souhaite accedir al servici « %s »."
 
 #~ msgid "Bluetooth device"
 #~ msgstr "Periferic Bluetooth"
 
 #~ msgid "Enter PIN"
-#~ msgstr "Saisir lo numèro d'identification personal"
+#~ msgstr "Sasir lo numèro d'identificacion personal"
 
 #~ msgid "Pairing confirmation for '%s'"
-#~ msgstr "Confirmer la demande de liaison per « %s »"
+#~ msgstr "Confirmar la demanda de ligason per « %s »"
 
 #~ msgid "Verify PIN"
-#~ msgstr "Vérifier lo numèro d'identification personal"
+#~ msgstr "Verificar lo numèro d'identificacion personal"
 
 #~ msgid "Authorization request from '%s'"
-#~ msgstr "Demande d'autorizacion de « %s »"
+#~ msgstr "Demanda d'autorizacion de « %s »"
 
 #~ msgid "Check authorization"
-#~ msgstr "Vérifier l'autorizacion"
+#~ msgstr "Verificar l'autorizacion"
 
 #~ msgid "Bluetooth Manager applet"
 #~ msgstr "Applet de gestion Bluetooth"
 
 #~ msgid "Bluetooth: Checking"
-#~ msgstr "Bluetooth : vérification"
+#~ msgstr "Bluetooth : verificacion"
 
 #~ msgid "Visible"
 #~ msgstr "Visible"
@@ -727,7 +722,7 @@ msgstr "[FICHIÈR...]"
 #~ msgstr "Mandar los fichièrs al periferic..."
 
 #~ msgid "Set up new device..."
-#~ msgstr "Configurer un novèl periferic..."
+#~ msgstr "Configurar un novèl periferic..."
 
 #~ msgid "Bluetooth Settings"
 #~ msgstr "Paramètres Bluetooth"
@@ -736,35 +731,35 @@ msgstr "[FICHIÈR...]"
 #~ msgstr "Quitar"
 
 #~ msgid "_Always grant access"
-#~ msgstr "_Toujours accorder l'accès"
+#~ msgstr "_Totjorn acordar l'accès"
 
 #~ msgid "_Reject"
-#~ msgstr "_Rejeter"
+#~ msgstr "_Regetar"
 
 #~ msgid "_Grant"
-#~ msgstr "_Accorder"
+#~ msgstr "_Acordar"
 
 #~ msgid "_Does not match"
-#~ msgstr "Ne correspond _pas"
+#~ msgstr "Correspond _pas"
 
 #~ msgid "_Matches"
 #~ msgstr "_Correspond"
 
 #~ msgid "_Show input"
-#~ msgstr "A_fichar les caractères picats"
+#~ msgstr "A_fichar los caractèrs picats"
 
 #~ msgid "File Transfer"
-#~ msgstr "Transfert de fichièr"
+#~ msgstr "Transferiment de fichièr"
 
 #~ msgid "Sending files via Bluetooth"
-#~ msgstr "Envoi de fichièrs per Bluetooth"
+#~ msgstr "Mandadís de fichièrs per Bluetooth"
 
 #~ msgid "Programming error: could not find the device in the list"
 #~ msgstr ""
-#~ "Error de programmation : impossible de trouver lo periferic dins la liste"
+#~ "Error de programacion : impossible de trobar lo periferic dins la lista"
 
 #~ msgid "OBEX Push file transfer unsupported"
-#~ msgstr "Lo transfert de fichièrs « OBEX Push » es pas pris en charge"
+#~ msgstr "Lo transfert de fichièrs « OBEX Push » es pas pres en carga"
 
 #~ msgid "Bluetooth (OBEX Push)"
 #~ msgstr "Bluetooth (OBEX Push)"
