@@ -606,6 +606,17 @@ bail:
 	g_free (name);
 }
 
+static void
+passkey_callback (GDBusMethodInvocation *invocation,
+		  GDBusProxy            *device,
+		  gpointer               data)
+{
+	g_warning ("RequestPasskey(): not implemented");
+	g_dbus_method_invocation_return_dbus_error (invocation,
+						    "org.bluez.Error.Rejected",
+						    "RequestPasskey not implemented");
+}
+
 static gboolean
 cancel_callback (GDBusMethodInvocation *invocation,
 		 gpointer               user_data)
@@ -1803,6 +1814,7 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 	g_object_add_weak_pointer (G_OBJECT (priv->agent), (gpointer *) (&priv->agent));
 
 	bluetooth_agent_set_pincode_func (priv->agent, pincode_callback, self);
+	bluetooth_agent_set_passkey_func (priv->agent, passkey_callback, self);
 	bluetooth_agent_set_display_func (priv->agent, display_callback, self);
 	bluetooth_agent_set_display_pincode_func (priv->agent, display_pincode_callback, self);
 	bluetooth_agent_set_cancel_func (priv->agent, cancel_callback, self);
