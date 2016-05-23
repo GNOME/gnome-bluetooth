@@ -43,7 +43,7 @@
 <!DOCTYPE devices [
 	<!ELEMENT devices (device)+>
 	<!ELEMENT device EMPTY>
-	<!ATTLIST device type (any|mouse|tablet|keyboard|headset|headphones|audio|printer|network) "any">
+	<!ATTLIST device type (any|mouse|tablet|keyboard|headset|headphones|audio|printer|network|joypad) "any">
 	<!ATTLIST device oui CDATA #IMPLIED>
 	<!ATTLIST device vendor CDATA #IMPLIED>
 	<!ATTLIST device name CDATA #IMPLIED>
@@ -170,6 +170,9 @@
 
 	<!-- Printers -->
 	<device type="printer" pin="0000"/>
+
+	<!-- Joypads and joysticks -->
+	<device type="joypad" pin="0000"/>
 
 	<!-- Headphones and headsets -->
 	<device type="headphones" pin="0000"/>

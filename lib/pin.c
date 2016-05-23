@@ -100,6 +100,7 @@ static guint string_to_type(const char *type)
 	TYPE_IS ("audio", BLUETOOTH_TYPE_OTHER_AUDIO);
 	TYPE_IS ("printer", BLUETOOTH_TYPE_PRINTER);
 	TYPE_IS ("network", BLUETOOTH_TYPE_NETWORK);
+	TYPE_IS ("joypad", BLUETOOTH_TYPE_JOYPAD);
 
 	g_warning ("unhandled type '%s'", type);
 	return BLUETOOTH_TYPE_ANY;
