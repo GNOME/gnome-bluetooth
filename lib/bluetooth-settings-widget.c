@@ -1976,6 +1976,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 	obex_agent_down ();
 
 	/* See default_adapter_changed () */
+	/* FIXME: This is blocking */
 	if (priv->client)
 		g_object_set (G_OBJECT (priv->client), "default-adapter-discoverable", FALSE, NULL);
 
