@@ -1095,7 +1095,7 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (ret == FALSE) {
 		g_warning ("Failed to set Discoverable to %d: %s", discoverable, error->message);
 		g_error_free (error);
-	} else {
+	} else if (discoverable) {
 		ret = properties_call_set_sync (properties,
 						BLUEZ_ADAPTER_INTERFACE,
 						"DiscoverableTimeout",
