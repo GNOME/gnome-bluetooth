@@ -915,10 +915,10 @@ create_callback (GObject      *source_object,
 		if (g_strcmp0 (dbus_error, "org.bluez.Error.AuthenticationCanceled") != 0) {
 			//FIXME show an error?
 			/* translators:
-			 * The '%s' is the device name, for example:
-			 * Setting up 'Sony Bluetooth Headset' failed
+			 * The “%s” is the device name, for example:
+			 * Setting up “Sony Bluetooth Headset” failed
 			 */
-			//text = g_strdup_printf(_("Setting up '%s' failed"), target_name);
+			//text = g_strdup_printf(_("Setting up “%s” failed"), target_name);
 
 			g_warning ("Setting up %s failed: %s", path, error->message);
 
@@ -1238,7 +1238,7 @@ update_visibility (BluetoothSettingsWidget *self)
 		g_free (path);
 
 		/* translators: first %s is the name of the computer, for example:
-		 * Visible as “Bastien Nocera's Computer” followed by the
+		 * Visible as “Bastien Nocera’s Computer” followed by the
 		 * location of the Downloads folder.*/
 		label = g_strdup_printf (_("Visible as “%s” and available for Bluetooth file transfers. Transferred files are placed in the <a href=\"%s\">Downloads</a> folder."), name, uri);
 		g_free (uri);
@@ -1267,7 +1267,7 @@ show_confirm_dialog (BluetoothSettingsWidget *self,
 
 	dialog = gtk_message_dialog_new (GTK_WINDOW (priv->properties_dialog), GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-					 _("Remove '%s' from the list of devices?"), name);
+					 _("Remove “%s” from the list of devices?"), name);
 	g_object_set (G_OBJECT (dialog), "secondary-text",
 		      _("If you remove the device, you will have to set it up again before next use."),
 		      NULL);
