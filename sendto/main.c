@@ -824,7 +824,7 @@ static GOptionEntry options[] = {
 	{ "device", 0, 0, G_OPTION_ARG_STRING, &option_device,
 				N_("Remote device to use"), N_("ADDRESS") },
 	{ "name", 0, 0, G_OPTION_ARG_STRING, &option_device_name,
-				N_("Remote device's name"), N_("NAME") },
+				N_("Remote device’s name"), N_("NAME") },
 	{ "dest", 0, G_OPTION_FLAG_HIDDEN,
 			G_OPTION_ARG_STRING, &option_device, NULL, NULL },
 	{ G_OPTION_REMAINING, 0, 0,
@@ -843,7 +843,7 @@ int main(int argc, char *argv[])
 
 	error = NULL;
 
-	if (gtk_init_with_args(&argc, &argv, _("[FILE...]"),
+	if (gtk_init_with_args(&argc, &argv, _("[FILE…]"),
 				options, GETTEXT_PACKAGE, &error) == FALSE) {
 		if (error != NULL) {
 			g_printerr("%s\n", error->message);
