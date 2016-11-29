@@ -55,8 +55,6 @@ const gchar *
 bluetooth_type_to_string (BluetoothType type)
 {
 	switch (type) {
-	case BLUETOOTH_TYPE_ANY:
-		return _("All types");
 	case BLUETOOTH_TYPE_PHONE:
 		return _("Phone");
 	case BLUETOOTH_TYPE_MODEM:
@@ -99,6 +97,29 @@ bluetooth_type_to_string (BluetoothType type)
 	}
 
 	return _("Unknown");
+}
+
+/**
+ * bluetooth_type_to_filter_string:
+ * @type: a #BluetoothType
+ *
+ * Returns a human-readable string representation of @type usable for display to users,
+ * when type filters are displayed. Do not free the return value.
+ * The returned string is already translated with gettext().
+ *
+ * Return value: a string.
+ **/
+const gchar *
+bluetooth_type_to_filter_string (BluetoothType type)
+{
+	switch (type) {
+	case BLUETOOTH_TYPE_ANY:
+		return _("All types");
+	default:
+		return bluetooth_type_to_string (type);
+	}
+
+	g_assert_not_reached ();
 }
 
 /**
