@@ -288,7 +288,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	gtk_grid_attach (GTK_GRID (table), priv->device_type, 1, 1, 1, 1);
 	gtk_widget_set_tooltip_text (priv->device_type, _("Select the device type to filter"));
 	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
-					   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_string (BLUETOOTH_TYPE_ANY)),
+					   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_filter_string (BLUETOOTH_TYPE_ANY)),
 					   DEVICE_TYPE_FILTER_COL_MASK, BLUETOOTH_TYPE_ANY,
 					   -1);
 	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
@@ -305,7 +305,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 		if (mask & BLUETOOTH_TYPE_INPUT || mask & BLUETOOTH_TYPE_AUDIO)
 			continue;
 		gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
-						   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_string (mask)),
+						   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_filter_string (mask)),
 						   DEVICE_TYPE_FILTER_COL_MASK, mask,
 						   -1);
 	}
