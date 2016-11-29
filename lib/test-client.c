@@ -165,7 +165,7 @@ static void create_window(void)
 	gtk_toolbar_set_show_arrow(GTK_TOOLBAR(toolbar), FALSE);
 	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, TRUE, 0);
 
-	item = gtk_tool_button_new (gtk_image_new_from_icon_name ("gtk-refresh", GTK_ICON_SIZE_LARGE_TOOLBAR), NULL);
+	item = gtk_tool_button_new (gtk_image_new_from_icon_name ("view-refresh", GTK_ICON_SIZE_LARGE_TOOLBAR), NULL);
 	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), item, -1);
 	g_signal_connect(item, "clicked", G_CALLBACK(scan_callback), NULL);
 
