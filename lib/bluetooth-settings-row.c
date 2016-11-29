@@ -159,6 +159,21 @@ bluetooth_settings_row_get_property (GObject        *object,
 }
 
 static void
+update_row (BluetoothSettingsRow *self)
+{
+	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
+
+	if (priv->name == NULL) {
+		gtk_label_set_text (GTK_LABEL (priv->label),
+				    bluetooth_type_to_string (priv->type));
+		gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+	} else {
+		gtk_label_set_text (GTK_LABEL (priv->label), priv->name);
+		gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
+	}
+}
+
+static void
 bluetooth_settings_row_set_property (GObject        *object,
 				     guint           property_id,
 				     const GValue   *value,
@@ -182,10 +197,7 @@ bluetooth_settings_row_set_property (GObject        *object,
 		break;
 	case PROP_TYPE:
 		priv->type = g_value_get_flags (value);
-		if (priv->name == NULL) {
-			gtk_label_set_text (GTK_LABEL (priv->label),
-					    bluetooth_type_to_string (priv->type));
-		}
+		update_row (self);
 		break;
 	case PROP_CONNECTED:
 		priv->connected = g_value_get_boolean (value);
@@ -194,8 +206,7 @@ bluetooth_settings_row_set_property (GObject        *object,
 	case PROP_NAME:
 		g_free (priv->name);
 		priv->name = g_value_dup_string (value);
-		if (priv->name != NULL)
-			gtk_label_set_text (GTK_LABEL (priv->label), priv->name);
+		update_row (self);
 		break;
 	case PROP_ADDRESS:
 		g_free (priv->bdaddr);
