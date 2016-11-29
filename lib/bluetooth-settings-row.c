@@ -95,8 +95,10 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 
 	gtk_widget_init_template (GTK_WIDGET (self));
 
-	/* Placeholder text */
+	/* Placeholder text and spinner */
 	g_object_bind_property (priv->spinner, "visible",
+				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
+	g_object_bind_property (priv->spinner, "active",
 				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
 }
 
