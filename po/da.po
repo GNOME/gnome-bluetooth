@@ -13,8 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-10 06:19+0000\n"
+"Report-Msgid-Bugs-To: "
+"http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-10-23 20:24+0000\n"
 "PO-Revision-Date: 2015-09-20 16:44+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -30,10 +31,10 @@ msgstr ""
 
 #: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
-msgstr "Klik for at vælge enhed…"
+msgstr "Klik for at vælge enhed …"
 
 #: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../lib/bluetooth-settings-widget.c:1275 ../sendto/main.c:447
 #: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Annullér"
@@ -52,9 +53,9 @@ msgid "No adapters available"
 msgstr "Ingen tilgængelige adaptere"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
-#: ../lib/bluetooth-settings-widget.c:1541
+#: ../lib/bluetooth-settings-widget.c:1564
 msgid "Searching for devices…"
-msgstr "Søger efter enheder…"
+msgstr "Søger efter enheder …"
 
 #: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
@@ -64,7 +65,7 @@ msgstr "Enhed"
 msgid "Type"
 msgstr "Type"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1526
 msgid "Devices"
 msgstr "Enheder"
 
@@ -153,8 +154,7 @@ msgstr "Danner par med \"%s\""
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
-msgstr ""
-"Bekræft venligst at følgende PIN-kode matcher den på enheden \"%s\"."
+msgstr "Bekræft venligst at følgende PIN-kode matcher den på enheden \"%s\"."
 
 #: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
@@ -163,18 +163,14 @@ msgstr "Forespørgsel om Bluetooth-pardannelse"
 #: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
-msgstr ""
-"\"%s\" vil danne par med denne enhed. Vil du tillade "
-"pardannelse?"
+msgstr "\"%s\" vil danne par med denne enhed. Vil du tillade pardannelse?"
 
 #: ../lib/bluetooth-pairing-dialog.c:116
-#| msgid "Confirm Bluetooth PIN"
 msgid "Confirm Bluetooth Connection"
 msgstr "Bekræft Bluetooth-forbindelse"
 
 #: ../lib/bluetooth-pairing-dialog.c:117
 #, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgid "'%s' wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "\"%s\" vil oprette forbindelse med denne enhed. Vil du give tilladelse?"
@@ -209,12 +205,12 @@ msgid "Dismiss"
 msgstr "Afvis"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
 msgstr "Annullér"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-pairing-dialog.c:289
 #: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Acceptér"
@@ -231,18 +227,18 @@ msgstr "Opkoblet"
 msgid "Disconnected"
 msgstr "Afkoblet"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: ../lib/bluetooth-settings-widget.c:1143
 msgid "Yes"
 msgstr "Ja"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: ../lib/bluetooth-settings-widget.c:1143
 msgid "No"
 msgstr "Nej"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer” followed by the
 #. * location of the Downloads folder.
-#: ../lib/bluetooth-settings-widget.c:1222
+#: ../lib/bluetooth-settings-widget.c:1243
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -251,31 +247,29 @@ msgstr ""
 "Synlig som \"%s\" og tilgængelig for Bluetooth-filoverførsel. Overførte "
 "filer placeres i mappen <a href=\"%s\">Hentninger</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1249
+#: ../lib/bluetooth-settings-widget.c:1270
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Fjern \"%s\" fra listen over enheder?"
 
-#: ../lib/bluetooth-settings-widget.c:1251
+#: ../lib/bluetooth-settings-widget.c:1272
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Hvis du fjerner enheden, skal du sætte den op igen, før den kan bruges næste "
 "gang."
 
-#: ../lib/bluetooth-settings-widget.c:1255
+#: ../lib/bluetooth-settings-widget.c:1276
 msgid "_Remove"
 msgstr "_Fjern"
 
 #. Translators: %s is the name of the filename received
 #: ../lib/bluetooth-settings-obexpush.c:145
 #, c-format
-#| msgid "Send files via Bluetooth"
 msgid "You received \"%s\" via Bluetooth"
 msgstr "Du modtog \"%s\" via Bluetooth"
 
 #: ../lib/bluetooth-settings-obexpush.c:147
-#| msgid "Receive Files"
 msgid "You received a file"
 msgstr "Du modtog en fil"
 
@@ -284,7 +278,6 @@ msgid "Open File"
 msgstr "Åbn fil"
 
 #: ../lib/bluetooth-settings-obexpush.c:162
-#| msgid "Receive Files"
 msgid "Reveal File"
 msgstr "Vis fil"
 
@@ -294,7 +287,6 @@ msgstr "Filmodtagelse fuldført"
 
 #: ../lib/bluetooth-settings-obexpush.c:233
 #, c-format
-#| msgid "Bluetooth File Transfer"
 msgid "Bluetooth file transfer from %s"
 msgstr "Bluetooth-filoverførsel fra %s"
 
@@ -405,7 +397,7 @@ msgstr "Indstillinger for _tastatur"
 
 #: ../lib/settings.ui.h:8
 msgid "Send _Files…"
-msgstr "Send _filer…"
+msgstr "Send _filer …"
 
 #: ../lib/settings.ui.h:9
 msgid "_Remove Device"
@@ -428,8 +420,7 @@ msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
-"Sørg for at fjernenhed er tændt, og at den accepterer "
-"Bluetooth-forbindelser"
+"Sørg for at fjernenhed er tændt, og at den accepterer Bluetooth-forbindelser"
 
 #: ../sendto/main.c:363
 #, c-format
@@ -461,7 +452,7 @@ msgstr[1] "ca. %'d timer"
 
 #: ../sendto/main.c:402 ../sendto/main.c:500
 msgid "Connecting…"
-msgstr "Danner forbindelse…"
+msgstr "Danner forbindelse …"
 
 #: ../sendto/main.c:444
 msgid "Bluetooth File Transfer"
@@ -548,7 +539,7 @@ msgstr "NAVN"
 
 #: ../sendto/main.c:846
 msgid "[FILE...]"
-msgstr "[FIL...]"
+msgstr "[FIL …]"
 
 #~ msgid "Visible as “%s”"
 #~ msgstr "Synlig som “%s”"
@@ -581,10 +572,10 @@ msgstr "[FIL...]"
 #~ msgstr "Opsætning af \"%s\" mislykkedes"
 
 #~ msgid "Connecting to '%s'..."
-#~ msgstr "Tilslutter til \"%s\"..."
+#~ msgstr "Tilslutter til \"%s\" …"
 
 #~ msgid "Please wait while finishing setup on device '%s'..."
-#~ msgstr "Vent venligst mens opsætningen af enheden \"%s\" færdiggøres..."
+#~ msgstr "Vent venligst mens opsætningen af enheden \"%s\" færdiggøres …"
 
 #~ msgid "Successfully set up new device '%s'"
 #~ msgstr "Opsætning af den nye enhed \"%s\" er fuldført"
@@ -593,7 +584,7 @@ msgstr "[FIL...]"
 #~ msgstr "Opsætning af ny Bluetooth-enhed"
 
 #~ msgid "PIN _options..."
-#~ msgstr "_Indstillinger for PIN-kode..."
+#~ msgstr "_Indstillinger for PIN-kode …"
 
 #~ msgid "Device Search"
 #~ msgstr "Søgning efter enhed"
@@ -653,7 +644,7 @@ msgstr "[FIL...]"
 #~ msgstr "Opsæt Bluetooth-enheder"
 
 #~ msgid "Connecting..."
-#~ msgstr "Kobler på..."
+#~ msgstr "Kobler på …"
 
 #~ msgid "Turn on Bluetooth"
 #~ msgstr "Aktivér Bluetooth"
@@ -671,7 +662,7 @@ msgstr "[FIL...]"
 #~ msgstr "Bluetooth: Slået fra"
 
 #~ msgid "Disconnecting..."
-#~ msgstr "Kobler af..."
+#~ msgstr "Kobler af …"
 
 #~ msgid "Disconnect"
 #~ msgstr "Kobl af"
@@ -680,10 +671,10 @@ msgstr "[FIL...]"
 #~ msgstr "Kobl på"
 
 #~ msgid "Send files..."
-#~ msgstr "Send filer..."
+#~ msgstr "Send filer …"
 
 #~ msgid "Browse files..."
-#~ msgstr "Gennemse filer..."
+#~ msgstr "Gennemse filer …"
 
 #~ msgid "Debug"
 #~ msgstr "Fejlsøg"
@@ -745,10 +736,10 @@ msgstr "[FIL...]"
 #~ msgstr "Synlig"
 
 #~ msgid "Send files to device..."
-#~ msgstr "Send filer til enhed..."
+#~ msgstr "Send filer til enhed …"
 
 #~ msgid "Set up new device..."
-#~ msgstr "Opsætning af ny enhed..."
+#~ msgstr "Opsætning af ny enhed …"
 
 #~ msgid "Bluetooth Settings"
 #~ msgstr "Indstillinger for Bluetooth"
@@ -796,7 +787,7 @@ msgstr "[FIL...]"
 #~ msgstr "Indstillinger"
 
 #~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Vis kun Bluetooth-enheder med..."
+#~ msgstr "Vis kun Bluetooth-enheder med …"
 
 #~ msgid "Select Device to Browse"
 #~ msgstr "Vælg enhed at gennemse"
@@ -808,7 +799,7 @@ msgstr "[FIL...]"
 #~ msgstr "Vælg enhed at gennemse"
 
 #~ msgid "Browse files on device..."
-#~ msgstr "Gennemse filer på enhed..."
+#~ msgstr "Gennemse filer på enhed …"
 
 #~ msgid "Bluetooth is disabled"
 #~ msgstr "Bluetooth er slået fra"
@@ -823,7 +814,7 @@ msgstr "[FIL...]"
 #~ msgstr "Synlighed"
 
 #~ msgid "Browse Files..."
-#~ msgstr "Gennemse filer..."
+#~ msgstr "Gennemse filer …"
 
 #~ msgctxt "Power"
 #~ msgid "Bluetooth"
@@ -850,11 +841,11 @@ msgstr "[FIL...]"
 
 #~ msgid ""
 #~ "The device will need to be within 10 meters of your computer, and be "
-#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
-#~ "in doubt."
+#~ "“visible” (sometimes called “discoverable”). Check the device's manual if in "
+#~ "doubt."
 #~ msgstr ""
-#~ "Enheden skal være inden for 10 meters afstand af din computer, og skal "
-#~ "være “synlig” (eng. “discoverable” eller “visible”). I tvivlstilfælde bør "
+#~ "Enheden skal være inden for 10 meters afstand af din computer, og skal være "
+#~ "“synlig” (eng. “discoverable” eller “visible”). I tvivlstilfælde bør "
 #~ "enhedens manual konsulteres."
 
 #~ msgid "Welcome to the Bluetooth new device setup"
@@ -942,13 +933,13 @@ msgstr "[FIL...]"
 #~ msgstr "Bluetooth-håndteringspanel"
 
 #~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Åbn tastaturindstillinger..."
+#~ msgstr "Åbn tastaturindstillinger …"
 
 #~ msgid "Open Mouse Preferences..."
-#~ msgstr "Åbn museindstillinger..."
+#~ msgstr "Åbn museindstillinger …"
 
 #~ msgid "Open Sound Preferences..."
-#~ msgstr "Åbn lydindstillinger..."
+#~ msgstr "Åbn lydindstillinger …"
 
 #~ msgid "Bluetooth: Enabled"
 #~ msgstr "Bluetooth: Slået til"
@@ -969,7 +960,7 @@ msgstr "[FIL...]"
 #~ msgstr "Venskabeligt navn"
 
 #~ msgid "Set up _new device..."
-#~ msgstr "Opsætning af _ny enhed..."
+#~ msgstr "Opsætning af _ny enhed …"
 
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr "Kan ikke starte indstillinger for \"Personlig Fildeling\""
@@ -1127,13 +1118,12 @@ msgstr "[FIL...]"
 #~ msgid ""
 #~ "If the service for receiving remote files via Bluetooth is enabled or not."
 #~ msgstr ""
-#~ "Hvorvidt tjenesten for modtagelse af fjerne filer via Bluetooth er "
-#~ "aktiveret eller ej."
+#~ "Hvorvidt tjenesten for modtagelse af fjerne filer via Bluetooth er aktiveret "
+#~ "eller ej."
 
 #~ msgid "If the service for sharing files via Bluetooth is enabled or not."
 #~ msgstr ""
-#~ "Hvorvidt tjenesten for deling af filer via Bluetooth er aktiveret eller "
-#~ "ej."
+#~ "Hvorvidt tjenesten for deling af filer via Bluetooth er aktiveret eller ej."
 
 #~ msgid "Please enter the following passkey: %s%s"
 #~ msgstr "Indtast følgende adgangsnøgle: %s%s"
@@ -1272,3 +1262,4 @@ msgstr "[FIL...]"
 
 #~ msgid "Frontline BTSnoop File"
 #~ msgstr "Frontline BTSnoop-fil"
+
