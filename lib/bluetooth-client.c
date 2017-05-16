@@ -623,11 +623,11 @@ adapter_g_properties_changed (GDBusProxy      *adapter,
 					    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
 			if (is_default != FALSE && powered) {
 				g_object_notify (G_OBJECT (client), "default-adapter");
-				g_object_notify (G_OBJECT (client), "default-adapter-powered");
 				g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 				g_object_notify (G_OBJECT (client), "default-adapter-discovering");
 				g_object_notify (G_OBJECT (client), "default-adapter-name");
 			}
+			g_object_notify (G_OBJECT (client), "default-adapter-powered");
 			notify = TRUE;
 		} else if (g_str_equal (property, "Discoverable") == TRUE) {
 			gboolean discoverable = g_variant_get_boolean (v);
