@@ -1,1 +1,0 @@
-SUBDIRS = libgnome-bluetooth
