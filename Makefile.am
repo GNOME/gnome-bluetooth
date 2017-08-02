@@ -2,7 +2,8 @@ SUBDIRS = icons lib sendto docs po
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make
+EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make \
+	meson.build meson_options.txt meson_post_install.py po/meson.build
 
 AM_DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update \

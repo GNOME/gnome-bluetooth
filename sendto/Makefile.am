@@ -24,7 +24,7 @@ desktop_in_files = bluetooth-sendto.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = $(man_MANS) $(desktop_in_in_files)
+EXTRA_DIST = $(man_MANS) $(desktop_in_in_files) meson.build
 DISTCLEANFILES = bluetooth-sendto.desktop
 
 MAINTAINERCLEANFILES = Makefile.in

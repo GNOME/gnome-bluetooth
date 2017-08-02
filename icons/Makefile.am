@@ -34,7 +34,7 @@ noinst_DATA = hicolor_apps_16x16_bluetooth.svg \
 		hicolor_status_32x32_bluetooth-disabled.svg \
 		hicolor_status_48x48_bluetooth-disabled.svg
 
-EXTRA_DIST = $(icons) $(noinst_DATA)
+EXTRA_DIST = $(icons) $(noinst_DATA) meson.build
 
 MAINTAINERCLEANFILES = Makefile.in
 
