@@ -163,9 +163,6 @@ pkg = import('pkgconfig')
 
 po_dir = join_paths(meson.source_root(), 'po')
 
-intltool_merge = find_program('intltool-merge')
-intltool_cache = join_paths(po_dir, '.intltool-merge-cache')
-
 top_inc = include_directories('.')
 
 subdir('icons')

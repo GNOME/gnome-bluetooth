@@ -33,19 +33,20 @@ install_man(
 desktop_conf = configuration_data()
 desktop_conf.set('VERSION', gnomebt_version)
 
-desktop_name = name + '.desktop'
+desktop = name + '.desktop'
 
 desktop_in = configure_file(
-  input: desktop_name + '.in.in',
-  output: desktop_name + '.in',
+  input: desktop + '.in.in',
+  output: desktop + '.in',
   configuration: desktop_conf
 )
 
-custom_target(
-  desktop_name,
+i18n.merge_file (
+  desktop,
+  type: 'desktop',
   input: desktop_in,
-  output: desktop_name,
-  command: [intltool_merge, '-d', '-u', '-c', intltool_cache, po_dir, '@INPUT@', '@OUTPUT@'],
+  output: desktop,
+  po_dir: po_dir,
   install: true,
   install_dir: join_paths(gnomebt_datadir, 'applications')
 )
