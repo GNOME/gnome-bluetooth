@@ -1520,7 +1520,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
 	priv->child_box = box;
 
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
 
 	s = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
@@ -1528,9 +1528,8 @@ add_device_section (BluetoothSettingsWidget *self)
 	g_free (s);
 	gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
-	gtk_widget_set_margin_start (widget, 6);
 	gtk_widget_set_margin_end (widget, 6);
-	gtk_widget_set_margin_bottom (widget, 6);
+	gtk_widget_set_margin_bottom (widget, 12);
 	gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
 
 	/* Discoverable spinner */
@@ -1538,7 +1537,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	g_object_bind_property (G_OBJECT (priv->client), "default-adapter-discovering",
 				G_OBJECT (priv->device_spinner), "active",
 				G_BINDING_SYNC_CREATE);
-	gtk_widget_set_margin_bottom (spinner, 6);
+	gtk_widget_set_margin_bottom (spinner, 12);
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, TRUE, 0);
 
 	/* Discoverable label placeholder, the real name is set in update_visibility().
