@@ -894,10 +894,6 @@ create_callback (GObject      *source_object,
 	ret = bluetooth_client_setup_device_finish (BLUETOOTH_CLIENT (source_object),
 						    res, &path, &error);
 
-	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
-
-	g_hash_table_remove (priv->pairing_devices, path);
-
 	/* Create failed */
 	if (ret == FALSE) {
 		//char *text;
@@ -933,6 +929,10 @@ create_callback (GObject      *source_object,
 	}
 
 	priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+
+	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+
+	g_hash_table_remove (priv->pairing_devices, path);
 
 	bluetooth_client_set_trusted (BLUETOOTH_CLIENT (source_object), path, TRUE);
 
