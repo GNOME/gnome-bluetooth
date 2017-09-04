@@ -4,15 +4,15 @@
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Bùi Xuân Dương <buixuanduong1983@gmail.com>, 2009.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2012.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2013-2014, 2015.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2013-2014, 2015, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-26 18:51+0000\n"
-"PO-Revision-Date: 2015-09-27 08:16+0700\n"
+"POT-Creation-Date: 2017-09-02 12:59+0000\n"
+"PO-Revision-Date: 2017-09-04 15:03+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -22,163 +22,163 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: ../lib/bluetooth-chooser-button.c:71
+#: lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Dùng chuột để chọn thiết bị…"
 
-#: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
-#: ../sendto/main.c:738 ../sendto/main.c:794
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1275
+#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "T_hôi"
 
-#: ../lib/bluetooth-chooser-button.c:202
+#: lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "Đồn_g ý"
 
-#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:101
+#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
+#: lib/bluetooth-utils.c:99
 msgid "Unknown"
 msgstr "Không biết"
 
-#: ../lib/bluetooth-chooser.c:176
+#: lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Không có bộ điều hợp"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
-#: ../lib/bluetooth-settings-widget.c:1541
+#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
+#: lib/bluetooth-settings-widget.c:1561
 msgid "Searching for devices…"
 msgstr "Đang tìm thiết bị…"
 
-#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
+#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "Thiết bị"
 
-#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
+#: lib/bluetooth-chooser.c:734 lib/settings.ui:179
 msgid "Type"
 msgstr "Kiểu"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
+#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1524
 msgid "Devices"
 msgstr "Thiết bị"
 
-#: ../lib/bluetooth-filter-widget.c:72
+#: lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Mọi chủng loại"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
+#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:134
 msgid "Paired"
 msgstr "Đã kết đôi"
 
-#: ../lib/bluetooth-filter-widget.c:76
+#: lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "Tin cậy"
 
-#: ../lib/bluetooth-filter-widget.c:78
+#: lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "Không kết nối hoặc tin cậy"
 
-#: ../lib/bluetooth-filter-widget.c:80
+#: lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "Đã kết nối hoặc tin cậy"
 
 #. This is the title of the filter section of the Bluetooth device chooser.
 #. * It used to say Show Only Bluetooth Devices With...
-#: ../lib/bluetooth-filter-widget.c:231
+#: lib/bluetooth-filter-widget.c:231
 msgid "Show:"
 msgstr "Hiện:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_Chủng loại thiết bị:"
 
-#: ../lib/bluetooth-filter-widget.c:258
+#: lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Chọn kiểu thiết bị để lọc"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:272
+#: lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "_Kiểu thiết bị:"
 
-#: ../lib/bluetooth-filter-widget.c:289
+#: lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Chọn kiểu thiết bị để lọc"
 
-#: ../lib/bluetooth-filter-widget.c:295
+#: lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Thiết bị nhập liệu (con chuột, bàn phím, v.v..)"
 
-#: ../lib/bluetooth-filter-widget.c:299
+#: lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Tai nghe và các thiết bị âm thanh khác"
 
-#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
-#: ../lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "Xác nhận PIN Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:84
+#: lib/bluetooth-pairing-dialog.c:84
 #, c-format
-msgid "Please confirm the PIN that was entered on '%s'."
+msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Vui lòng xác nhận mã PIN cái đã nhập vào trên “%s”."
 
-#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
-#: ../lib/bluetooth-pairing-dialog.c:149
+#: lib/bluetooth-pairing-dialog.c:88 lib/bluetooth-pairing-dialog.c:101
+#: lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "Xác nhận"
 
-#: ../lib/bluetooth-pairing-dialog.c:91
+#: lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
-"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
-"device's manual."
+"Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
+"device’s manual."
 msgstr ""
 "Xác nhận mã PIN Bluetooth cho “%s”. Cái này bạn có thể tìm thấy trên quyển "
 "sổ hướng dẫn sử dụng của thiết bị."
 
-#: ../lib/bluetooth-pairing-dialog.c:97
+#: lib/bluetooth-pairing-dialog.c:97
 #, c-format
-msgid "Pairing '%s'"
+msgid "Pairing “%s”"
 msgstr "Ghép đôi “%s”"
 
-#: ../lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
-"Please confirm that the following PIN matches the one displayed on '%s'."
+"Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "Vui lòng xác nhận mã PIN khớp với cái hiển thị trên “%s”."
 
-#: ../lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Yêu cầu kết đôi Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:111
+#: lib/bluetooth-pairing-dialog.c:111
 #, c-format
-msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr "“%s” muốn kết đôi với thiết bị này. Bạn có cho kết đôi không?"
 
-#: ../lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:116
 msgid "Confirm Bluetooth Connection"
 msgstr "Xác nhận kết nối Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:117
+#: lib/bluetooth-pairing-dialog.c:117
 #, c-format
-msgid "'%s' wants to connect with this device. Do you want to allow it?"
-msgstr "“%s” muốn kết nối với thiết bị này. Bạn có cho kết đôi không?"
+msgid "“%s” wants to connect with this device. Do you want to allow it?"
+msgstr "“%s” muốn kết nối với thiết bị này. Bạn có cho phép nó không?"
 
-#: ../lib/bluetooth-pairing-dialog.c:125
+#: lib/bluetooth-pairing-dialog.c:125
 #, c-format
-msgid "Please enter the following PIN on '%s'."
-msgstr "Hãy điền mã PIN sau trên “%s”."
+msgid "Please enter the following PIN on “%s”."
+msgstr "Vui lòng điền mã PIN sau đây vào “%s”."
 
-#: ../lib/bluetooth-pairing-dialog.c:128
+#: lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
-"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
-msgstr "Hãy điền mã PIN sau trên “%s”. Rồi nhấn “Enter” trên bàn phím."
+"Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
+msgstr ""
+"Vui lòng điền mã PIN sau đây trên “%s”. Rồi nhấn “Enter” trên bàn phím."
 
-#: ../lib/bluetooth-pairing-dialog.c:131
+#: lib/bluetooth-pairing-dialog.c:131
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -186,49 +186,48 @@ msgstr ""
 "Vui lòng di chuyển cần điều khiển iCade của bạn theo theo hướng sau. Sau đó "
 "bấm bất kỳ phím trắng nào."
 
-#: ../lib/bluetooth-pairing-dialog.c:139
+#: lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "Cho phép"
 
-#: ../lib/bluetooth-pairing-dialog.c:143
+#: lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "Gạt bỏ"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:277
-#: ../lib/bluetooth-settings-obexpush.c:246
+#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Chấp nhận"
 
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
+#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:37
 msgid "Not Set Up"
 msgstr "Chưa cài đặt"
 
-#: ../lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:81
 msgid "Connected"
 msgstr "Đã kết nối"
 
-#: ../lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:83
 msgid "Disconnected"
 msgstr "Chưa kết nối"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: lib/bluetooth-settings-widget.c:1143
 msgid "Yes"
 msgstr "Có"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: lib/bluetooth-settings-widget.c:1143
 msgid "No"
 msgstr "Không"
 
 #. translators: first %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: ../lib/bluetooth-settings-widget.c:1222
+#: lib/bluetooth-settings-widget.c:1243
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -237,291 +236,296 @@ msgstr ""
 "Xuất hiện như là “%s” và sẵn sàng cho truyền các tập tin qua Bluetooth. Các "
 "tập tin đã truyền được đặt ở trong thư mục <a href=\"%s\">Tải về</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1270
 #, c-format
-msgid "Remove '%s' from the list of devices?"
+msgid "Remove “%s” from the list of devices?"
 msgstr "Xóa “%s” ra khỏi danh sách thiết bị?"
 
-#: ../lib/bluetooth-settings-widget.c:1251
+#: lib/bluetooth-settings-widget.c:1272
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Nếu bạn gỡ bỏ thiết bị, bạn sẽ phải cài đặt lại nó khi dùng nó lần sau."
 
-#: ../lib/bluetooth-settings-widget.c:1255
+#: lib/bluetooth-settings-widget.c:1276
 msgid "_Remove"
 msgstr "_Xóa bỏ"
 
 #. Translators: %s is the name of the filename received
-#: ../lib/bluetooth-settings-obexpush.c:145
+#: lib/bluetooth-settings-obexpush.c:145
 #, c-format
-msgid "You received \"%s\" via Bluetooth"
+msgid "You received “%s” via Bluetooth"
 msgstr "Bạn đã nhận \"%s\" thông qua Bluetooth"
 
-#: ../lib/bluetooth-settings-obexpush.c:147
+#: lib/bluetooth-settings-obexpush.c:147
 msgid "You received a file"
 msgstr "Bạn đã nhận một tập tin"
 
-#: ../lib/bluetooth-settings-obexpush.c:158
+#: lib/bluetooth-settings-obexpush.c:158
 msgid "Open File"
 msgstr "Mở tập tin"
 
-#: ../lib/bluetooth-settings-obexpush.c:162
+#: lib/bluetooth-settings-obexpush.c:162
 msgid "Reveal File"
 msgstr "Hiện tập tin"
 
-#: ../lib/bluetooth-settings-obexpush.c:179
+#: lib/bluetooth-settings-obexpush.c:179
 msgid "File reception complete"
 msgstr "Hoàn tất nhận tập tin"
 
-#: ../lib/bluetooth-settings-obexpush.c:233
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Truyền tập tin qua Bluetooth từ %s"
 
-#: ../lib/bluetooth-settings-obexpush.c:243
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "Từ chối"
 
-#: ../lib/bluetooth-utils.c:59
-msgid "All types"
-msgstr "Mọi kiểu"
-
-#: ../lib/bluetooth-utils.c:61
+#: lib/bluetooth-utils.c:59
 msgid "Phone"
 msgstr "Điện thoại"
 
-#: ../lib/bluetooth-utils.c:63
+#: lib/bluetooth-utils.c:61
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:65
+#: lib/bluetooth-utils.c:63
 msgid "Computer"
 msgstr "Máy tính"
 
-#: ../lib/bluetooth-utils.c:67
+#: lib/bluetooth-utils.c:65
 msgid "Network"
 msgstr "Mạng"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:70
+#: lib/bluetooth-utils.c:68
 msgid "Headset"
-msgstr "Tai nghe"
+msgstr "Tai nghe đàm thoại"
 
-#: ../lib/bluetooth-utils.c:72
+#: lib/bluetooth-utils.c:70
 msgid "Headphones"
 msgstr "Tai nghe"
 
-#: ../lib/bluetooth-utils.c:74
+#: lib/bluetooth-utils.c:72
 msgid "Audio device"
 msgstr "Thiết bị âm thanh"
 
-#: ../lib/bluetooth-utils.c:76
+#: lib/bluetooth-utils.c:74
 msgid "Keyboard"
 msgstr "Bàn phím"
 
-#: ../lib/bluetooth-utils.c:78
+#: lib/bluetooth-utils.c:76
 msgid "Mouse"
 msgstr "Chuột"
 
-#: ../lib/bluetooth-utils.c:80
+#: lib/bluetooth-utils.c:78
 msgid "Camera"
 msgstr "Máy ảnh"
 
-#: ../lib/bluetooth-utils.c:82
+#: lib/bluetooth-utils.c:80
 msgid "Printer"
 msgstr "Máy in"
 
-#: ../lib/bluetooth-utils.c:84
+#: lib/bluetooth-utils.c:82
 msgid "Joypad"
 msgstr "Tay chơi game"
 
-#: ../lib/bluetooth-utils.c:86
+#: lib/bluetooth-utils.c:84
 msgid "Tablet"
 msgstr "Máy tính bảng"
 
-#: ../lib/bluetooth-utils.c:88
+#: lib/bluetooth-utils.c:86
 msgid "Video device"
 msgstr "Thiết bị phim ảnh"
 
-#: ../lib/bluetooth-utils.c:90
+#: lib/bluetooth-utils.c:88
 msgid "Remote control"
 msgstr "Điều khiển từ xa"
 
-#: ../lib/bluetooth-utils.c:92
+#: lib/bluetooth-utils.c:90
 msgid "Scanner"
 msgstr "Máy quét"
 
-#: ../lib/bluetooth-utils.c:94
+#: lib/bluetooth-utils.c:92
 msgid "Display"
 msgstr "Màn hình"
 
-#: ../lib/bluetooth-utils.c:96
+#: lib/bluetooth-utils.c:94
 msgid "Wearable"
 msgstr "Mang được"
 
-#: ../lib/bluetooth-utils.c:98
+#: lib/bluetooth-utils.c:96
 msgid "Toy"
 msgstr "Đồ chơi"
 
-#: ../lib/settings.ui.h:1
+#: lib/bluetooth-utils.c:117
+msgid "All types"
+msgstr "Mọi kiểu"
+
+#: lib/settings.ui:44
 msgid "Connection"
 msgstr "Kết nối"
 
-#: ../lib/settings.ui.h:4
+#: lib/settings.ui:224
 msgid "Address"
 msgstr "Địa chỉ"
 
-#: ../lib/settings.ui.h:5
+#: lib/settings.ui:279
 msgid "_Mouse & Touchpad Settings"
 msgstr "Cài đặt Ch_uột & Touchpad"
 
-#: ../lib/settings.ui.h:6
+#: lib/settings.ui:293
 msgid "_Sound Settings"
 msgstr "Cài đặt Â_m thanh"
 
-#: ../lib/settings.ui.h:7
+#: lib/settings.ui:307
 msgid "_Keyboard Settings"
 msgstr "Cài đặt _Bàn phím"
 
-#: ../lib/settings.ui.h:8
+#: lib/settings.ui:321
 msgid "Send _Files…"
 msgstr "Gửi _tập tin…"
 
-#: ../lib/settings.ui.h:9
+#: lib/settings.ui:335
 msgid "_Remove Device"
 msgstr "Đĩa _di động"
 
-#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+#: sendto/bluetooth-sendto.desktop.in.in:3
 msgid "Bluetooth Transfer"
 msgstr "Truyền Bluetooth"
 
-#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+#: sendto/bluetooth-sendto.desktop.in.in:4
 msgid "Send files via Bluetooth"
 msgstr "Gửi tập tin thông qua Bluetooth"
 
-#: ../sendto/main.c:117
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: sendto/bluetooth-sendto.desktop.in.in:6
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#: sendto/main.c:117
 msgid "An unknown error occurred"
 msgstr "Đã gặp lỗi không xác định"
 
-#: ../sendto/main.c:130
+#: sendto/main.c:130
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr "Kiểm tra thiết bị từ xa đã bật và chấp nhận kết nối Bluetooth"
 
-#: ../sendto/main.c:363
+#: sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d giây"
 
-#: ../sendto/main.c:368 ../sendto/main.c:381
+#: sendto/main.c:368 sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d phút"
 
-#: ../sendto/main.c:379
+#: sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d giờ"
 
-#: ../sendto/main.c:389
+#: sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "khoảng %'d giờ"
 
-#: ../sendto/main.c:402 ../sendto/main.c:500
+#: sendto/main.c:402 sendto/main.c:500
 msgid "Connecting…"
 msgstr "Đang kết nối…"
 
-#: ../sendto/main.c:444
+#: sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "Truyền tập tin qua Bluetooth"
 
-#: ../sendto/main.c:448
+#: sendto/main.c:448
 msgid "_Retry"
 msgstr "_Thử lại"
 
-#: ../sendto/main.c:470
+#: sendto/main.c:470
 msgid "From:"
 msgstr "Từ:"
 
-#: ../sendto/main.c:484
+#: sendto/main.c:484
 msgid "To:"
 msgstr "Đến:"
 
-#: ../sendto/main.c:577
+#: sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "Đang gửi %s"
 
-#: ../sendto/main.c:584 ../sendto/main.c:633
+#: sendto/main.c:584 sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Đang gửi %d / %d tập tin"
 
-#: ../sendto/main.c:629
+#: sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:631
+#: sendto/main.c:631
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:662
+#: sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "đã truyền xong %u"
 
-#: ../sendto/main.c:669
+#: sendto/main.c:669
 msgid "_Close"
 msgstr "Đón_g"
 
-#: ../sendto/main.c:679
+#: sendto/main.c:679
 msgid "There was an error"
 msgstr "Đã có lỗi xảy ra"
 
-#: ../sendto/main.c:734
+#: sendto/main.c:734
 msgid "Select device to send to"
 msgstr "Chọn thiết bị để gửi đến"
 
-#: ../sendto/main.c:739
+#: sendto/main.c:739
 msgid "_Send"
 msgstr "_Gửi"
 
-#: ../sendto/main.c:789
+#: sendto/main.c:789
 msgid "Choose files to send"
 msgstr "Chọn tập tin để gửi"
 
-#: ../sendto/main.c:795
+#: sendto/main.c:795
 msgid "Select"
 msgstr "Chọn"
 
-#: ../sendto/main.c:825
+#: sendto/main.c:825
 msgid "Remote device to use"
 msgstr "Thiết bị từ xa sẽ dùng"
 
-#: ../sendto/main.c:825
+#: sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ĐỊA_CHỈ"
 
-#: ../sendto/main.c:827
-msgid "Remote device's name"
+#: sendto/main.c:827
+msgid "Remote device’s name"
 msgstr "Tên của thiết bị từ xa"
 
-#: ../sendto/main.c:827
+#: sendto/main.c:827
 msgid "NAME"
 msgstr "TÊN"
 
-#: ../sendto/main.c:846
-msgid "[FILE...]"
+#: sendto/main.c:846
+msgid "[FILE…]"
 msgstr "[TẬP TIN…]"
 
 #~ msgid "Visible as “%s”"
