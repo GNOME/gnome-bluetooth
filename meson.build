@@ -1,6 +1,6 @@
 project(
   'gnome-bluetooth', 'c',
-  version: '3.25.91',
+  version: '3.26.0',
   license: 'GPL2+',
   default_options: [
     'buildtype=debugoptimized',
