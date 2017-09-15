@@ -5,12 +5,6 @@ deps = [
   dependency('gio-2.0')
 ]
 
-cflags = [
-  '-DDATADIR="@0@"'.format(gnomebt_datadir),
-  '-DICONDIR="@0@"'.format(gnomebt_icondir),
-  '-DLOCALEDIR="@0@"'.format(gnomebt_localedir)
-]
-
 executable(
   name,
   'main.c',
@@ -19,7 +13,6 @@ executable(
     lib_inc
   ],
   dependencies: deps,
-  c_args: cflags,
   link_with: libgnome_bluetooth,
   install: true,
   install_dir: gnomebt_bindir
