@@ -35,7 +35,7 @@ gnomebt_mandir = join_paths(gnomebt_prefix, get_option('mandir'))
 gnomebt_pkgdatadir = join_paths(gnomebt_datadir, meson.project_name())
 gnomebt_pkglibdir = join_paths(gnomebt_libdir, meson.project_name())
 
-gnomebt_icondir = join_paths(gnomebt_datadir, 'icons', 'hicolor')
+gnomebt_icondir = join_paths(gnomebt_datadir, 'icons')
 
 gnomebt_buildtype = get_option('buildtype')
 gnomebt_debug = gnomebt_buildtype.contains('debug')
