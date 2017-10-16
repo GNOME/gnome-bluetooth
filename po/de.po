@@ -14,11 +14,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-05 18:17+0000\n"
-"PO-Revision-Date: 2015-09-05 21:59+0200\n"
-"Last-Translator: Bernd Homuth <dev@hmt.im>\n"
+"POT-Creation-Date: 2017-09-01 07:01+0000\n"
+"PO-Revision-Date: 2017-10-16 19:59+0200\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -26,14 +26,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: ../lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Klicken, um das Gerät auszuwählen …"
 
 #: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
+#: ../lib/bluetooth-settings-widget.c:1275 ../sendto/main.c:447
 #: ../sendto/main.c:738 ../sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_bbrechen"
@@ -43,7 +43,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:101
+#: ../lib/bluetooth-utils.c:99
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -52,7 +52,7 @@ msgid "No adapters available"
 msgstr "Keine Adapter verfügbar"
 
 #: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
-#: ../lib/bluetooth-settings-widget.c:1541
+#: ../lib/bluetooth-settings-widget.c:1564
 msgid "Searching for devices…"
 msgstr "Nach Geräten wird gesucht …"
 
@@ -64,7 +64,7 @@ msgstr "Gerät "
 msgid "Type"
 msgstr "Typ"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1526
 msgid "Devices"
 msgstr "Geräte"
 
@@ -169,13 +169,11 @@ msgstr ""
 "Verbindung zulassen?"
 
 #: ../lib/bluetooth-pairing-dialog.c:116
-#| msgid "Confirm Bluetooth PIN"
 msgid "Confirm Bluetooth Connection"
 msgstr "Bluetooth-Verbindung bestätigen"
 
 #: ../lib/bluetooth-pairing-dialog.c:117
 #, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgid "'%s' wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "Gerät »%s« möchte mit diesem Rechner gekoppelt werden. Möchten Sie die "
@@ -211,12 +209,12 @@ msgid "Dismiss"
 msgstr "Verwerfen"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:296
+#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
-msgstr "A_bbrechen"
+msgstr "Abbrechen"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:277
+#: ../lib/bluetooth-pairing-dialog.c:289
 #: ../lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Akzeptieren"
@@ -233,18 +231,18 @@ msgstr "Verbunden"
 msgid "Disconnected"
 msgstr "Verbindung getrennt"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: ../lib/bluetooth-settings-widget.c:1143
 msgid "Yes"
 msgstr "Ja"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: ../lib/bluetooth-settings-widget.c:1143
 msgid "No"
 msgstr "Nein"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera's Computer” followed by the
 #. * location of the Downloads folder.
-#: ../lib/bluetooth-settings-widget.c:1222
+#: ../lib/bluetooth-settings-widget.c:1243
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -253,26 +251,25 @@ msgstr ""
 "Sichtbar als »%s« und verfügbar für Bluetooth-Dateitransfers. Empfangene "
 "Dateien werden im <a href=\"%s\">Downloads</a>-Ordner abgelegt."
 
-#: ../lib/bluetooth-settings-widget.c:1249
+#: ../lib/bluetooth-settings-widget.c:1270
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "»%s« aus der Liste der bekannten Geräte entfernen?"
 
-#: ../lib/bluetooth-settings-widget.c:1251
+#: ../lib/bluetooth-settings-widget.c:1272
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Falls Sie das Gerät entfernen, müssen Sie es vor der nächsten Benutzung "
 "erneut konfigurieren."
 
-#: ../lib/bluetooth-settings-widget.c:1255
+#: ../lib/bluetooth-settings-widget.c:1276
 msgid "_Remove"
 msgstr "_Entfernen"
 
 #. Translators: %s is the name of the filename received
 #: ../lib/bluetooth-settings-obexpush.c:145
 #, c-format
-#| msgid "Send files via Bluetooth"
 msgid "You received \"%s\" via Bluetooth"
 msgstr "Sie haben »%s« über Bluetooth empfangen"
 
@@ -281,7 +278,6 @@ msgid "You received a file"
 msgstr "Sie haben eine Datei empfangen"
 
 #: ../lib/bluetooth-settings-obexpush.c:158
-#| msgid "Send _Files…"
 msgid "Open File"
 msgstr "Datei öffnen"
 
@@ -295,7 +291,6 @@ msgstr "Dateiempfang abgeschlossen"
 
 #: ../lib/bluetooth-settings-obexpush.c:233
 #, c-format
-#| msgid "Bluetooth File Transfer"
 msgid "Bluetooth file transfer from %s"
 msgstr "Bluetooth-Dateiübertragung von %s"
 
@@ -304,85 +299,85 @@ msgid "Decline"
 msgstr "Ablehnen"
 
 #: ../lib/bluetooth-utils.c:59
-msgid "All types"
-msgstr "Alle Typen"
-
-#: ../lib/bluetooth-utils.c:61
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-utils.c:63
+#: ../lib/bluetooth-utils.c:61
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:65
+#: ../lib/bluetooth-utils.c:63
 msgid "Computer"
 msgstr "Rechner"
 
-#: ../lib/bluetooth-utils.c:67
+#: ../lib/bluetooth-utils.c:65
 msgid "Network"
 msgstr "Netzwerk"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:70
+#: ../lib/bluetooth-utils.c:68
 msgid "Headset"
 msgstr "Sprechgarnitur"
 
-#: ../lib/bluetooth-utils.c:72
+#: ../lib/bluetooth-utils.c:70
 msgid "Headphones"
 msgstr "Kopfhörer"
 
-#: ../lib/bluetooth-utils.c:74
+#: ../lib/bluetooth-utils.c:72
 msgid "Audio device"
 msgstr "Audio-Gerät"
 
-#: ../lib/bluetooth-utils.c:76
+#: ../lib/bluetooth-utils.c:74
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../lib/bluetooth-utils.c:78
+#: ../lib/bluetooth-utils.c:76
 msgid "Mouse"
 msgstr "Maus"
 
-#: ../lib/bluetooth-utils.c:80
+#: ../lib/bluetooth-utils.c:78
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../lib/bluetooth-utils.c:82
+#: ../lib/bluetooth-utils.c:80
 msgid "Printer"
 msgstr "Drucker"
 
-#: ../lib/bluetooth-utils.c:84
+#: ../lib/bluetooth-utils.c:82
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../lib/bluetooth-utils.c:86
+#: ../lib/bluetooth-utils.c:84
 msgid "Tablet"
 msgstr "Tablet"
 
-#: ../lib/bluetooth-utils.c:88
+#: ../lib/bluetooth-utils.c:86
 msgid "Video device"
 msgstr "Video-Gerät"
 
-#: ../lib/bluetooth-utils.c:90
+#: ../lib/bluetooth-utils.c:88
 msgid "Remote control"
 msgstr "Fernbedienung"
 
-#: ../lib/bluetooth-utils.c:92
+#: ../lib/bluetooth-utils.c:90
 msgid "Scanner"
 msgstr "Scanner"
 
-#: ../lib/bluetooth-utils.c:94
+#: ../lib/bluetooth-utils.c:92
 msgid "Display"
 msgstr "Anzeige"
 
-#: ../lib/bluetooth-utils.c:96
+#: ../lib/bluetooth-utils.c:94
 msgid "Wearable"
 msgstr "Tragbares Gerät"
 
-#: ../lib/bluetooth-utils.c:98
+#: ../lib/bluetooth-utils.c:96
 msgid "Toy"
 msgstr "Spielzeug"
+
+#: ../lib/bluetooth-utils.c:117
+msgid "All types"
+msgstr "Alle Typen"
 
 #: ../lib/settings.ui.h:1
 msgid "Connection"
