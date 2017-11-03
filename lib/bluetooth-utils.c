@@ -335,6 +335,7 @@ uuid16_to_string (guint uuid16, const char *uuid)
 	case BLUETOOTH_UUID_HFP_AG:
 		return "HandsfreeAudioGateway";
 	case BLUETOOTH_UUID_HID:
+	case 0x1812:
 		return "HumanInterfaceDeviceService";
 	case BLUETOOTH_UUID_SAP:
 		return "SIM_Access";
