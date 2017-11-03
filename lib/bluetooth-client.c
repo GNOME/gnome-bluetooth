@@ -361,7 +361,8 @@ device_g_properties_changed (GDBusProxy      *device,
 			gtk_tree_store_set (priv->store, &iter,
 					    BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 					    -1);
-		} else if (g_str_equal (property, "Class") == TRUE) {
+		} else if (g_str_equal (property, "Class") == TRUE ||
+			   g_str_equal (property, "Appearance") == TRUE) {
 			BluetoothType type;
 			const char *icon = NULL;
 			char *bdaddr;
@@ -370,7 +371,10 @@ device_g_properties_changed (GDBusProxy      *device,
 					    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
 					    -1);
 
-			type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
+			if (g_str_equal (property, "Class") == TRUE)
+				type = bluetooth_class_to_type (g_variant_get_uint32 (v));
+			else
+				type = bluetooth_appearance_to_type (g_variant_get_uint16 (v));
 			icon = icon_override (bdaddr, type);
 
 			g_free (bdaddr);
@@ -380,7 +384,7 @@ device_g_properties_changed (GDBusProxy      *device,
 						    BLUETOOTH_COLUMN_TYPE, type,
 						    BLUETOOTH_COLUMN_ICON, icon,
 						    -1);
-			} else {
+			} else if (type != 0) {
 				gtk_tree_store_set (priv->store, &iter,
 						    BLUETOOTH_COLUMN_TYPE, type,
 						    -1);
@@ -442,9 +446,15 @@ device_added (ObjectManager   *manager,
 	v = g_variant_lookup_value (dict, "Name", G_VARIANT_TYPE_STRING);
 	name = v ? g_variant_get_string (v, NULL) : NULL;
 
-	v = g_variant_lookup_value (dict, "Class", G_VARIANT_TYPE_UINT32);
-	type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
+	v = g_variant_lookup_value (dict, "Appearance", G_VARIANT_TYPE_UINT16);
+	type = v ? bluetooth_appearance_to_type (g_variant_get_uint16 (v)) : BLUETOOTH_TYPE_ANY;
 	icon = icon_override (address, type);
+
+	if (type == BLUETOOTH_TYPE_ANY) {
+		v = g_variant_lookup_value (dict, "Class", G_VARIANT_TYPE_UINT32);
+		type = v ? bluetooth_class_to_type (g_variant_get_uint32 (v)) : BLUETOOTH_TYPE_ANY;
+		icon = icon_override (address, type);
+	}
 
 	if (icon == NULL) {
 		v = g_variant_lookup_value (dict, "Icon", G_VARIANT_TYPE_STRING);
