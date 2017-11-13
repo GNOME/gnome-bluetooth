@@ -29,7 +29,6 @@
 #include <gio/gio.h>
 
 #include "bluetooth-client-glue.h"
-#include "bluetooth-fdo-glue.h"
 #include "bluetooth-agent.h"
 
 #define BLUEZ_SERVICE			"org.bluez"
