@@ -409,12 +409,11 @@ device_g_properties_changed (GDBusProxy      *device,
 
 static void
 device_added (GDBusObjectManager   *manager,
-	      const char           *path,
+	      Device1              *device,
 	      BluetoothClient      *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GDBusProxy *adapter;
-	Device1 *device;
 	Properties *properties;
 	const char *adapter_path, *address, *alias, *name, *icon;
 	char **uuids;
@@ -424,19 +423,10 @@ device_added (GDBusObjectManager   *manager,
 	GtkTreeIter iter, parent;
 	guint16 appearance;
 
-	device = device1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						 G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-						 BLUEZ_SERVICE,
-						 path,
-						 NULL,
-						 NULL);
-	if (device == NULL)
-		return;
-
 	properties = properties_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
 							BLUEZ_SERVICE,
-							path,
+							g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (device))),
 							NULL,
 							NULL);
 
@@ -510,7 +500,6 @@ device_added (GDBusObjectManager   *manager,
 			  G_CALLBACK (device_g_properties_changed), client);
 
 	g_object_unref (properties);
-	g_object_unref (device);
 	g_object_unref (adapter);
 }
 
@@ -702,27 +691,19 @@ adapter_g_properties_changed (GDBusProxy      *adapter,
 
 static void
 adapter_added (GDBusObjectManager   *manager,
-	       const char           *path,
+	       Adapter1             *adapter,
 	       BluetoothClient      *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-	Adapter1 *adapter;
 	Properties *properties;
 	const gchar *address, *name;
 	gboolean discovering, discoverable, powered;
 
-	adapter = adapter1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						   G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-						   BLUEZ_SERVICE,
-						   path,
-						   NULL,
-						   NULL);
-
 	properties = properties_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
 							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
 							BLUEZ_SERVICE,
-							path,
+							g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (adapter))),
 							NULL,
 							NULL);
 
@@ -745,8 +726,11 @@ adapter_added (GDBusObjectManager   *manager,
 	g_signal_connect (G_OBJECT (adapter), "g-properties-changed",
 			  G_CALLBACK (adapter_g_properties_changed), client);
 
-	if (!priv->default_adapter)
-		default_adapter_changed (manager, path, client);
+	if (!priv->default_adapter) {
+		default_adapter_changed (manager,
+					 g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (adapter))),
+					 client);
+	}
 
 	g_object_unref (properties);
 	g_object_unref (adapter);
@@ -820,11 +804,11 @@ interface_added (GDBusObjectManager *manager,
 
 	if (IS_ADAPTER1 (interface)) {
 		adapter_added (manager,
-			       g_dbus_proxy_get_object_path (G_DBUS_PROXY (object)),
+			       ADAPTER1 (interface),
 			       client);
 	} else if (IS_DEVICE1 (interface)) {
 		device_added (manager,
-			      g_dbus_proxy_get_object_path (G_DBUS_PROXY (object)),
+			      DEVICE1 (interface),
 			      client);
 	}
 }
@@ -880,7 +864,7 @@ object_manager_new_callback(GObject      *source_object,
 			continue;
 
 		adapter_added (priv->manager,
-			       g_dbus_object_get_object_path (object),
+			       ADAPTER1 (iface),
 			       client);
 	}
 
@@ -893,7 +877,7 @@ object_manager_new_callback(GObject      *source_object,
 			continue;
 
 		device_added (priv->manager,
-			      g_dbus_object_get_object_path (object),
+			      DEVICE1 (iface),
 			      client);
 	}
 	g_list_free_full (object_list, g_object_unref);
