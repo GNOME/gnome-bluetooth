@@ -32,8 +32,6 @@ gnomebt_mandir = join_paths(gnomebt_prefix, get_option('mandir'))
 gnomebt_pkgdatadir = join_paths(gnomebt_datadir, meson.project_name())
 gnomebt_pkglibdir = join_paths(gnomebt_libdir, meson.project_name())
 
-gnomebt_icondir = join_paths(gnomebt_datadir, 'icons')
-
 gnomebt_buildtype = get_option('buildtype')
 gnomebt_debug = gnomebt_buildtype.contains('debug')
 
@@ -128,7 +126,11 @@ configure_file(
   configuration: config_h
 )
 
-meson.add_install_script('meson_post_install.py', get_option('icon_update') ? 'icon_update' : '')
+meson.add_install_script(
+  'meson_post_install.py',
+  get_option('icon_update') ? 'icon_update' : '',
+  gnomebt_datadir
+)
 
 output = '\nConfigure summary:\n\n'
 output += '        Compiler....................:  ' + cc.get_id() + '\n\n'
