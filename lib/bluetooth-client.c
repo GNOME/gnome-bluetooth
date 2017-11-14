@@ -414,7 +414,6 @@ device_added (GDBusObjectManager   *manager,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GDBusProxy *adapter;
-	Properties *properties;
 	const char *adapter_path, *address, *alias, *name, *icon;
 	char **uuids;
 	gboolean paired, trusted, connected;
@@ -422,13 +421,6 @@ device_added (GDBusObjectManager   *manager,
 	BluetoothType type;
 	GtkTreeIter iter, parent;
 	guint16 appearance;
-
-	properties = properties_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-							BLUEZ_SERVICE,
-							g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (device))),
-							NULL,
-							NULL);
 
 	adapter_path = device1_get_adapter (device);
 	address = device1_get_address (device);
@@ -476,7 +468,6 @@ device_added (GDBusObjectManager   *manager,
 						   BLUETOOTH_COLUMN_CONNECTED, connected,
 						   BLUETOOTH_COLUMN_TRUSTED, trusted,
 						   BLUETOOTH_COLUMN_PROXY, device,
-						   BLUETOOTH_COLUMN_PROPERTIES, properties,
 						   -1);
 	} else {
 		gtk_tree_store_set(priv->store, &iter,
@@ -491,7 +482,6 @@ device_added (GDBusObjectManager   *manager,
 				   BLUETOOTH_COLUMN_CONNECTED, connected,
 				   BLUETOOTH_COLUMN_TRUSTED, trusted,
 				   BLUETOOTH_COLUMN_PROXY, device,
-				   BLUETOOTH_COLUMN_PROPERTIES, properties,
 				   -1);
 	}
 	g_strfreev (uuids);
@@ -499,7 +489,6 @@ device_added (GDBusObjectManager   *manager,
 	g_signal_connect (G_OBJECT (device), "g-properties-changed",
 			  G_CALLBACK (device_g_properties_changed), client);
 
-	g_object_unref (properties);
 	g_object_unref (adapter);
 }
 
@@ -674,16 +663,8 @@ adapter_added (GDBusObjectManager   *manager,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-	Properties *properties;
 	const gchar *address, *name;
 	gboolean discovering, discoverable, powered;
-
-	properties = properties_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-							G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-							BLUEZ_SERVICE,
-							g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (adapter))),
-							NULL,
-							NULL);
 
 	address = adapter1_get_address (adapter);
 	name = adapter1_get_name (adapter);
@@ -693,7 +674,6 @@ adapter_added (GDBusObjectManager   *manager,
 
 	gtk_tree_store_insert_with_values(priv->store, &iter, NULL, -1,
 					  BLUETOOTH_COLUMN_PROXY, adapter,
-					  BLUETOOTH_COLUMN_PROPERTIES, properties,
 					  BLUETOOTH_COLUMN_ADDRESS, address,
 					  BLUETOOTH_COLUMN_NAME, name,
 					  BLUETOOTH_COLUMN_DISCOVERING, discovering,
@@ -710,7 +690,6 @@ adapter_added (GDBusObjectManager   *manager,
 					 client);
 	}
 
-	g_object_unref (properties);
 	g_object_unref (adapter);
 }
 
