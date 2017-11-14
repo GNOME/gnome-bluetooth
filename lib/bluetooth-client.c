@@ -53,7 +53,6 @@
 #define BLUEZ_MANAGER_PATH		"/"
 #define BLUEZ_ADAPTER_INTERFACE		"org.bluez.Adapter1"
 #define BLUEZ_DEVICE_INTERFACE		"org.bluez.Device1"
-#define FDO_PROPERTIES_INTERFACE	"org.freedesktop.DBus.Properties"
 
 #define BLUETOOTH_CLIENT_GET_PRIVATE(obj) bluetooth_client_get_instance_private (obj)
 
