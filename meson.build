@@ -3,7 +3,7 @@ project(
   version: '3.26.1',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
-  meson_version: '>= 0.41.0'
+  meson_version: '>= 0.43.0'
 )
 
 gnomebt_version = meson.project_version()
@@ -135,11 +135,7 @@ if gnomebt_debug
     '-Wstrict-prototypes'
   ]
 
-  foreach flag: test_flags
-    if cc.has_argument(flag)
-      compiler_flags += [flag]
-    endif
-  endforeach
+  compiler_flags += cc.get_supported_arguments(test_flags)
 endif
 
 add_project_arguments(common_flags + compiler_flags, language: 'c')
