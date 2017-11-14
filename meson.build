@@ -58,47 +58,9 @@ cc = meson.get_compiler('c')
 
 config_h = configuration_data()
 
-# defines
-set_defines = [
-  # package
-  ['PACKAGE', meson.project_name()],
-  ['PACKAGE_BUGREPORT', 'http://bugzilla.gnome.org/enter_bug.cgi?product=' + meson.project_name()],
-  ['PACKAGE_NAME', meson.project_name()],
-  ['PACKAGE_STRING', '@0@ @1@'.format(meson.project_name(), gnomebt_version)],
-  ['PACKAGE_TARNAME', meson.project_name()],
-  ['PACKAGE_URL', ''],
-  ['PACKAGE_VERSION', gnomebt_version],
-  ['VERSION', gnomebt_version],
-  # i18n
-  ['GETTEXT_PACKAGE', gnomebt_gettext_package],
-  ['LOCALEDIR', gnomebt_localedir]
-]
-
-foreach define: set_defines
-  config_h.set_quoted(define[0], define[1])
-endforeach
-
-# debug
-config_h.set('NDEBUG', not gnomebt_debug)
-config_h.set('GNOME_ENABLE_DEBUG', gnomebt_debug)
-
-# headers
-check_headers = [
-  ['HAVE_DLFCN_H', 'dlfcn.h'],
-  ['HAVE_INTTYPES_H', 'inttypes.h'],
-  ['HAVE_MEMORY_H', 'memory.h'],
-  ['HAVE_STDINT_H', 'stdint.h'],
-  ['HAVE_STDLIB_H', 'stdlib.h'],
-  ['HAVE_STRINGS_H', 'strings.h'],
-  ['HAVE_STRING_H', 'string.h'],
-  ['HAVE_SYS_STAT_H', 'sys/stat.h'],
-  ['HAVE_SYS_TYPES_H', 'sys/types.h'],
-  ['HAVE_UNISTD_H', 'unistd.h']
-]
-
-foreach header: check_headers
-  config_h.set(header[0], cc.has_header(header[1]))
-endforeach
+#i18n
+config_h.set_quoted('GETTEXT_PACKAGE', gnomebt_gettext_package)
+config_h.set_quoted('LOCALEDIR', gnomebt_localedir)
 
 # compiler flags
 common_flags = [
@@ -141,14 +103,7 @@ endif
 add_project_arguments(common_flags + compiler_flags, language: 'c')
 
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.12.0')
-
 m_dep = cc.find_library('m')
-config_h.set('HAVE_LIBM', m_dep.found() and cc.has_function('sin', dependencies: m_dep))
-
-configure_file(
-  output: 'config.h',
-  configuration: config_h
-)
 
 gnome = import('gnome')
 i18n = import('i18n')
@@ -167,6 +122,11 @@ if enable_gtk_doc
 endif
 
 subdir('po')
+
+configure_file(
+  output: 'config.h',
+  configuration: config_h
+)
 
 meson.add_install_script('meson_post_install.py', get_option('icon_update') ? 'icon_update' : '')
 
