@@ -79,14 +79,6 @@ built_sources += gnome.gdbus_codegen(
   interface_prefix: 'org.bluez'
 )
 
-fdo = 'bluetooth-fdo'
-
-built_sources += gnome.gdbus_codegen(
-  fdo + '-glue',
-  fdo + '.xml',
-  interface_prefix: 'org.freedesktop.DBus'
-)
-
 deps = [
   gtk_dep,
   m_dep,

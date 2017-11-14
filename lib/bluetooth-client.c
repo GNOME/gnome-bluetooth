@@ -44,7 +44,6 @@
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-client-glue.h"
-#include "bluetooth-fdo-glue.h"
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 #include "pin.h"
