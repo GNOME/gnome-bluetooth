@@ -32,9 +32,6 @@ gnomebt_mandir = join_paths(gnomebt_prefix, get_option('mandir'))
 gnomebt_pkgdatadir = join_paths(gnomebt_datadir, meson.project_name())
 gnomebt_pkglibdir = join_paths(gnomebt_libdir, meson.project_name())
 
-gnomebt_buildtype = get_option('buildtype')
-gnomebt_debug = gnomebt_buildtype.contains('debug')
-
 # options
 enable_gtk_doc = get_option('gtk_doc')
 enable_gir = get_option('introspection')
@@ -82,7 +79,7 @@ common_flags = [
 ]
 
 compiler_flags = []
-if gnomebt_debug
+if get_option('buildtype').contains('debug')
   test_flags = [
     '-Werror=format=2',
     '-Werror=implicit-function-declaration',
