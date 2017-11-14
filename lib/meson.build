@@ -123,7 +123,7 @@ pkg.generate(
   ],
   requires_private: 'libudev',
   variables: 'exec_prefix=' + gnomebt_libexecdir,
-  install_dir: join_paths(gnomebt_libdir, 'pkgconfig')
+  install_dir: join_paths(get_option('libdir'), 'pkgconfig')
 )
 
 if enable_gir
