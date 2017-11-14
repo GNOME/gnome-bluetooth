@@ -41,8 +41,8 @@ gnomebt_buildtype = get_option('buildtype')
 gnomebt_debug = gnomebt_buildtype.contains('debug')
 
 # options
-enable_gtk_doc = get_option('enable-gtk-doc')
-enable_gir = get_option('enable-introspection')
+enable_gtk_doc = get_option('gtk_doc')
+enable_gir = get_option('introspection')
 
 # Before making a release, the GNOMEBT_LT_VERSION string should be modified.
 # The string is of the form C:R:A.
@@ -175,7 +175,7 @@ endif
 
 subdir('po')
 
-meson.add_install_script('meson_post_install.py', get_option('enable-icon-update') ? 'icon-update' : '')
+meson.add_install_script('meson_post_install.py', get_option('icon_update') ? 'icon_update' : '')
 
 output = '\nConfigure summary:\n\n'
 output += '        Compiler....................:  ' + cc.get_id() + '\n\n'
