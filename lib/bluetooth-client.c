@@ -516,29 +516,13 @@ device_removed (const char      *path,
 	}
 }
 
-static void
-powered_callback (GDBusProxy   *proxy,
-		  GAsyncResult *res,
-		  gpointer	data)
-{
-	GError *error = NULL;
-
-	if (!properties_call_set_finish (PROPERTIES(proxy), res, &error)) {
-		g_debug ("Call to Set Powered failed %s: %s",
-			 g_dbus_proxy_get_object_path (proxy), error->message);
-		g_error_free (error);
-	}
-
-	g_object_unref (proxy);
-}
-
 static gboolean
 adapter_set_powered (BluetoothClient *client,
 		     const char *path,
 		     gboolean powered)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	Properties *properties;
+	GObject *adapter;
 	GtkTreeIter iter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
@@ -547,19 +531,13 @@ adapter_set_powered (BluetoothClient *client,
 		return FALSE;
 
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
+			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
-	if (properties == NULL)
+	if (adapter == NULL)
 		return FALSE;
 
-
-	properties_call_set (properties,
-			     BLUEZ_ADAPTER_INTERFACE,
-			     "Powered",
-			     g_variant_new_variant (g_variant_new_boolean (powered)),
-			     NULL,
-			     (GAsyncReadyCallback) powered_callback,
-			     NULL);
+	g_object_set (adapter, "powered", powered, NULL);
+	g_object_unref (adapter);
 
 	return TRUE;
 }
@@ -1037,8 +1015,7 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
 	GError *error = NULL;
 	GtkTreePath *path;
-	Properties *properties;
-	gboolean ret;
+	GObject *adapter;
 	GtkTreeIter iter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
@@ -1049,35 +1026,19 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	path = gtk_tree_row_reference_get_path (priv->default_adapter);
 	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-                            BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
+                            BLUETOOTH_COLUMN_PROXY, &adapter, -1);
         gtk_tree_path_free (path);
 
-	if (properties == NULL)
+	if (adapter == NULL)
 		return FALSE;
 
-	ret = properties_call_set_sync (properties,
-					BLUEZ_ADAPTER_INTERFACE,
-					"Discoverable",
-					g_variant_new_variant (g_variant_new_boolean (discoverable)),
-					NULL, &error);
-	if (ret == FALSE) {
-		g_warning ("Failed to set Discoverable to %d: %s", discoverable, error->message);
-		g_error_free (error);
-	} else if (discoverable) {
-		ret = properties_call_set_sync (properties,
-						BLUEZ_ADAPTER_INTERFACE,
-						"DiscoverableTimeout",
-						g_variant_new_variant (g_variant_new_uint32 (timeout)),
-						NULL, &error);
-		if (ret == FALSE) {
-			g_warning ("Failed to set DiscoverableTimeout to %d: %s", timeout, error->message);
-			g_error_free (error);
-		}
-	}
+	g_object_set (adapter,
+		      "discoverable", discoverable,
+		      "discoverable-timeout", timeout,
+		      NULL);
+	g_object_unref (adapter);
 
-	g_object_unref (properties);
-
-	return ret;
+	return TRUE;
 }
 
 static void
@@ -1534,41 +1495,32 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 
 gboolean
 bluetooth_client_set_trusted (BluetoothClient *client,
-			      const char      *device,
+			      const char      *device_path,
 			      gboolean         trusted)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	Properties *properties;
-	GError     *error = NULL;
+	GObject *device;
+	GError *error = NULL;
 	GtkTreeIter iter;
-	gboolean   ret;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device != NULL, FALSE);
 
-	if (get_iter_from_path (priv->store, &iter, device) == FALSE) {
-		g_debug ("Couldn't find device '%s' in tree to mark it as trusted", device);
+	if (get_iter_from_path (priv->store, &iter, device_path) == FALSE) {
+		g_debug ("Couldn't find device '%s' in tree to mark it as trusted", device_path);
 		return FALSE;
 	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_PROPERTIES, &properties, -1);
+			    BLUETOOTH_COLUMN_PROXY, &device, -1);
 
-	if (properties == NULL) {
-		g_debug ("Couldn't find properties for device '%s' in tree to mark it as trusted", device);
+	if (device == NULL)
 		return FALSE;
-	}
 
-	ret = properties_call_set_sync (properties, BLUEZ_DEVICE_INTERFACE, "Trusted",
-					g_variant_new_variant (g_variant_new_boolean (trusted)),
-					NULL, &error);
-	if (ret == FALSE) {
-		g_warning ("Failed to set Trusted to %d: %s", trusted, error->message);
-		g_error_free (error);
-	}
+	g_object_set (device, "trusted", trusted, NULL);
+	g_object_unref (device);
 
-	g_object_unref (properties);
-	return ret;
+	return TRUE;
 }
 
 GDBusProxy *
