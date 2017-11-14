@@ -53,22 +53,10 @@ built_sources += gnome.compile_resources(
 enum_types = 'gnome-bluetooth-enum-types'
 
 built_sources += gnome.mkenums(
-  enum_types + '.c',
-  sources: enum_headers,
-  fhead: '#include <bluetooth-enums.h>\n#include "gnome-bluetooth-enum-types.h"\n#include <glib-object.h>',
-  fprod: '\n/* enumerations from "@filename@" */',
-  vhead: 'GType\n@enum_name@_get_type (void)\n{\n  static GType etype = 0;\n  if (etype == 0) {\n    static const G@Type@Value values[] = {',
-  vprod: '      { @VALUENAME@, "@VALUENAME@", "@valuenick@" },',
-  vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
-)
-
-built_sources += gnome.mkenums(
-  enum_types + '.h',
-  sources: enum_headers,
-  fhead: '#ifndef __GNOME_BLUETOOTH_ENUM_TYPES_H__\n#define __GNOME_BLUETOOTH_ENUM_TYPES_H__\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n',
-  fprod: '/* enumerations from "@filename@" */\n',
-  vhead: 'GType @enum_name@_get_type (void);\n#define BLUETOOTH_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n',
-  ftail: 'G_END_DECLS\n\n#endif /* __GNOME_BLUETOOTH_ENUM_TYPES_H__ */'
+  enum_types,
+  sources: headers,
+  c_template: enum_types + '.c.template',
+  h_template: enum_types + '.h.template'
 )
 
 client = 'bluetooth-client'
