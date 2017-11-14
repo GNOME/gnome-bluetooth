@@ -82,13 +82,13 @@ cflags = [
   '-DG_LOG_DOMAIN="Bluetooth"'
 ]
 
-symbol_map = meson.project_name() + '.map'
+symbol_map = join_paths(meson.current_source_dir(), meson.project_name() + '.map')
 
-ldflag = '-Wl,--version-script,@0@/@1@'.format(meson.current_source_dir(), symbol_map)
+test_ldflag = '-Wl,--version-script,' + symbol_map
 ldflags = []
 
-if host_machine.system().contains('linux') and cc.has_argument(ldflag)
-  ldflags += ldflag
+if cc.has_argument(test_ldflag)
+  ldflags += test_ldflag
 endif
 
 libgnome_bluetooth = shared_library(
