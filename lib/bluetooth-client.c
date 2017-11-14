@@ -421,6 +421,9 @@ device_added (GDBusObjectManager   *manager,
 	GtkTreeIter iter, parent;
 	guint16 appearance;
 
+	g_signal_connect (G_OBJECT (device), "g-properties-changed",
+			  G_CALLBACK (device_g_properties_changed), client);
+
 	adapter_path = device1_get_adapter (device);
 	address = device1_get_address (device);
 	alias = device1_get_alias (device);
@@ -484,10 +487,6 @@ device_added (GDBusObjectManager   *manager,
 				   -1);
 	}
 	g_strfreev (uuids);
-
-	g_signal_connect (G_OBJECT (device), "g-properties-changed",
-			  G_CALLBACK (device_g_properties_changed), client);
-
 	g_object_unref (adapter);
 }
 
@@ -665,6 +664,9 @@ adapter_added (GDBusObjectManager   *manager,
 	const gchar *address, *name;
 	gboolean discovering, discoverable, powered;
 
+	g_signal_connect (G_OBJECT (adapter), "g-properties-changed",
+			  G_CALLBACK (adapter_g_properties_changed), client);
+
 	address = adapter1_get_address (adapter);
 	name = adapter1_get_name (adapter);
 	discovering = adapter1_get_discovering (adapter);
@@ -679,9 +681,6 @@ adapter_added (GDBusObjectManager   *manager,
 					  BLUETOOTH_COLUMN_DISCOVERABLE, discoverable,
 					  BLUETOOTH_COLUMN_POWERED, powered,
 					  -1);
-
-	g_signal_connect (G_OBJECT (adapter), "g-properties-changed",
-			  G_CALLBACK (adapter_g_properties_changed), client);
 
 	if (!priv->default_adapter) {
 		default_adapter_changed (manager,
