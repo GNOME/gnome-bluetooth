@@ -767,6 +767,7 @@ interface_added (GDBusObjectManager *manager,
 static void
 interface_removed (GDBusObjectManager *manager,
 		   GDBusObject        *object,
+		   GDBusInterface     *interface,
 		   gpointer            user_data)
 {
 	BluetoothClient *client = user_data;
