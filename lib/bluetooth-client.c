@@ -990,7 +990,6 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 				    guint timeout)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
-	GError *error = NULL;
 	GtkTreePath *path;
 	GObject *adapter;
 	GtkTreeIter iter;
