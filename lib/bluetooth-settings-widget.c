@@ -1808,8 +1808,6 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 		return;
 	}
 
-	g_object_add_weak_pointer (G_OBJECT (priv->agent), (gpointer *) (&priv->agent));
-
 	bluetooth_agent_set_pincode_func (priv->agent, pincode_callback, self);
 	bluetooth_agent_set_passkey_func (priv->agent, passkey_callback, self);
 	bluetooth_agent_set_display_func (priv->agent, display_callback, self);
