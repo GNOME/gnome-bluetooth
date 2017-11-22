@@ -288,6 +288,22 @@ icon_override (const char    *bdaddr,
 }
 
 static void
+device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char **icon)
+{
+	g_return_if_fail(!type);
+	g_return_if_fail(!icon);
+
+	*type = bluetooth_appearance_to_type (device1_get_appearance (device));
+	if (*type == 0 || *type == BLUETOOTH_TYPE_ANY)
+		*type = bluetooth_class_to_type (device1_get_class (device));
+
+	*icon = icon_override (device1_get_address (device), *type);
+
+	if (!*icon)
+		*icon = device1_get_icon (device);
+}
+
+static void
 device_notify_cb (Device1         *device,
 		  GParamSpec      *pspec,
 		  BluetoothClient *client)
@@ -309,14 +325,6 @@ device_notify_cb (Device1         *device,
 
 		gtk_tree_store_set (priv->store, &iter,
 				    BLUETOOTH_COLUMN_ALIAS, alias, -1);
-	} else if (g_strcmp0 (property, "icon") == 0) {
-		const gchar *icon = device1_get_icon (device);
-
-		/* See "Class" handling below */
-		if (g_strcmp0 (icon, "audio-card") != 0) {
-			gtk_tree_store_set (priv->store, &iter,
-					    BLUETOOTH_COLUMN_ICON, icon, -1);
-		}
 	} else if (g_strcmp0 (property, "paired") == 0) {
 		gboolean paired = device1_get_paired (device);
 
@@ -346,35 +354,18 @@ device_notify_cb (Device1         *device,
 		gtk_tree_store_set (priv->store, &iter,
 				    BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 				    -1);
-	} else if (g_strcmp0 (property, "class") == 0 ||
+	} else if (g_strcmp0 (property, "icon") == 0 ||
+		   g_strcmp0 (property, "class") == 0 ||
 		   g_strcmp0 (property, "appearance") == 0) {
-		BluetoothType type;
+		BluetoothType type = BLUETOOTH_TYPE_ANY;
 		const char *icon = NULL;
-		char *bdaddr;
 
-		gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-				    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
+		device_resolve_type_and_icon (device, &type, &icon);
+
+		gtk_tree_store_set (priv->store, &iter,
+				    BLUETOOTH_COLUMN_TYPE, type,
+				    BLUETOOTH_COLUMN_ICON, icon,
 				    -1);
-
-		if (g_strcmp0 (property, "class") == 0)
-			type = bluetooth_class_to_type (device1_get_class (device));
-		else
-			type = bluetooth_appearance_to_type (device1_get_appearance (device));
-
-		icon = icon_override (bdaddr, type);
-
-		g_free (bdaddr);
-
-		if (icon) {
-			gtk_tree_store_set (priv->store, &iter,
-					    BLUETOOTH_COLUMN_TYPE, type,
-					    BLUETOOTH_COLUMN_ICON, icon,
-					    -1);
-		} else if (type != 0) {
-			gtk_tree_store_set (priv->store, &iter,
-					    BLUETOOTH_COLUMN_TYPE, type,
-					    -1);
-		}
 	} else {
 		g_debug ("Unhandled property: %s", property);
 	}
@@ -393,7 +384,6 @@ device_added (GDBusObjectManager   *manager,
 	int legacypairing;
 	BluetoothType type;
 	GtkTreeIter iter, parent;
-	guint16 appearance;
 
 	g_signal_connect (G_OBJECT (device), "notify",
 			  G_CALLBACK (device_notify_cb), client);
@@ -402,26 +392,13 @@ device_added (GDBusObjectManager   *manager,
 	address = device1_get_address (device);
 	alias = device1_get_alias (device);
 	name = device1_get_name (device);
-
-	appearance = device1_get_appearance (device);
-	type = appearance ? bluetooth_appearance_to_type (appearance) : BLUETOOTH_TYPE_ANY;
-	icon = icon_override (address, type);
-
-	if (type == BLUETOOTH_TYPE_ANY) {
-		guint32 class;
-		class = device1_get_class (device);
-		type = class ? bluetooth_class_to_type (class) : BLUETOOTH_TYPE_ANY;
-		icon = icon_override (address, type);
-	}
-
-	if (icon == NULL)
-		icon = device1_get_icon (device);
-
 	paired = device1_get_paired (device);
 	trusted = device1_get_trusted (device);
 	connected = device1_get_connected (device);
 	uuids = device_list_uuids (device1_get_uuids (device));
 	legacypairing = device1_get_legacy_pairing (device);
+
+	device_resolve_type_and_icon (device, &type, &icon);
 
 	if (get_iter_from_path (priv->store, &parent, adapter_path) == FALSE)
 		return;
