@@ -1802,7 +1802,7 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 
-	priv->agent = bluetooth_agent_new ();
+	priv->agent = bluetooth_agent_new (AGENT_PATH);
 	if (bluetooth_agent_register (priv->agent) == FALSE) {
 		g_clear_object (&priv->agent);
 		return;
@@ -1816,8 +1816,6 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 	bluetooth_agent_set_confirm_func (priv->agent, confirm_callback, self);
 	bluetooth_agent_set_authorize_func (priv->agent, authorize_callback, self);
 	bluetooth_agent_set_authorize_service_func (priv->agent, authorize_service_callback, self);
-
-	bluetooth_agent_setup (priv->agent, AGENT_PATH);
 }
 
 static void
