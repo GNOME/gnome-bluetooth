@@ -449,10 +449,8 @@ device_added (GDBusObjectManager   *manager,
 	uuids = device_list_uuids (device1_get_uuids (device));
 	legacypairing = device1_get_legacy_pairing (device);
 
-	if (get_iter_from_path (priv->store, &parent, adapter_path) == FALSE) {
-		g_object_unref (device);
+	if (get_iter_from_path (priv->store, &parent, adapter_path) == FALSE)
 		return;
-	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &parent,
 			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
@@ -687,8 +685,6 @@ adapter_added (GDBusObjectManager   *manager,
 					 g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (adapter))),
 					 client);
 	}
-
-	g_object_unref (adapter);
 }
 
 static void
