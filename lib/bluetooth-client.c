@@ -783,6 +783,36 @@ interface_removed (GDBusObjectManager *manager,
 }
 
 static void
+object_added (GDBusObjectManager *manager,
+	      GDBusObject        *object,
+	      BluetoothClient    *client)
+{
+	GList *interfaces, *l;
+
+	interfaces = g_dbus_object_get_interfaces (object);
+
+	for (l = interfaces; l != NULL; l = l->next)
+		interface_added (manager, object, G_DBUS_INTERFACE (l->data), client);
+
+	g_list_free_full (interfaces, g_object_unref);
+}
+
+static void
+object_removed (GDBusObjectManager *manager,
+	        GDBusObject        *object,
+	        BluetoothClient    *client)
+{
+	GList *interfaces, *l;
+
+	interfaces = g_dbus_object_get_interfaces (object);
+
+	for (l = interfaces; l != NULL; l = l->next)
+		interface_removed (manager, object, G_DBUS_INTERFACE (l->data), client);
+
+	g_list_free_full (interfaces, g_object_unref);
+}
+
+static void
 object_manager_new_callback(GObject      *source_object,
 			    GAsyncResult *res,
 			    void         *user_data)
@@ -801,6 +831,9 @@ object_manager_new_callback(GObject      *source_object,
 
 	g_signal_connect (G_OBJECT (priv->manager), "interface-added", (GCallback) interface_added, client);
 	g_signal_connect (G_OBJECT (priv->manager), "interface-removed", (GCallback) interface_removed, client);
+
+	g_signal_connect (G_OBJECT (priv->manager), "object-added", (GCallback) object_added, client);
+	g_signal_connect (G_OBJECT (priv->manager), "object-removed", (GCallback) object_removed, client);
 
 	object_list = g_dbus_object_manager_get_objects (priv->manager);
 
