@@ -290,8 +290,8 @@ icon_override (const char    *bdaddr,
 static void
 device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char **icon)
 {
-	g_return_if_fail(!type);
-	g_return_if_fail(!icon);
+	g_return_if_fail (type);
+	g_return_if_fail (icon);
 
 	*type = bluetooth_appearance_to_type (device1_get_appearance (device));
 	if (*type == 0 || *type == BLUETOOTH_TYPE_ANY)
