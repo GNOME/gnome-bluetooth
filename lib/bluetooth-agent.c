@@ -118,15 +118,18 @@ enum {
 
 static GParamSpec *props[PROP_LAST];
 
-static GDBusProxy *get_device_from_path (const char *path)
+static GDBusProxy *
+get_device_from_path (BluetoothAgentPrivate *priv,
+		      const char            *path)
 {
 	Device1 *device;
-	device = device1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						 G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-						 BLUEZ_SERVICE,
-						 path,
-						 NULL,
-						 NULL);
+
+	device = device1_proxy_new_sync (priv->conn,
+					 G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+					 BLUEZ_SERVICE,
+					 path,
+					 NULL,
+					 NULL);
 
 	return G_DBUS_PROXY(device);
 }
@@ -142,7 +145,7 @@ static gboolean bluetooth_agent_request_pincode(BluetoothAgent *agent,
 	if (priv->pincode_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -162,7 +165,7 @@ static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
 	if (priv->passkey_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -183,7 +186,7 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 	if (priv->display_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -205,7 +208,7 @@ static gboolean bluetooth_agent_display_pincode(BluetoothAgent *agent,
 	if (priv->display_pincode_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -227,7 +230,7 @@ static gboolean bluetooth_agent_request_confirmation(BluetoothAgent *agent,
 	if (priv->confirm_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -247,7 +250,7 @@ static gboolean bluetooth_agent_request_authorization(BluetoothAgent *agent,
 	if (priv->authorize_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -268,7 +271,7 @@ static gboolean bluetooth_agent_authorize_service(BluetoothAgent *agent,
 	if (priv->authorize_service_func == NULL)
 		return FALSE;
 
-	device = get_device_from_path(path);
+	device = get_device_from_path (priv, path);
 	if (device == NULL)
 		return FALSE;
 
@@ -499,7 +502,7 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE (agent);
 
-	priv->agent_manager = agent_manager1_proxy_new_for_bus_sync(G_BUS_TYPE_SYSTEM,
+	priv->agent_manager = agent_manager1_proxy_new_sync(priv->conn,
                      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
                      BLUEZ_SERVICE, "/org/bluez", NULL, NULL);
 
