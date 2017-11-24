@@ -301,6 +301,9 @@ device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char *
 
 	if (!*icon)
 		*icon = device1_get_icon (device);
+
+	if (!*icon)
+		*icon = "bluetooth";
 }
 
 static void
