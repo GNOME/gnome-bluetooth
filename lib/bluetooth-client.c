@@ -710,12 +710,12 @@ interface_removed (GDBusObjectManager *manager,
 {
 	BluetoothClient *client = user_data;
 
-	if (IS_ADAPTER1 (object)) {
+	if (IS_ADAPTER1 (interface)) {
 		adapter_removed (manager,
-				 g_dbus_proxy_get_object_path (G_DBUS_PROXY (object)),
+				 g_dbus_object_get_object_path (object),
 				 client);
-	} else if (IS_DEVICE1 (object)) {
-		device_removed (g_dbus_proxy_get_object_path (G_DBUS_PROXY (object)),
+	} else if (IS_DEVICE1 (interface)) {
+		device_removed (g_dbus_object_get_object_path (object),
 				client);
 	}
 }
