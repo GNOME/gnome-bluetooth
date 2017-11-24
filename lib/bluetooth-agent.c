@@ -539,6 +539,23 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 	return TRUE;
 }
 
+static gboolean
+error_matches_remote_error (GError     *error,
+			    const char *remote_error)
+{
+	char *str;
+	gboolean ret;
+
+	if (error == NULL)
+		return FALSE;
+
+	str = g_dbus_error_get_remote_error (error);
+	ret = (g_strcmp0 (str, remote_error) == 0);
+	g_free (str);
+
+	return ret;
+}
+
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv;
@@ -555,7 +572,8 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 						       priv->path,
 						       NULL, &error) == FALSE) {
 		/* Ignore errors if the adapter is gone */
-		if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD) == FALSE) {
+		if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD) == FALSE &&
+		    error_matches_remote_error (error, "org.bluez.Error.DoesNotExist") == FALSE) {
 			g_printerr ("Agent unregistration failed: %s '%s'\n",
 				    error->message,
 				    g_quark_to_string (error->domain));
