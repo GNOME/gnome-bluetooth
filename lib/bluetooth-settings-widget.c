@@ -1294,19 +1294,12 @@ remove_selected_device (BluetoothSettingsWidget *self)
 	GError *error = NULL;
 	GVariant *ret;
 
-	g_object_get (G_OBJECT (priv->client), "default-adapter", &adapter, NULL);
-	adapter_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						       G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-						       NULL,
-						       BLUEZ_SERVICE,
-						       adapter,
-						       ADAPTER_IFACE,
-						       NULL,
-						       &error);
-	g_free (adapter);
+	g_debug ("About to call RemoveDevice for %s", priv->selected_object_path);
+
+	adapter_proxy = _bluetooth_client_get_default_adapter (priv->client);
+
 	if (adapter_proxy == NULL) {
-		g_warning ("Failed to create a GDBusProxy for the default adapter: %s", error->message);
-		g_error_free (error);
+		g_warning ("Failed to get a GDBusProxy for the default adapter");
 		return FALSE;
 	}
 
