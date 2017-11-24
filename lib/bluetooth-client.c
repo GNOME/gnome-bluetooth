@@ -839,7 +839,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 						  object_manager_new_callback, client);
 }
 
-static GDBusProxy *
+GDBusProxy *
 _bluetooth_client_get_default_adapter(BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
