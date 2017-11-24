@@ -295,6 +295,31 @@ static gboolean bluetooth_agent_cancel(BluetoothAgent *agent,
 }
 
 static void
+register_agent (BluetoothAgentPrivate *priv)
+{
+	GError *error = NULL;
+	gboolean ret;
+
+	ret = agent_manager1_call_register_agent_sync (priv->agent_manager,
+						       priv->path,
+						       "DisplayYesNo",
+						       NULL, &error);
+	if (ret == FALSE) {
+		g_printerr ("Agent registration failed: %s\n", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	ret = agent_manager1_call_request_default_agent_sync (priv->agent_manager,
+							      priv->path,
+							      NULL, &error);
+	if (ret == FALSE) {
+		g_printerr ("Agent registration as default failed: %s\n", error->message);
+		g_error_free (error);
+	}
+}
+
+static void
 name_appeared_cb (GDBusConnection *connection,
 		  const gchar     *name,
 		  const gchar     *name_owner,
@@ -304,6 +329,16 @@ name_appeared_cb (GDBusConnection *connection,
 
 	g_free (priv->busname);
 	priv->busname = g_strdup (name_owner);
+
+	priv->agent_manager = agent_manager1_proxy_new_sync (priv->conn,
+							     G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+							     BLUEZ_SERVICE,
+							     "/org/bluez",
+							     NULL,
+							     NULL);
+
+	if (priv->reg_id > 0)
+		register_agent (priv);
 }
 
 static void
@@ -315,6 +350,7 @@ name_vanished_cb (GDBusConnection *connection,
 
 	g_free (priv->busname);
 	priv->busname = NULL;
+	g_clear_object (&priv->agent_manager);
 }
 
 static void
@@ -496,15 +532,10 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv;
 	GError *error = NULL;
-	gboolean ret;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
 	priv = BLUETOOTH_AGENT_GET_PRIVATE (agent);
-
-	priv->agent_manager = agent_manager1_proxy_new_sync(priv->conn,
-                     G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                     BLUEZ_SERVICE, "/org/bluez", NULL, NULL);
 
 	priv->reg_id = g_dbus_connection_register_object (priv->conn,
 						      priv->path,
@@ -520,24 +551,8 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 		return FALSE;
 	}
 
-	ret = agent_manager1_call_register_agent_sync (priv->agent_manager,
-						       priv->path,
-						       "DisplayYesNo",
-						       NULL, &error);
-	if (ret == FALSE) {
-		g_printerr ("Agent registration failed: %s\n", error->message);
-		g_error_free (error);
-		return FALSE;
-	}
-
-	ret = agent_manager1_call_request_default_agent_sync (priv->agent_manager,
-							      priv->path,
-							      NULL, &error);
-	if (ret == FALSE) {
-		g_printerr ("Agent registration as default failed: %s\n", error->message);
-		g_error_free (error);
-		return FALSE;
-	}
+	if (priv->agent_manager != NULL)
+		register_agent (priv);
 
 	return TRUE;
 }
