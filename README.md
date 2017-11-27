@@ -9,7 +9,7 @@ Requirements
 ------------
 
 - glib
-- bluez 5.x
+- bluez 5.51 or newer
 - rfkill sub-system enable in the kernel[1]
 - gnome-settings-daemon
 
