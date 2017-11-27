@@ -1447,7 +1447,6 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GObject *device;
-	GError *error = NULL;
 	GtkTreeIter iter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
