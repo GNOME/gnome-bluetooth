@@ -1289,7 +1289,6 @@ static gboolean
 remove_selected_device (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	char *adapter;
 	GDBusProxy *adapter_proxy;
 	GError *error = NULL;
 	GVariant *ret;
