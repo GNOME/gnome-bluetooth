@@ -130,7 +130,7 @@ set_connecting_page (BluetoothSettingsWidget *self,
 		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("connecting_notebook")), page);
 	if (page == CONNECTING_NOTEBOOK_PAGE_SWITCH)
-		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
+		gtk_spinner_stop (GTK_SPINNER (WID ("connecting_spinner")));
 }
 
 static void
