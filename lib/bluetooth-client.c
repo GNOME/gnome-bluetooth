@@ -451,6 +451,7 @@ device_removed (const char      *path,
 	GtkTreeIter iter;
 
 	if (get_iter_from_path(priv->store, &iter, path) == TRUE) {
+		/* Note that removal can also happen from adapter_removed. */
 		g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
 		gtk_tree_store_remove(priv->store, &iter);
 	}
@@ -635,8 +636,9 @@ adapter_removed (GDBusObjectManager   *manager,
 		 BluetoothClient      *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GtkTreeIter iter;
+	GtkTreeIter iter, childiter;
 	gboolean was_default;
+	gboolean have_child;
 
 	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
 		return;
@@ -646,6 +648,22 @@ adapter_removed (GDBusObjectManager   *manager,
 
 	if (!was_default)
 		return;
+
+	/* Ensure that all devices are removed. This can happen if bluetoothd
+	 * crashes as the "object-removed" signal is emitted in an undefined
+	 * order. */
+	have_child = gtk_tree_model_iter_children (priv->store, &childiter, &iter);
+	while (have_child) {
+		GDBusProxy *object;
+
+		gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &childiter,
+				    BLUETOOTH_COLUMN_PROXY, &object, -1);
+
+		g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, g_dbus_proxy_get_object_path (object));
+		g_object_unref (object);
+
+		have_child = gtk_tree_store_remove (priv->store, &childiter);
+	}
 
 	g_clear_pointer (&priv->default_adapter, gtk_tree_row_reference_free);
 	gtk_tree_store_remove (priv->store, &iter);
