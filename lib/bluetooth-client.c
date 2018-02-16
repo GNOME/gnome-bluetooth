@@ -758,17 +758,23 @@ object_manager_new_callback(GObject      *source_object,
 			    GAsyncResult *res,
 			    void         *user_data)
 {
-	BluetoothClient  *client = BLUETOOTH_CLIENT (user_data);
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	BluetoothClient *client;
+	BluetoothClientPrivate *priv;
+	GDBusObjectManager *manager;
 	GList *object_list, *l;
 	GError *error = NULL;
 
-	priv->manager = g_dbus_object_manager_client_new_for_bus_finish (res, &error);
-	if (error) {
-		g_warning ("Could not create bluez object manager: %s", error->message);
+	manager = g_dbus_object_manager_client_new_for_bus_finish (res, &error);
+	if (!manager) {
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+			g_warning ("Could not create bluez object manager: %s", error->message);
 		g_error_free (error);
 		return;
 	}
+
+	client = BLUETOOTH_CLIENT (user_data);
+	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	priv->manager = manager;
 
 	g_signal_connect (G_OBJECT (priv->manager), "interface-added", (GCallback) interface_added, client);
 	g_signal_connect (G_OBJECT (priv->manager), "interface-removed", (GCallback) interface_removed, client);
