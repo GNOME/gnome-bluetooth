@@ -59,6 +59,7 @@ typedef struct _BluetoothClientPrivate BluetoothClientPrivate;
 
 struct _BluetoothClientPrivate {
 	GDBusObjectManager *manager;
+	GCancellable *cancellable;
 	GtkTreeStore *store;
 	GtkTreeRowReference *default_adapter;
 };
@@ -819,6 +820,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 
+	priv->cancellable = g_cancellable_new ();
 	priv->store = gtk_tree_store_new(_BLUETOOTH_NUM_COLUMNS,
 					 G_TYPE_OBJECT,     /* BLUETOOTH_COLUMN_PROXY */
 					 G_TYPE_OBJECT,     /* BLUETOOTH_COLUMN_PROPERTIES */
@@ -844,7 +846,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 						  BLUEZ_MANAGER_PATH,
 						  object_manager_get_proxy_type_func,
 						  NULL, NULL,
-						  NULL,
+						  priv->cancellable,
 						  object_manager_new_callback, client);
 }
 
@@ -1099,6 +1101,10 @@ static void bluetooth_client_finalize(GObject *object)
 	BluetoothClient *client = BLUETOOTH_CLIENT (object);
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
 
+	if (priv->cancellable != NULL) {
+		g_cancellable_cancel (priv->cancellable);
+		g_clear_object (&priv->cancellable);
+	}
 	g_clear_object (&priv->manager);
 	g_object_unref (priv->store);
 
