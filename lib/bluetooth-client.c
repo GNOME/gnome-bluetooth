@@ -1210,7 +1210,7 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
 
 	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	model = g_object_ref(priv->store);
+	model = GTK_TREE_MODEL (g_object_ref(priv->store));
 
 	return model;
 }
