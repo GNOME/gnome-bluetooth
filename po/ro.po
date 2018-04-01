@@ -6,14 +6,14 @@
 # Lucian Adrian Grijincu <lucian.grijincu@gmail.com>, 2009, 2010, 2011.
 # Daniel Șerbănescu <cyber19rider@gmail.com>, 2010.
 # Nichita Utiu <nikita.utiu@gmail.com>, 2010.
-# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-13 15:12+0000\n"
-"PO-Revision-Date: 2015-10-25 16:27+0200\n"
+"POT-Creation-Date: 2017-11-15 12:52+0000\n"
+"PO-Revision-Date: 2018-04-01 17:32+0200\n"
 "Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
 "Language-Team: Gnome Romanian Translation Team\n"
 "Language: ro\n"
@@ -25,166 +25,163 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: ../lib/bluetooth-chooser-button.c:71
+#: lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Clic pentru a selecta dispozitivul…"
 
-#: ../lib/bluetooth-chooser-button.c:201
-#: ../lib/bluetooth-settings-widget.c:1254 ../sendto/main.c:447
-#: ../sendto/main.c:738 ../sendto/main.c:794
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1275
+#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Anulează"
 
-#: ../lib/bluetooth-chooser-button.c:202
+#: lib/bluetooth-chooser-button.c:202
 msgid "_OK"
 msgstr "_OK"
 
-#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
-#: ../lib/bluetooth-utils.c:101
+#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
+#: lib/bluetooth-utils.c:99
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: ../lib/bluetooth-chooser.c:176
+#: lib/bluetooth-chooser.c:176
 msgid "No adapters available"
 msgstr "Niciun adaptor disponibil"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
-#: ../lib/bluetooth-settings-widget.c:1541
+#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
+#: lib/bluetooth-settings-widget.c:1561
 msgid "Searching for devices…"
 msgstr "Se caută după dispozitive…"
 
-#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
+#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "Dispozitiv"
 
-#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:3
+#: lib/bluetooth-chooser.c:734 lib/settings.ui:179
 msgid "Type"
 msgstr "Tip"
 
-#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1503
+#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1524
 msgid "Devices"
 msgstr "Dispozitive"
 
-#: ../lib/bluetooth-filter-widget.c:72
+#: lib/bluetooth-filter-widget.c:72
 msgid "All categories"
 msgstr "Toate categoriile"
 
-#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:2
+#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:134
 msgid "Paired"
 msgstr "Asociat"
 
-#: ../lib/bluetooth-filter-widget.c:76
+#: lib/bluetooth-filter-widget.c:76
 msgid "Trusted"
 msgstr "De încredere"
 
-#: ../lib/bluetooth-filter-widget.c:78
+#: lib/bluetooth-filter-widget.c:78
 msgid "Not paired or trusted"
 msgstr "Nici asociat, nici de încredere"
 
-#: ../lib/bluetooth-filter-widget.c:80
+#: lib/bluetooth-filter-widget.c:80
 msgid "Paired or trusted"
 msgstr "Asociat sau de încredere"
 
 #. This is the title of the filter section of the Bluetooth device chooser.
 #. * It used to say Show Only Bluetooth Devices With...
-#: ../lib/bluetooth-filter-widget.c:231
+#: lib/bluetooth-filter-widget.c:231
 msgid "Show:"
 msgstr "Arată:"
 
 #. The device category filter
-#: ../lib/bluetooth-filter-widget.c:247
+#: lib/bluetooth-filter-widget.c:247
 msgid "Device _category:"
 msgstr "_Categorie dispozitiv:"
 
-#: ../lib/bluetooth-filter-widget.c:258
+#: lib/bluetooth-filter-widget.c:258
 msgid "Select the device category to filter"
 msgstr "Alegeți categoria dispozitivului pentru filtrare"
 
 #. The device type filter
-#: ../lib/bluetooth-filter-widget.c:272
+#: lib/bluetooth-filter-widget.c:272
 msgid "Device _type:"
 msgstr "_Tip dispozitiv:"
 
-#: ../lib/bluetooth-filter-widget.c:289
+#: lib/bluetooth-filter-widget.c:289
 msgid "Select the device type to filter"
 msgstr "Alegeți tipul dispozitivului pentru filtrare"
 
-#: ../lib/bluetooth-filter-widget.c:295
+#: lib/bluetooth-filter-widget.c:295
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Dispozitive de intrare (mauși, tastaturi, etc.)"
 
-#: ../lib/bluetooth-filter-widget.c:299
+#: lib/bluetooth-filter-widget.c:299
 msgid "Headphones, headsets and other audio devices"
 msgstr "Căști și alte dispozitive audio"
 
-#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
-#: ../lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "Confirmă PIN-ul Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:84
+#: lib/bluetooth-pairing-dialog.c:84
 #, c-format
-msgid "Please confirm the PIN that was entered on '%s'."
+msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Confirmați PIN-ul care a fost introdus pe „%s”."
 
-#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
-#: ../lib/bluetooth-pairing-dialog.c:149
+#: lib/bluetooth-pairing-dialog.c:88 lib/bluetooth-pairing-dialog.c:101
+#: lib/bluetooth-pairing-dialog.c:149
 msgid "Confirm"
 msgstr "Confirmă"
 
-#: ../lib/bluetooth-pairing-dialog.c:91
+#: lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
-"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
-"device's manual."
+"Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
+"device’s manual."
 msgstr ""
 "Confirmați PIN-ul Bluetooth pentru „%s”. Acesta se poate găsi de obicei în "
 "manualul dispozitivului."
 
-#: ../lib/bluetooth-pairing-dialog.c:97
+#: lib/bluetooth-pairing-dialog.c:97
 #, c-format
-msgid "Pairing '%s'"
+msgid "Pairing “%s”"
 msgstr "Cerere de asociere pentru „%s”"
 
-#: ../lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
-"Please confirm that the following PIN matches the one displayed on '%s'."
+"Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr ""
 "Confirmați dacă PIN-ul următor corespunde celui de pe dispozitivul „%s”."
 
-#: ../lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Cerere de asociere Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:111
+#: lib/bluetooth-pairing-dialog.c:111
 #, c-format
-msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr "„%s” vrea să se asocieze cu acest dispozitiv. Permiteți asocierea?"
 
-#: ../lib/bluetooth-pairing-dialog.c:116
-#| msgid "Confirm Bluetooth PIN"
+#: lib/bluetooth-pairing-dialog.c:116
 msgid "Confirm Bluetooth Connection"
 msgstr "Confirmă conexiunea Bluetooth"
 
-#: ../lib/bluetooth-pairing-dialog.c:117
+#: lib/bluetooth-pairing-dialog.c:117
 #, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
-msgid "'%s' wants to connect with this device. Do you want to allow it?"
+msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr "„%s” vrea să se conecteze cu acest dispozitiv. Permiteți conectarea?"
 
-#: ../lib/bluetooth-pairing-dialog.c:125
+#: lib/bluetooth-pairing-dialog.c:125
 #, c-format
-msgid "Please enter the following PIN on '%s'."
+msgid "Please enter the following PIN on “%s”."
 msgstr "Introduceți următorul PIN pe „%s”."
 
-#: ../lib/bluetooth-pairing-dialog.c:128
+#: lib/bluetooth-pairing-dialog.c:128
 #, c-format
 msgid ""
-"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+"Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr "Introduceți următorul PIN pe „%s”. Apoi apăsați „Enter” pe tastatură."
 
-#: ../lib/bluetooth-pairing-dialog.c:131
+#: lib/bluetooth-pairing-dialog.c:131
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -192,231 +189,230 @@ msgstr ""
 "Mutați joystick-ul iCade în direcțiile următoare. Apoi apăsați oricare "
 "dintre butoanele albe."
 
-#: ../lib/bluetooth-pairing-dialog.c:139
+#: lib/bluetooth-pairing-dialog.c:139
 msgid "Allow"
 msgstr "Permite"
 
-#: ../lib/bluetooth-pairing-dialog.c:143
+#: lib/bluetooth-pairing-dialog.c:143
 msgid "Dismiss"
 msgstr "Respinge"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:153 ../lib/bluetooth-pairing-dialog.c:308
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:308
 msgid "Cancel"
 msgstr "Anulează"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:289
-#: ../lib/bluetooth-settings-obexpush.c:246
+#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Acceptă"
 
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
+#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:37
 msgid "Not Set Up"
 msgstr "Neconfigurat"
 
-#: ../lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:81
 msgid "Connected"
 msgstr "Conectat"
 
-#: ../lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:83
 msgid "Disconnected"
 msgstr "Deconectat"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: lib/bluetooth-settings-widget.c:1143
 msgid "Yes"
 msgstr "Da"
 
-#: ../lib/bluetooth-settings-widget.c:1122
+#: lib/bluetooth-settings-widget.c:1143
 msgid "No"
 msgstr "Nu"
 
 #. translators: first %s is the name of the computer, for example:
-#. * Visible as “Bastien Nocera's Computer” followed by the
+#. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: ../lib/bluetooth-settings-widget.c:1222
+#: lib/bluetooth-settings-widget.c:1243
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
 "Vizibil ca „%s” și disponibil pentru transfer de fișiere prin Bluetooth. "
-"Fișierele transferate sunt plasate în dosarul <a href=\"%s\">Descărcări</a>"
+"Fișierele transferate sunt plasate în dosarul <a href=\"%s\">Descărcări</a>."
 
-#: ../lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1270
 #, c-format
-msgid "Remove '%s' from the list of devices?"
+msgid "Remove “%s” from the list of devices?"
 msgstr "Eliminați „%s” din lista dispozitivelor?"
 
-#: ../lib/bluetooth-settings-widget.c:1251
+#: lib/bluetooth-settings-widget.c:1272
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Dacă eliminați acest dispozitiv, va trebui să îl configurați din nou înainte "
 "de următoarea utilizare."
 
-#: ../lib/bluetooth-settings-widget.c:1255
+#: lib/bluetooth-settings-widget.c:1276
 msgid "_Remove"
 msgstr "_Elimină"
 
 #. Translators: %s is the name of the filename received
-#: ../lib/bluetooth-settings-obexpush.c:145
+#: lib/bluetooth-settings-obexpush.c:145
 #, c-format
-#| msgid "Send files via Bluetooth"
-msgid "You received \"%s\" via Bluetooth"
+msgid "You received “%s” via Bluetooth"
 msgstr "Ați primit „%s” prin Bluetooth"
 
-#: ../lib/bluetooth-settings-obexpush.c:147
-#| msgid "Receive Files"
+#: lib/bluetooth-settings-obexpush.c:147
 msgid "You received a file"
 msgstr "Ați primit un fișier"
 
-#: ../lib/bluetooth-settings-obexpush.c:158
-#| msgid "Send _Files…"
+#: lib/bluetooth-settings-obexpush.c:158
 msgid "Open File"
 msgstr "Deschide fișierul"
 
-#: ../lib/bluetooth-settings-obexpush.c:162
-#| msgid "Receive Files"
+#: lib/bluetooth-settings-obexpush.c:162
 msgid "Reveal File"
 msgstr "Dezvăluie fișierul"
 
-#: ../lib/bluetooth-settings-obexpush.c:179
+#: lib/bluetooth-settings-obexpush.c:179
 msgid "File reception complete"
 msgstr "Primirea fișierului s-a încheiat"
 
-#: ../lib/bluetooth-settings-obexpush.c:233
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
-#| msgid "Bluetooth File Transfer"
 msgid "Bluetooth file transfer from %s"
 msgstr "Transfer de fișiere prin Bluetooth de la %s"
 
-#: ../lib/bluetooth-settings-obexpush.c:243
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "Refuză"
 
-#: ../lib/bluetooth-utils.c:59
-msgid "All types"
-msgstr "Toate tipurile"
-
-#: ../lib/bluetooth-utils.c:61
+#: lib/bluetooth-utils.c:59
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../lib/bluetooth-utils.c:63
+#: lib/bluetooth-utils.c:61
 msgid "Modem"
 msgstr "Modem"
 
-#: ../lib/bluetooth-utils.c:65
+#: lib/bluetooth-utils.c:63
 msgid "Computer"
 msgstr "Calculator"
 
-#: ../lib/bluetooth-utils.c:67
+#: lib/bluetooth-utils.c:65
 msgid "Network"
 msgstr "Rețea"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: ../lib/bluetooth-utils.c:70
+#: lib/bluetooth-utils.c:68
 msgid "Headset"
 msgstr "Set de căști"
 
-#: ../lib/bluetooth-utils.c:72
+#: lib/bluetooth-utils.c:70
 msgid "Headphones"
 msgstr "Căști"
 
-#: ../lib/bluetooth-utils.c:74
+#: lib/bluetooth-utils.c:72
 msgid "Audio device"
 msgstr "Dispozitiv audio"
 
-#: ../lib/bluetooth-utils.c:76
+#: lib/bluetooth-utils.c:74
 msgid "Keyboard"
 msgstr "Tastatură"
 
-#: ../lib/bluetooth-utils.c:78
+#: lib/bluetooth-utils.c:76
 msgid "Mouse"
 msgstr "Maus"
 
-#: ../lib/bluetooth-utils.c:80
+#: lib/bluetooth-utils.c:78
 msgid "Camera"
 msgstr "Cameră"
 
-#: ../lib/bluetooth-utils.c:82
+#: lib/bluetooth-utils.c:80
 msgid "Printer"
 msgstr "Imprimantă"
 
-#: ../lib/bluetooth-utils.c:84
+#: lib/bluetooth-utils.c:82
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../lib/bluetooth-utils.c:86
+#: lib/bluetooth-utils.c:84
 msgid "Tablet"
 msgstr "Tabletă"
 
-#: ../lib/bluetooth-utils.c:88
+#: lib/bluetooth-utils.c:86
 msgid "Video device"
 msgstr "Dispozitiv video"
 
-#: ../lib/bluetooth-utils.c:90
+#: lib/bluetooth-utils.c:88
 msgid "Remote control"
 msgstr "Telecomandă"
 
-#: ../lib/bluetooth-utils.c:92
+#: lib/bluetooth-utils.c:90
 msgid "Scanner"
 msgstr "Scanner"
 
-#: ../lib/bluetooth-utils.c:94
+#: lib/bluetooth-utils.c:92
 msgid "Display"
 msgstr "Ecran"
 
-#: ../lib/bluetooth-utils.c:96
+#: lib/bluetooth-utils.c:94
 msgid "Wearable"
 msgstr "Accesoriu"
 
-#: ../lib/bluetooth-utils.c:98
+#: lib/bluetooth-utils.c:96
 msgid "Toy"
 msgstr "Jucărie"
 
-#: ../lib/settings.ui.h:1
+#: lib/bluetooth-utils.c:117
+msgid "All types"
+msgstr "Toate tipurile"
+
+#: lib/settings.ui:44
 msgid "Connection"
 msgstr "Conexiune"
 
-#: ../lib/settings.ui.h:4
+#: lib/settings.ui:224
 msgid "Address"
 msgstr "Adresă"
 
-#: ../lib/settings.ui.h:5
+#: lib/settings.ui:279
 msgid "_Mouse & Touchpad Settings"
 msgstr "Configurări pentru _maus și touchpad"
 
-#: ../lib/settings.ui.h:6
+#: lib/settings.ui:293
 msgid "_Sound Settings"
 msgstr "Configurări pentru _sunet"
 
-#: ../lib/settings.ui.h:7
+#: lib/settings.ui:307
 msgid "_Keyboard Settings"
 msgstr "Configurări pentru _tastatură"
 
-#: ../lib/settings.ui.h:8
+#: lib/settings.ui:321
 msgid "Send _Files…"
 msgstr "Trimite _fișiere…"
 
-#: ../lib/settings.ui.h:9
+#: lib/settings.ui:335
 msgid "_Remove Device"
 msgstr "_Elimină dispozitivul"
 
-#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+#: sendto/bluetooth-sendto.desktop.in.in:3
 msgid "Bluetooth Transfer"
 msgstr "Transfer Bluetooth"
 
-#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+#: sendto/bluetooth-sendto.desktop.in.in:4
 msgid "Send files via Bluetooth"
 msgstr "Trimiteți fișiere prin Bluetooth"
 
-#: ../sendto/main.c:117
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: sendto/bluetooth-sendto.desktop.in.in:6
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#: sendto/main.c:117
 msgid "An unknown error occurred"
 msgstr "A apărut o eroare necunoscută"
 
-#: ../sendto/main.c:130
+#: sendto/main.c:130
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -424,7 +420,7 @@ msgstr ""
 "Asigurați-vă că dispozitivul la distanță este pornit și acceptă conexiuni "
 "Bluetooth"
 
-#: ../sendto/main.c:363
+#: sendto/main.c:363
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
@@ -432,7 +428,7 @@ msgstr[0] "o secundă"
 msgstr[1] "%'d secunde"
 msgstr[2] "%'d de secunde"
 
-#: ../sendto/main.c:368 ../sendto/main.c:381
+#: sendto/main.c:368 sendto/main.c:381
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
@@ -440,7 +436,7 @@ msgstr[0] "un minut"
 msgstr[1] "%'d minute"
 msgstr[2] "%'d de minute"
 
-#: ../sendto/main.c:379
+#: sendto/main.c:379
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
@@ -448,7 +444,7 @@ msgstr[0] "o oră"
 msgstr[1] "%'d ore"
 msgstr[2] "%'d de ore"
 
-#: ../sendto/main.c:389
+#: sendto/main.c:389
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
@@ -456,47 +452,47 @@ msgstr[0] "aproximativ o oră"
 msgstr[1] "aproximativ %'d ore"
 msgstr[2] "aproximativ %'d de ore"
 
-#: ../sendto/main.c:402 ../sendto/main.c:500
+#: sendto/main.c:402 sendto/main.c:500
 msgid "Connecting…"
 msgstr "Se conectează…"
 
-#: ../sendto/main.c:444
+#: sendto/main.c:444
 msgid "Bluetooth File Transfer"
 msgstr "Transfer fișiere prin Bluetooth"
 
-#: ../sendto/main.c:448
+#: sendto/main.c:448
 msgid "_Retry"
 msgstr "_Reîncearcă"
 
-#: ../sendto/main.c:470
+#: sendto/main.c:470
 msgid "From:"
 msgstr "De la:"
 
-#: ../sendto/main.c:484
+#: sendto/main.c:484
 msgid "To:"
 msgstr "Către:"
 
-#: ../sendto/main.c:577
+#: sendto/main.c:577
 #, c-format
 msgid "Sending %s"
 msgstr "Se trimite %s"
 
-#: ../sendto/main.c:584 ../sendto/main.c:633
+#: sendto/main.c:584 sendto/main.c:633
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Se trimite fișierul %d din %d"
 
-#: ../sendto/main.c:629
+#: sendto/main.c:629
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:631
+#: sendto/main.c:631
 #, c-format
 msgid "%d B/s"
-msgstr "%d O/s"
+msgstr "%d B/s"
 
-#: ../sendto/main.c:662
+#: sendto/main.c:662
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
@@ -504,49 +500,49 @@ msgstr[0] "%u transfer complet"
 msgstr[1] "%u transferuri complete"
 msgstr[2] "%u de transferuri complete"
 
-#: ../sendto/main.c:669
+#: sendto/main.c:669
 msgid "_Close"
 msgstr "În_chide"
 
-#: ../sendto/main.c:679
+#: sendto/main.c:679
 msgid "There was an error"
 msgstr "A apărut o eroare"
 
-#: ../sendto/main.c:734
+#: sendto/main.c:734
 msgid "Select device to send to"
 msgstr "Alegeți dispozitivul destinație"
 
-#: ../sendto/main.c:739
+#: sendto/main.c:739
 msgid "_Send"
 msgstr "_Trimite"
 
-#: ../sendto/main.c:789
+#: sendto/main.c:789
 msgid "Choose files to send"
 msgstr "Alegeți fișierele de trimis"
 
-#: ../sendto/main.c:795
+#: sendto/main.c:795
 msgid "Select"
 msgstr "Alege"
 
-#: ../sendto/main.c:825
+#: sendto/main.c:825
 msgid "Remote device to use"
 msgstr "Dispozitiv la distanță de folosit"
 
-#: ../sendto/main.c:825
+#: sendto/main.c:825
 msgid "ADDRESS"
 msgstr "ADRESĂ"
 
-#: ../sendto/main.c:827
-msgid "Remote device's name"
-msgstr "Numele dispozitivului la distanță "
+#: sendto/main.c:827
+msgid "Remote device’s name"
+msgstr "Numele dispozitivului la distanță"
 
-#: ../sendto/main.c:827
+#: sendto/main.c:827
 msgid "NAME"
 msgstr "NUME"
 
-#: ../sendto/main.c:846
-msgid "[FILE...]"
-msgstr "[FIȘIER...]"
+#: sendto/main.c:846
+msgid "[FILE…]"
+msgstr "[FIȘIER…]"
 
 #~| msgid "Visibility of “%s”"
 #~ msgid "Visible as “%s”"
@@ -984,9 +980,6 @@ msgstr "[FIȘIER...]"
 #~ msgid "Bluetooth has been disabled by a switch on your computer."
 #~ msgstr ""
 #~ "Bluetooth-ul a fost dezactivat de către un comutator de la calculator."
-
-#~ msgid "bluetooth"
-#~ msgstr "bluetooth"
 
 #~ msgid "<u>Pair</u>"
 #~ msgstr "<u>Asociază</u>"
