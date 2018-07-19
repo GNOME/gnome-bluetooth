@@ -1005,10 +1005,20 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (adapter == NULL)
 		return FALSE;
 
-	g_object_set (adapter,
-		      "discoverable", discoverable,
-		      "discoverable-timeout", timeout,
-		      NULL);
+	if (discoverable) {
+		g_object_set (adapter,
+			      "discoverable", discoverable,
+			      "discoverable-timeout", timeout,
+			      NULL);
+	} else {
+		/* Work-around race in bluetoothd which would reset the discoverable
+		 * flag if a timeout change was requested before discoverable finished
+		 * being set to off:
+		 * https://bugzilla.redhat.com/show_bug.cgi?id=1602985 */
+		g_object_set (adapter,
+			      "discoverable", FALSE,
+			      NULL);
+	}
 	g_object_unref (adapter);
 
 	return TRUE;
