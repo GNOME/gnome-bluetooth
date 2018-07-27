@@ -70,11 +70,7 @@ built_sources += gnome.gdbus_codegen(
 deps = [
   gtk_dep,
   m_dep,
-  dependency('gio-unix-2.0'),
-  dependency('gmodule-2.0'),
-  dependency('libcanberra-gtk3'),
-  dependency('libnotify', version: '>= 0.7.0'),
-  dependency('libudev')
+  libgbt_dep
 ]
 
 cflags = [

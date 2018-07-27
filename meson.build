@@ -99,6 +99,12 @@ add_project_arguments(common_flags + compiler_flags, language: 'c')
 
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.12.0')
 m_dep = cc.find_library('m')
+libgbt_dep = [ dependency('gio-unix-2.0'),
+               dependency('gmodule-2.0'),
+               dependency('libcanberra-gtk3'),
+               dependency('libnotify', version: '>= 0.7.0'),
+               dependency('libudev')
+]
 
 gnome = import('gnome')
 i18n = import('i18n')
