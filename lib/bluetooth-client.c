@@ -975,7 +975,6 @@ _bluetooth_client_get_discoverable (BluetoothClient *client)
  * _bluetooth_client_set_discoverable:
  * @client: a #BluetoothClient object
  * @discoverable: whether the device should be discoverable
- * @timeout: timeout in seconds for making undiscoverable, or 0 for never
  *
  * Sets the default adapter's discoverable status.
  *
@@ -983,8 +982,7 @@ _bluetooth_client_get_discoverable (BluetoothClient *client)
  **/
 static gboolean
 _bluetooth_client_set_discoverable (BluetoothClient *client,
-				    gboolean discoverable,
-				    guint timeout)
+				    gboolean discoverable)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
 	GtkTreePath *path;
@@ -1008,7 +1006,7 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (discoverable) {
 		g_object_set (adapter,
 			      "discoverable", discoverable,
-			      "discoverable-timeout", timeout,
+			      "discoverable-timeout", 0,
 			      NULL);
 	} else {
 		/* Work-around race in bluetoothd which would reset the discoverable
@@ -1113,7 +1111,7 @@ bluetooth_client_set_property (GObject        *object,
 
 	switch (property_id) {
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-	        _bluetooth_client_set_discoverable (self, g_value_get_boolean (value), 0);
+	        _bluetooth_client_set_discoverable (self, g_value_get_boolean (value));
 		break;
 	case PROP_DEFAULT_ADAPTER_DISCOVERING:
 		_bluetooth_client_set_default_adapter_discovering (self, g_value_get_boolean (value));
