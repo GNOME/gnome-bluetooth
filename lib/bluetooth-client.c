@@ -652,7 +652,7 @@ adapter_removed (GDBusObjectManager   *manager,
 	/* Ensure that all devices are removed. This can happen if bluetoothd
 	 * crashes as the "object-removed" signal is emitted in an undefined
 	 * order. */
-	have_child = gtk_tree_model_iter_children (priv->store, &childiter, &iter);
+	have_child = gtk_tree_model_iter_children (GTK_TREE_MODEL (priv->store), &childiter, &iter);
 	while (have_child) {
 		GDBusProxy *object;
 
