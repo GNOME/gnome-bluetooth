@@ -1,10 +1,5 @@
 name = 'bluetooth-sendto'
 
-deps = [
-  gtk_dep,
-  dependency('gio-2.0')
-]
-
 executable(
   name,
   'main.c',
@@ -12,7 +7,7 @@ executable(
     top_inc,
     lib_inc
   ],
-  dependencies: deps,
+  dependencies: gtk_dep,
   link_with: libgnome_bluetooth,
   install: true,
   install_dir: gnomebt_bindir
