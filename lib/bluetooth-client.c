@@ -62,6 +62,9 @@ struct _BluetoothClientPrivate {
 	GCancellable *cancellable;
 	GtkTreeStore *store;
 	GtkTreeRowReference *default_adapter;
+	/* Discoverable during discovery? */
+	gboolean disco_during_disco;
+	gboolean discovery_started;
 };
 
 enum {
@@ -652,7 +655,7 @@ adapter_removed (GDBusObjectManager   *manager,
 	/* Ensure that all devices are removed. This can happen if bluetoothd
 	 * crashes as the "object-removed" signal is emitted in an undefined
 	 * order. */
-	have_child = gtk_tree_model_iter_children (priv->store, &childiter, &iter);
+	have_child = gtk_tree_model_iter_children (GTK_TREE_MODEL (priv->store), &childiter, &iter);
 	while (have_child) {
 		GDBusProxy *object;
 
@@ -942,40 +945,9 @@ _bluetooth_client_get_default_adapter_name (BluetoothClient *self)
 }
 
 /**
- * _bluetooth_client_get_discoverable:
- * @client: a #BluetoothClient
- *
- * Gets the default adapter's discoverable status, cached in the adapter model.
- *
- * Returns: the discoverable status, or FALSE if no default adapter exists
- */
-static gboolean
-_bluetooth_client_get_discoverable (BluetoothClient *client)
-{
-	BluetoothClientPrivate *priv;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gboolean ret;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
-	if (priv->default_adapter == NULL)
-		return FALSE;
-
-	path = gtk_tree_row_reference_get_path (priv->default_adapter);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-                            BLUETOOTH_COLUMN_DISCOVERABLE, &ret, -1);
-
-	return ret;
-}
-
-/**
  * _bluetooth_client_set_discoverable:
  * @client: a #BluetoothClient object
  * @discoverable: whether the device should be discoverable
- * @timeout: timeout in seconds for making undiscoverable, or 0 for never
  *
  * Sets the default adapter's discoverable status.
  *
@@ -983,8 +955,7 @@ _bluetooth_client_get_discoverable (BluetoothClient *client)
  **/
 static gboolean
 _bluetooth_client_set_discoverable (BluetoothClient *client,
-				    gboolean discoverable,
-				    guint timeout)
+				    gboolean discoverable)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
 	GtkTreePath *path;
@@ -1008,7 +979,7 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 	if (discoverable) {
 		g_object_set (adapter,
 			      "discoverable", discoverable,
-			      "discoverable-timeout", timeout,
+			      "discoverable-timeout", 0,
 			      NULL);
 	} else {
 		/* Work-around race in bluetoothd which would reset the discoverable
@@ -1026,27 +997,28 @@ _bluetooth_client_set_discoverable (BluetoothClient *client,
 
 static void
 _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
-						   gboolean         discover)
+						   gboolean         discovering,
+						   gboolean         discoverable)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
-	GtkTreeIter iter;
 	GDBusProxy *adapter;
-	gboolean current;
+	GVariantBuilder builder;
 
 	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return;
 
-	get_iter_from_proxy (priv->store, &iter, adapter);
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-			    BLUETOOTH_COLUMN_DISCOVERING, &current, -1);
-
-	if (current == discover) {
-		g_object_unref(adapter);
-		return;
+	g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
+	g_variant_builder_add (&builder, "{sv}",
+			       "Discoverable", g_variant_new_boolean (discoverable));
+	if (!adapter1_call_set_discovery_filter_sync (ADAPTER1 (adapter),
+						      g_variant_builder_end (&builder), NULL, NULL)) {
+		/* BlueZ too old? */
+		_bluetooth_client_set_discoverable (client, discoverable);
 	}
 
-	if (discover)
+	priv->discovery_started = discovering;
+	if (discovering)
 		adapter1_call_start_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
 	else
 		adapter1_call_stop_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
@@ -1080,6 +1052,7 @@ bluetooth_client_get_property (GObject        *object,
 			       GParamSpec     *pspec)
 {
 	BluetoothClient *self = BLUETOOTH_CLIENT (object);
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (self);
 
 	switch (property_id) {
 	case PROP_DEFAULT_ADAPTER:
@@ -1092,7 +1065,7 @@ bluetooth_client_get_property (GObject        *object,
 		g_value_take_string (value, _bluetooth_client_get_default_adapter_name (self));
 		break;
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-		g_value_set_boolean (value, _bluetooth_client_get_discoverable (self));
+		g_value_set_boolean (value, priv->disco_during_disco);
 		break;
 	case PROP_DEFAULT_ADAPTER_DISCOVERING:
 		g_value_set_boolean (value, _bluetooth_client_get_default_adapter_discovering (self));
@@ -1110,13 +1083,15 @@ bluetooth_client_set_property (GObject        *object,
 			       GParamSpec     *pspec)
 {
 	BluetoothClient *self = BLUETOOTH_CLIENT (object);
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (self);
 
 	switch (property_id) {
 	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-	        _bluetooth_client_set_discoverable (self, g_value_get_boolean (value), 0);
+		priv->disco_during_disco = g_value_get_boolean (value);
+		_bluetooth_client_set_default_adapter_discovering (self, priv->discovery_started, priv->disco_during_disco);
 		break;
 	case PROP_DEFAULT_ADAPTER_DISCOVERING:
-		_bluetooth_client_set_default_adapter_discovering (self, g_value_get_boolean (value));
+		_bluetooth_client_set_default_adapter_discovering (self, g_value_get_boolean (value), priv->disco_during_disco);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -1187,11 +1162,11 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	/**
 	 * BluetoothClient:default-adapter-discoverable:
 	 *
-	 * %TRUE if the default Bluetooth adapter is discoverable.
+	 * %TRUE if the default Bluetooth adapter is discoverable during discovery.
 	 */
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERABLE,
 					 g_param_spec_boolean ("default-adapter-discoverable", NULL,
-							      "Whether the default adapter is visible by other devices",
+							      "Whether the default adapter is visible by other devices during discovery",
 							       FALSE, G_PARAM_READWRITE));
 	/**
 	 * BluetoothClient:default-adapter-name:
