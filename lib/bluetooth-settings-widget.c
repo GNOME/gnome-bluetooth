@@ -25,6 +25,8 @@
 #include <gtk/gtk.h>
 
 #include <glib/gi18n-lib.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <math.h>
 
 #include "bluetooth-client.h"
@@ -1886,6 +1888,11 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	GtkWidget *widget;
 	GError *error = NULL;
+
+	/* This ensures the HdyColumn type is known by GtkBuilder when loading
+	 * the UI template.
+	 */
+	HDY_TYPE_COLUMN;
 
 	priv->cancellable = g_cancellable_new ();
 	priv->debug = g_getenv ("BLUETOOTH_DEBUG") != NULL;
