@@ -100,6 +100,21 @@ gio_dep = dependency('gio-2.0')
 gio_unix_dep = dependency('gio-unix-2.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.12.0')
 libcanberra_gtk_dep = dependency('libcanberra-gtk3')
+libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.7', required: false)
+if not libhandy_dep.found()
+  libhandy = subproject(
+    'libhandy',
+    default_options: [
+      'examples=false',
+      'glade_catalog=disabled',
+      'introspection=disabled',
+      'static=true',
+      'tests=false',
+      'vapi=false',
+    ]
+  )
+  libhandy_dep = libhandy.get_variable('libhandy_dep')
+endif
 libnotify_dep = dependency('libnotify', version: '>= 0.7.0')
 libudev_dep = dependency('libudev')
 
