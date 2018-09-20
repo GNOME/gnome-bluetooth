@@ -102,6 +102,7 @@ m_dep = cc.find_library('m')
 libgbt_dep = [ dependency('gio-unix-2.0'),
                dependency('gmodule-2.0'),
                dependency('libcanberra-gtk3'),
+               dependency('libhandy-0.0', version: '>= 0.0.3'),
                dependency('libnotify', version: '>= 0.7.0'),
                dependency('libudev')
 ]
