@@ -1902,7 +1902,7 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 		return;
 	}
 
-	widget = WID ("scrolledwindow1");
+	widget = WID ("vbox_bluetooth");
 
 	priv->connecting_devices = g_hash_table_new_full (g_str_hash,
 								g_str_equal,
@@ -1939,8 +1939,6 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	add_device_section (self);
 
 	gtk_widget_set_hexpand (widget, TRUE);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
-					GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	gtk_container_add (GTK_CONTAINER (self), widget);
 
 	setup_properties_dialog (self);
