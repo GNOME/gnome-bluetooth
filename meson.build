@@ -3,7 +3,7 @@ project(
   version: '3.28.2',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
-  meson_version: '>= 0.43.0',
+  meson_version: '>= 0.49.0',
 )
 
 gnomebt_version = meson.project_version()
@@ -20,10 +20,10 @@ gnomebt_gir_ns = 'GnomeBluetooth'
 gnomebt_gettext_package = meson.project_name() + '2'
 
 gnomebt_prefix = get_option('prefix')
-gnomebt_datadir = join_paths(gnomebt_prefix, get_option('datadir'))
-gnomebt_localedir = join_paths(gnomebt_prefix, get_option('localedir'))
+gnomebt_datadir = gnomebt_prefix / get_option('datadir')
+gnomebt_localedir = gnomebt_prefix / get_option('localedir')
 
-gnomebt_pkgdatadir = join_paths(gnomebt_datadir, meson.project_name())
+gnomebt_pkgdatadir = gnomebt_datadir / meson.project_name()
 
 # options
 enable_gtk_doc = get_option('gtk_doc')
@@ -46,7 +46,7 @@ gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')
 
-po_dir = join_paths(meson.current_source_dir(), 'po')
+po_dir = meson.current_source_dir() / 'po'
 
 top_inc = include_directories('.')
 

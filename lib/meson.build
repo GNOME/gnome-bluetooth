@@ -78,7 +78,7 @@ cflags = [
   '-DG_LOG_DOMAIN="Bluetooth"',
 ]
 
-symbol_map = join_paths(meson.current_source_dir(), meson.project_name() + '.map')
+symbol_map = meson.current_source_dir() / (meson.project_name() + '.map')
 
 test_ldflag = '-Wl,--version-script,' + symbol_map
 ldflags = []
