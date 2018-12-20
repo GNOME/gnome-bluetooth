@@ -42,6 +42,14 @@ age = 0
 
 libversion = '@0@.@1@.@2@'.format(current, age, revision)
 
+gnome = import('gnome')
+i18n = import('i18n')
+pkg = import('pkgconfig')
+
+po_dir = join_paths(meson.current_source_dir(), 'po')
+
+top_inc = include_directories('.')
+
 cc = meson.get_compiler('c')
 
 config_h = configuration_data()
@@ -96,14 +104,6 @@ libgbt_dep = [ dependency('gio-unix-2.0'),
                dependency('libnotify', version: '>= 0.7.0'),
                dependency('libudev'),
 ]
-
-gnome = import('gnome')
-i18n = import('i18n')
-pkg = import('pkgconfig')
-
-po_dir = join_paths(meson.source_root(), 'po')
-
-top_inc = include_directories('.')
 
 subdir('icons')
 subdir('lib')
