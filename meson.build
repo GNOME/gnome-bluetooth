@@ -16,21 +16,14 @@ gnomebt_api_version = '1.0'
 gnomebt_api_name = '@0@-@1@'.format(meson.project_name(), gnomebt_api_version)
 
 gnomebt_gir_ns = 'GnomeBluetooth'
-gnomebt_gir_version = '1.0'
 
 gnomebt_gettext_package = meson.project_name() + '2'
 
 gnomebt_prefix = get_option('prefix')
-gnomebt_bindir = join_paths(gnomebt_prefix, get_option('bindir'))
 gnomebt_datadir = join_paths(gnomebt_prefix, get_option('datadir'))
-gnomebt_includedir = join_paths(gnomebt_prefix, get_option('includedir'))
-gnomebt_libdir = join_paths(gnomebt_prefix, get_option('libdir'))
-gnomebt_libexecdir = join_paths(gnomebt_prefix, get_option('libexecdir'))
 gnomebt_localedir = join_paths(gnomebt_prefix, get_option('localedir'))
-gnomebt_mandir = join_paths(gnomebt_prefix, get_option('mandir'))
 
 gnomebt_pkgdatadir = join_paths(gnomebt_datadir, meson.project_name())
-gnomebt_pkglibdir = join_paths(gnomebt_libdir, meson.project_name())
 
 # options
 enable_gtk_doc = get_option('gtk_doc')
