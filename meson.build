@@ -3,7 +3,7 @@ project(
   version: '3.28.2',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
-  meson_version: '>= 0.43.0'
+  meson_version: '>= 0.43.0',
 )
 
 gnomebt_version = meson.project_version()
@@ -75,7 +75,7 @@ common_flags = [
   '-DLIBSOUP_DISABLE_DEPRECATED',
   '-DLIBSOUP_DISABLE_SINGLE_INCLUDES',
   '-DWNCK_DISABLE_DEPRECATED',
-  '-DWNCK_DISABLE_SINGLE_INCLUDES'
+  '-DWNCK_DISABLE_SINGLE_INCLUDES',
 ]
 
 compiler_flags = []
@@ -89,7 +89,7 @@ if get_option('buildtype').contains('debug')
     '-Werror=pointer-arith',
     '-Werror=return-type',
     '-Wnested-externs',
-    '-Wstrict-prototypes'
+    '-Wstrict-prototypes',
   ]
 
   compiler_flags += cc.get_supported_arguments(test_flags)
@@ -103,7 +103,7 @@ libgbt_dep = [ dependency('gio-unix-2.0'),
                dependency('gmodule-2.0'),
                dependency('libcanberra-gtk3'),
                dependency('libnotify', version: '>= 0.7.0'),
-               dependency('libudev')
+               dependency('libudev'),
 ]
 
 gnome = import('gnome')
@@ -126,13 +126,13 @@ subdir('po')
 
 configure_file(
   output: 'config.h',
-  configuration: config_h
+  configuration: config_h,
 )
 
 meson.add_install_script(
   'meson_post_install.py',
   get_option('icon_update') ? 'icon_update' : '',
-  gnomebt_datadir
+  gnomebt_datadir,
 )
 
 output = '\nConfigure summary:\n\n'
