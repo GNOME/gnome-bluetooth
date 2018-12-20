@@ -32,5 +32,5 @@ i18n.merge_file (
   output: desktop,
   po_dir: po_dir,
   install: true,
-  install_dir: join_paths(gnomebt_datadir, 'applications'),
+  install_dir: gnomebt_datadir / 'applications',
 )
