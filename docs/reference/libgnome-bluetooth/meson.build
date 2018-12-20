@@ -20,8 +20,6 @@ configure_file(
   configuration: version_conf,
 )
 
-doc_path = join_paths(gnomebt_datadir, 'gtk-doc', 'html', meson.project_name())
-
 gnome.gtkdoc(
   meson.project_name(),
   main_sgml: meson.project_name() + '-docs.sgml',
@@ -40,5 +38,4 @@ gnome.gtkdoc(
   ],
   gobject_typesfile: meson.project_name() + '.types',
   install: true,
-  install_dir: doc_path
 )

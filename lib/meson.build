@@ -97,7 +97,6 @@ libgnome_bluetooth = shared_library(
   link_args: ldflags,
   link_depends: symbol_map,
   install: true,
-  install_dir: gnomebt_libdir,
 )
 
 libgnome_bluetooth_dep = declare_dependency(
@@ -119,7 +118,6 @@ pkg.generate(
   ],
   requires_private: 'libudev',
   variables: 'exec_prefix=' + gnomebt_libexecdir,
-  install_dir: join_paths(get_option('libdir'), 'pkgconfig'),
 )
 
 if enable_gir
@@ -133,9 +131,6 @@ if enable_gir
 
   gir_extra_args = '--warn-all'
 
-  gir_dir = join_paths(gnomebt_datadir, 'gir-' + gnomebt_gir_version)
-  typelib_dir = join_paths(gnomebt_libdir, 'girepository-' + gnomebt_gir_version)
-
   gnome.generate_gir(
     libgnome_bluetooth,
     sources: gir_sources,
@@ -147,8 +142,6 @@ if enable_gir
     includes: gir_incs,
     extra_args: gir_extra_args,
     install: true,
-    install_dir_gir: gir_dir,
-    install_dir_typelib: typelib_dir,
   )
 endif
 

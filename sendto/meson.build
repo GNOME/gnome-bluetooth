@@ -10,13 +10,9 @@ executable(
   dependencies: gtk_dep,
   link_with: libgnome_bluetooth,
   install: true,
-  install_dir: gnomebt_bindir,
 )
 
-install_man(
-  name + '.1',
-  install_dir: join_paths(gnomebt_mandir, 'man1'),
-)
+install_man(name + '.1')
 
 desktop_conf = configuration_data()
 desktop_conf.set('VERSION', gnomebt_version)
