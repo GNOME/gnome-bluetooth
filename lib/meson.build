@@ -123,8 +123,6 @@ if enable_gir
     'Gtk-3.0',
   ]
 
-  gir_extra_args = '--warn-all'
-
   gnome.generate_gir(
     libgnome_bluetooth,
     sources: gir_sources,
@@ -134,7 +132,6 @@ if enable_gir
     identifier_prefix: 'Bluetooth',
     export_packages: gnomebt_api_name,
     includes: gir_incs,
-    extra_args: gir_extra_args,
     install: true,
   )
 endif
