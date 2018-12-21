@@ -23,10 +23,7 @@ configure_file(
 gnome.gtkdoc(
   meson.project_name(),
   main_sgml: meson.project_name() + '-docs.sgml',
-  src_dir: [
-    top_inc,
-    lib_inc,
-  ],
+  src_dir: top_inc,
   dependencies: libgnome_bluetooth_dep,
   scan_args: [
     '--rebuild-types',

@@ -3,12 +3,8 @@ name = 'bluetooth-sendto'
 executable(
   name,
   'main.c',
-  include_directories: [
-    top_inc,
-    lib_inc,
-  ],
-  dependencies: gtk_dep,
-  link_with: libgnome_bluetooth,
+  include_directories: top_inc,
+  dependencies: libgnome_bluetooth_dep,
   install: true,
 )
 
