@@ -96,14 +96,14 @@ endif
 
 add_project_arguments(common_flags + compiler_flags, language: 'c')
 
+gio_dep = dependency('gio-2.0')
+gio_unix_dep = dependency('gio-unix-2.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.12.0')
+libcanberra_gtk_dep = dependency('libcanberra-gtk3')
+libnotify_dep = dependency('libnotify', version: '>= 0.7.0')
+libudev_dep = dependency('libudev')
+
 m_dep = cc.find_library('m')
-libgbt_dep = [ dependency('gio-unix-2.0'),
-               dependency('gmodule-2.0'),
-               dependency('libcanberra-gtk3'),
-               dependency('libnotify', version: '>= 0.7.0'),
-               dependency('libudev'),
-]
 
 subdir('icons')
 subdir('lib')

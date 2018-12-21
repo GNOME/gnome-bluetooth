@@ -67,9 +67,15 @@ built_sources += gnome.gdbus_codegen(
 )
 
 deps = [
+  gio_dep,
   gtk_dep,
-  m_dep,
-  libgbt_dep,
+]
+
+private_deps = [
+  gio_unix_dep,
+  libcanberra_gtk_dep,
+  libnotify_dep,
+  libudev_dep,
 ]
 
 cflags = [
@@ -85,7 +91,7 @@ libgnome_bluetooth = shared_library(
   sources: sources + built_sources,
   version: libversion,
   include_directories: top_inc,
-  dependencies: deps,
+  dependencies: deps + private_deps + [m_dep],
   c_args: cflags,
   link_args: ldflags,
   link_depends: symbol_map,
@@ -105,11 +111,8 @@ pkg.generate(
   description: 'Widgets for Bluetooth device selection',
   filebase: gnomebt_api_name,
   subdirs: meson.project_name(),
-  requires: [
-    'gio-2.0',
-    'gtk+-3.0',
-  ],
-  requires_private: 'libudev',
+  requires: deps,
+  #requires_private: private_deps,
   variables: 'exec_prefix=${prefix}',
 )
 
@@ -150,7 +153,7 @@ foreach name: test_names
     name,
     [name + '.c'] + built_sources,
     include_directories: top_inc,
-    dependencies: deps,
+    dependencies: deps + private_deps,
     c_args: cflags,
     link_with: libgnome_bluetooth,
   )
