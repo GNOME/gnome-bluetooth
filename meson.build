@@ -20,8 +20,8 @@ gnomebt_gir_ns = 'GnomeBluetooth'
 gnomebt_gettext_package = meson.project_name() + '2'
 
 gnomebt_prefix = get_option('prefix')
-gnomebt_datadir = gnomebt_prefix / get_option('datadir')
-gnomebt_localedir = gnomebt_prefix / get_option('localedir')
+gnomebt_datadir = get_option('datadir')
+gnomebt_localedir = get_option('localedir')
 
 gnomebt_pkgdatadir = gnomebt_datadir / meson.project_name()
 
@@ -56,7 +56,7 @@ config_h = configuration_data()
 
 #i18n
 config_h.set_quoted('GETTEXT_PACKAGE', gnomebt_gettext_package)
-config_h.set_quoted('LOCALEDIR', gnomebt_localedir)
+config_h.set_quoted('LOCALEDIR', gnomebt_prefix / gnomebt_localedir)
 
 # compiler flags
 common_flags = [

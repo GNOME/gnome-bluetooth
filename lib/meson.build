@@ -74,7 +74,7 @@ deps = [
 ]
 
 cflags = [
-  '-DPKGDATADIR="@0@"'.format(gnomebt_pkgdatadir),
+  '-DPKGDATADIR="@0@"'.format(gnomebt_prefix / gnomebt_pkgdatadir),
   '-DG_LOG_DOMAIN="Bluetooth"',
 ]
 
