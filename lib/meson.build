@@ -44,7 +44,6 @@ resource_data = files(
 built_sources += gnome.compile_resources(
   'bluetooth-settings-resources',
   'bluetooth.gresource.xml',
-  source_dir: '.',
   c_name: 'bluetooth_settings',
   dependencies: resource_data,
   export: true,
