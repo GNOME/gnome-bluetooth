@@ -12,11 +12,9 @@ private_headers = [
 version_conf = configuration_data()
 version_conf.set('VERSION', gnomebt_version)
 
-version_xml = 'version.xml'
-
 configure_file(
-  input: version_xml + '.in',
-  output: version_xml,
+  input: 'version.xml.in',
+  output: '@BASENAME@',
   configuration: version_conf,
 )
 

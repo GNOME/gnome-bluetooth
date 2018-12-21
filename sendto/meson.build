@@ -17,7 +17,7 @@ desktop = name + '.desktop'
 
 desktop_in = configure_file(
   input: desktop + '.in.in',
-  output: desktop + '.in',
+  output: '@BASENAME@',
   configuration: desktop_conf,
 )
 
