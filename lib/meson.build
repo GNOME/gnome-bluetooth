@@ -79,13 +79,7 @@ cflags = [
 ]
 
 symbol_map = meson.current_source_dir() / (meson.project_name() + '.map')
-
-test_ldflag = '-Wl,--version-script,' + symbol_map
-ldflags = []
-
-if cc.has_argument(test_ldflag)
-  ldflags += test_ldflag
-endif
+ldflags = cc.get_supported_link_arguments('-Wl,--version-script,' + symbol_map)
 
 libgnome_bluetooth = shared_library(
   meson.project_name(),
