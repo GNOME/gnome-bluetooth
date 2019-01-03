@@ -64,6 +64,7 @@ struct _BluetoothSettingsWidgetPrivate {
 	char                *selected_object_path;
 
 	/* Device section */
+	GtkWidget           *device_label;
 	GtkWidget           *device_list;
 	GtkAdjustment       *focus_adjustment;
 	GtkSizeGroup        *row_sizegroup;
@@ -1517,7 +1518,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
 
 	s = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
-	widget = gtk_label_new (s);
+	priv->device_label = widget = gtk_label_new (s);
 	g_free (s);
 	gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
@@ -1549,6 +1550,12 @@ add_device_section (BluetoothSettingsWidget *self)
 				    (GtkListBoxSortFunc)device_sort_func, NULL, NULL);
 	g_signal_connect_swapped (widget, "row-activated",
 				  G_CALLBACK (activate_row), self);
+        atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_label)),
+                                     ATK_RELATION_LABEL_FOR,
+                                     ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)));
+        atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)),
+                                     ATK_RELATION_LABELLED_BY,
+                                     ATK_OBJECT (gtk_widget_get_accessible (priv->device_label)));
 
 	priv->device_stack = gtk_stack_new ();
 	gtk_stack_set_homogeneous (GTK_STACK (priv->device_stack), FALSE);
