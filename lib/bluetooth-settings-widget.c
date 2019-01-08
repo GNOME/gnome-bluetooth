@@ -64,6 +64,7 @@ struct _BluetoothSettingsWidgetPrivate {
 	char                *selected_object_path;
 
 	/* Device section */
+	GtkWidget           *device_label;
 	GtkWidget           *device_list;
 	GtkAdjustment       *focus_adjustment;
 	GtkSizeGroup        *row_sizegroup;
@@ -1501,7 +1502,7 @@ add_device_section (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	GtkWidget *vbox;
-	GtkWidget *widget, *box, *hbox, *spinner;
+	GtkWidget *box, *hbox, *spinner;
 	GtkWidget *frame, *label;
 	gchar *s;
 
@@ -1517,13 +1518,13 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
 
 	s = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
-	widget = gtk_label_new (s);
+	priv->device_label = gtk_label_new (s);
 	g_free (s);
-	gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-	gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
-	gtk_widget_set_margin_end (widget, 6);
-	gtk_widget_set_margin_bottom (widget, 12);
-	gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
+	gtk_label_set_use_markup (GTK_LABEL (priv->device_label), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (priv->device_label), 0, 0.5);
+	gtk_widget_set_margin_end (priv->device_label, 6);
+	gtk_widget_set_margin_bottom (priv->device_label, 12);
+	gtk_box_pack_start (GTK_BOX (hbox), priv->device_label, FALSE, TRUE, 0);
 
 	/* Discoverable spinner */
 	priv->device_spinner = spinner = gtk_spinner_new ();
@@ -1539,16 +1540,22 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_label_set_use_markup (GTK_LABEL (priv->visible_label), TRUE);
 	update_visibility (self);
 
-	priv->device_list = widget = gtk_list_box_new ();
-	g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
-	gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
-	gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
+	priv->device_list = gtk_list_box_new ();
+	g_signal_connect (priv->device_list, "keynav-failed", G_CALLBACK (keynav_failed), self);
+	gtk_list_box_set_selection_mode (GTK_LIST_BOX (priv->device_list), GTK_SELECTION_NONE);
+	gtk_list_box_set_header_func (GTK_LIST_BOX (priv->device_list),
 				      update_header_func,
 				      NULL, NULL);
-	gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
+	gtk_list_box_set_sort_func (GTK_LIST_BOX (priv->device_list),
 				    (GtkListBoxSortFunc)device_sort_func, NULL, NULL);
-	g_signal_connect_swapped (widget, "row-activated",
+	g_signal_connect_swapped (priv->device_list, "row-activated",
 				  G_CALLBACK (activate_row), self);
+        atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_label)),
+                                     ATK_RELATION_LABEL_FOR,
+                                     ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)));
+        atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)),
+                                     ATK_RELATION_LABELLED_BY,
+                                     ATK_OBJECT (gtk_widget_get_accessible (priv->device_label)));
 
 	priv->device_stack = gtk_stack_new ();
 	gtk_stack_set_homogeneous (GTK_STACK (priv->device_stack), FALSE);
@@ -1559,7 +1566,7 @@ add_device_section (BluetoothSettingsWidget *self)
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (frame), widget);
+	gtk_container_add (GTK_CONTAINER (frame), priv->device_list);
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), frame, DEVICES_PAGE);
 	gtk_box_pack_start (GTK_BOX (box), priv->device_stack, TRUE, TRUE, 0);
 
