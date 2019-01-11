@@ -9,12 +9,12 @@ headers = enum_headers + files(
   'bluetooth-chooser-combo.h',
   'bluetooth-filter-widget.h',
   'bluetooth-settings-widget.h',
-  'bluetooth-utils.h'
+  'bluetooth-utils.h',
 )
 
 install_headers(
   headers,
-  subdir: meson.project_name()
+  subdir: meson.project_name(),
 )
 
 sources = files(
@@ -29,7 +29,7 @@ sources = files(
   'bluetooth-settings-row.c',
   'bluetooth-settings-widget.c',
   'bluetooth-utils.c',
-  'pin.c'
+  'pin.c',
 )
 
 built_sources = []
@@ -38,16 +38,15 @@ resource_data = files(
   'bluetooth-pairing-dialog.ui',
   'bluetooth-settings.css',
   'bluetooth-settings-row.ui',
-  'settings.ui'
+  'settings.ui',
 )
 
 built_sources += gnome.compile_resources(
   'bluetooth-settings-resources',
   'bluetooth.gresource.xml',
-  source_dir: '.',
   c_name: 'bluetooth_settings',
   dependencies: resource_data,
-  export: true
+  export: true,
 )
 
 enum_types = 'gnome-bluetooth-enum-types'
@@ -56,7 +55,7 @@ built_sources += gnome.mkenums(
   enum_types,
   sources: headers,
   c_template: enum_types + '.c.template',
-  h_template: enum_types + '.h.template'
+  h_template: enum_types + '.h.template',
 )
 
 client = 'bluetooth-client'
@@ -64,46 +63,45 @@ client = 'bluetooth-client'
 built_sources += gnome.gdbus_codegen(
   client + '-glue',
   client + '.xml',
-  interface_prefix: 'org.bluez'
+  interface_prefix: 'org.bluez',
 )
 
 deps = [
+  gio_dep,
   gtk_dep,
-  m_dep,
-  libgbt_dep
+]
+
+private_deps = [
+  gio_unix_dep,
+  libcanberra_gtk_dep,
+  libnotify_dep,
+  libudev_dep,
 ]
 
 cflags = [
-  '-DPKGDATADIR="@0@"'.format(gnomebt_pkgdatadir),
-  '-DG_LOG_DOMAIN="Bluetooth"'
+  '-DPKGDATADIR="@0@"'.format(gnomebt_prefix / gnomebt_pkgdatadir),
+  '-DG_LOG_DOMAIN="Bluetooth"',
 ]
 
-symbol_map = join_paths(meson.current_source_dir(), meson.project_name() + '.map')
-
-test_ldflag = '-Wl,--version-script,' + symbol_map
-ldflags = []
-
-if cc.has_argument(test_ldflag)
-  ldflags += test_ldflag
-endif
+symbol_map = meson.current_source_dir() / (meson.project_name() + '.map')
+ldflags = cc.get_supported_link_arguments('-Wl,--version-script,' + symbol_map)
 
 libgnome_bluetooth = shared_library(
   meson.project_name(),
   sources: sources + built_sources,
   version: libversion,
   include_directories: top_inc,
-  dependencies: deps,
+  dependencies: deps + private_deps + [m_dep],
   c_args: cflags,
   link_args: ldflags,
   link_depends: symbol_map,
   install: true,
-  install_dir: gnomebt_libdir
 )
 
 libgnome_bluetooth_dep = declare_dependency(
   link_with: libgnome_bluetooth,
   include_directories: lib_inc,
-  dependencies: deps
+  dependencies: deps,
 )
 
 pkg.generate(
@@ -113,13 +111,8 @@ pkg.generate(
   description: 'Widgets for Bluetooth device selection',
   filebase: gnomebt_api_name,
   subdirs: meson.project_name(),
-  requires: [
-    'gio-2.0',
-    'gtk+-3.0'
-  ],
-  requires_private: 'libudev',
-  variables: 'exec_prefix=' + gnomebt_libexecdir,
-  install_dir: join_paths(get_option('libdir'), 'pkgconfig')
+  requires: deps,
+  variables: 'exec_prefix=${prefix}',
 )
 
 if enable_gir
@@ -128,13 +121,8 @@ if enable_gir
   gir_incs = [
     'GModule-2.0',
     'GObject-2.0',
-    'Gtk-3.0'
+    'Gtk-3.0',
   ]
-
-  gir_extra_args = '--warn-all'
-
-  gir_dir = join_paths(gnomebt_datadir, 'gir-' + gnomebt_gir_version)
-  typelib_dir = join_paths(gnomebt_libdir, 'girepository-' + gnomebt_gir_version)
 
   gnome.generate_gir(
     libgnome_bluetooth,
@@ -145,10 +133,7 @@ if enable_gir
     identifier_prefix: 'Bluetooth',
     export_packages: gnomebt_api_name,
     includes: gir_incs,
-    extra_args: gir_extra_args,
     install: true,
-    install_dir_gir: gir_dir,
-    install_dir_typelib: typelib_dir,
   )
 endif
 
@@ -159,7 +144,7 @@ test_names = [
   'test-deviceselection',
   'test-pairing-dialog',
   'test-pin',
-  'test-settings'
+  'test-settings',
 ]
 
 foreach name: test_names
@@ -167,9 +152,9 @@ foreach name: test_names
     name,
     [name + '.c'] + built_sources,
     include_directories: top_inc,
-    dependencies: deps,
+    dependencies: deps + private_deps,
     c_args: cflags,
-    link_with: libgnome_bluetooth
+    link_with: libgnome_bluetooth,
   )
 endforeach
 
@@ -177,12 +162,12 @@ database = 'pin-code-database.xml'
 
 install_data(
   database,
-  install_dir: gnomebt_pkgdatadir
+  install_dir: gnomebt_pkgdatadir,
 )
 
 custom_target(
   database,
   input: database,
   output: database + '.valid',
-  command: [find_program('xmllint'), '--output', '@OUTPUT@', '--valid', '@INPUT']
+  command: [find_program('xmllint'), '--output', '@OUTPUT@', '--valid', '@INPUT'],
 )

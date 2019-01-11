@@ -3,20 +3,12 @@ name = 'bluetooth-sendto'
 executable(
   name,
   'main.c',
-  include_directories: [
-    top_inc,
-    lib_inc
-  ],
-  dependencies: gtk_dep,
-  link_with: libgnome_bluetooth,
+  include_directories: top_inc,
+  dependencies: libgnome_bluetooth_dep,
   install: true,
-  install_dir: gnomebt_bindir
 )
 
-install_man(
-  name + '.1',
-  install_dir: join_paths(gnomebt_mandir, 'man1')
-)
+install_man(name + '.1')
 
 desktop_conf = configuration_data()
 desktop_conf.set('VERSION', gnomebt_version)
@@ -25,8 +17,8 @@ desktop = name + '.desktop'
 
 desktop_in = configure_file(
   input: desktop + '.in.in',
-  output: desktop + '.in',
-  configuration: desktop_conf
+  output: '@BASENAME@',
+  configuration: desktop_conf,
 )
 
 i18n.merge_file (
@@ -36,5 +28,5 @@ i18n.merge_file (
   output: desktop,
   po_dir: po_dir,
   install: true,
-  install_dir: join_paths(gnomebt_datadir, 'applications')
+  install_dir: gnomebt_datadir / 'applications',
 )

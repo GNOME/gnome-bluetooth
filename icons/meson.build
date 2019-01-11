@@ -1,1 +1,1 @@
-install_subdir('hicolor', install_dir: join_paths(gnomebt_datadir, 'icons'))
+install_subdir('hicolor', install_dir: gnomebt_datadir / 'icons')

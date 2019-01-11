@@ -3,7 +3,7 @@ project(
   version: '3.28.2',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
-  meson_version: '>= 0.43.0'
+  meson_version: '>= 0.49.0',
 )
 
 gnomebt_version = meson.project_version()
@@ -16,21 +16,14 @@ gnomebt_api_version = '1.0'
 gnomebt_api_name = '@0@-@1@'.format(meson.project_name(), gnomebt_api_version)
 
 gnomebt_gir_ns = 'GnomeBluetooth'
-gnomebt_gir_version = '1.0'
 
 gnomebt_gettext_package = meson.project_name() + '2'
 
 gnomebt_prefix = get_option('prefix')
-gnomebt_bindir = join_paths(gnomebt_prefix, get_option('bindir'))
-gnomebt_datadir = join_paths(gnomebt_prefix, get_option('datadir'))
-gnomebt_includedir = join_paths(gnomebt_prefix, get_option('includedir'))
-gnomebt_libdir = join_paths(gnomebt_prefix, get_option('libdir'))
-gnomebt_libexecdir = join_paths(gnomebt_prefix, get_option('libexecdir'))
-gnomebt_localedir = join_paths(gnomebt_prefix, get_option('localedir'))
-gnomebt_mandir = join_paths(gnomebt_prefix, get_option('mandir'))
+gnomebt_datadir = get_option('datadir')
+gnomebt_localedir = get_option('localedir')
 
-gnomebt_pkgdatadir = join_paths(gnomebt_datadir, meson.project_name())
-gnomebt_pkglibdir = join_paths(gnomebt_libdir, meson.project_name())
+gnomebt_pkgdatadir = gnomebt_datadir / meson.project_name()
 
 # options
 enable_gtk_doc = get_option('gtk_doc')
@@ -49,13 +42,21 @@ age = 0
 
 libversion = '@0@.@1@.@2@'.format(current, age, revision)
 
+gnome = import('gnome')
+i18n = import('i18n')
+pkg = import('pkgconfig')
+
+po_dir = meson.current_source_dir() / 'po'
+
+top_inc = include_directories('.')
+
 cc = meson.get_compiler('c')
 
 config_h = configuration_data()
 
 #i18n
 config_h.set_quoted('GETTEXT_PACKAGE', gnomebt_gettext_package)
-config_h.set_quoted('LOCALEDIR', gnomebt_localedir)
+config_h.set_quoted('LOCALEDIR', gnomebt_prefix / gnomebt_localedir)
 
 # compiler flags
 common_flags = [
@@ -75,12 +76,12 @@ common_flags = [
   '-DLIBSOUP_DISABLE_DEPRECATED',
   '-DLIBSOUP_DISABLE_SINGLE_INCLUDES',
   '-DWNCK_DISABLE_DEPRECATED',
-  '-DWNCK_DISABLE_SINGLE_INCLUDES'
+  '-DWNCK_DISABLE_SINGLE_INCLUDES',
 ]
 
 compiler_flags = []
 if get_option('buildtype').contains('debug')
-  test_flags = [
+  compiler_flags += cc.get_supported_arguments([
     '-Werror=format=2',
     '-Werror=implicit-function-declaration',
     '-Werror=init-self',
@@ -89,30 +90,20 @@ if get_option('buildtype').contains('debug')
     '-Werror=pointer-arith',
     '-Werror=return-type',
     '-Wnested-externs',
-    '-Wstrict-prototypes'
-  ]
-
-  compiler_flags += cc.get_supported_arguments(test_flags)
+    '-Wstrict-prototypes',
+  ])
 endif
 
 add_project_arguments(common_flags + compiler_flags, language: 'c')
 
+gio_dep = dependency('gio-2.0')
+gio_unix_dep = dependency('gio-unix-2.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.12.0')
+libcanberra_gtk_dep = dependency('libcanberra-gtk3')
+libnotify_dep = dependency('libnotify', version: '>= 0.7.0')
+libudev_dep = dependency('libudev')
+
 m_dep = cc.find_library('m')
-libgbt_dep = [ dependency('gio-unix-2.0'),
-               dependency('gmodule-2.0'),
-               dependency('libcanberra-gtk3'),
-               dependency('libnotify', version: '>= 0.7.0'),
-               dependency('libudev')
-]
-
-gnome = import('gnome')
-i18n = import('i18n')
-pkg = import('pkgconfig')
-
-po_dir = join_paths(meson.source_root(), 'po')
-
-top_inc = include_directories('.')
 
 subdir('icons')
 subdir('lib')
@@ -126,13 +117,13 @@ subdir('po')
 
 configure_file(
   output: 'config.h',
-  configuration: config_h
+  configuration: config_h,
 )
 
 meson.add_install_script(
   'meson_post_install.py',
   get_option('icon_update') ? 'icon_update' : '',
-  gnomebt_datadir
+  gnomebt_datadir,
 )
 
 output = '\nConfigure summary:\n\n'
