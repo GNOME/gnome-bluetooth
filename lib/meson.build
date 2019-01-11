@@ -117,7 +117,7 @@ pkg.generate(
     'gtk+-3.0',
   ],
   requires_private: 'libudev',
-  variables: 'exec_prefix=' + gnomebt_libexecdir,
+  variables: 'exec_prefix=${prefix}',
 )
 
 if enable_gir
