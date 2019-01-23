@@ -6,14 +6,15 @@
 # Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2009.
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2013, 2014.
+# sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
 "POT-Creation-Date: 2018-11-04 15:43+0000\n"
-"PO-Revision-Date: 2019-01-24 00:40+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
+"PO-Revision-Date: 2019-01-24 00:49+0900\n"
+"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -118,10 +119,9 @@ msgid "Confirm Bluetooth PIN"
 msgstr "Bluetooth PIN の確認"
 
 #: lib/bluetooth-pairing-dialog.c:84
-#, fuzzy, c-format
-#| msgid "Please confirm the PIN that was entered on '%s'."
+#, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
-msgstr "'%s' で入力された PIN を確認してください。"
+msgstr "“%s”で入力された PIN を確認してください。"
 
 #: lib/bluetooth-pairing-dialog.c:88 lib/bluetooth-pairing-dialog.c:101
 #: lib/bluetooth-pairing-dialog.c:149
@@ -129,71 +129,57 @@ msgid "Confirm"
 msgstr "確認"
 
 #: lib/bluetooth-pairing-dialog.c:91
-#, fuzzy, c-format
-#| msgid ""
-#| "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
-#| "device's manual."
+#, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
 "device’s manual."
 msgstr ""
-"'%s' の Bluetooth PIN を確認してください。通常はデバイスのマニュアルに記載さ"
+"“%s”の Bluetooth PIN を確認してください。通常はデバイスのマニュアルに記載さ"
 "れています。"
 
 #: lib/bluetooth-pairing-dialog.c:97
-#, fuzzy, c-format
-#| msgid "Pairing '%s'"
+#, c-format
 msgid "Pairing “%s”"
-msgstr "ペアリング '%s'"
+msgstr "ペアリング“%s”"
 
 #: lib/bluetooth-pairing-dialog.c:105
-#, fuzzy, c-format
-#| msgid ""
-#| "Please confirm that the following PIN matches the one displayed on '%s'."
+#, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr ""
-"以下の PIN が '%s' に表示されているものと一致するかどうか確認してください。"
+"以下の PIN が“%s”に表示されているものと一致するかどうか確認してください。"
 
 #: lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth ペアリングリクエスト"
 
 #: lib/bluetooth-pairing-dialog.c:111
-#, fuzzy, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+#, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
-"'%s' がこのデバイスとのペアリングを要求しています。ペアリングを許可しますか?"
+"“%s”がこのデバイスとのペアリングを要求しています。ペアリングを許可しますか?"
 
 #: lib/bluetooth-pairing-dialog.c:116
-#, fuzzy
-#| msgid "Confirm Bluetooth PIN"
 msgid "Confirm Bluetooth Connection"
-msgstr "Bluetooth PIN の確認"
+msgstr "Bluetooth 接続の確認"
 
 #: lib/bluetooth-pairing-dialog.c:117
-#, fuzzy, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+#, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr ""
-"'%s' がこのデバイスとのペアリングを要求しています。ペアリングを許可しますか?"
+"“%s”がこのデバイスとの接続を要求しています。許可しますか?"
 
 #: lib/bluetooth-pairing-dialog.c:125
-#, fuzzy, c-format
-#| msgid "Please enter the following PIN on '%s'."
+#, c-format
 msgid "Please enter the following PIN on “%s”."
-msgstr "次の PINを '%s' に入力してください。"
+msgstr "次の PIN を“%s”に入力してください。"
 
 #: lib/bluetooth-pairing-dialog.c:128
-#, fuzzy, c-format
-#| msgid ""
-#| "Please enter the following PIN on '%s'. Then press “Return” on the "
-#| "keyboard."
+#, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr ""
-"次のPINを'%s'に入力してください。その後キーボードで“Return”を押してください。"
+"次の PIN を“%s”に入力してください。その後キーボードで“Return”を押してください。"
 
 #: lib/bluetooth-pairing-dialog.c:131
 msgid ""
@@ -249,13 +235,13 @@ msgstr "いいえ"
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
-msgstr ""
+msgstr "“%s”として表示され、Bluetooth ファイル転送に利用できます。"
+"転送されたファイルは<a href=\"%s\">ダウンロード</a>フォルダーに置かれます。"
 
 #: lib/bluetooth-settings-widget.c:1273
-#, fuzzy, c-format
-#| msgid "Remove '%s' from the list of devices?"
+#, c-format
 msgid "Remove “%s” from the list of devices?"
-msgstr "'%s' をデバイスのリストから削除しますか?"
+msgstr "“%s”をデバイスのリストから削除しますか?"
 
 #: lib/bluetooth-settings-widget.c:1275
 msgid ""
@@ -269,38 +255,34 @@ msgstr "削除(_R)"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
-#, fuzzy, c-format
-#| msgid "Send files via Bluetooth"
+#, c-format
 msgid "You received “%s” via Bluetooth"
-msgstr "ファイルを Bluetooth で送信"
+msgstr "Bluetooth で“%s”を受信しました"
 
 #: lib/bluetooth-settings-obexpush.c:147
 msgid "You received a file"
-msgstr ""
+msgstr "ファイルを受信しました"
 
 #: lib/bluetooth-settings-obexpush.c:158
-#, fuzzy
-#| msgid "Send _Files…"
 msgid "Open File"
-msgstr "ファイルの送信(_F)…"
+msgstr "ファイルを開く"
 
 #: lib/bluetooth-settings-obexpush.c:162
 msgid "Reveal File"
-msgstr ""
+msgstr "ファイルを表示"
 
 #: lib/bluetooth-settings-obexpush.c:179
 msgid "File reception complete"
-msgstr ""
+msgstr "ファイル受信完了"
 
 #: lib/bluetooth-settings-obexpush.c:233
-#, fuzzy, c-format
-#| msgid "Bluetooth File Transfer"
+#, c-format
 msgid "Bluetooth file transfer from %s"
-msgstr "Bluetooth ファイル転送"
+msgstr "%s からの Bluetooth ファイル転送"
 
 #: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
-msgstr ""
+msgstr "謝絶"
 
 #: lib/bluetooth-utils.c:59
 msgid "Phone"
@@ -422,7 +404,7 @@ msgstr "ファイルを Bluetooth で送信"
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: sendto/bluetooth-sendto.desktop.in.in:6
 msgid "bluetooth"
-msgstr ""
+msgstr "bluetooth"
 
 #: sendto/main.c:117
 msgid "An unknown error occurred"
@@ -432,7 +414,7 @@ msgstr "不明なエラーが発生しました"
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
-msgstr ""
+msgstr "リモートデバイスの Bluetooth 接続が有効になっていることを確認してください"
 
 #: sendto/main.c:363
 #, c-format
@@ -530,27 +512,23 @@ msgstr "選択"
 
 #: sendto/main.c:825
 msgid "Remote device to use"
-msgstr "使用するリモート・デバイス"
+msgstr "使用するリモートデバイス"
 
 #: sendto/main.c:825
 msgid "ADDRESS"
 msgstr "アドレス"
 
 #: sendto/main.c:827
-#, fuzzy
-#| msgid "Remote device's name"
 msgid "Remote device’s name"
-msgstr "リモート・デバイスの名前"
+msgstr "リモートデバイスの名前"
 
 #: sendto/main.c:827
 msgid "NAME"
 msgstr "名前"
 
 #: sendto/main.c:846
-#, fuzzy
-#| msgid "[FILE...]"
 msgid "[FILE…]"
-msgstr "[ファイル...]"
+msgstr "[ファイル…]"
 
 #~ msgid "Visible as “%s”"
 #~ msgstr "“%s”のように表示されます"
