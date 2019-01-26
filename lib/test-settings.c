@@ -16,7 +16,8 @@ int main (int argc, char **argv)
 	gtk_init (&argc, &argv);
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_widget_set_size_request (window, 800, 600);
+	gtk_widget_set_size_request (window, 300, 600);
+	gtk_window_set_default_size (GTK_WINDOW (window), 800, -1);
 	gtk_window_set_resizable (GTK_WINDOW (window), TRUE);
 	g_signal_connect (G_OBJECT (window), "delete-event",
 			  G_CALLBACK (delete_event_cb), NULL);
