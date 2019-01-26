@@ -14,6 +14,7 @@ build_stable:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES
   script:
+    - git submodule update
     - meson . _build --prefix=/usr
     - ninja -C _build
     - ninja -C _build install
