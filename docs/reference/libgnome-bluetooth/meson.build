@@ -7,6 +7,7 @@ private_headers = [
   'bluetooth-settings-obexpush.h',
   'bluetooth-settings-row.h',
   'gnome-bluetooth-enum-types.h',
+  'bluetooth-hdy-column.h',
 ]
 
 version_conf = configuration_data()
