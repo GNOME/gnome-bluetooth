@@ -23,6 +23,7 @@ sources = files(
   'bluetooth-chooser-button.c',
   'bluetooth-chooser-combo.c',
   'bluetooth-client.c',
+  'bluetooth-hdy-column.c',
   'bluetooth-filter-widget.c',
   'bluetooth-pairing-dialog.c',
   'bluetooth-settings-obexpush.c',
