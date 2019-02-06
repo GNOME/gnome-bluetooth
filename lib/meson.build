@@ -23,6 +23,7 @@ sources = files(
   'bluetooth-chooser-button.c',
   'bluetooth-chooser-combo.c',
   'bluetooth-client.c',
+  'bluetooth-hdy-column.c',
   'bluetooth-filter-widget.c',
   'bluetooth-pairing-dialog.c',
   'bluetooth-settings-obexpush.c',
@@ -74,7 +75,6 @@ deps = [
 private_deps = [
   gio_unix_dep,
   libcanberra_gtk_dep,
-  libhandy_dep,
   libnotify_dep,
   libudev_dep,
 ]
