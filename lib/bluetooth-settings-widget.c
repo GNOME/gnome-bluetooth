@@ -1969,8 +1969,10 @@ bluetooth_settings_widget_finalize (GObject *object)
 
 	/* See default_adapter_changed () */
 	/* FIXME: This is blocking */
-	if (priv->client)
+	if (priv->client) {
+		g_object_set (G_OBJECT (priv->client), "default-adapter-discovering", FALSE, NULL);
 		g_object_set (G_OBJECT (priv->client), "default-adapter-discoverable", FALSE, NULL);
+	}
 
 	g_cancellable_cancel (priv->cancellable);
 	g_clear_object (&priv->cancellable);
