@@ -1352,9 +1352,6 @@ default_adapter_changed (BluetoothClient  *client,
 	g_debug ("Default adapter changed to: %s", default_adapter ? default_adapter : "(none)");
 
 	g_object_set (G_OBJECT (client), "default-adapter-discovering", default_adapter != NULL, NULL);
-
-	/* FIXME: This should turn off automatically when
-	 * the settings panel goes away */
 	g_object_set (G_OBJECT (client), "default-adapter-discoverable", default_adapter != NULL, NULL);
 
 	g_signal_emit (G_OBJECT (self), signals[ADAPTER_STATUS_CHANGED], 0);
