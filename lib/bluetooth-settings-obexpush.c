@@ -771,14 +771,18 @@ obex_agent_dispose (GObject *obj)
 {
 	ObexAgent *self = OBEX_AGENT (obj);
 
-	g_dbus_connection_unregister_object (self->connection, self->object_reg_id);
-	self->object_reg_id = 0;
+	if (self->object_reg_id != 0) {
+		g_dbus_connection_unregister_object (self->connection, self->object_reg_id);
+		self->object_reg_id = 0;
+	}
 
 	g_bus_unown_name (self->owner_id);
 	self->owner_id = 0;
 
-	g_bus_unwatch_name (self->obexd_watch_id);
-	self->obexd_watch_id = 0;
+	if (self->obexd_watch_id != 0) {
+		g_bus_unwatch_name (self->obexd_watch_id);
+		self->obexd_watch_id = 0;
+	}
 
 	g_clear_object (&client);
 
@@ -802,7 +806,7 @@ obex_agent_new (void)
 void
 obex_agent_down (void)
 {
-	if (agent != NULL) {
+	if (agent != NULL && agent->connection != NULL) {
 		g_dbus_connection_call (agent->connection,
 					MANAGER_SERVICE,
 					MANAGER_PATH,
