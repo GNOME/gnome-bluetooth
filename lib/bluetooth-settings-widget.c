@@ -879,6 +879,7 @@ bail:
 	if (data->timeout_id > 0)
 		g_source_remove (data->timeout_id);
 
+	g_free (data->device);
 	g_timer_destroy (data->timer);
 	g_free (data);
 }
