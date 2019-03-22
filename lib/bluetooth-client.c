@@ -1465,7 +1465,7 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 	GtkTreeIter iter;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-	g_return_val_if_fail (device != NULL, FALSE);
+	g_return_val_if_fail (device_path != NULL, FALSE);
 
 	if (get_iter_from_path (priv->store, &iter, device_path) == FALSE) {
 		g_debug ("Couldn't find device '%s' in tree to mark it as trusted", device_path);
