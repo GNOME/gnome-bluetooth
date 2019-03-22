@@ -1373,16 +1373,24 @@ bluetooth_client_setup_device_finish (BluetoothClient  *client,
 				      GError          **error)
 {
 	GSimpleAsyncResult *simple;
+	char *object_path;
+	gboolean ret;
+
+	g_return_val_if_fail (path != NULL, FALSE);
 
 	simple = (GSimpleAsyncResult *) res;
 
 	g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == bluetooth_client_setup_device);
 
-	if (path != NULL)
-		*path = g_object_get_data (G_OBJECT (res), "device-object-path");
+	ret = g_simple_async_result_get_op_res_gboolean (simple);
+	object_path = g_strdup (g_object_get_data (G_OBJECT (res), "device-object-path"));
+	*path = object_path;
+	g_debug ("bluetooth_client_setup_device_finish() %s (path: %s)",
+		 ret ? "success" : "failure", object_path);
 
-	if (g_simple_async_result_get_op_res_gboolean (simple))
+	if (ret)
 		return TRUE;
+
 	g_simple_async_result_propagate_error (simple, error);
 	return FALSE;
 }
@@ -1409,7 +1417,8 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 					    user_data,
 					    bluetooth_client_setup_device);
 	g_simple_async_result_set_check_cancellable (simple, cancellable);
-	g_object_set_data (G_OBJECT (simple), "device-object-path", g_strdup (path));
+	g_object_set_data_full (G_OBJECT (simple), "device-object-path",
+				g_strdup (path), (GDestroyNotify) g_free);
 
 	if (get_iter_from_path (priv->store, &iter, path) == FALSE) {
 		g_simple_async_result_set_error (simple, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
