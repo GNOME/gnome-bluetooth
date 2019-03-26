@@ -66,6 +66,7 @@ G_DEFINE_TYPE(ObexAgent, obex_agent, G_TYPE_OBJECT)
 
 static ObexAgent *agent;
 static BluetoothClient *client;
+static GCancellable *cancellable;
 
 static void
 on_close_notification (NotifyNotification *notification)
@@ -116,7 +117,7 @@ notification_launch_action_on_file_cb (NotifyNotification *notification,
 					NULL,
 					G_DBUS_CALL_FLAGS_NONE,
 					-1,
-					NULL,
+					cancellable,
 					NULL,
 					NULL);
 
@@ -404,7 +405,7 @@ check_if_bonded_or_ask (GDBusProxy *transfer,
 					  MANAGER_SERVICE,
 					  session,
 					  SESSION_IFACE,
-					  NULL,
+					  cancellable,
 					  on_check_bonded_or_ask_session_acquired,
 					  invocation);
 		g_variant_unref (v);
@@ -624,12 +625,24 @@ obex_agent_authorize_push (GObject *source_object,
 			   GAsyncResult *res,
 			   gpointer user_data)
 {
-	GDBusProxy *transfer = g_dbus_proxy_new_for_bus_finish (res, NULL);
-	GDBusMethodInvocation *invocation = user_data;
-	GVariant *variant = g_dbus_proxy_get_cached_property (transfer, "Name");
-	const gchar *filename = g_variant_get_string (variant, NULL);
+	GDBusProxy *transfer;
+	GError *error = NULL;
+	GDBusMethodInvocation *invocation;
+	GVariant *variant;
+	const gchar *filename;
 	char *template;
 	int fd;
+
+	transfer = g_dbus_proxy_new_for_bus_finish (res, &error);
+	if (!transfer) {
+		g_debug ("obex_agent_authorize_push() failed: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	invocation = user_data;
+	variant = g_dbus_proxy_get_cached_property (transfer, "Name");
+	filename = g_variant_get_string (variant, NULL);
 
 	g_debug ("AuthorizePush received");
 
@@ -679,7 +692,7 @@ handle_method_call (GDBusConnection       *connection,
 					  MANAGER_SERVICE,
 					  transfer,
 					  TRANSFER_IFACE,
-					  NULL,
+					  cancellable,
 					  obex_agent_authorize_push,
 					  invocation);
 	} else {
@@ -713,7 +726,7 @@ obexd_appeared_cb (GDBusConnection *connection,
 				NULL,
 				G_DBUS_CALL_FLAGS_NONE,
 				-1,
-				NULL,
+				cancellable,
 				NULL,
 				NULL);
 }
@@ -821,6 +834,10 @@ obex_agent_down (void)
 					NULL);
 	}
 
+	if (cancellable != NULL) {
+		g_cancellable_cancel (cancellable);
+		g_clear_object (&cancellable);
+	}
 	g_clear_object (&agent);
 	g_clear_object (&client);
 }
@@ -834,4 +851,7 @@ obex_agent_up (void)
 	if (!notify_init ("gnome-bluetooth")) {
 		g_warning("Unable to initialize the notification system");
 	}
+
+	g_assert (cancellable == NULL);
+	cancellable = g_cancellable_new ();
 }
