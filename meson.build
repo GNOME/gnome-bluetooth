@@ -1,6 +1,6 @@
 project(
   'gnome-bluetooth', 'c',
-  version: '3.32.0',
+  version: '3.32.1',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
   meson_version: '>= 0.49.0',
@@ -37,7 +37,7 @@ enable_gir = get_option('introspection')
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
 current = 13
-revision = 1
+revision = 2
 age = 0
 
 libversion = '@0@.@1@.@2@'.format(current, age, revision)

@@ -1,3 +1,11 @@
+ver 3.32.1:
+- Fix setup of devices that don't need pairing
+- Always try to pair pointer devices
+- Delegate audio devices quirks to bluez, which means that more
+  PIN codes can be tried without user intervention
+- Disable discovery when switching settings
+- Fix possible warnings when switching settings
+
 ver 3.32.0:
 - Add quirk for Evoluent VerticalMouse 4
 
