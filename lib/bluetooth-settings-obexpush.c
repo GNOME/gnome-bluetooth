@@ -160,7 +160,7 @@ show_notification (const char *filename)
 						(NotifyActionCallback) notification_launch_action_on_file_cb,
 						g_strdup (file_uri), (GFreeFunc) g_free);
 	}
-	notify_notification_add_action (notification, "reveal", _("Reveal File"),
+	notify_notification_add_action (notification, "reveal", _("Open Containing Folder"),
 					(NotifyActionCallback) notification_launch_action_on_file_cb,
 					g_strdup (file_uri), (GFreeFunc) g_free);
 
