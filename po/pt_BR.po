@@ -1,31 +1,30 @@
 # Brazilian Portuguese translation for gnome-bluetooth
-# Copyright (c) 2013, 2015, 2017 Luiz Augusto von Dentz
+# Copyright (c) 2019 GNOME Bluetooth's AUTHORS
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Luiz Augusto von Dentz <luiz.dentz@indt.org.br>, 2007.
 # Henrique P Machado <zehrique@gmail.com>, 2009.
 # Flamarion Jorge <jorge.flamarion@gmail.com>, 2010.
 # Djavan Fagundes <djavan@comum.org>, 2011.
 # Jonh Wendell <jwendell@gnome.org>, 2012.
-# Rafael Ferreira <rafael.f.f1@gmail.com>, 2012.
 # Edson Silva <edsonlead@gmail.com>, 2013.
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2013.
 # Enrico Nicoletto <liverig@gmail.com>, 2014, 2015, 2017.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2012-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-13 21:07+0000\n"
-"PO-Revision-Date: 2017-08-31 11:51-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
+"POT-Creation-Date: 2019-07-18 13:00+0000\n"
+"PO-Revision-Date: 2019-07-22 01:04-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 3.32.0\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -33,7 +32,7 @@ msgstr ""
 msgid "Click to select device…"
 msgstr "Clique para selecionar o dispositivo…"
 
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1275
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
 #: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Cancelar"
@@ -52,7 +51,7 @@ msgid "No adapters available"
 msgstr "Nenhum adaptador disponível"
 
 #: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1564
+#: lib/bluetooth-settings-widget.c:1561
 msgid "Searching for devices…"
 msgstr "Pesquisando por dispositivos…"
 
@@ -60,11 +59,11 @@ msgstr "Pesquisando por dispositivos…"
 msgid "Device"
 msgstr "Dispositivo"
 
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:179
+#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
 msgid "Type"
 msgstr "Tipo"
 
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1526
+#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -72,7 +71,7 @@ msgstr "Dispositivos"
 msgid "All categories"
 msgstr "Todas as categorias"
 
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:134
+#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
 msgid "Paired"
 msgstr "Emparelhado"
 
@@ -212,11 +211,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:246
+#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:247
 msgid "Accept"
 msgstr "Aceitar"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:37
+#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
 msgid "Not Set Up"
 msgstr "Não foi configurado"
 
@@ -228,18 +227,18 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1149
 msgid "Yes"
 msgstr "Sim"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1149
 msgid "No"
 msgstr "Não"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1243
+#: lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -249,50 +248,50 @@ msgstr ""
 "arquivos transferidos serão colocados na pasta de <a href=\"%s\">Downloads</"
 "a>."
 
-#: lib/bluetooth-settings-widget.c:1270
+#: lib/bluetooth-settings-widget.c:1276
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Remover “%s” da lista de dispositivos?"
 
-#: lib/bluetooth-settings-widget.c:1272
+#: lib/bluetooth-settings-widget.c:1278
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se você remover o dispositivo, você terá de configurá-lo novamente antes da "
 "próxima utilização."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1282
 msgid "_Remove"
 msgstr "_Remover"
 
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:145
+#: lib/bluetooth-settings-obexpush.c:146
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "Você recebeu “%s” via Bluetooth"
 
-#: lib/bluetooth-settings-obexpush.c:147
+#: lib/bluetooth-settings-obexpush.c:148
 msgid "You received a file"
 msgstr "Você recebeu um arquivo"
 
-#: lib/bluetooth-settings-obexpush.c:158
+#: lib/bluetooth-settings-obexpush.c:159
 msgid "Open File"
 msgstr "Abrir arquivo"
 
-#: lib/bluetooth-settings-obexpush.c:162
-msgid "Reveal File"
-msgstr "Revelar arquivo"
+#: lib/bluetooth-settings-obexpush.c:163
+msgid "Open Containing Folder"
+msgstr "Abrir pasta recipiente"
 
-#: lib/bluetooth-settings-obexpush.c:179
+#: lib/bluetooth-settings-obexpush.c:180
 msgid "File reception complete"
 msgstr "Recebimento de arquivo completado"
 
-#: lib/bluetooth-settings-obexpush.c:233
+#: lib/bluetooth-settings-obexpush.c:234
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Transferência Bluetooth de arquivo de %s"
 
-#: lib/bluetooth-settings-obexpush.c:243
+#: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Recusar"
 
@@ -381,27 +380,27 @@ msgstr "Todos os tipos"
 msgid "Connection"
 msgstr "Conexão"
 
-#: lib/settings.ui:224
+#: lib/settings.ui:229
 msgid "Address"
 msgstr "Endereço"
 
-#: lib/settings.ui:279
+#: lib/settings.ui:285
 msgid "_Mouse & Touchpad Settings"
 msgstr "Configurações de _mouse & touchpad"
 
-#: lib/settings.ui:293
+#: lib/settings.ui:299
 msgid "_Sound Settings"
 msgstr "Configurações de _som"
 
-#: lib/settings.ui:307
+#: lib/settings.ui:313
 msgid "_Keyboard Settings"
 msgstr "Configurações de _teclado"
 
-#: lib/settings.ui:321
+#: lib/settings.ui:327
 msgid "Send _Files…"
 msgstr "Enviar _arquivos…"
 
-#: lib/settings.ui:335
+#: lib/settings.ui:341
 msgid "_Remove Device"
 msgstr "_Remover dispositivo"
 
@@ -412,12 +411,6 @@ msgstr "Transferência Bluetooth"
 #: sendto/bluetooth-sendto.desktop.in.in:4
 msgid "Send files via Bluetooth"
 msgstr "Enviar arquivos via Bluetooth"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: sendto/bluetooth-sendto.desktop.in.in:6
-#| msgid "Bluetooth"
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #: sendto/main.c:117
 msgid "An unknown error occurred"
@@ -503,8 +496,8 @@ msgstr "%d B/s"
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
-msgstr[0] "%u trasferência concluída"
-msgstr[1] "%u trasferências concluídas"
+msgstr[0] "%u transferência concluída"
+msgstr[1] "%u transferências concluídas"
 
 #: sendto/main.c:669
 msgid "_Close"
@@ -550,6 +543,13 @@ msgstr "NOME"
 #: sendto/main.c:846
 msgid "[FILE…]"
 msgstr "[ARQUIVO…]"
+
+#~ msgid "Reveal File"
+#~ msgstr "Revelar arquivo"
+
+#~| msgid "Bluetooth"
+#~ msgid "bluetooth"
+#~ msgstr "bluetooth"
 
 #~| msgid "Searching for devices…"
 #~ msgid "Searching for devices..."
