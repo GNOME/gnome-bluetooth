@@ -392,8 +392,8 @@ device_added (GDBusObjectManager   *manager,
 	BluetoothType type;
 	GtkTreeIter iter, parent;
 
-	g_signal_connect (G_OBJECT (device), "notify",
-			  G_CALLBACK (device_notify_cb), client);
+	g_signal_connect_object (G_OBJECT (device), "notify",
+				 G_CALLBACK (device_notify_cb), client, 0);
 
 	adapter_path = device1_get_adapter (device);
 	address = device1_get_address (device);
@@ -608,8 +608,8 @@ adapter_added (GDBusObjectManager   *manager,
 	const gchar *address, *name;
 	gboolean discovering, discoverable, powered;
 
-	g_signal_connect (G_OBJECT (adapter), "notify",
-			  G_CALLBACK (adapter_notify_cb), client);
+	g_signal_connect_object (G_OBJECT (adapter), "notify",
+				 G_CALLBACK (adapter_notify_cb), client, 0);
 
 	address = adapter1_get_address (adapter);
 	name = adapter1_get_name (adapter);
@@ -798,11 +798,11 @@ object_manager_new_callback(GObject      *source_object,
 	priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	priv->manager = manager;
 
-	g_signal_connect (G_OBJECT (priv->manager), "interface-added", (GCallback) interface_added, client);
-	g_signal_connect (G_OBJECT (priv->manager), "interface-removed", (GCallback) interface_removed, client);
+	g_signal_connect_object (G_OBJECT (priv->manager), "interface-added", (GCallback) interface_added, client, 0);
+	g_signal_connect_object (G_OBJECT (priv->manager), "interface-removed", (GCallback) interface_removed, client, 0);
 
-	g_signal_connect (G_OBJECT (priv->manager), "object-added", (GCallback) object_added, client);
-	g_signal_connect (G_OBJECT (priv->manager), "object-removed", (GCallback) object_removed, client);
+	g_signal_connect_object (G_OBJECT (priv->manager), "object-added", (GCallback) object_added, client, 0);
+	g_signal_connect_object (G_OBJECT (priv->manager), "object-removed", (GCallback) object_removed, client, 0);
 
 	object_list = g_dbus_object_manager_get_objects (priv->manager);
 
