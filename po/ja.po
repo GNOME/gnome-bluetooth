@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2019-01-27 14:11+0000\n"
+"POT-Creation-Date: 2019-07-18 13:00+0000\n"
 "PO-Revision-Date: 2019-01-28 00:43+0900\n"
 "Last-Translator: Akira Tanaka <root.167d36d4acb91@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Click to select device…"
 msgstr "クリックしてデバイスを選択…"
 
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1279
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
 #: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "中止(_C)"
@@ -46,7 +46,7 @@ msgid "No adapters available"
 msgstr "アダプターが利用できません"
 
 #: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1563
+#: lib/bluetooth-settings-widget.c:1561
 msgid "Searching for devices…"
 msgstr "デバイスを検索しています…"
 
@@ -58,7 +58,7 @@ msgstr "デバイス"
 msgid "Type"
 msgstr "種類"
 
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1520
+#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
 msgid "Devices"
 msgstr "デバイス"
 
@@ -204,11 +204,11 @@ msgid "Cancel"
 msgstr "中止"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:246
+#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:247
 msgid "Accept"
 msgstr "承認"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:37
+#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
 msgid "Not Set Up"
 msgstr "設定されていません"
 
@@ -220,68 +220,69 @@ msgstr "接続"
 msgid "Disconnected"
 msgstr "切断"
 
-#: lib/bluetooth-settings-widget.c:1147
+#: lib/bluetooth-settings-widget.c:1149
 msgid "Yes"
 msgstr "はい"
 
-#: lib/bluetooth-settings-widget.c:1147
+#: lib/bluetooth-settings-widget.c:1149
 msgid "No"
 msgstr "いいえ"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1247
+#: lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
-"“%s”として見えており、Bluetooth ファイル転送が利用可能です。転送されたファイルは<a href=\"%s\">ダウンロード</a>フォルダーに保管されます。"
+"“%s”として見えており、Bluetooth ファイル転送が利用可能です。転送されたファイ"
+"ルは<a href=\"%s\">ダウンロード</a>フォルダーに保管されます。"
 
-#: lib/bluetooth-settings-widget.c:1274
+#: lib/bluetooth-settings-widget.c:1276
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "“%s”をデバイスのリストから削除しますか?"
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1278
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "デバイスを削除すると、次回使用時にデバイスを再設定しなければなりません。"
 
-#: lib/bluetooth-settings-widget.c:1280
+#: lib/bluetooth-settings-widget.c:1282
 msgid "_Remove"
 msgstr "削除(_R)"
 
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:145
+#: lib/bluetooth-settings-obexpush.c:146
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "Bluetooth で“%s”を受信しました"
 
-#: lib/bluetooth-settings-obexpush.c:147
+#: lib/bluetooth-settings-obexpush.c:148
 msgid "You received a file"
 msgstr "ファイルを受信しました"
 
-#: lib/bluetooth-settings-obexpush.c:158
+#: lib/bluetooth-settings-obexpush.c:159
 msgid "Open File"
 msgstr "ファイルを開く"
 
-#: lib/bluetooth-settings-obexpush.c:162
-msgid "Reveal File"
-msgstr "ファイルを表示"
+#: lib/bluetooth-settings-obexpush.c:163
+msgid "Open Containing Folder"
+msgstr ""
 
-#: lib/bluetooth-settings-obexpush.c:179
+#: lib/bluetooth-settings-obexpush.c:180
 msgid "File reception complete"
 msgstr "ファイル受信完了"
 
-#: lib/bluetooth-settings-obexpush.c:233
+#: lib/bluetooth-settings-obexpush.c:234
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "%s からの Bluetooth ファイル転送"
 
-#: lib/bluetooth-settings-obexpush.c:243
+#: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "謝絶"
 
@@ -401,11 +402,6 @@ msgstr "Bluetooth 転送"
 #: sendto/bluetooth-sendto.desktop.in.in:4
 msgid "Send files via Bluetooth"
 msgstr "ファイルを Bluetooth で送信"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: sendto/bluetooth-sendto.desktop.in.in:6
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #: sendto/main.c:117
 msgid "An unknown error occurred"
@@ -531,6 +527,12 @@ msgstr "名前"
 #: sendto/main.c:846
 msgid "[FILE…]"
 msgstr "[ファイル…]"
+
+#~ msgid "Reveal File"
+#~ msgstr "ファイルを表示"
+
+#~ msgid "bluetooth"
+#~ msgstr "bluetooth"
 
 #~ msgid "Visible as “%s”"
 #~ msgstr "“%s”のように表示されます"
