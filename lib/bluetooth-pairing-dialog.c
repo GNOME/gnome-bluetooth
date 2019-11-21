@@ -65,8 +65,8 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 				   const char             *device_name)
 {
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
-	char *title;
-	char *help;
+	g_autofree char *title = NULL;
+	g_autofree char *help = NULL;
 	GtkStyleContext *context;
 
 	priv->mode = mode;
@@ -159,8 +159,6 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 
 	gtk_label_set_text (GTK_LABEL (priv->title), title);
 	gtk_label_set_text (GTK_LABEL (priv->help_label), help);
-	g_free (title);
-	g_free (help);
 }
 
 BluetoothPairingMode
