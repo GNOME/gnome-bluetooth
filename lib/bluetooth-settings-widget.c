@@ -1347,7 +1347,7 @@ default_adapter_changed (BluetoothClient  *client,
 			 BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	char *default_adapter;
+	g_autofree char *default_adapter = NULL;
 
 	g_object_get (priv->client, "default-adapter", &default_adapter, NULL);
 
@@ -1687,7 +1687,8 @@ row_changed_cb (GtkTreeModel *tree_model,
 
 		path = g_object_get_data (G_OBJECT (l->data), "object-path");
 		if (g_str_equal (object_path, path)) {
-			char *name, *bdaddr;
+			g_autofree char *name = NULL;
+			g_autofree char *bdaddr = NULL;
 			BluetoothType type;
 			gboolean paired, trusted, connected, legacy_pairing;
 
