@@ -484,7 +484,7 @@ lookup_download_dir (void)
 	char *dir;
 
 	special_dir = g_get_user_special_dir (G_USER_DIRECTORY_DOWNLOAD);
-	if (special_dir != NULL && strcmp (special_dir, g_get_home_dir ()) != 0) {
+	if (special_dir != NULL) {
 		g_mkdir_with_parents (special_dir, 0755);
 		return g_strdup (special_dir);
 	}
