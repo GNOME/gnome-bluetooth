@@ -162,6 +162,17 @@ is_connecting (BluetoothSettingsWidget *self,
 						     bdaddr));
 }
 
+static gboolean
+has_default_adapter (BluetoothSettingsWidget *self)
+{
+	g_autofree char *default_adapter = NULL;
+	BluetoothSettingsWidgetPrivate *priv;
+
+	priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
+	g_object_get (priv->client, "default-adapter", &default_adapter, NULL);
+	return (default_adapter != NULL);
+}
+
 typedef struct {
 	char             *bdaddr;
 	BluetoothSettingsWidget *self;
@@ -205,6 +216,9 @@ connect_done (GObject      *source_object,
 	remove_connecting (self, data->bdaddr);
 
 	//FIXME show an error if it failed?
+	g_object_set (G_OBJECT (priv->client),
+		      "default-adapter-discovering", has_default_adapter (self),
+		      NULL);
 
 out:
 	g_clear_error (&error);
@@ -856,6 +870,7 @@ connect_callback (GObject      *source_object,
 		  gpointer      user_data)
 {
 	SetupConnectData *data = (SetupConnectData *) user_data;
+	BluetoothSettingsWidgetPrivate *priv;
 	GError *error = NULL;
 	gboolean success;
 
@@ -876,6 +891,11 @@ connect_callback (GObject      *source_object,
 
 	turn_off_pairing (data->self, data->device);
 
+	priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (data->self);
+	g_object_set (G_OBJECT (priv->client),
+		      "default-adapter-discovering", has_default_adapter (data->self),
+		      NULL);
+
 bail:
 	if (data->timeout_id > 0)
 		g_source_remove (data->timeout_id);
@@ -890,7 +910,8 @@ create_callback (GObject      *source_object,
 		 GAsyncResult *res,
 		 gpointer      user_data)
 {
-	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+	BluetoothSettingsWidget *self = user_data;
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
 	SetupConnectData *data;
 	GError *error = NULL;
 	gboolean ret;
@@ -938,6 +959,10 @@ create_callback (GObject      *source_object,
 		g_free (dbus_error);
 		g_error_free (error);
 		g_free (path);
+
+		g_object_set (G_OBJECT (priv->client),
+			      "default-adapter-discovering", has_default_adapter (self),
+			      NULL);
 		return;
 	}
 
@@ -1033,6 +1058,7 @@ start_pairing (BluetoothSettingsWidget *self,
 			     g_strdup (g_dbus_proxy_get_object_path (proxy)),
 			     GINT_TO_POINTER (1));
 
+	g_object_set (G_OBJECT (priv->client), "default-adapter-discovering", FALSE, NULL);
 	bluetooth_client_setup_device (priv->client,
 				       g_dbus_proxy_get_object_path (proxy),
 				       pair,
@@ -1060,6 +1086,9 @@ switch_connected_state_set (GtkSwitch               *button,
 	data->bdaddr = g_strdup (priv->selected_bdaddr);
 	data->self = self;
 
+	g_object_set (G_OBJECT (priv->client),
+		      "default-adapter-discovering", has_default_adapter (self),
+		      NULL);
 	bluetooth_client_connect_service (priv->client,
 					  priv->selected_object_path,
 					  gtk_switch_get_active (button),
