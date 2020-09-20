@@ -297,7 +297,8 @@ device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char *
 	g_return_if_fail (type);
 	g_return_if_fail (icon);
 
-	if (g_strcmp0 (device1_get_name (device), "ION iCade Game Controller") == 0) {
+	if (g_strcmp0 (device1_get_name (device), "ION iCade Game Controller") == 0 ||
+	    g_strcmp0 (device1_get_name (device), "8Bitdo Zero GamePad") == 0) {
 		*type = BLUETOOTH_TYPE_JOYPAD;
 		*icon = "input-gaming";
 		return;
