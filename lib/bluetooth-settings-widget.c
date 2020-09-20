@@ -910,6 +910,10 @@ create_callback (GObject      *source_object,
 			return;
 		}
 
+		priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+
+		g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+
 		turn_off_pairing (user_data, path);
 
 		dbus_error = g_dbus_error_get_remote_error (error);
