@@ -389,7 +389,7 @@ device_added (GDBusObjectManager   *manager,
 	char **uuids;
 	gboolean paired, trusted, connected;
 	int legacypairing;
-	BluetoothType type;
+	BluetoothType type = BLUETOOTH_TYPE_ANY;
 	GtkTreeIter iter, parent;
 
 	g_signal_connect_object (G_OBJECT (device), "notify",
