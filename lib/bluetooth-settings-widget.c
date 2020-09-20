@@ -917,7 +917,11 @@ create_callback (GObject      *source_object,
 		turn_off_pairing (user_data, path);
 
 		dbus_error = g_dbus_error_get_remote_error (error);
-		if (g_strcmp0 (dbus_error, "org.bluez.Error.AuthenticationCanceled") != 0) {
+		if (g_strcmp0 (dbus_error, "org.bluez.Error.AuthenticationFailed") == 0) {
+			//FIXME pairing failed because we entered the wrong code
+		} else if (g_strcmp0 (dbus_error, "org.bluez.Error.AuthenticationCanceled") == 0) {
+			//FIXME pairing was cancelled
+		} else {
 			//FIXME show an error?
 			/* translators:
 			 * The “%s” is the device name, for example:
