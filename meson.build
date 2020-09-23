@@ -133,3 +133,9 @@ output += '        Prefix......................:  ' + gnomebt_prefix + '\n'
 output += '        Documentation...............:  ' + enable_gtk_doc.to_string() + '\n'
 output += '        GObject-Introspection.......:  ' + enable_gir.to_string()
 message(output)
+
+meson.add_dist_script(
+  find_program('check-news.sh').path(),
+  '@0@'.format(meson.project_version()),
+  'NEWS',
+)
