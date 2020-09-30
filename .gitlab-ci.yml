@@ -1,9 +1,17 @@
 image: fedora:rawhide
 
 variables:
-  DEPENDENCIES: gtk-doc gobject-introspection-devel
-                gtk3-devel systemd-devel libcanberra-devel libnotify-devel
-                meson redhat-rpm-config gcc glibc-devel
+  DEPENDENCIES:
+    gtk-doc
+    gobject-introspection-devel
+    gtk3-devel
+    systemd-devel
+    libcanberra-devel
+    libnotify-devel
+    meson
+    redhat-rpm-config
+    gcc
+    glibc-devel
   GIT_SUBMODULE_STRATEGY: recursive
 
 build_stable:
