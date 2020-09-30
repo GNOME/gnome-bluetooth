@@ -1086,9 +1086,10 @@ switch_connected_state_set (GtkSwitch               *button,
 	data->bdaddr = g_strdup (priv->selected_bdaddr);
 	data->self = self;
 
-	g_object_set (G_OBJECT (priv->client),
-		      "default-adapter-discovering", has_default_adapter (self),
-		      NULL);
+	if (gtk_switch_get_active (button))
+		g_object_set (G_OBJECT (priv->client),
+			      "default-adapter-discovering", FALSE,
+			      NULL);
 	bluetooth_client_connect_service (priv->client,
 					  priv->selected_object_path,
 					  gtk_switch_get_active (button),
