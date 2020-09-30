@@ -12,6 +12,7 @@ variables:
     redhat-rpm-config
     gcc
     glibc-devel
+    git
   GIT_SUBMODULE_STRATEGY: recursive
 
 build_stable:
@@ -23,3 +24,4 @@ build_stable:
     - ninja -C _build
     - ninja -C _build install
     - ninja -C _build test
+    - ninja -C _build dist
