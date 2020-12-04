@@ -1,14 +1,14 @@
 # Norwegian bokmål translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
-# Kjartan Maraas <kmaraas@gnome.org>, 2007-2017.
+# Kjartan Maraas <kmaraas@gnome.org>, 2007-2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-bluetooth 3.26.x\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-13 21:07+0000\n"
-"PO-Revision-Date: 2017-11-06 15:17+0100\n"
+"Project-Id-Version: gnome-bluetooth 3.38.x\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
+"POT-Creation-Date: 2020-06-25 07:23+0000\n"
+"PO-Revision-Date: 2020-12-04 16:18+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Click to select device…"
 msgstr "Klikk for å velge enhet …"
 
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1275
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
 #: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_vbryt"
@@ -40,7 +40,7 @@ msgid "No adapters available"
 msgstr "Ingen enheter tilgjengelig"
 
 #: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1564
+#: lib/bluetooth-settings-widget.c:1561
 msgid "Searching for devices…"
 msgstr "Søker etter enheter …"
 
@@ -48,11 +48,11 @@ msgstr "Søker etter enheter …"
 msgid "Device"
 msgstr "Enhet"
 
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:179
+#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
 msgid "Type"
 msgstr "Type"
 
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1526
+#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
 msgid "Devices"
 msgstr "Enheter"
 
@@ -60,7 +60,7 @@ msgstr "Enheter"
 msgid "All categories"
 msgstr "Alle kategorier"
 
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:134
+#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
 msgid "Paired"
 msgstr "Koblet sammen"
 
@@ -191,16 +191,16 @@ msgid "Dismiss"
 msgstr "Avvis"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:308
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:306
 msgid "Cancel"
 msgstr "Avbryt"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:246
+#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:247
 msgid "Accept"
 msgstr "Godta"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:37
+#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
 msgid "Not Set Up"
 msgstr "Ikke satt opp"
 
@@ -212,18 +212,18 @@ msgstr "Koblet til"
 msgid "Disconnected"
 msgstr "Koblet fra"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1149
 msgid "Yes"
 msgstr "Ja"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1149
 msgid "No"
 msgstr "Nei"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1243
+#: lib/bluetooth-settings-widget.c:1249
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -232,50 +232,50 @@ msgstr ""
 "Synlig som «%s» og tilgjengelig for filoverføringer via Bluetooth. Overførte "
 "filer plasseres i mappen <a href=\"%s\">Nedlastinger</a>."
 
-#: lib/bluetooth-settings-widget.c:1270
+#: lib/bluetooth-settings-widget.c:1276
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Fjern «%s» fra enhetslisten?"
 
-#: lib/bluetooth-settings-widget.c:1272
+#: lib/bluetooth-settings-widget.c:1278
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Hvis du fjerner enheten vil du måtte konfigurere den igjen før du bruker den "
 "på nytt."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1282
 msgid "_Remove"
 msgstr "Fje_rn"
 
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:145
+#: lib/bluetooth-settings-obexpush.c:146
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "Du mottok «%s» via Bluetooth"
 
-#: lib/bluetooth-settings-obexpush.c:147
+#: lib/bluetooth-settings-obexpush.c:148
 msgid "You received a file"
 msgstr "Du mottok en fil"
 
-#: lib/bluetooth-settings-obexpush.c:158
+#: lib/bluetooth-settings-obexpush.c:159
 msgid "Open File"
 msgstr "Åpne fil"
 
-#: lib/bluetooth-settings-obexpush.c:162
-msgid "Reveal File"
-msgstr "Vis vil"
+#: lib/bluetooth-settings-obexpush.c:163
+msgid "Open Containing Folder"
+msgstr "Åpne innholdsmappe"
 
-#: lib/bluetooth-settings-obexpush.c:179
+#: lib/bluetooth-settings-obexpush.c:180
 msgid "File reception complete"
 msgstr "Mottak av fil fullført"
 
-#: lib/bluetooth-settings-obexpush.c:233
+#: lib/bluetooth-settings-obexpush.c:234
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Bluetooth-filoverføring fra %s"
 
-#: lib/bluetooth-settings-obexpush.c:243
+#: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Avslå"
 
@@ -364,27 +364,27 @@ msgstr "Alle typer"
 msgid "Connection"
 msgstr "Tilkobling"
 
-#: lib/settings.ui:224
+#: lib/settings.ui:229
 msgid "Address"
 msgstr "Adresse"
 
-#: lib/settings.ui:279
+#: lib/settings.ui:285
 msgid "_Mouse & Touchpad Settings"
 msgstr "Innstillinger for _mus og pekeplate"
 
-#: lib/settings.ui:293
+#: lib/settings.ui:299
 msgid "_Sound Settings"
 msgstr "Innstillinger for _lyd"
 
-#: lib/settings.ui:307
+#: lib/settings.ui:313
 msgid "_Keyboard Settings"
 msgstr "Innstillinger for _tastatur"
 
-#: lib/settings.ui:321
+#: lib/settings.ui:327
 msgid "Send _Files…"
 msgstr "Send _filer …"
 
-#: lib/settings.ui:335
+#: lib/settings.ui:341
 msgid "_Remove Device"
 msgstr "Fje_rn enhet"
 
@@ -395,11 +395,6 @@ msgstr "Bluetooth-overføring"
 #: sendto/bluetooth-sendto.desktop.in.in:4
 msgid "Send files via Bluetooth"
 msgstr "Send filer via Bluetooth"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: sendto/bluetooth-sendto.desktop.in.in:6
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #: sendto/main.c:117
 msgid "An unknown error occurred"
