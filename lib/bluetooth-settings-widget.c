@@ -1406,8 +1406,8 @@ device_sort_func (gconstpointer a, gconstpointer b, gpointer data)
 	gboolean paired_a, paired_b;
 	gboolean trusted_a, trusted_b;
 	gboolean connected_a, connected_b;
-	char *name_a, *name_b;
-	int ret;
+	g_autofree char *name_a = NULL;
+	g_autofree char *name_b = NULL;
 
 	g_object_get (row_a,
 		      "paired", &paired_a,
@@ -1427,37 +1427,26 @@ device_sort_func (gconstpointer a, gconstpointer b, gpointer data)
 	setup_b = paired_b || trusted_b;
 	if (setup_a != setup_b) {
 		if (setup_a)
-			ret = -1;
+			return -1;
 		else
-			ret = 1;
-		goto out;
+			return 1;
 	}
 
 	/* Then connected ones */
 	if (connected_a != connected_b) {
 		if (connected_a)
-			ret = -1;
+			return -1;
 		else
-			ret = 1;
-		goto out;
+			return 1;
 	}
 
-	if (name_a == NULL) {
-		ret = 1;
-		goto out;
-	}
-	if (name_b == NULL) {
-		ret = -1;
-		goto out;
-	}
+	if (name_a == NULL)
+		return 1;
+	if (name_b == NULL)
+		return -1;
 
 	/* And all being equal, alphabetically */
-	ret = g_utf8_collate (name_a, name_b);
-
-out:
-	g_free (name_a);
-	g_free (name_b);
-	return ret;
+	return g_utf8_collate (name_a, name_b);
 }
 
 static void
