@@ -1624,8 +1624,9 @@ row_inserted_cb (GtkTreeModel *tree_model,
 {
 	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
-	GDBusProxy *proxy;
-	char *name, *bdaddr;
+	g_autoptr(GDBusProxy) proxy = NULL;
+	g_autofree char *name = NULL;
+	g_autofree char *bdaddr = NULL;
 	BluetoothType type;
 	gboolean paired, trusted, connected, legacy_pairing;
 	GtkWidget *row;
@@ -1635,7 +1636,6 @@ row_inserted_cb (GtkTreeModel *tree_model,
 				    BLUETOOTH_COLUMN_NAME, &name,
 				    -1);
 		g_debug ("Not adding device '%s'", name);
-		g_free (name);
 		return;
 	}
 
@@ -1668,10 +1668,6 @@ row_inserted_cb (GtkTreeModel *tree_model,
 
 	gtk_container_add (GTK_CONTAINER (priv->device_list), row);
 	gtk_size_group_add_widget (priv->row_sizegroup, row);
-
-	g_object_unref (proxy);
-	g_free (name);
-	g_free (bdaddr);
 
 	gtk_stack_set_transition_type (GTK_STACK (priv->device_stack),
 				       GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN);
