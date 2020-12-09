@@ -49,6 +49,7 @@ struct _BluetoothSettingsRowPrivate {
 	BluetoothType type;
 	gboolean connected;
 	char *name;
+	char *alias;
 	char *bdaddr;
 	gboolean legacy_pairing;
 
@@ -63,6 +64,7 @@ enum {
 	PROP_TYPE,
 	PROP_CONNECTED,
 	PROP_NAME,
+	PROP_ALIAS,
 	PROP_ADDRESS,
 	PROP_PAIRING,
 	PROP_LEGACY_PAIRING
@@ -110,6 +112,7 @@ bluetooth_settings_row_finalize (GObject *object)
 
 	g_clear_object (&priv->proxy);
 	g_clear_pointer (&priv->name, g_free);
+	g_clear_pointer (&priv->alias, g_free);
 	g_clear_pointer (&priv->bdaddr, g_free);
 
 	G_OBJECT_CLASS(bluetooth_settings_row_parent_class)->finalize(object);
@@ -143,6 +146,9 @@ bluetooth_settings_row_get_property (GObject        *object,
 	case PROP_NAME:
 		g_value_set_string (value, priv->name);
 		break;
+	case PROP_ALIAS:
+		g_value_set_string (value, priv->alias);
+		break;
 	case PROP_ADDRESS:
 		g_value_set_string (value, priv->bdaddr);
 		break;
@@ -168,7 +174,7 @@ update_row (BluetoothSettingsRow *self)
 				    bluetooth_type_to_string (priv->type));
 		gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
 	} else {
-		gtk_label_set_text (GTK_LABEL (priv->label), priv->name);
+		gtk_label_set_text (GTK_LABEL (priv->label), priv->alias);
 		gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 	}
 }
@@ -206,6 +212,11 @@ bluetooth_settings_row_set_property (GObject        *object,
 	case PROP_NAME:
 		g_free (priv->name);
 		priv->name = g_value_dup_string (value);
+		update_row (self);
+		break;
+	case PROP_ALIAS:
+		g_free (priv->alias);
+		priv->alias = g_value_dup_string (value);
 		update_row (self);
 		break;
 	case PROP_ADDRESS:
@@ -260,6 +271,10 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 	g_object_class_install_property (object_class, PROP_NAME,
 					 g_param_spec_string ("name", NULL,
 							      "Name",
+							      NULL, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_ALIAS,
+					 g_param_spec_string ("alias", NULL,
+							      "Alias",
 							      NULL, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_ADDRESS,
 					 g_param_spec_string ("address", NULL,
