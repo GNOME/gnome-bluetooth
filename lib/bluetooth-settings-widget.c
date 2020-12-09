@@ -1114,7 +1114,7 @@ update_properties (BluetoothSettingsWidget *self,
 	gboolean ret;
 	BluetoothType type;
 	gboolean connected, paired;
-	char **uuids, *bdaddr, *name, *icon;
+	char **uuids, *bdaddr, *alias, *icon;
 	guint i;
 
 	model = bluetooth_client_get_device_model (priv->client);
@@ -1144,7 +1144,7 @@ update_properties (BluetoothSettingsWidget *self,
 
 	gtk_tree_model_get (model, &iter,
 			    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
-			    BLUETOOTH_COLUMN_NAME, &name,
+			    BLUETOOTH_COLUMN_ALIAS, &alias,
 			    BLUETOOTH_COLUMN_ICON, &icon,
 			    BLUETOOTH_COLUMN_PAIRED, &paired,
 			    BLUETOOTH_COLUMN_CONNECTED, &connected,
@@ -1165,9 +1165,9 @@ update_properties (BluetoothSettingsWidget *self,
 	gtk_widget_hide (WID ("send_button"));
 
 	/* Name */
-	gtk_window_set_title (GTK_WINDOW (priv->properties_dialog), name);
+	gtk_window_set_title (GTK_WINDOW (priv->properties_dialog), alias);
 	g_free (priv->selected_name);
-	priv->selected_name = name;
+	priv->selected_name = alias;
 
 	/* Icon */
 	gtk_image_set_from_icon_name (GTK_IMAGE (WID ("image")), icon, GTK_ICON_SIZE_DIALOG);
@@ -1627,6 +1627,7 @@ row_inserted_cb (GtkTreeModel *tree_model,
 	g_autoptr(GDBusProxy) proxy = NULL;
 	g_autofree char *name = NULL;
 	g_autofree char *bdaddr = NULL;
+	g_autofree char *alias = NULL;
 	BluetoothType type;
 	gboolean paired, trusted, connected, legacy_pairing;
 	GtkWidget *row;
@@ -1642,6 +1643,7 @@ row_inserted_cb (GtkTreeModel *tree_model,
 	gtk_tree_model_get (tree_model, iter,
 			    BLUETOOTH_COLUMN_PROXY, &proxy,
 			    BLUETOOTH_COLUMN_NAME, &name,
+			    BLUETOOTH_COLUMN_ALIAS, &alias,
 			    BLUETOOTH_COLUMN_PAIRED, &paired,
 			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
 			    BLUETOOTH_COLUMN_CONNECTED, &connected,
@@ -1661,6 +1663,7 @@ row_inserted_cb (GtkTreeModel *tree_model,
 			    "type", type,
 			    "connected", connected,
 			    "name", name,
+			    "alias", alias,
 			    "address", bdaddr,
 			    "legacy-pairing", legacy_pairing,
 			    NULL);
@@ -1711,12 +1714,14 @@ row_changed_cb (GtkTreeModel *tree_model,
 		path = g_object_get_data (G_OBJECT (l->data), "object-path");
 		if (g_str_equal (object_path, path)) {
 			g_autofree char *name = NULL;
+			g_autofree char *alias = NULL;
 			g_autofree char *bdaddr = NULL;
 			BluetoothType type;
 			gboolean paired, trusted, connected, legacy_pairing;
 
 			gtk_tree_model_get (tree_model, iter,
 					    BLUETOOTH_COLUMN_NAME, &name,
+					    BLUETOOTH_COLUMN_ALIAS, &alias,
 					    BLUETOOTH_COLUMN_PAIRED, &paired,
 					    BLUETOOTH_COLUMN_TRUSTED, &trusted,
 					    BLUETOOTH_COLUMN_CONNECTED, &connected,
@@ -1733,6 +1738,7 @@ row_changed_cb (GtkTreeModel *tree_model,
 				      "type", type,
 				      "connected", connected,
 				      "name", name,
+				      "alias", alias,
 				      "legacy-pairing", legacy_pairing,
 				      NULL);
 
