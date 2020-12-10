@@ -19,6 +19,8 @@ build_stable:
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES
+    # Work-around ldd bug in rawhide CIs
+    - sed -i -e 's/test -r/test -f/g' -e 's/test -x/test -f/g' /bin/ldd
   script:
     - meson . _build --prefix=/usr
     - ninja -C _build
