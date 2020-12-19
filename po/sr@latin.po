@@ -7,28 +7,30 @@
 #
 # Miloš Popović <gpopac@gmail.com>, 2007—2010.
 # Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011—2017.
+# Đorđe Mančić <djordjemancic@outlook.com>, 2020.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-13 21:07+0000\n"
-"PO-Revision-Date: 2017-08-14 20:25+0200\n"
-"Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
+"POT-Creation-Date: 2020-12-11 12:43+0000\n"
+"PO-Revision-Date: 2020-12-17 17:48+0100\n"
+"Last-Translator: Đorđe Mančić <djordjemancic@outlook.com>\n"
 "Language-Team: srpski <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "X-Project-Style: gnome\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #: lib/bluetooth-chooser-button.c:71
 msgid "Click to select device…"
 msgstr "Kliknite da izaberete uređaj…"
 
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1275
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1319
 #: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "_Otkaži"
@@ -44,10 +46,10 @@ msgstr "Nepoznato"
 
 #: lib/bluetooth-chooser.c:176
 msgid "No adapters available"
-msgstr "Nema dosupnih adaptera"
+msgstr "Nema dostupnih adaptera"
 
 #: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1564
+#: lib/bluetooth-settings-widget.c:1588
 msgid "Searching for devices…"
 msgstr "Tražim uređaje…"
 
@@ -55,11 +57,11 @@ msgstr "Tražim uređaje…"
 msgid "Device"
 msgstr "Uređaj"
 
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:179
+#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
 msgid "Type"
 msgstr "Vrsta"
 
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1526
+#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1545
 msgid "Devices"
 msgstr "Uređaji"
 
@@ -67,7 +69,7 @@ msgstr "Uređaji"
 msgid "All categories"
 msgstr "Sve kategorije"
 
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:134
+#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
 msgid "Paired"
 msgstr "Upareni"
 
@@ -122,7 +124,6 @@ msgstr "Potvrdite PIN blututa"
 
 #: lib/bluetooth-pairing-dialog.c:84
 #, c-format
-#| msgid "Please confirm the PIN that was entered on '%s'."
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Potvrdite PIN koji je ispisan na „%s“."
 
@@ -133,9 +134,6 @@ msgstr "Potvrdi"
 
 #: lib/bluetooth-pairing-dialog.c:91
 #, c-format
-#| msgid ""
-#| "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
-#| "device's manual."
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
 "device’s manual."
@@ -144,14 +142,11 @@ msgstr ""
 
 #: lib/bluetooth-pairing-dialog.c:97
 #, c-format
-#| msgid "Pairing '%s'"
 msgid "Pairing “%s”"
 msgstr "Uparujem „%s“"
 
 #: lib/bluetooth-pairing-dialog.c:105
 #, c-format
-#| msgid ""
-#| "Please confirm that the following PIN matches the one displayed on '%s'."
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "Potvrdite da se sledeći PIN poklapa sa onim prikazanim na „%s“."
@@ -162,7 +157,6 @@ msgstr "Zahtev uparivanja Blututa"
 
 #: lib/bluetooth-pairing-dialog.c:111
 #, c-format
-#| msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
 "„%s“ želi da se upari sa ovim uređajem. Da li želite da dopustite uparivanje?"
@@ -173,7 +167,6 @@ msgstr "Potvrdite blutut povezivanje"
 
 #: lib/bluetooth-pairing-dialog.c:117
 #, c-format
-#| msgid "'%s' wants to connect with this device. Do you want to allow it?"
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "„%s“ želi da se poveže sa ovim uređajem. Da li želite da dopustite "
@@ -181,15 +174,11 @@ msgstr ""
 
 #: lib/bluetooth-pairing-dialog.c:125
 #, c-format
-#| msgid "Please enter the following PIN on '%s'."
 msgid "Please enter the following PIN on “%s”."
 msgstr "Unesite sledeći PIN na „%s“."
 
 #: lib/bluetooth-pairing-dialog.c:128
 #, c-format
-#| msgid ""
-#| "Please enter the following PIN on '%s'. Then press “Return” on the "
-#| "keyboard."
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr "Unesite sledeći PIN na „%s“. Zatim pritisnite „Unesi“ na tastaturi."
@@ -211,39 +200,39 @@ msgid "Dismiss"
 msgstr "Odbaci"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:308
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:306
 msgid "Cancel"
 msgstr "Otkaži"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:246
+#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:247
 msgid "Accept"
 msgstr "Prihvati"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:37
+#: lib/bluetooth-settings-row.c:81 lib/bluetooth-settings-row.ui:40
 msgid "Not Set Up"
 msgstr "Nije podešeno"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:83
 msgid "Connected"
 msgstr "Povezan"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:85
 msgid "Disconnected"
 msgstr "Nepovezan"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1187
 msgid "Yes"
 msgstr "Da"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1187
 msgid "No"
 msgstr "Ne"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1243
+#: lib/bluetooth-settings-widget.c:1287
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -252,52 +241,50 @@ msgstr ""
 "Uređaj je vidljiv kao „%s“ i spreman za prenose datoteka preko blututa. "
 "Prenešene datoteke će biti smeštene u fascikli <a href=\"%s\">Preuzeto</a>."
 
-#: lib/bluetooth-settings-widget.c:1270
+#: lib/bluetooth-settings-widget.c:1314
 #, c-format
-#| msgid "Remove '%s' from the list of devices?"
 msgid "Remove “%s” from the list of devices?"
 msgstr "Da uklonim „%s“ sa spiska uređaja?"
 
-#: lib/bluetooth-settings-widget.c:1272
+#: lib/bluetooth-settings-widget.c:1316
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Ukoliko uklonite uređaj, moraćete ponovo da ga podesite pre sledećeg "
 "korišćenja."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1320
 msgid "_Remove"
 msgstr "_Ukloni"
 
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:145
+#: lib/bluetooth-settings-obexpush.c:146
 #, c-format
-#| msgid "You received \"%s\" via Bluetooth"
 msgid "You received “%s” via Bluetooth"
 msgstr "Primili ste „%s“ preko blututa"
 
-#: lib/bluetooth-settings-obexpush.c:147
+#: lib/bluetooth-settings-obexpush.c:148
 msgid "You received a file"
 msgstr "Primili ste datoteku"
 
-#: lib/bluetooth-settings-obexpush.c:158
+#: lib/bluetooth-settings-obexpush.c:159
 msgid "Open File"
 msgstr "Otvori datoteku"
 
-#: lib/bluetooth-settings-obexpush.c:162
-msgid "Reveal File"
-msgstr "Prikaži datoteku"
+#: lib/bluetooth-settings-obexpush.c:163
+msgid "Open Containing Folder"
+msgstr "Otvori pripadajuću fasciklu"
 
-#: lib/bluetooth-settings-obexpush.c:179
+#: lib/bluetooth-settings-obexpush.c:180
 msgid "File reception complete"
 msgstr "Prijem datoteke završen"
 
-#: lib/bluetooth-settings-obexpush.c:233
+#: lib/bluetooth-settings-obexpush.c:234
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Blutut prenos datoteke sa uređaja „%s“"
 
-#: lib/bluetooth-settings-obexpush.c:243
+#: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Odbij"
 
@@ -386,27 +373,27 @@ msgstr "Sve vrste"
 msgid "Connection"
 msgstr "Veza"
 
-#: lib/settings.ui:224
+#: lib/settings.ui:229
 msgid "Address"
 msgstr "Adresa"
 
-#: lib/settings.ui:279
+#: lib/settings.ui:285
 msgid "_Mouse & Touchpad Settings"
 msgstr "Podešavanja _miša i dodirne table"
 
-#: lib/settings.ui:293
+#: lib/settings.ui:299
 msgid "_Sound Settings"
-msgstr "Podšavanja _zvuka"
+msgstr "Podešavanja _zvuka"
 
-#: lib/settings.ui:307
+#: lib/settings.ui:313
 msgid "_Keyboard Settings"
 msgstr "Podešavanja _tastature"
 
-#: lib/settings.ui:321
+#: lib/settings.ui:327
 msgid "Send _Files…"
 msgstr "Pošalji _datoteke…"
 
-#: lib/settings.ui:335
+#: lib/settings.ui:341
 msgid "_Remove Device"
 msgstr "_Ukloni uređaj"
 
@@ -417,11 +404,6 @@ msgstr "Prenos Blututom"
 #: sendto/bluetooth-sendto.desktop.in.in:4
 msgid "Send files via Bluetooth"
 msgstr "Šaljem datoteke preko Blututa"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: sendto/bluetooth-sendto.desktop.in.in:6
-msgid "bluetooth"
-msgstr "bluetooth"
 
 #: sendto/main.c:117
 msgid "An unknown error occurred"
@@ -553,7 +535,6 @@ msgid "ADDRESS"
 msgstr "ADRESA"
 
 #: sendto/main.c:827
-#| msgid "Remote device's name"
 msgid "Remote device’s name"
 msgstr "Naziv udaljenog uređaja"
 
@@ -562,9 +543,14 @@ msgid "NAME"
 msgstr "NAZIV"
 
 #: sendto/main.c:846
-#| msgid "[FILE...]"
 msgid "[FILE…]"
 msgstr "[DATOTEKA…]"
+
+#~ msgid "Reveal File"
+#~ msgstr "Prikaži datoteku"
+
+#~ msgid "bluetooth"
+#~ msgstr "bluetooth"
 
 #~ msgid "Visible as “%s”"
 #~ msgstr "Vidi se kao „%s“"
