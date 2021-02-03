@@ -36,9 +36,9 @@ enable_gir = get_option('introspection')
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-current = 13
-revision = 2
-age = 0
+current = 14
+revision = 0
+age = 1
 
 libversion = '@0@.@1@.@2@'.format(current, age, revision)
 
