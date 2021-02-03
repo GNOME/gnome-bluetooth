@@ -185,6 +185,8 @@ bluetooth_class_to_type (guint32 class)
 		case 0x01:
 		case 0x02:
 			return BLUETOOTH_TYPE_HEADSET;
+		case 0x05:
+			return BLUETOOTH_TYPE_SPEAKERS;
 		case 0x06:
 			return BLUETOOTH_TYPE_HEADPHONES;
 		case 0x0b: /* VCR */

@@ -79,6 +79,7 @@ typedef enum {
  * @BLUETOOTH_TYPE_DISPLAY: a display
  * @BLUETOOTH_TYPE_WEARABLE: a wearable computer
  * @BLUETOOTH_TYPE_TOY: a toy or game
+ * @BLUETOOTH_TYPE_SPEAKERS: audio speaker or speakers
  *
  * The type of a Bluetooth device. See also %BLUETOOTH_TYPE_INPUT and %BLUETOOTH_TYPE_AUDIO
  **/
@@ -102,7 +103,8 @@ typedef enum {
 	BLUETOOTH_TYPE_SCANNER		= 1 << 16,
 	BLUETOOTH_TYPE_DISPLAY		= 1 << 17,
 	BLUETOOTH_TYPE_WEARABLE		= 1 << 18,
-	BLUETOOTH_TYPE_TOY		= 1 << 19
+	BLUETOOTH_TYPE_TOY		= 1 << 19,
+	BLUETOOTH_TYPE_SPEAKERS		= 1 << 20,
 } BluetoothType;
 
 #define _BLUETOOTH_TYPE_NUM_TYPES 20
