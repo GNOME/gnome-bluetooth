@@ -542,7 +542,7 @@ static gboolean
 error_matches_remote_error (GError     *error,
 			    const char *remote_error)
 {
-	char *str;
+	g_autofree char *str = NULL;
 	gboolean ret;
 
 	if (error == NULL)
@@ -550,7 +550,6 @@ error_matches_remote_error (GError     *error,
 
 	str = g_dbus_error_get_remote_error (error);
 	ret = (g_strcmp0 (str, remote_error) == 0);
-	g_free (str);
 
 	return ret;
 }
