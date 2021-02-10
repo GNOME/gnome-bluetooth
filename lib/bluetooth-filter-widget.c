@@ -34,12 +34,9 @@
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 
-#define BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
-						BLUETOOTH_TYPE_FILTER_WIDGET, BluetoothFilterWidgetPrivate))
+struct _BluetoothFilterWidget {
+	GtkBox parent;
 
-typedef struct _BluetoothFilterWidgetPrivate BluetoothFilterWidgetPrivate;
-
-struct _BluetoothFilterWidgetPrivate {
 	GtkWidget *device_type_label, *device_type;
 	GtkWidget *device_category_label, *device_category;
 	GtkWidget *title;
@@ -84,97 +81,92 @@ bluetooth_device_category_to_string (int type)
 }
 
 static void
-set_combobox_from_filter (BluetoothFilterWidget *self)
+set_combobox_from_filter (BluetoothFilterWidget *filter)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
 	GtkTreeIter iter;
 	gboolean cont;
 
 	/* Look for an exact matching filter first */
-	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->device_type_filter_model),
+	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filter->device_type_filter_model),
 					      &iter);
 	while (cont != FALSE) {
 		int mask;
 
-		gtk_tree_model_get (GTK_TREE_MODEL (priv->device_type_filter_model), &iter,
+		gtk_tree_model_get (GTK_TREE_MODEL (filter->device_type_filter_model), &iter,
 				    DEVICE_TYPE_FILTER_COL_MASK, &mask, -1);
-		if (mask == priv->device_type_filter) {
-			gtk_combo_box_set_active_iter (GTK_COMBO_BOX(priv->device_type), &iter);
+		if (mask == filter->device_type_filter) {
+			gtk_combo_box_set_active_iter (GTK_COMBO_BOX(filter->device_type), &iter);
 			return;
 		}
-		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL (priv->device_type_filter_model), &iter);
+		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL (filter->device_type_filter_model), &iter);
 	}
 
 	/* Then a fuzzy match */
-	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->device_type_filter_model),
+	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filter->device_type_filter_model),
 					      &iter);
 	while (cont != FALSE) {
 		int mask;
 
-		gtk_tree_model_get (GTK_TREE_MODEL (priv->device_type_filter_model), &iter,
+		gtk_tree_model_get (GTK_TREE_MODEL (filter->device_type_filter_model), &iter,
 				    DEVICE_TYPE_FILTER_COL_MASK, &mask,
 				    -1);
-		if (mask & priv->device_type_filter) {
-			gtk_combo_box_set_active_iter (GTK_COMBO_BOX(priv->device_type), &iter);
+		if (mask & filter->device_type_filter) {
+			gtk_combo_box_set_active_iter (GTK_COMBO_BOX(filter->device_type), &iter);
 			return;
 		}
-		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL (priv->device_type_filter_model), &iter);
+		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL (filter->device_type_filter_model), &iter);
 	}
 
 	/* Then just set the any then */
-	gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->device_type_filter_model), &iter);
-	gtk_combo_box_set_active_iter (GTK_COMBO_BOX(priv->device_type), &iter);
+	gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filter->device_type_filter_model), &iter);
+	gtk_combo_box_set_active_iter (GTK_COMBO_BOX(filter->device_type), &iter);
 }
 
 static void
 filter_category_changed_cb (GtkComboBox *widget, gpointer data)
 {
-	BluetoothFilterWidget *self = BLUETOOTH_FILTER_WIDGET (data);
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
+	BluetoothFilterWidget *filter = BLUETOOTH_FILTER_WIDGET (data);
 
-	priv->device_category_filter = gtk_combo_box_get_active (GTK_COMBO_BOX(priv->device_category));
-	if (priv->filter)
-		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
-	g_object_notify (G_OBJECT(self), "device-category-filter");
+	filter->device_category_filter = gtk_combo_box_get_active (GTK_COMBO_BOX(filter->device_category));
+	if (filter->filter)
+		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter->filter));
+	g_object_notify (G_OBJECT(filter), "device-category-filter");
 }
 
 static void
 filter_type_changed_cb (GtkComboBox *widget, gpointer data)
 {
-	BluetoothFilterWidget *self = BLUETOOTH_FILTER_WIDGET (data);
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
+	BluetoothFilterWidget *filter = BLUETOOTH_FILTER_WIDGET (data);
 	GtkTreeIter iter;
 
 	if (gtk_combo_box_get_active_iter (widget, &iter) == FALSE)
 		return;
 
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->device_type_filter_model), &iter,
-			    DEVICE_TYPE_FILTER_COL_MASK, &(priv->device_type_filter),
+	gtk_tree_model_get (GTK_TREE_MODEL (filter->device_type_filter_model), &iter,
+			    DEVICE_TYPE_FILTER_COL_MASK, &(filter->device_type_filter),
 			    -1);
 
-	if (priv->filter)
-		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
-	g_object_notify (G_OBJECT(self), "device-type-filter");
+	if (filter->filter)
+		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter->filter));
+	g_object_notify (G_OBJECT(filter), "device-type-filter");
 }
 
 /**
  * bluetooth_filter_widget_set_title:
- * @self: a #BluetoothFilterWidget.
+ * @filter: a #BluetoothFilterWidget.
  * @title: Title for the #BluetoothFilterWidget.
  *
  * Used to set a different title for the #BluetoothFilterWidget than the default.
  *
  **/
 void
-bluetooth_filter_widget_set_title (BluetoothFilterWidget *self, gchar *title)
+bluetooth_filter_widget_set_title (BluetoothFilterWidget *filter, gchar *title)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
-
-	gtk_label_set_text (GTK_LABEL (priv->title), title);
+	gtk_label_set_text (GTK_LABEL (filter->title), title);
 }
 
 static void
-bluetooth_filter_widget_bind_chooser_single (BluetoothFilterWidget *self,
+bluetooth_filter_widget_bind_chooser_single (BluetoothFilterWidget *filter,
 					     BluetoothChooser *chooser,
 					     const char *property)
 {
@@ -183,13 +175,13 @@ bluetooth_filter_widget_bind_chooser_single (BluetoothFilterWidget *self,
 	 * The bindings will be automatically removed when one of the
 	 * objects goes away */
 	g_object_bind_property ((gpointer) chooser, property,
-				(gpointer) self, property,
+				(gpointer) filter, property,
 				G_BINDING_BIDIRECTIONAL);
 }
 
 /**
  * bluetooth_filter_widget_bind_filter:
- * @self: a #BluetoothFilterWidget.
+ * @filter: a #BluetoothFilterWidget.
  * @chooser: The #BluetoothChooser widget to bind the filter to.
  *
  * Binds a #BluetoothFilterWidget to a #BluetoothChooser such that changing the
@@ -199,18 +191,17 @@ bluetooth_filter_widget_bind_chooser_single (BluetoothFilterWidget *self,
  *
  **/
 void
-bluetooth_filter_widget_bind_filter (BluetoothFilterWidget *self, BluetoothChooser *chooser)
+bluetooth_filter_widget_bind_filter (BluetoothFilterWidget *filter, BluetoothChooser *chooser)
 {
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "device-type-filter");
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "device-category-filter");
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "show-device-type");
-	bluetooth_filter_widget_bind_chooser_single (self, chooser, "show-device-category");
+	bluetooth_filter_widget_bind_chooser_single (filter, chooser, "device-type-filter");
+	bluetooth_filter_widget_bind_chooser_single (filter, chooser, "device-category-filter");
+	bluetooth_filter_widget_bind_chooser_single (filter, chooser, "show-device-type");
+	bluetooth_filter_widget_bind_chooser_single (filter, chooser, "show-device-category");
 }
 
 static void
-bluetooth_filter_widget_init(BluetoothFilterWidget *self)
+bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(self);
 	guint i;
 
 	GtkWidget *label;
@@ -220,22 +211,22 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 
 	gtk_widget_push_composite_child ();
 
-	g_object_set (G_OBJECT (self), "orientation", GTK_ORIENTATION_VERTICAL, NULL);
+	g_object_set (G_OBJECT (filter), "orientation", GTK_ORIENTATION_VERTICAL, NULL);
 
-	gtk_box_set_homogeneous (GTK_BOX (self), FALSE);
-	gtk_box_set_spacing (GTK_BOX (self), 6);
+	gtk_box_set_homogeneous (GTK_BOX (filter), FALSE);
+	gtk_box_set_spacing (GTK_BOX (filter), 6);
 
-	priv->title = gtk_label_new ("");
+	filter->title = gtk_label_new ("");
 	/* This is the title of the filter section of the Bluetooth device chooser.
 	 * It used to say Show Only Bluetooth Devices With... */
-	bluetooth_filter_widget_set_title (self, _("Show:"));
-	gtk_widget_show (priv->title);
-	gtk_box_pack_start (GTK_BOX (self), priv->title, TRUE, TRUE, 0);
-	gtk_misc_set_alignment (GTK_MISC (priv->title), 0, 0.5);
+	bluetooth_filter_widget_set_title (filter, _("Show:"));
+	gtk_widget_show (filter->title);
+	gtk_box_pack_start (GTK_BOX (filter), filter->title, TRUE, TRUE, 0);
+	gtk_misc_set_alignment (GTK_MISC (filter->title), 0, 0.5);
 
 	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
 	gtk_widget_show (alignment);
-	gtk_box_pack_start (GTK_BOX (self), alignment, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (filter), alignment, TRUE, TRUE, 0);
 
 	table = gtk_grid_new ();
 	gtk_widget_show (table);
@@ -249,23 +240,23 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	gtk_widget_show (label);
 	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-	priv->device_category_label = label;
+	filter->device_category_label = label;
 
-	priv->device_category = gtk_combo_box_text_new ();
-	gtk_widget_set_no_show_all (priv->device_category, TRUE);
-	gtk_widget_show (priv->device_category);
-	gtk_grid_attach (GTK_GRID (table), priv->device_category, 1, 0, 1, 1);
-	gtk_widget_set_tooltip_text (priv->device_category, _("Select the device category to filter"));
+	filter->device_category = gtk_combo_box_text_new ();
+	gtk_widget_set_no_show_all (filter->device_category, TRUE);
+	gtk_widget_show (filter->device_category);
+	gtk_grid_attach (GTK_GRID (table), filter->device_category, 1, 0, 1, 1);
+	gtk_widget_set_tooltip_text (filter->device_category, _("Select the device category to filter"));
 	for (i = 0; i < BLUETOOTH_CATEGORY_NUM_CATEGORIES; i++) {
-		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (priv->device_category),
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (filter->device_category),
 					        _(bluetooth_device_category_to_string (i)));
 	}
-	g_signal_connect (G_OBJECT (priv->device_category), "changed",
-			  G_CALLBACK (filter_category_changed_cb), self);
-	gtk_combo_box_set_active (GTK_COMBO_BOX (priv->device_category), priv->device_category_filter);
-	if (priv->show_device_category) {
-		gtk_widget_show (priv->device_category_label);
-		gtk_widget_show (priv->device_category);
+	g_signal_connect (G_OBJECT (filter->device_category), "changed",
+			  G_CALLBACK (filter_category_changed_cb), filter);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (filter->device_category), filter->device_category_filter);
+	if (filter->show_device_category) {
+		gtk_widget_show (filter->device_category_label);
+		gtk_widget_show (filter->device_category);
 	}
 
 	/* The device type filter */
@@ -274,28 +265,28 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 	gtk_widget_show (label);
 	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-	priv->device_type_label = label;
+	filter->device_type_label = label;
 
-	priv->device_type_filter_model = GTK_TREE_MODEL (gtk_list_store_new (DEVICE_TYPE_FILTER_NUM_COLS,
+	filter->device_type_filter_model = GTK_TREE_MODEL (gtk_list_store_new (DEVICE_TYPE_FILTER_NUM_COLS,
 									     G_TYPE_STRING, G_TYPE_INT));
-	priv->device_type = gtk_combo_box_new_with_model (priv->device_type_filter_model);
+	filter->device_type = gtk_combo_box_new_with_model (filter->device_type_filter_model);
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->device_type), renderer, TRUE);
-	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (priv->device_type), renderer, "text", DEVICE_TYPE_FILTER_COL_NAME);
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (filter->device_type), renderer, TRUE);
+	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (filter->device_type), renderer, "text", DEVICE_TYPE_FILTER_COL_NAME);
 
-	gtk_widget_set_no_show_all (priv->device_type, TRUE);
-	gtk_widget_show (priv->device_type);
-	gtk_grid_attach (GTK_GRID (table), priv->device_type, 1, 1, 1, 1);
-	gtk_widget_set_tooltip_text (priv->device_type, _("Select the device type to filter"));
-	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
+	gtk_widget_set_no_show_all (filter->device_type, TRUE);
+	gtk_widget_show (filter->device_type);
+	gtk_grid_attach (GTK_GRID (table), filter->device_type, 1, 1, 1, 1);
+	gtk_widget_set_tooltip_text (filter->device_type, _("Select the device type to filter"));
+	gtk_list_store_insert_with_values (GTK_LIST_STORE (filter->device_type_filter_model), NULL, G_MAXUINT32,
 					   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_filter_string (BLUETOOTH_TYPE_ANY)),
 					   DEVICE_TYPE_FILTER_COL_MASK, BLUETOOTH_TYPE_ANY,
 					   -1);
-	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
+	gtk_list_store_insert_with_values (GTK_LIST_STORE (filter->device_type_filter_model), NULL, G_MAXUINT32,
 					   DEVICE_TYPE_FILTER_COL_NAME, _("Input devices (mice, keyboards, etc.)"),
 					   DEVICE_TYPE_FILTER_COL_MASK, BLUETOOTH_TYPE_INPUT,
 					   -1);
-	gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
+	gtk_list_store_insert_with_values (GTK_LIST_STORE (filter->device_type_filter_model), NULL, G_MAXUINT32,
 					   DEVICE_TYPE_FILTER_COL_NAME, _("Headphones, headsets and other audio devices"),
 					   DEVICE_TYPE_FILTER_COL_MASK, BLUETOOTH_TYPE_AUDIO,
 					   -1);
@@ -304,21 +295,21 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 		int mask = 1 << i;
 		if (mask & BLUETOOTH_TYPE_INPUT || mask & BLUETOOTH_TYPE_AUDIO)
 			continue;
-		gtk_list_store_insert_with_values (GTK_LIST_STORE (priv->device_type_filter_model), NULL, G_MAXUINT32,
+		gtk_list_store_insert_with_values (GTK_LIST_STORE (filter->device_type_filter_model), NULL, G_MAXUINT32,
 						   DEVICE_TYPE_FILTER_COL_NAME, _(bluetooth_type_to_filter_string (mask)),
 						   DEVICE_TYPE_FILTER_COL_MASK, mask,
 						   -1);
 	}
-	g_signal_connect (G_OBJECT (priv->device_type), "changed",
-			  G_CALLBACK(filter_type_changed_cb), self);
-	set_combobox_from_filter (self);
-	if (priv->show_device_type) {
-		gtk_widget_show (priv->device_type_label);
-		gtk_widget_show (priv->device_type);
+	g_signal_connect (G_OBJECT (filter->device_type), "changed",
+			  G_CALLBACK(filter_type_changed_cb), filter);
+	set_combobox_from_filter (filter);
+	if (filter->show_device_type) {
+		gtk_widget_show (filter->device_type_label);
+		gtk_widget_show (filter->device_type);
 	}
 
 	/* The services filter */
-	priv->device_service_filter = NULL;
+	filter->device_service_filter = NULL;
 
 	gtk_widget_pop_composite_child ();
 }
@@ -326,7 +317,7 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *self)
 static void
 bluetooth_filter_widget_finalize (GObject *object)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
+	BluetoothFilterWidget *filter = BLUETOOTH_FILTER_WIDGET (object);
 
 	g_clear_pointer (&filter->device_service_filter, g_free);
 
@@ -336,7 +327,7 @@ bluetooth_filter_widget_finalize (GObject *object)
 static void
 bluetooth_filter_widget_dispose (GObject *object)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
+	BluetoothFilterWidget *filter = BLUETOOTH_FILTER_WIDGET (object);
 
 	g_clear_object (&filter->chooser);
 
@@ -356,32 +347,32 @@ static void
 bluetooth_filter_widget_set_property (GObject *object, guint prop_id,
 					 const GValue *value, GParamSpec *pspec)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
+	BluetoothFilterWidget *filter = BLUETOOTH_FILTER_WIDGET (object);
 
 	switch (prop_id) {
 	case PROP_SHOW_DEVICE_TYPE:
-		priv->show_device_type = g_value_get_boolean (value);
-		g_object_set (G_OBJECT (priv->device_type_label), "visible", priv->show_device_type, NULL);
-		g_object_set (G_OBJECT (priv->device_type), "visible", priv->show_device_type, NULL);
+		filter->show_device_type = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (filter->device_type_label), "visible", filter->show_device_type, NULL);
+		g_object_set (G_OBJECT (filter->device_type), "visible", filter->show_device_type, NULL);
 		break;
 	case PROP_SHOW_DEVICE_CATEGORY:
-		priv->show_device_category = g_value_get_boolean (value);
-		g_object_set (G_OBJECT (priv->device_category_label), "visible", priv->show_device_category, NULL);
-		g_object_set (G_OBJECT (priv->device_category), "visible", priv->show_device_category, NULL);
+		filter->show_device_category = g_value_get_boolean (value);
+		g_object_set (G_OBJECT (filter->device_category_label), "visible", filter->show_device_category, NULL);
+		g_object_set (G_OBJECT (filter->device_category), "visible", filter->show_device_category, NULL);
 		break;
 	case PROP_DEVICE_TYPE_FILTER:
-		priv->device_type_filter = g_value_get_int (value);
+		filter->device_type_filter = g_value_get_int (value);
 		set_combobox_from_filter (BLUETOOTH_FILTER_WIDGET (object));
 		break;
 	case PROP_DEVICE_CATEGORY_FILTER:
-		priv->device_category_filter = g_value_get_enum (value);
-		gtk_combo_box_set_active (GTK_COMBO_BOX(priv->device_category), priv->device_category_filter);
+		filter->device_category_filter = g_value_get_enum (value);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(filter->device_category), filter->device_category_filter);
 		break;
 	case PROP_DEVICE_SERVICE_FILTER:
-		g_free (priv->device_service_filter);
-		priv->device_service_filter = g_value_dup_string (value);
-		if (priv->filter)
-			gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
+		g_free (filter->device_service_filter);
+		filter->device_service_filter = g_value_dup_string (value);
+		if (filter->filter)
+			gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter->filter));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
@@ -393,23 +384,23 @@ static void
 bluetooth_filter_widget_get_property (GObject *object, guint prop_id,
 					 GValue *value, GParamSpec *pspec)
 {
-	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
+	BluetoothFilterWidget *filter = BLUETOOTH_FILTER_WIDGET (object);
 
 	switch (prop_id) {
 	case PROP_SHOW_DEVICE_TYPE:
-		g_value_set_boolean (value, priv->show_device_type);
+		g_value_set_boolean (value, filter->show_device_type);
 		break;
 	case PROP_SHOW_DEVICE_CATEGORY:
-		g_value_set_boolean (value, priv->show_device_category);
+		g_value_set_boolean (value, filter->show_device_category);
 		break;
 	case PROP_DEVICE_TYPE_FILTER:
-		g_value_set_int (value, priv->device_type_filter);
+		g_value_set_int (value, filter->device_type_filter);
 		break;
 	case PROP_DEVICE_CATEGORY_FILTER:
-		g_value_set_enum (value, priv->device_category_filter);
+		g_value_set_enum (value, filter->device_category_filter);
 		break;
 	case PROP_DEVICE_SERVICE_FILTER:
-		g_value_set_string (value, priv->device_service_filter);
+		g_value_set_string (value, filter->device_service_filter);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, prop_id, pspec);
@@ -424,8 +415,6 @@ bluetooth_filter_widget_class_init (BluetoothFilterWidgetClass *klass)
 	 * device-type-filter value */
 	guint i;
 	int max_filter_val;
-
-	g_type_class_add_private(klass, sizeof(BluetoothFilterWidgetPrivate));
 
 	G_OBJECT_CLASS(klass)->dispose = bluetooth_filter_widget_dispose;
 	G_OBJECT_CLASS(klass)->finalize = bluetooth_filter_widget_finalize;

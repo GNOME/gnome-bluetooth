@@ -28,33 +28,11 @@
 #include <bluetooth-enums.h>
 #include <bluetooth-chooser.h>
 
+G_DECLARE_FINAL_TYPE(BluetoothFilterWidget, bluetooth_filter_widget, BLUETOOTH, FILTER_WIDGET, GtkBox)
 #define BLUETOOTH_TYPE_FILTER_WIDGET (bluetooth_filter_widget_get_type())
-#define BLUETOOTH_FILTER_WIDGET(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
-			       	BLUETOOTH_TYPE_FILTER_WIDGET, BluetoothFilterWidget))
-#define BLUETOOTH_FILTER_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
-				       BLUETOOTH_TYPE_FILTER_WIDGET, BluetoothFilterWidgetClass))
-#define BLUETOOTH_IS_FILTER_WIDGET(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), \
-						BLUETOOTH_TYPE_FILTER_WIDGET))
-#define BLUETOOTH_IS_FILTER_WIDGET_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
-						BLUETOOTH_TYPE_FILTER_WIDGET))
-#define BLUETOOTH_GET_FILTER_WIDGET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
-				BLUETOOTH_TYPE_FILTER_WIDGET, BluetoothFilterWidgetClass))
-
-typedef struct _BluetoothFilterWidget BluetoothFilterWidget;
-typedef struct _BluetoothFilterWidgetClass BluetoothFilterWidgetClass;
-
-struct _BluetoothFilterWidget {
-	GtkBox parent;
-};
-
-struct _BluetoothFilterWidgetClass {
-	GtkBoxClass parent_class;
-};
-
-GType bluetooth_filter_widget_get_type (void);
 
 GtkWidget *bluetooth_filter_widget_new (void);
 
-void bluetooth_filter_widget_set_title (BluetoothFilterWidget *self, gchar *title);
+void bluetooth_filter_widget_set_title (BluetoothFilterWidget *filter, gchar *title);
 
-void bluetooth_filter_widget_bind_filter (BluetoothFilterWidget *self, BluetoothChooser *chooser);
+void bluetooth_filter_widget_bind_filter (BluetoothFilterWidget *filter, BluetoothChooser *chooser);
