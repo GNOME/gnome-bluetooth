@@ -770,8 +770,6 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	GtkWidget *vbox;
 	GtkWidget *hbox;
 
-	gtk_widget_push_composite_child ();
-
 	g_object_set (G_OBJECT (self), "orientation", GTK_ORIENTATION_VERTICAL, NULL);
 
 	priv->client = bluetooth_client_new ();
@@ -843,8 +841,6 @@ bluetooth_chooser_init(BluetoothChooser *self)
 			 G_CALLBACK(filter_type_changed_cb), NULL);
 	g_signal_connect(self, "notify::device-category-filter",
 			 G_CALLBACK(filter_category_changed_cb), NULL);
-
-	gtk_widget_pop_composite_child ();
 }
 
 static GObject *

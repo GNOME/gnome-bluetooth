@@ -209,8 +209,6 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 	GtkWidget *table;
 	GtkCellRenderer *renderer;
 
-	gtk_widget_push_composite_child ();
-
 	g_object_set (G_OBJECT (filter), "orientation", GTK_ORIENTATION_VERTICAL, NULL);
 
 	gtk_box_set_homogeneous (GTK_BOX (filter), FALSE);
@@ -310,8 +308,6 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 
 	/* The services filter */
 	filter->device_service_filter = NULL;
-
-	gtk_widget_pop_composite_child ();
 }
 
 static void
