@@ -14,6 +14,9 @@ variables:
     glibc-devel
     git
   GIT_SUBMODULE_STRATEGY: recursive
+  DEPENDENCIES_ABI_CHECK:
+    libabigail
+  LAST_ABI_BREAK: "7cc6250695ca7c7f326f0dd1dcbabc0061123b6b"
 
 build_stable:
   before_script:
@@ -25,3 +28,5 @@ build_stable:
     - ninja -C _build install
     - ninja -C _build test
     - ninja -C _build dist
+    - dnf install -y $DEPENDENCIES_ABI_CHECK
+    - ./.ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
