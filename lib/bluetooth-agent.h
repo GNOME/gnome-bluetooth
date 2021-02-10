@@ -26,30 +26,8 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 
+G_DECLARE_FINAL_TYPE(BluetoothAgent, bluetooth_agent, BLUETOOTH, AGENT, GObject)
 #define BLUETOOTH_TYPE_AGENT (bluetooth_agent_get_type())
-#define BLUETOOTH_AGENT(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
-					BLUETOOTH_TYPE_AGENT, BluetoothAgent))
-#define BLUETOOTH_AGENT_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
-					BLUETOOTH_TYPE_AGENT, BluetoothAgentClass))
-#define BLUETOOTH_IS_AGENT(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), \
-							BLUETOOTH_TYPE_AGENT))
-#define BLUETOOTH_IS_AGENT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
-							BLUETOOTH_TYPE_AGENT))
-#define BLUETOOTH_GET_AGENT_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
-					BLUETOOTH_TYPE_AGENT, BluetoothAgentClass))
-
-typedef struct _BluetoothAgent BluetoothAgent;
-typedef struct _BluetoothAgentClass BluetoothAgentClass;
-
-struct _BluetoothAgent {
-	GObject parent;
-};
-
-struct _BluetoothAgentClass {
-	GObjectClass parent_class;
-};
-
-GType bluetooth_agent_get_type(void);
 
 BluetoothAgent *bluetooth_agent_new(const char *path);
 
