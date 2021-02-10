@@ -1632,22 +1632,23 @@ row_inserted_cb (GtkTreeModel *tree_model,
 	gboolean paired, trusted, connected, legacy_pairing;
 	GtkWidget *row;
 
-	if (is_interesting_device (tree_model, iter) == FALSE) {
-		gtk_tree_model_get (tree_model, iter,
-				    BLUETOOTH_COLUMN_NAME, &name,
-				    -1);
-		g_debug ("Not adding device '%s'", name);
+	gtk_tree_model_get (tree_model, iter,
+			    BLUETOOTH_COLUMN_NAME, &name,
+			    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
+			    -1);
+
+	if (name == NULL ||
+	    is_interesting_device (tree_model, iter) == FALSE) {
+		g_debug ("Not adding device '%s'", name ? name : bdaddr);
 		return;
 	}
 
 	gtk_tree_model_get (tree_model, iter,
 			    BLUETOOTH_COLUMN_PROXY, &proxy,
-			    BLUETOOTH_COLUMN_NAME, &name,
 			    BLUETOOTH_COLUMN_ALIAS, &alias,
 			    BLUETOOTH_COLUMN_PAIRED, &paired,
 			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
 			    BLUETOOTH_COLUMN_CONNECTED, &connected,
-			    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
 			    BLUETOOTH_COLUMN_TYPE, &type,
 			    BLUETOOTH_COLUMN_LEGACYPAIRING, &legacy_pairing,
 			    -1);
