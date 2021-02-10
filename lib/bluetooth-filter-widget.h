@@ -22,14 +22,11 @@
  *
  */
 
-#ifndef __BLUETOOTH_FILTER_WIDGET_H
-#define __BLUETOOTH_FILTER_WIDGET_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <bluetooth-enums.h>
 #include <bluetooth-chooser.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_FILTER_WIDGET (bluetooth_filter_widget_get_type())
 #define BLUETOOTH_FILTER_WIDGET(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -61,7 +58,3 @@ GtkWidget *bluetooth_filter_widget_new (void);
 void bluetooth_filter_widget_set_title (BluetoothFilterWidget *self, gchar *title);
 
 void bluetooth_filter_widget_bind_filter (BluetoothFilterWidget *self, BluetoothChooser *chooser);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_FILTER_WIDGET_H */

@@ -22,13 +22,10 @@
  *
  */
 
-#ifndef __BLUETOOTH_UTILS_H
-#define __BLUETOOTH_UTILS_H
+#pragma once
 
 #include <gio/gio.h>
 #include <bluetooth-enums.h>
-
-G_BEGIN_DECLS
 
 /*
  * The profile UUID list is provided by the Bluetooth SIG:
@@ -69,7 +66,3 @@ const char    *bluetooth_uuid_to_string        (const char *uuid);
 
 void bluetooth_send_to_address (const char *address,
 				const char *alias);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_UTILS_H */

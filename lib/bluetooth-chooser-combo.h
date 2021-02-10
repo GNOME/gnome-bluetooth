@@ -16,12 +16,9 @@
  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BLUETOOTH_CHOOSER_COMBO_H__
-#define __BLUETOOTH_CHOOSER_COMBO_H__
+#pragma once
 
 #include <gtk/gtk.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_CHOOSER_COMBO     (bluetooth_chooser_combo_get_type ())
 #define BLUETOOTH_CHOOSER_COMBO(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BLUETOOTH_TYPE_CHOOSER_COMBO, BluetoothChooserCombo))
@@ -61,7 +58,3 @@ struct _BluetoothChooserComboClass {
 GType		bluetooth_chooser_combo_get_type	(void);
 
 GtkWidget *	bluetooth_chooser_combo_new		(void);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_CHOOSER_COMBO_H__ */

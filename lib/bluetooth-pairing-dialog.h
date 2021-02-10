@@ -18,12 +18,9 @@
  *
  */
 
-#ifndef __BLUETOOTH_PAIRING_DIALOG_H
-#define __BLUETOOTH_PAIRING_DIALOG_H
+#pragma once
 
 #include <gtk/gtk.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_PAIRING_DIALOG (bluetooth_pairing_dialog_get_type())
 #define BLUETOOTH_PAIRING_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -79,7 +76,3 @@ void bluetooth_pairing_dialog_set_pin_entered (BluetoothPairingDialog *self,
 					       guint                   entered);
 
 char *bluetooth_pairing_dialog_get_pin (BluetoothPairingDialog *self);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_PAIRING_DIALOG_H */

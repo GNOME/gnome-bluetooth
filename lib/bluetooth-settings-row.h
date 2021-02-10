@@ -18,12 +18,9 @@
  *
  */
 
-#ifndef __BLUETOOTH_SETTINGS_ROW_H
-#define __BLUETOOTH_SETTINGS_ROW_H
+#pragma once
 
 #include <gtk/gtk.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_SETTINGS_ROW (bluetooth_settings_row_get_type())
 #define BLUETOOTH_SETTINGS_ROW(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -57,7 +54,3 @@ struct _BluetoothSettingsRowClass {
 GType bluetooth_settings_row_get_type (void);
 
 GtkWidget *bluetooth_settings_row_new (void);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_SETTINGS_ROW_H */

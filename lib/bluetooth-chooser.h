@@ -22,13 +22,10 @@
  *
  */
 
-#ifndef __BLUETOOTH_CHOOSER_H
-#define __BLUETOOTH_CHOOSER_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <bluetooth-enums.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_CHOOSER (bluetooth_chooser_get_type())
 #define BLUETOOTH_CHOOSER(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -80,7 +77,3 @@ GtkWidget *bluetooth_chooser_get_scrolled_window (BluetoothChooser *self);
 
 void bluetooth_chooser_start_discovery (BluetoothChooser *self);
 void bluetooth_chooser_stop_discovery (BluetoothChooser *self);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_CHOOSER_H */

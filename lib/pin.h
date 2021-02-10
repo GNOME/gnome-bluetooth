@@ -21,6 +21,8 @@
  *
  */
 
+#pragma once
+
 #include <glib.h>
 
 #define PIN_NUM_DIGITS 6

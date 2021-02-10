@@ -21,13 +21,10 @@
  *
  */
 
-#ifndef __BLUETOOTH_AGENT_H
-#define __BLUETOOTH_AGENT_H
+#pragma once
 
 #include <glib-object.h>
 #include <gio/gio.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_AGENT (bluetooth_agent_get_type())
 #define BLUETOOTH_AGENT(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -121,7 +118,3 @@ typedef enum {
 
 GType  bluetooth_agent_error_get_type (void);
 GQuark bluetooth_agent_error_quark    (void);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_AGENT_H */

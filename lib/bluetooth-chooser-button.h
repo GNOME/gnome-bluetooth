@@ -16,12 +16,9 @@
  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BLUETOOTH_CHOOSER_BUTTON_H__
-#define __BLUETOOTH_CHOOSER_BUTTON_H__
+#pragma once
 
 #include <gtk/gtk.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_CHOOSER_BUTTON     (bluetooth_chooser_button_get_type ())
 #define BLUETOOTH_CHOOSER_BUTTON(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BLUETOOTH_TYPE_CHOOSER_BUTTON, BluetoothChooserButton))
@@ -47,7 +44,3 @@ GType		bluetooth_chooser_button_get_type	(void);
 
 GtkWidget *	bluetooth_chooser_button_new		(void);
 gboolean	bluetooth_chooser_button_available	(BluetoothChooserButton *button);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_CHOOSER_BUTTON_H__ */

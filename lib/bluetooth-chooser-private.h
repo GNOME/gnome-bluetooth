@@ -21,19 +21,12 @@
  *
  */
 
-#ifndef __BLUETOOTH_CHOOSER_PRIVATE_H
-#define __BLUETOOTH_CHOOSER_PRIVATE_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <bluetooth-enums.h>
 
-G_BEGIN_DECLS
-
 GtkTreeModel *bluetooth_chooser_get_model (BluetoothChooser *self);
 GtkWidget *bluetooth_chooser_get_treeview (BluetoothChooser *self);
 gboolean bluetooth_chooser_remove_selected_device (BluetoothChooser *self);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_CHOOSER_PRIVATE_H */

@@ -18,12 +18,9 @@
  *
  */
 
-#ifndef __BLUETOOTH_SETTINGS_WIDGET_H
-#define __BLUETOOTH_SETTINGS_WIDGET_H
+#pragma once
 
 #include <gtk/gtk.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_SETTINGS_WIDGET (bluetooth_settings_widget_get_type())
 #define BLUETOOTH_SETTINGS_WIDGET(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -59,7 +56,3 @@ GType bluetooth_settings_widget_get_type (void);
 GtkWidget *bluetooth_settings_widget_new (void);
 
 gboolean bluetooth_settings_widget_get_default_adapter_powered (BluetoothSettingsWidget *widget);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_SETTINGS_WIDGET_H */

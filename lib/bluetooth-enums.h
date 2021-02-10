@@ -21,12 +21,9 @@
  *
  */
 
-#ifndef __BLUETOOTH_ENUMS_H
-#define __BLUETOOTH_ENUMS_H
+#pragma once
 
 #include <glib.h>
-
-G_BEGIN_DECLS
 
 /**
  * SECTION:bluetooth-enums
@@ -183,7 +180,3 @@ typedef enum {
 	BLUETOOTH_STATUS_CONNECTING,
 	BLUETOOTH_STATUS_PLAYING
 } BluetoothStatus;
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_ENUMS_H */

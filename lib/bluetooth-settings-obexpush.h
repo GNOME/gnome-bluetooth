@@ -23,12 +23,9 @@
  *
  */
 
-#ifndef __OBEX_AGENT_H__
-#define __OBEX_AGENT_H__
+#pragma once
 
 #include <glib-object.h>
-
-G_BEGIN_DECLS
 
 typedef struct _ObexAgent {
 	GObject parent;
@@ -54,7 +51,3 @@ GType obex_agent_get_type (void);
 void     obex_agent_up (void);
 void     obex_agent_down (void);
 char    *lookup_download_dir (void);
-
-G_END_DECLS
-
-#endif

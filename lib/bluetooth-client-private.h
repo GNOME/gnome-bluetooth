@@ -21,14 +21,11 @@
  *
  */
 
-#ifndef __BLUETOOTH_CLIENT_PRIVATE_H
-#define __BLUETOOTH_CLIENT_PRIVATE_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <bluetooth-enums.h>
-
-G_BEGIN_DECLS
 
 typedef void (*BluetoothClientSetupFunc) (BluetoothClient *client,
 					  const GError    *error,
@@ -57,7 +54,3 @@ void bluetooth_client_dump_device (GtkTreeModel *model,
 gboolean bluetooth_client_get_connectable(const char **uuids);
 
 GDBusProxy *_bluetooth_client_get_default_adapter (BluetoothClient *client);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_CLIENT_PRIVATE_H */

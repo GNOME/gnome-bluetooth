@@ -21,14 +21,11 @@
  *
  */
 
-#ifndef __BLUETOOTH_CLIENT_H
-#define __BLUETOOTH_CLIENT_H
+#pragma once
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <bluetooth-enums.h>
-
-G_BEGIN_DECLS
 
 #define BLUETOOTH_TYPE_CLIENT (bluetooth_client_get_type())
 #define BLUETOOTH_CLIENT(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
@@ -81,7 +78,3 @@ void bluetooth_client_connect_service (BluetoothClient     *client,
 gboolean bluetooth_client_connect_service_finish (BluetoothClient *client,
 						  GAsyncResult    *res,
 						  GError         **error);
-
-G_END_DECLS
-
-#endif /* __BLUETOOTH_CLIENT_H */
