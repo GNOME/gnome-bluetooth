@@ -686,8 +686,6 @@ create_treeview (BluetoothChooser *self)
 
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW(tree), TRUE);
 
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW(tree), TRUE);
-
 	g_object_set (tree, "show-expanders", FALSE, NULL);
 
 	g_signal_connect (G_OBJECT (tree), "row-activated",
