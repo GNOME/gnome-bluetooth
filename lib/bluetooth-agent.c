@@ -331,8 +331,7 @@ name_vanished_cb (GDBusConnection *connection,
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
-	g_free (priv->busname);
-	priv->busname = NULL;
+	g_clear_pointer (&priv->busname, g_free);
 	g_clear_object (&priv->agent_manager);
 }
 
@@ -578,14 +577,9 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 		}
 	}
 
-	g_object_unref(priv->agent_manager);
-	priv->agent_manager = NULL;
-
-	g_free(priv->path);
-	priv->path = NULL;
-
-	g_free(priv->busname);
-	priv->busname = NULL;
+	g_clear_object (&priv->agent_manager);
+	g_clear_pointer (&priv->path, g_free);
+	g_clear_pointer (&priv->busname, g_free);
 
 	if (priv->reg_id > 0) {
 		g_dbus_connection_unregister_object (priv->conn, priv->reg_id);

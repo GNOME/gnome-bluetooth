@@ -328,8 +328,7 @@ bluetooth_filter_widget_finalize (GObject *object)
 {
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
 
-	g_free (priv->device_service_filter);
-	priv->device_service_filter = NULL;
+	g_clear_pointer (&filter->device_service_filter, g_free);
 
 	G_OBJECT_CLASS(bluetooth_filter_widget_parent_class)->finalize(object);
 }
@@ -339,10 +338,7 @@ bluetooth_filter_widget_dispose (GObject *object)
 {
 	BluetoothFilterWidgetPrivate *priv = BLUETOOTH_FILTER_WIDGET_GET_PRIVATE(object);
 
-	if (priv->chooser) {
-		g_object_unref (priv->chooser);
-		priv->chooser = NULL;
-	}
+	g_clear_object (&filter->chooser);
 
 	G_OBJECT_CLASS(bluetooth_filter_widget_parent_class)->dispose(object);
 }
