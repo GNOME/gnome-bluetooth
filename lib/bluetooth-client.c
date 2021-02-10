@@ -1422,7 +1422,7 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GSimpleAsyncResult *simple;
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 	GtkTreeIter iter, adapter_iter;
 	gboolean paired;
 	GError *err = NULL;
@@ -1477,8 +1477,6 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 		g_simple_async_result_complete_in_idle (simple);
 		g_object_unref (simple);
 	}
-
-	g_object_unref (device);
 }
 
 gboolean
@@ -1601,7 +1599,7 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
 	GSimpleAsyncResult *simple;
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 	g_return_if_fail (path != NULL);
@@ -1630,8 +1628,6 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 					 (GAsyncReadyCallback) disconnect_callback,
 					 simple);
 	}
-
-	g_object_unref (device);
 }
 
 /**

@@ -140,7 +140,7 @@ static gboolean bluetooth_agent_request_pincode(BluetoothAgent *agent,
 			const char *path, GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->pincode_func == NULL)
 		return FALSE;
@@ -151,8 +151,6 @@ static gboolean bluetooth_agent_request_pincode(BluetoothAgent *agent,
 
 	priv->pincode_func(invocation, device, priv->pincode_data);
 
-	g_object_unref(device);
-
 	return TRUE;
 }
 
@@ -160,7 +158,7 @@ static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
 			const char *path, GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->passkey_func == NULL)
 		return FALSE;
@@ -171,8 +169,6 @@ static gboolean bluetooth_agent_request_passkey(BluetoothAgent *agent,
 
 	priv->passkey_func(invocation, device, priv->passkey_data);
 
-	g_object_unref(device);
-
 	return TRUE;
 }
 
@@ -181,7 +177,7 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->display_func == NULL)
 		return FALSE;
@@ -193,8 +189,6 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 	priv->display_func(invocation, device, passkey, entered,
 			   priv->display_data);
 
-	g_object_unref(device);
-
 	return TRUE;
 }
 
@@ -203,7 +197,7 @@ static gboolean bluetooth_agent_display_pincode(BluetoothAgent *agent,
 						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->display_pincode_func == NULL)
 		return FALSE;
@@ -215,8 +209,6 @@ static gboolean bluetooth_agent_display_pincode(BluetoothAgent *agent,
 	priv->display_pincode_func(invocation, device, pincode,
 				   priv->display_data);
 
-	g_object_unref(device);
-
 	return TRUE;
 }
 
@@ -225,7 +217,7 @@ static gboolean bluetooth_agent_request_confirmation(BluetoothAgent *agent,
 						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->confirm_func == NULL)
 		return FALSE;
@@ -236,8 +228,6 @@ static gboolean bluetooth_agent_request_confirmation(BluetoothAgent *agent,
 
 	priv->confirm_func(invocation, device, passkey, priv->confirm_data);
 
-	g_object_unref(device);
-
 	return TRUE;
 }
 
@@ -245,7 +235,7 @@ static gboolean bluetooth_agent_request_authorization(BluetoothAgent *agent,
 					const char *path, GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->authorize_func == NULL)
 		return FALSE;
@@ -256,8 +246,6 @@ static gboolean bluetooth_agent_request_authorization(BluetoothAgent *agent,
 
 	priv->authorize_func(invocation, device, priv->authorize_data);
 
-	g_object_unref(device);
-
 	return TRUE;
 }
 
@@ -266,7 +254,7 @@ static gboolean bluetooth_agent_authorize_service(BluetoothAgent *agent,
 						GDBusMethodInvocation *invocation)
 {
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
-	GDBusProxy *device;
+	g_autoptr(GDBusProxy) device = NULL;
 
 	if (priv->authorize_service_func == NULL)
 		return FALSE;
@@ -277,8 +265,6 @@ static gboolean bluetooth_agent_authorize_service(BluetoothAgent *agent,
 
 	priv->authorize_service_func(invocation, device, uuid,
 					    priv->authorize_service_data);
-
-	g_object_unref(device);
 
 	return TRUE;
 }
