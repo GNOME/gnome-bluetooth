@@ -283,7 +283,7 @@ static gboolean bluetooth_agent_cancel(BluetoothAgent *agent,
 static void
 register_agent (BluetoothAgentPrivate *priv)
 {
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	gboolean ret;
 
 	ret = agent_manager1_call_register_agent_sync (priv->agent_manager,
@@ -292,17 +292,14 @@ register_agent (BluetoothAgentPrivate *priv)
 						       NULL, &error);
 	if (ret == FALSE) {
 		g_printerr ("Agent registration failed: %s\n", error->message);
-		g_error_free (error);
 		return;
 	}
 
 	ret = agent_manager1_call_request_default_agent_sync (priv->agent_manager,
 							      priv->path,
 							      NULL, &error);
-	if (ret == FALSE) {
+	if (ret == FALSE)
 		g_printerr ("Agent registration as default failed: %s\n", error->message);
-		g_error_free (error);
-	}
 }
 
 static void
@@ -453,7 +450,7 @@ handle_method_call (GDBusConnection       *connection,
 	BluetoothAgentPrivate *priv = BLUETOOTH_AGENT_GET_PRIVATE(agent);
 
 	if (g_str_equal (sender, priv->busname) == FALSE) {
-		GError *error = NULL;
+		GError *error;
 		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
 				     "Permission Denied");
 		g_dbus_method_invocation_take_error(invocation, error);
@@ -517,7 +514,7 @@ static const GDBusInterfaceVTable interface_vtable =
 gboolean bluetooth_agent_register(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
@@ -532,8 +529,6 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 						      &error);
 	if (priv->reg_id == 0) {
 		g_warning ("Failed to register object: %s", error->message);
-		g_error_free (error);
-		error = NULL;
 		return FALSE;
 	}
 
@@ -563,7 +558,7 @@ error_matches_remote_error (GError     *error,
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 {
 	BluetoothAgentPrivate *priv;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
@@ -582,7 +577,6 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 				    error->message,
 				    g_quark_to_string (error->domain));
 		}
-		g_error_free(error);
 	}
 
 	g_object_unref(priv->agent_manager);
