@@ -85,13 +85,11 @@ notification_launch_action_on_file_cb (NotifyNotification *notification,
 	if (g_str_equal (action, "display") != FALSE) {
 		GdkDisplay *display;
 		GAppLaunchContext *ctx;
-		GTimeVal val;
-
-		g_get_current_time (&val);
 
 		display = gdk_display_get_default ();
 		ctx = G_APP_LAUNCH_CONTEXT (gdk_display_get_app_launch_context (display));
-		gdk_app_launch_context_set_timestamp (GDK_APP_LAUNCH_CONTEXT (ctx), val.tv_sec);
+		gdk_app_launch_context_set_timestamp (GDK_APP_LAUNCH_CONTEXT (ctx),
+						      g_get_monotonic_time () / G_USEC_PER_SEC);
 
 		if (g_app_info_launch_default_for_uri (file_uri, ctx, NULL) == FALSE) {
 			g_warning ("Failed to launch the file viewer\n");
