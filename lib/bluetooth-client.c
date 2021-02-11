@@ -132,22 +132,20 @@ static gboolean iter_search(GtkTreeStore *store,
 	return found;
 }
 
-static gboolean compare_path(GtkTreeStore *store,
-					GtkTreeIter *iter, gpointer user_data)
+static gboolean
+compare_path (GtkTreeStore *store,
+	      GtkTreeIter *iter,
+	      gpointer user_data)
 {
 	const gchar *path = user_data;
-	GDBusProxy *object;
-	gboolean found = FALSE;
+	g_autoptr(GDBusProxy) object = NULL;
 
-	gtk_tree_model_get(GTK_TREE_MODEL(store), iter,
-					BLUETOOTH_COLUMN_PROXY, &object, -1);
+	gtk_tree_model_get (GTK_TREE_MODEL(store), iter,
+			    BLUETOOTH_COLUMN_PROXY, &object,
+			    -1);
 
-	if (object != NULL) {
-		found = g_str_equal(path, g_dbus_proxy_get_object_path(object));
-		g_object_unref(object);
-	}
-
-	return found;
+	return (object != NULL &&
+		g_str_equal (path, g_dbus_proxy_get_object_path (object)));
 }
 
 static gboolean
@@ -156,15 +154,11 @@ compare_address (GtkTreeStore *store,
 		 gpointer user_data)
 {
 	const char *address = user_data;
-	char *tmp_address;
-	gboolean found = FALSE;
+	g_autofree char *tmp_address = NULL;
 
 	gtk_tree_model_get (GTK_TREE_MODEL(store), iter,
 			    BLUETOOTH_COLUMN_ADDRESS, &tmp_address, -1);
-	found = g_str_equal (address, tmp_address);
-	g_free (tmp_address);
-
-	return found;
+	return (g_strcmp0 (address, tmp_address) == 0);
 }
 
 static gboolean
