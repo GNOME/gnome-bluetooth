@@ -1514,52 +1514,48 @@ bluetooth_client_get_device (BluetoothClient *client,
 }
 
 static void
-connect_callback (GDBusProxy         *proxy,
-		  GAsyncResult       *res,
-		  GSimpleAsyncResult *simple)
+connect_callback (GDBusProxy   *proxy,
+		  GAsyncResult *res,
+		  GTask        *task)
 {
 	gboolean retval;
 	GError *error = NULL;
 
-	retval = device1_call_connect_finish (DEVICE1(proxy), res, &error);
+	retval = device1_call_connect_finish (DEVICE1 (proxy), res, &error);
 	if (retval == FALSE) {
 		g_debug ("Connect failed for %s: %s",
 			 g_dbus_proxy_get_object_path (proxy), error->message);
-		g_simple_async_result_take_error (simple, error);
+		g_task_return_error (task, error);
 	} else {
 		g_debug ("Connect succeeded for %s",
 			 g_dbus_proxy_get_object_path (proxy));
-		g_simple_async_result_set_op_res_gboolean (simple, retval);
+		g_task_return_boolean (task, retval);
 	}
 
-	g_simple_async_result_complete_in_idle (simple);
-
-	g_object_unref (simple);
+	g_object_unref (task);
 }
 
 static void
 disconnect_callback (GDBusProxy   *proxy,
 		     GAsyncResult *res,
-		     GSimpleAsyncResult *simple)
+		     GTask        *task)
 {
 	gboolean retval;
 	GError *error = NULL;
 
-	retval = device1_call_disconnect_finish (DEVICE1(proxy), res, &error);
+	retval = device1_call_disconnect_finish (DEVICE1 (proxy), res, &error);
 	if (retval == FALSE) {
 		g_debug ("Disconnect failed for %s: %s",
 			 g_dbus_proxy_get_object_path (proxy),
 			 error->message);
-		g_simple_async_result_take_error (simple, error);
+		g_task_return_error (task, error);
 	} else {
 		g_debug ("Disconnect succeeded for %s",
 			 g_dbus_proxy_get_object_path (proxy));
-		g_simple_async_result_set_op_res_gboolean (simple, retval);
+		g_task_return_boolean (task, retval);
 	}
 
-	g_simple_async_result_complete_in_idle (simple);
-
-	g_object_unref (simple);
+	g_object_unref (task);
 }
 
 /**
@@ -1585,35 +1581,40 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
 	GtkTreeIter iter;
-	GSimpleAsyncResult *simple;
+	GTask *task;
 	g_autoptr(GDBusProxy) device = NULL;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 	g_return_if_fail (path != NULL);
 
-	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
+	task = g_task_new (G_OBJECT (client),
+			   cancellable,
+			   callback,
+			   user_data);
+	g_task_set_source_tag (task, bluetooth_client_connect_service);
+
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE) {
+		g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
+					 "Device with object path %s does not exist",
+					 path);
+		g_object_unref (task);
 		return;
+	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
 			    BLUETOOTH_COLUMN_PROXY, &device,
 			    -1);
 
-	simple = g_simple_async_result_new (G_OBJECT (client),
-					    callback,
-					    user_data,
-					    bluetooth_client_connect_service);
-	g_simple_async_result_set_check_cancellable (simple, cancellable);
-
 	if (connect) {
 		device1_call_connect (DEVICE1(device),
 				      cancellable,
 				      (GAsyncReadyCallback) connect_callback,
-				      simple);
+				      task);
 	} else {
 		device1_call_disconnect (DEVICE1(device),
 					 cancellable,
 					 (GAsyncReadyCallback) disconnect_callback,
-					 simple);
+					 task);
 	}
 }
 
@@ -1632,16 +1633,13 @@ bluetooth_client_connect_service_finish (BluetoothClient *client,
 					 GAsyncResult    *res,
 					 GError         **error)
 {
-	GSimpleAsyncResult *simple;
+	GTask *task;
 
-	simple = (GSimpleAsyncResult *) res;
+	task = G_TASK (res);
 
-	g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == bluetooth_client_connect_service);
+	g_warn_if_fail (g_task_get_source_tag (task) == bluetooth_client_connect_service);
 
-	if (g_simple_async_result_get_op_res_gboolean (simple))
-		return TRUE;
-	g_simple_async_result_propagate_error (simple, error);
-	return FALSE;
+	return g_task_propagate_boolean (task, error);
 }
 
 #define BOOL_STR(x) (x ? "True" : "False")
