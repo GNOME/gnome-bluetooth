@@ -205,7 +205,6 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 	guint i;
 
 	GtkWidget *label;
-	GtkWidget *alignment;
 	GtkWidget *table;
 	GtkCellRenderer *renderer;
 
@@ -220,15 +219,14 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 	bluetooth_filter_widget_set_title (filter, _("Show:"));
 	gtk_widget_show (filter->title);
 	gtk_box_pack_start (GTK_BOX (filter), filter->title, TRUE, TRUE, 0);
-	gtk_misc_set_alignment (GTK_MISC (filter->title), 0, 0.5);
-
-	alignment = gtk_alignment_new (0.5, 0.5, 1, 1);
-	gtk_widget_show (alignment);
-	gtk_box_pack_start (GTK_BOX (filter), alignment, TRUE, TRUE, 0);
+	g_object_set (G_OBJECT (filter->title),
+		      "xalign", 0.0,
+		      "yalign", 0.5,
+		      NULL);
 
 	table = gtk_grid_new ();
 	gtk_widget_show (table);
-	gtk_container_add (GTK_CONTAINER (alignment), table);
+	gtk_box_pack_start (GTK_BOX (filter), table, TRUE, TRUE, 0);
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 12);
 
@@ -237,7 +235,10 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 	gtk_widget_set_no_show_all (label, TRUE);
 	gtk_widget_show (label);
 	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	g_object_set (G_OBJECT (label),
+		      "xalign", 0.0,
+		      "yalign", 0.5,
+		      NULL);
 	filter->device_category_label = label;
 
 	filter->device_category = gtk_combo_box_text_new ();
@@ -262,7 +263,10 @@ bluetooth_filter_widget_init(BluetoothFilterWidget *filter)
 	gtk_widget_set_no_show_all (label, TRUE);
 	gtk_widget_show (label);
 	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	g_object_set (G_OBJECT (label),
+		      "xalign", 0.0,
+		      "yalign", 0.5,
+		      NULL);
 	filter->device_type_label = label;
 
 	filter->device_type_filter_model = GTK_TREE_MODEL (gtk_list_store_new (DEVICE_TYPE_FILTER_NUM_COLS,

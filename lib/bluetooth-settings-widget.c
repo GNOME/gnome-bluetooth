@@ -1546,7 +1546,10 @@ add_device_section (BluetoothSettingsWidget *self)
 	priv->device_label = gtk_label_new (s);
 	g_free (s);
 	gtk_label_set_use_markup (GTK_LABEL (priv->device_label), TRUE);
-	gtk_misc_set_alignment (GTK_MISC (priv->device_label), 0, 0.5);
+	g_object_set (G_OBJECT (priv->device_label),
+		      "xalign", 0.0,
+		      "yalign", 0.5,
+		      NULL);
 	gtk_widget_set_margin_end (priv->device_label, 6);
 	gtk_widget_set_margin_bottom (priv->device_label, 12);
 	gtk_box_pack_start (GTK_BOX (hbox), priv->device_label, FALSE, TRUE, 0);
