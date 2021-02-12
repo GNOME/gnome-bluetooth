@@ -15,6 +15,8 @@ variables:
     glibc-devel
     git
   GIT_SUBMODULE_STRATEGY: recursive
+  TEST_DEPS:
+    python3-dbus
   DEPENDENCIES_ABI_CHECK:
     libabigail
   LAST_ABI_BREAK: "7cc6250695ca7c7f326f0dd1dcbabc0061123b6b"
@@ -34,6 +36,7 @@ build_stable:
     - python3 setup.py build
     - python3 setup.py install
     - cd ..
+    - dnf install -y $TEST_DEPS
     - ninja -C _build test
     - ninja -C _build dist
     - dnf install -y $DEPENDENCIES_ABI_CHECK

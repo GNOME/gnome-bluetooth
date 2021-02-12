@@ -1,0 +1,165 @@
+#!/usr/bin/python3
+
+# gnome-bluetooth integration test suite
+#
+# Copyright: (C) 2021 Bastien Nocera <hadess@hadess.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+import os
+import sys
+import dbus
+import inspect
+import tempfile
+import subprocess
+import unittest
+import time
+
+try:
+    import gi
+    from gi.repository import GLib
+    from gi.repository import Gio
+
+    gi.require_version('Gtk', '3.0')
+    from gi.repository import Gtk
+except ImportError as e:
+    sys.stderr.write('Skipping tests, PyGobject not available for Python 3, or missing GI typelibs: %s\n' % str(e))
+    sys.exit(0)
+
+try:
+    gi.require_version('GIRepository', '2.0')
+    from gi.repository import GIRepository
+    builddir = os.getenv('top_builddir', '.')
+    GIRepository.Repository.prepend_library_path(builddir + '/lib/')
+    GIRepository.Repository.prepend_search_path(builddir + '/lib/')
+
+    gi.require_version('GnomeBluetoothPriv', '1.0')
+    from gi.repository import GnomeBluetoothPriv
+except ImportError as e:
+    sys.stderr.write('Could not find GnomeBluetoothPriv gobject-introspection data in the build dir: %s\n' % str(e))
+    sys.exit(1)
+
+try:
+    import dbusmock
+except ImportError:
+    sys.stderr.write('Skipping tests, python-dbusmock not available (http://pypi.python.org/pypi/python-dbusmock).\n')
+    sys.exit(0)
+
+# Out-of-process tests
+class OopTests(dbusmock.DBusTestCase):
+    @classmethod
+    def setUp(self):
+        self.client = GnomeBluetoothPriv.Client.new()
+        # used in test_pairing
+        self.paired = False
+
+    def print_tree(self, model):
+        def print_row(model, treepath, treeiter):
+            print("\t" * (treepath.get_depth() - 1), model[treeiter][:], sep="")
+        model.foreach(print_row)
+
+    def wait_for_mainloop(self):
+        ml = GLib.MainLoop()
+        GLib.timeout_add_seconds(1, ml.quit)
+        ml.run()
+
+    def test_no_adapters(self):
+        adapters = self.client.get_adapter_model()
+        self.wait_for_mainloop()
+        self.assertEqual(len(adapters), 0)
+
+    def test_one_adapter(self):
+        adapters = self.client.get_adapter_model()
+        self.wait_for_mainloop()
+        self.assertEqual(len(adapters), 1)
+
+    def _pair_cb(self, client, result, user_data=None):
+        success, path = client.setup_device_finish(result)
+        self.assertEqual(success, True)
+        address = '11:22:33:44:55:66'
+        self.assertEqual(path, '/org/bluez/hci0/dev_' + address.replace(':', '_'))
+        self.paired = True
+
+    def test_pairing(self):
+        adapters = self.client.get_adapter_model()
+        self.wait_for_mainloop()
+        self.assertEqual(len(adapters), 1)
+
+        devices = self.client.get_device_model()
+        self.assertEqual(len(devices), 1)
+
+        # Get first device
+        path = Gtk.TreePath([0])
+        treeiter = devices.get_iter(path)
+        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '11:22:33:44:55:66')
+        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), False)
+
+        proxy = devices.get_value(treeiter, GnomeBluetoothPriv.Column.PROXY)
+        self.client.setup_device (proxy.get_object_path(),
+                True,
+                None,
+                self._pair_cb)
+        self.wait_for_mainloop()
+        self.assertEqual(self.paired, True)
+
+        treeiter = devices.get_iter(path)
+        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), True)
+        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.ICON), 'phone')
+
+class Tests(dbusmock.DBusTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        os.environ['G_MESSAGES_DEBUG'] = 'all'
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
+        (cls.p_mock, cls.obj_bluez) = cls.spawn_server_template(
+            'bluez5', {}, stdout=subprocess.PIPE)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.p_mock.stdout.close()
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+
+    def setUp(self):
+        self.obj_bluez.Reset()
+        self.dbusmock = dbus.Interface(self.obj_bluez, dbusmock.MOCK_IFACE)
+        self.dbusmock_bluez = dbus.Interface(self.obj_bluez, 'org.bluez.Mock')
+
+    def run_test_process(self):
+        # Get the calling function's name
+        test_name = inspect.stack()[1][3]
+        # And run the test with the same name in the OopTests class in a separate process
+        out = subprocess.run([sys.argv[0], 'OopTests.' + test_name], capture_output=True)
+        self.assertEqual(out.returncode, 0, "Running test " + test_name + " failed:" + out.stderr.decode('UTF-8'))
+
+    def test_no_adapters(self):
+        self.run_test_process()
+
+    def test_one_adapter(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        self.run_test_process()
+
+    def test_pairing(self):
+        adapter_name = 'hci0'
+        self.dbusmock_bluez.AddAdapter(adapter_name, 'my-computer')
+
+        address = '11:22:33:44:55:66'
+        alias = 'My Phone'
+
+        path = self.dbusmock_bluez.AddDevice(adapter_name, address, alias)
+        self.assertEqual(path, '/org/bluez/' + adapter_name + '/dev_' + address.replace(':', '_'))
+
+        self.run_test_process()
+
+if __name__ == '__main__':
+    unittest.main()

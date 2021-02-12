@@ -114,6 +114,7 @@ if enable_gtk_doc
 endif
 
 subdir('po')
+subdir('tests')
 
 configure_file(
   output: 'config.h',
