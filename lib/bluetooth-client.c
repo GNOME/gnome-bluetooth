@@ -1376,6 +1376,13 @@ device_pair_callback (GDBusProxy         *proxy,
 	g_object_unref (simple);
 }
 
+/**
+ * bluetooth_client_setup_device_finish:
+ * @client:
+ * @res:
+ * @path: (out):
+ * @error:
+ */
 gboolean
 bluetooth_client_setup_device_finish (BluetoothClient  *client,
 				      GAsyncResult     *res,
