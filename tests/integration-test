@@ -71,6 +71,11 @@ class OopTests(dbusmock.DBusTestCase):
         GLib.timeout_add_seconds(1, ml.quit)
         ml.run()
 
+    def wait_for_condition(self, condition):
+        ctx = GLib.main_context_default()
+        while not condition():
+          ctx.iteration(True)
+
     def test_no_adapters(self):
         adapters = self.client.get_adapter_model()
         self.wait_for_mainloop()
