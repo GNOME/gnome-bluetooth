@@ -138,6 +138,7 @@ class Tests(dbusmock.DBusTestCase):
     @classmethod
     def setUpClass(cls):
         os.environ['G_MESSAGES_DEBUG'] = 'all'
+        os.environ['G_DEBUG'] = 'fatal_warnings'
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
         (cls.p_mock, cls.obj_bluez) = cls.spawn_server_template(
