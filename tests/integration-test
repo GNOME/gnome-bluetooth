@@ -83,7 +83,14 @@ class OopTests(dbusmock.DBusTestCase):
 
     def test_one_adapter(self):
         adapters = self.client.get_adapter_model()
-        self.wait_for_mainloop()
+        self._row_inserted = False
+
+        def adapters_row_inserted_cb(model, path, _iter):
+            self._row_inserted = True
+        adapters.connect('row-inserted', adapters_row_inserted_cb)
+
+        self.wait_for_condition(lambda: self._row_inserted == True)
+
         self.assertEqual(len(adapters), 1)
 
     def _pair_cb(self, client, result, user_data=None):
@@ -95,7 +102,14 @@ class OopTests(dbusmock.DBusTestCase):
 
     def test_pairing(self):
         adapters = self.client.get_adapter_model()
-        self.wait_for_mainloop()
+        self._row_inserted = False
+
+        def adapters_row_inserted_cb(model, path, _iter):
+            self._row_inserted = True
+        adapters.connect('row-inserted', adapters_row_inserted_cb)
+
+        self.wait_for_condition(lambda: self._row_inserted == True)
+
         self.assertEqual(len(adapters), 1)
 
         devices = self.client.get_device_model()
@@ -112,7 +126,7 @@ class OopTests(dbusmock.DBusTestCase):
                 True,
                 None,
                 self._pair_cb)
-        self.wait_for_mainloop()
+        self.wait_for_condition(lambda: self.paired == True)
         self.assertEqual(self.paired, True)
 
         treeiter = devices.get_iter(path)
