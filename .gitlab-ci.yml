@@ -27,6 +27,13 @@ build_stable:
     - meson . _build --prefix=/usr
     - ninja -C _build
     - ninja -C _build install
+    # Install newer python-dbusmock
+    - git clone https://github.com/hadess/python-dbusmock.git
+    - cd python-dbusmock
+    - git checkout -b wip/hadess/bluez-pair origin/wip/hadess/bluez-pair
+    - python3 setup.py build
+    - python3 setup.py install
+    - cd ..
     - ninja -C _build test
     - ninja -C _build dist
     - dnf install -y $DEPENDENCIES_ABI_CHECK
