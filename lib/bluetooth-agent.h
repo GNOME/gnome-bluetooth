@@ -31,8 +31,6 @@ G_DECLARE_FINAL_TYPE(BluetoothAgent, bluetooth_agent, BLUETOOTH, AGENT, GObject)
 
 BluetoothAgent *bluetooth_agent_new(const char *path);
 
-gboolean bluetooth_agent_setup(BluetoothAgent *agent, const char *path);
-
 gboolean bluetooth_agent_register(BluetoothAgent *agent);
 gboolean bluetooth_agent_unregister(BluetoothAgent *agent);
 
