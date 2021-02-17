@@ -427,7 +427,7 @@ handle_method_call (GDBusConnection       *connection,
 
 	if (g_str_equal (sender, agent->busname) == FALSE) {
 		GError *error;
-		error = g_error_new (AGENT_ERROR, AGENT_ERROR_REJECT,
+		error = g_error_new (BLUETOOTH_AGENT_ERROR, BLUETOOTH_AGENT_ERROR_REJECT,
 				     "Permission Denied");
 		g_dbus_method_invocation_take_error(invocation, error);
 		return;
@@ -648,11 +648,11 @@ GType bluetooth_agent_error_get_type(void)
 	static GType etype = 0;
 	if (etype == 0) {
 		static const GEnumValue values[] = {
-			ENUM_ENTRY(AGENT_ERROR_REJECT, "Rejected"),
+			ENUM_ENTRY(BLUETOOTH_AGENT_ERROR_REJECT, "Rejected"),
 			{ 0, 0, 0 }
 		};
 
-		etype = g_enum_register_static("agent", values);
+		etype = g_enum_register_static("BluetoothAgentError", values);
 	}
 
 	return etype;
