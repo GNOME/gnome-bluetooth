@@ -492,6 +492,8 @@ gboolean bluetooth_agent_register(BluetoothAgent *agent)
 	g_autoptr(GError) error = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
+	g_return_val_if_fail (agent->path != NULL, FALSE);
+	g_return_val_if_fail (g_variant_is_object_path(agent->path), FALSE);
 
 	agent->reg_id = g_dbus_connection_register_object (agent->conn,
 							   agent->path,
