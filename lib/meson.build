@@ -139,7 +139,10 @@ if enable_gir
 
   gnomebt_priv_gir = gnome.generate_gir(
     libgnome_bluetooth,
-    sources: gir_sources + ['bluetooth-client-private.h'],
+    sources: gir_sources + [
+      'bluetooth-client-private.h',
+      'bluetooth-agent.h',
+      ],
     nsversion: gnomebt_api_version,
     namespace: 'GnomeBluetoothPriv',
     symbol_prefix: 'bluetooth',
