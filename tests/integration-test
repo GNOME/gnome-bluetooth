@@ -133,6 +133,14 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), True)
         self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.ICON), 'phone')
 
+    def test_agent(self):
+        agent = GnomeBluetoothPriv.Agent.new ('/org/gnome/bluetooth/integration_test')
+        self.assertIsNotNone(agent)
+        # Process D-Bus daemon appearing and agent being registered
+        self.wait_for_mainloop()
+        self.assertTrue(agent.register())
+        self.assertTrue(agent.unregister())
+
 class Tests(dbusmock.DBusTestCase):
 
     @classmethod
@@ -185,6 +193,9 @@ class Tests(dbusmock.DBusTestCase):
         path = self.dbusmock_bluez.AddDevice(adapter_name, address, alias)
         self.assertEqual(path, '/org/bluez/' + adapter_name + '/dev_' + address.replace(':', '_'))
 
+        self.run_test_process()
+
+    def test_agent(self):
         self.run_test_process()
 
 if __name__ == '__main__':
