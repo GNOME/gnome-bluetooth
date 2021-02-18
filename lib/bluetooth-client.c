@@ -967,77 +967,25 @@ _bluetooth_client_get_default_adapter_name (BluetoothClient *self)
 	return ret;
 }
 
-/**
- * _bluetooth_client_set_discoverable:
- * @client: a #BluetoothClient object
- * @discoverable: whether the device should be discoverable
- *
- * Sets the default adapter's discoverable status.
- *
- * Return value: Whether setting the state on the default adapter was successful.
- **/
-static gboolean
-_bluetooth_client_set_discoverable (BluetoothClient *client,
-				    gboolean discoverable)
-{
-	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
-	GtkTreePath *path;
-	GObject *adapter;
-	GtkTreeIter iter;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
-
-	if (priv->default_adapter == NULL)
-		return FALSE;
-
-	path = gtk_tree_row_reference_get_path (priv->default_adapter);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->store), &iter, path);
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
-                            BLUETOOTH_COLUMN_PROXY, &adapter, -1);
-        gtk_tree_path_free (path);
-
-	if (adapter == NULL)
-		return FALSE;
-
-	if (discoverable) {
-		g_object_set (adapter,
-			      "discoverable", discoverable,
-			      "discoverable-timeout", 0,
-			      NULL);
-	} else {
-		/* Work-around race in bluetoothd which would reset the discoverable
-		 * flag if a timeout change was requested before discoverable finished
-		 * being set to off:
-		 * https://bugzilla.redhat.com/show_bug.cgi?id=1602985 */
-		g_object_set (adapter,
-			      "discoverable", FALSE,
-			      NULL);
-	}
-	g_object_unref (adapter);
-
-	return TRUE;
-}
-
 static void
 _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 						   gboolean         discovering,
 						   gboolean         discoverable)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE (client);
-	GDBusProxy *adapter;
+	g_autoptr(GDBusProxy) adapter = NULL;
 	GVariantBuilder builder;
 
 	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL)
 		return;
 
-	g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
-	g_variant_builder_add (&builder, "{sv}",
-			       "Discoverable", g_variant_new_boolean (discoverable));
-	if (!adapter1_call_set_discovery_filter_sync (ADAPTER1 (adapter),
-						      g_variant_builder_end (&builder), NULL, NULL)) {
-		/* BlueZ too old? */
-		_bluetooth_client_set_discoverable (client, discoverable);
+	if (discovering) {
+		g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
+		g_variant_builder_add (&builder, "{sv}",
+				       "Discoverable", g_variant_new_boolean (discoverable));
+		adapter1_call_set_discovery_filter_sync (ADAPTER1 (adapter),
+							 g_variant_builder_end (&builder), NULL, NULL);
 	}
 
 	priv->discovery_started = discovering;
@@ -1045,8 +993,6 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 		adapter1_call_start_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
 	else
 		adapter1_call_stop_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
-
-	g_object_unref(adapter);
 }
 
 static gboolean
