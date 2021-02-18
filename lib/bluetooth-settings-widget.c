@@ -512,6 +512,47 @@ pincode_callback (GDBusMethodInvocation *invocation,
 }
 
 static void
+cancel_setup_cb (GObject      *source_object,
+		 GAsyncResult *res,
+		 gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	g_autofree char *path = NULL;
+	gboolean ret;
+
+	ret = bluetooth_client_cancel_setup_device_finish (BLUETOOTH_CLIENT (source_object),
+							   res, &path, &error);
+	if (!ret)
+		g_debug ("Setup cancellation for '%s' failed: %s", path, error->message);
+	else
+		g_debug ("Setup cancellation for '%s' success", path);
+}
+
+static void
+display_passkey_or_pincode_cb (GtkDialog *dialog,
+			       int        response,
+			       gpointer   user_data)
+{
+	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
+
+	if (response == GTK_RESPONSE_CANCEL ||
+	    response == GTK_RESPONSE_DELETE_EVENT) {
+		g_autofree char *path = NULL;
+
+		path = g_object_steal_data (G_OBJECT (dialog), "path");
+		bluetooth_client_cancel_setup_device (priv->client,
+						      path,
+						      priv->cancellable,
+						      cancel_setup_cb,
+						      user_data);
+	} else {
+		g_assert_not_reached ();
+	}
+
+	g_clear_pointer (&priv->pairing_dialog, gtk_widget_destroy);
+}
+
+static void
 display_callback (GDBusMethodInvocation *invocation,
 		  GDBusProxy            *device,
 		  guint                  pin,
@@ -537,6 +578,11 @@ display_callback (GDBusMethodInvocation *invocation,
 					   name);
 	bluetooth_pairing_dialog_set_pin_entered (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog),
 						  entered);
+	g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
+			  G_CALLBACK (display_passkey_or_pincode_cb), user_data);
+	g_object_set_data_full (G_OBJECT (priv->pairing_dialog),
+				"path", g_strdup (g_dbus_proxy_get_object_path (device)),
+				g_free);
 
 	gtk_widget_show (priv->pairing_dialog);
 }
@@ -598,6 +644,11 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 					   BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD,
 					   display_pin,
 					   name);
+	g_signal_connect (G_OBJECT (priv->pairing_dialog), "response",
+			  G_CALLBACK (display_passkey_or_pincode_cb), user_data);
+	g_object_set_data_full (G_OBJECT (priv->pairing_dialog),
+				"path", g_strdup (g_dbus_proxy_get_object_path (device)),
+				g_free);
 	gtk_widget_show (priv->pairing_dialog);
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
