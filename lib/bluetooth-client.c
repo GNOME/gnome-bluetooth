@@ -462,30 +462,49 @@ device_removed (const char      *path,
 	}
 }
 
-static gboolean
+static void
+adapter_set_powered_cb (GDBusProxy *proxy,
+			GAsyncResult *res,
+			gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	g_autoptr(GVariant) ret = NULL;
+
+	ret = g_dbus_proxy_call_finish (proxy, res, &error);
+	if (!ret) {
+		g_debug ("Error setting property 'Powered' on interface org.bluez.Adapter1: %s (%s, %d)",
+			 error->message, g_quark_to_string (error->domain), error->code);
+	}
+}
+
+static void
 adapter_set_powered (BluetoothClient *client,
 		     const char *path,
 		     gboolean powered)
 {
 	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
-	GObject *adapter;
+	g_autoptr(GObject) adapter = NULL;
 	GtkTreeIter iter;
+	GVariant *variant;
 
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
+	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 
 	if (get_iter_from_path (priv->store, &iter, path) == FALSE)
-		return FALSE;
+		return;
 
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
 			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
 
 	if (adapter == NULL)
-		return FALSE;
+		return;
 
-	g_object_set (adapter, "powered", powered, NULL);
-	g_object_unref (adapter);
-
-	return TRUE;
+	variant = g_variant_new_boolean (powered);
+	g_dbus_proxy_call (G_DBUS_PROXY (adapter),
+			   "org.freedesktop.DBus.Properties.Set",
+			   g_variant_new ("(ssv)", "org.bluez.Adapter1", "Powered", variant),
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   NULL, (GAsyncReadyCallback) adapter_set_powered_cb, client);
 }
 
 static void
