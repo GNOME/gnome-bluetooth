@@ -880,7 +880,7 @@ connect_timeout_cb (gpointer user_data)
 	SetupConnectData *data = (SetupConnectData *) user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (data->self);
 
-	bluetooth_client_connect_service (priv->client, data->device, TRUE, NULL, connect_callback, data);
+	bluetooth_client_connect_service (priv->client, data->device, TRUE, priv->cancellable, connect_callback, data);
 	data->timeout_id = 0;
 
 	return G_SOURCE_REMOVE;
