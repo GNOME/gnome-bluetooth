@@ -200,7 +200,7 @@ static gboolean bluetooth_agent_display_pincode(BluetoothAgent *agent,
 		return FALSE;
 
 	agent->display_pincode_func(invocation, device, pincode,
-				    agent->display_data);
+				    agent->display_pincode_data);
 
 	return TRUE;
 }
