@@ -85,8 +85,8 @@ struct _BluetoothAgent {
 	BluetoothAgentPasskeyFunc pincode_func;
 	gpointer pincode_data;
 
-	BluetoothAgentDisplayFunc display_func;
-	gpointer display_data;
+	BluetoothAgentDisplayPasskeyFunc display_passkey_func;
+	gpointer display_passkey_data;
 
 	BluetoothAgentDisplayPinCodeFunc display_pincode_func;
 	gpointer display_pincode_data;
@@ -173,15 +173,15 @@ static gboolean bluetooth_agent_display_passkey(BluetoothAgent *agent,
 {
 	g_autoptr(GDBusProxy) device = NULL;
 
-	if (agent->display_func == NULL)
+	if (agent->display_passkey_func == NULL)
 		return FALSE;
 
 	device = get_device_from_path (agent, path);
 	if (device == NULL)
 		return FALSE;
 
-	agent->display_func(invocation, device, passkey, entered,
-			    agent->display_data);
+	agent->display_passkey_func(invocation, device, passkey, entered,
+			            agent->display_passkey_data);
 
 	return TRUE;
 }
@@ -567,13 +567,13 @@ void bluetooth_agent_set_passkey_func(BluetoothAgent *agent,
 	agent->passkey_data = data;
 }
 
-void bluetooth_agent_set_display_func(BluetoothAgent *agent,
-				BluetoothAgentDisplayFunc func, gpointer data)
+void bluetooth_agent_set_display_passkey_func(BluetoothAgent *agent,
+				BluetoothAgentDisplayPasskeyFunc func, gpointer data)
 {
 	g_return_if_fail (BLUETOOTH_IS_AGENT (agent));
 
-	agent->display_func = func;
-	agent->display_data = data;
+	agent->display_passkey_func = func;
+	agent->display_passkey_data = data;
 }
 
 void bluetooth_agent_set_display_pincode_func(BluetoothAgent *agent,

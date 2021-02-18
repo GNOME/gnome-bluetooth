@@ -553,18 +553,18 @@ display_passkey_or_pincode_cb (GtkDialog *dialog,
 }
 
 static void
-display_callback (GDBusMethodInvocation *invocation,
-		  GDBusProxy            *device,
-		  guint                  pin,
-		  guint                  entered,
-		  gpointer               user_data)
+display_passkey_callback (GDBusMethodInvocation *invocation,
+		          GDBusProxy            *device,
+			  guint                  pin,
+			  guint                  entered,
+			  gpointer               user_data)
 {
 	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	g_autofree char *pin_str = NULL;
 	g_autofree char *name = NULL;
 
-	g_debug ("display_callback (%s, %i, %i)", g_dbus_proxy_get_object_path (device), pin, entered);
+	g_debug ("display_passkey_callback (%s, %i, %i)", g_dbus_proxy_get_object_path (device), pin, entered);
 
 	if (priv->pairing_dialog == NULL ||
 	    bluetooth_pairing_dialog_get_mode (BLUETOOTH_PAIRING_DIALOG (priv->pairing_dialog)) != BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD)
@@ -1844,7 +1844,7 @@ setup_pairing_agent (BluetoothSettingsWidget *self)
 
 	bluetooth_agent_set_pincode_func (priv->agent, pincode_callback, self);
 	bluetooth_agent_set_passkey_func (priv->agent, passkey_callback, self);
-	bluetooth_agent_set_display_func (priv->agent, display_callback, self);
+	bluetooth_agent_set_display_passkey_func (priv->agent, display_passkey_callback, self);
 	bluetooth_agent_set_display_pincode_func (priv->agent, display_pincode_callback, self);
 	bluetooth_agent_set_cancel_func (priv->agent, cancel_callback, self);
 	bluetooth_agent_set_confirm_func (priv->agent, confirm_callback, self);
