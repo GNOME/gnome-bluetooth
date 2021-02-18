@@ -855,7 +855,7 @@ connect_callback (GObject      *source_object,
 			data->timeout_id = g_timeout_add (500, connect_timeout_cb, data);
 			return;
 		}
-		g_debug ("Failed to connect to device %s", data->device);
+		g_debug ("Failed to connect to device %s: %s", data->device, error->message);
 	}
 
 	turn_off_pairing (data->self, data->device);
