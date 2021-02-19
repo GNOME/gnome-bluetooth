@@ -1778,11 +1778,10 @@ device_removed_cb (BluetoothClient *client,
 
 		path = g_object_get_data (G_OBJECT (l->data), "object-path");
 		if (g_str_equal (path, object_path)) {
-			char *name;
+			g_autofree char *name = NULL;
 
 			g_object_get (G_OBJECT (l->data), "name", &name, NULL);
-			g_debug ("Removing device '%s'", name);
-			g_free (name);
+			g_debug ("Removing device '%s'", name ? name : object_path);
 
 			gtk_widget_destroy (GTK_WIDGET (l->data));
 			found = TRUE;
