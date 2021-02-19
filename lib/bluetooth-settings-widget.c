@@ -1412,20 +1412,19 @@ device_sort_func (gconstpointer a, gconstpointer b, gpointer data)
 	gboolean paired_a, paired_b;
 	gboolean trusted_a, trusted_b;
 	gboolean connected_a, connected_b;
-	g_autofree char *alias_a = NULL;
-	g_autofree char *alias_b = NULL;
+	gint64 time_a, time_b;
 
 	g_object_get (row_a,
 		      "paired", &paired_a,
 		      "trusted", &trusted_a,
 		      "connected", &connected_a,
-		      "alias", &alias_a,
+		      "time-created", &time_a,
 		      NULL);
 	g_object_get (row_b,
 		      "paired", &paired_b,
 		      "trusted", &trusted_b,
 		      "connected", &connected_b,
-		      "alias", &alias_b,
+		      "time-created", &time_b,
 		      NULL);
 
 	/* First, paired or trusted devices (setup devices) */
@@ -1446,13 +1445,8 @@ device_sort_func (gconstpointer a, gconstpointer b, gpointer data)
 			return 1;
 	}
 
-	if (alias_a == NULL)
-		return 1;
-	if (alias_b == NULL)
-		return -1;
-
-	/* And all being equal, alphabetically */
-	return g_utf8_collate (alias_a, alias_b);
+	/* And all being equal, oldest ones first */
+	return (time_a > time_b) ? 1 : -1;
 }
 
 static void
