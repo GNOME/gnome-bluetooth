@@ -995,9 +995,9 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 
 	priv->discovery_started = discovering;
 	if (discovering)
-		adapter1_call_start_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
+		adapter1_call_start_discovery (ADAPTER1 (adapter), NULL, NULL, NULL);
 	else
-		adapter1_call_stop_discovery_sync (ADAPTER1 (adapter), NULL, NULL);
+		adapter1_call_stop_discovery (ADAPTER1 (adapter), NULL, NULL, NULL);
 }
 
 static gboolean
