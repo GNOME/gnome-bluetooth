@@ -52,6 +52,7 @@ struct _BluetoothSettingsRowPrivate {
 	char *alias;
 	char *bdaddr;
 	gboolean legacy_pairing;
+	gint64 time_created;
 
 	gboolean pairing;
 };
@@ -67,7 +68,8 @@ enum {
 	PROP_ALIAS,
 	PROP_ADDRESS,
 	PROP_PAIRING,
-	PROP_LEGACY_PAIRING
+	PROP_LEGACY_PAIRING,
+	PROP_TIME_CREATED
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE(BluetoothSettingsRow, bluetooth_settings_row, GTK_TYPE_LIST_BOX_ROW)
@@ -102,6 +104,8 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
 	g_object_bind_property (priv->spinner, "active",
 				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
+
+	priv->time_created = g_get_monotonic_time();
 }
 
 static void
@@ -157,6 +161,9 @@ bluetooth_settings_row_get_property (GObject        *object,
 		break;
 	case PROP_LEGACY_PAIRING:
 		g_value_set_boolean (value, priv->legacy_pairing);
+		break;
+	case PROP_TIME_CREATED:
+		g_value_set_int64 (value, priv->time_created);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -288,6 +295,10 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 					 g_param_spec_boolean ("legacy-pairing", NULL,
 							      "Legacy pairing",
 							      FALSE, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_TIME_CREATED,
+					 g_param_spec_int64 ("time-created", NULL,
+							    "Time Created",
+							    G_MININT64, G_MAXINT64, 0, G_PARAM_READABLE));
 
 	/* Bind class to template */
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/bluetooth/bluetooth-settings-row.ui");
