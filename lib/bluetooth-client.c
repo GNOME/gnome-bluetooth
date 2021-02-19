@@ -163,9 +163,10 @@ compare_address (GtkTreeStore *store,
 
 static gboolean
 get_iter_from_path (GtkTreeStore *store,
-		    GtkTreeIter *iter,
-		    const char *path)
+		    GtkTreeIter  *iter,
+		    const char   *path)
 {
+	g_return_val_if_fail (path != NULL, FALSE);
 	return iter_search(store, iter, NULL, compare_path, (gpointer) path);
 }
 
@@ -174,6 +175,7 @@ get_iter_from_proxy(GtkTreeStore *store,
 		    GtkTreeIter *iter,
 		    GDBusProxy *proxy)
 {
+	g_return_val_if_fail (proxy != NULL, FALSE);
 	return iter_search(store, iter, NULL, compare_path,
 			   (gpointer) g_dbus_proxy_get_object_path (proxy));
 }
@@ -185,6 +187,9 @@ get_iter_from_address (GtkTreeStore *store,
 		       GDBusProxy   *adapter)
 {
 	GtkTreeIter parent_iter;
+
+	g_return_val_if_fail (address != NULL, FALSE);
+	g_return_val_if_fail (adapter != NULL, FALSE);
 
 	if (get_iter_from_proxy (store, &parent_iter, adapter) == FALSE)
 		return FALSE;
