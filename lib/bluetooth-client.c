@@ -1430,6 +1430,95 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 	}
 }
 
+/**
+ * bluetooth_client_cancel_setup_device_finish:
+ * @client:
+ * @res:
+ * @path: (out):
+ * @error:
+ */
+gboolean
+bluetooth_client_cancel_setup_device_finish (BluetoothClient  *client,
+					     GAsyncResult     *res,
+					     char            **path,
+					     GError          **error)
+{
+	GTask *task;
+	char *object_path;
+	gboolean ret;
+
+	g_return_val_if_fail (path != NULL, FALSE);
+
+	task = G_TASK (res);
+
+	g_warn_if_fail (g_task_get_source_tag (task) == bluetooth_client_cancel_setup_device);
+
+	ret = g_task_propagate_boolean (task, error);
+	object_path = g_strdup (g_task_get_task_data (task));
+	*path = object_path;
+	g_debug ("bluetooth_client_cancel_setup_device_finish() %s (path: %s)",
+		 ret ? "success" : "failure", object_path);
+	return ret;
+}
+
+static void
+device_cancel_pairing_callback (GDBusProxy   *proxy,
+				GAsyncResult *res,
+				GTask        *task)
+{
+	GError *error = NULL;
+
+	if (device1_call_cancel_pairing_finish (DEVICE1(proxy), res, &error) == FALSE) {
+		g_debug ("CancelPairing() failed for %s: %s",
+			 g_dbus_proxy_get_object_path (proxy),
+			 error->message);
+		g_task_return_error (task, error);
+	} else {
+		g_task_return_boolean (task, TRUE);
+	}
+	g_object_unref (task);
+}
+
+void
+bluetooth_client_cancel_setup_device (BluetoothClient          *client,
+				      const char               *path,
+				      GCancellable             *cancellable,
+				      GAsyncReadyCallback       callback,
+				      gpointer                  user_data)
+{
+	BluetoothClientPrivate *priv = BLUETOOTH_CLIENT_GET_PRIVATE(client);
+	GTask *task;
+	g_autoptr(GDBusProxy) device = NULL;
+	GtkTreeIter iter;
+
+	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
+	g_return_if_fail (path != NULL);
+
+	task = g_task_new (G_OBJECT (client),
+			   cancellable,
+			   callback,
+			   user_data);
+	g_task_set_source_tag (task, bluetooth_client_cancel_setup_device);
+	g_task_set_task_data (task, g_strdup (path), (GDestroyNotify) g_free);
+
+	if (get_iter_from_path (priv->store, &iter, path) == FALSE) {
+		g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
+					 "Device with object path %s does not exist",
+					 path);
+		g_object_unref (task);
+		return;
+	}
+
+	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
+			    BLUETOOTH_COLUMN_PROXY, &device,
+			    -1);
+
+	device1_call_cancel_pairing (DEVICE1(device),
+				     cancellable,
+				     (GAsyncReadyCallback) device_cancel_pairing_callback,
+				     task);
+}
+
 gboolean
 bluetooth_client_set_trusted (BluetoothClient *client,
 			      const char      *device_path,

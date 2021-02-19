@@ -42,6 +42,16 @@ gboolean bluetooth_client_setup_device_finish (BluetoothClient  *client,
 					       char            **path,
 					       GError          **error);
 
+void bluetooth_client_cancel_setup_device (BluetoothClient     *client,
+					   const char          *path,
+					   GCancellable        *cancellable,
+					   GAsyncReadyCallback  callback,
+					   gpointer             user_data);
+gboolean bluetooth_client_cancel_setup_device_finish (BluetoothClient *client,
+						      GAsyncResult     *res,
+						      char            **path,
+						      GError          **error);
+
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
 
