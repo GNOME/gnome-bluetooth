@@ -1383,6 +1383,7 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 	gboolean paired;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
+	g_return_if_fail (path != NULL);
 
 	task = g_task_new (G_OBJECT (client),
 			   cancellable,
