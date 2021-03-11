@@ -6,11 +6,9 @@ envs.set ('top_srcdir', meson.source_root())
 
 test_deps = [ gnomebt_priv_gir, ]
 
-if enable_gir
-  test('gnome-bluetooth-integration-test',
-    integration_test,
-    args: [ 'Tests' ],
-    env: envs,
-    depends: test_deps
-    )
-endif
+test('gnome-bluetooth-integration-test',
+  integration_test,
+  args: [ 'Tests' ],
+  env: envs,
+  depends: test_deps
+)
