@@ -104,7 +104,7 @@ typedef enum {
 	BLUETOOTH_TYPE_SPEAKERS		= 1 << 20,
 } BluetoothType;
 
-#define _BLUETOOTH_TYPE_NUM_TYPES 20
+#define _BLUETOOTH_TYPE_NUM_TYPES 21
 
 /**
  * BLUETOOTH_TYPE_INPUT:
@@ -117,7 +117,7 @@ typedef enum {
  *
  * Use this value to select any Bluetooth audio device where a #BluetoothType enum is required.
  */
-#define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO)
+#define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO | BLUETOOTH_TYPE_SPEAKERS)
 
 /**
  * BluetoothColumn:
