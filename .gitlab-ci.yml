@@ -19,7 +19,8 @@ variables:
     python3-dbus
   DEPENDENCIES_ABI_CHECK:
     libabigail
-  LAST_ABI_BREAK: "7cc6250695ca7c7f326f0dd1dcbabc0061123b6b"
+    intltool
+  LAST_ABI_BREAK: "92b1faa10bb7431694b799733c5ff672d2f62a70"
 
 build_stable:
   before_script:
@@ -41,4 +42,4 @@ build_stable:
     - ninja -C _build dist
     - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
     - dnf install -y $DEPENDENCIES_ABI_CHECK
-    - check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+    - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
