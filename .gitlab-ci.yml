@@ -16,6 +16,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   TEST_DEPS:
     python3-dbus
+    python3-dbusmock
   DEPENDENCIES_ABI_CHECK:
     libabigail
     intltool
@@ -29,13 +30,6 @@ build_stable:
     - meson . _build --prefix=/usr
     - ninja -C _build
     - ninja -C _build install
-    # Install newer python-dbusmock
-    - git clone https://github.com/hadess/python-dbusmock.git
-    - cd python-dbusmock
-    - git checkout -b wip/hadess/bluez-pair origin/wip/hadess/bluez-pair
-    - python3 setup.py build
-    - python3 setup.py install
-    - cd ..
     - dnf install -y $TEST_DEPS
     - ninja -C _build test
     - ninja -C _build dist
