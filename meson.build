@@ -40,7 +40,8 @@ current = 14
 revision = 0
 age = 1
 
-libversion = '@0@.@1@.@2@'.format(current, age, revision)
+lt_soversion = current - age
+libversion = '@0@.@1@.@2@'.format(lt_soversion, age, revision)
 
 gnome = import('gnome')
 i18n = import('i18n')
