@@ -39,7 +39,6 @@ build_stable:
     - dnf install -y $TEST_DEPS
     - ninja -C _build test
     - ninja -C _build dist
+    - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
     - dnf install -y $DEPENDENCIES_ABI_CHECK
-    # See https://sourceware.org/bugzilla/show_bug.cgi?id=27269
-    - rpm -Uvh --oldpackage https://kojipkgs.fedoraproject.org//packages/libabigail/1.7/2.fc33/x86_64/libabigail-1.7-2.fc33.x86_64.rpm
-    - ./.ci/check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+    - check-abi ${LAST_ABI_BREAK} $(git rev-parse HEAD)
