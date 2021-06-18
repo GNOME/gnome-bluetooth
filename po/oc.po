@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2020-06-25 07:23+0000\n"
+"POT-Creation-Date: 2021-05-13 14:41+0000\n"
 "PO-Revision-Date: 2021-05-13 16:40+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot En Òc\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Click to select device…"
 msgstr "Clicatz per causir un periferic…"
 
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
+#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1326
 #: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
 msgid "_Cancel"
 msgstr "A_nullar"
@@ -32,7 +32,7 @@ msgstr "A_nullar"
 msgid "_OK"
 msgstr "_D'acòrdi"
 
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
+#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:79
 #: lib/bluetooth-utils.c:99
 msgid "Unknown"
 msgstr "Desconegut"
@@ -41,72 +41,72 @@ msgstr "Desconegut"
 msgid "No adapters available"
 msgstr "Pas cap d'adaptator de disponible"
 
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1561
+#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:802
+#: lib/bluetooth-settings-widget.c:1591
 msgid "Searching for devices…"
 msgstr "Recèrca de periferics…"
 
-#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
+#: lib/bluetooth-chooser.c:696 lib/bluetooth-chooser.c:982
 msgid "Device"
 msgstr "Periferic"
 
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
+#: lib/bluetooth-chooser.c:732 lib/settings.ui:182
 msgid "Type"
 msgstr "Tipe"
 
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
+#: lib/bluetooth-chooser.c:984 lib/bluetooth-settings-widget.c:1545
 msgid "Devices"
 msgstr "Periferics"
 
-#: lib/bluetooth-filter-widget.c:72
+#: lib/bluetooth-filter-widget.c:69
 msgid "All categories"
 msgstr "Totas las categorias"
 
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
+#: lib/bluetooth-filter-widget.c:71 lib/settings.ui:135
 msgid "Paired"
 msgstr "Apariat"
 
-#: lib/bluetooth-filter-widget.c:76
+#: lib/bluetooth-filter-widget.c:73
 msgid "Trusted"
 msgstr "Fisable"
 
-#: lib/bluetooth-filter-widget.c:78
+#: lib/bluetooth-filter-widget.c:75
 msgid "Not paired or trusted"
 msgstr "Pas apariat o fisable"
 
-#: lib/bluetooth-filter-widget.c:80
+#: lib/bluetooth-filter-widget.c:77
 msgid "Paired or trusted"
 msgstr "Apariat o fisable"
 
 #. This is the title of the filter section of the Bluetooth device chooser.
 #. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:231
+#: lib/bluetooth-filter-widget.c:219
 msgid "Show:"
-msgstr "Afichar :"
+msgstr "Afichar :"
 
 #. The device category filter
-#: lib/bluetooth-filter-widget.c:247
+#: lib/bluetooth-filter-widget.c:234
 msgid "Device _category:"
-msgstr "_Categoria de periferic :"
+msgstr "_Categoria de periferic :"
 
-#: lib/bluetooth-filter-widget.c:258
+#: lib/bluetooth-filter-widget.c:248
 msgid "Select the device category to filter"
 msgstr "Seleccionar la categoria de periferic a filtrar"
 
 #. The device type filter
-#: lib/bluetooth-filter-widget.c:272
+#: lib/bluetooth-filter-widget.c:262
 msgid "Device _type:"
-msgstr "_Tipe de periferic :"
+msgstr "_Tipe de periferic :"
 
-#: lib/bluetooth-filter-widget.c:289
+#: lib/bluetooth-filter-widget.c:282
 msgid "Select the device type to filter"
 msgstr "Causir lo tipe de periferic a filtrar"
 
-#: lib/bluetooth-filter-widget.c:295
+#: lib/bluetooth-filter-widget.c:288
 msgid "Input devices (mice, keyboards, etc.)"
 msgstr "Periferics de picada (mirga, clavièrs, etc.)"
 
-#: lib/bluetooth-filter-widget.c:299
+#: lib/bluetooth-filter-widget.c:292
 msgid "Headphones, headsets and other audio devices"
 msgstr "Escotadors, casques àudio e autres periferics àudio"
 
@@ -131,7 +131,7 @@ msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
 "device’s manual."
 msgstr ""
-"Confirmar lo numèro d'identificacion personala (PIN) de « %s ». Es  "
+"Confirmar lo numèro d'identificacion personala (PIN) de « %s ». Es "
 "normalament indicat dins lo manual del periferic."
 
 #: lib/bluetooth-pairing-dialog.c:97
@@ -154,7 +154,7 @@ msgstr "Demanda de ligason Bluetooth"
 #: lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
-msgstr "« %s » se vòl connectar a aqueste periferic. Autorizatz la ligason ?"
+msgstr "« %s » se vòl connectar a aqueste periferic. Autorizatz la ligason ?"
 
 #: lib/bluetooth-pairing-dialog.c:116
 msgid "Confirm Bluetooth Connection"
@@ -163,7 +163,7 @@ msgstr "Confirmar la connexion al Bluetooth"
 #: lib/bluetooth-pairing-dialog.c:117
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
-msgstr "« %s » se vòl connectar a aqueste periferic. Autorizatz la ligason ?"
+msgstr "« %s » se vòl connectar a aqueste periferic. Autorizatz la ligason ?"
 
 #: lib/bluetooth-pairing-dialog.c:125
 #, c-format
@@ -200,34 +200,34 @@ msgid "Cancel"
 msgstr "Anullar"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:247
+#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:245
 msgid "Accept"
 msgstr "Acceptar"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:83 lib/bluetooth-settings-row.ui:40
 msgid "Not Set Up"
 msgstr "Pas configurat"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:85
 msgid "Connected"
 msgstr "Connectat"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:87
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1196
 msgid "Yes"
 msgstr "Òc"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1196
 msgid "No"
 msgstr "Non"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1297
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -237,50 +237,50 @@ msgstr ""
 "Los fichièrs transferits son placats dins lo dorsièr <a href=\"%s"
 "\">Telecargaments</a>."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1321
 #, c-format
 msgid "Remove “%s” from the list of devices?"
-msgstr "Suprimir « %s » de la lista dels periferics ?"
+msgstr "Suprimir « %s » de la lista dels periferics ?"
 
-#: lib/bluetooth-settings-widget.c:1278
+#: lib/bluetooth-settings-widget.c:1323
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se suprimissètz aqueste periferic, vos lo caldrà reconfigurar tornamai abans "
 "utilizacion."
 
-#: lib/bluetooth-settings-widget.c:1282
+#: lib/bluetooth-settings-widget.c:1327
 msgid "_Remove"
 msgstr "_Suprimir"
 
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:146
+#: lib/bluetooth-settings-obexpush.c:144
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "Avètz recebut « %s » per Bluetooth"
 
-#: lib/bluetooth-settings-obexpush.c:148
+#: lib/bluetooth-settings-obexpush.c:146
 msgid "You received a file"
 msgstr "Avètz recebut un fichièr"
 
-#: lib/bluetooth-settings-obexpush.c:159
+#: lib/bluetooth-settings-obexpush.c:157
 msgid "Open File"
 msgstr "Dobrir un fichièr"
 
-#: lib/bluetooth-settings-obexpush.c:163
+#: lib/bluetooth-settings-obexpush.c:161
 msgid "Open Containing Folder"
 msgstr "Dobrir lo dorsièr parent"
 
-#: lib/bluetooth-settings-obexpush.c:180
+#: lib/bluetooth-settings-obexpush.c:178
 msgid "File reception complete"
 msgstr "Transferiment de fichièr acabat"
 
-#: lib/bluetooth-settings-obexpush.c:234
+#: lib/bluetooth-settings-obexpush.c:232
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Transferiment de fichièr per Bluetooth dempuèi %s"
 
-#: lib/bluetooth-settings-obexpush.c:244
+#: lib/bluetooth-settings-obexpush.c:242
 msgid "Decline"
 msgstr "Refusar"
 
@@ -454,11 +454,11 @@ msgstr "_Ensajar tornamai"
 
 #: sendto/main.c:470
 msgid "From:"
-msgstr "De :"
+msgstr "De :"
 
 #: sendto/main.c:484
 msgid "To:"
-msgstr "Cap a :"
+msgstr "Cap a :"
 
 #: sendto/main.c:577
 #, c-format
