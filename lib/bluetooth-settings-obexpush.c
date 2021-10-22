@@ -29,10 +29,10 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n-lib.h>
 #include <gio/gio.h>
+#include <gsound.h>
 #include <gtk/gtk.h>
 #include <bluetooth-client.h>
 #include <libnotify/notify.h>
-#include <canberra-gtk.h>
 
 #include "bluetooth-settings-obexpush.h"
 
@@ -67,6 +67,7 @@ G_DEFINE_TYPE(ObexAgent, obex_agent, G_TYPE_OBJECT)
 static ObexAgent *agent;
 static BluetoothClient *client;
 static GCancellable *cancellable;
+static GSoundContext *gsound_context;
 
 static void
 on_close_notification (NotifyNotification *notification)
@@ -130,7 +131,6 @@ show_notification (const char *filename)
 {
 	char *file_uri, *notification_text, *display, *mime_type;
 	NotifyNotification *notification;
-	ca_context *ctx;
 	GAppInfo *app;
 
 	file_uri = g_filename_to_uri (filename, NULL, NULL);
@@ -172,11 +172,12 @@ show_notification (const char *filename)
 	g_free (notification_text);
 
 	/* Now we do the audio notification */
-	ctx = ca_gtk_context_get ();
-	ca_context_play (ctx, 0,
-			 CA_PROP_EVENT_ID, "complete-download",
-			 CA_PROP_EVENT_DESCRIPTION, _("File reception complete"),
-			 NULL);
+	if (gsound_context) {
+		gsound_context_play_simple (gsound_context, cancellable, NULL,
+					    GSOUND_ATTR_EVENT_ID, "complete-download",
+					    GSOUND_ATTR_EVENT_DESCRIPTION, _("File reception complete"),
+					    NULL);
+	}
 }
 
 static void
@@ -852,4 +853,12 @@ obex_agent_up (void)
 
 	g_assert (cancellable == NULL);
 	cancellable = g_cancellable_new ();
+
+	if (gsound_context == NULL) {
+		g_autoptr(GError) error = NULL;
+
+		gsound_context = gsound_context_new (cancellable, &error);
+		if (!gsound_context)
+			g_warning ("Failed to open sound context: %s", error->message);
+	}
 }
