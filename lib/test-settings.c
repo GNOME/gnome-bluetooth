@@ -1,10 +1,12 @@
 #include "bluetooth-settings-widget.h"
+#include <adwaita.h>
 
 int main (int argc, char **argv)
 {
 	GtkWidget *window, *widget;
 
 	gtk_init ();
+	adw_init ();
 
 	window = gtk_window_new ();
 	gtk_widget_set_size_request (window, 300, 600);

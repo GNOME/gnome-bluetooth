@@ -1,4 +1,5 @@
 #include "bluetooth-pairing-dialog.h"
+#include <adwaita.h>
 
 static const char *
 response_to_str (int response)
@@ -49,6 +50,7 @@ int main (int argc, char **argv)
 	const char *device = "My device";
 
 	gtk_init ();
+	adw_init ();
 
 	if (g_strcmp0 (argv[1], "pin-confirmation") == 0 ||
 	    argv[1] == NULL) {
