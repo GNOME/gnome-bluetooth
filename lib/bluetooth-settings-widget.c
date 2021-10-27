@@ -1579,12 +1579,9 @@ add_device_section (BluetoothSettingsWidget *self)
 				    (GtkListBoxSortFunc)device_sort_func, NULL, NULL);
 	g_signal_connect_swapped (priv->device_list, "row-activated",
 				  G_CALLBACK (activate_row), self);
-        atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_label)),
-                                     ATK_RELATION_LABEL_FOR,
-                                     ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)));
-        atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (priv->device_list)),
-                                     ATK_RELATION_LABELLED_BY,
-                                     ATK_OBJECT (gtk_widget_get_accessible (priv->device_label)));
+	gtk_accessible_update_relation (GTK_ACCESSIBLE (priv->device_list),
+					GTK_ACCESSIBLE_RELATION_LABELLED_BY, priv->device_label, NULL,
+					-1);
 
 	priv->device_stack = gtk_stack_new ();
 	gtk_stack_set_homogeneous (GTK_STACK (priv->device_stack), FALSE);
