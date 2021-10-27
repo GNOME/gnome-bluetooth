@@ -1183,7 +1183,7 @@ update_properties (BluetoothSettingsWidget *self,
 	priv->selected_name = alias;
 
 	/* Icon */
-	gtk_image_set_from_icon_name (GTK_IMAGE (WID ("image")), icon, GTK_ICON_SIZE_DIALOG);
+	gtk_image_set_from_icon_name (GTK_IMAGE (WID ("image")), icon);
 
 	/* Connection */
 	button = GTK_SWITCH (WID ("switch_connection"));
