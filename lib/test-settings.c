@@ -22,7 +22,7 @@ int main (int argc, char **argv)
 	g_signal_connect (G_OBJECT (window), "delete-event",
 			  G_CALLBACK (delete_event_cb), NULL);
 	widget = bluetooth_settings_widget_new ();
-	gtk_container_add (GTK_CONTAINER (window), widget);
+	gtk_window_set_child (GTK_WINDOW (window), widget);
 
 	gtk_widget_show_all (window);
 

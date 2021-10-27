@@ -670,16 +670,17 @@ cancel_callback (GDBusMethodInvocation *invocation,
 		 gpointer               user_data)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
-	GList *l, *children;
+	GtkWidget *child;
 
 	g_debug ("cancel_callback ()");
 
 	g_clear_pointer ((GtkWindow**)&priv->pairing_dialog, gtk_window_destroy);
 
-	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
-	for (l = children; l != NULL; l = l->next)
-		g_object_set (l->data, "pairing", FALSE, NULL);
-	g_list_free (children);
+	child = gtk_widget_get_first_child (priv->device_list);
+	while (child) {
+		g_object_set (G_OBJECT (child), "pairing", FALSE, NULL);
+		child = gtk_widget_get_next_sibling (child);
+	}
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
 
@@ -846,21 +847,24 @@ turn_off_pairing (BluetoothSettingsWidget *self,
 		  const char              *object_path)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	GList *l, *children;
+	GtkWidget *child;
 
-	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
-	for (l = children; l != NULL; l = l->next) {
+	for (child = gtk_widget_get_first_child (priv->device_list);
+	     child != NULL;
+	     child = gtk_widget_get_next_sibling (child)) {
 		GDBusProxy *proxy;
 
-		g_object_get (l->data, "proxy", &proxy, NULL);
+		if (!GTK_IS_LIST_BOX_ROW (child))
+			continue;
+
+		g_object_get (G_OBJECT (child), "proxy", &proxy, NULL);
 		if (g_strcmp0 (g_dbus_proxy_get_object_path (proxy), object_path) == 0) {
-			g_object_set (l->data, "pairing", FALSE, NULL);
+			g_object_set (G_OBJECT (child), "pairing", FALSE, NULL);
 			g_object_unref (proxy);
 			break;
 		}
 		g_object_unref (proxy);
 	}
-	g_list_free (children);
 }
 
 typedef struct {
@@ -1471,19 +1475,15 @@ static gboolean
 keynav_failed (GtkWidget *list, GtkDirectionType direction, BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	GList *children, *item;
-
-	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
+	GtkWidget *child;
 
 	if (direction == GTK_DIR_DOWN) {
-		item = children;
+		child = gtk_widget_get_first_child (priv->device_list);
 	} else {
-		item = g_list_last (children);
+		child = gtk_widget_get_last_child (priv->device_list);
 	}
 
-	gtk_widget_child_focus (item->data, direction);
-
-	g_list_free (children);
+	gtk_widget_child_focus (child, direction);
 
 	return TRUE;
 }
@@ -1594,7 +1594,7 @@ add_device_section (BluetoothSettingsWidget *self)
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (frame), priv->device_list);
+	gtk_frame_set_child (GTK_FRAME (frame), priv->device_list);
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), frame, DEVICES_PAGE);
 	gtk_box_pack_start (GTK_BOX (box), priv->device_stack, TRUE, TRUE, 0);
 
@@ -1673,13 +1673,13 @@ row_inserted_cb (GtkTreeModel *tree_model,
 			    NULL);
 	g_object_set_data_full (G_OBJECT (row), "object-path", g_strdup (g_dbus_proxy_get_object_path (proxy)), g_free);
 
-	gtk_container_add (GTK_CONTAINER (priv->device_list), row);
+	gtk_list_box_append (GTK_LIST_BOX (priv->device_list), row);
 	gtk_size_group_add_widget (priv->row_sizegroup, row);
 
 	gtk_stack_set_transition_type (GTK_STACK (priv->device_stack),
 				       GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN);
-	gtk_container_child_set (GTK_CONTAINER (WID ("vbox_bluetooth")),
-				 priv->child_box, "expand", FALSE, NULL);
+	gtk_widget_set_hexpand (priv->child_box, FALSE);
+	gtk_widget_set_vexpand (priv->child_box, FALSE);
 	gtk_stack_set_visible_child_name (GTK_STACK (priv->device_stack), DEVICES_PAGE);
 }
 
@@ -1692,7 +1692,7 @@ row_changed_cb (GtkTreeModel *tree_model,
 	BluetoothSettingsWidget *self = user_data;
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
 	GDBusProxy *proxy;
-	GList *l, *children;
+	GtkWidget *child;
 	const char *object_path;
 
 	if (is_interesting_device (tree_model, iter) == FALSE) {
@@ -1711,11 +1711,15 @@ row_changed_cb (GtkTreeModel *tree_model,
 			    -1);
 	object_path = g_dbus_proxy_get_object_path (proxy);
 
-	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
-	for (l = children; l != NULL; l = l->next) {
+	for (child = gtk_widget_get_first_child (priv->device_list);
+	     child != NULL;
+	     child = gtk_widget_get_next_sibling (child)) {
 		const char *path;
 
-		path = g_object_get_data (G_OBJECT (l->data), "object-path");
+		if (!GTK_IS_LIST_BOX_ROW (child))
+			continue;
+
+		path = g_object_get_data (G_OBJECT (child), "object-path");
 		if (g_str_equal (object_path, path)) {
 			g_autofree char *name = NULL;
 			g_autofree char *alias = NULL;
@@ -1736,7 +1740,7 @@ row_changed_cb (GtkTreeModel *tree_model,
 
 			add_device_type (self, bdaddr, type);
 
-			g_object_set (G_OBJECT (l->data),
+			g_object_set (G_OBJECT (child),
 				      "paired", paired,
 				      "trusted", trusted,
 				      "type", type,
@@ -1753,7 +1757,6 @@ row_changed_cb (GtkTreeModel *tree_model,
 			break;
 		}
 	}
-	g_list_free (children);
 	g_object_unref (proxy);
 }
 
@@ -1763,32 +1766,36 @@ device_removed_cb (BluetoothClient *client,
 		   gpointer         user_data)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (user_data);
-	GList *children, *l;
+	GtkWidget *child;
 	gboolean found = FALSE;
 
-	children = gtk_container_get_children (GTK_CONTAINER (priv->device_list));
-	for (l = children; l != NULL; l = l->next) {
+	for (child = gtk_widget_get_first_child (priv->device_list);
+	     child != NULL;
+	     child = gtk_widget_get_next_sibling (child)) {
 		const char *path;
 
-		path = g_object_get_data (G_OBJECT (l->data), "object-path");
+		if (!GTK_IS_LIST_BOX_ROW (child))
+			continue;
+
+		path = g_object_get_data (G_OBJECT (child), "object-path");
 		if (g_str_equal (path, object_path)) {
 			g_autofree char *name = NULL;
 
-			g_object_get (G_OBJECT (l->data), "name", &name, NULL);
+			g_object_get (G_OBJECT (child), "name", &name, NULL);
 			g_debug ("Removing device '%s'", name ? name : object_path);
 
-			gtk_list_box_remove (GTK_LIST_BOX (priv->device_list), GTK_WIDGET (l->data));
+			gtk_list_box_remove (GTK_LIST_BOX (priv->device_list), GTK_WIDGET (child));
 			found = TRUE;
 			break;
 		}
 	}
 
 	if (found) {
-		if (gtk_container_get_children (GTK_CONTAINER (priv->device_list)) == NULL) {
+		if (gtk_widget_get_first_child (priv->device_list) == NULL) {
 			gtk_stack_set_transition_type (GTK_STACK (priv->device_stack),
 						       GTK_STACK_TRANSITION_TYPE_NONE);
-			gtk_container_child_set (GTK_CONTAINER (WID ("vbox_bluetooth")),
-						 priv->child_box, "expand", TRUE, NULL);
+			gtk_widget_set_hexpand (priv->child_box, FALSE);
+			gtk_widget_set_vexpand (priv->child_box, FALSE);
 			gtk_stack_set_visible_child_name (GTK_STACK (priv->device_stack), FILLER_PAGE);
 		}
 	} else {
@@ -1800,14 +1807,12 @@ static void
 setup_properties_dialog (BluetoothSettingsWidget *self)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
-	GtkWidget *container;
 	GtkStyleContext *context;
 
 	priv->properties_dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
 	gtk_widget_set_size_request (priv->properties_dialog, 380, -1);
 	gtk_window_set_resizable (GTK_WINDOW (priv->properties_dialog), FALSE);
-	container = gtk_dialog_get_content_area (GTK_DIALOG (priv->properties_dialog));
-	gtk_container_add (GTK_CONTAINER (container), WID ("properties_vbox"));
+	gtk_window_set_child (GTK_WINDOW (priv->properties_dialog), WID ("properties_vbox"));
 
 	g_signal_connect (G_OBJECT (priv->properties_dialog), "delete-event",
 			  G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -1983,7 +1988,7 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	gtk_widget_set_hexpand (widget, TRUE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (widget),
 					GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-	gtk_container_add (GTK_CONTAINER (self), widget);
+	gtk_box_append (GTK_BOX (self), widget);
 
 	setup_properties_dialog (self);
 

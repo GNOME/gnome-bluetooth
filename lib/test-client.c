@@ -159,7 +159,7 @@ static void create_window(void)
 					G_CALLBACK(delete_callback), NULL);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	gtk_container_add(GTK_CONTAINER(window), vbox);
+	gtk_window_set_child(GTK_WINDOW(window), vbox);
 
 	toolbar = gtk_toolbar_new();
 	gtk_toolbar_set_show_arrow(GTK_TOOLBAR(toolbar), FALSE);
@@ -177,7 +177,7 @@ static void create_window(void)
 	tree = gtk_tree_view_new();
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(tree), TRUE);
 	gtk_widget_grab_focus(GTK_WIDGET(tree));
-	gtk_container_add(GTK_CONTAINER(scrolled), tree);
+	gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled), tree);
 
 	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
 					"Proxy", gtk_cell_renderer_text_new(),
