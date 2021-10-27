@@ -28,7 +28,6 @@ response_cb (GtkDialog *dialog,
 	    response == GTK_RESPONSE_DELETE_EVENT) {
 		if (response != GTK_RESPONSE_DELETE_EVENT)
 			gtk_window_destroy (GTK_WINDOW (dialog));
-		gtk_main_quit ();
 		return;
 	}
 
@@ -39,7 +38,6 @@ response_cb (GtkDialog *dialog,
 						   "My device");
 	} else {
 		gtk_window_destroy (GTK_WINDOW (dialog));
-		gtk_main_quit ();
 	}
 }
 
@@ -92,7 +90,8 @@ int main (int argc, char **argv)
 
 	gtk_widget_show (window);
 
-	gtk_main ();
+	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
+		g_main_context_iteration (NULL, TRUE);
 
 	return 0;
 }

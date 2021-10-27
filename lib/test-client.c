@@ -306,7 +306,8 @@ int main(int argc, char *argv[])
 
 	create_window();
 
-	gtk_main();
+	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
+		g_main_context_iteration (NULL, TRUE);
 
 	g_object_unref(client);
 
