@@ -35,14 +35,6 @@
 static BluetoothClient *client;
 static GtkTreeSelection *selection;
 
-static void delete_callback(GtkWidget *window, GdkEvent *event,
-						gpointer user_data)
-{
-	gtk_window_destroy(GTK_WINDOW(window));
-
-	gtk_main_quit();
-}
-
 static void scan_callback(GtkWidget *button, gpointer user_data)
 {
 	g_object_set (G_OBJECT (client), "default-adapter-discovering", TRUE, NULL);
@@ -150,13 +142,10 @@ static void create_window(void)
 	GtkTreeModel *sorted;
 	GtkWidget *statusbar;
 
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	window = gtk_window_new();
 	gtk_window_set_title(GTK_WINDOW(window), "Test client");
 	gtk_window_set_icon_name(GTK_WINDOW(window), "bluetooth");
-	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
-	g_signal_connect(G_OBJECT(window), "delete-event",
-					G_CALLBACK(delete_callback), NULL);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_window_set_child(GTK_WINDOW(window), vbox);
@@ -257,7 +246,7 @@ static void create_window(void)
 	statusbar = gtk_statusbar_new();
 	gtk_box_pack_start(GTK_BOX(vbox), statusbar, FALSE, FALSE, 0);
 
-	gtk_widget_show_all(window);
+	gtk_window_present(GTK_WINDOW(window));
 }
 
 static void
