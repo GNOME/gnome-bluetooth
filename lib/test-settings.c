@@ -13,7 +13,7 @@ int main (int argc, char **argv)
 {
 	GtkWidget *window, *widget;
 
-	gtk_init (&argc, &argv);
+	gtk_init ();
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request (window, 300, 600);

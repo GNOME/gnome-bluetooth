@@ -50,7 +50,7 @@ int main (int argc, char **argv)
 	const char *pin = "123456";
 	const char *device = "My device";
 
-	gtk_init (&argc, &argv);
+	gtk_init ();
 
 	if (g_strcmp0 (argv[1], "pin-confirmation") == 0 ||
 	    argv[1] == NULL) {
