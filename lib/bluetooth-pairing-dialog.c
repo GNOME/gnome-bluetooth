@@ -73,7 +73,7 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 
 	g_clear_pointer (&priv->pin, g_free);
 	priv->pin = g_strdup (pin);
-	gtk_entry_set_text (GTK_ENTRY (priv->entry_pin), pin ? pin : "");
+	gtk_editable_set_text (GTK_EDITABLE (priv->entry_pin), pin ? pin : "");
 	gtk_label_set_text (GTK_LABEL (priv->label_pin), pin);
 
 	switch (mode) {
@@ -178,7 +178,7 @@ bluetooth_pairing_dialog_get_pin (BluetoothPairingDialog *self)
 		  priv->mode == BLUETOOTH_PAIRING_MODE_PIN_QUERY);
 	g_assert (gtk_widget_is_sensitive (GTK_WIDGET (priv->done)));
 
-	return g_strdup (gtk_entry_get_text (GTK_ENTRY (priv->entry_pin)));
+	return g_strdup (gtk_editable_get_text (GTK_EDITABLE (priv->entry_pin)));
 }
 
 void
@@ -242,7 +242,7 @@ text_changed_cb (GObject    *gobject,
 	    priv->mode != BLUETOOTH_PAIRING_MODE_PIN_QUERY)
 		return;
 
-	text = gtk_entry_get_text (GTK_ENTRY (priv->entry_pin));
+	text = gtk_editable_get_text (GTK_EDITABLE (priv->entry_pin));
 	if (!text || strlen (text) < 4)
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->done), FALSE);
 	else
