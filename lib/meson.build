@@ -114,7 +114,7 @@ if enable_gir
   gir_incs = [
     'GModule-2.0',
     'GObject-2.0',
-    'Gtk-3.0',
+    'Gtk-4.0',
   ]
 
   gnome.generate_gir(

@@ -99,7 +99,7 @@ add_project_arguments(common_flags + compiler_flags, language: 'c')
 
 gio_dep = dependency('gio-2.0', version: '>= 2.44')
 gio_unix_dep = dependency('gio-unix-2.0')
-gtk_dep = dependency('gtk+-3.0', version: '>= 3.12.0')
+gtk_dep = dependency('gtk4', version: '>= 4.4')
 gsound_dep = dependency('gsound')
 libnotify_dep = dependency('libnotify', version: '>= 0.7.0')
 libudev_dep = dependency('libudev')
