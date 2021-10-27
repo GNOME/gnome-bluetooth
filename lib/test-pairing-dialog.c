@@ -27,7 +27,7 @@ response_cb (GtkDialog *dialog,
 	if (response == GTK_RESPONSE_CANCEL ||
 	    response == GTK_RESPONSE_DELETE_EVENT) {
 		if (response != GTK_RESPONSE_DELETE_EVENT)
-			gtk_widget_destroy (GTK_WIDGET (dialog));
+			gtk_window_destroy (GTK_WINDOW (dialog));
 		gtk_main_quit ();
 		return;
 	}
@@ -38,7 +38,7 @@ response_cb (GtkDialog *dialog,
 						   "234567",
 						   "My device");
 	} else {
-		gtk_widget_destroy (GTK_WIDGET (dialog));
+		gtk_window_destroy (GTK_WINDOW (dialog));
 		gtk_main_quit ();
 	}
 }

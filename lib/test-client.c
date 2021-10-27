@@ -38,7 +38,7 @@ static GtkTreeSelection *selection;
 static void delete_callback(GtkWidget *window, GdkEvent *event,
 						gpointer user_data)
 {
-	gtk_widget_destroy(window);
+	gtk_window_destroy(GTK_WINDOW(window));
 
 	gtk_main_quit();
 }
