@@ -10,7 +10,7 @@ headers = enum_headers + files(
 
 install_headers(
   headers,
-  subdir: meson.project_name(),
+  subdir: gnomebt_api_name,
 )
 
 sources = files(
@@ -80,7 +80,7 @@ symbol_map = meson.current_source_dir() / (meson.project_name() + '.map')
 ldflags = cc.get_supported_link_arguments('-Wl,--version-script,' + symbol_map)
 
 libgnome_bluetooth = shared_library(
-  meson.project_name(),
+  gnomebt_api_name,
   sources: sources + built_sources,
   version: libversion,
   include_directories: top_inc,
@@ -103,7 +103,7 @@ pkg.generate(
   name: gnomebt_api_name,
   description: 'Widgets for Bluetooth device selection',
   filebase: gnomebt_api_name,
-  subdirs: meson.project_name(),
+  subdirs: gnomebt_api_name,
   requires: deps,
   variables: 'exec_prefix=${prefix}',
 )
