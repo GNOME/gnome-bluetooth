@@ -466,28 +466,32 @@ static void create_window(void)
 	gtk_box_pack_start(GTK_BOX(vbox), table, TRUE, TRUE, 9);
 
 	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 1, 0.5);
+	gtk_label_set_xalign(GTK_LABEL(label), 1.0);
+	gtk_label_set_yalign(GTK_LABEL(label), 0.5);
 	text = g_markup_printf_escaped("<b>%s</b>", _("From:"));
 	gtk_label_set_markup(GTK_LABEL(label), text);
 	g_free(text);
 	gtk_grid_attach(GTK_GRID(table), label, 0, 0, 1, 1);
 
 	label_from = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label_from), 0, 0.5);
+	gtk_label_set_xalign(GTK_LABEL(label_from), 0.0);
+	gtk_label_set_yalign(GTK_LABEL(label_from), 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label_from), PANGO_ELLIPSIZE_MIDDLE);
 	gtk_grid_attach(GTK_GRID(table), label_from, 1, 0, 1, 1);
 
 	update_from_label ();
 
 	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 1, 0.5);
+	gtk_label_set_xalign(GTK_LABEL(label), 1.0);
+	gtk_label_set_yalign(GTK_LABEL(label), 0.5);
 	text = g_markup_printf_escaped("<b>%s</b>", _("To:"));
 	gtk_label_set_markup(GTK_LABEL(label), text);
 	g_free(text);
 	gtk_grid_attach(GTK_GRID(table), label, 0, 1, 1, 1);
 
 	label = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_label_set_xalign(GTK_LABEL(label), 0.0);
+	gtk_label_set_yalign(GTK_LABEL(label), 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL(label), PANGO_ELLIPSIZE_END);
 	gtk_label_set_text(GTK_LABEL(label), option_device_name);
 	gtk_grid_attach(GTK_GRID(table), label, 1, 1, 1, 1);
@@ -507,7 +511,8 @@ static void create_window(void)
 	gtk_box_pack_start(GTK_BOX (hbox), image_status, FALSE, FALSE, 4);
 
 	label_status = gtk_label_new(NULL);
-	gtk_misc_set_alignment(GTK_MISC(label_status), 0, 0.5);
+	gtk_label_set_xalign(GTK_LABEL(label_status), 0.0);
+	gtk_label_set_yalign(GTK_LABEL(label_status), 0.5);
 	gtk_label_set_line_wrap(GTK_LABEL(label_status), TRUE);
 	gtk_box_pack_start(GTK_BOX (hbox), label_status, TRUE, TRUE, 4);
 
