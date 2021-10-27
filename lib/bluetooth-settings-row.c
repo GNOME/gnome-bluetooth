@@ -102,7 +102,7 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 	/* Placeholder text and spinner */
 	g_object_bind_property (priv->spinner, "visible",
 				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
-	g_object_bind_property (priv->spinner, "active",
+	g_object_bind_property (priv->spinner, "spinning",
 				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
 
 	priv->time_created = g_get_monotonic_time();

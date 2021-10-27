@@ -1576,7 +1576,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	/* Discoverable spinner */
 	priv->device_spinner = spinner = gtk_spinner_new ();
 	g_object_bind_property (G_OBJECT (priv->client), "default-adapter-discovering",
-				G_OBJECT (priv->device_spinner), "active",
+				G_OBJECT (priv->device_spinner), "spinning",
 				G_BINDING_SYNC_CREATE);
 	gtk_widget_set_margin_bottom (spinner, 12);
 	gtk_box_append (GTK_BOX (hbox), spinner);
