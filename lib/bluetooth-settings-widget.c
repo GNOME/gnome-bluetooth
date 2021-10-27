@@ -1595,8 +1595,6 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_frame_set_child (GTK_FRAME (frame), priv->device_list);
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), frame, DEVICES_PAGE);
 	gtk_box_append (GTK_BOX (box), priv->device_stack);
-
-	gtk_widget_show_all (box);
 }
 
 static gboolean
@@ -1988,9 +1986,6 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	gtk_box_append (GTK_BOX (self), widget);
 
 	setup_properties_dialog (self);
-
-	gtk_widget_show_all (GTK_WIDGET (self));
-
 	setup_obex (self);
 }
 
