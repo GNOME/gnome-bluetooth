@@ -4,10 +4,6 @@ enum_headers = files('bluetooth-enums.h')
 
 headers = enum_headers + files(
   'bluetooth-client.h',
-  'bluetooth-chooser.h',
-  'bluetooth-chooser-button.h',
-  'bluetooth-chooser-combo.h',
-  'bluetooth-filter-widget.h',
   'bluetooth-settings-widget.h',
   'bluetooth-utils.h',
 )
@@ -19,12 +15,8 @@ install_headers(
 
 sources = files(
   'bluetooth-agent.c',
-  'bluetooth-chooser.c',
-  'bluetooth-chooser-button.c',
-  'bluetooth-chooser-combo.c',
   'bluetooth-client.c',
   'bluetooth-hdy-column.c',
-  'bluetooth-filter-widget.c',
   'bluetooth-pairing-dialog.c',
   'bluetooth-settings-obexpush.c',
   'bluetooth-settings-row.c',
@@ -157,7 +149,6 @@ test_names = [
   'test-agent',
   'test-class',
   'test-client',
-  'test-deviceselection',
   'test-pairing-dialog',
   'test-pin',
   'test-settings',
