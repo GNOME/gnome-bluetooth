@@ -247,7 +247,7 @@ setup_pairing_dialog (BluetoothSettingsWidget *self)
 
 	g_clear_pointer ((GtkWindow**)&priv->pairing_dialog, gtk_window_destroy);
 	priv->pairing_dialog = bluetooth_pairing_dialog_new ();
-	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+	toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (self)));
 	gtk_window_set_transient_for (GTK_WINDOW (priv->pairing_dialog), GTK_WINDOW (toplevel));
 	gtk_window_set_modal (GTK_WINDOW (priv->pairing_dialog), TRUE);
 }
@@ -1514,7 +1514,7 @@ activate_row (BluetoothSettingsWidget *self,
 		g_object_unref (proxy);
 
 		w = priv->properties_dialog;
-		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+		toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (self)));
 		gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (toplevel));
 		gtk_window_set_modal (GTK_WINDOW (w), TRUE);
 		gtk_window_present (GTK_WINDOW (w));
