@@ -1312,11 +1312,25 @@ name_changed (BluetoothClient  *client,
 	update_visibility (self);
 }
 
+static void
+confirm_dialog_response_cb (GtkDialog *dialog,
+			    gint       response,
+			    gpointer   user_data)
+{
+	GMainLoop *mainloop = g_object_get_data (G_OBJECT (dialog), "mainloop");
+	int *out_response = user_data;
+
+	*out_response = response;
+
+	g_main_loop_quit (mainloop);
+}
+
 static gboolean
 show_confirm_dialog (BluetoothSettingsWidget *self,
 		     const char *name)
 {
 	BluetoothSettingsWidgetPrivate *priv = BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE (self);
+	g_autoptr(GMainLoop) mainloop = NULL;
 	GtkWidget *dialog;
 	gint response;
 
@@ -1330,7 +1344,11 @@ show_confirm_dialog (BluetoothSettingsWidget *self,
 	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
 	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_ACCEPT);
 
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	mainloop = g_main_loop_new (NULL, FALSE);
+	g_object_set_data (G_OBJECT (dialog), "mainloop", mainloop);
+	g_signal_connect (dialog, "response", G_CALLBACK (confirm_dialog_response_cb), &response);
+
+	g_main_loop_run (mainloop);
 
 	gtk_window_destroy (GTK_WINDOW (dialog));
 
