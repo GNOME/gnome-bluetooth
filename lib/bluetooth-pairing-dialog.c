@@ -286,7 +286,6 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	/* OK button */
 	priv->done = gtk_button_new_with_label (_("Accept"));
 	gtk_widget_hide (priv->done);
-	gtk_widget_set_can_default (GTK_WIDGET (priv->done), TRUE);
 	g_signal_connect (G_OBJECT (priv->done), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), priv->done);
@@ -308,7 +307,6 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_start (GTK_HEADER_BAR (header), priv->cancel);
 	gtk_widget_show (priv->cancel);
-	gtk_widget_grab_default (GTK_WIDGET (priv->done));
 
 	g_signal_connect (G_OBJECT (priv->entry_pin), "notify::text",
 			  G_CALLBACK (text_changed_cb), self);
