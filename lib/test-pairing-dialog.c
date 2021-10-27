@@ -22,6 +22,7 @@ response_cb (GtkDialog *dialog,
 	     int        response,
 	     gpointer   user_data)
 {
+	GMainLoop *mainloop = user_data;
 	g_message ("Received response '%d' (%s)",
 		   response, response_to_str (response));
 
@@ -29,6 +30,7 @@ response_cb (GtkDialog *dialog,
 	    response == GTK_RESPONSE_DELETE_EVENT) {
 		if (response != GTK_RESPONSE_DELETE_EVENT)
 			gtk_window_destroy (GTK_WINDOW (dialog));
+		g_main_loop_quit (mainloop);
 		return;
 	}
 
@@ -39,11 +41,13 @@ response_cb (GtkDialog *dialog,
 						   "My device");
 	} else {
 		gtk_window_destroy (GTK_WINDOW (dialog));
+		g_main_loop_quit (mainloop);
 	}
 }
 
 int main (int argc, char **argv)
 {
+	g_autoptr(GMainLoop) mainloop = NULL;
 	GtkWidget *window;
 	BluetoothPairingMode mode;
 	const char *pin = "123456";
@@ -82,18 +86,19 @@ int main (int argc, char **argv)
 		return 1;
 	}
 
+	mainloop = g_main_loop_new (NULL, FALSE);
+
 	window = bluetooth_pairing_dialog_new ();
 	bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (window),
 					   mode,
 					   pin,
 					   device);
 	g_signal_connect (G_OBJECT (window), "response",
-			  G_CALLBACK (response_cb), window);
+			  G_CALLBACK (response_cb), mainloop);
 
 	gtk_widget_show (window);
 
-	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
-		g_main_context_iteration (NULL, TRUE);
+	g_main_loop_run (mainloop);
 
 	return 0;
 }
