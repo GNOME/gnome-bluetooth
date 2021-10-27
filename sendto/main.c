@@ -34,7 +34,6 @@
 #include <gtk/gtk.h>
 
 #include <bluetooth-client.h>
-#include <bluetooth-chooser.h>
 
 #define OBEX_SERVICE	"org.bluez.obex"
 #define OBEX_PATH	"/org/bluez/obex"
@@ -689,100 +688,6 @@ on_transfer_error (void)
 	current_transfer = NULL;
 }
 
-static void
-select_device_changed(BluetoothChooser *sel,
-		      char *address,
-		      gpointer user_data)
-{
-	GtkDialog *dialog = user_data;
-	char *icon;
-
-	if (address == NULL)
-		goto bail;
-
-	icon = bluetooth_chooser_get_selected_device_icon (sel);
-	if (icon == NULL)
-		goto bail;
-
-	/* Apple's device don't have OBEX */
-	if (g_str_equal (icon, "phone-apple-iphone"))
-		goto bail;
-
-	gtk_dialog_set_response_sensitive (dialog,
-					   GTK_RESPONSE_ACCEPT, TRUE);
-	return;
-
-bail:
-	gtk_dialog_set_response_sensitive (dialog,
-					   GTK_RESPONSE_ACCEPT, FALSE);
-}
-
-static void
-select_device_activated(BluetoothChooser *sel,
-			char *address,
-			gpointer user_data)
-{
-	GtkDialog *dialog = user_data;
-
-	gtk_dialog_response(dialog, GTK_RESPONSE_ACCEPT);
-}
-
-static char *
-show_browse_dialog (char **device_name)
-{
-	GtkWidget *dialog, *selector, *send_button, *content_area;
-	char *bdaddr;
-	int response_id;
-	GtkStyleContext *context;
-
-	dialog = g_object_new (GTK_TYPE_DIALOG,
-			       "title", _("Select device to send to"),
-			       "use-header-bar", 1,
-			       NULL);
-	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
-			       _("_Cancel"), GTK_RESPONSE_CANCEL,
-			       _("_Send"), GTK_RESPONSE_ACCEPT,
-			       NULL);
-	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
-	send_button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	context = gtk_widget_get_style_context(send_button);
-	gtk_style_context_add_class (context, "suggested-action");
-
-	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
-					  GTK_RESPONSE_ACCEPT, FALSE);
-	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
-
-	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
-	content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-	gtk_box_set_spacing (GTK_BOX (content_area), 2);
-
-	selector = bluetooth_chooser_new();
-	gtk_container_set_border_width(GTK_CONTAINER(selector), 5);
-	gtk_widget_show(selector);
-	g_object_set(selector,
-		     "show-searching", TRUE,
-		     "show-device-category", TRUE,
-		     "show-device-type", TRUE,
-		     NULL);
-	g_signal_connect(selector, "selected-device-changed",
-			 G_CALLBACK(select_device_changed), dialog);
-	g_signal_connect(selector, "selected-device-activated",
-			 G_CALLBACK(select_device_activated), dialog);
-	gtk_box_pack_start (GTK_BOX (content_area), selector, TRUE, TRUE, 0);
-	bluetooth_chooser_start_discovery (BLUETOOTH_CHOOSER (selector));
-
-	bdaddr = NULL;
-	response_id = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response_id == GTK_RESPONSE_ACCEPT) {
-		bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (selector));
-		*device_name = bluetooth_chooser_get_selected_device_name (BLUETOOTH_CHOOSER (selector));
-	}
-
-	gtk_widget_destroy (dialog);
-
-	return bdaddr;
-}
-
 static char **
 show_select_dialog(void)
 {
@@ -877,13 +782,8 @@ int main(int argc, char *argv[])
 			return 1;
 	}
 
-	if (option_device == NULL) {
-		option_device = show_browse_dialog(&option_device_name);
-		if (option_device == NULL) {
-			g_strfreev(option_files);
-			return 1;
-		}
-	}
+	if (option_device == NULL)
+		return 1;
 
 	file_count = g_strv_length(option_files);
 
