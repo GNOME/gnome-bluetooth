@@ -1535,12 +1535,13 @@ add_device_section (BluetoothSettingsWidget *self)
 	vbox = WID ("vbox_bluetooth");
 
 	box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+	gtk_widget_set_vexpand (box, TRUE);
 	gtk_widget_set_margin_top (box, 6);
-	gtk_box_pack_start (GTK_BOX (vbox), box, TRUE, TRUE, 0);
+	gtk_box_append (GTK_BOX (vbox), box);
 	priv->child_box = box;
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
+	gtk_box_append (GTK_BOX (box), hbox);
 
 	s = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
 	priv->device_label = gtk_label_new (s);
@@ -1552,7 +1553,7 @@ add_device_section (BluetoothSettingsWidget *self)
 		      NULL);
 	gtk_widget_set_margin_end (priv->device_label, 6);
 	gtk_widget_set_margin_bottom (priv->device_label, 12);
-	gtk_box_pack_start (GTK_BOX (hbox), priv->device_label, FALSE, TRUE, 0);
+	gtk_box_append (GTK_BOX (hbox), priv->device_label);
 
 	/* Discoverable spinner */
 	priv->device_spinner = spinner = gtk_spinner_new ();
@@ -1560,7 +1561,7 @@ add_device_section (BluetoothSettingsWidget *self)
 				G_OBJECT (priv->device_spinner), "active",
 				G_BINDING_SYNC_CREATE);
 	gtk_widget_set_margin_bottom (spinner, 12);
-	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, TRUE, 0);
+	gtk_box_append (GTK_BOX (hbox), spinner);
 
 	/* Discoverable label placeholder, the real name is set in update_visibility().
 	 * If you ever see this string during normal use, please file a bug. */
@@ -1594,9 +1595,10 @@ add_device_section (BluetoothSettingsWidget *self)
 
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_widget_set_vexpand (frame, TRUE);
 	gtk_frame_set_child (GTK_FRAME (frame), priv->device_list);
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), frame, DEVICES_PAGE);
-	gtk_box_pack_start (GTK_BOX (box), priv->device_stack, TRUE, TRUE, 0);
+	gtk_box_append (GTK_BOX (box), priv->device_stack);
 
 	gtk_widget_show_all (box);
 }

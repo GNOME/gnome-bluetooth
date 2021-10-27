@@ -152,16 +152,17 @@ static void create_window(void)
 
 	toolbar = gtk_toolbar_new();
 	gtk_toolbar_set_show_arrow(GTK_TOOLBAR(toolbar), FALSE);
-	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, TRUE, 0);
+	gtk_box_append(GTK_BOX(vbox), toolbar);
 
 	item = gtk_tool_button_new (gtk_image_new_from_icon_name ("view-refresh"), NULL);
 	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), item, -1);
 	g_signal_connect(item, "clicked", G_CALLBACK(scan_callback), NULL);
 
 	scrolled = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_set_vexpand(scrolled, TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled),
 				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX (vbox), scrolled, TRUE, TRUE, 0);
+	gtk_box_append (GTK_BOX (vbox), scrolled);
 
 	tree = gtk_tree_view_new();
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(tree), TRUE);
@@ -244,7 +245,7 @@ static void create_window(void)
 	gtk_tree_view_expand_all(GTK_TREE_VIEW(tree));
 
 	statusbar = gtk_statusbar_new();
-	gtk_box_pack_start(GTK_BOX(vbox), statusbar, FALSE, FALSE, 0);
+	gtk_box_append(GTK_BOX(vbox), statusbar);
 
 	gtk_window_present(GTK_WINDOW(window));
 }
