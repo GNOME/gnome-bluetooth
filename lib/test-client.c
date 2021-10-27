@@ -135,7 +135,7 @@ static void create_window(void)
 	GtkWidget *window;
 	GtkWidget *vbox;
 	GtkWidget *toolbar;
-	GtkToolItem *item;
+	GtkWidget *refresh_button;
 	GtkWidget *scrolled;
 	GtkWidget *tree;
 	GtkTreeModel *model;
@@ -150,13 +150,12 @@ static void create_window(void)
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_window_set_child(GTK_WINDOW(window), vbox);
 
-	toolbar = gtk_toolbar_new();
-	gtk_toolbar_set_show_arrow(GTK_TOOLBAR(toolbar), FALSE);
+	toolbar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_append(GTK_BOX(vbox), toolbar);
 
-	item = gtk_tool_button_new (gtk_image_new_from_icon_name ("view-refresh"), NULL);
-	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), item, -1);
-	g_signal_connect(item, "clicked", G_CALLBACK(scan_callback), NULL);
+	refresh_button = gtk_button_new_from_icon_name ("view-refresh");
+	gtk_box_append(GTK_BOX(toolbar), refresh_button);
+	g_signal_connect(refresh_button, "clicked", G_CALLBACK(scan_callback), NULL);
 
 	scrolled = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_set_vexpand(scrolled, TRUE);
