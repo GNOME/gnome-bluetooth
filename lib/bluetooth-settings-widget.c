@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 
 #include <glib/gi18n-lib.h>
@@ -37,7 +38,6 @@
 #include "bluetooth-settings-row.h"
 #include "bluetooth-settings-obexpush.h"
 #include "bluetooth-pairing-dialog.h"
-#include "bluetooth-hdy-column.h"
 #include "pin.h"
 
 #define BLUETOOTH_SETTINGS_WIDGET_GET_PRIVATE(obj) \
@@ -1928,7 +1928,7 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 	/* This ensures the BluetoothHdyColumn type is known by GtkBuilder when
 	 * loading the UI template.
 	 */
-	g_type_ensure (BLUETOOTH_TYPE_HDY_COLUMN);
+	g_type_ensure (ADW_TYPE_CLAMP);
 
 	priv->cancellable = g_cancellable_new ();
 	priv->debug = g_getenv ("BLUETOOTH_DEBUG") != NULL;

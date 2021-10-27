@@ -16,7 +16,6 @@ install_headers(
 sources = files(
   'bluetooth-agent.c',
   'bluetooth-client.c',
-  'bluetooth-hdy-column.c',
   'bluetooth-pairing-dialog.c',
   'bluetooth-settings-obexpush.c',
   'bluetooth-settings-row.c',
@@ -62,6 +61,7 @@ built_sources += gnome.gdbus_codegen(
 deps = [
   gio_dep,
   gtk_dep,
+  libadwaita_dep,
 ]
 
 private_deps = [
