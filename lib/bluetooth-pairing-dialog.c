@@ -279,9 +279,9 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	/* Header */
 	header = gtk_dialog_get_header_bar (GTK_DIALOG (self));
 	priv->title = gtk_label_new ("");
-	gtk_header_bar_set_custom_title (GTK_HEADER_BAR (header), priv->title);
+	gtk_header_bar_set_title_widget (GTK_HEADER_BAR (header), priv->title);
 	gtk_widget_show (priv->title);
-	gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header), FALSE);
+	gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (header), FALSE);
 
 	/* OK button */
 	priv->done = gtk_button_new_with_label (_("Accept"));
