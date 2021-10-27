@@ -427,8 +427,7 @@ static void response_callback(GtkWidget *dialog,
 		current_transfer = NULL;
 	}
 
-	gtk_widget_destroy(dialog);
-	gtk_main_quit();
+	gtk_window_destroy(GTK_WINDOW (dialog));
 }
 
 static void create_window(void)
@@ -447,22 +446,16 @@ static void create_window(void)
 			       _("_Retry"), RESPONSE_RETRY,
 			       NULL);
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
-	gtk_window_set_type_hint(GTK_WINDOW(dialog),
-				 GDK_WINDOW_TYPE_HINT_NORMAL);
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 400, -1);
-	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_set_spacing(GTK_BOX(vbox), 6);
-	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
-	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
-	                   vbox);
+	gtk_window_set_child (GTK_WINDOW(dialog), vbox);
 
 	table = gtk_grid_new();
 	gtk_grid_set_column_spacing(GTK_GRID(table), 4);
 	gtk_grid_set_row_spacing(GTK_GRID(table), 4);
-	gtk_box_pack_start(GTK_BOX(vbox), table, TRUE, TRUE, 9);
+	gtk_box_append(GTK_BOX(vbox), table);
 
 	label = gtk_label_new(NULL);
 	gtk_label_set_xalign(GTK_LABEL(label), 1.0);
@@ -496,31 +489,32 @@ static void create_window(void)
 	gtk_grid_attach(GTK_GRID(table), label, 1, 1, 1, 1);
 
 	progress = gtk_progress_bar_new();
+	gtk_widget_set_vexpand (progress, TRUE);
 	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress), TRUE);
 	gtk_progress_bar_set_ellipsize(GTK_PROGRESS_BAR(progress),
 							PANGO_ELLIPSIZE_END);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
 							_("Connecting…"));
-	gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
+	gtk_box_append(GTK_BOX(vbox), progress);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
 
-	image_status = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
-	gtk_widget_set_no_show_all (image_status, TRUE);
-	gtk_box_pack_start(GTK_BOX (hbox), image_status, FALSE, FALSE, 4);
+	image_status = gtk_image_new_from_icon_name ("dialog-warning");
+	gtk_widget_hide(image_status);
+	gtk_box_append(GTK_BOX(hbox), image_status);
 
 	label_status = gtk_label_new(NULL);
 	gtk_label_set_xalign(GTK_LABEL(label_status), 0.0);
 	gtk_label_set_yalign(GTK_LABEL(label_status), 0.5);
-	gtk_label_set_line_wrap(GTK_LABEL(label_status), TRUE);
-	gtk_box_pack_start(GTK_BOX (hbox), label_status, TRUE, TRUE, 4);
+	gtk_label_set_wrap(GTK_LABEL(label_status), TRUE);
+	gtk_box_append(GTK_BOX(hbox), label_status);
 
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 2);
+	gtk_box_append(GTK_BOX(vbox), hbox);
 
 	g_signal_connect(G_OBJECT(dialog), "response",
 				G_CALLBACK(response_callback), NULL);
 
-	gtk_widget_show_all(dialog);
+	gtk_window_present(GTK_WINDOW(dialog));
 }
 
 static gchar *get_device_name(const gchar *address)
@@ -688,12 +682,20 @@ on_transfer_error (void)
 	current_transfer = NULL;
 }
 
+static gint select_dialog_response;
+static GMainLoop *select_dialog_mainloop = NULL;
+
+static void select_dialog_response_callback(GtkWidget *dialog,
+					gint response, gpointer user_data)
+{
+	select_dialog_response = response;
+	g_main_loop_quit(select_dialog_mainloop);
+}
 static char **
 show_select_dialog(void)
 {
 	GtkWidget *dialog, *button;
 	gchar **files = NULL;
-	GtkStyleContext *context;
 
 	dialog = g_object_new (GTK_TYPE_FILE_CHOOSER_DIALOG,
 			       "title", _("Choose files to send"),
@@ -703,29 +705,32 @@ show_select_dialog(void)
 	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
 			       _("_Cancel"), GTK_RESPONSE_CANCEL,
 			       _("Select"), GTK_RESPONSE_ACCEPT, NULL);
-	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_file_chooser_set_select_multiple(GTK_FILE_CHOOSER(dialog), TRUE);
 
 	button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	context = gtk_widget_get_style_context(button);
-	gtk_style_context_add_class (context, "suggested-action");
+	gtk_widget_add_css_class(button, "suggested-action");
 
-	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
-		GSList *list, *filenames;
+	g_signal_connect(dialog, "response", G_CALLBACK(select_dialog_response_callback), NULL);
+
+	select_dialog_mainloop = g_main_loop_new(NULL, FALSE);
+	g_main_loop_run(select_dialog_mainloop);
+
+	if (select_dialog_response == GTK_RESPONSE_ACCEPT) {
+		g_autoptr(GListModel) selected_files = NULL;
 		int i;
 
-		filenames = gtk_file_chooser_get_filenames(GTK_FILE_CHOOSER(dialog));
+		selected_files = gtk_file_chooser_get_files(GTK_FILE_CHOOSER(dialog));
 
-		files = g_new(gchar *, g_slist_length(filenames) + 1);
+		files = g_new(gchar *, g_list_model_get_n_items(selected_files) + 1);
 
-		for (list = filenames, i = 0; list; list = list->next, i++)
-			files[i] = list->data;
+		for (i = 0; g_list_model_get_n_items(selected_files); i++) {
+			g_autoptr(GFile) file = g_list_model_get_item(selected_files, i);
+			files[i] = g_file_get_path(file);
+		}
 		files[i] = NULL;
-
-		g_slist_free(filenames);
 	}
 
-	gtk_widget_destroy(dialog);
+	gtk_window_destroy(GTK_WINDOW(dialog));
 
 	return files;
 }
@@ -744,6 +749,7 @@ static GOptionEntry options[] = {
 
 int main(int argc, char *argv[])
 {
+	g_autoptr(GOptionContext) option_context = NULL;
 	GError *error = NULL;
 	int i;
 
@@ -753,8 +759,11 @@ int main(int argc, char *argv[])
 
 	error = NULL;
 
-	if (gtk_init_with_args(&argc, &argv, _("[FILE…]"),
-				options, GETTEXT_PACKAGE, &error) == FALSE) {
+	gtk_init();
+
+	option_context = g_option_context_new(NULL);
+	g_option_context_add_main_entries(option_context, options, GETTEXT_PACKAGE);
+	if (g_option_context_parse(option_context, &argc, &argv, &error) == FALSE) {
 		if (error != NULL) {
 			g_printerr("%s\n", error->message);
 			g_error_free(error);
@@ -846,7 +855,8 @@ int main(int argc, char *argv[])
 	if (!g_cancellable_is_cancelled (cancellable))
 		send_files ();
 
-	gtk_main();
+	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
+		g_main_context_iteration (NULL, TRUE);
 
 	g_cancellable_cancel (cancellable);
 
