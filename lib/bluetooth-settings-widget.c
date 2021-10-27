@@ -1594,7 +1594,6 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), label, FILLER_PAGE);
 
 	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_widget_set_vexpand (frame, TRUE);
 	gtk_frame_set_child (GTK_FRAME (frame), priv->device_list);
 	gtk_stack_add_named (GTK_STACK (priv->device_stack), frame, DEVICES_PAGE);
