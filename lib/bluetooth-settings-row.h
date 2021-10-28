@@ -23,34 +23,11 @@
 #include <gtk/gtk.h>
 
 #define BLUETOOTH_TYPE_SETTINGS_ROW (bluetooth_settings_row_get_type())
-#define BLUETOOTH_SETTINGS_ROW(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
-				BLUETOOTH_TYPE_SETTINGS_ROW, BluetoothSettingsRow))
-#define BLUETOOTH_SETTINGS_ROW_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
-				BLUETOOTH_TYPE_SETTINGS_ROW, BluetoothSettingsRowClass))
-#define BLUETOOTH_IS_SETTINGS_ROW(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), \
-						BLUETOOTH_TYPE_SETTINGS_ROW))
-#define BLUETOOTH_IS_SETTINGS_ROW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
-						BLUETOOTH_TYPE_SETTINGS_ROW))
-#define BLUETOOTH_GET_SETTINGS_ROW_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
-				BLUETOOTH_TYPE_SETTINGS_ROW, BluetoothSettingsRowClass))
+G_DECLARE_DERIVABLE_TYPE (BluetoothSettingsRow, bluetooth_settings_row, BLUETOOTH, SETTINGS_ROW, GtkListBoxRow)
 
-/**
- * BluetoothSettingsRow:
- *
- * The <structname>BluetoothSettingsRow</structname> struct contains
- * only private fields and should not be directly accessed.
- */
-typedef struct _BluetoothSettingsRow BluetoothSettingsRow;
-typedef struct _BluetoothSettingsRowClass BluetoothSettingsRowClass;
-
-struct _BluetoothSettingsRow {
-	GtkListBoxRow parent;
+struct _BluetoothSettingsRowClass
+{
+  GtkListBoxRowClass parent_class;
 };
-
-struct _BluetoothSettingsRowClass {
-	GtkListBoxRowClass parent_class;
-};
-
-GType bluetooth_settings_row_get_type (void);
 
 GtkWidget *bluetooth_settings_row_new (void);
