@@ -852,7 +852,7 @@ turn_off_pairing (BluetoothSettingsWidget *self,
 	for (child = gtk_widget_get_first_child (priv->device_list);
 	     child != NULL;
 	     child = gtk_widget_get_next_sibling (child)) {
-		GDBusProxy *proxy;
+		g_autoptr(GDBusProxy) proxy = NULL;
 
 		if (!GTK_IS_LIST_BOX_ROW (child))
 			continue;
@@ -860,10 +860,8 @@ turn_off_pairing (BluetoothSettingsWidget *self,
 		g_object_get (G_OBJECT (child), "proxy", &proxy, NULL);
 		if (g_strcmp0 (g_dbus_proxy_get_object_path (proxy), object_path) == 0) {
 			g_object_set (G_OBJECT (child), "pairing", FALSE, NULL);
-			g_object_unref (proxy);
 			break;
 		}
-		g_object_unref (proxy);
 	}
 }
 
