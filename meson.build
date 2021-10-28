@@ -3,7 +3,7 @@ project(
   version: '42.alpha',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
-  meson_version: '>= 0.49.0',
+  meson_version: '>= 0.53.0',
 )
 
 gnomebt_version = meson.project_version()
@@ -130,13 +130,10 @@ meson.add_install_script(
   gnomebt_datadir,
 )
 
-output = '\nConfigure summary:\n\n'
-output += '        Compiler....................:  ' + cc.get_id() + '\n\n'
-output += '        Compiler Flags..............:  ' + ' '.join(compiler_flags) + '\n'
-output += '        Prefix......................:  ' + gnomebt_prefix + '\n'
-output += '        Documentation...............:  ' + enable_gtk_doc.to_string() + '\n'
-output += '        GObject-Introspection.......:  ' + enable_gir.to_string()
-message(output)
+summary({'Documentation': enable_gtk_doc,
+         'Introspection': enable_gir,
+         'Run gtk-update-icon-cache': get_option('icon_update')},
+        section: 'General')
 
 meson.add_dist_script(
   find_program('check-news.sh').path(),
