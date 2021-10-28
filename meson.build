@@ -21,7 +21,7 @@ gnomebt_prefix = get_option('prefix')
 gnomebt_datadir = get_option('datadir')
 gnomebt_localedir = get_option('localedir')
 
-gnomebt_pkgdatadir = gnomebt_datadir / meson.project_name()
+gnomebt_pkgdatadir = gnomebt_datadir / gnomebt_api_name
 
 # options
 enable_gtk_doc = get_option('gtk_doc')
