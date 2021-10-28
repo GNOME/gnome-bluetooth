@@ -105,7 +105,6 @@ libudev_dep = dependency('libudev')
 
 m_dep = cc.find_library('m')
 
-subdir('icons')
 subdir('lib')
 if get_option('sendto')
   subdir('sendto')
