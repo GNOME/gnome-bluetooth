@@ -280,7 +280,6 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	header = gtk_dialog_get_header_bar (GTK_DIALOG (self));
 	priv->title = gtk_label_new ("");
 	gtk_header_bar_set_title_widget (GTK_HEADER_BAR (header), priv->title);
-	gtk_widget_show (priv->title);
 	gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (header), FALSE);
 
 	/* OK button */
@@ -306,7 +305,6 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	g_signal_connect (G_OBJECT (priv->cancel), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_start (GTK_HEADER_BAR (header), priv->cancel);
-	gtk_widget_show (priv->cancel);
 
 	g_signal_connect (G_OBJECT (priv->entry_pin), "notify::text",
 			  G_CALLBACK (text_changed_cb), self);
