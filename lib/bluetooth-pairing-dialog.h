@@ -22,33 +22,13 @@
 
 #include <gtk/gtk.h>
 
+
 #define BLUETOOTH_TYPE_PAIRING_DIALOG (bluetooth_pairing_dialog_get_type())
-#define BLUETOOTH_PAIRING_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
-				BLUETOOTH_TYPE_PAIRING_DIALOG, BluetoothPairingDialog))
-#define BLUETOOTH_PAIRING_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
-				BLUETOOTH_TYPE_PAIRING_DIALOG, BluetoothPairingDialogClass))
-#define BLUETOOTH_IS_PAIRING_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), \
-						BLUETOOTH_TYPE_PAIRING_DIALOG))
-#define BLUETOOTH_IS_PAIRING_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
-						BLUETOOTH_TYPE_PAIRING_DIALOG))
-#define BLUETOOTH_GET_PAIRING_DIALOG_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
-				BLUETOOTH_TYPE_PAIRING_DIALOG, BluetoothPairingDialogClass))
+G_DECLARE_DERIVABLE_TYPE (BluetoothPairingDialog, bluetooth_pairing_dialog, BLUETOOTH, PAIRING_DIALOG, GtkDialog)
 
-/**
- * BluetoothPairingDialog:
- *
- * The <structname>BluetoothPairingDialog</structname> struct contains
- * only private fields and should not be directly accessed.
- */
-typedef struct _BluetoothPairingDialog BluetoothPairingDialog;
-typedef struct _BluetoothPairingDialogClass BluetoothPairingDialogClass;
-
-struct _BluetoothPairingDialog {
-	GtkDialog parent;
-};
-
-struct _BluetoothPairingDialogClass {
-	GtkDialogClass parent_class;
+struct _BluetoothPairingDialogClass
+{
+  GObjectClass parent_class;
 };
 
 typedef enum {
