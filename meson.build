@@ -107,7 +107,9 @@ m_dep = cc.find_library('m')
 
 subdir('icons')
 subdir('lib')
-subdir('sendto')
+if get_option('sendto')
+  subdir('sendto')
+endif
 
 if enable_gtk_doc
   subdir('docs/reference/libgnome-bluetooth')
@@ -132,6 +134,7 @@ meson.add_install_script(
 
 summary({'Documentation': enable_gtk_doc,
          'Introspection': enable_gir,
+         'Send-to': get_option('sendto'),
          'Run gtk-update-icon-cache': get_option('icon_update')},
         section: 'General')
 
