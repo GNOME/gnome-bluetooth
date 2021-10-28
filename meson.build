@@ -108,7 +108,9 @@ m_dep = cc.find_library('m')
 
 subdir('icons')
 subdir('lib')
-subdir('sendto')
+if get_option('sendto')
+  subdir('sendto')
+endif
 
 if enable_gtk_doc
   subdir('docs/reference/libgnome-bluetooth')
@@ -136,6 +138,7 @@ output += '        Compiler....................:  ' + cc.get_id() + '\n\n'
 output += '        Compiler Flags..............:  ' + ' '.join(compiler_flags) + '\n'
 output += '        Prefix......................:  ' + gnomebt_prefix + '\n'
 output += '        Documentation...............:  ' + enable_gtk_doc.to_string() + '\n'
+output += '        Send-to.....................:  ' + get_option('sendto').to_string() + '\n'
 output += '        GObject-Introspection.......:  ' + enable_gir.to_string()
 message(output)
 
