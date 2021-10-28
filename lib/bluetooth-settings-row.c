@@ -31,12 +31,9 @@
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 
-#define BLUETOOTH_SETTINGS_ROW_GET_PRIVATE(obj) \
-	(bluetooth_settings_row_get_instance_private (obj))
+struct _BluetoothSettingsRow {
+	GtkListBoxRow parent_instance;
 
-typedef struct _BluetoothSettingsRowPrivate BluetoothSettingsRowPrivate;
-
-struct _BluetoothSettingsRowPrivate {
 	/* Widget */
 	GtkWidget *label;
 	GtkWidget *status;
@@ -72,52 +69,47 @@ enum {
 	PROP_TIME_CREATED
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(BluetoothSettingsRow, bluetooth_settings_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE(BluetoothSettingsRow, bluetooth_settings_row, GTK_TYPE_LIST_BOX_ROW)
 
 static void
 label_might_change (BluetoothSettingsRow *self)
 {
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
-
-	if (!priv->paired && !priv->trusted)
-		gtk_label_set_text (GTK_LABEL (priv->status), _("Not Set Up"));
-	else if (priv->connected)
-		gtk_label_set_text (GTK_LABEL (priv->status), _("Connected"));
+	if (!self->paired && !self->trusted)
+		gtk_label_set_text (GTK_LABEL (self->status), _("Not Set Up"));
+	else if (self->connected)
+		gtk_label_set_text (GTK_LABEL (self->status), _("Connected"));
 	else
-		gtk_label_set_text (GTK_LABEL (priv->status), _("Disconnected"));
+		gtk_label_set_text (GTK_LABEL (self->status), _("Disconnected"));
 
-	if (priv->pairing)
-		gtk_widget_show (priv->spinner);
+	if (self->pairing)
+		gtk_widget_show (self->spinner);
 	else
-		gtk_widget_show (priv->status);
+		gtk_widget_show (self->status);
 }
 
 static void
 bluetooth_settings_row_init (BluetoothSettingsRow *self)
 {
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
-
 	gtk_widget_init_template (GTK_WIDGET (self));
 
 	/* Placeholder text and spinner */
-	g_object_bind_property (priv->spinner, "visible",
-				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
-	g_object_bind_property (priv->spinner, "spinning",
-				priv->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
+	g_object_bind_property (self->spinner, "visible",
+				self->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
+	g_object_bind_property (self->spinner, "spinning",
+				self->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
 
-	priv->time_created = g_get_monotonic_time();
+	self->time_created = g_get_monotonic_time();
 }
 
 static void
 bluetooth_settings_row_finalize (GObject *object)
 {
 	BluetoothSettingsRow *self = BLUETOOTH_SETTINGS_ROW (object);
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
 
-	g_clear_object (&priv->proxy);
-	g_clear_pointer (&priv->name, g_free);
-	g_clear_pointer (&priv->alias, g_free);
-	g_clear_pointer (&priv->bdaddr, g_free);
+	g_clear_object (&self->proxy);
+	g_clear_pointer (&self->name, g_free);
+	g_clear_pointer (&self->alias, g_free);
+	g_clear_pointer (&self->bdaddr, g_free);
 
 	G_OBJECT_CLASS(bluetooth_settings_row_parent_class)->finalize(object);
 }
@@ -129,41 +121,40 @@ bluetooth_settings_row_get_property (GObject        *object,
 				     GParamSpec     *pspec)
 {
 	BluetoothSettingsRow *self = BLUETOOTH_SETTINGS_ROW (object);
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
 
 	switch (property_id) {
 	case PROP_PROXY:
-		g_value_set_object (value, priv->proxy);
+		g_value_set_object (value, self->proxy);
 		break;
 	case PROP_PAIRED:
-		g_value_set_boolean (value, priv->paired);
+		g_value_set_boolean (value, self->paired);
 		break;
 	case PROP_TRUSTED:
-		g_value_set_boolean (value, priv->trusted);
+		g_value_set_boolean (value, self->trusted);
 		break;
 	case PROP_TYPE:
-		g_value_set_flags (value, priv->type);
+		g_value_set_flags (value, self->type);
 		break;
 	case PROP_CONNECTED:
-		g_value_set_boolean (value, priv->connected);
+		g_value_set_boolean (value, self->connected);
 		break;
 	case PROP_NAME:
-		g_value_set_string (value, priv->name);
+		g_value_set_string (value, self->name);
 		break;
 	case PROP_ALIAS:
-		g_value_set_string (value, priv->alias);
+		g_value_set_string (value, self->alias);
 		break;
 	case PROP_ADDRESS:
-		g_value_set_string (value, priv->bdaddr);
+		g_value_set_string (value, self->bdaddr);
 		break;
 	case PROP_PAIRING:
-		g_value_set_boolean (value, priv->pairing);
+		g_value_set_boolean (value, self->pairing);
 		break;
 	case PROP_LEGACY_PAIRING:
-		g_value_set_boolean (value, priv->legacy_pairing);
+		g_value_set_boolean (value, self->legacy_pairing);
 		break;
 	case PROP_TIME_CREATED:
-		g_value_set_int64 (value, priv->time_created);
+		g_value_set_int64 (value, self->time_created);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -174,14 +165,12 @@ bluetooth_settings_row_get_property (GObject        *object,
 static void
 update_row (BluetoothSettingsRow *self)
 {
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
-
-	if (priv->name == NULL) {
-		gtk_label_set_text (GTK_LABEL (priv->label),
-				    bluetooth_type_to_string (priv->type));
+	if (self->name == NULL) {
+		gtk_label_set_text (GTK_LABEL (self->label),
+				    bluetooth_type_to_string (self->type));
 		gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
 	} else {
-		gtk_label_set_text (GTK_LABEL (priv->label), priv->alias);
+		gtk_label_set_text (GTK_LABEL (self->label), self->alias);
 		gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 	}
 }
@@ -193,49 +182,48 @@ bluetooth_settings_row_set_property (GObject        *object,
 				     GParamSpec     *pspec)
 {
 	BluetoothSettingsRow *self = BLUETOOTH_SETTINGS_ROW (object);
-	BluetoothSettingsRowPrivate *priv = BLUETOOTH_SETTINGS_ROW_GET_PRIVATE (self);
 
 	switch (property_id) {
 	case PROP_PROXY:
-		g_clear_object (&priv->proxy);
-		priv->proxy = g_value_dup_object (value);
+		g_clear_object (&self->proxy);
+		self->proxy = g_value_dup_object (value);
 		break;
 	case PROP_PAIRED:
-		priv->paired = g_value_get_boolean (value);
+		self->paired = g_value_get_boolean (value);
 		label_might_change (self);
 		break;
 	case PROP_TRUSTED:
-		priv->trusted = g_value_get_boolean (value);
+		self->trusted = g_value_get_boolean (value);
 		label_might_change (self);
 		break;
 	case PROP_TYPE:
-		priv->type = g_value_get_flags (value);
+		self->type = g_value_get_flags (value);
 		update_row (self);
 		break;
 	case PROP_CONNECTED:
-		priv->connected = g_value_get_boolean (value);
+		self->connected = g_value_get_boolean (value);
 		label_might_change (self);
 		break;
 	case PROP_NAME:
-		g_free (priv->name);
-		priv->name = g_value_dup_string (value);
+		g_free (self->name);
+		self->name = g_value_dup_string (value);
 		update_row (self);
 		break;
 	case PROP_ALIAS:
-		g_free (priv->alias);
-		priv->alias = g_value_dup_string (value);
+		g_free (self->alias);
+		self->alias = g_value_dup_string (value);
 		update_row (self);
 		break;
 	case PROP_ADDRESS:
-		g_free (priv->bdaddr);
-		priv->bdaddr = g_value_dup_string (value);
+		g_free (self->bdaddr);
+		self->bdaddr = g_value_dup_string (value);
 		break;
 	case PROP_PAIRING:
-		priv->pairing = g_value_get_boolean (value);
+		self->pairing = g_value_get_boolean (value);
 		label_might_change (self);
 		break;
 	case PROP_LEGACY_PAIRING:
-		priv->legacy_pairing = g_value_get_boolean (value);
+		self->legacy_pairing = g_value_get_boolean (value);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -302,9 +290,9 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 
 	/* Bind class to template */
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/bluetooth/bluetooth-settings-row.ui");
-	gtk_widget_class_bind_template_child_private (widget_class, BluetoothSettingsRow, label);
-	gtk_widget_class_bind_template_child_private (widget_class, BluetoothSettingsRow, spinner);
-	gtk_widget_class_bind_template_child_private (widget_class, BluetoothSettingsRow, status);
+	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, label);
+	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, spinner);
+	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, status);
 }
 
 /**

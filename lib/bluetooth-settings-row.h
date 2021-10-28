@@ -23,11 +23,6 @@
 #include <gtk/gtk.h>
 
 #define BLUETOOTH_TYPE_SETTINGS_ROW (bluetooth_settings_row_get_type())
-G_DECLARE_DERIVABLE_TYPE (BluetoothSettingsRow, bluetooth_settings_row, BLUETOOTH, SETTINGS_ROW, GtkListBoxRow)
-
-struct _BluetoothSettingsRowClass
-{
-  GtkListBoxRowClass parent_class;
-};
+G_DECLARE_FINAL_TYPE (BluetoothSettingsRow, bluetooth_settings_row, BLUETOOTH, SETTINGS_ROW, GtkListBoxRow)
 
 GtkWidget *bluetooth_settings_row_new (void);
