@@ -96,6 +96,8 @@ bluetooth_type_to_string (BluetoothType type)
 		return _("Toy");
 	case BLUETOOTH_TYPE_SPEAKERS:
 		return _("Speakers");
+	default:
+		/* fallthrough */
 	}
 
 	return _("Unknown");
