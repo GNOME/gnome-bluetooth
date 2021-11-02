@@ -94,6 +94,8 @@ bluetooth_type_to_string (BluetoothType type)
 		return _("Wearable");
 	case BLUETOOTH_TYPE_TOY:
 		return _("Toy");
+	case BLUETOOTH_TYPE_SPEAKERS:
+		return _("Speakers");
 	}
 
 	return _("Unknown");
