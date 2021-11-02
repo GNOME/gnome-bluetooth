@@ -35,26 +35,6 @@
  **/
 
 /**
- * BluetoothCategory:
- * @BLUETOOTH_CATEGORY_ALL: all devices
- * @BLUETOOTH_CATEGORY_PAIRED: paired devices
- * @BLUETOOTH_CATEGORY_TRUSTED: trusted devices
- * @BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED: neither paired, nor trusted devices
- * @BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED: paired and/or trusted devices
- *
- * The category of a Bluetooth devices.
- **/
-typedef enum {
-	BLUETOOTH_CATEGORY_ALL,
-	BLUETOOTH_CATEGORY_PAIRED,
-	BLUETOOTH_CATEGORY_TRUSTED,
-	BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
-	BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
-	/* < private > */
-	BLUETOOTH_CATEGORY_NUM_CATEGORIES /*< skip >*/
-} BluetoothCategory;
-
-/**
  * BluetoothType:
  * @BLUETOOTH_TYPE_ANY: any device, or a device of an unknown type
  * @BLUETOOTH_TYPE_PHONE: a telephone (usually a cell/mobile phone)
