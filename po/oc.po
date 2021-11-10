@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2021-05-13 14:41+0000\n"
-"PO-Revision-Date: 2021-05-13 16:40+0200\n"
+"POT-Creation-Date: 2021-11-10 14:34+0000\n"
+"PO-Revision-Date: 2021-11-10 18:14+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -16,99 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Project-Style: gnome\n"
-
-#: lib/bluetooth-chooser-button.c:71
-msgid "Click to select device…"
-msgstr "Clicatz per causir un periferic…"
-
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1326
-#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
-msgid "_Cancel"
-msgstr "A_nullar"
-
-#: lib/bluetooth-chooser-button.c:202
-msgid "_OK"
-msgstr "_D'acòrdi"
-
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:79
-#: lib/bluetooth-utils.c:99
-msgid "Unknown"
-msgstr "Desconegut"
-
-#: lib/bluetooth-chooser.c:176
-msgid "No adapters available"
-msgstr "Pas cap d'adaptator de disponible"
-
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:802
-#: lib/bluetooth-settings-widget.c:1591
-msgid "Searching for devices…"
-msgstr "Recèrca de periferics…"
-
-#: lib/bluetooth-chooser.c:696 lib/bluetooth-chooser.c:982
-msgid "Device"
-msgstr "Periferic"
-
-#: lib/bluetooth-chooser.c:732 lib/settings.ui:182
-msgid "Type"
-msgstr "Tipe"
-
-#: lib/bluetooth-chooser.c:984 lib/bluetooth-settings-widget.c:1545
-msgid "Devices"
-msgstr "Periferics"
-
-#: lib/bluetooth-filter-widget.c:69
-msgid "All categories"
-msgstr "Totas las categorias"
-
-#: lib/bluetooth-filter-widget.c:71 lib/settings.ui:135
-msgid "Paired"
-msgstr "Apariat"
-
-#: lib/bluetooth-filter-widget.c:73
-msgid "Trusted"
-msgstr "Fisable"
-
-#: lib/bluetooth-filter-widget.c:75
-msgid "Not paired or trusted"
-msgstr "Pas apariat o fisable"
-
-#: lib/bluetooth-filter-widget.c:77
-msgid "Paired or trusted"
-msgstr "Apariat o fisable"
-
-#. This is the title of the filter section of the Bluetooth device chooser.
-#. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:219
-msgid "Show:"
-msgstr "Afichar :"
-
-#. The device category filter
-#: lib/bluetooth-filter-widget.c:234
-msgid "Device _category:"
-msgstr "_Categoria de periferic :"
-
-#: lib/bluetooth-filter-widget.c:248
-msgid "Select the device category to filter"
-msgstr "Seleccionar la categoria de periferic a filtrar"
-
-#. The device type filter
-#: lib/bluetooth-filter-widget.c:262
-msgid "Device _type:"
-msgstr "_Tipe de periferic :"
-
-#: lib/bluetooth-filter-widget.c:282
-msgid "Select the device type to filter"
-msgstr "Causir lo tipe de periferic a filtrar"
-
-#: lib/bluetooth-filter-widget.c:288
-msgid "Input devices (mice, keyboards, etc.)"
-msgstr "Periferics de picada (mirga, clavièrs, etc.)"
-
-#: lib/bluetooth-filter-widget.c:292
-msgid "Headphones, headsets and other audio devices"
-msgstr "Escotadors, casques àudio e autres periferics àudio"
 
 #: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
 #: lib/bluetooth-pairing-dialog.c:104
@@ -195,39 +104,39 @@ msgid "Dismiss"
 msgstr "Abandonar"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Anullar"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:245
+#: lib/bluetooth-pairing-dialog.c:286 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Acceptar"
 
-#: lib/bluetooth-settings-row.c:83 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:34
 msgid "Not Set Up"
 msgstr "Pas configurat"
 
-#: lib/bluetooth-settings-row.c:85
+#: lib/bluetooth-settings-row.c:80
 msgid "Connected"
 msgstr "Connectat"
 
-#: lib/bluetooth-settings-row.c:87
+#: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: lib/bluetooth-settings-widget.c:1196
+#: lib/bluetooth-settings-widget.c:1198
 msgid "Yes"
 msgstr "Òc"
 
-#: lib/bluetooth-settings-widget.c:1196
+#: lib/bluetooth-settings-widget.c:1198
 msgid "No"
 msgstr "Non"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1297
+#: lib/bluetooth-settings-widget.c:1299
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -237,21 +146,33 @@ msgstr ""
 "Los fichièrs transferits son placats dins lo dorsièr <a href=\"%s"
 "\">Telecargaments</a>."
 
-#: lib/bluetooth-settings-widget.c:1321
+#: lib/bluetooth-settings-widget.c:1337
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Suprimir « %s » de la lista dels periferics ?"
 
-#: lib/bluetooth-settings-widget.c:1323
+#: lib/bluetooth-settings-widget.c:1339
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Se suprimissètz aqueste periferic, vos lo caldrà reconfigurar tornamai abans "
 "utilizacion."
 
-#: lib/bluetooth-settings-widget.c:1327
+#: lib/bluetooth-settings-widget.c:1342 sendto/main.c:445 sendto/main.c:706
+msgid "_Cancel"
+msgstr "A_nullar"
+
+#: lib/bluetooth-settings-widget.c:1343
 msgid "_Remove"
 msgstr "_Suprimir"
+
+#: lib/bluetooth-settings-widget.c:1561
+msgid "Devices"
+msgstr "Periferics"
+
+#: lib/bluetooth-settings-widget.c:1605
+msgid "Searching for devices…"
+msgstr "Recèrca de periferics…"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:144
@@ -275,12 +196,12 @@ msgstr "Dobrir lo dorsièr parent"
 msgid "File reception complete"
 msgstr "Transferiment de fichièr acabat"
 
-#: lib/bluetooth-settings-obexpush.c:232
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Transferiment de fichièr per Bluetooth dempuèi %s"
 
-#: lib/bluetooth-settings-obexpush.c:242
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "Refusar"
 
@@ -361,35 +282,47 @@ msgstr "Portable"
 msgid "Toy"
 msgstr "Joguet"
 
-#: lib/bluetooth-utils.c:117
-msgid "All types"
-msgstr "Totes los tipes"
+#: lib/bluetooth-utils.c:98
+msgid "Speakers"
+msgstr "Naut-parlaires"
 
-#: lib/settings.ui:44
+#: lib/bluetooth-utils.c:103
+msgid "Unknown"
+msgstr "Desconegut"
+
+#: lib/settings.ui:29
 msgid "Connection"
 msgstr "Connexion"
 
-#: lib/settings.ui:229
+#: lib/settings.ui:71
+msgid "Paired"
+msgstr "Apariat"
+
+#: lib/settings.ui:94
+msgid "Type"
+msgstr "Tipe"
+
+#: lib/settings.ui:117
 msgid "Address"
 msgstr "Adreça"
 
-#: lib/settings.ui:285
+#: lib/settings.ui:143
 msgid "_Mouse & Touchpad Settings"
 msgstr "Paramètres de la mir_gat e del pavat tactil"
 
-#: lib/settings.ui:299
+#: lib/settings.ui:150
 msgid "_Sound Settings"
 msgstr "Paramètres del _son"
 
-#: lib/settings.ui:313
+#: lib/settings.ui:157
 msgid "_Keyboard Settings"
 msgstr "Paramètres del _clavièr"
 
-#: lib/settings.ui:327
+#: lib/settings.ui:164
 msgid "Send _Files…"
 msgstr "Mandadís de _fichièrs…"
 
-#: lib/settings.ui:341
+#: lib/settings.ui:171
 msgid "_Remove Device"
 msgstr "_Suprimir lo periferic"
 
@@ -401,137 +334,182 @@ msgstr "Transferiment Bluetooth"
 msgid "Send files via Bluetooth"
 msgstr "Mandadís de fichièrs per Bluetooth"
 
-#: sendto/main.c:117
+#: sendto/main.c:116
 msgid "An unknown error occurred"
 msgstr "Una error desconeguda s'es produita"
 
-#: sendto/main.c:130
+#: sendto/main.c:129
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Vérifiez que lo periferic es allumé e qu'il accepte les connexions Bluetooth"
 
-#: sendto/main.c:363
+#: sendto/main.c:362
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d segonda"
 msgstr[1] "%'d segondas"
 
-#: sendto/main.c:368 sendto/main.c:381
+#: sendto/main.c:367 sendto/main.c:380
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minuta"
 msgstr[1] "%'d minutas"
 
-#: sendto/main.c:379
+#: sendto/main.c:378
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d ora"
 msgstr[1] "%'d oras"
 
-#: sendto/main.c:389
+#: sendto/main.c:388
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "environ %'d ora"
 msgstr[1] "environ %'d oras"
 
-#: sendto/main.c:402 sendto/main.c:500
+#: sendto/main.c:401 sendto/main.c:497
 msgid "Connecting…"
 msgstr "Connexion en cors…"
 
-#: sendto/main.c:444
+#: sendto/main.c:442
 msgid "Bluetooth File Transfer"
 msgstr "Transferiment de fichièr per Bluetooth"
 
-#: sendto/main.c:448
+#: sendto/main.c:446
 msgid "_Retry"
 msgstr "_Ensajar tornamai"
 
-#: sendto/main.c:470
+#: sendto/main.c:463
 msgid "From:"
 msgstr "De :"
 
-#: sendto/main.c:484
+#: sendto/main.c:479
 msgid "To:"
 msgstr "Cap a :"
 
-#: sendto/main.c:577
+#: sendto/main.c:575
 #, c-format
 msgid "Sending %s"
 msgstr "Mandadís de %s"
 
-#: sendto/main.c:584 sendto/main.c:633
+#: sendto/main.c:582 sendto/main.c:631
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Mandadís del fichièr %d sus %d"
 
-#: sendto/main.c:629
+#: sendto/main.c:627
 #, c-format
 msgid "%d kB/s"
 msgstr "%d Ko/s"
 
-#: sendto/main.c:631
+#: sendto/main.c:629
 #, c-format
 msgid "%d B/s"
 msgstr "%d o/s"
 
-#: sendto/main.c:662
+#: sendto/main.c:660
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u transferiment acabat"
 msgstr[1] "%u transferiments acabats"
 
-#: sendto/main.c:669
+#: sendto/main.c:667
 msgid "_Close"
 msgstr "_Tampar"
 
-#: sendto/main.c:679
+#: sendto/main.c:677
 msgid "There was an error"
 msgstr "I a agut una error"
 
 # Títol de fenèstra
-#: sendto/main.c:734
-msgid "Select device to send to"
-msgstr "Causida del periferic cibla"
-
-#: sendto/main.c:739
-msgid "_Send"
-msgstr "_Mandar"
-
-# Títol de fenèstra
-#: sendto/main.c:789
+#: sendto/main.c:701
 msgid "Choose files to send"
 msgstr "Causida dels fichièrs de mandar"
 
-#: sendto/main.c:795
+#: sendto/main.c:707
 msgid "Select"
 msgstr "Seleccionar"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "Remote device to use"
 msgstr "Periferic distant d'utilizar"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "ADDRESS"
 msgstr "ADREÇA"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "Remote device’s name"
 msgstr "Nom del periferic distant"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "NAME"
 msgstr "NOM"
 
-#: sendto/main.c:846
-msgid "[FILE…]"
-msgstr "[FICHIÈR...]"
+#~ msgid "Click to select device…"
+#~ msgstr "Clicatz per causir un periferic…"
+
+#~ msgid "_OK"
+#~ msgstr "_D'acòrdi"
+
+#~ msgid "No adapters available"
+#~ msgstr "Pas cap d'adaptator de disponible"
+
+#~ msgid "Device"
+#~ msgstr "Periferic"
+
+#~ msgid "All categories"
+#~ msgstr "Totas las categorias"
+
+#~ msgid "Trusted"
+#~ msgstr "Fisable"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "Pas apariat o fisable"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "Apariat o fisable"
+
+#~ msgid "Show:"
+#~ msgstr "Afichar :"
+
+#~ msgid "Device _category:"
+#~ msgstr "_Categoria de periferic :"
+
+#~ msgid "Select the device category to filter"
+#~ msgstr "Seleccionar la categoria de periferic a filtrar"
+
+#~ msgid "Device _type:"
+#~ msgstr "_Tipe de periferic :"
+
+#~ msgid "Select the device type to filter"
+#~ msgstr "Causir lo tipe de periferic a filtrar"
+
+#~ msgid "Input devices (mice, keyboards, etc.)"
+#~ msgstr "Periferics de picada (mirga, clavièrs, etc.)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "Escotadors, casques àudio e autres periferics àudio"
+
+#~ msgid "All types"
+#~ msgstr "Totes los tipes"
+
+# Títol de fenèstra
+#~ msgid "Select device to send to"
+#~ msgstr "Causida del periferic cibla"
+
+#~ msgid "_Send"
+#~ msgstr "_Mandar"
+
+#~ msgid "[FILE…]"
+#~ msgstr "[FICHIÈR...]"
 
 #~ msgid "Visible as “%s”"
 #~ msgstr "Visible en tant que « %s »"
