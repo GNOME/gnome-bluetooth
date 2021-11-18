@@ -23,12 +23,7 @@
 #include <gtk/gtk.h>
 
 #define BLUETOOTH_TYPE_SETTINGS_WIDGET (bluetooth_settings_widget_get_type())
-G_DECLARE_DERIVABLE_TYPE (BluetoothSettingsWidget, bluetooth_settings_widget, BLUETOOTH, SETTINGS_WIDGET, GtkBox)
-
-struct _BluetoothSettingsWidgetClass
-{
-  GtkBoxClass parent_class;
-};
+G_DECLARE_FINAL_TYPE (BluetoothSettingsWidget, bluetooth_settings_widget, BLUETOOTH, SETTINGS_WIDGET, GtkBox)
 
 GtkWidget *bluetooth_settings_widget_new (void);
 
