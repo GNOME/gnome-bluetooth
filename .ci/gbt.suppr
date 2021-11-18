@@ -17,3 +17,15 @@ drop = yes
 [suppress_function]
 symbol_name_regexp = bluetooth_filter_*
 drop = yes
+
+[suppress_function]
+symbol_name = bluetooth_client_get_adapter_model
+drop = yes
+
+[suppress_function]
+symbol_name = bluetooth_client_get_device_model
+drop = yes
+
+[suppress_function]
+symbol_name = bluetooth_client_get_filter_model
+drop = yes
