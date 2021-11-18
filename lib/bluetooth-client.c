@@ -1215,9 +1215,11 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
  *
  * Return value: (transfer full): a #GtkTreeModel object.
  **/
-GtkTreeModel *bluetooth_client_get_filter_model (BluetoothClient *client,
-						 GtkTreeModelFilterVisibleFunc func,
-						 gpointer data, GDestroyNotify destroy)
+static GtkTreeModel *
+bluetooth_client_get_filter_model (BluetoothClient               *client,
+				   GtkTreeModelFilterVisibleFunc  func,
+				   gpointer                       data,
+				   GDestroyNotify                 destroy)
 {
 	BluetoothClientPrivate *priv;
 	GtkTreeModel *model;
