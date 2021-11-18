@@ -95,16 +95,15 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
         self.assertEqual(self.client.get_property('num-adapters'), 1)
 
-        devices = self.client.get_device_model()
-        self.assertEqual(len(devices), 1)
+        model = self.client.get_model()
 
         # Get first device
-        path = Gtk.TreePath([0])
-        treeiter = devices.get_iter(path)
-        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '11:22:33:44:55:66')
-        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), False)
+        path = Gtk.TreePath([0, 0])
+        treeiter = model.get_iter(path)
+        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '11:22:33:44:55:66')
+        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), False)
 
-        proxy = devices.get_value(treeiter, GnomeBluetoothPriv.Column.PROXY)
+        proxy = model.get_value(treeiter, GnomeBluetoothPriv.Column.PROXY)
         self.client.setup_device (proxy.get_object_path(),
                 True,
                 None,
@@ -112,9 +111,9 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_condition(lambda: self.paired == True)
         self.assertEqual(self.paired, True)
 
-        treeiter = devices.get_iter(path)
-        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), True)
-        self.assertEqual(devices.get_value(treeiter, GnomeBluetoothPriv.Column.ICON), 'phone')
+        treeiter = model.get_iter(path)
+        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.PAIRED), True)
+        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ICON), 'phone')
 
     def test_agent(self):
         agent = GnomeBluetoothPriv.Agent.new ('/org/gnome/bluetooth/integration_test')
