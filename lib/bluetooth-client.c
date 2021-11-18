@@ -59,6 +59,7 @@ struct _BluetoothClient {
 	GDBusObjectManager *manager;
 	GCancellable *cancellable;
 	GtkTreeStore *store;
+	guint num_adapters;
 	GtkTreeRowReference *default_adapter;
 	/* Discoverable during discovery? */
 	gboolean disco_during_disco;
@@ -67,6 +68,7 @@ struct _BluetoothClient {
 
 enum {
 	PROP_0,
+	PROP_NUM_ADAPTERS,
 	PROP_DEFAULT_ADAPTER,
 	PROP_DEFAULT_ADAPTER_POWERED,
 	PROP_DEFAULT_ADAPTER_DISCOVERABLE,
@@ -650,6 +652,9 @@ adapter_added (GDBusObjectManager   *manager,
 					 g_dbus_object_get_object_path (g_dbus_interface_get_object (G_DBUS_INTERFACE (adapter))),
 					 client);
 	}
+
+	client->num_adapters++;
+	g_object_notify (G_OBJECT (client), "num-adapters");
 }
 
 static void
@@ -668,7 +673,7 @@ adapter_removed (GDBusObjectManager   *manager,
 			   BLUETOOTH_COLUMN_DEFAULT, &was_default, -1);
 
 	if (!was_default)
-		return;
+		goto out;
 
 	/* Ensure that all devices are removed. This can happen if bluetoothd
 	 * crashes as the "object-removed" signal is emitted in an undefined
@@ -707,6 +712,10 @@ adapter_removed (GDBusObjectManager   *manager,
 		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 		g_object_notify (G_OBJECT (client), "default-adapter-discovering");
 	}
+
+out:
+	client->num_adapters--;
+	g_object_notify (G_OBJECT (client), "num-adapters");
 }
 
 static GType
@@ -1009,6 +1018,9 @@ bluetooth_client_get_property (GObject        *object,
 	BluetoothClient *client = BLUETOOTH_CLIENT (object);
 
 	switch (property_id) {
+	case PROP_NUM_ADAPTERS:
+		g_value_set_uint (value, client->num_adapters);
+		break;
 	case PROP_DEFAULT_ADAPTER:
 		g_value_set_string (value, _bluetooth_client_get_default_adapter_path (client));
 		break;
@@ -1092,6 +1104,16 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__STRING,
 			      G_TYPE_NONE, 1, G_TYPE_STRING);
+
+	/**
+	 * BluetoothClient:num-adapters:
+	 *
+	 * The number of detected Bluetooth adapters.
+	 */
+	g_object_class_install_property (object_class, PROP_NUM_ADAPTERS,
+					 g_param_spec_uint ("num-adapters", NULL,
+							    "The number of detected Bluetooth adapters",
+							    0, G_MAXUINT, 0, G_PARAM_READABLE));
 
 	/**
 	 * BluetoothClient:default-adapter:
