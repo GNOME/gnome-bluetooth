@@ -1095,7 +1095,9 @@ update_properties (BluetoothSettingsWidget *self,
 	gboolean ret;
 	BluetoothType type;
 	gboolean connected, paired;
-	char **uuids, *bdaddr, *alias, *icon;
+	g_auto(GStrv) uuids = NULL;
+	char *bdaddr, *alias;
+	g_autofree char *icon = NULL;
 	guint i;
 
 	model = bluetooth_client_get_model (self->client);
@@ -1214,9 +1216,6 @@ update_properties (BluetoothSettingsWidget *self,
 
 	g_free (self->selected_bdaddr);
 	self->selected_bdaddr = bdaddr;
-
-	g_free (icon);
-	g_strfreev (uuids);
 }
 
 static void
@@ -1675,18 +1674,17 @@ row_changed_cb (GtkTreeModel *tree_model,
 		gpointer      user_data)
 {
 	BluetoothSettingsWidget *self = user_data;
-	GDBusProxy *proxy;
+	g_autoptr(GDBusProxy) proxy = NULL;
 	GtkWidget *child;
 	const char *object_path;
 
 	if (is_interesting_device (tree_model, iter) == FALSE) {
-		char *name;
+		g_autofree char *name = NULL;
 
 		gtk_tree_model_get (tree_model, iter,
 				    BLUETOOTH_COLUMN_NAME, &name,
 				    -1);
 		g_debug ("Not interested in device '%s'", name);
-		g_free (name);
 		return;
 	}
 
@@ -1741,7 +1739,6 @@ row_changed_cb (GtkTreeModel *tree_model,
 			break;
 		}
 	}
-	g_object_unref (proxy);
 }
 
 static void
