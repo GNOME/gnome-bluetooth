@@ -34,8 +34,6 @@ BluetoothClient *bluetooth_client_new(void);
 
 GtkTreeModel *bluetooth_client_get_model(BluetoothClient *client);
 
-GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client);
-
 void bluetooth_client_connect_service (BluetoothClient     *client,
 				       const char          *path,
 				       gboolean             connect,

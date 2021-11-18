@@ -1202,52 +1202,6 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
 	return model;
 }
 
-/**
- * bluetooth_client_get_device_model:
- * @client: a #BluetoothClient object
- *
- * Returns a #GtkTreeModelFilter with only devices belonging to the default adapter listed.
- * Note that the model will follow a specific adapter, and will not follow the default adapter.
- * Also note that due to the way #GtkTreeModelFilter works, you will probably want to
- * monitor signals on the "child-model" #GtkTreeModel to monitor for changes.
- *
- * Return value: (transfer full): a #GtkTreeModel object.
- **/
-GtkTreeModel *bluetooth_client_get_device_model (BluetoothClient *client)
-{
-	GtkTreeModel *model;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gboolean cont, found = FALSE;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	cont = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(client->store), &iter);
-
-	while (cont == TRUE) {
-		gboolean is_default;
-
-		gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
-				    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
-
-		if (is_default == TRUE) {
-			found = TRUE;
-			break;
-		}
-
-		cont = gtk_tree_model_iter_next (GTK_TREE_MODEL(client->store), &iter);
-	}
-
-	if (found == TRUE) {
-		path = gtk_tree_model_get_path (GTK_TREE_MODEL(client->store), &iter);
-		model = gtk_tree_model_filter_new (GTK_TREE_MODEL(client->store), path);
-		gtk_tree_path_free (path);
-	} else
-		model = NULL;
-
-	return model;
-}
-
 typedef struct {
 	BluetoothClientSetupFunc func;
 	BluetoothClient *client;
