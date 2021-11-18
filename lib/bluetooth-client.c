@@ -1203,68 +1203,6 @@ GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
 }
 
 /**
- * bluetooth_client_get_filter_model:
- * @client: a #BluetoothClient object
- * @func: a #GtkTreeModelFilterVisibleFunc
- * @data: user data to pass to gtk_tree_model_filter_set_visible_func()
- * @destroy: a destroy function for gtk_tree_model_filter_set_visible_func()
- *
- * Returns a #GtkTreeModelFilter of devices filtered using the @func, @data and @destroy arguments to pass to gtk_tree_model_filter_set_visible_func().
- *
- * Return value: (transfer full): a #GtkTreeModel object.
- **/
-static GtkTreeModel *
-bluetooth_client_get_filter_model (BluetoothClient               *client,
-				   GtkTreeModelFilterVisibleFunc  func,
-				   gpointer                       data,
-				   GDestroyNotify                 destroy)
-{
-	GtkTreeModel *model;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	model = gtk_tree_model_filter_new(GTK_TREE_MODEL(client->store), NULL);
-
-	gtk_tree_model_filter_set_visible_func(GTK_TREE_MODEL_FILTER(model),
-							func, data, destroy);
-
-	return model;
-}
-
-static gboolean adapter_filter(GtkTreeModel *model,
-					GtkTreeIter *iter, gpointer user_data)
-{
-	GDBusProxy *proxy;
-	gboolean active;
-
-	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_PROXY, &proxy, -1);
-
-	if (proxy == NULL)
-		return FALSE;
-
-	active = g_str_equal(BLUEZ_ADAPTER_INTERFACE,
-					g_dbus_proxy_get_interface_name(proxy));
-
-	g_object_unref(proxy);
-
-	return active;
-}
-
-/**
- * bluetooth_client_get_adapter_model:
- * @client: a #BluetoothClient object
- *
- * Returns a #GtkTreeModelFilter with only adapters present.
- *
- * Return value: (transfer full): a #GtkTreeModel object.
- **/
-GtkTreeModel *bluetooth_client_get_adapter_model (BluetoothClient *client)
-{
-	return bluetooth_client_get_filter_model (client, adapter_filter,
-						  NULL, NULL);
-}
-
-/**
  * bluetooth_client_get_device_model:
  * @client: a #BluetoothClient object
  *
