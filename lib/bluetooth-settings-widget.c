@@ -1088,40 +1088,56 @@ update_properties (BluetoothSettingsWidget *self,
 		   GDBusProxy              *proxy)
 {
 	GtkSwitch *button;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
+	g_autoptr (GtkTreeModel) model = NULL;
+	GtkTreeIter iter, child_iter;
+	gboolean is_default = FALSE;
+	gboolean found_adapter = FALSE;
 	gboolean ret;
 	BluetoothType type;
 	gboolean connected, paired;
 	char **uuids, *bdaddr, *alias, *icon;
 	guint i;
 
-	model = bluetooth_client_get_device_model (self->client);
+	model = bluetooth_client_get_model (self->client);
 	g_assert (model);
 
 	ret = gtk_tree_model_get_iter_first (model, &iter);
 	while (ret) {
-		GDBusProxy *p;
-
 		gtk_tree_model_get (model, &iter,
+				    BLUETOOTH_COLUMN_DEFAULT, &is_default,
+				    -1);
+
+		if (is_default) {
+			found_adapter = TRUE;
+			break;
+		}
+		ret = gtk_tree_model_iter_next (model, &iter);
+	}
+	if (!found_adapter) {
+		g_warning ("Could not find default adapter");
+		return;
+	}
+
+	ret = gtk_tree_model_iter_children (model, &child_iter, &iter);
+	while (ret) {
+		g_autoptr(GDBusProxy) p = NULL;
+
+		gtk_tree_model_get (model, &child_iter,
 				    BLUETOOTH_COLUMN_PROXY, &p,
 				    -1);
 
 		if (g_strcmp0 (g_dbus_proxy_get_object_path (proxy),
 			       g_dbus_proxy_get_object_path (p)) == 0) {
-			g_object_unref (p);
 			break;
 		}
 
-		g_object_unref (p);
-
-		ret = gtk_tree_model_iter_next (model, &iter);
+		ret = gtk_tree_model_iter_next (model, &child_iter);
 	}
 
 	/* This means we've found the device */
 	g_assert (ret);
 
-	gtk_tree_model_get (model, &iter,
+	gtk_tree_model_get (model, &child_iter,
 			    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
 			    BLUETOOTH_COLUMN_ALIAS, &alias,
 			    BLUETOOTH_COLUMN_ICON, &icon,
@@ -1131,8 +1147,7 @@ update_properties (BluetoothSettingsWidget *self,
 			    BLUETOOTH_COLUMN_TYPE, &type,
 			    -1);
 	if (self->debug)
-		bluetooth_client_dump_device (model, &iter);
-	g_object_unref (model);
+		bluetooth_client_dump_device (model, &child_iter);
 
 	g_free (self->selected_object_path);
 	self->selected_object_path = g_strdup (g_dbus_proxy_get_object_path (proxy));
