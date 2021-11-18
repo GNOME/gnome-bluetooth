@@ -28,35 +28,7 @@
 #include <bluetooth-enums.h>
 
 #define BLUETOOTH_TYPE_CLIENT (bluetooth_client_get_type())
-#define BLUETOOTH_CLIENT(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
-					BLUETOOTH_TYPE_CLIENT, BluetoothClient))
-#define BLUETOOTH_CLIENT_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
-					BLUETOOTH_TYPE_CLIENT, BluetoothClientClass))
-#define BLUETOOTH_IS_CLIENT(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), \
-							BLUETOOTH_TYPE_CLIENT))
-#define BLUETOOTH_IS_CLIENT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
-							BLUETOOTH_TYPE_CLIENT))
-#define BLUETOOTH_GET_CLIENT_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
-					BLUETOOTH_TYPE_CLIENT, BluetoothClientClass))
-
-/**
- * BluetoothClient:
- *
- * The <structname>BluetoothClient</structname> struct contains
- * only private fields and should not be directly accessed.
- */
-typedef struct _BluetoothClient BluetoothClient;
-typedef struct _BluetoothClientClass BluetoothClientClass;
-
-struct _BluetoothClient {
-	GObject parent;
-};
-
-struct _BluetoothClientClass {
-	GObjectClass parent_class;
-};
-
-GType bluetooth_client_get_type(void);
+G_DECLARE_FINAL_TYPE (BluetoothClient, bluetooth_client, BLUETOOTH, CLIENT, GObject)
 
 BluetoothClient *bluetooth_client_new(void);
 
