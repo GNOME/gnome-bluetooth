@@ -16,6 +16,7 @@ install_headers(
 sources = files(
   'bluetooth-agent.c',
   'bluetooth-client.c',
+  'bluetooth-device.c',
   'bluetooth-pairing-dialog.c',
   'bluetooth-settings-obexpush.c',
   'bluetooth-settings-row.c',
@@ -132,6 +133,7 @@ if enable_gir
   gnomebt_priv_gir = gnome.generate_gir(
     libgnome_bluetooth,
     sources: gir_sources + [
+      'bluetooth-device.h',
       'bluetooth-client-private.h',
       'bluetooth-agent.h',
       ],

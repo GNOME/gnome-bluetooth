@@ -14,3 +14,15 @@ if enable_gir
     depends: test_deps
   )
 endif
+
+test_bluetooth_device = executable('test-bluetooth-device',
+  'test-bluetooth-device.c',
+  include_directories: lib_inc,
+  dependencies: deps + private_deps,
+  c_args: cflags,
+  link_with: libgnome_bluetooth,
+)
+
+test('test-bluetooth-device-test',
+  test_bluetooth_device,
+)
