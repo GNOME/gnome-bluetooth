@@ -42,6 +42,7 @@
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-client-glue.h"
+#include "bluetooth-device.h"
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"
 #include "pin.h"
@@ -54,6 +55,7 @@
 struct _BluetoothClient {
 	GObject parent;
 
+	GListStore *list_store;
 	GDBusObjectManager *manager;
 	GCancellable *cancellable;
 	GtkTreeStore *store;
@@ -905,6 +907,7 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_INT,        /* BLUETOOTH_COLUMN_LEGACYPAIRING */
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_POWERED */
 					 G_TYPE_STRV);      /* BLUETOOTH_COLUMN_UUIDS */
+	client->list_store = g_list_store_new (BLUETOOTH_TYPE_DEVICE);
 
 	g_dbus_object_manager_client_new_for_bus (G_BUS_TYPE_SYSTEM,
 						  G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START,
@@ -1096,6 +1099,7 @@ static void bluetooth_client_finalize(GObject *object)
 	}
 	g_clear_object (&client->manager);
 	g_object_unref (client->store);
+	g_object_unref (client->list_store);
 
 	g_clear_pointer (&client->default_adapter, gtk_tree_row_reference_free);
 
@@ -1203,6 +1207,23 @@ BluetoothClient *bluetooth_client_new(void)
 				   (gpointer) &bluetooth_client);
 
 	return bluetooth_client;
+}
+
+/**
+ * bluetooth_client_get_devices:
+ * @client: a #BluetoothClient object
+ *
+ * Returns an unfiltered #GListStore representing the devices attached to the default
+ * Bluetooth adapter.
+ *
+ * Return value: (transfer full): a #GListStore
+ **/
+GListStore *
+bluetooth_client_get_devices (BluetoothClient *client)
+{
+	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
+
+	return G_LIST_STORE (g_object_ref (client->list_store));
 }
 
 /**

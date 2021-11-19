@@ -33,6 +33,7 @@ G_DECLARE_FINAL_TYPE (BluetoothClient, bluetooth_client, BLUETOOTH, CLIENT, GObj
 BluetoothClient *bluetooth_client_new(void);
 
 GtkTreeModel *bluetooth_client_get_model(BluetoothClient *client);
+GListStore *bluetooth_client_get_devices (BluetoothClient *client);
 
 void bluetooth_client_connect_service (BluetoothClient     *client,
 				       const char          *path,
