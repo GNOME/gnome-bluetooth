@@ -115,10 +115,7 @@ if enable_gtk_doc
 endif
 
 subdir('po')
-
-if enable_gir
-  subdir('tests')
-endif
+subdir('tests')
 
 configure_file(
   output: 'config.h',
