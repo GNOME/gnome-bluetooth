@@ -410,6 +410,8 @@ device_added (GDBusObjectManager   *manager,
 
 	device_resolve_type_and_icon (device, &type, &icon);
 
+	g_debug ("Inserting device '%s' on adapter '%s'", address, adapter_path);
+
 	if (get_iter_from_path (client->store, &parent, adapter_path) == FALSE)
 		return;
 
@@ -454,6 +456,8 @@ device_removed (const char      *path,
 		BluetoothClient *client)
 {
 	GtkTreeIter iter;
+
+	g_debug ("Removing device '%s'", path);
 
 	if (get_iter_from_path(client->store, &iter, path) == TRUE) {
 		/* Note that removal can also happen from adapter_removed. */
@@ -519,6 +523,8 @@ default_adapter_changed (GDBusObjectManager   *manager,
 
 	if (get_iter_from_path (client->store, &iter, path) == FALSE)
 		return;
+
+	g_debug ("Setting '%s' as the new default adapter", path);
 
 	tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (client->store), &iter);
 	client->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (client->store), tree_path);
@@ -635,6 +641,8 @@ adapter_added (GDBusObjectManager   *manager,
 	powered = adapter1_get_powered (adapter);
 	discoverable = adapter1_get_discoverable (adapter);
 
+	g_debug ("Inserting adapter '%s'", address);
+
 	gtk_tree_store_insert_with_values(client->store, &iter, NULL, -1,
 					  BLUETOOTH_COLUMN_PROXY, adapter,
 					  BLUETOOTH_COLUMN_ADDRESS, address,
@@ -666,6 +674,8 @@ adapter_removed (GDBusObjectManager   *manager,
 
 	if (get_iter_from_path (client->store, &iter, path) == FALSE)
 		return;
+
+	g_debug ("Removing adapter '%s'", path);
 
 	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
 			   BLUETOOTH_COLUMN_DEFAULT, &was_default, -1);
@@ -832,6 +842,7 @@ object_manager_new_callback(GObject      *source_object,
 	/* We need to add the adapters first, otherwise the devices will
 	 * be dropped to the floor, as they wouldn't have a parent in
 	 * the treestore */
+	g_debug ("Adding adapters from ObjectManager");
 	for (l = object_list; l != NULL; l = l->next) {
 		GDBusObject *object = l->data;
 		GDBusInterface *iface;
@@ -845,6 +856,7 @@ object_manager_new_callback(GObject      *source_object,
 			       client);
 	}
 
+	g_debug ("Adding devices from ObjectManager");
 	for (l = object_list; l != NULL; l = l->next) {
 		GDBusObject *object = l->data;
 		GDBusInterface *iface;
@@ -1440,6 +1452,7 @@ bluetooth_client_get_device (BluetoothClient *client,
 	GDBusProxy *proxy;
 
 	if (get_iter_from_path (client->store, &iter, path) == FALSE) {
+		g_debug ("Couldn't find device '%s' in tree", path);
 		return NULL;
 	}
 
