@@ -846,6 +846,12 @@ object_manager_new_callback(GObject      *source_object,
 	g_signal_connect_object (G_OBJECT (client->manager), "object-added", (GCallback) object_added, client, 0);
 	g_signal_connect_object (G_OBJECT (client->manager), "object-removed", (GCallback) object_removed, client, 0);
 
+	/* NOTE: Since 2013, in 68852faa5a957d14480e72e8e63bc8e1196d19cf, the default
+	 * adapter has been dependent on the order objects are returned from
+	 * g_dbus_object_manager_client_get_objects(), which has never not been
+	 * tested to have the highest numbered device as the default one.
+	 *
+	 * It's 2021, and there are no reasons for that to be changed this late. */
 	object_list = g_dbus_object_manager_get_objects (client->manager);
 
 	/* We need to add the adapters first, otherwise the devices will
