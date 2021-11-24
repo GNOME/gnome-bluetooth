@@ -66,6 +66,10 @@ class OopTests(dbusmock.DBusTestCase):
             print("\t" * (treepath.get_depth() - 1), model[treeiter][:], sep="")
         model.foreach(print_row)
 
+    def print_list_store(self, model):
+        for device in model:
+            print(f"{device.get_property('name')}: {device.get_property('address')}")
+
     def wait_for_mainloop(self):
         ml = GLib.MainLoop()
         GLib.timeout_add_seconds(1, ml.quit)
