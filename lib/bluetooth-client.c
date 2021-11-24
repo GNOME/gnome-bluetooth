@@ -318,70 +318,99 @@ device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char *
 }
 
 static void
-device_notify_cb (Device1         *device,
+device_notify_cb (Device1         *device1,
 		  GParamSpec      *pspec,
 		  BluetoothClient *client)
 {
 	const char *property = g_param_spec_get_name (pspec);
 	GtkTreeIter iter;
+	guint i, n_items;
+	g_autoptr(BluetoothDevice) device = NULL;
+	const char *device_path;
 
-	if (get_iter_from_proxy (client->store, &iter, G_DBUS_PROXY (device)) == FALSE)
+	if (get_iter_from_proxy (client->store, &iter, G_DBUS_PROXY (device1)) == FALSE)
 		return;
 
-	g_debug ("Property '%s' changed on device '%s'",
-		 property, g_dbus_proxy_get_object_path (G_DBUS_PROXY (device)));
+	device_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (device1));
+	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+	for (i = 0; i < n_items; i++) {
+		g_autoptr(BluetoothDevice) d = NULL;
+
+		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+		if (g_str_equal (device_path, bluetooth_device_get_object_path (d))) {
+			device = g_steal_pointer (&d);
+			break;
+		}
+	}
+
+	if (!device) {
+		g_debug ("Device %s was not known, so property '%s' not applied", device_path, property);
+		return;
+	}
+
+	g_debug ("Property '%s' changed on device '%s'", property, device_path);
 
 	if (g_strcmp0 (property, "name") == 0) {
-		const gchar *name = device1_get_name (device);
+		const gchar *name = device1_get_name (device1);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_NAME, name, -1);
+		g_object_set (G_OBJECT (device), "name", name, NULL);
 	} else if (g_strcmp0 (property, "alias") == 0) {
-		const gchar *alias = device1_get_alias (device);
+		const gchar *alias = device1_get_alias (device1);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_ALIAS, alias, -1);
+		g_object_set (G_OBJECT (device), "alias", alias, NULL);
 	} else if (g_strcmp0 (property, "paired") == 0) {
-		gboolean paired = device1_get_paired (device);
+		gboolean paired = device1_get_paired (device1);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_PAIRED, paired, -1);
+		g_object_set (G_OBJECT (device), "paired", paired, NULL);
 	} else if (g_strcmp0 (property, "trusted") == 0) {
-		gboolean trusted = device1_get_trusted (device);
+		gboolean trusted = device1_get_trusted (device1);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_TRUSTED, trusted, -1);
+		g_object_set (G_OBJECT (device), "trusted", trusted, NULL);
 	} else if (g_strcmp0 (property, "connected") == 0) {
-		gboolean connected = device1_get_connected (device);
+		gboolean connected = device1_get_connected (device1);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_CONNECTED, connected, -1);
+		g_object_set (G_OBJECT (device), "connected", connected, NULL);
 	} else if (g_strcmp0 (property, "uuids") == 0) {
-		char **uuids;
+		g_auto(GStrv) uuids = NULL;
 
-		uuids = device_list_uuids (device1_get_uuids (device));
+		uuids = device_list_uuids (device1_get_uuids (device1));
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_UUIDS, uuids, -1);
-		g_strfreev (uuids);
+		g_object_set (G_OBJECT (device), "uuids", uuids, NULL);
 	} else if (g_strcmp0 (property, "legacy-pairing") == 0) {
-		gboolean legacypairing = device1_get_legacy_pairing (device);
+		gboolean legacypairing = device1_get_legacy_pairing (device1);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_LEGACYPAIRING, legacypairing,
 				    -1);
+		g_object_set (G_OBJECT (device), "legacy-pairing", legacypairing, NULL);
 	} else if (g_strcmp0 (property, "icon") == 0 ||
 		   g_strcmp0 (property, "class") == 0 ||
 		   g_strcmp0 (property, "appearance") == 0) {
 		BluetoothType type = BLUETOOTH_TYPE_ANY;
 		const char *icon = NULL;
 
-		device_resolve_type_and_icon (device, &type, &icon);
+		device_resolve_type_and_icon (device1, &type, &icon);
 
 		gtk_tree_store_set (client->store, &iter,
 				    BLUETOOTH_COLUMN_TYPE, type,
 				    BLUETOOTH_COLUMN_ICON, icon,
 				    -1);
+		g_object_set (G_OBJECT (device),
+			      "type", type,
+			      "icon", icon,
+			      NULL);
 	} else {
 		g_debug ("Unhandled property: %s", property);
 	}
@@ -390,11 +419,13 @@ device_notify_cb (Device1         *device,
 static void
 device_added (GDBusObjectManager   *manager,
 	      Device1              *device,
-	      BluetoothClient      *client)
+	      BluetoothClient      *client,
+	      gboolean              coldplug)
 {
 	g_autoptr (GDBusProxy) adapter = NULL;
 	const char *adapter_path, *address, *alias, *name, *icon;
 	g_auto(GStrv) uuids = NULL;
+	gboolean default_adapter;
 	gboolean paired, trusted, connected;
 	int legacypairing;
 	BluetoothType type = BLUETOOTH_TYPE_ANY;
@@ -421,7 +452,9 @@ device_added (GDBusObjectManager   *manager,
 		return;
 
 	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &parent,
-			    BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+			    BLUETOOTH_COLUMN_PROXY, &adapter,
+			    BLUETOOTH_COLUMN_DEFAULT, &default_adapter,
+			    -1);
 
 	if (get_iter_from_address (client->store, &iter, address, adapter) == FALSE) {
 		gtk_tree_store_insert_with_values (client->store, &iter, &parent, -1,
@@ -452,6 +485,25 @@ device_added (GDBusObjectManager   *manager,
 				   BLUETOOTH_COLUMN_PROXY, device,
 				   -1);
 	}
+
+	if (default_adapter && !coldplug) {
+		BluetoothDevice *device_obj;
+
+		device_obj = g_object_new (BLUETOOTH_TYPE_DEVICE,
+					   "address", address,
+					   "alias", alias,
+					   "name", name,
+					   "type", type,
+					   "icon", icon,
+					   "legacy-pairing", legacypairing,
+					   "uuids", uuids,
+					   "paired", paired,
+					   "connected", connected,
+					   "trusted", trusted,
+					   "proxy", device,
+					   NULL);
+		g_list_store_append (client->list_store, device_obj);
+	}
 }
 
 static void
@@ -459,6 +511,7 @@ device_removed (const char      *path,
 		BluetoothClient *client)
 {
 	GtkTreeIter iter;
+	guint i, n_items;
 
 	g_debug ("Removing device '%s'", path);
 
@@ -467,6 +520,18 @@ device_removed (const char      *path,
 		g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
 		gtk_tree_store_remove(client->store, &iter);
 	}
+
+	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+	for (i = 0; i < n_items; i++) {
+		g_autoptr(BluetoothDevice) device = NULL;
+
+		device = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+		if (g_str_equal (path, bluetooth_device_get_object_path (device))) {
+			g_list_store_remove (client->list_store, i);
+			return;
+		}
+	}
+	g_debug ("Device %s was not known, so not removed", path);
 }
 
 static void
@@ -514,6 +579,72 @@ adapter_set_powered (BluetoothClient *client,
 }
 
 static void
+add_devices_to_list_store (BluetoothClient *client)
+{
+	GList *object_list, *l;
+
+	g_debug ("Emptying list store as default adapter changed");
+	g_list_store_remove_all (client->list_store);
+
+	g_debug ("Coldplugging devices for new default adapter");
+	object_list = g_dbus_object_manager_get_objects (client->manager);
+	for (l = object_list; l != NULL; l = l->next) {
+		GDBusObject *object = l->data;
+		GDBusInterface *iface;
+		const char *adapter_path, *address, *alias, *name, *icon;
+		g_auto(GStrv) uuids = NULL;
+		gboolean default_adapter;
+		gboolean paired, trusted, connected;
+		int legacypairing;
+		BluetoothType type = BLUETOOTH_TYPE_ANY;
+		GtkTreeIter parent;
+		BluetoothDevice *device_obj;
+
+		iface = g_dbus_object_get_interface (object, BLUEZ_DEVICE_INTERFACE);
+		if (!iface)
+			continue;
+
+		adapter_path = device1_get_adapter (DEVICE1 (iface));
+		if (get_iter_from_path (client->store, &parent, adapter_path) == FALSE)
+			continue;
+		gtk_tree_model_get (GTK_TREE_MODEL(client->store), &parent,
+				    BLUETOOTH_COLUMN_DEFAULT, &default_adapter,
+				    -1);
+		if (!default_adapter)
+			continue;
+
+		address = device1_get_address (DEVICE1 (iface));
+		alias = device1_get_alias (DEVICE1 (iface));
+		name = device1_get_name (DEVICE1 (iface));
+		paired = device1_get_paired (DEVICE1 (iface));
+		trusted = device1_get_trusted (DEVICE1 (iface));
+		connected = device1_get_connected (DEVICE1 (iface));
+		uuids = device_list_uuids (device1_get_uuids (DEVICE1 (iface)));
+		legacypairing = device1_get_legacy_pairing (DEVICE1 (iface));
+
+		device_resolve_type_and_icon (DEVICE1 (iface), &type, &icon);
+
+		g_debug ("Adding device '%s' on adapter '%s' to list store", address, adapter_path);
+
+		device_obj = g_object_new (BLUETOOTH_TYPE_DEVICE,
+					   "address", address,
+					   "alias", alias,
+					   "name", name,
+					   "type", type,
+					   "icon", icon,
+					   "legacy-pairing", legacypairing,
+					   "uuids", uuids,
+					   "paired", paired,
+					   "connected", connected,
+					   "trusted", trusted,
+					   "proxy", DEVICE1 (iface),
+					   NULL);
+		g_list_store_append (client->list_store, device_obj);
+	}
+	g_list_free_full (object_list, g_object_unref);
+}
+
+static void
 default_adapter_changed (GDBusObjectManager   *manager,
 			 const char           *path,
 			 BluetoothClient      *client)
@@ -535,6 +666,8 @@ default_adapter_changed (GDBusObjectManager   *manager,
 
 	gtk_tree_store_set (client->store, &iter,
 			    BLUETOOTH_COLUMN_DEFAULT, TRUE, -1);
+
+	add_devices_to_list_store (client);
 
 	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
 			   BLUETOOTH_COLUMN_POWERED, &powered, -1);
@@ -767,7 +900,8 @@ interface_added (GDBusObjectManager *manager,
 	} else if (IS_DEVICE1 (interface)) {
 		device_added (manager,
 			      DEVICE1 (interface),
-			      client);
+			      client,
+			      FALSE);
 	}
 }
 
@@ -882,7 +1016,8 @@ object_manager_new_callback(GObject      *source_object,
 
 		device_added (client->manager,
 			      DEVICE1 (iface),
-			      client);
+			      client,
+			      TRUE);
 	}
 	g_list_free_full (object_list, g_object_unref);
 }
