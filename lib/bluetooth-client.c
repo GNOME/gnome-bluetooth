@@ -390,9 +390,9 @@ device_added (GDBusObjectManager   *manager,
 	      Device1              *device,
 	      BluetoothClient      *client)
 {
-	GDBusProxy *adapter;
+	g_autoptr (GDBusProxy) adapter = NULL;
 	const char *adapter_path, *address, *alias, *name, *icon;
-	char **uuids;
+	g_auto(GStrv) uuids = NULL;
 	gboolean paired, trusted, connected;
 	int legacypairing;
 	BluetoothType type = BLUETOOTH_TYPE_ANY;
@@ -450,8 +450,6 @@ device_added (GDBusObjectManager   *manager,
 				   BLUETOOTH_COLUMN_PROXY, device,
 				   -1);
 	}
-	g_strfreev (uuids);
-	g_object_unref (adapter);
 }
 
 static void
