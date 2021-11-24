@@ -19,6 +19,7 @@ import sys
 import dbus
 import inspect
 import tempfile
+import random
 import subprocess
 import unittest
 import time
@@ -97,6 +98,98 @@ class OopTests(dbusmock.DBusTestCase):
         treeiter = model.get_iter(path)
         self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '22:33:44:55:66:77')
 
+        # GListStore
+        list_store = self.client.get_devices()
+        self.assertEqual(list_store.get_n_items(), 1)
+        device = list_store.get_item(0)
+        self.assertIsNotNone(device)
+        self.assertEqual(device.get_property('address'), '22:33:44:55:66:77')
+
+    def test_device_notify(self):
+        bus = dbus.SystemBus()
+        dbusmock_bluez = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0/dev_22_33_44_55_66_77'), 'org.freedesktop.DBus.Mock')
+
+        list_store = self.client.get_devices()
+        self.wait_for_mainloop()
+        self.assertEqual(list_store.get_n_items(), 1)
+        device = list_store.get_item(0)
+        self.assertIsNotNone(device)
+        self.assertEqual(device.get_property('connected'), False)
+
+        received_notification = False
+        def device_notify_cb(device, pspec):
+            nonlocal received_notification
+            received_notification = True
+            self.assertEqual(pspec.name, 'connected')
+        device.connect('notify', device_notify_cb)
+
+        dbusmock_bluez.UpdateProperties('org.bluez.Device1', {
+                'Connected': True,
+        })
+        self.wait_for_condition(lambda: received_notification == True)
+        self.assertEqual(device.get_property('connected'), True)
+
+    def test_device_removal(self):
+        bus = dbus.SystemBus()
+        dbusmock_bluez = dbus.Interface(bus.get_object('org.bluez', '/'), 'org.bluez.Mock')
+        hci0_bluez = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter1')
+        list_store = self.client.get_devices()
+
+        num_devices = 0
+        num_mice = 0
+        num_devices_signal = 0
+        def device_added_cb(client, device):
+            nonlocal num_devices_signal
+            num_devices_signal += 1
+        def device_removed_cb(client, path):
+            nonlocal num_devices_signal
+            num_devices_signal -= 1
+        self.client.connect('device-added', device_added_cb)
+        self.client.connect('device-removed', device_removed_cb)
+
+        self.wait_for_mainloop()
+
+        for i in range(1, 3):
+            to_add = random.randrange(5, 10)
+            to_remove = random.randrange(1, to_add)
+            total = num_devices + to_add - to_remove
+
+            print(f"Device removal iteration {i}: +{to_add} -{to_remove} = {total}")
+
+            for i in range(1, to_add + 1):
+                print(f"Adding mouse {i}")
+                num_mice += 1
+                address_start = num_mice
+                address = f"{address_start:02d}:{address_start+1:02d}:{address_start+2:02d}:" + \
+                        f"{address_start+3:02d}:{address_start+4:02d}:{address_start+5:02d}"
+                dbusmock_bluez.AddDevice('hci0', address, f'My Mouse {num_mice}')
+            self.wait_for_mainloop()
+            # self.wait_for_condition(lambda: list_store.get_n_items() == num_devices + to_add)
+            self.assertEqual(list_store.get_n_items(), num_devices + to_add)
+            self.assertEqual(list_store.get_n_items(), num_devices_signal)
+
+            for i in range(to_remove - 1, -1, -1):
+                print(f"Removing mouse {i}")
+                device = list_store.get_item(i)
+                self.assertIsNotNone(device, f"Device at index {i} in list store did not exist")
+                hci0_bluez.RemoveDevice(device.get_object_path())
+            self.wait_for_mainloop()
+            # self.wait_for_condition(lambda: list_store.get_n_items() == total)
+            self.assertEqual(list_store.get_n_items(), total)
+            self.assertEqual(list_store.get_n_items(), num_devices_signal)
+            num_devices = total
+
+        print(f"Device removal finishing: -{num_devices}")
+        for i in range(num_devices - 1, -1, -1):
+            print(f"Removing mouse {i}")
+            device = list_store.get_item(i)
+            hci0_bluez.RemoveDevice(device.get_object_path())
+
+        self.wait_for_mainloop()
+        # self.wait_for_condition(lambda: list_store.get_n_items() == 0)
+        self.assertEqual(list_store.get_n_items(), 0)
+        self.assertEqual(num_devices_signal, 0)
+
     def test_default_adapter(self):
         bus = dbus.SystemBus()
         bluez_server = bus.get_object('org.bluez', '/org/bluez')
@@ -124,6 +217,13 @@ class OopTests(dbusmock.DBusTestCase):
         treeiter = model.get_iter(path)
         self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '22:33:44:55:66:77')
 
+        # GListModel
+        list_store = self.client.get_devices()
+        self.assertEqual(list_store.get_n_items(), 1)
+        device = list_store.get_item(0)
+        self.assertIsNotNone(device)
+        self.assertEqual(device.get_property('address'), '22:33:44:55:66:77')
+
         # Remove default adapter
         dbusmock_bluez.RemoveAdapter('hci1')
         self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 2)
@@ -137,6 +237,12 @@ class OopTests(dbusmock.DBusTestCase):
         path = Gtk.TreePath([0, 0])
         treeiter = model.get_iter(path)
         self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '11:22:33:44:55:66')
+
+        # GListModel
+        self.assertEqual(list_store.get_n_items(), 1)
+        device = list_store.get_item(0)
+        self.assertIsNotNone(device)
+        self.assertEqual(device.get_property('address'), '11:22:33:44:55:66')
 
     def _pair_cb(self, client, result, user_data=None):
         success, path = client.setup_device_finish(result)
@@ -221,6 +327,15 @@ class Tests(dbusmock.DBusTestCase):
     def test_one_device(self):
         self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
         self.dbusmock_bluez.AddDevice('hci0', '22:33:44:55:66:77', 'My Mouse')
+        self.run_test_process()
+
+    def test_device_notify(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        self.dbusmock_bluez.AddDevice('hci0', '22:33:44:55:66:77', 'My Mouse')
+        self.run_test_process()
+
+    def test_device_removal(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
         self.run_test_process()
 
     def test_default_adapter(self):
