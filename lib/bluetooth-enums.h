@@ -112,7 +112,6 @@ typedef enum {
  * @BLUETOOTH_COLUMN_PAIRED: whether the device is paired to its parent adapter. Only available for devices.
  * @BLUETOOTH_COLUMN_TRUSTED: whether the device is trusted. Only available for devices.
  * @BLUETOOTH_COLUMN_CONNECTED: whether the device is connected. Only available for devices.
- * @BLUETOOTH_COLUMN_DISCOVERABLE: whether the adapter is discoverable/visible. Only available for adapters.
  * @BLUETOOTH_COLUMN_DISCOVERING: whether the adapter is discovering. Only available for adapters.
  * @BLUETOOTH_COLUMN_LEGACYPAIRING: whether the device does not support Bluetooth 2.1 Simple Secure Pairing. Only available for devices.
  * @BLUETOOTH_COLUMN_POWERED: whether the adapter is powered. Only available for adapters.
@@ -132,7 +131,6 @@ typedef enum {
 	BLUETOOTH_COLUMN_PAIRED,
 	BLUETOOTH_COLUMN_TRUSTED,
 	BLUETOOTH_COLUMN_CONNECTED,
-	BLUETOOTH_COLUMN_DISCOVERABLE,
 	BLUETOOTH_COLUMN_DISCOVERING,
 	BLUETOOTH_COLUMN_LEGACYPAIRING,
 	BLUETOOTH_COLUMN_POWERED,

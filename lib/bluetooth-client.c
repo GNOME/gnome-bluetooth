@@ -71,9 +71,8 @@ enum {
 	PROP_NUM_ADAPTERS,
 	PROP_DEFAULT_ADAPTER,
 	PROP_DEFAULT_ADAPTER_POWERED,
-	PROP_DEFAULT_ADAPTER_DISCOVERABLE,
-	PROP_DEFAULT_ADAPTER_NAME,
-	PROP_DEFAULT_ADAPTER_DISCOVERING
+	PROP_DEFAULT_ADAPTER_SETUP_MODE,
+	PROP_DEFAULT_ADAPTER_NAME
 };
 
 enum {
@@ -679,8 +678,7 @@ default_adapter_changed (GDBusObjectManager   *manager,
 		g_debug ("New default adapter is powered, so invalidating all the default-adapter* properties");
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
-		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
-		g_object_notify (G_OBJECT (client), "default-adapter-discovering");
+		g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 		g_object_notify (G_OBJECT (client), "default-adapter-name");
 		return;
 	}
@@ -730,7 +728,7 @@ adapter_notify_cb (Adapter1       *adapter,
 				    BLUETOOTH_COLUMN_DISCOVERING, discovering, -1);
 
 		if (is_default)
-			g_object_notify (G_OBJECT (client), "default-adapter-discovering");
+			g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 	} else if (g_strcmp0 (property, "powered") == 0) {
 		gboolean powered = adapter1_get_powered (adapter);
 
@@ -740,19 +738,10 @@ adapter_notify_cb (Adapter1       *adapter,
 		if (is_default && powered) {
 			g_debug ("Default adapter is powered, so invalidating all the default-adapter* properties");
 			g_object_notify (G_OBJECT (client), "default-adapter");
-			g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
-			g_object_notify (G_OBJECT (client), "default-adapter-discovering");
+			g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 			g_object_notify (G_OBJECT (client), "default-adapter-name");
 		}
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
-	} else if (g_strcmp0 (property, "discoverable") == 0) {
-		gboolean discoverable = adapter1_get_discoverable (adapter);
-
-		gtk_tree_store_set (client->store, &iter,
-				    BLUETOOTH_COLUMN_DISCOVERABLE, discoverable, -1);
-
-		if (is_default)
-			g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 	} else {
 		notify = FALSE;
 	}
@@ -774,7 +763,7 @@ adapter_added (GDBusObjectManager   *manager,
 {
 	GtkTreeIter iter;
 	const gchar *address, *name, *alias;
-	gboolean discovering, discoverable, powered;
+	gboolean discovering, powered;
 
 	g_signal_connect_object (G_OBJECT (adapter), "notify",
 				 G_CALLBACK (adapter_notify_cb), client, 0);
@@ -784,7 +773,6 @@ adapter_added (GDBusObjectManager   *manager,
 	alias = adapter1_get_alias (adapter);
 	discovering = adapter1_get_discovering (adapter);
 	powered = adapter1_get_powered (adapter);
-	discoverable = adapter1_get_discoverable (adapter);
 
 	g_debug ("Inserting adapter '%s'", address);
 
@@ -794,7 +782,6 @@ adapter_added (GDBusObjectManager   *manager,
 					  BLUETOOTH_COLUMN_NAME, name,
 					  BLUETOOTH_COLUMN_ALIAS, alias,
 					  BLUETOOTH_COLUMN_DISCOVERING, discovering,
-					  BLUETOOTH_COLUMN_DISCOVERABLE, discoverable,
 					  BLUETOOTH_COLUMN_POWERED, powered,
 					  -1);
 
@@ -862,8 +849,7 @@ adapter_removed (GDBusObjectManager   *manager,
 	} else {
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
-		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
-		g_object_notify (G_OBJECT (client), "default-adapter-discovering");
+		g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 	}
 
 out:
@@ -1040,7 +1026,6 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_PAIRED */
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_TRUSTED */
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_CONNECTED */
-					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_DISCOVERABLE */
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_DISCOVERING */
 					 G_TYPE_INT,        /* BLUETOOTH_COLUMN_LEGACYPAIRING */
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_POWERED */
@@ -1129,8 +1114,7 @@ _bluetooth_client_get_default_adapter_name (BluetoothClient *client)
 
 static void
 _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
-						   gboolean         discovering,
-						   gboolean         discoverable)
+						   gboolean         discovering)
 {
 	g_autoptr(GDBusProxy) adapter = NULL;
 	GVariantBuilder builder;
@@ -1142,7 +1126,7 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 	if (discovering) {
 		g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
 		g_variant_builder_add (&builder, "{sv}",
-				       "Discoverable", g_variant_new_boolean (discoverable));
+				       "Discoverable", g_variant_new_boolean (TRUE));
 		adapter1_call_set_discovery_filter_sync (ADAPTER1 (adapter),
 							 g_variant_builder_end (&builder), NULL, NULL);
 	}
@@ -1193,10 +1177,7 @@ bluetooth_client_get_property (GObject        *object,
 	case PROP_DEFAULT_ADAPTER_NAME:
 		g_value_take_string (value, _bluetooth_client_get_default_adapter_name (client));
 		break;
-	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-		g_value_set_boolean (value, client->disco_during_disco);
-		break;
-	case PROP_DEFAULT_ADAPTER_DISCOVERING:
+	case PROP_DEFAULT_ADAPTER_SETUP_MODE:
 		g_value_set_boolean (value, _bluetooth_client_get_default_adapter_discovering (client));
 		break;
 	default:
@@ -1214,12 +1195,8 @@ bluetooth_client_set_property (GObject        *object,
 	BluetoothClient *client = BLUETOOTH_CLIENT (object);
 
 	switch (property_id) {
-	case PROP_DEFAULT_ADAPTER_DISCOVERABLE:
-		client->disco_during_disco = g_value_get_boolean (value);
-		_bluetooth_client_set_default_adapter_discovering (client, client->discovery_started, client->disco_during_disco);
-		break;
-	case PROP_DEFAULT_ADAPTER_DISCOVERING:
-		_bluetooth_client_set_default_adapter_discovering (client, g_value_get_boolean (value), client->disco_during_disco);
+	case PROP_DEFAULT_ADAPTER_SETUP_MODE:
+		_bluetooth_client_set_default_adapter_discovering (client, g_value_get_boolean (value));
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -1315,13 +1292,13 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 							      "Whether the default adapter is powered",
 							       FALSE, G_PARAM_READABLE));
 	/**
-	 * BluetoothClient:default-adapter-discoverable:
+	 * BluetoothClient:default-adapter-setup-mode:
 	 *
-	 * %TRUE if the default Bluetooth adapter is discoverable during discovery.
+	 * %TRUE if the default Bluetooth adapter is in setup mode (discoverable, and discovering).
 	 */
-	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERABLE,
-					 g_param_spec_boolean ("default-adapter-discoverable", NULL,
-							      "Whether the default adapter is visible by other devices during discovery",
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_SETUP_MODE,
+					 g_param_spec_boolean ("default-adapter-setup-mode", NULL,
+							      "Whether the default adapter is visible to others and scanning",
 							       FALSE, G_PARAM_READWRITE));
 	/**
 	 * BluetoothClient:default-adapter-name:
@@ -1332,15 +1309,6 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 					 g_param_spec_string ("default-adapter-name", NULL,
 							      "The human readable name of the default adapter",
 							      NULL, G_PARAM_READABLE));
-	/**
-	 * BluetoothClient:default-adapter-discovering:
-	 *
-	 * %TRUE if the default Bluetooth adapter is discovering.
-	 */
-	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_DISCOVERING,
-					 g_param_spec_boolean ("default-adapter-discovering", NULL,
-							      "Whether the default adapter is searching for devices",
-							       FALSE, G_PARAM_READWRITE));
 }
 
 /**
@@ -1786,7 +1754,7 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 {
 	GDBusProxy *proxy;
 	char *address, *alias, *icon, **uuids;
-	gboolean is_default, paired, trusted, connected, discoverable, discovering, powered, is_adapter;
+	gboolean is_default, paired, trusted, connected, discovering, powered, is_adapter;
 	GtkTreeIter parent;
 	BluetoothType type;
 
@@ -1799,7 +1767,6 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 			    BLUETOOTH_COLUMN_PAIRED, &paired,
 			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
 			    BLUETOOTH_COLUMN_CONNECTED, &connected,
-			    BLUETOOTH_COLUMN_DISCOVERABLE, &discoverable,
 			    BLUETOOTH_COLUMN_DISCOVERING, &discovering,
 			    BLUETOOTH_COLUMN_POWERED, &powered,
 			    BLUETOOTH_COLUMN_UUIDS, &uuids,
@@ -1820,7 +1787,6 @@ bluetooth_client_dump_device (GtkTreeModel *model,
 		if (is_default)
 			g_print ("\tDefault adapter\n");
 		g_print ("\tD-Bus Path: %s\n", proxy ? g_dbus_proxy_get_object_path (proxy) : "(none)");
-		g_print ("\tDiscoverable: %s\n", BOOL_STR (discoverable));
 		if (discovering)
 			g_print ("\tDiscovery in progress\n");
 		g_print ("\t%s\n", powered ? "Is powered" : "Is not powered");

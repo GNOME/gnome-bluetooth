@@ -34,7 +34,7 @@ static GtkTreeSelection *selection;
 
 static void scan_callback(GtkWidget *button, gpointer user_data)
 {
-	g_object_set (G_OBJECT (client), "default-adapter-discovering", TRUE, NULL);
+	g_object_set (G_OBJECT (client), "default-adapter-setup-mode", TRUE, NULL);
 }
 
 static void select_callback(GtkTreeSelection *selection, gpointer user_data)
@@ -210,10 +210,6 @@ static void create_window(void)
 						legacypairing_to_text, NULL, NULL);
 
 	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
-					"Discoverable", gtk_cell_renderer_text_new(),
-					"text", BLUETOOTH_COLUMN_DISCOVERABLE, NULL);
-
-	gtk_tree_view_insert_column_with_attributes(GTK_TREE_VIEW(tree), -1,
 					"Discovering", gtk_cell_renderer_text_new(),
 					"text", BLUETOOTH_COLUMN_DISCOVERING, NULL);
 
@@ -276,7 +272,7 @@ default_adapter_discovering_changed (GObject    *gobject,
 {
 	gboolean discovering;
 
-	g_object_get (G_OBJECT (gobject), "default-adapter-discovering", &discovering, NULL);
+	g_object_get (G_OBJECT (gobject), "default-adapter-setup-mode", &discovering, NULL);
 	g_message ("Default adapter is %s", discovering ? "discovering" : "not discovering");
 }
 
@@ -296,7 +292,7 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (default_adapter_changed), NULL);
 	g_signal_connect (G_OBJECT (client), "notify::default-adapter-powered",
 			  G_CALLBACK (default_adapter_powered_changed), NULL);
-	g_signal_connect (G_OBJECT (client), "notify::default-adapter-discovering",
+	g_signal_connect (G_OBJECT (client), "notify::default-adapter-setup-mode",
 			  G_CALLBACK (default_adapter_discovering_changed), NULL);
 
 	default_adapter_changed (G_OBJECT (client), NULL, NULL);

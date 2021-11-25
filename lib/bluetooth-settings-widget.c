@@ -202,7 +202,7 @@ connect_done (GObject      *source_object,
 
 	//FIXME show an error if it failed?
 	g_object_set (G_OBJECT (self->client),
-		      "default-adapter-discovering", has_default_adapter (self),
+		      "default-adapter-setup-mode", has_default_adapter (self),
 		      NULL);
 
 out:
@@ -889,7 +889,7 @@ connect_callback (GObject      *source_object,
 	turn_off_pairing (data->self, data->device);
 
 	g_object_set (G_OBJECT (data->self->client),
-		      "default-adapter-discovering", has_default_adapter (data->self),
+		      "default-adapter-setup-mode", has_default_adapter (data->self),
 		      NULL);
 
 bail:
@@ -947,7 +947,7 @@ create_callback (GObject      *source_object,
 		}
 
 		g_object_set (G_OBJECT (self->client),
-			      "default-adapter-discovering", has_default_adapter (self),
+			      "default-adapter-setup-mode", has_default_adapter (self),
 			      NULL);
 		return;
 	}
@@ -1038,7 +1038,7 @@ start_pairing (BluetoothSettingsWidget *self,
 			     g_strdup (g_dbus_proxy_get_object_path (proxy)),
 			     GINT_TO_POINTER (1));
 
-	g_object_set (G_OBJECT (self->client), "default-adapter-discovering", FALSE, NULL);
+	g_object_set (G_OBJECT (self->client), "default-adapter-setup-mode", FALSE, NULL);
 	bluetooth_client_setup_device (self->client,
 				       g_dbus_proxy_get_object_path (proxy),
 				       pair,
@@ -1066,7 +1066,7 @@ switch_connected_state_set (GtkSwitch               *button,
 
 	if (gtk_switch_get_active (button))
 		g_object_set (G_OBJECT (self->client),
-			      "default-adapter-discovering", FALSE,
+			      "default-adapter-setup-mode", FALSE,
 			      NULL);
 	bluetooth_client_connect_service (self->client,
 					  self->selected_object_path,
@@ -1391,8 +1391,7 @@ default_adapter_changed (BluetoothClient         *client,
 
 	g_debug ("Default adapter changed to: %s", default_adapter ? default_adapter : "(none)");
 
-	g_object_set (G_OBJECT (client), "default-adapter-discovering", default_adapter != NULL, NULL);
-	g_object_set (G_OBJECT (client), "default-adapter-discoverable", default_adapter != NULL, NULL);
+	g_object_set (G_OBJECT (client), "default-adapter-setup-mode", default_adapter != NULL, NULL);
 
 	g_signal_emit (G_OBJECT (self), signals[ADAPTER_STATUS_CHANGED], 0);
 }
@@ -1543,7 +1542,7 @@ add_device_section (BluetoothSettingsWidget *self)
 
 	/* Discoverable spinner */
 	self->device_spinner = spinner = gtk_spinner_new ();
-	g_object_bind_property (G_OBJECT (self->client), "default-adapter-discovering",
+	g_object_bind_property (G_OBJECT (self->client), "default-adapter-setup-mode",
 				G_OBJECT (self->device_spinner), "spinning",
 				G_BINDING_SYNC_CREATE);
 	gtk_widget_set_margin_bottom (spinner, 12);
@@ -1979,10 +1978,8 @@ bluetooth_settings_widget_finalize (GObject *object)
 
 	/* See default_adapter_changed () */
 	/* FIXME: This is blocking */
-	if (self->client) {
-		g_object_set (G_OBJECT (self->client), "default-adapter-discovering", FALSE, NULL);
-		g_object_set (G_OBJECT (self->client), "default-adapter-discoverable", FALSE, NULL);
-	}
+	if (self->client)
+		g_object_set (G_OBJECT (self->client), "default-adapter-setup-mode", FALSE, NULL);
 
 	g_cancellable_cancel (self->cancellable);
 	g_clear_object (&self->cancellable);
