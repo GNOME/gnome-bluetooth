@@ -323,22 +323,20 @@ on_check_bonded_or_ask_session_acquired (GObject *object,
 					 gpointer user_data)
 {
 	GDBusMethodInvocation *invocation = user_data;
-	GDBusProxy *session;
-	GError *error = NULL;
+	g_autoptr(GDBusProxy) session = NULL;
+	g_autoptr(GError) error = NULL;
 	GVariant *v;
-	char *device, *adapter, *name;
+	g_autofree char *device = NULL;
+	g_autofree char *adapter = NULL;
+	g_autofree char *name = NULL;
 	gboolean paired;
 
 	session = g_dbus_proxy_new_for_bus_finish (res, &error);
 
 	if (!session) {
 		g_debug ("Failed to create a proxy for the session: %s", error->message);
-		g_clear_error (&error);
 		goto out;
 	}
-
-	device = NULL;
-	adapter = NULL;
 
 	/* obexd puts the remote device in Destination and our adapter
 	 * in Source */
@@ -354,31 +352,22 @@ on_check_bonded_or_ask_session_acquired (GObject *object,
 		g_variant_unref (v);
 	}
 
-	g_object_unref (session);
-
 	if (!device || !adapter) {
 		g_debug ("Could not get remote device for the transfer");
-		g_free (device);
-		g_free (adapter);
 		goto out;
 	}
 
-	name = NULL;
 	paired = get_paired_for_address (adapter, device, &name);
-	g_free (device);
-	g_free (adapter);
 
 	if (paired) {
 		g_debug ("Remote device '%s' is paired, auto-accepting the transfer", name);
 		g_dbus_method_invocation_return_value (invocation,
 						       g_variant_new ("(s)", g_object_get_data (G_OBJECT (invocation), "temp-filename")));
-		g_free (name);
 		return;
 	} else {
 		ask_user (invocation,
 			  g_object_get_data (G_OBJECT (invocation), "filename"),
 			  name ? name : device);
-		g_free (name);
 		return;
 	}
 
