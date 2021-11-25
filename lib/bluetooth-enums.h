@@ -116,7 +116,6 @@ typedef enum {
  * @BLUETOOTH_COLUMN_DISCOVERING: whether the adapter is discovering. Only available for adapters.
  * @BLUETOOTH_COLUMN_LEGACYPAIRING: whether the device does not support Bluetooth 2.1 Simple Secure Pairing. Only available for devices.
  * @BLUETOOTH_COLUMN_POWERED: whether the adapter is powered. Only available for adapters.
- * @BLUETOOTH_COLUMN_SERVICES: an array of service names and #BluetoothStatus connection statuses.
  * @BLUETOOTH_COLUMN_UUIDS: a string array of human-readable UUIDs.
  *
  * A column identifier to pass to bluetooth_chooser_get_selected_device_info().
@@ -137,7 +136,6 @@ typedef enum {
 	BLUETOOTH_COLUMN_DISCOVERING,
 	BLUETOOTH_COLUMN_LEGACYPAIRING,
 	BLUETOOTH_COLUMN_POWERED,
-	BLUETOOTH_COLUMN_SERVICES,
 	BLUETOOTH_COLUMN_UUIDS,
 } BluetoothColumn;
 
