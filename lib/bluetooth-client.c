@@ -326,6 +326,9 @@ device_notify_cb (Device1         *device,
 	if (get_iter_from_proxy (client->store, &iter, G_DBUS_PROXY (device)) == FALSE)
 		return;
 
+	g_debug ("Property '%s' changed on device '%s'",
+		 property, g_dbus_proxy_get_object_path (G_DBUS_PROXY (device)));
+
 	if (g_strcmp0 (property, "name") == 0) {
 		const gchar *name = device1_get_name (device);
 
@@ -537,6 +540,7 @@ default_adapter_changed (GDBusObjectManager   *manager,
 			   BLUETOOTH_COLUMN_POWERED, &powered, -1);
 
 	if (powered) {
+		g_debug ("New default adapter is powered, so invalidating all the default-adapter* properties");
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 		g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
@@ -569,6 +573,10 @@ adapter_notify_cb (Adapter1       *adapter,
 	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
 			    BLUETOOTH_COLUMN_DEFAULT, &is_default, -1);
 
+	g_debug ("Property '%s' changed on %sadapter '%s'", property,
+		 is_default ? "default " : "",
+		 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)));
+
 	if (g_strcmp0 (property, "alias") == 0) {
 		const gchar *alias = adapter1_get_alias (adapter);
 
@@ -594,6 +602,7 @@ adapter_notify_cb (Adapter1       *adapter,
 				    BLUETOOTH_COLUMN_POWERED, powered, -1);
 
 		if (is_default && powered) {
+			g_debug ("Default adapter is powered, so invalidating all the default-adapter* properties");
 			g_object_notify (G_OBJECT (client), "default-adapter");
 			g_object_notify (G_OBJECT (client), "default-adapter-discoverable");
 			g_object_notify (G_OBJECT (client), "default-adapter-discovering");
