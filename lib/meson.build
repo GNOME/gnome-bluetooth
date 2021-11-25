@@ -151,6 +151,7 @@ test_names = [
   'test-agent',
   'test-class',
   'test-client',
+  'test-liststore',
   'test-pairing-dialog',
   'test-pin',
   'test-settings',
