@@ -72,7 +72,8 @@ enum {
 	PROP_DEFAULT_ADAPTER,
 	PROP_DEFAULT_ADAPTER_POWERED,
 	PROP_DEFAULT_ADAPTER_SETUP_MODE,
-	PROP_DEFAULT_ADAPTER_NAME
+	PROP_DEFAULT_ADAPTER_NAME,
+	PROP_DEFAULT_ADAPTER_ADDRESS
 };
 
 enum {
@@ -1091,6 +1092,10 @@ bluetooth_client_get_property (GObject        *object,
 		g_value_set_boolean (value, client->default_adapter ?
 				     adapter1_get_discovering (client->default_adapter) : FALSE);
 		break;
+	case PROP_DEFAULT_ADAPTER_ADDRESS:
+		g_value_set_string (value, client->default_adapter ?
+				    adapter1_get_address (client->default_adapter) : NULL);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
@@ -1219,6 +1224,15 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_NAME,
 					 g_param_spec_string ("default-adapter-name", NULL,
 							      "The human readable name of the default adapter",
+							      NULL, G_PARAM_READABLE));
+	/**
+	 * BluetoothClient:default-adapter-address:
+	 *
+	 * The address of the default Bluetooth adapter or %NULL.
+	 */
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_ADDRESS,
+					 g_param_spec_string ("default-adapter-address", NULL,
+							      "The address of the default adapter",
 							      NULL, G_PARAM_READABLE));
 }
 
