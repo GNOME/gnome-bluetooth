@@ -27,6 +27,7 @@
 #include <math.h>
 
 #include "bluetooth-client.h"
+#include "bluetooth-device.h"
 #include "bluetooth-client-private.h"
 #include "bluetooth-client-glue.h"
 #include "bluetooth-agent.h"
@@ -44,7 +45,6 @@ struct _BluetoothSettingsWidget {
 	GtkBuilder          *builder;
 	GtkWidget           *child_box;
 	BluetoothClient     *client;
-	GtkTreeModel        *model;
 	gboolean             debug;
 	GCancellable        *cancellable;
 
@@ -1083,14 +1083,9 @@ switch_connected_state_set (GtkSwitch               *button,
 
 static void
 update_properties (BluetoothSettingsWidget *self,
-		   GDBusProxy              *proxy)
+		   BluetoothDevice         *device)
 {
 	GtkSwitch *button;
-	g_autoptr (GtkTreeModel) model = NULL;
-	GtkTreeIter iter, child_iter;
-	gboolean is_default = FALSE;
-	gboolean found_adapter = FALSE;
-	gboolean ret;
 	BluetoothType type;
 	gboolean connected, paired;
 	g_auto(GStrv) uuids = NULL;
@@ -1098,59 +1093,21 @@ update_properties (BluetoothSettingsWidget *self,
 	g_autofree char *icon = NULL;
 	guint i;
 
-	model = bluetooth_client_get_model (self->client);
-	g_assert (model);
-
-	ret = gtk_tree_model_get_iter_first (model, &iter);
-	while (ret) {
-		gtk_tree_model_get (model, &iter,
-				    BLUETOOTH_COLUMN_DEFAULT, &is_default,
-				    -1);
-
-		if (is_default) {
-			found_adapter = TRUE;
-			break;
-		}
-		ret = gtk_tree_model_iter_next (model, &iter);
-	}
-	if (!found_adapter) {
-		g_warning ("Could not find default adapter");
-		return;
-	}
-
-	ret = gtk_tree_model_iter_children (model, &child_iter, &iter);
-	while (ret) {
-		g_autoptr(GDBusProxy) p = NULL;
-
-		gtk_tree_model_get (model, &child_iter,
-				    BLUETOOTH_COLUMN_PROXY, &p,
-				    -1);
-
-		if (g_strcmp0 (g_dbus_proxy_get_object_path (proxy),
-			       g_dbus_proxy_get_object_path (p)) == 0) {
-			break;
-		}
-
-		ret = gtk_tree_model_iter_next (model, &child_iter);
-	}
-
-	/* This means we've found the device */
-	g_assert (ret);
-
-	gtk_tree_model_get (model, &child_iter,
-			    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
-			    BLUETOOTH_COLUMN_ALIAS, &alias,
-			    BLUETOOTH_COLUMN_ICON, &icon,
-			    BLUETOOTH_COLUMN_PAIRED, &paired,
-			    BLUETOOTH_COLUMN_CONNECTED, &connected,
-			    BLUETOOTH_COLUMN_UUIDS, &uuids,
-			    BLUETOOTH_COLUMN_TYPE, &type,
-			    -1);
 	if (self->debug)
-		bluetooth_client_dump_device (model, &child_iter);
+		bluetooth_device_dump (device);
+
+	g_object_get (device,
+		      "address", &bdaddr,
+		      "alias", &alias,
+		      "icon", &icon,
+		      "paired", &paired,
+		      "connected", &connected,
+		      "uuids", &uuids,
+		      "type", &type,
+		      NULL);
 
 	g_free (self->selected_object_path);
-	self->selected_object_path = g_strdup (g_dbus_proxy_get_object_path (proxy));
+	self->selected_object_path = g_strdup (bluetooth_device_get_object_path (device));
 
 	/* Hide all the buttons now, and show them again if we need to */
 	gtk_widget_hide (WID ("keyboard_button"));
@@ -1481,23 +1438,18 @@ activate_row (BluetoothSettingsWidget *self,
 {
 	GtkWindow *w;
 	GtkWidget *toplevel;
+	g_autoptr(BluetoothDevice) device = NULL;
 	gboolean paired, trusted, is_setup;
 
 	g_object_get (G_OBJECT (row),
 		      "paired", &paired,
 		      "trusted", &trusted,
+		      "device", &device,
 		      NULL);
 	is_setup = paired || trusted;
 
 	if (is_setup) {
-		GDBusProxy *proxy;
-
-		//FIXME pass the row
-		//FIXME add UUIDs to the row
-		//FIXME add icon to the row
-		g_object_get (G_OBJECT (row), "proxy", &proxy, NULL);
-		update_properties (self, proxy);
-		g_object_unref (proxy);
+		update_properties (self, device);
 
 		w = self->properties_dialog;
 		toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (self)));
@@ -1583,112 +1535,17 @@ add_device_section (BluetoothSettingsWidget *self)
 	gtk_box_append (GTK_BOX (box), self->device_stack);
 }
 
-static gboolean
-is_interesting_device (GtkTreeModel *model,
-		       GtkTreeIter  *iter)
-{
-	GtkTreeIter parent_iter;
-	gboolean is_default;
-
-	/* Not a child */
-	if (gtk_tree_model_iter_parent (model, &parent_iter, iter) == FALSE)
-		return FALSE;
-
-	/* Not the default adapter */
-	gtk_tree_model_get (model, &parent_iter,
-			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
-			    -1);
-	return is_default;
-}
-
 static void
-row_inserted_cb (GtkTreeModel *tree_model,
-		 GtkTreePath  *path,
-		 GtkTreeIter  *iter,
-		 gpointer      user_data)
+device_changed_cb (GObject    *object,
+		   GParamSpec *pspec,
+		   gpointer    user_data)
 {
 	BluetoothSettingsWidget *self = user_data;
-	g_autoptr(GDBusProxy) proxy = NULL;
-	g_autofree char *name = NULL;
-	g_autofree char *bdaddr = NULL;
-	g_autofree char *alias = NULL;
-	BluetoothType type;
-	gboolean paired, trusted, connected, legacy_pairing;
-	GtkWidget *row;
-
-	if (is_interesting_device (tree_model, iter) == FALSE) {
-		gtk_tree_model_get (tree_model, iter,
-				    BLUETOOTH_COLUMN_NAME, &name,
-				    -1);
-		g_debug ("Not adding device '%s'", name);
-		return;
-	}
-
-	gtk_tree_model_get (tree_model, iter,
-			    BLUETOOTH_COLUMN_PROXY, &proxy,
-			    BLUETOOTH_COLUMN_NAME, &name,
-			    BLUETOOTH_COLUMN_ALIAS, &alias,
-			    BLUETOOTH_COLUMN_PAIRED, &paired,
-			    BLUETOOTH_COLUMN_TRUSTED, &trusted,
-			    BLUETOOTH_COLUMN_CONNECTED, &connected,
-			    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
-			    BLUETOOTH_COLUMN_TYPE, &type,
-			    BLUETOOTH_COLUMN_LEGACYPAIRING, &legacy_pairing,
-			    -1);
-
-	g_debug ("Adding device %s (%s)", name, g_dbus_proxy_get_object_path (proxy));
-
-	add_device_type (self, bdaddr, type);
-
-	row = g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW,
-			    "proxy", proxy,
-			    "paired", paired,
-			    "trusted", trusted,
-			    "type", type,
-			    "connected", connected,
-			    "name", name,
-			    "alias", alias,
-			    "address", bdaddr,
-			    "legacy-pairing", legacy_pairing,
-			    "visible", name != NULL,
-			    NULL);
-	g_object_set_data_full (G_OBJECT (row), "object-path", g_strdup (g_dbus_proxy_get_object_path (proxy)), g_free);
-
-	gtk_list_box_append (GTK_LIST_BOX (self->device_list), row);
-	gtk_size_group_add_widget (self->row_sizegroup, row);
-
-	gtk_stack_set_transition_type (GTK_STACK (self->device_stack),
-				       GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN);
-	gtk_widget_set_hexpand (self->child_box, FALSE);
-	gtk_widget_set_vexpand (self->child_box, FALSE);
-	gtk_stack_set_visible_child_name (GTK_STACK (self->device_stack), DEVICES_PAGE);
-}
-
-static void
-row_changed_cb (GtkTreeModel *tree_model,
-		GtkTreePath  *path,
-		GtkTreeIter  *iter,
-		gpointer      user_data)
-{
-	BluetoothSettingsWidget *self = user_data;
-	g_autoptr(GDBusProxy) proxy = NULL;
+	BluetoothDevice *device = BLUETOOTH_DEVICE (object);
 	GtkWidget *child;
 	const char *object_path;
 
-	if (is_interesting_device (tree_model, iter) == FALSE) {
-		g_autofree char *name = NULL;
-
-		gtk_tree_model_get (tree_model, iter,
-				    BLUETOOTH_COLUMN_NAME, &name,
-				    -1);
-		g_debug ("Not interested in device '%s'", name);
-		return;
-	}
-
-	gtk_tree_model_get (tree_model, iter,
-			    BLUETOOTH_COLUMN_PROXY, &proxy,
-			    -1);
-	object_path = g_dbus_proxy_get_object_path (proxy);
+	object_path = bluetooth_device_get_object_path (device);
 
 	for (child = gtk_widget_get_first_child (self->device_list);
 	     child != NULL;
@@ -1700,42 +1557,58 @@ row_changed_cb (GtkTreeModel *tree_model,
 
 		path = g_object_get_data (G_OBJECT (child), "object-path");
 		if (g_str_equal (object_path, path)) {
-			g_autofree char *name = NULL;
-			g_autofree char *alias = NULL;
-			g_autofree char *bdaddr = NULL;
+			g_autofree char *address = NULL;
 			BluetoothType type;
-			gboolean paired, trusted, connected, legacy_pairing;
 
-			gtk_tree_model_get (tree_model, iter,
-					    BLUETOOTH_COLUMN_NAME, &name,
-					    BLUETOOTH_COLUMN_ALIAS, &alias,
-					    BLUETOOTH_COLUMN_PAIRED, &paired,
-					    BLUETOOTH_COLUMN_TRUSTED, &trusted,
-					    BLUETOOTH_COLUMN_CONNECTED, &connected,
-					    BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
-					    BLUETOOTH_COLUMN_TYPE, &type,
-					    BLUETOOTH_COLUMN_LEGACYPAIRING, &legacy_pairing,
-					    -1);
-
-			add_device_type (self, bdaddr, type);
-
-			g_object_set (G_OBJECT (child),
-				      "paired", paired,
-				      "trusted", trusted,
-				      "type", type,
-				      "connected", connected,
-				      "name", name,
-				      "alias", alias,
-				      "legacy-pairing", legacy_pairing,
-				      "visible", name != NULL,
+			g_object_get (G_OBJECT (device),
+				      "address", &address,
+				      "type", &type,
 				      NULL);
+
+			add_device_type (self, address, type);
 
 			/* Update the properties if necessary */
 			if (g_strcmp0 (self->selected_object_path, object_path) == 0)
-				update_properties (user_data, proxy);
+				update_properties (user_data, device);
 			break;
 		}
 	}
+}
+
+static void
+device_added_cb (BluetoothClient *client,
+		 BluetoothDevice *device,
+		 gpointer         user_data)
+{
+	BluetoothSettingsWidget *self = user_data;
+	g_autofree char *alias = NULL;
+	g_autofree char *address = NULL;
+	BluetoothType type;
+	GtkWidget *row;
+
+	row = bluetooth_settings_row_new_from_device (device);
+
+	g_object_get (G_OBJECT (row),
+		      "alias", &alias,
+		      "address", &address,
+		      "type", &type,
+		      NULL);
+	add_device_type (self, address, type);
+	g_debug ("Adding device %s (%s)", alias, bluetooth_device_get_object_path (device));
+
+	g_object_set_data_full (G_OBJECT (row), "object-path", g_strdup (bluetooth_device_get_object_path (device)), g_free);
+
+	gtk_list_box_append (GTK_LIST_BOX (self->device_list), row);
+	gtk_size_group_add_widget (self->row_sizegroup, row);
+
+	gtk_stack_set_transition_type (GTK_STACK (self->device_stack),
+				       GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN);
+	gtk_widget_set_hexpand (self->child_box, FALSE);
+	gtk_widget_set_vexpand (self->child_box, FALSE);
+	gtk_stack_set_visible_child_name (GTK_STACK (self->device_stack), DEVICES_PAGE);
+
+	g_signal_connect_object (G_OBJECT (device), "notify",
+				 G_CALLBACK (device_changed_cb), self, 0);
 }
 
 static void
@@ -1778,6 +1651,22 @@ device_removed_cb (BluetoothClient *client,
 		}
 	} else {
 		g_debug ("Didn't find a row to remove for tree path %s", object_path);
+	}
+}
+
+static void
+devices_coldplug (BluetoothSettingsWidget *self)
+{
+	g_autoptr(GListModel) model = NULL;
+	guint n_devices, i;
+
+	model = G_LIST_MODEL (bluetooth_client_get_devices (self->client));
+	n_devices = g_list_model_get_n_items (model);
+	for (i = 0; i < n_devices; i++) {
+		g_autoptr(BluetoothDevice) device = NULL;
+
+		device = g_list_model_get_item (model, i);
+		device_added_cb (self->client, device, self);
 	}
 }
 
@@ -1936,17 +1825,16 @@ bluetooth_settings_widget_init (BluetoothSettingsWidget *self)
 
 	setup_pairing_agent (self);
 	self->client = bluetooth_client_new ();
-	g_signal_connect (G_OBJECT (self->client), "notify::default-adapter-name",
-			  G_CALLBACK (name_changed), self);
-	self->model = bluetooth_client_get_model (self->client);
-	g_signal_connect (self->model, "row-changed",
-			  G_CALLBACK (row_changed_cb), self);
-	g_signal_connect (self->model, "row-inserted",
-			  G_CALLBACK (row_inserted_cb), self);
+	g_signal_connect (self->client, "device-added",
+			  G_CALLBACK (device_added_cb), self);
 	g_signal_connect (self->client, "device-removed",
 			  G_CALLBACK (device_removed_cb), self);
+	devices_coldplug (self);
+
 	g_signal_connect (G_OBJECT (self->client), "notify::default-adapter",
 			  G_CALLBACK (default_adapter_changed), self);
+	g_signal_connect (G_OBJECT (self->client), "notify::default-adapter-name",
+			  G_CALLBACK (name_changed), self);
 	g_signal_connect (G_OBJECT (self->client), "notify::default-adapter-powered",
 			  G_CALLBACK (default_adapter_changed), self);
 	default_adapter_changed (self->client, NULL, self);
@@ -1984,7 +1872,6 @@ bluetooth_settings_widget_finalize (GObject *object)
 	g_cancellable_cancel (self->cancellable);
 	g_clear_object (&self->cancellable);
 
-	g_clear_object (&self->model);
 	g_clear_object (&self->client);
 	g_clear_object (&self->builder);
 
