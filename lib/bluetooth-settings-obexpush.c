@@ -35,6 +35,7 @@
 #include <libnotify/notify.h>
 
 #include "bluetooth-settings-obexpush.h"
+#include "bluetooth-device.h"
 
 #define MANAGER_SERVICE	"org.bluez.obex"
 #define MANAGER_IFACE	"org.bluez.obex.AgentManager1"
@@ -270,51 +271,43 @@ get_paired_for_address (const char  *adapter,
 			const char  *device,
 			char       **name)
 {
-	GtkTreeModel *model;
-	GtkTreeIter parent;
-	gboolean next;
-	gboolean ret = FALSE;
-	char *addr;
+	g_autoptr(GListStore) model = NULL;
+	g_autofree char *default_address = NULL;
+	guint n_devices, i;
 
-	model = bluetooth_client_get_model (client);
-
-	for (next = gtk_tree_model_get_iter_first (model, &parent);
-	     next;
-	     next = gtk_tree_model_iter_next (model, &parent)) {
-		gtk_tree_model_get (model, &parent,
-			BLUETOOTH_COLUMN_ADDRESS, &addr,
-			-1);
-
-		if (g_strcmp0 (addr, adapter) == 0) {
-			GtkTreeIter child;
-			char *dev_addr;
-
-			for (next = gtk_tree_model_iter_children (model, &child, &parent);
-			     next;
-			     next = gtk_tree_model_iter_next (model, &child)) {
-				gboolean paired;
-				char *alias;
-
-				gtk_tree_model_get (model, &child,
-					BLUETOOTH_COLUMN_ADDRESS, &dev_addr,
-					BLUETOOTH_COLUMN_PAIRED, &paired,
-					BLUETOOTH_COLUMN_ALIAS, &alias,
-					-1);
-				if (g_strcmp0 (dev_addr, device) == 0) {
-					ret = paired;
-					*name = alias;
-					next = FALSE;
-				} else {
-					g_free (alias);
-				}
-				g_free (dev_addr);
-			}
-		}
-		g_free (addr);
+	g_object_get (client,
+		      "default-adapter-address", &default_address,
+		      NULL);
+	if (g_strcmp0 (default_address, adapter) != 0) {
+		g_debug ("Adapter '%s' is not the default adapter (%s)",
+			 adapter, default_address);
+		return FALSE;
 	}
 
-	g_object_unref (model);
-	return ret;
+	model = bluetooth_client_get_devices (client);
+	n_devices = g_list_model_get_n_items (G_LIST_MODEL (model));
+
+	for (i = 0; i < n_devices; i++) {
+		g_autoptr(BluetoothDevice) _device = NULL;
+		g_autofree char *address = NULL;
+		g_autofree char *alias = NULL;
+		gboolean paired = FALSE;
+
+		_device = g_list_model_get_item (G_LIST_MODEL (model), i);
+		g_object_get (_device,
+			      "address", &address,
+			      "alias", &alias,
+			      "paired", paired,
+			      NULL);
+		if (g_strcmp0 (device, address) != 0)
+			continue;
+
+		*name = g_steal_pointer (&alias);
+		return paired;
+	}
+
+	g_debug ("Could not find device '%s' in default adapter devices", device);
+	return FALSE;
 }
 
 static void
