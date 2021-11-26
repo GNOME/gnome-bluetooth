@@ -77,6 +77,7 @@ enum {
 };
 
 enum {
+	DEVICE_ADDED,
 	DEVICE_REMOVED,
 	LAST_SIGNAL
 };
@@ -503,6 +504,7 @@ device_added (GDBusObjectManager   *manager,
 					   "proxy", device,
 					   NULL);
 		g_list_store_append (client->list_store, device_obj);
+		g_signal_emit (G_OBJECT (client), signals[DEVICE_ADDED], 0, device_obj);
 	}
 }
 
@@ -640,6 +642,7 @@ add_devices_to_list_store (BluetoothClient *client)
 					   "proxy", DEVICE1 (iface),
 					   NULL);
 		g_list_store_append (client->list_store, device_obj);
+		g_signal_emit (G_OBJECT (client), signals[DEVICE_ADDED], 0, device_obj);
 	}
 	g_list_free_full (object_list, g_object_unref);
 }
@@ -1248,6 +1251,23 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	object_class->finalize = bluetooth_client_finalize;
 	object_class->get_property = bluetooth_client_get_property;
 	object_class->set_property = bluetooth_client_set_property;
+
+	/**
+	 * BluetoothClient::device-added:
+	 * @client: a #BluetoothClient object which received the signal
+	 * @device: a #BluetoothDevice object
+	 *
+	 * The #BluetoothClient::device-added signal is launched when a
+	 * device gets added to the model.
+	 **/
+	signals[DEVICE_ADDED] =
+		g_signal_new ("device-added",
+			      G_TYPE_FROM_CLASS (klass),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 1, G_TYPE_OBJECT);
 
 	/**
 	 * BluetoothClient::device-removed:
