@@ -307,19 +307,6 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, status);
 }
 
-/**
- * bluetooth_settings_row_new:
- *
- * Returns a new #BluetoothSettingsRow widget.
- *
- * Return value: A #BluetoothSettingsRow widget
- **/
-GtkWidget *
-bluetooth_settings_row_new (void)
-{
-	return g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW, NULL);
-}
-
 static gboolean
 name_to_visible (GBinding     *binding,
 		 const GValue *from_value,
