@@ -39,6 +39,7 @@ struct _BluetoothSettingsRow {
 
 	/* Properties */
 	GDBusProxy *proxy;
+	BluetoothDevice *device;
 	gboolean paired;
 	gboolean trusted;
 	BluetoothType type;
@@ -55,6 +56,7 @@ struct _BluetoothSettingsRow {
 enum {
 	PROP_0,
 	PROP_PROXY,
+	PROP_DEVICE,
 	PROP_PAIRED,
 	PROP_TRUSTED,
 	PROP_TYPE,
@@ -105,6 +107,7 @@ bluetooth_settings_row_finalize (GObject *object)
 	BluetoothSettingsRow *self = BLUETOOTH_SETTINGS_ROW (object);
 
 	g_clear_object (&self->proxy);
+	g_clear_object (&self->device);
 	g_clear_pointer (&self->name, g_free);
 	g_clear_pointer (&self->alias, g_free);
 	g_clear_pointer (&self->bdaddr, g_free);
@@ -123,6 +126,9 @@ bluetooth_settings_row_get_property (GObject        *object,
 	switch (property_id) {
 	case PROP_PROXY:
 		g_value_set_object (value, self->proxy);
+		break;
+	case PROP_DEVICE:
+		g_value_set_object (value, self->device);
 		break;
 	case PROP_PAIRED:
 		g_value_set_boolean (value, self->paired);
@@ -186,6 +192,10 @@ bluetooth_settings_row_set_property (GObject        *object,
 		g_clear_object (&self->proxy);
 		self->proxy = g_value_dup_object (value);
 		break;
+	case PROP_DEVICE:
+		g_assert (!self->device);
+		self->device = g_value_dup_object (value);
+		break;
 	case PROP_PAIRED:
 		self->paired = g_value_get_boolean (value);
 		label_might_change (self);
@@ -245,6 +255,10 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 					 g_param_spec_object ("proxy", NULL,
 							      "The D-Bus object path of the device",
 							      G_TYPE_DBUS_PROXY, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_DEVICE,
+					 g_param_spec_object ("device", NULL,
+							      "a BluetoothDevice object",
+							      BLUETOOTH_TYPE_DEVICE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 	g_object_class_install_property (object_class, PROP_PAIRED,
 					 g_param_spec_boolean ("paired", NULL,
 							      "Paired",
@@ -304,4 +318,64 @@ GtkWidget *
 bluetooth_settings_row_new (void)
 {
 	return g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW, NULL);
+}
+
+static gboolean
+name_to_visible (GBinding     *binding,
+		 const GValue *from_value,
+		 GValue       *to_value,
+		 gpointer      user_data)
+{
+	const char *name;
+
+	name = g_value_get_string (from_value);
+	g_value_set_boolean (to_value, name != NULL);
+	return TRUE;
+}
+
+/**
+ * bluetooth_settings_row_new_from_device:
+ *
+ * Returns a new #BluetoothSettingsRow widget populated from
+ * the #BluetoothDevice passed.
+ *
+ * Return value: A #BluetoothSettingsRow widget
+ **/
+GtkWidget *
+bluetooth_settings_row_new_from_device (BluetoothDevice *device)
+{
+	g_autoptr(GDBusProxy) proxy = NULL;
+	GtkWidget *row;
+	const char *props[] = {
+		"name",
+		"alias",
+		"paired",
+		"trusted",
+		"connected",
+		"address",
+		"type",
+		"legacy-pairing"
+	};
+	guint i;
+
+	g_return_val_if_fail (BLUETOOTH_IS_DEVICE (device), NULL);
+
+	g_object_get (G_OBJECT (device), "proxy", &proxy, NULL);
+	row = g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW,
+			    "proxy", proxy,
+			    "device", device,
+			    NULL);
+
+	for (i = 0; i < G_N_ELEMENTS (props); i++) {
+		g_object_bind_property (G_OBJECT (device), props[i],
+					G_OBJECT (row), props[i],
+					G_BINDING_SYNC_CREATE);
+	}
+	g_object_bind_property_full (G_OBJECT (device), "name",
+				     G_OBJECT (row), "visible",
+				     G_BINDING_SYNC_CREATE,
+				     name_to_visible, NULL,
+				     NULL, NULL);
+
+	return row;
 }
