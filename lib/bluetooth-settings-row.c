@@ -253,7 +253,7 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 
 	g_object_class_install_property (object_class, PROP_PROXY,
 					 g_param_spec_object ("proxy", NULL,
-							      "The D-Bus object path of the device",
+							      "The D-Bus proxy object of the device",
 							      G_TYPE_DBUS_PROXY, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_object ("device", NULL,
