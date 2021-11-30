@@ -69,7 +69,7 @@ class OopTests(dbusmock.DBusTestCase):
 
     def print_list_store(self, model):
         for device in model:
-            print(f"{device.get_property('name')}: {device.get_property('address')}")
+            print(f"{device.props.name}: {device.props.address}")
 
     def wait_for_mainloop(self):
         ml = GLib.MainLoop()
@@ -83,21 +83,21 @@ class OopTests(dbusmock.DBusTestCase):
 
     def test_no_adapters(self):
         self.wait_for_mainloop()
-        self.assertEqual(self.client.get_property('num-adapters'), 0)
+        self.assertEqual(self.client.props.num_adapters, 0)
 
     def test_one_adapter(self):
-        self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
-        self.assertEqual(self.client.get_property('num-adapters'), 1)
+        self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
+        self.assertEqual(self.client.props.num_adapters, 1)
 
     def test_one_device(self):
-        self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
+        self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
 
         # GListStore
         list_store = self.client.get_devices()
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.get_property('address'), '22:33:44:55:66:77')
+        self.assertEqual(device.props.address, '22:33:44:55:66:77')
 
     def test_device_notify(self):
         bus = dbus.SystemBus()
@@ -108,7 +108,7 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.get_property('connected'), False)
+        self.assertEqual(device.props.connected, False)
 
         received_notification = False
         def device_notify_cb(device, pspec):
@@ -121,7 +121,7 @@ class OopTests(dbusmock.DBusTestCase):
                 'Connected': True,
         })
         self.wait_for_condition(lambda: received_notification == True)
-        self.assertEqual(device.get_property('connected'), True)
+        self.assertEqual(device.props.connected, True)
 
     def test_device_removal(self):
         bus = dbus.SystemBus()
@@ -189,35 +189,35 @@ class OopTests(dbusmock.DBusTestCase):
         bluez_server = bus.get_object('org.bluez', '/org/bluez')
         dbusmock_bluez = dbus.Interface(bluez_server, 'org.bluez.Mock')
 
-        self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
-        self.assertEqual(self.client.get_property('num-adapters'), 2)
+        self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
+        self.assertEqual(self.client.props.num_adapters, 2)
 
         # GListModel
         list_store = self.client.get_devices()
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.get_property('address'), '22:33:44:55:66:77')
+        self.assertEqual(device.props.address, '22:33:44:55:66:77')
 
         # Set default adapter in setup mode
-        self.assertEqual (self.client.get_property('default-adapter-setup-mode'), False)
-        default_adapter_path = self.client.get_property('default-adapter')
-        self.client.set_property('default-adapter-setup-mode', True)
+        self.assertEqual (self.client.props.default_adapter_setup_mode, False)
+        default_adapter_path = self.client.props.default_adapter
+        self.client.props.default_adapter_setup_mode = True
         self.wait_for_mainloop()
-        self.assertEqual(self.client.get_property('default-adapter-setup-mode'), True)
+        self.assertEqual(self.client.props.default_adapter_setup_mode, True)
 
         # Remove default adapter
         dbusmock_bluez.RemoveAdapter('hci1')
-        self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 2)
-        self.assertEqual(self.client.get_property('num-adapters'), 1)
-        self.assertNotEqual(self.client.get_property('default-adapter'), default_adapter_path)
-        self.assertEqual(self.client.get_property('default-adapter-setup-mode'), False)
+        self.wait_for_condition(lambda: self.client.props.num_adapters != 2)
+        self.assertEqual(self.client.props.num_adapters, 1)
+        self.assertNotEqual(self.client.props.default_adapter, default_adapter_path)
+        self.assertEqual(self.client.props.default_adapter_setup_mode, False)
 
         # GListModel
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.get_property('address'), '11:22:33:44:55:66')
+        self.assertEqual(device.props.address, '11:22:33:44:55:66')
 
         # Re-add the old adapter, device is still there
         dbusmock_bluez.AddAdapter('hci1', 'my-computer #2')
@@ -226,7 +226,7 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.get_property('address'), '11:22:33:44:55:66')
+        self.assertEqual(device.props.address, '11:22:33:44:55:66')
 
     def _pair_cb(self, client, result, user_data=None):
         success, path = client.setup_device_finish(result)
@@ -236,15 +236,15 @@ class OopTests(dbusmock.DBusTestCase):
         self.paired = True
 
     def test_pairing(self):
-        self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
-        self.assertEqual(self.client.get_property('num-adapters'), 1)
+        self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
+        self.assertEqual(self.client.props.num_adapters, 1)
 
         model = self.client.get_devices()
 
         # Get first device
         device = model.get_item(0)
-        self.assertEqual(device.get_property('address'), '11:22:33:44:55:66')
-        self.assertEqual(device.get_property('paired'), False)
+        self.assertEqual(device.props.address, '11:22:33:44:55:66')
+        self.assertEqual(device.props.paired, False)
 
         self.client.setup_device (device.get_object_path(),
                 True,
@@ -253,8 +253,8 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_condition(lambda: self.paired == True)
         self.assertEqual(self.paired, True)
 
-        self.assertEqual(device.get_property('paired'), True)
-        self.assertEqual(device.get_property('icon'), 'phone')
+        self.assertEqual(device.props.paired, True)
+        self.assertEqual(device.props.icon, 'phone')
 
     def test_agent(self):
         agent = GnomeBluetoothPriv.Agent.new ('/org/gnome/bluetooth/integration_test')
