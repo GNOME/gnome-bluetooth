@@ -904,7 +904,6 @@ static void bluetooth_client_init(BluetoothClient *client)
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_DISCOVERING */
 					 G_TYPE_INT,        /* BLUETOOTH_COLUMN_LEGACYPAIRING */
 					 G_TYPE_BOOLEAN,    /* BLUETOOTH_COLUMN_POWERED */
-					 G_TYPE_HASH_TABLE, /* BLUETOOTH_COLUMN_SERVICES */
 					 G_TYPE_STRV);      /* BLUETOOTH_COLUMN_UUIDS */
 
 	g_dbus_object_manager_client_new_for_bus (G_BUS_TYPE_SYSTEM,
