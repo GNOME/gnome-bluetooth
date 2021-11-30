@@ -41,3 +41,7 @@ build_stable:
     - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
     - dnf install -y $DEPENDENCIES_ABI_CHECK
     - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+  artifacts:
+    when: always
+    paths:
+      - "${CI_PROJECT_DIR}/_build/meson-logs/"
