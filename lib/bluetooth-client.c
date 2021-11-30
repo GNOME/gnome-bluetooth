@@ -1274,25 +1274,6 @@ bluetooth_client_get_devices (BluetoothClient *client)
 	return G_LIST_STORE (g_object_ref (client->list_store));
 }
 
-/**
- * bluetooth_client_get_model:
- * @client: a #BluetoothClient object
- *
- * Returns an unfiltered #GtkTreeModel representing the adapter and devices available on the system.
- *
- * Return value: (transfer full): a #GtkTreeModel object.
- **/
-GtkTreeModel *bluetooth_client_get_model (BluetoothClient *client)
-{
-	GtkTreeModel *model;
-
-	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), NULL);
-
-	model = GTK_TREE_MODEL (g_object_ref(client->store));
-
-	return model;
-}
-
 typedef struct {
 	BluetoothClientSetupFunc func;
 	BluetoothClient *client;
