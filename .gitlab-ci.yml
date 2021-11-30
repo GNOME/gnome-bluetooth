@@ -37,6 +37,7 @@ build_stable:
     - cd ..
     - dnf install -y $TEST_DEPS
     - ninja -C _build test
+    - .ci/fail_skipped_tests.py _build/meson-logs/testlog.junit.xml
     - ninja -C _build dist
     - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
     - dnf install -y $DEPENDENCIES_ABI_CHECK
