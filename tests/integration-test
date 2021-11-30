@@ -92,12 +92,6 @@ class OopTests(dbusmock.DBusTestCase):
     def test_one_device(self):
         self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
 
-        # GtkTreeModel
-        model = self.client.get_model()
-        path = Gtk.TreePath([0, 0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '22:33:44:55:66:77')
-
         # GListStore
         list_store = self.client.get_devices()
         self.assertEqual(list_store.get_n_items(), 1)
@@ -198,25 +192,6 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_condition(lambda: self.client.get_property('num-adapters') != 0)
         self.assertEqual(self.client.get_property('num-adapters'), 2)
 
-        # GtkTreeModel
-        model = self.client.get_model()
-
-        path = Gtk.TreePath([1])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.DEFAULT), False)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.NAME), 'my-computer')
-        path = Gtk.TreePath([1, 0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '11:22:33:44:55:66')
-
-        path = Gtk.TreePath([0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.NAME), 'my-computer #2')
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.DEFAULT), True)
-        path = Gtk.TreePath([0, 0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '22:33:44:55:66:77')
-
         # GListModel
         list_store = self.client.get_devices()
         self.assertEqual(list_store.get_n_items(), 1)
@@ -238,15 +213,6 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertNotEqual(self.client.get_property('default-adapter'), default_adapter_path)
         self.assertEqual(self.client.get_property('default-adapter-setup-mode'), False)
 
-        # GtkTreeModel
-        path = Gtk.TreePath([0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.DEFAULT), True)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.NAME), 'my-computer')
-        path = Gtk.TreePath([0, 0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.ADDRESS), '11:22:33:44:55:66')
-
         # GListModel
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
@@ -255,12 +221,6 @@ class OopTests(dbusmock.DBusTestCase):
 
         # Re-add the old adapter, device is still there
         dbusmock_bluez.AddAdapter('hci1', 'my-computer #2')
-
-        # GtkTreeModel
-        path = Gtk.TreePath([0])
-        treeiter = model.get_iter(path)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.DEFAULT), True)
-        self.assertEqual(model.get_value(treeiter, GnomeBluetoothPriv.Column.NAME), 'my-computer')
 
         # GListModel
         self.assertEqual(list_store.get_n_items(), 1)
