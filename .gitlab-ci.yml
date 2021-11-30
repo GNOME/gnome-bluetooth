@@ -16,6 +16,8 @@ variables:
     git
   GIT_SUBMODULE_STRATEGY: recursive
   TEST_DEPS:
+    dbus-daemon
+    python3-gobject-base
     python3-dbus
   DEPENDENCIES_ABI_CHECK:
     libabigail
