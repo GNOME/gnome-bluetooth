@@ -34,6 +34,7 @@
 #include <gtk/gtk.h>
 
 #include <bluetooth-client.h>
+#include <bluetooth-device.h>
 
 #define OBEX_SERVICE	"org.bluez.obex"
 #define OBEX_PATH	"/org/bluez/obex"
@@ -517,45 +518,31 @@ static void create_window(void)
 	gtk_window_present(GTK_WINDOW(dialog));
 }
 
-static gchar *get_device_name(const gchar *address)
+static char *
+get_device_name (const char *address)
 {
-	BluetoothClient *client;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	gboolean cont;
-	char *found_name;
+	g_autoptr(BluetoothClient) client = NULL;
+	g_autoptr(GListStore) model = NULL;
+	guint n_devices, i;
 
-	found_name = NULL;
-	client = bluetooth_client_new ();
-	model = bluetooth_client_get_model (client);
-	if (model == NULL) {
-		g_object_unref (client);
-		return NULL;
+	model = bluetooth_client_get_devices (client);
+	n_devices = g_list_model_get_n_items (G_LIST_MODEL (model));
+	for (i = 0; i < n_devices; i++) {
+		g_autoptr(BluetoothDevice) device = NULL;
+		g_autofree char *name = NULL;
+		g_autofree char *_address = NULL;
+
+		g_object_get (device,
+			      "name", &name,
+			      "address", &_address,
+			      NULL);
+		if (g_strcmp0 (address, _address) != 0)
+			continue;
+
+		return g_steal_pointer (&name);
 	}
 
-	cont = gtk_tree_model_get_iter_first(model, &iter);
-	while (cont != FALSE) {
-		char *bdaddr, *name;
-
-		gtk_tree_model_get(model, &iter,
-				   BLUETOOTH_COLUMN_ADDRESS, &bdaddr,
-				   BLUETOOTH_COLUMN_ALIAS, &name,
-				   -1);
-		if (g_strcmp0 (bdaddr, address) == 0) {
-			g_free (bdaddr);
-			found_name = name;
-			break;
-		}
-		g_free (bdaddr);
-		g_free (name);
-
-		cont = gtk_tree_model_iter_next(model, &iter);
-	}
-
-	g_object_unref (model);
-	g_object_unref (client);
-
-	return found_name;
+	return NULL;
 }
 
 static void
