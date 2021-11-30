@@ -1525,24 +1525,6 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 	return TRUE;
 }
 
-GDBusProxy *
-bluetooth_client_get_device (BluetoothClient *client,
-			     const char       *path)
-{
-	GtkTreeIter iter;
-	GDBusProxy *proxy;
-
-	if (get_iter_from_path (client->store, &iter, path) == FALSE) {
-		g_debug ("Couldn't find device '%s' in tree", path);
-		return NULL;
-	}
-
-	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
-			                BLUETOOTH_COLUMN_PROXY, &proxy,
-			                -1);
-	return proxy;
-}
-
 static void
 connect_callback (GDBusProxy   *proxy,
 		  GAsyncResult *res,

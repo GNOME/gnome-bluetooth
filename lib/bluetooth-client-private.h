@@ -55,9 +55,6 @@ gboolean bluetooth_client_cancel_setup_device_finish (BluetoothClient *client,
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
 
-GDBusProxy *bluetooth_client_get_device (BluetoothClient *client,
-					 const char      *path);
-
 void bluetooth_client_dump_device (GtkTreeModel *model,
 				   GtkTreeIter *iter);
 
