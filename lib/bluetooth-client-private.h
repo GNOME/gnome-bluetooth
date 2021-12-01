@@ -23,8 +23,8 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gtk/gtk.h>
+#include <gio/gio.h>
+#include <bluetooth-device.h>
 #include <bluetooth-enums.h>
 
 typedef void (*BluetoothClientSetupFunc) (BluetoothClient *client,
