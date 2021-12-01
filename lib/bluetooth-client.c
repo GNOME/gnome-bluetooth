@@ -1481,25 +1481,23 @@ bluetooth_client_set_trusted (BluetoothClient *client,
 			      const char      *device_path,
 			      gboolean         trusted)
 {
-	GObject *device;
-	GtkTreeIter iter;
+	g_autoptr(BluetoothDevice) device = NULL;
+	g_autoptr(GDBusProxy) proxy = NULL;
 
 	g_return_val_if_fail (BLUETOOTH_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (device_path != NULL, FALSE);
 
-	if (get_iter_from_path (client->store, &iter, device_path) == FALSE) {
+	device = get_device_for_path (client, device_path);
+	if (device == NULL) {
 		g_debug ("Couldn't find device '%s' in tree to mark it as trusted", device_path);
 		return FALSE;
 	}
 
-	gtk_tree_model_get (GTK_TREE_MODEL (client->store), &iter,
-			    BLUETOOTH_COLUMN_PROXY, &device, -1);
+	g_object_get (G_OBJECT (device),
+		      "proxy", &proxy,
+		      NULL);
 
-	if (device == NULL)
-		return FALSE;
-
-	g_object_set (device, "trusted", trusted, NULL);
-	g_object_unref (device);
+	g_object_set (proxy, "trusted", trusted, NULL);
 
 	return TRUE;
 }
