@@ -580,9 +580,12 @@ static void
 add_devices_to_list_store (BluetoothClient *client)
 {
 	GList *object_list, *l;
+	const char *default_adapter_path;
 
 	g_debug ("Emptying list store as default adapter changed");
 	g_list_store_remove_all (client->list_store);
+
+	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
 
 	g_debug ("Coldplugging devices for new default adapter");
 	object_list = g_dbus_object_manager_get_objects (client->manager);
@@ -591,11 +594,9 @@ add_devices_to_list_store (BluetoothClient *client)
 		GDBusInterface *iface;
 		const char *adapter_path, *address, *alias, *name, *icon;
 		g_auto(GStrv) uuids = NULL;
-		gboolean default_adapter;
 		gboolean paired, trusted, connected;
 		int legacypairing;
 		BluetoothType type = BLUETOOTH_TYPE_ANY;
-		GtkTreeIter parent;
 		BluetoothDevice *device_obj;
 
 		iface = g_dbus_object_get_interface (object, BLUEZ_DEVICE_INTERFACE);
@@ -603,12 +604,7 @@ add_devices_to_list_store (BluetoothClient *client)
 			continue;
 
 		adapter_path = device1_get_adapter (DEVICE1 (iface));
-		if (get_iter_from_path (client->store, &parent, adapter_path) == FALSE)
-			continue;
-		gtk_tree_model_get (GTK_TREE_MODEL(client->store), &parent,
-				    BLUETOOTH_COLUMN_DEFAULT, &default_adapter,
-				    -1);
-		if (!default_adapter)
+		if (g_strcmp0 (adapter_path, default_adapter_path) != 0)
 			continue;
 
 		address = device1_get_address (DEVICE1 (iface));
