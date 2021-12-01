@@ -1340,8 +1340,7 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 {
 	GTask *task;
 	g_autoptr(GDBusProxy) device = NULL;
-	GtkTreeIter iter, adapter_iter;
-	gboolean paired;
+	GtkTreeIter iter;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 	g_return_if_fail (path != NULL);
@@ -1363,23 +1362,7 @@ bluetooth_client_setup_device (BluetoothClient          *client,
 
 	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
 			    BLUETOOTH_COLUMN_PROXY, &device,
-			    BLUETOOTH_COLUMN_PAIRED, &paired, -1);
-
-	if (paired != FALSE &&
-	    gtk_tree_model_iter_parent (GTK_TREE_MODEL(client->store), &adapter_iter, &iter)) {
-		GDBusProxy *adapter;
-		g_autoptr(GError) err = NULL;
-
-		gtk_tree_model_get (GTK_TREE_MODEL(client->store), &adapter_iter,
-				    BLUETOOTH_COLUMN_PROXY, &adapter,
-				    -1);
-		adapter1_call_remove_device_sync (ADAPTER1 (adapter),
-						  path,
-						  NULL, &err);
-		if (err != NULL)
-			g_warning ("Failed to remove device: %s", err->message);
-		g_object_unref (adapter);
-	}
+			    -1);
 
 	if (pair == TRUE) {
 		device1_call_pair (DEVICE1(device),
