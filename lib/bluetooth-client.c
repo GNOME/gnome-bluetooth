@@ -198,6 +198,24 @@ get_iter_from_address (GtkTreeStore *store,
 	return iter_search (store, iter, &parent_iter, compare_address, (gpointer) address);
 }
 
+static BluetoothDevice *
+get_device_for_path (BluetoothClient *client,
+		     const char      *path)
+{
+	guint n_items, i;
+
+	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+	for (i = 0; i < n_items; i++) {
+		g_autoptr(BluetoothDevice) d = NULL;
+
+		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+		if (g_str_equal (path, bluetooth_device_get_object_path (d))) {
+			return g_steal_pointer (&d);
+		}
+	}
+	return NULL;
+}
+
 static char **
 device_list_uuids (const gchar * const *uuids)
 {
