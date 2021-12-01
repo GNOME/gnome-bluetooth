@@ -1568,9 +1568,9 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 				  GAsyncReadyCallback  callback,
 				  gpointer             user_data)
 {
-	GtkTreeIter iter;
 	GTask *task;
-	g_autoptr(GDBusProxy) device = NULL;
+	g_autoptr(BluetoothDevice) device = NULL;
+	g_autoptr(GDBusProxy) proxy = NULL;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 	g_return_if_fail (path != NULL);
@@ -1581,7 +1581,8 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 			   user_data);
 	g_task_set_source_tag (task, bluetooth_client_connect_service);
 
-	if (get_iter_from_path (client->store, &iter, path) == FALSE) {
+	device = get_device_for_path (client, path);
+	if (device == NULL) {
 		g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
 					 "Device with object path %s does not exist",
 					 path);
@@ -1589,17 +1590,17 @@ bluetooth_client_connect_service (BluetoothClient     *client,
 		return;
 	}
 
-	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
-			    BLUETOOTH_COLUMN_PROXY, &device,
-			    -1);
+	g_object_get (G_OBJECT (device),
+		      "proxy", &proxy,
+		      NULL);
 
 	if (connect) {
-		device1_call_connect (DEVICE1(device),
+		device1_call_connect (DEVICE1(proxy),
 				      cancellable,
 				      (GAsyncReadyCallback) connect_callback,
 				      task);
 	} else {
-		device1_call_disconnect (DEVICE1(device),
+		device1_call_disconnect (DEVICE1(proxy),
 					 cancellable,
 					 (GAsyncReadyCallback) disconnect_callback,
 					 task);
