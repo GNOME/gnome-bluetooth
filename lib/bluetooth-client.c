@@ -1292,6 +1292,8 @@ device_pair_callback (GDBusProxy   *proxy,
 			 error->message);
 		g_task_return_error (task, error);
 	} else {
+		g_debug ("Pair() success for %s",
+			 g_dbus_proxy_get_object_path (proxy));
 		g_task_return_boolean (task, TRUE);
 	}
 	g_object_unref (task);
