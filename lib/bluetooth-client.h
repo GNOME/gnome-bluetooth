@@ -3,6 +3,7 @@
  *  BlueZ - Bluetooth protocol stack for Linux
  *
  *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
+ *  Copyright (C) 2009-2021  Red Hat Inc.
  *
  *
  *  This library is free software; you can redistribute it and/or
