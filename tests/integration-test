@@ -263,6 +263,25 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(device.props.paired, True)
         self.assertEqual(device.props.icon, 'phone')
 
+    def test_set_trusted(self):
+        self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
+        self.assertEqual(self.client.props.num_adapters, 1)
+
+        model = self.client.get_devices()
+
+        # Get first device
+        device = model.get_item(0)
+        self.assertEqual(device.props.address, '11:22:33:44:55:66')
+        self.assertEqual(device.props.trusted, False)
+
+        self.client.set_trusted(device.get_object_path(), True)
+        self.wait_for_condition(lambda: device.props.trusted == True)
+        self.assertEqual(device.props.trusted, True)
+
+        self.client.set_trusted(device.get_object_path(), False)
+        self.wait_for_condition(lambda: device.props.trusted == False)
+        self.assertEqual(device.props.trusted, False)
+
     def test_agent(self):
         agent = GnomeBluetoothPriv.Agent.new ('/org/gnome/bluetooth/integration_test')
         self.assertIsNotNone(agent)
@@ -344,6 +363,11 @@ class Tests(dbusmock.DBusTestCase):
         path = self.dbusmock_bluez.AddDevice(adapter_name, address, alias)
         self.assertEqual(path, '/org/bluez/' + adapter_name + '/dev_' + address.replace(':', '_'))
 
+        self.run_test_process()
+
+    def test_set_trusted(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'My Phone')
         self.run_test_process()
 
     def test_agent(self):
