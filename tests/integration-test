@@ -96,6 +96,7 @@ class OopTests(dbusmock.DBusTestCase):
 
     def test_one_device(self):
         self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
+        self.assertEqual(self.client.props.num_adapters, 1)
 
         # GListStore
         list_store = self.client.get_devices()
@@ -126,6 +127,7 @@ class OopTests(dbusmock.DBusTestCase):
                 'Connected': True,
         })
         self.wait_for_condition(lambda: received_notification == True)
+        self.assertEqual(received_notification, True)
         self.assertEqual(device.props.connected, True)
 
     def test_device_removal(self):
