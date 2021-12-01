@@ -431,6 +431,7 @@ device_added (GDBusObjectManager   *manager,
 	      gboolean              coldplug)
 {
 	g_autoptr (GDBusProxy) adapter = NULL;
+	const char *default_adapter_path;
 	const char *adapter_path, *address, *alias, *name, *icon;
 	g_auto(GStrv) uuids = NULL;
 	gboolean default_adapter;
@@ -456,12 +457,14 @@ device_added (GDBusObjectManager   *manager,
 
 	g_debug ("Inserting device '%s' on adapter '%s'", address, adapter_path);
 
+	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
+	default_adapter = (g_strcmp0 (default_adapter_path, adapter_path) == 0);
+
 	if (get_iter_from_path (client->store, &parent, adapter_path) == FALSE)
 		return;
 
 	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &parent,
 			    BLUETOOTH_COLUMN_PROXY, &adapter,
-			    BLUETOOTH_COLUMN_DEFAULT, &default_adapter,
 			    -1);
 
 	if (get_iter_from_address (client->store, &iter, address, adapter) == FALSE) {
