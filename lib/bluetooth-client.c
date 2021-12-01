@@ -791,6 +791,8 @@ adapter_removed (GDBusObjectManager   *manager,
 		 BluetoothClient      *client)
 {
 	GtkTreeIter iter, childiter;
+	g_autoptr(GDBusProxy) new_default_adapter = NULL;
+	GList *object_list, *l;
 	gboolean was_default = FALSE;
 	gboolean have_child;
 
@@ -824,16 +826,22 @@ adapter_removed (GDBusObjectManager   *manager,
 	g_clear_object (&client->default_adapter);
 	gtk_tree_store_remove (client->store, &iter);
 
-	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL(client->store),
-					   &iter)) {
-		GDBusProxy *adapter;
+	new_default_adapter = NULL;
+	object_list = g_dbus_object_manager_get_objects (client->manager);
+	for (l = object_list; l != NULL; l = l->next) {
+		GDBusObject *object = l->data;
+		GDBusInterface *iface;
 
-		gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
-				   BLUETOOTH_COLUMN_PROXY, &adapter, -1);
+		iface = g_dbus_object_get_interface (object, BLUEZ_ADAPTER_INTERFACE);
+		if (iface) {
+			new_default_adapter = G_DBUS_PROXY (g_object_ref (iface));
+			break;
+		}
+	}
+	g_list_free_full (object_list, g_object_unref);
 
-		default_adapter_changed (manager, adapter, client);
-
-		g_object_unref(adapter);
+	if (new_default_adapter) {
+		default_adapter_changed (manager, new_default_adapter, client);
 	} else {
 		g_object_notify (G_OBJECT (client), "default-adapter");
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
