@@ -1444,8 +1444,8 @@ bluetooth_client_cancel_setup_device (BluetoothClient          *client,
 				      gpointer                  user_data)
 {
 	GTask *task;
-	g_autoptr(GDBusProxy) device = NULL;
-	GtkTreeIter iter;
+	g_autoptr(BluetoothDevice) device = NULL;
+	g_autoptr(GDBusProxy) proxy = NULL;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 	g_return_if_fail (path != NULL);
@@ -1457,7 +1457,8 @@ bluetooth_client_cancel_setup_device (BluetoothClient          *client,
 	g_task_set_source_tag (task, bluetooth_client_cancel_setup_device);
 	g_task_set_task_data (task, g_strdup (path), (GDestroyNotify) g_free);
 
-	if (get_iter_from_path (client->store, &iter, path) == FALSE) {
+	device = get_device_for_path (client, path);
+	if (device == NULL) {
 		g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
 					 "Device with object path %s does not exist",
 					 path);
@@ -1465,11 +1466,11 @@ bluetooth_client_cancel_setup_device (BluetoothClient          *client,
 		return;
 	}
 
-	gtk_tree_model_get (GTK_TREE_MODEL(client->store), &iter,
-			    BLUETOOTH_COLUMN_PROXY, &device,
-			    -1);
+	g_object_get (G_OBJECT (device),
+		      "proxy", &proxy,
+		      NULL);
 
-	device1_call_cancel_pairing (DEVICE1(device),
+	device1_call_cancel_pairing (DEVICE1(proxy),
 				     cancellable,
 				     (GAsyncReadyCallback) device_cancel_pairing_callback,
 				     task);
