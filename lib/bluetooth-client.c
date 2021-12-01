@@ -343,7 +343,6 @@ device_notify_cb (Device1         *device1,
 {
 	const char *property = g_param_spec_get_name (pspec);
 	GtkTreeIter iter;
-	guint i, n_items;
 	g_autoptr(BluetoothDevice) device = NULL;
 	const char *device_path;
 
@@ -351,17 +350,7 @@ device_notify_cb (Device1         *device1,
 		return;
 
 	device_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (device1));
-	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
-	for (i = 0; i < n_items; i++) {
-		g_autoptr(BluetoothDevice) d = NULL;
-
-		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
-		if (g_str_equal (device_path, bluetooth_device_get_object_path (d))) {
-			device = g_steal_pointer (&d);
-			break;
-		}
-	}
-
+	device = get_device_for_path (client, device_path);
 	if (!device) {
 		g_debug ("Device %s was not known, so property '%s' not applied", device_path, property);
 		return;
