@@ -495,14 +495,6 @@ adapter_notify_cb (Adapter1       *adapter,
 	} else if (g_strcmp0 (property, "discovering") == 0) {
 		g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 	} else if (g_strcmp0 (property, "powered") == 0) {
-		gboolean powered = adapter1_get_powered (adapter);
-
-		if (powered) {
-			g_debug ("Default adapter is powered, so invalidating all the default-adapter* properties");
-			g_object_notify (G_OBJECT (client), "default-adapter");
-			g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
-			g_object_notify (G_OBJECT (client), "default-adapter-name");
-		}
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 	}
 }
@@ -524,23 +516,16 @@ default_adapter_changed (GDBusObjectManager   *manager,
 
 	add_devices_to_list_store (client);
 
+	g_debug ("New default adapter so invalidating all the default-adapter* properties");
+	g_object_notify (G_OBJECT (client), "default-adapter");
+	g_object_notify (G_OBJECT (client), "default-adapter-address");
+	g_object_notify (G_OBJECT (client), "default-adapter-powered");
+	g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
+	g_object_notify (G_OBJECT (client), "default-adapter-name");
+
 	powered = adapter1_get_powered (client->default_adapter);
-
-	if (powered) {
-		g_debug ("New default adapter is powered, so invalidating all the default-adapter* properties");
-		g_object_notify (G_OBJECT (client), "default-adapter");
-		g_object_notify (G_OBJECT (client), "default-adapter-powered");
-		g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
-		g_object_notify (G_OBJECT (client), "default-adapter-name");
-		return;
-	}
-
-	/*
-	 * If the adapter is turn off (Powered = False in bluetooth) object
-	 * notifications will be sent only when a Powered = True signal arrives
-	 * from bluetoothd
-	 */
-	adapter_set_powered (client, adapter, TRUE);
+	if (powered)
+		adapter_set_powered (client, adapter, TRUE);
 }
 
 static void
