@@ -26,3 +26,15 @@ test_bluetooth_device = executable('test-bluetooth-device',
 test('test-bluetooth-device-test',
   test_bluetooth_device,
 )
+
+test_bluetooth_utils = executable('test-bluetooth-utils',
+  'test-bluetooth-utils.c',
+  include_directories: [ top_inc, lib_inc],
+  dependencies: deps + private_deps,
+  c_args: cflags,
+  link_with: libgnome_bluetooth,
+)
+
+test('test-bluetooth-device-utils',
+  test_bluetooth_utils,
+)
