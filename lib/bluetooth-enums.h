@@ -98,21 +98,3 @@ typedef enum {
  * Use this value to select any Bluetooth audio device where a #BluetoothType enum is required.
  */
 #define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO | BLUETOOTH_TYPE_SPEAKERS)
-
-/**
- * BluetoothStatus:
- * @BLUETOOTH_STATUS_INVALID: whether the status has been set yet
- * @BLUETOOTH_STATUS_DISCONNECTED: whether the service is disconnected
- * @BLUETOOTH_STATUS_CONNECTED: whether the service is connected
- * @BLUETOOTH_STATUS_CONNECTING: whether the service is connecting
- * @BLUETOOTH_STATUS_PLAYING: whether the service is playing (only used by the audio service)
- *
- * The connection status of a service on a particular device. Note that @BLUETOOTH_STATUS_CONNECTING and @BLUETOOTH_STATUS_PLAYING might not be available for all services.
- **/
-typedef enum {
-	BLUETOOTH_STATUS_INVALID = 0,
-	BLUETOOTH_STATUS_DISCONNECTED,
-	BLUETOOTH_STATUS_CONNECTED,
-	BLUETOOTH_STATUS_CONNECTING,
-	BLUETOOTH_STATUS_PLAYING
-} BluetoothStatus;
