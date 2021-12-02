@@ -100,46 +100,6 @@ typedef enum {
 #define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO | BLUETOOTH_TYPE_SPEAKERS)
 
 /**
- * BluetoothColumn:
- * @BLUETOOTH_COLUMN_PROXY: a #GDBusProxy object
- * @BLUETOOTH_COLUMN_PROPERTIES: Used to be #GDBusProxy object for DBus.Properties, now always %NULL
- * @BLUETOOTH_COLUMN_ADDRESS: a string representing a Bluetooth address
- * @BLUETOOTH_COLUMN_ALIAS: a string to use for display (the name of the device, or its address if the name is not known). Only available for devices.
- * @BLUETOOTH_COLUMN_NAME: a string representing the device or adapter's name
- * @BLUETOOTH_COLUMN_TYPE: the #BluetoothType of the device. Only available for devices.
- * @BLUETOOTH_COLUMN_ICON: a string representing the icon name for the device. Only available for devices.
- * @BLUETOOTH_COLUMN_DEFAULT: whether the adapter is the default one. Only available for adapters.
- * @BLUETOOTH_COLUMN_PAIRED: whether the device is paired to its parent adapter. Only available for devices.
- * @BLUETOOTH_COLUMN_TRUSTED: whether the device is trusted. Only available for devices.
- * @BLUETOOTH_COLUMN_CONNECTED: whether the device is connected. Only available for devices.
- * @BLUETOOTH_COLUMN_DISCOVERING: whether the adapter is discovering. Only available for adapters.
- * @BLUETOOTH_COLUMN_LEGACYPAIRING: whether the device does not support Bluetooth 2.1 Simple Secure Pairing. Only available for devices.
- * @BLUETOOTH_COLUMN_POWERED: whether the adapter is powered. Only available for adapters.
- * @BLUETOOTH_COLUMN_UUIDS: a string array of human-readable UUIDs.
- *
- * A column identifier to pass to bluetooth_chooser_get_selected_device_info().
- **/
-typedef enum {
-	BLUETOOTH_COLUMN_PROXY,
-	BLUETOOTH_COLUMN_PROPERTIES,
-	BLUETOOTH_COLUMN_ADDRESS,
-	BLUETOOTH_COLUMN_ALIAS,
-	BLUETOOTH_COLUMN_NAME,
-	BLUETOOTH_COLUMN_TYPE,
-	BLUETOOTH_COLUMN_ICON,
-	BLUETOOTH_COLUMN_DEFAULT,
-	BLUETOOTH_COLUMN_PAIRED,
-	BLUETOOTH_COLUMN_TRUSTED,
-	BLUETOOTH_COLUMN_CONNECTED,
-	BLUETOOTH_COLUMN_DISCOVERING,
-	BLUETOOTH_COLUMN_LEGACYPAIRING,
-	BLUETOOTH_COLUMN_POWERED,
-	BLUETOOTH_COLUMN_UUIDS,
-} BluetoothColumn;
-
-#define _BLUETOOTH_NUM_COLUMNS (BLUETOOTH_COLUMN_UUIDS + 1)
-
-/**
  * BluetoothStatus:
  * @BLUETOOTH_STATUS_INVALID: whether the status has been set yet
  * @BLUETOOTH_STATUS_DISCONNECTED: whether the service is disconnected
