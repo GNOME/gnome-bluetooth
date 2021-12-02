@@ -255,6 +255,20 @@ bluetooth_appearance_to_type (guint16 appearance)
 			return BLUETOOTH_TYPE_SCANNER;
 		}
 		break;
+	case 0x21:
+		return BLUETOOTH_TYPE_SPEAKERS;
+	case 0x25: /* Audio */
+		switch (appearance & 0x3f) {
+		case 0x01:
+		case 0x02:
+		case 0x04:
+			return BLUETOOTH_TYPE_HEADSET;
+		case 0x03:
+			return BLUETOOTH_TYPE_HEADPHONES;
+		default:
+			return BLUETOOTH_TYPE_OTHER_AUDIO;
+		}
+		break;
 	}
 
 	return 0;
