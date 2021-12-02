@@ -1,20 +1,14 @@
 # GNOME Bluetooth
 
 
-gnome-bluetooth is collection of widgets for applications that want
-to select Bluetooth devices. It is also used by GNOME session
-components such as the Settings and gnome-shell.
+gnome-bluetooth is a helper library on top of the bluez daemon's D-Bus API.
 
 Requirements
 ------------
 
-- glib
+- GTK
 - bluez 5.51 or newer
-- rfkill sub-system enable in the kernel[1]
-- gnome-settings-daemon
-
-[1]: Note that read/write access to the /dev/rfkill device is
-required and should be provided by the distribution
+- rfkill sub-system enabled in the kernel, and [accessible](https://github.com/systemd/systemd/pull/21605)
 
 Copyright
 ---------
