@@ -994,11 +994,6 @@ bluetooth_client_get_devices (BluetoothClient *client)
 	return G_LIST_STORE (g_object_ref (client->list_store));
 }
 
-typedef struct {
-	BluetoothClientSetupFunc func;
-	BluetoothClient *client;
-} CreateDeviceData;
-
 static void
 device_pair_callback (GDBusProxy   *proxy,
 		      GAsyncResult *res,

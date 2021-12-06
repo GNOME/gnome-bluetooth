@@ -28,10 +28,6 @@
 #include <bluetooth-device.h>
 #include <bluetooth-enums.h>
 
-typedef void (*BluetoothClientSetupFunc) (BluetoothClient *client,
-					  const GError    *error,
-					  const char      *device_path);
-
 void bluetooth_client_setup_device (BluetoothClient          *client,
 				    const char               *path,
 				    gboolean                  pair,
