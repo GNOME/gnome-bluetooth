@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <glib.h>
+#include <gio/gio.h>
 #include <glib/gi18n.h>
 
 #include "bluetooth-device.h"
