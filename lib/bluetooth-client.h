@@ -24,8 +24,7 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gtk/gtk.h>
+#include <gio/gio.h>
 #include <bluetooth-enums.h>
 
 #define BLUETOOTH_TYPE_CLIENT (bluetooth_client_get_type())
