@@ -42,10 +42,11 @@ built_sources += gnome.compile_resources(
   export: true,
 )
 
-built_sources += gnome.mkenums_simple(
+enum_sources = gnome.mkenums_simple(
   'gnome-bluetooth-enum-types',
   sources : headers,
 )
+built_sources += enum_sources
 
 client = 'bluetooth-client'
 

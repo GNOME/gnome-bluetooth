@@ -28,7 +28,7 @@ test('test-bluetooth-device-test',
 )
 
 test_bluetooth_utils = executable('test-bluetooth-utils',
-  'test-bluetooth-utils.c',
+  [ 'test-bluetooth-utils.c', enum_sources ],
   include_directories: [ top_inc, lib_inc],
   dependencies: deps + private_deps,
   c_args: cflags,
