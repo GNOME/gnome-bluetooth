@@ -760,6 +760,41 @@ _bluetooth_client_get_default_adapter(BluetoothClient *client)
 }
 
 static void
+set_discovery_filter_cb (Adapter1     *adapter,
+			 GAsyncResult *res,
+			 gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	gboolean ret;
+
+	ret = adapter1_call_set_discovery_filter_finish (adapter, res, &error);
+	if (!ret) {
+		g_debug ("Error calling SetDiscoveryFilter()  on interface org.bluez.Adapter1: %s (%s, %d)",
+			 error->message, g_quark_to_string (error->domain), error->code);
+	}
+}
+
+static void
+discovery_cb (Adapter1     *adapter,
+	      GAsyncResult *res,
+	      gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	gboolean ret;
+	gboolean start_call = GPOINTER_TO_UINT (user_data);
+
+	if (start_call)
+		ret = adapter1_call_start_discovery_finish (adapter, res, &error);
+	else
+		ret = adapter1_call_stop_discovery_finish (adapter, res, &error);
+	if (!ret) {
+		g_debug ("Error calling %s  on interface org.bluez.Adapter1: %s (%s, %d)",
+			 start_call ? "StartDiscovery()" : "StopDiscovery()",
+			 error->message, g_quark_to_string (error->domain), error->code);
+	}
+}
+
+static void
 _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 						   gboolean         discovering)
 {
@@ -774,15 +809,27 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 		g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
 		g_variant_builder_add (&builder, "{sv}",
 				       "Discoverable", g_variant_new_boolean (TRUE));
-		adapter1_call_set_discovery_filter_sync (ADAPTER1 (adapter),
-							 g_variant_builder_end (&builder), NULL, NULL);
+		adapter1_call_set_discovery_filter (ADAPTER1 (adapter),
+						    g_variant_builder_end (&builder),
+						    client->cancellable,
+						    (GAsyncReadyCallback) set_discovery_filter_cb,
+						    client);
 	}
 
 	client->discovery_started = discovering;
-	if (discovering)
-		adapter1_call_start_discovery (ADAPTER1 (adapter), NULL, NULL, NULL);
-	else
-		adapter1_call_stop_discovery (ADAPTER1 (adapter), NULL, NULL, NULL);
+	if (discovering) {
+		adapter1_call_start_discovery (ADAPTER1 (adapter),
+					       client->cancellable,
+					       (GAsyncReadyCallback) discovery_cb,
+					       GUINT_TO_POINTER (discovering));
+	} else {
+		/* Don't cancel a dicovery stop when the BluetoothClient
+		 * is finalised, so don't pass a cancellable */
+		adapter1_call_stop_discovery (ADAPTER1 (adapter),
+					      NULL,
+					      (GAsyncReadyCallback) discovery_cb,
+					      GUINT_TO_POINTER (discovering));
+	}
 }
 
 static void
