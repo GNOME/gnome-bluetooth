@@ -33,5 +33,6 @@ const gchar   *bluetooth_type_to_string        (guint type);
 gboolean       bluetooth_verify_address        (const char *bdaddr);
 const char    *bluetooth_uuid_to_string        (const char *uuid);
 
-void bluetooth_send_to_address (const char *address,
-				const char *alias);
+gboolean bluetooth_send_to_address (const char  *address,
+				    const char  *alias,
+				    GError     **error);

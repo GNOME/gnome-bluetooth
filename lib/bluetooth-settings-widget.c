@@ -1210,7 +1210,11 @@ static void
 send_callback (GtkButton               *button,
 	       BluetoothSettingsWidget *self)
 {
-	bluetooth_send_to_address (self->selected_bdaddr, self->selected_name);
+	g_autoptr(GError) error = NULL;
+
+	if (!bluetooth_send_to_address (self->selected_bdaddr, self->selected_name, &error))
+		g_warning ("Failed to call bluetooth-sendto: %s",
+			   error ? error->message : "unknown error");
 }
 
 /* Visibility/Discoverable */

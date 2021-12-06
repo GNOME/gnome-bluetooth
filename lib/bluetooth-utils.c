@@ -425,31 +425,31 @@ bluetooth_uuid_to_string (const char *uuid)
  * bluetooth_send_to_address:
  * @address: Remote device to use
  * @alias: Remote device's name
+ * @error: a #GError
  *
- * Start a GUI application for transfering files over Bluetooth.
+ * Start a GUI application for transferring files over Bluetooth.
+ *
+ * Return value: %TRUE on success, %FALSE on error.
  **/
-void
-bluetooth_send_to_address (const char *address,
-			   const char *alias)
+gboolean
+bluetooth_send_to_address (const char  *address,
+			   const char  *alias,
+			   GError     **error)
 {
 	GPtrArray *a;
-	GError *err = NULL;
+	g_auto(GStrv) args = NULL;
 
-	a = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
+	g_return_val_if_fail (address != NULL, FALSE);
+	g_return_val_if_fail (bluetooth_verify_address (address), FALSE);
 
+	a = g_ptr_array_new ();
 	g_ptr_array_add (a, g_strdup ("bluetooth-sendto"));
-	if (address != NULL)
-		g_ptr_array_add (a, g_strdup_printf ("--device=%s", address));
-	if (address != NULL && alias != NULL)
+	g_ptr_array_add (a, g_strdup_printf ("--device=%s", address));
+	if (alias != NULL)
 		g_ptr_array_add (a, g_strdup_printf ("--name=%s", alias));
 	g_ptr_array_add (a, NULL);
+	args = (GStrv) g_ptr_array_free (a, FALSE);
 
-	if (g_spawn_async(NULL, (char **) a->pdata, NULL,
-			  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &err) == FALSE) {
-		g_printerr("Couldn't execute command: %s\n", err->message);
-		g_error_free (err);
-	}
-
-	g_ptr_array_free (a, TRUE);
+	return g_spawn_async (NULL, args, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, error);
 }
 
