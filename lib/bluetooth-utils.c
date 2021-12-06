@@ -35,7 +35,6 @@
 #include "config.h"
 
 #include <glib/gi18n-lib.h>
-#include <gtk/gtk.h>
 
 #include "bluetooth-utils.h"
 #include "gnome-bluetooth-enum-types.h"

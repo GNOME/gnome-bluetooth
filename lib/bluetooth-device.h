@@ -7,7 +7,6 @@
 #pragma once
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
 #include <bluetooth-enums.h>
 
 #define BLUETOOTH_TYPE_DEVICE (bluetooth_device_get_type())

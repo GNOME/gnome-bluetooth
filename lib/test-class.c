@@ -22,7 +22,6 @@
  */
 
 #include <string.h>
-#include <gtk/gtk.h>
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
@@ -45,8 +44,6 @@ int main(int argc, char *argv[])
 {
 	GLogLevelFlags fatal_mask;
 	guint class;
-
-	gtk_init();
 
 	fatal_mask = g_log_set_always_fatal (G_LOG_FATAL_MASK);
 	fatal_mask |= G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL;
