@@ -1868,8 +1868,6 @@ bluetooth_settings_widget_finalize (GObject *object)
 
 	obex_agent_down ();
 
-	/* See default_adapter_changed () */
-	/* FIXME: This is blocking */
 	if (self->client)
 		g_object_set (G_OBJECT (self->client), "default-adapter-setup-mode", FALSE, NULL);
 
