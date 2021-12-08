@@ -484,9 +484,18 @@ adapter_notify_cb (Adapter1       *adapter,
 	const char *default_adapter_path;
 
 	adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter));
-	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
-	if (g_strcmp0 (default_adapter_path, adapter_path) != 0)
+	if (client->default_adapter == NULL) {
+		g_debug ("Property '%s' changed on adapter '%s', but default adapter not set yet",
+			 property, adapter_path);
 		return;
+	}
+
+	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
+	if (g_strcmp0 (default_adapter_path, adapter_path) != 0) {
+		g_debug ("Ignoring property '%s' change on non-default adapter %s",
+			   property, adapter_path);
+		return;
+	}
 
 	g_debug ("Property '%s' changed on default adapter '%s'", property, adapter_path);
 
