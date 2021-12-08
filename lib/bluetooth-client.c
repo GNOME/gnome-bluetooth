@@ -309,6 +309,7 @@ device_added (GDBusObjectManager   *manager,
 	g_autoptr (GDBusProxy) adapter = NULL;
 	BluetoothDevice *device_obj;
 	const char *default_adapter_path;
+	const char *device_path;
 	const char *adapter_path, *address, *alias, *name, *icon;
 	g_auto(GStrv) uuids = NULL;
 	gboolean paired, trusted, connected;
@@ -322,6 +323,16 @@ device_added (GDBusObjectManager   *manager,
 
 	g_signal_connect_object (G_OBJECT (device), "notify",
 				 G_CALLBACK (device_notify_cb), client, 0);
+
+	device_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (device));
+	device_obj = get_device_for_path (client, device_path);
+	if (device_obj) {
+		g_debug ("Updating proxy for device '%s'", device_path);
+		g_object_set (G_OBJECT (device_obj),
+			      "proxy", device,
+			       NULL);
+		return;
+	}
 
 	address = device1_get_address (device);
 	alias = device1_get_alias (device);
