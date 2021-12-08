@@ -189,7 +189,7 @@ bluetooth_settings_row_set_property (GObject        *object,
 
 	switch (property_id) {
 	case PROP_PROXY:
-		g_assert (!self->proxy);
+		g_clear_object (&self->proxy);
 		self->proxy = g_value_dup_object (value);
 		break;
 	case PROP_DEVICE:
@@ -254,7 +254,7 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 	g_object_class_install_property (object_class, PROP_PROXY,
 					 g_param_spec_object ("proxy", NULL,
 							      "The D-Bus proxy object of the device",
-							      G_TYPE_DBUS_PROXY, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+							      G_TYPE_DBUS_PROXY, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_object ("device", NULL,
 							      "a BluetoothDevice object",
@@ -341,7 +341,8 @@ bluetooth_settings_row_new_from_device (BluetoothDevice *device)
 		"connected",
 		"address",
 		"type",
-		"legacy-pairing"
+		"legacy-pairing",
+		"proxy"
 	};
 	guint i;
 
@@ -349,7 +350,6 @@ bluetooth_settings_row_new_from_device (BluetoothDevice *device)
 
 	g_object_get (G_OBJECT (device), "proxy", &proxy, NULL);
 	row = g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW,
-			    "proxy", proxy,
 			    "device", device,
 			    NULL);
 
