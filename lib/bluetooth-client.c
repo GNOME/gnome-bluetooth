@@ -510,6 +510,16 @@ adapter_notify_cb (Adapter1       *adapter,
 }
 
 static void
+notify_default_adapter_props (BluetoothClient *client)
+{
+	g_object_notify (G_OBJECT (client), "default-adapter");
+	g_object_notify (G_OBJECT (client), "default-adapter-address");
+	g_object_notify (G_OBJECT (client), "default-adapter-powered");
+	g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
+	g_object_notify (G_OBJECT (client), "default-adapter-name");
+}
+
+static void
 default_adapter_changed (GDBusObjectManager   *manager,
 			 GDBusProxy           *adapter,
 			 BluetoothClient      *client)
@@ -527,11 +537,7 @@ default_adapter_changed (GDBusObjectManager   *manager,
 	add_devices_to_list_store (client);
 
 	g_debug ("New default adapter so invalidating all the default-adapter* properties");
-	g_object_notify (G_OBJECT (client), "default-adapter");
-	g_object_notify (G_OBJECT (client), "default-adapter-address");
-	g_object_notify (G_OBJECT (client), "default-adapter-powered");
-	g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
-	g_object_notify (G_OBJECT (client), "default-adapter-name");
+	notify_default_adapter_props (client);
 
 	powered = adapter1_get_powered (client->default_adapter);
 	if (!powered)
