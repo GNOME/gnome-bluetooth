@@ -534,7 +534,7 @@ default_adapter_changed (GDBusObjectManager   *manager,
 	g_object_notify (G_OBJECT (client), "default-adapter-name");
 
 	powered = adapter1_get_powered (client->default_adapter);
-	if (powered)
+	if (!powered)
 		adapter_set_powered (client, adapter, TRUE);
 }
 
