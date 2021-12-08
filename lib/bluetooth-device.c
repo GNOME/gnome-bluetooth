@@ -103,7 +103,7 @@ bluetooth_device_set_property (GObject        *object,
 	switch (property_id) {
 	case PROP_PROXY:
 		g_clear_object (&device->proxy);
-		device->proxy = g_value_get_object (value);
+		device->proxy = g_value_dup_object (value);
 		break;
 	case PROP_ADDRESS:
 		g_clear_pointer (&device->address, g_free);
