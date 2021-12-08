@@ -555,6 +555,21 @@ default_adapter_changed (GDBusObjectManager   *manager,
 		adapter_set_powered (client, adapter, TRUE);
 }
 
+static gboolean
+is_default_adapter (BluetoothClient *client,
+		    Adapter1        *adapter)
+{
+	const char *default_adapter_path = NULL;
+	const char *adapter_path;
+
+	g_return_val_if_fail (client->default_adapter, FALSE);
+	g_return_val_if_fail (adapter, FALSE);
+
+	adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter));
+	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
+	return (g_strcmp0 (adapter_path, default_adapter_path) == 0);
+}
+
 static void
 adapter_added (GDBusObjectManager   *manager,
 	       Adapter1             *adapter,
