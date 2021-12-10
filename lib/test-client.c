@@ -67,6 +67,18 @@ static void row_inserted(GtkTreeModel *model, GtkTreePath *path,
 	GtkTreeView *tree = user_data;
 
 	gtk_tree_view_expand_all(tree);
+	g_message ("inserted:");
+	bluetooth_client_dump_device (model, iter);
+}
+
+static void row_changed(GtkTreeModel *model, GtkTreePath *path,
+				GtkTreeIter *iter, gpointer user_data)
+{
+	GtkTreeView *tree = user_data;
+
+	gtk_tree_view_expand_all(tree);
+	g_message ("changed:");
+	bluetooth_client_dump_device (model, iter);
 }
 
 static void proxy_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
@@ -244,6 +256,8 @@ static void create_window(void)
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree), sorted);
 	g_signal_connect(G_OBJECT(model), "row-inserted",
 					G_CALLBACK(row_inserted), tree);
+	g_signal_connect(G_OBJECT(model), "row-changed",
+			 G_CALLBACK(row_changed), tree);
 	g_object_unref(sorted);
 	g_object_unref(model);
 
