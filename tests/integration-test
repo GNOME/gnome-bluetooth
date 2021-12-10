@@ -60,6 +60,8 @@ class OopTests(dbusmock.DBusTestCase):
         self.client = GnomeBluetoothPriv.Client.new()
         # used in test_pairing
         self.paired = False
+        # used in test_default_notify
+        self.default_adapter = None
 
     def print_tree(self, model):
         def print_row(model, treepath, treeiter):
@@ -141,6 +143,29 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertTrue(agent.register())
         self.assertTrue(agent.unregister())
 
+    def test_default_notify(self):
+        model = self.client.get_model()
+
+        def _sync(self, model):
+            for adapter in model:
+                default = adapter[GnomeBluetoothPriv.Column.DEFAULT]
+                powered = adapter[GnomeBluetoothPriv.Column.POWERED]
+                if default and powered:
+                    self.default_adapter = adapter[GnomeBluetoothPriv.Column.ADDRESS]
+                    break
+        def row_inserted_cb(model, path, _iter):
+            _sync(self, model)
+        def row_deleted_cb(model, path):
+            _sync(self, model)
+        def row_changed_cb(model, path, _iter):
+            _sync(self, model)
+        model.connect('row-inserted', row_inserted_cb)
+        model.connect('row-deleted', row_deleted_cb)
+        model.connect('row-changed', row_changed_cb)
+
+        self.wait_for_mainloop()
+        self.assertEqual(self.default_adapter, '00:11:22:33:44:55')
+
 class Tests(dbusmock.DBusTestCase):
 
     @classmethod
@@ -196,6 +221,9 @@ class Tests(dbusmock.DBusTestCase):
         self.run_test_process()
 
     def test_agent(self):
+        self.run_test_process()
+
+    def test_default_notify(self):
         self.run_test_process()
 
 if __name__ == '__main__':
