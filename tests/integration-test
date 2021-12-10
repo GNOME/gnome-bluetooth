@@ -164,7 +164,8 @@ class OopTests(dbusmock.DBusTestCase):
         model.connect('row-changed', row_changed_cb)
 
         self.wait_for_mainloop()
-        self.assertEqual(self.default_adapter, '00:11:22:33:44:55')
+        self.wait_for_condition(lambda: self.default_adapter == '00:11:22:33:44:55')
+        # self.assertEqual(self.default_adapter, '00:11:22:33:44:55')
 
 class Tests(dbusmock.DBusTestCase):
 
@@ -197,6 +198,7 @@ class Tests(dbusmock.DBusTestCase):
         # And run the test with the same name in the OopTests class in a separate process
         out = subprocess.run(self.exec_path + ['OopTests.' + test_name], capture_output=True)
         self.assertEqual(out.returncode, 0, "Running test " + test_name + " failed:" + out.stderr.decode('UTF-8') + '\n\n\nSTDOUT:\n' + out.stdout.decode('UTF-8'))
+        print(out.stdout.decode('UTF-8'))
         if os.getenv('VALGRIND') != None:
             print(out.stderr.decode('UTF-8'))
 
