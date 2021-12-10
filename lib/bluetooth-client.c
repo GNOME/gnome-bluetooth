@@ -538,7 +538,6 @@ default_adapter_changed (GDBusObjectManager   *manager,
 
 	tree_path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
 	priv->default_adapter = gtk_tree_row_reference_new (GTK_TREE_MODEL (priv->store), tree_path);
-	gtk_tree_path_free (tree_path);
 
 	gtk_tree_model_get (GTK_TREE_MODEL(priv->store), &iter,
 			    BLUETOOTH_COLUMN_DEFAULT, &is_default,
