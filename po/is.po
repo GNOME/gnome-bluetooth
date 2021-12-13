@@ -6,107 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2020-06-25 07:23+0000\n"
-"PO-Revision-Date: 2021-09-29 07:46+0000\n"
+"POT-Creation-Date: 2021-11-10 14:34+0000\n"
+"PO-Revision-Date: 2021-12-13 08:48+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.12.3\n"
-
-#: lib/bluetooth-chooser-button.c:71
-msgid "Click to select device…"
-msgstr "Ýttu til að velja tæki..."
-
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
-#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
-msgid "_Cancel"
-msgstr "_Hætta við"
-
-#: lib/bluetooth-chooser-button.c:202
-msgid "_OK"
-msgstr "Í _lagi"
-
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
-#: lib/bluetooth-utils.c:99
-msgid "Unknown"
-msgstr "Óþekkt"
-
-#: lib/bluetooth-chooser.c:176
-msgid "No adapters available"
-msgstr "Engin tengitæki tiltæk"
-
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1561
-msgid "Searching for devices…"
-msgstr "Leita að tækjum..."
-
-#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
-msgid "Device"
-msgstr "Tæki"
-
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
-msgid "Type"
-msgstr "Tegund"
-
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
-msgid "Devices"
-msgstr "Tæki"
-
-#: lib/bluetooth-filter-widget.c:72
-msgid "All categories"
-msgstr "Allir flokkar"
-
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
-msgid "Paired"
-msgstr "Parað"
-
-#: lib/bluetooth-filter-widget.c:76
-msgid "Trusted"
-msgstr "Treyst"
-
-#: lib/bluetooth-filter-widget.c:78
-msgid "Not paired or trusted"
-msgstr "Hvorki treyst né parað saman"
-
-#: lib/bluetooth-filter-widget.c:80
-msgid "Paired or trusted"
-msgstr "Treyst eða parað saman"
-
-#. This is the title of the filter section of the Bluetooth device chooser.
-#. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:231
-msgid "Show:"
-msgstr "Sýna:"
-
-#. The device category filter
-#: lib/bluetooth-filter-widget.c:247
-msgid "Device _category:"
-msgstr "_Tækjaflokkur:"
-
-#: lib/bluetooth-filter-widget.c:258
-msgid "Select the device category to filter"
-msgstr "Veldu tækisflokk til að sía"
-
-#. The device type filter
-#: lib/bluetooth-filter-widget.c:272
-msgid "Device _type:"
-msgstr "_Gerð tækis:"
-
-#: lib/bluetooth-filter-widget.c:289
-msgid "Select the device type to filter"
-msgstr "Veldu tegund tækis til að sía"
-
-#: lib/bluetooth-filter-widget.c:295
-msgid "Input devices (mice, keyboards, etc.)"
-msgstr "Inntakstæki (mýs, lyklaborð, o.s.frv.)"
-
-#: lib/bluetooth-filter-widget.c:299
-msgid "Headphones, headsets and other audio devices"
-msgstr "Heyrnartól, heyrnartól með hljóðnema eða önnur hljóðtæki"
 
 #: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
 #: lib/bluetooth-pairing-dialog.c:104
@@ -192,39 +101,39 @@ msgid "Dismiss"
 msgstr "Hafna"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Hætta við"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:247
+#: lib/bluetooth-pairing-dialog.c:286 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Samþykkja"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:34
 msgid "Not Set Up"
 msgstr "Ekki uppsett"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:80
 msgid "Connected"
 msgstr "Tengt"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
 msgstr "Aftengt"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "Yes"
 msgstr "Já"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "No"
 msgstr "Nei"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1299
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -233,50 +142,62 @@ msgstr ""
 "Sýnilegt sem “%s” og tiltækt fyrir skráaflutning með Bluetooth. Fluttar "
 "skrár eru settar í möppuna <a href=\"%s\">Sóttar skrár</a>."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1337
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Viltu fjarlægja '%s‘ af listanum yfir tæki?"
 
-#: lib/bluetooth-settings-widget.c:1278
+#: lib/bluetooth-settings-widget.c:1339
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Þú verður að setja tækið upp aftur ef þú vilt nota það eftir að hafa "
 "fjarlægt það."
 
-#: lib/bluetooth-settings-widget.c:1282
+#: lib/bluetooth-settings-widget.c:1342 sendto/main.c:445 sendto/main.c:706
+msgid "_Cancel"
+msgstr "_Hætta við"
+
+#: lib/bluetooth-settings-widget.c:1343
 msgid "_Remove"
 msgstr "_Fjarlægja"
 
+#: lib/bluetooth-settings-widget.c:1561
+msgid "Devices"
+msgstr "Tæki"
+
+#: lib/bluetooth-settings-widget.c:1605
+msgid "Searching for devices…"
+msgstr "Leita að tækjum..."
+
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:146
+#: lib/bluetooth-settings-obexpush.c:144
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "Þú fékkst '%s' í gegnum Bluetooth"
 
-#: lib/bluetooth-settings-obexpush.c:148
+#: lib/bluetooth-settings-obexpush.c:146
 msgid "You received a file"
 msgstr "Þú fékkst skrá"
 
-#: lib/bluetooth-settings-obexpush.c:159
+#: lib/bluetooth-settings-obexpush.c:157
 msgid "Open File"
 msgstr "Opna skrá"
 
-#: lib/bluetooth-settings-obexpush.c:163
+#: lib/bluetooth-settings-obexpush.c:161
 msgid "Open Containing Folder"
 msgstr "Opna umlykjandi möppu"
 
-#: lib/bluetooth-settings-obexpush.c:180
+#: lib/bluetooth-settings-obexpush.c:178
 msgid "File reception complete"
 msgstr "Skrá móttekin"
 
-#: lib/bluetooth-settings-obexpush.c:234
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Bluetooth skráaflutningur frá %s"
 
-#: lib/bluetooth-settings-obexpush.c:244
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "Hafna"
 
@@ -357,35 +278,47 @@ msgstr "Klæðanlegt"
 msgid "Toy"
 msgstr "Leikfang"
 
-#: lib/bluetooth-utils.c:117
-msgid "All types"
-msgstr "Allar tegundir"
+#: lib/bluetooth-utils.c:98
+msgid "Speakers"
+msgstr "Hátalarar"
 
-#: lib/settings.ui:44
+#: lib/bluetooth-utils.c:103
+msgid "Unknown"
+msgstr "Óþekkt"
+
+#: lib/settings.ui:29
 msgid "Connection"
 msgstr "Tenging"
 
-#: lib/settings.ui:229
+#: lib/settings.ui:71
+msgid "Paired"
+msgstr "Parað"
+
+#: lib/settings.ui:94
+msgid "Type"
+msgstr "Tegund"
+
+#: lib/settings.ui:117
 msgid "Address"
 msgstr "Vistfang"
 
-#: lib/settings.ui:285
+#: lib/settings.ui:143
 msgid "_Mouse & Touchpad Settings"
 msgstr "Stillingar _músar og snertiplatta"
 
-#: lib/settings.ui:299
+#: lib/settings.ui:150
 msgid "_Sound Settings"
 msgstr "_Hljóðstillingar"
 
-#: lib/settings.ui:313
+#: lib/settings.ui:157
 msgid "_Keyboard Settings"
 msgstr "Ly_klaborðsstillingar"
 
-#: lib/settings.ui:327
+#: lib/settings.ui:164
 msgid "Send _Files…"
 msgstr "Sen_da skrár…"
 
-#: lib/settings.ui:341
+#: lib/settings.ui:171
 msgid "_Remove Device"
 msgstr "Fja_rlægja tæki"
 
@@ -397,11 +330,11 @@ msgstr "Bluetooth flutningur"
 msgid "Send files via Bluetooth"
 msgstr "Senda skrár með Bluetooth"
 
-#: sendto/main.c:117
+#: sendto/main.c:116
 msgid "An unknown error occurred"
 msgstr "Óþekkt villa kom upp"
 
-#: sendto/main.c:130
+#: sendto/main.c:129
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -409,124 +342,169 @@ msgstr ""
 "Gakktu úr skugga um að kveikt sé á tækinu og að það samþykki Bluetooth-"
 "tengingar"
 
-#: sendto/main.c:363
+#: sendto/main.c:362
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekúnda"
 msgstr[1] "%'d sekúndur"
 
-#: sendto/main.c:368 sendto/main.c:381
+#: sendto/main.c:367 sendto/main.c:380
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d mínúta"
 msgstr[1] "%'d mínútur"
 
-#: sendto/main.c:379
+#: sendto/main.c:378
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d klukkutími"
 msgstr[1] "%'d klukkutímar"
 
-#: sendto/main.c:389
+#: sendto/main.c:388
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "nálægt %'d klukkustund"
 msgstr[1] "nálægt %'d klukkustundum"
 
-#: sendto/main.c:402 sendto/main.c:500
+#: sendto/main.c:401 sendto/main.c:497
 msgid "Connecting…"
 msgstr "Tengist…"
 
-#: sendto/main.c:444
+#: sendto/main.c:442
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth skráaflutningur"
 
-#: sendto/main.c:448
+#: sendto/main.c:446
 msgid "_Retry"
 msgstr "_Reyna aftur"
 
-#: sendto/main.c:470
+#: sendto/main.c:463
 msgid "From:"
 msgstr "Frá:"
 
-#: sendto/main.c:484
+#: sendto/main.c:479
 msgid "To:"
 msgstr "Til:"
 
-#: sendto/main.c:577
+#: sendto/main.c:575
 #, c-format
 msgid "Sending %s"
 msgstr "Sendi %s"
 
-#: sendto/main.c:584 sendto/main.c:633
+#: sendto/main.c:582 sendto/main.c:631
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Sendi skrá %d af %d"
 
-#: sendto/main.c:629
+#: sendto/main.c:627
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/sek"
 
-#: sendto/main.c:631
+#: sendto/main.c:629
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/sek."
 
-#: sendto/main.c:662
+#: sendto/main.c:660
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u flutningi lokið"
 msgstr[1] "%u flutningum lokið"
 
-#: sendto/main.c:669
+#: sendto/main.c:667
 msgid "_Close"
 msgstr "_Loka"
 
-#: sendto/main.c:679
+#: sendto/main.c:677
 msgid "There was an error"
 msgstr "Það kom upp villa"
 
-#: sendto/main.c:734
-msgid "Select device to send to"
-msgstr "Veldu tæki til að senda til"
-
-#: sendto/main.c:739
-msgid "_Send"
-msgstr "_Senda"
-
-#: sendto/main.c:789
+#: sendto/main.c:701
 msgid "Choose files to send"
 msgstr "Veldu skrár til að senda"
 
-#: sendto/main.c:795
+#: sendto/main.c:707
 msgid "Select"
 msgstr "Velja"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "Remote device to use"
 msgstr "Tæki sem á að nota"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "ADDRESS"
 msgstr "VISTFANG"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "Remote device’s name"
 msgstr "Heiti fjartengds tækis"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "NAME"
 msgstr "NAFN"
 
-#: sendto/main.c:846
-msgid "[FILE…]"
-msgstr "[SKRÁ...]"
+#~ msgid "Click to select device…"
+#~ msgstr "Ýttu til að velja tæki..."
+
+#~ msgid "_OK"
+#~ msgstr "Í _lagi"
+
+#~ msgid "No adapters available"
+#~ msgstr "Engin tengitæki tiltæk"
+
+#~ msgid "Device"
+#~ msgstr "Tæki"
+
+#~ msgid "All categories"
+#~ msgstr "Allir flokkar"
+
+#~ msgid "Trusted"
+#~ msgstr "Treyst"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "Hvorki treyst né parað saman"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "Treyst eða parað saman"
+
+#~ msgid "Show:"
+#~ msgstr "Sýna:"
+
+#~ msgid "Device _category:"
+#~ msgstr "_Tækjaflokkur:"
+
+#~ msgid "Select the device category to filter"
+#~ msgstr "Veldu tækisflokk til að sía"
+
+#~ msgid "Device _type:"
+#~ msgstr "_Gerð tækis:"
+
+#~ msgid "Select the device type to filter"
+#~ msgstr "Veldu tegund tækis til að sía"
+
+#~ msgid "Input devices (mice, keyboards, etc.)"
+#~ msgstr "Inntakstæki (mýs, lyklaborð, o.s.frv.)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "Heyrnartól, heyrnartól með hljóðnema eða önnur hljóðtæki"
+
+#~ msgid "All types"
+#~ msgstr "Allar tegundir"
+
+#~ msgid "Select device to send to"
+#~ msgstr "Veldu tæki til að senda til"
+
+#~ msgid "_Send"
+#~ msgstr "_Senda"
+
+#~ msgid "[FILE…]"
+#~ msgstr "[SKRÁ...]"
 
 #~ msgid "Reveal File"
 #~ msgstr "Sýna skrá"
