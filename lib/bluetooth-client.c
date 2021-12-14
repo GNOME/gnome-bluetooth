@@ -769,7 +769,8 @@ object_manager_new_callback(GObject      *source_object,
 {
 	BluetoothClient *client;
 	GDBusObjectManager *manager;
-	GList *object_list, *l;
+	g_autolist(GDBusObject) object_list = NULL;
+	GList *l;
 	GError *error = NULL;
 
 	manager = g_dbus_object_manager_client_new_for_bus_finish (res, &error);
