@@ -799,8 +799,7 @@ object_manager_new_callback(GObject      *source_object,
 	object_list = g_dbus_object_manager_get_objects (client->manager);
 
 	/* We need to add the adapters first, otherwise the devices will
-	 * be dropped to the floor, as they wouldn't have a parent in
-	 * the treestore */
+	 * be dropped to the floor, as they wouldn't have a default adapter */
 	g_debug ("Adding adapters from ObjectManager");
 	for (l = object_list; l != NULL; l = l->next) {
 		GDBusObject *object = l->data;
