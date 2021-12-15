@@ -762,6 +762,33 @@ object_removed (GDBusObjectManager *manager,
 	g_list_free_full (interfaces, g_object_unref);
 }
 
+static int
+reverse_sort_adapters (gconstpointer a,
+                       gconstpointer b)
+{
+	GDBusProxy *adapter_a = (GDBusProxy *) a;
+	GDBusProxy *adapter_b = (GDBusProxy *) b;
+
+	return g_strcmp0 (g_dbus_proxy_get_object_path (adapter_b),
+			  g_dbus_proxy_get_object_path (adapter_a));
+}
+
+static GList *
+filter_adapter_list (GList *object_list)
+{
+	GList *l, *out = NULL;
+
+	for (l = object_list; l != NULL; l = l->next) {
+		GDBusObject *object = l->data;
+		GDBusInterface *iface;
+
+		iface = g_dbus_object_get_interface (object, BLUEZ_ADAPTER_INTERFACE);
+		if (iface)
+			out = g_list_prepend (out, iface);
+	}
+	return out;
+}
+
 static void
 object_manager_new_callback(GObject      *source_object,
 			    GAsyncResult *res,
@@ -770,6 +797,7 @@ object_manager_new_callback(GObject      *source_object,
 	BluetoothClient *client;
 	GDBusObjectManager *manager;
 	g_autolist(GDBusObject) object_list = NULL;
+	g_autolist(GDBusProxy) adapter_list = NULL;
 	GList *l;
 	GError *error = NULL;
 
@@ -790,29 +818,15 @@ object_manager_new_callback(GObject      *source_object,
 	g_signal_connect_object (G_OBJECT (client->manager), "object-added", (GCallback) object_added, client, 0);
 	g_signal_connect_object (G_OBJECT (client->manager), "object-removed", (GCallback) object_removed, client, 0);
 
-	/* NOTE: Since 2013, in 68852faa5a957d14480e72e8e63bc8e1196d19cf, the default
-	 * adapter has been dependent on the order objects are returned from
-	 * g_dbus_object_manager_client_get_objects(), which has never not been
-	 * tested to have the highest numbered device as the default one.
-	 *
-	 * It's 2021, and there are no reasons for that to be changed this late. */
-	object_list = g_dbus_object_manager_get_objects (client->manager);
-
 	/* We need to add the adapters first, otherwise the devices will
 	 * be dropped to the floor, as they wouldn't have a default adapter */
+	object_list = g_dbus_object_manager_get_objects (client->manager);
+	adapter_list = filter_adapter_list (object_list);
+	adapter_list = g_list_sort (adapter_list, reverse_sort_adapters);
+
 	g_debug ("Adding adapters from ObjectManager");
-	for (l = object_list; l != NULL; l = l->next) {
-		GDBusObject *object = l->data;
-		GDBusInterface *iface;
-
-		iface = g_dbus_object_get_interface (object, BLUEZ_ADAPTER_INTERFACE);
-		if (!iface)
-			continue;
-
-		adapter_added (client->manager,
-			       ADAPTER1 (iface),
-			       client);
-	}
+	for (l = adapter_list; l != NULL; l = l->next)
+		adapter_added (client->manager, l->data, client);
 }
 
 static void bluetooth_client_init(BluetoothClient *client)
