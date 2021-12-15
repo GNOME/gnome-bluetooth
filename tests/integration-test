@@ -306,8 +306,26 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertIsNotNone(agent)
         # Process D-Bus daemon appearing and agent being registered
         self.wait_for_mainloop()
+
         self.assertTrue(agent.register())
+        self.wait_for_mainloop()
+
         self.assertTrue(agent.unregister())
+        self.wait_for_mainloop()
+
+        # Check that we don't have a re-register warning
+        self.assertTrue(agent.register())
+        self.wait_for_mainloop()
+
+        agent.unregister()
+        self.wait_for_mainloop()
+
+        # And try again
+        agent = GnomeBluetoothPriv.Agent.new ('/org/gnome/bluetooth/integration_test')
+        self.assertIsNotNone(agent)
+        self.wait_for_mainloop()
+        agent.unregister()
+        self.wait_for_mainloop()
 
 class Tests(dbusmock.DBusTestCase):
 
