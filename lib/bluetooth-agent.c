@@ -369,6 +369,7 @@ static void bluetooth_agent_finalize(GObject *object)
 
 	bluetooth_agent_unregister (agent);
 
+	g_clear_pointer (&agent->path, g_free);
 	g_bus_unwatch_name (agent->watch_id);
 	g_free (agent->busname);
 	g_dbus_node_info_unref (agent->introspection_data);
@@ -536,7 +537,6 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 					      NULL, agent_unregister_cb, NULL);
 
 	g_clear_object (&agent->agent_manager);
-	g_clear_pointer (&agent->path, g_free);
 	g_clear_pointer (&agent->busname, g_free);
 
 	if (agent->reg_id > 0) {
