@@ -526,8 +526,10 @@ gboolean bluetooth_agent_unregister(BluetoothAgent *agent)
 {
 	g_return_val_if_fail (BLUETOOTH_IS_AGENT (agent), FALSE);
 
-	if (agent->agent_manager == NULL)
+	if (agent->agent_manager == NULL) {
+		g_debug ("AgentManager not registered yet");
 		return FALSE;
+	}
 
 	agent_manager1_call_unregister_agent (agent->agent_manager,
 					      agent->path,
