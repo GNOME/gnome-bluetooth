@@ -959,6 +959,9 @@ bluetooth_client_set_property (GObject        *object,
 	BluetoothClient *client = BLUETOOTH_CLIENT (object);
 
 	switch (property_id) {
+	case PROP_DEFAULT_ADAPTER_POWERED:
+		adapter_set_powered (client, g_value_get_boolean (value));
+		break;
 	case PROP_DEFAULT_ADAPTER_SETUP_MODE:
 		_bluetooth_client_set_default_adapter_discovering (client, g_value_get_boolean (value));
 		break;
@@ -1053,7 +1056,7 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_POWERED,
 					 g_param_spec_boolean ("default-adapter-powered", NULL,
 							      "Whether the default adapter is powered",
-							       FALSE, G_PARAM_READABLE));
+							       FALSE, G_PARAM_READWRITE));
 	/**
 	 * BluetoothClient:default-adapter-setup-mode:
 	 *
