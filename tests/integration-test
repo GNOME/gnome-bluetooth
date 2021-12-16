@@ -235,6 +235,32 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertIsNotNone(device)
         self.assertEqual(device.props.address, '11:22:33:44:55:66')
 
+    def test_default_adapter_powered(self):
+        bus = dbus.SystemBus()
+        dbusmock_bluez = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.freedesktop.DBus.Mock')
+        dbusprops_bluez = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.freedesktop.DBus.Properties')
+
+        self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
+        self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
+        self.assertEqual(self.client.props.num_adapters, 1)
+        self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.props.default_adapter_powered, True)
+
+        self.client.props.default_adapter_powered = False
+        self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == False)
+        self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.props.default_adapter_powered, False)
+
+        dbusmock_bluez.UpdateProperties('org.bluez.Adapter1', {
+                'Powered': True,
+        })
+        self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
+        self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.props.default_adapter_powered, True)
+
     def _pair_cb(self, client, result, user_data=None):
         success, path = client.setup_device_finish(result)
         self.assertEqual(success, True)
@@ -388,6 +414,15 @@ class Tests(dbusmock.DBusTestCase):
         self.dbusmock_bluez.AddAdapter('hci1', 'my-computer #2')
         self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'My Phone')
         self.dbusmock_bluez.AddDevice('hci1', '22:33:44:55:66:77', 'My Mouse')
+        self.run_test_process()
+
+    def test_default_adapter_powered(self):
+        path = self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        bus = dbus.SystemBus()
+        dbusmock_adapter = dbus.Interface(bus.get_object('org.bluez', path), 'org.freedesktop.DBus.Mock')
+        dbusmock_adapter.UpdateProperties('org.bluez.Adapter1', {
+            'Powered': False,
+        })
         self.run_test_process()
 
     def test_pairing(self):
