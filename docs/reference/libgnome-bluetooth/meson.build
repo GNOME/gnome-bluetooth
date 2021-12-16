@@ -20,7 +20,7 @@ version_xml = configure_file(
 )
 
 gnome.gtkdoc(
-  meson.project_name(),
+  gnomebt_api_name,
   main_sgml: meson.project_name() + '-docs.sgml',
   src_dir: lib_inc,
   dependencies: libgnome_bluetooth_dep,
