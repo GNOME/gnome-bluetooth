@@ -396,7 +396,8 @@ adapter_set_powered_cb (GDBusProxy *proxy,
 
 	ret = g_dbus_proxy_call_finish (proxy, res, &error);
 	if (!ret) {
-		g_debug ("Error setting property 'Powered' on interface org.bluez.Adapter1: %s (%s, %d)",
+		g_debug ("Error setting property 'Powered' on %s: %s (%s, %d)",
+			 g_dbus_proxy_get_object_path (proxy),
 			 error->message, g_quark_to_string (error->domain), error->code);
 	}
 }
@@ -419,6 +420,8 @@ adapter_set_powered (BluetoothClient *client,
 		return;
 	}
 
+	g_debug ("Powering up default adapter %s",
+		 g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter)));
 	variant = g_variant_new_boolean (powered);
 	g_dbus_proxy_call (G_DBUS_PROXY (client->default_adapter),
 			   "org.freedesktop.DBus.Properties.Set",
