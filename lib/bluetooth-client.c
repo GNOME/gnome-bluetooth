@@ -403,15 +403,24 @@ adapter_set_powered_cb (GDBusProxy *proxy,
 
 static void
 adapter_set_powered (BluetoothClient *client,
-		     GDBusProxy      *adapter,
 		     gboolean         powered)
 {
 	GVariant *variant;
 
 	g_return_if_fail (BLUETOOTH_IS_CLIENT (client));
 
+	if (!client->default_adapter) {
+		g_debug ("No default adapter to power");
+		return;
+	}
+
+	if (powered == adapter1_get_powered (client->default_adapter)) {
+		g_debug ("Default adapter is already %spowered", powered ? "" : "un");
+		return;
+	}
+
 	variant = g_variant_new_boolean (powered);
-	g_dbus_proxy_call (adapter,
+	g_dbus_proxy_call (G_DBUS_PROXY (client->default_adapter),
 			   "org.freedesktop.DBus.Properties.Set",
 			   g_variant_new ("(ssv)", "org.bluez.Adapter1", "Powered", variant),
 			   G_DBUS_CALL_FLAGS_NONE,
@@ -571,7 +580,7 @@ default_adapter_changed (GDBusObjectManager       *manager,
 
 	powered = adapter1_get_powered (client->default_adapter);
 	if (!powered)
-		adapter_set_powered (client, adapter, TRUE);
+		adapter_set_powered (client, TRUE);
 }
 
 static gboolean
