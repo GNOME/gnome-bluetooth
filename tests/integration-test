@@ -42,7 +42,7 @@ try:
     GIRepository.Repository.prepend_library_path(builddir + '/lib/')
     GIRepository.Repository.prepend_search_path(builddir + '/lib/')
 
-    gi.require_version('GnomeBluetoothPriv', '2.0')
+    gi.require_version('GnomeBluetoothPriv', '3.0')
     from gi.repository import GnomeBluetoothPriv
 except ImportError as e:
     sys.stderr.write('Could not find GnomeBluetoothPriv gobject-introspection data in the build dir: %s\n' % str(e))

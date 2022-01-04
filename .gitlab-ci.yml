@@ -41,9 +41,9 @@ build_stable:
     - ninja -C _build test
     - .ci/fail_skipped_tests.py _build/meson-logs/testlog.junit.xml
     - ninja -C _build dist
-    - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
-    - dnf install -y $DEPENDENCIES_ABI_CHECK
-    - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+    # - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
+    # - dnf install -y $DEPENDENCIES_ABI_CHECK
+    # - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     when: always
     paths:

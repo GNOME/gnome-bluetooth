@@ -10,7 +10,7 @@ gnomebt_version = meson.project_version()
 version_array = gnomebt_version.split('.')
 gnomebt_major_version = version_array[0].to_int()
 
-gnomebt_api_version = '2.0'
+gnomebt_api_version = '3.0'
 gnomebt_api_name = '@0@-@1@'.format(meson.project_name(), gnomebt_api_version)
 
 gnomebt_gir_ns = 'GnomeBluetooth'
