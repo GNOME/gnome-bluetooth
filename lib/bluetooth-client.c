@@ -532,7 +532,7 @@ adapter_notify_cb (Adapter1       *adapter,
 }
 
 typedef enum {
-	REPLACEMENT,
+	OWNER_UPDATE,
 	NEW_DEFAULT,
 	REMOVAL
 } DefaultAdapterChangeType;
@@ -564,15 +564,16 @@ default_adapter_changed (GDBusObjectManager       *manager,
 		return;
 	} else if (change_type == NEW_DEFAULT) {
 		g_debug ("Setting '%s' as the new default adapter", g_dbus_proxy_get_object_path (adapter));
-	} else if (change_type == REPLACEMENT) {
-		g_debug ("Replacing '%s' default adapter proxy", g_dbus_proxy_get_object_path (adapter));
+	} else if (change_type == OWNER_UPDATE) {
+		g_debug ("Updating default adapter proxy '%s' for new owner",
+			 g_dbus_proxy_get_object_path (adapter));
 	}
 
 	client->default_adapter = ADAPTER1 (g_object_ref (G_OBJECT (adapter)));
 	g_signal_connect_object (G_OBJECT (adapter), "notify",
 				 G_CALLBACK (adapter_notify_cb), client, 0);
 
-	if (change_type == REPLACEMENT)
+	if (change_type == OWNER_UPDATE)
 		return;
 
 	add_devices_to_list_store (client);
@@ -620,11 +621,11 @@ adapter_added (GDBusObjectManager   *manager,
 					 NEW_DEFAULT,
 					 client);
 	} else if (is_default_adapter (client, adapter)) {
-		g_debug ("Replacing default adapter with new proxy %s %s %s",
+		g_debug ("Updating default adapter with new proxy %s %s %s",
 			 name, adapter_path, iface);
 		default_adapter_changed (manager,
 					 G_DBUS_PROXY (adapter),
-					 REPLACEMENT,
+					 OWNER_UPDATE,
 					 client);
 		return;
 	} else {
