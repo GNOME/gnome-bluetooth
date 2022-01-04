@@ -21,7 +21,7 @@ variables:
     python3-dbus
   DEPENDENCIES_ABI_CHECK:
     libabigail
-  LAST_ABI_BREAK: "6ee14a44966355d54d7b1f802fbf65415872c4ac"
+  LAST_ABI_BREAK: "e2bdd3e255475698e0e5314d7e09fff0c9b78398"
 
 build_stable:
   before_script:
@@ -41,9 +41,9 @@ build_stable:
     - ninja -C _build test
     - .ci/fail_skipped_tests.py _build/meson-logs/testlog.junit.xml
     - ninja -C _build dist
-    # - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
-    # - dnf install -y $DEPENDENCIES_ABI_CHECK
-    # - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
+    - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
+    - dnf install -y $DEPENDENCIES_ABI_CHECK
+    - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     when: always
     paths:
