@@ -195,6 +195,8 @@ class OopTests(dbusmock.DBusTestCase):
         bus = dbus.SystemBus()
         bluez_server = bus.get_object('org.bluez', '/org/bluez')
         dbusmock_bluez = dbus.Interface(bluez_server, 'org.bluez.Mock')
+        hci0_props = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.freedesktop.DBus.Properties')
+        hci1_props = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci1'), 'org.freedesktop.DBus.Properties')
 
         self.wait_for_condition(lambda: self.client.props.num_adapters != 0)
         self.assertEqual(self.client.props.num_adapters, 2)
@@ -208,10 +210,16 @@ class OopTests(dbusmock.DBusTestCase):
 
         # Set default adapter in setup mode
         self.assertEqual (self.client.props.default_adapter_setup_mode, False)
+        self.assertEqual(hci0_props.Get('org.bluez.Adapter1', 'Discoverable'), False)
+        self.assertEqual(hci1_props.Get('org.bluez.Adapter1', 'Discoverable'), False)
         default_adapter_path = self.client.props.default_adapter
         self.client.props.default_adapter_setup_mode = True
+        self.wait_for_condition(lambda: hci1_props.Get('org.bluez.Adapter1', 'Discoverable') == True)
+        self.assertEqual(hci1_props.Get('org.bluez.Adapter1', 'Discoverable'), True)
         self.wait_for_mainloop()
         self.assertEqual(self.client.props.default_adapter_setup_mode, True)
+        self.assertEqual(hci0_props.Get('org.bluez.Adapter1', 'Discoverable'), False)
+        self.assertEqual(hci1_props.Get('org.bluez.Adapter1', 'Discoverable'), True)
 
         # Remove default adapter
         dbusmock_bluez.RemoveAdapter('hci1')
@@ -219,12 +227,16 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(self.client.props.num_adapters, 1)
         self.assertNotEqual(self.client.props.default_adapter, default_adapter_path)
         self.assertEqual(self.client.props.default_adapter_setup_mode, False)
+        self.assertEqual(hci0_props.Get('org.bluez.Adapter1', 'Discoverable'), False)
 
         # GListModel
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
         self.assertEqual(device.props.name, 'Device on hci0')
+
+        # Make hci0 discoverable
+        self.client.props.default_adapter_setup_mode = True
 
         # Re-add the old adapter, device is still there
         dbusmock_bluez.AddAdapter('hci1', 'hci1')
@@ -236,6 +248,10 @@ class OopTests(dbusmock.DBusTestCase):
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
         self.assertEqual(device.props.name, 'Device on hci1')
+
+        self.wait_for_condition(lambda: hci0_props.Get('org.bluez.Adapter1', 'Discoverable') == False)
+        self.assertEqual(hci0_props.Get('org.bluez.Adapter1', 'Discoverable'), False)
+        self.assertEqual(hci1_props.Get('org.bluez.Adapter1', 'Discoverable'), False)
 
     def test_default_adapter_powered(self):
         bus = dbus.SystemBus()
