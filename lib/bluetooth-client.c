@@ -533,6 +533,7 @@ adapter_notify_cb (Adapter1       *adapter,
 
 typedef enum {
 	OWNER_UPDATE,
+	REPLACEMENT,
 	NEW_DEFAULT,
 	REMOVAL
 } DefaultAdapterChangeType;
@@ -548,6 +549,10 @@ notify_default_adapter_props (BluetoothClient *client)
 }
 
 static void
+_bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
+						   gboolean         discovering);
+
+static void
 default_adapter_changed (GDBusObjectManager       *manager,
 			 GDBusProxy               *adapter,
 			 DefaultAdapterChangeType  change_type,
@@ -555,18 +560,26 @@ default_adapter_changed (GDBusObjectManager       *manager,
 {
 	gboolean powered;
 
-	g_clear_object (&client->default_adapter);
 	if (change_type == REMOVAL) {
+		g_clear_object (&client->default_adapter);
 		g_debug ("Emptying list store as default adapter removed");
 		g_list_store_remove_all (client->list_store);
 		g_debug ("No default adapter so invalidating all the default-adapter* properties");
 		notify_default_adapter_props (client);
 		return;
 	} else if (change_type == NEW_DEFAULT) {
+		g_clear_object (&client->default_adapter);
 		g_debug ("Setting '%s' as the new default adapter", g_dbus_proxy_get_object_path (adapter));
 	} else if (change_type == OWNER_UPDATE) {
+		g_clear_object (&client->default_adapter);
 		g_debug ("Updating default adapter proxy '%s' for new owner",
 			 g_dbus_proxy_get_object_path (adapter));
+	} else if (change_type == REPLACEMENT) {
+		g_debug ("Emptying list store as old default adapter removed");
+		g_list_store_remove_all (client->list_store);
+		g_debug ("Disabling discovery on old default adapter");
+		_bluetooth_client_set_default_adapter_discovering (client, FALSE);
+		g_clear_object (&client->default_adapter);
 	}
 
 	client->default_adapter = ADAPTER1 (g_object_ref (G_OBJECT (adapter)));
@@ -601,6 +614,14 @@ is_default_adapter (BluetoothClient *client,
 	return (g_strcmp0 (adapter_path, default_adapter_path) == 0);
 }
 
+static gboolean
+should_be_default_adapter (BluetoothClient *client,
+			   Adapter1        *adapter)
+{
+	return g_strcmp0 (g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)),
+			  g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter))) > 0;
+}
+
 static void
 adapter_added (GDBusObjectManager   *manager,
 	       Adapter1             *adapter,
@@ -628,6 +649,14 @@ adapter_added (GDBusObjectManager   *manager,
 					 OWNER_UPDATE,
 					 client);
 		return;
+	} else if (should_be_default_adapter (client, adapter)) {
+		g_debug ("Replacing default adapter %s with %s %s %s",
+			 g_dbus_proxy_get_name_owner (G_DBUS_PROXY (client->default_adapter)),
+			 name, adapter_path, iface);
+		default_adapter_changed (manager,
+					 G_DBUS_PROXY (adapter),
+					 REPLACEMENT,
+					 client);
 	} else {
 		g_debug ("Ignoring added non-default adapter %s %s %s",
 			 name, adapter_path, iface);

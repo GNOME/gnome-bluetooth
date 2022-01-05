@@ -235,7 +235,7 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.props.name, 'Device on hci0')
+        self.assertEqual(device.props.name, 'Device on hci1')
 
     def test_default_adapter_powered(self):
         bus = dbus.SystemBus()
