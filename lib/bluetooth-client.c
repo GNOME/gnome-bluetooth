@@ -420,7 +420,8 @@ adapter_set_powered (BluetoothClient *client,
 		return;
 	}
 
-	g_debug ("Powering up default adapter %s",
+	g_debug ("Powering %s default adapter %s",
+		 powered ? "up" : "down",
 		 g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter)));
 	variant = g_variant_new_boolean (powered);
 	g_dbus_proxy_call (G_DBUS_PROXY (client->default_adapter),
