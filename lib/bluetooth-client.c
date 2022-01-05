@@ -872,9 +872,14 @@ discovery_cb (Adapter1     *adapter,
 	else
 		ret = adapter1_call_stop_discovery_finish (adapter, res, &error);
 	if (!ret) {
-		g_debug ("Error calling %s  on interface org.bluez.Adapter1: %s (%s, %d)",
+		g_debug ("Error calling %s on %s org.bluez.Adapter1: %s (%s, %d)",
 			 start_call ? "StartDiscovery()" : "StopDiscovery()",
+			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)),
 			 error->message, g_quark_to_string (error->domain), error->code);
+	} else {
+		g_debug ("Ran %s successfully on %s org.bluez.Adapter1",
+			 start_call ? "StartDiscovery()" : "StopDiscovery()",
+			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)));
 	}
 }
 
@@ -886,8 +891,11 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 	GVariantBuilder builder;
 
 	adapter = _bluetooth_client_get_default_adapter (client);
-	if (adapter == NULL)
+	if (adapter == NULL) {
+		g_debug ("%s discovery requested, but no default adapter",
+			 discovering ? "Starting" : "Stopping");
 		return;
+	}
 
 	if (discovering) {
 		g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
@@ -902,13 +910,15 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 
 	client->discovery_started = discovering;
 	if (discovering) {
+		g_debug ("Starting discovery on %s", g_dbus_proxy_get_object_path (adapter));
 		adapter1_call_start_discovery (ADAPTER1 (adapter),
 					       client->cancellable,
 					       (GAsyncReadyCallback) discovery_cb,
 					       GUINT_TO_POINTER (discovering));
 	} else {
-		/* Don't cancel a dicovery stop when the BluetoothClient
+		/* Don't cancel a discovery stop when the BluetoothClient
 		 * is finalised, so don't pass a cancellable */
+		g_debug ("Stopping discovery on %s", g_dbus_proxy_get_object_path (adapter));
 		adapter1_call_stop_discovery (ADAPTER1 (adapter),
 					      NULL,
 					      (GAsyncReadyCallback) discovery_cb,
