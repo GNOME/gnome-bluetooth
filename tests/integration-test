@@ -204,7 +204,7 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.props.address, '22:33:44:55:66:77')
+        self.assertEqual(device.props.name, 'Device on hci1')
 
         # Set default adapter in setup mode
         self.assertEqual (self.client.props.default_adapter_setup_mode, False)
@@ -224,16 +224,16 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.props.address, '11:22:33:44:55:66')
+        self.assertEqual(device.props.name, 'Device on hci0')
 
         # Re-add the old adapter, device is still there
-        dbusmock_bluez.AddAdapter('hci1', 'my-computer #2')
+        dbusmock_bluez.AddAdapter('hci1', 'hci1')
 
         # GListModel
         self.assertEqual(list_store.get_n_items(), 1)
         device = list_store.get_item(0)
         self.assertIsNotNone(device)
-        self.assertEqual(device.props.address, '11:22:33:44:55:66')
+        self.assertEqual(device.props.name, 'Device on hci0')
 
     def test_default_adapter_powered(self):
         bus = dbus.SystemBus()
@@ -410,10 +410,10 @@ class Tests(dbusmock.DBusTestCase):
         self.run_test_process()
 
     def test_default_adapter(self):
-        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
-        self.dbusmock_bluez.AddAdapter('hci1', 'my-computer #2')
-        self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'My Phone')
-        self.dbusmock_bluez.AddDevice('hci1', '22:33:44:55:66:77', 'My Mouse')
+        self.dbusmock_bluez.AddAdapter('hci0', 'hci0')
+        self.dbusmock_bluez.AddAdapter('hci1', 'hci1')
+        self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'Device on hci0')
+        self.dbusmock_bluez.AddDevice('hci1', '22:33:44:55:66:77', 'Device on hci1')
         self.run_test_process()
 
     def test_default_adapter_powered(self):
