@@ -18,9 +18,13 @@ multiple Bluetooth adapters. Earlier versions of the bluez backend software
 had support for setting a "default adapter" but that is not the case
 any more.
 
-As the goal is usually to disable an internal Bluetooth adapter in favour of
-a more featureful removable one, there are a couple of possibilities
-to do this, depending on the hardware:
+Since GNOME 42, the default adapter is the "highest numbered" one, so
+removable/external Bluetooth adapters are likely going to be preferred
+to internal ones.
+
+As the goal for multiple adapters usually is to disable an internal
+Bluetooth adapter in favour of a more featureful removable one, there are
+a couple of possibilities to do this, depending on the hardware:
 
 - Disable the internal Bluetooth adapter in the system's BIOS or firmware
 
