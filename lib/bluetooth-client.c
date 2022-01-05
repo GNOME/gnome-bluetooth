@@ -61,8 +61,6 @@ struct _BluetoothClient {
 	GDBusObjectManager *manager;
 	GCancellable *cancellable;
 	guint num_adapters;
-	/* Discoverable during discovery? */
-	gboolean disco_during_disco;
 	gboolean discovery_started;
 };
 
