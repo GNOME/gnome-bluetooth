@@ -228,6 +228,8 @@ class OopTests(dbusmock.DBusTestCase):
 
         # Re-add the old adapter, device is still there
         dbusmock_bluez.AddAdapter('hci1', 'hci1')
+        self.wait_for_condition(lambda: self.client.props.num_adapters == 2)
+        self.assertEqual(self.client.props.num_adapters, 2)
 
         # GListModel
         self.assertEqual(list_store.get_n_items(), 1)
