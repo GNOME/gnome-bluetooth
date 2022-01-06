@@ -32,8 +32,9 @@ build_stable:
     - ninja -C _build
     - ninja -C _build install
     # Install newer python-dbusmock
-    - git clone https://github.com/martinpitt/python-dbusmock.git
+    - git clone https://github.com/hadess/python-dbusmock.git
     - cd python-dbusmock
+    - git checkout -b wip/hadess/bluez-disco-fixes origin/wip/hadess/bluez-disco-fixes
     - python3 setup.py build
     - python3 setup.py install
     - cd ..
