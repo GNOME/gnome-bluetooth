@@ -12,13 +12,9 @@ gnomebt_major_version = version_array[0].to_int()
 
 gnomebt_api_version = '3.0'
 gnomebt_api_name = '@0@-@1@'.format(meson.project_name(), gnomebt_api_version)
+gnomebt_gettext_package = gnomebt_api_name
 
 gnomebt_gir_ns = 'GnomeBluetooth'
-
-# The number at the end a suffix of the files and should
-# be bumped along the api_version so that translations
-# can be installed in parallel with older versions.
-gnomebt_gettext_package = meson.project_name() + '3'
 
 gnomebt_prefix = get_option('prefix')
 gnomebt_datadir = get_option('datadir')
