@@ -1,8 +1,17 @@
-ver 42.alpha: (unreleased)
+ver 42.alpha:
+This version of gnome-bluetooth contains major API changes, but it is
+parallel-installable with the GTK 3-based, 3.34.x versions of the
+library.
+
 - Port library to GTK4
 - Remove chooser widgets from library
 - Remove chooser UI from bluetooth-sendto
 - Make bluetooth-sendto optional
+- Replace canberra-gtk dependency with gsound
+- GtkTreeModel-based API was replaced by a GListModel-based API
+- Loads of bug fixes, many new tests
+- Make changes to the way the default adapter is selected, see README.md
+  for details
 
 ver 3.34.5:
 - Fix unwanted soname change
