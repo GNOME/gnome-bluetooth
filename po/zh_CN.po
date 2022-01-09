@@ -5,112 +5,22 @@
 # 甘露(Gan Lu) <rhythm.gan@gmail.com>，2013
 # Tong Hui <tonghuix@gmail.com>, 2013
 # Dingzhong Chen <wsxy162@gmail.com>, 2017-2021.
+# lumingzh <lumingzh@qq.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2020-08-27 13:00+0000\n"
-"PO-Revision-Date: 2021-03-28 03:05+0800\n"
-"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
+"POT-Creation-Date: 2021-11-10 14:34+0000\n"
+"PO-Revision-Date: 2022-01-01 11:48+0800\n"
+"Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"X-Generator: Gtranslator 41.0\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-
-#: lib/bluetooth-chooser-button.c:71
-msgid "Click to select device…"
-msgstr "点击选取设备…"
-
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
-#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
-msgid "_Cancel"
-msgstr "取消(_C)"
-
-#: lib/bluetooth-chooser-button.c:202
-msgid "_OK"
-msgstr "确定(_O)"
-
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
-#: lib/bluetooth-utils.c:99
-msgid "Unknown"
-msgstr "未知的"
-
-#: lib/bluetooth-chooser.c:176
-msgid "No adapters available"
-msgstr "无可用适配器"
-
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1561
-msgid "Searching for devices…"
-msgstr "正在搜索设备…"
-
-#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
-msgid "Device"
-msgstr "设备"
-
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
-msgid "Type"
-msgstr "类型"
-
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
-msgid "Devices"
-msgstr "设备"
-
-#: lib/bluetooth-filter-widget.c:72
-msgid "All categories"
-msgstr "全部分类"
-
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
-msgid "Paired"
-msgstr "已配对"
-
-#: lib/bluetooth-filter-widget.c:76
-msgid "Trusted"
-msgstr "受信任"
-
-#: lib/bluetooth-filter-widget.c:78
-msgid "Not paired or trusted"
-msgstr "非配对也非信任"
-
-#: lib/bluetooth-filter-widget.c:80
-msgid "Paired or trusted"
-msgstr "已配对或受信任"
-
-#. This is the title of the filter section of the Bluetooth device chooser.
-#. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:231
-msgid "Show:"
-msgstr "显示："
-
-#. The device category filter
-#: lib/bluetooth-filter-widget.c:247
-msgid "Device _category:"
-msgstr "设备分类(_C)："
-
-#: lib/bluetooth-filter-widget.c:258
-msgid "Select the device category to filter"
-msgstr "选择要筛选的设备分类"
-
-#. The device type filter
-#: lib/bluetooth-filter-widget.c:272
-msgid "Device _type:"
-msgstr "设备类型(_T)："
-
-#: lib/bluetooth-filter-widget.c:289
-msgid "Select the device type to filter"
-msgstr "选择要筛选的设备类型"
-
-#: lib/bluetooth-filter-widget.c:295
-msgid "Input devices (mice, keyboards, etc.)"
-msgstr "输入设备（鼠标、键盘等）"
-
-#: lib/bluetooth-filter-widget.c:299
-msgid "Headphones, headsets and other audio devices"
-msgstr "耳机、耳麦及其他音频设备"
 
 #: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
 #: lib/bluetooth-pairing-dialog.c:104
@@ -189,39 +99,39 @@ msgid "Dismiss"
 msgstr "拒绝"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "取消"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:247
+#: lib/bluetooth-pairing-dialog.c:286 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "接受"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:34
 msgid "Not Set Up"
 msgstr "未设置"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:80
 msgid "Connected"
 msgstr "已连接"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
 msgstr "已断开"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "Yes"
 msgstr "是"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "No"
 msgstr "没有"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1299
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -230,48 +140,60 @@ msgstr ""
 "作为“%s”可见并可用于蓝牙文件传输。已传输的文件位于 <a href=\"%s\">下载</a> 文"
 "件夹。"
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1337
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "将“%s”从设备列表中移除？"
 
-#: lib/bluetooth-settings-widget.c:1278
+#: lib/bluetooth-settings-widget.c:1339
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "如果您移除此设备，下次使用它之前必须重新设置。"
 
-#: lib/bluetooth-settings-widget.c:1282
+#: lib/bluetooth-settings-widget.c:1342 sendto/main.c:445 sendto/main.c:706
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: lib/bluetooth-settings-widget.c:1343
 msgid "_Remove"
 msgstr "移除(_R)"
 
+#: lib/bluetooth-settings-widget.c:1561
+msgid "Devices"
+msgstr "设备"
+
+#: lib/bluetooth-settings-widget.c:1605
+msgid "Searching for devices…"
+msgstr "正在搜索设备…"
+
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:146
+#: lib/bluetooth-settings-obexpush.c:144
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "从蓝牙接收到了“%s”"
 
-#: lib/bluetooth-settings-obexpush.c:148
+#: lib/bluetooth-settings-obexpush.c:146
 msgid "You received a file"
 msgstr "接收到了一个文件"
 
-#: lib/bluetooth-settings-obexpush.c:159
+#: lib/bluetooth-settings-obexpush.c:157
 msgid "Open File"
 msgstr "打开文件"
 
-#: lib/bluetooth-settings-obexpush.c:163
+#: lib/bluetooth-settings-obexpush.c:161
 msgid "Open Containing Folder"
 msgstr "打开所在文件夹"
 
-#: lib/bluetooth-settings-obexpush.c:180
+#: lib/bluetooth-settings-obexpush.c:178
 msgid "File reception complete"
 msgstr "文件接收完成"
 
-#: lib/bluetooth-settings-obexpush.c:234
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "从 %s 传送来的蓝牙文件"
 
-#: lib/bluetooth-settings-obexpush.c:244
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "拒绝"
 
@@ -352,35 +274,47 @@ msgstr "可穿戴"
 msgid "Toy"
 msgstr "玩具"
 
-#: lib/bluetooth-utils.c:117
-msgid "All types"
-msgstr "所有类型"
+#: lib/bluetooth-utils.c:98
+msgid "Speakers"
+msgstr "扬声器"
 
-#: lib/settings.ui:44
+#: lib/bluetooth-utils.c:103
+msgid "Unknown"
+msgstr "未知的"
+
+#: lib/settings.ui:29
 msgid "Connection"
 msgstr "连接"
 
-#: lib/settings.ui:229
+#: lib/settings.ui:71
+msgid "Paired"
+msgstr "已配对"
+
+#: lib/settings.ui:94
+msgid "Type"
+msgstr "类型"
+
+#: lib/settings.ui:117
 msgid "Address"
 msgstr "地址"
 
-#: lib/settings.ui:285
+#: lib/settings.ui:143
 msgid "_Mouse & Touchpad Settings"
 msgstr "鼠标与触摸板设置(_M)"
 
-#: lib/settings.ui:299
+#: lib/settings.ui:150
 msgid "_Sound Settings"
 msgstr "声音设置(_S)"
 
-#: lib/settings.ui:313
+#: lib/settings.ui:157
 msgid "_Keyboard Settings"
 msgstr "键盘设置(_K)"
 
-#: lib/settings.ui:327
+#: lib/settings.ui:164
 msgid "Send _Files…"
 msgstr "发送文件(_F)…"
 
-#: lib/settings.ui:341
+#: lib/settings.ui:171
 msgid "_Remove Device"
 msgstr "移除设备(_R)"
 
@@ -392,129 +326,174 @@ msgstr "蓝牙传送"
 msgid "Send files via Bluetooth"
 msgstr "通过蓝牙设备发送文件"
 
-#: sendto/main.c:117
+#: sendto/main.c:116
 msgid "An unknown error occurred"
 msgstr "发生未知错误"
 
-#: sendto/main.c:130
+#: sendto/main.c:129
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr "请确认远端设备已打开并接收蓝牙连接"
 
-#: sendto/main.c:363
+#: sendto/main.c:362
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d 秒"
 
-#: sendto/main.c:368 sendto/main.c:381
+#: sendto/main.c:367 sendto/main.c:380
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d 分钟"
 
-#: sendto/main.c:379
+#: sendto/main.c:378
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d 小时"
 
-#: sendto/main.c:389
+#: sendto/main.c:388
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "约 %'d 小时"
 
-#: sendto/main.c:402 sendto/main.c:500
+#: sendto/main.c:401 sendto/main.c:497
 msgid "Connecting…"
 msgstr "正在连接……"
 
-#: sendto/main.c:444
+#: sendto/main.c:442
 msgid "Bluetooth File Transfer"
 msgstr "蓝牙文件传送"
 
-#: sendto/main.c:448
+#: sendto/main.c:446
 msgid "_Retry"
 msgstr "重试(_R)"
 
-#: sendto/main.c:470
+#: sendto/main.c:463
 msgid "From:"
 msgstr "从："
 
-#: sendto/main.c:484
+#: sendto/main.c:479
 msgid "To:"
 msgstr "到："
 
-#: sendto/main.c:577
+#: sendto/main.c:575
 #, c-format
 msgid "Sending %s"
 msgstr "正在发送 %s"
 
-#: sendto/main.c:584 sendto/main.c:633
+#: sendto/main.c:582 sendto/main.c:631
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "正在发送文件 %d / %d"
 
-#: sendto/main.c:629
+#: sendto/main.c:627
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/秒"
 
-#: sendto/main.c:631
+#: sendto/main.c:629
 #, c-format
 msgid "%d B/s"
 msgstr "%d 字节/秒"
 
-#: sendto/main.c:662
+#: sendto/main.c:660
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u 传输完成"
 
-#: sendto/main.c:669
+#: sendto/main.c:667
 msgid "_Close"
 msgstr "关闭(_C)"
 
-#: sendto/main.c:679
+#: sendto/main.c:677
 msgid "There was an error"
 msgstr "出错了"
 
-#: sendto/main.c:734
-msgid "Select device to send to"
-msgstr "选择要发送到的设备"
-
-#: sendto/main.c:739
-msgid "_Send"
-msgstr "发送(_S)"
-
-#: sendto/main.c:789
+#: sendto/main.c:701
 msgid "Choose files to send"
 msgstr "选择要发送的文件"
 
-#: sendto/main.c:795
+#: sendto/main.c:707
 msgid "Select"
 msgstr "选择"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "Remote device to use"
 msgstr "要使用的远端设备"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "ADDRESS"
 msgstr "地址"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "Remote device’s name"
 msgstr "远端设备名"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "NAME"
 msgstr "名称"
 
-#: sendto/main.c:846
-msgid "[FILE…]"
-msgstr "[文件…]"
+#~ msgid "Click to select device…"
+#~ msgstr "点击选取设备…"
+
+#~ msgid "_OK"
+#~ msgstr "确定(_O)"
+
+#~ msgid "No adapters available"
+#~ msgstr "无可用适配器"
+
+#~ msgid "Device"
+#~ msgstr "设备"
+
+#~ msgid "All categories"
+#~ msgstr "全部分类"
+
+#~ msgid "Trusted"
+#~ msgstr "受信任"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "非配对也非信任"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "已配对或受信任"
+
+#~ msgid "Show:"
+#~ msgstr "显示："
+
+#~ msgid "Device _category:"
+#~ msgstr "设备分类(_C)："
+
+#~ msgid "Select the device category to filter"
+#~ msgstr "选择要筛选的设备分类"
+
+#~ msgid "Device _type:"
+#~ msgstr "设备类型(_T)："
+
+#~ msgid "Select the device type to filter"
+#~ msgstr "选择要筛选的设备类型"
+
+#~ msgid "Input devices (mice, keyboards, etc.)"
+#~ msgstr "输入设备（鼠标、键盘等）"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "耳机、耳麦及其他音频设备"
+
+#~ msgid "All types"
+#~ msgstr "所有类型"
+
+#~ msgid "Select device to send to"
+#~ msgstr "选择要发送到的设备"
+
+#~ msgid "_Send"
+#~ msgstr "发送(_S)"
+
+#~ msgid "[FILE…]"
+#~ msgstr "[文件…]"
 
 #~ msgid "Reveal File"
 #~ msgstr "显示文件"
