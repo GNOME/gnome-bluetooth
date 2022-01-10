@@ -272,7 +272,7 @@ register_agent (BluetoothAgent *agent)
 
 	ret = agent_manager1_call_register_agent_sync (agent->agent_manager,
 						       agent->path,
-						       "DisplayYesNo",
+						       "KeyboardDisplay",
 						       NULL, &error);
 	if (ret == FALSE) {
 		g_printerr ("Agent registration failed: %s\n", error->message);
