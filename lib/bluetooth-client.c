@@ -227,8 +227,11 @@ device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char *
 
 	*icon = icon_override (device1_get_address (device), *type);
 
-	if (!*icon)
+	if (!*icon) {
 		*icon = device1_get_icon (device);
+		if (*icon && *icon[0] == '\0')
+			*icon = NULL;
+	}
 
 	if (!*icon)
 		*icon = "bluetooth";
