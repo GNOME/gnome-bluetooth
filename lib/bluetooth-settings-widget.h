@@ -28,3 +28,5 @@ G_DECLARE_FINAL_TYPE (BluetoothSettingsWidget, bluetooth_settings_widget, BLUETO
 GtkWidget *bluetooth_settings_widget_new (void);
 
 gboolean bluetooth_settings_widget_get_default_adapter_powered (BluetoothSettingsWidget *widget);
+void bluetooth_settings_widget_set_default_adapter_powered (BluetoothSettingsWidget *widget,
+                                                            gboolean                 powered);

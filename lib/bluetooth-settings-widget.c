@@ -1960,3 +1960,21 @@ bluetooth_settings_widget_get_default_adapter_powered (BluetoothSettingsWidget *
 
 	return ret;
 }
+
+/**
+ * bluetooth_settings_widget_set_default_adapter_powered:
+ * @widget: a #BluetoothSettingsWidget widget.
+ * @powered: whether the adapter should be powered
+ *
+ * Power up or down the default adapter.
+ **/
+void
+bluetooth_settings_widget_set_default_adapter_powered (BluetoothSettingsWidget *self,
+                                                       gboolean                 powered)
+{
+	g_return_if_fail (BLUETOOTH_IS_SETTINGS_WIDGET (self));
+
+	g_object_set (G_OBJECT (self->client),
+		      "default-adapter-powered", powered,
+		      NULL);
+}
