@@ -18,7 +18,7 @@ endif
 test_bluetooth_device = executable('test-bluetooth-device',
   'test-bluetooth-device.c',
   include_directories: lib_inc,
-  dependencies: deps + private_deps,
+  dependencies: deps,
   c_args: cflags,
   link_with: libgnome_bluetooth,
 )
@@ -30,7 +30,7 @@ test('test-bluetooth-device-test',
 test_bluetooth_utils = executable('test-bluetooth-utils',
   [ 'test-bluetooth-utils.c', enum_sources ],
   include_directories: [ top_inc, lib_inc],
-  dependencies: deps + private_deps,
+  dependencies: deps,
   c_args: cflags,
   link_with: libgnome_bluetooth,
 )

@@ -1,5 +1,5 @@
-#include "pin.c"
 #include "bluetooth-enums.h"
+#include "pin.h"
 
 int main (int argc, char **argv)
 {
