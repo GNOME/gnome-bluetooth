@@ -1,7 +1,9 @@
 # GNOME Bluetooth
 
 
-gnome-bluetooth is a helper library on top of the bluez daemon's D-Bus API.
+gnome-bluetooth is a helper library on top of the bluez daemon's D-Bus API. It used
+to contain widgets for application developers but is now home to everything Bluetooth
+related for the code GNOME desktop, and nothing pertinent to application developers.
 
 Requirements
 ------------
