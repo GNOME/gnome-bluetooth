@@ -561,8 +561,6 @@ default_adapter_changed (GDBusObjectManager       *manager,
 			 DefaultAdapterChangeType  change_type,
 			 BluetoothClient          *client)
 {
-	gboolean powered;
-
 	if (change_type == REMOVAL) {
 		g_clear_object (&client->default_adapter);
 		g_debug ("Emptying list store as default adapter removed");
@@ -596,10 +594,6 @@ default_adapter_changed (GDBusObjectManager       *manager,
 
 	g_debug ("New default adapter so invalidating all the default-adapter* properties");
 	notify_default_adapter_props (client);
-
-	powered = adapter1_get_powered (client->default_adapter);
-	if (!powered)
-		adapter_set_powered (client, TRUE);
 }
 
 static gboolean

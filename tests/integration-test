@@ -259,6 +259,9 @@ class OopTests(dbusmock.DBusTestCase):
         dbusprops_bluez = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.freedesktop.DBus.Properties')
 
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
+        self.wait_for_mainloop()
+        self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
+        self.client.props.default_adapter_powered = True
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
         self.assertEqual(self.client.props.num_adapters, 1)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
