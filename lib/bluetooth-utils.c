@@ -304,6 +304,9 @@ bluetooth_appearance_to_type (guint16 appearance)
 #define BLUETOOTH_UUID_GENERIC_NET	0x1201
 #define BLUETOOTH_UUID_VDP_SOURCE	0x1303
 
+#define BLUETOOTH_LE_UUID_BATTERY                0x180F
+#define BLUETOOTH_LE_UUID_HUMAN_INTERFACE_DEVICE 0x1812
+
 static const char *
 uuid16_custom_to_string (guint uuid16, const char *uuid)
 {
