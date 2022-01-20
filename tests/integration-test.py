@@ -77,7 +77,7 @@ class OopTests(dbusmock.DBusTestCase):
 
     def wait_for_mainloop(self):
         ml = GLib.MainLoop()
-        GLib.timeout_add_seconds(1, ml.quit)
+        GLib.timeout_add(100, ml.quit)
         ml.run()
 
     def wait_for_condition(self, condition, timeout=5):
@@ -86,7 +86,7 @@ class OopTests(dbusmock.DBusTestCase):
         def timeout_cb():
             nonlocal timed_out
             timed_out = True
-        GLib.timeout_add_seconds(1, timeout_cb)
+        GLib.timeout_add(100, timeout_cb)
         while not condition() and not timed_out:
           ctx.iteration(True)
 
