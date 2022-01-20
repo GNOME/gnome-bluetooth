@@ -29,7 +29,7 @@ build_stable:
     - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
   script:
     # Install newer python-dbusmock
-    - git clone --branch=wip/hadess/bluez-modalias-prop https://github.com/hadess/python-dbusmock.git
+    - git clone https://github.com/martinpitt/python-dbusmock.git
     - cd python-dbusmock
     - python3 setup.py build
     - python3 setup.py install
