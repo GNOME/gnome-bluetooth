@@ -1495,6 +1495,16 @@ bluetooth_client_connect_service_finish (BluetoothClient *client,
 	return g_task_propagate_boolean (task, error);
 }
 
+/**
+ * bluetooth_client_has_connected_input_devices:
+ * @client: a #BluetoothClient
+ *
+ * Returns whether there are connected devices with the input capability.
+ * This can be used by an OS user interface to warn the user before disabling
+ * Bluetooth so that the user isn't stranded without any input devices.
+ *
+ * Returns: %TRUE if there are connected input devices.
+ **/
 gboolean
 bluetooth_client_has_connected_input_devices (BluetoothClient *client)
 {
