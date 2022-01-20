@@ -24,6 +24,7 @@ enum {
 	PROP_CONNECTED,
 	PROP_LEGACYPAIRING,
 	PROP_UUIDS,
+	PROP_CONNECTABLE,
 };
 
 struct _BluetoothDevice {
@@ -40,9 +41,45 @@ struct _BluetoothDevice {
 	gboolean connected;
 	gboolean legacy_pairing;
 	char **uuids;
+	gboolean connectable;
+};
+
+static const char *connectable_uuids[] = {
+	"HSP",
+	"AudioSource",
+	"AudioSink",
+	"A/V_RemoteControlTarget",
+	"A/V_RemoteControl",
+	"Headset_-_AG",
+	"Handsfree",
+	"HandsfreeAudioGateway",
+	"HumanInterfaceDeviceService",
+	"Human Interface Device",
 };
 
 G_DEFINE_TYPE(BluetoothDevice, bluetooth_device, G_TYPE_OBJECT)
+
+static void
+update_connectable (BluetoothDevice *device)
+{
+	gboolean new_connectable = FALSE;
+
+	if (device->uuids) {
+		guint i;
+
+		for (i = 0; i < G_N_ELEMENTS (connectable_uuids); i++) {
+			if (g_strv_contains ((const char * const*) device->uuids, connectable_uuids[i])) {
+				new_connectable = TRUE;
+				break;
+			}
+		}
+	}
+
+	if (new_connectable != device->connectable) {
+		device->connectable = new_connectable;
+		g_object_notify (G_OBJECT (device), "connectable");
+	}
+}
 
 static void
 bluetooth_device_get_property (GObject        *object,
@@ -139,6 +176,7 @@ bluetooth_device_set_property (GObject        *object,
 	case PROP_UUIDS:
 		g_clear_pointer (&device->uuids, g_strfreev);
 		device->uuids = g_value_dup_boxed (value);
+		update_connectable (device);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -201,6 +239,9 @@ static void bluetooth_device_class_init(BluetoothDeviceClass *klass)
 	g_object_class_install_property (object_class, PROP_UUIDS,
 					 g_param_spec_boxed ("uuids", NULL, "UUIDs",
 							     G_TYPE_STRV, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_CONNECTABLE,
+					 g_param_spec_boolean ("connectable", NULL, "Connectable",
+							       FALSE, G_PARAM_READABLE));
 }
 
 static void
