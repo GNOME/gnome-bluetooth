@@ -24,6 +24,12 @@ if enable_gir and has_dbusmock
   endforeach
 endif
 
+if not has_dbusmock
+  test('integration-test-skipped',
+    find_program('integration-test-skipped.sh'),
+  )
+endif
+
 test_bluetooth_device = executable('test-bluetooth-device',
   'test-bluetooth-device.c',
   include_directories: lib_inc,
