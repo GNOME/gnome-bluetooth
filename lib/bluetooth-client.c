@@ -1518,3 +1518,32 @@ bluetooth_client_connect_service_finish (BluetoothClient *client,
 
 	return g_task_propagate_boolean (task, error);
 }
+
+gboolean
+bluetooth_client_has_connected_input_devices (BluetoothClient *client)
+{
+	guint i, n_items;
+	guint n_connected = 0;
+
+	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+	for (i = 0; i < n_items; i++) {
+		g_autoptr(BluetoothDevice) device = NULL;
+		g_auto(GStrv) uuids = NULL;
+		gboolean connected = FALSE;
+
+		device = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+		g_object_get (device,
+			      "connected", &connected,
+			      "uuids", &uuids, NULL);
+		if (!connected)
+			continue;
+		if (!uuids)
+			continue;
+		if (g_strv_contains ((const gchar * const *) uuids, "Human Interface Device") ||
+		    g_strv_contains ((const gchar * const *) uuids, "HumanInterfaceDeviceService"))
+			n_connected++;
+	}
+	g_debug ("Found %i input devices connected", n_connected);
+
+	return n_connected > 0;
+}

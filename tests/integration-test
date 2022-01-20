@@ -374,6 +374,50 @@ class OopTests(dbusmock.DBusTestCase):
         agent.unregister()
         self.wait_for_mainloop()
 
+    def test_connected_input_devices(self):
+        bus = dbus.SystemBus()
+        dbusmock_bluez = dbus.Interface(bus.get_object('org.bluez', '/'), 'org.bluez.Mock')
+
+        path = dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'My LE Mouse')
+        dev1 = dbus.Interface(bus.get_object('org.bluez', path), 'org.freedesktop.DBus.Mock')
+        dev1.UpdateProperties('org.bluez.Device1',
+                {'UUIDs': dbus.Array(['00001812-0000-1000-8000-00805f9b34fb'], variant_level=1)})
+
+        path = dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:67', 'My Classic Mouse')
+        dev2 = dbus.Interface(bus.get_object('org.bluez', path), 'org.freedesktop.DBus.Mock')
+        dev2.UpdateProperties('org.bluez.Device1',
+                {'UUIDs': dbus.Array(['00001124-0000-1000-8000-00805f9b34fb'], variant_level=1)})
+
+        self.wait_for_mainloop()
+        list_store = self.client.get_devices()
+        self.assertEqual(list_store.get_n_items(), 2)
+        self.assertEqual(self.client.has_connected_input_devices(), False)
+
+        dev1.UpdateProperties('org.bluez.Device1',
+                {'Connected': dbus.Boolean(True, variant_level=1)})
+
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.has_connected_input_devices(), True)
+
+        dev1.UpdateProperties('org.bluez.Device1',
+                {'Connected': dbus.Boolean(False, variant_level=1)})
+
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.has_connected_input_devices(), False)
+
+        dev2.UpdateProperties('org.bluez.Device1',
+                {'Connected': dbus.Boolean(True, variant_level=1)})
+
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.has_connected_input_devices(), True)
+
+        dev2.UpdateProperties('org.bluez.Device1',
+                {'Connected': dbus.Boolean(False, variant_level=1)})
+
+        self.wait_for_mainloop()
+        self.assertEqual(self.client.has_connected_input_devices(), False)
+
+
 class Tests(dbusmock.DBusTestCase):
 
     @classmethod
@@ -469,6 +513,10 @@ class Tests(dbusmock.DBusTestCase):
         self.run_test_process()
 
     def test_agent(self):
+        self.run_test_process()
+
+    def test_connected_input_devices(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
         self.run_test_process()
 
 if __name__ == '__main__':

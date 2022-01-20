@@ -44,3 +44,5 @@ void bluetooth_client_connect_service (BluetoothClient     *client,
 gboolean bluetooth_client_connect_service_finish (BluetoothClient *client,
 						  GAsyncResult    *res,
 						  GError         **error);
+
+gboolean bluetooth_client_has_connected_input_devices (BluetoothClient *client);
