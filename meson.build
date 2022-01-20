@@ -115,6 +115,15 @@ if enable_gtk_doc
 endif
 
 subdir('po')
+
+python = import('python')
+python3 = python.find_installation('python3')
+has_dbusmock = false
+script = 'import dbusmock'
+if run_command(python3, '-c', script, check: false).returncode() == 0
+  has_dbusmock = true
+endif
+
 subdir('tests')
 
 configure_file(
@@ -130,6 +139,7 @@ meson.add_install_script(
 
 summary({'Documentation': enable_gtk_doc,
          'Introspection': enable_gir,
+         'Dbusmock tests': has_dbusmock,
          'Send-to': get_option('sendto'),
          'Run gtk-update-icon-cache': get_option('icon_update')},
         section: 'General')
