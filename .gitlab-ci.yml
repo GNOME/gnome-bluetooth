@@ -26,18 +26,17 @@ variables:
 build_stable:
   before_script:
     - dnf update -y --nogpgcheck
-    - dnf install -y --nogpgcheck $DEPENDENCIES
+    - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
   script:
-    - meson . _build --prefix=/usr -Dicon_update=true -Dgtk_doc=true -Dintrospection=true -Dsendto=true
-    - ninja -C _build
-    - ninja -C _build install
     # Install newer python-dbusmock
     - git clone --branch=wip/hadess/bluez-modalias-prop https://github.com/hadess/python-dbusmock.git
     - cd python-dbusmock
     - python3 setup.py build
     - python3 setup.py install
     - cd ..
-    - dnf install -y $TEST_DEPS
+    - meson . _build --prefix=/usr -Dicon_update=true -Dgtk_doc=true -Dintrospection=true -Dsendto=true
+    - ninja -C _build
+    - ninja -C _build install
     - ninja -C _build test
     - .ci/fail_skipped_tests.py _build/meson-logs/testlog.junit.xml
     - ninja -C _build dist
