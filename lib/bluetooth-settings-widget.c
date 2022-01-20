@@ -1088,7 +1088,7 @@ update_properties (BluetoothSettingsWidget *self,
 {
 	GtkSwitch *button;
 	BluetoothType type;
-	gboolean connected, paired;
+	gboolean connected, paired, connectable;
 	g_auto(GStrv) uuids = NULL;
 	char *bdaddr, *alias;
 	g_autofree char *icon = NULL;
@@ -1105,6 +1105,7 @@ update_properties (BluetoothSettingsWidget *self,
 		      "connected", &connected,
 		      "uuids", &uuids,
 		      "type", &type,
+		      "connectable", &connectable,
 		      NULL);
 
 	g_free (self->selected_object_path);
@@ -1139,8 +1140,7 @@ update_properties (BluetoothSettingsWidget *self,
 			    paired ? _("Yes") : _("No"));
 
 	/* UUIDs */
-	gtk_widget_set_sensitive (GTK_WIDGET (button),
-				  bluetooth_client_get_connectable ((const char **) uuids));
+	gtk_widget_set_sensitive (GTK_WIDGET (button), connectable);
 	for (i = 0; uuids && uuids[i] != NULL; i++) {
 		if (g_str_equal (uuids[i], "OBEXObjectPush")) {
 			gtk_widget_show (WID ("send_button"));
