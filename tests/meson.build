@@ -1,4 +1,4 @@
-if enable_gir
+if enable_gir and has_dbusmock
   integration_test = find_program('integration-test.py')
 
   envs = environment()
@@ -7,12 +7,21 @@ if enable_gir
 
   test_deps = [ gnomebt_priv_gir, ]
 
-  test('gnome-bluetooth-integration-test',
-    integration_test,
-    args: [ 'Tests' ],
-    env: envs,
-    depends: test_deps
-  )
+  python3 = find_program('python3')
+  unittest_inspector = find_program('unittest_inspector.py')
+  r = run_command(unittest_inspector, files('integration-test.py'))
+  unit_tests = r.stdout().strip().split('\n')
+
+  foreach ut: unit_tests
+    ut_args = files('integration-test.py')
+    ut_args += ut
+    test(ut,
+      python3,
+      args: ut_args,
+      env: envs,
+      depends: test_deps
+    )
+  endforeach
 endif
 
 test_bluetooth_device = executable('test-bluetooth-device',
