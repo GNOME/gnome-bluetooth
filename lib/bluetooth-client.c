@@ -1045,6 +1045,10 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 	 *
 	 * The #BluetoothClient::device-removed signal is launched when a
 	 * device gets removed from the model.
+	 *
+	 * Note that #BluetoothClient::device-removed will not be called
+	 * for each individual device as the model is cleared when the
+	 * #BluetoothClient:default-adapter property changes.
 	 **/
 	signals[DEVICE_REMOVED] =
 		g_signal_new ("device-removed",
