@@ -1,13 +1,15 @@
 private_headers = [
   'bluetooth-agent.h',
-  'bluetooth-chooser-private.h',
   'bluetooth-client-glue.h',
   'bluetooth-client-private.h',
   'bluetooth-fdo-glue.h',
+  'bluetooth-pairing-dialog.h',
   'bluetooth-settings-obexpush.h',
+  'bluetooth-settings-resources.h',
   'bluetooth-settings-row.h',
+  'bluetooth-settings-widget.h',
   'gnome-bluetooth-enum-types.h',
-  'bluetooth-hdy-column.h',
+  'pin.h'
 ]
 
 version_conf = configuration_data()
