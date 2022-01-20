@@ -276,7 +276,7 @@ bluetooth_appearance_to_type (guint16 appearance)
 
 /*
  * The profile UUID list is provided by the Bluetooth SIG:
- * https://www.bluetooth.com/specifications/assigned-numbers/service-discovery
+ * https://www.bluetooth.com/specifications/assigned-numbers/
  */
 #define BLUETOOTH_UUID_SPP		0x1101
 #define BLUETOOTH_UUID_DUN		0x1103
@@ -318,8 +318,8 @@ uuid16_custom_to_string (guint uuid16, const char *uuid)
 	}
 }
 
-/* Short names from Table 2 at:
- * https://www.bluetooth.org/Technical/AssignedNumbers/service_discovery.htm */
+/* From "16-bit UUID Numbers Document" listed at:
+ * https://www.bluetooth.com/specifications/assigned-numbers/ */
 static const char *
 uuid16_to_string (guint uuid16, const char *uuid)
 {
