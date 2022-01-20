@@ -52,6 +52,4 @@ gboolean bluetooth_client_cancel_setup_device_finish (BluetoothClient *client,
 gboolean bluetooth_client_set_trusted(BluetoothClient *client,
 					const char *device, gboolean trusted);
 
-gboolean bluetooth_client_get_connectable(const char **uuids);
-
 GDBusProxy *_bluetooth_client_get_default_adapter (BluetoothClient *client);
