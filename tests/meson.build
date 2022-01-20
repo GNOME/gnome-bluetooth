@@ -1,5 +1,5 @@
 if enable_gir
-  integration_test = find_program('integration-test')
+  integration_test = find_program('integration-test.py')
 
   envs = environment()
   envs.set ('top_builddir', meson.build_root())
