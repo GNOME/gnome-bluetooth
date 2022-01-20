@@ -35,18 +35,18 @@ except ImportError as e:
     sys.stderr.write('Skipping tests, PyGobject not available for Python 3, or missing GI typelibs: %s\n' % str(e))
     sys.exit(77)
 
-try:
-    gi.require_version('GIRepository', '2.0')
-    from gi.repository import GIRepository
-    builddir = os.getenv('top_builddir', '.')
-    GIRepository.Repository.prepend_library_path(builddir + '/lib/')
-    GIRepository.Repository.prepend_search_path(builddir + '/lib/')
+gi.require_version('GIRepository', '2.0')
+from gi.repository import GIRepository
+builddir = os.getenv('top_builddir', '.')
+GIRepository.Repository.prepend_library_path(builddir + '/lib/')
+GIRepository.Repository.prepend_search_path(builddir + '/lib/')
 
+GNOME_BLUETOOTH_PRIV_UNAVAILABLE = False
+try:
     gi.require_version('GnomeBluetoothPriv', '3.0')
     from gi.repository import GnomeBluetoothPriv
-except ImportError as e:
-    sys.stderr.write('Could not find GnomeBluetoothPriv gobject-introspection data in the build dir: %s\n' % str(e))
-    sys.exit(1)
+except (ImportError, ValueError) as e:
+    GNOME_BLUETOOTH_PRIV_UNAVAILABLE = True
 
 try:
     import dbusmock
@@ -58,6 +58,10 @@ except ImportError:
 class OopTests(dbusmock.DBusTestCase):
     @classmethod
     def setUp(self):
+        if GNOME_BLUETOOTH_PRIV_UNAVAILABLE:
+            sys.stderr.write('Could not find GnomeBluetoothPriv gobject-introspection data in the build dir: %s\n' % str(e))
+            sys.exit(1)
+
         self.client = GnomeBluetoothPriv.Client.new()
         # used in test_pairing
         self.paired = False
