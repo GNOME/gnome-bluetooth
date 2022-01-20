@@ -362,7 +362,6 @@ uuid16_to_string (guint uuid16, const char *uuid)
 	case BLUETOOTH_UUID_HFP_AG:
 		return "HandsfreeAudioGateway";
 	case BLUETOOTH_UUID_HID:
-	case 0x1812:
 		return "HumanInterfaceDeviceService";
 	case BLUETOOTH_UUID_SAP:
 		return "SIM_Access";
@@ -383,6 +382,10 @@ uuid16_to_string (guint uuid16, const char *uuid)
 		return "SEMC HLA";
 	case 0x8e771401:
 		return "SEMC Watch Phone";
+	case BLUETOOTH_LE_UUID_BATTERY:
+		return "Battery";
+	case BLUETOOTH_LE_UUID_HUMAN_INTERFACE_DEVICE:
+		return "Human Interface Device";
 	default:
 		g_debug ("Unhandled UUID %s (0x%x)", uuid, uuid16);
 		return NULL;

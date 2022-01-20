@@ -790,7 +790,8 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 		return;
 	}
 
-	if (g_strcmp0 (bluetooth_uuid_to_string (uuid), "HumanInterfaceDeviceService") != 0) {
+	if (g_strcmp0 (bluetooth_uuid_to_string (uuid), "HumanInterfaceDeviceService") != 0 &&
+	    g_strcmp0 (bluetooth_uuid_to_string (uuid), "Human Interface Device") != 0) {
 		g_autofree char *msg = NULL;
 		msg = g_strdup_printf ("Rejecting service auth (%s) for %s: not HID",
 				       uuid, g_dbus_proxy_get_object_path (device));

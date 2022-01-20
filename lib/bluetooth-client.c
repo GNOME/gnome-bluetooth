@@ -92,6 +92,7 @@ static const char *connectable_uuids[] = {
 	"Handsfree",
 	"HandsfreeAudioGateway",
 	"HumanInterfaceDeviceService",
+	"Human Interface Device",
 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
