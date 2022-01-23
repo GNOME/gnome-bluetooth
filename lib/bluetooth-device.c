@@ -7,6 +7,7 @@
 #include "config.h"
 
 #include <glib-object.h>
+#include <libupower-glib/upower.h>
 
 #include "bluetooth-device.h"
 #include "bluetooth-utils.h"
@@ -25,6 +26,9 @@ enum {
 	PROP_LEGACYPAIRING,
 	PROP_UUIDS,
 	PROP_CONNECTABLE,
+	PROP_BATTERY_TYPE,
+	PROP_BATTERY_PERCENTAGE,
+	PROP_BATTERY_LEVEL
 };
 
 struct _BluetoothDevice {
@@ -42,6 +46,9 @@ struct _BluetoothDevice {
 	gboolean legacy_pairing;
 	char **uuids;
 	gboolean connectable;
+	BluetoothBatteryType battery_type;
+	double battery_percentage;
+	UpDeviceLevel battery_level;
 };
 
 static const char *connectable_uuids[] = {
@@ -126,6 +133,15 @@ bluetooth_device_get_property (GObject        *object,
 	case PROP_CONNECTABLE:
 		g_value_set_boolean (value, device->connectable);
 		break;
+	case PROP_BATTERY_TYPE:
+		g_value_set_enum (value, device->battery_type);
+		break;
+	case PROP_BATTERY_PERCENTAGE:
+		g_value_set_double (value, device->battery_percentage);
+		break;
+	case PROP_BATTERY_LEVEL:
+		g_value_set_uint (value, device->battery_level);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
@@ -180,6 +196,15 @@ bluetooth_device_set_property (GObject        *object,
 		g_clear_pointer (&device->uuids, g_strfreev);
 		device->uuids = g_value_dup_boxed (value);
 		update_connectable (device);
+		break;
+	case PROP_BATTERY_TYPE:
+		device->battery_type = g_value_get_enum (value);
+		break;
+	case PROP_BATTERY_PERCENTAGE:
+		device->battery_percentage = g_value_get_double (value);
+		break;
+	case PROP_BATTERY_LEVEL:
+		device->battery_level = g_value_get_uint (value);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -245,6 +270,16 @@ static void bluetooth_device_class_init(BluetoothDeviceClass *klass)
 	g_object_class_install_property (object_class, PROP_CONNECTABLE,
 					 g_param_spec_boolean ("connectable", NULL, "Connectable",
 							       FALSE, G_PARAM_READABLE));
+	g_object_class_install_property (object_class, PROP_BATTERY_TYPE,
+					 g_param_spec_enum ("battery-type", NULL, "Battery Type",
+							    BLUETOOTH_TYPE_BATTERY_TYPE, BLUETOOTH_BATTERY_TYPE_NONE, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_BATTERY_PERCENTAGE,
+					 g_param_spec_double ("battery-percentage", NULL, "Battery Percentage",
+							    0.0, 100.f, 0.0, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_BATTERY_LEVEL,
+					 g_param_spec_uint ("battery-level", NULL, "Battery Level",
+							    UP_DEVICE_LEVEL_UNKNOWN, UP_DEVICE_LEVEL_LAST - 1, UP_DEVICE_LEVEL_UNKNOWN,
+							    G_PARAM_READWRITE));
 }
 
 static void
@@ -277,6 +312,10 @@ bluetooth_device_to_string (BluetoothDevice *device)
 	g_string_append_printf (str, "\tD-Bus Path: %s\n", device->proxy ? g_dbus_proxy_get_object_path (device->proxy) : "(none)");
 	g_string_append_printf (str, "\tType: %s Icon: %s\n", bluetooth_type_to_string (device->type), device->icon);
 	g_string_append_printf (str, "\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(device->paired), BOOL_STR(device->trusted), BOOL_STR(device->connected));
+	if (device->battery_type == BLUETOOTH_BATTERY_TYPE_PERCENTAGE)
+		g_string_append_printf (str, "\tBattery: %.02g%%\n", device->battery_percentage);
+	else if (device->battery_type == BLUETOOTH_BATTERY_TYPE_COARSE)
+		g_string_append_printf (str, "\tBattery: %s\n", up_device_level_to_string (device->battery_level));
 	if (device->uuids != NULL) {
 		guint i;
 		g_string_append_printf (str, "\tUUIDs: ");

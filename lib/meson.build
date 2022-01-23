@@ -66,6 +66,7 @@ private_deps = [
   gio_unix_dep,
   libudev_dep,
   m_dep,
+  upower_dep,
 ]
 
 ui_deps = [
@@ -79,6 +80,7 @@ ui_private_deps = [
   gsound_dep,
   libnotify_dep,
   libudev_dep,
+  upower_dep,
   m_dep,
 ]
 

@@ -107,6 +107,7 @@ libadwaita_dep = dependency(
 )
 libnotify_dep = dependency('libnotify', version: '>= 0.7.0')
 libudev_dep = dependency('libudev')
+upower_dep = dependency('upower-glib')
 
 m_dep = cc.find_library('m')
 
