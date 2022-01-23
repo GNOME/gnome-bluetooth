@@ -98,3 +98,17 @@ typedef enum {
  * Use this value to select any Bluetooth audio device where a #BluetoothType enum is required.
  */
 #define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO | BLUETOOTH_TYPE_SPEAKERS)
+
+/**
+ * BluetoothBatteryType:
+ * @BLUETOOTH_BATTERY_TYPE_NONE: no battery reporting
+ * @BLUETOOTH_BATTERY_TYPE_PERCENTAGE: battery reported in percentage
+ * @BLUETOOTH_BATTERY_TYPE_COARSE: battery reported coarsely
+ *
+ * The type of battery reporting supported by the device.
+ **/
+typedef enum {
+	BLUETOOTH_BATTERY_TYPE_NONE,
+	BLUETOOTH_BATTERY_TYPE_PERCENTAGE,
+	BLUETOOTH_BATTERY_TYPE_COARSE
+} BluetoothBatteryType;
