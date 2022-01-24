@@ -798,14 +798,13 @@ object_manager_new_callback(GObject      *source_object,
 	GDBusObjectManager *manager;
 	g_autolist(GDBusObject) object_list = NULL;
 	g_autolist(GDBusProxy) adapter_list = NULL;
+	g_autoptr(GError) error = NULL;
 	GList *l;
-	GError *error = NULL;
 
 	manager = g_dbus_object_manager_client_new_for_bus_finish (res, &error);
 	if (!manager) {
 		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
 			g_warning ("Could not create bluez object manager: %s", error->message);
-		g_error_free (error);
 		return;
 	}
 
