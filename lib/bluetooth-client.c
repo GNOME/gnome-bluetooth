@@ -39,6 +39,7 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <gio/gio.h>
+#include <libupower-glib/upower.h>
 
 #include "bluetooth-client.h"
 #include "bluetooth-client-private.h"
@@ -62,6 +63,7 @@ struct _BluetoothClient {
 	GCancellable *cancellable;
 	guint num_adapters;
 	gboolean discovery_started;
+	UpClient *up_client;
 };
 
 enum {
@@ -828,6 +830,185 @@ object_manager_new_callback(GObject      *source_object,
 		adapter_added (client->manager, l->data, client);
 }
 
+static void
+device_set_up_device (BluetoothDevice *device,
+		      UpDevice        *up_device)
+{
+	g_object_set_data_full (G_OBJECT (device), "up-device", up_device ? g_object_ref (up_device) : NULL, g_object_unref);
+}
+
+static UpDevice *
+device_get_up_device (BluetoothDevice *device)
+{
+	return g_object_get_data (G_OBJECT (device), "up-device");
+}
+
+static void
+up_device_notify_cb (GObject    *gobject,
+		     GParamSpec *pspec,
+		     gpointer    user_data)
+{
+	UpDevice *up_device = UP_DEVICE (gobject);
+	BluetoothDevice *device = user_data;
+	UpDeviceLevel battery_level;
+	double percentage;
+	BluetoothBatteryType battery_type;
+
+	g_object_get (up_device,
+		      "battery-level", &battery_level,
+		      "percentage", &percentage,
+		      NULL);
+
+	if (battery_level == UP_DEVICE_LEVEL_NONE)
+		battery_type = BLUETOOTH_BATTERY_TYPE_PERCENTAGE;
+	else
+		battery_type = BLUETOOTH_BATTERY_TYPE_COARSE;
+	g_debug ("Updating battery information for %s", bluetooth_device_get_object_path (device));
+	g_object_set (device,
+		      "battery-type", battery_type,
+		      "battery-level", battery_level,
+		      "battery-percentage", percentage,
+		      NULL);
+}
+
+static BluetoothDevice *
+get_bluetooth_device_for_up_device (BluetoothClient *client,
+				    const char      *path)
+{
+	guint n_items, i;
+
+	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+	for (i = 0; i < n_items; i++) {
+		g_autoptr(BluetoothDevice) d = NULL;
+		UpDevice *up_device;
+
+		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+		up_device = device_get_up_device (d);
+		if (!up_device)
+			continue;
+		if (g_str_equal (path, up_device_get_object_path (up_device)))
+			return g_steal_pointer (&d);
+	}
+	return NULL;
+}
+
+static void
+up_device_removed_cb (UpClient   *up_client,
+		      const char *object_path,
+		      gpointer    user_data)
+{
+	BluetoothClient *client = user_data;
+	BluetoothDevice *device;
+
+	device = get_bluetooth_device_for_up_device (client, object_path);
+	if (device == NULL)
+		return;
+	g_debug ("Removing UpDevice %s for BluetoothDevice %s",
+		 object_path, bluetooth_device_get_object_path (device));
+	device_set_up_device (device, NULL);
+	g_object_set (device,
+		      "battery-type", BLUETOOTH_BATTERY_TYPE_NONE,
+		      "battery-level", UP_DEVICE_LEVEL_UNKNOWN,
+		      "battery-percentage", 0.0f,
+		      NULL);
+}
+
+static void
+up_device_added_cb (UpClient *up_client,
+		    UpDevice *up_device,
+		    gpointer  user_data)
+{
+	BluetoothClient *client = user_data;
+	g_autofree char *native_path = NULL;
+	g_autoptr(BluetoothDevice) device = NULL;
+	UpDeviceLevel battery_level;
+	double percentage;
+	BluetoothBatteryType battery_type;
+
+	g_debug ("Considering UPower device %s", up_device_get_object_path (up_device));
+
+	g_object_get (up_device,
+		      "native-path", &native_path,
+		      "battery-level", &battery_level,
+		      "percentage", &percentage,
+		      NULL);
+
+	if (!native_path || !g_str_has_prefix (native_path, "/org/bluez/"))
+		return;
+	device = get_device_for_path (client, native_path);
+	if (!device) {
+		g_debug ("Could not find bluez device for upower device %s", native_path);
+		return;
+	}
+	g_signal_connect (G_OBJECT (up_device), "notify::battery-level",
+			  G_CALLBACK (up_device_notify_cb), device);
+	g_signal_connect (G_OBJECT (up_device), "notify::percentage",
+			  G_CALLBACK (up_device_notify_cb), device);
+	device_set_up_device (device, up_device);
+	if (battery_level == UP_DEVICE_LEVEL_NONE)
+		battery_type = BLUETOOTH_BATTERY_TYPE_PERCENTAGE;
+	else
+		battery_type = BLUETOOTH_BATTERY_TYPE_COARSE;
+	g_debug ("Applying battery information for %s", native_path);
+	g_object_set (device,
+		      "battery-type", battery_type,
+		      "battery-level", battery_level,
+		      "battery-percentage", percentage,
+		      NULL);
+}
+
+static void
+up_client_get_devices_cb (GObject      *source_object,
+			  GAsyncResult *res,
+			  gpointer      user_data)
+{
+	GPtrArray *devices;
+	g_autoptr(GError) error = NULL;
+	BluetoothClient *client;
+	guint i;
+
+	devices = up_client_get_devices_finish (UP_CLIENT (source_object), res, &error);
+	if (!devices) {
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+			g_debug ("Could not get UPower devices: %s", error->message);
+		return;
+	}
+	g_debug ("Got initial list of %d UPower devices", devices->len);
+	client = user_data;
+	for (i = 0; i < devices->len; i++) {
+		UpDevice *device = g_ptr_array_index (devices, i);
+		up_device_added_cb (client->up_client, device, client);
+	}
+	g_ptr_array_unref (devices);
+}
+
+static void
+up_client_new_cb (GObject      *source_object,
+		  GAsyncResult *res,
+		  gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	BluetoothClient *client;
+	UpClient *up_client;
+
+	up_client = up_client_new_finish (res, &error);
+	if (!up_client) {
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+			g_debug ("Could not create UpClient: %s", error->message);
+		return;
+	}
+
+	g_debug ("Successfully created UpClient");
+	client = user_data;
+	client->up_client = up_client;
+	g_signal_connect (G_OBJECT (up_client), "device-added",
+			  G_CALLBACK (up_device_added_cb), client);
+	g_signal_connect (G_OBJECT (up_client), "device-removed",
+			  G_CALLBACK (up_device_removed_cb), client);
+	up_client_get_devices_async (up_client, client->cancellable,
+				     up_client_get_devices_cb, client);
+}
+
 static void bluetooth_client_init(BluetoothClient *client)
 {
 	client->cancellable = g_cancellable_new ();
@@ -841,6 +1022,9 @@ static void bluetooth_client_init(BluetoothClient *client)
 						  NULL, NULL,
 						  client->cancellable,
 						  object_manager_new_callback, client);
+	up_client_new_async (client->cancellable,
+			     up_client_new_cb,
+			     client);
 }
 
 GDBusProxy *
@@ -1008,6 +1192,7 @@ static void bluetooth_client_finalize(GObject *object)
 	g_object_unref (client->list_store);
 
 	g_clear_object (&client->default_adapter);
+	g_clear_object (&client->up_client);
 
 	G_OBJECT_CLASS(bluetooth_client_parent_class)->finalize (object);
 }
