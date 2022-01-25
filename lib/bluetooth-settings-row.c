@@ -20,6 +20,7 @@
 
 #include "config.h"
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 
 #include <glib/gi18n-lib.h>
@@ -30,10 +31,9 @@
 #include "gnome-bluetooth-enum-types.h"
 
 struct _BluetoothSettingsRow {
-	GtkListBoxRow parent_instance;
+	AdwActionRow parent_instance;
 
 	/* Widget */
-	GtkWidget *label;
 	GtkWidget *status;
 	GtkWidget *spinner;
 
@@ -69,7 +69,7 @@ enum {
 	PROP_TIME_CREATED
 };
 
-G_DEFINE_TYPE(BluetoothSettingsRow, bluetooth_settings_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE(BluetoothSettingsRow, bluetooth_settings_row, ADW_TYPE_ACTION_ROW)
 
 static void
 label_might_change (BluetoothSettingsRow *self)
@@ -170,11 +170,11 @@ static void
 update_row (BluetoothSettingsRow *self)
 {
 	if (self->name == NULL) {
-		gtk_label_set_text (GTK_LABEL (self->label),
+		adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
 				    bluetooth_type_to_string (self->type));
 		gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
 	} else {
-		gtk_label_set_text (GTK_LABEL (self->label), self->alias);
+		adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), self->alias);
 		gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 	}
 }
@@ -302,7 +302,6 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 
 	/* Bind class to template */
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/bluetooth/bluetooth-settings-row.ui");
-	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, label);
 	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, spinner);
 	gtk_widget_class_bind_template_child (widget_class, BluetoothSettingsRow, status);
 }

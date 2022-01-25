@@ -20,10 +20,11 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include "bluetooth-device.h"
 
 #define BLUETOOTH_TYPE_SETTINGS_ROW (bluetooth_settings_row_get_type())
-G_DECLARE_FINAL_TYPE (BluetoothSettingsRow, bluetooth_settings_row, BLUETOOTH, SETTINGS_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (BluetoothSettingsRow, bluetooth_settings_row, BLUETOOTH, SETTINGS_ROW, AdwActionRow)
 
 GtkWidget *bluetooth_settings_row_new_from_device (BluetoothDevice *device);
