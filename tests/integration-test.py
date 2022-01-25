@@ -436,6 +436,23 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(device.props.alias, 'My other device')
         self.assertEqual(device.props.connectable, False)
 
+    def test_battery(self):
+        # Make a new client that tries to connect to UPower
+        client = GnomeBluetoothPriv.Client.new()
+
+        self.wait_for_mainloop()
+        list_store = client.get_devices()
+        self.assertEqual(list_store.get_n_items(), 2)
+
+        device = list_store.get_item(0)
+        self.assertEqual(int(device.props.battery_type), int(GnomeBluetoothPriv.BatteryType.PERCENTAGE))
+        self.assertEqual(device.props.battery_percentage, 66)
+
+        device = list_store.get_item(1)
+        self.assertEqual(int(device.props.battery_type), int(GnomeBluetoothPriv.BatteryType.COARSE))
+        self.assertEqual(device.props.battery_percentage, 55)
+        self.assertEqual(device.props.battery_level, 6)
+
 class Tests(dbusmock.DBusTestCase):
 
     @classmethod
@@ -549,6 +566,64 @@ class Tests(dbusmock.DBusTestCase):
         path = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:67', 'My other device')
 
         self.run_test_process()
+
+    def test_battery(self):
+        (p_mock, obj_upower) = self.spawn_server_template(
+            'upower', {})
+        mock = dbus.Interface(obj_upower, dbusmock.MOCK_IFACE)
+
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+
+        # Bluetooth LE device, with Battery info from bluez
+        device = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'LE Mouse')
+        device_obj = self.dbus_con.get_object('org.bluez', device)
+        device_obj.AddProperties('org.bluez.Battery1', {
+                'Percentage': dbus.Byte(56, variant_level=1),
+        })
+        device_obj.UpdateProperties('org.bluez.Device1', {
+                'Connected': True,
+        })
+        mock.AddObject('/org/freedesktop/UPower/devices/mouse_dev_11_22_33_44_55_66',
+                   'org.freedesktop.UPower.Device',
+                   {
+                       'NativePath': dbus.String('/org/bluez/hci0/dev_11_22_33_44_55_66'),
+                       'Type': dbus.UInt32(5, variant_level=1),
+                       'State': dbus.UInt32(2, variant_level=1),
+                       'Percentage': dbus.Double(66, variant_level=1),
+                       'BatteryLevel': dbus.UInt32(1, variant_level=1),
+                       'IsPresent': dbus.Boolean(True, variant_level=1),
+                       'IconName': dbus.String('', variant_level=1),
+                       # LEVEL_NONE
+                       'WarningLevel': dbus.UInt32(1, variant_level=1),
+                   },
+                   [])
+
+
+        # Bluetooth Classic device, with coarse kernel battery reporting
+        device = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:67', 'Classic Mouse')
+        device_obj = self.dbus_con.get_object('org.bluez', device)
+        device_obj.UpdateProperties('org.bluez.Device1', {
+                'Connected': True,
+        })
+        mock.AddObject('/org/freedesktop/UPower/devices/mouse_dev_11_22_33_44_55_67',
+                   'org.freedesktop.UPower.Device',
+                   {
+                       'NativePath': dbus.String('/org/bluez/hci0/dev_11_22_33_44_55_67'),
+                       'Type': dbus.UInt32(5, variant_level=1),
+                       'State': dbus.UInt32(2, variant_level=1),
+                       'Percentage': dbus.Double(55, variant_level=1),
+                       'BatteryLevel': dbus.UInt32(6, variant_level=1),
+                       'IsPresent': dbus.Boolean(True, variant_level=1),
+                       'IconName': dbus.String('', variant_level=1),
+                       # LEVEL_NONE
+                       'WarningLevel': dbus.UInt32(1, variant_level=1),
+                   },
+                   [])
+
+        self.run_test_process()
+
+        p_mock.terminate()
+        p_mock.wait()
 
 if __name__ == '__main__':
     unittest.main()
