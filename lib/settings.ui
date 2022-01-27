@@ -182,60 +182,41 @@
     </child>
     <child>
       <object class="AdwPreferencesGroup" id="devices_group">
+        <property name="title" translatable="yes">Devices</property>
+        <property name="header-suffix">
+          <object class="GtkSpinner" id="device_spinner"/>
+        </property>
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="spacing">12</property>
+          <object class="GtkStack" id="device_stack">
+            <property name="hhomogeneous">False</property>
+            <property name="vhomogeneous">False</property>
             <child>
-              <object class="GtkBox">
-                <child>
-                  <object class="GtkLabel" id="device_label">
-                    <property name="xalign">0</property>
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Devices</property>
+              <object class="GtkStackPage">
+                <property name="name">devices-page</property>
+                <property name="child">
+                  <object class="GtkListBox" id="device_list">
+                    <property name="selection-mode">none</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Devices</property>
+                    </accessibility>
                     <style>
-                      <class name="heading"/>
+                      <class name="boxed-list"/>
                     </style>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkSpinner" id="device_spinner"/>
-                </child>
+                </property>
               </object>
             </child>
             <child>
-              <object class="GtkStack" id="device_stack">
-                <property name="hhomogeneous">False</property>
-                <property name="vhomogeneous">False</property>
-                <child>
-                  <object class="GtkStackPage">
-                    <property name="name">filler-page</property>
-                    <property name="child">
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Searching for devices…</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                    </property>
+              <object class="GtkStackPage">
+                <property name="name">filler-page</property>
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Searching for devices…</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkStackPage">
-                    <property name="name">devices-page</property>
-                    <property name="child">
-                      <object class="GtkListBox" id="device_list">
-                        <property name="selection-mode">none</property>
-                        <accessibility>
-                          <relation name="labelled-by">device_label</relation>
-                        </accessibility>
-                        <style>
-                          <class name="boxed-list"/>
-                        </style>
-                      </object>
-                    </property>
-                  </object>
-                </child>
+                </property>
               </object>
             </child>
           </object>
