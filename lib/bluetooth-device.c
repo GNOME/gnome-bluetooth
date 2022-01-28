@@ -123,6 +123,9 @@ bluetooth_device_get_property (GObject        *object,
 	case PROP_UUIDS:
 		g_value_set_boxed (value, device->uuids);
 		break;
+	case PROP_CONNECTABLE:
+		g_value_set_boolean (value, device->connectable);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
