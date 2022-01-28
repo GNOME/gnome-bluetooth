@@ -421,6 +421,20 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_mainloop()
         self.assertEqual(self.client.has_connected_input_devices(), False)
 
+    def test_connectable_devices(self):
+        client = GnomeBluetoothPriv.Client.new()
+
+        self.wait_for_mainloop()
+        list_store = client.get_devices()
+        self.assertEqual(list_store.get_n_items(), 2)
+
+        device = list_store.get_item(0)
+        self.assertEqual(device.props.alias, 'My Mouse')
+        self.assertEqual(device.props.connectable, True)
+
+        device = list_store.get_item(1)
+        self.assertEqual(device.props.alias, 'My other device')
+        self.assertEqual(device.props.connectable, False)
 
 class Tests(dbusmock.DBusTestCase):
 
@@ -521,6 +535,19 @@ class Tests(dbusmock.DBusTestCase):
 
     def test_connected_input_devices(self):
         self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        self.run_test_process()
+
+    def test_connectable_devices(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        bus = dbus.SystemBus()
+
+        path = self.dbusmock_bluez.AddDevice('hci0', '22:33:44:55:66:77', 'My Mouse')
+        dev = dbus.Interface(bus.get_object('org.bluez', path), 'org.freedesktop.DBus.Mock')
+        dev.UpdateProperties('org.bluez.Device1',
+                {'UUIDs': dbus.Array(['00001812-0000-1000-8000-00805f9b34fb'], variant_level=1)})
+
+        path = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:67', 'My other device')
+
         self.run_test_process()
 
 if __name__ == '__main__':
