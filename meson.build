@@ -3,7 +3,7 @@ project(
   version: '42.alpha.2',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
-  meson_version: '>= 0.53.0',
+  meson_version: '>= 0.58.0',
 )
 
 gnomebt_version = meson.project_version()
@@ -151,7 +151,7 @@ summary({'Documentation': enable_gtk_doc,
         section: 'General')
 
 meson.add_dist_script(
-  find_program('check-news.sh').path(),
+  find_program('check-news.sh').full_path(),
   '@0@'.format(meson.project_version()),
   'NEWS',
 )
