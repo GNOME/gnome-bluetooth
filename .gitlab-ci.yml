@@ -25,6 +25,8 @@ variables:
   LAST_ABI_BREAK: "cbc08c4f293664e681b1646e794e7cf62782c6cc"
 
 build_stable:
+  tags:
+    - crun
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
