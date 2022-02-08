@@ -500,7 +500,6 @@ adapter_notify_cb (Adapter1       *adapter,
 	g_debug ("Property '%s' changed on default adapter '%s'", property, adapter_path);
 
 	if (g_strcmp0 (property, "alias") == 0) {
-		g_object_notify (G_OBJECT (client), "default-adapter-powered");
 		g_object_notify (G_OBJECT (client), "default-adapter-name");
 	} else if (g_strcmp0 (property, "discovering") == 0) {
 		g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
