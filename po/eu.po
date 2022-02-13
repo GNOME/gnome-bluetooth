@@ -5,13 +5,13 @@
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2009, 2010, 2011.
 # Julen Ruiz Aizpuru <julenx@gmail.com>, 2011.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013, 2014, 2015, 2017.
-# Asier Sarasua Garmendia <asier.sarasua@gmail.com>, 2019.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2022.
 #
 msgid ""
 msgstr "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2020-06-25 07:23+0000\n"
-"PO-Revision-Date: 2019-07-21 17:00+0100\n"
+"POT-Creation-Date: 2021-11-10 14:34+0000\n"
+"PO-Revision-Date: 2022-02-13 17:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -19,97 +19,6 @@ msgstr "Project-Id-Version: gnome-bluetooth master\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: lib/bluetooth-chooser-button.c:71
-msgid "Click to select device…"
-msgstr "Egin klik gailua hautatzeko…"
-
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
-#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
-msgid "_Cancel"
-msgstr "_Utzi"
-
-#: lib/bluetooth-chooser-button.c:202
-msgid "_OK"
-msgstr "_Ados"
-
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
-#: lib/bluetooth-utils.c:99
-msgid "Unknown"
-msgstr "Ezezaguna"
-
-#: lib/bluetooth-chooser.c:176
-msgid "No adapters available"
-msgstr "Ez dago moldagailurik erabilgarri"
-
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1561
-msgid "Searching for devices…"
-msgstr "Gailuak bilatzen…"
-
-#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
-msgid "Device"
-msgstr "Gailua"
-
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
-msgid "Type"
-msgstr "Mota"
-
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
-msgid "Devices"
-msgstr "Gailuak"
-
-#: lib/bluetooth-filter-widget.c:72
-msgid "All categories"
-msgstr "Kategoria guztiak"
-
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
-msgid "Paired"
-msgstr "Parekatua"
-
-#: lib/bluetooth-filter-widget.c:76
-msgid "Trusted"
-msgstr "Fidatua"
-
-#: lib/bluetooth-filter-widget.c:78
-msgid "Not paired or trusted"
-msgstr "Parekatu edo fidatu gabea"
-
-#: lib/bluetooth-filter-widget.c:80
-msgid "Paired or trusted"
-msgstr "Parekatuta edo fidatuta"
-
-#. This is the title of the filter section of the Bluetooth device chooser.
-#. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:231
-msgid "Show:"
-msgstr "Erakutsi:"
-
-#. The device category filter
-#: lib/bluetooth-filter-widget.c:247
-msgid "Device _category:"
-msgstr "Gailuaren _kategoria:"
-
-#: lib/bluetooth-filter-widget.c:258
-msgid "Select the device category to filter"
-msgstr "Hautatu gailuaren kategoria iragazteko"
-
-#. The device type filter
-#: lib/bluetooth-filter-widget.c:272
-msgid "Device _type:"
-msgstr "Gailu _mota:"
-
-#: lib/bluetooth-filter-widget.c:289
-msgid "Select the device type to filter"
-msgstr "Hautatu gailu mota iragazteko"
-
-#: lib/bluetooth-filter-widget.c:295
-msgid "Input devices (mice, keyboards, etc.)"
-msgstr "Sarrerako gailuak (sagua, teklatua, e.a…)"
-
-#: lib/bluetooth-filter-widget.c:299
-msgid "Headphones, headsets and other audio devices"
-msgstr "Entzungailuak, entzungailuak mikrofonoarekin eta bestelako audioko gailuak"
 
 #: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
 #: lib/bluetooth-pairing-dialog.c:104
@@ -188,87 +97,99 @@ msgid "Dismiss"
 msgstr "Baztertu"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Utzi"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:287 lib/bluetooth-settings-obexpush.c:247
+#: lib/bluetooth-pairing-dialog.c:286 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Onartu"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:34
 msgid "Not Set Up"
 msgstr "Ez konfiguratu"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:80
 msgid "Connected"
 msgstr "Konektatuta"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
 msgstr "Deskonektatuta"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "Yes"
 msgstr "Bai"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "No"
 msgstr "Ez"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1299
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr "“%s” gisa ikusgai eta Bluetooth bidezko fitxategi-transferentzientzako erabilgarri. Transferitutako fitxategiak honako karpetan kokatzen dira: <a href=\"%s\">Deskargak</a>."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1337
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Kendu “%s“ gailuen zerrendatik?"
 
-#: lib/bluetooth-settings-widget.c:1278
+#: lib/bluetooth-settings-widget.c:1339
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "Gailua ezabatzen baduzu, berriro konfiguratu beharko duzu hurrengoan erabili aurretik."
 
-#: lib/bluetooth-settings-widget.c:1282
+#: lib/bluetooth-settings-widget.c:1342 sendto/main.c:445 sendto/main.c:706
+msgid "_Cancel"
+msgstr "_Utzi"
+
+#: lib/bluetooth-settings-widget.c:1343
 msgid "_Remove"
 msgstr "_Kendu"
 
+#: lib/bluetooth-settings-widget.c:1561
+msgid "Devices"
+msgstr "Gailuak"
+
+#: lib/bluetooth-settings-widget.c:1605
+msgid "Searching for devices…"
+msgstr "Gailuak bilatzen…"
+
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:146
+#: lib/bluetooth-settings-obexpush.c:144
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "\"%s\" Bluetooth bidez jasota."
 
-#: lib/bluetooth-settings-obexpush.c:148
+#: lib/bluetooth-settings-obexpush.c:146
 msgid "You received a file"
 msgstr "Fitxategi bat jasota"
 
-#: lib/bluetooth-settings-obexpush.c:159
+#: lib/bluetooth-settings-obexpush.c:157
 msgid "Open File"
 msgstr "Ireki fitxategia"
 
-#: lib/bluetooth-settings-obexpush.c:163
+#: lib/bluetooth-settings-obexpush.c:161
 msgid "Open Containing Folder"
 msgstr "Ireki karpeta edukitzailea"
 
-#: lib/bluetooth-settings-obexpush.c:180
+#: lib/bluetooth-settings-obexpush.c:178
 msgid "File reception complete"
 msgstr "Fitxategi-harrera burutu da"
 
-#: lib/bluetooth-settings-obexpush.c:234
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Bluetooth-en fitxategi-transferentzia %s(e)ndik"
 
-#: lib/bluetooth-settings-obexpush.c:244
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "Ukatu"
 
@@ -349,35 +270,47 @@ msgstr "Jantzigarria"
 msgid "Toy"
 msgstr "Jostailua"
 
-#: lib/bluetooth-utils.c:117
-msgid "All types"
-msgstr "Mota guztiak"
+#: lib/bluetooth-utils.c:98
+msgid "Speakers"
+msgstr "Bozgorailuak"
 
-#: lib/settings.ui:44
+#: lib/bluetooth-utils.c:103
+msgid "Unknown"
+msgstr "Ezezaguna"
+
+#: lib/settings.ui:29
 msgid "Connection"
 msgstr "Konexioa"
 
-#: lib/settings.ui:229
+#: lib/settings.ui:71
+msgid "Paired"
+msgstr "Parekatua"
+
+#: lib/settings.ui:94
+msgid "Type"
+msgstr "Mota"
+
+#: lib/settings.ui:117
 msgid "Address"
 msgstr "Helbidea"
 
-#: lib/settings.ui:285
+#: lib/settings.ui:143
 msgid "_Mouse & Touchpad Settings"
 msgstr "_Saguaren eta ukipen-teklatuaren ezarpenak"
 
-#: lib/settings.ui:299
+#: lib/settings.ui:150
 msgid "_Sound Settings"
 msgstr "_Soinuaren ezarpenak"
 
-#: lib/settings.ui:313
+#: lib/settings.ui:157
 msgid "_Keyboard Settings"
 msgstr "_Teklatuaren ezarpenak"
 
-#: lib/settings.ui:327
+#: lib/settings.ui:164
 msgid "Send _Files…"
 msgstr "Bidali _fitxategiak…"
 
-#: lib/settings.ui:341
+#: lib/settings.ui:171
 msgid "_Remove Device"
 msgstr "_Kendu gailua"
 
@@ -389,134 +322,180 @@ msgstr "Bluetooth-en transferentzia"
 msgid "Send files via Bluetooth"
 msgstr "Fitxategiak Bluetooth bidez bidaltzea"
 
-#: sendto/main.c:117
+#: sendto/main.c:116
 msgid "An unknown error occurred"
 msgstr "Errore ezezaguna gertatu da"
 
-#: sendto/main.c:130
+#: sendto/main.c:129
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr "Ziurtatu zaitez urruneko gailua piztuta dagoela eta Bluetooth konexioak onartzen dituela"
 
-#: sendto/main.c:363
+#: sendto/main.c:362
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "segundo %'d"
 msgstr[1] "%'d segundo"
 
-#: sendto/main.c:368 sendto/main.c:381
+#: sendto/main.c:367 sendto/main.c:380
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "minutu %'d"
 msgstr[1] "%'d minutu"
 
-#: sendto/main.c:379
+#: sendto/main.c:378
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "ordu %'d"
 msgstr[1] "%'d ordu"
 
-#: sendto/main.c:389
+#: sendto/main.c:388
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "gutxi gorabehera ordu %'d"
 msgstr[1] "gutxi gorabehera %'d ordu"
 
-#: sendto/main.c:402 sendto/main.c:500
+#: sendto/main.c:401 sendto/main.c:497
 msgid "Connecting…"
 msgstr "Konektatzen..."
 
-#: sendto/main.c:444
+#: sendto/main.c:442
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth-en fitxategi-transferentzia"
 
-#: sendto/main.c:448
+#: sendto/main.c:446
 msgid "_Retry"
 msgstr "S_aiatu berriro"
 
-#: sendto/main.c:470
+#: sendto/main.c:463
 msgid "From:"
 msgstr "Nondik:"
 
-#: sendto/main.c:484
+#: sendto/main.c:479
 msgid "To:"
 msgstr "Hona:"
 
-#: sendto/main.c:577
+#: sendto/main.c:575
 #, c-format
 msgid "Sending %s"
 msgstr "%s bidaltzen"
 
-#: sendto/main.c:584 sendto/main.c:633
+#: sendto/main.c:582 sendto/main.c:631
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Fitxategia bidaltzen: %d / %d"
 
-#: sendto/main.c:629
+#: sendto/main.c:627
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: sendto/main.c:631
+#: sendto/main.c:629
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: sendto/main.c:662
+#: sendto/main.c:660
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "Transferentzia %u osatuta"
 msgstr[1] "%u transferentzia osatuta"
 
-#: sendto/main.c:669
+#: sendto/main.c:667
 msgid "_Close"
 msgstr "It_xi"
 
-#: sendto/main.c:679
+#: sendto/main.c:677
 msgid "There was an error"
 msgstr "Errore bat dago"
 
-#: sendto/main.c:734
-msgid "Select device to send to"
-msgstr "Hautatu gailua horra bidaltzeko"
-
-#: sendto/main.c:739
-msgid "_Send"
-msgstr "_Bidali"
-
-#: sendto/main.c:789
+#: sendto/main.c:701
 msgid "Choose files to send"
 msgstr "Aukeratu fitxategiak bidaltzeko"
 
-#: sendto/main.c:795
+#: sendto/main.c:707
 msgid "Select"
 msgstr "Hautatu"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "Remote device to use"
 msgstr "Urruneko gailua erabiltzeko"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "ADDRESS"
 msgstr "HELBIDEA"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "Remote device’s name"
 msgstr "Urruneko gailuaren izena"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "NAME"
 msgstr "IZENA"
 
-#: sendto/main.c:846
-msgid "[FILE…]"
-msgstr "[FITXATEGIA...]"
+#~ msgid "Click to select device…"
+#~ msgstr "Egin klik gailua hautatzeko…"
+
+#~ msgid "_OK"
+#~ msgstr "_Ados"
+
+#~ msgid "No adapters available"
+#~ msgstr "Ez dago moldagailurik erabilgarri"
+
+#~ msgid "Device"
+#~ msgstr "Gailua"
+
+#~ msgid "All categories"
+#~ msgstr "Kategoria guztiak"
+
+#~ msgid "Trusted"
+#~ msgstr "Fidatua"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "Parekatu edo fidatu gabea"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "Parekatuta edo fidatuta"
+
+#~ msgid "Show:"
+#~ msgstr "Erakutsi:"
+
+#~ msgid "Device _category:"
+#~ msgstr "Gailuaren _kategoria:"
+
+#~ msgid "Select the device category to filter"
+#~ msgstr "Hautatu gailuaren kategoria iragazteko"
+
+#~ msgid "Device _type:"
+#~ msgstr "Gailu _mota:"
+
+#~ msgid "Select the device type to filter"
+#~ msgstr "Hautatu gailu mota iragazteko"
+
+#~ msgid "Input devices (mice, keyboards, etc.)"
+#~ msgstr "Sarrerako gailuak (sagua, teklatua, e.a…)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr ""
+#~ "Entzungailuak, entzungailuak mikrofonoarekin eta bestelako audioko gailuak"
+
+#~ msgid "All types"
+#~ msgstr "Mota guztiak"
+
+#~ msgid "Select device to send to"
+#~ msgstr "Hautatu gailua horra bidaltzeko"
+
+#~ msgid "_Send"
+#~ msgstr "_Bidali"
+
+#~ msgid "[FILE…]"
+#~ msgstr "[FITXATEGIA...]"
 
 #~ msgid "Reveal File"
 #~ msgstr "Errebelatu fitxategia"
