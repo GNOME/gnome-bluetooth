@@ -1248,50 +1248,6 @@ name_changed (BluetoothClient  *client,
 	update_visibility (self);
 }
 
-static void
-confirm_dialog_response_cb (GtkDialog *dialog,
-			    gint       response,
-			    gpointer   user_data)
-{
-	GMainLoop *mainloop = g_object_get_data (G_OBJECT (dialog), "mainloop");
-	int *out_response = user_data;
-
-	*out_response = response;
-
-	g_main_loop_quit (mainloop);
-}
-
-static gboolean
-show_confirm_dialog (BluetoothSettingsWidget *self,
-		     const char *name)
-{
-	g_autoptr(GMainLoop) mainloop = NULL;
-	GtkWidget *dialog;
-	gint response;
-
-	dialog = gtk_message_dialog_new (GTK_WINDOW (self->properties_dialog), GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
-					 _("Remove “%s” from the list of devices?"), name);
-	g_object_set (G_OBJECT (dialog), "secondary-text",
-		      _("If you remove the device, you will have to set it up again before next use."),
-		      NULL);
-
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_ACCEPT);
-
-	mainloop = g_main_loop_new (NULL, FALSE);
-	g_object_set_data (G_OBJECT (dialog), "mainloop", mainloop);
-	g_signal_connect (dialog, "response", G_CALLBACK (confirm_dialog_response_cb), &response);
-
-	g_main_loop_run (mainloop);
-
-	gtk_window_destroy (GTK_WINDOW (dialog));
-
-	if (response == GTK_RESPONSE_ACCEPT)
-		return TRUE;
-
-	return FALSE;
-}
 
 static gboolean
 remove_selected_device (BluetoothSettingsWidget *self)
@@ -1331,13 +1287,47 @@ remove_selected_device (BluetoothSettingsWidget *self)
 }
 
 static void
-delete_clicked (GtkButton               *button,
-		BluetoothSettingsWidget *self)
+confirm_dialog_response_cb (GtkDialog *dialog,
+			    gint       response,
+			    gpointer   user_data)
 {
-	if (show_confirm_dialog (self, self->selected_name) != FALSE) {
+	BluetoothSettingsWidget *self = user_data;
+
+	if (response == GTK_RESPONSE_ACCEPT) {
 		remove_selected_device (self);
 		gtk_widget_hide (GTK_WIDGET (self->properties_dialog));
 	}
+
+	gtk_window_destroy (GTK_WINDOW (dialog));
+}
+
+static void
+show_confirm_dialog (BluetoothSettingsWidget *self,
+		     const char *name)
+{
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new (GTK_WINDOW (self->properties_dialog),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+					 _("Remove “%s” from the list of devices?"), name);
+	g_object_set (G_OBJECT (dialog), "secondary-text",
+		      _("If you remove the device, you will have to set it up again before next use."),
+		      NULL);
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_ACCEPT);
+
+	g_signal_connect (dialog, "response", G_CALLBACK (confirm_dialog_response_cb), self);
+
+	gtk_widget_show (dialog);
+}
+
+static void
+delete_clicked (GtkButton               *button,
+		BluetoothSettingsWidget *self)
+{
+	show_confirm_dialog (self, self->selected_name);
 }
 
 static void
