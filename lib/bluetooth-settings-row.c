@@ -81,10 +81,17 @@ label_might_change (BluetoothSettingsRow *self)
 	else
 		gtk_label_set_text (GTK_LABEL (self->status), _("Disconnected"));
 
-	if (self->pairing)
+	if (self->pairing) {
+		gtk_widget_hide (self->status);
+
+		gtk_spinner_start (GTK_SPINNER (self->spinner));
 		gtk_widget_show (self->spinner);
-	else
+	} else {
+		gtk_spinner_stop (GTK_SPINNER (self->spinner));
+		gtk_widget_hide (self->spinner);
+
 		gtk_widget_show (self->status);
+	}
 }
 
 static void
@@ -92,13 +99,9 @@ bluetooth_settings_row_init (BluetoothSettingsRow *self)
 {
 	gtk_widget_init_template (GTK_WIDGET (self));
 
-	/* Placeholder text and spinner */
-	g_object_bind_property (self->spinner, "visible",
-				self->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
-	g_object_bind_property (self->spinner, "spinning",
-				self->status, "visible", G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);
-
 	self->time_created = g_get_monotonic_time();
+
+	label_might_change (self);
 }
 
 static void
