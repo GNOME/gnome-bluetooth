@@ -1000,10 +1000,10 @@ up_client_new_cb (GObject      *source_object,
 	g_debug ("Successfully created UpClient");
 	client = user_data;
 	client->up_client = up_client;
-	g_signal_connect (G_OBJECT (up_client), "device-added",
-			  G_CALLBACK (up_device_added_cb), client);
-	g_signal_connect (G_OBJECT (up_client), "device-removed",
-			  G_CALLBACK (up_device_removed_cb), client);
+	g_signal_connect_object (G_OBJECT (up_client), "device-added",
+				 G_CALLBACK (up_device_added_cb), client, 0);
+	g_signal_connect_object (G_OBJECT (up_client), "device-removed",
+				 G_CALLBACK (up_device_removed_cb), client, 0);
 	up_client_get_devices_async (up_client, client->cancellable,
 				     up_client_get_devices_cb, client);
 }
