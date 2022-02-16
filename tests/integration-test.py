@@ -436,22 +436,6 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(device.props.alias, 'My other device')
         self.assertEqual(device.props.connectable, False)
 
-    def test_battery(self):
-        # Make a new client that tries to connect to UPower
-        client = GnomeBluetoothPriv.Client.new()
-
-        self.wait_for_mainloop()
-        list_store = client.get_devices()
-        self.assertEqual(list_store.get_n_items(), 2)
-
-        device = list_store.get_item(0)
-        self.assertEqual(int(device.props.battery_type), int(GnomeBluetoothPriv.BatteryType.PERCENTAGE))
-        self.assertEqual(device.props.battery_percentage, 66)
-
-        device = list_store.get_item(1)
-        self.assertEqual(int(device.props.battery_type), int(GnomeBluetoothPriv.BatteryType.COARSE))
-        self.assertEqual(device.props.battery_percentage, 55)
-        self.assertEqual(device.props.battery_level, 6)
 
 class Tests(dbusmock.DBusTestCase):
 
@@ -465,6 +449,7 @@ class Tests(dbusmock.DBusTestCase):
             'bluez5', {})
 
         cls.exec_path = [sys.argv[0]]
+        cls.exec_dir = builddir + '/tests/'
         if os.getenv('VALGRIND') != None:
             cls.exec_path = ['valgrind'] + cls.exec_path
 
@@ -479,11 +464,19 @@ class Tests(dbusmock.DBusTestCase):
         self.dbusmock_bluez = dbus.Interface(self.obj_bluez, 'org.bluez.Mock')
 
     def run_test_process(self):
+        c_tests = ['test_battery']
         # Get the calling function's name
         test_name = inspect.stack()[1][3]
         print(f"Running out-of-process test {test_name}")
         # And run the test with the same name in the OopTests class in a separate process
-        out = subprocess.run(self.exec_path + ['OopTests.' + test_name], capture_output=True)
+        if test_name in c_tests:
+            if os.getenv('VALGRIND') != None:
+                out = subprocess.run(['valgrind', self.exec_dir + test_name], capture_output=True)
+            else:
+                out = subprocess.run([self.exec_dir + test_name], capture_output=True)
+        else:
+            out = subprocess.run(self.exec_path + ['OopTests.' + test_name], capture_output=True)
+
         self.assertEqual(out.returncode, 0, "Running test " + test_name + " failed:" + out.stderr.decode('UTF-8') + '\n\n\nSTDOUT:\n' + out.stdout.decode('UTF-8'))
         if os.getenv('VALGRIND') != None:
             print(out.stderr.decode('UTF-8'))

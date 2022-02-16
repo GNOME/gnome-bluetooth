@@ -1,11 +1,21 @@
 if enable_gir and has_dbusmock
+  c_execs = []
+  c_exec = executable('test_battery',
+    'test_battery.c',
+    include_directories: lib_inc,
+    dependencies: deps,
+    c_args: cflags,
+    link_with: libgnome_bluetooth,
+  )
+  c_execs += [c_exec]
+
   integration_test = find_program('integration-test.py')
 
   envs = environment()
   envs.set ('top_builddir', meson.global_build_root())
   envs.set ('top_srcdir', meson.global_source_root())
 
-  test_deps = [ gnomebt_priv_gir, ]
+  test_deps = [ gnomebt_priv_gir, c_exec ]
 
   python3 = find_program('python3')
   unittest_inspector = find_program('unittest_inspector.py')
