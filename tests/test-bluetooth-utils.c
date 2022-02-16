@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2021 Bastien Nocera <hadess@hadess.net>
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
+ */
+
 #include <locale.h>
 #include <bluetooth-utils.c>
 
