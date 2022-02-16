@@ -34,7 +34,7 @@ build_stable:
     - dnf install -y https://kojipkgs.fedoraproject.org//work/tasks/5825/82495825/upower-0.99.14-1.fc36.x86_64.rpm https://kojipkgs.fedoraproject.org//work/tasks/5825/82495825/upower-devel-0.99.14-1.fc36.x86_64.rpm
   script:
     # Install newer python-dbusmock
-    - git clone https://github.com/martinpitt/python-dbusmock.git
+    - git clone --branch=wip/hadess/upower-remove-device https://github.com/hadess/python-dbusmock.git
     - cd python-dbusmock
     - python3 setup.py build
     - python3 setup.py install
