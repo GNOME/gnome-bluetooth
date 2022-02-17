@@ -94,10 +94,8 @@ bluetooth_type_to_string (BluetoothType type)
 	case BLUETOOTH_TYPE_SPEAKERS:
 		return _("Speakers");
 	default:
-		/* fallthrough */
+		return _("Unknown");
 	}
-
-	return _("Unknown");
 }
 
 /**
