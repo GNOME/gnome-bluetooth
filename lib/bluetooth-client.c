@@ -1084,12 +1084,17 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 	g_autoptr(GDBusProxy) adapter = NULL;
 	GVariantBuilder builder;
 
+	if (client->discovery_started == discovering)
+		return;
+
 	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL) {
 		g_debug ("%s discovery requested, but no default adapter",
 			 discovering ? "Starting" : "Stopping");
 		return;
 	}
+
+	client->discovery_started = discovering;
 
 	if (discovering) {
 		g_variant_builder_init (&builder, G_VARIANT_TYPE_VARDICT);
@@ -1102,7 +1107,6 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 						    client);
 	}
 
-	client->discovery_started = discovering;
 	if (discovering) {
 		g_debug ("Starting discovery on %s", g_dbus_proxy_get_object_path (adapter));
 		adapter1_call_start_discovery (ADAPTER1 (adapter),
