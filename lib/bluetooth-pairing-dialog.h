@@ -28,7 +28,7 @@ G_DECLARE_DERIVABLE_TYPE (BluetoothPairingDialog, bluetooth_pairing_dialog, BLUE
 
 struct _BluetoothPairingDialogClass
 {
-  GObjectClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 typedef enum {
