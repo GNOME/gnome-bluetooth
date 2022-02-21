@@ -274,6 +274,8 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	GtkWidget *header;
 	GtkStyleContext *context;
 
+	G_OBJECT_CLASS(bluetooth_pairing_dialog_parent_class)->constructed (object);
+
 	/* Header */
 	header = gtk_dialog_get_header_bar (GTK_DIALOG (self));
 	priv->title = gtk_label_new ("");
