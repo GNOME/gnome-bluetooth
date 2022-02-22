@@ -706,13 +706,14 @@ show_select_dialog(void)
 
 	if (select_dialog_response == GTK_RESPONSE_ACCEPT) {
 		g_autoptr(GListModel) selected_files = NULL;
-		int i;
+		guint i, n_items;
 
 		selected_files = gtk_file_chooser_get_files(GTK_FILE_CHOOSER(dialog));
+		n_items = g_list_model_get_n_items(selected_files);
 
-		files = g_new(gchar *, g_list_model_get_n_items(selected_files) + 1);
+		files = g_new(gchar *, n_items + 1);
 
-		for (i = 0; g_list_model_get_n_items(selected_files); i++) {
+		for (i = 0; i < n_items; i++) {
 			g_autoptr(GFile) file = g_list_model_get_item(selected_files, i);
 			files[i] = g_file_get_path(file);
 		}
