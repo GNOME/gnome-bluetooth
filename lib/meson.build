@@ -184,7 +184,7 @@ pkg.generate(
   description: 'Bluetooth libraries for gnome-control-center',
   filebase: gnomebt_ui_api_name,
   subdirs: gnomebt_api_name,
-  requires: deps,
+  requires: ui_deps,
   variables: 'exec_prefix=${prefix}',
 )
 
