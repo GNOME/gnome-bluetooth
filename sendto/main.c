@@ -712,7 +712,7 @@ show_select_dialog(void)
 
 		files = g_new(gchar *, g_list_model_get_n_items(selected_files) + 1);
 
-		for (i = 0; g_list_model_get_n_items(selected_files); i++) {
+		for (i = 0; i < g_list_model_get_n_items(selected_files); i++) {
 			g_autoptr(GFile) file = g_list_model_get_item(selected_files, i);
 			files[i] = g_file_get_path(file);
 		}
