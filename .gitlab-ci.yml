@@ -39,7 +39,7 @@ build_stable:
     - python3 setup.py build
     - python3 setup.py install
     - cd ..
-    - meson . _build --prefix=/usr -Dicon_update=true -Dgtk_doc=true -Dintrospection=true -Dsendto=true
+    - meson . _build --prefix=/usr -Dgtk_doc=true -Dintrospection=true -Dsendto=true
     - ninja -C _build
     - ninja -C _build install
     - ninja -C _build test

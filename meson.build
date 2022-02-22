@@ -137,17 +137,10 @@ configure_file(
   configuration: config_h,
 )
 
-meson.add_install_script(
-  'meson_post_install.py',
-  get_option('icon_update') ? 'icon_update' : '',
-  gnomebt_datadir,
-)
-
 summary({'Documentation': enable_gtk_doc,
          'Introspection': enable_gir,
          'Dbusmock tests': has_dbusmock,
-         'Send-to': get_option('sendto'),
-         'Run gtk-update-icon-cache': get_option('icon_update')},
+         'Send-to': get_option('sendto')},
         section: 'General')
 
 meson.add_dist_script(
