@@ -699,6 +699,8 @@ show_select_dialog(void)
 
 	g_signal_connect(dialog, "response", G_CALLBACK(select_dialog_response_callback), NULL);
 
+	gtk_widget_show(dialog);
+
 	select_dialog_mainloop = g_main_loop_new(NULL, FALSE);
 	g_main_loop_run(select_dialog_mainloop);
 
