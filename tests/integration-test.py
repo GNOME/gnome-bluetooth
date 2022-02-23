@@ -28,9 +28,6 @@ try:
     import gi
     from gi.repository import GLib
     from gi.repository import Gio
-
-    gi.require_version('Gtk', '4.0')
-    from gi.repository import Gtk
 except ImportError as e:
     sys.stderr.write('Skipping tests, PyGobject not available for Python 3, or missing GI typelibs: %s\n' % str(e))
     sys.exit(77)
