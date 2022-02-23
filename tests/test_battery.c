@@ -30,17 +30,32 @@ remove_upower_device (GDBusConnection *bus,
 	g_assert_nonnull (ret);
 }
 
+#define DEFAULT_MESON_TIMEOUT 30
+#define MAX_TEST_TIME         DEFAULT_MESON_TIMEOUT / 10
+
+static gboolean
+timeout_cb (gpointer user_data)
+{
+	char *str = user_data;
+	g_assert_cmpstr (NULL, ==, str);
+	exit (1);
+	return TRUE;
+}
+
 int main (int argc, char **argv)
 {
 	BluetoothClient *client;
 	GListStore *list_store;
+	guint id;
 
 	client = bluetooth_client_new ();
 	list_store = bluetooth_client_get_devices (client);
 
 	/* Wait for bluez */
+	id = g_timeout_add (MAX_TEST_TIME * 1000, timeout_cb, (gpointer) G_STRLOC);
 	while (g_list_model_get_n_items (G_LIST_MODEL (list_store)) != 2)
 		g_main_context_iteration (NULL, TRUE);
+	g_source_remove (id);
 	g_assert_cmpuint (g_list_model_get_n_items (G_LIST_MODEL (list_store)), ==, 2);
 
 	BluetoothDevice *device;
@@ -49,10 +64,12 @@ int main (int argc, char **argv)
 	device = g_list_model_get_item (G_LIST_MODEL (list_store), 0);
 	/* Wait for upower */
 	g_object_get (G_OBJECT (device), "battery-type", &battery_type, NULL);
+	id = g_timeout_add (MAX_TEST_TIME * 1000, timeout_cb, (gpointer) G_STRLOC);
 	while (battery_type != BLUETOOTH_BATTERY_TYPE_PERCENTAGE) {
 		g_main_context_iteration (NULL, TRUE);
 		g_object_get (G_OBJECT (device), "battery-type", &battery_type, NULL);
 	}
+	g_source_remove (id);
 	g_object_get (G_OBJECT (device),
 		      "battery-type", &battery_type,
 		      "battery-percentage", &battery_percentage,
@@ -83,26 +100,32 @@ int main (int argc, char **argv)
 	client2 = bluetooth_client_new ();
 	list_store2 = bluetooth_client_get_devices (client2);
 
+	id = g_timeout_add (MAX_TEST_TIME * 1000, timeout_cb, (gpointer) G_STRLOC);
 	while (g_list_model_get_n_items (G_LIST_MODEL (list_store2)) != 2)
 		g_main_context_iteration (NULL, TRUE);
+	g_source_remove (id);
 	g_assert_cmpuint (g_list_model_get_n_items (G_LIST_MODEL (list_store2)), ==, 2);
 
 	BluetoothDevice *device2;
 	device2 = g_list_model_get_item (G_LIST_MODEL (list_store2), 0);
 	g_object_get (G_OBJECT (device2), "battery-type", &battery_type, NULL);
+	id = g_timeout_add (MAX_TEST_TIME * 1000, timeout_cb, (gpointer) G_STRLOC);
 	while (battery_type != BLUETOOTH_BATTERY_TYPE_PERCENTAGE) {
 		g_main_context_iteration (NULL, TRUE);
 		g_object_get (G_OBJECT (device2), "battery-type", &battery_type, NULL);
 	}
+	g_source_remove (id);
 
 	GDBusConnection *bus;
 	bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
 	remove_upower_device (bus, "/org/freedesktop/UPower/devices/mouse_dev_11_22_33_44_55_66");
 	g_object_get (G_OBJECT (device2), "battery-type", &battery_type, NULL);
+	id = g_timeout_add (MAX_TEST_TIME * 1000, timeout_cb, (gpointer) G_STRLOC);
 	while (battery_type != BLUETOOTH_BATTERY_TYPE_NONE) {
 		g_main_context_iteration (NULL, TRUE);
 		g_object_get (G_OBJECT (device2), "battery-type", &battery_type, NULL);
 	}
+	g_source_remove (id);
 	g_object_unref (G_OBJECT (device2));
 
 	g_dbus_connection_call_sync (bus,
@@ -117,8 +140,10 @@ int main (int argc, char **argv)
 				     NULL,
 				     NULL);
 	remove_upower_device (bus, "/org/freedesktop/UPower/devices/mouse_dev_11_22_33_44_55_67");
+	id = g_timeout_add (MAX_TEST_TIME * 1000, timeout_cb, (gpointer) G_STRLOC);
 	while (g_list_model_get_n_items (G_LIST_MODEL (list_store2)) != 1)
 		g_main_context_iteration (NULL, TRUE);
+	g_source_remove (id);
 	g_assert_cmpuint (g_list_model_get_n_items (G_LIST_MODEL (list_store2)), ==, 1);
 
 	g_object_unref (G_OBJECT (list_store2));
