@@ -79,13 +79,12 @@ class OopTests(dbusmock.DBusTestCase):
 
     def wait_for_condition(self, condition, timeout=5):
         ctx = GLib.main_context_default()
-        timeout = timeout * 1000
+        remaining = timeout * 1000
         interval = 100
         timed_out = False
         def timeout_cb():
-            nonlocal timed_out
-            nonlocal interval
-            timeout = timeout - interval
+            nonlocal timed_out, interval, timeout
+            remaining = remaining - interval
             if timeout <= 0:
                 timed_out = True
                 return False
