@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2019-07-18 13:00+0000\n"
-"PO-Revision-Date: 2019-08-17 15:56+0300\n"
+"POT-Creation-Date: 2021-11-10 14:34+0000\n"
+"PO-Revision-Date: 2022-02-23 19:17+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -24,99 +24,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2011-09-08 09:16+0000\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-POT-Import-Date: 2012-02-19 15:16:02+0000\n"
-
-#: lib/bluetooth-chooser-button.c:71
-msgid "Click to select device…"
-msgstr "Napsauta valitaksesi laitteen…"
-
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
-#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
-msgid "_Cancel"
-msgstr "_Peru"
-
-#: lib/bluetooth-chooser-button.c:202
-msgid "_OK"
-msgstr "_OK"
-
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
-#: lib/bluetooth-utils.c:99
-msgid "Unknown"
-msgstr "Tuntematon"
-
-#: lib/bluetooth-chooser.c:176
-msgid "No adapters available"
-msgstr "Sovittimia ei ole saatavilla"
-
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1561
-msgid "Searching for devices…"
-msgstr "Etsitään laitteita…"
-
-#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
-msgid "Device"
-msgstr "Laite"
-
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
-msgid "Type"
-msgstr "Tyyppi"
-
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
-msgid "Devices"
-msgstr "Laitteet"
-
-#: lib/bluetooth-filter-widget.c:72
-msgid "All categories"
-msgstr "Kaikki luokat"
-
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
-msgid "Paired"
-msgstr "Paritettu"
-
-#: lib/bluetooth-filter-widget.c:76
-msgid "Trusted"
-msgstr "Luotettu"
-
-#: lib/bluetooth-filter-widget.c:78
-msgid "Not paired or trusted"
-msgstr "Ei paritettu eikä luotettu"
-
-#: lib/bluetooth-filter-widget.c:80
-msgid "Paired or trusted"
-msgstr "Paritettu tai luotettu"
-
-#. This is the title of the filter section of the Bluetooth device chooser.
-#. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:231
-msgid "Show:"
-msgstr "Näytä:"
-
-#. The device category filter
-#: lib/bluetooth-filter-widget.c:247
-msgid "Device _category:"
-msgstr "Laite_luokka:"
-
-#: lib/bluetooth-filter-widget.c:258
-msgid "Select the device category to filter"
-msgstr "Valitse etsittävä laiteluokka"
-
-#. The device type filter
-#: lib/bluetooth-filter-widget.c:272
-msgid "Device _type:"
-msgstr "Laite_tyyppi:"
-
-#: lib/bluetooth-filter-widget.c:289
-msgid "Select the device type to filter"
-msgstr "Valitse etsittävä laitetyyppi"
-
-#: lib/bluetooth-filter-widget.c:295
-msgid "Input devices (mice, keyboards, etc.)"
-msgstr "Syötelaite (hiiri, näppäimistö jne.)"
-
-#: lib/bluetooth-filter-widget.c:299
-msgid "Headphones, headsets and other audio devices"
-msgstr "Kuulokkeet, kuulokemikrofonit ja muut äänilaitteet"
 
 #: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
 #: lib/bluetooth-pairing-dialog.c:104
@@ -201,39 +110,39 @@ msgid "Dismiss"
 msgstr "Hylkää"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:308
+#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Peru"
 
 #. OK button
-#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:247
+#: lib/bluetooth-pairing-dialog.c:286 lib/bluetooth-settings-obexpush.c:246
 msgid "Accept"
 msgstr "Hyväksy"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:34
 msgid "Not Set Up"
 msgstr "Ei asetuksia tehtynä"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:80
 msgid "Connected"
 msgstr "Yhdistetty"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
 msgstr "Yhteys katkaistu"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "Yes"
 msgstr "Kyllä"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1198
 msgid "No"
 msgstr "Ei"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1299
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -242,50 +151,62 @@ msgstr ""
 "Näkyvissä nimellä “%s” ja käytettävissä Bluetooth-tiedostosiirtoihin. "
 "Siirretyt tiedostot sijoitetaan <a href=\"%s\">Lataukset</a>-kansioon."
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1337
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Poistetaanko “%s” laiteluettelosta?"
 
-#: lib/bluetooth-settings-widget.c:1278
+#: lib/bluetooth-settings-widget.c:1339
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Jos poistat laitteen, sinun tulee määrittää sen asetukset uudelleen ennen "
 "seuraavaa käyttökertaa."
 
-#: lib/bluetooth-settings-widget.c:1282
+#: lib/bluetooth-settings-widget.c:1342 sendto/main.c:445 sendto/main.c:706
+msgid "_Cancel"
+msgstr "_Peru"
+
+#: lib/bluetooth-settings-widget.c:1343
 msgid "_Remove"
 msgstr "_Poista"
 
+#: lib/bluetooth-settings-widget.c:1561
+msgid "Devices"
+msgstr "Laitteet"
+
+#: lib/bluetooth-settings-widget.c:1605
+msgid "Searching for devices…"
+msgstr "Etsitään laitteita…"
+
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:146
+#: lib/bluetooth-settings-obexpush.c:144
 #, c-format
 msgid "You received “%s” via Bluetooth"
 msgstr "Vastaanotettiin tiedosto “%s” Bluetoothin kautta"
 
-#: lib/bluetooth-settings-obexpush.c:148
+#: lib/bluetooth-settings-obexpush.c:146
 msgid "You received a file"
 msgstr "Vastaanotit tiedoston"
 
-#: lib/bluetooth-settings-obexpush.c:159
+#: lib/bluetooth-settings-obexpush.c:157
 msgid "Open File"
 msgstr "Avaa tiedosto"
 
-#: lib/bluetooth-settings-obexpush.c:163
+#: lib/bluetooth-settings-obexpush.c:161
 msgid "Open Containing Folder"
 msgstr "Avaa sisältävä kansio"
 
-#: lib/bluetooth-settings-obexpush.c:180
+#: lib/bluetooth-settings-obexpush.c:178
 msgid "File reception complete"
 msgstr "Tiedoston vastaanotto valmistui"
 
-#: lib/bluetooth-settings-obexpush.c:234
+#: lib/bluetooth-settings-obexpush.c:233
 #, c-format
 msgid "Bluetooth file transfer from %s"
 msgstr "Bluetooth-tiedostonsiirto lähteestä %s"
 
-#: lib/bluetooth-settings-obexpush.c:244
+#: lib/bluetooth-settings-obexpush.c:243
 msgid "Decline"
 msgstr "Kieltäydy"
 
@@ -366,35 +287,47 @@ msgstr "Puettava"
 msgid "Toy"
 msgstr "Lelu"
 
-#: lib/bluetooth-utils.c:117
-msgid "All types"
-msgstr "Kaikki tyypit"
+#: lib/bluetooth-utils.c:98
+msgid "Speakers"
+msgstr "Kaiuttimet"
 
-#: lib/settings.ui:44
+#: lib/bluetooth-utils.c:103
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: lib/settings.ui:29
 msgid "Connection"
 msgstr "Yhteys"
 
-#: lib/settings.ui:229
+#: lib/settings.ui:71
+msgid "Paired"
+msgstr "Paritettu"
+
+#: lib/settings.ui:94
+msgid "Type"
+msgstr "Tyyppi"
+
+#: lib/settings.ui:117
 msgid "Address"
 msgstr "Osoite"
 
-#: lib/settings.ui:285
+#: lib/settings.ui:143
 msgid "_Mouse & Touchpad Settings"
 msgstr "_Hiiren ja kosketuslevyn asetukset"
 
-#: lib/settings.ui:299
+#: lib/settings.ui:150
 msgid "_Sound Settings"
 msgstr "_Ääniasetukset"
 
-#: lib/settings.ui:313
+#: lib/settings.ui:157
 msgid "_Keyboard Settings"
 msgstr "_Näppäimistöasetukset"
 
-#: lib/settings.ui:327
+#: lib/settings.ui:164
 msgid "Send _Files…"
 msgstr "Lähetä _tiedostoja…"
 
-#: lib/settings.ui:341
+#: lib/settings.ui:171
 msgid "_Remove Device"
 msgstr "_Poista laite"
 
@@ -406,135 +339,180 @@ msgstr "Bluetooth-siirto"
 msgid "Send files via Bluetooth"
 msgstr "Lähetä tiedostoja Bluetoothilla"
 
-#: sendto/main.c:117
+#: sendto/main.c:116
 msgid "An unknown error occurred"
 msgstr "Tapahtui tuntematon virhe"
 
-#: sendto/main.c:130
+#: sendto/main.c:129
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
 "Varmista, että etälaite on kytketty päälle ja hyväksyy Bluetooth-yhteyksiä"
 
-#: sendto/main.c:363
+#: sendto/main.c:362
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d sekunti"
 msgstr[1] "%'d sekuntia"
 
-#: sendto/main.c:368 sendto/main.c:381
+#: sendto/main.c:367 sendto/main.c:380
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d minuutti"
 msgstr[1] "%'d minuuttia"
 
-#: sendto/main.c:379
+#: sendto/main.c:378
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d tunti"
 msgstr[1] "%'d tuntia"
 
-#: sendto/main.c:389
+#: sendto/main.c:388
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "noin %'d tunti"
 msgstr[1] "noin %'d tuntia"
 
-#: sendto/main.c:402 sendto/main.c:500
+#: sendto/main.c:401 sendto/main.c:497
 msgid "Connecting…"
 msgstr "Yhdistetään…"
 
-#: sendto/main.c:444
+#: sendto/main.c:442
 msgid "Bluetooth File Transfer"
 msgstr "Bluetooth-tiedostonsiirto"
 
-#: sendto/main.c:448
+#: sendto/main.c:446
 msgid "_Retry"
 msgstr "Y_ritä uudelleen"
 
-#: sendto/main.c:470
+#: sendto/main.c:463
 msgid "From:"
 msgstr "Lähettäjä:"
 
-#: sendto/main.c:484
+#: sendto/main.c:479
 msgid "To:"
 msgstr "Vastaanottaja:"
 
-#: sendto/main.c:577
+#: sendto/main.c:575
 #, c-format
 msgid "Sending %s"
 msgstr "Lähetetään %s"
 
-#: sendto/main.c:584 sendto/main.c:633
+#: sendto/main.c:582 sendto/main.c:631
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Lähetetään tiedostoa %d/%d"
 
-#: sendto/main.c:629
+#: sendto/main.c:627
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kt/s"
 
-#: sendto/main.c:631
+#: sendto/main.c:629
 #, c-format
 msgid "%d B/s"
 msgstr "%d t/s"
 
-#: sendto/main.c:662
+#: sendto/main.c:660
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u siirto valmis"
 msgstr[1] "%u siirtoa valmiina"
 
-#: sendto/main.c:669
+#: sendto/main.c:667
 msgid "_Close"
 msgstr "_Sulje"
 
-#: sendto/main.c:679
+#: sendto/main.c:677
 msgid "There was an error"
 msgstr "Tapahtui virhe"
 
-#: sendto/main.c:734
-msgid "Select device to send to"
-msgstr "Valitse laite jolle lähetetään"
-
-#: sendto/main.c:739
-msgid "_Send"
-msgstr "_Lähetä"
-
-#: sendto/main.c:789
+#: sendto/main.c:701
 msgid "Choose files to send"
 msgstr "Valitse lähetettävät tiedostot"
 
-#: sendto/main.c:795
+#: sendto/main.c:707
 msgid "Select"
 msgstr "Valitse"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "Remote device to use"
 msgstr "Käytettävä etälaite"
 
-#: sendto/main.c:825
+#: sendto/main.c:740
 msgid "ADDRESS"
 msgstr "OSOITE"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "Remote device’s name"
 msgstr "Etälaitteen nimi"
 
-#: sendto/main.c:827
+#: sendto/main.c:742
 msgid "NAME"
 msgstr "NIMI"
 
-#: sendto/main.c:846
-msgid "[FILE…]"
-msgstr "[TIEDOSTO…]"
+#~ msgid "Click to select device…"
+#~ msgstr "Napsauta valitaksesi laitteen…"
+
+#~ msgid "_OK"
+#~ msgstr "_OK"
+
+#~ msgid "No adapters available"
+#~ msgstr "Sovittimia ei ole saatavilla"
+
+#~ msgid "Device"
+#~ msgstr "Laite"
+
+#~ msgid "All categories"
+#~ msgstr "Kaikki luokat"
+
+#~ msgid "Trusted"
+#~ msgstr "Luotettu"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "Ei paritettu eikä luotettu"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "Paritettu tai luotettu"
+
+#~ msgid "Show:"
+#~ msgstr "Näytä:"
+
+#~ msgid "Device _category:"
+#~ msgstr "Laite_luokka:"
+
+#~ msgid "Select the device category to filter"
+#~ msgstr "Valitse etsittävä laiteluokka"
+
+#~ msgid "Device _type:"
+#~ msgstr "Laite_tyyppi:"
+
+#~ msgid "Select the device type to filter"
+#~ msgstr "Valitse etsittävä laitetyyppi"
+
+#~ msgid "Input devices (mice, keyboards, etc.)"
+#~ msgstr "Syötelaite (hiiri, näppäimistö jne.)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "Kuulokkeet, kuulokemikrofonit ja muut äänilaitteet"
+
+#~ msgid "All types"
+#~ msgstr "Kaikki tyypit"
+
+#~ msgid "Select device to send to"
+#~ msgstr "Valitse laite jolle lähetetään"
+
+#~ msgid "_Send"
+#~ msgstr "_Lähetä"
+
+#~ msgid "[FILE…]"
+#~ msgstr "[TIEDOSTO…]"
 
 #~ msgid "Maximum width"
 #~ msgstr "Enimmäisleveys"
