@@ -396,33 +396,33 @@ class OopTests(dbusmock.DBusTestCase):
         dev2.UpdateProperties('org.bluez.Device1',
                 {'UUIDs': dbus.Array(['00001124-0000-1000-8000-00805f9b34fb'], variant_level=1)})
 
-        self.wait_for_mainloop()
         list_store = self.client.get_devices()
+        self.wait_for_condition(lambda: list_store.get_n_items() == 2)
         self.assertEqual(list_store.get_n_items(), 2)
         self.assertEqual(self.client.has_connected_input_devices(), False)
 
         dev1.UpdateProperties('org.bluez.Device1',
                 {'Connected': dbus.Boolean(True, variant_level=1)})
 
-        self.wait_for_mainloop()
+        self.wait_for_condition(lambda: self.client.has_connected_input_devices() == True)
         self.assertEqual(self.client.has_connected_input_devices(), True)
 
         dev1.UpdateProperties('org.bluez.Device1',
                 {'Connected': dbus.Boolean(False, variant_level=1)})
 
-        self.wait_for_mainloop()
+        self.wait_for_condition(lambda: self.client.has_connected_input_devices() == False)
         self.assertEqual(self.client.has_connected_input_devices(), False)
 
         dev2.UpdateProperties('org.bluez.Device1',
                 {'Connected': dbus.Boolean(True, variant_level=1)})
 
-        self.wait_for_mainloop()
+        self.wait_for_condition(lambda: self.client.has_connected_input_devices() == True)
         self.assertEqual(self.client.has_connected_input_devices(), True)
 
         dev2.UpdateProperties('org.bluez.Device1',
                 {'Connected': dbus.Boolean(False, variant_level=1)})
 
-        self.wait_for_mainloop()
+        self.wait_for_condition(lambda: self.client.has_connected_input_devices() == False)
         self.assertEqual(self.client.has_connected_input_devices(), False)
 
     def test_connectable_devices(self):
