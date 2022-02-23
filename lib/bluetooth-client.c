@@ -65,6 +65,8 @@ struct _BluetoothClient {
 	gboolean discovery_started;
 	UpClient *up_client;
 	gboolean bluez_devices_coldplugged;
+	GList *removed_devices_queue;
+	guint removed_devices_queue_id;
 };
 
 enum {
@@ -86,6 +88,8 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
+
+#define DEVICE_REMOVAL_TIMEOUT_MSECS 50
 
 static void up_client_coldplug (BluetoothClient *client);
 
@@ -343,26 +347,60 @@ device_added (GDBusObjectManager   *manager,
 	g_signal_emit (G_OBJECT (client), signals[DEVICE_ADDED], 0, device_obj);
 }
 
+static gboolean
+unqueue_device_removal (BluetoothClient *client)
+{
+	GList *l;
+
+	if (!client->removed_devices_queue)
+		return G_SOURCE_REMOVE;
+
+	for (l = client->removed_devices_queue; l != NULL; l = l->next) {
+		char *path = l->data;
+		guint i, n_items;
+		gboolean found = FALSE;
+
+		g_debug ("Removing '%s' from queue of removed devices", path);
+
+		n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+		for (i = 0; i < n_items; i++) {
+			g_autoptr(BluetoothDevice) device = NULL;
+
+			device = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+			if (g_str_equal (path, bluetooth_device_get_object_path (device))) {
+				g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
+				g_list_store_remove (client->list_store, i);
+				found = TRUE;
+				break;
+			}
+		}
+		if (!found)
+			g_debug ("Device %s was not known, so not removed", path);
+		g_free (path);
+	}
+	g_clear_pointer (&client->removed_devices_queue, g_list_free);
+
+	client->removed_devices_queue_id = 0;
+	return G_SOURCE_REMOVE;
+}
+
+static void
+queue_device_removal (BluetoothClient *client,
+		      const char      *path)
+{
+	client->removed_devices_queue = g_list_prepend (client->removed_devices_queue,
+							g_strdup (path));
+	g_clear_handle_id (&client->removed_devices_queue_id, g_source_remove);
+	client->removed_devices_queue_id = g_timeout_add (DEVICE_REMOVAL_TIMEOUT_MSECS,
+							  (GSourceFunc) unqueue_device_removal, client);
+}
+
 static void
 device_removed (const char      *path,
 		BluetoothClient *client)
 {
-	guint i, n_items;
-
-	g_debug ("Removing device '%s'", path);
-
-	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
-	for (i = 0; i < n_items; i++) {
-		g_autoptr(BluetoothDevice) device = NULL;
-
-		device = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
-		if (g_str_equal (path, bluetooth_device_get_object_path (device))) {
-			g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
-			g_list_store_remove (client->list_store, i);
-			return;
-		}
-	}
-	g_debug ("Device %s was not known, so not removed", path);
+	g_debug ("Device '%s' was removed", path);
+	queue_device_removal (client, path);
 }
 
 static void
@@ -655,6 +693,7 @@ adapter_removed (GDBusObjectManager   *manager,
 	g_autoptr(GDBusProxy) new_default_adapter = NULL;
 	GList *object_list, *l;
 	gboolean was_default = FALSE;
+	DefaultAdapterChangeType change_type;
 
 	if (g_strcmp0 (path, g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter))) == 0)
 		was_default = TRUE;
@@ -679,9 +718,18 @@ adapter_removed (GDBusObjectManager   *manager,
 	}
 	g_list_free_full (object_list, g_object_unref);
 
+	/* Removal? */
+	change_type = new_default_adapter ? NEW_DEFAULT : REMOVAL;
+	if (change_type == REMOVAL) {
+		/* Clear out the removed_devices queue */
+		g_clear_handle_id (&client->removed_devices_queue_id, g_source_remove);
+		g_list_free_full (client->removed_devices_queue, g_free);
+		client->removed_devices_queue = NULL;
+	}
+
 	default_adapter_changed (manager,
 				 new_default_adapter,
-				 new_default_adapter ? NEW_DEFAULT : REMOVAL,
+				 change_type,
 				 client);
 
 out:
@@ -1209,6 +1257,9 @@ static void bluetooth_client_finalize(GObject *object)
 		g_cancellable_cancel (client->cancellable);
 		g_clear_object (&client->cancellable);
 	}
+	g_clear_handle_id (&client->removed_devices_queue_id, g_source_remove);
+	g_list_free_full (client->removed_devices_queue, g_free);
+	client->removed_devices_queue = NULL;
 	g_clear_object (&client->manager);
 	g_object_unref (client->list_store);
 
