@@ -437,6 +437,28 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(device.props.connectable, False)
 
 
+    def test_adapter_removal(self):
+        bus = dbus.SystemBus()
+        bluez_server = bus.get_object('org.bluez', '/org/bluez')
+        dbusmock_bluez = dbus.Interface(bluez_server, 'org.bluez.Mock')
+
+        client = GnomeBluetoothPriv.Client.new()
+        list_store = client.get_devices()
+        self.wait_for_condition(lambda: list_store.get_n_items() == 1)
+        self.assertEqual(list_store.get_n_items(), 1)
+
+        num_devices = 1
+        def device_removed_cb(client, path):
+            nonlocal num_devices
+            num_devices -= 1
+        self.client.connect('device-removed', device_removed_cb)
+
+        dbusmock_bluez.RemoveAdapterWithDevices('hci0')
+        # Wait for 5 seconds or until we have the wrong result
+        self.wait_for_condition(lambda: num_devices == 0)
+        self.assertEqual(num_devices, 1)
+
+
 class Tests(dbusmock.DBusTestCase):
 
     @classmethod
@@ -614,6 +636,18 @@ class Tests(dbusmock.DBusTestCase):
                        'WarningLevel': dbus.UInt32(1, variant_level=1),
                    },
                    [])
+
+        self.run_test_process()
+
+
+    def test_adapter_removal(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        device = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'LE Mouse')
+        device_obj = self.dbus_con.get_object('org.bluez', device)
+        device_obj.UpdateProperties('org.bluez.Device1', {
+                'Connected': True,
+                'Paired': True
+        })
 
         self.run_test_process()
 
