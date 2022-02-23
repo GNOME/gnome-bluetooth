@@ -64,6 +64,7 @@ struct _BluetoothClient {
 	guint num_adapters;
 	gboolean discovery_started;
 	UpClient *up_client;
+	gboolean bluez_devices_coldplugged;
 };
 
 enum {
@@ -85,6 +86,8 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE(BluetoothClient, bluetooth_client, G_TYPE_OBJECT)
+
+static void up_client_coldplug (BluetoothClient *client);
 
 static BluetoothDevice *
 get_device_for_path (BluetoothClient *client,
@@ -413,6 +416,9 @@ add_devices_to_list_store (BluetoothClient *client)
 {
 	GList *object_list, *l;
 	const char *default_adapter_path;
+	gboolean coldplug_upower;
+
+	coldplug_upower = !client->bluez_devices_coldplugged && client->up_client;
 
 	g_debug ("Emptying list store as default adapter changed");
 	g_list_store_remove_all (client->list_store);
@@ -420,6 +426,7 @@ add_devices_to_list_store (BluetoothClient *client)
 	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
 
 	g_debug ("Coldplugging devices for new default adapter");
+	client->bluez_devices_coldplugged = TRUE;
 	object_list = g_dbus_object_manager_get_objects (client->manager);
 	for (l = object_list; l != NULL; l = l->next) {
 		GDBusObject *object = l->data;
@@ -472,6 +479,9 @@ add_devices_to_list_store (BluetoothClient *client)
 		g_signal_emit (G_OBJECT (client), signals[DEVICE_ADDED], 0, device_obj);
 	}
 	g_list_free_full (object_list, g_object_unref);
+
+	if (coldplug_upower)
+		up_client_coldplug (client);
 }
 
 static void
@@ -982,6 +992,14 @@ up_client_get_devices_cb (GObject      *source_object,
 }
 
 static void
+up_client_coldplug (BluetoothClient *client)
+{
+	g_return_if_fail (client->up_client != NULL);
+	up_client_get_devices_async (client->up_client, client->cancellable,
+				     up_client_get_devices_cb, client);
+}
+
+static void
 up_client_new_cb (GObject      *source_object,
 		  GAsyncResult *res,
 		  gpointer      user_data)
@@ -1004,8 +1022,8 @@ up_client_new_cb (GObject      *source_object,
 				 G_CALLBACK (up_device_added_cb), client, 0);
 	g_signal_connect_object (G_OBJECT (up_client), "device-removed",
 				 G_CALLBACK (up_device_removed_cb), client, 0);
-	up_client_get_devices_async (up_client, client->cancellable,
-				     up_client_get_devices_cb, client);
+	if (client->bluez_devices_coldplugged)
+		up_client_coldplug (client);
 }
 
 static void bluetooth_client_init(BluetoothClient *client)
