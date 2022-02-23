@@ -449,8 +449,10 @@ class Tests(dbusmock.DBusTestCase):
         os.environ['G_DEBUG'] = 'fatal_warnings'
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
-        (cls.p_mock, cls.obj_bluez) = cls.spawn_server_template(
+        (cls.p_mock_bluez, cls.obj_bluez) = cls.spawn_server_template(
             'bluez5', {})
+        (cls.p_mock_upower, cls.obj_upower) = cls.spawn_server_template(
+            'upower', {})
 
         cls.exec_path = [sys.argv[0]]
         cls.exec_dir = builddir + '/tests/'
@@ -459,8 +461,10 @@ class Tests(dbusmock.DBusTestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
+        cls.p_mock_bluez.terminate()
+        cls.p_mock_bluez.wait()
+        cls.p_mock_upower.terminate()
+        cls.p_mock_upower.wait()
 
     def setUp(self):
         self.obj_bluez.Reset()
@@ -565,9 +569,7 @@ class Tests(dbusmock.DBusTestCase):
         self.run_test_process()
 
     def test_battery(self):
-        (p_mock, obj_upower) = self.spawn_server_template(
-            'upower', {})
-        mock = dbus.Interface(obj_upower, dbusmock.MOCK_IFACE)
+        mock = dbus.Interface(self.obj_upower, dbusmock.MOCK_IFACE)
 
         self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
 
@@ -619,8 +621,6 @@ class Tests(dbusmock.DBusTestCase):
 
         self.run_test_process()
 
-        p_mock.terminate()
-        p_mock.wait()
 
 if __name__ == '__main__':
     unittest.main()
