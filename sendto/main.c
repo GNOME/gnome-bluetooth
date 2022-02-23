@@ -688,6 +688,7 @@ show_select_dialog(void)
 			       "title", _("Choose files to send"),
 			       "action", GTK_FILE_CHOOSER_ACTION_OPEN,
 			       "use-header-bar", 1,
+			       "hide-on-close", TRUE,
 			       NULL);
 	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
 			       _("_Cancel"), GTK_RESPONSE_CANCEL,
