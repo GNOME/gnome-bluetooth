@@ -83,9 +83,9 @@ class OopTests(dbusmock.DBusTestCase):
         interval = 100
         timed_out = False
         def timeout_cb():
-            nonlocal timed_out, interval, timeout
+            nonlocal timed_out, interval, remaining
             remaining = remaining - interval
-            if timeout <= 0:
+            if remaining <= 0:
                 timed_out = True
                 return False
             return True
