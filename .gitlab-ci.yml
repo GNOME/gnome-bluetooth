@@ -10,6 +10,7 @@ variables:
     systemd-devel
     gsound-devel
     libnotify-devel
+    upower-devel
     meson
     redhat-rpm-config
     gcc
@@ -30,8 +31,6 @@ build_stable:
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
-    # Newer upower!
-    - dnf install -y https://kojipkgs.fedoraproject.org//work/tasks/5825/82495825/upower-0.99.14-1.fc36.x86_64.rpm https://kojipkgs.fedoraproject.org//work/tasks/5825/82495825/upower-devel-0.99.14-1.fc36.x86_64.rpm
   script:
     # Install newer python-dbusmock
     - git clone https://github.com/martinpitt/python-dbusmock.git
