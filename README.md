@@ -11,6 +11,7 @@ Requirements
 - GTK
 - bluez 5.51 or newer
 - rfkill sub-system enabled in the kernel, and [accessible](https://github.com/systemd/systemd/pull/21605)
+- the latest [git version of python-dbusmock](https://github.com/martinpitt/python-dbusmock) to run tests.
 
 Multiple Bluetooth adapters
 ---------------------------
