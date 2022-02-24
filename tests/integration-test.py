@@ -171,8 +171,7 @@ class OopTests(dbusmock.DBusTestCase):
                 address = f"{address_start:02d}:{address_start+1:02d}:{address_start+2:02d}:" + \
                         f"{address_start+3:02d}:{address_start+4:02d}:{address_start+5:02d}"
                 dbusmock_bluez.AddDevice('hci0', address, f'My Mouse {num_mice}')
-            self.wait_for_mainloop()
-            # self.wait_for_condition(lambda: list_store.get_n_items() == num_devices + to_add)
+            self.wait_for_condition(lambda: list_store.get_n_items() == num_devices + to_add, timeout=0.1)
             self.assertEqual(list_store.get_n_items(), num_devices + to_add)
             self.assertEqual(list_store.get_n_items(), num_devices_signal)
 
@@ -181,8 +180,7 @@ class OopTests(dbusmock.DBusTestCase):
                 device = list_store.get_item(i)
                 self.assertIsNotNone(device, f"Device at index {i} in list store did not exist")
                 hci0_bluez.RemoveDevice(device.get_object_path())
-            self.wait_for_mainloop()
-            # self.wait_for_condition(lambda: list_store.get_n_items() == total)
+            self.wait_for_condition(lambda: list_store.get_n_items() == total, timeout=0.1)
             self.assertEqual(list_store.get_n_items(), total)
             self.assertEqual(list_store.get_n_items(), num_devices_signal)
             num_devices = total
@@ -193,8 +191,7 @@ class OopTests(dbusmock.DBusTestCase):
             device = list_store.get_item(i)
             hci0_bluez.RemoveDevice(device.get_object_path())
 
-        self.wait_for_mainloop()
-        # self.wait_for_condition(lambda: list_store.get_n_items() == 0)
+        self.wait_for_condition(lambda: list_store.get_n_items() == 0, timeout=0.1)
         self.assertEqual(list_store.get_n_items(), 0)
         self.assertEqual(num_devices_signal, 0)
 
