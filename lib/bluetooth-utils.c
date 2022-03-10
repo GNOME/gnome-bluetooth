@@ -390,6 +390,24 @@ uuid16_to_string (guint uuid16, const char *uuid)
 	}
 }
 
+static const char *
+uuid128_to_string (const char *uuid)
+{
+	struct {
+		const char *uuid;
+		const char *str;
+	} uuids128[] = {
+		{ "03B80E5A-EDE8-4B33-A751-6CE34EC4C700", "MIDI" },
+	};
+	guint i;
+
+	for (i = 0; i < G_N_ELEMENTS (uuids128); i++) {
+		if (g_ascii_strcasecmp (uuids128[i].uuid, uuid) == 0)
+			return uuids128[i].str;
+	}
+	return NULL;
+}
+
 /**
  * bluetooth_uuid_to_string:
  * @uuid: a string representing a Bluetooth UUID
@@ -401,10 +419,14 @@ uuid16_to_string (guint uuid16, const char *uuid)
 const char *
 bluetooth_uuid_to_string (const char *uuid)
 {
+	const char *ret;
 	char **parts;
 	guint uuid16;
 	gboolean is_custom = FALSE;
 
+	ret = uuid128_to_string (uuid);
+	if (ret)
+		return ret;
 	if (g_str_has_suffix (uuid, "-0000-1000-8000-0002ee000002") != FALSE)
 		is_custom = TRUE;
 
