@@ -426,7 +426,7 @@ class OopTests(dbusmock.DBusTestCase):
 
         self.wait_for_mainloop()
         list_store = client.get_devices()
-        self.assertEqual(list_store.get_n_items(), 2)
+        self.assertEqual(list_store.get_n_items(), 3)
 
         device = list_store.get_item(0)
         self.assertEqual(device.props.alias, 'My Mouse')
@@ -435,6 +435,10 @@ class OopTests(dbusmock.DBusTestCase):
         device = list_store.get_item(1)
         self.assertEqual(device.props.alias, 'My other device')
         self.assertEqual(device.props.connectable, False)
+
+        device = list_store.get_item(2)
+        self.assertEqual(device.props.alias, 'My MIDI device')
+        self.assertEqual(device.props.connectable, True)
 
 
     def test_adapter_removal(self):
@@ -583,6 +587,11 @@ class Tests(dbusmock.DBusTestCase):
                 {'UUIDs': dbus.Array(['00001812-0000-1000-8000-00805f9b34fb'], variant_level=1)})
 
         path = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:67', 'My other device')
+
+        path = self.dbusmock_bluez.AddDevice('hci0', '22:33:44:55:66:78', 'My MIDI device')
+        dev = dbus.Interface(bus.get_object('org.bluez', path), 'org.freedesktop.DBus.Mock')
+        dev.UpdateProperties('org.bluez.Device1',
+                {'UUIDs': dbus.Array(['03B80E5A-EDE8-4B33-A751-6CE34EC4C700'], variant_level=1)})
 
         self.run_test_process()
 
