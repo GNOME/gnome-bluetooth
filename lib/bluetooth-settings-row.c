@@ -177,7 +177,10 @@ update_row (BluetoothSettingsRow *self)
 				    bluetooth_type_to_string (self->type));
 		gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
 	} else {
-		adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), self->alias);
+		g_autofree char *escaped = NULL;
+		if (self->alias != NULL)
+			escaped = g_markup_escape_text (self->alias, -1);
+		adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), escaped);
 		gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 	}
 }
