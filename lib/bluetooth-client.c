@@ -1157,6 +1157,7 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 	if (adapter == NULL) {
 		g_debug ("%s discovery requested, but no default adapter",
 			 discovering ? "Starting" : "Stopping");
+		client->discovery_started = FALSE;
 		return;
 	}
 
