@@ -1341,6 +1341,14 @@ default_adapter_changed (BluetoothClient         *client,
 
 	g_debug ("Default adapter changed to: %s", default_adapter ? default_adapter : "(none)");
 
+	if (default_adapter == NULL && self->device_list != NULL) {
+		GtkWidget *child;
+
+		g_debug ("Emptying list box as default adapter removed");
+		while ((child = gtk_widget_get_first_child (self->device_list)))
+			gtk_list_box_remove (GTK_LIST_BOX (self->device_list), child);
+	}
+
 	g_object_set (G_OBJECT (client), "default-adapter-setup-mode", default_adapter != NULL, NULL);
 
 	g_signal_emit (G_OBJECT (self), signals[ADAPTER_STATUS_CHANGED], 0);
