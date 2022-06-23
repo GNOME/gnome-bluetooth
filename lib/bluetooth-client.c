@@ -1104,6 +1104,45 @@ _bluetooth_client_get_default_adapter(BluetoothClient *client)
 }
 
 static void
+stop_discovery_cb (Adapter1     *adapter,
+		   GAsyncResult *res,
+		   gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	gboolean ret;
+
+	ret = adapter1_call_stop_discovery_finish (adapter, res, &error);
+	if (!ret) {
+		g_debug ("Error calling StopDiscovery() on %s org.bluez.Adapter1: %s (%s, %d)",
+			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)),
+			 error->message, g_quark_to_string (error->domain), error->code);
+	} else {
+		g_debug ("Ran StopDiscovery() successfully on %s org.bluez.Adapter1",
+			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)));
+	}
+}
+
+static void
+start_discovery_cb (Adapter1     *adapter,
+		    GAsyncResult *res,
+		    gpointer      user_data)
+{
+	g_autoptr(GError) error = NULL;
+	gboolean ret;
+
+	ret = adapter1_call_start_discovery_finish (adapter, res, &error);
+	if (!ret) {
+		g_debug ("Error calling StartDiscovery() on %s org.bluez.Adapter1: %s (%s, %d)",
+			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)),
+			 error->message, g_quark_to_string (error->domain), error->code);
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			BluetoothClient *client = user_data;
+			client->discovery_started = FALSE;
+		}
+	}
+}
+
+static void
 set_discovery_filter_cb (Adapter1     *adapter,
 			 GAsyncResult *res,
 			 gpointer      user_data)
@@ -1113,33 +1152,20 @@ set_discovery_filter_cb (Adapter1     *adapter,
 
 	ret = adapter1_call_set_discovery_filter_finish (adapter, res, &error);
 	if (!ret) {
-		g_debug ("Error calling SetDiscoveryFilter()  on interface org.bluez.Adapter1: %s (%s, %d)",
+		g_debug ("Error calling SetDiscoveryFilter() on interface org.bluez.Adapter1: %s (%s, %d)",
 			 error->message, g_quark_to_string (error->domain), error->code);
-	}
-}
-
-static void
-discovery_cb (Adapter1     *adapter,
-	      GAsyncResult *res,
-	      gpointer      user_data)
-{
-	g_autoptr(GError) error = NULL;
-	gboolean ret;
-	gboolean start_call = GPOINTER_TO_UINT (user_data);
-
-	if (start_call)
-		ret = adapter1_call_start_discovery_finish (adapter, res, &error);
-	else
-		ret = adapter1_call_stop_discovery_finish (adapter, res, &error);
-	if (!ret) {
-		g_debug ("Error calling %s on %s org.bluez.Adapter1: %s (%s, %d)",
-			 start_call ? "StartDiscovery()" : "StopDiscovery()",
-			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)),
-			 error->message, g_quark_to_string (error->domain), error->code);
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			BluetoothClient *client = user_data;
+			client->discovery_started = FALSE;
+		}
 	} else {
-		g_debug ("Ran %s successfully on %s org.bluez.Adapter1",
-			 start_call ? "StartDiscovery()" : "StopDiscovery()",
-			 g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)));
+		BluetoothClient *client = user_data;
+
+		g_debug ("Starting discovery on %s", g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter)));
+		adapter1_call_start_discovery (ADAPTER1 (adapter),
+					       client->cancellable,
+					       (GAsyncReadyCallback) start_discovery_cb,
+					       client);
 	}
 }
 
@@ -1172,22 +1198,14 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 						    client->cancellable,
 						    (GAsyncReadyCallback) set_discovery_filter_cb,
 						    client);
-	}
-
-	if (discovering) {
-		g_debug ("Starting discovery on %s", g_dbus_proxy_get_object_path (adapter));
-		adapter1_call_start_discovery (ADAPTER1 (adapter),
-					       client->cancellable,
-					       (GAsyncReadyCallback) discovery_cb,
-					       GUINT_TO_POINTER (discovering));
 	} else {
 		/* Don't cancel a discovery stop when the BluetoothClient
 		 * is finalised, so don't pass a cancellable */
 		g_debug ("Stopping discovery on %s", g_dbus_proxy_get_object_path (adapter));
 		adapter1_call_stop_discovery (ADAPTER1 (adapter),
 					      NULL,
-					      (GAsyncReadyCallback) discovery_cb,
-					      GUINT_TO_POINTER (discovering));
+					      (GAsyncReadyCallback) stop_discovery_cb,
+					      client);
 	}
 }
 
