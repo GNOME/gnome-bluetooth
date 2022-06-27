@@ -62,6 +62,7 @@ struct _BluetoothClient {
 	GDBusObjectManager *manager;
 	GCancellable *cancellable;
 	guint num_adapters;
+	/* Prevent concurrent enabling or disabling discoveries */
 	gboolean discovery_started;
 	UpClient *up_client;
 	gboolean bluez_devices_coldplugged;
