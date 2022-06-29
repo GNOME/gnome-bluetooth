@@ -16,6 +16,7 @@ variables:
     gcc
     glibc-devel
     git
+    wget
   GIT_SUBMODULE_STRATEGY: recursive
   TEST_DEPS:
     dbus-daemon
@@ -35,6 +36,7 @@ build_stable:
     # Install newer python-dbusmock
     - git clone https://github.com/martinpitt/python-dbusmock.git
     - cd python-dbusmock
+    - wget https://github.com/martinpitt/python-dbusmock/raw/50d590be5392e467ebe5d6322a63990867350f62/setup.py
     - python3 setup.py build
     - python3 setup.py install
     - cd ..
