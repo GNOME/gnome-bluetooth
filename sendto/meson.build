@@ -4,7 +4,7 @@ executable(
   name,
   'main.c',
   include_directories: top_inc,
-  dependencies: [libgnome_bluetooth_dep, gtk_dep],
+  dependencies: [libgnome_bluetooth_dep, gtk_dep, libadwaita_dep],
   install: true,
 )
 

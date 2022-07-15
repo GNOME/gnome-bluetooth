@@ -28,6 +28,7 @@
 
 #include <sys/time.h>
 
+#include <adwaita.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>
@@ -751,6 +752,7 @@ int main(int argc, char *argv[])
 	error = NULL;
 
 	gtk_init();
+	adw_init();
 
 	option_context = g_option_context_new(NULL);
 	g_option_context_add_main_entries(option_context, options, GETTEXT_PACKAGE);
