@@ -451,6 +451,10 @@ static void create_window(void)
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 400, -1);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	gtk_widget_set_margin_end(vbox, 12);
+	gtk_widget_set_margin_start(vbox, 12);
+	gtk_widget_set_margin_top(vbox, 12);
+	gtk_widget_set_margin_bottom(vbox, 12);
 	gtk_box_set_spacing(GTK_BOX(vbox), 6);
 	gtk_window_set_child (GTK_WINDOW(dialog), vbox);
 
