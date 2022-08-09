@@ -1696,6 +1696,14 @@ disconnect_callback (GDBusProxy   *proxy,
  * @callback: (scope async): a #GAsyncReadyCallback to call when the connection is complete
  * @user_data: the data to pass to callback function
  *
+ * This will start the process of connecting to one of the known-connectable
+ * services on the device. This means that it could connect to all the audio
+ * services on a headset, but just to the input service on a keyboard.
+ *
+ * Broadly speaking, this will only have an effect on devices with audio and HID
+ * services, and do nothing if the device doesn't have the "connectable"
+ * property set.
+ *
  * When the connection operation is finished, @callback will be called. You can
  * then call bluetooth_client_connect_service_finish() to get the result of the
  * operation.
