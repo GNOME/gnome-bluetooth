@@ -426,6 +426,7 @@ class OopTests(dbusmock.DBusTestCase):
 
         self.wait_for_mainloop()
         list_store = client.get_devices()
+        self.wait_for_condition(lambda: list_store.get_n_items() == 3)
         self.assertEqual(list_store.get_n_items(), 3)
 
         device = list_store.get_item(0)
