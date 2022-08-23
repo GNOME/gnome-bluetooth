@@ -122,7 +122,7 @@ pkg.generate(
 )
 
 if enable_gir
-  gir_sources = sources + headers
+  gir_sources = sources + headers + enum_sources
 
   gir_incs = [
     'Gio-2.0',
