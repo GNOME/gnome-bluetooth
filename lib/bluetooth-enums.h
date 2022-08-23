@@ -112,3 +112,21 @@ typedef enum {
 	BLUETOOTH_BATTERY_TYPE_PERCENTAGE,
 	BLUETOOTH_BATTERY_TYPE_COARSE
 } BluetoothBatteryType;
+
+/**
+ * BluetoothAdapterState:
+ * @BLUETOOTH_ADAPTER_STATE_ABSENT: Bluetooth adapter is missing.
+ * @BLUETOOTH_ADAPTER_STATE_ON: Bluetooth adapter is on.
+ * @BLUETOOTH_ADAPTER_STATE_TURNING_ON: Bluetooth adapter is being turned on.
+ * @BLUETOOTH_ADAPTER_STATE_TURNING_OFF: Bluetooth adapter is being turned off.
+ * @BLUETOOTH_ADAPTER_STATE_OFF: Bluetooth adapter is off.
+ *
+ * A more precise power state for a Bluetooth adapter.
+ **/
+typedef enum {
+	BLUETOOTH_ADAPTER_STATE_ABSENT = 0,
+	BLUETOOTH_ADAPTER_STATE_ON,
+	BLUETOOTH_ADAPTER_STATE_TURNING_ON,
+	BLUETOOTH_ADAPTER_STATE_TURNING_OFF,
+	BLUETOOTH_ADAPTER_STATE_OFF,
+} BluetoothAdapterState;

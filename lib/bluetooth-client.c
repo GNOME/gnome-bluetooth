@@ -54,11 +54,19 @@
 #define BLUEZ_ADAPTER_INTERFACE		"org.bluez.Adapter1"
 #define BLUEZ_DEVICE_INTERFACE		"org.bluez.Device1"
 
+/* Subset of BluetoothAdapterState */
+typedef enum {
+	POWER_STATE_REQUEST_NONE = 0,
+	POWER_STATE_REQUEST_ON,
+	POWER_STATE_REQUEST_OFF,
+} PowerStateRequest;
+
 struct _BluetoothClient {
 	GObject parent;
 
 	GListStore *list_store;
 	Adapter1 *default_adapter;
+	PowerStateRequest power_req;
 	GDBusObjectManager *manager;
 	GCancellable *cancellable;
 	guint num_adapters;
@@ -75,6 +83,7 @@ enum {
 	PROP_NUM_ADAPTERS,
 	PROP_DEFAULT_ADAPTER,
 	PROP_DEFAULT_ADAPTER_POWERED,
+	PROP_DEFAULT_ADAPTER_STATE,
 	PROP_DEFAULT_ADAPTER_SETUP_MODE,
 	PROP_DEFAULT_ADAPTER_NAME,
 	PROP_DEFAULT_ADAPTER_ADDRESS
@@ -409,15 +418,31 @@ adapter_set_powered_cb (GDBusProxy *proxy,
 			GAsyncResult *res,
 			gpointer      user_data)
 {
+	BluetoothClient *client;
 	g_autoptr(GError) error = NULL;
 	g_autoptr(GVariant) ret = NULL;
 
 	ret = g_dbus_proxy_call_finish (proxy, res, &error);
 	if (!ret) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+			return;
 		g_debug ("Error setting property 'Powered' on %s: %s (%s, %d)",
 			 g_dbus_proxy_get_object_path (proxy),
 			 error->message, g_quark_to_string (error->domain), error->code);
 	}
+
+	client = user_data;
+	if (client->default_adapter) {
+		gboolean powered;
+
+		powered = adapter1_get_powered (client->default_adapter);
+		if ((powered && client->power_req == POWER_STATE_REQUEST_ON) ||
+		    (!powered && client->power_req == POWER_STATE_REQUEST_OFF)) {
+			/* Only reset if we don't have a conflicting state in progress */
+			client->power_req = POWER_STATE_REQUEST_NONE;
+		}
+	}
+	g_object_notify (G_OBJECT (client), "default-adapter-state");
 }
 
 static void
@@ -433,6 +458,12 @@ adapter_set_powered (BluetoothClient *client,
 		return;
 	}
 
+	if ((powered && client->power_req == POWER_STATE_REQUEST_ON) ||
+	    (!powered && client->power_req == POWER_STATE_REQUEST_OFF)) {
+		g_debug ("Default adapter is already being powered %s", powered ? "on" : "off");
+		return;
+	}
+
 	if (powered == adapter1_get_powered (client->default_adapter)) {
 		g_debug ("Default adapter is already %spowered", powered ? "" : "un");
 		return;
@@ -442,6 +473,9 @@ adapter_set_powered (BluetoothClient *client,
 		 powered ? "up" : "down",
 		 g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter)));
 	variant = g_variant_new_boolean (powered);
+	client->power_req = powered ?
+		POWER_STATE_REQUEST_ON : POWER_STATE_REQUEST_OFF;
+	g_object_notify (G_OBJECT (client), "default-adapter-state");
 	g_dbus_proxy_call (G_DBUS_PROXY (client->default_adapter),
 			   "org.freedesktop.DBus.Properties.Set",
 			   g_variant_new ("(ssv)", "org.bluez.Adapter1", "Powered", variant),
@@ -554,6 +588,7 @@ adapter_notify_cb (Adapter1       *adapter,
 		g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 	} else if (g_strcmp0 (property, "powered") == 0) {
 		g_object_notify (G_OBJECT (client), "default-adapter-powered");
+		g_object_notify (G_OBJECT (client), "default-adapter-state");
 	}
 }
 
@@ -570,6 +605,7 @@ notify_default_adapter_props (BluetoothClient *client)
 	g_object_notify (G_OBJECT (client), "default-adapter");
 	g_object_notify (G_OBJECT (client), "default-adapter-address");
 	g_object_notify (G_OBJECT (client), "default-adapter-powered");
+	g_object_notify (G_OBJECT (client), "default-adapter-state");
 	g_object_notify (G_OBJECT (client), "default-adapter-setup-mode");
 	g_object_notify (G_OBJECT (client), "default-adapter-name");
 }
@@ -603,7 +639,6 @@ default_adapter_changed (GDBusObjectManager       *manager,
 		g_list_store_remove_all (client->list_store);
 		g_debug ("Disabling discovery on old default adapter");
 		_bluetooth_client_set_default_adapter_discovering (client, FALSE);
-		g_clear_object (&client->default_adapter);
 	}
 
 	client->default_adapter = ADAPTER1 (g_object_ref (G_OBJECT (adapter)));
@@ -1210,6 +1245,19 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 	}
 }
 
+static BluetoothAdapterState
+adapter_get_state (BluetoothClient *client)
+{
+	if (!client->default_adapter)
+		return BLUETOOTH_ADAPTER_STATE_ABSENT;
+	if (client->power_req == POWER_STATE_REQUEST_NONE)
+		return adapter1_get_powered (client->default_adapter) ?
+			BLUETOOTH_ADAPTER_STATE_ON : BLUETOOTH_ADAPTER_STATE_OFF;
+	return client->power_req == POWER_STATE_REQUEST_ON ?
+		BLUETOOTH_ADAPTER_STATE_TURNING_ON :
+		BLUETOOTH_ADAPTER_STATE_TURNING_OFF;
+}
+
 static void
 bluetooth_client_get_property (GObject        *object,
 			       guint           property_id,
@@ -1229,6 +1277,9 @@ bluetooth_client_get_property (GObject        *object,
 	case PROP_DEFAULT_ADAPTER_POWERED:
 		g_value_set_boolean (value, client->default_adapter ?
 				     adapter1_get_powered (client->default_adapter) : FALSE);
+		break;
+	case PROP_DEFAULT_ADAPTER_STATE:
+		g_value_set_enum (value, adapter_get_state (client));
 		break;
 	case PROP_DEFAULT_ADAPTER_NAME:
 		g_value_set_string (value, client->default_adapter ?
@@ -1363,6 +1414,18 @@ static void bluetooth_client_class_init(BluetoothClientClass *klass)
 					 g_param_spec_boolean ("default-adapter-powered", NULL,
 							      "Whether the default adapter is powered",
 							       FALSE, G_PARAM_READWRITE));
+	/**
+	 * BluetoothClient:default-adapter-state:
+	 *
+	 * The #BluetoothAdapterState of the default Bluetooth adapter. More precise than
+	 * #BluetoothClient:default-adapter-powered.
+	 */
+	g_object_class_install_property (object_class, PROP_DEFAULT_ADAPTER_STATE,
+					 g_param_spec_enum ("default-adapter-state", NULL,
+							    "State of the default adapter",
+							    BLUETOOTH_TYPE_ADAPTER_STATE,
+							    BLUETOOTH_ADAPTER_STATE_ABSENT,
+							    G_PARAM_READABLE));
 	/**
 	 * BluetoothClient:default-adapter-setup-mode:
 	 *

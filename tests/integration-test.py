@@ -265,26 +265,34 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
         self.wait_for_mainloop()
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
         self.client.props.default_adapter_powered = True
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.TURNING_ON)
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
         self.assertEqual(self.client.props.num_adapters, 1)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
         self.wait_for_mainloop()
         self.assertEqual(self.client.props.default_adapter_powered, True)
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.ON)
 
         self.client.props.default_adapter_powered = False
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == False)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.TURNING_OFF)
         self.wait_for_mainloop()
         self.assertEqual(self.client.props.default_adapter_powered, False)
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
 
         dbusmock_bluez.UpdateProperties('org.bluez.Adapter1', {
                 'Powered': True,
         })
+        # NOTE: this should be "turning on" when we have bluez API to keep track of it
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
         self.wait_for_mainloop()
         self.assertEqual(self.client.props.default_adapter_powered, True)
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.ON)
 
     def _pair_cb(self, client, result, user_data=None):
         success, path = client.setup_device_finish(result)
