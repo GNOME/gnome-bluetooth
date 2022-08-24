@@ -1,6 +1,6 @@
 project(
   'gnome-bluetooth', 'c',
-  version: '42.2',
+  version: '42.3',
   license: 'GPL2+',
   default_options: 'buildtype=debugoptimized',
   meson_version: '>= 0.58.0',
@@ -34,9 +34,9 @@ enable_gir = get_option('introspection')
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-current = 14
+current = 15
 revision = 0
-age = 1
+age = 2
 
 lt_soversion = current - age
 libversion = '@0@.@1@.@2@'.format(lt_soversion, age, revision)
