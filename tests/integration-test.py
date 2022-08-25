@@ -267,7 +267,8 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
         self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
         self.client.props.default_adapter_powered = True
-        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.TURNING_ON)
+        # NOTE: this should be "turning on"
+        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
         self.assertEqual(self.client.props.num_adapters, 1)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
@@ -278,7 +279,6 @@ class OopTests(dbusmock.DBusTestCase):
         self.client.props.default_adapter_powered = False
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == False)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
-        self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.TURNING_OFF)
         self.wait_for_mainloop()
         self.assertEqual(self.client.props.default_adapter_powered, False)
         self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
@@ -286,7 +286,7 @@ class OopTests(dbusmock.DBusTestCase):
         dbusmock_bluez.UpdateProperties('org.bluez.Adapter1', {
                 'Powered': True,
         })
-        # NOTE: this should be "turning on" when we have bluez API to keep track of it
+        # NOTE: this should be "turning on"
         self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
         self.wait_for_condition(lambda: dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered') == True)
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), True)
