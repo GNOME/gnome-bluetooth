@@ -1,3 +1,11 @@
+ver 42.4:
+This version switches the power state API added in version 42.3 to be backed
+by the experimental PowerState property in bluetoothd. The API will not show
+transitional states if the version of bluetoothd is too old.
+
+The battery API now exports the battery information for all Bluetooth devices
+listed in UPower, not just the ones re-exported from bluetoothd.
+
 ver 42.3:
 This version adds a new API for more precise adapter power state, and fixes
 a number of small UI problems in bluetooth-sendto.
