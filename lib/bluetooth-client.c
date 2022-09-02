@@ -114,6 +114,26 @@ get_device_for_path (BluetoothClient *client,
 	return NULL;
 }
 
+static BluetoothDevice *
+get_device_for_bdaddr (BluetoothClient *client,
+		       const char      *bdaddr)
+{
+	guint n_items, i;
+
+	n_items = g_list_model_get_n_items (G_LIST_MODEL (client->list_store));
+	for (i = 0; i < n_items; i++) {
+		g_autoptr(BluetoothDevice) d = NULL;
+		g_autofree char *s = NULL;
+
+		d = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
+		g_object_get (G_OBJECT (d), "address", &s, NULL);
+		if (g_ascii_strncasecmp (bdaddr, s, BDADDR_STR_LEN) == 0) {
+			return g_steal_pointer (&d);
+		}
+	}
+	return NULL;
+}
+
 static char **
 device_list_uuids (const gchar * const *uuids)
 {
@@ -983,7 +1003,7 @@ up_device_added_cb (UpClient *up_client,
 		    gpointer  user_data)
 {
 	BluetoothClient *client = user_data;
-	g_autofree char *native_path = NULL;
+	g_autofree char *serial = NULL;
 	g_autoptr(BluetoothDevice) device = NULL;
 	UpDeviceLevel battery_level;
 	double percentage;
@@ -992,16 +1012,16 @@ up_device_added_cb (UpClient *up_client,
 	g_debug ("Considering UPower device %s", up_device_get_object_path (up_device));
 
 	g_object_get (up_device,
-		      "native-path", &native_path,
+		      "serial", &serial,
 		      "battery-level", &battery_level,
 		      "percentage", &percentage,
 		      NULL);
 
-	if (!native_path || !g_str_has_prefix (native_path, "/org/bluez/"))
+	if (!serial || !bluetooth_verify_address(serial))
 		return;
-	device = get_device_for_path (client, native_path);
+	device = get_device_for_bdaddr (client, serial);
 	if (!device) {
-		g_debug ("Could not find bluez device for upower device %s", native_path);
+		g_debug ("Could not find bluez device for upower device with serial %s", serial);
 		return;
 	}
 	g_signal_connect (G_OBJECT (up_device), "notify::battery-level",
@@ -1013,7 +1033,7 @@ up_device_added_cb (UpClient *up_client,
 		battery_type = BLUETOOTH_BATTERY_TYPE_PERCENTAGE;
 	else
 		battery_type = BLUETOOTH_BATTERY_TYPE_COARSE;
-	g_debug ("Applying battery information for %s", native_path);
+	g_debug ("Applying battery information for %s", serial);
 	g_object_set (device,
 		      "battery-type", battery_type,
 		      "battery-level", battery_level,

@@ -27,6 +27,8 @@
 #include <gio/gio.h>
 #include <bluetooth-enums.h>
 
+#define BDADDR_STR_LEN                         17
+
 BluetoothType  bluetooth_class_to_type         (guint32 class);
 BluetoothType  bluetooth_appearance_to_type    (guint16 appearance);
 const gchar   *bluetooth_type_to_string        (guint type);
