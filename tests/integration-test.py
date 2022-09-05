@@ -622,6 +622,7 @@ class Tests(dbusmock.DBusTestCase):
                    'org.freedesktop.UPower.Device',
                    {
                        'NativePath': dbus.String('/org/bluez/hci0/dev_11_22_33_44_55_66'),
+                       'Serial': dbus.String('11:22:33:44:55:66', variant_level=1),
                        'Type': dbus.UInt32(5, variant_level=1),
                        'State': dbus.UInt32(2, variant_level=1),
                        'Percentage': dbus.Double(66, variant_level=1),
@@ -644,6 +645,7 @@ class Tests(dbusmock.DBusTestCase):
                    'org.freedesktop.UPower.Device',
                    {
                        'NativePath': dbus.String('/org/bluez/hci0/dev_11_22_33_44_55_67'),
+                       'Serial': dbus.String('11:22:33:44:55:67', variant_level=1),
                        'Type': dbus.UInt32(5, variant_level=1),
                        'State': dbus.UInt32(2, variant_level=1),
                        'Percentage': dbus.Double(55, variant_level=1),
