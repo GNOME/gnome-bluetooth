@@ -195,6 +195,8 @@ bluetooth_pairing_dialog_set_pin_entered (BluetoothPairingDialog *self,
 		guint i;
 
 		invisible = gtk_entry_get_invisible_char (GTK_ENTRY (priv->entry_pin));
+		if (invisible == 0)
+			invisible = '*';
 
 		str = g_string_new (NULL);
 		for (i = 0; i < entered; i++)
