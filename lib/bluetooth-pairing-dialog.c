@@ -184,7 +184,7 @@ bluetooth_pairing_dialog_set_pin_entered (BluetoothPairingDialog *self,
 					  guint                   entered)
 {
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
-	char *done;
+	g_autofree char *done = NULL;
 
 	g_assert (priv->mode == BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD);
 	g_assert (priv->pin);
@@ -208,7 +208,6 @@ bluetooth_pairing_dialog_set_pin_entered (BluetoothPairingDialog *self,
 	}
 
 	gtk_label_set_text (GTK_LABEL (priv->label_pin), done);
-	g_free (done);
 }
 
 static void
