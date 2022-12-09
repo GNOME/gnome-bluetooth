@@ -72,6 +72,7 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 	g_clear_pointer (&priv->pin, g_free);
 	priv->pin = g_strdup (pin);
 	gtk_editable_set_text (GTK_EDITABLE (priv->entry_pin), pin ? pin : "");
+	gtk_entry_set_visibility (GTK_ENTRY (priv->entry_pin), TRUE);
 	gtk_label_set_text (GTK_LABEL (priv->label_pin), pin);
 
 	switch (mode) {
@@ -124,6 +125,8 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD:
 		help = g_strdup_printf (_("Please enter the following PIN on “%s”. Then press “Return” on the keyboard."), device_name);
+		/* populate the invisible character */
+		gtk_entry_set_visibility (GTK_ENTRY (priv->entry_pin), FALSE);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_ICADE:
 		help = g_strdup (_("Please move the joystick of your iCade in the following directions. Then press any of the white buttons."));
