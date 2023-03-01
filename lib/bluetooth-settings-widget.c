@@ -1090,7 +1090,6 @@ update_properties (BluetoothSettingsWidget *self,
 	g_auto(GStrv) uuids = NULL;
 	char *bdaddr, *alias;
 	g_autofree char *icon = NULL;
-	guint i;
 
 	if (self->debug)
 		bluetooth_device_dump (device);
@@ -1139,12 +1138,8 @@ update_properties (BluetoothSettingsWidget *self,
 
 	/* UUIDs */
 	gtk_widget_set_sensitive (GTK_WIDGET (button), connectable);
-	for (i = 0; uuids && uuids[i] != NULL; i++) {
-		if (g_str_equal (uuids[i], "OBEXObjectPush")) {
-			gtk_widget_show (WID ("send_button"));
-			break;
-		}
-	}
+	if (uuids && g_strv_contains (uuids, "OBEXObjectPush"))
+		gtk_widget_show (WID ("send_button"));
 
 	/* Type */
 	gtk_label_set_text (GTK_LABEL (WID ("type_label")), bluetooth_type_to_string (type));
