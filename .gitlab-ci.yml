@@ -21,6 +21,7 @@ variables:
     dbus-daemon
     python3-gobject-base
     python3-dbus
+    python3-dbusmock
   DEPENDENCIES_ABI_CHECK:
     libabigail
   LAST_ABI_BREAK: "cbc08c4f293664e681b1646e794e7cf62782c6cc"
@@ -32,12 +33,6 @@ build_stable:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
   script:
-    # Install newer python-dbusmock
-    - git clone https://github.com/martinpitt/python-dbusmock.git
-    - cd python-dbusmock
-    - python3 setup.py build
-    - python3 setup.py install
-    - cd ..
     - meson . _build --prefix=/usr -Dgtk_doc=true -Dintrospection=true -Dsendto=true
     - ninja -C _build
     - ninja -C _build install
