@@ -36,6 +36,7 @@
 
 #include "config.h"
 
+#define _GNU_SOURCE
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <gio/gio.h>
@@ -186,11 +187,12 @@ phone_oui_to_icon_name (const char *bdaddr)
 }
 
 static const char *
-icon_override (const char    *bdaddr,
-	       BluetoothType  type)
+icon_override (const char    *name,
+	       const char    *bdaddr,
+	       BluetoothType *type)
 {
 	/* audio-card, you're ugly */
-	switch (type) {
+	switch (*type) {
 	case BLUETOOTH_TYPE_HEADSET:
 		return "audio-headset";
 	case BLUETOOTH_TYPE_HEADPHONES:
@@ -203,6 +205,12 @@ icon_override (const char    *bdaddr,
 		return "video-display";
 	case BLUETOOTH_TYPE_SCANNER:
 		return "scanner";
+	case BLUETOOTH_TYPE_MOUSE:
+		if (name && strcasestr (name, "tablet")) {
+			*type = BLUETOOTH_TYPE_TABLET;
+			return "input-tablet";
+		}
+		/* fallthrough */
 	case BLUETOOTH_TYPE_REMOTE_CONTROL:
 	case BLUETOOTH_TYPE_WEARABLE:
 	case BLUETOOTH_TYPE_TOY:
@@ -215,11 +223,14 @@ icon_override (const char    *bdaddr,
 static void
 device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char **icon)
 {
+	const char *name;
+
 	g_return_if_fail (type);
 	g_return_if_fail (icon);
 
-	if (g_strcmp0 (device1_get_name (device), "ION iCade Game Controller") == 0 ||
-	    g_strcmp0 (device1_get_name (device), "8Bitdo Zero GamePad") == 0) {
+	name = device1_get_name (device);
+	if (g_strcmp0 (name, "ION iCade Game Controller") == 0 ||
+	    g_strcmp0 (name, "8Bitdo Zero GamePad") == 0) {
 		*type = BLUETOOTH_TYPE_JOYPAD;
 		*icon = "input-gaming";
 		return;
@@ -230,7 +241,7 @@ device_resolve_type_and_icon (Device1 *device, BluetoothType *type, const char *
 	if (*type == 0 || *type == BLUETOOTH_TYPE_ANY)
 		*type = bluetooth_class_to_type (device1_get_class (device));
 
-	*icon = icon_override (device1_get_address (device), *type);
+	*icon = icon_override (name, device1_get_address (device), type);
 
 	if (!*icon) {
 		*icon = device1_get_icon (device);
