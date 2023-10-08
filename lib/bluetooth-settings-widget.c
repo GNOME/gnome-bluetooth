@@ -1287,18 +1287,14 @@ remove_selected_device (BluetoothSettingsWidget *self)
 }
 
 static void
-confirm_dialog_response_cb (GtkDialog *dialog,
-			    gint       response,
+confirm_dialog_remove_cb (AdwMessageDialog *dialog,
+			    gchar     *response,
 			    gpointer   user_data)
 {
 	BluetoothSettingsWidget *self = user_data;
 
-	if (response == GTK_RESPONSE_ACCEPT) {
-		remove_selected_device (self);
-		gtk_widget_set_visible (GTK_WIDGET (self->properties_dialog), FALSE);
-	}
-
-	gtk_window_destroy (GTK_WINDOW (dialog));
+	remove_selected_device (self);
+	gtk_widget_set_visible (GTK_WIDGET (self->properties_dialog), FALSE);
 }
 
 static void
@@ -1307,20 +1303,20 @@ show_confirm_dialog (BluetoothSettingsWidget *self,
 {
 	GtkWidget *dialog;
 
-	dialog = gtk_message_dialog_new (GTK_WINDOW (self->properties_dialog),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+	dialog = adw_message_dialog_new (GTK_WINDOW (self->properties_dialog), NULL,
+					 _("If you remove the device, you will have to set it up again before next use."));
+	adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog),
 					 _("Remove “%s” from the list of devices?"), name);
-	g_object_set (G_OBJECT (dialog), "secondary-text",
-		      _("If you remove the device, you will have to set it up again before next use."),
-		      NULL);
 
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Remove"), GTK_RESPONSE_ACCEPT);
+	adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+				      "cancel", _("_Cancel"),
+				      "remove", _("_Remove"),
+				      NULL);
+	adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "remove", ADW_RESPONSE_DESTRUCTIVE);
 
-	g_signal_connect (dialog, "response", G_CALLBACK (confirm_dialog_response_cb), self);
+	g_signal_connect (dialog, "response::remove", G_CALLBACK (confirm_dialog_remove_cb), self);
 
-	gtk_widget_show (dialog);
+	gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
