@@ -111,19 +111,23 @@ static guint signals[LAST_SIGNAL] = { 0 };
 #define DEVICES_PAGE                 "devices-page"
 
 enum {
-	CONNECTING_NOTEBOOK_PAGE_SWITCH = 0,
-	CONNECTING_NOTEBOOK_PAGE_SPINNER = 1
+	CONNECTING_STATE_IDLE = 0,
+	CONNECTING_STATE_LOADING = 1
 };
 
 static void
-set_connecting_page (BluetoothSettingsWidget *self,
-		     int                      page)
+set_connecting_state (BluetoothSettingsWidget *self,
+		     int                      state)
 {
-	if (page == CONNECTING_NOTEBOOK_PAGE_SPINNER)
+	if (state == CONNECTING_STATE_LOADING) {
 		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("connecting_notebook")), page);
-	if (page == CONNECTING_NOTEBOOK_PAGE_SWITCH)
+		gtk_widget_set_visible (GTK_WIDGET (WID ("connecting_spinner")), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (WID ("switch_connection")), FALSE);
+	} else {
 		gtk_spinner_stop (GTK_SPINNER (WID ("connecting_spinner")));
+		gtk_widget_set_visible (GTK_WIDGET (WID ("connecting_spinner")), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (WID ("switch_connection")), TRUE);
+	}
 }
 
 static void
@@ -197,7 +201,7 @@ connect_done (GObject      *source_object,
 			gtk_switch_set_active (button, !data->state);
 			g_debug ("Connection failed to %s: %s", data->bdaddr, error->message);
 		}
-		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
+		set_connecting_state (self, CONNECTING_STATE_IDLE);
 	}
 
 	remove_connecting (self, data->bdaddr);
@@ -1080,7 +1084,7 @@ switch_connected_state_set (GtkSwitch               *button,
 					  data);
 
 	add_connecting (self, data->bdaddr);
-	set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
+	set_connecting_state (self, CONNECTING_STATE_LOADING);
 
 	return TRUE;
 }
@@ -1133,22 +1137,22 @@ update_properties (BluetoothSettingsWidget *self,
 	gtk_switch_set_state (button, connected);
 	gtk_switch_set_active (button, connected);
 	if (is_connecting (self, bdaddr)) {
-		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
+		set_connecting_state (self, CONNECTING_STATE_LOADING);
 	} else {
-		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
+		set_connecting_state (self, CONNECTING_STATE_IDLE);
 	}
 
 	/* Paired */
-	gtk_label_set_text (GTK_LABEL (WID ("paired_label")),
-			    paired ? _("Yes") : _("No"));
+	adw_action_row_set_subtitle (ADW_ACTION_ROW (WID ("paired_row")),
+				     paired ? _("Yes") : _("No"));
 
 	/* UUIDs */
-	gtk_widget_set_sensitive (GTK_WIDGET (button), connectable);
 	if (uuids && g_strv_contains ((const char * const*) uuids, "OBEXObjectPush"))
 		gtk_widget_show (WID ("send_button"));
 
 	/* Type */
-	gtk_label_set_text (GTK_LABEL (WID ("type_label")), bluetooth_type_to_string (type));
+	adw_action_row_set_subtitle (ADW_ACTION_ROW (WID ("type_row")),
+				     bluetooth_type_to_string (type));
 	switch (type) {
 	case BLUETOOTH_TYPE_KEYBOARD:
 		gtk_widget_show (WID ("keyboard_button"));
@@ -1167,7 +1171,7 @@ update_properties (BluetoothSettingsWidget *self,
 	}
 
 	/* Address */
-	gtk_label_set_text (GTK_LABEL (WID ("address_label")), bdaddr);
+	adw_action_row_set_subtitle (ADW_ACTION_ROW (WID ("address_row")), bdaddr);
 
 	g_free (self->selected_bdaddr);
 	self->selected_bdaddr = bdaddr;
@@ -1182,28 +1186,25 @@ switch_panel (BluetoothSettingsWidget *self,
 		       0, panel);
 }
 
-static gboolean
+static void
 keyboard_callback (GtkButton        *button,
 		   BluetoothSettingsWidget *self)
 {
 	switch_panel (self, KEYBOARD_PREFS);
-	return TRUE;
 }
 
-static gboolean
+static void
 mouse_callback (GtkButton        *button,
 		BluetoothSettingsWidget *self)
 {
 	switch_panel (self, MOUSE_PREFS);
-	return TRUE;
 }
 
-static gboolean
+static void
 sound_callback (GtkButton        *button,
 		BluetoothSettingsWidget *self)
 {
 	switch_panel (self, SOUND_PREFS);
-	return TRUE;
 }
 
 static void
@@ -1608,9 +1609,8 @@ setup_properties_dialog (BluetoothSettingsWidget *self)
 
 	self->properties_dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
 	gtk_window_set_hide_on_close (self->properties_dialog, TRUE);
-	gtk_widget_set_size_request (GTK_WIDGET (self->properties_dialog), 380, -1);
-	gtk_window_set_resizable (self->properties_dialog, FALSE);
-	gtk_window_set_child (self->properties_dialog, WID ("properties_vbox"));
+	gtk_window_set_resizable (self->properties_dialog, TRUE);
+	gtk_window_set_child (self->properties_dialog, WID ("properties_widget"));
 
 	g_signal_connect (G_OBJECT (WID ("delete_button")), "clicked",
 			  G_CALLBACK (delete_clicked), self);
