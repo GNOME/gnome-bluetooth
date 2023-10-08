@@ -1607,10 +1607,7 @@ setup_properties_dialog (BluetoothSettingsWidget *self)
 {
 	GtkStyleContext *context;
 
-	self->properties_dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", TRUE, NULL);
-	gtk_window_set_hide_on_close (self->properties_dialog, TRUE);
-	gtk_window_set_resizable (self->properties_dialog, TRUE);
-	gtk_window_set_child (self->properties_dialog, WID ("properties_widget"));
+	self->properties_dialog = GTK_WINDOW (WID ("properties_dialog"));
 
 	g_signal_connect (G_OBJECT (WID ("delete_button")), "clicked",
 			  G_CALLBACK (delete_clicked), self);

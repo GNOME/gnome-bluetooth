@@ -1,119 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <object class="GtkScrolledWindow" id="properties_widget">
-    <property name="vexpand">True</property>
-    <property name="hexpand">True</property>
+  <object class="AdwWindow" id="properties_dialog">
+    <property name="destroy-with-parent">True</property>
+    <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
+    <property name="width-request">360</property>
+    <property name="height-request">270</property>
+    <property name="default-width">400</property>
+    <property name="default-widget">switch_connection</property>
     <child>
-      <object class="AdwClamp">
-        <property name="maximum-size">450</property>
-        <property name="margin_start">12</property>
-        <property name="margin_end">12</property>
-        <property name="margin_top">12</property>
-        <property name="margin_bottom">12</property>
+      <object class="GtkShortcutController">
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="spacing">24</property>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar" id="headerbar">
+            <property name="show-title">False</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="properties_widget">
+            <property name="vexpand">True</property>
+            <property name="hexpand">True</property>
             <child>
-              <object class="GtkImage" id="image">
-                <property name="margin_top">16</property>
-                <property name="margin_bottom">16</property>
-                <property name="icon_name">image-missing</property>
-                <property name="icon_size">large</property>
-                <property name="use_fallback">True</property>
-                <style>
-                  <class name="icon-dropshadow"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkListBox">
-                <property name="selection-mode">none</property>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
+              <object class="AdwClamp">
+                <property name="maximum-size">450</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">36</property>
                 <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Connection</property>
-                    <property name="activatable-widget">switch_connection</property>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">24</property>
                     <child>
-                      <object class="GtkSpinner" id="connecting_spinner">
-                        <property name="visible">False</property>
-                        <property name="valign">center</property>
+                      <object class="GtkImage" id="image">
+                        <property name="margin_top">16</property>
+                        <property name="margin_bottom">16</property>
+                        <property name="icon_name">image-missing</property>
+                        <property name="icon_size">large</property>
+                        <property name="use_fallback">True</property>
+                        <style>
+                          <class name="icon-dropshadow"/>
+                        </style>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSwitch" id="switch_connection">
-                        <property name="valign">center</property>
+                      <object class="GtkListBox">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                        <child>
+                          <object class="AdwActionRow">
+                            <property name="title" translatable="yes">Connection</property>
+                            <property name="activatable-widget">switch_connection</property>
+                            <child>
+                              <object class="GtkSpinner" id="connecting_spinner">
+                                <property name="visible">False</property>
+                                <property name="valign">center</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="switch_connection">
+                                <property name="valign">center</property>
+                                <property name="receives_default">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="paired_row">
+                            <property name="title" translatable="yes">Paired</property>
+                            <property name="subtitle" translatable="yes">Yes</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="type_row">
+                            <property name="title" translatable="yes">Type</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="address_row">
+                            <property name="title" translatable="yes">Address</property>
+                            <property name="subtitle">00:00:00:00:00</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="paired_row">
-                    <property name="title" translatable="yes">Paired</property>
-                    <property name="subtitle" translatable="yes">Yes</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="type_row">
-                    <property name="title" translatable="yes">Type</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="address_row">
-                    <property name="title" translatable="yes">Address</property>
-                    <property name="subtitle">00:00:00:00:00</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkButton" id="mouse_button">
-                    <property name="label" translatable="yes">_Mouse &amp; Touchpad Settings</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="sound_button">
-                    <property name="label" translatable="yes">_Sound Settings</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="keyboard_button">
-                    <property name="label" translatable="yes">_Keyboard Settings</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="send_button">
-                    <property name="label" translatable="yes">Send _Files…</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="delete_button">
-                    <property name="label" translatable="yes">_Remove Device</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkButton" id="mouse_button">
+                            <property name="label" translatable="yes">_Mouse &amp; Touchpad Settings</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="sound_button">
+                            <property name="label" translatable="yes">_Sound Settings</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="keyboard_button">
+                            <property name="label" translatable="yes">_Keyboard Settings</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="send_button">
+                            <property name="label" translatable="yes">Send _Files…</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="delete_button">
+                            <property name="label" translatable="yes">_Remove Device</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
