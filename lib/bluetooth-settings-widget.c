@@ -1116,10 +1116,10 @@ update_properties (BluetoothSettingsWidget *self,
 	self->selected_object_path = g_strdup (bluetooth_device_get_object_path (device));
 
 	/* Hide all the buttons now, and show them again if we need to */
-	gtk_widget_hide (WID ("keyboard_button"));
-	gtk_widget_hide (WID ("sound_button"));
-	gtk_widget_hide (WID ("mouse_button"));
-	gtk_widget_hide (WID ("send_button"));
+	gtk_widget_set_visible (WID ("keyboard_button"), FALSE);
+	gtk_widget_set_visible (WID ("sound_button"), FALSE);
+	gtk_widget_set_visible (WID ("mouse_button"), FALSE);
+	gtk_widget_set_visible (WID ("send_button"), FALSE);
 
 	/* Name */
 	gtk_window_set_title (GTK_WINDOW (self->properties_dialog), alias);
@@ -1146,23 +1146,23 @@ update_properties (BluetoothSettingsWidget *self,
 
 	/* UUIDs */
 	if (uuids && g_strv_contains ((const char * const*) uuids, "OBEXObjectPush"))
-		gtk_widget_show (WID ("send_button"));
+		gtk_widget_set_visible (WID ("send_button"), TRUE);
 
 	/* Type */
 	adw_action_row_set_subtitle (ADW_ACTION_ROW (WID ("type_row")),
 				     bluetooth_type_to_string (type));
 	switch (type) {
 	case BLUETOOTH_TYPE_KEYBOARD:
-		gtk_widget_show (WID ("keyboard_button"));
+		gtk_widget_set_visible (WID ("keyboard_button"), TRUE);
 		break;
 	case BLUETOOTH_TYPE_MOUSE:
 	case BLUETOOTH_TYPE_TABLET:
-		gtk_widget_show (WID ("mouse_button"));
+		gtk_widget_set_visible (WID ("mouse_button"), TRUE);
 		break;
 	case BLUETOOTH_TYPE_HEADSET:
 	case BLUETOOTH_TYPE_HEADPHONES:
 	case BLUETOOTH_TYPE_OTHER_AUDIO:
-		gtk_widget_show (WID ("sound_button"));
+		gtk_widget_set_visible (WID ("sound_button"), TRUE);
 	default:
 		/* others? */
 		;
@@ -1295,7 +1295,7 @@ confirm_dialog_response_cb (GtkDialog *dialog,
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		remove_selected_device (self);
-		gtk_widget_hide (GTK_WIDGET (self->properties_dialog));
+		gtk_widget_set_visible (GTK_WIDGET (self->properties_dialog), FALSE);
 	}
 
 	gtk_window_destroy (GTK_WINDOW (dialog));
