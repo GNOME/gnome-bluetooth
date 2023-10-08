@@ -1144,7 +1144,7 @@ update_properties (BluetoothSettingsWidget *self,
 
 	/* UUIDs */
 	gtk_widget_set_sensitive (GTK_WIDGET (button), connectable);
-	if (uuids && g_strv_contains (uuids, "OBEXObjectPush"))
+	if (uuids && g_strv_contains ((const char * const*) uuids, "OBEXObjectPush"))
 		gtk_widget_show (WID ("send_button"));
 
 	/* Type */
