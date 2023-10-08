@@ -47,6 +47,7 @@
                         <property name="icon_name">image-missing</property>
                         <property name="icon_size">large</property>
                         <property name="use_fallback">True</property>
+                        <property name="pixel-size">128</property>
                         <style>
                           <class name="icon-dropshadow"/>
                         </style>
@@ -140,6 +141,9 @@
                           <object class="GtkButton" id="delete_button">
                             <property name="label" translatable="yes">_Remove Device</property>
                             <property name="use-underline">True</property>
+                            <style>
+                              <class name="destructive-action"/>
+                            </style>
                           </object>
                         </child>
                       </object>

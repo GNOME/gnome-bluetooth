@@ -92,8 +92,6 @@ static guint signals[LAST_SIGNAL] = { 0 };
 #define MOUSE_PREFS		"mouse"
 #define SOUND_PREFS		"sound"
 
-#define ICON_SIZE 128
-
 /* We'll try to connect to the device repeatedly for that
  * amount of time before we bail out */
 #define CONNECT_TIMEOUT 3.0
@@ -1605,8 +1603,6 @@ devices_coldplug (BluetoothSettingsWidget *self)
 static void
 setup_properties_dialog (BluetoothSettingsWidget *self)
 {
-	GtkStyleContext *context;
-
 	self->properties_dialog = GTK_WINDOW (WID ("properties_dialog"));
 
 	g_signal_connect (G_OBJECT (WID ("delete_button")), "clicked",
@@ -1621,12 +1617,6 @@ setup_properties_dialog (BluetoothSettingsWidget *self)
 			  G_CALLBACK (send_callback), self);
 	g_signal_connect (G_OBJECT (WID ("switch_connection")), "state-set",
 			  G_CALLBACK (switch_connected_state_set), self);
-
-	/* Styling */
-	gtk_image_set_pixel_size (GTK_IMAGE (WID ("image")), ICON_SIZE);
-
-	context = gtk_widget_get_style_context (WID ("delete_button"));
-	gtk_style_context_add_class (context, "destructive-action");
 }
 
 static void
