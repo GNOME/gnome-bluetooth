@@ -162,6 +162,7 @@ has_default_adapter (BluetoothSettingsWidget *self)
 typedef struct {
 	char             *bdaddr;
 	BluetoothSettingsWidget *self;
+	gboolean          state;
 } ConnectData;
 
 static void
@@ -188,9 +189,12 @@ connect_done (GObject      *source_object,
 		button = GTK_SWITCH (WID ("switch_connection"));
 
 		/* Ensure the switch position is in the correct place. */
-		gtk_switch_set_active (button, gtk_switch_get_state (button));
-
-		if (success == FALSE) {
+		if (success) {
+			gtk_switch_set_state (button, data->state);
+			gtk_switch_set_active (button, data->state);
+		} else {
+			gtk_switch_set_state (button, !data->state);
+			gtk_switch_set_active (button, !data->state);
 			g_debug ("Connection failed to %s: %s", data->bdaddr, error->message);
 		}
 		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
@@ -1062,6 +1066,7 @@ switch_connected_state_set (GtkSwitch               *button,
 	data = g_new0 (ConnectData, 1);
 	data->bdaddr = g_strdup (self->selected_bdaddr);
 	data->self = self;
+	data->state = state;
 
 	if (gtk_switch_get_active (button))
 		g_object_set (G_OBJECT (self->client),
@@ -1126,6 +1131,7 @@ update_properties (BluetoothSettingsWidget *self,
 	button = GTK_SWITCH (WID ("switch_connection"));
 
 	gtk_switch_set_state (button, connected);
+	gtk_switch_set_active (button, connected);
 	if (is_connecting (self, bdaddr)) {
 		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
 	} else {
