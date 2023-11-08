@@ -101,7 +101,7 @@ gtk_dep = dependency('gtk4', version: '>= 4.4')
 gsound_dep = dependency('gsound')
 libadwaita_dep = dependency(
   'libadwaita-1',
-  version: '>= 1.1',
+  version: '>= 1.4',
   fallback: ['libadwaita', 'libadwaita_dep'],
   default_options: ['examples=false', 'introspection=disabled', 'tests=false', 'vapi=false'],
 )
