@@ -49,7 +49,7 @@
  * Return value: a string.
  **/
 const gchar *
-bluetooth_type_to_string (BluetoothType type)
+bluetooth_type_to_string (guint type)
 {
 	switch (type) {
 	case BLUETOOTH_TYPE_PHONE:
