@@ -297,7 +297,7 @@ get_paired_for_address (const char  *adapter,
 		g_object_get (_device,
 			      "address", &address,
 			      "alias", &alias,
-			      "paired", paired,
+			      "paired", &paired,
 			      NULL);
 		if (g_strcmp0 (device, address) != 0)
 			continue;
