@@ -53,8 +53,9 @@ except ImportError:
 
 # Out-of-process tests
 class OopTests(dbusmock.DBusTestCase):
-    @classmethod
     def setUp(self):
+        super().setUp()
+
         if GNOME_BLUETOOTH_PRIV_UNAVAILABLE:
             sys.stderr.write('Could not find GnomeBluetoothPriv gobject-introspection data in the build dir: %s\n' % str(e))
             sys.exit(1)
@@ -482,6 +483,7 @@ class Tests(dbusmock.DBusTestCase):
 
     @classmethod
     def setUpClass(cls):
+        super().setUpClass()
         os.environ['G_MESSAGES_DEBUG'] = 'all'
         os.environ['G_DEBUG'] = 'fatal_warnings'
         cls.start_system_bus()
@@ -502,8 +504,10 @@ class Tests(dbusmock.DBusTestCase):
         cls.p_mock_bluez.wait()
         cls.p_mock_upower.terminate()
         cls.p_mock_upower.wait()
+        super().tearDownClass()
 
     def setUp(self):
+        super().setUp()
         self.obj_bluez.Reset()
         self.dbusmock = dbus.Interface(self.obj_bluez, dbusmock.MOCK_IFACE)
         self.dbusmock_bluez = dbus.Interface(self.obj_bluez, 'org.bluez.Mock')
