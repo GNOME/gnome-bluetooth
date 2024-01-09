@@ -402,8 +402,8 @@ unqueue_device_removal (BluetoothClient *client)
 
 			device = g_list_model_get_item (G_LIST_MODEL (client->list_store), i);
 			if (g_str_equal (path, bluetooth_device_get_object_path (device))) {
-				g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
 				g_list_store_remove (client->list_store, i);
+				g_signal_emit (G_OBJECT (client), signals[DEVICE_REMOVED], 0, path);
 				found = TRUE;
 				break;
 			}
