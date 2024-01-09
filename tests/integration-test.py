@@ -146,12 +146,17 @@ class OopTests(dbusmock.DBusTestCase):
         num_devices = 0
         num_mice = 0
         num_devices_signal = 0
+        num_items = 0
         def device_added_cb(client, device):
             nonlocal num_devices_signal
             num_devices_signal += 1
+            nonlocal num_items
+            num_items = list_store.get_n_items()
         def device_removed_cb(client, path):
             nonlocal num_devices_signal
             num_devices_signal -= 1
+            nonlocal num_items
+            num_items = list_store.get_n_items()
         self.client.connect('device-added', device_added_cb)
         self.client.connect('device-removed', device_removed_cb)
 
@@ -194,6 +199,7 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_condition(lambda: list_store.get_n_items() == 0, timeout=0.1)
         self.assertEqual(list_store.get_n_items(), 0)
         self.assertEqual(num_devices_signal, 0)
+        self.assertEqual(num_items, 0)
 
     def test_default_adapter(self):
         bus = dbus.SystemBus()
