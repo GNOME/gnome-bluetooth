@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-01-25 18:09+0000\n"
-"PO-Revision-Date: 2023-04-22 17:00+0100\n"
+"POT-Creation-Date: 2023-11-23 16:22+0000\n"
+"PO-Revision-Date: 2024-02-20 17:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -118,39 +118,39 @@ msgstr "Konektatuta"
 msgid "Disconnected"
 msgstr "Deskonektatuta"
 
-#: lib/bluetooth-settings-widget.c:1138
+#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
 msgid "Yes"
 msgstr "Bai"
 
-#: lib/bluetooth-settings-widget.c:1138
+#: lib/bluetooth-settings-widget.c:1148
 msgid "No"
 msgstr "Ez"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1237
+#: lib/bluetooth-settings-widget.c:1240
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr "“%s” gisa ikusgai eta Bluetooth bidezko fitxategi-transferentzientzako erabilgarri. Transferitutako fitxategiak honako karpetan agertuko dira: <a href=\"%s\">Deskargak</a>."
 
-#: lib/bluetooth-settings-widget.c:1313
-#, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Kendu “%s“ gailuen zerrendatik?"
-
-#: lib/bluetooth-settings-widget.c:1315
+#: lib/bluetooth-settings-widget.c:1310
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "Gailua ezabatzen baduzu, berriro konfiguratu beharko duzu hurrengoan erabili aurretik."
 
-#: lib/bluetooth-settings-widget.c:1318 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312
+#, c-format
+msgid "Remove “%s” from the list of devices?"
+msgstr "Kendu “%s“ gailuen zerrendatik?"
+
+#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_Utzi"
 
-#: lib/bluetooth-settings-widget.c:1319
+#: lib/bluetooth-settings-widget.c:1316
 msgid "_Remove"
 msgstr "_Kendu"
 
@@ -270,47 +270,47 @@ msgstr "Bozgorailuak"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: lib/settings.ui:32
-msgid "Connection"
-msgstr "Konexioa"
+#: lib/settings.ui:42
+msgid "_Connection"
+msgstr "_Konexioa"
 
-#: lib/settings.ui:74
+#: lib/settings.ui:68
 msgid "Paired"
 msgstr "Parekatua"
 
-#: lib/settings.ui:97
+#: lib/settings.ui:77
 msgid "Type"
 msgstr "Mota"
 
-#: lib/settings.ui:120
+#: lib/settings.ui:85
 msgid "Address"
 msgstr "Helbidea"
 
-#: lib/settings.ui:146
+#: lib/settings.ui:101
 msgid "_Mouse & Touchpad Settings"
 msgstr "_Saguaren eta ukipen-teklatuaren ezarpenak"
 
-#: lib/settings.ui:153
+#: lib/settings.ui:107
 msgid "_Sound Settings"
 msgstr "_Soinuaren ezarpenak"
 
-#: lib/settings.ui:160
+#: lib/settings.ui:113
 msgid "_Keyboard Settings"
 msgstr "_Teklatuaren ezarpenak"
 
-#: lib/settings.ui:167
+#: lib/settings.ui:119
 msgid "Send _Files…"
 msgstr "Bidali _fitxategiak…"
 
-#: lib/settings.ui:174
-msgid "_Remove Device"
-msgstr "_Kendu gailua"
+#: lib/settings.ui:125
+msgid "_Forget Device…"
+msgstr "_Ahaztu gailua…"
 
-#: lib/settings.ui:188 lib/settings.ui:203
+#: lib/settings.ui:147 lib/settings.ui:162
 msgid "Devices"
 msgstr "Gailuak"
 
-#: lib/settings.ui:217
+#: lib/settings.ui:176
 msgid "Searching for devices…"
 msgstr "Gailuak bilatzen…"
 
