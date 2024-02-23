@@ -59,6 +59,7 @@ struct _BluetoothSettingsWidget {
 	char                *selected_object_path;
 
 	/* Device section */
+        GtkWidget           *page;
 	GtkWidget           *device_list;
 	GtkAdjustment       *focus_adjustment;
 	GtkSizeGroup        *row_sizegroup;
@@ -71,7 +72,6 @@ struct _BluetoothSettingsWidget {
 	GHashTable          *devices_type; /* key=bdaddr, value=guint32 */
 
 	/* Sharing section */
-	GtkWidget           *explanation_group;
 	gboolean             has_console;
 	GDBusProxy          *session_proxy;
 };
@@ -1227,7 +1227,7 @@ update_visibility (BluetoothSettingsWidget *self)
 
 	g_object_get (G_OBJECT (self->client), "default-adapter-name", &name, NULL);
 	if (name != NULL) {
-		g_autofree char *label = NULL;
+		g_autofree char *description = NULL;
 		g_autofree char *path = NULL;
 		g_autofree char *uri = NULL;
 
@@ -1237,10 +1237,11 @@ update_visibility (BluetoothSettingsWidget *self)
 		/* translators: first %s is the name of the computer, for example:
 		 * Visible as “Bastien Nocera’s Computer” followed by the
 		 * location of the Downloads folder.*/
-		label = g_strdup_printf (_("Visible as “%s” and available for Bluetooth file transfers. Transferred files are placed in the <a href=\"%s\">Downloads</a> folder."), name, uri);
-		adw_preferences_group_set_description (ADW_PREFERENCES_GROUP (self->explanation_group), label);
-	}
-	gtk_widget_set_visible (self->explanation_group, name != NULL);
+		description = g_strdup_printf (_("Visible as “%s” and available for Bluetooth file transfers. Transferred files are placed in the <a href=\"%s\">Downloads</a> folder."), name, uri);
+		adw_preferences_page_set_description (ADW_PREFERENCES_PAGE (self->page), description);
+	} else {
+                adw_preferences_page_set_description (ADW_PREFERENCES_PAGE (self->page), NULL);
+        }
 }
 
 static void
@@ -1455,7 +1456,7 @@ add_device_section (BluetoothSettingsWidget *self)
 
 	/* Discoverable label placeholder, the real name is set in update_visibility().
 	 * If you ever see this string during normal use, please file a bug. */
-	self->explanation_group = WID ("explanation_group");
+	self->page = WID ("page");
 	update_visibility (self);
 
 	self->device_list = WID ("device_list");
