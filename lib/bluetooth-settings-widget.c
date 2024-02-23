@@ -63,7 +63,6 @@ struct _BluetoothSettingsWidget {
 	GtkWidget           *device_list;
 	GtkAdjustment       *focus_adjustment;
 	GtkSizeGroup        *row_sizegroup;
-	GtkWidget           *device_stack;
 	GtkWidget           *device_spinner;
 	GHashTable          *connecting_devices; /* key=bdaddr, value=boolean */
 
@@ -104,9 +103,6 @@ static guint signals[LAST_SIGNAL] = { 0 };
 #define GNOME_SESSION_DBUS_NAME      "org.gnome.SessionManager"
 #define GNOME_SESSION_DBUS_OBJECT    "/org/gnome/SessionManager"
 #define GNOME_SESSION_DBUS_INTERFACE "org.gnome.SessionManager"
-
-#define FILLER_PAGE                  "filler-page"
-#define DEVICES_PAGE                 "devices-page"
 
 enum {
 	CONNECTING_STATE_IDLE = 0,
@@ -1465,8 +1461,6 @@ add_device_section (BluetoothSettingsWidget *self)
 				    (GtkListBoxSortFunc)device_sort_func, NULL, NULL);
 	g_signal_connect_swapped (self->device_list, "row-activated",
 				  G_CALLBACK (activate_row), self);
-
-	self->device_stack = WID ("device_stack");
 }
 
 static void
@@ -1535,10 +1529,6 @@ device_added_cb (BluetoothClient *client,
 	gtk_list_box_append (GTK_LIST_BOX (self->device_list), row);
 	gtk_size_group_add_widget (self->row_sizegroup, row);
 
-	gtk_stack_set_transition_type (GTK_STACK (self->device_stack),
-				       GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN);
-	gtk_stack_set_visible_child_name (GTK_STACK (self->device_stack), DEVICES_PAGE);
-
 	g_signal_connect_object (G_OBJECT (device), "notify",
 				 G_CALLBACK (device_changed_cb), self, 0);
 }
@@ -1573,15 +1563,9 @@ device_removed_cb (BluetoothClient *client,
 		}
 	}
 
-	if (found) {
-		if (gtk_widget_get_first_child (self->device_list) == NULL) {
-			gtk_stack_set_transition_type (GTK_STACK (self->device_stack),
-						       GTK_STACK_TRANSITION_TYPE_NONE);
-			gtk_stack_set_visible_child_name (GTK_STACK (self->device_stack), FILLER_PAGE);
-		}
-	} else {
-		g_debug ("Didn't find a row to remove for tree path %s", object_path);
-	}
+        if (!found) {
+             g_debug ("Didn't find a row to remove for tree path %s", object_path);
+        }
 }
 
 static void
