@@ -1,7 +1,7 @@
 # English (United Kingdom) translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same licence as the gnome-bluetooth package.
-# Bruce Cowan <bruce@bcowan.me.uk>, 2009, 2010, 2011, 2012.
+# Bruce Cowan <bruce@bcowan.me.uk>, 2009-2012.
 # Philip Withnall <philip@tecnocode.co.uk>, 2010.
 # Zander Brown <zbrown@gnome.org>, 2019.
 # Andi Chandler <andi@gowling.com>, 2024.
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-02-05 09:03+0000\n"
-"PO-Revision-Date: 2024-02-23 12:45+0000\n"
+"POT-Creation-Date: 2024-02-22 17:49+0000\n"
+"PO-Revision-Date: 2024-02-23 12:13+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English - United Kingdom <en_GB@li.org>\n"
 "Language: en_GB\n"
@@ -20,6 +20,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
+"X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
+"X-Project-Style: gnome\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -125,18 +127,18 @@ msgstr "Connected"
 msgid "Disconnected"
 msgstr "Disconnected"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
 msgid "Yes"
 msgstr "Yes"
 
-#: lib/bluetooth-settings-widget.c:1143
+#: lib/bluetooth-settings-widget.c:1148
 msgid "No"
 msgstr "No"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1238
+#: lib/bluetooth-settings-widget.c:1240
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -145,22 +147,22 @@ msgstr ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 
-#: lib/bluetooth-settings-widget.c:1314
+#: lib/bluetooth-settings-widget.c:1310
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"If you remove the device, you will have to set it up again before next use."
+
+#: lib/bluetooth-settings-widget.c:1312
 #, c-format
 msgid "Remove “%s” from the list of devices?"
 msgstr "Remove “%s” from the list of devices?"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"If you remove the device, you will have to set it up again before next use."
-
-#: lib/bluetooth-settings-widget.c:1319 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_Cancel"
 
-#: lib/bluetooth-settings-widget.c:1320
+#: lib/bluetooth-settings-widget.c:1316
 msgid "_Remove"
 msgstr "_Remove"
 
@@ -280,47 +282,47 @@ msgstr "Speakers"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: lib/settings.ui:32
-msgid "Connection"
-msgstr "Connection"
+#: lib/settings.ui:42
+msgid "_Connection"
+msgstr "_Connection"
 
-#: lib/settings.ui:74
+#: lib/settings.ui:68
 msgid "Paired"
 msgstr "Paired"
 
-#: lib/settings.ui:97
+#: lib/settings.ui:77
 msgid "Type"
 msgstr "Type"
 
-#: lib/settings.ui:120
+#: lib/settings.ui:85
 msgid "Address"
 msgstr "Address"
 
-#: lib/settings.ui:146
+#: lib/settings.ui:101
 msgid "_Mouse & Touchpad Settings"
 msgstr "_Mouse & Touchpad Settings"
 
-#: lib/settings.ui:153
+#: lib/settings.ui:107
 msgid "_Sound Settings"
 msgstr "_Sound Settings"
 
-#: lib/settings.ui:160
+#: lib/settings.ui:113
 msgid "_Keyboard Settings"
 msgstr "_Keyboard Settings"
 
-#: lib/settings.ui:167
+#: lib/settings.ui:119
 msgid "Send _Files…"
 msgstr "Send _Files…"
 
-#: lib/settings.ui:174
-msgid "_Remove Device"
-msgstr "_Remove Device"
+#: lib/settings.ui:125
+msgid "_Forget Device…"
+msgstr "_Forget Device…"
 
-#: lib/settings.ui:188 lib/settings.ui:203
+#: lib/settings.ui:147 lib/settings.ui:162
 msgid "Devices"
 msgstr "Devices"
 
-#: lib/settings.ui:217
+#: lib/settings.ui:176
 msgid "Searching for devices…"
 msgstr "Searching for devices…"
 
