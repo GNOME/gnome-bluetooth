@@ -1,21 +1,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# A S Alam <aalam@users.sf.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2018, 2021, 2023.
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2018, 2021, 2023, 2024 A S Alam <aalam@users.sf.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-01-25 18:09+0000\n"
-"PO-Revision-Date: 2023-09-02 08:35-0700\n"
-"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"POT-Creation-Date: 2023-11-23 16:22+0000\n"
+"PO-Revision-Date: 2024-03-17 23:06-0500\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <punjabi-translation@googlegroups.com>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -123,18 +123,18 @@ msgstr "ਕਨੈਕਟ ਹੈ"
 msgid "Disconnected"
 msgstr "ਡਿਸ-ਕਨੈਕਟ ਹੈ"
 
-#: lib/bluetooth-settings-widget.c:1138
+#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
 msgid "Yes"
 msgstr "ਹਾਂ"
 
-#: lib/bluetooth-settings-widget.c:1138
+#: lib/bluetooth-settings-widget.c:1148
 msgid "No"
 msgstr "ਨਹੀਂ"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1237
+#: lib/bluetooth-settings-widget.c:1240
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -144,23 +144,23 @@ msgstr ""
 " ਫ਼ਾਇਲਾਂ ਨੂੰ <a "
 "href=\"%s\">ਡਾਊਨਲੋਡ (Downloads)</a> ਫੋਲਡਰ 'ਚ ਰੱਖਿਆ ਜਾਵੇਗਾ।"
 
-#: lib/bluetooth-settings-widget.c:1313
-#, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "ਕੀ ਡਿਵਾਈਸਾਂ ਦੀ ਸੂਚੀ ਵਿੱਚੋਂ “%s“ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
-
-#: lib/bluetooth-settings-widget.c:1315
+#: lib/bluetooth-settings-widget.c:1310
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "ਜੇ ਤੁਸੀਂ ਡਿਵਾਈਸ ਹਟਾਇਆ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਅਗਲੀ ਵਾਰ ਵਰਤਣ ਸਮੇਂ ਸੈੱਟਅੱਪ ਕਰਨਾ"
 " ਪਵੇਗਾ।"
 
-#: lib/bluetooth-settings-widget.c:1318 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312
+#, c-format
+msgid "Remove “%s” from the list of devices?"
+msgstr "ਕੀ ਡਿਵਾਈਸਾਂ ਦੀ ਸੂਚੀ ਵਿੱਚੋਂ “%s“ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?"
+
+#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
-#: lib/bluetooth-settings-widget.c:1319
+#: lib/bluetooth-settings-widget.c:1316
 msgid "_Remove"
 msgstr "ਹਟਾਓ(_R)"
 
@@ -280,47 +280,49 @@ msgstr "ਸਪੀਕਰ"
 msgid "Unknown"
 msgstr "ਅਣਪਛਾਤਾ"
 
-#: lib/settings.ui:32
-msgid "Connection"
-msgstr "ਕਨੈਕਸ਼ਨ"
+#: lib/settings.ui:42
+#| msgid "Connection"
+msgid "_Connection"
+msgstr "ਕਨੈਕਸ਼ਨ(_C)"
 
-#: lib/settings.ui:74
+#: lib/settings.ui:68
 msgid "Paired"
 msgstr "ਪੇਅਰ ਕੀਤੇ"
 
-#: lib/settings.ui:97
+#: lib/settings.ui:77
 msgid "Type"
 msgstr "ਕਿਸਮ"
 
-#: lib/settings.ui:120
+#: lib/settings.ui:85
 msgid "Address"
 msgstr "ਐਡਰੈੱਸ"
 
-#: lib/settings.ui:146
+#: lib/settings.ui:101
 msgid "_Mouse & Touchpad Settings"
 msgstr "ਮਾਊਸ ਅਤੇ ਟੱਚਪੈਡ ਸੈਟਿੰਗਾਂ(_M)"
 
-#: lib/settings.ui:153
+#: lib/settings.ui:107
 msgid "_Sound Settings"
 msgstr "ਸਾਊਂਡ ਸੈਟਿੰਗਾਂ(_S)"
 
-#: lib/settings.ui:160
+#: lib/settings.ui:113
 msgid "_Keyboard Settings"
 msgstr "ਕੀਬੋਰਡ ਸੈਟਿੰਗਾਂ(_K)"
 
-#: lib/settings.ui:167
+#: lib/settings.ui:119
 msgid "Send _Files…"
 msgstr "…ਫਾਇਲਾਂ ਭੇਜੋ(_F)"
 
-#: lib/settings.ui:174
-msgid "_Remove Device"
-msgstr "ਡਿਵਾਈਸ ਹਟਾਓ(_R)"
+#: lib/settings.ui:125
+#| msgid "_Remove Device"
+msgid "_Forget Device…"
+msgstr "…ਡਿਵਾਈਸ ਨੂੰ ਭੁੱਲੋ(_F)"
 
-#: lib/settings.ui:188 lib/settings.ui:203
+#: lib/settings.ui:147 lib/settings.ui:162
 msgid "Devices"
 msgstr "ਡਿਵਾਈਸ"
 
-#: lib/settings.ui:217
+#: lib/settings.ui:176
 msgid "Searching for devices…"
 msgstr "…ਡਿਵਾਈਸਾਂ ਲਈ ਖੋਜ ਜਾਰੀ ਹੈ"
 
@@ -1035,3 +1037,4 @@ msgstr "ਨਾਂ"
 
 #~ msgid "Error Occurred"
 #~ msgstr "ਗਲਤੀ ਆਈ"
+
