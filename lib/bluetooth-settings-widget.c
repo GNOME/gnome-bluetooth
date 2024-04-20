@@ -1303,18 +1303,21 @@ show_confirm_dialog (BluetoothSettingsWidget *self,
 {
 	GtkWidget *dialog;
 
-	dialog = adw_message_dialog_new (GTK_WINDOW (self->properties_dialog), NULL,
-					 _("If you remove the device, you will have to set it up again before next use."));
-	adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog),
-					 _("Remove “%s” from the list of devices?"), name);
+	dialog = adw_message_dialog_new (GTK_WINDOW (self->properties_dialog),
+					 _("Forget Device?"), NULL);
+
+        adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
+                                        _("“%s” will be removed from your saved devices."
+                                                 "You will have to set it up again to use it."), name);
+
 
 	adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
 				      "cancel", _("_Cancel"),
-				      "remove", _("_Remove"),
+				      "forget", _("_Forget"),
 				      NULL);
-	adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "remove", ADW_RESPONSE_DESTRUCTIVE);
+	adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "forget", ADW_RESPONSE_DESTRUCTIVE);
 
-	g_signal_connect (dialog, "response::remove", G_CALLBACK (confirm_dialog_remove_cb), self);
+	g_signal_connect (dialog, "response::forget", G_CALLBACK (confirm_dialog_remove_cb), self);
 
 	gtk_window_present (GTK_WINDOW (dialog));
 }
