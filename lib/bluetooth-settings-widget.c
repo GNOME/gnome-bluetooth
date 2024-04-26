@@ -1307,7 +1307,7 @@ show_confirm_dialog (BluetoothSettingsWidget *self,
 					 _("Forget Device?"), NULL);
 
         adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
-                                        _("“%s” will be removed from your saved devices."
+                                        _("“%s” will be removed from your saved devices. "
                                                  "You will have to set it up again to use it."), name);
 
 
