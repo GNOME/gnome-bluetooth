@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-01-25 18:09+0000\n"
-"PO-Revision-Date: 2023-07-03 11:14+0300\n"
+"POT-Creation-Date: 2024-04-26 16:12+0000\n"
+"PO-Revision-Date: 2024-04-29 02:52+0300\n"
 "Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
 "Language-Team: www.gnome.gr\n"
 "Language: el\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -133,18 +133,18 @@ msgstr "Συνδέθηκε"
 msgid "Disconnected"
 msgstr "Αποσυνδέθηκε"
 
-#: lib/bluetooth-settings-widget.c:1138
+#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
 msgid "Yes"
 msgstr "Ναι"
 
-#: lib/bluetooth-settings-widget.c:1138
+#: lib/bluetooth-settings-widget.c:1148
 msgid "No"
 msgstr "Όχι"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1237
+#: lib/bluetooth-settings-widget.c:1240
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -153,23 +153,23 @@ msgstr ""
 "Ορατό ως “%s” και διαθέσιμο για μεταφορές αρχείου μπλουτούθ. Τα μεταφερόμενα "
 "αρχεία τοποθετούνται στον φάκελο <a href=\"%s\">λήψεις</a>."
 
-#: lib/bluetooth-settings-widget.c:1313
-#, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Αφαίρεση του «%s» από τη λίστα των συσκευών;"
-
-#: lib/bluetooth-settings-widget.c:1315
+#: lib/bluetooth-settings-widget.c:1310
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Εάν αφαιρέσετε τη συσκευή, θα πρέπει να τη ρυθμίσετε ξανά την επόμενη φορά "
 "που θα την χρησιμοποιήσετε."
 
-#: lib/bluetooth-settings-widget.c:1318 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312
+#, c-format
+msgid "Remove “%s” from the list of devices?"
+msgstr "Αφαίρεση του «%s» από τη λίστα των συσκευών;"
+
+#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_Ακύρωση"
 
-#: lib/bluetooth-settings-widget.c:1319
+#: lib/bluetooth-settings-widget.c:1316
 msgid "_Remove"
 msgstr "_Αφαίρεση"
 
@@ -289,47 +289,47 @@ msgstr "Ηχεία"
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: lib/settings.ui:32
-msgid "Connection"
-msgstr "Σύνδεση"
+#: lib/settings.ui:42
+msgid "_Connection"
+msgstr "_Σύνδεση"
 
-#: lib/settings.ui:74
+#: lib/settings.ui:68
 msgid "Paired"
 msgstr "Συζευγμένα"
 
-#: lib/settings.ui:97
+#: lib/settings.ui:77
 msgid "Type"
 msgstr "Τύπος"
 
-#: lib/settings.ui:120
+#: lib/settings.ui:85
 msgid "Address"
 msgstr "Διεύθυνση"
 
-#: lib/settings.ui:146
+#: lib/settings.ui:101
 msgid "_Mouse & Touchpad Settings"
 msgstr "Ρυθμίσεις _ποντικιού και πινακίδας αφής"
 
-#: lib/settings.ui:153
+#: lib/settings.ui:107
 msgid "_Sound Settings"
 msgstr "Ρυθμίσεις ή_χου"
 
-#: lib/settings.ui:160
+#: lib/settings.ui:113
 msgid "_Keyboard Settings"
 msgstr "Ρυθμίσεις π_ληκτρολογίου"
 
-#: lib/settings.ui:167
+#: lib/settings.ui:119
 msgid "Send _Files…"
 msgstr "Αποστολή _αρχείων…"
 
-#: lib/settings.ui:174
-msgid "_Remove Device"
-msgstr "Α_φαίρεση συσκευής"
+#: lib/settings.ui:125
+msgid "_Forget Device…"
+msgstr "Α_φαίρεση συσκευής…"
 
-#: lib/settings.ui:188 lib/settings.ui:203
+#: lib/settings.ui:147 lib/settings.ui:162
 msgid "Devices"
 msgstr "Συσκευές"
 
-#: lib/settings.ui:217
+#: lib/settings.ui:176
 msgid "Searching for devices…"
 msgstr "Αναζήτηση για συσκευές…"
 
