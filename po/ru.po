@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master.ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2023-11-29 14:00+0300\n"
+"POT-Creation-Date: 2024-04-26 18:03+0000\n"
+"PO-Revision-Date: 2024-04-27 13:55+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Launchpad-Export-Date: 2009-04-14 23:23+0000\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -126,18 +126,18 @@ msgstr "Подключено"
 msgid "Disconnected"
 msgstr "Отключено"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1144 lib/settings.ui:69
 msgid "Yes"
 msgstr "Да"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1144
 msgid "No"
 msgstr "Нет"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1236
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -146,25 +146,26 @@ msgstr ""
 "Виден как «%s», доступен для передачи файлов по Bluetooth. Полученные файлы "
 "сохраняются в каталог <a href=\"%s\">Загрузки</a>."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Если вы удалите устройство, вам необходимо будет снова настроить его перед "
-"следующим использованием."
+#: lib/bluetooth-settings-widget.c:1307
+msgid "Forget Device?"
+msgstr "Забыть устройство?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1310
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Удалить «%s» из списка устройств?"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr ""
+"“%s” будет удалено из сохраненных устройств. Вам необходимо будет настроить "
+"его снова перед использованием."
 
 #: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
-msgstr "_Отмена"
+msgstr "_Отменить"
 
 #: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_Удалить"
+msgid "_Forget"
+msgstr "_Забыть"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -318,11 +319,11 @@ msgstr "Отправить _файлы…"
 msgid "_Forget Device…"
 msgstr "_Забыть устройство…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:144 lib/settings.ui:166
 msgid "Devices"
 msgstr "Устройства"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:157
 msgid "Searching for devices…"
 msgstr "Поиск устройств…"
 
@@ -457,6 +458,13 @@ msgstr "Имя удалённого устройства"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "ИМЯ"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "Удалить «%s» из списка устройств?"
+
+#~ msgid "_Remove"
+#~ msgstr "_Удалить"
 
 #~ msgid "Click to select device…"
 #~ msgstr "Нажмите, чтобы выбрать устройство…"
