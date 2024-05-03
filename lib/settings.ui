@@ -25,73 +25,92 @@
             <property name="show-title">False</property>
           </object>
         </child>
-        <child>
-          <object class="AdwStatusPage" id="status_page">
+        <property name="content">
+          <object class="AdwPreferencesPage">
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">24</property>
+              <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">12</property>
                     <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">_Connection</property>
-                        <property name="activatable-widget">switch_connection</property>
-                        <property name="use-underline">True</property>
-                        <child>
-                          <object class="GtkSpinner" id="connecting_spinner">
-                            <property name="visible">False</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkSwitch" id="switch_connection">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwActionRow" id="paired_row">
-                        <property name="title" translatable="yes">Paired</property>
-                        <property name="subtitle" translatable="yes">Yes</property>
+                      <object class="GtkImage" id="device_icon">
+                        <property name="pixel-size">96</property>
                         <style>
-                          <class name="property"/>
+                          <class name="icon-dropshadow"/>
                         </style>
                       </object>
                     </child>
                     <child>
-                      <object class="AdwActionRow" id="type_row">
-                        <property name="title" translatable="yes">Type</property>
+                      <object class="GtkLabel" id="device_name">
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="justify">center</property>
                         <style>
-                          <class name="property"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="address_row">
-                        <property name="title" translatable="yes">Address</property>
-                        <property name="subtitle">00:00:00:00:00</property>
-                        <property name="subtitle-selectable">True</property>
-                        <style>
-                          <class name="property"/>
+                          <class name="title"/>
+                          <class name="title-1"/>
                         </style>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">_Connection</property>
+                    <property name="activatable-widget">switch_connection</property>
+                    <property name="use-underline">True</property>
+                    <child>
+                      <object class="GtkSpinner" id="connecting_spinner">
+                        <property name="visible">False</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSwitch" id="switch_connection">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwActionRow" id="paired_row">
+                    <property name="title" translatable="yes">Paired</property>
+                    <property name="subtitle" translatable="yes">Yes</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow" id="type_row">
+                    <property name="title" translatable="yes">Type</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow" id="address_row">
+                    <property name="title" translatable="yes">Address</property>
+                    <property name="subtitle">00:00:00:00:00</property>
+                    <property name="subtitle-selectable">True</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
                 <child>
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
@@ -134,7 +153,7 @@
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
     </child>
   </object>

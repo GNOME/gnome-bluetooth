@@ -1121,12 +1121,12 @@ update_properties (BluetoothSettingsWidget *self,
 	gtk_widget_set_visible (WID ("send_button"), FALSE);
 
 	/* Name */
-	adw_status_page_set_title (ADW_STATUS_PAGE (WID ("status_page")), alias);
+        gtk_label_set_label (GTK_LABEL (WID ("device_name")), alias);
 	g_free (self->selected_name);
 	self->selected_name = alias;
 
 	/* Icon */
-	adw_status_page_set_icon_name (ADW_STATUS_PAGE (WID ("status_page")), icon);
+        gtk_image_set_from_icon_name (GTK_IMAGE (WID ("device_icon")), icon);
 
 	/* Connection */
 	button = GTK_SWITCH (WID ("switch_connection"));
