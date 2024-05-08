@@ -3,19 +3,25 @@
 
 int main (int argc, char **argv)
 {
-	GtkWidget *window, *widget;
+        GtkWidget *window, *toolbarview, *headerbar, *widget;
 
-	gtk_init ();
 	adw_init ();
 
-	window = gtk_window_new ();
+	window = adw_window_new ();
 	gtk_widget_set_size_request (window, 300, 600);
 	gtk_window_set_default_size (GTK_WINDOW (window), 800, -1);
 	gtk_window_set_resizable (GTK_WINDOW (window), TRUE);
-	widget = bluetooth_settings_widget_new ();
-	gtk_window_set_child (GTK_WINDOW (window), widget);
 
-	gtk_window_present(GTK_WINDOW(window));
+        toolbarview = adw_toolbar_view_new ();
+  	adw_window_set_content (ADW_WINDOW (window), toolbarview);
+
+        headerbar = adw_header_bar_new ();
+        adw_toolbar_view_add_top_bar (ADW_TOOLBAR_VIEW (toolbarview), headerbar);
+
+	widget = bluetooth_settings_widget_new ();
+        adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbarview), widget);
+
+	gtk_window_present (GTK_WINDOW (window));
 
 	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
 		g_main_context_iteration (NULL, TRUE);

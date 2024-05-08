@@ -53,7 +53,7 @@ struct _BluetoothSettingsWidget {
 	GHashTable          *pairing_devices; /* key=object-path, value=boolean */
 
 	/* Properties */
-	GtkWindow           *properties_dialog;
+	AdwDialog           *properties_dialog;
 	char                *selected_bdaddr;
 	char                *selected_name;
 	char                *selected_object_path;
@@ -1419,8 +1419,7 @@ static void
 activate_row (BluetoothSettingsWidget *self,
               GtkListBoxRow    *row)
 {
-	GtkWindow *w;
-	GtkWidget *toplevel;
+	AdwDialog *w;
 	g_autoptr(BluetoothDevice) device = NULL;
 	gboolean paired, trusted, is_setup;
 
@@ -1435,10 +1434,7 @@ activate_row (BluetoothSettingsWidget *self,
 		update_properties (self, device);
 
 		w = self->properties_dialog;
-		toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (self)));
-		gtk_window_set_transient_for (w, GTK_WINDOW (toplevel));
-		gtk_window_set_modal (w, TRUE);
-		gtk_window_present (w);
+                adw_dialog_present (w, GTK_WIDGET (self));
 	} else {
 		start_pairing (self, row);
 	}
@@ -1590,7 +1586,7 @@ devices_coldplug (BluetoothSettingsWidget *self)
 static void
 setup_properties_dialog (BluetoothSettingsWidget *self)
 {
-	self->properties_dialog = GTK_WINDOW (WID ("properties_dialog"));
+	self->properties_dialog = ADW_DIALOG (WID ("properties_dialog"));
 
 	g_signal_connect (G_OBJECT (WID ("delete_button")), "clicked",
 			  G_CALLBACK (delete_clicked), self);
@@ -1760,7 +1756,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 	BluetoothSettingsWidget *self = BLUETOOTH_SETTINGS_WIDGET(object);
 
 	g_clear_object (&self->agent);
-	g_clear_pointer (&self->properties_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->properties_dialog, adw_dialog_force_close);
 	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
 	g_clear_object (&self->session_proxy);
 
