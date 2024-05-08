@@ -1287,39 +1287,38 @@ remove_selected_device (BluetoothSettingsWidget *self)
 }
 
 static void
-confirm_dialog_remove_cb (AdwMessageDialog *dialog,
-			    gchar     *response,
-			    gpointer   user_data)
+confirm_dialog_remove_cb (AdwAlertDialog *dialog,
+                          gchar     *response,
+                          gpointer   user_data)
 {
 	BluetoothSettingsWidget *self = user_data;
 
 	remove_selected_device (self);
-	gtk_widget_set_visible (GTK_WIDGET (self->properties_dialog), FALSE);
+        adw_dialog_close (self->properties_dialog);
 }
 
 static void
 show_confirm_dialog (BluetoothSettingsWidget *self,
 		     const char *name)
 {
-	GtkWidget *dialog;
+	AdwDialog *dialog;
 
-	dialog = adw_message_dialog_new (GTK_WINDOW (self->properties_dialog),
-					 _("Forget Device?"), NULL);
+	dialog = adw_alert_dialog_new (_("Forget Device?"), NULL);
 
-        adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
-                                        _("“%s” will be removed from your saved devices. "
+        adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog),
+                                      _("“%s” will be removed from your saved devices. "
                                                  "You will have to set it up again to use it."), name);
 
 
-	adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-				      "cancel", _("_Cancel"),
-				      "forget", _("_Forget"),
-				      NULL);
-	adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "forget", ADW_RESPONSE_DESTRUCTIVE);
+	adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                        "cancel", _("_Cancel"),
+				        "forget", _("_Forget"),
+				        NULL);
+	adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog), "forget", ADW_RESPONSE_DESTRUCTIVE);
 
 	g_signal_connect (dialog, "response::forget", G_CALLBACK (confirm_dialog_remove_cb), self);
 
-	gtk_window_present (GTK_WINDOW (dialog));
+        adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void
