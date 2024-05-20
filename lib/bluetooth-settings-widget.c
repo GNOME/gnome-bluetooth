@@ -1115,10 +1115,10 @@ update_properties (BluetoothSettingsWidget *self,
 	self->selected_object_path = g_strdup (bluetooth_device_get_object_path (device));
 
 	/* Hide all the buttons now, and show them again if we need to */
-	gtk_widget_set_visible (WID ("keyboard_button"), FALSE);
-	gtk_widget_set_visible (WID ("sound_button"), FALSE);
-	gtk_widget_set_visible (WID ("mouse_button"), FALSE);
-	gtk_widget_set_visible (WID ("send_button"), FALSE);
+	gtk_widget_set_visible (WID ("keyboard_button_row"), FALSE);
+	gtk_widget_set_visible (WID ("sound_button_row"), FALSE);
+	gtk_widget_set_visible (WID ("mouse_button_row"), FALSE);
+	gtk_widget_set_visible (WID ("send_button_row"), FALSE);
 
 	/* Name */
         gtk_label_set_label (GTK_LABEL (WID ("device_name")), alias);
@@ -1145,23 +1145,23 @@ update_properties (BluetoothSettingsWidget *self,
 
 	/* UUIDs */
 	if (uuids && g_strv_contains ((const char * const*) uuids, "OBEXObjectPush"))
-		gtk_widget_set_visible (WID ("send_button"), TRUE);
+		gtk_widget_set_visible (WID ("send_button_row"), TRUE);
 
 	/* Type */
 	adw_action_row_set_subtitle (ADW_ACTION_ROW (WID ("type_row")),
 				     bluetooth_type_to_string (type));
 	switch (type) {
 	case BLUETOOTH_TYPE_KEYBOARD:
-		gtk_widget_set_visible (WID ("keyboard_button"), TRUE);
+		gtk_widget_set_visible (WID ("keyboard_button_row"), TRUE);
 		break;
 	case BLUETOOTH_TYPE_MOUSE:
 	case BLUETOOTH_TYPE_TABLET:
-		gtk_widget_set_visible (WID ("mouse_button"), TRUE);
+		gtk_widget_set_visible (WID ("mouse_button_row"), TRUE);
 		break;
 	case BLUETOOTH_TYPE_HEADSET:
 	case BLUETOOTH_TYPE_HEADPHONES:
 	case BLUETOOTH_TYPE_OTHER_AUDIO:
-		gtk_widget_set_visible (WID ("sound_button"), TRUE);
+		gtk_widget_set_visible (WID ("sound_button_row"), TRUE);
 	default:
 		/* others? */
 		;
@@ -1184,28 +1184,28 @@ switch_panel (BluetoothSettingsWidget *self,
 }
 
 static void
-keyboard_callback (GtkButton        *button,
+keyboard_callback (AdwButtonRow            *row,
 		   BluetoothSettingsWidget *self)
 {
 	switch_panel (self, KEYBOARD_PREFS);
 }
 
 static void
-mouse_callback (GtkButton        *button,
+mouse_callback (AdwButtonRow            *row,
 		BluetoothSettingsWidget *self)
 {
 	switch_panel (self, MOUSE_PREFS);
 }
 
 static void
-sound_callback (GtkButton        *button,
-		BluetoothSettingsWidget *self)
+sound_callback (AdwButtonRow            *row,
+                BluetoothSettingsWidget *self)
 {
 	switch_panel (self, SOUND_PREFS);
 }
 
 static void
-send_callback (GtkButton               *button,
+send_callback (AdwButtonRow            *row,
 	       BluetoothSettingsWidget *self)
 {
 	g_autoptr(GError) error = NULL;
@@ -1322,8 +1322,8 @@ show_confirm_dialog (BluetoothSettingsWidget *self,
 }
 
 static void
-delete_clicked (GtkButton               *button,
-		BluetoothSettingsWidget *self)
+delete_callback (AdwButtonRow              *row,
+		 BluetoothSettingsWidget   *self)
 {
 	show_confirm_dialog (self, self->selected_name);
 }
@@ -1587,15 +1587,15 @@ setup_properties_dialog (BluetoothSettingsWidget *self)
 {
 	self->properties_dialog = ADW_DIALOG (WID ("properties_dialog"));
 
-	g_signal_connect (G_OBJECT (WID ("delete_button")), "clicked",
-			  G_CALLBACK (delete_clicked), self);
-	g_signal_connect (G_OBJECT (WID ("mouse_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("delete_button_row")), "activated",
+			  G_CALLBACK (delete_callback), self);
+	g_signal_connect (G_OBJECT (WID ("mouse_button_row")), "activated",
 			  G_CALLBACK (mouse_callback), self);
-	g_signal_connect (G_OBJECT (WID ("keyboard_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("keyboard_button_row")), "activated",
 			  G_CALLBACK (keyboard_callback), self);
-	g_signal_connect (G_OBJECT (WID ("sound_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("sound_button_row")), "activated",
 			  G_CALLBACK (sound_callback), self);
-	g_signal_connect (G_OBJECT (WID ("send_button")), "clicked",
+	g_signal_connect (G_OBJECT (WID ("send_button_row")), "activated",
 			  G_CALLBACK (send_callback), self);
 	g_signal_connect (G_OBJECT (WID ("switch_connection")), "state-set",
 			  G_CALLBACK (switch_connected_state_set), self);

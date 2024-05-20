@@ -97,43 +97,41 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup">
+                <property name="separate-rows">True</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkButton" id="mouse_button">
-                        <property name="label" translatable="yes">_Mouse &amp; Touchpad Settings</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="sound_button">
-                        <property name="label" translatable="yes">_Sound Settings</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="keyboard_button">
-                        <property name="label" translatable="yes">_Keyboard Settings</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="send_button">
-                        <property name="label" translatable="yes">Send _Files…</property>
-                        <property name="use-underline">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="delete_button">
-                        <property name="label" translatable="yes">_Forget Device…</property>
-                        <property name="use-underline">True</property>
-                        <style>
-                          <class name="destructive-action"/>
-                        </style>
-                      </object>
-                    </child>
+                  <object class="AdwButtonRow" id="mouse_button_row">
+                    <property name="title" translatable="yes">_Mouse &amp;amp; Touchpad Settings</property>
+                    <property name="use-underline">True</property>
+                    <property name="end-icon-name">go-next-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwButtonRow" id="sound_button_row">
+                    <property name="title" translatable="yes">_Sound Settings</property>
+                    <property name="use-underline">True</property>
+                    <property name="end-icon-name">go-next-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwButtonRow" id="keyboard_button_row">
+                    <property name="title" translatable="yes">_Keyboard Settings</property>
+                    <property name="use-underline">True</property>
+                    <property name="end-icon-name">go-next-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwButtonRow" id="send_button_row">
+                    <property name="title" translatable="yes">Send _Files…</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwButtonRow" id="delete_button_row">
+                    <property name="title" translatable="yes">_Forget Device…</property>
+                    <property name="use-underline">True</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
                   </object>
                 </child>
               </object>
