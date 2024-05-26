@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-02-19 20:53+0100\n"
+"POT-Creation-Date: 2024-04-26 18:03+0000\n"
+"PO-Revision-Date: 2024-05-26 11:53+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -128,18 +128,18 @@ msgstr "Kapcsolódva"
 msgid "Disconnected"
 msgstr "Bontva"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1144 lib/settings.ui:69
 msgid "Yes"
 msgstr "Igen"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1144
 msgid "No"
 msgstr "Nem"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1236
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -148,25 +148,30 @@ msgstr ""
 "„%s” néven látható és elérhető a Bluetooth fájlátvitelhez. Az átküldött "
 "fájlok a <a href=\"%s\">Letöltések</a> mappába kerülnek."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Ha eltávolítja az eszközt, a következő használat előtt újra be kell majd "
-"állítania."
+#: lib/bluetooth-settings-widget.c:1307
+#| msgid "_Forget Device…"
+msgid "Forget Device?"
+msgstr "Elfelejti az eszközt?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1310
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Eltávolítja a(z) „%s” eszközt az eszközök listájából?"
+#| msgid ""
+#| "If you remove the device, you will have to set it up again before next "
+#| "use."
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr ""
+"A(z) „%s” eltávolításra kerül a mentett eszközei közül. Újra be kell majd"
+" állítania a használatához."
 
 #: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "Mé_gse"
 
 #: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_Eltávolítás"
+msgid "_Forget"
+msgstr "_Elfelejtés"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -285,7 +290,6 @@ msgid "Unknown"
 msgstr "Ismeretlen"
 
 #: lib/settings.ui:42
-#| msgid "Connection"
 msgid "_Connection"
 msgstr "_Kapcsolat"
 
@@ -318,15 +322,14 @@ msgid "Send _Files…"
 msgstr "_Fájlok küldése…"
 
 #: lib/settings.ui:125
-#| msgid "_Remove Device"
 msgid "_Forget Device…"
 msgstr "Eszköz el_felejtése…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:144 lib/settings.ui:166
 msgid "Devices"
 msgstr "Eszközök"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:157
 msgid "Searching for devices…"
 msgstr "Eszközök keresése…"
 
