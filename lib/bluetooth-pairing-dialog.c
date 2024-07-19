@@ -292,12 +292,10 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), priv->done);
 
 	/* Spinner */
-	priv->spinner = gtk_spinner_new ();
+	priv->spinner = adw_spinner_new ();
 	gtk_widget_set_margin_end (priv->spinner, 12);
 	gtk_widget_hide (priv->spinner);
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), priv->spinner);
-	g_object_bind_property (priv->spinner, "visible",
-				priv->spinner, "spinning", 0);
 	g_object_bind_property (priv->spinner, "visible",
 				priv->done, "visible",
 				G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN | G_BINDING_BIDIRECTIONAL);

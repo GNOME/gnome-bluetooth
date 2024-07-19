@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 
 #define BLUETOOTH_TYPE_PAIRING_DIALOG (bluetooth_pairing_dialog_get_type())
