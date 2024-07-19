@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-02-16 23:48+0200\n"
+"POT-Creation-Date: 2024-07-19 07:35+0000\n"
+"PO-Revision-Date: 2024-07-19 23:38+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -124,18 +124,18 @@ msgstr "חיבור פעיל"
 msgid "Disconnected"
 msgstr "חיבור כבוי"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1144 lib/settings.ui:72
 msgid "Yes"
 msgstr "כן"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1144
 msgid "No"
 msgstr "לא"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1236
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -144,23 +144,27 @@ msgstr ""
 "נראה כ־„%s” וזמין עבור העברת קבצי בלוטות'. קבצים שהועברו ממוקמים בתיקיית ה<a "
 "href=\"%s\">הורדות</a>."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr "אם התקן זה יימחק, יהיה עליך להגדיר אותו שוב לפני השימוש הבא."
+#: lib/bluetooth-settings-widget.c:1306
+msgid "Forget Device?"
+msgstr "לשכוח את ההתקן?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1309
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "להסיר את „%s” מרשימת ההתקנים?"
+#| msgid ""
+#| "If you remove the device, you will have to set it up again before next "
+#| "use."
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr "„%s” יוסר מההתקנים השמורים שלך. יש להגדיר אותו שוב כדי להשתמש בו."
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1314 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "ה_סרה"
+#: lib/bluetooth-settings-widget.c:1315
+msgid "_Forget"
+msgstr "ל_שכוח"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -278,47 +282,47 @@ msgstr "רמקולים"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "_חיבור"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:71
 msgid "Paired"
 msgstr "צימוד"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:80
 msgid "Type"
 msgstr "סוג"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:88
 msgid "Address"
 msgstr "כתובת"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
-msgstr "הגדרות _עכבר ומשטח המגע"
+#: lib/settings.ui:103
+msgid "_Mouse &amp; Touchpad Settings"
+msgstr "הגדרות _עכבר ומשטח מגע"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:110
 msgid "_Sound Settings"
 msgstr "הגדרות _שמע"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:117
 msgid "_Keyboard Settings"
 msgstr "הגדרות מ_קלדת"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:124
 msgid "Send _Files…"
 msgstr "שליחת _קבצים…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:130
 msgid "_Forget Device…"
 msgstr "התעלמות מהתקן…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:147 lib/settings.ui:169
 msgid "Devices"
 msgstr "התקנים"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:160
 msgid "Searching for devices…"
 msgstr "חיפוש אחר התקנים…"
 
@@ -456,6 +460,13 @@ msgstr "שם ההתקן המרוחק"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "שם"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "להסיר את „%s” מרשימת ההתקנים?"
+
+#~ msgid "_Remove"
+#~ msgstr "ה_סרה"
 
 #~ msgid "Click to select device…"
 #~ msgstr "נא ללחוץ לבחירת התקן…"
@@ -798,8 +809,8 @@ msgstr "שם"
 #~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
 #~ "in doubt."
 #~ msgstr ""
-#~ "על ההתקן להיות בטווח של עד עשרה מטרים מהמחשב שלך, ועליו להיות "
-#~ "“גלוי” (לעתים נקרא “נראה”). יש לעיין במדריך השימוש בהתקן למען הסר ספק."
+#~ "על ההתקן להיות בטווח של עד עשרה מטרים מהמחשב שלך, ועליו להיות “גלוי” "
+#~ "(לעתים נקרא “נראה”). יש לעיין במדריך השימוש בהתקן למען הסר ספק."
 
 #~ msgid "Welcome to the Bluetooth new device setup"
 #~ msgstr "ברוך בואך אל אשף הגדרת התקני Bluetooth"
