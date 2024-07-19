@@ -84,10 +84,8 @@ label_might_change (BluetoothSettingsRow *self)
 	if (self->pairing) {
 		gtk_widget_hide (self->status);
 
-		gtk_spinner_start (GTK_SPINNER (self->spinner));
 		gtk_widget_show (self->spinner);
 	} else {
-		gtk_spinner_stop (GTK_SPINNER (self->spinner));
 		gtk_widget_hide (self->spinner);
 
 		gtk_widget_show (self->status);

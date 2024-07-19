@@ -3,9 +3,7 @@
   <template class="BluetoothSettingsRow" parent="AdwActionRow">
     <property name="activatable">True</property>
     <child type="suffix">
-      <object class="GtkSpinner" id="spinner">
-        <property name="valign">center</property>
-      </object>
+      <object class="AdwSpinner" id="spinner"/>
     </child>
     <child type="suffix">
       <object class="GtkLabel" id="status">
