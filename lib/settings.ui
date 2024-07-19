@@ -50,9 +50,8 @@
                     <property name="activatable-widget">switch_connection</property>
                     <property name="use-underline">True</property>
                     <child>
-                      <object class="GtkSpinner" id="connecting_spinner">
+                      <object class="AdwSpinner" id="connecting_spinner">
                         <property name="visible">False</property>
-                        <property name="valign">center</property>
                       </object>
                     </child>
                     <child>
@@ -146,7 +145,7 @@
       <object class="AdwPreferencesGroup" id="devices_group">
         <property name="title" translatable="yes">Devices</property>
         <property name="header-suffix">
-          <object class="GtkSpinner" id="device_spinner"/>
+          <object class="AdwSpinner" id="device_spinner"/>
         </property>
         <child>
           <object class="GtkListBox" id="device_list">

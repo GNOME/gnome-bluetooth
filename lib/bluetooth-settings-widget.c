@@ -114,11 +114,9 @@ set_connecting_state (BluetoothSettingsWidget *self,
 		     int                      state)
 {
 	if (state == CONNECTING_STATE_LOADING) {
-		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
 		gtk_widget_set_visible (GTK_WIDGET (WID ("connecting_spinner")), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET (WID ("switch_connection")), FALSE);
 	} else {
-		gtk_spinner_stop (GTK_SPINNER (WID ("connecting_spinner")));
 		gtk_widget_set_visible (GTK_WIDGET (WID ("connecting_spinner")), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (WID ("switch_connection")), TRUE);
 	}
@@ -1445,7 +1443,7 @@ add_device_section (BluetoothSettingsWidget *self)
 	/* Discoverable spinner */
 	self->device_spinner = WID ("device_spinner");
 	g_object_bind_property (G_OBJECT (self->client), "default-adapter-setup-mode",
-				G_OBJECT (self->device_spinner), "spinning",
+				G_OBJECT (self->device_spinner), "visible",
 				G_BINDING_SYNC_CREATE);
 
 	/* Discoverable label placeholder, the real name is set in update_visibility().
