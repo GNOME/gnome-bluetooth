@@ -117,7 +117,7 @@ pkg.generate(
   description: 'Bluetooth libraries for gnome-shell',
   filebase: gnomebt_api_name,
   subdirs: gnomebt_api_name,
-  requires: deps,
+  requires: 'gio-2.0',
   variables: 'exec_prefix=${prefix}',
 )
 
@@ -184,7 +184,7 @@ pkg.generate(
   description: 'Bluetooth libraries for gnome-control-center',
   filebase: gnomebt_ui_api_name,
   subdirs: gnomebt_api_name,
-  requires: ui_deps,
+  requires: [ 'gio-2.0', 'gtk4', 'libadwaita-1' ],
   variables: 'exec_prefix=${prefix}',
 )
 
