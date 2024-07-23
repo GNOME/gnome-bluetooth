@@ -1091,6 +1091,32 @@ switch_connected_state_set (GtkSwitch               *button,
 }
 
 static void
+apply_use_fallback (GtkWidget *widget)
+{
+	GtkWidget *child;
+
+	for (child = gtk_widget_get_first_child (widget);
+	     child != NULL;
+	     child = gtk_widget_get_next_sibling (child)) {
+		if (GTK_IS_IMAGE (child)) {
+			g_object_set (G_OBJECT (child), "use-fallback", TRUE, NULL);
+			break;
+		} else {
+			apply_use_fallback (child);
+		}
+	}
+
+}
+
+static void
+status_page_set_icon_name (GtkWidget  *status_page,
+			   const char *icon_name)
+{
+	adw_status_page_set_icon_name (ADW_STATUS_PAGE (status_page), icon_name);
+	apply_use_fallback (status_page);
+}
+
+static void
 update_properties (BluetoothSettingsWidget *self,
 		   BluetoothDevice         *device)
 {
@@ -1130,7 +1156,7 @@ update_properties (BluetoothSettingsWidget *self,
 	self->selected_name = alias;
 
 	/* Icon */
-	adw_status_page_set_icon_name (ADW_STATUS_PAGE (WID ("status_page")), icon);
+	status_page_set_icon_name (WID ("status_page"), icon);
 
 	/* Connection */
 	button = GTK_SWITCH (WID ("switch_connection"));
