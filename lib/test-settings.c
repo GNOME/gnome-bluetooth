@@ -9,7 +9,7 @@ int main (int argc, char **argv)
 	adw_init ();
 
 	window = adw_window_new ();
-        gtk_window_set_title (GTK_WINDOW (window), _("Bluetooth"));
+        gtk_window_set_title (GTK_WINDOW (window), "Bluetooth");
 	gtk_widget_set_size_request (window, 300, 600);
 	gtk_window_set_default_size (GTK_WINDOW (window), 800, -1);
 	gtk_window_set_resizable (GTK_WINDOW (window), TRUE);
