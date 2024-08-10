@@ -24,11 +24,11 @@
 
 
 #define BLUETOOTH_TYPE_PAIRING_DIALOG (bluetooth_pairing_dialog_get_type())
-G_DECLARE_DERIVABLE_TYPE (BluetoothPairingDialog, bluetooth_pairing_dialog, BLUETOOTH, PAIRING_DIALOG, GtkDialog)
+G_DECLARE_DERIVABLE_TYPE (BluetoothPairingDialog, bluetooth_pairing_dialog, BLUETOOTH, PAIRING_DIALOG, AdwDialog)
 
 struct _BluetoothPairingDialogClass
 {
-  GtkDialogClass parent_class;
+  AdwDialogClass parent_class;
 };
 
 typedef enum {

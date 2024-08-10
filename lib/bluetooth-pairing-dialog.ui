@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="BluetoothPairingDialog" parent="GtkDialog">
-    <child>
-      <object class="GtkBox" id="dialog-vbox1">
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child>
+  <template class="BluetoothPairingDialog" parent="AdwDialog">
+    <property name="follows-content-size">True</property>
+    <property name="can-close">False</property>
+    <signal name="close-attempt" handler="close_attempt_cb"/>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-start-title-buttons">False</property>
+            <property name="show-end-title-buttons">False</property>
+            <child type="start">
+              <object class="GtkButton" id="cancel">
+                <property name="label" translatable="yes">Cancel</property>
+                <signal name="clicked" handler="response_cb"/>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="done">
+                <property name="visible">False</property>
+                <property name="label" translatable="yes">Accept</property>
+                <signal name="clicked" handler="response_cb"/>
+              </object>
+            </child>
+            <child type="end">
+              <object class="AdwSpinner" id="spinner">
+                <property name="visible">False</property>
+                <property name="margin-end">12</property>
+                <property name="visible" bind-source="done" bind-property="visible" bind-flags="sync-create|invert-boolean|bidirectional"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <property name="content">
           <object class="GtkBox" id="pairing_dialog_box">
             <property name="margin_start">50</property>
             <property name="margin_end">50</property>
@@ -60,8 +87,8 @@
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

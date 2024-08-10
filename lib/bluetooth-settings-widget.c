@@ -49,7 +49,7 @@ struct _BluetoothSettingsWidget {
 
 	/* Pairing */
 	BluetoothAgent      *agent;
-	GtkWindow           *pairing_dialog;
+	AdwDialog           *pairing_dialog;
 	GHashTable          *pairing_devices; /* key=object-path, value=boolean */
 
 	/* Properties */
@@ -225,13 +225,8 @@ add_device_type (BluetoothSettingsWidget *self,
 static void
 setup_pairing_dialog (BluetoothSettingsWidget *self)
 {
-	GtkWidget *toplevel;
-
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
-	self->pairing_dialog = GTK_WINDOW (bluetooth_pairing_dialog_new ());
-	toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (self)));
-	gtk_window_set_transient_for (self->pairing_dialog, GTK_WINDOW (toplevel));
-	gtk_window_set_modal (self->pairing_dialog, TRUE);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
+	self->pairing_dialog = ADW_DIALOG (bluetooth_pairing_dialog_new ());
 }
 
 static gboolean
@@ -324,7 +319,7 @@ display_cb (GtkDialog *dialog,
 {
 	BluetoothSettingsWidget *self = user_data;
 
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 }
 
 static void
@@ -349,7 +344,7 @@ enter_pin_cb (GtkDialog *dialog,
 						       g_variant_new ("(s)", pin));
 
 		if (bluetooth_pairing_dialog_get_mode (BLUETOOTH_PAIRING_DIALOG (self->pairing_dialog)) == BLUETOOTH_PAIRING_MODE_PIN_QUERY) {
-			g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+			g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 			return;
 		}
 		bluetooth_pairing_dialog_set_mode (BLUETOOTH_PAIRING_DIALOG (self->pairing_dialog),
@@ -360,7 +355,7 @@ enter_pin_cb (GtkDialog *dialog,
 		g_dbus_method_invocation_return_dbus_error (invocation,
 							    "org.bluez.Error.Canceled",
 							    "User cancelled pairing");
-		g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+		g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 		return;
 	}
 
@@ -394,7 +389,7 @@ confirm_remote_pin_cb (GtkDialog *dialog,
 		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", "Pairing refused from settings panel");
 	}
 
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 }
 
 static void
@@ -488,7 +483,7 @@ pincode_callback (GDBusMethodInvocation *invocation,
 				  G_CALLBACK (confirm_remote_pin_cb), user_data);
 	}
 
-	gtk_window_present (self->pairing_dialog);
+	adw_dialog_present (self->pairing_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -529,7 +524,7 @@ display_passkey_or_pincode_cb (GtkDialog *dialog,
 		g_assert_not_reached ();
 	}
 
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 }
 
 static void
@@ -563,7 +558,7 @@ display_passkey_callback (GDBusMethodInvocation *invocation,
 				"path", g_strdup (g_dbus_proxy_get_object_path (device)),
 				g_free);
 
-	gtk_window_present (self->pairing_dialog);
+	adw_dialog_present (self->pairing_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -627,7 +622,7 @@ display_pincode_callback (GDBusMethodInvocation *invocation,
 	g_object_set_data_full (G_OBJECT (self->pairing_dialog),
 				"path", g_strdup (g_dbus_proxy_get_object_path (device)),
 				g_free);
-	gtk_window_present (self->pairing_dialog);
+	adw_dialog_present (self->pairing_dialog, GTK_WIDGET (self));
 
 	g_dbus_method_invocation_return_value (invocation, NULL);
 }
@@ -652,7 +647,7 @@ cancel_callback (GDBusMethodInvocation *invocation,
 
 	g_debug ("cancel_callback ()");
 
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 
 	child = gtk_widget_get_first_child (self->device_list);
 	while (child) {
@@ -681,7 +676,7 @@ confirm_cb (GtkDialog *dialog,
 							    "org.bluez.Error.Canceled",
 							    "User cancelled pairing");
 	}
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 }
 
 static void
@@ -708,7 +703,7 @@ confirm_callback (GDBusMethodInvocation *invocation,
 			  G_CALLBACK (confirm_cb), user_data);
 	g_object_set_data (G_OBJECT (self->pairing_dialog), "invocation", invocation);
 
-	gtk_window_present (self->pairing_dialog);
+	adw_dialog_present (self->pairing_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -731,7 +726,7 @@ authorize_callback (GDBusMethodInvocation *invocation,
 			  G_CALLBACK (confirm_cb), user_data);
 	g_object_set_data (G_OBJECT (self->pairing_dialog), "invocation", invocation);
 
-	gtk_window_present (self->pairing_dialog);
+	adw_dialog_present (self->pairing_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -756,7 +751,7 @@ authorize_service_cb (GtkDialog *dialog,
 		msg = g_strdup_printf ("Rejecting service auth (HID): not paired or trusted");
 		g_dbus_method_invocation_return_dbus_error (invocation, "org.bluez.Error.Rejected", msg);
 	}
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 }
 
 static void
@@ -814,7 +809,7 @@ authorize_service_callback (GDBusMethodInvocation *invocation,
 		g_object_set_data_full (G_OBJECT (invocation), "device", g_object_ref (device), g_object_unref);
 		g_object_set_data (G_OBJECT (self->pairing_dialog), "invocation", invocation);
 
-		gtk_window_present (self->pairing_dialog);
+		adw_dialog_present (self->pairing_dialog, GTK_WIDGET (self));
 	}
 }
 
@@ -925,7 +920,7 @@ create_callback (GObject      *source_object,
 		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
 			return;
 
-		g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+		g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 
 		turn_off_pairing (user_data, path);
 
@@ -954,7 +949,7 @@ create_callback (GObject      *source_object,
 		return;
 	}
 
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 
 	g_hash_table_remove (self->pairing_devices, path);
 
@@ -1292,7 +1287,7 @@ confirm_dialog_remove_cb (AdwAlertDialog *dialog,
 	BluetoothSettingsWidget *self = user_data;
 
 	remove_selected_device (self);
-        adw_dialog_close (self->properties_dialog);
+        adw_dialog_force_close (self->properties_dialog);
 }
 
 static void
@@ -1754,7 +1749,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 
 	g_clear_object (&self->agent);
 	g_clear_pointer (&self->properties_dialog, adw_dialog_force_close);
-	g_clear_pointer (&self->pairing_dialog, gtk_window_destroy);
+	g_clear_pointer (&self->pairing_dialog, adw_dialog_force_close);
 	g_clear_object (&self->session_proxy);
 
 	obex_agent_down ();
