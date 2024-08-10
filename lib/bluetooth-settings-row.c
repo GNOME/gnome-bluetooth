@@ -82,13 +82,13 @@ label_might_change (BluetoothSettingsRow *self)
 		gtk_label_set_text (GTK_LABEL (self->status), _("Disconnected"));
 
 	if (self->pairing) {
-		gtk_widget_hide (self->status);
+		gtk_widget_set_visible (self->status, FALSE);
 
-		gtk_widget_show (self->spinner);
+		gtk_widget_set_visible (self->spinner, TRUE);
 	} else {
-		gtk_widget_hide (self->spinner);
+		gtk_widget_set_visible (self->spinner, FALSE);
 
-		gtk_widget_show (self->status);
+		gtk_widget_set_visible (self->status, TRUE);
 	}
 }
 

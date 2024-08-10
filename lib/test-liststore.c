@@ -58,7 +58,7 @@ int main (int argc, char **argv)
 	listbox = gtk_list_box_new ();
 	gtk_list_box_bind_model (GTK_LIST_BOX (listbox), G_LIST_MODEL (model), create_device_cb, NULL, NULL);
 	gtk_window_set_child (GTK_WINDOW (window), listbox);
-	gtk_widget_show (window);
+	gtk_window_present (GTK_WINDOW (window));
 
 	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
 		g_main_context_iteration (NULL, TRUE);

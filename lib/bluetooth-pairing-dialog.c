@@ -77,13 +77,13 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 
 	switch (mode) {
 	case BLUETOOTH_PAIRING_MODE_PIN_QUERY:
-		gtk_widget_show (priv->done);
+		gtk_widget_set_visible (priv->done, TRUE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), CONFIRMATION_PAGE);
 		title = g_strdup(_("Confirm Bluetooth PIN"));
 		help = g_strdup_printf (_("Please confirm the PIN that was entered on “%s”."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION:
-		gtk_widget_show (priv->done);
+		gtk_widget_set_visible (priv->done, TRUE);
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), CONFIRMATION_PAGE);
 		title = g_strdup(_("Confirm Bluetooth PIN"));
@@ -92,25 +92,25 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_NORMAL:
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_KEYBOARD:
 	case BLUETOOTH_PAIRING_MODE_PIN_DISPLAY_ICADE:
-		gtk_widget_hide (priv->done);
+		gtk_widget_set_visible (priv->done, FALSE);
 		title = g_strdup_printf (_("Pairing “%s”"), device_name);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), DISPLAY_PAGE);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_MATCH:
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
-		gtk_widget_show (priv->done);
+		gtk_widget_set_visible (priv->done, TRUE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), DISPLAY_PAGE);
 		title = g_strdup(_("Confirm Bluetooth PIN"));
 		help = g_strdup_printf (_("Please confirm that the following PIN matches the one displayed on “%s”."), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_YES_NO:
-		gtk_widget_show (priv->done);
+		gtk_widget_set_visible (priv->done, TRUE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), MESSAGE_PAGE);
 		title = g_strdup (_("Bluetooth Pairing Request"));
 		help = g_strdup_printf (_("“%s” wants to pair with this device. Do you want to allow pairing?"), device_name);
 		break;
 	case BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH:
-		gtk_widget_show (priv->done);
+		gtk_widget_set_visible (priv->done, TRUE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), MESSAGE_PAGE);
 		title = g_strdup (_("Confirm Bluetooth Connection"));
 		help = g_strdup_printf (_("“%s” wants to connect with this device. Do you want to allow it?"), device_name);
@@ -145,7 +145,7 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		context = gtk_widget_get_style_context (priv->cancel);
 		gtk_style_context_add_class (context, "destructive-action");
 
-		gtk_widget_hide (priv->pin_notebook);
+		gtk_widget_set_visible (priv->pin_notebook, FALSE);
 	} else {
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
 		context = gtk_widget_get_style_context (priv->done);
@@ -155,7 +155,7 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		context = gtk_widget_get_style_context (priv->cancel);
 		gtk_style_context_remove_class (context, "destructive-action");
 
-		gtk_widget_show (priv->pin_notebook);
+		gtk_widget_set_visible (priv->pin_notebook, TRUE);
 	}
 
 	gtk_label_set_text (GTK_LABEL (priv->title), title);
@@ -286,7 +286,7 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 
 	/* OK button */
 	priv->done = gtk_button_new_with_label (_("Accept"));
-	gtk_widget_hide (priv->done);
+	gtk_widget_set_visible (priv->done, FALSE);
 	g_signal_connect (G_OBJECT (priv->done), "clicked",
 			  G_CALLBACK (response_cb), self);
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), priv->done);
@@ -294,7 +294,7 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	/* Spinner */
 	priv->spinner = adw_spinner_new ();
 	gtk_widget_set_margin_end (priv->spinner, 12);
-	gtk_widget_hide (priv->spinner);
+	gtk_widget_set_visible (priv->spinner, FALSE);
 	gtk_header_bar_pack_end (GTK_HEADER_BAR (header), priv->spinner);
 	g_object_bind_property (priv->spinner, "visible",
 				priv->done, "visible",

@@ -96,7 +96,7 @@ int main (int argc, char **argv)
 	g_signal_connect (G_OBJECT (window), "response",
 			  G_CALLBACK (response_cb), mainloop);
 
-	gtk_widget_show (window);
+	gtk_window_present (GTK_WINDOW (window));
 
 	g_main_loop_run (mainloop);
 
