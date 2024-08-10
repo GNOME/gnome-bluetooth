@@ -65,7 +65,6 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
 	g_autofree char *title = NULL;
 	g_autofree char *help = NULL;
-	GtkStyleContext *context;
 
 	priv->mode = mode;
 
@@ -138,22 +137,18 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 	if (mode == BLUETOOTH_PAIRING_MODE_YES_NO ||
 	    mode == BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH) {
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Allow"));
-		context = gtk_widget_get_style_context (priv->done);
-		gtk_style_context_remove_class (context, "suggested-action");
+		gtk_widget_remove_css_class (priv->done, "suggested-action");
 
 		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("Dismiss"));
-		context = gtk_widget_get_style_context (priv->cancel);
-		gtk_style_context_add_class (context, "destructive-action");
+		gtk_widget_add_css_class (priv->cancel, "destructive-action");
 
 		gtk_widget_set_visible (priv->pin_notebook, FALSE);
 	} else {
 		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
-		context = gtk_widget_get_style_context (priv->done);
-		gtk_style_context_add_class (context, "suggested-action");
+		gtk_widget_add_css_class (priv->done, "suggested-action");
 
 		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("Cancel"));
-		context = gtk_widget_get_style_context (priv->cancel);
-		gtk_style_context_remove_class (context, "destructive-action");
+		gtk_widget_remove_css_class (priv->cancel, "destructive-action");
 
 		gtk_widget_set_visible (priv->pin_notebook, TRUE);
 	}
@@ -274,7 +269,6 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	BluetoothPairingDialog *self = BLUETOOTH_PAIRING_DIALOG (object);
 	BluetoothPairingDialogPrivate *priv = BLUETOOTH_PAIRING_DIALOG_GET_PRIVATE (self);
 	GtkWidget *header;
-	GtkStyleContext *context;
 
 	G_OBJECT_CLASS(bluetooth_pairing_dialog_parent_class)->constructed (object);
 
@@ -309,10 +303,8 @@ bluetooth_pairing_dialog_constructed (GObject *object)
 	g_signal_connect (G_OBJECT (priv->entry_pin), "notify::text",
 			  G_CALLBACK (text_changed_cb), self);
 
-	context = gtk_widget_get_style_context (priv->done);
-	gtk_style_context_add_class (context, "suggested-action");
-	context = gtk_widget_get_style_context (priv->title);
-	gtk_style_context_add_class (context, "title");
+	gtk_widget_add_css_class (priv->done, "suggested-action");
+	gtk_widget_add_css_class (priv->title, "title");
 }
 
 static void
