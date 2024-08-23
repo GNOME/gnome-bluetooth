@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-02-22 20:29+0800\n"
+"POT-Creation-Date: 2024-07-29 18:37+0000\n"
+"PO-Revision-Date: 2024-08-23 16:09+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
-"Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 45.3\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -99,7 +99,7 @@ msgid "Dismiss"
 msgstr "拒绝"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "取消"
 
@@ -108,7 +108,7 @@ msgstr "取消"
 msgid "Accept"
 msgstr "接受"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "未设置"
 
@@ -120,18 +120,18 @@ msgstr "已连接"
 msgid "Disconnected"
 msgstr "已断开"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
 msgid "Yes"
 msgstr "是"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1142
 msgid "No"
 msgstr "没有"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1234
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -140,23 +140,24 @@ msgstr ""
 "作为“%s”可见并可用于蓝牙文件传输。已传输的文件位于 <a href=\"%s\">下载</a> 文"
 "件夹。"
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr "如果您移除此设备，下次使用它之前必须重新设置。"
+#: lib/bluetooth-settings-widget.c:1304
+msgid "Forget Device?"
+msgstr "忘记设备吗？"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1307
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "将“%s”从设备列表中移除？"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr "“%s”将从保存的设备中移除。您将必须再次设置它才能使用。"
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "移除(_R)"
+#: lib/bluetooth-settings-widget.c:1313
+msgid "_Forget"
+msgstr "忘记(_F)"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -274,47 +275,47 @@ msgstr "扬声器"
 msgid "Unknown"
 msgstr "未知的"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "连接(_C)"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "已配对"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "类型"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "地址"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
 msgstr "鼠标与触摸板设置(_M)"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "声音设置(_S)"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "键盘设置(_K)"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "发送文件(_F)…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "忘记设备(_F)…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "设备"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
 msgstr "正在搜索设备…"
 
@@ -362,7 +363,7 @@ msgstr[0] "约 %'d 小时"
 
 #: sendto/main.c:403 sendto/main.c:503
 msgid "Connecting…"
-msgstr "正在连接……"
+msgstr "正在连接…"
 
 #: sendto/main.c:444
 msgid "Bluetooth File Transfer"
@@ -393,12 +394,12 @@ msgstr "正在发送文件 %d / %d"
 #: sendto/main.c:619
 #, c-format
 msgid "%d kB/s"
-msgstr "%d kB/秒"
+msgstr "%d kB/s"
 
 #: sendto/main.c:621
 #, c-format
 msgid "%d B/s"
-msgstr "%d 字节/秒"
+msgstr "%d B/s"
 
 #: sendto/main.c:652
 #, c-format
@@ -437,6 +438,13 @@ msgstr "远端设备名"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "名称"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "将“%s”从设备列表中移除？"
+
+#~ msgid "_Remove"
+#~ msgstr "移除(_R)"
 
 #~ msgid "Click to select device…"
 #~ msgstr "点击选取设备…"
