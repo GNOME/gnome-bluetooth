@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-02-23 20:27+0100\n"
+"POT-Creation-Date: 2024-07-29 18:37+0000\n"
+"PO-Revision-Date: 2024-08-26 17:57+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.3\n"
 "X-Project-Style: gnome\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
@@ -104,7 +104,7 @@ msgid "Dismiss"
 msgstr "Abandonar"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Anullar"
 
@@ -113,7 +113,7 @@ msgstr "Anullar"
 msgid "Accept"
 msgstr "Acceptar"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "Pas configurat"
 
@@ -125,18 +125,18 @@ msgstr "Connectat"
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
 msgid "Yes"
 msgstr "Òc"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1142
 msgid "No"
 msgstr "Non"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1234
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -146,25 +146,26 @@ msgstr ""
 "Los fichièrs transferits son placats dins lo dorsièr <a href=\"%s"
 "\">Telecargaments</a>."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Se suprimissètz aqueste periferic, vos lo caldrà reconfigurar tornamai abans "
-"utilizacion."
+#: lib/bluetooth-settings-widget.c:1304
+msgid "Forget Device?"
+msgstr "Oblidar lo periferic ?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1307
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Suprimir « %s » de la lista dels periferics ?"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr ""
+"« %s » serà levat de vòstres periferics salvats. Lo vos calrà reconfigurar "
+"abans utilizacion."
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "A_nullar"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_Suprimir"
+#: lib/bluetooth-settings-widget.c:1313
+msgid "_Forget"
+msgstr "_Oblidar"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -282,47 +283,47 @@ msgstr "Naut-parlaires"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "_Connexion"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "Apariat"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "Tipe"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "Adreça"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
-msgstr "Paramètres de la mir_gat e del pavat tactil"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
+msgstr "_Paramètres de la mirga e del pavat tactil"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "Paramètres del _son"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "Paramètres del _clavièr"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "Mandadís de _fichièrs…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "_Suprimir lo periferic…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "Periferics"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
 msgstr "Recèrca de periferics…"
 
@@ -452,6 +453,12 @@ msgstr "Nom del periferic distant"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOM"
+
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "Suprimir « %s » de la lista dels periferics ?"
+
+#~ msgid "_Remove"
+#~ msgstr "_Suprimir"
 
 #~ msgid "Click to select device…"
 #~ msgstr "Clicatz per causir un periferic…"
