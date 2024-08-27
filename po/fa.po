@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-01-18 04:16+0330\n"
+"POT-Creation-Date: 2024-07-29 18:37+0000\n"
+"PO-Revision-Date: 2024-08-27 14:55+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -99,7 +99,7 @@ msgid "Dismiss"
 msgstr "رد"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "لغو"
 
@@ -108,7 +108,7 @@ msgstr "لغو"
 msgid "Accept"
 msgstr "قبول"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "برپا نشده"
 
@@ -120,18 +120,18 @@ msgstr "وصل شده"
 msgid "Disconnected"
 msgstr "قطع شده"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
 msgid "Yes"
 msgstr "بله"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1142
 msgid "No"
 msgstr "خیر"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1234
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred files "
@@ -140,23 +140,26 @@ msgstr ""
 "نمایان به عنوان «%s» و آمادهٔ انتقال بلوتوثی پرونده‌ها. پرونده‌های منتقل شده در "
 "پوشهٔ <a href=\"%s\">بارگیری‌ها</a> قرار می‌گیرند."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr "اگر افزاره را بردارید، باید پیش از استفادهٔ بعدی دوباره برپایش کنید."
+#: lib/bluetooth-settings-widget.c:1304
+msgid "Forget Device?"
+msgstr "فراموش کردن افزاره?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1307
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "برداشتن «%s» از سیاههٔ افزاره‌ها؟"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up again "
+"to use it."
+msgstr ""
+"«%s» از افزاره‌های ذخیره شده‌تان برداشته خواهد شد. برای استفاده باید دوباره "
+"برپایش کنید."
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_لغو"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_برداشتن"
+#: lib/bluetooth-settings-widget.c:1313
+msgid "_Forget"
+msgstr "_فراموشی"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -274,47 +277,47 @@ msgstr "بلندگوها"
 msgid "Unknown"
 msgstr "نامعلوم"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "_اتّصال"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "جفت شده"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "گونه"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "نشانی"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
 msgstr "تنظیمات _موشی و صفحهٔ لمسی"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "تنظیمات _صدا"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "تنظیمات ص_فحه‌کلید"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "ا_رسال پرونده‌ها…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "_فراموش کردن افزاره…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "دستگاه‌ها"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
 msgstr "جست‌وجوی افزاره‌ها…"
 
@@ -442,6 +445,13 @@ msgstr "نام افزارهٔ دوردست"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAME"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "برداشتن «%s» از سیاههٔ افزاره‌ها؟"
+
+#~ msgid "_Remove"
+#~ msgstr "_برداشتن"
 
 #~ msgid "Click to select device…"
 #~ msgstr "برای گزینش دستگاه کلیک کنید…"
