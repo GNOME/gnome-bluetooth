@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-02-24 21:35+0600\n"
+"POT-Creation-Date: 2024-07-29 18:37+0000\n"
+"PO-Revision-Date: 2024-08-30 19:33+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -104,7 +104,7 @@ msgid "Dismiss"
 msgstr "Елемеу"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Бас тарту"
 
@@ -113,7 +113,7 @@ msgstr "Бас тарту"
 msgid "Accept"
 msgstr "Қабылдау"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "Бапталмаған"
 
@@ -125,18 +125,18 @@ msgstr "Байланысқан"
 msgid "Disconnected"
 msgstr "Байланыспаған"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
 msgid "Yes"
 msgstr "Иә"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1142
 msgid "No"
 msgstr "Жоқ"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1234
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -146,24 +146,26 @@ msgstr ""
 "үшін қолжетерлік. Алмасқан файлдарды <a href=\"%s\">Жүктемелер</a> бумасынан "
 "табуға болады."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Құрылғыны өшірсеңіз, қайта қолдану үшін оны жаңадан баптау керек болады."
+#: lib/bluetooth-settings-widget.c:1304
+msgid "Forget Device?"
+msgstr "Құрылғыны ұмыту керек пе?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1307
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "\"%s\" құрылғылар тізімінен өшіру керек пе?"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr ""
+"\"%s\" сіздің сақталған құрылғыларыңыздан өшіріледі. Оны қайта қолдану үшін "
+"оны жаңадан баптау керек болады."
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "Өші_ру"
+#: lib/bluetooth-settings-widget.c:1313
+msgid "_Forget"
+msgstr "Ұ_мыту"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -281,47 +283,47 @@ msgstr "Динамиктер"
 msgid "Unknown"
 msgstr "Белгісіз"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "Байланы_с"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "Жұпталған"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "Түрі"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "Адресі"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
 msgstr "_Тышқан және тачпад баптаулары"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "Дыбы_с баптаулары"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "_Пернетақта баптаулары"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "_Файлдарды жіберу…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "Құрылғыны ұ_мыту…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "Құрылғылар"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
 msgstr "Құрылғыларды іздеу…"
 
@@ -446,6 +448,13 @@ msgstr "Қашықтағы құрылғы атауы"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "АТАУЫ"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "\"%s\" құрылғылар тізімінен өшіру керек пе?"
+
+#~ msgid "_Remove"
+#~ msgstr "Өші_ру"
 
 #~ msgid "Click to select device…"
 #~ msgstr "Құрылғыны таңдау үшін шертіңіз…"
