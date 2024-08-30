@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.14\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-04-26 16:12+0000\n"
-"PO-Revision-Date: 2024-05-05 00:25+0100\n"
+"POT-Creation-Date: 2024-07-29 18:37+0000\n"
+"PO-Revision-Date: 2024-08-30 15:39+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português (https://l10n.gnome.org/teams/pt/)\n"
 "Language: pt\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -110,7 +110,7 @@ msgid "Dismiss"
 msgstr "Negar"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -119,7 +119,7 @@ msgstr "Cancelar"
 msgid "Accept"
 msgstr "Aceitar"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "Por configurar"
 
@@ -131,18 +131,18 @@ msgstr "Ligado"
 msgid "Disconnected"
 msgstr "Desligado"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
 msgid "Yes"
 msgstr "Sim"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1142
 msgid "No"
 msgstr "Não"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1234
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -151,25 +151,26 @@ msgstr ""
 "Visível como \"%s\" e disponível para transferências Bluetooth. Os ficheiros "
 "transferidos são colocados na pasta de <a href=\"%s\">Transferências</a>."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Se remover o dispositivo, terá de o configurar novamente antes de o poder "
-"voltar a utilizar."
+#: lib/bluetooth-settings-widget.c:1304
+msgid "Forget Device?"
+msgstr "Esquecer dispositivo?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1307
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Remover \"%s\" da lista de dispositivos?"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr ""
+"“%s” será removido dos seus dispositivos guardados. Terá de o configurar "
+"novamente para o utilizar."
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_Remover"
+#: lib/bluetooth-settings-widget.c:1313
+msgid "_Forget"
+msgstr "_Esquecer"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -191,7 +192,7 @@ msgstr "Abrir a pasta que o contém"
 
 #: lib/bluetooth-settings-obexpush.c:179
 msgid "File reception complete"
-msgstr "Receção de ficheiro completa"
+msgstr "Receção de ficheiros concluída"
 
 #: lib/bluetooth-settings-obexpush.c:234
 #, c-format
@@ -200,7 +201,7 @@ msgstr "Transferência de ficheiros por Bluetooth de %s"
 
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
-msgstr "Declinar"
+msgstr "Recusar"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -249,7 +250,7 @@ msgstr "Impressora"
 
 #: lib/bluetooth-utils.c:79
 msgid "Joypad"
-msgstr "Joypad"
+msgstr "Comando de jogos"
 
 #: lib/bluetooth-utils.c:81
 msgid "Tablet"
@@ -287,47 +288,47 @@ msgstr "Altifalantes"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "_Ligação"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "Emparelhado"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "Tipo"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "Endereço"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
-msgstr "Definições de _Rato & Painel táctil"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
+msgstr "Definições do _Rato e do Painel tátil"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "Definições de _Som"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "Definições de _Teclado"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "Enviar _ficheiros…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "_Esquecer dispositivo…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "Dispositivos"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
 msgstr "A procurar dispositivos…"
 
@@ -457,6 +458,13 @@ msgstr "Nome do dispositivo remoto"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOME"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "Remover \"%s\" da lista de dispositivos?"
+
+#~ msgid "_Remove"
+#~ msgstr "_Remover"
 
 #~ msgid "Click to select device…"
 #~ msgstr "Clique para selecionar um dispositivo…"
