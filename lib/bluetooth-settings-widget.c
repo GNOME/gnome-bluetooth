@@ -1113,6 +1113,9 @@ update_properties (BluetoothSettingsWidget *self,
 	gtk_widget_set_visible (WID ("mouse_button_row"), FALSE);
 	gtk_widget_set_visible (WID ("send_button_row"), FALSE);
 
+        /* Properties dialog title */
+        adw_dialog_set_title (ADW_DIALOG (WID ("properties_dialog")), alias);
+
 	/* Name */
         gtk_label_set_label (GTK_LABEL (WID ("device_name")), alias);
 	g_free (self->selected_name);
