@@ -313,7 +313,7 @@ get_icade_pincode (char **pin_display_str)
 }
 
 static void
-display_cb (GtkDialog *dialog,
+display_cb (AdwDialog *dialog,
 	    int        response,
 	    gpointer   user_data)
 {
@@ -323,7 +323,7 @@ display_cb (GtkDialog *dialog,
 }
 
 static void
-enter_pin_cb (GtkDialog *dialog,
+enter_pin_cb (AdwDialog *dialog,
 	      int        response,
 	      gpointer   user_data)
 {
@@ -365,7 +365,7 @@ enter_pin_cb (GtkDialog *dialog,
 }
 
 static void
-confirm_remote_pin_cb (GtkDialog *dialog,
+confirm_remote_pin_cb (AdwDialog *dialog,
 		       int        response,
 		       gpointer   user_data)
 {
@@ -504,7 +504,7 @@ cancel_setup_cb (GObject      *source_object,
 }
 
 static void
-display_passkey_or_pincode_cb (GtkDialog *dialog,
+display_passkey_or_pincode_cb (AdwDialog *dialog,
 			       int        response,
 			       gpointer   user_data)
 {
@@ -661,7 +661,7 @@ cancel_callback (GDBusMethodInvocation *invocation,
 }
 
 static void
-confirm_cb (GtkDialog *dialog,
+confirm_cb (AdwDialog *dialog,
 	    int        response,
 	    gpointer   user_data)
 {
@@ -730,7 +730,7 @@ authorize_callback (GDBusMethodInvocation *invocation,
 }
 
 static void
-authorize_service_cb (GtkDialog *dialog,
+authorize_service_cb (AdwDialog *dialog,
 		      int        response,
 		      gpointer   user_data)
 {
