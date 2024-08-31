@@ -12,14 +12,16 @@
             <property name="show-end-title-buttons">False</property>
             <child type="start">
               <object class="GtkButton" id="cancel">
-                <property name="label" translatable="yes">Cancel</property>
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="use-underline">True</property>
                 <signal name="clicked" handler="response_cb"/>
               </object>
             </child>
             <child type="end">
               <object class="GtkButton" id="done">
                 <property name="visible">False</property>
-                <property name="label" translatable="yes">Accept</property>
+                <property name="label" translatable="yes">_Accept</property>
+                <property name="use-underline">True</property>
                 <signal name="clicked" handler="response_cb"/>
               </object>
             </child>

@@ -89,7 +89,7 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_CONFIRMATION:
 		gtk_widget_set_visible (priv->done, TRUE);
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("C_onfirm"));
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), CONFIRMATION_PAGE);
 		title = g_strdup(_("Confirm Bluetooth PIN"));
 		help = g_strdup_printf (_("Confirm the Bluetooth PIN for “%s”. This can usually be found in the device’s manual."), device_name);
@@ -102,7 +102,7 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), DISPLAY_PAGE);
 		break;
 	case BLUETOOTH_PAIRING_MODE_PIN_MATCH:
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("C_onfirm"));
 		gtk_widget_set_visible (priv->done, TRUE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->pin_notebook), DISPLAY_PAGE);
 		title = g_strdup(_("Confirm Bluetooth PIN"));
@@ -142,18 +142,18 @@ bluetooth_pairing_dialog_set_mode (BluetoothPairingDialog *self,
 
 	if (mode == BLUETOOTH_PAIRING_MODE_YES_NO ||
 	    mode == BLUETOOTH_PAIRING_MODE_CONFIRM_AUTH) {
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Allow"));
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("_Allow"));
 		gtk_widget_remove_css_class (priv->done, "suggested-action");
 
-		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("Dismiss"));
+		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("_Dismiss"));
 		gtk_widget_add_css_class (priv->cancel, "destructive-action");
 
 		gtk_widget_set_visible (priv->pin_notebook, FALSE);
 	} else {
-		gtk_button_set_label (GTK_BUTTON (priv->done), _("Confirm"));
+		gtk_button_set_label (GTK_BUTTON (priv->done), _("C_onfirm"));
 		gtk_widget_add_css_class (priv->done, "suggested-action");
 
-		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("Cancel"));
+		gtk_button_set_label (GTK_BUTTON (priv->cancel), _("_Cancel"));
 		gtk_widget_remove_css_class (priv->cancel, "destructive-action");
 
 		gtk_widget_set_visible (priv->pin_notebook, TRUE);
