@@ -1,18 +1,18 @@
 # Swedish translation for gnome-bluetooth
-# Copyright © 2007-2023 Free Software Foundation, Inc.
+# Copyright © 2007-2024 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2010, 2011, 2012.
 # Mattias Eriksson <snaggen@gmail.com>, 2014.
 # Josef Andersson <l10nl18nsweja@gmail.com>, 2014.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2015, 2017, 2018, 2019, 2023.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2015, 2017, 2018, 2019, 2023, 2024.
 # Luna Jernberg <droidbittin@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2023-11-25 23:07+0100\n"
+"POT-Creation-Date: 2024-07-20 09:34+0000\n"
+"PO-Revision-Date: 2024-07-31 15:38+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
 #: lib/bluetooth-pairing-dialog.c:103
@@ -103,7 +103,7 @@ msgid "Dismiss"
 msgstr "Avfärda"
 
 #. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
+#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -112,7 +112,7 @@ msgstr "Avbryt"
 msgid "Accept"
 msgstr "Acceptera"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "Inte konfigurerat"
 
@@ -124,18 +124,18 @@ msgstr "Ansluten"
 msgid "Disconnected"
 msgstr "Frånkopplad"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
 msgid "Yes"
 msgstr "Ja"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1142
 msgid "No"
 msgstr "Nej"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1234
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -144,25 +144,26 @@ msgstr ""
 "Synlig som ”%s” och tillgänglig för Bluetooth-filöverföringar. Överförda "
 "filer placeras i mappen <a href=\"%s\">Hämtningar</a>."
 
-#: lib/bluetooth-settings-widget.c:1310
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Om du tar bort enheten så måste du konfigurera den igen innan du kan använda "
-"den."
+#: lib/bluetooth-settings-widget.c:1304
+msgid "Forget Device?"
+msgstr "Glöm enhet?"
 
-#: lib/bluetooth-settings-widget.c:1312
+#: lib/bluetooth-settings-widget.c:1307
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Ta bort ”%s” från listan över enheter?"
+msgid ""
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
+msgstr ""
+"”%s” kommer tas bort från dina sparade enheter. Du kommer behöva konfigurera "
+"den igen innan du kan använda den."
 
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_Ta bort"
+#: lib/bluetooth-settings-widget.c:1313
+msgid "_Forget"
+msgstr "_Glöm"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -280,47 +281,47 @@ msgstr "Högtalare"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "_Anslutning"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "Ihopparad"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "Typ"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "Adress"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
 msgstr "Inställningar för _mus och styrplatta"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "Ljudin_ställningar"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "_Tangentbordsinställningar"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "Skicka _filer…"
 
-#: lib/settings.ui:125
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "_Glöm enhet…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "Enheter"
 
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
 msgstr "Söker efter enheter…"
 
@@ -450,6 +451,13 @@ msgstr "Fjärrenhetens namn"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAMN"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "Ta bort ”%s” från listan över enheter?"
+
+#~ msgid "_Remove"
+#~ msgstr "_Ta bort"
 
 #~ msgid "Click to select device…"
 #~ msgstr "Klicka för att välja enhet…"
