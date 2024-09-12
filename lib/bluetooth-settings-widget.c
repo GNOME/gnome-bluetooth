@@ -1427,7 +1427,12 @@ activate_row (BluetoothSettingsWidget *self,
 	is_setup = paired || trusted;
 
 	if (is_setup) {
+		GtkWidget *page;
+
 		update_properties (self, device);
+
+		page = WID ("preferences_page");
+		adw_preferences_page_scroll_to_top (ADW_PREFERENCES_PAGE (page));
 
 		w = self->properties_dialog;
 		adw_dialog_present (w, GTK_WIDGET (self));
