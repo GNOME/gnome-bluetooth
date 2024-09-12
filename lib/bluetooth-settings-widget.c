@@ -1430,7 +1430,7 @@ activate_row (BluetoothSettingsWidget *self,
 		update_properties (self, device);
 
 		w = self->properties_dialog;
-                adw_dialog_present (w, GTK_WIDGET (self));
+		adw_dialog_present (w, GTK_WIDGET (self));
 	} else {
 		start_pairing (self, row);
 	}
