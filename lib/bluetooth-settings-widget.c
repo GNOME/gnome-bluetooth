@@ -651,7 +651,8 @@ cancel_callback (GDBusMethodInvocation *invocation,
 
 	child = gtk_widget_get_first_child (self->device_list);
 	while (child) {
-		g_object_set (G_OBJECT (child), "pairing", FALSE, NULL);
+		if (GTK_IS_LIST_BOX_ROW (child))
+			g_object_set (G_OBJECT (child), "pairing", FALSE, NULL);
 		child = gtk_widget_get_next_sibling (child);
 	}
 
