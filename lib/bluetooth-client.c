@@ -1215,9 +1215,6 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 	g_autoptr(GDBusProxy) adapter = NULL;
 	GVariantBuilder builder;
 
-	if (client->discovery_started == discovering)
-		return;
-
 	adapter = _bluetooth_client_get_default_adapter (client);
 	if (adapter == NULL) {
 		g_debug ("%s discovery requested, but no default adapter",
@@ -1225,6 +1222,15 @@ _bluetooth_client_set_default_adapter_discovering (BluetoothClient *client,
 		client->discovery_started = FALSE;
 		return;
 	}
+
+	if (!adapter1_get_powered (client->default_adapter) && discovering) {
+		g_debug("Starting discovery requested, but default adapter is unpowered");
+		client->discovery_started = FALSE;
+		return;
+	}
+
+	if (client->discovery_started == discovering)
+		return;
 
 	client->discovery_started = discovering;
 
