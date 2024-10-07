@@ -273,6 +273,13 @@ class OopTests(dbusmock.DBusTestCase):
         self.wait_for_mainloop()
         self.assertEqual(dbusprops_bluez.Get('org.bluez.Adapter1', 'Powered'), False)
         self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
+
+        # Verify that discovery doesn't start when unpowered
+        self.assertEqual (self.client.props.default_adapter_setup_mode, False)
+        self.client.props.default_adapter_setup_mode = True
+        self.wait_for_mainloop()
+        self.assertEqual (self.client.props.default_adapter_setup_mode, False)
+
         self.client.props.default_adapter_powered = True
         # NOTE: this should be "turning on"
         self.assertEqual(self.client.props.default_adapter_state, GnomeBluetoothPriv.AdapterState.OFF)
