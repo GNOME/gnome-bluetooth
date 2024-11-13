@@ -2,14 +2,15 @@
 # Copyright (C) 2009-2015 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Akom Chotiphantawanon <knight2000@gmail.com>, 2009-2015.
+# Atirut Wattanamongkol <atirut.wattanamongkol@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-08-31 14:08+0000\n"
-"PO-Revision-Date: 2024-09-10 14:50+0700\n"
-"Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
+"POT-Creation-Date: 2024-11-06 05:20+0000\n"
+"PO-Revision-Date: 2024-11-13 18:56+0700\n"
+"Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -35,9 +36,8 @@ msgstr "ยืนยัน"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
-msgid ""
-"Confirm the Bluetooth PIN for “%s”. This can usually be found in the device’s manual."
-msgstr "ยืนยัน PIN บลูทูธสำหรับ “%s” ตามปกติสามารถหาได้ในคู่มือของอุปกรณ์"
+msgid "Confirm the Bluetooth PIN for “%s”. This can usually be found in the device’s manual."
+msgstr "ยืนยัน PIN บลูทูธสำหรับ “%s” โดยปกติรหัสนี้สามารถพบได้ในคู่มือของอุปกรณ์"
 
 #: lib/bluetooth-pairing-dialog.c:101
 #, c-format
@@ -79,9 +79,9 @@ msgstr "กรุณาป้อน PIN ต่อไปนี้ที่ “%s�
 
 #: lib/bluetooth-pairing-dialog.c:137
 msgid ""
-"Please move the joystick of your iCade in the following directions. Then press any of "
-"the white buttons."
-msgstr "กรุณาเลื่อนก้านควบคุม iCade ของคุณในทิศทางต่อไปนี้ แล้วกดปุ่มสีขาวใดๆ"
+"Please move the joystick of your iCade in the following directions. Then press any of the white "
+"buttons."
+msgstr "กรุณาเลื่อนก้านควบคุม iCade ของคุณในทิศทางต่อไปนี้ แล้วกดปุ่มสีขาวปุ่มใดก็ได้"
 
 #: lib/bluetooth-pairing-dialog.c:145
 msgid "Allow"
@@ -111,42 +111,39 @@ msgstr "เชื่อมต่ออยู่"
 msgid "Disconnected"
 msgstr "ไม่ได้เชื่อมต่อ"
 
-#: lib/bluetooth-settings-widget.c:1137 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "ใช่"
 
-#: lib/bluetooth-settings-widget.c:1137
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "ไม่ใช่"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1229
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
-"Visible as “%s” and available for Bluetooth file transfers. Transferred files are "
-"placed in the <a href=\"%s\">Downloads</a> folder."
+"Visible as “%s” and available for Bluetooth file transfers. Transferred files are placed in the <a "
+"href=\"%s\">Downloads</a> folder."
 msgstr ""
-"มองเห็นเป็น “%s” และสามารถถ่ายโอนไฟล์ผ่านบลูทูธได้ ไฟล์ที่ถ่ายโอนจะอยู่ในโฟลเดอร์ <a "
-"href=\"%s\">ดาวน์โหลด</a>"
+"มองเห็นในชื่อ “%s” และสามารถถ่ายโอนไฟล์ผ่านบลูทูธได้ ไฟล์ที่ถ่ายโอนจะอยู่ในโฟลเดอร์ <a href=\"%s\">ดาวน์โหลด</a>"
 
-#: lib/bluetooth-settings-widget.c:1299
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
-msgstr "_ลืมอุปกรณ์"
+msgstr "ลืมอุปกรณ์หรือไม่?"
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
-msgid ""
-"“%s” will be removed from your saved devices. You will have to set it up again to use "
-"it."
-msgstr "“%s” จะถูกลบออกจากรายชื่ออุปกรณ์ที่บันทึกไว้ของคุณ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งหากต้องการใช้"
+msgid "“%s” will be removed from your saved devices. You will have to set it up again to use it."
+msgstr "“%s” จะถูกลบออกจากรายชื่ออุปกรณ์ที่บันทึกไว้ของคุณ คุณจะต้องตั้งค่าอุปกรณ์ใหม่อีกครั้งหากต้องการใช้ใหม่"
 
-#: lib/bluetooth-settings-widget.c:1307 sendto/main.c:447 sendto/main.c:699
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: lib/bluetooth-settings-widget.c:1308
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_ลืม"
 
@@ -236,7 +233,7 @@ msgstr "แท็บเล็ต"
 
 #: lib/bluetooth-utils.c:83
 msgid "Video device"
-msgstr "อุปกรณ์วีดิทัศน์"
+msgstr "อุปกรณ์วิดีโอ"
 
 #: lib/bluetooth-utils.c:85
 msgid "Remote control"
@@ -284,15 +281,15 @@ msgstr "ที่อยู่"
 
 #: lib/settings.ui:102
 msgid "_Mouse &amp; Touchpad Settings"
-msgstr "ค่าตั้งเ_มาส์และทัชแพด"
+msgstr "การตั้งค่าเ_มาส์และทัชแพด"
 
 #: lib/settings.ui:109
 msgid "_Sound Settings"
-msgstr "ค่าตั้งเ_สียง"
+msgstr "การตั้งค่าเ_สียง"
 
 #: lib/settings.ui:116
 msgid "_Keyboard Settings"
-msgstr "ค่าตั้งแ_ป้นพิมพ์"
+msgstr "การตั้งค่าแ_ป้นพิมพ์"
 
 #: lib/settings.ui:123
 msgid "Send _Files…"
@@ -323,9 +320,7 @@ msgid "An unknown error occurred"
 msgstr "เกิดข้อผิดพลาดไม่ทราบสาเหตุ"
 
 #: sendto/main.c:131
-msgid ""
-"Make sure that the remote device is switched on and that it accepts Bluetooth "
-"connections"
+msgid "Make sure that the remote device is switched on and that it accepts Bluetooth connections"
 msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าอุปกรณ์อีกฝ่ายหนึ่งเปิดทำงานอยู่ และรับการเชื่อมต่อบลูทูธ"
 
 #: sendto/main.c:364
@@ -766,14 +761,13 @@ msgstr "ชื่อ"
 #~ msgstr "ตั้งค่าเสร็จสมบูรณ์แล้ว"
 
 #~ msgid ""
-#~ "The Bluetooth new device setup will walk you through the process of configuring "
-#~ "Bluetooth enabled devices for use with this computer."
-#~ msgstr ""
-#~ "การตั้งค่าอุปกรณ์บูลทูทชิ้นใหม่ จะพาคุณผ่านกระบวนการตั้งค่าอุปกรณ์ที่รองรับบลูทูท เพื่อใช้กับคอมพิวเตอร์เครื่องนี้"
+#~ "The Bluetooth new device setup will walk you through the process of configuring Bluetooth "
+#~ "enabled devices for use with this computer."
+#~ msgstr "การตั้งค่าอุปกรณ์บูลทูทชิ้นใหม่ จะพาคุณผ่านกระบวนการตั้งค่าอุปกรณ์ที่รองรับบลูทูท เพื่อใช้กับคอมพิวเตอร์เครื่องนี้"
 
 #~ msgid ""
-#~ "The device will need to be within 10 meters of your computer, and be “visible” "
-#~ "(sometimes called “discoverable”). Check the device's manual if in doubt."
+#~ "The device will need to be within 10 meters of your computer, and be “visible” (sometimes "
+#~ "called “discoverable”). Check the device's manual if in doubt."
 #~ msgstr ""
 #~ "อุปกรณ์จะต้องอยู่ภายในระยะ 10 เมตร จากเครื่องคอมพิวเตอร์ของคุณ และ “มองเห็นได้” (บางครั้งเรียกว่า "
 #~ "“เปิดให้ตรวจพบได้”) กรุณาตรวจสอบกับคู่มืออุปกรณ์หากมีข้อสงสัย"
@@ -900,8 +894,7 @@ msgstr "ชื่อ"
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr "ไม่สามารถเปิดเครื่องมือปรับแต่ง \"การแบ่งปันแฟ้มส่วนตัว\""
 
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly installed."
+#~ msgid "Please verify that the \"Personal File Sharing\" program is correctly installed."
 #~ msgstr "กรุณาตรวจสอบว่าโปรแกรม \"แบ่งปันแฟ้มส่วนตัว\" ได้ติดตั้งอย่างถูกต้องแล้ว"
 
 #~ msgid "_Show Bluetooth icon"
