@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-09-02 12:30+0000\n"
+"POT-Creation-Date: 2025-02-15 01:28+0000\n"
 "PO-Revision-Date: 2024-09-03 22:21+0200\n"
 "Last-Translator: Vincent Chatelain <vinchatl_gnome@proton.me>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -42,8 +42,8 @@ msgstr ""
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Confirmer"
+msgid "C_onfirm"
+msgstr "C_onfirmer"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -110,19 +110,26 @@ msgstr ""
 "Appuyez ensuite sur n’importe lequel des boutons blancs."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
+#, fuzzy
+#| msgid "Allow"
+msgid "_Allow"
 msgstr "Autoriser"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
+#, fuzzy
+#| msgid "Dismiss"
+msgid "_Dismiss"
 msgstr "Abandonner"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Annuler"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "A_nnuler"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
+#: lib/bluetooth-pairing-dialog.ui:23
+#, fuzzy
+#| msgid "Accept"
+msgid "_Accept"
 msgstr "Accepter"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
@@ -137,18 +144,18 @@ msgstr "Connecté"
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: lib/bluetooth-settings-widget.c:1140 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Oui"
 
-#: lib/bluetooth-settings-widget.c:1140
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Non"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1232
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -158,11 +165,11 @@ msgstr ""
 "Bluetooth. Les fichiers transférés sont placés dans le dossier <a "
 "href=\"%s\">Téléchargements</a>."
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Oublier le périphérique ?"
 
-#: lib/bluetooth-settings-widget.c:1305
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -171,11 +178,7 @@ msgstr ""
 "« %s » va être supprimé de vos périphériques enregistrés. Vous devrez le "
 "configurer à nouveau avant utilisation."
 
-#: lib/bluetooth-settings-widget.c:1310 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "A_nnuler"
-
-#: lib/bluetooth-settings-widget.c:1311
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Oublier"
 
@@ -209,6 +212,10 @@ msgstr "Transfert de fichier par Bluetooth depuis %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Refuser"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Accepter"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -466,6 +473,9 @@ msgstr "Nom du périphérique distant"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOM"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
