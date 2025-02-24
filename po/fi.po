@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-07-29 18:37+0000\n"
-"PO-Revision-Date: 2024-08-23 13:41+0300\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-02-24 20:34+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -27,22 +27,22 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 "X-POT-Import-Date: 2012-02-19 15:16:02+0000\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Vahvista Bluetooth-PIN"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Vahvista laitteelle “%s” syötetty PIN."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "Vahvista"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "_Vahvista"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -51,49 +51,49 @@ msgstr ""
 "Vahvista Bluetooth-PIN-koodi laitteelle “%s”. Koodi on yleensä mainittu "
 "laitteen ohjekirjassa."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "Paritetaan “%s”"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "Vahvista, että seuraava PIN täsmää laitteella “%s” näkyvää PIN-koodia."
 
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth-parituspyyntö"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
 "“%s” haluaa muodostaa parin tämän laitteen kanssa. Sallitaanko paritus?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Vahvista Bluetooth-yhteys"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "“%s” haluaa muodostaa yhteyden tämän laitteen kanssa. Sallitaanko yhteys?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "Syötä seuraava PIN laitteelle “%s”."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr "Syötä seuraava PIN laitteelle “%s” ja paina “Enter”."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -101,23 +101,22 @@ msgstr ""
 "Liikuta iCaden sauvaohjainta seuraaviin suuntiin. Paina sitten mitä tahansa "
 "valkoista painiketta."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "Salli"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "_Salli"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "Hylkää"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "H_ylkää"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
-msgid "Cancel"
-msgstr "Peru"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Peru"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Hyväksy"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Hyväksy"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -131,18 +130,18 @@ msgstr "Yhdistetty"
 msgid "Disconnected"
 msgstr "Yhteys katkaistu"
 
-#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Kyllä"
 
-#: lib/bluetooth-settings-widget.c:1142
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Ei"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1234
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -151,15 +150,12 @@ msgstr ""
 "Näkyvissä nimellä “%s” ja käytettävissä Bluetooth-tiedostosiirtoihin. "
 "Siirretyt tiedostot sijoitetaan <a href=\"%s\">Lataukset</a>-kansioon."
 
-#: lib/bluetooth-settings-widget.c:1304
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Unohdetaanko laite?"
 
-#: lib/bluetooth-settings-widget.c:1307
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
-#| msgid ""
-#| "If you remove the device, you will have to set it up again before next "
-#| "use."
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
 "again to use it."
@@ -167,11 +163,7 @@ msgstr ""
 "“%s” poistetaan tallennetuista laitteista. Jos haluat käyttää sitä "
 "uudelleen, se tulee määrittää uudelleen."
 
-#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Peru"
-
-#: lib/bluetooth-settings-widget.c:1313
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Unohda"
 
@@ -205,6 +197,10 @@ msgstr "Bluetooth-tiedostonsiirto lähteestä %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Kieltäydy"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Hyväksy"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -460,6 +456,9 @@ msgstr "Etälaitteen nimi"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NIMI"
+
+#~ msgid "Cancel"
+#~ msgstr "Peru"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
