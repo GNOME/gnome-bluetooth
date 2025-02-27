@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2024-08-31 14:08+0000\n"
-"PO-Revision-Date: 2024-09-02 23:46+0200\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-02-27 22:37+0100\n"
 "Last-Translator: Fran Dieguez <fran.dieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -22,13 +22,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
-"X-Project-Style: gnome\n"
-"X-DL-Team: gl\n"
-"X-DL-Module: gnome-bluetooth\n"
 "X-DL-Branch: master\n"
 "X-DL-Domain: po\n"
+"X-DL-Module: gnome-bluetooth\n"
 "X-DL-State: Translating\n"
+"X-DL-Team: gl\n"
+"X-Generator: Poedit 3.5\n"
+"X-Project-Style: gnome\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -42,8 +42,8 @@ msgstr "Confirme o PIN que foi escrito en «%s»."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Confirmar"
+msgid "C_onfirm"
+msgstr "C_onfirmar"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -104,20 +104,21 @@ msgstr ""
 "botón branco."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Permitir"
+msgid "_Allow"
+msgstr "_Permitir"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Rexeitar"
+msgid "_Dismiss"
+msgstr "_Rexeitar"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Cancelar"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Cancelar"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Aceptar"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Aceptar"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -131,18 +132,18 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: lib/bluetooth-settings-widget.c:1137 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Si"
 
-#: lib/bluetooth-settings-widget.c:1137
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Non"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1229
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -152,11 +153,11 @@ msgstr ""
 "Bluetooth. Os ficheiros transferidos gardaranse no cartafol <a "
 "href=\"%s\">Descargas</a>."
 
-#: lib/bluetooth-settings-widget.c:1299
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Esquecer dispositivo?"
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -165,11 +166,7 @@ msgstr ""
 "«%s» quitarase dos seus dispositivos gardados. Deberá configuralo de novo "
 "antes de usalo a seguinte vez."
 
-#: lib/bluetooth-settings-widget.c:1307 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: lib/bluetooth-settings-widget.c:1308
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Esquecer"
 
@@ -204,6 +201,10 @@ msgstr "Transferencia de ficheiro por Bluetooth desde %s"
 msgid "Decline"
 msgstr "Rexeitar"
 
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Aceptar"
+
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
 msgstr "Teléfono"
@@ -220,7 +221,8 @@ msgstr "Computador"
 msgid "Network"
 msgstr "Rede"
 
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#. translators: a hands-free headset, a combination of a single speaker with a
+#. microphone
 #: lib/bluetooth-utils.c:65
 msgid "Headset"
 msgstr "Auriculares"
@@ -459,6 +461,9 @@ msgstr "Nome do dispositivo remoto"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOME"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
