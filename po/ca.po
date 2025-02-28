@@ -9,10 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
-"issues\n"
-"POT-Creation-Date: 2024-07-29 18:37+0000\n"
-"PO-Revision-Date: 2024-08-26 09:38+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-02-27 22:26+0100\n"
 "Last-Translator: maite guix <maite.guix@me.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -20,24 +19,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Confirmeu el PIN Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Confirmeu que el PIN que s'ha introduït a «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "Confirma"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "C_onfirma"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -46,49 +45,49 @@ msgstr ""
 "Confirmeu el PIN Bluetooth per a «%s». El PIN es troba normalment al manual "
 "del dispositiu."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "S'està aparellant amb «%s»"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "Confirmeu que el PIN següent concorda amb el que es mostra a «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Petició d'aparellament per Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
 "«%s» vol aparellar-se amb aquest dispositiu. Voleu permetre l'aparellament?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Confirmeu la connexió Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr "«%s» vol connectar-se amb aquest dispositiu. Voleu permetre-ho?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "Introduïu el PIN següent a «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr ""
 "Introduïu el PIN següent a «%s» i premeu la tecla de Retorn en el teclat."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -96,23 +95,22 @@ msgstr ""
 "Moveu la palanca de control del vostre iCade en les direccions següents. "
 "Després premeu qualsevol dels botons blancs."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "Permet"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "_Permet"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "Descarta"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "_Descarta"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
-msgid "Cancel"
-msgstr "Cancel·la"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Cancel·la"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Accepta"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Accepta"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -126,45 +124,41 @@ msgstr "Connectat"
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Sí"
 
-#: lib/bluetooth-settings-widget.c:1142
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "No"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1234
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
 "Visible com a «%s» i disponible per a transferències de fitxers per "
-"Bluetooth. Els fitxers transferits es troben a la carpeta <a "
-"href=\"%s\">Baixades</a>."
+"Bluetooth. Els fitxers transferits es troben a la carpeta <a href=\"%s"
+"\">Baixades</a>."
 
-#: lib/bluetooth-settings-widget.c:1304
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Voleu oblidar el dispositiu?"
 
-#: lib/bluetooth-settings-widget.c:1307
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
 "again to use it."
 msgstr ""
-"«%s» serà eliminat de la llista de dispositius desats. Haureu de tornar-lo "
-"a configurar per utilitzar-lo."
+"«%s» serà eliminat de la llista de dispositius desats. Haureu de tornar-lo a "
+"configurar per utilitzar-lo."
 
-#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Cancel·la"
-
-#: lib/bluetooth-settings-widget.c:1313
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Oblida"
 
@@ -198,6 +192,10 @@ msgstr "Transferència de fitxers per Bluetooth des de %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Declina"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Accepta"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -454,6 +452,9 @@ msgstr "Nom del dispositiu remot"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOM"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel·la"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
