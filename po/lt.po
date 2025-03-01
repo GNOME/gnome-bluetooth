@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bluetooth Applet 1.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-08-31 14:08+0000\n"
-"PO-Revision-Date: 2024-09-02 22:51+0300\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-03-01 23:07+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -33,8 +33,8 @@ msgstr "Patvirtinkite „%s“ įvestą PIN."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Patvirtinti"
+msgid "C_onfirm"
+msgstr "_Patvirtinti"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -94,20 +94,21 @@ msgstr ""
 "kurį baltą mygtuką."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Leisti"
+msgid "_Allow"
+msgstr "_Leisti"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Atmesti"
+msgid "_Dismiss"
+msgstr "At_mesti"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Atsisakyti"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Atšaukti"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Priimti"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Priimti"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -121,18 +122,18 @@ msgstr "Prisijungta"
 msgid "Disconnected"
 msgstr "Atsijungta"
 
-#: lib/bluetooth-settings-widget.c:1137 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Taip"
 
-#: lib/bluetooth-settings-widget.c:1137
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Ne"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1229
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -141,11 +142,11 @@ msgstr ""
 "Matomas kaip „%s“ ir prieinamas Bluetooth failų perdavimams. Perduoti failai "
 "bus patalpinti <a href=\"%s\">parsiuntimų</a> aplanke."
 
-#: lib/bluetooth-settings-widget.c:1299
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Pamiršti įrenginį?"
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -154,11 +155,7 @@ msgstr ""
 "„%s“ bus pašalintas iš įrašytų įrenginių.Reikės jį nustatyti iš naujo prieš "
 "kitą naudojimą."
 
-#: lib/bluetooth-settings-widget.c:1307 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Atšaukti"
-
-#: lib/bluetooth-settings-widget.c:1308
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Pamiršti"
 
@@ -192,6 +189,10 @@ msgstr "Bluetooth failų perdavimas iš %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Atmesti"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Priimti"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -453,6 +454,9 @@ msgstr "Nutolusio įrenginio pavadinimas"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "PAVADINIMAS"
+
+#~ msgid "Cancel"
+#~ msgstr "Atsisakyti"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
