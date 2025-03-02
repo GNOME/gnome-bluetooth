@@ -10,8 +10,8 @@
 #
 # Update in gnome-bluetooth:
 # Changwoo Ryu <cwryu@debian.org>, 2009-2011, 2015.
-# SeongMan, Jang <brian.jang11@gmail.com> 2017.
-# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011-2015, 2019, 2022, 2024.
+# SeongMan Jang <brian.jang11@gmail.com> 2017.
+# Seong-ho Cho <shcho@gnome.org>, 2011-2015, 2019, 2022, 2024-2025.
 #
 # 주의:
 # - Bluetooth는 "블루투스"로 번역.
@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2024-07-29 18:37+0000\n"
-"PO-Revision-Date: 2024-08-25 00:25+0900\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-03-01 04:24+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -32,24 +32,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "블루투스 PIN 확인"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "“%s” 장치에 입력한 PIN을 확인하십시오."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "확인"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "확인(_O)"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -57,47 +57,47 @@ msgid ""
 msgstr ""
 "“%s” 장치의 블루투스 PIN을 확인하십시오. 장치 설명서에서 찾을 수 있습니다."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "“%s” 장치 페어링 중"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "“%s” 장치에 표시된 PIN이 다음 PIN과 일치하는지 확인하십시오."
 
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "블루투스 페어링 요청"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr "“%s” 장치가 이 장치와 페어링하려고 합니다. 페어링을 허용하시겠습니까?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "블루투스 연결 확인"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr "“%s” 장치가 이 장치에 연결하려고 합니다. 허용하시겠습니까?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "“%s” 장치에 다음 PIN을 입력하십시오."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr "“%s” 장치에 다음 PIN을 입력하고 키보드에서 “Return”을 누르십시오."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -105,23 +105,22 @@ msgstr ""
 "다음 방향을 따라 iCade의 조이스틱을 움직이십시오. 그 다음 흰색 단추중 아무거"
 "나 누르십시오."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "허용"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "허용(_A)"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "무시"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "무시(_D)"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
-msgid "Cancel"
-msgstr "취소"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "취소(_C)"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "수락"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "수락(_A)"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -135,18 +134,18 @@ msgstr "연결함"
 msgid "Disconnected"
 msgstr "연결 끊김"
 
-#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "예"
 
-#: lib/bluetooth-settings-widget.c:1142
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "아니요"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1234
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -155,11 +154,11 @@ msgstr ""
 "이름이 “%s”이고 블루투스 파일 전송을 사용할 수 있습니다. 전송한 파일은 <a "
 "href=\"%s\">다운로드</a> 폴더에 저장됩니다."
 
-#: lib/bluetooth-settings-widget.c:1304
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "장치를 제거할까요?"
 
-#: lib/bluetooth-settings-widget.c:1307
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -167,11 +166,7 @@ msgid ""
 msgstr ""
 "저장한 장치 목록에서 “%s” 장치를 제거합니다. 사용하려면 다시 설정해야합니다."
 
-#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "취소(_C)"
-
-#: lib/bluetooth-settings-widget.c:1313
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "제거(_F)"
 
@@ -210,6 +205,10 @@ msgstr "%s에서 블루투스 파일 전송이 있습니다"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "거부"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "수락"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -462,6 +461,9 @@ msgstr "원격 장치의 이름"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "<이름>"
+
+#~ msgid "Cancel"
+#~ msgstr "취소"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
