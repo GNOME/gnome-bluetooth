@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.38.x\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-07-29 18:37+0000\n"
-"PO-Revision-Date: 2024-08-26 21:02+0200\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-03-02 16:15+0100\n"
 "Last-Translator: Brage <bragefuglseth@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -18,22 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Bekreft PIN for Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
-msgstr "Vennligst bekreft PIN-koden som ble skrevet inn på «%s»."
+msgstr "Bekreft PIN-koden som ble skrevet inn på «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "Bekreft"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "_Bekreft"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -42,49 +42,49 @@ msgstr ""
 "Bekreft Bluetooth-PIN for «%s». Denne finnes vanligvis i dokumentasjonen for "
 "enheten."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "Kobler sammen med «%s»"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "Vennligst bekreft at følgende PIN er lik den som vises på «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Forespørsel om Bluetooth-sammenkobling"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
 "«%s» ønsker å koble sammen med denne enheten. Vil du tillate sammenkobling?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Bekreft Bluetooth-tilkobling"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr "«%s» ønsker å koble til denne enheten. Vil du tillate dette?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "Vennligst oppgi følgende PIN på «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr ""
 "Vennligst oppgi følgende PIN på «%s» og trykk «linjeskift» på tastaturet."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -92,23 +92,22 @@ msgstr ""
 "Vennligst beveg styrepinnen på din iCade i følgende retninger. Trykk så på "
 "en av de hvite knappene."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "Tillat"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "_Tillat"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "Avvis"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "Av_vis"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
-msgid "Cancel"
-msgstr "Avbryt"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Avbryt"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Godta"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Godta"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -122,18 +121,18 @@ msgstr "Koblet til"
 msgid "Disconnected"
 msgstr "Koblet fra"
 
-#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Ja"
 
-#: lib/bluetooth-settings-widget.c:1142
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Nei"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1234
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -142,11 +141,11 @@ msgstr ""
 "Synlig som «%s» og tilgjengelig for filoverføringer via Bluetooth. Overførte "
 "filer plasseres i mappen <a href=\"%s\">Nedlastinger</a>."
 
-#: lib/bluetooth-settings-widget.c:1304
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Glemme enhet?"
 
-#: lib/bluetooth-settings-widget.c:1307
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -155,11 +154,7 @@ msgstr ""
 "«%s» vil fjernes fra de lagrede enhetene dine. Den vil måtte settes opp på "
 "nytt for å bli brukt."
 
-#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Avbryt"
-
-#: lib/bluetooth-settings-widget.c:1313
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Glem"
 
@@ -193,6 +188,10 @@ msgstr "Bluetooth-filoverføring fra %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Avslå"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Godta"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -449,6 +448,9 @@ msgstr "Navn på ekstern enhet"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAVN"
+
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
 
 #~ msgid "Click to select device…"
 #~ msgstr "Klikk for å velge enhet …"
