@@ -4,14 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2024.
-# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024.
+# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-08-31 14:08+0000\n"
-"PO-Revision-Date: 2024-09-03 09:04+0200\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-03-03 15:47+0100\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
-"X-Generator: Gtranslator 46.1\n"
+"X-Generator: Gtranslator 47.1\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -34,8 +34,8 @@ msgstr "Confirme el PIN introducido en «%s»."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Confirmar"
+msgid "C_onfirm"
+msgstr "C_onfirmar"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -98,20 +98,21 @@ msgstr ""
 "cualquiera de los botones blancos."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Permitir"
+msgid "_Allow"
+msgstr "_Permitir"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Descartar"
+msgid "_Dismiss"
+msgstr "_Descartar"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Cancelar"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Cancelar"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Aceptar"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Aceptar"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -125,18 +126,18 @@ msgstr "Conectado"
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: lib/bluetooth-settings-widget.c:1137 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Sí"
 
-#: lib/bluetooth-settings-widget.c:1137
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "No"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1229
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -146,11 +147,11 @@ msgstr ""
 "Bluetooth. Los archivos transferidos se guardan en la carpeta <a "
 "href=\"%s\">Descargas</a>."
 
-#: lib/bluetooth-settings-widget.c:1299
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "¿Olvidar dispositivo?"
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -159,11 +160,7 @@ msgstr ""
 "Se eliminará «%s» de sus dispositivos guardados. Tendrá que configurarlo de "
 "nuevo antes de poder usarlo."
 
-#: lib/bluetooth-settings-widget.c:1307 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: lib/bluetooth-settings-widget.c:1308
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Olvidar"
 
@@ -197,6 +194,10 @@ msgstr "Transferencia de archivos Bluetooth desde %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Rechazar"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Aceptar"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -453,6 +454,9 @@ msgstr "Nombre del dispositivo remoto"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOMBRE"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
