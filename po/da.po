@@ -6,7 +6,7 @@
 # Kris Thomsen <lakristho@gmail.com>, 2011.
 # flemming christensen <fc@stromata.dk>, 2011.
 # scootergrisen, 2015.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2017, 2022, 2024.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2017, 2022, 2024-2025.
 # Alan Mortensen <alanmortensen.am@gmail.com>, 2018.
 #
 # paired -> parret
@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-08-31 14:08+0000\n"
-"PO-Revision-Date: 2024-09-08 17:41+0200\n"
+"POT-Creation-Date: 2025-02-23 09:43+0000\n"
+"PO-Revision-Date: 2025-03-08 14:20+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -42,8 +42,8 @@ msgstr "Bekræft venligst den PIN-kode som blev indtastet på “%s”."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Bekræft"
+msgid "C_onfirm"
+msgstr "_Bekræft"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -105,20 +105,21 @@ msgstr ""
 "en vilkårlig hvid knap."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Tillad"
+msgid "_Allow"
+msgstr "_Tillad"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Afvis"
+msgid "_Dismiss"
+msgstr "A_fvis"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Annullér"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Annullér"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Acceptér"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "A_cceptér"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -132,18 +133,18 @@ msgstr "Forbundet"
 msgid "Disconnected"
 msgstr "Frakoblet"
 
-#: lib/bluetooth-settings-widget.c:1137 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Ja"
 
-#: lib/bluetooth-settings-widget.c:1137
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Nej"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1229
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -152,22 +153,20 @@ msgstr ""
 "Synlig som “%s” og tilgængelig for Bluetooth-filoverførsel. Overførte filer "
 "placeres i mappen <a href=\"%s\">Hentet</a>."
 
-#: lib/bluetooth-settings-widget.c:1299
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Glem enhed?"
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
 "again to use it."
-msgstr "“%s” vil blive fjernet fra dine gemte enheder. Du skal i så fald sætte den op igen, før den kan bruges næste gang."
+msgstr ""
+"“%s” vil blive fjernet fra dine gemte enheder. Du skal i så fald sætte den "
+"op igen, før den kan bruges næste gang."
 
-#: lib/bluetooth-settings-widget.c:1307 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Annullér"
-
-#: lib/bluetooth-settings-widget.c:1308
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Glem"
 
@@ -201,6 +200,10 @@ msgstr "Bluetooth-filoverførsel fra %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Afvis"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Acceptér"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -457,6 +460,9 @@ msgstr "Fjernenheds navn"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAVN"
+
+#~ msgid "Cancel"
+#~ msgstr "Annullér"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
