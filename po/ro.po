@@ -7,14 +7,16 @@
 # Daniel Șerbănescu <cyber19rider@gmail.com>, 2010.
 # Nichita Utiu <nikita.utiu@gmail.com>, 2010.
 # Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015, 2018.
+# Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, 2024.
+# Antonio Marin <gnmer.6qxyg@slmail.me>, 2025.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-08-04 18:09+0000\n"
-"PO-Revision-Date: 2024-08-23 08:18+0300\n"
-"Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
-"gmail [dot] com>\n"
+"POT-Creation-Date: 2025-03-10 16:44+0000\n"
+"PO-Revision-Date: 2025-03-17 16:06+0100\n"
+"Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Gnome Romanian Translation Team\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -22,25 +24,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Gtranslator 47.1\n"
 "X-Project-Style: gnome\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Confirmă PIN-ul Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Confirmați PIN-ul care a fost introdus pe „%s”."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "Confirmă"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "C_onfirmă"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -49,48 +51,48 @@ msgstr ""
 "Confirmați PIN-ul Bluetooth pentru „%s”. Acesta se poate găsi de obicei în "
 "manualul dispozitivului."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "Cerere de asociere pentru „%s”"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr ""
 "Confirmați dacă PIN-ul următor corespunde celui de pe dispozitivul „%s”."
 
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Cerere de asociere Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr "„%s” vrea să se asocieze cu acest dispozitiv. Permiteți asocierea?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Confirmă conexiunea Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr "„%s” vrea să se conecteze cu acest dispozitiv. Permiteți conectarea?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "Introduceți următorul PIN pe „%s”."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr "Introduceți următorul PIN pe „%s”. Apoi apăsați „Enter” pe tastatură."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -98,23 +100,22 @@ msgstr ""
 "Mutați joystick-ul iCade în direcțiile următoare. Apoi apăsați oricare "
 "dintre butoanele albe."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "Permite"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "_Permite"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "Respinge"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "_Respinge"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
-msgid "Cancel"
-msgstr "Anulează"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Anulează"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Acceptă"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Acceptă"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -128,18 +129,18 @@ msgstr "Conectat"
 msgid "Disconnected"
 msgstr "Deconectat"
 
-#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Da"
 
-#: lib/bluetooth-settings-widget.c:1142
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Nu"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1234
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -148,11 +149,11 @@ msgstr ""
 "Vizibil ca „%s” și disponibil pentru transfer de fișiere prin Bluetooth. "
 "Fișierele transferate sunt plasate în dosarul <a href=\"%s\">Descărcări</a>."
 
-#: lib/bluetooth-settings-widget.c:1304
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Uitați dispozitivul?"
 
-#: lib/bluetooth-settings-widget.c:1307
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -161,11 +162,7 @@ msgstr ""
 "„%s” va fi eliminat din dispozitivele salvate. Va trebui să îl configurați "
 "din nou pentru a-l utiliza."
 
-#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Anulează"
-
-#: lib/bluetooth-settings-widget.c:1313
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Uită"
 
@@ -199,6 +196,10 @@ msgstr "Transfer de fișiere prin Bluetooth de la %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Refuză"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Acceptă"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -460,554 +461,3 @@ msgstr "Numele dispozitivului la distanță"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NUME"
-
-#, c-format
-#~ msgid "Remove “%s” from the list of devices?"
-#~ msgstr "Eliminați „%s” din lista dispozitivelor?"
-
-#~ msgid "_Remove"
-#~ msgstr "_Elimină"
-
-#~ msgid "Click to select device…"
-#~ msgstr "Clic pentru a selecta dispozitivul…"
-
-#~ msgid "_OK"
-#~ msgstr "_OK"
-
-#~ msgid "No adapters available"
-#~ msgstr "Niciun adaptor disponibil"
-
-#~ msgid "Device"
-#~ msgstr "Dispozitiv"
-
-#~ msgid "All categories"
-#~ msgstr "Toate categoriile"
-
-#~ msgid "Trusted"
-#~ msgstr "De încredere"
-
-#~ msgid "Not paired or trusted"
-#~ msgstr "Nici asociat, nici de încredere"
-
-#~ msgid "Paired or trusted"
-#~ msgstr "Asociat sau de încredere"
-
-#~ msgid "Show:"
-#~ msgstr "Arată:"
-
-#~ msgid "Device _category:"
-#~ msgstr "_Categorie dispozitiv:"
-
-#~ msgid "Select the device category to filter"
-#~ msgstr "Alegeți categoria dispozitivului pentru filtrare"
-
-#~ msgid "Device _type:"
-#~ msgstr "_Tip dispozitiv:"
-
-#~ msgid "Select the device type to filter"
-#~ msgstr "Alegeți tipul dispozitivului pentru filtrare"
-
-#~ msgid "Input devices (mice, keyboards, etc.)"
-#~ msgstr "Dispozitive de intrare (mauși, tastaturi, etc.)"
-
-#~ msgid "Headphones, headsets and other audio devices"
-#~ msgstr "Căști și alte dispozitive audio"
-
-#~ msgid "All types"
-#~ msgstr "Toate tipurile"
-
-#~ msgid "Select device to send to"
-#~ msgstr "Alegeți dispozitivul destinație"
-
-#~ msgid "_Send"
-#~ msgstr "_Trimite"
-
-#~ msgid "[FILE…]"
-#~ msgstr "[FIȘIER…]"
-
-#~ msgid "Reveal File"
-#~ msgstr "Dezvăluie fișierul"
-
-#~ msgid "bluetooth"
-#~ msgstr "bluetooth"
-
-#~| msgid "Visibility of “%s”"
-#~ msgid "Visible as “%s”"
-#~ msgstr "Vizibil ca „%s”"
-
-#~ msgid "page 1"
-#~ msgstr "pagina 1"
-
-#~ msgid "page 2"
-#~ msgstr "pagina 2"
-
-#~| msgid "<b>Show Only Bluetooth Devices With...</b>"
-#~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Afișează doar dispozitivele Bluetooth cu..."
-
-#~ msgid "Use this GPS device for Geolocation services"
-#~ msgstr "Folosește acest dispozitiv GPS pentru servicii de geolocație"
-
-#~ msgid "Access the Internet using your cell phone (test)"
-#~ msgstr "Accesează Internetul utilizând telefonul mobil (test)"
-
-#~ msgid "Select Device to Browse"
-#~ msgstr "Alegere dispozitiv de navigat"
-
-#~ msgid "_Browse"
-#~ msgstr "_Navighează"
-
-#~ msgid "Select device to browse"
-#~ msgstr "Alege dispozitivul de navigat"
-
-#~ msgid "Turn On Bluetooth"
-#~ msgstr "Pornește Bluetooth"
-
-#~ msgid "Bluetooth: Off"
-#~ msgstr "Bluetooth: oprit"
-
-#~ msgid "Turn Off Bluetooth"
-#~ msgstr "Oprește Bluetooth"
-
-#~ msgid "Bluetooth: On"
-#~ msgstr "Bluetooth: pornit"
-
-#~ msgid "Bluetooth: Disabled"
-#~ msgstr "Bluetooth: dezactivat"
-
-#~ msgid "Disconnecting..."
-#~ msgstr "Se deconectează..."
-
-#~ msgid "Connecting..."
-#~ msgstr "Se conectează..."
-
-#~ msgid "Disconnect"
-#~ msgstr "Deconectează"
-
-#~ msgid "Connect"
-#~ msgstr "Conectează"
-
-#~ msgid "Browse files..."
-#~ msgstr "Navighează fișiere..."
-
-#~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Deschide preferințele tastaturii..."
-
-#~ msgid "Open Mouse Preferences..."
-#~ msgstr "Deschide preferințele mausului..."
-
-#~ msgid "Open Sound Preferences..."
-#~ msgstr "Deschide preferințele sunetului..."
-
-#~ msgid "Debug"
-#~ msgstr "Depanează"
-
-#~ msgid "- Bluetooth applet"
-#~ msgstr "- Miniaplicație Bluetooth"
-
-#~ msgid ""
-#~ "%s\n"
-#~ "Run '%s --help' to see a full list of available command line options.\n"
-#~ msgstr ""
-#~ "%s\n"
-#~ "Executați „%s --help” pentru a vedea întreaga listă a comenzilor "
-#~ "disponibile.\n"
-
-#~ msgid "Bluetooth Applet"
-#~ msgstr "Miniaplicație Bluetooth"
-
-#~ msgid "Bluetooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Bluetooth: Enabled"
-#~ msgstr "Bluetooth: activat"
-
-#~ msgid "Please enter the PIN mentioned on device %s."
-#~ msgstr "Introduceți PIN-ul menționat pe dispozitiv: %s"
-
-#~ msgid "Grant access to '%s'"
-#~ msgstr "Permite accesul la „%s”"
-
-#~ msgid "Device %s wants access to the service '%s'."
-#~ msgstr "Dispozitivul %s vrea să acceseze serviciul „%s”."
-
-#~ msgid "Bluetooth device"
-#~ msgstr "Dispozitiv Bluetooth"
-
-#~ msgid "Enter PIN"
-#~ msgstr "Introduceți PIN-ul"
-
-#~ msgid "Pairing confirmation for '%s'"
-#~ msgstr "Confirmare de asociere pentru „%s”"
-
-#~ msgid "Verify PIN"
-#~ msgstr "Verificare PIN"
-
-#~ msgid "Authorization request from '%s'"
-#~ msgstr "Cerere de autorizare de la „%s”"
-
-#~ msgid "Check authorization"
-#~ msgstr "Verifică autorizarea"
-
-#~ msgid "Bluetooth Manager"
-#~ msgstr "Administrator Bluetooth"
-
-#~ msgid "Bluetooth Manager applet"
-#~ msgstr "Miniaplicație administrator Bluetooth"
-
-#~ msgid "Bluetooth: Checking"
-#~ msgstr "Bluetooth: verificare"
-
-#~ msgid "Browse files on device..."
-#~ msgstr "Navighează fișierele de pe dispozitiv..."
-
-#~ msgid "Preferences"
-#~ msgstr "Preferințe"
-
-#~ msgid "Quit"
-#~ msgstr "Ieșire"
-
-#~ msgid "Send files to device..."
-#~ msgstr "Trimite fișiere către dispozitiv..."
-
-#~ msgid "Set up new device..."
-#~ msgstr "Configurează un dispozitiv nou..."
-
-#~ msgid "Visible"
-#~ msgstr "Vizibil"
-
-#~ msgid "_Always grant access"
-#~ msgstr "Permite _accesul întotdeauna"
-
-#~ msgid "_Grant"
-#~ msgstr "Permi_te"
-
-#~ msgid "_Reject"
-#~ msgstr "_Refuză"
-
-#~ msgid "_Does not match"
-#~ msgstr "N_u se potrivesc"
-
-#~ msgid "_Matches"
-#~ msgstr "_Potriviri"
-
-#~ msgid "_Show input"
-#~ msgstr "A_fișează intrările"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "Bluetooth-ul este dezactivat"
-
-#~| msgid "Bluetooth is disabled"
-#~ msgid "Bluetooth is disabled by hardware switch"
-#~ msgstr "Bluetooth-ul este dezactivat dintr-un comutator hardware"
-
-#~| msgid "No Bluetooth adapters present"
-#~ msgid "No Bluetooth adapters found"
-#~ msgstr "Niciun adaptor Bluetooth nu a fost găsit"
-
-#~| msgid "Visible"
-#~ msgid "Visibility"
-#~ msgstr "Vizibilitate"
-
-#~| msgid "Phone"
-#~ msgid "Power"
-#~ msgstr "Putere"
-
-#~ msgid "Pairing with '%s' cancelled"
-#~ msgstr "Asocierea cu „%s” a fost anulată"
-
-#~ msgid "Please confirm that the PIN displayed on '%s' matches this one."
-#~ msgstr "Confirmați dacă PIN-ul afișat pe „%s” este acesta."
-
-#~ msgid "Please enter the following PIN:"
-#~ msgstr "Introduceți următorul PIN:"
-
-#~ msgid "Setting up '%s' failed"
-#~ msgstr "Configurarea dispozitivului „%s” a eșuat"
-
-#~ msgid "Connecting to '%s'..."
-#~ msgstr "Se conectează la „%s”..."
-
-#~ msgid "Please wait while finishing setup on device '%s'..."
-#~ msgstr "Așteptați până se termină configurarea dispozitivului „%s”..."
-
-#~ msgid "Successfully set up new device '%s'"
-#~ msgstr "Noul dispozitiv „%s” a fost configurat cu succes"
-
-#~ msgid "'0000' (most headsets, mice and GPS devices)"
-#~ msgstr "„0000” (majoritatea căștilor, mausurilor și dispozitivelor GPS)"
-
-#~ msgid "'1111'"
-#~ msgstr "„1111”"
-
-#~ msgid "'1234'"
-#~ msgstr "„1234”"
-
-#~ msgid "Bluetooth New Device Setup"
-#~ msgstr "Configurare dispozitiv Bluetooth nou"
-
-#~ msgid "Custom PIN:"
-#~ msgstr "PIN personalizat:"
-
-#~ msgid "Device Setup"
-#~ msgstr "Configurare dispozitiv"
-
-#~ msgid "Device Setup Failed"
-#~ msgstr "Configurarea dispozitivului a eșuat"
-
-#~ msgid "Device search"
-#~ msgstr "Căutare dispozitive"
-
-#~ msgid "Do not pair"
-#~ msgstr "Nu asocia"
-
-#~ msgid "Does not match"
-#~ msgstr "Nu se potrivesc"
-
-#~ msgid "Finishing New Device Setup"
-#~ msgstr "Se încheie configurarea noului dispozitiv"
-
-#~ msgid "Fixed PIN"
-#~ msgstr "PIN predefinit"
-
-#~ msgid "Introduction"
-#~ msgstr "Introducere"
-
-#~ msgid "Matches"
-#~ msgstr "Se potrivește"
-
-#~ msgid "PIN Options"
-#~ msgstr "Opțiuni PIN"
-
-#~ msgid "PIN _options..."
-#~ msgstr "_Opțiuni PIN..."
-
-#~ msgid "Select the additional services you want to use with your device:"
-#~ msgstr ""
-#~ "Alegeți serviciile adiționale pe care doriți să le folosiți cu "
-#~ "dispozitivul dumneavoastră:"
-
-#~| msgid "Select the device you want to setup"
-#~ msgid "Select the device you want to set up"
-#~ msgstr "Alegeți dispozitivul pe care doriți să îl configurați"
-
-#~ msgid "Setup Completed"
-#~ msgstr "Configurare completă"
-
-#~ msgid ""
-#~ "The Bluetooth new device setup will walk you through the process of "
-#~ "configuring Bluetooth enabled devices for use with this computer."
-#~ msgstr ""
-#~ "Asistentul de instalare a unui nou dispozitiv Bluetooth vă va ghida în "
-#~ "procesul de configurare a dispozitivelor Bluetooth active pentru a fi "
-#~ "folosite cu acest calculator."
-
-#~ msgid ""
-#~ "The device will need to be within 10 meters of your computer, and be "
-#~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
-#~ "in doubt."
-#~ msgstr ""
-#~ "Dispozitivul trebuie să se afle la mai puțin de 10 metri față de "
-#~ "calculator și trebuie să fie „vizibil” (câteodată întâlnit și ca "
-#~ "„descoperibil”). Verificați manualul dispozitivului dacă aveți dubii."
-
-#~ msgid "Welcome to the Bluetooth new device setup"
-#~ msgstr ""
-#~ "Bine ați venit la asistentul de instalare de noi dispozitive Bluetooth"
-
-#~ msgid "_Automatic PIN selection"
-#~ msgstr "Selectare _automată PIN"
-
-#~ msgid "_Restart Setup"
-#~ msgstr "_Repornește instalarea"
-
-#~| msgid "Bluetooth New Device Setup"
-#~ msgid "Bluetooth Device Setup"
-#~ msgstr "Configurare dispozitiv Bluetooth"
-
-#~| msgid "Bluetooth device"
-#~ msgid "Setup Bluetooth devices"
-#~ msgstr "Configurare dispozitive Bluetooth"
-
-#~ msgid "File Transfer"
-#~ msgstr "Transfer fișiere"
-
-#~ msgid "Sending files via Bluetooth"
-#~ msgstr "Se trimit fișiere prin Bluetooth"
-
-#~ msgid "%d KB/s"
-#~ msgstr "%d KO/s"
-
-#~| msgid "Programming error, could not find the device in the list"
-#~ msgid "Programming error: could not find the device in the list"
-#~ msgstr "Eroare de programare: nu s-a putut găsi dispozitivul în listă"
-
-#~| msgid "Obex Push file transfer unsupported"
-#~ msgid "OBEX Push file transfer unsupported"
-#~ msgstr "Transferul de fișiere prin OBEX Push nu este suportat"
-
-#~ msgid "Bluetooth (OBEX Push)"
-#~ msgstr "Bluetooth (OBEX Push)"
-
-#~ msgid "Run in standalone mode"
-#~ msgstr "Rulează în mod autonom"
-
-#~ msgid "Moblin Bluetooth Panel"
-#~ msgstr "Administrator Bluetooth Moblin"
-
-#~ msgid "- Moblin Bluetooth Panel"
-#~ msgstr "- Miniaplicație Bluetooth Moblin"
-
-#~ msgid "%d hour"
-#~ msgid_plural "%d hours"
-#~ msgstr[0] "o oră"
-#~ msgstr[1] "%d ore"
-#~ msgstr[2] "%d de ore"
-
-#~ msgid "%d minute"
-#~ msgid_plural "%d minutes"
-#~ msgstr[0] "un minut"
-#~ msgstr[1] "%d minute"
-#~ msgstr[2] "%d de minute"
-
-#~ msgid "%d second"
-#~ msgid_plural "%d seconds"
-#~ msgstr[0] "o secundă"
-#~ msgstr[1] "%d secunde"
-#~ msgstr[2] "%d de secunde"
-
-#~ msgid "%s %s %s"
-#~ msgstr "%s %s %s"
-
-#~ msgid "%s %s"
-#~ msgstr "%s %s"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "0 seconds"
-#~ msgstr "0 secunde"
-
-#~ msgid ""
-#~ "Your computer is visible on\n"
-#~ "Bluetooth for %s."
-#~ msgstr ""
-#~ "Calculatorule este vizibil prin\n"
-#~ "Bluetooth pentru %s."
-
-#~ msgid "Pairing with %s failed."
-#~ msgstr "Asocierea cu „%s” a eșuat."
-
-#~| msgid "Paired"
-#~ msgid "Pair"
-#~ msgstr "Asociază"
-
-#~| msgid "_Browse"
-#~ msgid "Browse"
-#~ msgstr "Navighează"
-
-#~ msgid "Device setup failed"
-#~ msgstr "Configurarea dispozitivului a eșuat"
-
-#~ msgid "Back to devices"
-#~ msgstr "Înapoi la dispozitive"
-
-#~ msgid "Done"
-#~ msgstr "Gata"
-
-#~ msgid "Device setup"
-#~ msgstr "Configurare dispozitiv"
-
-#~ msgid "Settings"
-#~ msgstr "Configurări"
-
-#~ msgid "Only show:"
-#~ msgstr "Afișează doar:"
-
-#~ msgid "PIN options"
-#~ msgstr "Opțiuni PIN"
-
-#~ msgid "Add a new device"
-#~ msgstr "Adaugă un dispozitiv nou"
-
-#~ msgid "Make visible on Bluetooth"
-#~ msgstr "Fă vizibil prin Bluetooth"
-
-#~ msgid "Send file from your computer"
-#~ msgstr "Trimite un fișier de pe calculator"
-
-#~ msgid "Bluetooth Manager Panel"
-#~ msgstr "Panou administrare Bluetooth"
-
-#~ msgid "Make computer _visible"
-#~ msgstr "Fă calculatorul _vizibil"
-
-#~ msgid "Friendly name"
-#~ msgstr "Nume afișat"
-
-#~ msgid "Set up _new device..."
-#~ msgstr "Configurează un dispozitiv _nou..."
-
-#~ msgid "Cannot start \"Personal File Sharing\" Preferences"
-#~ msgstr "Nu s-au putut porni preferințele de „Partajare fișiere personale”"
-
-#~ msgid ""
-#~ "Please verify that the \"Personal File Sharing\" program is correctly "
-#~ "installed."
-#~ msgstr ""
-#~ "Verificați dacă programul „Partajare fișiere personale” este instalat "
-#~ "corect."
-
-#~ msgid "_Show Bluetooth icon"
-#~ msgstr "Afișează iconița _Bluetooth"
-
-#~ msgid "Your computer does not have any Bluetooth adapters plugged in."
-#~ msgstr "Calculatorul nu are conectat niciun adaptor Bluetooth"
-
-#~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr ""
-#~ "Bluetooth-ul a fost dezactivat de către un comutator de la calculator."
-
-#~ msgid "<u>Pair</u>"
-#~ msgstr "<u>Asociază</u>"
-
-#~ msgid "<u>Connect</u>"
-#~ msgstr "<u>Conectează</u>"
-
-#~ msgid "<u>Browse</u>"
-#~ msgstr "<u>Navighează</u>"
-
-#~ msgid "Output a list of currently known devices"
-#~ msgstr "Afișează o listă a dispozitivelor cunoscute acum"
-
-#~ msgid "Bluetooth Preferences"
-#~ msgstr "Preferințe Bluetooth"
-
-#~ msgid "Whether to show the notification icon"
-#~ msgstr "Dacă se afișează sau nu pictograma de notificare"
-
-#~ msgid "Whether to show the notification icon."
-#~ msgstr "Dacă se afișează sau nu pictograma de notificare."
-
-#~ msgid "GConf error: %s"
-#~ msgstr "Eroare GConf: %s"
-
-#~ msgid "All further errors shown only on terminal."
-#~ msgstr "Toate erorile următoare sunt afișate doar în terminal."
-
-#~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "Un administrator Bluetooth pentru GNOME"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Lucian Adrian Grijincu\n"
-#~ "Launchpad Contributions:\n"
-#~ "  Adi Roiban https://launchpad.net/~adiroiban\n"
-#~ "  Alexandru Szasz https://launchpad.net/~alexxed\n"
-#~ "  Cristian KLEIN https://launchpad.net/~cristiklein\n"
-#~ "  Doru Horișco https://launchpad.net/~doruhushhush\n"
-#~ "  Ionuț Jula https://launchpad.net/~ionutjula\n"
-#~ "  Marcel Holtmann https://launchpad.net/~holtmann"
-
-#~ msgid "GNOME Bluetooth home page"
-#~ msgstr "Pagina de Internet GNOME Bluetooth"
