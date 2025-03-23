@@ -14,6 +14,7 @@ if enable_gir and has_dbusmock
   envs = environment()
   envs.set ('top_builddir', meson.global_build_root())
   envs.set ('top_srcdir', meson.global_source_root())
+  envs.set ('GI_TYPELIB_PATH', meson.global_build_root() / 'lib')
 
   test_deps = [ gnomebt_priv_gir, c_exec ]
 

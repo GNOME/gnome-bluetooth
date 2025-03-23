@@ -32,11 +32,7 @@ except ImportError as e:
     sys.stderr.write('Skipping tests, PyGobject not available for Python 3, or missing GI typelibs: %s\n' % str(e))
     sys.exit(77)
 
-gi.require_version('GIRepository', '2.0')
-from gi.repository import GIRepository
 builddir = os.getenv('top_builddir', '.')
-GIRepository.Repository.prepend_library_path(builddir + '/lib/')
-GIRepository.Repository.prepend_search_path(builddir + '/lib/')
 
 GNOME_BLUETOOTH_PRIV_UNAVAILABLE = False
 try:
