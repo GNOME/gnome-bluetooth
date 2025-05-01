@@ -5,13 +5,13 @@
 #
 # Peteris Krisjanis <pecisk@gmail.com>, 2009.
 # Anita Reitere <nitalynx@gmail.com>, 2010.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2016, 2017, 2019, 2022, 2024 Rūdofls Mazurs <rudolfs.mazurs@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2016, 2017, 2019, 2022, 2024, 2025 Rūdofls Mazurs <rudolfs.mazurs@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-08-31 14:08+0000\n"
-"PO-Revision-Date: 2024-09-11 23:01+0300\n"
+"POT-Creation-Date: 2025-04-10 22:07+0000\n"
+"PO-Revision-Date: 2025-05-01 21:53+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -35,8 +35,9 @@ msgstr "Lūdzu, apstipriniet PIN, kas tika ievadīta ierīcē “%s”."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Apstiprināt"
+#| msgid "Confirm"
+msgid "C_onfirm"
+msgstr "_Apstiprināt"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -96,20 +97,24 @@ msgstr ""
 "jebkuru no baltajām pogām."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Atļaut"
+#| msgid "Allow"
+msgid "_Allow"
+msgstr "_Atļaut"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Atmest"
+#| msgid "Dismiss"
+msgid "_Dismiss"
+msgstr "_Noraidīt"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Atcelt"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "At_celt"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Pieņemt"
+#: lib/bluetooth-pairing-dialog.ui:23
+#| msgid "Accept"
+msgid "_Accept"
+msgstr "_Pieņemt"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -123,18 +128,18 @@ msgstr "Savienots"
 msgid "Disconnected"
 msgstr "Atvienots"
 
-#: lib/bluetooth-settings-widget.c:1137 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Jā"
 
-#: lib/bluetooth-settings-widget.c:1137
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Nē"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1229
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -143,28 +148,20 @@ msgstr ""
 "Redzams kā “%s” un pieejams Bluetooth datņu pārsūtīšanai. Pārsūtītās datnes "
 "tiek novietotas mapē <a href=\"%s\">Lejupielādes</a>."
 
-#: lib/bluetooth-settings-widget.c:1299
-#| msgid "_Forget Device…"
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Aizmirst ierīci?"
 
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
-#| msgid ""
-#| "If you remove the device, you will have to set it up again before next "
-#| "use."
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
 "again to use it."
 msgstr ""
-"“%s” tiks izņemta no saglabāto ierīču saraksta. Lai to atkal izmantotu, "
-"tā būs vēlreiz jāiestata."
+"“%s” tiks izņemta no saglabāto ierīču saraksta. Lai to atkal izmantotu, tā "
+"būs vēlreiz jāiestata."
 
-#: lib/bluetooth-settings-widget.c:1307 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "At_celt"
-
-#: lib/bluetooth-settings-widget.c:1308
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "Ai_zmirst"
 
@@ -198,6 +195,10 @@ msgstr "Bluetooth datņu pārsūtīšana no %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Noraidīt"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Pieņemt"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -301,7 +302,6 @@ msgid "Address"
 msgstr "Adrese"
 
 #: lib/settings.ui:102
-#| msgid "_Mouse & Touchpad Settings"
 msgid "_Mouse &amp; Touchpad Settings"
 msgstr "Peles un skārienpaliktņa iestatīju_mi"
 
@@ -460,6 +460,9 @@ msgstr "Attālās ierīces nosaukums"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOSAUKUMS"
+
+#~ msgid "Cancel"
+#~ msgstr "Atcelt"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
