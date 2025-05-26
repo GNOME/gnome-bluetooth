@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2024-09-02 18:47+0000\n"
-"PO-Revision-Date: 2024-09-10 12:04+0200\n"
+"POT-Creation-Date: 2025-05-10 14:18+0000\n"
+"PO-Revision-Date: 2025-05-26 09:06+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -34,8 +34,8 @@ msgstr "Prosím, potvrďte kód PIN zadaný v zariadení „%s“."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Potvrdiť"
+msgid "C_onfirm"
+msgstr "P_otvrdiť"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -44,7 +44,7 @@ msgid ""
 "device’s manual."
 msgstr ""
 "Potvrďte kód PIN pre zariadenie „%s“. Zvyčajne sa dá nájsť v dokumentácii k "
-"zariadeniu"
+"zariadeniu."
 
 # GtkLabel label
 #: lib/bluetooth-pairing-dialog.c:101
@@ -58,7 +58,7 @@ msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr ""
 "Prosím, potvrďte, že nasledovný kód PIN sa zhoduje s tým zobrazeným na "
-"zariadení „%s“"
+"zariadení „%s“."
 
 # desktop entry name
 #: lib/bluetooth-pairing-dialog.c:114
@@ -106,21 +106,22 @@ msgstr ""
 "stlačte jedno z bielych tlačidiel."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Povoliť"
+msgid "_Allow"
+msgstr "_Povoliť"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Odmietnuť"
+msgid "_Dismiss"
+msgstr "O_dmietnuť"
 
 # GtkButton label
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Zrušiť"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Zrušiť"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Prijať"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "Prij_ať"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -135,18 +136,18 @@ msgstr "Pripojené"
 msgid "Disconnected"
 msgstr "Odpojené"
 
-#: lib/bluetooth-settings-widget.c:1140 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Áno"
 
-#: lib/bluetooth-settings-widget.c:1140
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Nie"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1232
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -157,11 +158,11 @@ msgstr ""
 "href=\"%s\">Stiahnuté</a>."
 
 # cmd desc
-#: lib/bluetooth-settings-widget.c:1302
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Zabudnúť zariadenie?"
 
-#: lib/bluetooth-settings-widget.c:1305
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -170,12 +171,7 @@ msgstr ""
 "Zariadenie „%s“ bude odstránené z vašich uložených zariadení. Na jeho "
 "použitie ho budete musieť znovu nastaviť."
 
-# GtkButton label
-#: lib/bluetooth-settings-widget.c:1310 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Zrušiť"
-
-#: lib/bluetooth-settings-widget.c:1311
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Zabudnúť"
 
@@ -211,6 +207,10 @@ msgstr "Prenos súborov cez bluetooth z %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Odmietnuť"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Prijať"
 
 # ListStore item
 #: lib/bluetooth-utils.c:56
@@ -344,7 +344,7 @@ msgstr "Nastavenia _klávesnice"
 
 #: lib/settings.ui:123
 msgid "Send _Files…"
-msgstr "Poslať _súbory"
+msgstr "Poslať _súbory…"
 
 # cmd desc
 #: lib/settings.ui:129
@@ -500,6 +500,10 @@ msgstr "Názov vzdialeného zariadenia"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NÁZOV"
+
+# GtkButton label
+#~ msgid "Cancel"
+#~ msgstr "Zrušiť"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
