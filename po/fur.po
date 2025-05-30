@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-10-07 14:48+0000\n"
-"PO-Revision-Date: 2024-10-14 14:05+0000\n"
+"POT-Creation-Date: 2025-05-10 14:18+0000\n"
+"PO-Revision-Date: 2025-05-30 09:25+0200\n"
 "Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Editor: HaiPO 2.0 beta\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -31,8 +31,8 @@ msgstr "Par plasê conferme il PIN inserît su “%s”."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Conferme"
+msgid "C_onfirm"
+msgstr "C_onferme"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -40,8 +40,8 @@ msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
 "device’s manual."
 msgstr ""
-"Conferme il PIN Bluetooth par “%s”. Chest di solit a si cjate tal manuâl dal"
-" dispositîf."
+"Conferme il PIN Bluetooth par “%s”. Chest di solit a si cjate tal manuâl dal "
+"dispositîf."
 
 #: lib/bluetooth-pairing-dialog.c:101
 #, c-format
@@ -92,24 +92,25 @@ msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
 msgstr ""
-"Par plasê môf il joystick dal to iCade in tes direzions chi sot. Dopo frache"
-" cualsisei boton blanc."
+"Par plasê môf il joystick dal to iCade in tes direzions chi sot. Dopo frache "
+"cualsisei boton blanc."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Permeti"
+msgid "_Allow"
+msgstr "_Permet"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Declinâ"
+msgid "_Dismiss"
+msgstr "_Scarte"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Anule"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Anule"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Acetâ"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Acete"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -153,12 +154,8 @@ msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
 "again to use it."
 msgstr ""
-"“%s” al vignarà gjavât dai dispositîfs salvâts. Par tornâ a doprâlu tu varâs"
-" di tornâ a configurâlu."
-
-#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Anule"
+"“%s” al vignarà gjavât dai dispositîfs salvâts. Par tornâ a doprâlu tu varâs "
+"di tornâ a configurâlu."
 
 #: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
@@ -195,6 +192,10 @@ msgstr "Trasferiment file Bluetooth da %s"
 msgid "Decline"
 msgstr "Decline"
 
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Acetâ"
+
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
 msgstr "Telefonos"
@@ -211,8 +212,7 @@ msgstr "Computer"
 msgid "Network"
 msgstr "Rêt"
 
-#. translators: a hands-free headset, a combination of a single speaker with a
-#. microphone
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
 #: lib/bluetooth-utils.c:65
 msgid "Headset"
 msgstr "Cufies"
@@ -452,6 +452,9 @@ msgstr "Non dal dispositîf esterni"
 msgid "NAME"
 msgstr "NON"
 
+#~ msgid "Cancel"
+#~ msgstr "Anule"
+
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
 #~ msgstr "Gjavâ “%s” de liste dai dispositîfs?"
@@ -535,7 +538,8 @@ msgstr "NON"
 #~ msgstr "pagjine 2"
 
 #~ msgid "Use this GPS device for Geolocation services"
-#~ msgstr "Dopre chest dispositîf GPS par il servizi di localizazion geografiche"
+#~ msgstr ""
+#~ "Dopre chest dispositîf GPS par il servizi di localizazion geografiche"
 
 #~ msgid "Access the Internet using your cell phone (test)"
 #~ msgstr "Vâ in Internet doprant il to telefono celulâr (in prove)"
