@@ -6,14 +6,14 @@
 # Reinout van Schouwen <reinouts@gnome.org>, 2008.
 # Wouter Bolsterlee <wbolster@gnome.org>, 2010–2011.
 # Erwin Poeze <donnut@outlook.com>, 2013.
-# Nathan Follens <nfollens@gnome.org>, 2015, 2017, 2019, 2022, 2024.
+# Nathan Follens <nfollens@gnome.org>, 2015, 2017, 2019, 2022, 2024-2025.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-10-07 14:48+0000\n"
-"PO-Revision-Date: 2024-10-27 23:50+0100\n"
+"POT-Creation-Date: 2025-08-10 15:37+0000\n"
+"PO-Revision-Date: 2025-08-20 00:43+0200\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
-msgstr "Bluetooth-pincode bevestigen"
+msgstr "Bevestig de Bluetooth-pincode"
 
 #: lib/bluetooth-pairing-dialog.c:88
 #, c-format
@@ -35,8 +35,8 @@ msgstr "Bevestig dat de pincode ingevoerd is op ‘%s’."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-msgid "Confirm"
-msgstr "Bevestigen"
+msgid "C_onfirm"
+msgstr "B_evestigen"
 
 #: lib/bluetooth-pairing-dialog.c:95
 #, c-format
@@ -97,20 +97,21 @@ msgstr ""
 "op een van de witte knoppen."
 
 #: lib/bluetooth-pairing-dialog.c:145
-msgid "Allow"
-msgstr "Toestaan"
+msgid "_Allow"
+msgstr "Toest_aan"
 
 #: lib/bluetooth-pairing-dialog.c:148
-msgid "Dismiss"
-msgstr "Verwerpen"
+msgid "_Dismiss"
+msgstr "_Afwijzen"
 
 #: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
-msgid "Cancel"
-msgstr "Annuleren"
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "_Annuleren"
 
-#: lib/bluetooth-pairing-dialog.ui:22 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Accepteren"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "_Accepteren"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -158,10 +159,6 @@ msgstr ""
 "‘%s’ zal uit uw opgeslagen apparaten verwijderd worden. Voordat u het weer "
 "kunt gebruiken zult u het opnieuw moeten instellen."
 
-#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "_Annuleren"
-
 #: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "_Vergeten"
@@ -196,6 +193,10 @@ msgstr "Bestandsoverdracht via Bluetooth van %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Afslaan"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Accepteren"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -326,11 +327,11 @@ msgstr "Apparaten"
 msgid "Searching for devices…"
 msgstr "Zoeken naar apparaten…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth-overdracht"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Bestanden versturen via Bluetooth"
 
@@ -452,6 +453,9 @@ msgstr "Naam van apparaat"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAAM"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuleren"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
