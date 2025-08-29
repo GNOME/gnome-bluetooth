@@ -1,6 +1,6 @@
 # Japanese translation for gnome-bluetooth.
 # Copyright (c) 2007-2010 Rosetta Contributors and Canonical Ltd 2007-2009
-# Copyright (C) 2019-2020, 2022 gnome-bluetooth's COPYRIGHT HOLDER
+# Copyright (C) 2019-2020, 2022, 2025 gnome-bluetooth's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-bluetooth package.
 # CHIKAMA Masaki <masaki.chikama@gmail.com>, 2008.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2009-2011.
@@ -11,182 +11,93 @@
 # Akira Tanaka <root.167d36d4acb91@gmail.com>, 2016.
 # sicklylife <translation@sicklylife.jp>, 2019, 2022.
 # Ryo Nakano <ryonakaknock3@gmail.com>, 2020.
+# Makoto Sakaguchi <ycco34vx@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2019-10-08 11:24+0000\n"
-"PO-Revision-Date: 2022-03-13 19:30+0900\n"
-"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
+"POT-Creation-Date: 2025-05-10 14:18+0000\n"
+"PO-Revision-Date: 2025-07-05 07:23+0900\n"
+"Last-Translator: Makoto Sakaguchi <ycco34vx@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.6\n"
 
-#: lib/bluetooth-chooser-button.c:71
-msgid "Click to select device…"
-msgstr "クリックしてデバイスを選択…"
-
-#: lib/bluetooth-chooser-button.c:201 lib/bluetooth-settings-widget.c:1281
-#: sendto/main.c:447 sendto/main.c:738 sendto/main.c:794
-msgid "_Cancel"
-msgstr "中止(_C)"
-
-#: lib/bluetooth-chooser-button.c:202
-msgid "_OK"
-msgstr "OK(_O)"
-
-#: lib/bluetooth-chooser.c:135 lib/bluetooth-filter-widget.c:82
-#: lib/bluetooth-utils.c:99
-msgid "Unknown"
-msgstr "未知"
-
-#: lib/bluetooth-chooser.c:176
-msgid "No adapters available"
-msgstr "アダプターが利用できません"
-
-#: lib/bluetooth-chooser.c:180 lib/bluetooth-chooser.c:806
-#: lib/bluetooth-settings-widget.c:1561
-msgid "Searching for devices…"
-msgstr "デバイスを検索しています…"
-
-#: lib/bluetooth-chooser.c:698 lib/bluetooth-chooser.c:988
-msgid "Device"
-msgstr "デバイス"
-
-#: lib/bluetooth-chooser.c:734 lib/settings.ui:182
-msgid "Type"
-msgstr "種類"
-
-#: lib/bluetooth-chooser.c:990 lib/bluetooth-settings-widget.c:1518
-msgid "Devices"
-msgstr "デバイス"
-
-#: lib/bluetooth-filter-widget.c:72
-msgid "All categories"
-msgstr "すべてのカテゴリ"
-
-#: lib/bluetooth-filter-widget.c:74 lib/settings.ui:135
-msgid "Paired"
-msgstr "ペアリング済"
-
-#: lib/bluetooth-filter-widget.c:76
-msgid "Trusted"
-msgstr "認証済み"
-
-#: lib/bluetooth-filter-widget.c:78
-msgid "Not paired or trusted"
-msgstr "未ペアリングあるいは未認証"
-
-#: lib/bluetooth-filter-widget.c:80
-msgid "Paired or trusted"
-msgstr "ペアリング済あるいは認証済"
-
-#. This is the title of the filter section of the Bluetooth device chooser.
-#. * It used to say Show Only Bluetooth Devices With...
-#: lib/bluetooth-filter-widget.c:231
-msgid "Show:"
-msgstr "表示:"
-
-#. The device category filter
-#: lib/bluetooth-filter-widget.c:247
-msgid "Device _category:"
-msgstr "デバイスのカテゴリ(_C):"
-
-#: lib/bluetooth-filter-widget.c:258
-msgid "Select the device category to filter"
-msgstr "リストを絞り込むためデバイスのカテゴリを選択してください"
-
-#. The device type filter
-#: lib/bluetooth-filter-widget.c:272
-msgid "Device _type:"
-msgstr "デバイスの種類(_T):"
-
-#: lib/bluetooth-filter-widget.c:289
-msgid "Select the device type to filter"
-msgstr "リストを絞り込むためデバイスの種類を選択してください"
-
-#: lib/bluetooth-filter-widget.c:295
-msgid "Input devices (mice, keyboards, etc.)"
-msgstr "入力デバイス (マウス、キーボード、など)"
-
-#: lib/bluetooth-filter-widget.c:299
-msgid "Headphones, headsets and other audio devices"
-msgstr "ヘッドフォン、ヘッドセット、その他のオーディオ・デバイス"
-
-#: lib/bluetooth-pairing-dialog.c:83 lib/bluetooth-pairing-dialog.c:90
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Bluetooth PIN の確認"
 
-#: lib/bluetooth-pairing-dialog.c:84
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
-msgstr "“%s”で入力された PIN を確認してください。"
+msgstr "“%s” で入力された PIN を確認してください。"
 
-#: lib/bluetooth-pairing-dialog.c:88 lib/bluetooth-pairing-dialog.c:101
-#: lib/bluetooth-pairing-dialog.c:149
-msgid "Confirm"
-msgstr "確認"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "確認(_O)"
 
-#: lib/bluetooth-pairing-dialog.c:91
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
 "device’s manual."
 msgstr ""
-"“%s”の Bluetooth PIN を確認してください。通常はデバイスのマニュアルに記載さ"
+"“%s” の Bluetooth PIN を確認してください。通常はデバイスのマニュアルに記載さ"
 "れています。"
 
-#: lib/bluetooth-pairing-dialog.c:97
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
-msgstr "ペアリング“%s”"
+msgstr "ペアリング “%s”"
 
-#: lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr ""
-"以下の PIN が“%s”に表示されているものと一致するかどうか確認してください。"
+"以下の PIN が “%s” に表示されているものと一致するかどうか確認してください。"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth ペアリングリクエスト"
 
-#: lib/bluetooth-pairing-dialog.c:111
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
-"“%s”がこのデバイスとのペアリングを要求しています。ペアリングを許可しますか?"
+"“%s” がこのデバイスとのペアリングを要求しています。ペアリングを許可しますか?"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Bluetooth 接続の確認"
 
-#: lib/bluetooth-pairing-dialog.c:117
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
-msgstr "“%s”がこのデバイスとの接続を要求しています。許可しますか?"
+msgstr "“%s” がこのデバイスとの接続を要求しています。許可しますか?"
 
-#: lib/bluetooth-pairing-dialog.c:125
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
-msgstr "次の PIN を“%s”に入力してください。"
+msgstr "次の PIN を “%s” に入力してください。"
 
-#: lib/bluetooth-pairing-dialog.c:128
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr ""
-"次の PIN を“%s”に入力してください。その後キーボードで“Return”を押してくださ"
-"い。"
+"次の PIN を “%s” に入力してください。その後キーボードで “Return” を押してく"
+"ださい。"
 
-#: lib/bluetooth-pairing-dialog.c:131
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -194,90 +105,91 @@ msgstr ""
 "以下の方向に iCade のジョイスティックを移動してください。その後白いボタンの"
 "いずれかを押してください。"
 
-#: lib/bluetooth-pairing-dialog.c:139
-msgid "Allow"
-msgstr "許可"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "許可(_A)"
 
-#: lib/bluetooth-pairing-dialog.c:143
-msgid "Dismiss"
-msgstr "拒否"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "拒否(_D)"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:153 lib/bluetooth-pairing-dialog.c:308
-msgid "Cancel"
-msgstr "中止"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "中止(_C)"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:289 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "承認"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "承認(_A)"
 
-#: lib/bluetooth-settings-row.c:79 lib/bluetooth-settings-row.ui:40
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "設定されていません"
 
-#: lib/bluetooth-settings-row.c:81
+#: lib/bluetooth-settings-row.c:80
 msgid "Connected"
 msgstr "接続"
 
-#: lib/bluetooth-settings-row.c:83
+#: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
 msgstr "切断"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "はい"
 
-#: lib/bluetooth-settings-widget.c:1149
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "いいえ"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1249
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
-"“%s”として見えており、Bluetooth ファイル転送が利用可能です。転送されたファイ"
-"ルは<a href=\"%s\">ダウンロード</a>フォルダーに保管されます。"
+"“%s” として見えており、Bluetooth ファイル転送が利用可能です。転送されたファ"
+"イルは<a href=\"%s\">ダウンロード</a>フォルダーに保管されます。"
 
-#: lib/bluetooth-settings-widget.c:1276
+#: lib/bluetooth-settings-widget.c:1303
+msgid "Forget Device?"
+msgstr "デバイスを削除しますか?"
+
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "“%s”をデバイスのリストから削除しますか?"
-
-#: lib/bluetooth-settings-widget.c:1278
 msgid ""
-"If you remove the device, you will have to set it up again before next use."
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
 msgstr ""
-"デバイスを削除すると、次回使用時にデバイスを再設定しなければなりません。"
+"“%s” はペアリング済みデバイスから削除されます。再度設定しないと使用できませ"
+"ん。"
 
-#: lib/bluetooth-settings-widget.c:1282
-msgid "_Remove"
-msgstr "削除(_R)"
+#: lib/bluetooth-settings-widget.c:1312
+msgid "_Forget"
+msgstr "削除(_F)"
 
 #. Translators: %s is the name of the filename received
-#: lib/bluetooth-settings-obexpush.c:146
+#: lib/bluetooth-settings-obexpush.c:145
 #, c-format
 msgid "You received “%s” via Bluetooth"
-msgstr "Bluetooth で“%s”を受信しました"
+msgstr "Bluetooth で “%s” を受信しました"
 
-#: lib/bluetooth-settings-obexpush.c:148
+#: lib/bluetooth-settings-obexpush.c:147
 msgid "You received a file"
 msgstr "ファイルを受信しました"
 
-#: lib/bluetooth-settings-obexpush.c:159
+#: lib/bluetooth-settings-obexpush.c:158
 msgid "Open File"
 msgstr "ファイルを開く"
 
-#: lib/bluetooth-settings-obexpush.c:163
+#: lib/bluetooth-settings-obexpush.c:162
 msgid "Open Containing Folder"
 msgstr "ファイルがあるフォルダーを開く"
 
-#: lib/bluetooth-settings-obexpush.c:180
+#: lib/bluetooth-settings-obexpush.c:179
 msgid "File reception complete"
 msgstr "ファイル受信完了"
 
@@ -290,132 +202,152 @@ msgstr "%s からの Bluetooth ファイル転送"
 msgid "Decline"
 msgstr "拒否"
 
-#: lib/bluetooth-utils.c:59
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "承認"
+
+#: lib/bluetooth-utils.c:56
 msgid "Phone"
 msgstr "電話"
 
-#: lib/bluetooth-utils.c:61
+#: lib/bluetooth-utils.c:58
 msgid "Modem"
 msgstr "モデム"
 
-#: lib/bluetooth-utils.c:63
+#: lib/bluetooth-utils.c:60
 msgid "Computer"
 msgstr "コンピューター"
 
-#: lib/bluetooth-utils.c:65
+#: lib/bluetooth-utils.c:62
 msgid "Network"
 msgstr "ネットワーク"
 
 #. translators: a hands-free headset, a combination of a single speaker with a microphone
-#: lib/bluetooth-utils.c:68
+#: lib/bluetooth-utils.c:65
 msgid "Headset"
 msgstr "ヘッドセット"
 
-#: lib/bluetooth-utils.c:70
+#: lib/bluetooth-utils.c:67
 msgid "Headphones"
 msgstr "ヘッドフォン"
 
-#: lib/bluetooth-utils.c:72
+#: lib/bluetooth-utils.c:69
 msgid "Audio device"
 msgstr "オーディオデバイス"
 
-#: lib/bluetooth-utils.c:74
+#: lib/bluetooth-utils.c:71
 msgid "Keyboard"
 msgstr "キーボード"
 
-#: lib/bluetooth-utils.c:76
+#: lib/bluetooth-utils.c:73
 msgid "Mouse"
 msgstr "マウス"
 
-#: lib/bluetooth-utils.c:78
+#: lib/bluetooth-utils.c:75
 msgid "Camera"
 msgstr "カメラ"
 
-#: lib/bluetooth-utils.c:80
+#: lib/bluetooth-utils.c:77
 msgid "Printer"
 msgstr "プリンター"
 
-#: lib/bluetooth-utils.c:82
+#: lib/bluetooth-utils.c:79
 msgid "Joypad"
 msgstr "ジョイパッド"
 
-#: lib/bluetooth-utils.c:84
+#: lib/bluetooth-utils.c:81
 msgid "Tablet"
 msgstr "タブレット"
 
-#: lib/bluetooth-utils.c:86
+#: lib/bluetooth-utils.c:83
 msgid "Video device"
 msgstr "ビデオデバイス"
 
-#: lib/bluetooth-utils.c:88
+#: lib/bluetooth-utils.c:85
 msgid "Remote control"
 msgstr "リモートコントローラー"
 
-#: lib/bluetooth-utils.c:90
+#: lib/bluetooth-utils.c:87
 msgid "Scanner"
 msgstr "スキャナー"
 
-#: lib/bluetooth-utils.c:92
+#: lib/bluetooth-utils.c:89
 msgid "Display"
 msgstr "ディスプレイ"
 
-#: lib/bluetooth-utils.c:94
+#: lib/bluetooth-utils.c:91
 msgid "Wearable"
 msgstr "ウェアラブル"
 
-#: lib/bluetooth-utils.c:96
+#: lib/bluetooth-utils.c:93
 msgid "Toy"
 msgstr "玩具"
 
-#: lib/bluetooth-utils.c:98
+#: lib/bluetooth-utils.c:95
 msgid "Speakers"
 msgstr "スピーカー"
 
-#: lib/bluetooth-utils.c:117
-msgid "All types"
-msgstr "すべての種類"
+#: lib/bluetooth-utils.c:97
+msgid "Unknown"
+msgstr "未知"
 
-#: lib/settings.ui:44
-msgid "Connection"
-msgstr "接続"
+#: lib/settings.ui:49
+msgid "_Connection"
+msgstr "接続(_C)"
 
-#: lib/settings.ui:229
+#: lib/settings.ui:70
+msgid "Paired"
+msgstr "ペアリング済"
+
+#: lib/settings.ui:79
+msgid "Type"
+msgstr "種類"
+
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "アドレス"
 
-#: lib/settings.ui:285
-msgid "_Mouse & Touchpad Settings"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
 msgstr "マウスとタッチパッドの設定(_M)"
 
-#: lib/settings.ui:299
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "音の設定(_S)"
 
-#: lib/settings.ui:313
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "キーボードの設定(_K)"
 
-#: lib/settings.ui:327
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "ファイルの送信(_F)…"
 
-#: lib/settings.ui:341
-msgid "_Remove Device"
-msgstr "デバイスの削除(_R)"
+#: lib/settings.ui:129
+msgid "_Forget Device…"
+msgstr "デバイスの削除(_F)…"
 
-#: sendto/bluetooth-sendto.desktop.in.in:3
+#: lib/settings.ui:146 lib/settings.ui:168
+msgid "Devices"
+msgstr "デバイス"
+
+#: lib/settings.ui:159
+msgid "Searching for devices…"
+msgstr "デバイスを検索しています…"
+
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth 転送"
 
-#: sendto/bluetooth-sendto.desktop.in.in:4
+#: sendto/bluetooth-sendto.desktop.in:4
 msgid "Send files via Bluetooth"
 msgstr "ファイルを Bluetooth で送信"
 
-#: sendto/main.c:117
+#: sendto/main.c:118
 msgid "An unknown error occurred"
 msgstr "不明なエラーが発生しました"
 
-#: sendto/main.c:130
+#: sendto/main.c:131
 msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
@@ -423,31 +355,31 @@ msgstr ""
 "リモートデバイスのスイッチが入っていて Bluetooth 接続を受け付ける状態にある"
 "ことを確認してください"
 
-#: sendto/main.c:363
+#: sendto/main.c:364
 #, c-format
 msgid "%'d second"
 msgid_plural "%'d seconds"
 msgstr[0] "%'d 秒"
 
-#: sendto/main.c:368 sendto/main.c:381
+#: sendto/main.c:369 sendto/main.c:382
 #, c-format
 msgid "%'d minute"
 msgid_plural "%'d minutes"
 msgstr[0] "%'d 分"
 
-#: sendto/main.c:379
+#: sendto/main.c:380
 #, c-format
 msgid "%'d hour"
 msgid_plural "%'d hours"
 msgstr[0] "%'d 時間"
 
-#: sendto/main.c:389
+#: sendto/main.c:390
 #, c-format
 msgid "approximately %'d hour"
 msgid_plural "approximately %'d hours"
 msgstr[0] "約 %'d 時間"
 
-#: sendto/main.c:402 sendto/main.c:500
+#: sendto/main.c:403 sendto/main.c:503
 msgid "Connecting…"
 msgstr "接続中…"
 
@@ -459,83 +391,138 @@ msgstr "Bluetooth ファイル転送"
 msgid "_Retry"
 msgstr "再試行(_R)"
 
-#: sendto/main.c:470
+#: sendto/main.c:469
 msgid "From:"
 msgstr "送信元:"
 
-#: sendto/main.c:484
+#: sendto/main.c:485
 msgid "To:"
 msgstr "送信先:"
 
-#: sendto/main.c:577
+#: sendto/main.c:567
 #, c-format
 msgid "Sending %s"
 msgstr "%s を送信中"
 
-#: sendto/main.c:584 sendto/main.c:633
+#: sendto/main.c:574 sendto/main.c:623
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "ファイル送信 %2$d 件中 %1$d 件"
 
-#: sendto/main.c:629
+#: sendto/main.c:619
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/秒"
 
-#: sendto/main.c:631
+#: sendto/main.c:621
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/秒"
 
-#: sendto/main.c:662
+#: sendto/main.c:652
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
 msgstr[0] "%u 件転送完了"
 
-#: sendto/main.c:669
+#: sendto/main.c:659
 msgid "_Close"
 msgstr "閉じる(_C)"
 
-#: sendto/main.c:679
+#: sendto/main.c:669
 msgid "There was an error"
 msgstr "エラーが発生しました"
 
-#: sendto/main.c:734
-msgid "Select device to send to"
-msgstr "送信先のデバイスを選択してください"
-
-#: sendto/main.c:739
-msgid "_Send"
-msgstr "送信(_S)"
-
-#: sendto/main.c:789
+#: sendto/main.c:693
 msgid "Choose files to send"
 msgstr "送信するファイルを選択"
 
-#: sendto/main.c:795
+#: sendto/main.c:700
 msgid "Select"
 msgstr "選択"
 
-#: sendto/main.c:825
+#: sendto/main.c:736
 msgid "Remote device to use"
 msgstr "使用するリモートデバイス"
 
-#: sendto/main.c:825
+#: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "アドレス"
 
-#: sendto/main.c:827
+#: sendto/main.c:738
 msgid "Remote device’s name"
 msgstr "リモートデバイスの名前"
 
-#: sendto/main.c:827
+#: sendto/main.c:738
 msgid "NAME"
 msgstr "名前"
 
-#: sendto/main.c:846
-msgid "[FILE…]"
-msgstr "[ファイル…]"
+#~ msgid "Click to select device…"
+#~ msgstr "クリックしてデバイスを選択…"
+
+#~ msgid "_OK"
+#~ msgstr "OK(_O)"
+
+#~ msgid "No adapters available"
+#~ msgstr "アダプターが利用できません"
+
+#~ msgid "Device"
+#~ msgstr "デバイス"
+
+#~ msgid "All categories"
+#~ msgstr "すべてのカテゴリ"
+
+#~ msgid "Trusted"
+#~ msgstr "認証済み"
+
+#~ msgid "Not paired or trusted"
+#~ msgstr "未ペアリングあるいは未認証"
+
+#~ msgid "Paired or trusted"
+#~ msgstr "ペアリング済あるいは認証済"
+
+#~ msgid "Show:"
+#~ msgstr "表示:"
+
+#~ msgid "Device _category:"
+#~ msgstr "デバイスのカテゴリ(_C):"
+
+#~ msgid "Select the device category to filter"
+#~ msgstr "リストを絞り込むためデバイスのカテゴリを選択してください"
+
+#~ msgid "Device _type:"
+#~ msgstr "デバイスの種類(_T):"
+
+#~ msgid "Select the device type to filter"
+#~ msgstr "リストを絞り込むためデバイスの種類を選択してください"
+
+#~ msgid "Input devices (mice, keyboards, etc.)"
+#~ msgstr "入力デバイス (マウス、キーボード、など)"
+
+#~ msgid "Headphones, headsets and other audio devices"
+#~ msgstr "ヘッドフォン、ヘッドセット、その他のオーディオ・デバイス"
+
+#~ msgid "Cancel"
+#~ msgstr "中止"
+
+#, c-format
+#~ msgid "Remove “%s” from the list of devices?"
+#~ msgstr "“%s”をデバイスのリストから削除しますか?"
+
+#~ msgid "_Remove"
+#~ msgstr "削除(_R)"
+
+#~ msgid "All types"
+#~ msgstr "すべての種類"
+
+#~ msgid "Select device to send to"
+#~ msgstr "送信先のデバイスを選択してください"
+
+#~ msgid "_Send"
+#~ msgstr "送信(_S)"
+
+#~ msgid "[FILE…]"
+#~ msgstr "[ファイル…]"
 
 #~ msgid "Reveal File"
 #~ msgstr "ファイルを表示"
