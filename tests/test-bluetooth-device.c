@@ -35,7 +35,6 @@ test_device (void)
 			       "paired", TRUE,
 			       "trusted", TRUE,
 			       "connected", FALSE,
-			       "legacy-pairing", FALSE,
 			       "uuids", uuids,
 			       NULL);
 	g_object_set (G_OBJECT (device),

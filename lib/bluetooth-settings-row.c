@@ -47,7 +47,6 @@ struct _BluetoothSettingsRow {
 	char *name;
 	char *alias;
 	char *bdaddr;
-	gboolean legacy_pairing;
 	gint64 time_created;
 
 	gboolean pairing;
@@ -65,7 +64,6 @@ enum {
 	PROP_ALIAS,
 	PROP_ADDRESS,
 	PROP_PAIRING,
-	PROP_LEGACY_PAIRING,
 	PROP_TIME_CREATED
 };
 
@@ -155,9 +153,6 @@ bluetooth_settings_row_get_property (GObject        *object,
 	case PROP_PAIRING:
 		g_value_set_boolean (value, self->pairing);
 		break;
-	case PROP_LEGACY_PAIRING:
-		g_value_set_boolean (value, self->legacy_pairing);
-		break;
 	case PROP_TIME_CREATED:
 		g_value_set_int64 (value, self->time_created);
 		break;
@@ -234,9 +229,6 @@ bluetooth_settings_row_set_property (GObject        *object,
 		self->pairing = g_value_get_boolean (value);
 		label_might_change (self);
 		break;
-	case PROP_LEGACY_PAIRING:
-		self->legacy_pairing = g_value_get_boolean (value);
-		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
@@ -295,10 +287,6 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 					 g_param_spec_boolean ("pairing", NULL,
 							      "Pairing",
 							      FALSE, G_PARAM_READWRITE));
-	g_object_class_install_property (object_class, PROP_LEGACY_PAIRING,
-					 g_param_spec_boolean ("legacy-pairing", NULL,
-							      "Legacy pairing",
-							      FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_TIME_CREATED,
 					 g_param_spec_int64 ("time-created", NULL,
 							    "Time Created",
@@ -344,7 +332,6 @@ bluetooth_settings_row_new_from_device (BluetoothDevice *device)
 		"connected",
 		"address",
 		"type",
-		"legacy-pairing",
 		"proxy"
 	};
 	guint i;

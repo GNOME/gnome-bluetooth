@@ -997,7 +997,6 @@ start_pairing (BluetoothSettingsWidget *self,
 	BluetoothType type;
 	g_autofree char *bdaddr = NULL;
 	g_autofree char *name = NULL;
-	gboolean legacy_pairing;
 	const char *pincode;
 
 	g_object_set (G_OBJECT (row), "pairing", TRUE, NULL);
@@ -1006,7 +1005,6 @@ start_pairing (BluetoothSettingsWidget *self,
 		      "type", &type,
 		      "address", &bdaddr,
 		      "name", &name,
-		      "legacy-pairing", &legacy_pairing,
 		      NULL);
 
 	if (name == NULL) {
@@ -1018,8 +1016,6 @@ start_pairing (BluetoothSettingsWidget *self,
 
 	g_debug ("Starting pairing for '%s'", name);
 
-	/* Legacy pairing might not have been detected yet,
-	 * so don't check for it */
 	pincode = get_pincode_for_device (type,
 					  bdaddr,
 					  name,
@@ -1028,9 +1024,9 @@ start_pairing (BluetoothSettingsWidget *self,
 	if (g_strcmp0 (pincode, "NULL") == 0)
 		pair = FALSE;
 
-	g_debug ("About to setup %s (legacy pairing: %d pair: %d)",
+	g_debug ("About to setup %s (pair: %d)",
 		 g_dbus_proxy_get_object_path (proxy),
-		 legacy_pairing, pair);
+		 pair);
 
 	g_hash_table_insert (self->pairing_devices,
 			     g_strdup (g_dbus_proxy_get_object_path (proxy)),

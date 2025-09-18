@@ -23,7 +23,6 @@ enum {
 	PROP_PAIRED,
 	PROP_TRUSTED,
 	PROP_CONNECTED,
-	PROP_LEGACYPAIRING,
 	PROP_UUIDS,
 	PROP_CONNECTABLE,
 	PROP_BATTERY_TYPE,
@@ -43,7 +42,6 @@ struct _BluetoothDevice {
 	gboolean paired;
 	gboolean trusted;
 	gboolean connected;
-	gboolean legacy_pairing;
 	char **uuids;
 	gboolean connectable;
 	BluetoothBatteryType battery_type;
@@ -125,9 +123,6 @@ bluetooth_device_get_property (GObject        *object,
 	case PROP_CONNECTED:
 		g_value_set_boolean (value, device->connected);
 		break;
-	case PROP_LEGACYPAIRING:
-		g_value_set_boolean (value, device->legacy_pairing);
-		break;
 	case PROP_UUIDS:
 		g_value_set_boxed (value, device->uuids);
 		break;
@@ -189,9 +184,6 @@ bluetooth_device_set_property (GObject        *object,
 		break;
 	case PROP_CONNECTED:
 		device->connected = g_value_get_boolean (value);
-		break;
-	case PROP_LEGACYPAIRING:
-		device->legacy_pairing = g_value_get_boolean (value);
 		break;
 	case PROP_UUIDS:
 		g_clear_pointer (&device->uuids, g_strfreev);
@@ -261,9 +253,6 @@ static void bluetooth_device_class_init(BluetoothDeviceClass *klass)
 							       FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_CONNECTED,
 					 g_param_spec_boolean ("connected", NULL, "Connected",
-							       FALSE, G_PARAM_READWRITE));
-	g_object_class_install_property (object_class, PROP_LEGACYPAIRING,
-					 g_param_spec_boolean ("legacy-pairing", NULL, "Legacy Pairing",
 							       FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_UUIDS,
 					 g_param_spec_boxed ("uuids", NULL, "UUIDs",

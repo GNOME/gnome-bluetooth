@@ -297,10 +297,6 @@ device_notify_cb (Device1         *device1,
 		uuids = device_list_uuids (device1_get_uuids (device1));
 
 		g_object_set (G_OBJECT (device), "uuids", uuids, NULL);
-	} else if (g_strcmp0 (property, "legacy-pairing") == 0) {
-		gboolean legacypairing = device1_get_legacy_pairing (device1);
-
-		g_object_set (G_OBJECT (device), "legacy-pairing", legacypairing, NULL);
 	} else if (g_strcmp0 (property, "icon") == 0 ||
 		   g_strcmp0 (property, "class") == 0 ||
 		   g_strcmp0 (property, "appearance") == 0) {
@@ -330,7 +326,6 @@ device_added (GDBusObjectManager   *manager,
 	const char *adapter_path, *address, *alias, *name, *icon;
 	g_auto(GStrv) uuids = NULL;
 	gboolean paired, trusted, connected;
-	int legacypairing;
 	BluetoothType type = BLUETOOTH_TYPE_ANY;
 
 	adapter_path = device1_get_adapter (device);
@@ -358,7 +353,6 @@ device_added (GDBusObjectManager   *manager,
 	trusted = device1_get_trusted (device);
 	connected = device1_get_connected (device);
 	uuids = device_list_uuids (device1_get_uuids (device));
-	legacypairing = device1_get_legacy_pairing (device);
 
 	device_resolve_type_and_icon (device, &type, &icon);
 
@@ -370,7 +364,6 @@ device_added (GDBusObjectManager   *manager,
 				   "name", name,
 				   "type", type,
 				   "icon", icon,
-				   "legacy-pairing", legacypairing,
 				   "uuids", uuids,
 				   "paired", paired,
 				   "connected", connected,
@@ -506,7 +499,6 @@ add_devices_to_list_store (BluetoothClient *client)
 		const char *adapter_path, *address, *alias, *name, *icon;
 		g_auto(GStrv) uuids = NULL;
 		gboolean paired, trusted, connected;
-		int legacypairing;
 		BluetoothType type = BLUETOOTH_TYPE_ANY;
 		BluetoothDevice *device_obj;
 
@@ -528,7 +520,6 @@ add_devices_to_list_store (BluetoothClient *client)
 		trusted = device1_get_trusted (DEVICE1 (iface));
 		connected = device1_get_connected (DEVICE1 (iface));
 		uuids = device_list_uuids (device1_get_uuids (DEVICE1 (iface)));
-		legacypairing = device1_get_legacy_pairing (DEVICE1 (iface));
 
 		device_resolve_type_and_icon (DEVICE1 (iface), &type, &icon);
 
@@ -540,7 +531,6 @@ add_devices_to_list_store (BluetoothClient *client)
 					   "name", name,
 					   "type", type,
 					   "icon", icon,
-					   "legacy-pairing", legacypairing,
 					   "uuids", uuids,
 					   "paired", paired,
 					   "connected", connected,
