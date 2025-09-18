@@ -41,7 +41,7 @@ create_device_cb (gpointer item, gpointer user_data)
 int main (int argc, char **argv)
 {
 	GtkWidget *window;
-	GtkWidget *listbox;
+	GtkWidget *scroll, *listbox;
 	GListStore *model;
 	g_autoptr(BluetoothClient) client = NULL;
 
@@ -53,11 +53,17 @@ int main (int argc, char **argv)
 	gtk_window_set_icon_name(GTK_WINDOW(window), "bluetooth");
 	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
 
+	scroll = gtk_scrolled_window_new ();
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
+                                      GTK_POLICY_NEVER,
+                                      GTK_POLICY_AUTOMATIC);
+	gtk_window_set_child (GTK_WINDOW (window), scroll);
+
 	client = bluetooth_client_new ();
 	model = bluetooth_client_get_devices (client);
 	listbox = gtk_list_box_new ();
 	gtk_list_box_bind_model (GTK_LIST_BOX (listbox), G_LIST_MODEL (model), create_device_cb, NULL, NULL);
-	gtk_window_set_child (GTK_WINDOW (window), listbox);
+	gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scroll), listbox);
 	gtk_window_present (GTK_WINDOW (window));
 
 	while (g_list_model_get_n_items (gtk_window_get_toplevels()) > 0)
