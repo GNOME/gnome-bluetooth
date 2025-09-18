@@ -130,3 +130,15 @@ typedef enum {
 	BLUETOOTH_ADAPTER_STATE_TURNING_OFF,
 	BLUETOOTH_ADAPTER_STATE_OFF,
 } BluetoothAdapterState;
+
+/**
+ * BluetoothBearer:
+ * @BLUETOOTH_BEARER_UNSET:
+ * @BLUETOOTH_BEARER_BREDR:
+ * @BLUETOOTH_BEARER_LE:
+ **/
+typedef enum {
+	BLUETOOTH_BEARER_UNSET = 0,
+	BLUETOOTH_BEARER_BREDR = 1 << 0,
+	BLUETOOTH_BEARER_LE    = 1 << 1
+} BluetoothBearer;
