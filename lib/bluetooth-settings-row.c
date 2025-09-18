@@ -334,7 +334,6 @@ name_to_visible (GBinding     *binding,
 GtkWidget *
 bluetooth_settings_row_new_from_device (BluetoothDevice *device)
 {
-	g_autoptr(GDBusProxy) proxy = NULL;
 	GtkWidget *row;
 	const char *props[] = {
 		"name",
@@ -351,7 +350,6 @@ bluetooth_settings_row_new_from_device (BluetoothDevice *device)
 
 	g_return_val_if_fail (BLUETOOTH_IS_DEVICE (device), NULL);
 
-	g_object_get (G_OBJECT (device), "proxy", &proxy, NULL);
 	row = g_object_new (BLUETOOTH_TYPE_SETTINGS_ROW,
 			    "device", device,
 			    NULL);
