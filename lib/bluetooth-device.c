@@ -312,6 +312,7 @@ bluetooth_device_to_string (BluetoothDevice *device)
 	g_string_append_printf (str, "Device: %s (%s)\n", device->alias, device->address);
 	g_string_append_printf (str, "\tD-Bus Path: %s\n", device->proxy ? g_dbus_proxy_get_object_path (device->proxy) : "(none)");
 	g_string_append_printf (str, "\tType: %s Icon: %s\n", bluetooth_type_to_string (device->type), device->icon);
+	g_string_append_printf (str, "\tLegacyPairing: %s\n", BOOL_STR(device->legacy_pairing));
 	g_string_append_printf (str, "\tPaired: %s Trusted: %s Connected: %s\n", BOOL_STR(device->paired), BOOL_STR(device->trusted), BOOL_STR(device->connected));
 	if (device->battery_type == BLUETOOTH_BATTERY_TYPE_PERCENTAGE)
 		g_string_append_printf (str, "\tBattery: %.02g%%\n", device->battery_percentage);
