@@ -46,6 +46,20 @@
     <property name="Adapter" type="o" access="read"></property>
   </interface>
 
+  <interface name="org.bluez.Bearer.BREDR1">
+    <method name="Connect"></method>
+    <method name="Disconnect"></method>
+    <property name="Adapter" type="o" access="read"></property>
+    <property name="Connected" type="b" access="read"></property>
+  </interface>
+
+  <interface name="org.bluez.Bearer.LE1">
+    <method name="Connect"></method>
+    <method name="Disconnect"></method>
+    <property name="Adapter" type="o" access="read"></property>
+    <property name="Connected" type="b" access="read"></property>
+  </interface>
+
   <interface name="org.bluez.AgentManager1">
     <method name="RegisterAgent">
       <arg name="agent" type="o" direction="in"/>

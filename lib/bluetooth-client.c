@@ -54,6 +54,8 @@
 #define BLUEZ_MANAGER_PATH		"/"
 #define BLUEZ_ADAPTER_INTERFACE		"org.bluez.Adapter1"
 #define BLUEZ_DEVICE_INTERFACE		"org.bluez.Device1"
+#define BLUEZ_BEARER_BREDR_INTERFACE	"org.bluez.Bearer.BREDR1"
+#define BLUEZ_BEARER_LE_INTERFACE	"org.bluez.Bearer.LE1"
 
 struct _BluetoothClient {
 	GObject parent;
@@ -318,6 +320,21 @@ device_notify_cb (Device1         *device1,
 	}
 }
 
+static BluetoothBearer
+bearer_from_ifaces (GDBusObject *dbus_object)
+{
+	GDBusInterface *bearer_iface;
+	BluetoothBearer bearer = BLUETOOTH_BEARER_UNSET;
+
+	bearer_iface = g_dbus_object_get_interface (dbus_object, BLUEZ_BEARER_LE_INTERFACE);
+	if (bearer_iface)
+		bearer |= BLUETOOTH_BEARER_LE;
+	bearer_iface = g_dbus_object_get_interface (dbus_object, BLUEZ_BEARER_BREDR_INTERFACE);
+	if (bearer_iface)
+		bearer |= BLUETOOTH_BEARER_BREDR;
+	return bearer;
+}
+
 static void
 device_added (GDBusObjectManager   *manager,
 	      Device1              *device,
@@ -325,12 +342,14 @@ device_added (GDBusObjectManager   *manager,
 {
 	g_autoptr (GDBusProxy) adapter = NULL;
 	BluetoothDevice *device_obj;
+	GDBusObject *dbus_object;
 	const char *default_adapter_path;
 	const char *device_path;
 	const char *adapter_path, *address, *alias, *name, *icon;
 	g_auto(GStrv) uuids = NULL;
 	gboolean paired, trusted, connected;
 	int legacypairing;
+	BluetoothBearer bearer = BLUETOOTH_BEARER_UNSET;
 	BluetoothType type = BLUETOOTH_TYPE_ANY;
 
 	adapter_path = device1_get_adapter (device);
@@ -362,6 +381,9 @@ device_added (GDBusObjectManager   *manager,
 
 	device_resolve_type_and_icon (device, &type, &icon);
 
+	dbus_object = g_dbus_object_manager_get_object (manager, device_path);
+	bearer = bearer_from_ifaces (dbus_object);
+
 	g_debug ("Inserting device '%s' on adapter '%s'", address, adapter_path);
 
 	device_obj = g_object_new (BLUETOOTH_TYPE_DEVICE,
@@ -370,6 +392,7 @@ device_added (GDBusObjectManager   *manager,
 				   "name", name,
 				   "type", type,
 				   "icon", icon,
+				   "bearer", bearer,
 				   "legacy-pairing", legacypairing,
 				   "uuids", uuids,
 				   "paired", paired,
@@ -435,6 +458,37 @@ device_removed (const char      *path,
 {
 	g_debug ("Device '%s' was removed", path);
 	queue_device_removal (client, path);
+}
+
+static void
+bearer_added (GDBusInterface  *iface,
+	      BluetoothClient *client)
+{
+	BluetoothDevice *device_obj;
+	const char *default_adapter_path;
+	const char *adapter_path;
+	const char *device_path;
+
+	if (IS_BEARER_LE1 (iface))
+		adapter_path = bearer_le1_get_adapter (BEARER_LE1(iface));
+	else
+		adapter_path = bearer_bredr1_get_adapter (BEARER_BREDR1(iface));
+	default_adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (client->default_adapter));
+	if (g_strcmp0 (default_adapter_path, adapter_path) != 0)
+		return;
+
+	device_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (iface));
+	device_obj = get_device_for_path (client, device_path);
+	if (device_obj) {
+		BluetoothBearer bearer;
+
+		g_object_get (device_obj, "bearer", &bearer, NULL);
+		if (IS_BEARER_LE1 (iface))
+			bearer |= BLUETOOTH_BEARER_LE;
+		else
+			bearer |= BLUETOOTH_BEARER_BREDR;
+		g_object_set (device_obj, "bearer", bearer, NULL);
+	}
 }
 
 static void
@@ -507,6 +561,7 @@ add_devices_to_list_store (BluetoothClient *client)
 		g_auto(GStrv) uuids = NULL;
 		gboolean paired, trusted, connected;
 		int legacypairing;
+		BluetoothBearer bearer = BLUETOOTH_BEARER_UNSET;
 		BluetoothType type = BLUETOOTH_TYPE_ANY;
 		BluetoothDevice *device_obj;
 
@@ -531,6 +586,7 @@ add_devices_to_list_store (BluetoothClient *client)
 		legacypairing = device1_get_legacy_pairing (DEVICE1 (iface));
 
 		device_resolve_type_and_icon (DEVICE1 (iface), &type, &icon);
+		bearer = bearer_from_ifaces (object);
 
 		g_debug ("Adding device '%s' on adapter '%s' to list store", address, adapter_path);
 
@@ -540,6 +596,7 @@ add_devices_to_list_store (BluetoothClient *client)
 					   "name", name,
 					   "type", type,
 					   "icon", icon,
+					   "bearer", bearer,
 					   "legacy-pairing", legacypairing,
 					   "uuids", uuids,
 					   "paired", paired,
@@ -788,6 +845,10 @@ object_manager_get_proxy_type_func (GDBusObjectManagerClient *manager,
 		return TYPE_DEVICE1_PROXY;
 	if (g_str_equal (interface_name, BLUEZ_ADAPTER_INTERFACE))
 		return TYPE_ADAPTER1_PROXY;
+	if (g_str_equal (interface_name, BLUEZ_BEARER_BREDR_INTERFACE))
+		return TYPE_BEARER_BREDR1_PROXY;
+	if (g_str_equal (interface_name, BLUEZ_BEARER_LE_INTERFACE))
+		return TYPE_BEARER_LE1_PROXY;
 
 	return G_TYPE_DBUS_PROXY;
 }
@@ -808,6 +869,10 @@ interface_added (GDBusObjectManager *manager,
 		device_added (manager,
 			      DEVICE1 (interface),
 			      client);
+	} else if (IS_BEARER_LE1 (interface) ||
+		   IS_BEARER_BREDR1 (interface)) {
+		bearer_added (interface,
+			      client);
 	}
 }
 
@@ -826,6 +891,13 @@ interface_removed (GDBusObjectManager *manager,
 	} else if (IS_DEVICE1 (interface)) {
 		device_removed (g_dbus_object_get_object_path (object),
 				client);
+	} else if (IS_BEARER_LE1 (interface) ||
+		   IS_BEARER_BREDR1 (interface)) {
+		/* Bearer is only removed when the device is
+		 * destroyed, so this is not implemented */
+		g_debug ("Interface %s removed from %s",
+			 IS_BEARER_LE1 (interface) ? "LE" : "BR-EDR",
+			 g_dbus_object_get_object_path (object));
 	}
 }
 
