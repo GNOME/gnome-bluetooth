@@ -51,6 +51,7 @@ struct _BluetoothSettingsRow {
 	BluetoothBearer bearer;
 	gint64 time_created;
 
+	gboolean show_bearer;
 	gboolean pairing;
 };
 
@@ -68,6 +69,7 @@ enum {
 	PROP_PAIRING,
 	PROP_LEGACY_PAIRING,
 	PROP_BEARER,
+	PROP_SHOW_BEARER,
 	PROP_TIME_CREATED
 };
 
@@ -163,6 +165,9 @@ bluetooth_settings_row_get_property (GObject        *object,
 	case PROP_BEARER:
 		g_value_set_flags (value, self->bearer);
 		break;
+	case PROP_SHOW_BEARER:
+		g_value_set_boolean (value, self->show_bearer);
+		break;
 	case PROP_TIME_CREATED:
 		g_value_set_int64 (value, self->time_created);
 		break;
@@ -170,6 +175,27 @@ bluetooth_settings_row_get_property (GObject        *object,
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
 		break;
 	}
+}
+
+static const char *
+bearer_to_str (BluetoothBearer bearer)
+{
+	g_return_val_if_fail (bearer != BLUETOOTH_BEARER_UNSET, NULL);
+
+	if (bearer & BLUETOOTH_BEARER_BREDR) {
+		if (bearer & BLUETOOTH_BEARER_LE) {
+			/* translators: device supports both Bluetooth Classic
+			 * and Bluetooth LE */
+			return N_("Classic / LE");
+		}
+		/* translators: device supports Bluetooth Classic */
+		return N_("Classic");
+	}
+	if (bearer & BLUETOOTH_BEARER_LE) {
+		/* translators: device supports Bluetooth LE */
+		return N_("LE");
+	}
+	return NULL;
 }
 
 static void
@@ -181,8 +207,20 @@ update_row (BluetoothSettingsRow *self)
 		gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
 	} else {
 		g_autofree char *escaped = NULL;
-		if (self->alias != NULL)
-			escaped = g_markup_escape_text (self->alias, -1);
+		if (self->alias != NULL) {
+			if (!self->show_bearer || self->bearer == BLUETOOTH_BEARER_UNSET) {
+				escaped = g_markup_escape_text (self->alias, -1);
+			} else {
+				g_autofree char *with_bearer;
+				/* translators: this is a device name followed by the type of
+				 * Bluetooth connection, eg: “Brand Headphones (Classic)”
+				 * or “Brand Headphones (LE)” */
+				with_bearer = g_strdup_printf (_("%s (%s)"),
+							       self->alias,
+							       _(bearer_to_str (self->bearer)));
+				escaped = g_markup_escape_text (with_bearer, -1);
+			}
+		}
 		adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), escaped);
 		gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 	}
@@ -244,6 +282,10 @@ bluetooth_settings_row_set_property (GObject        *object,
 		break;
 	case PROP_BEARER:
 		self->bearer = g_value_get_flags (value);
+		break;
+	case PROP_SHOW_BEARER:
+		self->show_bearer = g_value_get_boolean (value);
+		update_row (self);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec);
@@ -311,6 +353,10 @@ bluetooth_settings_row_class_init (BluetoothSettingsRowClass *klass)
 					 g_param_spec_flags ("bearer", NULL,
 							     "Supported Bearer",
 							     BLUETOOTH_TYPE_BEARER, BLUETOOTH_BEARER_UNSET, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_SHOW_BEARER,
+					 g_param_spec_boolean ("show-bearer", NULL,
+							      "Show Bearer",
+							      FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_TIME_CREATED,
 					 g_param_spec_int64 ("time-created", NULL,
 							    "Time Created",
