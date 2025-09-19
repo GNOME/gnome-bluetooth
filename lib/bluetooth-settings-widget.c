@@ -146,6 +146,40 @@ is_connecting (BluetoothSettingsWidget *self,
 						     bdaddr));
 }
 
+static void
+update_show_bearer (BluetoothSettingsWidget *self,
+		    const char           *alias)
+{
+	GtkWidget *child;
+	int num_dups = 0;
+
+	/* Count the dupes */
+	child = gtk_widget_get_first_child (self->device_list);
+	while (child) {
+		if (GTK_IS_LIST_BOX_ROW (child)) {
+			g_autofree char *child_alias = NULL;
+			g_object_get (G_OBJECT (child), "alias", &child_alias, NULL);
+			if (g_strcmp0 (alias, child_alias) == 0)
+				num_dups++;
+		}
+		child = gtk_widget_get_next_sibling (child);
+	}
+
+	if (num_dups > 1)
+		g_message ("enabling show bearer for “%s”", alias);
+
+	child = gtk_widget_get_first_child (self->device_list);
+	while (child) {
+		if (GTK_IS_LIST_BOX_ROW (child)) {
+			g_autofree char *child_alias = NULL;
+			g_object_get (G_OBJECT (child), "alias", &child_alias, NULL);
+			if (g_strcmp0 (alias, child_alias) == 0)
+				g_object_set (G_OBJECT (child), "show-bearer", num_dups > 1, NULL);
+		}
+		child = gtk_widget_get_next_sibling (child);
+	}
+}
+
 static gboolean
 has_default_adapter (BluetoothSettingsWidget *self)
 {
@@ -1486,11 +1520,13 @@ device_changed_cb (GObject    *object,
 		path = g_object_get_data (G_OBJECT (child), "object-path");
 		if (g_str_equal (object_path, path)) {
 			g_autofree char *address = NULL;
+			g_autofree char *alias = NULL;
 			BluetoothType type;
 
 			g_object_get (G_OBJECT (device),
 				      "address", &address,
 				      "type", &type,
+				      "alias", &alias,
 				      NULL);
 
 			add_device_type (self, address, type);
@@ -1498,6 +1534,9 @@ device_changed_cb (GObject    *object,
 			/* Update the properties if necessary */
 			if (g_strcmp0 (self->selected_object_path, object_path) == 0)
 				update_properties (user_data, device);
+
+			update_show_bearer (self, alias);
+
 			break;
 		}
 	}
@@ -1529,6 +1568,8 @@ device_added_cb (BluetoothClient *client,
 	gtk_list_box_append (GTK_LIST_BOX (self->device_list), row);
 	gtk_size_group_add_widget (self->row_sizegroup, row);
 
+	update_show_bearer (self, alias);
+
 	g_signal_connect_object (G_OBJECT (device), "notify",
 				 G_CALLBACK (device_changed_cb), self, 0);
 }
@@ -1552,12 +1593,16 @@ device_removed_cb (BluetoothClient *client,
 
 		path = g_object_get_data (G_OBJECT (child), "object-path");
 		if (g_str_equal (path, object_path)) {
-			g_autofree char *name = NULL;
+			g_autofree char *alias = NULL;
 
-			g_object_get (G_OBJECT (child), "name", &name, NULL);
-			g_debug ("Removing device '%s'", name ? name : object_path);
+			g_debug ("Removing device '%s'", object_path);
+
+			g_object_get (G_OBJECT (child), "alias", &alias, NULL);
 
 			gtk_list_box_remove (GTK_LIST_BOX (self->device_list), GTK_WIDGET (child));
+
+			update_show_bearer (self, alias);
+
 			found = TRUE;
 			break;
 		}
