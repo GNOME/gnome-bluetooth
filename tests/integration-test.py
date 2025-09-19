@@ -459,6 +459,26 @@ class OopTests(dbusmock.DBusTestCase):
         self.assertEqual(device.props.alias, 'My MIDI device')
         self.assertEqual(device.props.connectable, True)
 
+    def test_bearer(self):
+        bus = dbus.SystemBus()
+        bluez_server = bus.get_object('org.bluez', '/org/bluez')
+
+        client = GnomeBluetoothPriv.Client.new()
+        list_store = client.get_devices()
+        self.wait_for_condition(lambda: list_store.get_n_items() == 3)
+        self.assertEqual(list_store.get_n_items(), 3)
+
+        device = list_store.get_item(0)
+        self.assertEqual(device.props.alias, 'My Headphones')
+        self.assertEqual(device.props.bearer, GnomeBluetoothPriv.Bearer.BREDR)
+
+        device = list_store.get_item(1)
+        self.assertEqual(device.props.alias, 'My Headphones')
+        self.assertEqual(device.props.bearer, GnomeBluetoothPriv.Bearer.LE)
+
+        device = list_store.get_item(2)
+        self.assertEqual(device.props.alias, 'My Mouse')
+        self.assertEqual(device.props.bearer, GnomeBluetoothPriv.Bearer.UNSET)
 
     def test_adapter_removal(self):
         bus = dbus.SystemBus()
@@ -614,6 +634,26 @@ class Tests(dbusmock.DBusTestCase):
         dev = dbus.Interface(bus.get_object('org.bluez', path), 'org.freedesktop.DBus.Mock')
         dev.UpdateProperties('org.bluez.Device1',
                 {'UUIDs': dbus.Array(['03B80E5A-EDE8-4B33-A751-6CE34EC4C700'], variant_level=1)})
+
+        self.run_test_process()
+
+    def test_bearer(self):
+        self.dbusmock_bluez.AddAdapter('hci0', 'my-computer')
+        bus = dbus.SystemBus()
+
+        device = self.dbusmock_bluez.AddDevice('hci0', '11:22:33:44:55:66', 'My Headphones')
+        device_obj = self.dbus_con.get_object('org.bluez', device)
+        device_obj.AddProperties('org.bluez.Bearer.BREDR1', {
+                'Connected': dbus.Boolean(False, variant_level=1),
+        })
+
+        device = self.dbusmock_bluez.AddDevice('hci0', '22:33:44:55:66:77', 'My Headphones')
+        device_obj = self.dbus_con.get_object('org.bluez', device)
+        device_obj.AddProperties('org.bluez.Bearer.LE1', {
+                'Connected': dbus.Boolean(False, variant_level=1),
+        })
+
+        self.dbusmock_bluez.AddDevice('hci0', '22:33:44:55:66:78', 'My Mouse')
 
         self.run_test_process()
 
