@@ -733,9 +733,9 @@ show_select_dialog(void)
 
 static GOptionEntry options[] = {
 	{ "device", 0, 0, G_OPTION_ARG_STRING, &option_device,
-				N_("Remote device to use"), N_("ADDRESS") },
+				N_("Remote device to use (required)"), N_("ADDRESS") },
 	{ "name", 0, 0, G_OPTION_ARG_STRING, &option_device_name,
-				N_("Remote device’s name"), N_("NAME") },
+				N_("Remote device’s name, used as a label in the UI"), N_("NAME") },
 	{ "dest", 0, G_OPTION_FLAG_HIDDEN,
 			G_OPTION_ARG_STRING, &option_device, NULL, NULL },
 	{ G_OPTION_REMAINING, 0, 0,
