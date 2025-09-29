@@ -774,11 +774,11 @@ int main(int argc, char *argv[])
 
 	cancellable = g_cancellable_new ();
 
-	/* A device name, but no device? */
-	if (option_device == NULL && option_device_name != NULL) {
-		if (option_files != NULL)
-			g_strfreev(option_files);
-		g_free (option_device_name);
+	if (option_device == NULL) {
+		g_autofree char *help = NULL;
+		g_printerr("\n%s\n\n", _("The “--device” option is required, device selection is not supported."));
+		help = g_option_context_get_help (option_context, TRUE, NULL);
+		g_printerr("%s", help);
 		return 1;
 	}
 
@@ -787,9 +787,6 @@ int main(int argc, char *argv[])
 		if (option_files == NULL)
 			return 1;
 	}
-
-	if (option_device == NULL)
-		return 1;
 
 	file_count = g_strv_length(option_files);
 
