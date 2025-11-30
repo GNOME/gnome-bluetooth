@@ -1,3 +1,13 @@
+include:
+  - component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
+    inputs:
+      job-stage: "release"
+      dist-job-name: "build_stable"
+
+stages:
+  - "build"
+  - "release"
+
 build_stable:
   stage: "build"
   image: fedora:rawhide
@@ -40,6 +50,7 @@ build_stable:
     - ninja -C "${MESON_BUILD_DIR}" test
     - .ci/fail_skipped_tests.py ${MESON_BUILD_DIR}/meson-logs/testlog.junit.xml
     - ninja -C "${MESON_BUILD_DIR}" dist
+    - cp -r "${MESON_BUILD_DIR}/meson-dist/" "${CI_PROJECT_DIR}/public-dist/"
     - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
     - dnf install -y $DEPENDENCIES_ABI_CHECK
     - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
@@ -49,3 +60,4 @@ build_stable:
       - "${CI_PROJECT_DIR}/${MESON_BUILD_DIR}/meson-logs/"
       - "${CI_PROJECT_DIR}/${MESON_BUILD_DIR}/meson-dist"
       - "${CI_PROJECT_DIR}/${MESON_BUILD_DIR}/meson-private/dist-build/meson-logs/"
+      - "public-dist"
