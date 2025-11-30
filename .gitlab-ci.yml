@@ -1,51 +1,51 @@
-image: fedora:rawhide
-
-variables:
-  DEPENDENCIES:
-    gtk-doc
-    gobject-introspection-devel
-    gtk4-devel
-    sassc
-    libadwaita-devel
-    systemd-devel
-    gsound-devel
-    libnotify-devel
-    upower-devel
-    meson
-    redhat-rpm-config
-    gcc
-    glibc-devel
-    git
-  GIT_SUBMODULE_STRATEGY: recursive
-  TEST_DEPS:
-    dbus-daemon
-    python3-gobject-base
-    python3-dbus
-    python3-dbusmock
-    python3-packaging
-  DEPENDENCIES_ABI_CHECK:
-    libabigail
-  LAST_ABI_BREAK: "cbc08c4f293664e681b1646e794e7cf62782c6cc"
-
 build_stable:
+  stage: "build"
+  image: fedora:rawhide
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    LAST_ABI_BREAK: "cbc08c4f293664e681b1646e794e7cf62782c6cc"
+    DEPENDENCIES:
+      gtk-doc
+      gobject-introspection-devel
+      gtk4-devel
+      sassc
+      libadwaita-devel
+      systemd-devel
+      gsound-devel
+      libnotify-devel
+      upower-devel
+      meson
+      redhat-rpm-config
+      gcc
+      glibc-devel
+      git
+    TEST_DEPS:
+      dbus-daemon
+      python3-gobject-base
+      python3-dbus
+      python3-dbusmock
+      python3-packaging
+    DEPENDENCIES_ABI_CHECK:
+      libabigail
+    MESON_BUILD_DIR: "_build"
   tags:
     - crun
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
   script:
-    - meson . _build --prefix=/usr -Dgtk_doc=true -Dintrospection=true -Dsendto=true
-    - ninja -C _build
-    - ninja -C _build install
-    - ninja -C _build test
-    - .ci/fail_skipped_tests.py _build/meson-logs/testlog.junit.xml
-    - ninja -C _build dist
+    - meson . "${MESON_BUILD_DIR}" --prefix=/usr -Dgtk_doc=true -Dintrospection=true -Dsendto=true
+    - ninja -C "${MESON_BUILD_DIR}"
+    - ninja -C "${MESON_BUILD_DIR}" install
+    - ninja -C "${MESON_BUILD_DIR}" test
+    - .ci/fail_skipped_tests.py ${MESON_BUILD_DIR}/meson-logs/testlog.junit.xml
+    - ninja -C "${MESON_BUILD_DIR}" dist
     - curl https://gitlab.freedesktop.org/hadess/check-abi/-/raw/main/contrib/check-abi-fedora.sh | bash
     - dnf install -y $DEPENDENCIES_ABI_CHECK
     - check-abi --suppr .ci/gbt.suppr ${LAST_ABI_BREAK} $(git rev-parse HEAD)
   artifacts:
     when: always
     paths:
-      - "${CI_PROJECT_DIR}/_build/meson-logs/"
-      - "${CI_PROJECT_DIR}/_build/meson-dist"
-      - "${CI_PROJECT_DIR}/_build/meson-private/dist-build/meson-logs/"
+      - "${CI_PROJECT_DIR}/${MESON_BUILD_DIR}/meson-logs/"
+      - "${CI_PROJECT_DIR}/${MESON_BUILD_DIR}/meson-dist"
+      - "${CI_PROJECT_DIR}/${MESON_BUILD_DIR}/meson-private/dist-build/meson-logs/"
