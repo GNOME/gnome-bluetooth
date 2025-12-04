@@ -1771,6 +1771,7 @@ bluetooth_settings_widget_finalize (GObject *object)
 
 	g_clear_object (&self->client);
 	g_clear_object (&self->builder);
+	g_clear_object (&self->row_sizegroup);
 
 	g_clear_pointer (&self->devices_type, g_hash_table_destroy);
 	g_clear_pointer (&self->connecting_devices, g_hash_table_destroy);
