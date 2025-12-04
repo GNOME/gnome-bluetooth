@@ -687,37 +687,30 @@ adapter_added (GDBusObjectManager   *manager,
 {
 	const char *adapter_path;
 	const char *iface;
-	const char *name;
 
-	name = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (adapter));
 	iface = g_dbus_proxy_get_interface_name (G_DBUS_PROXY (adapter));
 	adapter_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (adapter));
 	if (!client->default_adapter) {
-		g_debug ("Inserting adapter %s %s %s",
-			 name, adapter_path, iface);
+		g_debug ("Inserting adapter %s %s", adapter_path, iface);
 		default_adapter_changed (manager,
 					 G_DBUS_PROXY (adapter),
 					 NEW_DEFAULT,
 					 client);
 	} else if (is_default_adapter (client, adapter)) {
-		g_debug ("Updating default adapter with new proxy %s %s %s",
-			 name, adapter_path, iface);
+		g_debug ("Updating default adapter with new proxy %s %s", adapter_path, iface);
 		default_adapter_changed (manager,
 					 G_DBUS_PROXY (adapter),
 					 OWNER_UPDATE,
 					 client);
 		return;
 	} else if (should_be_default_adapter (client, adapter)) {
-		g_debug ("Replacing default adapter %s with %s %s %s",
-			 g_dbus_proxy_get_name_owner (G_DBUS_PROXY (client->default_adapter)),
-			 name, adapter_path, iface);
+		g_debug ("Replacing default adapter with %s %s", adapter_path, iface);
 		default_adapter_changed (manager,
 					 G_DBUS_PROXY (adapter),
 					 REPLACEMENT,
 					 client);
 	} else {
-		g_debug ("Ignoring added non-default adapter %s %s %s",
-			 name, adapter_path, iface);
+		g_debug ("Ignoring added non-default adapter %s %s", adapter_path, iface);
 	}
 
 	client->num_adapters++;
