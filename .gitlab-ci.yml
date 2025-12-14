@@ -1,5 +1,14 @@
 include:
-  - component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
+  - project: "gnome/citemplates"
+    file: "templates/default-rules.yml"
+
+  - component: "gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@25.7"
+    inputs:
+      meson-options: "$MESON_OPTIONS"
+      asan: "disabled"
+      lsan: "disabled"
+
+  - component: "gitlab.gnome.org/GNOME/citemplates/release-service@25.7"
     inputs:
       job-stage: "release"
       dist-job-name: "build_stable"
@@ -7,6 +16,12 @@ include:
 stages:
   - "build"
   - "release"
+
+variables:
+  MESON_OPTIONS: >-
+    -Dgtk_doc=true
+    -Dintrospection=true
+    -Dsendto=true
 
 build_stable:
   stage: "build"
@@ -44,7 +59,7 @@ build_stable:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck $DEPENDENCIES $TEST_DEPS
   script:
-    - meson . "${MESON_BUILD_DIR}" --prefix=/usr -Dgtk_doc=true -Dintrospection=true -Dsendto=true
+    - meson . "${MESON_BUILD_DIR}" --prefix=/usr $MESON_OPTIONS
     - ninja -C "${MESON_BUILD_DIR}"
     - ninja -C "${MESON_BUILD_DIR}" install
     - ninja -C "${MESON_BUILD_DIR}" test
