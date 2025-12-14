@@ -10,7 +10,7 @@ stages:
 
 build_stable:
   stage: "build"
-  image: fedora:rawhide
+  image: "fedora:43"
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
     LAST_ABI_BREAK: "cbc08c4f293664e681b1646e794e7cf62782c6cc"
