@@ -674,47 +674,48 @@ on_transfer_error (void)
 	current_transfer = NULL;
 }
 
-static gint select_dialog_response;
+static GListModel *select_dialog_files = NULL;
 static GMainLoop *select_dialog_mainloop = NULL;
 
-static void select_dialog_response_callback(GtkWidget *dialog,
-					gint response, gpointer user_data)
+static void select_dialog_open_cb (GObject      *source_object,
+				   GAsyncResult *res,
+				   gpointer      user_data)
 {
-	select_dialog_response = response;
+	GtkFileDialog *file_dialog = GTK_FILE_DIALOG (source_object);
+	g_autoptr(GError) error = NULL;
+
+	select_dialog_files = gtk_file_dialog_open_multiple_finish (file_dialog, res, &error);
+	if (error != NULL) {
+		g_warning ("Failed to pick files: %s", error->message);
+		g_clear_object (&select_dialog_files);
+	}
+
 	g_main_loop_quit(select_dialog_mainloop);
 }
 static char **
 show_select_dialog(void)
 {
-	GtkWidget *dialog, *button;
+	g_autoptr(GtkFileDialog) file_dialog = NULL;
 	gchar **files = NULL;
 
-	dialog = g_object_new (GTK_TYPE_FILE_CHOOSER_DIALOG,
-			       "title", _("Choose files to send"),
-			       "action", GTK_FILE_CHOOSER_ACTION_OPEN,
-			       "use-header-bar", 1,
-			       "hide-on-close", TRUE,
-			       NULL);
-	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
-			       _("_Cancel"), GTK_RESPONSE_CANCEL,
-			       _("Select"), GTK_RESPONSE_ACCEPT, NULL);
-	gtk_file_chooser_set_select_multiple(GTK_FILE_CHOOSER(dialog), TRUE);
+	file_dialog = gtk_file_dialog_new ();
+	gtk_file_dialog_set_title (file_dialog, _("Choose files to send"));
+	gtk_file_dialog_set_accept_label (file_dialog, _("Select"));
+	gtk_file_dialog_set_modal (file_dialog, TRUE);
 
-	button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	gtk_widget_add_css_class(button, "suggested-action");
-
-	g_signal_connect(dialog, "response", G_CALLBACK(select_dialog_response_callback), NULL);
-
-	gtk_widget_show(dialog);
+	gtk_file_dialog_open_multiple (file_dialog,
+				       NULL,
+				       NULL,
+				       select_dialog_open_cb,
+				       NULL);
 
 	select_dialog_mainloop = g_main_loop_new(NULL, FALSE);
 	g_main_loop_run(select_dialog_mainloop);
 
-	if (select_dialog_response == GTK_RESPONSE_ACCEPT) {
-		g_autoptr(GListModel) selected_files = NULL;
+	if (select_dialog_files != NULL) {
+		g_autoptr(GListModel) selected_files = g_steal_pointer (&select_dialog_files);
 		guint i, n_items;
 
-		selected_files = gtk_file_chooser_get_files(GTK_FILE_CHOOSER(dialog));
 		n_items = g_list_model_get_n_items(selected_files);
 
 		files = g_new(gchar *, n_items + 1);
@@ -725,8 +726,6 @@ show_select_dialog(void)
 		}
 		files[i] = NULL;
 	}
-
-	gtk_window_destroy(GTK_WINDOW(dialog));
 
 	return files;
 }
