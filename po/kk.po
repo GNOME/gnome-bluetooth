@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2024-07-29 18:37+0000\n"
-"PO-Revision-Date: 2024-08-30 19:33+0500\n"
+"POT-Creation-Date: 2025-12-14 10:25+0000\n"
+"PO-Revision-Date: 2026-01-09 22:43+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,24 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Bluetooth PIN кодын растау"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "\"%s\" құрылғысында енгізілген PIN кодын растаңыз."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "Растау"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "Рас_тау"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -42,12 +42,12 @@ msgstr ""
 "\"%s\" үшін Bluetooth PIN кодын растаңыз. Әдетте оны құрылғы құжаттамасынан "
 "табуға болады."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "\"%s\" жұптау"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
@@ -55,31 +55,31 @@ msgstr ""
 "Келесі PIN коды \"%s\" құрылғысында көрсетілген кодпен сәйкес келетінін "
 "растаңыз."
 
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth жұптау сұранымы"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr "\"%s\" бұл құрылғымен жұптағысы келеді. Жұптауды рұқсат ету керек пе?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Bluetooth байланысын растау"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "\"%s\" бұл құрылғыға байланыс орнатқысы келеді. Оны рұқсат ету керек пе?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "Келесі PIN кодын \"%s\" құрылғысында енгізіңіз."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
@@ -87,7 +87,7 @@ msgstr ""
 "Келесі PIN кодын \"%s\" құрылғысында енгізіңіз. Одан кейін пернетақтада "
 "\"Enter\" басыңыз."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -95,23 +95,22 @@ msgstr ""
 "Өзіңіздің iCade құрылғысының джойстигін келесі бағыттарда жылжытыңыз. Одан "
 "кейін ақ батырмалардын кез-келгенін басыңыз."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "Рұқсат ету"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "Рұқс_ат ету"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "Елемеу"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "Еле_меу"
 
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:304
-msgid "Cancel"
-msgstr "Бас тарту"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "Ба_с тарту"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Қабылдау"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "Қ_абылдау"
 
 #: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
@@ -125,18 +124,18 @@ msgstr "Байланысқан"
 msgid "Disconnected"
 msgstr "Байланыспаған"
 
-#: lib/bluetooth-settings-widget.c:1142 lib/settings.ui:71
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Иә"
 
-#: lib/bluetooth-settings-widget.c:1142
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "Жоқ"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1234
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
@@ -146,11 +145,11 @@ msgstr ""
 "үшін қолжетерлік. Алмасқан файлдарды <a href=\"%s\">Жүктемелер</a> бумасынан "
 "табуға болады."
 
-#: lib/bluetooth-settings-widget.c:1304
+#: lib/bluetooth-settings-widget.c:1303
 msgid "Forget Device?"
 msgstr "Құрылғыны ұмыту керек пе?"
 
-#: lib/bluetooth-settings-widget.c:1307
+#: lib/bluetooth-settings-widget.c:1306
 #, c-format
 msgid ""
 "“%s” will be removed from your saved devices. You will have to set it up "
@@ -159,11 +158,7 @@ msgstr ""
 "\"%s\" сіздің сақталған құрылғыларыңыздан өшіріледі. Оны қайта қолдану үшін "
 "оны жаңадан баптау керек болады."
 
-#: lib/bluetooth-settings-widget.c:1312 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "Ба_с тарту"
-
-#: lib/bluetooth-settings-widget.c:1313
+#: lib/bluetooth-settings-widget.c:1312
 msgid "_Forget"
 msgstr "Ұ_мыту"
 
@@ -197,6 +192,10 @@ msgstr "%s жіберген Bluetooth файлдармен алмасуы"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Тайдыру"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Қабылдау"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -327,11 +326,11 @@ msgstr "Құрылғылар"
 msgid "Searching for devices…"
 msgstr "Құрылғыларды іздеу…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth алмасулары"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Файлдарды Bluetooth арқылы жіберу"
 
@@ -448,6 +447,9 @@ msgstr "Қашықтағы құрылғы атауы"
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "АТАУЫ"
+
+#~ msgid "Cancel"
+#~ msgstr "Бас тарту"
 
 #, c-format
 #~ msgid "Remove “%s” from the list of devices?"
