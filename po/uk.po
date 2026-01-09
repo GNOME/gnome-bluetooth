@@ -5,21 +5,21 @@
 # Kyrylo Polezhajev <polezhajev@ukr.net>, 2009.
 # wanderlust <wanderlust@ukr.net>, 2009.
 # Daniel Korostil <ted.korostiled@gmail.com>, 2012, 2013, 2014, 2016.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-03-10 16:44+0000\n"
-"PO-Revision-Date: 2025-03-19 19:40+0200\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-09 23:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 23.04.3\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -328,11 +328,11 @@ msgstr "Пристрої"
 msgid "Searching for devices…"
 msgstr "Пошук пристроїв…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Передача файлів через Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Надіслати файли через Bluetooth"
 
@@ -445,20 +445,27 @@ msgid "Select"
 msgstr "Вибрати"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Використати віддалений пристрій"
+#| msgid "Remote device to use"
+msgid "Remote device to use (required)"
+msgstr "Використати віддалений пристрій (обов'язковий параметр)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "АДРЕСА"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Назва віддаленого пристрою"
+#| msgid "Remote device’s name"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Назва віддаленого пристрою, буде використано як мітку в інтерфейсі"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "НАЗВА"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"Потрібен параметр «--device», підтримки вибору пристрою не передбачено."
 
 #~ msgid "Cancel"
 #~ msgstr "Скасувати"
