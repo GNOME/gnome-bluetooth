@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bluetooth Applet 1.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-03-01 23:07+0200\n"
-"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-10 17:28+0200\n"
+"Last-Translator: Aurimas Černius <aurimas.cernius@mailo.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -323,11 +323,11 @@ msgstr "Įrenginiai"
 msgid "Searching for devices…"
 msgstr "Ieškoma įrenginių…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth perdavimas"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Siųsti failus per Bluetooth"
 
@@ -440,20 +440,25 @@ msgid "Select"
 msgstr "Pasirinkti"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Naudotinas nutolęs įrenginys"
+msgid "Remote device to use (required)"
+msgstr "Naudotinas nutolęs įrenginys (būtina)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRESAS"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nutolusio įrenginio pavadinimas"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nutolusio įrenginio pavadinimas, naudojamas kaip užrašas sąsajoje"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "PAVADINIMAS"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"Parametras „--device“ yra būtinas, įrenginio pasirinkimas nepalaikomas."
 
 #~ msgid "Cancel"
 #~ msgstr "Atsisakyti"
