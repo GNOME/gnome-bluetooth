@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.14\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-24 14:38+0000\n"
-"PO-Revision-Date: 2025-02-27 22:24+0000\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-10 15:43+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português (https://l10n.gnome.org/teams/pt/)\n"
 "Language: pt\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -332,11 +332,11 @@ msgstr "Dispositivos"
 msgid "Searching for devices…"
 msgstr "A procurar dispositivos…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Transferência por Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Enviar ficheiros através do Bluetooth"
 
@@ -444,20 +444,25 @@ msgid "Select"
 msgstr "Selecionar"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Dispositivo remoto a utilizar"
+msgid "Remote device to use (required)"
+msgstr "Dispositivo remoto a utilizar (obrigatório)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ENDEREÇO"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nome do dispositivo remoto"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nome do dispositivo remoto, utilizado como rótulo na interface"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOME"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"A opção \"--device\" é obrigatória, a seleção do dispositivo não é suportada."
 
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"
@@ -1009,8 +1014,8 @@ msgstr "NOME"
 
 #~ msgid "translator-credits"
 #~ msgstr ""
-#~ "Duarte Loreto <happyguy_pt@hotmail.com>, Susana Pereira <susana."
-#~ "pereira@gmail.com>, Bruno Ramalhete <bram.512@gmail.com>, Pedro "
+#~ "Duarte Loreto <happyguy_pt@hotmail.com>, Susana Pereira "
+#~ "<susana.pereira@gmail.com>, Bruno Ramalhete <bram.512@gmail.com>, Pedro "
 #~ "Albuquerque <palbuquerque73@gmail.com>"
 
 #~ msgid "GNOME Bluetooth home page"
