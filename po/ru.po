@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth.master.ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-14 09:25+0000\n"
-"PO-Revision-Date: 2025-02-14 12:32+0300\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-10 19:13+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -325,11 +325,11 @@ msgstr "Устройства"
 msgid "Searching for devices…"
 msgstr "Поиск устройств…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Передача данных по Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Отправка файлов через Bluetooth"
 
@@ -442,20 +442,24 @@ msgid "Select"
 msgstr "Выбрать"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Используемое удалённое устройство"
+msgid "Remote device to use (required)"
+msgstr "Удаленное устройство для использования (обязательно)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "АДРЕС"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Имя удалённого устройства"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Имя удаленного устройства, используемое в качестве метки в интерфейсе"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "ИМЯ"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Требуется параметр «--device», выбор устройства не поддерживается."
 
 #~ msgid "Cancel"
 #~ msgstr "Отмена"
