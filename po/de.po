@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-22 17:39+0000\n"
-"PO-Revision-Date: 2025-02-23 18:46+0100\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-18 00:15+0100\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -339,11 +339,11 @@ msgstr "Geräte"
 msgid "Searching for devices…"
 msgstr "Nach Geräten wird gesucht …"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth-Übertragung"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Dateien über Bluetooth versenden"
 
@@ -451,20 +451,26 @@ msgid "Select"
 msgstr "Auswahl"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Zu verwendendes entferntes Gerät"
+msgid "Remote device to use (required)"
+msgstr "Zu verwendendes entferntes Gerät (erforderlich)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Name des entfernten Gerätes"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr ""
+"Name des entfernten Gerätes. Wird als Bezeichnung in der Oberfläche verwendet"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAME"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"Die Option »--device« ist notwendig. Eine Gerätewahl wird nicht unterstützt."
 
 #~ msgid "Cancel"
 #~ msgstr "Abbrechen"
