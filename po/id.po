@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-03-10 16:44+0000\n"
-"PO-Revision-Date: 2025-03-11 20:01+0700\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-17 16:39+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -330,11 +330,11 @@ msgstr "Perangkat"
 msgid "Searching for devices…"
 msgstr "Mencari perangkat…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Transfer Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Mengirim berkas melalui Bluetooth"
 
@@ -436,17 +436,21 @@ msgid "Select"
 msgstr "Pilih"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Perangkat jarak jauh yang hendak dipakai"
+msgid "Remote device to use (required)"
+msgstr "Perangkat jarak jauh yang hendak dipakai (diperlukan)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ALAMAT"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nama perangkat jarak jauh"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nama perangkat jarak jauh, dipakai sebagai label dalam UI"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAMA"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Opsi ”--device” diperlukan, pemilihan perangkat tidak didukung."
