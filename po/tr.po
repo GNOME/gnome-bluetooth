@@ -14,16 +14,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-14 09:25+0000\n"
-"PO-Revision-Date: 2025-02-14 08:00+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-11 18:07+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Türkçe <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -331,11 +331,11 @@ msgstr "Aygıtlar"
 msgid "Searching for devices…"
 msgstr "Aygıtlar aranıyor…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth Aktarımı"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Dosyaları Bluetooth ile gönder"
 
@@ -438,17 +438,21 @@ msgid "Select"
 msgstr "Seç"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Kullanılacak uzak aygıt"
+msgid "Remote device to use (required)"
+msgstr "Kullanılacak uzak aygıt (gerekli)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRES"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Uzak aygıtın adı"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Uzak aygıtın adı, arayüzde etiket olarak kullanılacak"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "AD"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "“--device” seçeneği gereklidir, aygıt seçimi desteklenmiyor."
