@@ -12,22 +12,22 @@
 # Leônidas Araújo <leorusvellt@hotmail.com>, 2022.
 # Matheus Polkorny <mpolkorny@ipt.br>, 2024.
 # Juliano de Souza Camargo <julianosc@pm.me>, 2024.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2012-2025.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2012-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-14 09:25+0000\n"
-"PO-Revision-Date: 2025-02-14 22:26-0300\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-19 17:13-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 47.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 49.0\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-DL-Team: pt_BR\n"
@@ -343,11 +343,11 @@ msgstr "Dispositivos"
 msgid "Searching for devices…"
 msgstr "Pesquisando por dispositivos…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Transferência Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Envie arquivos via Bluetooth"
 
@@ -455,20 +455,25 @@ msgid "Select"
 msgstr "Selecionar"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Dispositivo remoto para usar"
+msgid "Remote device to use (required)"
+msgstr "Dispositivo remoto para usar (obrigatório)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ENDEREÇO"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nome do dispositivo remoto"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nome do dispositivo remoto, usado como um rótulo na interface gráfica"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOME"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"A opção “--device” é obrigatória, a seleção de dispositivo não é suportada."
 
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"
