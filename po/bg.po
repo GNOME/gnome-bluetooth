@@ -7,14 +7,15 @@
 # Krasimir "Bfaf" Chonov <mk2616@abv.bg>, 2009, 2010, 2014.
 # Alexander Shopov <ash@kambanaria.org>, 2009, 2010, 2011, 2012, 2016, 2017, 2021, 2022.
 # Lyubomir Vasilev <lyubomirv@abv.bg>, 2017.
-# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024, 2025.
+# twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024, 2025, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-24 18:35+0000\n"
-"PO-Revision-Date: 2025-02-24 20:12+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
+"issues\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-22 10:50+0100\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -327,11 +328,11 @@ msgstr "Устройства"
 msgid "Searching for devices…"
 msgstr "Търсене на устройства…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Прехвърляне на файл през Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Изпращане на файлове през Bluetooth"
 
@@ -439,17 +440,22 @@ msgid "Select"
 msgstr "Избор"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Отдалечено устройство"
+msgid "Remote device to use (required)"
+msgstr "Отдалечено устройство (задължително)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "АДРЕС"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Име на отдалечено устройство"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Име на отдалеченото устройство, използва се като етикет в интерфейса"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "ИМЕ"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"Опцията „--device“ е задължителна, изборът на устройство не се поддържа."
