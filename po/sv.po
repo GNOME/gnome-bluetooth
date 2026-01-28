@@ -1,18 +1,18 @@
 # Swedish translation for gnome-bluetooth
-# Copyright © 2007-2025 Free Software Foundation, Inc.
+# Copyright © 2007-2026 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 # Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2010, 2011, 2012.
 # Mattias Eriksson <snaggen@gmail.com>, 2014.
 # Josef Andersson <l10nl18nsweja@gmail.com>, 2014.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2015, 2017, 2018, 2019, 2023, 2024, 2025.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2015, 2017, 2018, 2019, 2023, 2024, 2025, 2026.
 # Luna Jernberg <droidbittin@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-14 10:52+0000\n"
-"PO-Revision-Date: 2025-02-27 22:50+0100\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-01-28 01:16+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -324,11 +324,11 @@ msgstr "Enheter"
 msgid "Searching for devices…"
 msgstr "Söker efter enheter…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth-överföring"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Skicka filer via Bluetooth"
 
@@ -436,20 +436,24 @@ msgid "Select"
 msgstr "Välj"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Fjärrenhet att använda"
+msgid "Remote device to use (required)"
+msgstr "Fjärrenhet att använda (nödvändig)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRESS"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Fjärrenhetens namn"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Fjärrenhetens namn, använd som en etikett i användargränsnittet"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAMN"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Flaggan ”--device” krävs, enhetsval stöds inte."
 
 #~ msgid "Cancel"
 #~ msgstr "Avbryt"
