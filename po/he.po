@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-02-27 10:29+0200\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-01 08:55+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -322,11 +322,11 @@ msgstr "התקנים"
 msgid "Searching for devices…"
 msgstr "חיפוש אחר התקנים…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "העברה דרך בלוטות׳"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "שליחת קבצים דרך בלוטות׳"
 
@@ -442,20 +442,24 @@ msgid "Select"
 msgstr "בחירה"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "התקן מרוחק לשימוש"
+msgid "Remote device to use (required)"
+msgstr "התקן מרוחק לשימוש (הכרחי)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "כתובת"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "שם ההתקן המרוחק"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "שם ההתקן המרוחק, משמש כתווית במנשק המשתמש"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "שם"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "האפשרות „‎--device” הכרחית, אין תמיכה בבחירת התקנים"
 
 #~ msgid "Cancel"
 #~ msgstr "ביטול"
