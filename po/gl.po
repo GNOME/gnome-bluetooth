@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth-master-po-gl-18070.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-02-27 22:37+0100\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-02 21:34+0100\n"
 "Last-Translator: Fran Dieguez <fran.dieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -27,7 +27,7 @@ msgstr ""
 "X-DL-Module: gnome-bluetooth\n"
 "X-DL-State: Translating\n"
 "X-DL-Team: gl\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 "X-Project-Style: gnome\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
@@ -335,11 +335,11 @@ msgstr "Dispositivos"
 msgid "Searching for devices…"
 msgstr "Buscando dispositivos…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Transferencia por Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Enviando ficheiros a través de Bluetooth"
 
@@ -447,20 +447,26 @@ msgid "Select"
 msgstr "Seleccionar"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Dispositivo remoto a empregar"
+msgid "Remote device to use (required)"
+msgstr "Dispositivo remoto a empregar (requirido)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ENDEREZO"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nome do dispositivo remoto"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nome do dispositivo remoto, usado como etiqueta na IU"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOME"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"A opción «--device» é necesaria, a selección do dispositivo non é "
+"compatible."
 
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"
