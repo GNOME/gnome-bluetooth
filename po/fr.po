@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-02-23 10:47+0100\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-03 13:52+0000\n"
 "Last-Translator: Vincent Chatelain <vinchatl_gnome@proton.me>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 45.3\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -340,11 +340,11 @@ msgstr "Périphériques"
 msgid "Searching for devices…"
 msgstr "Recherche de périphériques…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Transfert Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Envoi de fichiers par Bluetooth"
 
@@ -453,20 +453,26 @@ msgid "Select"
 msgstr "Sélectionner"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Périphérique distant à utiliser"
+msgid "Remote device to use (required)"
+msgstr "Périphérique distant à utiliser (obligatoire)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nom du périphérique distant"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nom du périphérique distant, utilisé comme étiquette dans l’interface"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOM"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"L’option « --device » est obligatoire ; la sélection du périphérique n’est "
+"pas prise en charge."
 
 #~ msgid "Cancel"
 #~ msgstr "Annuler"
