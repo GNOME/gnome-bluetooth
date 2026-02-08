@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2025-02-15 01:28+0000\n"
-"PO-Revision-Date: 2025-02-20 22:50+0100\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-08 17:26+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -330,11 +330,11 @@ msgstr "Zařízení"
 msgid "Searching for devices…"
 msgstr "Vyhledávají se zařízení…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Přenos přes Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Posílejte soubory přes Bluetooth"
 
@@ -447,20 +447,24 @@ msgid "Select"
 msgstr "Vybrat"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Použít zadané vzdálené zařízení"
+msgid "Remote device to use (required)"
+msgstr "Vzdálené zařízení k použití (povinné)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRESA"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Název vzdáleného zařízení"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Název vzdáleného zařízení, používaný jako popisek v uživ. rozhraní"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NÁZEV"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Volba „--device“ je povinná, výběr zařízení není podporován."
 
 #~ msgid "Cancel"
 #~ msgstr "Zrušit"
