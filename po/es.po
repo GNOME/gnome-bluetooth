@@ -4,14 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010-2024.
-# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024-2025.
+# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bluez-gnome.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-03-03 15:47+0100\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-12 13:43+0100\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 49.0\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:37+0000\n"
-"X-Generator: Gtranslator 47.1\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -215,7 +215,8 @@ msgstr "Equipo"
 msgid "Network"
 msgstr "Red"
 
-#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#. translators: a hands-free headset, a combination of a single speaker with a
+#. microphone
 #: lib/bluetooth-utils.c:65
 msgid "Headset"
 msgstr "Auriculares"
@@ -328,11 +329,11 @@ msgstr "Dispositivos"
 msgid "Searching for devices…"
 msgstr "Buscando dispositivos…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Transferencia Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Enviar archivos mediante Bluetooth"
 
@@ -440,709 +441,882 @@ msgid "Select"
 msgstr "Seleccionar"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Dispositivo remoto que usar"
+msgid "Remote device to use (required)"
+msgstr "Dispositivo remoto que usar (requerido)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "DIRECCIÓN"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nombre del dispositivo remoto"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr ""
+"Nombre del dispositivo remoto, utilizado como etiqueta en la interfaz de "
+"usuario"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOMBRE"
 
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"Se requiere la opción «--device», no se admite la selección de dispositivo."
+
+#, fuzzy
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"
 
-#, c-format
+#, fuzzy, c-format
 #~ msgid "Remove “%s” from the list of devices?"
-#~ msgstr "¿Quitar «%s» de la lista de dispositivos?"
+#~ msgstr "¿Eliminar “%s” de la lista de dispositivos?"
 
+#, fuzzy
 #~ msgid "_Remove"
-#~ msgstr "_Quitar"
+#~ msgstr "_Eliminar"
 
+#, fuzzy
 #~ msgid "Click to select device…"
-#~ msgstr "Pulse para seleccionar el dispositivo…"
+#~ msgstr "Haga clic para seleccionar el dispositivo..."
 
+#, fuzzy
 #~ msgid "_OK"
-#~ msgstr "_Aceptar"
+#~ msgstr "_DE ACUERDO"
 
+#, fuzzy
 #~ msgid "No adapters available"
-#~ msgstr "No hay ningún adaptador disponible"
+#~ msgstr "No hay adaptadores disponibles"
 
+#, fuzzy
 #~ msgid "Device"
 #~ msgstr "Dispositivo"
 
+#, fuzzy
 #~ msgid "All categories"
-#~ msgstr "Todas las categorías"
+#~ msgstr "Todas las categorias"
 
+#, fuzzy
 #~ msgid "Trusted"
-#~ msgstr "De confianza"
+#~ msgstr "Confiable"
 
+#, fuzzy
 #~ msgid "Not paired or trusted"
-#~ msgstr "Ni emparejados ni de confianza"
+#~ msgstr "No emparejado ni confiable"
 
+#, fuzzy
 #~ msgid "Paired or trusted"
-#~ msgstr "Emparejados o de confianza"
+#~ msgstr "Emparejado o de confianza"
 
+#, fuzzy
 #~ msgid "Show:"
-#~ msgstr "Mostrar:"
+#~ msgstr "Espectáculo:"
 
+#, fuzzy
 #~ msgid "Device _category:"
-#~ msgstr "_Categoría de dispositivo:"
+#~ msgstr "Dispositivo _categoría:"
 
+#, fuzzy
 #~ msgid "Select the device category to filter"
-#~ msgstr "Seleccionar la categoría de dispositivo por la que filtrar"
+#~ msgstr "Seleccione la categoría de dispositivo para filtrar"
 
+#, fuzzy
 #~ msgid "Device _type:"
-#~ msgstr "_Tipo de dispositivo:"
+#~ msgstr "Tipo de dispositivo:"
 
+#, fuzzy
 #~ msgid "Select the device type to filter"
-#~ msgstr "Seleccionar el tipo de dispositivo por el que filtrar"
+#~ msgstr "Seleccione el tipo de dispositivo a filtrar"
 
+#, fuzzy
 #~ msgid "Input devices (mice, keyboards, etc.)"
 #~ msgstr "Dispositivos de entrada (ratones, teclados, etc.)"
 
+#, fuzzy
 #~ msgid "Headphones, headsets and other audio devices"
-#~ msgstr ""
-#~ "Auriculares, auriculares con micrófono y otros dispositivos de sonido"
+#~ msgstr "Auriculares, cascos y otros dispositivos de audio"
 
+#, fuzzy
 #~ msgid "All types"
 #~ msgstr "Todos los tipos"
 
+#, fuzzy
 #~ msgid "Select device to send to"
-#~ msgstr "Seleccionar el dispositivo al que enviar"
+#~ msgstr "Seleccione el dispositivo al que enviar"
 
+#, fuzzy
 #~ msgid "_Send"
 #~ msgstr "_Enviar"
 
+#, fuzzy
 #~ msgid "[FILE…]"
 #~ msgstr "[ARCHIVO…]"
 
+#, fuzzy
 #~ msgid "Reveal File"
-#~ msgstr "Mostrar archivo"
+#~ msgstr "Revelar archivo"
 
+#, fuzzy
 #~ msgid "bluetooth"
 #~ msgstr "bluetooth"
 
-#~| msgid "Searching for devices…"
+#, fuzzy
 #~ msgid "Searching for devices..."
-#~ msgstr "Buscando dispositivos…"
+#~ msgstr "Buscando dispositivos..."
 
+#, fuzzy
 #~ msgid "Visible as “%s”"
-#~ msgstr "Visible como «%s»"
+#~ msgstr "Visible como \"%s\""
 
+#, fuzzy
 #~ msgid "page 1"
-#~ msgstr "página 1"
+#~ msgstr "pagina 1"
 
+#, fuzzy
 #~ msgid "page 2"
-#~ msgstr "página 2"
+#~ msgstr "pagina 2"
 
+#, fuzzy
 #~ msgid "Done"
-#~ msgstr "Realizado"
+#~ msgstr "Hecho"
 
+#, fuzzy
 #~ msgid "Please enter the following PIN on 'Foobar':"
-#~ msgstr "Introduzca el siguiente PIN en «alguno»:"
+#~ msgstr "Ingrese el siguiente PIN en 'Foobar':"
 
-#~| msgid "Please enter the PIN mentioned on device %s."
+#, fuzzy
 #~ msgid "Please enter the PIN code entered on '%s':"
-#~ msgstr "Introduzca el código PIN introducido en «%s»:"
+#~ msgstr "Ingrese el código PIN ingresado en '%s':"
 
+#, fuzzy
 #~ msgid "Matches"
-#~ msgstr "Coincide"
+#~ msgstr "Partidos"
 
+#, fuzzy
 #~ msgid "Please confirm that the PIN displayed on '%s' matches this one:"
-#~ msgstr "Confirme que el PIN mostrado en «%s» coincide con este:"
+#~ msgstr "Confirme que el PIN que se muestra en '%s' coincide con este:"
 
+#, fuzzy
 #~ msgid "Please confirm that you want to pair with '%s'"
-#~ msgstr "Confirme que se quiere emparejar con «%s»"
+#~ msgstr "Por favor confirma que deseas emparejar con '%s'"
 
+#, fuzzy
 #~ msgid "Use this GPS device for Geolocation services"
-#~ msgstr "Usar este dispositivo GPS para servicios de geolocalización"
+#~ msgstr "Utilice este dispositivo GPS para servicios de Geolocalización"
 
+#, fuzzy
 #~ msgid "Access the Internet using your cell phone (test)"
-#~ msgstr "Acceder a Internet usando su teléfono móvil (prueba)"
+#~ msgstr "Accede a Internet usando tu teléfono celular (prueba)"
 
+#, fuzzy
 #~ msgid "Pairing with '%s' cancelled"
-#~ msgstr "Emparejamiento con «%s» cancelado"
+#~ msgstr "Emparejamiento con '%s' cancelado"
 
+#, fuzzy
 #~ msgid "Please enter the following PIN:"
-#~ msgstr "Introduzca el siguiente PIN:"
+#~ msgstr "Por favor ingrese el siguiente PIN:"
 
+#, fuzzy
 #~ msgid "Setting up '%s' failed"
-#~ msgstr "Falló al configurar «%s»"
+#~ msgstr "Error al configurar '%s'"
 
+#, fuzzy
 #~ msgid "Connecting to '%s'..."
-#~ msgstr "Conectando con «%s»…"
+#~ msgstr "Conectándose a '%s'..."
 
+#, fuzzy
 #~ msgid "Please wait while finishing setup on device '%s'..."
-#~ msgstr "Espere mientras se termina de configurar el dispositivo «%s»…"
+#~ msgstr "Espere mientras finaliza la configuración en el dispositivo '%s'..."
 
+#, fuzzy
 #~ msgid "Successfully set up new device '%s'"
-#~ msgstr "Dispositivo nuevo «%s» configurado correctamente"
+#~ msgstr "Configure exitosamente el nuevo dispositivo '%s'"
 
+#, fuzzy
 #~ msgid "Bluetooth New Device Setup"
-#~ msgstr "Configuración de dispositivo Bluetooth nuevo"
+#~ msgstr "Configuración de nuevo dispositivo Bluetooth"
 
+#, fuzzy
 #~ msgid "PIN _options..."
-#~ msgstr "_Opciones del PIN…"
+#~ msgstr "PIN_opciones..."
 
+#, fuzzy
 #~ msgid "Device Search"
 #~ msgstr "Búsqueda de dispositivos"
 
+#, fuzzy
 #~ msgid "Device Setup"
 #~ msgstr "Configuración del dispositivo"
 
+#, fuzzy
 #~ msgid "Finishing Setup"
 #~ msgstr "Finalizando la configuración"
 
+#, fuzzy
 #~ msgid "Select the additional services you want to use with your device:"
 #~ msgstr ""
-#~ "Seleccionar los servicios adicionales que quiere usar con su dispositivo:"
+#~ "Selecciona los servicios adicionales que deseas utilizar con tu "
+#~ "dispositivo:"
 
+#, fuzzy
 #~ msgid "Setup Summary"
-#~ msgstr "Configurar resumen"
+#~ msgstr "Resumen de configuración"
 
+#, fuzzy
 #~ msgid "PIN Options"
-#~ msgstr "Opciones del PIN"
+#~ msgstr "Opciones de PIN"
 
+#, fuzzy
 #~ msgid "_Automatic PIN selection"
-#~ msgstr "Selección _automática del PIN"
+#~ msgstr "_Selección automática de PIN"
 
+#, fuzzy
 #~ msgid "Fixed PIN"
 #~ msgstr "PIN fijo"
 
+#, fuzzy
 #~ msgid "'0000' (most headsets, mice and GPS devices)"
-#~ msgstr "«0000» (la mayoría de los auriculares, ratones y dispositivos GPS)"
+#~ msgstr "'0000' (la mayoría de auriculares, ratones y dispositivos GPS)"
 
+#, fuzzy
 #~ msgid "'1111'"
-#~ msgstr "«1111»"
+#~ msgstr "'1111'"
 
+#, fuzzy
 #~ msgid "'1234'"
-#~ msgstr "«1234»"
+#~ msgstr "'1234'"
 
+#, fuzzy
 #~ msgid "Do not pair"
-#~ msgstr "No emparejar"
+#~ msgstr "no emparejar"
 
+#, fuzzy
 #~ msgid "Custom PIN:"
 #~ msgstr "PIN personalizado:"
 
+#, fuzzy
 #~ msgid "_Try Again"
-#~ msgstr "I_ntentarlo de nuevo"
+#~ msgstr "_Intentar otra vez"
 
+#, fuzzy
 #~ msgid "_Quit"
-#~ msgstr "_Salir"
+#~ msgstr "_Abandonar"
 
+#, fuzzy
 #~ msgid "Does not match"
-#~ msgstr "No coincide"
+#~ msgstr "no coincide"
 
+#, fuzzy
 #~ msgid "Bluetooth Device Setup"
-#~ msgstr "Configuración de dispositivo Bluetooth"
+#~ msgstr "Configuración del dispositivo Bluetooth"
 
+#, fuzzy
 #~ msgid "Setup Bluetooth devices"
 #~ msgstr "Configurar dispositivos Bluetooth"
 
+#, fuzzy
 #~ msgid "Connecting..."
-#~ msgstr "Conectando…"
+#~ msgstr "Conectando..."
 
+#, fuzzy
 #~ msgid "File Transfer"
 #~ msgstr "Transferencia de archivos"
 
+#, fuzzy
 #~ msgid "Sending files via Bluetooth"
-#~ msgstr "Enviando archivos vía Bluetooth"
+#~ msgstr "Envío de archivos a través de Bluetooth"
 
+#, fuzzy
 #~ msgid "Turn on Bluetooth"
-#~ msgstr "Encender el Bluetooth"
+#~ msgstr "Activar Bluetooth"
 
+#, fuzzy
 #~ msgid "Bluetooth: Off"
 #~ msgstr "Bluetooth: Apagado"
 
+#, fuzzy
 #~ msgid "Turn off Bluetooth"
-#~ msgstr "Apagar el Bluetooth"
+#~ msgstr "Apagar Bluetooth"
 
+#, fuzzy
 #~ msgid "Bluetooth: On"
-#~ msgstr "Bluetooth: Encendido"
+#~ msgstr "Bluetooth: activado"
 
+#, fuzzy
 #~ msgid "Bluetooth: Disabled"
-#~ msgstr "Bluetooth: Desactivado"
+#~ msgstr "Bluetooth: deshabilitado"
 
+#, fuzzy
 #~ msgid "Disconnecting..."
-#~ msgstr "Desconectando…"
+#~ msgstr "Desconectando..."
 
+#, fuzzy
 #~ msgid "Disconnect"
 #~ msgstr "Desconectar"
 
+#, fuzzy
 #~ msgid "Connect"
 #~ msgstr "Conectar"
 
+#, fuzzy
 #~ msgid "Send files..."
-#~ msgstr "Enviar archivos…"
+#~ msgstr "Enviar archivos..."
 
+#, fuzzy
 #~ msgid "Browse files..."
-#~ msgstr "Examinar archivos…"
+#~ msgstr "Explorar archivos..."
 
+#, fuzzy
 #~ msgid "Debug"
 #~ msgstr "Depurar"
 
+#, fuzzy
 #~ msgid "- Bluetooth applet"
-#~ msgstr "- Miniaplicación para Bluetooth"
+#~ msgstr "- subprograma Bluetooth"
 
+#, fuzzy
 #~ msgid ""
 #~ "%s\n"
 #~ "Run '%s --help' to see a full list of available command line options.\n"
-#~ msgstr ""
-#~ "%s\n"
-#~ "Ejecute «%s --help» para ver una lista completa de todas las opciones "
-#~ "disponibles de la línea de comandos.\n"
+#~ msgstr "%s\n"
 
+#, fuzzy
 #~ msgid "Bluetooth Applet"
-#~ msgstr "Miniaplicación para Bluetooth"
+#~ msgstr "Subprograma Bluetooth"
 
+#, fuzzy
 #~ msgid "Bluetooth"
-#~ msgstr "Bluetooth"
+#~ msgstr "bluetooth"
 
+#, fuzzy
 #~ msgid "Grant access to '%s'"
-#~ msgstr "Conceder acceso a «%s»"
+#~ msgstr "Conceder acceso a '%s'"
 
+#, fuzzy
 #~ msgid "Device %s wants access to the service '%s'."
-#~ msgstr "El dispositivo %s quiere acceder al servicio «%s»."
+#~ msgstr "El dispositivo %s quiere acceder al servicio '%s'."
 
+#, fuzzy
 #~ msgid "Bluetooth device"
-#~ msgstr "Dispositivo Bluetooth"
+#~ msgstr "dispositivo Bluetooth"
 
+#, fuzzy
 #~ msgid "Enter PIN"
-#~ msgstr "Introducir el PIN"
+#~ msgstr "Introducir PIN"
 
+#, fuzzy
 #~ msgid "Pairing confirmation for '%s'"
-#~ msgstr "Confirmación de emparejamiento para «%s»"
+#~ msgstr "Confirmación de emparejamiento para '%s'"
 
+#, fuzzy
 #~ msgid "Verify PIN"
-#~ msgstr "Verificar el PIN"
+#~ msgstr "Verificar PIN"
 
+#, fuzzy
 #~ msgid "Authorization request from '%s'"
-#~ msgstr "Solicitud de autorización de «%s»"
+#~ msgstr "Solicitud de autorización de '%s'"
 
+#, fuzzy
 #~ msgid "Check authorization"
-#~ msgstr "Comprobar autorización"
+#~ msgstr "Verificar autorización"
 
+#, fuzzy
 #~ msgid "Bluetooth Manager"
-#~ msgstr "Gestor de Bluetooth"
+#~ msgstr "Administrador de Bluetooth"
 
+#, fuzzy
 #~ msgid "Bluetooth Manager applet"
-#~ msgstr "Miniaplicación del Gestor de Bluetooth"
+#~ msgstr "Subprograma de administrador de Bluetooth"
 
+#, fuzzy
 #~ msgid "Bluetooth: Checking"
 #~ msgstr "Bluetooth: Comprobando"
 
+#, fuzzy
 #~ msgid "Visible"
 #~ msgstr "Visible"
 
+#, fuzzy
 #~ msgid "Send files to device..."
-#~ msgstr "Enviar archivos al dispositivo…"
+#~ msgstr "Enviar archivos al dispositivo..."
 
+#, fuzzy
 #~ msgid "Set up new device..."
-#~ msgstr "Configurar un dispositivo nuevo…"
+#~ msgstr "Configurar nuevo dispositivo..."
 
+#, fuzzy
 #~ msgid "Bluetooth Settings"
 #~ msgstr "Configuración de Bluetooth"
 
+#, fuzzy
 #~ msgid "Quit"
-#~ msgstr "Salir"
+#~ msgstr "Abandonar"
 
+#, fuzzy
 #~ msgid "_Always grant access"
-#~ msgstr "Conceder acceso _siempre"
+#~ msgstr "_Conceder siempre acceso"
 
+#, fuzzy
 #~ msgid "_Reject"
 #~ msgstr "_Rechazar"
 
+#, fuzzy
 #~ msgid "_Grant"
 #~ msgstr "_Conceder"
 
+#, fuzzy
 #~ msgid "_Does not match"
 #~ msgstr "_No coincide"
 
+#, fuzzy
 #~ msgid "_Matches"
-#~ msgstr "C_oincide"
+#~ msgstr "_Partidos"
 
+#, fuzzy
 #~ msgid "_Show input"
 #~ msgstr "_Mostrar entrada"
 
+#, fuzzy
 #~ msgid "Programming error: could not find the device in the list"
 #~ msgstr ""
-#~ "Error de programación, no se pudo encontrar el dispositivo en la lista"
+#~ "Error de programación: no se pudo encontrar el dispositivo en la lista"
 
+#, fuzzy
 #~ msgid "OBEX Push file transfer unsupported"
-#~ msgstr "No se soporta la transferencia de archivos con OBEX Push"
+#~ msgstr "La transferencia de archivos OBEX Push no es compatible"
 
+#, fuzzy
 #~ msgid "Bluetooth (OBEX Push)"
-#~ msgstr "Bluetooth (OBEX Push)"
+#~ msgstr "Bluetooth (empuje OBEX)"
 
+#, fuzzy
 #~ msgid "%d KB/s"
 #~ msgstr "%d KB/s"
 
+#, fuzzy
 #~ msgid "Preferences"
 #~ msgstr "Preferencias"
 
+#, fuzzy
 #~ msgid "Select Device to Browse"
-#~ msgstr "Seleccionar el dispositivo que examinar"
+#~ msgstr "Seleccione el dispositivo para explorar"
 
+#, fuzzy
 #~ msgid "_Browse"
-#~ msgstr "_Examinar"
+#~ msgstr "_Navegar"
 
+#, fuzzy
 #~ msgid "Select device to browse"
-#~ msgstr "Seleccionar el dispositivo para examinar"
+#~ msgstr "Seleccione el dispositivo para navegar"
 
+#, fuzzy
 #~ msgid "Browse files on device..."
-#~ msgstr "Examinar archivos en el dispositivo…"
+#~ msgstr "Explorar archivos en el dispositivo..."
 
+#, fuzzy
 #~ msgid "Bluetooth is disabled"
-#~ msgstr "El Bluetooth está desconectado"
+#~ msgstr "Bluetooth está deshabilitado"
 
+#, fuzzy
 #~ msgid "Bluetooth is disabled by hardware switch"
-#~ msgstr "El Bluetooth está desactivado por el interruptor físico"
+#~ msgstr "Bluetooth está desactivado mediante un interruptor de hardware"
 
+#, fuzzy
 #~ msgid "No Bluetooth adapters found"
-#~ msgstr "No se encontró ningún adaptador Bluetooth"
+#~ msgstr "No se encontraron adaptadores Bluetooth"
 
+#, fuzzy
 #~ msgid "Visibility"
 #~ msgstr "Visibilidad"
 
+#, fuzzy
 #~ msgid "Browse Files..."
-#~ msgstr "Examinar archivos…"
+#~ msgstr "Explorar archivos..."
 
+#, fuzzy
 #~ msgctxt "Power"
 #~ msgid "Bluetooth"
-#~ msgstr "Bluetooth"
+#~ msgstr "bluetooth"
 
+#, fuzzy
 #~ msgid "Device Setup Failed"
-#~ msgstr "Falló la configuración del dispositivo"
+#~ msgstr "Error en la configuración del dispositivo"
 
+#, fuzzy
 #~ msgid "Introduction"
 #~ msgstr "Introducción"
 
+#, fuzzy
 #~ msgid "Select the device you want to set up"
-#~ msgstr "Seleccione el dispositivo que quiere configurar"
+#~ msgstr "Seleccione el dispositivo que desea configurar"
 
+#, fuzzy
 #~ msgid "Setup Completed"
 #~ msgstr "Configuración completada"
 
+#, fuzzy
 #~ msgid ""
 #~ "The Bluetooth new device setup will walk you through the process of "
 #~ "configuring Bluetooth enabled devices for use with this computer."
 #~ msgstr ""
-#~ "La configuración de dispositivos Bluetooth nuevos le guiará a través del "
-#~ "proceso de configuración de dispositivos con Bluetooth activados para "
-#~ "usarlos con este equipo."
+#~ "La configuración del nuevo dispositivo Bluetooth lo guiará a través del "
+#~ "proceso de configuración de dispositivos habilitados para Bluetooth para "
+#~ "usar con esta computadora."
 
+#, fuzzy
 #~ msgid ""
 #~ "The device will need to be within 10 meters of your computer, and be "
 #~ "“visible” (sometimes called “discoverable”). Check the device's manual if "
 #~ "in doubt."
 #~ msgstr ""
-#~ "El dispositivo deberá estar en un radio de 10 metros alrededor de su "
-#~ "equipo y poder ser “visible” (llamado algunas veces “descubrible”). Si "
-#~ "tiene dudas, consulte el manual del dispositivo."
+#~ "El dispositivo deberá estar a 10 metros de su computadora y ser “visible” "
+#~ "(a veces llamado “detectable”). "
 
+#, fuzzy
 #~ msgid "Welcome to the Bluetooth new device setup"
-#~ msgstr "Bienvenido/a a la configuración de dispositivos Bluetooth nuevos"
+#~ msgstr "Bienvenido a la configuración del nuevo dispositivo Bluetooth"
 
+#, fuzzy
 #~ msgid "Run in standalone mode"
 #~ msgstr "Ejecutar en modo independiente"
 
+#, fuzzy
 #~ msgid "Moblin Bluetooth Panel"
-#~ msgstr "Panel Bluetooth de Moblin"
+#~ msgstr "Panel Bluetooth Moblin"
 
+#, fuzzy
 #~ msgid "- Moblin Bluetooth Panel"
-#~ msgstr "- Panel Bluetooth de Moblin"
+#~ msgstr "- Panel Bluetooth Moblin"
 
+#, fuzzy
 #~ msgid "%d hour"
 #~ msgid_plural "%d hours"
 #~ msgstr[0] "%d hora"
 #~ msgstr[1] "%d horas"
 
+#, fuzzy
 #~ msgid "%d minute"
 #~ msgid_plural "%d minutes"
 #~ msgstr[0] "%d minuto"
 #~ msgstr[1] "%d minutos"
 
+#, fuzzy
 #~ msgid "%d second"
 #~ msgid_plural "%d seconds"
 #~ msgstr[0] "%d segundo"
 #~ msgstr[1] "%d segundos"
 
+#, fuzzy
 #~ msgctxt "time"
 #~ msgid "%s %s %s"
 #~ msgstr "%s %s %s"
 
+#, fuzzy
 #~ msgctxt "time"
 #~ msgid "%s %s"
-#~ msgstr "%s %s"
+#~ msgstr "%s%s"
 
+#, fuzzy
 #~ msgid "0 seconds"
 #~ msgstr "0 segundos"
 
+#, fuzzy
 #~ msgid ""
 #~ "Your computer is visible on\n"
 #~ "Bluetooth for %s."
-#~ msgstr ""
-#~ "El equipo es visible a través de\n"
-#~ "Bluetooth durante %s."
+#~ msgstr "Su computadora es visible en\n"
 
+#, fuzzy
 #~ msgid "Pairing with %s failed."
-#~ msgstr "Falló el emparejamiento con %s."
+#~ msgstr "El emparejamiento con %s falló."
 
+#, fuzzy
 #~ msgid "Pair"
-#~ msgstr "Emparejar"
+#~ msgstr "Par"
 
+#, fuzzy
 #~ msgid "Browse"
-#~ msgstr "Examinar"
+#~ msgstr "Navegar"
 
+#, fuzzy
 #~ msgid "Device setup failed"
-#~ msgstr "Falló la configuración del dispositivo"
+#~ msgstr "Error en la configuración del dispositivo"
 
+#, fuzzy
 #~ msgid "Back to devices"
-#~ msgstr "Volver a los dispositivos"
+#~ msgstr "Volver a dispositivos"
 
+#, fuzzy
 #~ msgid "Device setup"
 #~ msgstr "Configuración del dispositivo"
 
+#, fuzzy
 #~ msgid "Settings"
-#~ msgstr "Configuración"
+#~ msgstr "Ajustes"
 
+#, fuzzy
 #~ msgid "Only show:"
-#~ msgstr "Mostrar sólo:"
+#~ msgstr "Sólo mostrar:"
 
+#, fuzzy
 #~ msgid "PIN options"
-#~ msgstr "Opciones del PIN"
+#~ msgstr "Opciones de PIN"
 
+#, fuzzy
 #~ msgid "Add a new device"
-#~ msgstr "Añadir un dispositivo nuevo"
+#~ msgstr "Agregar un nuevo dispositivo"
 
+#, fuzzy
 #~ msgid "Make visible on Bluetooth"
-#~ msgstr "Hacer visible a través de Bluetooth"
+#~ msgstr "Hacer visible en Bluetooth"
 
+#, fuzzy
 #~ msgid "Send file from your computer"
-#~ msgstr "Enviar un archivo desde el equipo"
+#~ msgstr "Enviar archivo desde su computadora"
 
+#, fuzzy
 #~ msgid "Bluetooth Manager Panel"
-#~ msgstr "Panel de gestión de Bluetooth"
+#~ msgstr "Panel del administrador de Bluetooth"
 
+#, fuzzy
 #~ msgid "Show Only Bluetooth Devices With..."
-#~ msgstr "Mostrar sólo dispositivos Bluetooth con…"
+#~ msgstr "Mostrar solo dispositivos Bluetooth con..."
 
+#, fuzzy
 #~ msgid "Open Keyboard Preferences..."
-#~ msgstr "Abrir las Preferencias del teclado…"
+#~ msgstr "Abrir Preferencias de teclado..."
 
+#, fuzzy
 #~ msgid "Open Mouse Preferences..."
-#~ msgstr "Abrir las Preferencias del ratón…"
+#~ msgstr "Abrir Preferencias del ratón..."
 
+#, fuzzy
 #~ msgid "Open Sound Preferences..."
-#~ msgstr "Abrir las Preferencias de sonido…"
+#~ msgstr "Abrir Preferencias de sonido..."
 
+#, fuzzy
 #~ msgid "Bluetooth: Enabled"
-#~ msgstr "Bluetooth: Activado"
+#~ msgstr "Bluetooth: habilitado"
 
+#, fuzzy
 #~ msgid "Power"
-#~ msgstr "Potencia"
+#~ msgstr "Fuerza"
 
+#, fuzzy
 #~ msgid "%s"
 #~ msgstr "%s"
 
+#, fuzzy
 #~ msgid "Active"
-#~ msgstr "Activar"
+#~ msgstr "Activo"
 
+#, fuzzy
 #~ msgid "Cannot start \"Personal File Sharing\" Preferences"
 #~ msgstr ""
-#~ "No se pueden iniciar las preferencias de «Compartición de archivos "
-#~ "personales»"
+#~ "No se pueden iniciar las preferencias de \"Compartir archivos personales\""
 
+#, fuzzy
 #~ msgid ""
 #~ "Please verify that the \"Personal File Sharing\" program is correctly "
 #~ "installed."
 #~ msgstr ""
-#~ "Compruebe que el programa «Compartición de archivos personales» está "
-#~ "correctamente instalado."
+#~ "Verifique que el programa \"Compartir archivos personales\" esté "
+#~ "instalado correctamente."
 
+#, fuzzy
 #~ msgid "_Show Bluetooth icon"
-#~ msgstr "_Mostrar icono Bluetooth"
+#~ msgstr "_Mostrar icono de Bluetooth"
 
+#, fuzzy
 #~ msgid "Sharing Settings..."
-#~ msgstr "Configuración de compartición…"
+#~ msgstr "Configuración para compartir..."
 
+#, fuzzy
 #~ msgid "Friendly name"
-#~ msgstr "Nombre amistoso"
+#~ msgstr "Nombre amigable"
 
+#, fuzzy
 #~ msgid "Make computer _visible"
-#~ msgstr "Hacer que el equipo sea _visible"
+#~ msgstr "Hacer visible la computadora"
 
+#, fuzzy
 #~ msgid "Set up _new device..."
-#~ msgstr "Configurar un dispositivo _nuevo…"
+#~ msgstr "Configurar _nuevo dispositivo..."
 
-#~| msgid "Disconnect"
+#, fuzzy
 #~ msgid "_Disconnect"
 #~ msgstr "_Desconectar"
 
+#, fuzzy
 #~ msgid "Your computer does not have any Bluetooth adapters plugged in."
-#~ msgstr "Su equipo no tiene ningún adaptador de Bluetooth conectado."
+#~ msgstr "Su computadora no tiene ningún adaptador Bluetooth conectado."
 
+#, fuzzy
 #~ msgid "Bluetooth has been disabled by a switch on your computer."
-#~ msgstr "Un conmutador ha desactivado el Bluetooth en su equipo."
+#~ msgstr ""
+#~ "Bluetooth ha sido desactivado mediante un interruptor en su computadora."
 
+#, fuzzy
 #~ msgid "<u>Pair</u>"
 #~ msgstr "<u>Emparejar</u>"
 
+#, fuzzy
 #~ msgid "<u>Connect</u>"
 #~ msgstr "<u>Conectar</u>"
 
+#, fuzzy
 #~ msgid "<u>Browse</u>"
-#~ msgstr "<u>Examinar</u>"
+#~ msgstr "<u>Navegar</u>"
 
+#, fuzzy
 #~ msgid "Output a list of currently known devices"
-#~ msgstr "Mostrar una lista de los dispositivos conocidos actualmente"
+#~ msgstr "Generar una lista de dispositivos conocidos actualmente"
 
+#, fuzzy
 #~ msgid "Bluetooth Preferences"
 #~ msgstr "Preferencias de Bluetooth"
 
+#, fuzzy
 #~ msgid "Whether to show the notification icon"
-#~ msgstr "Indica si se debe mostrar el icono de notificación"
+#~ msgstr "Si mostrar el ícono de notificación"
 
+#, fuzzy
 #~ msgid "Whether to show the notification icon."
-#~ msgstr "Indica si se debe mostrar el icono de notificación."
+#~ msgstr "Ya sea para mostrar el ícono de notificación."
 
+#, fuzzy
 #~ msgid "GConf error: %s"
-#~ msgstr "Error de GConf:  %s"
+#~ msgstr "Error de GConf: %s"
 
+#, fuzzy
 #~ msgid "All further errors shown only on terminal."
-#~ msgstr "En adelante todos los errores sólo se mostrarán en el terminal."
+#~ msgstr "Todos los errores adicionales se muestran solo en la terminal."
 
+#, fuzzy
 #~ msgid "A Bluetooth manager for the GNOME desktop"
-#~ msgstr "Un gestor de Bluetooth para el escritorio GNOME"
+#~ msgstr "Un administrador de Bluetooth para el escritorio GNOME"
 
+#, fuzzy
 #~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Jorge González <jorgegonz@svn.gnome.org>, 2009\n"
-#~ "\n"
-#~ "Contribuciones en Launchpad:\n"
-#~ "  Alvaro Lazaro https://launchpad.net/~alazaro\n"
-#~ "  Chema https://launchpad.net/~chema2\n"
-#~ "  Cuadrado https://launchpad.net/~soydavid86\n"
-#~ "  Dante Díaz https://launchpad.net/~dante.df\n"
-#~ "  Deisy Yekaterina https://launchpad.net/~onlyone342\n"
-#~ "  Gonzalo L. Campos Medina https://launchpad.net/~gcamposm\n"
-#~ "  JM Rivas https://launchpad.net/~guelote\n"
-#~ "  Jago (Carlos S. Melón) https://launchpad.net/~jago84\n"
-#~ "  Jorge González González https://launchpad.net/~jorge-gonzalez-gonzalez\n"
-#~ "  Julián Alarcón https://launchpad.net/~alarconj\n"
-#~ "  Martin Albisetti https://launchpad.net/~beuno\n"
-#~ "  Paco Molinero https://launchpad.net/~franciscomol\n"
-#~ "  RICARDO https://launchpad.net/~rjvidela\n"
-#~ "  Ricardo González Castro https://launchpad.net/~rickgc\n"
-#~ "  Ricardo Pérez López https://launchpad.net/~ricardo\n"
-#~ "  Sargate Kanogan https://launchpad.net/~sargate\n"
-#~ "  Wilfredo Ernesto Guerrero Campos https://launchpad.net/~wolffkrieger\n"
-#~ "  José Luis Flores Pineda https://launchpad.net/~peker\n"
-#~ "  Michael Castielli https://launchpad.net/~mickyx\n"
-#~ "  Nacho Blanco https://launchpad.net/~nako\n"
-#~ "  Ricardo Varas Santana https://launchpad.net/~rvaras81\n"
-#~ "  Rodrigo Garcia Gonzalez https://launchpad.net/~nibblesmx\n"
-#~ "  fr85710 https://launchpad.net/~fr85710\n"
-#~ "  maaark https://launchpad.net/~tremolodehendrik"
+#~ msgstr "créditos-traductor"
 
+#, fuzzy
 #~ msgid "GNOME Bluetooth home page"
-#~ msgstr "Página web de GNOME Bluetooth"
+#~ msgstr "Página de inicio de GNOME Bluetooth"
 
+#, fuzzy
 #~ msgid "Bluetooth: Unknown"
 #~ msgstr "Bluetooth: Desconocido"
 
+#, fuzzy
 #~ msgid "Enter passkey"
-#~ msgstr "Introducir contraseña"
+#~ msgstr "Introduzca la clave de acceso"
 
-#~| msgid "Enter passkey"
+#, fuzzy
 #~ msgid "Verify passkey"
-#~ msgstr "Verificar contraseña"
+#~ msgstr "Verificar clave de acceso"
 
+#, fuzzy
 #~ msgid "Known devices"
 #~ msgstr "Dispositivos conocidos"
 
+#, fuzzy
 #~ msgid "Successfully configured '%s'"
-#~ msgstr "«%s» se configuró correctamente"
+#~ msgstr "'%s' configurado exitosamente"
 
+#, fuzzy
 #~ msgid "Bluetooth Device Wizard"
-#~ msgstr "Asistente de dispositivos Bluetooth"
+#~ msgstr "Asistente para dispositivos Bluetooth"
 
+#, fuzzy
 #~ msgid "Setup Finished"
-#~ msgstr "Finalizó la configuración"
+#~ msgstr "Configuración finalizada"
 
+#, fuzzy
 #~ msgid "Check passkey"
-#~ msgstr "Comprobar la contraseña"
+#~ msgstr "comprobar la clave de acceso"
 
+#, fuzzy
 #~ msgid "S_earch"
-#~ msgstr "_Buscar"
+#~ msgstr "Buscar"
 
+#, fuzzy
 #~ msgid "Authentication request"
 #~ msgstr "Solicitud de autenticación"
 
+#, fuzzy
 #~ msgid "Pairing request for device:"
 #~ msgstr "Solicitud de emparejamiento para el dispositivo:"
 
+#, fuzzy
 #~ msgid "Enter passkey for authentication:"
-#~ msgstr "Introduzca la contraseña para la autenticación:"
+#~ msgstr "Ingrese la clave de acceso para la autenticación:"
 
+#, fuzzy
 #~ msgid "Confirmation request"
 #~ msgstr "Solicitud de confirmación"
 
+#, fuzzy
 #~ msgid "Confirm value for authentication:"
-#~ msgstr "Confirmar el valor para la autenticación:"
+#~ msgstr "Confirmar valor para la autenticación:"
 
+#, fuzzy
 #~ msgid "Authorization request"
 #~ msgstr "Solicitud de autorización"
 
+#, fuzzy
 #~ msgid "Authorization request for device:"
-#~ msgstr "Solicitud de autorización para el dispositivo:"
+#~ msgstr "Solicitud de autorización para dispositivo:"
 
+#, fuzzy
 #~ msgid "Please wait whilst '%s' is being paired"
-#~ msgstr "Espere mientras «%s» se empareja"
+#~ msgstr "Espere mientras se empareja '%s'"
 
+#, fuzzy
 #~ msgid "Additional setup"
-#~ msgstr "Ajustes adicionales"
+#~ msgstr "Configuración adicional"
 
+#, fuzzy
 #~ msgid "Setting up new device"
-#~ msgstr "Configurando el dispositivo nuevo"
+#~ msgstr "Configurar un nuevo dispositivo"
 
+#, fuzzy
 #~ msgid "Confirmation request for %s"
 #~ msgstr "Solicitud de confirmación para %s"
 
+#, fuzzy
 #~ msgid "Error Occurred"
-#~ msgstr "Ocurrió un error"
+#~ msgstr "Se produjo un error"
 
+#, fuzzy
 #~ msgid "gtk-close"
-#~ msgstr "gtk-close"
+#~ msgstr "gtk-cerrar"
 
+#, fuzzy
 #~ msgid "General"
 #~ msgstr "General"
 
+#, fuzzy
 #~ msgid "Notification area"
 #~ msgstr "Área de notificación"
 
+#, fuzzy
 #~ msgid "Never display icon"
-#~ msgstr "No mostrar nunca el icono"
+#~ msgstr "Nunca mostrar el icono"
 
+#, fuzzy
 #~ msgid "Only display when adapter present"
-#~ msgstr "Mostrar sólo cuando el adaptador esté presente"
+#~ msgstr "Solo se muestra cuando el adaptador está presente"
 
+#, fuzzy
 #~ msgid "Always display icon"
 #~ msgstr "Mostrar siempre el icono"
 
+#, fuzzy
 #~ msgid ""
 #~ "Display options for the notification icon. Valid options are \"never\", "
 #~ "\"present\" and \"always\"."
-#~ msgstr ""
-#~ "Muestra las opciones para el icono de notificación. Las opciones válidas "
-#~ "son «nunca», «presente» y «siempre»."
+#~ msgstr "Opciones de visualización para el icono de notificación. "
 
+#, fuzzy
 #~ msgid "Unnamed Adapter"
 #~ msgstr "Adaptador sin nombre"
