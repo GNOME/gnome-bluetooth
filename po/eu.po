@@ -5,14 +5,14 @@
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2009, 2010, 2011.
 # Julen Ruiz Aizpuru <julenx@gmail.com>, 2011.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013, 2014, 2015, 2017.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023, 2025.
+# Asier Saratsua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023, 2025, 2026.
 #
 msgid ""
 msgstr "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-15 01:28+0000\n"
-"PO-Revision-Date: 2025-02-27 17:00+0100\n"
-"Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-15 17:00+0100\n"
+"Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -314,11 +314,11 @@ msgstr "Gailuak"
 msgid "Searching for devices…"
 msgstr "Gailuak bilatzen…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth bidezko transferentzia"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Fitxategiak Bluetooth bidez bidaltzea"
 
@@ -424,20 +424,24 @@ msgid "Select"
 msgstr "Hautatu"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Urruneko gailua erabiltzeko"
+msgid "Remote device to use (required)"
+msgstr "Erabiliko den urruneko gailua (halabeharrezkoa)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "HELBIDEA"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Urruneko gailuaren izena"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Urruneko gailuaren izena, erabiltzaile-interfazean etiketa gisa erabiliko dena"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "IZENA"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "“--device” aukera ezinbestekoa da, gailuen hautaketa ez da onartzen."
 
 #~ msgid "Cancel"
 #~ msgstr "Utzi"
