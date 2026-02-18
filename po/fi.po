@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-02-24 20:34+0200\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-18 12:14+0200\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2011-09-08 09:16+0000\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 "X-POT-Import-Date: 2012-02-19 15:16:02+0000\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
@@ -331,11 +331,11 @@ msgstr "Laitteet"
 msgid "Searching for devices…"
 msgstr "Etsitään laitteita…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth-siirto"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Lähetä tiedostoja Bluetoothilla"
 
@@ -442,20 +442,24 @@ msgid "Select"
 msgstr "Valitse"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Käytettävä etälaite"
+msgid "Remote device to use (required)"
+msgstr "Käytettävä etälaite (vaaditaan)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "OSOITE"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Etälaitteen nimi"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Etälaitteen nimi, käytetään nimikkeenä käyttöliittymässä"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NIMI"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Valinta “--device” on pakollinen, laitevalinta ei ole tuettu."
 
 #~ msgid "Cancel"
 #~ msgstr "Peru"
