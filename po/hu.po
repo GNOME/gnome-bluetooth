@@ -1,15 +1,15 @@
 # Hungarian translation for gnome-bluetooth.
-# Copyright (c) 2007, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2019, 2024, 2025 Free Software Foundation, Inc.
+# Copyright (c) 2007, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2019, 2024, 2025, 2026 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-bluetooth package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009, 2010, 2011, 2012.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2019, 2024, 2025.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2019, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-03-02 19:52+0100\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-22 10:04+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2008-10-05 13:36+0000\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -32,7 +32,6 @@ msgstr "Erősítse meg a(z) „%s” eszközön megadott PIN-t."
 
 #: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
 #: lib/bluetooth-pairing-dialog.c:153
-#| msgid "Confirm"
 msgid "C_onfirm"
 msgstr "Meg_erősítés"
 
@@ -100,12 +99,10 @@ msgstr ""
 "bármelyik fehér gombot."
 
 #: lib/bluetooth-pairing-dialog.c:145
-#| msgid "Allow"
 msgid "_Allow"
 msgstr "_Engedélyezés"
 
 #: lib/bluetooth-pairing-dialog.c:148
-#| msgid "Dismiss"
 msgid "_Dismiss"
 msgstr "El_tüntetés"
 
@@ -115,7 +112,6 @@ msgid "_Cancel"
 msgstr "Mé_gse"
 
 #: lib/bluetooth-pairing-dialog.ui:23
-#| msgid "Accept"
 msgid "_Accept"
 msgstr "_Elfogadás"
 
@@ -332,11 +328,11 @@ msgstr "Eszközök"
 msgid "Searching for devices…"
 msgstr "Eszközök keresése…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth átvitel"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Fájlok küldése Bluetoothon"
 
@@ -444,17 +440,24 @@ msgid "Select"
 msgstr "Kijelölés"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Használandó távoli eszköz"
+#| msgid "Remote device to use"
+msgid "Remote device to use (required)"
+msgstr "Használandó távoli eszköz (kötelező)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "CÍM"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Távoli eszköz neve"
+#| msgid "Remote device’s name"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr ""
+"A távoli eszköz neve, amely címkeként lesz használva a felhasználói felületen"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NÉV"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "A „--device” kapcsoló kötelező, az eszközválasztás nem támogatott."
