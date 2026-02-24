@@ -11,7 +11,7 @@
 # Update in gnome-bluetooth:
 # Changwoo Ryu <cwryu@debian.org>, 2009-2011, 2015.
 # SeongMan Jang <brian.jang11@gmail.com> 2017.
-# Seong-ho Cho <shcho@gnome.org>, 2011-2015, 2019, 2022, 2024-2025.
+# Seong-ho Cho <shcho@gnome.org>, 2011-2015, 2019, 2022, 2024-2026.
 #
 # 주의:
 # - Bluetooth는 "블루투스"로 번역.
@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-03-01 04:24+0900\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-02-22 21:01+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.7\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -341,12 +341,12 @@ msgstr "장치"
 msgid "Searching for devices…"
 msgstr "장치 검색 중…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "블루투스 전송"
 
 # long description
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "블루투스를 통해 파일을 전송합니다"
 
@@ -447,20 +447,24 @@ msgid "Select"
 msgstr "선택"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "사용할 원격 장치"
+msgid "Remote device to use (required)"
+msgstr "사용할 원격 장치 (필수)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "<주소>"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "원격 장치의 이름"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "인터페이스에서 레이블로 표시할 원격 장치의 이름"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "<이름>"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "장치 선택을 지원하지 않아 “--device” 옵션이 필요합니다."
 
 #~ msgid "Cancel"
 #~ msgstr "취소"
