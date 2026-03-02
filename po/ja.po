@@ -1,6 +1,6 @@
 # Japanese translation for gnome-bluetooth.
 # Copyright (c) 2007-2010 Rosetta Contributors and Canonical Ltd 2007-2009
-# Copyright (C) 2019-2020, 2022, 2025 gnome-bluetooth's COPYRIGHT HOLDER
+# Copyright (C) 2019-2020, 2022, 2025-2026 gnome-bluetooth's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-bluetooth package.
 # CHIKAMA Masaki <masaki.chikama@gmail.com>, 2008.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2009-2011.
@@ -12,22 +12,22 @@
 # sicklylife <translation@sicklylife.jp>, 2019, 2022.
 # Ryo Nakano <ryonakaknock3@gmail.com>, 2020.
 # Makoto Sakaguchi <ycco34vx@gmail.com>, 2025.
+# 小山田 純 <oyamadajun@outlook.jp>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2025-05-10 14:18+0000\n"
-"PO-Revision-Date: 2025-07-05 07:23+0900\n"
-"Last-Translator: Makoto Sakaguchi <ycco34vx@gmail.com>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-03-02 22:18+0900\n"
+"Last-Translator: 小山田 純 <oyamadajun@outlook.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -335,11 +335,11 @@ msgstr "デバイス"
 msgid "Searching for devices…"
 msgstr "デバイスを検索しています…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth 転送"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "ファイルを Bluetooth で送信"
 
@@ -442,20 +442,26 @@ msgid "Select"
 msgstr "選択"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "使用するリモートデバイス"
+msgid "Remote device to use (required)"
+msgstr "使用するリモートデバイス(必須)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "アドレス"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "リモートデバイスの名前"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "リモートデバイスの名前はUIに表示されます"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "名前"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"“--device” オプションは必須で、デバイスをインタラクティブに選択することはで"
+"きません。"
 
 #~ msgid "Click to select device…"
 #~ msgstr "クリックしてデバイスを選択…"
