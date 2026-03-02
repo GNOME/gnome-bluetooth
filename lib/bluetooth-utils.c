@@ -266,6 +266,8 @@ bluetooth_appearance_to_type (guint16 appearance)
 			return BLUETOOTH_TYPE_OTHER_AUDIO;
 		}
 		break;
+	case 0x2a: /* Gaming */
+		return BLUETOOTH_TYPE_JOYPAD;
 	}
 
 	return 0;
