@@ -6,21 +6,23 @@
 # Wojciech Szczęsny <wszczesny@aviary.pl>, 2013.
 # Paweł Żołnowski <pawel@zolnowski.name>, 2014.
 # Aviary.pl <community-poland@mozilla.org>, 2007-2024.
+# Victoria <royal.victoria@proton.me>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-15 01:28+0000\n"
-"PO-Revision-Date: 2024-08-31 16:09+0200\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <community-poland@mozilla.org>\n"
+"POT-Creation-Date: 2025-12-14 16:04+0000\n"
+"PO-Revision-Date: 2026-03-03 10:52+0100\n"
+"Last-Translator: Victoria <royal.victoria@proton.me>\n"
+"Language-Team: Polish\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Gtranslator 49.0\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -330,11 +332,11 @@ msgstr "Urządzenia"
 msgid "Searching for devices…"
 msgstr "Wyszukiwanie urządzeń…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Przesyłanie przez Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Wysyłanie plików przez Bluetooth"
 
@@ -447,17 +449,21 @@ msgid "Select"
 msgstr "Wybierz"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Zdalne urządzenie do użycia"
+msgid "Remote device to use (required)"
+msgstr "Zdalne urządzenie do użycia (wymagane)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRES"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nazwa zdalnego urządzenia"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nazwa zdalnego urządzenia, używane jako etykieta w interfejsie"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAZWA"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Opcja „--device” jest wymagana, wybór urządzeń nie jest wspierany."
