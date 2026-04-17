@@ -324,7 +324,7 @@ device_added (GDBusObjectManager   *manager,
 	      BluetoothClient      *client)
 {
 	g_autoptr (GDBusProxy) adapter = NULL;
-	BluetoothDevice *device_obj;
+	g_autoptr (BluetoothDevice) device_obj = NULL;
 	const char *default_adapter_path;
 	const char *device_path;
 	const char *adapter_path, *address, *alias, *name, *icon;
@@ -508,7 +508,7 @@ add_devices_to_list_store (BluetoothClient *client)
 		gboolean paired, trusted, connected;
 		int legacypairing;
 		BluetoothType type = BLUETOOTH_TYPE_ANY;
-		BluetoothDevice *device_obj;
+		g_autoptr (BluetoothDevice) device_obj = NULL;
 
 		iface = g_dbus_object_get_interface (object, BLUEZ_DEVICE_INTERFACE);
 		if (!iface)
