@@ -6,14 +6,14 @@
 # Reinout van Schouwen <reinouts@gnome.org>, 2008.
 # Wouter Bolsterlee <wbolster@gnome.org>, 2010–2011.
 # Erwin Poeze <donnut@outlook.com>, 2013.
-# Nathan Follens <nfollens@gnome.org>, 2015, 2017, 2019, 2022, 2024-2025.
+# Nathan Follens <nfollens@gnome.org>, 2015, 2017, 2019, 2022, 2024-2026.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-08-10 15:37+0000\n"
-"PO-Revision-Date: 2025-08-20 00:43+0200\n"
+"POT-Creation-Date: 2026-04-17 18:37+0000\n"
+"PO-Revision-Date: 2026-04-19 19:57+0200\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -439,20 +439,25 @@ msgid "Select"
 msgstr "Selecteren"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Te gebruiken extern apparaat"
+msgid "Remote device to use (required)"
+msgstr "Te gebruiken extern apparaat (vereist)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRES"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Naam van apparaat"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Naam van extern apparaat, gebruikt als label in de interface"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAAM"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"De parameter ‘--device’ is vereist, apparaatselectie wordt niet ondersteund."
 
 #~ msgid "Cancel"
 #~ msgstr "Annuleren"
