@@ -1,15 +1,15 @@
 # Norwegian bokmål translation for gnome-bluetooth
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the bluez-gnome package.
-# Kjartan Maraas <kmaraas@gnome.org>, 2007-2020.
+# Kjartan Maraas <kmaraas@gnome.org>, 2007-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.38.x\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-03-02 16:15+0100\n"
-"Last-Translator: Brage <bragefuglseth@gnome.org>\n"
+"POT-Creation-Date: 2026-04-17 18:37+0000\n"
+"PO-Revision-Date: 2026-05-05 20:41+0200\n"
+"Last-Translator: Kjartan Maraas <kjartan.maraas@gmail.com>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -322,11 +322,11 @@ msgstr "Enheter"
 msgid "Searching for devices…"
 msgstr "Søker etter enheter …"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Bluetooth-overføring"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Send filer via Bluetooth"
 
@@ -434,84 +434,21 @@ msgid "Select"
 msgstr "Velg"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Ekstern enhet som skal brukes"
+msgid "Remote device to use (required)"
+msgstr "Ekstern enhet som skal brukes (kreves)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "ADRESSE"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Navn på ekstern enhet"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Navn på ekstern enhet, brukt som etikett i brukergrensesnittet"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NAVN"
 
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"
-
-#~ msgid "Click to select device…"
-#~ msgstr "Klikk for å velge enhet …"
-
-#~ msgid "_OK"
-#~ msgstr "_OK"
-
-#~ msgid "No adapters available"
-#~ msgstr "Ingen enheter tilgjengelig"
-
-#~ msgid "Device"
-#~ msgstr "Enhet"
-
-#~ msgid "All categories"
-#~ msgstr "Alle kategorier"
-
-#~ msgid "Trusted"
-#~ msgstr "I tillitsforhold"
-
-#~ msgid "Not paired or trusted"
-#~ msgstr "Ikke koblet sammen eller i tillitsforhold"
-
-#~ msgid "Paired or trusted"
-#~ msgstr "Koblet sammen eller i tillitsforhold"
-
-#~ msgid "Show:"
-#~ msgstr "Vis:"
-
-#~ msgid "Device _category:"
-#~ msgstr "Enhets_kategori:"
-
-#~ msgid "Select the device category to filter"
-#~ msgstr "Velg enhetskategori som skal filtreres"
-
-#~ msgid "Device _type:"
-#~ msgstr "_Type enhet:"
-
-#~ msgid "Select the device type to filter"
-#~ msgstr "Velg enhetstype som skal filtreres"
-
-#~ msgid "Input devices (mice, keyboards, etc.)"
-#~ msgstr "Inndataenheter (mus, tastatur, etc.)"
-
-#~ msgid "Headphones, headsets and other audio devices"
-#~ msgstr "Hodetelefoner og andre lydenheter"
-
-#, c-format
-#~ msgid "Remove “%s” from the list of devices?"
-#~ msgstr "Fjern «%s» fra enhetslisten?"
-
-#~ msgid "_Remove"
-#~ msgstr "Fje_rn"
-
-#~ msgid "All types"
-#~ msgstr "Alle typer"
-
-#~ msgid "Select device to send to"
-#~ msgstr "Velg enhet å sende til"
-
-#~ msgid "_Send"
-#~ msgstr "_Send"
-
-#~ msgid "[FILE…]"
-#~ msgstr "[FIL …]"
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "«--device» flagget kreves. Valg av enhet er ikke støttet."
