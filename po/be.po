@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/"
 "issues\n"
-"POT-Creation-Date: 2025-02-23 09:43+0000\n"
-"PO-Revision-Date: 2025-03-07 15:58+0300\n"
+"POT-Creation-Date: 2026-04-17 18:37+0000\n"
+"PO-Revision-Date: 2026-05-13 21:43+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -323,11 +323,11 @@ msgstr "Прылады"
 msgid "Searching for devices…"
 msgstr "Пошук прылад…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Перадача па Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Адпраўка файлаў праз Bluetooth"
 
@@ -439,20 +439,24 @@ msgid "Select"
 msgstr "Выбраць"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Аддаленая прылада"
+msgid "Remote device to use (required)"
+msgstr "Аддаленая прылада для выкарыстання (абавязкова)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "АДРАС"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Назва аддаленай прылады"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Назва аддаленай прылады, у інтэрфейсе выкарыстоўваецца як загаловак"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "НАЗВА"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "Параметр «--device» абавязковы, выбар прылады не падтрымліваецца."
 
 #~ msgid "Cancel"
 #~ msgstr "Скасаваць"
