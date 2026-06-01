@@ -16,38 +16,40 @@
 #    http://live.gnome.org/GnomeBluetooth
 # -------------------------------------------------------------------------------
 # Milo Casagrande <milo@milo.name>, 2011, 2012, 2013, 2015, 2017, 2019, 2022, 2024.
+# Leonardo Pantani <leonardo.pantani@gmail.com>, 2026.
+# Davide Ferracin <davide.ferracin@icloud.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2023-11-23 16:22+0000\n"
-"PO-Revision-Date: 2024-03-01 14:19+0100\n"
-"Last-Translator: Milo Casagrande <milo@milo.name>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"POT-Creation-Date: 2026-04-17 18:37+0000\n"
+"PO-Revision-Date: 2026-05-30 11:12+0200\n"
+"Last-Translator: Davide Ferracin <davide.ferracin@icloud.com>\n"
+"Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 50.0\n"
 
-#: lib/bluetooth-pairing-dialog.c:82 lib/bluetooth-pairing-dialog.c:89
-#: lib/bluetooth-pairing-dialog.c:103
+#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
+#: lib/bluetooth-pairing-dialog.c:108
 msgid "Confirm Bluetooth PIN"
 msgstr "Conferma PIN Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:83
+#: lib/bluetooth-pairing-dialog.c:88
 #, c-format
 msgid "Please confirm the PIN that was entered on “%s”."
 msgstr "Confermare il PIN inserito su «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:100
-#: lib/bluetooth-pairing-dialog.c:150
-msgid "Confirm"
-msgstr "Conferma"
+#: lib/bluetooth-pairing-dialog.c:92 lib/bluetooth-pairing-dialog.c:105
+#: lib/bluetooth-pairing-dialog.c:153
+msgid "C_onfirm"
+msgstr "C_onferma"
 
-#: lib/bluetooth-pairing-dialog.c:90
+#: lib/bluetooth-pairing-dialog.c:95
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for “%s”. This can usually be found in the "
@@ -56,52 +58,52 @@ msgstr ""
 "Confermare il PIN Bluetooth per «%s»: solitamente può essere trovato nel "
 "manuale del dispositivo."
 
-#: lib/bluetooth-pairing-dialog.c:96
+#: lib/bluetooth-pairing-dialog.c:101
 #, c-format
 msgid "Pairing “%s”"
 msgstr "Associazione con «%s»"
 
-#: lib/bluetooth-pairing-dialog.c:104
+#: lib/bluetooth-pairing-dialog.c:109
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on “%s”."
 msgstr "Confermare che il PIN visualizzato su «%s» corrisponda a questo."
 
 #
-#: lib/bluetooth-pairing-dialog.c:109
+#: lib/bluetooth-pairing-dialog.c:114
 msgid "Bluetooth Pairing Request"
 msgstr "Richiesta associazione Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:110
+#: lib/bluetooth-pairing-dialog.c:115
 #, c-format
 msgid "“%s” wants to pair with this device. Do you want to allow pairing?"
 msgstr ""
 "«%s» ha richiesto di essere associato con questo dispositivo. Consentire "
 "l'associazione?"
 
-#: lib/bluetooth-pairing-dialog.c:115
+#: lib/bluetooth-pairing-dialog.c:120
 msgid "Confirm Bluetooth Connection"
 msgstr "Conferma connessione Bluetooth"
 
-#: lib/bluetooth-pairing-dialog.c:116
+#: lib/bluetooth-pairing-dialog.c:121
 #, c-format
 msgid "“%s” wants to connect with this device. Do you want to allow it?"
 msgstr ""
 "«%s» ha richiesto collegarsi con questo dispositivo. Consentire il "
 "collegamento?"
 
-#: lib/bluetooth-pairing-dialog.c:124
+#: lib/bluetooth-pairing-dialog.c:129
 #, c-format
 msgid "Please enter the following PIN on “%s”."
 msgstr "Inserire il seguente PIN su «%s»."
 
-#: lib/bluetooth-pairing-dialog.c:127
+#: lib/bluetooth-pairing-dialog.c:132
 #, c-format
 msgid ""
 "Please enter the following PIN on “%s”. Then press “Return” on the keyboard."
 msgstr "Inserire il seguente PIN su «%s» e premere «Invio» sulla tastiera."
 
-#: lib/bluetooth-pairing-dialog.c:132
+#: lib/bluetooth-pairing-dialog.c:137
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -109,77 +111,73 @@ msgstr ""
 "Muovere il joystick del proprio iCade nelle seguenti direzioni, quindi "
 "premere uno dei pulsanti bianchi."
 
-#: lib/bluetooth-pairing-dialog.c:140
-msgid "Allow"
-msgstr "Consenti"
+#: lib/bluetooth-pairing-dialog.c:145
+msgid "_Allow"
+msgstr "_Consenti"
 
-#: lib/bluetooth-pairing-dialog.c:144
-msgid "Dismiss"
-msgstr "Declina"
+#: lib/bluetooth-pairing-dialog.c:148
+msgid "_Dismiss"
+msgstr "_Nega"
 
 # FIXME! usare stock
-#. Cancel button
-#: lib/bluetooth-pairing-dialog.c:154 lib/bluetooth-pairing-dialog.c:306
-msgid "Cancel"
-msgstr "Annulla"
+#: lib/bluetooth-pairing-dialog.c:156 lib/bluetooth-pairing-dialog.ui:15
+#: lib/bluetooth-settings-widget.c:1311 sendto/main.c:447 sendto/main.c:699
+msgid "_Cancel"
+msgstr "A_nnulla"
 
-#. OK button
-#: lib/bluetooth-pairing-dialog.c:288 lib/bluetooth-settings-obexpush.c:247
-msgid "Accept"
-msgstr "Accetta"
+#: lib/bluetooth-pairing-dialog.ui:23
+msgid "_Accept"
+msgstr "Acc_etta"
 
-#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:14
+#: lib/bluetooth-settings-row.c:78 lib/bluetooth-settings-row.ui:12
 msgid "Not Set Up"
 msgstr "Non configurato"
 
 #: lib/bluetooth-settings-row.c:80
 msgid "Connected"
-msgstr "Collegato"
+msgstr "Connesso"
 
 #: lib/bluetooth-settings-row.c:82
 msgid "Disconnected"
-msgstr "Scollegato"
+msgstr "Non connesso"
 
-#: lib/bluetooth-settings-widget.c:1148 lib/settings.ui:69
+#: lib/bluetooth-settings-widget.c:1141 lib/settings.ui:71
 msgid "Yes"
 msgstr "Sì"
 
-#: lib/bluetooth-settings-widget.c:1148
+#: lib/bluetooth-settings-widget.c:1141
 msgid "No"
 msgstr "No"
 
 #. translators: first %s is the name of the computer, for example:
 #. * Visible as “Bastien Nocera’s Computer” followed by the
 #. * location of the Downloads folder.
-#: lib/bluetooth-settings-widget.c:1240
+#: lib/bluetooth-settings-widget.c:1233
 #, c-format
 msgid ""
 "Visible as “%s” and available for Bluetooth file transfers. Transferred "
 "files are placed in the <a href=\"%s\">Downloads</a> folder."
 msgstr ""
-"Visibile come «%s» e disponibile per trasferimenti file via Bluetooth. I "
-"file trasferiti vengono salvati nella cartella <a href=\"%s\">Scaricati</a>."
+"Visibile come «%s» e disponibile per il trasferimento di file via Bluetooth. "
+"I file trasferiti vengono salvati nella cartella <a href=\"%s\">Scaricati</"
+"a>."
 
-#: lib/bluetooth-settings-widget.c:1310
+#: lib/bluetooth-settings-widget.c:1303
+msgid "Forget Device?"
+msgstr "Dimenticare il dispositivo?"
+
+#: lib/bluetooth-settings-widget.c:1306
+#, c-format
 msgid ""
-"If you remove the device, you will have to set it up again before next use."
+"“%s” will be removed from your saved devices. You will have to set it up "
+"again to use it."
 msgstr ""
-"Rimuovendo il dispositivo è necessario configurarlo nuovamente per poterlo "
-"riusare."
+"«%s» sarà rimosso dai propri dispositivi salvati. Sarà necessario "
+"configurarlo nuovamente prima di utilizzarlo."
 
 #: lib/bluetooth-settings-widget.c:1312
-#, c-format
-msgid "Remove “%s” from the list of devices?"
-msgstr "Rimuovere «%s» dall'elenco dei dispositivi?"
-
-# FIXME! usare stock
-#: lib/bluetooth-settings-widget.c:1315 sendto/main.c:447 sendto/main.c:699
-msgid "_Cancel"
-msgstr "A_nnulla"
-
-#: lib/bluetooth-settings-widget.c:1316
-msgid "_Remove"
-msgstr "_Rimuovi"
+msgid "_Forget"
+msgstr "_Dimentica"
 
 #. Translators: %s is the name of the filename received
 #: lib/bluetooth-settings-obexpush.c:145
@@ -211,6 +209,10 @@ msgstr "Trasferimento file Bluetooth da %s"
 #: lib/bluetooth-settings-obexpush.c:244
 msgid "Decline"
 msgstr "Rifiuta"
+
+#: lib/bluetooth-settings-obexpush.c:247
+msgid "Accept"
+msgstr "Accetta"
 
 #: lib/bluetooth-utils.c:56
 msgid "Phone"
@@ -300,57 +302,56 @@ msgstr "Altoparlanti"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: lib/settings.ui:42
+#: lib/settings.ui:49
 msgid "_Connection"
 msgstr "_Connessione"
 
-#: lib/settings.ui:68
+#: lib/settings.ui:70
 msgid "Paired"
 msgstr "Associato"
 
-#: lib/settings.ui:77
+#: lib/settings.ui:79
 msgid "Type"
 msgstr "Tipo"
 
-#: lib/settings.ui:85
+#: lib/settings.ui:87
 msgid "Address"
 msgstr "Indirizzo"
 
-#: lib/settings.ui:101
-msgid "_Mouse & Touchpad Settings"
+#: lib/settings.ui:102
+msgid "_Mouse &amp; Touchpad Settings"
 msgstr "Impostazioni _mouse e touchpad"
 
-#: lib/settings.ui:107
+#: lib/settings.ui:109
 msgid "_Sound Settings"
 msgstr "Impostazioni _audio"
 
-#: lib/settings.ui:113
+#: lib/settings.ui:116
 msgid "_Keyboard Settings"
 msgstr "Impostazioni _tastiera"
 
-#: lib/settings.ui:119
+#: lib/settings.ui:123
 msgid "Send _Files…"
 msgstr "Invia _file…"
 
-#: lib/settings.ui:125
-#| msgid "_Remove Device"
+#: lib/settings.ui:129
 msgid "_Forget Device…"
 msgstr "_Dimentica dispositivo…"
 
-#: lib/settings.ui:147 lib/settings.ui:162
+#: lib/settings.ui:146 lib/settings.ui:168
 msgid "Devices"
 msgstr "Dispositivi"
 
 # [NdT] si riferisci ai dispositivi Bluetooth
-#: lib/settings.ui:176
+#: lib/settings.ui:159
 msgid "Searching for devices…"
-msgstr "Ricerca dispositivi…"
+msgstr "Ricerca dispositivi in corso"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "Trasferimento Bluetooth"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "Invia file attraverso Bluetooth"
 
@@ -363,8 +364,8 @@ msgid ""
 "Make sure that the remote device is switched on and that it accepts "
 "Bluetooth connections"
 msgstr ""
-"Assicurarsi che il dispositivo remoto sia attivato e che accetti connessioni "
-"Bluetooth"
+"Assicurarsi che il dispositivo remoto sia attivato e che accetti le "
+"connessioni Bluetooth"
 
 #: sendto/main.c:364
 #, c-format
@@ -396,7 +397,7 @@ msgstr[1] "approssimativamente %'d ore"
 
 #: sendto/main.c:403 sendto/main.c:503
 msgid "Connecting…"
-msgstr "Connessione…"
+msgstr "Connessione in corso…"
 
 #: sendto/main.c:444
 msgid "Bluetooth File Transfer"
@@ -458,17 +459,23 @@ msgid "Select"
 msgstr "Seleziona"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "Dispositivo remoto da usare"
+msgid "Remote device to use (required)"
+msgstr "Dispositivo remoto da utilizzare (obbligatorio)"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "INDIRIZZO"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "Nome del dispositivo remoto"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "Nome dispositivo remoto, usato come etichetta nell'interfaccia utente"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "NOME"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr ""
+"L'opzione «--device» è obbligatoria, la selezione del dispositivo non è "
+"supportata."
