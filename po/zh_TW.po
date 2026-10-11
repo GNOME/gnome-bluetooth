@@ -9,20 +9,21 @@
 # pan93412 <pan93412@gmail.com>, 2019.
 # Freddy Cheng <freddy4212@gmail.com>, 2022.
 #
+# SPDX-FileCopyrightText: 2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-bluetooth 3.3.3\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-bluetooth/issues\n"
-"POT-Creation-Date: 2025-03-23 10:31+0000\n"
-"PO-Revision-Date: 2025-03-27 16:05+0800\n"
+"POT-Creation-Date: 2026-04-17 18:37+0000\n"
+"PO-Revision-Date: 2026-10-11 20:40+0800\n"
 "Last-Translator: Cheng-Chia Tseng <zerngjia@gmail.com>\n"
-"Language-Team: Chinese - Taiwan <chinese-l10n@googlegroups.com>\n"
+"Language-Team: Chinese (Traditional) <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.9\n"
 
 #: lib/bluetooth-pairing-dialog.c:87 lib/bluetooth-pairing-dialog.c:94
 #: lib/bluetooth-pairing-dialog.c:108
@@ -320,11 +321,11 @@ msgstr "裝置"
 msgid "Searching for devices…"
 msgstr "正在搜尋裝置…"
 
-#: sendto/bluetooth-sendto.desktop.in:3
+#: sendto/bluetooth-sendto.desktop.in:2
 msgid "Bluetooth Transfer"
 msgstr "藍牙傳輸"
 
-#: sendto/bluetooth-sendto.desktop.in:4
+#: sendto/bluetooth-sendto.desktop.in:3
 msgid "Send files via Bluetooth"
 msgstr "透過藍牙傳送檔案"
 
@@ -425,20 +426,24 @@ msgid "Select"
 msgstr "選取"
 
 #: sendto/main.c:736
-msgid "Remote device to use"
-msgstr "要使用的遠端裝置"
+msgid "Remote device to use (required)"
+msgstr "要使用的遠端裝置（必要）"
 
 #: sendto/main.c:736
 msgid "ADDRESS"
 msgstr "位址"
 
 #: sendto/main.c:738
-msgid "Remote device’s name"
-msgstr "遠端裝置名稱"
+msgid "Remote device’s name, used as a label in the UI"
+msgstr "遠端裝置的名稱，在介面中會當作文字標籤使用"
 
 #: sendto/main.c:738
 msgid "NAME"
 msgstr "名稱"
+
+#: sendto/main.c:779
+msgid "The “--device” option is required, device selection is not supported."
+msgstr "需要有「--device」選項，因為不支援裝置選取。"
 
 #~ msgid "Cancel"
 #~ msgstr "取消"
